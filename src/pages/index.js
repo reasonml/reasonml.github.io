@@ -2,14 +2,16 @@ import React from "react"
 import Link from "gatsby-link"
 import Helmet from "react-helmet"
 
+import Features from '../components/Features'
+
 const links = [
   {
     target: '/learn/',
-    title: 'learn',
+    title: 'quickstart',
   },
   {
     target: '/guide/',
-    title: 'guide',
+    title: 'learn',
   },
   {
     target: '/community/',
@@ -20,6 +22,33 @@ const links = [
     title: 'road map',
   },
 ]
+
+const features = [
+  {
+    title: 'Types without hassle',
+    description: 'Powerful type inference means you rarely have to annotate types, but everything gets checked for you.',
+    action: 'See how',
+    url: '/docs/types',
+  },
+  {
+    title: 'Web or Native',
+    description: 'Write your frontend, backend, and build tools all in the same language -- without compromising on speed.',
+    action: 'Native quickstart',
+    url: '/docs/native/quickstart',
+  },
+  {
+    title: 'Easy JavaScript interop',
+    description: 'Use packages from npm with minimum hassle, or drop in a snippet of raw JavaScript while you\'re learning',
+    action: 'Learn more',
+    url: '/docs/javascript/interop',
+  },
+  {
+    title: 'Flexible & Fun',
+    description: 'Make websites, games, servers, build tools, and more! Take a look at these examples to get inspired.',
+    action: 'See examples',
+    url: '/community/examples',
+  }
+];
 
 export default class Index extends React.Component {
   render() {
@@ -38,7 +67,7 @@ export default class Index extends React.Component {
               </div>
             </div>
             <div css={{alignItems: 'center'}}>
-              <img src="/static/reason_400.png" width={400} />
+              <img src="/static/reason_300.png" width={300} />
               {/*<h1>Reason</h1>*/}
               <p css={styles.description}>
                 Reason is a new syntax and toolchain for OCaml, a powerful
@@ -56,9 +85,12 @@ export default class Index extends React.Component {
             </div>
           </div>
         </div>
-        <div css={styles.body}>
-          <div css={styles.content}>
-            More stuff here
+        <div css={[styles.body, styles.features]}>
+          <div css={[styles.content]}>
+            <div css={styles.featuresDivider} />
+            <Features
+              features={features}
+            />
           </div>
         </div>
       </div>
@@ -83,6 +115,7 @@ const styles = {
     fontSize: '1.5em',
     lineHeight: '1.5em',
     textAlign: 'center',
+    textShadow: '1px 1px white',
   },
   top: {
     flexDirection: 'row',
@@ -112,6 +145,14 @@ const styles = {
     padding: 15,
     textDecoration: 'none',
     color: 'currentColor',
+  },
+  featuresDivider: {
+    height: 1,
+    backgroundColor: '#cecece',
+  },
+  features: {
+    // backgroundColor: '#d0d0d0',
+    backgroundColor: '#f6f4f4',
   },
   body: {
 
