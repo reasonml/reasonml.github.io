@@ -9,7 +9,7 @@ import Link from "../components/Link"
 import Header from '../components/Header'
 
 const editUrl = path =>
-  `https://github.com/jaredly/reason-docs/edit/master/docs/src/pages/${path}`
+  `https://github.com/jaredly/reason-docs/edit/master/src/pages/${path}`
   // `https://github.com/facebook/reason/edit/master/docs/src/pages/${path}`
 
 export default class Guide extends React.Component {
