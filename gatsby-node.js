@@ -16,12 +16,14 @@ exports.createPages = ({graphql, boundActionCreators}) => {
       edges {
         node {
           relativePath
+          childMarkdownRemark {id}
         }
       }
     }
   }`).then(({errors, data}) => {
     if (errors) return Promise.reject(errors)
-    data.allFile.edges.forEach(({node: {relativePath}}) => {
+    data.allFile.edges.forEach(({node: {relativePath, childMarkdownRemark}}) => {
+      if (!childMarkdownRemark) return
       let targetPath = relativePath.slice(0, -'.md'.length)
       if (relativePath.match(/index\.md$/)) {
         targetPath = relativePath.slice(0, -'/index.md'.length)
