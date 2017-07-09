@@ -35,7 +35,7 @@ export default class HTML extends React.Component {
             name="viewport"
             content="width=device-width, initial-scale=1.0"
           />
-          <link rel="stylesheet" href="reset.css"/>
+          <link rel="stylesheet" href="/reset.css"/>
           {this.props.headComponents}
           <TypographyStyle typography={typography} />
           {css}
