@@ -17,7 +17,7 @@ const Node = ({current, root, item: {title, relativePath, children}, depth}) => 
   ? <div css={[styles.node, root && styles.rootNode]}>
       {!root ? <Link to={relativePath} css={linkStyles}>{title}</Link> : null}
       <ul css={[styles.children, root && styles.rootChildren]}>
-      {children.map(child => <li key={child.relativePath}><Node current={current} item={child} depth={depth + 1} /></li>)}
+      {children.map(child => <li style={styles.li} key={child.relativePath}><Node current={current} item={child} depth={depth + 1} /></li>)}
       </ul>
     </div>
   : <Link css={[styles.node, linkStyles]} to={relativePath}>{title}</Link>
@@ -32,6 +32,10 @@ const styles = {
 
   node: {
 
+  },
+
+  li: {
+    marginBottom: 10,
   },
 
   link: {
