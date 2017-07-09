@@ -6,6 +6,8 @@ import { rhythm } from "../utils/typography"
 
 import HeaderNav from '../components/HeaderNav'
 
+import "../reset.css"
+
 export default class Template extends React.Component {
   static propTypes = {
     children: PropTypes.func,

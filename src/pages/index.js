@@ -49,7 +49,7 @@ export default class Index extends React.Component {
               transforms into performant, readable JavaScript.
             </p>
             <div css={{flexDirection: 'row', marginBottom: '1.5em'}}>
-              <Link to="/guide/get-started/" css={styles.button}>
+              <Link to="/guide/getting-started/" css={styles.button}>
                 Get started
               </Link>
               <Link to="/guide/" css={styles.button}>
@@ -71,13 +71,13 @@ export default class Index extends React.Component {
             <h3 css={styles.columnHeader}>
               <Link to="/guide/javascript/">JavaScript quickstart</Link>
             </h3>
-              <div dangerouslySetInnerHTML={{__html: javascript.childMarkdownRemark.html}}/>
+            <div dangerouslySetInnerHTML={{__html: javascript.childMarkdownRemark.html}}/>
           </div>
           <div css={styles.column}>
             <h3 css={styles.columnHeader}>
               Native quickstart
             </h3>
-            <p>Coming soon...</p>
+            <div dangerouslySetInnerHTML={{__html: native.childMarkdownRemark.html}}/>
           </div>
         </Section>
       </div>
@@ -128,6 +128,7 @@ const styles = {
     flexBasis: 0,
     flexShrink: 1,
     margin: '0 20px',
+    minWidth: 0,
   },
   columnHeader: {
     alignSelf: 'center',

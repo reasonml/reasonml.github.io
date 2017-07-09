@@ -1,5 +1,5 @@
 import React from "react"
-import Link from "gatsby-link"
+import Link from "./Link"
 
 const links = [
   {
@@ -21,7 +21,6 @@ const links = [
   {
     target: 'https://github.com/facebook/reason',
     title: 'github',
-    external: true,
   },
 ]
 
@@ -29,13 +28,9 @@ export default class HeaderNav extends React.Component {
   render() {
     return <div css={styles.links}>
       {links.map(link => (
-        link.external
-        ? <a href={link.target} key={link.target} css={styles.link}>
-            {link.title}
-          </a>
-        : <Link css={styles.link} to={link.target} key={link.target}>
-            {link.title}
-          </Link>
+        <Link css={styles.link} to={link.target} key={link.target}>
+          {link.title}
+        </Link>
       ))}
     </div>
   }
@@ -47,7 +42,5 @@ const styles = {
   },
   link: {
     padding: 15,
-    textDecoration: 'none',
-    color: 'currentColor',
   },
 }
