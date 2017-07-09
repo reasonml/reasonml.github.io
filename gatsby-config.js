@@ -1,5 +1,5 @@
 module.exports = {
-  pathPrefix: '/reason-docs/',
+  pathPrefix: '/',
   siteMetadata: {
     title: `Gatsby Default Starter`,
   },

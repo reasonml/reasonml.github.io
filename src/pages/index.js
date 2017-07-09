@@ -69,7 +69,7 @@ export default class Index extends React.Component {
         <Section css={[styles.quickstarts, styles.twoColumn]}>
           <div css={styles.column}>
             <h3 css={styles.columnHeader}>
-              <Link to="/guide/javascript/">JavaScript quickstart</Link>
+              JavaScript quickstart
             </h3>
             <div dangerouslySetInnerHTML={{__html: javascript.childMarkdownRemark.html}}/>
           </div>

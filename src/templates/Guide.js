@@ -78,9 +78,11 @@ const parseData = nodes => nodes.map(({
   childMarkdownRemark: {frontmatter: {title, order}}
 }) => ({relativePath: fixPath(relativePath), title, order}))
 
+const values = obj => Object.keys(obj).map(k => obj[k])
+
 const listify = node => ({
   ...node,
-  children: Object.values(node.children)
+  children: values(node.children)
     .sort((a, b) => a.order - b.order)
     .map(listify)
 })
