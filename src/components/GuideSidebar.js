@@ -1,5 +1,5 @@
 import React from 'react'
-import Link from 'gatsby-link'
+import Link from './Link'
 
 const fixPath = relativePath => {
   if (relativePath.match(/\/index\.md$/)) {

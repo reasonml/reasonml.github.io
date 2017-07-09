@@ -14,12 +14,6 @@ const editUrl = path =>
 
 export default class Guide extends React.Component {
   render() {
-    if (this.props.errors) {
-      return <div>{JSON.stringify(this.props.errors)}</div>
-    }
-    if (!this.props.data) {
-      return <div>NOO</div>
-    }
     const {allFile, file: {relativePath, childMarkdownRemark: {frontmatter: {title}, html}}} = this.props.data
     return <div>
       <Helmet title={title} />
@@ -27,8 +21,8 @@ export default class Guide extends React.Component {
         <Header inverted />
         <div css={{alignItems: 'center'}}>
           <h1>
-            <Link css={styles.topLink} to="/guide">
-              Guide
+            <Link css={styles.topLink} to="/community">
+              Community
             </Link>
           </h1>
         </div>
@@ -76,7 +70,7 @@ export const pageQuery = graphql`
     # For building the table of contents
     # TODO make a fragment probably
     allFile(filter:{
-      relativePath:{regex:"/^guide"}
+      relativePath:{regex:"/^community.*\\.md/"}
     }) {
       edges{
         node{
