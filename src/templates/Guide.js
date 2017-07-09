@@ -31,6 +31,7 @@ export default class Guide extends React.Component {
       <Section css={{flexDirection: 'row'}}>
         <div css={styles.sidebar}>
           <GuideSidebar
+            current={fixPath(relativePath)}
             root={constructTree(section, parseData(allFile.edges.map(edge => edge.node)))}
           />
         </div>
