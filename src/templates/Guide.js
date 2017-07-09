@@ -14,12 +14,7 @@ const editUrl = path =>
 
 export default class Guide extends React.Component {
   render() {
-    if (this.props.errors) {
-      return <div>{JSON.stringify(this.props.errors)}</div>
-    }
-    if (!this.props.data) {
-      return <div>NOO</div>
-    }
+    const {section, sectionTitle} = this.props.pathContext
     const {allFile, file: {relativePath, childMarkdownRemark: {frontmatter: {title}, html}}} = this.props.data
     return <div>
       <Helmet title={title} />
@@ -27,8 +22,8 @@ export default class Guide extends React.Component {
         <Header inverted />
         <div css={{alignItems: 'center'}}>
           <h1>
-            <Link css={styles.topLink} to="/guide">
-              Guide
+            <Link css={styles.topLink} to={`/${section}`}>
+              {sectionTitle}
             </Link>
           </h1>
         </div>
@@ -36,7 +31,7 @@ export default class Guide extends React.Component {
       <Section css={{flexDirection: 'row'}}>
         <div css={styles.sidebar}>
           <GuideSidebar
-            files={allFile.edges.map(edge => edge.node)}
+            root={constructTree(section, parseData(allFile.edges.map(edge => edge.node)))}
           />
         </div>
         <div css={styles.main}>
@@ -71,12 +66,53 @@ const styles = {
   },
 }
 
+const fixPath = relativePath => {
+  if (relativePath.match(/\/index\.md$/)) {
+    return '/' + relativePath.slice(0, -'/index.md'.length)
+  }
+  return '/' + relativePath.slice(0, -'.md'.length)
+}
+
+const parseData = nodes => nodes.map(({
+  relativePath,
+  childMarkdownRemark: {frontmatter: {title, order}}
+}) => ({relativePath: fixPath(relativePath), title, order}))
+
+const listify = node => ({
+  ...node,
+  children: Object.values(node.children)
+    .sort((a, b) => a.order - b.order)
+    .map(listify)
+})
+
+const constructTree = (section, files) => {
+  const tree = {children: {}}
+  files.forEach(({relativePath, title, order}) => {
+    const parts = relativePath.split(/\//g).slice(1)
+    const last = parts.pop()
+    let parent = tree
+    parts.forEach(part => {
+      if (!parent.children[part]) parent.children[part] = {children: {}}
+      parent = parent.children[part]
+    })
+    parent.children[last] = {
+      children: {},
+      ...parent.children[last],
+      relativePath,
+      title,
+      order,
+    }
+  })
+  return listify(tree.children[section])
+}
+
+
 export const pageQuery = graphql`
-  query PageByPath($relativePath: String!) {
+  query PageByPath($relativePath: String!, $relatedFiles: String!) {
     # For building the table of contents
     # TODO make a fragment probably
     allFile(filter:{
-      relativePath:{regex:"/^guide"}
+      relativePath:{regex:$relatedFiles}
     }) {
       edges{
         node{
