@@ -15,7 +15,7 @@ const links = [
     title: 'community',
   },
   {
-    target: '/roadmap/',
+    target: '/community/roadmap/',
     title: 'road map',
   },
   {
