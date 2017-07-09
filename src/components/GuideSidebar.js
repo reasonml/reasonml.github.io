@@ -1,52 +1,10 @@
 import React from 'react'
 import Link from './Link'
 
-const fixPath = relativePath => {
-  if (relativePath.match(/\/index\.md$/)) {
-    return '/' + relativePath.slice(0, -'/index.md'.length)
-  }
-  return '/' + relativePath.slice(0, -'.md'.length)
-}
-
-const parseData = nodes => nodes.map(({
-  relativePath,
-  childMarkdownRemark: {frontmatter: {title, order}}
-}) => ({relativePath: fixPath(relativePath), title, order}))
-
-const listify = node => ({
-  ...node,
-  children: Object.values(node.children)
-    .sort((a, b) => a.order - b.order)
-    .map(listify)
-})
-
-const constructTree = files => {
-  const tree = {children: {}}
-  files.forEach(({relativePath, title, order}) => {
-    const parts = relativePath.split(/\//g).slice(1)
-    const last = parts.pop()
-    let parent = tree
-    parts.forEach(part => {
-      if (!parent.children[part]) parent.children[part] = {children: {}}
-      parent = parent.children[part]
-    })
-    parent.children[last] = {
-      children: {},
-      ...parent.children[last],
-      relativePath,
-      title,
-      order,
-    }
-  })
-  console.log(tree)
-  return listify(tree.children.guide)
-}
-
 export default class GuideSidebar extends React.Component {
   render() {
-    const root = constructTree(parseData(this.props.files))
     return <div css={styles.container}>
-      <Node item={root} root depth={0} />
+      <Node item={this.props.root} root depth={0} />
     </div>
   }
 }

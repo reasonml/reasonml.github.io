@@ -12,7 +12,7 @@ exports.createPages = ({graphql, boundActionCreators}) => {
   const {createPage} = boundActionCreators;
 
   return graphql(`{
-    allFile(filter:{relativePath:{regex:"/^(guide|community)\\\\/.*\\\\.md/"}}) {
+    allFile(filter:{relativePath:{regex:"/^(guide|community)\\\\/.*\\\\.md$/"}}) {
       edges {
         node {
           relativePath
@@ -34,7 +34,7 @@ exports.createPages = ({graphql, boundActionCreators}) => {
           section: section,
           sectionTitle: sectionTitles[section],
           relativePath,
-          relatedFiles: `/^${section}\\\\/.*\\\\.md/`,
+          relatedFiles: `/^${section}\\/.*\\.md$/`,
         }
       })
     })
