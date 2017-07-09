@@ -4,6 +4,8 @@ import Link from "gatsby-link"
 import Helmet from "react-helmet"
 import { rhythm } from "../utils/typography"
 
+import HeaderNav from '../components/HeaderNav'
+
 export default class Template extends React.Component {
   static propTypes = {
     children: PropTypes.func,
@@ -14,25 +16,30 @@ export default class Template extends React.Component {
     if (location.pathname === '/') {
       return this.props.children()
     }
-    
+    if (true) {
+      return this.props.children()
+    }
+
+    const accent = '#db4d3f';
     return (
       <div>
         <Helmet
           title="Reason: JavaScript-flavored OCaml"
-          meta={[
-            { name: "description", content: "Sample" },
-            { name: "keywords", content: "sample, something" },
-          ]}
         />
         <div
           style={{
-            background: `rebeccapurple`,
+            backgroundColor: accent,
             marginBottom: rhythm(1),
+            flexDirection: 'row',
+            justifyContent: 'center',
           }}
         >
           <div
             style={{
-              margin: `0 auto`,
+              flex: 1,
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              // margin: `0 auto`,
               maxWidth: 960,
               padding: `${rhythm(1)} ${rhythm(3 / 4)}`,
             }}
@@ -45,20 +52,23 @@ export default class Template extends React.Component {
                   textDecoration: "none",
                 }}
               >
-                Gatsby
+                Reason
               </Link>
             </h1>
+            <HeaderNav />
           </div>
         </div>
-        <div
-          style={{
-            margin: `0 auto`,
-            maxWidth: 960,
-            padding: `${rhythm(1)} ${rhythm(3 / 4)}`,
-            paddingTop: 0,
-          }}
-        >
-          {this.props.children()}
+        <div css={{alignSelf: 'stretch', flexDirection: 'row', justifyContent: 'center'}}>
+          <div
+            style={{
+              maxWidth: 960,
+              flex: 1,
+              padding: `${rhythm(1)} ${rhythm(3 / 4)}`,
+              paddingTop: 0,
+            }}
+          >
+            {this.props.children()}
+          </div>
         </div>
       </div>
     )
