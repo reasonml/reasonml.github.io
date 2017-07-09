@@ -5,6 +5,6 @@ order: 0
 
 Here's how you start!
 
-- [JavaScript quickstart](javascript/quickstart)
-- [Native quickstart](native/quickstart)
-- [Set up your editor](editor-setup)
+- [JavaScript quickstart](/guide/javascript/quickstart)
+- [Native quickstart](/guide/native/quickstart)
+- [Set up your editor](/guide/editor-setup)
