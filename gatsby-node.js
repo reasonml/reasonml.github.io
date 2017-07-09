@@ -41,22 +41,22 @@ exports.createPages = ({graphql, boundActionCreators}) => {
   })
 }
 
-// // TODO remove once gatsby auto-reruns createPages
-// exports.onCreateNode = ({node, boundActionCreators}) => {
-//   const {createPage} = boundActionCreators;
-//
-//   if (!node.relativePath || !node.childMarkdownRemark) return
-//
-//   const {relativePath} = node;
-//   let targetPath = relativePath.slice(0, -'.md'.length)
-//   if (relativePath.match(/index\.md$/)) {
-//     targetPath = relativePath.slice(0, -'/index.md'.length)
-//   }
-//   createPage({
-//     path: targetPath,
-//     component: path.resolve('src/templates/Guide.js'),
-//     context: {
-//       relativePath,
-//     }
-//   })
-// }
+exports.onCreateNode = ({node, boundActionCreators}) => {
+  const {createPage} = boundActionCreators;
+
+  if (!node.relativePath || !node.childMarkdownRemark) return
+
+  const {relativePath} = node;
+  if (!relativePath.match(/^(guide|community)\//)) return
+  let targetPath = relativePath.slice(0, -'.md'.length)
+  if (relativePath.match(/index\.md$/)) {
+    targetPath = relativePath.slice(0, -'/index.md'.length)
+  }
+  createPage({
+    path: targetPath,
+    component: path.resolve('src/templates/Guide.js'),
+    context: {
+      relativePath,
+    }
+  })
+}
