@@ -13,7 +13,7 @@ const features = [
     title: 'Types without hassle',
     description: 'Powerful type inference means you rarely have to annotate types, but everything gets checked for you.',
     action: 'See how',
-    url: '/guide/types/',
+    url: '/guide/language/types/',
   },
   {
     title: 'Web or Native',
