@@ -12,7 +12,7 @@ export default ({inverted}) => (
     height: 100,
   }}>
     <Link to="/" style={{textDecoration: 'none', color: 'currentColor'}} >
-      <img style={{margin: 0, border: `2px solid ${gray}`, boxSizing: 'content-box'}} src="/static/icon_50.png" width={50}/>
+      <img style={{margin: 0, border: `2px solid ${gray}`, boxSizing: 'content-box'}} src={require('../images/icon_50.png')} width={50}/>
     </Link>
     <HeaderNav />
   </div>

@@ -42,7 +42,7 @@ export default class Index extends React.Component {
         <Section backgroundColor={gray}>
           <Header />
           <div css={{alignItems: 'center'}}>
-            <img src="/static/reason_300.png" width={300} />
+            <img src={require('../images/reason_300.png')} width={300} />
             <p css={styles.description}>
               Reason is a new syntax and toolchain for OCaml, a powerful
               language that will give you type-safe, maintainable code that
