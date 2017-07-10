@@ -13,7 +13,7 @@ let someInts = (10, 20);
 let (ten, twenty) = someInts;
 ```
 
-he following binds variables: `n = "Guy"`, `a = 30`
+The following binds variables: `n = "Guy"`, `a = 30`
 
 ```reason
 type person = {name: string, age: int};
