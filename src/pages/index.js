@@ -113,7 +113,6 @@ const styles = {
   container: {
   },
   inner: {
-
   },
 
   header: {
@@ -123,6 +122,9 @@ const styles = {
 
   twoColumn: {
     flexDirection: 'row',
+    '@media(max-width: 800px)': {
+      flexDirection: 'column',
+    }
   },
 
   column: {
@@ -131,13 +133,17 @@ const styles = {
     flexShrink: 1,
     margin: '0 20px',
     minWidth: 0,
+    '@media(max-width: 800px)': {
+      flexBasis: 'auto',
+    }
   },
+
   columnHeader: {
     alignSelf: 'center',
   },
 
   description: {
-    width: 600,
+    maxWidth: 600,
     fontWeight: 200,
     fontSize: '1.5em',
     lineHeight: '1.5em',
@@ -166,6 +172,7 @@ const styles = {
   features: {
     // backgroundColor: '#d0d0d0',
     backgroundColor: '#f6f4f4',
+
   },
 
   quickstarts: {

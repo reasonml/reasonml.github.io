@@ -33,7 +33,9 @@ const accent = '#db4d3f';
 const styles = {
   container: {
     flexDirection: 'row',
-    // color: 'white',
+    '@media(max-width: 900px)': {
+      flexDirection: 'column',
+    }
   },
   feature: {
     flex: 1,
@@ -41,9 +43,12 @@ const styles = {
     padding: 38,
   },
   divider: {
-    width: 1,
+    flexBasis: 1,
     backgroundColor: '#cecece',
     margin: '30px 0',
+    '@media(max-width: 900px)': {
+      margin: 0,
+    }
   },
 
   button: {
@@ -66,5 +71,6 @@ const styles = {
     fontSize: 16,
     lineHeight: 1.6,
     textAlign: 'center',
+    maxWidth: 300,
   },
 }
