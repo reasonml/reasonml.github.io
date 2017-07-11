@@ -30,6 +30,7 @@ module.exports = {
           `${__dirname}/syntax-highlighting/index.js`,
           'gatsby-remark-copy-linked-files',
           // 'gatsby-remark-smartypants',
+          'gatsby-plugin-catch-links',
         ],
       },
     },
