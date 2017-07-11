@@ -15,8 +15,8 @@ const links = [
     title: 'community',
   },
   {
-    target: '/community/roadmap/',
-    title: 'road map',
+    target: '/community/blog/',
+    title: 'blog',
   },
   {
     target: 'https://github.com/facebook/reason',
