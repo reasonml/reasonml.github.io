@@ -58,7 +58,7 @@ const styles = {
     borderBottom: '1px solid #aaa',
   },
   sidebar: {
-    padding: '2em',
+    paddingTop: '2em',
   },
   main: {
     position: 'relative',

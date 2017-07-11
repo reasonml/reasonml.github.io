@@ -13,4 +13,10 @@ Come say hi!
 - [Stack Overflow](http://stackoverflow.com/questions/tagged/reason)
 - IRC (freenode #reasonml)
 
-We also maintain [BuckleTypes](https://github.com/BuckleTypes), where community members submit Reason/OCaml JavaScript bindings.
+### Github
+
+- [ReasonML Org](https://github.com/reasonml)
+
+- [Reason Editor Plugins](https://github.com/reasonml-editor)
+
+- [BuckleTypes](https://github.com/BuckleTypes): examples of BuckleScript JS bindings from the community.
