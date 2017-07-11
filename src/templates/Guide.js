@@ -54,7 +54,7 @@ export default class Guide extends React.Component {
           </h1>
         </div>
       </Section>
-      <Section css={{flexDirection: 'row'}}>
+      <Section css={styles.contentSection}>
         <div css={styles.sidebar}>
           <GuideSidebar
             current={fixPath(relativePath)}
@@ -80,8 +80,14 @@ const styles = {
     justifyContent: 'space-between',
     alignItems: 'flex-end',
   },
+  contentSection: {
+    flexDirection: 'row',
+    '@media(max-width: 800px)': {
+      flexDirection: 'column',
+    },
+  },
   sidebar: {
-    padding: '2em',
+    // padding: '2em',
   },
   main: {
     position: 'relative',
