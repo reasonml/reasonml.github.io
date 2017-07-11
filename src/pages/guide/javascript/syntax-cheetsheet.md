@@ -31,13 +31,13 @@ JavaScript                |   Reason
 <pre>'Hello world!' </pre>           |  Strings must use "
 Characters are strings               |  <pre>'a'  </pre>
 <pre>true</pre>                      |  <pre>true </pre>
-<pre>[1,2,3] </pre>                  |  <pre>[1,2,3] </pre>
+`[1,2,3]`                            |  `[1,2,3]`
 <pre>null</pre>                      |  <pre>()</pre>
 <pre>const x = y;</pre>              |  <pre>let x = y;</pre>
 <pre>let x = y;</pre>                |  <pre>reference cells</pre>
 <pre>var x = y;</pre>                |  No equivalent (thankfully)
-<pre>[x, ...lst] (linear time)</pre> | <pre>[x, ...lst] (constant time)</pre>
-<pre>[...lst, x] (linear time)</pre> | <pre>Not supported</pre>
+`[x, ...lst] (linear time)`          | `[x, ...lst] (constant time)`
+`[...lst, x] (linear time)`          | <pre>Not supported</pre>
 <pre>{...obj, x: y}</pre>            | <pre>{...obj, x: y}</pre>
 
 
