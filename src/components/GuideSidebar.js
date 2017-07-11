@@ -19,6 +19,7 @@ export default class GuideSidebar extends React.Component {
         Navigation
       </div>
       <div css={[styles.contents, this.state.closed && styles.hiddenContents]}>
+        <Link to={this.props.search}>Search</Link>
         <Node current={this.props.current} item={this.props.root} root depth={0} />
       </div>
     </div>
@@ -36,6 +37,26 @@ const Node = ({current, root, item: {title, relativePath, children}, depth}) => 
     </div>
   : <Link css={[styles.node, linkStyles]} to={relativePath}>{title}</Link>
 }
+
+export const sidebarFragment = graphql`
+  fragment guideSidebar on RootQueryType {
+    allFile(filter:{
+      relativePath:{regex:$relatedFiles}
+    }) {
+      edges{
+        node{
+          relativePath
+          childMarkdownRemark{
+            frontmatter{
+              title
+              order
+            }
+          }
+        }
+      }
+    }
+  }
+`;
 
 const styles = {
   container: {
@@ -118,6 +139,49 @@ const styles = {
     marginLeft: 0,
     paddingLeft: 0,
   },
+}
+
+
+export const fixPath = relativePath => {
+  if (relativePath.match(/\/index\.md$/)) {
+    return '/' + relativePath.slice(0, -'/index.md'.length)
+  }
+  return '/' + relativePath.slice(0, -'.md'.length)
+}
+
+const parseData = nodes => nodes.map(({
+  relativePath,
+  childMarkdownRemark: {frontmatter: {title, order}}
+}) => ({relativePath: fixPath(relativePath), title, order}))
+
+const values = obj => Object.keys(obj).map(k => obj[k])
+
+const listify = node => ({
+  ...node,
+  children: values(node.children)
+    .sort((a, b) => a.order - b.order)
+    .map(listify)
+})
+
+export const constructTree = (section, files) => {
+  const tree = {children: {}}
+  parseData(files).forEach(({relativePath, title, order}) => {
+    const parts = relativePath.split(/\//g).slice(1)
+    const last = parts.pop()
+    let parent = tree
+    parts.forEach(part => {
+      if (!parent.children[part]) parent.children[part] = {children: {}}
+      parent = parent.children[part]
+    })
+    parent.children[last] = {
+      children: {},
+      ...parent.children[last],
+      relativePath,
+      title,
+      order,
+    }
+  })
+  return listify(tree.children[section])
 }
 
 // TODO
