@@ -42,5 +42,9 @@ const styles = {
   },
   link: {
     padding: 15,
+    '@media(max-width: 550px)': {
+      padding: 5,
+      // fontSize: '.9em',
+    }
   },
 }

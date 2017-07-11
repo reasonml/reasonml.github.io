@@ -74,12 +74,15 @@ const styles = {
   },
 
   li: {
+    margin: 0,
+    padding: 0,
   },
 
   link: {
     textDecoration: 'none',
     color: 'currentColor',
     paddingBottom: 10,
+    display: 'block',
   },
 
   currentLink: {
