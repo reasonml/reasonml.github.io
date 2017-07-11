@@ -10,8 +10,13 @@ export default ({inverted}) => (
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    padding: '10px 10px',
     paddingLeft: '2em',
-    height: 100,
+    // height: 100,
+    '@media(max-width: 400px)': {
+      paddingLeft: 10,
+      height: 'auto',
+    }
   }}>
     <Link to="/" style={{textDecoration: 'none', color: 'currentColor'}} >
       <img style={{width: 50, maxWidth: 50, margin: 0, border: `2px solid ${gray}`, boxSizing: 'content-box'}} src={icon} width={50}/>
