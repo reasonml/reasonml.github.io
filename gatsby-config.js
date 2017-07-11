@@ -29,7 +29,7 @@ module.exports = {
           // 'gatsby-remark-prismjs',
           `${__dirname}/syntax-highlighting/index.js`,
           'gatsby-remark-copy-linked-files',
-          'gatsby-remark-smartypants',
+          // 'gatsby-remark-smartypants',
         ],
       },
     },

@@ -9,6 +9,7 @@ import Link from "../components/Link"
 import Header from '../components/Header'
 
 require('../../syntax-highlighting/xcode.css')
+require('./guide.css')
 
 const editUrl = path =>
   `https://github.com/jaredly/reason-docs/edit/master/src/pages/${path}`
@@ -28,10 +29,12 @@ export default class Guide extends React.Component {
       edit = editUrl(relativePath)
     }
     return <div css={styles.main}>
-      <Link css={styles.editLink} to={edit}>
-        Suggest an edit
-      </Link>
-      <h2 css={styles.title}>{title}</h2>
+      <h2 css={styles.title}>
+        {title}
+        <Link css={styles.editLink} to={edit}>
+          Suggest an edit
+        </Link>
+      </h2>
       {contents}
     </div>
   }
@@ -66,13 +69,16 @@ export default class Guide extends React.Component {
 
 const styles = {
   editLink: {
-    position: 'absolute',
-    right: '2.4em',
-    top: '2em',
-    fontSize: '.8em',
+    fontSize: '14px',
+    fontWeight: 'normal',
+    lineHeight: '25px',
   },
   title: {
     borderBottom: '1px solid #aaa',
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-end',
   },
   sidebar: {
     padding: '2em',
@@ -81,6 +87,7 @@ const styles = {
     position: 'relative',
     flex: 1,
     padding: '2em',
+    minWidth: 0,
   },
 }
 
