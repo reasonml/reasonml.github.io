@@ -45,6 +45,10 @@ const styles = {
     '@media(max-width: 550px)': {
       padding: 5,
       // fontSize: '.9em',
+    },
+    '@media(max-width: 400px)': {
+      padding: 5,
+      fontSize: '.9em',
     }
   },
 }
