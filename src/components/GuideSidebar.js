@@ -81,7 +81,9 @@ const styles = {
   link: {
     textDecoration: 'none',
     color: 'currentColor',
-    paddingBottom: 10,
+    lineHeight: '1.2em',
+    paddingBottom: 3,
+    paddingTop: 5,
     display: 'block',
   },
 
@@ -94,11 +96,9 @@ const styles = {
   link1: {
     fontWeight: 'bold',
     fontSize: '1.2em',
-    paddingBottom: 10,
-  },
-
-  rootLink: {
-    alignSelf: 'center',
+    lineHeight: '1.2em',
+    // paddingBottom: 10,
+    // marginTop: 5,
   },
 
   rootNode: {
