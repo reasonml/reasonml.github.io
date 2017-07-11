@@ -11,6 +11,18 @@ const sectionTitles = {
 exports.createPages = ({graphql, boundActionCreators}) => {
   const {createPage} = boundActionCreators;
 
+  Object.keys(sectionTitles).forEach(section => {
+    createPage({
+      path: `${section}/search`,
+      component: path.resolve('src/templates/Search.js'),
+      context: {
+        section: section,
+        sectionTitle: sectionTitles[section],
+        relatedFiles: `/^${section}\\/.*\\.md$/`,
+      }
+    })
+  })
+
   return graphql(`{
     allFile(filter:{relativePath:{regex:"/^(guide|community)\\\\/.*\\\\.md$/"}}) {
       edges {
