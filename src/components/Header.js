@@ -10,6 +10,7 @@ export default ({inverted}) => (
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    paddingLeft: '2em',
     height: 100,
   }}>
     <Link to="/" style={{textDecoration: 'none', color: 'currentColor'}} >

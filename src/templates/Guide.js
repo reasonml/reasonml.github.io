@@ -8,6 +8,8 @@ import {accent, gray} from '../utils/colors'
 import Link from "../components/Link"
 import Header from '../components/Header'
 
+require('../../syntax-highlighting/xcode.css')
+
 const editUrl = path =>
   `https://github.com/jaredly/reason-docs/edit/master/src/pages/${path}`
   // `https://github.com/facebook/reason/edit/master/docs/src/pages/${path}`
@@ -33,7 +35,7 @@ export default class Guide extends React.Component {
       {contents}
     </div>
   }
-  
+
   render() {
     const {section, sectionTitle} = this.props.pathContext
     const {allFile, file: {relativePath, childMarkdownRemark: {frontmatter: {title}, html}}} = this.props.data
@@ -73,7 +75,7 @@ const styles = {
     borderBottom: '1px solid #aaa',
   },
   sidebar: {
-    paddingTop: '2em',
+    padding: '2em',
   },
   main: {
     position: 'relative',
