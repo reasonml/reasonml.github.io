@@ -2,6 +2,7 @@ import React from "react"
 import Link from "gatsby-link"
 import Helmet from "react-helmet"
 
+import Examples from '../pages/community/examples'
 import Header from '../components/Header'
 import Features from '../components/Features'
 import Section from '../components/Section'
@@ -37,7 +38,7 @@ const features = [
 
 export default class Index extends React.Component {
   render() {
-    const {javascript, native} = this.props.data
+    const {javascript, examples} = this.props.data
     return (
       <div css={styles.container}>
         <Section backgroundColor={gray}>
@@ -76,9 +77,9 @@ export default class Index extends React.Component {
           </div>
           <div css={styles.column}>
             <h3 css={styles.columnHeader}>
-              Native quickstart
+              Examples
             </h3>
-            <div dangerouslySetInnerHTML={{__html: native.childMarkdownRemark.html}}/>
+            <Examples />
           </div>
         </Section>
       </div>
@@ -96,7 +97,7 @@ export const pageQuery = graphql`
         }
       }
     }
-    native: file(relativePath:{eq:"guide/native/quickstart.md"}) {
+    examples: file(relativePath:{eq:"community/examples.md"}) {
       childMarkdownRemark {
         html
         frontmatter {

@@ -13,6 +13,27 @@ const editUrl = path =>
   // `https://github.com/facebook/reason/edit/master/docs/src/pages/${path}`
 
 export default class Guide extends React.Component {
+  renderMain() {
+    const {relativePath, childMarkdownRemark: {frontmatter: {title}, html}} = this.props.data.file
+    let edit
+    let contents
+    if (relativePath === 'community/examples.md') {
+      const Examples = require('../pages/community/examples.js')
+      contents = <Examples />
+      edit = editUrl('community/examples.js')
+    } else {
+      contents = <div dangerouslySetInnerHTML={{__html: html}} />
+      edit = editUrl(relativePath)
+    }
+    return <div css={styles.main}>
+      <Link css={styles.editLink} to={edit}>
+        Suggest an edit
+      </Link>
+      <h2 css={styles.title}>{title}</h2>
+      {contents}
+    </div>
+  }
+  
   render() {
     const {section, sectionTitle} = this.props.pathContext
     const {allFile, file: {relativePath, childMarkdownRemark: {frontmatter: {title}, html}}} = this.props.data
@@ -35,13 +56,7 @@ export default class Guide extends React.Component {
             root={constructTree(section, parseData(allFile.edges.map(edge => edge.node)))}
           />
         </div>
-        <div css={styles.main}>
-          <Link css={styles.editLink} to={editUrl(relativePath)}>
-            Suggest an edit
-          </Link>
-          <h2 css={styles.title}>{title}</h2>
-          <div dangerouslySetInnerHTML={{__html: html}} />
-        </div>
+        {this.renderMain()}
       </Section>
     </div>
   }
