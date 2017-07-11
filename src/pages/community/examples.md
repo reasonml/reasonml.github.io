@@ -1,6 +1,10 @@
 ---
 title: Examples
-order: 0
+order: 1
 ---
 
-Here are some
+
+- [Reason Maze](https://github.com/jaredly/reason-maze)
+- [Reason Snake](https://github.com/rdavison/llama-snake/tree/master/websnake)
+- [ReasonReact Hacker News](https://github.com/jsdf/reason-react-hacker-news)
+- [Mareo](https://github.com/chenglou/Mareo): Mario + Reason
