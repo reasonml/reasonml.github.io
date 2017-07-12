@@ -1,6 +1,6 @@
 ---
 title: Frequently Asked Questions
-order: 10
+order: 9
 ---
 Frequently Asked Questions
 =======
