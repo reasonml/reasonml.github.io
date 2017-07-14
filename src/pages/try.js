@@ -141,6 +141,7 @@ export default class Try extends Component {
             <Helmet>
                 <script src={__PATH_PREFIX__ + "/bs.js"}></script>
                 <script src={__PATH_PREFIX__ + "/refmt.js"}></script>
+                <title>Try Reason</title>
             </Helmet>
             <Section backgroundColor={accent} css={{color: "white"}}>
                 <Header inverted />
