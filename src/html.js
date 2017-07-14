@@ -1,10 +1,10 @@
-import React from "react"
-import PropTypes from "prop-types"
-import Helmet from "react-helmet"
+import React from 'react'
+import PropTypes from 'prop-types'
+import Helmet from 'react-helmet'
 
-import { TypographyStyle } from "react-typography"
-import typography from "./utils/typography"
-import favicon from "./favicon.png"
+import { TypographyStyle } from 'react-typography'
+import typography from './utils/typography'
+import favicon from './favicon.png'
 
 const BUILD_TIME = new Date().getTime()
 
@@ -17,11 +17,11 @@ export default class HTML extends React.Component {
     const head = Helmet.rewind()
 
     let css
-    if (process.env.NODE_ENV === "production") {
+    if (process.env.NODE_ENV === 'production') {
       css = (
         <style
           dangerouslySetInnerHTML={{
-            __html: require("!raw!../public/styles.css"),
+            __html: require('!raw!../public/styles.css'),
           }}
         />
       )
@@ -32,7 +32,7 @@ export default class HTML extends React.Component {
         <head>
           <meta charSet="utf-8" />
           <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
-          <link rel="icon" type="image/png" href={favicon}/>
+          <link rel="icon" type="image/png" href={favicon} />
           <meta
             name="viewport"
             content="width=device-width, initial-scale=1.0"
