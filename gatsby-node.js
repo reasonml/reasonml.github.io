@@ -34,6 +34,9 @@ exports.createPages = ({graphql, boundActionCreators}) => {
     }
   }`).then(({errors, data}) => {
     if (errors) return Promise.reject(errors)
+    if (!data.allFile) {
+        throw new Error('No files found')
+    }
     data.allFile.edges.forEach(({node: {relativePath, childMarkdownRemark}}) => {
       if (!childMarkdownRemark) return
       let targetPath = relativePath.slice(0, -'.md'.length)

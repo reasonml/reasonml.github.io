@@ -1,14 +1,20 @@
 
 import React, {Component} from 'react'
-import CodeMirror from 'react-codemirror2'
 import Helmet from 'react-helmet'
 import Header from '../components/Header'
 import Section from '../components/Section'
 import {accent, gray} from '../utils/colors'
-require('codemirror/lib/codemirror.css');
-require('codemirror/mode/javascript/javascript')
-require('codemirror/mode/mllike/mllike')
-require('codemirror/mode/rust/rust')
+
+let CodeMirror
+if (typeof navigator !== 'undefined') {
+    CodeMirror = require('react-codemirror2').default
+    require('codemirror/lib/codemirror.css');
+    require('codemirror/mode/javascript/javascript')
+    require('codemirror/mode/mllike/mllike')
+    require('codemirror/mode/rust/rust')
+} else {
+    CodeMirror = () => <div>placehodler</div>
+}
 
 const bs = text => {
     try {
@@ -139,13 +145,13 @@ export default class Try extends Component {
         const {reason, ocaml, js, reasonError, bsError, ocamlError} = this.state
         return <div css={styles.container}>
             <Helmet>
-                <script src={__PATH_PREFIX__ + "/bs.js"}></script>
-                <script src={__PATH_PREFIX__ + "/refmt.js"}></script>
+                <script async src={__PATH_PREFIX__ + "/bs.js"}></script>
+                <script async src={__PATH_PREFIX__ + "/refmt.js"}></script>
                 <title>Try Reason</title>
             </Helmet>
-            <Section backgroundColor={accent} css={{color: "white"}}>
+            <div css={{backgroundColor: accent, color: "white"}}>
                 <Header inverted />
-            </Section>
+            </div>
             <div css={styles.inner}>
             <div css={styles.column}>
                 <div css={styles.row}>
