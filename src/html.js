@@ -32,8 +32,6 @@ export default class HTML extends React.Component {
         <head>
           <meta charSet="utf-8" />
           <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
-          <script async src={__PATH_PREFIX__ + "/bs.js"}></script>
-          <script async src={__PATH_PREFIX__ + "/refmt.js"}></script>
           <link rel="icon" type="image/png" href={favicon}/>
           <meta
             name="viewport"
