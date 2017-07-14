@@ -1,3 +1,5 @@
+![reason logo](src/images/reason_200.png)
+
 # The Reason website & documentation
 
 Uses [gatsby](https://www.gatsbyjs.org/).
