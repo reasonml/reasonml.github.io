@@ -7,7 +7,7 @@ import {accent, gray} from '../utils/colors'
 
 let CodeMirror
 if (typeof navigator !== 'undefined') {
-    CodeMirror = require('react-codemirror2').default
+    CodeMirror = require('../components/CodeMirror')
     require('codemirror/lib/codemirror.css');
     require('codemirror/mode/javascript/javascript')
     require('codemirror/mode/mllike/mllike')
@@ -169,7 +169,7 @@ export default class Try extends Component {
                             mode: "rust",
                             lineNumbers: true,
                         }}
-                        onValueChange={(_, __, x) => this.updateReason(x)}
+                        onChange={this.updateReason}
                     />
                     {reasonError && <div css={styles.error}>
                         <div css={styles.errorTitle}>
@@ -190,7 +190,7 @@ export default class Try extends Component {
                             mode: "mllike",
                             lineNumbers: true,
                         }}
-                        onValueChange={(_, __, x) => this.updateOCaml(x)}
+                        onValueChange={this.updateOCaml}
                     />
                     {ocamlError && <div css={styles.error}>
                         <div css={styles.errorTitle}>
