@@ -1,6 +1,10 @@
 
 import React, {Component} from 'react'
 import CodeMirror from 'react-codemirror2'
+import Helmet from 'react-helmet'
+import Header from '../components/Header'
+import Section from '../components/Section'
+import {accent, gray} from '../utils/colors'
 require('codemirror/lib/codemirror.css');
 require('codemirror/mode/javascript/javascript')
 require('codemirror/mode/mllike/mllike')
@@ -25,11 +29,20 @@ const defaultSource = 'let x = 10;\nJs.log x;'
 
 const errorTimeout = 500;
 
+const waitForLoaded = (done) => {
+    const tout = setInterval(() => {
+        if (window.refmt && window.ocaml) {
+            clearInterval(tout)
+            done()
+        }
+    })
+}
+
 export default class Try extends Component {
     state = {
-        reason: '/* initial */',
-        ocaml: '(* initial *)',
-        js: '// nothing',
+        reason: '/* loading */',
+        ocaml: '(* loading *)',
+        js: '// loading',
         jsIsLatest: false,
         autoEvaluate: true,
         output: [],
@@ -37,9 +50,10 @@ export default class Try extends Component {
     rerr = null
 
     componentDidMount() {
-        setTimeout(() => {
+        waitForLoaded(() => {
+            // this.setState({loaded: true})
             this.updateReason(defaultSource)
-        }, 1000)
+        })
         this.iframe.contentWindow.console = {
             log: (...items) => {
                 this.setState(state => ({...state, output: state.output.concat({type: 'log', contents: items})}))
@@ -124,6 +138,13 @@ export default class Try extends Component {
     render() {
         const {reason, ocaml, js, reasonError, bsError, ocamlError} = this.state
         return <div css={styles.container}>
+            <Helmet>
+                <script src={__PATH_PREFIX__ + "/bs.js"}></script>
+                <script src={__PATH_PREFIX__ + "/refmt.js"}></script>
+            </Helmet>
+            <Section backgroundColor={accent} css={{color: "white"}}>
+                <Header inverted />
+            </Section>
             <div css={styles.inner}>
             <div css={styles.column}>
                 <div css={styles.row}>
@@ -268,16 +289,35 @@ const styles = {
         flexDirection: 'row',
         flex: 1,
         padding: 20,
+        '@media(max-width: 500px)': {
+            display: 'block',
+            flexDirection: 'column',
+            overflow: 'auto',
+        },
     },
     column: {
         flex: 1,
         minWidth: 0,
+        '@media(max-width: 500px)': {
+            display: 'block',
+            flexShrink: 'initial',
+            flexGrow: 'initial',
+            // flex: 0,
+        },
     },
     row: {
         flex: 1,
         minHeight: 0,
         border: '1px solid #aaa',
         position: 'relative',
+        '@media(max-width: 500px)': {
+            // display: 'block',
+            height: 300,
+            marginBottom: 20,
+            flexShrink: 'initial',
+            flexGrow: 'initial',
+            // flex: 0,
+        },
     },
 
     label: {
