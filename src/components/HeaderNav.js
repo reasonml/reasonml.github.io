@@ -7,6 +7,10 @@ const links = [
     title: 'quickstart',
   },
   {
+    target: '/try/',
+    title: 'try',
+  },
+  {
     target: '/guide/',
     title: 'guide',
   },
