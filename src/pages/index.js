@@ -17,11 +17,17 @@ const features = [
     url: '/guide/language/types/',
   },
   {
-    title: 'Web or Native',
-    description: 'Write your frontend, backend, and build tools all in the same language -- without compromising on speed.',
-    action: 'Native quickstart',
-    url: '/guide/native/quickstart/',
+      title: 'Online playground',
+      description: 'Play with Reason in-browser, take a look at the produced OCaml and JavaScript, and try out code samples.',
+      action: 'Try it now',
+      url: '/try',
   },
+  // {
+  //   title: 'Web or Native', // 😢 not ready yet
+  //   description: 'Write your frontend, backend, and build tools all in the same language -- without compromising on speed.',
+  //   action: 'Native quickstart',
+  //   url: '/guide/native/quickstart/',
+  // },
   {
     title: 'Easy JavaScript interop',
     description: 'Use packages from npm with minimum hassle, or drop in a snippet of raw JavaScript while you\'re learning',
@@ -30,7 +36,7 @@ const features = [
   },
   {
     title: 'Flexible & Fun',
-    description: 'Make websites, games, servers, build tools, and more! Take a look at these examples to get inspired.',
+    description: 'Make websites, animations, games, servers, cli tools, and more! Take a look at these examples to get inspired.',
     action: 'See examples',
     url: '/community/examples',
   }
