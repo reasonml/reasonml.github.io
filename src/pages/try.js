@@ -43,6 +43,12 @@ const waitForLoaded = done => {
   })
 }
 
+const isSafari = (
+  typeof navigator !== 'undefined' && /iP(ad|hone|od).+Version\/[\d\.]+.*Safari/i.test(navigator.userAgent)
+) || (
+  typeof safari !== 'undefined'
+);
+
 export default class Try extends Component {
   state = {
     reason: '/* loading */',
@@ -199,9 +205,7 @@ export default class Try extends Component {
     const { reason, ocaml, js, reasonError, bsError, ocamlError } = this.state
     const codemirrorStyles = [
       styles.codemirror,
-      typeof window !== 'undefined' &&
-        typeof window.safari !== 'undefined' &&
-        styles.codemirrorSafari,
+      isSafari && styles.codemirrorSafari,
     ]
     return (
       <div css={styles.container}>
@@ -408,13 +412,13 @@ const styles = {
 
   codemirror: {
     flex: 1,
-    // '& .CodeMirror div': {
-    //     display: 'block',
-    // },
     '& .CodeMirror': {
       flex: 1,
-      // minHeight: 300,
       height: 'auto',
+
+      '@media(max-width: 500px)': {
+        height: 300,
+      },
     },
   },
 
