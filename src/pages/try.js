@@ -143,6 +143,12 @@ export default class Try extends Component {
 
     render() {
         const {reason, ocaml, js, reasonError, bsError, ocamlError} = this.state
+        const codemirrorStyles = [
+            styles.codemirror,
+            typeof window !== 'undefined' &&
+            typeof window.safari !== 'undefined' &&
+            styles.codemirrorSafari,
+        ];
         return <div css={styles.container}>
             <Helmet>
                 <script async src={__PATH_PREFIX__ + "/bs.js"}></script>
@@ -157,7 +163,7 @@ export default class Try extends Component {
                 <div css={styles.row}>
                     <div css={styles.label}>reason</div>
                     <CodeMirror
-                        css={styles.codemirror}
+                        css={codemirrorStyles}
                         value={reason}
                         options={{
                             mode: "rust",
@@ -178,7 +184,7 @@ export default class Try extends Component {
                 <div css={styles.row}>
                     <div css={styles.label}>ocaml</div>
                     <CodeMirror
-                        css={styles.codemirror}
+                        css={codemirrorStyles}
                         value={ocaml}
                         options={{
                             mode: "mllike",
@@ -211,7 +217,7 @@ export default class Try extends Component {
                 <div css={styles.row}>
                     <div css={styles.label}>javascript</div>
                     <CodeMirror
-                        css={styles.codemirror}
+                        css={codemirrorStyles}
                         value={js}
                         options={{
                             mode: "javascript",
@@ -345,9 +351,19 @@ const styles = {
 
     codemirror: {
         flex: 1,
+        // '& .CodeMirror div': {
+        //     display: 'block',
+        // },
         '& .CodeMirror': {
             flex: 1,
+            // minHeight: 300,
             height: 'auto',
+        }
+    },
+
+    codemirrorSafari: {
+        '& .CodeMirror': {
+            height: 300,
         }
     },
 }
