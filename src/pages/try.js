@@ -358,6 +358,10 @@ const styles = {
     bottom: 0,
     left: 0,
     right: 0,
+    '@media(max-width: 500px)': {
+      position: 'static',
+      display: 'block',
+    },
   },
   inner: {
     flexDirection: 'row',
@@ -366,7 +370,6 @@ const styles = {
     '@media(max-width: 500px)': {
       display: 'block',
       flexDirection: 'column',
-      overflow: 'auto',
     },
   },
   column: {
