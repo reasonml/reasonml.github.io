@@ -21,8 +21,8 @@ const examples = [{
 export default class Examples extends React.Component {
   render() {
     return <div css={styles.container}>
-      {examples.map(({title, url, img}) => (
-        <a href={url} css={styles.link}>
+      {examples.map(({title, url, img}, index) => (
+        <a key={index} href={url} css={styles.link}>
           <img src={img} css={styles.img} />
           <span css={styles.title}>{title}</span>
         </a>
