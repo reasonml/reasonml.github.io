@@ -5,9 +5,13 @@ order: 8
 
 ### New website!
 
-July 7, 2017
+July 14, 2017
 
-This one is built with [gatsby](https://www.gatsbyjs.org) and has edit links all over the place. Take a look around!
+Notice anything different? =)
+
+The new documentation website is built by our community member [Jared](https://jaredforsyth.com) (make sure to check his Raeson blog posts too!). The new site keeps most of the same content from the old one, while providing a better structure to navigate through them. You'd notice "Suggest an edit" link all over the place. Take a look around!
+
+(Built with [Gatsby](https://www.gatsbyjs.org))
 
 ### New ReasonReact version released
 

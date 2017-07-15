@@ -5,7 +5,7 @@ order: 20
 
 An example is worth a thousand words.
 
-This section is dedicated to newcomers trying to figure out general idioms & conventions in Reason and BuckleScript. If you're a beginner who's got a good idea for an example, please [send us a pull request](https://github.com/facebook/reason/pulls)!
+This section is dedicated to newcomers trying to figure out general idioms & conventions in Reason and BuckleScript. If you're a beginner who's got a good idea for an example, please suggest an edit!
 
 ### Using the `option` type
 
