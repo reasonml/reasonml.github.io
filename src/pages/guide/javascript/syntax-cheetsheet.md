@@ -64,7 +64,7 @@ In `Reason`, "sequence expressions" are created with `{}` and evaluate to their
 last statement. In `JavaScript`, this can be simulated via a temporary variable
 which must be created in an invalid state, then later mutated.
 
-> <table>
+<table>
   <thead><tr> <th scope="col"><p >JavaScript</p></th> <th scope="col"><p>Reason</p></th></tr></thead>
   <tr>
     <td>
@@ -92,11 +92,11 @@ let res = {
 
 `JavaScript` has two different kinds of functions, whereas `Reason` only has one.
 
-> JavaScript                            |   Reason
-> --------------------------------------|--------------------------------
-> <pre>arg => retVal  </pre>            |  <pre>fun arg => retVal</pre>
-> <pre>function named(arg) {...}        |
-> <pre>let f = function named(arg) {...}|
+JavaScript                            |   Reason
+--------------------------------------|--------------------------------
+<pre>arg => retVal  </pre>            |  <pre>fun arg => retVal</pre>
+<pre>function named(arg) {...}        |
+<pre>let f = function named(arg) {...}|
 
 
 
@@ -105,19 +105,19 @@ The primary difference between modern (ES6) `JavaScript` and `Reason` lambdas is
 understanding of the meaning of a function when it has a very large destructured
 argument.
 
-> JavaScript                        |   Reason
-> ----------------------------------|--------------------------------
-> <pre>const incr = x => x + 1;</pre>        |  <pre>let incr = fun x => x + 1;</pre>
-> <pre>const five = incr(4);</pre>           |  <pre>let five = incr 4;</pre>
-> <pre>const add = (x, y) => x+y;</pre>      |  <pre>let add = fun x y => x+y;</pre>
-> <pre>const x = add(3, 4);</pre>            |  <pre>let x = add 3 4;</pre>
-> <pre>const y = add(3, add(0, 1));</pre>    |  <pre>let y = add 3 (add 0 1);</pre>
+JavaScript                        |   Reason
+----------------------------------|--------------------------------
+<pre>const incr = x => x + 1;</pre>        |  <pre>let incr = fun x => x + 1;</pre>
+<pre>const five = incr(4);</pre>           |  <pre>let five = incr 4;</pre>
+<pre>const add = (x, y) => x+y;</pre>      |  <pre>let add = fun x y => x+y;</pre>
+<pre>const x = add(3, 4);</pre>            |  <pre>let x = add 3 4;</pre>
+<pre>const y = add(3, add(0, 1));</pre>    |  <pre>let y = add 3 (add 0 1);</pre>
 
 
 Like `JavaScript`, `Reason` allows any expression on the right hand side of the
 lambda `=>`.
 
-> <table>
+<table>
   <thead><tr> <th scope="col"><p >JavaScript</p></th> <th scope="col"><p>Reason</p></th></tr></thead>
   <tr>
     <td>
@@ -141,7 +141,7 @@ statement wrapped in `{}` braces. With `Reason`, `{}` blocks are *already* expre
 require two modes for lambda - all lambdas in `Reason` have expressions on the right hand side of the `=>`,
 and some of those expressions coincidentally resemble "function bodies" in `{}` braces.
 
-> <table>
+<table>
   <thead><tr> <th scope="col"><p >JavaScript</p></th> <th scope="col"><p>Reason</p></th></tr></thead>
   <tr>
     <td>
@@ -171,7 +171,7 @@ when supplying those arguments as first class. In `JavaScript`, arguments
 are an array, and supplying *all* of the arguments requires `.apply`.
 In `Reason`, you may simply supply the tuple.
 
-> <table>
+<table>
   <thead><tr> <th scope="col"><p >JavaScript</p></th> <th scope="col"><p>Reason</p></th></tr></thead>
   <tr>
     <td>
@@ -203,7 +203,7 @@ you read have omitted them. See how in this example, arguments that are clearly
 single words, or that have balanced "bookends" (such as `{ }`) do not need
 the parentheses.
 
-> <table>
+<table>
   <thead><tr> <th scope="col"><p >JavaScript</p></th> <th scope="col"><p>Reason</p></th></tr></thead>
   <tr>
     <td>
@@ -237,7 +237,7 @@ the native compiler (or even a `JavaScript` backend), currying is optimized.
 happen to supply all the arguments). The main syntactic difference when defining
 curried functions is that `Reason` lambdas always begin with the `fun` keyword.
 
-> <table>
+<table>
   <thead><tr> <th scope="col"><p >JavaScript</p></th> <th scope="col"><p>Reason</p></th></tr></thead>
   <tr>
     <td><pre>let add = a => b => a + b;</pre></td>
@@ -248,7 +248,7 @@ curried functions is that `Reason` lambdas always begin with the `fun` keyword.
 When invoking curried functions, the syntax is the same, but with `Reason`,
 supplying the parenthesis is optional.
 
-> <table>
+<table>
   <thead><tr> <th scope="col"><p >JavaScript</p></th> <th scope="col"><p>Reason</p></th></tr></thead>
   <tr>
     <td>
@@ -274,7 +274,7 @@ syntactic sugar to help with curried function definitions. The two forms
 are *exactly* equivalent and nothing changes about how you would invoke these
 functions.
 
-> <table>
+<table>
   <thead><tr> <th scope="col"><p >JavaScript</p></th> <th scope="col"><p>Reason</p></th></tr></thead>
   <tr>
     <td>
@@ -302,7 +302,7 @@ want to create records or access record fields. In the simplest case, the record
 type is already in scope and you can unambiguously create values just by using
 the standard `{ key: value }` syntax.
 
-> <table>
+<table>
   <thead>
     <tr>
       <th scope="col"><p>JavaScript</p></th>
@@ -346,7 +346,7 @@ scope for the rest of the expression), or (3) open the entire module to bring
 the record type into scope (least safe--brings all names from the opened module
 into scope for the rest of the block).
 
-> <table>
+<table>
   <thead>
     <tr>
       <th scope="col"><p>JavaScript</p></th>
@@ -392,7 +392,7 @@ some time when the program is in an invalid state.  The switch statement in
 `Reason` also provides many more super powers, discussed in [Pattern
 Matching](./index.html#diving-deeper-expressive-pattern-matching).
 
-> <table>
+<table>
   <thead><tr> <th scope="col"><p >JavaScript</p></th> <th scope="col"><p>Reason</p></th></tr></thead>
   <tr>
     <td>

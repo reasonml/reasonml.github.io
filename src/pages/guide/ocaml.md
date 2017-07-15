@@ -16,7 +16,7 @@ Reason comments use the C-family style of comments, and OCaml comments use `(*
 time, and in OCaml, nested `(* *)` are validated at parse time.
 Reason will also *eventually* support line comments, which are not supported in OCaml.
 
-> <table>
+<table>
   <thead><tr> <th scope="col"><p >OCaml</p></th> <th scope="col"><p>Reason</p></th></tr></thead>
   <tr>
     <td>
@@ -37,7 +37,7 @@ Reason will also *eventually* support line comments, which are not supported in 
 In `Reason`'s repl `rtop` (a customized `utop`), each input is submitted via
 a single `;` semicolon. `OCaml`'s repl requires two semicolons `;;`.
 
-> <table>
+<table>
   <thead><tr> <th scope="col"><p >OCaml REPL</p></th> <th scope="col"><p>Reason REPL</p></th></tr></thead>
   <tr>
     <td>
@@ -60,7 +60,7 @@ requires). In `Reason`, to achieve the corresponding *inequality*,
 simply swap the first character with a `!` character. (`!=` for structural
 inequality, and `!==` for reference inequality). `Reason`'s
 symbol choices are slightly more consistent and follow the ES6 conventions.
-> <table>
+<table>
   <thead><tr><th scope="col"><p>Equality</p></th> <th scope="col"><p>Expressed in OCaml via</p></th> <th scope="col"><p>Expressed in Reason via</p></th></tr></thead>
   <tr>
     <td>
@@ -132,7 +132,7 @@ All blocks *evaluate* to the last line and the semicolon on the last line is
 optional. `{}` braces are only needed if you have more than one item to chain
 together via `;`.
 
-> <table>
+<table>
   <thead><tr> <th scope="col"><p>OCaml</p></th><th scope="col"><p>Reason</p></th></tr></thead>
   <tr>
     <td>
@@ -172,77 +172,75 @@ contexts are very different. (Local scope requires trailing `in`, but module bod
 not and some imperative statements must be assigned to `_` or `()`, or else use double `;;`).
 `Reason` greatly simplifies the syntax for new _and_ experienced ML programmers.
 
-> <table>
->   <thead><tr> <th scope="col"><p>OCaml Module Body</p></th><th scope="col"><p>Reason Module Body</p></th></tr></thead>
->   <tr>
->     <td>
->       <pre>
-> let ten = 10
-> let () = imperativeFunc ten ten
-> let () = imperativeFunc 0 0</pre>
->     </td>
->     <td>
->       <pre>
-> let ten = 10;
-> imperativeFunc ten ten;
-> imperativeFunc 0 0;</pre>
->     </td>
->   </tr>
->   <tr>
->     <td>
->       <pre>
-> let ten = 10;;
-> imperativeFunc ten ten;;
-> imperativeFunc 0 0;;</pre>
->     </td>
->     <td>*Same as above*</td>
->   </tr>
->   <thead><tr> <th scope="col"><p>OCaml Local Scope</p></th><th scope="col"><p>Reason Local Scope</p></th></tr></thead>
->   <tr>
->     <td>
->       <pre>
-> let ten = 10 in
-> let \_ = imperativeFunc ten ten in
-> imperativeFunc 0 0</pre>
->     </td>
->     <td>
->
->        *same as above*
->
->     </td>
->   </tr>
->   <tr>
->     <td>
->       <pre>
-> let ten = 10 in begin
->   imperativeFunc ten ten;
->   imperativeFunc 0 0
-> end</pre>
->     </td>
->     <td>
->        *same as above*
->     </td>
->   </tr>
->   <tr>
->     <td>
->       <pre>
-> let ten = 10 in (
->   imperativeFunc ten ten;
->   imperativeFunc 0 0
-> )</pre>
->     </td>
->     <td>
->        *same as above*
->     </td>
->   </tr>
-> </table>
+<table>
+  <thead><tr> <th scope="col"><p>OCaml Module Body</p></th><th scope="col"><p>Reason Module Body</p></th></tr></thead>
+  <tr>
+    <td>
+      <pre>
+let ten = 10
+let () = imperativeFunc ten ten
+let () = imperativeFunc 0 0</pre>
+    </td>
+    <td>
+      <pre>
+let ten = 10;
+imperativeFunc ten ten;
+imperativeFunc 0 0;</pre>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <pre>
+let ten = 10;;
+imperativeFunc ten ten;;
+imperativeFunc 0 0;;</pre>
+    </td>
+    <td>*Same as above*</td>
+  </tr>
+  <thead><tr> <th scope="col"><p>OCaml Local Scope</p></th><th scope="col"><p>Reason Local Scope</p></th></tr></thead>
+  <tr>
+    <td>
+      <pre>
+let ten = 10 in
+let \_ = imperativeFunc ten ten in
+imperativeFunc 0 0</pre>
+    </td>
+    <td>
+       *same as above*
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <pre>
+let ten = 10 in begin
+  imperativeFunc ten ten;
+  imperativeFunc 0 0
+end</pre>
+    </td>
+    <td>
+       *same as above*
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <pre>
+let ten = 10 in (
+  imperativeFunc ten ten;
+  imperativeFunc 0 0
+)</pre>
+    </td>
+    <td>
+       *same as above*
+    </td>
+  </tr>
+</table>
 
 ### Tuples and Records
 
 In `Reason`, tuples always require parentheses. This requirement makes `Reason` easier to
 read and also removes the need for type annotations inside of tuple members
 to be wrapped in *additional* parentheses.
-> <table>
+<table>
   <thead><tr> <th scope="col"><p>OCaml</p></th><th scope="col"><p>Reason</p></th></tr></thead>
   <tr>
     <td>
@@ -273,7 +271,7 @@ to be wrapped in *additional* parentheses.
 In `Reason`, records resemble JavaScript, using `:` instead of `=`. Because
 `Reason` tuples always require wrapping parens, records may contain lambdas as values
 without needing extra parens.
-> <table>
+<table>
   <thead><tr> <th scope="col"><p>OCaml</p></th><th scope="col"><p>Reason</p></th></tr></thead>
   <tr>
     <td>
@@ -306,19 +304,19 @@ let myFuncs = {
 
 Lists in `Reason` are delimited with commas rather than semi-colons as they are in JavaScript. `Reason` also uses JavaScript's spread syntax for list concatenation instead of the `::` operator.
 
-> <table>
-> <thead><tr> <th scope="col"><p>OCaml Lists</p></th><th scope="col"><p>Reason Lists</p></th></tr></thead>
->   <tr>
->     <td>
->       <pre>let list = [1; 2; 3]</pre>
->       <pre>let list = hd :: tl</pre>
->     </td>
->     <td>
->       <pre>let list = [1, 2, 3];</pre>
->       <pre>let list = [hd, ...tl];</pre>
->     </td>
->   </tr>
-> </table>
+<table>
+<thead><tr> <th scope="col"><p>OCaml Lists</p></th><th scope="col"><p>Reason Lists</p></th></tr></thead>
+  <tr>
+    <td>
+      <pre>let list = [1; 2; 3]</pre>
+      <pre>let list = hd :: tl</pre>
+    </td>
+    <td>
+      <pre>let list = [1, 2, 3];</pre>
+      <pre>let list = [hd, ...tl];</pre>
+    </td>
+  </tr>
+</table>
 
 ### Type Definitions
 
@@ -327,51 +325,49 @@ only one syntactic pattern to learn for each kind of type. Whereas in `OCaml`,
 there are separate syntaxes for tuple types `(x * y)` and tuple values
 `(x, y)`).
 
-> <table>
-> <thead><tr> <th scope="col"><p>OCaml Tuples</p></th><th scope="col"><p>Reason Tuples</p></th></tr></thead>
->   <tr>
->     <td>
->       <pre>
-> type tuple = int \* int
-> let tup: tuple = (10, 30)</pre>
->
->     </td>
->     <td>
->       <pre>
-> type tuple = (int, int);
-> let tup: tuple = (10, 30);</pre>
->     </td>
->   </tr>
-> <thead><tr> <th scope="col"><p>OCaml Records</p></th><th scope="col"><p>Reason Records</p></th></tr></thead>
->   <tr>
->     <td>
->       <pre>
-> type r =
->   {x: int; y: int};
-> let myRec: r = {x = 0; y = 10};</pre>
->
->     </td>
->     <td>
->       <pre>
-> type r =
->   {x: int, y: int};
-> let myRec: r = {x: 0, y: 10};</pre>
->     </td>
->   </tr>
-> <thead><tr> <th scope="col"><p>OCaml Functions</p></th><th scope="col"><p>Reason Functions</p></th></tr></thead>
->   <tr>
->     <td>
->       <pre>
-> type func = int -> int;
-> let x: func = fun a -> a + 1;</pre>
->     </td>
->     <td>
->       <pre>
-> type func = int => int;
-> let x: func = fun a => a + 1;</pre>
->     </td>
->   </tr>
-> </table>
+<table>
+<thead><tr> <th scope="col"><p>OCaml Tuples</p></th><th scope="col"><p>Reason Tuples</p></th></tr></thead>
+  <tr>
+    <td>
+      <pre>
+type tuple = int \* int
+let tup: tuple = (10, 30)</pre>
+    </td>
+    <td>
+      <pre>
+type tuple = (int, int);
+let tup: tuple = (10, 30);</pre>
+    </td>
+  </tr>
+<thead><tr> <th scope="col"><p>OCaml Records</p></th><th scope="col"><p>Reason Records</p></th></tr></thead>
+  <tr>
+    <td>
+      <pre>
+type r =
+  {x: int; y: int};
+let myRec: r = {x = 0; y = 10};</pre>
+    </td>
+    <td>
+      <pre>
+type r =
+  {x: int, y: int};
+let myRec: r = {x: 0, y: 10};</pre>
+    </td>
+  </tr>
+<thead><tr> <th scope="col"><p>OCaml Functions</p></th><th scope="col"><p>Reason Functions</p></th></tr></thead>
+  <tr>
+    <td>
+      <pre>
+type func = int -> int;
+let x: func = fun a -> a + 1;</pre>
+    </td>
+    <td>
+      <pre>
+type func = int => int;
+let x: func = fun a => a + 1;</pre>
+    </td>
+  </tr>
+</table>
 
 ### Functions
 
@@ -396,7 +392,7 @@ the syntax makes it clear how it is actually an extension of a single argument
 function. The single case match is a natural extension of the simple lambda,
 and the multicase lambda is a natural extension of the single case lambda.
 
-> <table>
+<table>
   <thead><tr> <th scope="col"><p>Form</p></th><th scope="col"><p>Ocaml</p></th><th scope="col"><p>Reason</p></th></tr></thead>
   <tr>
     <td>
@@ -447,7 +443,7 @@ Both `OCaml` and `Reason` syntax offer a syntactic sugar for expressing curried
 functions. The following table shows three equivalent definitions which are
 identical once parsed. As always, all `Reason` functions include an `=>` arrow.
 
-> <table> <thead><tr><th scope="col"><p>Ocaml</p></th><th
+<table> <thead><tr><th scope="col"><p>Ocaml</p></th><th
         scope="col"><p>Reason</p></th></tr></thead>
   <tr>
     <td>
@@ -740,7 +736,7 @@ parentheses, otherwise the `Some` case is parsed as belonging to the outer
 `match`. `Reason`'s required `{}` blocks around match cases prevent this
 issue.
 
-> <table>
+<table>
   <thead><tr> <th scope="col"><p>OCaml (BROKEN)</p></th><th scope="col"><p>Reason</p></th></tr></thead>
   <tr>
     <td>
@@ -817,7 +813,7 @@ function application syntax, `Reason` also unifies the syntax for Functors.
 In `Reason`, functor parsing rules are almost identical to the function
   parsing rules, using `=>` to represent curried application.
 
-> <table>
+<table>
   <thead><tr> <th scope="col"><p>OCaml</p></th><th scope="col"><p>Reason</p></th></tr></thead>
   <tr>
     <td>
@@ -844,7 +840,7 @@ to the syntax for creating/applying functions. Also, functor *application* is
 consistent with function application (again, space separated lists).
 
 
-> <table>
+<table>
   <thead><tr> <th scope="col"><p>OCaml</p></th><th scope="col"><p>Reason</p></th></tr></thead>
   <tr>
     <td>
@@ -926,7 +922,7 @@ This is a welcomed improvement because the `OCaml` type errors the user would
 see were very confusing when it would believe the function's return value
 was a tuple with infix `,` comma.
 
-> <table>
+<table>
   <thead><tr> <th scope="col"><p>OCaml</p></th><th scope="col"><p>Reason</p></th></tr></thead>
   <tr>
     <td>
@@ -948,7 +944,7 @@ let myFuncs = {
 
 
 ###### Lambdas as match results no longer need extra parens
-> <table>
+<table>
   <thead><tr> <th scope="col"><p>OCaml</p></th><th scope="col"><p>Reason</p></th></tr></thead>
   <tr>
     <td>
@@ -972,7 +968,7 @@ let x = switch prnt {
 </table>
 
 ###### Lambdas and type annotations in tuples no longer require extra parens
-> <table>
+<table>
   <thead><tr> <th scope="col"><p>OCaml</p></th><th scope="col"><p>Reason</p></th></tr></thead>
   <tr>
     <td>
@@ -1039,7 +1035,7 @@ let | MyThing \_ as ppp
 
 Because equalities and their negations have been made more consistent in `Reason`,
 the `=` operator is available for mutable field update.
-> <table>
+<table>
   <thead><tr> <th scope="col"><p >OCaml</p></th> <th scope="col"><p>Reason</p></th></tr></thead>
   <tr>
     <td>
@@ -1059,18 +1055,18 @@ In Reason, `!` and other prefix operators have lower precedence than dot `.` or 
 This is more consistent with what other languages do, and is more practical
 when (or if) the `!` symbol is used to represent boolean `not`.
 
-> Ocaml                                 | Reason
-> --------------------------------------|--------------------------------
-> <pre>   let x = !(foo.bar);    </pre> | <pre>    let x = !foo.bar;        </pre>
-> <pre>   let x = !(foo#bar);    </pre> | <pre>    let x = !foo#bar;        </pre>
-> <pre>   let x = !(!foo.bar);   </pre> | <pre>    let x = !(!foo).bar;     </pre>
-> <pre>   let x = !(!foo#bar);   </pre> | <pre>    let x = !(!foo)#bar;     </pre>
-> <pre>   let x = !(!(foo.bar)); </pre> | <pre>    let x = !(!foo.bar);     </pre>
-> <pre>   let x = !(!(foo#bar)); </pre> | <pre>    let x = !(!foo#bar);     </pre>
-> <pre>   let x = !!(foo.bar);   </pre> | <pre>    let x = !!foo.bar;       </pre>
-> <pre>   let x = !!(foo#bar);   </pre> | <pre>    let x = !!foo#bar;       </pre>
-> <pre>   let x = !~(foo.bar);   </pre> | <pre>    let x = !~foo.bar;       </pre>
-> <pre>   let x = !~(foo#bar);   </pre> | <pre>    let x = !~foo#bar;       </pre>
+Ocaml                                 | Reason
+--------------------------------------|--------------------------------
+<pre>   let x = !(foo.bar);    </pre> | <pre>    let x = !foo.bar;        </pre>
+<pre>   let x = !(foo#bar);    </pre> | <pre>    let x = !foo#bar;        </pre>
+<pre>   let x = !(!foo.bar);   </pre> | <pre>    let x = !(!foo).bar;     </pre>
+<pre>   let x = !(!foo#bar);   </pre> | <pre>    let x = !(!foo)#bar;     </pre>
+<pre>   let x = !(!(foo.bar)); </pre> | <pre>    let x = !(!foo.bar);     </pre>
+<pre>   let x = !(!(foo#bar)); </pre> | <pre>    let x = !(!foo#bar);     </pre>
+<pre>   let x = !!(foo.bar);   </pre> | <pre>    let x = !!foo.bar;       </pre>
+<pre>   let x = !!(foo#bar);   </pre> | <pre>    let x = !!foo#bar;       </pre>
+<pre>   let x = !~(foo.bar);   </pre> | <pre>    let x = !~foo.bar;       </pre>
+<pre>   let x = !~(foo#bar);   </pre> | <pre>    let x = !~foo#bar;       </pre>
 
 
 ###### Comment Escaping
@@ -1084,15 +1080,15 @@ be parsed *without* the backslash when added to the AST. When reprinted, the
 escape backslashes are added back in automatically.
 
 
-> OCaml                                        | Reason
-> ---------------------------------------------|--------------------------------
-> <code>let (/*) a b => a + b;       </code>   |  <code>     let (/\\\*) a b => a + b;         </code>
-> <code>let x = 12 /-\* 23 /-\* 12;  </code>   |  <code>     let x = 12 /-\\\* 23 /-\\\* 12; </code>
-> <code>let y = (/*) a b;            </code>   |  <code>     let y = (/\\\*) a b;            </code>
-> <code>let (!=*) q r => q + r;      </code>   |  <code>     let (!=\\\*) q r => q + r;      </code>
-> <code>let res = q (!=*) r;         </code>   |  <code>     let res = q (!=\\\*) r;         </code>
-> <code>let (!=/*) q r => q + r;     </code>   |  <code>     let (!=\/\\\*) q r => q + r;    </code>
-> <code>let res = q (!=/*) r;        </code>   |  <code>     let res = q (!=\/\\\*) r;       </code>
+OCaml                                        | Reason
+---------------------------------------------|--------------------------------
+<code>let (/*) a b => a + b;       </code>   |  <code>     let (/\\\*) a b => a + b;         </code>
+<code>let x = 12 /-\* 23 /-\* 12;  </code>   |  <code>     let x = 12 /-\\\* 23 /-\\\* 12; </code>
+<code>let y = (/*) a b;            </code>   |  <code>     let y = (/\\\*) a b;            </code>
+<code>let (!=*) q r => q + r;      </code>   |  <code>     let (!=\\\*) q r => q + r;      </code>
+<code>let res = q (!=*) r;         </code>   |  <code>     let res = q (!=\\\*) r;         </code>
+<code>let (!=/*) q r => q + r;     </code>   |  <code>     let (!=\/\\\*) q r => q + r;    </code>
+<code>let res = q (!=/*) r;        </code>   |  <code>     let res = q (!=\/\\\*) r;       </code>
 
 
 
@@ -1102,7 +1098,7 @@ uses `===` to represent `OCaml`'s `==`, then how would `Reason` represent `OCaml
 `===` symbol (if it were defined)? `Reason` provides a way! "Escape" the triple
 equals symbol!
 
-> <table>
+<table>
   <thead><tr> <th scope="col"><p>Identifier</p></th><th scope="col"><p>Meaning</p></th> <th scope="col"><p>Expressed in OCaml via</p></th> <th scope="col"><p>Expressed in Reason via</p></th></tr></thead>
   <tr>
   <tr>

@@ -3,9 +3,11 @@ title: Articles and Videos
 order: 0
 ---
 
-## Articles
+## OCaml Concepts
 
-- [Real World OCaml](https://realworldocaml.org): a comprehensive book on OCaml. Make sure you install [reason-tools](https://github.com/reasonml/reason-tools) to translate the syntax to Reason!
+Reason is just OCaml under the hood; We don't yet cover every concept on this documentation site. These external articles (in OCaml syntax) might help! **Make sure you install [reason-tools](https://github.com/reasonml/reason-tools) to translate the syntax to Reason!**
+
+- [Real World OCaml](https://realworldocaml.org): a comprehensive book on OCaml.
 - [GADT tutorial](http://mads-hartmann.com/ocaml/2015/01/05/gadt-ocaml.html) for those interested in the deeper parts of OCaml.
 
 ### BuckleScript
