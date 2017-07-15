@@ -54,37 +54,17 @@ export default class Guide extends React.Component {
           </h1>
         </div>
       </Section>
-      <Media query="(max-width: 800px)">
-        {matches => matches
-          // Mobile viewports render the guidebar below the content
-          ? (
-            <Section css={styles.contentSection}>
-              <div css={styles.sidebar}>
-              </div>
-              {this.renderMain()}
-              <hr />
-              <GuideSidebar
-                  current={fixPath(relativePath)}
-                  search={`/${section}/search`}
-                  root={constructTree(section, allFile.edges.map(edge => edge.node))}
-                />
-            </Section>
-          )
-          // Desktop viewports render the guidebar to the side of the content
-          : (
-            <Section css={styles.contentSection}>
-              <div css={styles.sidebar}>
-                <GuideSidebar
-                  renderAsFixed={true}
-                  current={fixPath(relativePath)}
-                  search={`/${section}/search`}
-                  root={constructTree(section, allFile.edges.map(edge => edge.node))}
-                />
-              </div>
-              {this.renderMain()}
-            </Section>
-        )}
-      </Media>
+      <Section css={styles.contentSection}>
+        <div css={styles.sidebar}>
+          <GuideSidebar
+            renderAsFixed={true}
+            current={fixPath(relativePath)}
+            search={`/${section}/search`}
+            root={constructTree(section, allFile.edges.map(edge => edge.node))}
+          />
+        </div>
+        {this.renderMain()}
+      </Section>
     </div>
   }
 }
@@ -105,7 +85,7 @@ const styles = {
   contentSection: {
     flexDirection: 'row',
     '@media(max-width: 800px)': {
-      flexDirection: 'column',
+      flexDirection: 'column-reverse',
     },
   },
   sidebar: {
