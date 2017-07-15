@@ -3,13 +3,6 @@ title: Articles and Videos
 order: 0
 ---
 
-## Videos
-
-- [Reason: JavaScript-flavored OCaml](https://www.youtube.com/watch?v=vTb8UU_Yjmk) July 2017
-- [A Speed-date with ReasonML](https://www.youtube.com/watch?v=dKYAh8vJiSk) May 2017
-- [Taming the Meta-language](https://www.youtube.com/watch?v=_0T5OSSzxms) March 2017
-- [The Age of Reason(ML)](https://www.youtube.com/watch?v=8LCmLQ1-YqQ) Nov 2016
-
 ## Articles
 
 - [Real World OCaml](https://realworldocaml.org): a comprehensive book on OCaml. Make sure you install [reason-tools](https://github.com/reasonml/reason-tools) to translate the syntax to Reason!
@@ -26,5 +19,16 @@ order: 0
 
 ### ReasonReact
 
+- [Documentation](https://reasonml.github.io/reason-react/)
 - [Interactive ReasonReact Tutorial](https://jaredforsyth.com/2017/07/05/a-reason-react-tutorial/): features runnable code and type hint on hover!
 - [A First Reason React app for Javascript developers](https://jamesfriend.com.au/a-first-reason-react-app-for-js-developers)
+- [Routing in Reason React](https://jamesfriend.com.au/routing-in-reason-react)
+
+## Videos
+
+- [Reason: JavaScript-flavored OCaml](https://www.youtube.com/watch?v=vTb8UU_Yjmk) July 2017
+- [A Speed-date with ReasonML](https://www.youtube.com/watch?v=dKYAh8vJiSk) May 2017
+- [Imperfection](https://www.youtube.com/watch?v=tCVXp6gFD8o) May 2017
+- [What's in a Language?](https://www.youtube.com/watch?v=24S5u_4gx7w) April 2017
+- [Taming the Meta-language](https://www.youtube.com/watch?v=_0T5OSSzxms) March 2017
+- [The Age of Reason(ML)](https://www.youtube.com/watch?v=8LCmLQ1-YqQ) Nov 2016
