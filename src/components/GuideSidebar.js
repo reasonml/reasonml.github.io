@@ -1,6 +1,7 @@
 import React from 'react'
 import Link from './Link'
 
+import {scale, rhythm, headerFontFamily} from '../utils/typography'
 import {accent} from '../utils/colors'
 
 export default class GuideSidebar extends React.Component {
@@ -58,22 +59,24 @@ export const sidebarFragment = graphql`
   }
 `;
 
+const phablet = '@media(max-width: 800px)'
+
 const styles = {
   container: {
-    width: 200,
-    fontSize: 14,
-    lineHeight: '14px',
-    '@media(max-width: 800px)': {
+    width: rhythm(8),
+    [phablet]: {
+      ...scale(0),
       width: 'auto',
     },
+    fontFamily: headerFontFamily(),
   },
 
   contents: {
-    padding: '2em',
+    padding: `${rhythm(1/3)} ${rhythm(1/2)}`,
   },
 
   hiddenContents: {
-    '@media(max-width: 800px)': {
+    [phablet]: {
       display: 'none',
     }
   },
@@ -81,17 +84,13 @@ const styles = {
   navToggle: {
     backgroundColor: '#444',
     color: 'white',
-    padding: '1em 2em',
+    padding: `${rhythm(1/3)} ${rhythm(1/2)}`,
     alignSelf: 'stretch',
     display: 'none',
     cursor: 'pointer',
-    '@media(max-width: 800px)': {
+    [phablet]: {
       display: 'flex',
     }
-  },
-
-  node: {
-
   },
 
   li: {
@@ -102,9 +101,9 @@ const styles = {
   link: {
     textDecoration: 'none',
     color: 'currentColor',
-    lineHeight: '1.2em',
-    paddingBottom: 3,
-    paddingTop: 5,
+    [phablet]: {
+      padding: `${rhythm(1/4)}`
+    },
     display: 'block',
   },
 
@@ -116,20 +115,15 @@ const styles = {
 
   link1: {
     fontWeight: 'bold',
-    fontSize: '1.2em',
-    lineHeight: '1.2em',
-    // paddingBottom: 10,
-    // marginTop: 5,
-  },
-
-  rootNode: {
+    ...scale(0),
   },
 
   children: {
+    ...scale(-0.2),
     listStyle: 'none',
     margin: 0,
     padding: 0,
-    paddingLeft: 15,
+    paddingLeft: rhythm(.5),
     marginLeft: 0,
     borderLeft: '1px solid #aaa',
   },

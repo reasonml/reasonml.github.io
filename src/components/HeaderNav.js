@@ -1,5 +1,6 @@
 import React from "react"
 import Link from "./Link"
+import {headerFontFamily} from '../utils/typography'
 
 const links = [
   {
@@ -43,6 +44,10 @@ export default class HeaderNav extends React.Component {
 const styles = {
   links: {
     flexDirection: 'row',
+    flex: 1,
+    overflow: 'auto',
+    justifyContent: 'flex-end',
+    fontFamily: headerFontFamily(),
   },
   link: {
     padding: 15,

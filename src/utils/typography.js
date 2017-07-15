@@ -15,11 +15,11 @@ const options = {
     'sans-serif',
   ],
   bodyFontFamily: [
-    'Helvetica Neue',
-    'Helvetica',
-    'Arial',
-    'Lucida Grande',
-    'sans-serif',
+    'Merriweather',
+    'Book Antiqua',
+    'Georgia',
+    'Century Schoolbook',
+    'serif'
   ],
   scaleRatio: 2.25,
   plugins: [new CodePlugin()],
@@ -34,6 +34,9 @@ const options = {
 }
 
 const typography = new Typography(options)
+
+typography.headerFontFamily = () => typography.options.headerFontFamily.join(',')
+typography.bodyFontFamily = () => typography.options.headerFontFamily.join(',')
 
 // Hot reload typography in development.
 if (process.env.NODE_ENV !== 'production') {

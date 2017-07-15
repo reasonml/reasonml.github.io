@@ -4,6 +4,7 @@ import Helmet from "react-helmet"
 import Section from '../components/Section'
 import GuideSidebar, {constructTree, fixPath} from '../components/GuideSidebar'
 import {accent, gray} from '../utils/colors'
+import {rhythm} from '../utils/typography'
 
 import Link from "../components/Link"
 import Header from '../components/Header'
@@ -102,9 +103,11 @@ export default class Search extends React.Component {
       <div css={styles.results}>
         {this.state.results.slice(0, 10).map(result => (
           <div key={result.relativePath} css={styles.result}>
-            <Link css={styles.resultTitle} to={fixPath(result.relativePath)}>
-              ‣ {result.title}
-            </Link>
+            <h4 css={styles.resultTitleWrapper}>
+              <Link css={styles.resultTitle} to={fixPath(result.relativePath)}>
+                ‣ {result.title}
+              </Link>
+            </h4>
             <div
               css={styles.resultBody}
               dangerouslySetInnerHTML={{__html: result.html}}
@@ -200,6 +203,10 @@ const styles = {
 
   resultTitle: {
     fontWeight: 'bold',
+  },
+
+  resultTitleWrapper: {
+    marginBottom: rhythm(0.5),
   },
 
   resultBody: {
