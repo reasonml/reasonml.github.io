@@ -12,8 +12,7 @@ require('../../syntax-highlighting/xcode.css')
 require('./guide.css')
 
 const editUrl = path =>
-  `https://github.com/jaredly/reason-docs/edit/master/src/pages/${path}`
-  // `https://github.com/facebook/reason/edit/master/docs/src/pages/${path}`
+  `https://github.com/reasonml/reasonml.github.io/edit/source/src/pages/${path}`
 
 export default class Guide extends React.Component {
   renderMain() {
