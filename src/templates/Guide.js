@@ -33,6 +33,9 @@ export default class Guide extends React.Component {
         {title}
         <Link css={styles.editLink} to={edit}>
           <img css={styles.editIcon} src={editIcon} />
+          <span css={styles.editText}>
+            Suggest an edit
+          </span>
         </Link>
       </h2>
       {contents}
@@ -97,7 +100,15 @@ const styles = {
     minWidth: 0,
   },
   editIcon: {
-    marginBottom: 0
+    marginBottom: 0,
+    '@media(min-width: 800px)': {
+      display: 'none'
+    }
+  },
+  editText: {
+    '@media(max-width: 800px)': {
+      display: 'none'
+    }
   }
 }
 
