@@ -5,7 +5,7 @@ const Remark = require('remark')
 
 const sectionTitles = {
   guide: 'Guide',
-  community: "Community",
+  community: "Communauté",
 };
 
 exports.createPages = ({graphql, boundActionCreators}) => {

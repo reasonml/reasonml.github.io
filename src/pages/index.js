@@ -13,8 +13,8 @@ const features = [
   {
     title: 'Typez sans tracas',
     description:
-      'Une inférence de type performante signifie que vous annotez rarement vos types, mais tout est vérifié pour vous.',
-    action: 'Voir plus',
+      'Une inférence de type performante signifie que vous devez rarement annoter vos types, mais tout est vérifié pour vous.',
+    action: 'Voir comment',
     url: '/guide/language/types/',
   },
   {
@@ -40,7 +40,7 @@ const features = [
   {
     title: 'Flexible & Fun',
     description:
-      'Créez des sites Web, des animations, des jeux, des serveurs, des outils cli et plus encore! Regardez ces exemples pour vous inspirer.',
+      'Créez des sites web, des animations, des jeux, des serveurs, des outils cli et plus encore ! Regardez ces exemples pour vous inspirer.',
     action: 'Voir les exemples',
     url: '/community/examples',
   },

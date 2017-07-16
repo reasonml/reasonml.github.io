@@ -25,11 +25,11 @@ Enjoy!
 
 18 Mai 2017
 
-Maintenant que la communauté décolle, garder les gens à jour via [Discord](https://discord.gg/reasonml) ou les autres channels existants n'est plus la meilleure option. Voilà pourquoi nous inaugurous une section blog. Dans l'esprit de la communauté, ces messages resteront courts et concis.
+Maintenant que la communauté décolle, garder les gens à jour via [Discord](https://discord.gg/reasonml) ou les autres channels existants n'est plus la meilleure option. Voilà pourquoi nous inaugurons une section blog. Dans l'esprit de la communauté, ces messages resteront courts et concis.
 
 Nous avons déplacé des projets de premier plan inutilisés de [GitHub/reasonml](https://github.com/reasonml/) vers [GitHub/reasonml-old](https://github.com/reasonml-old). Les anciennes URL sont redirigées, donc pas de soucis à ce niveau là.
 
-Nous avons nettoyé la code base Reason. Les intégrations de l'éditeur ont été déplacées dans leurs repos dédiés. Les instructions mises à jour sont toujours [là](./tools.html#editor-integration). D'autres opérations de nettoyage du repo de Reason sont toujours en cours.
+Nous avons aussi nettoyé la code base de Reason. Les intégrations de l'éditeur ont été déplacées dans leurs repos dédiés. Les instructions mises à jour sont toujours [là](./tools.html#editor-integration). D'autres opérations de nettoyage du repo de Reason sont en cours.
 
 Certaines rooms dans Discord ont été fusionnées. Moins de rooms, des discussions plus ciblées. 
 

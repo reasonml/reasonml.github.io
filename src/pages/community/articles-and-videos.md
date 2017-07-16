@@ -5,7 +5,7 @@ order: 0
 
 ## Les concepts d'OCaml
 
-Reason est juste OCaml en réalité; Nous ne couvrons pas encore tous les concepts sur ce site de documentation. Ces articles externes (en syntaxe OCaml) pourraient cependant vous aider ! **Assurez-vous d'installer [reason-tools](https://github.com/reasonml/reason-tools) afin de pouvoir traduire la syntaxe vers Reason !**
+Reason est juste OCaml en réalité; Nous ne couvrons pas encore tous les concepts sur ce site de documentation. Ces articles externes (en syntaxe OCaml) pourraient cependant vous aider ! **Assurez-vous d'installer [Reason-tools](https://github.com/reasonml/reason-tools) afin de pouvoir traduire la syntaxe vers Reason !**
 
 - [Real World OCaml](https://realworldocaml.org) : un livre complet et détaillé sur OCaml.
 - [Turoriel sur les types algébriques de données](http://mads-hartmann.com/ocaml/2015/01/05/gadt-ocaml.html) pour ceux qui s'intéressent aux concepts les plus complexes d'OCaml.

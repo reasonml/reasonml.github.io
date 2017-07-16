@@ -17,7 +17,7 @@ const links = [
   },
   {
     target: '/community/',
-    title: 'communité',
+    title: 'communauté',
   },
   {
     target: '/community/blog/',

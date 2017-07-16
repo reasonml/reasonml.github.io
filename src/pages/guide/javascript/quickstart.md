@@ -7,7 +7,7 @@ order: 0
 npm install -g bs-platform
 bsb -init my-first-app -theme basic-reason
 ```
-Ensuite exécutez-le comme d'habitude :
+Ensuite lancez votre projet comme d'habitude :
 ```sh
 cd my-first-app
 npm run build
