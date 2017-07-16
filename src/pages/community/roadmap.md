@@ -3,19 +3,19 @@ title: Roadmap
 order: 2
 ---
 
-> Here's where we talk about what's being done, what needs to be done, etc.
+> Voici où nous parlons de ce qui se fait, de ce qu'il faut faire, etc.
 
-Near future
+Futur proche
 
-- Syntax change: JavaScript-style function calls [pull request](https://github.com/facebook/reason/pull/1299)
-- data structures [immutable.re]()
-- native compilation in bucklescript's `bsb` (see [this fork](https://github.com/bsansouci/bsb-native))
+- Modification de la syntaxe : Appels de fonction à la JavaScript [pull request](https://github.com/facebook/reason/pull/1299)
+- Structures de données [immutable.re]()
+- Compilation native via `bsb` de BuckleScript (regardez [ce fork](https://github.com/bsansouci/bsb-native))
 
-Future
+Futur
 
-- bucklescript gets package-based namespacing (no more conflicts with other packages' file names)
-- figuring out async
+- BuckleScript obtient un namespacing basé sur les paquets (plus de conflits avec les noms de fichiers d'autres paquets)
+- Pensez à l'asynchrone
 - ...
 
-Far future
-- get cross-compilation to android, ios working well
+Futur lointain
+- Obtenir une cross-compilation sur Android & iOS qui fonctionne bien

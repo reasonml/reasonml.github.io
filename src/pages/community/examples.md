@@ -1,5 +1,5 @@
 ---
-title: Examples
+title: Exemples
 order: 1
 template: ./examples.js
 ---

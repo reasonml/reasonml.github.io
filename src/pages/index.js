@@ -25,7 +25,7 @@ const features = [
     url: '/try',
   },
   // {
-  //   title: 'Web ou Natif', // 😢 pas encore prêt
+  //   title: 'Web ou Natif', // 😢 not ready yet
   //   description: 'Concevez votre frontend, backend et créez tous les outils dans le même language - sans compromettre la vitesse.',
   //   action: 'Introduction rapide natif',
   //   url: '/guide/native/quickstart/',
