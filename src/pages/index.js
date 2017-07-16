@@ -54,13 +54,13 @@ export default class Index extends React.Component {
         <Section backgroundColor={gray}>
           <Header />
           <div css={{ alignItems: 'center' }}>
-            <img src={logo} width={300} height={112} />
+            <img src={logo} css={styles.logo} />
             <p css={styles.description}>
               Reason is a new syntax and toolchain for OCaml, a powerful
               language that will give you type-safe, maintainable code that
               transforms into performant, readable JavaScript.
             </p>
-            <div css={{ flexDirection: 'row', marginBottom: '1.5em' }}>
+            <div css={styles.buttonGroup}>
               <Link to="/guide/getting-started/" css={styles.button}>
                 Get started
               </Link>
@@ -150,10 +150,15 @@ const styles = {
   description: {
     maxWidth: 600,
     fontWeight: 200,
-    fontSize: '1.5em',
+    fontSize: '1.1em',
     lineHeight: '1.5em',
     textAlign: 'center',
     textShadow: '1px 1px white',
+    padding: '0.8em',
+    marginBottom: 0,
+    '@media(min-width: 800px)': {
+      fontSize: '1.5em'
+    }
   },
   content: {
     maxWidth: 1270,
@@ -169,7 +174,18 @@ const styles = {
     padding: '8px 34px',
     borderRadius: 5,
     margin: 10,
+    textAlign: 'center'
   },
+
+  buttonGroup: {
+    flexDirection: 'row',
+    marginBottom: '1.5em',
+    '@media(max-width: 340px)': {
+      flexDirection: 'column',
+      width: '80%'
+    }
+  },
+
   featuresDivider: {
     height: 1,
     backgroundColor: '#cecece',
@@ -183,4 +199,9 @@ const styles = {
     backgroundColor: 'white',
     padding: 30,
   },
+
+  logo: {
+    maxWidth: 300,
+    width: '80%'
+  }
 }
