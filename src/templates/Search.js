@@ -91,7 +91,7 @@ export default class Search extends React.Component {
   renderMain() {
     return <div css={styles.container}>
       <div css={styles.searchBar}>
-        Search
+        Rechercher
         <input
           ref={input => this.input = input}
           css={styles.searchInput}

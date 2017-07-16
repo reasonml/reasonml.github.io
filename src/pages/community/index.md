@@ -1,11 +1,11 @@
 ---
-title: Community
+title: Communité
 order: 0
 ---
 
-This is where we keep track of all the awesome things happening in the community.
+C'est ici que nous surveillons toutes les choses géniales qui se passent dans la communauté.
 
-Come say hi!
+Venez faire un coucou !
 
 - [Discord](https://discord.gg/reasonml)
 - [Twitter](https://twitter.com/reasonml)
@@ -17,6 +17,6 @@ Come say hi!
 
 - [ReasonML Org](https://github.com/reasonml)
 
-- [Reason Editor Plugins](https://github.com/reasonml-editor)
+- [Plugins éditeur Reason](https://github.com/reasonml-editor)
 
-- [BuckleTypes](https://github.com/BuckleTypes): examples of BuckleScript JS bindings from the community.
+- [BuckleTypes](https://github.com/BuckleTypes) : des exemples de bindings BuckleScript - JS par la communauté.

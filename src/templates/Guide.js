@@ -31,7 +31,7 @@ export default class Guide extends React.Component {
       <h2 css={styles.title}>
         {title}
         <Link css={styles.editLink} to={edit}>
-          Suggest an edit
+          Suggérer une modification
         </Link>
       </h2>
       {contents}
