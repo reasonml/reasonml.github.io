@@ -1,5 +1,5 @@
 ---
-title: Comparison to OCaml
+title: Comparaison avec OCaml
 order: 10
 ---
 

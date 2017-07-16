@@ -1,6 +1,6 @@
 ---
-title: The Reason Guide
+title: Le Guide Reason
 order: 0
 ---
 
-Here's the guide! Hope you enjoy it.
+Voici le guide ! En espérant qu'ils vous plaise.

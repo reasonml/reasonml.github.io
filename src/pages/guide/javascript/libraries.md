@@ -1,5 +1,5 @@
 ---
-title: Libraries
+title: Librairies
 order: 2
 ---
 

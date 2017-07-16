@@ -1,5 +1,5 @@
 ---
-title: Interop
+title: Interopérabilité
 order: 1
 ---
 

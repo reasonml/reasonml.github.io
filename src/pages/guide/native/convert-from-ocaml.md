@@ -1,5 +1,5 @@
 ---
-title: Converting from OCaml
+title: Convertir depuis OCaml
 order: 4
 ---
 

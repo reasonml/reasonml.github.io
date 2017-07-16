@@ -1,5 +1,5 @@
 ---
-title: Syntax cheetsheet
+title: Cheatsheet syntaxique
 order: 1
 ---
 

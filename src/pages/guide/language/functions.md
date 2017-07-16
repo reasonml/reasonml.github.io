@@ -1,5 +1,5 @@
 ---
-title: Functions
+title: Fonctions
 order: 3
 ---
 

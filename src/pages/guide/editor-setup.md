@@ -1,5 +1,5 @@
 ---
-title: Editor setup
+title: Configuration de l'éditeur
 order: 1
 ---
 

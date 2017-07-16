@@ -1,5 +1,5 @@
 ---
-title: Built-in Data Types
+title: Types de données intégrés
 order: 2
 ---
 

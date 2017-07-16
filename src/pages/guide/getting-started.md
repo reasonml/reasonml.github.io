@@ -1,10 +1,10 @@
 ---
-title: Getting started
+title: Démarrer
 order: 0
 ---
 
-Here's how you start!
+Voici comment vous commencez !
 
-- [JavaScript quickstart](/guide/javascript/quickstart)
-- [Native quickstart](/guide/native/quickstart)
-- [Set up your editor](/guide/editor-setup)
+- [Démarrage rapide en JavaScript](/guide/javascript/quickstart)
+- [Démarrage rapide en natif](/guide/native/quickstart)
+- [Configurer votre éditeur](/guide/editor-setup)

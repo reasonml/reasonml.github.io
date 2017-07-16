@@ -1,5 +1,5 @@
 ---
-title: Quickstart
+title: Démarrage rapide
 order: 0
 ---
 

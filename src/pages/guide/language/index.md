@@ -1,5 +1,5 @@
 ---
-title: Language basics
+title: Principes de base du langage
 order: 1
 ---
 

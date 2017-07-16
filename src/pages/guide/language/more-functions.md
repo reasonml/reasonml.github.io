@@ -1,5 +1,5 @@
 ---
-title: More on Functions
+title: Plus sur les fonctions
 order: 6
 ---
 

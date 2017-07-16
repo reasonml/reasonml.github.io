@@ -1,5 +1,5 @@
 ---
-title: Imperative Loops
+title: Boucles Impératives
 order: 9
 ---
 

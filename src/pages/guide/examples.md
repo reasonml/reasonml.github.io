@@ -1,5 +1,5 @@
 ---
-title: Examples
+title: Exemples
 order: 20
 ---
 

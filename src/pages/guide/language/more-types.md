@@ -1,5 +1,5 @@
 ---
-title: More on Types
+title: Plus sur les types
 order: 7
 ---
 
