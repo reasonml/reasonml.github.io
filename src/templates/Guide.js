@@ -4,6 +4,7 @@ import Helmet from "react-helmet"
 import Section from '../components/Section'
 import GuideSidebar, {constructTree, fixPath} from '../components/GuideSidebar'
 import {accent, gray} from '../utils/colors'
+import editIcon from '../../static/edit-icon.svg'
 
 import Link from "../components/Link"
 import Header from '../components/Header'
@@ -31,7 +32,10 @@ export default class Guide extends React.Component {
       <h2 css={styles.title}>
         {title}
         <Link css={styles.editLink} to={edit}>
-          Suggest an edit
+          <img css={styles.editIcon} src={editIcon} />
+          <span css={styles.editText}>
+            Suggest an edit
+          </span>
         </Link>
       </h2>
       {contents}
@@ -95,6 +99,17 @@ const styles = {
     padding: '2em',
     minWidth: 0,
   },
+  editIcon: {
+    marginBottom: 0,
+    '@media(min-width: 800px)': {
+      display: 'none'
+    }
+  },
+  editText: {
+    '@media(max-width: 800px)': {
+      display: 'none'
+    }
+  }
 }
 
 export const pageQuery = graphql`
