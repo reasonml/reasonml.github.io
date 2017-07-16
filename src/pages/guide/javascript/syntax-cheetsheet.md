@@ -5,21 +5,21 @@ order: 1
 
 Reason resembles a typed subset of modern JavaScript (the good parts).
 
-`Reason`'s syntax is easy to learn, and if you know modern
-`JavaScript` you can usually read and make sense of `Reason` code without
-actually learning `Reason`.
-The OCaml language that `Reason` uses provides many new concepts that
-deliver a much more expressive, yet often more constrained experience. `Reason`
+Reason's syntax is easy to learn, and if you know modern
+JavaScript you can usually read and make sense of Reason code without
+actually learning Reason.
+The OCaml language that Reason uses provides many new concepts that
+deliver a much more expressive, yet often more constrained experience. Reason
 helps you learn those new concepts more quickly and reap the benefits of the
-`OCaml` compiler sooner.
+OCaml compiler sooner.
 
 
-The end result is that `Reason`:
+The end result is that Reason:
 
 - Allows writing code that a wide range of developers can **easily read**.
 - Can be **mastered quickly**.
 - Delivers the true **"if it compiles, it works"** experience pioneered by the `ML` language.
-- Compiles to **bare metal** native binaries, *or* to `JavaScript`.
+- Compiles to **bare metal** native binaries, *or* to JavaScript.
 
 ### Basic Language Primitives
 
@@ -60,8 +60,8 @@ no static types           |  <pre>type point = {x: int, mutable y: int};</pre>
 <pre>{...point, x: 30}</pre>       |  <pre>{...point, x: 30}</pre>
 
 ### Blocks
-In `Reason`, "sequence expressions" are created with `{}` and evaluate to their
-last statement. In `JavaScript`, this can be simulated via a temporary variable
+In Reason, "sequence expressions" are created with `{}` and evaluate to their
+last statement. In JavaScript, this can be simulated via a temporary variable
 which must be created in an invalid state, then later mutated.
 
 <table>
@@ -90,7 +90,7 @@ let res = {
 
 ### Lambdas
 
-`JavaScript` has two different kinds of functions, whereas `Reason` only has one.
+JavaScript has two different kinds of functions, whereas Reason only has one.
 
 JavaScript                            |   Reason
 --------------------------------------|--------------------------------
@@ -100,8 +100,8 @@ JavaScript                            |   Reason
 
 
 
-The primary difference between modern (ES6) `JavaScript` and `Reason` lambdas is that
-`Reason` lambdas begin with the word `fun`. This is simply to assist in visual
+The primary difference between modern (ES6) JavaScript and Reason lambdas is that
+Reason lambdas begin with the word `fun`. This is simply to assist in visual
 understanding of the meaning of a function when it has a very large destructured
 argument.
 
@@ -114,7 +114,7 @@ JavaScript                        |   Reason
 <pre>const y = add(3, add(0, 1));</pre>    |  <pre>let y = add 3 (add 0 1);</pre>
 
 
-Like `JavaScript`, `Reason` allows any expression on the right hand side of the
+Like JavaScript, Reason allows any expression on the right hand side of the
 lambda `=>`.
 
 <table>
@@ -136,9 +136,9 @@ let add = fun (x, y) =>
 </table>
 
 
-However, `JavaScript` allows lambdas to return `{}` blocks *instead* of expressions, by way of a `return`
-statement wrapped in `{}` braces. With `Reason`, `{}` blocks are *already* expressions, so `Reason` doesn't
-require two modes for lambda - all lambdas in `Reason` have expressions on the right hand side of the `=>`,
+However, JavaScript allows lambdas to return `{}` blocks *instead* of expressions, by way of a `return`
+statement wrapped in `{}` braces. With Reason, `{}` blocks are *already* expressions, so Reason doesn't
+require two modes for lambda - all lambdas in Reason have expressions on the right hand side of the `=>`,
 and some of those expressions coincidentally resemble "function bodies" in `{}` braces.
 
 <table>
@@ -164,12 +164,12 @@ let myFun = fun (x, y) => {
 </table>
 
 
-When using `Reason` every function accepts a single argument. In this example,
+When using Reason every function accepts a single argument. In this example,
 that single argument happens to be a destructured tuple. This appears very
-similar to the `JavaScript` arguments. However, the difference is apparent
-when supplying those arguments as first class. In `JavaScript`, arguments
+similar to the JavaScript arguments. However, the difference is apparent
+when supplying those arguments as first class. In JavaScript, arguments
 are an array, and supplying *all* of the arguments requires `.apply`.
-In `Reason`, you may simply supply the tuple.
+In Reason, you may simply supply the tuple.
 
 <table>
   <thead><tr> <th scope="col"><p >JavaScript</p></th> <th scope="col"><p>Reason</p></th></tr></thead>
@@ -195,9 +195,9 @@ let result = add myArgs;</pre>
 
 ### Function Application
 
-In `Reason`, parentheses are typically optional in places where it is obvious
+In Reason, parentheses are typically optional in places where it is obvious
 they aren't needed. This means that when invoking functions, parentheses
-aren't always required around the argument. `Reason` will let you add the
+aren't always required around the argument. Reason will let you add the
 parentheses if you really want them, but it's good to know why some samples
 you read have omitted them. See how in this example, arguments that are clearly
 single words, or that have balanced "bookends" (such as `{ }`) do not need
@@ -231,11 +231,11 @@ let result = aFunc {x:0};</pre>
 
 ### Currying
 
-Both `JavaScript` and `Reason` support currying, but with `Reason`, when using
-the native compiler (or even a `JavaScript` backend), currying is optimized.
-(Specifically, you are not penalized for currying in `Reason`, whenever you
+Both JavaScript and Reason support currying, but with Reason, when using
+the native compiler (or even a JavaScript backend), currying is optimized.
+(Specifically, you are not penalized for currying in Reason, whenever you
 happen to supply all the arguments). The main syntactic difference when defining
-curried functions is that `Reason` lambdas always begin with the `fun` keyword.
+curried functions is that Reason lambdas always begin with the `fun` keyword.
 
 <table>
   <thead><tr> <th scope="col"><p >JavaScript</p></th> <th scope="col"><p>Reason</p></th></tr></thead>
@@ -245,7 +245,7 @@ curried functions is that `Reason` lambdas always begin with the `fun` keyword.
   </tr>
 </table>
 
-When invoking curried functions, the syntax is the same, but with `Reason`,
+When invoking curried functions, the syntax is the same, but with Reason,
 supplying the parenthesis is optional.
 
 <table>
@@ -268,8 +268,8 @@ supplying the parenthesis is optional.
   </tr>
 </table>
 
-Because `Reason` lambdas include the `fun` keyword, curried functions don't
-appear as clean as they do in `JavaScript`. To remedy this, `Reason` includes a
+Because Reason lambdas include the `fun` keyword, curried functions don't
+appear as clean as they do in JavaScript. To remedy this, Reason includes a
 syntactic sugar to help with curried function definitions. The two forms
 are *exactly* equivalent and nothing changes about how you would invoke these
 functions.
@@ -297,7 +297,7 @@ functions.
 
 ### Record Fields
 
-In `Reason`, you must ensure your record literal has an unambiguous type if you
+In Reason, you must ensure your record literal has an unambiguous type if you
 want to create records or access record fields. In the simplest case, the record
 type is already in scope and you can unambiguously create values just by using
 the standard `{ key: value }` syntax.
@@ -386,10 +386,10 @@ let bob = {
 ### Expressions
 
 If it wasn't already clear, in Reason, almost everything is an expression. For
-example, in `Reason`, the `switch` statement *evaluates* to a value, which makes
-programming less error prone. Notice how in the `JavaScript` version, there is
+example, in Reason, the `switch` statement *evaluates* to a value, which makes
+programming less error prone. Notice how in the JavaScript version, there is
 some time when the program is in an invalid state.  The switch statement in
-`Reason` also provides many more super powers, discussed in [Pattern
+Reason also provides many more super powers, discussed in [Pattern
 Matching](./index.html#diving-deeper-expressive-pattern-matching).
 
 <table>
