@@ -5,7 +5,7 @@ const examples = [{
   url: 'https://github.com/jaredly/reason-maze',
   img: require('./example-screenshots/reason-maze.png'),
 }, {
-  title: 'Mareo: Mario + Reason',
+  title: 'Mareo : Mario + Reason',
   url: 'https://github.com/chenglou/Mareo',
   img: require('./example-screenshots/mareo.png'),
 }, {

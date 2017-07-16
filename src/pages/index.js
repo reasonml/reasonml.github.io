@@ -11,37 +11,37 @@ import logo from '../images/reason_300.png'
 
 const features = [
   {
-    title: 'Types without hassle',
+    title: 'Typez sans tracas',
     description:
-      'Powerful type inference means you rarely have to annotate types, but everything gets checked for you.',
-    action: 'See how',
+      'Une inférence de type performante signifie que vous annotez rarement vos types, mais tout est vérifié pour vous.',
+    action: 'Voir plus',
     url: '/guide/language/types/',
   },
   {
-    title: 'Online playground',
+    title: 'Éditeur en ligne',
     description:
-      'Play with Reason in-browser, take a look at the produced OCaml and JavaScript, and try out code samples.',
-    action: 'Try it now',
+      "Jouez avec Reason dans votre navigateur, jetez un coup d'oeil au code OCaml et JavaScript, testez les exemples fournis.",
+    action: 'Essayer maintenant',
     url: '/try',
   },
   // {
-  //   title: 'Web or Native', // 😢 not ready yet
-  //   description: 'Write your frontend, backend, and build tools all in the same language -- without compromising on speed.',
-  //   action: 'Native quickstart',
+  //   title: 'Web ou Natif', // 😢 pas encore prêt
+  //   description: 'Concevez votre frontend, backend et créez tous les outils dans le même language - sans compromettre la vitesse.',
+  //   action: 'Introduction rapide natif',
   //   url: '/guide/native/quickstart/',
   // },
   {
-    title: 'Easy JavaScript interop',
+    title: "Interopérabilité JavaScript",
     description:
-      "Use packages from npm with minimum hassle, or drop in a snippet of raw JavaScript while you're learning",
-    action: 'Learn more',
+      "Utilisez vos paquets depuis npm sans soucis, ou rajoutez un bout de JavaScript pendant que vous apprenez.",
+    action: 'En savoir plus',
     url: '/guide/javascript/interop/',
   },
   {
     title: 'Flexible & Fun',
     description:
-      'Make websites, animations, games, servers, cli tools, and more! Take a look at these examples to get inspired.',
-    action: 'See examples',
+      'Créez des sites Web, des animations, des jeux, des serveurs, des outils cli et plus encore! Regardez ces exemples pour vous inspirer.',
+    action: 'Voir les exemples',
     url: '/community/examples',
   },
 ]
@@ -56,16 +56,16 @@ export default class Index extends React.Component {
           <div css={{ alignItems: 'center' }}>
             <img src={logo} width={300} height={112} />
             <p css={styles.description}>
-              Reason is a new syntax and toolchain for OCaml, a powerful
-              language that will give you type-safe, maintainable code that
-              transforms into performant, readable JavaScript.
+              Reason est une nouvelle syntaxe et chaîne de compilation pour OCaml,
+              un puissant langage qui vous génère un code typé et maintenable, 
+              produisant du JavaScript performant et lisible.
             </p>
             <div css={{ flexDirection: 'row', marginBottom: '1.5em' }}>
               <Link to="/guide/getting-started/" css={styles.button}>
-                Get started
+                Démarrer
               </Link>
               <Link to="/guide/" css={styles.button}>
-                Learn more
+                En savoir plus
               </Link>
             </div>
           </div>
@@ -78,7 +78,7 @@ export default class Index extends React.Component {
         </Section>
         <Section css={[styles.quickstarts, styles.twoColumn]}>
           <div css={styles.column}>
-            <h3 css={styles.columnHeader}>JavaScript quickstart</h3>
+            <h3 css={styles.columnHeader}>Démarrage rapide en JavaScript</h3>
             <div
               dangerouslySetInnerHTML={{
                 __html: javascript.childMarkdownRemark.html,
@@ -86,7 +86,7 @@ export default class Index extends React.Component {
             />
           </div>
           <div css={styles.column}>
-            <h3 css={styles.columnHeader}>Examples</h3>
+            <h3 css={styles.columnHeader}>Exemples</h3>
             <Examples />
           </div>
         </Section>

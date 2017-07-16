@@ -26,7 +26,7 @@ export default class Template extends React.Component {
     return (
       <div>
         <Helmet
-          title="Reason: JavaScript-flavored OCaml"
+          title="Reason: JavaScript à la sauce OCaml"
         />
         <div
           style={{

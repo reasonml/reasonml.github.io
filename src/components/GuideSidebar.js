@@ -20,7 +20,7 @@ export default class GuideSidebar extends React.Component {
         Navigation
       </div>
       <div css={[styles.contents, this.state.closed && styles.hiddenContents]}>
-        <Link to={this.props.search}>Search</Link>
+        <Link to={this.props.search}>Recherche</Link>
         <Node current={this.props.current} item={this.props.root} root depth={0} />
       </div>
     </div>

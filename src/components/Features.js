@@ -65,6 +65,7 @@ const styles = {
 
   title: {
     marginBottom: '.5em',
+    textAlign: 'center',
   },
 
   description: {

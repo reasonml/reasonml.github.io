@@ -5,11 +5,11 @@ import {headerFontFamily} from '../utils/typography'
 const links = [
   {
     target: '/guide/javascript/quickstart',
-    title: 'quickstart',
+    title: 'démarrer',
   },
   {
     target: '/try/',
-    title: 'try',
+    title: 'éditeur',
   },
   {
     target: '/guide/',
@@ -17,7 +17,7 @@ const links = [
   },
   {
     target: '/community/',
-    title: 'community',
+    title: 'communité',
   },
   {
     target: '/community/blog/',
