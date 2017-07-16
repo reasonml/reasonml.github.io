@@ -101,7 +101,7 @@ let areYouCrushingIt = Yes;
 
 **Note**: variant constructors need to be capitalized.
 
-A `switch` expression is like a large `if/elseif/elseif..` allows you to check every possible case of a variant. To use it, enumerate every variant constructor, each followed by an `=>` and the expression corresponding to that case.
+A `switch` expression is like a large `if/elseif/elseif..` that allows you to check every possible case of a variant. To use it, enumerate every variant constructor, each followed by an `=>` and the expression corresponding to that case.
 
 ```reason
 let message = switch (areYouCrushingIt) {
@@ -135,7 +135,7 @@ let friendAccount = Instagram "Jenny";
 
 **Note** how using a constructor is like calling a function! It's as if `Facebook` was a function that accepts two arguments. This isn't a coincidence; there's a reason why a constructor's data is called "argument".
 
-**Note**: careful not to confuse a constructor with e.g. 2 arguments with a constructor carrying a single tuple argument:
+**Note**: be careful not to confuse a constructor carrying 2 arguments with a constructor carrying a single tuple argument:
 
 ```reason
 type account =
@@ -175,7 +175,7 @@ let myList = [1, 2, 3];
 let anotherList = [0, ...myList]; /* myList didn't mutate */
 ```
 
-Under the hood, a list is just a normal variant with a neat syntax. To illustrate this, here's how you'd declare your own int list type, without the nice syntax:
+Under the hood, a list is just a normal variant with a neat syntax. To illustrate this, here's how you would declare your own int list type, without the nice syntax:
 
 ```reason
 type myListType = Empty | NonEmpty int myListType;
@@ -185,7 +185,7 @@ let myList = NonEmpty 1 (NonEmpty 2 (NonEmpty 3 Empty));
 
 ### Array
 
-Arrays are like lists, except mutable and support fast random access, for performance-sensitive scenarios.
+Arrays are like lists, except they are mutable and support fast random access for performance-sensitive scenarios.
 
 ```reason
 let myArray = [|"hello", "world", "how are you"|];
