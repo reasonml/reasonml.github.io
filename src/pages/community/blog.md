@@ -3,34 +3,34 @@ title: Blog
 order: 8
 ---
 
-### New website!
+### Nouveau site !
 
-July 14, 2017
+14 Juillet 2017
 
-Notice anything different? =)
+Vous remarquez quelque chose de différent ? =)
 
-The new documentation website is built by our community member [Jared](https://jaredforsyth.com) (make sure to check his Reason blog posts too!). The new site keeps most of the same content from the old one, while providing a better structure to navigate through them. You'll notice "Suggest an edit" links all over the place. Take a look around!
+Le nouveau site de la documentation est construit par un membre de la communauté [Jared](https://jaredforsyth.com) (assurez-vous de jeter un coup d'oeil à ses articles sur Reason !). Le nouveau site conserve la majorité du contenu de l'ancien, tout en offrant une meilleure structure pour naviguer dans celui-ci. Vous remarquerez la présence d'un lien "Suggérer un modification" un peu partout. N'hésitez pas à faire un tour !
 
-(Built with [Gatsby](https://www.gatsbyjs.org))
+(Conçu avec [Gatsby](https://www.gatsbyjs.org))
 
-### New ReasonReact version released
+### Nouvelle version de ReasonReact publiée
 
-June 12, 2017
+12 Juin 2017
 
-Very exciting release! Short version: ReasonReact now has its own documentation site [here](https://reasonml.github.io/reason-react/). Accompanying this is the new [BuckleScript](https://www.npmjs.com/package/bs-platform) release. Both are non-breaking.
+Une release très excitante ! Pour faire simple : ReasonReact a maintenant son propre site de documentation [ici](https://reasonml.github.io/reason-react/). Il est acccompagné par la nouvelle version de [BuckleScript](https://www.npmjs.com/package/bs-platform) d'ailleurs. Les deux nouvelles versions sont rétrocompatibles.
 
 Enjoy!
 
-### Spring Cleaning (First Blog Post!)
+### Nettoyage de printemps (Premier Blog Post !)
 
-May 18, 2017
+18 Mai 2017
 
-Now that the community is taking off, keeping folks up-to-date through [Discord](https://discord.gg/reasonml) and other existing channels became less ideal. We're starting a blog post section for this reason. In the spirit of the community, these posts will stay short and concise.
+Maintenant que la communauté décolle, garder les gens à jour via [Discord](https://discord.gg/reasonml) ou les autres channels existants n'est plus la meilleure option. Voilà pourquoi nous inaugurous une section blog. Dans l'esprit de la communauté, ces messages resteront courts et concis.
 
-We've moved unused first-party projects from [GitHub/reasonml](https://github.com/reasonml/) to [GitHub/reasonml-old](https://github.com/reasonml-old). Old URLs are redirected, so no breackage here.
+Nous avons déplacé des projets de premier plan inutilisés de [GitHub/reasonml](https://github.com/reasonml/) vers [GitHub/reasonml-old](https://github.com/reasonml-old). Les anciennes URL sont redirigées, donc pas de soucis à ce niveau là.
 
-We've cleaned up the Reason codebase. Editor integrations moved out to their dedicated repos. Updated instructions are still [here](./tools.html#editor-integration). Other Reason repo cleanups are still ongoing.
+Nous avons nettoyé la code base Reason. Les intégrations de l'éditeur ont été déplacées dans leurs repos dédiés. Les instructions mises à jour sont toujours [là](./tools.html#editor-integration). D'autres opérations de nettoyage du repo de Reason sont toujours en cours.
 
-Some discord rooms got merged together. Fewer rooms, more focused discussions.
+Certaines rooms dans Discord ont été fusionnées. Moins de rooms, des discussions plus ciblées. 
 
-As you can see: this documentation site got a few rearrangements too. In general, if you'd like to contribute to docs, please ping us on Discord!
+Comme vous pouvez le voir : ce site de documentation a également subit quelques réarrangements. En général, si vous souhaitez contribuer à la doc, contactez nous directement sur Discord !

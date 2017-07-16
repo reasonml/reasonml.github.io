@@ -7,7 +7,7 @@ order: 2
 
 Futur proche
 
-- Modification de la syntaxe : Appels de fonction à la JavaScript [pull request](https://github.com/facebook/reason/pull/1299)
+- Modification de la syntaxe : appels de fonction à la JavaScript [pull request](https://github.com/facebook/reason/pull/1299)
 - Structures de données [immutable.re]()
 - Compilation native via `bsb` de BuckleScript (regardez [ce fork](https://github.com/bsansouci/bsb-native))
 
