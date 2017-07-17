@@ -108,8 +108,8 @@ https://github.com/freebroccolo/vscode-reasonml
 ### Atom
 
 You can install the [Atom](https://atom.io/) Reason integration through either
-[atom-ocaml-merlin](https://atom.io/packages/ocaml-merlin) or
-[Nuclide](https://nuclide.io/). The former is lighter.
+[atom-ocaml-merlin](https://atom.io/packages/ocaml-merlin), [atom-ide-reason](https://github.com/zaaack/atom-ide-reason) or
+[Nuclide](https://nuclide.io/). The first two is lighter.
 
 <img style="width:100%; max-width:470px; max-height:440px" src="images/AtomAutocomplete.png" />
 
@@ -124,6 +124,12 @@ As noted on the page, you'll also need the linter (which itself needs Linter-ui-
 Intention and Busy-signal).
 
 **Note**: if you've installed the global binaries through the [JS Workflow](./gettingStarted.html#javascript-workflow-project-setup) then you can ignore the `opam install merlin` instructions at the end.
+
+#### Atom-IDE-Reason
+An atom-languageclient plugin using the same language-server of vscode-reason, as the [readme](https://github.com/zaaack/atom-ide-reason) says, you'll also need:
+
+- [atom-ide-ui](https://atom.io/packages/atom-ide-ui)
+- [language-reason](https://atom.io/packages/language-reason)
 
 #### Nuclide
 Alternatively, if you use Nuclide:
