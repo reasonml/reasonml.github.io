@@ -17,12 +17,12 @@ Reason will also *eventually* support line comments, which are not supported in 
   <tr>
     <td>
       <code>
-`(* OCaml (*nest*) *)`
+(* OCaml (*nest*) *)
       </code>
     </td>
     <td>
       <code>
-`/* Reason /*nest*/  */`
+/* Reason /*nest*/  */
       </code>
     </td>
   </tr>
@@ -133,19 +133,19 @@ together via `;`.
   <tr>
     <td>
       <pre>
-let \_ =
+let _ =
   let msg = "Hello" in
-  print\_string msg;
+  print_string msg;
   let msg2 = "Goodbye" in
-  print\_string msg2</pre>
+  print_string msg2</pre>
     </td>
     <td>
       <pre>
 {
   let msg = "Hello";
-  print\_string msg;
+  print_string msg;
   let msg2 = "Goodbye";
-  print\_string msg2
+  print_string msg2
 };</pre>
     </td>
   </tr>
@@ -198,7 +198,7 @@ imperativeFunc 0 0;;</pre>
     <td>
       <pre>
 let ten = 10 in
-let \_ = imperativeFunc ten ten in
+let _ = imperativeFunc ten ten in
 imperativeFunc 0 0</pre>
     </td>
     <td>
@@ -326,7 +326,7 @@ there are separate syntaxes for tuple types `(x * y)` and tuple values
   <tr>
     <td>
       <pre>
-type tuple = int \* int
+type tuple = int * int
 let tup: tuple = (10, 30)</pre>
     </td>
     <td>
@@ -375,7 +375,7 @@ OCaml has three ways to define functions:
 Reason also supports the same three ways to define lambdas, but for
 consistency:
 
-- Every Reason form uses an `=>` arrow in one way or another.\*
+- Every Reason form uses an `=>` arrow in one way or another.
 - Reason uses at most one keyword (`fun`).
 - As with all pattern matching, the leading bar `|` is required in the single
   argument pattern match form.
@@ -572,7 +572,7 @@ type and returns a new type.
 let x: int list = [2]
 type listOfListOfInts =
   int list list
-type ('a, 'b) tup = ('a \* 'b)
+type ('a, 'b) tup = ('a * 'b)
 type pairs = (int, int) tup list
 let tuples: pairs = [(2, 3)]</pre>
     </td>
@@ -606,7 +606,7 @@ parameters to `pair`, and a *single* type parameter that happens to be a tuple.
     <td>
       <pre>
 type intPair = (int, int) pair
-type pairList = (int \* int) list</pre>
+type pairList = (int * int) list</pre>
     </td>
     <td>
       <pre>
@@ -655,10 +655,10 @@ type pairList = list (int, int);</pre>
 type myVariant =
    | HasNothing
    | HasSingleInt of int
-   | HasSingleTuple of (int \* int)
-   | HasMultipleInts of int \* int
+   | HasSingleTuple of (int * int)
+   | HasMultipleInts of int * int
    | HasMultipleTuples
-      of (int \* int) \* (int\* int)
+      of (int * int) * (int * int)
 
 let a = HasSingleInt 10
 let a = HasSingleTuple (10, 10)
@@ -897,9 +897,9 @@ module Res = F A B;</pre>
   </tr>
 </table>
 
-> \* *Note: There is currently a known inconsistency where functors do not
+**Note: There is currently a known inconsistency where functors do not
 conform to function application syntax when in type annotation position - see
-`formatTest/modules.re`.*
+`formatTest/modules.re`.**
 
 
 
@@ -947,8 +947,8 @@ let myFuncs = {
       <pre>
 let x = match prnt with
   | None -> fun a -> blah
-  (\* Extra () required ! \*)
-  | Some "\_" -> (fun a -> ())
+  (* Extra () required ! *)
+  | Some "_" -> (fun a -> ())
   | Some "ml" -> blah
       </pre>
     </td>
@@ -1016,13 +1016,13 @@ let ppp = switch (MyThing 20) {
   <tr>
     <td>
       <pre>
-let | (MyThing \_ as ppp)
-    | (YourThing \_ as ppp) = ppp;</pre>
+let | (MyThing _ as ppp)
+    | (YourThing _ as ppp) = ppp;</pre>
     </td>
     <td>
       <pre>
-let | MyThing \_ as ppp
-    | YourThing \_ as ppp = ppp;</pre>
+let | MyThing _ as ppp
+    | YourThing _ as ppp = ppp;</pre>
     </td>
   </tr>
 </table>
@@ -1078,13 +1078,13 @@ escape backslashes are added back in automatically.
 
 OCaml                                        | Reason
 ---------------------------------------------|--------------------------------
-<code>let (/*) a b => a + b;       </code>   |  <code>     let (/\\\*) a b => a + b;         </code>
-<code>let x = 12 /-\* 23 /-\* 12;  </code>   |  <code>     let x = 12 /-\\\* 23 /-\\\* 12; </code>
-<code>let y = (/*) a b;            </code>   |  <code>     let y = (/\\\*) a b;            </code>
-<code>let (!=*) q r => q + r;      </code>   |  <code>     let (!=\\\*) q r => q + r;      </code>
-<code>let res = q (!=*) r;         </code>   |  <code>     let res = q (!=\\\*) r;         </code>
-<code>let (!=/*) q r => q + r;     </code>   |  <code>     let (!=\/\\\*) q r => q + r;    </code>
-<code>let res = q (!=/*) r;        </code>   |  <code>     let res = q (!=\/\\\*) r;       </code>
+<code>let (/*) a b => a + b;       </code>   |  <code>     let (/\\*) a b => a + b;         </code>
+<code>let x = 12 /-* 23 /-* 12;  </code>   |  <code>     let x = 12 /-\\* 23 /-\\* 12; </code>
+<code>let y = (/*) a b;            </code>   |  <code>     let y = (/\\*) a b;            </code>
+<code>let (!=*) q r => q + r;      </code>   |  <code>     let (!=\\*) q r => q + r;      </code>
+<code>let res = q (!=*) r;         </code>   |  <code>     let res = q (!=\\*) r;         </code>
+<code>let (!=/*) q r => q + r;     </code>   |  <code>     let (!=\/\\*) q r => q + r;    </code>
+<code>let res = q (!=/*) r;        </code>   |  <code>     let res = q (!=\/\\*) r;       </code>
 
 
 
