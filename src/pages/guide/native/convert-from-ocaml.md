@@ -3,11 +3,11 @@ title: Converting from OCaml
 order: 4
 ---
 
-Since Reason's just another syntax for OCaml, convert an OCaml project over is straightforward and doesn't require semantic changes. However, there are a few build setup & miscellaneous changes.
+Since Reason is just another syntax for OCaml, converting an OCaml project over is straightforward and doesn't require semantic changes. However, there are a few build setup and miscellaneous changes required.
 
 #### OCamlBuild -> Rebuild
 Reason comes with a drop in replacement for `ocamlbuild` called `rebuild`, that
-will automatically build any reason file along with your OCaml files, with
+will automatically build any Reason file along with your OCaml files, with
 no additional configuration. This allows you to add Reason files to your existing
 OCaml project bit by bit. Wherever your script refers to `ocamlbuild`, just replace
 it with `rebuild`.
