@@ -5,6 +5,7 @@ module.exports = {
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
+    `gatsby-transformer-rawhtml`,
     `gatsby-plugin-glamor`,
     {
       resolve: 'gatsby-source-filesystem',
