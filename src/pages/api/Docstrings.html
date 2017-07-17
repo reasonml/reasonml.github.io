@@ -1,0 +1,228 @@
+<div class="ocamldoc">
+<div class="navbar"><a class="pre" href="Asttypes.html" title="Asttypes">Previous</a>
+&#xA0;<a class="up" href="index.html" title="Index">Up</a>
+&#xA0;<a class="post" href="Lexer.html" title="Lexer">Next</a>
+</div>
+<h1>Module <a href="type_Docstrings.html">Docstrings</a></h1>
+
+<pre><span class="keyword">module</span> Docstrings: sig .. end</pre><div class="info module top">
+(Re)Initialise all docstring state<br>
+</div>
+<hr width="100%">
+
+<pre><span class="keyword">let</span> init: unit =&gt; unit;
+</pre>
+<pre><span class="keyword">let</span> warn_bad_docstrings: unit =&gt; unit;
+</pre><div class="info ">
+Emit warnings for unattached and ambiguous docstrings<br>
+</div>
+<br>
+<h3 id="3_Docstrings">Docstrings</h3><br>
+
+<pre><span class="keyword">type</span> docstring;
+</pre>
+<div class="info ">
+Documentation comments<br>
+</div>
+
+
+<pre><span class="keyword">let</span> docstring: string =&gt; Location.t =&gt; docstring;
+</pre><div class="info ">
+Create a docstring<br>
+</div>
+
+<pre><span class="keyword">let</span> docstring_body: docstring =&gt; string;
+</pre><div class="info ">
+Get the text of a docstring<br>
+</div>
+
+<pre><span class="keyword">let</span> docstring_loc: docstring =&gt; Location.t;
+</pre><div class="info ">
+Get the location of a docstring<br>
+</div>
+<br>
+<h3 id="3_Setfunctions">Set functions</h3>
+<p>
+
+   These functions are used by the lexer to associate docstrings to
+   the locations of tokens.<br>
+
+</p><pre><span class="keyword">let</span> set_pre_docstrings: Lexing.position =&gt; list docstring =&gt; unit;
+</pre><div class="info ">
+Docstrings immediately preceding a token<br>
+</div>
+
+<pre><span class="keyword">let</span> set_post_docstrings: Lexing.position =&gt; list docstring =&gt; unit;
+</pre><div class="info ">
+Docstrings immediately following a token<br>
+</div>
+
+<pre><span class="keyword">let</span> set_floating_docstrings: Lexing.position =&gt; list docstring =&gt; unit;
+</pre><div class="info ">
+Docstrings not immediately adjacent to a token<br>
+</div>
+
+<pre><span class="keyword">let</span> set_pre_extra_docstrings: Lexing.position =&gt; list docstring =&gt; unit;
+</pre><div class="info ">
+Docstrings immediately following the token which precedes this one<br>
+</div>
+
+<pre><span class="keyword">let</span> set_post_extra_docstrings: Lexing.position =&gt; list docstring =&gt; unit;
+</pre><div class="info ">
+Docstrings immediately preceding the token which follows this one<br>
+</div>
+<br>
+<h3 id="3_Items">Items</h3>
+<p>
+
+    The <a href="Docstrings.html#TYPEdocs"><code class="code">Docstrings.docs</code></a> type represents documentation attached to an item.<br>
+
+</p><pre><span class="keyword">type</span> docs = {</pre><table class="typetable">
+<tbody><tr>
+<td align="left" valign="top">
+<code>&#xA0;&#xA0;</code></td>
+<td align="left" valign="top">
+<code>docs_pre&#xA0;: docstring option;</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>&#xA0;&#xA0;</code></td>
+<td align="left" valign="top">
+<code>docs_post&#xA0;: docstring option;</code></td>
+
+</tr></tbody></table>
+}
+
+
+
+<pre><span class="keyword">let</span> empty_docs: docs;
+</pre>
+<pre><span class="keyword">let</span> docs_attr: docstring =&gt; Parsetree.attribute;
+</pre>
+<pre><span class="keyword">let</span> add_docs_attrs: docs =&gt; Parsetree.attributes =&gt; Parsetree.attributes;
+</pre><div class="info ">
+Convert item documentation to attributes and add them to an
+    attribute list<br>
+</div>
+
+<pre><span class="keyword">let</span> symbol_docs: unit =&gt; docs;
+</pre><div class="info ">
+Fetch the item documentation for the current symbol. This also
+    marks this documentation (for ambiguity warnings).<br>
+</div>
+
+<pre><span class="keyword">let</span> symbol_docs_lazy: unit =&gt; Lazy.t docs;
+</pre>
+<pre><span class="keyword">let</span> rhs_docs: int =&gt; int =&gt; docs;
+</pre><div class="info ">
+Fetch the item documentation for the symbols between two
+    positions. This also marks this documentation (for ambiguity
+    warnings).<br>
+</div>
+
+<pre><span class="keyword">let</span> rhs_docs_lazy: int =&gt; int =&gt; Lazy.t docs;
+</pre>
+<pre><span class="keyword">let</span> mark_symbol_docs: unit =&gt; unit;
+</pre><div class="info ">
+Mark the item documentation for the current symbol (for ambiguity
+    warnings).<br>
+</div>
+
+<pre><span class="keyword">let</span> mark_rhs_docs: int =&gt; int =&gt; unit;
+</pre><div class="info ">
+Mark as associated the item documentation for the symbols between
+    two positions (for ambiguity warnings)<br>
+</div>
+<br>
+<h3 id="3_Fieldsandconstructors">Fields and constructors</h3>
+<p>
+
+    The <a href="Docstrings.html#TYPEinfo"><code class="code">Docstrings.info</code></a> type represents documentation attached to a field or
+    constructor.<br>
+
+</p><pre><span class="keyword">type</span> info = option docstring;
+</pre>
+
+
+<pre><span class="keyword">let</span> empty_info: info;
+</pre>
+<pre><span class="keyword">let</span> info_attr: docstring =&gt; Parsetree.attribute;
+</pre>
+<pre><span class="keyword">let</span> add_info_attrs: info =&gt; Parsetree.attributes =&gt; Parsetree.attributes;
+</pre><div class="info ">
+Convert field info to attributes and add them to an
+    attribute list<br>
+</div>
+
+<pre><span class="keyword">let</span> symbol_info: unit =&gt; info;
+</pre><div class="info ">
+Fetch the field info for the current symbol.<br>
+</div>
+
+<pre><span class="keyword">let</span> rhs_info: int =&gt; info;
+</pre><div class="info ">
+Fetch the field info following the symbol at a given position.<br>
+</div>
+<br>
+<h3 id="3_Unattachedcomments">Unattached comments</h3>
+<p>
+
+    The <a href="Docstrings.html#TYPEtext"><code class="code">Docstrings.text</code></a> type represents documentation which is not attached to
+    anything.<br>
+
+</p><pre><span class="keyword">type</span> text = list docstring;
+</pre>
+
+
+<pre><span class="keyword">let</span> empty_text: text;
+</pre>
+<pre><span class="keyword">let</span> text_attr: docstring =&gt; Parsetree.attribute;
+</pre>
+<pre><span class="keyword">let</span> add_text_attrs: text =&gt; Parsetree.attributes =&gt; Parsetree.attributes;
+</pre><div class="info ">
+Convert text to attributes and add them to an attribute list<br>
+</div>
+
+<pre><span class="keyword">let</span> symbol_text: unit =&gt; text;
+</pre><div class="info ">
+Fetch the text preceding the current symbol.<br>
+</div>
+
+<pre><span class="keyword">let</span> symbol_text_lazy: unit =&gt; Lazy.t text;
+</pre>
+<pre><span class="keyword">let</span> rhs_text: int =&gt; text;
+</pre><div class="info ">
+Fetch the text preceding the symbol at the given position.<br>
+</div>
+
+<pre><span class="keyword">let</span> rhs_text_lazy: int =&gt; Lazy.t text;
+</pre><br>
+<h3 id="3_Extratext">Extra text</h3>
+<p>
+
+    There may be additional text attached to the delimiters of a block
+    (e.g. <code class="code">struct</code> and <code class="code">end</code>). This is fetched by the following
+    functions, which are applied to the contents of the block rather
+    than the delimiters.<br>
+
+</p><pre><span class="keyword">let</span> symbol_pre_extra_text: unit =&gt; text;
+</pre><div class="info ">
+Fetch additional text preceding the current symbol<br>
+</div>
+
+<pre><span class="keyword">let</span> symbol_post_extra_text: unit =&gt; text;
+</pre><div class="info ">
+Fetch additional text following the current symbol<br>
+</div>
+
+<pre><span class="keyword">let</span> rhs_pre_extra_text: int =&gt; text;
+</pre><div class="info ">
+Fetch additional text preceding the symbol at the given position<br>
+</div>
+
+<pre><span class="keyword">let</span> rhs_post_extra_text: int =&gt; text;
+</pre><div class="info ">
+Fetch additional text following the symbol at the given position<br>
+</div>
+</div>

@@ -1,0 +1,120 @@
+<div class="ocamldoc">
+<div class="navbar"><a class="pre" href="Bigarray.Genarray.html" title="Bigarray.Genarray">Previous</a>
+&#xA0;<a class="up" href="Bigarray.html" title="Bigarray">Up</a>
+&#xA0;<a class="post" href="Bigarray.Array2.html" title="Bigarray.Array2">Next</a>
+</div>
+<h1>Module <a href="type_Bigarray.Array1.html">Bigarray.Array1</a></h1>
+
+<pre><span class="keyword">module</span> Array1: sig .. end</pre><div class="info module top">
+One-dimensional arrays. The <code class="code">Array1</code> structure provides operations
+   similar to those of
+   <a href="Bigarray.Genarray.html"><code class="code">Bigarray.Genarray</code></a>, but specialized to the case of one-dimensional arrays.
+   (The <code class="code">Array2</code> and <code class="code">Array3</code> structures below provide operations
+   specialized for two- and three-dimensional arrays.)
+   Statically knowing the number of dimensions of the array allows
+   faster operations, and more precise static type-checking.<br>
+</div>
+<hr width="100%">
+
+<pre><span class="keyword">type</span> t &apos;a &apos;b &apos;c;
+</pre>
+<div class="info ">
+The type of one-dimensional big arrays whose elements have
+     OCaml type <code class="code">&apos;a</code>, representation kind <code class="code">&apos;b</code>, and memory layout <code class="code">&apos;c</code>.<br>
+</div>
+
+
+<pre><span class="keyword">let</span> create: Bigarray.kind &apos;a &apos;b =&gt; Bigarray.layout &apos;c =&gt; int =&gt; t &apos;a &apos;b &apos;c;
+</pre><div class="info ">
+<code class="code">Array1.create kind layout dim</code> returns a new bigarray of
+     one dimension, whose size is <code class="code">dim</code>.  <code class="code">kind</code> and <code class="code">layout</code>
+     determine the array element kind and the array layout
+     as described for <code class="code">Genarray.create</code>.<br>
+</div>
+
+<pre><span class="keyword">let</span> dim: t &apos;a &apos;b &apos;c =&gt; int;
+</pre><div class="info ">
+Return the size (dimension) of the given one-dimensional
+     big array.<br>
+</div>
+
+<pre><span class="keyword">let</span> kind: t &apos;a &apos;b &apos;c =&gt; Bigarray.kind &apos;a &apos;b;
+</pre><div class="info ">
+Return the kind of the given big array.<br>
+</div>
+
+<pre><span class="keyword">let</span> layout: t &apos;a &apos;b &apos;c =&gt; Bigarray.layout &apos;c;
+</pre><div class="info ">
+Return the layout of the given big array.<br>
+</div>
+
+<pre><span class="keyword">let</span> get: t &apos;a &apos;b &apos;c =&gt; int =&gt; &apos;a;
+</pre><div class="info ">
+<code class="code">Array1.get a x</code>, or alternatively <code class="code">a.{x}</code>,
+     returns the element of <code class="code">a</code> at index <code class="code">x</code>.
+     <code class="code">x</code> must be greater or equal than <code class="code">0</code> and strictly less than
+     <code class="code">Array1.dim a</code> if <code class="code">a</code> has C layout.  If <code class="code">a</code> has Fortran layout,
+     <code class="code">x</code> must be greater or equal than <code class="code">1</code> and less or equal than
+     <code class="code">Array1.dim a</code>.  Otherwise, <code class="code">Invalid_argument</code> is raised.<br>
+</div>
+
+<pre><span class="keyword">let</span> set: t &apos;a &apos;b &apos;c =&gt; int =&gt; &apos;a =&gt; unit;
+</pre><div class="info ">
+<code class="code">Array1.set a x v</code>, also written <code class="code">a.{x} &lt;- v</code>,
+     stores the value <code class="code">v</code> at index <code class="code">x</code> in <code class="code">a</code>.
+     <code class="code">x</code> must be inside the bounds of <code class="code">a</code> as described in
+     <a href="Bigarray.Array1.html#VALget"><code class="code">Bigarray.Array1.get</code></a>;
+     otherwise, <code class="code">Invalid_argument</code> is raised.<br>
+</div>
+
+<pre><span class="keyword">let</span> sub: t &apos;a &apos;b &apos;c =&gt; int =&gt; int =&gt; t &apos;a &apos;b &apos;c;
+</pre><div class="info ">
+Extract a sub-array of the given one-dimensional big array.
+     See <code class="code">Genarray.sub_left</code> for more details.<br>
+</div>
+
+<pre><span class="keyword">let</span> blit: t &apos;a &apos;b &apos;c =&gt; t &apos;a &apos;b &apos;c =&gt; unit;
+</pre><div class="info ">
+Copy the first big array to the second big array.
+     See <code class="code">Genarray.blit</code> for more details.<br>
+</div>
+
+<pre><span class="keyword">let</span> fill: t &apos;a &apos;b &apos;c =&gt; &apos;a =&gt; unit;
+</pre><div class="info ">
+Fill the given big array with the given value.
+     See <code class="code">Genarray.fill</code> for more details.<br>
+</div>
+
+<pre><span class="keyword">let</span> of_array: Bigarray.kind &apos;a &apos;b =&gt; Bigarray.layout &apos;c =&gt; array &apos;a =&gt; t &apos;a &apos;b &apos;c;
+</pre><div class="info ">
+Build a one-dimensional big array initialized from the
+     given array.<br>
+</div>
+
+<pre><span class="keyword">let</span> map_file:
+  Unix.file_descr =&gt;
+  pos::int64? =&gt;
+  Bigarray.kind &apos;a &apos;b =&gt;
+  Bigarray.layout &apos;c =&gt;
+  bool =&gt;
+  int =&gt;
+  t &apos;a &apos;b &apos;c;
+</pre><div class="info ">
+Memory mapping of a file as a one-dimensional big array.
+     See <a href="Bigarray.Genarray.html#VALmap_file"><code class="code">Bigarray.Genarray.map_file</code></a> for more details.<br>
+</div>
+
+<pre><span class="keyword">let</span> unsafe_get: t &apos;a &apos;b &apos;c =&gt; int =&gt; &apos;a;
+</pre><div class="info ">
+Like <a href="Bigarray.Array1.html#VALget"><code class="code">Bigarray.Array1.get</code></a>, but bounds checking is not always performed.
+      Use with caution and only when the program logic guarantees that
+      the access is within bounds.<br>
+</div>
+
+<pre><span class="keyword">let</span> unsafe_set: t &apos;a &apos;b &apos;c =&gt; int =&gt; &apos;a =&gt; unit;
+</pre><div class="info ">
+Like <a href="Bigarray.Array1.html#VALset"><code class="code">Bigarray.Array1.set</code></a>, but bounds checking is not always performed.
+      Use with caution and only when the program logic guarantees that
+      the access is within bounds.<br>
+</div>
+</div>

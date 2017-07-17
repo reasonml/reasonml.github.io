@@ -1,0 +1,34 @@
+<div class="ocamldoc">
+<div class="navbar"><a class="pre" href="BytesLabels.html" title="BytesLabels">Previous</a>
+&#xA0;<a class="up" href="index.html" title="Index">Up</a>
+&#xA0;<a class="post" href="CamlinternalFormat.html" title="CamlinternalFormat">Next</a>
+</div>
+<h1>Module <a href="type_Callback.html">Callback</a></h1>
+
+<pre><span class="keyword">module</span> Callback: sig .. end</pre><div class="info module top">
+Registering OCaml values with the C runtime.
+<p>
+
+   This module allows OCaml values to be registered with the C runtime
+   under a symbolic name, so that C code can later call back registered
+   OCaml functions, or raise registered OCaml exceptions.<br>
+</p></div>
+<hr width="100%">
+
+<pre><span class="keyword">let</span> register: string =&gt; &apos;a =&gt; unit;
+</pre><div class="info ">
+<code class="code">Callback.register n v</code> registers the value <code class="code">v</code> under
+   the name <code class="code">n</code>. C code can later retrieve a handle to <code class="code">v</code>
+   by calling <code class="code">caml_named_value(n)</code>.<br>
+</div>
+
+<pre><span class="keyword">let</span> register_exception: string =&gt; exn =&gt; unit;
+</pre><div class="info ">
+<code class="code">Callback.register_exception n exn</code> registers the
+   exception contained in the exception value <code class="code">exn</code>
+   under the name <code class="code">n</code>. C code can later retrieve a handle to
+   the exception by calling <code class="code">caml_named_value(n)</code>. The exception
+   value thus obtained is suitable for passing as first argument
+   to <code class="code">raise_constant</code> or <code class="code">raise_with_arg</code>.<br>
+</div>
+</div>
