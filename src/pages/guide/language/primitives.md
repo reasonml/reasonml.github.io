@@ -21,4 +21,5 @@ String Concatenation                  |  `"Hello " ^ "World"`
 Immutable Lists                       |  `[1, 2, 3]`
 Immutable Prepend                     |  `[item1, item2, ...theRest]`
 Reference Equality                    |  `thisThing === thatThing`
-Records                               |  `{score: 100}`
+Arrays                                |  `[|1, 2, 3|]`
+Records                               |  `type player = {score: int}; {score: 100}`
