@@ -87,7 +87,7 @@ const styles = {
   contentSection: {
     flexDirection: 'row',
     '@media(max-width: 800px)': {
-      flexDirection: 'column',
+      flexDirection: 'column-reverse',
     },
   },
   sidebar: {
