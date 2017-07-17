@@ -18,4 +18,10 @@ npm run develop
 
 That'll start a hot-loading server & you can make changes & see the results.
 
+If you have push access, to deploy a new version of the site, go to the source branch and do:
+
+```
+npm run deploy
+```
+
 For info on how gatsby works, take a look at [their docs](https://www.gatsbyjs.org/docs/).

@@ -19,7 +19,7 @@ Reason leverages OCaml's language design and type system to give immediate feedb
 
 #### Low Overhead
 
-Reason keeps things simple and lean. Thanks to this, integrating Reason into your existing [JavaScript](./getting-starded.md#javascript-workflow) or [OCaml](./getting-starded.md#native-workflow) project is hassle-free. Do more with less; reduce your future burden!
+Reason keeps things simple and lean. Thanks to this, integrating Reason into your existing [JavaScript](/guide/javascript) or [OCaml](/guide/native) project is hassle-free. Do more with less; reduce your future burden!
 
 #### Performant & predictable
 
@@ -31,8 +31,8 @@ How Reason Works
 The OCaml compiler is organized into several stages, which are exposed as
 libraries. Reason replaces part of the compiler toolchain with a completely
 new syntax parser that is more approachable, while still fully compatible with
-the rest of the compiler.  Reason also implements a new source printer which
-integrates into your IDE and the new custom [`REPL`](./tools.html#repl).
+the rest of the compiler. Reason also implements a new source printer which
+integrates into your IDE and the new custom [`REPL`](/guide/tools#repl).
 
 ###### Why OCaml?
 

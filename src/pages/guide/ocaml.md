@@ -5,10 +5,6 @@ order: 10
 
 A quick reference for OCaml programmers.
 
-Consult the general [Syntax Basics](index.html#syntax-basics) for an overview
-of the Reason syntax. This guide merely dives deeper into the differences and
-improvements that OCaml programmers would notice most.
-
 ### Comments
 
 Reason comments use the C-family style of comments, and OCaml comments use `(*

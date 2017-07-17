@@ -18,8 +18,8 @@ Command Line Utilities
 The Reason toolchain uses a few important tools that are used in the terminal,
 and/or with your editor.
 
-**Note**: the [JavaScript](./gettingStarted.html#javascript-workflow-editor-setup-global-utilities)
-and [native](./nativeWorkflow.html#native-workflow-editor-setup-global-utilities)
+**Note**: the [JavaScript](/guide/javascript)
+and [native](/guide/native)
 workflow have different ways of installing  these tools. Please consult their
 respective sections for the installation proper. This section only describes
 what they are.
@@ -60,8 +60,8 @@ need to worry about it.
 
 Merlin is for OCaml, but has first-class support for Reason. **For the support to
 work, you'd need the `ocamlmerlin-reason` binary**. Again, the installation of
-these utilities are described in the [JS Workflow](./gettingStarted.html#javascript-workflow-editor-setup-global-utilities)
-and [Native Workflow](./nativeWorkflow.html#native-workflow-editor-setup-global-utilities)
+these utilities are described in the [JS Workflow](/guide/javascript)
+and [Native Workflow](/guide/native)
 page.
 
 

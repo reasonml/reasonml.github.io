@@ -390,7 +390,7 @@ example, in Reason, the `switch` statement *evaluates* to a value, which makes
 programming less error prone. Notice how in the JavaScript version, there is
 some time when the program is in an invalid state.  The switch statement in
 Reason also provides many more super powers, discussed in [Pattern
-Matching](./index.html#diving-deeper-expressive-pattern-matching).
+Matching](/guide/language/destructuring).
 
 <table>
   <thead><tr> <th scope="col"><p >JavaScript</p></th> <th scope="col"><p>Reason</p></th></tr></thead>

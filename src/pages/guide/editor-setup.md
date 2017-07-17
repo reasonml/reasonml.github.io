@@ -3,10 +3,10 @@ title: Editor setup
 order: 1
 ---
 
-See our [tooling](./tools.html) section for a descriptions of what you need to install and which editors we support.
-Our [editor integration](./tools.html#editor-integration) need a few binaries to be found in your `$PATH`:
+See our [tooling](/guide/tools) section for a descriptions of what you need to install and which editors we support.
+Our [editor integration](/guide/tools#editor-integration) need a few binaries to be found in your `$PATH`:
 - `refmt`: the Reason parser/printer (editor formatter).
-- `ocamlmerlin-reason`: Reason bridge to [Merlin](./tools.html#tools-command-line-utilities-merlin).
+- `ocamlmerlin-reason`: Reason bridge to [Merlin](/guide/tools#tools-command-line-utilities-merlin).
 - `ocamlmerlin`: the Merlin binary.
 The tooling section explains what these binaries do.
 **Install reason-cli globally** with npm:

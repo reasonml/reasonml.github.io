@@ -9,7 +9,7 @@ This section is dedicated to newcomers trying to figure out general idioms & con
 
 ### Using the `option` type
 
-`option` is a [variant](./index.html#built-in-data-types-variant) that comes with the [standard library](http://caml.inria.fr/pub/docs/manual-ocaml/libref/). It obviates the need for null values in other languages.
+`option` is a [variant](/guide/language/data-types#variant) that comes with the [standard library](http://caml.inria.fr/pub/docs/manual-ocaml/libref/). It obviates the need for null values in other languages.
 
 ```reason
 let possiblyNullValue1 = None;
@@ -33,7 +33,7 @@ let result: response universityStudent = fetchDataFromServer ();
 
 ### Creating a JS Object
 
-Assuming you're [compiling to JS](./gettingStarted.html#javascript-workflow), of course.
+Assuming you're [compiling to JS](/guide/javascript), of course.
 
 ```reason
 let obj1 = {

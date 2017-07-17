@@ -9,10 +9,10 @@ Frequently Asked Questions
 There's no need to pick! Reason and OCaml share the exact same semantics (i.e. how the code runs). Only the syntax differ. Carry [Reason-tools](https://github.com/reasonml/reason-tools) around so that you can freely convert between the two syntaxes. A Reason tutorial is an OCaml tutorial, vice-versa.
 
 #### I'm not sure what to do with Reason
-[We compile to JS very well](./gettingStarted.html#javascript-workflow). Think of what project you'd usually make if it was pure JavaScript; try porting/writing that in Reason + BuckleScript instead! We recommend trying to make concrete, end-user projects (e.g. a little command line util) rather than infra-level projects (e.g. a boilerplate generator). The latter category requires expertise and understanding idiomatic Reason code.
+[We compile to JS very well](/guide/javascript). Think of what project you'd usually make if it was pure JavaScript; try porting/writing that in Reason + BuckleScript instead! We recommend trying to make concrete, end-user projects (e.g. a little command line util) rather than infra-level projects (e.g. a boilerplate generator). The latter category requires expertise and understanding idiomatic Reason code.
 
 #### What's the relation between Reason, BuckleScript and OCaml?
-See [here](./gettingStarted.html#javascript-workflow). Reason's a syntax for OCaml and supports all its features. BuckleScript compiles OCaml/Reason code into JavaScript.
+See [here](/guide/javascript). Reason's a syntax for OCaml and supports all its features. BuckleScript compiles OCaml/Reason code into JavaScript.
 
 #### Where can I find documentation on the stdlib (standard library)?
 Reason uses whatever OCaml uses. For BuckleScript (JS workflow), it'd be at http://bucklescript.github.io/bucklescript/api. For native, it'd be at http://caml.inria.fr/pub/docs/manual-ocaml/libref/index.html.
@@ -24,10 +24,10 @@ They're from the standard library, pre-`open`ed during the compilation of your f
 We do compile to native, but the native workflow is currently work-in-progress. At this time, we recommend compiling to JS through BuckleScript and use the bindings at [BuckleTypes](https://github.com/buckletypes) or somewhere else.
 
 #### What's the `.merlin` file at the root of my project?
-That's the metadata file for [Merlin](./tools.html#tools-command-line-utilities-merlin), the shared editor integration backend for autocomplete, jump-to-definition, etc. For the [JavaScript Workflow](./gettingStarted.html#javascript-workflow), `bsb` the build system generates the `.merlin` for you; You don't need to check that into your version control and don't have to manually modify it.
+That's the metadata file for [Merlin](/guide/tools#tools-command-line-utilities-merlin), the shared editor integration backend for autocomplete, jump-to-definition, etc. For the [JavaScript Workflow](/guide/javascript), `bsb` the build system generates the `.merlin` for you; You don't need to check that into your version control and don't have to manually modify it.
 
 #### I don't see any `import` or `require` in my file; how does module resolution work?
-Reason/OCaml doesn't require you to write any import; modules being referred to in the file are automatically searched in the project. Specifically, a module `Hello` asks the compiler to look for the file `hello.re` or `hello.ml` (and their corresponding [interface file](./modules.html#modules-signatures), `hello.rei` or `hello.mli`, if available).
+Reason/OCaml doesn't require you to write any import; modules being referred to in the file are automatically searched in the project. Specifically, a module `Hello` asks the compiler to look for the file `hello.re` or `hello.ml` (and their corresponding [interface file](/guide/language/modules#signatures), `hello.rei` or `hello.mli`, if available).
 
 A module name is the file name, capitalized. It has to be unique per project; this abstracts away the file system and allows you to move files around without changing code.
 
@@ -36,7 +36,7 @@ Not currently. You'd have to do the manual translation. Alternatively, try [usin
 
 Generally speaking, we recommend binding to the JS library thinly rather than thickly and idiomatically; better stay lightweight and catch conversion mistakes.
 
-See also our [JS interop guide](./gettingStarted.html#javascript-workflow-talk-to-existing-js-libraries).
+See also our [JS interop guide](/guide/javascript/interop).
 
 #### Bsb: is there a way to configure the output directory?
 Not currently. We'd like to keep the configuration minimal.
