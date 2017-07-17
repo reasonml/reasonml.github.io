@@ -9,10 +9,10 @@ Foire Aux Questions
 Aucune raison de choisir entre les deux ! Reason et OCaml partagent exactement la même sémantique (ex : comment le code s'exécute). Seule la syntaxe diffère. Gardez [Reason-tools](https://github.com/reasonml/reason-tools) à portée de main afin de pouvoir faire vos équivalences entre les deux syntaxes librement. Un tutoriel Reason est un tutoriel OCaml et vice-versa.
 
 #### Je ne sais pas trop quoi faire avec Reason
-[Nous compilons très bien vers JavaScript](./gettingStarted.html#javascript-workflow). Pensez à quel projet vous feriez habituellement s'il s'agissait purement de JavaScript. Essayez juste de le porter / écrire en Reason + BuckleScript à la place ! Nous vous recommandons d'essayer de réaliser des projets concrets, avec des utilisateurs finaux (par exemple, un petit utilitaire de ligne de commande) plutôt que des projets au niveau d'infrastructures (par exemple, un générateur de boilerplate). Cette dernière catégorie nécessite une expertise et une compréhension idiomatique du code Reason assez poussées.
+[Nous compilons très bien vers JavaScript](./gettingStarted.html#javascript-workflow). Pensez à quel projet vous feriez habituellement s'il s'agissait purement de JavaScript. Essayez juste de le porter/écrire en Reason + BuckleScript à la place ! Nous vous recommandons d'essayer de réaliser des projets concrets, avec des utilisateurs finaux (par exemple, un petit utilitaire de ligne de commande) plutôt que des projets au niveau d'infrastructures (par exemple, un générateur de boilerplate). Cette dernière catégorie nécessite une expertise et une compréhension idiomatique du code Reason assez poussées.
 
 #### Quelle est la relation entre  Reason, BuckleScript et OCaml ?
-Regardez [ici](./gettingStarted.html#javascript-workflow). Reason est une syntaxe pour OCaml et prend en charge toutes ses fonctionnalités. BuckleScript compile du code OCaml / Reason en JavaScript.
+Regardez [ici](./gettingStarted.html#javascript-workflow). Reason est une syntaxe pour OCaml et prend en charge toutes ses fonctionnalités. BuckleScript compile du code OCaml/Reason en JavaScript.
 
 #### Où est-ce que je peux trouver une documentation pour stdlib (standard library) ?
 Reason utilise tout ce qu'utilise OCaml. Pour BuckleScript (workflow JS), ce serait ici :  http://bucklescript.github.io/bucklescript/api. Pour le natif, ce serait là : http://caml.inria.fr/pub/docs/manual-ocaml/libref/index.html.
@@ -29,7 +29,7 @@ C'est le fichier metadata de [Merlin](./tools.html#tools-command-line-utilities-
 
 
 #### Je ne vois aucun `import` ou `require` dans mon fichier. Comment fonction la résultion de module ?
-Reason / OCaml n'a pas besoin que vous écriviez d'import. Les modules référencés dans le fichier sont automatiquement recherchés dans le projet. Plus précisement, un module `Hello` demande au compilateur de chercher un fichier `hello.re` ou `hello.ml` (et leur [fichier d'interface](./modules.html#modules-signatures) correspondant, `hello.rei` or `hello.mli`, s'il est disponible).
+Reason/OCaml n'a pas besoin que vous écriviez d'import. Les modules référencés dans le fichier sont automatiquement recherchés dans le projet. Plus précisement, un module `Hello` demande au compilateur de chercher un fichier `hello.re` ou `hello.ml` (et leur [fichier d'interface](./modules.html#modules-signatures) correspondant, `hello.rei` or `hello.mli`, s'il est disponible).
 
 Un nom de module est le nom du fichier, en majuscule. Il doit être unique par projet. Cela met de côté le système de fichiers et vous permet de déplacer des fichiers sans modifier votre code.
 
@@ -49,7 +49,7 @@ Pas actuellement. Nous aimerions que la configuration reste minimale.
 De plus, n'oubliez pas d'ajouter les dossiers source dans votre `bsconfig.json` ! Par soucis de performance, `bsb` ne crée pas automatiquement et de façon récursive des dossiers imbriqués.
 
 #### Est-ce que `Some | None`, `contents`, `Array`, `List` ont quelque chose de particulier ? D'où vient-ils ?
-Ce sont des variantes / records / défintions de modules ordinaires qui viennent avec la [librairie standard](http://caml.inria.fr/pub/docs/manual-ocaml/libref/), `open` par défaut lors de la compilation par commodité.
+Ce sont des variantes/records/défintions de modules ordinaires qui viennent avec la [librairie standard](http://caml.inria.fr/pub/docs/manual-ocaml/libref/), `open` par défaut lors de la compilation par commodité.
 
 #### Que signifie un argument précédé d'un underscore (ex : `_` ou `_foo`) ?
 Disons que vous avez : `List.map (fun item => 1) myList`. L'arguemnt `item` n'est pas utilisé et va généré un avertissement au niveau du compilateur. Utilisé `fun _ => 1`, indique au contraire que vous recevez et ignorez délibérément un argument, contournant ainsi l'avertissement. Vous pouvez aussi utiliser `fun _item => 1` qui a le même effet, mais indique de façon plus descriptive ce que vous ignorez.

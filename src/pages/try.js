@@ -212,7 +212,7 @@ export default class Try extends Component {
         <Helmet>
           <script async src={__PATH_PREFIX__ + '/bs.js'} />
           <script async src={__PATH_PREFIX__ + '/refmt.js'} />
-          <title>Try Reason</title>
+          <title>Essayez Reason</title>
         </Helmet>
         <div css={{ backgroundColor: accent, color: 'white' }}>
           <Header inverted />

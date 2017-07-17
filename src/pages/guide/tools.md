@@ -6,75 +6,52 @@ order: 4
 Reason-tools
 -------
 
-[Reason-tools](https://github.com/reasonml/reason-tools) is a convenient browser
-extension for quickly toggling between OCaml syntax and Reason syntax. It also
-prettifies the OCaml libraries documentation pages.
-[Here](https://reasonml.github.io/reason-tools/popup.html)'s the standalone
-version.
+[Reason-tools](https://github.com/reasonml/reason-tools) est une extension navigateur assez pratique pour basculer rapidement entre la syntaxe OCaml et la syntaxe Reason. Il sert également à nettoyer le code des pages de documentation des librairies OCaml.
+Vous avez la version autonome [ici](https://reasonml.github.io/reason-tools/popup.html).
 
-Command Line Utilities
+Utilitaires de ligne de commande
 -------
 
-The Reason toolchain uses a few important tools that are used in the terminal,
-and/or with your editor.
+La chaine de compilation de Reason utilise quelques outils importants qui sont utilisés dans le terminal et/ou avec votre éditeur.
 
-**Note**: the [JavaScript](./gettingStarted.html#javascript-workflow-editor-setup-global-utilities)
-and [native](./nativeWorkflow.html#native-workflow-editor-setup-global-utilities)
-workflow have different ways of installing  these tools. Please consult their
-respective sections for the installation proper. This section only describes
-what they are.
+**Note**: les workflows [JavaScript](./javascript)
+et [natif](./native) ont différentes façons d'installer ces outils. Consultez leurs sections respectives afin d'avoir la démarche d'installation en elle-même. Cette section ne décrit que ce qu'ils sont.
 
 ### Refmt
 
-`refmt` ("Reason format") takes in your code text and spits it out, nicely formatted. Developers
-use it pervasively to prettify their code, either through invoking it in the
-terminal, or through an editor shortcut. It also serves to convert to/from
-Reason/OCaml syntax.
+`refmt` ("Reason format") prend le texte de votre code et le retourne bien formaté. Les développeurs l'utilisent de façon intensive pour nettoyer leur code, soit en l'exécutant depuis le terminal, soit par un raccourci éditeur. Il sert également à convertir depuis/vers la syntaxe Reason/OCaml.
 
-`refmt` optionally takes in a column width, and **responsively** formats your
-code based on it. In other words, it doesn't just naively break to the next line
-at a certain characters limit; it solves the constrains and arranges your code
-accordingly. Here's `refmt` inside Vim, called once per window resize (just to
-show the point):
+`refmt` prend éventuellement en paramètre une largeur de colonne, et formate votre code de façon **responsive** en se basant dessus. En d'autres termes, il ne se limite pas à passer à la ligne suivante dès qu'il atteint une certaine limite de caractères. Il prend en considération les contraintes et organise votre code en conséquence. Voici `refmt` à l'intérieur de Vim, appelé une fois par fenêtre redimensionnée (juste pour l'exemple):
 
 <img src="images/LiquidSmallOptCrop.gif" style="width:100%; max-width:466px; max-height:433px;" />
 
-The Reason community uses it to enforce a consistent style and avoid time-consuming
-manual formatting & stylistic debates.
+La communauté Reason l'utilise pour faire respecter un style cohérent et éviter les formations manuelles chronophages et autres débats stylistiques.
 
-See `refmt --help` for the options.
+Exécutez `refmt --help` pour avoir les options.
 
 ### Merlin
 
-[Merlin](https://github.com/ocaml/merlin) provides type hint, refactor, real-
-time errors, jump to definitions, etc. to our editors.
+[Merlin](https://github.com/ocaml/merlin) propose du type hinting, du refactoring, l'affichage d'erreurs en temps réel, du saut vers les définitions, etc. à nos éditeurs.
 
 
-Merlin's command line name is called `ocamlmerlin`, though you wouldn't call it
-manually (editors start it themselves and query it). To configure Merlin to
-understand your project, you'd write a `.merlin` file at the root (documentation
-[here](https://github.com/ocaml/merlin/wiki/project-configuration)).
+L'interface en ligne de commande de Merlin est `ocamlmerlin`, bien que vous n'ayez pas à l'appeler manuellement (les éditeurs le démarrent eux-mêmes et le demandent). Pour configurer Merlin afin de comprendre votre projet, vous devrez écrire un fichier `.merlin` à la racine (la documentation est
+[ici](https://github.com/ocaml/merlin/wiki/project-configuration)).
 
-**Note**: For the JS workflow, we generate the `.merlin` file for you, so no
-need to worry about it.
+**Note**: Pour le workflow JS, nous générons le fichier `.merlin` pour vous, donc pas de soucis à ce niveau là.
 
-Merlin is for OCaml, but has first-class support for Reason. **For the support to
-work, you'd need the `ocamlmerlin-reason` binary**. Again, the installation of
-these utilities are described in the [JS Workflow](./gettingStarted.html#javascript-workflow-editor-setup-global-utilities)
-and [Native Workflow](./nativeWorkflow.html#native-workflow-editor-setup-global-utilities)
-page.
+Merlin est destiné à OCaml à la base, mais possède un support de première classe pour Reason. **Afin que le support fonctionne, vous aurez besoin d'`ocamlmerlin-reason`**. Encore une fois, l'installation de ces utilitaires est décrite dans le [workflow JS](./javascript)
+et [le workflow natif](./native).
 
 
 ### REPL
 
-Reason comes with a REPL called `rtop` which lets you interactively evaluate
-Reason. It features intelligent, type-driven autocompletion.
+Reason est fourni avec une boucle d'évaluation REPL appelée `rtop` qui vous permet d'évaluer Reason de façon interactive. Elle propose une auto-complétion intelligente et typée.
 
 <img src="images/RtopOptCrop.gif" style="width:100%; max-width:466px; max-height:433px;">
 
 
 ```sh
-# The rtop command begins a REPL session
+# La commande rtop commence une session REPL
 rtop
 ```
 
@@ -86,51 +63,49 @@ let result = 100 + 200;
 # result : int = 300;
 ```
 
-Use `#quit;` to close your REPL session.
+Utilisez `#quit;` pour fermer votre session REPL.
 
-Editor Integration
+Integration éditeur
 =======
 
-All our editor integrations provides at minimum:
+Toutes nos intégrations éditeur proposent au minimum :
 
-- Displaying types.
-- `refmt`-ing a file.
-- Showing errors
-- Syntax highlighting.
+- Affichage de types.
+- `refmt`-ing de fichier.
+- Affichage d'erreurs.
+- Coloration syntaxique.
 
-They're powered by Reason's `refmt` and Merlin, mentioned in the previous sections.
+Ces fonctionnalités sont propulsées par `refmt` de Reason et Merlin, mentionnés dans les sections précédentes.
 
-### VSCode (recommended)
+### VSCode (recommendé)
 
-The Visual Studio Code Reason plugin offers lots of great features and polish.
+Le plugin Reason de Visual Studio Code Reason offre énormément de super fonctionnalités.
 https://github.com/freebroccolo/vscode-reasonml
 
 ### Atom
 
-You can install the [Atom](https://atom.io/) Reason integration through either
-[atom-ocaml-merlin](https://atom.io/packages/ocaml-merlin) or
-[Nuclide](https://nuclide.io/). The former is lighter.
+Vous pouvez installer l'intégration [Atom](https://atom.io/) de Reason via [atom-ocaml-merlin](https://atom.io/packages/ocaml-merlin) ou
+[Nuclide](https://nuclide.io/). Le premier est plus léger.
 
 <img style="width:100%; max-width:470px; max-height:440px" src="images/AtomAutocomplete.png" />
 
 #### OCaml-Merlin
-As per the instructions [here](https://atom.io/packages/ocaml-merlin), you'll also need:
+Conformément aux instructions [ici](https://atom.io/packages/ocaml-merlin), vous aurez aussi besoin de :
 
 - [language-reason](https://atom.io/packages/language-reason)
 - [linter-refmt](https://atom.io/packages/linter-refmt)
 - [reason-refmt](https://atom.io/packages/reason-refmt)
 
-As noted on the page, you'll also need the linter (which itself needs Linter-ui-default,
-Intention and Busy-signal).
+Comme indiqué sur la page, vous aurez également besoin du linter (qui nécessite Linter-ui-default, Intention et Busy-signal).
 
-**Note**: if you've installed the global binaries through the [JS Workflow](./gettingStarted.html#javascript-workflow-project-setup) then you can ignore the `opam install merlin` instructions at the end.
+**Note**: si vous avez installé les outils en global via le [workflow JS](./javascriptp), alors pous pouvez passer outre les instructions `opam install merlin` à la fin.
 
 #### Nuclide
-Alternatively, if you use Nuclide:
+Sinon, si vous utilisez Nuclide :
 
-- Open the package installer from the menu `Packages > Settings View > Install Packages and Themes`.
-- Search for and install `nuclide` if not already installed.
-- If you don't want to turn on all of Nuclide's features, you can disable most of it except for:
+- Ouvrez l'installateur de paquets depuis `Packages > Settings View > Install Packages and Themes`.
+- Cherchez et installez `nuclide` si ce n'est pas déjà fait.
+- Si vous ne souhaitez pas activer toutes les fonctionnalités de Nuclide, vous pouvez en désactiver la plupart excepté :
   - nuclide-ocaml
   - hyperclick
   - autocomplete
@@ -141,28 +116,28 @@ Alternatively, if you use Nuclide:
   - nuclide-language-reason
   - nuclide-type-hint
 
-We piggy back on Nuclide's facilities (formatting, diagnosis, datatip). `⌘+shift+p` and search for these keywords).
+Nous nous reposons sur les fonctionnalités de Nuclide (formatting, diagnosis, datatip). `⌘+shift+p` et cherchez ces mots-clés).
 
 ### Vim
 
-Install [vim-reason](https://github.com/reasonml-editor/vim-reason) like you would any Vim plugin.
+Installez [vim-reason](https://github.com/reasonml-editor/vim-reason) comme vous le feriez pour n'importe quel plugin Vim.
 
-For example, through [NeoBundle](https://github.com/Shougo/neobundle.vim):
+Par exemple, via [NeoBundle](https://github.com/Shougo/neobundle.vim):
 
 ```
 NeoBundle 'reasonml-editor/vim-reason'
 ```
 
-Likewise for [vim-plug](https://github.com/junegunn/vim-plug) and others.
+Idem pour [vim-plug](https://github.com/junegunn/vim-plug) et le reste.
 
 <img src="images/VimReason.png" style="width:100%; max-width:470px; max-height:440px" />
 
 #### Merlin
 
-`merlin` has built in `Vim` support.
+`merlin` supporte `Vim` par défaut.
 
-Completion is provided using `omnifunc`. By default you can trigger it with `<C-X><C-O>` while in insert mode.
-If you use completion plugins, most of them can use `omni` as a source.
+L'auto-complétion est fournie en utilisant `omnifunc`. Par défaut vous pouvez l'activer un utilisant `<C-X><C-O>` dans le mode insertion.
+Si vous utilisez des plugins d'auto-complétion, la plupart d'entre eux utilisent `omni` à la base.
 
 ```
 " deoplete
@@ -172,31 +147,31 @@ let g:deoplete#omni_patterns.reason = '[^. *\t]\.\w*\|\h\w*|#'
 let g:deoplete#sources = {}
 let g:deoplete#sources.reason = ['omni', 'buffer']
 
-" neocomplete and YouCompleteMe work out of the box
+" neocomplete et YouCompleteMe fonctionnent directement
 ```
 
-You can use syntactic checks with plugins like [Syntastic](https://github.com/vim-syntastic/syntastic) (vim-reason should just work with it out of the box), ALE, and others.
+Vous pouvez utiliser les vérifications syntaxiques via des plugins comme [Syntastic](https://github.com/vim-syntastic/syntastic) (vim-reason devrait fonctionner avec par défaut), ALE, ou autres.
 
 ```
-" For ALE
+" Pour ALE
 
 let g:ale_linter_aliases = {'reason': 'ocaml'}
 ```
 
-See the other provided Merlin features in the [README](https://github.com/reasonml-editor/vim-reason#merlin).
+Prenez connaissance des autres fonctionnalités proposées par Merlin dans le [README](https://github.com/reasonml-editor/vim-reason#merlin).
 
-The command `:ReasonPrettyPrint` invokes the binary `refmt` and formats text in the current buffer.
-You can set `g:vimreason_extra_args_expr_reason` variable to control the arguments passed to `refmt` (such as `--print-width`).
+La commande `:ReasonPrettyPrint` invoque l'outil `refmt` et formate le texte dans le buffer actuel.
+Vous pouvez définir la variable `g:vimreason_extra_args_expr_reason` afin de controler les arguments passés à `refmt` (comme `--print-width` par exemple).
 
 ### Emacs
 
-[Reason-mode](https://github.com/arichiardi/reason-mode) provides `refmt` and optional REPL support.
-For Merlin support, merlin-mode is on [Elpa](https://www.emacswiki.org/emacs/ELPA). Please see merlin-mode's usage [here](https://github.com/ocaml/merlin/wiki/emacs-from-scratch#discovering-the-emacs-mode) (ignore the installation part above).
+[Reason-mode](https://github.com/arichiardi/reason-mode) propose `refmt` et un support optionnel de la boucle d'évaluation REPL.
+Pour le support de  Merlin, merlin-mode est disponible sur [Elpa](https://www.emacswiki.org/emacs/ELPA). Veuillez consulter l'utilisation de merlin-mode [ici](https://github.com/ocaml/merlin/wiki/emacs-from-scratch#discovering-the-emacs-mode) (ignorez la partie d'installation plus haut).
 
 ### Sublime Text
-*Experimental*. Doesn't support Merlin yet!
+*Expérimental*. Sublime Text ne supporte pas encore Merlin.
 https://github.com/reasonml-editor/sublime-reason
 
 ### IDEA
-*Experimental*.
+*Expérimental*.
 https://github.com/reasonml-editor/reasonml-idea-plugin
