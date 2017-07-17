@@ -1,0 +1,34 @@
+<div class="ocamldoc">
+<div class="navbar"><a class="pre" href="Hashtbl.S.html" title="Hashtbl.S">Previous</a>
+&#xA0;<a class="up" href="Hashtbl.html" title="Hashtbl">Up</a>
+&#xA0;<a class="post" href="Hashtbl.SeededS.html" title="Hashtbl.SeededS">Next</a>
+</div>
+<h1>Module type <a href="type_Hashtbl.SeededHashedType.html">Hashtbl.SeededHashedType</a></h1>
+
+<pre><span class="keyword">module</span> type SeededHashedType = sig .. end</pre><div class="info modtype top">
+The input signature of the functor <a href="Hashtbl.MakeSeeded.html"><code class="code">Hashtbl.MakeSeeded</code></a>.<br>
+<b>Since</b> 4.00.0<br>
+</div>
+<hr width="100%">
+
+<pre><span class="keyword">type</span> t;
+</pre>
+<div class="info ">
+The type of the hashtable keys.<br>
+</div>
+
+
+<pre><span class="keyword">let</span> equal: t =&gt; t =&gt; bool;
+</pre><div class="info ">
+The equality predicate used to compare keys.<br>
+</div>
+
+<pre><span class="keyword">let</span> hash: int =&gt; t =&gt; int;
+</pre><div class="info ">
+A seeded hashing function on keys.  The first argument is
+          the seed.  It must be the case that if <code class="code">equal x y</code> is true,
+          then <code class="code">hash seed x = hash seed y</code> for any value of <code class="code">seed</code>.
+          A suitable choice for <code class="code">hash</code> is the function <a href="Hashtbl.html#VALseeded_hash"><code class="code">Hashtbl.seeded_hash</code></a>
+          below.<br>
+</div>
+</div>

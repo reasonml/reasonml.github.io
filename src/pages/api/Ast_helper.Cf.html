@@ -1,0 +1,66 @@
+<div class="ocamldoc">
+<div class="navbar"><a class="pre" href="Ast_helper.Cl.html" title="Ast_helper.Cl">Previous</a>
+&#xA0;<a class="up" href="Ast_helper.html" title="Ast_helper">Up</a>
+&#xA0;<a class="post" href="Ast_helper.Ci.html" title="Ast_helper.Ci">Next</a>
+</div>
+<h1>Module <a href="type_Ast_helper.Cf.html">Ast_helper.Cf</a></h1>
+
+<pre><span class="keyword">module</span> Cf: sig .. end</pre><div class="info module top">
+Class fields<br>
+</div>
+<hr width="100%">
+
+<pre><span class="keyword">let</span> mk:
+  loc::Ast_helper.loc? =&gt;
+  attrs::Ast_helper.attrs? =&gt;
+  docs::Docstrings.docs? =&gt;
+  Parsetree.class_field_desc =&gt;
+  Parsetree.class_field;
+</pre>
+<pre><span class="keyword">let</span> attr: Parsetree.class_field =&gt; Parsetree.attribute =&gt; Parsetree.class_field;
+</pre>
+<pre><span class="keyword">let</span> inherit_:
+  loc::Ast_helper.loc? =&gt;
+  attrs::Ast_helper.attrs? =&gt;
+  Asttypes.override_flag =&gt;
+  Parsetree.class_expr =&gt;
+  option string =&gt;
+  Parsetree.class_field;
+</pre>
+<pre><span class="keyword">let</span> val_:
+  loc::Ast_helper.loc? =&gt;
+  attrs::Ast_helper.attrs? =&gt;
+  Ast_helper.str =&gt;
+  Asttypes.mutable_flag =&gt;
+  Parsetree.class_field_kind =&gt;
+  Parsetree.class_field;
+</pre>
+<pre><span class="keyword">let</span> method_:
+  loc::Ast_helper.loc? =&gt;
+  attrs::Ast_helper.attrs? =&gt;
+  Ast_helper.str =&gt;
+  Asttypes.private_flag =&gt;
+  Parsetree.class_field_kind =&gt;
+  Parsetree.class_field;
+</pre>
+<pre><span class="keyword">let</span> constraint_:
+  loc::Ast_helper.loc? =&gt;
+  attrs::Ast_helper.attrs? =&gt;
+  Parsetree.core_type =&gt;
+  Parsetree.core_type =&gt;
+  Parsetree.class_field;
+</pre>
+<pre><span class="keyword">let</span> initializer_:
+  loc::Ast_helper.loc? =&gt; attrs::Ast_helper.attrs? =&gt; Parsetree.expression =&gt; Parsetree.class_field;
+</pre>
+<pre><span class="keyword">let</span> extension:
+  loc::Ast_helper.loc? =&gt; attrs::Ast_helper.attrs? =&gt; Parsetree.extension =&gt; Parsetree.class_field;
+</pre>
+<pre><span class="keyword">let</span> attribute: loc::Ast_helper.loc? =&gt; Parsetree.attribute =&gt; Parsetree.class_field;
+</pre>
+<pre><span class="keyword">let</span> text: Docstrings.text =&gt; list Parsetree.class_field;
+</pre>
+<pre><span class="keyword">let</span> virtual_: Parsetree.core_type =&gt; Parsetree.class_field_kind;
+</pre>
+<pre><span class="keyword">let</span> concrete: Asttypes.override_flag =&gt; Parsetree.expression =&gt; Parsetree.class_field_kind;
+</pre></div>

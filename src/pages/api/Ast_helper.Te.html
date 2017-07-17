@@ -1,0 +1,49 @@
+<div class="ocamldoc">
+<div class="navbar"><a class="pre" href="Ast_helper.Type.html" title="Ast_helper.Type">Previous</a>
+&#xA0;<a class="up" href="Ast_helper.html" title="Ast_helper">Up</a>
+&#xA0;<a class="post" href="Ast_helper.Mty.html" title="Ast_helper.Mty">Next</a>
+</div>
+<h1>Module <a href="type_Ast_helper.Te.html">Ast_helper.Te</a></h1>
+
+<pre><span class="keyword">module</span> Te: sig .. end</pre><div class="info module top">
+Type extensions<br>
+</div>
+<hr width="100%">
+
+<pre><span class="keyword">let</span> mk:
+  attrs::Ast_helper.attrs? =&gt;
+  docs::Docstrings.docs? =&gt;
+  params::list (Parsetree.core_type, Asttypes.variance)? =&gt;
+  priv::Asttypes.private_flag? =&gt;
+  Ast_helper.lid =&gt;
+  list Parsetree.extension_constructor =&gt;
+  Parsetree.type_extension;
+</pre>
+<pre><span class="keyword">let</span> constructor:
+  loc::Ast_helper.loc? =&gt;
+  attrs::Ast_helper.attrs? =&gt;
+  docs::Docstrings.docs? =&gt;
+  info::Docstrings.info? =&gt;
+  Ast_helper.str =&gt;
+  Parsetree.extension_constructor_kind =&gt;
+  Parsetree.extension_constructor;
+</pre>
+<pre><span class="keyword">let</span> decl:
+  loc::Ast_helper.loc? =&gt;
+  attrs::Ast_helper.attrs? =&gt;
+  docs::Docstrings.docs? =&gt;
+  info::Docstrings.info? =&gt;
+  args::list Parsetree.core_type? =&gt;
+  res::Parsetree.core_type? =&gt;
+  Ast_helper.str =&gt;
+  Parsetree.extension_constructor;
+</pre>
+<pre><span class="keyword">let</span> rebind:
+  loc::Ast_helper.loc? =&gt;
+  attrs::Ast_helper.attrs? =&gt;
+  docs::Docstrings.docs? =&gt;
+  info::Docstrings.info? =&gt;
+  Ast_helper.str =&gt;
+  Ast_helper.lid =&gt;
+  Parsetree.extension_constructor;
+</pre></div>

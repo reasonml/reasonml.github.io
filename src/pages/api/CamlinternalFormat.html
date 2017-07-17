@@ -1,0 +1,216 @@
+<div class="ocamldoc">
+<div class="navbar"><a class="pre" href="Callback.html" title="Callback">Previous</a>
+&#xA0;<a class="up" href="index.html" title="Index">Up</a>
+&#xA0;<a class="post" href="CamlinternalFormatBasics.html" title="CamlinternalFormatBasics">Next</a>
+</div>
+<h1>Module <a href="type_CamlinternalFormat.html">CamlinternalFormat</a></h1>
+
+<pre><span class="keyword">module</span> CamlinternalFormat: sig .. end</pre><hr width="100%">
+
+<pre><span class="keyword">let</span> is_in_char_set: CamlinternalFormatBasics.char_set =&gt; char =&gt; bool;
+</pre>
+<pre><span class="keyword">let</span> rev_char_set: CamlinternalFormatBasics.char_set =&gt; CamlinternalFormatBasics.char_set;
+</pre>
+<pre><span class="keyword">type</span> mutable_char_set = bytes;
+</pre>
+
+
+<pre><span class="keyword">let</span> create_char_set: unit =&gt; mutable_char_set;
+</pre>
+<pre><span class="keyword">let</span> add_in_char_set: mutable_char_set =&gt; char =&gt; unit;
+</pre>
+<pre><span class="keyword">let</span> freeze_char_set: mutable_char_set =&gt; CamlinternalFormatBasics.char_set;
+</pre>
+<pre><span class="keyword">type</span> (&apos;a, &apos;b, &apos;c, &apos;d, &apos;e, &apos;f) param_format_ebb = </pre><table class="typetable">
+<tbody><tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Param_format_EBB : (&apos;x -&gt; &apos;a0, &apos;b0, &apos;c0, &apos;d0, &apos;e0, &apos;f0) CamlinternalFormatBasics.fmt -&gt; (&apos;a0, &apos;b0, &apos;c0, &apos;d0, &apos;e0, &apos;f0) param_format_ebb</code></td>
+
+</tr></tbody></table>
+
+
+
+<pre><span class="keyword">let</span> param_format_of_ignored_format:
+  CamlinternalFormatBasics.ignored &apos;a &apos;b &apos;c &apos;d &apos;y &apos;x =&gt;
+  CamlinternalFormatBasics.fmt &apos;x &apos;b &apos;c &apos;y &apos;e &apos;f =&gt;
+  param_format_ebb &apos;a &apos;b &apos;c &apos;d &apos;e &apos;f;
+</pre>
+<pre><span class="keyword">type</span> (&apos;b, &apos;c) acc_formatting_gen = </pre><table class="typetable">
+<tbody><tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Acc_open_tag of (&apos;b, &apos;c) acc</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Acc_open_box of (&apos;b, &apos;c) acc</code></td>
+
+</tr></tbody></table>
+
+
+
+<pre><span class="keyword">type</span> (&apos;b, &apos;c) acc = </pre><table class="typetable">
+<tbody><tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Acc_formatting_lit of (&apos;b, &apos;c) acc * CamlinternalFormatBasics.formatting_lit</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Acc_formatting_gen of (&apos;b, &apos;c) acc        * (&apos;b, &apos;c) acc_formatting_gen</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Acc_string_literal of (&apos;b, &apos;c) acc * string</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Acc_char_literal of (&apos;b, &apos;c) acc * char</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Acc_data_string of (&apos;b, &apos;c) acc * string</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Acc_data_char of (&apos;b, &apos;c) acc * char</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Acc_delay of (&apos;b, &apos;c) acc * (&apos;b -&gt; &apos;c)</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Acc_flush of (&apos;b, &apos;c) acc</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Acc_invalid_arg of (&apos;b, &apos;c) acc * string</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>End_of_acc</code></td>
+
+</tr></tbody></table>
+
+
+
+<pre><span class="keyword">type</span> (&apos;a, &apos;b) heter_list = </pre><table class="typetable">
+<tbody><tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Cons : &apos;c * (&apos;a0, &apos;b0) heter_list -&gt; (&apos;c -&gt; &apos;a0, &apos;b0) heter_list</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Nil : (&apos;b1, &apos;b1) heter_list</code></td>
+
+</tr></tbody></table>
+
+
+
+<pre><span class="keyword">type</span> (&apos;b, &apos;c, &apos;e, &apos;f) fmt_ebb = </pre><table class="typetable">
+<tbody><tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Fmt_EBB : (&apos;a, &apos;b0, &apos;c0, &apos;d, &apos;e0, &apos;f0) CamlinternalFormatBasics.fmt -&gt; (&apos;b0, &apos;c0, &apos;e0, &apos;f0) fmt_ebb</code></td>
+
+</tr></tbody></table>
+
+
+
+<pre><span class="keyword">let</span> make_printf:
+  (&apos;b =&gt; acc &apos;b &apos;c =&gt; &apos;d) =&gt;
+  &apos;b =&gt;
+  acc &apos;b &apos;c =&gt;
+  CamlinternalFormatBasics.fmt &apos;a &apos;b &apos;c &apos;c &apos;c &apos;d =&gt;
+  &apos;a;
+</pre>
+<pre><span class="keyword">let</span> output_acc: Pervasives.out_channel =&gt; acc Pervasives.out_channel unit =&gt; unit;
+</pre>
+<pre><span class="keyword">let</span> bufput_acc: Buffer.t =&gt; acc Buffer.t unit =&gt; unit;
+</pre>
+<pre><span class="keyword">let</span> strput_acc: Buffer.t =&gt; acc unit string =&gt; unit;
+</pre>
+<pre><span class="keyword">let</span> type_format:
+  CamlinternalFormatBasics.fmt &apos;x &apos;b &apos;c &apos;t &apos;u &apos;v =&gt;
+  CamlinternalFormatBasics.fmtty &apos;a &apos;b &apos;c &apos;d &apos;e &apos;f =&gt;
+  CamlinternalFormatBasics.fmt &apos;a &apos;b &apos;c &apos;d &apos;e &apos;f;
+</pre>
+<pre><span class="keyword">let</span> fmt_ebb_of_string: legacy_behavior::bool? =&gt; string =&gt; fmt_ebb &apos;b &apos;c &apos;e &apos;f;
+</pre>
+<pre><span class="keyword">let</span> format_of_string_fmtty:
+  string =&gt;
+  CamlinternalFormatBasics.fmtty &apos;a &apos;b &apos;c &apos;d &apos;e &apos;f =&gt;
+  CamlinternalFormatBasics.format6 &apos;a &apos;b &apos;c &apos;d &apos;e &apos;f;
+</pre>
+<pre><span class="keyword">let</span> format_of_string_format:
+  string =&gt;
+  CamlinternalFormatBasics.format6 &apos;a &apos;b &apos;c &apos;d &apos;e &apos;f =&gt;
+  CamlinternalFormatBasics.format6 &apos;a &apos;b &apos;c &apos;d &apos;e &apos;f;
+</pre>
+<pre><span class="keyword">let</span> char_of_iconv: CamlinternalFormatBasics.int_conv =&gt; char;
+</pre>
+<pre><span class="keyword">let</span> string_of_formatting_lit: CamlinternalFormatBasics.formatting_lit =&gt; string;
+</pre>
+<pre><span class="keyword">let</span> string_of_formatting_gen: CamlinternalFormatBasics.formatting_gen &apos;a &apos;b &apos;c &apos;d &apos;e &apos;f =&gt; string;
+</pre>
+<pre><span class="keyword">let</span> string_of_fmtty: CamlinternalFormatBasics.fmtty &apos;a &apos;b &apos;c &apos;d &apos;e &apos;f =&gt; string;
+</pre>
+<pre><span class="keyword">let</span> string_of_fmt: CamlinternalFormatBasics.fmt &apos;a &apos;b &apos;c &apos;d &apos;e &apos;f =&gt; string;
+</pre>
+<pre><span class="keyword">let</span> open_box_of_string: string =&gt; (int, CamlinternalFormatBasics.block_type);
+</pre>
+<pre><span class="keyword">let</span> symm:
+  CamlinternalFormatBasics.fmtty_rel &apos;a1 &apos;b1 &apos;c1 &apos;d1 &apos;e1 &apos;f1 &apos;a2 &apos;b2 &apos;c2 &apos;d2 &apos;e2 &apos;f2 =&gt;
+  CamlinternalFormatBasics.fmtty_rel &apos;a2 &apos;b2 &apos;c2 &apos;d2 &apos;e2 &apos;f2 &apos;a1 &apos;b1 &apos;c1 &apos;d1 &apos;e1 &apos;f1;
+</pre>
+<pre><span class="keyword">let</span> trans:
+  CamlinternalFormatBasics.fmtty_rel &apos;a1 &apos;b1 &apos;c1 &apos;d1 &apos;e1 &apos;f1 &apos;a2 &apos;b2 &apos;c2 &apos;d2 &apos;e2 &apos;f2 =&gt;
+  CamlinternalFormatBasics.fmtty_rel &apos;a2 &apos;b2 &apos;c2 &apos;d2 &apos;e2 &apos;f2 &apos;a3 &apos;b3 &apos;c3 &apos;d3 &apos;e3 &apos;f3 =&gt;
+  CamlinternalFormatBasics.fmtty_rel &apos;a1 &apos;b1 &apos;c1 &apos;d1 &apos;e1 &apos;f1 &apos;a3 &apos;b3 &apos;c3 &apos;d3 &apos;e3 &apos;f3;
+</pre>
+<pre><span class="keyword">let</span> recast:
+  CamlinternalFormatBasics.fmt &apos;a1 &apos;b1 &apos;c1 &apos;d1 &apos;e1 &apos;f1 =&gt;
+  CamlinternalFormatBasics.fmtty_rel &apos;a1 &apos;b1 &apos;c1 &apos;d1 &apos;e1 &apos;f1 &apos;a2 &apos;b2 &apos;c2 &apos;d2 &apos;e2 &apos;f2 =&gt;
+  CamlinternalFormatBasics.fmt &apos;a2 &apos;b2 &apos;c2 &apos;d2 &apos;e2 &apos;f2;
+</pre></div>
