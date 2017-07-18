@@ -14,7 +14,7 @@ Capitalized tag:
 becomes
 
 ```reason
-MyComponent.createElement foo::bar children::[] () [@JSX]
+MyComponent.make foo::bar children::[] ()
 ```
 
 Lowercase tag:
