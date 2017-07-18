@@ -5,31 +5,31 @@ import {headerFontFamily} from '../utils/typography'
 const links = [
   {
     target: '/guide/javascript/quickstart',
-    title: 'quickstart',
+    title: 'Quick Start',
   },
   {
     target: '/try/',
-    title: 'try',
+    title: 'Try',
   },
   {
     target: '/guide/',
-    title: 'guide',
+    title: 'Guide',
   },
   {
     target: '/api/index.html',
-    title: 'api',
+    title: 'API',
   },
   {
     target: '/community/',
-    title: 'community',
+    title: 'Community',
   },
   {
     target: '/community/blog/',
-    title: 'blog',
+    title: 'Blog',
   },
   {
     target: 'https://github.com/facebook/reason',
-    title: 'github',
+    title: 'GitHub',
   },
 ]
 
