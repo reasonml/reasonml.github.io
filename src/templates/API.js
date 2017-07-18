@@ -36,7 +36,7 @@ export default class API extends Component {
         </Section>
         <div css={{alignItems: 'center'}}>
           <div 
-            css={{maxWidth: 1270}}
+            css={{maxWidth: 1270, width: '100%'}}
             dangerouslySetInnerHTML={{__html: content}}
           />
         </div>
