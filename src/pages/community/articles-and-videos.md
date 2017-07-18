@@ -18,6 +18,7 @@ Reason is just OCaml under the hood; We don't yet cover every concept on this do
 - [BuckleScript FFI Cheat Sheet](https://github.com/glennsl/bucklescript-ffi-cheatsheet)
 - [BuckleScript Cookbook](https://github.com/glennsl/bucklescript-cookbook)
 - [JavaScript Interop with Reason and BuckleScript](https://jaredforsyth.com/2017/06/03/javascript-interop-with-reason-and-bucklescript/)
+- [Unit Testing in ReasonML](https://jaketrent.com/post/unit-testing-in-reasonml/)
 
 ### ReasonReact
 
