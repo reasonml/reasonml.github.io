@@ -24,6 +24,7 @@ module.exports = {
               maxWidth: 690,
             },
           },
+          'gatsby-remark-autolink-headers',
           // {
           //   resolve: 'gatsby-remark-responsive-iframe',
           // },
