@@ -14,7 +14,7 @@ Capitalized tag:
 becomes
 
 ```reason
-MyComponent.createElement foo::bar children::[] () [@JSX]
+MyComponent.make foo::bar children::[] ()
 ```
 
 Lowercase tag:
@@ -34,7 +34,8 @@ ppx macros to spot them and syntactically transform the preceeding expression
 into something else. This way, everyone gets to benefit the JSX syntax without
 needing to opt into a specific library using it, e.g. React.
 
-Some departures from JS JSX: Children text require double quote. Attributes
+Some departures from JS JSX: Children text needs to be converted to a React element. 
+This is done using `ReasonReact.stringToElement "string"`. Attributes
 don't mandate curly braces, unless they're complex expressions (in which case
 they're formatted to parentheses).
 
@@ -47,7 +48,7 @@ they're formatted to parentheses).
   forcedOptional=?(Some "hello")
   onClick={updater handleClick}
   thisWorksToo=(updater handleClick)>
-  "foo bar"
+  (ReasonReact.stringToElement "foo bar")
 </NoCurlyBraces>
 ```
 
