@@ -3,13 +3,11 @@ title: Natif
 order: 5
 ---
 
-We currently use the default OCaml workflow to compile to native, although [there's work underway](https://github.com/bsansouci/bsb-native) to bring native compilation support to the bucklescript builder.
+Nous utilisons actuellement le workflow OCaml par défaut pour compiler vers le natif, bien qu'il y ait [des projets en cours](https://github.com/bsansouci/bsb-native) pour ajouter le support de la compilation vers le natif au builder de BuckleScript.
 
-> **Note**: some parts of the native workflow likely don't work on Windows. The native workflow is currently **work in progress**, as we're currently focusing on polishing the JS workflow. Contribution welcome!
+> **Note**: certaines parties du workflow natif ne fonctionnent probablement pas sous Windows. Le workflow natif est actuellement en **work in progress**, car nous nous concentrons sur le peaufinage du workflow JS. Les contributions sont les bienvenues !
 
-Reason integrates well into existing toolchains such as `ocamlbuild`, and ships
-with a binary called `rebuild`, a thin wrapper around [`ocamlbuild`](https://ocaml.org/learn/tutorials/ocamlbuild/)
-that ensures the right flags to be passed to the compiler for any files ending
-in `.re`.
+Reason s'intègre bien aux chaines de compilation existantes comme `ocamlbuild`, et propose un outil nommé `rebuild`, un léger wrapper autour d'[`ocamlbuild`](https://ocaml.org/learn/tutorials/ocamlbuild/) qui garantit que les bons *flags* sont transmis au compilateur pour tout fichier se terminant par `.re`.
 
-For native compilation, we use [OPAM](https://opam.ocaml.org).
+Pour la compilation native, nous utilisons [OPAM](https://opam.ocaml.org).
+

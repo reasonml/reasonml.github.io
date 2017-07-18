@@ -1,5 +1,5 @@
 ---
-title: Configuration de l'éditeur
+title: "Configuration de l'éditeur"
 order: 1
 ---
 

@@ -4,15 +4,15 @@ order: 0
 ---
 
 ```sh
-# On OSX, install opam via Homebrew:
+# Sur MacOS, installez opam via Homebrew:
 brew update
 brew install opam
-# On Linux, see here (you'll need opam >= 1.2.2): http://opam.ocaml.org/doc/Install.html
+# Sur Linux, voir ici (vous aurez besoin d'opam >= 1.2.2): http://opam.ocaml.org/doc/Install.html
 opam init
-# **Note**: add the line below to your ~/.bashrc or ~/.zshrc too; it's needed at every shell startup
+# **Note**: ajoutez la ligne ci-dessous à votre ~/.bashrc ou ~/.zshrc également; c'est un pré-requis lors de chaque démarrage du shell
 eval $(opam config env)
 opam update
 opam switch 4.02.3
 ```
 
-Then clone our example [`ReasonNativeProject`](https://github.com/reasonml/ReasonNativeProject) repo, and you're good to go!
+Ensuite clonez le repo de notre exemple [`ReasonNativeProject`](https://github.com/reasonml/ReasonNativeProject), et vous êtes prêt !
