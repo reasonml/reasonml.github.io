@@ -75,9 +75,9 @@ console.log(x$1 + " back in reason land");
 We'll need a little knowledge about Bucklescript's runtime representation of various values for this to work.
 
 - `strings` are strings, `ints` and `floats` are just numbers
-- an [Array](http://facebook.github.io/reason/#built-in-data-types-array) is a mutable fixed-length list in OCaml, and is represented as a plain javascript array.
-- a [List](http://facebook.github.io/reason/#built-in-data-types-linked-list) is an immutable functional-style linked list, and is definitely the more idiomatic one to use in most cases. However, it's representation is more complicated (try `Js.log [1,2,3,4]` to check it out). Because of this, I generally convert to & from `Array`s when I'm talking to javascript, via `Array.of_list` and `Array.to_list`.
-- If you want to go deeper, there's an exhaustive list [on the BuckleScript wiki](https://github.com/bucklescript/bucklescript/wiki/Runtime-representation)
+- an [Array](/guide/language/data-types#array) is a mutable fixed-length list in OCaml, and is represented as a plain javascript array.
+- a [List](/guide/language/data-types#linked-list) is an immutable functional-style linked list, and is definitely the more idiomatic one to use in most cases. However, it's representation is more complicated (try `Js.log [1,2,3,4]` to check it out). Because of this, I generally convert to & from `Array`s when I'm talking to javascript, via `Array.of_list` and `Array.to_list`.
+- If you want to go deeper, there's an exhaustive list [in the BuckleScript manual](http://bucklescript.github.io/bucklescript/Manual.html#_runtime_representation)
 
 Knowing that, we can write a function in JavaScript that just accepts an array and returns a number, without much trouble at all.
 
