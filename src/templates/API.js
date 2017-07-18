@@ -16,7 +16,7 @@ export default class API extends Component {
       <div>
         <Section backgroundColor={accent} css={{color: 'white'}}>
           <Helmet>
-            <title>Reason API</title>
+            <title>Standard Library API</title>
           </Helmet>
           <Header inverted />
           <div css={{alignItems: 'center'}}>
@@ -26,6 +26,13 @@ export default class API extends Component {
               </Link>
             </h1>
           </div>
+        </Section>
+        <Section css={{paddingTop: '36px'}}>
+          <h2>Standard Library</h2>
+          <p css={{maxWidth: 1270}}>
+            Below is the API for the OCaml standard library. It's directly copied over from <a href="http://caml.inria.fr/pub/docs/manual-ocaml/libref/index.html">the OCaml Manual</a>, formatted to the Reason syntax and styled accordingly.
+            The API docs are work-in-progress; we'll be polishing these gradually!
+          </p>
         </Section>
         <div css={{alignItems: 'center'}}>
           <div 

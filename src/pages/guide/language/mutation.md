@@ -5,7 +5,7 @@ order: 8
 
 Reason/OCaml exposes mutable features through [array](#built-in-data-types-array) and [mutable record fields](#built-in-data-types-record). They're sometimes great for performance and expressing certain familiar programming patterns.
 
-For a single mutable reference (e.g. assigning a value to `let`), the standard library comes with syntax sugar for a [record type called `ref`](http://caml.inria.fr/pub/docs/manual-ocaml/libref/Pervasives.html#TYPEref). You'd use it like so:
+For a single mutable reference (e.g. assigning a value to `let`), the standard library comes with syntax sugar for a [record type called `ref`](/api/Pervasives.html#TYPEref). You'd use it like so:
 
 ```reason
 let myValue = ref 10;

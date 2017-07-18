@@ -14,9 +14,6 @@ There's no need to pick! Reason and OCaml share the exact same semantics (i.e. h
 #### What's the relation between Reason, BuckleScript and OCaml?
 See [here](/guide/javascript). Reason's a syntax for OCaml and supports all its features. BuckleScript compiles OCaml/Reason code into JavaScript.
 
-#### Where can I find documentation on the stdlib (standard library)?
-Reason uses whatever OCaml uses. For BuckleScript (JS workflow), it'd be at http://bucklescript.github.io/bucklescript/api. For native, it'd be at http://caml.inria.fr/pub/docs/manual-ocaml/libref/index.html.
-
 #### Where do all these `print_endline`, `string_of_int` functions come from?
 They're from the standard library, pre-`open`ed during the compilation of your file. This is why you see them in scope.
 
@@ -47,7 +44,7 @@ Are you using a third-party module? If you're compiling to JS, did you add the d
 Additionally, don't forget to add the source folders into your `bsconfig.json`! For performance, `bsb` doesn't automatically and recursively build nested folders.
 
 #### Is `Some | None`, `contents`, `Array`, `List` and all of these special? Where do they come from?
-They're ordinary variants/records/module definitions that comes with the [standard library](http://caml.inria.fr/pub/docs/manual-ocaml/libref/), `open`ed by default during compilation out of convenience.
+They're ordinary variants/records/module definitions that comes with the [standard library](/api/index.html), `open`ed by default during compilation out of convenience.
 
 #### What does an argument with a prepended underscore (e.g. `_` or `_foo`) mean?
 Say you have `List.map (fun item => 1) myList`. The argument `item` isn't used and will generate a compiler warning. Using `fun _ => 1` instead indicates that you're intentionally receiving and ignoring the argument, therefore bypassing the warning. Alternatively, `fun _item => 1` has the same effect, but indicates more descriptively what you're ignoring.
