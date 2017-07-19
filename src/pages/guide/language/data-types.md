@@ -62,7 +62,7 @@ To reduce redundancy, we provide **punning** for a record's types and values. Yo
 type horsePower = {power: int, metric: bool};
 
 let metric = true;
-let horsePower1 = {power: 10, metric};
+let someHorsePower = {power: 10, metric};
 /* same as the value {power: 10, metric: metric}; */
 
 type car = {name: string, horsePower};
