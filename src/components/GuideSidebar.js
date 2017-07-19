@@ -79,6 +79,9 @@ const styles = {
       padding: `${rhythm(1/4)}`
     },
     display: 'block',
+    ':hover': {
+      color: accent,
+    }
   },
 
   currentLink: {

@@ -25,7 +25,7 @@ export default class Guide extends React.Component {
       contents = <Examples />
       edit = editUrl('community/examples.js')
     } else {
-      contents = <div dangerouslySetInnerHTML={{__html: html}} />
+      contents = <div className="markdown-content" dangerouslySetInnerHTML={{__html: html}} />
       edit = editUrl(relativePath)
     }
     return <div css={styles.main}>
