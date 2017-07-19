@@ -28,7 +28,7 @@ Reason will also *eventually* support line comments, which are not supported in 
   </tr>
 </table>
 
-###REPL ([Read-Eval-Print-Loop](https://en.wikipedia.org/wiki/Read–eval–print_loop))
+### REPL ([Read-Eval-Print-Loop](https://en.wikipedia.org/wiki/Read–eval–print_loop))
 
 In Reason's repl `rtop` (a customized `utop`), each input is submitted via
 a single `;` semicolon. OCaml's repl requires two semicolons `;;`.
@@ -45,7 +45,7 @@ a single `;` semicolon. OCaml's repl requires two semicolons `;;`.
   </tr>
 </table>
 
-###Operator Renaming
+### Operator Renaming
 
 Reason has all of OCaml's infix operators, but a couple of operators
 are *expressed* differently.
@@ -56,6 +56,7 @@ requires). In Reason, to achieve the corresponding *inequality*,
 simply swap the first character with a `!` character. (`!=` for structural
 inequality, and `!==` for reference inequality). Reason's
 symbol choices are slightly more consistent and follow the ES6 conventions.
+
 <table>
   <thead><tr><th scope="col"><p>Equality</p></th> <th scope="col"><p>Expressed in OCaml via</p></th> <th scope="col"><p>Expressed in Reason via</p></th></tr></thead>
   <tr>
@@ -236,6 +237,7 @@ let ten = 10 in (
 In Reason, tuples always require parentheses. This requirement makes Reason easier to
 read and also removes the need for type annotations inside of tuple members
 to be wrapped in *additional* parentheses.
+
 <table>
   <thead><tr> <th scope="col"><p>OCaml</p></th><th scope="col"><p>Reason</p></th></tr></thead>
   <tr>
@@ -267,6 +269,7 @@ to be wrapped in *additional* parentheses.
 In Reason, records resemble JavaScript, using `:` instead of `=`. Because
 Reason tuples always require wrapping parens, records may contain lambdas as values
 without needing extra parens.
+
 <table>
   <thead><tr> <th scope="col"><p>OCaml</p></th><th scope="col"><p>Reason</p></th></tr></thead>
   <tr>
@@ -492,8 +495,6 @@ fun (arg : argType) => fun (arg2 : arg2Type) => returnValue;
 fun (arg : argType) (arg2 : arg2Type) => returnValue;
 ```
 
-
-
 Both Reason and OCaml allow annotating the return type, when using the
 "super sugared let binding" form.
 
@@ -504,13 +505,13 @@ let myFunc (a:int) (b:int) :int list = [1]
 let myFunc (a:int) (b:int) :int -> int = fun x -> x + a + b
 ```
 
-
 ```reason
 /* Reason */
 let myFunc (a:int) (b:int) :(int, int) => (a, b);
 let myFunc (a:int) (b:int) :list int => [1];
 let myFunc (a:int) (b:int) :(int => int) => fun x => x + a + b;
 ```
+
 > Because we're using `=>` for all functions everywhere in Reason, there's
 one case where we need to add extra parens around a return type that is
 itself a function type.
@@ -588,8 +589,6 @@ let tuples: pairs = [(2, 3)]</pre>
   </tr>
 </table>
 
-
-
 ### Tuples as Type Parameters
 
 Because OCaml uses parens and commas to represent multiple arguments to type
@@ -600,6 +599,7 @@ a single argument which happens to be a tuple.
 
 The following examples shows the difference between passing *two* type
 parameters to `pair`, and a *single* type parameter that happens to be a tuple.
+
 <table>
   <thead><tr> <th scope="col"><p>OCaml</p></th><th scope="col"><p>Reason</p></th></tr></thead>
   <tr>
@@ -622,7 +622,6 @@ type pairList = list (int, int);</pre>
   records.
 - Just about everything else uses the syntactic pattern of function application
   (space separated arguments).
-
 
 
 ### Variants
@@ -835,7 +834,6 @@ In Reason, the syntax for creating and applying functors is nearly identical
 to the syntax for creating/applying functions. Also, functor *application* is
 consistent with function application (again, space separated lists).
 
-
 <table>
   <thead><tr> <th scope="col"><p>OCaml</p></th><th scope="col"><p>Reason</p></th></tr></thead>
   <tr>
@@ -902,7 +900,6 @@ conform to function application syntax when in type annotation position - see
 `formatTest/modules.re`.**
 
 
-
 ### Various Improvements
 
 OCaml doesn't require parens around sequences `(a;b;c;d)` or tuples `(x,y)`, so
@@ -910,7 +907,6 @@ that ends up ruling out a bunch of other very convenient syntax rules.  Since
 Reason always uses `{}` to enclose sequences or let bindings, and Reason
 always requires `()` around tuples, many other syntax constructs are expressed
 more intuitively, without requiring extra wrapping in parenthesis.
-
 
 ###### Lambdas as record fields no longer need extra parens
 
@@ -940,6 +936,7 @@ let myFuncs = {
 
 
 ###### Lambdas as match results no longer need extra parens
+
 <table>
   <thead><tr> <th scope="col"><p>OCaml</p></th><th scope="col"><p>Reason</p></th></tr></thead>
   <tr>
@@ -964,6 +961,7 @@ let x = switch prnt {
 </table>
 
 ###### Lambdas and type annotations in tuples no longer require extra parens
+
 <table>
   <thead><tr> <th scope="col"><p>OCaml</p></th><th scope="col"><p>Reason</p></th></tr></thead>
   <tr>
@@ -989,7 +987,7 @@ let tuple =
 
 ### Various Differences
 
-#####`as` precedence
+##### `as` precedence
 
 With Reason, `as` has a higher precedence than `|` bar. This allows creating `as` aliases
 for entire rows in pattern matching.
@@ -1027,7 +1025,7 @@ let | MyThing _ as ppp
   </tr>
 </table>
 
-###Mutable Record Field Updates
+### Mutable Record Field Updates
 
 Because equalities and their negations have been made more consistent in Reason,
 the `=` operator is available for mutable field update.
@@ -1089,6 +1087,7 @@ OCaml                                        | Reason
 
 
 ###### Operator Renaming
+
 If Reason uses `==` to represent OCaml's `=`, and
 uses `===` to represent OCaml's `==`, then how would Reason represent OCaml's
 `===` symbol (if it were defined)? Reason provides a way! "Escape" the triple
