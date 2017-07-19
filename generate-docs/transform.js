@@ -1,5 +1,6 @@
 const cheerio = require('cheerio');
 const spawn = require('child_process').spawnSync;
+const path = require('path');
 
 function convert(input, isInterface) {
   const result = spawn(
@@ -29,6 +30,14 @@ module.exports = function(fileInfo, api, options) {
       return $el.text($el.text().replace('OCaml library', 'Reason API'));
     });
     $('br').remove();
+  }
+
+  if (path.basename(fileInfo.path).startsWith('type_')) {
+    // turn module interface page into <pre> so code whitespace is preserved
+    const typePageContent = $('code');
+    typePageContent
+      .parent()
+      .html(`<pre>${typePageContent.html().replace('<br>', '\n')}</pre>`);
   }
 
   $('title').map((i, el) => {
