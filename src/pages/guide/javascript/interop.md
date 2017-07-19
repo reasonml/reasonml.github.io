@@ -113,7 +113,7 @@ Getting a value and getting a function are both pretty easy:
 ```ocaml
 external pi: float = "Math.PI" [@@bs.val];
 let tau = pi *. 2.0;
-external alert: string => void = "alert" [@@bs.val];
+external alert: string => unit = "alert" [@@bs.val];
 alert "hello";
 ```
 
