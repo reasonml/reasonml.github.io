@@ -18,7 +18,7 @@ See [here](/guide/javascript). Reason's a syntax for OCaml and supports all its 
 They're from the standard library, pre-`open`ed during the compilation of your file. This is why you see them in scope.
 
 #### What's the server-side story? Should I compile to native or to JS and use node.js?
-We do compile to native, but the native workflow is currently work-in-progress. At this time, we recommend compiling to JS through BuckleScript and use the bindings at [BuckleTypes](https://github.com/buckletypes) or somewhere else.
+We do compile to native, but the native workflow is currently work-in-progress. At this time, we recommend compiling to JS through BuckleScript and use the bindings at [reasonml-community](https://github.com/reasonml-community) or somewhere else.
 
 #### What's the `.merlin` file at the root of my project?
 That's the metadata file for [Merlin](/guide/tools#tools-command-line-utilities-merlin), the shared editor integration backend for autocomplete, jump-to-definition, etc. For the [JavaScript Workflow](/guide/javascript), `bsb` the build system generates the `.merlin` for you; You don't need to check that into your version control and don't have to manually modify it.

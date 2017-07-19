@@ -15,8 +15,6 @@ Come say hi!
 
 ### Github
 
-- [ReasonML Org](https://github.com/reasonml)
-
+- [Reason Org](https://github.com/reasonml)
+- [Reason Community Org](https://github.com/reasonml-community)
 - [Reason Editor Plugins](https://github.com/reasonml-editor)
-
-- [BuckleTypes](https://github.com/BuckleTypes): examples of BuckleScript JS bindings from the community.
