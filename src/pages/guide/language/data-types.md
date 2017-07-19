@@ -151,8 +151,8 @@ The `switch` expression can also let you "open up" a variant and bind its argume
 ```reason
 type account =
 | None
-| Instagram string;
-| Facebook string int
+| Instagram string
+| Facebook string int;
 let myAccount = Facebook "Josh" 26;
 ...
 let greeting = switch (myAccount) {
