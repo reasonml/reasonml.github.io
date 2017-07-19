@@ -12,7 +12,7 @@ if (typeof navigator !== 'undefined') {
   require('codemirror/mode/mllike/mllike')
   require('codemirror/mode/rust/rust')
 } else {
-  CodeMirror = () => <div>placehodler</div>
+  CodeMirror = () => <div>placeholder</div>
 }
 
 const bs = text => {
