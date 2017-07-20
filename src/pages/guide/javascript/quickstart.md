@@ -14,7 +14,7 @@ npm run build
 ```
 You can also build in watch mode: 
 ```sh
-npm run build -w
+npm run watch
 ```
 This will compile Reason to Javascript in the `lib/js/` folder
 
