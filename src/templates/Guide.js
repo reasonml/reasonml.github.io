@@ -15,7 +15,49 @@ require('./guide.css')
 const editUrl = path =>
   `https://github.com/reasonml/reasonml.github.io/edit/source/src/pages/${path}`
 
+function flattenTreeToPaths(node) {
+  return [node.relativePath].concat(
+    ...node.children.map(child => flattenTreeToPaths(child))
+  )
+}
+
 export default class Guide extends React.Component {
+  renderSequenceLinks() {
+    const {
+      allFile,
+      file: {relativePath},
+    } = this.props.data;
+
+    // only show in guide section
+    if (!relativePath.startsWith('guide')) return null
+
+    const current = fixPath(relativePath)
+    const {section} = this.props.pathContext
+
+    const root = constructTree(section, allFile.edges.map(edge => edge.node))
+    let flattened = flattenTreeToPaths(root)
+
+    let prev = null;
+    let next = null;
+    for (var i = 0; i < flattened.length; i++) {
+      if (flattened[i] === current) {
+        prev = flattened[i - 1]
+        next = flattened[i + 1]
+        break;
+      }
+    }
+
+    return (
+      <div css={styles.sequenceLinks}>
+        <div>
+          {prev &&<Link to={prev}><span>&larr; Previous</span></Link>}
+        </div>
+        <div>
+          {next &&<Link to={next}><span>Next &rarr;</span></Link>}
+        </div>
+      </div>
+    );
+  }
   renderMain() {
     const {relativePath, childMarkdownRemark: {frontmatter: {title}, html}} = this.props.data.file
     let edit
@@ -39,6 +81,7 @@ export default class Guide extends React.Component {
         </Link>
       </h2>
       {contents}
+      {this.renderSequenceLinks()}
     </div>
   }
 
@@ -109,6 +152,11 @@ const styles = {
     '@media(max-width: 800px)': {
       display: 'none'
     }
+  },
+  sequenceLinks: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingTop: 32
   }
 }
 
