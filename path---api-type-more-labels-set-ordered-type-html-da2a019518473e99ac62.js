@@ -1,2 +1,0 @@
-webpackJsonp([98],{"./node_modules/json-loader/index.js!./.cache/json/api-type-more-labels-set-ordered-type-html.json":function(e,t){e.exports={data:{file:{relativePath:"api/type_MoreLabels.Set.OrderedType.html",childRawHtml:{content:'<div class="ocamldoc">\n<code class="code">Set.OrderedType</code></div>'}}},pathContext:{relativePath:"api/type_MoreLabels.Set.OrderedType.html"}}}});
-//# sourceMappingURL=path---api-type-more-labels-set-ordered-type-html-da2a019518473e99ac62.js.map
