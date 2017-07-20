@@ -98,7 +98,7 @@ JavaScript                            |   Reason
 <pre>function named(arg) {...}        |
 <pre>let f = function named(arg) {...}|
 
-
+#### Function keyword
 
 The primary difference between modern (ES6) JavaScript and Reason lambdas is that
 Reason lambdas begin with the word `fun`. This is simply to assist in visual
@@ -113,6 +113,7 @@ JavaScript                        |   Reason
 <pre>const x = add(3, 4);</pre>            |  <pre>let x = add 3 4;</pre>
 <pre>const y = add(3, add(0, 1));</pre>    |  <pre>let y = add 3 (add 0 1);</pre>
 
+#### Function expression
 
 Like JavaScript, Reason allows any expression on the right hand side of the
 lambda `=>`.
@@ -135,6 +136,7 @@ let add = fun (x, y) =>
   </tr>
 </table>
 
+#### Function blocks
 
 However, JavaScript allows lambdas to return `{}` blocks *instead* of expressions, by way of a `return`
 statement wrapped in `{}` braces. With Reason, `{}` blocks are *already* expressions, so Reason doesn't
@@ -163,6 +165,7 @@ let myFun = fun (x, y) => {
   </tr>
 </table>
 
+#### Function arguments
 
 When using Reason every function accepts a single argument. In this example,
 that single argument happens to be a destructured tuple. This appears very
@@ -245,6 +248,8 @@ curried functions is that Reason lambdas always begin with the `fun` keyword.
   </tr>
 </table>
 
+#### Optional parenthesis
+
 When invoking curried functions, the syntax is the same, but with Reason,
 supplying the parenthesis is optional.
 
@@ -267,6 +272,8 @@ supplying the parenthesis is optional.
     </td>
   </tr>
 </table>
+
+#### Syntactic sugar
 
 Because Reason lambdas include the `fun` keyword, curried functions don't
 appear as clean as they do in JavaScript. To remedy this, Reason includes a
@@ -333,6 +340,8 @@ the standard `{ key: value }` syntax.
     </td>
   </tr>
 </table>
+
+#### Declare record type in another file
 
 When the record type is declared in a different module, you have to give Reason
 a little guidance on which exact type you mean, because different record types
