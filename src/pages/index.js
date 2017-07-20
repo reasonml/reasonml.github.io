@@ -8,6 +8,7 @@ import Features from '../components/Features'
 import Section from '../components/Section'
 import { accent, gray } from '../utils/colors'
 import logo from '../images/reason_300.png'
+import {headerFontFamily} from '../utils/typography'
 
 const features = [
   {
@@ -156,6 +157,7 @@ const styles = {
     textShadow: '1px 1px white',
     padding: '0.8em',
     marginBottom: 0,
+    fontFamily: headerFontFamily(),
     '@media(min-width: 800px)': {
       fontSize: '1.5em'
     }
@@ -166,6 +168,7 @@ const styles = {
   },
 
   button: {
+    fontFamily: headerFontFamily(),
     textDecoration: 'none',
     background: accent,
     border: '1px solid #aaa',

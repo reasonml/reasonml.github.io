@@ -1,6 +1,7 @@
 import React from "react"
 import Link from "gatsby-link"
 import Helmet from "react-helmet"
+import {headerFontFamily} from '../utils/typography'
 
 const intersperse = (items, fn) => items.reduce(
   (items, item, i) => i === 0 ? [item] : [...items, fn(i), item],
@@ -52,6 +53,7 @@ const styles = {
   },
 
   button: {
+    fontFamily: headerFontFamily(),
     border: '1px solid currentColor',
     backgroundColor: 'transparent',
     borderRadius: 10,
@@ -68,6 +70,7 @@ const styles = {
   },
 
   description: {
+    fontFamily: headerFontFamily(),
     fontSize: 16,
     lineHeight: 1.6,
     textAlign: 'center',
