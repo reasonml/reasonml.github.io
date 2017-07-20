@@ -338,11 +338,13 @@ When the record type is declared in a different module, you have to give Reason
 a little guidance on which exact type you mean, because different record types
 in different modules can share field names.
 
-In order of safety, it's preferred to either (1) prefix at least one record
-field with the module name to uniquely identify the record type (safest), (2)
-prefix the record literal with a temporary module open to bring the record type
+In order of safety, it's preferred to either 
+1. prefix at least one record
+field with the module name to uniquely identify the record type (safest), 
+2. prefix the record literal with a temporary module open to bring the record type
 into scope (slightly less safe--brings all names from the opened module into
-scope for the rest of the expression), or (3) open the entire module to bring
+scope for the rest of the expression), or 
+3. open the entire module to bring
 the record type into scope (least safe--brings all names from the opened module
 into scope for the rest of the block).
 
