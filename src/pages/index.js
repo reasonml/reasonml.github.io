@@ -33,7 +33,7 @@ const features = [
   {
     title: "Interopérabilité JavaScript",
     description:
-      "Utilisez vos paquets depuis npm sans soucis, ou rajoutez un bout de JavaScript pendant que vous apprenez.",
+      "Utilisez vos paquets depuis npm sans soucis, ou rajoutez directement un bout de JavaScript pendant que vous apprenez.",
     action: 'En savoir plus',
     url: '/guide/javascript/interop/',
   },

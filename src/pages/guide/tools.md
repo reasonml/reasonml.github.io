@@ -45,7 +45,7 @@ et [le workflow natif](./native).
 
 ### REPL
 
-Reason est fourni avec une boucle d'évaluation REPL appelée `rtop` qui vous permet d'évaluer Reason de façon interactive. Elle propose une auto-complétion intelligente et typée.
+Reason est fourni avec une boucle d'évaluation (REPL) appelée `rtop` qui vous permet d'évaluer Reason de façon interactive. Elle propose une auto-complétion intelligente et typée.
 
 <img src="images/RtopOptCrop.gif" style="width:100%; max-width:466px; max-height:433px;">
 
@@ -165,7 +165,7 @@ Vous pouvez définir la variable `g:vimreason_extra_args_expr_reason` afin de co
 
 ### Emacs
 
-[Reason-mode](https://github.com/arichiardi/reason-mode) propose `refmt` et un support optionnel de la boucle d'évaluation REPL.
+[Reason-mode](https://github.com/arichiardi/reason-mode) propose `refmt` et un support optionnel de la boucle d'évaluation (REPL).
 Pour le support de  Merlin, merlin-mode est disponible sur [Elpa](https://www.emacswiki.org/emacs/ELPA). Veuillez consulter l'utilisation de merlin-mode [ici](https://github.com/ocaml/merlin/wiki/emacs-from-scratch#discovering-the-emacs-mode) (ignorez la partie d'installation plus haut).
 
 ### Sublime Text

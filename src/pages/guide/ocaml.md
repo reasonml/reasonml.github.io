@@ -3,18 +3,13 @@ title: Comparaison avec OCaml
 order: 10
 ---
 
-A quick reference for OCaml programmers.
+Un rapide résumé pour les développeurs OCaml.
 
-Consult the general [Syntax Basics](index.html#syntax-basics) for an overview
-of the `Reason` syntax. This guide merely dives deeper into the differences and
-improvements that OCaml programmers would notice most.
+### Commentaires
 
-### Comments
-
-Reason comments use the C-family style of comments, and OCaml comments use `(*
-*)` style comments. In Reason, nested `/**/` comments are validated at parse
-time, and in OCaml, nested `(* *)` are validated at parse time.
-Reason will also *eventually* support line comments, which are not supported in OCaml.
+Les commentaires en Reason utilisent le style de commentaires de la famille du C et les commentaires en OCaml utilisent plutôt le style `(*
+*)`. En Reason, les `/**/` en commentaires imbriqués sont valides lors du parsing, et en OCaml, les `(* *)` le sont aussi de leur côté.
+Reason pourra aussi supporter les commentaires de fin de ligne, ce qui n'est pas le cas en OCaml.
 
 <table>
   <thead><tr> <th scope="col"><p >OCaml</p></th> <th scope="col"><p>Reason</p></th></tr></thead>
@@ -32,10 +27,9 @@ Reason will also *eventually* support line comments, which are not supported in 
   </tr>
 </table>
 
-###REPL ([Read-Eval-Print-Loop](https://en.wikipedia.org/wiki/Read–eval–print_loop))
+### REPL ([Read-Eval-Print-Loop](https://en.wikipedia.org/wiki/Read–eval–print_loop))
 
-In `Reason`'s repl `rtop` (a customized `utop`), each input is submitted via
-a single `;` semicolon. `OCaml`'s repl requires two semicolons `;;`.
+Dans la boucle d'évaluation de Reason, `rtop` (une version customisée d'`utop`), chaque entrée est soumise via un seul point-virgule `;`. La boucle d'évalution OCaml quant à elle requiert deux points-virgules `;;`.
 
 <table>
   <thead><tr> <th scope="col"><p >OCaml REPL</p></th> <th scope="col"><p>Reason REPL</p></th></tr></thead>
@@ -49,19 +43,14 @@ a single `;` semicolon. `OCaml`'s repl requires two semicolons `;;`.
   </tr>
 </table>
 
-###Operator Renaming
+### Renommage d'opérateur
 
-`Reason` has all of `OCaml`'s infix operators, but a couple of operators
-are *expressed* differently.
-In `Reason`, structural equality is written as `==`, and reference equality
-(physical equality)
-is written as `===` (so just remember to add an extra `=` to what `OCaml`
-requires). In `Reason`, to achieve the corresponding *inequality*,
-simply swap the first character with a `!` character. (`!=` for structural
-inequality, and `!==` for reference inequality). `Reason`'s
-symbol choices are slightly more consistent and follow the ES6 conventions.
+Reason possède tous les opérateurs infixes d'OCaml, mais plusieurs d'entre eux sont *exprimés* différement.
+En Reason, l'égalité simple s'écrit `==`, et l'égalité stricte (égalité physique) s'écrit  `===` (souvenez-vous juste de rajouter un `=` supplémentaire à ceux qu'OCaml
+requiert). En Reason, pour vérifier une inégalité,
+changer juste le premier caractère que nous venons de voir avec un `!` (`!=` pour l'inégalité simple, et `!==` pour l'inégalité stricte). Les choix de symboles de Reason sont légèrement plus cohérents et suivents les conventions d'ES6.
 <table>
-  <thead><tr><th scope="col"><p>Equality</p></th> <th scope="col"><p>Expressed in OCaml via</p></th> <th scope="col"><p>Expressed in Reason via</p></th></tr></thead>
+  <thead><tr><th scope="col"><p>Égalité</p></th> <th scope="col"><p>Exprimée en OCaml via</p></th> <th scope="col"><p>Exprimée en Reason via</p></th></tr></thead>
   <tr>
     <td>
       <pre>
@@ -90,7 +79,7 @@ x == y</pre>
 x === y</pre>
     </td>
   </tr>
-  <thead><tr><th scope="col"><p>Inequality</p></th> <th scope="col"><p>Expressed in OCaml via</p></th> <th scope="col"><p>Expressed in Reason via</p></th></tr></thead>
+  <thead><tr><th scope="col"><p>Inégalité</p></th> <th scope="col"><p>Exprimée en OCaml via</p></th> <th scope="col"><p>Exprimée en Reason via</p></th></tr></thead>
   <tr>
     <td>
       <pre>
@@ -122,15 +111,10 @@ x !== y</pre>
 </table>
 
 
-### Local Scope
+### Scope local
 
-`Reason`'s lexical scoping is exactly the same as `OCaml`'s, but let bindings
-syntactically resemble "block scope" which is more familiar to many
-developers. In `Reason`, they are created with `{}` braces, which
-may contain both `let` bindings and imperative commands, separated by `;`.
-All blocks *evaluate* to the last line and the semicolon on the last line is
-optional. `{}` braces are only needed if you have more than one item to chain
-together via `;`.
+Le scoping lexical de Reason est exactement le même que celui d'OCaml, mais les  bindings *let* ressemblent syntaxiquement au "block scope" qui est beaucoup plus familier pour de nombreux développeurs. En Reason, le scope est créé avec des accolades `{}`, qui peuvent contenir des bindings `let` et des commandes impératives, séparés par des `;`.
+Tous les blocs sont *évalués* à la dernière ligne où le point-virgule est d'ailleurs facultatif. Les accolades`{}` ne sont nécessaires que si vous avez plus d'un élément à chaîner via `;`.
 
 <table>
   <thead><tr> <th scope="col"><p>OCaml</p></th><th scope="col"><p>Reason</p></th></tr></thead>
@@ -155,25 +139,20 @@ let \_ =
   </tr>
 </table>
 
-`Reason`'s `{}` syntax removes many commonly reported pain points in `OCaml`'s
-syntax:
+La syntaxe `{}` en Reason supprime plusieurs *pain points* communément signalés dans la syntaxe d'OCaml :
 
-- Double semicolons are removed entirely.
-- `begin`/`end` is removed entirely.
-- Infamous imperative parsing [issues](https://github.com/ocaml/ocaml/pull/278) are gone.
-- Module bodies and local scope are unified.
+- Les doubles point-virgules sont complètement retirés.
+- `begin`/`end` est complètement retiré.
+- Les fameux [problèmes](https://github.com/ocaml/ocaml/pull/278) de parsing impératif ont disparu.
+- Les *bodies* et *local scope* des modules ont été unifiés.
 
-### Local Scope Vs. Module Bodies
+### Scope local Vs. Module Bodies
 
-In `Reason`, everything that can go between the `{}` in [Local
-Scopes](#reason-vs-ml-syntax-local-scope) and in module bodies. You can usually
-even cut/paste code between the two contexts. In `OCaml`, the syntaxes for the two
-contexts are very different. (Local scope requires trailing `in`, but module bodies do
-not and some imperative statements must be assigned to `_` or `()`, or else use double `;;`).
-`Reason` greatly simplifies the syntax for new _and_ experienced ML programmers.
+En Reason, tout ce qui peut être écrit entre les `{}` peut être dans le [scope Local](#reason-vs-ml-syntax-local-scope) ou les *module bodies*. Vous pouvez même généralement copier/coller votre code entre ces deux contextes. En OCaml, les syntaxes pour les deux contextes sont très différentes. Le *scope local* requiert un *trailing* `in`, mais pas les *module bodies*. Par ailleurs, certaines déclarations impératives doivent être assignées à `_` ou `()`, voir utiliser un double `;;`).
+Reason simplifie grandement la syntaxe pour les nouveaux _et_ les plus expérimentés des développeurs ML.
 
 <table>
-  <thead><tr> <th scope="col"><p>OCaml Module Body</p></th><th scope="col"><p>Reason Module Body</p></th></tr></thead>
+  <thead><tr> <th scope="col"><p>Body d'un module OCaml</p></th><th scope="col"><p>Body d'un module Reason</p></th></tr></thead>
   <tr>
     <td>
       <pre>
@@ -195,9 +174,9 @@ let ten = 10;;
 imperativeFunc ten ten;;
 imperativeFunc 0 0;;</pre>
     </td>
-    <td>*Same as above*</td>
+    <td>*Idem*</td>
   </tr>
-  <thead><tr> <th scope="col"><p>OCaml Local Scope</p></th><th scope="col"><p>Reason Local Scope</p></th></tr></thead>
+  <thead><tr> <th scope="col"><p>Scope local OCaml</p></th><th scope="col"><p>Scope local Reason</p></th></tr></thead>
   <tr>
     <td>
       <pre>
@@ -206,7 +185,7 @@ let \_ = imperativeFunc ten ten in
 imperativeFunc 0 0</pre>
     </td>
     <td>
-       *same as above*
+       *Idem*
     </td>
   </tr>
   <tr>
@@ -218,7 +197,7 @@ let ten = 10 in begin
 end</pre>
     </td>
     <td>
-       *same as above*
+       *Idem*
     </td>
   </tr>
   <tr>
@@ -230,16 +209,15 @@ let ten = 10 in (
 )</pre>
     </td>
     <td>
-       *same as above*
+       *Idem*
     </td>
   </tr>
 </table>
 
-### Tuples and Records
+### Tuples et Records
 
-In `Reason`, tuples always require parentheses. This requirement makes `Reason` easier to
-read and also removes the need for type annotations inside of tuple members
-to be wrapped in *additional* parentheses.
+En Reason, les tuples s'écrivent toujours avec des parenthèses. Cela rend Reason plus facile à lire et supprime par la même occasion le besoin d'englober à l'intérieur de parenthèses supplémentaires, les annotations de type des membres du tuple.
+
 <table>
   <thead><tr> <th scope="col"><p>OCaml</p></th><th scope="col"><p>Reason</p></th></tr></thead>
   <tr>
@@ -268,9 +246,7 @@ to be wrapped in *additional* parentheses.
   </tr>
 </table>
 
-In `Reason`, records resemble JavaScript, using `:` instead of `=`. Because
-`Reason` tuples always require wrapping parens, records may contain lambdas as values
-without needing extra parens.
+En Reason, les records ressemblent à du JavaScript, utilisant `:` à la place de `=`. Vu que les tuples Reason sont toujours dans des parenthèses, les records  peuvent contenir des *lambdas* sans besoin de parenthèses supplémentaires.
 <table>
   <thead><tr> <th scope="col"><p>OCaml</p></th><th scope="col"><p>Reason</p></th></tr></thead>
   <tr>
@@ -300,12 +276,12 @@ let myFuncs = {
     </td>
 </table>
 
-### Lists
+### Listes
 
-Lists in `Reason` are delimited with commas rather than semi-colons as they are in JavaScript. `Reason` also uses JavaScript's spread syntax for list concatenation instead of the `::` operator.
+Les Listes en Reason sont délimitées par des virgules plutôt que par des points-virgules comme c'est le cas en JavaScript. Reason utilise aussi la syntax *spread* de JavaScript pour la concatenation de liste au lieu de l'opérateur `::`.
 
 <table>
-<thead><tr> <th scope="col"><p>OCaml Lists</p></th><th scope="col"><p>Reason Lists</p></th></tr></thead>
+<thead><tr> <th scope="col"><p>Listes OCaml</p></th><th scope="col"><p>Listes Reason</p></th></tr></thead>
   <tr>
     <td>
       <pre>let list = [1; 2; 3]</pre>
@@ -318,15 +294,13 @@ Lists in `Reason` are delimited with commas rather than semi-colons as they are 
   </tr>
 </table>
 
-### Type Definitions
+### Définitions de type
 
-With `Reason`, types generally look like the values they represent.  There is
-only one syntactic pattern to learn for each kind of type. Whereas in `OCaml`,
-there are separate syntaxes for tuple types `(x * y)` and tuple values
-`(x, y)`).
+Avec Reason, les types ressemblent généralement aux valeurs qu'ils représentent. Il n'y a qu'un seul motif syntaxique à apprendre pour chaque type de type. Tandis qu'en OCaml, il y a une syntaxe différente pour les types de tuples `(x * y)` et les valeurs de tuples
+`(x, y)`.
 
 <table>
-<thead><tr> <th scope="col"><p>OCaml Tuples</p></th><th scope="col"><p>Reason Tuples</p></th></tr></thead>
+<thead><tr> <th scope="col"><p>Tuples OCaml</p></th><th scope="col"><p>Tuples Reason</p></th></tr></thead>
   <tr>
     <td>
       <pre>
@@ -339,7 +313,7 @@ type tuple = (int, int);
 let tup: tuple = (10, 30);</pre>
     </td>
   </tr>
-<thead><tr> <th scope="col"><p>OCaml Records</p></th><th scope="col"><p>Reason Records</p></th></tr></thead>
+<thead><tr> <th scope="col"><p>Records OCaml</p></th><th scope="col"><p>Records Reason</p></th></tr></thead>
   <tr>
     <td>
       <pre>
@@ -354,7 +328,7 @@ type r =
 let myRec: r = {x: 0, y: 10};</pre>
     </td>
   </tr>
-<thead><tr> <th scope="col"><p>OCaml Functions</p></th><th scope="col"><p>Reason Functions</p></th></tr></thead>
+<thead><tr> <th scope="col"><p>Fonctions OCaml</p></th><th scope="col"><p>Fonctions Reason</p></th></tr></thead>
   <tr>
     <td>
       <pre>
@@ -369,31 +343,25 @@ let x: func = fun a => a + 1;</pre>
   </tr>
 </table>
 
-### Functions
+### Fonctions
 
-`OCaml` has three ways to define functions:
+OCaml propose trois façons de définir une fonction :
 
-- Some `OCaml` forms use arrows `->`, some use equals `=`.
-- Some `OCaml` forms use the `fun` keyword, others use the `function` keyword.
+- Certaines formes d'OCaml utilisent des flèches `->`, d'autres des signes égal `=`.
+- Certaines formes d'OCaml utilisent le mot-clé `fun`, d'autres le mot-clé `function`.
 
-`Reason` also supports the same three ways to define lambdas, but for
-consistency:
+Reason propose aussi les 3 mêmes façons de définir des lambdas, mais par soucis de cohérence :
 
-- Every `Reason` form uses an `=>` arrow in one way or another.\*
-- `Reason` uses at most one keyword (`fun`).
-- As with all pattern matching, the leading bar `|` is required in the single
-  argument pattern match form.
+- Reason utilisera toujours une flèche `=>`.
+- Reason utilise un mot-clé tout au plus (`fun`).
+- Comme pour tout *pattern matching*, le pipe `|` est requis dans le pattern match de l'argument.
 
-###### Single argument match functions
+###### Fonctions match à un argument
 
-`OCaml` has a function definition (`function |`) which is considered to be
-equivalent of `function a -> match a with ...`. `Reason` has the same, but
-the syntax makes it clear how it is actually an extension of a single argument
-function. The single case match is a natural extension of the simple lambda,
-and the multicase lambda is a natural extension of the single case lambda.
+OCaml a une définition de fonction (`function |`) qu'on considère équivalente à `function a -> match a with ...`. Reason possède la même, mais la syntaxe ici montre plus clairement qu'il s'agit d'une extension de fonction à un seul arguement. Le match à un seul cas est une extension naturelle du lambda simple, et le lambda à plusieurs cas est une extension naturelle du lambda simple.
 
 <table>
-  <thead><tr> <th scope="col"><p>Form</p></th><th scope="col"><p>Ocaml</p></th><th scope="col"><p>Reason</p></th></tr></thead>
+  <thead><tr> <th scope="col"><p>Forme</p></th><th scope="col"><p>OCaml</p></th><th scope="col"><p>Reason</p></th></tr></thead>
   <tr>
     <td>
       lambda
@@ -409,7 +377,7 @@ fun pat => e</pre>
   </tr>
   <tr>
     <td>
-      one match case
+      cas à un match
     </td>
     <td>
       <pre>
@@ -422,7 +390,7 @@ fun | pat => e</pre>
   </tr>
   <tr>
     <td>
-      many cases
+      plusieurs cas
     </td>
     <td>
       <pre>
@@ -437,13 +405,11 @@ fun | pat => e
   </tr>
 </table>
 
-###### Let binding for curried functions
+###### Binding let pour les fonctions curryfiées
 
-Both `OCaml` and `Reason` syntax offer a syntactic sugar for expressing curried
-functions. The following table shows three equivalent definitions which are
-identical once parsed. As always, all `Reason` functions include an `=>` arrow.
+Les deux syntaxes d'OCaml et de Reason offrent un zeste de *syntactic sugar* pour exprimer les fonctions curryfiées. Le tableau suivant montre 3 définitions équivalentes qui sont identiques une fois parsées.  Comme toujours, toutes les fonctions Reason incluent une flèche `=>`.
 
-<table> <thead><tr><th scope="col"><p>Ocaml</p></th><th
+<table> <thead><tr><th scope="col"><p>OCaml</p></th><th
         scope="col"><p>Reason</p></th></tr></thead>
   <tr>
     <td>
@@ -478,11 +444,9 @@ let x a b => e;</pre>
 </table>
 
 
-### Annotating Function Arguments
+### Annotation d'arguments de fonction
 
-In both `Reason` and `OCaml`, arguments are annotated with types by (as with
-everything else), wrapping them in parenthesis after appending
-`:typeAnnotation`.
+En Reason et en OCaml, les arguments sont annotés avec des types (comme pour tout le reste), les enveloppant entre parenthèses après l'ajout `:typeAnnotation`.
 
 ```reason
 fun (arg : argType) => returnValue;
@@ -497,9 +461,7 @@ fun (arg : argType) (arg2 : arg2Type) => returnValue;
 ```
 
 
-
-Both `Reason` and `OCaml` allow annotating the return type, when using the
-"super sugared let binding" form.
+Reason ainsi qu'OCaml permettent d'annoter le type retourné, lorsqu'on utilise la forme du "super binding let *sucré*".
 
 ```ocaml
 (* OCaml *)
@@ -515,34 +477,28 @@ let myFunc (a:int) (b:int) :(int, int) => (a, b);
 let myFunc (a:int) (b:int) :list int => [1];
 let myFunc (a:int) (b:int) :(int => int) => fun x => x + a + b;
 ```
-> Because we're using `=>` for all functions everywhere in `Reason`, there's
-one case where we need to add extra parens around a return type that is
-itself a function type.
+> Parce que nous utilisons `=>` pour les fonctions partout en Reason, il y a un cas où nous avons besoin d'ajouter des parenthèses supplémentaires atour du type retourné, qui est lui-même un type de fonction.
 
 
-### Type Parameters
+### Paramètres de type
 
-###### OCaml:
+###### OCaml :
 
-OCaml's type applications (think "generics"), are applied in reverse order.
+Les applications de type en OCaml (pensez "generics"), sont appliquées dans l'ordre inverse.
 
-With OCaml, there are some unintuitive consequences of this.
-
+Il y a ainsi dans le langage, quelques conséquences assez peu intuitives à cela.
 
 ```ocaml
     let x: int list = [2]
 
     type listOfListOfInts = int list list
 
-    (* Parsed as: *)
+    (* Parsé comme étant : *)
     type listOfListOfInts = (int list) list
 ```
 
 
-Things get even more strange when type constructors accept multiple parameters.
-Multiple arguments require parenthesis and commas to separate type parameters,
-but those parentheses don't represent tuples. The parentheses/comma form must
-also be given when constructing type instances such as `(int, string) tuple`.
+Les choses deviennent encore plus étranges lorsque les constructeurs de type acceptent plusieurs paramètres. Les arguments multiples nécessitent des parenthèses et des virgules pour séparer les paramètres de type, mais ces parenthèses ne représentent pas les tuples. La forme parenthèses/virgule doit également être donnée lors de la construction d'instances de type telles que le tuple`(int, string)`.
 
 
 ```ocaml
@@ -550,23 +506,18 @@ also be given when constructing type instances such as `(int, string) tuple`.
 
     type listOfTuplesOfStringAndInt = (string, int) tuple list
 
-    (* Which is parsed as: *)
+    (* Parsé comme étant : *)
     type listOfTuplesOfStringAndInt = ((string, int) tuple) list
 
-    (* Which allows a list of (tuples of (string and int)) *)
+    (* CE qui permet une liste de (tuples de (string et d'int)) *)
     let tuples: listOfTuplesOfStringAndInt = [("asdf", 3)]
 ```
 
-###### Reason:
+###### Reason :
 
-In summary, Reason unifies almost all of the syntax into simple "function
-application" style meaning that type parameters follow the same space-separated
-list pattern seen everywhere else in the syntax. As with everything else,
-parentheses may be used to enforce precedence. This results in fewer syntactic
-patterns to learn.
+En résumé, Reason unifie presque la totalité de la syntaxe en un style simple d'"application de fonction", ce qui signifie que les paramètres de type suivent le même modèle de listes séparées par des espaces vu partout ailleurs dans la syntaxe. Comme pour tout le reste, les parenthèses peuvent être utilisées pour faire respecter la priorité. Le résultat de tout cela est qu'il y a moins de modèles syntaxiques à apprendre.
 
-For example, you can imagine `list` being a "function" for types that accepts a
-type and returns a new type.
+Par exemple, on peut imaginer `list` comme étant une "fonction" pour les types qui accepte un type et retourne un nouveau type.
 
 <table>
   <thead><tr> <th scope="col"><p>OCaml</p></th><th scope="col"><p>Reason</p></th></tr></thead>
@@ -594,16 +545,12 @@ let tuples: pairs = [(2, 3)]</pre>
 
 
 
-### Tuples as Type Parameters
+### Tuples en tant que paramètres de type
 
-Because `OCaml` uses parens and commas to represent multiple arguments to type
-constructors, it's confusing when one of the arguments to a type constructor is
-itself a tuple. In `OCaml`, it's difficult to remember the difference between a
-type constructor accepting multiple arguments and a type constructor accepting
-a single argument which happens to be a tuple.
+Parce qu'OCaml utilise des parenthèses et des virgules pour représenter plusieurs arguments de constructeurs de type, il est assez déroutant de voir que l'un des arguments d'un constructeur de type est lui-même un tuple. En OCaml, il est difficile de se rappeler la différence entre un constructeur de type acceptant plusieurs arguments et un constructeur de type acceptant un seul argument qui se trouve être un tuple.
 
-The following examples shows the difference between passing *two* type
-parameters to `pair`, and a *single* type parameter that happens to be a tuple.
+Les exemples suivants montrent la différence entre passer *deux* paramètres de type à `pair` et `un seul` paramètre de type qui est un tuple.
+
 <table>
   <thead><tr> <th scope="col"><p>OCaml</p></th><th scope="col"><p>Reason</p></th></tr></thead>
   <tr>
@@ -620,36 +567,24 @@ type pairList = list (int, int);</pre>
   </tr>
 </table>
 
-- In `Reason`, syntax that represent tuple or tuple types, always looks like
-  tuples.
-- In `Reason`, syntax that represent records or record types, always look like
-  records.
-- Just about everything else uses the syntactic pattern of function application
-  (space separated arguments).
+- En Reason, la syntaxe qui représente un tuple ou des types de tuples ressemble toujours à un tuple.
+- En Reason, la syntaxe qui représente un record ou des types de records ressemble toujours à un record.
+- À peu près tout le reste utilise le modèle syntaxique de l'application de fonction (arguments séparés par des espaces).
 
 
 
 ### Variants
 
 ###### OCaml
-- `OCaml` already expects constructor argument types to be specified in tuple
-  form, so it's confusing when a single constructor expects a single argument
-  that *happens* to be a tuple type.
-- What's even more confusing is that the constructors don't *actually* accept
-  tuples, yet the syntax appear to resemble tuples.
-- Sometimes the syntax for instantiating a constructor with multiple arguments
-  overlaps the syntax for constructing a variant with a single argument that
-  happens to be a tuple - so it looks *exactly* like you *are* supplying a
-  tuple when you are not actually supplying a tuple.
+- OCaml s'attend déjà à ce que les types des arguments de constructeurs soient spécifiés sous la forme de tuples, donc on est un peu confus lorsque le seul argument qu'attend un constructeur se trouve être type de tuple.
+- Ce qui est encore plus surprenant, c'est que les constructeurs n'acceptent pas *réellement* les tuples, même si la syntaxe semble ressembler à des tuples.
+- Parfois, la syntaxe pour l'instanciation d'un constructeur avec plusieurs arguments chevauche la syntaxe pour construire une variant avec un seul argument qui se trouve être un tuple - donc on dirait que vous êtes entrain d'envoyer un tuple, alors que ce n'est pas le cas.
 
 ###### Reason
 
-- Variant constructor types are expected to be listed as space separated lists,
-  using parenthesis to group precedence (as with **everything** else).
-- Constructing instances of the variant (as you would have guessed) follows
-  function application style (space separated lists).
-- Tuples **always** *look* like tuples, and anything that looks like a tuple
-  *is* a tuple.
+- Les types de constructeurs de variants doivent être listés sous forme de listes séparées par des espaces, en utilisant des parenthèses pour regrouper par priorité (comme *tout* le reste).
+- La construction des instances de la variant (comme vous l'aurez deviné) suit le style d'application de la fonction (listes séparées par des espaces).
+- Les Tuples *ressemble* **toujours** à des tuples, et tout autre chose qui ressemblerait à un type … *est* un tuple.
 
 <table>
   <thead><tr> <th scope="col"><p>OCaml</p></th><th scope="col"><p>Reason</p></th></tr></thead>
@@ -721,23 +656,16 @@ let res = switch x {
 
 ###### Reason
 
-- Uses the `switch` keyword, and doesn't require `with`.
-- *Requires* wrapping `switch` cases in `{}` to avoid confusing and error
-  prone mis-parsing when pattern matching is embedded in other pattern
-  matching.
-- Uses the `=>`.
-- Requires the leading bar. This is a good idea because it frees up other
-  possibilities in the grammar without conflicts.
+- Utilise le mot-clé `switch`, et ne requiert pas `with`.
+- *Requiert* d'englober les cas du `switch` dans des accolades `{}` afin d'éviter toute confusion et une mauvaise analyse des erreurs lorsque le pattern matching est intégré dans un autre pattern matching.
+- Utilise `=>`.
+- Requiert l'emploi du pipe `|`. C'est une bonne idée car cela libère d'autres possibilités dans la grammaire sans pour autant générer de conflits.
 
 
-Can you spot the error in the `OCaml` example? This is one of the most common
-mistakes among `OCaml` programmers. The second `match` *must* be wrapped in
-parentheses, otherwise the `Some` case is parsed as belonging to the outer
-`match`. `Reason`'s required `{}` blocks around match cases prevent this
-issue.
+Pouvez-vous repérer l'erreur dans l'exemple OCaml ? C'est l'une des erreurs les plus fréquentes chez les développeurs OCaml. Le second `match` *doit* être englobé dans des parenthèses, sinon le cas `Some` est parsé comme appartenant au `match` externe. Les blocs `{}` requis par Reason devraient prévenir ce genre de problèmes.
 
 <table>
-  <thead><tr> <th scope="col"><p>OCaml (BROKEN)</p></th><th scope="col"><p>Reason</p></th></tr></thead>
+  <thead><tr> <th scope="col"><p>OCaml (non fonctionnel)</p></th><th scope="col"><p>Reason</p></th></tr></thead>
   <tr>
     <td>
       <pre>
@@ -760,9 +688,9 @@ let res = switch x {
   </tr>
 </table>
 
-### Modules and Signatures
+### Modules et Signatures
 
-###### Defining Modules/Signatures
+###### Définition de Modules/Signatures
 
 <table>
   <thead><tr> <th scope="col"><p>OCaml</p></th><th scope="col"><p>Reason</p></th></tr></thead>
@@ -805,13 +733,11 @@ module MyModule = {
 </table>
 
 
-##### Functors Types
+##### Types de foncteurs
 
-In the same way that type parameters (think generics) were made consistent with
-function application syntax, `Reason` also unifies the syntax for Functors.
+De la même manière que les paramètres de type (pensez generics) ont été conçu de façon cohérente avec la syntaxe de l'application de fonction, Reason unifie aussi la syntaxe des  Foncteurs.
 
-In `Reason`, functor parsing rules are almost identical to the function
-  parsing rules, using `=>` to represent curried application.
+En Reason, les règles de parsing de foncteurs sont quasiment identiques à celles des fonctions, utilisant le flèche `=>` pour représenter l'application curryfiée.
 
 <table>
   <thead><tr> <th scope="col"><p>OCaml</p></th><th scope="col"><p>Reason</p></th></tr></thead>
@@ -833,11 +759,9 @@ module type FType =
   </tr>
 </table>
 
-### Functors
+### Foncteurs
 
-In `Reason`, the syntax for creating and applying functors is nearly identical
-to the syntax for creating/applying functions. Also, functor *application* is
-consistent with function application (again, space separated lists).
+En Reason, la syntaxe pour créer et appliquer des foncteurs est quasiment identique à celle des fonctions. De plus, *l'application* d'un foncteur est cohérente avec celle d'un fonction (encore une fois, des listes séparées par des espaces).
 
 
 <table>
@@ -901,26 +825,21 @@ module Res = F A B;</pre>
   </tr>
 </table>
 
-> \* *Note: There is currently a known inconsistency where functors do not
-conform to function application syntax when in type annotation position - see
-`formatTest/modules.re`.*
+> \* **Note: Il existe actuellement une incohérence connue lorsque les foncteurs ne sont pas conformes à la syntaxe de l'application de fonction lorsqu'ils sont à la place d'une annotation de type - voir
+`formatTest/modules.re`.**
 
 
 
-### Various Improvements
+### Améliorations diverses
 
-OCaml doesn't require parens around sequences `(a;b;c;d)` or tuples `(x,y)`, so
-that ends up ruling out a bunch of other very convenient syntax rules.  Since
-Reason always uses `{}` to enclose sequences or let bindings, and `Reason`
-always requires `()` around tuples, many other syntax constructs are expressed
-more intuitively, without requiring extra wrapping in parenthesis.
+OCaml ne requiert pas de parenthèses autour des séquences `(a;b;c;d)` ou des tuples `(x,y)`, ce qui finit par exclure un tas d'autres règles de syntaxe très pratiques. Vu que Reason utilise toujours les accolades `{}` pour englober des séquences ou des bindigs let, et que Reason
+requiert toujours des parenthèses `()` autour de tuples, beaucoup d'autres constructions de syntaxe sont exprimées de manière plus intuitive, sans nécessiter d'enveloppement supplémentaire entre parenthèses.
 
 
-###### Lambdas as record fields no longer need extra parens
+###### Les lambdas en champs de record n'ont plus besoin de parenthèses supplémentaires
 
-This is a welcomed improvement because the `OCaml` type errors the user would
-see were very confusing when it would believe the function's return value
-was a tuple with infix `,` comma.
+Il s'agit d'une amélioration bienvenue parce que les erreurs de type en OCaml que l'utilisateur voyait étaient très déroutantes quand il pensait que la valeur de retour de la fonction était un tuple avec une virgule `,` infixe.
+
 
 <table>
   <thead><tr> <th scope="col"><p>OCaml</p></th><th scope="col"><p>Reason</p></th></tr></thead>
@@ -943,7 +862,7 @@ let myFuncs = {
 </table>
 
 
-###### Lambdas as match results no longer need extra parens
+###### Les lambdas en résultats de match n'ont plus besoin de parenthèses supplémentaires
 <table>
   <thead><tr> <th scope="col"><p>OCaml</p></th><th scope="col"><p>Reason</p></th></tr></thead>
   <tr>
@@ -967,7 +886,8 @@ let x = switch prnt {
   </tr>
 </table>
 
-###### Lambdas and type annotations in tuples no longer require extra parens
+###### Les lambdas en types d'annotation de tuples n'ont plus besoin de parenthèses supplémentaires
+
 <table>
   <thead><tr> <th scope="col"><p>OCaml</p></th><th scope="col"><p>Reason</p></th></tr></thead>
   <tr>
@@ -991,12 +911,11 @@ let tuple =
 </table>
 
 
-### Various Differences
+### Différences diverses
 
-#####`as` precedence
+##### Priorité d'`as`
 
-With `Reason`, `as` has a higher precedence than `|` bar. This allows creating `as` aliases
-for entire rows in pattern matching.
+Avec Reason, `as` à une plus grande priorité que le pipe `|`. Cela permet de créer des alias `as` pour des lignes entières dans le pattern matching.
 
 <table>
   <thead><tr> <th scope="col"><p>OCaml</p></th><th scope="col"><p>Reason</p></th></tr></thead>
@@ -1031,10 +950,10 @@ let | MyThing \_ as ppp
   </tr>
 </table>
 
-###Mutable Record Field Updates
+### Updates de champ de record mutables
 
-Because equalities and their negations have been made more consistent in `Reason`,
-the `=` operator is available for mutable field update.
+Parce que les égalités et leurs négations ont été rendues plus cohérentes en Reason, l'opérateur `=` est disponible pour la mise à jour du champ mutable.
+
 <table>
   <thead><tr> <th scope="col"><p >OCaml</p></th> <th scope="col"><p>Reason</p></th></tr></thead>
   <tr>
@@ -1049,11 +968,9 @@ myRec.field = "next"</pre>
   </tr>
 </table>
 
-##### Prefix operators
+##### Opérateurs de préfix
 
-In Reason, `!` and other prefix operators have lower precedence than dot `.` or send `#`.
-This is more consistent with what other languages do, and is more practical
-when (or if) the `!` symbol is used to represent boolean `not`.
+En Reason, `!` et d'autres opérateurs de préfixe ont une priorité moindre que celle du point `.` ou du dièse `#`. C'est plus cohénrent avec ce que font d'autres langages, et plus pratique lorque (ou si) le symbole `!` est utilisé pour représenter le booléen `not`.
 
 Ocaml                                 | Reason
 --------------------------------------|--------------------------------
@@ -1069,15 +986,10 @@ Ocaml                                 | Reason
 <pre>   let x = !~(foo#bar);   </pre> | <pre>    let x = !~foo#bar;       </pre>
 
 
-###### Comment Escaping
-Because Reason uses C-style comments, some obscure custom prefix/infix
-operators must be written differently.  The rules for prefix/infix operators
-are the same as in OCaml syntax, but with the following exceptions:
+###### Escape de commentaire
+Parce que Reason utilise des commentaires de style C, certains obscurs opérateurs préfixés/infixes customs doivent être écrits différemment. Les règles pour les opérateurs préfixés/infixes sont les mêmes que dans la syntaxe OCaml, mais avec les exceptions suivantes:
 
-Specifically, if any character except the first in an prefix/infix operator is
-a star or forward slash, that must be first escaped with a backslash. These will
-be parsed *without* the backslash when added to the AST. When reprinted, the
-escape backslashes are added back in automatically.
+Plus précisément, si un caractère, à l'exception du premier, d'un opérateur préfixé/infixe est une étoile ou un slash, il faut d'abord l'échapper avec un backslash. Ceux-ci seront analysés *sans* le backslash lorsqu'ils seront ajoutés à l'AST. Lorsqu'ils sont reprint, les backslashes sont automatiquement rajoutées.
 
 
 OCaml                                        | Reason
@@ -1092,14 +1004,12 @@ OCaml                                        | Reason
 
 
 
-###### Operator Renaming
-If `Reason` uses `==` to represent `OCaml`'s `=`, and
-uses `===` to represent `OCaml`'s `==`, then how would `Reason` represent `OCaml`'s
-`===` symbol (if it were defined)? `Reason` provides a way! "Escape" the triple
-equals symbol!
+###### Renommage d'opérateur
+Si Reason utilise `==` pour représenter le `=` d'OCaml, et
+utilise `===` pour représenter le `==` d'OCaml, alors comment est-ce que Reason représente le symbole `===` d'OCaml (s'il était définit) ? Reason propose une solution ! "Escape" le symbole triple égal !
 
 <table>
-  <thead><tr> <th scope="col"><p>Identifier</p></th><th scope="col"><p>Meaning</p></th> <th scope="col"><p>Expressed in OCaml via</p></th> <th scope="col"><p>Expressed in Reason via</p></th></tr></thead>
+  <thead><tr> <th scope="col"><p>Identifiant</p></th><th scope="col"><p>Signifit</p></th> <th scope="col"><p>Exprimé en OCaml via</p></th> <th scope="col"><p>Exprimé en Reason via</p></th></tr></thead>
   <tr>
   <tr>
     <td>
