@@ -64,4 +64,4 @@ Note that this would translate to `foo=true` within JSX in JS code.
 
 There is no support for JSX spread attributes.
 
-JSX calls supports the features of [labeled functions](#basics-function): optional, explicitly passed optional and optional with default.
+JSX calls supports the features of [labeled functions](functions#labeled-arguments): optional, explicitly passed optional and optional with default.
