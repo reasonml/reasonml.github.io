@@ -1,6 +1,6 @@
 ---
 title: Destructuring & Pattern Matching
-order: 5
+order: 130
 ---
 
 "Destructuring" is a visually concise way of extracting fields from a data structure while binding them to variables. You can use destructuring anywhere you'd normally use a variable. To destructure, instead

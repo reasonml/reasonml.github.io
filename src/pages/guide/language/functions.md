@@ -1,7 +1,9 @@
 ---
 title: Functions
-order: 3
+order: 100
 ---
+
+Can you believe we haven't covered function until now?
 
 Functions are declared with `fun` and return the expression.
 
@@ -49,7 +51,7 @@ let eleven = increment (double 5);
 
 If you forget to wrap `double 5` in parentheses, you'd get `increment double 5`, as if the `increment` function wrongly takes two arguments.
 
-#### No Argument
+### No Argument
 
 A function always takes an argument; but sometimes, we'd use it for e.g. side-effects, and don't have anything to pass to it. In other languages, we'd conceptually pass "no argument". In Reason, every function takes an argument; here we'd conventionally pass it the value `()`, called "unit".
 
@@ -66,7 +68,7 @@ logSomething ();
 
 `()` is a totally normal value, the single possible value in `unit`. Reason/OCaml gave it a special syntax out of convenience.
 
-#### Labeled Arguments
+### Labeled Arguments
 Multi-arguments functions, especially those whose arguments are of the same type, can be confusing to call.
 
 ```reason
@@ -121,7 +123,7 @@ Here's the syntax for typing the arguments:
 let drawCircle radius::(r: int) color::(c: string) => ...;
 ```
 
-#### Optional Labeled Arguments
+### Optional Labeled Arguments
 
 Labeled function arguments can be made optional during declaration. You can then omit them when calling the function.
 
@@ -153,7 +155,7 @@ let curriedFunction = drawCircle ::color;
 let actualResultWithoutProvidingRadius = drawCircle ::color ();
 ```
 
-##### Explicitly Passed Optional
+#### Explicitly Passed Optional
 
 Sometimes, you might want to forward a value to a function without knowing whether the value is `None` or `Some a`. Naively, you'd do:
 
@@ -172,7 +174,7 @@ let result = drawCircle ::color radius::?payloadRadius ();
 
 This means "I understand `radius` is optional, and that when I pass it a value it needs to be an `int`, but I don't know whether the value I'm passing is `None` or `Some val`, so I'll pass you the whole `option` wrapper".
 
-##### Optional with Default Value
+#### Optional with Default Value
 
 Optional labeled arguments can also be provided a default value. They aren't wrapped in an `option` type.
 
@@ -182,3 +184,48 @@ let drawCircle ::radius=1 ::color () => {
   startAt r r;
 };
 ```
+
+#### Recursive Functions
+
+By default, values can't see a binding that points to it, but including the
+`rec` keyword in a `let` binding makes this possible. This allows functions
+to see and call themselves, giving us the power of recursion.
+
+```reason
+let rec neverTerminate = fun () => neverTerminate ();
+```
+
+#### Mutually Recursive Functions
+
+Mutually recursive functions start like a single recursive function using the
+`rec` keyword, and then are chained together with `and`:
+
+```reason
+let rec callSecond = fun () => callFirst ()
+and callFirst = fun () => callSecond ();
+```
+
+**Note** that there's no semicolon ending the first line and no `let` on the second line.
+
+#### Currying
+
+Reason functions can automatically be **partially** called:
+
+```reason
+let add = fun x y => x + y;
+let addFive = add 5;
+let eleven = addFive 6;
+let twelve = addFive 7;
+```
+
+Actually, the above `add` is nothing but syntactic sugar for this:
+
+```reason
+let add = fun x => fun y => x + y;
+```
+
+OCaml optimizes this to avoid the unnecessary function allocation (2 functions here, naively speaking) whenever it can! This way, we get
+
+- Nice syntax
+- Currying for free (every function takes a single argument, actually!)
+- No performance cost

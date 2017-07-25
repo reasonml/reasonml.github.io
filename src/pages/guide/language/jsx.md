@@ -1,7 +1,9 @@
 ---
 title: JSX
-order: 10
+order: 160
 ---
+
+Would you like some HTML syntax in your Reason? If not, quickly skip over this section and pretend you've seen nothing!
 
 Reason supports the JSX syntax, with some slight differences compared to the one in [ReactJS](https://facebook.github.io/react/docs/introducing-jsx.html). JSX tags translate to function calls as shown in these examples:
 

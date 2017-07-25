@@ -1,6 +1,6 @@
 ---
 title: Mutation
-order: 8
+order: 140
 ---
 
 Reason/OCaml exposes mutable features through [array](#built-in-data-types-array) and [mutable record fields](#built-in-data-types-record). They're sometimes great for performance and expressing certain familiar programming patterns.

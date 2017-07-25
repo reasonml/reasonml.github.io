@@ -1,10 +1,7 @@
 ---
-title: Primitives
+title: Overview
 order: 0
 ---
-
-Primitives / Operations
-----------
 
 Primitive                             | Example
 --------------------------------------|--------------------------------
@@ -18,8 +15,10 @@ Float Addition                        |  `23.0 +. 1.0`
 Integer Division/Multiplication       |  `2 / 23 * 1`
 Float Division/Multiplication         |  `2.0 /. 23.0 *. 1.0`
 String Concatenation                  |  `"Hello " ^ "World"`
+Comparison                            |  `>`, `<`, `>=`, `=<`
+Boolean operations                    |  `not`, `&&`, `||`
+Reference, Physical Equality          |  `===`, `==`
 Immutable Lists                       |  `[1, 2, 3]`
 Immutable Prepend                     |  `[item1, item2, ...theRest]`
-Reference Equality                    |  `thisThing === thatThing`
 Arrays                                |  `[|1, 2, 3|]`
 Records                               |  `type player = {score: int}; {score: 100}`
