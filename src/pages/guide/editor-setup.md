@@ -1,5 +1,5 @@
 ---
-title: Editor setup
+title: Editor Setup
 order: 1
 ---
 
@@ -9,7 +9,9 @@ Our [editor integration](/guide/tools#editor-integration) need a few binaries to
 - `ocamlmerlin-reason`: Reason bridge to [Merlin](/guide/tools#tools-command-line-utilities-merlin).
 - `ocamlmerlin`: the Merlin binary.
 The tooling section explains what these binaries do.
-**Install reason-cli globally** with npm:
+
+**Install reason-cli globally** with npm/yarn:
+
 ```sh
 ## on Linux:
 npm install -g https://github.com/reasonml/reason-cli/archive/beta-v-1.13.6-bin-linux.tar.gz
@@ -18,8 +20,10 @@ npm install -g https://github.com/reasonml/reason-cli/archive/beta-v-1.13.6-bin-
 ## test that you have them installed correctly
 which ocamlmerlin refmt ocamlmerlin-reason
 ```
-**Note**: the global toolchain `reason-cli` currently doesn't work on Windows.
-**Note**: please verify that your installed OCaml version is `4.02.x` and that Merlin is `>=2.5.1`. The above installation does that automatically, but people sometimes install our toolchain through other ways (e.g. native workflow, with looser version constraints).
+**Note**: `reason-cli` currently doesn't work on Windows, but it's not a hard requirement for using Reason; you can still have great CLI build system messages through BuckleScript, whose npm package [`bs-platform`](https://www.npmjs.com/package/bs-platform) does work on Windows.
+
+**Note**: please verify that your installed OCaml version is `4.02.x` and that Merlin is `>=2.5.1`. The above installation does that automatically, but people sometimes install our toolchain through other ways (e.g. OPAM, with looser version constraints).
+
 ```sh
 ocamlc -version
 ocamlmerlin -version

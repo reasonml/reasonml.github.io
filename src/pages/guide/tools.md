@@ -20,7 +20,7 @@ and/or with your editor.
 
 **Note**: the [JavaScript](/guide/javascript)
 and [native](/guide/native)
-workflow have different ways of installing  these tools. Please consult their
+workflow have different ways of installing these tools. Please consult their
 respective sections for the installation proper. This section only describes
 what they are.
 
@@ -37,7 +37,7 @@ at a certain characters limit; it solves the constrains and arranges your code
 accordingly. Here's `refmt` inside Vim, called once per window resize (just to
 show the point):
 
-<img src="images/LiquidSmallOptCrop.gif" style="width:100%; max-width:466px; max-height:433px;" />
+<img width="466" height="433" src="https://user-images.githubusercontent.com/1909539/28570942-3bd962a2-70f5-11e7-8934-1b7f249d7814.gif" style="max-width:466px; max-height:433px;" />
 
 The Reason community uses it to enforce a consistent style and avoid time-consuming
 manual formatting & stylistic debates.
@@ -70,7 +70,7 @@ page.
 Reason comes with a REPL called `rtop` which lets you interactively evaluate
 Reason. It features intelligent, type-driven autocompletion.
 
-<img src="images/RtopOptCrop.gif" style="width:100%; max-width:466px; max-height:433px;">
+<img src="https://user-images.githubusercontent.com/1909539/28570943-3bd9eb00-70f5-11e7-981c-4846719c0943.gif" style="width:100%; max-width:466px; max-height:433px;">
 
 
 ```sh
@@ -110,8 +110,6 @@ https://github.com/freebroccolo/vscode-reasonml
 You can install the [Atom](https://atom.io/) Reason integration through either
 [atom-ocaml-merlin](https://atom.io/packages/ocaml-merlin) or
 [Nuclide](https://nuclide.io/). The former is lighter.
-
-<img style="width:100%; max-width:470px; max-height:440px" src="images/AtomAutocomplete.png" />
 
 #### OCaml-Merlin
 As per the instructions [here](https://atom.io/packages/ocaml-merlin), you'll also need:
@@ -154,8 +152,6 @@ NeoBundle 'reasonml-editor/vim-reason'
 ```
 
 Likewise for [vim-plug](https://github.com/junegunn/vim-plug) and others.
-
-<img src="images/VimReason.png" style="width:100%; max-width:470px; max-height:440px" />
 
 #### Merlin
 
