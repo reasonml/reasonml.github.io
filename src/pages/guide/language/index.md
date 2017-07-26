@@ -32,7 +32,7 @@ The OCaml compiler is organized into several stages, which are exposed as
 libraries. Reason replaces part of the compiler toolchain with a completely
 new syntax parser that is more approachable, while still fully compatible with
 the rest of the compiler. Reason also implements a new source printer which
-integrates into your IDE and the new custom [`REPL`](/guide/tools#repl).
+integrates into your IDE and the new custom [`REPL`](/guide/editor-tools/extra-goodies#repl).
 
 ###### Why OCaml?
 

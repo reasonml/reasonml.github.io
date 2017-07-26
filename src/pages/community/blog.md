@@ -29,7 +29,7 @@ Now that the community is taking off, keeping folks up-to-date through [Discord]
 
 We've moved unused first-party projects from [GitHub/reasonml](https://github.com/reasonml/) to [GitHub/reasonml-old](https://github.com/reasonml-old). Old URLs are redirected, so no breackage here.
 
-We've cleaned up the Reason codebase. Editor integrations moved out to their dedicated repos. Updated instructions are still [here](/guide/tools#editor-integration). Other Reason repo cleanups are still ongoing.
+We've cleaned up the Reason codebase. Editor integrations moved out to their dedicated repos. Updated instructions are still [here](/guide/editor-tools/supported-editors). Other Reason repo cleanups are still ongoing.
 
 Some discord rooms got merged together. Fewer rooms, more focused discussions.
 
