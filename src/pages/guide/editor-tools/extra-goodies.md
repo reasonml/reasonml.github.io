@@ -40,3 +40,7 @@ Reason comes with a REPL called `rtop` which, once invoked, lets you interactive
 Use `#quit;` to close your REPL session.
 
 **Note that `rtop` currently doesn't work easily with packages and `external`s**. We recommend evaluating code inside our [Try](/try) playground.
+
+#### ocamlc, ocamlopt, ocamlrun, rebuild
+
+`ocamlc` and `ocamlopt` are the bare ocaml compilers.
