@@ -31,6 +31,7 @@ JavaScript                |   Reason
 <pre>'Hello world!' </pre>           |  Strings must use "
 Characters are strings               |  <pre>'a'  </pre>
 <pre>true</pre>                      |  <pre>true </pre>
+<pre>!true</pre>                      |  <pre>not true </pre>
 `[1,2,3]`                            |  `[1,2,3]`
 <pre>null</pre>                      |  <pre>()</pre>
 <pre>const x = y;</pre>              |  <pre>let x = y;</pre>
