@@ -51,6 +51,7 @@ export default class Index extends React.Component {
     const { javascript, examples } = this.props.data
     return (
       <div css={styles.container}>
+        <Helmet title={`Reason`} />
         <Section backgroundColor={gray}>
           <Header />
           <div css={{ alignItems: 'center' }}>

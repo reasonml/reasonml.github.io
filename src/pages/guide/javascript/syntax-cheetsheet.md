@@ -3,45 +3,39 @@ title: Cheatsheet syntaxique
 order: 1
 ---
 
-Reason resembles a typed subset of modern JavaScript (the good parts).
+Reason ressemble à un sous-ensemble typé du JavaScript moderne (uniquement les bons aspects).
 
-`Reason`'s syntax is easy to learn, and if you know modern
-`JavaScript` you can usually read and make sense of `Reason` code without
-actually learning `Reason`.
-The OCaml language that `Reason` uses provides many new concepts that
-deliver a much more expressive, yet often more constrained experience. `Reason`
-helps you learn those new concepts more quickly and reap the benefits of the
-`OCaml` compiler sooner.
+La syntaxe Reason est facile à apprendre, et si vous connaissez déjà le JavaScript moderne, vous pouvez généralement lire et comprendre du code Reason sans pour autant avoir appris Reason.
+Le langage OCaml qu'utilise Reason propose de nombreux concepts nouveaux qui offrent une expérience beaucoup plus expressive, mais souvent plus contraignante. Reason vous aide à apprendre ces nouveaux concepts plus rapidement et à profiter plus tôt des bénéfices du compilateur OCaml.
 
+C'est pourquoi au final, Reason :
 
-The end result is that `Reason`:
+- Permet d'écrire du code qu'un grand nombre de développeurs peut **lire facilement**.
+- Peut être **maîtrisé rapidement**.
+- Procure la vraie expérience **"si ça compile, ça marche"** initiée par le langage `ML`.
+- Compile en hyperviseurs de Type 1 (* **bare metal** native binaries *), *ou* en JavaScript.
 
-- Allows writing code that a wide range of developers can **easily read**.
-- Can be **mastered quickly**.
-- Delivers the true **"if it compiles, it works"** experience pioneered by the `ML` language.
-- Compiles to **bare metal** native binaries, *or* to `JavaScript`.
-
-### Basic Language Primitives
+### Primitives de base du langue
 
 JavaScript                |   Reason
 --------------------------|--------------------------------
 <pre>3</pre>                         |  <pre>3</pre>
 <pre>3.1415 </pre>                   |  <pre> 3.1415 </pre>
 <pre>"Hello world!" </pre>           |  <pre>"Hello world!" </pre>
-<pre>'Hello world!' </pre>           |  Strings must use "
-Characters are strings               |  <pre>'a'  </pre>
+<pre>'Hello world!' </pre>           |  Les strings doivent utiliser "
+Les caractères sont des strings               |  <pre>'a'  </pre>
 <pre>true</pre>                      |  <pre>true </pre>
 `[1,2,3]`                            |  `[1,2,3]`
 <pre>null</pre>                      |  <pre>()</pre>
 <pre>const x = y;</pre>              |  <pre>let x = y;</pre>
-<pre>let x = y;</pre>                |  <pre>reference cells</pre>
-<pre>var x = y;</pre>                |  No equivalent (thankfully)
-`[x, ...lst] (linear time)`          | `[x, ...lst] (constant time)`
-`[...lst, x] (linear time)`          | <pre>Not supported</pre>
+<pre>let x = y;</pre>                |  <pre>cellules de référence</pre>
+<pre>var x = y;</pre>                |  Pas d'équivalent (heureusement)
+`[x, ...lst] (temps linéaire)`          | `[x, ...lst] (temps constant)`
+`[...lst, x] (temps linéaire)`          | <pre>Pas supporté</pre>
 <pre>{...obj, x: y}</pre>            | <pre>{...obj, x: y}</pre>
 
 
-### Basic Operations on Primitives
+### Opérations basiques sur des primitives
 
 JavaScript                         |   Reason
 -----------------------------------|--------------------------------
@@ -49,20 +43,18 @@ JavaScript                         |   Reason
 <pre>1.0 + 2.0 </pre>              |  <pre>1.0 +. 2.0 </pre>
 <pre>"hello " + "world" </pre>     |  <pre>"hello " ^ "world" </pre>
 
-### Objects and Records
+### Objects et Records
 JavaScript                |   Reason
 --------------------------|--------------------------------
 "Objects"                 |  "Records"
-no static types           |  <pre>type point = {x: int, mutable y: int};</pre>
+pas de types statiques           |  <pre>type point = {x: int, mutable y: int};</pre>
 <pre>{x: 30, y: 20}</pre>          |  <pre>{x: 30, y: 20}</pre>
 <pre>point.x</pre>                 |  <pre>point.x</pre>
 <pre>point.y = 30;</pre>           |  <pre>point.y = 30;</pre>
 <pre>{...point, x: 30}</pre>       |  <pre>{...point, x: 30}</pre>
 
-### Blocks
-In `Reason`, "sequence expressions" are created with `{}` and evaluate to their
-last statement. In `JavaScript`, this can be simulated via a temporary variable
-which must be created in an invalid state, then later mutated.
+### Blocs
+En Reason, les "expressions de séquence" sont créées avec `{}` et évaluées à leur dernière déclaration. En JavaScript, cela peut être simulé via une variable temporaire qui doit être créée dans un état non valide, puis mutée plus tard.
 
 <table>
   <thead><tr> <th scope="col"><p >JavaScript</p></th> <th scope="col"><p>Reason</p></th></tr></thead>
@@ -90,7 +82,7 @@ let res = {
 
 ### Lambdas
 
-`JavaScript` has two different kinds of functions, whereas `Reason` only has one.
+JavaScript a deux différents types de fonctions, alors que Reason n'en a qu'un.
 
 JavaScript                            |   Reason
 --------------------------------------|--------------------------------
@@ -99,11 +91,9 @@ JavaScript                            |   Reason
 <pre>let f = function named(arg) {...}|
 
 
+#### Mot-clé de fonction
 
-The primary difference between modern (ES6) `JavaScript` and `Reason` lambdas is that
-`Reason` lambdas begin with the word `fun`. This is simply to assist in visual
-understanding of the meaning of a function when it has a very large destructured
-argument.
+La différence principale entre les lambdas du JavaScript moderne (ES6) et ceux de Reason et que ceux de Reason commencencent avec le mot `fun`. Il s'agit simplement d'aider à la compréhension visuelle de la signification d'une fonction lorsqu'elle possède un très large argument déstructuré.
 
 JavaScript                        |   Reason
 ----------------------------------|--------------------------------
@@ -114,8 +104,9 @@ JavaScript                        |   Reason
 <pre>const y = add(3, add(0, 1));</pre>    |  <pre>let y = add 3 (add 0 1);</pre>
 
 
-Like `JavaScript`, `Reason` allows any expression on the right hand side of the
-lambda `=>`.
+#### Expression de fonction
+
+Comme JavaScript, Reason permet toute expression sur le côté droit du lambda `=>`.
 
 <table>
   <thead><tr> <th scope="col"><p >JavaScript</p></th> <th scope="col"><p>Reason</p></th></tr></thead>
@@ -136,10 +127,9 @@ let add = fun (x, y) =>
 </table>
 
 
-However, `JavaScript` allows lambdas to return `{}` blocks *instead* of expressions, by way of a `return`
-statement wrapped in `{}` braces. With `Reason`, `{}` blocks are *already* expressions, so `Reason` doesn't
-require two modes for lambda - all lambdas in `Reason` have expressions on the right hand side of the `=>`,
-and some of those expressions coincidentally resemble "function bodies" in `{}` braces.
+#### Blocs de fonction
+
+Cependant, JavaScript permet aux lambdas de retourner des blocs `{}` *au lieu* d'expressions, via une instruction `return` englobée dans des accolades `{}`. Avec Reason, les blocs`{}` sont *déjà* des expressions, donc Reason n'a pas besoin de deux modes de lambda - tous les lambdas en Reason ont des expressions sur le côté droit de `=>`, et certaines de ces expressions ressemblent comme par hasard au corps de fonction dans les accolades `{}`.
 
 <table>
   <thead><tr> <th scope="col"><p >JavaScript</p></th> <th scope="col"><p>Reason</p></th></tr></thead>
@@ -163,13 +153,9 @@ let myFun = fun (x, y) => {
   </tr>
 </table>
 
+#### Arguments de fonction
 
-When using `Reason` every function accepts a single argument. In this example,
-that single argument happens to be a destructured tuple. This appears very
-similar to the `JavaScript` arguments. However, the difference is apparent
-when supplying those arguments as first class. In `JavaScript`, arguments
-are an array, and supplying *all* of the arguments requires `.apply`.
-In `Reason`, you may simply supply the tuple.
+Lorsque vous utilisez Reason, chaque fonction accepte un seul argument. Dans cet exemple, ce seul argument se trouve être un tuple déstructuré. Cela semble très semblable aux arguments JavaScript. Cependant, la différence est apparente lorsqu'on fournit ces arguments en première classe. En JavaScript, les arguments sont un arry et fournir tous les arguments nécessite un `.apply`. En Reason, vous pouvez simplement fournir le tuple.
 
 <table>
   <thead><tr> <th scope="col"><p >JavaScript</p></th> <th scope="col"><p>Reason</p></th></tr></thead>
@@ -193,15 +179,9 @@ let result = add myArgs;</pre>
   </tr>
 </table>
 
-### Function Application
+### Application de fonction
 
-In `Reason`, parentheses are typically optional in places where it is obvious
-they aren't needed. This means that when invoking functions, parentheses
-aren't always required around the argument. `Reason` will let you add the
-parentheses if you really want them, but it's good to know why some samples
-you read have omitted them. See how in this example, arguments that are clearly
-single words, or that have balanced "bookends" (such as `{ }`) do not need
-the parentheses.
+En Reason, les parenthèses sont généralement facultatives dans les endroits où il est évident qu'elles ne sont pas nécessaires. Cela signifie que lorsque vous invoquez des fonctions, les parenthèses ne sont pas toujours nécessaires autour de l'argument. Reason vous laissera ajouter des parenthèses si vous les voulez vraiment, mais il est bon de savoir pourquoi certains examples que vous avez lus les ont omis. Voyez comment, dans cet exemple, les arguments qui sont clairement des mots simples ou qui ont des "bookends" équilibrés (tels que `{}`) n'ont pas besoin de parenthèses.
 
 <table>
   <thead><tr> <th scope="col"><p >JavaScript</p></th> <th scope="col"><p>Reason</p></th></tr></thead>
@@ -229,13 +209,9 @@ let result = aFunc {x:0};</pre>
   </tr>
 </table>
 
-### Currying
+### Curryfication
 
-Both `JavaScript` and `Reason` support currying, but with `Reason`, when using
-the native compiler (or even a `JavaScript` backend), currying is optimized.
-(Specifically, you are not penalized for currying in `Reason`, whenever you
-happen to supply all the arguments). The main syntactic difference when defining
-curried functions is that `Reason` lambdas always begin with the `fun` keyword.
+Aussi bien JavaScript que Reason supportent la curryfication, mais avec Reason, quand vous utilisez le compilateur natif (ou même un backend JavaScript), la curryfication est optimisée. Pour être plus précis : chaque fois que vous arrivez à fournir tous les arguments, le fait de curryfié n'est pas pénalisé en Reason. La principale différence syntaxique lors de la définition des fonctions curryfiées est que les lambdas de Reason commencent toujours par le mot-clé `fun`.
 
 <table>
   <thead><tr> <th scope="col"><p >JavaScript</p></th> <th scope="col"><p>Reason</p></th></tr></thead>
@@ -245,8 +221,7 @@ curried functions is that `Reason` lambdas always begin with the `fun` keyword.
   </tr>
 </table>
 
-When invoking curried functions, the syntax is the same, but with `Reason`,
-supplying the parenthesis is optional.
+Quand vous invoquez des fonctions curryfiées, la syntaxe est identique, mais avec Reason, l'ajout de parenthèses est facultatif.
 
 <table>
   <thead><tr> <th scope="col"><p >JavaScript</p></th> <th scope="col"><p>Reason</p></th></tr></thead>
@@ -268,11 +243,7 @@ supplying the parenthesis is optional.
   </tr>
 </table>
 
-Because `Reason` lambdas include the `fun` keyword, curried functions don't
-appear as clean as they do in `JavaScript`. To remedy this, `Reason` includes a
-syntactic sugar to help with curried function definitions. The two forms
-are *exactly* equivalent and nothing changes about how you would invoke these
-functions.
+Parce que les lambdas Reason incluent le mot-clé `fun`, les fonctions curryfiées ne semblent pas être aussi *clean* qu'elles le sont en JavaScript. Pour remédier à cela, Reason intègre un peu de *sucre syntaxique* pour aider avec les définitions de fonctions curryfiées. Ces deux formes sont *en tout point* équivalentes et rien ne change quant à la façon dont vous invoqueriez ces fonctions.
 
 <table>
   <thead><tr> <th scope="col"><p >JavaScript</p></th> <th scope="col"><p>Reason</p></th></tr></thead>
@@ -286,7 +257,7 @@ functions.
   </tr>
   <tr>
     <td>
-      <pre>// No syntactic sugar needed</pre>
+      <pre>// Pas besoin de sucre syntaxique</pre>
     </td>
     <td>
       <pre>let add = fun a b => a + b;</pre>
@@ -295,12 +266,9 @@ functions.
 </table>
 
 
-### Record Fields
+### Champs de record
 
-In `Reason`, you must ensure your record literal has an unambiguous type if you
-want to create records or access record fields. In the simplest case, the record
-type is already in scope and you can unambiguously create values just by using
-the standard `{ key: value }` syntax.
+En Reason, vous devez vous assurer que la déclaration de votre record a un type non ambigu si vous souhaitez créer des records ou accéder à des champs de record. Dans le cas le plus simple, le type du record est déjà dans le scope et vous pouvez créer des valeurs simplement en utilisant la syntaxe `{key: value}` standard.
 
 <table>
   <thead>
@@ -326,7 +294,7 @@ the standard `{ key: value }` syntax.
   };
   let make id name => { id: id, name: name };
   /&ast;
-  Alternatively, using field name punning,
+  Ou en utilisant le raccourci de nom de champ,
   let make id name => { id, name };
   &ast;/
 };</pre>
@@ -334,17 +302,9 @@ the standard `{ key: value }` syntax.
   </tr>
 </table>
 
-When the record type is declared in a different module, you have to give Reason
-a little guidance on which exact type you mean, because different record types
-in different modules can share field names.
+Lorsque le type du record est déclaré dans un module différent, vous devez donner quelques informations à Reason quant au type exact que vous voulez, car différents types de record dans différents modules peuvent partager des noms de champs.
 
-In order of safety, it's preferred to either (1) prefix at least one record
-field with the module name to uniquely identify the record type (safest), (2)
-prefix the record literal with a temporary module open to bring the record type
-into scope (slightly less safe--brings all names from the opened module into
-scope for the rest of the expression), or (3) open the entire module to bring
-the record type into scope (least safe--brings all names from the opened module
-into scope for the rest of the block).
+Par soucis de sécurité, il est préférable de 1. préfixer au moins un champ d'enregistrement avec le nom du module pour identifier de manière unique le type du record (le plus sûr), 2. préfixer la déclaration du record avec un module temporaire ouvert pour amener le type du record dans le scope (légèrement moins sûr - amène tous les noms du module ouvert dans le scope du reste de l'expression), ou 3. ouvrez le module entier pour que le type du record atteigne le champ d'application (le moins sûr - apporte tous les noms de l'ouverture module dans la portée pour le reste du bloc).
 
 <table>
   <thead>
@@ -385,12 +345,8 @@ let bob = {
 
 ### Expressions
 
-If it wasn't already clear, in Reason, almost everything is an expression. For
-example, in `Reason`, the `switch` statement *evaluates* to a value, which makes
-programming less error prone. Notice how in the `JavaScript` version, there is
-some time when the program is in an invalid state.  The switch statement in
-`Reason` also provides many more super powers, discussed in [Pattern
-Matching](./index.html#diving-deeper-expressive-pattern-matching).
+Si ce n'était pas déjà clair, en Reason, quasiment tout est une expression. Par exemple, en Reason, l'instruction `switch` est évaluée en une valeure, ce qui rend la programmation moins propice aux erreurs. Notez comment, dans la version JavaScript, il y a certaines fois où le programme est dans un état non valide. L'instruction switch en Reason fournit également beaucoup plus de *superpouvoirs*, abordés dans la partie [Pattern
+Matching](/guide/language/destructuring).
 
 <table>
   <thead><tr> <th scope="col"><p >JavaScript</p></th> <th scope="col"><p>Reason</p></th></tr></thead>

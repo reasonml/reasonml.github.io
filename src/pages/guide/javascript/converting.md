@@ -3,24 +3,24 @@ title:  Convertir depuis JS
 order: 5
 ---
 
-Preparation
+Préparation
 -------
 
-**Before you proceed**, please make sure that Reason is what your team needs! As much as we vouch for Reason and BuckleScript's popularity, please don't unnecessarily thrash your colleagues and give them a bad first impression. That's hard to undo afterward.
+**Avant de procéder**, assurez-vous que Reason est ce dont votre équipe a besoin ! Certes nous voudrions voir croître la popularité de Reason et BuckleScript, mais ne dérangez pas inutilement vos collègues, en leur donnant une mauvaise première impression qui plus est. C'est difficile à défaire après coup.
 
-This guide covers a workflow that's helped us convert things over rapidly and efficiently. It's not intended to go over language/FFI features (though it puts them in context). Basic Reason/BuckleScript knowledge is assumed.
+Ce guide couvre un workflow qui nous a aidé à convertir les choses rapidement et de façon efficace. Il n'est pas destiné à passer en revue les fonctionnalités du langage (bien que cela les mettent en contexte). Des connaissances de base en Reason/BuckleScript sont un prérequis.
 
-Syntax
+Syntaxe
 -------
 
-**Goal**: first and foremost, **make the file syntactically valid**. Don't care about wrong types, missing modules, bad file organization, too many externals, etc. We'll come back to clean these up after setting up the regression test that is "no more syntax errors".
+**Objectif**: tout d'abord, **rendre le fichier syntaxiquement valide**. Ne vous souciez pas des types incorrects, des modules manquants, de la mauvaise organisation des fichiers, d'autres externals, etc. Nous reviendrons pour les nettoyer après avoir configuré le test de régression pour qu'il n'y ait "pas d'erreurs de syntaxe".
 
-Since the Reason syntax resembles enough to that of JavaScript, instead of starting a new Reason file, just copy over an existing js file and work on top of it.
+Étant donné que la syntaxe Reason ressemble à celle de JavaScript, au lieu de créer un nouveau fichier Reason, il suffit de copier sur un fichier js existant et de travailler en haut de celui-ci.
 
-*Tip*: don't forget that you can use `refmt` in your editor/terminal! If you don't know e.g. the precedence of some operations, wrap them in as many parentheses as you wish, then `refmt` your code and see which ones remain. Likewise, no need to lose time on indentations and spacing; `refmt` takes care of them.
+*Conseil*: n'oubliez pas que vous pouvez utiliser `refmt` dans votre éditeur/terminal ! Si par exemple vous ne connaissez pas la préséance de certaines opérations, enveloppez-les dans autant de parenthèses que vous le souhaitez, puis `refmt`-ez votre code et voyez celles qui restent. De même, il n'est pas nécessaire de perdre du temps sur les indentations et l'espacement; `refmt` prend soin d'eux.
 
 ```reason
-/* original JS file you've copied over */
+/* fichier JS original que vous avez copié */
 const school = require('school');
 
 const defaultId = 10;
@@ -33,20 +33,20 @@ function queryResult(usePayload, payload) {
 }
 ```
 
-Here are some of the things you'd do at this step:
+Voici certaines choses que vous feriez à cette étape :
 
-- Convert the function call syntax over.
+- Convertir la syntaxe d'appel de fonction.
 
-- Convert the `var`/`const` over to `let`.
+- Convertir les `var`/`const` en `let`.
 
-- Hide the `require`s.
+- Commenter les `require`s.
 
-- Make other such changes. For idioms that don't have a BuckleScript equivalent, use `bs.raw` ([documentation](http://bucklescript.github.io/bucklescript/Manual.html#_embedding_arbitrary_js_code_as_an_expression)).
+- Effectuer d'autres changements similaires. Pour les expressions idiomatiques qui n'ont pas d'équivalent, BuckleScript utilise `bs.raw` ([documentation](http://bucklescript.github.io/bucklescript/Manual.html#_embedding_arbitrary_js_code_as_an_expression)).
 
-Again, **worry only about making the file syntactically valid**. Trying to learn all three of syntax, types and other semantics while converting over a file reduces your iteration speed to less than a third.
+Encore une fois, **ne vous inquiétez que de rendre le fichier syntaxiquement valide**. Essayer d'apprendre les trois syntaxes, les types et autres sémantiques lors de la conversion d'un fichier réduit votre vitesse d'itération à moins d'un tiers.
 
 ```reason
-/* syntactically valid, semantically wrong conversion */
+/* syntaxe valide, conversion sémantiquement incorrecte */
 /* const school = require('school'); */
 
 let defaultId = 10;
@@ -55,63 +55,64 @@ let queryResult usePayload payload => {
   if (usePayload) {
     payload.student
   } else {
-    /* no need for early return in Reason; if-else is an expression */
+    /* pas besoin de return anticipé en reason; if-else est une expression */
     school.getStudentById defaultId;
   }
 };
 ```
 
-Types, Pass 1
+Types, Passe 1
 -------
 
-**Goal**: correct the types, but just enough to move onto the next step.
+**Objectif**: corriger les types, mais juste assez pour passer à la prochaine étape.
 
-You might still occasionally get syntax errors, but not as drastic as the previous step's.
+Vous pouvez parfois obtenir des erreurs de syntaxe, mais pas aussi drastiques que l'étape précédente.
 
-- Change `foo.bar` to `foo##bar`. This escape-hatch [BuckleScript feature](http://bucklescript.github.io/bucklescript/Manual.html#_how_to_consume_js_property_and_methods) will be your medium-term friend.
+- Changer `foo.bar` en `foo##bar`. Cette [fonctionnalité *escape-hatch* de BuckleScript](http://bucklescript.github.io/bucklescript/Manual.html#_how_to_consume_js_property_and_methods) sera votre ami à moyen terme.
 
-- Convert `{foo: bar}` to `[%bs.obj {foo: bar}]` ([docs](http://bucklescript.github.io/bucklescript/Manual.html#_create_js_objects_using_bs_obj)). After `refmt`, this will sugar to `{"foo": bar}`.
+- Convertir `{foo: bar}` en `[%bs.obj {foo: bar}]` ([docs](http://bucklescript.github.io/bucklescript/Manual.html#_create_js_objects_using_bs_obj)). Après `refmt`, le tout sera *sucré* en `{"foo": bar}`.
 
-- To communicate with external JS files, use `external`. They're BuckleScript's [foreign function interface](http://bucklescript.github.io/bucklescript/Manual.html#_ffi).
+- Pour communiquer avec des fichiers JavaScript externes, utilisez `external`. Ils sont [l'interface de fonction étrangère](http://bucklescript.github.io/bucklescript/Manual.html#_ffi) de BuckleScript.
 
-  - Inline externals. No need to create clean, well-separated files for externals for now. We'll come back to these.
+  - Externals inline. Pas besoin de créer des fichiers propres et bien séparés pour les externals pour l'instant. Nous reviendrons là-dessus.
 
-  - If it's too cumbersome to correctly type an `external`'s input/output, use some placeholder polymorphic types, e.g. `external getStudentById: 'whatever => 'whateverElse = ...`.
+  - S'il est trop compliqué de saisir correctement une entrée/sortie d'un external, utilisez certains types polymorphiques *par défaut*, par exemple : `external getStudentById: 'whatever => 'whateverElse = ...`.
 
-  - For data types & patterns that are hard to properly convert over, you can occasionally create converters like `external unsafeCast : myPayloadType => anotherDataType = "%identity";`.
+  - Pour les types et modèles de données difficiles à convertir correctement, vous pouvez parfois créer des convertisseurs comme `external unsafeCast : myPayloadType => anotherDataType = "%identity";`.
 
-This is the first pass; the final types likely look different. For now, reap the rewards! Once you're finally done fixing all the type errors, your JS file should now be generated. Keep it open side-by-side. Time to come back and fix all the hacks!
+C'est la première passe, les types finaux semblent différents. Pour l'instant, récoltez les récompenses ! Une fois que vous avez fini de réparer toutes les erreurs de type, votre fichier JS devrait maintenant être généré. Gardez-le ouvert à côte. Il est temps de revenir et de réparer tous les hacks !
+
 
 ```reason
-/* syntactically valid, still semantically wrong, but better */
+/* syntaxiquement valide, toujours sémantiquement faux, mais mieux */
 external getStudentById: 'whatever => 'whateverElse = "getStudentById" [@@bs.module "school"];
 
 let defaultId = 10;
 
 let queryResult usePayload payload => {
   if (usePayload) {
-    payload##student /* this will be inferred as `Js.t 'a` */
+    payload##student /* cela sera déduit comme `Js.t 'a` */
   } else {
     getStudentById defaultId;
   }
 };
 ```
 
-Runtime Semantics
+Sémantiques d'exécution
 -------
 
-**Goal**: fix the errors in the generated JS output.
+**Objectif**: corriger les erreurs dans le JS généré.
 
-Compare it with your old JS file. The output is likely incorrect; you probably mis-converted some idioms and mistyped some externals.
+Comparez-le avec votre ancien fichier JS. Le résultat est probablement incorrect. Vous avez probablement mal converti certaines expressions idiomatiques et avez mal écrit des internals.
 
-- Type the shape of JS objects (the things that required `##`).
+- Typez la forme des objets JS (les choses nécessitant `##`).
 
-- Convert whichever parts to records/variants/idiomatic OCaml types.
+- Convertissez les pièces par rapport aux records/variants/types idiomatiques OCaml.
 
-All this time, check the output for any change.
+Vérifiez le résultat en quête de n'importe quel changement.
 
 ```reason
-type student; /* abstract type, described later */
+type student; /* type abstrait, décrit plus tard */
 external getStudentById: 'whatever => student = "getStudentById" [@@bs.module "school"];
 
 type payloadType = Js.t {. student: student};
@@ -127,21 +128,20 @@ let queryResult usePayload (payload: payloadType) => {
 };
 ```
 
-Clean Up (Types, Pass 2)
+Nettoyage (Types, Passe 2)
 -------
 
-**Goal**: make your types legit (aka, sound).
+**Objectif**: rendre vos types *legit* (aka, *sound*).
 
-Go back fix whatever you've left during the first pass.
+Reprenez tout bug que vous auriez laissé pendant la première passe et corrigez-le.
 
-- Make sure you don't have any `'whatever` types left in `external`s.
+- Assurez-vous que vous n'avez aucun type `whatever` dans vos `internals`.
 
-- You can keep the `external`s inlined, or pull them out into a file.
-
+- Vous pouvez conserver vos `externals` inlined, ou les extraire dans un fichier.
 
 ```reason
-/* in the current file */
-type payloadType = Js.t {. student: School.student}; /* TODO: put this somewhere else! */
+/* dans le fichier actuel */
+type payloadType = Js.t {. student: School.student}; /* TODO: mettre ça ailleurs ! */
 
 let defaultId = 10;
 
@@ -155,24 +155,24 @@ let queryResult usePayload (payload: payloadType) => {
 ```
 
 ```reason
-/* in a dedicated School.re file */
+/* dans un fichier School.re dédié */
 type student;
 external getStudentById: int => student = "getStudentById" [@@bs.module "School"];
 external getAllStudents: unit => array student = "getAllStudents" [@@bs.module "School"];
 ```
 
-Type `student` doesn't have an actual content; that's called an [abstract type](#modules-signatures). It's a convenient way of specifying the relationship between external calls without knowing what the shape of the data is under the hood.
+Le type `sudent` n'a pas de contenu réel, c'est ce qu'on appelle [un type abstrait](#modules-signatures). C'est un moyen pratique de spécifier la relation entre les appels externes sans savoir quelle est la forme des données sous le capot. 
 
-And then you're done!
+Et vous avez terminé !
 
 
-Tips
+Conseils
 -------
 
-**Don't** try to fully convert a JS file into a pristine Reason file in a single shot. Such method might actually slow you down! It's fine to have externals and `bs.obj` left, and temporarily not take advantage of nice OCaml features (variants, labelled arguments, etc.). Once you've converted a few other related files, you can come back and now refactor **faster** by banking on the type system.
+**N'essayez pas** de convertir complètement un fichier JS en un fichier Reason immaculé d'un seul coup. Une telle méthode pourrait réellement vous ralentir ! Ce n'est pas grave d'avoir des externals et `bs.obj` de côté, et de ne pas profiter des super fonctionnalités OCaml (variants, arguments labellés, etc.) temporairement. Une fois que vous avez converti quelques autres fichiers connexes, vous pouvez revenir et refactorer **rapidement** en vous reposant sur le système de typage.
 
-Whatever nice utilities you find (e.g. convert a `Js.null_undefined Js.boolean` to a `bool`), put them in a `tempUtils.re` file or something. They're easy examples for your colleagues and removes some conversion churns.
+Quels que soient les utilitaires agréables que vous trouveriez (par exemple, convertir un `Js.null_undefined Js.boolean` vers un `bool`), placez-les dans un fichier `tempUtil.re` ou quelque chose comme ça. Ils sont des exemples faciles pour vos collègues et réduisent certains problèmes de conversion.
 
-We **highly recommend** you to check the JS output into version control. It makes your build system integration quasi-nonexistent, and makes sure that when you're not there, your teammates can make small changes, audit the output diff, and catch any mistakes. It's also a great selling point that the checked in JS output is friendly to emergency hot patches (a big selling point for managers!). Even if you're upgrading BuckleScript version, you'd catch any output difference. It's like [Jest snapshots](https://facebook.github.io/jest/docs/snapshot-testing.html), for free!
+Nous vous **recommandons vivement** de vérifier le résultat JS dans le contrôle de version. Cela rend l'intégration de système de build quasi inexistante et vous assure que lorsque vous n'êtes pas là, vos coéquipiers peuvent faire de petits changements, auditer le diff de sortie et catch n'importe quelle erreur. Le fait que la sortie JavaScript enregistrée soit compatible avec des correctifs d'urgence est un bon argument de vente (surtout auprès des managers !). Même si vous mettez à niveau la version de BuckleScript, vous allez catch n'importe quelle différence de sortie. C'est comme des [snapshots Jest](https://facebook.github.io/jest/docs/snapshot-testing.html), mais gratuitement !
 
-As always, ping us on [Discord](https://discord.gg/reasonml) for more help!
+Comme toujours, contacez-nous sur [Discord](https://discord.gg/reasonml) pour plus d'aide !

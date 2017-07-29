@@ -3,8 +3,7 @@ title: JavaScript
 order: 4
 ---
 
-Reason compiles to JavaScript and native code. The workflows for each are **currently separated**. This page describes the JavaScript workflow. Our native workflow is currently work-in-progress and can be seen [here](./nativeWorkflow.html).
-Whenever you get stuck:
-- Check out the [frequently asked questions](/community/faq).
-- Peruse some [code examples](/community/examples).
-- Ask us questions on [Discord](https://discord.gg/reasonml)!
+Reason compile en JavaScript et en code natif. Les workflows pour chacun d'eux sont actuellement séparés. Cette page décrit le workflow JavaScript. Notre workflow natif est en *work-in-progress* et peut être vu [ici](./native). Chaque fois que vous coincé :
+- Référez-vous à la [FAQ](/community/faq).
+- Lisez attentivement certains [exemples](/community/examples).
+- Posez-nous vos questions sur [Discord](https://discord.gg/reasonml) !

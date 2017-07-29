@@ -1,8 +1,8 @@
 ---
 title: Librairies
-order: 2
+order: 3
 ---
 
-Libraries that have already been wrapped with bucklescript bindings are customarily prefixed with `bs-`, e.g. `bs-director`. [Here's a search](https://www.npmjs.com/search?q=keywords:bucklescript) for all of the bucklescript related libraries on npm.
+Les bibliothèques qui ont déjà été englobées par des bindings BuckleScript sont généralement préfixées avec `bs-`, ex: `bs-director`. [Voici une recherche](https://www.npmjs.com/search?q=keywords:bucklescript) de toutes les librairies liées à BuckleScript sur npm.
 
-TODO give an example of working with e.g. momentjs.
+TODO : donner un example de comment travailler avec momentjs par exemple.

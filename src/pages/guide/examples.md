@@ -33,14 +33,14 @@ let result: response universityStudent = fetchDataFromServer ();
 
 ### Création d'un Object JS
 
-En supposant que vous êtes entrain de [compiler vers JS](./gettingStarted.html#javascript-workflow), bien évidemment.
+En supposant que vous êtes entrain de [compiler en JS](./gettingStarted.html#javascript-workflow), bien évidemment.
 
 ```reason
 let obj1 = {
   "name": "John",
   "age": 30
 };
-/* Compile vers un objet JS qui ressemble exactement à ce que vous voyez là */
+/* Compile en un objet JS qui ressemble exactement à ce que vous voyez là */
 ```
 
 Vous noterez que ce qui précède n'est pas un record. Les clés sont encapsulées dans une string via le apostrophes. C'est le *syntax sugar* de Reason pour [bs.obj](http://bucklescript.github.io/bucklescript/Manual.html#_create_js_objects_using_bs_obj). Le type est déduit. L'exemple suivant l'identifie explicitement.

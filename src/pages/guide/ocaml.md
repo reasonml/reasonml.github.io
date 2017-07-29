@@ -144,11 +144,11 @@ La syntaxe `{}` en Reason supprime plusieurs *pain points* communément signalé
 - Les doubles point-virgules sont complètement retirés.
 - `begin`/`end` est complètement retiré.
 - Les fameux [problèmes](https://github.com/ocaml/ocaml/pull/278) de parsing impératif ont disparu.
-- Les *bodies* et *local scope* des modules ont été unifiés.
+- Les *corps* (*bodies*) et *local scope* des modules ont été unifiés.
 
-### Scope local Vs. Module Bodies
+### Scope local Vs. Corps de module
 
-En Reason, tout ce qui peut être écrit entre les `{}` peut être dans le [scope Local](#reason-vs-ml-syntax-local-scope) ou les *module bodies*. Vous pouvez même généralement copier/coller votre code entre ces deux contextes. En OCaml, les syntaxes pour les deux contextes sont très différentes. Le *scope local* requiert un *trailing* `in`, mais pas les *module bodies*. Par ailleurs, certaines déclarations impératives doivent être assignées à `_` ou `()`, voir utiliser un double `;;`).
+En Reason, tout ce qui peut être écrit entre les `{}` peut être dans le [scope Local](#reason-vs-ml-syntax-local-scope) ou les *corps de module*. Vous pouvez même généralement copier/coller votre code entre ces deux contextes. En OCaml, les syntaxes pour les deux contextes sont très différentes. Le *scope local* requiert un *trailing* `in`, mais pas les *corps de module*. Par ailleurs, certaines déclarations impératives doivent être assignées à `_` ou `()`, voir utiliser un double `;;`).
 Reason simplifie grandement la syntaxe pour les nouveaux _et_ les plus expérimentés des développeurs ML.
 
 <table>
