@@ -1,6 +1,6 @@
 ---
 title: Events
-order: 3
+order: 30
 ---
 
 There are a few Reason meetups around the world, among others:

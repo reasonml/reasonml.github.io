@@ -1,6 +1,6 @@
 ---
 title: Frequently Asked Questions
-order: 9
+order: 40
 ---
 Frequently Asked Questions
 =======
@@ -54,6 +54,9 @@ Assuming `MyModule` is a module's name, `t` is a community convention that indic
 
 #### Why is there a [`Js_promise`](http://bucklescript.github.io/bucklescript/api/Js_promise.html) and then a [`Js.Promise`](http://bucklescript.github.io/bucklescript/api/Js.Promise.html)? What about [`Js_array`](http://bucklescript.github.io/bucklescript/api/Js_array.html), [`Js_string`](http://bucklescript.github.io/bucklescript/api/Js_string.html) and whatever else?
 As a convention, `Js_foo` is the actual module, and `Js.Foo` is just an alias for it. They're [equivalent](https://github.com/bloomberg/bucklescript/blob/7bc37f387a726ba1ae4afeefe02b9c82577d9e10/jscomp/runtime/js.ml#L124-L138). Prefer `Js.Foo`, because that's the official, public module name.
+
+#### When will modular implicit & multicore & algebraic effects be ready?
+They will one day. In the meantime, help us ship more Reason code! The popularity will help funnel more OCaml contributions. The less the OCaml folks need to worry about low-hanging fruits, the more they can focus on great research and execution!
 
 #### Why are BuckleScript and bsb so fast? How can I slow it down?
 BuckleScript is optimized for performance across the whole stack. You can try slowing it down by adding a dozen layers of indirections and metaprogramming. Try:

@@ -1,13 +1,23 @@
 ---
 title: Types!
-order: 120
+order: 15
 ---
 
-Drumroll! You probably came to Reason for the types! (Or the friendly community, or the interesting tweets, or the hype.)
+Types are the highlight of Reason! Here, you get a glimpse of why so many are excited about them.
+
+This section briefly introduces the types syntax so that you can power through the subsequent sections without getting confused. More advanced topics on types can be found in the [More On Types](/guide/language/more-on-types) section.
 
 ### Type Annotations
 
-Types can be inferred or explicitly written down by choice.
+Types can be inferred (aka deduced by the type system):
+
+```reason
+let score = 10;
+```
+
+Reason knows that `score` is an `int`, judging by the value `10`.
+
+Types can also be explicitly written down by choice:
 
 ```reason
 let score: int = 10;
@@ -17,14 +27,13 @@ You can also wrap an expression in parentheses and annotate it:
 
 ```reason
 let myInt = 5;
-let myInt = (5 : int);
-let myInt = (5 : int) + (4 : int);
+let myInt = (5: int);
+let myInt = (5: int) + (4: int);
 let add (x: int) (y: int) :int => x + y;
 let drawCircle radius::(r: int) :unit => ...;
 ```
 
-Note: in the last line, `radius::(r: int)` is a labeled argument.
-More on this [here](https://reasonml.github.io/guide/language/functions).
+Note: in the last line, `radius::(r: int)` is a labeled argument. More on this [here](/guide/language/functions).
 
 ### Type Aliases
 
@@ -35,173 +44,10 @@ type scoreType = int;
 let x: scoreType = 10;
 ```
 
-#### Mutually Recursive Types
+### Design Decisions
 
-Just like functions, types can be mutually recursive through `and`:
+Reason is backed by OCaml, whose type system has received decades of engineering. Here are a few highlights:
 
-```reason
-type student = {taughtBy: teacher}
-and teacher = {students: list student};
-```
-
-**Note** that there's no semicolon ending the first line and no `type` on the second line.
-
-#### Type Arguments
-
-Types can be "parameterized" (akin to generics in other languages). It's as if a type is a function that takes in arguments and returns a new type. The parameters need to start with `'`.
-
-Types with parameters allow us to kill duplications. Before:
-
-```reason
-/* this is a tuple of 3 items, explained next */
-type intCoordinates = (int, int, int);
-type floatCoordinates = (float, float, float);
-
-let buddy: intCoordinates = (10, 20, 20);
-```
-
-After:
-
-```reason
-type coordinates 'a = ('a, 'a, 'a);
-
-/* apply the coordinates "type function" and return the type (int, int, int) */
-type intCoordinatesAlias = coordinates int;
-let buddy: intCoordinatesAlias = (10, 20, 20);
-
-/* or, more commonly, write it inline */
-let buddy: coordinates float = (10.5, 20.5, 20.5);
-```
-
-In practice, types are inferred for you. So the more concise version of the above example would be nothing but:
-
-```reason
-let buddy = (10, 20, 20);
-```
-
-The type system infers that it's a `(int, int, int)`. Nothing else needed to be written down.
-
-Type arguments appear everywhere.
-
-```reason
-/* inferred as `list string` */
-let greetings = ["hello", "world", "how are you"];
-```
-
-If types didn't accept parameters (aka, if we didn't have "type functions"), the standard library will need to define the types `listOfString`, `listOfInt`, `listOfTuplesOfInt`, etc.
-
-Types can receive more arguments, and be composable.
-
-```reason
-type result 'a 'b =
-| Ok 'a
-| Error 'b;
-
-type myPayload = {data: string};
-
-type myPayloadResults 'errorType = list (result myPayload 'errorType);
-
-let payloadResults: myPayloadResults string = [
-  Ok {data: "hi"},
-  Ok {data: "bye"},
-  Error "Something wrong happened!"
-];
-```
-
-Exceptions
-----------
-
-Exceptions are just a special kind of [variant](variant), "thrown" in **exceptional** cases (don't abuse them!). When you have ordinary variants, you often don't **need** exceptions, since you can just use variants types such as `type result` above.
-
-```reason
-try (somethingThatThrows ()) {
-| Not_found => print_endline "Item not found!"
-| Invalid_argument message => print_endline message
-};
-```
-
-You can make your own exceptions like you'd make a variant (exceptions need to be capitalized too).
-
-```
-exception InputClosed string;
-...
-raise (InputClosed "the stream has closed!");
-```
-
-Objects
-----------------------------------
-Although functions are the preferred way of working within Reason, it's also possible to use
-objects.
-
-An object encapsulates data that it stores within fields, and has methods that can be invoked
-against the data it has.
-
-##### Declaring an object type
-An object can have an object type to define its structure.
-
-```reason
-type tesla = {
-  .
-  color: string
-};
-```
-The extra dot at the beginning is to indicate that this is a closed object type, which means that
-an object based on this type must have exactly this public structure.
-
-```reason
-type car 'a = {
-  ..
-  color: string
-} as 'a;
-```
-Two dots, also called an elision, indicate that this is an open object type, and therefore
-can also contain other values and methods. An open object is also polymorphic and therefore
-requires a parameter.
-
-An object type is not required to create an object.
-
-##### Creating an object
-```reason
-type tesla = {
-  .
-  drive: int => int
-};
-
-let obj:tesla = {
-  val hasEnvy = {contents: false};
-  pub drive speed => {
-    this#enableEnvy true;
-    speed
-  };
-  pri enableEnvy envy => {
-    hasEnvy.contents = envy
-  };
-};
-```
-This object is of object type tesla and has a public method `drive`. It also contains a
-private method `enableEnvy` that is only accesible from within the object.
-
-The following example shows an open object type which uses a type as parameter. The
-object type parameter is required to implement all the methods of the open object
-type.
-
-```reason
-type tesla 'a = {
-  ..
-  drive: int => int
-} as 'a;
-
-let obj:
-  tesla {. drive: int => int, doYouWant: unit => bool}
-  = {
-  val hasEnvy = {contents: false};
-  pub drive speed => {
-    this#enableEnvy true;
-    speed
-  };
-  pub doYouWant () => hasEnvy.contents;
-  pri enableEnvy envy => {
-    hasEnvy.contents = envy
-  };
-};
-```
+- We don't have a "type coverage" tool; **the coverage is always 100%**. Every piece of Reason code has a type. If you don't write it down manually, it'll be deduced (inferred) by the type system.
+- The type system is completely "sound", meaning that every type guarantees that it's not lying about itself. In a conventional, best-effort type system, just because the type says it's e.g. "an integer that's never null", doesn't mean it's actually never null. In contrast, a Reason program has no null bugs
+- The types are entirely inferable (barring some exceptional features). You'd usually never have to annotate values yourself; editor features like [VSCode's codelens](https://github.com/reasonml-editor/vscode-reasonml) show you all the types while you write code. Feel free you write out the types manually though!

@@ -1,6 +1,6 @@
 ---
 title: Examples
-order: 1
+order: 20
 template: ./examples.js
 ---
 

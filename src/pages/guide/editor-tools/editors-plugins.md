@@ -1,5 +1,5 @@
 ---
-title: Editor Setup
+title: Editors Plugins
 order: 20
 ---
 

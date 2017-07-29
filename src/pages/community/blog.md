@@ -17,7 +17,7 @@ The new documentation website is built by our community member [Jared](https://j
 
 June 12, 2017
 
-Very exciting release! Short version: ReasonReact now has its own documentation site [here](https://reasonml.github.io/reason-react/). Accompanying this is the new [BuckleScript](https://www.npmjs.com/package/bs-platform) release. Both are non-breaking.
+Very exciting release! Short version: ReasonReact now has its own documentation site [here](//reasonml.github.io/reason-react/). Accompanying this is the new [BuckleScript](https://www.npmjs.com/package/bs-platform) release. Both are non-breaking.
 
 Enjoy!
 

@@ -12,7 +12,7 @@ And then run it as usual:
 cd my-first-app
 npm run build
 ```
-You can also build in watch mode: 
+You can also build in watch mode:
 ```sh
 npm run watch
 ```

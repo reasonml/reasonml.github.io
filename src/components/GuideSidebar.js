@@ -69,7 +69,7 @@ const styles = {
   },
 
   node: {
-    
+
   },
 
   li: {

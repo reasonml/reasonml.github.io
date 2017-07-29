@@ -1,21 +1,35 @@
 ---
-title: Roadmap
-order: 2
+title: Roadmap & Contribution
+order: 50
 ---
 
-> Here's where we talk about what's being done, what needs to be done, etc.
+### Reason Team TODOs
 
-Near future
+Here's the place to keep up with what's happening for the Reason team! This list isn't exhaustive and might change.
 
+#### Near future
+
+- Validating secret ReasonReact feature, then release it
+- Another secret feature
 - Syntax change: JavaScript-style function calls [pull request](https://github.com/facebook/reason/pull/1299)
-- data structures [immutable.re]()
-- native compilation in bucklescript's `bsb` (see [this fork](https://github.com/bsansouci/bsb-native))
+- Testing data structures [immutable.re](https://github.com/facebookincubator/immutable-re)
+- Native compilation in bucklescript's `bsb` (see [this fork](https://github.com/bsansouci/bsb-native))
+- BuckleScript gets package-based namespacing (no more conflicts with other packages' file names)
 
-Future
+#### Future
 
-- bucklescript gets package-based namespacing (no more conflicts with other packages' file names)
-- figuring out async
-- ...
+- Better async story
+- Better dev-time printing facility
+- Better JSON facilities
+- Sleep more
 
-Far future
-- get cross-compilation to android, ios working well
+### Your Contribution Opportunities
+
+Wanna help?
+
+- [Better documentation site](https://github.com/reasonml/reasonml.github.io/issues)
+- Contribute to [your favorite editor plugin for Reason](/guide/editor-tools/supported-editors#officially-supported-editors)
+- On that note: better [ocaml-language-server](https://github.com/freebroccolo/ocaml-language-server). This will potentially power all our editor integration in the future.
+- Come up with more [project names starting with "re"](https://github.com/reasonml/ideas-for-project-names-starting-with-re)
+- Whatever project you'd normally do in JavaScript, try it in Reason + BuckleScript!
+- Talk about Reason and BuckleScript!

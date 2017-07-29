@@ -61,10 +61,16 @@ switch (isWindowOpen, isDoorOpen) { /* this is a 2-tuple */
 
 Try to keep the usage of tuple **local**. For data structures that are long-living and passed around often, prefer a **record**, which has named fields.
 
+A tuple type might also be called a "product type", and `(string, int)` is written as `string * int` in some places. The idea is that a tuple is really a "cartesian product"; imagine a 2D grid, with `string` on the x axis and `int` on the y axis!
+
+The combination of tuple + `switch` is very powerful and concise, and **wipes out an entire category of bugs**. Together, they cleanly list out all the possible combinations of values. A tuple of type `(bool, bool)` indeed has `2 * 2 = 4` possibilities, and the type system asks you to cover all 4. This lends itself well to code refactors; instead of informally adding a few if-else on arbitrary values here and there, you can directly pinpoint the exact `switch` branch you need to alter, no more and no less.
+
 ### Design Decisions
 
 Tuple's existence might seem odd for those coming from untyped languages. "Why not just use a list/array?"
 
 A type system isn't all-powerful, nor should it be; some tasteful trade-offs need to be applied in order to keep the language simple, performant (both compilation and running speed) and easy to understand. Reason lists, for example, are more flexible in size; they can be concatenated, appended, sliced, etc. In return, they need to be homogenous (can only contain a single type of value per list), and random index access on them might not always be valid \*. Tuple, on the other hand, through its constrain on size, is faster, gives the type system the leeway to exhaustively track all its items' types, and guarantees safe access.
+
+A Reason tuple is typed "structurally". This means that even if you don't annotate your data with an explicit type, the compiler can still deduce it by looking at its content, its usage, etc. As long as the declarations and the usages' inferred shapes match up, you're all good!
 
 \* It's not that the Reason type system cannot accept heterogenous, dynamically-sized lists; it actually can (hint: GADT)! But making such feature the default increases both the first-time learning overhead and the understandability of code. Just because the types can accomplish it doesn't mean it's always a good idea to let some pieces of code grow unboundedly complex!
