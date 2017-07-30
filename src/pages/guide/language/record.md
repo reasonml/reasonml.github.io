@@ -103,22 +103,19 @@ type car = {name: string, horsePower};
 
 #### Interop with JavaScript
 
-If you're working with JavaScript, the record syntax & operations should feel familiar, and you might be tempted to interop with JS by converting a JS object to a record, and vice-versa. This is fine, but we have an **even better way without conversion overhead**! See [here](https://bucklescript.github.io/bucklescript/Manual.html#_binding_to_js_objects) which talks about **Reason objects**.
-<!-- TODO: link to doc  -->
-
-#### Example: pass a Javascript Object as parameter
-If you need to pass an Object to an external npm-module function written in Javascript, you will have to pass him a Javascript Object and not a Record.
+If you're working with JavaScript, the record syntax & operations should feel familiar, and you might be tempted to interop with JS by converting a JS object to a record, and vice-versa. This is fine, but we have an **even better way without conversion overhead**! See [here](https://bucklescript.github.io/bucklescript/Manual.html#_binding_to_js_objects) which talks about **Reason objects**. Here's an example:
+<!-- TODO: link to object doc  -->
 
 ```reason
-type object = Js.t {
+type payload = Js.t {
     .
     name: string
 };
-external addObject: object => boolean = "addObject" [@@bs.module "npm-module-name"];
-let objectInstance = [%bs.obj {name: "reasonML"}];
-let res = addObject objectInstance;
-
+external sendQuery: payload => unit = "sendQuery" [@@bs.module "myAjaxLibrary"];
+sendQuery {"name": "Reason"};
 ```
+
+Notice the dot in the type definiton. That's is an object type notation, and has nothing to do with a record! Objects will be described in a later section.
 
 #### Record Types Are Found By Field Name
 
