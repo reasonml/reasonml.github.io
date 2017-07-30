@@ -106,6 +106,18 @@ type car = {name: string, horsePower};
 If you're working with JavaScript, the record syntax & operations should feel familiar, and you might be tempted to interop with JS by converting a JS object to a record, and vice-versa. This is fine, but we have an **even better way without conversion overhead**! See [here](https://bucklescript.github.io/bucklescript/Manual.html#_binding_to_js_objects) which talks about **Reason objects**.
 <!-- TODO: link to doc  -->
 
+#### Example: pass an object to an external npm module
+```reason
+type object = Js.t {
+    .
+    name: string
+};
+external addObject: object => boolean = "addObject" [@@bs.module "npm-module-name"];
+let objectInstance = [%bs.obj {name: "reasonML"}];
+let res = addObject objectInstance;
+
+```
+
 #### Record Types Are Found By Field Name
 
 With records, you cannot say "I'd like this function to take any record type, as long as they have the field `age`". Example:
