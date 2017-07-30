@@ -1,13 +1,10 @@
 ![reason logo](src/images/reason_200.png)
 
-# The Reason website & documentation
+# [Reason](https://github.com/facebook/reason) Website & Documentation
 
-Uses [gatsby](https://www.gatsbyjs.org/).
+## Contribute
 
-## Organization
-All pages are in [src/pages/](src/pages/). The markdown files under
-[src/pages/guide](src/pages/guide/) and
-[src/pages/community](src/pages/community/) are probably of most interest.
+All pages are in [src/pages/](src/pages/). The markdown files under [src/pages/guide](src/pages/guide/) and [src/pages/community](src/pages/community/) are probably of most interest.
 
 ## Building
 
@@ -24,4 +21,4 @@ If you have push access, to deploy a new version of the site, go to the source b
 npm run deploy
 ```
 
-For info on how gatsby works, take a look at [their docs](https://www.gatsbyjs.org/docs/).
+The site uses GatsbyJS. For info on how it works, take a look at [their docs](https://www.gatsbyjs.org/docs/).
