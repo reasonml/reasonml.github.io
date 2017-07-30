@@ -106,7 +106,9 @@ type car = {name: string, horsePower};
 If you're working with JavaScript, the record syntax & operations should feel familiar, and you might be tempted to interop with JS by converting a JS object to a record, and vice-versa. This is fine, but we have an **even better way without conversion overhead**! See [here](https://bucklescript.github.io/bucklescript/Manual.html#_binding_to_js_objects) which talks about **Reason objects**.
 <!-- TODO: link to doc  -->
 
-#### Example: pass an object to an external npm module
+#### Example: pass a Javascript Object as parameter
+If you need to pass an Object to an external npm-module function written in Javascript, you will have to pass him a Javascript Object and not a Record.
+
 ```reason
 type object = Js.t {
     .
