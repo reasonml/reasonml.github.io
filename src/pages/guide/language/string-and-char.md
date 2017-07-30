@@ -52,7 +52,7 @@ BuckleScript's special pre-processor can then look for such `js` marker around t
 
 #### Usage
 
-[More string operations can be found in the standard library](/api/String.html). For JS compilation, see the familiar JS string API bindings in the [BuckleScript API docs](http://bucklescript.github.io/bucklescript/api/Js_string.html).
+[More string operations can be found in the standard library](/api/String.html). For JS compilation, see the familiar `JS.String` API bindings in the [BuckleScript API docs](http://bucklescript.github.io/bucklescript/api/Js_string.html). Since a Reason string maps to a JavaScript string, you can mix & match the string operations in both standard libraries.
 
 #### Tips & Tricks
 

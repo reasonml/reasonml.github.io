@@ -161,7 +161,7 @@ external getStudentById: int => student = "getStudentById" [@@bs.module "School"
 external getAllStudents: unit => array student = "getAllStudents" [@@bs.module "School"];
 ```
 
-Type `student` doesn't have an actual content; that's called an [abstract type](#modules-signatures). It's a convenient way of specifying the relationship between external calls without knowing what the shape of the data is under the hood.
+Type `student` doesn't have an actual content; that's called an [abstract type](/guide/language/modules#signatures). It's a convenient way of specifying the relationship between external calls without knowing what the shape of the data is under the hood.
 
 And then you're done!
 
@@ -169,7 +169,7 @@ And then you're done!
 Tips
 -------
 
-**Don't** try to fully convert a JS file into a pristine Reason file in a single shot. Such method might actually slow you down! It's fine to have externals and `bs.obj` left, and temporarily not take advantage of nice OCaml features (variants, labelled arguments, etc.). Once you've converted a few other related files, you can come back and now refactor **faster** by banking on the type system.
+**Don't** try to fully convert a JS file into a pristine Reason file in a single shot. Such method might actually slow you down! It's fine to have externals and `bs.obj` left, and temporarily not take advantage of nice OCaml features (variants, labeled arguments, etc.). Once you've converted a few other related files, you can come back and now refactor **faster** by banking on the type system.
 
 Whatever nice utilities you find (e.g. convert a `Js.null_undefined Js.boolean` to a `bool`), put them in a `tempUtils.re` file or something. They're easy examples for your colleagues and removes some conversion churns.
 

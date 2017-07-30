@@ -156,7 +156,7 @@ external drawFloat: float => unit = "draw" [@@bs.module "myLibrary"];
 external drawString: string => unit = "draw" [@@bs.module "myLibrary"];
 ```
 
-Or, get fancy and use an advanced feature of variant called GADT, then use BuckleScript's [phantom argument FFI feature]( http://bucklescript.github.io/bucklescript/Manual.html#_phantom_arguments_and_ad_hoc_polymorphism). If these words mean absolutely nothing to you, no worries; just use the previous suggestion.
+Or, get fancy and use an advanced feature of variant called GADT, then use BuckleScript's [phantom argument FFI feature](http://bucklescript.github.io/bucklescript/Manual.html#_phantom_arguments_and_ad_hoc_polymorphism). If these words mean absolutely nothing to you, no worries; just use the previous suggestion.
 
 #### Variant Types Are Found By Field Name
 

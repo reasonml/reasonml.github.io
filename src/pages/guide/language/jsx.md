@@ -36,7 +36,7 @@ ppx macros to spot them and syntactically transform the preceeding expression
 into something else. This way, everyone gets to benefit the JSX syntax without
 needing to opt into a specific library using it, e.g. React.
 
-Some departures from JS JSX: Children text needs to be converted to a React element. 
+Some departures from JS JSX: Children text needs to be converted to a React element.
 This is done using `ReasonReact.stringToElement "string"`. Attributes
 don't mandate curly braces, unless they're complex expressions (in which case
 they're formatted to parentheses).
@@ -64,4 +64,4 @@ Note that this would translate to `foo=true` within JSX in JS code.
 
 There is no support for JSX spread attributes.
 
-JSX calls supports the features of [labeled functions](functions#labeled-arguments): optional, explicitly passed optional and optional with default.
+JSX calls supports the features of [labeled functions](/guide/language/functions#labeled-arguments): optional, explicitly passed optional and optional with default.

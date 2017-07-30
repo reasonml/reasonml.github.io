@@ -64,7 +64,7 @@ while true {
 
 #### Breaking Out of Loop
 
-There's no loop-breaking `break` keyword (nor early `return` from functions, for that matter) in Reason/OCaml. In general, prefer map/filter/reduce over imperative loops. However, we can break out of a while loop easily through using a [mutable binding](#diving-deeper-mutation). Example without the `ref` syntax sugar:
+There's no loop-breaking `break` keyword (nor early `return` from functions, for that matter) in Reason/OCaml. In general, prefer map/filter/reduce over imperative loops. However, we can break out of a while loop easily through using a [mutable binding](/guide/language/mutation). Example without the `ref` syntax sugar:
 
 ```reason
 Random.self_init ();

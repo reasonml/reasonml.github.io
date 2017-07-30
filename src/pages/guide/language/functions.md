@@ -89,7 +89,7 @@ let addCoordinates x::x y::y => {
 addCoordinates x::5 y::6;
 ```
 
-Since we have currying (more on that [here](#diving-deeper-more-on-function)), we can provide the arguments in any order:
+Since we have currying (more on that below), we can provide the arguments in any order:
 
 ```reason
 addCoordinates y::6 x::5;
@@ -140,7 +140,7 @@ let drawCircle ::color ::radius=? () => {
 
 If omitted, `radius` is **wrapped** in the standard library's `option` type, defaulting to `None`. If provided, it'll be wrapped with a `Some`. So `radius`'s type value is either `None` or `Some int` here.
 
-**Note**: `None | Some foo` is a data structure type called variant, described [below](variant). This particular variant type is provided by the standard library. It's called `option`. Its definition: `type option 'a = None | Some 'a`.
+**Note**: `None | Some foo` is a data structure type called variant, described [below](/guide/language/variant). This particular variant type is provided by the standard library. It's called `option`. Its definition: `type option 'a = None | Some 'a`.
 
 **Note** the unit `()` at the end of `drawCircle`. Without it, since `radius` and `color` are both labeled, can be curried, and can be applied out-of-order, it's unclear what the following mean:
 

@@ -79,7 +79,7 @@ let payloadResults: myPayloadResults string = [
 Exceptions
 ----------
 
-Exceptions are just a special kind of [variant](variant), "thrown" in **exceptional** cases (don't abuse them!). When you have ordinary variants, you often don't **need** exceptions, since you can just use variants types such as `type result` above.
+Exceptions are just a special kind of [variant](/guide/language/variant), "thrown" in **exceptional** cases (don't abuse them!). When you have ordinary variants, you often don't **need** exceptions, since you can just use variants types such as `type result` above.
 
 ```reason
 try (somethingThatThrows ()) {

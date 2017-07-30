@@ -3,7 +3,7 @@ title: Mutation
 order: 140
 ---
 
-Reason/OCaml exposes mutable features through [array](array) and [mutable record fields](record#mutable-fields). They're sometimes great for performance and expressing certain familiar programming patterns.
+Reason/OCaml exposes mutable features through [array](/guide/language/list-and-array#array) and [mutable record fields](/guide/language/record#mutable-update). They're sometimes great for performance and expressing certain familiar programming patterns.
 
 For a single mutable reference (e.g. assigning a value to `let`), the standard library comes with syntax sugar for a [record type called `ref`](/api/Pervasives.html#TYPEref). You'd use it like so:
 
@@ -36,4 +36,4 @@ let foo = "hello";
 print_endline foo; /* "hello" */
 ```
 
-Notice we've assigned a new type to `foo` in the before-last line. This is type-safe since, as documented [here](#basics-let-binding), the lines afterward can only see the last assignment of `foo`.
+Notice we've assigned a new type to `foo` in the before-last line. This is type-safe since, as documented [here](/guide/language/let-bindings#bindings-are-immutable), the lines afterward can only see the last assignment of `foo`.

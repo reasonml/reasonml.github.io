@@ -23,6 +23,7 @@ Types can also be explicitly written down by choice:
 let score: int = 10;
 ```
 
+<!-- TODO: put this in advanced section -->
 You can also wrap an expression in parentheses and annotate it:
 
 ```reason
@@ -43,6 +44,8 @@ You can refer to a type by a different name:
 type scoreType = int;
 let x: scoreType = 10;
 ```
+
+<!-- TODO: labeled arguments -->
 
 ### Design Decisions
 

@@ -7,21 +7,21 @@ Tuples are
 
 - immutable
 - ordered
-- fixed-sized at creation time
+- fix-sized at creation time
 - heterogeneous (can contain different types of values)
 
 ```reason
-let my3dCoordinates = (20.0, 30.5, 100.0);
 let ageAndName = (24, "Lil' Reason");
+let my3dCoordinates = (20.0, 30.5, 100.0);
 ```
 
 Tuples' types can be used in type annotations as well. Tuple types visually resemble tuples values.
 
 ```reason
-let my3dCoordinates: (float, float, float) = (20.0, 30.5, 100.0);
+let ageAndName: (int, string) = (24, "Lil' Reason");
 /* a tuple type alias */
-type myPair = (int, string);
-let ageAndName: myPair = (24, "Lil' Reason");
+type coord3d = (float, float, float);
+let my3dCoordinates: coord3d = (20.0, 30.5, 100.0);
 ```
 
 **Note**: there's no tuple of size 1. You'd just use the value itself.
@@ -35,6 +35,8 @@ let (_, y, _) = my3dCoordinates; /* now you've retrieved y */
 ```
 
 The `_` means you're ignoring the indicated members of the tuple.
+
+Tuples aren't meant to be updated mutatively; you'd create new ones by destructuring the old ones.
 
 ### Tips & Tricks
 

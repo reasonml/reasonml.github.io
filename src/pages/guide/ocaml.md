@@ -163,7 +163,7 @@ syntax:
 ### Local Scope Vs. Module Bodies
 
 In Reason, everything that can go between the `{}` in [Local
-Scopes](#reason-vs-ml-syntax-local-scope) and in module bodies. You can usually
+Scopes](#local-scope) and in module bodies. You can usually
 even cut/paste code between the two contexts. In OCaml, the syntaxes for the two
 contexts are very different. (Local scope requires trailing `in`, but module bodies do
 not and some imperative statements must be assigned to `_` or `()`, or else use double `;;`).
@@ -675,7 +675,8 @@ let res = match x with
    | HasMultipleInts (x, y) -> 0
    | HasMultipleTuples
       ((x, y),
-       (q, r)) -> 0</pre>
+       (q, r)) -> 0
+   </pre>
     </td>
     <td>
       <pre>
@@ -703,7 +704,8 @@ let res = switch x {
    | HasMultipleTuples
       (x, y)
       (q, r) => 0
-};</pre>
+};
+</pre>
     </td>
   </tr>
 </table>

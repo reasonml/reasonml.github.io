@@ -28,7 +28,7 @@ Here's the place to keep up with what's happening for the Reason team! This list
 Wanna help?
 
 - [Better documentation site](https://github.com/reasonml/reasonml.github.io/issues)
-- Contribute to [your favorite editor plugin for Reason](/guide/editor-tools/supported-editors#officially-supported-editors)
+- Contribute to [your favorite editor plugin for Reason](/guide/editor-tools/editors-plugins#officially-supported-editors)
 - On that note: better [ocaml-language-server](https://github.com/freebroccolo/ocaml-language-server). This will potentially power all our editor integration in the future.
 - Come up with more [project names starting with "re"](https://github.com/reasonml/ideas-for-project-names-starting-with-re)
 - Whatever project you'd normally do in JavaScript, try it in Reason + BuckleScript!
