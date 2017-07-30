@@ -48,7 +48,7 @@ type person = {age: int, name: string};
 ```reason
 /* example.re */
 
-let me: School.person = School.{age: 20, name: "Big Reason"};
+let me: School.person = {age: 20, name: "Big Reason"};
 /* or */
 let me = School.{age: 20, name: "Big Reason"};
 /* or */
