@@ -16,9 +16,9 @@ order: 10
 
 ### (Alternative) Through OPAM
 
-[OPAM](https://opam.ocaml.org) is the native package manager for OCaml. If you come from OCaml and don't have npm/yarn, use this installation, but be careful about it!
+[OPAM](https://opam.ocaml.org) is the native package manager for OCaml. If you come from OCaml and don't have npm/yarn, you can optionally install this way, but be careful!
 
-Make sure you're on OCaml `4.02.3`.
+**Make sure you're on OCaml `4.02.3`**.
 
 ```
 opam update
