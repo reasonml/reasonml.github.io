@@ -94,7 +94,7 @@ The [standard library](/api/index.html) exposes two important variants you'll co
 type option 'a = None | Some 'a;
 ```
 
-This is the convention used to simulate a "nullable" (aka `undefined` or `null`) value in other languages. Thanks to this convenience type definition, Reason can default every value to be non-nullable. An `int` will always be an int, never "`int` **or** `null` **or** `undefined`". If you do want to express a "nullable int", you'd use `option int`, whose possible values are `None` or `Some int`. `switch` forces you to handle both cases; therefore, **a pure Reason problem doesn't have null errors**.
+This is the convention used to simulate a "nullable" (aka `undefined` or `null`) value in other languages. Thanks to this convenience type definition, Reason can default every value to be non-nullable. An `int` will always be an int, never "`int` **or** `null` **or** `undefined`". If you do want to express a "nullable int", you'd use `option int`, whose possible values are `None` or `Some int`. `switch` forces you to handle both cases; therefore, **a pure Reason program doesn't have null errors**.
 
 ##### `list`
 
