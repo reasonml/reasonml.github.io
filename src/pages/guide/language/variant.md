@@ -160,7 +160,7 @@ Or, get fancy and use an advanced feature of variant called GADT, then use Buckl
 
 #### Variant Types Are Found By Field Name
 
-Please refer to this [record section](/guide/language/record#record-types-are-found-by-field-name). Variants are the same: a function can't accept an arbitrary constructor shared by two different variants. Again, such feature exists, it's called called a polymorphic variant. We'll talk about this in the future =).
+Please refer to this [record section](/guide/language/record#record-types-are-found-by-field-name). Variants are the same: a function can't accept an arbitrary constructor shared by two different variants. Again, such feature exists, it's called a polymorphic variant. We'll talk about this in the future =).
 
 ### Design Decisions
 
