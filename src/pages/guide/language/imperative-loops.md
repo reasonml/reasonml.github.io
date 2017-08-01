@@ -54,14 +54,6 @@ while (testCondition) {
 };
 ```
 
-The parenthesis around `testCondition` may be omitted if they are unnecessary.
-
-```reason
-while true {
-  print_endline "hello";
-};
-```
-
 ### Tips & Tricks
 
 There's no loop-breaking `break` keyword (nor early `return` from functions, for that matter) in Reason. In general, prefer `map`/`filter`/`reduce` over imperative loops. However, we can break out of a while loop easily through using a [mutable binding](/guide/language/mutation).
