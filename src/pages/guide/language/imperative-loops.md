@@ -3,7 +3,7 @@ title: Imperative Loops
 order: 150
 ---
 
-#### For Loops
+### For Loops
 
 For loops iterate from a starting value up to (and including) the ending value.
 
@@ -44,7 +44,7 @@ for x in xStart downto xEnd {
 };
 ```
 
-#### While Loops
+### While Loops
 
 While loops execute a code block while some condition is true. The form of a `while` loop includes a single expression, the condition to test.
 
@@ -62,16 +62,16 @@ while true {
 };
 ```
 
-#### Breaking Out of Loop
+### Tips & Tricks
 
-There's no loop-breaking `break` keyword (nor early `return` from functions, for that matter) in Reason/OCaml. In general, prefer map/filter/reduce over imperative loops. However, we can break out of a while loop easily through using a [mutable binding](/guide/language/mutation). Example without the `ref` syntax sugar:
+There's no loop-breaking `break` keyword (nor early `return` from functions, for that matter) in Reason. In general, prefer `map`/`filter`/`reduce` over imperative loops. However, we can break out of a while loop easily through using a [mutable binding](/guide/language/mutation).
 
 ```reason
 Random.self_init ();
-let break = {contents: false};
-while (not break.contents) {
+let break = ref false;
+while (not !break) {
   if (Random.int 10 === 3) {
-    break.contents = true
+    break := true
   } else {
     print_endline "hello"
   }

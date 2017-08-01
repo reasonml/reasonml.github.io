@@ -16,7 +16,7 @@ const features = [
     description:
       'Powerful type inference means you rarely have to annotate types, but everything gets checked for you.',
     action: 'See how',
-    url: '/guide/language/types/',
+    url: '/guide/language/type/',
   },
   {
     title: 'Online playground',

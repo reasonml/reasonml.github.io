@@ -40,7 +40,7 @@ Updating an arbitrary item in the middle of a list is discouraged, since its per
 
 ##### Access
 
-`switch` (described in [pattern-matching section](/guide/language/destructuring-pattern-matching)) is usually used to access list items:
+`switch` (described in the [pattern matching section](/guide/language/pattern-matching)) is usually used to access list items:
 
 ```
 let message = switch myList {
@@ -54,6 +54,8 @@ To access an arbitrary list item, use `List.nth`.
 #### Tips & Tricks
 
 Feel free to allocate as many empty lists as you'd like. As explained in the [variant section for list](/guide/language/variant#list), an empty list is actually a parameter-less variant constructor under the hood, which compiles to a mere integer. No extra memory allocation needed.
+
+To understand how prepend can be immutable and `O(1)` at the same time, see the explanation of [list's underlying representation](/guide/language/variant#list).
 
 #### Design Decisions
 

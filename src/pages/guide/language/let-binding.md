@@ -1,5 +1,5 @@
 ---
-title: Let Bindings
+title: Let Binding
 order: 10
 ---
 

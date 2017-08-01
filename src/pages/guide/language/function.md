@@ -1,5 +1,5 @@
 ---
-title: Functions
+title: Function
 order: 100
 ---
 
@@ -66,7 +66,7 @@ let logSomething () => {
 logSomething ();
 ```
 
-`()` is a totally normal value, the single possible value in `unit`. Reason/OCaml gave it a special syntax out of convenience.
+`()` is a totally normal value, the single possible value in `unit`. Reason gave it a special syntax out of convenience.
 
 ### Labeled Arguments
 Multi-arguments functions, especially those whose arguments are of the same type, can be confusing to call.

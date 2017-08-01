@@ -1,5 +1,5 @@
 ---
-title: Externals
+title: External
 order: 170
 ---
 
@@ -16,7 +16,7 @@ external getElementsByClassName : string => array Dom.element =
   "document.getElementsByClassName" [@@bs.val];
 ```
 
-(The above is a BuckleScript-specific external that binds to a JavaScript function of the same name.)
+(The above is a [BuckleScript](https://bucklescript.github.io/bucklescript/Manual.html)-specific external that binds to a JavaScript function of the same name.)
 
 ### Usage
 

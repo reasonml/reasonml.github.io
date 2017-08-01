@@ -24,7 +24,7 @@ We do compile to native, but the native workflow is currently work-in-progress. 
 That's the metadata file for [Merlin](/guide/editor-tools/extra-goodies#merlin), the shared editor integration backend for autocomplete, jump-to-definition, etc. For the [JavaScript Workflow](/guide/javascript), `bsb` the build system generates the `.merlin` for you; You don't need to check that into your version control and don't have to manually modify it.
 
 #### I don't see any `import` or `require` in my file; how does module resolution work?
-Reason/OCaml doesn't require you to write any import; modules being referred to in the file are automatically searched in the project. Specifically, a module `Hello` asks the compiler to look for the file `hello.re` or `hello.ml` (and their corresponding [interface file](/guide/language/modules#signatures), `hello.rei` or `hello.mli`, if available).
+Reason/OCaml doesn't require you to write any import; modules being referred to in the file are automatically searched in the project. Specifically, a module `Hello` asks the compiler to look for the file `hello.re` or `hello.ml` (and their corresponding [interface file](/guide/language/module#signatures), `hello.rei` or `hello.mli`, if available).
 
 A module name is the file name, capitalized. It has to be unique per project; this abstracts away the file system and allows you to move files around without changing code.
 

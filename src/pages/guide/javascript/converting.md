@@ -161,7 +161,7 @@ external getStudentById: int => student = "getStudentById" [@@bs.module "School"
 external getAllStudents: unit => array student = "getAllStudents" [@@bs.module "School"];
 ```
 
-Type `student` doesn't have an actual content; that's called an [abstract type](/guide/language/modules#signatures). It's a convenient way of specifying the relationship between external calls without knowing what the shape of the data is under the hood.
+Type `student` doesn't have an actual content; that's called an [abstract type](/guide/language/module#signatures). It's a convenient way of specifying the relationship between external calls without knowing what the shape of the data is under the hood.
 
 And then you're done!
 

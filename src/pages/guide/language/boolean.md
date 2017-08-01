@@ -7,7 +7,7 @@ A boolean has the type `bool` and can be either `true` or `false`. Common operat
 
 - `&&`: logical and
 - `||`: logical or
-- `not`: logical not
+- `not`: logical not. **Note that ! is reserved for something else**
 - `<=`, `>=`, `<`, `>`
 - `==`: physical equal, compares data structures deeply: `(1, 2) == (1, 2)` is `true`. Convenient, but use with caution
 - `===`: referential equal, compares shallowly. `(1, 2) === (1, 2)` is `false`. `let myTuple = (1, 2); myTuple === myTuple` is `true`.
@@ -16,7 +16,7 @@ A boolean has the type `bool` and can be either `true` or `false`. Common operat
 
 ### Usage
 
-**Note that BuckleScript provides bindings to the JavaScript** `true` and `false`, which [aren't the same as the Reason/OCaml `true` and `false`](http://bucklescript.github.io/bucklescript/Manual.html#_boolean)! Don't use them interchangeably without proper conversion (`Js.to_bool` and `Js.Boolean.to_js_boolean`).
+**Note: BuckleScript provides bindings to the JavaScript** `true` and `false`, which [aren't the same as the Reason/OCaml `true` and `false`](http://bucklescript.github.io/bucklescript/Manual.html#_boolean)! Don't use them interchangeably without proper conversion (`Js.to_bool` and `Js.Boolean.to_js_boolean`).
 
 ### Tips & Tricks
 

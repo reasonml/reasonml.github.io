@@ -3,37 +3,46 @@ title: Mutation
 order: 140
 ---
 
-Reason/OCaml exposes mutable features through [array](/guide/language/list-and-array#array) and [mutable record fields](/guide/language/record#mutable-update). They're sometimes great for performance and expressing certain familiar programming patterns.
+Reason has great traditional imperative & mutative programming capabilities. You should use these features sparingly, but sometimes they allow your code to be more performant and written in a more familiar pattern.
 
-For a single mutable reference (e.g. assigning a value to `let`), the standard library comes with syntax sugar for a [record type called `ref`](/api/Pervasives.html#TYPEref). You'd use it like so:
+### Mutate Let-binding
 
-```reason
-let myValue = ref 10;
-if (...) {
-  myValue := 20;
-};
-print_int !myValue;
-```
-
-In reality, this is just:
+Let-bindings are immutable, but you can wrap it with a `ref`, which is like a box whose content can change:
 
 ```reason
-let myValue = {contents: 10};
-if (...) {
-  myValue.contents = 20;
-};
-print_int myValue.contents;
+let foo = ref 5;
 ```
 
-There's nothing special about this record, beside the fact that it comes inside the standard library.
+### Usage
 
-You can also achieve lightweight, local "mutations" through overriding let bindings:
+You can get the actual value of a `ref` through the `!` operator:
+
+```
+let five = !foo; /* 5 */
+```
+
+Assign a new value to `foo` like so:
+
+```
+foo := 6;
+```
+
+Note that the previous binding `five` stays `5`, since it got the underlying item on the `ref` box, not the `ref` itself.
+
+### Tip & Tricks
+
+**Just kidding**! `ref` isn't actually a special feature! It's just an ordinary syntax sugar for a [predefined mutable record type called `ref`](/api/Pervasives.html#TYPEref) in the standard library (search "References" in that page). Here's the desugared version:
+
+```reason
+let foo = {contents: 5};
+let five = foo.contents;
+foo.contents = 5;
+```
+
+Before reaching for know, know that you can achieve lightweight, local "mutations" through overriding let bindings:
 
 ```reason
 let foo = 10;
-let foo = someCondition ? foo + 5 : foo; /* either 15 or 10 */
-let foo = "hello";
-print_endline foo; /* "hello" */
+let foo = someCondition ? foo + 5 : foo;
+print_int foo; /* either 15 or 10 */
 ```
-
-Notice we've assigned a new type to `foo` in the before-last line. This is type-safe since, as documented [here](/guide/language/let-bindings#bindings-are-immutable), the lines afterward can only see the last assignment of `foo`.

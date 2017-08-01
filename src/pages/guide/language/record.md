@@ -37,7 +37,9 @@ Access (the familiar dot notation):
 let name = me.name;
 ```
 
-**Records must have an explicit type definition**. If you only write `{age: 5, name: "Baby Reason"}` without an explicit declaration somewhere above, the type system will give you an error. If the type definition resides in another file, you need to explicit indicate which file it is:
+#### Record Needs an Explicit Definition
+
+If you only write `{age: 5, name: "Baby Reason"}` without an explicit declaration somewhere above, the type system will give you an error. If the type definition resides in another file, you need to explicit indicate which file it is:
 
 ```reason
 /* School.re */
@@ -103,8 +105,7 @@ type car = {name: string, horsePower};
 
 #### Interop with JavaScript
 
-If you're working with JavaScript, the record syntax & operations should feel familiar, and you might be tempted to interop with JS by converting a JS object to a record, and vice-versa. This is fine, but we have an **even better way without conversion overhead**! See [here](https://bucklescript.github.io/bucklescript/Manual.html#_binding_to_js_objects) which talks about **Reason objects**. Here's an example:
-<!-- TODO: link to object doc  -->
+If you're working with JavaScript, the record syntax & operations should feel familiar, and you might be tempted to interop with JS by converting a JS object to a record, and vice-versa. This is fine, but we have an **even better way without conversion overhead**! See [here](https://bucklescript.github.io/bucklescript/Manual.html#_binding_to_js_objects) which talks about **[Reason objects](/guide/language/object)**. Here's an example:
 
 ```reason
 type payload = Js.t {
@@ -119,7 +120,7 @@ Notice the dot in the type definiton. That's is an object type notation, and has
 
 #### Record Types Are Found By Field Name
 
-With records, you cannot say "I'd like this function to take any record type, as long as they have the field `age`". Example:
+With records, you **cannot** say "I'd like this function to take any record type, as long as they have the field `age`". The following _works_, but not as expected:
 
 ```reason
 type person = {age: int, name: string};

@@ -35,9 +35,11 @@ let message = switch (areYouCrushingIt) {
 /* message is "Great!" */
 ```
 
-A variant has an extremely rich amount of type system assistance. For example, we'll give you a type error if you've forgotten to cover a case of your variant, or if two cases are redundant. Be sure to check out switch and pattern-matching in a [later section](/guide/language/destructuring-pattern-matching)!
+A variant has an extremely rich amount of type system assistance. For example, we'll give you a type error if you've forgotten to cover a case of your variant, or if two cases are redundant. Be sure to check out switch and pattern-matching in a [later section](/guide/language/pattern-matching)!
 
-**A variant type usually needs to be explicit declared beforehand**. If the variant you're using is in a different file, bring it into scope like you'd do [for a record](/guide/language/record#usage):
+#### Variant Needs an Explicit Definition
+
+If the variant you're using is in a different file, bring it into scope like you'd do [for a record](/guide/language/record#record-needs-an-explicit-definition):
 
 ```reason
 /* Zoo.re */

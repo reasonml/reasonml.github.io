@@ -1,5 +1,5 @@
 ---
-title: Modules
+title: Module
 order: 180
 ---
 
