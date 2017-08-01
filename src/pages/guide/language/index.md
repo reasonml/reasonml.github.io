@@ -1,6 +1,6 @@
 ---
 title: Language basics
-order: 1
+order: 20
 ---
 
 # What Is Reason

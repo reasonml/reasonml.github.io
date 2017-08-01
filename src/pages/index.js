@@ -14,7 +14,7 @@ const features = [
   {
     title: 'Types without hassle',
     description:
-      'Powerful type inference means you rarely have to annotate types, but everything gets checked for you.',
+      'Powerful, safe type inference means you rarely have to annotate types, but everything gets checked for you.',
     action: 'See how',
     url: '/guide/language/type/',
   },
@@ -34,7 +34,7 @@ const features = [
   {
     title: 'Easy JavaScript interop',
     description:
-      "Use packages from npm with minimum hassle, or drop in a snippet of raw JavaScript while you're learning",
+      "Use packages from NPM/Yarn with minimum hassle, or even drop in a snippet of raw JavaScript while you're learning!",
     action: 'Learn more',
     url: '/guide/javascript/interop/',
   },
@@ -58,9 +58,7 @@ export default class Index extends React.Component {
           <div css={{ alignItems: 'center' }}>
             <img src={logo} css={styles.logo} />
             <p css={styles.description}>
-              Reason is a new syntax and toolchain for OCaml, a powerful
-              language that will give you type-safe, maintainable code that
-              transforms into performant, readable JavaScript.
+              Reason lets you write simple, fast and high-quality type safe code while leveraging both the JavaScript & OCaml ecosystems.
             </p>
             <div css={styles.buttonGroup}>
               <Link to="/guide/javascript/quickstart" css={styles.button}>

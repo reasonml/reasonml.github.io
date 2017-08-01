@@ -3,82 +3,88 @@ title: Syntax Cheatsheet
 order: 1
 ---
 
-### Basic Language Primitives
+We've worked very hard to make Reason look like JS while preserving OCaml's great semantics & types. Hope you enjoy it!
+
+### Let Binding
 
 JavaScript                |   Reason
 --------------------------|--------------------------------
-<pre>3</pre>                         |  <pre>3</pre>
-<pre>3.1415 </pre>                   |  <pre> 3.1415 </pre>
-<pre>"Hello world!" </pre>           |  <pre>"Hello world!" </pre>
-<pre>'Hello world!' </pre>           |  Strings must use "
-Characters are strings               |  <pre>'a'  </pre>
-<pre>true</pre>                      |  <pre>true </pre>
-<pre>!true</pre>                     |  <pre>not true </pre>
-`[1,2,3]`                            |  `[1,2,3]`
-<pre>null</pre>                      |  <pre>()</pre>
-<pre>const x = y;</pre>              |  <pre>let x = y;</pre>
-<pre>let x = y;</pre>                |  <pre>reference cells</pre>
-<pre>var x = y;</pre>                |  No equivalent (thankfully)
-`[x, ...lst] (linear time)`          | `[x, ...lst] (constant time)`
-`[...lst, x] (linear time)`          | Not supported
-<pre>{...obj, x: y}</pre>            | <pre>{...obj, x: y}</pre>
+`const x = 5;`              |  `let x = 5;`
+`var x = y;`                |  No equivalent (thankfully)
+`let x = 5; x = 6;`         |  `let x = ref 5; x := 6;`
 
-
-### Basic Operations on Primitives
-
-JavaScript                         |   Reason
------------------------------------|--------------------------------
-<pre>1 + 2</pre>                   |  <pre>1 + 2</pre>
-<pre>1.0 + 2.0 </pre>              |  <pre>1.0 +. 2.0 </pre>
-<pre>"hello " + "world" </pre>     |  <pre>"hello " ^ "world" </pre>
-
-### Object and Record
+### String & Char
 
 JavaScript                |   Reason
 --------------------------|--------------------------------
-Objects                 |  Records/BuckleScript Object
-no static types           |  <pre>type point = {x: int, mutable y: int};</pre>
-<pre>{x: 30, y: 20}</pre>          |  <pre>{x: 30, y: 20}</pre>
-<pre>point.x</pre>                 |  <pre>point.x</pre>
-<pre>point.y = 30;</pre>           |  <pre>point.y = 30;</pre>
-<pre>{...point, x: 30}</pre>       |  <pre>{...point, x: 30}</pre>
+`"Hello world!"`            |  Same
+`'Hello world!'`            |  Strings must use `"`
+Characters are strings      |  `'a'`
+`"hello " + "world"`        |  `"hello " ^ "world"`
 
+### Boolean
+
+JavaScript                |   Reason
+--------------------------|--------------------------------
+`true`, `false`                      |  `true`, `false` \*
+`!true`                              |  `not true`
+`||`, `&&`, `<=`, `>=`, `<`, `>`     |  Same
+`a === b`, `a !== b`                 |  Same
+No deep equality (recursive compare) |  `a == b`, `a != b`
+`a == b`                             |  No equality with implicit casting (thankfully)
+
+\* This is the Reason spiritual equivalent; it doesn't mean it compiles to JS' `true`/`false`! To compile to the latter, use `Js.true_`/`Js.false_`. See [here](/guide/language/boolean#usage).
+
+### Number
+
+JavaScript                |   Reason
+--------------------------|--------------------------------
+`3`                         |  Same \*
+`3.1415`                    |  Same
+`3 + 4`                     |  Same
+`3.0 + 4.5`                 |  `3.0 +. 4.5`
+
+\* JS has no distinction between integer and float.
+
+### Object/Record
+
+JavaScript                |   Reason
+--------------------------|--------------------------------
+no static types           |  `type point = {x: int, mutable y: int};`
+`{x: 30, y: 20}`          |  Same \*
+`point.x`                 |  Same
+`point.y = 30;`           |  Same
+`{...point, x: 30}`       |  Same
+
+\* This is the Reason spiritual equivalent; it doesn't mean it compiles to JS' object! To compile to the latter, see [here](/guide/language/object#tip--tricks).
+
+### Array
+
+JavaScript                |   Reason
+--------------------------|--------------------------------
+`[1, 2, 3]`               |  `[|1, 2, 3|]`
+`myArray[1] = 10`         |  `myArray.(1) = 10`
+No tuple                  |  `(1, 2, 3)`
+No immutable list         |  `[1, 2, 3]`
+
+### Null
+
+JavaScript                |   Reason
+--------------------------|--------------------------------
+`null`, `undefined`       |  `None` \*
+
+\* Again, only a spiritual equivalent; Reason doesn't have nulls, nor null bugs!
 
 ### Function
 
 JavaScript                            |   Reason
 --------------------------------------|--------------------------------
-<pre>arg => retVal  </pre>            |  <pre>fun arg => retVal</pre>
-<pre>function named(arg) {...}        |
-<pre>let f = function named(arg) {...}|
+`arg => retVal`                       |  `fun arg => retVal`
+`function named(arg) {...}`           |  `fun named arg => ...`
+`const f = function named(arg) {...}` |  `let f = fun named arg => ...`
+`add(4, add(5, 6))`                   |  `add 4 (add 5 6)`
 
-JavaScript                        |   Reason
-----------------------------------|--------------------------------
-<pre>const incr = x => x + 1;</pre>        |  <pre>let incr = fun x => x + 1;</pre>
-<pre>const five = incr(4);</pre>           |  <pre>let five = incr 4;</pre>
-<pre>const add = (x, y) => x + y;</pre>      |  <pre>let add = fun x y => x + y;</pre>
-<pre>const x = add(3, 4);</pre>            |  <pre>let x = add 3 4;</pre>
-<pre>const y = add(3, add(0, 1));</pre>    |  <pre>let y = add 3 (add 0 1);</pre>
-
-#### Function Expression
-
-<table>
-  <thead><tr> <th scope="col"><p >JavaScript</p></th> <th scope="col"><p>Reason</p></th></tr></thead>
-  <tr>
-    <td>
-      <pre>
-const add = (x, y) => x + x + y + y;
-      </pre>
-    </td>
-    <td>
-      <pre>
-let add = fun x y => x + x + y + y;
-      </pre>
-    </td>
-  </tr>
-</table>
-
-#### Function blocks
+#### Blocks
 
 <table>
   <thead><tr> <th scope="col"><p >JavaScript</p></th> <th scope="col"><p>Reason</p></th></tr></thead>
@@ -102,129 +108,62 @@ let myFun = fun x y => {
   </tr>
 </table>
 
-### Function Application
+#### Currying
 
-In Reason, parentheses are typically optional in places where it is obvious
-they aren't needed. This means that when invoking functions, parentheses
-aren't always required around the argument. Reason will let you add the
-parentheses if you really want them, but it's good to know why some samples
-you read have omitted them. See how in this example, arguments that are clearly
-single words, or that have balanced "bookends" (such as `{ }`) do not need
-the parentheses.
+JavaScript                |   Reason
+--------------------------|--------------------------------
+`let add = a => b => a + b`       |  `let add a b => a + b`
 
-<table>
-  <thead><tr> <th scope="col"><p >JavaScript</p></th> <th scope="col"><p>Reason</p></th></tr></thead>
-  <tr>
-    <td>
-      <pre>
-let result = aFunc(oneArg);</pre>
-    </td>
-    <td>
-      <pre>
-let result = aFunc oneArg;</pre>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <pre>
-let result = aFunc({x:0});
-      </pre>
-    </td>
-    <td>
-      <pre>let result = aFunc {x:0};</pre>
-    </td>
-  </tr>
-</table>
+Both JavaScript and Reason support currying, but Reason currying is **built-in and optimized to avoids intermediate function allocation & calls**, whenever possible.
 
-### Currying
+### If-else
 
-Both JavaScript and Reason support currying, but with Reason, when using
-the native compiler (or even a JavaScript backend), currying is optimized.
-(Specifically, you are not penalized for currying in Reason, whenever you
-happen to supply all the arguments). The main syntactic difference when defining
-curried functions is that Reason lambdas always begin with the `fun` keyword.
+JavaScript                |   Reason
+--------------------------|--------------------------------
+`if (a) {b} else {c}`     |  Same \*
+`a ? b : c`               |  Same
+`switch`                  |  `switch` but [not the same at all](/guide/language/pattern-matching)
 
-<table>
-  <thead><tr> <th scope="col"><p >JavaScript</p></th> <th scope="col"><p>Reason</p></th></tr></thead>
-  <tr>
-    <td><pre>let add = a => b => a + b;</pre></td>
-    <td><pre>let add = fun a => fun b => a + b;</pre></td>
-  </tr>
-</table>
+\* Reason conditionals are always expressions!
 
-#### Syntactic sugar
+### Destructuring
 
-Because Reason lambdas include the `fun` keyword, curried functions don't
-appear as clean as they do in JavaScript. To remedy this, Reason includes a
-syntactic sugar to help with curried function definitions. The two forms
-are *exactly* equivalent and nothing changes about how you would invoke these
-functions.
+JavaScript                |   Reason
+--------------------------|--------------------------------
+`const {a, b} = data`             |  `let {a, b} = data`
+`const [a, b] = data`             |  `let [|a, b|] = data` \*
+`const {a: aa, b: bb} = data`     |  `let {a: aa, b: bb} = data`
 
-<table>
-  <thead><tr> <th scope="col"><p >JavaScript</p></th> <th scope="col"><p>Reason</p></th></tr></thead>
-  <tr>
-    <td>
-      <pre>let add = a => b => a + b;</pre>
-    </td>
-    <td>
-      <pre>let add = fun a => fun b => a + b;</pre>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <pre>// No syntactic sugar</pre>
-    </td>
-    <td>
-      <pre>let add = fun a b => a + b;</pre>
-    </td>
-  </tr>
-</table>
+\* Gives good compiler warning that `data` might not be of length 2. Switch to pattern-matching instead.
 
+### Loop
 
-### Expressions
+JavaScript                |   Reason
+--------------------------|--------------------------------
+`for (let i = 0; i <= 10; i++) {...}`             |  `for i in 0 to 10 {...}`
+`for (let i = 10; i >- 0; i--) {...}`             |  `for i in 10 downto 0 {...}`
+`while (true) {...}`                              |  Same
 
-In Reason, almost everything is an expression. For example, in Reason, the `switch` statement *evaluates* to a value, which makes programming less error prone. Notice how in the JavaScript version, there is some time when the program is in an invalid state.  The switch statement in Reason also provides many more super powers, discussed in [Pattern Matching](/guide/language/pattern-matching).
+### JSX
 
-<table>
-  <thead><tr> <th scope="col"><p >JavaScript</p></th> <th scope="col"><p>Reason</p></th></tr></thead>
-  <tr>
-    <td>
-      <pre>login ? "hi" : "bye" </pre>
-    </td>
-    <td>
-      <pre>login ? "hi" : "bye" </pre>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <pre>
-let res = undefined;
-switch (thing) {
-  case first:
-     res = "first";
-     break;
-  case second:
-     res = "second";
-     break;
-};
-      </pre>
-    </td>
-    <td>
-      <pre>
-let res = switch thing {
-| first => "first"
-| second => "second"
-};
-      </pre>
-    </td>
-  </tr>
-</table>
+JavaScript                |   Reason
+--------------------------|--------------------------------
+`<Foo bar=1 baz="hi" onClick={bla} />`  |  `<Foo bar=1 baz="hi" onClick=(bla) />`
+`<Foo bar=bar />`                       |  `<Foo bar />`
+`<input checked />`                     |  `<input checked=true />`
+
+### Exception
+
+JavaScript                |   Reason
+--------------------------|--------------------------------
+`throw new SomeError(...)`  |  `raise (SomeError ...)`
+`try (a) {...} catch (Err) {...} finally {...}`   |  `try (a) { | Err => ...}` \*
+
+\* No finally.
 
 ### Blocks
 
-In Reason, "sequence expressions" are created with `{}` and evaluate to their
-last statement. In JavaScript, this can be simulated via a temporary variable
-which must be created in an invalid state, then later mutated.
+In Reason, "sequence expressions" are created with `{}` and evaluate to their last statement. In JavaScript, this can be simulated via a temporary variable which must be created in an invalid state, then later mutated.
 
 <table>
   <thead><tr> <th scope="col"><p >JavaScript</p></th> <th scope="col"><p>Reason</p></th></tr></thead>
@@ -248,3 +187,4 @@ let res = {
     </td>
   </tr>
 </table>
+

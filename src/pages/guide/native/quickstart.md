@@ -3,6 +3,8 @@ title: Quickstart
 order: 0
 ---
 
+**Note: the native workflow is heavily work-in-progress**.
+
 ```sh
 # On OSX, install opam via Homebrew:
 brew update

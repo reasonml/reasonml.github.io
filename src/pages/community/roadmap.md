@@ -33,3 +33,4 @@ Wanna help?
 - Come up with more [project names starting with "re"](https://github.com/reasonml/ideas-for-project-names-starting-with-re)
 - Whatever project you'd normally do in JavaScript, try it in Reason + BuckleScript!
 - Talk about Reason and BuckleScript!
+- Ping @chenglou in [Discord](https://discord.gg/reasonml) for more tasks.

@@ -1,6 +1,6 @@
 ---
 title: Examples
-order: 20
+order: 60
 ---
 
 An example is worth a thousand words.
