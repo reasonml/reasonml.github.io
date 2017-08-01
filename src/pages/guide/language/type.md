@@ -5,7 +5,7 @@ order: 15
 
 Types are the highlight of Reason! Here, you get a glimpse of why so many are excited about them.
 
-This section briefly introduces the types syntax so that you can power through the subsequent sections without getting confused. More advanced topics on types can be found in the [More On Types](/guide/language/more-on-types) section.
+This section briefly introduces the types syntax so that you can power through the subsequent sections without getting confused. More advanced topics on types can be found in the [More On Types](/guide/language/more-on-type) section.
 
 ### Annotations
 

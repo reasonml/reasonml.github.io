@@ -27,7 +27,7 @@ let message = isMorning ? "Good morning!" : "Hello!";
 
 ### Usage
 
-**`if-else` and ternary are much less used** in Reason than in other languages; [Pattern-matching](/guide/language/pattern matching) kills a whole category of code that previously required conditionals. Prefer `if-else` if you only have, say, 2 branches.
+**`if-else` and ternary are much less used** in Reason than in other languages; [Pattern-matching](/guide/language/pattern-matching) kills a whole category of code that previously required conditionals. Prefer `if-else` if you only have, say, 2 branches.
 
 ### Design Decisions
 
