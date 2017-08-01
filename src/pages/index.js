@@ -58,7 +58,7 @@ export default class Index extends React.Component {
           <div css={{ alignItems: 'center' }}>
             <img src={logo} css={styles.logo} />
             <p css={styles.description}>
-              Reason lets you write simple, fast and high-quality type safe code while leveraging both the JavaScript & OCaml ecosystems.
+              Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript & OCaml ecosystems.
             </p>
             <div css={styles.buttonGroup}>
               <Link to="/guide/javascript/quickstart" css={styles.button}>
