@@ -59,7 +59,7 @@ Here's a JSX tag that shows most of the features.
 
 #### Punning
 
-ReactJS JSX's argument punning, e.g. `<input checked />`, due to unfortunate historical reasons, deusgars to `<input checked=true />`, in order to conform to DOM's idioms. Reason doesn't have such baggage, so we've decided to desugar it to `<input checked=checked />`. This allows folks to cram many more props into a ReasonReact component without it looking too bloated:
+ReactJS JSX's argument punning, e.g. `<input checked />`, due to unfortunate historical reasons, desugars to `<input checked=true />`, in order to conform to DOM's idioms. Reason doesn't have such baggage, so we've decided to desugar it to `<input checked=checked />`. This allows folks to cram many more props into a ReasonReact component without it looking too bloated:
 
 ```reason
 <MyComponent isLoading text onClick />
