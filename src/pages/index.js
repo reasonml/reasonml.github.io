@@ -62,9 +62,9 @@ export default class Index extends React.Component {
             </p>
             <div css={styles.buttonGroup}>
               <Link to="/guide/javascript/quickstart" css={styles.button}>
-                Get started
+                Quick Start
               </Link>
-              <Link to="/guide/" css={styles.button}>
+              <Link to="/guide/what-and-why" css={styles.button}>
                 Learn more
               </Link>
             </div>
