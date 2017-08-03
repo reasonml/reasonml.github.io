@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import Helmet from 'react-helmet'
-import Header from '../components/Header'
-import Section from '../components/Section'
-import { accent, gray } from '../utils/colors'
+import Header from '../../components/Header'
+import Section from '../../components/Section'
+import { accent, gray } from '../../utils/colors'
 
 let CodeMirror
 if (typeof navigator !== 'undefined') {
-  CodeMirror = require('../components/CodeMirror')
+  CodeMirror = require('../../components/CodeMirror')
   require('codemirror/lib/codemirror.css')
   require('codemirror/mode/javascript/javascript')
   require('codemirror/mode/mllike/mllike')
@@ -55,7 +55,7 @@ export default class Try extends Component {
     js: '// loading',
     jsIsLatest: false,
     autoEvaluate: true,
-    output: [],
+    output: []
   }
   rerr = null
 
@@ -68,21 +68,21 @@ export default class Try extends Component {
       log: (...items) => {
         this.setState(state => ({
           ...state,
-          output: state.output.concat({ type: 'log', contents: items }),
+          output: state.output.concat({ type: 'log', contents: items })
         }))
       },
       error: (...items) => {
         this.setState(state => ({
           ...state,
-          output: state.output.concat({ type: 'error', contents: items }),
+          output: state.output.concat({ type: 'error', contents: items })
         }))
       },
       warn: (...items) => {
         this.setState(state => ({
           ...state,
-          output: state.output.concat({ type: 'warn', contents: items }),
+          output: state.output.concat({ type: 'warn', contents: items })
         }))
-      },
+      }
     }
     this.iframe.contentDocument.body.innerHTML = '(iframe)'
   }
@@ -95,7 +95,7 @@ export default class Try extends Component {
       this.err = setTimeout(
         () =>
           this.setState({
-            reasonError: converted[1],
+            reasonError: converted[1]
           }),
         errorTimeout
       )
@@ -104,7 +104,7 @@ export default class Try extends Component {
         reasonError: null,
         bsError: null,
         ocamlError: null,
-        jsIsLatest: false,
+        jsIsLatest: false
       })
       return
     }
@@ -121,7 +121,7 @@ export default class Try extends Component {
       this.err = setTimeout(
         () =>
           this.setState({
-            ocamlError: converted[1],
+            ocamlError: converted[1]
           }),
         errorTimeout
       )
@@ -130,7 +130,7 @@ export default class Try extends Component {
         reasonError: null,
         bsError: null,
         ocamlError: null,
-        jsIsLatest: false,
+        jsIsLatest: false
       })
       return
     }
@@ -150,7 +150,7 @@ export default class Try extends Component {
           reasonError: null,
           bsError: null,
           ocamlError: null,
-          jsIsLatest: true,
+          jsIsLatest: true
         })
         if (this.state.autoEvaluate) {
           this.run(res.js_code)
@@ -160,7 +160,7 @@ export default class Try extends Component {
         this.err = setTimeout(
           () =>
             this.setState({
-              bsError: res,
+              bsError: res
             }),
           errorTimeout
         )
@@ -169,7 +169,7 @@ export default class Try extends Component {
       this.err = setTimeout(
         () =>
           this.setState({
-            bsError: err,
+            bsError: err
           }),
         errorTimeout
       )
@@ -180,7 +180,7 @@ export default class Try extends Component {
       reasonError: null,
       bsError: null,
       ocamlError: null,
-      jsIsLatest: false,
+      jsIsLatest: false
     })
   }
 
@@ -204,7 +204,7 @@ export default class Try extends Component {
     const { reason, ocaml, js, reasonError, bsError, ocamlError } = this.state
     const codemirrorStyles = [
       styles.codemirror,
-      isSafari && styles.codemirrorSafari,
+      isSafari && styles.codemirrorSafari
     ]
     return (
       <div css={styles.container}>
@@ -225,7 +225,7 @@ export default class Try extends Component {
                 value={reason}
                 options={{
                   mode: 'rust',
-                  lineNumbers: true,
+                  lineNumbers: true
                 }}
                 onChange={this.updateReason}
               />
@@ -245,7 +245,7 @@ export default class Try extends Component {
                 value={ocaml}
                 options={{
                   mode: 'mllike',
-                  lineNumbers: true,
+                  lineNumbers: true
                 }}
                 onValueChange={this.updateOCaml}
               />
@@ -279,7 +279,7 @@ export default class Try extends Component {
                 options={{
                   mode: 'javascript',
                   lineNumbers: true,
-                  readOnly: 'nocursor',
+                  readOnly: 'nocursor'
                 }}
               />
             </div>
@@ -320,26 +320,26 @@ const formatOutput = item =>
 
 const styles = {
   checkbox: {
-    marginLeft: 10,
+    marginLeft: 10
   },
   iframe: {
     flex: 1,
     border: '1px solid #aaf',
-    margin: 5,
+    margin: 5
   },
   output: {
     flex: 1,
-    padding: 10,
+    padding: 10
   },
   outputLine: {
     fontFamily: 'monospace',
     whiteSpace: 'pre',
-    display: 'block',
+    display: 'block'
   },
 
   errorBody: {
     fontFamily: 'monospace',
-    fontSize: 12,
+    fontSize: 12
   },
   error: {
     position: 'absolute',
@@ -348,7 +348,7 @@ const styles = {
     right: 0,
     backgroundColor: '#faa',
     padding: '10px 20px',
-    zIndex: 10,
+    zIndex: 10
   },
 
   container: {
@@ -359,8 +359,8 @@ const styles = {
     right: 0,
     '@media(max-width: 500px)': {
       position: 'static',
-      display: 'block',
-    },
+      display: 'block'
+    }
   },
   inner: {
     flexDirection: 'row',
@@ -368,8 +368,8 @@ const styles = {
     padding: 20,
     '@media(max-width: 500px)': {
       display: 'block',
-      flexDirection: 'column',
-    },
+      flexDirection: 'column'
+    }
   },
   column: {
     flex: 1,
@@ -377,9 +377,9 @@ const styles = {
     '@media(max-width: 500px)': {
       display: 'block',
       flexShrink: 'initial',
-      flexGrow: 'initial',
+      flexGrow: 'initial'
       // flex: 0,
-    },
+    }
   },
   row: {
     flex: 1,
@@ -391,9 +391,9 @@ const styles = {
       height: 300,
       marginBottom: 20,
       flexShrink: 'initial',
-      flexGrow: 'initial',
+      flexGrow: 'initial'
       // flex: 0,
-    },
+    }
   },
 
   label: {
@@ -409,7 +409,7 @@ const styles = {
     lineHeight: '14px',
     flexDirection: 'row',
     alignItems: 'center',
-    zIndex: 20,
+    zIndex: 20
   },
 
   codemirror: {
@@ -419,14 +419,14 @@ const styles = {
       height: 'auto',
 
       '@media(max-width: 500px)': {
-        height: 300,
-      },
-    },
+        height: 300
+      }
+    }
   },
 
   codemirrorSafari: {
     '& .CodeMirror': {
-      height: 300,
-    },
-  },
+      height: 300
+    }
+  }
 }

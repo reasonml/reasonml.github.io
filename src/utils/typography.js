@@ -19,7 +19,7 @@ const options = {
     'Book Antiqua',
     'Georgia',
     'Century Schoolbook',
-    'serif'
+    'serif',
   ],
   scaleRatio: 2.25,
   plugins: [new CodePlugin()],
@@ -35,7 +35,8 @@ const options = {
 
 const typography = new Typography(options)
 
-typography.headerFontFamily = () => typography.options.headerFontFamily.join(',')
+typography.headerFontFamily = () =>
+  typography.options.headerFontFamily.join(',')
 typography.bodyFontFamily = () => typography.options.headerFontFamily.join(',')
 
 // Hot reload typography in development.

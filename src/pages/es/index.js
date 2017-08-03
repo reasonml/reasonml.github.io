@@ -2,28 +2,28 @@ import React from 'react'
 import Link from 'gatsby-link'
 import Helmet from 'react-helmet'
 
-import Examples from '../pages/community/examples'
-import Header from '../components/Header'
-import Features from '../components/Features'
-import Section from '../components/Section'
-import { accent, gray } from '../utils/colors'
-import logo from '../images/reason_300.png'
-import { headerFontFamily } from '../utils/typography'
+import Examples from '../../pages/community/examples'
+import Header from '../../components/Header'
+import Features from '../../components/Features'
+import Section from '../../components/Section'
+import { accent, gray } from '../../utils/colors'
+import logo from '../../images/reason_300.png'
+import { headerFontFamily } from '../../utils/typography'
 
 const features = [
   {
-    title: 'Types without hassle',
+    title: 'Tipos sin problemas',
     description:
       'Powerful, safe type inference means you rarely have to annotate types, but everything gets checked for you.',
     action: 'See how',
-    url: '/guide/language/type/',
+    url: '/guide/language/type/'
   },
   {
     title: 'Online playground',
     description:
       'Play with Reason in-browser, take a look at the produced OCaml and JavaScript, and try out code samples.',
     action: 'Try it now',
-    url: '/try',
+    url: '/try'
   },
   // {
   //   title: 'Web or Native', // 😢 not ready yet
@@ -36,18 +36,17 @@ const features = [
     description:
       "Use packages from NPM/Yarn with minimum hassle, or even drop in a snippet of raw JavaScript while you're learning!",
     action: 'Learn more',
-    url: '/guide/javascript/interop/',
+    url: '/guide/javascript/interop/'
   },
   {
     title: 'Flexible & Fun',
     description:
       'Make websites, animations, games, servers, cli tools, and more! Take a look at these examples to get inspired.',
     action: 'See examples',
-    url: '/community/examples',
-  },
+    url: '/community/examples'
+  }
 ]
-
-export default class Index extends React.Component {
+export default class IndexEs extends React.Component {
   render() {
     const { javascript, examples } = this.props.data
     return (
@@ -62,7 +61,7 @@ export default class Index extends React.Component {
               while leveraging both the JavaScript & OCaml ecosystems.
             </p>
             <div css={styles.buttonGroup}>
-              <Link to="/guide/javascript/quickstart" css={styles.button}>
+              <Link to="/es/guide/javascript/quickstart" css={styles.button}>
                 Get started
               </Link>
               <Link to="/guide/" css={styles.button}>
@@ -82,7 +81,7 @@ export default class Index extends React.Component {
             <h3 css={styles.columnHeader}>JavaScript quickstart</h3>
             <div
               dangerouslySetInnerHTML={{
-                __html: javascript.childMarkdownRemark.html,
+                __html: javascript.childMarkdownRemark.html
               }}
             />
           </div>
@@ -95,9 +94,8 @@ export default class Index extends React.Component {
     )
   }
 }
-
 export const pageQuery = graphql`
-  query IndexQuery {
+  query IndexEsQuery {
     javascript: file(relativePath: { eq: "guide/javascript/quickstart.md" }) {
       childMarkdownRemark {
         html
@@ -116,23 +114,19 @@ export const pageQuery = graphql`
     }
   }
 `
-
 const styles = {
   container: {},
   inner: {},
-
   header: {
     backgroundColor: gray,
-    alignItems: 'center',
+    alignItems: 'center'
   },
-
   twoColumn: {
     flexDirection: 'row',
     '@media(max-width: 800px)': {
-      flexDirection: 'column',
-    },
+      flexDirection: 'column'
+    }
   },
-
   column: {
     flexGrow: 1,
     flexBasis: 0,
@@ -140,14 +134,12 @@ const styles = {
     margin: '0 20px',
     minWidth: 0,
     '@media(max-width: 800px)': {
-      flexBasis: 'auto',
-    },
+      flexBasis: 'auto'
+    }
   },
-
   columnHeader: {
-    alignSelf: 'center',
+    alignSelf: 'center'
   },
-
   description: {
     maxWidth: 600,
     fontWeight: 200,
@@ -159,14 +151,13 @@ const styles = {
     marginBottom: 0,
     fontFamily: headerFontFamily(),
     '@media(min-width: 800px)': {
-      fontSize: '1.5em',
-    },
+      fontSize: '1.5em'
+    }
   },
   content: {
     maxWidth: 1270,
-    alignSelf: 'center',
+    alignSelf: 'center'
   },
-
   button: {
     fontFamily: headerFontFamily(),
     textDecoration: 'none',
@@ -177,34 +168,30 @@ const styles = {
     padding: '8px 34px',
     borderRadius: 5,
     margin: 10,
-    textAlign: 'center',
+    textAlign: 'center'
   },
-
   buttonGroup: {
     flexDirection: 'row',
     marginBottom: '1.5em',
     '@media(max-width: 340px)': {
       flexDirection: 'column',
-      width: '80%',
-    },
+      width: '80%'
+    }
   },
-
   featuresDivider: {
     height: 1,
-    backgroundColor: '#cecece',
+    backgroundColor: '#cecece'
   },
   features: {
     // backgroundColor: '#d0d0d0',
-    backgroundColor: '#f6f4f4',
+    backgroundColor: '#f6f4f4'
   },
-
   quickstarts: {
     backgroundColor: 'white',
-    padding: 30,
+    padding: 30
   },
-
   logo: {
     maxWidth: 300,
-    width: '80%',
-  },
+    width: '80%'
+  }
 }
