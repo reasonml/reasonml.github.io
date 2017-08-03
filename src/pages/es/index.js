@@ -12,17 +12,17 @@ import { headerFontFamily } from '../../utils/typography'
 
 const features = [
   {
-    title: 'Tipos sin problemas',
+    title: 'Tipos de datos sin problemas',
     description:
-      'Powerful, safe type inference means you rarely have to annotate types, but everything gets checked for you.',
-    action: 'See how',
-    url: '/guide/language/type/'
+      'Un sistema inferido, eficiente y seguro significa que raramente hay que declarar los tipos, sin embargo estan presentes sin nuestra ayuda.',
+    action: 'Ver como',
+    url: '/es/guide/language/type/'
   },
   {
-    title: 'Online playground',
+    title: 'Editor online',
     description:
-      'Play with Reason in-browser, take a look at the produced OCaml and JavaScript, and try out code samples.',
-    action: 'Try it now',
+      'Juga con Reason dentro de tu navegador, mira el codigo producido en OCaml y JavaScript, y proba los ejemplos.',
+    action: 'Prueba ahora',
     url: '/try'
   },
   // {
@@ -32,18 +32,18 @@ const features = [
   //   url: '/guide/native/quickstart/',
   // },
   {
-    title: 'Easy JavaScript interop',
+    title: 'Facil interoperabilidad con JavaScript',
     description:
-      "Use packages from NPM/Yarn with minimum hassle, or even drop in a snippet of raw JavaScript while you're learning!",
-    action: 'Learn more',
-    url: '/guide/javascript/interop/'
+      'Usa paquetes de NPM/Yarn con el menor esfuerzo, o hasta ingresa algunas lineas de JavaScript mientras estes aprendiendo.',
+    action: 'Aprender mas',
+    url: '/es/guide/javascript/interop/'
   },
   {
-    title: 'Flexible & Fun',
+    title: 'Flexible y Divertido',
     description:
-      'Make websites, animations, games, servers, cli tools, and more! Take a look at these examples to get inspired.',
-    action: 'See examples',
-    url: '/community/examples'
+      'Crea paginas web, animaciones, juegos, servidores, herramientas de comados, y mas! Mira los ejemplos para sentirte inspirado.',
+    action: 'Ver ejemplos',
+    url: '/es/community/examples'
   }
 ]
 export default class IndexEs extends React.Component {
@@ -57,15 +57,16 @@ export default class IndexEs extends React.Component {
           <div css={{ alignItems: 'center' }}>
             <img src={logo} css={styles.logo} />
             <p css={styles.description}>
-              Reason lets you write simple, fast and quality type safe code
-              while leveraging both the JavaScript & OCaml ecosystems.
+              Reason te permite escribir codigo mas simple, rapido y de mayor
+              calidad en codigo con tipos seguros mientras aprovechas los
+              ecosistemas de JavaScript y OCaml
             </p>
             <div css={styles.buttonGroup}>
               <Link to="/es/guide/javascript/quickstart" css={styles.button}>
-                Get started
+                Comenzar
               </Link>
-              <Link to="/guide/" css={styles.button}>
-                Learn more
+              <Link to="/es/guide/" css={styles.button}>
+                Aprender Mas
               </Link>
             </div>
           </div>
@@ -78,7 +79,7 @@ export default class IndexEs extends React.Component {
         </Section>
         <Section css={[styles.quickstarts, styles.twoColumn]}>
           <div css={styles.column}>
-            <h3 css={styles.columnHeader}>JavaScript quickstart</h3>
+            <h3 css={styles.columnHeader}>Inicio Rapido en JavaScript</h3>
             <div
               dangerouslySetInnerHTML={{
                 __html: javascript.childMarkdownRemark.html
@@ -86,7 +87,7 @@ export default class IndexEs extends React.Component {
             />
           </div>
           <div css={styles.column}>
-            <h3 css={styles.columnHeader}>Examples</h3>
+            <h3 css={styles.columnHeader}>Ejemplos</h3>
             <Examples />
           </div>
         </Section>
@@ -96,7 +97,9 @@ export default class IndexEs extends React.Component {
 }
 export const pageQuery = graphql`
   query IndexEsQuery {
-    javascript: file(relativePath: { eq: "guide/javascript/quickstart.md" }) {
+    javascript: file(
+      relativePath: { eq: "es/guide/javascript/quickstart.md" }
+    ) {
       childMarkdownRemark {
         html
         frontmatter {

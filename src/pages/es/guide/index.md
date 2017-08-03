@@ -3,7 +3,7 @@ title: La Guia de Reason
 order: 0
 ---
 
-Por aca podemos empezar!
+Para empezar:
 
 - [Guia rapida JavaScript](/es/guide/javascript/quickstart)
 - [Guia rapida nativa](/es/guide/native/quickstart)
