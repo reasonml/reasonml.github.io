@@ -31,8 +31,14 @@ opam add merlin.2.5.4
 If your editor isn't behaving as expected with the above install, do the following:
 
 ```
-which ocamlmerlin refmt ocamlmerlin-reason # It should spit out three paths that contain the word `reason-cli`.
-ocamlmerlin -v # should say "The Merlin toolkit version 2.5.x, for Ocaml 4.02.3"
+which ocamlmerlin refmt ocamlmerlin-reason
 ```
 
-Please verify that your installed OCaml version is `4.02.x` and that Merlin is `>=2.5.1`.
+It should spit out three paths that contain the word `reason-cli`.
+
+```
+ocamlmerlin -version
+```
+
+It should say "The Merlin toolkit version 2.5.x, for Ocaml 4.02.3". Not OCaml 4.03, not 4.04, etc.
+
