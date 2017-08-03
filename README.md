@@ -9,7 +9,7 @@ All pages are in [src/pages/](src/pages/). The markdown files under [src/pages/g
 ## Building
 
 ```
-npm install
+yarn install
 npm run develop
 ```
 
