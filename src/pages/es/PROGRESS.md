@@ -1,0 +1,43 @@
+
+# Translation to Spanish Progress
+
+## Guide
+- [x] What & Why
+- [ ] Editor Setup
+- [ ] Global Installation
+- [ ] Editors Plugins
+- [ ] Extra Goodies
+- [ ] Language basics
+- [ ] Overview
+- [ ] Let Binding
+- [ ] Type!
+- [ ] String & Char
+- [ ] Boolean
+- [ ] Integer & Float
+- [ ] Tuple
+- [ ] Record
+- [ ] Variant!
+- [ ] List & Array
+- [ ] Function
+- [ ] If-Else
+- [ ] More on Type
+- [ ] Destructuring
+- [ ] Pattern Matching!
+- [ ] Mutation
+- [ ] Imperative Loops
+- [ ] JSX
+- [ ] External
+- [ ] Exception
+- [ ] Object
+- [ ] Module
+- [ ] JavaScript
+- [ ] Quickstart
+- [ ] Interop
+- [ ] Syntax Cheatsheet
+- [ ] Libraries
+- [ ] Converting from JS
+- [ ] Native
+- [ ] Quickstart
+- [ ] Converting from OCaml
+- [ ] Comparison to OCaml
+- [ ] Examples
