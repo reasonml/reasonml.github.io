@@ -1,6 +1,6 @@
 ---
-title: Editor Setup
+title: Configuracion del Editor
 order: 10
 ---
 
-This section describes the tools you need to install to get a nice, friendly Reason editing environment.
+Esta seccion descrie las herramientas que necesitas instalar para tener un ambiente de edicion comodo y amigable al usar Reason.
