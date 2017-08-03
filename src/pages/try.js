@@ -217,6 +217,9 @@ export default class Try extends Component {
         <div css={{ backgroundColor: accent, color: 'white' }}>
           <Header inverted />
         </div>
+        <center>
+          <span> <button css={styles.ButtonStyle}>Create Tryit Link</button> </span><input css={styles.inputStyle} type='text' name='tryurl' disabled/>
+        </center>
         <div css={styles.inner}>
           <div css={styles.column}>
             <div css={styles.row}>
@@ -411,6 +414,14 @@ const styles = {
     flexDirection: 'row',
     alignItems: 'center',
     zIndex: 20,
+  },
+
+  inputStyle:{
+    width: '50%',
+    'margin-top': '2px',
+  },
+  ButtonStyle:{
+    color: '#db4d3f',
   },
 
   codemirror: {
