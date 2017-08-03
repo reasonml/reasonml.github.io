@@ -57,6 +57,7 @@ export default class Try extends Component {
     jsIsLatest: false,
     autoEvaluate: true,
     output: [],
+    tryUrl: window.location.href,
   }
   rerr = null
 
@@ -218,7 +219,7 @@ export default class Try extends Component {
           <Header inverted />
         </div>
         <center>
-          <span> <button css={styles.ButtonStyle}>Create Tryit Link</button> </span><input css={styles.inputStyle} type='text' name='tryurl' disabled/>
+          <span> <button css={styles.ButtonStyle}>Create Tryit Link</button> </span><input css={styles.inputStyle} type='text' name='tryUrl' value={this.state.tryUrl} disabled/>
         </center>
         <div css={styles.inner}>
           <div css={styles.column}>
