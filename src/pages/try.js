@@ -30,7 +30,19 @@ const bs = text => {
   }
 }
 
-const defaultSource = 'let x = 10;\nJs.log x;'
+const decodeBase64 = () => {
+    let url_encode = window.location.href;
+    let url = new URL(url_encode);
+    let digestCode = url.searchParams.get("digest");
+    if (digestCode == null) {
+      return 'let x = 10;\nJs.log x;'
+    }else{
+      return window.atob(digestCode);
+    }  
+    
+}
+
+const defaultSource = decodeBase64();
 
 const errorTimeout = 500
 
@@ -63,21 +75,16 @@ export default class Try extends Component {
   handleClick = this.handleClick.bind(this);
 
    handleClick() {
-    var val = this.enCodeBase64(this.state.reason);
+    var val = this.encodeBase64(this.state.reason);
     this.setState({tryUrl: val});
     document.getElementById('digest').disabled = false;
   }
 
-  enCodeBase64(input){
+  encodeBase64(input){
         this.setState({tryUrl : ""});
         return  window.location.href +"?digest=" + window.btoa(input);
   }
 
-
-  deCodeBase64(){
-
-
-  }
 
   rerr = null
 
