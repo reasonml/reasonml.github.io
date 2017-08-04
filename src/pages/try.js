@@ -72,12 +72,10 @@ export default class Try extends Component {
     tryUrl: window.location.href,
   }
 
-  handleClick = this.handleClick.bind(this);
-
-   handleClick() {
+   handleClick = ()=> {
     var val = this.encodeBase64(this.state.reason);
     this.setState({tryUrl: val});
-    document.getElementById('digest').disabled = false;
+    window.location = val;
   }
 
   encodeBase64(input){
@@ -246,7 +244,7 @@ export default class Try extends Component {
           <Header inverted />
         </div>
         <center>
-          <span> <button onClick={this.handleClick} css={styles.ButtonStyle}>Create Tryit Link</button> </span><input css={styles.inputStyle} type='text' id='digest' value={this.state.tryUrl} disabled/>
+          <span> <button onClick={this.handleClick} css={styles.ButtonStyle}>Create Tryit Link</button> </span>
         </center>
         <div css={styles.inner}>
           <div css={styles.column}>
