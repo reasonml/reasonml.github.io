@@ -30,7 +30,19 @@ const bs = text => {
   }
 }
 
-const defaultSource = 'let x = 10;\nJs.log x;'
+const decodeBase64 = () => {
+    let url_encode = window.location.href;
+    let url = new URL(url_encode);
+    let digestCode = url.searchParams.get("digest");
+    if (digestCode == null) {
+      return 'let x = 10;\nJs.log x;'
+    }else{
+      return window.atob(digestCode);
+    }  
+    
+}
+
+const defaultSource = decodeBase64();
 
 const errorTimeout = 500
 
@@ -57,7 +69,21 @@ export default class Try extends Component {
     jsIsLatest: false,
     autoEvaluate: true,
     output: [],
+    tryUrl: window.location.href,
   }
+
+   handleClick = ()=> {
+    var val = this.encodeBase64(this.state.reason);
+    this.setState({tryUrl: val});
+    window.location = val;
+  }
+
+  encodeBase64(input){
+        this.setState({tryUrl : ""});
+        return  window.location.href +"?digest=" + window.btoa(input);
+  }
+
+
   rerr = null
 
   componentDidMount() {
@@ -217,6 +243,9 @@ export default class Try extends Component {
         <div css={{ backgroundColor: accent, color: 'white' }}>
           <Header inverted />
         </div>
+        <center>
+          <span> <button onClick={this.handleClick} css={styles.ButtonStyle}>Create Tryit Link</button> </span>
+        </center>
         <div css={styles.inner}>
           <div css={styles.column}>
             <div css={styles.row}>
@@ -411,6 +440,14 @@ const styles = {
     flexDirection: 'row',
     alignItems: 'center',
     zIndex: 20,
+  },
+
+  inputStyle:{
+    width: '60%',
+    'margin-top': '2px',
+  },
+  ButtonStyle:{
+    color: '#db4d3f',
   },
 
   codemirror: {
