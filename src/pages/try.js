@@ -59,6 +59,26 @@ export default class Try extends Component {
     output: [],
     tryUrl: window.location.href,
   }
+
+  handleClick = this.handleClick.bind(this);
+
+   handleClick() {
+    var val = this.enCodeBase64(this.state.reason);
+    this.setState({tryUrl: val});
+    document.getElementById('digest').disabled = false;
+  }
+
+  enCodeBase64(input){
+        this.setState({tryUrl : ""});
+        return  window.location.href +"?digest=" + window.btoa(input);
+  }
+
+
+  deCodeBase64(){
+
+
+  }
+
   rerr = null
 
   componentDidMount() {
@@ -219,7 +239,7 @@ export default class Try extends Component {
           <Header inverted />
         </div>
         <center>
-          <span> <button css={styles.ButtonStyle}>Create Tryit Link</button> </span><input css={styles.inputStyle} type='text' name='tryUrl' value={this.state.tryUrl} disabled/>
+          <span> <button onClick={this.handleClick} css={styles.ButtonStyle}>Create Tryit Link</button> </span><input css={styles.inputStyle} type='text' id='digest' value={this.state.tryUrl} disabled/>
         </center>
         <div css={styles.inner}>
           <div css={styles.column}>
@@ -418,7 +438,7 @@ const styles = {
   },
 
   inputStyle:{
-    width: '50%',
+    width: '60%',
     'margin-top': '2px',
   },
   ButtonStyle:{
