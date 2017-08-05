@@ -69,7 +69,6 @@ export default class Try extends Component {
     jsIsLatest: false,
     autoEvaluate: true,
     output: [],
-    tryUrl: window.location.href,
   }
 
    handleClick = ()=> {
