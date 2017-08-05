@@ -71,13 +71,13 @@ export default class Try extends Component {
     output: [],
   }
 
-   handleClick = ()=> {
+  handleClick = ()=> {
     var val = this.encodeBase64(this.state.reason);
     window.location = val;
   }
 
   encodeBase64(input){
-        return  window.location.href.split('?')[0] +"?digest=" + window.btoa(input);
+    return  window.location.href.split('?')[0] +"?digest=" + window.btoa(input);
   }
 
 
