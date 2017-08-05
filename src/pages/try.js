@@ -80,7 +80,7 @@ export default class Try extends Component {
 
   encodeBase64(input){
         this.setState({tryUrl : ""});
-        return  window.location.href +"?digest=" + window.btoa(input);
+        return  window.location.href.split('?')[0] +"?digest=" + window.btoa(input);
   }
 
 
