@@ -439,10 +439,6 @@ const styles = {
     zIndex: 20,
   },
 
-  inputStyle:{
-    width: '60%',
-    'margin-top': '2px',
-  },
   ButtonStyle:{
     color: '#db4d3f',
   },
