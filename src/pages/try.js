@@ -73,12 +73,10 @@ export default class Try extends Component {
 
    handleClick = ()=> {
     var val = this.encodeBase64(this.state.reason);
-    this.setState({tryUrl: val});
     window.location = val;
   }
 
   encodeBase64(input){
-        this.setState({tryUrl : ""});
         return  window.location.href.split('?')[0] +"?digest=" + window.btoa(input);
   }
 
