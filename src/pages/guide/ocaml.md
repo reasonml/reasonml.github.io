@@ -20,7 +20,7 @@ Equality | OCaml | Reason
 Structural | `x = y` | `x == y`
 Reference | `x == y` | `x === y`
 
-Equality | OCaml | Reason
+Inequality | OCaml | Reason
 ---------|-------|-------
 Structural | `x <> y` | `x != y`
 Reference | `x != y` | `x !== y`
