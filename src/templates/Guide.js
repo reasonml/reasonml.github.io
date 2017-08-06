@@ -4,6 +4,7 @@ import Helmet from "react-helmet"
 import Section from '../components/Section'
 import GuideSidebar, {constructTree, fixPath} from '../components/GuideSidebar'
 import {accent, gray} from '../utils/colors'
+import editIcon from '../../static/edit-icon.svg'
 
 import Link from "../components/Link"
 import Header from '../components/Header'
@@ -14,7 +15,49 @@ require('./guide.css')
 const editUrl = path =>
   `https://github.com/reasonml/reasonml.github.io/edit/source/src/pages/${path}`
 
+function flattenTreeToPaths(node) {
+  return [node.relativePath].concat(
+    ...node.children.map(child => flattenTreeToPaths(child))
+  )
+}
+
 export default class Guide extends React.Component {
+  renderSequenceLinks() {
+    const {
+      allFile,
+      file: {relativePath},
+    } = this.props.data;
+
+    // only show in guide section
+    if (!relativePath.startsWith('guide')) return null
+
+    const current = fixPath(relativePath)
+    const {section} = this.props.pathContext
+
+    const root = constructTree(section, allFile.edges.map(edge => edge.node))
+    let flattened = flattenTreeToPaths(root)
+
+    let prev = null;
+    let next = null;
+    for (var i = 0; i < flattened.length; i++) {
+      if (flattened[i] === current) {
+        prev = flattened[i - 1]
+        next = flattened[i + 1]
+        break;
+      }
+    }
+
+    return (
+      <div css={styles.sequenceLinks}>
+        <div>
+          {prev &&<Link to={prev}><span>&larr; Précédent</span></Link>}
+        </div>
+        <div>
+          {next &&<Link to={next}><span>Suivant &rarr;</span></Link>}
+        </div>
+      </div>
+    );
+  }
   renderMain() {
     const {relativePath, childMarkdownRemark: {frontmatter: {title}, html}} = this.props.data.file
     let edit
@@ -24,17 +67,21 @@ export default class Guide extends React.Component {
       contents = <Examples />
       edit = editUrl('community/examples.js')
     } else {
-      contents = <div dangerouslySetInnerHTML={{__html: html}} />
+      contents = <div className="markdown-content" dangerouslySetInnerHTML={{__html: html}} />
       edit = editUrl(relativePath)
     }
     return <div css={styles.main}>
       <h2 css={styles.title}>
         {title}
         <Link css={styles.editLink} to={edit}>
-          Suggérer une modification
+          <img css={styles.editIcon} src={editIcon} />
+          <span css={styles.editText}>
+            Suggérer une modification
+          </span>
         </Link>
       </h2>
       {contents}
+      {this.renderSequenceLinks()}
     </div>
   }
 
@@ -83,7 +130,7 @@ const styles = {
   contentSection: {
     flexDirection: 'row',
     '@media(max-width: 800px)': {
-      flexDirection: 'column',
+      flexDirection: 'column-reverse',
     },
   },
   sidebar: {
@@ -95,6 +142,22 @@ const styles = {
     padding: '2em',
     minWidth: 0,
   },
+  editIcon: {
+    marginBottom: 0,
+    '@media(min-width: 800px)': {
+      display: 'none'
+    }
+  },
+  editText: {
+    '@media(max-width: 800px)': {
+      display: 'none'
+    }
+  },
+  sequenceLinks: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingTop: 32
+  }
 }
 
 export const pageQuery = graphql`

@@ -3,32 +3,32 @@ title: Quoi & Pourquoi
 order: 0
 ---
 
-### What Is Reason?
+### Qu'est-ce que Reason ?
 
-Reason is not a new language; it's a new syntax and toolchain powered by the battle-tested language, [OCaml](https://ocaml.org). Reason gives OCaml a familiar syntax geared toward JavaScript programmers, and caters to the existing NPM/Yarn workflow folks already know.
+Reason n'est pas un nouveau langage. C'est une nouvelle syntaxe et chaine de compilation propulsée par le langage testé et approuvé qu'est [OCaml](https://ocaml.org). Reason donne à OCaml une syntaxe familière et orientée vers les développeurs JavaScript et s'adresse aux workflows NPM/Yarn déjà existants que connait la communauté.
 
-In that regard, Reason can almost be considered as a solidly statically typed, faster and simpler cousin of JavaScript, minus the historical crufts, plus the features of ES2030 you can use today, and with access to both the JS and the OCaml ecosystem!
+À cet égard, Reason peut presque être considéré comme un cousin fortement typé de façon statique, plus rapide et plus simple de JavaScript. Les détails historiques en moins, mais les fonctionnalités d'ES2030 que vous pouvez utiliser aujourd'hui et l'accès à l'écosystème JavaScript et OCaml en plus !
 
-Reason compiles to JavaScript thanks to our partner project, [BuckleScript](https://bucklescript.github.io/bucklescript/Manual.html), which compiles OCaml/Reason into readable JavaScript with smooth interop. Reason also compiles to fast, barebone assembly, thanks to OCaml itself.
+Reason compile en JavaScript grâce au partenaire de notre projet [BuckleScript](https://bucklescript.github.io/bucklescript/Manual.html), qui compile OCaml/Reason en un JavaScript lisible avec une interopérabilité impéccable. Reason compile également en assembleur grâce à OCaml lui-même.
 
-### Why Reason?
+### Pourquoi Reason ?
 
-> "Why bother learning an **entire** new language?"
+> "Pourquoi m'embêter à apprendre un **tout** nouveau langage ?"
 
-This isn't what Reason's about.
+Ce n'est pas la raison d'être de Reason.
 
-The realization is that 80% of OCaml's semantics (aka how it runs) already straightforwardly maps over to modern JavaScript and vice-versa\*; if one has the luxury of leaving out a few corners of JavaScript and add a few nice things, one can actually achieve something that compiles to pretty readable JS and directly use 80% of its ecosystem & tooling. That is, on top of being able to compile to barebone assembly, iOS, Android and even [microcontrollers](http://www.algo-prog.info/ocapic/web/index.php?id=ocapic)!
+Le fait est que 80% de la sémantique d'OCaml (aka comment elle s'exécute) est déjà directement orientée vers le JavaScript moderne et vice versa \*. Si on a la possibilité de se permettre de laisser de côté quelques aspects de JavaScript et d'ajouter quelques bonnes choses, on peut réellement réaliser quelque chose qui compile un JavaScript assez lisible et utilise directement 80% de son écosystème et de ses outils. Ceci,  en plus d'être capable de compiler en assembleur, iOS, Android et même en [microcontrôleurs](http://www.algo-prog.info/ocapic/web/index.php?id=ocapic) !
 
-However, it's unclear which features of JS to reshape, in order to fit it into the mold of a language with fast semantics and 100% sound typing. But we can _work backward_, from an already sound language with performance and simplicity taken into account, and give it a few tweaks so that it looks and acts a bit more like the better part of the familiar web language we've come to know.
+Cependant, il n'est pas chose aisée que de savoir quelles fonctionnalités de JavaScript remodeler, afin de les intégrer dans le moule d'un langage avec des sémantiques rapides et fortement typé. Mais nous pouvons *travailler dans le sens inverse*, à partir d'un langage déjà fortement typé, avec la performance et la simplicité prises en compte, et lui faire subir quelques ajustements. Le tout pour qu'il ressemble et agisse un peu plus comme le meilleur aspect du langage Web qui nous est si familier.
 
-All these decisions made it so that, for common use-cases, the learning curve of Reason isn't really higher than learning JS + a gradual type system; in return, you get:
+Toutes ces décisions ont été prises de sorte à ce, pour les cas d'utilisation courante, la courbe d'apprentissage de Reason ne soit pas vraiment supérieure à celle de l'apprentissage de JavaScript + un système de typage progressif. En retour, vous obtenez :
 
-- **A rock solid type system**. OCaml types have 100% coverage (every line of code), inference (types can be deduced and aren't required to be written manually), and soundness (once it compiles, the types are guaranteed to be accurate).
-- **An eye for simplicity & pragmatism**. We allow opt-in side-effect, mutation and object for familiary & interop, while keeping the rest of the language pure, immutable and functional.
-- **A focus on performance**. Reason's build system, [`bsb`](http://bucklescript.github.io/bucklescript/Manual.html#_bucklescript_build_system_code_bsb_code), finishes building in less than 100ms (incremental).
-- **Incremental learning & codebase conversion**. Reap the benefits of a fully typed file from day one. If everything else fails, [paste some raw JavaScript snippets right in your Reason file](/guide/javascript/interop).
-- **Great ecosystem & tooling**. Use [your favorite editor](/guide/editor-tools/editors-plugins), [your favorite NPM package](/guide/javascript/libraries), and any of your [favorite](https://github.com/reasonml/reason-react) [existing](https://github.com/reasonml-community/bs-jest) [stack](https://webpack.js.org).
+- **Un système de typage solide comme le roc**. Les types OCaml possèdent une couverture de 100% (chaque ligne de code), l'inférence (les types peuvent être déduits et ne doivent pas forcément être écrits manuellement) et la sûreté (une fois que ça compile, les types sont garantis pour être précis).
+- **Une attention à la simplicité et au pragmatisme**. Nous autorisons la mutation et l'objet par soucis de familiarité et d'interopérabilité, tout en conservant le reste du langage pur, immutable et fonctionnel.
+- **Un focus sur la performance**. Le système de build de Reason, [`bsb`](http://bucklescript.github.io/bucklescript/Manual.html#_bucklescript_build_system_code_bsb_code), build en moins de 100ms (incrémental).
+- **Apprentissage progressif & conversion de codebase**. Récupérez les avantages d'un fichier entièrement typé dès le premier jour. Si tout le reste échoue, [collez des extraits de JavaScript brut directement dans votre fichier Reason](/guide/javascript/interop).
+- **Super écosystème & outillage**. Utilisez [votre éditeur préféré](/guide/editor-tools/editors-plugins), [votre package NPM favori](/guide/javascript/libraries), et n'importe laquelle de vos [stacks](https://webpack.js.org) [favorites](https://github.com/reasonml/reason-react) [existantes](https://github.com/reasonml-community/bs-jest).
 
-\* Don't believe us? Check our [JS -> Reason cheat sheet](/guide/javascript/syntax-cheatsheet) or try a few snippets of Reason in [the playground](/try/) and observe the output at the right!
+\* Vous ne nous croyez pas ? Jetez un coup d'oeil à notre [cheatsheet JavaScript -> Reason](/guide/javascript/syntax-cheatsheet) ou essayez quelques extraits de Reason dans [l'éditeur](/try/) et observez le résutlat sur votre droite !
 
-_Reason is a open source community project from Facebook_.
+*Reason est un projet communautaire open source de Facebook.*
