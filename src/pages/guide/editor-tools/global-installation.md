@@ -22,8 +22,8 @@ order: 10
 
 ```
 opam update
-opam add reason.1.13.6
-opam add merlin.2.5.4
+opam install reason.1.13.6
+opam install merlin.2.5.4
 ```
 
 ### Troubleshooting
