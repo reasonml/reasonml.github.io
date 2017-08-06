@@ -24,13 +24,13 @@ Si vous utilisez `ocamlbuild` sans `rebuild`, ajoutez la ligne suivante à votre
 <**/*.{re,.rei}>: package(reason), syntax(utf8)
 ```
 
-#### Constructor Syntax Fix
+#### Correction de syntaxe de constructeur
 
 Le code Reason converti peut attacher `[@implicit_arity]` aux constructeurs des variants de la sorte : `C 1 2 [@implicit_arity]`. Cela est dû au fait qu'OCaml à cette syntaxe ambiguë où un constructeur à plusieurs arguments attend l'argument sous la forme d'un *tuple*. Donc pendant le parsing, nous ne savons pas si `C (1, 2)` en OCaml doit être traduit par `C (1, 2)` ou `C 1 2` en Reason.
 Par défaut, nous le convertirons en `C 1 2 [@implicit_arity]`, ce qui indique au compilateur qu'il peut s'agir à la fois de `C 1 2` ou `C (1, 2)`.
 
 Pour empêcher`[@implicit_arity]` d'être généré, on peut fournir `--assume-explicit-arity`
-à `refmt`. Ceci force le formatteur à générer `C 1 2` au lieu de `C 1 2 [@implicit_arity]`.
+à `refmt`. Ceci force le formateur à générer `C 1 2` au lieu de `C 1 2 [@implicit_arity]`.
 
 Cependant, vu que `C 1 2` requiert plusieurs arguments, il pourrait faire échouer la compilation s'il s'agit en fait d'un constructeur avec un seul *tuple* en tant qu'argument (ex : `Some`).
 Nous avons déjà quelques règles d'exception en interne pour gérer la plupart des constructeurs qui requièrent un seul *tuple* en tant qu'argument. De la sorte ils seront convertis correctement (ex : `Some (1, 2)` sera converti en `Some (1, 2)` au lieu de `Some 1 2`, qui ne compilera pas).

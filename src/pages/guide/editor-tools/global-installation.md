@@ -1,24 +1,24 @@
 ---
-title: Global Installation
+title: Installation globale
 order: 10
 ---
 
-**Before setting up the editor plugins**, you need to install the global binaries needed by them.
+**Avant de configurer les plugins de l'éditeur**, vous devez installer les outils globaux dont ils ont besoin.
 
-### (Recommended) Through Npm/Yarn
+### (Recommandé) Via NPM/Yarn
 
-| Platform  | Install command
+| Platforme  | Commande d'installation
 |-----------|-------------------------------------------------------------------------------------------------
 | **OSX**   | `npm install -g https://github.com/reasonml/reason-cli/archive/beta-v-1.13.6-bin-darwin.tar.gz`
 | **Linux** | `npm install -g https://github.com/reasonml/reason-cli/archive/beta-v-1.13.6-bin-linux.tar.gz`
 
-**`reason-cli` currently doesn't work on Windows**, but it's not a hard requirement for using Reason; you still have great CLI build system diagnosis messages through BuckleScript, whose npm global package [`bs-platform`](https://www.npmjs.com/package/bs-platform) does work on Windows.
+**`reason-cli` ne fonctionne pas actuellement sous Windows**, mais ce n'est pas une exigence pour l'utilisation de Reason. Vous disposez toujours de super messages de diagnostic du CLI du build système via BuckleScript, dont le paquet global NPM  [`bs-platform`](https://www.npmjs.com/package/bs-platform) fonctionne lui par contre sur Windows aussi.
 
-### (Alternative) Through OPAM
+### (Alternative) Via OPAM
 
-[OPAM](https://opam.ocaml.org) is the native package manager for OCaml. If you come from OCaml and don't have npm/yarn, you can optionally install this way, but be careful!
+[OPAM](https://opam.ocaml.org) est le package manager natif d'OCaml. Si vous venez d'OCaml et que vous ne disposez pas de NPM/Yarn, vous pouvez éventuellement l'installer de cette façon, mais attention !
 
-**Make sure you're on OCaml `4.02.3`**.
+**Assurez-vous d'être sur OCaml `4.02.3`**.
 
 ```
 opam update
@@ -26,19 +26,19 @@ opam add reason.1.13.6
 opam add merlin.2.5.4
 ```
 
-### Troubleshooting
+### Dépannage
 
-If your editor isn't behaving as expected with the above install, do the following:
+Si votre éditeur ne se comporte pas comme prévu avec l'installation ci-dessus, procédez comme suit :
 
 ```
 which ocamlmerlin refmt ocamlmerlin-reason
 ```
 
-It should spit out three paths that contain the word `reason-cli`.
+Il devrait renvoyer trois chemins qui contiennent le mot `reason-cli`.
 
 ```
 ocamlmerlin -version
 ```
 
-It should say "The Merlin toolkit version 2.5.x, for Ocaml 4.02.3". Not OCaml 4.03, not 4.04, etc.
+Il devrait dire "The Merlin toolkit version 2.5.x, for Ocaml 4.02.3". Non pas OCaml 4.03, ni 4.04, etc.
 

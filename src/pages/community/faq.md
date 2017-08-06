@@ -25,7 +25,7 @@ Elles proviennent de la librairie standard, pre-`open` lors de la compilation de
 Nous compilons vers le natif, mais le workflow natif est actuellement en cours de développement. Pour le moment, nous recommandons de compiler en JS via BuckleScript et d'utiliser les bindings disponibles sur [BuckleTypes](https://github.com/buckletypes) ou autre part.
 
 #### Quel est ce fichier `.merlin` à la racine du projet ?
-C'est le fichier metadata de [Merlin](./tools.html#tools-command-line-utilities-merlin), le backend de l'éditeur d'intégration partagé pour l'autocomplétion, le "saut vers la définition", etc. Pour le [Workflow JavaScript](./gettingStarted.html#javascript-workflow), le système de build de `bsb` génère le fichier `.merlin` pour vous. Vous n'avez pas besoin de vérifier cela dans votre contrôle de version et ne devez pas le modifier manuellement.
+C'est le fichier metadata de [Merlin](./tools.html#tools-command-line-utilities-merlin), le backend de l'éditeur d'intégration partagé pour l'autocomplétion, la "redirection vers définition", etc. Pour le [Workflow JavaScript](./gettingStarted.html#javascript-workflow), le système de build de `bsb` génère le fichier `.merlin` pour vous. Vous n'avez pas besoin de vérifier cela dans votre contrôle de version et ne devez pas le modifier manuellement.
 
 
 #### Je ne vois aucun `import` ou `require` dans mon fichier. Comment fonction la résultion de module ?
