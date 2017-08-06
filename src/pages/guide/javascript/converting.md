@@ -1,5 +1,5 @@
 ---
-title:  Convertir depuis JS
+title:  Convertir depuis JavaScript
 order: 5
 ---
 

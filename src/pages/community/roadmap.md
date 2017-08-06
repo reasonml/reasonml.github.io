@@ -9,7 +9,7 @@ Voici l'endroit où il faut être pour suivre ce qui se passe chez l'équipe Rea
 
 #### Futur proche
 
-- Valider une fonctionnalité secrète de ReasonReact, then la publier
+- Valider une fonctionnalité secrète de ReasonReact, ensuite la publier
 - Une autre fonctionnalité secrète
 - Modification de syntaxe : appels de fonctions à la JavaScript [(pull request)](https://github.com/facebook/reason/pull/1299)
 - Test de structures de données via [immutable.re](https://github.com/facebookincubator/immutable-re)
