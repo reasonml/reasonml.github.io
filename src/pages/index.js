@@ -8,12 +8,13 @@ import Features from '../components/Features'
 import Section from '../components/Section'
 import { accent, gray } from '../utils/colors'
 import logo from '../images/reason_300.png'
+import { headerFontFamily } from '../utils/typography'
 
 const features = [
   {
     title: 'Typez sans tracas',
     description:
-      'Une inférence de type performante signifie que vous devez rarement annoter vos types, mais tout est vérifié pour vous.',
+      'Une inférence de type puissante et sûre signifie que vous devez rarement annoter des types, mais tout est vérifié pour vous.',
     action: 'Voir comment',
     url: '/guide/language/types/',
   },
@@ -26,14 +27,14 @@ const features = [
   },
   // {
   //   title: 'Web ou Natif', // 😢 not ready yet
-  //   description: 'Concevez votre frontend, backend et créez tous les outils dans le même language - sans compromettre la vitesse.',
-  //   action: 'Introduction rapide natif',
+  //   description: 'Créez vos frontend, backend et mêmes vos outils de build dans un seul et unique language - sans compromis sur la vitesse.',
+  //   action: 'Commencer en natif',
   //   url: '/guide/native/quickstart/',
   // },
   {
-    title: "Interopérabilité JavaScript",
+    title: 'Interopérabilité JavaScript',
     description:
-      "Utilisez vos paquets depuis npm sans soucis, ou rajoutez directement un bout de JavaScript pendant que vous apprenez.",
+      'Utilisez vos paquets depuis npm sans soucis, ou rajoutez directement un bout de JavaScript pendant que vous apprenez.',
     action: 'En savoir plus',
     url: '/guide/javascript/interop/',
   },
@@ -57,9 +58,8 @@ export default class Index extends React.Component {
           <div css={{ alignItems: 'center' }}>
             <img src={logo} width={300} height={112} />
             <p css={styles.description}>
-              Reason est une nouvelle syntaxe et chaîne de compilation pour OCaml,
-              un puissant langage qui vous génère un code typé et maintenable, 
-              produisant du JavaScript performant et lisible.
+              Reason vous permet d'écrire un code simple, performant, typé et de
+              qualité, tout en tirant parti des écosystèmes JavaScript et OCaml.
             </p>
             <div css={{ flexDirection: 'row', marginBottom: '1.5em' }}>
               <Link to="/guide/getting-started/" css={styles.button}>
@@ -151,10 +151,16 @@ const styles = {
   description: {
     maxWidth: 600,
     fontWeight: 200,
-    fontSize: '1.5em',
+    fontSize: '1.1em',
     lineHeight: '1.5em',
     textAlign: 'center',
     textShadow: '1px 1px white',
+    padding: '0.8em',
+    marginBottom: 0,
+    fontFamily: headerFontFamily(),
+    '@media(min-width: 800px)': {
+      fontSize: '1.5em',
+    },
   },
   content: {
     maxWidth: 1270,
@@ -162,6 +168,7 @@ const styles = {
   },
 
   button: {
+    fontFamily: headerFontFamily(),
     textDecoration: 'none',
     background: accent,
     border: '1px solid #aaa',
@@ -170,7 +177,18 @@ const styles = {
     padding: '8px 34px',
     borderRadius: 5,
     margin: 10,
+    textAlign: 'center',
   },
+
+  buttonGroup: {
+    flexDirection: 'row',
+    marginBottom: '1.5em',
+    '@media(max-width: 340px)': {
+      flexDirection: 'column',
+      width: '80%',
+    },
+  },
+
   featuresDivider: {
     height: 1,
     backgroundColor: '#cecece',
@@ -183,5 +201,10 @@ const styles = {
   quickstarts: {
     backgroundColor: 'white',
     padding: 30,
+  },
+
+  logo: {
+    maxWidth: 300,
+    width: '80%',
   },
 }
