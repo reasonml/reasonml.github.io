@@ -16,6 +16,10 @@ const links = [
     title: 'Guide',
   },
   {
+    target: '/api/index.html',
+    title: 'API',
+  },
+  {
     target: '/community/',
     title: 'Communauté',
   },

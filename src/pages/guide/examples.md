@@ -1,6 +1,6 @@
 ---
 title: Exemples
-order: 20
+order: 70
 ---
 
 Un exemple vaut mille mots.

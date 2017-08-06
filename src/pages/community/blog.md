@@ -1,6 +1,6 @@
 ---
 title: Blog
-order: 8
+order: 0
 ---
 
 ### Nouveau site !

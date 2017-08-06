@@ -23,7 +23,7 @@ exports.createPages = ({graphql, boundActionCreators}) => {
     })
   })
 
-  return graphql(`{
+  graphql(`{
     allFile(filter:{relativePath:{regex:"/^(guide|community)\\\\/.*\\\\.md$/"}}) {
       edges {
         node {
@@ -53,6 +53,30 @@ exports.createPages = ({graphql, boundActionCreators}) => {
           relativePath,
           relatedFiles: `/^${section}\\/.*\\.md$/`,
         }
+      })
+    })
+  }).then(() => {
+    return graphql(`{
+      allFile(filter:{relativePath:{regex:"/api.*html$/"}}) {
+        edges {
+          node {
+            relativePath
+          }
+        }
+      }
+    }`).then(({errors, data}) => {
+      if (errors) return Promise.reject(errors)
+      if (!data.allFile) {
+          throw new Error('No files found')
+      }
+      data.allFile.edges.forEach(({node: {relativePath}}) => {
+        createPage({
+          path: relativePath,
+          component: path.resolve('src/templates/API.js'),
+          context: {
+            relativePath,
+          }
+        })
       })
     })
   })

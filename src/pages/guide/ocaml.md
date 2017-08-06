@@ -1,6 +1,6 @@
 ---
 title: Comparaison avec OCaml
-order: 10
+order: 50
 ---
 
 Un rapide résumé pour les développeurs OCaml.

@@ -20,8 +20,11 @@ Vous pouvez aussi build en mode watch:
 rpm run watch
 ```
 
-Ce qui va compiler Reason en JavaScrit dans le dossier `/lib/js/`.
+C'est tout ! Ceci compile Reason en JavaScrit dans le dossier `/lib/js/`.
 
-Sinon **pour lancer une application [ReasonReact](https://reasonml.github.io/reason-react/gettingStarted.html)**, essayez `bsb -init my-react-app -theme react`.
-Plus d'informations sur bsb & bsconfig [ici](http://bucklescript.github.io/bucklescript/Manual.html#_bucklescript_build_system_code_bsb_code).
-**BuckleScript dispose d'un support de première classe pour Reason**, c'est pourquoi vous ne voyez pas d'étapes supplémentaires pour l'installation de "reason".
+
+- Lisez ceci pour en savoir plus sur la façon dont nous compilons en JavaScript grâce à notre partenaire sur ce projet, [BuckleScript](http://bucklescript.github.io/bucklescript/Manual.html).
+
+- Sinon, **pour démarrer une application [ReasonReact](//reasonml.github.io/reason-react/gettingStarted.html) app**, essayez `bsb -init my-react-app -theme react`.
+
+- Rendez-vous sur la partie [Configuration de l'éditeur](/guide/editor-tools/global-installation) pour obtenir le plugin Reason de votre éditeur préféré !

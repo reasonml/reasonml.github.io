@@ -1,0 +1,342 @@
+<div class="ocamldoc">
+<div class="navbar"><a class="pre" href="StdLabels.Bytes.html" title="StdLabels.Bytes">Previous</a>
+&#xA0;<a class="up" href="StdLabels.html" title="StdLabels">Up</a>
+&#xA0;<a class="post" href="StdLabels.String.html" title="StdLabels.String">Next</a>
+</div>
+<h1>Module <a href="type_StdLabels.List.html">StdLabels.List</a></h1>
+
+<pre><span class="keyword">module</span> List: ListLabels;
+</pre><hr width="100%">
+
+<pre><span class="keyword">let</span> length: list &apos;a =&gt; int;
+</pre><div class="info ">
+Return the length (number of elements) of the given list.<br>
+</div>
+
+<pre><span class="keyword">let</span> hd: list &apos;a =&gt; &apos;a;
+</pre><div class="info ">
+Return the first element of the given list. Raise
+   <code class="code">Failure &quot;hd&quot;</code> if the list is empty.<br>
+</div>
+
+<pre><span class="keyword">let</span> tl: list &apos;a =&gt; list &apos;a;
+</pre><div class="info ">
+Return the given list without its first element. Raise
+   <code class="code">Failure &quot;tl&quot;</code> if the list is empty.<br>
+</div>
+
+<pre><span class="keyword">let</span> nth: list &apos;a =&gt; int =&gt; &apos;a;
+</pre><div class="info ">
+Return the <code class="code">n</code>-th element of the given list.
+   The first element (head of the list) is at position 0.
+   Raise <code class="code">Failure &quot;nth&quot;</code> if the list is too short.
+   Raise <code class="code">Invalid_argument &quot;List.nth&quot;</code> if <code class="code">n</code> is negative.<br>
+</div>
+
+<pre><span class="keyword">let</span> rev: list &apos;a =&gt; list &apos;a;
+</pre><div class="info ">
+List reversal.<br>
+</div>
+
+<pre><span class="keyword">let</span> append: list &apos;a =&gt; list &apos;a =&gt; list &apos;a;
+</pre><div class="info ">
+Catenate two lists.  Same function as the infix operator <code class="code">@</code>.
+   Not tail-recursive (length of the first argument).  The <code class="code">@</code>
+   operator is not tail-recursive either.<br>
+</div>
+
+<pre><span class="keyword">let</span> rev_append: list &apos;a =&gt; list &apos;a =&gt; list &apos;a;
+</pre><div class="info ">
+<code class="code">ListLabels.rev_append l1 l2</code> reverses <code class="code">l1</code> and concatenates it to <code class="code">l2</code>.
+   This is equivalent to <a href="ListLabels.html#VALrev"><code class="code">ListLabels.rev</code></a><code class="code"> l1 @ l2</code>, but <code class="code">rev_append</code> is
+   tail-recursive and more efficient.<br>
+</div>
+
+<pre><span class="keyword">let</span> concat: list (list &apos;a) =&gt; list &apos;a;
+</pre><div class="info ">
+Concatenate a list of lists.  The elements of the argument are all
+   concatenated together (in the same order) to give the result.
+   Not tail-recursive
+   (length of the argument + length of the longest sub-list).<br>
+</div>
+
+<pre><span class="keyword">let</span> flatten: list (list &apos;a) =&gt; list &apos;a;
+</pre><div class="info ">
+Same as <code class="code">concat</code>.  Not tail-recursive
+   (length of the argument + length of the longest sub-list).<br>
+</div>
+<br>
+<h6 id="6_Iterators">Iterators</h6><br>
+
+<pre><span class="keyword">let</span> iter: f::(&apos;a =&gt; unit) =&gt; list &apos;a =&gt; unit;
+</pre><div class="info ">
+<code class="code">ListLabels.iter f [a1; ...; an]</code> applies function <code class="code">f</code> in turn to
+   <code class="code">a1; ...; an</code>. It is equivalent to
+   <code class="code">begin f a1; f a2; ...; f an; () end</code>.<br>
+</div>
+
+<pre><span class="keyword">let</span> iteri: f::(int =&gt; &apos;a =&gt; unit) =&gt; list &apos;a =&gt; unit;
+</pre><div class="info ">
+Same as <a href="ListLabels.html#VALiter"><code class="code">ListLabels.iter</code></a>, but the function is applied to the index of
+   the element as first argument (counting from 0), and the element
+   itself as second argument.<br>
+<b>Since</b> 4.00.0<br>
+</div>
+
+<pre><span class="keyword">let</span> map: f::(&apos;a =&gt; &apos;b) =&gt; list &apos;a =&gt; list &apos;b;
+</pre><div class="info ">
+<code class="code">ListLabels.map f [a1; ...; an]</code> applies function <code class="code">f</code> to <code class="code">a1, ..., an</code>,
+   and builds the list <code class="code">[f a1; ...; f an]</code>
+   with the results returned by <code class="code">f</code>.  Not tail-recursive.<br>
+</div>
+
+<pre><span class="keyword">let</span> mapi: f::(int =&gt; &apos;a =&gt; &apos;b) =&gt; list &apos;a =&gt; list &apos;b;
+</pre><div class="info ">
+Same as <a href="ListLabels.html#VALmap"><code class="code">ListLabels.map</code></a>, but the function is applied to the index of
+   the element as first argument (counting from 0), and the element
+   itself as second argument.<br>
+<b>Since</b> 4.00.0<br>
+</div>
+
+<pre><span class="keyword">let</span> rev_map: f::(&apos;a =&gt; &apos;b) =&gt; list &apos;a =&gt; list &apos;b;
+</pre><div class="info ">
+<code class="code">ListLabels.rev_map f l</code> gives the same result as
+   <a href="ListLabels.html#VALrev"><code class="code">ListLabels.rev</code></a><code class="code"> (</code><a href="ListLabels.html#VALmap"><code class="code">ListLabels.map</code></a><code class="code"> f l)</code>, but is tail-recursive and
+   more efficient.<br>
+</div>
+
+<pre><span class="keyword">let</span> fold_left: f::(&apos;a =&gt; &apos;b =&gt; &apos;a) =&gt; init::&apos;a =&gt; list &apos;b =&gt; &apos;a;
+</pre><div class="info ">
+<code class="code">ListLabels.fold_left f a [b1; ...; bn]</code> is
+   <code class="code">f (... (f (f a b1) b2) ...) bn</code>.<br>
+</div>
+
+<pre><span class="keyword">let</span> fold_right: f::(&apos;a =&gt; &apos;b =&gt; &apos;b) =&gt; list &apos;a =&gt; init::&apos;b =&gt; &apos;b;
+</pre><div class="info ">
+<code class="code">ListLabels.fold_right f [a1; ...; an] b</code> is
+   <code class="code">f a1 (f a2 (... (f an b) ...))</code>.  Not tail-recursive.<br>
+</div>
+<br>
+<h6 id="6_Iteratorsontwolists">Iterators on two lists</h6><br>
+
+<pre><span class="keyword">let</span> iter2: f::(&apos;a =&gt; &apos;b =&gt; unit) =&gt; list &apos;a =&gt; list &apos;b =&gt; unit;
+</pre><div class="info ">
+<code class="code">ListLabels.iter2 f [a1; ...; an] [b1; ...; bn]</code> calls in turn
+   <code class="code">f a1 b1; ...; f an bn</code>.
+   Raise <code class="code">Invalid_argument</code> if the two lists have
+   different lengths.<br>
+</div>
+
+<pre><span class="keyword">let</span> map2: f::(&apos;a =&gt; &apos;b =&gt; &apos;c) =&gt; list &apos;a =&gt; list &apos;b =&gt; list &apos;c;
+</pre><div class="info ">
+<code class="code">ListLabels.map2 f [a1; ...; an] [b1; ...; bn]</code> is
+   <code class="code">[f a1 b1; ...; f an bn]</code>.
+   Raise <code class="code">Invalid_argument</code> if the two lists have
+   different lengths.  Not tail-recursive.<br>
+</div>
+
+<pre><span class="keyword">let</span> rev_map2: f::(&apos;a =&gt; &apos;b =&gt; &apos;c) =&gt; list &apos;a =&gt; list &apos;b =&gt; list &apos;c;
+</pre><div class="info ">
+<code class="code">ListLabels.rev_map2 f l1 l2</code> gives the same result as
+   <a href="ListLabels.html#VALrev"><code class="code">ListLabels.rev</code></a><code class="code"> (</code><a href="ListLabels.html#VALmap2"><code class="code">ListLabels.map2</code></a><code class="code"> f l1 l2)</code>, but is tail-recursive and
+   more efficient.<br>
+</div>
+
+<pre><span class="keyword">let</span> fold_left2: f::(&apos;a =&gt; &apos;b =&gt; &apos;c =&gt; &apos;a) =&gt; init::&apos;a =&gt; list &apos;b =&gt; list &apos;c =&gt; &apos;a;
+</pre><div class="info ">
+<code class="code">ListLabels.fold_left2 f a [b1; ...; bn] [c1; ...; cn]</code> is
+   <code class="code">f (... (f (f a b1 c1) b2 c2) ...) bn cn</code>.
+   Raise <code class="code">Invalid_argument</code> if the two lists have
+   different lengths.<br>
+</div>
+
+<pre><span class="keyword">let</span> fold_right2: f::(&apos;a =&gt; &apos;b =&gt; &apos;c =&gt; &apos;c) =&gt; list &apos;a =&gt; list &apos;b =&gt; init::&apos;c =&gt; &apos;c;
+</pre><div class="info ">
+<code class="code">ListLabels.fold_right2 f [a1; ...; an] [b1; ...; bn] c</code> is
+   <code class="code">f a1 b1 (f a2 b2 (... (f an bn c) ...))</code>.
+   Raise <code class="code">Invalid_argument</code> if the two lists have
+   different lengths.  Not tail-recursive.<br>
+</div>
+<br>
+<h6 id="6_Listscanning">List scanning</h6><br>
+
+<pre><span class="keyword">let</span> for_all: f::(&apos;a =&gt; bool) =&gt; list &apos;a =&gt; bool;
+</pre><div class="info ">
+<code class="code">for_all p [a1; ...; an]</code> checks if all elements of the list
+   satisfy the predicate <code class="code">p</code>. That is, it returns
+   <code class="code">(p a1) &amp;&amp; (p a2) &amp;&amp; ... &amp;&amp; (p an)</code>.<br>
+</div>
+
+<pre><span class="keyword">let</span> exists: f::(&apos;a =&gt; bool) =&gt; list &apos;a =&gt; bool;
+</pre><div class="info ">
+<code class="code">exists p [a1; ...; an]</code> checks if at least one element of
+   the list satisfies the predicate <code class="code">p</code>. That is, it returns
+   <code class="code">(p a1) || (p a2) || ... || (p an)</code>.<br>
+</div>
+
+<pre><span class="keyword">let</span> for_all2: f::(&apos;a =&gt; &apos;b =&gt; bool) =&gt; list &apos;a =&gt; list &apos;b =&gt; bool;
+</pre><div class="info ">
+Same as <a href="ListLabels.html#VALfor_all"><code class="code">ListLabels.for_all</code></a>, but for a two-argument predicate.
+   Raise <code class="code">Invalid_argument</code> if the two lists have
+   different lengths.<br>
+</div>
+
+<pre><span class="keyword">let</span> exists2: f::(&apos;a =&gt; &apos;b =&gt; bool) =&gt; list &apos;a =&gt; list &apos;b =&gt; bool;
+</pre><div class="info ">
+Same as <a href="ListLabels.html#VALexists"><code class="code">ListLabels.exists</code></a>, but for a two-argument predicate.
+   Raise <code class="code">Invalid_argument</code> if the two lists have
+   different lengths.<br>
+</div>
+
+<pre><span class="keyword">let</span> mem: &apos;a =&gt; set::list &apos;a =&gt; bool;
+</pre><div class="info ">
+<code class="code">mem a l</code> is true if and only if <code class="code">a</code> is equal
+   to an element of <code class="code">l</code>.<br>
+</div>
+
+<pre><span class="keyword">let</span> memq: &apos;a =&gt; set::list &apos;a =&gt; bool;
+</pre><div class="info ">
+Same as <a href="ListLabels.html#VALmem"><code class="code">ListLabels.mem</code></a>, but uses physical equality instead of structural
+   equality to compare list elements.<br>
+</div>
+<br>
+<h6 id="6_Listsearching">List searching</h6><br>
+
+<pre><span class="keyword">let</span> find: f::(&apos;a =&gt; bool) =&gt; list &apos;a =&gt; &apos;a;
+</pre><div class="info ">
+<code class="code">find p l</code> returns the first element of the list <code class="code">l</code>
+   that satisfies the predicate <code class="code">p</code>.
+   Raise <code class="code">Not_found</code> if there is no value that satisfies <code class="code">p</code> in the
+   list <code class="code">l</code>.<br>
+</div>
+
+<pre><span class="keyword">let</span> filter: f::(&apos;a =&gt; bool) =&gt; list &apos;a =&gt; list &apos;a;
+</pre><div class="info ">
+<code class="code">filter p l</code> returns all the elements of the list <code class="code">l</code>
+   that satisfy the predicate <code class="code">p</code>.  The order of the elements
+   in the input list is preserved.<br>
+</div>
+
+<pre><span class="keyword">let</span> find_all: f::(&apos;a =&gt; bool) =&gt; list &apos;a =&gt; list &apos;a;
+</pre><div class="info ">
+<code class="code">find_all</code> is another name for <a href="ListLabels.html#VALfilter"><code class="code">ListLabels.filter</code></a>.<br>
+</div>
+
+<pre><span class="keyword">let</span> partition: f::(&apos;a =&gt; bool) =&gt; list &apos;a =&gt; (list &apos;a, list &apos;a);
+</pre><div class="info ">
+<code class="code">partition p l</code> returns a pair of lists <code class="code">(l1, l2)</code>, where
+   <code class="code">l1</code> is the list of all the elements of <code class="code">l</code> that
+   satisfy the predicate <code class="code">p</code>, and <code class="code">l2</code> is the list of all the
+   elements of <code class="code">l</code> that do not satisfy <code class="code">p</code>.
+   The order of the elements in the input list is preserved.<br>
+</div>
+<br>
+<h6 id="6_Associationlists">Association lists</h6><br>
+
+<pre><span class="keyword">let</span> assoc: &apos;a =&gt; list (&apos;a, &apos;b) =&gt; &apos;b;
+</pre><div class="info ">
+<code class="code">assoc a l</code> returns the value associated with key <code class="code">a</code> in the list of
+   pairs <code class="code">l</code>. That is,
+   <code class="code">assoc a [ ...; (a,b); ...] = b</code>
+   if <code class="code">(a,b)</code> is the leftmost binding of <code class="code">a</code> in list <code class="code">l</code>.
+   Raise <code class="code">Not_found</code> if there is no value associated with <code class="code">a</code> in the
+   list <code class="code">l</code>.<br>
+</div>
+
+<pre><span class="keyword">let</span> assq: &apos;a =&gt; list (&apos;a, &apos;b) =&gt; &apos;b;
+</pre><div class="info ">
+Same as <a href="ListLabels.html#VALassoc"><code class="code">ListLabels.assoc</code></a>, but uses physical equality instead of
+   structural equality to compare keys.<br>
+</div>
+
+<pre><span class="keyword">let</span> mem_assoc: &apos;a =&gt; map::list (&apos;a, &apos;b) =&gt; bool;
+</pre><div class="info ">
+Same as <a href="ListLabels.html#VALassoc"><code class="code">ListLabels.assoc</code></a>, but simply return true if a binding exists,
+   and false if no bindings exist for the given key.<br>
+</div>
+
+<pre><span class="keyword">let</span> mem_assq: &apos;a =&gt; map::list (&apos;a, &apos;b) =&gt; bool;
+</pre><div class="info ">
+Same as <a href="ListLabels.html#VALmem_assoc"><code class="code">ListLabels.mem_assoc</code></a>, but uses physical equality instead of
+   structural equality to compare keys.<br>
+</div>
+
+<pre><span class="keyword">let</span> remove_assoc: &apos;a =&gt; list (&apos;a, &apos;b) =&gt; list (&apos;a, &apos;b);
+</pre><div class="info ">
+<code class="code">remove_assoc a l</code> returns the list of
+   pairs <code class="code">l</code> without the first pair with key <code class="code">a</code>, if any.
+   Not tail-recursive.<br>
+</div>
+
+<pre><span class="keyword">let</span> remove_assq: &apos;a =&gt; list (&apos;a, &apos;b) =&gt; list (&apos;a, &apos;b);
+</pre><div class="info ">
+Same as <a href="ListLabels.html#VALremove_assoc"><code class="code">ListLabels.remove_assoc</code></a>, but uses physical equality instead
+   of structural equality to compare keys.  Not tail-recursive.<br>
+</div>
+<br>
+<h6 id="6_Listsofpairs">Lists of pairs</h6><br>
+
+<pre><span class="keyword">let</span> split: list (&apos;a, &apos;b) =&gt; (list &apos;a, list &apos;b);
+</pre><div class="info ">
+Transform a list of pairs into a pair of lists:
+   <code class="code">split [(a1,b1); ...; (an,bn)]</code> is <code class="code">([a1; ...; an], [b1; ...; bn])</code>.
+   Not tail-recursive.<br>
+</div>
+
+<pre><span class="keyword">let</span> combine: list &apos;a =&gt; list &apos;b =&gt; list (&apos;a, &apos;b);
+</pre><div class="info ">
+Transform a pair of lists into a list of pairs:
+   <code class="code">combine [a1; ...; an] [b1; ...; bn]</code> is
+   <code class="code">[(a1,b1); ...; (an,bn)]</code>.
+   Raise <code class="code">Invalid_argument</code> if the two lists
+   have different lengths.  Not tail-recursive.<br>
+</div>
+<br>
+<h6 id="6_Sorting">Sorting</h6><br>
+
+<pre><span class="keyword">let</span> sort: cmp::(&apos;a =&gt; &apos;a =&gt; int) =&gt; list &apos;a =&gt; list &apos;a;
+</pre><div class="info ">
+Sort a list in increasing order according to a comparison
+   function.  The comparison function must return 0 if its arguments
+   compare as equal, a positive integer if the first is greater,
+   and a negative integer if the first is smaller (see Array.sort for
+   a complete specification).  For example,
+   <a href="Pervasives.html#VALcompare"><code class="code">Pervasives.compare</code></a> is a suitable comparison function.
+   The resulting list is sorted in increasing order.
+   <code class="code">ListLabels.sort</code> is guaranteed to run in constant heap space
+   (in addition to the size of the result list) and logarithmic
+   stack space.
+<p>
+
+   The current implementation uses Merge Sort. It runs in constant
+   heap space and logarithmic stack space.<br>
+</p></div>
+
+<pre><span class="keyword">let</span> stable_sort: cmp::(&apos;a =&gt; &apos;a =&gt; int) =&gt; list &apos;a =&gt; list &apos;a;
+</pre><div class="info ">
+Same as <a href="ListLabels.html#VALsort"><code class="code">ListLabels.sort</code></a>, but the sorting algorithm is guaranteed to
+   be stable (i.e. elements that compare equal are kept in their
+   original order) .
+<p>
+
+   The current implementation uses Merge Sort. It runs in constant
+   heap space and logarithmic stack space.<br>
+</p></div>
+
+<pre><span class="keyword">let</span> fast_sort: cmp::(&apos;a =&gt; &apos;a =&gt; int) =&gt; list &apos;a =&gt; list &apos;a;
+</pre><div class="info ">
+Same as <a href="ListLabels.html#VALsort"><code class="code">ListLabels.sort</code></a> or <a href="ListLabels.html#VALstable_sort"><code class="code">ListLabels.stable_sort</code></a>, whichever is
+    faster on typical input.<br>
+</div>
+
+<pre><span class="keyword">let</span> merge: cmp::(&apos;a =&gt; &apos;a =&gt; int) =&gt; list &apos;a =&gt; list &apos;a =&gt; list &apos;a;
+</pre><div class="info ">
+Merge two lists:
+    Assuming that <code class="code">l1</code> and <code class="code">l2</code> are sorted according to the
+    comparison function <code class="code">cmp</code>, <code class="code">merge cmp l1 l2</code> will return a
+    sorted list containting all the elements of <code class="code">l1</code> and <code class="code">l2</code>.
+    If several elements compare equal, the elements of <code class="code">l1</code> will be
+    before the elements of <code class="code">l2</code>.
+    Not tail-recursive (sum of the lengths of the arguments).<br>
+</div>
+</div>

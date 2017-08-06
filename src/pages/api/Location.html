@@ -1,0 +1,214 @@
+<div class="ocamldoc">
+<div class="navbar"><a class="pre" href="Lexer.html" title="Lexer">Previous</a>
+&#xA0;<a class="up" href="index.html" title="Index">Up</a>
+&#xA0;<a class="post" href="Longident.html" title="Longident">Next</a>
+</div>
+<h1>Module <a href="type_Location.html">Location</a></h1>
+
+<pre><span class="keyword">module</span> Location: sig .. end</pre><div class="info module top">
+An arbitrary value of type <code class="code">t</code>; describes an empty ghost range.<br>
+</div>
+<hr width="100%">
+
+<pre><span class="keyword">type</span> t = {</pre><table class="typetable">
+<tbody><tr>
+<td align="left" valign="top">
+<code>&#xA0;&#xA0;</code></td>
+<td align="left" valign="top">
+<code>loc_start&#xA0;: Lexing.position;</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>&#xA0;&#xA0;</code></td>
+<td align="left" valign="top">
+<code>loc_end&#xA0;: Lexing.position;</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>&#xA0;&#xA0;</code></td>
+<td align="left" valign="top">
+<code>loc_ghost&#xA0;: bool;</code></td>
+
+</tr></tbody></table>
+}
+
+
+
+<pre><span class="keyword">let</span> none: t;
+</pre><div class="info ">
+An arbitrary value of type <code class="code">t</code>; describes an empty ghost range.<br>
+</div>
+
+<pre><span class="keyword">let</span> in_file: string =&gt; t;
+</pre><div class="info ">
+Return an empty ghost range located in a given file.<br>
+</div>
+
+<pre><span class="keyword">let</span> init: Lexing.lexbuf =&gt; string =&gt; unit;
+</pre><div class="info ">
+Set the file name and line number of the <code class="code">lexbuf</code> to be the start
+    of the named file.<br>
+</div>
+
+<pre><span class="keyword">let</span> curr: Lexing.lexbuf =&gt; t;
+</pre><div class="info ">
+Get the location of the current token from the <code class="code">lexbuf</code>.<br>
+</div>
+
+<pre><span class="keyword">let</span> symbol_rloc: unit =&gt; t;
+</pre>
+<pre><span class="keyword">let</span> symbol_gloc: unit =&gt; t;
+</pre>
+<pre><span class="keyword">let</span> rhs_loc: int =&gt; t;
+</pre><div class="info ">
+<code class="code">rhs_loc n</code> returns the location of the symbol at position <code class="code">n</code>, starting
+  at 1, in the current parser rule.<br>
+</div>
+
+<pre><span class="keyword">let</span> input_name: Pervasives.ref string;
+</pre>
+<pre><span class="keyword">let</span> input_lexbuf: Pervasives.ref (option Lexing.lexbuf);
+</pre>
+<pre><span class="keyword">let</span> get_pos_info: Lexing.position =&gt; (string, int, int);
+</pre>
+<pre><span class="keyword">let</span> print_loc: Format.formatter =&gt; t =&gt; unit;
+</pre>
+<pre><span class="keyword">let</span> print_error: Format.formatter =&gt; t =&gt; unit;
+</pre>
+<pre><span class="keyword">let</span> print_error_cur_file: Format.formatter =&gt; unit;
+</pre>
+<pre><span class="keyword">let</span> print_warning: t =&gt; Format.formatter =&gt; Warnings.t =&gt; unit;
+</pre>
+<pre><span class="keyword">let</span> formatter_for_warnings: Pervasives.ref Format.formatter;
+</pre>
+<pre><span class="keyword">let</span> prerr_warning: t =&gt; Warnings.t =&gt; unit;
+</pre>
+<pre><span class="keyword">let</span> echo_eof: unit =&gt; unit;
+</pre>
+<pre><span class="keyword">let</span> reset: unit =&gt; unit;
+</pre>
+<pre><span class="keyword">let</span> warning_printer: Pervasives.ref (t =&gt; Format.formatter =&gt; Warnings.t =&gt; unit);
+</pre><div class="info ">
+Hook for intercepting warnings.<br>
+</div>
+
+<pre><span class="keyword">let</span> default_warning_printer: t =&gt; Format.formatter =&gt; Warnings.t =&gt; unit;
+</pre><div class="info ">
+Original warning printer for use in hooks.<br>
+</div>
+
+<pre><span class="keyword">let</span> highlight_locations: Format.formatter =&gt; list t =&gt; bool;
+</pre>
+<pre><span class="keyword">type</span> &apos;a loc = {</pre><table class="typetable">
+<tbody><tr>
+<td align="left" valign="top">
+<code>&#xA0;&#xA0;</code></td>
+<td align="left" valign="top">
+<code>txt&#xA0;: &apos;a;</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>&#xA0;&#xA0;</code></td>
+<td align="left" valign="top">
+<code>loc&#xA0;: t;</code></td>
+
+</tr></tbody></table>
+}
+
+
+
+<pre><span class="keyword">let</span> mknoloc: &apos;a =&gt; loc &apos;a;
+</pre>
+<pre><span class="keyword">let</span> mkloc: &apos;a =&gt; t =&gt; loc &apos;a;
+</pre>
+<pre><span class="keyword">let</span> print: Format.formatter =&gt; t =&gt; unit;
+</pre>
+<pre><span class="keyword">let</span> print_filename: Format.formatter =&gt; string =&gt; unit;
+</pre>
+<pre><span class="keyword">let</span> absolute_path: string =&gt; string;
+</pre>
+<pre><span class="keyword">let</span> show_filename: string =&gt; string;
+</pre><div class="info ">
+In -absname mode, return the absolute path for this filename.
+        Otherwise, returns the filename unchanged.<br>
+</div>
+
+<pre><span class="keyword">let</span> absname: Pervasives.ref bool;
+</pre>
+<pre><span class="keyword">type</span> error = {</pre><table class="typetable">
+<tbody><tr>
+<td align="left" valign="top">
+<code>&#xA0;&#xA0;</code></td>
+<td align="left" valign="top">
+<code>loc&#xA0;: t;</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>&#xA0;&#xA0;</code></td>
+<td align="left" valign="top">
+<code>msg&#xA0;: string;</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>&#xA0;&#xA0;</code></td>
+<td align="left" valign="top">
+<code>sub&#xA0;: error list;</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>&#xA0;&#xA0;</code></td>
+<td align="left" valign="top">
+<code>if_highlight&#xA0;: string;</code></td>
+
+</tr></tbody></table>
+}
+
+
+
+<pre><span class="keyword">exception</span> Error error;
+</pre>
+
+<pre><span class="keyword">let</span> error: loc::t? =&gt; sub::list error? =&gt; if_highlight::string? =&gt; string =&gt; error;
+</pre>
+<pre><span class="keyword">let</span> errorf:
+  loc::t? =&gt;
+  sub::list error? =&gt;
+  if_highlight::string? =&gt;
+  Pervasives.format4 &apos;a unit string error =&gt;
+  &apos;a;
+</pre>
+<pre><span class="keyword">let</span> raise_errorf:
+  loc::t? =&gt;
+  sub::list error? =&gt;
+  if_highlight::string? =&gt;
+  Pervasives.format4 &apos;a unit string &apos;b =&gt;
+  &apos;a;
+</pre>
+<pre><span class="keyword">let</span> error_of_printer: t =&gt; (Format.formatter =&gt; &apos;a =&gt; unit) =&gt; &apos;a =&gt; error;
+</pre>
+<pre><span class="keyword">let</span> error_of_printer_file: (Format.formatter =&gt; &apos;a =&gt; unit) =&gt; &apos;a =&gt; error;
+</pre>
+<pre><span class="keyword">let</span> error_of_exn: exn =&gt; option error;
+</pre>
+<pre><span class="keyword">let</span> register_error_of_exn: (exn =&gt; option error) =&gt; unit;
+</pre>
+<pre><span class="keyword">let</span> report_error: Format.formatter =&gt; error =&gt; unit;
+</pre>
+<pre><span class="keyword">let</span> error_reporter: Pervasives.ref (Format.formatter =&gt; error =&gt; unit);
+</pre><div class="info ">
+Hook for intercepting error reports.<br>
+</div>
+
+<pre><span class="keyword">let</span> default_error_reporter: Format.formatter =&gt; error =&gt; unit;
+</pre><div class="info ">
+Original error reporter for use in hooks.<br>
+</div>
+
+<pre><span class="keyword">let</span> report_exception: Format.formatter =&gt; exn =&gt; unit;
+</pre></div>

@@ -1,6 +1,6 @@
 ---
 title: JavaScript
-order: 4
+order: 30
 ---
 
 Reason compile en JavaScript et en code natif. Les workflows pour chacun d'eux sont actuellement séparés. Cette page décrit le workflow JavaScript. Notre workflow natif est en *work-in-progress* et peut être vu [ici](./native). Chaque fois que vous coincé :

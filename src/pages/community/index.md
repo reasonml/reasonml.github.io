@@ -1,5 +1,5 @@
 ---
-title: Communité
+title: Communauté
 order: 0
 ---
 

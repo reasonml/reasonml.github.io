@@ -1,0 +1,44 @@
+<div class="ocamldoc">
+<div class="navbar"><a class="pre" href="Ast_helper.Vb.html" title="Ast_helper.Vb">Previous</a>
+&#xA0;<a class="up" href="Ast_helper.html" title="Ast_helper">Up</a>
+&#xA0;<a class="post" href="Ast_helper.Ctf.html" title="Ast_helper.Ctf">Next</a>
+</div>
+<h1>Module <a href="type_Ast_helper.Cty.html">Ast_helper.Cty</a></h1>
+
+<pre><span class="keyword">module</span> Cty: sig .. end</pre><div class="info module top">
+Class type expressions<br>
+</div>
+<hr width="100%">
+
+<pre><span class="keyword">let</span> mk:
+  loc::Ast_helper.loc? =&gt;
+  attrs::Ast_helper.attrs? =&gt;
+  Parsetree.class_type_desc =&gt;
+  Parsetree.class_type;
+</pre>
+<pre><span class="keyword">let</span> attr: Parsetree.class_type =&gt; Parsetree.attribute =&gt; Parsetree.class_type;
+</pre>
+<pre><span class="keyword">let</span> constr:
+  loc::Ast_helper.loc? =&gt;
+  attrs::Ast_helper.attrs? =&gt;
+  Ast_helper.lid =&gt;
+  list Parsetree.core_type =&gt;
+  Parsetree.class_type;
+</pre>
+<pre><span class="keyword">let</span> signature:
+  loc::Ast_helper.loc? =&gt;
+  attrs::Ast_helper.attrs? =&gt;
+  Parsetree.class_signature =&gt;
+  Parsetree.class_type;
+</pre>
+<pre><span class="keyword">let</span> arrow:
+  loc::Ast_helper.loc? =&gt;
+  attrs::Ast_helper.attrs? =&gt;
+  Asttypes.label =&gt;
+  Parsetree.core_type =&gt;
+  Parsetree.class_type =&gt;
+  Parsetree.class_type;
+</pre>
+<pre><span class="keyword">let</span> extension:
+  loc::Ast_helper.loc? =&gt; attrs::Ast_helper.attrs? =&gt; Parsetree.extension =&gt; Parsetree.class_type;
+</pre></div>

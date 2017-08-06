@@ -5,6 +5,7 @@ module.exports = {
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
+    `gatsby-transformer-rawhtml`,
     `gatsby-plugin-glamor`,
     {
       resolve: 'gatsby-source-filesystem',
@@ -23,6 +24,7 @@ module.exports = {
               maxWidth: 690,
             },
           },
+          'gatsby-remark-autolink-headers',
           // {
           //   resolve: 'gatsby-remark-responsive-iframe',
           // },

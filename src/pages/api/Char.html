@@ -1,0 +1,56 @@
+<div class="ocamldoc">
+<div class="navbar"><a class="pre" href="CamlinternalOO.html" title="CamlinternalOO">Previous</a>
+&#xA0;<a class="up" href="index.html" title="Index">Up</a>
+&#xA0;<a class="post" href="Complex.html" title="Complex">Next</a>
+</div>
+<h1>Module <a href="type_Char.html">Char</a></h1>
+
+<pre><span class="keyword">module</span> Char: sig .. end</pre><div class="info module top">
+Character operations.<br>
+</div>
+<hr width="100%">
+
+<pre><span class="keyword">let</span> code: char =&gt; int;
+</pre><div class="info ">
+Return the ASCII code of the argument.<br>
+</div>
+
+<pre><span class="keyword">let</span> chr: int =&gt; char;
+</pre><div class="info ">
+Return the character with the given ASCII code.
+   Raise <code class="code">Invalid_argument &quot;Char.chr&quot;</code> if the argument is
+   outside the range 0--255.<br>
+</div>
+
+<pre><span class="keyword">let</span> escaped: char =&gt; string;
+</pre><div class="info ">
+Return a string representing the given character,
+   with special characters escaped following the lexical conventions
+   of OCaml.<br>
+</div>
+
+<pre><span class="keyword">let</span> lowercase: char =&gt; char;
+</pre><div class="info ">
+Convert the given character to its equivalent lowercase character.<br>
+</div>
+
+<pre><span class="keyword">let</span> uppercase: char =&gt; char;
+</pre><div class="info ">
+Convert the given character to its equivalent uppercase character.<br>
+</div>
+
+<pre><span class="keyword">type</span> t = char;
+</pre>
+<div class="info ">
+An alias for the type of characters.<br>
+</div>
+
+
+<pre><span class="keyword">let</span> compare: t =&gt; t =&gt; int;
+</pre><div class="info ">
+The comparison function for characters, with the same specification as
+    <a href="Pervasives.html#VALcompare"><code class="code">Pervasives.compare</code></a>.  Along with the type <code class="code">t</code>, this function <code class="code">compare</code>
+    allows the module <code class="code">Char</code> to be passed as argument to the functors
+    <a href="Set.Make.html"><code class="code">Set.Make</code></a> and <a href="Map.Make.html"><code class="code">Map.Make</code></a>.<br>
+</div>
+</div>

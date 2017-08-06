@@ -1,0 +1,67 @@
+<div class="ocamldoc">
+<div class="navbar"><a class="pre" href="Ast_helper.Ctf.html" title="Ast_helper.Ctf">Previous</a>
+&#xA0;<a class="up" href="Ast_helper.html" title="Ast_helper">Up</a>
+&#xA0;<a class="post" href="Ast_helper.Cf.html" title="Ast_helper.Cf">Next</a>
+</div>
+<h1>Module <a href="type_Ast_helper.Cl.html">Ast_helper.Cl</a></h1>
+
+<pre><span class="keyword">module</span> Cl: sig .. end</pre><div class="info module top">
+Class expressions<br>
+</div>
+<hr width="100%">
+
+<pre><span class="keyword">let</span> mk:
+  loc::Ast_helper.loc? =&gt;
+  attrs::Ast_helper.attrs? =&gt;
+  Parsetree.class_expr_desc =&gt;
+  Parsetree.class_expr;
+</pre>
+<pre><span class="keyword">let</span> attr: Parsetree.class_expr =&gt; Parsetree.attribute =&gt; Parsetree.class_expr;
+</pre>
+<pre><span class="keyword">let</span> constr:
+  loc::Ast_helper.loc? =&gt;
+  attrs::Ast_helper.attrs? =&gt;
+  Ast_helper.lid =&gt;
+  list Parsetree.core_type =&gt;
+  Parsetree.class_expr;
+</pre>
+<pre><span class="keyword">let</span> structure:
+  loc::Ast_helper.loc? =&gt;
+  attrs::Ast_helper.attrs? =&gt;
+  Parsetree.class_structure =&gt;
+  Parsetree.class_expr;
+</pre>
+<pre><span class="keyword">let</span> fun_:
+  loc::Ast_helper.loc? =&gt;
+  attrs::Ast_helper.attrs? =&gt;
+  Asttypes.label =&gt;
+  option Parsetree.expression =&gt;
+  Parsetree.pattern =&gt;
+  Parsetree.class_expr =&gt;
+  Parsetree.class_expr;
+</pre>
+<pre><span class="keyword">let</span> apply:
+  loc::Ast_helper.loc? =&gt;
+  attrs::Ast_helper.attrs? =&gt;
+  Parsetree.class_expr =&gt;
+  list (Asttypes.label, Parsetree.expression) =&gt;
+  Parsetree.class_expr;
+</pre>
+<pre><span class="keyword">let</span> let_:
+  loc::Ast_helper.loc? =&gt;
+  attrs::Ast_helper.attrs? =&gt;
+  Asttypes.rec_flag =&gt;
+  list Parsetree.value_binding =&gt;
+  Parsetree.class_expr =&gt;
+  Parsetree.class_expr;
+</pre>
+<pre><span class="keyword">let</span> constraint_:
+  loc::Ast_helper.loc? =&gt;
+  attrs::Ast_helper.attrs? =&gt;
+  Parsetree.class_expr =&gt;
+  Parsetree.class_type =&gt;
+  Parsetree.class_expr;
+</pre>
+<pre><span class="keyword">let</span> extension:
+  loc::Ast_helper.loc? =&gt; attrs::Ast_helper.attrs? =&gt; Parsetree.extension =&gt; Parsetree.class_expr;
+</pre></div>

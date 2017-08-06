@@ -1,54 +1,40 @@
 ---
 title: Principes de base du langage
-order: 1
+order: 20
 ---
 
-# What Is Reason
+# Qu'est-ce que Reason
 
-Reason is an umbrella project that provides a curated layer for [OCaml](http://ocaml.org). It offers:
+Raison est un projet ombrelle qui fournit une surcouche organisée pour [OCaml](http://ocaml.org). Il propose :
 
-- A new, familiar syntax for the battle-tested language that is OCaml.
-- A workflow for compiling to JavaScript and native code.
-- A set of friendly documentations, libraries and utilities.
 
-# Why Reason
+- Une nouvelle syntaxe familière pour le langage testé et approuvé qu'est OCaml.
+- Un workflow pour compiler en JavaScript ou en code natif.
+- Un ensemble de documentations, de librairies et d'utilitaires sympa.
 
-#### Worry-free
+# Pourquoi Reason
 
-Reason leverages OCaml's language design and type system to give immediate feedback in the form of compile-time errors and avoided anti-patterns.
+#### Aucun soucis
 
-#### Low Overhead
+Reason s'appuie sur l'architecture et le système de typage d'OCaml pour fournir un retour d'informations immédiat sous la forme d'erreurs au moment de la compilation et de d'anti-patterns qui sont évités.
 
-Reason keeps things simple and lean. Thanks to this, integrating Reason into your existing JavaScript/OCaml project is [hassle-free](./gettingStarted.html#javascript-workflow). Do more with less; reduce your future burden!
+#### Surcharge faible
 
-#### Performant & predictable
+Reason garde les choses simples et efficaces. Grâce à cela, intégrer Reason dans votre projet [JavaScript](/guide/javascript) ou [OCaml](/guide/native) existant est assez simple. Faîtes plus avec moins; Allégez votre futur fardeau !
 
-Let the compiler and the type system nudge you toward writing code that's fast and easy to think about.
+#### Performant & prévisible
 
-How Reason Works
+Laissez le compilateur et le système de typage vous pousser à écrire un code qui est rapide et facile à appréhender.
+
+
+Comment fonctionne Reason
 =========================
 
-The OCaml compiler is organized into several stages, which are exposed as
-libraries. `Reason` replaces part of the compiler toolchain with a completely
-new syntax parser that is more approachable, while still fully compatible with
-the rest of the compiler.  `Reason` also implements a new source printer which
-integrates into your IDE and the new custom [`REPL`](./tools.html#repl).
+Le compilateur OCaml est organisé en plusieurs niveaux, qui sont exposés en tant que librairies. Reason remplace une partie de la chaîne d'outils du compilateur par un analyseur de syntaxe complètement nouveau qui est plus accessible, tout en étant toujours compatible avec le reste du compilateur. Reason implémente également un nouveau *source printer* qui s'intègre dans votre IDE et la nouvelle [`REPL`](/guide/editor-tools/extra-goodies/#repl) custom.
 
-###### Why OCaml?
+###### Pourquoi OCaml ?
 
-OCaml is a great tool for writing highly expressive, functional
-*or* imperative code, with type inference and fast runtime performance.
-Because of these properties, OCaml has helped
-Facebook quickly build scalable infrastructure such as
-[Hack](http://hacklang.org/), [Flow](http://flowtype.org/), and
-[Infer](http://fbinfer.com/). It is also used for other performance sensitive
-applications in the financial industry (Jane Street, Bloomberg). At the same
-time, OCaml has a very mature (*and still growing*) ecosystem for targeting
-browser and `JavaScript` environments with a focus on language interoperability
-and integration with existing `JavaScript` code.
+OCaml est un excellent langage pour écrire un code hautement expressif, fonctionnel *ou* impératif, avec une inférence de types et un runtime rapide et performant. En raison de ces propriétés, OCaml a aidé Facebook à créer rapidement des infrastructures évolutives telles que [Hack](http://hacklang.org/), [Flow](http://flowtype.org/) et
+[Infer](http://fbinfer.com/). Il est également utilisé pour d'autres applications sensibles aux performances dans l'industrie financière (Jane Street, Bloomberg).
 
-
-`Reason`'s non-invasive approach to the `OCaml` compiler allows `Reason` code
-to take advantage of all of the existing `OCaml` compiler
-optimizations/backends such as bare metal `ARM`, `x86`, and even `JavaScript`
-compilation.
+L'approche non-invasive de Reason envers le compilateur OCaml permet au code Reason de profiter de toutes les optimisations/backends existants du compilateur OCaml tel que la compilation ARM, x86 et même JavaScript. OCaml dispose d'un écosystème très mature (*et toujours croissant*) pour cibler les environnements navigateurs et JavaScript en mettant l'accent sur l'interopérabilité des langages et l'intégration avec le code JavaScript existant.

@@ -1,0 +1,55 @@
+<div class="ocamldoc">
+<div class="navbar"><a class="pre" href="ListLabels.html" title="ListLabels">Previous</a>
+&#xA0;<a class="up" href="index.html" title="Index">Up</a>
+&#xA0;<a class="post" href="Marshal.html" title="Marshal">Next</a>
+</div>
+<h1>Module <a href="type_Map.html">Map</a></h1>
+
+<pre><span class="keyword">module</span> Map: sig .. end</pre><div class="info module top">
+Association tables over ordered types.
+<p>
+
+   This module implements applicative association tables, also known as
+   finite maps or dictionaries, given a total ordering function
+   over the keys.
+   All operations over maps are purely applicative (no side-effects).
+   The implementation uses balanced binary trees, and therefore searching
+   and insertion take time logarithmic in the size of the map.
+</p><p>
+
+   For instance:
+   </p><pre class="codepre">     module IntPairs =
+       struct
+         type t = int * int
+         let compare (x0,y0) (x1,y1) =
+           match Pervasives.compare x0 x1 with
+               0 -&gt; Pervasives.compare y0 y1
+             | c -&gt; c
+       end
+
+     module PairsMap = Map.Make(IntPairs)
+
+     let m = PairsMap.(empty |&gt; add (0,1) &quot;hello&quot; |&gt; add (1,0) &quot;world&quot;)
+   </pre>
+<p>
+
+   This creates a new module <code class="code">PairsMap</code>, with a new type <code class="code">&apos;a PairsMap.t</code>
+   of maps from <code class="code">int * int</code> to <code class="code">&apos;a</code>. In this example, <code class="code">m</code> contains <code class="code">string</code>
+   values so its type is <code class="code">string PairsMap.t</code>.<br>
+</p></div>
+<hr width="100%">
+
+<pre><span class="keyword">module</span> type OrderedType = sig .. end</pre><div class="info">
+Input signature of the functor <a href="Map.Make.html"><code class="code">Map.Make</code></a>.
+</div>
+
+<pre><span class="keyword">module</span> type S = sig .. end</pre><div class="info">
+Output signature of the functor <a href="Map.Make.html"><code class="code">Map.Make</code></a>.
+</div>
+
+<pre><span class="keyword">module</span> Make: (Ord: OrderedType) =&gt; S with type key = Ord.t;
+</pre><div class="info">
+Functor building an implementation of the map structure
+   given a totally ordered type.
+</div>
+</div>

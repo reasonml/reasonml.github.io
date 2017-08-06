@@ -1,0 +1,236 @@
+<div class="ocamldoc">
+<div class="navbar"><a class="pre" href="Ast_helper.Pat.html" title="Ast_helper.Pat">Previous</a>
+&#xA0;<a class="up" href="Ast_helper.html" title="Ast_helper">Up</a>
+&#xA0;<a class="post" href="Ast_helper.Val.html" title="Ast_helper.Val">Next</a>
+</div>
+<h1>Module <a href="type_Ast_helper.Exp.html">Ast_helper.Exp</a></h1>
+
+<pre><span class="keyword">module</span> Exp: sig .. end</pre><div class="info module top">
+Expressions<br>
+</div>
+<hr width="100%">
+
+<pre><span class="keyword">let</span> mk:
+  loc::Ast_helper.loc? =&gt;
+  attrs::Ast_helper.attrs? =&gt;
+  Parsetree.expression_desc =&gt;
+  Parsetree.expression;
+</pre>
+<pre><span class="keyword">let</span> attr: Parsetree.expression =&gt; Parsetree.attribute =&gt; Parsetree.expression;
+</pre>
+<pre><span class="keyword">let</span> ident:
+  loc::Ast_helper.loc? =&gt; attrs::Ast_helper.attrs? =&gt; Ast_helper.lid =&gt; Parsetree.expression;
+</pre>
+<pre><span class="keyword">let</span> constant:
+  loc::Ast_helper.loc? =&gt; attrs::Ast_helper.attrs? =&gt; Asttypes.constant =&gt; Parsetree.expression;
+</pre>
+<pre><span class="keyword">let</span> let_:
+  loc::Ast_helper.loc? =&gt;
+  attrs::Ast_helper.attrs? =&gt;
+  Asttypes.rec_flag =&gt;
+  list Parsetree.value_binding =&gt;
+  Parsetree.expression =&gt;
+  Parsetree.expression;
+</pre>
+<pre><span class="keyword">let</span> fun_:
+  loc::Ast_helper.loc? =&gt;
+  attrs::Ast_helper.attrs? =&gt;
+  Asttypes.label =&gt;
+  option Parsetree.expression =&gt;
+  Parsetree.pattern =&gt;
+  Parsetree.expression =&gt;
+  Parsetree.expression;
+</pre>
+<pre><span class="keyword">let</span> function_:
+  loc::Ast_helper.loc? =&gt; attrs::Ast_helper.attrs? =&gt; list Parsetree.case =&gt; Parsetree.expression;
+</pre>
+<pre><span class="keyword">let</span> apply:
+  loc::Ast_helper.loc? =&gt;
+  attrs::Ast_helper.attrs? =&gt;
+  Parsetree.expression =&gt;
+  list (Asttypes.label, Parsetree.expression) =&gt;
+  Parsetree.expression;
+</pre>
+<pre><span class="keyword">let</span> match_:
+  loc::Ast_helper.loc? =&gt;
+  attrs::Ast_helper.attrs? =&gt;
+  Parsetree.expression =&gt;
+  list Parsetree.case =&gt;
+  Parsetree.expression;
+</pre>
+<pre><span class="keyword">let</span> try_:
+  loc::Ast_helper.loc? =&gt;
+  attrs::Ast_helper.attrs? =&gt;
+  Parsetree.expression =&gt;
+  list Parsetree.case =&gt;
+  Parsetree.expression;
+</pre>
+<pre><span class="keyword">let</span> tuple:
+  loc::Ast_helper.loc? =&gt;
+  attrs::Ast_helper.attrs? =&gt;
+  list Parsetree.expression =&gt;
+  Parsetree.expression;
+</pre>
+<pre><span class="keyword">let</span> construct:
+  loc::Ast_helper.loc? =&gt;
+  attrs::Ast_helper.attrs? =&gt;
+  Ast_helper.lid =&gt;
+  option Parsetree.expression =&gt;
+  Parsetree.expression;
+</pre>
+<pre><span class="keyword">let</span> variant:
+  loc::Ast_helper.loc? =&gt;
+  attrs::Ast_helper.attrs? =&gt;
+  Asttypes.label =&gt;
+  option Parsetree.expression =&gt;
+  Parsetree.expression;
+</pre>
+<pre><span class="keyword">let</span> record:
+  loc::Ast_helper.loc? =&gt;
+  attrs::Ast_helper.attrs? =&gt;
+  list (Ast_helper.lid, Parsetree.expression) =&gt;
+  option Parsetree.expression =&gt;
+  Parsetree.expression;
+</pre>
+<pre><span class="keyword">let</span> field:
+  loc::Ast_helper.loc? =&gt;
+  attrs::Ast_helper.attrs? =&gt;
+  Parsetree.expression =&gt;
+  Ast_helper.lid =&gt;
+  Parsetree.expression;
+</pre>
+<pre><span class="keyword">let</span> setfield:
+  loc::Ast_helper.loc? =&gt;
+  attrs::Ast_helper.attrs? =&gt;
+  Parsetree.expression =&gt;
+  Ast_helper.lid =&gt;
+  Parsetree.expression =&gt;
+  Parsetree.expression;
+</pre>
+<pre><span class="keyword">let</span> array:
+  loc::Ast_helper.loc? =&gt;
+  attrs::Ast_helper.attrs? =&gt;
+  list Parsetree.expression =&gt;
+  Parsetree.expression;
+</pre>
+<pre><span class="keyword">let</span> ifthenelse:
+  loc::Ast_helper.loc? =&gt;
+  attrs::Ast_helper.attrs? =&gt;
+  Parsetree.expression =&gt;
+  Parsetree.expression =&gt;
+  option Parsetree.expression =&gt;
+  Parsetree.expression;
+</pre>
+<pre><span class="keyword">let</span> sequence:
+  loc::Ast_helper.loc? =&gt;
+  attrs::Ast_helper.attrs? =&gt;
+  Parsetree.expression =&gt;
+  Parsetree.expression =&gt;
+  Parsetree.expression;
+</pre>
+<pre><span class="keyword">let</span> while_:
+  loc::Ast_helper.loc? =&gt;
+  attrs::Ast_helper.attrs? =&gt;
+  Parsetree.expression =&gt;
+  Parsetree.expression =&gt;
+  Parsetree.expression;
+</pre>
+<pre><span class="keyword">let</span> for_:
+  loc::Ast_helper.loc? =&gt;
+  attrs::Ast_helper.attrs? =&gt;
+  Parsetree.pattern =&gt;
+  Parsetree.expression =&gt;
+  Parsetree.expression =&gt;
+  Asttypes.direction_flag =&gt;
+  Parsetree.expression =&gt;
+  Parsetree.expression;
+</pre>
+<pre><span class="keyword">let</span> coerce:
+  loc::Ast_helper.loc? =&gt;
+  attrs::Ast_helper.attrs? =&gt;
+  Parsetree.expression =&gt;
+  option Parsetree.core_type =&gt;
+  Parsetree.core_type =&gt;
+  Parsetree.expression;
+</pre>
+<pre><span class="keyword">let</span> constraint_:
+  loc::Ast_helper.loc? =&gt;
+  attrs::Ast_helper.attrs? =&gt;
+  Parsetree.expression =&gt;
+  Parsetree.core_type =&gt;
+  Parsetree.expression;
+</pre>
+<pre><span class="keyword">let</span> send:
+  loc::Ast_helper.loc? =&gt;
+  attrs::Ast_helper.attrs? =&gt;
+  Parsetree.expression =&gt;
+  string =&gt;
+  Parsetree.expression;
+</pre>
+<pre><span class="keyword">let</span> new_:
+  loc::Ast_helper.loc? =&gt; attrs::Ast_helper.attrs? =&gt; Ast_helper.lid =&gt; Parsetree.expression;
+</pre>
+<pre><span class="keyword">let</span> setinstvar:
+  loc::Ast_helper.loc? =&gt;
+  attrs::Ast_helper.attrs? =&gt;
+  Ast_helper.str =&gt;
+  Parsetree.expression =&gt;
+  Parsetree.expression;
+</pre>
+<pre><span class="keyword">let</span> override:
+  loc::Ast_helper.loc? =&gt;
+  attrs::Ast_helper.attrs? =&gt;
+  list (Ast_helper.str, Parsetree.expression) =&gt;
+  Parsetree.expression;
+</pre>
+<pre><span class="keyword">let</span> letmodule:
+  loc::Ast_helper.loc? =&gt;
+  attrs::Ast_helper.attrs? =&gt;
+  Ast_helper.str =&gt;
+  Parsetree.module_expr =&gt;
+  Parsetree.expression =&gt;
+  Parsetree.expression;
+</pre>
+<pre><span class="keyword">let</span> assert_:
+  loc::Ast_helper.loc? =&gt; attrs::Ast_helper.attrs? =&gt; Parsetree.expression =&gt; Parsetree.expression;
+</pre>
+<pre><span class="keyword">let</span> lazy_:
+  loc::Ast_helper.loc? =&gt; attrs::Ast_helper.attrs? =&gt; Parsetree.expression =&gt; Parsetree.expression;
+</pre>
+<pre><span class="keyword">let</span> poly:
+  loc::Ast_helper.loc? =&gt;
+  attrs::Ast_helper.attrs? =&gt;
+  Parsetree.expression =&gt;
+  option Parsetree.core_type =&gt;
+  Parsetree.expression;
+</pre>
+<pre><span class="keyword">let</span> object_:
+  loc::Ast_helper.loc? =&gt;
+  attrs::Ast_helper.attrs? =&gt;
+  Parsetree.class_structure =&gt;
+  Parsetree.expression;
+</pre>
+<pre><span class="keyword">let</span> newtype:
+  loc::Ast_helper.loc? =&gt;
+  attrs::Ast_helper.attrs? =&gt;
+  string =&gt;
+  Parsetree.expression =&gt;
+  Parsetree.expression;
+</pre>
+<pre><span class="keyword">let</span> pack:
+  loc::Ast_helper.loc? =&gt; attrs::Ast_helper.attrs? =&gt; Parsetree.module_expr =&gt; Parsetree.expression;
+</pre>
+<pre><span class="keyword">let</span> open_:
+  loc::Ast_helper.loc? =&gt;
+  attrs::Ast_helper.attrs? =&gt;
+  Asttypes.override_flag =&gt;
+  Ast_helper.lid =&gt;
+  Parsetree.expression =&gt;
+  Parsetree.expression;
+</pre>
+<pre><span class="keyword">let</span> extension:
+  loc::Ast_helper.loc? =&gt; attrs::Ast_helper.attrs? =&gt; Parsetree.extension =&gt; Parsetree.expression;
+</pre>
+<pre><span class="keyword">let</span> case:
+  Parsetree.pattern =&gt; guard::Parsetree.expression? =&gt; Parsetree.expression =&gt; Parsetree.case;
+</pre></div>

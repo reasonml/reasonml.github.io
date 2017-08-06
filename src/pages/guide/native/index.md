@@ -1,6 +1,6 @@
 ---
 title: Natif
-order: 5
+order: 40
 ---
 
 Nous utilisons actuellement le workflow OCaml par défaut pour compiler en natif, bien qu'il y ait [des projets en cours](https://github.com/bsansouci/bsb-native) pour ajouter le support de la compilation vers le natif au builder de BuckleScript.

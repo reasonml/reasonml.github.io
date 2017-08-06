@@ -1,6 +1,6 @@
 ---
 title: Fonctions
-order: 3
+order: 100
 ---
 
 Functions are declared with `fun` and return the expression.
