@@ -3,35 +3,35 @@ title: Roadmap & Contribution
 order: 50
 ---
 
-### Reason Team TODOs
+### TODOs de l'équipe Reason
 
-Here's the place to keep up with what's happening for the Reason team! This list isn't exhaustive and might change.
+Voici l'endroit où il faut être pour suivre ce qui se passe chez l'équipe Reason ! Cette liste n'est pas exhaustive et peut changer.
 
-#### Near future
+#### Futur proche
 
-- Validating secret ReasonReact feature, then release it
-- Another secret feature
-- Syntax change: JavaScript-style function calls [pull request](https://github.com/facebook/reason/pull/1299)
-- Testing data structures [immutable.re](https://github.com/facebookincubator/immutable-re)
-- Native compilation in bucklescript's `bsb` (see [this fork](https://github.com/bsansouci/bsb-native))
-- BuckleScript gets package-based namespacing (no more conflicts with other packages' file names)
+- Valider une fonctionnalité secrète de ReasonReact, then la publier
+- Une autre fonctionnalité secrète
+- Modification de syntaxe : appels de fonctions à la JavaScript [(pull request)](https://github.com/facebook/reason/pull/1299)
+- Test de structures de données via [immutable.re](https://github.com/facebookincubator/immutable-re)
+- Compilation native via `bsb` de BuckleScript (see [this fork](https://github.com/bsansouci/bsb-native))
+- BuckleScript obtient un namespacing basé sur les packages (plus de conflits avec les noms de fichiers d'autres paquets)
 
-#### Future
+#### Futur
 
-- Better async story
-- Better dev-time printing facility
-- Better JSON facilities
-- Sleep more
+- Meilleure gestion de l'asynchrone
+- Meilleure gestion de l'affichage du dev-time
+- Meilleure gestion du JSON
+- Plus de sommeil
 
-### Your Contribution Opportunities
+### Vos opportunités de contribution
 
-Wanna help?
+Envie de donner un coup de main ?
 
-- [Better documentation site](https://github.com/reasonml/reasonml.github.io/issues)
-- [Help us translate the docs!](https://github.com/reasonml/reasonml.github.io/issues/3)
-- Contribute to [your favorite editor plugin for Reason](/guide/editor-tools/editors-plugins#officially-supported-editors)
-- On that note: better [ocaml-language-server](https://github.com/freebroccolo/ocaml-language-server). This will potentially power all our editor integration in the future.
-- Come up with more [project names starting with "re"](https://github.com/reasonml/ideas-for-project-names-starting-with-re)
-- Whatever project you'd normally do in JavaScript, try it in Reason + BuckleScript!
-- Talk about Reason and BuckleScript!
-- Ping @chenglou in [Discord](https://discord.gg/reasonml) for more tasks.
+- [Un meilleur site de documentation](https://github.com/reasonml/reasonml.github.io/issues).
+- [Aidez-nous à traduire les docs !](https://github.com/reasonml/reasonml.github.io/issues/3)
+- Contribuez au projet du [plugin Reason de votre éditeur préféré](/guide/editor-tools/editors-plugins#officially-supported-editors).
+- À ce sujet : améliorer [ocaml-language-server](https://github.com/freebroccolo/ocaml-language-server). Cela propulsera potentiellement toute notre intégration éditeur dans le futur.
+- Proposez plus de [noms de projets commençant par "re"](https://github.com/reasonml/ideas-for-project-names-starting-with-re).
+- Quel que soit le projet que vous feriez normalement en JavaScript, essayez plutôt en Reason + BuckleScript !
+- Parlez de Reason et BuckleScript !
+- Ping **@chenglou** sur [Discord](https://discord.gg/reasonml) pour avoir plus de tâches.

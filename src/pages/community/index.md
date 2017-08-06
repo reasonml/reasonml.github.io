@@ -15,8 +15,6 @@ Venez faire un coucou !
 
 ### Github
 
-- [ReasonML Org](https://github.com/reasonml)
-
-- [Plugins éditeur Reason](https://github.com/reasonml-editor)
-
-- [BuckleTypes](https://github.com/BuckleTypes) : des exemples de bindings BuckleScript - JS par la communauté.
+- [Organisation Reason](https://github.com/reasonml)
+- [Organisation Reason Community](https://github.com/reasonml-community)
+- [Plugins éditeurs Reason](https://github.com/reasonml-editor)
