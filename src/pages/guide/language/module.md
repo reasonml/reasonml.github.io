@@ -251,7 +251,7 @@ module MakeSet = fun (Item: Comparable) => {
   let empty = [];
   let add (currentSet: backingType) (newItem: Item.t) :backingType =>
     /* if item exists */
-    if (List.exists (fun x => Item.equal x newItem) currentSet) {
+    if (List.exists (Item.equal newItem) currentSet) {
       currentSet /* return the same (immutable) set (a list really) */
     } else {
       [newItem, ...currentSet]; /* prepend to the set and return it */
