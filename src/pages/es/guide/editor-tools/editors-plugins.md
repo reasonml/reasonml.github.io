@@ -1,31 +1,31 @@
 ---
-title: Editors Plugins
+title: Plugines para Editores
 order: 20
 ---
 
-**Make sure you've installed reason-cli from the previous section.**
+**Asegurate de haber instalado reason-cli mediante la seccion anterior.**
 
-Reason's nature lends itself to great editor support. Most of our editor plugins provides at minimum:
+La naturaleza de Reason permite un excelente soporte de los editores. La mayoria del soporte provee por lo menos:
 
-- Types display.
-- Programmatic code formatting through `refmt`.
-- Errors & warnings display.
-- Syntax highlighting.
-- Type-driven autocomplete.
-- Jump to definition.
+- Muestra de tipos de datos.
+- Formato automatico del codigo mediante `refmt`.
+- Muestra de errores y alertas.
+- Sintaxis.
+- Autocompletado mediante los tipos de datos.
+- Accesso rapido a la definicion.
 
-And other features. See, for example, our VSCode plugin's [feature section](https://github.com/reasonml-editor/vscode-reasonml#features)!
+Y otras caracteristicas. Vea, por ejemplo, [nuestras caracteristicas](https://github.com/reasonml-editor/vscode-reasonml#features) del plugin de VSCode!
 
-### Officially Supported Editors
+### Editores con soporte oficial
 
-- [VSCode](https://github.com/reasonml-editor/vscode-reasonml): **recommended**.
+- [VSCode](https://github.com/reasonml-editor/vscode-reasonml): **recomendado**.
 - [Atom](https://github.com/314eter/atom-ocaml-merlin)
-  - Please install the related packages with `apm install language-reason linter linter-refmt reason-refmt`.
-  - Alternatively, if you use [Nuclide](https://nuclide.io/), Reason support comes by default.
-  - True to the spirit of JavaScript, [here's yet another Atom Reason plugin](https://github.com/zaaack/atom-ide-reason)! Actually, this one's the prospective de-facto Atom Reason plugin. If you feel adventurous, please dog food it!
+  - Porfavor instale los paquetes correspondientes mediante `apm install language-reason linter linter-refmt reason-refmt`.
+  - Alternativamente, si usas [Nuclide](https://nuclide.io/), soporte para Reason viene por defecto.
+  - Fiel al espiritu de JavaScript, [aca hay otro plugin mas de Atom](https://github.com/zaaack/atom-ide-reason)! En realidad, este es el futuro plugin por defecto de Atom para Reason. Si te sientes valiente, porfavor probalo! 
 - [Vim](https://github.com/reasonml-editor/vim-reason)
 - [Emacs](https://github.com/reasonml-editor/reason-mode)
-- [Sublime Text](https://github.com/reasonml-editor/sublime-reason): experimental. Doesn't support type-related features yet.
+- [Sublime Text](https://github.com/reasonml-editor/sublime-reason): experimental. Todavia no tiene soporte con tipos de datos todavia.
 - [IDEA](https://github.com/reasonml-editor/reasonml-idea-plugin)
 
-The GitHub [reasonml-editor](https://github.com/reasonml-editor/) community hosts most of these plugins. If you'd like to add your favorite editor's plugin here, send us a [pull request](https://github.com/reasonml/reasonml.github.io)!
+La comunidad [reasonml-editor](https://github.com/reasonml-editor/) en GitHub tiene la mayoria de estos plugins. Si quieres agregar un plugin de tu editor favorito, mandanos un [pull request](https://github.com/reasonml/reasonml.github.io)!
