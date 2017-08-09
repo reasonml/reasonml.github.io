@@ -96,11 +96,68 @@ let message =
 
 ### Tips & Tricks
 
-Do not abuse the fall-through `_` case too much. This prevents the compiler from sometimes telling you that you've forgotten to cover a case.
+**Flatten your pattern-match whenever you can**. This is a real bug remover. Example below.
 
-Whenever you'd like to use an if-else with many branches, prefer pattern matching instead. It's more [performant](/guide/language/variant#design-decisions) and concise
+Do not abuse the fall-through `_` case too much. This prevents the compiler from telling you that you've forgotten to cover a case (exhaustiveness check), which would be especially helpful after a refactoring where you add a new case to a variant. Try only using `_` against infinite possibilities, e.g. string, int, etc.
 
-See the example of switch + tuple [here](/guide/language/tuple#tips--tricks).
+Here's a series of examples, from worst to best:
+
+```reason
+let optionBoolToJsBoolean opt => 
+  if (opt == None) {
+    Js.false_
+  } else {
+    if (opt == Some true) {
+      Js.true_
+    } else {
+      Js.false_
+    }
+  };
+```
+
+Now that's just silly =). Let's turn it into pattern-matching:
+
+```reason
+let optionBoolToJsBoolean opt => switch opt {
+| None => Js.false_
+| Some a => switch a {
+  | true => Js.true_
+  | false => Js.false_
+  }
+};
+```
+
+Slightly better, but still nested. Pattern-matching allows you to do this:
+
+```reason
+let optionBoolToJsBoolean opt => switch opt {
+| None => Js.false_
+| Some true => Js.true_
+| Some false => Js.false_
+};
+```
+
+Much more linear-looking! Now, you might be tempted to do this:
+
+```reason
+let optionBoolToJsBoolean opt => switch opt {
+| Some true => Js.true_
+| _ => Js.false_
+};
+```
+
+Which is much more concise, but kills the exhaustiveness check mentioned above. This is the best:
+
+```reason
+let optionBoolToJsBoolean opt => switch opt {
+| Some true => Js.true_
+| Some false | None => Js.false_
+};
+```
+
+Pretty darn hard to make a mistake in this code at this point! Whenever you'd like to use an if-else with many branches, prefer pattern matching instead. It's more concise and [performant](/guide/language/variant#design-decisions) too.
+
+See another example, with switch + tuple [here](/guide/language/tuple#tips--tricks).
 
 ### Design Notes
 
