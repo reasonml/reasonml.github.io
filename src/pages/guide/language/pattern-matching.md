@@ -161,7 +161,9 @@ See another example, with switch + tuple [here](/guide/language/tuple#tips--tric
 
 ### Design Notes
 
-Pattern matching corresponds to case analysis in math. Using it for the first time might make you feel like you've been missing out all these years.
+The notorious [fizzbuzz problem](https://en.wikipedia.org/wiki/Fizz_buzz#Programming_interviews) strangely trips some people up, partially due its nature of paralyzing the programmer who hopes to simplify/unify the few condition branches in search of elegance where there's none. While fizzbuzz is slightly too dynamic to be solved in `when`-less switches, hopefully you can see that usually, pattern-matching's visual conciseness allows us to overcome decision paralysis, while keeping all the benefits (and more, as you've seen) of a bunch of brute-forced `if-else`s. There's really nothing wrong with explicitly listing out all the possibilities; Pattern matching corresponds to **case analysis** in math, a valid problem-solving technique that proves to be extremely convenient.
+
+Using a Reason `switch` for the first time might make you feel like you've been missing out all these years. Careful, for it might ruin other languages for you =).
 
 If you've tried to refactor a big, nested if-else logic, you might realize it's very hard to get the logic right. On the other hand, pattern matching + tuple conceptually maps to a 2D table, where each cell can be independently filled. This ensures that whenever you need to add a case in the `switch`, you can target that and only that table cell, without messing other cells up.
 
