@@ -33,7 +33,7 @@ const bs = text => {
 }
 
 // worst names ever
-const [encode64, decode64] = [btoa, atob]
+const [encode64, decode64] = [window.btoa, window.atob]
 const queryParamPrefix = "?encoded_snippet="
 
 const decodeSnippetFromURL = () => {
