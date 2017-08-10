@@ -3,6 +3,8 @@ import Helmet from 'react-helmet'
 import Header from '../components/Header'
 import Section from '../components/Section'
 import { accent, gray } from '../utils/colors'
+import {headerFontFamily} from '../utils/typography'
+import debounce from '../utils/debounce'
 
 let CodeMirror
 if (typeof navigator !== 'undefined') {
@@ -30,19 +32,35 @@ const bs = text => {
   }
 }
 
-const decodeBase64 = () => {
-    let url_encode = window.location.href;
-    let url = new URL(url_encode);
-    let digestCode = url.searchParams.get("digest");
-    if (digestCode == null) {
-      return 'let x = 10;\nJs.log x;'
-    }else{
-      return window.atob(digestCode);
-    }  
-    
+// worst names ever
+const [encode64, decode64] = [btoa, atob]
+const queryParamPrefix = "?encoded_snippet="
+
+const decodeSnippetFromURL = () => {
+  // returns ?encoded_snippet=blablabla
+  const queryParam = window.location.search;
+  const encodedSnippet = queryParam.slice(queryParamPrefix.length);
+
+  if (encodedSnippet === '') {
+    return 'let x = 10;\nJs.log x;'
+  } else {
+    return decode64(encodedSnippet);
+  }
 }
 
-const defaultSource = decodeBase64();
+const encodeSnippetToURL = input => {
+  const encodedSnippet = encode64(input);
+  // avoid a refresh of the page; we also don't want every few keystrokes to
+  // create a new history for the back button, so replace the current one
+  const newURL = 
+    window.location.origin + 
+    window.location.pathname + 
+    queryParamPrefix + 
+    encodedSnippet;
+  window.history.replaceState(null, '', newURL);
+}
+
+const defaultSource = decodeSnippetFromURL();
 
 const errorTimeout = 500
 
@@ -71,17 +89,7 @@ export default class Try extends Component {
     output: [],
   }
 
-  handleClick = ()=> {
-    var val = this.encodeBase64(this.state.reason);
-    window.location = val;
-  }
-
-  encodeBase64(input){
-    return  window.location.href.split('?')[0] +"?digest=" + window.btoa(input);
-  }
-
-
-  rerr = null
+  err = null
 
   componentDidMount() {
     waitForLoaded(() => {
@@ -111,8 +119,11 @@ export default class Try extends Component {
     this.iframe.contentDocument.body.innerHTML = '(iframe)'
   }
 
-  updateReason = reason => {
+  updateReason = debounce(reason => {
     if (reason === this.state.reason) return
+
+    encodeSnippetToURL(reason);
+
     clearTimeout(this.err)
     const converted = window.refmt(reason, 'RE', 'implementation', 'ML')
     if (converted[0] !== 'REtoML') {
@@ -135,7 +146,7 @@ export default class Try extends Component {
     const ocaml = converted[1]
 
     this.tryCompiling(reason, ocaml)
-  }
+  }, 100)
 
   updateOCaml = ocaml => {
     if (ocaml === this.state.ocaml) return
@@ -240,9 +251,7 @@ export default class Try extends Component {
         <div css={{ backgroundColor: accent, color: 'white' }}>
           <Header inverted />
         </div>
-        <center>
-          <span> <button onClick={this.handleClick} css={styles.ButtonStyle}>Create Tryit Link</button> </span>
-        </center>
+        <div css={styles.info}>Copy the URL to share the code snippet</div>
         <div css={styles.inner}>
           <div css={styles.column}>
             <div css={styles.row}>
@@ -392,7 +401,7 @@ const styles = {
   inner: {
     flexDirection: 'row',
     flex: 1,
-    padding: 20,
+    padding: '10px 20px 20px 20px',
     '@media(max-width: 500px)': {
       display: 'block',
       flexDirection: 'column',
@@ -439,8 +448,10 @@ const styles = {
     zIndex: 20,
   },
 
-  ButtonStyle:{
-    color: '#db4d3f',
+  info: {
+    fontFamily: headerFontFamily(),
+    fontSize: 16,
+    padding: '10px 20px 0 20px',
   },
 
   codemirror: {
