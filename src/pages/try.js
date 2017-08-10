@@ -32,8 +32,6 @@ const bs = text => {
   }
 }
 
-// worst names ever
-const [encode64, decode64] = [window.btoa, window.atob]
 const queryParamPrefix = "?encoded_snippet="
 
 const decodeSnippetFromURL = () => {
@@ -44,12 +42,12 @@ const decodeSnippetFromURL = () => {
   if (encodedSnippet === '') {
     return 'let x = 10;\nJs.log x;'
   } else {
-    return decode64(encodedSnippet);
+    return window.atob(encodedSnippet);
   }
 }
 
 const encodeSnippetToURL = input => {
-  const encodedSnippet = encode64(input);
+  const encodedSnippet = window.btoa(input);
   // avoid a refresh of the page; we also don't want every few keystrokes to
   // create a new history for the back button, so replace the current one
   const newURL = 
@@ -59,8 +57,6 @@ const encodeSnippetToURL = input => {
     encodedSnippet;
   window.history.replaceState(null, '', newURL);
 }
-
-const defaultSource = decodeSnippetFromURL();
 
 const errorTimeout = 500
 
@@ -94,6 +90,7 @@ export default class Try extends Component {
   componentDidMount() {
     waitForLoaded(() => {
       // this.setState({loaded: true})
+      const defaultSource = decodeSnippetFromURL();
       this.updateReason(defaultSource)
     })
     this.iframe.contentWindow.console = {
