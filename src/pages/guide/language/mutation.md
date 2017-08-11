@@ -39,7 +39,7 @@ let five = foo.contents;
 foo.contents = 5;
 ```
 
-Before reaching for know, know that you can achieve lightweight, local "mutations" through overriding let bindings:
+Before reaching for `ref`, know that you can achieve lightweight, local "mutations" through overriding let bindings:
 
 ```reason
 let foo = 10;
