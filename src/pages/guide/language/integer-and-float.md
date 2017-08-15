@@ -27,6 +27,6 @@ There's no Float module in the current standard library. For JS compilation, see
 
 "Why the heck can't I just use an overloaded `+` for both int and float? Why is it that each time I find a performant language with great types and interop and community, I find these kind of flaws?"
 
-There there. Polymorphic operators, under the current type system, would need to be hard-coded into the compiler. The physical polymorphic equal, `==` is such operator, `+` and the rest aren't. [Improvements are under way](https://www.reddit.com/r/ocaml/comments/2vyk10/modular_implicits/) to make them work as desired. In the meantime, let's keep shipping =).
+There, there. Polymorphic operators, under the current type system, would need to be hard-coded into the compiler. The physical polymorphic equal, `==`, is such an operator; `+` and the rest aren't. [Improvements are under way](https://www.reddit.com/r/ocaml/comments/2vyk10/modular_implicits/) to make them work as desired. In the meantime, let's keep shipping =).
 
 Additionally, floats are rather special in Reason/OCaml native. [Check here](http://www.lexifi.com/blog/unboxed-floats-ocaml) if you're interested in learning some rather interesting optimizations!

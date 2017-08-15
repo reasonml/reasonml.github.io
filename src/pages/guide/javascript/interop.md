@@ -104,7 +104,7 @@ I've run into more than a few bugs because of raw JavaScript that I added to sav
 
 ## Settling down and getting disciplined about things
 
-So far we've been using `bs.raw`, which is a very fast n loose way to do it, and **not** suitable for production.
+So far we've been using `bs.raw`, which is a very fast and loose way to do it, and **not** suitable for production.
 
 But what if we actually need to call a function that's in JavaScript? It's needed for interacting with the DOM, or using node modules. In BuckleScript, you use an `external` declaration ([docs](http://bucklescript.github.io/bucklescript/Manual.html#_binding_to_simple_js_functions_values)).
 
@@ -133,9 +133,9 @@ let ctx = getContext myCanvas "2d";
 
 So let's unpack what's going on. We created some abstract types for the Canvas DOM node and the associated RenderingContext object.
 
-Then we made a `getContext` function, but instead of `@@bs.val` we used `@@bs.send`, and we used an empty string for the text of the external. `@@bs.send` means "we're calling a method on the first argument", which in this case is the canvas. BuckleScript will translate this into `theFirstArgument.getContext(theSecondArgument, ...)`.
+Then we made a `getContext` function, but instead of `@@bs.val` we used `@@bs.send`, and we used an empty string for the text of the external. `@@bs.send` means "we're calling a method on the first argument", which in this case is the canvas. Given the above, BuckleScript will translate `getContext theFirstArgument theSecondArgument` into `theFirstArgument.getContext(theSecondArgument, ...)`.
 
-And the empty string means "the js-name is the same as the name we're giving the external here in BuckleScript-land", in this case `getContext`. If we wanted to name it something else (like `getRenderingContext`), when we'd have to supply the string `"getContext"` so that BuckleScript calls the right function.
+The empty string means "the JS name is the same as the name we're giving the external in BuckleScript-land" – in this case `getContext`. If we wanted to name it something else (like `getRenderingContext`), then we'd have to supply the string `"getContext"` so that BuckleScript calls the right function.
 
 Let's add one more function just so it's interesting.
 

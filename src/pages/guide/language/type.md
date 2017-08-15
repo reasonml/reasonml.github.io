@@ -48,7 +48,7 @@ let x: scoreType = 10;
 
 Reason is backed by OCaml, whose type system has received decades of engineering. Here are a few highlights:
 
-- **Types can be inferred**. The type system deduces the types for you even if you don't manually writing them down. This speeds up the prototyping phase. Additionally, editor features like [VSCode's codelens](https://github.com/reasonml-editor/vscode-reasonml) show you all the types while you write code.
+- **Types can be inferred**. The type system deduces the types for you even if you don't manually write them down. This speeds up the prototyping phase. Additionally, editor features like [VSCode's codelens](https://github.com/reasonml-editor/vscode-reasonml) show you all the types while you write code.
 
 - **The type coverage is always 100%**. We don't need a "type coverage" tool! Every piece of Reason code has a type.
 

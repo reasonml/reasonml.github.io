@@ -6,7 +6,16 @@ Frequently Asked Questions
 =======
 
 #### Should I learn Reason or OCaml first?
-There's no need to pick! Reason and OCaml share the exact same semantics (i.e. how the code runs). Only the syntax differ. Carry [Reason-tools](https://github.com/reasonml/reason-tools) around so that you can freely convert between the two syntaxes. A Reason tutorial is an OCaml tutorial, vice-versa.
+There's no need to pick! Reason and OCaml share the exact same semantics (i.e. how the code runs). Only the syntax differ. Carry [Reason-tools](https://github.com/reasonml/reason-tools) around so that you can freely convert between the two syntaxes. A Reason tutorial is an OCaml tutorial, vice-versa. In the terminal, you can have these alises:
+
+```sh
+# converts ocaml code into reason
+alias mlre="pbpaste | refmt --parse ml --print re --interface false | pbcopy"
+# converts reason code into ocaml
+alias reml="pbpaste | refmt --parse re --print ml --interface false | pbcopy"
+```
+
+They'll take your code from the (macOS) clipboard, convert it, and paste it back into your clipboard! Swap out pbpaste/pbcopy with your system's clipboard functions.
 
 #### I'm not sure what to do with Reason
 [We compile to JS very well](/guide/javascript). Think of what project you'd usually make if it was pure JavaScript; try porting/writing that in Reason + BuckleScript instead! We recommend trying to make concrete, end-user projects (e.g. a little command line util) rather than infra-level projects (e.g. a boilerplate generator). The latter category requires expertise and understanding idiomatic Reason code.
@@ -16,6 +25,15 @@ See [here](/guide/javascript). Reason's a syntax for OCaml and supports all its 
 
 #### Where do all these `print_endline`, `string_of_int` functions come from?
 They're from the standard library, pre-`open`ed during the compilation of your file. This is why you see them in scope.
+
+#### Can I have a function to print arbitrary data structures?
+If you're compiling to JavaScript through BuckleScript, you can use the JS `console.log` through [`Js.log`](https://bucklescript.github.io/bucklescript/api/Js.html#VALlog). If you're compiling to native, you'll need something like [ppx_show](https://github.com/diml/ppx_show). A future OCaml feature (called modular implicit) will solve this directly in the language.
+
+#### Why is there a + for adding ints and +. for adding floats, etc.?
+See [here](/guide/language/integer-and-float#design-decisions).
+
+#### Does library ___ work with Reason?
+Most JS libraries should easily work under Reason + BuckleScript. On the native side, since Reason's just a syntax transform: yes, they work with Reason too. But the native workflow is currently work-in-progress and needs polish.
 
 #### What's the server-side story? Should I compile to native or to JS and use node.js?
 We do compile to native, but the native workflow is currently work-in-progress. At this time, we recommend compiling to JS through BuckleScript and use the bindings at [reasonml-community](https://github.com/reasonml-community) or somewhere else.
@@ -36,7 +54,7 @@ Generally speaking, we recommend binding to the JS library thinly rather than th
 See also our [JS interop guide](/guide/javascript/interop).
 
 #### Bsb: is there a way to configure the output directory?
-Not currently. We'd like to keep the configuration minimal.
+Not currently. We're keeping the configuration minimal. We'll add it later based on popular demands.
 
 #### The compiler says the module can't be found.
 Are you using a third-party module? If you're compiling to JS, did you add the dependency in your [`bsconfig.json`](http://bucklescript.github.io/bucklescript/Manual.html#_get_started)'s `bs-dependencies` field? Also, did you do `bsb -make-world`? `bsb` by default only build the root project itself for performance.

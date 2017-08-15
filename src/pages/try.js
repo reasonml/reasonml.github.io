@@ -3,6 +3,8 @@ import Helmet from 'react-helmet'
 import Header from '../components/Header'
 import Section from '../components/Section'
 import { accent, gray } from '../utils/colors'
+import {headerFontFamily} from '../utils/typography'
+import debounce from '../utils/debounce'
 
 let CodeMirror
 if (typeof navigator !== 'undefined') {
@@ -30,7 +32,31 @@ const bs = text => {
   }
 }
 
-const defaultSource = 'let x = 10;\nJs.log x;'
+const queryParamPrefix = "?encoded_snippet="
+
+const decodeSnippetFromURL = () => {
+  // returns ?encoded_snippet=blablabla
+  const queryParam = window.location.search;
+  const encodedSnippet = queryParam.slice(queryParamPrefix.length);
+
+  if (encodedSnippet === '') {
+    return 'let x = 10;\nJs.log x;'
+  } else {
+    return window.atob(encodedSnippet);
+  }
+}
+
+const encodeSnippetToURL = input => {
+  const encodedSnippet = window.btoa(input);
+  // avoid a refresh of the page; we also don't want every few keystrokes to
+  // create a new history for the back button, so replace the current one
+  const newURL = 
+    window.location.origin + 
+    window.location.pathname + 
+    queryParamPrefix + 
+    encodedSnippet;
+  window.history.replaceState(null, '', newURL);
+}
 
 const errorTimeout = 500
 
@@ -57,11 +83,13 @@ export default class Try extends Component {
     autoEvaluate: true,
     output: [],
   }
-  rerr = null
+
+  err = null
 
   componentDidMount() {
     waitForLoaded(() => {
       // this.setState({loaded: true})
+      const defaultSource = decodeSnippetFromURL();
       this.updateReason(defaultSource)
     })
     this.iframe.contentWindow.console = {
@@ -87,8 +115,11 @@ export default class Try extends Component {
     this.iframe.contentDocument.body.innerHTML = '(iframe)'
   }
 
-  updateReason = reason => {
+  updateReason = debounce(reason => {
     if (reason === this.state.reason) return
+
+    encodeSnippetToURL(reason);
+
     clearTimeout(this.err)
     const converted = window.refmt(reason, 'RE', 'implementation', 'ML')
     if (converted[0] !== 'REtoML') {
@@ -111,7 +142,7 @@ export default class Try extends Component {
     const ocaml = converted[1]
 
     this.tryCompiling(reason, ocaml)
-  }
+  }, 100)
 
   updateOCaml = ocaml => {
     if (ocaml === this.state.ocaml) return
@@ -216,6 +247,7 @@ export default class Try extends Component {
         <div css={{ backgroundColor: accent, color: 'white' }}>
           <Header inverted />
         </div>
+        <div css={styles.info}>Copy the URL to share the code snippet</div>
         <div css={styles.inner}>
           <div css={styles.column}>
             <div css={styles.row}>
@@ -365,7 +397,7 @@ const styles = {
   inner: {
     flexDirection: 'row',
     flex: 1,
-    padding: 20,
+    padding: '10px 20px 20px 20px',
     '@media(max-width: 500px)': {
       display: 'block',
       flexDirection: 'column',
@@ -410,6 +442,12 @@ const styles = {
     flexDirection: 'row',
     alignItems: 'center',
     zIndex: 20,
+  },
+
+  info: {
+    fontFamily: headerFontFamily(),
+    fontSize: 16,
+    padding: '10px 20px 0 20px',
   },
 
   codemirror: {
