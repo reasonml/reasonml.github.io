@@ -44,11 +44,11 @@ Hehe...
 Analogically speaking, it's like JavaScript's backtick string interpolation, except without needing to escape special chars, and without built-in interpolation of variables. Though you can trivially restore the latter functionality, [as BuckleScript has done](http://bucklescript.github.io/bucklescript/Manual.html#_unicode_support_with_string_interpolation_since_1_7_0):
 
 ```reason
-let world = {js|世界|js};
-let helloWorld = {js|你好，$world|js};
+let world = {js|世界|js}; /* Supports Unicode characters */
+let helloWorld = {j|你好，$world|j}; /* Supports Unicode and interpolation variables */
 ```
 
-BuckleScript's special pre-processor can then look for such `js` marker around the string and transforms it into something else.
+BuckleScript's special pre-processor can then look for such `js and `j` marker around the string and transforms it into something else.
 
 #### Usage
 
