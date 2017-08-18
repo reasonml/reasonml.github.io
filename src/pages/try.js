@@ -7,14 +7,18 @@ import {headerFontFamily} from '../utils/typography'
 import debounce from '../utils/debounce'
 
 let CodeMirror
-if (typeof navigator !== 'undefined') {
+if (typeof navigator !== 'undefined' && false) {
   CodeMirror = require('../components/CodeMirror')
   require('codemirror/lib/codemirror.css')
   require('codemirror/mode/javascript/javascript')
   require('codemirror/mode/mllike/mllike')
   require('codemirror/mode/rust/rust')
 } else {
-  CodeMirror = () => <div>placeholder</div>
+  CodeMirror = () => (
+    <div css={styles.fakeCodemirrorPreload}>
+      <div css={styles.fakeCodemirrorPreloadInner} />
+    </div>
+  )
 }
 
 const reasonQueryParamPrefix = "?reason="
@@ -336,7 +340,6 @@ export default class Try extends Component {
                   </div>
                 )}
               </div>
-              />
             </div>
           </div>
         </div>
@@ -445,6 +448,17 @@ const styles = {
     fontFamily: headerFontFamily(),
     fontSize: 16,
     padding: '10px 20px 0 20px',
+  },
+
+  fakeCodemirrorPreload: {
+    display: 'flex',
+    flexGrow: 1,
+    width: 30,
+  },
+  fakeCodemirrorPreloadInner: {
+    backgroundColor: '#f7f7f7',
+    borderRight: '1px solid rgb(221, 221, 221)',
+    flexGrow: 1,
   },
 
   codemirror: {
