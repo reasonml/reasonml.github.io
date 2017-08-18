@@ -7,7 +7,7 @@ import {headerFontFamily} from '../utils/typography'
 import debounce from '../utils/debounce'
 
 let CodeMirror
-if (typeof navigator !== 'undefined' && false) {
+if (typeof navigator !== 'undefined') {
   CodeMirror = require('../components/CodeMirror')
   require('codemirror/lib/codemirror.css')
   require('codemirror/mode/javascript/javascript')
