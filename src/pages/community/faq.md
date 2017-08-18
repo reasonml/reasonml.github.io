@@ -82,3 +82,18 @@ BuckleScript is optimized for performance across the whole stack. You can try sl
 - Adding a few infinite loops here and there.
 - Stuffing a JavaScript build tool in the pipeline.
 - Dragging in more dependencies for writing a hello world.
+
+### I'm seeing some weird .cm[ixja] files referenced in a compiler error. Where do these files come from?
+
+OCaml outputs a few different files during compilation, depending on your build target (native/bytecode/JavaScript):
+
+.cmi: Compiled interface (.rei/mli) file
+.cmx: Compiled object file for native output (via ocamlopt)
+.cmo: Compiled object file for bytecode output
+.cmj: Compiled object file for web (via BuckleScript)
+.cma: Library file for bytecode output (equivalent to C's .a files)
+.cmxa: Library file for native output
+.cmt: Contains a "Typetree" – basically the AST with all type info
+.cmti: Just like a .cmt file, but for interface files
+
+There is more information and context for some of these files [on the OCaml site](https://ocaml.org/learn/tutorials/filenames.html) and in [this mailing list post](http://caml.inria.fr/pub/ml-archives/caml-list/2008/09/2bc9b38171177af5dc0d832a365d290d.en.html)
