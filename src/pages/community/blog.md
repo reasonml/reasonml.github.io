@@ -7,7 +7,7 @@ order: 0
 
 August 18, 2017
 
-Based on popular feedback, we've now improved our online [Try](https://reasonml.github.io/try) section. Highlights:
+Based on popular feedback, we've now improved our online [Try](/try) section. Highlights:
 
 - Bidirectional conversion. Write Reason, get OCaml translation, vice-versa.
 - Live evaluation, with console feedback in the lower-right section.
@@ -41,7 +41,7 @@ May 18, 2017
 
 Now that the community is taking off, keeping folks up-to-date through [Discord](https://discord.gg/reasonml) and other existing channels became less ideal. We're starting a blog post section for this reason. In the spirit of the community, these posts will stay short and concise.
 
-We've moved unused first-party projects from [GitHub/reasonml](https://github.com/reasonml/) to [GitHub/reasonml-old](https://github.com/reasonml-old). Old URLs are redirected, so no breackage here.
+We've moved unused first-party projects from [GitHub/reasonml](https://github.com/reasonml/) to [GitHub/reasonml-old](https://github.com/reasonml-old). Old URLs are redirected, so no breakage here.
 
 We've cleaned up the Reason codebase. Editor integrations moved out to their dedicated repos. Updated instructions are still [here](/guide/editor-tools/editors-plugins). Other Reason repo cleanups are still ongoing.
 
