@@ -95,5 +95,6 @@ OCaml outputs a few different files during compilation, depending on your build 
 - .cmxa: Library file for native output
 - .cmt: Contains a "Typedtree" – basically the AST with all type info
 - .cmti: Just like a .cmt file, but for interface files
+- .cmxs: Dynamically loaded plugin (for native compilation)
 
-There is more information and context for some of these files [on the OCaml site](https://ocaml.org/learn/tutorials/filenames.html) and in [this mailing list post](http://caml.inria.fr/pub/ml-archives/caml-list/2008/09/2bc9b38171177af5dc0d832a365d290d.en.html)
+There is more information and context for some of these files [on the OCaml site](https://ocaml.org/learn/tutorials/filenames.html) and in [this mailing list post](http://caml.inria.fr/pub/ml-archives/caml-list/2008/09/2bc9b38171177af5dc0d832a365d290d.en.html). There are deeper dives on [native](https://caml.inria.fr/pub/docs/manual-ocaml/native.html) and [bytecode](http://caml.inria.fr/pub/docs/manual-ocaml/comp.html) compilation that contain more detailed descriptions in the OCaml manual
