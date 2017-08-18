@@ -3,6 +3,20 @@ title: Blog
 order: 0
 ---
 
+### Much Better Try Playground
+
+August 18, 2017
+
+Based on popular feedback; we've now improved our online [Try](https://reasonml.github.io/try) section. Highlights:
+
+- Bidirectional conversion. Write Reason, get OCaml translation, vice-versa.
+- Live evaluation, with console feedback in the lower-right section.
+- The majority of the [standard library](/api/index.html) is now loaded. Since we're evaluating on the web, This includes BuckleScript's [extra stdlib APIs](https://bucklescript.github.io/bucklescript/api/).
+- Sharable code snippet! Just copy the URL.
+- Some performance improvements.
+
+Have fun!
+
 ### New website!
 
 July 14, 2017

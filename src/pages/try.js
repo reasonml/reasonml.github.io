@@ -17,56 +17,44 @@ if (typeof navigator !== 'undefined') {
   CodeMirror = () => <div>placeholder</div>
 }
 
-const bs = text => {
-  try {
-    const res = JSON.parse(window.ocaml.compile(text))
-    console.log(res)
-    if (res.js_code) {
-      return res.js_code
-    } else {
-      console.log(res)
-      return 'unexpected response'
-    }
-  } catch (e) {
-    return 'failure: ' + e
-  }
-}
+const reasonQueryParamPrefix = "?reason="
+const ocamlQueryParamPrefix = "?ocaml="
 
-const queryParamPrefix = "?encoded_snippet="
-
+// returns [code, isReason]
 const decodeSnippetFromURL = () => {
-  // returns ?encoded_snippet=blablabla
-  const queryParam = window.location.search;
-  const encodedSnippet = queryParam.slice(queryParamPrefix.length);
-
-  if (encodedSnippet === '') {
-    return 'let x = 10;\nJs.log x;'
+  const queryParam = window.location.search; // returns ?encoded_snippet=blablabla
+  if (queryParam.startsWith(reasonQueryParamPrefix)) {
+    const encodedSnippet = queryParam.slice(reasonQueryParamPrefix.length);
+    return [decodeURIComponent(encodedSnippet), true];
+  } else if (queryParam.startsWith(ocamlQueryParamPrefix)) {
+    const encodedSnippet = queryParam.slice(ocamlQueryParamPrefix.length);
+    return [decodeURIComponent(encodedSnippet), false];
   } else {
-    return window.atob(encodedSnippet);
+    return ['let x = 10;\nJs.log x;', true]
   }
 }
 
-const encodeSnippetToURL = input => {
-  const encodedSnippet = window.btoa(input);
+const encodeSnippetToURL = debounce((input, queryParamPrefix) => {
+  const encodedSnippet = encodeURIComponent(input);
   // avoid a refresh of the page; we also don't want every few keystrokes to
   // create a new history for the back button, so replace the current one
-  const newURL = 
-    window.location.origin + 
-    window.location.pathname + 
-    queryParamPrefix + 
+  const newURL =
+    window.location.origin +
+    window.location.pathname +
+    queryParamPrefix +
     encodedSnippet;
   window.history.replaceState(null, '', newURL);
-}
+}, 100);
 
 const errorTimeout = 500
 
-const waitForLoaded = done => {
+const waitUntilScriptsLoaded = done => {
   const tout = setInterval(() => {
-    if (window.refmt && window.ocaml) {
+    if (window.refmt && window.ocaml && window.require) {
       clearInterval(tout)
       done()
     }
-  })
+  }, 10)
 }
 
 const isSafari = (
@@ -78,6 +66,7 @@ const isSafari = (
 export default class Try extends Component {
   state = {
     reason: '/* loading */',
+    reasonSyntaxError: null,
     ocaml: '(* loading *)',
     js: '// loading',
     jsIsLatest: false,
@@ -88,12 +77,11 @@ export default class Try extends Component {
   err = null
 
   componentDidMount() {
-    waitForLoaded(() => {
-      // this.setState({loaded: true})
-      const defaultSource = decodeSnippetFromURL();
-      this.updateReason(defaultSource)
+    waitUntilScriptsLoaded(() => {
+      const [codeFromURL, isReason] = decodeSnippetFromURL();
+      isReason ? this.updateReason(codeFromURL) : this.updateOCaml(codeFromURL)
     })
-    this.iframe.contentWindow.console = {
+    window.console = {
       log: (...items) => {
         this.setState(state => ({
           ...state,
@@ -113,127 +101,145 @@ export default class Try extends Component {
         }))
       },
     }
-    this.iframe.contentDocument.body.innerHTML = '(iframe)'
   }
 
-  updateReason = debounce(reason => {
-    if (reason === this.state.reason) return
-
-    encodeSnippetToURL(reason);
-
+  updateReason = newReasonCode => {
+    if (newReasonCode === this.state.reason) return
+    encodeSnippetToURL(newReasonCode, reasonQueryParamPrefix);
     clearTimeout(this.err)
-    const converted = window.refmt(reason, 'RE', 'implementation', 'ML')
-    if (converted[0] !== 'REtoML') {
-      this.err = setTimeout(
-        () =>
-          this.setState({
-            reasonError: converted[1],
+
+    this.setState((prevState, _) => {
+      const converted = window.refmt(newReasonCode, 'RE', 'implementation', 'ML')
+
+      let newOcamlCode = prevState.ocaml;
+      if (converted[0] === 'REtoML') {
+        newOcamlCode = converted[1]
+        this.tryCompiling(newReasonCode, newOcamlCode)
+      } else {
+        this.err = setTimeout(
+          () => this.setState(_ => {
+            const error = converted[1] === '' ? 'Syntax error' : converted[1];
+            return {
+              reasonSyntaxError: error,
+              compileError: null,
+              ocamlSyntaxError: null,
+              js: '',
+              ocaml: '',
+              output: [],
+            }
           }),
-        errorTimeout
-      )
-      this.setState({
-        reason,
-        reasonError: null,
-        bsError: null,
-        ocamlError: null,
-        jsIsLatest: false,
-      })
-      return
-    }
-    const ocaml = converted[1]
-
-    this.tryCompiling(reason, ocaml)
-  }, 100)
-
-  updateOCaml = ocaml => {
-    if (ocaml === this.state.ocaml) return
-    clearTimeout(this.err)
-    const converted = window.refmt(ocaml, 'ML', 'implementation', 'RE')
-    if (converted[0] !== 'MLtoRE') {
-      this.err = setTimeout(
-        () =>
-          this.setState({
-            ocamlError: converted[1],
-          }),
-        errorTimeout
-      )
-      this.setState({
-        ocaml,
-        reasonError: null,
-        bsError: null,
-        ocamlError: null,
-        jsIsLatest: false,
-      })
-      return
-    }
-    const reason = converted[1]
-
-    this.tryCompiling(reason, ocaml)
+          errorTimeout
+        )
+      }
+      return {
+        reason: newReasonCode,
+        ocaml: newOcamlCode,
+        reasonSyntaxError: null,
+        compileError: null,
+        ocamlSyntaxError: null,
+      }
+    });
   }
 
-  tryCompiling(reason, ocaml) {
+  updateOCaml = newOcamlCode => {
+    if (newOcamlCode === this.state.ocaml) return
+    encodeSnippetToURL(newOcamlCode, ocamlQueryParamPrefix);
+    clearTimeout(this.err)
+
+    this.setState((prevState, _) => {
+      const converted = window.refmt(newOcamlCode, 'ML', 'implementation', 'RE')
+
+      let newReasonCode = prevState.reason;
+      if (converted[0] === 'MLtoRE') {
+        newReasonCode = converted[1]
+        this.tryCompiling(newReasonCode, newOcamlCode)
+      } else {
+        this.err = setTimeout(
+          () => this.setState(_ => {
+            const error = converted[1] === '' ? 'Syntax error' : converted[1];
+            return {
+              ocamlSyntaxError: error,
+              compileError: null,
+              reasonSyntaxError: null,
+              js: '',
+              reason: '',
+              output: [],
+            }
+          }),
+          errorTimeout
+        )
+      }
+      return {
+        reason: newReasonCode,
+        ocaml: newOcamlCode,
+        reasonSyntaxError: null,
+        compileError: null,
+        ocamlSyntaxError: null,
+      }
+    });
+  }
+
+  tryCompiling = debounce((reason, ocaml) => {
     try {
       const res = JSON.parse(window.ocaml.compile(ocaml))
       if (res.js_code) {
-        this.setState({
-          reason,
-          ocaml,
+        this.setState(_ => ({
           js: res.js_code,
-          reasonError: null,
-          bsError: null,
-          ocamlError: null,
           jsIsLatest: true,
-        })
+        }))
         if (this.state.autoEvaluate) {
-          this.run(res.js_code)
+          this.evalJs(res.js_code)
         }
         return
       } else {
         this.err = setTimeout(
-          () =>
-            this.setState({
-              bsError: res,
-            }),
+          () => this.setState(_ => ({
+            compileError: res,
+            js: '',
+          })),
           errorTimeout
         )
       }
     } catch (err) {
       this.err = setTimeout(
-        () =>
-          this.setState({
-            bsError: err,
-          }),
+        () => this.setState(_ => ({
+          compileError: err,
+          js: '',
+        })),
         errorTimeout
       )
     }
-    this.setState({
-      reason,
-      ocaml,
-      reasonError: null,
-      bsError: null,
-      ocamlError: null,
-      jsIsLatest: false,
+    this.setState(_ => {
+      return {
+        compileError: null,
+        jsIsLatest: false,
+        output: [],
+      }
     })
-  }
+  }, 100)
 
   toggleEvaluate = () => {
     if (!this.state.autoEvaluate && this.state.jsIsLatest) {
-      this.run(this.state.js)
+      this.evalJs(this.state.js)
     }
-    this.setState({ autoEvaluate: !this.state.autoEvaluate })
+    this.setState(_ => {
+      return {
+        autoEvaluate: !this.state.autoEvaluate
+      }
+    })
   }
 
-  run(code) {
+  evalJs(code) {
     this.setState(
       state => ({ ...state, output: [] }),
       () => {
-        this.iframe.contentWindow.eval(wrapInExports(code))
+        window.eval(wrapInExports(code))
       }
     )
   }
 
   render() {
-    const { reason, ocaml, js, reasonError, bsError, ocamlError } = this.state
+    const { reason, ocaml, js, reasonSyntaxError, compileError, ocamlSyntaxError } = this.state
     const codemirrorStyles = [
       styles.codemirror,
       isSafari && styles.codemirrorSafari,
@@ -241,6 +247,7 @@ export default class Try extends Component {
     return (
       <div css={styles.container}>
         <Helmet>
+          <script async src={__PATH_PREFIX__ + '/stdlibBundle.js'} />
           <script async src={__PATH_PREFIX__ + '/bs.js'} />
           <script async src={__PATH_PREFIX__ + '/refmt.js'} />
           <title>Try Reason</title>
@@ -248,11 +255,11 @@ export default class Try extends Component {
         <div css={{ backgroundColor: accent, color: 'white' }}>
           <Header inverted />
         </div>
-        <div css={styles.info}>Copy the URL to share the code snippet</div>
+        <div css={styles.info}>Copy the URL to share the code snippet!</div>
         <div css={styles.inner}>
           <div css={styles.column}>
             <div css={styles.row}>
-              <div css={styles.label}>reason</div>
+              <div css={styles.label}>Reason</div>
               <CodeMirror
                 css={codemirrorStyles}
                 value={reason}
@@ -262,17 +269,16 @@ export default class Try extends Component {
                 }}
                 onChange={this.updateReason}
               />
-              {reasonError &&
+              {reasonSyntaxError &&
                 <div css={styles.error}>
-                  <div css={styles.errorTitle}>Reason transformation error</div>
                   <div css={styles.errorBody}>
-                    {reasonError}
+                    {reasonSyntaxError}
                   </div>
                 </div>}
             </div>
             <div style={{ flexBasis: 20 }} />
             <div css={styles.row}>
-              <div css={styles.label}>ocaml</div>
+              <div css={styles.label}>OCaml</div>
               <CodeMirror
                 css={codemirrorStyles}
                 value={ocaml}
@@ -280,24 +286,20 @@ export default class Try extends Component {
                   mode: 'mllike',
                   lineNumbers: true,
                 }}
-                onValueChange={this.updateOCaml}
+                onChange={this.updateOCaml}
               />
-              {ocamlError &&
+              {ocamlSyntaxError &&
                 <div css={styles.error}>
-                  <div css={styles.errorTitle}>Reason transformation error</div>
                   <div css={styles.errorBody}>
-                    {ocamlError}
+                    {ocamlSyntaxError}
                   </div>
                 </div>}
-              {bsError &&
+              {compileError &&
                 <div css={styles.error}>
-                  <div css={styles.errorTitle}>
-                    Bucklescript Compilation Error
-                  </div>
                   <div css={styles.errorBody}>
-                    {bsError.js_error_msg
-                      ? bsError.js_error_msg
-                      : bsError.message}
+                    {compileError.js_error_msg
+                      ? compileError.js_error_msg
+                      : compileError.message}
                   </div>
                 </div>}
             </div>
@@ -305,7 +307,7 @@ export default class Try extends Component {
           <div style={{ flexBasis: 20 }} />
           <div css={styles.column}>
             <div css={styles.row}>
-              <div css={styles.label}>javascript</div>
+              <div css={styles.label}>JavaScript</div>
               <CodeMirror
                 css={codemirrorStyles}
                 value={js}
@@ -318,12 +320,13 @@ export default class Try extends Component {
             </div>
             <div style={{ flexBasis: 20 }} />
             <div css={styles.row}>
-              <div css={styles.label} onClick={this.toggleEvaluate}>
-                auto-evaluate
+              <div css={styles.label}>
+                Auto-evaluate
                 <input
                   css={styles.checkbox}
                   type="checkbox"
                   checked={this.state.autoEvaluate}
+                  onChange={this.toggleEvaluate}
                 />
               </div>
               <div css={styles.output}>
@@ -333,9 +336,6 @@ export default class Try extends Component {
                   </div>
                 )}
               </div>
-              <iframe
-                css={styles.iframe}
-                ref={iframe => (this.iframe = iframe)}
               />
             </div>
           </div>
@@ -354,11 +354,6 @@ const formatOutput = item =>
 const styles = {
   checkbox: {
     marginLeft: 10,
-  },
-  iframe: {
-    flex: 1,
-    border: '1px solid #aaf',
-    margin: 5,
   },
   output: {
     flex: 1,
@@ -443,6 +438,7 @@ const styles = {
     flexDirection: 'row',
     alignItems: 'center',
     zIndex: 20,
+    borderRadius: '0 0 0 5px',
   },
 
   info: {

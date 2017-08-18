@@ -22,3 +22,11 @@ npm run deploy
 ```
 
 The site uses GatsbyJS. For info on how it works, take a look at [their docs](https://www.gatsbyjs.org/docs/).
+
+## Building the Playground
+
+The playground uses a bundled JS version of Reason's refmt, [BuckleScript](https://github.com/BuckleScript/bucklescript) compiler, its standard library, etc.
+
+To build the bundled standard library: Please read the documentation in `regenerateStdlibForBrowser.js`.
+
+To build refmt and bs: make sure you've got OPAM, js_of_ocaml, reason, menhirLib and ocaml-migrate-parsetree installed, then invoke black magic at https://github.com/jaredly/bs-refmt-jsoo. Then cry a little and submit a PR to make the process better.
