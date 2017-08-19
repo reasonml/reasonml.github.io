@@ -5,7 +5,7 @@ order: 30
 
 ### Extension navigateur : Reason-tools
 
-[Reason-tools](https://github.com/reasonml/reason-tools) vous permet de basculer rapidement entre la syntaxe OCaml et la syntaxe Reason lorsque vous parcourez des tutoriels et des documentations écrites n'importe laquelle de ces deux syntaxes.
+[Reason-tools](https://github.com/reasonml/reason-tools) vous permet de basculer rapidement entre la syntaxe OCaml et la syntaxe Reason lorsque vous parcourez des tutoriels et des documentations écrites dans n'importe laquelle de ces deux syntaxes.
 
 ### BuckleScript
 
@@ -27,13 +27,13 @@ Il formate le code de façon **responsive** en fonction de la largeur de l'édit
 
 #### Merlin
 
-[Merlin](https://github.com/ocaml/merlin) est le moteur sous-jacent des systèmes de type hinting, de refactoring, de gestion des erreurs en temps réel, du saut vers définition, etc, de nos éditeurs. Son outil de ligne de commande s'appelle `ocamlmerlin`, bien que vous ne l'utilisiez pas manuellement (les éditeurs le démarrent eux-mêmes et le demandent).
+[Merlin](https://github.com/ocaml/merlin) est le moteur sous-jacent des systèmes de type hinting, de refactoring, de gestion des erreurs en temps réel, du saut vers définition, etc, de nos éditeurs. Son outil de ligne de commande s'appelle `ocamlmerlin`, bien que vous ne l'utilisiez pas manuellement (les éditeurs le démarre eux-mêmes et le demande).
 
 Pour configurer Merlin pour comprendre votre projet, vous écririez un fichier `.merlin` à la racine (documentation [ici](https://github.com/ocaml/merlin/wiki/project-configuration)). **Pour le workflow JavaScript, cette configuration est générée automatiquement pour vous par `bsb` de BuckleScript.**
 
 #### REPL
 
-Reason est fourni avec une boucle d'évaluation (REPL) nommée `rtop`, qui une fois invoquée, vous permet d'évaluer le code de manière interactive. Elle propose une auto-complétion intelligente et basée sur les types.
+Reason est fourni avec une boucle d'évaluation (REPL) nommée `rtop`, qui une fois invoquée, vous permet d'évaluer le code de manière interactive. Elle propose une autocomplétion intelligente et basée sur les types.
 
 <img src="https://user-images.githubusercontent.com/1909539/28570943-3bd9eb00-70f5-11e7-981c-4846719c0943.gif" style="width:100%; max-width:466px; max-height:433px;">
 

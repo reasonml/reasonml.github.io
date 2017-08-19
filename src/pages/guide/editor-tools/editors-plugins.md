@@ -3,16 +3,16 @@ title: Plugins éditeurs
 order: 20
 ---
 
-**Assurez-vous d'avoir installé `reason-cli` de la section précédente**
+**Assurez-vous d'avoir installé `reason-cli` de la section précédente**.
 
 La nature de Reason se prête à un excellent support éditeur. La plupart de nos plugins éditeurs fournissent au minimum :
 
 - Affichage de types.
 - Mise en forme de code programmatique via `refmt`.
-- Affichage d'errors & de warnings.
+- Affichage d'erreurs & de warnings.
 - Coloration syntaxique.
 - Autocomplétion sur la base de types.
-- Redirection vers définition.
+- Saut vers définition.
 
 Et d'autres fonctionnalités. Regardez, par exemple, la [section fonctionnalité](https://github.com/reasonml-editor/vscode-reasonml#features)  de notre plugin VSCode !
 
@@ -21,7 +21,7 @@ Et d'autres fonctionnalités. Regardez, par exemple, la [section fonctionnalité
 - [VSCode](https://github.com/reasonml-editor/vscode-reasonml): **recommandé**.
 - [Atom](https://github.com/314eter/atom-ocaml-merlin)
   - Installez les paquets associés avec `apm install language-reason linter linter-refmt reason-refmt`.
-  - Si vous utilisez [Nuclide](https://nuclide.io/), le support de Reason est fournit par défaut.
+  - Si vous utilisez [Nuclide](https://nuclide.io/), le support de Reason est fourni par défaut.
   - Fidèle à l'esprit de JavaScript, [voici encore un autre plugin Reason pour Atom](https://github.com/zaaack/atom-ide-reason) ! En fait, celui-ci pourrait potentiellement être le plugin Reason recommandé pour Atom.
 - [Vim](https://github.com/reasonml-editor/vim-reason)
 - [Emacs](https://github.com/reasonml-editor/reason-mode)
