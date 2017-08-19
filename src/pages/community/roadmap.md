@@ -12,9 +12,9 @@ Voici l'endroit où il faut être pour suivre ce qui se passe chez l'équipe Rea
 - Valider une fonctionnalité secrète de ReasonReact, ensuite la publier
 - Une autre fonctionnalité secrète
 - Modification de syntaxe : appels de fonctions à la JavaScript [(pull request)](https://github.com/facebook/reason/pull/1299)
-- Test de structures de données via [immutable.re](https://github.com/facebookincubator/immutable-re)
-- Compilation native via `bsb` de BuckleScript (see [this fork](https://github.com/bsansouci/bsb-native))
-- BuckleScript obtient un namespacing basé sur les packages (plus de conflits avec les noms de fichiers d'autres paquets)
+- Test de structures de données [immutable.re](https://github.com/facebookincubator/immutable-re)
+- Compilation native via `bsb` de BuckleScript (voir [ce fork](https://github.com/bsansouci/bsb-native))
+- BuckleScript obtient un namespacing basé sur les paquets (plus de conflits avec les noms de fichiers d'autres paquets)
 
 #### Futur
 

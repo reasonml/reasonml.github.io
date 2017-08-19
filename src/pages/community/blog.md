@@ -12,7 +12,7 @@ En nous basant sur les retours de la communauté, nous avons maintenant amélior
 - Conversion bidirectionnelle. Écrivez en Reason, obtenez la traduction OCaml, vice-versa.
 - Évaluation en direct, avec feedback de la console dans la partie inférieure droite.
 - La majorité de la [librairie standard](/api/index.html) est maintenant chargée. Comme nous évaluons sur le Web, cela inclut les [APIs supplémentaires stdlib](https://bucklescript.github.io/bucklescript/api/) de BuckleScript.
-- Un extrait de code partageable ! Copiez simplement l'URL.
+- Snippets de code partageable ! Copiez simplement l'URL.
 - Quelques améliorations de performance.
 
 Have fun!
@@ -24,7 +24,7 @@ Have fun!
 
 Vous remarquez quelque chose de différent ? =)
 
-Le nouveau site de la documentation est construit par un membre de la communauté [Jared](https://jaredforsyth.com) (assurez-vous de jeter un coup d'oeil à ses articles sur Reason !). Le nouveau site conserve la majorité du contenu de l'ancien, tout en offrant une meilleure structure pour naviguer dans celui-ci. Vous remarquerez la présence d'un lien "Suggérer un modification" un peu partout. N'hésitez pas à faire un tour !
+Le nouveau site de la documentation est construit par un membre de la communauté [Jared](https://jaredforsyth.com) (assurez-vous de jeter un coup d'oeil à ses articles sur Reason !). Le nouveau site conserve la majorité du contenu de l'ancien, tout en offrant une meilleure structure pour naviguer dans celui-ci. Vous remarquerez la présence d'un lien "Suggérer une modification" un peu partout. N'hésitez pas à faire un tour !
 
 (Conçu avec [Gatsby](https://www.gatsbyjs.org))
 
@@ -44,7 +44,7 @@ Maintenant que la communauté décolle, garder les gens à jour via [Discord](ht
 
 Nous avons déplacé des projets de premier plan inutilisés de [GitHub/reasonml](https://github.com/reasonml/) vers [GitHub/reasonml-old](https://github.com/reasonml-old). Les anciennes URL sont redirigées, donc pas de soucis à ce niveau là.
 
-Nous avons aussi nettoyé la code base de Reason. Les intégrations de l'éditeur ont été déplacées dans leurs repos dédiés. Les instructions mises à jour sont toujours [là](./tools.html#editor-integration). D'autres opérations de nettoyage du repo de Reason sont en cours.
+Nous avons aussi nettoyé la code base de Reason. Les intégrations de l'éditeur ont été déplacées dans leurs repos dédiés. Les instructions mises à jour sont toujours [là](/guide/editor-tools/editors-plugins). D'autres opérations de nettoyage du repo de Reason sont en cours.
 
 Certaines rooms dans Discord ont été fusionnées. Moins de rooms, des discussions plus ciblées. 
 
