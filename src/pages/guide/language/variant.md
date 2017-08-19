@@ -1,11 +1,11 @@
 ---
-title: Variant
+title: Variant!
 order: 70
 ---
 
-Behold, the crown jewel of Reason data structures!
+Voici, le joyau de la couronne des structures de données Reason !
 
-Most data structures in most languages are about "this **and** that". A variant allows us to express "this **or** that".
+La majorité des structures de données dans la plupart des langages concernent «ceci **et** cela». Une variante nous permet d'exprimer «ceci **ou** cela».
 
 ```reason
 type myResponseVariant =
@@ -16,15 +16,15 @@ type myResponseVariant =
 let areYouCrushingIt = Yes;
 ```
 
-`Yes`, `No` and `PrettyMuch` aren't strings, nor references, nor some special data type. They're called "constructors" (or "tag"). The `|` bar separates each constructor.
+`Yes`, `No` et `PrettyMuch` ne sont pas des strings, ni des références, ou un type spécial de donnée. Il s'agit de "*constructeurs*" (ou "*tags*"). Le pipe `|` sépare chaque constructeur.
 
-**Note**: a variant's constructors need to be capitalized.
+**Note** : le constructeur d'une variante doit être écrit avec la première lettre en majuscule.
 
-### Usage
+### Utilisation
 
-Along with a variant comes one of the most important features of Reason, the `switch` expression.
+Avec une variant vient l'une des fonctionnalités les plus importantes de Reason, l'expression `switch`.
 
-A Reason `switch` is visually similar to other languages' `switch` (aka a large `if/elseif/elseif...`). It allows you to check every possible case of a variant. To use it, enumerate every variant constructor of the particular variant you'd like to use, each followed by an `=>` and the expression corresponding to that case.
+Un `switch` Reason est visuellement similaire à celui d'autres langages (aka un long `if/elseif/elseif`...). Il vous permet de vérifier tous les cas possibles d'une variant. Pour l'utiliser, énumérez chaque constructeur de la variant que vous souhaitez utiliser, chacun suivi d'un `=>` et de l'expression correspondant à ce cas.
 
 ```reason
 let message = switch (areYouCrushingIt) {
@@ -32,12 +32,14 @@ let message = switch (areYouCrushingIt) {
 | Yes => "Great!"
 | PrettyMuch => "Nice!"
 };
-/* message is "Great!" */
+/* message vaut "Great!" */
 ```
 
-A variant has an extremely rich amount of type system assistance. For example, we'll give you a type error if you've forgotten to cover a case of your variant, or if two cases are redundant. Be sure to check out switch and pattern-matching in a [later section](/guide/language/destructuring-pattern-matching)!
+Une variant a un pourcentage extrêmement important d'assistance du système de types. Par exemple, nous vous donnerons une erreur de type si vous avez oublié de couvrir un cas de votre variant ou si deux cas sont redondants. Assurez-vous de jeter un coup d'oeil au switch et au pattern-matching dans une [section ultérieure](/guide/language/pattern-matching) !
 
-**A variant type usually needs to be explicit declared beforehand**. If the variant you're using is in a different file, bring it into scope like you'd do [for a record](/guide/language/record#usage):
+#### Une variante nécessite une définition explicite
+
+Si la variant que vous utilisez est dans un fichier différent, amenez-la dans le scope comme vous le feriez [pour un record](/guide/language/record#record-needs-an-explicit-definition) :
 
 ```reason
 /* Zoo.re */
@@ -53,9 +55,9 @@ let pet: Zoo.animal = Dog; /* preferred */
 let pet = Zoo.Dog;
 ```
 
-#### Constructor Arguments
+#### Arguments de constructeur
 
-A variant's constructors can hold extra data separated by space.
+Les constructeurs de variants peuvent contenir des données supplémentaires séparées par un espace.
 
 ```reason
 type account =
@@ -64,16 +66,16 @@ type account =
 | Facebook string int;
 ```
 
-Here, `Instagram` holds a `string`, and `Facebook` holds a `string` and an `int`. Usage:
+Ici, `Instagram` contient une `string`, et `Facebook` tient une `string` et un `int`. Utilisation :
 
 ```reason
 let myAccount = Facebook "Josh" 26;
 let friendAccount = Instagram "Jenny";
 ```
 
-**Notice how using a constructor is like calling a function**? It's as if `Facebook` was a function that accepts two arguments. This isn't a coincidence; there's a reason why a constructor's data is called "constructor argument".
+**Remarquez comment utiliser un constructeur est sembable à un appel de fonction ?** C'est comme si `Facebook` était une fonction qui acceptait deux arguments. Ce n'est pas un hasard. Il y a une raison pour laquelle les données d'un constructeur s'appellent "arguments de constructeur".
 
-Using `switch`, you can pattern-match (again, described in a later section) a constructor's arguments:
+À l'aide de `switch`, vous pouvez faire du pattern-matching (encore une fois décrit dans une section ultérieure) sur les arguments d'un constructeur :
 
 ```reason
 let greeting = switch (myAccount) {
@@ -84,9 +86,9 @@ let greeting = switch (myAccount) {
 }
 ```
 
-#### Honorable Mentions
+#### Mentions honorables
 
-The [standard library](/api/index.html) exposes two important variants you'll come to hear a lot.
+La [ librairie standard](/api/index.html) expose deux importantes variants dont vous entendrez souvent parler.
 
 ##### `option`
 
@@ -94,7 +96,7 @@ The [standard library](/api/index.html) exposes two important variants you'll co
 type option 'a = None | Some 'a;
 ```
 
-This is the convention used to simulate a "nullable" (aka `undefined` or `null`) value in other languages. Thanks to this convenience type definition, Reason can default every value to be non-nullable. An `int` will always be an int, never "`int` **or** `null` **or** `undefined`". If you do want to express a "nullable int", you'd use `option int`, whose possible values are `None` or `Some int`. `switch` forces you to handle both cases; therefore, **a pure Reason program doesn't have null errors**.
+C'est la convention utilisée pour simuler une valeur "nulle" (aka `undefined` ou `null`) d'autres langages. Grâce à cette définition de type de commodité, Reason peut rendre chaque valeur non-nulle par défaut. Un `int` sera toujours un int, jamais "`int` **ou** `null` **ou** `undefined`". Si vous souhaitez exprimer un "int nul", vous utiliserez `option int`, dont les valeurs possibles sont `None` ou `Some int`. `switch` vous force à gérer les deux cas. Par conséquent, **un programme en Reason pur n'a pas d'erreurs `null`**.
 
 ##### `list`
 
@@ -102,40 +104,40 @@ This is the convention used to simulate a "nullable" (aka `undefined` or `null`)
 type list 'a = Empty | Head 'a (list 'a);
 ```
 
-_Not the actual type definition. Just an illustration_.
+_Pas la définition de type réelle. Juste un exemple_.
 
-This says: "a list that holds a value of type `a` (whatever it is) is either empty, or holds that value plus another list".
+Ceci signifie : "une list contenant une valeur de type `a` (quelle qu'elle soit) est soit vide, soit contient cette valeur plus une autre list".
 
-Reason gave `list` a syntax sugar. `[1, 2, 3]` is conceptually equivalent to `Head 1 (Head 2 (Head 3 Empty))`. Once again, `switch` forces you to handle every case of this variant, including `Empty` (aka `[]`). **This eliminates another big category of access bugs**.
+Reason fournit à `list` un *sucre syntaxique*. `[1, 2, 3]` est conceptuellement équivalent à `Head 1 (Head 2 (Head 3 Empty))`. Encore une fois, le `switch` vous oblige à gérer chaque cas de cette variant, y compris `Empty` (aka `[]`). **Ceci élimine une autre grande catégorie de bugs d'accès.**
 
-##### Other Variant-like Types
+##### Autres types semblables à des variants
 
-Did you know that you can use `switch` on string, int, float, array, and most other data structures? Try it!
+Saviez-vous que vous pouvez utiliser `switch` sur des strings, ints, floats, arrays, et plein d'autres structures de données ? Essayez dans l'éditeur pour voir !
 
 <!-- TODO playground link -->
 
-### Tips & Tricks
+### Conseils & astuces
 
-**Be careful** not to confuse a constructor carrying 2 arguments with a constructor carrying a single tuple argument:
+**Faîtes attention** à ne pas confondre un constructeur comportant 2 arguments avec un constructeur avec un seul tuple en argument :
 
 ```reason
 type account =
 | Facebook string int /* 2 arguments */
 type account2 =
-| Instagram (string, int) /* 1 argument - happens to be a 2-tuple */
+| Instagram (string, int) /* 1 argument - qui se trouve être un 2-uplet */
 ```
-#### Variants Must Have constructors
+#### Les variants doivent avoir un constructeur
 
-If you come from an untyped language, you might be tempted to try `type foo = int | string`. This isn't possible in Reason; you'd have to give each branch a constructor: `type foo = Int int | String int`. Though usually, needing this might be an anti-pattern. The Design Decisions section below explains more.
+Si vous venez d'un langage non typé, vous pourriez être tenté d'essayer `type foo = int | string`. Ceci n'est pas possible en Reason. Vous devriez donner à chaque branche un constructeur : `type foo = Int int | String int`. Bien qu'en général, le simple fait que vous ayez besoin d'écrire ça pourrait bien être un anti-pattern. La section Décisions de conception ci-dessous l'explique plus en détails.
 
-#### Interop with JavaScript
+#### Interopérabilité avec JavaScript
 
-_This section assumes knowledge about BuckleScript's [FFI](http://bucklescript.github.io/bucklescript/Manual.html#_ffi). Skip this if you haven't felt the itch to use variants for binding to JS functions yet_.
+_Cette section suppose des connaissance sur l'[IFE](http://bucklescript.github.io/bucklescript/Manual.html#_ffi) de BuckleScript. Sautez cette partie si vous n'avez pas encore ressenti le besoin d'utiliser des variants pour gérer des bindings de fonctions JavaScript_.
 
-Quite a few JS libraries use functions that can accept many types of arguments. In these cases, it's very tempting to model them as variants. For example, suppose there's a `myLibrary.draw` JS function that takes in either a `number` or a `string`. You might be tempted to bind it like so:
+Beaucoup de librairies JavaScript utilisent des fonctions pouvant accepter de nombreux types d'arguments. Dans ces cas là, il est très tentant de les modéliser par des variants. Par exemple, supposons qu'il existe une fonction JavaScript `myLibrary.draw` qui prend un `number` ou une `string` en paramètre. Vous pourriez être tenté de la bind comme tel :
 
 ```
-/* reserved for internal usage */
+/* réservé pour un usage interne */
 external draw: 'a => unit = "draw" [@@bs.module "myLibrary"];
 
 type animal =
@@ -149,26 +151,26 @@ let betterDraw animal =>
   };
 ```
 
-You could definitely do that, but there are better ways! For example, simply two `external`s that both compile to the same JS call:
+Vous pourriez procéder de la sorte, mais il existe de bien meilleures solutions ! Par exemple, deux `external`s tout simplement, qui compilent vers le même appel JavaScript :
 
 ```
 external drawFloat: float => unit = "draw" [@@bs.module "myLibrary"];
 external drawString: string => unit = "draw" [@@bs.module "myLibrary"];
 ```
 
-Or, get fancy and use an advanced feature of variant called GADT, then use BuckleScript's [phantom argument FFI feature](http://bucklescript.github.io/bucklescript/Manual.html#_phantom_arguments_and_ad_hoc_polymorphism). If these words mean absolutely nothing to you, no worries; just use the previous suggestion.
+Ou, faîtes vous plaisir et utilisez une fonctionnalité avancée des variants appelée GADT, puis utilisez la [fonctionnalité de l'argument fantôme de l'IFE](http://bucklescript.github.io/bucklescript/Manual.html#_phantom_arguments_and_ad_hoc_polymorphism) de BuckleScript. Si ces mots ne vous disent absolument rien, pas de soucis. Référez-vous plutôt à la suggestion précédente.
 
-#### Variant Types Are Found By Field Name
+#### Les types de variantes se trouvent par nom de champ
 
-Please refer to this [record section](/guide/language/record#record-types-are-found-by-field-name). Variants are the same: a function can't accept an arbitrary constructor shared by two different variants. Again, such feature exists, it's called a polymorphic variant. We'll talk about this in the future =).
+Veuillez vous référer à cette [section du record](/guide/language/record#record-types-are-found-by-field-name). C'est pareil pour les variants : une fonction ne peut pas accepter un constructeur arbitraire partagé par deux différentes variants. Encore une fois, cette fonctionnalité existe, il s'agit de la *variant polymorphique*. Nous en parlerons plus dans le futur =).
 
-### Design Decisions
+### Décisions de conception
 
-Variant in its many forms (polymorphic variant, open variant, GADT, etc.) are likely _the_ feature of a type system such as Reason's. The aforementioned `option` variant, for example, obliterates the need for nullable types, a major source of bugs in other languages. Philosophically speaking, a problem is composed of many possible branches/conditions. Mishandling these conditions is the majority of what we call bugs. **A type system doesn't magically eliminates bugs; it points out the unhandled conditions and asks you to cover them**\*. The ability to model "this or that" correctly is crucial.
+La variant sous ses nombreuses formes (variant polymorphe, variant ouverte, GADT, etc.) est probablement *la* fonctionnalité clé d'un système de types comme celui de Reason. La variant `option` susmentionnée, par exemple, supprime le besoin de types nuls, une source majeure de bugs dans d'autres langages. Philosophiquement parlant, un problème est composé de nombreuses branches/conditions possibles. Mal gérer ces conditions est la principale source de ce que nous appelons "bugs". **Un système de types n'élimine pas les bugs par magie. Il souligne les conditions non traitées et vous demande de les couvrir**\*. La capacité à modéliser "ceci ou cela" correctement est cruciale.
 
-For example, some folks wonder how the type system can safety eliminate badly formatted JSON data from propagating into their program. They don't, not by themselves! But if the parser returns the `option` type `None | Some actualData`, then you'd have to handle the `None` case explicitly in later call sites. That's all there is.
+Par exemple, certains se demandent comment le système de types peut empêcher les données JSON mal formatées de se propager dans leur programme. Ils ne le font pas, pas par eux-mêmes ! Mais si l'analyseur renvoie le type  `option` `None | Some actualData`, alors vous devriez gérer le cas `None` de façon explicite dans les prochains lieux d'appel. C'est aussi simple que ça.
 
-Performance-wise, a variant can potentially tremendously speed up your program's logic. Here's a piece of JavaScript:
+D'un point de vue "performances pures", une variant peut potentiellement accélérer considérablement la logique de votre programme. Voici un morceau de JavaScript :
 
 ```js
 let data = 'dog';
@@ -181,7 +183,7 @@ if (data === 'dog') {
 }
 ```
 
-There's a linear amount of branch checking here (`O(n)`). Compare this to using a Reason variant:
+Il y a une quantité linéaire de contrôle de branche ici (`O(n)`). Comparez ceci à l'utilisation d'une variant Reason :
 
 ```reason
 type animal = Dog | Cat | Bird;
@@ -193,16 +195,17 @@ switch data {
 }
 ```
 
-The compiler sees the variant, then
+Le compilateur voit la variant et ensuite 
 
-1. conceptually turns them into `type animal = 0 | 1 | 2`
+1. la transforme de façon conceptuelle en `type animal = 0 | 1 | 2`
 
-2. compiles `switch` to a constant-time format (`O(1)`).
+2. compile `switch` en un format constant dans le temps (`O(1)`).
 
-You might wonder why typed functional languages are used so often for parsing; switching on a large tree efficiently and safely is pretty much the best-case scenario for variants.
+Vous pourriez vous demander pourquoi les langages fonctionnels typés sont souvent utilisés pour le parsing. Le switch d'un grand arbre de données de façon efficace et en toute sécurité est à peu près le meilleur scénario possible pour les variants.
 
 <!-- TODO: playground link -->
 
-Mind blown yet? Variants have a deep connection to other fields of mathematics; [See here](https://codewords.recurse.com/issues/three/algebra-and-calculus-of-algebraic-data-types) for an interesting exploration.
+Mind blown? Les variants ont une connexion profonde avec d'autres domaines des mathématiques. [Voyez ici](https://codewords.recurse.com/issues/three/algebra-and-calculus-of-algebraic-data-types) pour vous lancer dans une exploration intéressante.
 
-\* It's always nicer to design away the problem rather than resorting to a type system to cover the pitfalls; In reality, it's unrealistic to do so for every problem, or even just to understand every problem fully in order to design a solution. A type system allows you to safely make a big category of changes to codebases without needing to understand the whole thing upfront. In this regard, types also allows us not needing to overly design an API just to circumvent callers' simple pitfalls. They reduce the layers of abstractions needed to "get things done", which in return reduces callers' cognitive burden.
+\*Il est toujours plus agréable de concevoir le problème plutôt que de recourir à un système de types pour couvrir les défauts. En réalité, il est irréaliste de le faire pour chaque problème, ou même simplement de comprendre tous les problèmes afin de concevoir une solution. Un système de types vous permet d'apporter bons nombres de changements à votre codebase en toute sécurité, sans avoir à tout comprendre par avance. À cet égard, les types nous permettent également de ne pas trop concevoir une API pour contourner les pièges simples des callers. Ils réduisent les couches d'abstractions nécessaires pour «faire avancer les choses», ce qui, en retour, réduit le fardeau cognitif des callers.
+

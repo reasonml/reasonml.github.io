@@ -5,7 +5,7 @@ order: 20
 
 ### String
 
-Reason strings are delimited using **double** quotes (single quotes are reserved for the character type below).
+Les strings en Reason sont délimitées par des **doubles** quotes (les simples quotes sont réservées pour le type caractère abordé ci-dessous).
 
 ```reason
 let greeting = "Hello world!";
@@ -13,25 +13,25 @@ let multilineGreeting = "Hello
  world!";
 ```
 
-Special characters in the string need to be escaped:
+Les caractères spéciaux dans une string ont besoin d'être échappés :
 
 ```reason
 let oneSlash = "\\";
 ```
 
-To concatenate strings, use `^`:
+Pour concaténer des strings, utilisez `^` :
 
 ```reason
 let greetings = "Hello " ^ "world!";
 ```
 
-#### Quoted String
+#### String citée
 
-There's a special syntax for string that allows
+Il existe une syntaxe spéciale pour les strings qui permet d'avoir
 
-- multiline string just like before
-- no special character escaping
-- hooks for special pre-processors
+- des strings multilignes comme précédemment
+- aucun caractère spécial à échapper
+- des crochets pour les pré-processeurs spéciaux
 
 ```reason
 let GreetingAndOneSlash = {|Hello
@@ -41,68 +41,68 @@ Hehe...
 |};
 ```
 
-Analogically speaking, it's like JavaScript's backtick string interpolation, except without needing to escape special chars, and without built-in interpolation of variables. Though you can trivially restore the latter functionality, [as BuckleScript has done](http://bucklescript.github.io/bucklescript/Manual.html#_unicode_support_with_string_interpolation_since_1_7_0):
+Par analogie, c'est comme l'interpolation de chaîne des backticks de JavaScript, excepté le fait d'avoir à échapper des caractères spéciaux, et sans interpolation intégrée de variables. Bien que vous puissiez récupérer trivialement cette dernière fonctionnalité, [comme BuckleScript l'a fait](http://bucklescript.github.io/bucklescript/Manual.html#_unicode_support_with_string_interpolation_since_1_7_0):
 
 ```reason
-let world = {js|世界|js};
-let helloWorld = {js|你好，$world|js};
+let world = {js|世界|js}; /* Supporte les caractères Unicode */
+let helloWorld = {j|你好，$world|j}; /* Supporte l'Unicode et les variables d'interpolation */
 ```
 
-BuckleScript's special pre-processor can then look for such `js` marker around the string and transforms it into something else.
+Le pré-processeur spécial de BuckleScript peut alors chercher un marqueur `js` ou `j` autour de la chaîne et la transformer en autre chose.
 
-#### Usage
+#### Utilisation
 
-[More string operations can be found in the standard library](/api/String.html). For JS compilation, see the familiar `JS.String` API bindings in the [BuckleScript API docs](http://bucklescript.github.io/bucklescript/api/Js_string.html). Since a Reason string maps to a JavaScript string, you can mix & match the string operations in both standard libraries.
+[Vous pouvez trouver plus d'opérations sur les strings dans la librairie standard](/api/String.html). Pour la compilation JavaScript, consultez l'API des bindings `JS.String` dans [les docs de l'API BuckleScript](http://bucklescript.github.io/bucklescript/api/Js_string.html). Étant donné qu'une string Reason map vers une string JavaScript, vous pouvez mélanger et associer les opérations de strings dans les deux librairies standard.
 
-#### Tips & Tricks
+#### Conseils & astuces
 
 https://twitter.com/jusrin00/status/875238742621028355
 
-**You have an expressive type system now**! In an untyped language, you'd often overload the meaning of string by using it as:
+**Vous avez un système de type expressif maintenant** ! Dans un langage non typé, vous surchargez souvent la signification de la string en l'utilisant comme suit :
 
-- a unique id: `var BLUE_COLOR = "blue"`
-- an identifier into a data structure: `var BLUE = "blue"; var RED = "red"; var colors = [BLUE, RED]`
-- the name of an object field: `person["age"] = 24`
-- an enum: `if (audio.canPlayType() === 'probably') {...}` [(ಠ_ಠ)](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/canPlayType#Return_value)
-- other crazy patterns you'll soon find horrible, after getting used to Reason's alternatives.
+- un unique id : `var BLUE_COLOR = "blue"`
+- un identifiant dans une structure de données : `var BLUE = "blue"; var RED = "red"; var colors = [BLUE, RED]`
+- le nom d'un champ d'objet : `person["age"] = 24`
+- une énumération : `if (audio.canPlayType() === 'probably') {...}` [(ಠ_ಠ)](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/canPlayType#Return_value)
+- d'autres modèles tout aussi farfelus que vous trouverez bientôt horribles, après vous être habitué(e) aux alternatives de Reason.
 
-The more you overload the poor string type, the less the type system can help you! Reason provides concise, fast and maintainable types & data structures alternatives to the use-cases above (e.g. variants, in a later section).
+Plus vous surchargez le type string, moins le système de type peut vous aider ! Reason fournit des types et des structures de données alternatifs aux cas d'utilisation ci-dessus, rapides et maintenables (les variants par exemple, abordés dans une section ultérieure).
 
-Under native compilation, Reason strings compile to a simple representation whose performance is straightforward to analyze, at the expense of sometimes requiring manual performance tuning. For example, naively concatenating strings like `"hi " ^ "how " ^ "are " ^ "you?"` unnecessarily allocates the intermediate strings `"are you?"` and `"how are you?"`. In this case, prefer [`String.concat`](/api/String.html). In a way, it's somewhat nice that the traditional runtime analysis we've learned in school can finally be useful again.
+Dans la compilation native, les strings Reason compilent en une représentation simple dont la performance est simple à analyser, au détriment parfois d'un réglage manuel des performances. Par exemple, concaténer naïvement des strings comme "salut" ^ "comment" ^ "ça" ^ "va ?" affecte inutilement les strings intermédiaires "ça va ?" et "comment ça va ?". Dans ce cas, préférez [`String.concat`](/api/String.html). D'une certaine manière, il est plutôt appréciable que l'analyse du runtime traditionnelle que nous avons apprise à l'école puisse finalement être utile à nouveau.
 
-Under JavaScript compilation, a Reason string maps to a JavaScript string and vice-versa, so no such above concern or analysis opportunities.
+Dans la compilation JavaScript, une string Reason map vers une string JavaScript et vice versa, donc le problème mentionné ci-dessus ne s'applique pas.
 
-#### Design Decisions
+#### Décisions de conception
 
-Quoted string's feature of not escaping special characters enables neat DSLs like [regular expression](/api/Str.html):
+La fonctionnalité string citée qui permet de ne pas avoir à échapper des caractères spéciaux rend possible des DSLs assez sympatiques comme les [expressions régulières](/api/Str.html) :
 
 ```reason
 let r = Str.regexp {|hello \([A-Za-z]+\)|};
 ```
 
-as opposed to
+comparé à
 
 ```reason
 let r = Str.regexp "hello \\([A-Za-z]+\\)";
 ```
 
-Though for JS compilation, you'd use [`[%bs.re]`](http://bucklescript.github.io/bucklescript/Manual.html#_regex_support) instead.
+Bien que pour la compilation JavaScript, vous utiliseriez [`[%bs.re]`](http://bucklescript.github.io/bucklescript/Manual.html#_regex_support) à la place.
 
-Reason/OCaml's emphasis on simplicity over cleverness can be seen here through its straightforward native string implementation. An overly sophisticated string implementation can sometimes [backfire](http://mrale.ph/blog/2016/11/23/making-less-dart-faster.html).
+L'accent mis par Reason/OCaml sur la simplicité par rapport à l'ingéniosité est très bien représenté ici par son implémentation assez simple des strings natives. Une implémentation de string trop sophistiquée peut parfois se [retourner contre nous](http://mrale.ph/blog/2016/11/23/making-less-dart-faster.html).
 
 ### Char
 
-Reason has a type for a string with a single letter:
+Reason a un type pour les strings à une seule lettre :
 
 ```reason
 let firstLetterOfAlphabet = 'a';
 ```
 
-**Note**: Char doesn't support Unicode or UTF-8.
+**Note** : Char ne supporte pas Unicode ou UTF-8.
 
-#### Tips & Tricks
+#### Conseils & astuces
 
-A character [compiles to an integer ranging from 0 to 255](https://bucklescript.github.io/bucklescript/js-demo/?gist=7f6d24873a48fe03fa037c7c47848a4b), for extra speed. You can also pattern-match (covered later) on it:
+Un caractère [compile en un integer compris entre 0 et 255](https://bucklescript.github.io/bucklescript/js-demo/?gist=7f6d24873a48fe03fa037c7c47848a4b), par soucis de rapidité. Vous pouvez aussi utilisez le pattern-matching ici (abordé plus tard) :
 
 ```reason
 let isVowel = switch theChar {

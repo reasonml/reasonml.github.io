@@ -7,7 +7,7 @@ Nous utilisons actuellement le workflow OCaml par défaut pour compiler en natif
 
 > **Note**: certaines parties du workflow natif ne fonctionnent probablement pas sous Windows. Le workflow natif est actuellement en **work in progress**, car nous nous concentrons sur le peaufinage du workflow JS. Les contributions sont les bienvenues !
 
-Reason s'intègre bien aux chaines de compilation existantes comme `ocamlbuild`, et propose un outil nommé `rebuild`, un léger wrapper autour d'[`ocamlbuild`](https://ocaml.org/learn/tutorials/ocamlbuild/) qui garantit que les bons *flags* sont transmis au compilateur pour tout fichier se terminant par `.re`.
+Reason s'intègre bien aux chaines de compilation existantes comme `ocamlbuild`, et propose un outil nommé `rebuild`, un léger wrapper autour d'[`ocamlbuild`](http://ocaml.org/learn/tutorials/ocamlbuild/) qui garantit que les bons *flags* sont transmis au compilateur pour tout fichier se terminant par `.re`.
 
 Pour la compilation native, nous utilisons [OPAM](https://opam.ocaml.org).
 

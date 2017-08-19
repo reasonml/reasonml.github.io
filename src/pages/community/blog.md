@@ -3,6 +3,21 @@ title: Blog
 order: 0
 ---
 
+### Un bien meilleur Editeur
+
+18 Août 2017
+
+En nous basant sur les retours de la communauté, nous avons maintenant amélioré notre section [Editeur](/try). Les principales nouveautés :
+
+- Conversion bidirectionnelle. Écrivez en Reason, obtenez la traduction OCaml, vice-versa.
+- Évaluation en direct, avec feedback de la console dans la partie inférieure droite.
+- La majorité de la [librairie standard](/api/index.html) est maintenant chargée. Comme nous évaluons sur le Web, cela inclut les [APIs supplémentaires stdlib](https://bucklescript.github.io/bucklescript/api/) de BuckleScript.
+- Un extrait de code partageable ! Copiez simplement l'URL.
+- Quelques améliorations de performance.
+
+Have fun!
+
+
 ### Nouveau site !
 
 14 Juillet 2017

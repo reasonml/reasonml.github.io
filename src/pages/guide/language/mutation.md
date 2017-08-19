@@ -3,37 +3,46 @@ title: Mutation
 order: 140
 ---
 
-Reason/OCaml exposes mutable features through [array](#built-in-data-types-array) and [mutable record fields](#built-in-data-types-record). They're sometimes great for performance and expressing certain familiar programming patterns.
+Reason a de grandes capacités de programmation impératives et mutatives traditionnelles. Vous devez utiliser ces fonctionnalités avec modération, mais parfois elles permettent à votre code d'être plus performant et écrit dans un pattern plus familier.
 
-For a single mutable reference (e.g. assigning a value to `let`), the standard library comes with syntax sugar for a [record type called `ref`](http://caml.inria.fr/pub/docs/manual-ocaml/libref/Pervasives.html#TYPEref). You'd use it like so:
+### Binding let muté
 
-```reason
-let myValue = ref 10;
-if (...) {
-  myValue := 20;
-};
-print_int !myValue;
-```
-
-In reality, this is just:
+Les bindings let sont immutables, mais vous pouvez les englober dans un `ref`, qui est un peu comme une boîte dont le contenu peut changer :
 
 ```reason
-let myValue = {contents: 10};
-if (...) {
-  myValue.contents = 20;
-};
-print_int myValue.contents;
+let foo = ref 5;
 ```
 
-There's nothing special about this record, beside the fact that it comes inside the standard library.
+### Utilisation
 
-You can also achieve lightweight, local "mutations" through overriding let bindings:
+Vous pouvez accéder à la valeur d'un `ref` via l'opérateur `!` :
+
+```
+let five = !foo; /* 5 */
+```
+
+Affectez une nouvelle valeur à `foo` comme ceci :
+
+```
+foo := 6;
+```
+
+Notez que le précédent binding `five` reste `5`, puisqu'il a obtenu l'élément sous-jacent dans la boîte `ref`, pas le  `ref` lui-même.
+
+### Conseils & astuces
+
+**Just kidding**! `ref` n'est en fait pas une fonctionnalité particulière ! C'est juste un *sucre syntaxique* ordinaire pour un [type de record mutable prédéfini appelé `ref`](/api/Pervasives.html#TYPEref) dans la librairie standard (cherchez "References" dans cette page). Voici la version *désucrée* :
+
+```reason
+let foo = {contents: 5};
+let five = foo.contents;
+foo.contents = 5;
+```
+
+Avant d'essayer d'utiliser des `ref`, sachez que vous pouvez obtenir des «mutations» légères et locales via des overrides de bindings let :
 
 ```reason
 let foo = 10;
-let foo = someCondition ? foo + 5 : foo; /* either 15 or 10 */
-let foo = "hello";
-print_endline foo; /* "hello" */
+let foo = someCondition ? foo + 5 : foo;
+print_int foo; /* soit 15 ou 10 */
 ```
-
-Notice we've assigned a new type to `foo` in the before-last line. This is type-safe since, as documented [here](#basics-let-binding), the lines afterward can only see the last assignment of `foo`.

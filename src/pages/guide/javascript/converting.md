@@ -169,7 +169,7 @@ Et vous avez terminé !
 Conseils
 -------
 
-**N'essayez pas** de convertir complètement un fichier JS en un fichier Reason immaculé d'un seul coup. Une telle méthode pourrait réellement vous ralentir ! Ce n'est pas grave d'avoir des externals et `bs.obj` de côté, et de ne pas profiter des super fonctionnalités OCaml (variants, arguments labellés, etc.) temporairement. Une fois que vous avez converti quelques autres fichiers connexes, vous pouvez revenir et refactorer **rapidement** en vous reposant sur le système de typage.
+**N'essayez pas** de convertir complètement un fichier JS en un fichier Reason immaculé d'un seul coup. Une telle méthode pourrait réellement vous ralentir ! Ce n'est pas grave d'avoir des externals et `bs.obj` de côté, et de ne pas profiter des super fonctionnalités OCaml (variants, arguments labellés, etc.) temporairement. Une fois que vous avez converti quelques autres fichiers connexes, vous pouvez revenir et refactorer **rapidement** en vous reposant sur le système de types.
 
 Quels que soient les utilitaires agréables que vous trouveriez (par exemple, convertir un `Js.null_undefined Js.boolean` vers un `bool`), placez-les dans un fichier `tempUtil.re` ou quelque chose comme ça. Ils sont des exemples faciles pour vos collègues et réduisent certains problèmes de conversion.
 

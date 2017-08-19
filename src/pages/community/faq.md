@@ -6,7 +6,16 @@ Foire Aux Questions
 =======
 
 #### Est-ce que je devrais apprendre Reason ou OCaml en premier ?
-Aucune raison de choisir entre les deux ! Reason et OCaml partagent exactement la même sémantique (ex : comment le code s'exécute). Seule la syntaxe diffère. Gardez [Reason-tools](https://github.com/reasonml/reason-tools) à portée de main afin de pouvoir faire vos équivalences entre les deux syntaxes librement. Un tutoriel Reason est un tutoriel OCaml et vice-versa.
+Aucune raison de choisir entre les deux ! Reason et OCaml partagent exactement la même sémantique (ex : comment le code s'exécute). Seule la syntaxe diffère. Gardez [Reason-tools](https://github.com/reasonml/reason-tools) à portée de main afin de pouvoir faire vos équivalences entre les deux syntaxes librement. Un tutoriel Reason est un tutoriel OCaml et vice-versa. Vosu pouvez avoir ces alias dans votre terminal à toute fin utile :
+
+```sh
+# converti un code ocaml en reason
+alias mlre="pbpaste | refmt --parse ml --print re --interface false | pbcopy"
+# converti un code reason code en ocaml
+alias reml="pbpaste | refmt --parse re --print ml --interface false | pbcopy"
+```
+
+Ils vont prendre votre code à partir du presse-papiers (macos), le convertir et le coller dans votre presse-papiers ! Échangez pbpaste/pbcopy avec les fonctions de votre système de presse-papier.
 
 #### Je ne sais pas trop quoi faire avec Reason
 [Nous compilons très bien vers JavaScript](./gettingStarted.html#javascript-workflow). Pensez à quel projet vous feriez habituellement s'il s'agissait purement de JavaScript. Essayez juste de le porter/écrire en Reason + BuckleScript à la place ! Nous vous recommandons d'essayer de réaliser des projets concrets, avec des utilisateurs finaux (par exemple, un petit utilitaire de ligne de commande) plutôt que des projets au niveau d'infrastructures (par exemple, un générateur de boilerplate). Cette dernière catégorie nécessite une expertise et une compréhension idiomatique du code Reason assez poussées.
@@ -23,6 +32,15 @@ Elles proviennent de la librairie standard, pre-`open` lors de la compilation de
 
 #### Qu'en est-il du rendu serveur ? Devrais-je compiler en natif ou JS et utiliser node.js ?
 Nous compilons vers le natif, mais le workflow natif est actuellement en cours de développement. Pour le moment, nous recommandons de compiler en JS via BuckleScript et d'utiliser les bindings disponibles sur [BuckleTypes](https://github.com/buckletypes) ou autre part.
+
+#### Puis-je avoir une fonction pour afficher des structures de données arbitraires?
+Si vous compilez en JavaScript via BuckleScript, vous pouvez utilisez le `console.log` JavaScript via [`Js.log`](https://bucklescript.github.io/bucklescript/api/Js.html#VALlog). Si vous compilez en natif, vous aurez besoin d'un outil comme [ppx_show](https://github.com/diml/ppx_show). Une future fonctionnalité d'Ocaml  (appelée *modular implicit*) réglera ce problème directement dans le langage.
+
+#### Pourquoi est-ce qu'il y a un `+` pour aditionner des ints et un `+.` pour additionner des floats, etc ?
+Voir [ici](/guide/language/integer-and-float#design-decisions).
+
+#### Est-ce que la librairie ___ fonctionne en Reason ?
+La plupart des librairies JavaScript devraient facilement fonctionner sous Reason + BuckleScript. Du côté natif, puisque Reason est juste une transformation de syntaxe : oui, elles fonctionnent aussi avec Reason. Mais le workflow natif est actuellement en cours d'élaboration et a besoin d'être peaufiné.
 
 #### Quel est ce fichier `.merlin` à la racine du projet ?
 C'est le fichier metadata de [Merlin](./tools.html#tools-command-line-utilities-merlin), le backend de l'éditeur d'intégration partagé pour l'autocomplétion, la "redirection vers définition", etc. Pour le [Workflow JavaScript](./gettingStarted.html#javascript-workflow), le système de build de `bsb` génère le fichier `.merlin` pour vous. Vous n'avez pas besoin de vérifier cela dans votre contrôle de version et ne devez pas le modifier manuellement.
@@ -41,7 +59,7 @@ D'une manière générale, nous recommandons de se bind à la bibliothèque JS p
 Voir aussi notre [guide d'interopérabilité JS](./gettingStarted.html#javascript-workflow-talk-to-existing-js-libraries).
 
 #### Bsb : Existe-t-il un moyen de configurer le répertoire de sortie ?
-Pas actuellement. Nous aimerions que la configuration reste minimale.
+Pas actuellement. Nous gardons la configuration minimale. Nous implémenterons peut-être ceci plus tard en fonction des demandes de la communauté.
 
 #### Le compilateur me dit qu'il n'arrive pas à trouver le module.
 Êtes-vous entrain d'utiliser un module tiers ? Si vous êtes entrain de compiler en JS, avez-vous ajouté une dépendance au champ `bs-dependencies` de votre [`bsconfig.json`](http://bucklescript.github.io/bucklescript/Manual.html#_get_started) ? Aussi, avez-vous exécutez `bsb -make-world` ? `bsb` par défaut ne crée le projet racine que pour lui-même, pour des questions de performance.

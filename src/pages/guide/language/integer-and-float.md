@@ -5,28 +5,29 @@ order: 40
 
 ### Integers
 
-32-bits, truncated when necessary. Reason provides the usual operations on them: `+`, `-`, `*`, `/`, etc.
+32 bits, tronqué lorsque nécessaire. Reason fournit les opérations habituelles : `+`, `-`, `*`, `/`, etc.
 
-#### Usage
+#### Utilisation
 
-See the [Int32 module](/api/Int32.html) in the standard library. For JS compilation, see [Js.Int](https://bucklescript.github.io/bucklescript/api/Js.Int.html).
+Regardez le [module Int32](/api/Int32.html) de la librairie standard. Pour la compilation JavaScript, regardez plutôt [Js.Int](https://bucklescript.github.io/bucklescript/api/Js.Int.html).
 
-#### Tips & Tricks
+#### Conseils & astuces
 
-**Careful when you bind to JavaScript numbers**! Long ones might be truncated. Bind JS number as float instead.
+**Attention lorsque vous bindez des numbers JavaScript ** ! Les plus longs peuvent être tronqués. Bindez le number JavaScript à un float à la place.
 
 ### Floats
 
-Float requires other operators: `+.`, `-.`, `*.`, `/.`, etc. Like `0.5 +. 0.6`.
+Le float requiert d'autres opérateurs : `+.`, `-.`, `*.`, `/.`, etc. Exemple : `0.5 +. 0.6`.
 
-#### Usage
+#### Utilisation
 
-There's no Float module in the current standard library. For JS compilation, see [Js.Float](https://bucklescript.github.io/bucklescript/api/Js.Float.html).
+Il n'y a pas de module Float dans la librairie standard actuelle. Pour la compilation JavaScript, voir [Js.Float](https://bucklescript.github.io/bucklescript/api/Js.Float.html).
 
-#### Design Decisions
+#### Décisions de conception
 
-"Why the heck can't I just use an overloaded `+` for both int and float? Why is it that each time I find a performant language with great types and interop and community, I find these kind of flaws?"
+"Pourquoi je ne peux pas simplement utiliser un `+`surchargé à la fois pour int et float ? Pourquoi est-ce que chaque fois que je trouve un langage performant avec des types, une interopérabilité et une communauté au top, je trouve toujours ce genre de défauts ?"
 
-There there. Polymorphic operators, under the current type system, would need to be hard-coded into the compiler. The physical polymorphic equal, `==` is such operator, `+` and the rest aren't. [Improvements are under way](https://www.reddit.com/r/ocaml/comments/2vyk10/modular_implicits/) to make them work as desired. In the meantime, let's keep shipping =).
+Là, là, doucement. Les opérateurs polymorphes, dans le système de types actuel, auraient besoin d'être codés en dur dans le compilateur. L'équivalent physique polymorphique, `==`, est un tel opérateur. `+` et le reste ne le sont pas. [Des améliorations sont en cours](https://www.reddit.com/r/ocaml/comments/2vyk10/modular_implicits/) pour les faire fonctionner comme souhaité. En attendant, continuons à livrer =).
 
-Additionally, floats are rather special in Reason/OCaml native. [Check here](http://www.lexifi.com/blog/unboxed-floats-ocaml) if you're interested in learning some rather interesting optimizations!
+En outre, les floats sont plutôt spéciaux en Reason/OCaml natif. [Vérifiez ici](http://www.lexifi.com/blog/unboxed-floats-ocaml) si avez envie d'apprendre des optimisations plutôt intéressantes !
+

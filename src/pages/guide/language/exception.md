@@ -3,14 +3,14 @@ title: Exception
 order: 175
 ---
 
-Exceptions are just a special kind of variant, "thrown" in **exceptional** cases (don't abuse them!).
+Les exceptions sont juste des variants un peu spéciales, "lancées" dans cas **exceptionnels** (n'en abusez pas !).
 
-### Usage
+### Utilisation
 
 ```reason
 let getItem theList => {
   if (...) {
-    /* return the found item here */
+    /* retourner l'item trouvé ici */
   } else {
     raise Not_found
   }
@@ -20,8 +20,7 @@ let result = try (getItem [1, 2, 3]) {
 | Not_found => print_endline "Item not found!"
 };
 ```
-
-You can make your own exceptions like you'd make a variant (exceptions need to be capitalized too).
+Vous pouvez faire vos propres exceptions comme vous feriez une variant (les exceptions doivent également être mises en majuscules).
 
 ```
 exception InputClosed string;
@@ -29,12 +28,12 @@ exception InputClosed string;
 raise (InputClosed "the stream has closed!");
 ```
 
-### Tips & Tricks
+### Conseils & astuces
 
-When you have ordinary variants, you often don't **need** exceptions. For example, instead of throwing when `item` can't be found in a collection, try to return an `option item` (`None` in this case) instead.
+Lorsque vous avez des variants ordinaires, vous n'avez pas souvent **besoin** d'exceptions. Par exemple, au lieu d'en lancer une lorsque `item` ne peut être trouvé dans une collection, essayez de renvoyer un `option item` (`None` dans le cas d'espèce) à la place.
 
-### Design Decisions
+### Décisions de conception
 
-The above tip seems to contract what's happening in the OCaml standard library; prominent functions in modules such as [List](/api/List.html) and [String](/api/String.html) seems to throw exceptions overly often. This is partially a historical sediment, and partially out of extreme care for performance. Native OCaml/Reason is extremely performant; exception throwing was designed to be very cheap, cheaper than allocation and returning e.g. an `option`. This is unfortunately not the case for JavaScript.
+Le point ci-dessus semble contredire ce qui se passe dans la librairie standard OCaml. Les fonctions éminentes dans des modules tels que [List](/api/List.html) et [String](/api/String.html) semblent lancer des exceptions trop souvent. Ceci est en partie en un *héritage historique*, et partiellement une attention extrême à la performance. OCaml natif/Reason sont extrêmement performants. Le générateur d'exceptions a été conçu pour être très léger, moins gourmant que l'allocation et le retour d'une `option` par exemple. Ce n'est malheureusement pas le cas pour JavaScript.
 
-Newer standard library alternatives usually come with `option`-returning functions rather than exception-throwing ones.
+Les alternatives de librairies standard plus récentes sont généralement livrées avec des fonctions retourant des `option` plutôt que lançant des exceptions.

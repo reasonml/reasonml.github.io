@@ -1,20 +1,19 @@
 ---
-title: Boucles Impératives
+title: Boucles impératives
 order: 150
 ---
 
-#### For Loops
+### Boucles for
 
-For loops iterate from a starting value up to (and including) the ending value.
+Les boucles `for` itèrent d'une valeur de départ jusqu'à (et y compris) la valeur de fin.
 
 ```reason
 for myBinding in (startValue) to (endValue) {
-  /* use myBinding here */
+  /* utilisez myBinding ici */
 };
 ```
 
-The parenthesis around `startValue` and `endValue` may be omitted if they are
-unnecessary.
+Les parenthèses autour de `startValue` et `endValue` peuvent être supprimées si elle sont facultatives.
 
 ```reason
 let xStart = 1;
@@ -26,11 +25,11 @@ for x in xStart to xEnd {
 };
 ```
 
-You can make the `for` loop count in the opposite direction by using `downto`.
+Vous pouvez faire itérer une boucle `for` en sens inverse en utilisant `downto`.
 
 ```reason
 for myBinding in (startValue) downto (endValue) {
-  statements
+  déclarations
 };
 ```
 
@@ -44,34 +43,26 @@ for x in xStart downto xEnd {
 };
 ```
 
-#### While Loops
+### Boucles while
 
-While loops execute a code block while some condition is true. The form of a `while` loop includes a single expression, the condition to test.
+Les boucles `while` exécutent un bloc de code tant qu'une condition est vraie. La forme d'une boucle while comprend une seule expression, la condition à tester.
 
 ```reason
 while (testCondition) {
-  statements;
+  déclarations;
 };
 ```
 
-The parenthesis around `testCondition` may be omitted if they are unnecessary.
+### Conseils & astuces
 
-```reason
-while true {
-  print_endline "hello";
-};
-```
-
-#### Breaking Out of Loop
-
-There's no loop-breaking `break` keyword (nor early `return` from functions, for that matter) in Reason/OCaml. In general, prefer map/filter/reduce over imperative loops. However, we can break out of a while loop easily through using a [mutable binding](#diving-deeper-mutation). Example without the `ref` syntax sugar:
+Il n'y a pas de mot-clé `break` pour stoper une boucle (ni de `return` anticipé d'ailleurs) en Reason. En général, préférez `map`/`filter`/`reduce` aux boucles impératives. Cependant, on peut sortir d'une boucle `while` facilement en utilisant un [binding mutable](/guide/language/mutation).
 
 ```reason
 Random.self_init ();
-let break = {contents: false};
-while (not break.contents) {
+let break = ref false;
+while (not !break) {
   if (Random.int 10 === 3) {
-    break.contents = true
+    break := true
   } else {
     print_endline "hello"
   }

@@ -1,46 +1,47 @@
 ---
-title: Liste & Array
+title: List & Array
 order: 80
 ---
 
 ### List
 
-Lists are:
+Les lists sont :
 
-- homogeneous
-- immutable
-- fast at prepending items
+- homogènes
+- immutables
+- rapides à l'ajout d'éléments (prepending)
 
 ```reason
 let myList = [1, 2, 3];
 ```
 
-Reason lists are simple, singly linked list.
+Les lists Reason sont simples, liées individuellement.
 
-#### Usage
 
-You'd use list for its resizability, its fast prepend (adding at the head), and its fast split, all of which are immutable yet efficient!
+#### Utilisation
 
-The standard lib provides a [List module](/api/List.html) (and its counterpart with labeled arguments, `ListLabels`).
+Vous utiliserez une list pour sa capacité à êre redimensionnée, son *prepend* rapide (ajout au début de la list), et son *split* rapide, qui sont tous immutables mais efficaces !
 
-##### Immutable Prepend
+La librairie standard fournit un [module List](/api/List.html) (et sa contrepartie avec des arguments labelisés, `ListLabels`).
 
-Use the spread syntax, which is just `List.cons`:
+##### Prepend immutable
+
+Utilisez la syntaxe spread, qui n'est en fait que `List.cons`:
 
 ```reason
 let myList = [1, 2, 3];
 let anotherList = [0, ...myList];
 ```
 
-`myList` didn't mutate. `anotherList` is now `[0, 1, 2, 3]`. This is efficient (constant time, not linear). `anotherList`'s last 3 elements are shared with `myList`!
+`myList` n'a pas été muté. `anotherList` vaut maintenant `[0, 1, 2, 3]`. Cette méthode est efficace (temps constant, pas linéaire). Les 3 derniers éléments d'`anotherList` sont partagés avec `myList` !
 
-**Note that `[a, ...b, ...c]` is a syntax error**. We don't support multiple spread for a list. That'd be an accidental linear operation (`O(b)`), since each item of b would be one-by-one added to the head of `c`. You can use `List.concat` for this.
+**Notez que `[a, ...b, ...c]` est une erreur de syntaxe**. Nous ne supportons pas plusieurs spreads pour une seule list. Ce serait une opération linéaire accidentelle (`O(b)`), étant donné que les éléments de `b` seraient ajoutés un à un au début de `c`. Vous pouvez utiliser `List.concat` pour ceci.
 
-Updating an arbitrary item in the middle of a list is discouraged, since its performance and allocation overhead would be linear (`O(n)`).
+Mettre à jour de façon arbitraire un élément au milieu d'une liste est déconseillez car ses performances et ses frais généraux d'allocation seraient linéaires (`O(n)`).
 
-##### Access
+##### Accès
 
-`switch` (described in [pattern-matching section](/guide/language/destructuring-pattern-matching)) is usually used to access list items:
+`switch` (abordé dans la [section pattern-matching](/guide/language/destructuring-pattern-matching)) est habituellement utilisé pour accéder aux éléments d'une list :
 
 ```
 let message = switch myList {
@@ -49,35 +50,35 @@ let message = switch myList {
 }
 ```
 
-To access an arbitrary list item, use `List.nth`.
+Pour accéder à un élément précis d'une list, utilisez `List.nth`.
 
-#### Tips & Tricks
+#### Conseils & astuces
 
-Feel free to allocate as many empty lists as you'd like. As explained in the [variant section for list](/guide/language/variant#list), an empty list is actually a parameter-less variant constructor under the hood, which compiles to a mere integer. No extra memory allocation needed.
+N'hésitez pas à allouer autant de lists vides que vous le souhaitez. Comme expliqué dans la section [variant pour list](/guide/language/variant#list), une liste vide est en fait un constructeur de variant sans paramètre, qui compile en un simple integer. Aucune allocation de mémoire supplémentaire n'est nécessaire.
 
-#### Design Decisions
+#### Décisions de conception
 
-In the future, we might provide an out-of-the-box list data structure that's immutable, resizable and features all-around fast operations, such as [Immutable-re](https://github.com/facebookincubator/immutable-re) (still work in progress!).
+Dans l'avenir, nous pourrions fournir une structure de données listée immutable, redimensionnable et dotée d'opérations rapides, telle que [Immutable-re](https://github.com/facebookincubator/immutable-re) (encore en work in progress !).
 
 ### Array
 
-Arrays are like lists, except they are:
+Les arrays sont comme les lists, sauf qu'ils sont :
 
-- mutable
-- fast at random access & updates
-- fix-sized on native (flexibly sized on JavaScript)
+- mutables
+- rapides pour les accès aléatoires et les mises à jour
+- de taille fixe en natif (flexible en JavaScript)
 
-You'd surround them with `[|` and `|]`.
+Vous les entourerez avec `[|` et `|]`.
 
 ```reason
 let myArray = [|"hello", "world", "how are you"|];
 ```
 
-#### Usage
+#### Utilisation
 
-Standard library [Array](/api/Array.html) and [ArrayLabel](/api/ArrayLabels.html) module. For JS compilation, you also have the familiar [Js.Array](https://bucklescript.github.io/bucklescript/api/Js.Array.html) bindings API.
+Les modules [Array](/api/Array.html) et [ArrayLabel](/api/ArrayLabels.html) de la librairie standard. Pour la compilation JavaScript, vous avez aussi les bindings de l'API [Js.Array](https://bucklescript.github.io/bucklescript/api/Js.Array.html) qui doit vous être un peu plus familière.
 
-Access & update an array item like so:
+L'accès et la mise à jour d'un array se font comme suit :
 
 ```reason
 let myArray = [|"hello", "world", "how are you"|];
@@ -86,11 +87,11 @@ let world = myArray.(1); /* "hello" */
 
 myArray.(0) = "hey";
 
-/* now [|"hey", "world", "how are you"|] */
+/* maintenant [|"hey", "world", "how are you"|] */
 ```
 
-The above array access/update is just syntax sugar for `Array.get`/`Array.set`.
+L'accès et la mise à jour de l'array notés ci-dessus ne sont qu'un *sucre syntaxique* pour `Array.get`/`Array.set`.
 
-#### Tips & Tricks
+#### Conseils & astuces
 
-If you're compiling to JavaScript, know that Reason arrays map straightforwardly to JavaScript arrays, and vice-versa. Thus, even though arrays are fix-sized on native, you can still use the `Js.Array` API to resize them. This is fine.
+Si vous compilez en JavaScript, sachez que les arrays Reason map directement les arrays JavaScript et vice versa. Ainsi, même si les arrays sont de taille fixe en natif, vous pouvez toujours utiliser l'API `Js.Array` pour les redimensionner. Ça passe.

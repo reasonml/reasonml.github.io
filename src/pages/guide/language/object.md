@@ -3,15 +3,15 @@ title: Object
 order: 175
 ---
 
-Most of time in Reason, you'd be using record to group named values together. In certain niche situations, however, you might want to use a similar feature called object; they're a bit more flexible and come with different tradeoffs.
+En Reason, vous utiliserez le record pour regrouper des valeurs nommées ensemble la plupart du temps. Dans certaines situations particulières cependant, vous voudrez peut-être utiliser une fonction similaire appelée *objet*. Ils sont un peu plus souples et présentent des compromis différents.
 
-**If you come from JavaScript**, you're mostly likely **not** looking for plain Reason objects. Skip right to the Tip & Tricks section below.
+**Si vous venez de JavaScript**, vous ne recherchez probablement **pas** des objets Reason. Passez directement à la section Conseils & astuces ci-dessous.
 
-### Usage
+### Utilisation
 
-#### Type Declaration
+#### Déclaration de type
 
-An object **doesn't need a type declaration**, though it can have one. It looks like a record, except with a `.`:
+Un objet **n'a pas besoin de déclaration de type**, bien qu'il puisse en avoir une. Elle est semblable à celle d'un record, avec un `.` en plus :
 
 ```reason
 type tesla = {
@@ -20,7 +20,7 @@ type tesla = {
 };
 ```
 
-The dot at the beginning indicates that this is a "closed" object type, which means that an object based on this type must have exactly this shape.
+Le point au début indique qu'il s'agit d'un type d'objet «fermé», ce qui signifie qu'un objet basé sur ce type doit avoir exactement cette forme.
 
 ```reason
 type car 'a = {
@@ -29,9 +29,9 @@ type car 'a = {
 } as 'a;
 ```
 
-Two dots, also called an elision, indicate that this is an "open" object type, and therefore can also contain other values and methods. An open object is also polymorphic and therefore requires a parameter.
+Deux points, également appelés *élision*, indiquent qu'il s'agit d'un type d'objet "ouvert", qui peut donc contenir d'autres valeurs et méthodes. Un objet ouvert est également polymorphe et nécessite donc un paramètre.
 
-#### Creation
+#### Création
 
 ```reason
 type tesla = {
@@ -51,11 +51,11 @@ let obj :tesla = {
 };
 ```
 
-This object is of object type tesla and has a public method `drive`. It also contains a private method `enableEnvy` that is only accessible from within the object.
+Cet objet est de type `tesla` et à une méthode publique `drive`. Il contient aussi une méthode privée `enableEnvy` uniquement accessible depuis l'intérieur de l'objet.
 
-As you can see, a Reason object can also access `this`. Just like a JavaScript object's `this`, our `this` has very erratic behavior depending on the context. Just kidding. Our `this` always points to the object itself correctly. Gotta learn from history.
+Comme vous pouvez le voir, un objet Reason peut aussi avoir accès à `this`. Exactement comme le `this` de l'object JavaScript, notre `this` a un comportement extrêment irrégulier en fonction du contexte. Nan on rigole. Notre `this` pointe toujours correctement vers l'objet en question. Il faut savoir apprendre de ses erreurs.
 
-The following example shows an open object type which uses a type as parameter. The object type parameter is required to implement all the methods of the open object type.
+L'exemple suivant montre un type d'objet ouvert qui utilise un type comme paramètre. Le paramètre de type d'objet est requis afin d'implémenter toutes les méthodes du type d'objet ouvert.
 
 ```reason
 type tesla 'a = {
@@ -78,13 +78,13 @@ let obj:
 };
 ```
 
-### Tip & Tricks
+### Conseils & astuces
 
-If you come from JavaScript, you're probably not looking for vanilla Reason objects, but BuckleScript's [special object] (https://bucklescript.github.io/bucklescript/Manual.html#_binding_to_js_objects). These are different in that they:
+Si vous venez de JavaScript, vous ne cherchez probablement pas les objets Reason natifs, mais plutôt [l'object spécial] (https://bucklescript.github.io/bucklescript/Manual.html#_binding_to_js_objects) de BuckleScript. Ils sont différents en ce qu'ils :
 
-- access fields through `##`
-- can assign fields with `#=`
-- are always used as a type parameter in the `Js.t` type.
-- compile to actual JS objects.
+- accèdent aux champs via `##`
+- peuvent assigner des champs via `#=`
+- sont toujours utilisés comme des paramètres de type dans le type `Js.t`.
+- compilent en de véritables objets JavaScript.
 
-Because they're used so often, Reason give the BS object value `[%bs.obj {foo: bar}]` a special syntax sugar: `{"foo": bar}`. It looks like a quoted record, basically.
+Parce qu'ils sont utilisés si souvent, Reason à la valeur de l'objet BuckleScript `[%bs.obj {foo: bar}]` ajoute un *sucre syntaxique* spécial : `{"foo": bar}`. On dirait un record entre guillemets pour faire simple.

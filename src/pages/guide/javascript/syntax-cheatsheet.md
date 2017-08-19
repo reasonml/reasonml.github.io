@@ -12,7 +12,7 @@ JavaScript                  |   Reason
 ----------------------------|--------------------------------
 `const x = 5;`              |  `let x = 5;`
 `var x = y;`                |  Pas d'équivalent (heureusement)
-`let x = 5; x = 6;`         |  `let x = ref 5; x := 6;`
+`let x = 5; x = x + 1;`         |  `let x = ref 5; x := !x + 1;`
 
 ### String & Char
 
@@ -23,7 +23,7 @@ JavaScript                  |   Reason
 Caractères sont des strings |  `'a'`
 `"hello " + "world"`        |  `"hello " ^ "world"`
 
-### Booléens
+### Boolean
 
 JavaScript                |   Reason
 --------------------------|--------------------------------
@@ -74,9 +74,9 @@ JavaScript                |   Reason
 --------------------------|--------------------------------
 `null`, `undefined`       |  `None` \*
 
-\* Encore une fois, seulement un équivalent spirituel. Raison n'a pas de nulls, ni des bugs nulls !
+\* Encore une fois, seulement un équivalent spirituel. Raison n'a pas de nulls, ni des bugs nulls ! Mais il existe [un type option](/guide/examples#using-the-option-type) lorsque vous avez réellement besoin de la nullité.
 
-### Fonction
+### Function
 
 JavaScript                            |   Reason
 --------------------------------------|--------------------------------
@@ -85,7 +85,7 @@ JavaScript                            |   Reason
 `const f = function named(arg) {...}` |  `let f = fun named arg => ...`
 `add(4, add(5, 6))`                   |  `add 4 (add 5 6)`
 
-#### Blocs
+#### Blocks
 
 <table>
   <thead><tr> <th scope="col"><p >JavaScript</p></th> <th scope="col"><p>Reason</p></th></tr></thead>
@@ -123,7 +123,7 @@ JavaScript                |   Reason
 --------------------------|--------------------------------
 `if (a) {b} else {c}`     |  Idem \*
 `a ? b : c`               |  Idem
-`switch`                  |  `switch` mais [pas du tout le même](/guide/language/pattern-matching)
+`switch`                  |  `switch` mais [survitaminé](/guide/language/pattern-matching)
 
 \* Les conditionnels en Reason sont toujours des expressions !
 
@@ -142,7 +142,7 @@ JavaScript                |   Reason
 JavaScript                |   Reason
 --------------------------|--------------------------------
 `for (let i = 0; i <= 10; i++) {...}`             |  `for i in 0 to 10 {...}`
-`for (let i = 10; i >- 0; i--) {...}`             |  `for i in 10 downto 0 {...}`
+`for (let i = 10; i >= 0; i--) {...}`             |  `for i in 10 downto 0 {...}`
 `while (true) {...}`                              |  Idem
 
 ### JSX

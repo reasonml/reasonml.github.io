@@ -1,5 +1,5 @@
 ---
-title: Bindings let
+title: Binding let
 order: 10
 ---
 
@@ -77,4 +77,4 @@ fun a =>
     a + b;
 ```
 
-Bien qu'ils ne soient pas strictement les mêmes, heureusement vous pouvez voir que `let` est juste une expression ! En Reason, nous avons transformé ìn` en `;` par soucis d'habitude visuelle. Mais ne laissez pas `let` cacher l'élégance sous-jacente d'une expression.
+Bien qu'ils ne soient pas strictement les mêmes, heureusement vous pouvez voir que `let` est juste une expression ! En Reason, nous avons transformé `in` en `;` par soucis d'habitude visuelle. Mais ne laissez pas `let` cacher l'élégance sous-jacente d'une expression.

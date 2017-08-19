@@ -3,62 +3,78 @@ title: JSX
 order: 160
 ---
 
-Reason supports the JSX syntax, with some slight differences compared to the one in [ReactJS](https://facebook.github.io/react/docs/introducing-jsx.html). JSX tags translate to function calls as shown in these examples:
+Voudriez-vous un peu de syntaxe HTML dans votre code Reason ? Si ce n'est pas le cas, passez rapidement cette section et prétendez n'avoir rien vu !
 
-Capitalized tag:
+Reason prend en charge la syntaxe JSX, avec quelques légères différences par rapport à celle de [ReactJS](https://facebook.github.io/react/docs/introducing-jsx.html). Reason JSX n'est pas lié à ReactJS, ils se traduisent par des appels de fonction normaux :
+
+### Tag capitalisé
 
 ```reason
 <MyComponent foo=bar />
 ```
 
-becomes
+devient
 
 ```reason
-MyComponent.createElement foo::bar children::[] () [@JSX]
+MyComponent.make foo::bar children::[] ()
 ```
 
-Lowercase tag:
+### Tag non-capitalisé
 
 ```reason
 <div foo=bar>child1 child2</div>
 ```
 
-becomes
+devient
 
 ```reason
 div foo::bar children::[child1, child2] () [@JSX]
 ```
 
-The `[@JSX]` syntax attribute can be safely ignored; it's a hook for potential
-ppx macros to spot them and syntactically transform the preceeding expression
-into something else. This way, everyone gets to benefit the JSX syntax without
-needing to opt into a specific library using it, e.g. React.
+### Utilisation
 
-Some departures from JS JSX: Children text require double quote. Attributes
-don't mandate curly braces, unless they're complex expressions (in which case
-they're formatted to parentheses).
+Voir [ReasonReact](//reasonml.github.io/reason-react/) pour un exemple d'application de JSX.
+
+Voici un tag JSX qui présente la plupart des fonctionnalités.
 
 ```reason
-<NoCurlyBraces
+<MyComponent
   booleanAttribute=true
   stringAttribute="string"
   intAttribute=1
-  floatAttribute=0.1
   forcedOptional=?(Some "hello")
   onClick={updater handleClick}
-  thisWorksToo=(updater handleClick)>
-  "foo bar"
-</NoCurlyBraces>
+  onClickThisWorksToo=(updater handleClick)>
+  <div>
+    (ReasonReact.stringToElement "hello")
+  </div>
+</MyComponent>
 ```
 
-There is also support for punning!
+### Différences du JSX JavaScript
+
+- Les attributs ne requièrent pas d'accolades, à moins qu'ils ne soient des expressions complexes (dans ce cas, ils sont formatés avec parenthèses).
+- Il n'y a aucun support des attributs spread du JSX.
+- Le punning !
+
+#### Punning
+
+Le punning d'argument du JSX de ReactJS, ex : `<input checked />`, dû à de malheureuses raisons historiques, se *désucre* en `<input checked=true />`, afin de se conformer aux idiomes du DOM. Reason n'a pas un tel passif, alors nous avons décidé de le *désucré* en `<input checked=checked />`. Cela permet aux gens d'ajouter beaucoup d'autres props dans un composant ReasonReact sans qu'il soit trop gonflé :
 
 ```reason
-<div foo /> /* same as <div foo=foo /> */
+<MyComponent isLoading text onClick />
 ```
 
-Note that this would translate to `foo=true` within JSX in JS code.
+### Conseils & astuces
 
-There is no support for JSX spread attributes.
+Pour les auteurs de librairies souhaitant profiter du JSX : l'attribut `[@JSX]` ci-dessus est un hook pour les macros ppx potentielles pour localiser une fonction souhaitant se formater en JSX. Une fois que vous trouvez la fonction, vous pouvez la transformer en toute autre expression.
 
-JSX calls supports the features of [labeled functions](#basics-function): optional, explicitly passed optional and optional with default.
+De cette façon, tout le monde bénéficie de la syntaxe JSX sans avoir besoin d'opter pour une librairie spécifique en l'utilisant, ex : ReasonReact.
+
+Les appels JSX prennent en charge les fonctionnalités des [fonctions labelisées](/guide/language/function#labeled-arguments) : facultatif, explicitement passé en option et facultatif par défaut.
+
+### Décisions de conception
+
+La façon dont nous avons conçu ce JSX est liée à la façon dont nous aimerions aider le langage à évoluer. Voir la section "What's the point?" dans cet [article](https://medium.com/@chenglou/cool-things-reason-formatter-does-9e1f79e25a82).
+
+La possibilité d'avoir des macros dans le langage + la syntaxe agnostique de JSX permet à chaque librairie d'implémenter potentiellement JSX sans tracas. De cette façon, nous ajoutons des connaissances visuelles au langage OCaml sous-jacent sans compromettre ses sémantiques (aka, comment il s'exécute). L'un des principaux objectifs de Reason est de permettre au plus grand nombre de personnes de profiter du beau langage qu'est OCaml, tout en rejetant les débats fastidieux autour de la syntaxe et du formatage.
