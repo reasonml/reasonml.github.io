@@ -259,7 +259,7 @@ export default class Try extends Component {
         <div css={{ backgroundColor: accent, color: 'white' }}>
           <Header inverted />
         </div>
-        <div css={styles.info}>Copy the URL to share the code snippet!</div>
+        <div css={styles.info}>Copiez l'URL pour partager votre snippet !</div>
         <div css={styles.inner}>
           <div css={styles.column}>
             <div css={styles.row}>
