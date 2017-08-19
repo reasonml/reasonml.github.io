@@ -3,7 +3,7 @@ title: Le Guide Reason
 order: 0
 ---
 
-Voici comment démarrer !
+C'est ici que tout débute !
 
 - [Démarrage rapide JavaScript](/guide/javascript/quickstart)
 - [Démarrage rapide natif](/guide/native/quickstart)
