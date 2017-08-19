@@ -15,7 +15,7 @@ cd my-first-app
 npm run build
 ```
 
-Vous pouvez aussi build en mode watch:
+Vous pouvez aussi build en watch mode :
 ```sh
 rpm run watch
 ```
