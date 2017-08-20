@@ -17,7 +17,7 @@ npm run build
 
 Vous pouvez aussi build en watch mode :
 ```sh
-rpm run watch
+npm run watch
 ```
 
 C'est tout ! Ceci compile Reason en JavaScrit dans le dossier `/lib/js/`.
