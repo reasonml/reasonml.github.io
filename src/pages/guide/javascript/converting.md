@@ -15,12 +15,12 @@ Syntaxe
 
 **Objectif**: tout d'abord, **rendre le fichier syntaxiquement valide**. Ne vous souciez pas des types incorrects, des modules manquants, de la mauvaise organisation des fichiers, d'autres externals, etc. Nous reviendrons pour les nettoyer après avoir configuré le test de régression pour qu'il n'y ait "pas d'erreurs de syntaxe".
 
-Étant donné que la syntaxe Reason ressemble à celle de JavaScript, au lieu de créer un nouveau fichier Reason, il suffit de copier sur un fichier js existant et de travailler en haut de celui-ci.
+Étant donné que la syntaxe Reason ressemble à celle de JavaScript, au lieu de créer un nouveau fichier Reason, il suffit de copier sur un fichier JavaScript existant et de travailler en haut de celui-ci.
 
-*Conseil*: n'oubliez pas que vous pouvez utiliser `refmt` dans votre éditeur/terminal ! Si par exemple vous ne connaissez pas la préséance de certaines opérations, enveloppez-les dans autant de parenthèses que vous le souhaitez, puis `refmt`-ez votre code et voyez celles qui restent. De même, il n'est pas nécessaire de perdre du temps sur les indentations et l'espacement; `refmt` prend soin d'eux.
+*Conseil*: n'oubliez pas que vous pouvez utiliser `refmt` dans votre éditeur/terminal ! Si par exemple vous ne connaissez pas la préséance de certaines opérations, enveloppez-les dans autant de parenthèses que vous le souhaitez, puis `refmt`-ez votre code et voyez celles qui restent. De même, il n'est pas nécessaire de perdre du temps sur les indentations et l'espacement : `refmt` prend soin d'eux.
 
 ```reason
-/* fichier JS original que vous avez copié */
+/* fichier JavaScript original que vous avez copié */
 const school = require('school');
 
 const defaultId = 10;
@@ -35,7 +35,7 @@ function queryResult(usePayload, payload) {
 
 Voici certaines choses que vous feriez à cette étape :
 
-- Convertir la syntaxe d'appel de fonction.
+- Convertir la syntaxe d'appel de fonctions.
 
 - Convertir les `var`/`const` en `let`.
 
@@ -80,7 +80,7 @@ Vous pouvez parfois obtenir des erreurs de syntaxe, mais pas aussi drastiques qu
 
   - Pour les types et modèles de données difficiles à convertir correctement, vous pouvez parfois créer des convertisseurs comme `external unsafeCast : myPayloadType => anotherDataType = "%identity";`.
 
-C'est la première passe, les types finaux semblent différents. Pour l'instant, récoltez les récompenses ! Une fois que vous avez fini de réparer toutes les erreurs de type, votre fichier JS devrait maintenant être généré. Gardez-le ouvert à côte. Il est temps de revenir et de réparer tous les hacks !
+C'est la première passe, les types finaux semblent différents. Pour l'instant, récoltez les récompenses ! Une fois que vous avez fini de réparer toutes les erreurs de type, votre fichier JavaScript devrait maintenant être généré. Gardez-le ouvert à côte. Il est temps de revenir et de réparer tous les hacks !
 
 
 ```reason
@@ -101,13 +101,13 @@ let queryResult usePayload payload => {
 Sémantiques d'exécution
 -------
 
-**Objectif**: corriger les erreurs dans le JS généré.
+**Objectif**: corriger les erreurs dans le JavaScript généré.
 
-Comparez-le avec votre ancien fichier JS. Le résultat est probablement incorrect. Vous avez probablement mal converti certaines expressions idiomatiques et avez mal écrit des internals.
+Comparez-le avec votre ancien fichier JavaScript. Le résultat est probablement incorrect. Vous avez probablement mal converti certaines expressions idiomatiques et avez mal écrit des internals.
 
-- Typez la forme des objets JS (les choses nécessitant `##`).
+- Typez la forme des objets JavaScript (les choses nécessitant `##`).
 
-- Convertissez les pièces par rapport aux records/variants/types idiomatiques OCaml.
+- Convertissez n'importe quelle partie en records/variants/types idiomatiques OCaml.
 
 Vérifiez le résultat en quête de n'importe quel changement.
 
@@ -169,10 +169,10 @@ Et vous avez terminé !
 Conseils
 -------
 
-**N'essayez pas** de convertir complètement un fichier JS en un fichier Reason immaculé d'un seul coup. Une telle méthode pourrait réellement vous ralentir ! Ce n'est pas grave d'avoir des externals et `bs.obj` de côté, et de ne pas profiter des super fonctionnalités OCaml (variants, arguments labellés, etc.) temporairement. Une fois que vous avez converti quelques autres fichiers connexes, vous pouvez revenir et refactorer **rapidement** en vous reposant sur le système de types.
+**N'essayez pas** de convertir complètement un fichier JavaScript en un fichier Reason immaculé d'un seul coup. Une telle méthode pourrait réellement vous ralentir ! Ce n'est pas grave d'avoir des externals et `bs.obj` de côté, et de ne pas profiter des super fonctionnalités OCaml (variants, arguments labellés, etc.) temporairement. Une fois que vous avez converti quelques autres fichiers connexes, vous pouvez revenir et refactorer **rapidement** en vous reposant sur le système de types.
 
 Quels que soient les utilitaires agréables que vous trouveriez (par exemple, convertir un `Js.null_undefined Js.boolean` vers un `bool`), placez-les dans un fichier `tempUtil.re` ou quelque chose comme ça. Ils sont des exemples faciles pour vos collègues et réduisent certains problèmes de conversion.
 
-Nous vous **recommandons vivement** de vérifier le résultat JS dans le contrôle de version. Cela rend l'intégration de système de build quasi inexistante et vous assure que lorsque vous n'êtes pas là, vos coéquipiers peuvent faire de petits changements, auditer le diff de sortie et catch n'importe quelle erreur. Le fait que la sortie JavaScript enregistrée soit compatible avec des correctifs d'urgence est un bon argument de vente (surtout auprès des managers !). Même si vous mettez à niveau la version de BuckleScript, vous allez catch n'importe quelle différence de sortie. C'est comme des [snapshots Jest](https://facebook.github.io/jest/docs/snapshot-testing.html), mais gratuitement !
+Nous vous **recommandons vivement** de vérifier le résultat JavaScript dans le contrôle de version. Cela rend l'intégration de système de build quasi inexistante et vous assure que lorsque vous n'êtes pas là, vos coéquipiers peuvent faire de petits changements, auditer le diff de sortie et catch n'importe quelle erreur. Le fait que la sortie JavaScript enregistrée soit compatible avec des correctifs d'urgence est un bon argument de vente (surtout auprès des managers !). Même si vous mettez à niveau la version de BuckleScript, vous allez catch n'importe quelle différence de sortie. C'est comme des [snapshots Jest](https://facebook.github.io/jest/docs/snapshot-testing.html), mais gratuitement !
 
 Comme toujours, contacez-nous sur [Discord](https://discord.gg/reasonml) pour plus d'aide !

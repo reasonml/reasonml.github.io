@@ -32,10 +32,10 @@ Que faire si vous voulez une valeur qui peut être utilisée à partir de votre 
 ```ocaml
 Js.log "ceci est reason";
 let x = [%bs.raw {| 'voici une string depuis javascript' |}];
-Js.log (x ^ " en territoire reason"); /* ^ est l'opérateur pour la concaténation de string */
+Js.log (x ^ " en territoire reason"); /* ^ est l'opérateur pour la concaténation de strings */
 ```
 
-Maintenant vous devez peut-être vous demander "mais qu'elle est cette sorcellerie ?". Comment OCaml sait-il que `x` est une string ? Il n'en sait rien. Le type de `x` dans ce code est un type magique qui s'unifiera avec n'importe quoi ! Voilà pourquoi cette méthode est très dangereuse et peut avoir des effets en cascade dans l'algorithme d'inférence de type d'OCaml.
+Maintenant vous devez peut-être vous demander "mais qu'elle est cette sorcellerie ?". Comment OCaml sait-il que `x` est une string ? Il n'en sait rien. Le type de `x` dans ce code est un type magique qui s'unifiera avec n'importe quoi ! Voilà pourquoi cette méthode est très dangereuse et peut avoir des effets en cascade dans l'algorithme d'inférence de types d'OCaml.
 
 ```ocaml
 let y = [%bs.raw {| 'quelque chose' |}];
@@ -68,16 +68,16 @@ var x$1 = ( 'bien typé' );
 console.log(x$1 + " en territoire reason");
 ```
 
-> La différence entre les 2 `%%` de la section précédente et le seul `%` de celle-ci est importante ! `[%%something ...]` est un "point d'extension" OCaml qui représente un instruction de *haut niveau* (il ne peut apparaître à l'intérieur d'une fonction ou d'une valeur, par exemple). `[%something ...]` est un point d'extension qui représente une *expression* et peut être mis à peu près n'importe où, mais assurez-vous que le JavaScript que vous avez mis à l'intérieur soit effectivement une expression ! Par exemple : ne placez pas un point-virgule après, ou vous obtiendrez une erreur de syntaxe lorsque vous essaierez d'exécuter le JavaScript résultant.
+> La différence entre les 2 `%%` de la section précédente et le seul `%` de celle-ci est importante ! `[%%something ...]` est un "point d'extension" OCaml qui représente une instruction de *haut niveau* (il ne peut apparaître à l'intérieur d'une fonction ou d'une valeur, par exemple). `[%something ...]` est un point d'extension qui représente une *expression* et peut être mis à peu près n'importe où, mais assurez-vous que le JavaScript que vous avez mis à l'intérieur soit effectivement une expression ! Par exemple : ne placez pas un point-virgule après, ou vous obtiendrez une erreur de syntaxe lorsque vous essaierez d'exécuter le JavaScript résultant.
 
 ## Dumper dans une fonction & passer des valeurs
 
-Nous aurons besoin de quelques connaissances sur la représentation du runtime de BuckleScript pour différentes valeurs afin que cela fonctionne.
+Nous aurons besoin de quelques connaissances sur la représentation du runtime de BuckleScript de différentes valeurs afin que cela fonctionne.
 
 - les `strings` sont des strings, `ints` and `floats` sont juste des nombres
 - un [Array](/guide/language/data-types/#array) est une liste de longueur fixe mutable en OCaml, et est représentée sous la forme d'un array simple en JavaScript.
-- une [List](/guide/language/data-types/#linked-list) est une liste immutable liée de style fonctionnel et est clairement le plus idiomatique à utiliser dans la plupart des cas. Cependant sa représentation est plus compliquée (essayez `Js.log [1,2,3,4]` pour vous en rendre compte). À cause de cela, il est conseillé de convertir en et depuis des `Arrays` lorsqu'on communique avec JavaScript, via `Array.of_list` et `Array.to_list`.
-- Si vous voulez approfondir le sujet, il existe une liste exhaustive [sur le wiki de BuckleScript](https://github.com/bucklescript/bucklescript/wiki/Runtime-representation).
+- une [List](/guide/language/data-types/#linked-list) est une liste immutable liée de style fonctionnel et est clairement la solution la plus idiomatique à utiliser dans la majorité des cas. Cependant sa représentation est plus compliquée (essayez `Js.log [1,2,3,4]` pour vous en rendre compte). À cause de cela, il est conseillé de convertir en et depuis des `Arrays` lorsqu'on communique avec JavaScript, via `Array.of_list` et `Array.to_list`.
+- Si vous voulez approfondir le sujet, il existe une liste exhaustive [dans le manuel de BuckleScript](https://github.com/bucklescript/bucklescript/wiki/Runtime-representation).
 
 En sachant cela, nous pouvons écrire une fonction en JavaScript qui accepte juste un array et renvoie un number, sans trop de problèmes.
 
@@ -98,7 +98,7 @@ Js.log (calculate [1,2,3] 10); /* -> 60 */
 
 Bien sûr, cette fonction que nous avons écrit en JavaScript pourrait être portée en Reason sans trop de tracas.
 
-**Souvenez-vous** que c'est une *bouée de sauvetage* qui est très utile pour apprendre afin que vous puissiez vous faire la main rapidement et construire quelque chose, mais c'est un bon exercice que de revenir sur ses pas et réécrire le tout en un beau code Reason bien typé comme il faut.
+**Souvenez-vous** que c'est une *porte de secours* qui est très utile pour apprendre afin que vous puissiez vous faire la main rapidement et construire quelque chose, mais c'est un bon exercice que de revenir sur ses pas et réécrire le tout en un beau code Reason bien typé comme il faut.
 
 J'ai rencontré pas mal de bugs à cause du JavaScript brut que j'ai ajouté pour gagner du temps à la base 😅.
 
@@ -161,4 +161,4 @@ var ctx = myCanvas.getContext("2d");
 ctx.fillRect(0.0, 0.0, 100.0, 100.0);
 ```
 
-Hou la la! Vous avez vu comment BuckleScript vient de simplifier notre variable `pi` pour nous ? Et le résultat ressemble quasiment à ce qu'on aurait pu écrire à la main.
+Hou la la ! Vous avez vu comment BuckleScript vient de simplifier notre variable `pi` pour nous ? Et le résultat ressemble quasiment à ce qu'on aurait pu écrire à la main.

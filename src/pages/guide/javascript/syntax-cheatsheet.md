@@ -3,7 +3,7 @@ title: Cheatsheet de la syntaxe
 order: 1
 ---
 
-Nous avons travaillé très dur pour que Reason ressemble à JavaScript tout en conservant les superbes sémantiques et types d'OCaml. En espérant que vous apprécierez!
+Nous avons travaillé très dur pour que Reason ressemble à JavaScript tout en conservant les superbes sémantiques et types d'OCaml. En espérant que vous apprécierez !
 
 
 ### Binding let
@@ -45,14 +45,14 @@ JavaScript                |   Reason
 `3 + 4`                     |  Idem
 `3.0 + 4.5`                 |  `3.0 +. 4.5`
 
-\* JavaScript ne fait pas de distinction entre les integer et les float.
+\* JavaScript ne fait pas de distinction entre les integers et les floats.
 
 ### Object/Record
 
 JavaScript                |   Reason
 --------------------------|--------------------------------
-pad de types statiques          |  `type point = {x: int, mutable y: int};`
-`{x: 30, y: 20}`          |  Idem \*
+pas de types statiques          |  `type point = {x: int, mutable y: int};`
+`{x: 30, y: 20}`          |  Idem\*
 `point.x`                 |  Idem
 `point.y = 30;`           |  Idem
 `{...point, x: 30}`       |  Idem
@@ -135,7 +135,7 @@ JavaScript                |   Reason
 `const [a, b] = data`             |  `let [|a, b|] = data` \*
 `const {a: aa, b: bb} = data`     |  `let {a: aa, b: bb} = data`
 
-\* Produit un bon avertissement du compilateur selon lequel *data* peuvent ne pas être de longueur 2. Passer au pattern-matching à la place.
+\* Produit un bon avertissement du compilateur selon lequel *data* peuvent ne pas être de longueur 2. Passez au pattern-matching à la place.
 
 ### Boucle
 
