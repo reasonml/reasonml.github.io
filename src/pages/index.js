@@ -16,7 +16,7 @@ const features = [
     description:
       'Une inférence de type puissante et sûre signifie que vous devez rarement annoter des types, mais tout est vérifié pour vous.',
     action: 'Voir comment',
-    url: '/guide/language/types/',
+    url: '/guide/language/type/',
   },
   {
     title: 'Éditeur en ligne',
