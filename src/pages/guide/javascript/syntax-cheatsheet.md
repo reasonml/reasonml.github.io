@@ -11,7 +11,7 @@ JavaScript                |   Reason
 --------------------------|--------------------------------
 `const x = 5;`              |  `let x = 5;`
 `var x = y;`                |  No equivalent (thankfully)
-`let x = 5; x = 6;`         |  `let x = ref 5; x := 6;`
+`let x = 5; x = x + 1;`     |  `let x = ref 5; x := !x + 1;`
 
 ### String & Char
 
@@ -73,7 +73,7 @@ JavaScript                |   Reason
 --------------------------|--------------------------------
 `null`, `undefined`       |  `None` \*
 
-\* Again, only a spiritual equivalent; Reason doesn't have nulls, nor null bugs!
+\* Again, only a spiritual equivalent; Reason doesn't have nulls, nor null bugs! But it does have [an option type](https://reasonml.github.io/guide/examples#using-the-option-type) for when you actually need nullability.
 
 ### Function
 
@@ -122,7 +122,7 @@ JavaScript                |   Reason
 --------------------------|--------------------------------
 `if (a) {b} else {c}`     |  Same \*
 `a ? b : c`               |  Same
-`switch`                  |  `switch` but [not the same at all](/guide/language/pattern-matching)
+`switch`                  |  `switch` but [super-powered!](/guide/language/pattern-matching)
 
 \* Reason conditionals are always expressions!
 
@@ -141,7 +141,7 @@ JavaScript                |   Reason
 JavaScript                |   Reason
 --------------------------|--------------------------------
 `for (let i = 0; i <= 10; i++) {...}`             |  `for i in 0 to 10 {...}`
-`for (let i = 10; i >- 0; i--) {...}`             |  `for i in 10 downto 0 {...}`
+`for (let i = 10; i >= 0; i--) {...}`             |  `for i in 10 downto 0 {...}`
 `while (true) {...}`                              |  Same
 
 ### JSX
