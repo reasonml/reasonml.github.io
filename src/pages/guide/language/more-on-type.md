@@ -78,7 +78,7 @@ and teacher = {students: list student};
 
 ### Décisions de conception
 
-Un système de types permettant d'avoir un argument de type consiste essentiellement à permettre des fonctions de types. `list int` est vraiment la fonction du type `list` prenant le type `int` en entrée, et retournant le type final et concret que vous utiliserez dans certains endroits. Vous avez peut-être remarqué que dans d'autres langages, cela est plus ou moins appelé des «génériques». Par exemple,`ArrayList<Integer>` en Java.
+Un système de types permettant d'avoir un argument de type consiste essentiellement à permettre des fonctions de types. `list int` est vraiment la fonction du type `list` prenant le type `int` en entrée, et retournant le type final que vous utiliserez. Vous avez peut-être remarqué que dans d'autres langages, cela est plus ou moins appelé des «génériques». Par exemple,`ArrayList<Integer>` en Java.
 
 [Le principe de la moindre puissance (principle of least power)](https://en.wikipedia.org/wiki/Rule_of_least_power) s'applique lorsque vous essayez de "faire avancer les choses". Si le domaine du problème le permet, choisissez sans hésitation la solution la moins abstraite possible (aka, la plus concrète). De sorte que la solution soit atteinte le plus rapidement possible et comporte moins d'indirections instables que vous auriez à traverser. Par exemple, préférez les types aux données de forme libre, préférez la configuration basée sur les données aux appels de fonctions Turing-complets, préférez les appels de fonctions aux macros, préférez les macros aux forks de projets, etc. Lorsque vous contraignez votre domaine et votre puissance, les choses deviennent plus simples à analyser. Le tout, _si_ le domaine est suffisamment limité pour le permettre.
 

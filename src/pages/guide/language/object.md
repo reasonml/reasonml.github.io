@@ -53,7 +53,7 @@ let obj :tesla = {
 
 Cet objet est de type `tesla` et à une méthode publique `drive`. Il contient aussi une méthode privée `enableEnvy` uniquement accessible depuis l'intérieur de l'objet.
 
-Comme vous pouvez le voir, un objet Reason peut aussi avoir accès à `this`. Exactement comme le `this` de l'object JavaScript, notre `this` a un comportement extrêment irrégulier en fonction du contexte. Nan on rigole. Notre `this` pointe toujours correctement vers l'objet en question. Il faut savoir apprendre de ses erreurs.
+Comme vous pouvez le voir, un objet Reason peut aussi avoir accès à `this`. Exactement comme le `this` de l'object JavaScript, notre `this` a un comportement extrêment irrégulier en fonction du contexte. Nan on rigole. Notre `this` pointe toujours correctement vers l'objet en question. Il faut savoir apprendre des erreurs de l'Histoire.
 
 L'exemple suivant montre un type d'objet ouvert qui utilise un type comme paramètre. Le paramètre de type d'objet est requis afin d'implémenter toutes les méthodes du type d'objet ouvert.
 

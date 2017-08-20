@@ -17,7 +17,7 @@ Concaténation de strings              |  `"Hello " ^ "World"`
 Comparaison                           |  `>`, `<`, `>=`, `=<`
 Operations de booléens                |  `not`, `&&`, `||`
 Égalité structurelle/physique            |  `===`, `==`
-Listes immutables                     |  `[1, 2, 3]`
+Lists immutables                     |  `[1, 2, 3]`
 Prepend immutable                     |  `[item1, item2, ...theRest]`
 Arrays                                |  `[|1, 2, 3|]`
 Records                               |  `type player = {score: int}; {score: 100}`

@@ -31,7 +31,7 @@ let message =
   };
 ```
 
-Notez comment nous avons destructuré `data` tout en gérant chacun des différents cas. Cependant le `switch` ci-dessus vous génèrera un warning du compilateur :
+Notez comment nous avons destructuré `data` tout en gérant chacun des différents cas. Cependant le `switch` ci-dessus vous générera un warning du compilateur :
 
 ```
 Warning 8: this pattern-matching is not exhaustive.
@@ -68,7 +68,7 @@ let reply =
   };
 ```
 
-Combiné avec d'autres structures de données, le pattern mathcing peut produire un code concis, vérfié par le compilateur et performant :
+Combiné avec d'autres structures de données, le pattern matching peut produire un code concis, vérifié par le compilateur et performant :
 
 ```reason
 let message =
@@ -96,8 +96,7 @@ let message =
 
 ### Conseils & astuces
 
-**Simplifiez votre pattern-match chaque fois que vous le pouvez
-**. Ça vous permet de supprimer bien des bugs. Exemple ci-dessous.
+**Simplifiez votre pattern-match chaque fois que vous le pouvez**. Ça vous permet de supprimer bien des bugs. Exemple ci-dessous.
 
 Ne pas trop abuser du cas par défaut `_`. Cela empêche le compilateur de vous dire que vous avez oublié de couvrir un cas (vérification exhaustive), ce qui serait particulièrement utile après un refactoring où vous ajoutez un nouveau cas à une variant. Essayez seulement d'utiliser `_` en dernier recours après avoir tenté d'infinies possibilités, par ex. strings, ints, etc.
 
@@ -138,7 +137,7 @@ let optionBoolToJsBoolean opt => switch opt {
 };
 ```
 
-Beaucoup plus linéaire ! Maintenant, vous pourriez être tenté de faire :
+Beaucoup plus linéaire ! Maintenant, vous pourriez être tenté(e) de faire :
 
 ```reason
 let optionBoolToJsBoolean opt => switch opt {

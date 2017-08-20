@@ -17,7 +17,7 @@ let score = 10;
 
 Reason sait que `score` est un `int` en se basant sur la valeur `10`. C'est ce qu'on appelle **l'inférence de type**.
 
-Cependant, les types peuvent aussi être manuellement écrits :
+Cependant, les types peuvent aussi être écrits manuellement :
 
 ```reason
 let score: int = 10;
@@ -33,7 +33,7 @@ let add (x: int) (y: int) :int => x + y;
 let drawCircle radius::(r: int) :unit => ...;
 ```
 
-Note : à la dernière ligne, `radius::(r: int)` est un argument labellisé. Plus à ce sujet [ici](/guide/language/function).
+Note : à la dernière ligne, `radius::(r: int)` est un "*argument labellisé*". Plus à ce sujet [ici](/guide/language/function).
 
 ### Alias
 
@@ -48,8 +48,8 @@ let x: scoreType = 10;
 
 Reason est propulsé par OCaml, dont le sytème de types a été peaufiné pendant des dizaines d'années. En voici quelques points intéressants : 
 
-- **Les types peuvetnt être inférés**. Le système de types déduit les types pour vous, même si vous ne les écrivez pas manuellement. Cela accélère la phase de prototypage. En outre, les fonctionnalités de l'éditeur comme les [codelens de VSCode](https://github.com/reasonml-editor/vscode-reasonml) vous montrent tous les types pendant que vous écrivez votre code.
+- **Les types peuvent être inférés**. Le système de types déduit les types pour vous, même si vous ne les écrivez pas manuellement. Cela accélère la phase de prototypage. En outre, les fonctionnalités d'éditeur comme les [codelens de VSCode](https://github.com/reasonml-editor/vscode-reasonml) vous montrent tous les types pendant que vous écrivez votre code.
 
 - **Le type coverage est toujours de 100%**. Nous n'avons pas besoin d'un outil de «couverture de type» ! Chaque bout de code Reason est typé.
 
-- **Le système de type est "fort"**. Cela signifie que, tant que votre code compile bien, chaque type garantit qu'il décrit bien ce qu'il est. Dans un système conventionnel de types, simplement parce que le type dit qu'il est par exemple "un integer qui n'est jamais nul", ne signifie pas qu'il n'est jamais nul. En revanche, un programme Reason pur n'a pas de bugs nuls.
+- **Le système de type est "sound"**. Cela signifie que, tant que votre code compile bien, chaque type garantit qu'il décrit bien ce qu'il est. Dans un système conventionnel de types, simplement parce que le type dit qu'il est par exemple "un integer qui n'est jamais nul", ne signifie pas qu'il n'est jamais nul. En revanche, un programme Reason pur n'a pas de bugs nuls.

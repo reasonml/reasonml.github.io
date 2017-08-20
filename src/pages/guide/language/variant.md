@@ -5,7 +5,7 @@ order: 70
 
 Voici, le joyau de la couronne des structures de données Reason !
 
-La majorité des structures de données dans la plupart des langages concernent «ceci **et** cela». Une variante nous permet d'exprimer «ceci **ou** cela».
+La majorité des structures de données dans la plupart des langages concernent «ceci **et** cela». Une variant nous permet d'exprimer «ceci **ou** cela».
 
 ```reason
 type myResponseVariant =
@@ -18,7 +18,7 @@ let areYouCrushingIt = Yes;
 
 `Yes`, `No` et `PrettyMuch` ne sont pas des strings, ni des références, ou un type spécial de donnée. Il s'agit de "*constructeurs*" (ou "*tags*"). Le pipe `|` sépare chaque constructeur.
 
-**Note** : le constructeur d'une variante doit être écrit avec la première lettre en majuscule.
+**Note** : le constructeur d'une variant doit être écrit avec la première lettre en majuscule.
 
 ### Utilisation
 
@@ -37,7 +37,7 @@ let message = switch (areYouCrushingIt) {
 
 Une variant a un pourcentage extrêmement important d'assistance du système de types. Par exemple, nous vous donnerons une erreur de type si vous avez oublié de couvrir un cas de votre variant ou si deux cas sont redondants. Assurez-vous de jeter un coup d'oeil au switch et au pattern-matching dans une [section ultérieure](/guide/language/pattern-matching) !
 
-#### Une variante nécessite une définition explicite
+#### Une variant nécessite une définition explicite
 
 Si la variant que vous utilisez est dans un fichier différent, amenez-la dans le scope comme vous le feriez [pour un record](/guide/language/record#record-needs-an-explicit-definition) :
 
@@ -50,8 +50,8 @@ type animal = Dog | Cat | Bird;
 ```reason
 /* example.re */
 
-let pet: Zoo.animal = Dog; /* preferred */
-/* or */
+let pet: Zoo.animal = Dog; /* conseillé */
+/* ou */
 let pet = Zoo.Dog;
 ```
 
@@ -128,13 +128,13 @@ type account2 =
 ```
 #### Les variants doivent avoir un constructeur
 
-Si vous venez d'un langage non typé, vous pourriez être tenté d'essayer `type foo = int | string`. Ceci n'est pas possible en Reason. Vous devriez donner à chaque branche un constructeur : `type foo = Int int | String int`. Bien qu'en général, le simple fait que vous ayez besoin d'écrire ça pourrait bien être un anti-pattern. La section Décisions de conception ci-dessous l'explique plus en détails.
+Si vous venez d'un langage non typé, vous pourriez être tenté d'essayer `type foo = int | string`. Ceci n'est pas possible en Reason. Vous devriez donner à chaque branche un constructeur : `type foo = Int int | String string`. Bien qu'en général, le simple fait que vous ayez besoin d'écrire ça pourrait bien être un anti-pattern. La section Décisions de conception ci-dessous l'explique plus en détails.
 
 #### Interopérabilité avec JavaScript
 
 _Cette section suppose des connaissance sur l'[IFE](http://bucklescript.github.io/bucklescript/Manual.html#_ffi) de BuckleScript. Sautez cette partie si vous n'avez pas encore ressenti le besoin d'utiliser des variants pour gérer des bindings de fonctions JavaScript_.
 
-Beaucoup de librairies JavaScript utilisent des fonctions pouvant accepter de nombreux types d'arguments. Dans ces cas là, il est très tentant de les modéliser par des variants. Par exemple, supposons qu'il existe une fonction JavaScript `myLibrary.draw` qui prend un `number` ou une `string` en paramètre. Vous pourriez être tenté de la bind comme tel :
+Beaucoup de librairies JavaScript utilisent des fonctions pouvant accepter de nombreux types d'arguments. Dans ces cas là, il est très tentant de les modéliser par des variants. Par exemple, supposons qu'il existe une fonction JavaScript `myLibrary.draw` qui prend un `number` ou une `string` en paramètre. Vous pourriez être tenté de la bind comme ceci :
 
 ```
 /* réservé pour un usage interne */
@@ -160,7 +160,7 @@ external drawString: string => unit = "draw" [@@bs.module "myLibrary"];
 
 Ou, faîtes vous plaisir et utilisez une fonctionnalité avancée des variants appelée GADT, puis utilisez la [fonctionnalité de l'argument fantôme de l'IFE](http://bucklescript.github.io/bucklescript/Manual.html#_phantom_arguments_and_ad_hoc_polymorphism) de BuckleScript. Si ces mots ne vous disent absolument rien, pas de soucis. Référez-vous plutôt à la suggestion précédente.
 
-#### Les types de variantes se trouvent par nom de champ
+#### Les types de variants se trouvent par nom de champ
 
 Veuillez vous référer à cette [section du record](/guide/language/record#record-types-are-found-by-field-name). C'est pareil pour les variants : une fonction ne peut pas accepter un constructeur arbitraire partagé par deux différentes variants. Encore une fois, cette fonctionnalité existe, il s'agit de la *variant polymorphique*. Nous en parlerons plus dans le futur =).
 
@@ -207,5 +207,5 @@ Vous pourriez vous demander pourquoi les langages fonctionnels typés sont souve
 
 Mind blown? Les variants ont une connexion profonde avec d'autres domaines des mathématiques. [Voyez ici](https://codewords.recurse.com/issues/three/algebra-and-calculus-of-algebraic-data-types) pour vous lancer dans une exploration intéressante.
 
-\*Il est toujours plus agréable de concevoir le problème plutôt que de recourir à un système de types pour couvrir les défauts. En réalité, il est irréaliste de le faire pour chaque problème, ou même simplement de comprendre tous les problèmes afin de concevoir une solution. Un système de types vous permet d'apporter bons nombres de changements à votre codebase en toute sécurité, sans avoir à tout comprendre par avance. À cet égard, les types nous permettent également de ne pas trop concevoir une API pour contourner les pièges simples des callers. Ils réduisent les couches d'abstractions nécessaires pour «faire avancer les choses», ce qui, en retour, réduit le fardeau cognitif des callers.
+\*Il est toujours plus agréable de résoudre le problème plutôt que de recourir à un système de types pour couvrir les défauts. En réalité, il est irréaliste de le faire pour chaque problème, ou même simplement de comprendre tous les problèmes afin de concevoir une solution. Un système de types vous permet d'apporter bon nombre de changements à votre codebase en toute sécurité, sans avoir à tout comprendre par avance. À cet égard, les types nous permettent également de ne pas trop concevoir une API pour contourner les pièges simples des callers. Ils réduisent les couches d'abstractions nécessaires pour «faire avancer les choses», ce qui, en retour, réduit le fardeau cognitif des callers.
 

@@ -58,9 +58,9 @@ Le pré-processeur spécial de BuckleScript peut alors chercher un marqueur `js`
 
 https://twitter.com/jusrin00/status/875238742621028355
 
-**Vous avez un système de type expressif maintenant** ! Dans un langage non typé, vous surchargez souvent la signification de la string en l'utilisant comme suit :
+**Vous avez un système de types expressif maintenant** ! Dans un langage non typé, vous surchargez souvent la signification de la string en l'utilisant comme suit :
 
-- un unique id : `var BLUE_COLOR = "blue"`
+- un id unique : `var BLUE_COLOR = "blue"`
 - un identifiant dans une structure de données : `var BLUE = "blue"; var RED = "red"; var colors = [BLUE, RED]`
 - le nom d'un champ d'objet : `person["age"] = 24`
 - une énumération : `if (audio.canPlayType() === 'probably') {...}` [(ಠ_ಠ)](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/canPlayType#Return_value)
@@ -68,13 +68,13 @@ https://twitter.com/jusrin00/status/875238742621028355
 
 Plus vous surchargez le type string, moins le système de type peut vous aider ! Reason fournit des types et des structures de données alternatifs aux cas d'utilisation ci-dessus, rapides et maintenables (les variants par exemple, abordés dans une section ultérieure).
 
-Dans la compilation native, les strings Reason compilent en une représentation simple dont la performance est simple à analyser, au détriment parfois d'un réglage manuel des performances. Par exemple, concaténer naïvement des strings comme "salut" ^ "comment" ^ "ça" ^ "va ?" affecte inutilement les strings intermédiaires "ça va ?" et "comment ça va ?". Dans ce cas, préférez [`String.concat`](/api/String.html). D'une certaine manière, il est plutôt appréciable que l'analyse du runtime traditionnelle que nous avons apprise à l'école puisse finalement être utile à nouveau.
+Dans la compilation native, les strings Reason compilent en une représentation simple dont la performance est simple à analyser, au détriment parfois d'un réglage manuel des performances. Par exemple, concaténer naïvement des strings comme "salut" ^ "comment" ^ "ça" ^ "va ?" affecte inutilement les strings intermédiaires "ça va ?" et "comment ça va ?". Dans ce cas, préférez [`String.concat`](/api/String.html). D'une certaine manière, il est plutôt appréciable que la traditionnelle analyse du runtime que nous avons appris à l'école puisse finalement être utile à nouveau.
 
 Dans la compilation JavaScript, une string Reason map vers une string JavaScript et vice versa, donc le problème mentionné ci-dessus ne s'applique pas.
 
 #### Décisions de conception
 
-La fonctionnalité string citée qui permet de ne pas avoir à échapper des caractères spéciaux rend possible des DSLs assez sympatiques comme les [expressions régulières](/api/Str.html) :
+La fonctionnalité de *string citée* qui permet de ne pas avoir à échapper des caractères spéciaux rend possible des DSLs assez sympatiques comme les [expressions régulières](/api/Str.html) :
 
 ```reason
 let r = Str.regexp {|hello \([A-Za-z]+\)|};

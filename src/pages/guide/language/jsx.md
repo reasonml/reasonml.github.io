@@ -3,7 +3,7 @@ title: JSX
 order: 160
 ---
 
-Voudriez-vous un peu de syntaxe HTML dans votre code Reason ? Si ce n'est pas le cas, passez rapidement cette section et prétendez n'avoir rien vu !
+Voudriez-vous un peu de syntaxe HTML dans votre code Reason ? Si ce n'est pas le cas, sautez cette section au plus vite et prétendez n'avoir rien vu !
 
 Reason prend en charge la syntaxe JSX, avec quelques légères différences par rapport à celle de [ReactJS](https://facebook.github.io/react/docs/introducing-jsx.html). Reason JSX n'est pas lié à ReactJS, ils se traduisent par des appels de fonction normaux :
 
@@ -67,11 +67,11 @@ Le punning d'argument du JSX de ReactJS, ex : `<input checked />`, dû à de mal
 
 ### Conseils & astuces
 
-Pour les auteurs de librairies souhaitant profiter du JSX : l'attribut `[@JSX]` ci-dessus est un hook pour les macros ppx potentielles pour localiser une fonction souhaitant se formater en JSX. Une fois que vous trouvez la fonction, vous pouvez la transformer en toute autre expression.
+Pour les auteurs de librairies souhaitant profiter du JSX : l'attribut `[@JSX]` ci-dessus est un hook pour les *macros ppx* potentielles pour localiser une fonction souhaitant se formater en JSX. Une fois que vous trouvez la fonction, vous pouvez la transformer en toute autre expression.
 
 De cette façon, tout le monde bénéficie de la syntaxe JSX sans avoir besoin d'opter pour une librairie spécifique en l'utilisant, ex : ReasonReact.
 
-Les appels JSX prennent en charge les fonctionnalités des [fonctions labelisées](/guide/language/function#labeled-arguments) : facultatif, explicitement passé en option et facultatif par défaut.
+Les appels JSX prennent en charge les fonctionnalités des [fonctions labellisées](/guide/language/function#labeled-arguments) : facultatif, explicitement passé en option et facultatif par défaut.
 
 ### Décisions de conception
 

@@ -20,9 +20,9 @@ Les lists Reason sont simples, liées individuellement.
 
 #### Utilisation
 
-Vous utiliserez une list pour sa capacité à êre redimensionnée, son *prepend* rapide (ajout au début de la list), et son *split* rapide, qui sont tous immutables mais efficaces !
+Vous utiliserez une list pour sa capacité à être redimensionnée, son *prepend* rapide (ajout au début de la list), et son *split* rapide, qui sont tous immutables et efficaces !
 
-La librairie standard fournit un [module List](/api/List.html) (et sa contrepartie avec des arguments labelisés, `ListLabels`).
+La librairie standard fournit un [module List](/api/List.html) (et sa contrepartie avec des arguments labellisés, `ListLabels`).
 
 ##### Prepend immutable
 

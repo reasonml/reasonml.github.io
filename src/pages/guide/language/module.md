@@ -132,7 +132,7 @@ module type EstablishmentType = {
 };
 ```
 
-Une signature définit la liste des exigences qu'un module doit satisfaire afin que ce module corresponde à la signature. Ces exigences sont de la forme :
+Une signature définit la liste des exigences qu'un module doit satisfaire afin qu'il corresponde à la signature. Ces exigences sont de la forme :
 
 - `let x: int;` requiert un binding `let` nommé `x` et de type `int`.
 
@@ -165,7 +165,7 @@ Il est également utile de cacher le type sous-jacent comme un détail d'implém
 
 ### Tout fichier `.rei` est une signature
 
-De la même façon qu'un fichier `react.re`définit implicitement un module React, un fichier `react.rei` définit implicitement une signature pour `React`. Si `react.rei` n'est pas fourni, la signature de `react.re` est par défaut d'exposer tous les champs du module. Parce qu'ils ne contiennent pas de fichiers d'implémentation, les fichiers `.rei` sont utilisés dans l'écosystème pour documenter l'API publique de leurs modules correspondants.
+De la même façon qu'un fichier `react.re` définit implicitement un module React, un fichier `react.rei` définit implicitement une signature pour `React`. Si `react.rei` n'est pas fourni, la signature de `react.re` est par défaut d'exposer tous les champs du module. Parce qu'ils ne contiennent pas de fichiers d'implémentation, les fichiers `.rei` sont utilisés dans l'écosystème pour documenter l'API publique de leurs modules correspondants.
 
 ```reason
 /* fichier react.re (implémentation. Compile en un module React) */

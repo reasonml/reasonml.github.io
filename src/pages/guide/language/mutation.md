@@ -31,7 +31,7 @@ Notez que le précédent binding `five` reste `5`, puisqu'il a obtenu l'élémen
 
 ### Conseils & astuces
 
-**Just kidding**! `ref` n'est en fait pas une fonctionnalité particulière ! C'est juste un *sucre syntaxique* ordinaire pour un [type de record mutable prédéfini appelé `ref`](/api/Pervasives.html#TYPEref) dans la librairie standard (cherchez "References" dans cette page). Voici la version *désucrée* :
+**Just kidding**! `ref` n'est pas une fonctionnalité particulière en fait ! C'est juste un *sucre syntaxique* ordinaire pour un [type de record mutable prédéfini appelé `ref`](/api/Pervasives.html#TYPEref) dans la librairie standard (cherchez "References" dans cette page). Voici la version *désucrée* :
 
 ```reason
 let foo = {contents: 5};
@@ -39,10 +39,10 @@ let five = foo.contents;
 foo.contents = 5;
 ```
 
-Avant d'essayer d'utiliser des `ref`, sachez que vous pouvez obtenir des «mutations» légères et locales via des overrides de bindings let :
+Avant d'essayer d'utiliser des `ref`s, sachez que vous pouvez obtenir des «mutations» légères et locales via des overrides de bindings let :
 
 ```reason
 let foo = 10;
 let foo = someCondition ? foo + 5 : foo;
-print_int foo; /* soit 15 ou 10 */
+print_int foo; /* soit 15 soit 10 */
 ```

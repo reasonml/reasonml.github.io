@@ -16,12 +16,12 @@ Un booléen possède le type `bool` et peut valoir`true` ou `false`. Les opérat
 
 ### Utilisation
 
-**Note : BuckleScript fournit des bindings pour le s** `true` et `false` **JavaScript**, qui [ne sont pas les mêmes `true` et `false` que ceux de Reason/OCaml](http://bucklescript.github.io/bucklescript/Manual.html#_boolean) ! Ne les utilisez pas de façon interchangeable sans conversion appropriée (`Js.to_bool` et `Js.Boolean.to_js_boolean`).
+**Note : BuckleScript fournit des bindings pour les** `true` **et** `false` **JavaScript**, qui [ne sont pas les mêmes `true` et `false` que ceux de Reason/OCaml](http://bucklescript.github.io/bucklescript/Manual.html#_boolean) ! Ne les utilisez pas de façon interchangeable sans conversion appropriée (`Js.to_bool` et `Js.Boolean.to_js_boolean`).
 
 ### Conseils & astuces
 
 **Utilisez l'égalité physique à bon escient**. Elle est pratique, mais peut accidentellement vous faire comparer deux structures de données profondément imbriquées et ainsi entraîner une baisse de performance. Il n'est pas toujours évident de discerner ce qui est considéré comme étant "égal".
-Idéalement, cela aurait été pluggable. Des futurs changements sont prévus pour rendre cela possible et fiable. Si vous êtes intéressé, jetez un coup d'oeil à [modular implicit](https://www.reddit.com/r/ocaml/comments/2vyk10/modular_implicits/).
+Idéalement, cela aurait été pluggable. Des futurs changements sont prévus pour rendre cela possible et fiable. Si vous êtes intéressé(e), jetez un coup d'oeil à ["modular implicit“](https://www.reddit.com/r/ocaml/comments/2vyk10/modular_implicits/).
 
 ### Décisions de conception
 

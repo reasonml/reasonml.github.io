@@ -33,7 +33,7 @@ let greetMore = fun name => {
 };
 ```
 
-**Puisque les définitions de fonction sont monnaie courante**, nous avons prévu un shorthand pour `let + fun` :
+**Puisque les définitions de fonctions sont monnaie courante**, nous avons prévu un shorthand pour `let + fun` :
 
 ```reason
 let add x y z => x + y + z;
@@ -89,7 +89,7 @@ let addCoordinates x::x y::y => {
 addCoordinates x::5 y::6;
 ```
 
-Étant donné que nous avons la *curryification* (plus à ce sujet ci-dessous), nous pouvons fournir les arguments dans n'importe quel ordre :
+Étant donné que nous avons la *curryfication* (plus à ce sujet ci-dessous), nous pouvons fournir les arguments dans n'importe quel ordre :
 
 ```reason
 addCoordinates y::6 x::5;

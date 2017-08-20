@@ -28,7 +28,7 @@ let my3dCoordinates: coord3d = (20.0, 30.5, 100.0);
 
 ### Utilisation
 
-La librairie standard fournit `fst` et `snd` ([ici](/api/Pervasives.html), sous "Pair operations"), fonctions assez pratiques qui vous permettent d'accéder au premier et au deuxième élément d'un 2-uplet. Généralement, vous avez accès aux membres d'un n-uplet grâce au destructuring (décrit plus loin dans la barre latérale) :
+La librairie standard fournit `fst` et `snd` ([ici](/api/Pervasives.html), sous "Pair operations"), fonctions assez pratiques qui vous permettent d'accéder au premier et au deuxième élément d'un 2-uplet (tuple de taille 2). Généralement, vous avez accès aux membres d'un n-uplet grâce au destructuring (décrit plus loin dans la barre latérale) :
 
 ```reason
 let (_, y, _) = my3dCoordinates; /* maintenant vous avez récupéré y */
@@ -71,7 +71,7 @@ Le combo tuple + `switch` est très puissant et concis, et **supprime toute une 
 
 L'existence du tuple peut sembler étrange à celles et ceux qui viennent de langages non typés. "Pourquoi ne pas simplement utiliser une list/un array ?"
 
-Un système de type n'est pas tout-puissant, et ne devrait pas l'être. Certains compromis de bon goût doivent être appliqués afin de garder le langage simple, performant (compilation et vitesse de fonctionnement) et facile à comprendre. Les lists Reason, par exemple, sont plus flexibles en taille. Elles peuvent être concaténées, ajoutées, tranchées, etc. En retour, elles doivent être homogènes (ne peuvent contenir qu'un seul type de valeur par list), et l'accès aléatoire à un index peut ne pas toujours être valide *. Le tuple, d'autre part, grâce à sa contrainte de taille, est plus rapide, donne au système de type assez de marge de manœuvre pour suivre de manière exhaustive tous les types de ses objets et garantit un accès sécurisé. En général, vous remarquerez quelques compromis importants et de bon goût dans un système de type : les champs de records sont fixes, mais peuvent être hétérogènes, alors que les champs d'une map sont flexibles mais homogènes, etc.
+Un système de types n'est pas tout-puissant, et ne devrait pas l'être. Certains compromis de bon goût doivent être appliqués afin de garder le langage simple, performant (compilation et vitesse de fonctionnement) et facile à comprendre. Les lists Reason, par exemple, sont plus flexibles en taille. Elles peuvent être concaténées, ajoutées, tranchées, etc. En retour, elles doivent être homogènes (ne peuvent contenir qu'un seul type de valeur par list), et l'accès aléatoire à un index peut ne pas toujours être valide*. Le tuple, d'autre part, grâce à sa contrainte de taille, est plus rapide, donne au système de types assez de marge de manœuvre pour suivre de manière exhaustive tous les types de ses objets et garantit un accès sécurisé. En général, vous remarquerez quelques compromis importants et de bon goût dans un système de type : les champs de records sont fixes, mais peuvent être hétérogènes, alors que les champs d'une map sont flexibles mais homogènes, etc.
 
 Un tuple Reason est typé "structurellement". Cela signifie que même si vous n'avez pas annoté votre donnée avec un type explicite, le compilateur peut encore le déduire en regardant son contenu, son utilisation, etc. Tant que les déclarations et les formes inférées des usages correspondent, tout va bien !
 

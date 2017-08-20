@@ -7,7 +7,7 @@ Les records sont comme des objets JavaScript mais sont :
 
 - plus léger
 - immutables par défaut
-- fixes au niveau des noms de champs et des types
+- fixes au niveau des noms de champ et des types
 - trrrès rapide
 - suuuuper bien typés
 
@@ -55,7 +55,7 @@ let me = School.{age: 20, name: "Big Reason"};
 let me = {School.age: 20, name: "Big Reason"};
 ```
 
-Chacune de ces 3 syntaxes indique que "la définition de ce record se trouve dans le fichier School". La première, l'annotation type normale, est à préférer.
+Chacune de ces 3 syntaxes indique que "la définition de ce record se trouve dans le fichier School". La première, l'annotation de type normale, est à préférer.
 
 #### Mise à jour immutable
 
