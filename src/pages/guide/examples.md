@@ -9,7 +9,7 @@ Cette section est consacrée aux néophytes essayant de trouver des idiomes et d
 
 ### Utilisation du type `option`
 
-`option` est une [variante](./language/data-types#variant) qui est proposée par la [librairie standard](http://caml.inria.fr/pub/docs/manual-ocaml/libref/). Il évite le besoin de valeurs nulles dans d'autres langues.
+`option` est une [variant](/guide/language/variant) proposée par la [librairie standard](/api/index.html). Il évite le besoin de valeurs nulles d'autres langages.
 
 ```reason
 let possiblyNullValue1 = None;
@@ -31,22 +31,22 @@ type response 'studentType = {status: int, student: 'studentType};
 let result: response universityStudent = fetchDataFromServer ();
 ```
 
-### Création d'un Object JS
+### Création d'un object JavaScript
 
-En supposant que vous êtes entrain de [compiler en JS](./gettingStarted.html#javascript-workflow), bien évidemment.
+En supposant que vous êtes entrain de [compiler en JS](/guide/javascript), bien évidemment.
 
 ```reason
 let obj1 = {
   "name": "John",
   "age": 30
 };
-/* Compile en un objet JS qui ressemble exactement à ce que vous voyez là */
+/* Compile en un objet JavaScript qui ressemble exactement à ce que vous voyez là */
 ```
 
 Vous noterez que ce qui précède n'est pas un record. Les clés sont encapsulées dans une string via le apostrophes. C'est le *syntax sugar* de Reason pour [bs.obj](http://bucklescript.github.io/bucklescript/Manual.html#_create_js_objects_using_bs_obj). Le type est déduit. L'exemple suivant l'identifie explicitement.
 
 
-### Typage d'un Object JS
+### Typage d'un object JavaScript
 
 ```reason
 type payload = Js.t {.
@@ -56,9 +56,9 @@ type payload = Js.t {.
 let obj1: payload = {"name": "John", "age": 30};
 ```
 
-Vous noterez que `{. name: string, age: int}` est la syntaxe requise pour la déclaration du type d'un object Reason/OCaml (pas d'un record !). Il est *lifté* dans `Js.t` afin que  BuckleScript voit le type entier et le compile correctement dans un objet JavaScript normal. D'habitude, les objets OCaml *non-lifté* sont compilés en quelque chose de différent (et rarement nécessaire d'ailleurs).
+Vous noterez que `{. name: string, age: int}` est la syntaxe requise pour la déclaration du type d'un object Reason/OCaml (pas d'un record !). Il est *lifté* dans `Js.t` afin que  BuckleScript voit le type entier et le compile correctement dans un objet JavaScript normal. D'habitude, les objets OCaml *non-liftés* sont compilés en quelque chose de différent (et rarement nécessaire d'ailleurs).
 
-### Binding avec un Module JS via Default Export
+### Binding avec un Module JavaScript via Default Export
 
 En supposant que le module est nommé `store.js`, et a un export par défault ainsi qu'une méthode `getDate`.
 

@@ -15,4 +15,4 @@ opam update
 opam switch 4.02.3
 ```
 
-Ensuite clonez le repo de notre exemple [`ReasonNativeProject`](https://github.com/reasonml/ReasonNativeProject), et vous êtes prêt !
+Ensuite clonez le repo de notre exemple [`ReasonNativeProject`](https://github.com/reasonml/ReasonNativeProject), et vous êtes prêt(e) !
