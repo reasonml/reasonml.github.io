@@ -62,10 +62,10 @@ export default class Index extends React.Component {
               qualité, tout en tirant parti des écosystèmes JavaScript et OCaml.
             </p>
             <div css={{ flexDirection: 'row', marginBottom: '1.5em' }}>
-              <Link to="/guide/getting-started/" css={styles.button}>
+              <Link to="/guide/javascript/quickstart" css={styles.button}>
                 Démarrer
               </Link>
-              <Link to="/guide/" css={styles.button}>
+              <Link to="/guide/what-and-why" css={styles.button}>
                 En savoir plus
               </Link>
             </div>
