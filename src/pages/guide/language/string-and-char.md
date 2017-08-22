@@ -105,7 +105,7 @@ let firstLetterOfAlphabet = 'a';
 A character [compiles to an integer ranging from 0 to 255](https://bucklescript.github.io/bucklescript/js-demo/?gist=7f6d24873a48fe03fa037c7c47848a4b), for extra speed. You can also pattern-match (covered later) on it:
 
 ```reason
-let isVowel = switch theChar {
+fun isVowel theChar => switch theChar {
 | 'a' | 'e' | 'i' | 'o' | 'u' | 'y' => true
 | _ => false
 };
