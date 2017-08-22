@@ -34,7 +34,7 @@ There's a special syntax for string that allows
 - hooks for special pre-processors
 
 ```reason
-let GreetingAndOneSlash = {|Hello
+let greetingAndOneSlash = {|Hello
 World
 \
 Hehe...
