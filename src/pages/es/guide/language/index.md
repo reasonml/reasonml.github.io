@@ -1,12 +1,12 @@
 ---
-title: Language basics
+title: Introduccion al Lenguaje
 order: 20
 ---
 
-Start your Reason learning journey here! A few pointers:
+Empieza tu camino a aprender Reason por aca! Algunos consejos:
 
-- Many sections have a "Tip & Tricks" and "Design Decisions" section. These are optional reads; feel free to skip them, but do come around and learn the extra tidbits!
-- If you need to bind to an existing JS library, [BuckleScript's FFI](http://bucklescript.github.io/bucklescript/Manual.html#_ffi) is your friend.
-- If you ever feel stuck, ask a question in [our community](/community) and/or submit a pull request by clicking the "Suggest an edit" button on the right.
+- Muchas secciones tienen "Consejos practicos" y "Decisiones de Disenio". Estos no son necesario de leerlos; sientase libre de saltearlos, pero si puede vuelva y aprenda los detalles del lenguaje!
+- Si necesitar conexiones a una libreria existente de JS, [BuckleScript's FFI](http://bucklescript.github.io/bucklescript/Manual.html#_ffi) es tu mejor opcion.
+- Si alguna vez te sientes estancado, haz una pregunta en [nuestra comunidad](/es/community) y/o manda un pr dandole click al boton "Sugerir una edicion" en la derecha.
 
-Enjoy!
+Suerte!
