@@ -5,6 +5,7 @@ import Section from '../components/Section'
 import { accent, gray } from '../utils/colors'
 import {headerFontFamily} from '../utils/typography'
 import debounce from '../utils/debounce'
+import { compressToEncodedURIComponent as compress, decompressFromEncodedURIComponent as decompress } from 'lz-string'
 
 let CodeMirror
 if (typeof navigator !== 'undefined') {
@@ -20,7 +21,6 @@ if (typeof navigator !== 'undefined') {
     </div>
   )
 }
-
 const reasonQueryParamPrefix = "?reason="
 const ocamlQueryParamPrefix = "?ocaml="
 
@@ -29,17 +29,17 @@ const decodeSnippetFromURL = () => {
   const queryParam = window.location.search; // returns ?encoded_snippet=blablabla
   if (queryParam.startsWith(reasonQueryParamPrefix)) {
     const encodedSnippet = queryParam.slice(reasonQueryParamPrefix.length);
-    return [atob(encodedSnippet), true];
+    return [decompress(encodedSnippet), true];
   } else if (queryParam.startsWith(ocamlQueryParamPrefix)) {
     const encodedSnippet = queryParam.slice(ocamlQueryParamPrefix.length);
-    return [atob(encodedSnippet), false];
+    return [decompress(encodedSnippet), false];
   } else {
     return ['let x = 10;\nJs.log x;', true]
   }
 }
 
 const encodeSnippetToURL = debounce((input, queryParamPrefix) => {
-  const encodedSnippet = btoa(input);
+  const encodedSnippet = compress(input);
   // avoid a refresh of the page; we also don't want every few keystrokes to
   // create a new history for the back button, so replace the current one
   const newURL =
