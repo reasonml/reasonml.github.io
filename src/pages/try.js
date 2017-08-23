@@ -373,13 +373,8 @@ const styles = {
     fontSize: 12,
   },
   error: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
     backgroundColor: '#faa',
     padding: '10px 20px',
-    zIndex: 10,
   },
 
   container: {
