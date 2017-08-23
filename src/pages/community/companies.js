@@ -28,6 +28,11 @@ const companies = shuffle([
     img: require('./logos/ephox.png'),
   },
   {
+    title: 'Facebook',
+    url: 'https://www.facebook.com/',
+    img: require('./logos/facebook.png'),
+  },
+  {
     title: 'Viska',
     url: 'https://www.viska.com/',
     img: require('./logos/viska.png'),
