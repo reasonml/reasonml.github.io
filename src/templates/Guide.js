@@ -66,6 +66,10 @@ export default class Guide extends React.Component {
       const Examples = require('../pages/community/examples.js')
       contents = <Examples />
       edit = editUrl('community/examples.js')
+    } else if (relativePath === 'community/companies.md') {
+      const Companies = require('../pages/community/companies.js')
+      contents = <Companies />
+      edit = editUrl('community/companies.js')
     } else {
       contents = <div className="markdown-content" dangerouslySetInnerHTML={{__html: html}} />
       edit = editUrl(relativePath)
