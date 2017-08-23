@@ -127,6 +127,7 @@ export default class Try extends Component {
               reasonSyntaxError: error,
               compileError: null,
               ocamlSyntaxError: null,
+              jsError: null,
               js: '',
               ocaml: '',
               output: [],
@@ -141,6 +142,7 @@ export default class Try extends Component {
         reasonSyntaxError: null,
         compileError: null,
         ocamlSyntaxError: null,
+        jsError: null
       }
     });
   }
@@ -165,6 +167,7 @@ export default class Try extends Component {
               ocamlSyntaxError: error,
               compileError: null,
               reasonSyntaxError: null,
+              jsError: null,
               js: '',
               reason: '',
               output: [],
@@ -179,6 +182,7 @@ export default class Try extends Component {
         reasonSyntaxError: null,
         compileError: null,
         ocamlSyntaxError: null,
+        jsError: null
       }
     });
   }
@@ -192,7 +196,16 @@ export default class Try extends Component {
           jsIsLatest: true,
         }))
         if (this.state.autoEvaluate) {
-          this.evalJs(res.js_code)
+          try {
+            this.evalJs(res.js_code)
+          } catch (err) {
+            this.err = setTimeout(
+              () => this.setState(_ => ({
+                jsError: err
+              })),
+              errorTimeout
+            )
+          }
         }
         return
       } else {
@@ -243,7 +256,7 @@ export default class Try extends Component {
   }
 
   render() {
-    const { reason, ocaml, js, reasonSyntaxError, compileError, ocamlSyntaxError } = this.state
+    const { reason, ocaml, js, reasonSyntaxError, compileError, ocamlSyntaxError, jsError } = this.state
     const codemirrorStyles = [
       styles.codemirror,
       isSafari && styles.codemirrorSafari,
@@ -321,6 +334,12 @@ export default class Try extends Component {
                   readOnly: 'nocursor',
                 }}
               />
+              {jsError &&
+                <div css={styles.error}>
+                  <div css={styles.errorBody}>
+                    {jsError.message}
+                  </div>
+                </div>}
             </div>
             <div style={{ flexBasis: 20 }} />
             <div css={styles.row}>
