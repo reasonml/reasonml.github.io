@@ -5,6 +5,7 @@ import Section from '../components/Section'
 import { accent, gray } from '../utils/colors'
 import {headerFontFamily} from '../utils/typography'
 import debounce from '../utils/debounce'
+import { compressToEncodedURIComponent as compress, decompressFromEncodedURIComponent as decompress } from 'lz-string'
 
 let CodeMirror
 if (typeof navigator !== 'undefined') {
@@ -20,7 +21,6 @@ if (typeof navigator !== 'undefined') {
     </div>
   )
 }
-
 const reasonQueryParamPrefix = "?reason="
 const ocamlQueryParamPrefix = "?ocaml="
 
@@ -29,17 +29,17 @@ const decodeSnippetFromURL = () => {
   const queryParam = window.location.search; // returns ?encoded_snippet=blablabla
   if (queryParam.startsWith(reasonQueryParamPrefix)) {
     const encodedSnippet = queryParam.slice(reasonQueryParamPrefix.length);
-    return [decodeURIComponent(encodedSnippet), true];
+    return [decompress(encodedSnippet), true];
   } else if (queryParam.startsWith(ocamlQueryParamPrefix)) {
     const encodedSnippet = queryParam.slice(ocamlQueryParamPrefix.length);
-    return [decodeURIComponent(encodedSnippet), false];
+    return [decompress(encodedSnippet), false];
   } else {
     return ['let x = 10;\nJs.log x;', true]
   }
 }
 
 const encodeSnippetToURL = debounce((input, queryParamPrefix) => {
-  const encodedSnippet = encodeURIComponent(input);
+  const encodedSnippet = compress(input);
   // avoid a refresh of the page; we also don't want every few keystrokes to
   // create a new history for the back button, so replace the current one
   const newURL =
@@ -127,6 +127,7 @@ export default class Try extends Component {
               reasonSyntaxError: error,
               compileError: null,
               ocamlSyntaxError: null,
+              jsError: null,
               js: '',
               ocaml: '',
               output: [],
@@ -141,6 +142,7 @@ export default class Try extends Component {
         reasonSyntaxError: null,
         compileError: null,
         ocamlSyntaxError: null,
+        jsError: null
       }
     });
   }
@@ -165,6 +167,7 @@ export default class Try extends Component {
               ocamlSyntaxError: error,
               compileError: null,
               reasonSyntaxError: null,
+              jsError: null,
               js: '',
               reason: '',
               output: [],
@@ -179,6 +182,7 @@ export default class Try extends Component {
         reasonSyntaxError: null,
         compileError: null,
         ocamlSyntaxError: null,
+        jsError: null
       }
     });
   }
@@ -192,7 +196,16 @@ export default class Try extends Component {
           jsIsLatest: true,
         }))
         if (this.state.autoEvaluate) {
-          this.evalJs(res.js_code)
+          try {
+            this.evalJs(res.js_code)
+          } catch (err) {
+            this.err = setTimeout(
+              () => this.setState(_ => ({
+                jsError: err
+              })),
+              errorTimeout
+            )
+          }
         }
         return
       } else {
@@ -243,7 +256,7 @@ export default class Try extends Component {
   }
 
   render() {
-    const { reason, ocaml, js, reasonSyntaxError, compileError, ocamlSyntaxError } = this.state
+    const { reason, ocaml, js, reasonSyntaxError, compileError, ocamlSyntaxError, jsError } = this.state
     const codemirrorStyles = [
       styles.codemirror,
       isSafari && styles.codemirrorSafari,
@@ -321,6 +334,12 @@ export default class Try extends Component {
                   readOnly: 'nocursor',
                 }}
               />
+              {jsError &&
+                <div css={styles.error}>
+                  <div css={styles.errorBody}>
+                    {jsError.message}
+                  </div>
+                </div>}
             </div>
             <div style={{ flexBasis: 20 }} />
             <div css={styles.row}>
@@ -373,13 +392,8 @@ const styles = {
     fontSize: 12,
   },
   error: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
     backgroundColor: '#faa',
     padding: '10px 20px',
-    zIndex: 10,
   },
 
   container: {
