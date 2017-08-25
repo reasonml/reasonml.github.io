@@ -78,4 +78,4 @@ fun a =>
     a + b;
 ```
 
-Though they're not strictly the same, hopefully you can see that `let` is just an expression! In Reason, we've turned `in` into `;` for visual familiarity; but don't let that hide the underlying elegance of an expression.
+Though they're not strictly the same, hopefully you can see that `let` is just an expression! In Reason, we've turned `in` into `=>` for visual familiarity; but don't let that hide the underlying elegance of an expression.
