@@ -1,25 +1,6 @@
 import React from 'react'
-
-// Fisher-Yates Shuffle - https://stackoverflow.com/questions/6274339/how-can-i-shuffle-an-array
-function shuffle(array) {
-  let counter = array.length
-
-  // While there are elements in the array
-  while (counter > 0) {
-    // Pick a random index
-    let index = Math.floor(Math.random() * counter)
-
-    // Decrease counter by 1
-    counter--
-
-    // And swap the last element with it
-    let temp = array[counter]
-    array[counter] = array[index]
-    array[index] = temp
-  }
-
-  return array
-}
+import shuffle from '../../utils/shuffle'
+import { accent } from '../../utils/colors'
 
 const companies = shuffle([
   {
@@ -43,7 +24,9 @@ export default class Companies extends React.Component {
   render() {
     return (
       <div>
-        <div>Companies currently using Reason:</div>
+        <div>
+          <div>The number of companies using Reason is growing</div>
+        </div>
         <div css={styles.container}>
           {companies.map(({ title, url, img }) =>
             <a key={title} href={url} css={styles.link}>
@@ -51,12 +34,9 @@ export default class Companies extends React.Component {
             </a>
           )}
         </div>
-        <span>
-          {"If don't see your company and you're using Reason, please "}
-          <a href="https://github.com/reasonml/reasonml.github.io/blob/source/src/pages/community/companies.js">
-            add yours to the list
-          </a>!
-        </span>
+        <a css={styles.addCompanyLink} href="https://github.com/reasonml/reasonml.github.io/wiki/Is-your-company-using-Reason%3F">
+          Add yours!
+        </a>
       </div>
     )
   }
@@ -74,10 +54,15 @@ const styles = {
     alignItems: 'center',
     margin: 10,
     flexDirection: 'column',
+  },
+  addCompanyLink: {
     textDecoration: 'none',
-    color: 'currentColor',
+    color: accent,
     ':hover': {
       textDecoration: 'underline',
+    },
+    ':visited': {
+      color: '#b13c2e',
     },
   },
   img: {

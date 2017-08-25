@@ -206,7 +206,7 @@ const styles = {
   // please keep in sync with guide.css's markdown-content selectors
   jsquickstart: {
     '& a': {
-      color: '#db4d3f',
+      color: accent,
       textDecoration: 'none',
     },
     '& a:hover': {
