@@ -80,6 +80,7 @@ export default class Index extends React.Component {
           <div css={styles.column}>
             <h3 css={styles.columnHeader}>JavaScript quickstart</h3>
             <div
+              css={styles.jsquickstart}
               dangerouslySetInnerHTML={{
                 __html: javascript.childMarkdownRemark.html,
               }}
@@ -200,6 +201,20 @@ const styles = {
   quickstarts: {
     backgroundColor: 'white',
     padding: 30,
+  },
+
+  // please keep in sync with guide.css's markdown-content selectors
+  jsquickstart: {
+    '& a': {
+      color: '#db4d3f',
+      textDecoration: 'none',
+    },
+    '& a:hover': {
+      textDecoration: 'underline',
+    },
+    '& a:visited': {
+      color: '#b13c2e',
+    },
   },
 
   logo: {
