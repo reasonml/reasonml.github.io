@@ -39,7 +39,7 @@ let name = me.name;
 
 #### Record Needs an Explicit Definition
 
-If you only write `{age: 5, name: "Baby Reason"}` without an explicit declaration somewhere above, the type system will give you an error. If the type definition resides in another file, you need to explicit indicate which file it is:
+If you only write `{age: 5, name: "Baby Reason"}` without an explicit declaration somewhere above, the type system will give you an error. If the type definition resides in another file, you need to explicitly indicate which file it is:
 
 ```reason
 /* School.re */
