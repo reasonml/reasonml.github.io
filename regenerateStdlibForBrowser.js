@@ -35,6 +35,6 @@ stdlibDirFiles.forEach(file => {
 });
 
 b
-  .transform('uglifyify')
+  .transform('uglifyify', { global: true })
   .bundle()
   .pipe(fs.createWriteStream(path.join(__dirname, 'static', 'stdlibBundle.js')));
