@@ -27,4 +27,4 @@ That's all! This compiles Reason to Javascript in the `lib/js/` folder.
 
 - Alternatively, **to start a [ReasonReact](//reasonml.github.io/reason-react/gettingStarted.html) app**, try `bsb -init my-react-app -theme react`.
 
-- Head over to [Editor Setup](/guide/editor-tools/global-installation) to get the Reason plugin for your favorite editor!
+- Head over to [Editor Setup](/guide/editor-tools/editors-plugins) to get the Reason plugin for your favorite editor!
