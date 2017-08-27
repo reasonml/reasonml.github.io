@@ -21,32 +21,45 @@ if (typeof navigator !== 'undefined') {
     </div>
   )
 }
-const reasonQueryParamPrefix = "?reason="
-const ocamlQueryParamPrefix = "?ocaml="
+const  queryParamPrefixFor = language => `?${language}=`;
 
-// returns [code, isReason]
-const decodeSnippetFromURL = () => {
-  const queryParam = window.location.search; // returns ?encoded_snippet=blablabla
-  if (queryParam.startsWith(reasonQueryParamPrefix)) {
-    const encodedSnippet = queryParam.slice(reasonQueryParamPrefix.length);
-    return [decompress(encodedSnippet), true];
-  } else if (queryParam.startsWith(ocamlQueryParamPrefix)) {
-    const encodedSnippet = queryParam.slice(ocamlQueryParamPrefix.length);
-    return [decompress(encodedSnippet), false];
-  } else {
-    return ['let x = 10;\nJs.log x;', true]
+const retrieve = () => {
+  function fromQueryParam(language) {
+    const queryParam = window.location.search; // returns ?language=blablabla
+    const prefix = queryParamPrefixFor(language);
+
+    if (queryParam.startsWith(prefix)) {
+      return {
+        language,
+        code: decompress(queryParam.slice(prefix.length)) || '' // decompressing an empty string returns null, joyously!
+      };
+    }
   }
-}
 
-const encodeSnippetToURL = debounce((input, queryParamPrefix) => {
-  const encodedSnippet = compress(input);
+  function fromLocalStorage() {
+    const json = localStorage.getItem('try-reason');
+    return json && JSON.parse(json);
+  }
+
+  // WTH? There's some retarded automatic semicolon insertion going on, actively causing bugs. Hence the parens. Wonderful!
+  return ( 
+    fromQueryParam('reason') ||
+    fromQueryParam('ocaml') ||
+    fromLocalStorage() ||
+    { language: 'reason', code: 'let x = 10;\nJs.log x;' }
+  );
+};
+
+const persist = debounce((language, code) => {
+  localStorage.setItem('try-reason', JSON.stringify({ language, code }));
+
   // avoid a refresh of the page; we also don't want every few keystrokes to
   // create a new history for the back button, so replace the current one
   const newURL =
     window.location.origin +
     window.location.pathname +
-    queryParamPrefix +
-    encodedSnippet;
+    queryParamPrefixFor(language) +
+    compress(code);
   window.history.replaceState(null, '', newURL);
 }, 100);
 
@@ -82,8 +95,8 @@ export default class Try extends Component {
 
   componentDidMount() {
     waitUntilScriptsLoaded(() => {
-      const [codeFromURL, isReason] = decodeSnippetFromURL();
-      isReason ? this.updateReason(codeFromURL) : this.updateOCaml(codeFromURL)
+      const {language, code} = retrieve();
+      language === 'reason' ? this.updateReason(code) : this.updateOCaml(code)
     })
     window.console = {
       log: (...items) => {
@@ -109,7 +122,7 @@ export default class Try extends Component {
 
   updateReason = newReasonCode => {
     if (newReasonCode === this.state.reason) return
-    encodeSnippetToURL(newReasonCode, reasonQueryParamPrefix);
+    persist('reason', newReasonCode);
     clearTimeout(this.err)
 
     this.setState((prevState, _) => {
@@ -149,7 +162,7 @@ export default class Try extends Component {
 
   updateOCaml = newOcamlCode => {
     if (newOcamlCode === this.state.ocaml) return
-    encodeSnippetToURL(newOcamlCode, ocamlQueryParamPrefix);
+    persist('ocaml', newOcamlCode);
     clearTimeout(this.err)
 
     this.setState((prevState, _) => {
