@@ -171,9 +171,9 @@ const styles = {
   },
 
   mainExample: {
-    padding: '.8em',
     '& .hljs': {
-      padding: '1.5em',
+      background: 'transparent',
+      border: 'none',
       marginBottom: 0
     }
   },
