@@ -3,6 +3,7 @@ import React from 'react'
 import Typography from 'typography'
 import CodePlugin from 'typography-plugin-code'
 import { MOBILE_MEDIA_QUERY } from 'typography-breakpoint-constants'
+import {text} from '../utils/colors'
 
 const options = {
   baseFontSize: '18px',
@@ -15,15 +16,21 @@ const options = {
     'sans-serif',
   ],
   bodyFontFamily: [
-    'Merriweather',
-    'Book Antiqua',
-    'Georgia',
-    'Century Schoolbook',
-    'serif'
+    '-apple-system',
+    'system-ui',
+    'BlinkMacSystemFont',
+    '"Segoe UI"',
+    'Roboto',
+    '"Helvetica Neue"',
+    'Arial',
+    'sans-serif'
   ],
   scaleRatio: 2.25,
   plugins: [new CodePlugin()],
   overrideStyles: ({ rhythm, scale }, options) => ({
+    body: {
+      color: text
+    },
     [MOBILE_MEDIA_QUERY]: {
       // Make baseFontSize on mobile 16px.
       html: {
