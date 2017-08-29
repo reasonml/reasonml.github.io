@@ -431,6 +431,7 @@ const styles = {
     minHeight: 0,
     border: '1px solid #aaa',
     position: 'relative',
+    overflow: 'auto',
     '@media(max-width: 500px)': {
       // display: 'block',
       height: 300,
