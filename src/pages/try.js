@@ -1,3 +1,4 @@
+import Link from 'gatsby-link'
 import React, { Component } from 'react'
 import Helmet from 'react-helmet'
 import Header from '../components/Header'
@@ -21,6 +22,33 @@ if (typeof navigator !== 'undefined') {
     </div>
   )
 }
+
+const examples = [{
+  code: 'C4TwDgpgBMBOHQLxQHIHsAm0CWA7YM80cCUAPlADIQCGAZgNwBQTANhAfAMZQDOArgFsoiJlCh1+uclVp0RAPigAGMePUV0WKADcarftHZ1O2AOYALAogVr16vQegBqKAAoBw48ACUUVx5CULDmVj7MbBxQgiAAKkQiTACQblrQAIx26qmY0ABMWfY52gAssvTldD6FUClpUABslZU+1fbixdAAzDUd9QCszdT0be19uVAA7ENyreEs7ARufqJJntFxCWRKAFK8AHSsaGYMQA',
+  name: 'Tree sum'
+}, {
+  code: 'KYDwLsBOB2CGA2ACARmA9rRAuRBnMkAltAOaIC8AfHgcWeYgESOIDaAAu8rgHQBuCALoBuAFCgIMBIljpk2GkVIVq+JfSYsOXXgPgjRo+MDCIAFAEoKiAN6jEiY6YjhrjABLB48NIgDqaJDwACYAhIxiDgBSvD5kZi6mAD7UqBgWkYgxPHHmiYgpKOiYhbJoyBmiAL7CQA',
+  name: 'Simple FFI - Base64'
+}, {
+  code: 'DYUwLgBADiBODOB7AdhAvBA3gKAhARMgIYC2I+AXFrngQGYCWCYlBAQogEb4A0Ne+YEXgsq+AFoALEgzCT8NAL58BRAObkqAZgBM2RQG5s2UJABWSVGhowEKCAB8AfBABS8AHTuUHkbAbIagx0AJ4Agsgh2ACQ0Y4u7h4A8lBgDD4aYACiAB7IMXHObp7eyB5QRAgguchGJuAQABQAlOjUeKYQxGToNNEW9kWJpR4AJiAAxojjSZxmk2AxeIUJnilpPkTIowAqkiCojY10AK6oUOirHgAiDBNgHpnQBN3krQDaAAKc8AC6zUsICtislUukyltdvtDsczhABlYriNxlMZnMFvDLB9vn8ActgYl1uDHuAakY8DROoxmAA5UggXrLRK3e4kyCvehMEQKZZDNZgzbbPYHJqw1AIy4g5GTaYgADKYH8gUxKGxP3+fT5oI2ZUyZJolIaQhEdJ61iZnhZDyeHMEwhYmquRMFUJFR1O4sskuGljGMvGCqVahVyDVuMdIOdutJeXJEBoiWAiGDmDMDgAEiBgEmeBAACTUk30-PGsCmkAOMyGfRAA',
+  name: 'Json'
+}, {
+  code: 'PQKgBAQghgzgpgEzAewHZgBYBcsAcYBcwwATsvDlAMbIJwB0yJA5sAO4CWA1h8AGIcAXoIgBXYQGIA8gGEoAWwA2YEMABQaxXCxgAZkMEAjcYLAcwAXgB8asGBicsVDGAAU5+bTABmADRmwTyQAVgBKMABvWzAAHzcABn948OswACIBYTFhNOi410SwAH0Uq3TMwVy7fKKk0vTsyrziyzKYLBIOVGYi5F0irp0OaIBfAG4NXSYArrAARjAsZHn4+MjogCkYekVkZjd9YWNhM1C1cbUgA',
+  name: 'FizzBuzz'
+}, {
+  code: 'PQKgBAQghgzgpgEzAewHZgBYBcsAcYBcwwATsvDlAMbIJwB0yJA5sAO4CWA1h8AEpRUCZAFsA+qgCuIgEZwSMAMQB5AMJQRAGzAhgAKE1wsYXBzABeMABZ6O21CyCwARnoBuPQaNgSg4eOYoSRgYDicACgBKCwA+PTAXWwBqej0ASBgARxJjcPCAWgAmemiQW01kZjBwgSFRegAzCodEyNLUtJoYauK7EzMysFr-RubjV0iPPQBBEl8AT3oOVA5jK0Lqhsl0MVifP1ExQODQiLa9AB8YsFmFpax5MAApGHoK5jcgA',
+  name: 'Normal distribution of random numbers'
+}, {
+  code: 'DYUwLgBAlgdgDgV0gXggbwD4CgA8ALMAW2AD4sIJ8QBDAEzIopzCjFBIEEIBlKQuUBAASAFQCyAGQgARAPYBjBIRAwwOAPQs2IBpXV4a9cpQBGs2gE9dTOCRF4oAZ2jPqEAG4gAThYiO+AiDC4lK0Ckoqauq2xjYkAJKQsjDAvnjUzmAA7rIQcNRe1ADmhXB4jhoxTOpmlmQaBMRkGAC+ANxYWKCQABQAlBDIxrCIkBgkEABSjgB03GBesEUzhNRg8ngA+hAA2gCkXkEAROo4cAA65yY7AHokALoAVCQ9M48A-H04l9Ek6kVQI73LAASBB4wgADMEDBQSCKBgeLJlBBDo4EMAUBM0RixhMOF5ChYZqxvFNZsBZEVYhB4RBEQA5ZJBZATaYzSlFCBHGC5VbrAyOI4dIA',
+  name: 'Regex'
+}, {
+  code: 'PQKgBAQghgzgpgEzAewHZgBYBcsAcYBcwwATsvDlAMbIJwB0yJA5sAO4CWA1h8AMpMsHVMwD6UADbMmHLBgC2MYAEUArhypcYggMQB5AMJR5EsCGAAoCxLhYwJOFTABHdZu0k7zOwF4AfBZgYABmqugAPmAA2gC6YP7RMYFgAJBBkVEAHgA0YPT5mTBxCQDeyUFBKTZ2ABQAnjC5AF4wAJTxYAAyHDBY9LhQnrIcaGA13mCZ7YUA3OUVKa4aWoJgEw1gAALROXn5S+6rEy1JFRUAvnPWtmPtPhYpUQAsuQBsAKy5AEy5NQC0AGYAIytXIABlyAE5IbkABwA3IAdlhPzAQKSKXCfhcbhWnjGflaDyxYAAgiQSFA6oxgqIJD0sMTsQApGD0CTIZhzIA',
+  name: 'Quicksort'
+}, {
+  code: 'DYUwLgBAFAlBC8EDeAoCFSQO4HsBOwAJghAEQDq+RpA3GhAFIDOAdMDgObIBWAPgBIhg7CABJcBQgEJe3AL4o5dIA',
+  name: 'String interpolation'
+}];
+
 const  queryParamPrefixFor = language => `?${language}=`;
 
 const retrieve = () => {
@@ -50,9 +78,16 @@ const retrieve = () => {
     fromQueryParam('reason') ||
     fromQueryParam('ocaml') ||
     fromLocalStorage() ||
-    { language: 'reason', code: 'let x = 10;\nJs.log x;' }
+    { language: 'reason', code: decompress(examples[0].code) }
   );
 };
+
+const generateShareableUrl = (language, code) =>
+  window.location.origin +
+  window.location.pathname +
+  queryParamPrefixFor(language) +
+  compress(code);
+
 
 const persist = debounce((language, code) => {
   try {
@@ -63,12 +98,7 @@ const persist = debounce((language, code) => {
 
   // avoid a refresh of the page; we also don't want every few keystrokes to
   // create a new history for the back button, so replace the current one
-  const newURL =
-    window.location.origin +
-    window.location.pathname +
-    queryParamPrefixFor(language) +
-    compress(code);
-  window.history.replaceState(null, '', newURL);
+  window.history.replaceState(null, '', generateShareableUrl(language, code));
 }, 100);
 
 const errorTimeout = 500
@@ -163,7 +193,8 @@ export default class Try extends Component {
         reasonSyntaxError: null,
         compileError: null,
         ocamlSyntaxError: null,
-        jsError: null
+        jsError: null,
+        shareableUrl: generateShareableUrl('reason', newReasonCode)
       }
     });
   }
@@ -203,7 +234,8 @@ export default class Try extends Component {
         reasonSyntaxError: null,
         compileError: null,
         ocamlSyntaxError: null,
-        jsError: null
+        jsError: null,
+        shareableUrl: generateShareableUrl('ocaml', newOcamlCode)
       }
     });
   }
@@ -257,8 +289,8 @@ export default class Try extends Component {
   }, 100)
 
   toggleEvaluate = () => {
-    if (!this.state.autoEvaluate && this.state.jsIsLatest) {
-      this.evalJs(this.state.js)
+    if (!this.state.autoEvaluate) {
+      this.evalLatest();
     }
     this.setState(_ => {
       return {
@@ -274,6 +306,18 @@ export default class Try extends Component {
         window.eval(wrapInExports(code))
       }
     )
+  }
+
+  evalLatest = () => {
+    if (this.state.jsIsLatest) {
+      this.evalJs(this.state.js);
+    }
+  }
+
+  copyShareableUrl = () => {
+    let input = document.getElementById('shareableUrl');
+    input.select();
+    document.execCommand('copy');
   }
 
   render() {
@@ -293,7 +337,31 @@ export default class Try extends Component {
         <div css={{ backgroundColor: accent, color: 'white' }}>
           <Header inverted />
         </div>
-        <div css={styles.info}>Copy the URL to share the code snippet!</div>
+        <div css={styles.toolbar}>
+          <div css={[styles.toolbarButton, styles.exampleSelect]}>
+            <button>Examples</button>
+            <ul css={styles.exampleMenu}>
+              {examples.map(example => <li key={example.name} onClick={() => this.updateReason(decompress(example.code))}>{example.name}</li>)}
+            </ul>
+          </div>
+          <div css={styles.toolbarButton}>
+            <button onClick={this.evalLatest}>Evaluate</button>
+            <input
+              css={styles.toolbarCheckbox}
+              type="checkbox"
+              checked={this.state.autoEvaluate}
+              onChange={this.toggleEvaluate}
+            />
+          </div>
+          <div css={[styles.toolbarButton, styles.shareButton]}>
+            <input
+              id="shareableUrl"
+              value={this.state.shareableUrl}
+              readOnly
+            />
+            <button onClick={this.copyShareableUrl}>Share</button>
+          </div>
+        </div>
         <div css={styles.inner}>
           <div css={styles.column}>
             <div css={styles.row}>
@@ -314,7 +382,6 @@ export default class Try extends Component {
                   </div>
                 </div>}
             </div>
-            <div style={{ flexBasis: 20 }} />
             <div css={styles.row}>
               <div css={styles.label}>OCaml</div>
               <CodeMirror
@@ -342,7 +409,6 @@ export default class Try extends Component {
                 </div>}
             </div>
           </div>
-          <div style={{ flexBasis: 20 }} />
           <div css={styles.column}>
             <div css={styles.row}>
               <div css={styles.label}>JavaScript</div>
@@ -362,17 +428,8 @@ export default class Try extends Component {
                   </div>
                 </div>}
             </div>
-            <div style={{ flexBasis: 20 }} />
             <div css={styles.row}>
-              <div css={styles.label}>
-                Auto-evaluate
-                <input
-                  css={styles.checkbox}
-                  type="checkbox"
-                  checked={this.state.autoEvaluate}
-                  onChange={this.toggleEvaluate}
-                />
-              </div>
+              <div css={styles.label}>Output</div>
               <div css={styles.output}>
                 {this.state.output.map((item, i) =>
                   <div css={styles.outputLine} key={i}>
@@ -395,9 +452,6 @@ const formatOutput = item =>
   item.contents.map(val => JSON.stringify(val)).join(' ')
 
 const styles = {
-  checkbox: {
-    marginLeft: 10,
-  },
   output: {
     flex: 1,
     padding: 10,
@@ -431,7 +485,6 @@ const styles = {
   inner: {
     flexDirection: 'row',
     flex: 1,
-    padding: '10px 20px 20px 20px',
     '@media(max-width: 500px)': {
       display: 'block',
       flexDirection: 'column',
@@ -450,7 +503,10 @@ const styles = {
   row: {
     flex: 1,
     minHeight: 0,
-    border: '1px solid #aaa',
+    background: gray,
+    border: '1px solid #d6d4d4',
+    borderBottom: 'none',
+    borderRight: 'none',
     position: 'relative',
     overflow: 'auto',
     '@media(max-width: 500px)': {
@@ -467,23 +523,86 @@ const styles = {
     position: 'absolute',
     top: 0,
     right: 0,
-    backgroundColor: 'rgba(200, 200, 200, 0.6)',
-    padding: '5px 10px',
-    fontWeight: 'bold',
-    fontFamily: 'monospace',
-    color: 'black',
-    fontSize: 14,
-    lineHeight: '14px',
+    backgroundColor: 'rgba(246, 244, 244, 0.8)',
+    padding: '1em',
+    textTransform: 'uppercase',
+    color: '#988',
+    fontSize: 12,
+    lineHeight: '12px',
     flexDirection: 'row',
     alignItems: 'center',
     zIndex: 20,
     borderRadius: '0 0 0 5px',
   },
 
-  info: {
+  toolbar: {
     fontFamily: headerFontFamily(),
     fontSize: 16,
-    padding: '10px 20px 0 20px',
+    flexDirection: 'row',
+    justifyContent: 'flex-end'
+  },
+
+  toolbarButton: {
+    borderLeft: '1px solid #d6d4d4',
+    padding: '1em 2em',
+    flexDirection: 'row',
+
+    '&:hover, &:hover button': {
+      color: accent,
+      cursor: 'pointer'
+    }
+  },
+
+  shareButton: {
+    '& input': {
+      background: gray,
+      transition: 'all 250ms',
+      width: 0,
+      padding: 0,
+    },
+    '&:hover input': {
+      width: '25vw',
+      marginRight: '1em',
+    },
+  },
+
+  exampleSelect: {
+    marginRight: 'auto',
+    borderRight: '1px solid #d6d4d4',
+    borderLeft: 'none',
+    position: 'relative',
+
+    '&:hover ul': {
+      display: 'block'
+    }
+  },
+
+  exampleMenu: {
+    position: 'absolute',
+    color: '#555',
+    zIndex: 10,
+    background: 'white',
+    display: 'none',
+    top: '100%',
+    left: 0,
+    minWidth: '100%',
+    width: '25vw',
+    boxShadow: '1px 1px 1px rgba(0, 0, 0, .2)',
+    borderTop: '1px solid #d6d4d4',
+
+    '& li': {
+      padding: '1em 2em',
+    },
+
+    '& li:hover': {
+      color: accent
+    }
+  },
+
+  toolbarCheckbox: {
+    marginLeft: '1em',
+    alignSelf: 'center',
+    justifySelf: 'center',
   },
 
   fakeCodemirrorPreload: {
@@ -502,6 +621,7 @@ const styles = {
     '& .CodeMirror': {
       flex: 1,
       height: 'auto',
+      background: 'transparent',
 
       '@media(max-width: 500px)': {
         height: 300,
