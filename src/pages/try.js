@@ -37,8 +37,12 @@ const retrieve = () => {
   }
 
   function fromLocalStorage() {
-    const json = localStorage.getItem('try-reason');
-    return json && JSON.parse(json);
+    try {
+      const json = localStorage.getItem('try-reason');
+      return json && JSON.parse(json);
+    } catch (e) {
+      console.error(e);
+    }
   }
 
   // WTH? There's some retarded automatic semicolon insertion going on, actively causing bugs. Hence the parens. Wonderful!
@@ -51,7 +55,11 @@ const retrieve = () => {
 };
 
 const persist = debounce((language, code) => {
-  localStorage.setItem('try-reason', JSON.stringify({ language, code }));
+  try {
+    localStorage.setItem('try-reason', JSON.stringify({ language, code }));
+  } catch (e) {
+    console.error(e);
+  }
 
   // avoid a refresh of the page; we also don't want every few keystrokes to
   // create a new history for the back button, so replace the current one
