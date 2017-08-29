@@ -154,7 +154,7 @@ const styles = {
     fontSize: '1.1em',
     lineHeight: '1.5em',
     textAlign: 'center',
-    textShadow: '1px 1px white',
+    textShadow: '0px 1px #f4f2f2',
     padding: '0.8em',
     marginBottom: 0,
     fontFamily: headerFontFamily(),
@@ -191,7 +191,7 @@ const styles = {
 
   featuresDivider: {
     height: 1,
-    backgroundColor: '#cecece',
+    backgroundColor: '#d6d4d4',
   },
   features: {
     // backgroundColor: '#d0d0d0',

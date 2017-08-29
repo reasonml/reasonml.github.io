@@ -3,7 +3,7 @@ import Helmet from "react-helmet"
 
 import Section from '../components/Section'
 import GuideSidebar, {constructTree, fixPath} from '../components/GuideSidebar'
-import {accent, gray} from '../utils/colors'
+import {accent, gray, dividerLine} from '../utils/colors'
 import {rhythm} from '../utils/typography'
 
 import Link from "../components/Link"
@@ -158,7 +158,7 @@ const styles = {
     lineHeight: '25px',
   },
   title: {
-    borderBottom: '1px solid #aaa',
+    borderBottom: '1px solid ' + dividerLine,
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',

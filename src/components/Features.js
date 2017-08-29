@@ -2,6 +2,7 @@ import React from "react"
 import Link from "gatsby-link"
 import Helmet from "react-helmet"
 import {headerFontFamily} from '../utils/typography'
+import { dividerLine } from '../utils/colors'
 
 const intersperse = (items, fn) => items.reduce(
   (items, item, i) => i === 0 ? [item] : [...items, fn(i), item],
@@ -45,7 +46,7 @@ const styles = {
   },
   divider: {
     flexBasis: 1,
-    backgroundColor: '#cecece',
+    backgroundColor: dividerLine,
     margin: '30px 0',
     '@media(max-width: 900px)': {
       margin: 0,
