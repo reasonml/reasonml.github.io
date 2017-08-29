@@ -84,7 +84,7 @@ Access & update an array item like so:
 ```reason
 let myArray = [|"hello", "world", "how are you"|];
 
-let world = myArray.(1); /* "hello" */
+let world = myArray.(0); /* "hello" */
 
 myArray.(0) = "hey";
 
