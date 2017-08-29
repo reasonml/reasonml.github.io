@@ -19,9 +19,11 @@ export default class Features extends React.Component {
         <div css={styles.description}>
           {description}
         </div>
-        <Link css={styles.button} to={url}>
-          {action}
-        </Link>
+        <div css={{marginTop: 'auto'}}>
+          <Link css={styles.button} to={url}>
+            {action}
+          </Link>
+        </div>
       </div>
     ))
     return <div css={styles.container}>
@@ -57,13 +59,12 @@ const styles = {
     fontFamily: headerFontFamily(),
     border: '1px solid currentColor',
     backgroundColor: 'transparent',
-    borderRadius: 10,
+    borderRadius: 5,
     padding: '5px 15px',
     textDecoration: 'none',
     color: 'currentColor',
     marginTop: '1em',
     fontSize: '.9em',
-
   },
 
   title: {

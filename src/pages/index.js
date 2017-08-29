@@ -15,15 +15,8 @@ const features = [
     title: 'Types without hassle',
     description:
       'Powerful, safe type inference means you rarely have to annotate types, but everything gets checked for you.',
-    action: 'See how',
+    action: 'Learn about types',
     url: '/guide/language/type/',
-  },
-  {
-    title: 'Online playground',
-    description:
-      'Play with Reason in-browser, take a look at the produced OCaml and JavaScript, and try out code samples.',
-    action: 'Try it now',
-    url: '/try',
   },
   // {
   //   title: 'Web or Native', // 😢 not ready yet
@@ -35,7 +28,7 @@ const features = [
     title: 'Easy JavaScript interop',
     description:
       "Use packages from NPM/Yarn with minimum hassle, or even drop in a snippet of raw JavaScript while you're learning!",
-    action: 'Learn more',
+    action: 'Learn about interop',
     url: '/guide/javascript/interop/',
   },
   {
@@ -49,7 +42,7 @@ const features = [
 
 export default class Index extends React.Component {
   render() {
-    const { javascript, examples } = this.props.data
+    const { mainExample, jsquickstart, examples } = this.props.data
     return (
       <div css={styles.container}>
         <Helmet title={`Reason`} />
@@ -57,12 +50,19 @@ export default class Index extends React.Component {
           <Header />
           <div css={{ alignItems: 'center' }}>
             <img src={logo} css={styles.logo} />
-            <p css={styles.description}>
-              Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript & OCaml ecosystems.
-            </p>
+            <div css={styles.frontAndCenter}>
+              <div css={styles.mainExample}
+                dangerouslySetInnerHTML={{
+                  __html: mainExample.childMarkdownRemark.html,
+                }}
+              />
+              <p css={styles.description}>
+                Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript & OCaml ecosystems.
+              </p>
+            </div>
             <div css={styles.buttonGroup}>
-              <Link to="/guide/javascript/quickstart" css={styles.button}>
-                Quick Start
+              <Link to="/try" css={[styles.button, styles.actionButton]}>
+                Try online
               </Link>
               <Link to="/guide/what-and-why" css={styles.button}>
                 Learn more
@@ -78,11 +78,11 @@ export default class Index extends React.Component {
         </Section>
         <Section css={[styles.quickstarts, styles.twoColumn]}>
           <div css={styles.column}>
-            <h3 css={styles.columnHeader}>JavaScript quickstart</h3>
+            <h3 css={styles.columnHeader}>JavaScript Quick Start</h3>
             <div
               css={styles.jsquickstart}
               dangerouslySetInnerHTML={{
-                __html: javascript.childMarkdownRemark.html,
+                __html: jsquickstart.childMarkdownRemark.html,
               }}
             />
           </div>
@@ -98,20 +98,14 @@ export default class Index extends React.Component {
 
 export const pageQuery = graphql`
   query IndexQuery {
-    javascript: file(relativePath: { eq: "guide/javascript/quickstart.md" }) {
+    mainExample: file(relativePath: { eq: "index-example.md" }) {
       childMarkdownRemark {
         html
-        frontmatter {
-          title
-        }
       }
     }
-    examples: file(relativePath: { eq: "community/examples.md" }) {
+    jsquickstart: file(relativePath: { eq: "guide/javascript/quickstart.md" }) {
       childMarkdownRemark {
         html
-        frontmatter {
-          title
-        }
       }
     }
   }
@@ -148,6 +142,15 @@ const styles = {
     alignSelf: 'center',
   },
 
+  frontAndCenter: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    margin: '2rem',
+    '@media(max-width: 950px)': {
+      flexDirection: 'column'
+    }
+  },
+
   description: {
     maxWidth: 600,
     fontWeight: 200,
@@ -167,22 +170,34 @@ const styles = {
     alignSelf: 'center',
   },
 
+  mainExample: {
+    '& .hljs': {
+      background: 'transparent',
+      border: 'none',
+      marginBottom: 0
+    }
+  },
+
   button: {
     fontFamily: headerFontFamily(),
     textDecoration: 'none',
-    background: accent,
-    border: '1px solid #aaa',
-    border: 'none',
-    color: 'white',
+    border: '1px solid currentColor',
     padding: '8px 34px',
+    color: 'currentColor',
     borderRadius: 5,
     margin: 10,
     textAlign: 'center'
   },
 
+  actionButton: {
+    border: 'none',
+    background: accent,
+    color: 'white',
+  },
+
   buttonGroup: {
     flexDirection: 'row',
-    marginBottom: '1.5em',
+    marginBottom: '3rem',
     '@media(max-width: 340px)': {
       flexDirection: 'column',
       width: '80%'
