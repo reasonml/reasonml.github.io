@@ -118,6 +118,39 @@ const isSafari = (
   typeof safari !== 'undefined'
 );
 
+class ShareButton extends Component {
+  state = {
+    showConfirmation: false
+  }
+
+  onClick = () => {
+    this.props.onClick();
+    this.setState({showConfirmation: true});
+    setTimeout(() => this.setState({showConfirmation: false}), 2000);
+  }
+
+  render() {
+    const {url} = this.props;
+    const {showConfirmation} = this.state;
+
+    return (
+      <div css={[styles.toolbarButton, styles.shareButton]}>
+        <input
+          id="shareableUrl"
+          value={this.props.url}
+          readOnly
+        />
+        <button onClick={this.onClick}>Share</button>
+        <span className={showConfirmation ? 'tooltip s-show-confirmation' : 'tooltip'} css={styles.tooltip}>
+          <span className="arrow"></span>
+          <span className="help">Click to copy to clipboard</span>
+          <span className="confirmation">Copied</span>
+        </span>
+      </div>
+    );
+  }
+}
+
 export default class Try extends Component {
   state = {
     reason: '/* loading */',
@@ -353,14 +386,10 @@ export default class Try extends Component {
               onChange={this.toggleEvaluate}
             />
           </div>
-          <div css={[styles.toolbarButton, styles.shareButton]}>
-            <input
-              id="shareableUrl"
-              value={this.state.shareableUrl}
-              readOnly
-            />
-            <button onClick={this.copyShareableUrl}>Share</button>
-          </div>
+          <ShareButton
+            url={this.state.shareableUrl}
+            onClick={this.copyShareableUrl}
+          />
         </div>
         <div css={styles.inner}>
           <div css={styles.column}>
@@ -554,16 +583,64 @@ const styles = {
   },
 
   shareButton: {
+    position: 'relative',
+
     '& input': {
       background: gray,
       transition: 'all 250ms',
       width: 0,
       padding: 0,
     },
+
     '&:hover input': {
       width: '25vw',
       marginRight: '1em',
     },
+
+    '&:hover .tooltip': {
+      display: 'block'
+    }
+  },
+
+  tooltip: {
+    display: 'none',
+    position: 'absolute',
+    zIndex: 100,
+    top: '100%',
+    right: '1em',
+    background: 'rgba(0, 0, 0, .6)',
+    color: 'white',
+    whiteSpace: 'nowrap',
+    padding: '.15em .8em',
+    borderRadius: '.25em',
+    fontSize: '.8rem',
+
+    '& .arrow': {
+      position: 'absolute',
+      content: ' ',
+      bottom: '100%',
+      right: '2.5em',
+      height: '0',
+      width: '0',
+      border: '.5em solid transparent',
+      pointerEvents: 'none',
+      borderBottomColor: 'rgba(0, 0, 0, .6)',
+      marginLeft: '.5em'
+    },
+
+    '& .confirmation': {
+      display: 'none',
+      padding: '0 .75em',
+    },
+
+    '&.s-show-confirmation': {
+      '& .help': {
+        display: 'none'
+      },
+      '& .confirmation': {
+        display: 'block'
+      }
+    }
   },
 
   exampleSelect: {
