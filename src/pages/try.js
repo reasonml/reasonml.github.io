@@ -677,7 +677,14 @@ const styles = {
     borderTop: '1px solid #d6d4d4',
 
     '& li': {
-      padding: '1em 2em',
+      padding: '.5em 2em',
+
+      '&:first-child': {
+        paddingTop: '1em'
+      },
+      '&:last-child': {
+        paddingBottom: '1em'
+      }
     },
 
     '& li:hover': {
