@@ -3,57 +3,56 @@ title: Let Binding
 order: 10
 ---
 
-A "let binding", in other languages, might be called a "variable declaration/assignment". `let` gives names to values. They can be seen and referenced by code that comes after them.
+Un "let binding", en otros lenguajes, pueden llamarse  "asignacion o declaracion de una variable". `let` le da un nombre a un valor. Pueden ser usadas por codigo el codigo que viene despues de las mismas.
 
 ```reason
-let greeting = "hello!";
-let score = 10;
-let newScore = 10 + score;
+let saludo = "hola!";
+let puntaje = 10;
+let nuevoPuntaje = 10 + puntaje;
 ...
 ```
 
-### Block Scope
+### Bloque de Alcance
 
-Bindings can be scoped through `{}`.
+Bindings pueden limitar su alcance mediante `{}`.
 
 ```reason
-if (displayGreeting) {
-  let message = "Enjoying the docs so far?";
-  print_endline message;
+if (mostrarSaludo) {
+  let mensaje = "Disfrutando de la documentacion hasta ahora?";
+  print_endline mensaje;
 };
-/* `message` not accessible here! */
+/* `mensaje` no es accesible aca! */
 ```
 
-### Bindings Are Immutable
+### Bindings son Inmutables
 
-"Immutable" as in, "doesn't change". Once a binding refers to a value, it cannot refer to anything else (unless it
-explicitly contains a mutable value, discussed later). However, you may create a new binding of the same name which *shadows* the previous binding; from that point onward, the binding will refer to the newly assigned value.
+"Inmmutable" como en, "no cambia". Una vez que un binding hace referencia a un valor, no puede hacer referencia a nada mas (al menos que contenga un valor mutable, explicado mas adelante). Sin embargo, se puede crear un nuevo binding del mismo nombre que *encierre* el binding previo; desde ese punto en adelante, el binding va a referir al nuevo valor asignado.
 
 ```reason
-let message = "hello";
-print_endline message; /* Prints "hello" */
-let message = "bye";
-print_endline message; /* Prints "bye" */
+let mensaje = "hola";
+print_endline mensaje; /* Imprime "hola" */
+let mensaje = "chau";
+print_endline mensaje; /* Imprime "chau" */
 ```
 
-### Tips & Tricks
+### Consejos
 
-Since bindings are scoped through `{}`, you can create an anonymous scope around them:
+Ya que los bindings estan limitados mediante `{}`, podes crear un scope anonimos mediante:
 
 ```reason
-let message = {
-  let part1 = "hello";
-  let part2 = "world";
-  part1 ^ " " ^ part2
+let mensaje = {
+  let parte1 = "hola";
+  let parte2 = "mundo";
+  parte1 ^ " " ^ parte2
 };
-/* `part1` and `part2` not accessible here! */
+/* `parte1` y `parte2` no son accesibles aca! */
 ```
 
-This prevents misuse of the bindings after these lines.
+Esto prevee el mal uso de los bindings despues de estas lineas.
 
-### Design Decisions
+### Decisiones de disenio
 
-Reason is backed by OCaml under the hood. a let binding, in OCaml syntax, looks like this:
+Reason funciona gracias a OCaml. Un let binding, en sintaxis de OCaml, funciona asi:
 
 ```ocaml
 let a = 1 in
@@ -61,7 +60,7 @@ let b = 2 in
 a + b
 ```
 
-This could be conceptually read in this format instead:
+Esto puede ser leido conceptualmente en este formato:
 
 ```ocaml
 let a = 1 in
@@ -69,7 +68,7 @@ let a = 1 in
     a + b
 ```
 
-Which might remind you of:
+Lo cual te puede recordar a:
 
 ```reason
 /* Reason syntax */
@@ -78,4 +77,4 @@ fun a =>
     a + b;
 ```
 
-Though they're not strictly the same, hopefully you can see that `let` is just an expression! In Reason, we've turned `in` into `;` for visual familiarity; but don't let that hide the underlying elegance of an expression.
+Aunque no son estrictamente lo mismo, afortunadamente podras observar que `let` es solo una expresion! En Reason, hemos transformado `in` en `;` para tener familiaridad visual; pero no dejes que eso oculte la elegancia de la expresion.

@@ -17,7 +17,7 @@ Concatenacion de Cadena de Caracteres |  `"Hello " ^ "World"`
 Comparacion                           |  `>`, `<`, `>=`, `=<`
 Operaciones Booleanas                 |  `not`, `&&`, `||`
 Referencia, Igualdad (profunda)       |  `===`, `==`
-Listas Imutables                      |  `[1, 2, 3]`
-Adicion Imutable                      |  `[item1, item2, ...elResto]`
+Listas Inmutables                     |  `[1, 2, 3]`
+Adicion Inmutable                     |  `[item1, item2, ...elResto]`
 Arreglo                               |  `[|1, 2, 3|]`
 Documento                             |  `type jugador = {puntaje: int}; {puntaje: 100}`
