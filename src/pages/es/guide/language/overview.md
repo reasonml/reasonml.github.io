@@ -1,23 +1,23 @@
 ---
-title: Overview
+title: Resumen
 order: 0
 ---
 
-Primitive                             | Example
+Primitiva                             | Ejemplo
 --------------------------------------|--------------------------------
-Strings                               |  `"Hello"`
-Characters                            |  `'x'`
-Integers                              |  `23`, `-23`
-Floats                                |  `23.0`, `-23.0`
-Integer Addition                      |  `23 + 1`
-Float Addition                        |  `23.0 +. 1.0`
-Integer Division/Multiplication       |  `2 / 23 * 1`
-Float Division/Multiplication         |  `2.0 /. 23.0 *. 1.0`
-String Concatenation                  |  `"Hello " ^ "World"`
-Comparison                            |  `>`, `<`, `>=`, `=<`
-Boolean operations                    |  `not`, `&&`, `||`
-Reference, Physical (deep) Equality   |  `===`, `==`
-Immutable Lists                       |  `[1, 2, 3]`
-Immutable Prepend                     |  `[item1, item2, ...theRest]`
-Arrays                                |  `[|1, 2, 3|]`
-Records                               |  `type player = {score: int}; {score: 100}`
+Cadena de Caracteres                  |  `"Hello"`
+Caracteres                            |  `'x'`
+Numeros Enteros                       | `23`, `-23`
+Real                                  |  `23.0`, `-23.0`
+Suma de Enteros                       |  `23 + 1`
+Suma de Reales                        |  `23.0 +. 1.0`
+Division/Multiplicacion de Enteros    |  `2 / 23 * 1`
+Division/Multiplicacion de Reales     |  `2.0 /. 23.0 *. 1.0`
+Concatenacion de Cadena de Caracteres |  `"Hello " ^ "World"`
+Comparacion                           |  `>`, `<`, `>=`, `=<`
+Operaciones Booleanas                 |  `not`, `&&`, `||`
+Referencia, Igualdad (profunda)       |  `===`, `==`
+Listas Imutables                      |  `[1, 2, 3]`
+Adicion Imutable                      |  `[item1, item2, ...elResto]`
+Arreglo                               |  `[|1, 2, 3|]`
+Documento                             |  `type jugador = {puntaje: int}; {puntaje: 100}`
