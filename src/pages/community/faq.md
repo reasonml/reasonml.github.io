@@ -38,6 +38,16 @@ Most JS libraries should easily work under Reason + BuckleScript. On the native 
 #### What's the server-side story? Should I compile to native or to JS and use node.js?
 We do compile to native, but the native workflow is currently work-in-progress. At this time, we recommend compiling to JS through BuckleScript and use the bindings at [reasonml-community](https://github.com/reasonml-community) or somewhere else.
 
+#### What's BuckleScript's async story?
+First, if you're not interfacing with any library that uses promises, you can simply use callbacks. Everyone gets them and they're performant.
+
+If you need to bind to a JS library that uses promises, or communicate with such library, you can use BS's [bindings to promises](http://bucklescript.github.io/bucklescript/api/Js.Promise.html). There's also potential to have some syntactic sugar in the future. In the long run, we'd like to implement a spec-compliant promises implementation in OCaml/Reason proper, so that the compiler optimizations could kick in.
+
+For a more idiomatic OCaml solution: on the native OCaml side, we have [lwt](http://ocsigen.org/lwt/) and [Async](https://ocaml.janestreet.com/ocaml-core/111.03.00/doc/async/#Std). We don't use them in web right now, but we might in the future.
+
+#### What's the (unit) test story?
+Some of OCaml's language features (not just types) might be able to defer the need for unit testing until later. In the meantime, for compilation to JS, we're working on [Jest bindings](https://github.com/BuckleTypes/bs-jest). We'll look into using Jest for native too, if Jest is written using Reason in the future (no concrete plan yet). [OUnit](http://ounit.forge.ocamlcore.org) is a good, small native OCaml testing library right now.
+
 #### What's the `.merlin` file at the root of my project?
 That's the metadata file for [Merlin](/guide/editor-tools/extra-goodies#merlin), the shared editor integration backend for autocomplete, jump-to-definition, etc. For the [JavaScript Workflow](/guide/javascript), `bsb` the build system generates the `.merlin` for you; You don't need to check that into your version control and don't have to manually modify it.
 
@@ -83,7 +93,7 @@ BuckleScript is optimized for performance across the whole stack. You can try sl
 - Stuffing a JavaScript build tool in the pipeline.
 - Dragging in more dependencies for writing a hello world.
 
-### I'm seeing a weird .cmi/.cmx/.cmj/.cma file referenced in a compiler error. Where do these files come from?
+#### I'm seeing a weird .cmi/.cmx/.cmj/.cma file referenced in a compiler error. Where do these files come from?
 
 The OCaml community frequently uses file extensions to distinguish between types of source, artifacts, and metadata, depending on your build target (native/bytecode/JavaScript). The following is a overview of some of the file extensions you may come across:
 
