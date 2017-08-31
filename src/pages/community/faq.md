@@ -85,7 +85,7 @@ BuckleScript is optimized for performance across the whole stack. You can try sl
 
 ### I'm seeing a weird .cmi/.cmx/.cmj/.cma file referenced in a compiler error. Where do these files come from?
 
-The OCaml community frequently uses file extensions to distinguish between types of source, artifacts, and metadata, depending on your build target (native/bytecode/JavaScript):
+The OCaml community frequently uses file extensions to distinguish between types of source, artifacts, and metadata, depending on your build target (native/bytecode/JavaScript). The following is a overview of some of the file extensions you may come across:
 
 #### Source files
 
@@ -105,7 +105,20 @@ The OCaml community frequently uses file extensions to distinguish between types
 - `.cmt`: Contains a "Typedtree" – basically the AST with all type info
 - `.cmti`: Just like a .cmt file, but for interface files
 - `.cmxs`: Dynamically loaded plugin (for native compilation)
+- `.o`: Compiled native object file
 - `.out`: Conventional name/extension for final output produced by ocamlc/ocamlopt (e.g. `ocamlc -o myExecutable.out`)
+
+#### Other OCaml ecosystem files
+
+- `.mll`: ocamllex lexical analyzer definition file
+- `.mly`: ocamlyacc parser generator definition file
+- `.mldylib`: Contains a list of module paths that will be compiled and archived together to build a corresponding `.cmxs` target (native plugin)
+- `.mliv`: Batteries-specific files for some [custom preprocessing](https://github.com/ocaml-batteries-team/batteries-included/blob/f019927b9503ec65ef816f02315de78d4bae3481/src/batArray.mliv).
+- `.mllib`: Ocaml library (cma and cmxa)
+- `.mlpack`: Ocaml package (cmo built with the -pack flag)
+- `.mlpp`: [Extlib](https://github.com/ygrek/ocaml-extlib)-specific files for some custom preprocessing
+- `.mltop`: [OCamlbuild top-level file](https://shonkychef.wordpress.com/2009/07/28/making-an-ocaml-toplevel-with-ocamlbuild/), used by OCamlbuild to generate a .top file
+- `.odocl`: OCaml documentation file
 
 If some of those explanations are still a bit cryptic, here are expansions on some of the terms used above:
 - [AST](https://en.wikipedia.org/wiki/Abstract_syntax_tree): Abstract Syntax Tree. The data structure coming from the source code, that the compiler operates on.
@@ -114,5 +127,5 @@ If some of those explanations are still a bit cryptic, here are expansions on so
 - [Bytecode](https://en.wikipedia.org/wiki/Bytecode): Like native code, but more portable and less performant
 - [Object file](https://en.wikipedia.org/wiki/Object_file): Contains machine code that is not directly runnable.
 
-There is more information and context for many of these file extensions [on the OCaml site](https://ocaml.org/learn/tutorials/filenames.html) and in [this mailing list post](http://caml.inria.fr/pub/ml-archives/caml-list/2008/09/2bc9b38171177af5dc0d832a365d290d.en.html). There are deeper dives on [native](https://caml.inria.fr/pub/docs/manual-ocaml/native.html) and [bytecode](http://caml.inria.fr/pub/docs/manual-ocaml/comp.html) compilation that contain more detailed descriptions in the OCaml manual
+There is more information and context for many of these file extensions [on the OCaml site](https://ocaml.org/learn/tutorials/filenames.html) and in [this mailing list post](http://caml.inria.fr/pub/ml-archives/caml-list/2008/09/2bc9b38171177af5dc0d832a365d290d.en.html). There are also deeper dives on [native](https://caml.inria.fr/pub/docs/manual-ocaml/native.html) and [bytecode](http://caml.inria.fr/pub/docs/manual-ocaml/comp.html) compilation that contain more detailed descriptions in the OCaml manual.
 
