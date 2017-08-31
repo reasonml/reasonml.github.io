@@ -83,7 +83,7 @@ BuckleScript is optimized for performance across the whole stack. You can try sl
 - Stuffing a JavaScript build tool in the pipeline.
 - Dragging in more dependencies for writing a hello world.
 
-### I'm seeing a weird .cmi/.cmx/.cmj/.cma file referenced in a compiler error. Where do these files come from?
+#### I'm seeing a weird .cmi/.cmx/.cmj/.cma file referenced in a compiler error. Where do these files come from?
 
 OCaml outputs a few different files during compilation, depending on your build target (native/bytecode/JavaScript):
 
