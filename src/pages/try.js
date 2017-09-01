@@ -101,31 +101,64 @@ export default class Try extends Component {
 
   err = null
 
+  _output = item =>
+    this.setState(state => ({
+      ...state,
+      output: state.output.concat(item)
+    }));
+
+  output = item => {
+    if (this.outputOverloaded)
+      return;
+
+    if (this.state.output.length > 100) {
+      this.outputOverloaded = true;
+      this._output({ type: 'error', contents: ['[Too much output!]']})
+      return;
+    }
+
+    this._output(item);
+  }
+
+  initEvalWorker = () => {
+    this.evalWorker = new Worker('/evalWorker.js');
+    this.evalWorker.onmessage = ({data}) => {
+      if (data.type === 'end') {
+        clearTimeout(data.contents);
+      } else {
+        this.output(data);
+      }
+    }
+  }
+
+  evalJs(code) {
+    this.outputOverloaded = false;
+    this.setState(
+      state => ({ ...state, output: [] }),
+      () => {
+        const timerId = setTimeout(() => {
+          this.evalWorker.terminate();
+          this.initEvalWorker();
+          this._output({type: 'error', contents: ['[Evaluation timed out!]']});
+        }, 1000);
+        this.evalWorker.postMessage({
+          code: wrapInExports(code),
+          timerId
+        });
+      }
+    )
+  }
+
   componentDidMount() {
     waitUntilScriptsLoaded(() => {
+      this.initEvalWorker();
       const {language, code} = retrieve();
       language === 'reason' ? this.updateReason(code) : this.updateOCaml(code)
     })
-    window.console = {
-      log: (...items) => {
-        this.setState(state => ({
-          ...state,
-          output: state.output.concat({ type: 'log', contents: items }),
-        }))
-      },
-      error: (...items) => {
-        this.setState(state => ({
-          ...state,
-          output: state.output.concat({ type: 'error', contents: items }),
-        }))
-      },
-      warn: (...items) => {
-        this.setState(state => ({
-          ...state,
-          output: state.output.concat({ type: 'warn', contents: items }),
-        }))
-      },
-    }
+  }
+
+  componentWillUnmount() {
+    this.evalWorker.terminate();
   }
 
   updateReason = newReasonCode => {
@@ -267,15 +300,6 @@ export default class Try extends Component {
     })
   }
 
-  evalJs(code) {
-    this.setState(
-      state => ({ ...state, output: [] }),
-      () => {
-        window.eval(wrapInExports(code))
-      }
-    )
-  }
-
   render() {
     const { reason, ocaml, js, reasonSyntaxError, compileError, ocamlSyntaxError, jsError } = this.state
     const codemirrorStyles = [
@@ -389,7 +413,7 @@ export default class Try extends Component {
 }
 
 const wrapInExports = code =>
-  `(function(exports) {${code}})(window.exports = {})`
+  `(function(exports) {${code}})({})`
 
 const formatOutput = item =>
   item.contents.map(val => JSON.stringify(val)).join(' ')
