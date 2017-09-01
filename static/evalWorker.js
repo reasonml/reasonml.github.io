@@ -1,3 +1,5 @@
+importScripts('stdlibBundle.js');
+
 const _console = console;
 
 console = {

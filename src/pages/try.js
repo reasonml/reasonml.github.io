@@ -309,7 +309,6 @@ export default class Try extends Component {
     return (
       <div css={styles.container}>
         <Helmet>
-          <script async src={__PATH_PREFIX__ + '/stdlibBundle.js'} />
           <script async src={__PATH_PREFIX__ + '/bs.js'} />
           <script async src={__PATH_PREFIX__ + '/refmt.js'} />
           <title>Try Reason</title>
