@@ -75,7 +75,7 @@ const errorTimeout = 500
 
 const waitUntilScriptsLoaded = done => {
   const tout = setInterval(() => {
-    if (window.refmt && window.ocaml && window.require) {
+    if (window.refmt && window.ocaml) {
       clearInterval(tout)
       done()
     }
@@ -129,6 +129,14 @@ export default class Try extends Component {
         this.output(data);
       }
     }
+    this.evalWorker.onerror = err => {
+      this.errorTimerId = setTimeout(
+        () => this.setState(_ => ({
+          jsError: err
+        })),
+        errorTimeout
+      );
+    }
   }
 
   evalJs(code) {
@@ -164,7 +172,7 @@ export default class Try extends Component {
   updateReason = newReasonCode => {
     if (newReasonCode === this.state.reason) return
     persist('reason', newReasonCode);
-    clearTimeout(this.err)
+    clearTimeout(this.errorTimerId)
 
     this.setState((prevState, _) => {
       const converted = window.refmt(newReasonCode, 'RE', 'implementation', 'ML')
@@ -174,7 +182,7 @@ export default class Try extends Component {
         newOcamlCode = converted[1]
         this.tryCompiling(newReasonCode, newOcamlCode)
       } else {
-        this.err = setTimeout(
+        this.errorTimerId = setTimeout(
           () => this.setState(_ => {
             const error = converted[1] === '' ? 'Syntax error' : converted[1];
             return {
@@ -204,7 +212,7 @@ export default class Try extends Component {
   updateOCaml = newOcamlCode => {
     if (newOcamlCode === this.state.ocaml) return
     persist('ocaml', newOcamlCode);
-    clearTimeout(this.err)
+    clearTimeout(this.errorTimerId)
 
     this.setState((prevState, _) => {
       const converted = window.refmt(newOcamlCode, 'ML', 'implementation', 'RE')
@@ -214,7 +222,7 @@ export default class Try extends Component {
         newReasonCode = converted[1]
         this.tryCompiling(newReasonCode, newOcamlCode)
       } else {
-        this.err = setTimeout(
+        this.errorTimerId = setTimeout(
           () => this.setState(_ => {
             const error = converted[1] === '' ? 'Syntax error' : converted[1];
             return {
@@ -250,20 +258,11 @@ export default class Try extends Component {
           jsIsLatest: true,
         }))
         if (this.state.autoEvaluate) {
-          try {
-            this.evalJs(res.js_code)
-          } catch (err) {
-            this.err = setTimeout(
-              () => this.setState(_ => ({
-                jsError: err
-              })),
-              errorTimeout
-            )
-          }
+            this.evalJs(res.js_code);
         }
         return
       } else {
-        this.err = setTimeout(
+        this.errorTimerId = setTimeout(
           () => this.setState(_ => ({
             compileError: res,
             js: '',
@@ -272,7 +271,7 @@ export default class Try extends Component {
         )
       }
     } catch (err) {
-      this.err = setTimeout(
+      this.errorTimerId = setTimeout(
         () => this.setState(_ => ({
           compileError: err,
           js: '',
