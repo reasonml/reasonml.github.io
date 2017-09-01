@@ -1,6 +1,8 @@
 import React from "react"
 import Link from "gatsby-link"
 import Helmet from "react-helmet"
+import {headerFontFamily} from '../utils/typography'
+import { dividerLine } from '../utils/colors'
 
 const intersperse = (items, fn) => items.reduce(
   (items, item, i) => i === 0 ? [item] : [...items, fn(i), item],
@@ -17,9 +19,11 @@ export default class Features extends React.Component {
         <div css={styles.description}>
           {description}
         </div>
-        <Link css={styles.button} to={url}>
-          {action}
-        </Link>
+        <div css={{marginTop: 'auto'}}>
+          <Link css={styles.button} to={url}>
+            {action}
+          </Link>
+        </div>
       </div>
     ))
     return <div css={styles.container}>
@@ -44,7 +48,7 @@ const styles = {
   },
   divider: {
     flexBasis: 1,
-    backgroundColor: '#cecece',
+    backgroundColor: dividerLine,
     margin: '30px 0',
     '@media(max-width: 900px)': {
       margin: 0,
@@ -52,23 +56,23 @@ const styles = {
   },
 
   button: {
+    fontFamily: headerFontFamily(),
     border: '1px solid currentColor',
     backgroundColor: 'transparent',
-    borderRadius: 10,
+    borderRadius: 5,
     padding: '5px 15px',
     textDecoration: 'none',
     color: 'currentColor',
     marginTop: '1em',
     fontSize: '.9em',
-
   },
 
   title: {
     marginBottom: '.5em',
-    textAlign: 'center',
   },
 
   description: {
+    fontFamily: headerFontFamily(),
     fontSize: 16,
     lineHeight: 1.6,
     textAlign: 'center',

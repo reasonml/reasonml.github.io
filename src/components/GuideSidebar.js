@@ -2,30 +2,21 @@ import React from 'react'
 import Link from './Link'
 
 import {scale, rhythm, headerFontFamily} from '../utils/typography'
-import {accent} from '../utils/colors'
+import {text, accent, dividerLine} from '../utils/colors'
 
-export default class GuideSidebar extends React.Component {
-  state = {closed: true}
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.current !== this.props.current) {
-      this.setState({closed: true})
-    }
-  }
-  render() {
-    return <div css={styles.container}>
-      <div
-        css={styles.navToggle}
-        onClick={() => this.setState({closed: !this.state.closed})}
-      >
-        Navigation
-      </div>
-      <div css={[styles.contents, this.state.closed && styles.hiddenContents]}>
-        <Link to={this.props.search}>Recherche</Link>
-        <Node current={this.props.current} item={this.props.root} root depth={0} />
-      </div>
+const GuideSidebar = ({props, current, root, search}) => (
+  <div css={styles.container}>
+    <div css={styles.contents}>
+      <Link css={styles.link} to={search}>
+        <svg css={styles.searchIcon} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15 15">
+          <path fill={text} d="M6.213 12.548C2.783 12.548 0 9.738 0 6.274 0 2.81 2.782 0 6.213 0c3.432 0 6.214 2.81 6.214 6.274 0 1.358-.428 2.616-1.154 3.643L15 13.482 13.576 15l-3.77-3.606c-1.015.727-2.254 1.154-3.593 1.154zm0-2.09c2.288 0 4.143-1.874 4.143-4.184S8.5 2.09 6.213 2.09c-2.287 0-4.142 1.874-4.142 4.184s1.856 4.183 4.143 4.183z"></path>
+        </svg>
+        Recherche
+      </Link>
+      <Node current={current} item={root} root depth={0} />
     </div>
-  }
-}
+  </div>
+)
 
 const Node = ({current, root, item: {title, relativePath, children}, depth}) => {
   const linkStyles = [styles.link, styles['link' + depth], relativePath === current && styles.currentLink]
@@ -38,6 +29,8 @@ const Node = ({current, root, item: {title, relativePath, children}, depth}) => 
     </div>
   : <Link css={[styles.node, linkStyles]} to={relativePath}>{title}</Link>
 }
+
+export default GuideSidebar
 
 export const sidebarFragment = graphql`
   fragment guideSidebar on RootQueryType {
@@ -64,6 +57,7 @@ const phablet = '@media(max-width: 800px)'
 const styles = {
   container: {
     width: rhythm(8),
+    padding: '20px',
     [phablet]: {
       ...scale(0),
       width: 'auto',
@@ -75,22 +69,8 @@ const styles = {
     padding: `${rhythm(1/3)} ${rhythm(1/2)}`,
   },
 
-  hiddenContents: {
-    [phablet]: {
-      display: 'none',
-    }
-  },
+  node: {
 
-  navToggle: {
-    backgroundColor: '#444',
-    color: 'white',
-    padding: `${rhythm(1/3)} ${rhythm(1/2)}`,
-    alignSelf: 'stretch',
-    display: 'none',
-    cursor: 'pointer',
-    [phablet]: {
-      display: 'flex',
-    }
   },
 
   li: {
@@ -105,6 +85,9 @@ const styles = {
       padding: `${rhythm(1/4)}`
     },
     display: 'block',
+    ':hover': {
+      color: accent,
+    }
   },
 
   currentLink: {
@@ -116,6 +99,8 @@ const styles = {
   link1: {
     fontWeight: 'bold',
     ...scale(0),
+    marginTop: '6px',
+    marginBottom: '6px',
   },
 
   children: {
@@ -125,7 +110,7 @@ const styles = {
     padding: 0,
     paddingLeft: rhythm(.5),
     marginLeft: 0,
-    borderLeft: '1px solid #aaa',
+    borderLeft: '1px solid ' + dividerLine,
   },
 
   rootChildren: {
@@ -133,6 +118,12 @@ const styles = {
     marginLeft: 0,
     paddingLeft: 0,
   },
+
+  searchIcon: {
+    width: '15px',
+    height: '15px',
+    marginRight: '5px',
+  }
 }
 
 

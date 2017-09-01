@@ -10,7 +10,7 @@ Reason est juste OCaml en réalité. Nous ne couvrons pas encore tous les concep
 - [Real World OCaml](https://realworldocaml.org) : un livre complet et détaillé sur OCaml.
 - [Turoriel sur les types algébriques de données](http://mads-hartmann.com/ocaml/2015/01/05/gadt-ocaml.html) pour ceux qui s'intéressent aux concepts les plus complexes d'OCaml.
 
-### BuckleScript
+## BuckleScript
 
 - [Manuel de BuckleScript](http://bucklescript.github.io/bucklescript/Manual.html), les documentations officielles de notre backend JavaScript.
 - [Documentation de l'API JS de BuckleScript](http://bucklescript.github.io/bucklescript/api/index.html)
@@ -21,7 +21,7 @@ Reason est juste OCaml en réalité. Nous ne couvrons pas encore tous les concep
 - [Unit Testing in ReasonML](https://jaketrent.com/post/unit-testing-in-reasonml/)
 
 
-### ReasonReact
+## ReasonReact
 
 - [Documentation](https://reasonml.github.io/reason-react/)
 - [Tutoriel ReasonReact intéractif](https://jaredforsyth.com/2017/07/05/a-reason-react-tutorial/) : propose une éditeur en ligne et des suggestions de types au survol !
@@ -36,3 +36,11 @@ Reason est juste OCaml en réalité. Nous ne couvrons pas encore tous les concep
 - [What's in a Language?](https://www.youtube.com/watch?v=24S5u_4gx7w) Avril 2017
 - [Taming the Meta-language](https://www.youtube.com/watch?v=_0T5OSSzxms) Mars 2017
 - [The Age of Reason(ML)](https://www.youtube.com/watch?v=8LCmLQ1-YqQ) Novembre 2016
+
+## Liens niveau pro
+
+Plus ils ont l'air vieux, meilleur est le contenu =P
+
+- [How OCaml type checker works](http://okmij.org/ftp/ML/generalization.html?fref=gc)
+- [Detecting use-cases for GADTs in OCaml](http://mads-hartmann.com/ocaml/2015/01/05/gadt-ocaml.html)
+- [Polymorphism and its limitations](http://www.polychoron.fr/ocaml-nonmanual/polymorphism.html)

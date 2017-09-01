@@ -5,6 +5,7 @@ import Section from '../components/Section'
 import { accent, gray } from '../utils/colors'
 import {headerFontFamily} from '../utils/typography'
 import debounce from '../utils/debounce'
+import { compressToEncodedURIComponent as compress, decompressFromEncodedURIComponent as decompress } from 'lz-string'
 
 let CodeMirror
 if (typeof navigator !== 'undefined') {
@@ -20,33 +21,53 @@ if (typeof navigator !== 'undefined') {
     </div>
   )
 }
+const  queryParamPrefixFor = language => `?${language}=`;
 
-const reasonQueryParamPrefix = "?reason="
-const ocamlQueryParamPrefix = "?ocaml="
+const retrieve = () => {
+  function fromQueryParam(language) {
+    const queryParam = window.location.search; // returns ?language=blablabla
+    const prefix = queryParamPrefixFor(language);
 
-// returns [code, isReason]
-const decodeSnippetFromURL = () => {
-  const queryParam = window.location.search; // returns ?encoded_snippet=blablabla
-  if (queryParam.startsWith(reasonQueryParamPrefix)) {
-    const encodedSnippet = queryParam.slice(reasonQueryParamPrefix.length);
-    return [decodeURIComponent(encodedSnippet), true];
-  } else if (queryParam.startsWith(ocamlQueryParamPrefix)) {
-    const encodedSnippet = queryParam.slice(ocamlQueryParamPrefix.length);
-    return [decodeURIComponent(encodedSnippet), false];
-  } else {
-    return ['let x = 10;\nJs.log x;', true]
+    if (queryParam.startsWith(prefix)) {
+      return {
+        language,
+        code: decompress(queryParam.slice(prefix.length)) || '' // decompressing an empty string returns null, joyously!
+      };
+    }
   }
-}
 
-const encodeSnippetToURL = debounce((input, queryParamPrefix) => {
-  const encodedSnippet = encodeURIComponent(input);
+  function fromLocalStorage() {
+    try {
+      const json = localStorage.getItem('try-reason');
+      return json && JSON.parse(json);
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
+  // WTH? There's some retarded automatic semicolon insertion going on, actively causing bugs. Hence the parens. Wonderful!
+  return ( 
+    fromQueryParam('reason') ||
+    fromQueryParam('ocaml') ||
+    fromLocalStorage() ||
+    { language: 'reason', code: 'let x = 10;\nJs.log x;' }
+  );
+};
+
+const persist = debounce((language, code) => {
+  try {
+    localStorage.setItem('try-reason', JSON.stringify({ language, code }));
+  } catch (e) {
+    console.error(e);
+  }
+
   // avoid a refresh of the page; we also don't want every few keystrokes to
   // create a new history for the back button, so replace the current one
   const newURL =
     window.location.origin +
     window.location.pathname +
-    queryParamPrefix +
-    encodedSnippet;
+    queryParamPrefixFor(language) +
+    compress(code);
   window.history.replaceState(null, '', newURL);
 }, 100);
 
@@ -82,8 +103,8 @@ export default class Try extends Component {
 
   componentDidMount() {
     waitUntilScriptsLoaded(() => {
-      const [codeFromURL, isReason] = decodeSnippetFromURL();
-      isReason ? this.updateReason(codeFromURL) : this.updateOCaml(codeFromURL)
+      const {language, code} = retrieve();
+      language === 'reason' ? this.updateReason(code) : this.updateOCaml(code)
     })
     window.console = {
       log: (...items) => {
@@ -109,7 +130,7 @@ export default class Try extends Component {
 
   updateReason = newReasonCode => {
     if (newReasonCode === this.state.reason) return
-    encodeSnippetToURL(newReasonCode, reasonQueryParamPrefix);
+    persist('reason', newReasonCode);
     clearTimeout(this.err)
 
     this.setState((prevState, _) => {
@@ -127,6 +148,7 @@ export default class Try extends Component {
               reasonSyntaxError: error,
               compileError: null,
               ocamlSyntaxError: null,
+              jsError: null,
               js: '',
               ocaml: '',
               output: [],
@@ -141,13 +163,14 @@ export default class Try extends Component {
         reasonSyntaxError: null,
         compileError: null,
         ocamlSyntaxError: null,
+        jsError: null
       }
     });
   }
 
   updateOCaml = newOcamlCode => {
     if (newOcamlCode === this.state.ocaml) return
-    encodeSnippetToURL(newOcamlCode, ocamlQueryParamPrefix);
+    persist('ocaml', newOcamlCode);
     clearTimeout(this.err)
 
     this.setState((prevState, _) => {
@@ -165,6 +188,7 @@ export default class Try extends Component {
               ocamlSyntaxError: error,
               compileError: null,
               reasonSyntaxError: null,
+              jsError: null,
               js: '',
               reason: '',
               output: [],
@@ -179,6 +203,7 @@ export default class Try extends Component {
         reasonSyntaxError: null,
         compileError: null,
         ocamlSyntaxError: null,
+        jsError: null
       }
     });
   }
@@ -192,7 +217,16 @@ export default class Try extends Component {
           jsIsLatest: true,
         }))
         if (this.state.autoEvaluate) {
-          this.evalJs(res.js_code)
+          try {
+            this.evalJs(res.js_code)
+          } catch (err) {
+            this.err = setTimeout(
+              () => this.setState(_ => ({
+                jsError: err
+              })),
+              errorTimeout
+            )
+          }
         }
         return
       } else {
@@ -243,7 +277,7 @@ export default class Try extends Component {
   }
 
   render() {
-    const { reason, ocaml, js, reasonSyntaxError, compileError, ocamlSyntaxError } = this.state
+    const { reason, ocaml, js, reasonSyntaxError, compileError, ocamlSyntaxError, jsError } = this.state
     const codemirrorStyles = [
       styles.codemirror,
       isSafari && styles.codemirrorSafari,
@@ -254,7 +288,7 @@ export default class Try extends Component {
           <script async src={__PATH_PREFIX__ + '/stdlibBundle.js'} />
           <script async src={__PATH_PREFIX__ + '/bs.js'} />
           <script async src={__PATH_PREFIX__ + '/refmt.js'} />
-          <title>Try Reason</title>
+          <title>Éditeur</title>
         </Helmet>
         <div css={{ backgroundColor: accent, color: 'white' }}>
           <Header inverted />
@@ -321,6 +355,12 @@ export default class Try extends Component {
                   readOnly: 'nocursor',
                 }}
               />
+              {jsError &&
+                <div css={styles.error}>
+                  <div css={styles.errorBody}>
+                    {jsError.message}
+                  </div>
+                </div>}
             </div>
             <div style={{ flexBasis: 20 }} />
             <div css={styles.row}>
@@ -373,13 +413,8 @@ const styles = {
     fontSize: 12,
   },
   error: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
     backgroundColor: '#faa',
     padding: '10px 20px',
-    zIndex: 10,
   },
 
   container: {
@@ -417,6 +452,7 @@ const styles = {
     minHeight: 0,
     border: '1px solid #aaa',
     position: 'relative',
+    overflow: 'auto',
     '@media(max-width: 500px)': {
       // display: 'block',
       height: 300,

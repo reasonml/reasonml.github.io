@@ -8,15 +8,22 @@ import Features from '../components/Features'
 import Section from '../components/Section'
 import { accent, gray } from '../utils/colors'
 import logo from '../images/reason_300.png'
-import {headerFontFamily} from '../utils/typography'
+import { headerFontFamily } from '../utils/typography'
 
 const features = [
   {
     title: 'Typez sans tracas',
     description:
       'Une inférence de type puissante et sûre signifie que vous devez rarement annoter des types, mais tout est vérifié pour vous.',
-    action: 'Plus sur les types',
+    action: 'Voir comment',
     url: '/guide/language/type/',
+  },
+  {
+    title: 'Éditeur en ligne',
+    description:
+      "Jouez avec Reason dans votre navigateur, jetez un coup d'oeil au code OCaml et JavaScript, testez les exemples fournis.",
+    action: 'Essayer maintenant',
+    url: '/try',
   },
   // {
   //   title: 'Web ou Natif', // 😢 not ready yet
@@ -28,7 +35,7 @@ const features = [
     title: 'Interopérabilité JavaScript',
     description:
       'Utilisez vos paquets depuis NPM/Yarn sans soucis, ou rajoutez directement un bout de JavaScript pendant que vous apprenez.',
-    action: "Plus sur l'interop",
+    action: 'En savoir plus',
     url: '/guide/javascript/interop/',
   },
   {
@@ -42,28 +49,21 @@ const features = [
 
 export default class Index extends React.Component {
   render() {
-    const { mainExample, jsquickstart, examples } = this.props.data
+    const { javascript, examples } = this.props.data
     return (
       <div css={styles.container}>
         <Helmet title={`Reason`} />
         <Section backgroundColor={gray}>
           <Header />
           <div css={{ alignItems: 'center' }}>
-            <img src={logo} css={styles.logo} />
-            <div css={styles.frontAndCenter}>
-              <div css={styles.mainExample}
-                dangerouslySetInnerHTML={{
-                  __html: mainExample.childMarkdownRemark.html,
-                }}
-              />
-              <p css={styles.description}>
+            <img src={logo} width={300} height={112} />
+            <p css={styles.description}>
               Reason vous permet d'écrire un code simple, performant, typé et de
               qualité, tout en tirant parti des écosystèmes JavaScript et OCaml.
-              </p>
-            </div>
-            <div css={styles.buttonGroup}>
-              <Link to="/try" css={[styles.button, styles.actionButton]}>
-                Essayer
+            </p>
+            <div css={{ flexDirection: 'row', marginBottom: '1.5em' }}>
+              <Link to="/guide/javascript/quickstart" css={styles.button}>
+                Démarrer
               </Link>
               <Link to="/guide/what-and-why" css={styles.button}>
                 En savoir plus
@@ -83,7 +83,7 @@ export default class Index extends React.Component {
             <div
               css={styles.jsquickstart}
               dangerouslySetInnerHTML={{
-                __html: jsquickstart.childMarkdownRemark.html,
+                __html: javascript.childMarkdownRemark.html,
               }}
             />
           </div>
@@ -99,14 +99,20 @@ export default class Index extends React.Component {
 
 export const pageQuery = graphql`
   query IndexQuery {
-    mainExample: file(relativePath: { eq: "index-example.md" }) {
+    javascript: file(relativePath: { eq: "guide/javascript/quickstart.md" }) {
       childMarkdownRemark {
         html
+        frontmatter {
+          title
+        }
       }
     }
-    jsquickstart: file(relativePath: { eq: "guide/javascript/quickstart.md" }) {
+    examples: file(relativePath: { eq: "community/examples.md" }) {
       childMarkdownRemark {
         html
+        frontmatter {
+          title
+        }
       }
     }
   }
@@ -143,71 +149,50 @@ const styles = {
     alignSelf: 'center',
   },
 
-  frontAndCenter: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    margin: '2rem',
-    '@media(max-width: 950px)': {
-      flexDirection: 'column'
-    }
-  },
-
   description: {
     maxWidth: 600,
     fontWeight: 200,
     fontSize: '1.1em',
     lineHeight: '1.5em',
     textAlign: 'center',
-    textShadow: '0px 1px #f4f2f2',
+    textShadow: '1px 1px white',
     padding: '0.8em',
     marginBottom: 0,
     fontFamily: headerFontFamily(),
     '@media(min-width: 800px)': {
-      fontSize: '1.5em'
-    }
+      fontSize: '1.5em',
+    },
   },
   content: {
     maxWidth: 1270,
     alignSelf: 'center',
   },
 
-  mainExample: {
-    '& .hljs': {
-      background: 'transparent',
-      border: 'none',
-      marginBottom: 0
-    }
-  },
-
   button: {
     fontFamily: headerFontFamily(),
     textDecoration: 'none',
-    border: '1px solid currentColor',
+    background: accent,
+    border: '1px solid #aaa',
+    border: 'none',
+    color: 'white',
     padding: '8px 34px',
-    color: 'currentColor',
     borderRadius: 5,
     margin: 10,
-    textAlign: 'center'
-  },
-
-  actionButton: {
-    border: 'none',
-    background: accent,
-    color: 'white',
+    textAlign: 'center',
   },
 
   buttonGroup: {
     flexDirection: 'row',
-    marginBottom: '3rem',
+    marginBottom: '1.5em',
     '@media(max-width: 340px)': {
       flexDirection: 'column',
-      width: '80%'
-    }
+      width: '80%',
+    },
   },
 
   featuresDivider: {
     height: 1,
-    backgroundColor: '#d6d4d4',
+    backgroundColor: '#cecece',
   },
   features: {
     // backgroundColor: '#d0d0d0',
@@ -222,7 +207,7 @@ const styles = {
   // please keep in sync with guide.css's markdown-content selectors
   jsquickstart: {
     '& a': {
-      color: accent,
+      color: '#db4d3f',
       textDecoration: 'none',
     },
     '& a:hover': {
@@ -233,8 +218,9 @@ const styles = {
     },
   },
 
+
   logo: {
     maxWidth: 300,
-    width: '80%'
-  }
+    width: '80%',
+  },
 }

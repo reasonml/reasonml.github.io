@@ -68,6 +68,15 @@ let a = 1 in
     a + b
 ```
 
+Ce qui correspond à ceci en Reason :
+
+```reason
+let a = 1;
+let b = 2;
+a + b;
+```
+
+
 Ce qui pourrait vous rappeler :
 
 ```reason
@@ -77,4 +86,4 @@ fun a =>
     a + b;
 ```
 
-Bien qu'ils ne soient pas strictement les mêmes, espérons que vous puissiez voir que `let` est juste une expression ! En Reason, nous avons transformé `in` en `;` par soucis de familiarité visuelle. Mais ne laissez pas `let` cacher l'élégance sous-jacente d'une expression.
+Bien qu'ils ne soient pas strictement les mêmes, espérons que vous puissiez voir que `let` est juste une expression et ressemble à une fonction ! En Reason, nous avons transformé `in` en `;` par soucis de familiarité visuelle. Mais ne laissez pas `let` cacher l'élégance sous-jacente des expressions.

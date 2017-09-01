@@ -3,7 +3,7 @@ import Helmet from "react-helmet"
 
 import Section from '../components/Section'
 import GuideSidebar, {constructTree, fixPath} from '../components/GuideSidebar'
-import {accent, gray} from '../utils/colors'
+import {accent, gray, dividerLine} from '../utils/colors'
 import {rhythm} from '../utils/typography'
 
 import Link from "../components/Link"
@@ -91,7 +91,7 @@ export default class Search extends React.Component {
   renderMain() {
     return <div css={styles.container}>
       <div css={styles.searchBar}>
-        Rechercher
+        Recherche
         <input
           ref={input => this.input = input}
           css={styles.searchInput}
@@ -122,7 +122,7 @@ export default class Search extends React.Component {
     const {section, sectionTitle} = this.props.pathContext
     const {allFile} = this.props.data
     return <div>
-      <Helmet title={`${sectionTitle} Search`} />
+      <Helmet title={`Recherche ${sectionTitle}`} />
       <Section backgroundColor={accent} css={{color: 'white'}}>
         <Header inverted />
         <div css={{alignItems: 'center'}}>
@@ -158,7 +158,7 @@ const styles = {
     lineHeight: '25px',
   },
   title: {
-    borderBottom: '1px solid #aaa',
+    borderBottom: '1px solid ' + dividerLine,
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -167,7 +167,7 @@ const styles = {
   contentSection: {
     flexDirection: 'row',
     '@media(max-width: 800px)': {
-      flexDirection: 'column',
+      flexDirection: 'column-reverse',
     },
   },
   sidebar: {

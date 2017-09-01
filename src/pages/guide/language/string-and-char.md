@@ -34,7 +34,7 @@ Il existe une syntaxe spéciale pour les strings qui permet d'avoir
 - des crochets pour les pré-processeurs spéciaux
 
 ```reason
-let GreetingAndOneSlash = {|Hello
+let greetingAndOneSlash = {|Hello
 World
 \
 Hehe...
@@ -86,7 +86,7 @@ comparé à
 let r = Str.regexp "hello \\([A-Za-z]+\\)";
 ```
 
-Bien que pour la compilation JavaScript, vous utiliseriez [`[%bs.re]`](http://bucklescript.github.io/bucklescript/Manual.html#_regex_support) à la place.
+Bien que pour la compilation JavaScript, vous utiliseriez [`[%bs.re]`](http://bucklescript.github.io/bucklescript/Manual.html#_regex_support) et [`Js.Re`](https://bucklescript.github.io/bucklescript/api/Js.Re.html) à la place, vu que `Str` n'est pas disponible.
 
 L'accent mis par Reason/OCaml sur la simplicité par rapport à l'ingéniosité est très bien représenté ici par son implémentation assez simple des strings natives. Une implémentation de string trop sophistiquée peut parfois se [retourner contre nous](http://mrale.ph/blog/2016/11/23/making-less-dart-faster.html).
 
@@ -105,7 +105,7 @@ let firstLetterOfAlphabet = 'a';
 Un caractère [compile en un integer compris entre 0 et 255](https://bucklescript.github.io/bucklescript/js-demo/?gist=7f6d24873a48fe03fa037c7c47848a4b), par soucis de rapidité. Vous pouvez aussi utilisez le pattern-matching ici (abordé plus tard) :
 
 ```reason
-let isVowel = switch theChar {
+fun isVowel theChar => switch theChar {
 | 'a' | 'e' | 'i' | 'o' | 'u' | 'y' => true
 | _ => false
 };

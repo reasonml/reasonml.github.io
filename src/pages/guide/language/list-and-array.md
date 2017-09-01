@@ -83,7 +83,7 @@ L'accès et la mise à jour d'un array se font comme suit :
 ```reason
 let myArray = [|"hello", "world", "how are you"|];
 
-let world = myArray.(1); /* "hello" */
+let firstItem = myArray.(0); /* "hello" */
 
 myArray.(0) = "hey";
 
