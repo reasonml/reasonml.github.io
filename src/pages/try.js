@@ -24,38 +24,183 @@ if (typeof navigator !== 'undefined') {
 }
 
 const examples = [{
-  code: 'C4TwDgpgBMBOHQLxQHIHsAm0CWA7YM80cCUAPlADIQCGAZgNwBQTANhAfAMZQDOArgFsoiJlCh1+uclVp0RAPigAGMePUV0WKADcarftHZ1O2AOYALAogVr16vQegBqKAAoBw48ACUUVx5CULDmVj7MbBxQgiAAKkQiTACQblrQAIx26qmY0ABMWfY52gAssvTldD6FUClpUABslZU+1fbixdAAzDUd9QCszdT0be19uVAA7ENyreEs7ARufqJJntFxCWRKAFK8AHSsaGYMQA',
-  name: 'Tree sum'
+  name: 'Tree sum',
+  code:
+`type tree = Node int tree tree | Leaf;
+
+let rec sum =
+  fun | Leaf => 0
+      | Node value left right =>
+        value + (sum left) + (sum right);
+
+let myTree =
+	(Node 1
+      (Node 2
+        (Node 4 Leaf Leaf)
+      	(Node 6 Leaf Leaf))
+      (Node 3
+        (Node 5 Leaf Leaf)
+        (Node 7 Leaf Leaf)));
+
+let () =
+	sum myTree |> Js.log;`
 }, {
-  code: 'KYDwLsBOB2CGA2ACARmA9rRAuRBnMkAltAOaIC8AfHgcWeYgESOIDaAAu8rgHQBuCALoBuAFCgIMBIljpk2GkVIVq+JfSYsOXXgPgjRo+MDCIAFAEoKiAN6jEiY6YjhrjABLB48NIgDqaJDwACYAhIxiDgBSvD5kZi6mAD7UqBgWkYgxPHHmiYgpKOiYhbJoyBmiAL7CQA',
-  name: 'FFI - Base64'
+  name: 'FFI - Base64',
+  code:
+`external btoa : string => string = "" [@@bs.val];
+external atob : string => string = "" [@@bs.val];
+
+let () = {
+  let text = "Hello World!";
+  Js.log (text |> btoa);
+  Js.log (text |> btoa |> atob);
+};`
 }, {
-  code: 'PQKgBAQghgzgpgEzAewHZgBYBcsAcYBcwwATsvDlAMbIJwB0yJA5sAO4CWA1h8AGLUsTDlAA2AYgBKcKgFcSMDgDc4AfQCsABhDAAUKLhYwJGWABmg4WLDoAvAD5dYG2AA8tsJrAB+XQEgARjACf3RwCyohEhFRMAAKdABaMACASgBuXX1DeNSwWycwACkYelFkZniIqJiwADYM3SA',
-  name: 'Recursion - Factorial'
+  name: 'Recursion - Factorial',
+  code:
+`/* Based on https://rosettacode.org/wiki/Factorial#Recursive_50 */
+let rec factorial n =>
+  n <= 0 ?
+	1 :
+	n * factorial (n - 1);
+
+let () =
+  Js.log (factorial 6);`
 }, {
-  code: 'PQKgBAQghgzgpgEzAewHZgBYBcsAcYBcwwATsvDlAMbIJwB0yJA5sAO4CWA1h8AOIk4ULHBhYA+jQC2UtOIQcAbhxhMAxAHkAwlCkAbMCGAAoPXCxhBVMMypIoYAEZgAvAD5jYMDE5YqGMAAKB1kkRwBKMABvTzAAHzAABlc3J1iEkhSbOydLWIBfAG5jU3MgyJdjAEgAKRh6PWRmINskACYAdjAATnDCoA',
-  name: 'Recursion - Greatest Common Divisor'
+  name: 'Recursion - Greatest Common Divisor',
+  code:
+`/* Based on https://rosettacode.org/wiki/Greatest_common_divisor#OCaml */
+let rec gcd a b =>
+  switch (a mod b) {
+  | 0 => b
+  | r => gcd b r
+  };
+
+let () =
+	Js.log (gcd 27 9);`
 }, {
-  code: 'PQKgBAQghgzgpgEzAewHZgBYBcsAcYBcwwATsvDlAMbIJwB0yJA5sAO4CWA1h8ACrI2cEjAD6yAGaiAElFTIOAYgDyAYSgBbADZgQwAFBa4WMCThVMchWHRQwAIzAWAvAD59YMBwlgAFOlcwAAYASjAAbw9PS3kOP3QAWjAARjC7C3sAbijPACkYei1kZgiAKwAfAFlkADc4MAQOGC4wCTINMFxkIzAAEjssZE7u+t77ctKAX2zomOt-MCTUpwcwKCjp-UNjPzDnKIwrOIAWFLAAJjAAZmygA',
-  name: 'Recursion - Towers of Hanoi'
+  name: 'Recursion - Towers of Hanoi',
+  code:
+`/* Based on https://rosettacode.org/wiki/Towers_of_Hanoi#OCaml */
+let rec hanoi n a b c =>
+  if (n > 0) {
+    hanoi (n - 1) a c b;
+    Js.log {j|Move disk from pole $a to pole $b|j};
+    hanoi (n - 1) c b a
+  };
+
+let () =
+  hanoi 4 1 2 3;`
 }, {
-  code: 'DYUwLgBADiBODOB7AdhAvBA3gKAhARMgIYC2I+AXFrngQGYCWCYlBAQogEb4A0Ne+YEXgsq+AFoALEgzCT8NAL58BRAObkqAZgBM2RQG5s2UJABWSVGhowEKCAB8AfBABS8AHTuUHkbAbIagx0AJ4Agsgh2ACQ0Y4u7h4A8lBgDD4aYACiAB7IMXHObp7eyB5QRAgguchGJuAQABQAlOjUeKYQxGToNNEW9kWJpR4AJiAAxojjSZxmk2AxeIUJnilpPkTIowAqkiCojY10AK6oUOirHgAiDBNgHpnQBN3krQDaAAKc8AC6zUsICtislUukyltdvtDsczhABlYriNxlMZnMFvDLB9vn8ActgYl1uDHuAakY8DROoxmAA5UggXrLRK3e4kyCvehMEQKZZDNZgzbbPYHJqw1AIy4g5GTaYgADKYH8gUxKGxP3+fT5oI2ZUyZJolIaQhEdJ61iZnhZDyeHMEwhYmquRMFUJFR1O4sskuGljGMvGCqVahVyDVuMdIOdutJeXJEBoiWAiGDmDMDgAEiBgEmeBAACTUk30-PGsCmkAOMyGfRAA',
-  name: 'Json'
+  name: 'Json',
+  code:
+`let person = {
+  "name": {
+    "first": "Bob",
+    "last": "Zhmith"
+  },
+  "age": 32
+};
+
+let json =
+  person |> Js.Json.stringifyAny
+		 |> Js.Option.getExn
+		 |> Js.Json.parseExn;
+
+let () = {
+  let name =
+  	json |> Js.Json.decodeObject
+	  	 |> Js.Option.andThen ((fun p => Js.Dict.get p "name") [@bs])
+	  	 |> Js.Option.andThen ((fun json => Js.Json.decodeObject json) [@bs])
+  		 |> Js.Option.getExn;
+  
+  let firstName =
+  	Js.Dict.get name "first"
+  	|> Js.Option.andThen ((fun json => Js.Json.decodeString json) [@bs])
+  	|> Js.Option.getExn;
+  
+  let lastName =
+  	Js.Dict.get name "last"
+  	|> Js.Option.andThen ((fun json => Js.Json.decodeString json) [@bs])
+  	|> Js.Option.getExn;
+  
+  Js.log {j|Hello, $firstName $lastName|j};
+}`
 }, {
-  code: 'PQKgBAQghgzgpgEzAewHZgBYBcsAcYBcwwATsvDlAMbIJwB0yJA5sAO4CWA1h8AGIcAXoIgBXYQGIA8gGEoAWwA2YEMABQaxXCxgAZkMEAjcYLAcwAXgB8asGBicsVDGAAU5+bTABmADRmwTyQAVgBKMABvWzAAHzcABn948OswACIBYTFhNOi410SwAH0Uq3TMwVy7fKKk0vTsyrziyzKYLBIOVGYi5F0irp0OaIBfAG4NXSYArrAARjAsZHn4+MjogCkYekVkZjd9YWNhM1C1cbUgA',
-  name: 'FizzBuzz'
+  name: 'FizzBuzz',
+  code:
+`/* Based on https://rosettacode.org/wiki/FizzBuzz#OCaml */
+
+let fizzbuzz i =>
+  switch (i mod 3, i mod 5) {
+  | (0, 0) => "FizzBuzz"
+  | (0, _) => "Fizz"
+  | (_, 0) => "Buzz"
+  | _ => string_of_int i
+  };
+
+for i in 1 to 100 {
+  Js.log (fizzbuzz i)
+};`
 }, {
-  code: 'PQKgBAQghgzgpgEzAewHZgBYBcsAcYBcwwATsvDlAMbIJwB0yJA5sAO4CWA1h8AEpRUCZAFsA+qgCuIgEZwSMAMQB5AMJQRAGzAhgAKE1wsYXBzABeMABZ6O21CyCwARnoBuPQaNgSg4eOYoSRgYDicACgBKCwA+PTAXWwBqej0ASBgARxJjcPCAWgAmemiQW01kZjBwgSFRegAzCodEyNLUtJoYauK7EzMysFr-RubjV0iPPQBBEl8AT3oOVA5jK0Lqhsl0MVifP1ExQODQiLa9AB8YsFmFpax5MAApGHoK5jcgA',
-  name: 'Normal distribution of random numbers'
+  name: 'Normal distribution of random numbers',
+  code:
+`/* Based on https://rosettacode.org/wiki/Random_numbers#OCaml */
+let pi = 4. *. atan 1.;
+
+let random_gaussian () =>
+  1. +.
+	sqrt ((-2.) *. log (Random.float 1.)) *.
+	cos (2. *. pi *. Random.float 1.);
+
+Array.init 42 (fun _ => random_gaussian ())
+|> Array.iter Js.log;`
 }, {
-  code: 'DYUwLgBAlgdgDgV0gXggbwD4CgA8ALMAW2AD4sIJ8QBDAEzIopzCjFBIEEIBlKQuUBAASAFQCyAGQgARAPYBjBIRAwwOAPQs2IBpXV4a9cpQBGs2gE9dTOCRF4oAZ2jPqEAG4gAThYiO+AiDC4lK0Ckoqauq2xjYkAJKQsjDAvnjUzmAA7rIQcNRe1ADmhXB4jhoxTOpmlmQaBMRkGAC+ANxYWKCQABQAlBDIxrCIkBgkEABSjgB03GBesEUzhNRg8ngA+hAA2gCkXkEAROo4cAA65yY7AHokALoAVCQ9M48A-H04l9Ek6kVQI73LAASBB4wgADMEDBQSCKBgeLJlBBDo4EMAUBM0RixhNpjMOF5ChYZpDZF4AKLUDZTWbAWRFWIQeEQREAOWSQWQ+PpjIgRxguVW6wMjiOHSAA',
-  name: 'Regex'
+  name: 'Regex',
+  code:
+`let input = {|
+  <html>
+    <head>
+      <title>A Simple HTML Document</title>
+    </head>
+    <body>
+      <p>This is a very simple HTML document</p>
+      <p>It only has two paragraphs</p>
+    </body>
+  </html>
+  |};
+  
+  let () =
+    input |> Js.String.match_ [%re "/<p\\b[^>]*>(.*?)<\\/p>/gi"]
+      |> fun
+        | Some result => result |> Js.Array.forEach Js.log
+          | None => Js.log "no matches";`
 }, {
-  code: 'PQKgBAQghgzgpgEzAewHZgBYBcsAcYBcwwATsvDlAMbIJwB0yJA5sAO4CWA1h8AMpMsHVMwD6UADbMmHLBgC2MYAEUArhypcYggMQB5AMJR5EsCGAAoCxLhYwJOFTABHdZu0k7zOwF4AfBZgYABmqugAPmAA2gC6YP7RMYFgAJBBkVEAHgA0YPT5mTBxCQDeyUFBKTZ2ABQAnjC5AF4wAJTxYAAyHDBY9LhQnrIcaGA13mCZ7YUA3OUVKa4aWoJgEw1gAALROXn5S+6rEy1JFRUAvnPWtmPtPhYpUQAsuQBsAKy5AEy5NQC0AGYAIytXIABlyAE5IbkABwA3IAdlhPzAQKSKXCfhcbhWnjGflaDyxYAAgiQSFA6oxgqIJD0sMTsQApGD0CTIZhzIA',
-  name: 'Quicksort'
+  name: 'Quicksort',
+  code:
+`/* Based on https://rosettacode.org/wiki/Sorting_algorithms/Quicksort#OCaml */
+
+let rec quicksort gt =>
+  fun | [] => []
+  	  | [x, ...xs] => {
+      	let (ys, zs) = List.partition (gt x) xs;
+      	quicksort gt ys @ [x, ...quicksort gt zs]
+      };
+
+let () =
+	[4, 65, 2, (-31), 0, 99, 83, 782, 1]
+	|> quicksort (>)
+	|> Array.of_list
+	|> Js.log;`
 }, {
-  code: 'GYewTgBAhhCWB2ECMEAuJkAYIG8BQEEokARnIiulrgRAJAA2ApqhAA5ggAmArgMasAvNAgAqCCQDctOgCkAzgDoGIAOa4AVgB8AJDFSwAtk3kQdZWKZ0du-VFo0BfWs8dA',
-  name: 'String interpolation'
+  name: 'String interpolation',
+  code:
+`for a in 1 to 10 {
+  for b in 1 to 10 {
+  	let product = a * b;
+  	Js.log {j|$a times $b is $product|j}
+  }
+}`
 }];
 
 const  queryParamPrefixFor = language => `?${language}=`;
@@ -383,7 +528,7 @@ export default class Try extends Component {
           <div css={[styles.toolbarButton, styles.exampleSelect]}>
             <button>Examples</button>
             <ul css={styles.exampleMenu}>
-              {examples.map(example => <li key={example.name} onClick={() => this.updateReason(decompress(example.code))}>{example.name}</li>)}
+              {examples.map(example => <li key={example.name} onClick={() => this.updateReason(example.code)}>{example.name}</li>)}
             </ul>
           </div>
           <div css={styles.toolbarButton}>
