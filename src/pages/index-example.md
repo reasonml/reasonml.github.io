@@ -1,8 +1,11 @@
 ```reason
-type tree = Node int tree tree | Leaf;
+type schoolPerson = Teacher | Director | Student string;
 
-let rec sum =
-  fun | Leaf => 0
-      | Node value left right =>
-        value + (sum left) + (sum right);
+let greeting =
+  switch stranger {
+  | Teacher => "Hey professor!"
+  | Director => "Hello director."
+  | Student "Richard" => "Still here Ricky?"
+  | Student anyOtherName => "Hey, " ^ anyOtherName ^ "."
+  };
 ```
