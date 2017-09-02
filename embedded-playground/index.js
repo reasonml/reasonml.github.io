@@ -15,6 +15,7 @@ module.exports = ({ markdownAST }) => {
         <div class="output"></div>
         <div class="buttons">
           <button class="run-button">Run</button>
+          <button class="reset-button">Reset</button>
           <button class="try-button">Open in playground</button>
         </div>
       </div>`;

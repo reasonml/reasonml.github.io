@@ -45,14 +45,15 @@ class MarkdownContainer extends React.Component {
       .forEach(container => {
         const editorContainer = container.querySelectorAll('.editor-container')[0];
         const runButton = container.querySelectorAll('.run-button')[0];
+        const resetButton = container.querySelectorAll('.reset-button')[0];
         const tryButton = container.querySelectorAll('.try-button')[0];
         const outputContainer = container.querySelectorAll('.output')[0];
 
-        const code = editorContainer.innerText;
+        const originalCode = editorContainer.innerText;
         editorContainer.innerHTML = '';
 
         const editor = codemirror(editorContainer);
-        editor.setValue(code)
+        editor.setValue(originalCode);
 
         runButton.onclick = () => {
           outputContainer.classList.remove('active');
@@ -68,10 +69,14 @@ class MarkdownContainer extends React.Component {
           });
         };
 
+        resetButton.onclick = () => {
+          editor.setValue(originalCode);
+        };
+
         tryButton.onclick = () => {
           const code = editor.getValue();
           location.href = `/try?reason=${compress(code)}`;
-        }
+        };
       });
   }
 
