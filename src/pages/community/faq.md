@@ -97,14 +97,14 @@ BuckleScript is optimized for performance across the whole stack. You can try sl
 
 The OCaml community frequently uses file extensions to distinguish between types of source, artifacts, and metadata, depending on your build target (native/bytecode/JavaScript). The following is a overview of some of the file extensions you may come across:
 
-#### Source files
+##### Source files
 
 - `.ml`: OCaml source file
 - `.mli`: OCaml interface file; determines which parts of the matching `.ml` file are visible to the outside world
 - `.re`: Reason source file. Like `.ml`, but for Reason
 - `.rei`: Reason interface file. Like `.mli`, but for Reason
 
-#### Compiled files
+##### Compiled files
 
 - `.cmi`: Compiled interface (.rei/mli) file
 - `.cmx`: Compiled object file for native output (via ocamlopt)
@@ -118,7 +118,7 @@ The OCaml community frequently uses file extensions to distinguish between types
 - `.o`: Compiled native object file
 - `.out`: Conventional name/extension for final output produced by ocamlc/ocamlopt (e.g. `ocamlc -o myExecutable.out`)
 
-#### Other OCaml ecosystem files
+##### Other OCaml ecosystem files
 
 - `.mll`: ocamllex lexical analyzer definition file
 - `.mly`: ocamlyacc parser generator definition file
