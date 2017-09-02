@@ -43,7 +43,7 @@ At Messenger, we've seen people ship warnings to production not because they did
 
 **The new errors can be turned on by adding `"bsc-flags": ["-bs-super-errors"]` to your bsconfig.json**, [like so](https://github.com/reasonml-community/reason-react-example/blob/6dc15bf5fbeeb184c99acb063f7644a0d14b12f4/bsconfig.json#L3). They're also available for [bsb-native](https://github.com/bsansouci/bsb-native). True to our stack's spirit, they're fast, simple to configure, and solid.
 
-**One more thing**: we're vertically integrated common pitfalls of [ReasonReact](https://reasonml.github.io/reason-react/) into these messages too, when applicable.
+**One more thing**: we're vertically integrated common pitfalls of [ReasonReact](//reasonml.github.io/reason-react/) into these messages too, when applicable.
 
 <div style="width:747px">
   <img alt="reason-react" src="https://user-images.githubusercontent.com/1909539/29712284-f1013bb2-894d-11e7-9596-1cca54d5c331.png" />
