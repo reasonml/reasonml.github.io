@@ -49,7 +49,7 @@ class MarkdownContainer extends React.Component {
         const tryButton = container.querySelectorAll('.try-button')[0];
         const outputContainer = container.querySelectorAll('.output')[0];
 
-        const originalCode = editorContainer.innerText;
+        const originalCode = editorContainer.innerText.trim();
         editorContainer.innerHTML = '';
 
         const editor = codemirror(editorContainer);
@@ -71,6 +71,8 @@ class MarkdownContainer extends React.Component {
 
         resetButton.onclick = () => {
           editor.setValue(originalCode);
+          outputContainer.classList.remove('active');
+          outputContainer.innerText = '';
         };
 
         tryButton.onclick = () => {
