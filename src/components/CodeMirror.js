@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-let codemirror = require('codemirror');
+const codemirror = require('codemirror');
 
 export default class CodeMirror extends Component {
   constructor(props) {

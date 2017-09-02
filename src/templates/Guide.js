@@ -9,6 +9,10 @@ import editIcon from '../../static/edit-icon.svg'
 import Link from "../components/Link"
 import Header from '../components/Header'
 
+import { compressToEncodedURIComponent as compress } from 'lz-string'
+
+const codemirror = require('codemirror');
+
 require('../../syntax-highlighting/xcode.css')
 require('./guide.css')
 
@@ -21,7 +25,55 @@ function flattenTreeToPaths(node) {
   )
 }
 
+const runCode = reasonCode => {
+  const [_, ocamlCode] = window.refmt(reasonCode, 'RE', 'implementation', 'ML');
+  const {js_code} = JSON.parse(window.ocaml.compile(ocamlCode));
+  const _console = console;
+  const output = [];
+  console = {
+    log: (...items) => output.push(items)
+  };
+  eval(js_code);
+  console = _console;
+  return output;
+}
+
 export default class Guide extends React.Component {
+  componentDidMount() {
+    document.querySelectorAll('.embedded-playground')
+      .forEach(container => {
+        const editorContainer = container.querySelectorAll('.editor-container')[0];
+        const runButton = container.querySelectorAll('.run-button')[0];
+        const tryButton = container.querySelectorAll('.try-button')[0];
+        const outputContainer = container.querySelectorAll('.output')[0];
+
+        const code = editorContainer.innerText;
+        editorContainer.innerHTML = '';
+
+        const editor = codemirror(editorContainer);
+        editor.setValue(code)
+
+        runButton.onclick = () => {
+          outputContainer.classList.remove('active');
+          outputContainer.classList.add('active');
+          outputContainer.innerText = 'Working...';
+          const code = editor.getValue();
+          const output = runCode(code);
+          outputContainer.innerText = '';
+          output.forEach(item => {
+            const el = document.createElement('div');
+            el.innerText = item.map(JSON.stringify).join (' ');
+            outputContainer.appendChild(el);
+          });
+        };
+
+        tryButton.onclick = () => {
+          const code = editor.getValue();
+          location.href = `/try?reason=${compress(code)}`;
+        }
+      });
+  }
+
   renderSequenceLinks() {
     const {
       allFile,
@@ -93,7 +145,11 @@ export default class Guide extends React.Component {
     const {section, sectionTitle} = this.props.pathContext
     const {allFile, file: {relativePath, childMarkdownRemark: {frontmatter: {title}, html}}} = this.props.data
     return <div>
-      <Helmet title={title} />
+      <Helmet title={title}>
+        <script async src={__PATH_PREFIX__ + '/stdlibBundle.js'} />
+        <script async src={__PATH_PREFIX__ + '/bs.js'} />
+        <script async src={__PATH_PREFIX__ + '/refmt.js'} />
+      </Helmet>
       <Section backgroundColor={accent} css={{color: 'white'}}>
         <Header inverted />
         <div css={{alignItems: 'center'}}>
