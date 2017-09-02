@@ -38,8 +38,9 @@ const runCode = reasonCode => {
   return output;
 }
 
-export default class Guide extends React.Component {
-  componentDidMount() {
+class MarkdownContainer extends React.Component {
+  initPlaygrounds = () => {
+    console.log('update');
     document.querySelectorAll('.embedded-playground')
       .forEach(container => {
         const editorContainer = container.querySelectorAll('.editor-container')[0];
@@ -74,6 +75,20 @@ export default class Guide extends React.Component {
       });
   }
 
+  componentDidUpdate() {
+    this.initPlaygrounds();
+  }
+
+  componentDidMount() {
+    this.initPlaygrounds();
+  }
+
+  render() {
+    return <div className="markdown-content" dangerouslySetInnerHTML={{__html: this.props.html}} />
+  }
+}
+
+export default class Guide extends React.Component {
   renderSequenceLinks() {
     const {
       allFile,
@@ -123,7 +138,7 @@ export default class Guide extends React.Component {
       contents = <Companies />
       edit = editUrl('community/companies.js')
     } else {
-      contents = <div className="markdown-content" dangerouslySetInnerHTML={{__html: html}} />
+      contents = <MarkdownContainer html={html} />
       edit = editUrl(relativePath)
     }
     return <div css={styles.main}>
