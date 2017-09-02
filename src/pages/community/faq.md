@@ -28,7 +28,7 @@ See [here](/guide/javascript). Reason's a syntax for OCaml and supports all its 
 * Elm has better error messages, though Reason is closing in fast.
 * BuckleScript has a very simple, direct and flexible FFI system, and generates highly readable js code, enabling gradual adoption and taking advantage of the full npm ecosystem. Elm's approach is more strict, emphasizing safety and as a consequence has an FFI system that is comparatively involved.
 * Elm is pure, while Reason is "pragmatic" (take that as you wish :)).
-* OCaml has had 25 or so years to mature, and has an active academic base of contributors that keep it close to the forefront of progamming langauge development, while Elm is relatively new and unstable, but moves faster.
+* OCaml has had 25 or so years to mature, and has an active academic base of contributors that keep it close to the forefront of progamming langauge development, while Elm is relatively new and unstable, but moves faster and has less legacy cruft.
 * Reason has first-class support for React, while Elm is focused solely on "The Elm Architecture" (TEA). Reason does however also have [a TEA implementation](https://github.com/OvermindDL1/bucklescript-tea) that does a surprisingly good job of mimicing its muse.
 
 #### How does Reason (and BuckleScript) compare to PureScript
