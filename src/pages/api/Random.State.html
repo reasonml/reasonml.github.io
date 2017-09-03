@@ -5,42 +5,42 @@
 
 <pre><span class="keyword">module</span> State: sig .. end</pre><hr width="100%">
 
-<pre><span class="keyword">type</span> t;
+<pre id="TYPEt"><span class="keyword">type</span> t;
 </pre>
 <div class="info ">
 The type of PRNG states.<br>
 </div>
 
 
-<pre><span class="keyword">let</span> make: array int =&gt; t;
+<pre id="VALmake"><span class="keyword">let</span> make: array int =&gt; t;
 </pre><div class="info ">
 Create a new state and initialize it with the given seed.<br>
 </div>
 
-<pre><span class="keyword">let</span> make_self_init: unit =&gt; t;
+<pre id="VALmake_self_init"><span class="keyword">let</span> make_self_init: unit =&gt; t;
 </pre><div class="info ">
 Create a new state and initialize it with a system-dependent
       low-entropy seed.<br>
 </div>
 
-<pre><span class="keyword">let</span> copy: t =&gt; t;
+<pre id="VALcopy"><span class="keyword">let</span> copy: t =&gt; t;
 </pre><div class="info ">
 Return a copy of the given state.<br>
 </div>
 
-<pre><span class="keyword">let</span> bits: t =&gt; int;
+<pre id="VALbits"><span class="keyword">let</span> bits: t =&gt; int;
 </pre>
-<pre><span class="keyword">let</span> int: t =&gt; int =&gt; int;
+<pre id="VALint"><span class="keyword">let</span> int: t =&gt; int =&gt; int;
 </pre>
-<pre><span class="keyword">let</span> int32: t =&gt; Int32.t =&gt; Int32.t;
+<pre id="VALint32"><span class="keyword">let</span> int32: t =&gt; Int32.t =&gt; Int32.t;
 </pre>
-<pre><span class="keyword">let</span> nativeint: t =&gt; Nativeint.t =&gt; Nativeint.t;
+<pre id="VALnativeint"><span class="keyword">let</span> nativeint: t =&gt; Nativeint.t =&gt; Nativeint.t;
 </pre>
-<pre><span class="keyword">let</span> int64: t =&gt; Int64.t =&gt; Int64.t;
+<pre id="VALint64"><span class="keyword">let</span> int64: t =&gt; Int64.t =&gt; Int64.t;
 </pre>
-<pre><span class="keyword">let</span> float: t =&gt; float =&gt; float;
+<pre id="VALfloat"><span class="keyword">let</span> float: t =&gt; float =&gt; float;
 </pre>
-<pre><span class="keyword">let</span> bool: t =&gt; bool;
+<pre id="VALbool"><span class="keyword">let</span> bool: t =&gt; bool;
 </pre><div class="info ">
 These functions are the same as the basic functions, except that they
       use (and update) the given PRNG state instead of the default one.<br>

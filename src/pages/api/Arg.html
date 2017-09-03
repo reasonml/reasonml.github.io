@@ -179,23 +179,23 @@ The concrete type describing the behavior associated
 </div>
 
 
-<pre><span class="keyword">type</span> key = string;
+<pre id="TYPEkey"><span class="keyword">type</span> key = string;
 </pre>
 
 
-<pre><span class="keyword">type</span> doc = string;
+<pre id="TYPEdoc"><span class="keyword">type</span> doc = string;
 </pre>
 
 
-<pre><span class="keyword">type</span> usage_msg = string;
+<pre id="TYPEusage_msg"><span class="keyword">type</span> usage_msg = string;
 </pre>
 
 
-<pre><span class="keyword">type</span> anon_fun = string =&gt; unit;
+<pre id="TYPEanon_fun"><span class="keyword">type</span> anon_fun = string =&gt; unit;
 </pre>
 
 
-<pre><span class="keyword">let</span> parse: list (key, spec, doc) =&gt; anon_fun =&gt; usage_msg =&gt; unit;
+<pre id="VALparse"><span class="keyword">let</span> parse: list (key, spec, doc) =&gt; anon_fun =&gt; usage_msg =&gt; unit;
 </pre><div class="info ">
 <code class="code">Arg.parse speclist anon_fun usage_msg</code> parses the command line.
     <code class="code">speclist</code> is a list of triples <code class="code">(key, spec, doc)</code>.
@@ -227,7 +227,7 @@ The concrete type describing the behavior associated
     by specifying your own <code class="code">-help</code> and <code class="code">--help</code> options in <code class="code">speclist</code>.<br>
 </p></div>
 
-<pre><span class="keyword">let</span> parse_dynamic: Pervasives.ref (list (key, spec, doc)) =&gt; anon_fun =&gt; usage_msg =&gt; unit;
+<pre id="VALparse_dynamic"><span class="keyword">let</span> parse_dynamic: Pervasives.ref (list (key, spec, doc)) =&gt; anon_fun =&gt; usage_msg =&gt; unit;
 </pre><div class="info ">
 Same as <a href="Arg.html#VALparse"><code class="code">Arg.parse</code></a>, except that the <code class="code">speclist</code> argument is a reference
     and may be updated during the parsing. A typical use for this feature
@@ -238,7 +238,7 @@ Same as <a href="Arg.html#VALparse"><code class="code">Arg.parse</code></a>, exc
 <br>
 </div>
 
-<pre><span class="keyword">let</span> parse_argv:
+<pre id="VALparse_argv"><span class="keyword">let</span> parse_argv:
   current::Pervasives.ref int? =&gt;
   array string =&gt;
   list (key, spec, doc) =&gt;
@@ -257,7 +257,7 @@ Same as <a href="Arg.html#VALparse"><code class="code">Arg.parse</code></a>, exc
   as argument.<br>
 </div>
 
-<pre><span class="keyword">let</span> parse_argv_dynamic:
+<pre id="VALparse_argv_dynamic"><span class="keyword">let</span> parse_argv_dynamic:
   current::Pervasives.ref int? =&gt;
   array string =&gt;
   Pervasives.ref (list (key, spec, doc)) =&gt;
@@ -270,13 +270,13 @@ Same as <a href="Arg.html#VALparse_argv"><code class="code">Arg.parse_argv</code
     See <a href="Arg.html#VALparse_dynamic"><code class="code">Arg.parse_dynamic</code></a>.<br>
 </div>
 
-<pre><span class="keyword">exception</span> Help string;
+<pre id="EXCEPTIONHelp"><span class="keyword">exception</span> Help string;
 </pre>
 <div class="info ">
 Raised by <code class="code">Arg.parse_argv</code> when the user asks for help.<br>
 </div>
 
-<pre><span class="keyword">exception</span> Bad string;
+<pre id="EXCEPTIONBad"><span class="keyword">exception</span> Bad string;
 </pre>
 <div class="info ">
 Functions in <code class="code">spec</code> or <code class="code">anon_fun</code> can raise <code class="code">Arg.Bad</code> with an error
@@ -284,7 +284,7 @@ Functions in <code class="code">spec</code> or <code class="code">anon_fun</code
     <code class="code">Arg.Bad</code> is also raised by <code class="code">Arg.parse_argv</code> in case of an error.<br>
 </div>
 
-<pre><span class="keyword">let</span> usage: list (key, spec, doc) =&gt; usage_msg =&gt; unit;
+<pre id="VALusage"><span class="keyword">let</span> usage: list (key, spec, doc) =&gt; usage_msg =&gt; unit;
 </pre><div class="info ">
 <code class="code">Arg.usage speclist usage_msg</code> prints to standard error
     an error message that includes the list of valid options.  This is
@@ -292,13 +292,13 @@ Functions in <code class="code">spec</code> or <code class="code">anon_fun</code
     <code class="code">speclist</code> and <code class="code">usage_msg</code> are the same as for <code class="code">Arg.parse</code>.<br>
 </div>
 
-<pre><span class="keyword">let</span> usage_string: list (key, spec, doc) =&gt; usage_msg =&gt; string;
+<pre id="VALusage_string"><span class="keyword">let</span> usage_string: list (key, spec, doc) =&gt; usage_msg =&gt; string;
 </pre><div class="info ">
 Returns the message that would have been printed by <a href="Arg.html#VALusage"><code class="code">Arg.usage</code></a>,
     if provided with the same parameters.<br>
 </div>
 
-<pre><span class="keyword">let</span> align: limit::int? =&gt; list (key, spec, doc) =&gt; list (key, spec, doc);
+<pre id="VALalign"><span class="keyword">let</span> align: limit::int? =&gt; list (key, spec, doc) =&gt; list (key, spec, doc);
 </pre><div class="info ">
 Align the documentation strings by inserting spaces at the first
     space, according to the length of the keyword.  Use a
@@ -309,7 +309,7 @@ Align the documentation strings by inserting spaces at the first
 <div class="param_info"><code class="code">limit</code> : options with keyword and message longer than
     <code class="code">limit</code> will not be used to compute the alignement.</div>
 
-<pre><span class="keyword">let</span> current: Pervasives.ref int;
+<pre id="VALcurrent"><span class="keyword">let</span> current: Pervasives.ref int;
 </pre><div class="info ">
 Position (in <a href="Sys.html#VALargv"><code class="code">Sys.argv</code></a>) of the argument being processed.  You can
     change this value, e.g. to force <a href="Arg.html#VALparse"><code class="code">Arg.parse</code></a> to skip some arguments.

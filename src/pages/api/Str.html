@@ -12,14 +12,14 @@ Regular expressions and high-level string processing<br>
 <br>
 <h6 id="6_Regularexpressions">Regular expressions</h6><br>
 
-<pre><span class="keyword">type</span> regexp;
+<pre id="TYPEregexp"><span class="keyword">type</span> regexp;
 </pre>
 <div class="info ">
 The type of compiled regular expressions.<br>
 </div>
 
 
-<pre><span class="keyword">let</span> regexp: string =&gt; regexp;
+<pre id="VALregexp"><span class="keyword">let</span> regexp: string =&gt; regexp;
 </pre><div class="info ">
 Compile a regular expression. The following constructs are
     recognized:<ul>
@@ -65,26 +65,26 @@ Compile a regular expression. The following constructs are
    need to write four backslash characters: <code class="code">Str.regexp &quot;\\\\&quot;</code>.<br>
 </p></div>
 
-<pre><span class="keyword">let</span> regexp_case_fold: string =&gt; regexp;
+<pre id="VALregexp_case_fold"><span class="keyword">let</span> regexp_case_fold: string =&gt; regexp;
 </pre><div class="info ">
 Same as <code class="code">regexp</code>, but the compiled expression will match text
     in a case-insensitive way: uppercase and lowercase letters will
     be considered equivalent.<br>
 </div>
 
-<pre><span class="keyword">let</span> quote: string =&gt; string;
+<pre id="VALquote"><span class="keyword">let</span> quote: string =&gt; string;
 </pre><div class="info ">
 <code class="code">Str.quote s</code> returns a regexp string that matches exactly
    <code class="code">s</code> and nothing else.<br>
 </div>
 
-<pre><span class="keyword">let</span> regexp_string: string =&gt; regexp;
+<pre id="VALregexp_string"><span class="keyword">let</span> regexp_string: string =&gt; regexp;
 </pre><div class="info ">
 <code class="code">Str.regexp_string s</code> returns a regular expression
    that matches exactly <code class="code">s</code> and nothing else.<br>
 </div>
 
-<pre><span class="keyword">let</span> regexp_string_case_fold: string =&gt; regexp;
+<pre id="VALregexp_string_case_fold"><span class="keyword">let</span> regexp_string_case_fold: string =&gt; regexp;
 </pre><div class="info ">
 <code class="code">Str.regexp_string_case_fold</code> is similar to <a href="Str.html#VALregexp_string"><code class="code">Str.regexp_string</code></a>,
    but the regexp matches in a case-insensitive way.<br>
@@ -92,14 +92,14 @@ Same as <code class="code">regexp</code>, but the compiled expression will match
 <br>
 <h6 id="6_Stringmatchingandsearching">String matching and searching</h6><br>
 
-<pre><span class="keyword">let</span> string_match: regexp =&gt; string =&gt; int =&gt; bool;
+<pre id="VALstring_match"><span class="keyword">let</span> string_match: regexp =&gt; string =&gt; int =&gt; bool;
 </pre><div class="info ">
 <code class="code">string_match r s start</code> tests whether a substring of <code class="code">s</code> that
    starts at position <code class="code">start</code> matches the regular expression <code class="code">r</code>.
    The first character of a string has position <code class="code">0</code>, as usual.<br>
 </div>
 
-<pre><span class="keyword">let</span> search_forward: regexp =&gt; string =&gt; int =&gt; int;
+<pre id="VALsearch_forward"><span class="keyword">let</span> search_forward: regexp =&gt; string =&gt; int =&gt; int;
 </pre><div class="info ">
 <code class="code">search_forward r s start</code> searches the string <code class="code">s</code> for a substring
    matching the regular expression <code class="code">r</code>. The search starts at position
@@ -109,7 +109,7 @@ Same as <code class="code">regexp</code>, but the compiled expression will match
 <b>Raises</b> <code>Not_found</code> if no substring matches.<br>
 </div>
 
-<pre><span class="keyword">let</span> search_backward: regexp =&gt; string =&gt; int =&gt; int;
+<pre id="VALsearch_backward"><span class="keyword">let</span> search_backward: regexp =&gt; string =&gt; int =&gt; int;
 </pre><div class="info ">
 <code class="code">search_backward r s last</code> searches the string <code class="code">s</code> for a
   substring matching the regular expression <code class="code">r</code>. The search first
@@ -119,14 +119,14 @@ Same as <code class="code">regexp</code>, but the compiled expression will match
 <b>Raises</b> <code>Not_found</code> if no substring matches.<br>
 </div>
 
-<pre><span class="keyword">let</span> string_partial_match: regexp =&gt; string =&gt; int =&gt; bool;
+<pre id="VALstring_partial_match"><span class="keyword">let</span> string_partial_match: regexp =&gt; string =&gt; int =&gt; bool;
 </pre><div class="info ">
 Similar to <a href="Str.html#VALstring_match"><code class="code">Str.string_match</code></a>, but also returns true if
    the argument string is a prefix of a string that matches.
    This includes the case of a true complete match.<br>
 </div>
 
-<pre><span class="keyword">let</span> matched_string: string =&gt; string;
+<pre id="VALmatched_string"><span class="keyword">let</span> matched_string: string =&gt; string;
 </pre><div class="info ">
 <code class="code">matched_string s</code> returns the substring of <code class="code">s</code> that was matched
    by the last call to one of the following matching or searching
@@ -159,14 +159,14 @@ Similar to <a href="Str.html#VALstring_match"><code class="code">Str.string_matc
    that was passed to the matching or searching function.<br>
 </p></div>
 
-<pre><span class="keyword">let</span> match_beginning: unit =&gt; int;
+<pre id="VALmatch_beginning"><span class="keyword">let</span> match_beginning: unit =&gt; int;
 </pre><div class="info ">
 <code class="code">match_beginning()</code> returns the position of the first character
    of the substring that was matched by the last call to a matching
    or searching function (see <a href="Str.html#VALmatched_string"><code class="code">Str.matched_string</code></a> for details).<br>
 </div>
 
-<pre><span class="keyword">let</span> match_end: unit =&gt; int;
+<pre id="VALmatch_end"><span class="keyword">let</span> match_end: unit =&gt; int;
 </pre><div class="info ">
 <code class="code">match_end()</code> returns the position of the character following the
    last character of the substring that was matched by the last call
@@ -174,7 +174,7 @@ Similar to <a href="Str.html#VALstring_match"><code class="code">Str.string_matc
    details).<br>
 </div>
 
-<pre><span class="keyword">let</span> matched_group: int =&gt; string =&gt; string;
+<pre id="VALmatched_group"><span class="keyword">let</span> matched_group: int =&gt; string =&gt; string;
 </pre><div class="info ">
 <code class="code">matched_group n s</code> returns the substring of <code class="code">s</code> that was matched
    by the <code class="code">n</code>th group <code class="code">\(...\)</code> of the regular expression that was
@@ -190,7 +190,7 @@ Similar to <a href="Str.html#VALstring_match"><code class="code">Str.string_matc
    because the first group itself was not matched.<br>
 </div>
 
-<pre><span class="keyword">let</span> group_beginning: int =&gt; int;
+<pre id="VALgroup_beginning"><span class="keyword">let</span> group_beginning: int =&gt; int;
 </pre><div class="info ">
 <code class="code">group_beginning n</code> returns the position of the first character
    of the substring that was matched by the <code class="code">n</code>th group of
@@ -203,7 +203,7 @@ Similar to <a href="Str.html#VALstring_match"><code class="code">Str.string_matc
 </ul>
 </div>
 
-<pre><span class="keyword">let</span> group_end: int =&gt; int;
+<pre id="VALgroup_end"><span class="keyword">let</span> group_end: int =&gt; int;
 </pre><div class="info ">
 <code class="code">group_end n</code> returns
    the position of the character following the last character of
@@ -219,7 +219,7 @@ Similar to <a href="Str.html#VALstring_match"><code class="code">Str.string_matc
 <br>
 <h6 id="6_Replacement">Replacement</h6><br>
 
-<pre><span class="keyword">let</span> global_replace: regexp =&gt; string =&gt; string =&gt; string;
+<pre id="VALglobal_replace"><span class="keyword">let</span> global_replace: regexp =&gt; string =&gt; string =&gt; string;
 </pre><div class="info ">
 <code class="code">global_replace regexp templ s</code> returns a string identical to <code class="code">s</code>,
    except that all substrings of <code class="code">s</code> that match <code class="code">regexp</code> have been
@@ -229,13 +229,13 @@ Similar to <a href="Str.html#VALstring_match"><code class="code">Str.string_matc
    <code class="code">\0</code> stands for the text matched by the whole regular expression.<br>
 </div>
 
-<pre><span class="keyword">let</span> replace_first: regexp =&gt; string =&gt; string =&gt; string;
+<pre id="VALreplace_first"><span class="keyword">let</span> replace_first: regexp =&gt; string =&gt; string =&gt; string;
 </pre><div class="info ">
 Same as <a href="Str.html#VALglobal_replace"><code class="code">Str.global_replace</code></a>, except that only the first substring
    matching the regular expression is replaced.<br>
 </div>
 
-<pre><span class="keyword">let</span> global_substitute: regexp =&gt; (string =&gt; string) =&gt; string =&gt; string;
+<pre id="VALglobal_substitute"><span class="keyword">let</span> global_substitute: regexp =&gt; (string =&gt; string) =&gt; string =&gt; string;
 </pre><div class="info ">
 <code class="code">global_substitute regexp subst s</code> returns a string identical
    to <code class="code">s</code>, except that all substrings of <code class="code">s</code> that match <code class="code">regexp</code>
@@ -244,13 +244,13 @@ Same as <a href="Str.html#VALglobal_replace"><code class="code">Str.global_repla
    and receives <code class="code">s</code> (the whole text) as argument.<br>
 </div>
 
-<pre><span class="keyword">let</span> substitute_first: regexp =&gt; (string =&gt; string) =&gt; string =&gt; string;
+<pre id="VALsubstitute_first"><span class="keyword">let</span> substitute_first: regexp =&gt; (string =&gt; string) =&gt; string =&gt; string;
 </pre><div class="info ">
 Same as <a href="Str.html#VALglobal_substitute"><code class="code">Str.global_substitute</code></a>, except that only the first substring
    matching the regular expression is replaced.<br>
 </div>
 
-<pre><span class="keyword">let</span> replace_matched: string =&gt; string =&gt; string;
+<pre id="VALreplace_matched"><span class="keyword">let</span> replace_matched: string =&gt; string =&gt; string;
 </pre><div class="info ">
 <code class="code">replace_matched repl s</code> returns the replacement text <code class="code">repl</code>
    in which <code class="code">\1</code>, <code class="code">\2</code>, etc. have been replaced by the text
@@ -263,7 +263,7 @@ Same as <a href="Str.html#VALglobal_substitute"><code class="code">Str.global_su
 <br>
 <h6 id="6_Splitting">Splitting</h6><br>
 
-<pre><span class="keyword">let</span> split: regexp =&gt; string =&gt; list string;
+<pre id="VALsplit"><span class="keyword">let</span> split: regexp =&gt; string =&gt; list string;
 </pre><div class="info ">
 <code class="code">split r s</code> splits <code class="code">s</code> into substrings, taking as delimiters
    the substrings that match <code class="code">r</code>, and returns the list of substrings.
@@ -272,13 +272,13 @@ Same as <a href="Str.html#VALglobal_substitute"><code class="code">Str.global_su
    beginning or at the end of the string is ignored.<br>
 </div>
 
-<pre><span class="keyword">let</span> bounded_split: regexp =&gt; string =&gt; int =&gt; list string;
+<pre id="VALbounded_split"><span class="keyword">let</span> bounded_split: regexp =&gt; string =&gt; int =&gt; list string;
 </pre><div class="info ">
 Same as <a href="Str.html#VALsplit"><code class="code">Str.split</code></a>, but splits into at most <code class="code">n</code> substrings,
    where <code class="code">n</code> is the extra integer parameter.<br>
 </div>
 
-<pre><span class="keyword">let</span> split_delim: regexp =&gt; string =&gt; list string;
+<pre id="VALsplit_delim"><span class="keyword">let</span> split_delim: regexp =&gt; string =&gt; list string;
 </pre><div class="info ">
 Same as <a href="Str.html#VALsplit"><code class="code">Str.split</code></a> but occurrences of the
    delimiter at the beginning and at the end of the string are
@@ -288,7 +288,7 @@ Same as <a href="Str.html#VALsplit"><code class="code">Str.split</code></a> but 
    arguments returns <code class="code">[&quot;abc&quot;]</code>.<br>
 </div>
 
-<pre><span class="keyword">let</span> bounded_split_delim: regexp =&gt; string =&gt; int =&gt; list string;
+<pre id="VALbounded_split_delim"><span class="keyword">let</span> bounded_split_delim: regexp =&gt; string =&gt; int =&gt; list string;
 </pre><div class="info ">
 Same as <a href="Str.html#VALbounded_split"><code class="code">Str.bounded_split</code></a>, but occurrences of the
    delimiter at the beginning and at the end of the string are
@@ -313,7 +313,7 @@ Same as <a href="Str.html#VALbounded_split"><code class="code">Str.bounded_split
 
 
 
-<pre><span class="keyword">let</span> full_split: regexp =&gt; string =&gt; list split_result;
+<pre id="VALfull_split"><span class="keyword">let</span> full_split: regexp =&gt; string =&gt; list split_result;
 </pre><div class="info ">
 Same as <a href="Str.html#VALsplit_delim"><code class="code">Str.split_delim</code></a>, but returns
    the delimiters as well as the substrings contained between
@@ -323,7 +323,7 @@ Same as <a href="Str.html#VALsplit_delim"><code class="code">Str.split_delim</co
    <code class="code">[Delim &quot;{&quot;; Text &quot;ab&quot;; Delim &quot;}&quot;]</code>.<br>
 </div>
 
-<pre><span class="keyword">let</span> bounded_full_split: regexp =&gt; string =&gt; int =&gt; list split_result;
+<pre id="VALbounded_full_split"><span class="keyword">let</span> bounded_full_split: regexp =&gt; string =&gt; int =&gt; list split_result;
 </pre><div class="info ">
 Same as <a href="Str.html#VALbounded_split_delim"><code class="code">Str.bounded_split_delim</code></a>, but returns
    the delimiters as well as the substrings contained between
@@ -333,27 +333,27 @@ Same as <a href="Str.html#VALbounded_split_delim"><code class="code">Str.bounded
 <br>
 <h6 id="6_Extractingsubstrings">Extracting substrings</h6><br>
 
-<pre><span class="keyword">let</span> string_before: string =&gt; int =&gt; string;
+<pre id="VALstring_before"><span class="keyword">let</span> string_before: string =&gt; int =&gt; string;
 </pre><div class="info ">
 <code class="code">string_before s n</code> returns the substring of all characters of <code class="code">s</code>
    that precede position <code class="code">n</code> (excluding the character at
    position <code class="code">n</code>).<br>
 </div>
 
-<pre><span class="keyword">let</span> string_after: string =&gt; int =&gt; string;
+<pre id="VALstring_after"><span class="keyword">let</span> string_after: string =&gt; int =&gt; string;
 </pre><div class="info ">
 <code class="code">string_after s n</code> returns the substring of all characters of <code class="code">s</code>
    that follow position <code class="code">n</code> (including the character at
    position <code class="code">n</code>).<br>
 </div>
 
-<pre><span class="keyword">let</span> first_chars: string =&gt; int =&gt; string;
+<pre id="VALfirst_chars"><span class="keyword">let</span> first_chars: string =&gt; int =&gt; string;
 </pre><div class="info ">
 <code class="code">first_chars s n</code> returns the first <code class="code">n</code> characters of <code class="code">s</code>.
    This is the same function as <a href="Str.html#VALstring_before"><code class="code">Str.string_before</code></a>.<br>
 </div>
 
-<pre><span class="keyword">let</span> last_chars: string =&gt; int =&gt; string;
+<pre id="VALlast_chars"><span class="keyword">let</span> last_chars: string =&gt; int =&gt; string;
 </pre><div class="info ">
 <code class="code">last_chars s n</code> returns the last <code class="code">n</code> characters of <code class="code">s</code>.<br>
 </div>
