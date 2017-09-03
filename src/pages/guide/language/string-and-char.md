@@ -48,7 +48,7 @@ let world = {js|世界|js}; /* Supports Unicode characters */
 let helloWorld = {j|你好，$world|j}; /* Supports Unicode and interpolation variables */
 ```
 
-BuckleScript's special pre-processor can then look for such `js and `j` marker around the string and transforms it into something else.
+BuckleScript's special pre-processor can then look for such `js` and `j` markers around the string and transforms it into something else.
 
 #### Usage
 
@@ -102,7 +102,7 @@ let firstLetterOfAlphabet = 'a';
 
 #### Tips & Tricks
 
-A character [compiles to an integer ranging from 0 to 255](https://bucklescript.github.io/bucklescript/js-demo/?gist=7f6d24873a48fe03fa037c7c47848a4b), for extra speed. You can also pattern-match (covered later) on it:
+A character [compiles to an integer ranging from 0 to 255](https://reasonml.github.io/try/?reason=DYUwLgBAhhC8EHIoKA), for extra speed. You can also pattern-match (covered later) on it:
 
 ```reason
 fun isVowel theChar => switch theChar {
