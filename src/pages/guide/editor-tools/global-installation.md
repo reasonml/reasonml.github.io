@@ -34,7 +34,7 @@ If your editor isn't behaving as expected with the above install, do the followi
 which ocamlmerlin refmt ocamlmerlin-reason
 ```
 
-It should spit out three paths that contain the word `reason-cli`.
+It should spit out three paths that contain the word `reason-cli`. Note: during `npm/yarn` installation, the `node_modules/reason-cli` paths may be symlinked to `/usr/local/bin` (if so, the latter will display).
 
 ```
 ocamlmerlin -version
