@@ -179,7 +179,7 @@ external glob : string => (Js.nullable error => array string => unit) => unit = 
 external sync : string => array string = "" [@@bs.val] [@@bs.module "glob"];
 ```
 
-And the releavnt parts of `package.json`:
+And the relevant parts of `package.json`:
 
 ```js
 {
@@ -187,7 +187,7 @@ And the releavnt parts of `package.json`:
   "version": "0.1.0",
   ...
   "devDependencies": {
-    "bs-platform": "^1.9.0"
+    "bs-platform": "^1.9.1"
   },
   "dependencies": {
     "glob": "^7.1.2"
