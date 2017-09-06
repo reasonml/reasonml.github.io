@@ -172,7 +172,7 @@ If you want to use a library that does not have existing bindings, however, you'
 
 As an example, here's the entire source code of the [`bs.glob`](https://github.com/reasonml-community/bs-glob) bindings (converted to Reason, the original is OCaml):
 
-```ml
+```reason
 type error;
 
 external glob : string => (Js.nullable error => array string => unit) => unit = "" [@@bs.module];
