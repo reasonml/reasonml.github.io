@@ -34,7 +34,7 @@ export default class API extends Component {
             The API docs are work-in-progress; we'll be polishing these gradually!
           </p>
           <p>
-            The API documentation for BuckleScript is located <a className="api-manual-link" href="https://bucklescript.github.io/bucklescript/api/index.html"><here</a>.
+            If you're targeting JavaScript, the <a className="api-manual-link" href="https://bucklescript.github.io/bucklescript/api/index.html">API docs for BuckleScript</a> includes all of below, plus JS-specific APIs.
           </p>
         </Section>
         <div css={{alignItems: 'center'}}>
