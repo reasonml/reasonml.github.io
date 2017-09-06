@@ -6,11 +6,11 @@ const examples = [{
   img: require('./example-screenshots/reason-maze.png'),
 }, {
   title: 'Mareo : Mario + Reason',
-  url: 'https://github.com/chenglou/Mareo',
+  url: 'https://github.com/reasonml-community/Mareo',
   img: require('./example-screenshots/mareo.png'),
 }, {
   title: 'ReasonReact Hacker News',
-  url: 'https://github.com/jsdf/reason-react-hacker-news',
+  url: 'https://github.com/reasonml-community/reason-react-hacker-news',
   img: require('./example-screenshots/hacker-news.png'),
 }, {
   title: 'Reason snake',

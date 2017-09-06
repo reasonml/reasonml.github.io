@@ -33,6 +33,9 @@ export default class API extends Component {
             Vous trouverez ci-dessous l'API de la librairie standard OCaml. Elle est directement copiée du <a className="api-manual-link" href="http://caml.inria.fr/pub/docs/manual-ocaml/libref/index.html">manuel OCaml</a>, formatée en syntaxe Reason et stylisée en conséquence.
             Les éléments de cette API sont en work-in-progress. Nous les améliorerons progressivement !
           </p>
+          <p>
+            Si vous visez le JavaScript, la <a className="api-manual-link" href="https://bucklescript.github.io/bucklescript/api/index.html">doc API de BuckleScript</a> inclue tout ce qui suit, plus des APIs spécifiques au JavaScript.
+          </p>
         </Section>
         <div css={{alignItems: 'center'}}>
           <div 

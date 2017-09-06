@@ -15,7 +15,7 @@ System interface.
 </p></div>
 <hr width="100%">
 
-<pre><span class="keyword">let</span> argv: array string;
+<pre id="VALargv"><span class="keyword">let</span> argv: array string;
 </pre><div class="info ">
 The command line arguments given to the process.
    The first element is the command name used to invoke the program.
@@ -23,17 +23,17 @@ The command line arguments given to the process.
    given to the program.<br>
 </div>
 
-<pre><span class="keyword">let</span> executable_name: string;
+<pre id="VALexecutable_name"><span class="keyword">let</span> executable_name: string;
 </pre><div class="info ">
 The name of the file containing the executable currently running.<br>
 </div>
 
-<pre><span class="keyword">let</span> file_exists: string =&gt; bool;
+<pre id="VALfile_exists"><span class="keyword">let</span> file_exists: string =&gt; bool;
 </pre><div class="info ">
 Test if a file with the given name exists.<br>
 </div>
 
-<pre><span class="keyword">let</span> is_directory: string =&gt; bool;
+<pre id="VALis_directory"><span class="keyword">let</span> is_directory: string =&gt; bool;
 </pre><div class="info ">
 Returns <code class="code">true</code> if the given name refers to a directory,
     <code class="code">false</code> if it refers to another kind of file.
@@ -41,12 +41,12 @@ Returns <code class="code">true</code> if the given name refers to a directory,
 <b>Since</b> 3.10.0<br>
 </div>
 
-<pre><span class="keyword">let</span> remove: string =&gt; unit;
+<pre id="VALremove"><span class="keyword">let</span> remove: string =&gt; unit;
 </pre><div class="info ">
 Remove the given file name from the file system.<br>
 </div>
 
-<pre><span class="keyword">let</span> rename: string =&gt; string =&gt; unit;
+<pre id="VALrename"><span class="keyword">let</span> rename: string =&gt; string =&gt; unit;
 </pre><div class="info ">
 Rename a file. The first argument is the old name and the
    second is the new name. If there is already another file
@@ -54,34 +54,34 @@ Rename a file. The first argument is the old name and the
    exception, depending on your operating system.<br>
 </div>
 
-<pre><span class="keyword">let</span> getenv: string =&gt; string;
+<pre id="VALgetenv"><span class="keyword">let</span> getenv: string =&gt; string;
 </pre><div class="info ">
 Return the value associated to a variable in the process
    environment. Raise <code class="code">Not_found</code> if the variable is unbound.<br>
 </div>
 
-<pre><span class="keyword">let</span> command: string =&gt; int;
+<pre id="VALcommand"><span class="keyword">let</span> command: string =&gt; int;
 </pre><div class="info ">
 Execute the given shell command and return its exit code.<br>
 </div>
 
-<pre><span class="keyword">let</span> time: unit =&gt; float;
+<pre id="VALtime"><span class="keyword">let</span> time: unit =&gt; float;
 </pre><div class="info ">
 Return the processor time, in seconds, used by the program
    since the beginning of execution.<br>
 </div>
 
-<pre><span class="keyword">let</span> chdir: string =&gt; unit;
+<pre id="VALchdir"><span class="keyword">let</span> chdir: string =&gt; unit;
 </pre><div class="info ">
 Change the current working directory of the process.<br>
 </div>
 
-<pre><span class="keyword">let</span> getcwd: unit =&gt; string;
+<pre id="VALgetcwd"><span class="keyword">let</span> getcwd: unit =&gt; string;
 </pre><div class="info ">
 Return the current working directory of the process.<br>
 </div>
 
-<pre><span class="keyword">let</span> readdir: string =&gt; array string;
+<pre id="VALreaddir"><span class="keyword">let</span> readdir: string =&gt; array string;
 </pre><div class="info ">
 Return the names of all files present in the given directory.
    Names denoting the current directory and the parent directory
@@ -92,14 +92,14 @@ Return the names of all files present in the given directory.
    appear in alphabetical order.<br>
 </div>
 
-<pre><span class="keyword">let</span> interactive: Pervasives.ref bool;
+<pre id="VALinteractive"><span class="keyword">let</span> interactive: Pervasives.ref bool;
 </pre><div class="info ">
 This reference is initially set to <code class="code">false</code> in standalone
    programs and to <code class="code">true</code> if the code is being executed under
    the interactive toplevel system <code class="code">ocaml</code>.<br>
 </div>
 
-<pre><span class="keyword">let</span> os_type: string;
+<pre id="VALos_type"><span class="keyword">let</span> os_type: string;
 </pre><div class="info ">
 Operating system currently executing the OCaml program. One of<ul>
 <li> <code class="code">&quot;Unix&quot;</code> (for all Unix versions, including Linux and Mac OS X),</li>
@@ -109,42 +109,42 @@ Operating system currently executing the OCaml program. One of<ul>
 <br>
 </div>
 
-<pre><span class="keyword">let</span> unix: bool;
+<pre id="VALunix"><span class="keyword">let</span> unix: bool;
 </pre><div class="info ">
 True if <code class="code">Sys.os_type = &quot;Unix&quot;</code>.<br>
 <b>Since</b> 4.01.0<br>
 </div>
 
-<pre><span class="keyword">let</span> win32: bool;
+<pre id="VALwin32"><span class="keyword">let</span> win32: bool;
 </pre><div class="info ">
 True if <code class="code">Sys.os_type = &quot;Win32&quot;</code>.<br>
 <b>Since</b> 4.01.0<br>
 </div>
 
-<pre><span class="keyword">let</span> cygwin: bool;
+<pre id="VALcygwin"><span class="keyword">let</span> cygwin: bool;
 </pre><div class="info ">
 True if <code class="code">Sys.os_type = &quot;Cygwin&quot;</code>.<br>
 <b>Since</b> 4.01.0<br>
 </div>
 
-<pre><span class="keyword">let</span> word_size: int;
+<pre id="VALword_size"><span class="keyword">let</span> word_size: int;
 </pre><div class="info ">
 Size of one word on the machine currently executing the OCaml
    program, in bits: 32 or 64.<br>
 </div>
 
-<pre><span class="keyword">let</span> big_endian: bool;
+<pre id="VALbig_endian"><span class="keyword">let</span> big_endian: bool;
 </pre><div class="info ">
 Whether the machine currently executing the Caml program is big-endian.<br>
 <b>Since</b> 4.00.0<br>
 </div>
 
-<pre><span class="keyword">let</span> max_string_length: int;
+<pre id="VALmax_string_length"><span class="keyword">let</span> max_string_length: int;
 </pre><div class="info ">
 Maximum length of strings and byte sequences.<br>
 </div>
 
-<pre><span class="keyword">let</span> max_array_length: int;
+<pre id="VALmax_array_length"><span class="keyword">let</span> max_array_length: int;
 </pre><div class="info ">
 Maximum length of a normal array.  The maximum length of a float
     array is <code class="code">max_array_length/2</code> on 32-bit machines and
@@ -190,7 +190,7 @@ What to do when receiving a signal:<ul>
 </div>
 
 
-<pre><span class="keyword">let</span> signal: int =&gt; signal_behavior =&gt; signal_behavior;
+<pre id="VALsignal"><span class="keyword">let</span> signal: int =&gt; signal_behavior =&gt; signal_behavior;
 </pre><div class="info ">
 Set the behavior of the system on receipt of a given signal.  The
    first argument is the signal number.  Return the behavior
@@ -199,126 +199,126 @@ Set the behavior of the system on receipt of a given signal.  The
    exception is raised.<br>
 </div>
 
-<pre><span class="keyword">let</span> set_signal: int =&gt; signal_behavior =&gt; unit;
+<pre id="VALset_signal"><span class="keyword">let</span> set_signal: int =&gt; signal_behavior =&gt; unit;
 </pre><div class="info ">
 Same as <a href="Sys.html#VALsignal"><code class="code">Sys.signal</code></a> but return value is ignored.<br>
 </div>
 <br>
 <div class="h7" id="7_SignalnumbersforthestandardPOSIXsignals">Signal numbers for the standard POSIX signals.</div><br>
 
-<pre><span class="keyword">let</span> sigabrt: int;
+<pre id="VALsigabrt"><span class="keyword">let</span> sigabrt: int;
 </pre><div class="info ">
 Abnormal termination<br>
 </div>
 
-<pre><span class="keyword">let</span> sigalrm: int;
+<pre id="VALsigalrm"><span class="keyword">let</span> sigalrm: int;
 </pre><div class="info ">
 Timeout<br>
 </div>
 
-<pre><span class="keyword">let</span> sigfpe: int;
+<pre id="VALsigfpe"><span class="keyword">let</span> sigfpe: int;
 </pre><div class="info ">
 Arithmetic exception<br>
 </div>
 
-<pre><span class="keyword">let</span> sighup: int;
+<pre id="VALsighup"><span class="keyword">let</span> sighup: int;
 </pre><div class="info ">
 Hangup on controlling terminal<br>
 </div>
 
-<pre><span class="keyword">let</span> sigill: int;
+<pre id="VALsigill"><span class="keyword">let</span> sigill: int;
 </pre><div class="info ">
 Invalid hardware instruction<br>
 </div>
 
-<pre><span class="keyword">let</span> sigint: int;
+<pre id="VALsigint"><span class="keyword">let</span> sigint: int;
 </pre><div class="info ">
 Interactive interrupt (ctrl-C)<br>
 </div>
 
-<pre><span class="keyword">let</span> sigkill: int;
+<pre id="VALsigkill"><span class="keyword">let</span> sigkill: int;
 </pre><div class="info ">
 Termination (cannot be ignored)<br>
 </div>
 
-<pre><span class="keyword">let</span> sigpipe: int;
+<pre id="VALsigpipe"><span class="keyword">let</span> sigpipe: int;
 </pre><div class="info ">
 Broken pipe<br>
 </div>
 
-<pre><span class="keyword">let</span> sigquit: int;
+<pre id="VALsigquit"><span class="keyword">let</span> sigquit: int;
 </pre><div class="info ">
 Interactive termination<br>
 </div>
 
-<pre><span class="keyword">let</span> sigsegv: int;
+<pre id="VALsigsegv"><span class="keyword">let</span> sigsegv: int;
 </pre><div class="info ">
 Invalid memory reference<br>
 </div>
 
-<pre><span class="keyword">let</span> sigterm: int;
+<pre id="VALsigterm"><span class="keyword">let</span> sigterm: int;
 </pre><div class="info ">
 Termination<br>
 </div>
 
-<pre><span class="keyword">let</span> sigusr1: int;
+<pre id="VALsigusr1"><span class="keyword">let</span> sigusr1: int;
 </pre><div class="info ">
 Application-defined signal 1<br>
 </div>
 
-<pre><span class="keyword">let</span> sigusr2: int;
+<pre id="VALsigusr2"><span class="keyword">let</span> sigusr2: int;
 </pre><div class="info ">
 Application-defined signal 2<br>
 </div>
 
-<pre><span class="keyword">let</span> sigchld: int;
+<pre id="VALsigchld"><span class="keyword">let</span> sigchld: int;
 </pre><div class="info ">
 Child process terminated<br>
 </div>
 
-<pre><span class="keyword">let</span> sigcont: int;
+<pre id="VALsigcont"><span class="keyword">let</span> sigcont: int;
 </pre><div class="info ">
 Continue<br>
 </div>
 
-<pre><span class="keyword">let</span> sigstop: int;
+<pre id="VALsigstop"><span class="keyword">let</span> sigstop: int;
 </pre><div class="info ">
 Stop<br>
 </div>
 
-<pre><span class="keyword">let</span> sigtstp: int;
+<pre id="VALsigtstp"><span class="keyword">let</span> sigtstp: int;
 </pre><div class="info ">
 Interactive stop<br>
 </div>
 
-<pre><span class="keyword">let</span> sigttin: int;
+<pre id="VALsigttin"><span class="keyword">let</span> sigttin: int;
 </pre><div class="info ">
 Terminal read from background process<br>
 </div>
 
-<pre><span class="keyword">let</span> sigttou: int;
+<pre id="VALsigttou"><span class="keyword">let</span> sigttou: int;
 </pre><div class="info ">
 Terminal write from background process<br>
 </div>
 
-<pre><span class="keyword">let</span> sigvtalrm: int;
+<pre id="VALsigvtalrm"><span class="keyword">let</span> sigvtalrm: int;
 </pre><div class="info ">
 Timeout in virtual time<br>
 </div>
 
-<pre><span class="keyword">let</span> sigprof: int;
+<pre id="VALsigprof"><span class="keyword">let</span> sigprof: int;
 </pre><div class="info ">
 Profiling interrupt<br>
 </div>
 
-<pre><span class="keyword">exception</span> Break;
+<pre id="EXCEPTIONBreak"><span class="keyword">exception</span> Break;
 </pre>
 <div class="info ">
 Exception raised on interactive interrupt if <a href="Sys.html#VALcatch_break"><code class="code">Sys.catch_break</code></a>
    is on.<br>
 </div>
 
-<pre><span class="keyword">let</span> catch_break: bool =&gt; unit;
+<pre id="VALcatch_break"><span class="keyword">let</span> catch_break: bool =&gt; unit;
 </pre><div class="info ">
 <code class="code">catch_break</code> governs whether interactive interrupt (ctrl-C)
    terminates the program or raises the <code class="code">Break</code> exception.
@@ -327,7 +327,7 @@ Exception raised on interactive interrupt if <a href="Sys.html#VALcatch_break"><
    terminate the program on user interrupt.<br>
 </div>
 
-<pre><span class="keyword">let</span> ocaml_version: string;
+<pre id="VALocaml_version"><span class="keyword">let</span> ocaml_version: string;
 </pre><div class="info ">
 <code class="code">ocaml_version</code> is the version of OCaml.
     It is a string of the form <code class="code">&quot;major.minor[.patchlevel][+additional-info]&quot;</code>,

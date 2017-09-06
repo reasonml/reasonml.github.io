@@ -34,7 +34,7 @@ Si votre éditeur ne se comporte pas comme prévu avec l'installation ci-dessus,
 which ocamlmerlin refmt ocamlmerlin-reason
 ```
 
-Il devrait renvoyer trois chemins qui contiennent le mot `reason-cli`.
+Il devrait renvoyer trois chemins qui contiennent le mot `reason-cli`. Note : durant l'installation `npm/yarn`, les paths `node_modules/reason-cli` peuvent être symlink à `/usr/local/bin` (ce sera affiché ultérieurement si c'est le cas).
 
 ```
 ocamlmerlin -version

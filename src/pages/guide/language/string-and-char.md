@@ -102,7 +102,7 @@ let firstLetterOfAlphabet = 'a';
 
 #### Conseils & astuces
 
-Un caractère [compile en un integer compris entre 0 et 255](https://bucklescript.github.io/bucklescript/js-demo/?gist=7f6d24873a48fe03fa037c7c47848a4b), par soucis de rapidité. Vous pouvez aussi utilisez le pattern-matching ici (abordé plus tard) :
+Un caractère [compile en un integer compris entre 0 et 255](/try/?reason=DYUwLgBAhhC8EHIoKA), par soucis de rapidité. Vous pouvez aussi utilisez le pattern-matching ici (abordé plus tard) :
 
 ```reason
 fun isVowel theChar => switch theChar {

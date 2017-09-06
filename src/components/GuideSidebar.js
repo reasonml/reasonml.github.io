@@ -2,16 +2,16 @@ import React from 'react'
 import Link from './Link'
 
 import {scale, rhythm, headerFontFamily} from '../utils/typography'
-import {text, accent, dividerLine} from '../utils/colors'
+import {text, accent, dividerLine, gray} from '../utils/colors'
 
 const GuideSidebar = ({props, current, root, search}) => (
   <div css={styles.container}>
     <div css={styles.contents}>
-      <Link css={styles.link} to={search}>
+      <Link css={[styles.link, {display: 'flex'}]} to={search}>
+        Recherche
         <svg css={styles.searchIcon} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 15 15">
           <path fill={text} d="M6.213 12.548C2.783 12.548 0 9.738 0 6.274 0 2.81 2.782 0 6.213 0c3.432 0 6.214 2.81 6.214 6.274 0 1.358-.428 2.616-1.154 3.643L15 13.482 13.576 15l-3.77-3.606c-1.015.727-2.254 1.154-3.593 1.154zm0-2.09c2.288 0 4.143-1.874 4.143-4.184S8.5 2.09 6.213 2.09c-2.287 0-4.142 1.874-4.142 4.184s1.856 4.183 4.143 4.183z"></path>
         </svg>
-        Recherche
       </Link>
       <Node current={current} item={root} root depth={0} />
     </div>
@@ -57,12 +57,14 @@ const phablet = '@media(max-width: 800px)'
 const styles = {
   container: {
     width: rhythm(8),
+    minHeight: '100%',
     padding: '20px',
     [phablet]: {
       ...scale(0),
       width: 'auto',
     },
     fontFamily: headerFontFamily(),
+    background: gray
   },
 
   contents: {
@@ -81,6 +83,7 @@ const styles = {
   link: {
     textDecoration: 'none',
     color: 'currentColor',
+    ...scale(-0.2),
     [phablet]: {
       padding: `${rhythm(1/4)}`
     },
@@ -98,19 +101,16 @@ const styles = {
 
   link1: {
     fontWeight: 'bold',
-    ...scale(0),
-    marginTop: '6px',
-    marginBottom: '6px',
+    marginTop: '1em',
+    marginBottom: '.25em',
   },
 
   children: {
-    ...scale(-0.2),
     listStyle: 'none',
     margin: 0,
     padding: 0,
-    paddingLeft: rhythm(.5),
+    paddingLeft: rhythm(1/3),
     marginLeft: 0,
-    borderLeft: '1px solid ' + dividerLine,
   },
 
   rootChildren: {
@@ -122,7 +122,8 @@ const styles = {
   searchIcon: {
     width: '15px',
     height: '15px',
-    marginRight: '5px',
+    marginLeft: 'auto',
+    alignSelf: 'center'
   }
 }
 

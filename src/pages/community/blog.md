@@ -46,7 +46,7 @@ Voici le même warning, dans l'ancienne version, noyé au milieu d'autres ouputs
 
 **Les nouvelles erreurs peuvent être activées en ajoutant `"bsc-flags": ["-bs-super-errors"]` à votre bsconfig.json**, [comme ceci](https://github.com/reasonml-community/reason-react-example/blob/6dc15bf5fbeeb184c99acb063f7644a0d14b12f4/bsconfig.json#L3). Elles sont aussi disponibles pour [bsb-native](https://github.com/bsansouci/bsb-native). Fidèle à notre vision de la stack, elles sont rapides, simples à configurer et robustes.
 
-**One more thing** : nous avons également intégré les pièges communs de [ReasonReact](https://reasonml.github.io/reason-react/) dans ces messages, lorsqu'ils sont applicables.
+**One more thing** : nous avons également intégré les pièges communs de [ReasonReact](//reasonml.github.io/reason-react/) dans ces messages, lorsqu'ils sont applicables.
 
 <div style="width:747px">
   <img alt="reason-react" src="https://user-images.githubusercontent.com/1909539/29712284-f1013bb2-894d-11e7-9596-1cca54d5c331.png" />
