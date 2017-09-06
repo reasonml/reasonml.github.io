@@ -175,7 +175,7 @@ As an example, here's the entire source code of the [`bs.glob`](https://github.c
 ```ml
 type error;
 
-external glob : string => (Js.null error => array string => unit) => unit = "" [@@bs.module];
+external glob : string => (Js.nullable error => array string => unit) => unit = "" [@@bs.module];
 external sync : string => array string = "" [@@bs.val] [@@bs.module "glob"];
 ```
 
