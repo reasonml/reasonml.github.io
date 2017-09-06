@@ -102,7 +102,7 @@ let firstLetterOfAlphabet = 'a';
 
 #### Tips & Tricks
 
-A character [compiles to an integer ranging from 0 to 255](https://reasonml.github.io/try/?reason=DYUwLgBAhhC8EHIoKA), for extra speed. You can also pattern-match (covered later) on it:
+A character [compiles to an integer ranging from 0 to 255](/try/?reason=DYUwLgBAhhC8EHIoKA), for extra speed. You can also pattern-match (covered later) on it:
 
 ```reason
 fun isVowel theChar => switch theChar {
