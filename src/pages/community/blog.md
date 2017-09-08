@@ -23,7 +23,9 @@ Messenger.com is the web version of Facebook Messenger; we also share code with 
 
 We believe in iterating on/alongside product teams in order to create the best infra. The product teams' and open source folks' feedback has changed our strategy a few times, for the better. As of today, Reason and BuckleScript are also deployed on a WhatsApp internal tool, Instagram Web (small scale), plus some critical Ads internal tools. We'll be working closely with these teams over the next year.
 
-A big thanks to the Messenger, Ads, WhatsApp and Instagram team members, to Hongbo (BuckleScript author) and to the OCaml community; and of course, to all of you folks in the community to being with us all this time. The best is yet to come.
+A big thanks to the Messenger, Ads, WhatsApp and Instagram team members, to Hongbo (BuckleScript author) and to the OCaml community (really, 50% Reason means 50% OCaml. We're nothing without them); and of course, to all of you folks in the community to being with us all this time. The best is yet to come.
+
+We've successfully onboarded regular JavaScript folks to Reason; in the most extreme case, an intern with no JS knowledge was able to ship ReasonReact code in production (and made 0 bug while doing so). Give your own team a try! =)
 
 See you soon!
 
