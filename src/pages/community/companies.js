@@ -18,6 +18,11 @@ const companies = shuffle([
     url: 'https://www.viska.com/',
     img: require('./logos/viska.png'),
   },
+  {
+    title: 'BeOpinion',
+    url: 'https://beopinion.com',
+    img: require('./logos/beopinion.png'),
+  },
 ])
 
 export default class Companies extends React.Component {
