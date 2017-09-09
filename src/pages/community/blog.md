@@ -16,7 +16,7 @@ Messenger.com is the web version of Facebook Messenger; we also share code with 
 - Full rebuild of the Reason part of the codebase is ~2s (a few hundreds of files), incremental build (the norm) is **<100ms** on average. The BuckleScript author estimates that the build system should scale to a few hundred thousands files in the current condition.
 - Messenger used to receive bugs reports on a daily basis; since the introduction of Reason, there have been a total of **10 bugs** (that's during the whole year, not per week)!
 - Most of the messenger core team's new features are now developed in Reason.
-- A dozen of massive refactor to iterate on ReasonReact, from us and others. Refactoring speed went from days to hours to dozens of minutes. I don't think we've caused more than a few bugs during the process (counted toward the total number of bugs).
+- Dozens of massive refactors while iterating on ReasonReact. Refactoring speed went from days to hours to dozens of minutes. I don't think we've caused more than a few bugs during the process (counted toward the total number of bugs).
 - Everyone writing Reason got promoted for quality engineering. Just kidding. But definitely high, long-term impact.
 
 #### Which Team's Next?
