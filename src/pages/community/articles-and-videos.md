@@ -42,4 +42,4 @@ The more dated they look, the richer the content =P
 - [How OCaml type checker works](http://okmij.org/ftp/ML/generalization.html?fref=gc)
 - [Detecting use-cases for GADTs in OCaml](http://mads-hartmann.com/ocaml/2015/01/05/gadt-ocaml.html)
 - [Polymorphism and its limitations](http://www.polychoron.fr/ocaml-nonmanual/polymorphism.html)
-- [Adding GADT to OCaml](http://www.math.nagoya-u.ac.jp/%7Egarrigue/papers/ml2011-show.pdf): on GADT and locally abstract types
+- [Adding GADT to OCaml](http://www.math.nagoya-u.ac.jp/%7Egarrigue/papers/ml2011-show.pdf), [Locally abstract types vs polymorphic annotations](https://groups.google.com/forum/#!topic/ocaml-aggregation-list/-tnouSeSQoY): on GADT and locally abstract types
