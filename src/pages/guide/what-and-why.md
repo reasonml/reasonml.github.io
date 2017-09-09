@@ -51,6 +51,7 @@ Make sure you talk to us in [Discord](https://discord.gg/reasonml) first, to cle
 - [Elm](http://elm-lang.org). A cousin of ours! Make clean, fun webapps.
 - [PureScript](http://www.purescript.org). Inspired by Haskell, compiled to the web.
 - [Fable](http://fable.io/). Based on F#, which is closely related to Ocaml.
+- [ClojureScript](https://clojurescript.org). Nothing in common with us on the surface, but prioritizes simplicity & great interop too.
 
 Hope that helps! Want to know more? Strike a conversation with any of us in the [community](/community/)!
 
