@@ -11,7 +11,7 @@ Reason is just OCaml under the hood; We don't yet cover every concept on this do
 
 ## BuckleScript
 
-- [BuckleScript Manual](http://bucklescript.github.io/bucklescript/Manual.html), the official documentations for our JavaScript backend.
+- [BuckleScript Manual](http://bucklescript.github.io/bucklescript/Manual.html): the official documentations for our JavaScript backend.
 - [BuckleScript JS API docs](http://bucklescript.github.io/bucklescript/api/index.html)
 - [BuckleScript build system schema](http://bucklescript.github.io/bucklescript/docson/#build-schema.json): comprehensive resource on `bsb`'s configuration.
 - [BuckleScript FFI Cheat Sheet](https://github.com/glennsl/bucklescript-ffi-cheatsheet)
@@ -42,3 +42,4 @@ The more dated they look, the richer the content =P
 - [How OCaml type checker works](http://okmij.org/ftp/ML/generalization.html?fref=gc)
 - [Detecting use-cases for GADTs in OCaml](http://mads-hartmann.com/ocaml/2015/01/05/gadt-ocaml.html)
 - [Polymorphism and its limitations](http://www.polychoron.fr/ocaml-nonmanual/polymorphism.html)
+- [Adding GADT to OCaml](http://www.math.nagoya-u.ac.jp/%7Egarrigue/papers/ml2011-show.pdf): on GADT and locally abstract types
