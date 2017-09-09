@@ -43,6 +43,14 @@ Many backing languages would satisfy the previous section's points; the points b
 - **The language for writing React**. Reason's [creator](https://twitter.com/jordwalke) also created [ReactJS](https://facebook.github.io/react/), whose first prototypes were written in SML, a distant cousin of OCaml. We've transcribed ReactML into ReactJS for wide adoption. A few years later, we're now iterating on the future of ReactJS through [ReasonReact](//reasonml.github.io/reason-react/).
 - **Nice, growing community**. I mean, we're really nice. I'm Canadian. We have members all over the world. If everything fails, ask in the Discord channel and [at least a few of our members in your timezone will answer](https://twitter.com/ken_wheeler/status/894298052705615872).
 
+### Don't Like Reason?
+
+Make sure you talk to us in [Discord](https://discord.gg/reasonml) first, to clear any misunderstanding/misconception! But if you _still_ don't like Reason, here are some alternatives:
+
+- [OCaml](http://ocaml.org). Reason's just a syntax and toolchain layer on top of OCaml. The OCaml<->Reason interop should be seamless since we share the same abstract syntax tree. BuckleScript works fine in OCaml, naturally.
+- [Elm](http://elm-lang.org). A cousin of ours! Make clean, fun webapps.
+- [PureScript](http://www.purescript.org). Inspired by Haskell, compiled to the web.
+
 Hope that helps! Want to know more? Strike a conversation with any of us in the [community](/community/)!
 
 _Reason is a open source community project from Facebook_.
