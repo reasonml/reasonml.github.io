@@ -13,7 +13,7 @@ This section is dedicated to newcomers trying to figure out general idioms & con
 
 ```reason
 let possiblyNullValue1 = None;
-let possiblyNullValue2 = Some "Hello@";
+let possiblyNullValue2 : option string = Some "Hello@";
 
 switch possiblyNullValue2 {
 | None => print_endline "Nothing to see here."
