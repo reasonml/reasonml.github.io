@@ -53,7 +53,7 @@ This prevents misuse of the bindings after these lines.
 
 ### Design Decisions
 
-Reason is backed by OCaml under the hood. a let binding, in OCaml syntax, looks like this:
+Reason is backed by OCaml under the hood. A let binding, in OCaml syntax, looks like this:
 
 ```ocaml
 let a = 1 in
