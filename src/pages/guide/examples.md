@@ -67,3 +67,18 @@ external store : store = "./store" [@@bs.module];
 Js.log store;
 Js.log (store##getDate ());
 ```
+
+### Checking for JS nullable types using the `option` type
+If you are writing a function that will be called by Javascript you may need to check if an argument's value is `null` or `undefined`. To do this we can simply use Bucklescript's [`Js.Nullable`](http://bucklescript.github.io/bucklescript/api/Js.html#TYPEnullable) type to lift this value into the `option` type from the standard library:
+
+```reason
+let greetByName = fun possiblyNullName => {
+  let optionName = Js.Nullable.to_opt possiblyNullName;
+  switch optionName {
+  | None => "Hello"
+  | Some name => "Hello " ^ name
+  }
+};
+```
+
+This check compiles to `possiblyNullName == null` in JS, so checks for the presence of `null` or `undefined`.
