@@ -22,7 +22,7 @@ order: 10
 
 ```
 opam update
-opam install reason.1.13.6
+opam install reason.1.13.7
 opam install merlin.2.5.4
 ```
 
