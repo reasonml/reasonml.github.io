@@ -23,6 +23,26 @@ const companies = shuffle([
     url: 'https://beopinion.com',
     img: require('./logos/beopinion.png'),
   },
+  {
+    title: 'Broadsheet',
+    url: 'https://www.broadsheet.com.au',
+    img: require('./logos/broadsheet.png'),
+  },
+  {
+    title: 'Wow Air',
+    url: 'https://beopinion.com',
+    img: require('./logos/wow-air.svg'),
+  },
+  {
+    title: 'Toughbyte',
+    url: 'http://toughbyte.com',
+    img: require('./logos/toughbyte.png'),
+  },
+  {
+    title: 'Sentia',
+    url: 'https://sentia.ai',
+    img: require('./logos/sentia.jpg'),
+  },
 ])
 
 export default class Companies extends React.Component {
@@ -59,6 +79,8 @@ const styles = {
     alignItems: 'center',
     margin: 10,
     flexDirection: 'column',
+    maxHeight: 150,
+    width: 250,
   },
   addCompanyLink: {
     textDecoration: 'none',
@@ -71,7 +93,6 @@ const styles = {
     },
   },
   img: {
-    width: 250,
     marginBottom: 0.5,
   },
 }
