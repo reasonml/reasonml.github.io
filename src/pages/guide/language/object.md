@@ -83,8 +83,7 @@ let obj:
 Si vous venez de JavaScript, vous ne cherchez probablement pas les objets Reason natifs, mais plutôt [l'object spécial] (https://bucklescript.github.io/bucklescript/Manual.html#_binding_to_js_objects) de BuckleScript. Ils sont différents en ce qu'ils :
 
 - accèdent aux champs via `##`
-- peuvent assigner des champs via `#=`
-- sont toujours utilisés comme des paramètres de type dans le type `Js.t`.
+- sont toujours utilisés avec `Js.t` (en tant que paramètres du type `Js.t`).
 - compilent en de véritables objets JavaScript.
 
 Parce qu'ils sont utilisés si souvent, Reason à la valeur de l'objet BuckleScript `[%bs.obj {foo: bar}]` ajoute un *sucre syntaxique* spécial : `{"foo": bar}`. On dirait un record entre guillemets pour faire simple.

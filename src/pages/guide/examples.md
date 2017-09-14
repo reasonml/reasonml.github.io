@@ -13,7 +13,7 @@ Cette section est consacrée aux néophytes essayant de trouver des idiomes et d
 
 ```reason
 let possiblyNullValue1 = None;
-let possiblyNullValue2 = Some "Hello@";
+let possiblyNullValue2 : option string = Some "Hello@";
 
 switch possiblyNullValue2 {
 | None => print_endline "Nothing to see here."

@@ -12,7 +12,7 @@ Reason est juste OCaml en réalité. Nous ne couvrons pas encore tous les concep
 
 ## BuckleScript
 
-- [Manuel de BuckleScript](http://bucklescript.github.io/bucklescript/Manual.html), les documentations officielles de notre backend JavaScript.
+- [Manuel de BuckleScript](http://bucklescript.github.io/bucklescript/Manual.html) : les documentations officielles de notre backend JavaScript.
 - [Documentation de l'API JS de BuckleScript](http://bucklescript.github.io/bucklescript/api/index.html)
 - [Schéma du système de compilation BuckleScript](http://bucklescript.github.io/bucklescript/docson/#build-schema.json) : une ressource détaillée sur la configuration de `bsb`.
 - [Cheatsheet de l'IFE BuckleScript](https://github.com/glennsl/bucklescript-ffi-cheatsheet)
@@ -44,3 +44,4 @@ Plus ils ont l'air vieux, meilleur est le contenu =P
 - [How OCaml type checker works](http://okmij.org/ftp/ML/generalization.html?fref=gc)
 - [Detecting use-cases for GADTs in OCaml](http://mads-hartmann.com/ocaml/2015/01/05/gadt-ocaml.html)
 - [Polymorphism and its limitations](http://www.polychoron.fr/ocaml-nonmanual/polymorphism.html)
+- [Adding GADT to OCaml](http://www.math.nagoya-u.ac.jp/%7Egarrigue/papers/ml2011-show.pdf), [Locally abstract types vs polymorphic annotations](https://groups.google.com/forum/#!topic/ocaml-aggregation-list/-tnouSeSQoY) : sur les GADTs et les types abstraits locallement

@@ -25,7 +25,7 @@ Et d'autres fonctionnalités. Regardez, par exemple, la [section fonctionnalité
   - Fidèle à l'esprit de JavaScript, [voici encore un autre plugin Reason pour Atom](https://github.com/zaaack/atom-ide-reason) ! En fait, celui-ci pourrait potentiellement être le plugin Reason recommandé pour Atom.
 - [Vim](https://github.com/reasonml-editor/vim-reason)
 - [Emacs](https://github.com/reasonml-editor/reason-mode)
-- [Sublime Text](https://github.com/reasonml-editor/sublime-reason) : expérimental. Ne supporte pas encore les fonctionnalités liées aux types.
+- [Sublime Text](https://github.com/reasonml-editor/sublime-reason)
 - [IDEA](https://github.com/reasonml-editor/reasonml-idea-plugin)
 
 La communauté GitHub [reasonml-editor](https://github.com/reasonml-editor/) héberge la plupart de ces plugins. Si vous souhaitez y ajouter le plugin de votre éditeur préféré, envoyez-nous une [pull request](https://github.com/reasonml/reasonml.github.io) !

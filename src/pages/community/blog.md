@@ -3,6 +3,32 @@ title: Blog
 order: 0
 ---
 
+### Messenger.com maintenant 50% converti à Reason
+
+*8 septembre 2017*
+
+Boom!
+
+Messenger.com est la version web de Facebook Messenger. Nous partageons également notre code avec la boîte de réception de Facebook.com et les onglets de discussion. Depuis plus d'un an, l'équipe Reason travaille directement sur Messenger afin d'intégrer Reason + BuckleScript dans les codebases. Depuis un certain temps, nous avons atteint une couverture du code Reason de 50% !
+
+#### Quelques statistiques
+
+- Un rebuild complet de la partie Reason de la codebase prend ~ 2s (quelques centaines de fichiers), un build incrémental (la norme) prend **<100ms** en moyenne. L'auteur de BuckleScript estime que le système de build devrait scale à quelques centaines de milliers de fichiers dans les conditions actuelles.
+- Messenger recevait des rapports de bugs de façon quotidienne. Depuis l'introduction de Reason, il y a eu un total de **10 bugs** (pendant toute l'année, pas par semaine) !
+- La plupart des nouvelles fonctionnalités de la core team Messenger sont maintenant développées en Reason.
+- Des dizaines de refactors massifs pendant l'itération sur ReasonReact. La vitesse de refactorisation est passée de quelques jours à quelques dizaines de minutes. Je ne pense pas que nous avons causé plus que quelques bugs pendant le processus (compte tenu du nombre total de bugs).
+- Toute les personnes travaillant en Reason ont été promues pour "production de code de qualité". Nan je rigole. Mais certainement un grand impact sur long terme.
+
+#### Quelle équipe est la suivante ?
+
+Nous croyons en l'itéreration sur/auprès des équipes produit afin de créer la meilleure infrastructure. Leurss feedbacks ainsi que ceux de la communauté open source ont changé notre stratégie à plusieurs reprises, pour le mieux. À partir d'aujourd'hui, Reason et BuckleScript sont également déployés sur un outil interne de WhatsApp, Instagram Web (à petite échelle), plus quelques outils internes critiques du côté d'Ads. Nous travaillerons étroitement avec ces équipes au cours de l'année qui vient.
+
+Nous avons introduit avec succès les développeurs réguliers de JavaScript à Reason. Dans le cas le plus extrême, un stagiaire sans connaissance en JavaScript a pu envoyer du code ReasonReact en production (le tout avec 0 bug). Essayez avec votre propre équipe à l'occasion ! =)
+
+Un grand merci à tous les membres de ces équipes, à Hongbo (auteur de BuckleScript) et à la communauté OCaml (vraiment, 50% Reason signifie 50% OCaml : nous ne sommes rien sans vous). Et bien sûr, à tous les amis de la communauté pour être avec nous tout au long de cette aventure. Le meilleur reste à venir.
+
+See you soon!
+
 ### De bien, bien, biiiieeeeen meilleurs messages d'erreur !
 
 *25 août 2017*

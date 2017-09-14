@@ -164,19 +164,19 @@ JavaScript                |   Reason
 
 ### Blocs
 
-En Reason, les "expressions de séquence" sont créées avec `{}` et évaluent à leur dernière déclaration. En JavaScript, cela peut être simulé via une variable temporaire qui doit être créée dans un état non valide, puis plus tard mutée.
+En Reason, les "expressions de séquence" sont créées avec `{}` et évaluent à leur dernière déclaration. En JavaScript, cela peut être simulé via une fonction anonyme immédiatement appelée (étant donné que les corps des fonctions ont leur propre scope local).
 
 <table>
   <thead><tr> <th scope="col"><p >JavaScript</p></th> <th scope="col"><p>Reason</p></th></tr></thead>
   <tr>
     <td>
       <pre>
-let res = undefined;
+let res = (function() {
 {
   const x = 23;
   const y = 34;
-  res = x + y;
-};</pre>
+  return x + y;
+})();</pre>
     </td>
     <td>
       <pre>

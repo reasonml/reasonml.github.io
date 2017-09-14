@@ -44,6 +44,18 @@ De nombreux langages supports satisfont les points de la section précédente. L
 - **Le langage pour écrire React**. Le [créateur](https://twitter.com/jordwalke) de Reason est aussi celui de [ReactJS](https://facebook.github.io/react/), dont les premiers prototypes ont été écrits en SML, un cousin éloigné d'OCaml. Nous avons transcrit ReactML dans ReactJS pour une large adoption. Quelques années plus tard, nous sommes en train d'itérer sur l'avenir de ReactJS grâce à [ReasonReact](//reasonml.github.io/reason-react/).
 - **Un communauté sympa et en pleine croissance**. Je veux dire, nous sommes vraiment sympa. Je suis Canadien. Nous avons des membres partout dans le monde. Si tout échoue, demandez de l'aide dans le channel Discord et [au moins quelques-uns de nos membres dans votre fuseau horaire répondront](https://twitter.com/ken_wheeler/status/894298052705615872).
 
+
+### Vous n'aimez pas Reason ?
+
+Assurez-vous de nous parler sur [Discord](https://discord.gg/reasonml) en premier lieu, afin de clarifier tout malentendu ou idée fausse ! ais si vous n'aimez _toujours_ pas Reason, voici quelques alternatives :
+
+- [OCaml](http://ocaml.org). Reason est une une syntaxe et chaine de compilation par dessus OCaml. L'interopérabilité OCaml<->Reason devrait être chose aisée étant donné que nous partagons le même AST. BuckleScript fonctionne très bien en OCaml, naturallement. [Js_of_ocaml](http://ocsigen.org/js_of_ocaml/) aussi.
+- [Rust](http://rust-lang.org). Un de nos cousins proches ! Pas de garbage collection, focus sur la rapidité et la sécurité.
+- [Elm](http://elm-lang.org). Un autre de nos cousins ! Concevez des webapps clean et fun.
+- [PureScript](http://www.purescript.org). Inspiré par Haskell, compile pour le web.
+- [Fable](http://fable.io/). Basé sur F#, qui est lui-même très lié à OCaml.
+- [ClojureScript](https://clojurescript.org). Rien à voir avec nous en surface, mais priorise la simplicité et une grande interopérabilité lui aussi.
+
 J'espère que cela pourra aider ! Vous voulez en savoir plus ? Démarrez une conversation avec n'importe lequel d'entre nous dans la [communité](/community/) !
 
 

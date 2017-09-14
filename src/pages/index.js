@@ -49,7 +49,7 @@ export default class Index extends React.Component {
         <Section backgroundColor={gray}>
           <Header />
           <div css={{ alignItems: 'center' }}>
-            <img src={logo} css={styles.logo} />
+            <img src={logo} css={styles.logo} role="presentation"/>
             <div css={styles.frontAndCenter}>
               <div css={styles.mainExample}
                 dangerouslySetInnerHTML={{
