@@ -64,8 +64,10 @@ JavaScript                |   Reason
 --------------------------|--------------------------------
 `[1, 2, 3]`               |  `[|1, 2, 3|]`
 `myArray[1] = 10`         |  `myArray.(1) = 10`
-No tuple                  |  `(1, 2, 3)`
+`[1, "Bob", true]` \*     |  `(1, "Bob", true)`
 No immutable list         |  `[1, 2, 3]`
+
+\* We can simulate tuples in JavaScript with arrays, because JavaScript arrays can contain multiple types of elements.
 
 ### Null
 
