@@ -67,3 +67,18 @@ external store : store = "./store" [@@bs.module];
 Js.log store;
 Js.log (store##getDate ());
 ```
+
+### Checking for JS nullable types using the `option` type
+For a function whose argument is passed a JavaScript value that's potentially `null` or `undefined`, it's idiomatic to convert it to a Reason `option`. The conversion is done through the helper functions in Bucklescript's [`Js.Nullable`](http://bucklescript.github.io/bucklescript/api/Js.html#TYPEnullable) module. In this case, `to_opt`:
+
+```reason
+let greetByName possiblyNullName => {
+  let optionName = Js.Nullable.to_opt possiblyNullName;
+  switch optionName {
+  | None => "Hi"
+  | Some name => "Hello " ^ name
+  }
+};
+```
+
+This check compiles to `possiblyNullName == null` in JS, so checks for the presence of `null` or `undefined`.
