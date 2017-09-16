@@ -80,6 +80,17 @@ let message =
   };
 ```
 
+**Note**: you can only pass literals (i.e. concrete values) as a pattern, not let-binding names or other things. The following doesn't work as expected:
+
+```reason
+let myMessage = "Hello";
+switch greeting {
+| myMessage => print_endline "Hi to you"
+}
+```
+
+Instead, it'd assume you're matching on any string, and binding that to the name `myMessage` in that `switch` case, which is not what you wanted.
+
 #### When clauses
 
 When you really need to use arbitrary logic with an otherwise clean pattern match, you can slip in some `when` clauses, which are basically `if` sugar:
@@ -103,7 +114,7 @@ Do not abuse the fall-through `_` case too much. This prevents the compiler from
 Here's a series of examples, from worst to best:
 
 ```reason
-let optionBoolToJsBoolean opt => 
+let optionBoolToJsBoolean opt =>
   if (opt == None) {
     Js.false_
   } else {
