@@ -12,7 +12,7 @@ And then run it as usual:
 
 ```sh
 cd my-first-app
-npm run build
+npm run start
 ```
 
 You can also build in watch mode:
