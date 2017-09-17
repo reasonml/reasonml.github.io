@@ -3,7 +3,7 @@ title: Blog
 order: 0
 ---
 
-### Messenger.com maintenant 50% converti à Reason
+### Messenger.com maintenant converti à Reason à 50%
 
 *8 septembre 2017*
 

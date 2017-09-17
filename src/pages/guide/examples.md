@@ -45,7 +45,6 @@ let obj1 = {
 
 Vous noterez que ce qui précède n'est pas un record. Les clés sont encapsulées dans une string via le apostrophes. C'est le *syntax sugar* de Reason pour [bs.obj](http://bucklescript.github.io/bucklescript/Manual.html#_create_js_objects_using_bs_obj). Le type est déduit. L'exemple suivant l'identifie explicitement.
 
-
 ### Typage d'un object JavaScript
 
 ```reason
@@ -68,3 +67,19 @@ external store : store = "./store" [@@bs.module];
 Js.log store;
 Js.log (store##getDate ());
 ```
+
+### Vérification des types nuls JavaScript en utilisant le type `option`
+
+Pour une fonction dont l'argument passé est une valeur JavaScript potentiellement `null` ou `undefined`, il faut penser à le convertir en un `option` Reason. La conversion se fait par l'intermédiaire des fonctions helpers du module Bucklescript [`Js.Nullable`](http://bucklescript.github.io/bucklescript/api/Js.html#TYPEnullable). Dans le cas d'espèce, `to_opt`:
+
+```reason
+let greetByName possiblyNullName => {
+  let optionName = Js.Nullable.to_opt possiblyNullName;
+  switch optionName {
+  | None => "Hi"
+  | Some name => "Hello " ^ name
+  }
+};
+```
+
+Cette vérification compile en `possiblyNullName == null` en JavaScript, alors vérifiez la présence de `null` ou `undefined`.

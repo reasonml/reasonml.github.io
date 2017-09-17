@@ -26,7 +26,7 @@ const companies = shuffle([
   {
     title: 'Broadsheet',
     url: 'https://www.broadsheet.com.au',
-    img: require('./logos/broadsheet.png'),
+    img: require('./logos/broadsheet.jpg'),
   },
   {
     title: 'Wow Air',

@@ -47,7 +47,7 @@ De nombreux langages supports satisfont les points de la section précédente. L
 
 ### Vous n'aimez pas Reason ?
 
-Assurez-vous de nous parler sur [Discord](https://discord.gg/reasonml) en premier lieu, afin de clarifier tout malentendu ou idée fausse ! ais si vous n'aimez _toujours_ pas Reason, voici quelques alternatives :
+Assurez-vous de nous parler sur [Discord](https://discord.gg/reasonml) en premier lieu, afin de clarifier tout malentendu ou idée fausse ! Mais si vous n'aimez _toujours_ pas Reason, voici quelques alternatives :
 
 - [OCaml](http://ocaml.org). Reason est une une syntaxe et chaine de compilation par dessus OCaml. L'interopérabilité OCaml<->Reason devrait être chose aisée étant donné que nous partagons le même AST. BuckleScript fonctionne très bien en OCaml, naturallement. [Js_of_ocaml](http://ocsigen.org/js_of_ocaml/) aussi.
 - [Rust](http://rust-lang.org). Un de nos cousins proches ! Pas de garbage collection, focus sur la rapidité et la sécurité.

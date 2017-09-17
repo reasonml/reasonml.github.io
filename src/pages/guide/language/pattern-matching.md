@@ -80,6 +80,17 @@ let message =
   };
 ```
 
+**Note** : vous ne pouvez passer que des literals (c'est-à-dire des valeurs concrètes) en tant que pattern, pas de noms de let-bindings ou autres. Ce qui suit ne fonctionne pas comme espéré :
+
+```reason
+let myMessage = "Hello";
+switch greeting {
+| myMessage => print_endline "Hi to you"
+}
+```
+
+Au lieu de cela, il supposera que vous êtes entrain de match n'importe quelle string et que vous liez ceci au nom `myMessage` dans cette branche du `switch`, ce qui n'est pas ce que vous vouliez.
+
 #### Clauses when
 
 Lorsque vous avez vraiment besoin d'utiliser une logique arbitraire avec un pattern match autrement propre, vous pouvez glisser certaines clauses `when`, qui sont grosso modo un *sucre syntaxique* pour `if` :
@@ -103,7 +114,7 @@ Ne pas trop abuser du cas par défaut `_`. Cela empêche le compilateur de vous 
 Voici une série d'exemples, du pire au meilleur :
 
 ```reason
-let optionBoolToJsBoolean opt => 
+let optionBoolToJsBoolean opt =>
   if (opt == None) {
     Js.false_
   } else {

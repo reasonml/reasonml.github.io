@@ -9,8 +9,8 @@ order: 10
 
 | Platforme  | Commande d'installation
 |-----------|-------------------------------------------------------------------------------------------------
-| **OSX**   | `npm install -g https://github.com/reasonml/reason-cli/archive/beta-v-1.13.6-bin-darwin.tar.gz`
-| **Linux** | `npm install -g https://github.com/reasonml/reason-cli/archive/beta-v-1.13.6-bin-linux.tar.gz`
+| **OSX**   | `npm install -g https://github.com/reasonml/reason-cli/archive/beta-v-1.13.7-bin-darwin.tar.gz`
+| **Linux** | `npm install -g https://github.com/reasonml/reason-cli/archive/beta-v-1.13.7-bin-linux.tar.gz`
 
 **`reason-cli` ne fonctionne pas actuellement sous Windows**, mais ce n'est pas une exigence pour l'utilisation de Reason. Vous disposez toujours de super messages de diagnostic du CLI du build système via BuckleScript, dont le paquet global NPM  [`bs-platform`](https://www.npmjs.com/package/bs-platform) qui lui fonctionne aussi sur Windows par contre.
 
@@ -22,7 +22,7 @@ order: 10
 
 ```
 opam update
-opam install reason.1.13.6
+opam install reason.1.13.7
 opam install merlin.2.5.4
 ```
 
