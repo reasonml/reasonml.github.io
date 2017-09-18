@@ -43,3 +43,4 @@ The more dated they look, the richer the content =P
 - [Detecting use-cases for GADTs in OCaml](http://mads-hartmann.com/ocaml/2015/01/05/gadt-ocaml.html)
 - [Polymorphism and its limitations](http://www.polychoron.fr/ocaml-nonmanual/polymorphism.html)
 - [Adding GADT to OCaml](http://www.math.nagoya-u.ac.jp/%7Egarrigue/papers/ml2011-show.pdf), [Locally abstract types vs polymorphic annotations](https://groups.google.com/forum/#!topic/ocaml-aggregation-list/-tnouSeSQoY): on GADT and locally abstract types
+- [Using the Format module](https://ocaml.org/learn/tutorials/format.html) and its [docs](https://caml.inria.fr/pub/docs/manual-ocaml/libref/Format.html): great for working with the hidden gem of the OCaml stdlib
