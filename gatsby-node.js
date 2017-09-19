@@ -24,7 +24,7 @@ exports.createPages = ({graphql, boundActionCreators}) => {
   })
 
   graphql(`{
-    allFile(filter:{relativePath:{regex:"/^(guide|community)\\\\/.*\\\\.md$/"}}) {
+    allFile(filter:{relativePath:{regex:"/^([a-z]{2}\\\\/)?(guide|community)\\\\/.*\\\\.md$/"}}) {
       edges {
         node {
           relativePath
