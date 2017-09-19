@@ -7,11 +7,11 @@
 
 <pre><span class="keyword">module</span> Lexer: sig .. end</pre><hr width="100%">
 
-<pre><span class="keyword">let</span> init: unit =&gt; unit;
+<pre id="VALinit"><span class="keyword">let</span> init: unit =&gt; unit;
 </pre>
-<pre><span class="keyword">let</span> token: Lexing.lexbuf =&gt; Parser.token;
+<pre id="VALtoken"><span class="keyword">let</span> token: Lexing.lexbuf =&gt; Parser.token;
 </pre>
-<pre><span class="keyword">let</span> skip_sharp_bang: Lexing.lexbuf =&gt; unit;
+<pre id="VALskip_sharp_bang"><span class="keyword">let</span> skip_sharp_bang: Lexing.lexbuf =&gt; unit;
 </pre>
 <pre><span class="keyword">type</span> error = </pre><table class="typetable">
 <tbody><tr>
@@ -66,21 +66,21 @@
 
 
 
-<pre><span class="keyword">exception</span> Error error Location.t;
+<pre id="EXCEPTIONError"><span class="keyword">exception</span> Error error Location.t;
 </pre>
 
-<pre><span class="keyword">let</span> report_error: Format.formatter =&gt; error =&gt; unit;
+<pre id="VALreport_error"><span class="keyword">let</span> report_error: Format.formatter =&gt; error =&gt; unit;
 </pre>
-<pre><span class="keyword">let</span> in_comment: unit =&gt; bool;
+<pre id="VALin_comment"><span class="keyword">let</span> in_comment: unit =&gt; bool;
 </pre>
-<pre><span class="keyword">let</span> in_string: unit =&gt; bool;
+<pre id="VALin_string"><span class="keyword">let</span> in_string: unit =&gt; bool;
 </pre>
-<pre><span class="keyword">let</span> print_warnings: Pervasives.ref bool;
+<pre id="VALprint_warnings"><span class="keyword">let</span> print_warnings: Pervasives.ref bool;
 </pre>
-<pre><span class="keyword">let</span> comments: unit =&gt; list (string, Location.t);
+<pre id="VALcomments"><span class="keyword">let</span> comments: unit =&gt; list (string, Location.t);
 </pre>
-<pre><span class="keyword">let</span> token_with_comments: Lexing.lexbuf =&gt; Parser.token;
+<pre id="VALtoken_with_comments"><span class="keyword">let</span> token_with_comments: Lexing.lexbuf =&gt; Parser.token;
 </pre>
-<pre><span class="keyword">let</span> set_preprocessor:
+<pre id="VALset_preprocessor"><span class="keyword">let</span> set_preprocessor:
   (unit =&gt; unit) =&gt; ((Lexing.lexbuf =&gt; Parser.token) =&gt; Lexing.lexbuf =&gt; Parser.token) =&gt; unit;
 </pre></div>

@@ -33,6 +33,9 @@ export default class API extends Component {
             Below is the API for the OCaml standard library. It's directly copied over from <a className="api-manual-link" href="http://caml.inria.fr/pub/docs/manual-ocaml/libref/index.html">the OCaml Manual</a>, formatted to the Reason syntax and styled accordingly.
             The API docs are work-in-progress; we'll be polishing these gradually!
           </p>
+          <p>
+            If you're targeting JavaScript, the <a className="api-manual-link" href="https://bucklescript.github.io/bucklescript/api/index.html">API docs for BuckleScript</a> includes all of below, plus JS-specific APIs.
+          </p>
         </Section>
         <div css={{alignItems: 'center'}}>
           <div 

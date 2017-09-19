@@ -337,14 +337,14 @@ A mapper record implements one &quot;method&quot; per syntactic category,
 </div>
 
 
-<pre><span class="keyword">let</span> default_mapper: mapper;
+<pre id="VALdefault_mapper"><span class="keyword">let</span> default_mapper: mapper;
 </pre><div class="info ">
 A default mapper, which implements a &quot;deep identity&quot; mapping.<br>
 </div>
 <br>
 <h2 id="2_Applymapperstocompilationunits">Apply mappers to compilation units</h2><br>
 
-<pre><span class="keyword">let</span> tool_name: unit =&gt; string;
+<pre id="VALtool_name"><span class="keyword">let</span> tool_name: unit =&gt; string;
 </pre><div class="info ">
 Can be used within a ppx preprocessor to know which tool is
     calling it <code class="code">&quot;ocamlc&quot;</code>, <code class="code">&quot;ocamlopt&quot;</code>, <code class="code">&quot;ocamldoc&quot;</code>, <code class="code">&quot;ocamldep&quot;</code>,
@@ -355,7 +355,7 @@ Can be used within a ppx preprocessor to know which tool is
     <code class="code">Clflags.debug</code>.<br>
 </div>
 
-<pre><span class="keyword">let</span> apply: source::string =&gt; target::string =&gt; mapper =&gt; unit;
+<pre id="VALapply"><span class="keyword">let</span> apply: source::string =&gt; target::string =&gt; mapper =&gt; unit;
 </pre><div class="info ">
 Apply a mapper (parametrized by the unit name) to a dumped
     parsetree found in the <code class="code">source</code> file and put the result in the
@@ -363,7 +363,7 @@ Apply a mapper (parametrized by the unit name) to a dumped
     is applied to the implementation or interface.<br>
 </div>
 
-<pre><span class="keyword">let</span> run_main: (list string =&gt; mapper) =&gt; unit;
+<pre id="VALrun_main"><span class="keyword">let</span> run_main: (list string =&gt; mapper) =&gt; unit;
 </pre><div class="info ">
 Entry point to call to implement a standalone -ppx rewriter from a
     mapper, parametrized by the command line arguments.  The current
@@ -374,9 +374,9 @@ Entry point to call to implement a standalone -ppx rewriter from a
 <br>
 <h2 id="2_RegistrationAPI">Registration API</h2><br>
 
-<pre><span class="keyword">let</span> register_function: Pervasives.ref (string =&gt; (list string =&gt; mapper) =&gt; unit);
+<pre id="VALregister_function"><span class="keyword">let</span> register_function: Pervasives.ref (string =&gt; (list string =&gt; mapper) =&gt; unit);
 </pre>
-<pre><span class="keyword">let</span> register: string =&gt; (list string =&gt; mapper) =&gt; unit;
+<pre id="VALregister"><span class="keyword">let</span> register: string =&gt; (list string =&gt; mapper) =&gt; unit;
 </pre><div class="info ">
 Apply the <code class="code">register_function</code>.  The default behavior is to run the
     mapper immediately, taking arguments from the process command
@@ -399,16 +399,16 @@ Apply the <code class="code">register_function</code>.  The default behavior is 
 <br>
 <h2 id="2_Conveniencefunctionstowritemappers">Convenience functions to write mappers</h2><br>
 
-<pre><span class="keyword">let</span> map_opt: (&apos;a =&gt; &apos;b) =&gt; option &apos;a =&gt; option &apos;b;
+<pre id="VALmap_opt"><span class="keyword">let</span> map_opt: (&apos;a =&gt; &apos;b) =&gt; option &apos;a =&gt; option &apos;b;
 </pre>
-<pre><span class="keyword">let</span> extension_of_error: Location.error =&gt; Parsetree.extension;
+<pre id="VALextension_of_error"><span class="keyword">let</span> extension_of_error: Location.error =&gt; Parsetree.extension;
 </pre><div class="info ">
 Encode an error into an &apos;ocaml.error&apos; extension node which can be
     inserted in a generated Parsetree.  The compiler will be
     responsible for reporting the error.<br>
 </div>
 
-<pre><span class="keyword">let</span> attribute_of_warning: Location.t =&gt; string =&gt; Parsetree.attribute;
+<pre id="VALattribute_of_warning"><span class="keyword">let</span> attribute_of_warning: Location.t =&gt; string =&gt; Parsetree.attribute;
 </pre><div class="info ">
 Encode a warning message into an &apos;ocaml.ppwarning&apos; attribute which can be
     inserted in a generated Parsetree.  The compiler will be
@@ -417,7 +417,7 @@ Encode a warning message into an &apos;ocaml.ppwarning&apos; attribute which can
 <br>
 <h2 id="2_Helperfunctionstocallexternalmappers">Helper functions to call external mappers</h2><br>
 
-<pre><span class="keyword">let</span> add_ppx_context_str: tool_name::string =&gt; Parsetree.structure =&gt; Parsetree.structure;
+<pre id="VALadd_ppx_context_str"><span class="keyword">let</span> add_ppx_context_str: tool_name::string =&gt; Parsetree.structure =&gt; Parsetree.structure;
 </pre><div class="info ">
 Extract information from the current environment and encode it
     into an attribute which is prepended to the list of structure
@@ -425,19 +425,19 @@ Extract information from the current environment and encode it
     processor.<br>
 </div>
 
-<pre><span class="keyword">let</span> add_ppx_context_sig: tool_name::string =&gt; Parsetree.signature =&gt; Parsetree.signature;
+<pre id="VALadd_ppx_context_sig"><span class="keyword">let</span> add_ppx_context_sig: tool_name::string =&gt; Parsetree.signature =&gt; Parsetree.signature;
 </pre><div class="info ">
 Same as <code class="code">add_ppx_context_str</code>, but for signatures.<br>
 </div>
 
-<pre><span class="keyword">let</span> drop_ppx_context_str: restore::bool =&gt; Parsetree.structure =&gt; Parsetree.structure;
+<pre id="VALdrop_ppx_context_str"><span class="keyword">let</span> drop_ppx_context_str: restore::bool =&gt; Parsetree.structure =&gt; Parsetree.structure;
 </pre><div class="info ">
 Drop the ocaml.ppx.context attribute from a structure.  If
     <code class="code">restore</code> is true, also restore the associated data in the current
     process.<br>
 </div>
 
-<pre><span class="keyword">let</span> drop_ppx_context_sig: restore::bool =&gt; Parsetree.signature =&gt; Parsetree.signature;
+<pre id="VALdrop_ppx_context_sig"><span class="keyword">let</span> drop_ppx_context_sig: restore::bool =&gt; Parsetree.signature =&gt; Parsetree.signature;
 </pre><div class="info ">
 Same as <code class="code">drop_ppx_context_str</code>, but for signatures.<br>
 </div>
@@ -450,7 +450,7 @@ Cookies are used to pass information from a ppx processor to
     a further invocation of itself, when called from the OCaml
     toplevel (or other tools that support cookies).<br>
 
-<pre><span class="keyword">let</span> set_cookie: string =&gt; Parsetree.expression =&gt; unit;
+<pre id="VALset_cookie"><span class="keyword">let</span> set_cookie: string =&gt; Parsetree.expression =&gt; unit;
 </pre>
-<pre><span class="keyword">let</span> get_cookie: string =&gt; option Parsetree.expression;
+<pre id="VALget_cookie"><span class="keyword">let</span> get_cookie: string =&gt; option Parsetree.expression;
 </pre></div>

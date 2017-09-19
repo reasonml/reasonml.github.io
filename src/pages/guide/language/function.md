@@ -142,7 +142,7 @@ If omitted, `radius` is **wrapped** in the standard library's `option` type, def
 
 **Note**: `None | Some foo` is a data structure type called variant, described [below](/guide/language/variant). This particular variant type is provided by the standard library. It's called `option`. Its definition: `type option 'a = None | Some 'a`.
 
-**Note** the unit `()` at the end of `drawCircle`. Without it, since `radius` and `color` are both labeled, can be curried, and can be applied out-of-order, it's unclear what the following mean:
+**Note** the unit `()` at the end of `drawCircle`. Without it, since `radius` and `color` are both labeled, can be curried, and can be applied out-of-order, it's unclear what the following means:
 
 ```reason
 let whatIsThis = drawCircle ::color;

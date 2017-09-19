@@ -259,7 +259,7 @@ const errorTimeout = 500
 
 const waitUntilScriptsLoaded = done => {
   const tout = setInterval(() => {
-    if (window.refmt && window.ocaml && window.require) {
+    if (window.refmt && window.ocaml) {
       clearInterval(tout)
       done()
     }
@@ -318,37 +318,78 @@ export default class Try extends Component {
 
   err = null
 
+  _output = item =>
+    this.setState(state => ({
+      ...state,
+      output: state.output.concat(item)
+    }));
+
+  output = item => {
+    if (this.outputOverloaded)
+      return;
+
+    if (this.state.output.length > 100) {
+      this.outputOverloaded = true;
+      this._output({ type: 'error', contents: ['[Too much output!]']})
+      return;
+    }
+
+    this._output(item);
+  }
+
+  initEvalWorker = () => {
+    this.evalWorker = new Worker('/evalWorker.js');
+    this.evalWorker.onmessage = ({data}) => {
+      if (data.type === 'end') {
+        clearTimeout(data.contents);
+      } else {
+        this.output(data);
+      }
+    }
+    this.evalWorker.onerror = err => {
+      this.errorTimerId = setTimeout(
+        () => this.setState(_ => ({
+          jsError: err
+        })),
+        errorTimeout
+      );
+    }
+  }
+
+  evalJs(code) {
+    this.outputOverloaded = false;
+    this.setState(
+      state => ({ ...state, output: [] }),
+      () => {
+        const timerId = setTimeout(() => {
+          this.evalWorker.terminate();
+          this.initEvalWorker();
+          this._output({type: 'error', contents: ['[Evaluation timed out!]']});
+        }, 1000);
+        this.evalWorker.postMessage({
+          code: wrapInExports(code),
+          timerId
+        });
+      }
+    )
+  }
+
   componentDidMount() {
     waitUntilScriptsLoaded(() => {
+      this.initEvalWorker();
       const {language, code} = retrieve();
       language === 'reason' ? this.updateReason(code) : this.updateOCaml(code)
     })
-    window.console = {
-      log: (...items) => {
-        this.setState(state => ({
-          ...state,
-          output: state.output.concat({ type: 'log', contents: items }),
-        }))
-      },
-      error: (...items) => {
-        this.setState(state => ({
-          ...state,
-          output: state.output.concat({ type: 'error', contents: items }),
-        }))
-      },
-      warn: (...items) => {
-        this.setState(state => ({
-          ...state,
-          output: state.output.concat({ type: 'warn', contents: items }),
-        }))
-      },
-    }
+  }
+
+  componentWillUnmount() {
+    this.evalWorker.terminate();
   }
 
   updateReason = newReasonCode => {
     if (newReasonCode === this.state.reason) return
     persist('reason', newReasonCode);
-    clearTimeout(this.err)
+    clearTimeout(this.errorTimerId)
 
     this.setState((prevState, _) => {
       const converted = window.refmt(newReasonCode, 'RE', 'implementation', 'ML')
@@ -358,7 +399,7 @@ export default class Try extends Component {
         newOcamlCode = converted[1]
         this.tryCompiling(newReasonCode, newOcamlCode)
       } else {
-        this.err = setTimeout(
+        this.errorTimerId = setTimeout(
           () => this.setState(_ => {
             const error = converted[1] === '' ? 'Syntax error' : converted[1];
             return {
@@ -389,7 +430,7 @@ export default class Try extends Component {
   updateOCaml = newOcamlCode => {
     if (newOcamlCode === this.state.ocaml) return
     persist('ocaml', newOcamlCode);
-    clearTimeout(this.err)
+    clearTimeout(this.errorTimerId)
 
     this.setState((prevState, _) => {
       const converted = window.refmt(newOcamlCode, 'ML', 'implementation', 'RE')
@@ -399,7 +440,7 @@ export default class Try extends Component {
         newReasonCode = converted[1]
         this.tryCompiling(newReasonCode, newOcamlCode)
       } else {
-        this.err = setTimeout(
+        this.errorTimerId = setTimeout(
           () => this.setState(_ => {
             const error = converted[1] === '' ? 'Syntax error' : converted[1];
             return {
@@ -436,20 +477,11 @@ export default class Try extends Component {
           jsIsLatest: true,
         }))
         if (this.state.autoEvaluate) {
-          try {
-            this.evalJs(res.js_code)
-          } catch (err) {
-            this.err = setTimeout(
-              () => this.setState(_ => ({
-                jsError: err
-              })),
-              errorTimeout
-            )
-          }
+            this.evalJs(res.js_code);
         }
         return
       } else {
-        this.err = setTimeout(
+        this.errorTimerId = setTimeout(
           () => this.setState(_ => ({
             compileError: res,
             js: '',
@@ -458,7 +490,7 @@ export default class Try extends Component {
         )
       }
     } catch (err) {
-      this.err = setTimeout(
+      this.errorTimerId = setTimeout(
         () => this.setState(_ => ({
           compileError: err,
           js: '',
@@ -506,7 +538,7 @@ export default class Try extends Component {
     input.select();
     document.execCommand('copy');
   }
-
+ 
   render() {
     const { reason, ocaml, js, reasonSyntaxError, compileError, ocamlSyntaxError, jsError } = this.state
     const codemirrorStyles = [
@@ -516,7 +548,6 @@ export default class Try extends Component {
     return (
       <div css={styles.container}>
         <Helmet>
-          <script async src={__PATH_PREFIX__ + '/stdlibBundle.js'} />
           <script async src={__PATH_PREFIX__ + '/bs.js'} />
           <script async src={__PATH_PREFIX__ + '/refmt.js'} />
           <title>Try Reason</title>
@@ -629,7 +660,7 @@ export default class Try extends Component {
 }
 
 const wrapInExports = code =>
-  `(function(exports) {${code}})(window.exports = {})`
+  `(function(exports) {${code}})({})`
 
 const formatOutput = item =>
   item.contents.map(val => JSON.stringify(val)).join(' ')

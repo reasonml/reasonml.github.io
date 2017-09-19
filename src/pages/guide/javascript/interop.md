@@ -163,3 +163,34 @@ ctx.fillRect(0.0, 0.0, 100.0, 100.0);
 ```
 
 Wow! Notice how BuckleScript just inlined our `pi` variable for us? And the output looks almost exactly like it was written by hand.
+
+## Using existing JavaScript libraries
+
+When folks write bindings for a particular JavaScript library, they'd usually publish it to npm. Head over to the [Libraries](/guide/javascript/libraries) to find out how to find these.
+
+To use a library that does not have existing bindings, however, you'll want to first install the npm package as usual, e.g. using `npm install --save <package-name>`, then just go ahead and write your bindings. You'll probably find the [`bs.module`](https://bucklescript.github.io/bucklescript/Manual.html#_binding_to_a_value_from_a_module_code_bs_module_code) FFI feature particularly useful; it emits the right `import`s or `require`s, depending on the JS compilation target's module format.
+
+As an example, here's the entire source code of the [`bs.glob`](https://github.com/reasonml-community/bs-glob) bindings (converted to Reason, the original is OCaml):
+
+```reason
+type error;
+
+external glob : string => (Js.nullable error => array string => unit) => unit = "" [@@bs.module];
+external sync : string => array string = "" [@@bs.val] [@@bs.module "glob"];
+```
+
+And the relevant parts of `package.json`:
+
+```js
+{
+  "name": "bs-glob",
+  "version": "0.1.0",
+  ...
+  "devDependencies": {
+    "bs-platform": "^1.9.1"
+  },
+  "dependencies": {
+    "glob": "^7.1.2"
+  }
+}
+```

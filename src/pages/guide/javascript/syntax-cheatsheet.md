@@ -64,8 +64,10 @@ JavaScript                |   Reason
 --------------------------|--------------------------------
 `[1, 2, 3]`               |  `[|1, 2, 3|]`
 `myArray[1] = 10`         |  `myArray.(1) = 10`
-No tuple                  |  `(1, 2, 3)`
+`[1, "Bob", true]` \*     |  `(1, "Bob", true)`
 No immutable list         |  `[1, 2, 3]`
+
+\* We can simulate tuples in JavaScript with arrays, because JavaScript arrays can contain multiple types of elements.
 
 ### Null
 
@@ -73,7 +75,7 @@ JavaScript                |   Reason
 --------------------------|--------------------------------
 `null`, `undefined`       |  `None` \*
 
-\* Again, only a spiritual equivalent; Reason doesn't have nulls, nor null bugs! But it does have [an option type](https://reasonml.github.io/guide/examples#using-the-option-type) for when you actually need nullability.
+\* Again, only a spiritual equivalent; Reason doesn't have nulls, nor null bugs! But it does have [an option type](/guide/examples#using-the-option-type) for when you actually need nullability.
 
 ### Function
 
@@ -163,19 +165,18 @@ JavaScript                |   Reason
 
 ### Blocks
 
-In Reason, "sequence expressions" are created with `{}` and evaluate to their last statement. In JavaScript, this can be simulated via a temporary variable which must be created in an invalid state, then later mutated.
+In Reason, "sequence expressions" are created with `{}` and evaluate to their last statement. In JavaScript, this can be simulated via an immediately-invoked function expression (since function bodies have their own local scope).
 
 <table>
   <thead><tr> <th scope="col"><p >JavaScript</p></th> <th scope="col"><p>Reason</p></th></tr></thead>
   <tr>
     <td>
       <pre>
-let res = undefined;
-{
+let res = (function() {
   const x = 23;
   const y = 34;
-  res = x + y;
-};</pre>
+  return x + y;
+})();</pre>
     </td>
     <td>
       <pre>
@@ -187,4 +188,3 @@ let res = {
     </td>
   </tr>
 </table>
-

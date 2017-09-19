@@ -12,13 +12,13 @@ And then run it as usual:
 
 ```sh
 cd my-first-app
-npm run build
+npm run start
 ```
 
 You can also build in watch mode:
 
 ```sh
-npm run start
+npm run watch
 ```
 
 That's all! This compiles Reason to Javascript in the `lib/js/` folder.
