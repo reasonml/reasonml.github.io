@@ -518,15 +518,6 @@ export default class Try extends Component {
     })
   }
 
-  evalJs(code) {
-    this.setState(
-      state => ({ ...state, output: [] }),
-      () => {
-        window.eval(wrapInExports(code))
-      }
-    )
-  }
-
   evalLatest = () => {
     if (this.state.jsIsLatest) {
       this.evalJs(this.state.js);
