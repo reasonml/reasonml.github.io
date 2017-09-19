@@ -1,3 +1,4 @@
+import Link from 'gatsby-link'
 import React, { Component } from 'react'
 import Helmet from 'react-helmet'
 import Header from '../components/Header'
@@ -21,6 +22,187 @@ if (typeof navigator !== 'undefined') {
     </div>
   )
 }
+
+const examples = [{
+  name: 'Tree sum',
+  code:
+`type tree = Node int tree tree | Leaf;
+
+let rec sum =
+  fun | Leaf => 0
+      | Node value left right =>
+        value + (sum left) + (sum right);
+
+let myTree =
+	(Node 1
+      (Node 2
+        (Node 4 Leaf Leaf)
+      	(Node 6 Leaf Leaf))
+      (Node 3
+        (Node 5 Leaf Leaf)
+        (Node 7 Leaf Leaf)));
+
+let () =
+	sum myTree |> Js.log;`
+}, {
+  name: 'FFI - Base64',
+  code:
+`external btoa : string => string = "" [@@bs.val];
+external atob : string => string = "" [@@bs.val];
+
+let () = {
+  let text = "Hello World!";
+  Js.log (text |> btoa);
+  Js.log (text |> btoa |> atob);
+};`
+}, {
+  name: 'Recursion - Factorial',
+  code:
+`/* Based on https://rosettacode.org/wiki/Factorial#Recursive_50 */
+let rec factorial n =>
+  n <= 0 ?
+	1 :
+	n * factorial (n - 1);
+
+let () =
+  Js.log (factorial 6);`
+}, {
+  name: 'Recursion - Greatest Common Divisor',
+  code:
+`/* Based on https://rosettacode.org/wiki/Greatest_common_divisor#OCaml */
+let rec gcd a b =>
+  switch (a mod b) {
+  | 0 => b
+  | r => gcd b r
+  };
+
+let () =
+	Js.log (gcd 27 9);`
+}, {
+  name: 'Recursion - Towers of Hanoi',
+  code:
+`/* Based on https://rosettacode.org/wiki/Towers_of_Hanoi#OCaml */
+let rec hanoi n a b c =>
+  if (n > 0) {
+    hanoi (n - 1) a c b;
+    Js.log {j|Move disk from pole $a to pole $b|j};
+    hanoi (n - 1) c b a
+  };
+
+let () =
+  hanoi 4 1 2 3;`
+}, {
+  name: 'Json',
+  code:
+`let person = {
+  "name": {
+    "first": "Bob",
+    "last": "Zhmith"
+  },
+  "age": 32
+};
+
+let json =
+  person |> Js.Json.stringifyAny
+		 |> Js.Option.getExn
+		 |> Js.Json.parseExn;
+
+let () = {
+  let name =
+  	json |> Js.Json.decodeObject
+	  	 |> Js.Option.andThen ((fun p => Js.Dict.get p "name") [@bs])
+	  	 |> Js.Option.andThen ((fun json => Js.Json.decodeObject json) [@bs])
+  		 |> Js.Option.getExn;
+  
+  let firstName =
+  	Js.Dict.get name "first"
+  	|> Js.Option.andThen ((fun json => Js.Json.decodeString json) [@bs])
+  	|> Js.Option.getExn;
+  
+  let lastName =
+  	Js.Dict.get name "last"
+  	|> Js.Option.andThen ((fun json => Js.Json.decodeString json) [@bs])
+  	|> Js.Option.getExn;
+  
+  Js.log {j|Hello, $firstName $lastName|j};
+}`
+}, {
+  name: 'FizzBuzz',
+  code:
+`/* Based on https://rosettacode.org/wiki/FizzBuzz#OCaml */
+
+let fizzbuzz i =>
+  switch (i mod 3, i mod 5) {
+  | (0, 0) => "FizzBuzz"
+  | (0, _) => "Fizz"
+  | (_, 0) => "Buzz"
+  | _ => string_of_int i
+  };
+
+for i in 1 to 100 {
+  Js.log (fizzbuzz i)
+};`
+}, {
+  name: 'Normal distribution of random numbers',
+  code:
+`/* Based on https://rosettacode.org/wiki/Random_numbers#OCaml */
+let pi = 4. *. atan 1.;
+
+let random_gaussian () =>
+  1. +.
+	sqrt ((-2.) *. log (Random.float 1.)) *.
+	cos (2. *. pi *. Random.float 1.);
+
+Array.init 42 (fun _ => random_gaussian ())
+|> Array.iter Js.log;`
+}, {
+  name: 'Regex',
+  code:
+`let input = {|
+  <html>
+    <head>
+      <title>A Simple HTML Document</title>
+    </head>
+    <body>
+      <p>This is a very simple HTML document</p>
+      <p>It only has two paragraphs</p>
+    </body>
+  </html>
+  |};
+  
+  let () =
+    input |> Js.String.match_ [%re "/<p\\b[^>]*>(.*?)<\\/p>/gi"]
+      |> fun
+        | Some result => result |> Js.Array.forEach Js.log
+          | None => Js.log "no matches";`
+}, {
+  name: 'Quicksort',
+  code:
+`/* Based on https://rosettacode.org/wiki/Sorting_algorithms/Quicksort#OCaml */
+
+let rec quicksort gt =>
+  fun | [] => []
+  	  | [x, ...xs] => {
+      	let (ys, zs) = List.partition (gt x) xs;
+      	quicksort gt ys @ [x, ...quicksort gt zs]
+      };
+
+let () =
+	[4, 65, 2, (-31), 0, 99, 83, 782, 1]
+	|> quicksort (>)
+	|> Array.of_list
+	|> Js.log;`
+}, {
+  name: 'String interpolation',
+  code:
+`for a in 1 to 10 {
+  for b in 1 to 10 {
+  	let product = a * b;
+  	Js.log {j|$a times $b is $product|j}
+  }
+}`
+}];
+
 const  queryParamPrefixFor = language => `?${language}=`;
 
 const retrieve = () => {
@@ -50,9 +232,16 @@ const retrieve = () => {
     fromQueryParam('reason') ||
     fromQueryParam('ocaml') ||
     fromLocalStorage() ||
-    { language: 'reason', code: 'let x = 10;\nJs.log x;' }
+    { language: 'reason', code: decompress(examples[0].code) }
   );
 };
+
+const generateShareableUrl = (language, code) =>
+  window.location.origin +
+  window.location.pathname +
+  queryParamPrefixFor(language) +
+  compress(code);
+
 
 const persist = debounce((language, code) => {
   try {
@@ -63,12 +252,7 @@ const persist = debounce((language, code) => {
 
   // avoid a refresh of the page; we also don't want every few keystrokes to
   // create a new history for the back button, so replace the current one
-  const newURL =
-    window.location.origin +
-    window.location.pathname +
-    queryParamPrefixFor(language) +
-    compress(code);
-  window.history.replaceState(null, '', newURL);
+  window.history.replaceState(null, '', generateShareableUrl(language, code));
 }, 100);
 
 const errorTimeout = 500
@@ -87,6 +271,39 @@ const isSafari = (
 ) || (
   typeof safari !== 'undefined'
 );
+
+class ShareButton extends Component {
+  state = {
+    showConfirmation: false
+  }
+
+  onClick = () => {
+    this.props.onClick();
+    this.setState({showConfirmation: true});
+    setTimeout(() => this.setState({showConfirmation: false}), 2000);
+  }
+
+  render() {
+    const {url} = this.props;
+    const {showConfirmation} = this.state;
+
+    return (
+      <div css={[styles.toolbarButton, styles.shareButton]}>
+        <input
+          id="shareableUrl"
+          value={this.props.url}
+          readOnly
+        />
+        <button onClick={this.onClick}>Share</button>
+        <span className={showConfirmation ? 'tooltip s-show-confirmation' : 'tooltip'} css={styles.tooltip}>
+          <span className="arrow"></span>
+          <span className="help">Click to copy to clipboard</span>
+          <span className="confirmation">Copied</span>
+        </span>
+      </div>
+    );
+  }
+}
 
 export default class Try extends Component {
   state = {
@@ -204,7 +421,8 @@ export default class Try extends Component {
         reasonSyntaxError: null,
         compileError: null,
         ocamlSyntaxError: null,
-        jsError: null
+        jsError: null,
+        shareableUrl: generateShareableUrl('reason', newReasonCode)
       }
     });
   }
@@ -244,7 +462,8 @@ export default class Try extends Component {
         reasonSyntaxError: null,
         compileError: null,
         ocamlSyntaxError: null,
-        jsError: null
+        jsError: null,
+        shareableUrl: generateShareableUrl('ocaml', newOcamlCode)
       }
     });
   }
@@ -289,8 +508,8 @@ export default class Try extends Component {
   }, 100)
 
   toggleEvaluate = () => {
-    if (!this.state.autoEvaluate && this.state.jsIsLatest) {
-      this.evalJs(this.state.js)
+    if (!this.state.autoEvaluate) {
+      this.evalLatest();
     }
     this.setState(_ => {
       return {
@@ -299,6 +518,18 @@ export default class Try extends Component {
     })
   }
 
+  evalLatest = () => {
+    if (this.state.jsIsLatest) {
+      this.evalJs(this.state.js);
+    }
+  }
+
+  copyShareableUrl = () => {
+    let input = document.getElementById('shareableUrl');
+    input.select();
+    document.execCommand('copy');
+  }
+ 
   render() {
     const { reason, ocaml, js, reasonSyntaxError, compileError, ocamlSyntaxError, jsError } = this.state
     const codemirrorStyles = [
@@ -315,7 +546,27 @@ export default class Try extends Component {
         <div css={{ backgroundColor: accent, color: 'white' }}>
           <Header inverted />
         </div>
-        <div css={styles.info}>Copy the URL to share the code snippet!</div>
+        <div css={styles.toolbar}>
+          <div css={[styles.toolbarButton, styles.exampleSelect]}>
+            <button>Examples</button>
+            <ul css={styles.exampleMenu}>
+              {examples.map(example => <li key={example.name} onClick={() => this.updateReason(example.code)}>{example.name}</li>)}
+            </ul>
+          </div>
+          <div css={styles.toolbarButton}>
+            <button onClick={this.evalLatest}>Evaluate</button>
+            <input
+              css={styles.toolbarCheckbox}
+              type="checkbox"
+              checked={this.state.autoEvaluate}
+              onChange={this.toggleEvaluate}
+            />
+          </div>
+          <ShareButton
+            url={this.state.shareableUrl}
+            onClick={this.copyShareableUrl}
+          />
+        </div>
         <div css={styles.inner}>
           <div css={styles.column}>
             <div css={styles.row}>
@@ -336,7 +587,6 @@ export default class Try extends Component {
                   </div>
                 </div>}
             </div>
-            <div style={{ flexBasis: 20 }} />
             <div css={styles.row}>
               <div css={styles.label}>OCaml</div>
               <CodeMirror
@@ -364,7 +614,6 @@ export default class Try extends Component {
                 </div>}
             </div>
           </div>
-          <div style={{ flexBasis: 20 }} />
           <div css={styles.column}>
             <div css={styles.row}>
               <div css={styles.label}>JavaScript</div>
@@ -384,17 +633,8 @@ export default class Try extends Component {
                   </div>
                 </div>}
             </div>
-            <div style={{ flexBasis: 20 }} />
             <div css={styles.row}>
-              <div css={styles.label}>
-                Auto-evaluate
-                <input
-                  css={styles.checkbox}
-                  type="checkbox"
-                  checked={this.state.autoEvaluate}
-                  onChange={this.toggleEvaluate}
-                />
-              </div>
+              <div css={styles.label}>Output</div>
               <div css={styles.output}>
                 {this.state.output.map((item, i) =>
                   <div css={styles.outputLine} key={i}>
@@ -417,9 +657,6 @@ const formatOutput = item =>
   item.contents.map(val => JSON.stringify(val)).join(' ')
 
 const styles = {
-  checkbox: {
-    marginLeft: 10,
-  },
   output: {
     flex: 1,
     padding: 10,
@@ -453,7 +690,6 @@ const styles = {
   inner: {
     flexDirection: 'row',
     flex: 1,
-    padding: '10px 20px 20px 20px',
     '@media(max-width: 500px)': {
       display: 'block',
       flexDirection: 'column',
@@ -472,7 +708,10 @@ const styles = {
   row: {
     flex: 1,
     minHeight: 0,
-    border: '1px solid #aaa',
+    background: gray,
+    border: '1px solid #d6d4d4',
+    borderBottom: 'none',
+    borderRight: 'none',
     position: 'relative',
     overflow: 'auto',
     '@media(max-width: 500px)': {
@@ -489,23 +728,141 @@ const styles = {
     position: 'absolute',
     top: 0,
     right: 0,
-    backgroundColor: 'rgba(200, 200, 200, 0.6)',
-    padding: '5px 10px',
-    fontWeight: 'bold',
-    fontFamily: 'monospace',
-    color: 'black',
-    fontSize: 14,
-    lineHeight: '14px',
+    backgroundColor: 'rgba(246, 244, 244, 0.8)',
+    padding: '1em',
+    textTransform: 'uppercase',
+    color: '#988',
+    fontSize: 12,
+    lineHeight: '12px',
     flexDirection: 'row',
     alignItems: 'center',
     zIndex: 20,
     borderRadius: '0 0 0 5px',
   },
 
-  info: {
+  toolbar: {
     fontFamily: headerFontFamily(),
     fontSize: 16,
-    padding: '10px 20px 0 20px',
+    flexDirection: 'row',
+    justifyContent: 'flex-end'
+  },
+
+  toolbarButton: {
+    borderLeft: '1px solid #d6d4d4',
+    padding: '1em 2em',
+    flexDirection: 'row',
+
+    '&:hover, &:hover button': {
+      color: accent,
+      cursor: 'pointer'
+    }
+  },
+
+  shareButton: {
+    position: 'relative',
+
+    '& input': {
+      background: gray,
+      transition: 'all 250ms',
+      width: 0,
+      padding: 0,
+    },
+
+    '&:hover input': {
+      width: '25vw',
+      marginRight: '1em',
+    },
+
+    '&:hover .tooltip': {
+      display: 'block'
+    }
+  },
+
+  tooltip: {
+    display: 'none',
+    position: 'absolute',
+    zIndex: 100,
+    top: '100%',
+    right: '1em',
+    background: 'rgba(0, 0, 0, .6)',
+    color: 'white',
+    whiteSpace: 'nowrap',
+    padding: '.15em .8em',
+    borderRadius: '.25em',
+    fontSize: '.8rem',
+
+    '& .arrow': {
+      position: 'absolute',
+      content: ' ',
+      bottom: '100%',
+      right: '2.5em',
+      height: '0',
+      width: '0',
+      border: '.5em solid transparent',
+      pointerEvents: 'none',
+      borderBottomColor: 'rgba(0, 0, 0, .6)',
+      marginLeft: '.5em'
+    },
+
+    '& .confirmation': {
+      display: 'none',
+      padding: '0 .75em',
+    },
+
+    '&.s-show-confirmation': {
+      '& .help': {
+        display: 'none'
+      },
+      '& .confirmation': {
+        display: 'block'
+      }
+    }
+  },
+
+  exampleSelect: {
+    marginRight: 'auto',
+    borderRight: '1px solid #d6d4d4',
+    borderLeft: 'none',
+    position: 'relative',
+
+    '&:hover ul': {
+      display: 'block'
+    }
+  },
+
+  exampleMenu: {
+    position: 'absolute',
+    color: '#555',
+    zIndex: 10,
+    background: 'white',
+    display: 'none',
+    top: '100%',
+    left: 0,
+    minWidth: '100%',
+    width: '25vw',
+    boxShadow: '1px 1px 1px rgba(0, 0, 0, .2)',
+    borderTop: '1px solid #d6d4d4',
+
+    '& li': {
+      padding: '.5em 2em',
+
+      '&:first-child': {
+        paddingTop: '1em'
+      },
+      '&:last-child': {
+        paddingBottom: '1em'
+      }
+    },
+
+    '& li:hover': {
+      color: accent
+    }
+  },
+
+  toolbarCheckbox: {
+    marginLeft: '1em',
+    alignSelf: 'center',
+    justifySelf: 'center',
   },
 
   fakeCodemirrorPreload: {
@@ -524,6 +881,7 @@ const styles = {
     '& .CodeMirror': {
       flex: 1,
       height: 'auto',
+      background: 'transparent',
 
       '@media(max-width: 500px)': {
         height: 300,
