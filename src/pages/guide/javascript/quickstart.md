@@ -15,11 +15,7 @@ cd my-first-app
 npm run start
 ```
 
-You can also build in watch mode:
-
-```sh
-npm run watch
-```
+It runs in watch mode, so any changes to files will be picked up and compiled.
 
 That's all! This compiles Reason to Javascript in the `lib/js/` folder.
 
