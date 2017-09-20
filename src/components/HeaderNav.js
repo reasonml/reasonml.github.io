@@ -1,4 +1,5 @@
 import React from "react"
+import LanguageSelect from './LanguageSelect'
 import Link from "./Link"
 import {headerFontFamily} from '../utils/typography'
 
@@ -35,33 +36,45 @@ const links = [
 
 export default class HeaderNav extends React.Component {
   render() {
-    return <div css={styles.links}>
-      {links.map(link => (
-        <Link css={styles.link} to={link.target} key={link.target}>
-          {link.title}
-        </Link>
-      ))}
+    return <div css={styles.linkContainer}>
+      <div css={styles.links}>
+        {links.map(link => (
+          <Link css={styles.link} to={link.target} key={link.target}>
+            {link.title}
+          </Link>
+        ))}
+      </div>
+      <LanguageSelect />
     </div>
   }
 }
 
 const styles = {
   links: {
+    alignItems: 'center',
     flexDirection: 'row',
     flex: 1,
-    overflow: 'auto',
     justifyContent: 'flex-end',
-    fontFamily: headerFontFamily(),
+    '@media(max-width: 550px)': {
+      justifyContent: 'space-evenly',
+    },
   },
   link: {
-    padding: 15,
+    padding: '0 10px',
     '@media(max-width: 550px)': {
-      padding: 5,
-      // fontSize: '.9em',
-    },
-    '@media(max-width: 400px)': {
-      padding: 5,
       fontSize: '.9em',
-    }
+    },
+  },
+  linkContainer: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    flex: 1,
+    justifyContent: 'flex-end',
+    overflow: 'auto',
+    fontFamily: headerFontFamily(),
+    '@media(max-width: 550px)': {
+      alignItems: 'flex-end',
+      flexDirection: 'column',
+    },
   },
 }
