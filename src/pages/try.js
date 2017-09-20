@@ -266,11 +266,10 @@ const waitUntilScriptsLoaded = done => {
   }, 10)
 }
 
-const isSafari = (
-  typeof navigator !== 'undefined' && /iP(ad|hone|od).+Version\/[\d\.]+.*Safari/i.test(navigator.userAgent)
-) || (
+const isSafari =
+  (typeof navigator !== 'undefined' &&
+    /iP(ad|hone|od).+Version\/[\d\.]+.*Safari/i.test(navigator.userAgent)) ||
   typeof safari !== 'undefined'
-);
 
 class ShareButton extends Component {
   state = {

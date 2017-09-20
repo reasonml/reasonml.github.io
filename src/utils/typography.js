@@ -42,7 +42,8 @@ const options = {
 
 const typography = new Typography(options)
 
-typography.headerFontFamily = () => typography.options.headerFontFamily.join(',')
+typography.headerFontFamily = () =>
+  typography.options.headerFontFamily.join(',')
 typography.bodyFontFamily = () => typography.options.headerFontFamily.join(',')
 
 // Hot reload typography in development.
