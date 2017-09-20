@@ -8,11 +8,10 @@ order: 10
 Reason is just OCaml under the hood; We don't yet cover every concept on this documentation site. These external articles (in OCaml syntax) might help! **Make sure you install [reason-tools](https://github.com/reasonml/reason-tools) to translate the syntax to Reason!**
 
 - [Real World OCaml](https://realworldocaml.org): a comprehensive book on OCaml.
-- [GADT tutorial](http://mads-hartmann.com/ocaml/2015/01/05/gadt-ocaml.html) for those interested in the deeper parts of OCaml.
 
-### BuckleScript
+## BuckleScript
 
-- [BuckleScript Manual](http://bucklescript.github.io/bucklescript/Manual.html), the official documentations for our JavaScript backend.
+- [BuckleScript Manual](http://bucklescript.github.io/bucklescript/Manual.html): the official documentations for our JavaScript backend.
 - [BuckleScript JS API docs](http://bucklescript.github.io/bucklescript/api/index.html)
 - [BuckleScript build system schema](http://bucklescript.github.io/bucklescript/docson/#build-schema.json): comprehensive resource on `bsb`'s configuration.
 - [BuckleScript FFI Cheat Sheet](https://github.com/glennsl/bucklescript-ffi-cheatsheet)
@@ -20,7 +19,7 @@ Reason is just OCaml under the hood; We don't yet cover every concept on this do
 - [JavaScript Interop with Reason and BuckleScript](https://jaredforsyth.com/2017/06/03/javascript-interop-with-reason-and-bucklescript/)
 - [Unit Testing in ReasonML](https://jaketrent.com/post/unit-testing-in-reasonml/)
 
-### ReasonReact
+## ReasonReact
 
 - [Documentation](//reasonml.github.io/reason-react/)
 - [Interactive ReasonReact Tutorial](https://jaredforsyth.com/2017/07/05/a-reason-react-tutorial/): features runnable code and type hint on hover!
@@ -35,3 +34,13 @@ Reason is just OCaml under the hood; We don't yet cover every concept on this do
 - [What's in a Language?](https://www.youtube.com/watch?v=24S5u_4gx7w) April 2017
 - [Taming the Meta-language](https://www.youtube.com/watch?v=_0T5OSSzxms) March 2017
 - [The Age of Reason(ML)](https://www.youtube.com/watch?v=8LCmLQ1-YqQ) Nov 2016
+
+## Pro Links
+
+The more dated they look, the richer the content =P
+
+- [How OCaml type checker works](http://okmij.org/ftp/ML/generalization.html?fref=gc)
+- [Detecting use-cases for GADTs in OCaml](http://mads-hartmann.com/ocaml/2015/01/05/gadt-ocaml.html)
+- [Polymorphism and its limitations](http://www.polychoron.fr/ocaml-nonmanual/polymorphism.html)
+- [Adding GADT to OCaml](http://www.math.nagoya-u.ac.jp/%7Egarrigue/papers/ml2011-show.pdf), [Locally abstract types vs polymorphic annotations](https://groups.google.com/forum/#!topic/ocaml-aggregation-list/-tnouSeSQoY): on GADT and locally abstract types
+- [Using the Format module](https://ocaml.org/learn/tutorials/format.html) and its [docs](https://caml.inria.fr/pub/docs/manual-ocaml/libref/Format.html): great for working with the hidden gem of the OCaml stdlib

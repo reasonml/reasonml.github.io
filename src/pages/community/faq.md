@@ -38,6 +38,16 @@ Most JS libraries should easily work under Reason + BuckleScript. On the native 
 #### What's the server-side story? Should I compile to native or to JS and use node.js?
 We do compile to native, but the native workflow is currently work-in-progress. At this time, we recommend compiling to JS through BuckleScript and use the bindings at [reasonml-community](https://github.com/reasonml-community) or somewhere else.
 
+#### What's BuckleScript's async story?
+First, if you're not interfacing with any library that uses promises, you can simply use callbacks. Everyone gets them and they're performant.
+
+If you need to bind to a JS library that uses promises, or communicate with such library, you can use BS's [bindings to promises](http://bucklescript.github.io/bucklescript/api/Js.Promise.html). There's also potential to have some syntactic sugar in the future. In the long run, we'd like to implement a spec-compliant promises implementation in OCaml/Reason proper, so that the compiler optimizations could kick in.
+
+For a more idiomatic OCaml solution: on the native OCaml side, we have [lwt](http://ocsigen.org/lwt/) and [Async](https://ocaml.janestreet.com/ocaml-core/111.03.00/doc/async/#Std). We don't use them in web right now, but we might in the future.
+
+#### What's the (unit) test story?
+Some of OCaml's language features (not just types) might be able to defer the need for unit testing until later. In the meantime, for compilation to JS, we're working on [Jest bindings](https://github.com/BuckleTypes/bs-jest). We'll look into using Jest for native too, if Jest is written using Reason in the future (no concrete plan yet). [OUnit](http://ounit.forge.ocamlcore.org) is a good, small native OCaml testing library right now.
+
 #### What's the `.merlin` file at the root of my project?
 That's the metadata file for [Merlin](/guide/editor-tools/extra-goodies#merlin), the shared editor integration backend for autocomplete, jump-to-definition, etc. For the [JavaScript Workflow](/guide/javascript), `bsb` the build system generates the `.merlin` for you; You don't need to check that into your version control and don't have to manually modify it.
 
@@ -82,3 +92,50 @@ BuckleScript is optimized for performance across the whole stack. You can try sl
 - Adding a few infinite loops here and there.
 - Stuffing a JavaScript build tool in the pipeline.
 - Dragging in more dependencies for writing a hello world.
+
+#### I'm seeing a weird .cmi/.cmx/.cmj/.cma file referenced in a compiler error. Where do these files come from?
+
+The OCaml community frequently uses file extensions to distinguish between types of source, artifacts, and metadata, depending on your build target (native/bytecode/JavaScript). The following is a overview of some of the file extensions you may come across:
+
+##### Source files
+
+- `.ml`: OCaml source file
+- `.mli`: OCaml interface file; determines which parts of the matching `.ml` file are visible to the outside world
+- `.re`: Reason source file. Like `.ml`, but for Reason
+- `.rei`: Reason interface file. Like `.mli`, but for Reason
+
+##### Compiled files
+
+- `.cmi`: Compiled interface (.rei/mli) file
+- `.cmx`: Compiled object file for native output (via ocamlopt)
+- `.cmo`: Compiled object file for bytecode output
+- `.cmj`: Compiled object file for web (via BuckleScript)
+- `.cma`: Library file for bytecode output (equivalent to C's .a files)
+- `.cmxa`: Library file for native output
+- `.cmt`: Contains a "Typedtree" – basically the AST with all type info
+- `.cmti`: Just like a .cmt file, but for interface files
+- `.cmxs`: Dynamically loaded plugin (for native compilation)
+- `.o`: Compiled native object file
+- `.out`: Conventional name/extension for final output produced by ocamlc/ocamlopt (e.g. `ocamlc -o myExecutable.out`)
+
+##### Other OCaml ecosystem files
+
+- `.mll`: ocamllex lexical analyzer definition file
+- `.mly`: ocamlyacc parser generator definition file
+- `.mldylib`: Contains a list of module paths that will be compiled and archived together to build a corresponding `.cmxs` target (native plugin)
+- `.mliv`: Batteries-specific files for some [custom preprocessing](https://github.com/ocaml-batteries-team/batteries-included/blob/f019927b9503ec65ef816f02315de78d4bae3481/src/batArray.mliv).
+- `.mllib`: Ocaml library (cma and cmxa)
+- `.mlpack`: Ocaml package (cmo built with the -pack flag)
+- `.mlpp`: [Extlib](https://github.com/ygrek/ocaml-extlib)-specific files for some custom preprocessing
+- `.mltop`: [OCamlbuild top-level file](https://shonkychef.wordpress.com/2009/07/28/making-an-ocaml-toplevel-with-ocamlbuild/), used by OCamlbuild to generate a .top file
+- `.odocl`: OCaml documentation file
+
+If some of those explanations are still a bit cryptic, here are expansions on some of the terms used above:
+- [AST](https://en.wikipedia.org/wiki/Abstract_syntax_tree): Abstract Syntax Tree. The data structure coming from the source code, that the compiler operates on.
+- [Linking](https://en.wikipedia.org/wiki/Linker_(computing)): The step where the compiler takes many intermediate compiled files and assembles them together. E.g. linking A with B, because A's original source file referred to B.
+- Native: Builds that run on bare metal assembly instructions of the platform in question.
+- [Bytecode](https://en.wikipedia.org/wiki/Bytecode): Like native code, but more portable and less performant
+- [Object file](https://en.wikipedia.org/wiki/Object_file): Contains machine code that is not directly runnable.
+
+There is more information and context for many of these file extensions [on the OCaml site](https://ocaml.org/learn/tutorials/filenames.html) and in [this mailing list post](http://caml.inria.fr/pub/ml-archives/caml-list/2008/09/2bc9b38171177af5dc0d832a365d290d.en.html). There are also deeper dives on [native](https://caml.inria.fr/pub/docs/manual-ocaml/native.html) and [bytecode](http://caml.inria.fr/pub/docs/manual-ocaml/comp.html) compilation that contain more detailed descriptions in the OCaml manual.
+

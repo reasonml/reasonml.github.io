@@ -3,7 +3,7 @@ import Helmet from "react-helmet"
 
 import Section from '../components/Section'
 import GuideSidebar, {constructTree, fixPath} from '../components/GuideSidebar'
-import {accent, gray} from '../utils/colors'
+import {accent, gray, dividerLine} from '../utils/colors'
 import editIcon from '../../static/edit-icon.svg'
 
 import Link from "../components/Link"
@@ -66,6 +66,10 @@ export default class Guide extends React.Component {
       const Examples = require('../pages/community/examples.js')
       contents = <Examples />
       edit = editUrl('community/examples.js')
+    } else if (relativePath === 'community/companies.md') {
+      const Companies = require('../pages/community/companies.js')
+      contents = <Companies />
+      edit = editUrl('community/companies.js')
     } else {
       contents = <div className="markdown-content" dangerouslySetInnerHTML={{__html: html}} />
       edit = editUrl(relativePath)
@@ -121,11 +125,12 @@ const styles = {
     lineHeight: '25px',
   },
   title: {
-    borderBottom: '1px solid #aaa',
+    borderBottom: '1px solid ' + dividerLine,
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'flex-end',
+    paddingBottom: '4px'
   },
   contentSection: {
     flexDirection: 'row',

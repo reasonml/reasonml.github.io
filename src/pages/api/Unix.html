@@ -717,7 +717,7 @@ The type of error codes.
 </div>
 
 
-<pre><span class="keyword">exception</span> Unix_error error string string;
+<pre id="EXCEPTIONUnix_error"><span class="keyword">exception</span> Unix_error error string string;
 </pre>
 <div class="info ">
 Raised by the system calls below when an error is encountered.
@@ -726,12 +726,12 @@ Raised by the system calls below when an error is encountered.
    to the function, if it has one, or the empty string otherwise.<br>
 </div>
 
-<pre><span class="keyword">let</span> error_message: error =&gt; string;
+<pre id="VALerror_message"><span class="keyword">let</span> error_message: error =&gt; string;
 </pre><div class="info ">
 Return a string describing the given error code.<br>
 </div>
 
-<pre><span class="keyword">let</span> handle_unix_error: (&apos;a =&gt; &apos;b) =&gt; &apos;a =&gt; &apos;b;
+<pre id="VALhandle_unix_error"><span class="keyword">let</span> handle_unix_error: (&apos;a =&gt; &apos;b) =&gt; &apos;a =&gt; &apos;b;
 </pre><div class="info ">
 <code class="code">handle_unix_error f x</code> applies <code class="code">f</code> to <code class="code">x</code> and returns the result.
    If the exception <code class="code">Unix_error</code> is raised, it prints a message
@@ -740,20 +740,20 @@ Return a string describing the given error code.<br>
 <br>
 <h6 id="6_Accesstotheprocessenvironment">Access to the process environment</h6><br>
 
-<pre><span class="keyword">let</span> environment: unit =&gt; array string;
+<pre id="VALenvironment"><span class="keyword">let</span> environment: unit =&gt; array string;
 </pre><div class="info ">
 Return the process environment, as an array of strings
     with the format ``variable=value&apos;&apos;.<br>
 </div>
 
-<pre><span class="keyword">let</span> getenv: string =&gt; string;
+<pre id="VALgetenv"><span class="keyword">let</span> getenv: string =&gt; string;
 </pre><div class="info ">
 Return the value associated to a variable in the process
    environment. Raise <code class="code">Not_found</code> if the variable is unbound.
    (This function is identical to <a href="Sys.html#VALgetenv"><code class="code">Sys.getenv</code></a>.)<br>
 </div>
 
-<pre><span class="keyword">let</span> putenv: string =&gt; string =&gt; unit;
+<pre id="VALputenv"><span class="keyword">let</span> putenv: string =&gt; string =&gt; unit;
 </pre><div class="info ">
 <code class="code">Unix.putenv name value</code> sets the value associated to a
    variable in the process environment.
@@ -833,7 +833,7 @@ Flags for <a href="Unix.html#VALwaitpid"><code class="code">Unix.waitpid</code><
 </div>
 
 
-<pre><span class="keyword">let</span> execv: string =&gt; array string =&gt; &apos;a;
+<pre id="VALexecv"><span class="keyword">let</span> execv: string =&gt; array string =&gt; &apos;a;
 </pre><div class="info ">
 <code class="code">execv prog args</code> execute the program in file <code class="code">prog</code>, with
    the arguments <code class="code">args</code>, and the current process environment.
@@ -842,37 +842,37 @@ Flags for <a href="Unix.html#VALwaitpid"><code class="code">Unix.waitpid</code><
    on failure, a <a href="Unix.html#EXCEPTIONUnix_error"><code class="code">Unix.Unix_error</code></a> exception is raised.<br>
 </div>
 
-<pre><span class="keyword">let</span> execve: string =&gt; array string =&gt; array string =&gt; &apos;a;
+<pre id="VALexecve"><span class="keyword">let</span> execve: string =&gt; array string =&gt; array string =&gt; &apos;a;
 </pre><div class="info ">
 Same as <a href="Unix.html#VALexecv"><code class="code">Unix.execv</code></a>, except that the third argument provides the
    environment to the program executed.<br>
 </div>
 
-<pre><span class="keyword">let</span> execvp: string =&gt; array string =&gt; &apos;a;
+<pre id="VALexecvp"><span class="keyword">let</span> execvp: string =&gt; array string =&gt; &apos;a;
 </pre><div class="info ">
 Same as <a href="Unix.html#VALexecv"><code class="code">Unix.execv</code></a>, except that
    the program is searched in the path.<br>
 </div>
 
-<pre><span class="keyword">let</span> execvpe: string =&gt; array string =&gt; array string =&gt; &apos;a;
+<pre id="VALexecvpe"><span class="keyword">let</span> execvpe: string =&gt; array string =&gt; array string =&gt; &apos;a;
 </pre><div class="info ">
 Same as <a href="Unix.html#VALexecve"><code class="code">Unix.execve</code></a>, except that
    the program is searched in the path.<br>
 </div>
 
-<pre><span class="keyword">let</span> fork: unit =&gt; int;
+<pre id="VALfork"><span class="keyword">let</span> fork: unit =&gt; int;
 </pre><div class="info ">
 Fork a new process. The returned integer is 0 for the child
    process, the pid of the child process for the parent process.<br>
 </div>
 
-<pre><span class="keyword">let</span> wait: unit =&gt; (int, process_status);
+<pre id="VALwait"><span class="keyword">let</span> wait: unit =&gt; (int, process_status);
 </pre><div class="info ">
 Wait until one of the children processes die, and return its pid
    and termination status.<br>
 </div>
 
-<pre><span class="keyword">let</span> waitpid: list wait_flag =&gt; int =&gt; (int, process_status);
+<pre id="VALwaitpid"><span class="keyword">let</span> waitpid: list wait_flag =&gt; int =&gt; (int, process_status);
 </pre><div class="info ">
 Same as <a href="Unix.html#VALwait"><code class="code">Unix.wait</code></a>, but waits for the child process whose pid is given.
    A pid of <code class="code">-1</code> means wait for any child.
@@ -884,7 +884,7 @@ Same as <a href="Unix.html#VALwait"><code class="code">Unix.wait</code></a>, but
    children.<br>
 </div>
 
-<pre><span class="keyword">let</span> system: string =&gt; process_status;
+<pre id="VALsystem"><span class="keyword">let</span> system: string =&gt; process_status;
 </pre><div class="info ">
 Execute the given command, wait until it terminates, and return
    its termination status. The string is interpreted by the shell
@@ -893,17 +893,17 @@ Execute the given command, wait until it terminates, and return
    be executed.<br>
 </div>
 
-<pre><span class="keyword">let</span> getpid: unit =&gt; int;
+<pre id="VALgetpid"><span class="keyword">let</span> getpid: unit =&gt; int;
 </pre><div class="info ">
 Return the pid of the process.<br>
 </div>
 
-<pre><span class="keyword">let</span> getppid: unit =&gt; int;
+<pre id="VALgetppid"><span class="keyword">let</span> getppid: unit =&gt; int;
 </pre><div class="info ">
 Return the pid of the parent process.<br>
 </div>
 
-<pre><span class="keyword">let</span> nice: int =&gt; int;
+<pre id="VALnice"><span class="keyword">let</span> nice: int =&gt; int;
 </pre><div class="info ">
 Change the process priority. The integer argument is added to the
    ``nice&apos;&apos; value. (Higher values of the ``nice&apos;&apos; value mean
@@ -912,24 +912,24 @@ Change the process priority. The integer argument is added to the
 <br>
 <h6 id="6_Basicfileinputoutput">Basic file input/output</h6><br>
 
-<pre><span class="keyword">type</span> file_descr;
+<pre id="TYPEfile_descr"><span class="keyword">type</span> file_descr;
 </pre>
 <div class="info ">
 The abstract type of file descriptors.<br>
 </div>
 
 
-<pre><span class="keyword">let</span> stdin: file_descr;
+<pre id="VALstdin"><span class="keyword">let</span> stdin: file_descr;
 </pre><div class="info ">
 File descriptor for standard input.<br>
 </div>
 
-<pre><span class="keyword">let</span> stdout: file_descr;
+<pre id="VALstdout"><span class="keyword">let</span> stdout: file_descr;
 </pre><div class="info ">
 File descriptor for standard output.<br>
 </div>
 
-<pre><span class="keyword">let</span> stderr: file_descr;
+<pre id="VALstderr"><span class="keyword">let</span> stderr: file_descr;
 </pre><div class="info ">
 File descriptor for standard error.<br>
 </div>
@@ -1086,7 +1086,7 @@ The flags to <a href="Unix.html#VALopenfile"><code class="code">Unix.openfile</c
 </div>
 
 
-<pre><span class="keyword">type</span> file_perm = int;
+<pre id="TYPEfile_perm"><span class="keyword">type</span> file_perm = int;
 </pre>
 <div class="info ">
 The type of file access rights, e.g. <code class="code">0o640</code> is read and write for user,
@@ -1094,26 +1094,26 @@ The type of file access rights, e.g. <code class="code">0o640</code> is read and
 </div>
 
 
-<pre><span class="keyword">let</span> openfile: string =&gt; list open_flag =&gt; file_perm =&gt; file_descr;
+<pre id="VALopenfile"><span class="keyword">let</span> openfile: string =&gt; list open_flag =&gt; file_perm =&gt; file_descr;
 </pre><div class="info ">
 Open the named file with the given flags. Third argument is the
    permissions to give to the file if it is created (see
    <a href="Unix.html#VALumask"><code class="code">Unix.umask</code></a>). Return a file descriptor on the named file.<br>
 </div>
 
-<pre><span class="keyword">let</span> close: file_descr =&gt; unit;
+<pre id="VALclose"><span class="keyword">let</span> close: file_descr =&gt; unit;
 </pre><div class="info ">
 Close a file descriptor.<br>
 </div>
 
-<pre><span class="keyword">let</span> read: file_descr =&gt; bytes =&gt; int =&gt; int =&gt; int;
+<pre id="VALread"><span class="keyword">let</span> read: file_descr =&gt; bytes =&gt; int =&gt; int =&gt; int;
 </pre><div class="info ">
 <code class="code">read fd buff ofs len</code> reads <code class="code">len</code> bytes from descriptor <code class="code">fd</code>,
     storing them in byte sequence <code class="code">buff</code>, starting at position <code class="code">ofs</code> in
     <code class="code">buff</code>. Return the number of bytes actually read.<br>
 </div>
 
-<pre><span class="keyword">let</span> write: file_descr =&gt; bytes =&gt; int =&gt; int =&gt; int;
+<pre id="VALwrite"><span class="keyword">let</span> write: file_descr =&gt; bytes =&gt; int =&gt; int =&gt; int;
 </pre><div class="info ">
 <code class="code">write fd buff ofs len</code> writes <code class="code">len</code> bytes to descriptor <code class="code">fd</code>,
     taking them from byte sequence <code class="code">buff</code>, starting at position <code class="code">ofs</code>
@@ -1122,20 +1122,20 @@ Close a file descriptor.<br>
     an error occurs.<br>
 </div>
 
-<pre><span class="keyword">let</span> single_write: file_descr =&gt; bytes =&gt; int =&gt; int =&gt; int;
+<pre id="VALsingle_write"><span class="keyword">let</span> single_write: file_descr =&gt; bytes =&gt; int =&gt; int =&gt; int;
 </pre><div class="info ">
 Same as <code class="code">write</code>, but attempts to write only once.
    Thus, if an error occurs, <code class="code">single_write</code> guarantees that no data
    has been written.<br>
 </div>
 
-<pre><span class="keyword">let</span> write_substring: file_descr =&gt; string =&gt; int =&gt; int =&gt; int;
+<pre id="VALwrite_substring"><span class="keyword">let</span> write_substring: file_descr =&gt; string =&gt; int =&gt; int =&gt; int;
 </pre><div class="info ">
 Same as <code class="code">write</code>, but take the data from a string instead of a byte
     sequence.<br>
 </div>
 
-<pre><span class="keyword">let</span> single_write_substring: file_descr =&gt; string =&gt; int =&gt; int =&gt; int;
+<pre id="VALsingle_write_substring"><span class="keyword">let</span> single_write_substring: file_descr =&gt; string =&gt; int =&gt; int =&gt; int;
 </pre><div class="info ">
 Same as <code class="code">single_write</code>, but take the data from a string instead of
     a byte sequence.<br>
@@ -1143,26 +1143,26 @@ Same as <code class="code">single_write</code>, but take the data from a string 
 <br>
 <h6 id="6_Interfacingwiththestandardinputoutputlibrary">Interfacing with the standard input/output library</h6><br>
 
-<pre><span class="keyword">let</span> in_channel_of_descr: file_descr =&gt; Pervasives.in_channel;
+<pre id="VALin_channel_of_descr"><span class="keyword">let</span> in_channel_of_descr: file_descr =&gt; Pervasives.in_channel;
 </pre><div class="info ">
 Create an input channel reading from the given descriptor.
    The channel is initially in binary mode; use
    <code class="code">set_binary_mode_in ic false</code> if text mode is desired.<br>
 </div>
 
-<pre><span class="keyword">let</span> out_channel_of_descr: file_descr =&gt; Pervasives.out_channel;
+<pre id="VALout_channel_of_descr"><span class="keyword">let</span> out_channel_of_descr: file_descr =&gt; Pervasives.out_channel;
 </pre><div class="info ">
 Create an output channel writing on the given descriptor.
    The channel is initially in binary mode; use
    <code class="code">set_binary_mode_out oc false</code> if text mode is desired.<br>
 </div>
 
-<pre><span class="keyword">let</span> descr_of_in_channel: Pervasives.in_channel =&gt; file_descr;
+<pre id="VALdescr_of_in_channel"><span class="keyword">let</span> descr_of_in_channel: Pervasives.in_channel =&gt; file_descr;
 </pre><div class="info ">
 Return the descriptor corresponding to an input channel.<br>
 </div>
 
-<pre><span class="keyword">let</span> descr_of_out_channel: Pervasives.out_channel =&gt; file_descr;
+<pre id="VALdescr_of_out_channel"><span class="keyword">let</span> descr_of_out_channel: Pervasives.out_channel =&gt; file_descr;
 </pre><div class="info ">
 Return the descriptor corresponding to an output channel.<br>
 </div>
@@ -1206,18 +1206,18 @@ Positioning modes for <a href="Unix.html#VALlseek"><code class="code">Unix.lseek
 </div>
 
 
-<pre><span class="keyword">let</span> lseek: file_descr =&gt; int =&gt; seek_command =&gt; int;
+<pre id="VALlseek"><span class="keyword">let</span> lseek: file_descr =&gt; int =&gt; seek_command =&gt; int;
 </pre><div class="info ">
 Set the current position for a file descriptor, and return the resulting
     offset (from the beginning of the file).<br>
 </div>
 
-<pre><span class="keyword">let</span> truncate: string =&gt; int =&gt; unit;
+<pre id="VALtruncate"><span class="keyword">let</span> truncate: string =&gt; int =&gt; unit;
 </pre><div class="info ">
 Truncates the named file to the given size.<br>
 </div>
 
-<pre><span class="keyword">let</span> ftruncate: file_descr =&gt; int =&gt; unit;
+<pre id="VALftruncate"><span class="keyword">let</span> ftruncate: file_descr =&gt; int =&gt; unit;
 </pre><div class="info ">
 Truncates the file corresponding to the given descriptor
    to the given size.<br>
@@ -1427,24 +1427,24 @@ The information returned by the <a href="Unix.html#VALstat"><code class="code">U
 </div>
 
 
-<pre><span class="keyword">let</span> stat: string =&gt; stats;
+<pre id="VALstat"><span class="keyword">let</span> stat: string =&gt; stats;
 </pre><div class="info ">
 Return the information for the named file.<br>
 </div>
 
-<pre><span class="keyword">let</span> lstat: string =&gt; stats;
+<pre id="VALlstat"><span class="keyword">let</span> lstat: string =&gt; stats;
 </pre><div class="info ">
 Same as <a href="Unix.html#VALstat"><code class="code">Unix.stat</code></a>, but in case the file is a symbolic link,
    return the information for the link itself.<br>
 </div>
 
-<pre><span class="keyword">let</span> fstat: file_descr =&gt; stats;
+<pre id="VALfstat"><span class="keyword">let</span> fstat: file_descr =&gt; stats;
 </pre><div class="info ">
 Return the information for the file associated with the given
    descriptor.<br>
 </div>
 
-<pre><span class="keyword">let</span> isatty: file_descr =&gt; bool;
+<pre id="VALisatty"><span class="keyword">let</span> isatty: file_descr =&gt; bool;
 </pre><div class="info ">
 Return <code class="code">true</code> if the given file descriptor refers to a terminal or
    console window, <code class="code">false</code> otherwise.<br>
@@ -1458,17 +1458,17 @@ File operations on large files.
 <br>
 <h6 id="6_Operationsonfilenames">Operations on file names</h6><br>
 
-<pre><span class="keyword">let</span> unlink: string =&gt; unit;
+<pre id="VALunlink"><span class="keyword">let</span> unlink: string =&gt; unit;
 </pre><div class="info ">
 Removes the named file<br>
 </div>
 
-<pre><span class="keyword">let</span> rename: string =&gt; string =&gt; unit;
+<pre id="VALrename"><span class="keyword">let</span> rename: string =&gt; string =&gt; unit;
 </pre><div class="info ">
 <code class="code">rename old new</code> changes the name of a file from <code class="code">old</code> to <code class="code">new</code>.<br>
 </div>
 
-<pre><span class="keyword">let</span> link: string =&gt; string =&gt; unit;
+<pre id="VALlink"><span class="keyword">let</span> link: string =&gt; string =&gt; unit;
 </pre><div class="info ">
 <code class="code">link source dest</code> creates a hard link named <code class="code">dest</code> to the file
    named <code class="code">source</code>.<br>
@@ -1523,33 +1523,33 @@ Flags for the <a href="Unix.html#VALaccess"><code class="code">Unix.access</code
 </div>
 
 
-<pre><span class="keyword">let</span> chmod: string =&gt; file_perm =&gt; unit;
+<pre id="VALchmod"><span class="keyword">let</span> chmod: string =&gt; file_perm =&gt; unit;
 </pre><div class="info ">
 Change the permissions of the named file.<br>
 </div>
 
-<pre><span class="keyword">let</span> fchmod: file_descr =&gt; file_perm =&gt; unit;
+<pre id="VALfchmod"><span class="keyword">let</span> fchmod: file_descr =&gt; file_perm =&gt; unit;
 </pre><div class="info ">
 Change the permissions of an opened file.<br>
 </div>
 
-<pre><span class="keyword">let</span> chown: string =&gt; int =&gt; int =&gt; unit;
+<pre id="VALchown"><span class="keyword">let</span> chown: string =&gt; int =&gt; int =&gt; unit;
 </pre><div class="info ">
 Change the owner uid and owner gid of the named file.<br>
 </div>
 
-<pre><span class="keyword">let</span> fchown: file_descr =&gt; int =&gt; int =&gt; unit;
+<pre id="VALfchown"><span class="keyword">let</span> fchown: file_descr =&gt; int =&gt; int =&gt; unit;
 </pre><div class="info ">
 Change the owner uid and owner gid of an opened file.<br>
 </div>
 
-<pre><span class="keyword">let</span> umask: int =&gt; int;
+<pre id="VALumask"><span class="keyword">let</span> umask: int =&gt; int;
 </pre><div class="info ">
 Set the process&apos;s file mode creation mask, and return the previous
     mask.<br>
 </div>
 
-<pre><span class="keyword">let</span> access: string =&gt; list access_permission =&gt; unit;
+<pre id="VALaccess"><span class="keyword">let</span> access: string =&gt; list access_permission =&gt; unit;
 </pre><div class="info ">
 Check that the process has the given permissions over the named
    file. Raise <code class="code">Unix_error</code> otherwise.<br>
@@ -1557,19 +1557,19 @@ Check that the process has the given permissions over the named
 <br>
 <h6 id="6_Operationsonfiledescriptors">Operations on file descriptors</h6><br>
 
-<pre><span class="keyword">let</span> dup: file_descr =&gt; file_descr;
+<pre id="VALdup"><span class="keyword">let</span> dup: file_descr =&gt; file_descr;
 </pre><div class="info ">
 Return a new file descriptor referencing the same file as
    the given descriptor.<br>
 </div>
 
-<pre><span class="keyword">let</span> dup2: file_descr =&gt; file_descr =&gt; unit;
+<pre id="VALdup2"><span class="keyword">let</span> dup2: file_descr =&gt; file_descr =&gt; unit;
 </pre><div class="info ">
 <code class="code">dup2 fd1 fd2</code> duplicates <code class="code">fd1</code> to <code class="code">fd2</code>, closing <code class="code">fd2</code> if already
    opened.<br>
 </div>
 
-<pre><span class="keyword">let</span> set_nonblock: file_descr =&gt; unit;
+<pre id="VALset_nonblock"><span class="keyword">let</span> set_nonblock: file_descr =&gt; unit;
 </pre><div class="info ">
 Set the ``non-blocking&apos;&apos; flag on the given descriptor.
    When the non-blocking flag is set, reading on a descriptor
@@ -1579,13 +1579,13 @@ Set the ``non-blocking&apos;&apos; flag on the given descriptor.
    for writing also raises <code class="code">EAGAIN</code> or <code class="code">EWOULDBLOCK</code>.<br>
 </div>
 
-<pre><span class="keyword">let</span> clear_nonblock: file_descr =&gt; unit;
+<pre id="VALclear_nonblock"><span class="keyword">let</span> clear_nonblock: file_descr =&gt; unit;
 </pre><div class="info ">
 Clear the ``non-blocking&apos;&apos; flag on the given descriptor.
    See <a href="Unix.html#VALset_nonblock"><code class="code">Unix.set_nonblock</code></a>.<br>
 </div>
 
-<pre><span class="keyword">let</span> set_close_on_exec: file_descr =&gt; unit;
+<pre id="VALset_close_on_exec"><span class="keyword">let</span> set_close_on_exec: file_descr =&gt; unit;
 </pre><div class="info ">
 Set the ``close-on-exec&apos;&apos; flag on the given descriptor.
    A descriptor with the close-on-exec flag is automatically
@@ -1593,7 +1593,7 @@ Set the ``close-on-exec&apos;&apos; flag on the given descriptor.
    one of the <code class="code">exec</code> functions.<br>
 </div>
 
-<pre><span class="keyword">let</span> clear_close_on_exec: file_descr =&gt; unit;
+<pre id="VALclear_close_on_exec"><span class="keyword">let</span> clear_close_on_exec: file_descr =&gt; unit;
 </pre><div class="info ">
 Clear the ``close-on-exec&apos;&apos; flag on the given descriptor.
    See <a href="Unix.html#VALset_close_on_exec"><code class="code">Unix.set_close_on_exec</code></a>.<br>
@@ -1601,76 +1601,76 @@ Clear the ``close-on-exec&apos;&apos; flag on the given descriptor.
 <br>
 <h6 id="6_Directories">Directories</h6><br>
 
-<pre><span class="keyword">let</span> mkdir: string =&gt; file_perm =&gt; unit;
+<pre id="VALmkdir"><span class="keyword">let</span> mkdir: string =&gt; file_perm =&gt; unit;
 </pre><div class="info ">
 Create a directory with the given permissions (see <a href="Unix.html#VALumask"><code class="code">Unix.umask</code></a>).<br>
 </div>
 
-<pre><span class="keyword">let</span> rmdir: string =&gt; unit;
+<pre id="VALrmdir"><span class="keyword">let</span> rmdir: string =&gt; unit;
 </pre><div class="info ">
 Remove an empty directory.<br>
 </div>
 
-<pre><span class="keyword">let</span> chdir: string =&gt; unit;
+<pre id="VALchdir"><span class="keyword">let</span> chdir: string =&gt; unit;
 </pre><div class="info ">
 Change the process working directory.<br>
 </div>
 
-<pre><span class="keyword">let</span> getcwd: unit =&gt; string;
+<pre id="VALgetcwd"><span class="keyword">let</span> getcwd: unit =&gt; string;
 </pre><div class="info ">
 Return the name of the current working directory.<br>
 </div>
 
-<pre><span class="keyword">let</span> chroot: string =&gt; unit;
+<pre id="VALchroot"><span class="keyword">let</span> chroot: string =&gt; unit;
 </pre><div class="info ">
 Change the process root directory.<br>
 </div>
 
-<pre><span class="keyword">type</span> dir_handle;
+<pre id="TYPEdir_handle"><span class="keyword">type</span> dir_handle;
 </pre>
 <div class="info ">
 The type of descriptors over opened directories.<br>
 </div>
 
 
-<pre><span class="keyword">let</span> opendir: string =&gt; dir_handle;
+<pre id="VALopendir"><span class="keyword">let</span> opendir: string =&gt; dir_handle;
 </pre><div class="info ">
 Open a descriptor on a directory<br>
 </div>
 
-<pre><span class="keyword">let</span> readdir: dir_handle =&gt; string;
+<pre id="VALreaddir"><span class="keyword">let</span> readdir: dir_handle =&gt; string;
 </pre><div class="info ">
 Return the next entry in a directory.<br>
 <b>Raises</b> <code>End_of_file</code> when the end of the directory has been reached.<br>
 </div>
 
-<pre><span class="keyword">let</span> rewinddir: dir_handle =&gt; unit;
+<pre id="VALrewinddir"><span class="keyword">let</span> rewinddir: dir_handle =&gt; unit;
 </pre><div class="info ">
 Reposition the descriptor to the beginning of the directory<br>
 </div>
 
-<pre><span class="keyword">let</span> closedir: dir_handle =&gt; unit;
+<pre id="VALclosedir"><span class="keyword">let</span> closedir: dir_handle =&gt; unit;
 </pre><div class="info ">
 Close a directory descriptor.<br>
 </div>
 <br>
 <h6 id="6_Pipesandredirections">Pipes and redirections</h6><br>
 
-<pre><span class="keyword">let</span> pipe: unit =&gt; (file_descr, file_descr);
+<pre id="VALpipe"><span class="keyword">let</span> pipe: unit =&gt; (file_descr, file_descr);
 </pre><div class="info ">
 Create a pipe. The first component of the result is opened
    for reading, that&apos;s the exit to the pipe. The second component is
    opened for writing, that&apos;s the entrance to the pipe.<br>
 </div>
 
-<pre><span class="keyword">let</span> mkfifo: string =&gt; file_perm =&gt; unit;
+<pre id="VALmkfifo"><span class="keyword">let</span> mkfifo: string =&gt; file_perm =&gt; unit;
 </pre><div class="info ">
 Create a named pipe with the given permissions (see <a href="Unix.html#VALumask"><code class="code">Unix.umask</code></a>).<br>
 </div>
 <br>
 <h6 id="6_Highlevelprocessandredirectionmanagement">High-level process and redirection management</h6><br>
 
-<pre><span class="keyword">let</span> create_process: string =&gt; array string =&gt; file_descr =&gt; file_descr =&gt; file_descr =&gt; int;
+<pre id="VALcreate_process"><span class="keyword">let</span> create_process: string =&gt; array string =&gt; file_descr =&gt; file_descr =&gt; file_descr =&gt; int;
 </pre><div class="info ">
 <code class="code">create_process prog args new_stdin new_stdout new_stderr</code>
    forks a new process that executes the program
@@ -1686,7 +1686,7 @@ Create a named pipe with the given permissions (see <a href="Unix.html#VALumask"
    The new process has the same environment as the current process.<br>
 </div>
 
-<pre><span class="keyword">let</span> create_process_env:
+<pre id="VALcreate_process_env"><span class="keyword">let</span> create_process_env:
   string =&gt; array string =&gt; array string =&gt; file_descr =&gt; file_descr =&gt; file_descr =&gt; int;
 </pre><div class="info ">
 <code class="code">create_process_env prog args env new_stdin new_stdout new_stderr</code>
@@ -1694,7 +1694,7 @@ Create a named pipe with the given permissions (see <a href="Unix.html#VALumask"
    <code class="code">env</code> specifies the environment passed to the program.<br>
 </div>
 
-<pre><span class="keyword">let</span> open_process_in: string =&gt; Pervasives.in_channel;
+<pre id="VALopen_process_in"><span class="keyword">let</span> open_process_in: string =&gt; Pervasives.in_channel;
 </pre><div class="info ">
 High-level pipe and process management. This function
    runs the given command in parallel with the program.
@@ -1703,7 +1703,7 @@ High-level pipe and process management. This function
    The command is interpreted by the shell <code class="code">/bin/sh</code> (cf. <code class="code">system</code>).<br>
 </div>
 
-<pre><span class="keyword">let</span> open_process_out: string =&gt; Pervasives.out_channel;
+<pre id="VALopen_process_out"><span class="keyword">let</span> open_process_out: string =&gt; Pervasives.out_channel;
 </pre><div class="info ">
 Same as <a href="Unix.html#VALopen_process_in"><code class="code">Unix.open_process_in</code></a>, but redirect the standard input of
    the command to a pipe.  Data written to the returned output channel
@@ -1713,7 +1713,7 @@ Same as <a href="Unix.html#VALopen_process_in"><code class="code">Unix.open_proc
    correct synchronization.<br>
 </div>
 
-<pre><span class="keyword">let</span> open_process: string =&gt; (Pervasives.in_channel, Pervasives.out_channel);
+<pre id="VALopen_process"><span class="keyword">let</span> open_process: string =&gt; (Pervasives.in_channel, Pervasives.out_channel);
 </pre><div class="info ">
 Same as <a href="Unix.html#VALopen_process_out"><code class="code">Unix.open_process_out</code></a>, but redirects both the standard input
    and standard output of the command to pipes connected to the two
@@ -1721,7 +1721,7 @@ Same as <a href="Unix.html#VALopen_process_out"><code class="code">Unix.open_pro
    of the command, and the output channel to the input of the command.<br>
 </div>
 
-<pre><span class="keyword">let</span> open_process_full:
+<pre id="VALopen_process_full"><span class="keyword">let</span> open_process_full:
   string =&gt; array string =&gt; (Pervasives.in_channel, Pervasives.out_channel, Pervasives.in_channel);
 </pre><div class="info ">
 Similar to <a href="Unix.html#VALopen_process"><code class="code">Unix.open_process</code></a>, but the second argument specifies
@@ -1730,28 +1730,28 @@ Similar to <a href="Unix.html#VALopen_process"><code class="code">Unix.open_proc
    and standard error of the command.<br>
 </div>
 
-<pre><span class="keyword">let</span> close_process_in: Pervasives.in_channel =&gt; process_status;
+<pre id="VALclose_process_in"><span class="keyword">let</span> close_process_in: Pervasives.in_channel =&gt; process_status;
 </pre><div class="info ">
 Close channels opened by <a href="Unix.html#VALopen_process_in"><code class="code">Unix.open_process_in</code></a>,
    wait for the associated command to terminate,
    and return its termination status.<br>
 </div>
 
-<pre><span class="keyword">let</span> close_process_out: Pervasives.out_channel =&gt; process_status;
+<pre id="VALclose_process_out"><span class="keyword">let</span> close_process_out: Pervasives.out_channel =&gt; process_status;
 </pre><div class="info ">
 Close channels opened by <a href="Unix.html#VALopen_process_out"><code class="code">Unix.open_process_out</code></a>,
    wait for the associated command to terminate,
    and return its termination status.<br>
 </div>
 
-<pre><span class="keyword">let</span> close_process: (Pervasives.in_channel, Pervasives.out_channel) =&gt; process_status;
+<pre id="VALclose_process"><span class="keyword">let</span> close_process: (Pervasives.in_channel, Pervasives.out_channel) =&gt; process_status;
 </pre><div class="info ">
 Close channels opened by <a href="Unix.html#VALopen_process"><code class="code">Unix.open_process</code></a>,
    wait for the associated command to terminate,
    and return its termination status.<br>
 </div>
 
-<pre><span class="keyword">let</span> close_process_full:
+<pre id="VALclose_process_full"><span class="keyword">let</span> close_process_full:
   (Pervasives.in_channel, Pervasives.out_channel, Pervasives.in_channel) =&gt; process_status;
 </pre><div class="info ">
 Close channels opened by <a href="Unix.html#VALopen_process_full"><code class="code">Unix.open_process_full</code></a>,
@@ -1761,20 +1761,20 @@ Close channels opened by <a href="Unix.html#VALopen_process_full"><code class="c
 <br>
 <h6 id="6_Symboliclinks">Symbolic links</h6><br>
 
-<pre><span class="keyword">let</span> symlink: string =&gt; string =&gt; unit;
+<pre id="VALsymlink"><span class="keyword">let</span> symlink: string =&gt; string =&gt; unit;
 </pre><div class="info ">
 <code class="code">symlink source dest</code> creates the file <code class="code">dest</code> as a symbolic link
    to the file <code class="code">source</code>.<br>
 </div>
 
-<pre><span class="keyword">let</span> readlink: string =&gt; string;
+<pre id="VALreadlink"><span class="keyword">let</span> readlink: string =&gt; string;
 </pre><div class="info ">
 Read the contents of a link.<br>
 </div>
 <br>
 <h6 id="6_Polling">Polling</h6><br>
 
-<pre><span class="keyword">let</span> select:
+<pre id="VALselect"><span class="keyword">let</span> select:
   list file_descr =&gt;
   list file_descr =&gt;
   list file_descr =&gt;
@@ -1862,7 +1862,7 @@ Commands for <a href="Unix.html#VALlockf"><code class="code">Unix.lockf</code></
 </div>
 
 
-<pre><span class="keyword">let</span> lockf: file_descr =&gt; lock_command =&gt; int =&gt; unit;
+<pre id="VALlockf"><span class="keyword">let</span> lockf: file_descr =&gt; lock_command =&gt; int =&gt; unit;
 </pre><div class="info ">
 <code class="code">lockf fd cmd size</code> puts a lock on a region of the file opened
    as <code class="code">fd</code>. The region starts at the current read/write position for
@@ -1895,7 +1895,7 @@ Commands for <a href="Unix.html#VALlockf"><code class="code">Unix.lockf</code></
    Note: installation of signal handlers is performed via
    the functions <a href="Sys.html#VALsignal"><code class="code">Sys.signal</code></a> and <a href="Sys.html#VALset_signal"><code class="code">Sys.set_signal</code></a>.<br>
 
-<pre><span class="keyword">let</span> kill: int =&gt; int =&gt; unit;
+<pre id="VALkill"><span class="keyword">let</span> kill: int =&gt; int =&gt; unit;
 </pre><div class="info ">
 <code class="code">kill pid sig</code> sends signal number <code class="code">sig</code> to the process
    with id <code class="code">pid</code>. Under Windows, only the <code class="code">Sys.sigkill</code> signal
@@ -1927,7 +1927,7 @@ Commands for <a href="Unix.html#VALlockf"><code class="code">Unix.lockf</code></
 
 
 
-<pre><span class="keyword">let</span> sigprocmask: sigprocmask_command =&gt; list int =&gt; list int;
+<pre id="VALsigprocmask"><span class="keyword">let</span> sigprocmask: sigprocmask_command =&gt; list int =&gt; list int;
 </pre><div class="info ">
 <code class="code">sigprocmask cmd sigs</code> changes the set of blocked signals.
    If <code class="code">cmd</code> is <code class="code">SIG_SETMASK</code>, blocked signals are set to those in
@@ -1939,19 +1939,19 @@ Commands for <a href="Unix.html#VALlockf"><code class="code">Unix.lockf</code></
    <code class="code">sigprocmask</code> returns the set of previously blocked signals.<br>
 </div>
 
-<pre><span class="keyword">let</span> sigpending: unit =&gt; list int;
+<pre id="VALsigpending"><span class="keyword">let</span> sigpending: unit =&gt; list int;
 </pre><div class="info ">
 Return the set of blocked signals that are currently pending.<br>
 </div>
 
-<pre><span class="keyword">let</span> sigsuspend: list int =&gt; unit;
+<pre id="VALsigsuspend"><span class="keyword">let</span> sigsuspend: list int =&gt; unit;
 </pre><div class="info ">
 <code class="code">sigsuspend sigs</code> atomically sets the blocked signals to <code class="code">sigs</code>
    and waits for a non-ignored, non-blocked signal to be delivered.
    On return, the blocked signals are reset to their initial value.<br>
 </div>
 
-<pre><span class="keyword">let</span> pause: unit =&gt; unit;
+<pre id="VALpause"><span class="keyword">let</span> pause: unit =&gt; unit;
 </pre><div class="info ">
 Wait until a non-ignored, non-blocked signal is delivered.<br>
 </div>
@@ -2104,30 +2104,30 @@ The type representing wallclock time and calendar date.<br>
 </div>
 
 
-<pre><span class="keyword">let</span> time: unit =&gt; float;
+<pre id="VALtime"><span class="keyword">let</span> time: unit =&gt; float;
 </pre><div class="info ">
 Return the current time since 00:00:00 GMT, Jan. 1, 1970,
    in seconds.<br>
 </div>
 
-<pre><span class="keyword">let</span> gettimeofday: unit =&gt; float;
+<pre id="VALgettimeofday"><span class="keyword">let</span> gettimeofday: unit =&gt; float;
 </pre><div class="info ">
 Same as <a href="Unix.html#VALtime"><code class="code">Unix.time</code></a>, but with resolution better than 1 second.<br>
 </div>
 
-<pre><span class="keyword">let</span> gmtime: float =&gt; tm;
+<pre id="VALgmtime"><span class="keyword">let</span> gmtime: float =&gt; tm;
 </pre><div class="info ">
 Convert a time in seconds, as returned by <a href="Unix.html#VALtime"><code class="code">Unix.time</code></a>, into a date and
    a time. Assumes UTC (Coordinated Universal Time), also known as GMT.<br>
 </div>
 
-<pre><span class="keyword">let</span> localtime: float =&gt; tm;
+<pre id="VALlocaltime"><span class="keyword">let</span> localtime: float =&gt; tm;
 </pre><div class="info ">
 Convert a time in seconds, as returned by <a href="Unix.html#VALtime"><code class="code">Unix.time</code></a>, into a date and
    a time. Assumes the local time zone.<br>
 </div>
 
-<pre><span class="keyword">let</span> mktime: tm =&gt; (float, tm);
+<pre id="VALmktime"><span class="keyword">let</span> mktime: tm =&gt; (float, tm);
 </pre><div class="info ">
 Convert a date and time, specified by the <code class="code">tm</code> argument, into
    a time in seconds, as returned by <a href="Unix.html#VALtime"><code class="code">Unix.time</code></a>.  The <code class="code">tm_isdst</code>,
@@ -2139,22 +2139,22 @@ Convert a date and time, specified by the <code class="code">tm</code> argument,
    local time zone.<br>
 </div>
 
-<pre><span class="keyword">let</span> alarm: int =&gt; int;
+<pre id="VALalarm"><span class="keyword">let</span> alarm: int =&gt; int;
 </pre><div class="info ">
 Schedule a <code class="code">SIGALRM</code> signal after the given number of seconds.<br>
 </div>
 
-<pre><span class="keyword">let</span> sleep: int =&gt; unit;
+<pre id="VALsleep"><span class="keyword">let</span> sleep: int =&gt; unit;
 </pre><div class="info ">
 Stop execution for the given number of seconds.<br>
 </div>
 
-<pre><span class="keyword">let</span> times: unit =&gt; process_times;
+<pre id="VALtimes"><span class="keyword">let</span> times: unit =&gt; process_times;
 </pre><div class="info ">
 Return the execution times of the process.<br>
 </div>
 
-<pre><span class="keyword">let</span> utimes: string =&gt; float =&gt; float =&gt; unit;
+<pre id="VALutimes"><span class="keyword">let</span> utimes: string =&gt; float =&gt; float =&gt; unit;
 </pre><div class="info ">
 Set the last access time (second arg) and last modification time
    (third arg) for a file. Times are expressed in seconds from
@@ -2231,12 +2231,12 @@ The type describing the status of an interval timer<br>
 </div>
 
 
-<pre><span class="keyword">let</span> getitimer: interval_timer =&gt; interval_timer_status;
+<pre id="VALgetitimer"><span class="keyword">let</span> getitimer: interval_timer =&gt; interval_timer_status;
 </pre><div class="info ">
 Return the current status of the given interval timer.<br>
 </div>
 
-<pre><span class="keyword">let</span> setitimer: interval_timer =&gt; interval_timer_status =&gt; interval_timer_status;
+<pre id="VALsetitimer"><span class="keyword">let</span> setitimer: interval_timer =&gt; interval_timer_status =&gt; interval_timer_status;
 </pre><div class="info ">
 <code class="code">setitimer t s</code> sets the interval timer <code class="code">t</code> and returns
    its previous status. The <code class="code">s</code> argument is interpreted as follows:
@@ -2250,49 +2250,49 @@ Return the current status of the given interval timer.<br>
 <br>
 <h6 id="6_Useridgroupid">User id, group id</h6><br>
 
-<pre><span class="keyword">let</span> getuid: unit =&gt; int;
+<pre id="VALgetuid"><span class="keyword">let</span> getuid: unit =&gt; int;
 </pre><div class="info ">
 Return the user id of the user executing the process.<br>
 </div>
 
-<pre><span class="keyword">let</span> geteuid: unit =&gt; int;
+<pre id="VALgeteuid"><span class="keyword">let</span> geteuid: unit =&gt; int;
 </pre><div class="info ">
 Return the effective user id under which the process runs.<br>
 </div>
 
-<pre><span class="keyword">let</span> setuid: int =&gt; unit;
+<pre id="VALsetuid"><span class="keyword">let</span> setuid: int =&gt; unit;
 </pre><div class="info ">
 Set the real user id and effective user id for the process.<br>
 </div>
 
-<pre><span class="keyword">let</span> getgid: unit =&gt; int;
+<pre id="VALgetgid"><span class="keyword">let</span> getgid: unit =&gt; int;
 </pre><div class="info ">
 Return the group id of the user executing the process.<br>
 </div>
 
-<pre><span class="keyword">let</span> getegid: unit =&gt; int;
+<pre id="VALgetegid"><span class="keyword">let</span> getegid: unit =&gt; int;
 </pre><div class="info ">
 Return the effective group id under which the process runs.<br>
 </div>
 
-<pre><span class="keyword">let</span> setgid: int =&gt; unit;
+<pre id="VALsetgid"><span class="keyword">let</span> setgid: int =&gt; unit;
 </pre><div class="info ">
 Set the real group id and effective group id for the process.<br>
 </div>
 
-<pre><span class="keyword">let</span> getgroups: unit =&gt; array int;
+<pre id="VALgetgroups"><span class="keyword">let</span> getgroups: unit =&gt; array int;
 </pre><div class="info ">
 Return the list of groups to which the user executing the process
    belongs.<br>
 </div>
 
-<pre><span class="keyword">let</span> setgroups: array int =&gt; unit;
+<pre id="VALsetgroups"><span class="keyword">let</span> setgroups: array int =&gt; unit;
 </pre><div class="info ">
 <code class="code">setgroups groups</code> sets the supplementary group IDs for the
       calling process. Appropriate privileges are required.<br>
 </div>
 
-<pre><span class="keyword">let</span> initgroups: string =&gt; int =&gt; unit;
+<pre id="VALinitgroups"><span class="keyword">let</span> initgroups: string =&gt; int =&gt; unit;
 </pre><div class="info ">
 <code class="code">initgroups user group</code> initializes the group access list by
       reading the group database /etc/group and using all groups of
@@ -2393,30 +2393,30 @@ Structure of entries in the <code class="code">groups</code> database.<br>
 </div>
 
 
-<pre><span class="keyword">let</span> getlogin: unit =&gt; string;
+<pre id="VALgetlogin"><span class="keyword">let</span> getlogin: unit =&gt; string;
 </pre><div class="info ">
 Return the login name of the user executing the process.<br>
 </div>
 
-<pre><span class="keyword">let</span> getpwnam: string =&gt; passwd_entry;
+<pre id="VALgetpwnam"><span class="keyword">let</span> getpwnam: string =&gt; passwd_entry;
 </pre><div class="info ">
 Find an entry in <code class="code">passwd</code> with the given name, or raise
    <code class="code">Not_found</code>.<br>
 </div>
 
-<pre><span class="keyword">let</span> getgrnam: string =&gt; group_entry;
+<pre id="VALgetgrnam"><span class="keyword">let</span> getgrnam: string =&gt; group_entry;
 </pre><div class="info ">
 Find an entry in <code class="code">group</code> with the given name, or raise
    <code class="code">Not_found</code>.<br>
 </div>
 
-<pre><span class="keyword">let</span> getpwuid: int =&gt; passwd_entry;
+<pre id="VALgetpwuid"><span class="keyword">let</span> getpwuid: int =&gt; passwd_entry;
 </pre><div class="info ">
 Find an entry in <code class="code">passwd</code> with the given user id, or raise
    <code class="code">Not_found</code>.<br>
 </div>
 
-<pre><span class="keyword">let</span> getgrgid: int =&gt; group_entry;
+<pre id="VALgetgrgid"><span class="keyword">let</span> getgrgid: int =&gt; group_entry;
 </pre><div class="info ">
 Find an entry in <code class="code">group</code> with the given group id, or raise
    <code class="code">Not_found</code>.<br>
@@ -2424,14 +2424,14 @@ Find an entry in <code class="code">group</code> with the given group id, or rai
 <br>
 <h6 id="6_Internetaddresses">Internet addresses</h6><br>
 
-<pre><span class="keyword">type</span> inet_addr;
+<pre id="TYPEinet_addr"><span class="keyword">type</span> inet_addr;
 </pre>
 <div class="info ">
 The abstract type of Internet addresses.<br>
 </div>
 
 
-<pre><span class="keyword">let</span> inet_addr_of_string: string =&gt; inet_addr;
+<pre id="VALinet_addr_of_string"><span class="keyword">let</span> inet_addr_of_string: string =&gt; inet_addr;
 </pre><div class="info ">
 Conversion from the printable representation of an Internet
     address to its internal representation.  The argument string
@@ -2441,31 +2441,31 @@ Conversion from the printable representation of an Internet
     does not match these formats.<br>
 </div>
 
-<pre><span class="keyword">let</span> string_of_inet_addr: inet_addr =&gt; string;
+<pre id="VALstring_of_inet_addr"><span class="keyword">let</span> string_of_inet_addr: inet_addr =&gt; string;
 </pre><div class="info ">
 Return the printable representation of the given Internet address.
     See <a href="Unix.html#VALinet_addr_of_string"><code class="code">Unix.inet_addr_of_string</code></a> for a description of the
     printable representation.<br>
 </div>
 
-<pre><span class="keyword">let</span> inet_addr_any: inet_addr;
+<pre id="VALinet_addr_any"><span class="keyword">let</span> inet_addr_any: inet_addr;
 </pre><div class="info ">
 A special IPv4 address, for use only with <code class="code">bind</code>, representing
    all the Internet addresses that the host machine possesses.<br>
 </div>
 
-<pre><span class="keyword">let</span> inet_addr_loopback: inet_addr;
+<pre id="VALinet_addr_loopback"><span class="keyword">let</span> inet_addr_loopback: inet_addr;
 </pre><div class="info ">
 A special IPv4 address representing the host machine (<code class="code">127.0.0.1</code>).<br>
 </div>
 
-<pre><span class="keyword">let</span> inet6_addr_any: inet_addr;
+<pre id="VALinet6_addr_any"><span class="keyword">let</span> inet6_addr_any: inet_addr;
 </pre><div class="info ">
 A special IPv6 address, for use only with <code class="code">bind</code>, representing
    all the Internet addresses that the host machine possesses.<br>
 </div>
 
-<pre><span class="keyword">let</span> inet6_addr_loopback: inet_addr;
+<pre id="VALinet6_addr_loopback"><span class="keyword">let</span> inet6_addr_loopback: inet_addr;
 </pre><div class="info ">
 A special IPv6 address representing the host machine (<code class="code">::1</code>).<br>
 </div>
@@ -2583,41 +2583,41 @@ The type of socket addresses. <code class="code">ADDR_UNIX name</code> is a sock
 
 
 
-<pre><span class="keyword">let</span> socket: socket_domain =&gt; socket_type =&gt; int =&gt; file_descr;
+<pre id="VALsocket"><span class="keyword">let</span> socket: socket_domain =&gt; socket_type =&gt; int =&gt; file_descr;
 </pre><div class="info ">
 Create a new socket in the given domain, and with the
    given kind. The third argument is the protocol type; 0 selects
    the default protocol for that kind of sockets.<br>
 </div>
 
-<pre><span class="keyword">let</span> domain_of_sockaddr: sockaddr =&gt; socket_domain;
+<pre id="VALdomain_of_sockaddr"><span class="keyword">let</span> domain_of_sockaddr: sockaddr =&gt; socket_domain;
 </pre><div class="info ">
 Return the socket domain adequate for the given socket address.<br>
 </div>
 
-<pre><span class="keyword">let</span> socketpair: socket_domain =&gt; socket_type =&gt; int =&gt; (file_descr, file_descr);
+<pre id="VALsocketpair"><span class="keyword">let</span> socketpair: socket_domain =&gt; socket_type =&gt; int =&gt; (file_descr, file_descr);
 </pre><div class="info ">
 Create a pair of unnamed sockets, connected together.<br>
 </div>
 
-<pre><span class="keyword">let</span> accept: file_descr =&gt; (file_descr, sockaddr);
+<pre id="VALaccept"><span class="keyword">let</span> accept: file_descr =&gt; (file_descr, sockaddr);
 </pre><div class="info ">
 Accept connections on the given socket. The returned descriptor
    is a socket connected to the client; the returned address is
    the address of the connecting client.<br>
 </div>
 
-<pre><span class="keyword">let</span> bind: file_descr =&gt; sockaddr =&gt; unit;
+<pre id="VALbind"><span class="keyword">let</span> bind: file_descr =&gt; sockaddr =&gt; unit;
 </pre><div class="info ">
 Bind a socket to an address.<br>
 </div>
 
-<pre><span class="keyword">let</span> connect: file_descr =&gt; sockaddr =&gt; unit;
+<pre id="VALconnect"><span class="keyword">let</span> connect: file_descr =&gt; sockaddr =&gt; unit;
 </pre><div class="info ">
 Connect a socket to an address.<br>
 </div>
 
-<pre><span class="keyword">let</span> listen: file_descr =&gt; int =&gt; unit;
+<pre id="VALlisten"><span class="keyword">let</span> listen: file_descr =&gt; int =&gt; unit;
 </pre><div class="info ">
 Set up a socket for receiving connection requests. The integer
    argument is the maximal number of pending requests.<br>
@@ -2660,7 +2660,7 @@ The type of commands for <code class="code">shutdown</code>.<br>
 </div>
 
 
-<pre><span class="keyword">let</span> shutdown: file_descr =&gt; shutdown_command =&gt; unit;
+<pre id="VALshutdown"><span class="keyword">let</span> shutdown: file_descr =&gt; shutdown_command =&gt; unit;
 </pre><div class="info ">
 Shutdown a socket connection. <code class="code">SHUTDOWN_SEND</code> as second argument
    causes reads on the other end of the connection to return
@@ -2669,12 +2669,12 @@ Shutdown a socket connection. <code class="code">SHUTDOWN_SEND</code> as second 
    to return a closed pipe condition (<code class="code">SIGPIPE</code> signal).<br>
 </div>
 
-<pre><span class="keyword">let</span> getsockname: file_descr =&gt; sockaddr;
+<pre id="VALgetsockname"><span class="keyword">let</span> getsockname: file_descr =&gt; sockaddr;
 </pre><div class="info ">
 Return the address of the given socket.<br>
 </div>
 
-<pre><span class="keyword">let</span> getpeername: file_descr =&gt; sockaddr;
+<pre id="VALgetpeername"><span class="keyword">let</span> getpeername: file_descr =&gt; sockaddr;
 </pre><div class="info ">
 Return the address of the host connected to the given socket.<br>
 </div>
@@ -2708,33 +2708,33 @@ The flags for <a href="Unix.html#VALrecv"><code class="code">Unix.recv</code></a
 
 
 
-<pre><span class="keyword">let</span> recv: file_descr =&gt; bytes =&gt; int =&gt; int =&gt; list msg_flag =&gt; int;
+<pre id="VALrecv"><span class="keyword">let</span> recv: file_descr =&gt; bytes =&gt; int =&gt; int =&gt; list msg_flag =&gt; int;
 </pre><div class="info ">
 Receive data from a connected socket.<br>
 </div>
 
-<pre><span class="keyword">let</span> recvfrom: file_descr =&gt; bytes =&gt; int =&gt; int =&gt; list msg_flag =&gt; (int, sockaddr);
+<pre id="VALrecvfrom"><span class="keyword">let</span> recvfrom: file_descr =&gt; bytes =&gt; int =&gt; int =&gt; list msg_flag =&gt; (int, sockaddr);
 </pre><div class="info ">
 Receive data from an unconnected socket.<br>
 </div>
 
-<pre><span class="keyword">let</span> send: file_descr =&gt; bytes =&gt; int =&gt; int =&gt; list msg_flag =&gt; int;
+<pre id="VALsend"><span class="keyword">let</span> send: file_descr =&gt; bytes =&gt; int =&gt; int =&gt; list msg_flag =&gt; int;
 </pre><div class="info ">
 Send data over a connected socket.<br>
 </div>
 
-<pre><span class="keyword">let</span> send_substring: file_descr =&gt; string =&gt; int =&gt; int =&gt; list msg_flag =&gt; int;
+<pre id="VALsend_substring"><span class="keyword">let</span> send_substring: file_descr =&gt; string =&gt; int =&gt; int =&gt; list msg_flag =&gt; int;
 </pre><div class="info ">
 Same as <code class="code">send</code>, but take the data from a string instead of a byte
     sequence.<br>
 </div>
 
-<pre><span class="keyword">let</span> sendto: file_descr =&gt; bytes =&gt; int =&gt; int =&gt; list msg_flag =&gt; sockaddr =&gt; int;
+<pre id="VALsendto"><span class="keyword">let</span> sendto: file_descr =&gt; bytes =&gt; int =&gt; int =&gt; list msg_flag =&gt; sockaddr =&gt; int;
 </pre><div class="info ">
 Send data over an unconnected socket.<br>
 </div>
 
-<pre><span class="keyword">let</span> sendto_substring: file_descr =&gt; string =&gt; int =&gt; int =&gt; list msg_flag =&gt; sockaddr =&gt; int;
+<pre id="VALsendto_substring"><span class="keyword">let</span> sendto_substring: file_descr =&gt; string =&gt; int =&gt; int =&gt; list msg_flag =&gt; sockaddr =&gt; int;
 </pre><div class="info ">
 Same as <code class="code">sendto</code>, but take the data from a string instead of a
     byte sequence.<br>
@@ -2962,52 +2962,52 @@ The socket options that can be consulted with <a href="Unix.html#VALgetsockopt_f
 </div>
 
 
-<pre><span class="keyword">let</span> getsockopt: file_descr =&gt; socket_bool_option =&gt; bool;
+<pre id="VALgetsockopt"><span class="keyword">let</span> getsockopt: file_descr =&gt; socket_bool_option =&gt; bool;
 </pre><div class="info ">
 Return the current status of a boolean-valued option
    in the given socket.<br>
 </div>
 
-<pre><span class="keyword">let</span> setsockopt: file_descr =&gt; socket_bool_option =&gt; bool =&gt; unit;
+<pre id="VALsetsockopt"><span class="keyword">let</span> setsockopt: file_descr =&gt; socket_bool_option =&gt; bool =&gt; unit;
 </pre><div class="info ">
 Set or clear a boolean-valued option in the given socket.<br>
 </div>
 
-<pre><span class="keyword">let</span> getsockopt_int: file_descr =&gt; socket_int_option =&gt; int;
+<pre id="VALgetsockopt_int"><span class="keyword">let</span> getsockopt_int: file_descr =&gt; socket_int_option =&gt; int;
 </pre><div class="info ">
 Same as <a href="Unix.html#VALgetsockopt"><code class="code">Unix.getsockopt</code></a> for an integer-valued socket option.<br>
 </div>
 
-<pre><span class="keyword">let</span> setsockopt_int: file_descr =&gt; socket_int_option =&gt; int =&gt; unit;
+<pre id="VALsetsockopt_int"><span class="keyword">let</span> setsockopt_int: file_descr =&gt; socket_int_option =&gt; int =&gt; unit;
 </pre><div class="info ">
 Same as <a href="Unix.html#VALsetsockopt"><code class="code">Unix.setsockopt</code></a> for an integer-valued socket option.<br>
 </div>
 
-<pre><span class="keyword">let</span> getsockopt_optint: file_descr =&gt; socket_optint_option =&gt; option int;
+<pre id="VALgetsockopt_optint"><span class="keyword">let</span> getsockopt_optint: file_descr =&gt; socket_optint_option =&gt; option int;
 </pre><div class="info ">
 Same as <a href="Unix.html#VALgetsockopt"><code class="code">Unix.getsockopt</code></a> for a socket option whose value is an
    <code class="code">int option</code>.<br>
 </div>
 
-<pre><span class="keyword">let</span> setsockopt_optint: file_descr =&gt; socket_optint_option =&gt; option int =&gt; unit;
+<pre id="VALsetsockopt_optint"><span class="keyword">let</span> setsockopt_optint: file_descr =&gt; socket_optint_option =&gt; option int =&gt; unit;
 </pre><div class="info ">
 Same as <a href="Unix.html#VALsetsockopt"><code class="code">Unix.setsockopt</code></a> for a socket option whose value is an
    <code class="code">int option</code>.<br>
 </div>
 
-<pre><span class="keyword">let</span> getsockopt_float: file_descr =&gt; socket_float_option =&gt; float;
+<pre id="VALgetsockopt_float"><span class="keyword">let</span> getsockopt_float: file_descr =&gt; socket_float_option =&gt; float;
 </pre><div class="info ">
 Same as <a href="Unix.html#VALgetsockopt"><code class="code">Unix.getsockopt</code></a> for a socket option whose value is a
    floating-point number.<br>
 </div>
 
-<pre><span class="keyword">let</span> setsockopt_float: file_descr =&gt; socket_float_option =&gt; float =&gt; unit;
+<pre id="VALsetsockopt_float"><span class="keyword">let</span> setsockopt_float: file_descr =&gt; socket_float_option =&gt; float =&gt; unit;
 </pre><div class="info ">
 Same as <a href="Unix.html#VALsetsockopt"><code class="code">Unix.setsockopt</code></a> for a socket option whose value is a
    floating-point number.<br>
 </div>
 
-<pre><span class="keyword">let</span> getsockopt_error: file_descr =&gt; option error;
+<pre id="VALgetsockopt_error"><span class="keyword">let</span> getsockopt_error: file_descr =&gt; option error;
 </pre><div class="info ">
 Return the error condition associated with the given socket,
     and clear it.<br>
@@ -3015,7 +3015,7 @@ Return the error condition associated with the given socket,
 <br>
 <h6 id="6_Highlevelnetworkconnectionfunctions">High-level network connection functions</h6><br>
 
-<pre><span class="keyword">let</span> open_connection: sockaddr =&gt; (Pervasives.in_channel, Pervasives.out_channel);
+<pre id="VALopen_connection"><span class="keyword">let</span> open_connection: sockaddr =&gt; (Pervasives.in_channel, Pervasives.out_channel);
 </pre><div class="info ">
 Connect to a server at the given address.
    Return a pair of buffered channels connected to the server.
@@ -3023,7 +3023,7 @@ Connect to a server at the given address.
    times to ensure correct synchronization.<br>
 </div>
 
-<pre><span class="keyword">let</span> shutdown_connection: Pervasives.in_channel =&gt; unit;
+<pre id="VALshutdown_connection"><span class="keyword">let</span> shutdown_connection: Pervasives.in_channel =&gt; unit;
 </pre><div class="info ">
 ``Shut down&apos;&apos; a connection established with <a href="Unix.html#VALopen_connection"><code class="code">Unix.open_connection</code></a>;
    that is, transmit an end-of-file condition to the server reading
@@ -3032,7 +3032,7 @@ Connect to a server at the given address.
    to free via <a href="Pervasives.html#VALclose_in"><code class="code">Pervasives.close_in</code></a>.<br>
 </div>
 
-<pre><span class="keyword">let</span> establish_server:
+<pre id="VALestablish_server"><span class="keyword">let</span> establish_server:
   (Pervasives.in_channel =&gt; Pervasives.out_channel =&gt; unit) =&gt; sockaddr =&gt; unit;
 </pre><div class="info ">
 Establish a server on the given address.
@@ -3145,42 +3145,42 @@ Structure of entries in the <code class="code">services</code> database.<br>
 </div>
 
 
-<pre><span class="keyword">let</span> gethostname: unit =&gt; string;
+<pre id="VALgethostname"><span class="keyword">let</span> gethostname: unit =&gt; string;
 </pre><div class="info ">
 Return the name of the local host.<br>
 </div>
 
-<pre><span class="keyword">let</span> gethostbyname: string =&gt; host_entry;
+<pre id="VALgethostbyname"><span class="keyword">let</span> gethostbyname: string =&gt; host_entry;
 </pre><div class="info ">
 Find an entry in <code class="code">hosts</code> with the given name, or raise
    <code class="code">Not_found</code>.<br>
 </div>
 
-<pre><span class="keyword">let</span> gethostbyaddr: inet_addr =&gt; host_entry;
+<pre id="VALgethostbyaddr"><span class="keyword">let</span> gethostbyaddr: inet_addr =&gt; host_entry;
 </pre><div class="info ">
 Find an entry in <code class="code">hosts</code> with the given address, or raise
    <code class="code">Not_found</code>.<br>
 </div>
 
-<pre><span class="keyword">let</span> getprotobyname: string =&gt; protocol_entry;
+<pre id="VALgetprotobyname"><span class="keyword">let</span> getprotobyname: string =&gt; protocol_entry;
 </pre><div class="info ">
 Find an entry in <code class="code">protocols</code> with the given name, or raise
    <code class="code">Not_found</code>.<br>
 </div>
 
-<pre><span class="keyword">let</span> getprotobynumber: int =&gt; protocol_entry;
+<pre id="VALgetprotobynumber"><span class="keyword">let</span> getprotobynumber: int =&gt; protocol_entry;
 </pre><div class="info ">
 Find an entry in <code class="code">protocols</code> with the given protocol number,
    or raise <code class="code">Not_found</code>.<br>
 </div>
 
-<pre><span class="keyword">let</span> getservbyname: string =&gt; string =&gt; service_entry;
+<pre id="VALgetservbyname"><span class="keyword">let</span> getservbyname: string =&gt; string =&gt; service_entry;
 </pre><div class="info ">
 Find an entry in <code class="code">services</code> with the given name, or raise
    <code class="code">Not_found</code>.<br>
 </div>
 
-<pre><span class="keyword">let</span> getservbyport: int =&gt; string =&gt; service_entry;
+<pre id="VALgetservbyport"><span class="keyword">let</span> getservbyport: int =&gt; string =&gt; service_entry;
 </pre><div class="info ">
 Find an entry in <code class="code">services</code> with the given service number,
    or raise <code class="code">Not_found</code>.<br>
@@ -3314,7 +3314,7 @@ Options to <a href="Unix.html#VALgetaddrinfo"><code class="code">Unix.getaddrinf
 </div>
 
 
-<pre><span class="keyword">let</span> getaddrinfo: string =&gt; string =&gt; list getaddrinfo_option =&gt; list addr_info;
+<pre id="VALgetaddrinfo"><span class="keyword">let</span> getaddrinfo: string =&gt; string =&gt; list getaddrinfo_option =&gt; list addr_info;
 </pre><div class="info ">
 <code class="code">getaddrinfo host service opts</code> returns a list of <a href="Unix.html#TYPEaddr_info"><code class="code">Unix.addr_info</code></a>
     records describing socket parameters and addresses suitable for
@@ -3420,7 +3420,7 @@ Options to <a href="Unix.html#VALgetnameinfo"><code class="code">Unix.getnameinf
 </div>
 
 
-<pre><span class="keyword">let</span> getnameinfo: sockaddr =&gt; list getnameinfo_option =&gt; name_info;
+<pre id="VALgetnameinfo"><span class="keyword">let</span> getnameinfo: sockaddr =&gt; list getnameinfo_option =&gt; name_info;
 </pre><div class="info ">
 <code class="code">getnameinfo addr opts</code> returns the host name and service name
     corresponding to the socket address <code class="code">addr</code>.  <code class="code">opts</code> is a possibly
@@ -3824,7 +3824,7 @@ Stop character (usually ctrl-S).<br>
 
 
 
-<pre><span class="keyword">let</span> tcgetattr: file_descr =&gt; terminal_io;
+<pre id="VALtcgetattr"><span class="keyword">let</span> tcgetattr: file_descr =&gt; terminal_io;
 </pre><div class="info ">
 Return the status of the terminal referred to by the given
    file descriptor.<br>
@@ -3855,7 +3855,7 @@ Return the status of the terminal referred to by the given
 
 
 
-<pre><span class="keyword">let</span> tcsetattr: file_descr =&gt; setattr_when =&gt; terminal_io =&gt; unit;
+<pre id="VALtcsetattr"><span class="keyword">let</span> tcsetattr: file_descr =&gt; setattr_when =&gt; terminal_io =&gt; unit;
 </pre><div class="info ">
 Set the status of the terminal referred to by the given
    file descriptor. The second argument indicates when the
@@ -3867,14 +3867,14 @@ Set the status of the terminal referred to by the given
    parameters.<br>
 </div>
 
-<pre><span class="keyword">let</span> tcsendbreak: file_descr =&gt; int =&gt; unit;
+<pre id="VALtcsendbreak"><span class="keyword">let</span> tcsendbreak: file_descr =&gt; int =&gt; unit;
 </pre><div class="info ">
 Send a break condition on the given file descriptor.
    The second argument is the duration of the break, in 0.1s units;
    0 means standard duration (0.25s).<br>
 </div>
 
-<pre><span class="keyword">let</span> tcdrain: file_descr =&gt; unit;
+<pre id="VALtcdrain"><span class="keyword">let</span> tcdrain: file_descr =&gt; unit;
 </pre><div class="info ">
 Waits until all output written on the given file descriptor
    has been transmitted.<br>
@@ -3905,7 +3905,7 @@ Waits until all output written on the given file descriptor
 
 
 
-<pre><span class="keyword">let</span> tcflush: file_descr =&gt; flush_queue =&gt; unit;
+<pre id="VALtcflush"><span class="keyword">let</span> tcflush: file_descr =&gt; flush_queue =&gt; unit;
 </pre><div class="info ">
 Discard data written on the given file descriptor but not yet
    transmitted, or data received but not yet read, depending on the
@@ -3946,7 +3946,7 @@ Discard data written on the given file descriptor but not yet
 
 
 
-<pre><span class="keyword">let</span> tcflow: file_descr =&gt; flow_action =&gt; unit;
+<pre id="VALtcflow"><span class="keyword">let</span> tcflow: file_descr =&gt; flow_action =&gt; unit;
 </pre><div class="info ">
 Suspend or restart reception or transmission of data on
    the given file descriptor, depending on the second argument:
@@ -3955,7 +3955,7 @@ Suspend or restart reception or transmission of data on
    and <code class="code">TCION</code> transmits a START character to restart input.<br>
 </div>
 
-<pre><span class="keyword">let</span> setsid: unit =&gt; int;
+<pre id="VALsetsid"><span class="keyword">let</span> setsid: unit =&gt; int;
 </pre><div class="info ">
 Put the calling process in a new session and detach it from
    its controlling terminal.<br>

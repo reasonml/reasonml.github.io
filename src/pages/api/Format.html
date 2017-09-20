@@ -79,7 +79,7 @@ Pretty printing.
 <br>
 <h6 id="6_Boxes">Boxes</h6><br>
 
-<pre><span class="keyword">let</span> open_box: int =&gt; unit;
+<pre id="VALopen_box"><span class="keyword">let</span> open_box: int =&gt; unit;
 </pre><div class="info ">
 <code class="code">open_box d</code> opens a new pretty-printing box
    with offset <code class="code">d</code>.
@@ -93,48 +93,48 @@ Pretty printing.
    current indentation.<br>
 </div>
 
-<pre><span class="keyword">let</span> close_box: unit =&gt; unit;
+<pre id="VALclose_box"><span class="keyword">let</span> close_box: unit =&gt; unit;
 </pre><div class="info ">
 Closes the most recently opened pretty-printing box.<br>
 </div>
 <br>
 <h6 id="6_Formattingfunctions">Formatting functions</h6><br>
 
-<pre><span class="keyword">let</span> print_string: string =&gt; unit;
+<pre id="VALprint_string"><span class="keyword">let</span> print_string: string =&gt; unit;
 </pre><div class="info ">
 <code class="code">print_string str</code> prints <code class="code">str</code> in the current box.<br>
 </div>
 
-<pre><span class="keyword">let</span> print_as: int =&gt; string =&gt; unit;
+<pre id="VALprint_as"><span class="keyword">let</span> print_as: int =&gt; string =&gt; unit;
 </pre><div class="info ">
 <code class="code">print_as len str</code> prints <code class="code">str</code> in the
    current box. The pretty-printer formats <code class="code">str</code> as if
    it were of length <code class="code">len</code>.<br>
 </div>
 
-<pre><span class="keyword">let</span> print_int: int =&gt; unit;
+<pre id="VALprint_int"><span class="keyword">let</span> print_int: int =&gt; unit;
 </pre><div class="info ">
 Prints an integer in the current box.<br>
 </div>
 
-<pre><span class="keyword">let</span> print_float: float =&gt; unit;
+<pre id="VALprint_float"><span class="keyword">let</span> print_float: float =&gt; unit;
 </pre><div class="info ">
 Prints a floating point number in the current box.<br>
 </div>
 
-<pre><span class="keyword">let</span> print_char: char =&gt; unit;
+<pre id="VALprint_char"><span class="keyword">let</span> print_char: char =&gt; unit;
 </pre><div class="info ">
 Prints a character in the current box.<br>
 </div>
 
-<pre><span class="keyword">let</span> print_bool: bool =&gt; unit;
+<pre id="VALprint_bool"><span class="keyword">let</span> print_bool: bool =&gt; unit;
 </pre><div class="info ">
 Prints a boolean in the current box.<br>
 </div>
 <br>
 <h6 id="6_Breakhints">Break hints</h6><br>
 
-<pre><span class="keyword">let</span> print_space: unit =&gt; unit;
+<pre id="VALprint_space"><span class="keyword">let</span> print_space: unit =&gt; unit;
 </pre><div class="info ">
 <code class="code">print_space ()</code> is used to separate items (typically to print
    a space between two words).
@@ -143,7 +143,7 @@ Prints a boolean in the current box.<br>
    It is equivalent to <code class="code">print_break 1 0</code>.<br>
 </div>
 
-<pre><span class="keyword">let</span> print_cut: unit =&gt; unit;
+<pre id="VALprint_cut"><span class="keyword">let</span> print_cut: unit =&gt; unit;
 </pre><div class="info ">
 <code class="code">print_cut ()</code> is used to mark a good break position.
    It indicates that the line may be split at this
@@ -153,7 +153,7 @@ Prints a boolean in the current box.<br>
    It is equivalent to <code class="code">print_break 0 0</code>.<br>
 </div>
 
-<pre><span class="keyword">let</span> print_break: int =&gt; int =&gt; unit;
+<pre id="VALprint_break"><span class="keyword">let</span> print_break: int =&gt; int =&gt; unit;
 </pre><div class="info ">
 Inserts a break hint in a pretty-printing box.
    <code class="code">print_break nspaces offset</code> indicates that the line may
@@ -165,24 +165,24 @@ Inserts a break hint in a pretty-printing box.
    <code class="code">nspaces</code> spaces are printed.<br>
 </div>
 
-<pre><span class="keyword">let</span> print_flush: unit =&gt; unit;
+<pre id="VALprint_flush"><span class="keyword">let</span> print_flush: unit =&gt; unit;
 </pre><div class="info ">
 Flushes the pretty printer: all opened boxes are closed,
    and all pending text is displayed.<br>
 </div>
 
-<pre><span class="keyword">let</span> print_newline: unit =&gt; unit;
+<pre id="VALprint_newline"><span class="keyword">let</span> print_newline: unit =&gt; unit;
 </pre><div class="info ">
 Equivalent to <code class="code">print_flush</code> followed by a new line.<br>
 </div>
 
-<pre><span class="keyword">let</span> force_newline: unit =&gt; unit;
+<pre id="VALforce_newline"><span class="keyword">let</span> force_newline: unit =&gt; unit;
 </pre><div class="info ">
 Forces a newline in the current box. Not the normal way of
    pretty-printing, you should prefer break hints.<br>
 </div>
 
-<pre><span class="keyword">let</span> print_if_newline: unit =&gt; unit;
+<pre id="VALprint_if_newline"><span class="keyword">let</span> print_if_newline: unit =&gt; unit;
 </pre><div class="info ">
 Executes the next formatting command if the preceding line
    has just been split. Otherwise, ignore the next formatting
@@ -191,7 +191,7 @@ Executes the next formatting command if the preceding line
 <br>
 <h6 id="6_Margin">Margin</h6><br>
 
-<pre><span class="keyword">let</span> set_margin: int =&gt; unit;
+<pre id="VALset_margin"><span class="keyword">let</span> set_margin: int =&gt; unit;
 </pre><div class="info ">
 <code class="code">set_margin d</code> sets the value of the right margin
    to <code class="code">d</code> (in characters): this value is used to detect line
@@ -201,14 +201,14 @@ Executes the next formatting command if the preceding line
    admissible value (which is greater than <code class="code">10^9</code>).<br>
 </div>
 
-<pre><span class="keyword">let</span> get_margin: unit =&gt; int;
+<pre id="VALget_margin"><span class="keyword">let</span> get_margin: unit =&gt; int;
 </pre><div class="info ">
 Returns the position of the right margin.<br>
 </div>
 <br>
 <h6 id="6_Maximumindentationlimit">Maximum indentation limit</h6><br>
 
-<pre><span class="keyword">let</span> set_max_indent: int =&gt; unit;
+<pre id="VALset_max_indent"><span class="keyword">let</span> set_max_indent: int =&gt; unit;
 </pre><div class="info ">
 <code class="code">set_max_indent d</code> sets the value of the maximum
    indentation limit to <code class="code">d</code> (in characters):
@@ -219,14 +219,14 @@ Returns the position of the right margin.<br>
    admissible value (which is greater than <code class="code">10^9</code>).<br>
 </div>
 
-<pre><span class="keyword">let</span> get_max_indent: unit =&gt; int;
+<pre id="VALget_max_indent"><span class="keyword">let</span> get_max_indent: unit =&gt; int;
 </pre><div class="info ">
 Return the value of the maximum indentation limit (in characters).<br>
 </div>
 <br>
 <h6 id="6_Formattingdepthmaximumnumberofboxesallowedbeforeellipsis">Formatting depth: maximum number of boxes allowed before ellipsis</h6><br>
 
-<pre><span class="keyword">let</span> set_max_boxes: int =&gt; unit;
+<pre id="VALset_max_boxes"><span class="keyword">let</span> set_max_boxes: int =&gt; unit;
 </pre><div class="info ">
 <code class="code">set_max_boxes max</code> sets the maximum number of boxes simultaneously
    opened.
@@ -235,26 +235,26 @@ Return the value of the maximum indentation limit (in characters).<br>
    Nothing happens if <code class="code">max</code> is smaller than 2.<br>
 </div>
 
-<pre><span class="keyword">let</span> get_max_boxes: unit =&gt; int;
+<pre id="VALget_max_boxes"><span class="keyword">let</span> get_max_boxes: unit =&gt; int;
 </pre><div class="info ">
 Returns the maximum number of boxes allowed before ellipsis.<br>
 </div>
 
-<pre><span class="keyword">let</span> over_max_boxes: unit =&gt; bool;
+<pre id="VALover_max_boxes"><span class="keyword">let</span> over_max_boxes: unit =&gt; bool;
 </pre><div class="info ">
 Tests if the maximum number of boxes allowed have already been opened.<br>
 </div>
 <br>
 <h6 id="6_Advancedformatting">Advanced formatting</h6><br>
 
-<pre><span class="keyword">let</span> open_hbox: unit =&gt; unit;
+<pre id="VALopen_hbox"><span class="keyword">let</span> open_hbox: unit =&gt; unit;
 </pre><div class="info ">
 <code class="code">open_hbox ()</code> opens a new pretty-printing box.
    This box is &apos;horizontal&apos;: the line is not split in this box
    (new lines may still occur inside boxes nested deeper).<br>
 </div>
 
-<pre><span class="keyword">let</span> open_vbox: int =&gt; unit;
+<pre id="VALopen_vbox"><span class="keyword">let</span> open_vbox: int =&gt; unit;
 </pre><div class="info ">
 <code class="code">open_vbox d</code> opens a new pretty-printing box
    with offset <code class="code">d</code>.
@@ -264,7 +264,7 @@ Tests if the maximum number of boxes allowed have already been opened.<br>
    current indentation.<br>
 </div>
 
-<pre><span class="keyword">let</span> open_hvbox: int =&gt; unit;
+<pre id="VALopen_hvbox"><span class="keyword">let</span> open_hvbox: int =&gt; unit;
 </pre><div class="info ">
 <code class="code">open_hvbox d</code> opens a new pretty-printing box
    with offset <code class="code">d</code>.
@@ -275,7 +275,7 @@ Tests if the maximum number of boxes allowed have already been opened.<br>
    current indentation.<br>
 </div>
 
-<pre><span class="keyword">let</span> open_hovbox: int =&gt; unit;
+<pre id="VALopen_hovbox"><span class="keyword">let</span> open_hovbox: int =&gt; unit;
 </pre><div class="info ">
 <code class="code">open_hovbox d</code> opens a new pretty-printing box
    with offset <code class="code">d</code>.
@@ -288,17 +288,17 @@ Tests if the maximum number of boxes allowed have already been opened.<br>
 <br>
 <h6 id="6_Tabulations">Tabulations</h6><br>
 
-<pre><span class="keyword">let</span> open_tbox: unit =&gt; unit;
+<pre id="VALopen_tbox"><span class="keyword">let</span> open_tbox: unit =&gt; unit;
 </pre><div class="info ">
 Opens a tabulation box.<br>
 </div>
 
-<pre><span class="keyword">let</span> close_tbox: unit =&gt; unit;
+<pre id="VALclose_tbox"><span class="keyword">let</span> close_tbox: unit =&gt; unit;
 </pre><div class="info ">
 Closes the most recently opened tabulation box.<br>
 </div>
 
-<pre><span class="keyword">let</span> print_tbreak: int =&gt; int =&gt; unit;
+<pre id="VALprint_tbreak"><span class="keyword">let</span> print_tbreak: int =&gt; int =&gt; unit;
 </pre><div class="info ">
 Break hint in a tabulation box.
    <code class="code">print_tbreak spaces offset</code> moves the insertion point to
@@ -312,32 +312,32 @@ Break hint in a tabulation box.
    indentation.<br>
 </div>
 
-<pre><span class="keyword">let</span> set_tab: unit =&gt; unit;
+<pre id="VALset_tab"><span class="keyword">let</span> set_tab: unit =&gt; unit;
 </pre><div class="info ">
 Sets a tabulation mark at the current insertion point.<br>
 </div>
 
-<pre><span class="keyword">let</span> print_tab: unit =&gt; unit;
+<pre id="VALprint_tab"><span class="keyword">let</span> print_tab: unit =&gt; unit;
 </pre><div class="info ">
 <code class="code">print_tab ()</code> is equivalent to <code class="code">print_tbreak 0 0</code>.<br>
 </div>
 <br>
 <h6 id="6_Ellipsis">Ellipsis</h6><br>
 
-<pre><span class="keyword">let</span> set_ellipsis_text: string =&gt; unit;
+<pre id="VALset_ellipsis_text"><span class="keyword">let</span> set_ellipsis_text: string =&gt; unit;
 </pre><div class="info ">
 Set the text of the ellipsis printed when too many boxes
    are opened (a single dot, <code class="code">.</code>, by default).<br>
 </div>
 
-<pre><span class="keyword">let</span> get_ellipsis_text: unit =&gt; string;
+<pre id="VALget_ellipsis_text"><span class="keyword">let</span> get_ellipsis_text: unit =&gt; string;
 </pre><div class="info ">
 Return the text of the ellipsis.<br>
 </div>
 <br>
 <h6 id="tags">Semantics Tags</h6><br>
 
-<pre><span class="keyword">type</span> tag = string;
+<pre id="TYPEtag"><span class="keyword">type</span> tag = string;
 </pre>
 
 <br>
@@ -394,7 +394,7 @@ Return the text of the ellipsis.<br>
    Tag marking and tag printing functions are user definable and can
    be set by calling <code class="code">set_formatter_tag_functions</code>.<br>
 
-</p><pre><span class="keyword">let</span> open_tag: tag =&gt; unit;
+</p><pre id="VALopen_tag"><span class="keyword">let</span> open_tag: tag =&gt; unit;
 </pre><div class="info ">
 <code class="code">open_tag t</code> opens the tag named <code class="code">t</code>; the <code class="code">print_open_tag</code>
    function of the formatter is called with <code class="code">t</code> as argument;
@@ -402,7 +402,7 @@ Return the text of the ellipsis.<br>
    device of the formatter.<br>
 </div>
 
-<pre><span class="keyword">let</span> close_tag: unit =&gt; unit;
+<pre id="VALclose_tag"><span class="keyword">let</span> close_tag: unit =&gt; unit;
 </pre><div class="info ">
 <code class="code">close_tag ()</code> closes the most recently opened tag <code class="code">t</code>.
    In addition, the <code class="code">print_close_tag</code> function of the formatter is called
@@ -410,41 +410,41 @@ Return the text of the ellipsis.<br>
    into the output device of the formatter.<br>
 </div>
 
-<pre><span class="keyword">let</span> set_tags: bool =&gt; unit;
+<pre id="VALset_tags"><span class="keyword">let</span> set_tags: bool =&gt; unit;
 </pre><div class="info ">
 <code class="code">set_tags b</code> turns on or off the treatment of tags (default is off).<br>
 </div>
 
-<pre><span class="keyword">let</span> set_print_tags: bool =&gt; unit;
+<pre id="VALset_print_tags"><span class="keyword">let</span> set_print_tags: bool =&gt; unit;
 </pre><div class="info ">
 <code class="code">set_print_tags b</code> turns on or off the printing of tags.<br>
 </div>
 
-<pre><span class="keyword">let</span> set_mark_tags: bool =&gt; unit;
+<pre id="VALset_mark_tags"><span class="keyword">let</span> set_mark_tags: bool =&gt; unit;
 </pre><div class="info ">
 <code class="code">set_mark_tags b</code> turns on or off the output of tag markers.<br>
 </div>
 
-<pre><span class="keyword">let</span> get_print_tags: unit =&gt; bool;
+<pre id="VALget_print_tags"><span class="keyword">let</span> get_print_tags: unit =&gt; bool;
 </pre><div class="info ">
 Return the current status of tags printing.<br>
 </div>
 
-<pre><span class="keyword">let</span> get_mark_tags: unit =&gt; bool;
+<pre id="VALget_mark_tags"><span class="keyword">let</span> get_mark_tags: unit =&gt; bool;
 </pre><div class="info ">
 Return the current status of tags marking.<br>
 </div>
 <br>
 <h6 id="6_Redirectingthestandardformatteroutput">Redirecting the standard formatter output</h6><br>
 
-<pre><span class="keyword">let</span> set_formatter_out_channel: Pervasives.out_channel =&gt; unit;
+<pre id="VALset_formatter_out_channel"><span class="keyword">let</span> set_formatter_out_channel: Pervasives.out_channel =&gt; unit;
 </pre><div class="info ">
 Redirect the pretty-printer output to the given channel.
     (All the output functions of the standard formatter are set to the
      default output functions printing to the given channel.)<br>
 </div>
 
-<pre><span class="keyword">let</span> set_formatter_output_functions: (string =&gt; int =&gt; int =&gt; unit) =&gt; (unit =&gt; unit) =&gt; unit;
+<pre id="VALset_formatter_output_functions"><span class="keyword">let</span> set_formatter_output_functions: (string =&gt; int =&gt; int =&gt; unit) =&gt; (unit =&gt; unit) =&gt; unit;
 </pre><div class="info ">
 <code class="code">set_formatter_output_functions out flush</code> redirects the
    pretty-printer output functions to the functions <code class="code">out</code> and
@@ -462,7 +462,7 @@ Redirect the pretty-printer output to the given channel.
    using low level functions <code class="code">print_flush</code> or <code class="code">print_newline</code>).<br>
 </p></div>
 
-<pre><span class="keyword">let</span> get_formatter_output_functions: unit =&gt; (string =&gt; int =&gt; int =&gt; unit, unit =&gt; unit);
+<pre id="VALget_formatter_output_functions"><span class="keyword">let</span> get_formatter_output_functions: unit =&gt; (string =&gt; int =&gt; int =&gt; unit, unit =&gt; unit);
 </pre><div class="info ">
 Return the current output functions of the pretty-printer.<br>
 </div>
@@ -509,7 +509,7 @@ The <code class="code">Format</code> module is versatile enough to let you compl
 
 
 
-<pre><span class="keyword">let</span> set_formatter_out_functions: formatter_out_functions =&gt; unit;
+<pre id="VALset_formatter_out_functions"><span class="keyword">let</span> set_formatter_out_functions: formatter_out_functions =&gt; unit;
 </pre><div class="info ">
 <code class="code">set_formatter_out_functions f</code>
    Redirect the pretty-printer output to the functions <code class="code">f.out_string</code>
@@ -529,7 +529,7 @@ The <code class="code">Format</code> module is versatile enough to let you compl
    <code class="code">f.out_string (String.make n &apos; &apos;) 0 n</code> and <code class="code">f.out_string &quot;\n&quot; 0 1</code>.<br>
 </p></div>
 
-<pre><span class="keyword">let</span> get_formatter_out_functions: unit =&gt; formatter_out_functions;
+<pre id="VALget_formatter_out_functions"><span class="keyword">let</span> get_formatter_out_functions: unit =&gt; formatter_out_functions;
 </pre><div class="info ">
 Return the current output functions of the pretty-printer,
    including line breaking and indentation functions. Useful to record the
@@ -579,7 +579,7 @@ The tag handling functions specific to a formatter:
 </div>
 
 
-<pre><span class="keyword">let</span> set_formatter_tag_functions: formatter_tag_functions =&gt; unit;
+<pre id="VALset_formatter_tag_functions"><span class="keyword">let</span> set_formatter_tag_functions: formatter_tag_functions =&gt; unit;
 </pre><div class="info ">
 <code class="code">set_formatter_tag_functions tag_funs</code> changes the meaning of
    opening and closing tags to use the functions in <code class="code">tag_funs</code>.
@@ -599,14 +599,14 @@ The tag handling functions specific to a formatter:
    material in the pretty-printer queue.<br>
 </p></div>
 
-<pre><span class="keyword">let</span> get_formatter_tag_functions: unit =&gt; formatter_tag_functions;
+<pre id="VALget_formatter_tag_functions"><span class="keyword">let</span> get_formatter_tag_functions: unit =&gt; formatter_tag_functions;
 </pre><div class="info ">
 Return the current tag functions of the pretty-printer.<br>
 </div>
 <br>
 <h6 id="6_Multipleformattedoutput">Multiple formatted output</h6><br>
 
-<pre><span class="keyword">type</span> formatter;
+<pre id="TYPEformatter"><span class="keyword">type</span> formatter;
 </pre>
 <div class="info ">
 Abstract data corresponding to a pretty-printer (also called a
@@ -628,26 +628,26 @@ Abstract data corresponding to a pretty-printer (also called a
 </p></div>
 
 
-<pre><span class="keyword">let</span> formatter_of_out_channel: Pervasives.out_channel =&gt; formatter;
+<pre id="VALformatter_of_out_channel"><span class="keyword">let</span> formatter_of_out_channel: Pervasives.out_channel =&gt; formatter;
 </pre><div class="info ">
 <code class="code">formatter_of_out_channel oc</code> returns a new formatter that
    writes to the corresponding channel <code class="code">oc</code>.<br>
 </div>
 
-<pre><span class="keyword">let</span> std_formatter: formatter;
+<pre id="VALstd_formatter"><span class="keyword">let</span> std_formatter: formatter;
 </pre><div class="info ">
 The standard formatter used by the formatting functions
    above. It is defined as <code class="code">formatter_of_out_channel stdout</code>.<br>
 </div>
 
-<pre><span class="keyword">let</span> err_formatter: formatter;
+<pre id="VALerr_formatter"><span class="keyword">let</span> err_formatter: formatter;
 </pre><div class="info ">
 A formatter to use with formatting functions below for
    output to standard error. It is defined as
    <code class="code">formatter_of_out_channel stderr</code>.<br>
 </div>
 
-<pre><span class="keyword">let</span> formatter_of_buffer: Buffer.t =&gt; formatter;
+<pre id="VALformatter_of_buffer"><span class="keyword">let</span> formatter_of_buffer: Buffer.t =&gt; formatter;
 </pre><div class="info ">
 <code class="code">formatter_of_buffer b</code> returns a new formatter writing to
    buffer <code class="code">b</code>. As usual, the formatter has to be flushed at
@@ -655,25 +655,25 @@ A formatter to use with formatting functions below for
    <code class="code">pp_print_newline</code>, to display all the pending material.<br>
 </div>
 
-<pre><span class="keyword">let</span> stdbuf: Buffer.t;
+<pre id="VALstdbuf"><span class="keyword">let</span> stdbuf: Buffer.t;
 </pre><div class="info ">
 The string buffer in which <code class="code">str_formatter</code> writes.<br>
 </div>
 
-<pre><span class="keyword">let</span> str_formatter: formatter;
+<pre id="VALstr_formatter"><span class="keyword">let</span> str_formatter: formatter;
 </pre><div class="info ">
 A formatter to use with formatting functions below for
    output to the <code class="code">stdbuf</code> string buffer.
    <code class="code">str_formatter</code> is defined as <code class="code">formatter_of_buffer stdbuf</code>.<br>
 </div>
 
-<pre><span class="keyword">let</span> flush_str_formatter: unit =&gt; string;
+<pre id="VALflush_str_formatter"><span class="keyword">let</span> flush_str_formatter: unit =&gt; string;
 </pre><div class="info ">
 Returns the material printed with <code class="code">str_formatter</code>, flushes
    the formatter and resets the corresponding buffer.<br>
 </div>
 
-<pre><span class="keyword">let</span> make_formatter: (string =&gt; int =&gt; int =&gt; unit) =&gt; (unit =&gt; unit) =&gt; formatter;
+<pre id="VALmake_formatter"><span class="keyword">let</span> make_formatter: (string =&gt; int =&gt; int =&gt; unit) =&gt; (unit =&gt; unit) =&gt; formatter;
 </pre><div class="info ">
 <code class="code">make_formatter out flush</code> returns a new formatter that writes according
   to the output function <code class="code">out</code>, and the flushing function <code class="code">flush</code>. For
@@ -683,101 +683,101 @@ Returns the material printed with <code class="code">str_formatter</code>, flush
 <br>
 <h6 id="6_Basicfunctionstousewithformatters">Basic functions to use with formatters</h6><br>
 
-<pre><span class="keyword">let</span> pp_open_hbox: formatter =&gt; unit =&gt; unit;
+<pre id="VALpp_open_hbox"><span class="keyword">let</span> pp_open_hbox: formatter =&gt; unit =&gt; unit;
 </pre>
-<pre><span class="keyword">let</span> pp_open_vbox: formatter =&gt; int =&gt; unit;
+<pre id="VALpp_open_vbox"><span class="keyword">let</span> pp_open_vbox: formatter =&gt; int =&gt; unit;
 </pre>
-<pre><span class="keyword">let</span> pp_open_hvbox: formatter =&gt; int =&gt; unit;
+<pre id="VALpp_open_hvbox"><span class="keyword">let</span> pp_open_hvbox: formatter =&gt; int =&gt; unit;
 </pre>
-<pre><span class="keyword">let</span> pp_open_hovbox: formatter =&gt; int =&gt; unit;
+<pre id="VALpp_open_hovbox"><span class="keyword">let</span> pp_open_hovbox: formatter =&gt; int =&gt; unit;
 </pre>
-<pre><span class="keyword">let</span> pp_open_box: formatter =&gt; int =&gt; unit;
+<pre id="VALpp_open_box"><span class="keyword">let</span> pp_open_box: formatter =&gt; int =&gt; unit;
 </pre>
-<pre><span class="keyword">let</span> pp_close_box: formatter =&gt; unit =&gt; unit;
+<pre id="VALpp_close_box"><span class="keyword">let</span> pp_close_box: formatter =&gt; unit =&gt; unit;
 </pre>
-<pre><span class="keyword">let</span> pp_open_tag: formatter =&gt; string =&gt; unit;
+<pre id="VALpp_open_tag"><span class="keyword">let</span> pp_open_tag: formatter =&gt; string =&gt; unit;
 </pre>
-<pre><span class="keyword">let</span> pp_close_tag: formatter =&gt; unit =&gt; unit;
+<pre id="VALpp_close_tag"><span class="keyword">let</span> pp_close_tag: formatter =&gt; unit =&gt; unit;
 </pre>
-<pre><span class="keyword">let</span> pp_print_string: formatter =&gt; string =&gt; unit;
+<pre id="VALpp_print_string"><span class="keyword">let</span> pp_print_string: formatter =&gt; string =&gt; unit;
 </pre>
-<pre><span class="keyword">let</span> pp_print_as: formatter =&gt; int =&gt; string =&gt; unit;
+<pre id="VALpp_print_as"><span class="keyword">let</span> pp_print_as: formatter =&gt; int =&gt; string =&gt; unit;
 </pre>
-<pre><span class="keyword">let</span> pp_print_int: formatter =&gt; int =&gt; unit;
+<pre id="VALpp_print_int"><span class="keyword">let</span> pp_print_int: formatter =&gt; int =&gt; unit;
 </pre>
-<pre><span class="keyword">let</span> pp_print_float: formatter =&gt; float =&gt; unit;
+<pre id="VALpp_print_float"><span class="keyword">let</span> pp_print_float: formatter =&gt; float =&gt; unit;
 </pre>
-<pre><span class="keyword">let</span> pp_print_char: formatter =&gt; char =&gt; unit;
+<pre id="VALpp_print_char"><span class="keyword">let</span> pp_print_char: formatter =&gt; char =&gt; unit;
 </pre>
-<pre><span class="keyword">let</span> pp_print_bool: formatter =&gt; bool =&gt; unit;
+<pre id="VALpp_print_bool"><span class="keyword">let</span> pp_print_bool: formatter =&gt; bool =&gt; unit;
 </pre>
-<pre><span class="keyword">let</span> pp_print_break: formatter =&gt; int =&gt; int =&gt; unit;
+<pre id="VALpp_print_break"><span class="keyword">let</span> pp_print_break: formatter =&gt; int =&gt; int =&gt; unit;
 </pre>
-<pre><span class="keyword">let</span> pp_print_cut: formatter =&gt; unit =&gt; unit;
+<pre id="VALpp_print_cut"><span class="keyword">let</span> pp_print_cut: formatter =&gt; unit =&gt; unit;
 </pre>
-<pre><span class="keyword">let</span> pp_print_space: formatter =&gt; unit =&gt; unit;
+<pre id="VALpp_print_space"><span class="keyword">let</span> pp_print_space: formatter =&gt; unit =&gt; unit;
 </pre>
-<pre><span class="keyword">let</span> pp_force_newline: formatter =&gt; unit =&gt; unit;
+<pre id="VALpp_force_newline"><span class="keyword">let</span> pp_force_newline: formatter =&gt; unit =&gt; unit;
 </pre>
-<pre><span class="keyword">let</span> pp_print_flush: formatter =&gt; unit =&gt; unit;
+<pre id="VALpp_print_flush"><span class="keyword">let</span> pp_print_flush: formatter =&gt; unit =&gt; unit;
 </pre>
-<pre><span class="keyword">let</span> pp_print_newline: formatter =&gt; unit =&gt; unit;
+<pre id="VALpp_print_newline"><span class="keyword">let</span> pp_print_newline: formatter =&gt; unit =&gt; unit;
 </pre>
-<pre><span class="keyword">let</span> pp_print_if_newline: formatter =&gt; unit =&gt; unit;
+<pre id="VALpp_print_if_newline"><span class="keyword">let</span> pp_print_if_newline: formatter =&gt; unit =&gt; unit;
 </pre>
-<pre><span class="keyword">let</span> pp_open_tbox: formatter =&gt; unit =&gt; unit;
+<pre id="VALpp_open_tbox"><span class="keyword">let</span> pp_open_tbox: formatter =&gt; unit =&gt; unit;
 </pre>
-<pre><span class="keyword">let</span> pp_close_tbox: formatter =&gt; unit =&gt; unit;
+<pre id="VALpp_close_tbox"><span class="keyword">let</span> pp_close_tbox: formatter =&gt; unit =&gt; unit;
 </pre>
-<pre><span class="keyword">let</span> pp_print_tbreak: formatter =&gt; int =&gt; int =&gt; unit;
+<pre id="VALpp_print_tbreak"><span class="keyword">let</span> pp_print_tbreak: formatter =&gt; int =&gt; int =&gt; unit;
 </pre>
-<pre><span class="keyword">let</span> pp_set_tab: formatter =&gt; unit =&gt; unit;
+<pre id="VALpp_set_tab"><span class="keyword">let</span> pp_set_tab: formatter =&gt; unit =&gt; unit;
 </pre>
-<pre><span class="keyword">let</span> pp_print_tab: formatter =&gt; unit =&gt; unit;
+<pre id="VALpp_print_tab"><span class="keyword">let</span> pp_print_tab: formatter =&gt; unit =&gt; unit;
 </pre>
-<pre><span class="keyword">let</span> pp_set_tags: formatter =&gt; bool =&gt; unit;
+<pre id="VALpp_set_tags"><span class="keyword">let</span> pp_set_tags: formatter =&gt; bool =&gt; unit;
 </pre>
-<pre><span class="keyword">let</span> pp_set_print_tags: formatter =&gt; bool =&gt; unit;
+<pre id="VALpp_set_print_tags"><span class="keyword">let</span> pp_set_print_tags: formatter =&gt; bool =&gt; unit;
 </pre>
-<pre><span class="keyword">let</span> pp_set_mark_tags: formatter =&gt; bool =&gt; unit;
+<pre id="VALpp_set_mark_tags"><span class="keyword">let</span> pp_set_mark_tags: formatter =&gt; bool =&gt; unit;
 </pre>
-<pre><span class="keyword">let</span> pp_get_print_tags: formatter =&gt; unit =&gt; bool;
+<pre id="VALpp_get_print_tags"><span class="keyword">let</span> pp_get_print_tags: formatter =&gt; unit =&gt; bool;
 </pre>
-<pre><span class="keyword">let</span> pp_get_mark_tags: formatter =&gt; unit =&gt; bool;
+<pre id="VALpp_get_mark_tags"><span class="keyword">let</span> pp_get_mark_tags: formatter =&gt; unit =&gt; bool;
 </pre>
-<pre><span class="keyword">let</span> pp_set_margin: formatter =&gt; int =&gt; unit;
+<pre id="VALpp_set_margin"><span class="keyword">let</span> pp_set_margin: formatter =&gt; int =&gt; unit;
 </pre>
-<pre><span class="keyword">let</span> pp_get_margin: formatter =&gt; unit =&gt; int;
+<pre id="VALpp_get_margin"><span class="keyword">let</span> pp_get_margin: formatter =&gt; unit =&gt; int;
 </pre>
-<pre><span class="keyword">let</span> pp_set_max_indent: formatter =&gt; int =&gt; unit;
+<pre id="VALpp_set_max_indent"><span class="keyword">let</span> pp_set_max_indent: formatter =&gt; int =&gt; unit;
 </pre>
-<pre><span class="keyword">let</span> pp_get_max_indent: formatter =&gt; unit =&gt; int;
+<pre id="VALpp_get_max_indent"><span class="keyword">let</span> pp_get_max_indent: formatter =&gt; unit =&gt; int;
 </pre>
-<pre><span class="keyword">let</span> pp_set_max_boxes: formatter =&gt; int =&gt; unit;
+<pre id="VALpp_set_max_boxes"><span class="keyword">let</span> pp_set_max_boxes: formatter =&gt; int =&gt; unit;
 </pre>
-<pre><span class="keyword">let</span> pp_get_max_boxes: formatter =&gt; unit =&gt; int;
+<pre id="VALpp_get_max_boxes"><span class="keyword">let</span> pp_get_max_boxes: formatter =&gt; unit =&gt; int;
 </pre>
-<pre><span class="keyword">let</span> pp_over_max_boxes: formatter =&gt; unit =&gt; bool;
+<pre id="VALpp_over_max_boxes"><span class="keyword">let</span> pp_over_max_boxes: formatter =&gt; unit =&gt; bool;
 </pre>
-<pre><span class="keyword">let</span> pp_set_ellipsis_text: formatter =&gt; string =&gt; unit;
+<pre id="VALpp_set_ellipsis_text"><span class="keyword">let</span> pp_set_ellipsis_text: formatter =&gt; string =&gt; unit;
 </pre>
-<pre><span class="keyword">let</span> pp_get_ellipsis_text: formatter =&gt; unit =&gt; string;
+<pre id="VALpp_get_ellipsis_text"><span class="keyword">let</span> pp_get_ellipsis_text: formatter =&gt; unit =&gt; string;
 </pre>
-<pre><span class="keyword">let</span> pp_set_formatter_out_channel: formatter =&gt; Pervasives.out_channel =&gt; unit;
+<pre id="VALpp_set_formatter_out_channel"><span class="keyword">let</span> pp_set_formatter_out_channel: formatter =&gt; Pervasives.out_channel =&gt; unit;
 </pre>
-<pre><span class="keyword">let</span> pp_set_formatter_output_functions:
+<pre id="VALpp_set_formatter_output_functions"><span class="keyword">let</span> pp_set_formatter_output_functions:
   formatter =&gt; (string =&gt; int =&gt; int =&gt; unit) =&gt; (unit =&gt; unit) =&gt; unit;
 </pre>
-<pre><span class="keyword">let</span> pp_get_formatter_output_functions:
+<pre id="VALpp_get_formatter_output_functions"><span class="keyword">let</span> pp_get_formatter_output_functions:
   formatter =&gt; unit =&gt; (string =&gt; int =&gt; int =&gt; unit, unit =&gt; unit);
 </pre>
-<pre><span class="keyword">let</span> pp_set_formatter_tag_functions: formatter =&gt; formatter_tag_functions =&gt; unit;
+<pre id="VALpp_set_formatter_tag_functions"><span class="keyword">let</span> pp_set_formatter_tag_functions: formatter =&gt; formatter_tag_functions =&gt; unit;
 </pre>
-<pre><span class="keyword">let</span> pp_get_formatter_tag_functions: formatter =&gt; unit =&gt; formatter_tag_functions;
+<pre id="VALpp_get_formatter_tag_functions"><span class="keyword">let</span> pp_get_formatter_tag_functions: formatter =&gt; unit =&gt; formatter_tag_functions;
 </pre>
-<pre><span class="keyword">let</span> pp_set_formatter_out_functions: formatter =&gt; formatter_out_functions =&gt; unit;
+<pre id="VALpp_set_formatter_out_functions"><span class="keyword">let</span> pp_set_formatter_out_functions: formatter =&gt; formatter_out_functions =&gt; unit;
 </pre>
-<pre><span class="keyword">let</span> pp_get_formatter_out_functions: formatter =&gt; unit =&gt; formatter_out_functions;
+<pre id="VALpp_get_formatter_out_functions"><span class="keyword">let</span> pp_get_formatter_out_functions: formatter =&gt; unit =&gt; formatter_out_functions;
 </pre><div class="info ">
 These functions are the basic ones: usual functions
    operating on the standard formatter are defined via partial
@@ -787,7 +787,7 @@ These functions are the basic ones: usual functions
 <br>
 <h6 id="6_Convenienceformattingfunctions">Convenience formatting functions.</h6><br>
 
-<pre><span class="keyword">let</span> pp_print_list:
+<pre id="VALpp_print_list"><span class="keyword">let</span> pp_print_list:
   pp_sep::(formatter =&gt; unit =&gt; unit)? =&gt; (formatter =&gt; &apos;a =&gt; unit) =&gt; formatter =&gt; list &apos;a =&gt; unit;
 </pre><div class="info ">
 <code class="code">pp_print_list ?pp_sep pp_v ppf l</code> prints the list <code class="code">l</code>. <code class="code">pp_v</code> is
@@ -797,7 +797,7 @@ These functions are the basic ones: usual functions
 <b>Since</b> 4.02.0<br>
 </div>
 
-<pre><span class="keyword">let</span> pp_print_text: formatter =&gt; string =&gt; unit;
+<pre id="VALpp_print_text"><span class="keyword">let</span> pp_print_text: formatter =&gt; string =&gt; unit;
 </pre><div class="info ">
 <code class="code">pp_print_text ppf s</code> prints <code class="code">s</code> with spaces and newlines
     respectively printed with <a href="Format.html#VALpp_print_space"><code class="code">Format.pp_print_space</code></a> and
@@ -807,7 +807,7 @@ These functions are the basic ones: usual functions
 <br>
 <h6 id="6_printflikefunctionsforprettyprinting"><code class="code">printf</code> like functions for pretty-printing.</h6><br>
 
-<pre><span class="keyword">let</span> fprintf: formatter =&gt; Pervasives.format &apos;a formatter unit =&gt; &apos;a;
+<pre id="VALfprintf"><span class="keyword">let</span> fprintf: formatter =&gt; Pervasives.format &apos;a formatter unit =&gt; &apos;a;
 </pre><br>
 <code class="code">fprintf ff fmt arg1 ... argN</code> formats the arguments <code class="code">arg1</code> to <code class="code">argN</code>
    according to the format string <code class="code">fmt</code>, and outputs the resulting string on
@@ -878,17 +878,17 @@ These functions are the basic ones: usual functions
    Note: If you need to prevent the interpretation of a <code class="code">@</code> character as a
    pretty-printing indication, you can also escape it with a <code class="code">%</code> character.<br>
 
-</p><pre><span class="keyword">let</span> printf: Pervasives.format &apos;a formatter unit =&gt; &apos;a;
+</p><pre id="VALprintf"><span class="keyword">let</span> printf: Pervasives.format &apos;a formatter unit =&gt; &apos;a;
 </pre><div class="info ">
 Same as <code class="code">fprintf</code> above, but output on <code class="code">std_formatter</code>.<br>
 </div>
 
-<pre><span class="keyword">let</span> eprintf: Pervasives.format &apos;a formatter unit =&gt; &apos;a;
+<pre id="VALeprintf"><span class="keyword">let</span> eprintf: Pervasives.format &apos;a formatter unit =&gt; &apos;a;
 </pre><div class="info ">
 Same as <code class="code">fprintf</code> above, but output on <code class="code">err_formatter</code>.<br>
 </div>
 
-<pre><span class="keyword">let</span> sprintf: Pervasives.format &apos;a unit string =&gt; &apos;a;
+<pre id="VALsprintf"><span class="keyword">let</span> sprintf: Pervasives.format &apos;a unit string =&gt; &apos;a;
 </pre><div class="info ">
 Same as <code class="code">printf</code> above, but instead of printing on a formatter,
    returns a string containing the result of formatting the arguments.
@@ -907,7 +907,7 @@ Same as <code class="code">printf</code> above, but instead of printing on a for
    pretty-printing returns the desired string.<br>
 </p></div>
 
-<pre><span class="keyword">let</span> asprintf: Pervasives.format4 &apos;a formatter unit string =&gt; &apos;a;
+<pre id="VALasprintf"><span class="keyword">let</span> asprintf: Pervasives.format4 &apos;a formatter unit string =&gt; &apos;a;
 </pre><div class="info ">
 Same as <code class="code">printf</code> above, but instead of printing on a formatter,
    returns a string containing the result of formatting the arguments.
@@ -916,7 +916,7 @@ Same as <code class="code">printf</code> above, but instead of printing on a for
 <b>Since</b> 4.01.0<br>
 </div>
 
-<pre><span class="keyword">let</span> ifprintf: formatter =&gt; Pervasives.format &apos;a formatter unit =&gt; &apos;a;
+<pre id="VALifprintf"><span class="keyword">let</span> ifprintf: formatter =&gt; Pervasives.format &apos;a formatter unit =&gt; &apos;a;
 </pre><div class="info ">
 Same as <code class="code">fprintf</code> above, but does not print anything.
    Useful to ignore some material when conditionally printing.<br>
@@ -925,20 +925,20 @@ Same as <code class="code">fprintf</code> above, but does not print anything.
 <br>
 Formatted output functions with continuations.<br>
 
-<pre><span class="keyword">let</span> kfprintf: (formatter =&gt; &apos;a) =&gt; formatter =&gt; Pervasives.format4 &apos;b formatter unit &apos;a =&gt; &apos;b;
+<pre id="VALkfprintf"><span class="keyword">let</span> kfprintf: (formatter =&gt; &apos;a) =&gt; formatter =&gt; Pervasives.format4 &apos;b formatter unit &apos;a =&gt; &apos;b;
 </pre><div class="info ">
 Same as <code class="code">fprintf</code> above, but instead of returning immediately,
    passes the formatter to its first argument at the end of printing.<br>
 </div>
 
-<pre><span class="keyword">let</span> ikfprintf: (formatter =&gt; &apos;a) =&gt; formatter =&gt; Pervasives.format4 &apos;b formatter unit &apos;a =&gt; &apos;b;
+<pre id="VALikfprintf"><span class="keyword">let</span> ikfprintf: (formatter =&gt; &apos;a) =&gt; formatter =&gt; Pervasives.format4 &apos;b formatter unit &apos;a =&gt; &apos;b;
 </pre><div class="info ">
 Same as <code class="code">kfprintf</code> above, but does not print anything.
    Useful to ignore some material when conditionally printing.<br>
 <b>Since</b> 3.12.0<br>
 </div>
 
-<pre><span class="keyword">let</span> ksprintf: (string =&gt; &apos;a) =&gt; Pervasives.format4 &apos;b unit string &apos;a =&gt; &apos;b;
+<pre id="VALksprintf"><span class="keyword">let</span> ksprintf: (string =&gt; &apos;a) =&gt; Pervasives.format4 &apos;b unit string &apos;a =&gt; &apos;b;
 </pre><div class="info ">
 Same as <code class="code">sprintf</code> above, but instead of returning the string,
    passes it to the first argument.<br>
@@ -946,7 +946,7 @@ Same as <code class="code">sprintf</code> above, but instead of returning the st
 <br>
 <h6 id="6_Deprecated">Deprecated</h6><br>
 
-<pre><span class="keyword">let</span> bprintf: Buffer.t =&gt; Pervasives.format &apos;a formatter unit =&gt; &apos;a;
+<pre id="VALbprintf"><span class="keyword">let</span> bprintf: Buffer.t =&gt; Pervasives.format &apos;a formatter unit =&gt; &apos;a;
 </pre><div class="info ">
 <span class="warning">Deprecated.</span>This function is error prone. Do not use it.
 <p>
@@ -956,12 +956,12 @@ Same as <code class="code">sprintf</code> above, but instead of returning the st
   use regular calls to <code class="code">Format.fprintf</code> on formatter <code class="code">to_b</code>.<br>
 </p></div>
 
-<pre><span class="keyword">let</span> kprintf: (string =&gt; &apos;a) =&gt; Pervasives.format4 &apos;b unit string &apos;a =&gt; &apos;b;
+<pre id="VALkprintf"><span class="keyword">let</span> kprintf: (string =&gt; &apos;a) =&gt; Pervasives.format4 &apos;b unit string &apos;a =&gt; &apos;b;
 </pre><div class="info ">
 <span class="warning">Deprecated.</span>An alias for <code class="code">ksprintf</code>.<br>
 </div>
 
-<pre><span class="keyword">let</span> set_all_formatter_output_functions:
+<pre id="VALset_all_formatter_output_functions"><span class="keyword">let</span> set_all_formatter_output_functions:
   out::(string =&gt; int =&gt; int =&gt; unit) =&gt;
   flush::(unit =&gt; unit) =&gt;
   newline::(unit =&gt; unit) =&gt;
@@ -971,13 +971,13 @@ Same as <code class="code">sprintf</code> above, but instead of returning the st
 <span class="warning">Deprecated.</span>Subsumed by <code class="code">set_formatter_out_functions</code>.<br>
 </div>
 
-<pre><span class="keyword">let</span> get_all_formatter_output_functions:
+<pre id="VALget_all_formatter_output_functions"><span class="keyword">let</span> get_all_formatter_output_functions:
   unit =&gt; (string =&gt; int =&gt; int =&gt; unit, unit =&gt; unit, unit =&gt; unit, int =&gt; unit);
 </pre><div class="info ">
 <span class="warning">Deprecated.</span>Subsumed by <code class="code">get_formatter_out_functions</code>.<br>
 </div>
 
-<pre><span class="keyword">let</span> pp_set_all_formatter_output_functions:
+<pre id="VALpp_set_all_formatter_output_functions"><span class="keyword">let</span> pp_set_all_formatter_output_functions:
   formatter =&gt;
   out::(string =&gt; int =&gt; int =&gt; unit) =&gt;
   flush::(unit =&gt; unit) =&gt;
@@ -988,7 +988,7 @@ Same as <code class="code">sprintf</code> above, but instead of returning the st
 <span class="warning">Deprecated.</span>Subsumed by <code class="code">pp_set_formatter_out_functions</code>.<br>
 </div>
 
-<pre><span class="keyword">let</span> pp_get_all_formatter_output_functions:
+<pre id="VALpp_get_all_formatter_output_functions"><span class="keyword">let</span> pp_get_all_formatter_output_functions:
   formatter =&gt; unit =&gt; (string =&gt; int =&gt; int =&gt; unit, unit =&gt; unit, unit =&gt; unit, int =&gt; unit);
 </pre><div class="info ">
 <span class="warning">Deprecated.</span>Subsumed by <code class="code">pp_get_formatter_out_functions</code>.<br>

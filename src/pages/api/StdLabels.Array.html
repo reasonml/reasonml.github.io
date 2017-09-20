@@ -7,12 +7,12 @@
 <pre><span class="keyword">module</span> Array: ArrayLabels;
 </pre><hr width="100%">
 
-<pre><span class="keyword">let</span> length: array &apos;a =&gt; int;
+<pre id="VALlength"><span class="keyword">let</span> length: array &apos;a =&gt; int;
 </pre><div class="info ">
 Return the length (number of elements) of the given array.<br>
 </div>
 
-<pre><span class="keyword">let</span> get: array &apos;a =&gt; int =&gt; &apos;a;
+<pre id="VALget"><span class="keyword">let</span> get: array &apos;a =&gt; int =&gt; &apos;a;
 </pre><div class="info ">
 <code class="code">ArrayLabels.get a n</code> returns the element number <code class="code">n</code> of array <code class="code">a</code>.
    The first element has number 0.
@@ -24,7 +24,7 @@ Return the length (number of elements) of the given array.<br>
    if <code class="code">n</code> is outside the range 0 to <code class="code">(ArrayLabels.length a - 1)</code>.<br>
 </p></div>
 
-<pre><span class="keyword">let</span> set: array &apos;a =&gt; int =&gt; &apos;a =&gt; unit;
+<pre id="VALset"><span class="keyword">let</span> set: array &apos;a =&gt; int =&gt; &apos;a =&gt; unit;
 </pre><div class="info ">
 <code class="code">ArrayLabels.set a n x</code> modifies array <code class="code">a</code> in place, replacing
    element number <code class="code">n</code> with <code class="code">x</code>.
@@ -35,7 +35,7 @@ Return the length (number of elements) of the given array.<br>
    if <code class="code">n</code> is outside the range 0 to <code class="code">ArrayLabels.length a - 1</code>.<br>
 </p></div>
 
-<pre><span class="keyword">let</span> make: int =&gt; &apos;a =&gt; array &apos;a;
+<pre id="VALmake"><span class="keyword">let</span> make: int =&gt; &apos;a =&gt; array &apos;a;
 </pre><div class="info ">
 <code class="code">ArrayLabels.make n x</code> returns a fresh array of length <code class="code">n</code>,
    initialized with <code class="code">x</code>.
@@ -51,12 +51,12 @@ Return the length (number of elements) of the given array.<br>
    size is only <code class="code">Sys.max_array_length / 2</code>.<br>
 </p></div>
 
-<pre><span class="keyword">let</span> create: int =&gt; &apos;a =&gt; array &apos;a;
+<pre id="VALcreate"><span class="keyword">let</span> create: int =&gt; &apos;a =&gt; array &apos;a;
 </pre><div class="info ">
 <span class="warning">Deprecated.</span><code class="code">ArrayLabels.create</code> is an alias for <a href="ArrayLabels.html#VALmake"><code class="code">ArrayLabels.make</code></a>.<br>
 </div>
 
-<pre><span class="keyword">let</span> init: int =&gt; f::(int =&gt; &apos;a) =&gt; array &apos;a;
+<pre id="VALinit"><span class="keyword">let</span> init: int =&gt; f::(int =&gt; &apos;a) =&gt; array &apos;a;
 </pre><div class="info ">
 <code class="code">ArrayLabels.init n f</code> returns a fresh array of length <code class="code">n</code>,
    with element number <code class="code">i</code> initialized to the result of <code class="code">f i</code>.
@@ -69,7 +69,7 @@ Return the length (number of elements) of the given array.<br>
    size is only <code class="code">Sys.max_array_length / 2</code>.<br>
 </p></div>
 
-<pre><span class="keyword">let</span> make_matrix: dimx::int =&gt; dimy::int =&gt; &apos;a =&gt; array (array &apos;a);
+<pre id="VALmake_matrix"><span class="keyword">let</span> make_matrix: dimx::int =&gt; dimy::int =&gt; &apos;a =&gt; array (array &apos;a);
 </pre><div class="info ">
 <code class="code">ArrayLabels.make_matrix dimx dimy e</code> returns a two-dimensional array
    (an array of arrays) with first dimension <code class="code">dimx</code> and
@@ -85,24 +85,24 @@ Return the length (number of elements) of the given array.<br>
    size is only <code class="code">Sys.max_array_length / 2</code>.<br>
 </p></div>
 
-<pre><span class="keyword">let</span> create_matrix: dimx::int =&gt; dimy::int =&gt; &apos;a =&gt; array (array &apos;a);
+<pre id="VALcreate_matrix"><span class="keyword">let</span> create_matrix: dimx::int =&gt; dimy::int =&gt; &apos;a =&gt; array (array &apos;a);
 </pre><div class="info ">
 <span class="warning">Deprecated.</span><code class="code">ArrayLabels.create_matrix</code> is an alias for
    <a href="ArrayLabels.html#VALmake_matrix"><code class="code">ArrayLabels.make_matrix</code></a>.<br>
 </div>
 
-<pre><span class="keyword">let</span> append: array &apos;a =&gt; array &apos;a =&gt; array &apos;a;
+<pre id="VALappend"><span class="keyword">let</span> append: array &apos;a =&gt; array &apos;a =&gt; array &apos;a;
 </pre><div class="info ">
 <code class="code">ArrayLabels.append v1 v2</code> returns a fresh array containing the
    concatenation of the arrays <code class="code">v1</code> and <code class="code">v2</code>.<br>
 </div>
 
-<pre><span class="keyword">let</span> concat: list (array &apos;a) =&gt; array &apos;a;
+<pre id="VALconcat"><span class="keyword">let</span> concat: list (array &apos;a) =&gt; array &apos;a;
 </pre><div class="info ">
 Same as <code class="code">ArrayLabels.append</code>, but concatenates a list of arrays.<br>
 </div>
 
-<pre><span class="keyword">let</span> sub: array &apos;a =&gt; pos::int =&gt; len::int =&gt; array &apos;a;
+<pre id="VALsub"><span class="keyword">let</span> sub: array &apos;a =&gt; pos::int =&gt; len::int =&gt; array &apos;a;
 </pre><div class="info ">
 <code class="code">ArrayLabels.sub a start len</code> returns a fresh array of length <code class="code">len</code>,
    containing the elements number <code class="code">start</code> to <code class="code">start + len - 1</code>
@@ -114,13 +114,13 @@ Same as <code class="code">ArrayLabels.append</code>, but concatenates a list of
    <code class="code">start &lt; 0</code>, or <code class="code">len &lt; 0</code>, or <code class="code">start + len &gt; ArrayLabels.length a</code>.<br>
 </p></div>
 
-<pre><span class="keyword">let</span> copy: array &apos;a =&gt; array &apos;a;
+<pre id="VALcopy"><span class="keyword">let</span> copy: array &apos;a =&gt; array &apos;a;
 </pre><div class="info ">
 <code class="code">ArrayLabels.copy a</code> returns a copy of <code class="code">a</code>, that is, a fresh array
    containing the same elements as <code class="code">a</code>.<br>
 </div>
 
-<pre><span class="keyword">let</span> fill: array &apos;a =&gt; pos::int =&gt; len::int =&gt; &apos;a =&gt; unit;
+<pre id="VALfill"><span class="keyword">let</span> fill: array &apos;a =&gt; pos::int =&gt; len::int =&gt; &apos;a =&gt; unit;
 </pre><div class="info ">
 <code class="code">ArrayLabels.fill a ofs len x</code> modifies the array <code class="code">a</code> in place,
    storing <code class="code">x</code> in elements number <code class="code">ofs</code> to <code class="code">ofs + len - 1</code>.
@@ -130,7 +130,7 @@ Same as <code class="code">ArrayLabels.append</code>, but concatenates a list of
    designate a valid subarray of <code class="code">a</code>.<br>
 </p></div>
 
-<pre><span class="keyword">let</span> blit: src::array &apos;a =&gt; src_pos::int =&gt; dst::array &apos;a =&gt; dst_pos::int =&gt; len::int =&gt; unit;
+<pre id="VALblit"><span class="keyword">let</span> blit: src::array &apos;a =&gt; src_pos::int =&gt; dst::array &apos;a =&gt; dst_pos::int =&gt; len::int =&gt; unit;
 </pre><div class="info ">
 <code class="code">ArrayLabels.blit v1 o1 v2 o2 len</code> copies <code class="code">len</code> elements
    from array <code class="code">v1</code>, starting at element number <code class="code">o1</code>, to array <code class="code">v2</code>,
@@ -144,53 +144,53 @@ Same as <code class="code">ArrayLabels.append</code>, but concatenates a list of
    designate a valid subarray of <code class="code">v2</code>.<br>
 </p></div>
 
-<pre><span class="keyword">let</span> to_list: array &apos;a =&gt; list &apos;a;
+<pre id="VALto_list"><span class="keyword">let</span> to_list: array &apos;a =&gt; list &apos;a;
 </pre><div class="info ">
 <code class="code">ArrayLabels.to_list a</code> returns the list of all the elements of <code class="code">a</code>.<br>
 </div>
 
-<pre><span class="keyword">let</span> of_list: list &apos;a =&gt; array &apos;a;
+<pre id="VALof_list"><span class="keyword">let</span> of_list: list &apos;a =&gt; array &apos;a;
 </pre><div class="info ">
 <code class="code">ArrayLabels.of_list l</code> returns a fresh array containing the elements
    of <code class="code">l</code>.<br>
 </div>
 
-<pre><span class="keyword">let</span> iter: f::(&apos;a =&gt; unit) =&gt; array &apos;a =&gt; unit;
+<pre id="VALiter"><span class="keyword">let</span> iter: f::(&apos;a =&gt; unit) =&gt; array &apos;a =&gt; unit;
 </pre><div class="info ">
 <code class="code">ArrayLabels.iter f a</code> applies function <code class="code">f</code> in turn to all
    the elements of <code class="code">a</code>.  It is equivalent to
    <code class="code">f a.(0); f a.(1); ...; f a.(ArrayLabels.length a - 1); ()</code>.<br>
 </div>
 
-<pre><span class="keyword">let</span> map: f::(&apos;a =&gt; &apos;b) =&gt; array &apos;a =&gt; array &apos;b;
+<pre id="VALmap"><span class="keyword">let</span> map: f::(&apos;a =&gt; &apos;b) =&gt; array &apos;a =&gt; array &apos;b;
 </pre><div class="info ">
 <code class="code">ArrayLabels.map f a</code> applies function <code class="code">f</code> to all the elements of <code class="code">a</code>,
    and builds an array with the results returned by <code class="code">f</code>:
    <code class="code">[| f a.(0); f a.(1); ...; f a.(ArrayLabels.length a - 1) |]</code>.<br>
 </div>
 
-<pre><span class="keyword">let</span> iteri: f::(int =&gt; &apos;a =&gt; unit) =&gt; array &apos;a =&gt; unit;
+<pre id="VALiteri"><span class="keyword">let</span> iteri: f::(int =&gt; &apos;a =&gt; unit) =&gt; array &apos;a =&gt; unit;
 </pre><div class="info ">
 Same as <a href="ArrayLabels.html#VALiter"><code class="code">ArrayLabels.iter</code></a>, but the
    function is applied to the index of the element as first argument,
    and the element itself as second argument.<br>
 </div>
 
-<pre><span class="keyword">let</span> mapi: f::(int =&gt; &apos;a =&gt; &apos;b) =&gt; array &apos;a =&gt; array &apos;b;
+<pre id="VALmapi"><span class="keyword">let</span> mapi: f::(int =&gt; &apos;a =&gt; &apos;b) =&gt; array &apos;a =&gt; array &apos;b;
 </pre><div class="info ">
 Same as <a href="ArrayLabels.html#VALmap"><code class="code">ArrayLabels.map</code></a>, but the
    function is applied to the index of the element as first argument,
    and the element itself as second argument.<br>
 </div>
 
-<pre><span class="keyword">let</span> fold_left: f::(&apos;a =&gt; &apos;b =&gt; &apos;a) =&gt; init::&apos;a =&gt; array &apos;b =&gt; &apos;a;
+<pre id="VALfold_left"><span class="keyword">let</span> fold_left: f::(&apos;a =&gt; &apos;b =&gt; &apos;a) =&gt; init::&apos;a =&gt; array &apos;b =&gt; &apos;a;
 </pre><div class="info ">
 <code class="code">ArrayLabels.fold_left f x a</code> computes
    <code class="code">f (... (f (f x a.(0)) a.(1)) ...) a.(n-1)</code>,
    where <code class="code">n</code> is the length of the array <code class="code">a</code>.<br>
 </div>
 
-<pre><span class="keyword">let</span> fold_right: f::(&apos;b =&gt; &apos;a =&gt; &apos;a) =&gt; array &apos;b =&gt; init::&apos;a =&gt; &apos;a;
+<pre id="VALfold_right"><span class="keyword">let</span> fold_right: f::(&apos;b =&gt; &apos;a =&gt; &apos;a) =&gt; array &apos;b =&gt; init::&apos;a =&gt; &apos;a;
 </pre><div class="info ">
 <code class="code">ArrayLabels.fold_right f a x</code> computes
    <code class="code">f a.(0) (f a.(1) ( ... (f a.(n-1) x) ...))</code>,
@@ -199,7 +199,7 @@ Same as <a href="ArrayLabels.html#VALmap"><code class="code">ArrayLabels.map</co
 <br>
 <h6 id="6_Sorting">Sorting</h6><br>
 
-<pre><span class="keyword">let</span> sort: cmp::(&apos;a =&gt; &apos;a =&gt; int) =&gt; array &apos;a =&gt; unit;
+<pre id="VALsort"><span class="keyword">let</span> sort: cmp::(&apos;a =&gt; &apos;a =&gt; int) =&gt; array &apos;a =&gt; unit;
 </pre><div class="info ">
 Sort an array in increasing order according to a comparison
    function.  The comparison function must return 0 if its arguments
@@ -231,7 +231,7 @@ Sort an array in increasing order according to a comparison
 <br>
 </div>
 
-<pre><span class="keyword">let</span> stable_sort: cmp::(&apos;a =&gt; &apos;a =&gt; int) =&gt; array &apos;a =&gt; unit;
+<pre id="VALstable_sort"><span class="keyword">let</span> stable_sort: cmp::(&apos;a =&gt; &apos;a =&gt; int) =&gt; array &apos;a =&gt; unit;
 </pre><div class="info ">
 Same as <a href="ArrayLabels.html#VALsort"><code class="code">ArrayLabels.sort</code></a>, but the sorting algorithm is stable (i.e.
    elements that compare equal are kept in their original order) and
@@ -243,7 +243,7 @@ Same as <a href="ArrayLabels.html#VALsort"><code class="code">ArrayLabels.sort</
    It is usually faster than the current implementation of <a href="ArrayLabels.html#VALsort"><code class="code">ArrayLabels.sort</code></a>.<br>
 </p></div>
 
-<pre><span class="keyword">let</span> fast_sort: cmp::(&apos;a =&gt; &apos;a =&gt; int) =&gt; array &apos;a =&gt; unit;
+<pre id="VALfast_sort"><span class="keyword">let</span> fast_sort: cmp::(&apos;a =&gt; &apos;a =&gt; int) =&gt; array &apos;a =&gt; unit;
 </pre><div class="info ">
 Same as <a href="ArrayLabels.html#VALsort"><code class="code">ArrayLabels.sort</code></a> or <a href="ArrayLabels.html#VALstable_sort"><code class="code">ArrayLabels.stable_sort</code></a>, whichever is
     faster on typical input.<br>
@@ -251,7 +251,7 @@ Same as <a href="ArrayLabels.html#VALsort"><code class="code">ArrayLabels.sort</
 <br>
 <h6 id="6_Undocumentedfunctions">Undocumented functions</h6><br>
 
-<pre><span class="keyword">let</span> unsafe_get: array &apos;a =&gt; int =&gt; &apos;a;
+<pre id="VALunsafe_get"><span class="keyword">let</span> unsafe_get: array &apos;a =&gt; int =&gt; &apos;a;
 </pre>
-<pre><span class="keyword">let</span> unsafe_set: array &apos;a =&gt; int =&gt; &apos;a =&gt; unit;
+<pre id="VALunsafe_set"><span class="keyword">let</span> unsafe_set: array &apos;a =&gt; int =&gt; &apos;a =&gt; unit;
 </pre></div>

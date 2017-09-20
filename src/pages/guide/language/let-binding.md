@@ -53,7 +53,7 @@ This prevents misuse of the bindings after these lines.
 
 ### Design Decisions
 
-Reason is backed by OCaml under the hood. a let binding, in OCaml syntax, looks like this:
+Reason is backed by OCaml under the hood. A let binding, in OCaml syntax, looks like this:
 
 ```ocaml
 let a = 1 in
@@ -69,6 +69,14 @@ let a = 1 in
     a + b
 ```
 
+Which is the following in Reason:
+
+```reason
+let a = 1;
+let b = 2;
+a + b;
+```
+
 Which might remind you of:
 
 ```reason
@@ -78,4 +86,4 @@ fun a =>
     a + b;
 ```
 
-Though they're not strictly the same, hopefully you can see that `let` is just an expression! In Reason, we've turned `in` into `;` for visual familiarity; but don't let that hide the underlying elegance of an expression.
+Though they're not strictly the same, hopefully you can see that `let` is just an expression and akin to a function! In Reason, we've turned `in` into `;` for visual familiarity; but don't let that hide the underlying elegance of expressions.

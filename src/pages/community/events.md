@@ -14,7 +14,11 @@ There are a few Reason meetups around the world, among others:
 - [Sydney](https://www.meetup.com/reason-sydney/)
 - [Paris](https://www.meetup.com/ReasonML-Paris/)
 - [Montreal](https://www.meetup.com/ReasonMTL/)
-- [London](https://www.meetup.com/ReasonLDN/)
+- [London](https://www.meetup.com/ReasonLDN/) ([Twitter](https://twitter.com/reasonldn))
 - [Oslo](https://www.meetup.com/Reason-Oslo/) ([Twitter](http://twitter.com/reasonoslo/))
+- [Portland](https://www.meetup.com/Portland-ReasonML/) ([Twitter](https://twitter.com/ReasonPDX))
+- [Copenhagen](https://www.meetup.com/preview/ReasonML-CPH)
+- [Brussels](https://www.meetup.com/ReasonML-BXL/)
+
 
 If you don't find your local area's Reason meetup, search on https://meetup.com or start one!

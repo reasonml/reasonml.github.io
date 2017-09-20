@@ -25,7 +25,7 @@ And other features. See, for example, our VSCode plugin's [feature section](http
   - True to the spirit of JavaScript, [here's yet another Atom Reason plugin](https://github.com/zaaack/atom-ide-reason)! Actually, this one's the prospective de-facto Atom Reason plugin. If you feel adventurous, please dog food it!
 - [Vim](https://github.com/reasonml-editor/vim-reason)
 - [Emacs](https://github.com/reasonml-editor/reason-mode)
-- [Sublime Text](https://github.com/reasonml-editor/sublime-reason): experimental. Doesn't support type-related features yet.
+- [Sublime Text](https://github.com/reasonml-editor/sublime-reason)
 - [IDEA](https://github.com/reasonml-editor/reasonml-idea-plugin)
 
 The GitHub [reasonml-editor](https://github.com/reasonml-editor/) community hosts most of these plugins. If you'd like to add your favorite editor's plugin here, send us a [pull request](https://github.com/reasonml/reasonml.github.io)!

@@ -34,7 +34,7 @@ There's a special syntax for string that allows
 - hooks for special pre-processors
 
 ```reason
-let GreetingAndOneSlash = {|Hello
+let greetingAndOneSlash = {|Hello
 World
 \
 Hehe...
@@ -48,7 +48,7 @@ let world = {js|世界|js}; /* Supports Unicode characters */
 let helloWorld = {j|你好，$world|j}; /* Supports Unicode and interpolation variables */
 ```
 
-BuckleScript's special pre-processor can then look for such `js and `j` marker around the string and transforms it into something else.
+BuckleScript's special pre-processor can then look for such `js` and `j` markers around the string and transforms it into something else.
 
 #### Usage
 
@@ -86,7 +86,7 @@ as opposed to
 let r = Str.regexp "hello \\([A-Za-z]+\\)";
 ```
 
-Though for JS compilation, you'd use [`[%bs.re]`](http://bucklescript.github.io/bucklescript/Manual.html#_regex_support) instead.
+Though for JS compilation, you'd use [`[%bs.re]`](http://bucklescript.github.io/bucklescript/Manual.html#_regex_support) and [`Js.Re`](https://bucklescript.github.io/bucklescript/api/Js.Re.html) instead, since `Str` is not available.
 
 Reason/OCaml's emphasis on simplicity over cleverness can be seen here through its straightforward native string implementation. An overly sophisticated string implementation can sometimes [backfire](http://mrale.ph/blog/2016/11/23/making-less-dart-faster.html).
 
@@ -102,10 +102,10 @@ let firstLetterOfAlphabet = 'a';
 
 #### Tips & Tricks
 
-A character [compiles to an integer ranging from 0 to 255](https://bucklescript.github.io/bucklescript/js-demo/?gist=7f6d24873a48fe03fa037c7c47848a4b), for extra speed. You can also pattern-match (covered later) on it:
+A character [compiles to an integer ranging from 0 to 255](/try/?reason=DYUwLgBAhhC8EHIoKA), for extra speed. You can also pattern-match (covered later) on it:
 
 ```reason
-let isVowel = switch theChar {
+fun isVowel theChar => switch theChar {
 | 'a' | 'e' | 'i' | 'o' | 'u' | 'y' => true
 | _ => false
 };
