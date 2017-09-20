@@ -7,6 +7,8 @@ const sectionTitles = {
   community: 'Community'
 }
 
+const langsWithPaths = ['es', 'ru'];
+
 exports.createPages = ({ graphql, boundActionCreators }) => {
   const { createPage } = boundActionCreators
 
@@ -45,15 +47,20 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
           if (relativePath.match(/index\.md$/)) {
             targetPath = relativePath.slice(0, -'/index.md'.length)
           }
-          const section = relativePath.split('/')[0]
+
+          const pathSplit = relativePath.split('/')
+          const [section, langPath] = langsWithPaths.indexOf(pathSplit[0]) === -1
+            ? [pathSplit[0], '']
+            : [pathSplit[1], pathSplit[0]]
+
           createPage({
             path: targetPath,
             component: path.resolve('src/templates/Guide.js'),
             context: {
-              section: section,
+              section: langPath ? langPath + '/' + section : section,
               sectionTitle: sectionTitles[section],
               relativePath,
-              relatedFiles: `/^${section}\\/.*\\.md$/`
+              relatedFiles: langPath ? `/^${langPath}\\/${section}\\/.*\\.md$/` : `/^${section}\\/.*\\.md$/`
             }
           })
         }

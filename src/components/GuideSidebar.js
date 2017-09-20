@@ -167,7 +167,16 @@ export const constructTree = (section, files) => {
       order,
     }
   })
-  return listify(tree.children[section])
+
+  const sectionPath = section.split('/');
+  const treeToListify = sectionPath.reduce(
+    (acc, section, i) => i === sectionPath.length - 1
+      ? acc[section]
+      : acc[section].children,
+    tree.children,
+  )
+
+  return listify(treeToListify)
 }
 
 // TODO

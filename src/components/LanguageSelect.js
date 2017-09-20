@@ -30,7 +30,7 @@ const onChange = (e) => {
   const newLang = e.target.value;
   if (newLang !== currentCode()) {
     const path = location.pathname;
-    const currentLang = langs.map(l => l.code).find(
+    const currentLang = getLangs().map(l => l.code).find(
       s => s === path.split('/')[1]
     );
     const currentLangRe = new RegExp(`\/${currentLang}(/|\$)`)
