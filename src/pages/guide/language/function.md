@@ -3,6 +3,8 @@ title: Function
 order: 100
 ---
 
+_Cheat sheet for the full function syntax at the end_
+
 Can you believe we haven't covered function until now?
 
 Functions are declared with `fun` and return the expression.
@@ -229,3 +231,139 @@ OCaml optimizes this to avoid the unnecessary function allocation (2 functions h
 - Nice syntax
 - Currying for free (every function takes a single argument, actually!)
 - No performance cost
+
+
+### Tips & Tricks
+
+Cheat sheet for the function syntaxes:
+
+#### Declaration
+
+```reason
+/* anonymous function. Listed for completeness only */
+fun x => fun y => 1;
+/* sugar for the above */
+fun x y => 1;
+/* assign to a name */
+let add = fun x y => 1;
+
+/* sugar for the above. */
+/* Don't need to remember all the above formats; they format to this one */
+let add x y => 1;
+
+/* labeled */
+let add first::x second::y => x + y;
+/* with punning sugar */
+let add ::first ::second => first + second;
+
+/* labeled with default value */
+let add first::x=1 second::y=2 => x + y;
+/* with punning */
+let add ::first=1 ::second=2 => first + second;
+
+/* optional */
+let add first::x=? second::y=? => switch x {...};
+/* with punning */
+let add ::first=? ::second=? => switch x {...};
+```
+
+##### With Type Annotation
+
+```reason
+/* anonymous function */
+fun (x: int) => fun (y: int): int => 1;
+/* sugar for the above */
+fun (x: int) (y: int): int => 1;
+/* assign to a name */
+let add = fun (x: int) (y: int): int => 1;
+
+/* sugar for the above. */
+/* Don't need to remember all the above formats; they format to this one */
+let add (x: int) (y: int) :int => 1;
+
+/* labeled */
+let add first::(x: int) second::(y: int): int => x + y;
+/* no punning sugar for labeled arguments with types yet */
+let add first::(first: int) second::(second: int): int => first + second;
+
+/* labeled with default value */
+let add first::(x: int)=1 second::(y: int)=2: int => x + y;
+/* no punning in this case yet */
+let add first::(first: int)=1 second::(second: int)=2: int => first + second;
+
+/* optional */
+/* careful with the space for the return type here! You need one */
+let add first::(x: option int)=? second::(y: option int)=? : int => switch x {...};
+/* no punning in this case yet */
+/* note that the caller would pass an `int`, not `option int` */
+/* Inside the function, `first` and `second` are `option int`.
+let add first::(first: option int)=? second::(second: option int)=? : int => switch x {...};
+```
+
+#### Application
+
+```reason
+/* anonymous application. Listed for completeness only */
+add(x)(y);
+/* sugar for the above */
+add x y;
+
+/* labeled */
+add first::1 second::2;
+/* with punning sugar */
+add ::first ::second;
+
+/* application with default value. Same as normal application */
+add first::1 second::2;
+
+/* explicit optional application */
+add first::?(Some 1) second::?(Some 2);
+/* with punning */
+add ::?first ::?second;
+```
+
+##### With Type Annotation
+
+```reason
+/* anonymous application */
+add (x: int) (y: int);
+
+/* labeled */
+add first::(1: int) second::(2: int);
+/* no punning sugar for labeled arguments application with types yet */
+add first::(first: int) second::(second: int);
+
+/* application with default value. Same as normal application */
+add first::(1: int) second::(2: int);
+
+/* explicit optional application */
+add first::?(Some 1: option int) second::?(Some 2: option int);
+
+/* no punning in this case yet */
+add first::?(first: option int) second::?(second: option int);
+```
+
+#### Standalone Type Signature
+
+```reason
+/* first arg type, second arg type, return type */
+type foo = int => int => int;
+
+/* labeled */
+type foo = first::int => second::int => int;
+
+/* labeled with default value */
+type foo = first::int? => second::int? => int;
+```
+
+##### In Interface Files
+
+To annotate a function from the implementation file (`.re`):
+
+```reason
+let add: int => int => int;
+```
+
+Same rules as the previous section, except replacing `type foo = bar` with `let add: bar`.
+
+**Don't** confuse this with actually exporting a type in the interface file. `let add: bar` annotates an existing value `bar` from the implementation file. `type foo = bar` exports a type of the same shape from the implementation file.
