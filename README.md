@@ -21,6 +21,8 @@ If you have push access, to deploy a new version of the site, go to the source b
 npm run deploy
 ```
 
+**Note**: the deployment is currently broken. You'll get an error in extract-text-webpack-plugin. See the temporary patch [here](https://github.com/gatsbyjs/gatsby/issues/1846#issuecomment-323221766). What a time to be alive.
+
 The site uses GatsbyJS. For info on how it works, take a look at [their docs](https://www.gatsbyjs.org/docs/).
 
 ## Building the Playground
