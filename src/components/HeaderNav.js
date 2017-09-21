@@ -1,5 +1,5 @@
 import React from "react"
-import LanguageSelect from './LanguageSelect'
+// import LanguageSelect from './LanguageSelect'
 import Link from "./Link"
 import {headerFontFamily} from '../utils/typography'
 
@@ -44,7 +44,6 @@ export default class HeaderNav extends React.Component {
           </Link>
         ))}
       </div>
-      <LanguageSelect />
     </div>
   }
 }

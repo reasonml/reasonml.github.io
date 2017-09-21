@@ -56,7 +56,6 @@ export default () => (
   </select>
 );
 
-
 const styles = {
   select: {
     minWidth: 40,
