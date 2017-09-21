@@ -64,7 +64,7 @@ Generally speaking, we recommend binding to the JS library thinly rather than th
 See also our [JS interop guide](/guide/javascript/interop).
 
 #### Bsb: is there a way to configure the output directory?
-Not currently. We're keeping the configuration minimal. We'll add it later based on popular demands.
+Not currently. Though you can output JS artifacts alongside your Reason files. See the `in-source` option [here](https://bucklescript.github.io/bucklescript/docson/#build-schema.json), in package-specs -> package-spec -> module-format-object.
 
 #### The compiler says the module can't be found.
 Are you using a third-party module? If you're compiling to JS, did you add the dependency in your [`bsconfig.json`](http://bucklescript.github.io/bucklescript/Manual.html#_get_started)'s `bs-dependencies` field? Also, did you do `bsb -make-world`? `bsb` by default only build the root project itself for performance.
