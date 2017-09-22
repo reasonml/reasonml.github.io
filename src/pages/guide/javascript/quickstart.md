@@ -14,6 +14,7 @@ And then run it as usual:
 cd my-first-app
 npm run start
 ```
+Then....
 
 It runs in watch mode, so any changes to files will be picked up and compiled.
 
