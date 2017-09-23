@@ -18,9 +18,11 @@ export default ({inverted}) => (
       height: 'auto',
     }
   }}>
-    <Link to="/" style={{textDecoration: 'none', color: 'currentColor'}} >
-      <img style={{display: 'block', width: 50, maxWidth: 50, margin: 0, border: `2px solid ${gray}`, boxSizing: 'content-box'}} src={icon} width={50} alt="Reason"/>
-    </Link>
+    <div style={{alignSelf: 'flex-start' }} >
+      <Link to="/" style={{textDecoration: 'none', color: 'currentColor'}} >
+        <img style={{display: 'block', width: 50, maxWidth: 50, margin: 0, border: `2px solid ${gray}`, boxSizing: 'content-box'}} src={icon} width={50} alt="Reason"/>
+      </Link>
+    </div>
     <HeaderNav />
   </div>
 )
