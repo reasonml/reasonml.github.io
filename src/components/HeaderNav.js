@@ -47,7 +47,7 @@ export default class HeaderNav extends React.Component {
     }))
   }
   render() {
-    const isPageHeaderGray = location.pathname.match(/^\/$/)
+    const isPageHeaderGray = window.location.pathname.match(/^\/$/)
     let mobileMenu
     let hamburgerButton
     let desktopMenu = (
