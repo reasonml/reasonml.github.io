@@ -51,3 +51,7 @@ ocamlmerlin -version
 ```
 
 It should say "The Merlin toolkit version 2.5.x, for Ocaml 4.02.3". Not OCaml 4.03, not 4.04, etc.
+
+#### Editor Error Message: Unbound Module `Js`, Etc.
+
+If using Visual Studio Code, make sure to open the project's root directory, i.e. the directory where the `package.json` and `bsconfig.json` files are kept, before working in the project. The editor support tool, Merlin, only works in VSCode if opened from the project root directory.
