@@ -1,8 +1,8 @@
 import React from "react"
 // import LanguageSelect from './LanguageSelect'
 import Link from "./Link"
-import {accent} from "../utils/colors"
-import {headerFontFamily} from '../utils/typography'
+import { accent, gray } from "../utils/colors"
+import { headerFontFamily } from '../utils/typography'
 
 const links = [
   {
@@ -47,6 +47,7 @@ export default class HeaderNav extends React.Component {
     }))
   }
   render() {
+    const isPageHeaderGray = window.location.pathname.match(/^\/$/)
     let mobileMenu
     let hamburgerButton
     let desktopMenu = (
@@ -61,7 +62,7 @@ export default class HeaderNav extends React.Component {
     if (this.state.isToggleOn) {
       mobileMenu = (
         <div css={styles.linksMobile}>
-          <ul style={{marginLeft: 0}}>
+          <ul style={{ marginLeft: 0 }}>
           {links.map(link => (
             <li css={styles.mobileMenuItem} key={link.target}>
               <Link css={styles.linkMobile} to={link.target} key={link.target} onClick={this.toggleMenu}>
@@ -74,16 +75,16 @@ export default class HeaderNav extends React.Component {
       )
       hamburgerButton = (
         <div css={styles.hamburger} onClick={this.toggleMenu}>
-          <span css={[styles.hamburgerBar, styles.hamburgerBarX1]} />
-          <span css={[styles.hamburgerBar, styles.hamburgerBarX2]} />
+          <span css={[styles.hamburgerBar, styles.hamburgerBarX1, !isPageHeaderGray && { background: gray }]} />
+          <span css={[styles.hamburgerBar, styles.hamburgerBarX2, !isPageHeaderGray && { background: gray }]} />
         </div>
       )
     } else {
       hamburgerButton = (
         <div css={styles.hamburger} onClick={this.toggleMenu}>
-          <span css={styles.hamburgerBar} />
-          <span css={styles.hamburgerBar} />
-          <span css={styles.hamburgerBar} />
+          <span css={[styles.hamburgerBar, !isPageHeaderGray && { background: gray }]} />
+          <span css={[styles.hamburgerBar, !isPageHeaderGray && { background: gray }]} />
+          <span css={[styles.hamburgerBar, !isPageHeaderGray && { background: gray }]} />
         </div>
       )
     }
@@ -134,7 +135,7 @@ const styles = {
     },
   },
   hamburgerBar: {
-    width: '33px',
+    width: '30px',
     height: '4px',
     margin: '2.5px 0 2.5px 0',
     background: accent,
@@ -160,9 +161,5 @@ const styles = {
       flexDirection: 'row',
       alignItems: 'flex-start',
     },
-  },
-  hamburgerButtonOrange: {
-    fontSize: "2em",
-    color: '#db4d3f',
   },
 }
