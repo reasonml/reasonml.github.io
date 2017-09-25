@@ -51,9 +51,12 @@ export default class HeaderNav extends React.Component {
 
 const styles = {
   link: {
-    padding: '0 10px',
-    fontSize: '.9em',
+    padding: '0 15px',
     whiteSpace: 'nowrap',
+    '@media(max-width: 550px)': {
+      padding: '0 5px',
+      fontSize: '.9em',
+    }
   }, 
   linkContainer: {
     flexWrap: 'wrap',
