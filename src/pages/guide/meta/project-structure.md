@@ -43,4 +43,6 @@ Don't abuse overly fancy features. Do leave some breathing room for future APIs 
 
 If it's a binding to a JS library, don't publish the JS artifacts. If it's a legit library, publish the artifacts in lib/js if you think JS consumers might use it. This is especially the case when you gradually convert a JS lib to Reason + BuckleScript while not breaking existing JS consumers.
 
+Do put the keywords `"reason"` and `"bucklescript"` in your package.json `keywords` field. This allows us to find the bindings much more easily for future purposes.
+
 **Justification**: Be nice to JS consumers of your library. They're your future Reasoners.
