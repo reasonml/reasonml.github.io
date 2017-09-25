@@ -36,9 +36,6 @@ const links = [
 ]
 
 export default class HeaderNav extends React.Component {
-  constructor(props) {
-    super(props)
-  }
   render() {
     return (
       <div css={styles.linkContainer}>
