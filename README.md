@@ -21,7 +21,7 @@ If you have push access, to deploy a new version of the site, go to the source b
 npm run deploy
 ```
 
-**Note**: the deployment is currently broken because of gatsby because of webpack because of chunking plugin, because that's life. We've currently cherry-picked the relevant changes into a stable branch called `good-for-deploy`. Deploy through that one.
+**Note**: the deployment is currently broken because of gatsby because of webpack because of chunking plugin, because that's life. We've currently cherry-picked the relevant changes into a stable branch called `new-deploy`. Deploy through that one.
 
 The site uses GatsbyJS. For info on how it works, take a look at [their docs](https://www.gatsbyjs.org/docs/).
 
