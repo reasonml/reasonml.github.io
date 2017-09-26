@@ -382,7 +382,7 @@ export default class Try extends Component {
   }
 
   componentWillUnmount() {
-    this.evalWorker.terminate();
+    this.evalWorker && this.evalWorker.terminate();
   }
 
   updateReason = newReasonCode => {
