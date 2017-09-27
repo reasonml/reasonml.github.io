@@ -168,7 +168,7 @@ Please refer to this [record section](/guide/language/record#record-types-are-fo
 
 Variant in its many forms (polymorphic variant, open variant, GADT, etc.) are likely _the_ feature of a type system such as Reason's. The aforementioned `option` variant, for example, obliterates the need for nullable types, a major source of bugs in other languages. Philosophically speaking, a problem is composed of many possible branches/conditions. Mishandling these conditions is the majority of what we call bugs. **A type system doesn't magically eliminates bugs; it points out the unhandled conditions and asks you to cover them**\*. The ability to model "this or that" correctly is crucial.
 
-For example, some folks wonder how the type system can safety eliminate badly formatted JSON data from propagating into their program. They don't, not by themselves! But if the parser returns the `option` type `None | Some actualData`, then you'd have to handle the `None` case explicitly in later call sites. That's all there is.
+For example, some folks wonder how the type system can safely eliminate badly formatted JSON data from propagating into their program. They don't, not by themselves! But if the parser returns the `option` type `None | Some actualData`, then you'd have to handle the `None` case explicitly in later call sites. That's all there is.
 
 Performance-wise, a variant can potentially tremendously speed up your program's logic. Here's a piece of JavaScript:
 
