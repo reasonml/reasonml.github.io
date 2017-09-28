@@ -30,7 +30,7 @@ const companies = shuffle([
   },
   {
     title: 'Wow Air',
-    url: 'https://beopinion.com',
+    url: 'https://wowair.com',
     img: require('./logos/wow-air.svg'),
   },
   {
