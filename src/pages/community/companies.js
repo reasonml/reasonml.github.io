@@ -43,6 +43,11 @@ const companies = shuffle([
     url: 'https://sentia.ai',
     img: require('./logos/sentia.jpg'),
   },
+  {
+    title: 'G2i',
+    url: 'http://g2i.co',
+    img: require('./logos/g2i.png'),
+  },
 ])
 
 export default class Companies extends React.Component {
