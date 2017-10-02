@@ -56,6 +56,9 @@ const styles = {
     '@media(max-width: 550px)': {
       padding: '0 5px',
       fontSize: '.9em',
+    },
+    '@media(max-height: 770px)': {
+      fontSize: '.9em',
     }
   }, 
   linkContainer: {
