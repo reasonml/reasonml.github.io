@@ -841,8 +841,12 @@ const styles = {
     width: '25vw',
     boxShadow: '1px 1px 1px rgba(0, 0, 0, .2)',
     borderTop: '1px solid #d6d4d4',
+    margin: 0,
+    padding: 0,
+    listStyle: 'none',
 
     '& li': {
+      margin: 0,
       padding: '.5em 2em',
 
       '&:first-child': {
