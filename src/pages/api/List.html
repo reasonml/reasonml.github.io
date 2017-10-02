@@ -25,18 +25,30 @@ List operations.
 <pre id="VALlength"><span class="keyword">let</span> length: list &apos;a =&gt; int;
 </pre><div class="info ">
 Return the length (number of elements) of the given list.<br>
+<pre class="hljs hljs-reason example">
+List.length [1, 2, 3, 4, 5]; /* returns 5 */
+List.length []; /* returns 0 */
+</pre >
 </div>
 
 <pre id="VALhd"><span class="keyword">let</span> hd: list &apos;a =&gt; &apos;a;
 </pre><div class="info ">
 Return the first element of the given list. Raise
    <code class="code">Failure &quot;hd&quot;</code> if the list is empty.<br>
+<pre class="hljs hljs-reason example">
+List.hd [1, 2, 3, 4, 5]; /* returns 1 */
+List.hd []; /* Failure */
+</pre >
 </div>
 
 <pre id="VALtl"><span class="keyword">let</span> tl: list &apos;a =&gt; list &apos;a;
 </pre><div class="info ">
 Return the given list without its first element. Raise
    <code class="code">Failure &quot;tl&quot;</code> if the list is empty.<br>
+<pre class="hljs hljs-reason example">
+List.tl [1, 2, 3, 4, 5]; /* returns [2, 3, 4, 5] */
+List.tl []; /* Failure */
+</pre >
 </div>
 
 <pre id="VALnth"><span class="keyword">let</span> nth: list &apos;a =&gt; int =&gt; &apos;a;
@@ -45,11 +57,17 @@ Return the <code class="code">n</code>-th element of the given list.
    The first element (head of the list) is at position 0.
    Raise <code class="code">Failure &quot;nth&quot;</code> if the list is too short.
    Raise <code class="code">Invalid_argument &quot;List.nth&quot;</code> if <code class="code">n</code> is negative.<br>
+<pre class="hljs hljs-reason example">
+List.nth [0, 1, 2, 3, 4] 2; /* returns 2 */
+</pre >
 </div>
 
 <pre id="VALrev"><span class="keyword">let</span> rev: list &apos;a =&gt; list &apos;a;
 </pre><div class="info ">
 List reversal.<br>
+<pre class="hljs hljs-reason example">
+List.rev [0, 1, 2, 3, 4]; /* returns [4, 3, 2, 1, 0] */
+</pre >
 </div>
 
 <pre id="VALappend"><span class="keyword">let</span> append: list &apos;a =&gt; list &apos;a =&gt; list &apos;a;
@@ -57,13 +75,19 @@ List reversal.<br>
 Catenate two lists.  Same function as the infix operator <code class="code">@</code>.
    Not tail-recursive (length of the first argument).  The <code class="code">@</code>
    operator is not tail-recursive either.<br>
+<pre class="hljs hljs-reason example">
+List.append [0, 1] [2, 3, 4]; /* returns [0, 1, 2, 3, 4] */
+</pre >
 </div>
 
 <pre id="VALrev_append"><span class="keyword">let</span> rev_append: list &apos;a =&gt; list &apos;a =&gt; list &apos;a;
 </pre><div class="info ">
-<code class="code">List.rev_append l1 l2</code> reverses <code class="code">l1</code> and concatenates it to <code class="code">l2</code>.
-   This is equivalent to <a href="List.html#VALrev"><code class="code">List.rev</code></a><code class="code"> l1 @ l2</code>, but <code class="code">rev_append</code> is
+<code class="code">List.rev_append l1 l2</code> reverses <code class="code">l1</code> and concatenates <code class="code">l2</code> to it.
+   This is equivalent to <a href="List.html#VALrev"><code class="code">List.rev</code></a><code class="code">l1 @ l2</code>, but <code class="code">rev_append</code> is
    tail-recursive and more efficient.<br>
+<pre class="hljs hljs-reason example">
+List.rev_append [0, 1] [2, 3, 4]; /* returns [1, 0, 2, 3, 4] */
+</pre >
 </div>
 
 <pre id="VALconcat"><span class="keyword">let</span> concat: list (list &apos;a) =&gt; list &apos;a;
@@ -72,21 +96,30 @@ Concatenate a list of lists.  The elements of the argument are all
    concatenated together (in the same order) to give the result.
    Not tail-recursive
    (length of the argument + length of the longest sub-list).<br>
+<pre class="hljs hljs-reason example">
+List.concat [[0, 1], [2, 3, 4]]; /* returns [0, 1, 2, 3, 4] */
+</pre >
 </div>
 
 <pre id="VALflatten"><span class="keyword">let</span> flatten: list (list &apos;a) =&gt; list &apos;a;
 </pre><div class="info ">
 Same as <code class="code">concat</code>.  Not tail-recursive
    (length of the argument + length of the longest sub-list).<br>
+<pre class="hljs hljs-reason example">
+List.flatten [[0, 1], [2, 3, 4]]; /* returns [0, 1, 2, 3, 4] */
+</pre >
 </div>
 <br>
 <h6 id="6_Iterators">Iterators</h6><br>
 
 <pre id="VALiter"><span class="keyword">let</span> iter: (&apos;a =&gt; unit) =&gt; list &apos;a =&gt; unit;
 </pre><div class="info ">
-<code class="code">List.iter f [a1; ...; an]</code> applies function <code class="code">f</code> in turn to
-   <code class="code">a1; ...; an</code>. It is equivalent to
+<code class="code">List.iter f [a1, ..., an]</code> applies function <code class="code">f</code> in turn to
+   <code class="code">a1, ..., an</code>. It is equivalent to
    <code class="code">begin f a1; f a2; ...; f an; () end</code>.<br>
+<pre class="hljs hljs-reason example">
+List.iter print_int [0, 1, 2]; /* prints out "012" */
+</pre>
 </div>
 
 <pre id="VALiteri"><span class="keyword">let</span> iteri: (int =&gt; &apos;a =&gt; unit) =&gt; list &apos;a =&gt; unit;
@@ -95,13 +128,20 @@ Same as <a href="List.html#VALiter"><code class="code">List.iter</code></a>, but
    the element as first argument (counting from 0), and the element
    itself as second argument.<br>
 <b>Since</b> 4.00.0<br>
+<pre class="hljs hljs-reason example">
+List.iteri (fun _ v => print_int v) [3, 2, 1]; /* prints out "321" */
+List.iteri (fun i _ => print_int i) [3, 2, 1]; /* prints out "012" */
+</pre>
 </div>
 
 <pre id="VALmap"><span class="keyword">let</span> map: (&apos;a =&gt; &apos;b) =&gt; list &apos;a =&gt; list &apos;b;
 </pre><div class="info ">
-<code class="code">List.map f [a1; ...; an]</code> applies function <code class="code">f</code> to <code class="code">a1, ..., an</code>,
-   and builds the list <code class="code">[f a1; ...; f an]</code>
+<code class="code">List.map f [a1, ..., an]</code> applies function <code class="code">f</code> to <code class="code">a1, ..., an</code>,
+   and builds the list <code class="code">[f a1, ..., f an]</code>
    with the results returned by <code class="code">f</code>.  Not tail-recursive.<br>
+<pre class="hljs hljs-reason example">
+List.map (fun v => v + 1) [3, 2, 1]; /* returns [4, 3, 2] */
+</pre>
 </div>
 
 <pre id="VALmapi"><span class="keyword">let</span> mapi: (int =&gt; &apos;a =&gt; &apos;b) =&gt; list &apos;a =&gt; list &apos;b;
@@ -110,82 +150,132 @@ Same as <a href="List.html#VALmap"><code class="code">List.map</code></a>, but t
    the element as first argument (counting from 0), and the element
    itself as second argument.  Not tail-recursive.<br>
 <b>Since</b> 4.00.0<br>
+<pre class="hljs hljs-reason example">
+List.mapi (fun _ v => v + 1) [3, 2, 1]; /* returns [4, 3, 2] */
+List.mapi (fun i _ => i) [3, 2, 1]; /* returns [0, 1, 2] */
+</pre>
 </div>
 
 <pre id="VALrev_map"><span class="keyword">let</span> rev_map: (&apos;a =&gt; &apos;b) =&gt; list &apos;a =&gt; list &apos;b;
 </pre><div class="info ">
 <code class="code">List.rev_map f l</code> gives the same result as
-   <a href="List.html#VALrev"><code class="code">List.rev</code></a><code class="code"> (</code><a href="List.html#VALmap"><code class="code">List.map</code></a><code class="code"> f l)</code>, but is tail-recursive and
+   <a href="List.html#VALrev"><code class="code">List.rev</code></a><code class="code">(</code><a href="List.html#VALmap"><code class="code">List.map</code></a><code class="code">f l)</code>, but is tail-recursive and
    more efficient.<br>
+<pre class="hljs hljs-reason example">
+List.rev_map (fun v => v + 1) [3, 2, 1]; /* returns [2, 3, 4] */
+</pre>
 </div>
 
 <pre id="VALfold_left"><span class="keyword">let</span> fold_left: (&apos;a =&gt; &apos;b =&gt; &apos;a) =&gt; &apos;a =&gt; list &apos;b =&gt; &apos;a;
 </pre><div class="info ">
-<code class="code">List.fold_left f a [b1; ...; bn]</code> is
+Reduces the list, starting from the leftmost item.
+<code class="code">List.fold_left f a [b1, ..., bn]</code> is
    <code class="code">f (... (f (f a b1) b2) ...) bn</code>.<br>
+<pre class="hljs hljs-reason example">
+List.fold_left (fun a v => a ^ string_of_int v ^ ", " ) "" [0, 1, 2]; /* returns "0, 1, 2, " */
+List.fold_left (fun a v => a + v ) 0 [0, 1, 2]; /* returns 3 */
+</pre>
 </div>
 
 <pre id="VALfold_right"><span class="keyword">let</span> fold_right: (&apos;a =&gt; &apos;b =&gt; &apos;b) =&gt; list &apos;a =&gt; &apos;b =&gt; &apos;b;
 </pre><div class="info ">
-<code class="code">List.fold_right f [a1; ...; an] b</code> is
+<code class="code">List.fold_right f [a1, ..., an] b</code> is
    <code class="code">f a1 (f a2 (... (f an b) ...))</code>.  Not tail-recursive.<br>
+<b>Note:</b> the order of arguments for <code class="code">f</code> and <code class="code">fold_right</code> are opposite of <code class="code">fold_left</code>.<br>
+<pre class="hljs hljs-reason example">
+List.fold_right (fun v a => a ^ string_of_int v ^ ", " ) [0, 1, 2] ""; /* returns "2, 1, 0, " */
+List.fold_right (fun v a => a + v ) [0, 1, 2] 0;  /* returns 3 */
+</pre>
 </div>
 <br>
+
 <h6 id="6_Iteratorsontwolists">Iterators on two lists</h6><br>
 
 <pre id="VALiter2"><span class="keyword">let</span> iter2: (&apos;a =&gt; &apos;b =&gt; unit) =&gt; list &apos;a =&gt; list &apos;b =&gt; unit;
 </pre><div class="info ">
-<code class="code">List.iter2 f [a1; ...; an] [b1; ...; bn]</code> calls in turn
-   <code class="code">f a1 b1; ...; f an bn</code>.
+<code class="code">List.iter2 f [a1, ..., an] [b1, ..., bn]</code> calls in turn
+   <code class="code">f a1 b1, ..., f an bn</code>.
    Raise <code class="code">Invalid_argument</code> if the two lists have
    different lengths.<br>
+<pre class="hljs hljs-reason example">
+let print_pair = (fun a b => print_string ((string_of_int a) ^ ":" ^ (string_of_int b) ^ ", "));
+List.iter2 print_pair [0, 1, 2,] [7, 8, 9]; /* prints "0:7, 1:8, 2:9, " */ 
+</pre>
 </div>
 
 <pre id="VALmap2"><span class="keyword">let</span> map2: (&apos;a =&gt; &apos;b =&gt; &apos;c) =&gt; list &apos;a =&gt; list &apos;b =&gt; list &apos;c;
 </pre><div class="info ">
-<code class="code">List.map2 f [a1; ...; an] [b1; ...; bn]</code> is
-   <code class="code">[f a1 b1; ...; f an bn]</code>.
+<code class="code">List.map2 f [a1, ..., an] [b1, ..., bn]</code> is
+   <code class="code">[f a1 b1, ..., f an bn]</code>.
    Raise <code class="code">Invalid_argument</code> if the two lists have
    different lengths.  Not tail-recursive.<br>
+<pre class="hljs hljs-reason example">
+let pair_to_string = (fun a b => (string_of_int a) ^ ":" ^ (string_of_int b));
+List.map2 pair_to_string [0, 1, 2,] [7, 8, 9]; /* returns ["0:7", "1:8", "2:9"] */ 
+</pre>
 </div>
 
 <pre id="VALrev_map2"><span class="keyword">let</span> rev_map2: (&apos;a =&gt; &apos;b =&gt; &apos;c) =&gt; list &apos;a =&gt; list &apos;b =&gt; list &apos;c;
 </pre><div class="info ">
 <code class="code">List.rev_map2 f l1 l2</code> gives the same result as
-   <a href="List.html#VALrev"><code class="code">List.rev</code></a><code class="code"> (</code><a href="List.html#VALmap2"><code class="code">List.map2</code></a><code class="code"> f l1 l2)</code>, but is tail-recursive and
+   <a href="List.html#VALrev"><code class="code">List.rev</code></a><code class="code">(</code><a href="List.html#VALmap2"><code class="code">List.map2</code></a><code class="code">f l1 l2)</code>, but is tail-recursive and
    more efficient.<br>
+<pre class="hljs hljs-reason example">
+let pair_to_string = (fun a b => (string_of_int a) ^ ":" ^ (string_of_int b));
+List.rev_map2 pair_to_string [0, 1, 2,] [7, 8, 9]; /* returns ["2:9", "1:8", "0:7"] */ 
+</pre>
 </div>
 
 <pre id="VALfold_left2"><span class="keyword">let</span> fold_left2: (&apos;a =&gt; &apos;b =&gt; &apos;c =&gt; &apos;a) =&gt; &apos;a =&gt; list &apos;b =&gt; list &apos;c =&gt; &apos;a;
 </pre><div class="info ">
-<code class="code">List.fold_left2 f a [b1; ...; bn] [c1; ...; cn]</code> is
+Similar to <code class="code">fold_left</code> but takes an additional list, and <code class="code">f</code> must take an additional value as well<br>
+<code class="code">List.fold_left2 f a [b1, ..., bn] [c1, ..., cn]</code> is
    <code class="code">f (... (f (f a b1 c1) b2 c2) ...) bn cn</code>.
    Raise <code class="code">Invalid_argument</code> if the two lists have
    different lengths.<br>
+<pre class="hljs hljs-reason example">
+let reducer = fun acc v1 v2 => acc + v1 + v2;
+List.fold_left2 reducer 0 [1, 2, 3] [0, 1, 2]; /* returns 9 */
+</pre>
 </div>
 
 <pre id="VALfold_right2"><span class="keyword">let</span> fold_right2: (&apos;a =&gt; &apos;b =&gt; &apos;c =&gt; &apos;c) =&gt; list &apos;a =&gt; list &apos;b =&gt; &apos;c =&gt; &apos;c;
 </pre><div class="info ">
-<code class="code">List.fold_right2 f [a1; ...; an] [b1; ...; bn] c</code> is
+Similar to <code class="code">fold_right</code> but takes an additional list, and <code class="code">f</code> must take an additional value as well<br>
+<code class="code">List.fold_right2 f [a1, ..., an] [b1, ..., bn] c</code> is
    <code class="code">f a1 b1 (f a2 b2 (... (f an bn c) ...))</code>.
    Raise <code class="code">Invalid_argument</code> if the two lists have
    different lengths.  Not tail-recursive.<br>
+<pre class="hljs hljs-reason example">
+let reducer = fun v1 v2 acc => acc + v1 + v2;
+List.fold_right2 reducer [1, 2, 3] [0, 1, 2] 0; /* returns 9 */
+</pre>
 </div>
 <br>
+
 <h6 id="6_Listscanning">List scanning</h6><br>
 
 <pre id="VALfor_all"><span class="keyword">let</span> for_all: (&apos;a =&gt; bool) =&gt; list &apos;a =&gt; bool;
 </pre><div class="info ">
-<code class="code">for_all p [a1; ...; an]</code> checks if all elements of the list
+<code class="code">for_all p [a1, ..., an]</code> checks if all elements of the list
    satisfy the predicate <code class="code">p</code>. That is, it returns
    <code class="code">(p a1) &amp;&amp; (p a2) &amp;&amp; ... &amp;&amp; (p an)</code>.<br>
+<pre class="hljs hljs-reason example">
+let is_even = fun x => (x mod 2) == 0
+List.for_all is_even [0, 2, 4, 6, 8]; /* returns true */ 
+</pre>
 </div>
 
 <pre id="VALexists"><span class="keyword">let</span> exists: (&apos;a =&gt; bool) =&gt; list &apos;a =&gt; bool;
 </pre><div class="info ">
-<code class="code">exists p [a1; ...; an]</code> checks if at least one element of
+<code class="code">exists p [a1, ..., an]</code> checks if at least one element of
    the list satisfies the predicate <code class="code">p</code>. That is, it returns
    <code class="code">(p a1) || (p a2) || ... || (p an)</code>.<br>
+<pre class="hljs hljs-reason example">
+let is_even = fun x => (x mod 2) == 0;
+List.exists is_even [1, 3, 5]; /* returns false */
+List.exists is_even [5, 4]; /* returns true */ 
+</pre>
 </div>
 
 <pre id="VALfor_all2"><span class="keyword">let</span> for_all2: (&apos;a =&gt; &apos;b =&gt; bool) =&gt; list &apos;a =&gt; list &apos;b =&gt; bool;
@@ -193,6 +283,11 @@ Same as <a href="List.html#VALmap"><code class="code">List.map</code></a>, but t
 Same as <a href="List.html#VALfor_all"><code class="code">List.for_all</code></a>, but for a two-argument predicate.
    Raise <code class="code">Invalid_argument</code> if the two lists have
    different lengths.<br>
+<pre class="hljs hljs-reason example">
+let matches = fun a b => a == b;
+List.for_all2 matches [0, 1, 2] [0, 1, 2]; /* returns true */
+List.for_all2 matches [0, 1, 2] [0, 1, 3]; /* returns false */
+</pre>
 </div>
 
 <pre id="VALexists2"><span class="keyword">let</span> exists2: (&apos;a =&gt; &apos;b =&gt; bool) =&gt; list &apos;a =&gt; list &apos;b =&gt; bool;
@@ -200,12 +295,21 @@ Same as <a href="List.html#VALfor_all"><code class="code">List.for_all</code></a
 Same as <a href="List.html#VALexists"><code class="code">List.exists</code></a>, but for a two-argument predicate.
    Raise <code class="code">Invalid_argument</code> if the two lists have
    different lengths.<br>
+<pre class="hljs hljs-reason example">
+let even_pair = fun a b => (a mod 2) == 0 && (b mod 2) == 0;
+List.exists2 even_pair [1, 4, 5] [1, 2, 3]; /* returns true */
+List.exists2 even_pair [1, 1, 5] [2, 2, 3]; /* returns false */
+</pre>
 </div>
 
 <pre id="VALmem"><span class="keyword">let</span> mem: &apos;a =&gt; list &apos;a =&gt; bool;
 </pre><div class="info ">
 <code class="code">mem a l</code> is true if and only if <code class="code">a</code> is equal
    to an element of <code class="code">l</code>.<br>
+<pre class="hljs hljs-reason example">
+List.mem 8 [0, 1, 2, 8]; /* returns true */
+List.mem 8 [0, 1, 2]; /* returns false */
+</pre>
 </div>
 
 <pre id="VALmemq"><span class="keyword">let</span> memq: &apos;a =&gt; list &apos;a =&gt; bool;
@@ -214,6 +318,7 @@ Same as <a href="List.html#VALmem"><code class="code">List.mem</code></a>, but u
    equality to compare list elements.<br>
 </div>
 <br>
+
 <h6 id="6_Listsearching">List searching</h6><br>
 
 <pre id="VALfind"><span class="keyword">let</span> find: (&apos;a =&gt; bool) =&gt; list &apos;a =&gt; &apos;a;
@@ -222,6 +327,9 @@ Same as <a href="List.html#VALmem"><code class="code">List.mem</code></a>, but u
    that satisfies the predicate <code class="code">p</code>.
    Raise <code class="code">Not_found</code> if there is no value that satisfies <code class="code">p</code> in the
    list <code class="code">l</code>.<br>
+<pre class="hljs hljs-reason example">
+List.find (fun x => x > 5) [0, 4, 5, 8, 2]; /* returns 8 */
+</pre>
 </div>
 
 <pre id="VALfilter"><span class="keyword">let</span> filter: (&apos;a =&gt; bool) =&gt; list &apos;a =&gt; list &apos;a;
@@ -229,11 +337,17 @@ Same as <a href="List.html#VALmem"><code class="code">List.mem</code></a>, but u
 <code class="code">filter p l</code> returns all the elements of the list <code class="code">l</code>
    that satisfy the predicate <code class="code">p</code>.  The order of the elements
    in the input list is preserved.<br>
+<pre class="hljs hljs-reason example">
+List.filter (fun x => (x mod 2) === 0) [0, 5, 4, 2, 7, 8]; /* returns [0, 4, 2, 8] */
+</pre>
 </div>
 
 <pre id="VALfind_all"><span class="keyword">let</span> find_all: (&apos;a =&gt; bool) =&gt; list &apos;a =&gt; list &apos;a;
 </pre><div class="info ">
 <code class="code">find_all</code> is another name for <a href="List.html#VALfilter"><code class="code">List.filter</code></a>.<br>
+<pre class="hljs hljs-reason example">
+List.find_all (fun x => (x mod 2) === 0) [0, 5, 4, 2, 7, 8]; /* returns [0, 4, 2, 8] */
+</pre>
 </div>
 
 <pre id="VALpartition"><span class="keyword">let</span> partition: (&apos;a =&gt; bool) =&gt; list &apos;a =&gt; (list &apos;a, list &apos;a);
@@ -243,6 +357,10 @@ Same as <a href="List.html#VALmem"><code class="code">List.mem</code></a>, but u
    satisfy the predicate <code class="code">p</code>, and <code class="code">l2</code> is the list of all the
    elements of <code class="code">l</code> that do not satisfy <code class="code">p</code>.
    The order of the elements in the input list is preserved.<br>
+<pre class="hljs hljs-reason example">
+let is_even = fun x => (x mod 2) === 0;
+List.partition is_even [5, 4, 2, 7, 8]; /* returns ([4, 2, 8], [5, 7]) */
+</pre>
 </div>
 <br>
 <h6 id="6_Associationlists">Association lists</h6><br>
@@ -251,10 +369,13 @@ Same as <a href="List.html#VALmem"><code class="code">List.mem</code></a>, but u
 </pre><div class="info ">
 <code class="code">assoc a l</code> returns the value associated with key <code class="code">a</code> in the list of
    pairs <code class="code">l</code>. That is,
-   <code class="code">assoc a [ ...; (a,b); ...] = b</code>
+   <code class="code">assoc a [ ..., (a,b), ...] = b</code>
    if <code class="code">(a,b)</code> is the leftmost binding of <code class="code">a</code> in list <code class="code">l</code>.
    Raise <code class="code">Not_found</code> if there is no value associated with <code class="code">a</code> in the
    list <code class="code">l</code>.<br>
+<pre class="hljs hljs-reason example">
+List.assoc true [(true, "hello"), (false, "world")]; /* returns "hello" */
+</pre>
 </div>
 
 <pre id="VALassq"><span class="keyword">let</span> assq: &apos;a =&gt; list (&apos;a, &apos;b) =&gt; &apos;b;
@@ -267,6 +388,9 @@ Same as <a href="List.html#VALassoc"><code class="code">List.assoc</code></a>, b
 </pre><div class="info ">
 Same as <a href="List.html#VALassoc"><code class="code">List.assoc</code></a>, but simply return true if a binding exists,
    and false if no bindings exist for the given key.<br>
+<pre class="hljs hljs-reason example">
+List.assoc "a" [("b", 5), ("c", 10)]; /* returns false */
+</pre>
 </div>
 
 <pre id="VALmem_assq"><span class="keyword">let</span> mem_assq: &apos;a =&gt; list (&apos;a, &apos;b) =&gt; bool;
@@ -280,6 +404,9 @@ Same as <a href="List.html#VALmem_assoc"><code class="code">List.mem_assoc</code
 <code class="code">remove_assoc a l</code> returns the list of
    pairs <code class="code">l</code> without the first pair with key <code class="code">a</code>, if any.
    Not tail-recursive.<br>
+<pre class="hljs hljs-reason example">
+List.remove_assoc "c" [("b", 5), ("c", 10)]; /* returns [("b", 5)] */
+</pre>
 </div>
 
 <pre id="VALremove_assq"><span class="keyword">let</span> remove_assq: &apos;a =&gt; list (&apos;a, &apos;b) =&gt; list (&apos;a, &apos;b);
@@ -293,17 +420,23 @@ Same as <a href="List.html#VALremove_assoc"><code class="code">List.remove_assoc
 <pre id="VALsplit"><span class="keyword">let</span> split: list (&apos;a, &apos;b) =&gt; (list &apos;a, list &apos;b);
 </pre><div class="info ">
 Transform a list of pairs into a pair of lists:
-   <code class="code">split [(a1,b1); ...; (an,bn)]</code> is <code class="code">([a1; ...; an], [b1; ...; bn])</code>.
+   <code class="code">split [(a1,b1), ..., (an,bn)]</code> is <code class="code">([a1, ..., an], [b1, ..., bn])</code>.
    Not tail-recursive.<br>
+<pre class="hljs hljs-reason example">
+List.split [("b", 5), ("c", 10)]; /* returns (["b", "c"], [5, 10]) */
+</pre>
 </div>
 
 <pre id="VALcombine"><span class="keyword">let</span> combine: list &apos;a =&gt; list &apos;b =&gt; list (&apos;a, &apos;b);
 </pre><div class="info ">
 Transform a pair of lists into a list of pairs:
-   <code class="code">combine [a1; ...; an] [b1; ...; bn]</code> is
-   <code class="code">[(a1,b1); ...; (an,bn)]</code>.
+   <code class="code">combine [a1, ..., an] [b1, ..., bn]</code> is
+   <code class="code">[(a1,b1), ..., (an,bn)]</code>.
    Raise <code class="code">Invalid_argument</code> if the two lists
    have different lengths.  Not tail-recursive.<br>
+<pre class="hljs hljs-reason example">
+List.combine ["b", "c"] [5, 10]; /* returns [("b", 5), ("c", 10)] */
+</pre>
 </div>
 <br>
 <h6 id="6_Sorting">Sorting</h6><br>
@@ -324,7 +457,11 @@ Sort a list in increasing order according to a comparison
 
    The current implementation uses Merge Sort. It runs in constant
    heap space and logarithmic stack space.<br>
-</p></div>
+</p>
+<pre class="hljs hljs-reason example">
+List.sort Pervasives.compare [4, 6, 1, 2]; /* returns [1, 2, 4, 6] */
+</pre>
+</div>
 
 <pre id="VALstable_sort"><span class="keyword">let</span> stable_sort: (&apos;a =&gt; &apos;a =&gt; int) =&gt; list &apos;a =&gt; list &apos;a;
 </pre><div class="info ">
@@ -335,18 +472,28 @@ Same as <a href="List.html#VALsort"><code class="code">List.sort</code></a>, but
 
    The current implementation uses Merge Sort. It runs in constant
    heap space and logarithmic stack space.<br>
-</p></div>
+</p>
+<pre class="hljs hljs-reason example">
+List.stable_sort Pervasives.compare [4, 6, 1, 2]; /* returns [1, 2, 4, 6] */        
+</pre>
+</div>
 
 <pre id="VALfast_sort"><span class="keyword">let</span> fast_sort: (&apos;a =&gt; &apos;a =&gt; int) =&gt; list &apos;a =&gt; list &apos;a;
 </pre><div class="info ">
 Same as <a href="List.html#VALsort"><code class="code">List.sort</code></a> or <a href="List.html#VALstable_sort"><code class="code">List.stable_sort</code></a>, whichever is faster
     on typical input.<br>
+<pre class="hljs hljs-reason example">
+List.fast_sort Pervasives.compare [4, 6, 1, 2]; /* returns [1, 2, 4, 6] */
+</pre>
 </div>
 
 <pre id="VALsort_uniq"><span class="keyword">let</span> sort_uniq: (&apos;a =&gt; &apos;a =&gt; int) =&gt; list &apos;a =&gt; list &apos;a;
 </pre><div class="info ">
 Same as <a href="List.html#VALsort"><code class="code">List.sort</code></a>, but also remove duplicates.<br>
 <b>Since</b> 4.02.0<br>
+<pre class="hljs hljs-reason example">
+List.sort_uniq Pervasives.compare [4, 6, 6, 1, 1, 2]; /* returns [1, 2, 4, 6] */
+</pre>
 </div>
 
 <pre id="VALmerge"><span class="keyword">let</span> merge: (&apos;a =&gt; &apos;a =&gt; int) =&gt; list &apos;a =&gt; list &apos;a =&gt; list &apos;a;
@@ -358,5 +505,8 @@ Merge two lists:
     If several elements compare equal, the elements of <code class="code">l1</code> will be
     before the elements of <code class="code">l2</code>.
     Not tail-recursive (sum of the lengths of the arguments).<br>
+<pre class="hljs hljs-reason example">
+List.merge Pervasives.compare [0, 2, 4] [1, 3, 5, 7]; /* returns [0, 1, 2, 3, 4, 5, 7] */
+</pre>
 </div>
 </div>
