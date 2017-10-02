@@ -10,19 +10,41 @@ export default ({inverted}) => (
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    padding: '10px 10px',
+    padding: 10,
     paddingLeft: '2em',
     // height: 100,
+    '@media(max-height: 770px)': {
+      paddingLeft: '1em'
+    },
     '@media(max-width: 400px)': {
       paddingLeft: 10,
       height: 'auto',
-    }
+    },
   }}>
-    <div style={{alignSelf: 'flex-start' }} >
-      <Link to="/" style={{textDecoration: 'none', color: 'currentColor'}} >
-        <img style={{display: 'block', width: 50, maxWidth: 50, margin: 0, border: `2px solid ${gray}`, boxSizing: 'content-box'}} src={icon} width={50} alt="Reason"/>
+    <div style={{alignSelf: 'flex-start' }}>
+      <Link to="/" style={styles.link}>
+        <img css={styles.logo} src={icon} width={50} alt="Reason"/>
       </Link>
     </div>
     <HeaderNav />
   </div>
 )
+
+const styles = {
+  logo: {
+    display: 'block',
+    width: 50,
+    maxWidth: 50,
+    margin: 0,
+    border: `2px solid ${gray}`,
+    boxSizing: 'content-box',
+
+    '@media(max-height: 770px)': {
+      width: 28
+    }
+  },
+  link: {
+    textDecoration: 'none',
+    color: 'currentColor'
+  }
+};

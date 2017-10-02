@@ -754,7 +754,11 @@ const styles = {
     '&:hover, &:hover button': {
       color: accent,
       cursor: 'pointer'
-    }
+    },
+
+    '@media(max-height: 770px)': {
+      padding: '.5em 1em',
+    },
   },
 
   shareButton: {
