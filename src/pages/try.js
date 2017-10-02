@@ -113,17 +113,17 @@ let () = {
 	  	 |> Js.Option.andThen ((fun p => Js.Dict.get p "name") [@bs])
 	  	 |> Js.Option.andThen ((fun json => Js.Json.decodeObject json) [@bs])
   		 |> Js.Option.getExn;
-  
+
   let firstName =
   	Js.Dict.get name "first"
   	|> Js.Option.andThen ((fun json => Js.Json.decodeString json) [@bs])
   	|> Js.Option.getExn;
-  
+
   let lastName =
   	Js.Dict.get name "last"
   	|> Js.Option.andThen ((fun json => Js.Json.decodeString json) [@bs])
   	|> Js.Option.getExn;
-  
+
   Js.log {j|Hello, $firstName $lastName|j};
 }`
 }, {
@@ -169,7 +169,7 @@ Array.init 42 (fun _ => random_gaussian ())
     </body>
   </html>
   |};
-  
+
   let () =
     input |> Js.String.match_ [%re "/<p\\b[^>]*>(.*?)<\\/p>/gi"]
       |> fun
@@ -228,7 +228,7 @@ const retrieve = () => {
   }
 
   // WTH? There's some retarded automatic semicolon insertion going on, actively causing bugs. Hence the parens. Wonderful!
-  return ( 
+  return (
     fromQueryParam('reason') ||
     fromQueryParam('ocaml') ||
     fromLocalStorage() ||
@@ -528,7 +528,7 @@ export default class Try extends Component {
     input.select();
     document.execCommand('copy');
   }
- 
+
   render() {
     const { reason, ocaml, js, reasonSyntaxError, compileError, ocamlSyntaxError, jsError } = this.state
     const codemirrorStyles = [
@@ -841,6 +841,8 @@ const styles = {
     width: '25vw',
     boxShadow: '1px 1px 1px rgba(0, 0, 0, .2)',
     borderTop: '1px solid #d6d4d4',
+    listStyleType: 'none',
+    margin: '0',
 
     '& li': {
       padding: '.5em 2em',
