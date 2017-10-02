@@ -467,13 +467,23 @@ export default class Try extends Component {
     });
   }
 
+  compile = (code) => {
+    const _consoleError = console.error;
+    let warning = '';
+    console.error = (...args) => args.forEach(argument => warning += argument + `\n`);
+    const res = JSON.parse(window.ocaml.compile(code));
+    console.error = _consoleError;
+    return [res, warning || null];
+  } 
+
   tryCompiling = debounce((reason, ocaml) => {
     try {
-      const res = JSON.parse(window.ocaml.compile(ocaml))
+      const [res, warning] = this.compile(ocaml);
       if (res.js_code) {
         this.setState(_ => ({
           js: res.js_code,
           jsIsLatest: true,
+          compileWarning: warning
         }))
         if (this.state.autoEvaluate) {
             this.evalJs(res.js_code);
@@ -483,6 +493,7 @@ export default class Try extends Component {
         this.errorTimerId = setTimeout(
           () => this.setState(_ => ({
             compileError: res,
+            compileWarning: null,
             js: '',
           })),
           errorTimeout
@@ -492,6 +503,7 @@ export default class Try extends Component {
       this.errorTimerId = setTimeout(
         () => this.setState(_ => ({
           compileError: err,
+          compileWarning: null,
           js: '',
         })),
         errorTimeout
@@ -500,6 +512,7 @@ export default class Try extends Component {
     this.setState(_ => {
       return {
         compileError: null,
+        compileWarning: null,
         jsIsLatest: false,
         output: [],
       }
@@ -530,11 +543,20 @@ export default class Try extends Component {
   }
  
   render() {
-    const { reason, ocaml, js, reasonSyntaxError, compileError, ocamlSyntaxError, jsError } = this.state
+    const {
+      reason,
+      ocaml,
+      js,
+      reasonSyntaxError,
+      compileError,
+      compileWarning,
+      ocamlSyntaxError,
+      jsError
+    } = this.state;
     const codemirrorStyles = [
       styles.codemirror,
       isSafari && styles.codemirrorSafari,
-    ]
+    ];
     return (
       <div css={styles.container}>
         <Helmet>
@@ -611,6 +633,12 @@ export default class Try extends Component {
                       : compileError.message}
                   </div>
                 </div>}
+              {compileWarning &&
+                <div css={styles.warning}>
+                  <div css={styles.errorBody}>
+                    {compileWarning}
+                  </div>
+                </div>}
             </div>
           </div>
           <div css={styles.column}>
@@ -672,6 +700,10 @@ const styles = {
   },
   error: {
     backgroundColor: '#faa',
+    padding: '10px 20px',
+  },
+  warning: {
+    backgroundColor: '#fff8dc',
     padding: '10px 20px',
   },
 
