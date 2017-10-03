@@ -5,6 +5,7 @@ import Section from '../components/Section'
 import GuideSidebar, {constructTree, fixPath} from '../components/GuideSidebar'
 import {accent, gray, dividerLine} from '../utils/colors'
 import {rhythm} from '../utils/typography'
+import debounce from '../utils/debounce'
 
 import Link from "../components/Link"
 import Header from '../components/Header'
@@ -76,12 +77,25 @@ export default class Search extends React.Component {
     }
   }
 
+  search = debounce((edges, text) => {
+    this.setState({
+      results: search(edges, text)
+    })
+  }, 200, false);
+
   setText = text => {
+    const shouldSearch = text.trim().length > 2
+    const results = shouldSearch ? {} : { results: [] }
     window.history.replaceState({}, document.title, window.location.pathname + '?' + text)
+
     this.setState({
       searchText: text,
-      results: text.trim().length > 2 ? search(this.props.data.allFile.edges, text.toLowerCase()) : []
+      ...results
     })
+
+    if (shouldSearch) {
+      this.search(this.props.data.allFile.edges, text.toLowerCase())
+    }
   }
 
   componentDidMount() {
