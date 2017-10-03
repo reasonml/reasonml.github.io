@@ -81,7 +81,7 @@ export default class Search extends React.Component {
     this.setState({
       results: search(edges, text)
     })
-  }, 200, false);
+  }, 200, true);
 
   setText = text => {
     const shouldSearch = text.trim().length > 2
