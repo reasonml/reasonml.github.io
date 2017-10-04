@@ -201,8 +201,7 @@ exposing the variant, it'll only tell you "it's `Company.profession`".
 
 #### Extending module signatures
 
-Like modules themselves module signatures can also be extended. To create a module 
-signature for the module extension example above the following is needed:
+Like modules themselves, module signatures can also be extended through `include module type of Foo`:
 
 ```reason
 module type BaseComponent = {
