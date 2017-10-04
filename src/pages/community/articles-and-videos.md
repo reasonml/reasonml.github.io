@@ -39,6 +39,7 @@ Reason is just OCaml under the hood; We don't yet cover every concept on this do
 
 The more dated they look, the richer the content =P
 
+- [Phantom Types in Reason](https://gist.github.com/busypeoples/3a28d039272ec3eb33ca2fc6b32dafc7): nice example for a hidden feature of Reason/OCaml
 - [How OCaml type checker works](http://okmij.org/ftp/ML/generalization.html?fref=gc)
 - [Detecting use-cases for GADTs in OCaml](http://mads-hartmann.com/ocaml/2015/01/05/gadt-ocaml.html)
 - [Polymorphism and its limitations](http://www.polychoron.fr/ocaml-nonmanual/polymorphism.html)
