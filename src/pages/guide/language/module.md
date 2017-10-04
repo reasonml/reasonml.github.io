@@ -199,6 +199,24 @@ It's also useful to hide the underlying type as an implementation detail others
 can't rely on. If you ask what the type of `Company.profession` is, instead of
 exposing the variant, it'll only tell you "it's `Company.profession`".
 
+#### Extending module signatures
+
+Like modules themselves module signatures can also be extended. To create a module 
+signature for the module extension example above the following is needed:
+
+```reason
+module type BaseComponent = {
+  let defaultGreeting: string;
+  let getAudience: excited::bool => string;
+};
+
+module type ActualComponent = {
+  /* the signature is copied over */
+  include module type of BaseComponent;
+  let render: unit => string;
+};
+```
+
 #### Every `.rei` file is a signature
 
 Similar to how a `react.re` file implicitly defines a module `React`, a file
