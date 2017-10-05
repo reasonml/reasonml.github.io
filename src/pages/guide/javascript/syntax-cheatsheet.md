@@ -43,6 +43,7 @@ JavaScript                |   Reason
 `3.1415`                    |  Same
 `3 + 4`                     |  Same
 `3.0 + 4.5`                 |  `3.0 +. 4.5`
+`5 % 3`                     |  `5 mod 3`
 
 \* JS has no distinction between integer and float.
 
