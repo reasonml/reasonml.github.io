@@ -463,7 +463,7 @@ let a = HasMultipleTuples (10, 10) (10, 10);
   <tr>
     <td>
       <pre>
-let res = match x with
+let res x = match x with
   | HasNothing -> 0
   | HasSingleInt x -> 0
   | HasSingleTuple (x, y) -> 0
@@ -473,7 +473,7 @@ let res = match x with
     </td>
     <td>
       <pre>
-let res = switch x {
+let res x = switch x {
 | HasNothing => 0
 | HasSingleInt x => 0
 | HasSingleTuple (x, y) => 0
