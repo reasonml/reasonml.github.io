@@ -10,7 +10,7 @@ Reason supports the JSX syntax, with some slight differences compared to the one
 ### Capitalized Tag
 
 ```reason
-<MyComponent foo=bar />
+<MyComponent foo={bar} />
 ```
 
 becomes
@@ -22,7 +22,7 @@ MyComponent.make foo::bar children::[] ()
 ### Uncapitalized Tag
 
 ```reason
-<div foo=bar>child1 child2</div>
+<div foo={bar}>child1 child2</div>
 ```
 
 becomes
@@ -39,27 +39,26 @@ Here's a JSX tag that shows most of the features.
 
 ```reason
 <MyComponent
-  booleanAttribute=true
+  booleanAttribute={true}
   stringAttribute="string"
-  intAttribute=1
-  forcedOptional=?(Some "hello")
-  onClick={updater handleClick}
-  onClickThisWorksToo=(updater handleClick)>
+  intAttribute={1}
+  forcedOptional=?{Some "hello"}
+  onClick={updater handleClick}>
   <div>
-    (ReasonReact.stringToElement "hello")
+    {ReasonReact.stringToElement "hello"}
   </div>
 </MyComponent>
 ```
 
 ### Departures From JS JSX
 
-- Attributes don't mandate curly braces, unless they're complex expressions (in which case they're formatted to parentheses).
+- Attributes and children don't mandate `{}`, but we show them anyway for ease of learning. Once you `refmt` your file, some of them go away and some turn into parentheses.
 - There is no support for JSX spread attributes.
 - Punning!
 
 #### Punning
 
-ReactJS JSX's argument punning, e.g. `<input checked />`, due to unfortunate historical reasons, desugars to `<input checked=true />`, in order to conform to DOM's idioms. Reason doesn't have such baggage, so we've decided to desugar it to `<input checked=checked />`. This allows folks to cram many more props into a ReasonReact component without it looking too bloated:
+ReactJS JSX's argument punning, e.g. `<input checked />`, due to unfortunate historical reasons, desugars to `<input checked={true} />`, in order to conform to DOM's idioms. Reason doesn't have such baggage, so we've decided to desugar it to `<input checked={checked} />`. This allows folks to cram many more props into a ReasonReact component without it looking too bloated:
 
 ```reason
 <MyComponent isLoading text onClick />
