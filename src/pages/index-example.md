@@ -1,7 +1,7 @@
 ```reason
 type schoolPerson = Teacher | Director | Student string;
 
-let greeting =
+let greeting stranger =>
   switch stranger {
   | Teacher => "Hey professor!"
   | Director => "Hello director."
