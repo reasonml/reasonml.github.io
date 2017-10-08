@@ -83,8 +83,8 @@ JavaScript                |   Reason
 JavaScript                            |   Reason
 --------------------------------------|--------------------------------
 `arg => retVal`                       |  `fun arg => retVal`
-`function named(arg) {...}`           |  `fun named arg => ...`
-`const f = function named(arg) {...}` |  `let f = fun named arg => ...`
+`function named(arg) {...}`           |  `let named arg => ...`
+`const f = function(arg) {...}`       |  `let f = fun arg => ...`
 `add(4, add(5, 6))`                   |  `add 4 (add 5 6)`
 
 #### Blocks
