@@ -183,7 +183,7 @@ Optional labeled arguments can also be provided a default value. They aren't wra
 ```reason
 let drawCircle ::radius=1 ::color () => {
   setColor color;
-  startAt r r;
+  startAt radius radius;
 };
 ```
 
@@ -264,7 +264,7 @@ let add ::first=1 ::second=2 => first + second;
 /* optional */
 let add first::x=? second::y=? => switch x {...};
 /* with punning */
-let add ::first=? ::second=? => switch x {...};
+let add ::first=? ::second=? => switch first {...};
 ```
 
 ##### With Type Annotation
@@ -297,7 +297,7 @@ let add first::(x: option int)=? second::(y: option int)=? : int => switch x {..
 /* no punning in this case yet */
 /* note that the caller would pass an `int`, not `option int` */
 /* Inside the function, `first` and `second` are `option int`. */
-let add first::(first: option int)=? second::(second: option int)=? : int => switch x {...};
+let add first::(first: option int)=? second::(second: option int)=? : int => switch first {...};
 ```
 
 #### Application
