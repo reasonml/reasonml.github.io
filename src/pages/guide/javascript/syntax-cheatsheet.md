@@ -117,7 +117,7 @@ JavaScript                |   Reason
 --------------------------|--------------------------------
 `let add = a => b => a + b`       |  `let add a b => a + b`
 
-Both JavaScript and Reason support currying, but Reason currying is **built-in and optimized to avoids intermediate function allocation & calls**, whenever possible.
+Both JavaScript and Reason support currying, but Reason currying is **built-in and optimized to avoid intermediate function allocation & calls**, whenever possible.
 
 ### If-else
 
