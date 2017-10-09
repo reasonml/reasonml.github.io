@@ -9,19 +9,21 @@ order: 10
 
 | Platform  | Install command
 |-----------|-------------------------------------------------------------------------------------------------
-| **OSX**   | `npm install -g https://github.com/reasonml/reason-cli/archive/beta-v-1.13.7-bin-darwin.tar.gz`
-| **Linux** | `npm install -g https://github.com/reasonml/reason-cli/archive/beta-v-1.13.7-bin-linux.tar.gz`
+| **OSX**     | `npm install -g https://github.com/reasonml/reason-cli/archive/beta-v-1.13.7-bin-darwin.tar.gz`
+| **Linux**   | `npm install -g https://github.com/reasonml/reason-cli/archive/beta-v-1.13.7-bin-linux.tar.gz`
+| **Windows** | Please see https://github.com/reasonml/reasonml.github.io/issues/195
 
-**`reason-cli` currently doesn't work on Windows**, but it's not a hard requirement for using Reason; you still have great CLI build system diagnosis messages through BuckleScript, whose npm global package [`bs-platform`](https://www.npmjs.com/package/bs-platform) does work on Windows.
+**Extra note for Windows users**: the current editor tooling support for Windows is shaky. Please help us improve it through the issue above! Thank you.
 
 ### (Alternative) Through OPAM
 
 [OPAM](https://opam.ocaml.org) is the native package manager for OCaml. If you come from OCaml and don't have npm/yarn, you can optionally install this way, but be careful!
 
-**Make sure you're on OCaml `4.02.3`**.
+**If you're on Windows**, please see https://github.com/reasonml/reasonml.github.io/issues/195.
 
 ```
 opam update
+opam switch 4.02.3 # mandatory!
 opam install reason.1.13.7
 opam install merlin.2.5.4
 ```
