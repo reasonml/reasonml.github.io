@@ -13,8 +13,6 @@ order: 10
 | **Linux**   | `npm install -g https://github.com/reasonml/reason-cli/archive/beta-v-1.13.7-bin-linux.tar.gz`
 | **Windows** | Please see https://github.com/reasonml/reasonml.github.io/issues/195
 
-**Extra note for Windows users**: the current editor tooling support for Windows is shaky. Please help us improve it through the issue above! Thank you.
-
 ### (Alternative) Through OPAM
 
 [OPAM](https://opam.ocaml.org) is the native package manager for OCaml. If you come from OCaml and don't have npm/yarn, you can optionally install this way, but be careful!
@@ -40,20 +38,23 @@ Finally, if things still don't work, please file an issue at https://github.com/
 
 #### Editor Plugin Not Working
 
-Assuming the installation of the binaries succeeded, if your editor integration doesn't work, do the following:
+- **If you're on Windows**, the current editor tooling support for Windows is shaky. Please help us improve it in https://github.com/reasonml/reasonml.github.io/issues/195. Thank you!
 
-```
-which ocamlmerlin refmt ocamlmerlin-reason
-```
+- Make sure you restart your editor. Some of them might not pick up your new shell environment (which now includes the newly installed binaries) without one.
 
-It should spit out three paths that contain the word `reason-cli`. Note: during `npm/yarn` installation, the `node_modules/reason-cli` paths may be symlinked to `/usr/local/bin` (if so, the latter will display).
+- Try the following:
+  ```
+  which ocamlmerlin refmt ocamlmerlin-reason
+  ```
+  It should spit out three paths that contain the word `reason-cli` if the `reason-cli` installation succeeded.
 
-```
-ocamlmerlin -version
-```
+- Check the Merlin version:
+  ```
+  ocamlmerlin -version
+  ```
 
-It should say "The Merlin toolkit version 2.5.x, for Ocaml 4.02.3". Not OCaml 4.03, not 4.04, etc.
+  It should say "The Merlin toolkit version 2.5.x, for Ocaml 4.02.3". Not OCaml 4.03, not 4.04, etc.
 
 #### Editor Error Message: Unbound Module `Js`, Etc.
 
-If you're on Visual Studio Code, make sure you open the editor at the project's root (where `package.json` and `bsconfig.json` are). You can do so, for example, by incoking `code .` in the terminal at the root.
+If you're on Visual Studio Code, make sure you open the editor at the project's root (where `package.json` and `bsconfig.json` are). You can do so, for example, by invoking `code .` in the terminal at the root.
