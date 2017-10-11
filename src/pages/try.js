@@ -681,7 +681,7 @@ const wrapInExports = code =>
   `(function(exports) {${code}})({})`
 
 const formatOutput = item =>
-  item.contents.map(val => JSON.stringify(val)).join(' ')
+  item.contents.join(' ')
 
 const styles = {
   output: {
