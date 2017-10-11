@@ -58,3 +58,5 @@ Finally, if things still don't work, please file an issue at https://github.com/
 #### Editor Error Message: Unbound Module `Js`, Etc.
 
 If you're on Visual Studio Code, make sure you open the editor at the project's root (where `package.json` and `bsconfig.json` are). You can do so, for example, by invoking `code .` in the terminal at the root.
+
+Also make sure you have build your project at least once with `npm`. You can do this by running `npm run-script build`
