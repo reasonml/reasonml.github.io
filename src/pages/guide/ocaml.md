@@ -487,10 +487,8 @@ let res x = switch x {
 
 ### Pattern Matching
 
-Can you spot the error in the OCaml example? This is one of the most common mistakes among OCaml programmers. The second `match` *must* be wrapped in parentheses, otherwise the `Some` case is parsed as belonging to the outer `match`. Reason's required `{}` blocks around match cases prevent this issue.
-
 <table>
-  <thead><tr> <th scope="col"><p>OCaml (BROKEN)</p></th><th scope="col"><p>Reason</p></th></tr></thead>
+  <thead><tr> <th scope="col"><p>OCaml</p></th><th scope="col"><p>Reason</p></th></tr></thead>
   <tr>
     <td>
       <pre>
@@ -507,11 +505,23 @@ let res = switch x {
     | None => 0
     | Some i => 10
   }
-  | B x y => 0
+  | B (x, y) => 0
 };</pre>
     </td>
   </tr>
 </table>
+
+Can you spot the error in the OCaml example? This is one of the most common mistakes among OCaml programmers. The nested `match` *must* be wrapped in parentheses, otherwise the `Some` case is parsed as belonging to the outer `match`. Visually, it's actually:
+
+```ocaml
+let res = match x with
+  | A (x, y) -> match y with
+    | None -> 0
+    | Some i -> 10
+    | B (x, y) -> 0
+```
+
+Reason's mandatory `{}` around `switch` cases prevents this issue.
 
 ### Modules and Signatures
 

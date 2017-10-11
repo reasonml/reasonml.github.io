@@ -28,6 +28,7 @@ Reason is just OCaml under the hood; We don't yet cover every concept on this do
 
 ## Videos
 
+- [Community-maintained Reason talks playlist](https://www.youtube.com/playlist?list=PLYU6eGtVFu8ZG3yh1FfLrqHBMUXj80wgK)
 - [Reason: JavaScript-flavored OCaml](https://www.youtube.com/watch?v=vTb8UU_Yjmk) July 2017
 - [A Speed-date with ReasonML](https://www.youtube.com/watch?v=dKYAh8vJiSk) May 2017
 - [Imperfection](https://www.youtube.com/watch?v=tCVXp6gFD8o) May 2017
