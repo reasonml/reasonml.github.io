@@ -232,7 +232,7 @@ const retrieve = () => {
     fromQueryParam('reason') ||
     fromQueryParam('ocaml') ||
     fromLocalStorage() ||
-    { language: 'reason', code: decompress(examples[0].code) }
+    { language: 'reason', code: examples[0].code }
   );
 };
 
