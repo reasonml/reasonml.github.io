@@ -105,6 +105,17 @@ let message =
   };
 ```
 
+#### Match on Exceptions
+
+If the function throws an exceptions (covered later), you can also match on _that_, in addition to the function's normally returned values.
+
+```reason
+switch (List.find (fun i => i === theItem) myItems) {
+| item => print_endline item
+| exception Not_found => print_endline "No such item found!"
+};
+```
+
 ### Tips & Tricks
 
 **Flatten your pattern-match whenever you can**. This is a real bug remover. Example below.
