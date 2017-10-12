@@ -2,13 +2,22 @@ importScripts('stdlibBundle.js');
 
 const _console = console;
 
+const stringify = value =>
+  JSON.stringify(value) || String(value);
+
+const send = (type, contents) =>
+  postMessage({ type, contents });
+
+const log = (type, items) =>
+  send(type, items.map(stringify))
+
 console = {
-  log: (...items) => postMessage({ type: 'log', contents: items }),
-  error: (...items) => postMessage({ type: 'error', contents: items }),
-  warn: (...items) => postMessage({ type: 'warn', contents: items })
+  log: (...items) => log('log', items),
+  error: (...items) => log('error', items),
+  warn: (...items) => log('warn', items),
 };
 
 onmessage = ({data}) => {
   eval(data.code);
-  postMessage({ type: 'end', contents: data.timerId });
+  send('end', data.timerId);
 };
