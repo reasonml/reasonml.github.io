@@ -57,4 +57,6 @@ Finally, if things still don't work, please file an issue at https://github.com/
 
 #### Editor Error Message: Unbound Module `Js`, Etc.
 
+Make sure you've built your project at least once; the diagnosis doesn't pick up until after that. The build command varies by project, but is frequently `npm run build` (which usually calls `bsb -make-world` under the hood).
+
 If you're on Visual Studio Code, make sure you open the editor at the project's root (where `package.json` and `bsconfig.json` are). You can do so, for example, by invoking `code .` in the terminal at the root.
