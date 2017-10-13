@@ -36,6 +36,10 @@ Reason is just OCaml under the hood; We don't yet cover every concept on this do
 - [Taming the Meta-language](https://www.youtube.com/watch?v=_0T5OSSzxms) March 2017
 - [The Age of Reason(ML)](https://www.youtube.com/watch?v=8LCmLQ1-YqQ) Nov 2016
 
+## General Functional Programming & Type System
+
+- [The algebra (and calculus!) of algebraic data types](https://codewords.recurse.com/issues/three/algebra-and-calculus-of-algebraic-data-types)
+
 ## Pro Links
 
 The more dated they look, the richer the content =P
