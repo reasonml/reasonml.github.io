@@ -38,6 +38,7 @@ Reason is just OCaml under the hood; We don't yet cover every concept on this do
 
 ## General Functional Programming & Type System
 
+- [C# and F# approaches to illegal states](http://enterprisecraftsmanship.com/2015/09/28/c-and-f-approaches-to-illegal-states/): F# is a cousin of Reason. Great article on F#'s equivalent of variants
 - [The algebra (and calculus!) of algebraic data types](https://codewords.recurse.com/issues/three/algebra-and-calculus-of-algebraic-data-types)
 
 ## Pro Links
