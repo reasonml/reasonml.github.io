@@ -29,12 +29,15 @@ Reason is just OCaml under the hood; We don't yet cover every concept on this do
 ## Videos
 
 - [Community-maintained Reason talks playlist](https://www.youtube.com/playlist?list=PLYU6eGtVFu8ZG3yh1FfLrqHBMUXj80wgK)
+- [The Why and How of ReasonML](https://www.youtube.com/watch?v=j5mlMUzpE5g): October 2017
+- [Critical ReasonML'ing](https://www.youtube.com/watch?v=k77aR_JyvEE): October 2017
+- [Universal Reason](https://www.youtube.com/watch?v=L0xz-ILKsLE&list=PLYU6eGtVFu8ZG3yh1FfLrqHBMUXj80wgK): October 2017
 - [Reason: JavaScript-flavored OCaml](https://www.youtube.com/watch?v=vTb8UU_Yjmk) July 2017
 - [A Speed-date with ReasonML](https://www.youtube.com/watch?v=dKYAh8vJiSk) May 2017
 - [Imperfection](https://www.youtube.com/watch?v=tCVXp6gFD8o) May 2017
 - [What's in a Language?](https://www.youtube.com/watch?v=24S5u_4gx7w) April 2017
 - [Taming the Meta-language](https://www.youtube.com/watch?v=_0T5OSSzxms) March 2017
-- [The Age of Reason(ML)](https://www.youtube.com/watch?v=8LCmLQ1-YqQ) Nov 2016
+- [The Age of Reason(ML)](https://www.youtube.com/watch?v=8LCmLQ1-YqQ) November 2016
 
 ## General Functional Programming & Type System
 
