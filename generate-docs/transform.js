@@ -27,8 +27,12 @@ module.exports = function(fileInfo, api, options) {
   if (fileInfo.path.endsWith('index.html')) {
     $('h1').map((i, el) => {
       const $el = $(el);
+      $el.attr('style', 'padding-left: 24px')
       return $el.text($el.text().replace('OCaml library', 'Reason API'));
     });
+
+    $('.indexlist li a').attr('style', 'padding-left: 24px')
+    $('.indextable tbody tr td a').attr('style', 'padding-left: 24px')
     $('br').remove();
   }
 
