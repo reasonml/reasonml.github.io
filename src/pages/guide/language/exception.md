@@ -17,7 +17,7 @@ let getItem theList => {
 };
 
 let result = try (getItem [1, 2, 3]) {
-| Not_found => print_endline "Item not found!"
+| Not_found => failwith "Item not found!"
 };
 ```
 
