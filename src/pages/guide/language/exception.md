@@ -17,9 +17,11 @@ let getItem theList => {
 };
 
 let result = try (getItem [1, 2, 3]) {
-| Not_found => print_endline "Item not found!"
+| Not_found => 0 /* Default value if getItem throws */
 };
 ```
+
+Note that the above is just for demonstration purposes; in reality, you'd return an `option int` directly from `getItem` and avoid the `try` altogether.
 
 You can directly match on exceptions _while_ getting another return value from a function:
 
