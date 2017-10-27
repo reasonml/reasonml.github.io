@@ -9,8 +9,8 @@ order: 10
 
 | Platform  | Install command
 |-----------|-------------------------------------------------------------------------------------------------
-| **OSX**     | `npm install -g https://github.com/reasonml/reason-cli/archive/beta-v-1.13.7-bin-darwin.tar.gz`
-| **Linux**   | `npm install -g https://github.com/reasonml/reason-cli/archive/beta-v-1.13.7-bin-linux.tar.gz`
+| **OSX**     | `npm install -g https://github.com/reasonml/reason-cli/archive/3.0.0-bin-darwin.tar.gz`
+| **Linux**   | `npm install -g https://github.com/reasonml/reason-cli/archive/3.0.0-bin-linux.tar.gz`
 | **Windows** | Please see https://github.com/reasonml/reasonml.github.io/issues/195
 
 ### (Alternative) Through OPAM
