@@ -13,6 +13,7 @@ The infra changes wouldn't have happened without a tight cooperation from these 
 
 **Highlights**:
 
+- [Here's how it looks](https://github.com/reasonml/reason-react/commit/36135bfb8905e99fea24224947adb89af40ffed1).
 - 100+ parsing & printing issues fixed! The total open issues count went from almost 500 to <300.
 - New error messages infra, by Fred. This solves lots of existing pain points with refmt error report: reserved keywords, missing semicolon, etc. More coming soon! **Please do give Fred a shout out on his [Twitter](https://twitter.com/let_def)**. Show that the JavaScript folks appreciate his help.
 - Unification of `[@foo]`, `[@@foo]` and `[@@@foo]` into `[@foo]`. Labeled argument + type punning, JS object type sugar `{. "foo": string}`, string concat is now `++`, infix operators formatting tweaks, etc.
