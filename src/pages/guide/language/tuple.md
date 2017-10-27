@@ -43,9 +43,9 @@ Tuples aren't meant to be updated mutatively; you'd create new ones by destructu
 You'd use tuples in handy situations that pass around multiple values without too much ceremony. For example, to return many values:
 
 ```reason
-let getCenterCoordinates () => {
-  let x = doSomeOperationsHere ();
-  let y = doSomeMoreOperationsHere ();
+let getCenterCoordinates = () => {
+  let x = doSomeOperationsHere();
+  let y = doSomeMoreOperationsHere();
   (x, y)
 };
 ```

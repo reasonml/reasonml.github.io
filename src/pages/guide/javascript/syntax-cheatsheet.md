@@ -11,7 +11,7 @@ JavaScript                |   Reason
 --------------------------|--------------------------------
 `const x = 5;`              |  `let x = 5;`
 `var x = y;`                |  No equivalent (thankfully)
-`let x = 5; x = x + 1;`     |  `let x = ref 5; x := !x + 1;`
+`let x = 5; x = x + 1;`     |  `let x = ref(5); x := x^ + 1;`
 
 ### String & Char
 
@@ -20,14 +20,14 @@ JavaScript                |   Reason
 `"Hello world!"`            |  Same
 `'Hello world!'`            |  Strings must use `"`
 Characters are strings      |  `'a'`
-`"hello " + "world"`        |  `"hello " ^ "world"`
+`"hello " + "world"`        |  `"hello " ++ "world"`
 
 ### Boolean
 
 JavaScript                |   Reason
 --------------------------|--------------------------------
 `true`, `false`                      |  `true`, `false` \*
-`!true`                              |  `not true`
+`!true`                              |  Same
 `||`, `&&`, `<=`, `>=`, `<`, `>`     |  Same
 `a === b`, `a !== b`                 |  Same
 No deep equality (recursive compare) |  `a == b`, `a != b`
@@ -51,7 +51,7 @@ JavaScript                |   Reason
 
 JavaScript                |   Reason
 --------------------------|--------------------------------
-no static types           |  `type point = {x: int, mutable y: int};`
+no static types           |  `type point = {x: int, mutable y: int}`
 `{x: 30, y: 20}`          |  Same \*
 `point.x`                 |  Same
 `point.y = 30;`           |  Same
@@ -64,7 +64,7 @@ no static types           |  `type point = {x: int, mutable y: int};`
 JavaScript                |   Reason
 --------------------------|--------------------------------
 `[1, 2, 3]`               |  `[|1, 2, 3|]`
-`myArray[1] = 10`         |  `myArray.(1) = 10`
+`myArray[1] = 10`         |  Same
 `[1, "Bob", true]` \*     |  `(1, "Bob", true)`
 No immutable list         |  `[1, 2, 3]`
 
@@ -82,10 +82,10 @@ JavaScript                |   Reason
 
 JavaScript                            |   Reason
 --------------------------------------|--------------------------------
-`arg => retVal`                       |  `fun arg => retVal`
-`function named(arg) {...}`           |  `let named arg => ...`
-`const f = function(arg) {...}`       |  `let f = fun arg => ...`
-`add(4, add(5, 6))`                   |  `add 4 (add 5 6)`
+`arg => retVal`                       |  `(arg) => retVal`
+`function named(arg) {...}`           |  `let named = (arg) => ...`
+`const f = function(arg) {...}`       |  `let f = (arg) => ...`
+`add(4, add(5, 6))`                   |  Same
 
 #### Blocks
 
@@ -102,7 +102,7 @@ const myFun = (x, y) => {
     </td>
     <td>
       <pre>
-let myFun = fun x y => {
+let myFun = (x, y) => {
   let doubleX = x + x;
   let doubleY = y + y;
   doubleX + doubleY
@@ -115,7 +115,7 @@ let myFun = fun x y => {
 
 JavaScript                |   Reason
 --------------------------|--------------------------------
-`let add = a => b => a + b`       |  `let add a b => a + b`
+`let add = a => b => a + b`       |  `let add = (a, b) => a + b`
 
 Both JavaScript and Reason support currying, but Reason currying is **built-in and optimized to avoid intermediate function allocation & calls**, whenever possible.
 
@@ -143,24 +143,26 @@ JavaScript                |   Reason
 
 JavaScript                |   Reason
 --------------------------|--------------------------------
-`for (let i = 0; i <= 10; i++) {...}`             |  `for i in 0 to 10 {...}`
-`for (let i = 10; i >= 0; i--) {...}`             |  `for i in 10 downto 0 {...}`
+`for (let i = 0; i <= 10; i++) {...}`             |  `for (i in 0 to 10) {...}`
+`for (let i = 10; i >= 0; i--) {...}`             |  `for (i in 10 downto 0) {...}`
 `while (true) {...}`                              |  Same
 
 ### JSX
 
 JavaScript                |   Reason
 --------------------------|--------------------------------
-`<Foo bar=1 baz="hi" onClick={bla} />`  |  `<Foo bar=1 baz="hi" onClick=(bla) />`
-`<Foo bar=bar />`                       |  `<Foo bar />`
+`<Foo bar=1 baz="hi" onClick={bla} />`  |  Same
+`<Foo bar=bar />`                       |  `<Foo bar />` \*
 `<input checked />`                     |  `<input checked=true />`
+
+\* Argument punning!
 
 ### Exception
 
 JavaScript                |   Reason
 --------------------------|--------------------------------
-`throw new SomeError(...)`  |  `raise (SomeError ...)`
-`try (a) {...} catch (Err) {...} finally {...}`   |  `try (a) { | Err => ...}` \*
+`throw new SomeError(...)`  |  `raise(SomeError(...))`
+`try (a) {...} catch (Err) {...} finally {...}`   |  `try a { | Err => ...}` \*
 
 \* No finally.
 

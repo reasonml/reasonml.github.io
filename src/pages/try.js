@@ -26,135 +26,120 @@ if (typeof navigator !== 'undefined') {
 const examples = [{
   name: 'Tree sum',
   code:
-`type tree = Node int tree tree | Leaf;
+`type tree = Lead | Node(int, tree, tree);
 
 let rec sum =
-  fun | Leaf => 0
-      | Node value left right =>
-        value + (sum left) + (sum right);
+  fun
+  | Leaf => 0
+  | Node(value, left, right) => value + sum(left) + sum(right);
 
 let myTree =
-	(Node 1
-      (Node 2
-        (Node 4 Leaf Leaf)
-      	(Node 6 Leaf Leaf))
-      (Node 3
-        (Node 5 Leaf Leaf)
-        (Node 7 Leaf Leaf)));
+  Node(
+    1,
+    Node(2, Node(4, Leaf, Leaf), Node(6, Leaf, Leaf)),
+    Node(3, Node(5, Leaf, Leaf), Node(7, Leaf, Leaf))
+  );
 
-let () =
-	sum myTree |> Js.log;`
+sum(myTree) |> Js.log;`
 }, {
   name: 'FFI - Base64',
   code:
-`external btoa : string => string = "" [@@bs.val];
-external atob : string => string = "" [@@bs.val];
+`[@bs.val] external btoa : string => string = "";
+[@bs.val] external atob : string => string = "";
 
-let () = {
-  let text = "Hello World!";
-  Js.log (text |> btoa);
-  Js.log (text |> btoa |> atob);
-};`
+let text = "Hello World!";
+Js.log(text |> btoa);
+Js.log(text |> btoa |> atob);`
 }, {
   name: 'Recursion - Factorial',
   code:
 `/* Based on https://rosettacode.org/wiki/Factorial#Recursive_50 */
-let rec factorial n =>
-  n <= 0 ?
-	1 :
-	n * factorial (n - 1);
+let rec factorial = (n) =>
+  n <= 0
+  ? 1
+  : n * factorial(n - 1);
 
-let () =
-  Js.log (factorial 6);`
+Js.log(factorial(6));`
 }, {
   name: 'Recursion - Greatest Common Divisor',
   code:
 `/* Based on https://rosettacode.org/wiki/Greatest_common_divisor#OCaml */
-let rec gcd a b =>
+let rec gcd = (a, b) =>
   switch (a mod b) {
   | 0 => b
-  | r => gcd b r
+  | r => gcd(b, r)
   };
 
-let () =
-	Js.log (gcd 27 9);`
+Js.log(gcd(27, 9));`
 }, {
   name: 'Recursion - Towers of Hanoi',
   code:
 `/* Based on https://rosettacode.org/wiki/Towers_of_Hanoi#OCaml */
-let rec hanoi n a b c =>
+let rec hanoi = (n, a, b, c) =>
   if (n > 0) {
-    hanoi (n - 1) a c b;
-    Js.log {j|Move disk from pole $a to pole $b|j};
-    hanoi (n - 1) c b a
+    hanoi(n - 1, a, c, b);
+    Js.log({j|Move disk from pole $a to pole $b|j});
+    hanoi(n - 1, c, b, a)
   };
 
-let () =
-  hanoi 4 1 2 3;`
+hanoi(4, 1, 2, 3);`
 }, {
   name: 'Json',
   code:
 `let person = {
-  "name": {
-    "first": "Bob",
-    "last": "Zhmith"
-  },
+  "name": {"first": "Bob", "last": "Zhmith"},
   "age": 32
 };
 
 let json =
-  person |> Js.Json.stringifyAny
-		 |> Js.Option.getExn
-		 |> Js.Json.parseExn;
+  person
+  |> Js.Json.stringifyAny
+  |> Js.Option.getExn
+  |> Js.Json.parseExn;
 
-let () = {
-  let name =
-  	json |> Js.Json.decodeObject
-	  	 |> Js.Option.andThen ((fun p => Js.Dict.get p "name") [@bs])
-	  	 |> Js.Option.andThen ((fun json => Js.Json.decodeObject json) [@bs])
-  		 |> Js.Option.getExn;
-  
-  let firstName =
-  	Js.Dict.get name "first"
-  	|> Js.Option.andThen ((fun json => Js.Json.decodeString json) [@bs])
-  	|> Js.Option.getExn;
-  
-  let lastName =
-  	Js.Dict.get name "last"
-  	|> Js.Option.andThen ((fun json => Js.Json.decodeString json) [@bs])
-  	|> Js.Option.getExn;
-  
-  Js.log {j|Hello, $firstName $lastName|j};
-}`
+let name =
+  json
+  |> Js.Json.decodeObject
+  |> Js.Option.andThen([@bs] ((p) => Js.Dict.get(p, "name")))
+  |> Js.Option.andThen([@bs] ((json) => Js.Json.decodeObject(json)))
+  |> Js.Option.getExn;
+
+let firstName =
+  Js.Dict.get(name, "first")
+  |> Js.Option.andThen([@bs] ((json) => Js.Json.decodeString(json)))
+  |> Js.Option.getExn;
+
+let lastName =
+  Js.Dict.get(name, "last")
+  |> Js.Option.andThen([@bs] ((json) => Js.Json.decodeString(json)))
+  |> Js.Option.getExn;
+
+Js.log({j|Hello, $firstName $lastName|j});`
 }, {
   name: 'FizzBuzz',
   code:
 `/* Based on https://rosettacode.org/wiki/FizzBuzz#OCaml */
-
-let fizzbuzz i =>
+let fizzbuzz = (i) =>
   switch (i mod 3, i mod 5) {
   | (0, 0) => "FizzBuzz"
   | (0, _) => "Fizz"
   | (_, 0) => "Buzz"
-  | _ => string_of_int i
+  | _ => string_of_int(i)
   };
 
-for i in 1 to 100 {
-  Js.log (fizzbuzz i)
+for (i in 1 to 100) {
+  Js.log(fizzbuzz(i))
 };`
 }, {
   name: 'Normal distribution of random numbers',
   code:
 `/* Based on https://rosettacode.org/wiki/Random_numbers#OCaml */
-let pi = 4. *. atan 1.;
+let pi = 4. *. atan(1.);
 
-let random_gaussian () =>
-  1. +.
-	sqrt ((-2.) *. log (Random.float 1.)) *.
-	cos (2. *. pi *. Random.float 1.);
+let random_gaussian = () =>
+  1. +. sqrt((-2.) *. log(Random.float(1.))) *. cos(2. *. pi *. Random.float(1.));
 
-Array.init 42 (fun _ => random_gaussian ())
-|> Array.iter Js.log;`
+Array.init(42, (_) => random_gaussian()) |> Array.iter(Js.log);`
 }, {
   name: 'Regex',
   code:
@@ -168,39 +153,37 @@ Array.init 42 (fun _ => random_gaussian ())
       <p>It only has two paragraphs</p>
     </body>
   </html>
-  |};
-  
-  let () =
-    input |> Js.String.match_ [%re "/<p\\b[^>]*>(.*?)<\\/p>/gi"]
-      |> fun
-        | Some result => result |> Js.Array.forEach Js.log
-          | None => Js.log "no matches";`
+|};
+
+input
+|> Js.String.match([%re "/<p\\b[^>]*>(.*?)<\\/p>/gi"])
+|> (
+  fun
+  | Some(result) => result |> Js.Array.forEach(Js.log)
+  | None => Js.log("no matches")
+);`
 }, {
   name: 'Quicksort',
   code:
 `/* Based on https://rosettacode.org/wiki/Sorting_algorithms/Quicksort#OCaml */
+let rec quicksort = (gt) =>
+  fun
+  | [] => []
+  | [x, ...xs] => {
+      let (ys, zs) = List.partition(gt(x), xs);
+      quicksort(gt, ys) @ [x, ...quicksort(gt, zs)]
+    };
 
-let rec quicksort gt =>
-  fun | [] => []
-  	  | [x, ...xs] => {
-      	let (ys, zs) = List.partition (gt x) xs;
-      	quicksort gt ys @ [x, ...quicksort gt zs]
-      };
-
-let () =
-	[4, 65, 2, (-31), 0, 99, 83, 782, 1]
-	|> quicksort (>)
-	|> Array.of_list
-	|> Js.log;`
+[4, 65, 2, (-31), 0, 99, 83, 782, 1] |> quicksort((>)) |> Array.of_list |> Js.log;`
 }, {
   name: 'String interpolation',
   code:
-`for a in 1 to 10 {
-  for b in 1 to 10 {
-  	let product = a * b;
-  	Js.log {j|$a times $b is $product|j}
+`for (a in 1 to 10) {
+  for (b in 1 to 10) {
+    let product = a * b;
+    Js.log({j|$a times $b is $product|j})
   }
-}`
+};`
 }];
 
 const  queryParamPrefixFor = language => `?${language}=`;
@@ -228,7 +211,7 @@ const retrieve = () => {
   }
 
   // WTH? There's some retarded automatic semicolon insertion going on, actively causing bugs. Hence the parens. Wonderful!
-  return ( 
+  return (
     fromQueryParam('reason') ||
     fromQueryParam('ocaml') ||
     fromLocalStorage() ||
@@ -474,7 +457,7 @@ export default class Try extends Component {
     const res = JSON.parse(window.ocaml.compile(code));
     console.error = _consoleError;
     return [res, warning || null];
-  } 
+  }
 
   tryCompiling = debounce((reason, ocaml) => {
     try {
@@ -541,7 +524,7 @@ export default class Try extends Component {
     input.select();
     document.execCommand('copy');
   }
- 
+
   render() {
     const {
       reason,

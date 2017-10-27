@@ -10,15 +10,15 @@ Reason has great traditional imperative & mutative programming capabilities. You
 Let-bindings are immutable, but you can wrap it with a `ref`, which is like a box whose content can change:
 
 ```reason
-let foo = ref 5;
+let foo = ref(5);
 ```
 
 ### Usage
 
-You can get the actual value of a `ref` through the `!` operator:
+You can get the actual value of a `ref` through the postfix `^` operator:
 
 ```
-let five = !foo; /* 5 */
+let five = foo^; /* 5 */
 ```
 
 Assign a new value to `foo` like so:
@@ -44,5 +44,5 @@ Before reaching for `ref`, know that you can achieve lightweight, local "mutatio
 ```reason
 let foo = 10;
 let foo = someCondition ? foo + 5 : foo;
-print_int foo; /* either 15 or 10 */
+print_int(foo); /* either 15 or 10 */
 ```

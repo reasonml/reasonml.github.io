@@ -89,16 +89,23 @@ Then only the constructor identifiers that were listed will be assumed to accept
 
 
 ```reason
-  type tm =
-    | TupleConstructor of (int, int)
-    | MultiArgumentsConstructor of int int;
+type tm =
+  | TupleConstructor((int, int))
+  | MultiArgumentsConstructor(int, int);
 
-let x = TupleConstructor (1, 2);
-let y = MultiArgumentsConstructor 1 2;
+let x = TupleConstructor((1, 2));
+
+let y = MultiArgumentsConstructor(1, 2);
+
 module Test = {
-  type a = | And of (int, int) | Or of (int, int);
+  type a =
+    | And((int, int))
+    | Or((int, int));
 };
-let a = Test.And (1, 2);
-let b = Test.Or (1, 2);
-let c = Some (1, 2);
+
+let a = Test.And((1, 2));
+
+let b = Test.Or((1, 2));
+
+let c = Some((1, 2));
 ```

@@ -19,7 +19,7 @@ Bindings can be scoped through `{}`.
 ```reason
 if (displayGreeting) {
   let message = "Enjoying the docs so far?";
-  print_endline message;
+  print_endline(message)
 };
 /* `message` not accessible here! */
 ```
@@ -31,9 +31,9 @@ explicitly contains a mutable value, discussed later). However, you may create a
 
 ```reason
 let message = "hello";
-print_endline message; /* Prints "hello" */
+print_endline(message); /* Prints "hello" */
 let message = "bye";
-print_endline message; /* Prints "bye" */
+print_endline(message); /* Prints "bye" */
 ```
 
 ### Tips & Tricks
@@ -44,7 +44,7 @@ Since bindings are scoped through `{}`, you can create an anonymous scope around
 let message = {
   let part1 = "hello";
   let part2 = "world";
-  part1 ^ " " ^ part2
+  part1 ++ " " ++ part2
 };
 /* `part1` and `part2` not accessible here! */
 ```
@@ -81,8 +81,8 @@ Which might remind you of:
 
 ```reason
 /* Reason syntax */
-fun a =>
-  fun b =>
+(a) =>
+  (b) =>
     a + b;
 ```
 

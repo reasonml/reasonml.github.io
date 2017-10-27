@@ -13,21 +13,20 @@ Consider a variant:
 
 ```reason
 type payload =
-| BadResult int
-| GoodResult string
-| NoResult;
+  | BadResult(int)
+  | GoodResult(string)
+  | NoResult;
 ```
 
 While using the `switch` expression on it, you can "destructure" it:
 
 ```reason
-let data = GoodResult "Product shipped!";
+let data = GoodResult("Product shipped!");
 
 let message =
   switch data {
-  | GoodResult theMessage => "Success! " ^ theMessage
-  | BadResult errorCode =>
-    "Something's wrong. The error code is: " ^ (string_of_int errorCode)
+  | GoodResult(theMessage) => "Success! " ++ theMessage
+  | BadResult(errorCode) => "Something's wrong. The error code is: " ++ string_of_int(errorCode)
   };
 ```
 
@@ -43,15 +42,15 @@ Isn't that great? While matching on the shape of your data, the type system warn
 
 ```reason
 switch myList {
-| [] => print_endline "Empty list"
-| [a, ...theRest] => print_endline ("list with the head value " ^ a)
+| [] => print_endline("Empty list")
+| [a, ...theRest] => print_endline("list with the head value " ++ a)
 };
 
 switch myArray {
-| [|1, 2|] => print_endline "This is an array with item 1 and 2"
-| [||] => print_endline "This array has no element"
-| _ => print_endline "This is an array"
-}
+| [|1, 2|] => print_endline("This is an array with item 1 and 2")
+| [||] => print_endline("This array has no element")
+| _ => print_endline("This is an array")
+};
 ```
 
 The `_` case is a special fall-through case that allows all unmatched conditions to go to that branch.
@@ -73,9 +72,9 @@ Combined with other data structures, pattern matching can produce extremely conc
 ```reason
 let message =
   switch data {
-  | GoodResult theMessage => "Success! " ^ theMessage
-  | BadResult (0 | 1 | 5) => "Something's wrong. It's a server side problem."
-  | BadResult errorCode => "Unknown error occurred. Code: " ^ string_of_int errorCode
+  | GoodResult(theMessage) => "Success! " ++ theMessage
+  | BadResult(0 | 1 | 5) => "Something's wrong. It's a server side problem."
+  | BadResult(errorCode) => "Unknown error occurred. Code: " ++ string_of_int(errorCode)
   | NoResult => "Things look fine"
   };
 ```
@@ -85,8 +84,8 @@ let message =
 ```reason
 let myMessage = "Hello";
 switch greeting {
-| myMessage => print_endline "Hi to you"
-}
+| myMessage => print_endline("Hi to you")
+};
 ```
 
 Instead, it'd assume you're matching on any string, and binding that to the name `myMessage` in that `switch` case, which is not what you wanted.
@@ -98,9 +97,9 @@ When you really need to use arbitrary logic with an otherwise clean pattern matc
 ```reason
 let message =
   switch data {
-  | GoodResult theMessage => ...
-  | BadResult errorCode when isServerError errorCode => ...
-  | BadResult errorCode => ... /* otherwise */
+  | GoodResult(theMessage) => ...
+  | BadResult(errorCode) when isServerError(errorCode) => ...
+  | BadResult(errorCode) => ... /* otherwise */
   | NoResult => ...
   };
 ```
@@ -110,9 +109,9 @@ let message =
 If the function throws an exceptions (covered later), you can also match on _that_, in addition to the function's normally returned values.
 
 ```reason
-switch (List.find (fun i => i === theItem) myItems) {
-| item => print_endline item
-| exception Not_found => print_endline "No such item found!"
+switch (List.find((i) => i === theItem, myItems)) {
+| item => print_endline(item)
+| exception Not_found => print_endline("No such item found!")
 };
 ```
 
@@ -125,11 +124,11 @@ Do not abuse the fall-through `_` case too much. This prevents the compiler from
 Here's a series of examples, from worst to best:
 
 ```reason
-let optionBoolToJsBoolean opt =>
+let optionBoolToJsBoolean = (opt) =>
   if (opt == None) {
     Js.false_
   } else {
-    if (opt == Some true) {
+    if (opt == Some(true)) {
       Js.true_
     } else {
       Js.false_
@@ -140,41 +139,43 @@ let optionBoolToJsBoolean opt =>
 Now that's just silly =). Let's turn it into pattern-matching:
 
 ```reason
-let optionBoolToJsBoolean opt => switch opt {
-| None => Js.false_
-| Some a => switch a {
-  | true => Js.true_
-  | false => Js.false_
-  }
-};
+let optionBoolToJsBoolean = (opt) =>
+  switch opt {
+  | None => Js.false_
+  | Some(a) => a ? Js.true_ : Js.false_
+  };
 ```
 
 Slightly better, but still nested. Pattern-matching allows you to do this:
 
 ```reason
-let optionBoolToJsBoolean opt => switch opt {
-| None => Js.false_
-| Some true => Js.true_
-| Some false => Js.false_
-};
+let optionBoolToJsBoolean = (opt) =>
+  switch opt {
+  | None => Js.false_
+  | Some(true) => Js.true_
+  | Some(false) => Js.false_
+  };
 ```
 
 Much more linear-looking! Now, you might be tempted to do this:
 
 ```reason
-let optionBoolToJsBoolean opt => switch opt {
-| Some true => Js.true_
-| _ => Js.false_
-};
+let optionBoolToJsBoolean = (opt) =>
+  switch opt {
+  | Some(true) => Js.true_
+  | _ => Js.false_
+  };
 ```
 
 Which is much more concise, but kills the exhaustiveness check mentioned above. This is the best:
 
 ```reason
-let optionBoolToJsBoolean opt => switch opt {
-| Some true => Js.true_
-| Some false | None => Js.false_
-};
+let optionBoolToJsBoolean = (opt) =>
+  switch opt {
+  | Some(true) => Js.true_
+  | Some(false)
+  | None => Js.false_
+  };
 ```
 
 Pretty darn hard to make a mistake in this code at this point! Whenever you'd like to use an if-else with many branches, prefer pattern matching instead. It's more concise and [performant](/guide/language/variant#design-decisions) too.

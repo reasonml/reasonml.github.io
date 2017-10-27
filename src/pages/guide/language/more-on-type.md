@@ -20,14 +20,15 @@ let buddy: intCoordinates = (10, 20, 20);
 After:
 
 ```reason
-type coordinates 'a = ('a, 'a, 'a);
+type coordinates('a) = ('a, 'a, 'a);
 
 /* apply the coordinates "type function" and return the type (int, int, int) */
-type intCoordinatesAlias = coordinates int;
+type intCoordinatesAlias = coordinates(int);
+
 let buddy: intCoordinatesAlias = (10, 20, 20);
 
 /* or, more commonly, write it inline */
-let buddy: coordinates float = (10.5, 20.5, 20.5);
+let buddy: coordinates(float) = (10.5, 20.5, 20.5);
 ```
 
 In practice, types are inferred for you. So the more concise version of the above example would be nothing but:
@@ -50,18 +51,18 @@ If types didn't accept parameters (aka, if we didn't have "type functions"), the
 Types can receive more arguments, and be composable.
 
 ```reason
-type result 'a 'b =
-| Ok 'a
-| Error 'b;
+type result('a, 'b) =
+  | Ok('a)
+  | Error('b);
 
 type myPayload = {data: string};
 
-type myPayloadResults 'errorType = list (result myPayload 'errorType);
+type myPayloadResults('errorType) = list(result(myPayload, 'errorType));
 
-let payloadResults: myPayloadResults string = [
-  Ok {data: "hi"},
-  Ok {data: "bye"},
-  Error "Something wrong happened!"
+let payloadResults: myPayloadResults(string) = [
+  Ok({data: "hi"}),
+  Ok({data: "bye"}),
+  Error("Something wrong happened!")
 ];
 ```
 
@@ -71,14 +72,14 @@ Just like functions, types can be mutually recursive through `and`:
 
 ```reason
 type student = {taughtBy: teacher}
-and teacher = {students: list student};
+and teacher = {students: list(student)};
 ```
 
 **Note** that there's no semicolon ending the first line and no `type` on the second line.
 
 ### Design Decisions
 
-A type system allowing type argument is basically allowing type-level functions. `list int` is really the `list` type function taking in the `int` type, and returning the final, concrete type you'd use in some places. You might have noticed that in other languages, this is more or less called "generics". For example, `ArrayList<Integer>` in Java.
+A type system allowing type argument is basically allowing type-level functions. `list(int)` is really the `list` type function taking in the `int` type, and returning the final, concrete type you'd use in some places. You might have noticed that in other languages, this is more or less called "generics". For example, `ArrayList<Integer>` in Java.
 
 [The principle of least power](https://en.wikipedia.org/wiki/Rule_of_least_power) applies when you're trying to "Get Things Done". If the problem domain allows, definitely pick the least abstract (aka, the most concrete) solution available, so that the solution is reached faster and has fewer unstable indirections you'd have to traverse. For example, prefer types over free-form data, prefer data-driven configuration over turing-complete function calls, prefer function calls over macros, prefer macros over project forks, etc. When you constraint your domain and power, things become easier to analyze. That is, _if_ the domain is constrained enough to allow it.
 

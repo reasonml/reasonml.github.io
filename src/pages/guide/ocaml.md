@@ -44,9 +44,9 @@ let _ =
       <pre>
 {
   let msg = "Hello";
-  print_string msg;
+  print_string(msg);
   let msg2 = "Goodbye";
-  print_string msg2
+  print_string(msg2)
 };</pre>
     </td>
   </tr>
@@ -75,8 +75,8 @@ let () = imperativeFunc 0 0</pre>
     <td>
       <pre>
 let ten = 10;
-imperativeFunc ten ten;
-imperativeFunc 0 0;</pre>
+imperativeFunc(ten, ten);
+imperativeFunc(0, 0);</pre>
     </td>
   </tr>
   <tr>
@@ -135,7 +135,7 @@ OCaml | Reason
 ------|-------
 `let tup = 4, 5` | `let tup = (4, 5);`
 `let tup = ((1: int), (2:int))` | `let tup = (1: int, 2:int);`
-`fun ((a: int), (b: int)) -> a ` | `fun (a: int, b: int) => a;`
+`fun ((a: int), (b: int)) -> a ` | `((a: int, b: int)) => a;`
 
 In Reason, record values resemble JavaScript, using `:` instead of `=`. Because Reason tuples always require wrapping parens, records may contain lambdas as values without needing extra parens.
 
@@ -162,8 +162,8 @@ let myFuncs = {
     <td>
       <pre>
 let myFuncs = {
-  myFun: fun x => x + 1,
-  your: fun a b => a + b
+  myFun: (x) => x + 1,
+  your: (a, b) => a + b
 };</pre>
     </td>
 </table>
@@ -190,15 +190,15 @@ OCaml Record | Reason Record
 OCaml Function | Reason Function
 ------|-------
 `type func = int -> int` | `type func = int => int;`
-`let x: func = fun a -> a + 1` | `let x: func = fun a => a + 1;`
+`let x: func = fun a -> a + 1` | `let x: func = (a) => a + 1;`
 
 ### Functions
 
 OCaml | Reason
 ------|-------
-`let x a b = e` | `let x a b => e;`
-`let x = fun a b -> e` | `let x = fun a b => e;`
-`let x = fun a -> fun b -> e` | `let x = fun a => fun b => e;`
+`let x a b = e` | `let x = (a, b) => e`
+`let x = fun a b -> e` | `let x = (a, b) => e`
+`let x = fun a -> fun b -> e` | `let x = (a, b) => e`
 
 #### Single argument match functions
 
@@ -260,15 +260,15 @@ everything else), wrapping them in parenthesis after appending
 `:typeAnnotation`.
 
 ```reason
-fun (arg : argType) => returnValue;
+(arg: argType) => returnValue;
 ```
 
 ```reason
-fun (arg : argType) => fun (arg2 : arg2Type) => returnValue;
+(arg: argType) => (arg2: arg2Type) => returnValue;
 ```
 
 ```reason
-fun (arg : argType) (arg2 : arg2Type) => returnValue;
+(arg: argType, arg2: arg2Type) => returnValue;
 ```
 
 Both Reason and OCaml allow annotating the return type, when using the
@@ -283,15 +283,12 @@ let myFunc (a:int) (b:int) :int -> int = fun x -> x + a + b
 
 ```reason
 /* Reason */
-let myFunc (a:int) (b:int) :(int, int) => (a, b);
-let myFunc (a:int) (b:int) :list int => [1];
-let myFunc (a:int) (b:int) :(int => int) => fun x => x + a + b;
+let myFunc = (a: int, b: int) :(int, int) => (a, b);
+let myFunc = (a: int, b: int) :list(int) => [1];
+let myFunc = (a: int, b: int): (int => int) => (x) => x + a + b;
 ```
 
-Because we're using `=>` for all functions everywhere in Reason, there's
-one case where we need to add extra parens around a return type that is
-itself a function type.
-
+Because we're using `=>` for all functions everywhere in Reason, there's one case where we need to add extra parens around a return type that is itself a function type.
 
 #### Type Parameters
 
@@ -332,11 +329,7 @@ let tuples: listOfTuplesOfStringAndInt = [("asdf", 3)]
 
 ##### Reason
 
-In summary, Reason unifies almost all of the syntax into simple "function
-application" style meaning that type parameters follow the same space-separated
-list pattern seen everywhere else in the syntax. As with everything else,
-parentheses may be used to enforce precedence. This results in fewer syntactic
-patterns to learn.
+In summary, Reason unifies almost all of the syntax into simple "function application" style meaning that type parameters follow the same comma-separated pattern seen everywhere else in the syntax. This results in fewer syntactic patterns to learn.
 
 For example, you can imagine `list` being a "function" for types that accepts a
 type and returns a new type.
@@ -354,10 +347,10 @@ let tuples: pairs = [(2, 3)]</pre>
     </td>
     <td>
       <pre>
-let x: list int = [2];
-type listOfListOfInts = list (list int);
-type tup 'a 'b = ('a, 'b);
-type pairs = list (tup int int);
+let x: list(int) = [2];
+type listOfListOfInts = list(list(int));
+type tup('a, 'b) = ('a, 'b);
+type pairs = list(tup(int, int));
 let tuples: pairs = [(2, 3)];</pre>
     </td>
   </tr>
@@ -376,15 +369,15 @@ parameters to `pair`, and a *single* type parameter that happens to be a tuple.
 
 OCaml | Reason
 ------|-------
-`type intPair = (int, int) pair` | `type intPair = pair int int;`
-`type pairList = (int * int) list` | `type pairList = list (int, int);`
+`type intPair = (int, int) pair` | `type intPair = pair(int, int)`
+`type pairList = (int * int) list` | `type pairList = list((int, int))`
 
 - In Reason, syntax that represent tuple or tuple types, always looks like
   tuples.
 - In Reason, syntax that represent records or record types, always look like
   records.
 - Just about everything else uses the syntactic pattern of function application
-  (space separated arguments).
+  (comma separated arguments).
 
 
 ### Variants
@@ -402,10 +395,10 @@ OCaml | Reason
 
 ###### Reason
 
-- Variant constructor types are expected to be listed as space separated lists,
+- Variant constructor types are expected to be listed as comma separated lists,
   using parenthesis to group precedence (as with **everything** else).
 - Constructing instances of the variant (as you would have guessed) follows
-  function application style (space separated lists).
+  function application style (comma separated lists).
 - Tuples **always** *look* like tuples, and anything that looks like a tuple
   *is* a tuple.
 
@@ -435,10 +428,10 @@ type myVariant =
       <pre>
 type myVariant =
   | HasNothing
-  | HasSingleInt int
-  | HasSingleTuple (int, int)
-  | HasMultipleInts int int
-  | HasMultipleTuples (int, int) (int, int);
+  | HasSingleInt(int)
+  | HasSingleTuple((int, int))
+  | HasMultipleInts(int, int)
+  | HasMultipleTuples((int, int), (int, int));
       </pre>
     </td>
   </tr>
@@ -453,10 +446,10 @@ let a = HasMultipleTuples ((10, 10), (10, 10))
     </td>
     <td>
       <pre>
-let a = HasSingleInt 10;
-let a = HasSingleTuple (10, 10);
-let a = HasMultipleInts 10 10;
-let a = HasMultipleTuples (10, 10) (10, 10);
+let a = HasSingleInt(10);
+let a = HasSingleTuple((10, 10));
+let a = HasMultipleInts(10, 10);
+let a = HasMultipleTuples((10, 10), (10, 10));
       </pre>
     </td>
   </tr>
@@ -473,13 +466,14 @@ let res x = match x with
     </td>
     <td>
       <pre>
-let res x = switch x {
-| HasNothing => 0
-| HasSingleInt x => 0
-| HasSingleTuple (x, y) => 0
-| HasMultipleInts x y => 0
-| HasMultipleTuples (x, y) (q, r) => 0
-};
+let res = (x) =>
+  switch x {
+  | HasNothing => 0
+  | HasSingleInt(x) => 0
+  | HasSingleTuple((x, y)) => 0
+  | HasMultipleInts(x, y) => 0
+  | HasMultipleTuples((x, y), (q, r)) => 0
+  };
       </pre>
     </td>
   </tr>
@@ -501,12 +495,13 @@ let res = match x with
     <td>
       <pre>
 let res = switch x {
-  | A (x, y) => switch y {
-    | None => 0
-    | Some i => 10
-  }
-  | B (x, y) => 0
-};</pre>
+  | A((x, y)) => switch y {
+      | None => 0
+      | Some(i) => 10
+    }
+  | B((x, y)) => 0
+};
+</pre>
     </td>
   </tr>
 </table>
@@ -553,13 +548,15 @@ module type MySig = {
   type t = int;
   let x: int;
 };
+
 module MyModule: MySig = {
   type t = int;
   let x = 10;
 };
+
 module MyModule = {
   module NestedModule = {
-     let msg = "hello";
+    let msg = "hello";
   };
 };
       </pre>
@@ -603,8 +600,8 @@ module F =
     <td>
       <pre>
 module F =
-  fun (A: ASig) =>
-  fun (B: BSig) => {};</pre>
+  (A: ASig) =>
+  (B: BSig) => {};</pre>
     </td>
   </tr>
   <tr>
@@ -614,7 +611,7 @@ module F = functor (A: ASig) (B: BSig) -> struct end</pre>
     </td>
     <td>
       <pre>
-module F = fun (A: ASig) (B: BSig) => {};</pre>
+module F = (A: ASig, B: BSig) => {};</pre>
     </td>
   </tr>
   <tr>
@@ -624,7 +621,7 @@ module F (A: ASig) (B: BSig) = struct end</pre>
     </td>
     <td>
       <pre>
-module F (A: ASig) (B: BSig) => {};</pre>
+module F (A: ASig, B: BSig) => {};</pre>
     </td>
   </tr>
   <tr>
@@ -634,7 +631,7 @@ module Res = F(A)(B)</pre>
     </td>
     <td>
       <pre>
-module Res = F A B;</pre>
+module Res = F(A, B);</pre>
     </td>
   </tr>
 </table>
@@ -671,9 +668,9 @@ let myFuncs = {
     <td>
       <pre>
 let myFuncs = {
-  myFun: fun x => x + 1,
-  your: fun a b => a + b
-}</pre>
+  myFun: (x) => x + 1,
+  your: (a, b) => a + b
+};</pre>
     </td>
   </tr>
 </table>
@@ -695,11 +692,12 @@ let x = match prnt with
     </td>
     <td>
       <pre>
-let x = switch prnt {
-| None => fun a => blah
-| Some "_" => fun a => ()
-| Some "ml" => blah
-};</pre>
+let x =
+  switch prnt {
+  | None => (a) => blah
+  | Some("_") => (a) => ()
+  | Some("ml") => blah
+  };</pre>
     </td>
   </tr>
 </table>
@@ -708,7 +706,7 @@ let x = switch prnt {
 
 OCaml | Reason
 ------|-------
-`let tuple = ((fun x -> x), 20)` | `let tuple = (fun x => x, 20);`
+`let tuple = ((fun x -> x), 20)` | `let tuple = ((x) => x, 20);`
 `let tuple = (("hi": string), (20: int))` | `let tuple = ("hi": string, 20: int);`
 
 ### Various Differences
@@ -730,23 +728,12 @@ let ppp = match MyThing 20 with
     </td>
     <td>
       <pre>
-let ppp = switch (MyThing 20) {
-| MyThing x as ppp
-| YourThing x as ppp => ppp;
-};
+let ppp =
+  switch (MyThing(20)) {
+  | MyThing(x) as ppp
+  | YourThing(x) as ppp => ppp
+  };
       </pre>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <pre>
-let | (MyThing _ as ppp)
-    | (YourThing _ as ppp) = ppp;</pre>
-    </td>
-    <td>
-      <pre>
-let | MyThing _ as ppp
-    | YourThing _ as ppp = ppp;</pre>
     </td>
   </tr>
 </table>
@@ -762,18 +749,16 @@ OCaml | Reason
 
 #### Prefix operators
 
-In Reason, `!` and other prefix operators have lower precedence than dot `.` or send `#`.
-This is more consistent with what other languages do, and is more practical
-when (or if) the `!` symbol is used to represent boolean `not`.
+Reason's `!` is used for boolean `not`. Deferencing uses the postfix `^`.
 
 OCaml                                 | Reason
 --------------------------------------|--------------------------------
-`let x = !(foo.bar)`    | `let x = !foo.bar;`
-`let x = !(foo#bar)`    | `let x = !foo#bar;`
-`let x = !(!foo.bar)`   | `let x = !(!foo).bar;`
-`let x = !(!foo#bar)`   | `let x = !(!foo)#bar;`
-`let x = !(!(foo.bar))` | `let x = !(!foo.bar);`
-`let x = !(!(foo#bar))` | `let x = !(!foo#bar);`
+`let x = !(foo.bar)`    | `let x = foo.bar^;`
+`let x = !(foo#bar)`    | `let x = foo#bar^;`
+`let x = !(!foo.bar)`   | `let x = foo^.bar^;`
+`let x = !(!foo#bar)`   | `let x = (foo^)#bar^;`
+`let x = !(!(foo.bar))` | `let x = foo.bar^ ^;`
+`let x = !(!(foo#bar))` | `let x = foo#bar^ ^;`
 `let x = !!(foo.bar)`   | `let x = !!foo.bar;`
 `let x = !!(foo#bar)`   | `let x = !!foo#bar;`
 `let x = !~(foo.bar)`   | `let x = !~foo.bar;`
@@ -794,19 +779,16 @@ escape backslashes are added back in automatically.
 OCaml                                        | Reason
 ---------------------------------------------|--------------------------------
 `let (/*) a b = a + b`      |  `let (/\*) a b => a + b;`
-`let x = 12 /-* 23 /-* 12`   |  `let x = 12 /-\* 23 /-\* 12;`
-`let y = (/*) a b`           |  `let y = (/\*) a b;`
-`let (!=*) q r = q + r`     |  `let (!=\*) q r => q + r;`
-`let res = q (!=*) r`        |  `let res = q (!=\*) r;`
-`let (!=/*) q r = q + r`    |  `let (!=\/\*) q r => q + r;`
-`let res = q (!=/*) r`       |  `let res = q (!=\/\*) r;`
+`let x = 12 /-* 23 /-* 12`   |  `let x = 12 /-* 23 /-* 12;`
+`let y = (/*) a b`           |  `let y = a /\* b;`
+`let (!=*) q r = q + r`     |  `let ( !=* ) = (q, r) => q + r;`
+`let res = q (!=*) r`        |  `let res = q(( !=* ), r);`
+`let (!=/*) q r = q + r`    |  `let ( !=/\* ) = (q, r) => q + r;`
+`let res = q (!=/*) r`       |  `let res = q(( !=/\* ), r);`
 
 #### Operator Renaming
 
-If Reason uses `==` to represent OCaml's `=`, and
-uses `===` to represent OCaml's `==`, then how would Reason represent OCaml's
-`===` symbol (if it were defined)? Reason provides a way! "Escape" the triple
-equals symbol!
+If Reason uses `==` to represent OCaml's `=`, and uses `===` to represent OCaml's `==`, then how would Reason represent OCaml's `===` symbol (if it were defined)? Reason provides a way! "Escape" the triple equals symbol!
 
 Identifier | Meaning | OCaml | Reason
 -----------|---------|-------|-------

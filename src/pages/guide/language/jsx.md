@@ -16,19 +16,19 @@ Reason supports the JSX syntax, with some slight differences compared to the one
 becomes
 
 ```reason
-MyComponent.make foo::bar children::[] ()
+MyComponent.make(~foo=bar, ~children=[], ());
 ```
 
 ### Uncapitalized Tag
 
 ```reason
-<div foo={bar}>child1 child2</div>
+<div foo={bar}> child1 child2 </div>;
 ```
 
 becomes
 
 ```reason
-div foo::bar children::[child1, child2] () [@JSX]
+([@JSX] div(~foo=bar, ~children=[child1, child2], ()));
 ```
 
 ### Usage
@@ -41,12 +41,10 @@ Here's a JSX tag that shows most of the features.
 <MyComponent
   booleanAttribute={true}
   stringAttribute="string"
-  intAttribute={1}
-  forcedOptional=?{Some "hello"}
-  onClick={updater handleClick}>
-  <div>
-    {ReasonReact.stringToElement "hello"}
-  </div>
+  intAttribute=1
+  forcedOptional=?{Some("hello")}
+  onClick={reduce(handleClick)}>
+  <div> {ReasonReact.stringToElement("hello")} </div>
 </MyComponent>
 ```
 

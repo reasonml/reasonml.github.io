@@ -5,7 +5,7 @@ order: 110
 
 ```reason
 if (showMenu) {
-  displayMenu ();
+  displayMenu()
 };
 ```
 

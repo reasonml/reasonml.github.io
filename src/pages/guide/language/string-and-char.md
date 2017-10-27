@@ -19,10 +19,10 @@ Special characters in the string need to be escaped:
 let oneSlash = "\\";
 ```
 
-To concatenate strings, use `^`:
+To concatenate strings, use `++`:
 
 ```reason
-let greetings = "Hello " ^ "world!";
+let greetings = "Hello " ++ "world!";
 ```
 
 #### Quoted String
@@ -52,7 +52,7 @@ BuckleScript's special pre-processor can then look for such `js` and `j` markers
 
 #### Usage
 
-[More string operations can be found in the standard library](/api/String.html). For JS compilation, see the familiar `JS.String` API bindings in the [BuckleScript API docs](http://bucklescript.github.io/bucklescript/api/Js_string.html). Since a Reason string maps to a JavaScript string, you can mix & match the string operations in both standard libraries.
+[More string operations can be found in the standard library](/api/String.html). For JS compilation, see the familiar `Js.String` API bindings in the [BuckleScript API docs](http://bucklescript.github.io/bucklescript/api/Js_string.html). Since a Reason string maps to a JavaScript string, you can mix & match the string operations in both standard libraries.
 
 #### Tips & Tricks
 
@@ -68,7 +68,7 @@ https://twitter.com/jusrin00/status/875238742621028355
 
 The more you overload the poor string type, the less the type system can help you! Reason provides concise, fast and maintainable types & data structures alternatives to the use-cases above (e.g. variants, in a later section).
 
-Under native compilation, Reason strings compile to a simple representation whose performance is straightforward to analyze, at the expense of sometimes requiring manual performance tuning. For example, naively concatenating strings like `"hi " ^ "how " ^ "are " ^ "you?"` unnecessarily allocates the intermediate strings `"are you?"` and `"how are you?"`. In this case, prefer [`String.concat`](/api/String.html). In a way, it's somewhat nice that the traditional runtime analysis we've learned in school can finally be useful again.
+Under native compilation, Reason strings compile to a simple representation whose performance is straightforward to analyze, at the expense of sometimes requiring manual performance tuning. For example, naively concatenating strings like `"hi " ++ "how " ++ "are " ++ "you?"` unnecessarily allocates the intermediate strings `"are you?"` and `"how are you?"` (though it might be optimized into a single string in these simple cases). In this case, prefer [`String.concat`](/api/String.html). In a way, it's somewhat nice that the traditional runtime analysis we've learned in school can finally be useful again.
 
 Under JavaScript compilation, a Reason string maps to a JavaScript string and vice-versa, so no such above concern or analysis opportunities.
 
@@ -77,13 +77,13 @@ Under JavaScript compilation, a Reason string maps to a JavaScript string and vi
 Quoted string's feature of not escaping special characters enables neat DSLs like [regular expression](/api/Str.html):
 
 ```reason
-let r = Str.regexp {|hello \([A-Za-z]+\)|};
+let r = Str.regexp({|hello \([A-Za-z]+\)|});
 ```
 
 as opposed to
 
 ```reason
-let r = Str.regexp "hello \\([A-Za-z]+\\)";
+let r = Str.regexp("hello \\([A-Za-z]+\\)");
 ```
 
 Though for JS compilation, you'd use [`[%bs.re]`](http://bucklescript.github.io/bucklescript/Manual.html#_regex_support) and [`Js.Re`](https://bucklescript.github.io/bucklescript/api/Js.Re.html) instead, since `Str` is not available.
@@ -105,8 +105,9 @@ let firstLetterOfAlphabet = 'a';
 A character [compiles to an integer ranging from 0 to 255](/try/?reason=DYUwLgBAhhC8EHIoKA), for extra speed. You can also pattern-match (covered later) on it:
 
 ```reason
-fun isVowel theChar => switch theChar {
-| 'a' | 'e' | 'i' | 'o' | 'u' | 'y' => true
-| _ => false
-};
+let isVowel = (theChar) =>
+  switch theChar {
+  | 'a'| 'e'| 'i'| 'o'| 'u'| 'y' => true
+  | _ => false
+  };
 ```

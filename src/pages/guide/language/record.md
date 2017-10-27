@@ -108,12 +108,11 @@ type car = {name: string, horsePower};
 If you're working with JavaScript, the record syntax & operations should feel familiar, and you might be tempted to interop with JS by converting a JS object to a record, and vice-versa. This is fine, but we have an **even better way without conversion overhead**! See [here](https://bucklescript.github.io/bucklescript/Manual.html#_binding_to_js_objects) which talks about **[Reason objects](/guide/language/object)**. Here's an example:
 
 ```reason
-type payload = Js.t {
-    .
-    name: string
-};
-external sendQuery: payload => unit = "sendQuery" [@@bs.module "myAjaxLibrary"];
-sendQuery {"name": "Reason"};
+type payload = {. "name": string};
+
+[@bs.module "myAjaxLibrary"] external sendQuery : payload => unit = "sendQuery";
+
+sendQuery({"name": "Reason"});
 ```
 
 Notice the dot in the type definiton. That's is an object type notation, and has nothing to do with a record! Objects will be described in a later section.
@@ -126,7 +125,7 @@ With records, you **cannot** say "I'd like this function to take any record type
 type person = {age: int, name: string};
 type monster = {age: int, hasTentacles: bool};
 
-let getAge entity => entity.age;
+let getAge = (entity) => entity.age;
 ```
 
 The last line's function will infer that the parameter `entity` must be of type `monster`. So the follow code's last line fails:
@@ -135,8 +134,8 @@ The last line's function will infer that the parameter `entity` must be of type 
 let kraken = {age: 9999, hasTentacles: true};
 let me = {age: 5, name: "Baby Reason"};
 
-getAge kraken;
-getAge me;
+getAge(kraken);
+getAge(me);
 ```
 
 The type system will complain that `me` is a `person`, and that `getAge` only works on `monster`. If you need such capability, use Reason objects, mentioned in the previous section.

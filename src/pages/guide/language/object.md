@@ -23,7 +23,7 @@ type tesla = {
 The dot at the beginning indicates that this is a "closed" object type, which means that an object based on this type must have exactly this shape.
 
 ```reason
-type car 'a = {
+type car('a) = {
   ..
   color: string
 } as 'a;
@@ -34,20 +34,17 @@ Two dots, also called an elision, indicate that this is an "open" object type, a
 #### Creation
 
 ```reason
-type tesla = {
-  .
+type tesla = {.
   drive: int => int
 };
 
-let obj :tesla = {
-  val hasEnvy = ref false;
-  pub drive speed => {
-    this#enableEnvy true;
+let obj: tesla = {
+  val hasEnvy = ref(false);
+  pub drive = (speed) => {
+    this#enableEnvy(true);
     speed
   };
-  pri enableEnvy envy => {
-    hasEnvy := envy
-  };
+  pri enableEnvy = (envy) => hasEnvy := envy
 };
 ```
 
@@ -58,30 +55,26 @@ As you can see, a Reason object can also access `this`. Just like a JavaScript o
 The following example shows an open object type which uses a type as parameter. The object type parameter is required to implement all the methods of the open object type.
 
 ```reason
-type tesla 'a = {
+type tesla('a) = {
   ..
   drive: int => int
 } as 'a;
 
-let obj:
-  tesla {. drive: int => int, doYouWant: unit => bool}
-  = {
-  val hasEnvy = ref false;
-  pub drive speed => {
-    this#enableEnvy true;
+let obj: tesla({. drive: int => int, doYouWant: unit => bool}) = {
+  val hasEnvy = ref(false);
+  pub drive = (speed) => {
+    this#enableEnvy(true);
     speed
   };
-  pub doYouWant () => !hasEnvy;
-  pri enableEnvy envy => {
-    hasEnvy := envy
-  };
+  pub doYouWant = () => hasEnvy^;
+  pri enableEnvy = (envy) => hasEnvy := envy
 };
 ```
 
 You can use the above object like so:
 
 ```reason
-obj#doYouWant ();
+obj#doYouWant();
 ```
 
 ### Tip & Tricks
@@ -92,4 +85,4 @@ If you come from JavaScript, you're probably not looking for vanilla Reason obje
 - always come with with `Js.t` (as a type parameter to the `Js.t` type).
 - compile to actual JS objects.
 
-Because they're used so often, Reason give the BS object value `[%bs.obj {foo: bar}]` a special syntax sugar: `{"foo": bar}`. It looks like a quoted record, basically.
+Because they're used so often, Reason give the BS object value `[%bs.obj {foo: bar}]` a special syntax sugar: `{"foo": bar}`. It looks like a quoted record, basically. Likewise for types: `{. "foo": string}`

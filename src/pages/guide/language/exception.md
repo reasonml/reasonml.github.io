@@ -8,41 +8,41 @@ Exceptions are just a special kind of variant, "thrown" in **exceptional** cases
 ### Usage
 
 ```reason
-let getItem theList => {
+let getItem = (theList) =>
   if (...) {
     /* return the found item here */
   } else {
-    raise Not_found
-  }
-};
+    raise(Not_found)
+  };
 
-let result = try (getItem [1, 2, 3]) {
-| Not_found => 0 /* Default value if getItem throws */
-};
+let result =
+  try (getItem([1, 2, 3])) {
+  | Not_found => 0 /* Default value if getItem throws */
+  };
 ```
 
-Note that the above is just for demonstration purposes; in reality, you'd return an `option int` directly from `getItem` and avoid the `try` altogether.
+Note that the above is just for demonstration purposes; in reality, you'd return an `option(int)` directly from `getItem` and avoid the `try` altogether.
 
 You can directly match on exceptions _while_ getting another return value from a function:
 
 ```reason
-switch (List.find (fun i => i === theItem) myItems) {
-| item => print_endline item
-| exception Not_found => print_endline "No such item found!"
+switch (List.find((i) => i === theItem, myItems)) {
+| item => print_endline(item)
+| exception Not_found => print_endline("No such item found!")
 };
 ```
 
 You can also make your own exceptions like you'd make a variant (exceptions need to be capitalized too).
 
 ```
-exception InputClosed string;
+exception InputClosed(string);
 ...
-raise (InputClosed "the stream has closed!");
+raise(InputClosed("the stream has closed!"));
 ```
 
 ### Tips & Tricks
 
-When you have ordinary variants, you often don't **need** exceptions. For example, instead of throwing when `item` can't be found in a collection, try to return an `option item` (`None` in this case) instead.
+When you have ordinary variants, you often don't **need** exceptions. For example, instead of throwing when `item` can't be found in a collection, try to return an `option(item)` (`None` in this case) instead.
 
 ### Design Decisions
 

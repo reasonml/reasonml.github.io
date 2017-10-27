@@ -7,7 +7,7 @@ A boolean has the type `bool` and can be either `true` or `false`. Common operat
 
 - `&&`: logical and
 - `||`: logical or
-- `not`: logical not. **Note that ! is reserved for something else**
+- `!`: logical not.
 - `<=`, `>=`, `<`, `>`
 - `==`: physical equal, compares data structures deeply: `(1, 2) == (1, 2)` is `true`. Convenient, but use with caution
 - `===`: referential equal, compares shallowly. `(1, 2) === (1, 2)` is `false`. `let myTuple = (1, 2); myTuple === myTuple` is `true`.

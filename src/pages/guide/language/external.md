@@ -8,12 +8,12 @@ order: 170
 Imagine writing a let binding, but with its body omitted and its type mandatorily written down:
 
 ```reason
-external myCFunction: int => string = "theCFunction";
+external myCFunction : int => string = "theCFunction";
 ```
 
 ```reason
-external getElementsByClassName : string => array Dom.element =
-  "document.getElementsByClassName" [@@bs.val];
+[@bs.val] external getElementsByClassName : string => array(Dom.element) =
+  "document.getElementsByClassName";
 ```
 
 (The above is a [BuckleScript](https://bucklescript.github.io/bucklescript/Manual.html)-specific external that binds to a JavaScript function of the same name.)

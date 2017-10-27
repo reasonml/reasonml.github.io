@@ -38,15 +38,18 @@ let {name: (n: string), age: (a: int)} = somePerson;
 Destructuring a functions' labeled arguments is also possible.
 
 ```reason
-type person = {name: string, age: int};
+type person = {
+  name: string,
+  age: int
+};
 
-let someFunction person::{name} => {
+let someFunction = (~person as {name}) => {
   /* you can use `name` here */
-}
+};
 
-let otherFunction person::({name} as thePerson) => {
+let otherFunction = (~person as {name} as thePerson) => {
   /* you can use both `name` and the whole record as `thePerson` here */
-}
+};
 ```
 
 **Keep reading the section, pattern matching, for a crazier form of destructuring**!

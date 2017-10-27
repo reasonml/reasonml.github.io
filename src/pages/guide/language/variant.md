@@ -9,9 +9,9 @@ Most data structures in most languages are about "this **and** that". A variant 
 
 ```reason
 type myResponseVariant =
-| Yes
-| No
-| PrettyMuch;
+  | Yes
+  | No
+  | PrettyMuch;
 
 let areYouCrushingIt = Yes;
 ```
@@ -27,11 +27,12 @@ Along with a variant comes one of the most important features of Reason, the `sw
 A Reason `switch` is visually similar to other languages' `switch` (aka a large `if/elseif/elseif...`). It allows you to check every possible case of a variant. To use it, enumerate every variant constructor of the particular variant you'd like to use, each followed by an `=>` and the expression corresponding to that case.
 
 ```reason
-let message = switch (areYouCrushingIt) {
-| No => "No worries. Keep going!"
-| Yes => "Great!"
-| PrettyMuch => "Nice!"
-};
+let message =
+  switch areYouCrushingIt {
+  | No => "No worries. Keep going!"
+  | Yes => "Great!"
+  | PrettyMuch => "Nice!"
+  };
 /* message is "Great!" */
 ```
 
@@ -57,20 +58,20 @@ let pet = Zoo.Dog;
 
 #### Constructor Arguments
 
-A variant's constructors can hold extra data separated by space.
+A variant's constructors can hold extra data separated by comma.
 
 ```reason
 type account =
-| None
-| Instagram string
-| Facebook string int;
+  | None
+  | Instagram(string)
+  | Facebook(string, int);
 ```
 
 Here, `Instagram` holds a `string`, and `Facebook` holds a `string` and an `int`. Usage:
 
 ```reason
-let myAccount = Facebook "Josh" 26;
-let friendAccount = Instagram "Jenny";
+let myAccount = Facebook("Josh", 26);
+let friendAccount = Instagram("Jenny");
 ```
 
 **Notice how using a constructor is like calling a function**? It's as if `Facebook` was a function that accepts two arguments. This isn't a coincidence; there's a reason why a constructor's data is called "constructor argument".
@@ -78,12 +79,12 @@ let friendAccount = Instagram "Jenny";
 Using `switch`, you can pattern-match (again, described in a later section) a constructor's arguments:
 
 ```reason
-let greeting = switch (myAccount) {
-| None => "Hi!"
-| Facebook name age =>
-  "Hi " ^ name ^ ", you're " ^ (string_of_int age) ^ "-year-old."
-| Instagram name => "Hello " ^ name ^ "!"
-}
+let greeting =
+  switch myAccount {
+  | None => "Hi!"
+  | Facebook(name, age) => "Hi " ++ name ++ ", you're " ++ string_of_int(age) ++ "-year-old."
+  | Instagram(name) => "Hello " ++ name ++ "!"
+  };
 ```
 
 #### Honorable Mentions
@@ -93,22 +94,22 @@ The [standard library](/api/index.html) exposes two important variants you'll co
 ##### `option`
 
 ```reason
-type option 'a = None | Some 'a;
+type option('a) = None | Some('a);
 ```
 
-This is the convention used to simulate a "nullable" (aka `undefined` or `null`) value in other languages. Thanks to this convenience type definition, Reason can default every value to be non-nullable. An `int` will always be an int, never "`int` **or** `null` **or** `undefined`". If you do want to express a "nullable int", you'd use `option int`, whose possible values are `None` or `Some int`. `switch` forces you to handle both cases; therefore, **a pure Reason program doesn't have null errors**.
+This is the convention used to simulate a "nullable" (aka `undefined` or `null`) value in other languages. Thanks to this convenience type definition, Reason can default every value to be non-nullable. An `int` will always be an int, never "`int` **or** `null` **or** `undefined`". If you do want to express a "nullable int", you'd use `option(int)`, whose possible values are `None` or `Some(int)`. `switch` forces you to handle both cases; therefore, **a pure Reason program doesn't have null errors**.
 
 ##### `list`
 
 ```reason
-type list 'a = Empty | Head 'a (list 'a);
+type list('a) = Empty | Head('a, list('a));
 ```
 
 _Not the actual type definition. Just an illustration_.
 
 This says: "a list that holds a value of type `a` (whatever it is) is either empty, or holds that value plus another list".
 
-Reason gave `list` a syntax sugar. `[1, 2, 3]` is conceptually equivalent to `Head 1 (Head 2 (Head 3 Empty))`. Once again, `switch` forces you to handle every case of this variant, including `Empty` (aka `[]`). **This eliminates another big category of access bugs**.
+Reason gave `list` a syntax sugar. `[1, 2, 3]` is conceptually equivalent to `Head(1, Head(2, Head(3, Empty)))`. Once again, `switch` forces you to handle every case of this variant, including `Empty` (aka `[]`). **This eliminates another big category of access bugs**.
 
 ##### Other Variant-like Types
 
@@ -122,13 +123,13 @@ Did you know that you can use `switch` on string, int, float, array, and most ot
 
 ```reason
 type account =
-| Facebook string int /* 2 arguments */
+  | Facebook(string, int) /* 2 arguments */;
 type account2 =
-| Instagram (string, int) /* 1 argument - happens to be a 2-tuple */
+  | Instagram((string, int)) /* 1 argument - happens to be a 2-tuple */;
 ```
 #### Variants Must Have constructors
 
-If you come from an untyped language, you might be tempted to try `type foo = int | string`. This isn't possible in Reason; you'd have to give each branch a constructor: `type foo = Int int | String int`. Though usually, needing this might be an anti-pattern. The Design Decisions section below explains more.
+If you come from an untyped language, you might be tempted to try `type foo = int | string`. This isn't possible in Reason; you'd have to give each branch a constructor: `type foo = Int(int) | String(int)`. Though usually, needing this might be an anti-pattern. The Design Decisions section below explains more.
 
 #### Interop with JavaScript
 
@@ -136,26 +137,26 @@ _This section assumes knowledge about BuckleScript's [FFI](http://bucklescript.g
 
 Quite a few JS libraries use functions that can accept many types of arguments. In these cases, it's very tempting to model them as variants. For example, suppose there's a `myLibrary.draw` JS function that takes in either a `number` or a `string`. You might be tempted to bind it like so:
 
-```
+```reason
 /* reserved for internal usage */
-external draw: 'a => unit = "draw" [@@bs.module "myLibrary"];
+[@bs.module "myLibrary"] external draw : 'a => unit = "draw";
 
 type animal =
-  | MyFloat float
-  | MyString string;
+  | MyFloat(float)
+  | MyString(string);
 
-let betterDraw animal =>
+let betterDraw = (animal) =>
   switch animal {
-  | MyFloat f => draw f
-  | MyString s => draw s
+  | MyFloat(f) => draw(f)
+  | MyString(s) => draw(s)
   };
 ```
 
 You could definitely do that, but there are better ways! For example, simply two `external`s that both compile to the same JS call:
 
-```
-external drawFloat: float => unit = "draw" [@@bs.module "myLibrary"];
-external drawString: string => unit = "draw" [@@bs.module "myLibrary"];
+```reason
+[@bs.module "myLibrary"] external drawFloat : float => unit = "draw";
+[@bs.module "myLibrary"] external drawString : string => unit = "draw";
 ```
 
 Or, get fancy and use an advanced feature of variant called GADT, then use BuckleScript's [phantom argument FFI feature](http://bucklescript.github.io/bucklescript/Manual.html#_phantom_arguments_and_ad_hoc_polymorphism). If these words mean absolutely nothing to you, no worries; just use the previous suggestion.
@@ -168,7 +169,7 @@ Please refer to this [record section](/guide/language/record#record-types-are-fo
 
 Variant in its many forms (polymorphic variant, open variant, GADT, etc.) are likely _the_ feature of a type system such as Reason's. The aforementioned `option` variant, for example, obliterates the need for nullable types, a major source of bugs in other languages. Philosophically speaking, a problem is composed of many possible branches/conditions. Mishandling these conditions is the majority of what we call bugs. **A type system doesn't magically eliminates bugs; it points out the unhandled conditions and asks you to cover them**\*. The ability to model "this or that" correctly is crucial.
 
-For example, some folks wonder how the type system can safely eliminate badly formatted JSON data from propagating into their program. They don't, not by themselves! But if the parser returns the `option` type `None | Some actualData`, then you'd have to handle the `None` case explicitly in later call sites. That's all there is.
+For example, some folks wonder how the type system can safely eliminate badly formatted JSON data from propagating into their program. They don't, not by themselves! But if the parser returns the `option` type `None | Some(actualData)`, then you'd have to handle the `None` case explicitly in later call sites. That's all there is.
 
 Performance-wise, a variant can potentially tremendously speed up your program's logic. Here's a piece of JavaScript:
 

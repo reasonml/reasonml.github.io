@@ -42,11 +42,12 @@ Updating an arbitrary item in the middle of a list is discouraged, since its per
 
 `switch` (described in the [pattern matching section](/guide/language/pattern-matching)) is usually used to access list items:
 
-```
-let message = switch myList {
-| [] => "This list is empty"
-| [a, ...rest] => "The head of the list is the string " ^ a
-}
+```reason
+let message =
+  switch myList {
+  | [] => "This list is empty"
+  | [a, ...rest] => "The head of the list is the string " ++ a
+  };
 ```
 
 To access an arbitrary list item, use `List.nth`.
@@ -84,9 +85,9 @@ Access & update an array item like so:
 ```reason
 let myArray = [|"hello", "world", "how are you"|];
 
-let firstItem = myArray.(0); /* "hello" */
+let firstItem = myArray[0]; /* "hello" */
 
-myArray.(0) = "hey";
+myArray[0] = "hey";
 
 /* now [|"hey", "world", "how are you"|] */
 ```
