@@ -4,8 +4,19 @@ import Link from './Link'
 import {scale, rhythm, headerFontFamily} from '../utils/typography'
 import {text, accent, dividerLine, gray} from '../utils/colors'
 
+const oldSyntax = () => {
+  let url = window.location;
+  url = url.toString();
+  url = url.replace(/reasonml.github.io/,"reasonml-old.github.io")
+  // url = url.replace(/localhost:8000/,"reasonml-old.github.io")
+  window.location = url;
+};
+
 const GuideSidebar = ({props, current, root, search}) => (
   <div css={styles.container}>
+    <a css={[styles.syntax, {display: 'flex'}]} onClick={oldSyntax} href="#">
+      See in 1.13.7 syntax
+    </a>
     <div css={styles.contents}>
       <Link css={[styles.link, {display: 'flex'}]} to={search}>
         Search
@@ -56,6 +67,7 @@ const phablet = '@media(max-width: 800px)'
 
 const styles = {
   container: {
+    position: 'relative',
     width: rhythm(8),
     minHeight: '100%',
     padding: '20px',
@@ -91,6 +103,24 @@ const styles = {
     ':hover': {
       color: accent,
     }
+  },
+  syntax: {
+    textDecoration: 'none',
+    color: 'currentColor',
+    ...scale(-0.2),
+    [phablet]: {
+      padding: `${rhythm(1/4)}`
+    },
+    display: 'block',
+    color: 'white',
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    width: '100%',
+    backgroundColor: accent,
+    justifyContent: 'center',
+    padding: '1px 0'
   },
 
   currentLink: {
