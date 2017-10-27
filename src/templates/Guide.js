@@ -87,7 +87,7 @@ export default class Guide extends React.Component {
     <a css={[styles.syntax, {display: 'flex'}]} onClick={oldSyntax} href="#">
       Looking for the old (version 2) syntax? Click here
     </a> : null;
-    return <div css={styles.main}>
+    return <div css={[styles.main, syntax ? styles.extraPadding : null]}>
       {syntax}
       <h2 css={styles.title}>
         {title}
@@ -163,6 +163,9 @@ const styles = {
     padding: '2em',
     minWidth: 0,
   },
+  extraPadding: {
+    paddingTop: '2.5em',
+  },
   editIcon: {
     marginBottom: 0,
     '@media(min-width: 800px)': {
@@ -181,21 +184,19 @@ const styles = {
   },
   syntax: {
     textDecoration: 'none',
-    color: 'currentColor',
+    color: 'white',
     ...scale(0.2),
     [phablet]: {
       padding: `${rhythm(1/4)}`
     },
-    ':hover': {
-      backgroundColor: gray,
-    },
+    backgroundColor: '#bb5144',
     display: 'block',
     position: 'absolute',
     top: 0,
     left: 0,
     right: 0,
     width: '100%',
-    height: 40,
+    height: '2em',
     justifyContent: 'center',
     alignItems: 'center'
   },
