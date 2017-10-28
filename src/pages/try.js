@@ -26,8 +26,8 @@ if (typeof navigator !== 'undefined') {
 const oldSyntax = () => {
   let url = window.location;
   url = url.toString();
-  // url = url.replace(/reasonml.github.io/,"reasonml-old.github.io")
-  url = url.replace(/localhost:8000/,"reasonml-old.github.io")
+  url = url.replace(/reasonml.github.io/,"reasonml-old.github.io")
+  // url = url.replace(/localhost:8000/,"reasonml-old.github.io")
   window.location = url;
 };
 
