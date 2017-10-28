@@ -33,7 +33,7 @@ What if you want a value that can be used from your Reason code?
 ```reason
 Js.log("this is reason");
 let x = [%bs.raw {| 'here is a string from javascript' |}];
-Js.log(x ++ " back in reason land"); /* ^ is the operator for string concat */
+Js.log(x ++ " back in reason land"); /* ++ is the operator for string concat */
 ```
 
 Now you might be wondering "what magic is this?? How did ocaml know that `x` was a string? **It doesn't**. The type of `x` in this code is a magic type that will unify with anything! This is quite dangerous and can have cascading effects in OCaml's type inference algorithm.
