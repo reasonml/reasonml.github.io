@@ -26,7 +26,7 @@ if (typeof navigator !== 'undefined') {
 const examples = [{
   name: 'Tree sum',
   code:
-`type tree = Lead | Node(int, tree, tree);
+`type tree = Leaf | Node(int, tree, tree);
 
 let rec sum =
   fun
@@ -242,7 +242,8 @@ const errorTimeout = 500
 
 const waitUntilScriptsLoaded = done => {
   const tout = setInterval(() => {
-    if (window.refmt && window.ocaml) {
+    // test for bucklescript compiler existence and refmt existence (one of the exposed method is printML)
+    if (window.ocaml && window.printML) {
       clearInterval(tout)
       done()
     }
@@ -374,18 +375,15 @@ export default class Try extends Component {
     clearTimeout(this.errorTimerId)
 
     this.setState((prevState, _) => {
-      const converted = window.refmt(newReasonCode, 'RE', 'implementation', 'ML')
-
       let newOcamlCode = prevState.ocaml;
-      if (converted[0] === 'REtoML') {
-        newOcamlCode = converted[1]
+      try {
+        newOcamlCode = window.printML(window.parseRE(newReasonCode))
         this.tryCompiling(newReasonCode, newOcamlCode)
-      } else {
+      } catch (e) {
         this.errorTimerId = setTimeout(
           () => this.setState(_ => {
-            const error = converted[1] === '' ? 'Syntax error' : converted[1];
             return {
-              reasonSyntaxError: error,
+              reasonSyntaxError: e,
               compileError: null,
               ocamlSyntaxError: null,
               jsError: null,
@@ -397,6 +395,7 @@ export default class Try extends Component {
           errorTimeout
         )
       }
+
       return {
         reason: newReasonCode,
         ocaml: newOcamlCode,
@@ -415,18 +414,15 @@ export default class Try extends Component {
     clearTimeout(this.errorTimerId)
 
     this.setState((prevState, _) => {
-      const converted = window.refmt(newOcamlCode, 'ML', 'implementation', 'RE')
-
       let newReasonCode = prevState.reason;
-      if (converted[0] === 'MLtoRE') {
-        newReasonCode = converted[1]
+      try {
+        newReasonCode = window.printRE(window.parseML(newOcamlCode))
         this.tryCompiling(newReasonCode, newOcamlCode)
-      } else {
+      } catch (e) {
         this.errorTimerId = setTimeout(
           () => this.setState(_ => {
-            const error = converted[1] === '' ? 'Syntax error' : converted[1];
             return {
-              ocamlSyntaxError: error,
+              ocamlSyntaxError: e,
               compileError: null,
               reasonSyntaxError: null,
               jsError: null,
@@ -438,6 +434,7 @@ export default class Try extends Component {
           errorTimeout
         )
       }
+
       return {
         reason: newReasonCode,
         ocaml: newOcamlCode,
