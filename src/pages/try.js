@@ -23,6 +23,14 @@ if (typeof navigator !== 'undefined') {
   )
 }
 
+const oldSyntax = () => {
+  let url = window.location;
+  url = url.toString();
+  // url = url.replace(/reasonml.github.io/,"reasonml-old.github.io")
+  url = url.replace(/localhost:8000/,"reasonml-old.github.io")
+  window.location = url;
+};
+
 const examples = [{
   name: 'Tree sum',
   code:
@@ -548,11 +556,20 @@ export default class Try extends Component {
           <Header inverted />
         </div>
         <div css={styles.toolbar}>
-          <div css={[styles.toolbarButton, styles.exampleSelect]}>
+          <div css={[styles.toolbarButton, styles.toolbarButtonRight]}>
             <button>Examples</button>
             <ul css={styles.exampleMenu}>
               {examples.map(example => <li key={example.name} onClick={() => this.updateReason(example.code)}>{example.name}</li>)}
             </ul>
+          </div>
+          <div css={[
+              styles.toolbarButton,
+              styles.toolbarButtonRight,
+              styles.toolbarButtonFill,
+            ]}>
+            <button onClick={oldSyntax}>
+              Old Syntax
+            </button>
           </div>
           <div css={styles.toolbarButton}>
             <button onClick={this.evalLatest}>Evaluate</button>
@@ -834,8 +851,7 @@ const styles = {
     }
   },
 
-  exampleSelect: {
-    marginRight: 'auto',
+  toolbarButtonRight: {
     borderRight: '1px solid #d6d4d4',
     borderLeft: 'none',
     position: 'relative',
@@ -843,6 +859,9 @@ const styles = {
     '&:hover ul': {
       display: 'block'
     }
+  },
+  toolbarButtonFill: {
+    marginRight: 'auto',
   },
 
   exampleMenu: {
