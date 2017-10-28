@@ -22,8 +22,8 @@ order: 10
 ```
 opam update
 opam switch 4.02.3 # mandatory!
-opam install reason.1.13.7
-opam install merlin.2.5.4
+opam install reason
+opam install merlin
 ```
 
 ### Troubleshooting
