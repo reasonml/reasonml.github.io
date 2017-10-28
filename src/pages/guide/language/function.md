@@ -79,7 +79,7 @@ Since we have currying (more on that below), we can provide the arguments in any
 addCoordinates(~y=6, ~x=5);
 ```
 
-The `x::x` part during declaration means the function accepts an argument labeled `x` and can refer to it in the function body as the variable `x`. This is so that we can have the following pattern, where labeled arguments are renamed inside the function for conciseness:
+The `~x as y` part during declaration means the function accepts an argument labeled `x` and can refer to it in the function body as the variable `y`. This is so that we can have the following pattern, where labeled arguments are renamed inside the function for conciseness:
 
 ```reason
 let drawCircle = (~radius as r, ~color as c) => {
@@ -91,7 +91,7 @@ let drawCircle = (~radius as r, ~color as c) => {
 drawCircle(~radius=10, ~color="red");
 ```
 
-For the common case of `radius::radius` (where the label is the same as the local variable name), we have the syntax shorthand `::x`:
+For the common case of `~radius as radius` (where the label is the same as the local variable name), we have the syntax shorthand `~x`:
 
 ```reason
 let drawCircle = (~radius, ~color) => {
@@ -122,7 +122,7 @@ let drawCircle = (~color, ~radius=?, ()) => {
 };
 ```
 
-If omitted, `radius` is **wrapped** in the standard library's `option` type, defaulting to `None`. If provided, it'll be wrapped with a `Some`. So `radius`'s type value is either `None` or `Some int` here.
+If omitted, `radius` is **wrapped** in the standard library's `option` type, defaulting to `None`. If provided, it'll be wrapped with a `Some`. So `radius`'s type value is either `None` or `Some(int)` here.
 
 **Note**: `None | Some(foo)` is a data structure type called variant, described [below](/guide/language/variant). This particular variant type is provided by the standard library. It's called `option`. Its definition: `type option('a) = None | Some('a)`.
 
@@ -141,7 +141,7 @@ let actualResultWithoutProvidingRadius = drawCircle(~color, ());
 
 #### Explicitly Passed Optional
 
-Sometimes, you might want to forward a value to a function without knowing whether the value is `None` or `Some a`. Naively, you'd do:
+Sometimes, you might want to forward a value to a function without knowing whether the value is `None` or `Some(a)`. Naively, you'd do:
 
 ```reason
 let result =
