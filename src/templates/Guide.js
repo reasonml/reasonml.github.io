@@ -133,6 +133,7 @@ export default class Guide extends React.Component {
 }
 
 const phablet = '@media(max-width: 800px)'
+const phone = '@media(max-width: 500px)'
 
 const styles = {
   editLink: {
@@ -188,6 +189,9 @@ const styles = {
     ...scale(0.2),
     [phablet]: {
       padding: `${rhythm(1/4)}`
+    },
+    [phone]: {
+      ...scale(-0.3),
     },
     backgroundColor: '#bb5144',
     display: 'block',
