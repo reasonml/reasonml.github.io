@@ -1,5 +1,5 @@
 ---
-title: Variant!
+title: Variant
 order: 70
 ---
 
