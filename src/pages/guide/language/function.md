@@ -107,6 +107,29 @@ Here's the syntax for typing the arguments:
 let drawCircle = (~radius as r: int, ~color as c: string) => ...;
 ```
 
+#### Currying
+
+Reason functions can automatically be **partially** called:
+
+```reason
+let add = (x, y) => x + y;
+let addFive = add(5);
+let eleven = addFive(6);
+let twelve = addFive(7);
+```
+
+Actually, the above `add` is nothing but syntactic sugar for this:
+
+```reason
+let add = (x, y) => x + y;
+```
+
+OCaml optimizes this to avoid the unnecessary function allocation (2 functions here, naively speaking) whenever it can! This way, we get
+
+- Nice syntax
+- Currying for free (every function takes a single argument, actually!)
+- No performance cost
+
 ### Optional Labeled Arguments
 
 Labeled function arguments can be made optional during declaration. You can then omit them when calling the function.
@@ -189,30 +212,6 @@ and callFirst = () => callSecond();
 ```
 
 **Note** that there's no semicolon ending the first line and no `let` on the second line.
-
-#### Currying
-
-Reason functions can automatically be **partially** called:
-
-```reason
-let add = (x, y) => x + y;
-let addFive = add(5);
-let eleven = addFive(6);
-let twelve = addFive(7);
-```
-
-Actually, the above `add` is nothing but syntactic sugar for this:
-
-```reason
-let add = (x, y) => x + y;
-```
-
-OCaml optimizes this to avoid the unnecessary function allocation (2 functions here, naively speaking) whenever it can! This way, we get
-
-- Nice syntax
-- Currying for free (every function takes a single argument, actually!)
-- No performance cost
-
 
 ### Tips & Tricks
 
