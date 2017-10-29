@@ -79,7 +79,7 @@ Since we have currying (more on that below), we can provide the arguments in any
 addCoordinates(~y=6, ~x=5);
 ```
 
-The `x::x` part during declaration means the function accepts an argument labeled `x` and can refer to it in the function body as the variable `x`. This is so that we can have the following pattern, where labeled arguments are renamed inside the function for conciseness:
+The `~x` part during declaration means the function accepts an argument labeled `x` and can refer to it in the function body by the name `x`. This is so that we can have the following pattern, where labeled arguments are renamed inside the function for conciseness:
 
 ```reason
 let drawCircle = (~radius as r, ~color as c) => {
@@ -91,7 +91,7 @@ let drawCircle = (~radius as r, ~color as c) => {
 drawCircle(~radius=10, ~color="red");
 ```
 
-For the common case of `radius::radius` (where the label is the same as the local variable name), we have the syntax shorthand `::x`:
+It should be noted that `~radius as radius` (where the label is the same as the local variable name), is unnecessary, and simply saying `~radius` is sufficient:
 
 ```reason
 let drawCircle = (~radius, ~color) => {
@@ -122,14 +122,14 @@ let drawCircle = (~color, ~radius=?, ()) => {
 };
 ```
 
-If omitted, `radius` is **wrapped** in the standard library's `option` type, defaulting to `None`. If provided, it'll be wrapped with a `Some`. So `radius`'s type value is either `None` or `Some int` here.
+When given in this syntax, `radius` is **wrapped** in the standard library's `option` type, defaulting to `None`. If provided, it'll be wrapped with a `Some`. So `radius`'s type value is either `None` or `Some int` here.
 
 **Note**: `None | Some(foo)` is a data structure type called variant, described [below](/guide/language/variant). This particular variant type is provided by the standard library. It's called `option`. Its definition: `type option('a) = None | Some('a)`.
 
 **Note** the unit `()` at the end of `drawCircle`. Without it, since `radius` and `color` are both labeled, can be curried, and can be applied out-of-order, it's unclear what the following means:
 
 ```reason
-let whatIsThis = drawCircle ::color;
+let whatIsThis = drawCircle(~color);
 ```
 
 Is `whatIsThis` a curried `drawCircle` function, waiting for the optional `radius` to be applied? Or did it finish applying? To address this confusion, append a positional (aka non-labeled) argument to `drawCircle` (conventionally `()`), and OCaml will, as a rule of thumb, presume the optional labeled argument is omitted when the positional argument is provided.
@@ -161,7 +161,7 @@ This means "I understand `radius` is optional, and that when I pass it a value i
 
 #### Optional with Default Value
 
-Optional labeled arguments can also be provided a default value. They aren't wrapped in an `option` type.
+Optional labeled arguments can also be provided a default value. In this case, they aren't wrapped in an `option` type.
 
 ```reason
 let drawCircle = (~radius=1, ~color, ()) => {
@@ -172,7 +172,7 @@ let drawCircle = (~radius=1, ~color, ()) => {
 
 #### Recursive Functions
 
-By default, values can't see a binding that points to it, but including the `rec` keyword in a `let` binding makes this possible. This allows functions to see and call themselves, giving us the power of recursion.
+By default, a value can't see a binding that points to it, but including the `rec` keyword in a `let` binding makes this possible. This allows functions to see and call themselves, giving us the power of recursion.
 
 ```reason
 let rec neverTerminate = () => neverTerminate();
