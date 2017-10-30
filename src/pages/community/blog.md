@@ -23,7 +23,7 @@ The infra changes wouldn't have happened without a tight cooperation from these 
 **How do I get it?**
 
 - There's a **migration script** at https://github.com/reasonml/upgradeSyntaxFrom2To3. Use it. No manual syntax upgrade needed.
-- Upgrade your [reason-cli](/guide/editor-tools/global-installation) to `3.0.0` (instead of the old `1.13.7`), for editor tooling.
+- Uninstall & upgrade your [reason-cli](/guide/editor-tools/global-installation) to `3.0.0` (instead of the old `1.13.7`), for editor tooling.
 - Upgrade your project's [BuckleScript](https://github.com/BuckleScript/bucklescript) to `2.0.0`.
 - Set `"refmt": 3` in your `bsconfig.json`.
 - Restart your editor.
