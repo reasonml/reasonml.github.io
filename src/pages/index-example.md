@@ -6,6 +6,6 @@ let greeting = (stranger) =>
   | Teacher => "Hey professor!"
   | Director => "Hello director."
   | Student("Richard") => "Still here Ricky?"
-  | Student(anyOtherName) => "Hey, " ++ (anyOtherName ++ ".")
+  | Student(anyOtherName) => "Hey, " ++ anyOtherName ++ "."
   };
 ```
