@@ -42,7 +42,7 @@ The type system infers that it's a `(int, int, int)`. Nothing else needed to be 
 Type arguments appear everywhere.
 
 ```reason
-/* inferred as `list string` */
+/* inferred as `list(string)` */
 let greetings = ["hello", "world", "how are you"];
 ```
 
