@@ -601,7 +601,7 @@ export default class Try extends Component {
               {reasonSyntaxError &&
                 <div css={styles.error}>
                   <div css={styles.errorBody}>
-                    {reasonSyntaxError}
+                    {reasonSyntaxError.message}
                   </div>
                 </div>}
             </div>
@@ -619,7 +619,7 @@ export default class Try extends Component {
               {ocamlSyntaxError &&
                 <div css={styles.error}>
                   <div css={styles.errorBody}>
-                    {ocamlSyntaxError}
+                    {ocamlSyntaxError.message}
                   </div>
                 </div>}
               {compileError &&
