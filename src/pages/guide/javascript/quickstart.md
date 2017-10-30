@@ -8,7 +8,13 @@ npm install -g bs-platform
 bsb -init my-first-app -theme basic-reason
 ```
 
-And then run it as usual:
+**Go to `bsconfig.json`**, add the following line:
+
+```json
+"refmt": 3
+```
+
+This enables the new Reason syntax. And then run it as usual:
 
 ```sh
 cd my-first-app
