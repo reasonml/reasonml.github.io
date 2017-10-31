@@ -13,6 +13,8 @@ order: 10
 | **Linux**   | `npm install -g https://github.com/reasonml/reason-cli/archive/3.0.0-bin-linux.tar.gz`
 | **Windows** | Please see https://github.com/reasonml/reasonml.github.io/issues/195
 
+Note: Bundles are currently large (approximately `100MB`), but `npm` will not provide progress while downloading.
+
 ### (Alternative) Through OPAM
 
 [OPAM](https://opam.ocaml.org) is the native package manager for OCaml. If you come from OCaml and don't have npm/yarn, you can optionally install this way, but be careful!
