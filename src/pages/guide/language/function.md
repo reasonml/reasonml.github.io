@@ -331,3 +331,11 @@ let add: (int, int) => int;
 Same rules as the previous section, except replacing `type foo = bar` with `let add: bar`.
 
 **Don't** confuse this with actually exporting a type in the interface file. `let add: bar` annotates an existing value `bar` from the implementation file. `type foo = bar` exports a type of the same shape from the implementation file.
+
+#### Higher-Order Functions
+
+```reason
+let list = [1, 2, 3, 4, 5]
+let nextList = List.map (fun v:int => v + 1) list; 
+nextList; (* [2, 3, 4, 5, 6] *)
+```
