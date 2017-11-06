@@ -5,6 +5,8 @@ order: 0
 
 ### Reason 3
 
+*October 27, 2017*
+
 I'm writing this post while coincidentally sitting next to the Reason team manager's manager who's trying out the new Reason syntax; his first impression is "this is exactly how I think it works!". I think this alone made all our effort worthwhile.
 
 Reason 3 is primarily the work of [Fred](https://github.com/let-def), the maintainer of Merlin (yeah, _that_ [Merlin](https://github.com/ocaml/merlin)), [Iwan](https://github.com/iwankaramazow) and [Jared](https://github.com/jaredly), over the last six months. The release packs a _lot_ of infra changes under the hood, most of which, we hope, stay invisible to you and occasionally make you feel "yeah, that _is_ how I think it should work".
