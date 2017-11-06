@@ -63,7 +63,14 @@ b
 // 3. bundle them with BuckleScript compiler (bs.js)
 
 /** Serialize a .cmi or a .cmj to a string that can be passed to
-  * ocaml.load_module */
+  * ocaml.load_module
+  *
+  * This function reads a binary file and produce a JS string containing
+  * hex escape sequences. This string gets appended to the file specified
+  * by the second parameter.
+  *
+  * Based on https://github.com/ocsigen/js_of_ocaml/blob/master/compiler/lib/js_output.ml#L279
+  */
 function serializeBinary(binFileName, jsFileName) {
   const binContent = fs.readFileSync(binFileName, "binary");
   const binLength = binContent.length;
