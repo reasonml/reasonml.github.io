@@ -29,6 +29,7 @@ Reason is just OCaml under the hood; We don't yet cover every concept on this do
 ## Videos
 
 - [Community-maintained Reason talks playlist](https://www.youtube.com/playlist?list=PLYU6eGtVFu8ZG3yh1FfLrqHBMUXj80wgK)
+- [ReasonML: Hype or next big thing?](https://www.youtube.com/watch?v=bqNploxWpjA&t): October 2017
 - [The Why and How of ReasonML](https://www.youtube.com/watch?v=j5mlMUzpE5g): October 2017
 - [Critical ReasonML'ing](https://www.youtube.com/watch?v=k77aR_JyvEE): October 2017
 - [Universal Reason](https://www.youtube.com/watch?v=L0xz-ILKsLE&list=PLYU6eGtVFu8ZG3yh1FfLrqHBMUXj80wgK): October 2017
