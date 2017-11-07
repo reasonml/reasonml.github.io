@@ -21,3 +21,4 @@ Immutable Lists                       |  `[1, 2, 3]`
 Immutable Prepend                     |  `[item1, item2, ...theRest]`
 Arrays                                |  `[|1, 2, 3|]`
 Records                               |  `type player = {score: int}; {score: 100}`
+Comments                              |  `/* Comment here */`
