@@ -53,6 +53,7 @@ logSomething();
 `()` is a totally normal value, the single possible value in `unit`. Reason gave it a special syntax out of convenience.
 
 ### Labeled Arguments
+
 Multi-arguments functions, especially those whose arguments are of the same type, can be confusing to call.
 
 ```reason
@@ -73,13 +74,13 @@ let addCoordinates = (~x, ~y) => {
 addCoordinates(~x=5, ~y=6);
 ```
 
-Since we have currying (more on that below), we can provide the arguments in any order:
+Since we have currying (more on that below), we can provide the arguments in **any order**:
 
 ```reason
 addCoordinates(~y=6, ~x=5);
 ```
 
-The `~x` part during declaration means the function accepts an argument labeled `x` and can refer to it in the function body by the same name. You can also refer to the arguments inside the function body by a different name for conciseness:
+The `~x` part in declaration means the function accepts an argument labeled `x` and can refer to it in the function body by the same name. You can also refer to the arguments inside the function body by a different name for conciseness:
 
 ```reason
 let drawCircle = (~radius as r, ~color as c) => {
@@ -90,6 +91,8 @@ let drawCircle = (~radius as r, ~color as c) => {
 
 drawCircle(~radius=10, ~color="red");
 ```
+
+As a matter of fact, `(~radius)` is just a shorthand (called **punning**) for `(~radius as radius)`.
 
 Here's the syntax for typing the arguments:
 

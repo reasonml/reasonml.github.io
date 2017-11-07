@@ -86,7 +86,7 @@ baby.age = baby.age + 1; /* alter `baby`. Happy birthday! */
 
 ### Syntax shorthand
 
-To reduce redundancy, we provide **punning** for a record's types and values. You can use it when the name of a record field matches the name of its value/type.
+To reduce redundancy, we provide **punning** for a record's types and values. Punning refers to the syntax shorthand you can use when the name of a field matches the name of its value/type:
 
 ```reason
 type horsePower = {power: int, metric: bool};

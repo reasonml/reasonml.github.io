@@ -56,11 +56,17 @@ Here's a JSX tag that shows most of the features.
 
 #### Punning
 
-ReactJS JSX's argument punning, e.g. `<input checked />`, due to unfortunate historical reasons, desugars to `<input checked={true} />`, in order to conform to DOM's idioms. Reason doesn't have such baggage, so we've decided to desugar it to `<input checked={checked} />`. This allows folks to cram many more props into a ReasonReact component without it looking too bloated:
+"Punning" refers to the syntax shorthand for when a label and a value are the same. For example, in JavaScript, instead of doing `return {name: name}`, you can do `return {name}`.
+
+Reason JSX supports punning. `<input checked />` is just a shorthand for `<input checked=checked />`. The formatter will help you format to the latter whenever possible. This is convenient in the cases where there are lots of props to pass down:
 
 ```reason
 <MyComponent isLoading text onClick />
 ```
+
+Consequently, a Reason JSX component can cram in a few more props before reaching for extra libraries solutions that avoids props passing.
+
+**Note** that this is a departure from ReactJS JSX, which does **not** have punning. ReactJS' `<input checked />` desugars to `<input checked=true />`, in order to conform to DOM's idioms and for backward compatibility.
 
 ### Tip & Tricks
 
