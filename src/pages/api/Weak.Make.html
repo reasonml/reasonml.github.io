@@ -3,7 +3,8 @@
 &#xA0;</div>
 <h1>Functor <a href="type_Weak.Make.html">Weak.Make</a></h1>
 
-<pre><span class="keyword">module</span> Make: functor (H : Hashtbl.HashedType) -&gt; S  with type data = H.t</pre><div class="info module top">
+<pre><span class="keyword">module</span> Make: (H: Hashtbl.HashedType) =&gt; S with type data = H.t;
+</pre><div class="info module top">
 Functor building an implementation of the weak hash table structure.<br>
 </div>
 <table border="0" cellpadding="3" width="100%">
@@ -22,13 +23,15 @@ Functor building an implementation of the weak hash table structure.<br>
 </tbody></table>
 <hr width="100%">
 
-<pre id="TYPEdata"><span class="keyword">type</span> data </pre>
+<pre id="TYPEdata"><span class="keyword">type</span> data;
+</pre>
 <div class="info ">
 The type of the elements stored in the table.<br>
 </div>
 
 
-<pre id="TYPEt"><span class="keyword">type</span> t </pre>
+<pre id="TYPEt"><span class="keyword">type</span> t;
+</pre>
 <div class="info ">
 The type of tables that contain elements of type <code class="code">data</code>.
         Note that weak hash tables cannot be marshaled using
@@ -37,66 +40,78 @@ The type of tables that contain elements of type <code class="code">data</code>.
 </div>
 
 
-<pre id="VALcreate">val create : int -&gt; t</pre><div class="info ">
+<pre id="VALcreate"><span class="keyword">let</span> create: int =&gt; t;
+</pre><div class="info ">
 <code class="code">create n</code> creates a new empty weak hash table, of initial
         size <code class="code">n</code>.  The table will grow as needed.<br>
 </div>
 
-<pre id="VALclear">val clear : t -&gt; unit</pre><div class="info ">
+<pre id="VALclear"><span class="keyword">let</span> clear: t =&gt; unit;
+</pre><div class="info ">
 Remove all elements from the table.<br>
 </div>
 
-<pre id="VALmerge">val merge : t -&gt; data -&gt; data</pre><div class="info ">
+<pre id="VALmerge"><span class="keyword">let</span> merge: (t, data) =&gt; data;
+</pre><div class="info ">
 <code class="code">merge t x</code> returns an instance of <code class="code">x</code> found in <code class="code">t</code> if any,
         or else adds <code class="code">x</code> to <code class="code">t</code> and return <code class="code">x</code>.<br>
 </div>
 
-<pre id="VALadd">val add : t -&gt; data -&gt; unit</pre><div class="info ">
+<pre id="VALadd"><span class="keyword">let</span> add: (t, data) =&gt; unit;
+</pre><div class="info ">
 <code class="code">add t x</code> adds <code class="code">x</code> to <code class="code">t</code>.  If there is already an instance
         of <code class="code">x</code> in <code class="code">t</code>, it is unspecified which one will be
         returned by subsequent calls to <code class="code">find</code> and <code class="code">merge</code>.<br>
 </div>
 
-<pre id="VALremove">val remove : t -&gt; data -&gt; unit</pre><div class="info ">
+<pre id="VALremove"><span class="keyword">let</span> remove: (t, data) =&gt; unit;
+</pre><div class="info ">
 <code class="code">remove t x</code> removes from <code class="code">t</code> one instance of <code class="code">x</code>.  Does
         nothing if there is no instance of <code class="code">x</code> in <code class="code">t</code>.<br>
 </div>
 
-<pre id="VALfind">val find : t -&gt; data -&gt; data</pre><div class="info ">
+<pre id="VALfind"><span class="keyword">let</span> find: (t, data) =&gt; data;
+</pre><div class="info ">
 <code class="code">find t x</code> returns an instance of <code class="code">x</code> found in <code class="code">t</code>.
         Raise <code class="code">Not_found</code> if there is no such element.<br>
 </div>
 
-<pre id="VALfind_all">val find_all : t -&gt; data -&gt; data list</pre><div class="info ">
+<pre id="VALfind_all"><span class="keyword">let</span> find_all: (t, data) =&gt; list(data);
+</pre><div class="info ">
 <code class="code">find_all t x</code> returns a list of all the instances of <code class="code">x</code>
         found in <code class="code">t</code>.<br>
 </div>
 
-<pre id="VALmem">val mem : t -&gt; data -&gt; bool</pre><div class="info ">
+<pre id="VALmem"><span class="keyword">let</span> mem: (t, data) =&gt; bool;
+</pre><div class="info ">
 <code class="code">mem t x</code> returns <code class="code">true</code> if there is at least one instance
         of <code class="code">x</code> in <code class="code">t</code>, false otherwise.<br>
 </div>
 
-<pre id="VALiter">val iter : (data -&gt; unit) -&gt; t -&gt; unit</pre><div class="info ">
+<pre id="VALiter"><span class="keyword">let</span> iter: (data =&gt; unit, t) =&gt; unit;
+</pre><div class="info ">
 <code class="code">iter f t</code> calls <code class="code">f</code> on each element of <code class="code">t</code>, in some unspecified
         order.  It is not specified what happens if <code class="code">f</code> tries to change
         <code class="code">t</code> itself.<br>
 </div>
 
-<pre id="VALfold">val fold : (data -&gt; &apos;a -&gt; &apos;a) -&gt; t -&gt; &apos;a -&gt; &apos;a</pre><div class="info ">
+<pre id="VALfold"><span class="keyword">let</span> fold: ((data, &apos;a) =&gt; &apos;a, t, &apos;a) =&gt; &apos;a;
+</pre><div class="info ">
 <code class="code">fold f t init</code> computes <code class="code">(f d1 (... (f dN init)))</code> where
         <code class="code">d1 ... dN</code> are the elements of <code class="code">t</code> in some unspecified order.
         It is not specified what happens if <code class="code">f</code> tries to change <code class="code">t</code>
         itself.<br>
 </div>
 
-<pre id="VALcount">val count : t -&gt; int</pre><div class="info ">
+<pre id="VALcount"><span class="keyword">let</span> count: t =&gt; int;
+</pre><div class="info ">
 Count the number of elements in the table.  <code class="code">count t</code> gives the
         same result as <code class="code">fold (fun _ n -&gt; n+1) t 0</code> but does not delay the
         deallocation of the dead elements.<br>
 </div>
 
-<pre id="VALstats">val stats : t -&gt; int * int * int * int * int * int</pre><div class="info ">
+<pre id="VALstats"><span class="keyword">let</span> stats: t =&gt; (int, int, int, int, int, int);
+</pre><div class="info ">
 Return statistics on the table.  The numbers are, in order:
         table length, number of entries, sum of bucket lengths,
         smallest bucket length, median bucket length, biggest bucket length.<br>

@@ -10,12 +10,52 @@ Module expressions<br>
 </div>
 <hr width="100%">
 
-<pre id="VALmk">val mk : ?loc:Ast_helper.loc -&gt;       ?attrs:Ast_helper.attrs -&gt;       Parsetree.module_expr_desc -&gt; Parsetree.module_expr</pre>
-<pre id="VALattr">val attr : Parsetree.module_expr -&gt; Parsetree.attribute -&gt; Parsetree.module_expr</pre>
-<pre id="VALident">val ident : ?loc:Ast_helper.loc -&gt;       ?attrs:Ast_helper.attrs -&gt; Ast_helper.lid -&gt; Parsetree.module_expr</pre>
-<pre id="VALstructure">val structure : ?loc:Ast_helper.loc -&gt;       ?attrs:Ast_helper.attrs -&gt; Parsetree.structure -&gt; Parsetree.module_expr</pre>
-<pre id="VALfunctor_">val functor_ : ?loc:Ast_helper.loc -&gt;       ?attrs:Ast_helper.attrs -&gt;       Ast_helper.str -&gt;       Parsetree.module_type option -&gt;       Parsetree.module_expr -&gt; Parsetree.module_expr</pre>
-<pre id="VALapply">val apply : ?loc:Ast_helper.loc -&gt;       ?attrs:Ast_helper.attrs -&gt;       Parsetree.module_expr -&gt; Parsetree.module_expr -&gt; Parsetree.module_expr</pre>
-<pre id="VALconstraint_">val constraint_ : ?loc:Ast_helper.loc -&gt;       ?attrs:Ast_helper.attrs -&gt;       Parsetree.module_expr -&gt; Parsetree.module_type -&gt; Parsetree.module_expr</pre>
-<pre id="VALunpack">val unpack : ?loc:Ast_helper.loc -&gt;       ?attrs:Ast_helper.attrs -&gt; Parsetree.expression -&gt; Parsetree.module_expr</pre>
-<pre id="VALextension">val extension : ?loc:Ast_helper.loc -&gt;       ?attrs:Ast_helper.attrs -&gt; Parsetree.extension -&gt; Parsetree.module_expr</pre></div>
+<pre id="VALmk"><span class="keyword">let</span> mk:
+  (~loc: Ast_helper.loc=?, ~attrs: Ast_helper.attrs=?, Parsetree.module_expr_desc) =&gt;
+  Parsetree.module_expr;
+</pre>
+<pre id="VALattr"><span class="keyword">let</span> attr: (Parsetree.module_expr, Parsetree.attribute) =&gt; Parsetree.module_expr;
+</pre>
+<pre id="VALident"><span class="keyword">let</span> ident:
+  (~loc: Ast_helper.loc=?, ~attrs: Ast_helper.attrs=?, Ast_helper.lid) =&gt; Parsetree.module_expr;
+</pre>
+<pre id="VALstructure"><span class="keyword">let</span> structure:
+  (~loc: Ast_helper.loc=?, ~attrs: Ast_helper.attrs=?, Parsetree.structure) =&gt;
+  Parsetree.module_expr;
+</pre>
+<pre id="VALfunctor_"><span class="keyword">let</span> functor_:
+  (
+    ~loc: Ast_helper.loc=?,
+    ~attrs: Ast_helper.attrs=?,
+    Ast_helper.str,
+    option(Parsetree.module_type),
+    Parsetree.module_expr
+  ) =&gt;
+  Parsetree.module_expr;
+</pre>
+<pre id="VALapply"><span class="keyword">let</span> apply:
+  (
+    ~loc: Ast_helper.loc=?,
+    ~attrs: Ast_helper.attrs=?,
+    Parsetree.module_expr,
+    Parsetree.module_expr
+  ) =&gt;
+  Parsetree.module_expr;
+</pre>
+<pre id="VALconstraint_"><span class="keyword">let</span> constraint_:
+  (
+    ~loc: Ast_helper.loc=?,
+    ~attrs: Ast_helper.attrs=?,
+    Parsetree.module_expr,
+    Parsetree.module_type
+  ) =&gt;
+  Parsetree.module_expr;
+</pre>
+<pre id="VALunpack"><span class="keyword">let</span> unpack:
+  (~loc: Ast_helper.loc=?, ~attrs: Ast_helper.attrs=?, Parsetree.expression) =&gt;
+  Parsetree.module_expr;
+</pre>
+<pre id="VALextension"><span class="keyword">let</span> extension:
+  (~loc: Ast_helper.loc=?, ~attrs: Ast_helper.attrs=?, Parsetree.extension) =&gt;
+  Parsetree.module_expr;
+</pre></div>

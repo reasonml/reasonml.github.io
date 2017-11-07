@@ -3,7 +3,8 @@
 &#xA0;</div>
 <h1>Functor <a href="type_MoreLabels.Map.Make.html">MoreLabels.Map.Make</a></h1>
 
-<pre><span class="keyword">module</span> Make: functor (Ord : OrderedType) -&gt; S  with type key = Ord.t</pre><table border="0" cellpadding="3" width="100%">
+<pre><span class="keyword">module</span> Make: (Ord: OrderedType) =&gt; S with type key = Ord.t;
+</pre><table border="0" cellpadding="3" width="100%">
 <tbody><tr>
 <td align="left" valign="top" width="1%%"><b>Parameters: </b></td>
 <td>
@@ -19,33 +20,59 @@
 </tbody></table>
 <hr width="100%">
 
-<pre id="TYPEkey"><span class="keyword">type</span> key </pre>
+<pre id="TYPEkey"><span class="keyword">type</span> key;
+</pre>
 
 
-<pre id="TYPEt"><span class="keyword">type</span> +&apos;a t </pre>
+<pre id="TYPEt"><span class="keyword">type</span> t(+&apos;a);
+</pre>
 
 
-<pre id="VALempty">val empty : &apos;a t</pre>
-<pre id="VALis_empty">val is_empty : &apos;a t -&gt; bool</pre>
-<pre id="VALmem">val mem : key -&gt; &apos;a t -&gt; bool</pre>
-<pre id="VALadd">val add : key:key -&gt;       data:&apos;a -&gt; &apos;a t -&gt; &apos;a t</pre>
-<pre id="VALsingleton">val singleton : key -&gt; &apos;a -&gt; &apos;a t</pre>
-<pre id="VALremove">val remove : key -&gt; &apos;a t -&gt; &apos;a t</pre>
-<pre id="VALmerge">val merge : f:(key -&gt; &apos;a option -&gt; &apos;b option -&gt; &apos;c option) -&gt;       &apos;a t -&gt; &apos;b t -&gt; &apos;c t</pre>
-<pre id="VALcompare">val compare : cmp:(&apos;a -&gt; &apos;a -&gt; int) -&gt;       &apos;a t -&gt; &apos;a t -&gt; int</pre>
-<pre id="VALequal">val equal : cmp:(&apos;a -&gt; &apos;a -&gt; bool) -&gt;       &apos;a t -&gt; &apos;a t -&gt; bool</pre>
-<pre id="VALiter">val iter : f:(key:key -&gt; data:&apos;a -&gt; unit) -&gt;       &apos;a t -&gt; unit</pre>
-<pre id="VALfold">val fold : f:(key:key -&gt; data:&apos;a -&gt; &apos;b -&gt; &apos;b) -&gt;       &apos;a t -&gt; init:&apos;b -&gt; &apos;b</pre>
-<pre id="VALfor_all">val for_all : f:(key -&gt; &apos;a -&gt; bool) -&gt; &apos;a t -&gt; bool</pre>
-<pre id="VALexists">val exists : f:(key -&gt; &apos;a -&gt; bool) -&gt; &apos;a t -&gt; bool</pre>
-<pre id="VALfilter">val filter : f:(key -&gt; &apos;a -&gt; bool) -&gt;       &apos;a t -&gt; &apos;a t</pre>
-<pre id="VALpartition">val partition : f:(key -&gt; &apos;a -&gt; bool) -&gt;       &apos;a t -&gt; &apos;a t * &apos;a t</pre>
-<pre id="VALcardinal">val cardinal : &apos;a t -&gt; int</pre>
-<pre id="VALbindings">val bindings : &apos;a t -&gt; (key * &apos;a) list</pre>
-<pre id="VALmin_binding">val min_binding : &apos;a t -&gt; key * &apos;a</pre>
-<pre id="VALmax_binding">val max_binding : &apos;a t -&gt; key * &apos;a</pre>
-<pre id="VALchoose">val choose : &apos;a t -&gt; key * &apos;a</pre>
-<pre id="VALsplit">val split : key -&gt;       &apos;a t -&gt;       &apos;a t * &apos;a option * &apos;a t</pre>
-<pre id="VALfind">val find : key -&gt; &apos;a t -&gt; &apos;a</pre>
-<pre id="VALmap">val map : f:(&apos;a -&gt; &apos;b) -&gt; &apos;a t -&gt; &apos;b t</pre>
-<pre id="VALmapi">val mapi : f:(key -&gt; &apos;a -&gt; &apos;b) -&gt;       &apos;a t -&gt; &apos;b t</pre></div>
+<pre id="VALempty"><span class="keyword">let</span> empty: t(&apos;a);
+</pre>
+<pre id="VALis_empty"><span class="keyword">let</span> is_empty: t(&apos;a) =&gt; bool;
+</pre>
+<pre id="VALmem"><span class="keyword">let</span> mem: (key, t(&apos;a)) =&gt; bool;
+</pre>
+<pre id="VALadd"><span class="keyword">let</span> add: (~key: key, ~data: &apos;a, t(&apos;a)) =&gt; t(&apos;a);
+</pre>
+<pre id="VALsingleton"><span class="keyword">let</span> singleton: (key, &apos;a) =&gt; t(&apos;a);
+</pre>
+<pre id="VALremove"><span class="keyword">let</span> remove: (key, t(&apos;a)) =&gt; t(&apos;a);
+</pre>
+<pre id="VALmerge"><span class="keyword">let</span> merge: (~f: (key, option(&apos;a), option(&apos;b)) =&gt; option(&apos;c), t(&apos;a), t(&apos;b)) =&gt; t(&apos;c);
+</pre>
+<pre id="VALcompare"><span class="keyword">let</span> compare: (~cmp: (&apos;a, &apos;a) =&gt; int, t(&apos;a), t(&apos;a)) =&gt; int;
+</pre>
+<pre id="VALequal"><span class="keyword">let</span> equal: (~cmp: (&apos;a, &apos;a) =&gt; bool, t(&apos;a), t(&apos;a)) =&gt; bool;
+</pre>
+<pre id="VALiter"><span class="keyword">let</span> iter: (~f: (~key: key, ~data: &apos;a) =&gt; unit, t(&apos;a)) =&gt; unit;
+</pre>
+<pre id="VALfold"><span class="keyword">let</span> fold: (~f: (~key: key, ~data: &apos;a, &apos;b) =&gt; &apos;b, t(&apos;a), ~init: &apos;b) =&gt; &apos;b;
+</pre>
+<pre id="VALfor_all"><span class="keyword">let</span> for_all: (~f: (key, &apos;a) =&gt; bool, t(&apos;a)) =&gt; bool;
+</pre>
+<pre id="VALexists"><span class="keyword">let</span> exists: (~f: (key, &apos;a) =&gt; bool, t(&apos;a)) =&gt; bool;
+</pre>
+<pre id="VALfilter"><span class="keyword">let</span> filter: (~f: (key, &apos;a) =&gt; bool, t(&apos;a)) =&gt; t(&apos;a);
+</pre>
+<pre id="VALpartition"><span class="keyword">let</span> partition: (~f: (key, &apos;a) =&gt; bool, t(&apos;a)) =&gt; (t(&apos;a), t(&apos;a));
+</pre>
+<pre id="VALcardinal"><span class="keyword">let</span> cardinal: t(&apos;a) =&gt; int;
+</pre>
+<pre id="VALbindings"><span class="keyword">let</span> bindings: t(&apos;a) =&gt; list((key, &apos;a));
+</pre>
+<pre id="VALmin_binding"><span class="keyword">let</span> min_binding: t(&apos;a) =&gt; (key, &apos;a);
+</pre>
+<pre id="VALmax_binding"><span class="keyword">let</span> max_binding: t(&apos;a) =&gt; (key, &apos;a);
+</pre>
+<pre id="VALchoose"><span class="keyword">let</span> choose: t(&apos;a) =&gt; (key, &apos;a);
+</pre>
+<pre id="VALsplit"><span class="keyword">let</span> split: (key, t(&apos;a)) =&gt; (t(&apos;a), option(&apos;a), t(&apos;a));
+</pre>
+<pre id="VALfind"><span class="keyword">let</span> find: (key, t(&apos;a)) =&gt; &apos;a;
+</pre>
+<pre id="VALmap"><span class="keyword">let</span> map: (~f: &apos;a =&gt; &apos;b, t(&apos;a)) =&gt; t(&apos;b);
+</pre>
+<pre id="VALmapi"><span class="keyword">let</span> mapi: (~f: (key, &apos;a) =&gt; &apos;b, t(&apos;a)) =&gt; t(&apos;b);
+</pre></div>

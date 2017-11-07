@@ -7,6 +7,8 @@
 
 <pre><span class="keyword">module</span> Map: sig .. end</pre><hr width="100%">
 
-<pre><span class="keyword">module</span> type OrderedType = Map.OrderedType</pre>
+<pre><span class="keyword">module</span> type OrderedType = Map.OrderedType;
+</pre>
 <pre><span class="keyword">module</span> type S = sig .. end</pre>
-<pre><span class="keyword">module</span> Make: functor (Ord : OrderedType) -&gt; S  with type key = Ord.t</pre></div>
+<pre><span class="keyword">module</span> Make: (Ord: OrderedType) =&gt; S with type key = Ord.t;
+</pre></div>

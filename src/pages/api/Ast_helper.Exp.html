@@ -10,40 +10,249 @@ Expressions<br>
 </div>
 <hr width="100%">
 
-<pre id="VALmk">val mk : ?loc:Ast_helper.loc -&gt;       ?attrs:Ast_helper.attrs -&gt; Parsetree.expression_desc -&gt; Parsetree.expression</pre>
-<pre id="VALattr">val attr : Parsetree.expression -&gt; Parsetree.attribute -&gt; Parsetree.expression</pre>
-<pre id="VALident">val ident : ?loc:Ast_helper.loc -&gt;       ?attrs:Ast_helper.attrs -&gt; Ast_helper.lid -&gt; Parsetree.expression</pre>
-<pre id="VALconstant">val constant : ?loc:Ast_helper.loc -&gt;       ?attrs:Ast_helper.attrs -&gt; Asttypes.constant -&gt; Parsetree.expression</pre>
-<pre id="VALlet_">val let_ : ?loc:Ast_helper.loc -&gt;       ?attrs:Ast_helper.attrs -&gt;       Asttypes.rec_flag -&gt;       Parsetree.value_binding list -&gt; Parsetree.expression -&gt; Parsetree.expression</pre>
-<pre id="VALfun_">val fun_ : ?loc:Ast_helper.loc -&gt;       ?attrs:Ast_helper.attrs -&gt;       Asttypes.label -&gt;       Parsetree.expression option -&gt;       Parsetree.pattern -&gt; Parsetree.expression -&gt; Parsetree.expression</pre>
-<pre id="VALfunction_">val function_ : ?loc:Ast_helper.loc -&gt;       ?attrs:Ast_helper.attrs -&gt; Parsetree.case list -&gt; Parsetree.expression</pre>
-<pre id="VALapply">val apply : ?loc:Ast_helper.loc -&gt;       ?attrs:Ast_helper.attrs -&gt;       Parsetree.expression -&gt;       (Asttypes.label * Parsetree.expression) list -&gt; Parsetree.expression</pre>
-<pre id="VALmatch_">val match_ : ?loc:Ast_helper.loc -&gt;       ?attrs:Ast_helper.attrs -&gt;       Parsetree.expression -&gt; Parsetree.case list -&gt; Parsetree.expression</pre>
-<pre id="VALtry_">val try_ : ?loc:Ast_helper.loc -&gt;       ?attrs:Ast_helper.attrs -&gt;       Parsetree.expression -&gt; Parsetree.case list -&gt; Parsetree.expression</pre>
-<pre id="VALtuple">val tuple : ?loc:Ast_helper.loc -&gt;       ?attrs:Ast_helper.attrs -&gt; Parsetree.expression list -&gt; Parsetree.expression</pre>
-<pre id="VALconstruct">val construct : ?loc:Ast_helper.loc -&gt;       ?attrs:Ast_helper.attrs -&gt;       Ast_helper.lid -&gt; Parsetree.expression option -&gt; Parsetree.expression</pre>
-<pre id="VALvariant">val variant : ?loc:Ast_helper.loc -&gt;       ?attrs:Ast_helper.attrs -&gt;       Asttypes.label -&gt; Parsetree.expression option -&gt; Parsetree.expression</pre>
-<pre id="VALrecord">val record : ?loc:Ast_helper.loc -&gt;       ?attrs:Ast_helper.attrs -&gt;       (Ast_helper.lid * Parsetree.expression) list -&gt;       Parsetree.expression option -&gt; Parsetree.expression</pre>
-<pre id="VALfield">val field : ?loc:Ast_helper.loc -&gt;       ?attrs:Ast_helper.attrs -&gt;       Parsetree.expression -&gt; Ast_helper.lid -&gt; Parsetree.expression</pre>
-<pre id="VALsetfield">val setfield : ?loc:Ast_helper.loc -&gt;       ?attrs:Ast_helper.attrs -&gt;       Parsetree.expression -&gt;       Ast_helper.lid -&gt; Parsetree.expression -&gt; Parsetree.expression</pre>
-<pre id="VALarray">val array : ?loc:Ast_helper.loc -&gt;       ?attrs:Ast_helper.attrs -&gt; Parsetree.expression list -&gt; Parsetree.expression</pre>
-<pre id="VALifthenelse">val ifthenelse : ?loc:Ast_helper.loc -&gt;       ?attrs:Ast_helper.attrs -&gt;       Parsetree.expression -&gt;       Parsetree.expression -&gt; Parsetree.expression option -&gt; Parsetree.expression</pre>
-<pre id="VALsequence">val sequence : ?loc:Ast_helper.loc -&gt;       ?attrs:Ast_helper.attrs -&gt;       Parsetree.expression -&gt; Parsetree.expression -&gt; Parsetree.expression</pre>
-<pre id="VALwhile_">val while_ : ?loc:Ast_helper.loc -&gt;       ?attrs:Ast_helper.attrs -&gt;       Parsetree.expression -&gt; Parsetree.expression -&gt; Parsetree.expression</pre>
-<pre id="VALfor_">val for_ : ?loc:Ast_helper.loc -&gt;       ?attrs:Ast_helper.attrs -&gt;       Parsetree.pattern -&gt;       Parsetree.expression -&gt;       Parsetree.expression -&gt;       Asttypes.direction_flag -&gt; Parsetree.expression -&gt; Parsetree.expression</pre>
-<pre id="VALcoerce">val coerce : ?loc:Ast_helper.loc -&gt;       ?attrs:Ast_helper.attrs -&gt;       Parsetree.expression -&gt;       Parsetree.core_type option -&gt; Parsetree.core_type -&gt; Parsetree.expression</pre>
-<pre id="VALconstraint_">val constraint_ : ?loc:Ast_helper.loc -&gt;       ?attrs:Ast_helper.attrs -&gt;       Parsetree.expression -&gt; Parsetree.core_type -&gt; Parsetree.expression</pre>
-<pre id="VALsend">val send : ?loc:Ast_helper.loc -&gt;       ?attrs:Ast_helper.attrs -&gt;       Parsetree.expression -&gt; string -&gt; Parsetree.expression</pre>
-<pre id="VALnew_">val new_ : ?loc:Ast_helper.loc -&gt;       ?attrs:Ast_helper.attrs -&gt; Ast_helper.lid -&gt; Parsetree.expression</pre>
-<pre id="VALsetinstvar">val setinstvar : ?loc:Ast_helper.loc -&gt;       ?attrs:Ast_helper.attrs -&gt;       Ast_helper.str -&gt; Parsetree.expression -&gt; Parsetree.expression</pre>
-<pre id="VALoverride">val override : ?loc:Ast_helper.loc -&gt;       ?attrs:Ast_helper.attrs -&gt;       (Ast_helper.str * Parsetree.expression) list -&gt; Parsetree.expression</pre>
-<pre id="VALletmodule">val letmodule : ?loc:Ast_helper.loc -&gt;       ?attrs:Ast_helper.attrs -&gt;       Ast_helper.str -&gt;       Parsetree.module_expr -&gt; Parsetree.expression -&gt; Parsetree.expression</pre>
-<pre id="VALassert_">val assert_ : ?loc:Ast_helper.loc -&gt;       ?attrs:Ast_helper.attrs -&gt; Parsetree.expression -&gt; Parsetree.expression</pre>
-<pre id="VALlazy_">val lazy_ : ?loc:Ast_helper.loc -&gt;       ?attrs:Ast_helper.attrs -&gt; Parsetree.expression -&gt; Parsetree.expression</pre>
-<pre id="VALpoly">val poly : ?loc:Ast_helper.loc -&gt;       ?attrs:Ast_helper.attrs -&gt;       Parsetree.expression -&gt; Parsetree.core_type option -&gt; Parsetree.expression</pre>
-<pre id="VALobject_">val object_ : ?loc:Ast_helper.loc -&gt;       ?attrs:Ast_helper.attrs -&gt; Parsetree.class_structure -&gt; Parsetree.expression</pre>
-<pre id="VALnewtype">val newtype : ?loc:Ast_helper.loc -&gt;       ?attrs:Ast_helper.attrs -&gt;       string -&gt; Parsetree.expression -&gt; Parsetree.expression</pre>
-<pre id="VALpack">val pack : ?loc:Ast_helper.loc -&gt;       ?attrs:Ast_helper.attrs -&gt; Parsetree.module_expr -&gt; Parsetree.expression</pre>
-<pre id="VALopen_">val open_ : ?loc:Ast_helper.loc -&gt;       ?attrs:Ast_helper.attrs -&gt;       Asttypes.override_flag -&gt;       Ast_helper.lid -&gt; Parsetree.expression -&gt; Parsetree.expression</pre>
-<pre id="VALextension">val extension : ?loc:Ast_helper.loc -&gt;       ?attrs:Ast_helper.attrs -&gt; Parsetree.extension -&gt; Parsetree.expression</pre>
-<pre id="VALcase">val case : Parsetree.pattern -&gt;       ?guard:Parsetree.expression -&gt; Parsetree.expression -&gt; Parsetree.case</pre></div>
+<pre id="VALmk"><span class="keyword">let</span> mk:
+  (~loc: Ast_helper.loc=?, ~attrs: Ast_helper.attrs=?, Parsetree.expression_desc) =&gt;
+  Parsetree.expression;
+</pre>
+<pre id="VALattr"><span class="keyword">let</span> attr: (Parsetree.expression, Parsetree.attribute) =&gt; Parsetree.expression;
+</pre>
+<pre id="VALident"><span class="keyword">let</span> ident:
+  (~loc: Ast_helper.loc=?, ~attrs: Ast_helper.attrs=?, Ast_helper.lid) =&gt; Parsetree.expression;
+</pre>
+<pre id="VALconstant"><span class="keyword">let</span> constant:
+  (~loc: Ast_helper.loc=?, ~attrs: Ast_helper.attrs=?, Asttypes.constant) =&gt; Parsetree.expression;
+</pre>
+<pre id="VALlet_"><span class="keyword">let</span> let_:
+  (
+    ~loc: Ast_helper.loc=?,
+    ~attrs: Ast_helper.attrs=?,
+    Asttypes.rec_flag,
+    list(Parsetree.value_binding),
+    Parsetree.expression
+  ) =&gt;
+  Parsetree.expression;
+</pre>
+<pre id="VALfun_"><span class="keyword">let</span> fun_:
+  (
+    ~loc: Ast_helper.loc=?,
+    ~attrs: Ast_helper.attrs=?,
+    Asttypes.label,
+    option(Parsetree.expression),
+    Parsetree.pattern,
+    Parsetree.expression
+  ) =&gt;
+  Parsetree.expression;
+</pre>
+<pre id="VALfunction_"><span class="keyword">let</span> function_:
+  (~loc: Ast_helper.loc=?, ~attrs: Ast_helper.attrs=?, list(Parsetree.case)) =&gt;
+  Parsetree.expression;
+</pre>
+<pre id="VALapply"><span class="keyword">let</span> apply:
+  (
+    ~loc: Ast_helper.loc=?,
+    ~attrs: Ast_helper.attrs=?,
+    Parsetree.expression,
+    list((Asttypes.label, Parsetree.expression))
+  ) =&gt;
+  Parsetree.expression;
+</pre>
+<pre id="VALmatch_"><span class="keyword">let</span> match:
+  (
+    ~loc: Ast_helper.loc=?,
+    ~attrs: Ast_helper.attrs=?,
+    Parsetree.expression,
+    list(Parsetree.case)
+  ) =&gt;
+  Parsetree.expression;
+</pre>
+<pre id="VALtry_"><span class="keyword">let</span> try_:
+  (
+    ~loc: Ast_helper.loc=?,
+    ~attrs: Ast_helper.attrs=?,
+    Parsetree.expression,
+    list(Parsetree.case)
+  ) =&gt;
+  Parsetree.expression;
+</pre>
+<pre id="VALtuple"><span class="keyword">let</span> tuple:
+  (~loc: Ast_helper.loc=?, ~attrs: Ast_helper.attrs=?, list(Parsetree.expression)) =&gt;
+  Parsetree.expression;
+</pre>
+<pre id="VALconstruct"><span class="keyword">let</span> construct:
+  (
+    ~loc: Ast_helper.loc=?,
+    ~attrs: Ast_helper.attrs=?,
+    Ast_helper.lid,
+    option(Parsetree.expression)
+  ) =&gt;
+  Parsetree.expression;
+</pre>
+<pre id="VALvariant"><span class="keyword">let</span> variant:
+  (
+    ~loc: Ast_helper.loc=?,
+    ~attrs: Ast_helper.attrs=?,
+    Asttypes.label,
+    option(Parsetree.expression)
+  ) =&gt;
+  Parsetree.expression;
+</pre>
+<pre id="VALrecord"><span class="keyword">let</span> record:
+  (
+    ~loc: Ast_helper.loc=?,
+    ~attrs: Ast_helper.attrs=?,
+    list((Ast_helper.lid, Parsetree.expression)),
+    option(Parsetree.expression)
+  ) =&gt;
+  Parsetree.expression;
+</pre>
+<pre id="VALfield"><span class="keyword">let</span> field:
+  (~loc: Ast_helper.loc=?, ~attrs: Ast_helper.attrs=?, Parsetree.expression, Ast_helper.lid) =&gt;
+  Parsetree.expression;
+</pre>
+<pre id="VALsetfield"><span class="keyword">let</span> setfield:
+  (
+    ~loc: Ast_helper.loc=?,
+    ~attrs: Ast_helper.attrs=?,
+    Parsetree.expression,
+    Ast_helper.lid,
+    Parsetree.expression
+  ) =&gt;
+  Parsetree.expression;
+</pre>
+<pre id="VALarray"><span class="keyword">let</span> array:
+  (~loc: Ast_helper.loc=?, ~attrs: Ast_helper.attrs=?, list(Parsetree.expression)) =&gt;
+  Parsetree.expression;
+</pre>
+<pre id="VALifthenelse"><span class="keyword">let</span> ifthenelse:
+  (
+    ~loc: Ast_helper.loc=?,
+    ~attrs: Ast_helper.attrs=?,
+    Parsetree.expression,
+    Parsetree.expression,
+    option(Parsetree.expression)
+  ) =&gt;
+  Parsetree.expression;
+</pre>
+<pre id="VALsequence"><span class="keyword">let</span> sequence:
+  (
+    ~loc: Ast_helper.loc=?,
+    ~attrs: Ast_helper.attrs=?,
+    Parsetree.expression,
+    Parsetree.expression
+  ) =&gt;
+  Parsetree.expression;
+</pre>
+<pre id="VALwhile_"><span class="keyword">let</span> while_:
+  (
+    ~loc: Ast_helper.loc=?,
+    ~attrs: Ast_helper.attrs=?,
+    Parsetree.expression,
+    Parsetree.expression
+  ) =&gt;
+  Parsetree.expression;
+</pre>
+<pre id="VALfor_"><span class="keyword">let</span> for_:
+  (
+    ~loc: Ast_helper.loc=?,
+    ~attrs: Ast_helper.attrs=?,
+    Parsetree.pattern,
+    Parsetree.expression,
+    Parsetree.expression,
+    Asttypes.direction_flag,
+    Parsetree.expression
+  ) =&gt;
+  Parsetree.expression;
+</pre>
+<pre id="VALcoerce"><span class="keyword">let</span> coerce:
+  (
+    ~loc: Ast_helper.loc=?,
+    ~attrs: Ast_helper.attrs=?,
+    Parsetree.expression,
+    option(Parsetree.core_type),
+    Parsetree.core_type
+  ) =&gt;
+  Parsetree.expression;
+</pre>
+<pre id="VALconstraint_"><span class="keyword">let</span> constraint_:
+  (
+    ~loc: Ast_helper.loc=?,
+    ~attrs: Ast_helper.attrs=?,
+    Parsetree.expression,
+    Parsetree.core_type
+  ) =&gt;
+  Parsetree.expression;
+</pre>
+<pre id="VALsend"><span class="keyword">let</span> send:
+  (~loc: Ast_helper.loc=?, ~attrs: Ast_helper.attrs=?, Parsetree.expression, string) =&gt;
+  Parsetree.expression;
+</pre>
+<pre id="VALnew_"><span class="keyword">let</span> new_:
+  (~loc: Ast_helper.loc=?, ~attrs: Ast_helper.attrs=?, Ast_helper.lid) =&gt; Parsetree.expression;
+</pre>
+<pre id="VALsetinstvar"><span class="keyword">let</span> setinstvar:
+  (~loc: Ast_helper.loc=?, ~attrs: Ast_helper.attrs=?, Ast_helper.str, Parsetree.expression) =&gt;
+  Parsetree.expression;
+</pre>
+<pre id="VALoverride"><span class="keyword">let</span> override:
+  (
+    ~loc: Ast_helper.loc=?,
+    ~attrs: Ast_helper.attrs=?,
+    list((Ast_helper.str, Parsetree.expression))
+  ) =&gt;
+  Parsetree.expression;
+</pre>
+<pre id="VALletmodule"><span class="keyword">let</span> letmodule:
+  (
+    ~loc: Ast_helper.loc=?,
+    ~attrs: Ast_helper.attrs=?,
+    Ast_helper.str,
+    Parsetree.module_expr,
+    Parsetree.expression
+  ) =&gt;
+  Parsetree.expression;
+</pre>
+<pre id="VALassert_"><span class="keyword">let</span> assert_:
+  (~loc: Ast_helper.loc=?, ~attrs: Ast_helper.attrs=?, Parsetree.expression) =&gt;
+  Parsetree.expression;
+</pre>
+<pre id="VALlazy_"><span class="keyword">let</span> lazy_:
+  (~loc: Ast_helper.loc=?, ~attrs: Ast_helper.attrs=?, Parsetree.expression) =&gt;
+  Parsetree.expression;
+</pre>
+<pre id="VALpoly"><span class="keyword">let</span> poly:
+  (
+    ~loc: Ast_helper.loc=?,
+    ~attrs: Ast_helper.attrs=?,
+    Parsetree.expression,
+    option(Parsetree.core_type)
+  ) =&gt;
+  Parsetree.expression;
+</pre>
+<pre id="VALobject_"><span class="keyword">let</span> object_:
+  (~loc: Ast_helper.loc=?, ~attrs: Ast_helper.attrs=?, Parsetree.class_structure) =&gt;
+  Parsetree.expression;
+</pre>
+<pre id="VALnewtype"><span class="keyword">let</span> newtype:
+  (~loc: Ast_helper.loc=?, ~attrs: Ast_helper.attrs=?, string, Parsetree.expression) =&gt;
+  Parsetree.expression;
+</pre>
+<pre id="VALpack"><span class="keyword">let</span> pack:
+  (~loc: Ast_helper.loc=?, ~attrs: Ast_helper.attrs=?, Parsetree.module_expr) =&gt;
+  Parsetree.expression;
+</pre>
+<pre id="VALopen_"><span class="keyword">let</span> open_:
+  (
+    ~loc: Ast_helper.loc=?,
+    ~attrs: Ast_helper.attrs=?,
+    Asttypes.override_flag,
+    Ast_helper.lid,
+    Parsetree.expression
+  ) =&gt;
+  Parsetree.expression;
+</pre>
+<pre id="VALextension"><span class="keyword">let</span> extension:
+  (~loc: Ast_helper.loc=?, ~attrs: Ast_helper.attrs=?, Parsetree.extension) =&gt; Parsetree.expression;
+</pre>
+<pre id="VALcase"><span class="keyword">let</span> case:
+  (Parsetree.pattern, ~guard: Parsetree.expression=?, Parsetree.expression) =&gt; Parsetree.case;
+</pre></div>

@@ -14,13 +14,15 @@ Sorting and merging lists.<br>
 </div>
 <hr width="100%">
 
-<pre id="VALlist">val list : (&apos;a -&gt; &apos;a -&gt; bool) -&gt; &apos;a list -&gt; &apos;a list</pre><div class="info ">
+<pre id="VALlist"><span class="keyword">let</span> list: ((&apos;a, &apos;a) =&gt; bool, list(&apos;a)) =&gt; list(&apos;a);
+</pre><div class="info ">
 Sort a list in increasing order according to an ordering predicate.
    The predicate should return <code class="code">true</code> if its first argument is
    less than or equal to its second argument.<br>
 </div>
 
-<pre id="VALarray">val array : (&apos;a -&gt; &apos;a -&gt; bool) -&gt; &apos;a array -&gt; unit</pre><div class="info ">
+<pre id="VALarray"><span class="keyword">let</span> array: ((&apos;a, &apos;a) =&gt; bool, array(&apos;a)) =&gt; unit;
+</pre><div class="info ">
 Sort an array in increasing order according to an
    ordering predicate.
    The predicate should return <code class="code">true</code> if its first argument is
@@ -28,7 +30,8 @@ Sort an array in increasing order according to an
    The array is sorted in place.<br>
 </div>
 
-<pre id="VALmerge">val merge : (&apos;a -&gt; &apos;a -&gt; bool) -&gt; &apos;a list -&gt; &apos;a list -&gt; &apos;a list</pre><div class="info ">
+<pre id="VALmerge"><span class="keyword">let</span> merge: ((&apos;a, &apos;a) =&gt; bool, list(&apos;a), list(&apos;a)) =&gt; list(&apos;a);
+</pre><div class="info ">
 Merge two lists according to the given predicate.
    Assuming the two argument lists are sorted according to the
    predicate, <code class="code">merge</code> returns a sorted list containing the elements

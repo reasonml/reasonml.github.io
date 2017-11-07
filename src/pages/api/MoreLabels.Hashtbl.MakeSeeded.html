@@ -4,7 +4,8 @@
 &#xA0;</div>
 <h1>Functor <a href="type_MoreLabels.Hashtbl.MakeSeeded.html">MoreLabels.Hashtbl.MakeSeeded</a></h1>
 
-<pre><span class="keyword">module</span> MakeSeeded: functor (H : SeededHashedType) -&gt; SeededS  with type key = H.t</pre><table border="0" cellpadding="3" width="100%">
+<pre><span class="keyword">module</span> MakeSeeded: (H: SeededHashedType) =&gt; SeededS with type key = H.t;
+</pre><table border="0" cellpadding="3" width="100%">
 <tbody><tr>
 <td align="left" valign="top" width="1%%"><b>Parameters: </b></td>
 <td>
@@ -20,23 +21,39 @@
 </tbody></table>
 <hr width="100%">
 
-<pre id="TYPEkey"><span class="keyword">type</span> key </pre>
+<pre id="TYPEkey"><span class="keyword">type</span> key;
+</pre>
 
 
-<pre id="TYPEt"><span class="keyword">type</span> &apos;a t </pre>
+<pre id="TYPEt"><span class="keyword">type</span> t(&apos;a);
+</pre>
 
 
-<pre id="VALcreate">val create : ?random:bool -&gt; int -&gt; &apos;a t</pre>
-<pre id="VALclear">val clear : &apos;a t -&gt; unit</pre>
-<pre id="VALreset">val reset : &apos;a t -&gt; unit</pre>
-<pre id="VALcopy">val copy : &apos;a t -&gt; &apos;a t</pre>
-<pre id="VALadd">val add : &apos;a t -&gt;       key:key -&gt; data:&apos;a -&gt; unit</pre>
-<pre id="VALremove">val remove : &apos;a t -&gt; key -&gt; unit</pre>
-<pre id="VALfind">val find : &apos;a t -&gt; key -&gt; &apos;a</pre>
-<pre id="VALfind_all">val find_all : &apos;a t -&gt; key -&gt; &apos;a list</pre>
-<pre id="VALreplace">val replace : &apos;a t -&gt;       key:key -&gt; data:&apos;a -&gt; unit</pre>
-<pre id="VALmem">val mem : &apos;a t -&gt; key -&gt; bool</pre>
-<pre id="VALiter">val iter : f:(key:key -&gt; data:&apos;a -&gt; unit) -&gt;       &apos;a t -&gt; unit</pre>
-<pre id="VALfold">val fold : f:(key:key -&gt; data:&apos;a -&gt; &apos;b -&gt; &apos;b) -&gt;       &apos;a t -&gt; init:&apos;b -&gt; &apos;b</pre>
-<pre id="VALlength">val length : &apos;a t -&gt; int</pre>
-<pre id="VALstats">val stats : &apos;a t -&gt; MoreLabels.Hashtbl.statistics</pre></div>
+<pre id="VALcreate"><span class="keyword">let</span> create: (~random: bool=?, int) =&gt; t(&apos;a);
+</pre>
+<pre id="VALclear"><span class="keyword">let</span> clear: t(&apos;a) =&gt; unit;
+</pre>
+<pre id="VALreset"><span class="keyword">let</span> reset: t(&apos;a) =&gt; unit;
+</pre>
+<pre id="VALcopy"><span class="keyword">let</span> copy: t(&apos;a) =&gt; t(&apos;a);
+</pre>
+<pre id="VALadd"><span class="keyword">let</span> add: (t(&apos;a), ~key: key, ~data: &apos;a) =&gt; unit;
+</pre>
+<pre id="VALremove"><span class="keyword">let</span> remove: (t(&apos;a), key) =&gt; unit;
+</pre>
+<pre id="VALfind"><span class="keyword">let</span> find: (t(&apos;a), key) =&gt; &apos;a;
+</pre>
+<pre id="VALfind_all"><span class="keyword">let</span> find_all: (t(&apos;a), key) =&gt; list(&apos;a);
+</pre>
+<pre id="VALreplace"><span class="keyword">let</span> replace: (t(&apos;a), ~key: key, ~data: &apos;a) =&gt; unit;
+</pre>
+<pre id="VALmem"><span class="keyword">let</span> mem: (t(&apos;a), key) =&gt; bool;
+</pre>
+<pre id="VALiter"><span class="keyword">let</span> iter: (~f: (~key: key, ~data: &apos;a) =&gt; unit, t(&apos;a)) =&gt; unit;
+</pre>
+<pre id="VALfold"><span class="keyword">let</span> fold: (~f: (~key: key, ~data: &apos;a, &apos;b) =&gt; &apos;b, t(&apos;a), ~init: &apos;b) =&gt; &apos;b;
+</pre>
+<pre id="VALlength"><span class="keyword">let</span> length: t(&apos;a) =&gt; int;
+</pre>
+<pre id="VALstats"><span class="keyword">let</span> stats: t(&apos;a) =&gt; MoreLabels.Hashtbl.statistics;
+</pre></div>

@@ -5,19 +5,23 @@
 </div>
 <h1>Module type <a href="type_MoreLabels.Hashtbl.SeededHashedType.html">MoreLabels.Hashtbl.SeededHashedType</a></h1>
 
-<pre><span class="keyword">module</span> type SeededHashedType = Hashtbl.SeededHashedType</pre><hr width="100%">
+<pre><span class="keyword">module</span> type SeededHashedType = Hashtbl.SeededHashedType;
+</pre><hr width="100%">
 
-<pre id="TYPEt"><span class="keyword">type</span> t </pre>
+<pre id="TYPEt"><span class="keyword">type</span> t;
+</pre>
 <div class="info ">
 The type of the hashtable keys.<br>
 </div>
 
 
-<pre id="VALequal">val equal : t -&gt; t -&gt; bool</pre><div class="info ">
+<pre id="VALequal"><span class="keyword">let</span> equal: (t, t) =&gt; bool;
+</pre><div class="info ">
 The equality predicate used to compare keys.<br>
 </div>
 
-<pre id="VALhash">val hash : int -&gt; t -&gt; int</pre><div class="info ">
+<pre id="VALhash"><span class="keyword">let</span> hash: (int, t) =&gt; int;
+</pre><div class="info ">
 A seeded hashing function on keys.  The first argument is
           the seed.  It must be the case that if <code class="code">equal x y</code> is true,
           then <code class="code">hash seed x = hash seed y</code> for any value of <code class="code">seed</code>.

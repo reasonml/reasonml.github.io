@@ -9,133 +9,159 @@ Output signature of the functor <a href="Set.Make.html"><code class="code">Set.M
 </div>
 <hr width="100%">
 
-<pre id="TYPEelt"><span class="keyword">type</span> elt </pre>
+<pre id="TYPEelt"><span class="keyword">type</span> elt;
+</pre>
 <div class="info ">
 The type of the set elements.<br>
 </div>
 
 
-<pre id="TYPEt"><span class="keyword">type</span> t </pre>
+<pre id="TYPEt"><span class="keyword">type</span> t;
+</pre>
 <div class="info ">
 The type of sets.<br>
 </div>
 
 
-<pre id="VALempty">val empty : t</pre><div class="info ">
+<pre id="VALempty"><span class="keyword">let</span> empty: t;
+</pre><div class="info ">
 The empty set.<br>
 </div>
 
-<pre id="VALis_empty">val is_empty : t -&gt; bool</pre><div class="info ">
+<pre id="VALis_empty"><span class="keyword">let</span> is_empty: t =&gt; bool;
+</pre><div class="info ">
 Test whether a set is empty or not.<br>
 </div>
 
-<pre id="VALmem">val mem : elt -&gt; t -&gt; bool</pre><div class="info ">
+<pre id="VALmem"><span class="keyword">let</span> mem: (elt, t) =&gt; bool;
+</pre><div class="info ">
 <code class="code">mem x s</code> tests whether <code class="code">x</code> belongs to the set <code class="code">s</code>.<br>
 </div>
 
-<pre id="VALadd">val add : elt -&gt; t -&gt; t</pre><div class="info ">
+<pre id="VALadd"><span class="keyword">let</span> add: (elt, t) =&gt; t;
+</pre><div class="info ">
 <code class="code">add x s</code> returns a set containing all elements of <code class="code">s</code>,
        plus <code class="code">x</code>. If <code class="code">x</code> was already in <code class="code">s</code>, <code class="code">s</code> is returned unchanged.<br>
 </div>
 
-<pre id="VALsingleton">val singleton : elt -&gt; t</pre><div class="info ">
+<pre id="VALsingleton"><span class="keyword">let</span> singleton: elt =&gt; t;
+</pre><div class="info ">
 <code class="code">singleton x</code> returns the one-element set containing only <code class="code">x</code>.<br>
 </div>
 
-<pre id="VALremove">val remove : elt -&gt; t -&gt; t</pre><div class="info ">
+<pre id="VALremove"><span class="keyword">let</span> remove: (elt, t) =&gt; t;
+</pre><div class="info ">
 <code class="code">remove x s</code> returns a set containing all elements of <code class="code">s</code>,
        except <code class="code">x</code>. If <code class="code">x</code> was not in <code class="code">s</code>, <code class="code">s</code> is returned unchanged.<br>
 </div>
 
-<pre id="VALunion">val union : t -&gt; t -&gt; t</pre><div class="info ">
+<pre id="VALunion"><span class="keyword">let</span> union: (t, t) =&gt; t;
+</pre><div class="info ">
 Set union.<br>
 </div>
 
-<pre id="VALinter">val inter : t -&gt; t -&gt; t</pre><div class="info ">
+<pre id="VALinter"><span class="keyword">let</span> inter: (t, t) =&gt; t;
+</pre><div class="info ">
 Set intersection.<br>
 </div>
 
-<pre id="VALdiff">val diff : t -&gt; t -&gt; t</pre><div class="info ">
+<pre id="VALdiff"><span class="keyword">let</span> diff: (t, t) =&gt; t;
+</pre><div class="info ">
 Set difference.<br>
 </div>
 
-<pre id="VALcompare">val compare : t -&gt; t -&gt; int</pre><div class="info ">
+<pre id="VALcompare"><span class="keyword">let</span> compare: (t, t) =&gt; int;
+</pre><div class="info ">
 Total ordering between sets. Can be used as the ordering function
        for doing sets of sets.<br>
 </div>
 
-<pre id="VALequal">val equal : t -&gt; t -&gt; bool</pre><div class="info ">
+<pre id="VALequal"><span class="keyword">let</span> equal: (t, t) =&gt; bool;
+</pre><div class="info ">
 <code class="code">equal s1 s2</code> tests whether the sets <code class="code">s1</code> and <code class="code">s2</code> are
        equal, that is, contain equal elements.<br>
 </div>
 
-<pre id="VALsubset">val subset : t -&gt; t -&gt; bool</pre><div class="info ">
+<pre id="VALsubset"><span class="keyword">let</span> subset: (t, t) =&gt; bool;
+</pre><div class="info ">
 <code class="code">subset s1 s2</code> tests whether the set <code class="code">s1</code> is a subset of
        the set <code class="code">s2</code>.<br>
 </div>
 
-<pre id="VALiter">val iter : (elt -&gt; unit) -&gt; t -&gt; unit</pre><div class="info ">
+<pre id="VALiter"><span class="keyword">let</span> iter: (elt =&gt; unit, t) =&gt; unit;
+</pre><div class="info ">
 <code class="code">iter f s</code> applies <code class="code">f</code> in turn to all elements of <code class="code">s</code>.
        The elements of <code class="code">s</code> are presented to <code class="code">f</code> in increasing order
        with respect to the ordering over the type of the elements.<br>
 </div>
 
-<pre id="VALfold">val fold : (elt -&gt; &apos;a -&gt; &apos;a) -&gt; t -&gt; &apos;a -&gt; &apos;a</pre><div class="info ">
+<pre id="VALfold"><span class="keyword">let</span> fold: ((elt, &apos;a) =&gt; &apos;a, t, &apos;a) =&gt; &apos;a;
+</pre><div class="info ">
 <code class="code">fold f s a</code> computes <code class="code">(f xN ... (f x2 (f x1 a))...)</code>,
        where <code class="code">x1 ... xN</code> are the elements of <code class="code">s</code>, in increasing order.<br>
 </div>
 
-<pre id="VALfor_all">val for_all : (elt -&gt; bool) -&gt; t -&gt; bool</pre><div class="info ">
+<pre id="VALfor_all"><span class="keyword">let</span> for_all: (elt =&gt; bool, t) =&gt; bool;
+</pre><div class="info ">
 <code class="code">for_all p s</code> checks if all elements of the set
        satisfy the predicate <code class="code">p</code>.<br>
 </div>
 
-<pre id="VALexists">val exists : (elt -&gt; bool) -&gt; t -&gt; bool</pre><div class="info ">
+<pre id="VALexists"><span class="keyword">let</span> exists: (elt =&gt; bool, t) =&gt; bool;
+</pre><div class="info ">
 <code class="code">exists p s</code> checks if at least one element of
        the set satisfies the predicate <code class="code">p</code>.<br>
 </div>
 
-<pre id="VALfilter">val filter : (elt -&gt; bool) -&gt; t -&gt; t</pre><div class="info ">
+<pre id="VALfilter"><span class="keyword">let</span> filter: (elt =&gt; bool, t) =&gt; t;
+</pre><div class="info ">
 <code class="code">filter p s</code> returns the set of all elements in <code class="code">s</code>
        that satisfy predicate <code class="code">p</code>.<br>
 </div>
 
-<pre id="VALpartition">val partition : (elt -&gt; bool) -&gt; t -&gt; t * t</pre><div class="info ">
+<pre id="VALpartition"><span class="keyword">let</span> partition: (elt =&gt; bool, t) =&gt; (t, t);
+</pre><div class="info ">
 <code class="code">partition p s</code> returns a pair of sets <code class="code">(s1, s2)</code>, where
        <code class="code">s1</code> is the set of all the elements of <code class="code">s</code> that satisfy the
        predicate <code class="code">p</code>, and <code class="code">s2</code> is the set of all the elements of
        <code class="code">s</code> that do not satisfy <code class="code">p</code>.<br>
 </div>
 
-<pre id="VALcardinal">val cardinal : t -&gt; int</pre><div class="info ">
+<pre id="VALcardinal"><span class="keyword">let</span> cardinal: t =&gt; int;
+</pre><div class="info ">
 Return the number of elements of a set.<br>
 </div>
 
-<pre id="VALelements">val elements : t -&gt; elt list</pre><div class="info ">
+<pre id="VALelements"><span class="keyword">let</span> elements: t =&gt; list(elt);
+</pre><div class="info ">
 Return the list of all elements of the given set.
        The returned list is sorted in increasing order with respect
        to the ordering <code class="code">Ord.compare</code>, where <code class="code">Ord</code> is the argument
        given to <a href="Set.Make.html"><code class="code">Set.Make</code></a>.<br>
 </div>
 
-<pre id="VALmin_elt">val min_elt : t -&gt; elt</pre><div class="info ">
+<pre id="VALmin_elt"><span class="keyword">let</span> min_elt: t =&gt; elt;
+</pre><div class="info ">
 Return the smallest element of the given set
        (with respect to the <code class="code">Ord.compare</code> ordering), or raise
        <code class="code">Not_found</code> if the set is empty.<br>
 </div>
 
-<pre id="VALmax_elt">val max_elt : t -&gt; elt</pre><div class="info ">
+<pre id="VALmax_elt"><span class="keyword">let</span> max_elt: t =&gt; elt;
+</pre><div class="info ">
 Same as <a href="Set.S.html#VALmin_elt"><code class="code">Set.S.min_elt</code></a>, but returns the largest element of the
        given set.<br>
 </div>
 
-<pre id="VALchoose">val choose : t -&gt; elt</pre><div class="info ">
+<pre id="VALchoose"><span class="keyword">let</span> choose: t =&gt; elt;
+</pre><div class="info ">
 Return one element of the given set, or raise <code class="code">Not_found</code> if
        the set is empty. Which element is chosen is unspecified,
        but equal elements will be chosen for equal sets.<br>
 </div>
 
-<pre id="VALsplit">val split : elt -&gt; t -&gt; t * bool * t</pre><div class="info ">
+<pre id="VALsplit"><span class="keyword">let</span> split: (elt, t) =&gt; (t, bool, t);
+</pre><div class="info ">
 <code class="code">split x s</code> returns a triple <code class="code">(l, present, r)</code>, where
           <code class="code">l</code> is the set of elements of <code class="code">s</code> that are
           strictly less than <code class="code">x</code>;
@@ -145,14 +171,16 @@ Return one element of the given set, or raise <code class="code">Not_found</code
           or <code class="code">true</code> if <code class="code">s</code> contains an element equal to <code class="code">x</code>.<br>
 </div>
 
-<pre id="VALfind">val find : elt -&gt; t -&gt; elt</pre><div class="info ">
+<pre id="VALfind"><span class="keyword">let</span> find: (elt, t) =&gt; elt;
+</pre><div class="info ">
 <code class="code">find x s</code> returns the element of <code class="code">s</code> equal to <code class="code">x</code> (according
         to <code class="code">Ord.compare</code>), or raise <code class="code">Not_found</code> if no such element
         exists.<br>
 <b>Since</b> 4.01.0<br>
 </div>
 
-<pre id="VALof_list">val of_list : elt list -&gt; t</pre><div class="info ">
+<pre id="VALof_list"><span class="keyword">let</span> of_list: list(elt) =&gt; t;
+</pre><div class="info ">
 <code class="code">of_list l</code> creates a set from a list of elements.
         This is usually more efficient than folding <code class="code">add</code> over the list,
         except perhaps for lists with many duplicated elements.<br>

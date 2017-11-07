@@ -10,6 +10,40 @@ Type declarations<br>
 </div>
 <hr width="100%">
 
-<pre id="VALmk">val mk : ?loc:Ast_helper.loc -&gt;       ?attrs:Ast_helper.attrs -&gt;       ?docs:Docstrings.docs -&gt;       ?text:Docstrings.text -&gt;       ?params:(Parsetree.core_type * Asttypes.variance) list -&gt;       ?cstrs:(Parsetree.core_type * Parsetree.core_type * Ast_helper.loc) list -&gt;       ?kind:Parsetree.type_kind -&gt;       ?priv:Asttypes.private_flag -&gt;       ?manifest:Parsetree.core_type -&gt; Ast_helper.str -&gt; Parsetree.type_declaration</pre>
-<pre id="VALconstructor">val constructor : ?loc:Ast_helper.loc -&gt;       ?attrs:Ast_helper.attrs -&gt;       ?info:Docstrings.info -&gt;       ?args:Parsetree.core_type list -&gt;       ?res:Parsetree.core_type -&gt;       Ast_helper.str -&gt; Parsetree.constructor_declaration</pre>
-<pre id="VALfield">val field : ?loc:Ast_helper.loc -&gt;       ?attrs:Ast_helper.attrs -&gt;       ?info:Docstrings.info -&gt;       ?mut:Asttypes.mutable_flag -&gt;       Ast_helper.str -&gt; Parsetree.core_type -&gt; Parsetree.label_declaration</pre></div>
+<pre id="VALmk"><span class="keyword">let</span> mk:
+  (
+    ~loc: Ast_helper.loc=?,
+    ~attrs: Ast_helper.attrs=?,
+    ~docs: Docstrings.docs=?,
+    ~text: Docstrings.text=?,
+    ~params: list((Parsetree.core_type, Asttypes.variance))=?,
+    ~cstrs: list((Parsetree.core_type, Parsetree.core_type, Ast_helper.loc))=?,
+    ~kind: Parsetree.type_kind=?,
+    ~priv: Asttypes.private_flag=?,
+    ~manifest: Parsetree.core_type=?,
+    Ast_helper.str
+  ) =&gt;
+  Parsetree.type_declaration;
+</pre>
+<pre id="VALconstructor"><span class="keyword">let</span> constructor:
+  (
+    ~loc: Ast_helper.loc=?,
+    ~attrs: Ast_helper.attrs=?,
+    ~info: Docstrings.info=?,
+    ~args: list(Parsetree.core_type)=?,
+    ~res: Parsetree.core_type=?,
+    Ast_helper.str
+  ) =&gt;
+  Parsetree.constructor_declaration;
+</pre>
+<pre id="VALfield"><span class="keyword">let</span> field:
+  (
+    ~loc: Ast_helper.loc=?,
+    ~attrs: Ast_helper.attrs=?,
+    ~info: Docstrings.info=?,
+    ~mut: Asttypes.mutable_flag=?,
+    Ast_helper.str,
+    Parsetree.core_type
+  ) =&gt;
+  Parsetree.label_declaration;
+</pre></div>

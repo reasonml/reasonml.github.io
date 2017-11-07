@@ -60,7 +60,8 @@ A value of type <code class="code">position</code> describes a point in a source
 </p></div>
 
 
-<pre id="VALdummy_pos">val dummy_pos : position</pre><div class="info ">
+<pre id="VALdummy_pos"><span class="keyword">let</span> dummy_pos: position;
+</pre><div class="info ">
 A value of type <code class="code">position</code>, guaranteed to be different from any
    valid position.<br>
 </div>
@@ -172,20 +173,23 @@ The type of lexer buffers. A lexer buffer is the argument passed
 </p></div>
 
 
-<pre id="VALfrom_channel">val from_channel : Pervasives.in_channel -&gt; lexbuf</pre><div class="info ">
+<pre id="VALfrom_channel"><span class="keyword">let</span> from_channel: Pervasives.in_channel =&gt; lexbuf;
+</pre><div class="info ">
 Create a lexer buffer on the given input channel.
    <code class="code">Lexing.from_channel inchan</code> returns a lexer buffer which reads
    from the input channel <code class="code">inchan</code>, at the current reading position.<br>
 </div>
 
-<pre id="VALfrom_string">val from_string : string -&gt; lexbuf</pre><div class="info ">
+<pre id="VALfrom_string"><span class="keyword">let</span> from_string: string =&gt; lexbuf;
+</pre><div class="info ">
 Create a lexer buffer which reads from
    the given string. Reading starts from the first character in
    the string. An end-of-input condition is generated when the
    end of the string is reached.<br>
 </div>
 
-<pre id="VALfrom_function">val from_function : (bytes -&gt; int -&gt; int) -&gt; lexbuf</pre><div class="info ">
+<pre id="VALfrom_function"><span class="keyword">let</span> from_function: ((bytes, int) =&gt; int) =&gt; lexbuf;
+</pre><div class="info ">
 Create a lexer buffer with the given function as its reading method.
    When the scanner needs more characters, it will call the given
    function, giving it a byte sequence <code class="code">s</code> and a byte
@@ -207,39 +211,46 @@ The following functions can be called from the semantic actions
    <code class="code">ocamllex</code>, is bound to the lexer buffer passed to the parsing
    function.<br>
 
-<pre id="VALlexeme">val lexeme : lexbuf -&gt; string</pre><div class="info ">
+<pre id="VALlexeme"><span class="keyword">let</span> lexeme: lexbuf =&gt; string;
+</pre><div class="info ">
 <code class="code">Lexing.lexeme lexbuf</code> returns the string matched by
            the regular expression.<br>
 </div>
 
-<pre id="VALlexeme_char">val lexeme_char : lexbuf -&gt; int -&gt; char</pre><div class="info ">
+<pre id="VALlexeme_char"><span class="keyword">let</span> lexeme_char: (lexbuf, int) =&gt; char;
+</pre><div class="info ">
 <code class="code">Lexing.lexeme_char lexbuf i</code> returns character number <code class="code">i</code> in
    the matched string.<br>
 </div>
 
-<pre id="VALlexeme_start">val lexeme_start : lexbuf -&gt; int</pre><div class="info ">
+<pre id="VALlexeme_start"><span class="keyword">let</span> lexeme_start: lexbuf =&gt; int;
+</pre><div class="info ">
 <code class="code">Lexing.lexeme_start lexbuf</code> returns the offset in the
    input stream of the first character of the matched string.
    The first character of the stream has offset 0.<br>
 </div>
 
-<pre id="VALlexeme_end">val lexeme_end : lexbuf -&gt; int</pre><div class="info ">
+<pre id="VALlexeme_end"><span class="keyword">let</span> lexeme_end: lexbuf =&gt; int;
+</pre><div class="info ">
 <code class="code">Lexing.lexeme_end lexbuf</code> returns the offset in the input stream
    of the character following the last character of the matched
    string. The first character of the stream has offset 0.<br>
 </div>
 
-<pre id="VALlexeme_start_p">val lexeme_start_p : lexbuf -&gt; position</pre><div class="info ">
+<pre id="VALlexeme_start_p"><span class="keyword">let</span> lexeme_start_p: lexbuf =&gt; position;
+</pre><div class="info ">
 Like <code class="code">lexeme_start</code>, but return a complete <code class="code">position</code> instead
     of an offset.<br>
 </div>
 
-<pre id="VALlexeme_end_p">val lexeme_end_p : lexbuf -&gt; position</pre><div class="info ">
+<pre id="VALlexeme_end_p"><span class="keyword">let</span> lexeme_end_p: lexbuf =&gt; position;
+</pre><div class="info ">
 Like <code class="code">lexeme_end</code>, but return a complete <code class="code">position</code> instead
     of an offset.<br>
 </div>
 
-<pre id="VALnew_line">val new_line : lexbuf -&gt; unit</pre><div class="info ">
+<pre id="VALnew_line"><span class="keyword">let</span> new_line: lexbuf =&gt; unit;
+</pre><div class="info ">
 Update the <code class="code">lex_curr_p</code> field of the lexbuf to reflect the start
     of a new line.  You can call this function in the semantic action
     of the rule that matches the end-of-line character.<br>
@@ -248,7 +259,8 @@ Update the <code class="code">lex_curr_p</code> field of the lexbuf to reflect t
 <br>
 <h6 id="6_Miscellaneousfunctions">Miscellaneous functions</h6><br>
 
-<pre id="VALflush_input">val flush_input : lexbuf -&gt; unit</pre><div class="info ">
+<pre id="VALflush_input"><span class="keyword">let</span> flush_input: lexbuf =&gt; unit;
+</pre><div class="info ">
 Discard the contents of the buffer and reset the current
     position to 0.  The next use of the lexbuf will trigger a
     refill.<br>

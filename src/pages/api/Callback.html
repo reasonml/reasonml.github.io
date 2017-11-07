@@ -15,13 +15,15 @@ Registering OCaml values with the C runtime.
 </p></div>
 <hr width="100%">
 
-<pre id="VALregister">val register : string -&gt; &apos;a -&gt; unit</pre><div class="info ">
+<pre id="VALregister"><span class="keyword">let</span> register: (string, &apos;a) =&gt; unit;
+</pre><div class="info ">
 <code class="code">Callback.register n v</code> registers the value <code class="code">v</code> under
    the name <code class="code">n</code>. C code can later retrieve a handle to <code class="code">v</code>
    by calling <code class="code">caml_named_value(n)</code>.<br>
 </div>
 
-<pre id="VALregister_exception">val register_exception : string -&gt; exn -&gt; unit</pre><div class="info ">
+<pre id="VALregister_exception"><span class="keyword">let</span> register_exception: (string, exn) =&gt; unit;
+</pre><div class="info ">
 <code class="code">Callback.register_exception n exn</code> registers the
    exception contained in the exception value <code class="code">exn</code>
    under the name <code class="code">n</code>. C code can later retrieve a handle to

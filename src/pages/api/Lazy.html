@@ -10,7 +10,8 @@ Deferred computations.<br>
 </div>
 <hr width="100%">
 
-<pre id="TYPEt"><span class="keyword">type</span> &apos;a t = &apos;a lazy_t </pre>
+<pre id="TYPEt"><span class="keyword">type</span> t(&apos;a) = lazy_t(&apos;a);
+</pre>
 <div class="info ">
 A value of type <code class="code">&apos;a Lazy.t</code> is a deferred computation, called
    a suspension, that has a result of type <code class="code">&apos;a</code>.  The special
@@ -39,9 +40,11 @@ A value of type <code class="code">&apos;a Lazy.t</code> is a deferred computati
 </p></div>
 
 
-<pre id="EXCEPTIONUndefined"><span class="keyword">exception</span> Undefined</pre>
+<pre id="EXCEPTIONUndefined"><span class="keyword">exception</span> Undefined;
+</pre>
 
-<pre id="VALforce">val force : &apos;a t -&gt; &apos;a</pre><div class="info ">
+<pre id="VALforce"><span class="keyword">let</span> force: t(&apos;a) =&gt; &apos;a;
+</pre><div class="info ">
 <code class="code">force x</code> forces the suspension <code class="code">x</code> and returns its result.
    If <code class="code">x</code> has already been forced, <code class="code">Lazy.force x</code> returns the
    same value again without recomputing it.  If it raised an exception,
@@ -50,7 +53,8 @@ A value of type <code class="code">&apos;a Lazy.t</code> is a deferred computati
    recursively.<br>
 </div>
 
-<pre id="VALforce_val">val force_val : &apos;a t -&gt; &apos;a</pre><div class="info ">
+<pre id="VALforce_val"><span class="keyword">let</span> force_val: t(&apos;a) =&gt; &apos;a;
+</pre><div class="info ">
 <code class="code">force_val x</code> forces the suspension <code class="code">x</code> and returns its
     result.  If <code class="code">x</code> has already been forced, <code class="code">force_val x</code>
     returns the same value again without recomputing it.
@@ -60,33 +64,39 @@ A value of type <code class="code">&apos;a Lazy.t</code> is a deferred computati
     whether <code class="code">force_val x</code> raises the same exception or <code class="code">Undefined</code>.<br>
 </div>
 
-<pre id="VALfrom_fun">val from_fun : (unit -&gt; &apos;a) -&gt; &apos;a t</pre><div class="info ">
+<pre id="VALfrom_fun"><span class="keyword">let</span> from_fun: (unit =&gt; &apos;a) =&gt; t(&apos;a);
+</pre><div class="info ">
 <code class="code">from_fun f</code> is the same as <code class="code">lazy (f ())</code> but slightly more efficient.<br>
 <b>Since</b> 4.00.0<br>
 </div>
 
-<pre id="VALfrom_val">val from_val : &apos;a -&gt; &apos;a t</pre><div class="info ">
+<pre id="VALfrom_val"><span class="keyword">let</span> from_val: &apos;a =&gt; t(&apos;a);
+</pre><div class="info ">
 <code class="code">from_val v</code> returns an already-forced suspension of <code class="code">v</code>.
     This is for special purposes only and should not be confused with
     <code class="code">lazy (v)</code>.<br>
 <b>Since</b> 4.00.0<br>
 </div>
 
-<pre id="VALis_val">val is_val : &apos;a t -&gt; bool</pre><div class="info ">
+<pre id="VALis_val"><span class="keyword">let</span> is_val: t(&apos;a) =&gt; bool;
+</pre><div class="info ">
 <code class="code">is_val x</code> returns <code class="code">true</code> if <code class="code">x</code> has already been forced and
     did not raise an exception.<br>
 <b>Since</b> 4.00.0<br>
 </div>
 
-<pre id="VALlazy_from_fun">val lazy_from_fun : (unit -&gt; &apos;a) -&gt; &apos;a t</pre><div class="info ">
+<pre id="VALlazy_from_fun"><span class="keyword">let</span> lazy_from_fun: (unit =&gt; &apos;a) =&gt; t(&apos;a);
+</pre><div class="info ">
 <span class="warning">Deprecated.</span>synonym for <code class="code">from_fun</code>.<br>
 </div>
 
-<pre id="VALlazy_from_val">val lazy_from_val : &apos;a -&gt; &apos;a t</pre><div class="info ">
+<pre id="VALlazy_from_val"><span class="keyword">let</span> lazy_from_val: &apos;a =&gt; t(&apos;a);
+</pre><div class="info ">
 <span class="warning">Deprecated.</span>synonym for <code class="code">from_val</code>.<br>
 </div>
 
-<pre id="VALlazy_is_val">val lazy_is_val : &apos;a t -&gt; bool</pre><div class="info ">
+<pre id="VALlazy_is_val"><span class="keyword">let</span> lazy_is_val: t(&apos;a) =&gt; bool;
+</pre><div class="info ">
 <span class="warning">Deprecated.</span>synonym for <code class="code">is_val</code>.<br>
 </div>
 </div>

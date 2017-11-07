@@ -12,16 +12,19 @@ Pseudo-random number generators (PRNG).<br>
 <br>
 <h6 id="6_Basicfunctions">Basic functions</h6><br>
 
-<pre id="VALinit">val init : int -&gt; unit</pre><div class="info ">
+<pre id="VALinit"><span class="keyword">let</span> init: int =&gt; unit;
+</pre><div class="info ">
 Initialize the generator, using the argument as a seed.
      The same seed will always yield the same sequence of numbers.<br>
 </div>
 
-<pre id="VALfull_init">val full_init : int array -&gt; unit</pre><div class="info ">
+<pre id="VALfull_init"><span class="keyword">let</span> full_init: array(int) =&gt; unit;
+</pre><div class="info ">
 Same as <a href="Random.html#VALinit"><code class="code">Random.init</code></a> but takes more data as seed.<br>
 </div>
 
-<pre id="VALself_init">val self_init : unit -&gt; unit</pre><div class="info ">
+<pre id="VALself_init"><span class="keyword">let</span> self_init: unit =&gt; unit;
+</pre><div class="info ">
 Initialize the generator with a random seed chosen
    in a system-dependent way.  If <code class="code">/dev/urandom</code> is available on
    the host machine, it is used to provide a highly random initial
@@ -29,41 +32,48 @@ Initialize the generator with a random seed chosen
    parameters (current time, process IDs).<br>
 </div>
 
-<pre id="VALbits">val bits : unit -&gt; int</pre><div class="info ">
+<pre id="VALbits"><span class="keyword">let</span> bits: unit =&gt; int;
+</pre><div class="info ">
 Return 30 random bits in a nonnegative integer.<br>
 <b>Before 3.12.0 </b> used a different algorithm (affects all the following
                    functions)<br>
 </div>
 
-<pre id="VALint">val int : int -&gt; int</pre><div class="info ">
+<pre id="VALint"><span class="keyword">let</span> int: int =&gt; int;
+</pre><div class="info ">
 <code class="code">Random.int bound</code> returns a random integer between 0 (inclusive)
      and <code class="code">bound</code> (exclusive).  <code class="code">bound</code> must be greater than 0 and less
      than 2<sup class="superscript">30</sup>.<br>
 </div>
 
-<pre id="VALint32">val int32 : Int32.t -&gt; Int32.t</pre><div class="info ">
+<pre id="VALint32"><span class="keyword">let</span> int32: Int32.t =&gt; Int32.t;
+</pre><div class="info ">
 <code class="code">Random.int32 bound</code> returns a random integer between 0 (inclusive)
      and <code class="code">bound</code> (exclusive).  <code class="code">bound</code> must be greater than 0.<br>
 </div>
 
-<pre id="VALnativeint">val nativeint : Nativeint.t -&gt; Nativeint.t</pre><div class="info ">
+<pre id="VALnativeint"><span class="keyword">let</span> nativeint: Nativeint.t =&gt; Nativeint.t;
+</pre><div class="info ">
 <code class="code">Random.nativeint bound</code> returns a random integer between 0 (inclusive)
      and <code class="code">bound</code> (exclusive).  <code class="code">bound</code> must be greater than 0.<br>
 </div>
 
-<pre id="VALint64">val int64 : Int64.t -&gt; Int64.t</pre><div class="info ">
+<pre id="VALint64"><span class="keyword">let</span> int64: Int64.t =&gt; Int64.t;
+</pre><div class="info ">
 <code class="code">Random.int64 bound</code> returns a random integer between 0 (inclusive)
      and <code class="code">bound</code> (exclusive).  <code class="code">bound</code> must be greater than 0.<br>
 </div>
 
-<pre id="VALfloat">val float : float -&gt; float</pre><div class="info ">
+<pre id="VALfloat"><span class="keyword">let</span> float: float =&gt; float;
+</pre><div class="info ">
 <code class="code">Random.float bound</code> returns a random floating-point number
    between 0 and <code class="code">bound</code> (inclusive).  If <code class="code">bound</code> is
    negative, the result is negative or zero.  If <code class="code">bound</code> is 0,
    the result is 0.<br>
 </div>
 
-<pre id="VALbool">val bool : unit -&gt; bool</pre><div class="info ">
+<pre id="VALbool"><span class="keyword">let</span> bool: unit =&gt; bool;
+</pre><div class="info ">
 <code class="code">Random.bool ()</code> returns <code class="code">true</code> or <code class="code">false</code> with probability 0.5 each.<br>
 </div>
 <br>
@@ -78,11 +88,13 @@ The functions from module <code class="code">State</code> manipulate the current
     other parts of the program.<br>
 
 <pre><span class="keyword">module</span> State: sig .. end</pre>
-<pre id="VALget_state">val get_state : unit -&gt; State.t</pre><div class="info ">
+<pre id="VALget_state"><span class="keyword">let</span> get_state: unit =&gt; State.t;
+</pre><div class="info ">
 Return the current state of the generator used by the basic functions.<br>
 </div>
 
-<pre id="VALset_state">val set_state : State.t -&gt; unit</pre><div class="info ">
+<pre id="VALset_state"><span class="keyword">let</span> set_state: State.t =&gt; unit;
+</pre><div class="info ">
 Set the state of the generator used by the basic functions.<br>
 </div>
 </div>

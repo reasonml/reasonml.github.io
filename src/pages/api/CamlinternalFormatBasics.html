@@ -245,7 +245,8 @@
 
 
 
-<pre id="TYPEchar_set"><span class="keyword">type</span> char_set = string </pre>
+<pre id="TYPEchar_set"><span class="keyword">type</span> char_set = string;
+</pre>
 
 
 <pre><span class="keyword">type</span> counter = </pre><table class="typetable">
@@ -298,7 +299,8 @@
 
 
 
-<pre id="TYPEpad_option"><span class="keyword">type</span> pad_option = int option </pre>
+<pre id="TYPEpad_option"><span class="keyword">type</span> pad_option = option(int);
+</pre>
 
 
 <pre><span class="keyword">type</span> (&apos;a, &apos;b) precision = </pre><table class="typetable">
@@ -326,7 +328,8 @@
 
 
 
-<pre id="TYPEprec_option"><span class="keyword">type</span> prec_option = int option </pre>
+<pre id="TYPEprec_option"><span class="keyword">type</span> prec_option = option(int);
+</pre>
 
 
 <pre><span class="keyword">type</span> (&apos;a, &apos;b, &apos;c) custom_arity = </pre><table class="typetable">
@@ -485,7 +488,8 @@
 
 
 
-<pre id="TYPEfmtty"><span class="keyword">type</span> (&apos;a, &apos;b, &apos;c, &apos;d, &apos;e, &apos;f) fmtty = (&apos;a, &apos;b, &apos;c, &apos;d, &apos;e, &apos;f, &apos;a, &apos;b, &apos;c, &apos;d, &apos;e, &apos;f)       fmtty_rel </pre>
+<pre id="TYPEfmtty"><span class="keyword">type</span> fmtty(&apos;a, &apos;b, &apos;c, &apos;d, &apos;e, &apos;f) = fmtty_rel(&apos;a, &apos;b, &apos;c, &apos;d, &apos;e, &apos;f, &apos;a, &apos;b, &apos;c, &apos;d, &apos;e, &apos;f);
+</pre>
 
 
 <pre><span class="keyword">type</span> (&apos;a1, &apos;b1, &apos;c1, &apos;d1, &apos;e1, &apos;f1, &apos;a2, &apos;b2, &apos;c2, &apos;d2, &apos;e2, &apos;f2) fmtty_rel = </pre><table class="typetable">
@@ -920,6 +924,16 @@ List of format elements.<br>
 
 
 
-<pre id="VALconcat_fmtty">val concat_fmtty : (&apos;g1, &apos;b1, &apos;c1, &apos;j1, &apos;d1, &apos;a1, &apos;g2, &apos;b2, &apos;c2, &apos;j2, &apos;d2, &apos;a2)       fmtty_rel -&gt;       (&apos;a1, &apos;b1, &apos;c1, &apos;d1, &apos;e1, &apos;f1, &apos;a2, &apos;b2, &apos;c2, &apos;d2, &apos;e2, &apos;f2)       fmtty_rel -&gt;       (&apos;g1, &apos;b1, &apos;c1, &apos;j1, &apos;e1, &apos;f1, &apos;g2, &apos;b2, &apos;c2, &apos;j2, &apos;e2, &apos;f2)       fmtty_rel</pre>
-<pre id="VALerase_rel">val erase_rel : (&apos;a, &apos;b, &apos;c, &apos;d, &apos;e, &apos;f, &apos;g, &apos;h, &apos;i, &apos;j, &apos;k, &apos;l)       fmtty_rel -&gt;       (&apos;a, &apos;b, &apos;c, &apos;d, &apos;e, &apos;f) fmtty</pre>
-<pre id="VALconcat_fmt">val concat_fmt : (&apos;a, &apos;b, &apos;c, &apos;d, &apos;e, &apos;f) fmt -&gt;       (&apos;f, &apos;b, &apos;c, &apos;e, &apos;g, &apos;h) fmt -&gt;       (&apos;a, &apos;b, &apos;c, &apos;d, &apos;g, &apos;h) fmt</pre></div>
+<pre id="VALconcat_fmtty"><span class="keyword">let</span> concat_fmtty:
+  (
+    fmtty_rel(&apos;g1, &apos;b1, &apos;c1, &apos;j1, &apos;d1, &apos;a1, &apos;g2, &apos;b2, &apos;c2, &apos;j2, &apos;d2, &apos;a2),
+    fmtty_rel(&apos;a1, &apos;b1, &apos;c1, &apos;d1, &apos;e1, &apos;f1, &apos;a2, &apos;b2, &apos;c2, &apos;d2, &apos;e2, &apos;f2)
+  ) =&gt;
+  fmtty_rel(&apos;g1, &apos;b1, &apos;c1, &apos;j1, &apos;e1, &apos;f1, &apos;g2, &apos;b2, &apos;c2, &apos;j2, &apos;e2, &apos;f2);
+</pre>
+<pre id="VALerase_rel"><span class="keyword">let</span> erase_rel:
+  fmtty_rel(&apos;a, &apos;b, &apos;c, &apos;d, &apos;e, &apos;f, &apos;g, &apos;h, &apos;i, &apos;j, &apos;k, &apos;l) =&gt; fmtty(&apos;a, &apos;b, &apos;c, &apos;d, &apos;e, &apos;f);
+</pre>
+<pre id="VALconcat_fmt"><span class="keyword">let</span> concat_fmt:
+  (fmt(&apos;a, &apos;b, &apos;c, &apos;d, &apos;e, &apos;f), fmt(&apos;f, &apos;b, &apos;c, &apos;e, &apos;g, &apos;h)) =&gt; fmt(&apos;a, &apos;b, &apos;c, &apos;d, &apos;g, &apos;h);
+</pre></div>

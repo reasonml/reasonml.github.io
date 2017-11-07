@@ -5,20 +5,24 @@
 </div>
 <h1>Module <a href="type_StdLabels.Bytes.html">StdLabels.Bytes</a></h1>
 
-<pre><span class="keyword">module</span> Bytes: BytesLabels</pre><hr width="100%">
+<pre><span class="keyword">module</span> Bytes: BytesLabels;
+</pre><hr width="100%">
 
-<pre id="VALlength">val length : bytes -&gt; int</pre><div class="info ">
+<pre id="VALlength"><span class="keyword">let</span> length: bytes =&gt; int;
+</pre><div class="info ">
 Return the length (number of bytes) of the argument.<br>
 </div>
 
-<pre id="VALget">val get : bytes -&gt; int -&gt; char</pre><div class="info ">
+<pre id="VALget"><span class="keyword">let</span> get: (bytes, int) =&gt; char;
+</pre><div class="info ">
 <code class="code">get s n</code> returns the byte at index <code class="code">n</code> in argument <code class="code">s</code>.
 <p>
 
     Raise <code class="code">Invalid_argument</code> if <code class="code">n</code> not a valid index in <code class="code">s</code>.<br>
 </p></div>
 
-<pre id="VALset">val set : bytes -&gt; int -&gt; char -&gt; unit</pre><div class="info ">
+<pre id="VALset"><span class="keyword">let</span> set: (bytes, int, char) =&gt; unit;
+</pre><div class="info ">
 <code class="code">set s n c</code> modifies <code class="code">s</code> in place, replacing the byte at index <code class="code">n</code>
     with <code class="code">c</code>.
 <p>
@@ -26,7 +30,8 @@ Return the length (number of bytes) of the argument.<br>
     Raise <code class="code">Invalid_argument</code> if <code class="code">n</code> is not a valid index in <code class="code">s</code>.<br>
 </p></div>
 
-<pre id="VALcreate">val create : int -&gt; bytes</pre><div class="info ">
+<pre id="VALcreate"><span class="keyword">let</span> create: int =&gt; bytes;
+</pre><div class="info ">
 <code class="code">create n</code> returns a new byte sequence of length <code class="code">n</code>. The
     sequence is uninitialized and contains arbitrary bytes.
 <p>
@@ -34,7 +39,8 @@ Return the length (number of bytes) of the argument.<br>
     Raise <code class="code">Invalid_argument</code> if <code class="code">n &lt; 0</code> or <code class="code">n &gt; </code><a href="Sys.html#VALmax_string_length"><code class="code">Sys.max_string_length</code></a>.<br>
 </p></div>
 
-<pre id="VALmake">val make : int -&gt; char -&gt; bytes</pre><div class="info ">
+<pre id="VALmake"><span class="keyword">let</span> make: (int, char) =&gt; bytes;
+</pre><div class="info ">
 <code class="code">make n c</code> returns a new byte sequence of length <code class="code">n</code>, filled with
     the byte <code class="code">c</code>.
 <p>
@@ -42,7 +48,8 @@ Return the length (number of bytes) of the argument.<br>
     Raise <code class="code">Invalid_argument</code> if <code class="code">n &lt; 0</code> or <code class="code">n &gt; </code><a href="Sys.html#VALmax_string_length"><code class="code">Sys.max_string_length</code></a>.<br>
 </p></div>
 
-<pre id="VALinit">val init : int -&gt; f:(int -&gt; char) -&gt; bytes</pre><div class="info ">
+<pre id="VALinit"><span class="keyword">let</span> init: (int, ~f: int =&gt; char) =&gt; bytes;
+</pre><div class="info ">
 <code class="code">init n f</code> returns a fresh byte sequence of length <code class="code">n</code>,
     with character <code class="code">i</code> initialized to the result of <code class="code">f i</code>.
 <p>
@@ -50,26 +57,31 @@ Return the length (number of bytes) of the argument.<br>
     Raise <code class="code">Invalid_argument</code> if <code class="code">n &lt; 0</code> or <code class="code">n &gt; </code><a href="Sys.html#VALmax_string_length"><code class="code">Sys.max_string_length</code></a>.<br>
 </p></div>
 
-<pre id="VALempty">val empty : bytes</pre><div class="info ">
+<pre id="VALempty"><span class="keyword">let</span> empty: bytes;
+</pre><div class="info ">
 A byte sequence of size 0.<br>
 </div>
 
-<pre id="VALcopy">val copy : bytes -&gt; bytes</pre><div class="info ">
+<pre id="VALcopy"><span class="keyword">let</span> copy: bytes =&gt; bytes;
+</pre><div class="info ">
 Return a new byte sequence that contains the same bytes as the
     argument.<br>
 </div>
 
-<pre id="VALof_string">val of_string : string -&gt; bytes</pre><div class="info ">
+<pre id="VALof_string"><span class="keyword">let</span> of_string: string =&gt; bytes;
+</pre><div class="info ">
 Return a new byte sequence that contains the same bytes as the
     given string.<br>
 </div>
 
-<pre id="VALto_string">val to_string : bytes -&gt; string</pre><div class="info ">
+<pre id="VALto_string"><span class="keyword">let</span> to_string: bytes =&gt; string;
+</pre><div class="info ">
 Return a new string that contains the same bytes as the given byte
     sequence.<br>
 </div>
 
-<pre id="VALsub">val sub : bytes -&gt; pos:int -&gt; len:int -&gt; bytes</pre><div class="info ">
+<pre id="VALsub"><span class="keyword">let</span> sub: (bytes, ~pos: int, ~len: int) =&gt; bytes;
+</pre><div class="info ">
 <code class="code">sub s start len</code> returns a new byte sequence of length <code class="code">len</code>,
     containing the subsequence of <code class="code">s</code> that starts at position <code class="code">start</code>
     and has length <code class="code">len</code>.
@@ -79,11 +91,13 @@ Return a new string that contains the same bytes as the given byte
     valid range of <code class="code">s</code>.<br>
 </p></div>
 
-<pre id="VALsub_string">val sub_string : bytes -&gt; int -&gt; int -&gt; string</pre><div class="info ">
+<pre id="VALsub_string"><span class="keyword">let</span> sub_string: (bytes, int, int) =&gt; string;
+</pre><div class="info ">
 Same as <code class="code">sub</code> but return a string instead of a byte sequence.<br>
 </div>
 
-<pre id="VALfill">val fill : bytes -&gt; pos:int -&gt; len:int -&gt; char -&gt; unit</pre><div class="info ">
+<pre id="VALfill"><span class="keyword">let</span> fill: (bytes, ~pos: int, ~len: int, char) =&gt; unit;
+</pre><div class="info ">
 <code class="code">fill s start len c</code> modifies <code class="code">s</code> in place, replacing <code class="code">len</code>
     characters with <code class="code">c</code>, starting at <code class="code">start</code>.
 <p>
@@ -92,7 +106,8 @@ Same as <code class="code">sub</code> but return a string instead of a byte sequ
     valid range of <code class="code">s</code>.<br>
 </p></div>
 
-<pre id="VALblit">val blit : src:bytes -&gt; src_pos:int -&gt; dst:bytes -&gt; dst_pos:int -&gt; len:int -&gt; unit</pre><div class="info ">
+<pre id="VALblit"><span class="keyword">let</span> blit: (~src: bytes, ~src_pos: int, ~dst: bytes, ~dst_pos: int, ~len: int) =&gt; unit;
+</pre><div class="info ">
 <code class="code">blit src srcoff dst dstoff len</code> copies <code class="code">len</code> bytes from sequence
     <code class="code">src</code>, starting at index <code class="code">srcoff</code>, to sequence <code class="code">dst</code>, starting at
     index <code class="code">dstoff</code>. It works correctly even if <code class="code">src</code> and <code class="code">dst</code> are the
@@ -105,48 +120,56 @@ Same as <code class="code">sub</code> but return a string instead of a byte sequ
     do not designate a valid range of <code class="code">dst</code>.<br>
 </p></div>
 
-<pre id="VALconcat">val concat : sep:bytes -&gt; bytes list -&gt; bytes</pre><div class="info ">
+<pre id="VALconcat"><span class="keyword">let</span> concat: (~sep: bytes, list(bytes)) =&gt; bytes;
+</pre><div class="info ">
 <code class="code">concat sep sl</code> concatenates the list of byte sequences <code class="code">sl</code>,
     inserting the separator byte sequence <code class="code">sep</code> between each, and
     returns the result as a new byte sequence.<br>
 </div>
 
-<pre id="VALiter">val iter : f:(char -&gt; unit) -&gt; bytes -&gt; unit</pre><div class="info ">
+<pre id="VALiter"><span class="keyword">let</span> iter: (~f: char =&gt; unit, bytes) =&gt; unit;
+</pre><div class="info ">
 <code class="code">iter f s</code> applies function <code class="code">f</code> in turn to all the bytes of <code class="code">s</code>.
     It is equivalent to <code class="code">f (get s 0); f (get s 1); ...; f (get s
     (length s - 1)); ()</code>.<br>
 </div>
 
-<pre id="VALiteri">val iteri : f:(int -&gt; char -&gt; unit) -&gt; bytes -&gt; unit</pre><div class="info ">
+<pre id="VALiteri"><span class="keyword">let</span> iteri: (~f: (int, char) =&gt; unit, bytes) =&gt; unit;
+</pre><div class="info ">
 Same as <a href="Bytes.html#VALiter"><code class="code">Bytes.iter</code></a>, but the function is applied to the index of
     the byte as first argument and the byte itself as second
     argument.<br>
 </div>
 
-<pre id="VALmap">val map : f:(char -&gt; char) -&gt; bytes -&gt; bytes</pre><div class="info ">
+<pre id="VALmap"><span class="keyword">let</span> map: (~f: char =&gt; char, bytes) =&gt; bytes;
+</pre><div class="info ">
 <code class="code">map f s</code> applies function <code class="code">f</code> in turn to all the bytes of <code class="code">s</code> and
     stores the resulting bytes in a new sequence that is returned as
     the result.<br>
 </div>
 
-<pre id="VALmapi">val mapi : f:(int -&gt; char -&gt; char) -&gt; bytes -&gt; bytes</pre><div class="info ">
+<pre id="VALmapi"><span class="keyword">let</span> mapi: (~f: (int, char) =&gt; char, bytes) =&gt; bytes;
+</pre><div class="info ">
 <code class="code">mapi f s</code> calls <code class="code">f</code> with each character of <code class="code">s</code> and its
     index (in increasing index order) and stores the resulting bytes
     in a new sequence that is returned as the result.<br>
 </div>
 
-<pre id="VALtrim">val trim : bytes -&gt; bytes</pre><div class="info ">
+<pre id="VALtrim"><span class="keyword">let</span> trim: bytes =&gt; bytes;
+</pre><div class="info ">
 Return a copy of the argument, without leading and trailing
     whitespace. The bytes regarded as whitespace are the ASCII
     characters <code class="code">&apos; &apos;</code>, <code class="code">&apos;\012&apos;</code>, <code class="code">&apos;\n&apos;</code>, <code class="code">&apos;\r&apos;</code>, and <code class="code">&apos;\t&apos;</code>.<br>
 </div>
 
-<pre id="VALescaped">val escaped : bytes -&gt; bytes</pre><div class="info ">
+<pre id="VALescaped"><span class="keyword">let</span> escaped: bytes =&gt; bytes;
+</pre><div class="info ">
 Return a copy of the argument, with special characters represented
     by escape sequences, following the lexical conventions of OCaml.<br>
 </div>
 
-<pre id="VALindex">val index : bytes -&gt; char -&gt; int</pre><div class="info ">
+<pre id="VALindex"><span class="keyword">let</span> index: (bytes, char) =&gt; int;
+</pre><div class="info ">
 <code class="code">index s c</code> returns the index of the first occurrence of byte <code class="code">c</code>
     in <code class="code">s</code>.
 <p>
@@ -154,7 +177,8 @@ Return a copy of the argument, with special characters represented
     Raise <code class="code">Not_found</code> if <code class="code">c</code> does not occur in <code class="code">s</code>.<br>
 </p></div>
 
-<pre id="VALrindex">val rindex : bytes -&gt; char -&gt; int</pre><div class="info ">
+<pre id="VALrindex"><span class="keyword">let</span> rindex: (bytes, char) =&gt; int;
+</pre><div class="info ">
 <code class="code">rindex s c</code> returns the index of the last occurrence of byte <code class="code">c</code>
     in <code class="code">s</code>.
 <p>
@@ -162,7 +186,8 @@ Return a copy of the argument, with special characters represented
     Raise <code class="code">Not_found</code> if <code class="code">c</code> does not occur in <code class="code">s</code>.<br>
 </p></div>
 
-<pre id="VALindex_from">val index_from : bytes -&gt; int -&gt; char -&gt; int</pre><div class="info ">
+<pre id="VALindex_from"><span class="keyword">let</span> index_from: (bytes, int, char) =&gt; int;
+</pre><div class="info ">
 <code class="code">index_from s i c</code> returns the index of the first occurrence of
     byte <code class="code">c</code> in <code class="code">s</code> after position <code class="code">i</code>.  <code class="code">Bytes.index s c</code> is
     equivalent to <code class="code">Bytes.index_from s 0 c</code>.
@@ -172,7 +197,8 @@ Return a copy of the argument, with special characters represented
     Raise <code class="code">Not_found</code> if <code class="code">c</code> does not occur in <code class="code">s</code> after position <code class="code">i</code>.<br>
 </p></div>
 
-<pre id="VALrindex_from">val rindex_from : bytes -&gt; int -&gt; char -&gt; int</pre><div class="info ">
+<pre id="VALrindex_from"><span class="keyword">let</span> rindex_from: (bytes, int, char) =&gt; int;
+</pre><div class="info ">
 <code class="code">rindex_from s i c</code> returns the index of the last occurrence of
     byte <code class="code">c</code> in <code class="code">s</code> before position <code class="code">i+1</code>.  <code class="code">rindex s c</code> is equivalent
     to <code class="code">rindex_from s (Bytes.length s - 1) c</code>.
@@ -182,11 +208,13 @@ Return a copy of the argument, with special characters represented
     Raise <code class="code">Not_found</code> if <code class="code">c</code> does not occur in <code class="code">s</code> before position <code class="code">i+1</code>.<br>
 </p></div>
 
-<pre id="VALcontains">val contains : bytes -&gt; char -&gt; bool</pre><div class="info ">
+<pre id="VALcontains"><span class="keyword">let</span> contains: (bytes, char) =&gt; bool;
+</pre><div class="info ">
 <code class="code">contains s c</code> tests if byte <code class="code">c</code> appears in <code class="code">s</code>.<br>
 </div>
 
-<pre id="VALcontains_from">val contains_from : bytes -&gt; int -&gt; char -&gt; bool</pre><div class="info ">
+<pre id="VALcontains_from"><span class="keyword">let</span> contains_from: (bytes, int, char) =&gt; bool;
+</pre><div class="info ">
 <code class="code">contains_from s start c</code> tests if byte <code class="code">c</code> appears in <code class="code">s</code> after
     position <code class="code">start</code>.  <code class="code">contains s c</code> is equivalent to <code class="code">contains_from
     s 0 c</code>.
@@ -195,7 +223,8 @@ Return a copy of the argument, with special characters represented
     Raise <code class="code">Invalid_argument</code> if <code class="code">start</code> is not a valid position in <code class="code">s</code>.<br>
 </p></div>
 
-<pre id="VALrcontains_from">val rcontains_from : bytes -&gt; int -&gt; char -&gt; bool</pre><div class="info ">
+<pre id="VALrcontains_from"><span class="keyword">let</span> rcontains_from: (bytes, int, char) =&gt; bool;
+</pre><div class="info ">
 <code class="code">rcontains_from s stop c</code> tests if byte <code class="code">c</code> appears in <code class="code">s</code> before
     position <code class="code">stop+1</code>.
 <p>
@@ -204,35 +233,41 @@ Return a copy of the argument, with special characters represented
     position in <code class="code">s</code>.<br>
 </p></div>
 
-<pre id="VALuppercase">val uppercase : bytes -&gt; bytes</pre><div class="info ">
+<pre id="VALuppercase"><span class="keyword">let</span> uppercase: bytes =&gt; bytes;
+</pre><div class="info ">
 Return a copy of the argument, with all lowercase letters
     translated to uppercase, including accented letters of the ISO
     Latin-1 (8859-1) character set.<br>
 </div>
 
-<pre id="VALlowercase">val lowercase : bytes -&gt; bytes</pre><div class="info ">
+<pre id="VALlowercase"><span class="keyword">let</span> lowercase: bytes =&gt; bytes;
+</pre><div class="info ">
 Return a copy of the argument, with all uppercase letters
     translated to lowercase, including accented letters of the ISO
     Latin-1 (8859-1) character set.<br>
 </div>
 
-<pre id="VALcapitalize">val capitalize : bytes -&gt; bytes</pre><div class="info ">
+<pre id="VALcapitalize"><span class="keyword">let</span> capitalize: bytes =&gt; bytes;
+</pre><div class="info ">
 Return a copy of the argument, with the first byte set to
     uppercase.<br>
 </div>
 
-<pre id="VALuncapitalize">val uncapitalize : bytes -&gt; bytes</pre><div class="info ">
+<pre id="VALuncapitalize"><span class="keyword">let</span> uncapitalize: bytes =&gt; bytes;
+</pre><div class="info ">
 Return a copy of the argument, with the first byte set to
     lowercase.<br>
 </div>
 
-<pre id="TYPEt"><span class="keyword">type</span> t = bytes </pre>
+<pre id="TYPEt"><span class="keyword">type</span> t = bytes;
+</pre>
 <div class="info ">
 An alias for the type of byte sequences.<br>
 </div>
 
 
-<pre id="VALcompare">val compare : t -&gt; t -&gt; int</pre><div class="info ">
+<pre id="VALcompare"><span class="keyword">let</span> compare: (t, t) =&gt; int;
+</pre><div class="info ">
 The comparison function for byte sequences, with the same
     specification as <a href="Pervasives.html#VALcompare"><code class="code">Pervasives.compare</code></a>.  Along with the type <code class="code">t</code>,
     this function <code class="code">compare</code> allows the module <code class="code">Bytes</code> to be passed as

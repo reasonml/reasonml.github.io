@@ -9,17 +9,20 @@ The input signature of the functor <a href="Hashtbl.Make.html"><code class="code
 </div>
 <hr width="100%">
 
-<pre id="TYPEt"><span class="keyword">type</span> t </pre>
+<pre id="TYPEt"><span class="keyword">type</span> t;
+</pre>
 <div class="info ">
 The type of the hashtable keys.<br>
 </div>
 
 
-<pre id="VALequal">val equal : t -&gt; t -&gt; bool</pre><div class="info ">
+<pre id="VALequal"><span class="keyword">let</span> equal: (t, t) =&gt; bool;
+</pre><div class="info ">
 The equality predicate used to compare keys.<br>
 </div>
 
-<pre id="VALhash">val hash : t -&gt; int</pre><div class="info ">
+<pre id="VALhash"><span class="keyword">let</span> hash: t =&gt; int;
+</pre><div class="info ">
 A hashing function on keys. It must be such that if two keys are
           equal according to <code class="code">equal</code>, then they have identical hash values
           as computed by <code class="code">hash</code>.

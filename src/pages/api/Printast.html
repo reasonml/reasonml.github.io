@@ -7,9 +7,15 @@
 
 <pre><span class="keyword">module</span> Printast: sig .. end</pre><hr width="100%">
 
-<pre id="VALinterface">val interface : Format.formatter -&gt; Parsetree.signature_item list -&gt; unit</pre>
-<pre id="VALimplementation">val implementation : Format.formatter -&gt; Parsetree.structure_item list -&gt; unit</pre>
-<pre id="VALtop_phrase">val top_phrase : Format.formatter -&gt; Parsetree.toplevel_phrase -&gt; unit</pre>
-<pre id="VALexpression">val expression : int -&gt; Format.formatter -&gt; Parsetree.expression -&gt; unit</pre>
-<pre id="VALstructure">val structure : int -&gt; Format.formatter -&gt; Parsetree.structure -&gt; unit</pre>
-<pre id="VALpayload">val payload : int -&gt; Format.formatter -&gt; Parsetree.payload -&gt; unit</pre></div>
+<pre id="VALinterface"><span class="keyword">let</span> interface: (Format.formatter, list(Parsetree.signature_item)) =&gt; unit;
+</pre>
+<pre id="VALimplementation"><span class="keyword">let</span> implementation: (Format.formatter, list(Parsetree.structure_item)) =&gt; unit;
+</pre>
+<pre id="VALtop_phrase"><span class="keyword">let</span> top_phrase: (Format.formatter, Parsetree.toplevel_phrase) =&gt; unit;
+</pre>
+<pre id="VALexpression"><span class="keyword">let</span> expression: (int, Format.formatter, Parsetree.expression) =&gt; unit;
+</pre>
+<pre id="VALstructure"><span class="keyword">let</span> structure: (int, Format.formatter, Parsetree.structure) =&gt; unit;
+</pre>
+<pre id="VALpayload"><span class="keyword">let</span> payload: (int, Format.formatter, Parsetree.payload) =&gt; unit;
+</pre></div>

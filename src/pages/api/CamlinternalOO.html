@@ -14,69 +14,113 @@ Run-time support for objects and classes.
 <br>
 <h6 id="6_Classes">Classes</h6><br>
 
-<pre id="TYPEtag"><span class="keyword">type</span> tag </pre>
+<pre id="TYPEtag"><span class="keyword">type</span> tag;
+</pre>
 
 
-<pre id="TYPElabel"><span class="keyword">type</span> label </pre>
+<pre id="TYPElabel"><span class="keyword">type</span> label;
+</pre>
 
 
-<pre id="TYPEtable"><span class="keyword">type</span> table </pre>
+<pre id="TYPEtable"><span class="keyword">type</span> table;
+</pre>
 
 
-<pre id="TYPEmeth"><span class="keyword">type</span> meth </pre>
+<pre id="TYPEmeth"><span class="keyword">type</span> meth;
+</pre>
 
 
-<pre id="TYPEt"><span class="keyword">type</span> t </pre>
+<pre id="TYPEt"><span class="keyword">type</span> t;
+</pre>
 
 
-<pre id="TYPEobj"><span class="keyword">type</span> obj </pre>
+<pre id="TYPEobj"><span class="keyword">type</span> obj;
+</pre>
 
 
-<pre id="TYPEclosure"><span class="keyword">type</span> closure </pre>
+<pre id="TYPEclosure"><span class="keyword">type</span> closure;
+</pre>
 
 
-<pre id="VALpublic_method_label">val public_method_label : string -&gt; tag</pre>
-<pre id="VALnew_method">val new_method : table -&gt; label</pre>
-<pre id="VALnew_variable">val new_variable : table -&gt; string -&gt; int</pre>
-<pre id="VALnew_methods_variables">val new_methods_variables : table -&gt;       string array -&gt; string array -&gt; label array</pre>
-<pre id="VALget_variable">val get_variable : table -&gt; string -&gt; int</pre>
-<pre id="VALget_variables">val get_variables : table -&gt; string array -&gt; int array</pre>
-<pre id="VALget_method_label">val get_method_label : table -&gt; string -&gt; label</pre>
-<pre id="VALget_method_labels">val get_method_labels : table -&gt; string array -&gt; label array</pre>
-<pre id="VALget_method">val get_method : table -&gt; label -&gt; meth</pre>
-<pre id="VALset_method">val set_method : table -&gt; label -&gt; meth -&gt; unit</pre>
-<pre id="VALset_methods">val set_methods : table -&gt; label array -&gt; unit</pre>
-<pre id="VALnarrow">val narrow : table -&gt; string array -&gt; string array -&gt; string array -&gt; unit</pre>
-<pre id="VALwiden">val widen : table -&gt; unit</pre>
-<pre id="VALadd_initializer">val add_initializer : table -&gt; (obj -&gt; unit) -&gt; unit</pre>
-<pre id="VALdummy_table">val dummy_table : table</pre>
-<pre id="VALcreate_table">val create_table : string array -&gt; table</pre>
-<pre id="VALinit_class">val init_class : table -&gt; unit</pre>
-<pre id="VALinherits">val inherits : table -&gt;       string array -&gt;       string array -&gt;       string array -&gt;       t * (table -&gt; obj -&gt; Obj.t) *       t * obj -&gt; bool -&gt; Obj.t array</pre>
-<pre id="VALmake_class">val make_class : string array -&gt;       (table -&gt; Obj.t -&gt; t) -&gt;       t * (table -&gt; Obj.t -&gt; t) *       (Obj.t -&gt; t) * Obj.t</pre>
-<pre id="TYPEinit_table"><span class="keyword">type</span> init_table </pre>
+<pre id="VALpublic_method_label"><span class="keyword">let</span> public_method_label: string =&gt; tag;
+</pre>
+<pre id="VALnew_method"><span class="keyword">let</span> new_method: table =&gt; label;
+</pre>
+<pre id="VALnew_variable"><span class="keyword">let</span> new_variable: (table, string) =&gt; int;
+</pre>
+<pre id="VALnew_methods_variables"><span class="keyword">let</span> new_methods_variables: (table, array(string), array(string)) =&gt; array(label);
+</pre>
+<pre id="VALget_variable"><span class="keyword">let</span> get_variable: (table, string) =&gt; int;
+</pre>
+<pre id="VALget_variables"><span class="keyword">let</span> get_variables: (table, array(string)) =&gt; array(int);
+</pre>
+<pre id="VALget_method_label"><span class="keyword">let</span> get_method_label: (table, string) =&gt; label;
+</pre>
+<pre id="VALget_method_labels"><span class="keyword">let</span> get_method_labels: (table, array(string)) =&gt; array(label);
+</pre>
+<pre id="VALget_method"><span class="keyword">let</span> get_method: (table, label) =&gt; meth;
+</pre>
+<pre id="VALset_method"><span class="keyword">let</span> set_method: (table, label, meth) =&gt; unit;
+</pre>
+<pre id="VALset_methods"><span class="keyword">let</span> set_methods: (table, array(label)) =&gt; unit;
+</pre>
+<pre id="VALnarrow"><span class="keyword">let</span> narrow: (table, array(string), array(string), array(string)) =&gt; unit;
+</pre>
+<pre id="VALwiden"><span class="keyword">let</span> widen: table =&gt; unit;
+</pre>
+<pre id="VALadd_initializer"><span class="keyword">let</span> add_initializer: (table, obj =&gt; unit) =&gt; unit;
+</pre>
+<pre id="VALdummy_table"><span class="keyword">let</span> dummy_table: table;
+</pre>
+<pre id="VALcreate_table"><span class="keyword">let</span> create_table: array(string) =&gt; table;
+</pre>
+<pre id="VALinit_class"><span class="keyword">let</span> init_class: table =&gt; unit;
+</pre>
+<pre id="VALinherits"><span class="keyword">let</span> inherits:
+  (table, array(string), array(string), array(string), (t, (table, obj) =&gt; Obj.t, t, obj), bool) =&gt;
+  array(Obj.t);
+</pre>
+<pre id="VALmake_class"><span class="keyword">let</span> make_class:
+  (array(string), (table, Obj.t) =&gt; t) =&gt; (t, (table, Obj.t) =&gt; t, Obj.t =&gt; t, Obj.t);
+</pre>
+<pre id="TYPEinit_table"><span class="keyword">type</span> init_table;
+</pre>
 
 
-<pre id="VALmake_class_store">val make_class_store : string array -&gt;       (table -&gt; t) -&gt;       init_table -&gt; unit</pre>
-<pre id="VALdummy_class">val dummy_class : string * int * int -&gt;       t * (table -&gt; Obj.t -&gt; t) *       (Obj.t -&gt; t) * Obj.t</pre><br>
+<pre id="VALmake_class_store"><span class="keyword">let</span> make_class_store: (array(string), table =&gt; t, init_table) =&gt; unit;
+</pre>
+<pre id="VALdummy_class"><span class="keyword">let</span> dummy_class: ((string, int, int)) =&gt; (t, (table, Obj.t) =&gt; t, Obj.t =&gt; t, Obj.t);
+</pre><br>
 <h6 id="6_Objects">Objects</h6><br>
 
-<pre id="VALcopy">val copy : (&lt; .. &gt; as &apos;a) -&gt; &apos;a</pre>
-<pre id="VALcreate_object">val create_object : table -&gt; obj</pre>
-<pre id="VALcreate_object_opt">val create_object_opt : obj -&gt; table -&gt; obj</pre>
-<pre id="VALrun_initializers">val run_initializers : obj -&gt; table -&gt; unit</pre>
-<pre id="VALrun_initializers_opt">val run_initializers_opt : obj -&gt;       obj -&gt; table -&gt; obj</pre>
-<pre id="VALcreate_object_and_run_initializers">val create_object_and_run_initializers : obj -&gt; table -&gt; obj</pre>
-<pre id="VALsend">val send : obj -&gt; tag -&gt; t</pre>
-<pre id="VALsendcache">val sendcache : obj -&gt;       tag -&gt; t -&gt; int -&gt; t</pre>
-<pre id="VALsendself">val sendself : obj -&gt; label -&gt; t</pre>
-<pre id="VALget_public_method">val get_public_method : obj -&gt; tag -&gt; closure</pre><br>
+<pre id="VALcopy"><span class="keyword">let</span> copy: ({..} as &apos;a) =&gt; &apos;a;
+</pre>
+<pre id="VALcreate_object"><span class="keyword">let</span> create_object: table =&gt; obj;
+</pre>
+<pre id="VALcreate_object_opt"><span class="keyword">let</span> create_object_opt: (obj, table) =&gt; obj;
+</pre>
+<pre id="VALrun_initializers"><span class="keyword">let</span> run_initializers: (obj, table) =&gt; unit;
+</pre>
+<pre id="VALrun_initializers_opt"><span class="keyword">let</span> run_initializers_opt: (obj, obj, table) =&gt; obj;
+</pre>
+<pre id="VALcreate_object_and_run_initializers"><span class="keyword">let</span> create_object_and_run_initializers: (obj, table) =&gt; obj;
+</pre>
+<pre id="VALsend"><span class="keyword">let</span> send: (obj, tag) =&gt; t;
+</pre>
+<pre id="VALsendcache"><span class="keyword">let</span> sendcache: (obj, tag, t, int) =&gt; t;
+</pre>
+<pre id="VALsendself"><span class="keyword">let</span> sendself: (obj, label) =&gt; t;
+</pre>
+<pre id="VALget_public_method"><span class="keyword">let</span> get_public_method: (obj, tag) =&gt; closure;
+</pre><br>
 <h6 id="6_Tablecache">Table cache</h6><br>
 
-<pre id="TYPEtables"><span class="keyword">type</span> tables </pre>
+<pre id="TYPEtables"><span class="keyword">type</span> tables;
+</pre>
 
 
-<pre id="VALlookup_tables">val lookup_tables : tables -&gt;       closure array -&gt; tables</pre><br>
+<pre id="VALlookup_tables"><span class="keyword">let</span> lookup_tables: (tables, array(closure)) =&gt; tables;
+</pre><br>
 <h6 id="6_Builtinstoreducecodesize">Builtins to reduce code size</h6><br>
 
 <pre><span class="keyword">type</span> impl = </pre><table class="typetable">
@@ -300,7 +344,8 @@ Run-time support for objects and classes.
 
 
 
-<pre id="VALparams">val params : params</pre><br>
+<pre id="VALparams"><span class="keyword">let</span> params: params;
+</pre><br>
 <h6 id="6_Statistics">Statistics</h6><br>
 
 <pre><span class="keyword">type</span> stats = {</pre><table class="typetable">
@@ -329,4 +374,5 @@ Run-time support for objects and classes.
 
 
 
-<pre id="VALstats">val stats : unit -&gt; stats</pre></div>
+<pre id="VALstats"><span class="keyword">let</span> stats: unit =&gt; stats;
+</pre></div>

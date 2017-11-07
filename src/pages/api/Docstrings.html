@@ -10,28 +10,34 @@
 </div>
 <hr width="100%">
 
-<pre id="VALinit">val init : unit -&gt; unit</pre>
-<pre id="VALwarn_bad_docstrings">val warn_bad_docstrings : unit -&gt; unit</pre><div class="info ">
+<pre id="VALinit"><span class="keyword">let</span> init: unit =&gt; unit;
+</pre>
+<pre id="VALwarn_bad_docstrings"><span class="keyword">let</span> warn_bad_docstrings: unit =&gt; unit;
+</pre><div class="info ">
 Emit warnings for unattached and ambiguous docstrings<br>
 </div>
 <br>
 <h3 id="3_Docstrings">Docstrings</h3><br>
 
-<pre id="TYPEdocstring"><span class="keyword">type</span> docstring </pre>
+<pre id="TYPEdocstring"><span class="keyword">type</span> docstring;
+</pre>
 <div class="info ">
 Documentation comments<br>
 </div>
 
 
-<pre id="VALdocstring">val docstring : string -&gt; Location.t -&gt; docstring</pre><div class="info ">
+<pre id="VALdocstring"><span class="keyword">let</span> docstring: (string, Location.t) =&gt; docstring;
+</pre><div class="info ">
 Create a docstring<br>
 </div>
 
-<pre id="VALdocstring_body">val docstring_body : docstring -&gt; string</pre><div class="info ">
+<pre id="VALdocstring_body"><span class="keyword">let</span> docstring_body: docstring =&gt; string;
+</pre><div class="info ">
 Get the text of a docstring<br>
 </div>
 
-<pre id="VALdocstring_loc">val docstring_loc : docstring -&gt; Location.t</pre><div class="info ">
+<pre id="VALdocstring_loc"><span class="keyword">let</span> docstring_loc: docstring =&gt; Location.t;
+</pre><div class="info ">
 Get the location of a docstring<br>
 </div>
 <br>
@@ -41,23 +47,28 @@ Get the location of a docstring<br>
    These functions are used by the lexer to associate docstrings to
    the locations of tokens.<br>
 
-</p><pre id="VALset_pre_docstrings">val set_pre_docstrings : Lexing.position -&gt; docstring list -&gt; unit</pre><div class="info ">
+</p><pre id="VALset_pre_docstrings"><span class="keyword">let</span> set_pre_docstrings: (Lexing.position, list(docstring)) =&gt; unit;
+</pre><div class="info ">
 Docstrings immediately preceding a token<br>
 </div>
 
-<pre id="VALset_post_docstrings">val set_post_docstrings : Lexing.position -&gt; docstring list -&gt; unit</pre><div class="info ">
+<pre id="VALset_post_docstrings"><span class="keyword">let</span> set_post_docstrings: (Lexing.position, list(docstring)) =&gt; unit;
+</pre><div class="info ">
 Docstrings immediately following a token<br>
 </div>
 
-<pre id="VALset_floating_docstrings">val set_floating_docstrings : Lexing.position -&gt; docstring list -&gt; unit</pre><div class="info ">
+<pre id="VALset_floating_docstrings"><span class="keyword">let</span> set_floating_docstrings: (Lexing.position, list(docstring)) =&gt; unit;
+</pre><div class="info ">
 Docstrings not immediately adjacent to a token<br>
 </div>
 
-<pre id="VALset_pre_extra_docstrings">val set_pre_extra_docstrings : Lexing.position -&gt; docstring list -&gt; unit</pre><div class="info ">
+<pre id="VALset_pre_extra_docstrings"><span class="keyword">let</span> set_pre_extra_docstrings: (Lexing.position, list(docstring)) =&gt; unit;
+</pre><div class="info ">
 Docstrings immediately following the token which precedes this one<br>
 </div>
 
-<pre id="VALset_post_extra_docstrings">val set_post_extra_docstrings : Lexing.position -&gt; docstring list -&gt; unit</pre><div class="info ">
+<pre id="VALset_post_extra_docstrings"><span class="keyword">let</span> set_post_extra_docstrings: (Lexing.position, list(docstring)) =&gt; unit;
+</pre><div class="info ">
 Docstrings immediately preceding the token which follows this one<br>
 </div>
 <br>
@@ -85,32 +96,41 @@ Docstrings immediately preceding the token which follows this one<br>
 
 
 
-<pre id="VALempty_docs">val empty_docs : docs</pre>
-<pre id="VALdocs_attr">val docs_attr : docstring -&gt; Parsetree.attribute</pre>
-<pre id="VALadd_docs_attrs">val add_docs_attrs : docs -&gt; Parsetree.attributes -&gt; Parsetree.attributes</pre><div class="info ">
+<pre id="VALempty_docs"><span class="keyword">let</span> empty_docs: docs;
+</pre>
+<pre id="VALdocs_attr"><span class="keyword">let</span> docs_attr: docstring =&gt; Parsetree.attribute;
+</pre>
+<pre id="VALadd_docs_attrs"><span class="keyword">let</span> add_docs_attrs: (docs, Parsetree.attributes) =&gt; Parsetree.attributes;
+</pre><div class="info ">
 Convert item documentation to attributes and add them to an
     attribute list<br>
 </div>
 
-<pre id="VALsymbol_docs">val symbol_docs : unit -&gt; docs</pre><div class="info ">
+<pre id="VALsymbol_docs"><span class="keyword">let</span> symbol_docs: unit =&gt; docs;
+</pre><div class="info ">
 Fetch the item documentation for the current symbol. This also
     marks this documentation (for ambiguity warnings).<br>
 </div>
 
-<pre id="VALsymbol_docs_lazy">val symbol_docs_lazy : unit -&gt; docs Lazy.t</pre>
-<pre id="VALrhs_docs">val rhs_docs : int -&gt; int -&gt; docs</pre><div class="info ">
+<pre id="VALsymbol_docs_lazy"><span class="keyword">let</span> symbol_docs_lazy: unit =&gt; Lazy.t(docs);
+</pre>
+<pre id="VALrhs_docs"><span class="keyword">let</span> rhs_docs: (int, int) =&gt; docs;
+</pre><div class="info ">
 Fetch the item documentation for the symbols between two
     positions. This also marks this documentation (for ambiguity
     warnings).<br>
 </div>
 
-<pre id="VALrhs_docs_lazy">val rhs_docs_lazy : int -&gt; int -&gt; docs Lazy.t</pre>
-<pre id="VALmark_symbol_docs">val mark_symbol_docs : unit -&gt; unit</pre><div class="info ">
+<pre id="VALrhs_docs_lazy"><span class="keyword">let</span> rhs_docs_lazy: (int, int) =&gt; Lazy.t(docs);
+</pre>
+<pre id="VALmark_symbol_docs"><span class="keyword">let</span> mark_symbol_docs: unit =&gt; unit;
+</pre><div class="info ">
 Mark the item documentation for the current symbol (for ambiguity
     warnings).<br>
 </div>
 
-<pre id="VALmark_rhs_docs">val mark_rhs_docs : int -&gt; int -&gt; unit</pre><div class="info ">
+<pre id="VALmark_rhs_docs"><span class="keyword">let</span> mark_rhs_docs: (int, int) =&gt; unit;
+</pre><div class="info ">
 Mark as associated the item documentation for the symbols between
     two positions (for ambiguity warnings)<br>
 </div>
@@ -121,21 +141,27 @@ Mark as associated the item documentation for the symbols between
     The <a href="Docstrings.html#TYPEinfo"><code class="code">Docstrings.info</code></a> type represents documentation attached to a field or
     constructor.<br>
 
-</p><pre id="TYPEinfo"><span class="keyword">type</span> info = docstring option </pre>
+</p><pre id="TYPEinfo"><span class="keyword">type</span> info = option(docstring);
+</pre>
 
 
-<pre id="VALempty_info">val empty_info : info</pre>
-<pre id="VALinfo_attr">val info_attr : docstring -&gt; Parsetree.attribute</pre>
-<pre id="VALadd_info_attrs">val add_info_attrs : info -&gt; Parsetree.attributes -&gt; Parsetree.attributes</pre><div class="info ">
+<pre id="VALempty_info"><span class="keyword">let</span> empty_info: info;
+</pre>
+<pre id="VALinfo_attr"><span class="keyword">let</span> info_attr: docstring =&gt; Parsetree.attribute;
+</pre>
+<pre id="VALadd_info_attrs"><span class="keyword">let</span> add_info_attrs: (info, Parsetree.attributes) =&gt; Parsetree.attributes;
+</pre><div class="info ">
 Convert field info to attributes and add them to an
     attribute list<br>
 </div>
 
-<pre id="VALsymbol_info">val symbol_info : unit -&gt; info</pre><div class="info ">
+<pre id="VALsymbol_info"><span class="keyword">let</span> symbol_info: unit =&gt; info;
+</pre><div class="info ">
 Fetch the field info for the current symbol.<br>
 </div>
 
-<pre id="VALrhs_info">val rhs_info : int -&gt; info</pre><div class="info ">
+<pre id="VALrhs_info"><span class="keyword">let</span> rhs_info: int =&gt; info;
+</pre><div class="info ">
 Fetch the field info following the symbol at a given position.<br>
 </div>
 <br>
@@ -145,25 +171,33 @@ Fetch the field info following the symbol at a given position.<br>
     The <a href="Docstrings.html#TYPEtext"><code class="code">Docstrings.text</code></a> type represents documentation which is not attached to
     anything.<br>
 
-</p><pre id="TYPEtext"><span class="keyword">type</span> text = docstring list </pre>
+</p><pre id="TYPEtext"><span class="keyword">type</span> text = list(docstring);
+</pre>
 
 
-<pre id="VALempty_text">val empty_text : text</pre>
-<pre id="VALtext_attr">val text_attr : docstring -&gt; Parsetree.attribute</pre>
-<pre id="VALadd_text_attrs">val add_text_attrs : text -&gt; Parsetree.attributes -&gt; Parsetree.attributes</pre><div class="info ">
+<pre id="VALempty_text"><span class="keyword">let</span> empty_text: text;
+</pre>
+<pre id="VALtext_attr"><span class="keyword">let</span> text_attr: docstring =&gt; Parsetree.attribute;
+</pre>
+<pre id="VALadd_text_attrs"><span class="keyword">let</span> add_text_attrs: (text, Parsetree.attributes) =&gt; Parsetree.attributes;
+</pre><div class="info ">
 Convert text to attributes and add them to an attribute list<br>
 </div>
 
-<pre id="VALsymbol_text">val symbol_text : unit -&gt; text</pre><div class="info ">
+<pre id="VALsymbol_text"><span class="keyword">let</span> symbol_text: unit =&gt; text;
+</pre><div class="info ">
 Fetch the text preceding the current symbol.<br>
 </div>
 
-<pre id="VALsymbol_text_lazy">val symbol_text_lazy : unit -&gt; text Lazy.t</pre>
-<pre id="VALrhs_text">val rhs_text : int -&gt; text</pre><div class="info ">
+<pre id="VALsymbol_text_lazy"><span class="keyword">let</span> symbol_text_lazy: unit =&gt; Lazy.t(text);
+</pre>
+<pre id="VALrhs_text"><span class="keyword">let</span> rhs_text: int =&gt; text;
+</pre><div class="info ">
 Fetch the text preceding the symbol at the given position.<br>
 </div>
 
-<pre id="VALrhs_text_lazy">val rhs_text_lazy : int -&gt; text Lazy.t</pre><br>
+<pre id="VALrhs_text_lazy"><span class="keyword">let</span> rhs_text_lazy: int =&gt; Lazy.t(text);
+</pre><br>
 <h3 id="3_Extratext">Extra text</h3>
 <p>
 
@@ -172,19 +206,23 @@ Fetch the text preceding the symbol at the given position.<br>
     functions, which are applied to the contents of the block rather
     than the delimiters.<br>
 
-</p><pre id="VALsymbol_pre_extra_text">val symbol_pre_extra_text : unit -&gt; text</pre><div class="info ">
+</p><pre id="VALsymbol_pre_extra_text"><span class="keyword">let</span> symbol_pre_extra_text: unit =&gt; text;
+</pre><div class="info ">
 Fetch additional text preceding the current symbol<br>
 </div>
 
-<pre id="VALsymbol_post_extra_text">val symbol_post_extra_text : unit -&gt; text</pre><div class="info ">
+<pre id="VALsymbol_post_extra_text"><span class="keyword">let</span> symbol_post_extra_text: unit =&gt; text;
+</pre><div class="info ">
 Fetch additional text following the current symbol<br>
 </div>
 
-<pre id="VALrhs_pre_extra_text">val rhs_pre_extra_text : int -&gt; text</pre><div class="info ">
+<pre id="VALrhs_pre_extra_text"><span class="keyword">let</span> rhs_pre_extra_text: int =&gt; text;
+</pre><div class="info ">
 Fetch additional text preceding the symbol at the given position<br>
 </div>
 
-<pre id="VALrhs_post_extra_text">val rhs_post_extra_text : int -&gt; text</pre><div class="info ">
+<pre id="VALrhs_post_extra_text"><span class="keyword">let</span> rhs_post_extra_text: int =&gt; text;
+</pre><div class="info ">
 Fetch additional text following the symbol at the given position<br>
 </div>
 </div>

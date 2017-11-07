@@ -10,50 +10,59 @@ Operations on file names.<br>
 </div>
 <hr width="100%">
 
-<pre id="VALcurrent_dir_name">val current_dir_name : string</pre><div class="info ">
+<pre id="VALcurrent_dir_name"><span class="keyword">let</span> current_dir_name: string;
+</pre><div class="info ">
 The conventional name for the current directory (e.g. <code class="code">.</code> in Unix).<br>
 </div>
 
-<pre id="VALparent_dir_name">val parent_dir_name : string</pre><div class="info ">
+<pre id="VALparent_dir_name"><span class="keyword">let</span> parent_dir_name: string;
+</pre><div class="info ">
 The conventional name for the parent of the current directory
    (e.g. <code class="code">..</code> in Unix).<br>
 </div>
 
-<pre id="VALdir_sep">val dir_sep : string</pre><div class="info ">
+<pre id="VALdir_sep"><span class="keyword">let</span> dir_sep: string;
+</pre><div class="info ">
 The directory separator (e.g. <code class="code">/</code> in Unix).<br>
 <b>Since</b> 3.11.2<br>
 </div>
 
-<pre id="VALconcat">val concat : string -&gt; string -&gt; string</pre><div class="info ">
+<pre id="VALconcat"><span class="keyword">let</span> concat: (string, string) =&gt; string;
+</pre><div class="info ">
 <code class="code">concat dir file</code> returns a file name that designates file
    <code class="code">file</code> in directory <code class="code">dir</code>.<br>
 </div>
 
-<pre id="VALis_relative">val is_relative : string -&gt; bool</pre><div class="info ">
+<pre id="VALis_relative"><span class="keyword">let</span> is_relative: string =&gt; bool;
+</pre><div class="info ">
 Return <code class="code">true</code> if the file name is relative to the current
    directory, <code class="code">false</code> if it is absolute (i.e. in Unix, starts
    with <code class="code">/</code>).<br>
 </div>
 
-<pre id="VALis_implicit">val is_implicit : string -&gt; bool</pre><div class="info ">
+<pre id="VALis_implicit"><span class="keyword">let</span> is_implicit: string =&gt; bool;
+</pre><div class="info ">
 Return <code class="code">true</code> if the file name is relative and does not start
    with an explicit reference to the current directory (<code class="code">./</code> or
    <code class="code">../</code> in Unix), <code class="code">false</code> if it starts with an explicit reference
    to the root directory or the current directory.<br>
 </div>
 
-<pre id="VALcheck_suffix">val check_suffix : string -&gt; string -&gt; bool</pre><div class="info ">
+<pre id="VALcheck_suffix"><span class="keyword">let</span> check_suffix: (string, string) =&gt; bool;
+</pre><div class="info ">
 <code class="code">check_suffix name suff</code> returns <code class="code">true</code> if the filename <code class="code">name</code>
    ends with the suffix <code class="code">suff</code>.<br>
 </div>
 
-<pre id="VALchop_suffix">val chop_suffix : string -&gt; string -&gt; string</pre><div class="info ">
+<pre id="VALchop_suffix"><span class="keyword">let</span> chop_suffix: (string, string) =&gt; string;
+</pre><div class="info ">
 <code class="code">chop_suffix name suff</code> removes the suffix <code class="code">suff</code> from
    the filename <code class="code">name</code>. The behavior is undefined if <code class="code">name</code> does not
    end with the suffix <code class="code">suff</code>.<br>
 </div>
 
-<pre id="VALchop_extension">val chop_extension : string -&gt; string</pre><div class="info ">
+<pre id="VALchop_extension"><span class="keyword">let</span> chop_extension: string =&gt; string;
+</pre><div class="info ">
 Return the given file name without its extension. The extension
    is the shortest suffix starting with a period and not including
    a directory separator, <code class="code">.xyz</code> for instance.
@@ -63,7 +72,8 @@ Return the given file name without its extension. The extension
    an extension.<br>
 </p></div>
 
-<pre id="VALbasename">val basename : string -&gt; string</pre><div class="info ">
+<pre id="VALbasename"><span class="keyword">let</span> basename: string =&gt; string;
+</pre><div class="info ">
 Split a file name into directory name / base file name.
    If <code class="code">name</code> is a valid file name, then <code class="code">concat (dirname name) (basename name)</code>
    returns a file name which is equivalent to <code class="code">name</code>. Moreover,
@@ -76,13 +86,15 @@ Split a file name into directory name / base file name.
    <code class="code">basename</code> utility.<br>
 </p></div>
 
-<pre id="VALdirname">val dirname : string -&gt; string</pre><div class="info ">
+<pre id="VALdirname"><span class="keyword">let</span> dirname: string =&gt; string;
+</pre><div class="info ">
 See <a href="Filename.html#VALbasename"><code class="code">Filename.basename</code></a>.
    This function conforms to the specification of POSIX.1-2008 for the
    <code class="code">dirname</code> utility.<br>
 </div>
 
-<pre id="VALtemp_file">val temp_file : ?temp_dir:string -&gt; string -&gt; string -&gt; string</pre><div class="info ">
+<pre id="VALtemp_file"><span class="keyword">let</span> temp_file: (~temp_dir: string=?, string, string) =&gt; string;
+</pre><div class="info ">
 <code class="code">temp_file prefix suffix</code> returns the name of a
    fresh temporary file in the temporary directory.
    The base name of the temporary file is formed by concatenating
@@ -97,7 +109,10 @@ See <a href="Filename.html#VALbasename"><code class="code">Filename.basename</co
 <b>Before 3.11.2 </b> no ?temp_dir optional argument<br>
 </div>
 
-<pre id="VALopen_temp_file">val open_temp_file : ?mode:Pervasives.open_flag list -&gt;       ?temp_dir:string -&gt; string -&gt; string -&gt; string * Pervasives.out_channel</pre><div class="info ">
+<pre id="VALopen_temp_file"><span class="keyword">let</span> open_temp_file:
+  (~mode: list(Pervasives.open_flag)=?, ~temp_dir: string=?, string, string) =&gt;
+  (string, Pervasives.out_channel);
+</pre><div class="info ">
 Same as <a href="Filename.html#VALtemp_file"><code class="code">Filename.temp_file</code></a>, but returns both the name of a fresh
    temporary file, and an output channel opened (atomically) on
    this file.  This function is more secure than <code class="code">temp_file</code>: there
@@ -110,7 +125,8 @@ Same as <a href="Filename.html#VALtemp_file"><code class="code">Filename.temp_fi
 <b>Before 3.11.2 </b> no ?temp_dir optional argument<br>
 </div>
 
-<pre id="VALget_temp_dir_name">val get_temp_dir_name : unit -&gt; string</pre><div class="info ">
+<pre id="VALget_temp_dir_name"><span class="keyword">let</span> get_temp_dir_name: unit =&gt; string;
+</pre><div class="info ">
 The name of the temporary directory:
     Under Unix, the value of the <code class="code">TMPDIR</code> environment variable, or &quot;/tmp&quot;
     if the variable is not set.
@@ -120,13 +136,15 @@ The name of the temporary directory:
 <b>Since</b> 4.00.0<br>
 </div>
 
-<pre id="VALset_temp_dir_name">val set_temp_dir_name : string -&gt; unit</pre><div class="info ">
+<pre id="VALset_temp_dir_name"><span class="keyword">let</span> set_temp_dir_name: string =&gt; unit;
+</pre><div class="info ">
 Change the temporary directory returned by <a href="Filename.html#VALget_temp_dir_name"><code class="code">Filename.get_temp_dir_name</code></a>
     and used by <a href="Filename.html#VALtemp_file"><code class="code">Filename.temp_file</code></a> and <a href="Filename.html#VALopen_temp_file"><code class="code">Filename.open_temp_file</code></a>.<br>
 <b>Since</b> 4.00.0<br>
 </div>
 
-<pre id="VALtemp_dir_name">val temp_dir_name : string</pre><div class="info ">
+<pre id="VALtemp_dir_name"><span class="keyword">let</span> temp_dir_name: string;
+</pre><div class="info ">
 <span class="warning">Deprecated.</span>You should use <a href="Filename.html#VALget_temp_dir_name"><code class="code">Filename.get_temp_dir_name</code></a> instead.<br>
 The name of the initial temporary directory:
     Under Unix, the value of the <code class="code">TMPDIR</code> environment variable, or &quot;/tmp&quot;
@@ -136,7 +154,8 @@ The name of the initial temporary directory:
 <b>Since</b> 3.09.1<br>
 </div>
 
-<pre id="VALquote">val quote : string -&gt; string</pre><div class="info ">
+<pre id="VALquote"><span class="keyword">let</span> quote: string =&gt; string;
+</pre><div class="info ">
 Return a quoted version of a file name, suitable for use as
     one argument in a command line, escaping all meta-characters.
     Warning: under Windows, the output is only suitable for use

@@ -717,7 +717,8 @@ The type of error codes.
 </div>
 
 
-<pre id="EXCEPTIONUnix_error"><span class="keyword">exception</span> Unix_error of error * string * string</pre>
+<pre id="EXCEPTIONUnix_error"><span class="keyword">exception</span> Unix_error(error, string, string);
+</pre>
 <div class="info ">
 Raised by the system calls below when an error is encountered.
    The first component is the error code; the second component
@@ -725,11 +726,13 @@ Raised by the system calls below when an error is encountered.
    to the function, if it has one, or the empty string otherwise.<br>
 </div>
 
-<pre id="VALerror_message">val error_message : error -&gt; string</pre><div class="info ">
+<pre id="VALerror_message"><span class="keyword">let</span> error_message: error =&gt; string;
+</pre><div class="info ">
 Return a string describing the given error code.<br>
 </div>
 
-<pre id="VALhandle_unix_error">val handle_unix_error : (&apos;a -&gt; &apos;b) -&gt; &apos;a -&gt; &apos;b</pre><div class="info ">
+<pre id="VALhandle_unix_error"><span class="keyword">let</span> handle_unix_error: (&apos;a =&gt; &apos;b, &apos;a) =&gt; &apos;b;
+</pre><div class="info ">
 <code class="code">handle_unix_error f x</code> applies <code class="code">f</code> to <code class="code">x</code> and returns the result.
    If the exception <code class="code">Unix_error</code> is raised, it prints a message
    describing the error and exits with code 2.<br>
@@ -737,18 +740,21 @@ Return a string describing the given error code.<br>
 <br>
 <h6 id="6_Accesstotheprocessenvironment">Access to the process environment</h6><br>
 
-<pre id="VALenvironment">val environment : unit -&gt; string array</pre><div class="info ">
+<pre id="VALenvironment"><span class="keyword">let</span> environment: unit =&gt; array(string);
+</pre><div class="info ">
 Return the process environment, as an array of strings
     with the format ``variable=value&apos;&apos;.<br>
 </div>
 
-<pre id="VALgetenv">val getenv : string -&gt; string</pre><div class="info ">
+<pre id="VALgetenv"><span class="keyword">let</span> getenv: string =&gt; string;
+</pre><div class="info ">
 Return the value associated to a variable in the process
    environment. Raise <code class="code">Not_found</code> if the variable is unbound.
    (This function is identical to <a href="Sys.html#VALgetenv"><code class="code">Sys.getenv</code></a>.)<br>
 </div>
 
-<pre id="VALputenv">val putenv : string -&gt; string -&gt; unit</pre><div class="info ">
+<pre id="VALputenv"><span class="keyword">let</span> putenv: (string, string) =&gt; unit;
+</pre><div class="info ">
 <code class="code">Unix.putenv name value</code> sets the value associated to a
    variable in the process environment.
    <code class="code">name</code> is the name of the environment variable,
@@ -827,7 +833,8 @@ Flags for <a href="Unix.html#VALwaitpid"><code class="code">Unix.waitpid</code><
 </div>
 
 
-<pre id="VALexecv">val execv : string -&gt; string array -&gt; &apos;a</pre><div class="info ">
+<pre id="VALexecv"><span class="keyword">let</span> execv: (string, array(string)) =&gt; &apos;a;
+</pre><div class="info ">
 <code class="code">execv prog args</code> execute the program in file <code class="code">prog</code>, with
    the arguments <code class="code">args</code>, and the current process environment.
    These <code class="code">execv*</code> functions never return: on success, the current
@@ -835,32 +842,38 @@ Flags for <a href="Unix.html#VALwaitpid"><code class="code">Unix.waitpid</code><
    on failure, a <a href="Unix.html#EXCEPTIONUnix_error"><code class="code">Unix.Unix_error</code></a> exception is raised.<br>
 </div>
 
-<pre id="VALexecve">val execve : string -&gt; string array -&gt; string array -&gt; &apos;a</pre><div class="info ">
+<pre id="VALexecve"><span class="keyword">let</span> execve: (string, array(string), array(string)) =&gt; &apos;a;
+</pre><div class="info ">
 Same as <a href="Unix.html#VALexecv"><code class="code">Unix.execv</code></a>, except that the third argument provides the
    environment to the program executed.<br>
 </div>
 
-<pre id="VALexecvp">val execvp : string -&gt; string array -&gt; &apos;a</pre><div class="info ">
+<pre id="VALexecvp"><span class="keyword">let</span> execvp: (string, array(string)) =&gt; &apos;a;
+</pre><div class="info ">
 Same as <a href="Unix.html#VALexecv"><code class="code">Unix.execv</code></a>, except that
    the program is searched in the path.<br>
 </div>
 
-<pre id="VALexecvpe">val execvpe : string -&gt; string array -&gt; string array -&gt; &apos;a</pre><div class="info ">
+<pre id="VALexecvpe"><span class="keyword">let</span> execvpe: (string, array(string), array(string)) =&gt; &apos;a;
+</pre><div class="info ">
 Same as <a href="Unix.html#VALexecve"><code class="code">Unix.execve</code></a>, except that
    the program is searched in the path.<br>
 </div>
 
-<pre id="VALfork">val fork : unit -&gt; int</pre><div class="info ">
+<pre id="VALfork"><span class="keyword">let</span> fork: unit =&gt; int;
+</pre><div class="info ">
 Fork a new process. The returned integer is 0 for the child
    process, the pid of the child process for the parent process.<br>
 </div>
 
-<pre id="VALwait">val wait : unit -&gt; int * process_status</pre><div class="info ">
+<pre id="VALwait"><span class="keyword">let</span> wait: unit =&gt; (int, process_status);
+</pre><div class="info ">
 Wait until one of the children processes die, and return its pid
    and termination status.<br>
 </div>
 
-<pre id="VALwaitpid">val waitpid : wait_flag list -&gt; int -&gt; int * process_status</pre><div class="info ">
+<pre id="VALwaitpid"><span class="keyword">let</span> waitpid: (list(wait_flag), int) =&gt; (int, process_status);
+</pre><div class="info ">
 Same as <a href="Unix.html#VALwait"><code class="code">Unix.wait</code></a>, but waits for the child process whose pid is given.
    A pid of <code class="code">-1</code> means wait for any child.
    A pid of <code class="code">0</code> means wait for any child in the same process group
@@ -871,7 +884,8 @@ Same as <a href="Unix.html#VALwait"><code class="code">Unix.wait</code></a>, but
    children.<br>
 </div>
 
-<pre id="VALsystem">val system : string -&gt; process_status</pre><div class="info ">
+<pre id="VALsystem"><span class="keyword">let</span> system: string =&gt; process_status;
+</pre><div class="info ">
 Execute the given command, wait until it terminates, and return
    its termination status. The string is interpreted by the shell
    <code class="code">/bin/sh</code> and therefore can contain redirections, quotes, variables,
@@ -879,15 +893,18 @@ Execute the given command, wait until it terminates, and return
    be executed.<br>
 </div>
 
-<pre id="VALgetpid">val getpid : unit -&gt; int</pre><div class="info ">
+<pre id="VALgetpid"><span class="keyword">let</span> getpid: unit =&gt; int;
+</pre><div class="info ">
 Return the pid of the process.<br>
 </div>
 
-<pre id="VALgetppid">val getppid : unit -&gt; int</pre><div class="info ">
+<pre id="VALgetppid"><span class="keyword">let</span> getppid: unit =&gt; int;
+</pre><div class="info ">
 Return the pid of the parent process.<br>
 </div>
 
-<pre id="VALnice">val nice : int -&gt; int</pre><div class="info ">
+<pre id="VALnice"><span class="keyword">let</span> nice: int =&gt; int;
+</pre><div class="info ">
 Change the process priority. The integer argument is added to the
    ``nice&apos;&apos; value. (Higher values of the ``nice&apos;&apos; value mean
    lower priorities.) Return the new nice value.<br>
@@ -895,21 +912,25 @@ Change the process priority. The integer argument is added to the
 <br>
 <h6 id="6_Basicfileinputoutput">Basic file input/output</h6><br>
 
-<pre id="TYPEfile_descr"><span class="keyword">type</span> file_descr </pre>
+<pre id="TYPEfile_descr"><span class="keyword">type</span> file_descr;
+</pre>
 <div class="info ">
 The abstract type of file descriptors.<br>
 </div>
 
 
-<pre id="VALstdin">val stdin : file_descr</pre><div class="info ">
+<pre id="VALstdin"><span class="keyword">let</span> stdin: file_descr;
+</pre><div class="info ">
 File descriptor for standard input.<br>
 </div>
 
-<pre id="VALstdout">val stdout : file_descr</pre><div class="info ">
+<pre id="VALstdout"><span class="keyword">let</span> stdout: file_descr;
+</pre><div class="info ">
 File descriptor for standard output.<br>
 </div>
 
-<pre id="VALstderr">val stderr : file_descr</pre><div class="info ">
+<pre id="VALstderr"><span class="keyword">let</span> stderr: file_descr;
+</pre><div class="info ">
 File descriptor for standard error.<br>
 </div>
 
@@ -1065,30 +1086,35 @@ The flags to <a href="Unix.html#VALopenfile"><code class="code">Unix.openfile</c
 </div>
 
 
-<pre id="TYPEfile_perm"><span class="keyword">type</span> file_perm = int </pre>
+<pre id="TYPEfile_perm"><span class="keyword">type</span> file_perm = int;
+</pre>
 <div class="info ">
 The type of file access rights, e.g. <code class="code">0o640</code> is read and write for user,
     read for group, none for others<br>
 </div>
 
 
-<pre id="VALopenfile">val openfile : string -&gt; open_flag list -&gt; file_perm -&gt; file_descr</pre><div class="info ">
+<pre id="VALopenfile"><span class="keyword">let</span> openfile: (string, list(open_flag), file_perm) =&gt; file_descr;
+</pre><div class="info ">
 Open the named file with the given flags. Third argument is the
    permissions to give to the file if it is created (see
    <a href="Unix.html#VALumask"><code class="code">Unix.umask</code></a>). Return a file descriptor on the named file.<br>
 </div>
 
-<pre id="VALclose">val close : file_descr -&gt; unit</pre><div class="info ">
+<pre id="VALclose"><span class="keyword">let</span> close: file_descr =&gt; unit;
+</pre><div class="info ">
 Close a file descriptor.<br>
 </div>
 
-<pre id="VALread">val read : file_descr -&gt; bytes -&gt; int -&gt; int -&gt; int</pre><div class="info ">
+<pre id="VALread"><span class="keyword">let</span> read: (file_descr, bytes, int, int) =&gt; int;
+</pre><div class="info ">
 <code class="code">read fd buff ofs len</code> reads <code class="code">len</code> bytes from descriptor <code class="code">fd</code>,
     storing them in byte sequence <code class="code">buff</code>, starting at position <code class="code">ofs</code> in
     <code class="code">buff</code>. Return the number of bytes actually read.<br>
 </div>
 
-<pre id="VALwrite">val write : file_descr -&gt; bytes -&gt; int -&gt; int -&gt; int</pre><div class="info ">
+<pre id="VALwrite"><span class="keyword">let</span> write: (file_descr, bytes, int, int) =&gt; int;
+</pre><div class="info ">
 <code class="code">write fd buff ofs len</code> writes <code class="code">len</code> bytes to descriptor <code class="code">fd</code>,
     taking them from byte sequence <code class="code">buff</code>, starting at position <code class="code">ofs</code>
     in <code class="code">buff</code>. Return the number of bytes actually written.  <code class="code">write</code>
@@ -1096,41 +1122,48 @@ Close a file descriptor.<br>
     an error occurs.<br>
 </div>
 
-<pre id="VALsingle_write">val single_write : file_descr -&gt; bytes -&gt; int -&gt; int -&gt; int</pre><div class="info ">
+<pre id="VALsingle_write"><span class="keyword">let</span> single_write: (file_descr, bytes, int, int) =&gt; int;
+</pre><div class="info ">
 Same as <code class="code">write</code>, but attempts to write only once.
    Thus, if an error occurs, <code class="code">single_write</code> guarantees that no data
    has been written.<br>
 </div>
 
-<pre id="VALwrite_substring">val write_substring : file_descr -&gt; string -&gt; int -&gt; int -&gt; int</pre><div class="info ">
+<pre id="VALwrite_substring"><span class="keyword">let</span> write_substring: (file_descr, string, int, int) =&gt; int;
+</pre><div class="info ">
 Same as <code class="code">write</code>, but take the data from a string instead of a byte
     sequence.<br>
 </div>
 
-<pre id="VALsingle_write_substring">val single_write_substring : file_descr -&gt; string -&gt; int -&gt; int -&gt; int</pre><div class="info ">
+<pre id="VALsingle_write_substring"><span class="keyword">let</span> single_write_substring: (file_descr, string, int, int) =&gt; int;
+</pre><div class="info ">
 Same as <code class="code">single_write</code>, but take the data from a string instead of
     a byte sequence.<br>
 </div>
 <br>
 <h6 id="6_Interfacingwiththestandardinputoutputlibrary">Interfacing with the standard input/output library</h6><br>
 
-<pre id="VALin_channel_of_descr">val in_channel_of_descr : file_descr -&gt; Pervasives.in_channel</pre><div class="info ">
+<pre id="VALin_channel_of_descr"><span class="keyword">let</span> in_channel_of_descr: file_descr =&gt; Pervasives.in_channel;
+</pre><div class="info ">
 Create an input channel reading from the given descriptor.
    The channel is initially in binary mode; use
    <code class="code">set_binary_mode_in ic false</code> if text mode is desired.<br>
 </div>
 
-<pre id="VALout_channel_of_descr">val out_channel_of_descr : file_descr -&gt; Pervasives.out_channel</pre><div class="info ">
+<pre id="VALout_channel_of_descr"><span class="keyword">let</span> out_channel_of_descr: file_descr =&gt; Pervasives.out_channel;
+</pre><div class="info ">
 Create an output channel writing on the given descriptor.
    The channel is initially in binary mode; use
    <code class="code">set_binary_mode_out oc false</code> if text mode is desired.<br>
 </div>
 
-<pre id="VALdescr_of_in_channel">val descr_of_in_channel : Pervasives.in_channel -&gt; file_descr</pre><div class="info ">
+<pre id="VALdescr_of_in_channel"><span class="keyword">let</span> descr_of_in_channel: Pervasives.in_channel =&gt; file_descr;
+</pre><div class="info ">
 Return the descriptor corresponding to an input channel.<br>
 </div>
 
-<pre id="VALdescr_of_out_channel">val descr_of_out_channel : Pervasives.out_channel -&gt; file_descr</pre><div class="info ">
+<pre id="VALdescr_of_out_channel"><span class="keyword">let</span> descr_of_out_channel: Pervasives.out_channel =&gt; file_descr;
+</pre><div class="info ">
 Return the descriptor corresponding to an output channel.<br>
 </div>
 <br>
@@ -1173,16 +1206,19 @@ Positioning modes for <a href="Unix.html#VALlseek"><code class="code">Unix.lseek
 </div>
 
 
-<pre id="VALlseek">val lseek : file_descr -&gt; int -&gt; seek_command -&gt; int</pre><div class="info ">
+<pre id="VALlseek"><span class="keyword">let</span> lseek: (file_descr, int, seek_command) =&gt; int;
+</pre><div class="info ">
 Set the current position for a file descriptor, and return the resulting
     offset (from the beginning of the file).<br>
 </div>
 
-<pre id="VALtruncate">val truncate : string -&gt; int -&gt; unit</pre><div class="info ">
+<pre id="VALtruncate"><span class="keyword">let</span> truncate: (string, int) =&gt; unit;
+</pre><div class="info ">
 Truncates the named file to the given size.<br>
 </div>
 
-<pre id="VALftruncate">val ftruncate : file_descr -&gt; int -&gt; unit</pre><div class="info ">
+<pre id="VALftruncate"><span class="keyword">let</span> ftruncate: (file_descr, int) =&gt; unit;
+</pre><div class="info ">
 Truncates the file corresponding to the given descriptor
    to the given size.<br>
 </div>
@@ -1391,21 +1427,25 @@ The information returned by the <a href="Unix.html#VALstat"><code class="code">U
 </div>
 
 
-<pre id="VALstat">val stat : string -&gt; stats</pre><div class="info ">
+<pre id="VALstat"><span class="keyword">let</span> stat: string =&gt; stats;
+</pre><div class="info ">
 Return the information for the named file.<br>
 </div>
 
-<pre id="VALlstat">val lstat : string -&gt; stats</pre><div class="info ">
+<pre id="VALlstat"><span class="keyword">let</span> lstat: string =&gt; stats;
+</pre><div class="info ">
 Same as <a href="Unix.html#VALstat"><code class="code">Unix.stat</code></a>, but in case the file is a symbolic link,
    return the information for the link itself.<br>
 </div>
 
-<pre id="VALfstat">val fstat : file_descr -&gt; stats</pre><div class="info ">
+<pre id="VALfstat"><span class="keyword">let</span> fstat: file_descr =&gt; stats;
+</pre><div class="info ">
 Return the information for the file associated with the given
    descriptor.<br>
 </div>
 
-<pre id="VALisatty">val isatty : file_descr -&gt; bool</pre><div class="info ">
+<pre id="VALisatty"><span class="keyword">let</span> isatty: file_descr =&gt; bool;
+</pre><div class="info ">
 Return <code class="code">true</code> if the given file descriptor refers to a terminal or
    console window, <code class="code">false</code> otherwise.<br>
 </div>
@@ -1418,15 +1458,18 @@ File operations on large files.
 <br>
 <h6 id="6_Operationsonfilenames">Operations on file names</h6><br>
 
-<pre id="VALunlink">val unlink : string -&gt; unit</pre><div class="info ">
+<pre id="VALunlink"><span class="keyword">let</span> unlink: string =&gt; unit;
+</pre><div class="info ">
 Removes the named file<br>
 </div>
 
-<pre id="VALrename">val rename : string -&gt; string -&gt; unit</pre><div class="info ">
+<pre id="VALrename"><span class="keyword">let</span> rename: (string, string) =&gt; unit;
+</pre><div class="info ">
 <code class="code">rename old new</code> changes the name of a file from <code class="code">old</code> to <code class="code">new</code>.<br>
 </div>
 
-<pre id="VALlink">val link : string -&gt; string -&gt; unit</pre><div class="info ">
+<pre id="VALlink"><span class="keyword">let</span> link: (string, string) =&gt; unit;
+</pre><div class="info ">
 <code class="code">link source dest</code> creates a hard link named <code class="code">dest</code> to the file
    named <code class="code">source</code>.<br>
 </div>
@@ -1480,45 +1523,54 @@ Flags for the <a href="Unix.html#VALaccess"><code class="code">Unix.access</code
 </div>
 
 
-<pre id="VALchmod">val chmod : string -&gt; file_perm -&gt; unit</pre><div class="info ">
+<pre id="VALchmod"><span class="keyword">let</span> chmod: (string, file_perm) =&gt; unit;
+</pre><div class="info ">
 Change the permissions of the named file.<br>
 </div>
 
-<pre id="VALfchmod">val fchmod : file_descr -&gt; file_perm -&gt; unit</pre><div class="info ">
+<pre id="VALfchmod"><span class="keyword">let</span> fchmod: (file_descr, file_perm) =&gt; unit;
+</pre><div class="info ">
 Change the permissions of an opened file.<br>
 </div>
 
-<pre id="VALchown">val chown : string -&gt; int -&gt; int -&gt; unit</pre><div class="info ">
+<pre id="VALchown"><span class="keyword">let</span> chown: (string, int, int) =&gt; unit;
+</pre><div class="info ">
 Change the owner uid and owner gid of the named file.<br>
 </div>
 
-<pre id="VALfchown">val fchown : file_descr -&gt; int -&gt; int -&gt; unit</pre><div class="info ">
+<pre id="VALfchown"><span class="keyword">let</span> fchown: (file_descr, int, int) =&gt; unit;
+</pre><div class="info ">
 Change the owner uid and owner gid of an opened file.<br>
 </div>
 
-<pre id="VALumask">val umask : int -&gt; int</pre><div class="info ">
+<pre id="VALumask"><span class="keyword">let</span> umask: int =&gt; int;
+</pre><div class="info ">
 Set the process&apos;s file mode creation mask, and return the previous
     mask.<br>
 </div>
 
-<pre id="VALaccess">val access : string -&gt; access_permission list -&gt; unit</pre><div class="info ">
+<pre id="VALaccess"><span class="keyword">let</span> access: (string, list(access_permission)) =&gt; unit;
+</pre><div class="info ">
 Check that the process has the given permissions over the named
    file. Raise <code class="code">Unix_error</code> otherwise.<br>
 </div>
 <br>
 <h6 id="6_Operationsonfiledescriptors">Operations on file descriptors</h6><br>
 
-<pre id="VALdup">val dup : file_descr -&gt; file_descr</pre><div class="info ">
+<pre id="VALdup"><span class="keyword">let</span> dup: file_descr =&gt; file_descr;
+</pre><div class="info ">
 Return a new file descriptor referencing the same file as
    the given descriptor.<br>
 </div>
 
-<pre id="VALdup2">val dup2 : file_descr -&gt; file_descr -&gt; unit</pre><div class="info ">
+<pre id="VALdup2"><span class="keyword">let</span> dup2: (file_descr, file_descr) =&gt; unit;
+</pre><div class="info ">
 <code class="code">dup2 fd1 fd2</code> duplicates <code class="code">fd1</code> to <code class="code">fd2</code>, closing <code class="code">fd2</code> if already
    opened.<br>
 </div>
 
-<pre id="VALset_nonblock">val set_nonblock : file_descr -&gt; unit</pre><div class="info ">
+<pre id="VALset_nonblock"><span class="keyword">let</span> set_nonblock: file_descr =&gt; unit;
+</pre><div class="info ">
 Set the ``non-blocking&apos;&apos; flag on the given descriptor.
    When the non-blocking flag is set, reading on a descriptor
    on which there is temporarily no data available raises the
@@ -1527,83 +1579,99 @@ Set the ``non-blocking&apos;&apos; flag on the given descriptor.
    for writing also raises <code class="code">EAGAIN</code> or <code class="code">EWOULDBLOCK</code>.<br>
 </div>
 
-<pre id="VALclear_nonblock">val clear_nonblock : file_descr -&gt; unit</pre><div class="info ">
+<pre id="VALclear_nonblock"><span class="keyword">let</span> clear_nonblock: file_descr =&gt; unit;
+</pre><div class="info ">
 Clear the ``non-blocking&apos;&apos; flag on the given descriptor.
    See <a href="Unix.html#VALset_nonblock"><code class="code">Unix.set_nonblock</code></a>.<br>
 </div>
 
-<pre id="VALset_close_on_exec">val set_close_on_exec : file_descr -&gt; unit</pre><div class="info ">
+<pre id="VALset_close_on_exec"><span class="keyword">let</span> set_close_on_exec: file_descr =&gt; unit;
+</pre><div class="info ">
 Set the ``close-on-exec&apos;&apos; flag on the given descriptor.
    A descriptor with the close-on-exec flag is automatically
    closed when the current process starts another program with
    one of the <code class="code">exec</code> functions.<br>
 </div>
 
-<pre id="VALclear_close_on_exec">val clear_close_on_exec : file_descr -&gt; unit</pre><div class="info ">
+<pre id="VALclear_close_on_exec"><span class="keyword">let</span> clear_close_on_exec: file_descr =&gt; unit;
+</pre><div class="info ">
 Clear the ``close-on-exec&apos;&apos; flag on the given descriptor.
    See <a href="Unix.html#VALset_close_on_exec"><code class="code">Unix.set_close_on_exec</code></a>.<br>
 </div>
 <br>
 <h6 id="6_Directories">Directories</h6><br>
 
-<pre id="VALmkdir">val mkdir : string -&gt; file_perm -&gt; unit</pre><div class="info ">
+<pre id="VALmkdir"><span class="keyword">let</span> mkdir: (string, file_perm) =&gt; unit;
+</pre><div class="info ">
 Create a directory with the given permissions (see <a href="Unix.html#VALumask"><code class="code">Unix.umask</code></a>).<br>
 </div>
 
-<pre id="VALrmdir">val rmdir : string -&gt; unit</pre><div class="info ">
+<pre id="VALrmdir"><span class="keyword">let</span> rmdir: string =&gt; unit;
+</pre><div class="info ">
 Remove an empty directory.<br>
 </div>
 
-<pre id="VALchdir">val chdir : string -&gt; unit</pre><div class="info ">
+<pre id="VALchdir"><span class="keyword">let</span> chdir: string =&gt; unit;
+</pre><div class="info ">
 Change the process working directory.<br>
 </div>
 
-<pre id="VALgetcwd">val getcwd : unit -&gt; string</pre><div class="info ">
+<pre id="VALgetcwd"><span class="keyword">let</span> getcwd: unit =&gt; string;
+</pre><div class="info ">
 Return the name of the current working directory.<br>
 </div>
 
-<pre id="VALchroot">val chroot : string -&gt; unit</pre><div class="info ">
+<pre id="VALchroot"><span class="keyword">let</span> chroot: string =&gt; unit;
+</pre><div class="info ">
 Change the process root directory.<br>
 </div>
 
-<pre id="TYPEdir_handle"><span class="keyword">type</span> dir_handle </pre>
+<pre id="TYPEdir_handle"><span class="keyword">type</span> dir_handle;
+</pre>
 <div class="info ">
 The type of descriptors over opened directories.<br>
 </div>
 
 
-<pre id="VALopendir">val opendir : string -&gt; dir_handle</pre><div class="info ">
+<pre id="VALopendir"><span class="keyword">let</span> opendir: string =&gt; dir_handle;
+</pre><div class="info ">
 Open a descriptor on a directory<br>
 </div>
 
-<pre id="VALreaddir">val readdir : dir_handle -&gt; string</pre><div class="info ">
+<pre id="VALreaddir"><span class="keyword">let</span> readdir: dir_handle =&gt; string;
+</pre><div class="info ">
 Return the next entry in a directory.<br>
 <b>Raises</b> <code>End_of_file</code> when the end of the directory has been reached.<br>
 </div>
 
-<pre id="VALrewinddir">val rewinddir : dir_handle -&gt; unit</pre><div class="info ">
+<pre id="VALrewinddir"><span class="keyword">let</span> rewinddir: dir_handle =&gt; unit;
+</pre><div class="info ">
 Reposition the descriptor to the beginning of the directory<br>
 </div>
 
-<pre id="VALclosedir">val closedir : dir_handle -&gt; unit</pre><div class="info ">
+<pre id="VALclosedir"><span class="keyword">let</span> closedir: dir_handle =&gt; unit;
+</pre><div class="info ">
 Close a directory descriptor.<br>
 </div>
 <br>
 <h6 id="6_Pipesandredirections">Pipes and redirections</h6><br>
 
-<pre id="VALpipe">val pipe : unit -&gt; file_descr * file_descr</pre><div class="info ">
+<pre id="VALpipe"><span class="keyword">let</span> pipe: unit =&gt; (file_descr, file_descr);
+</pre><div class="info ">
 Create a pipe. The first component of the result is opened
    for reading, that&apos;s the exit to the pipe. The second component is
    opened for writing, that&apos;s the entrance to the pipe.<br>
 </div>
 
-<pre id="VALmkfifo">val mkfifo : string -&gt; file_perm -&gt; unit</pre><div class="info ">
+<pre id="VALmkfifo"><span class="keyword">let</span> mkfifo: (string, file_perm) =&gt; unit;
+</pre><div class="info ">
 Create a named pipe with the given permissions (see <a href="Unix.html#VALumask"><code class="code">Unix.umask</code></a>).<br>
 </div>
 <br>
 <h6 id="6_Highlevelprocessandredirectionmanagement">High-level process and redirection management</h6><br>
 
-<pre id="VALcreate_process">val create_process : string -&gt;       string array -&gt; file_descr -&gt; file_descr -&gt; file_descr -&gt; int</pre><div class="info ">
+<pre id="VALcreate_process"><span class="keyword">let</span> create_process: (string, array(string), file_descr, file_descr, file_descr) =&gt; int;
+</pre><div class="info ">
 <code class="code">create_process prog args new_stdin new_stdout new_stderr</code>
    forks a new process that executes the program
    in file <code class="code">prog</code>, with arguments <code class="code">args</code>. The pid of the new
@@ -1618,13 +1686,16 @@ Create a named pipe with the given permissions (see <a href="Unix.html#VALumask"
    The new process has the same environment as the current process.<br>
 </div>
 
-<pre id="VALcreate_process_env">val create_process_env : string -&gt;       string array -&gt;       string array -&gt; file_descr -&gt; file_descr -&gt; file_descr -&gt; int</pre><div class="info ">
+<pre id="VALcreate_process_env"><span class="keyword">let</span> create_process_env:
+  (string, array(string), array(string), file_descr, file_descr, file_descr) =&gt; int;
+</pre><div class="info ">
 <code class="code">create_process_env prog args env new_stdin new_stdout new_stderr</code>
    works as <a href="Unix.html#VALcreate_process"><code class="code">Unix.create_process</code></a>, except that the extra argument
    <code class="code">env</code> specifies the environment passed to the program.<br>
 </div>
 
-<pre id="VALopen_process_in">val open_process_in : string -&gt; Pervasives.in_channel</pre><div class="info ">
+<pre id="VALopen_process_in"><span class="keyword">let</span> open_process_in: string =&gt; Pervasives.in_channel;
+</pre><div class="info ">
 High-level pipe and process management. This function
    runs the given command in parallel with the program.
    The standard output of the command is redirected to a pipe,
@@ -1632,7 +1703,8 @@ High-level pipe and process management. This function
    The command is interpreted by the shell <code class="code">/bin/sh</code> (cf. <code class="code">system</code>).<br>
 </div>
 
-<pre id="VALopen_process_out">val open_process_out : string -&gt; Pervasives.out_channel</pre><div class="info ">
+<pre id="VALopen_process_out"><span class="keyword">let</span> open_process_out: string =&gt; Pervasives.out_channel;
+</pre><div class="info ">
 Same as <a href="Unix.html#VALopen_process_in"><code class="code">Unix.open_process_in</code></a>, but redirect the standard input of
    the command to a pipe.  Data written to the returned output channel
    is sent to the standard input of the command.
@@ -1641,39 +1713,47 @@ Same as <a href="Unix.html#VALopen_process_in"><code class="code">Unix.open_proc
    correct synchronization.<br>
 </div>
 
-<pre id="VALopen_process">val open_process : string -&gt; Pervasives.in_channel * Pervasives.out_channel</pre><div class="info ">
+<pre id="VALopen_process"><span class="keyword">let</span> open_process: string =&gt; (Pervasives.in_channel, Pervasives.out_channel);
+</pre><div class="info ">
 Same as <a href="Unix.html#VALopen_process_out"><code class="code">Unix.open_process_out</code></a>, but redirects both the standard input
    and standard output of the command to pipes connected to the two
    returned channels.  The input channel is connected to the output
    of the command, and the output channel to the input of the command.<br>
 </div>
 
-<pre id="VALopen_process_full">val open_process_full : string -&gt;       string array -&gt;       Pervasives.in_channel * Pervasives.out_channel * Pervasives.in_channel</pre><div class="info ">
+<pre id="VALopen_process_full"><span class="keyword">let</span> open_process_full:
+  (string, array(string)) =&gt; (Pervasives.in_channel, Pervasives.out_channel, Pervasives.in_channel);
+</pre><div class="info ">
 Similar to <a href="Unix.html#VALopen_process"><code class="code">Unix.open_process</code></a>, but the second argument specifies
    the environment passed to the command.  The result is a triple
    of channels connected respectively to the standard output, standard input,
    and standard error of the command.<br>
 </div>
 
-<pre id="VALclose_process_in">val close_process_in : Pervasives.in_channel -&gt; process_status</pre><div class="info ">
+<pre id="VALclose_process_in"><span class="keyword">let</span> close_process_in: Pervasives.in_channel =&gt; process_status;
+</pre><div class="info ">
 Close channels opened by <a href="Unix.html#VALopen_process_in"><code class="code">Unix.open_process_in</code></a>,
    wait for the associated command to terminate,
    and return its termination status.<br>
 </div>
 
-<pre id="VALclose_process_out">val close_process_out : Pervasives.out_channel -&gt; process_status</pre><div class="info ">
+<pre id="VALclose_process_out"><span class="keyword">let</span> close_process_out: Pervasives.out_channel =&gt; process_status;
+</pre><div class="info ">
 Close channels opened by <a href="Unix.html#VALopen_process_out"><code class="code">Unix.open_process_out</code></a>,
    wait for the associated command to terminate,
    and return its termination status.<br>
 </div>
 
-<pre id="VALclose_process">val close_process : Pervasives.in_channel * Pervasives.out_channel -&gt; process_status</pre><div class="info ">
+<pre id="VALclose_process"><span class="keyword">let</span> close_process: ((Pervasives.in_channel, Pervasives.out_channel)) =&gt; process_status;
+</pre><div class="info ">
 Close channels opened by <a href="Unix.html#VALopen_process"><code class="code">Unix.open_process</code></a>,
    wait for the associated command to terminate,
    and return its termination status.<br>
 </div>
 
-<pre id="VALclose_process_full">val close_process_full : Pervasives.in_channel * Pervasives.out_channel * Pervasives.in_channel -&gt;       process_status</pre><div class="info ">
+<pre id="VALclose_process_full"><span class="keyword">let</span> close_process_full:
+  ((Pervasives.in_channel, Pervasives.out_channel, Pervasives.in_channel)) =&gt; process_status;
+</pre><div class="info ">
 Close channels opened by <a href="Unix.html#VALopen_process_full"><code class="code">Unix.open_process_full</code></a>,
    wait for the associated command to terminate,
    and return its termination status.<br>
@@ -1681,18 +1761,23 @@ Close channels opened by <a href="Unix.html#VALopen_process_full"><code class="c
 <br>
 <h6 id="6_Symboliclinks">Symbolic links</h6><br>
 
-<pre id="VALsymlink">val symlink : string -&gt; string -&gt; unit</pre><div class="info ">
+<pre id="VALsymlink"><span class="keyword">let</span> symlink: (string, string) =&gt; unit;
+</pre><div class="info ">
 <code class="code">symlink source dest</code> creates the file <code class="code">dest</code> as a symbolic link
    to the file <code class="code">source</code>.<br>
 </div>
 
-<pre id="VALreadlink">val readlink : string -&gt; string</pre><div class="info ">
+<pre id="VALreadlink"><span class="keyword">let</span> readlink: string =&gt; string;
+</pre><div class="info ">
 Read the contents of a link.<br>
 </div>
 <br>
 <h6 id="6_Polling">Polling</h6><br>
 
-<pre id="VALselect">val select : file_descr list -&gt;       file_descr list -&gt;       file_descr list -&gt;       float -&gt; file_descr list * file_descr list * file_descr list</pre><div class="info ">
+<pre id="VALselect"><span class="keyword">let</span> select:
+  (list(file_descr), list(file_descr), list(file_descr), float) =&gt;
+  (list(file_descr), list(file_descr), list(file_descr));
+</pre><div class="info ">
 Wait until some input/output operations become possible on
    some channels. The three list arguments are, respectively, a set
    of descriptors to check for reading (first argument), for writing
@@ -1774,7 +1859,8 @@ Commands for <a href="Unix.html#VALlockf"><code class="code">Unix.lockf</code></
 </div>
 
 
-<pre id="VALlockf">val lockf : file_descr -&gt; lock_command -&gt; int -&gt; unit</pre><div class="info ">
+<pre id="VALlockf"><span class="keyword">let</span> lockf: (file_descr, lock_command, int) =&gt; unit;
+</pre><div class="info ">
 <code class="code">lockf fd cmd size</code> puts a lock on a region of the file opened
    as <code class="code">fd</code>. The region starts at the current read/write position for
    <code class="code">fd</code> (as set by <a href="Unix.html#VALlseek"><code class="code">Unix.lseek</code></a>), and extends <code class="code">size</code> bytes forward if
@@ -1806,7 +1892,8 @@ Commands for <a href="Unix.html#VALlockf"><code class="code">Unix.lockf</code></
    Note: installation of signal handlers is performed via
    the functions <a href="Sys.html#VALsignal"><code class="code">Sys.signal</code></a> and <a href="Sys.html#VALset_signal"><code class="code">Sys.set_signal</code></a>.<br>
 
-<pre id="VALkill">val kill : int -&gt; int -&gt; unit</pre><div class="info ">
+<pre id="VALkill"><span class="keyword">let</span> kill: (int, int) =&gt; unit;
+</pre><div class="info ">
 <code class="code">kill pid sig</code> sends signal number <code class="code">sig</code> to the process
    with id <code class="code">pid</code>. Under Windows, only the <code class="code">Sys.sigkill</code> signal
    is emulated.<br>
@@ -1837,7 +1924,8 @@ Commands for <a href="Unix.html#VALlockf"><code class="code">Unix.lockf</code></
 
 
 
-<pre id="VALsigprocmask">val sigprocmask : sigprocmask_command -&gt; int list -&gt; int list</pre><div class="info ">
+<pre id="VALsigprocmask"><span class="keyword">let</span> sigprocmask: (sigprocmask_command, list(int)) =&gt; list(int);
+</pre><div class="info ">
 <code class="code">sigprocmask cmd sigs</code> changes the set of blocked signals.
    If <code class="code">cmd</code> is <code class="code">SIG_SETMASK</code>, blocked signals are set to those in
    the list <code class="code">sigs</code>.
@@ -1848,17 +1936,20 @@ Commands for <a href="Unix.html#VALlockf"><code class="code">Unix.lockf</code></
    <code class="code">sigprocmask</code> returns the set of previously blocked signals.<br>
 </div>
 
-<pre id="VALsigpending">val sigpending : unit -&gt; int list</pre><div class="info ">
+<pre id="VALsigpending"><span class="keyword">let</span> sigpending: unit =&gt; list(int);
+</pre><div class="info ">
 Return the set of blocked signals that are currently pending.<br>
 </div>
 
-<pre id="VALsigsuspend">val sigsuspend : int list -&gt; unit</pre><div class="info ">
+<pre id="VALsigsuspend"><span class="keyword">let</span> sigsuspend: list(int) =&gt; unit;
+</pre><div class="info ">
 <code class="code">sigsuspend sigs</code> atomically sets the blocked signals to <code class="code">sigs</code>
    and waits for a non-ignored, non-blocked signal to be delivered.
    On return, the blocked signals are reset to their initial value.<br>
 </div>
 
-<pre id="VALpause">val pause : unit -&gt; unit</pre><div class="info ">
+<pre id="VALpause"><span class="keyword">let</span> pause: unit =&gt; unit;
+</pre><div class="info ">
 Wait until a non-ignored, non-blocked signal is delivered.<br>
 </div>
 <br>
@@ -2010,26 +2101,31 @@ The type representing wallclock time and calendar date.<br>
 </div>
 
 
-<pre id="VALtime">val time : unit -&gt; float</pre><div class="info ">
+<pre id="VALtime"><span class="keyword">let</span> time: unit =&gt; float;
+</pre><div class="info ">
 Return the current time since 00:00:00 GMT, Jan. 1, 1970,
    in seconds.<br>
 </div>
 
-<pre id="VALgettimeofday">val gettimeofday : unit -&gt; float</pre><div class="info ">
+<pre id="VALgettimeofday"><span class="keyword">let</span> gettimeofday: unit =&gt; float;
+</pre><div class="info ">
 Same as <a href="Unix.html#VALtime"><code class="code">Unix.time</code></a>, but with resolution better than 1 second.<br>
 </div>
 
-<pre id="VALgmtime">val gmtime : float -&gt; tm</pre><div class="info ">
+<pre id="VALgmtime"><span class="keyword">let</span> gmtime: float =&gt; tm;
+</pre><div class="info ">
 Convert a time in seconds, as returned by <a href="Unix.html#VALtime"><code class="code">Unix.time</code></a>, into a date and
    a time. Assumes UTC (Coordinated Universal Time), also known as GMT.<br>
 </div>
 
-<pre id="VALlocaltime">val localtime : float -&gt; tm</pre><div class="info ">
+<pre id="VALlocaltime"><span class="keyword">let</span> localtime: float =&gt; tm;
+</pre><div class="info ">
 Convert a time in seconds, as returned by <a href="Unix.html#VALtime"><code class="code">Unix.time</code></a>, into a date and
    a time. Assumes the local time zone.<br>
 </div>
 
-<pre id="VALmktime">val mktime : tm -&gt; float * tm</pre><div class="info ">
+<pre id="VALmktime"><span class="keyword">let</span> mktime: tm =&gt; (float, tm);
+</pre><div class="info ">
 Convert a date and time, specified by the <code class="code">tm</code> argument, into
    a time in seconds, as returned by <a href="Unix.html#VALtime"><code class="code">Unix.time</code></a>.  The <code class="code">tm_isdst</code>,
    <code class="code">tm_wday</code> and <code class="code">tm_yday</code> fields of <code class="code">tm</code> are ignored.  Also return a
@@ -2040,19 +2136,23 @@ Convert a date and time, specified by the <code class="code">tm</code> argument,
    local time zone.<br>
 </div>
 
-<pre id="VALalarm">val alarm : int -&gt; int</pre><div class="info ">
+<pre id="VALalarm"><span class="keyword">let</span> alarm: int =&gt; int;
+</pre><div class="info ">
 Schedule a <code class="code">SIGALRM</code> signal after the given number of seconds.<br>
 </div>
 
-<pre id="VALsleep">val sleep : int -&gt; unit</pre><div class="info ">
+<pre id="VALsleep"><span class="keyword">let</span> sleep: int =&gt; unit;
+</pre><div class="info ">
 Stop execution for the given number of seconds.<br>
 </div>
 
-<pre id="VALtimes">val times : unit -&gt; process_times</pre><div class="info ">
+<pre id="VALtimes"><span class="keyword">let</span> times: unit =&gt; process_times;
+</pre><div class="info ">
 Return the execution times of the process.<br>
 </div>
 
-<pre id="VALutimes">val utimes : string -&gt; float -&gt; float -&gt; unit</pre><div class="info ">
+<pre id="VALutimes"><span class="keyword">let</span> utimes: (string, float, float) =&gt; unit;
+</pre><div class="info ">
 Set the last access time (second arg) and last modification time
    (third arg) for a file. Times are expressed in seconds from
    00:00:00 GMT, Jan. 1, 1970.  A time of <code class="code">0.0</code> is interpreted as the
@@ -2128,11 +2228,13 @@ The type describing the status of an interval timer<br>
 </div>
 
 
-<pre id="VALgetitimer">val getitimer : interval_timer -&gt; interval_timer_status</pre><div class="info ">
+<pre id="VALgetitimer"><span class="keyword">let</span> getitimer: interval_timer =&gt; interval_timer_status;
+</pre><div class="info ">
 Return the current status of the given interval timer.<br>
 </div>
 
-<pre id="VALsetitimer">val setitimer : interval_timer -&gt;       interval_timer_status -&gt; interval_timer_status</pre><div class="info ">
+<pre id="VALsetitimer"><span class="keyword">let</span> setitimer: (interval_timer, interval_timer_status) =&gt; interval_timer_status;
+</pre><div class="info ">
 <code class="code">setitimer t s</code> sets the interval timer <code class="code">t</code> and returns
    its previous status. The <code class="code">s</code> argument is interpreted as follows:
    <code class="code">s.it_value</code>, if nonzero, is the time to the next timer expiration;
@@ -2145,41 +2247,50 @@ Return the current status of the given interval timer.<br>
 <br>
 <h6 id="6_Useridgroupid">User id, group id</h6><br>
 
-<pre id="VALgetuid">val getuid : unit -&gt; int</pre><div class="info ">
+<pre id="VALgetuid"><span class="keyword">let</span> getuid: unit =&gt; int;
+</pre><div class="info ">
 Return the user id of the user executing the process.<br>
 </div>
 
-<pre id="VALgeteuid">val geteuid : unit -&gt; int</pre><div class="info ">
+<pre id="VALgeteuid"><span class="keyword">let</span> geteuid: unit =&gt; int;
+</pre><div class="info ">
 Return the effective user id under which the process runs.<br>
 </div>
 
-<pre id="VALsetuid">val setuid : int -&gt; unit</pre><div class="info ">
+<pre id="VALsetuid"><span class="keyword">let</span> setuid: int =&gt; unit;
+</pre><div class="info ">
 Set the real user id and effective user id for the process.<br>
 </div>
 
-<pre id="VALgetgid">val getgid : unit -&gt; int</pre><div class="info ">
+<pre id="VALgetgid"><span class="keyword">let</span> getgid: unit =&gt; int;
+</pre><div class="info ">
 Return the group id of the user executing the process.<br>
 </div>
 
-<pre id="VALgetegid">val getegid : unit -&gt; int</pre><div class="info ">
+<pre id="VALgetegid"><span class="keyword">let</span> getegid: unit =&gt; int;
+</pre><div class="info ">
 Return the effective group id under which the process runs.<br>
 </div>
 
-<pre id="VALsetgid">val setgid : int -&gt; unit</pre><div class="info ">
+<pre id="VALsetgid"><span class="keyword">let</span> setgid: int =&gt; unit;
+</pre><div class="info ">
 Set the real group id and effective group id for the process.<br>
 </div>
 
-<pre id="VALgetgroups">val getgroups : unit -&gt; int array</pre><div class="info ">
+<pre id="VALgetgroups"><span class="keyword">let</span> getgroups: unit =&gt; array(int);
+</pre><div class="info ">
 Return the list of groups to which the user executing the process
    belongs.<br>
 </div>
 
-<pre id="VALsetgroups">val setgroups : int array -&gt; unit</pre><div class="info ">
+<pre id="VALsetgroups"><span class="keyword">let</span> setgroups: array(int) =&gt; unit;
+</pre><div class="info ">
 <code class="code">setgroups groups</code> sets the supplementary group IDs for the
       calling process. Appropriate privileges are required.<br>
 </div>
 
-<pre id="VALinitgroups">val initgroups : string -&gt; int -&gt; unit</pre><div class="info ">
+<pre id="VALinitgroups"><span class="keyword">let</span> initgroups: (string, int) =&gt; unit;
+</pre><div class="info ">
 <code class="code">initgroups user group</code> initializes the group access list by
       reading the group database /etc/group and using all groups of
       which <code class="code">user</code> is a member. The additional group <code class="code">group</code> is also
@@ -2279,39 +2390,46 @@ Structure of entries in the <code class="code">groups</code> database.<br>
 </div>
 
 
-<pre id="VALgetlogin">val getlogin : unit -&gt; string</pre><div class="info ">
+<pre id="VALgetlogin"><span class="keyword">let</span> getlogin: unit =&gt; string;
+</pre><div class="info ">
 Return the login name of the user executing the process.<br>
 </div>
 
-<pre id="VALgetpwnam">val getpwnam : string -&gt; passwd_entry</pre><div class="info ">
+<pre id="VALgetpwnam"><span class="keyword">let</span> getpwnam: string =&gt; passwd_entry;
+</pre><div class="info ">
 Find an entry in <code class="code">passwd</code> with the given name, or raise
    <code class="code">Not_found</code>.<br>
 </div>
 
-<pre id="VALgetgrnam">val getgrnam : string -&gt; group_entry</pre><div class="info ">
+<pre id="VALgetgrnam"><span class="keyword">let</span> getgrnam: string =&gt; group_entry;
+</pre><div class="info ">
 Find an entry in <code class="code">group</code> with the given name, or raise
    <code class="code">Not_found</code>.<br>
 </div>
 
-<pre id="VALgetpwuid">val getpwuid : int -&gt; passwd_entry</pre><div class="info ">
+<pre id="VALgetpwuid"><span class="keyword">let</span> getpwuid: int =&gt; passwd_entry;
+</pre><div class="info ">
 Find an entry in <code class="code">passwd</code> with the given user id, or raise
    <code class="code">Not_found</code>.<br>
 </div>
 
-<pre id="VALgetgrgid">val getgrgid : int -&gt; group_entry</pre><div class="info ">
+<pre id="VALgetgrgid"><span class="keyword">let</span> getgrgid: int =&gt; group_entry;
+</pre><div class="info ">
 Find an entry in <code class="code">group</code> with the given group id, or raise
    <code class="code">Not_found</code>.<br>
 </div>
 <br>
 <h6 id="6_Internetaddresses">Internet addresses</h6><br>
 
-<pre id="TYPEinet_addr"><span class="keyword">type</span> inet_addr </pre>
+<pre id="TYPEinet_addr"><span class="keyword">type</span> inet_addr;
+</pre>
 <div class="info ">
 The abstract type of Internet addresses.<br>
 </div>
 
 
-<pre id="VALinet_addr_of_string">val inet_addr_of_string : string -&gt; inet_addr</pre><div class="info ">
+<pre id="VALinet_addr_of_string"><span class="keyword">let</span> inet_addr_of_string: string =&gt; inet_addr;
+</pre><div class="info ">
 Conversion from the printable representation of an Internet
     address to its internal representation.  The argument string
     consists of 4 numbers separated by periods (<code class="code">XXX.YYY.ZZZ.TTT</code>)
@@ -2320,27 +2438,32 @@ Conversion from the printable representation of an Internet
     does not match these formats.<br>
 </div>
 
-<pre id="VALstring_of_inet_addr">val string_of_inet_addr : inet_addr -&gt; string</pre><div class="info ">
+<pre id="VALstring_of_inet_addr"><span class="keyword">let</span> string_of_inet_addr: inet_addr =&gt; string;
+</pre><div class="info ">
 Return the printable representation of the given Internet address.
     See <a href="Unix.html#VALinet_addr_of_string"><code class="code">Unix.inet_addr_of_string</code></a> for a description of the
     printable representation.<br>
 </div>
 
-<pre id="VALinet_addr_any">val inet_addr_any : inet_addr</pre><div class="info ">
+<pre id="VALinet_addr_any"><span class="keyword">let</span> inet_addr_any: inet_addr;
+</pre><div class="info ">
 A special IPv4 address, for use only with <code class="code">bind</code>, representing
    all the Internet addresses that the host machine possesses.<br>
 </div>
 
-<pre id="VALinet_addr_loopback">val inet_addr_loopback : inet_addr</pre><div class="info ">
+<pre id="VALinet_addr_loopback"><span class="keyword">let</span> inet_addr_loopback: inet_addr;
+</pre><div class="info ">
 A special IPv4 address representing the host machine (<code class="code">127.0.0.1</code>).<br>
 </div>
 
-<pre id="VALinet6_addr_any">val inet6_addr_any : inet_addr</pre><div class="info ">
+<pre id="VALinet6_addr_any"><span class="keyword">let</span> inet6_addr_any: inet_addr;
+</pre><div class="info ">
 A special IPv6 address, for use only with <code class="code">bind</code>, representing
    all the Internet addresses that the host machine possesses.<br>
 </div>
 
-<pre id="VALinet6_addr_loopback">val inet6_addr_loopback : inet_addr</pre><div class="info ">
+<pre id="VALinet6_addr_loopback"><span class="keyword">let</span> inet6_addr_loopback: inet_addr;
+</pre><div class="info ">
 A special IPv6 address representing the host machine (<code class="code">::1</code>).<br>
 </div>
 <br>
@@ -2457,35 +2580,42 @@ The type of socket addresses. <code class="code">ADDR_UNIX name</code> is a sock
 
 
 
-<pre id="VALsocket">val socket : socket_domain -&gt; socket_type -&gt; int -&gt; file_descr</pre><div class="info ">
+<pre id="VALsocket"><span class="keyword">let</span> socket: (socket_domain, socket_type, int) =&gt; file_descr;
+</pre><div class="info ">
 Create a new socket in the given domain, and with the
    given kind. The third argument is the protocol type; 0 selects
    the default protocol for that kind of sockets.<br>
 </div>
 
-<pre id="VALdomain_of_sockaddr">val domain_of_sockaddr : sockaddr -&gt; socket_domain</pre><div class="info ">
+<pre id="VALdomain_of_sockaddr"><span class="keyword">let</span> domain_of_sockaddr: sockaddr =&gt; socket_domain;
+</pre><div class="info ">
 Return the socket domain adequate for the given socket address.<br>
 </div>
 
-<pre id="VALsocketpair">val socketpair : socket_domain -&gt;       socket_type -&gt; int -&gt; file_descr * file_descr</pre><div class="info ">
+<pre id="VALsocketpair"><span class="keyword">let</span> socketpair: (socket_domain, socket_type, int) =&gt; (file_descr, file_descr);
+</pre><div class="info ">
 Create a pair of unnamed sockets, connected together.<br>
 </div>
 
-<pre id="VALaccept">val accept : file_descr -&gt; file_descr * sockaddr</pre><div class="info ">
+<pre id="VALaccept"><span class="keyword">let</span> accept: file_descr =&gt; (file_descr, sockaddr);
+</pre><div class="info ">
 Accept connections on the given socket. The returned descriptor
    is a socket connected to the client; the returned address is
    the address of the connecting client.<br>
 </div>
 
-<pre id="VALbind">val bind : file_descr -&gt; sockaddr -&gt; unit</pre><div class="info ">
+<pre id="VALbind"><span class="keyword">let</span> bind: (file_descr, sockaddr) =&gt; unit;
+</pre><div class="info ">
 Bind a socket to an address.<br>
 </div>
 
-<pre id="VALconnect">val connect : file_descr -&gt; sockaddr -&gt; unit</pre><div class="info ">
+<pre id="VALconnect"><span class="keyword">let</span> connect: (file_descr, sockaddr) =&gt; unit;
+</pre><div class="info ">
 Connect a socket to an address.<br>
 </div>
 
-<pre id="VALlisten">val listen : file_descr -&gt; int -&gt; unit</pre><div class="info ">
+<pre id="VALlisten"><span class="keyword">let</span> listen: (file_descr, int) =&gt; unit;
+</pre><div class="info ">
 Set up a socket for receiving connection requests. The integer
    argument is the maximal number of pending requests.<br>
 </div>
@@ -2527,7 +2657,8 @@ The type of commands for <code class="code">shutdown</code>.<br>
 </div>
 
 
-<pre id="VALshutdown">val shutdown : file_descr -&gt; shutdown_command -&gt; unit</pre><div class="info ">
+<pre id="VALshutdown"><span class="keyword">let</span> shutdown: (file_descr, shutdown_command) =&gt; unit;
+</pre><div class="info ">
 Shutdown a socket connection. <code class="code">SHUTDOWN_SEND</code> as second argument
    causes reads on the other end of the connection to return
    an end-of-file condition.
@@ -2535,11 +2666,13 @@ Shutdown a socket connection. <code class="code">SHUTDOWN_SEND</code> as second 
    to return a closed pipe condition (<code class="code">SIGPIPE</code> signal).<br>
 </div>
 
-<pre id="VALgetsockname">val getsockname : file_descr -&gt; sockaddr</pre><div class="info ">
+<pre id="VALgetsockname"><span class="keyword">let</span> getsockname: file_descr =&gt; sockaddr;
+</pre><div class="info ">
 Return the address of the given socket.<br>
 </div>
 
-<pre id="VALgetpeername">val getpeername : file_descr -&gt; sockaddr</pre><div class="info ">
+<pre id="VALgetpeername"><span class="keyword">let</span> getpeername: file_descr =&gt; sockaddr;
+</pre><div class="info ">
 Return the address of the host connected to the given socket.<br>
 </div>
 
@@ -2572,28 +2705,34 @@ The flags for <a href="Unix.html#VALrecv"><code class="code">Unix.recv</code></a
 
 
 
-<pre id="VALrecv">val recv : file_descr -&gt; bytes -&gt; int -&gt; int -&gt; msg_flag list -&gt; int</pre><div class="info ">
+<pre id="VALrecv"><span class="keyword">let</span> recv: (file_descr, bytes, int, int, list(msg_flag)) =&gt; int;
+</pre><div class="info ">
 Receive data from a connected socket.<br>
 </div>
 
-<pre id="VALrecvfrom">val recvfrom : file_descr -&gt;       bytes -&gt; int -&gt; int -&gt; msg_flag list -&gt; int * sockaddr</pre><div class="info ">
+<pre id="VALrecvfrom"><span class="keyword">let</span> recvfrom: (file_descr, bytes, int, int, list(msg_flag)) =&gt; (int, sockaddr);
+</pre><div class="info ">
 Receive data from an unconnected socket.<br>
 </div>
 
-<pre id="VALsend">val send : file_descr -&gt; bytes -&gt; int -&gt; int -&gt; msg_flag list -&gt; int</pre><div class="info ">
+<pre id="VALsend"><span class="keyword">let</span> send: (file_descr, bytes, int, int, list(msg_flag)) =&gt; int;
+</pre><div class="info ">
 Send data over a connected socket.<br>
 </div>
 
-<pre id="VALsend_substring">val send_substring : file_descr -&gt; string -&gt; int -&gt; int -&gt; msg_flag list -&gt; int</pre><div class="info ">
+<pre id="VALsend_substring"><span class="keyword">let</span> send_substring: (file_descr, string, int, int, list(msg_flag)) =&gt; int;
+</pre><div class="info ">
 Same as <code class="code">send</code>, but take the data from a string instead of a byte
     sequence.<br>
 </div>
 
-<pre id="VALsendto">val sendto : file_descr -&gt;       bytes -&gt; int -&gt; int -&gt; msg_flag list -&gt; sockaddr -&gt; int</pre><div class="info ">
+<pre id="VALsendto"><span class="keyword">let</span> sendto: (file_descr, bytes, int, int, list(msg_flag), sockaddr) =&gt; int;
+</pre><div class="info ">
 Send data over an unconnected socket.<br>
 </div>
 
-<pre id="VALsendto_substring">val sendto_substring : file_descr -&gt;       string -&gt; int -&gt; int -&gt; msg_flag list -&gt; sockaddr -&gt; int</pre><div class="info ">
+<pre id="VALsendto_substring"><span class="keyword">let</span> sendto_substring: (file_descr, string, int, int, list(msg_flag), sockaddr) =&gt; int;
+</pre><div class="info ">
 Same as <code class="code">sendto</code>, but take the data from a string instead of a
     byte sequence.<br>
 </div>
@@ -2820,58 +2959,69 @@ The socket options that can be consulted with <a href="Unix.html#VALgetsockopt_f
 </div>
 
 
-<pre id="VALgetsockopt">val getsockopt : file_descr -&gt; socket_bool_option -&gt; bool</pre><div class="info ">
+<pre id="VALgetsockopt"><span class="keyword">let</span> getsockopt: (file_descr, socket_bool_option) =&gt; bool;
+</pre><div class="info ">
 Return the current status of a boolean-valued option
    in the given socket.<br>
 </div>
 
-<pre id="VALsetsockopt">val setsockopt : file_descr -&gt; socket_bool_option -&gt; bool -&gt; unit</pre><div class="info ">
+<pre id="VALsetsockopt"><span class="keyword">let</span> setsockopt: (file_descr, socket_bool_option, bool) =&gt; unit;
+</pre><div class="info ">
 Set or clear a boolean-valued option in the given socket.<br>
 </div>
 
-<pre id="VALgetsockopt_int">val getsockopt_int : file_descr -&gt; socket_int_option -&gt; int</pre><div class="info ">
+<pre id="VALgetsockopt_int"><span class="keyword">let</span> getsockopt_int: (file_descr, socket_int_option) =&gt; int;
+</pre><div class="info ">
 Same as <a href="Unix.html#VALgetsockopt"><code class="code">Unix.getsockopt</code></a> for an integer-valued socket option.<br>
 </div>
 
-<pre id="VALsetsockopt_int">val setsockopt_int : file_descr -&gt; socket_int_option -&gt; int -&gt; unit</pre><div class="info ">
+<pre id="VALsetsockopt_int"><span class="keyword">let</span> setsockopt_int: (file_descr, socket_int_option, int) =&gt; unit;
+</pre><div class="info ">
 Same as <a href="Unix.html#VALsetsockopt"><code class="code">Unix.setsockopt</code></a> for an integer-valued socket option.<br>
 </div>
 
-<pre id="VALgetsockopt_optint">val getsockopt_optint : file_descr -&gt; socket_optint_option -&gt; int option</pre><div class="info ">
+<pre id="VALgetsockopt_optint"><span class="keyword">let</span> getsockopt_optint: (file_descr, socket_optint_option) =&gt; option(int);
+</pre><div class="info ">
 Same as <a href="Unix.html#VALgetsockopt"><code class="code">Unix.getsockopt</code></a> for a socket option whose value is an
    <code class="code">int option</code>.<br>
 </div>
 
-<pre id="VALsetsockopt_optint">val setsockopt_optint : file_descr -&gt; socket_optint_option -&gt; int option -&gt; unit</pre><div class="info ">
+<pre id="VALsetsockopt_optint"><span class="keyword">let</span> setsockopt_optint: (file_descr, socket_optint_option, option(int)) =&gt; unit;
+</pre><div class="info ">
 Same as <a href="Unix.html#VALsetsockopt"><code class="code">Unix.setsockopt</code></a> for a socket option whose value is an
    <code class="code">int option</code>.<br>
 </div>
 
-<pre id="VALgetsockopt_float">val getsockopt_float : file_descr -&gt; socket_float_option -&gt; float</pre><div class="info ">
+<pre id="VALgetsockopt_float"><span class="keyword">let</span> getsockopt_float: (file_descr, socket_float_option) =&gt; float;
+</pre><div class="info ">
 Same as <a href="Unix.html#VALgetsockopt"><code class="code">Unix.getsockopt</code></a> for a socket option whose value is a
    floating-point number.<br>
 </div>
 
-<pre id="VALsetsockopt_float">val setsockopt_float : file_descr -&gt; socket_float_option -&gt; float -&gt; unit</pre><div class="info ">
+<pre id="VALsetsockopt_float"><span class="keyword">let</span> setsockopt_float: (file_descr, socket_float_option, float) =&gt; unit;
+</pre><div class="info ">
 Same as <a href="Unix.html#VALsetsockopt"><code class="code">Unix.setsockopt</code></a> for a socket option whose value is a
    floating-point number.<br>
 </div>
 
-<pre id="VALgetsockopt_error">val getsockopt_error : file_descr -&gt; error option</pre><div class="info ">
+<pre id="VALgetsockopt_error"><span class="keyword">let</span> getsockopt_error: file_descr =&gt; option(error);
+</pre><div class="info ">
 Return the error condition associated with the given socket,
     and clear it.<br>
 </div>
 <br>
 <h6 id="6_Highlevelnetworkconnectionfunctions">High-level network connection functions</h6><br>
 
-<pre id="VALopen_connection">val open_connection : sockaddr -&gt; Pervasives.in_channel * Pervasives.out_channel</pre><div class="info ">
+<pre id="VALopen_connection"><span class="keyword">let</span> open_connection: sockaddr =&gt; (Pervasives.in_channel, Pervasives.out_channel);
+</pre><div class="info ">
 Connect to a server at the given address.
    Return a pair of buffered channels connected to the server.
    Remember to call <a href="Pervasives.html#VALflush"><code class="code">Pervasives.flush</code></a> on the output channel at the right
    times to ensure correct synchronization.<br>
 </div>
 
-<pre id="VALshutdown_connection">val shutdown_connection : Pervasives.in_channel -&gt; unit</pre><div class="info ">
+<pre id="VALshutdown_connection"><span class="keyword">let</span> shutdown_connection: Pervasives.in_channel =&gt; unit;
+</pre><div class="info ">
 ``Shut down&apos;&apos; a connection established with <a href="Unix.html#VALopen_connection"><code class="code">Unix.open_connection</code></a>;
    that is, transmit an end-of-file condition to the server reading
    on the other side of the connection. This does not fully close the
@@ -2879,7 +3029,8 @@ Connect to a server at the given address.
    to free via <a href="Pervasives.html#VALclose_in"><code class="code">Pervasives.close_in</code></a>.<br>
 </div>
 
-<pre id="VALestablish_server">val establish_server : (Pervasives.in_channel -&gt; Pervasives.out_channel -&gt; unit) -&gt;       sockaddr -&gt; unit</pre><div class="info ">
+<pre id="VALestablish_server"><span class="keyword">let</span> establish_server: ((Pervasives.in_channel, Pervasives.out_channel) =&gt; unit, sockaddr) =&gt; unit;
+</pre><div class="info ">
 Establish a server on the given address.
    The function given as first argument is called for each connection
    with two buffered channels connected to the client. A new process
@@ -2990,36 +3141,43 @@ Structure of entries in the <code class="code">services</code> database.<br>
 </div>
 
 
-<pre id="VALgethostname">val gethostname : unit -&gt; string</pre><div class="info ">
+<pre id="VALgethostname"><span class="keyword">let</span> gethostname: unit =&gt; string;
+</pre><div class="info ">
 Return the name of the local host.<br>
 </div>
 
-<pre id="VALgethostbyname">val gethostbyname : string -&gt; host_entry</pre><div class="info ">
+<pre id="VALgethostbyname"><span class="keyword">let</span> gethostbyname: string =&gt; host_entry;
+</pre><div class="info ">
 Find an entry in <code class="code">hosts</code> with the given name, or raise
    <code class="code">Not_found</code>.<br>
 </div>
 
-<pre id="VALgethostbyaddr">val gethostbyaddr : inet_addr -&gt; host_entry</pre><div class="info ">
+<pre id="VALgethostbyaddr"><span class="keyword">let</span> gethostbyaddr: inet_addr =&gt; host_entry;
+</pre><div class="info ">
 Find an entry in <code class="code">hosts</code> with the given address, or raise
    <code class="code">Not_found</code>.<br>
 </div>
 
-<pre id="VALgetprotobyname">val getprotobyname : string -&gt; protocol_entry</pre><div class="info ">
+<pre id="VALgetprotobyname"><span class="keyword">let</span> getprotobyname: string =&gt; protocol_entry;
+</pre><div class="info ">
 Find an entry in <code class="code">protocols</code> with the given name, or raise
    <code class="code">Not_found</code>.<br>
 </div>
 
-<pre id="VALgetprotobynumber">val getprotobynumber : int -&gt; protocol_entry</pre><div class="info ">
+<pre id="VALgetprotobynumber"><span class="keyword">let</span> getprotobynumber: int =&gt; protocol_entry;
+</pre><div class="info ">
 Find an entry in <code class="code">protocols</code> with the given protocol number,
    or raise <code class="code">Not_found</code>.<br>
 </div>
 
-<pre id="VALgetservbyname">val getservbyname : string -&gt; string -&gt; service_entry</pre><div class="info ">
+<pre id="VALgetservbyname"><span class="keyword">let</span> getservbyname: (string, string) =&gt; service_entry;
+</pre><div class="info ">
 Find an entry in <code class="code">services</code> with the given name, or raise
    <code class="code">Not_found</code>.<br>
 </div>
 
-<pre id="VALgetservbyport">val getservbyport : int -&gt; string -&gt; service_entry</pre><div class="info ">
+<pre id="VALgetservbyport"><span class="keyword">let</span> getservbyport: (int, string) =&gt; service_entry;
+</pre><div class="info ">
 Find an entry in <code class="code">services</code> with the given service number,
    or raise <code class="code">Not_found</code>.<br>
 </div>
@@ -3152,7 +3310,8 @@ Options to <a href="Unix.html#VALgetaddrinfo"><code class="code">Unix.getaddrinf
 </div>
 
 
-<pre id="VALgetaddrinfo">val getaddrinfo : string -&gt; string -&gt; getaddrinfo_option list -&gt; addr_info list</pre><div class="info ">
+<pre id="VALgetaddrinfo"><span class="keyword">let</span> getaddrinfo: (string, string, list(getaddrinfo_option)) =&gt; list(addr_info);
+</pre><div class="info ">
 <code class="code">getaddrinfo host service opts</code> returns a list of <a href="Unix.html#TYPEaddr_info"><code class="code">Unix.addr_info</code></a>
     records describing socket parameters and addresses suitable for
     communicating with the given host and service.  The empty list is
@@ -3257,7 +3416,8 @@ Options to <a href="Unix.html#VALgetnameinfo"><code class="code">Unix.getnameinf
 </div>
 
 
-<pre id="VALgetnameinfo">val getnameinfo : sockaddr -&gt; getnameinfo_option list -&gt; name_info</pre><div class="info ">
+<pre id="VALgetnameinfo"><span class="keyword">let</span> getnameinfo: (sockaddr, list(getnameinfo_option)) =&gt; name_info;
+</pre><div class="info ">
 <code class="code">getnameinfo addr opts</code> returns the host name and service name
     corresponding to the socket address <code class="code">addr</code>.  <code class="code">opts</code> is a possibly
     empty list of options that governs how these names are obtained.
@@ -3660,7 +3820,8 @@ Stop character (usually ctrl-S).<br>
 
 
 
-<pre id="VALtcgetattr">val tcgetattr : file_descr -&gt; terminal_io</pre><div class="info ">
+<pre id="VALtcgetattr"><span class="keyword">let</span> tcgetattr: file_descr =&gt; terminal_io;
+</pre><div class="info ">
 Return the status of the terminal referred to by the given
    file descriptor.<br>
 </div>
@@ -3690,7 +3851,8 @@ Return the status of the terminal referred to by the given
 
 
 
-<pre id="VALtcsetattr">val tcsetattr : file_descr -&gt; setattr_when -&gt; terminal_io -&gt; unit</pre><div class="info ">
+<pre id="VALtcsetattr"><span class="keyword">let</span> tcsetattr: (file_descr, setattr_when, terminal_io) =&gt; unit;
+</pre><div class="info ">
 Set the status of the terminal referred to by the given
    file descriptor. The second argument indicates when the
    status change takes place: immediately (<code class="code">TCSANOW</code>),
@@ -3701,13 +3863,15 @@ Set the status of the terminal referred to by the given
    parameters.<br>
 </div>
 
-<pre id="VALtcsendbreak">val tcsendbreak : file_descr -&gt; int -&gt; unit</pre><div class="info ">
+<pre id="VALtcsendbreak"><span class="keyword">let</span> tcsendbreak: (file_descr, int) =&gt; unit;
+</pre><div class="info ">
 Send a break condition on the given file descriptor.
    The second argument is the duration of the break, in 0.1s units;
    0 means standard duration (0.25s).<br>
 </div>
 
-<pre id="VALtcdrain">val tcdrain : file_descr -&gt; unit</pre><div class="info ">
+<pre id="VALtcdrain"><span class="keyword">let</span> tcdrain: file_descr =&gt; unit;
+</pre><div class="info ">
 Waits until all output written on the given file descriptor
    has been transmitted.<br>
 </div>
@@ -3737,7 +3901,8 @@ Waits until all output written on the given file descriptor
 
 
 
-<pre id="VALtcflush">val tcflush : file_descr -&gt; flush_queue -&gt; unit</pre><div class="info ">
+<pre id="VALtcflush"><span class="keyword">let</span> tcflush: (file_descr, flush_queue) =&gt; unit;
+</pre><div class="info ">
 Discard data written on the given file descriptor but not yet
    transmitted, or data received but not yet read, depending on the
    second argument: <code class="code">TCIFLUSH</code> flushes data received but not read,
@@ -3777,7 +3942,8 @@ Discard data written on the given file descriptor but not yet
 
 
 
-<pre id="VALtcflow">val tcflow : file_descr -&gt; flow_action -&gt; unit</pre><div class="info ">
+<pre id="VALtcflow"><span class="keyword">let</span> tcflow: (file_descr, flow_action) =&gt; unit;
+</pre><div class="info ">
 Suspend or restart reception or transmission of data on
    the given file descriptor, depending on the second argument:
    <code class="code">TCOOFF</code> suspends output, <code class="code">TCOON</code> restarts output,
@@ -3785,7 +3951,8 @@ Suspend or restart reception or transmission of data on
    and <code class="code">TCION</code> transmits a START character to restart input.<br>
 </div>
 
-<pre id="VALsetsid">val setsid : unit -&gt; int</pre><div class="info ">
+<pre id="VALsetsid"><span class="keyword">let</span> setsid: unit =&gt; int;
+</pre><div class="info ">
 Put the calling process in a new session and detach it from
    its controlling terminal.<br>
 </div>

@@ -12,7 +12,8 @@ Arrays of weak pointers and hash tables of weak pointers.<br>
 <br>
 <h6 id="6_Lowlevelfunctions">Low-level functions</h6><br>
 
-<pre id="TYPEt"><span class="keyword">type</span> &apos;a t </pre>
+<pre id="TYPEt"><span class="keyword">type</span> t(&apos;a);
+</pre>
 <div class="info ">
 The type of arrays of weak pointers (weak arrays).  A weak
    pointer is a value that the garbage collector may erase whenever
@@ -34,18 +35,21 @@ The type of arrays of weak pointers (weak arrays).  A weak
 </div>
 
 
-<pre id="VALcreate">val create : int -&gt; &apos;a t</pre><div class="info ">
+<pre id="VALcreate"><span class="keyword">let</span> create: int =&gt; t(&apos;a);
+</pre><div class="info ">
 <code class="code">Weak.create n</code> returns a new weak array of length <code class="code">n</code>.
    All the pointers are initially empty.  Raise <code class="code">Invalid_argument</code>
    if <code class="code">n</code> is negative or greater than <a href="Sys.html#VALmax_array_length"><code class="code">Sys.max_array_length</code></a><code class="code">-1</code>.<br>
 </div>
 
-<pre id="VALlength">val length : &apos;a t -&gt; int</pre><div class="info ">
+<pre id="VALlength"><span class="keyword">let</span> length: t(&apos;a) =&gt; int;
+</pre><div class="info ">
 <code class="code">Weak.length ar</code> returns the length (number of elements) of
    <code class="code">ar</code>.<br>
 </div>
 
-<pre id="VALset">val set : &apos;a t -&gt; int -&gt; &apos;a option -&gt; unit</pre><div class="info ">
+<pre id="VALset"><span class="keyword">let</span> set: (t(&apos;a), int, option(&apos;a)) =&gt; unit;
+</pre><div class="info ">
 <code class="code">Weak.set ar n (Some el)</code> sets the <code class="code">n</code>th cell of <code class="code">ar</code> to be a
    (full) pointer to <code class="code">el</code>; <code class="code">Weak.set ar n None</code> sets the <code class="code">n</code>th
    cell of <code class="code">ar</code> to empty.
@@ -53,14 +57,16 @@ The type of arrays of weak pointers (weak arrays).  A weak
    0 to <a href="Weak.html#VALlength"><code class="code">Weak.length</code></a><code class="code"> a - 1</code>.<br>
 </div>
 
-<pre id="VALget">val get : &apos;a t -&gt; int -&gt; &apos;a option</pre><div class="info ">
+<pre id="VALget"><span class="keyword">let</span> get: (t(&apos;a), int) =&gt; option(&apos;a);
+</pre><div class="info ">
 <code class="code">Weak.get ar n</code> returns None if the <code class="code">n</code>th cell of <code class="code">ar</code> is
    empty, <code class="code">Some x</code> (where <code class="code">x</code> is the value) if it is full.
    Raise <code class="code">Invalid_argument &quot;Weak.get&quot;</code> if <code class="code">n</code> is not in the range
    0 to <a href="Weak.html#VALlength"><code class="code">Weak.length</code></a><code class="code"> a - 1</code>.<br>
 </div>
 
-<pre id="VALget_copy">val get_copy : &apos;a t -&gt; int -&gt; &apos;a option</pre><div class="info ">
+<pre id="VALget_copy"><span class="keyword">let</span> get_copy: (t(&apos;a), int) =&gt; option(&apos;a);
+</pre><div class="info ">
 <code class="code">Weak.get_copy ar n</code> returns None if the <code class="code">n</code>th cell of <code class="code">ar</code> is
    empty, <code class="code">Some x</code> (where <code class="code">x</code> is a (shallow) copy of the value) if
    it is full.
@@ -72,19 +78,22 @@ The type of arrays of weak pointers (weak arrays).  A weak
    0 to <a href="Weak.html#VALlength"><code class="code">Weak.length</code></a><code class="code"> a - 1</code>.<br>
 </div>
 
-<pre id="VALcheck">val check : &apos;a t -&gt; int -&gt; bool</pre><div class="info ">
+<pre id="VALcheck"><span class="keyword">let</span> check: (t(&apos;a), int) =&gt; bool;
+</pre><div class="info ">
 <code class="code">Weak.check ar n</code> returns <code class="code">true</code> if the <code class="code">n</code>th cell of <code class="code">ar</code> is
    full, <code class="code">false</code> if it is empty.  Note that even if <code class="code">Weak.check ar n</code>
    returns <code class="code">true</code>, a subsequent <a href="Weak.html#VALget"><code class="code">Weak.get</code></a><code class="code"> ar n</code> can return <code class="code">None</code>.<br>
 </div>
 
-<pre id="VALfill">val fill : &apos;a t -&gt; int -&gt; int -&gt; &apos;a option -&gt; unit</pre><div class="info ">
+<pre id="VALfill"><span class="keyword">let</span> fill: (t(&apos;a), int, int, option(&apos;a)) =&gt; unit;
+</pre><div class="info ">
 <code class="code">Weak.fill ar ofs len el</code> sets to <code class="code">el</code> all pointers of <code class="code">ar</code> from
    <code class="code">ofs</code> to <code class="code">ofs + len - 1</code>.  Raise <code class="code">Invalid_argument &quot;Weak.fill&quot;</code>
    if <code class="code">ofs</code> and <code class="code">len</code> do not designate a valid subarray of <code class="code">a</code>.<br>
 </div>
 
-<pre id="VALblit">val blit : &apos;a t -&gt; int -&gt; &apos;a t -&gt; int -&gt; int -&gt; unit</pre><div class="info ">
+<pre id="VALblit"><span class="keyword">let</span> blit: (t(&apos;a), int, t(&apos;a), int, int) =&gt; unit;
+</pre><div class="info ">
 <code class="code">Weak.blit ar1 off1 ar2 off2 len</code> copies <code class="code">len</code> weak pointers
    from <code class="code">ar1</code> (starting at <code class="code">off1</code>) to <code class="code">ar2</code> (starting at <code class="code">off2</code>).
    It works correctly even if <code class="code">ar1</code> and <code class="code">ar2</code> are the same.
@@ -114,7 +123,8 @@ A weak hash table is a hashed set of values.  Each value may
 The output signature of the functor <a href="Weak.Make.html"><code class="code">Weak.Make</code></a>.
 </div>
 
-<pre><span class="keyword">module</span> Make: functor (H : Hashtbl.HashedType) -&gt; S  with type data = H.t</pre><div class="info">
+<pre><span class="keyword">module</span> Make: (H: Hashtbl.HashedType) =&gt; S with type data = H.t;
+</pre><div class="info">
 Functor building an implementation of the weak hash table structure.
 </div>
 </div>

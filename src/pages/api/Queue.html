@@ -18,76 +18,92 @@ First-in first-out queues.
 </p></div>
 <hr width="100%">
 
-<pre id="TYPEt"><span class="keyword">type</span> &apos;a t </pre>
+<pre id="TYPEt"><span class="keyword">type</span> t(&apos;a);
+</pre>
 <div class="info ">
 The type of queues containing elements of type <code class="code">&apos;a</code>.<br>
 </div>
 
 
-<pre id="EXCEPTIONEmpty"><span class="keyword">exception</span> Empty</pre>
+<pre id="EXCEPTIONEmpty"><span class="keyword">exception</span> Empty;
+</pre>
 <div class="info ">
 Raised when <a href="Queue.html#VALtake"><code class="code">Queue.take</code></a> or <a href="Queue.html#VALpeek"><code class="code">Queue.peek</code></a> is applied to an empty queue.<br>
 </div>
 
-<pre id="VALcreate">val create : unit -&gt; &apos;a t</pre><div class="info ">
+<pre id="VALcreate"><span class="keyword">let</span> create: unit =&gt; t(&apos;a);
+</pre><div class="info ">
 Return a new queue, initially empty.<br>
 </div>
 
-<pre id="VALadd">val add : &apos;a -&gt; &apos;a t -&gt; unit</pre><div class="info ">
+<pre id="VALadd"><span class="keyword">let</span> add: (&apos;a, t(&apos;a)) =&gt; unit;
+</pre><div class="info ">
 <code class="code">add x q</code> adds the element <code class="code">x</code> at the end of the queue <code class="code">q</code>.<br>
 </div>
 
-<pre id="VALpush">val push : &apos;a -&gt; &apos;a t -&gt; unit</pre><div class="info ">
+<pre id="VALpush"><span class="keyword">let</span> push: (&apos;a, t(&apos;a)) =&gt; unit;
+</pre><div class="info ">
 <code class="code">push</code> is a synonym for <code class="code">add</code>.<br>
 </div>
 
-<pre id="VALtake">val take : &apos;a t -&gt; &apos;a</pre><div class="info ">
+<pre id="VALtake"><span class="keyword">let</span> take: t(&apos;a) =&gt; &apos;a;
+</pre><div class="info ">
 <code class="code">take q</code> removes and returns the first element in queue <code class="code">q</code>,
    or raises <code class="code">Empty</code> if the queue is empty.<br>
 </div>
 
-<pre id="VALpop">val pop : &apos;a t -&gt; &apos;a</pre><div class="info ">
+<pre id="VALpop"><span class="keyword">let</span> pop: t(&apos;a) =&gt; &apos;a;
+</pre><div class="info ">
 <code class="code">pop</code> is a synonym for <code class="code">take</code>.<br>
 </div>
 
-<pre id="VALpeek">val peek : &apos;a t -&gt; &apos;a</pre><div class="info ">
+<pre id="VALpeek"><span class="keyword">let</span> peek: t(&apos;a) =&gt; &apos;a;
+</pre><div class="info ">
 <code class="code">peek q</code> returns the first element in queue <code class="code">q</code>, without removing
    it from the queue, or raises <code class="code">Empty</code> if the queue is empty.<br>
 </div>
 
-<pre id="VALtop">val top : &apos;a t -&gt; &apos;a</pre><div class="info ">
+<pre id="VALtop"><span class="keyword">let</span> top: t(&apos;a) =&gt; &apos;a;
+</pre><div class="info ">
 <code class="code">top</code> is a synonym for <code class="code">peek</code>.<br>
 </div>
 
-<pre id="VALclear">val clear : &apos;a t -&gt; unit</pre><div class="info ">
+<pre id="VALclear"><span class="keyword">let</span> clear: t(&apos;a) =&gt; unit;
+</pre><div class="info ">
 Discard all elements from a queue.<br>
 </div>
 
-<pre id="VALcopy">val copy : &apos;a t -&gt; &apos;a t</pre><div class="info ">
+<pre id="VALcopy"><span class="keyword">let</span> copy: t(&apos;a) =&gt; t(&apos;a);
+</pre><div class="info ">
 Return a copy of the given queue.<br>
 </div>
 
-<pre id="VALis_empty">val is_empty : &apos;a t -&gt; bool</pre><div class="info ">
+<pre id="VALis_empty"><span class="keyword">let</span> is_empty: t(&apos;a) =&gt; bool;
+</pre><div class="info ">
 Return <code class="code">true</code> if the given queue is empty, <code class="code">false</code> otherwise.<br>
 </div>
 
-<pre id="VALlength">val length : &apos;a t -&gt; int</pre><div class="info ">
+<pre id="VALlength"><span class="keyword">let</span> length: t(&apos;a) =&gt; int;
+</pre><div class="info ">
 Return the number of elements in a queue.<br>
 </div>
 
-<pre id="VALiter">val iter : (&apos;a -&gt; unit) -&gt; &apos;a t -&gt; unit</pre><div class="info ">
+<pre id="VALiter"><span class="keyword">let</span> iter: (&apos;a =&gt; unit, t(&apos;a)) =&gt; unit;
+</pre><div class="info ">
 <code class="code">iter f q</code> applies <code class="code">f</code> in turn to all elements of <code class="code">q</code>,
    from the least recently entered to the most recently entered.
    The queue itself is unchanged.<br>
 </div>
 
-<pre id="VALfold">val fold : (&apos;b -&gt; &apos;a -&gt; &apos;b) -&gt; &apos;b -&gt; &apos;a t -&gt; &apos;b</pre><div class="info ">
+<pre id="VALfold"><span class="keyword">let</span> fold: ((&apos;b, &apos;a) =&gt; &apos;b, &apos;b, t(&apos;a)) =&gt; &apos;b;
+</pre><div class="info ">
 <code class="code">fold f accu q</code> is equivalent to <code class="code">List.fold_left f accu l</code>,
    where <code class="code">l</code> is the list of <code class="code">q</code>&apos;s elements. The queue remains
    unchanged.<br>
 </div>
 
-<pre id="VALtransfer">val transfer : &apos;a t -&gt; &apos;a t -&gt; unit</pre><div class="info ">
+<pre id="VALtransfer"><span class="keyword">let</span> transfer: (t(&apos;a), t(&apos;a)) =&gt; unit;
+</pre><div class="info ">
 <code class="code">transfer q1 q2</code> adds all of <code class="code">q1</code>&apos;s elements at the end of
    the queue <code class="code">q2</code>, then clears <code class="code">q1</code>. It is equivalent to the
    sequence <code class="code">iter (fun x -&gt; add x q2) q1; clear q1</code>, but runs

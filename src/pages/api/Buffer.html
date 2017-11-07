@@ -16,13 +16,15 @@ Extensible buffers.
 </p></div>
 <hr width="100%">
 
-<pre id="TYPEt"><span class="keyword">type</span> t </pre>
+<pre id="TYPEt"><span class="keyword">type</span> t;
+</pre>
 <div class="info ">
 The abstract type of buffers.<br>
 </div>
 
 
-<pre id="VALcreate">val create : int -&gt; t</pre><div class="info ">
+<pre id="VALcreate"><span class="keyword">let</span> create: int =&gt; t;
+</pre><div class="info ">
 <code class="code">create n</code> returns a fresh buffer, initially empty.
    The <code class="code">n</code> parameter is the initial size of the internal byte sequence
    that holds the buffer contents. That byte sequence is automatically
@@ -37,25 +39,29 @@ The abstract type of buffers.<br>
    be clipped to that interval.<br>
 </div>
 
-<pre id="VALcontents">val contents : t -&gt; string</pre><div class="info ">
+<pre id="VALcontents"><span class="keyword">let</span> contents: t =&gt; string;
+</pre><div class="info ">
 Return a copy of the current contents of the buffer.
     The buffer itself is unchanged.<br>
 </div>
 
-<pre id="VALto_bytes">val to_bytes : t -&gt; bytes</pre><div class="info ">
+<pre id="VALto_bytes"><span class="keyword">let</span> to_bytes: t =&gt; bytes;
+</pre><div class="info ">
 Return a copy of the current contents of the buffer.
     The buffer itself is unchanged.<br>
 <b>Since</b> 4.02<br>
 </div>
 
-<pre id="VALsub">val sub : t -&gt; int -&gt; int -&gt; string</pre><div class="info ">
+<pre id="VALsub"><span class="keyword">let</span> sub: (t, int, int) =&gt; string;
+</pre><div class="info ">
 <code class="code">Buffer.sub b off len</code> returns (a copy of) the bytes from the
     current contents of the buffer <code class="code">b</code> starting at offset <code class="code">off</code> of
     length <code class="code">len</code> bytes. May raise <code class="code">Invalid_argument</code> if out of bounds
     request. The buffer itself is unaffected.<br>
 </div>
 
-<pre id="VALblit">val blit : t -&gt; int -&gt; bytes -&gt; int -&gt; int -&gt; unit</pre><div class="info ">
+<pre id="VALblit"><span class="keyword">let</span> blit: (t, int, bytes, int, int) =&gt; unit;
+</pre><div class="info ">
 <code class="code">Buffer.blit src srcoff dst dstoff len</code> copies <code class="code">len</code> characters from
    the current contents of the buffer <code class="code">src</code>, starting at offset <code class="code">srcoff</code>
    to <code class="code">dst</code>, starting at character <code class="code">dstoff</code>.
@@ -67,20 +73,24 @@ Return a copy of the current contents of the buffer.
 <b>Since</b> 3.11.2<br>
 </p></div>
 
-<pre id="VALnth">val nth : t -&gt; int -&gt; char</pre><div class="info ">
+<pre id="VALnth"><span class="keyword">let</span> nth: (t, int) =&gt; char;
+</pre><div class="info ">
 get the n-th character of the buffer. Raise <code class="code">Invalid_argument</code> if
     index out of bounds<br>
 </div>
 
-<pre id="VALlength">val length : t -&gt; int</pre><div class="info ">
+<pre id="VALlength"><span class="keyword">let</span> length: t =&gt; int;
+</pre><div class="info ">
 Return the number of characters currently contained in the buffer.<br>
 </div>
 
-<pre id="VALclear">val clear : t -&gt; unit</pre><div class="info ">
+<pre id="VALclear"><span class="keyword">let</span> clear: t =&gt; unit;
+</pre><div class="info ">
 Empty the buffer.<br>
 </div>
 
-<pre id="VALreset">val reset : t -&gt; unit</pre><div class="info ">
+<pre id="VALreset"><span class="keyword">let</span> reset: t =&gt; unit;
+</pre><div class="info ">
 Empty the buffer and deallocate the internal byte sequence holding the
    buffer contents, replacing it with the initial internal byte sequence
    of length <code class="code">n</code> that was allocated by <a href="Buffer.html#VALcreate"><code class="code">Buffer.create</code></a> <code class="code">n</code>.
@@ -88,31 +98,37 @@ Empty the buffer and deallocate the internal byte sequence holding the
    faster reclamation of the space used by the buffer.<br>
 </div>
 
-<pre id="VALadd_char">val add_char : t -&gt; char -&gt; unit</pre><div class="info ">
+<pre id="VALadd_char"><span class="keyword">let</span> add_char: (t, char) =&gt; unit;
+</pre><div class="info ">
 <code class="code">add_char b c</code> appends the character <code class="code">c</code> at the end of the buffer <code class="code">b</code>.<br>
 </div>
 
-<pre id="VALadd_string">val add_string : t -&gt; string -&gt; unit</pre><div class="info ">
+<pre id="VALadd_string"><span class="keyword">let</span> add_string: (t, string) =&gt; unit;
+</pre><div class="info ">
 <code class="code">add_string b s</code> appends the string <code class="code">s</code> at the end of the buffer <code class="code">b</code>.<br>
 </div>
 
-<pre id="VALadd_bytes">val add_bytes : t -&gt; bytes -&gt; unit</pre><div class="info ">
+<pre id="VALadd_bytes"><span class="keyword">let</span> add_bytes: (t, bytes) =&gt; unit;
+</pre><div class="info ">
 <code class="code">add_string b s</code> appends the string <code class="code">s</code> at the end of the buffer <code class="code">b</code>.<br>
 <b>Since</b> 4.02<br>
 </div>
 
-<pre id="VALadd_substring">val add_substring : t -&gt; string -&gt; int -&gt; int -&gt; unit</pre><div class="info ">
+<pre id="VALadd_substring"><span class="keyword">let</span> add_substring: (t, string, int, int) =&gt; unit;
+</pre><div class="info ">
 <code class="code">add_substring b s ofs len</code> takes <code class="code">len</code> characters from offset
    <code class="code">ofs</code> in string <code class="code">s</code> and appends them at the end of the buffer <code class="code">b</code>.<br>
 </div>
 
-<pre id="VALadd_subbytes">val add_subbytes : t -&gt; bytes -&gt; int -&gt; int -&gt; unit</pre><div class="info ">
+<pre id="VALadd_subbytes"><span class="keyword">let</span> add_subbytes: (t, bytes, int, int) =&gt; unit;
+</pre><div class="info ">
 <code class="code">add_substring b s ofs len</code> takes <code class="code">len</code> characters from offset
     <code class="code">ofs</code> in byte sequence <code class="code">s</code> and appends them at the end of the buffer <code class="code">b</code>.<br>
 <b>Since</b> 4.02<br>
 </div>
 
-<pre id="VALadd_substitute">val add_substitute : t -&gt; (string -&gt; string) -&gt; string -&gt; unit</pre><div class="info ">
+<pre id="VALadd_substitute"><span class="keyword">let</span> add_substitute: (t, string =&gt; string, string) =&gt; unit;
+</pre><div class="info ">
 <code class="code">add_substitute b f s</code> appends the string pattern <code class="code">s</code> at the end
    of the buffer <code class="code">b</code> with substitution.
    The substitution process looks for variables into
@@ -131,19 +147,22 @@ Empty the buffer and deallocate the internal byte sequence holding the
 <br>
 </div>
 
-<pre id="VALadd_buffer">val add_buffer : t -&gt; t -&gt; unit</pre><div class="info ">
+<pre id="VALadd_buffer"><span class="keyword">let</span> add_buffer: (t, t) =&gt; unit;
+</pre><div class="info ">
 <code class="code">add_buffer b1 b2</code> appends the current contents of buffer <code class="code">b2</code>
    at the end of buffer <code class="code">b1</code>.  <code class="code">b2</code> is not modified.<br>
 </div>
 
-<pre id="VALadd_channel">val add_channel : t -&gt; Pervasives.in_channel -&gt; int -&gt; unit</pre><div class="info ">
+<pre id="VALadd_channel"><span class="keyword">let</span> add_channel: (t, Pervasives.in_channel, int) =&gt; unit;
+</pre><div class="info ">
 <code class="code">add_channel b ic n</code> reads exactly <code class="code">n</code> character from the
    input channel <code class="code">ic</code> and stores them at the end of buffer <code class="code">b</code>.
    Raise <code class="code">End_of_file</code> if the channel contains fewer than <code class="code">n</code>
    characters.<br>
 </div>
 
-<pre id="VALoutput_buffer">val output_buffer : Pervasives.out_channel -&gt; t -&gt; unit</pre><div class="info ">
+<pre id="VALoutput_buffer"><span class="keyword">let</span> output_buffer: (Pervasives.out_channel, t) =&gt; unit;
+</pre><div class="info ">
 <code class="code">output_buffer oc b</code> writes the current contents of buffer <code class="code">b</code>
    on the output channel <code class="code">oc</code>.<br>
 </div>

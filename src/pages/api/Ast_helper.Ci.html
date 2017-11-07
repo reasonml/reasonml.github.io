@@ -10,4 +10,16 @@ Classes<br>
 </div>
 <hr width="100%">
 
-<pre id="VALmk">val mk : ?loc:Ast_helper.loc -&gt;       ?attrs:Ast_helper.attrs -&gt;       ?docs:Docstrings.docs -&gt;       ?text:Docstrings.text -&gt;       ?virt:Asttypes.virtual_flag -&gt;       ?params:(Parsetree.core_type * Asttypes.variance) list -&gt;       Ast_helper.str -&gt; &apos;a -&gt; &apos;a Parsetree.class_infos</pre></div>
+<pre id="VALmk"><span class="keyword">let</span> mk:
+  (
+    ~loc: Ast_helper.loc=?,
+    ~attrs: Ast_helper.attrs=?,
+    ~docs: Docstrings.docs=?,
+    ~text: Docstrings.text=?,
+    ~virt: Asttypes.virtual_flag=?,
+    ~params: list((Parsetree.core_type, Asttypes.variance))=?,
+    Ast_helper.str,
+    &apos;a
+  ) =&gt;
+  Parsetree.class_infos(&apos;a);
+</pre></div>

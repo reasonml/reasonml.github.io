@@ -22,129 +22,150 @@ List operations.
 </p></div>
 <hr width="100%">
 
-<pre id="VALlength">val length : &apos;a list -&gt; int</pre><div class="info ">
+<pre id="VALlength"><span class="keyword">let</span> length: list(&apos;a) =&gt; int;
+</pre><div class="info ">
 Return the length (number of elements) of the given list.<br>
 </div>
 
-<pre id="VALhd">val hd : &apos;a list -&gt; &apos;a</pre><div class="info ">
+<pre id="VALhd"><span class="keyword">let</span> hd: list(&apos;a) =&gt; &apos;a;
+</pre><div class="info ">
 Return the first element of the given list. Raise
    <code class="code">Failure &quot;hd&quot;</code> if the list is empty.<br>
 </div>
 
-<pre id="VALtl">val tl : &apos;a list -&gt; &apos;a list</pre><div class="info ">
+<pre id="VALtl"><span class="keyword">let</span> tl: list(&apos;a) =&gt; list(&apos;a);
+</pre><div class="info ">
 Return the given list without its first element. Raise
    <code class="code">Failure &quot;tl&quot;</code> if the list is empty.<br>
 </div>
 
-<pre id="VALnth">val nth : &apos;a list -&gt; int -&gt; &apos;a</pre><div class="info ">
+<pre id="VALnth"><span class="keyword">let</span> nth: (list(&apos;a), int) =&gt; &apos;a;
+</pre><div class="info ">
 Return the <code class="code">n</code>-th element of the given list.
    The first element (head of the list) is at position 0.
    Raise <code class="code">Failure &quot;nth&quot;</code> if the list is too short.
    Raise <code class="code">Invalid_argument &quot;List.nth&quot;</code> if <code class="code">n</code> is negative.<br>
 </div>
 
-<pre id="VALrev">val rev : &apos;a list -&gt; &apos;a list</pre><div class="info ">
+<pre id="VALrev"><span class="keyword">let</span> rev: list(&apos;a) =&gt; list(&apos;a);
+</pre><div class="info ">
 List reversal.<br>
 </div>
 
-<pre id="VALappend">val append : &apos;a list -&gt; &apos;a list -&gt; &apos;a list</pre><div class="info ">
+<pre id="VALappend"><span class="keyword">let</span> append: (list(&apos;a), list(&apos;a)) =&gt; list(&apos;a);
+</pre><div class="info ">
 Catenate two lists.  Same function as the infix operator <code class="code">@</code>.
    Not tail-recursive (length of the first argument).  The <code class="code">@</code>
    operator is not tail-recursive either.<br>
 </div>
 
-<pre id="VALrev_append">val rev_append : &apos;a list -&gt; &apos;a list -&gt; &apos;a list</pre><div class="info ">
+<pre id="VALrev_append"><span class="keyword">let</span> rev_append: (list(&apos;a), list(&apos;a)) =&gt; list(&apos;a);
+</pre><div class="info ">
 <code class="code">List.rev_append l1 l2</code> reverses <code class="code">l1</code> and concatenates it to <code class="code">l2</code>.
    This is equivalent to <a href="List.html#VALrev"><code class="code">List.rev</code></a><code class="code"> l1 @ l2</code>, but <code class="code">rev_append</code> is
    tail-recursive and more efficient.<br>
 </div>
 
-<pre id="VALconcat">val concat : &apos;a list list -&gt; &apos;a list</pre><div class="info ">
+<pre id="VALconcat"><span class="keyword">let</span> concat: list(list(&apos;a)) =&gt; list(&apos;a);
+</pre><div class="info ">
 Concatenate a list of lists.  The elements of the argument are all
    concatenated together (in the same order) to give the result.
    Not tail-recursive
    (length of the argument + length of the longest sub-list).<br>
 </div>
 
-<pre id="VALflatten">val flatten : &apos;a list list -&gt; &apos;a list</pre><div class="info ">
+<pre id="VALflatten"><span class="keyword">let</span> flatten: list(list(&apos;a)) =&gt; list(&apos;a);
+</pre><div class="info ">
 Same as <code class="code">concat</code>.  Not tail-recursive
    (length of the argument + length of the longest sub-list).<br>
 </div>
 <br>
 <h6 id="6_Iterators">Iterators</h6><br>
 
-<pre id="VALiter">val iter : (&apos;a -&gt; unit) -&gt; &apos;a list -&gt; unit</pre><div class="info ">
+<pre id="VALiter"><span class="keyword">let</span> iter: (&apos;a =&gt; unit, list(&apos;a)) =&gt; unit;
+</pre><div class="info ">
 <code class="code">List.iter f [a1; ...; an]</code> applies function <code class="code">f</code> in turn to
    <code class="code">a1; ...; an</code>. It is equivalent to
    <code class="code">begin f a1; f a2; ...; f an; () end</code>.<br>
 </div>
 
-<pre id="VALiteri">val iteri : (int -&gt; &apos;a -&gt; unit) -&gt; &apos;a list -&gt; unit</pre><div class="info ">
+<pre id="VALiteri"><span class="keyword">let</span> iteri: ((int, &apos;a) =&gt; unit, list(&apos;a)) =&gt; unit;
+</pre><div class="info ">
 Same as <a href="List.html#VALiter"><code class="code">List.iter</code></a>, but the function is applied to the index of
    the element as first argument (counting from 0), and the element
    itself as second argument.<br>
 <b>Since</b> 4.00.0<br>
 </div>
 
-<pre id="VALmap">val map : (&apos;a -&gt; &apos;b) -&gt; &apos;a list -&gt; &apos;b list</pre><div class="info ">
+<pre id="VALmap"><span class="keyword">let</span> map: (&apos;a =&gt; &apos;b, list(&apos;a)) =&gt; list(&apos;b);
+</pre><div class="info ">
 <code class="code">List.map f [a1; ...; an]</code> applies function <code class="code">f</code> to <code class="code">a1, ..., an</code>,
    and builds the list <code class="code">[f a1; ...; f an]</code>
    with the results returned by <code class="code">f</code>.  Not tail-recursive.<br>
 </div>
 
-<pre id="VALmapi">val mapi : (int -&gt; &apos;a -&gt; &apos;b) -&gt; &apos;a list -&gt; &apos;b list</pre><div class="info ">
+<pre id="VALmapi"><span class="keyword">let</span> mapi: ((int, &apos;a) =&gt; &apos;b, list(&apos;a)) =&gt; list(&apos;b);
+</pre><div class="info ">
 Same as <a href="List.html#VALmap"><code class="code">List.map</code></a>, but the function is applied to the index of
    the element as first argument (counting from 0), and the element
    itself as second argument.  Not tail-recursive.<br>
 <b>Since</b> 4.00.0<br>
 </div>
 
-<pre id="VALrev_map">val rev_map : (&apos;a -&gt; &apos;b) -&gt; &apos;a list -&gt; &apos;b list</pre><div class="info ">
+<pre id="VALrev_map"><span class="keyword">let</span> rev_map: (&apos;a =&gt; &apos;b, list(&apos;a)) =&gt; list(&apos;b);
+</pre><div class="info ">
 <code class="code">List.rev_map f l</code> gives the same result as
    <a href="List.html#VALrev"><code class="code">List.rev</code></a><code class="code"> (</code><a href="List.html#VALmap"><code class="code">List.map</code></a><code class="code"> f l)</code>, but is tail-recursive and
    more efficient.<br>
 </div>
 
-<pre id="VALfold_left">val fold_left : (&apos;a -&gt; &apos;b -&gt; &apos;a) -&gt; &apos;a -&gt; &apos;b list -&gt; &apos;a</pre><div class="info ">
+<pre id="VALfold_left"><span class="keyword">let</span> fold_left: ((&apos;a, &apos;b) =&gt; &apos;a, &apos;a, list(&apos;b)) =&gt; &apos;a;
+</pre><div class="info ">
 <code class="code">List.fold_left f a [b1; ...; bn]</code> is
    <code class="code">f (... (f (f a b1) b2) ...) bn</code>.<br>
 </div>
 
-<pre id="VALfold_right">val fold_right : (&apos;a -&gt; &apos;b -&gt; &apos;b) -&gt; &apos;a list -&gt; &apos;b -&gt; &apos;b</pre><div class="info ">
+<pre id="VALfold_right"><span class="keyword">let</span> fold_right: ((&apos;a, &apos;b) =&gt; &apos;b, list(&apos;a), &apos;b) =&gt; &apos;b;
+</pre><div class="info ">
 <code class="code">List.fold_right f [a1; ...; an] b</code> is
    <code class="code">f a1 (f a2 (... (f an b) ...))</code>.  Not tail-recursive.<br>
 </div>
 <br>
 <h6 id="6_Iteratorsontwolists">Iterators on two lists</h6><br>
 
-<pre id="VALiter2">val iter2 : (&apos;a -&gt; &apos;b -&gt; unit) -&gt; &apos;a list -&gt; &apos;b list -&gt; unit</pre><div class="info ">
+<pre id="VALiter2"><span class="keyword">let</span> iter2: ((&apos;a, &apos;b) =&gt; unit, list(&apos;a), list(&apos;b)) =&gt; unit;
+</pre><div class="info ">
 <code class="code">List.iter2 f [a1; ...; an] [b1; ...; bn]</code> calls in turn
    <code class="code">f a1 b1; ...; f an bn</code>.
    Raise <code class="code">Invalid_argument</code> if the two lists have
    different lengths.<br>
 </div>
 
-<pre id="VALmap2">val map2 : (&apos;a -&gt; &apos;b -&gt; &apos;c) -&gt; &apos;a list -&gt; &apos;b list -&gt; &apos;c list</pre><div class="info ">
+<pre id="VALmap2"><span class="keyword">let</span> map2: ((&apos;a, &apos;b) =&gt; &apos;c, list(&apos;a), list(&apos;b)) =&gt; list(&apos;c);
+</pre><div class="info ">
 <code class="code">List.map2 f [a1; ...; an] [b1; ...; bn]</code> is
    <code class="code">[f a1 b1; ...; f an bn]</code>.
    Raise <code class="code">Invalid_argument</code> if the two lists have
    different lengths.  Not tail-recursive.<br>
 </div>
 
-<pre id="VALrev_map2">val rev_map2 : (&apos;a -&gt; &apos;b -&gt; &apos;c) -&gt; &apos;a list -&gt; &apos;b list -&gt; &apos;c list</pre><div class="info ">
+<pre id="VALrev_map2"><span class="keyword">let</span> rev_map2: ((&apos;a, &apos;b) =&gt; &apos;c, list(&apos;a), list(&apos;b)) =&gt; list(&apos;c);
+</pre><div class="info ">
 <code class="code">List.rev_map2 f l1 l2</code> gives the same result as
    <a href="List.html#VALrev"><code class="code">List.rev</code></a><code class="code"> (</code><a href="List.html#VALmap2"><code class="code">List.map2</code></a><code class="code"> f l1 l2)</code>, but is tail-recursive and
    more efficient.<br>
 </div>
 
-<pre id="VALfold_left2">val fold_left2 : (&apos;a -&gt; &apos;b -&gt; &apos;c -&gt; &apos;a) -&gt; &apos;a -&gt; &apos;b list -&gt; &apos;c list -&gt; &apos;a</pre><div class="info ">
+<pre id="VALfold_left2"><span class="keyword">let</span> fold_left2: ((&apos;a, &apos;b, &apos;c) =&gt; &apos;a, &apos;a, list(&apos;b), list(&apos;c)) =&gt; &apos;a;
+</pre><div class="info ">
 <code class="code">List.fold_left2 f a [b1; ...; bn] [c1; ...; cn]</code> is
    <code class="code">f (... (f (f a b1 c1) b2 c2) ...) bn cn</code>.
    Raise <code class="code">Invalid_argument</code> if the two lists have
    different lengths.<br>
 </div>
 
-<pre id="VALfold_right2">val fold_right2 : (&apos;a -&gt; &apos;b -&gt; &apos;c -&gt; &apos;c) -&gt; &apos;a list -&gt; &apos;b list -&gt; &apos;c -&gt; &apos;c</pre><div class="info ">
+<pre id="VALfold_right2"><span class="keyword">let</span> fold_right2: ((&apos;a, &apos;b, &apos;c) =&gt; &apos;c, list(&apos;a), list(&apos;b), &apos;c) =&gt; &apos;c;
+</pre><div class="info ">
 <code class="code">List.fold_right2 f [a1; ...; an] [b1; ...; bn] c</code> is
    <code class="code">f a1 b1 (f a2 b2 (... (f an bn c) ...))</code>.
    Raise <code class="code">Invalid_argument</code> if the two lists have
@@ -153,60 +174,70 @@ Same as <a href="List.html#VALmap"><code class="code">List.map</code></a>, but t
 <br>
 <h6 id="6_Listscanning">List scanning</h6><br>
 
-<pre id="VALfor_all">val for_all : (&apos;a -&gt; bool) -&gt; &apos;a list -&gt; bool</pre><div class="info ">
+<pre id="VALfor_all"><span class="keyword">let</span> for_all: (&apos;a =&gt; bool, list(&apos;a)) =&gt; bool;
+</pre><div class="info ">
 <code class="code">for_all p [a1; ...; an]</code> checks if all elements of the list
    satisfy the predicate <code class="code">p</code>. That is, it returns
    <code class="code">(p a1) &amp;&amp; (p a2) &amp;&amp; ... &amp;&amp; (p an)</code>.<br>
 </div>
 
-<pre id="VALexists">val exists : (&apos;a -&gt; bool) -&gt; &apos;a list -&gt; bool</pre><div class="info ">
+<pre id="VALexists"><span class="keyword">let</span> exists: (&apos;a =&gt; bool, list(&apos;a)) =&gt; bool;
+</pre><div class="info ">
 <code class="code">exists p [a1; ...; an]</code> checks if at least one element of
    the list satisfies the predicate <code class="code">p</code>. That is, it returns
    <code class="code">(p a1) || (p a2) || ... || (p an)</code>.<br>
 </div>
 
-<pre id="VALfor_all2">val for_all2 : (&apos;a -&gt; &apos;b -&gt; bool) -&gt; &apos;a list -&gt; &apos;b list -&gt; bool</pre><div class="info ">
+<pre id="VALfor_all2"><span class="keyword">let</span> for_all2: ((&apos;a, &apos;b) =&gt; bool, list(&apos;a), list(&apos;b)) =&gt; bool;
+</pre><div class="info ">
 Same as <a href="List.html#VALfor_all"><code class="code">List.for_all</code></a>, but for a two-argument predicate.
    Raise <code class="code">Invalid_argument</code> if the two lists have
    different lengths.<br>
 </div>
 
-<pre id="VALexists2">val exists2 : (&apos;a -&gt; &apos;b -&gt; bool) -&gt; &apos;a list -&gt; &apos;b list -&gt; bool</pre><div class="info ">
+<pre id="VALexists2"><span class="keyword">let</span> exists2: ((&apos;a, &apos;b) =&gt; bool, list(&apos;a), list(&apos;b)) =&gt; bool;
+</pre><div class="info ">
 Same as <a href="List.html#VALexists"><code class="code">List.exists</code></a>, but for a two-argument predicate.
    Raise <code class="code">Invalid_argument</code> if the two lists have
    different lengths.<br>
 </div>
 
-<pre id="VALmem">val mem : &apos;a -&gt; &apos;a list -&gt; bool</pre><div class="info ">
+<pre id="VALmem"><span class="keyword">let</span> mem: (&apos;a, list(&apos;a)) =&gt; bool;
+</pre><div class="info ">
 <code class="code">mem a l</code> is true if and only if <code class="code">a</code> is equal
    to an element of <code class="code">l</code>.<br>
 </div>
 
-<pre id="VALmemq">val memq : &apos;a -&gt; &apos;a list -&gt; bool</pre><div class="info ">
+<pre id="VALmemq"><span class="keyword">let</span> memq: (&apos;a, list(&apos;a)) =&gt; bool;
+</pre><div class="info ">
 Same as <a href="List.html#VALmem"><code class="code">List.mem</code></a>, but uses physical equality instead of structural
    equality to compare list elements.<br>
 </div>
 <br>
 <h6 id="6_Listsearching">List searching</h6><br>
 
-<pre id="VALfind">val find : (&apos;a -&gt; bool) -&gt; &apos;a list -&gt; &apos;a</pre><div class="info ">
+<pre id="VALfind"><span class="keyword">let</span> find: (&apos;a =&gt; bool, list(&apos;a)) =&gt; &apos;a;
+</pre><div class="info ">
 <code class="code">find p l</code> returns the first element of the list <code class="code">l</code>
    that satisfies the predicate <code class="code">p</code>.
    Raise <code class="code">Not_found</code> if there is no value that satisfies <code class="code">p</code> in the
    list <code class="code">l</code>.<br>
 </div>
 
-<pre id="VALfilter">val filter : (&apos;a -&gt; bool) -&gt; &apos;a list -&gt; &apos;a list</pre><div class="info ">
+<pre id="VALfilter"><span class="keyword">let</span> filter: (&apos;a =&gt; bool, list(&apos;a)) =&gt; list(&apos;a);
+</pre><div class="info ">
 <code class="code">filter p l</code> returns all the elements of the list <code class="code">l</code>
    that satisfy the predicate <code class="code">p</code>.  The order of the elements
    in the input list is preserved.<br>
 </div>
 
-<pre id="VALfind_all">val find_all : (&apos;a -&gt; bool) -&gt; &apos;a list -&gt; &apos;a list</pre><div class="info ">
+<pre id="VALfind_all"><span class="keyword">let</span> find_all: (&apos;a =&gt; bool, list(&apos;a)) =&gt; list(&apos;a);
+</pre><div class="info ">
 <code class="code">find_all</code> is another name for <a href="List.html#VALfilter"><code class="code">List.filter</code></a>.<br>
 </div>
 
-<pre id="VALpartition">val partition : (&apos;a -&gt; bool) -&gt; &apos;a list -&gt; &apos;a list * &apos;a list</pre><div class="info ">
+<pre id="VALpartition"><span class="keyword">let</span> partition: (&apos;a =&gt; bool, list(&apos;a)) =&gt; (list(&apos;a), list(&apos;a));
+</pre><div class="info ">
 <code class="code">partition p l</code> returns a pair of lists <code class="code">(l1, l2)</code>, where
    <code class="code">l1</code> is the list of all the elements of <code class="code">l</code> that
    satisfy the predicate <code class="code">p</code>, and <code class="code">l2</code> is the list of all the
@@ -216,7 +247,8 @@ Same as <a href="List.html#VALmem"><code class="code">List.mem</code></a>, but u
 <br>
 <h6 id="6_Associationlists">Association lists</h6><br>
 
-<pre id="VALassoc">val assoc : &apos;a -&gt; (&apos;a * &apos;b) list -&gt; &apos;b</pre><div class="info ">
+<pre id="VALassoc"><span class="keyword">let</span> assoc: (&apos;a, list((&apos;a, &apos;b))) =&gt; &apos;b;
+</pre><div class="info ">
 <code class="code">assoc a l</code> returns the value associated with key <code class="code">a</code> in the list of
    pairs <code class="code">l</code>. That is,
    <code class="code">assoc a [ ...; (a,b); ...] = b</code>
@@ -225,41 +257,48 @@ Same as <a href="List.html#VALmem"><code class="code">List.mem</code></a>, but u
    list <code class="code">l</code>.<br>
 </div>
 
-<pre id="VALassq">val assq : &apos;a -&gt; (&apos;a * &apos;b) list -&gt; &apos;b</pre><div class="info ">
+<pre id="VALassq"><span class="keyword">let</span> assq: (&apos;a, list((&apos;a, &apos;b))) =&gt; &apos;b;
+</pre><div class="info ">
 Same as <a href="List.html#VALassoc"><code class="code">List.assoc</code></a>, but uses physical equality instead of structural
    equality to compare keys.<br>
 </div>
 
-<pre id="VALmem_assoc">val mem_assoc : &apos;a -&gt; (&apos;a * &apos;b) list -&gt; bool</pre><div class="info ">
+<pre id="VALmem_assoc"><span class="keyword">let</span> mem_assoc: (&apos;a, list((&apos;a, &apos;b))) =&gt; bool;
+</pre><div class="info ">
 Same as <a href="List.html#VALassoc"><code class="code">List.assoc</code></a>, but simply return true if a binding exists,
    and false if no bindings exist for the given key.<br>
 </div>
 
-<pre id="VALmem_assq">val mem_assq : &apos;a -&gt; (&apos;a * &apos;b) list -&gt; bool</pre><div class="info ">
+<pre id="VALmem_assq"><span class="keyword">let</span> mem_assq: (&apos;a, list((&apos;a, &apos;b))) =&gt; bool;
+</pre><div class="info ">
 Same as <a href="List.html#VALmem_assoc"><code class="code">List.mem_assoc</code></a>, but uses physical equality instead of
    structural equality to compare keys.<br>
 </div>
 
-<pre id="VALremove_assoc">val remove_assoc : &apos;a -&gt; (&apos;a * &apos;b) list -&gt; (&apos;a * &apos;b) list</pre><div class="info ">
+<pre id="VALremove_assoc"><span class="keyword">let</span> remove_assoc: (&apos;a, list((&apos;a, &apos;b))) =&gt; list((&apos;a, &apos;b));
+</pre><div class="info ">
 <code class="code">remove_assoc a l</code> returns the list of
    pairs <code class="code">l</code> without the first pair with key <code class="code">a</code>, if any.
    Not tail-recursive.<br>
 </div>
 
-<pre id="VALremove_assq">val remove_assq : &apos;a -&gt; (&apos;a * &apos;b) list -&gt; (&apos;a * &apos;b) list</pre><div class="info ">
+<pre id="VALremove_assq"><span class="keyword">let</span> remove_assq: (&apos;a, list((&apos;a, &apos;b))) =&gt; list((&apos;a, &apos;b));
+</pre><div class="info ">
 Same as <a href="List.html#VALremove_assoc"><code class="code">List.remove_assoc</code></a>, but uses physical equality instead
    of structural equality to compare keys.  Not tail-recursive.<br>
 </div>
 <br>
 <h6 id="6_Listsofpairs">Lists of pairs</h6><br>
 
-<pre id="VALsplit">val split : (&apos;a * &apos;b) list -&gt; &apos;a list * &apos;b list</pre><div class="info ">
+<pre id="VALsplit"><span class="keyword">let</span> split: list((&apos;a, &apos;b)) =&gt; (list(&apos;a), list(&apos;b));
+</pre><div class="info ">
 Transform a list of pairs into a pair of lists:
    <code class="code">split [(a1,b1); ...; (an,bn)]</code> is <code class="code">([a1; ...; an], [b1; ...; bn])</code>.
    Not tail-recursive.<br>
 </div>
 
-<pre id="VALcombine">val combine : &apos;a list -&gt; &apos;b list -&gt; (&apos;a * &apos;b) list</pre><div class="info ">
+<pre id="VALcombine"><span class="keyword">let</span> combine: (list(&apos;a), list(&apos;b)) =&gt; list((&apos;a, &apos;b));
+</pre><div class="info ">
 Transform a pair of lists into a list of pairs:
    <code class="code">combine [a1; ...; an] [b1; ...; bn]</code> is
    <code class="code">[(a1,b1); ...; (an,bn)]</code>.
@@ -269,7 +308,8 @@ Transform a pair of lists into a list of pairs:
 <br>
 <h6 id="6_Sorting">Sorting</h6><br>
 
-<pre id="VALsort">val sort : (&apos;a -&gt; &apos;a -&gt; int) -&gt; &apos;a list -&gt; &apos;a list</pre><div class="info ">
+<pre id="VALsort"><span class="keyword">let</span> sort: ((&apos;a, &apos;a) =&gt; int, list(&apos;a)) =&gt; list(&apos;a);
+</pre><div class="info ">
 Sort a list in increasing order according to a comparison
    function.  The comparison function must return 0 if its arguments
    compare as equal, a positive integer if the first is greater,
@@ -286,7 +326,8 @@ Sort a list in increasing order according to a comparison
    heap space and logarithmic stack space.<br>
 </p></div>
 
-<pre id="VALstable_sort">val stable_sort : (&apos;a -&gt; &apos;a -&gt; int) -&gt; &apos;a list -&gt; &apos;a list</pre><div class="info ">
+<pre id="VALstable_sort"><span class="keyword">let</span> stable_sort: ((&apos;a, &apos;a) =&gt; int, list(&apos;a)) =&gt; list(&apos;a);
+</pre><div class="info ">
 Same as <a href="List.html#VALsort"><code class="code">List.sort</code></a>, but the sorting algorithm is guaranteed to
    be stable (i.e. elements that compare equal are kept in their
    original order) .
@@ -296,17 +337,20 @@ Same as <a href="List.html#VALsort"><code class="code">List.sort</code></a>, but
    heap space and logarithmic stack space.<br>
 </p></div>
 
-<pre id="VALfast_sort">val fast_sort : (&apos;a -&gt; &apos;a -&gt; int) -&gt; &apos;a list -&gt; &apos;a list</pre><div class="info ">
+<pre id="VALfast_sort"><span class="keyword">let</span> fast_sort: ((&apos;a, &apos;a) =&gt; int, list(&apos;a)) =&gt; list(&apos;a);
+</pre><div class="info ">
 Same as <a href="List.html#VALsort"><code class="code">List.sort</code></a> or <a href="List.html#VALstable_sort"><code class="code">List.stable_sort</code></a>, whichever is faster
     on typical input.<br>
 </div>
 
-<pre id="VALsort_uniq">val sort_uniq : (&apos;a -&gt; &apos;a -&gt; int) -&gt; &apos;a list -&gt; &apos;a list</pre><div class="info ">
+<pre id="VALsort_uniq"><span class="keyword">let</span> sort_uniq: ((&apos;a, &apos;a) =&gt; int, list(&apos;a)) =&gt; list(&apos;a);
+</pre><div class="info ">
 Same as <a href="List.html#VALsort"><code class="code">List.sort</code></a>, but also remove duplicates.<br>
 <b>Since</b> 4.02.0<br>
 </div>
 
-<pre id="VALmerge">val merge : (&apos;a -&gt; &apos;a -&gt; int) -&gt; &apos;a list -&gt; &apos;a list -&gt; &apos;a list</pre><div class="info ">
+<pre id="VALmerge"><span class="keyword">let</span> merge: ((&apos;a, &apos;a) =&gt; int, list(&apos;a), list(&apos;a)) =&gt; list(&apos;a);
+</pre><div class="info ">
 Merge two lists:
     Assuming that <code class="code">l1</code> and <code class="code">l2</code> are sorted according to the
     comparison function <code class="code">cmp</code>, <code class="code">merge cmp l1 l2</code> will return a

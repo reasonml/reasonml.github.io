@@ -10,7 +10,8 @@ Formatted output functions.<br>
 </div>
 <hr width="100%">
 
-<pre id="VALfprintf">val fprintf : Pervasives.out_channel -&gt;       (&apos;a, Pervasives.out_channel, unit) Pervasives.format -&gt; &apos;a</pre><div class="info ">
+<pre id="VALfprintf"><span class="keyword">let</span> fprintf: (Pervasives.out_channel, Pervasives.format(&apos;a, Pervasives.out_channel, unit)) =&gt; &apos;a;
+</pre><div class="info ">
 <code class="code">fprintf outchan format arg1 ... argN</code> formats the arguments
    <code class="code">arg1</code> to <code class="code">argN</code> according to the format string <code class="code">format</code>, and
    outputs the resulting string on the channel <code class="code">outchan</code>.
@@ -120,26 +121,31 @@ Formatted output functions.<br>
    digits as the value of the argument given before the float.<br>
 </p></div>
 
-<pre id="VALprintf">val printf : (&apos;a, Pervasives.out_channel, unit) Pervasives.format -&gt; &apos;a</pre><div class="info ">
+<pre id="VALprintf"><span class="keyword">let</span> printf: Pervasives.format(&apos;a, Pervasives.out_channel, unit) =&gt; &apos;a;
+</pre><div class="info ">
 Same as <a href="Printf.html#VALfprintf"><code class="code">Printf.fprintf</code></a>, but output on <code class="code">stdout</code>.<br>
 </div>
 
-<pre id="VALeprintf">val eprintf : (&apos;a, Pervasives.out_channel, unit) Pervasives.format -&gt; &apos;a</pre><div class="info ">
+<pre id="VALeprintf"><span class="keyword">let</span> eprintf: Pervasives.format(&apos;a, Pervasives.out_channel, unit) =&gt; &apos;a;
+</pre><div class="info ">
 Same as <a href="Printf.html#VALfprintf"><code class="code">Printf.fprintf</code></a>, but output on <code class="code">stderr</code>.<br>
 </div>
 
-<pre id="VALsprintf">val sprintf : (&apos;a, unit, string) Pervasives.format -&gt; &apos;a</pre><div class="info ">
+<pre id="VALsprintf"><span class="keyword">let</span> sprintf: Pervasives.format(&apos;a, unit, string) =&gt; &apos;a;
+</pre><div class="info ">
 Same as <a href="Printf.html#VALfprintf"><code class="code">Printf.fprintf</code></a>, but instead of printing on an output channel,
    return a string containing the result of formatting the arguments.<br>
 </div>
 
-<pre id="VALbprintf">val bprintf : Buffer.t -&gt; (&apos;a, Buffer.t, unit) Pervasives.format -&gt; &apos;a</pre><div class="info ">
+<pre id="VALbprintf"><span class="keyword">let</span> bprintf: (Buffer.t, Pervasives.format(&apos;a, Buffer.t, unit)) =&gt; &apos;a;
+</pre><div class="info ">
 Same as <a href="Printf.html#VALfprintf"><code class="code">Printf.fprintf</code></a>, but instead of printing on an output channel,
    append the formatted arguments to the given extensible buffer
    (see module <a href="Buffer.html"><code class="code">Buffer</code></a>).<br>
 </div>
 
-<pre id="VALifprintf">val ifprintf : &apos;a -&gt; (&apos;b, &apos;a, unit) Pervasives.format -&gt; &apos;b</pre><div class="info ">
+<pre id="VALifprintf"><span class="keyword">let</span> ifprintf: (&apos;a, Pervasives.format(&apos;b, &apos;a, unit)) =&gt; &apos;b;
+</pre><div class="info ">
 Same as <a href="Printf.html#VALfprintf"><code class="code">Printf.fprintf</code></a>, but does not print anything.
     Useful to ignore some material when conditionally printing.<br>
 <b>Since</b> 3.10.0<br>
@@ -147,25 +153,41 @@ Same as <a href="Printf.html#VALfprintf"><code class="code">Printf.fprintf</code
 <br>
 Formatted output functions with continuations.<br>
 
-<pre id="VALkfprintf">val kfprintf : (Pervasives.out_channel -&gt; &apos;a) -&gt;       Pervasives.out_channel -&gt;       (&apos;b, Pervasives.out_channel, unit, &apos;a) Pervasives.format4 -&gt; &apos;b</pre><div class="info ">
+<pre id="VALkfprintf"><span class="keyword">let</span> kfprintf:
+  (
+    Pervasives.out_channel =&gt; &apos;a,
+    Pervasives.out_channel,
+    Pervasives.format4(&apos;b, Pervasives.out_channel, unit, &apos;a)
+  ) =&gt;
+  &apos;b;
+</pre><div class="info ">
 Same as <code class="code">fprintf</code>, but instead of returning immediately,
    passes the out channel to its first argument at the end of printing.<br>
 <b>Since</b> 3.09.0<br>
 </div>
 
-<pre id="VALikfprintf">val ikfprintf : (Pervasives.out_channel -&gt; &apos;a) -&gt;       Pervasives.out_channel -&gt;       (&apos;b, Pervasives.out_channel, unit, &apos;a) Pervasives.format4 -&gt; &apos;b</pre><div class="info ">
+<pre id="VALikfprintf"><span class="keyword">let</span> ikfprintf:
+  (
+    Pervasives.out_channel =&gt; &apos;a,
+    Pervasives.out_channel,
+    Pervasives.format4(&apos;b, Pervasives.out_channel, unit, &apos;a)
+  ) =&gt;
+  &apos;b;
+</pre><div class="info ">
 Same as <code class="code">kfprintf</code> above, but does not print anything.
    Useful to ignore some material when conditionally printing.<br>
 <b>Since</b> 4.0<br>
 </div>
 
-<pre id="VALksprintf">val ksprintf : (string -&gt; &apos;a) -&gt; (&apos;b, unit, string, &apos;a) Pervasives.format4 -&gt; &apos;b</pre><div class="info ">
+<pre id="VALksprintf"><span class="keyword">let</span> ksprintf: (string =&gt; &apos;a, Pervasives.format4(&apos;b, unit, string, &apos;a)) =&gt; &apos;b;
+</pre><div class="info ">
 Same as <code class="code">sprintf</code> above, but instead of returning the string,
    passes it to the first argument.<br>
 <b>Since</b> 3.09.0<br>
 </div>
 
-<pre id="VALkbprintf">val kbprintf : (Buffer.t -&gt; &apos;a) -&gt;       Buffer.t -&gt; (&apos;b, Buffer.t, unit, &apos;a) Pervasives.format4 -&gt; &apos;b</pre><div class="info ">
+<pre id="VALkbprintf"><span class="keyword">let</span> kbprintf: (Buffer.t =&gt; &apos;a, Buffer.t, Pervasives.format4(&apos;b, Buffer.t, unit, &apos;a)) =&gt; &apos;b;
+</pre><div class="info ">
 Same as <code class="code">bprintf</code>, but instead of returning immediately,
    passes the buffer to its first argument at the end of printing.<br>
 <b>Since</b> 3.10.0<br>
@@ -173,7 +195,8 @@ Same as <code class="code">bprintf</code>, but instead of returning immediately,
 <br>
 Deprecated<br>
 
-<pre id="VALkprintf">val kprintf : (string -&gt; &apos;a) -&gt; (&apos;b, unit, string, &apos;a) Pervasives.format4 -&gt; &apos;b</pre><div class="info ">
+<pre id="VALkprintf"><span class="keyword">let</span> kprintf: (string =&gt; &apos;a, Pervasives.format4(&apos;b, unit, string, &apos;a)) =&gt; &apos;b;
+</pre><div class="info ">
 A deprecated synonym for <code class="code">ksprintf</code>.<br>
 </div>
 </div>

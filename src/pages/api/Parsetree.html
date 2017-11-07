@@ -12,13 +12,16 @@ Abstract syntax tree produced by parsing<br>
 <br>
 <h2 id="2_Extensionpoints">Extension points</h2><br>
 
-<pre id="TYPEattribute"><span class="keyword">type</span> attribute = string Asttypes.loc * payload </pre>
+<pre id="TYPEattribute"><span class="keyword">type</span> attribute = (Asttypes.loc(string), payload);
+</pre>
 
 
-<pre id="TYPEextension"><span class="keyword">type</span> extension = string Asttypes.loc * payload </pre>
+<pre id="TYPEextension"><span class="keyword">type</span> extension = (Asttypes.loc(string), payload);
+</pre>
 
 
-<pre id="TYPEattributes"><span class="keyword">type</span> attributes = attribute list </pre>
+<pre id="TYPEattributes"><span class="keyword">type</span> attributes = list(attribute);
+</pre>
 
 
 <pre><span class="keyword">type</span> payload = </pre><table class="typetable">
@@ -162,7 +165,8 @@ Abstract syntax tree produced by parsing<br>
 
 
 
-<pre id="TYPEpackage_type"><span class="keyword">type</span> package_type = Longident.t Asttypes.loc *       (Longident.t Asttypes.loc * core_type) list </pre>
+<pre id="TYPEpackage_type"><span class="keyword">type</span> package_type = (Asttypes.loc(Longident.t), list((Asttypes.loc(Longident.t), core_type)));
+</pre>
 
 
 <pre><span class="keyword">type</span> row_field = </pre><table class="typetable">
@@ -1128,10 +1132,12 @@ Abstract syntax tree produced by parsing<br>
 
 
 
-<pre id="TYPEclass_description"><span class="keyword">type</span> class_description = class_type class_infos </pre>
+<pre id="TYPEclass_description"><span class="keyword">type</span> class_description = class_infos(class_type);
+</pre>
 
 
-<pre id="TYPEclass_type_declaration"><span class="keyword">type</span> class_type_declaration = class_type class_infos </pre>
+<pre id="TYPEclass_type_declaration"><span class="keyword">type</span> class_type_declaration = class_infos(class_type);
+</pre>
 
 
 <pre><span class="keyword">type</span> class_expr = {</pre><table class="typetable">
@@ -1329,7 +1335,8 @@ Abstract syntax tree produced by parsing<br>
 
 
 
-<pre id="TYPEclass_declaration"><span class="keyword">type</span> class_declaration = class_expr class_infos </pre>
+<pre id="TYPEclass_declaration"><span class="keyword">type</span> class_declaration = class_infos(class_expr);
+</pre>
 
 <br>
 <h2 id="2_Modulelanguage">Module language</h2><br>
@@ -1413,7 +1420,8 @@ Abstract syntax tree produced by parsing<br>
 
 
 
-<pre id="TYPEsignature"><span class="keyword">type</span> signature = signature_item list </pre>
+<pre id="TYPEsignature"><span class="keyword">type</span> signature = list(signature_item);
+</pre>
 
 
 <pre><span class="keyword">type</span> signature_item = {</pre><table class="typetable">
@@ -1655,10 +1663,12 @@ Abstract syntax tree produced by parsing<br>
 
 
 
-<pre id="TYPEinclude_description"><span class="keyword">type</span> include_description = module_type include_infos </pre>
+<pre id="TYPEinclude_description"><span class="keyword">type</span> include_description = include_infos(module_type);
+</pre>
 
 
-<pre id="TYPEinclude_declaration"><span class="keyword">type</span> include_declaration = module_expr include_infos </pre>
+<pre id="TYPEinclude_declaration"><span class="keyword">type</span> include_declaration = include_infos(module_expr);
+</pre>
 
 
 <pre><span class="keyword">type</span> with_constraint = </pre><table class="typetable">
@@ -1772,7 +1782,8 @@ Abstract syntax tree produced by parsing<br>
 
 
 
-<pre id="TYPEstructure"><span class="keyword">type</span> structure = structure_item list </pre>
+<pre id="TYPEstructure"><span class="keyword">type</span> structure = list(structure_item);
+</pre>
 
 
 <pre><span class="keyword">type</span> structure_item = {</pre><table class="typetable">

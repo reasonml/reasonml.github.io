@@ -13,52 +13,63 @@ Last-in first-out stacks.
 </p></div>
 <hr width="100%">
 
-<pre id="TYPEt"><span class="keyword">type</span> &apos;a t </pre>
+<pre id="TYPEt"><span class="keyword">type</span> t(&apos;a);
+</pre>
 <div class="info ">
 The type of stacks containing elements of type <code class="code">&apos;a</code>.<br>
 </div>
 
 
-<pre id="EXCEPTIONEmpty"><span class="keyword">exception</span> Empty</pre>
+<pre id="EXCEPTIONEmpty"><span class="keyword">exception</span> Empty;
+</pre>
 <div class="info ">
 Raised when <a href="Stack.html#VALpop"><code class="code">Stack.pop</code></a> or <a href="Stack.html#VALtop"><code class="code">Stack.top</code></a> is applied to an empty stack.<br>
 </div>
 
-<pre id="VALcreate">val create : unit -&gt; &apos;a t</pre><div class="info ">
+<pre id="VALcreate"><span class="keyword">let</span> create: unit =&gt; t(&apos;a);
+</pre><div class="info ">
 Return a new stack, initially empty.<br>
 </div>
 
-<pre id="VALpush">val push : &apos;a -&gt; &apos;a t -&gt; unit</pre><div class="info ">
+<pre id="VALpush"><span class="keyword">let</span> push: (&apos;a, t(&apos;a)) =&gt; unit;
+</pre><div class="info ">
 <code class="code">push x s</code> adds the element <code class="code">x</code> at the top of stack <code class="code">s</code>.<br>
 </div>
 
-<pre id="VALpop">val pop : &apos;a t -&gt; &apos;a</pre><div class="info ">
+<pre id="VALpop"><span class="keyword">let</span> pop: t(&apos;a) =&gt; &apos;a;
+</pre><div class="info ">
 <code class="code">pop s</code> removes and returns the topmost element in stack <code class="code">s</code>,
    or raises <code class="code">Empty</code> if the stack is empty.<br>
 </div>
 
-<pre id="VALtop">val top : &apos;a t -&gt; &apos;a</pre><div class="info ">
+<pre id="VALtop"><span class="keyword">let</span> top: t(&apos;a) =&gt; &apos;a;
+</pre><div class="info ">
 <code class="code">top s</code> returns the topmost element in stack <code class="code">s</code>,
    or raises <code class="code">Empty</code> if the stack is empty.<br>
 </div>
 
-<pre id="VALclear">val clear : &apos;a t -&gt; unit</pre><div class="info ">
+<pre id="VALclear"><span class="keyword">let</span> clear: t(&apos;a) =&gt; unit;
+</pre><div class="info ">
 Discard all elements from a stack.<br>
 </div>
 
-<pre id="VALcopy">val copy : &apos;a t -&gt; &apos;a t</pre><div class="info ">
+<pre id="VALcopy"><span class="keyword">let</span> copy: t(&apos;a) =&gt; t(&apos;a);
+</pre><div class="info ">
 Return a copy of the given stack.<br>
 </div>
 
-<pre id="VALis_empty">val is_empty : &apos;a t -&gt; bool</pre><div class="info ">
+<pre id="VALis_empty"><span class="keyword">let</span> is_empty: t(&apos;a) =&gt; bool;
+</pre><div class="info ">
 Return <code class="code">true</code> if the given stack is empty, <code class="code">false</code> otherwise.<br>
 </div>
 
-<pre id="VALlength">val length : &apos;a t -&gt; int</pre><div class="info ">
+<pre id="VALlength"><span class="keyword">let</span> length: t(&apos;a) =&gt; int;
+</pre><div class="info ">
 Return the number of elements in a stack.<br>
 </div>
 
-<pre id="VALiter">val iter : (&apos;a -&gt; unit) -&gt; &apos;a t -&gt; unit</pre><div class="info ">
+<pre id="VALiter"><span class="keyword">let</span> iter: (&apos;a =&gt; unit, t(&apos;a)) =&gt; unit;
+</pre><div class="info ">
 <code class="code">iter f s</code> applies <code class="code">f</code> in turn to all elements of <code class="code">s</code>,
    from the element at the top of the stack to the element at the
    bottom of the stack. The stack itself is unchanged.<br>

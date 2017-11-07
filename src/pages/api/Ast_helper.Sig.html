@@ -10,18 +10,40 @@ Signature items<br>
 </div>
 <hr width="100%">
 
-<pre id="VALmk">val mk : ?loc:Ast_helper.loc -&gt;       Parsetree.signature_item_desc -&gt; Parsetree.signature_item</pre>
-<pre id="VALvalue">val value : ?loc:Ast_helper.loc -&gt;       Parsetree.value_description -&gt; Parsetree.signature_item</pre>
-<pre id="VALtype_">val type_ : ?loc:Ast_helper.loc -&gt;       Parsetree.type_declaration list -&gt; Parsetree.signature_item</pre>
-<pre id="VALtype_extension">val type_extension : ?loc:Ast_helper.loc -&gt; Parsetree.type_extension -&gt; Parsetree.signature_item</pre>
-<pre id="VALexception_">val exception_ : ?loc:Ast_helper.loc -&gt;       Parsetree.extension_constructor -&gt; Parsetree.signature_item</pre>
-<pre id="VALmodule_">val module_ : ?loc:Ast_helper.loc -&gt;       Parsetree.module_declaration -&gt; Parsetree.signature_item</pre>
-<pre id="VALrec_module">val rec_module : ?loc:Ast_helper.loc -&gt;       Parsetree.module_declaration list -&gt; Parsetree.signature_item</pre>
-<pre id="VALmodtype">val modtype : ?loc:Ast_helper.loc -&gt;       Parsetree.module_type_declaration -&gt; Parsetree.signature_item</pre>
-<pre id="VALopen_">val open_ : ?loc:Ast_helper.loc -&gt; Parsetree.open_description -&gt; Parsetree.signature_item</pre>
-<pre id="VALinclude_">val include_ : ?loc:Ast_helper.loc -&gt;       Parsetree.include_description -&gt; Parsetree.signature_item</pre>
-<pre id="VALclass_">val class_ : ?loc:Ast_helper.loc -&gt;       Parsetree.class_description list -&gt; Parsetree.signature_item</pre>
-<pre id="VALclass_type">val class_type : ?loc:Ast_helper.loc -&gt;       Parsetree.class_type_declaration list -&gt; Parsetree.signature_item</pre>
-<pre id="VALextension">val extension : ?loc:Ast_helper.loc -&gt;       ?attrs:Ast_helper.attrs -&gt; Parsetree.extension -&gt; Parsetree.signature_item</pre>
-<pre id="VALattribute">val attribute : ?loc:Ast_helper.loc -&gt; Parsetree.attribute -&gt; Parsetree.signature_item</pre>
-<pre id="VALtext">val text : Docstrings.text -&gt; Parsetree.signature_item list</pre></div>
+<pre id="VALmk"><span class="keyword">let</span> mk: (~loc: Ast_helper.loc=?, Parsetree.signature_item_desc) =&gt; Parsetree.signature_item;
+</pre>
+<pre id="VALvalue"><span class="keyword">let</span> value: (~loc: Ast_helper.loc=?, Parsetree.value_description) =&gt; Parsetree.signature_item;
+</pre>
+<pre id="VALtype_"><span class="keyword">let</span> type_: (~loc: Ast_helper.loc=?, list(Parsetree.type_declaration)) =&gt; Parsetree.signature_item;
+</pre>
+<pre id="VALtype_extension"><span class="keyword">let</span> type_extension: (~loc: Ast_helper.loc=?, Parsetree.type_extension) =&gt; Parsetree.signature_item;
+</pre>
+<pre id="VALexception_"><span class="keyword">let</span> exception_:
+  (~loc: Ast_helper.loc=?, Parsetree.extension_constructor) =&gt; Parsetree.signature_item;
+</pre>
+<pre id="VALmodule_"><span class="keyword">let</span> module_: (~loc: Ast_helper.loc=?, Parsetree.module_declaration) =&gt; Parsetree.signature_item;
+</pre>
+<pre id="VALrec_module"><span class="keyword">let</span> rec_module:
+  (~loc: Ast_helper.loc=?, list(Parsetree.module_declaration)) =&gt; Parsetree.signature_item;
+</pre>
+<pre id="VALmodtype"><span class="keyword">let</span> modtype:
+  (~loc: Ast_helper.loc=?, Parsetree.module_type_declaration) =&gt; Parsetree.signature_item;
+</pre>
+<pre id="VALopen_"><span class="keyword">let</span> open_: (~loc: Ast_helper.loc=?, Parsetree.open_description) =&gt; Parsetree.signature_item;
+</pre>
+<pre id="VALinclude_"><span class="keyword">let</span> include_: (~loc: Ast_helper.loc=?, Parsetree.include_description) =&gt; Parsetree.signature_item;
+</pre>
+<pre id="VALclass_"><span class="keyword">let</span> class_:
+  (~loc: Ast_helper.loc=?, list(Parsetree.class_description)) =&gt; Parsetree.signature_item;
+</pre>
+<pre id="VALclass_type"><span class="keyword">let</span> class_type:
+  (~loc: Ast_helper.loc=?, list(Parsetree.class_type_declaration)) =&gt; Parsetree.signature_item;
+</pre>
+<pre id="VALextension"><span class="keyword">let</span> extension:
+  (~loc: Ast_helper.loc=?, ~attrs: Ast_helper.attrs=?, Parsetree.extension) =&gt;
+  Parsetree.signature_item;
+</pre>
+<pre id="VALattribute"><span class="keyword">let</span> attribute: (~loc: Ast_helper.loc=?, Parsetree.attribute) =&gt; Parsetree.signature_item;
+</pre>
+<pre id="VALtext"><span class="keyword">let</span> text: Docstrings.text =&gt; list(Parsetree.signature_item);
+</pre></div>

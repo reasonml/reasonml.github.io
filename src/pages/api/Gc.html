@@ -318,70 +318,83 @@ The GC parameters are given as a <code class="code">control</code> record.  Note
 </div>
 
 
-<pre id="VALstat">val stat : unit -&gt; stat</pre><div class="info ">
+<pre id="VALstat"><span class="keyword">let</span> stat: unit =&gt; stat;
+</pre><div class="info ">
 Return the current values of the memory management counters in a
    <code class="code">stat</code> record.  This function examines every heap block to get the
    statistics.<br>
 </div>
 
-<pre id="VALquick_stat">val quick_stat : unit -&gt; stat</pre><div class="info ">
+<pre id="VALquick_stat"><span class="keyword">let</span> quick_stat: unit =&gt; stat;
+</pre><div class="info ">
 Same as <code class="code">stat</code> except that <code class="code">live_words</code>, <code class="code">live_blocks</code>, <code class="code">free_words</code>,
     <code class="code">free_blocks</code>, <code class="code">largest_free</code>, and <code class="code">fragments</code> are set to 0.  This
     function is much faster than <code class="code">stat</code> because it does not need to go
     through the heap.<br>
 </div>
 
-<pre id="VALcounters">val counters : unit -&gt; float * float * float</pre><div class="info ">
+<pre id="VALcounters"><span class="keyword">let</span> counters: unit =&gt; (float, float, float);
+</pre><div class="info ">
 Return <code class="code">(minor_words, promoted_words, major_words)</code>.  This function
     is as fast as <code class="code">quick_stat</code>.<br>
 </div>
 
-<pre id="VALget">val get : unit -&gt; control</pre><div class="info ">
+<pre id="VALget"><span class="keyword">let</span> get: unit =&gt; control;
+</pre><div class="info ">
 Return the current values of the GC parameters in a <code class="code">control</code> record.<br>
 </div>
 
-<pre id="VALset">val set : control -&gt; unit</pre><div class="info ">
+<pre id="VALset"><span class="keyword">let</span> set: control =&gt; unit;
+</pre><div class="info ">
 <code class="code">set r</code> changes the GC parameters according to the <code class="code">control</code> record <code class="code">r</code>.
    The normal usage is: <code class="code">Gc.set { (Gc.get()) with Gc.verbose = 0x00d }</code><br>
 </div>
 
-<pre id="VALminor">val minor : unit -&gt; unit</pre><div class="info ">
+<pre id="VALminor"><span class="keyword">let</span> minor: unit =&gt; unit;
+</pre><div class="info ">
 Trigger a minor collection.<br>
 </div>
 
-<pre id="VALmajor_slice">val major_slice : int -&gt; int</pre><div class="info ">
+<pre id="VALmajor_slice"><span class="keyword">let</span> major_slice: int =&gt; int;
+</pre><div class="info ">
 Do a minor collection and a slice of major collection.  The argument
     is the size of the slice, 0 to use the automatically-computed
     slice size.  In all cases, the result is the computed slice size.<br>
 </div>
 
-<pre id="VALmajor">val major : unit -&gt; unit</pre><div class="info ">
+<pre id="VALmajor"><span class="keyword">let</span> major: unit =&gt; unit;
+</pre><div class="info ">
 Do a minor collection and finish the current major collection cycle.<br>
 </div>
 
-<pre id="VALfull_major">val full_major : unit -&gt; unit</pre><div class="info ">
+<pre id="VALfull_major"><span class="keyword">let</span> full_major: unit =&gt; unit;
+</pre><div class="info ">
 Do a minor collection, finish the current major collection cycle,
    and perform a complete new cycle.  This will collect all currently
    unreachable blocks.<br>
 </div>
 
-<pre id="VALcompact">val compact : unit -&gt; unit</pre><div class="info ">
+<pre id="VALcompact"><span class="keyword">let</span> compact: unit =&gt; unit;
+</pre><div class="info ">
 Perform a full major collection and compact the heap.  Note that heap
    compaction is a lengthy operation.<br>
 </div>
 
-<pre id="VALprint_stat">val print_stat : Pervasives.out_channel -&gt; unit</pre><div class="info ">
+<pre id="VALprint_stat"><span class="keyword">let</span> print_stat: Pervasives.out_channel =&gt; unit;
+</pre><div class="info ">
 Print the current values of the memory management counters (in
    human-readable form) into the channel argument.<br>
 </div>
 
-<pre id="VALallocated_bytes">val allocated_bytes : unit -&gt; float</pre><div class="info ">
+<pre id="VALallocated_bytes"><span class="keyword">let</span> allocated_bytes: unit =&gt; float;
+</pre><div class="info ">
 Return the total number of bytes allocated since the program was
    started.  It is returned as a <code class="code">float</code> to avoid overflow problems
    with <code class="code">int</code> on 32-bit machines.<br>
 </div>
 
-<pre id="VALfinalise">val finalise : (&apos;a -&gt; unit) -&gt; &apos;a -&gt; unit</pre><div class="info ">
+<pre id="VALfinalise"><span class="keyword">let</span> finalise: (&apos;a =&gt; unit, &apos;a) =&gt; unit;
+</pre><div class="info ">
 <code class="code">finalise f v</code> registers <code class="code">f</code> as a finalisation function for <code class="code">v</code>.
    <code class="code">v</code> must be heap-allocated.  <code class="code">f</code> will be called with <code class="code">v</code> as
    argument at some point between the first time <code class="code">v</code> becomes unreachable
@@ -446,13 +459,15 @@ Return the total number of bytes allocated since the program was
    heap-allocated and non-constant except when the length argument is <code class="code">0</code>.<br>
 </p></div>
 
-<pre id="VALfinalise_release">val finalise_release : unit -&gt; unit</pre><div class="info ">
+<pre id="VALfinalise_release"><span class="keyword">let</span> finalise_release: unit =&gt; unit;
+</pre><div class="info ">
 A finalisation function may call <code class="code">finalise_release</code> to tell the
     GC that it can launch the next finalisation function without waiting
     for the current one to return.<br>
 </div>
 
-<pre id="TYPEalarm"><span class="keyword">type</span> alarm </pre>
+<pre id="TYPEalarm"><span class="keyword">type</span> alarm;
+</pre>
 <div class="info ">
 An alarm is a piece of data that calls a user function at the end of
    each major GC cycle.  The following functions are provided to create
@@ -460,14 +475,16 @@ An alarm is a piece of data that calls a user function at the end of
 </div>
 
 
-<pre id="VALcreate_alarm">val create_alarm : (unit -&gt; unit) -&gt; alarm</pre><div class="info ">
+<pre id="VALcreate_alarm"><span class="keyword">let</span> create_alarm: (unit =&gt; unit) =&gt; alarm;
+</pre><div class="info ">
 <code class="code">create_alarm f</code> will arrange for <code class="code">f</code> to be called at the end of each
    major GC cycle, starting with the current cycle or the next one.
    A value of type <code class="code">alarm</code> is returned that you can
    use to call <code class="code">delete_alarm</code>.<br>
 </div>
 
-<pre id="VALdelete_alarm">val delete_alarm : alarm -&gt; unit</pre><div class="info ">
+<pre id="VALdelete_alarm"><span class="keyword">let</span> delete_alarm: alarm =&gt; unit;
+</pre><div class="info ">
 <code class="code">delete_alarm a</code> will stop the calls to the function associated
    to <code class="code">a</code>.  Calling <code class="code">delete_alarm a</code> again has no effect.<br>
 </div>

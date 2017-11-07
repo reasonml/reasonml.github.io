@@ -10,7 +10,48 @@ Type extensions<br>
 </div>
 <hr width="100%">
 
-<pre id="VALmk">val mk : ?attrs:Ast_helper.attrs -&gt;       ?docs:Docstrings.docs -&gt;       ?params:(Parsetree.core_type * Asttypes.variance) list -&gt;       ?priv:Asttypes.private_flag -&gt;       Ast_helper.lid -&gt;       Parsetree.extension_constructor list -&gt; Parsetree.type_extension</pre>
-<pre id="VALconstructor">val constructor : ?loc:Ast_helper.loc -&gt;       ?attrs:Ast_helper.attrs -&gt;       ?docs:Docstrings.docs -&gt;       ?info:Docstrings.info -&gt;       Ast_helper.str -&gt;       Parsetree.extension_constructor_kind -&gt; Parsetree.extension_constructor</pre>
-<pre id="VALdecl">val decl : ?loc:Ast_helper.loc -&gt;       ?attrs:Ast_helper.attrs -&gt;       ?docs:Docstrings.docs -&gt;       ?info:Docstrings.info -&gt;       ?args:Parsetree.core_type list -&gt;       ?res:Parsetree.core_type -&gt; Ast_helper.str -&gt; Parsetree.extension_constructor</pre>
-<pre id="VALrebind">val rebind : ?loc:Ast_helper.loc -&gt;       ?attrs:Ast_helper.attrs -&gt;       ?docs:Docstrings.docs -&gt;       ?info:Docstrings.info -&gt;       Ast_helper.str -&gt; Ast_helper.lid -&gt; Parsetree.extension_constructor</pre></div>
+<pre id="VALmk"><span class="keyword">let</span> mk:
+  (
+    ~attrs: Ast_helper.attrs=?,
+    ~docs: Docstrings.docs=?,
+    ~params: list((Parsetree.core_type, Asttypes.variance))=?,
+    ~priv: Asttypes.private_flag=?,
+    Ast_helper.lid,
+    list(Parsetree.extension_constructor)
+  ) =&gt;
+  Parsetree.type_extension;
+</pre>
+<pre id="VALconstructor"><span class="keyword">let</span> constructor:
+  (
+    ~loc: Ast_helper.loc=?,
+    ~attrs: Ast_helper.attrs=?,
+    ~docs: Docstrings.docs=?,
+    ~info: Docstrings.info=?,
+    Ast_helper.str,
+    Parsetree.extension_constructor_kind
+  ) =&gt;
+  Parsetree.extension_constructor;
+</pre>
+<pre id="VALdecl"><span class="keyword">let</span> decl:
+  (
+    ~loc: Ast_helper.loc=?,
+    ~attrs: Ast_helper.attrs=?,
+    ~docs: Docstrings.docs=?,
+    ~info: Docstrings.info=?,
+    ~args: list(Parsetree.core_type)=?,
+    ~res: Parsetree.core_type=?,
+    Ast_helper.str
+  ) =&gt;
+  Parsetree.extension_constructor;
+</pre>
+<pre id="VALrebind"><span class="keyword">let</span> rebind:
+  (
+    ~loc: Ast_helper.loc=?,
+    ~attrs: Ast_helper.attrs=?,
+    ~docs: Docstrings.docs=?,
+    ~info: Docstrings.info=?,
+    Ast_helper.str,
+    Ast_helper.lid
+  ) =&gt;
+  Parsetree.extension_constructor;
+</pre></div>

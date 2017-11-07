@@ -6,35 +6,63 @@
 
 <pre><span class="keyword">module</span> type S = sig .. end</pre><hr width="100%">
 
-<pre id="TYPEelt"><span class="keyword">type</span> elt </pre>
+<pre id="TYPEelt"><span class="keyword">type</span> elt;
+</pre>
 
 
-<pre id="TYPEt"><span class="keyword">type</span> t </pre>
+<pre id="TYPEt"><span class="keyword">type</span> t;
+</pre>
 
 
-<pre id="VALempty">val empty : t</pre>
-<pre id="VALis_empty">val is_empty : t -&gt; bool</pre>
-<pre id="VALmem">val mem : elt -&gt; t -&gt; bool</pre>
-<pre id="VALadd">val add : elt -&gt; t -&gt; t</pre>
-<pre id="VALsingleton">val singleton : elt -&gt; t</pre>
-<pre id="VALremove">val remove : elt -&gt; t -&gt; t</pre>
-<pre id="VALunion">val union : t -&gt; t -&gt; t</pre>
-<pre id="VALinter">val inter : t -&gt; t -&gt; t</pre>
-<pre id="VALdiff">val diff : t -&gt; t -&gt; t</pre>
-<pre id="VALcompare">val compare : t -&gt; t -&gt; int</pre>
-<pre id="VALequal">val equal : t -&gt; t -&gt; bool</pre>
-<pre id="VALsubset">val subset : t -&gt; t -&gt; bool</pre>
-<pre id="VALiter">val iter : f:(elt -&gt; unit) -&gt; t -&gt; unit</pre>
-<pre id="VALfold">val fold : f:(elt -&gt; &apos;a -&gt; &apos;a) -&gt; t -&gt; init:&apos;a -&gt; &apos;a</pre>
-<pre id="VALfor_all">val for_all : f:(elt -&gt; bool) -&gt; t -&gt; bool</pre>
-<pre id="VALexists">val exists : f:(elt -&gt; bool) -&gt; t -&gt; bool</pre>
-<pre id="VALfilter">val filter : f:(elt -&gt; bool) -&gt; t -&gt; t</pre>
-<pre id="VALpartition">val partition : f:(elt -&gt; bool) -&gt;       t -&gt; t * t</pre>
-<pre id="VALcardinal">val cardinal : t -&gt; int</pre>
-<pre id="VALelements">val elements : t -&gt; elt list</pre>
-<pre id="VALmin_elt">val min_elt : t -&gt; elt</pre>
-<pre id="VALmax_elt">val max_elt : t -&gt; elt</pre>
-<pre id="VALchoose">val choose : t -&gt; elt</pre>
-<pre id="VALsplit">val split : elt -&gt;       t -&gt; t * bool * t</pre>
-<pre id="VALfind">val find : elt -&gt; t -&gt; elt</pre>
-<pre id="VALof_list">val of_list : elt list -&gt; t</pre></div>
+<pre id="VALempty"><span class="keyword">let</span> empty: t;
+</pre>
+<pre id="VALis_empty"><span class="keyword">let</span> is_empty: t =&gt; bool;
+</pre>
+<pre id="VALmem"><span class="keyword">let</span> mem: (elt, t) =&gt; bool;
+</pre>
+<pre id="VALadd"><span class="keyword">let</span> add: (elt, t) =&gt; t;
+</pre>
+<pre id="VALsingleton"><span class="keyword">let</span> singleton: elt =&gt; t;
+</pre>
+<pre id="VALremove"><span class="keyword">let</span> remove: (elt, t) =&gt; t;
+</pre>
+<pre id="VALunion"><span class="keyword">let</span> union: (t, t) =&gt; t;
+</pre>
+<pre id="VALinter"><span class="keyword">let</span> inter: (t, t) =&gt; t;
+</pre>
+<pre id="VALdiff"><span class="keyword">let</span> diff: (t, t) =&gt; t;
+</pre>
+<pre id="VALcompare"><span class="keyword">let</span> compare: (t, t) =&gt; int;
+</pre>
+<pre id="VALequal"><span class="keyword">let</span> equal: (t, t) =&gt; bool;
+</pre>
+<pre id="VALsubset"><span class="keyword">let</span> subset: (t, t) =&gt; bool;
+</pre>
+<pre id="VALiter"><span class="keyword">let</span> iter: (~f: elt =&gt; unit, t) =&gt; unit;
+</pre>
+<pre id="VALfold"><span class="keyword">let</span> fold: (~f: (elt, &apos;a) =&gt; &apos;a, t, ~init: &apos;a) =&gt; &apos;a;
+</pre>
+<pre id="VALfor_all"><span class="keyword">let</span> for_all: (~f: elt =&gt; bool, t) =&gt; bool;
+</pre>
+<pre id="VALexists"><span class="keyword">let</span> exists: (~f: elt =&gt; bool, t) =&gt; bool;
+</pre>
+<pre id="VALfilter"><span class="keyword">let</span> filter: (~f: elt =&gt; bool, t) =&gt; t;
+</pre>
+<pre id="VALpartition"><span class="keyword">let</span> partition: (~f: elt =&gt; bool, t) =&gt; (t, t);
+</pre>
+<pre id="VALcardinal"><span class="keyword">let</span> cardinal: t =&gt; int;
+</pre>
+<pre id="VALelements"><span class="keyword">let</span> elements: t =&gt; list(elt);
+</pre>
+<pre id="VALmin_elt"><span class="keyword">let</span> min_elt: t =&gt; elt;
+</pre>
+<pre id="VALmax_elt"><span class="keyword">let</span> max_elt: t =&gt; elt;
+</pre>
+<pre id="VALchoose"><span class="keyword">let</span> choose: t =&gt; elt;
+</pre>
+<pre id="VALsplit"><span class="keyword">let</span> split: (elt, t) =&gt; (t, bool, t);
+</pre>
+<pre id="VALfind"><span class="keyword">let</span> find: (elt, t) =&gt; elt;
+</pre>
+<pre id="VALof_list"><span class="keyword">let</span> of_list: list(elt) =&gt; t;
+</pre></div>

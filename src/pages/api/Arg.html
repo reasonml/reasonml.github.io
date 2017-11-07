@@ -179,19 +179,24 @@ The concrete type describing the behavior associated
 </div>
 
 
-<pre id="TYPEkey"><span class="keyword">type</span> key = string </pre>
+<pre id="TYPEkey"><span class="keyword">type</span> key = string;
+</pre>
 
 
-<pre id="TYPEdoc"><span class="keyword">type</span> doc = string </pre>
+<pre id="TYPEdoc"><span class="keyword">type</span> doc = string;
+</pre>
 
 
-<pre id="TYPEusage_msg"><span class="keyword">type</span> usage_msg = string </pre>
+<pre id="TYPEusage_msg"><span class="keyword">type</span> usage_msg = string;
+</pre>
 
 
-<pre id="TYPEanon_fun"><span class="keyword">type</span> anon_fun = string -&gt; unit </pre>
+<pre id="TYPEanon_fun"><span class="keyword">type</span> anon_fun = string =&gt; unit;
+</pre>
 
 
-<pre id="VALparse">val parse : (key * spec * doc) list -&gt; anon_fun -&gt; usage_msg -&gt; unit</pre><div class="info ">
+<pre id="VALparse"><span class="keyword">let</span> parse: (list((key, spec, doc)), anon_fun, usage_msg) =&gt; unit;
+</pre><div class="info ">
 <code class="code">Arg.parse speclist anon_fun usage_msg</code> parses the command line.
     <code class="code">speclist</code> is a list of triples <code class="code">(key, spec, doc)</code>.
     <code class="code">key</code> is the option keyword, it must start with a <code class="code">&apos;-&apos;</code> character.
@@ -222,7 +227,8 @@ The concrete type describing the behavior associated
     by specifying your own <code class="code">-help</code> and <code class="code">--help</code> options in <code class="code">speclist</code>.<br>
 </p></div>
 
-<pre id="VALparse_dynamic">val parse_dynamic : (key * spec * doc) list Pervasives.ref -&gt;       anon_fun -&gt; usage_msg -&gt; unit</pre><div class="info ">
+<pre id="VALparse_dynamic"><span class="keyword">let</span> parse_dynamic: (Pervasives.ref(list((key, spec, doc))), anon_fun, usage_msg) =&gt; unit;
+</pre><div class="info ">
 Same as <a href="Arg.html#VALparse"><code class="code">Arg.parse</code></a>, except that the <code class="code">speclist</code> argument is a reference
     and may be updated during the parsing. A typical use for this feature
     is to parse command lines of the form:<ul>
@@ -232,7 +238,10 @@ Same as <a href="Arg.html#VALparse"><code class="code">Arg.parse</code></a>, exc
 <br>
 </div>
 
-<pre id="VALparse_argv">val parse_argv : ?current:int Pervasives.ref -&gt;       string array -&gt;       (key * spec * doc) list -&gt; anon_fun -&gt; usage_msg -&gt; unit</pre><div class="info ">
+<pre id="VALparse_argv"><span class="keyword">let</span> parse_argv:
+  (~current: Pervasives.ref(int)=?, array(string), list((key, spec, doc)), anon_fun, usage_msg) =&gt;
+  unit;
+</pre><div class="info ">
 <code class="code">Arg.parse_argv ~current args speclist anon_fun usage_msg</code> parses
   the array <code class="code">args</code> as if it were the command line.  It uses and updates
   the value of <code class="code">~current</code> (if given), or <code class="code">Arg.current</code>.  You must set
@@ -244,37 +253,51 @@ Same as <a href="Arg.html#VALparse"><code class="code">Arg.parse</code></a>, exc
   as argument.<br>
 </div>
 
-<pre id="VALparse_argv_dynamic">val parse_argv_dynamic : ?current:int Pervasives.ref -&gt;       string array -&gt;       (key * spec * doc) list Pervasives.ref -&gt;       anon_fun -&gt; string -&gt; unit</pre><div class="info ">
+<pre id="VALparse_argv_dynamic"><span class="keyword">let</span> parse_argv_dynamic:
+  (
+    ~current: Pervasives.ref(int)=?,
+    array(string),
+    Pervasives.ref(list((key, spec, doc))),
+    anon_fun,
+    string
+  ) =&gt;
+  unit;
+</pre><div class="info ">
 Same as <a href="Arg.html#VALparse_argv"><code class="code">Arg.parse_argv</code></a>, except that the <code class="code">speclist</code> argument is a
     reference and may be updated during the parsing.
     See <a href="Arg.html#VALparse_dynamic"><code class="code">Arg.parse_dynamic</code></a>.<br>
 </div>
 
-<pre id="EXCEPTIONHelp"><span class="keyword">exception</span> Help of string</pre>
+<pre id="EXCEPTIONHelp"><span class="keyword">exception</span> Help(string);
+</pre>
 <div class="info ">
 Raised by <code class="code">Arg.parse_argv</code> when the user asks for help.<br>
 </div>
 
-<pre id="EXCEPTIONBad"><span class="keyword">exception</span> Bad of string</pre>
+<pre id="EXCEPTIONBad"><span class="keyword">exception</span> Bad(string);
+</pre>
 <div class="info ">
 Functions in <code class="code">spec</code> or <code class="code">anon_fun</code> can raise <code class="code">Arg.Bad</code> with an error
     message to reject invalid arguments.
     <code class="code">Arg.Bad</code> is also raised by <code class="code">Arg.parse_argv</code> in case of an error.<br>
 </div>
 
-<pre id="VALusage">val usage : (key * spec * doc) list -&gt; usage_msg -&gt; unit</pre><div class="info ">
+<pre id="VALusage"><span class="keyword">let</span> usage: (list((key, spec, doc)), usage_msg) =&gt; unit;
+</pre><div class="info ">
 <code class="code">Arg.usage speclist usage_msg</code> prints to standard error
     an error message that includes the list of valid options.  This is
     the same message that <a href="Arg.html#VALparse"><code class="code">Arg.parse</code></a> prints in case of error.
     <code class="code">speclist</code> and <code class="code">usage_msg</code> are the same as for <code class="code">Arg.parse</code>.<br>
 </div>
 
-<pre id="VALusage_string">val usage_string : (key * spec * doc) list -&gt; usage_msg -&gt; string</pre><div class="info ">
+<pre id="VALusage_string"><span class="keyword">let</span> usage_string: (list((key, spec, doc)), usage_msg) =&gt; string;
+</pre><div class="info ">
 Returns the message that would have been printed by <a href="Arg.html#VALusage"><code class="code">Arg.usage</code></a>,
     if provided with the same parameters.<br>
 </div>
 
-<pre id="VALalign">val align : ?limit:int -&gt;       (key * spec * doc) list -&gt; (key * spec * doc) list</pre><div class="info ">
+<pre id="VALalign"><span class="keyword">let</span> align: (~limit: int=?, list((key, spec, doc))) =&gt; list((key, spec, doc));
+</pre><div class="info ">
 Align the documentation strings by inserting spaces at the first
     space, according to the length of the keyword.  Use a
     space as the first character in a doc string if you want to
@@ -284,7 +307,8 @@ Align the documentation strings by inserting spaces at the first
 <div class="param_info"><code class="code">limit</code> : options with keyword and message longer than
     <code class="code">limit</code> will not be used to compute the alignement.</div>
 
-<pre id="VALcurrent">val current : int Pervasives.ref</pre><div class="info ">
+<pre id="VALcurrent"><span class="keyword">let</span> current: Pervasives.ref(int);
+</pre><div class="info ">
 Position (in <a href="Sys.html#VALargv"><code class="code">Sys.argv</code></a>) of the argument being processed.  You can
     change this value, e.g. to force <a href="Arg.html#VALparse"><code class="code">Arg.parse</code></a> to skip some arguments.
     <a href="Arg.html#VALparse"><code class="code">Arg.parse</code></a> uses the initial value of <a href="Arg.html#VALcurrent"><code class="code">Arg.current</code></a> as the index of

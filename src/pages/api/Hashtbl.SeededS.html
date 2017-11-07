@@ -10,23 +10,39 @@ The output signature of the functor <a href="Hashtbl.MakeSeeded.html"><code clas
 </div>
 <hr width="100%">
 
-<pre id="TYPEkey"><span class="keyword">type</span> key </pre>
+<pre id="TYPEkey"><span class="keyword">type</span> key;
+</pre>
 
 
-<pre id="TYPEt"><span class="keyword">type</span> &apos;a t </pre>
+<pre id="TYPEt"><span class="keyword">type</span> t(&apos;a);
+</pre>
 
 
-<pre id="VALcreate">val create : ?random:bool -&gt; int -&gt; &apos;a t</pre>
-<pre id="VALclear">val clear : &apos;a t -&gt; unit</pre>
-<pre id="VALreset">val reset : &apos;a t -&gt; unit</pre>
-<pre id="VALcopy">val copy : &apos;a t -&gt; &apos;a t</pre>
-<pre id="VALadd">val add : &apos;a t -&gt; key -&gt; &apos;a -&gt; unit</pre>
-<pre id="VALremove">val remove : &apos;a t -&gt; key -&gt; unit</pre>
-<pre id="VALfind">val find : &apos;a t -&gt; key -&gt; &apos;a</pre>
-<pre id="VALfind_all">val find_all : &apos;a t -&gt; key -&gt; &apos;a list</pre>
-<pre id="VALreplace">val replace : &apos;a t -&gt; key -&gt; &apos;a -&gt; unit</pre>
-<pre id="VALmem">val mem : &apos;a t -&gt; key -&gt; bool</pre>
-<pre id="VALiter">val iter : (key -&gt; &apos;a -&gt; unit) -&gt; &apos;a t -&gt; unit</pre>
-<pre id="VALfold">val fold : (key -&gt; &apos;a -&gt; &apos;b -&gt; &apos;b) -&gt; &apos;a t -&gt; &apos;b -&gt; &apos;b</pre>
-<pre id="VALlength">val length : &apos;a t -&gt; int</pre>
-<pre id="VALstats">val stats : &apos;a t -&gt; Hashtbl.statistics</pre></div>
+<pre id="VALcreate"><span class="keyword">let</span> create: (~random: bool=?, int) =&gt; t(&apos;a);
+</pre>
+<pre id="VALclear"><span class="keyword">let</span> clear: t(&apos;a) =&gt; unit;
+</pre>
+<pre id="VALreset"><span class="keyword">let</span> reset: t(&apos;a) =&gt; unit;
+</pre>
+<pre id="VALcopy"><span class="keyword">let</span> copy: t(&apos;a) =&gt; t(&apos;a);
+</pre>
+<pre id="VALadd"><span class="keyword">let</span> add: (t(&apos;a), key, &apos;a) =&gt; unit;
+</pre>
+<pre id="VALremove"><span class="keyword">let</span> remove: (t(&apos;a), key) =&gt; unit;
+</pre>
+<pre id="VALfind"><span class="keyword">let</span> find: (t(&apos;a), key) =&gt; &apos;a;
+</pre>
+<pre id="VALfind_all"><span class="keyword">let</span> find_all: (t(&apos;a), key) =&gt; list(&apos;a);
+</pre>
+<pre id="VALreplace"><span class="keyword">let</span> replace: (t(&apos;a), key, &apos;a) =&gt; unit;
+</pre>
+<pre id="VALmem"><span class="keyword">let</span> mem: (t(&apos;a), key) =&gt; bool;
+</pre>
+<pre id="VALiter"><span class="keyword">let</span> iter: ((key, &apos;a) =&gt; unit, t(&apos;a)) =&gt; unit;
+</pre>
+<pre id="VALfold"><span class="keyword">let</span> fold: ((key, &apos;a, &apos;b) =&gt; &apos;b, t(&apos;a), &apos;b) =&gt; &apos;b;
+</pre>
+<pre id="VALlength"><span class="keyword">let</span> length: t(&apos;a) =&gt; int;
+</pre>
+<pre id="VALstats"><span class="keyword">let</span> stats: t(&apos;a) =&gt; Hashtbl.statistics;
+</pre></div>

@@ -16,9 +16,12 @@ File operations on large files.
 </div>
 <hr width="100%">
 
-<pre id="VALlseek">val lseek : Unix.file_descr -&gt; int64 -&gt; Unix.seek_command -&gt; int64</pre>
-<pre id="VALtruncate">val truncate : string -&gt; int64 -&gt; unit</pre>
-<pre id="VALftruncate">val ftruncate : Unix.file_descr -&gt; int64 -&gt; unit</pre>
+<pre id="VALlseek"><span class="keyword">let</span> lseek: (Unix.file_descr, int64, Unix.seek_command) =&gt; int64;
+</pre>
+<pre id="VALtruncate"><span class="keyword">let</span> truncate: (string, int64) =&gt; unit;
+</pre>
+<pre id="VALftruncate"><span class="keyword">let</span> ftruncate: (Unix.file_descr, int64) =&gt; unit;
+</pre>
 <pre><span class="keyword">type</span> stats = {</pre><table class="typetable">
 <tbody><tr>
 <td align="left" valign="top">
@@ -144,6 +147,9 @@ Last status change time<br>
 
 
 
-<pre id="VALstat">val stat : string -&gt; stats</pre>
-<pre id="VALlstat">val lstat : string -&gt; stats</pre>
-<pre id="VALfstat">val fstat : Unix.file_descr -&gt; stats</pre></div>
+<pre id="VALstat"><span class="keyword">let</span> stat: string =&gt; stats;
+</pre>
+<pre id="VALlstat"><span class="keyword">let</span> lstat: string =&gt; stats;
+</pre>
+<pre id="VALfstat"><span class="keyword">let</span> fstat: Unix.file_descr =&gt; stats;
+</pre></div>

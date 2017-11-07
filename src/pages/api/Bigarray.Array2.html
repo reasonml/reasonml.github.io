@@ -12,14 +12,16 @@ Two-dimensional arrays. The <code class="code">Array2</code> structure provides 
 </div>
 <hr width="100%">
 
-<pre id="TYPEt"><span class="keyword">type</span> (&apos;a, &apos;b, &apos;c) t </pre>
+<pre id="TYPEt"><span class="keyword">type</span> t(&apos;a, &apos;b, &apos;c);
+</pre>
 <div class="info ">
 The type of two-dimensional big arrays whose elements have
      OCaml type <code class="code">&apos;a</code>, representation kind <code class="code">&apos;b</code>, and memory layout <code class="code">&apos;c</code>.<br>
 </div>
 
 
-<pre id="VALcreate">val create : (&apos;a, &apos;b) Bigarray.kind -&gt;       &apos;c Bigarray.layout -&gt; int -&gt; int -&gt; (&apos;a, &apos;b, &apos;c) t</pre><div class="info ">
+<pre id="VALcreate"><span class="keyword">let</span> create: (Bigarray.kind(&apos;a, &apos;b), Bigarray.layout(&apos;c), int, int) =&gt; t(&apos;a, &apos;b, &apos;c);
+</pre><div class="info ">
 <code class="code">Array2.create kind layout dim1 dim2</code> returns a new bigarray of
      two dimension, whose size is <code class="code">dim1</code> in the first dimension
      and <code class="code">dim2</code> in the second dimension.  <code class="code">kind</code> and <code class="code">layout</code>
@@ -27,23 +29,28 @@ The type of two-dimensional big arrays whose elements have
      as described for <a href="Bigarray.Genarray.html#VALcreate"><code class="code">Bigarray.Genarray.create</code></a>.<br>
 </div>
 
-<pre id="VALdim1">val dim1 : (&apos;a, &apos;b, &apos;c) t -&gt; int</pre><div class="info ">
+<pre id="VALdim1"><span class="keyword">let</span> dim1: t(&apos;a, &apos;b, &apos;c) =&gt; int;
+</pre><div class="info ">
 Return the first dimension of the given two-dimensional big array.<br>
 </div>
 
-<pre id="VALdim2">val dim2 : (&apos;a, &apos;b, &apos;c) t -&gt; int</pre><div class="info ">
+<pre id="VALdim2"><span class="keyword">let</span> dim2: t(&apos;a, &apos;b, &apos;c) =&gt; int;
+</pre><div class="info ">
 Return the second dimension of the given two-dimensional big array.<br>
 </div>
 
-<pre id="VALkind">val kind : (&apos;a, &apos;b, &apos;c) t -&gt; (&apos;a, &apos;b) Bigarray.kind</pre><div class="info ">
+<pre id="VALkind"><span class="keyword">let</span> kind: t(&apos;a, &apos;b, &apos;c) =&gt; Bigarray.kind(&apos;a, &apos;b);
+</pre><div class="info ">
 Return the kind of the given big array.<br>
 </div>
 
-<pre id="VALlayout">val layout : (&apos;a, &apos;b, &apos;c) t -&gt; &apos;c Bigarray.layout</pre><div class="info ">
+<pre id="VALlayout"><span class="keyword">let</span> layout: t(&apos;a, &apos;b, &apos;c) =&gt; Bigarray.layout(&apos;c);
+</pre><div class="info ">
 Return the layout of the given big array.<br>
 </div>
 
-<pre id="VALget">val get : (&apos;a, &apos;b, &apos;c) t -&gt; int -&gt; int -&gt; &apos;a</pre><div class="info ">
+<pre id="VALget"><span class="keyword">let</span> get: (t(&apos;a, &apos;b, &apos;c), int, int) =&gt; &apos;a;
+</pre><div class="info ">
 <code class="code">Array2.get a x y</code>, also written <code class="code">a.{x,y}</code>,
      returns the element of <code class="code">a</code> at coordinates (<code class="code">x</code>, <code class="code">y</code>).
      <code class="code">x</code> and <code class="code">y</code> must be within the bounds
@@ -51,7 +58,8 @@ Return the layout of the given big array.<br>
      otherwise, <code class="code">Invalid_argument</code> is raised.<br>
 </div>
 
-<pre id="VALset">val set : (&apos;a, &apos;b, &apos;c) t -&gt; int -&gt; int -&gt; &apos;a -&gt; unit</pre><div class="info ">
+<pre id="VALset"><span class="keyword">let</span> set: (t(&apos;a, &apos;b, &apos;c), int, int, &apos;a) =&gt; unit;
+</pre><div class="info ">
 <code class="code">Array2.set a x y v</code>, or alternatively <code class="code">a.{x,y} &lt;- v</code>,
      stores the value <code class="code">v</code> at coordinates (<code class="code">x</code>, <code class="code">y</code>) in <code class="code">a</code>.
      <code class="code">x</code> and <code class="code">y</code> must be within the bounds of <code class="code">a</code>,
@@ -59,28 +67,35 @@ Return the layout of the given big array.<br>
      otherwise, <code class="code">Invalid_argument</code> is raised.<br>
 </div>
 
-<pre id="VALsub_left">val sub_left : (&apos;a, &apos;b, Bigarray.c_layout) t -&gt;       int -&gt; int -&gt; (&apos;a, &apos;b, Bigarray.c_layout) t</pre><div class="info ">
+<pre id="VALsub_left"><span class="keyword">let</span> sub_left: (t(&apos;a, &apos;b, Bigarray.c_layout), int, int) =&gt; t(&apos;a, &apos;b, Bigarray.c_layout);
+</pre><div class="info ">
 Extract a two-dimensional sub-array of the given two-dimensional
      big array by restricting the first dimension.
      See <a href="Bigarray.Genarray.html#VALsub_left"><code class="code">Bigarray.Genarray.sub_left</code></a> for more details.
      <code class="code">Array2.sub_left</code> applies only to arrays with C layout.<br>
 </div>
 
-<pre id="VALsub_right">val sub_right : (&apos;a, &apos;b, Bigarray.fortran_layout) t -&gt;       int -&gt; int -&gt; (&apos;a, &apos;b, Bigarray.fortran_layout) t</pre><div class="info ">
+<pre id="VALsub_right"><span class="keyword">let</span> sub_right:
+  (t(&apos;a, &apos;b, Bigarray.fortran_layout), int, int) =&gt; t(&apos;a, &apos;b, Bigarray.fortran_layout);
+</pre><div class="info ">
 Extract a two-dimensional sub-array of the given two-dimensional
      big array by restricting the second dimension.
      See <a href="Bigarray.Genarray.html#VALsub_right"><code class="code">Bigarray.Genarray.sub_right</code></a> for more details.
      <code class="code">Array2.sub_right</code> applies only to arrays with Fortran layout.<br>
 </div>
 
-<pre id="VALslice_left">val slice_left : (&apos;a, &apos;b, Bigarray.c_layout) t -&gt;       int -&gt; (&apos;a, &apos;b, Bigarray.c_layout) Bigarray.Array1.t</pre><div class="info ">
+<pre id="VALslice_left"><span class="keyword">let</span> slice_left:
+  (t(&apos;a, &apos;b, Bigarray.c_layout), int) =&gt; Bigarray.Array1.t(&apos;a, &apos;b, Bigarray.c_layout);
+</pre><div class="info ">
 Extract a row (one-dimensional slice) of the given two-dimensional
      big array.  The integer parameter is the index of the row to
      extract.  See <a href="Bigarray.Genarray.html#VALslice_left"><code class="code">Bigarray.Genarray.slice_left</code></a> for more details.
      <code class="code">Array2.slice_left</code> applies only to arrays with C layout.<br>
 </div>
 
-<pre id="VALslice_right">val slice_right : (&apos;a, &apos;b, Bigarray.fortran_layout) t -&gt;       int -&gt; (&apos;a, &apos;b, Bigarray.fortran_layout) Bigarray.Array1.t</pre><div class="info ">
+<pre id="VALslice_right"><span class="keyword">let</span> slice_right:
+  (t(&apos;a, &apos;b, Bigarray.fortran_layout), int) =&gt; Bigarray.Array1.t(&apos;a, &apos;b, Bigarray.fortran_layout);
+</pre><div class="info ">
 Extract a column (one-dimensional slice) of the given
      two-dimensional big array.  The integer parameter is the
      index of the column to extract.  See <a href="Bigarray.Genarray.html#VALslice_right"><code class="code">Bigarray.Genarray.slice_right</code></a>
@@ -88,32 +103,40 @@ Extract a column (one-dimensional slice) of the given
      with Fortran layout.<br>
 </div>
 
-<pre id="VALblit">val blit : (&apos;a, &apos;b, &apos;c) t -&gt; (&apos;a, &apos;b, &apos;c) t -&gt; unit</pre><div class="info ">
+<pre id="VALblit"><span class="keyword">let</span> blit: (t(&apos;a, &apos;b, &apos;c), t(&apos;a, &apos;b, &apos;c)) =&gt; unit;
+</pre><div class="info ">
 Copy the first big array to the second big array.
      See <a href="Bigarray.Genarray.html#VALblit"><code class="code">Bigarray.Genarray.blit</code></a> for more details.<br>
 </div>
 
-<pre id="VALfill">val fill : (&apos;a, &apos;b, &apos;c) t -&gt; &apos;a -&gt; unit</pre><div class="info ">
+<pre id="VALfill"><span class="keyword">let</span> fill: (t(&apos;a, &apos;b, &apos;c), &apos;a) =&gt; unit;
+</pre><div class="info ">
 Fill the given big array with the given value.
      See <a href="Bigarray.Genarray.html#VALfill"><code class="code">Bigarray.Genarray.fill</code></a> for more details.<br>
 </div>
 
-<pre id="VALof_array">val of_array : (&apos;a, &apos;b) Bigarray.kind -&gt;       &apos;c Bigarray.layout -&gt; &apos;a array array -&gt; (&apos;a, &apos;b, &apos;c) t</pre><div class="info ">
+<pre id="VALof_array"><span class="keyword">let</span> of_array: (Bigarray.kind(&apos;a, &apos;b), Bigarray.layout(&apos;c), array(array(&apos;a))) =&gt; t(&apos;a, &apos;b, &apos;c);
+</pre><div class="info ">
 Build a two-dimensional big array initialized from the
      given array of arrays.<br>
 </div>
 
-<pre id="VALmap_file">val map_file : Unix.file_descr -&gt;       ?pos:int64 -&gt;       (&apos;a, &apos;b) Bigarray.kind -&gt;       &apos;c Bigarray.layout -&gt; bool -&gt; int -&gt; int -&gt; (&apos;a, &apos;b, &apos;c) t</pre><div class="info ">
+<pre id="VALmap_file"><span class="keyword">let</span> map_file:
+  (Unix.file_descr, ~pos: int64=?, Bigarray.kind(&apos;a, &apos;b), Bigarray.layout(&apos;c), bool, int, int) =&gt;
+  t(&apos;a, &apos;b, &apos;c);
+</pre><div class="info ">
 Memory mapping of a file as a two-dimensional big array.
      See <a href="Bigarray.Genarray.html#VALmap_file"><code class="code">Bigarray.Genarray.map_file</code></a> for more details.<br>
 </div>
 
-<pre id="VALunsafe_get">val unsafe_get : (&apos;a, &apos;b, &apos;c) t -&gt; int -&gt; int -&gt; &apos;a</pre><div class="info ">
+<pre id="VALunsafe_get"><span class="keyword">let</span> unsafe_get: (t(&apos;a, &apos;b, &apos;c), int, int) =&gt; &apos;a;
+</pre><div class="info ">
 Like <a href="Bigarray.Array2.html#VALget"><code class="code">Bigarray.Array2.get</code></a>, but bounds checking is not always
       performed.<br>
 </div>
 
-<pre id="VALunsafe_set">val unsafe_set : (&apos;a, &apos;b, &apos;c) t -&gt; int -&gt; int -&gt; &apos;a -&gt; unit</pre><div class="info ">
+<pre id="VALunsafe_set"><span class="keyword">let</span> unsafe_set: (t(&apos;a, &apos;b, &apos;c), int, int, &apos;a) =&gt; unit;
+</pre><div class="info ">
 Like <a href="Bigarray.Array2.html#VALset"><code class="code">Bigarray.Array2.set</code></a>, but bounds checking is not always
       performed.<br>
 </div>

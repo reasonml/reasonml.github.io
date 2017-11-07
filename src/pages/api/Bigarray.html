@@ -16,7 +16,8 @@ Large, multi-dimensional, numerical arrays.
 </p><p>
 
    Concerning the naming conventions, users of this module are encouraged
-   to do <code class="code">open Bigarray</code> in their source, then refer to array types and
+   to do <code class="code">open Bigarray;
+</code> in their source, then refer to array types and
    operations via short dot notation, e.g. <code class="code">Array1.t</code> or <code class="code">Array2.sub</code>.
 </p><p>
 
@@ -321,55 +322,68 @@ To each element kind is associated an OCaml type, which is
 
 
 
-<pre id="VALfloat32">val float32 : (float, float32_elt) kind</pre><div class="info ">
+<pre id="VALfloat32"><span class="keyword">let</span> float32: kind(float, float32_elt);
+</pre><div class="info ">
 See <a href="Bigarray.html#VALchar"><code class="code">Bigarray.char</code></a>.<br>
 </div>
 
-<pre id="VALfloat64">val float64 : (float, float64_elt) kind</pre><div class="info ">
+<pre id="VALfloat64"><span class="keyword">let</span> float64: kind(float, float64_elt);
+</pre><div class="info ">
 See <a href="Bigarray.html#VALchar"><code class="code">Bigarray.char</code></a>.<br>
 </div>
 
-<pre id="VALcomplex32">val complex32 : (Complex.t, complex32_elt) kind</pre><div class="info ">
+<pre id="VALcomplex32"><span class="keyword">let</span> complex32: kind(Complex.t, complex32_elt);
+</pre><div class="info ">
 See <a href="Bigarray.html#VALchar"><code class="code">Bigarray.char</code></a>.<br>
 </div>
 
-<pre id="VALcomplex64">val complex64 : (Complex.t, complex64_elt) kind</pre><div class="info ">
+<pre id="VALcomplex64"><span class="keyword">let</span> complex64: kind(Complex.t, complex64_elt);
+</pre><div class="info ">
 See <a href="Bigarray.html#VALchar"><code class="code">Bigarray.char</code></a>.<br>
 </div>
 
-<pre id="VALint8_signed">val int8_signed : (int, int8_signed_elt) kind</pre><div class="info ">
+<pre id="VALint8_signed"><span class="keyword">let</span> int8_signed: kind(int, int8_signed_elt);
+</pre><div class="info ">
 See <a href="Bigarray.html#VALchar"><code class="code">Bigarray.char</code></a>.<br>
 </div>
 
-<pre id="VALint8_unsigned">val int8_unsigned : (int, int8_unsigned_elt) kind</pre><div class="info ">
+<pre id="VALint8_unsigned"><span class="keyword">let</span> int8_unsigned: kind(int, int8_unsigned_elt);
+</pre><div class="info ">
 See <a href="Bigarray.html#VALchar"><code class="code">Bigarray.char</code></a>.<br>
 </div>
 
-<pre id="VALint16_signed">val int16_signed : (int, int16_signed_elt) kind</pre><div class="info ">
+<pre id="VALint16_signed"><span class="keyword">let</span> int16_signed: kind(int, int16_signed_elt);
+</pre><div class="info ">
 See <a href="Bigarray.html#VALchar"><code class="code">Bigarray.char</code></a>.<br>
 </div>
 
-<pre id="VALint16_unsigned">val int16_unsigned : (int, int16_unsigned_elt) kind</pre><div class="info ">
+<pre id="VALint16_unsigned"><span class="keyword">let</span> int16_unsigned: kind(int, int16_unsigned_elt);
+</pre><div class="info ">
 See <a href="Bigarray.html#VALchar"><code class="code">Bigarray.char</code></a>.<br>
 </div>
 
-<pre id="VALint">val int : (int, int_elt) kind</pre><div class="info ">
+<pre id="VALint"><span class="keyword">let</span> int: kind(int, int_elt);
+</pre><div class="info ">
 See <a href="Bigarray.html#VALchar"><code class="code">Bigarray.char</code></a>.<br>
 </div>
 
-<pre id="VALint32">val int32 : (int32, int32_elt) kind</pre><div class="info ">
+<pre id="VALint32"><span class="keyword">let</span> int32: kind(int32, int32_elt);
+</pre><div class="info ">
 See <a href="Bigarray.html#VALchar"><code class="code">Bigarray.char</code></a>.<br>
 </div>
 
-<pre id="VALint64">val int64 : (int64, int64_elt) kind</pre><div class="info ">
+<pre id="VALint64"><span class="keyword">let</span> int64: kind(int64, int64_elt);
+</pre><div class="info ">
 See <a href="Bigarray.html#VALchar"><code class="code">Bigarray.char</code></a>.<br>
 </div>
 
-<pre id="VALnativeint">val nativeint : (nativeint, nativeint_elt) kind</pre><div class="info ">
+<pre id="VALnativeint"><span class="keyword">let</span> nativeint: kind(nativeint, nativeint_elt);
+</pre><div class="info ">
 See <a href="Bigarray.html#VALchar"><code class="code">Bigarray.char</code></a>.<br>
 </div>
 
-<pre id="VALchar">val char : (char, int8_unsigned_elt) kind</pre><div class="info ">
+<pre id="VALchar"><span class="keyword">let</span> char: kind(char, int8_unsigned_elt);
+</pre><div class="info ">
 As shown by the types of the values above,
    big arrays of kind <code class="code">float32_elt</code> and <code class="code">float64_elt</code> are
    accessed using the OCaml type <code class="code">float</code>.  Big arrays of complex kinds
@@ -465,8 +479,10 @@ To facilitate interoperability with existing C and Fortran code,
 
 
 
-<pre id="VALc_layout">val c_layout : c_layout layout</pre>
-<pre id="VALfortran_layout">val fortran_layout : fortran_layout layout</pre><br>
+<pre id="VALc_layout"><span class="keyword">let</span> c_layout: layout(c_layout);
+</pre>
+<pre id="VALfortran_layout"><span class="keyword">let</span> fortran_layout: layout(fortran_layout);
+</pre><br>
 <h6 id="6_Genericarraysofarbitrarilymanydimensions">Generic arrays (of arbitrarily many dimensions)</h6><br>
 
 <pre><span class="keyword">module</span> Genarray: sig .. end</pre><br>
@@ -490,34 +506,40 @@ Three-dimensional arrays.
 <br>
 <h6 id="6_Coercionsbetweengenericbigarraysandfixeddimensionbigarrays">Coercions between generic big arrays and fixed-dimension big arrays</h6><br>
 
-<pre id="VALgenarray_of_array1">val genarray_of_array1 : (&apos;a, &apos;b, &apos;c) Array1.t -&gt; (&apos;a, &apos;b, &apos;c) Genarray.t</pre><div class="info ">
+<pre id="VALgenarray_of_array1"><span class="keyword">let</span> genarray_of_array1: Array1.t(&apos;a, &apos;b, &apos;c) =&gt; Genarray.t(&apos;a, &apos;b, &apos;c);
+</pre><div class="info ">
 Return the generic big array corresponding to the given one-dimensional
    big array.<br>
 </div>
 
-<pre id="VALgenarray_of_array2">val genarray_of_array2 : (&apos;a, &apos;b, &apos;c) Array2.t -&gt; (&apos;a, &apos;b, &apos;c) Genarray.t</pre><div class="info ">
+<pre id="VALgenarray_of_array2"><span class="keyword">let</span> genarray_of_array2: Array2.t(&apos;a, &apos;b, &apos;c) =&gt; Genarray.t(&apos;a, &apos;b, &apos;c);
+</pre><div class="info ">
 Return the generic big array corresponding to the given two-dimensional
    big array.<br>
 </div>
 
-<pre id="VALgenarray_of_array3">val genarray_of_array3 : (&apos;a, &apos;b, &apos;c) Array3.t -&gt; (&apos;a, &apos;b, &apos;c) Genarray.t</pre><div class="info ">
+<pre id="VALgenarray_of_array3"><span class="keyword">let</span> genarray_of_array3: Array3.t(&apos;a, &apos;b, &apos;c) =&gt; Genarray.t(&apos;a, &apos;b, &apos;c);
+</pre><div class="info ">
 Return the generic big array corresponding to the given three-dimensional
    big array.<br>
 </div>
 
-<pre id="VALarray1_of_genarray">val array1_of_genarray : (&apos;a, &apos;b, &apos;c) Genarray.t -&gt; (&apos;a, &apos;b, &apos;c) Array1.t</pre><div class="info ">
+<pre id="VALarray1_of_genarray"><span class="keyword">let</span> array1_of_genarray: Genarray.t(&apos;a, &apos;b, &apos;c) =&gt; Array1.t(&apos;a, &apos;b, &apos;c);
+</pre><div class="info ">
 Return the one-dimensional big array corresponding to the given
    generic big array.  Raise <code class="code">Invalid_argument</code> if the generic big array
    does not have exactly one dimension.<br>
 </div>
 
-<pre id="VALarray2_of_genarray">val array2_of_genarray : (&apos;a, &apos;b, &apos;c) Genarray.t -&gt; (&apos;a, &apos;b, &apos;c) Array2.t</pre><div class="info ">
+<pre id="VALarray2_of_genarray"><span class="keyword">let</span> array2_of_genarray: Genarray.t(&apos;a, &apos;b, &apos;c) =&gt; Array2.t(&apos;a, &apos;b, &apos;c);
+</pre><div class="info ">
 Return the two-dimensional big array corresponding to the given
    generic big array.  Raise <code class="code">Invalid_argument</code> if the generic big array
    does not have exactly two dimensions.<br>
 </div>
 
-<pre id="VALarray3_of_genarray">val array3_of_genarray : (&apos;a, &apos;b, &apos;c) Genarray.t -&gt; (&apos;a, &apos;b, &apos;c) Array3.t</pre><div class="info ">
+<pre id="VALarray3_of_genarray"><span class="keyword">let</span> array3_of_genarray: Genarray.t(&apos;a, &apos;b, &apos;c) =&gt; Array3.t(&apos;a, &apos;b, &apos;c);
+</pre><div class="info ">
 Return the three-dimensional big array corresponding to the given
    generic big array.  Raise <code class="code">Invalid_argument</code> if the generic big array
    does not have exactly three dimensions.<br>
@@ -525,7 +547,8 @@ Return the three-dimensional big array corresponding to the given
 <br>
 <h6 id="6_Reshapingbigarrays">Re-shaping big arrays</h6><br>
 
-<pre id="VALreshape">val reshape : (&apos;a, &apos;b, &apos;c) Genarray.t -&gt;       int array -&gt; (&apos;a, &apos;b, &apos;c) Genarray.t</pre><div class="info ">
+<pre id="VALreshape"><span class="keyword">let</span> reshape: (Genarray.t(&apos;a, &apos;b, &apos;c), array(int)) =&gt; Genarray.t(&apos;a, &apos;b, &apos;c);
+</pre><div class="info ">
 <code class="code">reshape b [|d1;...;dN|]</code> converts the big array <code class="code">b</code> to a
    <code class="code">N</code>-dimensional array of dimensions <code class="code">d1</code>...<code class="code">dN</code>.  The returned
    array and the original array <code class="code">b</code> share their data
@@ -542,17 +565,20 @@ Return the three-dimensional big array corresponding to the given
    Otherwise, <code class="code">Invalid_argument</code> is raised.<br>
 </div>
 
-<pre id="VALreshape_1">val reshape_1 : (&apos;a, &apos;b, &apos;c) Genarray.t -&gt; int -&gt; (&apos;a, &apos;b, &apos;c) Array1.t</pre><div class="info ">
+<pre id="VALreshape_1"><span class="keyword">let</span> reshape_1: (Genarray.t(&apos;a, &apos;b, &apos;c), int) =&gt; Array1.t(&apos;a, &apos;b, &apos;c);
+</pre><div class="info ">
 Specialized version of <a href="Bigarray.html#VALreshape"><code class="code">Bigarray.reshape</code></a> for reshaping to
    one-dimensional arrays.<br>
 </div>
 
-<pre id="VALreshape_2">val reshape_2 : (&apos;a, &apos;b, &apos;c) Genarray.t -&gt;       int -&gt; int -&gt; (&apos;a, &apos;b, &apos;c) Array2.t</pre><div class="info ">
+<pre id="VALreshape_2"><span class="keyword">let</span> reshape_2: (Genarray.t(&apos;a, &apos;b, &apos;c), int, int) =&gt; Array2.t(&apos;a, &apos;b, &apos;c);
+</pre><div class="info ">
 Specialized version of <a href="Bigarray.html#VALreshape"><code class="code">Bigarray.reshape</code></a> for reshaping to
    two-dimensional arrays.<br>
 </div>
 
-<pre id="VALreshape_3">val reshape_3 : (&apos;a, &apos;b, &apos;c) Genarray.t -&gt;       int -&gt; int -&gt; int -&gt; (&apos;a, &apos;b, &apos;c) Array3.t</pre><div class="info ">
+<pre id="VALreshape_3"><span class="keyword">let</span> reshape_3: (Genarray.t(&apos;a, &apos;b, &apos;c), int, int, int) =&gt; Array3.t(&apos;a, &apos;b, &apos;c);
+</pre><div class="info ">
 Specialized version of <a href="Bigarray.html#VALreshape"><code class="code">Bigarray.reshape</code></a> for reshaping to
    three-dimensional arrays.<br>
 </div>

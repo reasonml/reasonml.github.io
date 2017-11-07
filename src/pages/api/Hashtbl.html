@@ -15,13 +15,15 @@ Hash tables and hash functions.
 <br>
 <h6 id="6_Genericinterface">Generic interface</h6><br>
 
-<pre id="TYPEt"><span class="keyword">type</span> (&apos;a, &apos;b) t </pre>
+<pre id="TYPEt"><span class="keyword">type</span> t(&apos;a, &apos;b);
+</pre>
 <div class="info ">
 The type of hash tables from type <code class="code">&apos;a</code> to type <code class="code">&apos;b</code>.<br>
 </div>
 
 
-<pre id="VALcreate">val create : ?random:bool -&gt; int -&gt; (&apos;a, &apos;b) t</pre><div class="info ">
+<pre id="VALcreate"><span class="keyword">let</span> create: (~random: bool=?, int) =&gt; t(&apos;a, &apos;b);
+</pre><div class="info ">
 <code class="code">Hashtbl.create n</code> creates a new, empty hash table, with
    initial size <code class="code">n</code>.  For best results, <code class="code">n</code> should be on the
    order of the expected number of elements that will be in
@@ -64,22 +66,26 @@ The type of hash tables from type <code class="code">&apos;a</code> to type <cod
    hash tables were created in non-randomized mode.<br>
 </p></div>
 
-<pre id="VALclear">val clear : (&apos;a, &apos;b) t -&gt; unit</pre><div class="info ">
+<pre id="VALclear"><span class="keyword">let</span> clear: t(&apos;a, &apos;b) =&gt; unit;
+</pre><div class="info ">
 Empty a hash table. Use <code class="code">reset</code> instead of <code class="code">clear</code> to shrink the
     size of the bucket table to its initial size.<br>
 </div>
 
-<pre id="VALreset">val reset : (&apos;a, &apos;b) t -&gt; unit</pre><div class="info ">
+<pre id="VALreset"><span class="keyword">let</span> reset: t(&apos;a, &apos;b) =&gt; unit;
+</pre><div class="info ">
 Empty a hash table and shrink the size of the bucket table
     to its initial size.<br>
 <b>Since</b> 4.00.0<br>
 </div>
 
-<pre id="VALcopy">val copy : (&apos;a, &apos;b) t -&gt; (&apos;a, &apos;b) t</pre><div class="info ">
+<pre id="VALcopy"><span class="keyword">let</span> copy: t(&apos;a, &apos;b) =&gt; t(&apos;a, &apos;b);
+</pre><div class="info ">
 Return a copy of the given hashtable.<br>
 </div>
 
-<pre id="VALadd">val add : (&apos;a, &apos;b) t -&gt; &apos;a -&gt; &apos;b -&gt; unit</pre><div class="info ">
+<pre id="VALadd"><span class="keyword">let</span> add: (t(&apos;a, &apos;b), &apos;a, &apos;b) =&gt; unit;
+</pre><div class="info ">
 <code class="code">Hashtbl.add tbl x y</code> adds a binding of <code class="code">x</code> to <code class="code">y</code> in table <code class="code">tbl</code>.
    Previous bindings for <code class="code">x</code> are not removed, but simply
    hidden. That is, after performing <a href="Hashtbl.html#VALremove"><code class="code">Hashtbl.remove</code></a><code class="code"> tbl x</code>,
@@ -87,29 +93,34 @@ Return a copy of the given hashtable.<br>
    (Same behavior as with association lists.)<br>
 </div>
 
-<pre id="VALfind">val find : (&apos;a, &apos;b) t -&gt; &apos;a -&gt; &apos;b</pre><div class="info ">
+<pre id="VALfind"><span class="keyword">let</span> find: (t(&apos;a, &apos;b), &apos;a) =&gt; &apos;b;
+</pre><div class="info ">
 <code class="code">Hashtbl.find tbl x</code> returns the current binding of <code class="code">x</code> in <code class="code">tbl</code>,
    or raises <code class="code">Not_found</code> if no such binding exists.<br>
 </div>
 
-<pre id="VALfind_all">val find_all : (&apos;a, &apos;b) t -&gt; &apos;a -&gt; &apos;b list</pre><div class="info ">
+<pre id="VALfind_all"><span class="keyword">let</span> find_all: (t(&apos;a, &apos;b), &apos;a) =&gt; list(&apos;b);
+</pre><div class="info ">
 <code class="code">Hashtbl.find_all tbl x</code> returns the list of all data
    associated with <code class="code">x</code> in <code class="code">tbl</code>.
    The current binding is returned first, then the previous
    bindings, in reverse order of introduction in the table.<br>
 </div>
 
-<pre id="VALmem">val mem : (&apos;a, &apos;b) t -&gt; &apos;a -&gt; bool</pre><div class="info ">
+<pre id="VALmem"><span class="keyword">let</span> mem: (t(&apos;a, &apos;b), &apos;a) =&gt; bool;
+</pre><div class="info ">
 <code class="code">Hashtbl.mem tbl x</code> checks if <code class="code">x</code> is bound in <code class="code">tbl</code>.<br>
 </div>
 
-<pre id="VALremove">val remove : (&apos;a, &apos;b) t -&gt; &apos;a -&gt; unit</pre><div class="info ">
+<pre id="VALremove"><span class="keyword">let</span> remove: (t(&apos;a, &apos;b), &apos;a) =&gt; unit;
+</pre><div class="info ">
 <code class="code">Hashtbl.remove tbl x</code> removes the current binding of <code class="code">x</code> in <code class="code">tbl</code>,
    restoring the previous binding if it exists.
    It does nothing if <code class="code">x</code> is not bound in <code class="code">tbl</code>.<br>
 </div>
 
-<pre id="VALreplace">val replace : (&apos;a, &apos;b) t -&gt; &apos;a -&gt; &apos;b -&gt; unit</pre><div class="info ">
+<pre id="VALreplace"><span class="keyword">let</span> replace: (t(&apos;a, &apos;b), &apos;a, &apos;b) =&gt; unit;
+</pre><div class="info ">
 <code class="code">Hashtbl.replace tbl x y</code> replaces the current binding of <code class="code">x</code>
    in <code class="code">tbl</code> by a binding of <code class="code">x</code> to <code class="code">y</code>.  If <code class="code">x</code> is unbound in <code class="code">tbl</code>,
    a binding of <code class="code">x</code> to <code class="code">y</code> is added to <code class="code">tbl</code>.
@@ -117,7 +128,8 @@ Return a copy of the given hashtable.<br>
    followed by <a href="Hashtbl.html#VALadd"><code class="code">Hashtbl.add</code></a><code class="code"> tbl x y</code>.<br>
 </div>
 
-<pre id="VALiter">val iter : (&apos;a -&gt; &apos;b -&gt; unit) -&gt; (&apos;a, &apos;b) t -&gt; unit</pre><div class="info ">
+<pre id="VALiter"><span class="keyword">let</span> iter: ((&apos;a, &apos;b) =&gt; unit, t(&apos;a, &apos;b)) =&gt; unit;
+</pre><div class="info ">
 <code class="code">Hashtbl.iter f tbl</code> applies <code class="code">f</code> to all bindings in table <code class="code">tbl</code>.
    <code class="code">f</code> receives the key as first argument, and the associated value
    as second argument. Each binding is presented exactly once to <code class="code">f</code>.
@@ -136,7 +148,8 @@ Return a copy of the given hashtable.<br>
    is entirely random.<br>
 </p></div>
 
-<pre id="VALfold">val fold : (&apos;a -&gt; &apos;b -&gt; &apos;c -&gt; &apos;c) -&gt; (&apos;a, &apos;b) t -&gt; &apos;c -&gt; &apos;c</pre><div class="info ">
+<pre id="VALfold"><span class="keyword">let</span> fold: ((&apos;a, &apos;b, &apos;c) =&gt; &apos;c, t(&apos;a, &apos;b), &apos;c) =&gt; &apos;c;
+</pre><div class="info ">
 <code class="code">Hashtbl.fold f tbl init</code> computes
    <code class="code">(f kN dN ... (f k1 d1 init)...)</code>,
    where <code class="code">k1 ... kN</code> are the keys of all bindings in <code class="code">tbl</code>,
@@ -157,14 +170,16 @@ Return a copy of the given hashtable.<br>
    is entirely random.<br>
 </p></div>
 
-<pre id="VALlength">val length : (&apos;a, &apos;b) t -&gt; int</pre><div class="info ">
+<pre id="VALlength"><span class="keyword">let</span> length: t(&apos;a, &apos;b) =&gt; int;
+</pre><div class="info ">
 <code class="code">Hashtbl.length tbl</code> returns the number of bindings in <code class="code">tbl</code>.
    It takes constant time.  Multiple bindings are counted once each, so
    <code class="code">Hashtbl.length</code> gives the number of times <code class="code">Hashtbl.iter</code> calls its
    first argument.<br>
 </div>
 
-<pre id="VALrandomize">val randomize : unit -&gt; unit</pre><div class="info ">
+<pre id="VALrandomize"><span class="keyword">let</span> randomize: unit =&gt; unit;
+</pre><div class="info ">
 After a call to <code class="code">Hashtbl.randomize()</code>, hash tables are created in
     randomized mode by default: <a href="Hashtbl.html#VALcreate"><code class="code">Hashtbl.create</code></a> returns randomized
     hash tables, unless the <code class="code">~random:false</code> optional parameter is given.
@@ -233,7 +248,8 @@ Histogram of bucket sizes.  This array <code class="code">histo</code> has
 
 
 
-<pre id="VALstats">val stats : (&apos;a, &apos;b) t -&gt; statistics</pre><div class="info ">
+<pre id="VALstats"><span class="keyword">let</span> stats: t(&apos;a, &apos;b) =&gt; statistics;
+</pre><div class="info ">
 <code class="code">Hashtbl.stats tbl</code> returns statistics about the table <code class="code">tbl</code>:
    number of buckets, size of the biggest bucket, distribution of
    buckets by size.<br>
@@ -282,7 +298,8 @@ The input signature of the functor <a href="Hashtbl.Make.html"><code class="code
 The output signature of the functor <a href="Hashtbl.Make.html"><code class="code">Hashtbl.Make</code></a>.
 </div>
 
-<pre><span class="keyword">module</span> Make: functor (H : HashedType) -&gt; S  with type key = H.t</pre><div class="info">
+<pre><span class="keyword">module</span> Make: (H: HashedType) =&gt; S with type key = H.t;
+</pre><div class="info">
 Functor building an implementation of the hashtable structure.
 </div>
 
@@ -294,26 +311,30 @@ The input signature of the functor <a href="Hashtbl.MakeSeeded.html"><code class
 The output signature of the functor <a href="Hashtbl.MakeSeeded.html"><code class="code">Hashtbl.MakeSeeded</code></a>.
 </div>
 
-<pre><span class="keyword">module</span> MakeSeeded: functor (H : SeededHashedType) -&gt; SeededS  with type key = H.t</pre><div class="info">
+<pre><span class="keyword">module</span> MakeSeeded: (H: SeededHashedType) =&gt; SeededS with type key = H.t;
+</pre><div class="info">
 Functor building an implementation of the hashtable structure.
 </div>
 <br>
 <h6 id="6_Thepolymorphichashfunctions">The polymorphic hash functions</h6><br>
 
-<pre id="VALhash">val hash : &apos;a -&gt; int</pre><div class="info ">
+<pre id="VALhash"><span class="keyword">let</span> hash: &apos;a =&gt; int;
+</pre><div class="info ">
 <code class="code">Hashtbl.hash x</code> associates a nonnegative integer to any value of
    any type. It is guaranteed that
    if <code class="code">x = y</code> or <code class="code">Pervasives.compare x y = 0</code>, then <code class="code">hash x = hash y</code>.
    Moreover, <code class="code">hash</code> always terminates, even on cyclic structures.<br>
 </div>
 
-<pre id="VALseeded_hash">val seeded_hash : int -&gt; &apos;a -&gt; int</pre><div class="info ">
+<pre id="VALseeded_hash"><span class="keyword">let</span> seeded_hash: (int, &apos;a) =&gt; int;
+</pre><div class="info ">
 A variant of <a href="Hashtbl.html#VALhash"><code class="code">Hashtbl.hash</code></a> that is further parameterized by
    an integer seed.<br>
 <b>Since</b> 4.00.0<br>
 </div>
 
-<pre id="VALhash_param">val hash_param : int -&gt; int -&gt; &apos;a -&gt; int</pre><div class="info ">
+<pre id="VALhash_param"><span class="keyword">let</span> hash_param: (int, int, &apos;a) =&gt; int;
+</pre><div class="info ">
 <code class="code">Hashtbl.hash_param meaningful total x</code> computes a hash value for <code class="code">x</code>,
    with the same properties as for <code class="code">hash</code>. The two extra integer
    parameters <code class="code">meaningful</code> and <code class="code">total</code> give more precise control over
@@ -333,7 +354,8 @@ A variant of <a href="Hashtbl.html#VALhash"><code class="code">Hashtbl.hash</cod
    <code class="code">meaningful = 10</code> and <code class="code">total = 100</code>.<br>
 </div>
 
-<pre id="VALseeded_hash_param">val seeded_hash_param : int -&gt; int -&gt; int -&gt; &apos;a -&gt; int</pre><div class="info ">
+<pre id="VALseeded_hash_param"><span class="keyword">let</span> seeded_hash_param: (int, int, int, &apos;a) =&gt; int;
+</pre><div class="info ">
 A variant of <a href="Hashtbl.html#VALhash_param"><code class="code">Hashtbl.hash_param</code></a> that is further parameterized by
    an integer seed.  Usage:
    <code class="code">Hashtbl.seeded_hash_param meaningful total seed x</code>.<br>

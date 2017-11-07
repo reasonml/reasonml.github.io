@@ -10,25 +10,31 @@ Helpers to produce Parsetree fragments<br>
 </div>
 <hr width="100%">
 
-<pre id="TYPElid"><span class="keyword">type</span> lid = Longident.t Asttypes.loc </pre>
+<pre id="TYPElid"><span class="keyword">type</span> lid = Asttypes.loc(Longident.t);
+</pre>
 
 
-<pre id="TYPEstr"><span class="keyword">type</span> str = string Asttypes.loc </pre>
+<pre id="TYPEstr"><span class="keyword">type</span> str = Asttypes.loc(string);
+</pre>
 
 
-<pre id="TYPEloc"><span class="keyword">type</span> loc = Location.t </pre>
+<pre id="TYPEloc"><span class="keyword">type</span> loc = Location.t;
+</pre>
 
 
-<pre id="TYPEattrs"><span class="keyword">type</span> attrs = Parsetree.attribute list </pre>
+<pre id="TYPEattrs"><span class="keyword">type</span> attrs = list(Parsetree.attribute);
+</pre>
 
 <br>
 <h2 id="2_Defaultlocations">Default locations</h2><br>
 
-<pre id="VALdefault_loc">val default_loc : loc Pervasives.ref</pre><div class="info ">
+<pre id="VALdefault_loc"><span class="keyword">let</span> default_loc: Pervasives.ref(loc);
+</pre><div class="info ">
 Default value for all optional location arguments.<br>
 </div>
 
-<pre id="VALwith_default_loc">val with_default_loc : loc -&gt; (unit -&gt; &apos;a) -&gt; &apos;a</pre><div class="info ">
+<pre id="VALwith_default_loc"><span class="keyword">let</span> with_default_loc: (loc, unit =&gt; &apos;a) =&gt; &apos;a;
+</pre><div class="info ">
 Set the <code class="code">default_loc</code> within the scope of the execution
         of the provided function.<br>
 </div>

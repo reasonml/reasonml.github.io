@@ -7,17 +7,28 @@
 
 <pre><span class="keyword">module</span> Pprintast: sig .. end</pre><hr width="100%">
 
-<pre id="TYPEspace_formatter"><span class="keyword">type</span> space_formatter = (unit, Format.formatter, unit) Pervasives.format </pre>
+<pre id="TYPEspace_formatter"><span class="keyword">type</span> space_formatter = Pervasives.format(unit, Format.formatter, unit);
+</pre>
 
 
 <pre>class printer : unit -&gt; object .. end</pre>
-<pre id="VALdefault">val default : printer</pre>
-<pre id="VALtoplevel_phrase">val toplevel_phrase : Format.formatter -&gt; Parsetree.toplevel_phrase -&gt; unit</pre>
-<pre id="VALexpression">val expression : Format.formatter -&gt; Parsetree.expression -&gt; unit</pre>
-<pre id="VALstring_of_expression">val string_of_expression : Parsetree.expression -&gt; string</pre>
-<pre id="VALtop_phrase">val top_phrase : Format.formatter -&gt; Parsetree.toplevel_phrase -&gt; unit</pre>
-<pre id="VALcore_type">val core_type : Format.formatter -&gt; Parsetree.core_type -&gt; unit</pre>
-<pre id="VALpattern">val pattern : Format.formatter -&gt; Parsetree.pattern -&gt; unit</pre>
-<pre id="VALsignature">val signature : Format.formatter -&gt; Parsetree.signature -&gt; unit</pre>
-<pre id="VALstructure">val structure : Format.formatter -&gt; Parsetree.structure -&gt; unit</pre>
-<pre id="VALstring_of_structure">val string_of_structure : Parsetree.structure -&gt; string</pre></div>
+<pre id="VALdefault"><span class="keyword">let</span> default: printer;
+</pre>
+<pre id="VALtoplevel_phrase"><span class="keyword">let</span> toplevel_phrase: (Format.formatter, Parsetree.toplevel_phrase) =&gt; unit;
+</pre>
+<pre id="VALexpression"><span class="keyword">let</span> expression: (Format.formatter, Parsetree.expression) =&gt; unit;
+</pre>
+<pre id="VALstring_of_expression"><span class="keyword">let</span> string_of_expression: Parsetree.expression =&gt; string;
+</pre>
+<pre id="VALtop_phrase"><span class="keyword">let</span> top_phrase: (Format.formatter, Parsetree.toplevel_phrase) =&gt; unit;
+</pre>
+<pre id="VALcore_type"><span class="keyword">let</span> core_type: (Format.formatter, Parsetree.core_type) =&gt; unit;
+</pre>
+<pre id="VALpattern"><span class="keyword">let</span> pattern: (Format.formatter, Parsetree.pattern) =&gt; unit;
+</pre>
+<pre id="VALsignature"><span class="keyword">let</span> signature: (Format.formatter, Parsetree.signature) =&gt; unit;
+</pre>
+<pre id="VALstructure"><span class="keyword">let</span> structure: (Format.formatter, Parsetree.structure) =&gt; unit;
+</pre>
+<pre id="VALstring_of_structure"><span class="keyword">let</span> string_of_structure: Parsetree.structure =&gt; string;
+</pre></div>

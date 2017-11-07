@@ -87,7 +87,8 @@ The flags to the <code class="code">Marshal.to_*</code> functions below.<br>
 </div>
 
 
-<pre id="VALto_channel">val to_channel : Pervasives.out_channel -&gt; &apos;a -&gt; extern_flags list -&gt; unit</pre><div class="info ">
+<pre id="VALto_channel"><span class="keyword">let</span> to_channel: (Pervasives.out_channel, &apos;a, list(extern_flags)) =&gt; unit;
+</pre><div class="info ">
 <code class="code">Marshal.to_channel chan v flags</code> writes the representation
    of <code class="code">v</code> on channel <code class="code">chan</code>. The <code class="code">flags</code> argument is a
    possibly empty list of flags that governs the marshaling
@@ -143,7 +144,8 @@ The flags to the <code class="code">Marshal.to_*</code> functions below.<br>
    it has no effect if marshaling is performed on a 32-bit platform.<br>
 </p></div>
 
-<pre id="VALto_bytes">val to_bytes : &apos;a -&gt; extern_flags list -&gt; bytes</pre><div class="info ">
+<pre id="VALto_bytes"><span class="keyword">let</span> to_bytes: (&apos;a, list(extern_flags)) =&gt; bytes;
+</pre><div class="info ">
 <code class="code">Marshal.to_bytes v flags</code> returns a byte sequence containing
    the representation of <code class="code">v</code>.
    The <code class="code">flags</code> argument has the same meaning as for
@@ -151,12 +153,14 @@ The flags to the <code class="code">Marshal.to_*</code> functions below.<br>
 <b>Since</b> 4.02.0<br>
 </div>
 
-<pre id="VALto_string">val to_string : &apos;a -&gt; extern_flags list -&gt; string</pre><div class="info ">
+<pre id="VALto_string"><span class="keyword">let</span> to_string: (&apos;a, list(extern_flags)) =&gt; string;
+</pre><div class="info ">
 Same as <code class="code">to_bytes</code> but return the result as a string instead of
     a byte sequence.<br>
 </div>
 
-<pre id="VALto_buffer">val to_buffer : bytes -&gt; int -&gt; int -&gt; &apos;a -&gt; extern_flags list -&gt; int</pre><div class="info ">
+<pre id="VALto_buffer"><span class="keyword">let</span> to_buffer: (bytes, int, int, &apos;a, list(extern_flags)) =&gt; int;
+</pre><div class="info ">
 <code class="code">Marshal.to_buffer buff ofs len v flags</code> marshals the value <code class="code">v</code>,
    storing its byte representation in the sequence <code class="code">buff</code>,
    starting at index <code class="code">ofs</code>, and writing at most
@@ -166,14 +170,16 @@ Same as <code class="code">to_bytes</code> but return the result as a string ins
    is raised.<br>
 </div>
 
-<pre id="VALfrom_channel">val from_channel : Pervasives.in_channel -&gt; &apos;a</pre><div class="info ">
+<pre id="VALfrom_channel"><span class="keyword">let</span> from_channel: Pervasives.in_channel =&gt; &apos;a;
+</pre><div class="info ">
 <code class="code">Marshal.from_channel chan</code> reads from channel <code class="code">chan</code> the
    byte representation of a structured value, as produced by
    one of the <code class="code">Marshal.to_*</code> functions, and reconstructs and
    returns the corresponding value.<br>
 </div>
 
-<pre id="VALfrom_bytes">val from_bytes : bytes -&gt; int -&gt; &apos;a</pre><div class="info ">
+<pre id="VALfrom_bytes"><span class="keyword">let</span> from_bytes: (bytes, int) =&gt; &apos;a;
+</pre><div class="info ">
 <code class="code">Marshal.from_bytes buff ofs</code> unmarshals a structured value
    like <a href="Marshal.html#VALfrom_channel"><code class="code">Marshal.from_channel</code></a> does, except that the byte
    representation is not read from a channel, but taken from
@@ -182,12 +188,14 @@ Same as <code class="code">to_bytes</code> but return the result as a string ins
 <b>Since</b> 4.02.0<br>
 </div>
 
-<pre id="VALfrom_string">val from_string : string -&gt; int -&gt; &apos;a</pre><div class="info ">
+<pre id="VALfrom_string"><span class="keyword">let</span> from_string: (string, int) =&gt; &apos;a;
+</pre><div class="info ">
 Same as <code class="code">from_bytes</code> but take a string as argument instead of a
     byte sequence.<br>
 </div>
 
-<pre id="VALheader_size">val header_size : int</pre><div class="info ">
+<pre id="VALheader_size"><span class="keyword">let</span> header_size: int;
+</pre><div class="info ">
 The bytes representing a marshaled value are composed of
    a fixed-size header and a variable-sized data part,
    whose size can be determined from the header.
@@ -211,11 +219,13 @@ The bytes representing a marshaled value are composed of
    to unmarshal the value.<br>
 </p></div>
 
-<pre id="VALdata_size">val data_size : bytes -&gt; int -&gt; int</pre><div class="info ">
+<pre id="VALdata_size"><span class="keyword">let</span> data_size: (bytes, int) =&gt; int;
+</pre><div class="info ">
 See <a href="Marshal.html#VALheader_size"><code class="code">Marshal.header_size</code></a>.<br>
 </div>
 
-<pre id="VALtotal_size">val total_size : bytes -&gt; int -&gt; int</pre><div class="info ">
+<pre id="VALtotal_size"><span class="keyword">let</span> total_size: (bytes, int) =&gt; int;
+</pre><div class="info ">
 See <a href="Marshal.html#VALheader_size"><code class="code">Marshal.header_size</code></a>.<br>
 </div>
 </div>

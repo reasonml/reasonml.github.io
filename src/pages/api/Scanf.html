@@ -365,7 +365,9 @@ The OCaml scanning facility is reminiscent of the corresponding C feature.
 <pre><span class="keyword">module</span> Scanning: sig .. end</pre><br>
 <h6 id="6_Typeofformattedinputfunctions">Type of formatted input functions</h6><br>
 
-<pre id="TYPEscanner"><span class="keyword">type</span> (&apos;a, &apos;b, &apos;c, &apos;d) scanner = (&apos;a, Scanning.in_channel, &apos;b, &apos;c, &apos;a -&gt; &apos;d, &apos;d) Pervasives.format6 -&gt;       &apos;c </pre>
+<pre id="TYPEscanner"><span class="keyword">type</span> scanner(&apos;a, &apos;b, &apos;c, &apos;d) =
+  Pervasives.format6(&apos;a, Scanning.in_channel, &apos;b, &apos;c, (&apos;a =&gt; &apos;d), &apos;d) =&gt; &apos;c;
+</pre>
 <div class="info ">
 The type of formatted input scanners: <code class="code">(&apos;a, &apos;b, &apos;c, &apos;d) scanner</code>
     is the type of a formatted input function that reads from some
@@ -391,7 +393,8 @@ The type of formatted input scanners: <code class="code">(&apos;a, &apos;b, &apo
 </p></div>
 
 
-<pre id="EXCEPTIONScan_failure"><span class="keyword">exception</span> Scan_failure of string</pre>
+<pre id="EXCEPTIONScan_failure"><span class="keyword">exception</span> Scan_failure(string);
+</pre>
 <div class="info ">
 The exception that formatted input functions raise when the input cannot
     be read according to the given format.<br>
@@ -399,7 +402,8 @@ The exception that formatted input functions raise when the input cannot
 <br>
 <h6 id="6_Thegeneralformattedinputfunction">The general formatted input function</h6><br>
 
-<pre id="VALbscanf">val bscanf : Scanning.in_channel -&gt; (&apos;a, &apos;b, &apos;c, &apos;d) scanner</pre><div class="info ">
+<pre id="VALbscanf"><span class="keyword">let</span> bscanf: Scanning.in_channel =&gt; scanner(&apos;a, &apos;b, &apos;c, &apos;d);
+</pre><div class="info ">
 <code class="code">bscanf ic fmt r1 ... rN f</code> reads arguments for the function <code class="code">f</code>, from the
     formatted input channel <code class="code">ic</code>, according to the format string <code class="code">fmt</code>, and
     applies <code class="code">f</code> to these values.
@@ -1712,7 +1716,8 @@ Scanners may raise the following exceptions when the input cannot be read
 <br>
 <h6 id="6_Specialisedformattedinputfunctions">Specialised formatted input functions</h6><br>
 
-<pre id="VALfscanf">val fscanf : Pervasives.in_channel -&gt; (&apos;a, &apos;b, &apos;c, &apos;d) scanner</pre><div class="info ">
+<pre id="VALfscanf"><span class="keyword">let</span> fscanf: Pervasives.in_channel =&gt; scanner(&apos;a, &apos;b, &apos;c, &apos;d);
+</pre><div class="info ">
 Same as <a href="Scanf.html#VALbscanf"><code class="code">Scanf.bscanf</code></a>, but reads from the given regular input channel.
 <p>
 
@@ -1728,16 +1733,19 @@ Same as <a href="Scanf.html#VALbscanf"><code class="code">Scanf.bscanf</code></a
     scanning from the same regular input channel.<br>
 </p></div>
 
-<pre id="VALsscanf">val sscanf : string -&gt; (&apos;a, &apos;b, &apos;c, &apos;d) scanner</pre><div class="info ">
+<pre id="VALsscanf"><span class="keyword">let</span> sscanf: string =&gt; scanner(&apos;a, &apos;b, &apos;c, &apos;d);
+</pre><div class="info ">
 Same as <a href="Scanf.html#VALbscanf"><code class="code">Scanf.bscanf</code></a>, but reads from the given string.<br>
 </div>
 
-<pre id="VALscanf">val scanf : (&apos;a, &apos;b, &apos;c, &apos;d) scanner</pre><div class="info ">
+<pre id="VALscanf"><span class="keyword">let</span> scanf: scanner(&apos;a, &apos;b, &apos;c, &apos;d);
+</pre><div class="info ">
 Same as <a href="Scanf.html#VALbscanf"><code class="code">Scanf.bscanf</code></a>, but reads from the predefined formatted input
     channel <a href="Scanf.Scanning.html#VALstdin"><code class="code">Scanf.Scanning.stdin</code></a> that is connected to <code class="code">Pervasives.stdin</code>.<br>
 </div>
 
-<pre id="VALkscanf">val kscanf : Scanning.in_channel -&gt;       (Scanning.in_channel -&gt; exn -&gt; &apos;d) -&gt; (&apos;a, &apos;b, &apos;c, &apos;d) scanner</pre><div class="info ">
+<pre id="VALkscanf"><span class="keyword">let</span> kscanf: (Scanning.in_channel, (Scanning.in_channel, exn) =&gt; &apos;d) =&gt; scanner(&apos;a, &apos;b, &apos;c, &apos;d);
+</pre><div class="info ">
 Same as <a href="Scanf.html#VALbscanf"><code class="code">Scanf.bscanf</code></a>, but takes an additional function argument
     <code class="code">ef</code> that is called in case of error: if the scanning process or
     some conversion fails, the scanning function aborts and calls the
@@ -1745,19 +1753,28 @@ Same as <a href="Scanf.html#VALbscanf"><code class="code">Scanf.bscanf</code></a
     exception that aborted the scanning process as arguments.<br>
 </div>
 
-<pre id="VALksscanf">val ksscanf : string -&gt;       (Scanning.in_channel -&gt; exn -&gt; &apos;d) -&gt; (&apos;a, &apos;b, &apos;c, &apos;d) scanner</pre><div class="info ">
+<pre id="VALksscanf"><span class="keyword">let</span> ksscanf: (string, (Scanning.in_channel, exn) =&gt; &apos;d) =&gt; scanner(&apos;a, &apos;b, &apos;c, &apos;d);
+</pre><div class="info ">
 Same as <a href="Scanf.html#VALkscanf"><code class="code">Scanf.kscanf</code></a> but reads from the given string.<br>
 <b>Since</b> 4.02.0<br>
 </div>
 
-<pre id="VALkfscanf">val kfscanf : Pervasives.in_channel -&gt;       (Scanning.in_channel -&gt; exn -&gt; &apos;d) -&gt; (&apos;a, &apos;b, &apos;c, &apos;d) scanner</pre><div class="info ">
+<pre id="VALkfscanf"><span class="keyword">let</span> kfscanf: (Pervasives.in_channel, (Scanning.in_channel, exn) =&gt; &apos;d) =&gt; scanner(&apos;a, &apos;b, &apos;c, &apos;d);
+</pre><div class="info ">
 Same as <a href="Scanf.html#VALkscanf"><code class="code">Scanf.kscanf</code></a>, but reads from the given regular input channel.<br>
 <b>Since</b> 4.02.0<br>
 </div>
 <br>
 <h6 id="6_Readingformatstringsfrominput">Reading format strings from input</h6><br>
 
-<pre id="VALbscanf_format">val bscanf_format : Scanning.in_channel -&gt;       (&apos;a, &apos;b, &apos;c, &apos;d, &apos;e, &apos;f) Pervasives.format6 -&gt;       ((&apos;a, &apos;b, &apos;c, &apos;d, &apos;e, &apos;f) Pervasives.format6 -&gt; &apos;g) -&gt; &apos;g</pre><div class="info ">
+<pre id="VALbscanf_format"><span class="keyword">let</span> bscanf_format:
+  (
+    Scanning.in_channel,
+    Pervasives.format6(&apos;a, &apos;b, &apos;c, &apos;d, &apos;e, &apos;f),
+    Pervasives.format6(&apos;a, &apos;b, &apos;c, &apos;d, &apos;e, &apos;f) =&gt; &apos;g
+  ) =&gt;
+  &apos;g;
+</pre><div class="info ">
 <code class="code">bscanf_format ic fmt f</code> reads a format string token from the formatted
     input channel <code class="code">ic</code>, according to the given format string <code class="code">fmt</code>, and
     applies <code class="code">f</code> to the resulting format string value.
@@ -1766,12 +1783,22 @@ Same as <a href="Scanf.html#VALkscanf"><code class="code">Scanf.kscanf</code></a
 <b>Since</b> 3.09.0<br>
 </div>
 
-<pre id="VALsscanf_format">val sscanf_format : string -&gt;       (&apos;a, &apos;b, &apos;c, &apos;d, &apos;e, &apos;f) Pervasives.format6 -&gt;       ((&apos;a, &apos;b, &apos;c, &apos;d, &apos;e, &apos;f) Pervasives.format6 -&gt; &apos;g) -&gt; &apos;g</pre><div class="info ">
+<pre id="VALsscanf_format"><span class="keyword">let</span> sscanf_format:
+  (
+    string,
+    Pervasives.format6(&apos;a, &apos;b, &apos;c, &apos;d, &apos;e, &apos;f),
+    Pervasives.format6(&apos;a, &apos;b, &apos;c, &apos;d, &apos;e, &apos;f) =&gt; &apos;g
+  ) =&gt;
+  &apos;g;
+</pre><div class="info ">
 Same as <a href="Scanf.html#VALbscanf_format"><code class="code">Scanf.bscanf_format</code></a>, but reads from the given string.<br>
 <b>Since</b> 3.09.0<br>
 </div>
 
-<pre id="VALformat_from_string">val format_from_string : string -&gt;       (&apos;a, &apos;b, &apos;c, &apos;d, &apos;e, &apos;f) Pervasives.format6 -&gt;       (&apos;a, &apos;b, &apos;c, &apos;d, &apos;e, &apos;f) Pervasives.format6</pre><div class="info ">
+<pre id="VALformat_from_string"><span class="keyword">let</span> format_from_string:
+  (string, Pervasives.format6(&apos;a, &apos;b, &apos;c, &apos;d, &apos;e, &apos;f)) =&gt;
+  Pervasives.format6(&apos;a, &apos;b, &apos;c, &apos;d, &apos;e, &apos;f);
+</pre><div class="info ">
 <code class="code">format_from_string s fmt</code> converts a string argument to a format string,
     according to the given format string <code class="code">fmt</code>.
     Raise <code class="code">Scan_failure</code> if <code class="code">s</code>, considered as a format string, does not
@@ -1779,7 +1806,8 @@ Same as <a href="Scanf.html#VALbscanf_format"><code class="code">Scanf.bscanf_fo
 <b>Since</b> 3.10.0<br>
 </div>
 
-<pre id="VALunescaped">val unescaped : string -&gt; string</pre><div class="info ">
+<pre id="VALunescaped"><span class="keyword">let</span> unescaped: string =&gt; string;
+</pre><div class="info ">
 Return a copy of the argument with escape sequences, following the
     lexical conventions of OCaml, replaced by their corresponding
     special characters. If there is no escape sequence in the

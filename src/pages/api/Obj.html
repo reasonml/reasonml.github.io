@@ -13,47 +13,86 @@ Operations on internal representations of values.
 </p></div>
 <hr width="100%">
 
-<pre id="TYPEt"><span class="keyword">type</span> t </pre>
+<pre id="TYPEt"><span class="keyword">type</span> t;
+</pre>
 
 
-<pre id="VALrepr">val repr : &apos;a -&gt; t</pre>
-<pre id="VALobj">val obj : t -&gt; &apos;a</pre>
-<pre id="VALmagic">val magic : &apos;a -&gt; &apos;b</pre>
-<pre id="VALis_block">val is_block : t -&gt; bool</pre>
-<pre id="VALis_int">val is_int : t -&gt; bool</pre>
-<pre id="VALtag">val tag : t -&gt; int</pre>
-<pre id="VALset_tag">val set_tag : t -&gt; int -&gt; unit</pre>
-<pre id="VALsize">val size : t -&gt; int</pre>
-<pre id="VALfield">val field : t -&gt; int -&gt; t</pre>
-<pre id="VALset_field">val set_field : t -&gt; int -&gt; t -&gt; unit</pre>
-<pre id="VALdouble_field">val double_field : t -&gt; int -&gt; float</pre>
-<pre id="VALset_double_field">val set_double_field : t -&gt; int -&gt; float -&gt; unit</pre>
-<pre id="VALnew_block">val new_block : int -&gt; int -&gt; t</pre>
-<pre id="VALdup">val dup : t -&gt; t</pre>
-<pre id="VALtruncate">val truncate : t -&gt; int -&gt; unit</pre>
-<pre id="VALadd_offset">val add_offset : t -&gt; Int32.t -&gt; t</pre>
-<pre id="VALfirst_non_constant_constructor_tag">val first_non_constant_constructor_tag : int</pre>
-<pre id="VALlast_non_constant_constructor_tag">val last_non_constant_constructor_tag : int</pre>
-<pre id="VALlazy_tag">val lazy_tag : int</pre>
-<pre id="VALclosure_tag">val closure_tag : int</pre>
-<pre id="VALobject_tag">val object_tag : int</pre>
-<pre id="VALinfix_tag">val infix_tag : int</pre>
-<pre id="VALforward_tag">val forward_tag : int</pre>
-<pre id="VALno_scan_tag">val no_scan_tag : int</pre>
-<pre id="VALabstract_tag">val abstract_tag : int</pre>
-<pre id="VALstring_tag">val string_tag : int</pre>
-<pre id="VALdouble_tag">val double_tag : int</pre>
-<pre id="VALdouble_array_tag">val double_array_tag : int</pre>
-<pre id="VALcustom_tag">val custom_tag : int</pre>
-<pre id="VALfinal_tag">val final_tag : int</pre>
-<pre id="VALint_tag">val int_tag : int</pre>
-<pre id="VALout_of_heap_tag">val out_of_heap_tag : int</pre>
-<pre id="VALunaligned_tag">val unaligned_tag : int</pre>
-<pre id="VALextension_name">val extension_name : &apos;a -&gt; string</pre>
-<pre id="VALextension_id">val extension_id : &apos;a -&gt; int</pre>
-<pre id="VALextension_slot">val extension_slot : &apos;a -&gt; t</pre><br>
+<pre id="VALrepr"><span class="keyword">let</span> repr: &apos;a =&gt; t;
+</pre>
+<pre id="VALobj"><span class="keyword">let</span> obj: t =&gt; &apos;a;
+</pre>
+<pre id="VALmagic"><span class="keyword">let</span> magic: &apos;a =&gt; &apos;b;
+</pre>
+<pre id="VALis_block"><span class="keyword">let</span> is_block: t =&gt; bool;
+</pre>
+<pre id="VALis_int"><span class="keyword">let</span> is_int: t =&gt; bool;
+</pre>
+<pre id="VALtag"><span class="keyword">let</span> tag: t =&gt; int;
+</pre>
+<pre id="VALset_tag"><span class="keyword">let</span> set_tag: (t, int) =&gt; unit;
+</pre>
+<pre id="VALsize"><span class="keyword">let</span> size: t =&gt; int;
+</pre>
+<pre id="VALfield"><span class="keyword">let</span> field: (t, int) =&gt; t;
+</pre>
+<pre id="VALset_field"><span class="keyword">let</span> set_field: (t, int, t) =&gt; unit;
+</pre>
+<pre id="VALdouble_field"><span class="keyword">let</span> double_field: (t, int) =&gt; float;
+</pre>
+<pre id="VALset_double_field"><span class="keyword">let</span> set_double_field: (t, int, float) =&gt; unit;
+</pre>
+<pre id="VALnew_block"><span class="keyword">let</span> new_block: (int, int) =&gt; t;
+</pre>
+<pre id="VALdup"><span class="keyword">let</span> dup: t =&gt; t;
+</pre>
+<pre id="VALtruncate"><span class="keyword">let</span> truncate: (t, int) =&gt; unit;
+</pre>
+<pre id="VALadd_offset"><span class="keyword">let</span> add_offset: (t, Int32.t) =&gt; t;
+</pre>
+<pre id="VALfirst_non_constant_constructor_tag"><span class="keyword">let</span> first_non_constant_constructor_tag: int;
+</pre>
+<pre id="VALlast_non_constant_constructor_tag"><span class="keyword">let</span> last_non_constant_constructor_tag: int;
+</pre>
+<pre id="VALlazy_tag"><span class="keyword">let</span> lazy_tag: int;
+</pre>
+<pre id="VALclosure_tag"><span class="keyword">let</span> closure_tag: int;
+</pre>
+<pre id="VALobject_tag"><span class="keyword">let</span> object_tag: int;
+</pre>
+<pre id="VALinfix_tag"><span class="keyword">let</span> infix_tag: int;
+</pre>
+<pre id="VALforward_tag"><span class="keyword">let</span> forward_tag: int;
+</pre>
+<pre id="VALno_scan_tag"><span class="keyword">let</span> no_scan_tag: int;
+</pre>
+<pre id="VALabstract_tag"><span class="keyword">let</span> abstract_tag: int;
+</pre>
+<pre id="VALstring_tag"><span class="keyword">let</span> string_tag: int;
+</pre>
+<pre id="VALdouble_tag"><span class="keyword">let</span> double_tag: int;
+</pre>
+<pre id="VALdouble_array_tag"><span class="keyword">let</span> double_array_tag: int;
+</pre>
+<pre id="VALcustom_tag"><span class="keyword">let</span> custom_tag: int;
+</pre>
+<pre id="VALfinal_tag"><span class="keyword">let</span> final_tag: int;
+</pre>
+<pre id="VALint_tag"><span class="keyword">let</span> int_tag: int;
+</pre>
+<pre id="VALout_of_heap_tag"><span class="keyword">let</span> out_of_heap_tag: int;
+</pre>
+<pre id="VALunaligned_tag"><span class="keyword">let</span> unaligned_tag: int;
+</pre>
+<pre id="VALextension_name"><span class="keyword">let</span> extension_name: &apos;a =&gt; string;
+</pre>
+<pre id="VALextension_id"><span class="keyword">let</span> extension_id: &apos;a =&gt; int;
+</pre>
+<pre id="VALextension_slot"><span class="keyword">let</span> extension_slot: &apos;a =&gt; t;
+</pre><br>
 The following two functions are deprecated.  Use module <a href="Marshal.html"><code class="code">Marshal</code></a>
     instead.<br>
 
-<pre id="VALmarshal">val marshal : t -&gt; bytes</pre>
-<pre id="VALunmarshal">val unmarshal : bytes -&gt; int -&gt; t * int</pre></div>
+<pre id="VALmarshal"><span class="keyword">let</span> marshal: t =&gt; bytes;
+</pre>
+<pre id="VALunmarshal"><span class="keyword">let</span> unmarshal: (bytes, int) =&gt; (t, int);
+</pre></div>

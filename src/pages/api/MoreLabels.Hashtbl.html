@@ -6,34 +6,59 @@
 
 <pre><span class="keyword">module</span> Hashtbl: sig .. end</pre><hr width="100%">
 
-<pre id="TYPEt"><span class="keyword">type</span> (&apos;a, &apos;b) t = (&apos;a, &apos;b) Hashtbl.t </pre>
+<pre id="TYPEt"><span class="keyword">type</span> t(&apos;a, &apos;b) = Hashtbl.t(&apos;a, &apos;b);
+</pre>
 
 
-<pre id="VALcreate">val create : ?random:bool -&gt; int -&gt; (&apos;a, &apos;b) t</pre>
-<pre id="VALclear">val clear : (&apos;a, &apos;b) t -&gt; unit</pre>
-<pre id="VALreset">val reset : (&apos;a, &apos;b) t -&gt; unit</pre>
-<pre id="VALcopy">val copy : (&apos;a, &apos;b) t -&gt; (&apos;a, &apos;b) t</pre>
-<pre id="VALadd">val add : (&apos;a, &apos;b) t -&gt; key:&apos;a -&gt; data:&apos;b -&gt; unit</pre>
-<pre id="VALfind">val find : (&apos;a, &apos;b) t -&gt; &apos;a -&gt; &apos;b</pre>
-<pre id="VALfind_all">val find_all : (&apos;a, &apos;b) t -&gt; &apos;a -&gt; &apos;b list</pre>
-<pre id="VALmem">val mem : (&apos;a, &apos;b) t -&gt; &apos;a -&gt; bool</pre>
-<pre id="VALremove">val remove : (&apos;a, &apos;b) t -&gt; &apos;a -&gt; unit</pre>
-<pre id="VALreplace">val replace : (&apos;a, &apos;b) t -&gt; key:&apos;a -&gt; data:&apos;b -&gt; unit</pre>
-<pre id="VALiter">val iter : f:(key:&apos;a -&gt; data:&apos;b -&gt; unit) -&gt; (&apos;a, &apos;b) t -&gt; unit</pre>
-<pre id="VALfold">val fold : f:(key:&apos;a -&gt; data:&apos;b -&gt; &apos;c -&gt; &apos;c) -&gt;       (&apos;a, &apos;b) t -&gt; init:&apos;c -&gt; &apos;c</pre>
-<pre id="VALlength">val length : (&apos;a, &apos;b) t -&gt; int</pre>
-<pre id="VALrandomize">val randomize : unit -&gt; unit</pre>
-<pre id="TYPEstatistics"><span class="keyword">type</span> statistics = Hashtbl.statistics </pre>
+<pre id="VALcreate"><span class="keyword">let</span> create: (~random: bool=?, int) =&gt; t(&apos;a, &apos;b);
+</pre>
+<pre id="VALclear"><span class="keyword">let</span> clear: t(&apos;a, &apos;b) =&gt; unit;
+</pre>
+<pre id="VALreset"><span class="keyword">let</span> reset: t(&apos;a, &apos;b) =&gt; unit;
+</pre>
+<pre id="VALcopy"><span class="keyword">let</span> copy: t(&apos;a, &apos;b) =&gt; t(&apos;a, &apos;b);
+</pre>
+<pre id="VALadd"><span class="keyword">let</span> add: (t(&apos;a, &apos;b), ~key: &apos;a, ~data: &apos;b) =&gt; unit;
+</pre>
+<pre id="VALfind"><span class="keyword">let</span> find: (t(&apos;a, &apos;b), &apos;a) =&gt; &apos;b;
+</pre>
+<pre id="VALfind_all"><span class="keyword">let</span> find_all: (t(&apos;a, &apos;b), &apos;a) =&gt; list(&apos;b);
+</pre>
+<pre id="VALmem"><span class="keyword">let</span> mem: (t(&apos;a, &apos;b), &apos;a) =&gt; bool;
+</pre>
+<pre id="VALremove"><span class="keyword">let</span> remove: (t(&apos;a, &apos;b), &apos;a) =&gt; unit;
+</pre>
+<pre id="VALreplace"><span class="keyword">let</span> replace: (t(&apos;a, &apos;b), ~key: &apos;a, ~data: &apos;b) =&gt; unit;
+</pre>
+<pre id="VALiter"><span class="keyword">let</span> iter: (~f: (~key: &apos;a, ~data: &apos;b) =&gt; unit, t(&apos;a, &apos;b)) =&gt; unit;
+</pre>
+<pre id="VALfold"><span class="keyword">let</span> fold: (~f: (~key: &apos;a, ~data: &apos;b, &apos;c) =&gt; &apos;c, t(&apos;a, &apos;b), ~init: &apos;c) =&gt; &apos;c;
+</pre>
+<pre id="VALlength"><span class="keyword">let</span> length: t(&apos;a, &apos;b) =&gt; int;
+</pre>
+<pre id="VALrandomize"><span class="keyword">let</span> randomize: unit =&gt; unit;
+</pre>
+<pre id="TYPEstatistics"><span class="keyword">type</span> statistics = Hashtbl.statistics;
+</pre>
 
 
-<pre id="VALstats">val stats : (&apos;a, &apos;b) t -&gt; statistics</pre>
-<pre><span class="keyword">module</span> type HashedType = Hashtbl.HashedType</pre>
-<pre><span class="keyword">module</span> type SeededHashedType = Hashtbl.SeededHashedType</pre>
+<pre id="VALstats"><span class="keyword">let</span> stats: t(&apos;a, &apos;b) =&gt; statistics;
+</pre>
+<pre><span class="keyword">module</span> type HashedType = Hashtbl.HashedType;
+</pre>
+<pre><span class="keyword">module</span> type SeededHashedType = Hashtbl.SeededHashedType;
+</pre>
 <pre><span class="keyword">module</span> type S = sig .. end</pre>
 <pre><span class="keyword">module</span> type SeededS = sig .. end</pre>
-<pre><span class="keyword">module</span> Make: functor (H : HashedType) -&gt; S  with type key = H.t</pre>
-<pre><span class="keyword">module</span> MakeSeeded: functor (H : SeededHashedType) -&gt; SeededS  with type key = H.t</pre>
-<pre id="VALhash">val hash : &apos;a -&gt; int</pre>
-<pre id="VALseeded_hash">val seeded_hash : int -&gt; &apos;a -&gt; int</pre>
-<pre id="VALhash_param">val hash_param : int -&gt; int -&gt; &apos;a -&gt; int</pre>
-<pre id="VALseeded_hash_param">val seeded_hash_param : int -&gt; int -&gt; int -&gt; &apos;a -&gt; int</pre></div>
+<pre><span class="keyword">module</span> Make: (H: HashedType) =&gt; S with type key = H.t;
+</pre>
+<pre><span class="keyword">module</span> MakeSeeded: (H: SeededHashedType) =&gt; SeededS with type key = H.t;
+</pre>
+<pre id="VALhash"><span class="keyword">let</span> hash: &apos;a =&gt; int;
+</pre>
+<pre id="VALseeded_hash"><span class="keyword">let</span> seeded_hash: (int, &apos;a) =&gt; int;
+</pre>
+<pre id="VALhash_param"><span class="keyword">let</span> hash_param: (int, int, &apos;a) =&gt; int;
+</pre>
+<pre id="VALseeded_hash_param"><span class="keyword">let</span> seeded_hash_param: (int, int, int, &apos;a) =&gt; int;
+</pre></div>

@@ -5,17 +5,20 @@
 
 <pre><span class="keyword">module</span> Slot: sig .. end</pre><hr width="100%">
 
-<pre id="TYPEt"><span class="keyword">type</span> t = Printexc.backtrace_slot </pre>
+<pre id="TYPEt"><span class="keyword">type</span> t = Printexc.backtrace_slot;
+</pre>
 
 
-<pre id="VALis_raise">val is_raise : t -&gt; bool</pre><div class="info ">
+<pre id="VALis_raise"><span class="keyword">let</span> is_raise: t =&gt; bool;
+</pre><div class="info ">
 <code class="code">is_raise slot</code> is <code class="code">true</code> when <code class="code">slot</code> refers to a raising
       point in the code, and <code class="code">false</code> when it comes from a simple
       function call.<br>
 <b>Since</b> 4.02<br>
 </div>
 
-<pre id="VALlocation">val location : t -&gt; Printexc.location option</pre><div class="info ">
+<pre id="VALlocation"><span class="keyword">let</span> location: t =&gt; option(Printexc.location);
+</pre><div class="info ">
 <code class="code">location slot</code> returns the location information of the slot,
       if available, and <code class="code">None</code> otherwise.
 <p>
@@ -29,7 +32,8 @@
 <b>Since</b> 4.02<br>
 </div>
 
-<pre id="VALformat">val format : int -&gt; t -&gt; string option</pre><div class="info ">
+<pre id="VALformat"><span class="keyword">let</span> format: (int, t) =&gt; option(string);
+</pre><div class="info ">
 <code class="code">format pos slot</code> returns the string representation of <code class="code">slot</code> as
       <code class="code">raw_backtrace_to_string</code> would format it, assuming it is the
       <code class="code">pos</code>-th element of the backtrace: the <code class="code">0</code>-th element is

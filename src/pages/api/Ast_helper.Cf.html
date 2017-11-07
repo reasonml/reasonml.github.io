@@ -10,15 +10,64 @@ Class fields<br>
 </div>
 <hr width="100%">
 
-<pre id="VALmk">val mk : ?loc:Ast_helper.loc -&gt;       ?attrs:Ast_helper.attrs -&gt;       ?docs:Docstrings.docs -&gt; Parsetree.class_field_desc -&gt; Parsetree.class_field</pre>
-<pre id="VALattr">val attr : Parsetree.class_field -&gt; Parsetree.attribute -&gt; Parsetree.class_field</pre>
-<pre id="VALinherit_">val inherit_ : ?loc:Ast_helper.loc -&gt;       ?attrs:Ast_helper.attrs -&gt;       Asttypes.override_flag -&gt;       Parsetree.class_expr -&gt; string option -&gt; Parsetree.class_field</pre>
-<pre id="VALval_">val val_ : ?loc:Ast_helper.loc -&gt;       ?attrs:Ast_helper.attrs -&gt;       Ast_helper.str -&gt;       Asttypes.mutable_flag -&gt; Parsetree.class_field_kind -&gt; Parsetree.class_field</pre>
-<pre id="VALmethod_">val method_ : ?loc:Ast_helper.loc -&gt;       ?attrs:Ast_helper.attrs -&gt;       Ast_helper.str -&gt;       Asttypes.private_flag -&gt; Parsetree.class_field_kind -&gt; Parsetree.class_field</pre>
-<pre id="VALconstraint_">val constraint_ : ?loc:Ast_helper.loc -&gt;       ?attrs:Ast_helper.attrs -&gt;       Parsetree.core_type -&gt; Parsetree.core_type -&gt; Parsetree.class_field</pre>
-<pre id="VALinitializer_">val initializer_ : ?loc:Ast_helper.loc -&gt;       ?attrs:Ast_helper.attrs -&gt; Parsetree.expression -&gt; Parsetree.class_field</pre>
-<pre id="VALextension">val extension : ?loc:Ast_helper.loc -&gt;       ?attrs:Ast_helper.attrs -&gt; Parsetree.extension -&gt; Parsetree.class_field</pre>
-<pre id="VALattribute">val attribute : ?loc:Ast_helper.loc -&gt; Parsetree.attribute -&gt; Parsetree.class_field</pre>
-<pre id="VALtext">val text : Docstrings.text -&gt; Parsetree.class_field list</pre>
-<pre id="VALvirtual_">val virtual_ : Parsetree.core_type -&gt; Parsetree.class_field_kind</pre>
-<pre id="VALconcrete">val concrete : Asttypes.override_flag -&gt; Parsetree.expression -&gt; Parsetree.class_field_kind</pre></div>
+<pre id="VALmk"><span class="keyword">let</span> mk:
+  (
+    ~loc: Ast_helper.loc=?,
+    ~attrs: Ast_helper.attrs=?,
+    ~docs: Docstrings.docs=?,
+    Parsetree.class_field_desc
+  ) =&gt;
+  Parsetree.class_field;
+</pre>
+<pre id="VALattr"><span class="keyword">let</span> attr: (Parsetree.class_field, Parsetree.attribute) =&gt; Parsetree.class_field;
+</pre>
+<pre id="VALinherit_"><span class="keyword">let</span> inherit_:
+  (
+    ~loc: Ast_helper.loc=?,
+    ~attrs: Ast_helper.attrs=?,
+    Asttypes.override_flag,
+    Parsetree.class_expr,
+    option(string)
+  ) =&gt;
+  Parsetree.class_field;
+</pre>
+<pre id="VALval_"><span class="keyword">let</span> val_:
+  (
+    ~loc: Ast_helper.loc=?,
+    ~attrs: Ast_helper.attrs=?,
+    Ast_helper.str,
+    Asttypes.mutable_flag,
+    Parsetree.class_field_kind
+  ) =&gt;
+  Parsetree.class_field;
+</pre>
+<pre id="VALmethod_"><span class="keyword">let</span> method:
+  (
+    ~loc: Ast_helper.loc=?,
+    ~attrs: Ast_helper.attrs=?,
+    Ast_helper.str,
+    Asttypes.private_flag,
+    Parsetree.class_field_kind
+  ) =&gt;
+  Parsetree.class_field;
+</pre>
+<pre id="VALconstraint_"><span class="keyword">let</span> constraint_:
+  (~loc: Ast_helper.loc=?, ~attrs: Ast_helper.attrs=?, Parsetree.core_type, Parsetree.core_type) =&gt;
+  Parsetree.class_field;
+</pre>
+<pre id="VALinitializer_"><span class="keyword">let</span> initializer_:
+  (~loc: Ast_helper.loc=?, ~attrs: Ast_helper.attrs=?, Parsetree.expression) =&gt;
+  Parsetree.class_field;
+</pre>
+<pre id="VALextension"><span class="keyword">let</span> extension:
+  (~loc: Ast_helper.loc=?, ~attrs: Ast_helper.attrs=?, Parsetree.extension) =&gt;
+  Parsetree.class_field;
+</pre>
+<pre id="VALattribute"><span class="keyword">let</span> attribute: (~loc: Ast_helper.loc=?, Parsetree.attribute) =&gt; Parsetree.class_field;
+</pre>
+<pre id="VALtext"><span class="keyword">let</span> text: Docstrings.text =&gt; list(Parsetree.class_field);
+</pre>
+<pre id="VALvirtual_"><span class="keyword">let</span> virtual_: Parsetree.core_type =&gt; Parsetree.class_field_kind;
+</pre>
+<pre id="VALconcrete"><span class="keyword">let</span> concrete: (Asttypes.override_flag, Parsetree.expression) =&gt; Parsetree.class_field_kind;
+</pre></div>

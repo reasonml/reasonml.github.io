@@ -10,19 +10,22 @@ Streams and parsers.<br>
 </div>
 <hr width="100%">
 
-<pre id="TYPEt"><span class="keyword">type</span> &apos;a t </pre>
+<pre id="TYPEt"><span class="keyword">type</span> t(&apos;a);
+</pre>
 <div class="info ">
 The type of streams holding values of type <code class="code">&apos;a</code>.<br>
 </div>
 
 
-<pre id="EXCEPTIONFailure"><span class="keyword">exception</span> Failure</pre>
+<pre id="EXCEPTIONFailure"><span class="keyword">exception</span> Failure;
+</pre>
 <div class="info ">
 Raised by parsers when none of the first components of the stream
    patterns is accepted.<br>
 </div>
 
-<pre id="EXCEPTIONError"><span class="keyword">exception</span> Error of string</pre>
+<pre id="EXCEPTIONError"><span class="keyword">exception</span> Error(string);
+</pre>
 <div class="info ">
 Raised by parsers when the first component of a stream pattern is
    accepted, but one of the following components is rejected.<br>
@@ -30,7 +33,8 @@ Raised by parsers when the first component of a stream pattern is
 <br>
 <h6 id="6_Streambuilders">Stream builders</h6><br>
 
-<pre id="VALfrom">val from : (int -&gt; &apos;a option) -&gt; &apos;a t</pre><div class="info ">
+<pre id="VALfrom"><span class="keyword">let</span> from: (int =&gt; option(&apos;a)) =&gt; t(&apos;a);
+</pre><div class="info ">
 <code class="code">Stream.from f</code> returns a stream built from the function <code class="code">f</code>.
    To create a new stream element, the function <code class="code">f</code> is called with
    the current stream count. The user function <code class="code">f</code> must return either
@@ -43,60 +47,71 @@ Raised by parsers when the first component of a stream pattern is
    <code class="code">f</code> the first time with count <code class="code">2</code>.<br>
 </p></div>
 
-<pre id="VALof_list">val of_list : &apos;a list -&gt; &apos;a t</pre><div class="info ">
+<pre id="VALof_list"><span class="keyword">let</span> of_list: list(&apos;a) =&gt; t(&apos;a);
+</pre><div class="info ">
 Return the stream holding the elements of the list in the same
    order.<br>
 </div>
 
-<pre id="VALof_string">val of_string : string -&gt; char t</pre><div class="info ">
+<pre id="VALof_string"><span class="keyword">let</span> of_string: string =&gt; t(char);
+</pre><div class="info ">
 Return the stream of the characters of the string parameter.<br>
 </div>
 
-<pre id="VALof_bytes">val of_bytes : bytes -&gt; char t</pre><div class="info ">
+<pre id="VALof_bytes"><span class="keyword">let</span> of_bytes: bytes =&gt; t(char);
+</pre><div class="info ">
 Return the stream of the characters of the bytes parameter.<br>
 <b>Since</b> 4.02.0<br>
 </div>
 
-<pre id="VALof_channel">val of_channel : Pervasives.in_channel -&gt; char t</pre><div class="info ">
+<pre id="VALof_channel"><span class="keyword">let</span> of_channel: Pervasives.in_channel =&gt; t(char);
+</pre><div class="info ">
 Return the stream of the characters read from the input channel.<br>
 </div>
 <br>
 <h6 id="6_Streamiterator">Stream iterator</h6><br>
 
-<pre id="VALiter">val iter : (&apos;a -&gt; unit) -&gt; &apos;a t -&gt; unit</pre><div class="info ">
+<pre id="VALiter"><span class="keyword">let</span> iter: (&apos;a =&gt; unit, t(&apos;a)) =&gt; unit;
+</pre><div class="info ">
 <code class="code">Stream.iter f s</code> scans the whole stream s, applying function <code class="code">f</code>
    in turn to each stream element encountered.<br>
 </div>
 <br>
 <h6 id="6_Predefinedparsers">Predefined parsers</h6><br>
 
-<pre id="VALnext">val next : &apos;a t -&gt; &apos;a</pre><div class="info ">
+<pre id="VALnext"><span class="keyword">let</span> next: t(&apos;a) =&gt; &apos;a;
+</pre><div class="info ">
 Return the first element of the stream and remove it from the
    stream. Raise Stream.Failure if the stream is empty.<br>
 </div>
 
-<pre id="VALempty">val empty : &apos;a t -&gt; unit</pre><div class="info ">
+<pre id="VALempty"><span class="keyword">let</span> empty: t(&apos;a) =&gt; unit;
+</pre><div class="info ">
 Return <code class="code">()</code> if the stream is empty, else raise <code class="code">Stream.Failure</code>.<br>
 </div>
 <br>
 <h6 id="6_Usefulfunctions">Useful functions</h6><br>
 
-<pre id="VALpeek">val peek : &apos;a t -&gt; &apos;a option</pre><div class="info ">
+<pre id="VALpeek"><span class="keyword">let</span> peek: t(&apos;a) =&gt; option(&apos;a);
+</pre><div class="info ">
 Return <code class="code">Some</code> of &quot;the first element&quot; of the stream, or <code class="code">None</code> if
    the stream is empty.<br>
 </div>
 
-<pre id="VALjunk">val junk : &apos;a t -&gt; unit</pre><div class="info ">
+<pre id="VALjunk"><span class="keyword">let</span> junk: t(&apos;a) =&gt; unit;
+</pre><div class="info ">
 Remove the first element of the stream, possibly unfreezing
    it before.<br>
 </div>
 
-<pre id="VALcount">val count : &apos;a t -&gt; int</pre><div class="info ">
+<pre id="VALcount"><span class="keyword">let</span> count: t(&apos;a) =&gt; int;
+</pre><div class="info ">
 Return the current count of the stream elements, i.e. the number
    of the stream elements discarded.<br>
 </div>
 
-<pre id="VALnpeek">val npeek : int -&gt; &apos;a t -&gt; &apos;a list</pre><div class="info ">
+<pre id="VALnpeek"><span class="keyword">let</span> npeek: (int, t(&apos;a)) =&gt; list(&apos;a);
+</pre><div class="info ">
 <code class="code">npeek n</code> returns the list of the <code class="code">n</code> first elements of
    the stream, or all its remaining elements if less than <code class="code">n</code>
    elements are available.<br>
