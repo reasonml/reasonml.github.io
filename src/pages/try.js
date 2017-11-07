@@ -194,7 +194,7 @@ let rec quicksort = (gt) =>
 };`
 }];
 
-const  queryParamPrefixFor = language => `?${language}=`;
+const queryParamPrefixFor = language => `?${language}=`;
 
 const retrieve = () => {
   function fromQueryParam(language) {
@@ -295,6 +295,27 @@ class ShareButton extends Component {
     );
   }
 }
+
+const formatErrorLocation = ({startLine, startLineStartChar, endLine, endLineEndChar}) => {
+  if (startLine === endLine) {
+    if (startLineStartChar === endLineEndChar) {
+      return `Line ${startLine}:${startLineStartChar}`
+    } else {
+      return `Line ${startLine}:${startLineStartChar}-${endLineEndChar}`
+    }
+  } else {
+    return `Line ${startLine}:${startLineStartChar}-Line ${endLine}:${endLineEndChar}`
+  }
+};
+
+const stripErrorNumberFromReasonSyntaxError = (error) => {
+  return error.replace(/\d+: /, '');
+}
+
+const capitalizeFirstChar = (str) => {
+  if (str.length === 0) return '';
+  return str[0].toUpperCase() + str.slice(1);
+};
 
 export default class Try extends Component {
   state = {
@@ -601,7 +622,9 @@ export default class Try extends Component {
               {reasonSyntaxError &&
                 <div css={styles.error}>
                   <div css={styles.errorBody}>
-                    {reasonSyntaxError.message}
+                    {formatErrorLocation(reasonSyntaxError.location)}
+                    {' '}
+                    {capitalizeFirstChar(stripErrorNumberFromReasonSyntaxError(reasonSyntaxError.message))}
                   </div>
                 </div>}
             </div>
