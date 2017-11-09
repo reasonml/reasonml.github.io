@@ -164,28 +164,11 @@ const execConfig = {
 childProcess.execSync(compileReasonReactCmd, execConfig);
 
 const reasonReactBsDir = path.join(__dirname, 'node_modules', 'reason-react', 'lib', 'bs', 'src');
-const modules = [
-  {
-    cmi: path.join(reasonReactBsDir, 'reactDOMRe.cmi'),
-    cmj: path.join(reasonReactBsDir, 'reactDOMRe.cmj')
-  },
-  {
-    cmi: path.join(reasonReactBsDir, 'reactDOMServerRe.cmi'),
-    cmj: path.join(reasonReactBsDir, 'reactDOMServerRe.cmj'),
-  },
-  {
-    cmi: path.join(reasonReactBsDir, 'reactEventRe.cmi'),
-    cmj: path.join(reasonReactBsDir, 'reactEventRe.cmj'),
-  },
-  {
-    cmi: path.join(reasonReactBsDir, 'reasonReact.cmi'),
-    cmj: path.join(reasonReactBsDir, 'reasonReact.cmj'),
-  },
-  {
-    cmi: path.join(reasonReactBsDir, 'reasonReactOptimizedCreateClass.cmi'),
-    cmj: path.join(reasonReactBsDir, 'reasonReactOptimizedCreateClass.cmj'),
-  },
-];
+const moduleNames = ['reactDOMRe', 'reactDOMServerRe', 'reactEventRe', 'reasonReact', 'reasonReactOptimizedCreateClass'];
+const modules = moduleNames.map(name => ({
+  cmi: path.join(reasonReactBsDir, name + ".cmi"),
+  cmj: path.join(reasonReactBsDir, name + ".cmj")
+}));
 
 const bsFilename = path.join(__dirname, 'static', 'bs.js');
 const bsReasonReactFilename = path.join(__dirname, 'static', 'bsReasonReact.js');
