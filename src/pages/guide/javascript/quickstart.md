@@ -4,17 +4,13 @@ order: 0
 ---
 
 ```sh
-npm install -g bs-platform
+npm install -g https://github.com/BuckleScript/bucklescript
 bsb -init my-first-app -theme basic-reason
 ```
 
-**Go to `bsconfig.json`**, add the following line:
+**Note** that this installs BuckleScript directly from source. Installing bs-platform from npm gives you a version whose reason template has a few bugs currently. This will be fixed soon.
 
-```json
-"refmt": 3
-```
-
-This enables the new Reason syntax. And then run it as usual:
+Then, run it as usual:
 
 ```sh
 cd my-first-app
