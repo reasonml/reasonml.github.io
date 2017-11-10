@@ -7,6 +7,8 @@ Would you like some HTML syntax in your Reason? If not, quickly skip over this s
 
 Reason supports the JSX syntax, with some slight differences compared to the one in [ReactJS](https://facebook.github.io/react/docs/introducing-jsx.html). Reason JSX isn't tied to ReactJS; they translate to normal function calls:
 
+**Note** for ReasonReact readers: this isn't what ReasonReact turns JSX into, in the end. See Usage section for more info.
+
 ### Capitalized Tag
 
 ```reason
@@ -33,7 +35,7 @@ becomes
 
 ### Usage
 
-See [ReasonReact](//reasonml.github.io/reason-react/) for an example application of JSX.
+See [ReasonReact](//reasonml.github.io/reason-react/docs/jsx) for an example application of JSX, which transforms the above calls into a ReasonReact-specific call.
 
 Here's a JSX tag that shows most of the features.
 
