@@ -1,0 +1,93 @@
+<html><head><meta charset="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1"/><title>Examples · Reason</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta property="og:title" content="Examples · Reason"/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io//index.html"/><meta property="og:description" content="An example is worth a thousand words."/><link rel="shortcut icon" href="/img/reason-react-red.svg"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-dark.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io//blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io//blog/feed.xml" title="Reason Blog RSS Feed"/><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/reason-react-white.svg"/><h2 class="headerTitle">Reason</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li><a href="/blog" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg"/>Español</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/en">English</a></li><li><a href="/fr">Français</a></li><li><a href="/pt-BR">Português (Brasil)</a></li><li><a href="/ru">Русский</a></li><li><a href="/zh-CN">中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank">Help Translate</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(){
+          if(languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search"/></li><li><a href="https://github.com/facebook/reason" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://crowdin.com/project/reason/es-ES" target="_blank">Translate</a><h1>Examples</h1></header><article><div><span><p>An example is worth a thousand words.</p>
+<p>This section is dedicated to newcomers trying to figure out general idioms &amp; conventions in Reason and BuckleScript. If you're a beginner who's got a good idea for an example, please suggest an edit!</p>
+<h3><a class="anchor" aria-hidden="true" name="using-the-option-type"></a><a href="#using-the-option-type" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Using the <code>option</code> type</h3>
+<p><code>option</code> is a <a href="/guide/language/variant">variant</a> that comes with the <a href="/api/index.html">standard library</a>. It obviates the need for null values in other languages.</p>
+<pre><code class="hljs css reason"><span class="hljs-keyword">let</span> possiblyNullValue1 = None;
+<span class="hljs-keyword">let</span> possiblyNullValue2: option(string) = Some(<span class="hljs-string">"Hello@"</span>);
+
+switch possiblyNullValue2 {
+| <span class="hljs-type">None</span> =&gt; print_endline(<span class="hljs-string">"Nothing to see here."</span>)
+| <span class="hljs-type">Some</span>(message) =&gt; print_endline(message)
+};
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" name="creating-a-parametrized-type"></a><a href="#creating-a-parametrized-type" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Creating a parametrized type</h3>
+<pre><code class="hljs css reason"><span class="hljs-class"><span class="hljs-keyword">type</span> universityStudent = {<span class="hljs-title">gpa</span>: <span class="hljs-title">float</span>};</span>
+
+<span class="hljs-class"><span class="hljs-keyword">type</span> response('<span class="hljs-title">studentType</span>) = {
+  <span class="hljs-title">status</span>: <span class="hljs-title">int</span>,
+  <span class="hljs-title">student</span>: '<span class="hljs-title">studentType</span>
+};</span>
+
+<span class="hljs-title">let</span> result: response(universityStudent) = fetchDataFromServer();
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" name="creating-a-js-object"></a><a href="#creating-a-js-object" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Creating a JS Object</h3>
+<p>Assuming you're <a href="/guide/javascript">compiling to JS</a>, of course.</p>
+<pre><code class="hljs css reason"><span class="hljs-keyword">let</span> <span class="hljs-attr">obj1</span> = {
+  <span class="hljs-string">"name"</span>: <span class="hljs-string">"John"</span>,
+  <span class="hljs-string">"age"</span>: <span class="hljs-number">30</span>
+};
+<span class="hljs-comment">/* Compiles to a JS object that looks exactly like what you're seeing */</span>
+</code></pre>
+<p>Note that the above isn't a record; the keys are quoted in string. That's Reason syntax sugar for <a href="http://bucklescript.github.io/bucklescript/Manual.html#_create_js_objects_using_bs_obj">bs.obj</a>. The type is inferred. Next example explicitly types it.</p>
+<h3><a class="anchor" aria-hidden="true" name="typing-a-js-object"></a><a href="#typing-a-js-object" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Typing a JS Object</h3>
+<pre><code class="hljs css reason"><span class="hljs-keyword">type</span> payload = {.
+  <span class="hljs-string">"name"</span>: <span class="hljs-built_in">string</span>,
+  <span class="hljs-string">"age"</span>: <span class="hljs-built_in">int</span>
+};
+
+<span class="hljs-keyword">let</span> obj1: payload = {<span class="hljs-string">"name"</span>: <span class="hljs-string">"John"</span>, <span class="hljs-string">"age"</span>: <span class="hljs-number">30</span>};
+</code></pre>
+<p>Note that <code>{. name: string, age: int}</code> is the syntax for a Reason/OCaml object type declaration (not a record!). It's lifted into <code>Js.t</code> so that BuckleScript sees the whole type and compiles it correctly to a regular JavaScript object. Ordinary, non-lifted OCaml objects are compiled into something else (rarely needed currently).</p>
+<h3><a class="anchor" aria-hidden="true" name="binding-to-a-js-module-with-default-export"></a><a href="#binding-to-a-js-module-with-default-export" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Binding to a JS Module with Default Export</h3>
+<p>Assuming the module's called <code>store.js</code>, and has a default export, plus a method called <code>getDate</code>.</p>
+<pre><code class="hljs css reason"><span class="hljs-keyword">type</span> <span class="hljs-keyword">store</span> = {. <span class="hljs-string">"getDate"</span>: [<span class="hljs-title">@bs.meth</span>] (unit =&gt; float)}<span class="hljs-comment">;
+</span>[<span class="hljs-title">@bs.module</span>] <span class="hljs-keyword">external</span> <span class="hljs-keyword">store</span> : <span class="hljs-keyword">store</span> = <span class="hljs-string">"./store"</span><span class="hljs-comment">;
+</span>
+Js.log(<span class="hljs-keyword">store</span>)<span class="hljs-comment">;
+</span>Js.log(<span class="hljs-keyword">store</span>##getDate())<span class="hljs-comment">;
+</span></code></pre>
+<h3><a class="anchor" aria-hidden="true" name="checking-for-js-nullable-types-using-the-option-type"></a><a href="#checking-for-js-nullable-types-using-the-option-type" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Checking for JS nullable types using the <code>option</code> type</h3>
+<p>For a function whose argument is passed a JavaScript value that's potentially <code>null</code> or <code>undefined</code>, it's idiomatic to convert it to a Reason <code>option</code>. The conversion is done through the helper functions in Bucklescript's <a href="http://bucklescript.github.io/bucklescript/api/Js.html#TYPEnullable"><code>Js.Nullable</code></a> module. In this case, <code>to_opt</code>:</p>
+<pre><code class="hljs css reason"><span class="hljs-keyword">let</span> greetByName = (possiblyNullName) =&gt; {
+  <span class="hljs-keyword">let</span> optionName = Js.Nullable.to_opt(possiblyNullName);
+  switch optionName {
+  | <span class="hljs-type">None</span> =&gt; <span class="hljs-string">"Hi"</span>
+  | <span class="hljs-type">Some</span>(name) =&gt; <span class="hljs-string">"Hello "</span> ++ name
+  }
+};
+</code></pre>
+<p>This check compiles to <code>possiblyNullName == null</code> in JS, so checks for the presence of <code>null</code> or <code>undefined</code>.</p>
+</span></div></article></div><div class="docs-prevnext"></div></div></div></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.js"></script><script>window.foo = new Pjax({
+          areas: [
+            // try to use the first query.
+            '.mainContainer, .docsNavContainer .toc .navWrapper',
+            // fallback
+            'body'
+          ],
+          link: '.docsNavContainer:not(.docsSliderActive) a',
+          update: {
+            script: false,
+          }
+        });
+        var languagesMenuItemCopy = document.getElementById("languages-menu");
+        languagesMenuItemCopy.addEventListener("click", function(e){
+          e.preventDefault();
+          e.stopPropagation();
+          e.stopImmediatePropagation();
+        });</script></span></div><script type="text/javascript" src="//cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+              var search = docsearch({
+                apiKey: '55156da6520de795d3a2c2d23786f08e',
+                indexName: 'reason',
+                inputSelector: '#search_input_react'
+              });
+            </script></body></html>
