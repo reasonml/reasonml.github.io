@@ -1,0 +1,800 @@
+<html><head><meta charset="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1"/><title>Comparison to OCaml · Reason</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta property="og:title" content="Comparison to OCaml · Reason"/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io//index.html"/><meta property="og:description" content="If you come from OCaml or are a newcomer reading a tutorial written on OCaml, this guide&#x27;s for you! But don&#x27;t forget that [reason-tools](https://github.com/reasonml/reason-tools) can convert between OCaml and Reason syntax on the fly."/><link rel="shortcut icon" href="/img/reason-react-red.svg"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/solarized-dark.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io//blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io//blog/feed.xml" title="Reason Blog RSS Feed"/><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/reason-react-white.svg"/><h2 class="headerTitle">Reason</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li><a href="/blog" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg"/>English</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/es-ES">Español</a></li><li><a href="/fr">Français</a></li><li><a href="/pt-BR">Português (Brasil)</a></li><li><a href="/ru">Русский</a></li><li><a href="/zh-CN">中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank">Help Translate</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(){
+          if(languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search"/></li><li><a href="https://github.com/facebook/reason" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/facebook/reason/tree/master/docs/ocaml.md" target="_blank">Edit</a><h1>Comparison to OCaml</h1></header><article><div><span><p>If you come from OCaml or are a newcomer reading a tutorial written on OCaml, this guide's for you! But don't forget that <a href="https://github.com/reasonml/reason-tools">reason-tools</a> can convert between OCaml and Reason syntax on the fly.</p>
+<h3><a class="anchor" aria-hidden="true" name="comments"></a><a href="#comments" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Comments</h3>
+<table>
+<thead>
+<tr><th>OCaml</th><th>Reason</th></tr>
+</thead>
+<tbody>
+<tr><td><code>(* OCaml (*nest*) *)</code></td><td><code>/* Reason /*nest*/ */</code></td></tr>
+</tbody>
+</table>
+<h3><a class="anchor" aria-hidden="true" name="operator-renaming"></a><a href="#operator-renaming" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Operator Renaming</h3>
+<p>Reason has all of OCaml's infix operators, but a couple of operators are expressed differently. In Reason, structural equality is written as <code>==</code>, and reference (physical) equality is written as <code>===</code>. In Reason, to achieve the corresponding inequality, simply swap the first character with a <code>!</code> character. (<code>!=</code> for structural inequality, and <code>!==</code> for reference inequality).</p>
+<table>
+<thead>
+<tr><th>Equality</th><th>OCaml</th><th>Reason</th></tr>
+</thead>
+<tbody>
+<tr><td>Structural</td><td><code>x = y</code></td><td><code>x == y</code></td></tr>
+<tr><td>Reference</td><td><code>x == y</code></td><td><code>x === y</code></td></tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr><th>Inequality</th><th>OCaml</th><th>Reason</th></tr>
+</thead>
+<tbody>
+<tr><td>Structural</td><td><code>x &lt;&gt; y</code></td><td><code>x != y</code></td></tr>
+<tr><td>Reference</td><td><code>x != y</code></td><td><code>x !== y</code></td></tr>
+</tbody>
+</table>
+<h3><a class="anchor" aria-hidden="true" name="local-scope"></a><a href="#local-scope" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Local Scope</h3>
+<p>Reason's lexical scoping is exactly the same as OCaml's, but let bindings syntactically resemble &quot;block scope&quot; which is more familiar to many developers. In Reason, they are created with <code>{}</code> braces, which may contain both <code>let</code> bindings and imperative commands, separated by <code>;</code>. All blocks evaluate to the last line and the semicolon on the last line is optional. <code>{}</code> braces are only needed if you have more than one item to chain together via <code>;</code>.</p>
+<table>
+  <thead><tr> <th scope="col"><p>OCaml</p></th><th scope="col"><p>Reason</p></th></tr></thead>
+  <tr>
+    <td>
+      <pre>
+let _ =
+  let msg = "Hello" in
+  print_string msg;
+  let msg2 = "Goodbye" in
+  print_string msg2</pre>
+    </td>
+    <td>
+      <pre>
+{
+  let msg = "Hello";
+  print_string(msg);
+  let msg2 = "Goodbye";
+  print_string(msg2)
+};</pre>
+    </td>
+  </tr>
+</table>
+<p>Reason's <code>{}</code> syntax removes many commonly reported pain points in OCaml's syntax:</p>
+<ul>
+<li>Double semicolons are removed entirely.</li>
+<li><code>begin</code>/<code>end</code> is removed entirely.</li>
+<li>Infamous imperative parsing <a href="https://github.com/ocaml/ocaml/pull/278">issues</a> are gone.</li>
+<li>Module bodies and local scope are unified.</li>
+</ul>
+<h3><a class="anchor" aria-hidden="true" name="local-scope-vs-module-body"></a><a href="#local-scope-vs-module-body" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Local Scope Vs. Module Body</h3>
+<p>In Reason, everything that can go between the <code>{}</code> in <a href="#local-scope">Local Scopes</a> and in module bodies. You can usually even cut/paste code between the two contexts. In OCaml, the syntaxes for the two contexts are very different. Local scope requires trailing <code>in</code>, but module bodies do not and some imperative statements must be assigned to <code>_</code> or <code>()</code>, or else use double <code>;;</code>.</p>
+<table>
+  <thead><tr> <th scope="col"><p>OCaml Module Body</p></th><th scope="col"><p>Reason Module Body</p></th></tr></thead>
+  <tr>
+    <td>
+      <pre>
+let ten = 10
+let () = imperativeFunc ten ten
+let () = imperativeFunc 0 0</pre>
+    </td>
+    <td>
+      <pre>
+let ten = 10;
+imperativeFunc(ten, ten);
+imperativeFunc(0, 0);</pre>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <pre>
+let ten = 10;;
+imperativeFunc ten ten;;
+imperativeFunc 0 0;;</pre>
+    </td>
+    <td>Same as above</td>
+  </tr>
+  <thead><tr> <th scope="col"><p>OCaml Local Scope</p></th><th scope="col"><p>Reason Local Scope</p></th></tr></thead>
+  <tr>
+    <td>
+      <pre>
+let ten = 10 in
+let _ = imperativeFunc ten ten in
+imperativeFunc 0 0</pre>
+    </td>
+    <td>
+       same as above
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <pre>
+let ten = 10 in begin
+  imperativeFunc ten ten;
+  imperativeFunc 0 0
+end</pre>
+    </td>
+    <td>
+       same as above
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <pre>
+let ten = 10 in (
+  imperativeFunc ten ten;
+  imperativeFunc 0 0
+)</pre>
+    </td>
+    <td>
+       same as above
+    </td>
+  </tr>
+</table>
+<h3><a class="anchor" aria-hidden="true" name="tuple-and-record"></a><a href="#tuple-and-record" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Tuple and Record</h3>
+<p>In Reason, tuples always require parentheses.</p>
+<table>
+<thead>
+<tr><th>OCaml</th><th>Reason</th></tr>
+</thead>
+<tbody>
+<tr><td><code>let tup = 4, 5</code></td><td><code>let tup = (4, 5);</code></td></tr>
+<tr><td><code>let tup = ((1: int), (2:int))</code></td><td><code>let tup = (1: int, 2:int);</code></td></tr>
+<tr><td><code>fun ((a: int), (b: int)) -&gt; a</code></td><td><code>((a: int, b: int)) =&gt; a;</code></td></tr>
+</tbody>
+</table>
+<p>In Reason, record values resemble JavaScript, using <code>:</code> instead of <code>=</code>. Because Reason tuples always require wrapping parens, records may contain lambdas as values without needing extra parens.</p>
+<table>
+  <thead><tr> <th scope="col"><p>OCaml</p></th><th scope="col"><p>Reason</p></th></tr></thead>
+  <tr>
+    <td>
+      <pre>
+let myRec = {x = 0; y = 10}</pre>
+    </td>
+    <td>
+      <pre>
+let myRec = {x: 0, y: 10};</pre>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <pre>
+let myFuncs = {
+  myFun = (fun x -> x + 1);
+  your = (fun a b -> a + b);
+}</pre>
+    </td>
+    <td>
+      <pre>
+let myFuncs = {
+  myFun: (x) => x + 1,
+  your: (a, b) => a + b
+};</pre>
+    </td>
+</table>
+<h3><a class="anchor" aria-hidden="true" name="lists"></a><a href="#lists" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Lists</h3>
+<table>
+<thead>
+<tr><th>OCaml</th><th>Reason</th></tr>
+</thead>
+<tbody>
+<tr><td><code>let list = [1; 2; 3]</code></td><td><code>let list = [1, 2, 3]</code></td></tr>
+<tr><td><code>let list = hd :: tl</code></td><td><code>let list = [hd, ...tl];</code></td></tr>
+</tbody>
+</table>
+<h3><a class="anchor" aria-hidden="true" name="type-definitions"></a><a href="#type-definitions" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Type Definitions</h3>
+<table>
+<thead>
+<tr><th>OCaml Tuple</th><th>Reason Tuple</th></tr>
+</thead>
+<tbody>
+<tr><td><code>type tuple = int * int</code></td><td><code>type tuple = (int, int);</code></td></tr>
+<tr><td><code>let tup: tuple = (10, 30)</code></td><td><code>let tup: tuple = (10, 30);</code></td></tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr><th>OCaml Record</th><th>Reason Record</th></tr>
+</thead>
+<tbody>
+<tr><td><code>type r = {x: int; y: int}</code></td><td><code>type r = {x: int, y: int};</code></td></tr>
+<tr><td><code>let myRec: r = {x = 0; y = 10}</code></td><td><code>let myRec: r = {x: 0, y: 10};</code></td></tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr><th>OCaml Function</th><th>Reason Function</th></tr>
+</thead>
+<tbody>
+<tr><td><code>type func = int -&gt; int</code></td><td><code>type func = int =&gt; int;</code></td></tr>
+<tr><td><code>let x: func = fun a -&gt; a + 1</code></td><td><code>let x: func = (a) =&gt; a + 1;</code></td></tr>
+</tbody>
+</table>
+<h3><a class="anchor" aria-hidden="true" name="functions"></a><a href="#functions" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Functions</h3>
+<table>
+<thead>
+<tr><th>OCaml</th><th>Reason</th></tr>
+</thead>
+<tbody>
+<tr><td><code>let x a b = e</code></td><td><code>let x = (a, b) =&gt; e</code></td></tr>
+<tr><td><code>let x = fun a b -&gt; e</code></td><td><code>let x = (a, b) =&gt; e</code></td></tr>
+<tr><td><code>let x = fun a -&gt; fun b -&gt; e</code></td><td><code>let x = (a, b) =&gt; e</code></td></tr>
+</tbody>
+</table>
+<h4><a class="anchor" aria-hidden="true" name="single-argument-match-functions"></a><a href="#single-argument-match-functions" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Single argument match functions</h4>
+<p>OCaml has a function definition (<code>function |</code>) which is considered to be
+equivalent of <code>function a -&gt; match a with ...</code>. Reason has the same, but
+the syntax makes it clear how it is actually an extension of a single argument
+function. The single case match is a natural extension of the simple lambda,
+and the multicase lambda is a natural extension of the single case lambda.</p>
+<table>
+  <thead><tr> <th scope="col"><p>Form</p></th><th scope="col"><p>OCaml</p></th><th scope="col"><p>Reason</p></th></tr></thead>
+  <tr>
+    <td>
+      lambda
+    </td>
+    <td>
+      <pre>
+fun pat -> e</pre>
+    </td>
+    <td>
+      <pre>
+fun pat => e</pre>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      one match case
+    </td>
+    <td>
+      <pre>
+function | pat -> e</pre>
+    </td>
+    <td>
+      <pre>
+fun | pat => e</pre>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      many cases
+    </td>
+    <td>
+      <pre>
+function | pat -> e
+         | pat2 -> e</pre>
+    </td>
+    <td>
+      <pre>
+fun | pat => e
+    | pat2 => e</pre>
+    </td>
+  </tr>
+</table>
+<h4><a class="anchor" aria-hidden="true" name="annotating-arguments"></a><a href="#annotating-arguments" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Annotating Arguments</h4>
+<p>In both Reason and OCaml, arguments are annotated with types by (as with
+everything else), wrapping them in parenthesis after appending
+<code>:typeAnnotation</code>.</p>
+<pre><code class="hljs css reason">(<span class="hljs-name">arg</span>: argType) =&gt; returnValue<span class="hljs-comment">;</span>
+</code></pre>
+<pre><code class="hljs css reason">(<span class="hljs-name">arg</span>: argType) =&gt; (<span class="hljs-name">arg2</span>: arg2Type) =&gt; returnValue<span class="hljs-comment">;</span>
+</code></pre>
+<pre><code class="hljs css reason">(<span class="hljs-string">arg:</span> argType, <span class="hljs-string">arg2:</span> arg2Type) =&gt; returnValue;
+</code></pre>
+<p>Both Reason and OCaml allow annotating the return type, when using the
+&quot;super sugared let binding&quot; form.</p>
+<pre><code class="hljs css ocaml"><span class="hljs-comment">(* OCaml *)</span>
+<span class="hljs-keyword">let</span> myFunc (a:<span class="hljs-built_in">int</span>) (b:<span class="hljs-built_in">int</span>) :<span class="hljs-built_in">int</span> * <span class="hljs-built_in">int</span> = (a, b)
+<span class="hljs-keyword">let</span> myFunc (a:<span class="hljs-built_in">int</span>) (b:<span class="hljs-built_in">int</span>) :<span class="hljs-built_in">int</span> <span class="hljs-built_in">list</span> = [<span class="hljs-number">1</span>]
+<span class="hljs-keyword">let</span> myFunc (a:<span class="hljs-built_in">int</span>) (b:<span class="hljs-built_in">int</span>) :<span class="hljs-built_in">int</span> -&gt; <span class="hljs-built_in">int</span> = <span class="hljs-keyword">fun</span> x -&gt; x + a + b
+</code></pre>
+<pre><code class="hljs css reason"><span class="hljs-comment">/* Reason */</span>
+<span class="hljs-keyword">let</span> myFunc = (a: <span class="hljs-keyword">int</span>, b: <span class="hljs-keyword">int</span>) :(<span class="hljs-keyword">int</span>, <span class="hljs-keyword">int</span>) =&gt; (a, b);
+<span class="hljs-keyword">let</span> myFunc = (a: <span class="hljs-keyword">int</span>, b: <span class="hljs-keyword">int</span>) :<span class="hljs-keyword">list</span>(<span class="hljs-keyword">int</span>) =&gt; [<span class="hljs-number">1</span>];
+<span class="hljs-keyword">let</span> myFunc = (a: <span class="hljs-keyword">int</span>, b: <span class="hljs-keyword">int</span>): (<span class="hljs-keyword">int</span> =&gt; <span class="hljs-keyword">int</span>) =&gt; (x) =&gt; x + a + b;
+</code></pre>
+<p>Because we're using <code>=&gt;</code> for all functions everywhere in Reason, there's one case where we need to add extra parens around a return type that is itself a function type.</p>
+<h4><a class="anchor" aria-hidden="true" name="type-parameters"></a><a href="#type-parameters" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Type Parameters</h4>
+<h5><a class="anchor" aria-hidden="true" name="ocaml"></a><a href="#ocaml" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>OCaml</h5>
+<p>OCaml's type applications (think &quot;generics&quot;), are applied in reverse order.</p>
+<p>With OCaml, there are some unintuitive consequences of this.</p>
+<pre><code class="hljs css ocaml"><span class="hljs-keyword">let</span> x: <span class="hljs-built_in">int</span> <span class="hljs-built_in">list</span> = [<span class="hljs-number">2</span>]
+
+<span class="hljs-keyword">type</span> listOfListOfInts = <span class="hljs-built_in">int</span> <span class="hljs-built_in">list</span> <span class="hljs-built_in">list</span>
+
+<span class="hljs-comment">(* Parsed as: *)</span>
+<span class="hljs-keyword">type</span> listOfListOfInts = (<span class="hljs-built_in">int</span> <span class="hljs-built_in">list</span>) <span class="hljs-built_in">list</span>
+</code></pre>
+<p>Things get even more strange when type constructors accept multiple parameters.
+Multiple arguments require parenthesis and commas to separate type parameters,
+but those parentheses don't represent tuples. The parentheses/comma form must
+also be given when constructing type instances such as <code>(int, string) tuple</code>.</p>
+<pre><code class="hljs css ocaml"><span class="hljs-keyword">type</span> (<span class="hljs-symbol">'a</span>, <span class="hljs-symbol">'b</span>) tuple = <span class="hljs-symbol">'a</span> * <span class="hljs-symbol">'b</span>
+
+<span class="hljs-keyword">type</span> listOfTuplesOfStringAndInt = (<span class="hljs-built_in">string</span>, <span class="hljs-built_in">int</span>) tuple <span class="hljs-built_in">list</span>
+
+<span class="hljs-comment">(* Which is parsed as: *)</span>
+<span class="hljs-keyword">type</span> listOfTuplesOfStringAndInt = ((<span class="hljs-built_in">string</span>, <span class="hljs-built_in">int</span>) tuple) <span class="hljs-built_in">list</span>
+
+<span class="hljs-comment">(* Which allows a list of (tuples of (string and int)) *)</span>
+<span class="hljs-keyword">let</span> tuples: listOfTuplesOfStringAndInt = [(<span class="hljs-string">"asdf"</span>, <span class="hljs-number">3</span>)]
+</code></pre>
+<h5><a class="anchor" aria-hidden="true" name="reason"></a><a href="#reason" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Reason</h5>
+<p>In summary, Reason unifies almost all of the syntax into simple &quot;function application&quot; style meaning that type parameters follow the same comma-separated pattern seen everywhere else in the syntax. This results in fewer syntactic patterns to learn.</p>
+<p>For example, you can imagine <code>list</code> being a &quot;function&quot; for types that accepts a
+type and returns a new type.</p>
+<table>
+  <thead><tr> <th scope="col"><p>OCaml</p></th><th scope="col"><p>Reason</p></th></tr></thead>
+  <tr>
+    <td>
+      <pre>
+let x: int list = [2]
+type listOfListOfInts = int list list
+type ('a, 'b) tup = ('a * 'b)
+type pairs = (int, int) tup list
+let tuples: pairs = [(2, 3)]</pre>
+    </td>
+    <td>
+      <pre>
+let x: list(int) = [2];
+type listOfListOfInts = list(list(int));
+type tup('a, 'b) = ('a, 'b);
+type pairs = list(tup(int, int));
+let tuples: pairs = [(2, 3)];</pre>
+    </td>
+  </tr>
+</table>
+<h3><a class="anchor" aria-hidden="true" name="tuples-as-type-parameters"></a><a href="#tuples-as-type-parameters" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Tuples as Type Parameters</h3>
+<p>Because OCaml uses parens and commas to represent multiple arguments to type
+constructors, it's confusing when one of the arguments to a type constructor is
+itself a tuple. In OCaml, it's difficult to remember the difference between a
+type constructor accepting multiple arguments and a type constructor accepting
+a single argument which happens to be a tuple.</p>
+<p>The following examples shows the difference between passing <em>two</em> type
+parameters to <code>pair</code>, and a <em>single</em> type parameter that happens to be a tuple.</p>
+<table>
+<thead>
+<tr><th>OCaml</th><th>Reason</th></tr>
+</thead>
+<tbody>
+<tr><td><code>type intPair = (int, int) pair</code></td><td><code>type intPair = pair(int, int)</code></td></tr>
+<tr><td><code>type pairList = (int * int) list</code></td><td><code>type pairList = list((int, int))</code></td></tr>
+</tbody>
+</table>
+<ul>
+<li>In Reason, syntax that represent tuple or tuple types, always looks like
+tuples.</li>
+<li>In Reason, syntax that represent records or record types, always look like
+records.</li>
+<li>Just about everything else uses the syntactic pattern of function application
+(comma separated arguments).</li>
+</ul>
+<h3><a class="anchor" aria-hidden="true" name="variants"></a><a href="#variants" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Variants</h3>
+<h6><a class="anchor" aria-hidden="true" name="ocaml"></a><a href="#ocaml" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>OCaml</h6>
+<ul>
+<li>OCaml already expects constructor argument types to be specified in tuple
+form, so it's confusing when a single constructor expects a single argument
+that <em>happens</em> to be a tuple type.</li>
+<li>What's even more confusing is that the constructors don't <em>actually</em> accept
+tuples, yet the syntax appear to resemble tuples.</li>
+<li>Sometimes the syntax for instantiating a constructor with multiple arguments
+overlaps the syntax for constructing a variant with a single argument that
+happens to be a tuple - so it looks <em>exactly</em> like you <em>are</em> supplying a
+tuple when you are not actually supplying a tuple.</li>
+</ul>
+<h6><a class="anchor" aria-hidden="true" name="reason"></a><a href="#reason" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Reason</h6>
+<ul>
+<li>Variant constructor types are expected to be listed as comma separated lists,
+using parenthesis to group precedence (as with <strong>everything</strong> else).</li>
+<li>Constructing instances of the variant (as you would have guessed) follows
+function application style (comma separated lists).</li>
+<li>Tuples <strong>always</strong> <em>look</em> like tuples, and anything that looks like a tuple
+<em>is</em> a tuple.</li>
+</ul>
+<table>
+  <thead>
+    <tr>
+      <th scope="col">
+        <p>OCaml</p>
+      </th>
+      <th scope="col">
+        <p>Reason</p>
+      </th>
+    </tr>
+  </thead>
+  <tr>
+    <td>
+      <pre>
+type myVariant =
+  | HasNothing
+  | HasSingleInt of int
+  | HasSingleTuple of (int * int)
+  | HasMultipleInts of int * int
+  | HasMultipleTuples of (int * int) * (int * int)
+      </pre>
+    </td>
+    <td>
+      <pre>
+type myVariant =
+  | HasNothing
+  | HasSingleInt(int)
+  | HasSingleTuple((int, int))
+  | HasMultipleInts(int, int)
+  | HasMultipleTuples((int, int), (int, int));
+      </pre>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <pre>
+let a = HasSingleInt 10
+let a = HasSingleTuple (10, 10)
+let a = HasMultipleInts (10, 10)
+let a = HasMultipleTuples ((10, 10), (10, 10))
+      </pre>
+    </td>
+    <td>
+      <pre>
+let a = HasSingleInt(10);
+let a = HasSingleTuple((10, 10));
+let a = HasMultipleInts(10, 10);
+let a = HasMultipleTuples((10, 10), (10, 10));
+      </pre>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <pre>
+let res x = match x with
+  | HasNothing -> 0
+  | HasSingleInt x -> 0
+  | HasSingleTuple (x, y) -> 0
+  | HasMultipleInts (x, y) -> 0
+  | HasMultipleTuples ((x, y), (q, r)) -> 0
+      </pre>
+    </td>
+    <td>
+      <pre>
+let res = (x) =>
+  switch x {
+  | HasNothing => 0
+  | HasSingleInt(x) => 0
+  | HasSingleTuple((x, y)) => 0
+  | HasMultipleInts(x, y) => 0
+  | HasMultipleTuples((x, y), (q, r)) => 0
+  };
+      </pre>
+    </td>
+  </tr>
+</table>
+<h3><a class="anchor" aria-hidden="true" name="pattern-matching"></a><a href="#pattern-matching" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Pattern Matching</h3>
+<table>
+  <thead><tr> <th scope="col"><p>OCaml</p></th><th scope="col"><p>Reason</p></th></tr></thead>
+  <tr>
+    <td>
+      <pre>
+let res = match x with
+  | A (x, y) -> match y with
+    | None -> 0
+    | Some i -> 10
+  | B (x, y) -> 0</pre>
+    </td>
+    <td>
+      <pre>
+let res = switch x {
+  | A((x, y)) => switch y {
+      | None => 0
+      | Some(i) => 10
+    }
+  | B((x, y)) => 0
+};
+</pre>
+    </td>
+  </tr>
+</table>
+<p>Can you spot the error in the OCaml example? This is one of the most common mistakes among OCaml programmers. The nested <code>match</code> <em>must</em> be wrapped in parentheses, otherwise the <code>Some</code> case is parsed as belonging to the outer <code>match</code>. Visually, it's actually:</p>
+<pre><code class="hljs css ocaml"><span class="hljs-keyword">let</span> res = <span class="hljs-keyword">match</span> x <span class="hljs-keyword">with</span>
+  | <span class="hljs-type">A</span> (x, y) -&gt; <span class="hljs-keyword">match</span> y <span class="hljs-keyword">with</span>
+    | <span class="hljs-type">None</span> -&gt; <span class="hljs-number">0</span>
+    | <span class="hljs-type">Some</span> i -&gt; <span class="hljs-number">10</span>
+    | <span class="hljs-type">B</span> (x, y) -&gt; <span class="hljs-number">0</span>
+</code></pre>
+<p>Reason's mandatory <code>{}</code> around <code>switch</code> cases prevents this issue.</p>
+<h3><a class="anchor" aria-hidden="true" name="modules-and-signatures"></a><a href="#modules-and-signatures" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Modules and Signatures</h3>
+<h4><a class="anchor" aria-hidden="true" name="definition"></a><a href="#definition" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Definition</h4>
+<table>
+  <thead><tr> <th scope="col"><p>OCaml</p></th><th scope="col"><p>Reason</p></th></tr></thead>
+  <tr>
+    <td>
+      <pre>
+module type MySig = sig
+  type t = int
+  val x: int
+end
+module MyModule: MySig = struct
+  type t = int
+  let x = 10
+end
+module MyModule = struct
+  module NestedModule = struct
+     let msg = "hello";
+  end
+end
+      </pre>
+    </td>
+    <td>
+      <pre>
+module type MySig = {
+  type t = int;
+  let x: int;
+};
+<p>module MyModule: MySig = {
+type t = int;
+let x = 10;
+};</p>
+<p>module MyModule = {
+module NestedModule = {
+let msg = &quot;hello&quot;;
+};
+};
+</pre>
+</td></p>
+  </tr>
+</table>
+<h4><a class="anchor" aria-hidden="true" name="functors-types"></a><a href="#functors-types" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Functors Types</h4>
+<table>
+  <thead><tr> <th scope="col"><p>OCaml</p></th><th scope="col"><p>Reason</p></th></tr></thead>
+  <tr>
+    <td>
+      <pre>
+module type FType =
+  functor (A: ASig) ->
+  functor (B: BSig) -> Result
+      </pre>
+    </td>
+    <td>
+      <pre>
+module type FType =
+  (A: ASig) =>
+  (B: BSig) => Result;
+      </pre>
+    </td>
+  </tr>
+</table>
+<h3><a class="anchor" aria-hidden="true" name="functors"></a><a href="#functors" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Functors</h3>
+<table>
+  <thead><tr> <th scope="col"><p>OCaml</p></th><th scope="col"><p>Reason</p></th></tr></thead>
+  <tr>
+    <td>
+      <pre>
+module F =
+  functor (A: ASig) ->
+  functor (B: BSig) -> struct end</pre>
+    </td>
+    <td>
+      <pre>
+module F =
+  (A: ASig) =>
+  (B: BSig) => {};</pre>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <pre>
+module F = functor (A: ASig) (B: BSig) -> struct end</pre>
+    </td>
+    <td>
+      <pre>
+module F = (A: ASig, B: BSig) => {};</pre>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <pre>
+module F (A: ASig) (B: BSig) = struct end</pre>
+    </td>
+    <td>
+      <pre>
+module F (A: ASig, B: BSig) => {};</pre>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <pre>
+module Res = F(A)(B)</pre>
+    </td>
+    <td>
+      <pre>
+module Res = F(A, B);</pre>
+    </td>
+  </tr>
+</table>
+<p><strong>Note: There is currently a known inconsistency where functors do not
+conform to function application syntax when in type annotation position - see
+<a href="https://github.com/facebook/reason">the Reason repo's</a> <code>formatTest/modules.re</code>.</strong></p>
+<h3><a class="anchor" aria-hidden="true" name="various-improvements"></a><a href="#various-improvements" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Various Improvements</h3>
+<p>OCaml doesn't require parens around sequences <code>(a;b;c;d)</code> or tuples <code>(x,y)</code>, so
+that ends up ruling out a bunch of other very convenient syntax rules.  Since
+Reason always uses <code>{}</code> to enclose sequences or let bindings, and Reason
+always requires <code>()</code> around tuples, many other syntax constructs are expressed
+more intuitively, without requiring extra wrapping in parenthesis.</p>
+<h4><a class="anchor" aria-hidden="true" name="lambdas-as-record-fields-no-longer-need-extra-parens"></a><a href="#lambdas-as-record-fields-no-longer-need-extra-parens" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Lambdas as record fields no longer need extra parens</h4>
+<p>This is a welcomed improvement because the OCaml type errors the user would
+see were very confusing when it would believe the function's return value
+was a tuple with infix <code>,</code> comma.</p>
+<table>
+  <thead><tr> <th scope="col"><p>OCaml</p></th><th scope="col"><p>Reason</p></th></tr></thead>
+  <tr>
+    <td>
+      <pre>
+let myFuncs = {
+  myFun = (fun x -> x + 1);
+  your = (fun a b -> a + b);
+}</pre>
+    </td>
+    <td>
+      <pre>
+let myFuncs = {
+  myFun: (x) => x + 1,
+  your: (a, b) => a + b
+};</pre>
+    </td>
+  </tr>
+</table>
+<h4><a class="anchor" aria-hidden="true" name="lambdas-as-match-results-no-longer-need-extra-parens"></a><a href="#lambdas-as-match-results-no-longer-need-extra-parens" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Lambdas as match results no longer need extra parens</h4>
+<table>
+  <thead><tr> <th scope="col"><p>OCaml</p></th><th scope="col"><p>Reason</p></th></tr></thead>
+  <tr>
+    <td>
+      <pre>
+let x = match prnt with
+  | None -> fun a -> blah
+  (* Extra () required ! *)
+  | Some "_" -> (fun a -> ())
+  | Some "ml" -> blah
+      </pre>
+    </td>
+    <td>
+      <pre>
+let x =
+  switch prnt {
+  | None => (a) => blah
+  | Some("_") => (a) => ()
+  | Some("ml") => blah
+  };</pre>
+    </td>
+  </tr>
+</table>
+<h4><a class="anchor" aria-hidden="true" name="lambdas-and-type-annotations-in-tuples-no-longer-require-extra-parens"></a><a href="#lambdas-and-type-annotations-in-tuples-no-longer-require-extra-parens" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Lambdas and type annotations in tuples no longer require extra parens</h4>
+<table>
+<thead>
+<tr><th>OCaml</th><th>Reason</th></tr>
+</thead>
+<tbody>
+<tr><td><code>let tuple = ((fun x -&gt; x), 20)</code></td><td><code>let tuple = ((x) =&gt; x, 20);</code></td></tr>
+<tr><td><code>let tuple = ((&quot;hi&quot;: string), (20: int))</code></td><td><code>let tuple = (&quot;hi&quot;: string, 20: int);</code></td></tr>
+</tbody>
+</table>
+<h3><a class="anchor" aria-hidden="true" name="various-differences"></a><a href="#various-differences" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Various Differences</h3>
+<h4><a class="anchor" aria-hidden="true" name="as-precedence"></a><a href="#as-precedence" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>as</code> precedence</h4>
+<p>With Reason, <code>as</code> has a higher precedence than <code>|</code> bar. This allows creating <code>as</code> aliases
+for entire rows in pattern matching.</p>
+<table>
+  <thead><tr> <th scope="col"><p>OCaml</p></th><th scope="col"><p>Reason</p></th></tr></thead>
+  <tr>
+    <td>
+      <pre>
+let ppp = match MyThing 20 with
+  | (MyThing x as ppp)
+  | (YourThing x as ppp) -> ppp;
+      </pre>
+    </td>
+    <td>
+      <pre>
+let ppp =
+  switch (MyThing(20)) {
+  | MyThing(x) as ppp
+  | YourThing(x) as ppp => ppp
+  };
+      </pre>
+    </td>
+  </tr>
+</table>
+<h4><a class="anchor" aria-hidden="true" name="mutable-record-field-updates"></a><a href="#mutable-record-field-updates" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Mutable Record Field Updates</h4>
+<p>Because equalities and their negations have been made more consistent in Reason,
+the <code>=</code> operator is available for mutable field update.</p>
+<table>
+<thead>
+<tr><th>OCaml</th><th>Reason</th></tr>
+</thead>
+<tbody>
+<tr><td><code>myRec.field &lt;- &quot;next&quot;</code></td><td><code>myRec.field = &quot;next&quot;</code></td></tr>
+</tbody>
+</table>
+<h4><a class="anchor" aria-hidden="true" name="prefix-operators"></a><a href="#prefix-operators" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Prefix operators</h4>
+<p>Reason's <code>!</code> is used for boolean <code>not</code>. Deferencing uses the postfix <code>^</code>.</p>
+<table>
+<thead>
+<tr><th>OCaml</th><th>Reason</th></tr>
+</thead>
+<tbody>
+<tr><td><code>let x = !(foo.bar)</code></td><td><code>let x = foo.bar^;</code></td></tr>
+<tr><td><code>let x = !(foo#bar)</code></td><td><code>let x = foo#bar^;</code></td></tr>
+<tr><td><code>let x = !(!foo.bar)</code></td><td><code>let x = foo^.bar^;</code></td></tr>
+<tr><td><code>let x = !(!foo#bar)</code></td><td><code>let x = (foo^)#bar^;</code></td></tr>
+<tr><td><code>let x = !(!(foo.bar))</code></td><td><code>let x = foo.bar^ ^;</code></td></tr>
+<tr><td><code>let x = !(!(foo#bar))</code></td><td><code>let x = foo#bar^ ^;</code></td></tr>
+<tr><td><code>let x = !!(foo.bar)</code></td><td><code>let x = !!foo.bar;</code></td></tr>
+<tr><td><code>let x = !!(foo#bar)</code></td><td><code>let x = !!foo#bar;</code></td></tr>
+<tr><td><code>let x = !~(foo.bar)</code></td><td><code>let x = !~foo.bar;</code></td></tr>
+<tr><td><code>let x = !~(foo#bar)</code></td><td><code>let x = !~foo#bar;</code></td></tr>
+</tbody>
+</table>
+<h4><a class="anchor" aria-hidden="true" name="comment-escaping"></a><a href="#comment-escaping" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Comment Escaping</h4>
+<p>Because Reason uses C-style comments, some obscure custom prefix/infix
+operators must be written differently.  The rules for prefix/infix operators
+are the same as in OCaml syntax, but with the following exceptions:</p>
+<p>Specifically, if any character except the first in an prefix/infix operator is
+a star or forward slash, that must be first escaped with a backslash. These will
+be parsed <em>without</em> the backslash when added to the AST. When reprinted, the
+escape backslashes are added back in automatically.</p>
+<table>
+<thead>
+<tr><th>OCaml</th><th>Reason</th></tr>
+</thead>
+<tbody>
+<tr><td><code>let (/*) a b = a + b</code></td><td><code>let (/\*) a b =&gt; a + b;</code></td></tr>
+<tr><td><code>let x = 12 /-* 23 /-* 12</code></td><td><code>let x = 12 /-* 23 /-* 12;</code></td></tr>
+<tr><td><code>let y = (/*) a b</code></td><td><code>let y = a /\* b;</code></td></tr>
+<tr><td><code>let (!=*) q r = q + r</code></td><td><code>let ( !=* ) = (q, r) =&gt; q + r;</code></td></tr>
+<tr><td><code>let res = q (!=*) r</code></td><td><code>let res = q(( !=* ), r);</code></td></tr>
+<tr><td><code>let (!=/*) q r = q + r</code></td><td><code>let ( !=/\* ) = (q, r) =&gt; q + r;</code></td></tr>
+<tr><td><code>let res = q (!=/*) r</code></td><td><code>let res = q(( !=/\* ), r);</code></td></tr>
+</tbody>
+</table>
+<h4><a class="anchor" aria-hidden="true" name="operator-renaming"></a><a href="#operator-renaming" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Operator Renaming</h4>
+<p>If Reason uses <code>==</code> to represent OCaml's <code>=</code>, and uses <code>===</code> to represent OCaml's <code>==</code>, then how would Reason represent OCaml's <code>===</code> symbol (if it were defined)? Reason provides a way! &quot;Escape&quot; the triple equals symbol!</p>
+<table>
+<thead>
+<tr><th>Identifier</th><th>Meaning</th><th>OCaml</th><th>Reason</th></tr>
+</thead>
+<tbody>
+<tr><td><code>&quot;===&quot;</code></td><td>Custom value</td><td><code>x === y</code></td><td><code>x \=== y</code></td></tr>
+</tbody>
+</table>
+<h4><a class="anchor" aria-hidden="true" name="repl"></a><a href="#repl" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>REPL</h4>
+<p>In Reason's repl <a href="/guide/editor-tools/extra-goodies#repl"><code>rtop</code></a> (a customized <a href="https://github.com/diml/utop"><code>utop</code></a>), each input is submitted via a single <code>;</code> semicolon. OCaml's repl requires two semicolons <code>;;</code>.</p>
+<table>
+<thead>
+<tr><th>OCaml</th><th>Reason</th></tr>
+</thead>
+<tbody>
+<tr><td><code>;;</code></td><td><code>;</code></td></tr>
+</tbody>
+</table>
+</span></div></article></div><div class="docs-prevnext"></div></div></div></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.js"></script><script>window.foo = new Pjax({
+          areas: [
+            // try to use the first query.
+            '.mainContainer, .docsNavContainer .toc .navWrapper',
+            // fallback
+            'body'
+          ],
+          link: '.docsNavContainer:not(.docsSliderActive) a',
+          update: {
+            script: false,
+          }
+        });
+        var languagesMenuItemCopy = document.getElementById("languages-menu");
+        languagesMenuItemCopy.addEventListener("click", function(e){
+          e.preventDefault();
+          e.stopPropagation();
+          e.stopImmediatePropagation();
+        });</script></span></div><script type="text/javascript" src="//cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+              var search = docsearch({
+                apiKey: '55156da6520de795d3a2c2d23786f08e',
+                indexName: 'reason',
+                inputSelector: '#search_input_react'
+              });
+            </script></body></html>
