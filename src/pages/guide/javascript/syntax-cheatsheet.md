@@ -151,9 +151,9 @@ JavaScript                |   Reason
 
 JavaScript                |   Reason
 --------------------------|--------------------------------
-`<Foo bar=1 baz="hi" onClick={bla} />`  |  Same
-`<Foo bar=bar />`                       |  `<Foo bar />` \*
-`<input checked />`                     |  `<input checked=true />`
+`<Foo bar={1} baz="hi" onClick={bla} />`  |  Same
+`<Foo bar={bar} />`                       |  `<Foo bar />` \*
+`<input checked />`                       |  `<input checked=true />`
 
 \* Argument punning!
 
