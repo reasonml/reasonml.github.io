@@ -20,6 +20,6 @@ There are a few Reason meetups around the world, among others:
 - [Copenhagen](https://www.meetup.com/preview/ReasonML-CPH)
 - [Brussels](https://www.meetup.com/ReasonML-BXL/)
 - [Budapest](https://www.meetup.com/ReasonML-Budapest/)
-
+- [Vancouver](https://www.meetup.com/Reason-Vancouver/)
 
 If you don't find your local area's Reason meetup, search on https://meetup.com or start one!
