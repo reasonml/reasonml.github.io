@@ -1,6 +1,6 @@
 ---
 title: What & Why
-order: 0
+id: what-and-why
 ---
 
 ### What Is Reason?
