@@ -1,6 +1,6 @@
 ---
 title: Examples
-order: 60
+id: examples
 ---
 
 An example is worth a thousand words.
