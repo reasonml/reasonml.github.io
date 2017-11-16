@@ -31,7 +31,7 @@ Keep them to a minimum.
 
 ### Documentation
 
-Have them. Spend more effort making them great (examples, pitfalls) and professional rather than _just_ fancy-looking.
+Have them. Spend more effort making them great (examples, pitfalls) and professional rather than _just_ fancy-looking. Do use examples, and avoid using names such as `foo` and `bar`. There's always more concrete names (it's an example, no need to be abstract/generalized just yet. The API docs will do this plentily). For blog posts, don't repeat the docs themselves, describe the _transition_ from old to new, and why (e.g. "it was a component, now it's a function, because ...").
 
 **Justification**: It's hard for newcomers to distinguish between a simple/decent library and one that's fancy-looking. For the sake of the community, don't try too hard to one-up each other's libraries. Do spread the words, but use your judgement too.
 
