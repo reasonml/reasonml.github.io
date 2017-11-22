@@ -4,11 +4,9 @@ order: 0
 ---
 
 ```sh
-npm install -g https://github.com/BuckleScript/bucklescript
+npm install -g bs-platform
 bsb -init my-first-app -theme basic-reason
 ```
-
-**Note** that this installs BuckleScript directly from source. Installing bs-platform from npm gives you a version whose reason template has a few bugs currently. This will be fixed soon.
 
 Then, run it as usual:
 
