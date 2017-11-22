@@ -26,7 +26,7 @@ The infra changes wouldn't have happened without a tight cooperation from these 
 
 - There's a **migration script** at https://github.com/reasonml/upgradeSyntaxFrom2To3. Use it. No manual syntax upgrade needed.
 - Uninstall & upgrade your [reason-cli](/guide/editor-tools/global-installation) to `3.0.0` (instead of the old `1.13.7`), for editor tooling.
-- Upgrade your project's [BuckleScript](https://github.com/BuckleScript/bucklescript) to `2.0.0`.
+- Upgrade your project's [BuckleScript](https://github.com/BuckleScript/bucklescript) to `2.1.0`.
 - Set `"refmt": 3` in your `bsconfig.json`.
 - Restart your editor.
 
@@ -34,7 +34,7 @@ The infra changes wouldn't have happened without a tight cooperation from these 
 
 **How does this affect existing projects**?
 
-- If you don't specify `"refmt": 3` in your `bsconfig.json`, nothing changes.
+- If you don't specify `"refmt": 3` in your `bsconfig.json`, nothing changes. (Update: bs-platform 2.1.0 now defaults to refmt 3. If you want to keep refmt 2, put `"refmt": 2`).
 - Your third-party dependencies can still stay at version 2, vice-versa. Things will work as intended.
 - Learning the new syntax? [Reason-tools](https://github.com/reasonml/reason-tools) now converts between syntaxes too!
 
