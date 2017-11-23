@@ -670,7 +670,7 @@ export default class Try extends Component {
                 options={{
                   mode: 'javascript',
                   lineNumbers: true,
-                  readOnly: 'nocursor',
+                  readOnly: true,
                 }}
               />
               {jsError &&
