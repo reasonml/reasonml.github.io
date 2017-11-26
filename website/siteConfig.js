@@ -89,6 +89,7 @@ const siteConfig = {
     apiKey: "55156da6520de795d3a2c2d23786f08e",
     indexName: "reason"
   },
+  disableHeaderTitle: true,
 };
 
 module.exports = siteConfig;
