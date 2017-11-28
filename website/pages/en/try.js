@@ -7,7 +7,7 @@ class Index extends React.Component {
       <script type="text/javascript" src="/js/bs.js" />
       <script type="text/javascript" src="/js/refmt.js" />
       <script type="text/javascript" src="/js/try.js" />
-      <link rel="stylesheet" href="/js/flexbox-reset.css" type="text/css" />
+      <link rel="stylesheet" href="/js/codemirror.css" type="text/css" />
     </span>;
   }
 }
