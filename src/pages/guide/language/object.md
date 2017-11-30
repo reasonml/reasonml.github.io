@@ -50,7 +50,7 @@ let obj: tesla = {
 
 This object is of object type tesla and has a public method `drive`. It also contains a private method `enableEnvy` that is only accessible from within the object.
 
-As you can see, a Reason object can also access `this`. Just like a JavaScript object's `this`, our `this` has very erratic behavior depending on the context. Just kidding. Our `this` always points to the object itself correctly. Gotta learn from history.
+As you can see, a Reason object can also access `this`. JavaScript object's `this` behavior can be quirky; Reason `this` always points to the object itself correctly.
 
 The following example shows an open object type which uses a type as parameter. The object type parameter is required to implement all the methods of the open object type.
 
