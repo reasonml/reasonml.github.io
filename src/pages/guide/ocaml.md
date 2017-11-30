@@ -548,12 +548,10 @@ module type MySig = {
   type t = int;
   let x: int;
 };
-
 module MyModule: MySig = {
   type t = int;
   let x = 10;
 };
-
 module MyModule = {
   module NestedModule = {
     let msg = "hello";
