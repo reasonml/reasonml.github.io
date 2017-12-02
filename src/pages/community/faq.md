@@ -56,21 +56,6 @@ Reason/OCaml doesn't require you to write any import; modules being referred to 
 
 A module name is the file name, capitalized. It has to be unique per project; this abstracts away the file system and allows you to move files around without changing code.
 
-#### BuckleScript: Is there a generic way to transform a record into a JS object?
-Not currently. You'd have to do the manual translation. Alternatively, try [using JS objects directly](http://bucklescript.github.io/bucklescript/Manual.html#_create_js_objects_using_bs_obj)
-
-Generally speaking, we recommend binding to the JS library thinly rather than thickly and idiomatically; better stay lightweight and catch conversion mistakes.
-
-See also our [JS interop guide](/guide/javascript/interop).
-
-#### Bsb: is there a way to configure the output directory?
-Not currently. Though you can output JS artifacts alongside your Reason files. See the `in-source` option [here](https://bucklescript.github.io/bucklescript/docson/#build-schema.json), in package-specs -> package-spec -> module-format-object.
-
-#### The compiler says the module can't be found.
-Are you using a third-party module? If you're compiling to JS, did you add the dependency in your [`bsconfig.json`](http://bucklescript.github.io/bucklescript/Manual.html#_get_started)'s `bs-dependencies` field? Also, did you do `bsb -make-world`? `bsb` by default only build the root project itself for performance.
-
-Additionally, don't forget to add the source folders into your `bsconfig.json`! For performance, `bsb` doesn't automatically and recursively build nested folders.
-
 #### Is `Some | None`, `contents`, `Array`, `List` and all of these special? Where do they come from?
 They're ordinary variants/records/module definitions that comes with the [standard library](/api/index.html), `open`ed by default during compilation out of convenience.
 

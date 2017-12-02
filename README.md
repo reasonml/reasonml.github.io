@@ -27,7 +27,7 @@ The site uses GatsbyJS. For info on how it works, take a look at [their docs](ht
 
 ## Building the Playground
 
-The playground uses a bundled JS version of Reason's refmt, [BuckleScript](https://github.com/BuckleScript/bucklescript) compiler, its standard library, etc.
+The playground uses a bundled JS version of Reason's refmt, [BuckleScript](https://bucklescript.github.io) compiler, its standard library, etc.
 
 To build the bundled standard library & refmt: Please read the documentation in `setupSomeArtifacts.js`.
 

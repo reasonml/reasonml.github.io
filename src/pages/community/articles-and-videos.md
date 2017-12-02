@@ -11,12 +11,11 @@ Reason is just OCaml under the hood; We don't yet cover every concept on this do
 
 ## BuckleScript
 
-- [BuckleScript Manual](http://bucklescript.github.io/bucklescript/Manual.html): the official documentations for our JavaScript backend.
+- [BuckleScript Documentation](https://bucklescript.github.io): the official documentations for our JavaScript backend.
 - [BuckleScript JS API docs](http://bucklescript.github.io/bucklescript/api/index.html)
-- [BuckleScript build system schema](http://bucklescript.github.io/bucklescript/docson/#build-schema.json): comprehensive resource on `bsb`'s configuration.
+- [BuckleScript build system schema](https://bucklescript.github.io/docs/en/build-overview.html): comprehensive resource on `bsb`'s configuration.
 - [BuckleScript FFI Cheat Sheet](https://github.com/glennsl/bucklescript-ffi-cheatsheet)
 - [BuckleScript Cookbook](https://github.com/glennsl/bucklescript-cookbook)
-- [JavaScript Interop with Reason and BuckleScript](https://jaredforsyth.com/2017/06/03/javascript-interop-with-reason-and-bucklescript/)
 - [Unit Testing in ReasonML](https://jaketrent.com/post/unit-testing-in-reasonml/)
 
 ## ReasonReact

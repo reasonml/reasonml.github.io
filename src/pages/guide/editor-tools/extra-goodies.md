@@ -9,7 +9,7 @@ order: 30
 
 ### BuckleScript
 
-You'll be seeing [BuckleScript](http://bucklescript.github.io/bucklescript/Manual.html) extensively throughout the rest of this documentation, since it's the engine that powers our JS compilation. Its global binaries are installed through `npm install -g bs-platform`.
+You'll be seeing [BuckleScript](http://bucklescript.github.io/) extensively throughout the rest of this documentation, since it's the engine that powers our JS compilation. Its global binaries are installed through `npm install -g bs-platform`.
 
 ### Other Utilities
 

@@ -105,7 +105,7 @@ type car = {name: string, horsePower};
 
 #### Interop with JavaScript
 
-If you're working with JavaScript, the record syntax & operations should feel familiar, and you might be tempted to interop with JS by converting a JS object to a record, and vice-versa. This is fine, but we have an **even better way without conversion overhead**! See [here](https://bucklescript.github.io/bucklescript/Manual.html#_binding_to_js_objects) which talks about **[Reason objects](/guide/language/object)**. Here's an example:
+If you're working with JavaScript, the record syntax & operations should feel familiar, and you might be tempted to interop with JS by converting a JS object to a record, and vice-versa. This is fine, but we have an **even better way without conversion overhead**! See [here](https://bucklescript.github.io/docs/en/object.html#object-as-record) which talks about **[Reason objects](/guide/language/object)**. Here's an example:
 
 ```reason
 type payload = {. "name": string};
