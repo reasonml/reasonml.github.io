@@ -26,7 +26,7 @@ Here's the place to keep up with what's happening for the Reason team! This list
 Wanna help?
 
 - **Working on Windows**? Please help us improve the [Windows tooling support](https://github.com/reasonml/reasonml.github.io/issues/195)!
-- [Improve the documentation and website](https://github.com/reasonml/reasonml.github.io/issues). There's also the [BuckleScript manual and API reference](https://bucklescript.github.io/bucklescript/Manual.html#_contributing_to_the_documentation)
+- [Improve the documentation and website](https://github.com/reasonml/reasonml.github.io/issues).
 - [Help us translate the docs!](https://github.com/reasonml/reasonml.github.io/issues/3)
 - [Suggest better error messages](https://github.com/reasonml-community/error-message-improvement/issues)
 - Contribute to [your favorite editor plugin for Reason](/guide/editor-tools/editors-plugins#officially-supported-editors)

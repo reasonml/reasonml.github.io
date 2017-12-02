@@ -78,7 +78,7 @@ We'll need a little knowledge about Bucklescript's runtime representation of var
 - `strings` are strings, `ints` and `floats` are just numbers
 - an [Array](/guide/language/list-and-array#list) is a mutable fixed-length list in OCaml, and is represented as a plain javascript array.
 - a [List](/guide/language/list-and-array#array) is an immutable functional-style linked list, and is definitely the more idiomatic one to use in most cases. However, it's representation is more complicated (try `Js.log([1,2,3,4])` to check it out). Because of this, I generally convert to & from `Array`s when I'm talking to javascript, via `Array.of_list` and `Array.to_list`.
-- If you want to go deeper, there's an exhaustive list [in the BuckleScript manual](http://bucklescript.github.io/bucklescript/Manual.html#_runtime_representation)
+- If you want to go deeper, there's an exhaustive list [in the BuckleScript manual](http://bucklescript.github.io/docs/en/common-data-types.html#cheat-sheet)
 
 Knowing that, we can write a function in JavaScript that just accepts an array and returns a number, without much trouble at all.
 
@@ -110,7 +110,7 @@ I've run into more than a few bugs because of raw JavaScript that I added to sav
 
 So far we've been using `bs.raw`, which is a very fast and loose way to do it, and **not** suitable for production.
 
-But what if we actually need to call a function that's in JavaScript? It's needed for interacting with the DOM, or using node modules. In BuckleScript, you use an `external` declaration ([docs](http://bucklescript.github.io/bucklescript/Manual.html#_binding_to_simple_js_functions_values)).
+But what if we actually need to call a function that's in JavaScript? It's needed for interacting with the DOM, or using node modules. In BuckleScript, you use an `external` declaration ([docs](http://bucklescript.github.io/docs/en/function.html)).
 
 Getting a value and getting a function are both pretty easy:
 
@@ -174,7 +174,7 @@ Wow! Notice how BuckleScript just inlined our `pi` variable for us? And the outp
 
 When folks write bindings for a particular JavaScript library, they'd usually publish it to npm. Head over to the [Libraries](/guide/javascript/libraries) to find out how to find these.
 
-To use a library that does not have existing bindings, however, you'll want to first install the npm package as usual, e.g. using `npm install --save <package-name>`, then just go ahead and write your bindings. You'll probably find the [`bs.module`](https://bucklescript.github.io/bucklescript/Manual.html#_binding_to_a_value_from_a_module_code_bs_module_code) FFI feature particularly useful; it emits the right `import`s or `require`s, depending on the JS compilation target's module format.
+To use a library that does not have existing bindings, however, you'll want to first install the npm package as usual, e.g. using `npm install --save <package-name>`, then just go ahead and write your bindings. You'll probably find the [`bs.module`](https://bucklescript.github.io/docs/en/import-export.html) FFI feature particularly useful; it emits the right `import`s or `require`s, depending on the JS compilation target's module format.
 
 As an example, here's the entire source code of the [`bs.glob`](https://github.com/reasonml-community/bs-glob) bindings (converted to Reason, the original is OCaml):
 

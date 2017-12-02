@@ -16,7 +16,7 @@ external myCFunction : int => string = "theCFunction";
   "document.getElementsByClassName";
 ```
 
-(The above is a [BuckleScript](https://bucklescript.github.io/bucklescript/Manual.html)-specific external that binds to a JavaScript function of the same name.)
+(The above is a [BuckleScript](https://bucklescript.github.io/)-specific external that binds to a JavaScript function of the same name.)
 
 **Note**: `external`s can only be at the top level, or inside a module definition. You can't declare them in e.g. a function body.
 
@@ -26,7 +26,7 @@ You'd use an external value/function as if it was a normal let binding.
 
 ### Tips & Tricks
 
-If you come from a JavaScript background: **do take some time to learn about the [BuckleScript externals](http://bucklescript.github.io/bucklescript/Manual.html#_binding_to_simple_js_functions_values)**! In the beginning, you'll likely encounter quite a few `external`s before you get to write 100% pure idiomatic Reason code.
+If you come from a JavaScript background: **do take some time to learn about the [BuckleScript externals](http://bucklescript.github.io/docs/en/interop-overview.html)**! In the beginning, you'll likely encounter quite a few `external`s before you get to write 100% pure idiomatic Reason code.
 
 ### Design Decisions
 

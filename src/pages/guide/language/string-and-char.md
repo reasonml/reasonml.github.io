@@ -41,7 +41,7 @@ Hehe...
 |};
 ```
 
-Analogically speaking, it's like JavaScript's backtick string interpolation, except without needing to escape special chars, and without built-in interpolation of variables. Though you can trivially restore the latter functionality, [as BuckleScript has done](http://bucklescript.github.io/bucklescript/Manual.html#_unicode_support_with_string_interpolation_since_1_7_0):
+Analogically speaking, it's like JavaScript's backtick string interpolation, except without needing to escape special chars, and without built-in interpolation of variables. Though you can trivially restore the latter functionality, [as BuckleScript has done](http://bucklescript.github.io/docs/en/common-data-types.html#unicode-support):
 
 ```reason
 let world = {js|世界|js}; /* Supports Unicode characters */
@@ -86,7 +86,7 @@ as opposed to
 let r = Str.regexp("hello \\([A-Za-z]+\\)");
 ```
 
-Though for JS compilation, you'd use [`[%bs.re]`](http://bucklescript.github.io/bucklescript/Manual.html#_regex_support) and [`Js.Re`](https://bucklescript.github.io/bucklescript/api/Js.Re.html) instead, since `Str` is not available.
+Though for JS compilation, you'd use [`[%bs.re]`](http://bucklescript.github.io/docs/en/regular-expression.html) and [`Js.Re`](https://bucklescript.github.io/bucklescript/api/Js.Re.html) instead, since `Str` is not available.
 
 Reason/OCaml's emphasis on simplicity over cleverness can be seen here through its straightforward native string implementation. An overly sophisticated string implementation can sometimes [backfire](http://mrale.ph/blog/2016/11/23/making-less-dart-faster.html).
 

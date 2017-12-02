@@ -17,7 +17,7 @@ npm run start
 
 It runs in watch mode, so any changes to files will be picked up and compiled. That's all!
 
-- Read more about how we compile to JavaScript through our partner project, [BuckleScript](http://bucklescript.github.io/bucklescript/Manual.html).
+- Read more about how we compile to JavaScript through our partner project, [BuckleScript](http://bucklescript.github.io/).
 
 - Alternatively, **to start a [ReasonReact](//reasonml.github.io/reason-react/docs/en/installation.html) app**, try `bsb -init my-react-app -theme react`.
 
