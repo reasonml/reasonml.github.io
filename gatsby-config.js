@@ -29,6 +29,7 @@ module.exports = {
           //   resolve: 'gatsby-remark-responsive-iframe',
           // },
           // 'gatsby-remark-prismjs',
+          `${__dirname}/embedded-playground/index.js`,
           `${__dirname}/syntax-highlighting/index.js`,
           'gatsby-remark-copy-linked-files',
           // 'gatsby-remark-smartypants',
