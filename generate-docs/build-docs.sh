@@ -6,6 +6,7 @@ make html_doc
 cd ..
 
 docs_path="../src/pages/api/"
+docs_path2="../website/pages/api/"
 
 mkdir -p ./output/
 rm -f ./output/*.html
@@ -18,3 +19,7 @@ mkdir -p "$docs_path"
 rm -f "$docs_path"*.html
 cp output/* "$docs_path"
 echo "docs output to $docs_path"
+mkdir -p "$docs_path2"
+rm -f "$docs_path2"*.html
+cp output/* "$docs_path2"
+echo "docs output to $docs_path2"
