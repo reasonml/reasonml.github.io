@@ -86,7 +86,9 @@ let ten = 10;;
 imperativeFunc ten ten;;
 imperativeFunc 0 0;;</pre>
     </td>
-    <td>Same as above</td>
+    <td>
+      same as above
+    </td>
   </tr>
 
   <thead><tr> <th scope="col"><p>OCaml Local Scope</p></th><th scope="col"><p>Reason Local Scope</p></th></tr></thead>
