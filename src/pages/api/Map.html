@@ -18,18 +18,21 @@ Association tables over ordered types.
 </p><p>
 
    For instance:
-   </p><pre class="codepre">     module IntPairs =
-       struct
-         type t = int * int
-         let compare (x0,y0) (x1,y1) =
-           match Pervasives.compare x0 x1 with
-               0 -&gt; Pervasives.compare y0 y1
-             | c -&gt; c
-       end
-
-     module PairsMap = Map.Make(IntPairs)
-
-     let m = PairsMap.(empty |&gt; add (0,1) &quot;hello&quot; |&gt; add (1,0) &quot;world&quot;)
+   </p><pre class="codepre">   
+      module IntPairs = {
+        type t = (int, int);
+        let compare = ((x0, y0):t, (x1,y1):t) =&gt; {
+          switch (Pervasives.compare(x0, x1)) {
+          | 0 =&gt; Pervasives.compare(y0, y1)
+          | c =&gt; c
+          };
+        };
+      };
+      
+      module PairsMap = Map.Make(IntPairs);
+      let m = PairsMap.empty
+              |&gt; PairsMap.add((0,1), &quot;hello&quot;)
+              |&gt; PairsMap.add((1,0), &quot;world&quot;);
    </pre>
 <p>
 
