@@ -69,9 +69,5 @@ module.exports = function(fileInfo, api, options) {
     const transformed = convert(input, true);
     return $el.text(transformed);
   });
-  $('a').map((i, el) => {
-    const $el = $(el);
-    return $el.href($el.href().prepend('/api/'));
-  });
   return body.html();
 };

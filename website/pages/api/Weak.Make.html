@@ -1,115 +1,34 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
-<head>
-<link rel="stylesheet" href="style.css" type="text/css">
-<meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type">
-<link rel="Start" href="index.html">
-<link rel="Up" href="Weak.html">
-<link title="Index of types" rel=Appendix href="index_types.html">
-<link title="Index of exceptions" rel=Appendix href="index_exceptions.html">
-<link title="Index of values" rel=Appendix href="index_values.html">
-<link title="Index of class attributes" rel=Appendix href="index_attributes.html">
-<link title="Index of class methods" rel=Appendix href="index_methods.html">
-<link title="Index of classes" rel=Appendix href="index_classes.html">
-<link title="Index of modules" rel=Appendix href="index_modules.html">
-<link title="Index of module types" rel=Appendix href="index_module_types.html">
-<link title="Arg" rel="Chapter" href="Arg.html">
-<link title="Array" rel="Chapter" href="Array.html">
-<link title="ArrayLabels" rel="Chapter" href="ArrayLabels.html">
-<link title="Buffer" rel="Chapter" href="Buffer.html">
-<link title="Bytes" rel="Chapter" href="Bytes.html">
-<link title="BytesLabels" rel="Chapter" href="BytesLabels.html">
-<link title="Callback" rel="Chapter" href="Callback.html">
-<link title="CamlinternalFormat" rel="Chapter" href="CamlinternalFormat.html">
-<link title="CamlinternalFormatBasics" rel="Chapter" href="CamlinternalFormatBasics.html">
-<link title="CamlinternalLazy" rel="Chapter" href="CamlinternalLazy.html">
-<link title="CamlinternalMod" rel="Chapter" href="CamlinternalMod.html">
-<link title="CamlinternalOO" rel="Chapter" href="CamlinternalOO.html">
-<link title="Char" rel="Chapter" href="Char.html">
-<link title="Complex" rel="Chapter" href="Complex.html">
-<link title="Digest" rel="Chapter" href="Digest.html">
-<link title="Filename" rel="Chapter" href="Filename.html">
-<link title="Format" rel="Chapter" href="Format.html">
-<link title="Gc" rel="Chapter" href="Gc.html">
-<link title="Genlex" rel="Chapter" href="Genlex.html">
-<link title="Hashtbl" rel="Chapter" href="Hashtbl.html">
-<link title="Int32" rel="Chapter" href="Int32.html">
-<link title="Int64" rel="Chapter" href="Int64.html">
-<link title="Lazy" rel="Chapter" href="Lazy.html">
-<link title="Lexing" rel="Chapter" href="Lexing.html">
-<link title="List" rel="Chapter" href="List.html">
-<link title="ListLabels" rel="Chapter" href="ListLabels.html">
-<link title="Map" rel="Chapter" href="Map.html">
-<link title="Marshal" rel="Chapter" href="Marshal.html">
-<link title="MoreLabels" rel="Chapter" href="MoreLabels.html">
-<link title="Nativeint" rel="Chapter" href="Nativeint.html">
-<link title="Obj" rel="Chapter" href="Obj.html">
-<link title="Oo" rel="Chapter" href="Oo.html">
-<link title="Parsing" rel="Chapter" href="Parsing.html">
-<link title="Pervasives" rel="Chapter" href="Pervasives.html">
-<link title="Printexc" rel="Chapter" href="Printexc.html">
-<link title="Printf" rel="Chapter" href="Printf.html">
-<link title="Queue" rel="Chapter" href="Queue.html">
-<link title="Random" rel="Chapter" href="Random.html">
-<link title="Scanf" rel="Chapter" href="Scanf.html">
-<link title="Set" rel="Chapter" href="Set.html">
-<link title="Sort" rel="Chapter" href="Sort.html">
-<link title="Stack" rel="Chapter" href="Stack.html">
-<link title="StdLabels" rel="Chapter" href="StdLabels.html">
-<link title="Stream" rel="Chapter" href="Stream.html">
-<link title="String" rel="Chapter" href="String.html">
-<link title="StringLabels" rel="Chapter" href="StringLabels.html">
-<link title="Sys" rel="Chapter" href="Sys.html">
-<link title="Weak" rel="Chapter" href="Weak.html">
-<link title="Ast_helper" rel="Chapter" href="Ast_helper.html">
-<link title="Ast_mapper" rel="Chapter" href="Ast_mapper.html">
-<link title="Asttypes" rel="Chapter" href="Asttypes.html">
-<link title="Docstrings" rel="Chapter" href="Docstrings.html">
-<link title="Lexer" rel="Chapter" href="Lexer.html">
-<link title="Location" rel="Chapter" href="Location.html">
-<link title="Longident" rel="Chapter" href="Longident.html">
-<link title="Parse" rel="Chapter" href="Parse.html">
-<link title="Parser" rel="Chapter" href="Parser.html">
-<link title="Parsetree" rel="Chapter" href="Parsetree.html">
-<link title="Pprintast" rel="Chapter" href="Pprintast.html">
-<link title="Printast" rel="Chapter" href="Printast.html">
-<link title="Syntaxerr" rel="Chapter" href="Syntaxerr.html">
-<link title="Unix" rel="Chapter" href="Unix.html">
-<link title="Str" rel="Chapter" href="Str.html">
-<link title="Bigarray" rel="Chapter" href="Bigarray.html">
-<link title="Num" rel="Chapter" href="Num.html"><title>OCaml library : Weak.Make</title>
-</head>
-<body>
-<div class="navbar">&nbsp;<a class="up" href="Weak.html" title="Weak">Up</a>
-&nbsp;</div>
+<div class="ocamldoc">
+<div class="navbar">&#xA0;<a class="up" href="Weak.html" title="Weak">Up</a>
+&#xA0;</div>
 <h1>Functor <a href="type_Weak.Make.html">Weak.Make</a></h1>
 
-<pre><span class="keyword">module</span> Make: <div class="sig_block"><code class="code">functor (</code><code class="code">H</code><code class="code"> : </code><code class="type"><a href="Hashtbl.HashedType.html">Hashtbl.HashedType</a></code><code class="code">) -&gt; </code><code class="type"><a href="Weak.S.html">S</a></code><code class="type">  with type data = H.t</code></div></pre><div class="info module top">
+<pre><span class="keyword">module</span> Make: functor (H : Hashtbl.HashedType) -&gt; S  with type data = H.t</pre><div class="info module top">
 Functor building an implementation of the weak hash table structure.<br>
 </div>
 <table border="0" cellpadding="3" width="100%">
-<tr>
+<tbody><tr>
 <td align="left" valign="top" width="1%%"><b>Parameters: </b></td>
 <td>
 <table class="paramstable">
-<tr>
+<tbody><tr>
 <td align="center" valign="top" width="15%">
 <code>H</code></td>
 <td align="center" valign="top">:</td>
-<td><code class="type"><a href="Hashtbl.HashedType.html">Hashtbl.HashedType</a></code>
-</table>
+<td><code class="type">Hashtbl.HashedType</code>
+</td></tr></tbody></table>
 </td>
 </tr>
-</table>
+</tbody></table>
 <hr width="100%">
 
-<pre><span id="TYPEdata"><span class="keyword">type</span> <code class="type"></code>data</span> </pre>
+<pre id="TYPEdata"><span class="keyword">type</span> data </pre>
 <div class="info ">
 The type of the elements stored in the table.<br>
 </div>
 
 
-<pre><span id="TYPEt"><span class="keyword">type</span> <code class="type"></code>t</span> </pre>
+<pre id="TYPEt"><span class="keyword">type</span> t </pre>
 <div class="info ">
 The type of tables that contain elements of type <code class="code">data</code>.
         Note that weak hash tables cannot be marshaled using
@@ -118,68 +37,68 @@ The type of tables that contain elements of type <code class="code">data</code>.
 </div>
 
 
-<pre><span id="VALcreate"><span class="keyword">val</span> create</span> : <code class="type">int -> <a href="Weak.S.html#TYPEt">t</a></code></pre><div class="info ">
+<pre id="VALcreate">val create : int -&gt; t</pre><div class="info ">
 <code class="code">create n</code> creates a new empty weak hash table, of initial
         size <code class="code">n</code>.  The table will grow as needed.<br>
 </div>
 
-<pre><span id="VALclear"><span class="keyword">val</span> clear</span> : <code class="type"><a href="Weak.S.html#TYPEt">t</a> -> unit</code></pre><div class="info ">
+<pre id="VALclear">val clear : t -&gt; unit</pre><div class="info ">
 Remove all elements from the table.<br>
 </div>
 
-<pre><span id="VALmerge"><span class="keyword">val</span> merge</span> : <code class="type"><a href="Weak.S.html#TYPEt">t</a> -> <a href="Weak.S.html#TYPEdata">data</a> -> <a href="Weak.S.html#TYPEdata">data</a></code></pre><div class="info ">
+<pre id="VALmerge">val merge : t -&gt; data -&gt; data</pre><div class="info ">
 <code class="code">merge t x</code> returns an instance of <code class="code">x</code> found in <code class="code">t</code> if any,
         or else adds <code class="code">x</code> to <code class="code">t</code> and return <code class="code">x</code>.<br>
 </div>
 
-<pre><span id="VALadd"><span class="keyword">val</span> add</span> : <code class="type"><a href="Weak.S.html#TYPEt">t</a> -> <a href="Weak.S.html#TYPEdata">data</a> -> unit</code></pre><div class="info ">
+<pre id="VALadd">val add : t -&gt; data -&gt; unit</pre><div class="info ">
 <code class="code">add t x</code> adds <code class="code">x</code> to <code class="code">t</code>.  If there is already an instance
         of <code class="code">x</code> in <code class="code">t</code>, it is unspecified which one will be
         returned by subsequent calls to <code class="code">find</code> and <code class="code">merge</code>.<br>
 </div>
 
-<pre><span id="VALremove"><span class="keyword">val</span> remove</span> : <code class="type"><a href="Weak.S.html#TYPEt">t</a> -> <a href="Weak.S.html#TYPEdata">data</a> -> unit</code></pre><div class="info ">
+<pre id="VALremove">val remove : t -&gt; data -&gt; unit</pre><div class="info ">
 <code class="code">remove t x</code> removes from <code class="code">t</code> one instance of <code class="code">x</code>.  Does
         nothing if there is no instance of <code class="code">x</code> in <code class="code">t</code>.<br>
 </div>
 
-<pre><span id="VALfind"><span class="keyword">val</span> find</span> : <code class="type"><a href="Weak.S.html#TYPEt">t</a> -> <a href="Weak.S.html#TYPEdata">data</a> -> <a href="Weak.S.html#TYPEdata">data</a></code></pre><div class="info ">
+<pre id="VALfind">val find : t -&gt; data -&gt; data</pre><div class="info ">
 <code class="code">find t x</code> returns an instance of <code class="code">x</code> found in <code class="code">t</code>.
         Raise <code class="code">Not_found</code> if there is no such element.<br>
 </div>
 
-<pre><span id="VALfind_all"><span class="keyword">val</span> find_all</span> : <code class="type"><a href="Weak.S.html#TYPEt">t</a> -> <a href="Weak.S.html#TYPEdata">data</a> -> <a href="Weak.S.html#TYPEdata">data</a> list</code></pre><div class="info ">
+<pre id="VALfind_all">val find_all : t -&gt; data -&gt; data list</pre><div class="info ">
 <code class="code">find_all t x</code> returns a list of all the instances of <code class="code">x</code>
         found in <code class="code">t</code>.<br>
 </div>
 
-<pre><span id="VALmem"><span class="keyword">val</span> mem</span> : <code class="type"><a href="Weak.S.html#TYPEt">t</a> -> <a href="Weak.S.html#TYPEdata">data</a> -> bool</code></pre><div class="info ">
+<pre id="VALmem">val mem : t -&gt; data -&gt; bool</pre><div class="info ">
 <code class="code">mem t x</code> returns <code class="code">true</code> if there is at least one instance
         of <code class="code">x</code> in <code class="code">t</code>, false otherwise.<br>
 </div>
 
-<pre><span id="VALiter"><span class="keyword">val</span> iter</span> : <code class="type">(<a href="Weak.S.html#TYPEdata">data</a> -> unit) -> <a href="Weak.S.html#TYPEt">t</a> -> unit</code></pre><div class="info ">
+<pre id="VALiter">val iter : (data -&gt; unit) -&gt; t -&gt; unit</pre><div class="info ">
 <code class="code">iter f t</code> calls <code class="code">f</code> on each element of <code class="code">t</code>, in some unspecified
         order.  It is not specified what happens if <code class="code">f</code> tries to change
         <code class="code">t</code> itself.<br>
 </div>
 
-<pre><span id="VALfold"><span class="keyword">val</span> fold</span> : <code class="type">(<a href="Weak.S.html#TYPEdata">data</a> -> 'a -> 'a) -> <a href="Weak.S.html#TYPEt">t</a> -> 'a -> 'a</code></pre><div class="info ">
+<pre id="VALfold">val fold : (data -&gt; &apos;a -&gt; &apos;a) -&gt; t -&gt; &apos;a -&gt; &apos;a</pre><div class="info ">
 <code class="code">fold f t init</code> computes <code class="code">(f d1 (... (f dN init)))</code> where
         <code class="code">d1 ... dN</code> are the elements of <code class="code">t</code> in some unspecified order.
         It is not specified what happens if <code class="code">f</code> tries to change <code class="code">t</code>
         itself.<br>
 </div>
 
-<pre><span id="VALcount"><span class="keyword">val</span> count</span> : <code class="type"><a href="Weak.S.html#TYPEt">t</a> -> int</code></pre><div class="info ">
+<pre id="VALcount">val count : t -&gt; int</pre><div class="info ">
 Count the number of elements in the table.  <code class="code">count t</code> gives the
         same result as <code class="code">fold (fun _ n -&gt; n+1) t 0</code> but does not delay the
         deallocation of the dead elements.<br>
 </div>
 
-<pre><span id="VALstats"><span class="keyword">val</span> stats</span> : <code class="type"><a href="Weak.S.html#TYPEt">t</a> -> int * int * int * int * int * int</code></pre><div class="info ">
+<pre id="VALstats">val stats : t -&gt; int * int * int * int * int * int</pre><div class="info ">
 Return statistics on the table.  The numbers are, in order:
         table length, number of entries, sum of bucket lengths,
         smallest bucket length, median bucket length, biggest bucket length.<br>
 </div>
-</body></html>
+</div>
