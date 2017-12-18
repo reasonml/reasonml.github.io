@@ -115,7 +115,7 @@ type payload = {. "name": string};
 sendQuery({"name": "Reason"});
 ```
 
-Notice the dot in the type definiton. That's is an object type notation, and has nothing to do with a record! Objects will be described in a later section.
+Notice the dot in the type definiton. That is an object type notation, and has nothing to do with a record! Objects will be described in a later section.
 
 #### Record Types Are Found By Field Name
 
