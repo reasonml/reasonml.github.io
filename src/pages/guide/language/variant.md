@@ -129,7 +129,7 @@ type account2 =
 ```
 #### Variants Must Have constructors
 
-If you come from an untyped language, you might be tempted to try `type foo = int | string`. This isn't possible in Reason; you'd have to give each branch a constructor: `type foo = Int(int) | String(int)`. Though usually, needing this might be an anti-pattern. The Design Decisions section below explains more.
+If you come from an untyped language, you might be tempted to try `type foo = int | string`. This isn't possible in Reason; you'd have to give each branch a constructor: `type foo = Int(int) | String(string)`. Though usually, needing this might be an anti-pattern. The Design Decisions section below explains more.
 
 #### Interop with JavaScript
 
