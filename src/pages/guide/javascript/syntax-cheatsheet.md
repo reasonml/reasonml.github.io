@@ -197,3 +197,4 @@ let res = {
 JavaScript                |   Reason
 --------------------------|--------------------------------
 `/* Comment */`  |  Same
+`// line comment`  |  Coming soon
