@@ -29,6 +29,10 @@ Keep them to a minimum.
 
 **Justification**: A compiled, statically typed language cannot model its dependencies easily by muddling along like in a dynamic language, especially when we're still piggy-backing on NPM/Yarn (to reduce learning overhead in the medium-term), both not made with Reason/BuckleScript in mind. Keeping dependencies simple & lean helps reduce possibility of conflicts (e.g. two diamond dependencies, or clashing interfaces).
 
+Model third-party code as `dependencies`, not `peerDependencies`.
+
+**Justification**: you should spiritually treat them as implementation details that might be swapped out one day.
+
 ### Documentation
 
 Have them. Spend more effort making them great (examples, pitfalls) and professional rather than _just_ fancy-looking. Do use examples, and avoid using names such as `foo` and `bar`. There's always more concrete names (it's an example, no need to be abstract/generalized just yet. The API docs will do this plentily). For blog posts, don't repeat the docs themselves, describe the _transition_ from old to new, and why (e.g. "it was a component, now it's a function, because ...").
