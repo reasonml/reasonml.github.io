@@ -69,7 +69,7 @@ The combination of tuple + `switch` is very powerful and concise, and **wipes ou
 
 ### Design Decisions
 
-Tuple's existence might seem odd for those coming from untyped languages. "Why not just use a list/array?"
+The existence of tuples might seem odd for those coming from untyped languages. "Why not just use a list/array?"
 
 A type system isn't all-powerful, nor should it be; some tasteful trade-offs need to be applied in order to keep the language simple, performant (both compilation and running speed) and easy to understand. Reason lists, for example, are more flexible in size; they can be concatenated, appended, sliced, etc. In return, they need to be homogenous (can only contain a single type of value per list), and random index access on them might not always be valid*. Tuple, on the other hand, through its constraint on size, is faster, gives the type system the leeway to exhaustively track all its items' types, and guarantees safe access. In general, you'll notice a few prominent, tasteful tradeoffs in a type system: record fields are fixed but can be heterogenous, while a map's fields are flexible but homogenous, etc.
 
