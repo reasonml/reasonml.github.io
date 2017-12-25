@@ -41,6 +41,10 @@ Use `#quit;` to close your REPL session.
 
 **Note that `rtop` currently doesn't work easily with packages and `external`s**. We recommend evaluating code inside our [Try](/try) playground.
 
+#### re:bench
+
+[re:bench](https://rebench.github.io) is an online benchmarking playground. It supports test cases written in Reason, OCaml and JavaScript, and allows sharing of benchmarks through unique URLs. It's compiled to JS using BuckleScript.
+
 #### ocamlc, ocamlopt, ocamlrun, rebuild
 
 `ocamlc` and `ocamlopt` are the bare ocaml compilers.

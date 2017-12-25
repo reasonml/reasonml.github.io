@@ -9,8 +9,8 @@ id: global-installation
 
 | Platform  | Install command
 |-----------|-------------------------------------------------------------------------------------------------
-| **OSX**     | `npm install -g https://github.com/reasonml/reason-cli/archive/3.0.0-bin-darwin.tar.gz`
-| **Linux**   | `npm install -g https://github.com/reasonml/reason-cli/archive/3.0.0-bin-linux.tar.gz`
+| **OSX**     | `npm install -g https://github.com/reasonml/reason-cli/archive/3.0.4-bin-darwin.tar.gz`
+| **Linux**   | `npm install -g https://github.com/reasonml/reason-cli/archive/3.0.4-bin-linux.tar.gz`
 | **Windows** | Please see https://github.com/reasonml/reasonml.github.io/issues/195
 
 Note: Bundles are currently large (approximately `100MB`), but `npm` will not provide progress while downloading.
@@ -24,7 +24,7 @@ Note: Bundles are currently large (approximately `100MB`), but `npm` will not pr
 ```
 opam update
 opam switch 4.02.3 # mandatory!
-opam install reason.3.0.0
+opam install reason.3.0.4
 opam install merlin.2.5.4
 ```
 

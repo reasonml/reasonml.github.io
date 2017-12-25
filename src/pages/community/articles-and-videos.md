@@ -14,7 +14,6 @@ Reason is just OCaml under the hood; We don't yet cover every concept on this do
 - [BuckleScript Documentation](https://bucklescript.github.io): the official documentations for our JavaScript backend.
 - [BuckleScript JS API docs](http://bucklescript.github.io/bucklescript/api/index.html)
 - [BuckleScript build system schema](https://bucklescript.github.io/docs/en/build-overview.html): comprehensive resource on `bsb`'s configuration.
-- [BuckleScript FFI Cheat Sheet](https://github.com/glennsl/bucklescript-ffi-cheatsheet)
 - [BuckleScript Cookbook](https://github.com/glennsl/bucklescript-cookbook)
 - [Unit Testing in ReasonML](https://jaketrent.com/post/unit-testing-in-reasonml/)
 
@@ -48,6 +47,7 @@ Reason is just OCaml under the hood; We don't yet cover every concept on this do
 
 The more dated they look, the richer the content =P
 
+- [How variants are represented in memory](https://discuss.ocaml.org/t/lwt-core-refactored-and-documented-to-be-contributor-friendly/161/28)
 - [Phantom Types in Reason](https://gist.github.com/busypeoples/3a28d039272ec3eb33ca2fc6b32dafc7): nice example for a hidden feature of Reason/OCaml
 - [How OCaml type checker works](http://okmij.org/ftp/ML/generalization.html?fref=gc)
 - [Detecting use-cases for GADTs in OCaml](http://mads-hartmann.com/ocaml/2015/01/05/gadt-ocaml.html)

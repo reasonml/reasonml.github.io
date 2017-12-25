@@ -29,6 +29,10 @@ Keep them to a minimum.
 
 **Justification**: A compiled, statically typed language cannot model its dependencies easily by muddling along like in a dynamic language, especially when we're still piggy-backing on NPM/Yarn (to reduce learning overhead in the medium-term), both not made with Reason/BuckleScript in mind. Keeping dependencies simple & lean helps reduce possibility of conflicts (e.g. two diamond dependencies, or clashing interfaces).
 
+Model third-party code as `dependencies`, not `peerDependencies`.
+
+**Justification**: you should spiritually treat them as implementation details that might be swapped out one day.
+
 ### Documentation
 
 Have them. Spend more effort making them great (examples, pitfalls) and professional rather than _just_ fancy-looking.

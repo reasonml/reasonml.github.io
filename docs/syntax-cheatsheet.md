@@ -191,3 +191,10 @@ let res = {
     </td>
   </tr>
 </table>
+
+### Comments
+
+JavaScript                |   Reason
+--------------------------|--------------------------------
+`/* Comment */`  |  Same
+`// line comment`  |  Coming soon
