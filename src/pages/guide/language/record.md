@@ -8,8 +8,8 @@ Records are like JavaScript objects but are
 - lighter
 - immutable by default
 - fixed in field names and types
-- veeery fast
-- veeeery nicely typed
+- exceptionally fast
+- extremely nicely typed
 
 ### Usage
 
