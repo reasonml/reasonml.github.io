@@ -18,6 +18,8 @@ external myCFunction : int => string = "theCFunction";
 
 (The above is a [BuckleScript](https://bucklescript.github.io/bucklescript/Manual.html)-specific external that binds to a JavaScript function of the same name.)
 
+**Note**: `external`s can only be at the top level, or inside a module definition. You can't declare them in e.g. a function body.
+
 ### Usage
 
 You'd use an external value/function as if it was a normal let binding.
