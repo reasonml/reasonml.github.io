@@ -41,7 +41,7 @@ Hehe...
 |};
 ```
 
-Analogically speaking, it's like JavaScript's backtick string interpolation, except without needing to escape special chars, and without built-in interpolation of variables. Though you can trivially restore the latter functionality, [as BuckleScript has done](http://bucklescript.github.io/bucklescript/Manual.html#_unicode_support_with_string_interpolation_since_1_7_0):
+Analogically speaking, it's like JavaScript's backtick string interpolation, except without needing to escape special chars, and without built-in interpolation of variables. Though you can trivially restore the latter functionality, [as BuckleScript has done](https://bucklescript.github.io/docs/en/common-data-types.html#interpolation):
 
 ```reason
 let world = {js|世界|js}; /* Supports Unicode characters */
@@ -52,7 +52,7 @@ BuckleScript's special pre-processor can then look for such `js` and `j` markers
 
 #### Usage
 
-[More string operations can be found in the standard library](/api/String.html). For JS compilation, see the familiar `Js.String` API bindings in the [BuckleScript API docs](http://bucklescript.github.io/bucklescript/api/Js_string.html). Since a Reason string maps to a JavaScript string, you can mix & match the string operations in both standard libraries.
+[More string operations can be found in the standard library](/api/String.html). For JS compilation, see the familiar `Js.String` API bindings in the [BuckleScript API docs](http://bucklescript.github.io/bucklescript/api/Js.String.html). Since a Reason string maps to a JavaScript string, you can mix & match the string operations in both standard libraries.
 
 #### Tips & Tricks
 
@@ -86,7 +86,7 @@ as opposed to
 let r = Str.regexp("hello \\([A-Za-z]+\\)");
 ```
 
-Though for JS compilation, you'd use [`[%bs.re]`](http://bucklescript.github.io/bucklescript/Manual.html#_regex_support) and [`Js.Re`](https://bucklescript.github.io/bucklescript/api/Js.Re.html) instead, since `Str` is not available.
+Though for JS compilation, you'd use [`[%bs.re]`](https://bucklescript.github.io/docs/en/regular-expression.html) and [`Js.Re`](https://bucklescript.github.io/bucklescript/api/Js.Re.html) instead, since `Str` is not available.
 
 Reason/OCaml's emphasis on simplicity over cleverness can be seen here through its straightforward native string implementation. An overly sophisticated string implementation can sometimes [backfire](http://mrale.ph/blog/2016/11/23/making-less-dart-faster.html).
 
