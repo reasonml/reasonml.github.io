@@ -75,15 +75,19 @@ class HomeSplash extends React.Component {
                 siteConfig.baseUrl +
                 "docs/" +
                 this.props.language +
-                "/installation.html"
+                "/try.html"
               }
             >
-              <translate>Get Started</translate>
+              <translate>Try Online</translate>
             </Button>
             <Button
-              href="https://jaredforsyth.com/2017/07/05/a-reason-react-tutorial"
-            >
-              Tutorial
+              href={
+                siteConfig.baseUrl +
+                "docs/" +
+                this.props.language +
+                "/quickstart-javascript.html"
+              }>
+              Quick Start
             </Button>
           </div>
         </div>

@@ -1,8 +1,13 @@
-/* White border around logo */
-.headerWrapper img.logo {
-  border: 2px solid #f6f4f4;
+.fixedHeaderContainer header > a > img {
+  /* spinning logo */
+  transition: 3s;
+  /* make sure it's a square. Spins at the center */
+  height: 34px;
+  width: 34px;
 }
-
+.fixedHeaderContainer header > a:hover > img {
+  transform: rotate(1080deg);
+}
 
 /* only show language icon */
 #languages-menu {
@@ -27,6 +32,24 @@
 #docsNav.container.docsNavContainer .toc::-webkit-scrollbar {
   display: none;
 }
+
+.spinner {
+  margin: auto;
+  position: absolute;
+  width: 800px;
+  left: 0px;
+  bottom: -400px;
+  animation:spin 750s linear infinite;
+  transition: opacity 2s;
+}
+
+@media (max-width: 1024px) {
+  .spinner {
+    opacity: 0;
+  }
+}
+
+@keyframes spin { 100% {transform:rotate(360deg); } }
 
 /* overrides. Most of these should be upstreamed into docusaurus */
 
@@ -57,10 +80,10 @@
   background-color: #f6f4f4 !important;
 }
 
-/* this is actually an image. forcing max width for retina displays */
 .projectTitle {
-  margin: auto;
-  max-width: 400px;
+  font-size: 50px;
+  font-weight: bold;
+  font-family: proxima-nova,sans-serif;
 }
 
 .quickStartAndExamples .blockImage {

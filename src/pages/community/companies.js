@@ -40,7 +40,7 @@ const companies = shuffle([
   },
   {
     title: 'Sentia',
-    url: 'https://sentia.ai',
+    url: 'https://www.sentia.ai',
     img: require('./logos/sentia.jpg'),
   },
   {
