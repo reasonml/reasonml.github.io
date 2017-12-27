@@ -8,8 +8,8 @@ Records are like JavaScript objects but are
 - lighter
 - immutable by default
 - fixed in field names and types
-- veeery fast
-- veeeery nicely typed
+- very fast
+- a bit more rigidly typed
 
 ### Usage
 
@@ -67,7 +67,7 @@ New records can be created from old records with the `...` spread operator. The 
 let meNextYear = {...me, age: me.age + 1};
 ```
 
-This update is very efficient! Try a few in our [playground](/try) to see how records are compiled.
+This update is very efficient! Try a few in our [playground](/try.html) to see how records are compiled.
 
 **Note**: spread cannot add new fields, as a record's shape is fixed by its type.
 
@@ -105,7 +105,7 @@ type car = {name: string, horsePower};
 
 #### Interop with JavaScript
 
-If you're working with JavaScript, the record syntax & operations should feel familiar, and you might be tempted to interop with JS by converting a JS object to a record, and vice-versa. This is fine, but we have an **even better way without conversion overhead**! See [here](https://bucklescript.github.io/docs/en/object.html#object-as-record) which talks about **[Reason objects](/guide/language/object)**. Here's an example:
+If you're working with JavaScript, the record syntax & operations should feel familiar, and you might be tempted to interop with JS by converting a JS object to a record, and vice-versa. This is fine, but we have an **even better way without conversion overhead**! See [here](https://bucklescript.github.io/docs/en/object.html#object-as-record) which talks about **[Reason objects](object.md)**. Here's an example:
 
 ```reason
 type payload = {. "name": string};

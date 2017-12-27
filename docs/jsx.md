@@ -76,7 +76,7 @@ For library authors wanting to take advantage of the JSX: the `[@JSX]` attribute
 
 This way, everyone gets to benefit the JSX syntax without needing to opt into a specific library using it, e.g. ReasonReact.
 
-JSX calls supports the features of [labeled functions](/guide/language/function#labeled-arguments): optional, explicitly passed optional and optional with default.
+JSX calls supports the features of [labeled functions](function.md#labeled-arguments): optional, explicitly passed optional and optional with default.
 
 ### Design Decisions
 

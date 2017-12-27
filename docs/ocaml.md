@@ -1,17 +1,17 @@
 ---
 title: Comparison to OCaml
-id: comparison-to-ocaml
+id: ocaml
 ---
 
 If you come from OCaml or are a newcomer reading a tutorial written on OCaml, this guide's for you! But don't forget that [reason-tools](https://github.com/reasonml/reason-tools) can convert between OCaml and Reason syntax on the fly.
 
-### Comments
+## Comments
 
 OCaml | Reason
 ------|-------
 `(* OCaml (*nest*) *)` | `/* Reason /*nest*/  */`
 
-### Operator Renaming
+## Operator Renaming
 
 Reason has all of OCaml's infix operators, but a couple of operators are expressed differently. In Reason, structural equality is written as `==`, and reference (physical) equality is written as `===`. In Reason, to achieve the corresponding inequality, simply swap the first character with a `!` character. (`!=` for structural inequality, and `!==` for reference inequality).
 
@@ -25,7 +25,7 @@ Inequality | OCaml | Reason
 Structural | `x <> y` | `x != y`
 Reference | `x != y` | `x !== y`
 
-### Local Scope
+## Local Scope
 
 Reason's lexical scoping is exactly the same as OCaml's, but let bindings syntactically resemble "block scope" which is more familiar to many developers. In Reason, they are created with `{}` braces, which may contain both `let` bindings and imperative commands, separated by `;`. All blocks evaluate to the last line and the semicolon on the last line is optional. `{}` braces are only needed if you have more than one item to chain together via `;`.
 
@@ -59,7 +59,7 @@ Reason's `{}` syntax removes many commonly reported pain points in OCaml's synta
 - Infamous imperative parsing [issues](https://github.com/ocaml/ocaml/pull/278) are gone.
 - Module bodies and local scope are unified.
 
-### Local Scope Vs. Module Body
+## Local Scope Vs. Module Body
 
 In Reason, everything that can go between the `{}` in [Local Scopes](#local-scope) and in module bodies. You can usually even cut/paste code between the two contexts. In OCaml, the syntaxes for the two contexts are very different. Local scope requires trailing `in`, but module bodies do not and some imperative statements must be assigned to `_` or `()`, or else use double `;;`.
 
@@ -129,7 +129,7 @@ let ten = 10 in (
   </tr>
 </table>
 
-### Tuple and Record
+## Tuple and Record
 
 In Reason, tuples always require parentheses.
 
@@ -170,14 +170,14 @@ let myFuncs = {
     </td>
 </table>
 
-### Lists
+## Lists
 
 OCaml | Reason
 ------|-------
 `let list = [1; 2; 3]` | `let list = [1, 2, 3]`
 `let list = hd :: tl` | `let list = [hd, ...tl];`
 
-### Type Definitions
+## Type Definitions
 
 OCaml Tuple | Reason Tuple
 ------|-------
@@ -194,7 +194,7 @@ OCaml Function | Reason Function
 `type func = int -> int` | `type func = int => int;`
 `let x: func = fun a -> a + 1` | `let x: func = (a) => a + 1;`
 
-### Functions
+## Functions
 
 OCaml | Reason
 ------|-------
@@ -202,7 +202,7 @@ OCaml | Reason
 `let x = fun a b -> e` | `let x = (a, b) => e`
 `let x = fun a -> fun b -> e` | `let x = (a, b) => e`
 
-#### Single argument match functions
+### Single argument match functions
 
 OCaml has a function definition (`function |`) which is considered to be
 equivalent of `function a -> match a with ...`. Reason has the same, but
@@ -255,7 +255,7 @@ fun | pat => e
   </tr>
 </table>
 
-#### Annotating Arguments
+### Annotating Arguments
 
 In both Reason and OCaml, arguments are annotated with types by (as with
 everything else), wrapping them in parenthesis after appending
@@ -292,9 +292,9 @@ let myFunc = (a: int, b: int): (int => int) => (x) => x + a + b;
 
 Because we're using `=>` for all functions everywhere in Reason, there's one case where we need to add extra parens around a return type that is itself a function type.
 
-#### Type Parameters
+### Type Parameters
 
-##### OCaml
+#### OCaml
 
 OCaml's type applications (think "generics"), are applied in reverse order.
 
@@ -329,7 +329,7 @@ type listOfTuplesOfStringAndInt = ((string, int) tuple) list
 let tuples: listOfTuplesOfStringAndInt = [("asdf", 3)]
 ```
 
-##### Reason
+#### Reason
 
 In summary, Reason unifies almost all of the syntax into simple "function application" style meaning that type parameters follow the same comma-separated pattern seen everywhere else in the syntax. This results in fewer syntactic patterns to learn.
 
@@ -358,7 +358,7 @@ let tuples: pairs = [(2, 3)];</pre>
   </tr>
 </table>
 
-### Tuples as Type Parameters
+## Tuples as Type Parameters
 
 Because OCaml uses parens and commas to represent multiple arguments to type
 constructors, it's confusing when one of the arguments to a type constructor is
@@ -382,9 +382,9 @@ OCaml | Reason
   (comma separated arguments).
 
 
-### Variants
+## Variants
 
-###### OCaml
+##### OCaml
 - OCaml already expects constructor argument types to be specified in tuple
   form, so it's confusing when a single constructor expects a single argument
   that *happens* to be a tuple type.
@@ -395,7 +395,7 @@ OCaml | Reason
   happens to be a tuple - so it looks *exactly* like you *are* supplying a
   tuple when you are not actually supplying a tuple.
 
-###### Reason
+##### Reason
 
 - Variant constructor types are expected to be listed as comma separated lists,
   using parenthesis to group precedence (as with **everything** else).
@@ -481,7 +481,7 @@ let res = (x) =>
   </tr>
 </table>
 
-### Pattern Matching
+## Pattern Matching
 
 <table>
   <thead><tr> <th scope="col"><p>OCaml</p></th><th scope="col"><p>Reason</p></th></tr></thead>
@@ -520,9 +520,9 @@ let res = match x with
 
 Reason's mandatory `{}` around `switch` cases prevents this issue.
 
-### Modules and Signatures
+## Modules and Signatures
 
-#### Definition
+### Definition
 
 <table>
   <thead><tr> <th scope="col"><p>OCaml</p></th><th scope="col"><p>Reason</p></th></tr></thead>
@@ -564,7 +564,7 @@ module MyModule = {
   </tr>
 </table>
 
-#### Functors Types
+### Functors Types
 
 <table>
   <thead><tr> <th scope="col"><p>OCaml</p></th><th scope="col"><p>Reason</p></th></tr></thead>
@@ -586,7 +586,7 @@ module type FType =
   </tr>
 </table>
 
-### Functors
+## Functors
 
 <table>
   <thead><tr> <th scope="col"><p>OCaml</p></th><th scope="col"><p>Reason</p></th></tr></thead>
@@ -621,7 +621,7 @@ module F (A: ASig) (B: BSig) = struct end</pre>
     </td>
     <td>
       <pre>
-module F (A: ASig, B: BSig) => {};</pre>
+module F = (A: ASig, B: BSig) => {};</pre>
     </td>
   </tr>
   <tr>
@@ -636,12 +636,7 @@ module Res = F(A, B);</pre>
   </tr>
 </table>
 
-**Note: There is currently a known inconsistency where functors do not
-conform to function application syntax when in type annotation position - see
-[the Reason repo's](https://github.com/facebook/reason) `formatTest/modules.re`.**
-
-
-### Various Improvements
+## Various Improvements
 
 OCaml doesn't require parens around sequences `(a;b;c;d)` or tuples `(x,y)`, so
 that ends up ruling out a bunch of other very convenient syntax rules.  Since
@@ -649,7 +644,7 @@ Reason always uses `{}` to enclose sequences or let bindings, and Reason
 always requires `()` around tuples, many other syntax constructs are expressed
 more intuitively, without requiring extra wrapping in parenthesis.
 
-#### Lambdas as record fields no longer need extra parens
+### Lambdas as record fields no longer need extra parens
 
 This is a welcomed improvement because the OCaml type errors the user would
 see were very confusing when it would believe the function's return value
@@ -676,7 +671,7 @@ let myFuncs = {
 </table>
 
 
-#### Lambdas as match results no longer need extra parens
+### Lambdas as match results no longer need extra parens
 
 <table>
   <thead><tr> <th scope="col"><p>OCaml</p></th><th scope="col"><p>Reason</p></th></tr></thead>
@@ -702,16 +697,16 @@ let x =
   </tr>
 </table>
 
-#### Lambdas and type annotations in tuples no longer require extra parens
+### Lambdas and type annotations in tuples no longer require extra parens
 
 OCaml | Reason
 ------|-------
 `let tuple = ((fun x -> x), 20)` | `let tuple = ((x) => x, 20);`
 `let tuple = (("hi": string), (20: int))` | `let tuple = ("hi": string, 20: int);`
 
-### Various Differences
+## Various Differences
 
-#### `as` precedence
+### `as` precedence
 
 With Reason, `as` has a higher precedence than `|` bar. This allows creating `as` aliases
 for entire rows in pattern matching.
@@ -738,7 +733,7 @@ let ppp =
   </tr>
 </table>
 
-#### Mutable Record Field Updates
+### Mutable Record Field Updates
 
 Because equalities and their negations have been made more consistent in Reason,
 the `=` operator is available for mutable field update.
@@ -747,7 +742,7 @@ OCaml | Reason
 ------|-------
 `myRec.field <- "next"` | `myRec.field = "next"`
 
-#### Prefix operators
+### Prefix operators
 
 Reason's `!` is used for boolean `not`. Deferencing uses the postfix `^`.
 
@@ -765,7 +760,7 @@ OCaml                                 | Reason
 `let x = !~(foo#bar)`   | `let x = !~foo#bar;`
 
 
-#### Comment Escaping
+### Comment Escaping
 Because Reason uses C-style comments, some obscure custom prefix/infix
 operators must be written differently.  The rules for prefix/infix operators
 are the same as in OCaml syntax, but with the following exceptions:
@@ -786,7 +781,7 @@ OCaml                                        | Reason
 `let (!=/*) q r = q + r`    |  `let ( !=/\* ) = (q, r) => q + r;`
 `let res = q (!=/*) r`       |  `let res = q(( !=/\* ), r);`
 
-#### Operator Renaming
+### Operator Renaming
 
 If Reason uses `==` to represent OCaml's `=`, and uses `===` to represent OCaml's `==`, then how would Reason represent OCaml's `===` symbol (if it were defined)? Reason provides a way! "Escape" the triple equals symbol!
 
@@ -794,9 +789,9 @@ Identifier | Meaning | OCaml | Reason
 -----------|---------|-------|-------
 `"==="` | Custom value | `x === y` | `x \=== y`
 
-#### REPL
+### REPL
 
-In Reason's repl [`rtop`](/guide/editor-tools/extra-goodies#repl) (a customized [`utop`](https://github.com/diml/utop)), each input is submitted via a single `;` semicolon. OCaml's repl requires two semicolons `;;`.
+In Reason's repl [`rtop`](extra-goodies.md#repl) (a customized [`utop`](https://github.com/diml/utop)), each input is submitted via a single `;` semicolon. OCaml's repl requires two semicolons `;;`.
 
 OCaml | Reason
 ------|-------

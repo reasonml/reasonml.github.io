@@ -13,7 +13,7 @@ You'll be seeing [BuckleScript](https://bucklescript.github.io) extensively thro
 
 ### Other Utilities
 
-The global installation you've done in the [past section](/guide/editor-tools/global-installation) comes with a few extra useful tools, described here.
+The global installation you've done in the [past section](global-installation.md) comes with a few extra useful tools, described here.
 
 #### Refmt
 
@@ -39,7 +39,7 @@ Reason comes with a REPL called `rtop` which, once invoked, lets you interactive
 
 Use `#quit;` to close your REPL session.
 
-**Note that `rtop` currently doesn't work easily with packages and `external`s**. We recommend evaluating code inside our [Try](/try) playground.
+**Note that `rtop` currently doesn't work easily with packages and `external`s**. We recommend evaluating code inside our [Try](/try.html) playground.
 
 #### re:bench
 

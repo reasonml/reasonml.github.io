@@ -36,11 +36,11 @@ let message =
 /* message is "Great!" */
 ```
 
-A variant has an extremely rich amount of type system assistance. For example, we'll give you a type error if you've forgotten to cover a case of your variant, or if two cases are redundant. Be sure to check out switch and pattern-matching in a [later section](/guide/language/pattern-matching)!
+A variant has an extremely rich amount of type system assistance. For example, we'll give you a type error if you've forgotten to cover a case of your variant, or if two cases are redundant. Be sure to check out switch and pattern-matching in a [later section](pattern-matching.md)!
 
 #### Variant Needs an Explicit Definition
 
-If the variant you're using is in a different file, bring it into scope like you'd do [for a record](/guide/language/record#record-needs-an-explicit-definition):
+If the variant you're using is in a different file, bring it into scope like you'd do [for a record](record.md#record-needs-an-explicit-definition):
 
 ```reason
 /* Zoo.re */
@@ -163,11 +163,11 @@ BuckleScript also provides [a few other ways](https://bucklescript.github.io/doc
 
 #### Variant Types Are Found By Field Name
 
-Please refer to this [record section](/guide/language/record#record-types-are-found-by-field-name). Variants are the same: a function can't accept an arbitrary constructor shared by two different variants. Again, such feature exists, it's called a polymorphic variant. We'll talk about this in the future =).
+Please refer to this [record section](record.md#record-types-are-found-by-field-name). Variants are the same: a function can't accept an arbitrary constructor shared by two different variants. Again, such feature exists, it's called a polymorphic variant. We'll talk about this in the future =).
 
 ### Design Decisions
 
-Variant in its many forms (polymorphic variant, open variant, GADT, etc.) are likely _the_ feature of a type system such as Reason's. The aforementioned `option` variant, for example, obliterates the need for nullable types, a major source of bugs in other languages. Philosophically speaking, a problem is composed of many possible branches/conditions. Mishandling these conditions is the majority of what we call bugs. **A type system doesn't magically eliminates bugs; it points out the unhandled conditions and asks you to cover them**\*. The ability to model "this or that" correctly is crucial.
+Variants, in their many forms (polymorphic variant, open variant, GADT, etc.), are likely _the_ feature of a type system such as Reason's. The aforementioned `option` variant, for example, obliterates the need for nullable types, a major source of bugs in other languages. Philosophically speaking, a problem is composed of many possible branches/conditions. Mishandling these conditions is the majority of what we call bugs. **A type system doesn't magically eliminate bugs; it points out the unhandled conditions and asks you to cover them**\*. The ability to model "this or that" correctly is crucial.
 
 For example, some folks wonder how the type system can safely eliminate badly formatted JSON data from propagating into their program. They don't, not by themselves! But if the parser returns the `option` type `None | Some(actualData)`, then you'd have to handle the `None` case explicitly in later call sites. That's all there is.
 

@@ -24,6 +24,6 @@ A boolean has the type `bool` and can be either `true` or `false`. Common operat
 
 ### Design Decisions
 
-_This section assumes knowledge with [variants](/guide/language/variant). If it's your first time reading this guide, feel free to come back to this later_!
+_This section assumes knowledge with [variants](variant.md). If it's your first time reading this guide, feel free to come back to this later_!
 
-Boolean is (only conceptually) a special case of a variant: `type bool = True | False`. Design-wise, this elegantly removes the need to hard-code a boolean type in the type system. The drawback is that, just like variants, the constructors are [compiled into a less readable but faster representation](/try/?reason=DYUwLgBAhhC8FgE4FcRA). This is why BuckleScript lacks information, at a later stages, to compile Reason true/false into JavaScript's true/false.
+Boolean is (only conceptually) a special case of a variant: `type bool = True | False`. Design-wise, this elegantly removes the need to hard-code a boolean type in the type system. The drawback is that, just like variants, the constructors are [compiled into a less readable but faster representation](/try.html?reason=DYUwLgBAhhC8FgE4FcRA). This is why BuckleScript lacks information, at a later stages, to compile Reason true/false into JavaScript's true/false.

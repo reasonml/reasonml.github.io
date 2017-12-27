@@ -58,7 +58,7 @@ while (testCondition) {
 
 ### Tips & Tricks
 
-There's no loop-breaking `break` keyword (nor early `return` from functions, for that matter) in Reason. In general, prefer `map`/`filter`/`reduce` over imperative loops. However, we can break out of a while loop easily through using a [mutable binding](/guide/language/mutation).
+There's no loop-breaking `break` keyword (nor early `return` from functions, for that matter) in Reason. In general, prefer `map`/`filter`/`reduce` over imperative loops. However, we can break out of a while loop easily through using a [mutable binding](mutation.md).
 
 ```reason
 Random.self_init();

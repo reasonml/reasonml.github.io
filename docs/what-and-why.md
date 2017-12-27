@@ -26,10 +26,10 @@ All these decisions made it so that, for common use-cases, the learning curve of
 - **A rock solid type system**. OCaml types have 100% coverage (every line of code), inference (types can be deduced and aren't required to be written manually), and soundness (once it compiles, the types are guaranteed to be accurate).
 - **An eye for simplicity & pragmatism**. We allow opt-in side-effect, mutation and object for familiarity & interop, while keeping the rest of the language pure, immutable and functional.
 - **A focus on performance & size**. Reason's build system, [`bsb`](https://bucklescript.github.io/docs/en/build-overview.html), finishes building in less than 100ms (incremental). Our produced output is also [tiny](https://twitter.com/bobzhang1988/status/827562467148623875).
-- **Incremental learning & codebase conversion**. Reap the benefits of a fully typed file from day one. If everything else fails, [paste some raw JavaScript snippets right in your Reason file](/guide/javascript/interop).
-- **Great ecosystem & tooling**. Use [your favorite editor](/guide/editor-tools/editors-plugins), [your favorite NPM package](/guide/javascript/libraries), and any of your [favorite](https://github.com/reasonml/reason-react) [existing](https://github.com/reasonml-community/bs-jest) [stack](https://webpack.js.org).
+- **Incremental learning & codebase conversion**. Reap the benefits of a fully typed file from day one. If everything else fails, [paste some raw JavaScript snippets right in your Reason file](interop.md).
+- **Great ecosystem & tooling**. Use [your favorite editor](editors-plugins.md), [your favorite NPM package](libraries.md), and any of your [favorite](https://github.com/reasonml/reason-react) [existing](https://github.com/reasonml-community/bs-jest) [stack](https://webpack.js.org).
 
-\* Don't believe us? Check our [JS -> Reason cheat sheet](/guide/javascript/syntax-cheatsheet) or try a few snippets of Reason in [the playground](/try/) and observe the output at the right!
+\* Don't believe us? Check our [JS -> Reason cheat sheet](syntax-cheatsheet.md) or try a few snippets of Reason in [the playground](/try.html) and observe the output at the right!
 
 ### Why OCaml As The Backing Language? Why Not [My Favorite Language]?
 
@@ -54,6 +54,6 @@ Make sure you talk to us in [Discord](https://discord.gg/reasonml) first, to cle
 - [Fable](http://fable.io/). Based on F#, which is closely related to OCaml.
 - [ClojureScript](https://clojurescript.org). Nothing in common with us on the surface, but prioritizes simplicity & great interop too.
 
-Hope that helps! Want to know more? Strike a conversation with any of us in the [community](/community/)!
+Hope that helps! Want to know more? Strike a conversation with any of us in the [community](community.md)!
 
 _Reason is a open source community project from Facebook_.

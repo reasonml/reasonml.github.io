@@ -5,7 +5,7 @@ id: type
 
 Types are the highlight of Reason! Here, you get a glimpse of why so many are excited about them.
 
-This section briefly introduces the types syntax so that you can power through the subsequent sections without getting confused. More advanced topics on types can be found in the [More On Types](/guide/language/more-on-type) section.
+This section briefly introduces the types syntax so that you can power through the subsequent sections without getting confused. More advanced topics on types can be found in the [More On Type](more-on-type.md) section.
 
 ### Annotations
 
@@ -33,7 +33,7 @@ let add = (x: int, y: int) : int => x + y;
 let drawCircle = (~radius as r: int) : unit => ...;
 ```
 
-Note: in the last line, `(~radius as r: int)` is a labeled argument. More on this [here](/guide/language/function).
+Note: in the last line, `(~radius as r: int)` is a labeled argument. More on this [here](function.md).
 
 ### Aliases
 

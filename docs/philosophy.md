@@ -1,6 +1,6 @@
 ---
-title: Meta
-id: meta
+title: Philosophy
+id: philosophy
 ---
 
 One of our proudest moments is when a few Reason users told us privately (paraphrased):

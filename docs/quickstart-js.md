@@ -4,11 +4,9 @@ id: quickstart-javascript
 ---
 
 ```sh
-npm install -g https://github.com/BuckleScript/bucklescript
+npm install -g bs-platform
 bsb -init my-first-app -theme basic-reason
 ```
-
-**Note** that this installs BuckleScript directly from source. Installing bs-platform from npm gives you a version whose reason template has a few bugs currently. This will be fixed soon.
 
 Then, run it as usual:
 
@@ -21,4 +19,4 @@ It runs in watch mode, so any changes to files will be picked up and compiled. T
 
 - Read more about how we compile to JavaScript through our partner project, [BuckleScript](https://bucklescript.github.io).
 - Alternatively, **to start a [ReasonReact](//reasonml.github.io/reason-react/docs/en/installation.html) app**, try `bsb -init my-react-app -theme react`.
-- Head over to [Editor Setup](/guide/editor-tools/global-installation) to get the Reason plugin for your favorite editor!
+- Head over to [Editor Setup](global-installation.md) to get the Reason plugin for your favorite editor!

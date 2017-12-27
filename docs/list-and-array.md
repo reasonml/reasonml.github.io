@@ -40,7 +40,7 @@ Updating an arbitrary item in the middle of a list is discouraged, since its per
 
 ##### Access
 
-`switch` (described in the [pattern matching section](/guide/language/pattern-matching)) is usually used to access list items:
+`switch` (described in the [pattern matching section](pattern-matching.md)) is usually used to access list items:
 
 ```reason
 let message =
@@ -54,13 +54,13 @@ To access an arbitrary list item, use `List.nth`.
 
 #### Tips & Tricks
 
-Feel free to allocate as many empty lists as you'd like. As explained in the [variant section for list](/guide/language/variant#list), an empty list is actually a parameter-less variant constructor under the hood, which compiles to a mere integer. No extra memory allocation needed.
+Feel free to allocate as many empty lists as you'd like. As explained in the [variant section for list](variant.md#honorable-mentions), an empty list is actually a parameter-less variant constructor under the hood, which compiles to a mere integer. No extra memory allocation needed.
 
-To understand how prepend can be immutable and `O(1)` at the same time, see the explanation of [list's underlying representation](/guide/language/variant#list).
+To understand how prepend can be immutable and `O(1)` at the same time, see also the previous link.
 
 #### Design Decisions
 
-In the future, we might provide an out-of-the-box list data structure that's immutable, resizable and features all-around fast operations, such as [Immutable-re](https://github.com/facebookincubator/immutable-re) (still work in progress!).
+In the future, we might provide an out-of-the-box list data structure that's immutable, resizable and features all-around fast operations.
 
 ### Array
 

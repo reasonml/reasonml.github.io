@@ -3,7 +3,7 @@ title: Pattern Matching!
 id: pattern-matching
 ---
 
-_Make sure you've read on [Variant](/guide/language/variant) first_.
+_Make sure you've read on [Variant](variant.md) first_.
 
 **We're finally here**! Pattern matching is one of _the_ best features of the language. It's like destructuring, but comes with even more help from the type system.
 
@@ -38,7 +38,7 @@ Here is an example of a value that is not matched:
 NoResult
 ```
 
-Isn't that great? While matching on the shape of your data, the type system warned of an unhandled case. This **conditional** aspect is what makes it pattern matching rather than plain destructuring. Most data structures with a "**if this then that**" aspect works with it:
+Isn't that great? While matching on the shape of your data, the type system warned of an unhandled case. This **conditional** aspect is what makes it pattern matching rather than plain destructuring. Most data structures with an "**if this then that**" aspect work with it:
 
 ```reason
 switch myList {
@@ -178,9 +178,9 @@ let optionBoolToJsBoolean = (opt) =>
   };
 ```
 
-Pretty darn hard to make a mistake in this code at this point! Whenever you'd like to use an if-else with many branches, prefer pattern matching instead. It's more concise and [performant](/guide/language/variant#design-decisions) too.
+Pretty darn hard to make a mistake in this code at this point! Whenever you'd like to use an if-else with many branches, prefer pattern matching instead. It's more concise and [performant](variant.md#design-decisions) too.
 
-See another example, with switch + tuple [here](/guide/language/tuple#tips--tricks).
+See another example, with switch + tuple [here](tuple.md#tips-tricks).
 
 ### Design Notes
 

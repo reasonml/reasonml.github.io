@@ -58,4 +58,4 @@ let otherFunction = (~person as {name} as thePerson) => {
 
 Destructuring can make your code much more concise without requiring you to name intermediate variables. Do use them! But don't abuse them and make your code overly nested & terse.
 
-If you're destructuring a record or a variant whose definition isn't in the current file, you need to explicitly annotate it. See [here](/guide/language/record#record-needs-an-explicit-definition) and [here](/guide/language/variant#variant-needs-an-explicit-definition).
+If you're destructuring a record or a variant whose definition isn't in the current file, you need to explicitly annotate it. See [here](record.md#record-needs-an-explicit-definition) and [here](variant.md#variant-needs-an-explicit-definition).
