@@ -38,7 +38,7 @@ Here is an example of a value that is not matched:
 NoResult
 ```
 
-Isn't that great? While matching on the shape of your data, the type system warned of an unhandled case. This **conditional** aspect is what makes it pattern matching rather than plain destructuring. Most data structures with a "**if this then that**" aspect works with it:
+Isn't that great? While matching on the shape of your data, the type system warned of an unhandled case. This **conditional** aspect is what makes it pattern matching rather than plain destructuring. Most data structures with an "**if this then that**" aspect work with it:
 
 ```reason
 switch myList {
