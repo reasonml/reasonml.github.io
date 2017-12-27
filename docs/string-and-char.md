@@ -3,7 +3,7 @@ title: String & Char
 id: string-and-char
 ---
 
-### String
+## String
 
 Reason strings are delimited using **double** quotes (single quotes are reserved for the character type below).
 
@@ -25,7 +25,7 @@ To concatenate strings, use `++`:
 let greetings = "Hello " ++ "world!";
 ```
 
-#### Quoted String
+### Quoted String
 
 There's a special syntax for string that allows
 
@@ -50,11 +50,11 @@ let helloWorld = {j|你好，$world|j}; /* Supports Unicode and interpolation va
 
 BuckleScript's special pre-processor can then look for such `js` and `j` markers around the string and transforms it into something else.
 
-#### Usage
+### Usage
 
 [More string operations can be found in the standard library](/api/String.html). For JS compilation, see the familiar `Js.String` API bindings in the [BuckleScript API docs](http://bucklescript.github.io/bucklescript/api/Js.String.html). Since a Reason string maps to a JavaScript string, you can mix & match the string operations in both standard libraries.
 
-#### Tips & Tricks
+### Tips & Tricks
 
 https://twitter.com/jusrin00/status/875238742621028355
 
@@ -72,7 +72,7 @@ Under native compilation, Reason strings compile to a simple representation whos
 
 Under JavaScript compilation, a Reason string maps to a JavaScript string and vice-versa, so no such above concern or analysis opportunities.
 
-#### Design Decisions
+### Design Decisions
 
 Quoted string's feature of not escaping special characters enables neat DSLs like [regular expression](/api/Str.html):
 
@@ -90,7 +90,7 @@ Though for JS compilation, you'd use [`[%bs.re]`](https://bucklescript.github.io
 
 Reason/OCaml's emphasis on simplicity over cleverness can be seen here through its straightforward native string implementation. An overly sophisticated string implementation can sometimes [backfire](http://mrale.ph/blog/2016/11/23/making-less-dart-faster.html).
 
-### Char
+## Char
 
 Reason has a type for a string with a single letter:
 
@@ -100,7 +100,7 @@ let firstLetterOfAlphabet = 'a';
 
 **Note**: Char doesn't support Unicode or UTF-8.
 
-#### Tips & Tricks
+### Tips & Tricks
 
 A character [compiles to an integer ranging from 0 to 255](/try.html?reason=DYUwLgBAhhC8EHIoKA), for extra speed. You can also pattern-match (covered later) on it:
 

@@ -12,7 +12,7 @@ let newScore = 10 + score;
 ...
 ```
 
-### Block Scope
+## Block Scope
 
 Bindings can be scoped through `{}`.
 
@@ -24,7 +24,7 @@ if (displayGreeting) {
 /* `message` not accessible here! */
 ```
 
-### Bindings Are Immutable
+## Bindings Are Immutable
 
 "Immutable" as in, "doesn't change". Once a binding refers to a value, it cannot refer to anything else (unless it
 explicitly contains a mutable value, discussed later). However, you may create a new binding of the same name which *shadows* the previous binding; from that point onward, the binding will refer to the newly assigned value.
@@ -36,7 +36,7 @@ let message = "bye";
 print_endline(message); /* Prints "bye" */
 ```
 
-### Tips & Tricks
+## Tips & Tricks
 
 Since bindings are scoped through `{}`, you can create an anonymous scope around them:
 
@@ -51,7 +51,7 @@ let message = {
 
 This prevents misuse of the bindings after these lines.
 
-### Design Decisions
+## Design Decisions
 
 Reason is backed by OCaml under the hood. A let binding, in OCaml syntax, looks like this:
 

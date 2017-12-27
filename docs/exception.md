@@ -5,7 +5,7 @@ id: exception
 
 Exceptions are just a special kind of variant, "thrown" in **exceptional** cases (don't abuse them!).
 
-### Usage
+## Usage
 
 ```reason
 let getItem = (theList) =>
@@ -40,11 +40,11 @@ exception InputClosed(string);
 raise(InputClosed("the stream has closed!"));
 ```
 
-### Tips & Tricks
+## Tips & Tricks
 
 When you have ordinary variants, you often don't **need** exceptions. For example, instead of throwing when `item` can't be found in a collection, try to return an `option(item)` (`None` in this case) instead.
 
-### Design Decisions
+## Design Decisions
 
 The above tip seems to contradict what's happening in the OCaml standard library; prominent functions in modules such as [List](/api/List.html) and [String](/api/String.html) seems to throw exceptions overly often. This is partially a historical sediment, and partially out of extreme care for performance. Native OCaml/Reason is incredibly performant; exception throwing was designed to be very cheap, cheaper than allocating and returning e.g. an `option`. This is unfortunately not the case for JavaScript.
 

@@ -7,7 +7,7 @@ Types are the highlight of Reason! Here, you get a glimpse of why so many are ex
 
 This section briefly introduces the types syntax so that you can power through the subsequent sections without getting confused. More advanced topics on types can be found in the [More On Type](more-on-type.md) section.
 
-### Annotations
+## Annotations
 
 This let-binding doesn't contain any written type:
 
@@ -35,7 +35,7 @@ let drawCircle = (~radius as r: int) : unit => ...;
 
 Note: in the last line, `(~radius as r: int)` is a labeled argument. More on this [here](function.md).
 
-### Aliases
+## Aliases
 
 You can refer to a type by a different name. They'll be equivalent:
 
@@ -44,7 +44,7 @@ type scoreType = int;
 let x: scoreType = 10;
 ```
 
-### Design Decisions
+## Design Decisions
 
 Reason is backed by OCaml, whose type system has received decades of engineering. Here are a few highlights:
 

@@ -14,15 +14,15 @@ A boolean has the type `bool` and can be either `true` or `false`. Common operat
 - `!=`: physical unequal
 - `!==`: referential unequal
 
-### Usage
+## Usage
 
 **Note: BuckleScript provides bindings to the JavaScript** `true` and `false`, which [aren't the same as the Reason/OCaml `true` and `false`](https://bucklescript.github.io/docs/en/boolean.html)! Don't use them interchangeably without proper conversion (`Js.to_bool` and `Js.Boolean.to_js_boolean`).
 
-### Tips & Tricks
+## Tips & Tricks
 
 **Use physical equal tastefully**. It's convenient, but might accidentally make you compare two deeply nested data structures and incur a big performance hit. It's also not always clear what counts as "equal". For example, is a piece of data `foo` equal to a lazy `foo`? Ideally, it'd have been pluggable. Future changes are coming to make this possible and reliable; if you're interested, check [modular implicit](https://www.reddit.com/r/ocaml/comments/2vyk10/modular_implicits/).
 
-### Design Decisions
+## Design Decisions
 
 _This section assumes knowledge with [variants](variant.md). If it's your first time reading this guide, feel free to come back to this later_!
 

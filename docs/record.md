@@ -11,7 +11,7 @@ Records are like JavaScript objects but are
 - very fast
 - a bit more rigidly typed
 
-### Usage
+## Usage
 
 Type (mandatory):
 
@@ -37,7 +37,7 @@ Access (the familiar dot notation):
 let name = me.name;
 ```
 
-#### Record Needs an Explicit Definition
+### Record Needs an Explicit Definition
 
 If you only write `{age: 5, name: "Baby Reason"}` without an explicit declaration somewhere above, the type system will give you an error. If the type definition resides in another file, you need to explicitly indicate which file it is:
 
@@ -59,7 +59,7 @@ let me = {School.age: 20, name: "Big Reason"};
 
 Either of the above 3 says "this record's definition is found in the School file". The first one, the regular type annotation, is preferred.
 
-#### Immutable Update
+### Immutable Update
 
 New records can be created from old records with the `...` spread operator. The original record isn't mutated.
 
@@ -71,7 +71,7 @@ This update is very efficient! Try a few in our [playground](/try.html) to see h
 
 **Note**: spread cannot add new fields, as a record's shape is fixed by its type.
 
-#### Mutable Update
+### Mutable Update
 
 Record fields can optionally be mutable. This allows you to update those fields in-place with the `=` operator.
 
@@ -84,7 +84,7 @@ let baby = {name: "Baby Reason", age: 5};
 baby.age = baby.age + 1; /* alter `baby`. Happy birthday! */
 ```
 
-### Syntax shorthand
+## Syntax shorthand
 
 To reduce redundancy, we provide **punning** for a record's types and values. Punning refers to the syntax shorthand you can use when the name of a field matches the name of its value/type:
 
@@ -101,9 +101,9 @@ type car = {name: string, horsePower};
 
 **Note that there's no punning for a single record field**! `{foo}` doesn't do what you expect (it's a block that returns the value `foo`).
 
-### Tips & Tricks
+## Tips & Tricks
 
-#### Interop with JavaScript
+### Interop with JavaScript
 
 If you're working with JavaScript, the record syntax & operations should feel familiar, and you might be tempted to interop with JS by converting a JS object to a record, and vice-versa. This is fine, but we have an **even better way without conversion overhead**! See [here](https://bucklescript.github.io/docs/en/object.html#object-as-record) which talks about **[Reason objects](object.md)**. Here's an example:
 
@@ -117,7 +117,7 @@ sendQuery({"name": "Reason"});
 
 Notice the dot in the type definiton. That is an object type notation, and has nothing to do with a record! Objects will be described in a later section.
 
-#### Record Types Are Found By Field Name
+### Record Types Are Found By Field Name
 
 With records, you **cannot** say "I'd like this function to take any record type, as long as they have the field `age`". The following _works_, but not as expected:
 
@@ -140,7 +140,7 @@ getAge(me);
 
 The type system will complain that `me` is a `person`, and that `getAge` only works on `monster`. If you need such capability, use Reason objects, mentioned in the previous section.
 
-### Design Decisions
+## Design Decisions
 
 After reading the constraints in the previous sections, and if you're coming from a dynamic language background, you might be wondering why one would bother with record in the first place instead of straight using object, since the former needs explicit typing and doesn't allow different records with the same field name to be passed to the same function, etc.
 

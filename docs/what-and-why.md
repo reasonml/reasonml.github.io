@@ -3,7 +3,7 @@ title: What & Why
 id: what-and-why
 ---
 
-### What Is Reason?
+## What Is Reason?
 
 Reason is not a new language; it's a new syntax and toolchain powered by the battle-tested language, [OCaml](http://ocaml.org). Reason gives OCaml a familiar syntax geared toward JavaScript programmers, and caters to the existing NPM/Yarn workflow folks already know.
 
@@ -11,7 +11,7 @@ In that regard, Reason can almost be considered as a solidly statically typed, f
 
 Reason compiles to JavaScript thanks to our partner project, [BuckleScript](https://bucklescript.github.io), which compiles OCaml/Reason into readable JavaScript with smooth interop. Reason also compiles to fast, barebone assembly, thanks to OCaml itself.
 
-### Why Reason?
+## Why Reason?
 
 > "Why bother learning an **entire** new language?"
 
@@ -31,7 +31,7 @@ All these decisions made it so that, for common use-cases, the learning curve of
 
 \* Don't believe us? Check our [JS -> Reason cheat sheet](syntax-cheatsheet.md) or try a few snippets of Reason in [the playground](/try.html) and observe the output at the right!
 
-### Why OCaml As The Backing Language? Why Not [My Favorite Language]?
+## Why OCaml As The Backing Language? Why Not [My Favorite Language]?
 
 First of all, please understand that no matter which language we choose, we'd get this question from most of you! =)
 
@@ -43,7 +43,7 @@ Many backing languages would satisfy the previous section's points; the points b
 - **The language for writing React**. Reason's [creator](https://twitter.com/jordwalke) also created [ReactJS](https://facebook.github.io/react/), whose first prototypes were written in SML, a distant cousin of OCaml. We've transcribed ReactML into ReactJS for wide adoption. A few years later, we're now iterating on the future of ReactJS through [ReasonReact](//reasonml.github.io/reason-react/).
 - **Nice, growing community**. I mean, we're really nice. I'm Canadian. We have members all over the world. If everything fails, ask in the Discord channel and [at least a few of our members in your timezone will answer](https://twitter.com/ken_wheeler/status/894298052705615872).
 
-### Don't Like Reason?
+## Don't Like Reason?
 
 Make sure you talk to us in [Discord](https://discord.gg/reasonml) first, to clear any misunderstanding/misconception! But if you _still_ don't like Reason, here are some alternatives:
 

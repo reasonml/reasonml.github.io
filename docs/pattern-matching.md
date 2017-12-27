@@ -7,7 +7,7 @@ _Make sure you've read on [Variant](variant.md) first_.
 
 **We're finally here**! Pattern matching is one of _the_ best features of the language. It's like destructuring, but comes with even more help from the type system.
 
-### Usage
+## Usage
 
 Consider a variant:
 
@@ -90,7 +90,7 @@ switch greeting {
 
 Instead, it'd assume you're matching on any string, and binding that to the name `myMessage` in that `switch` case, which is not what you wanted.
 
-#### When clauses
+### When clauses
 
 When you really need to use arbitrary logic with an otherwise clean pattern match, you can slip in some `when` clauses, which are basically `if` sugar:
 
@@ -104,7 +104,7 @@ let message =
   };
 ```
 
-#### Match on Exceptions
+### Match on Exceptions
 
 If the function throws an exceptions (covered later), you can also match on _that_, in addition to the function's normally returned values.
 
@@ -115,7 +115,7 @@ switch (List.find((i) => i === theItem, myItems)) {
 };
 ```
 
-### Tips & Tricks
+## Tips & Tricks
 
 **Flatten your pattern-match whenever you can**. This is a real bug remover. Example below.
 
@@ -182,7 +182,7 @@ Pretty darn hard to make a mistake in this code at this point! Whenever you'd li
 
 See another example, with switch + tuple [here](tuple.md#tips-tricks).
 
-### Design Notes
+## Design Notes
 
 The notorious [fizzbuzz problem](https://en.wikipedia.org/wiki/Fizz_buzz#Programming_interviews) strangely trips some people up, partially due its nature of paralyzing the programmer who hopes to simplify/unify the few condition branches in search of elegance where there's none. While fizzbuzz is slightly too dynamic to be solved in `when`-less switches, hopefully you can see that usually, pattern-matching's visual conciseness allows us to overcome decision paralysis, while keeping all the benefits (and more, as you've seen) of a bunch of brute-forced `if-else`s. There's really nothing wrong with explicitly listing out all the possibilities; Pattern matching corresponds to **case analysis** in math, a valid problem-solving technique that proves to be extremely convenient.
 

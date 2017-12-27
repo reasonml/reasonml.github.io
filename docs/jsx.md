@@ -9,7 +9,7 @@ Reason supports the JSX syntax, with some slight differences compared to the one
 
 **Note** for ReasonReact readers: this isn't what ReasonReact turns JSX into, in the end. See Usage section for more info.
 
-### Capitalized Tag
+## Capitalized Tag
 
 ```reason
 <MyComponent foo={bar} />
@@ -21,7 +21,7 @@ becomes
 ([@JSX] MyComponent.make(~foo=bar, ~children=[], ()));
 ```
 
-### Uncapitalized Tag
+## Uncapitalized Tag
 
 ```reason
 <div foo={bar}> child1 child2 </div>;
@@ -33,7 +33,7 @@ becomes
 ([@JSX] div(~foo=bar, ~children=[child1, child2], ()));
 ```
 
-### Usage
+## Usage
 
 See [ReasonReact](//reasonml.github.io/reason-react/docs/jsx) for an example application of JSX, which transforms the above calls into a ReasonReact-specific call.
 
@@ -50,13 +50,13 @@ Here's a JSX tag that shows most of the features.
 </MyComponent>
 ```
 
-### Departures From JS JSX
+## Departures From JS JSX
 
 - Attributes and children don't mandate `{}`, but we show them anyway for ease of learning. Once you `refmt` your file, some of them go away and some turn into parentheses.
 - There is no support for JSX spread attributes.
 - Punning!
 
-#### Punning
+### Punning
 
 "Punning" refers to the syntax shorthand for when a label and a value are the same. For example, in JavaScript, instead of doing `return {name: name}`, you can do `return {name}`.
 
@@ -70,7 +70,7 @@ Consequently, a Reason JSX component can cram in a few more props before reachin
 
 **Note** that this is a departure from ReactJS JSX, which does **not** have punning. ReactJS' `<input checked />` desugars to `<input checked=true />`, in order to conform to DOM's idioms and for backward compatibility.
 
-### Tip & Tricks
+## Tip & Tricks
 
 For library authors wanting to take advantage of the JSX: the `[@JSX]` attribute above is a hook for potential ppx macros to spot a function wanting to format as JSX. Once you spot the function, you can turn it into any other expression.
 
@@ -78,7 +78,7 @@ This way, everyone gets to benefit the JSX syntax without needing to opt into a 
 
 JSX calls supports the features of [labeled functions](function.md#labeled-arguments): optional, explicitly passed optional and optional with default.
 
-### Design Decisions
+## Design Decisions
 
 The way we designed this JSX is related to how we'd like to help the language evolve. See the section "What's the point?" in [this blog post](https://medium.com/@chenglou/cool-things-reason-formatter-does-9e1f79e25a82).
 

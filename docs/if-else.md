@@ -25,11 +25,11 @@ We also have ternary sugar.
 let message = isMorning ? "Good morning!" : "Hello!";
 ```
 
-### Usage
+## Usage
 
 **`if-else` and ternary are much less used** in Reason than in other languages; [Pattern-matching](pattern-matching.md) kills a whole category of code that previously required conditionals. Prefer `if-else` if you only have, say, 2 branches.
 
-### Design Decisions
+## Design Decisions
 
 Reason ternary is just a sugar for the `bool` variant and a switch:
 

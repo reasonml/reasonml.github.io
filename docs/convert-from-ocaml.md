@@ -5,14 +5,16 @@ id: convert-from-ocaml
 
 Since Reason is just another syntax for OCaml, converting an OCaml project over is straightforward and doesn't require semantic changes. However, there are a few build setup and miscellaneous changes required.
 
-#### OCamlBuild -> Rebuild
+## OCamlBuild -> Rebuild
+
 Reason comes with a drop in replacement for `ocamlbuild` called `rebuild`, that
 will automatically build any Reason file along with your OCaml files, with
 no additional configuration. This allows you to add Reason files to your existing
 OCaml project bit by bit. Wherever your script refers to `ocamlbuild`, just replace
 it with `rebuild`.
 
-#### Makefile
+## Makefile
+
 If your build system executes explicit build commands, then the easiest way to
 use Reason with `ocamlopt/ocamlc` is by adding the following flags to each
 compilation step:
@@ -31,7 +33,7 @@ need the `-intf/-impl/-intf-suffix` flags:
 <**/*.{re,.rei}>: package(reason), syntax(utf8)
 ```
 
-#### Constructor Syntax Fix
+## Constructor Syntax Fix
 
 The converted Reason code may attach `[@implicit_arity]` to variant constructors, like so: `C 1 2 [@implicit_arity]`.
 This is due to the fact that OCaml has the ambiguous syntax where a multi-arguments

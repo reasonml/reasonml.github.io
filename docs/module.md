@@ -3,12 +3,12 @@ title: Module
 id: module
 ---
 
-### Basics
+## Basics
 
 **Modules are like mini files**! They can contain type definitions, `let`
 bindings, nested modules, etc.
 
-#### Creation
+### Creation
 
 To create a module, use the `module` keyword. The module name must start with a
 **capital letter**. Whatever you could place in a `.re` file, you may place
@@ -47,7 +47,7 @@ module MyModule = {
 let message = MyModule.NestedModule.message;
 ```
 
-#### `open`ing a module
+### `open`ing a module
 
 Constantly referring to a value/type in a module can be tedious. We can open a
 module's definition and refer to its contents without prepending them with the
@@ -74,7 +74,7 @@ let anotherPerson: profession = Teacher;
 printProfession(anotherPerson);
 ```
 
-#### Extending modules
+### Extending modules
 
 Using `include` in a module statically "spreads" a module's content into
 a new one, thus often fulfill the role of "inheritance" or "mixin".
@@ -100,7 +100,7 @@ allows refering to items (values, types, constructors, etc.) in the `open`ed
 module's scope in an "unqualified" way (aka, `foo` instead of the qualified
 `MyModule.foo`).
 
-#### Every `.re` file is a module
+### Every `.re` file is a module
 
 An OCaml/Reason file maps to a module; this unlocks some interesting
 expressivity that'd previously require code generation in other languages. The
@@ -137,7 +137,7 @@ A module's type is called a "signature", and can be written explicitly. If a
 module is like a `.re` (implementation) file, then a module's signature is like
 a `.rei` (interface) file.
 
-#### Creation
+### Creation
 
 To create a signature, use the `module type` keyword. The signature name must start with a
 **capital letter**. Whatever you could place in a `.rei` file, you may place
@@ -199,7 +199,7 @@ It's also useful to hide the underlying type as an implementation detail others
 can't rely on. If you ask what the type of `Company.profession` is, instead of
 exposing the variant, it'll only tell you "it's `Company.profession`".
 
-#### Extending module signatures
+### Extending module signatures
 
 Like modules themselves, module signatures can also be extended through `include module type of Foo`:
 
@@ -216,7 +216,7 @@ module type ActualComponent = {
 };
 ```
 
-#### Every `.rei` file is a signature
+### Every `.rei` file is a signature
 
 Similar to how a `react.re` file implicitly defines a module `React`, a file
 `react.rei` implicitly defines a signature for `React`. If `react.rei` isn't
@@ -292,7 +292,7 @@ module IntPair = {
 module SetOfIntPairs = MakeSet(IntPair);
 ```
 
-#### Module functions types
+### Module functions types
 
 Like with module types, functor types also act to constrain and hide what we may
 assume about functors. The syntax for functor types are consistent with those

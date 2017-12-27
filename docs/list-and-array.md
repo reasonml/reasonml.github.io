@@ -3,7 +3,7 @@ title: List & Array
 id: list-and-array
 ---
 
-### List
+## List
 
 Lists are:
 
@@ -17,13 +17,13 @@ let myList = [1, 2, 3];
 
 Reason lists are simple, singly linked list.
 
-#### Usage
+### Usage
 
 You'd use list for its resizability, its fast prepend (adding at the head), and its fast split, all of which are immutable yet efficient!
 
 The standard lib provides a [List module](/api/List.html) (and its counterpart with labeled arguments, `ListLabels`).
 
-##### Immutable Prepend
+#### Immutable Prepend
 
 Use the spread syntax, which is just `List.cons`:
 
@@ -38,7 +38,7 @@ let anotherList = [0, ...myList];
 
 Updating an arbitrary item in the middle of a list is discouraged, since its performance and allocation overhead would be linear (`O(n)`).
 
-##### Access
+#### Access
 
 `switch` (described in the [pattern matching section](pattern-matching.md)) is usually used to access list items:
 
@@ -52,17 +52,17 @@ let message =
 
 To access an arbitrary list item, use `List.nth`.
 
-#### Tips & Tricks
+### Tips & Tricks
 
 Feel free to allocate as many empty lists as you'd like. As explained in the [variant section for list](variant.md#honorable-mentions), an empty list is actually a parameter-less variant constructor under the hood, which compiles to a mere integer. No extra memory allocation needed.
 
 To understand how prepend can be immutable and `O(1)` at the same time, see also the previous link.
 
-#### Design Decisions
+### Design Decisions
 
 In the future, we might provide an out-of-the-box list data structure that's immutable, resizable and features all-around fast operations.
 
-### Array
+## Array
 
 Arrays are like lists, except they are:
 
@@ -76,7 +76,7 @@ You'd surround them with `[|` and `|]`.
 let myArray = [|"hello", "world", "how are you"|];
 ```
 
-#### Usage
+### Usage
 
 Standard library [Array](/api/Array.html) and [ArrayLabel](/api/ArrayLabels.html) module. For JS compilation, you also have the familiar [Js.Array](https://bucklescript.github.io/bucklescript/api/Js.Array.html) bindings API.
 
@@ -94,6 +94,6 @@ myArray[0] = "hey";
 
 The above array access/update is just syntax sugar for `Array.get`/`Array.set`.
 
-#### Tips & Tricks
+### Tips & Tricks
 
 If you're compiling to JavaScript, know that Reason arrays map straightforwardly to JavaScript arrays, and vice-versa. Thus, even though arrays are fix-sized on native, you can still use the `Js.Array` API to resize them. This is fine.

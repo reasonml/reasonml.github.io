@@ -26,7 +26,7 @@ let my3dCoordinates: coord3d = (20.0, 30.5, 100.0);
 
 **Note**: there's no tuple of size 1. You'd just use the value itself.
 
-### Usage
+## Usage
 
 The standard library provides `fst` and `snd` ([here](/api/Pervasives.html), under "Pair operations"), convenience functions that allow you to access the first and second element of a 2-tuple. Generally, you'd access n-tuple members through destructuring (described later in the sidebar):
 
@@ -38,7 +38,7 @@ The `_` means you're ignoring the indicated members of the tuple.
 
 Tuples aren't meant to be updated mutatively; you'd create new ones by destructuring the old ones.
 
-### Tips & Tricks
+## Tips & Tricks
 
 You'd use tuples in handy situations that pass around multiple values without too much ceremony. For example, to return many values:
 
@@ -67,7 +67,7 @@ A tuple type might also be called a "product type", and `(string, int)` is writt
 
 The combination of tuple + `switch` is very powerful and concise, and **wipes out an entire category of bugs**. Together, they cleanly list out all the possible combinations of values. A tuple of type `(bool, bool)` indeed has `2 * 2 = 4` possibilities, and the type system asks you to cover all 4. This lends itself well to code refactors; instead of informally adding a few if-else on arbitrary values here and there, you can directly pinpoint the exact `switch` branch you need to alter, no more and no less.
 
-### Design Decisions
+## Design Decisions
 
 The existence of tuples might seem odd for those coming from untyped languages. "Why not just use a list/array?"
 

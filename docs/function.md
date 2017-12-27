@@ -35,7 +35,7 @@ let greetMore = (name) => {
 };
 ```
 
-### No Argument
+## No Argument
 
 A function always takes an argument; but sometimes, we'd use it for e.g. side-effects, and don't have anything to pass to it. In other languages, we'd conceptually pass "no argument". In Reason, every function takes an argument; here we'd conventionally pass it the value `()`, called "unit".
 
@@ -52,7 +52,7 @@ logSomething();
 
 `()` is a totally normal value, the single possible value in `unit`. Reason gave it a special syntax out of convenience.
 
-### Labeled Arguments
+## Labeled Arguments
 
 Multi-arguments functions, especially those whose arguments are of the same type, can be confusing to call.
 
@@ -100,7 +100,7 @@ Here's the syntax for typing the arguments:
 let drawCircle = (~radius as r: int, ~color as c: string) => ...;
 ```
 
-#### Currying
+### Currying
 
 Reason functions can automatically be **partially** called:
 
@@ -123,7 +123,7 @@ OCaml optimizes this to [avoid the unnecessary function allocation](/try/?reason
 - Currying for free (every function takes a single argument, actually!)
 - No performance cost
 
-### Optional Labeled Arguments
+## Optional Labeled Arguments
 
 Labeled function arguments can be made optional during declaration. You can then omit them when calling the function.
 
@@ -155,7 +155,7 @@ let curriedFunction = drawCircle(~color);
 let actualResultWithoutProvidingRadius = drawCircle(~color, ());
 ```
 
-#### Explicitly Passed Optional
+### Explicitly Passed Optional
 
 Sometimes, you might want to forward a value to a function without knowing whether the value is `None` or `Some a`. Naively, you'd do:
 
@@ -175,7 +175,7 @@ let result = drawCircle(~color, ~radius=?payloadRadius, ());
 
 This means "I understand `radius` is optional, and that when I pass it a value it needs to be an `int`, but I don't know whether the value I'm passing is `None` or `Some(val)`, so I'll pass you the whole `option` wrapper".
 
-#### Optional with Default Value
+### Optional with Default Value
 
 Optional labeled arguments can also be provided a default value. In this case, they aren't wrapped in an `option` type.
 
@@ -186,7 +186,7 @@ let drawCircle = (~radius=1, ~color, ()) => {
 };
 ```
 
-#### Recursive Functions
+### Recursive Functions
 
 By default, a value can't see a binding that points to it, but including the `rec` keyword in a `let` binding makes this possible. This allows functions to see and call themselves, giving us the power of recursion.
 
@@ -194,7 +194,7 @@ By default, a value can't see a binding that points to it, but including the `re
 let rec neverTerminate = () => neverTerminate();
 ```
 
-#### Mutually Recursive Functions
+### Mutually Recursive Functions
 
 Mutually recursive functions start like a single recursive function using the
 `rec` keyword, and then are chained together with `and`:
@@ -206,11 +206,11 @@ and callFirst = () => callSecond();
 
 **Note** that there's no semicolon ending the first line and no `let` on the second line.
 
-### Tips & Tricks
+## Tips & Tricks
 
 Cheat sheet for the function syntaxes:
 
-#### Declaration
+### Declaration
 
 ```reason
 /* anonymous function. Listed for completeness only */
@@ -236,7 +236,7 @@ let add = (~first as x=?, ~second as y=?) => switch x {...};
 let add = (~first=?, ~second=?) => switch first {...};
 ```
 
-##### With Type Annotation
+#### With Type Annotation
 
 ```reason
 /* anonymous function */
@@ -264,7 +264,7 @@ let add = (~first as x: option(int)=?, ~second as y: option(int)=?) : int => swi
 let add = (~first: option(int)=?, ~second: option(int)=?) : int => switch first {...};
 ```
 
-#### Application
+### Application
 
 ```reason
 /* anonymous application. Listed for completeness only */
@@ -286,7 +286,7 @@ add(~first=?Some(1), ~second=?Some(2));
 add(~first?, ~second?);
 ```
 
-##### With Type Annotation
+#### With Type Annotation
 
 ```reason
 /* anonymous application */
@@ -306,7 +306,7 @@ add(~first=?Some(1): option(int), ~second=?Some(2): option(int));
 add(~first: option(int)?, ~second: option(int)?);
 ```
 
-#### Standalone Type Signature
+### Standalone Type Signature
 
 ```reason
 /* first arg type, second arg type, return type */
@@ -321,7 +321,7 @@ type foo = (~first: int, ~second: int) => int;
 type foo = (~first: int=?, ~second: int=?) => int;
 ```
 
-##### In Interface Files
+#### In Interface Files
 
 To annotate a function from the implementation file (`.re`):
 

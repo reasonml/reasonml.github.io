@@ -13,7 +13,7 @@ Come say hi!
 - [Stack Overflow](http://stackoverflow.com/questions/tagged/reason)
 - IRC (freenode #reasonml)
 
-### Github
+## Github
 
 - [Reason Org](https://github.com/reasonml)
 - [Reason Community Org](https://github.com/reasonml-community)

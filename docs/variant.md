@@ -20,7 +20,7 @@ let areYouCrushingIt = Yes;
 
 **Note**: a variant's constructors need to be capitalized.
 
-### Usage
+## Usage
 
 Along with a variant comes one of the most important features of Reason, the `switch` expression.
 
@@ -38,7 +38,7 @@ let message =
 
 A variant has an extremely rich amount of type system assistance. For example, we'll give you a type error if you've forgotten to cover a case of your variant, or if two cases are redundant. Be sure to check out switch and pattern-matching in a [later section](pattern-matching.md)!
 
-#### Variant Needs an Explicit Definition
+### Variant Needs an Explicit Definition
 
 If the variant you're using is in a different file, bring it into scope like you'd do [for a record](record.md#record-needs-an-explicit-definition):
 
@@ -56,7 +56,7 @@ let pet: Zoo.animal = Dog; /* preferred */
 let pet = Zoo.Dog;
 ```
 
-#### Constructor Arguments
+### Constructor Arguments
 
 A variant's constructors can hold extra data separated by comma.
 
@@ -87,11 +87,11 @@ let greeting =
   };
 ```
 
-#### Honorable Mentions
+### Honorable Mentions
 
 The [standard library](/api/index.html) exposes two important variants you'll come to hear a lot.
 
-##### `option`
+#### `option`
 
 ```reason
 type option('a) = None | Some('a);
@@ -99,7 +99,7 @@ type option('a) = None | Some('a);
 
 This is the convention used to simulate a "nullable" (aka `undefined` or `null`) value in other languages. Thanks to this convenience type definition, Reason can default every value to be non-nullable. An `int` will always be an int, never "`int` **or** `null` **or** `undefined`". If you do want to express a "nullable int", you'd use `option(int)`, whose possible values are `None` or `Some(int)`. `switch` forces you to handle both cases; therefore, **a pure Reason program doesn't have null errors**.
 
-##### `list`
+#### `list`
 
 ```reason
 type list('a) = Empty | Head('a, list('a));
@@ -111,13 +111,13 @@ This says: "a list that holds a value of type `a` (whatever it is) is either emp
 
 Reason gave `list` a syntax sugar. `[1, 2, 3]` is conceptually equivalent to `Head(1, Head(2, Head(3, Empty)))`. Once again, `switch` forces you to handle every case of this variant, including `Empty` (aka `[]`). **This eliminates another big category of access bugs**.
 
-##### Other Variant-like Types
+#### Other Variant-like Types
 
 Did you know that you can use `switch` on string, int, float, array, and most other data structures? Try it!
 
 <!-- TODO playground link -->
 
-### Tips & Tricks
+## Tips & Tricks
 
 **Be careful** not to confuse a constructor carrying 2 arguments with a constructor carrying a single tuple argument:
 
@@ -127,11 +127,11 @@ type account =
 type account2 =
   | Instagram((string, int)) /* 1 argument - happens to be a 2-tuple */;
 ```
-#### Variants Must Have constructors
+### Variants Must Have constructors
 
 If you come from an untyped language, you might be tempted to try `type foo = int | string`. This isn't possible in Reason; you'd have to give each branch a constructor: `type foo = Int(int) | String(string)`. Though usually, needing this might be an anti-pattern. The Design Decisions section below explains more.
 
-#### Interop with JavaScript
+### Interop with JavaScript
 
 _This section assumes knowledge about BuckleScript's [FFI](https://bucklescript.github.io/docs/en/interop-overview.html). Skip this if you haven't felt the itch to use variants for binding to JS functions yet_.
 
@@ -161,11 +161,11 @@ You could definitely do that, but there are better ways! For example, simply two
 
 BuckleScript also provides [a few other ways](https://bucklescript.github.io/docs/en/function.html#binding-to-polymorphic-function) to do this.
 
-#### Variant Types Are Found By Field Name
+### Variant Types Are Found By Field Name
 
 Please refer to this [record section](record.md#record-types-are-found-by-field-name). Variants are the same: a function can't accept an arbitrary constructor shared by two different variants. Again, such feature exists, it's called a polymorphic variant. We'll talk about this in the future =).
 
-### Design Decisions
+## Design Decisions
 
 Variants, in their many forms (polymorphic variant, open variant, GADT, etc.), are likely _the_ feature of a type system such as Reason's. The aforementioned `option` variant, for example, obliterates the need for nullable types, a major source of bugs in other languages. Philosophically speaking, a problem is composed of many possible branches/conditions. Mishandling these conditions is the majority of what we call bugs. **A type system doesn't magically eliminate bugs; it points out the unhandled conditions and asks you to cover them**\*. The ability to model "this or that" correctly is crucial.
 

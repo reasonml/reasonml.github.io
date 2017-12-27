@@ -1,6 +1,6 @@
 ---
 title: Comparison to OCaml
-id: ocaml
+id: comparison-to-ocaml
 ---
 
 If you come from OCaml or are a newcomer reading a tutorial written on OCaml, this guide's for you! But don't forget that [reason-tools](https://github.com/reasonml/reason-tools) can convert between OCaml and Reason syntax on the fly.

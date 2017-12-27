@@ -5,7 +5,7 @@ id: destructuring
 
 "Destructuring" is a visually concise way of extracting fields from a data structure. You can use destructuring anywhere you'd normally use a variable.
 
-### Usage
+## Usage
 
 The following binds variables: `ten = 10`, `twenty = 20`
 
@@ -54,7 +54,7 @@ let otherFunction = (~person as {name} as thePerson) => {
 
 **Keep reading the section, pattern matching, for a crazier form of destructuring**!
 
-### Tips & Tricks
+## Tips & Tricks
 
 Destructuring can make your code much more concise without requiring you to name intermediate variables. Do use them! But don't abuse them and make your code overly nested & terse.
 

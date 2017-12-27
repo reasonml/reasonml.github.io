@@ -5,7 +5,7 @@ id: mutation
 
 Reason has great traditional imperative & mutative programming capabilities. You should use these features sparingly, but sometimes they allow your code to be more performant and written in a more familiar pattern.
 
-### Mutate Let-binding
+## Mutate Let-binding
 
 Let-bindings are immutable, but you can wrap it with a `ref`, which is like a box whose content can change:
 
@@ -13,7 +13,7 @@ Let-bindings are immutable, but you can wrap it with a `ref`, which is like a bo
 let foo = ref(5);
 ```
 
-### Usage
+## Usage
 
 You can get the actual value of a `ref` through the postfix `^` operator:
 
@@ -29,7 +29,7 @@ foo := 6;
 
 Note that the previous binding `five` stays `5`, since it got the underlying item on the `ref` box, not the `ref` itself.
 
-### Tip & Tricks
+## Tip & Tricks
 
 **Just kidding**! `ref` isn't actually a special feature! It's just an ordinary syntax sugar for a [predefined mutable record type called `ref`](/api/Pervasives.html#TYPEref) in the standard library (search "References" in that page). Here's the desugared version:
 

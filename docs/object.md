@@ -7,9 +7,9 @@ Most of time in Reason, you'd be using record to group named values together. In
 
 **If you come from JavaScript**, you're mostly likely **not** looking for plain Reason objects. Skip right to the Tip & Tricks section below.
 
-### Usage
+## Usage
 
-#### Type Declaration
+### Type Declaration
 
 An object **doesn't need a type declaration**, though it can have one. It looks like a record, except with a `.`:
 
@@ -31,7 +31,7 @@ type car('a) = {
 
 Two dots, also called an elision, indicate that this is an "open" object type, and therefore can also contain other values and methods. An open object is also polymorphic and therefore requires a parameter.
 
-#### Creation
+### Creation
 
 ```reason
 type tesla = {.
@@ -77,7 +77,7 @@ You can use the above object like so:
 obj#doYouWant();
 ```
 
-### Tip & Tricks
+## Tip & Tricks
 
 If you come from JavaScript, you're probably not looking for vanilla Reason objects, but BuckleScript's [special object](https://bucklescript.github.io/docs/en/object.html#object-as-record). These are different in that they:
 

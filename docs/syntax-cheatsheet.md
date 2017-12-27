@@ -5,7 +5,7 @@ id: syntax-cheatsheet
 
 We've worked very hard to make Reason look like JS while preserving OCaml's great semantics & types. Hope you enjoy it!
 
-### Let Binding
+## Let Binding
 
 JavaScript                |   Reason
 --------------------------|--------------------------------
@@ -13,7 +13,7 @@ JavaScript                |   Reason
 `var x = y;`                |  No equivalent (thankfully)
 `let x = 5; x = x + 1;`     |  `let x = ref(5); x := x^ + 1;`
 
-### String & Char
+## String & Char
 
 JavaScript                |   Reason
 --------------------------|--------------------------------
@@ -22,7 +22,7 @@ JavaScript                |   Reason
 Characters are strings      |  `'a'`
 `"hello " + "world"`        |  `"hello " ++ "world"`
 
-### Boolean
+## Boolean
 
 JavaScript                |   Reason
 --------------------------|--------------------------------
@@ -35,7 +35,7 @@ No deep equality (recursive compare) |  `a == b`, `a != b`
 
 \* This is the Reason spiritual equivalent; it doesn't mean it compiles to JS' `true`/`false`! To compile to the latter, use `Js.true_`/`Js.false_`. See [here](/guide/language/boolean#usage).
 
-### Number
+## Number
 
 JavaScript                |   Reason
 --------------------------|--------------------------------
@@ -47,7 +47,7 @@ JavaScript                |   Reason
 
 \* JS has no distinction between integer and float.
 
-### Object/Record
+## Object/Record
 
 JavaScript                |   Reason
 --------------------------|--------------------------------
@@ -59,7 +59,7 @@ no static types           |  `type point = {x: int, mutable y: int}`
 
 \* This is the Reason spiritual equivalent; it doesn't mean it compiles to JS' object! To compile to the latter, see [here](/guide/language/object#tip--tricks).
 
-### Array
+## Array
 
 JavaScript                |   Reason
 --------------------------|--------------------------------
@@ -70,7 +70,7 @@ No immutable list         |  `[1, 2, 3]`
 
 \* We can simulate tuples in JavaScript with arrays, because JavaScript arrays can contain multiple types of elements.
 
-### Null
+## Null
 
 JavaScript                |   Reason
 --------------------------|--------------------------------
@@ -78,7 +78,7 @@ JavaScript                |   Reason
 
 \* Again, only a spiritual equivalent; Reason doesn't have nulls, nor null bugs! But it does have [an option type](/guide/examples#using-the-option-type) for when you actually need nullability.
 
-### Function
+## Function
 
 JavaScript                            |   Reason
 --------------------------------------|--------------------------------
@@ -87,7 +87,7 @@ JavaScript                            |   Reason
 `const f = function(arg) {...}`       |  `let f = (arg) => ...`
 `add(4, add(5, 6))`                   |  Same
 
-#### Blocks
+### Blocks
 
 <table>
   <thead><tr> <th scope="col"><p >JavaScript</p></th> <th scope="col"><p>Reason</p></th></tr></thead>
@@ -111,7 +111,7 @@ let myFun = (x, y) => {
   </tr>
 </table>
 
-#### Currying
+### Currying
 
 JavaScript                |   Reason
 --------------------------|--------------------------------
@@ -119,7 +119,7 @@ JavaScript                |   Reason
 
 Both JavaScript and Reason support currying, but Reason currying is **built-in and optimized to avoid intermediate function allocation & calls**, whenever possible.
 
-### If-else
+## If-else
 
 JavaScript                |   Reason
 --------------------------|--------------------------------
@@ -129,7 +129,7 @@ JavaScript                |   Reason
 
 \* Reason conditionals are always expressions!
 
-### Destructuring
+## Destructuring
 
 JavaScript                |   Reason
 --------------------------|--------------------------------
@@ -139,7 +139,7 @@ JavaScript                |   Reason
 
 \* Gives good compiler warning that `data` might not be of length 2. Switch to pattern-matching instead.
 
-### Loop
+## Loop
 
 JavaScript                |   Reason
 --------------------------|--------------------------------
@@ -147,7 +147,7 @@ JavaScript                |   Reason
 `for (let i = 10; i >= 0; i--) {...}`             |  `for (i in 10 downto 0) {...}`
 `while (true) {...}`                              |  Same
 
-### JSX
+## JSX
 
 JavaScript                |   Reason
 --------------------------|--------------------------------
@@ -157,7 +157,7 @@ JavaScript                |   Reason
 
 \* Argument punning!
 
-### Exception
+## Exception
 
 JavaScript                |   Reason
 --------------------------|--------------------------------
@@ -166,7 +166,7 @@ JavaScript                |   Reason
 
 \* No finally.
 
-### Blocks
+## Blocks
 
 In Reason, "sequence expressions" are created with `{}` and evaluate to their last statement. In JavaScript, this can be simulated via an immediately-invoked function expression (since function bodies have their own local scope).
 
@@ -192,7 +192,7 @@ let res = {
   </tr>
 </table>
 
-### Comments
+## Comments
 
 JavaScript                |   Reason
 --------------------------|--------------------------------

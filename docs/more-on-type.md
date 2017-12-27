@@ -3,7 +3,7 @@ title: More on Type
 id: more-on-type
 ---
 
-### Type Argument!
+## Type Argument!
 
 Types can accept parameters, akin to generics in other languages. It's as if a type is a function that takes in arguments and returns a new type! The parameters **need** to start with `'`.
 
@@ -66,7 +66,7 @@ let payloadResults: myPayloadResults(string) = [
 ];
 ```
 
-### Mutually Recursive Types
+## Mutually Recursive Types
 
 Just like functions, types can be mutually recursive through `and`:
 
@@ -77,7 +77,7 @@ and teacher = {students: list(student)};
 
 **Note** that there's no semicolon ending the first line and no `type` on the second line.
 
-### Design Decisions
+## Design Decisions
 
 A type system allowing type argument is basically allowing type-level functions. `list(int)` is really the `list` type function taking in the `int` type, and returning the final, concrete type you'd use in some places. You might have noticed that in other languages, this is more or less called "generics". For example, `ArrayList<Integer>` in Java.
 

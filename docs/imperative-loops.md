@@ -3,7 +3,7 @@ title: Imperative Loops
 id: imperative-loops
 ---
 
-### For Loops
+## For Loops
 
 For loops iterate from a starting value up to (and including) the ending value.
 
@@ -46,7 +46,7 @@ for (x in xStart downto xEnd) {
 };
 ```
 
-### While Loops
+## While Loops
 
 While loops execute a code block while some condition is true. The form of a `while` loop includes a single expression, the condition to test.
 
@@ -56,7 +56,7 @@ while (testCondition) {
 };
 ```
 
-### Tips & Tricks
+## Tips & Tricks
 
 There's no loop-breaking `break` keyword (nor early `return` from functions, for that matter) in Reason. In general, prefer `map`/`filter`/`reduce` over imperative loops. However, we can break out of a while loop easily through using a [mutable binding](mutation.md).
 

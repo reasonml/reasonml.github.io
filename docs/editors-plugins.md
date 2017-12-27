@@ -16,7 +16,7 @@ Reason's nature lends itself to great editor support. Most of our editor plugins
 
 And other features. See, for example, our VSCode plugin's [feature section](https://github.com/reasonml-editor/vscode-reasonml#features)!
 
-### Officially Supported Editors
+## Officially Supported Editors
 
 - [VSCode](https://github.com/reasonml-editor/vscode-reasonml): **recommended**.
 - [Atom](https://github.com/314eter/atom-ocaml-merlin)
