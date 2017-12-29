@@ -3,9 +3,11 @@ import React, { Component } from 'react'
 import Helmet from 'react-helmet'
 import Header from '../components/Header'
 import Section from '../components/Section'
+import Preview from '../components/Preview'
 import { accent, gray } from '../utils/colors'
 import {headerFontFamily} from '../utils/typography'
 import debounce from '../utils/debounce'
+import filterBuckleScriptWarnings from '../utils/filterBuckleScriptWarnings'
 import { compressToEncodedURIComponent as compress, decompressFromEncodedURIComponent as decompress } from 'lz-string'
 
 let CodeMirror
@@ -192,6 +194,18 @@ let rec quicksort = (gt) =>
     Js.log({j|$a times $b is $product|j})
   }
 };`
+}, {
+  name: 'ReasonReact Greetings',
+  code:
+`module Greeting = {
+  let component = ReasonReact.statelessComponent("Greeting");
+  let make = (_children) => {
+    ...component,
+    render: (self) => <button> (ReasonReact.stringToElement("Hello!")) </button>
+  };
+};
+
+ReactDOMRe.renderToElementWithId(<Greeting />, "preview");`
 }];
 
 const queryParamPrefixFor = language => `?${language}=`;
@@ -263,6 +277,8 @@ const isSafari =
     /iP(ad|hone|od).+Version\/[\d\.]+.*Safari/i.test(navigator.userAgent)) ||
   typeof safari !== 'undefined'
 
+const reasonReactRegex = /ReasonReact\.|ReactDOMRe\.|ReactEventRe\.|ReactDOMServerRe\./;
+
 class ShareButton extends Component {
   state = {
     showConfirmation: false
@@ -325,6 +341,8 @@ export default class Try extends Component {
     js: '// loading',
     jsIsLatest: false,
     autoEvaluate: true,
+    showPreviewPanel: false,
+    previewScriptsLoaded: false,
     output: [],
   }
 
@@ -373,15 +391,39 @@ export default class Try extends Component {
     this.setState(
       state => ({ ...state, output: [] }),
       () => {
-        const timerId = setTimeout(() => {
-          this.evalWorker.terminate();
-          this.initEvalWorker();
-          this._output({type: 'error', contents: ['[Evaluation timed out!]']});
-        }, 1000);
-        this.evalWorker.postMessage({
-          code: wrapInExports(code),
-          timerId
-        });
+        if (this.state.showPreviewPanel) {
+          if (this.state.previewScriptsLoaded) {
+            try {
+              eval(code);
+            } catch(e) {
+              this.errorTimerId = setTimeout(
+                () => this.setState(_ => {
+                  return {
+                    reasonSyntaxError: null,
+                    compileError: null,
+                    ocamlSyntaxError: null,
+                    jsError: e,
+                    js: '',
+                    ocaml: '',
+                    showPreviewPanel: false,
+                    output: [],
+                  }
+                }),
+                errorTimeout
+              )
+            }
+          }
+        } else {
+          const timerId = setTimeout(() => {
+            this.evalWorker.terminate();
+            this.initEvalWorker();
+            this._output({type: 'error', contents: ['[Evaluation timed out!]']});
+          }, 1000);
+          this.evalWorker.postMessage({
+            code: wrapInExports(code),
+            timerId
+          });
+        }
       }
     )
   }
@@ -405,9 +447,11 @@ export default class Try extends Component {
 
     this.setState((prevState, _) => {
       let newOcamlCode = prevState.ocaml;
+      let newShowPreviewPanel = prevState.showPreviewPanel;
       try {
         newOcamlCode = window.printML(window.parseRE(newReasonCode))
-        this.tryCompiling(newReasonCode, newOcamlCode)
+        newShowPreviewPanel = this.detectReasonReact(newOcamlCode);
+        this.tryCompiling(newReasonCode, newOcamlCode, newShowPreviewPanel)
       } catch (e) {
         this.errorTimerId = setTimeout(
           () => this.setState(_ => {
@@ -418,6 +462,7 @@ export default class Try extends Component {
               jsError: null,
               js: '',
               ocaml: '',
+              showPreviewPanel: false,
               output: [],
             }
           }),
@@ -432,21 +477,24 @@ export default class Try extends Component {
         compileError: null,
         ocamlSyntaxError: null,
         jsError: null,
+        showPreviewPanel: newShowPreviewPanel,
         shareableUrl: generateShareableUrl('reason', newReasonCode)
       }
     });
   }
 
-  updateOCaml = newOcamlCode => {
-    if (newOcamlCode === this.state.ocaml) return
+  updateOCaml = (newOcamlCode, forceUpdate) => {
+    if (newOcamlCode === this.state.ocaml && !forceUpdate) return
     persist('ocaml', newOcamlCode);
     clearTimeout(this.errorTimerId)
 
     this.setState((prevState, _) => {
       let newReasonCode = prevState.reason;
+      let newShowPreviewPanel = prevState.showPreviewPanel;
       try {
         newReasonCode = window.printRE(window.parseML(newOcamlCode))
-        this.tryCompiling(newReasonCode, newOcamlCode)
+        newShowPreviewPanel = this.detectReasonReact(newOcamlCode);
+        this.tryCompiling(newReasonCode, newOcamlCode, newShowPreviewPanel)
       } catch (e) {
         this.errorTimerId = setTimeout(
           () => this.setState(_ => {
@@ -457,6 +505,7 @@ export default class Try extends Component {
               jsError: null,
               js: '',
               reason: '',
+              showPreviewPanel: false,
               output: [],
             }
           }),
@@ -471,23 +520,36 @@ export default class Try extends Component {
         compileError: null,
         ocamlSyntaxError: null,
         jsError: null,
+        showPreviewPanel: newShowPreviewPanel,
         shareableUrl: generateShareableUrl('ocaml', newOcamlCode)
       }
     });
   }
 
-  compile = (code) => {
+  compile = (code, rewriteJsx) => {
     const _consoleError = console.error;
     let warning = '';
-    console.error = (...args) => args.forEach(argument => warning += argument + `\n`);
-    const res = JSON.parse(window.ocaml.compile(code));
+    console.error = (...args) => filterBuckleScriptWarnings(args).forEach(argument => warning += argument + `\n`);
+    let ocamlCode = code;
+    if (rewriteJsx) {
+      if (!this.state.previewScriptsLoaded) return [null, null];
+
+      const ppxRes = JSON.parse(window.jsxv2.rewrite(code));
+      if (ppxRes.ocaml_code) {
+        ocamlCode = ppxRes.ocaml_code;
+      } else {
+        console.error = _consoleError;
+        return [{message: ppxRes.ppx_error_msg || ppxRes.js_error_msg}, warning || null];
+      }
+    }
+    const res = JSON.parse(window.ocaml.compile(ocamlCode));
     console.error = _consoleError;
     return [res, warning || null];
   }
 
-  tryCompiling = debounce((reason, ocaml) => {
+  tryCompiling = debounce((reason, ocaml, rewriteJsx) => {
     try {
-      const [res, warning] = this.compile(ocaml);
+      const [res, warning] = this.compile(ocaml, rewriteJsx);
       if (res.js_code) {
         this.setState(_ => ({
           js: res.js_code,
@@ -504,6 +566,7 @@ export default class Try extends Component {
             compileError: res,
             compileWarning: null,
             js: '',
+            showPreviewPanel: false,
           })),
           errorTimeout
         )
@@ -514,6 +577,7 @@ export default class Try extends Component {
           compileError: err,
           compileWarning: null,
           js: '',
+          showPreviewPanel: false,
         })),
         errorTimeout
       )
@@ -551,6 +615,46 @@ export default class Try extends Component {
     document.execCommand('copy');
   }
 
+  detectReasonReact = (code) => {
+    return reasonReactRegex.test(code);
+  }
+
+  toggleShowPreviewPanel = () => {
+    this.setState(_ => {
+      return {
+        showPreviewPanel: !this.state.showPreviewPanel
+      }
+    });
+  }
+
+  handlePreviewScriptsLoaded = () => {
+    this.setState(_ => {
+      return {
+        previewScriptsLoaded: true
+      }
+    }, () => {
+      if (this.state.showPreviewPanel) {
+        this.updateOCaml(this.state.ocaml, true);
+      }
+    });
+  }
+
+  handlePreviewScriptsError = () => {
+    this._output({type: 'error', contents: ['[Error loading ReasonReact scripts!]']});
+    this.setState(_ => {
+      return {
+        reasonSyntaxError: null,
+        compileError: null,
+        ocamlSyntaxError: null,
+        jsError: null,
+        js: '',
+        ocaml: '',
+        showPreviewPanel: false,
+        previewScriptsLoaded: false
+      }
+    });
+  }
+
   render() {
     const {
       reason,
@@ -560,7 +664,8 @@ export default class Try extends Component {
       compileError,
       compileWarning,
       ocamlSyntaxError,
-      jsError
+      jsError,
+      showPreviewPanel
     } = this.state;
     const codemirrorStyles = [
       styles.codemirror,
@@ -569,7 +674,7 @@ export default class Try extends Component {
     return (
       <div css={styles.container}>
         <Helmet>
-          <script async src={__PATH_PREFIX__ + '/bs.js'} />
+          <script async src={__PATH_PREFIX__ + '/bsReasonReact.js'} />
           <script async src={__PATH_PREFIX__ + '/refmt.js'} />
           <title>Try Reason</title>
         </Helmet>
@@ -591,6 +696,15 @@ export default class Try extends Component {
             <button onClick={oldSyntax}>
               Old Syntax
             </button>
+          </div>
+          <div css={styles.toolbarButton}>
+            <button>ReasonReact</button>
+            <input
+              css={styles.toolbarCheckbox}
+              type="checkbox"
+              checked={this.state.showPreviewPanel}
+              onChange={this.toggleShowPreviewPanel}
+            />
           </div>
           <div css={styles.toolbarButton}>
             <button onClick={this.evalLatest}>Evaluate</button>
@@ -682,13 +796,18 @@ export default class Try extends Component {
             </div>
             <div css={styles.row}>
               <div css={styles.label}>Output</div>
-              <div css={styles.output}>
-                {this.state.output.map((item, i) =>
-                  <div css={styles.outputLine} key={i}>
-                    {formatOutput(item)}
-                  </div>
-                )}
-              </div>
+                {showPreviewPanel ?
+                  <Preview
+                    onScriptLoaded={this.handlePreviewScriptsLoaded}
+                    onError={this.handlePreviewScriptsError}
+                  /> :
+                  <div css={styles.output}>
+                    {this.state.output.map((item, i) =>
+                      <div css={styles.outputLine} key={i}>
+                        {formatOutput(item)}
+                      </div>
+                    )}
+                  </div>}
             </div>
           </div>
         </div>
