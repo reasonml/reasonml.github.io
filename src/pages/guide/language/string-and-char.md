@@ -60,7 +60,7 @@ https://twitter.com/jusrin00/status/875238742621028355
 
 **You have an expressive type system now**! In an untyped language, you'd often overload the meaning of string by using it as:
 
-- a unique id: `var BLUE_COLOR = "blue"`
+- an unique id: `var BLUE_COLOR = "blue"`
 - an identifier into a data structure: `var BLUE = "blue"; var RED = "red"; var colors = [BLUE, RED]`
 - the name of an object field: `person["age"] = 24`
 - an enum: `if (audio.canPlayType() === 'probably') {...}` [(ಠ_ಠ)](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/canPlayType#Return_value)
