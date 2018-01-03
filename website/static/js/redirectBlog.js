@@ -3,22 +3,24 @@
  */
 
 (function() {
-  var path = window.location.pathname.split('/');
+  var path = window.location.pathname.replace(/^\//, '').replace(/\/$/, '').split('/');
   var page = path[path.length - 1];
   if (page.indexOf('blog') !== 0) {
     return;
   }
   // redirects[page][hash] => new page;
   var redirects = {
-    '#reducers-are-here': '2017/09/01/reducers.html',
-    '#reducers-are-here-design-decisions': '2017/09/01/reducers.html#design-decisions',
-    '#021-released': '2017/07/05/021.html',
-    '#015-released': '2017/06/21/015.html',
-    '#major-new-release': '2017/06/09/major-release.html'
+    '#reason-3': '2017/10/27/reason3.html',
+    '#messengercom-now-50-converted-to-reason': '2017/09/08/messenger-50-reason.html',
+    '#way-way-waaaay-nicer-error-messages': '2017/08/25/way-nicer-error-messages.html',
+    '#much-better-playground': '2017/08/18/much-better-playground.html',
+    '#new-website': '2017/07/14/new-website.html',
+    '#new-reasonreact-version-released': '2017/06/12/new-reason-react.html',
+    '#spring-cleaning-first-blog-post': '2017/05/18/spring-cleaning.html',
   };
 
   var hash = window.location.hash
-  var base = '/reason-react/blog/';
+  var base = '/blog/';
   Object.keys(redirects).forEach(function(redirect) {
     if (redirect === hash) {
       // setup html

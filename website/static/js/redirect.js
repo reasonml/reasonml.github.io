@@ -3,6 +3,7 @@
  */
 
 (function() {
+  console.log('hit====');
   var faq = {
     '#frequently-asked-questions-common-type-errors': 'im-having-a-type-error.html',
     '#frequently-asked-questions-how-do-i-do-props-spreading-div-thisprops': 'props-spread.html',
@@ -22,27 +23,37 @@
     '#getting-started-reason-scripts': 'installation.html#reason-scripts',
     default: 'installation.html'
   };
+  var community = {
+    '#getting-started': 'installation.html',
+    '#getting-started-bsb': 'installation.html#bsb',
+    'articles-and-videos': 'installation.html#reason-scripts',
+    'blog': '/blog',
+    default: '/docs/en/community.html',
+  };
+  var articlesAndVideos = {
+    '#ocaml-concepts': '/docs/en/articles-videos.html#ocaml-concepts',
+    '#bucklescript': '/docs/en/articles-videos.html#bucklescript',
+    '#reasonreact': '/docs/en/articles-videos.html#reasonreact',
+    '#videos': '/docs/en/articles-videos.html#videos',
+    '#general-functional-programming--type-system': '/docs/en/articles-videos.html#general-functional-programming--type-system',
+    '#pro-links': '/docs/en/articles-videos.html#pro-links',
+    default: '/docs/en/articles-videos.html',
+  };
   // redirects[page][hash] => new page;
-  // yarn start only supports faq.html format, but gh pages upens up the other two.
   var redirects = {
-    'faq.html': faq,
     'faq': faq,
-    'faq/': faq,
-    'examples.html': examples,
     'examples': examples,
-    'examples/': examples,
-    'gettingStarted.html': gettingStarted,
     'gettingStarted': gettingStarted,
-    'gettingStarted/': gettingStarted,
+    'community': community,
+    'articles-and-videos': articlesAndVideos,
   };
   var hash = window.location.hash;
-  var base = '/reason-react/docs/en/';
-  var path = window.location.pathname.split('/');
+  var path = window.location.pathname.replace(/^\//, '').replace(/\/$/, '').split('/');
+  console.log(path,' -------');
   var page = path[path.length - 1];
   if (redirects[page]) {
     var link = document.getElementById('redirectLink');
-    var location = base +
-      (redirects[page][hash] || redirects[page].default);
+    var location = redirects[page][hash] || redirects[page].default;
     link.textContent = 'https://reasonml.github.io' + location;
     link.href = location;
   }
