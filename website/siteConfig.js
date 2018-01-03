@@ -70,9 +70,19 @@ const examples = [
     link: "https://github.com/reasonml-community/reason-react-hacker-news",
   },
   {
+    name: "Maze",
+    image: "img/examples/maze.png",
+    link: "https://github.com/jaredly/reason-maze",
+  },
+  {
     name: "TodoMVC",
     image: "img/examples/todomvc.png",
     link: "https://github.com/reasonml-community/reason-react-example/tree/master/src/todomvc",
+  },
+  {
+    name: "Mereo",
+    image: "img/examples/mareo.png",
+    link: "https://github.com/reasonml-community/Mareo",
   }
 ]
 
