@@ -34,18 +34,19 @@
   var events = {
     default: 'docs/en/events.html'
   };
-  var gettingStarted = {
-    '#getting-started': 'installation.html',
-    '#getting-started-bsb': 'installation.html#bsb',
-    '#getting-started-reason-scripts': 'installation.html#reason-scripts',
-    default: 'installation.html'
+  var roadmap = {
+    '#reason-team-todos': 'docs/en/roadmap.html#reason-team-todos',
+    '#near-future': 'docs/en/roadmap.html#near-future',
+    '#future': 'docs/en/roadmap.html#future',
+    '#your-contribution-opportunities': 'docs/en/roadmap.html#your-contribution-opportunities',
+    default: 'docs/en/roadmap.html'
   };
   var community = {
-    '#getting-started': 'installation.html',
-    '#getting-started-bsb': 'installation.html#bsb',
-    'articles-and-videos': 'installation.html#reason-scripts',
-    'blog': '/blog',
-    default: '/docs/en/community.html',
+    '#github': 'docs/en/community.html#github',
+    default: 'docs/en/community.html',
+  };
+  var companies = {
+    default: 'docs/en/companies-using-reason.html',
   };
   var articlesAndVideos = {
     '#ocaml-concepts': 'docs/en/articles-videos.html#ocaml-concepts',
@@ -60,10 +61,11 @@
   var redirects = {
     'faq': faq,
     'examples': examples,
-    'gettingStarted': gettingStarted,
+    'roadmap': roadmap,
     'community': community,
     'articles-and-videos': articlesAndVideos,
     'events': events,
+    'companies': companies,
   };
   var hash = window.location.hash;
   var path = window.location.pathname.replace(/^\//, '').replace(/\/$/, '').split('/');
