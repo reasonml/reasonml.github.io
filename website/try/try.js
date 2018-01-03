@@ -331,10 +331,12 @@ const examples = [{
   code:
 `type tree = Leaf | Node(int, tree, tree);
 
-let rec sum =
-  fun
+let rec sum = (item) => {
+  switch (item) {
   | Leaf => 0
   | Node(value, left, right) => value + sum(left) + sum(right);
+  }
+}
 
 let myTree =
   Node(
@@ -465,19 +467,6 @@ input
   | Some(result) => result |> Js.Array.forEach(Js.log)
   | None => Js.log("no matches")
 );`
-}, {
-  name: 'Quicksort',
-  code:
-`/* Based on https://rosettacode.org/wiki/Sorting_algorithms/Quicksort#OCaml */
-let rec quicksort = (gt) =>
-  fun
-  | [] => []
-  | [x, ...xs] => {
-      let (ys, zs) = List.partition(gt(x), xs);
-      quicksort(gt, ys) @ [x, ...quicksort(gt, zs)]
-    };
-
-[4, 65, 2, (-31), 0, 99, 83, 782, 1] |> quicksort((>)) |> Array.of_list |> Js.log;`
 }, {
   name: 'String interpolation',
   code:
@@ -627,27 +616,27 @@ class Try extends Component {
       autoEvaluate: true,
       output: [],
     }
-  
+
     this.err = null
-  
+
     this._output = item =>
       this.setState(state => ({
         output: state.output.concat(item)
       }));
-  
+
     this.output = item => {
       if (this.outputOverloaded)
         return;
-  
+
       if (this.state.output.length > 100) {
         this.outputOverloaded = true;
         this._output({ type: 'error', contents: ['[Too much output!]']})
         return;
       }
-  
+
       this._output(item);
     }
-  
+
     this.initEvalWorker = () => {
       this.evalWorker = new Worker('/js/evalWorker.js');
       this.evalWorker.onmessage = ({data}) => {
@@ -666,7 +655,7 @@ class Try extends Component {
         );
       }
     }
-  
+
     this.evalJs = (code) => {
       this.outputOverloaded = false;
       this.setState(
@@ -689,7 +678,7 @@ class Try extends Component {
       if (newReasonCode === this.state.reason) return
       persist('reason', newReasonCode);
       clearTimeout(this.errorTimerId)
-  
+
       this.setState((prevState, _) => {
         let newOcamlCode = prevState.ocaml;
         try {
@@ -711,7 +700,7 @@ class Try extends Component {
             errorTimeout
           )
         }
-  
+
         return {
           reason: newReasonCode,
           ocaml: newOcamlCode,
@@ -723,12 +712,12 @@ class Try extends Component {
         }
       });
     }
-  
+
     this.updateOCaml = newOcamlCode => {
       if (newOcamlCode === this.state.ocaml) return
       persist('ocaml', newOcamlCode);
       clearTimeout(this.errorTimerId)
-  
+
       this.setState((prevState, _) => {
         let newReasonCode = prevState.reason;
         try {
@@ -750,7 +739,7 @@ class Try extends Component {
             errorTimeout
           )
         }
-  
+
         return {
           reason: newReasonCode,
           ocaml: newOcamlCode,
@@ -762,7 +751,7 @@ class Try extends Component {
         }
       });
     }
-  
+
     this.compile = (code) => {
       const _consoleError = console.error;
       let warning = '';
@@ -771,7 +760,7 @@ class Try extends Component {
       console.error = _consoleError;
       return [res, warning || null];
     }
-  
+
     this.tryCompiling = debounce((reason, ocaml) => {
       try {
         const [res, warning] = this.compile(ocaml);
@@ -814,7 +803,7 @@ class Try extends Component {
         }
       })
     }, 100)
-  
+
     this.toggleEvaluate = () => {
       if (!this.state.autoEvaluate) {
         this.evalLatest();
@@ -825,21 +814,21 @@ class Try extends Component {
         }
       })
     }
-  
+
     this.evalLatest = () => {
       if (this.state.jsIsLatest) {
         this.evalJs(this.state.js);
       }
     }
-  
+
     this.copyShareableUrl = () => {
       let input = document.getElementById('shareableUrl');
       input.select();
       document.execCommand('copy');
     }
-  
+
   }
-  
+
   componentDidMount() {
     waitUntilScriptsLoaded(() => {
       this.initEvalWorker();
@@ -871,7 +860,7 @@ class Try extends Component {
       <div className={styles.container}>
         <div className={styles.toolbar}>
           <div className={`${styles.toolbarButton} ${styles.toolbarButtonRight}`}>
-            <button>Examples</button>
+            <button className="try-examples">Examples</button>
             <ul className={styles.exampleMenu}>
               {examples.map(example => <li key={example.name} onClick={() => this.updateReason(example.code)}>{example.name}</li>)}
             </ul>
