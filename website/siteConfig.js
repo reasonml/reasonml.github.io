@@ -5,37 +5,61 @@ const users = [
     caption: "Facebook",
     image: "img/logos/facebook.svg",
     infoLink: "https://www.facebook.com",
-    pinned: true
   },
   {
     caption: "Messenger",
     image: "img/logos/messenger.svg",
     infoLink: "https://messenger.com",
-    pinned: true
   },
   {
     caption: "WOW air",
     image: "img/logos/wowair.svg",
     infoLink: "https://wowair.com",
-    pinned: true
+  },
+  {
+    caption: "Viska",
+    image: "img/logos/viska.png",
+    infoLink: "https://www.viska.com",
   },
   {
     caption: "BeOpinion",
     image: "img/logos/beopinion.svg",
     infoLink: "https://beopinion.com",
-    pinned: true
+  },
+  {
+    caption: "Sentia",
+    image: "img/logos/sentia.jpg",
+    infoLink: "https://sentia.ai",
   },
   {
     caption: "Gain by Sentia",
-    image: "img/logos/gain_logo.svg",
+    image: "img/logos/gain.svg",
     infoLink: "https://gain.ai",
-    pinned: true
   },
   {
     caption: "Social Tables",
     image: "img/logos/socialtables.svg",
     infoLink: "https://www.socialtables.com",
-    pinned: true
+  },
+  {
+    caption: "Broadsheet",
+    image: "img/logos/broadsheet.jpg",
+    infoLink: "https://www.broadsheet.com.au",
+  },
+  {
+    caption: "Toughbyte",
+    image: "img/logos/toughbyte.png",
+    infoLink: "http://www.toughbyte.com",
+  },
+  {
+    caption: "g2i.co",
+    image: "img/logos/g2i.png",
+    infoLink: "http://g2i.co",
+  },
+  {
+    caption: "ephox",
+    image: "img/logos/ephox.png",
+    infoLink: "https://www.ephox.com",
   },
 ];
 

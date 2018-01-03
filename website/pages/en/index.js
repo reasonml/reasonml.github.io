@@ -129,9 +129,6 @@ class Index extends React.Component {
   render() {
     let language = this.props.language || "en";
     const showcase = siteConfig.users
-      .filter(user => {
-        return user.pinned;
-      })
       .map(user => {
         return (
           <a href={user.infoLink}>
@@ -191,7 +188,7 @@ class Index extends React.Component {
 
           <div className="productShowcaseSection paddingBottom">
             <h2>
-              <translate>Projects Using ReasonReact</translate>
+              <translate>Companies Using Reason</translate>
             </h2>
             <div className="logos">
               {showcase}
@@ -199,14 +196,13 @@ class Index extends React.Component {
             <div className="more-users">
               <a
                 className="button"
-                href={`${siteConfig.baseUrl}${this.props.language}/built-with-reason-react.html`}
+                href={`${siteConfig.baseUrl}${this.props.language}/companies-using-reason.html`}
               >
                 <translate>See Full List</translate>
               </a>
             </div>
           </div>
         </div>
-        <script src={siteConfig.baseUrl + 'js/redirectIndex.js'}></script>
       </div>
     );
   }
