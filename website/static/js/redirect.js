@@ -366,6 +366,14 @@
       '#publishing': 'docs/en/project-structure.html#publishing',
       default: 'docs/en/project-structure.html',
     },
+    'guide/examples': {
+      '#using-the-option-type': 'docs/en/newcomer-examples.html#using-the-option-type',
+      '#creating-a-parametrized-type': 'docs/en/newcomer-examples.html#creating-a-parametrized-type',
+      '#creating-a-js-object': 'docs/en/newcomer-examples.html#creating-a-js-object',
+      '#binding-to-a-js-module-with-default-export': 'docs/en/newcomer-examples.html#binding-to-a-js-module-with-default-export',
+      '#checking-for-js-nullable-types-using-the-option-type': 'docs/en/newcomer-examples.html#checking-for-js-nullable-types-using-the-option-type',
+      default: 'docs/en/newcomer-examples.html',
+    },
   };
   var hash = window.location.hash;
   var path = window.location.pathname.replace(/^\//, '').replace(/\/$/, '');
