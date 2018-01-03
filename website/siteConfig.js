@@ -111,7 +111,7 @@ const siteConfig = {
   users,
   examples,
   /* path to images for header/footer */
-  headerIcon: "img/icon_50.png",
+  // headerIcon: "img/icon_50.png",
   footerIcon: "img/icon_50.png",
   favicon: "img/icon_50.png",
   /* colors for website */

@@ -12,17 +12,31 @@
   text-align: center;
   padding-top: 10px;
 }
-/* === */
 
-.fixedHeaderContainer header > a > img {
-  /* spinning logo */
-  transition: transform 0.5s cubic-bezier(0.18, 0.89, 0.31, 1.16);
-  /* make sure it's a square. Spins at the center */
-  height: 34px;
-  width: 34px;
+/* commencing epic hack to animate header logo */
+/* our header logo image is intentionally absent. We substitude it with a css-drawn logo that looks similar to the Reason logo */
+/* this way we can animate it and turn the label RE into REI */
+/* currently we can't access the header logo config in userland (we use docusaurus). That's why we do it this way */
+.fixedHeaderContainer header > a::before {
+  top: -2px;
+  font-weight: 700;
+  color: white;
+  position: absolute;
+  width: 25;
+  height: 21;
+  content: "REI";
+  font-size: 20px;
+  background-color: $primaryColor;
+  border: 2px solid white;
+  display: flex;
+  padding-left: 9;
+  padding-top: 13;
+  overflow: hidden;
+  transition: all 0.5s cubic-bezier(0.18, 0.89, 0.31, 1.16);
 }
-.fixedHeaderContainer header > a:hover > img {
-  transform: scale(1.3);
+.fixedHeaderContainer header > a:hover::before {
+  width: 31;
+  padding-left: 3;
 }
 
 .productShowcaseSection .logos img {
