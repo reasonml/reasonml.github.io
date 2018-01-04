@@ -22,7 +22,7 @@ module.exports = function(fileInfo, api, options) {
   body.empty();
   const docContent = $('<div class="ocamldoc"></div>');
   docContent.append(bodyContent);
-  body.append('<link rel="stylesheet" href="/css/api.css" />');
+  body.append('<link rel="stylesheet" href="/css/main.css" />');
   body.append(docContent);
 
   if (fileInfo.path.endsWith('index.html')) {
