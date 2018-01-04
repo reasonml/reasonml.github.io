@@ -111,3 +111,5 @@ let isVowel = (theChar) =>
   | _ => false
   };
 ```
+
+To convert a String to a Char, use `"a".[0]`. To convert a Char to a String, use `String.make(1, 'a')`.
