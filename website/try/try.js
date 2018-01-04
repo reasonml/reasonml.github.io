@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
-import * as Colors from '../../src/utils/colors';
 import debounce from '../../src/utils/debounce';
 import * as lzString from 'lz-string';
 import codemirror from 'codemirror';
@@ -9,180 +8,8 @@ import javascript from 'codemirror/mode/javascript/javascript';
 import mllike from 'codemirror/mode/mllike/mllike';
 import rust from 'codemirror/mode/rust/rust';
 
-const {accent, gray} = Colors;
 const compress = lzString.compressToEncodedURIComponent;
 const decompress = lzString.decompressFromEncodedURIComponent;
-
-const styles = {
-  output: {
-    flex: 1,
-    display: "flex",
-    padding: 10,
-  },
-  outputLine: {
-    fontFamily: 'monospace',
-    whiteSpace: 'pre',
-    display: 'block',
-  },
-
-  errorBody: {
-    fontFamily: 'monospace',
-    fontSize: 12,
-  },
-  error: {
-    backgroundColor: '#faa',
-    padding: '10px 20px',
-  },
-  warning: {
-    backgroundColor: '#fff8dc',
-    padding: '10px 20px',
-  },
-
-  inner: {
-    flexDirection: 'row',
-    flex: 1,
-    display: "flex",
-    '@media(max-width: 500px)': {
-      display: 'block',
-      flexDirection: 'column',
-    },
-  },
-  column: {
-    flex: 1,
-    display: "flex",
-    flexDirection: 'column',
-    minWidth: 0,
-    '@media(max-width: 500px)': {
-      display: 'block',
-      flexShrink: 'initial',
-      flexGrow: 'initial',
-      // flex: 0,
-    },
-  },
-  row: {
-    flex: 1,
-    display: "flex",
-    minHeight: 0,
-    background: gray,
-    border: '1px solid #d6d4d4',
-    borderBottom: 'none',
-    borderRight: 'none',
-    position: 'relative',
-    overflow: 'auto',
-    '@media(max-width: 500px)': {
-      // display: 'block',
-      height: 300,
-      marginBottom: 20,
-      flexShrink: 'initial',
-      flexGrow: 'initial',
-      // flex: 0,
-    },
-  },
-
-  label: {
-    display: 'flex',
-    position: 'absolute',
-    top: 0,
-    right: 0,
-    backgroundColor: 'rgba(246, 244, 244, 0.8)',
-    padding: '1em',
-    textTransform: 'uppercase',
-    color: '#988',
-    fontSize: 12,
-    lineHeight: '12px',
-    flexDirection: 'row',
-    alignItems: 'center',
-    zIndex: 20,
-    borderRadius: '0 0 0 5px',
-  },
-
-  tooltip: {
-    display: 'none',
-    position: 'absolute',
-    zIndex: 100,
-    top: '100%',
-    right: '1em',
-    background: 'rgba(0, 0, 0, .6)',
-    color: 'white',
-    whiteSpace: 'nowrap',
-    padding: '.15em .8em',
-    borderRadius: '.25em',
-    fontSize: '.8rem',
-
-    '& .arrow': {
-      position: 'absolute',
-      content: ' ',
-      bottom: '100%',
-      right: '2.5em',
-      height: '0',
-      width: '0',
-      border: '.5em solid transparent',
-      pointerEvents: 'none',
-      borderBottomColor: 'rgba(0, 0, 0, .6)',
-      marginLeft: '.5em'
-    },
-
-    '& .confirmation': {
-      display: 'none',
-      padding: '0 .75em',
-    },
-
-    '&.s-show-confirmation': {
-      '& .help': {
-        display: 'none'
-      },
-      '& .confirmation': {
-        display: 'block'
-      }
-    }
-  },
-
-  toolbarButtonRight: {
-    borderRight: '1px solid #d6d4d4',
-    borderLeft: 'none',
-    position: 'relative',
-
-    '&:hover ul': {
-      display: 'block'
-    }
-  },
-  toolbarButtonFill: {
-    marginRight: 'auto',
-  },
-
-  fakeCodemirrorPreload: {
-    display: 'flex',
-    flexGrow: 1,
-    width: 30,
-  },
-  fakeCodemirrorPreloadInner: {
-    display: 'flex',
-    backgroundColor: '#f7f7f7',
-    borderRight: '1px solid rgb(221, 221, 221)',
-    flexGrow: 1,
-  },
-
-  codemirror: {
-    flex: 1,
-    display: "flex",
-    '& .CodeMirror': {
-      flex: 1,
-      display: "flex",
-      height: 'auto',
-      background: 'transparent',
-
-      '@media(max-width: 500px)': {
-        height: 300,
-      },
-    },
-  },
-
-  codemirrorSafari: {
-    '& .CodeMirror': {
-      height: 300,
-    },
-  },
-};
 
 class CodeMirror extends Component {
   constructor(props) {
@@ -194,21 +21,20 @@ class CodeMirror extends Component {
     this.editor.setValue(this.props.value)
 
     this.editor.on('change', (cm, metadata) => {
-        const value = this.editor.getValue();
-        if (value !== this.props.value && this.props.onChange) {
-            this.props.onChange(value)
-        }
+      const value = this.editor.getValue();
+      if (value !== this.props.value && this.props.onChange) {
+          this.props.onChange(value)
+      }
     });
   }
 
   componentWillReceiveProps(nextProps) {
     if (this.props.value !== nextProps.value && nextProps.value !== this.editor.getValue()) {
-        this.editor.setValue(nextProps.value);
+      this.editor.setValue(nextProps.value);
     }
   }
 
   render() {
-
     return (
       <div className={this.props.className} ref={div => this.div = div}/>
     )
@@ -430,6 +256,7 @@ const persist = debounce((language, code) => {
 
 const errorTimeout = 500
 
+// we now sync load the scripts (for now). This is basically no-op
 const waitUntilScriptsLoaded = done => {
   const tout = setInterval(() => {
     // test for bucklescript compiler existence and refmt existence (one of the exposed method is printML)
@@ -439,11 +266,6 @@ const waitUntilScriptsLoaded = done => {
     }
   }, 10)
 }
-
-const isSafari =
-  (typeof navigator !== 'undefined' &&
-    /iP(ad|hone|od).+Version\/[\d\.]+.*Safari/i.test(navigator.userAgent)) ||
-  typeof safari !== 'undefined'
 
 class ShareButton extends Component {
   constructor(props) {
@@ -470,10 +292,9 @@ class ShareButton extends Component {
           readOnly
         />
         <div onClick={this.onClick}>Share</div>
-        <span className={showConfirmation ? 'tooltip s-show-confirmation' : 'tooltip'} style={styles.tooltip}>
+        <span className="try-tooltip">
           <span className="arrow"></span>
-          <span className="help">Click to copy to clipboard</span>
-          <span className="confirmation">Copied</span>
+          {showConfirmation ? 'Copied': 'Click to copy to clipboard'}
         </span>
       </div>
     );
@@ -740,7 +561,7 @@ class Try extends Component {
   }
 
   render() {
-    const {
+    let {
       reason,
       ocaml,
       js,
@@ -748,24 +569,21 @@ class Try extends Component {
       compileError,
       compileWarning,
       ocamlSyntaxError,
-      jsError
+      jsError,
     } = this.state;
-    const codemirrorStyles = isSafari
-      ? Object.assign({}, styles.codemirror, styles.codemirrorSafari)
-      : styles.codemirror;
     return (
       <div className="try-inner">
         <div className="try-buttons">
-          <div className="try-button-item try-button-examples try-button-right">
+          <div className="try-button try-button-examples try-button-right">
             Examples
             <ul className="try-button-examples-list">
               {examples.map(example => <li key={example.name} onClick={() => this.updateReason(example.code)}>{example.name}</li>)}
             </ul>
           </div>
-          <div className="try-button-item try-button-right" style={{marginRight: 'auto'}} onClick={oldSyntax}>
+          <div className="try-button try-button-right" style={{marginRight: 'auto'}} onClick={oldSyntax}>
             Old Syntax
           </div>
-          <div className="try-button-item">
+          <div className="try-button">
             Evaluate
             <input
               className="try-button-evaluate-checkbox"
@@ -775,99 +593,85 @@ class Try extends Component {
             />
           </div>
           <ShareButton
-            className="try-button-item try-button-share"
+            className="try-button try-button-share"
             url={this.state.shareableUrl}
             onClick={this.copyShareableUrl}
           />
         </div>
-        <div style={styles.inner}>
-          <div style={styles.column}>
-            <div style={styles.row}>
-              <div style={styles.label}>Reason</div>
-              <CodeMirror
-                style={codemirrorStyles}
-                value={reason}
-                options={{
-                  mode: 'rust',
-                  lineNumbers: true,
-                }}
-                onChange={this.updateReason}
-              />
+        <div className="try-grid">
+
+          <div className="try-grid-editor">
+            <div className="try-label">Reason</div>
+            <CodeMirror
+              className="try-codemirror-wrap"
+              value={reason}
+              options={{
+                mode: 'rust',
+                lineNumbers: true,
+              }}
+              onChange={this.updateReason}
+            />
+            <div>
               {reasonSyntaxError &&
-                <div style={styles.error}>
-                  <div style={styles.errorBody}>
-                    {formatErrorLocation(reasonSyntaxError.location)}
-                    {' '}
-                    {capitalizeFirstChar(stripErrorNumberFromReasonSyntaxError(reasonSyntaxError.message))}
-                  </div>
+                <div className="try-error">
+                  {formatErrorLocation(reasonSyntaxError.location)}
+                  {' '}
+                  {capitalizeFirstChar(stripErrorNumberFromReasonSyntaxError(reasonSyntaxError.message))}
                 </div>}
             </div>
-            <div style={styles.row}>
-              <div style={styles.label}>OCaml</div>
-              <CodeMirror
-                style={codemirrorStyles}
-                value={ocaml}
-                options={{
-                  mode: 'mllike',
-                  lineNumbers: true,
-                }}
-                onChange={this.updateOCaml}
-              />
-              {ocamlSyntaxError &&
-                <div style={styles.error}>
-                  <div style={styles.errorBody}>
-                    {ocamlSyntaxError.message}
-                  </div>
-                </div>}
+          </div>
+
+          <div className="try-grid-editor">
+            <div className="try-label">JavaScript</div>
+            <CodeMirror
+              className="try-codemirror-wrap"
+              value={js}
+              options={{
+                mode: 'javascript',
+                lineNumbers: true,
+                readOnly: 'nocursor',
+              }}
+            />
+            <div>
+              {jsError && <div className="try-error">{jsError.message}</div>}
+            </div>
+          </div>
+
+          <div className="try-grid-editor">
+            <div className="try-label">OCaml</div>
+            <CodeMirror
+              className="try-codemirror-wrap"
+              value={ocaml}
+              options={{
+                mode: 'mllike',
+                lineNumbers: true,
+              }}
+              onChange={this.updateOCaml}
+            />
+            <div>
+              {ocamlSyntaxError && <div className="try-error">{ocamlSyntaxError.message}</div>}
               {compileError &&
-                <div style={styles.error}>
-                  <div style={styles.errorBody}>
-                    {compileError.js_error_msg
-                      ? compileError.js_error_msg
-                      : compileError.message}
-                  </div>
-                </div>}
-              {compileWarning &&
-                <div style={styles.warning}>
-                  <div style={styles.errorBody}>
-                    {compileWarning}
-                  </div>
-                </div>}
+                <div className="try-error">{compileError.js_error_msg
+                  ? compileError.js_error_msg
+                  : compileError.message}
+                </div>
+              }
+              {compileWarning && <div className="try-warning">{compileWarning}</div>}
             </div>
           </div>
-          <div style={styles.column}>
-            <div style={styles.row}>
-              <div style={styles.label}>JavaScript</div>
-              <CodeMirror
-                style={codemirrorStyles}
-                value={js}
-                options={{
-                  mode: 'javascript',
-                  lineNumbers: true,
-                  readOnly: 'nocursor',
-                }}
-              />
-              {jsError &&
-                <div style={styles.error}>
-                  <div style={styles.errorBody}>
-                    {jsError.message}
-                  </div>
-                </div>}
-            </div>
-            <div style={styles.row}>
-              <div style={styles.label}>Output</div>
-              <div style={styles.output}>
-                {this.state.output.map((item, i) =>
-                  <div style={styles.outputLine} key={i}>
-                    {formatOutput(item)}
-                  </div>
-                )}
-              </div>
+
+          <div className="try-grid-editor try-output">
+            <div className="try-label">Output</div>
+            <div style={{padding: 10}}>
+              {this.state.output.map((item, i) =>
+                <div className="try-output-line" key={i}>
+                  {item.contents.join(' ')}
+                </div>
+              )}
             </div>
           </div>
+
         </div>
-        <script async src={'/js/bs.js'} />
-        <script async src={'/js/refmt.js'} />
       </div>
     )
   }
@@ -875,8 +679,5 @@ class Try extends Component {
 
 const wrapInExports = code =>
   `(function(exports) {${code}})({})`
-
-const formatOutput = item =>
-  item.contents.join(' ')
 
 ReactDOM.render(<Try />, document.querySelector('#try-wrapper'));
