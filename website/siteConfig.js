@@ -48,7 +48,7 @@ const users = [
   },
   {
     caption: "Toughbyte",
-    image: "img/logos/toughbyte.png",
+    image: "img/logos/toughbyte.svg",
     infoLink: "http://www.toughbyte.com",
   },
   {
