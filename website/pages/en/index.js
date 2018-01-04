@@ -52,7 +52,7 @@ That's all! This compiles Reason to Javascript in the ${code}lib/js/${code} fold
 
 - Read more about how we compile to JavaScript through our partner project, [BuckleScript](http://bucklescript.github.io).
 
-- Alternatively, **to start a [ReasonReact](//reasonml.github.io/reason-react/docs/en/installation.html) app**, try ${code}bsb -init my-react-app -theme react${code}.
+- Alternatively, **to start a [ReasonReact](https://reasonml.github.io/reason-react/docs/en/installation.html) app**, try ${code}bsb -init my-react-app -theme react${code}.
 
 - Head over to [Editor Setup](/guide/editor-tools/global-installation) to get the Reason plugin for your favorite editor!`;
 
