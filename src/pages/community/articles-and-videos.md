@@ -23,6 +23,7 @@ Reason is just OCaml under the hood; We don't yet cover every concept on this do
 - [Interactive ReasonReact Tutorial](https://jaredforsyth.com/2017/07/05/a-reason-react-tutorial/): features runnable code and type hint on hover!
 - [A First Reason React app for Javascript developers](https://jamesfriend.com.au/a-first-reason-react-app-for-js-developers)
 - [Routing in Reason React](https://jamesfriend.com.au/routing-in-reason-react)
+- [Buildin Marvel Heroes App using ReasonReact](https://medium.com/oke-software-poland/reasonml-marvel-tutorial-part-0-e38e1bfe1866)
 
 ## Videos
 
