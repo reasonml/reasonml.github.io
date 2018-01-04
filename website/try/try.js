@@ -4,7 +4,6 @@ import * as Colors from '../../src/utils/colors';
 import debounce from '../../src/utils/debounce';
 import * as lzString from 'lz-string';
 import codemirror from 'codemirror';
-import {css} from 'glamor';
 
 import javascript from 'codemirror/mode/javascript/javascript';
 import mllike from 'codemirror/mode/mllike/mllike';
@@ -39,20 +38,6 @@ const styles = {
     padding: '10px 20px',
   },
 
-  container: {
-    position: 'fixed',
-    display: 'flex',
-    flexDirection: 'column',
-    paddingTop: '50px',
-    top: 0,
-    bottom: 0,
-    left: 0,
-    right: 0,
-    '@media(max-width: 500px)': {
-      position: 'static',
-      display: 'block',
-    },
-  },
   inner: {
     flexDirection: 'row',
     flex: 1,
@@ -111,49 +96,6 @@ const styles = {
     borderRadius: '0 0 0 5px',
   },
 
-  toolbar: {
-    display: 'flex',
-    fontSize: 16,
-    flexDirection: 'row',
-    justifyContent: 'flex-end'
-  },
-
-  toolbarButton: {
-    display: 'flex',
-    borderLeft: '1px solid #d6d4d4',
-    padding: '1em 2em',
-    flexDirection: 'row',
-
-    '&:hover, &:hover button': {
-      color: accent,
-      cursor: 'pointer'
-    },
-
-    '@media(max-height: 770px)': {
-      padding: '.5em 1em',
-    },
-  },
-
-  shareButton: {
-    position: 'relative',
-
-    '& input': {
-      background: gray,
-      transition: 'all 250ms',
-      width: 0,
-      padding: 0,
-    },
-
-    '&:hover input': {
-      width: '25vw',
-      marginRight: '1em',
-    },
-
-    '&:hover .tooltip': {
-      display: 'block'
-    }
-  },
-
   tooltip: {
     display: 'none',
     position: 'absolute',
@@ -208,46 +150,6 @@ const styles = {
     marginRight: 'auto',
   },
 
-  exampleMenu: {
-    position: 'absolute',
-    color: '#555',
-    zIndex: 10,
-    background: 'white',
-    display: 'none',
-    top: '100%',
-    left: 0,
-    minWidth: '100%',
-    width: '25vw',
-    boxShadow: '1px 1px 1px rgba(0, 0, 0, .2)',
-    borderTop: '1px solid #d6d4d4',
-    margin: 0,
-    padding: 0,
-    listStyle: 'none',
-
-    '& li': {
-      margin: 0,
-      padding: '.5em 2em',
-
-      '&:first-child': {
-        paddingTop: '1em'
-      },
-      '&:last-child': {
-        paddingBottom: '1em'
-      }
-    },
-
-    '& li:hover': {
-      color: accent
-    }
-  },
-
-  toolbarCheckbox: {
-    display: 'flex',
-    marginLeft: '1em',
-    alignSelf: 'center',
-    justifySelf: 'center',
-  },
-
   fakeCodemirrorPreload: {
     display: 'flex',
     flexGrow: 1,
@@ -281,11 +183,6 @@ const styles = {
     },
   },
 };
-
-Object.keys(styles).map(function(key) {
-  styles[key] = css(styles[key]);
-});
-console.log(styles);
 
 class CodeMirror extends Component {
   constructor(props) {
@@ -322,7 +219,8 @@ const oldSyntax = () => {
   let url = window.location;
   url = url.toString();
   url = url.replace(/reasonml.github.io/,"reasonml-old.github.io")
-  // url = url.replace(/localhost:8000/,"reasonml-old.github.io")
+  url = url.replace(/localhost:3000/,"reasonml-old.github.io")
+  url = url.replace(/en\/try.html/,"try")
   window.location = url;
 };
 
@@ -336,7 +234,7 @@ let rec sum = (item) => {
   | Leaf => 0
   | Node(value, left, right) => value + sum(left) + sum(right);
   }
-}
+};
 
 let myTree =
   Node(
@@ -356,7 +254,7 @@ let text = "Hello World!";
 Js.log(text |> btoa);
 Js.log(text |> btoa |> atob);`
 }, {
-  name: 'Recursion - Factorial',
+  name: 'Factorial',
   code:
 `/* Based on https://rosettacode.org/wiki/Factorial#Recursive_50 */
 let rec factorial = (n) =>
@@ -366,7 +264,7 @@ let rec factorial = (n) =>
 
 Js.log(factorial(6));`
 }, {
-  name: 'Recursion - Greatest Common Divisor',
+  name: 'Greatest Common Divisor',
   code:
 `/* Based on https://rosettacode.org/wiki/Greatest_common_divisor#OCaml */
 let rec gcd = (a, b) =>
@@ -377,7 +275,7 @@ let rec gcd = (a, b) =>
 
 Js.log(gcd(27, 9));`
 }, {
-  name: 'Recursion - Towers of Hanoi',
+  name: 'Towers of Hanoi',
   code:
 `/* Based on https://rosettacode.org/wiki/Towers_of_Hanoi#OCaml */
 let rec hanoi = (n, a, b, c) =>
@@ -565,14 +463,14 @@ class ShareButton extends Component {
     const {showConfirmation} = this.state;
 
     return (
-      <div className={`${styles.toolbarButton} ${styles.shareButton}`}>
+      <div className={this.props.className}>
         <input
           id="shareableUrl"
           value={this.props.url}
           readOnly
         />
-        <button onClick={this.onClick}>Share</button>
-        <span className={showConfirmation ? 'tooltip s-show-confirmation' : 'tooltip'} className={styles.tooltip}>
+        <div onClick={this.onClick}>Share</div>
+        <span className={showConfirmation ? 'tooltip s-show-confirmation' : 'tooltip'} style={styles.tooltip}>
           <span className="arrow"></span>
           <span className="help">Click to copy to clipboard</span>
           <span className="confirmation">Copied</span>
@@ -852,44 +750,42 @@ class Try extends Component {
       ocamlSyntaxError,
       jsError
     } = this.state;
-    const codemirrorStyles = [
-      styles.codemirror,
-      isSafari && styles.codemirrorSafari,
-    ];
+    const codemirrorStyles = isSafari
+      ? Object.assign({}, styles.codemirror, styles.codemirrorSafari)
+      : styles.codemirror;
     return (
-      <div className={styles.container}>
-        <div className={styles.toolbar}>
-          <div className={`${styles.toolbarButton} ${styles.toolbarButtonRight}`}>
-            <button className="try-examples">Examples</button>
-            <ul className={styles.exampleMenu}>
+      <div className="try-inner">
+        <div className="try-buttons">
+          <div className="try-button-item try-button-examples try-button-right">
+            Examples
+            <ul className="try-button-examples-list">
               {examples.map(example => <li key={example.name} onClick={() => this.updateReason(example.code)}>{example.name}</li>)}
             </ul>
           </div>
-          <div className={`${styles.toolbarButton} ${styles.toolbarButtonRight} ${styles.toolbarButtonFill}`}>
-            <button onClick={oldSyntax}>
-              Old Syntax
-            </button>
+          <div className="try-button-item try-button-right" style={{marginRight: 'auto'}} onClick={oldSyntax}>
+            Old Syntax
           </div>
-          <div className={styles.toolbarButton}>
-            <button onClick={this.evalLatest}>Evaluate</button>
+          <div className="try-button-item">
+            Evaluate
             <input
-              className={styles.toolbarCheckbox}
+              className="try-button-evaluate-checkbox"
               type="checkbox"
               checked={this.state.autoEvaluate}
               onChange={this.toggleEvaluate}
             />
           </div>
           <ShareButton
+            className="try-button-item try-button-share"
             url={this.state.shareableUrl}
             onClick={this.copyShareableUrl}
           />
         </div>
-        <div className={styles.inner}>
-          <div className={styles.column}>
-            <div className={styles.row}>
-              <div className={styles.label}>Reason</div>
+        <div style={styles.inner}>
+          <div style={styles.column}>
+            <div style={styles.row}>
+              <div style={styles.label}>Reason</div>
               <CodeMirror
-                className={codemirrorStyles}
+                style={codemirrorStyles}
                 value={reason}
                 options={{
                   mode: 'rust',
@@ -898,18 +794,18 @@ class Try extends Component {
                 onChange={this.updateReason}
               />
               {reasonSyntaxError &&
-                <div className={styles.error}>
-                  <div className={styles.errorBody}>
+                <div style={styles.error}>
+                  <div style={styles.errorBody}>
                     {formatErrorLocation(reasonSyntaxError.location)}
                     {' '}
                     {capitalizeFirstChar(stripErrorNumberFromReasonSyntaxError(reasonSyntaxError.message))}
                   </div>
                 </div>}
             </div>
-            <div className={styles.row}>
-              <div className={styles.label}>OCaml</div>
+            <div style={styles.row}>
+              <div style={styles.label}>OCaml</div>
               <CodeMirror
-                className={codemirrorStyles}
+                style={codemirrorStyles}
                 value={ocaml}
                 options={{
                   mode: 'mllike',
@@ -918,32 +814,32 @@ class Try extends Component {
                 onChange={this.updateOCaml}
               />
               {ocamlSyntaxError &&
-                <div className={styles.error}>
-                  <div className={styles.errorBody}>
+                <div style={styles.error}>
+                  <div style={styles.errorBody}>
                     {ocamlSyntaxError.message}
                   </div>
                 </div>}
               {compileError &&
-                <div className={styles.error}>
-                  <div className={styles.errorBody}>
+                <div style={styles.error}>
+                  <div style={styles.errorBody}>
                     {compileError.js_error_msg
                       ? compileError.js_error_msg
                       : compileError.message}
                   </div>
                 </div>}
               {compileWarning &&
-                <div className={styles.warning}>
-                  <div className={styles.errorBody}>
+                <div style={styles.warning}>
+                  <div style={styles.errorBody}>
                     {compileWarning}
                   </div>
                 </div>}
             </div>
           </div>
-          <div className={styles.column}>
-            <div className={styles.row}>
-              <div className={styles.label}>JavaScript</div>
+          <div style={styles.column}>
+            <div style={styles.row}>
+              <div style={styles.label}>JavaScript</div>
               <CodeMirror
-                className={codemirrorStyles}
+                style={codemirrorStyles}
                 value={js}
                 options={{
                   mode: 'javascript',
@@ -952,17 +848,17 @@ class Try extends Component {
                 }}
               />
               {jsError &&
-                <div className={styles.error}>
-                  <div className={styles.errorBody}>
+                <div style={styles.error}>
+                  <div style={styles.errorBody}>
                     {jsError.message}
                   </div>
                 </div>}
             </div>
-            <div className={styles.row}>
-              <div className={styles.label}>Output</div>
-              <div className={styles.output}>
+            <div style={styles.row}>
+              <div style={styles.label}>Output</div>
+              <div style={styles.output}>
                 {this.state.output.map((item, i) =>
-                  <div className={styles.outputLine} key={i}>
+                  <div style={styles.outputLine} key={i}>
                     {formatOutput(item)}
                   </div>
                 )}
@@ -983,4 +879,4 @@ const wrapInExports = code =>
 const formatOutput = item =>
   item.contents.join(' ')
 
-ReactDOM.render(<Try />, document.querySelector('#tryWrapper'));
+ReactDOM.render(<Try />, document.querySelector('#try-wrapper'));
