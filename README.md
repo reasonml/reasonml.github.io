@@ -1,34 +1,30 @@
-![reason logo](src/images/reason_200.png)
+# Reason Website
 
-# [Reason](https://github.com/facebook/reason) Website & Documentation
+This code is used to generate https://reasonml.github.io. It pulls in files from `docs/` and `website/` to generate html files served on the site.
 
-## Contribute
+`website/` contains the JS, CSS, images and other files (and blog, which contains some markdown files too, these are separated from `docs/`, not too important).
 
-All pages are in [src/pages/](src/pages/). The markdown files under [src/pages/guide](src/pages/guide/) and [src/pages/community](src/pages/community/) are probably of most interest.
+`npm install && npm start` to start the development server & watcher.
 
-## Building
+Don't use `npm build`. It's mostly for debugging.
 
-```
-yarn install
-npm run develop
-```
+In the end, we spit out normal HTML, with all the JS dependencies (barring a few critical ones) removed, including ReactJS itself. It's a full, static website, super lightweight, portable, unfancy but good looking. Works with JS turned off too.
 
-That'll start a hot-loading server & you can make changes & see the results.
+Two special files:
 
-If you have push access, to deploy a new version of the site, go to the source branch and do:
+- `sidebars.json`: lists the sections.
+- `siteConfig.json`: some header and i18n configs.
 
-```
-npm run deploy
-```
+During your development, most changes will be picked up at each browser refresh. If you touch these two files or `blog/`, however, you'll have to restart the server to see the changes.
 
-**Note**: the deployment is currently broken because of gatsby because of webpack because of chunking plugin, because that's life. We've currently cherry-picked the relevant changes into a stable branch called `new-deploy`. Deploy through that one.
+## Translations
 
-The site uses GatsbyJS. For info on how it works, take a look at [their docs](https://www.gatsbyjs.org/docs/).
+The entire site can be translated via the [Crowdin project](https://crowdin.com/project/reason). This repo only has the canonical english documentation. Don't manually edit things in `i18n/`.
 
-## Building the Playground
+## Debugging
 
-The playground uses a bundled JS version of Reason's refmt, [BuckleScript](https://bucklescript.github.io) compiler, its standard library, etc.
+`console.log`s appear in your terminal! Since the site itself is React-free.
 
-To build the bundled standard library & refmt: Please read the documentation in `setupSomeArtifacts.js`.
+## Building and Deploying
 
-bs: make sure you've got closure compiler, OPAM, js_of_ocaml, reason and menhirLib installed, then invoke black magic at https://github.com/jaredly/bs-refmt-jsoo. Then cry a little and submit a PR to make the process better.
+Changes from `source` branch are automatically picked into `master` branch by CI, then published. Translation download/uploads are still manual right now (needs API key, which @rickyvetter and @chenglou have).
