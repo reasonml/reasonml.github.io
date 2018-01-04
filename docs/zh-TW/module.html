@@ -1,0 +1,238 @@
+<html><head><meta charset="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1"/><title>模組 · Reason</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta property="og:title" content="模組 · Reason"/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io//index.html"/><meta property="og:description" content="## Basics"/><link rel="shortcut icon" href="/img/icon_50.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/arduino-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io//blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io//blog/feed.xml" title="Reason Blog RSS Feed"/><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/dummy.svg"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li><a href="/docs/zh-TW/quickstart-javascript.html" target="_self">文件</a></li><li><a href="/zh-TW/try.html" target="_self">Try</a></li><li><a href="/api/index.html" target="_self">API</a></li><li><a href="/docs/zh-TW/community.html" target="_self">Community</a></li><li><a href="/blog" target="_self">網誌</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg"/>繁體中文</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/ja">日本語</a></li><li><a href="/en">English</a></li><li><a href="/es-ES">Español</a></li><li><a href="/fr">Français</a></li><li><a href="/ko">한국어</a></li><li><a href="/pt-BR">Português (Brasil)</a></li><li><a href="/ru">Русский</a></li><li><a href="/zh-CN">中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank">協助翻譯</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(){
+          if(languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search"/></li><li><a href="https://github.com/facebook/reason" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>Language Basics</span></h2></div><div class="navGroups"><div class="navGroup navGroupActive"><h3>Intro</h3><ul><li class="navListItem"><a class="navItem" href="/docs/zh-TW/what-and-why.html">什麼 &amp; 為何</a></li></ul></div><div class="navGroup navGroupActive"><h3>Editor Setup</h3><ul><li class="navListItem"><a class="navItem" href="/docs/zh-TW/global-installation.html">全域安裝</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/editor-plugins.html">Editors Plugins</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/extra-goodies.html">更多好物</a></li></ul></div><div class="navGroup navGroupActive"><h3>Language Basics</h3><ul><li class="navListItem"><a class="navItem" href="/docs/zh-TW/overview.html">概述</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/let-binding.html">Let 繫結</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/type.html">型別！</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/string-and-char.html">字串 &amp; 字元</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/boolean.html">布林值</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/integer-and-float.html">整數 &amp; 浮點數</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/tuple.html">Tuple</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/record.html">Record</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/variant.html">變異！</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/list-and-array.html">List &amp; 陣列</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/function.html">函式</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/if-else.html">If-Else</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/more-on-type.html">更多有關型別</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/destructuring.html">解構</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/pattern-matching.html">樣式匹配</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/mutation.html">可突變</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/imperative-loops.html">命令式迴圈</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/jsx.html">JSX</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/external.html">外部</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/exception.html">例外</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/object.html">物件</a></li><li class="navListItem navListItemActive"><a class="navItem navItemActive" href="/docs/zh-TW/module.html">模組</a></li></ul></div><div class="navGroup navGroupActive"><h3>JavaScript</h3><ul><li class="navListItem"><a class="navItem" href="/docs/zh-TW/quickstart-javascript.html">Quickstart</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/interop.html">交互作用</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/syntax-cheatsheet.html">句法簡潔手冊</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/libraries.html">函式庫</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/converting-from-js.html">Converting from JS</a></li></ul></div><div class="navGroup navGroupActive"><h3>Native</h3><ul><li class="navListItem"><a class="navItem" href="/docs/zh-TW/native.html">Native</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/quickstart-ocaml.html">Quickstart</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/convert-from-ocaml.html">從 OCaml 轉換</a></li></ul></div><div class="navGroup navGroupActive"><h3>Extra</h3><ul><li class="navListItem"><a class="navItem" href="/docs/zh-TW/comparison-to-ocaml.html">Comparison to OCaml</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/newcomer-examples.html">Newcomer Examples</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/project-structure.html">專案結構</a></li></ul></div></div></section></div><script>
+          var toggler = document.getElementById('navToggler');
+          var nav = document.getElementById('docsNav');
+          toggler.onclick = function() {
+            nav.classList.toggle('docsSliderActive');
+          };
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://crowdin.com/project/reason/zh-TW" target="_blank">Translate</a><h1>模組</h1></header><article><div><span><h2><a class="anchor" aria-hidden="true" name="basics"></a><a href="#basics" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Basics</h2>
+<p><strong>Modules are like mini files</strong>! They can contain type definitions, <code>let</code> bindings, nested modules, etc.</p>
+<h3><a class="anchor" aria-hidden="true" name="creation"></a><a href="#creation" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Creation</h3>
+<p>To create a module, use the <code>module</code> keyword. The module name must start with a <strong>capital letter</strong>. Whatever you could place in a <code>.re</code> file, you may place inside a module definition's <code>{}</code> block.</p>
+<pre><code class="hljs css reason"><span class="hljs-keyword">module</span> School = {
+  <span class="hljs-keyword">type</span> profession = Teacher | Director;
+
+  <span class="hljs-keyword">let</span> person1 = Teacher;
+  <span class="hljs-keyword">let</span> getProfession = <span class="hljs-function">(<span class="hljs-params">person</span>) =&gt;</span>
+    <span class="hljs-keyword">switch</span> person {
+    | <span class="hljs-function"><span class="hljs-params">Teacher</span> =&gt;</span> <span class="hljs-string">"A teacher"</span>
+    | <span class="hljs-function"><span class="hljs-params">Director</span> =&gt;</span> <span class="hljs-string">"A director"</span>
+    };
+};
+</code></pre>
+<p>A module's contents (including types!) can be accessed much like a record's, using the <code>.</code> notation. This demonstrates modules' utility for namespacing.</p>
+<pre><code class="hljs css reason">let anotherPerson: <span class="hljs-keyword">School.profession </span>= <span class="hljs-keyword">School.Teacher;
+</span>print_endline(<span class="hljs-keyword">School.getProfession(anotherPerson)); </span><span class="hljs-comment">/* "A teacher" */</span>
+</code></pre>
+<p>Nested modules work too.</p>
+<pre><code class="hljs css reason">module <span class="hljs-attr">MyModule</span> = {
+  module <span class="hljs-attr">NestedModule</span> = {
+    <span class="hljs-keyword">let</span> <span class="hljs-attr">message</span> = <span class="hljs-string">"hello"</span>;
+  };
+};
+
+<span class="hljs-keyword">let</span> <span class="hljs-attr">message</span> = MyModule.NestedModule.message;
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" name="open-ing-a-module"></a><a href="#open-ing-a-module" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>open</code>ing a module</h3>
+<p>Constantly referring to a value/type in a module can be tedious. We can open a module's definition and refer to its contents without prepending them with the module's name. Two ways:</p>
+<p>Local open.</p>
+<pre><code class="hljs css reason"><span class="hljs-keyword">let</span> message =
+  School.(
+    <span class="hljs-keyword">switch</span> person1 {
+    | <span class="hljs-function"><span class="hljs-params">Teacher</span> =&gt;</span> <span class="hljs-string">"Hello teacher!"</span>
+    | <span class="hljs-function"><span class="hljs-params">Director</span> =&gt;</span> <span class="hljs-string">"Hello director!"</span>
+    }
+  );
+</code></pre>
+<p>Global open. <strong>Use this sparingly as it allows convenience at the cost of ease of reasoning</strong>:</p>
+<pre><code class="hljs css reason">open <span class="hljs-keyword">School;
+</span>let anotherPerson: profession = Teacher<span class="hljs-comment">;</span>
+printProfession(anotherPerson)<span class="hljs-comment">;</span>
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" name="extending-modules"></a><a href="#extending-modules" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Extending modules</h3>
+<p>Using <code>include</code> in a module statically &quot;spreads&quot; a module's content into a new one, thus often fulfill the role of &quot;inheritance&quot; or &quot;mixin&quot;.</p>
+<pre><code class="hljs css reason"><span class="hljs-keyword">module</span> BaseComponent = {
+  <span class="hljs-keyword">let</span> defaultGreeting = <span class="hljs-string">"Hello"</span>;
+  <span class="hljs-keyword">let</span> getAudience = <span class="hljs-function">(<span class="hljs-params">~excited</span>) =&gt;</span> excited ? <span class="hljs-string">"world!"</span> : <span class="hljs-string">"world"</span>;
+};
+
+<span class="hljs-keyword">module</span> ActualComponent = {
+  <span class="hljs-comment">/* the content is copied over */</span>
+  include BaseComponent;
+  <span class="hljs-comment">/* overrides BaseComponent.defaultGreeting */</span>
+  <span class="hljs-keyword">let</span> defaultGreeting = <span class="hljs-string">"Hey"</span>;
+  <span class="hljs-keyword">let</span> render = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> defaultGreeting ++ <span class="hljs-string">" "</span> ++ getAudience(~excited=<span class="hljs-literal">true</span>);
+};
+</code></pre>
+<p><strong>Note</strong>: <code>include</code> and <code>open</code> are very different! The former literally copies over definitions into the new module for it to appropriate. The latter simply allows refering to items (values, types, constructors, etc.) in the <code>open</code>ed module's scope in an &quot;unqualified&quot; way (aka, <code>foo</code> instead of the qualified <code>MyModule.foo</code>).</p>
+<h3><a class="anchor" aria-hidden="true" name="every-re-file-is-a-module"></a><a href="#every-re-file-is-a-module" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Every <code>.re</code> file is a module</h3>
+<p>An OCaml/Reason file maps to a module; this unlocks some interesting expressivity that'd previously require code generation in other languages. The file <code>react.re</code> implicitly forms a module <code>React</code>, which can be seen by other source files.</p>
+<pre><code class="hljs css reason"><span class="hljs-comment">/* fileA.re. This typically compiles to module FileA below */</span>
+<span class="hljs-keyword">let</span> <span class="hljs-attr">a</span> = <span class="hljs-number">1</span>;
+<span class="hljs-keyword">let</span> <span class="hljs-attr">b</span> = <span class="hljs-number">2</span>;
+
+<span class="hljs-comment">/* fileB.re */</span>
+<span class="hljs-comment">/* Maps fileA's implementation to a new API */</span>
+<span class="hljs-keyword">let</span> <span class="hljs-attr">alpha</span> = FileA.a;
+<span class="hljs-keyword">let</span> <span class="hljs-attr">beta</span> = FileA.b;
+</code></pre>
+<p>This contrived snippet expresses &quot;copying&quot; a file:</p>
+<pre><code class="hljs css reason"><span class="hljs-comment">/* fileA.re. This typically compiles to module FileA below */</span>
+let a = <span class="hljs-number">1</span><span class="hljs-comment">;</span>
+let <span class="hljs-keyword">b </span>= <span class="hljs-number">2</span><span class="hljs-comment">;</span>
+
+<span class="hljs-comment">/* fileB.re */</span>
+<span class="hljs-comment">/* compiles to exactly fileA.re's content with no runtime overhead! */</span>
+include FileA<span class="hljs-comment">;</span>
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" name="signatures"></a><a href="#signatures" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Signatures</h2>
+<p>A module's type is called a &quot;signature&quot;, and can be written explicitly. If a module is like a <code>.re</code> (implementation) file, then a module's signature is like a <code>.rei</code> (interface) file.</p>
+<h3><a class="anchor" aria-hidden="true" name="creation"></a><a href="#creation" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Creation</h3>
+<p>To create a signature, use the <code>module type</code> keyword. The signature name must start with a <strong>capital letter</strong>. Whatever you could place in a <code>.rei</code> file, you may place inside a signature definition's <code>{}</code> block.</p>
+<pre><code class="hljs css reason"><span class="hljs-comment">/* Picking up previous section's example */</span>
+<span class="hljs-keyword">module</span> type EstablishmentType = {
+  <span class="hljs-keyword">type</span> profession;
+  <span class="hljs-keyword">let</span> getProfession: <span class="hljs-function"><span class="hljs-params">profession</span> =&gt;</span> <span class="hljs-built_in">string</span>;
+};
+</code></pre>
+<p>A signature defines the list of requirements that a module must satisfy in order for that module to match the signature. Those requirements are of the form:</p>
+<ul>
+<li><p><code>let x: int;</code> requires a <code>let</code> binding named <code>x</code>, of type <code>int</code>.</p></li>
+<li><p><code>type t = someType;</code> requires a type field <code>t</code> to be equal to <code>someType</code>.</p></li>
+<li><p><code>type t;</code> requires a type field <code>t</code>, but without imposing any requirements on the actual, concrete type of <code>t</code>. We'd use <code>t</code> in other entries in the signature to describe relationships, e.g. <code>let makePair: t =&gt; (t, t)</code> but we cannot, for example, assume that <code>t</code> is an <code>int</code>. This gives us great, enforced abstraction abilities.</p></li>
+</ul>
+<p>To illustrate the various kinds of type entries, consider the above signature <code>EstablishmentType</code> which requires that a module:</p>
+<ul>
+<li>Declare a type named <code>profession</code>.</li>
+<li>Must include a function that takes in a value of the type <code>profession</code> and returns a string.</li>
+</ul>
+<p><strong>Note</strong>:</p>
+<p>Modules of the type <code>EstablishmentType</code> can contain more fields than the signature declares, just like the module <code>School</code> in the previous section (if we choose to assign it the type <code>EstablishmentType</code>. Otherwise, <code>School</code> exposes every field). This effectively makes the <code>person1</code> field an enforced implementation detail! Outsiders can't access it, since it's not present in the signature; the signature <strong>constrained</strong> what others can access.</p>
+<p>The type <code>EstablishmentType.profession</code> is <strong>abstract</strong>: it doesn't have a concrete type; it's saying &quot;I don't care what the actual type is, but it's used as input to <code>getProfession</code>&quot;. This is useful to fit many modules under the same interface:</p>
+<pre><code class="hljs css reason">module Company: EstablishmentType = {
+ <span class="hljs-built_in"> type </span>profession = CEO | Designer | Engineer | <span class="hljs-built_in">..</span>.;
+
+  let getProfession = (person) =&gt; <span class="hljs-built_in">..</span>.;
+  let person1 = <span class="hljs-built_in">..</span>.;
+  let person2 = <span class="hljs-built_in">..</span>.;
+};
+</code></pre>
+<p>It's also useful to hide the underlying type as an implementation detail others can't rely on. If you ask what the type of <code>Company.profession</code> is, instead of exposing the variant, it'll only tell you &quot;it's <code>Company.profession</code>&quot;.</p>
+<h3><a class="anchor" aria-hidden="true" name="extending-module-signatures"></a><a href="#extending-module-signatures" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Extending module signatures</h3>
+<p>Like modules themselves, module signatures can also be extended through <code>include module type of Foo</code>:</p>
+<pre><code class="hljs css reason"><span class="hljs-keyword">module</span> <span class="hljs-keyword">type</span> <span class="hljs-type">BaseComponent</span> = {
+  <span class="hljs-keyword">let</span> defaultGreeting: <span class="hljs-built_in">string</span>;
+  <span class="hljs-keyword">let</span> getAudience: (~excited: <span class="hljs-built_in">bool</span>) =&gt; <span class="hljs-built_in">string</span>;
+};
+
+<span class="hljs-keyword">module</span> <span class="hljs-keyword">type</span> <span class="hljs-type">ActualComponent</span> = {
+  /* the signature is copied over */
+  <span class="hljs-keyword">include</span> (<span class="hljs-keyword">module</span> <span class="hljs-keyword">type</span> <span class="hljs-keyword">of</span> <span class="hljs-type">BaseComponent</span>);
+  <span class="hljs-keyword">let</span> render: <span class="hljs-built_in">unit</span> =&gt; <span class="hljs-built_in">string</span>;
+};
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" name="every-rei-file-is-a-signature"></a><a href="#every-rei-file-is-a-signature" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Every <code>.rei</code> file is a signature</h3>
+<p>Similar to how a <code>react.re</code> file implicitly defines a module <code>React</code>, a file <code>react.rei</code> implicitly defines a signature for <code>React</code>. If <code>react.rei</code> isn't provided, the signature of <code>react.re</code> defaults to exposing all the fields of the module. Because they don't contain implementation files, <code>.rei</code> files are used in the ecosystem to also document the public API of their corresponding modules.</p>
+<pre><code class="hljs css reason">/* file react.re (implementation. <span class="hljs-type">Compiles</span> <span class="hljs-keyword">to</span> <span class="hljs-keyword">module</span> <span class="hljs-type">React</span>) */
+<span class="hljs-keyword">type</span> state = <span class="hljs-built_in">int</span>;
+<span class="hljs-keyword">let</span> render = (str) =&gt; str;
+</code></pre>
+<pre><code class="hljs css reason">/* file react.rei (interface. <span class="hljs-type">Compiles</span> <span class="hljs-keyword">to</span> signature <span class="hljs-keyword">of</span> <span class="hljs-keyword">module</span> <span class="hljs-type">React</span>) */
+<span class="hljs-keyword">type</span> state = <span class="hljs-built_in">int</span>;
+<span class="hljs-keyword">let</span> render: str =&gt; str;
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" name="module-functions-functors"></a><a href="#module-functions-functors" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Module Functions (functors)</h2>
+<p>Modules can be passed to functions! It would be the equivalent of passing a file as a first-class item. However, modules are at a different &quot;layer&quot; of the language than other common concepts, so we can't pass them to <em>regular</em> functions. Instead, we pass them to special functions called &quot;functors&quot;.</p>
+<p>The syntax for defining and using functors is very much like the syntax for defining and using regular functions. The primary differences are:</p>
+<ul>
+<li>Functors use the <code>module</code> keyword instead of <code>let</code>.</li>
+<li>Functors take modules as arguments and return a module.</li>
+<li>Functors <em>require</em> annotating arguments.</li>
+<li>Functors must start with a capital letter (just like modules/signatures).</li>
+</ul>
+<p>Here's an example <code>MakeSet</code> functor, that takes in a module of the type <code>Comparable</code> and returns a new set that can contain such comparable items.</p>
+<pre><code class="hljs css reason"><span class="hljs-keyword">module</span> type Comparable = {
+  <span class="hljs-keyword">type</span> t;
+  <span class="hljs-keyword">let</span> equal: <span class="hljs-function">(<span class="hljs-params">t, t</span>) =&gt;</span> bool;
+};
+
+<span class="hljs-keyword">module</span> MakeSet = (Item: Comparable) =&gt; {
+  <span class="hljs-comment">/* let's use a list as our naive backing data structure */</span>
+  <span class="hljs-keyword">type</span> backingType = list(Item.t);
+  <span class="hljs-keyword">let</span> empty = [];
+  <span class="hljs-keyword">let</span> add = (currentSet: backingType, newItem: Item.t) : <span class="hljs-function"><span class="hljs-params">backingType</span> =&gt;</span>
+    <span class="hljs-comment">/* if item exists */</span>
+    <span class="hljs-keyword">if</span> (List.exists(<span class="hljs-function">(<span class="hljs-params">x</span>) =&gt;</span> Item.equal(x, newItem), currentSet)) {
+      currentSet <span class="hljs-comment">/* return the same (immutable) set (a list really) */</span>
+    } <span class="hljs-keyword">else</span> {
+      [
+        newItem,
+        ...currentSet <span class="hljs-comment">/* prepend to the set and return it */</span>
+      ]
+    };
+};
+</code></pre>
+<p>Functors can be applied using function application syntax. In this case, we're creating a set, whose items are pairs of integers.</p>
+<pre><code class="hljs css reason"><span class="hljs-keyword">module</span> IntPair = {
+  <span class="hljs-keyword">type</span> t = (int, int);
+  <span class="hljs-keyword">let</span> equal = <span class="hljs-function">(<span class="hljs-params">(<span class="hljs-params">x1, y1</span>), (<span class="hljs-params">x2, y2</span>)</span>) =&gt;</span> x1 == x2 &amp;&amp; y1 == y2;
+  <span class="hljs-keyword">let</span> create = <span class="hljs-function">(<span class="hljs-params">x, y</span>) =&gt;</span> (x, y);
+};
+
+<span class="hljs-comment">/* IntPair abides by the Comparable signature required by MakeSet */</span>
+<span class="hljs-keyword">module</span> SetOfIntPairs = MakeSet(IntPair);
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" name="module-functions-types"></a><a href="#module-functions-types" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Module functions types</h3>
+<p>Like with module types, functor types also act to constrain and hide what we may assume about functors. The syntax for functor types are consistent with those for function types, but with types capitalized to represent the signatures of modules the functor accepts as arguments and return values. In the previous example, we're exposing the backing type of a set; by giving <code>MakeSet</code> a functor signature, we can hide the underlying data structure!</p>
+<pre><code class="hljs css reason">module<span class="hljs-built_in"> type </span>Comparable = <span class="hljs-built_in">..</span>.
+
+module<span class="hljs-built_in"> type </span>MakeSetType = (Item: Comparable) =&gt; {
+ <span class="hljs-built_in"> type </span>backingType;
+  let empty: backingType;
+  let add: (backingType, Item.t) =&gt; backingType;
+};
+
+module MakeSet: MakeSetType = (Item: Comparable) =&gt; {
+  <span class="hljs-built_in">..</span>.
+};
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" name="drawbacks"></a><a href="#drawbacks" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Drawbacks</h2>
+<p>Modules and functors are at a different &quot;layer&quot; of language than the rest ( functions, let bindings, data structures, etc.). For example, you can't easily pass them into a tuple or record. Use them judiciously! Lots of times, just a record or a function is enough.</p>
+<pre><code class="hljs css reason">module <span class="hljs-type">School</span> = <span class="hljs-meta">{...}</span>;
+
+/* this will straight up give you a syntax error! */
+<span class="hljs-keyword">let</span> schools = (<span class="hljs-type">School</span>, <span class="hljs-type">School</span>);
+</code></pre>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="object.html">← 物件</a><a class="docs-next button" href="quickstart-javascript.html">Quickstart →</a></div></div></div></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.js"></script><script>window.foo = new Pjax({
+          areas: [
+            // try to use the first query.
+            '.mainContainer, .docsNavContainer .toc .navWrapper',
+            // fallback
+            'body'
+          ],
+          link: '.docsNavContainer:not(.docsSliderActive) a',
+          update: {
+            script: false,
+          }
+        });
+        var languagesMenuItemCopy = document.getElementById("languages-menu");
+        languagesMenuItemCopy.addEventListener("click", function(e){
+          e.preventDefault();
+          e.stopPropagation();
+          e.stopImmediatePropagation();
+        });</script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+              var search = docsearch({
+                apiKey: '55156da6520de795d3a2c2d23786f08e',
+                indexName: 'reason',
+                inputSelector: '#search_input_react'
+              });
+            </script></body></html>

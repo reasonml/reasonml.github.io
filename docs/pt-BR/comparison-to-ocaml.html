@@ -1,0 +1,1547 @@
+<html><head><meta charset="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1"/><title>Comparison to OCaml · Reason</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta property="og:title" content="Comparison to OCaml · Reason"/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io//index.html"/><meta property="og:description" content="Se você veio da OCaml ou é um recém-chegado lendo um tutorial escrito na OCaml, este guia é para você! Mas não se esqueça de que [ reason-tools](https://github.com/reasonml/reason-tools) pode converter entre sintaxe OCaml e Reason em tempo real."/><link rel="shortcut icon" href="/img/icon_50.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/arduino-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io//blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io//blog/feed.xml" title="Reason Blog RSS Feed"/><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/dummy.svg"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li><a href="/docs/pt-BR/quickstart-javascript.html" target="_self">Docs</a></li><li><a href="/pt-BR/try.html" target="_self">Try</a></li><li><a href="/api/index.html" target="_self">API</a></li><li><a href="/docs/pt-BR/community.html" target="_self">Community</a></li><li><a href="/blog" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg"/>Português (Brasil)</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/ja">日本語</a></li><li><a href="/en">English</a></li><li><a href="/es-ES">Español</a></li><li><a href="/fr">Français</a></li><li><a href="/ko">한국어</a></li><li><a href="/ru">Русский</a></li><li><a href="/zh-CN">中文</a></li><li><a href="/zh-TW">繁體中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank">Help Translate</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(){
+          if(languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search"/></li><li><a href="https://github.com/facebook/reason" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>Extra</span></h2></div><div class="navGroups"><div class="navGroup navGroupActive"><h3>Intro</h3><ul><li class="navListItem"><a class="navItem" href="/docs/pt-BR/what-and-why.html">What &amp; Why</a></li></ul></div><div class="navGroup navGroupActive"><h3>Editor Setup</h3><ul><li class="navListItem"><a class="navItem" href="/docs/pt-BR/global-installation.html">Global Installation</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/editor-plugins.html">Editors Plugins</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/extra-goodies.html">Extra Goodies</a></li></ul></div><div class="navGroup navGroupActive"><h3>Language Basics</h3><ul><li class="navListItem"><a class="navItem" href="/docs/pt-BR/overview.html">Overview</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/let-binding.html">Let Binding</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/type.html">Type!</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/string-and-char.html">String &amp; Char</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/boolean.html">Boolean</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/integer-and-float.html">Integer &amp; Float</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/tuple.html">Tuple</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/record.html">Record</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/variant.html">Variant!</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/list-and-array.html">List &amp; Array</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/function.html">Function</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/if-else.html">If-Else</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/more-on-type.html">More on Type</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/destructuring.html">Destructuring</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/pattern-matching.html">Pattern Matching!</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/mutation.html">Mutation</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/imperative-loops.html">Imperative Loops</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/jsx.html">JSX</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/external.html">External</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/exception.html">Exception</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/object.html">Object</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/module.html">Module</a></li></ul></div><div class="navGroup navGroupActive"><h3>JavaScript</h3><ul><li class="navListItem"><a class="navItem" href="/docs/pt-BR/quickstart-javascript.html">Quickstart</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/interop.html">Interop</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/syntax-cheatsheet.html">Syntax Cheatsheet</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/libraries.html">Libraries</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/converting-from-js.html">Converting from JS</a></li></ul></div><div class="navGroup navGroupActive"><h3>Native</h3><ul><li class="navListItem"><a class="navItem" href="/docs/pt-BR/native.html">Native</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/quickstart-ocaml.html">Quickstart</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/convert-from-ocaml.html">Converting from OCaml</a></li></ul></div><div class="navGroup navGroupActive"><h3>Extra</h3><ul><li class="navListItem navListItemActive"><a class="navItem navItemActive" href="/docs/pt-BR/comparison-to-ocaml.html">Comparison to OCaml</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/newcomer-examples.html">Newcomer Examples</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/project-structure.html">Project Structure</a></li></ul></div></div></section></div><script>
+          var toggler = document.getElementById('navToggler');
+          var nav = document.getElementById('docsNav');
+          toggler.onclick = function() {
+            nav.classList.toggle('docsSliderActive');
+          };
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://crowdin.com/project/reason/pt-BR" target="_blank">Translate</a><h1>Comparison to OCaml</h1></header><article><div><span><p>Se você veio da OCaml ou é um recém-chegado lendo um tutorial escrito na OCaml, este guia é para você! Mas não se esqueça de que <a href="https://github.com/reasonml/reason-tools"> reason-tools</a> pode converter entre sintaxe OCaml e Reason em tempo real.</p>
+<h2><a class="anchor" aria-hidden="true" name="comments"></a><a href="#comments" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Comments</h2>
+<table>
+<thead>
+<tr><th>OCaml</th><th>Reason</th></tr>
+</thead>
+<tbody>
+<tr><td><code>(* OCaml (*nest*) *)</code></td><td><code>/* Reason /*nest*/ */</code></td></tr>
+</tbody>
+</table>
+<h2><a class="anchor" aria-hidden="true" name="operator-renaming"></a><a href="#operator-renaming" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Operator Renaming</h2>
+<p>Reason tem todos os operadores infixos da OCaml, mas alguns deles são expressos de maneira diferente. No Reason, igualdade estrutural é escrita com <code>= =</code> e igualdade referencial (física) é escrita com <code>=</code>. No Reason, para obter a correspondente desigualdade, simplesmente troca-se o primeiro caractere por um caractere de <code>!</code> (exclamação). (<code>!=</code> de desigualdade estrutural, e <code>!==</code> para desigualdade de referência).</p>
+<table>
+<thead>
+<tr><th>Igualdade</th><th>OCaml</th><th>Reason</th></tr>
+</thead>
+<tbody>
+<tr><td>Estrutural</td><td><code>x = y</code></td><td><code>x == y</code></td></tr>
+<tr><td>Referêncial</td><td><code>x == y</code></td><td><code>x === y</code></td></tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr><th>Desigualdade</th><th>OCaml</th><th>Reason</th></tr>
+</thead>
+<tbody>
+<tr><td>Estrutural</td><td><code>x &lt;&gt; y</code></td><td><code>x != y</code></td></tr>
+<tr><td>Referêncial</td><td><code>x != y</code></td><td><code>x !== y</code></td></tr>
+</tbody>
+</table>
+<h2><a class="anchor" aria-hidden="true" name="local-scope"></a><a href="#local-scope" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Local Scope</h2>
+<p>O escopo léxico do Reason é exatamente igual a da OCaml, mas deixe as ligações sintaticamente assemelhando-se aos &quot;escopos de bloco&quot;, que são mais familiar para muitos desenvolvedores. No Reason, eles são criados com chaves <code>{}</code>, que podem conter tanto <code>let</code> ligações e comandos imperativos, separados por <code>;</code>. Todos os blocos avaliam a última linha e o ponto e vírgula na última linha é opcional. <code>{}</code> chaves só são necessárias se você tiver mais de um item para encadear via <code>;</code>.</p>
+<table>
+  <tr>
+    <th scope="col">
+      <p>
+        OCaml
+      </p>
+    </th>
+<pre><code class="hljs">&lt;th scope=&quot;col&quot;&gt;
+  &lt;p&gt;
+    Reason
+  &lt;/p&gt;
+&lt;/th&gt;
+</code></pre>
+  </tr>
+  <tr>
+    <td>
+      <pre>
+let _ =
+  let msg = "Hello" in
+  print_string msg;
+  let msg2 = "Goodbye" in
+  print_string msg2</pre>
+    </td>
+<pre><code class="hljs">&lt;td&gt;
+  &lt;pre&gt;
+</code></pre>
+<p>{
+let msg = &quot;Hello&quot;;
+print_string(msg);
+let msg2 = &quot;Goodbye&quot;;
+print_string(msg2)
+};</pre>
+</td></p>
+  </tr>
+</table>
+<p>A sintaxe <code>{}</code> do Reason remove muitos pontos de dor (pontos fracos) comummente relatados na sintaxe do OCaml:</p>
+<ul>
+<li>Os pontos-e-vírgulas duplos foram completamente removidos.</li>
+<li><code>início</code>/<code>fim</code> foi removido completamente.</li>
+<li>Parâmetros imperiais infames <a href="https://github.com/ocaml/ocaml/pull/278">issue</a> se foram.</li>
+<li>Body de módulos e escopo local foram unificados.</li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" name="local-scope-vs-module-body"></a><a href="#local-scope-vs-module-body" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Local Scope Vs. Module Body</h2>
+<p>No Reason, tudo que puder ocorrer entre <code>{}</code> nos <a href="#local-scope">Escopos Locais</a> e nos corpos de módulos. Você geralmente pode até cortar/colar código entre os dois contextos. Em OCaml, as sintaxes para os dois contextos são muito diferentes. Escopo local requer <code>in</code> à direita, mas corpos de módulos não e algumas declarações imperativas devem ser atribuídas a <code>_</code> ou <code>()</code>, ou então usam <code>;;</code>.</p>
+<table>
+  <tr>
+    <th scope="col">
+      <p>
+        Corpo do módulo OCaml
+      </p>
+    </th>
+<pre><code class="hljs">&lt;th scope=&quot;col&quot;&gt;
+  &lt;p&gt;
+    Corpo do módulo Reason
+  &lt;/p&gt;
+&lt;/th&gt;
+</code></pre>
+  </tr>
+  <tr>
+    <td>
+      <pre>
+let ten = 10
+let () = imperativeFunc ten ten
+let () = imperativeFunc 0 0</pre>
+    </td>
+<pre><code class="hljs">&lt;td&gt;
+  &lt;pre&gt;
+</code></pre>
+<p>let ten = 10;
+imperativeFunc(ten, ten);
+imperativeFunc(0, 0);</pre>
+</td></p>
+  </tr>
+  <tr>
+    <td>
+      <pre>
+let ten = 10;;
+imperativeFunc ten ten;;
+imperativeFunc 0 0;;</pre>
+    </td>
+<pre><code class="hljs">&lt;td&gt;
+  Mesmo que acima
+&lt;/td&gt;
+</code></pre>
+  </tr>
+  <tr>
+    <th scope="col">
+      <p>
+        Escopo Local OCaml
+      </p>
+    </th>
+<pre><code class="hljs">&lt;th scope=&quot;col&quot;&gt;
+  &lt;p&gt;
+    Escopo Local Reason
+  &lt;/p&gt;
+&lt;/th&gt;
+</code></pre>
+  </tr>
+  <tr>
+    <td>
+      <pre>
+let ten = 10 in
+let _ = imperativeFunc ten ten in
+imperativeFunc 0 0</pre>
+    </td>
+<pre><code class="hljs">&lt;td&gt;
+  mesmo que acima
+&lt;/td&gt;
+</code></pre>
+  </tr>
+  <tr>
+    <td>
+      <pre>
+let ten = 10 in begin
+  imperativeFunc ten ten;
+  imperativeFunc 0 0
+end</pre>
+    </td>
+<pre><code class="hljs">&lt;td&gt;
+  mesmo que acima
+&lt;/td&gt;
+</code></pre>
+  </tr>
+  <tr>
+    <td>
+      <pre>
+let ten = 10 in (
+  imperativeFunc ten ten;
+  imperativeFunc 0 0
+)</pre>
+    </td>
+<pre><code class="hljs">&lt;td&gt;
+  mesmo que acima
+&lt;/td&gt;
+</code></pre>
+  </tr>
+</table>
+<h2><a class="anchor" aria-hidden="true" name="tuple-and-record"></a><a href="#tuple-and-record" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Tuple and Record</h2>
+<p>No Reason, tuplas sempre requerem parênteses.</p>
+<table>
+<thead>
+<tr><th>OCaml</th><th>Reason</th></tr>
+</thead>
+<tbody>
+<tr><td><code>let tup = 4, 5</code></td><td><code>let tup = (4, 5);</code></td></tr>
+<tr><td><code>let tup = ((1: int), (2:int))</code></td><td><code>let tup = (1: int, 2:int);</code></td></tr>
+<tr><td><code>fun ((a: int), (b: int)) -&gt; a</code></td><td><code>((a: int, b: int)) =&gt; a;</code></td></tr>
+</tbody>
+</table>
+<p>No Reason, valores de registo se assemelham ao JavaScript, usando <code>:</code> em vez de <code>=</code>. Porque tupla no Reason sempre exige envolvimento em parênteses, os registros podem conter lambdas como valores sem precisar de parênteses extras.</p>
+<table>
+  <tr>
+    <th scope="col">
+      <p>
+        OCaml
+      </p>
+    </th>
+<pre><code class="hljs">&lt;th scope=&quot;col&quot;&gt;
+  &lt;p&gt;
+    Reason
+  &lt;/p&gt;
+&lt;/th&gt;
+</code></pre>
+  </tr>
+  <tr>
+    <td>
+      <pre>
+let myRec = {x = 0; y = 10}</pre>
+    </td>
+<pre><code class="hljs">&lt;td&gt;
+  &lt;pre&gt;
+</code></pre>
+<p>let myRec = {x: 0, y: 10};</pre>
+</td></p>
+  </tr>
+  <tr>
+    <td>
+      <pre>
+let myFuncs = {
+  myFun = (fun x -> x + 1);
+  your = (fun a b -> a + b);
+}</pre>
+    </td>
+<pre><code class="hljs">&lt;td&gt;
+  &lt;pre&gt;
+</code></pre>
+<p>let myFuncs = {
+myFun: (x) =&gt; x + 1,
+your: (a, b) =&gt; a + b
+};</pre>
+</td></table></p>
+<pre><code class="hljs">&lt;h2&gt;
+  Lists
+&lt;/h2&gt;
+
+&lt;table&gt;
+  &lt;tr&gt;
+    &lt;th&gt;
+      OCaml
+    &lt;/th&gt;
+    
+    &lt;th&gt;
+      Reason
+    &lt;/th&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;code&gt;let list = [1; 2; 3]&lt;/code&gt;
+    &lt;/td&gt;
+    
+    &lt;td&gt;
+      &lt;code&gt;let list = [1, 2, 3]&lt;/code&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;code&gt;let list = hd :: tl&lt;/code&gt;
+    &lt;/td&gt;
+    
+    &lt;td&gt;
+      &lt;code&gt;let list = [hd, ...tl];&lt;/code&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;h2&gt;
+  Type Definitions
+&lt;/h2&gt;
+
+&lt;table&gt;
+  &lt;tr&gt;
+    &lt;th&gt;
+      Tupla OCaml
+    &lt;/th&gt;
+    
+    &lt;th&gt;
+      Tupla Reason
+    &lt;/th&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;code&gt;type tuple = int * int&lt;/code&gt;
+    &lt;/td&gt;
+    
+    &lt;td&gt;
+      &lt;code&gt;type tuple = (int, int);&lt;/code&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;code&gt;let tup: tuple = (10, 30)&lt;/code&gt;
+    &lt;/td&gt;
+    
+    &lt;td&gt;
+      &lt;code&gt;let tup: tuple = (10, 30);&lt;/code&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;table&gt;
+  &lt;tr&gt;
+    &lt;th&gt;
+      Registro de OCaml
+    &lt;/th&gt;
+    
+    &lt;th&gt;
+      Registro do Reason
+    &lt;/th&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;code&gt;type r = {x: int; y: int}&lt;/code&gt;
+    &lt;/td&gt;
+    
+    &lt;td&gt;
+      &lt;code&gt;type r = {x: int, y: int};&lt;/code&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;code&gt;let myRec: r = {x = 0; y = 10}&lt;/code&gt;
+    &lt;/td&gt;
+    
+    &lt;td&gt;
+      &lt;code&gt;let myRec: r = {x: 0, y: 10};&lt;/code&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;table&gt;
+  &lt;tr&gt;
+    &lt;th&gt;
+      OCaml Function
+    &lt;/th&gt;
+    
+    &lt;th&gt;
+      Reason Function
+    &lt;/th&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;code&gt;type func = int -&amp;gt; int&lt;/code&gt;
+    &lt;/td&gt;
+    
+    &lt;td&gt;
+      &lt;code&gt;type func = int =&amp;gt; int;&lt;/code&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;code&gt;let x: func = fun a -&amp;gt; a + 1&lt;/code&gt;
+    &lt;/td&gt;
+    
+    &lt;td&gt;
+      &lt;code&gt;let x: func = (a) =&amp;gt; a + 1;&lt;/code&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;h2&gt;
+  Functions
+&lt;/h2&gt;
+
+&lt;table&gt;
+  &lt;tr&gt;
+    &lt;th&gt;
+      OCaml
+    &lt;/th&gt;
+    
+    &lt;th&gt;
+      Reason
+    &lt;/th&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;code&gt;let x a b = e&lt;/code&gt;
+    &lt;/td&gt;
+    
+    &lt;td&gt;
+      &lt;code&gt;let x = (a, b) =&amp;gt; e&lt;/code&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;code&gt;let x = fun a b -&amp;gt; e&lt;/code&gt;
+    &lt;/td&gt;
+    
+    &lt;td&gt;
+      &lt;code&gt;let x = (a, b) =&amp;gt; e&lt;/code&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;code&gt;let x = fun a -&amp;gt; fun b -&amp;gt; e&lt;/code&gt;
+    &lt;/td&gt;
+    
+    &lt;td&gt;
+      &lt;code&gt;let x = (a, b) =&amp;gt; e&lt;/code&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;h3&gt;
+  Single argument match functions
+&lt;/h3&gt;
+
+&lt;p&gt;
+  OCaml tem uma definição de função (&lt;code&gt;function |&lt;/code&gt;) que é considerado como equivalente de &lt;code&gt;function a -&amp;gt; match a with ...&lt;/code&gt;. Reason tem o mesmo, mas a sintaxe deixa claro como é na verdade uma extensão da função de argumento único. A correspondência de caso único é uma extensão natural do lambda simples, e o lambda múltiplo é uma extensão natural do lambda de caso único.
+&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;tr&gt;
+    &lt;th scope=&quot;col&quot;&gt;
+      &lt;p&gt;
+        Form
+      &lt;/p&gt;
+    &lt;/th&gt;
+    
+    &lt;th scope=&quot;col&quot;&gt;
+      &lt;p&gt;
+        OCaml
+      &lt;/p&gt;
+    &lt;/th&gt;
+    
+    &lt;th scope=&quot;col&quot;&gt;
+      &lt;p&gt;
+        Reason
+      &lt;/p&gt;
+    &lt;/th&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td&gt;
+      lambda
+    &lt;/td&gt;
+    
+    &lt;td&gt;
+      &lt;pre&gt;
+</code></pre>
+<p>fun pat -&gt; e</pre>
+</td></p>
+<pre><code class="hljs">    &lt;td&gt;
+      &lt;pre&gt;
+</code></pre>
+<p>fun pat =&gt; e</pre>
+</td>
+</tr></p>
+<pre><code class="hljs">  &lt;tr&gt;
+    &lt;td&gt;
+      caso de correspondência única
+    &lt;/td&gt;
+    
+    &lt;td&gt;
+      &lt;pre&gt;
+</code></pre>
+<p>function | pat -&gt; e</pre>
+</td></p>
+<pre><code class="hljs">    &lt;td&gt;
+      &lt;pre&gt;
+</code></pre>
+<p>fun | pat =&gt; e</pre>
+</td>
+</tr></p>
+<pre><code class="hljs">  &lt;tr&gt;
+    &lt;td&gt;
+      múltiplos casos
+    &lt;/td&gt;
+    
+    &lt;td&gt;
+      &lt;pre&gt;
+</code></pre>
+<p>function | pat -&gt; e
+| pat2 -&gt; e</pre>
+</td></p>
+<pre><code class="hljs">    &lt;td&gt;
+      &lt;pre&gt;
+</code></pre>
+<p>fun | pat =&gt; e
+| pat2 =&gt; e</pre>
+</td>
+</tr>
+</table></p>
+<pre><code class="hljs">&lt;h3&gt;
+  Annotating Arguments
+&lt;/h3&gt;
+
+&lt;p&gt;
+  Tanto o Reason como OCaml, argumentos são anotados com tipos por (como acontece com tudo o resto), envolvê-los entre parênteses depois acrescentando &lt;code&gt;: typeAnnotation&lt;/code&gt;.
+&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;reason&quot;&gt;(arg: argType) =&amp;gt; returnValue;
+</code></pre>
+<p></code></pre></p>
+<pre><code class="hljs">&lt;pre&gt;&lt;code class=&quot;reason&quot;&gt;(arg: argType) =&amp;gt; (arg2: arg2Type) =&amp;gt; returnValue;
+</code></pre>
+<p></code></pre></p>
+<pre><code class="hljs">&lt;pre&gt;&lt;code class=&quot;reason&quot;&gt;(arg: argType, arg2: arg2Type) =&amp;gt; returnValue;
+</code></pre>
+<p></code></pre></p>
+<pre><code class="hljs">&lt;p&gt;
+  Tanto o Reason como OCaml permitem anotar o tipo de retorno, quando usando a forma &quot;super sugared let binding&quot;.
+&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;ocaml&quot;&gt;(* OCaml *)
+</code></pre>
+<p>let myFunc (a:int) (b:int) :int * int = (a, b)
+let myFunc (a:int) (b:int) :int list = [1]
+let myFunc (a:int) (b:int) :int -&gt; int = fun x -&gt; x + a + b
+</code></pre></p>
+<pre><code class="hljs">&lt;pre&gt;&lt;code class=&quot;reason&quot;&gt;/* Reason */
+</code></pre>
+<p>let myFunc = (a: int, b: int) :(int, int) =&gt; (a, b);
+let myFunc = (a: int, b: int) :list(int) =&gt; [1];
+let myFunc = (a: int, b: int): (int =&gt; int) =&gt; (x) =&gt; x + a + b;
+</code></pre></p>
+<pre><code class="hljs">&lt;p&gt;
+  Porque estamos usando &lt;code&gt;=&amp;gt;&lt;/code&gt; para todas as funções no Reason, há um caso onde precisamos adicionar um parenteses extra em torno de um tipo de retorno que é em si um tipo de função.
+&lt;/p&gt;
+
+&lt;h3&gt;
+  Type Parameters
+&lt;/h3&gt;
+
+&lt;h4&gt;
+  OCaml
+&lt;/h4&gt;
+
+&lt;p&gt;
+  Aplicações do tipo do OCaml (pense &quot;genéricas&quot;), são aplicadas na ordem inversa.
+&lt;/p&gt;
+
+&lt;p&gt;
+  Com OCaml, existem algumas consequências não intuitivas para isso.
+&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;ocaml&quot;&gt;let x: int list = [2]
+</code></pre>
+<p>type listOfListOfInts = int list list</p>
+<p>(* Parsed as: *)
+type listOfListOfInts = (int list) list
+</code></pre></p>
+<pre><code class="hljs">&lt;p&gt;
+  As coisas ficam ainda mais estranhas quando parâmetros de tipo aceitam parâmetros múltiplos. Argumentos múltiplos requerem parênteses e vírgulas para separar os parâmetros de tipo, mas esses parênteses não representam tuplas. A forma de parênteses/vírgula também deve ser dada ao construir instâncias de tipo tais como &lt;code&gt;(int, string) tupla&lt;/code&gt;.
+&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;ocaml&quot;&gt;type ('a, 'b) tuple = 'a * 'b
+</code></pre>
+<p>type listOfTuplesOfStringAndInt = (string, int) tuple list</p>
+<p>(* Which is parsed as: *)
+type listOfTuplesOfStringAndInt = ((string, int) tuple) list</p>
+<p>(* Which allows a list of (tuples of (string and int)) *)
+let tuples: listOfTuplesOfStringAndInt = [(&quot;asdf&quot;, 3)]
+</code></pre></p>
+<pre><code class="hljs">&lt;h4&gt;
+  Reason
+&lt;/h4&gt;
+
+&lt;p&gt;
+  Em resumo, o Reason unifica quase toda a sintaxe no estilo simples de &quot;aplicação de função&quot;, o que significa que os parâmetros de tipo seguem o mesmo padrão separado por vírgula visto em qualquer outro lugar na sintaxe. Isso resulta em menos padrões sintáticos para aprender.
+&lt;/p&gt;
+
+&lt;p&gt;
+  Por exemplo, você pode imaginar &lt;code&gt;list&lt;/code&gt; ser uma &quot;função&quot; para tipos que aceita um tipo e retorna um novo tipo.
+&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;tr&gt;
+    &lt;th scope=&quot;col&quot;&gt;
+      &lt;p&gt;
+        OCaml
+      &lt;/p&gt;
+    &lt;/th&gt;
+    
+    &lt;th scope=&quot;col&quot;&gt;
+      &lt;p&gt;
+        Reason
+      &lt;/p&gt;
+    &lt;/th&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;pre&gt;
+</code></pre>
+<p>let x: int list = [2]
+type listOfListOfInts = int list list
+type ('a, 'b) tup = ('a * 'b)
+type pairs = (int, int) tup list
+let tuples: pairs = [(2, 3)]</pre>
+</td></p>
+<pre><code class="hljs">    &lt;td&gt;
+      &lt;pre&gt;
+</code></pre>
+<p>let x: list(int) = [2];
+type listOfListOfInts = list(list(int));
+type tup('a, 'b) = ('a, 'b);
+type pairs = list(tup(int, int));
+let tuples: pairs = [(2, 3)];</pre>
+</td>
+</tr>
+</table></p>
+<pre><code class="hljs">&lt;h2&gt;
+  Tuples as Type Parameters
+&lt;/h2&gt;
+
+&lt;p&gt;
+  Como o OCaml usa parenteses e vírgulas para representar argumentos múltiplos para construtores de tipo, é confuso quando um dos argumentos para um construtor de tipo é uma tupla ele próprio. Na OCaml, é difícil lembrar a diferença entre um construtor de tipos aceitando vários argumentos e um construtor de tipo aceitando um único argumento que acontece de ser um tupla.
+&lt;/p&gt;
+
+&lt;p&gt;
+  Os exemplos a seguir mostram a diferença entre passar &lt;em&gt;dois &lt;/em&gt; tipos de parâmetros para &lt;code&gt;par&lt;/code&gt;, e um parâmetro de tipo &lt;em&gt;single&lt;/em&gt; que na verdade é um tuple.
+&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;tr&gt;
+    &lt;th&gt;
+      OCaml
+    &lt;/th&gt;
+    
+    &lt;th&gt;
+      Reason
+    &lt;/th&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;code&gt;type intPair = (int, int) pair&lt;/code&gt;
+    &lt;/td&gt;
+    
+    &lt;td&gt;
+      &lt;code&gt;type intPair = pair(int, int)&lt;/code&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;code&gt;type pairList = (int * int) list&lt;/code&gt;
+    &lt;/td&gt;
+    
+    &lt;td&gt;
+      &lt;code&gt;type pairList = list((int, int))&lt;/code&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    No Reason, sintaxes que representam tuplas ou tipos de tuplas, sempre se parecem com tuplas.
+  &lt;/li&gt;
+  &lt;li&gt;
+    No Reason, sintaxes que representam registros ou tipos de registros, sempre se parecem com registros.
+  &lt;/li&gt;
+  &lt;li&gt;
+    Quase todo o resto usa o padrão sintático de aplicação de função (argumentos separados por vírgula).
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;
+  Variants
+&lt;/h2&gt;
+
+&lt;h5&gt;
+  OCaml
+&lt;/h5&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    OCaml já espera que os tipos de argumentos do construtor sejam especificados no formulário de tuple, por isso fica confuso quando um único construtor espera um argumento único que &lt;em&gt;acontece&lt;/em&gt; de ser um tipo de tuple.
+  &lt;/li&gt;
+  &lt;li&gt;
+    O que é ainda mais confuso é que os construtores não &lt;em&gt;realmente&lt;/em&gt; aceitam tuplas, ainda que a sintaxe pareça assemelhar-se tuplas.
+  &lt;/li&gt;
+  &lt;li&gt;
+    Às vezes, a sintaxe para instanciar um construtor com vários argumentos sobrepõe a sintaxe para construir uma variante com um único argumento que acontece de ser uma tupla - então parece &lt;em&gt;exatamente&lt;/em&gt; que você &lt;em&gt;está&lt;/em&gt; fornecendo uma tupla quando você não está realmente fornecendo uma tupla.
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h5&gt;
+  Reason
+&lt;/h5&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    Tipos de construtores de variantes devem ser listados como listas separadas por vírgulas, usando parênteses para preceder grupo (como com &lt;strong&gt; todo&lt;/strong&gt; resto).
+  &lt;/li&gt;
+  &lt;li&gt;
+    Construir instâncias da variante (como você teria adivinhado) segue o estilo de aplicação de função (listas separadas por vírgulas).
+  &lt;/li&gt;
+  &lt;li&gt;
+    Tuplas &lt;strong&gt;sempre&lt;/strong&gt; &lt;em&gt;parecem&lt;/em&gt; como tuplas e qualquer coisa que se pareça com uma tupla &lt;em&gt;é&lt;/em&gt; uma tupla.
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;table&gt;
+  &lt;tr&gt;
+    &lt;th scope=&quot;col&quot;&gt;
+      &lt;p&gt;
+        OCaml
+      &lt;/p&gt;
+    &lt;/th&gt;
+    
+    &lt;th scope=&quot;col&quot;&gt;
+      &lt;p&gt;
+        Reason
+      &lt;/p&gt;
+    &lt;/th&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;pre&gt;
+</code></pre>
+<p>type myVariant =
+| HasNothing
+| HasSingleInt of int
+| HasSingleTuple of (int * int)
+| HasMultipleInts of int * int
+| HasMultipleTuples of (int * int) * (int * int)
+</pre>
+</td></p>
+<pre><code class="hljs">    &lt;td&gt;
+      &lt;pre&gt;
+</code></pre>
+<p>type myVariant =
+| HasNothing
+| HasSingleInt(int)
+| HasSingleTuple((int, int))
+| HasMultipleInts(int, int)
+| HasMultipleTuples((int, int), (int, int));
+</pre>
+</td>
+</tr></p>
+<pre><code class="hljs">  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;pre&gt;
+</code></pre>
+<p>let a = HasSingleInt 10
+let a = HasSingleTuple (10, 10)
+let a = HasMultipleInts (10, 10)
+let a = HasMultipleTuples ((10, 10), (10, 10))
+</pre>
+</td></p>
+<pre><code class="hljs">    &lt;td&gt;
+      &lt;pre&gt;
+</code></pre>
+<p>let a = HasSingleInt(10);
+let a = HasSingleTuple((10, 10));
+let a = HasMultipleInts(10, 10);
+let a = HasMultipleTuples((10, 10), (10, 10));
+</pre>
+</td>
+</tr></p>
+<pre><code class="hljs">  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;pre&gt;
+</code></pre>
+<p>let res x = match x with
+| HasNothing -&gt; 0
+| HasSingleInt x -&gt; 0
+| HasSingleTuple (x, y) -&gt; 0
+| HasMultipleInts (x, y) -&gt; 0
+| HasMultipleTuples ((x, y), (q, r)) -&gt; 0
+</pre>
+</td></p>
+<pre><code class="hljs">    &lt;td&gt;
+      &lt;pre&gt;
+</code></pre>
+<p>let res = (x) =&gt;
+switch x {
+| HasNothing =&gt; 0
+| HasSingleInt(x) =&gt; 0
+| HasSingleTuple((x, y)) =&gt; 0
+| HasMultipleInts(x, y) =&gt; 0
+| HasMultipleTuples((x, y), (q, r)) =&gt; 0
+};
+</pre>
+</td>
+</tr>
+</table></p>
+<pre><code class="hljs">&lt;h2&gt;
+  Pattern Matching
+&lt;/h2&gt;
+
+&lt;table&gt;
+  &lt;tr&gt;
+    &lt;th scope=&quot;col&quot;&gt;
+      &lt;p&gt;
+        OCaml
+      &lt;/p&gt;
+    &lt;/th&gt;
+    
+    &lt;th scope=&quot;col&quot;&gt;
+      &lt;p&gt;
+        Reason
+      &lt;/p&gt;
+    &lt;/th&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;pre&gt;
+</code></pre>
+<p>let res = match x with
+| A (x, y) -&gt; match y with
+| None -&gt; 0
+| Some i -&gt; 10
+| B (x, y) -&gt; 0</pre>
+</td></p>
+<pre><code class="hljs">    &lt;td&gt;
+      &lt;pre&gt;
+</code></pre>
+<p>let res = switch x {
+| A((x, y)) =&gt; switch y {
+| None =&gt; 0
+| Some(i) =&gt; 10
+}
+| B((x, y)) =&gt; 0
+};</p>
+</pre>
+        </td>
+      </tr>
+    </table>
+<pre><code class="hljs">&lt;p&gt;
+  Você consegue detectar o erro no exemplo OCaml? Este é um dos erros mais comuns entre os programadores OCaml. O &lt;code&gt;match&lt;/code&gt; aninhado &lt;em&gt;deve&lt;/em&gt; ser encapsulado entre parênteses, caso contrário o caso &lt;code&gt;Some&lt;/code&gt; é analisado como pertencente à correspondência &lt;code&gt;match&lt;/code&gt; externo. Visualmente, é na verdade:
+&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;ocaml&quot;&gt;let res = match x with
+</code></pre>
+<p>| A (x, y) -&gt; match y with
+| None -&gt; 0
+| Some i -&gt; 10
+| B (x, y) -&gt; 0
+</code></pre></p>
+<pre><code class="hljs">&lt;p&gt;
+  Os casos obrigatórios de &lt;code&gt;{}&lt;/code&gt; em torno de &lt;code&gt;switch&lt;/code&gt; evitam esse problema.
+&lt;/p&gt;
+
+&lt;h2&gt;
+  Modules and Signatures
+&lt;/h2&gt;
+
+&lt;h3&gt;
+  Definition
+&lt;/h3&gt;
+
+&lt;table&gt;
+  &lt;tr&gt;
+    &lt;th scope=&quot;col&quot;&gt;
+      &lt;p&gt;
+        OCaml
+      &lt;/p&gt;
+    &lt;/th&gt;
+    
+    &lt;th scope=&quot;col&quot;&gt;
+      &lt;p&gt;
+        Reason
+      &lt;/p&gt;
+    &lt;/th&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;pre&gt;
+</code></pre>
+<p>module type MySig = sig
+type t = int
+val x: int
+end
+module MyModule: MySig = struct
+type t = int
+let x = 10
+end
+module MyModule = struct
+module NestedModule = struct
+let msg = &quot;hello&quot;;
+end
+end
+</pre>
+</td></p>
+<pre><code class="hljs">    &lt;td&gt;
+      &lt;pre&gt;
+</code></pre>
+<p>module type MySig = {
+type t = int;
+let x: int;
+};
+module MyModule: MySig = {
+type t = int;
+let x = 10;
+};
+module MyModule = {
+module NestedModule = {
+let msg = &quot;hello&quot;;
+};
+};
+</pre>
+</td>
+</tr>
+</table></p>
+<pre><code class="hljs">&lt;h3&gt;
+  Functors Types
+&lt;/h3&gt;
+
+&lt;table&gt;
+  &lt;tr&gt;
+    &lt;th scope=&quot;col&quot;&gt;
+      &lt;p&gt;
+        OCaml
+      &lt;/p&gt;
+    &lt;/th&gt;
+    
+    &lt;th scope=&quot;col&quot;&gt;
+      &lt;p&gt;
+        Reason
+      &lt;/p&gt;
+    &lt;/th&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;pre&gt;
+</code></pre>
+<p>module type FType =
+functor (A: ASig) -&gt;
+functor (B: BSig) -&gt; Result
+</pre>
+</td></p>
+<pre><code class="hljs">    &lt;td&gt;
+      &lt;pre&gt;
+</code></pre>
+<p>module type FType =
+(A: ASig) =&gt;
+(B: BSig) =&gt; Result;
+</pre>
+</td>
+</tr>
+</table></p>
+<pre><code class="hljs">&lt;h2&gt;
+  Functors
+&lt;/h2&gt;
+
+&lt;table&gt;
+  &lt;tr&gt;
+    &lt;th scope=&quot;col&quot;&gt;
+      &lt;p&gt;
+        OCaml
+      &lt;/p&gt;
+    &lt;/th&gt;
+    
+    &lt;th scope=&quot;col&quot;&gt;
+      &lt;p&gt;
+        Reason
+      &lt;/p&gt;
+    &lt;/th&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;pre&gt;
+</code></pre>
+<p>module F =
+functor (A: ASig) -&gt;
+functor (B: BSig) -&gt; struct end</pre>
+</td></p>
+<pre><code class="hljs">    &lt;td&gt;
+      &lt;pre&gt;
+</code></pre>
+<p>module F =
+(A: ASig) =&gt;
+(B: BSig) =&gt; {};</pre>
+</td>
+</tr></p>
+<pre><code class="hljs">  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;pre&gt;
+</code></pre>
+<p>module F = functor (A: ASig) (B: BSig) -&gt; struct end</pre>
+</td></p>
+<pre><code class="hljs">    &lt;td&gt;
+      &lt;pre&gt;
+</code></pre>
+<p>module F = (A: ASig, B: BSig) =&gt; {};</pre>
+</td>
+</tr></p>
+<pre><code class="hljs">  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;pre&gt;
+</code></pre>
+<p>module F (A: ASig) (B: BSig) = struct end</pre>
+</td></p>
+<pre><code class="hljs">    &lt;td&gt;
+      &lt;pre&gt;
+</code></pre>
+<p>module F = (A: ASig, B: BSig) =&gt; {};</pre>
+</td>
+</tr></p>
+<pre><code class="hljs">  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;pre&gt;
+</code></pre>
+<p>module Res = F(A)(B)</pre>
+</td></p>
+<pre><code class="hljs">    &lt;td&gt;
+      &lt;pre&gt;
+</code></pre>
+<p>module Res = F(A, B);</pre>
+</td>
+</tr>
+</table></p>
+<pre><code class="hljs">&lt;h2&gt;
+  Various Improvements
+&lt;/h2&gt;
+
+&lt;p&gt;
+  OCaml doesn't require parens around sequences &lt;code&gt;(a;b;c;d)&lt;/code&gt; or tuples &lt;code&gt;(x,y)&lt;/code&gt;, so that ends up ruling out a bunch of other very convenient syntax rules. Since Reason always uses &lt;code&gt;{}&lt;/code&gt; to enclose sequences or let bindings, and Reason always requires &lt;code&gt;()&lt;/code&gt; around tuples, many other syntax constructs are expressed more intuitively, without requiring extra wrapping in parenthesis.
+&lt;/p&gt;
+
+&lt;h3&gt;
+  Lambdas as record fields no longer need extra parens
+&lt;/h3&gt;
+
+&lt;p&gt;
+  This is a welcomed improvement because the OCaml type errors the user would see were very confusing when it would believe the function's return value was a tuple with infix &lt;code&gt;,&lt;/code&gt; comma.
+&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;tr&gt;
+    &lt;th scope=&quot;col&quot;&gt;
+      &lt;p&gt;
+        OCaml
+      &lt;/p&gt;
+    &lt;/th&gt;
+    
+    &lt;th scope=&quot;col&quot;&gt;
+      &lt;p&gt;
+        Reason
+      &lt;/p&gt;
+    &lt;/th&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;pre&gt;
+</code></pre>
+<p>let myFuncs = {
+myFun = (fun x -&gt; x + 1);
+your = (fun a b -&gt; a + b);
+}</pre>
+</td></p>
+<pre><code class="hljs">    &lt;td&gt;
+      &lt;pre&gt;
+</code></pre>
+<p>let myFuncs = {
+myFun: (x) =&gt; x + 1,
+your: (a, b) =&gt; a + b
+};</pre>
+</td>
+</tr>
+</table></p>
+<pre><code class="hljs">&lt;h3&gt;
+  Lambdas as match results no longer need extra parens
+&lt;/h3&gt;
+
+&lt;table&gt;
+  &lt;tr&gt;
+    &lt;th scope=&quot;col&quot;&gt;
+      &lt;p&gt;
+        OCaml
+      &lt;/p&gt;
+    &lt;/th&gt;
+    
+    &lt;th scope=&quot;col&quot;&gt;
+      &lt;p&gt;
+        Reason
+      &lt;/p&gt;
+    &lt;/th&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;pre&gt;
+</code></pre>
+<p>let x = match prnt with
+| None -&gt; fun a -&gt; blah
+(* Extra () required ! *)
+| Some &quot;_&quot; -&gt; (fun a -&gt; ())
+| Some &quot;ml&quot; -&gt; blah
+</pre>
+</td></p>
+<pre><code class="hljs">    &lt;td&gt;
+      &lt;pre&gt;
+</code></pre>
+<p>let x =
+switch prnt {
+| None =&gt; (a) =&gt; blah
+| Some(&quot;_&quot;) =&gt; (a) =&gt; ()
+| Some(&quot;ml&quot;) =&gt; blah
+};</pre>
+</td>
+</tr>
+</table></p>
+<pre><code class="hljs">&lt;h3&gt;
+  Lambdas and type annotations in tuples no longer require extra parens
+&lt;/h3&gt;
+
+&lt;table&gt;
+  &lt;tr&gt;
+    &lt;th&gt;
+      OCaml
+    &lt;/th&gt;
+    
+    &lt;th&gt;
+      Reason
+    &lt;/th&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;code&gt;let tuple = ((fun x -&amp;gt; x), 20)&lt;/code&gt;
+    &lt;/td&gt;
+    
+    &lt;td&gt;
+      &lt;code&gt;let tuple = ((x) =&amp;gt; x, 20);&lt;/code&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;code&gt;let tuple = ((&quot;hi&quot;: string), (20: int))&lt;/code&gt;
+    &lt;/td&gt;
+    
+    &lt;td&gt;
+      &lt;code&gt;let tuple = (&quot;hi&quot;: string, 20: int);&lt;/code&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;h2&gt;
+  Various Differences
+&lt;/h2&gt;
+
+&lt;h3&gt;
+  &lt;code&gt;as&lt;/code&gt; precedence
+&lt;/h3&gt;
+
+&lt;p&gt;
+  With Reason, &lt;code&gt;as&lt;/code&gt; has a higher precedence than &lt;code&gt;|&lt;/code&gt; bar. This allows creating &lt;code&gt;as&lt;/code&gt; aliases for entire rows in pattern matching.
+&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;tr&gt;
+    &lt;th scope=&quot;col&quot;&gt;
+      &lt;p&gt;
+        OCaml
+      &lt;/p&gt;
+    &lt;/th&gt;
+    
+    &lt;th scope=&quot;col&quot;&gt;
+      &lt;p&gt;
+        Reason
+      &lt;/p&gt;
+    &lt;/th&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;pre&gt;
+</code></pre>
+<p>let ppp = match MyThing 20 with
+| (MyThing x as ppp)
+| (YourThing x as ppp) -&gt; ppp;
+</pre>
+</td></p>
+<pre><code class="hljs">    &lt;td&gt;
+      &lt;pre&gt;
+</code></pre>
+<p>let ppp =
+switch (MyThing(20)) {
+| MyThing(x) as ppp
+| YourThing(x) as ppp =&gt; ppp
+};
+</pre>
+</td>
+</tr>
+</table></p>
+<pre><code class="hljs">&lt;h3&gt;
+  Mutable Record Field Updates
+&lt;/h3&gt;
+
+&lt;p&gt;
+  Because equalities and their negations have been made more consistent in Reason, the &lt;code&gt;=&lt;/code&gt; operator is available for mutable field update.
+&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;tr&gt;
+    &lt;th&gt;
+      OCaml
+    &lt;/th&gt;
+    
+    &lt;th&gt;
+      Reason
+    &lt;/th&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;code&gt;myRec.field &amp;lt;- &quot;next&quot;&lt;/code&gt;
+    &lt;/td&gt;
+    
+    &lt;td&gt;
+      &lt;code&gt;myRec.field = &quot;next&quot;&lt;/code&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;h3&gt;
+  Prefix operators
+&lt;/h3&gt;
+
+&lt;p&gt;
+  Reason's &lt;code&gt;!&lt;/code&gt; is used for boolean &lt;code&gt;not&lt;/code&gt;. Deferencing uses the postfix &lt;code&gt;^&lt;/code&gt;.
+&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;tr&gt;
+    &lt;th&gt;
+      OCaml
+    &lt;/th&gt;
+    
+    &lt;th&gt;
+      Reason
+    &lt;/th&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;code&gt;let x = !(foo.bar)&lt;/code&gt;
+    &lt;/td&gt;
+    
+    &lt;td&gt;
+      &lt;code&gt;let x = foo.bar^;&lt;/code&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;code&gt;let x = !(foo#bar)&lt;/code&gt;
+    &lt;/td&gt;
+    
+    &lt;td&gt;
+      &lt;code&gt;let x = foo#bar^;&lt;/code&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;code&gt;let x = !(!foo.bar)&lt;/code&gt;
+    &lt;/td&gt;
+    
+    &lt;td&gt;
+      &lt;code&gt;let x = foo^.bar^;&lt;/code&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;code&gt;let x = !(!foo#bar)&lt;/code&gt;
+    &lt;/td&gt;
+    
+    &lt;td&gt;
+      &lt;code&gt;let x = (foo^)#bar^;&lt;/code&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;code&gt;let x = !(!(foo.bar))&lt;/code&gt;
+    &lt;/td&gt;
+    
+    &lt;td&gt;
+      &lt;code&gt;let x = foo.bar^ ^;&lt;/code&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;code&gt;let x = !(!(foo#bar))&lt;/code&gt;
+    &lt;/td&gt;
+    
+    &lt;td&gt;
+      &lt;code&gt;let x = foo#bar^ ^;&lt;/code&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;code&gt;let x = !!(foo.bar)&lt;/code&gt;
+    &lt;/td&gt;
+    
+    &lt;td&gt;
+      &lt;code&gt;let x = !!foo.bar;&lt;/code&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;code&gt;let x = !!(foo#bar)&lt;/code&gt;
+    &lt;/td&gt;
+    
+    &lt;td&gt;
+      &lt;code&gt;let x = !!foo#bar;&lt;/code&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;code&gt;let x = !~(foo.bar)&lt;/code&gt;
+    &lt;/td&gt;
+    
+    &lt;td&gt;
+      &lt;code&gt;let x = !~foo.bar;&lt;/code&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;code&gt;let x = !~(foo#bar)&lt;/code&gt;
+    &lt;/td&gt;
+    
+    &lt;td&gt;
+      &lt;code&gt;let x = !~foo#bar;&lt;/code&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;h3&gt;
+  Comment Escaping
+&lt;/h3&gt;
+
+&lt;p&gt;
+  Because Reason uses C-style comments, some obscure custom prefix/infix operators must be written differently. The rules for prefix/infix operators are the same as in OCaml syntax, but with the following exceptions:
+&lt;/p&gt;
+
+&lt;p&gt;
+  Specifically, if any character except the first in an prefix/infix operator is a star or forward slash, that must be first escaped with a backslash. These will be parsed &lt;em&gt;without&lt;/em&gt; the backslash when added to the AST. When reprinted, the escape backslashes are added back in automatically.
+&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;tr&gt;
+    &lt;th&gt;
+      OCaml
+    &lt;/th&gt;
+    
+    &lt;th&gt;
+      Reason
+    &lt;/th&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;code&gt;let (/*) a b = a + b&lt;/code&gt;
+    &lt;/td&gt;
+    
+    &lt;td&gt;
+      &lt;code&gt;let (/\*) a b =&amp;gt; a + b;&lt;/code&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;code&gt;let x = 12 /-* 23 /-* 12&lt;/code&gt;
+    &lt;/td&gt;
+    
+    &lt;td&gt;
+      &lt;code&gt;let x = 12 /-* 23 /-* 12;&lt;/code&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;code&gt;let y = (/*) a b&lt;/code&gt;
+    &lt;/td&gt;
+    
+    &lt;td&gt;
+      &lt;code&gt;let y = a /\* b;&lt;/code&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;code&gt;let (!=*) q r = q + r&lt;/code&gt;
+    &lt;/td&gt;
+    
+    &lt;td&gt;
+      &lt;code&gt;let ( !=* ) = (q, r) =&amp;gt; q + r;&lt;/code&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;code&gt;let res = q (!=*) r&lt;/code&gt;
+    &lt;/td&gt;
+    
+    &lt;td&gt;
+      &lt;code&gt;let res = q(( !=* ), r);&lt;/code&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;code&gt;let (!=/*) q r = q + r&lt;/code&gt;
+    &lt;/td&gt;
+    
+    &lt;td&gt;
+      &lt;code&gt;let ( !=/\* ) = (q, r) =&amp;gt; q + r;&lt;/code&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;code&gt;let res = q (!=/*) r&lt;/code&gt;
+    &lt;/td&gt;
+    
+    &lt;td&gt;
+      &lt;code&gt;let res = q(( !=/\* ), r);&lt;/code&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;h3&gt;
+  Operator Renaming
+&lt;/h3&gt;
+
+&lt;p&gt;
+  If Reason uses &lt;code&gt;==&lt;/code&gt; to represent OCaml's &lt;code&gt;=&lt;/code&gt;, and uses &lt;code&gt;===&lt;/code&gt; to represent OCaml's &lt;code&gt;==&lt;/code&gt;, then how would Reason represent OCaml's &lt;code&gt;===&lt;/code&gt; symbol (if it were defined)? Reason provides a way! &quot;Escape&quot; the triple equals symbol!
+&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;tr&gt;
+    &lt;th&gt;
+      Identificador
+    &lt;/th&gt;
+    
+    &lt;th&gt;
+      Significado
+    &lt;/th&gt;
+    
+    &lt;th&gt;
+      OCaml
+    &lt;/th&gt;
+    
+    &lt;th&gt;
+      Reason
+    &lt;/th&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;code&gt;&quot;===&quot;&lt;/code&gt;
+    &lt;/td&gt;
+    
+    &lt;td&gt;
+      Custom value
+    &lt;/td&gt;
+    
+    &lt;td&gt;
+      &lt;code&gt;x === y&lt;/code&gt;
+    &lt;/td&gt;
+    
+    &lt;td&gt;
+      &lt;code&gt;x \=== y&lt;/code&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;h3&gt;
+  REPL
+&lt;/h3&gt;
+
+&lt;p&gt;
+  In Reason's repl &lt;a href=&quot;extra-goodies.md#repl&quot;&gt;&lt;code&gt;rtop&lt;/code&gt;&lt;/a&gt; (a customized &lt;a href=&quot;https://github.com/diml/utop&quot;&gt;&lt;code&gt;utop&lt;/code&gt;&lt;/a&gt;), each input is submitted via a single &lt;code&gt;;&lt;/code&gt; semicolon. OCaml's repl requires two semicolons &lt;code&gt;;;&lt;/code&gt;.
+&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;tr&gt;
+    &lt;th&gt;
+      OCaml
+    &lt;/th&gt;
+    
+    &lt;th&gt;
+      Reason
+    &lt;/th&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;code&gt;;;&lt;/code&gt;
+    &lt;/td&gt;
+    
+    &lt;td&gt;
+      &lt;code&gt;;&lt;/code&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;</code></pre>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="convert-from-ocaml.html">← Converting from OCaml</a><a class="docs-next button" href="newcomer-examples.html">Newcomer Examples →</a></div></div></div></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.js"></script><script>window.foo = new Pjax({
+          areas: [
+            // try to use the first query.
+            '.mainContainer, .docsNavContainer .toc .navWrapper',
+            // fallback
+            'body'
+          ],
+          link: '.docsNavContainer:not(.docsSliderActive) a',
+          update: {
+            script: false,
+          }
+        });
+        var languagesMenuItemCopy = document.getElementById("languages-menu");
+        languagesMenuItemCopy.addEventListener("click", function(e){
+          e.preventDefault();
+          e.stopPropagation();
+          e.stopImmediatePropagation();
+        });</script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+              var search = docsearch({
+                apiKey: '55156da6520de795d3a2c2d23786f08e',
+                indexName: 'reason',
+                inputSelector: '#search_input_react'
+              });
+            </script></body></html>

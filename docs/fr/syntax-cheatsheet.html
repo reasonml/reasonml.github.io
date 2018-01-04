@@ -1,0 +1,291 @@
+<html><head><meta charset="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1"/><title>Syntax Cheatsheet · Reason</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta property="og:title" content="Syntax Cheatsheet · Reason"/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io//index.html"/><meta property="og:description" content="We&#x27;ve worked very hard to make Reason look like JS while preserving OCaml&#x27;s great semantics &amp; types. Hope you enjoy it!"/><link rel="shortcut icon" href="/img/icon_50.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/arduino-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io//blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io//blog/feed.xml" title="Reason Blog RSS Feed"/><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/dummy.svg"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li><a href="/docs/fr/quickstart-javascript.html" target="_self">Docs</a></li><li><a href="/fr/try.html" target="_self">Try</a></li><li><a href="/api/index.html" target="_self">API</a></li><li><a href="/docs/fr/community.html" target="_self">Community</a></li><li><a href="/blog" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg"/>Français</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/ja">日本語</a></li><li><a href="/en">English</a></li><li><a href="/es-ES">Español</a></li><li><a href="/ko">한국어</a></li><li><a href="/pt-BR">Português (Brasil)</a></li><li><a href="/ru">Русский</a></li><li><a href="/zh-CN">中文</a></li><li><a href="/zh-TW">繁體中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank">Help Translate</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(){
+          if(languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search"/></li><li><a href="https://github.com/facebook/reason" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>JavaScript</span></h2></div><div class="navGroups"><div class="navGroup navGroupActive"><h3>Intro</h3><ul><li class="navListItem"><a class="navItem" href="/docs/fr/what-and-why.html">What &amp; Why</a></li></ul></div><div class="navGroup navGroupActive"><h3>Editor Setup</h3><ul><li class="navListItem"><a class="navItem" href="/docs/fr/global-installation.html">Global Installation</a></li><li class="navListItem"><a class="navItem" href="/docs/fr/editor-plugins.html">Editors Plugins</a></li><li class="navListItem"><a class="navItem" href="/docs/fr/extra-goodies.html">Extra Goodies</a></li></ul></div><div class="navGroup navGroupActive"><h3>Language Basics</h3><ul><li class="navListItem"><a class="navItem" href="/docs/fr/overview.html">Overview</a></li><li class="navListItem"><a class="navItem" href="/docs/fr/let-binding.html">Let Binding</a></li><li class="navListItem"><a class="navItem" href="/docs/fr/type.html">Type!</a></li><li class="navListItem"><a class="navItem" href="/docs/fr/string-and-char.html">String &amp; Char</a></li><li class="navListItem"><a class="navItem" href="/docs/fr/boolean.html">Boolean</a></li><li class="navListItem"><a class="navItem" href="/docs/fr/integer-and-float.html">Integer &amp; Float</a></li><li class="navListItem"><a class="navItem" href="/docs/fr/tuple.html">Tuple</a></li><li class="navListItem"><a class="navItem" href="/docs/fr/record.html">Record</a></li><li class="navListItem"><a class="navItem" href="/docs/fr/variant.html">Variant!</a></li><li class="navListItem"><a class="navItem" href="/docs/fr/list-and-array.html">List &amp; Array</a></li><li class="navListItem"><a class="navItem" href="/docs/fr/function.html">Function</a></li><li class="navListItem"><a class="navItem" href="/docs/fr/if-else.html">If-Else</a></li><li class="navListItem"><a class="navItem" href="/docs/fr/more-on-type.html">More on Type</a></li><li class="navListItem"><a class="navItem" href="/docs/fr/destructuring.html">Destructuring</a></li><li class="navListItem"><a class="navItem" href="/docs/fr/pattern-matching.html">Pattern Matching!</a></li><li class="navListItem"><a class="navItem" href="/docs/fr/mutation.html">Mutation</a></li><li class="navListItem"><a class="navItem" href="/docs/fr/imperative-loops.html">Imperative Loops</a></li><li class="navListItem"><a class="navItem" href="/docs/fr/jsx.html">JSX</a></li><li class="navListItem"><a class="navItem" href="/docs/fr/external.html">External</a></li><li class="navListItem"><a class="navItem" href="/docs/fr/exception.html">Exception</a></li><li class="navListItem"><a class="navItem" href="/docs/fr/object.html">Object</a></li><li class="navListItem"><a class="navItem" href="/docs/fr/module.html">Module</a></li></ul></div><div class="navGroup navGroupActive"><h3>JavaScript</h3><ul><li class="navListItem"><a class="navItem" href="/docs/fr/quickstart-javascript.html">Quickstart</a></li><li class="navListItem"><a class="navItem" href="/docs/fr/interop.html">Interop</a></li><li class="navListItem navListItemActive"><a class="navItem navItemActive" href="/docs/fr/syntax-cheatsheet.html">Syntax Cheatsheet</a></li><li class="navListItem"><a class="navItem" href="/docs/fr/libraries.html">Libraries</a></li><li class="navListItem"><a class="navItem" href="/docs/fr/converting-from-js.html">Converting from JS</a></li></ul></div><div class="navGroup navGroupActive"><h3>Native</h3><ul><li class="navListItem"><a class="navItem" href="/docs/fr/native.html">Native</a></li><li class="navListItem"><a class="navItem" href="/docs/fr/quickstart-ocaml.html">Quickstart</a></li><li class="navListItem"><a class="navItem" href="/docs/fr/convert-from-ocaml.html">Converting from OCaml</a></li></ul></div><div class="navGroup navGroupActive"><h3>Extra</h3><ul><li class="navListItem"><a class="navItem" href="/docs/fr/comparison-to-ocaml.html">Comparison to OCaml</a></li><li class="navListItem"><a class="navItem" href="/docs/fr/newcomer-examples.html">Newcomer Examples</a></li><li class="navListItem"><a class="navItem" href="/docs/fr/project-structure.html">Project Structure</a></li></ul></div></div></section></div><script>
+          var toggler = document.getElementById('navToggler');
+          var nav = document.getElementById('docsNav');
+          toggler.onclick = function() {
+            nav.classList.toggle('docsSliderActive');
+          };
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://crowdin.com/project/reason/fr" target="_blank">Translate</a><h1>Syntax Cheatsheet</h1></header><article><div><span><p>We've worked very hard to make Reason look like JS while preserving OCaml's great semantics &amp; types. Hope you enjoy it!</p>
+<h2><a class="anchor" aria-hidden="true" name="let-binding"></a><a href="#let-binding" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Let Binding</h2>
+<table>
+<thead>
+<tr><th>JavaScript</th><th>Reason</th></tr>
+</thead>
+<tbody>
+<tr><td><code>const x = 5;</code></td><td><code>let x = 5;</code></td></tr>
+<tr><td><code>var x = y;</code></td><td>No equivalent (thankfully)</td></tr>
+<tr><td><code>let x = 5; x = x + 1;</code></td><td><code>let x = ref(5); x := x^ + 1;</code></td></tr>
+</tbody>
+</table>
+<h2><a class="anchor" aria-hidden="true" name="string-char"></a><a href="#string-char" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>String &amp; Char</h2>
+<table>
+<thead>
+<tr><th>JavaScript</th><th>Reason</th></tr>
+</thead>
+<tbody>
+<tr><td><code>&quot;Hello world!&quot;</code></td><td>Same</td></tr>
+<tr><td><code>'Hello world!'</code></td><td>Strings must use <code>&quot;</code></td></tr>
+<tr><td>Characters are strings</td><td><code>'a'</code></td></tr>
+<tr><td><code>&quot;hello &quot; + &quot;world&quot;</code></td><td><code>&quot;hello &quot; ++ &quot;world&quot;</code></td></tr>
+</tbody>
+</table>
+<h2><a class="anchor" aria-hidden="true" name="boolean"></a><a href="#boolean" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Boolean</h2>
+<table>
+<thead>
+<tr><th>JavaScript</th><th>Reason</th></tr>
+</thead>
+<tbody>
+<tr><td><code>true</code>, <code>false</code></td><td><code>true</code>, <code>false</code> *</td></tr>
+<tr><td><code>!true</code></td><td>Same</td></tr>
+<tr><td>`</td><td></td><td><code>,</code>&amp;&amp;<code>,</code>&lt;=<code>,</code>&gt;=<code>,</code>&lt;<code>,</code>&gt;`</td><td>Same</td></tr>
+<tr><td><code>a === b</code>, <code>a !== b</code></td><td>Same</td></tr>
+<tr><td>No deep equality (recursive compare)</td><td><code>a == b</code>, <code>a != b</code></td></tr>
+<tr><td><code>a == b</code></td><td>No equality with implicit casting (thankfully)</td></tr>
+</tbody>
+</table>
+<p>* This is the Reason spiritual equivalent; it doesn't mean it compiles to JS' <code>true</code>/<code>false</code>! To compile to the latter, use <code>Js.true_</code>/<code>Js.false_</code>. See <a href="/guide/language/boolean#usage">here</a>.</p>
+<h2><a class="anchor" aria-hidden="true" name="number"></a><a href="#number" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Number</h2>
+<table>
+<thead>
+<tr><th>JavaScript</th><th>Reason</th></tr>
+</thead>
+<tbody>
+<tr><td><code>3</code></td><td>Same *</td></tr>
+<tr><td><code>3.1415</code></td><td>Same</td></tr>
+<tr><td><code>3 + 4</code></td><td>Same</td></tr>
+<tr><td><code>3.0 + 4.5</code></td><td><code>3.0 +. 4.5</code></td></tr>
+<tr><td><code>5 % 3</code></td><td><code>5 mod 3</code></td></tr>
+</tbody>
+</table>
+<p>* JS has no distinction between integer and float.</p>
+<h2><a class="anchor" aria-hidden="true" name="object-record"></a><a href="#object-record" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Object/Record</h2>
+<table>
+<thead>
+<tr><th>JavaScript</th><th>Reason</th></tr>
+</thead>
+<tbody>
+<tr><td>no static types</td><td><code>type point = {x: int, mutable y: int}</code></td></tr>
+<tr><td><code>{x: 30, y: 20}</code></td><td>Same *</td></tr>
+<tr><td><code>point.x</code></td><td>Same</td></tr>
+<tr><td><code>point.y = 30;</code></td><td>Same</td></tr>
+<tr><td><code>{...point, x: 30}</code></td><td>Same</td></tr>
+</tbody>
+</table>
+<p>* This is the Reason spiritual equivalent; it doesn't mean it compiles to JS' object! To compile to the latter, see <a href="/guide/language/object#tip--tricks">here</a>.</p>
+<h2><a class="anchor" aria-hidden="true" name="array"></a><a href="#array" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Array</h2>
+<table>
+<thead>
+<tr><th>JavaScript</th><th>Reason</th></tr>
+</thead>
+<tbody>
+<tr><td><code>[1, 2, 3]</code></td><td>`[</td><td>1, 2, 3</td><td>]`</td></tr>
+<tr><td><code>myArray[1] = 10</code></td><td>Same</td></tr>
+<tr><td><code>[1, &quot;Bob&quot;, true]</code> *</td><td><code>(1, &quot;Bob&quot;, true)</code></td></tr>
+<tr><td>No immutable list</td><td><code>[1, 2, 3]</code></td></tr>
+</tbody>
+</table>
+<p>* We can simulate tuples in JavaScript with arrays, because JavaScript arrays can contain multiple types of elements.</p>
+<h2><a class="anchor" aria-hidden="true" name="null"></a><a href="#null" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Null</h2>
+<table>
+<thead>
+<tr><th>JavaScript</th><th>Reason</th></tr>
+</thead>
+<tbody>
+<tr><td><code>null</code>, <code>undefined</code></td><td><code>None</code> *</td></tr>
+</tbody>
+</table>
+<p>* Again, only a spiritual equivalent; Reason doesn't have nulls, nor null bugs! But it does have <a href="/guide/examples#using-the-option-type">an option type</a> for when you actually need nullability.</p>
+<h2><a class="anchor" aria-hidden="true" name="function"></a><a href="#function" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Function</h2>
+<table>
+<thead>
+<tr><th>JavaScript</th><th>Reason</th></tr>
+</thead>
+<tbody>
+<tr><td><code>arg =&gt; retVal</code></td><td><code>(arg) =&gt; retVal</code></td></tr>
+<tr><td><code>function named(arg) {...}</code></td><td><code>let named = (arg) =&gt; ...</code></td></tr>
+<tr><td><code>const f = function(arg) {...}</code></td><td><code>let f = (arg) =&gt; ...</code></td></tr>
+<tr><td><code>add(4, add(5, 6))</code></td><td>Same</td></tr>
+</tbody>
+</table>
+<h3><a class="anchor" aria-hidden="true" name="blocks"></a><a href="#blocks" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Blocks</h3>
+<table>
+  <tr>
+    <th scope="col">
+      <p >
+        JavaScript
+      </p>
+    </th>
+<pre><code class="hljs">&lt;th scope=&quot;col&quot;&gt;
+  &lt;p&gt;
+    Reason
+  &lt;/p&gt;
+&lt;/th&gt;
+</code></pre>
+  </tr>
+  <tr>
+    <td>
+      <pre>
+const myFun = (x, y) => {
+  const doubleX = x + x;
+  const doubleY = y + y;
+  return doubleX + doubleY
+};</pre>
+    </td>
+<pre><code class="hljs">&lt;td&gt;
+  &lt;pre&gt;
+</code></pre>
+<p>let myFun = (x, y) =&gt; {
+let doubleX = x + x;
+let doubleY = y + y;
+doubleX + doubleY
+};</pre>
+</td></p>
+  </tr>
+</table>
+<h3><a class="anchor" aria-hidden="true" name="currying"></a><a href="#currying" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Currying</h3>
+<table>
+<thead>
+<tr><th>JavaScript</th><th>Reason</th></tr>
+</thead>
+<tbody>
+<tr><td><code>let add = a =&gt; b =&gt; a + b</code></td><td><code>let add = (a, b) =&gt; a + b</code></td></tr>
+</tbody>
+</table>
+<p>Both JavaScript and Reason support currying, but Reason currying is <strong>built-in and optimized to avoid intermediate function allocation &amp; calls</strong>, whenever possible.</p>
+<h2><a class="anchor" aria-hidden="true" name="if-else"></a><a href="#if-else" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>If-else</h2>
+<table>
+<thead>
+<tr><th>JavaScript</th><th>Reason</th></tr>
+</thead>
+<tbody>
+<tr><td><code>if (a) {b} else {c}</code></td><td>Same *</td></tr>
+<tr><td><code>a ? b : c</code></td><td>Same</td></tr>
+<tr><td><code>switch</code></td><td><code>switch</code> but <a href="/guide/language/pattern-matching">super-powered!</a></td></tr>
+</tbody>
+</table>
+<p>* Reason conditionals are always expressions!</p>
+<h2><a class="anchor" aria-hidden="true" name="destructuring"></a><a href="#destructuring" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Destructuring</h2>
+<table>
+<thead>
+<tr><th>JavaScript</th><th>Reason</th></tr>
+</thead>
+<tbody>
+<tr><td><code>const {a, b} = data</code></td><td><code>let {a, b} = data</code></td></tr>
+<tr><td><code>const [a, b] = data</code></td><td>`let [</td><td>a, b</td><td>] = data` *</td></tr>
+<tr><td><code>const {a: aa, b: bb} = data</code></td><td><code>let {a: aa, b: bb} = data</code></td></tr>
+</tbody>
+</table>
+<p>* Gives good compiler warning that <code>data</code> might not be of length 2. Switch to pattern-matching instead.</p>
+<h2><a class="anchor" aria-hidden="true" name="loop"></a><a href="#loop" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Loop</h2>
+<table>
+<thead>
+<tr><th>JavaScript</th><th>Reason</th></tr>
+</thead>
+<tbody>
+<tr><td><code>for (let i = 0; i &lt;= 10; i++) {...}</code></td><td><code>for (i in 0 to 10) {...}</code></td></tr>
+<tr><td><code>for (let i = 10; i &gt;= 0; i--) {...}</code></td><td><code>for (i in 10 downto 0) {...}</code></td></tr>
+<tr><td><code>while (true) {...}</code></td><td>Same</td></tr>
+</tbody>
+</table>
+<h2><a class="anchor" aria-hidden="true" name="jsx"></a><a href="#jsx" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>JSX</h2>
+<table>
+<thead>
+<tr><th>JavaScript</th><th>Reason</th></tr>
+</thead>
+<tbody>
+<tr><td><code>&lt;Foo bar=1 baz=&quot;hi&quot; onClick={bla} /&gt;</code></td><td>Same</td></tr>
+<tr><td><code>&lt;Foo bar=bar /&gt;</code></td><td><code>&lt;Foo bar /&gt;</code> *</td></tr>
+<tr><td><code>&lt;input checked /&gt;</code></td><td><code>&lt;input checked=true /&gt;</code></td></tr>
+</tbody>
+</table>
+<p>* Argument punning!</p>
+<h2><a class="anchor" aria-hidden="true" name="exception"></a><a href="#exception" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Exception</h2>
+<table>
+<thead>
+<tr><th>JavaScript</th><th>Reason</th></tr>
+</thead>
+<tbody>
+<tr><td><code>throw new SomeError(...)</code></td><td><code>raise(SomeError(...))</code></td></tr>
+<tr><td><code>try (a) {...} catch (Err) {...} finally {...}</code></td><td>`try a {</td><td>Err =&gt; ...}` *</td></tr>
+</tbody>
+</table>
+<p>* No finally.</p>
+<h2><a class="anchor" aria-hidden="true" name="blocks"></a><a href="#blocks" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Blocks</h2>
+<p>In Reason, &quot;sequence expressions&quot; are created with <code>{}</code> and evaluate to their last statement. In JavaScript, this can be simulated via an immediately-invoked function expression (since function bodies have their own local scope).</p>
+<table>
+  <tr>
+    <th scope="col">
+      <p >
+        JavaScript
+      </p>
+    </th>
+<pre><code class="hljs">&lt;th scope=&quot;col&quot;&gt;
+  &lt;p&gt;
+    Reason
+  &lt;/p&gt;
+&lt;/th&gt;
+</code></pre>
+  </tr>
+  <tr>
+    <td>
+      <pre>
+let res = (function() {
+  const x = 23;
+  const y = 34;
+  return x + y;
+})();</pre>
+    </td>
+<pre><code class="hljs">&lt;td&gt;
+  &lt;pre&gt;
+</code></pre>
+<p>let res = {
+let x = 23;
+let y = 34;
+x + y
+};</pre>
+</td></p>
+  </tr>
+</table>
+<h2><a class="anchor" aria-hidden="true" name="comments"></a><a href="#comments" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Comments</h2>
+<table>
+<thead>
+<tr><th>JavaScript</th><th>Reason</th></tr>
+</thead>
+<tbody>
+<tr><td><code>/* Comment */</code></td><td>Same</td></tr>
+<tr><td><code>// line comment</code></td><td>Coming soon</td></tr>
+</tbody>
+</table>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="interop.html">← Interop</a><a class="docs-next button" href="libraries.html">Libraries →</a></div></div></div></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.js"></script><script>window.foo = new Pjax({
+          areas: [
+            // try to use the first query.
+            '.mainContainer, .docsNavContainer .toc .navWrapper',
+            // fallback
+            'body'
+          ],
+          link: '.docsNavContainer:not(.docsSliderActive) a',
+          update: {
+            script: false,
+          }
+        });
+        var languagesMenuItemCopy = document.getElementById("languages-menu");
+        languagesMenuItemCopy.addEventListener("click", function(e){
+          e.preventDefault();
+          e.stopPropagation();
+          e.stopImmediatePropagation();
+        });</script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+              var search = docsearch({
+                apiKey: '55156da6520de795d3a2c2d23786f08e',
+                indexName: 'reason',
+                inputSelector: '#search_input_react'
+              });
+            </script></body></html>
