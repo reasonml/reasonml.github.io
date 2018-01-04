@@ -374,13 +374,27 @@
       '#checking-for-js-nullable-types-using-the-option-type': 'docs/en/newcomer-examples.html#checking-for-js-nullable-types-using-the-option-type',
       default: 'docs/en/newcomer-examples.html',
     },
+    'try': {
+      default: 'en/try.html',
+    },
+    'blog': {
+      '#reason-3': 'blog/2017/10/27/reason3.html',
+      '#messengercom-now-50-converted-to-reason': 'blog/2017/09/08/messenger-50-reason.html',
+      '#way-way-waaaay-nicer-error-messages': 'blog/2017/08/25/way-nicer-error-messages.html',
+      '#much-better-playground': 'blog/2017/08/18/much-better-playground.html',
+      '#new-website': 'blog/2017/07/14/new-website.html',
+      '#new-reasonreact-version-released': 'blog/2017/06/12/new-reason-react.html',
+      '#spring-cleaning-first-blog-post': 'blog/2017/05/18/spring-cleaning.html',
+      default: 'blog',
+    },
   };
   var hash = window.location.hash;
+  var search = window.location.search;
   var path = window.location.pathname.replace(/^\//, '').replace(/\/$/, '');
   if (redirects[path]) {
     var link = document.getElementById('redirectLink');
     var location = redirects[path][hash] || redirects[path].default;
-    link.textContent = 'https://reasonml.github.io/' + location;
-    link.href = '/' + location;
+    link.textContent = 'https://reasonml.github.io/' + location + search;
+    link.href = '/' + location + search;
   }
 })();
