@@ -30,7 +30,7 @@ class Users extends React.Component {
               <p>
                 <translate>Here are some of the companies successfully using Reason and BuckleScript in production, today.</translate>
               </p>
-            <a href="https://github.com/reasonml/reasonml.github.io/blob/source/website/siteconfig.js" className="button addCompanyButton">
+            <a href="https://github.com/reasonml/reasonml.github.io/blob/source/website/siteConfig.js" className="button addCompanyButton">
               <translate>Add yours (SVG logo preferred)</translate>
             </a>
             </div>

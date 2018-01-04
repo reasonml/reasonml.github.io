@@ -29,7 +29,7 @@ const users = [
   {
     caption: "Sentia",
     image: "img/logos/sentia.jpg",
-    infoLink: "https://sentia.ai",
+    infoLink: "https://www.sentia.ai",
   },
   {
     caption: "Gain by Sentia",
