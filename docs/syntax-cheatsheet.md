@@ -159,11 +159,40 @@ JavaScript                |   Reason
 
 ## Exception
 
-JavaScript                |   Reason
---------------------------|--------------------------------
-`throw new SomeError(...)`  |  `raise(SomeError(...))`
-`try (a) {...} catch (Err) {...} finally {...}`   |  `try a { | Err => ...}` \*
-
+<table>
+  <thead><tr> <th scope="col"><p >JavaScript</p></th> <th scope="col"><p>Reason</p></th></tr></thead>
+  <tr>
+    <td>
+      <pre>
+        throw new SomeError(...)
+      </pre>
+    </td>
+    <td>
+      <pre>
+        raise(SomeError(...))
+      </pre>
+    </td>
+  </tr>
+  <tr>  
+    <td>
+      <pre>
+        try { ... }
+        catch (Err) { ... }
+        finally { ... }
+      </pre>
+    </td>
+    <td>
+      <pre>
+        try {
+          ...
+        } {
+          | Err => 
+        } *
+      </pre>
+    </td>
+  </tr>
+</table>
+   
 \* No finally.
 
 ## Blocks
