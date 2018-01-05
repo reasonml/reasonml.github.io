@@ -93,20 +93,22 @@ JavaScript                            |   Reason
   <thead><tr> <th scope="col"><p >JavaScript</p></th> <th scope="col"><p>Reason</p></th></tr></thead>
   <tr>
     <td>
-      <pre>
+      <code>
+        <pre>
 const myFun = (x, y) => {
   const doubleX = x + x;
   const doubleY = y + y;
   return doubleX + doubleY
-};</pre>
+};</pre></code>
     </td>
     <td>
-      <pre>
+      <code>
+        <pre>
 let myFun = (x, y) => {
   let doubleX = x + x;
   let doubleY = y + y;
   doubleX + doubleY
-};</pre>
+};</pre></code>
     </td>
   </tr>
 </table>
@@ -174,20 +176,22 @@ In Reason, "sequence expressions" are created with `{}` and evaluate to their la
   <thead><tr> <th scope="col"><p >JavaScript</p></th> <th scope="col"><p>Reason</p></th></tr></thead>
   <tr>
     <td>
-      <pre>
+      <code>
+        <pre>
 let res = (function() {
   const x = 23;
   const y = 34;
   return x + y;
-})();</pre>
+})();</pre></code>
     </td>
     <td>
-      <pre>
+      <code>
+        <pre>
 let res = {
   let x = 23;
   let y = 34;
   x + y
-};</pre>
+};</pre></code>
     </td>
   </tr>
 </table>
