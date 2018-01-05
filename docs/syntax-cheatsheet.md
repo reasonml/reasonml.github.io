@@ -177,7 +177,7 @@ JavaScript                |   Reason
     <td>
       <pre>
         try { ... }
-        catch (Err) { ... }
+        catch (e) { ... }
         finally { ... }
       </pre>
     </td>
@@ -186,7 +186,7 @@ JavaScript                |   Reason
         try {
           ...
         } {
-          | Err => 
+          | e => 
         } *
       </pre>
     </td>
