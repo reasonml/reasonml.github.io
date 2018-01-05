@@ -76,7 +76,7 @@ JavaScript                |   Reason
 --------------------------|--------------------------------
 `null`, `undefined`       |  `None` \*
 
-\* Again, only a spiritual equivalent; Reason doesn't have nulls, nor null bugs! But it does have [an option type](/guide/examples#using-the-option-type) for when you actually need nullability.
+\* Again, only a spiritual equivalent; Reason doesn't have nulls, nor null bugs! But it does have [an option type](/docs/en/newcomer-examples.html#using-the-option-type) for when you actually need nullability.
 
 ## Function
 
