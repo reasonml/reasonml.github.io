@@ -25,17 +25,16 @@ The type <code class="code">Genarray.t</code> is the type of big arrays with var
        (<code class="code">c_layout</code> or <code class="code">fortran_layout</code>).</li>
 </ul>
 
-     For instance, <code class="code">(float, float32_elt, fortran_layout) Genarray.t</code>
+     For instance, <code class="code">(float, float32_elt, fortran_layout)(Genarray.t)</code>
      is the type of generic big arrays containing 32-bit floats
      in Fortran layout; reads and writes in this array use the
      OCaml type <code class="code">float</code>.<br>
 </div>
 
 
-<pre id="VALcreate"><span class="keyword">let</span> create:
-  (Bigarray.kind(&apos;a, &apos;b), Bigarray.layout(&apos;c), array(int)) =&gt; t(&apos;a, &apos;b, &apos;c);
+<pre id="VALcreate"><span class="keyword">let</span> create: (Bigarray.kind(&apos;a, &apos;b), Bigarray.layout(&apos;c), array(int)) =&gt; t(&apos;a, &apos;b, &apos;c);
 </pre><div class="info ">
-<code class="code">Genarray.create kind layout dimensions</code> returns a new big array
+<code class="code">Genarray.create(kind, layout, dimensions)</code> returns a new big array
      whose element kind is determined by the parameter <code class="code">kind</code> (one of
      <code class="code">float32</code>, <code class="code">float64</code>, <code class="code">int8_signed</code>, etc) and whose layout is
      determined by the parameter <code class="code">layout</code> (one of <code class="code">c_layout</code> or
@@ -45,7 +44,7 @@ The type <code class="code">Genarray.t</code> is the type of big arrays with var
      of the bigarray.
 <p>
 
-     For instance, <code class="code">Genarray.create int32 c_layout [|4;6;8|]</code>
+     For instance, <code class="code">Genarray.create(int32, c_layout, [|4, 6, 8|])</code>
      returns a fresh big array of 32-bit integers, in C layout,
      having three dimensions, the three dimensions being 4, 6 and 8
      respectively.
@@ -67,18 +66,18 @@ Return the number of dimensions of the given big array.<br>
 
 <pre id="VALdims"><span class="keyword">let</span> dims: t(&apos;a, &apos;b, &apos;c) =&gt; array(int);
 </pre><div class="info ">
-<code class="code">Genarray.dims a</code> returns all dimensions of the big array <code class="code">a</code>,
-     as an array of integers of length <code class="code">Genarray.num_dims a</code>.<br>
+<code class="code">Genarray.dims(a)</code> returns all dimensions of the big array <code class="code">a</code>,
+     as an array of integers of length <code class="code">Genarray.num_dims(a)</code>.<br>
 </div>
 
 <pre id="VALnth_dim"><span class="keyword">let</span> nth_dim: (t(&apos;a, &apos;b, &apos;c), int) =&gt; int;
 </pre><div class="info ">
-<code class="code">Genarray.nth_dim a n</code> returns the <code class="code">n</code>-th dimension of the
-     big array <code class="code">a</code>.  The first dimension corresponds to <code class="code">n = 0</code>;
-     the second dimension corresponds to <code class="code">n = 1</code>; the last dimension,
-     to <code class="code">n = Genarray.num_dims a - 1</code>.
+<code class="code">Genarray.nth_dim(a, n)</code> returns the <code class="code">n</code>-th dimension of the
+     big array <code class="code">a</code>.  The first dimension corresponds to <code class="code">n == 0</code>;
+     the second dimension corresponds to <code class="code">n == 1</code>; the last dimension,
+     to <code class="code">n == Genarray.num_dims(a) - 1</code>.
      Raise <code class="code">Invalid_argument</code> if <code class="code">n</code> is less than 0 or greater or equal than
-     <code class="code">Genarray.num_dims a</code>.<br>
+     <code class="code">Genarray.num_dims(a)</code>.<br>
 </div>
 
 <pre id="VALkind"><span class="keyword">let</span> kind: t(&apos;a, &apos;b, &apos;c) =&gt; Bigarray.kind(&apos;a, &apos;b);
@@ -135,11 +134,10 @@ Assign an element of a generic big array.
      as described below.)<br>
 </p></div>
 
-<pre id="VALsub_left"><span class="keyword">let</span> sub_left:
-  (t(&apos;a, &apos;b, Bigarray.c_layout), int, int) =&gt; t(&apos;a, &apos;b, Bigarray.c_layout);
+<pre id="VALsub_left"><span class="keyword">let</span> sub_left: (t(&apos;a, &apos;b, Bigarray.c_layout), int, int) =&gt; t(&apos;a, &apos;b, Bigarray.c_layout);
 </pre><div class="info ">
 Extract a sub-array of the given big array by restricting the
-     first (left-most) dimension.  <code class="code">Genarray.sub_left a ofs len</code>
+     first (left-most) dimension.  <code class="code">Genarray.sub_left(a, ofs, len)</code>
      returns a big array with the same number of dimensions as <code class="code">a</code>,
      and the same dimensions as <code class="code">a</code>, except the first dimension,
      which corresponds to the interval <code class="code">[ofs ... ofs + len - 1]</code>
@@ -154,15 +152,14 @@ Extract a sub-array of the given big array by restricting the
      <code class="code">Genarray.sub_left</code> applies only to big arrays in C layout.
      Raise <code class="code">Invalid_argument</code> if <code class="code">ofs</code> and <code class="code">len</code> do not designate
      a valid sub-array of <code class="code">a</code>, that is, if <code class="code">ofs &lt; 0</code>, or <code class="code">len &lt; 0</code>,
-     or <code class="code">ofs + len &gt; Genarray.nth_dim a 0</code>.<br>
+     or <code class="code">ofs + len &gt; Genarray.nth_dim(a, 0)</code>.<br>
 </p></div>
 
 <pre id="VALsub_right"><span class="keyword">let</span> sub_right:
-  (t(&apos;a, &apos;b, Bigarray.fortran_layout), int, int) =&gt;
-  t(&apos;a, &apos;b, Bigarray.fortran_layout);
+  (t(&apos;a, &apos;b, Bigarray.fortran_layout), int, int) =&gt; t(&apos;a, &apos;b, Bigarray.fortran_layout);
 </pre><div class="info ">
 Extract a sub-array of the given big array by restricting the
-     last (right-most) dimension.  <code class="code">Genarray.sub_right a ofs len</code>
+     last (right-most) dimension.  <code class="code">Genarray.sub_right(a, ofs, len)</code>
      returns a big array with the same number of dimensions as <code class="code">a</code>,
      and the same dimensions as <code class="code">a</code>, except the last dimension,
      which corresponds to the interval <code class="code">[ofs ... ofs + len - 1]</code>
@@ -177,11 +174,10 @@ Extract a sub-array of the given big array by restricting the
      <code class="code">Genarray.sub_right</code> applies only to big arrays in Fortran layout.
      Raise <code class="code">Invalid_argument</code> if <code class="code">ofs</code> and <code class="code">len</code> do not designate
      a valid sub-array of <code class="code">a</code>, that is, if <code class="code">ofs &lt; 1</code>, or <code class="code">len &lt; 0</code>,
-     or <code class="code">ofs + len &gt; Genarray.nth_dim a (Genarray.num_dims a - 1)</code>.<br>
+     or <code class="code">ofs + len &gt; Genarray.nth_dim(a, Genarray.num_dims(a) - 1)</code>.<br>
 </p></div>
 
-<pre id="VALslice_left"><span class="keyword">let</span> slice_left:
-  (t(&apos;a, &apos;b, Bigarray.c_layout), array(int)) =&gt; t(&apos;a, &apos;b, Bigarray.c_layout);
+<pre id="VALslice_left"><span class="keyword">let</span> slice_left: (t(&apos;a, &apos;b, Bigarray.c_layout), array(int)) =&gt; t(&apos;a, &apos;b, Bigarray.c_layout);
 </pre><div class="info ">
 Extract a sub-array of lower dimension from the given big array
      by fixing one or several of the first (left-most) coordinates.
@@ -201,8 +197,7 @@ Extract a sub-array of lower dimension from the given big array
 </p></div>
 
 <pre id="VALslice_right"><span class="keyword">let</span> slice_right:
-  (t(&apos;a, &apos;b, Bigarray.fortran_layout), array(int)) =&gt;
-  t(&apos;a, &apos;b, Bigarray.fortran_layout);
+  (t(&apos;a, &apos;b, Bigarray.fortran_layout), array(int)) =&gt; t(&apos;a, &apos;b, Bigarray.fortran_layout);
 </pre><div class="info ">
 Extract a sub-array of lower dimension from the given big array
      by fixing one or several of the last (right-most) coordinates.
@@ -224,7 +219,7 @@ Extract a sub-array of lower dimension from the given big array
 <pre id="VALblit"><span class="keyword">let</span> blit: (t(&apos;a, &apos;b, &apos;c), t(&apos;a, &apos;b, &apos;c)) =&gt; unit;
 </pre><div class="info ">
 Copy all elements of a big array in another big array.
-     <code class="code">Genarray.blit src dst</code> copies all elements of <code class="code">src</code> into
+     <code class="code">Genarray.blit(src, dst)</code> copies all elements of <code class="code">src</code> into
      <code class="code">dst</code>.  Both arrays <code class="code">src</code> and <code class="code">dst</code> must have the same number of
      dimensions and equal dimensions.  Copying a sub-array of <code class="code">src</code>
      to a sub-array of <code class="code">dst</code> can be achieved by applying <code class="code">Genarray.blit</code>
@@ -234,25 +229,18 @@ Copy all elements of a big array in another big array.
 <pre id="VALfill"><span class="keyword">let</span> fill: (t(&apos;a, &apos;b, &apos;c), &apos;a) =&gt; unit;
 </pre><div class="info ">
 Set all elements of a big array to a given value.
-     <code class="code">Genarray.fill a v</code> stores the value <code class="code">v</code> in all elements of
+     <code class="code">Genarray.fill(a, v)</code> stores the value <code class="code">v</code> in all elements of
      the big array <code class="code">a</code>.  Setting only some elements of <code class="code">a</code> to <code class="code">v</code>
      can be achieved by applying <code class="code">Genarray.fill</code> to a sub-array
      or a slice of <code class="code">a</code>.<br>
 </div>
 
 <pre id="VALmap_file"><span class="keyword">let</span> map_file:
-  (
-    Unix.file_descr,
-    ~pos: int64=?,
-    Bigarray.kind(&apos;a, &apos;b),
-    Bigarray.layout(&apos;c),
-    bool,
-    array(int)
-  ) =&gt;
+  (Unix.file_descr, ~pos: int64=?, Bigarray.kind(&apos;a, &apos;b), Bigarray.layout(&apos;c), bool, array(int)) =&gt;
   t(&apos;a, &apos;b, &apos;c);
 </pre><div class="info ">
 Memory mapping of a file as a big array.
-     <code class="code">Genarray.map_file fd kind layout shared dims</code>
+     <code class="code">Genarray.map_file(fd, kind, layout, shared, dims)</code>
      returns a big array of kind <code class="code">kind</code>, layout <code class="code">layout</code>,
      and dimensions as specified in <code class="code">dims</code>.  The data contained in
      this big array are the contents of the file referred to by
@@ -279,7 +267,7 @@ Memory mapping of a file as a big array.
      the actual size of the file, the major dimension (that is,
      the first dimension for an array with C layout, and the last
      dimension for an array with Fortran layout) can be given as
-     <code class="code">-1</code>.  <code class="code">Genarray.map_file</code> then determines the major dimension
+     <code class="code">(-1)</code>.  <code class="code">Genarray.map_file</code> then determines the major dimension
      from the size of the file.  The file must contain an integral
      number of sub-arrays as determined by the non-major dimensions,
      otherwise <code class="code">Failure</code> is raised.

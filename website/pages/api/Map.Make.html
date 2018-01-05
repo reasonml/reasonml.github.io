@@ -50,34 +50,33 @@ Test whether a map is empty or not.<br>
 
 <pre id="VALmem"><span class="keyword">let</span> mem: (key, t(&apos;a)) =&gt; bool;
 </pre><div class="info ">
-<code class="code">mem x m</code> returns <code class="code">true</code> if <code class="code">m</code> contains a binding for <code class="code">x</code>,
+<code class="code">mem(x, m)</code> returns <code class="code">true</code> if <code class="code">m</code> contains a binding for <code class="code">x</code>,
        and <code class="code">false</code> otherwise.<br>
 </div>
 
 <pre id="VALadd"><span class="keyword">let</span> add: (key, &apos;a, t(&apos;a)) =&gt; t(&apos;a);
 </pre><div class="info ">
-<code class="code">add x y m</code> returns a map containing the same bindings as
+<code class="code">add(x, y, m)</code> returns a map containing the same bindings as
        <code class="code">m</code>, plus a binding of <code class="code">x</code> to <code class="code">y</code>. If <code class="code">x</code> was already bound
        in <code class="code">m</code>, its previous binding disappears.<br>
 </div>
 
 <pre id="VALsingleton"><span class="keyword">let</span> singleton: (key, &apos;a) =&gt; t(&apos;a);
 </pre><div class="info ">
-<code class="code">singleton x y</code> returns the one-element map that contains a binding <code class="code">y</code>
+<code class="code">singleton(x, y)</code> returns the one-element map that contains a binding <code class="code">y</code>
         for <code class="code">x</code>.<br>
 <b>Since</b> 3.12.0<br>
 </div>
 
 <pre id="VALremove"><span class="keyword">let</span> remove: (key, t(&apos;a)) =&gt; t(&apos;a);
 </pre><div class="info ">
-<code class="code">remove x m</code> returns a map containing the same bindings as
+<code class="code">remove(x, m)</code> returns a map containing the same bindings as
        <code class="code">m</code>, except for <code class="code">x</code> which is unbound in the returned map.<br>
 </div>
 
-<pre id="VALmerge"><span class="keyword">let</span> merge:
-  ((key, option(&apos;a), option(&apos;b)) =&gt; option(&apos;c), t(&apos;a), t(&apos;b)) =&gt; t(&apos;c);
+<pre id="VALmerge"><span class="keyword">let</span> merge: ((key, option(&apos;a), option(&apos;b)) =&gt; option(&apos;c), t(&apos;a), t(&apos;b)) =&gt; t(&apos;c);
 </pre><div class="info ">
-<code class="code">merge f m1 m2</code> computes a map whose keys is a subset of keys of <code class="code">m1</code>
+<code class="code">merge(f, m1, m2)</code> computes a map whose keys is a subset of keys of <code class="code">m1</code>
         and of <code class="code">m2</code>. The presence of each such binding, and the corresponding
         value, is determined with the function <code class="code">f</code>.<br>
 <b>Since</b> 3.12.0<br>
@@ -91,7 +90,7 @@ Total ordering between maps.  The first argument is a total ordering
 
 <pre id="VALequal"><span class="keyword">let</span> equal: ((&apos;a, &apos;a) =&gt; bool, t(&apos;a), t(&apos;a)) =&gt; bool;
 </pre><div class="info ">
-<code class="code">equal cmp m1 m2</code> tests whether the maps <code class="code">m1</code> and <code class="code">m2</code> are
+<code class="code">equal(cmp, m1, m2)</code> tests whether the maps <code class="code">m1</code> and <code class="code">m2</code> are
        equal, that is, contain equal keys and associate them with
        equal data.  <code class="code">cmp</code> is the equality predicate used to compare
        the data associated with the keys.<br>
@@ -99,7 +98,7 @@ Total ordering between maps.  The first argument is a total ordering
 
 <pre id="VALiter"><span class="keyword">let</span> iter: ((key, &apos;a) =&gt; unit, t(&apos;a)) =&gt; unit;
 </pre><div class="info ">
-<code class="code">iter f m</code> applies <code class="code">f</code> to all bindings in map <code class="code">m</code>.
+<code class="code">iter(f, m)</code> applies <code class="code">f</code> to all bindings in map <code class="code">m</code>.
        <code class="code">f</code> receives the key as first argument, and the associated value
        as second argument.  The bindings are passed to <code class="code">f</code> in increasing
        order with respect to the ordering over the type of the keys.<br>
@@ -107,35 +106,35 @@ Total ordering between maps.  The first argument is a total ordering
 
 <pre id="VALfold"><span class="keyword">let</span> fold: ((key, &apos;a, &apos;b) =&gt; &apos;b, t(&apos;a), &apos;b) =&gt; &apos;b;
 </pre><div class="info ">
-<code class="code">fold f m a</code> computes <code class="code">(f kN dN ... (f k1 d1 a)...)</code>,
+<code class="code">fold(f, m, a)</code> computes <code class="code">(f kN dN ... (f k1 d1 a)...)</code>,
        where <code class="code">k1 ... kN</code> are the keys of all bindings in <code class="code">m</code>
        (in increasing order), and <code class="code">d1 ... dN</code> are the associated data.<br>
 </div>
 
 <pre id="VALfor_all"><span class="keyword">let</span> for_all: ((key, &apos;a) =&gt; bool, t(&apos;a)) =&gt; bool;
 </pre><div class="info ">
-<code class="code">for_all p m</code> checks if all the bindings of the map
+<code class="code">for_all(p, m)</code> checks if all the bindings of the map
         satisfy the predicate <code class="code">p</code>.<br>
 <b>Since</b> 3.12.0<br>
 </div>
 
 <pre id="VALexists"><span class="keyword">let</span> exists: ((key, &apos;a) =&gt; bool, t(&apos;a)) =&gt; bool;
 </pre><div class="info ">
-<code class="code">exists p m</code> checks if at least one binding of the map
+<code class="code">exists(p, m)</code> checks if at least one binding of the map
         satisfy the predicate <code class="code">p</code>.<br>
 <b>Since</b> 3.12.0<br>
 </div>
 
 <pre id="VALfilter"><span class="keyword">let</span> filter: ((key, &apos;a) =&gt; bool, t(&apos;a)) =&gt; t(&apos;a);
 </pre><div class="info ">
-<code class="code">filter p m</code> returns the map with all the bindings in <code class="code">m</code>
+<code class="code">filter(p, m)</code> returns the map with all the bindings in <code class="code">m</code>
         that satisfy predicate <code class="code">p</code>.<br>
 <b>Since</b> 3.12.0<br>
 </div>
 
 <pre id="VALpartition"><span class="keyword">let</span> partition: ((key, &apos;a) =&gt; bool, t(&apos;a)) =&gt; (t(&apos;a), t(&apos;a));
 </pre><div class="info ">
-<code class="code">partition p m</code> returns a pair of maps <code class="code">(m1, m2)</code>, where
+<code class="code">partition(p, m)</code> returns a pair of maps <code class="code">(m1, m2)</code>, where
         <code class="code">m1</code> contains all the bindings of <code class="code">s</code> that satisfy the
         predicate <code class="code">p</code>, and <code class="code">m2</code> is the map with all the bindings of
         <code class="code">s</code> that do not satisfy <code class="code">p</code>.<br>
@@ -182,25 +181,25 @@ Return one binding of the given map, or raise <code class="code">Not_found</code
 
 <pre id="VALsplit"><span class="keyword">let</span> split: (key, t(&apos;a)) =&gt; (t(&apos;a), option(&apos;a), t(&apos;a));
 </pre><div class="info ">
-<code class="code">split x m</code> returns a triple <code class="code">(l, data, r)</code>, where
+<code class="code">split(x, m)</code> returns a triple <code class="code">(l, data, r)</code>, where
           <code class="code">l</code> is the map with all the bindings of <code class="code">m</code> whose key
         is strictly less than <code class="code">x</code>;
           <code class="code">r</code> is the map with all the bindings of <code class="code">m</code> whose key
         is strictly greater than <code class="code">x</code>;
           <code class="code">data</code> is <code class="code">None</code> if <code class="code">m</code> contains no binding for <code class="code">x</code>,
-          or <code class="code">Some v</code> if <code class="code">m</code> binds <code class="code">v</code> to <code class="code">x</code>.<br>
+          or <code class="code">Some(v)</code> if <code class="code">m</code> binds <code class="code">v</code> to <code class="code">x</code>.<br>
 <b>Since</b> 3.12.0<br>
 </div>
 
 <pre id="VALfind"><span class="keyword">let</span> find: (key, t(&apos;a)) =&gt; &apos;a;
 </pre><div class="info ">
-<code class="code">find x m</code> returns the current binding of <code class="code">x</code> in <code class="code">m</code>,
+<code class="code">find(x, m)</code> returns the current binding of <code class="code">x</code> in <code class="code">m</code>,
        or raises <code class="code">Not_found</code> if no such binding exists.<br>
 </div>
 
 <pre id="VALmap"><span class="keyword">let</span> map: (&apos;a =&gt; &apos;b, t(&apos;a)) =&gt; t(&apos;b);
 </pre><div class="info ">
-<code class="code">map f m</code> returns a map with same domain as <code class="code">m</code>, where the
+<code class="code">map(f, m)</code> returns a map with same domain as <code class="code">m</code>, where the
        associated value <code class="code">a</code> of all bindings of <code class="code">m</code> has been
        replaced by the result of the application of <code class="code">f</code> to <code class="code">a</code>.
        The bindings are passed to <code class="code">f</code> in increasing order

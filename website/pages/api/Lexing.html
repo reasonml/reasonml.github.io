@@ -176,7 +176,7 @@ The type of lexer buffers. A lexer buffer is the argument passed
 <pre id="VALfrom_channel"><span class="keyword">let</span> from_channel: Pervasives.in_channel =&gt; lexbuf;
 </pre><div class="info ">
 Create a lexer buffer on the given input channel.
-   <code class="code">Lexing.from_channel inchan</code> returns a lexer buffer which reads
+   <code class="code">Lexing.from_channel(inchan)</code> returns a lexer buffer which reads
    from the input channel <code class="code">inchan</code>, at the current reading position.<br>
 </div>
 
@@ -213,26 +213,26 @@ The following functions can be called from the semantic actions
 
 <pre id="VALlexeme"><span class="keyword">let</span> lexeme: lexbuf =&gt; string;
 </pre><div class="info ">
-<code class="code">Lexing.lexeme lexbuf</code> returns the string matched by
+<code class="code">Lexing.lexeme(lexbuf)</code> returns the string matched by
            the regular expression.<br>
 </div>
 
 <pre id="VALlexeme_char"><span class="keyword">let</span> lexeme_char: (lexbuf, int) =&gt; char;
 </pre><div class="info ">
-<code class="code">Lexing.lexeme_char lexbuf i</code> returns character number <code class="code">i</code> in
+<code class="code">Lexing.lexeme_char(lexbuf, i)</code> returns character number <code class="code">i</code> in
    the matched string.<br>
 </div>
 
 <pre id="VALlexeme_start"><span class="keyword">let</span> lexeme_start: lexbuf =&gt; int;
 </pre><div class="info ">
-<code class="code">Lexing.lexeme_start lexbuf</code> returns the offset in the
+<code class="code">Lexing.lexeme_start(lexbuf)</code> returns the offset in the
    input stream of the first character of the matched string.
    The first character of the stream has offset 0.<br>
 </div>
 
 <pre id="VALlexeme_end"><span class="keyword">let</span> lexeme_end: lexbuf =&gt; int;
 </pre><div class="info ">
-<code class="code">Lexing.lexeme_end lexbuf</code> returns the offset in the input stream
+<code class="code">Lexing.lexeme_end(lexbuf)</code> returns the offset in the input stream
    of the character following the last character of the matched
    string. The first character of the stream has offset 0.<br>
 </div>

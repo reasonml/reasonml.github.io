@@ -246,16 +246,16 @@ The major GC speed is computed from this parameter.
 This value controls the GC messages on standard error output.
        It is a sum of some of the following flags, to print messages
        on the corresponding events:<ul>
-<li><code class="code">0x001</code> Start of major GC cycle.</li>
-<li><code class="code">0x002</code> Minor collection and major GC slice.</li>
-<li><code class="code">0x004</code> Growing and shrinking of the heap.</li>
-<li><code class="code">0x008</code> Resizing of stacks and memory manager tables.</li>
-<li><code class="code">0x010</code> Heap compaction.</li>
-<li><code class="code">0x020</code> Change of GC parameters.</li>
-<li><code class="code">0x040</code> Computation of major GC slice size.</li>
-<li><code class="code">0x080</code> Calling of finalisation functions.</li>
-<li><code class="code">0x100</code> Bytecode executable and shared library search at start-up.</li>
-<li><code class="code">0x200</code> Computation of compaction-triggering condition.
+<li><code class="code">1</code> Start of major GC cycle.</li>
+<li><code class="code">2</code> Minor collection and major GC slice.</li>
+<li><code class="code">4</code> Growing and shrinking of the heap.</li>
+<li><code class="code">8</code> Resizing of stacks and memory manager tables.</li>
+<li><code class="code">16</code> Heap compaction.</li>
+<li><code class="code">32</code> Change of GC parameters.</li>
+<li><code class="code">64</code> Computation of major GC slice size.</li>
+<li><code class="code">128</code> Calling of finalisation functions.</li>
+<li><code class="code">256</code> Bytecode executable and shared library search at start-up.</li>
+<li><code class="code">512</code> Computation of compaction-triggering condition.
        Default: 0.</li>
 </ul>
 <br>
@@ -346,8 +346,8 @@ Return the current values of the GC parameters in a <code class="code">control</
 
 <pre id="VALset"><span class="keyword">let</span> set: control =&gt; unit;
 </pre><div class="info ">
-<code class="code">set r</code> changes the GC parameters according to the <code class="code">control</code> record <code class="code">r</code>.
-   The normal usage is: <code class="code">Gc.set { (Gc.get()) with Gc.verbose = 0x00d }</code><br>
+<code class="code">set(r)</code> changes the GC parameters according to the <code class="code">control</code> record <code class="code">r</code>.
+   The normal usage is: <code class="code">Gc.set({...Gc.get(), Gc.verbose: 13})</code><br>
 </div>
 
 <pre id="VALminor"><span class="keyword">let</span> minor: unit =&gt; unit;
@@ -395,7 +395,7 @@ Return the total number of bytes allocated since the program was
 
 <pre id="VALfinalise"><span class="keyword">let</span> finalise: (&apos;a =&gt; unit, &apos;a) =&gt; unit;
 </pre><div class="info ">
-<code class="code">finalise f v</code> registers <code class="code">f</code> as a finalisation function for <code class="code">v</code>.
+<code class="code">finalise(f, v)</code> registers <code class="code">f</code> as a finalisation function for <code class="code">v</code>.
    <code class="code">v</code> must be heap-allocated.  <code class="code">f</code> will be called with <code class="code">v</code> as
    argument at some point between the first time <code class="code">v</code> becomes unreachable
    and the time <code class="code">v</code> is collected by the GC.  Several functions can
@@ -477,7 +477,7 @@ An alarm is a piece of data that calls a user function at the end of
 
 <pre id="VALcreate_alarm"><span class="keyword">let</span> create_alarm: (unit =&gt; unit) =&gt; alarm;
 </pre><div class="info ">
-<code class="code">create_alarm f</code> will arrange for <code class="code">f</code> to be called at the end of each
+<code class="code">create_alarm(f)</code> will arrange for <code class="code">f</code> to be called at the end of each
    major GC cycle, starting with the current cycle or the next one.
    A value of type <code class="code">alarm</code> is returned that you can
    use to call <code class="code">delete_alarm</code>.<br>
@@ -485,7 +485,7 @@ An alarm is a piece of data that calls a user function at the end of
 
 <pre id="VALdelete_alarm"><span class="keyword">let</span> delete_alarm: alarm =&gt; unit;
 </pre><div class="info ">
-<code class="code">delete_alarm a</code> will stop the calls to the function associated
-   to <code class="code">a</code>.  Calling <code class="code">delete_alarm a</code> again has no effect.<br>
+<code class="code">delete_alarm(a)</code> will stop the calls to the function associated
+   to <code class="code">a</code>.  Calling <code class="code">delete_alarm(a)</code> again has no effect.<br>
 </div>
 </div>

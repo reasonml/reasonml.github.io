@@ -59,7 +59,7 @@ A convenient alias to designate a file name.<br>
 
 <pre id="VALopen_in"><span class="keyword">let</span> open_in: file_name =&gt; in_channel;
 </pre><div class="info ">
-<code class="code">Scanning.open_in fname</code> returns a formatted input channel for bufferized
+<code class="code">Scanning.open_in(fname)</code> returns a formatted input channel for bufferized
     reading in text mode from file <code class="code">fname</code>.
 <p>
 
@@ -73,7 +73,7 @@ A convenient alias to designate a file name.<br>
 
 <pre id="VALopen_in_bin"><span class="keyword">let</span> open_in_bin: file_name =&gt; in_channel;
 </pre><div class="info ">
-<code class="code">Scanning.open_in_bin fname</code> returns a formatted input channel for
+<code class="code">Scanning.open_in_bin(fname)</code> returns a formatted input channel for
     bufferized reading in binary mode from file <code class="code">fname</code>.<br>
 <b>Since</b> 3.12.0<br>
 </div>
@@ -97,7 +97,7 @@ An alias for <code class="code">open_in_bin</code> above.<br>
 
 <pre id="VALfrom_string"><span class="keyword">let</span> from_string: string =&gt; in_channel;
 </pre><div class="info ">
-<code class="code">Scanning.from_string s</code> returns a formatted input channel which reads
+<code class="code">Scanning.from_string(s)</code> returns a formatted input channel which reads
     from the given string.
     Reading starts from the first character in the string.
     The end-of-input condition is set when the end of the string is reached.<br>
@@ -105,7 +105,7 @@ An alias for <code class="code">open_in_bin</code> above.<br>
 
 <pre id="VALfrom_function"><span class="keyword">let</span> from_function: (unit =&gt; char) =&gt; in_channel;
 </pre><div class="info ">
-<code class="code">Scanning.from_function f</code> returns a formatted input channel with the
+<code class="code">Scanning.from_function(f)</code> returns a formatted input channel with the
     given function as its reading method.
 <p>
 
@@ -118,26 +118,26 @@ An alias for <code class="code">open_in_bin</code> above.<br>
 
 <pre id="VALfrom_channel"><span class="keyword">let</span> from_channel: Pervasives.in_channel =&gt; in_channel;
 </pre><div class="info ">
-<code class="code">Scanning.from_channel ic</code> returns a formatted input channel which reads
+<code class="code">Scanning.from_channel(ic)</code> returns a formatted input channel which reads
     from the regular input channel <code class="code">ic</code> argument, starting at the current
     reading position.<br>
 </div>
 
 <pre id="VALend_of_input"><span class="keyword">let</span> end_of_input: in_channel =&gt; bool;
 </pre><div class="info ">
-<code class="code">Scanning.end_of_input ic</code> tests the end-of-input condition of the given
+<code class="code">Scanning.end_of_input(ic)</code> tests the end-of-input condition of the given
     formatted input channel.<br>
 </div>
 
 <pre id="VALbeginning_of_input"><span class="keyword">let</span> beginning_of_input: in_channel =&gt; bool;
 </pre><div class="info ">
-<code class="code">Scanning.beginning_of_input ic</code> tests the beginning of input condition of
+<code class="code">Scanning.beginning_of_input(ic)</code> tests the beginning of input condition of
     the given formatted input channel.<br>
 </div>
 
 <pre id="VALname_of_input"><span class="keyword">let</span> name_of_input: in_channel =&gt; string;
 </pre><div class="info ">
-<code class="code">Scanning.name_of_input ic</code> returns the name of the character source
+<code class="code">Scanning.name_of_input(ic)</code> returns the name of the character source
     for the formatted input channel <code class="code">ic</code>.<br>
 <b>Since</b> 3.09.0<br>
 </div>

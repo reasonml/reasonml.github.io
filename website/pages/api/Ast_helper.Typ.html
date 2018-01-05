@@ -10,22 +10,14 @@ Type expressions<br>
 <hr width="100%">
 
 <pre id="VALmk"><span class="keyword">let</span> mk:
-  (
-    ~loc: Ast_helper.loc=?,
-    ~attrs: Ast_helper.attrs=?,
-    Parsetree.core_type_desc
-  ) =&gt;
+  (~loc: Ast_helper.loc=?, ~attrs: Ast_helper.attrs=?, Parsetree.core_type_desc) =&gt;
   Parsetree.core_type;
 </pre>
 <pre id="VALattr"><span class="keyword">let</span> attr: (Parsetree.core_type, Parsetree.attribute) =&gt; Parsetree.core_type;
 </pre>
-<pre id="VALany"><span class="keyword">let</span> any:
-  (~loc: Ast_helper.loc=?, ~attrs: Ast_helper.attrs=?, unit) =&gt;
-  Parsetree.core_type;
+<pre id="VALany"><span class="keyword">let</span> any: (~loc: Ast_helper.loc=?, ~attrs: Ast_helper.attrs=?, unit) =&gt; Parsetree.core_type;
 </pre>
-<pre id="VALvar"><span class="keyword">let</span> var:
-  (~loc: Ast_helper.loc=?, ~attrs: Ast_helper.attrs=?, string) =&gt;
-  Parsetree.core_type;
+<pre id="VALvar"><span class="keyword">let</span> var: (~loc: Ast_helper.loc=?, ~attrs: Ast_helper.attrs=?, string) =&gt; Parsetree.core_type;
 </pre>
 <pre id="VALarrow"><span class="keyword">let</span> arrow:
   (
@@ -38,11 +30,7 @@ Type expressions<br>
   Parsetree.core_type;
 </pre>
 <pre id="VALtuple"><span class="keyword">let</span> tuple:
-  (
-    ~loc: Ast_helper.loc=?,
-    ~attrs: Ast_helper.attrs=?,
-    list(Parsetree.core_type)
-  ) =&gt;
+  (~loc: Ast_helper.loc=?, ~attrs: Ast_helper.attrs=?, list(Parsetree.core_type)) =&gt;
   Parsetree.core_type;
 </pre>
 <pre id="VALconstr"><span class="keyword">let</span> constr:
@@ -73,12 +61,7 @@ Type expressions<br>
   Parsetree.core_type;
 </pre>
 <pre id="VALalias"><span class="keyword">let</span> alias:
-  (
-    ~loc: Ast_helper.loc=?,
-    ~attrs: Ast_helper.attrs=?,
-    Parsetree.core_type,
-    string
-  ) =&gt;
+  (~loc: Ast_helper.loc=?, ~attrs: Ast_helper.attrs=?, Parsetree.core_type, string) =&gt;
   Parsetree.core_type;
 </pre>
 <pre id="VALvariant"><span class="keyword">let</span> variant:
@@ -92,12 +75,7 @@ Type expressions<br>
   Parsetree.core_type;
 </pre>
 <pre id="VALpoly"><span class="keyword">let</span> poly:
-  (
-    ~loc: Ast_helper.loc=?,
-    ~attrs: Ast_helper.attrs=?,
-    list(string),
-    Parsetree.core_type
-  ) =&gt;
+  (~loc: Ast_helper.loc=?, ~attrs: Ast_helper.attrs=?, list(string), Parsetree.core_type) =&gt;
   Parsetree.core_type;
 </pre>
 <pre id="VALpackage"><span class="keyword">let</span> package:
@@ -110,8 +88,7 @@ Type expressions<br>
   Parsetree.core_type;
 </pre>
 <pre id="VALextension"><span class="keyword">let</span> extension:
-  (~loc: Ast_helper.loc=?, ~attrs: Ast_helper.attrs=?, Parsetree.extension) =&gt;
-  Parsetree.core_type;
+  (~loc: Ast_helper.loc=?, ~attrs: Ast_helper.attrs=?, Parsetree.extension) =&gt; Parsetree.core_type;
 </pre>
 <pre id="VALforce_poly"><span class="keyword">let</span> force_poly: Parsetree.core_type =&gt; Parsetree.core_type;
 </pre></div>

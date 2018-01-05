@@ -111,19 +111,19 @@ Operating system currently executing the OCaml program. One of<ul>
 
 <pre id="VALunix"><span class="keyword">let</span> unix: bool;
 </pre><div class="info ">
-True if <code class="code">Sys.os_type = &quot;Unix&quot;</code>.<br>
+True if <code class="code">Sys.os_type == &quot;Unix&quot;</code>.<br>
 <b>Since</b> 4.01.0<br>
 </div>
 
 <pre id="VALwin32"><span class="keyword">let</span> win32: bool;
 </pre><div class="info ">
-True if <code class="code">Sys.os_type = &quot;Win32&quot;</code>.<br>
+True if <code class="code">Sys.os_type == &quot;Win32&quot;</code>.<br>
 <b>Since</b> 4.01.0<br>
 </div>
 
 <pre id="VALcygwin"><span class="keyword">let</span> cygwin: bool;
 </pre><div class="info ">
-True if <code class="code">Sys.os_type = &quot;Cygwin&quot;</code>.<br>
+True if <code class="code">Sys.os_type == &quot;Cygwin&quot;</code>.<br>
 <b>Since</b> 4.01.0<br>
 </div>
 
@@ -147,7 +147,7 @@ Maximum length of strings and byte sequences.<br>
 <pre id="VALmax_array_length"><span class="keyword">let</span> max_array_length: int;
 </pre><div class="info ">
 Maximum length of a normal array.  The maximum length of a float
-    array is <code class="code">max_array_length/2</code> on 32-bit machines and
+    array is <code class="code">max_array_length / 2</code> on 32-bit machines and
     <code class="code">max_array_length</code> on 64-bit machines.<br>
 </div>
 <br>
@@ -183,7 +183,7 @@ What to do when receiving a signal:<ul>
 <li><code class="code">Signal_default</code>: take the default behavior
      (usually: abort the program)</li>
 <li><code class="code">Signal_ignore</code>: ignore the signal</li>
-<li><code class="code">Signal_handle f</code>: call function <code class="code">f</code>, giving it the signal
+<li><code class="code">Signal_handle(f)</code>: call function <code class="code">f</code>, giving it the signal
    number as argument.</li>
 </ul>
 <br>
@@ -322,8 +322,8 @@ Exception raised on interactive interrupt if <a href="Sys.html#VALcatch_break"><
 </pre><div class="info ">
 <code class="code">catch_break</code> governs whether interactive interrupt (ctrl-C)
    terminates the program or raises the <code class="code">Break</code> exception.
-   Call <code class="code">catch_break true</code> to enable raising <code class="code">Break</code>,
-   and <code class="code">catch_break false</code> to let the system
+   Call <code class="code">catch_break(true)</code> to enable raising <code class="code">Break</code>,
+   and <code class="code">catch_break(false)</code> to let the system
    terminate the program on user interrupt.<br>
 </div>
 
@@ -332,7 +332,7 @@ Exception raised on interactive interrupt if <a href="Sys.html#VALcatch_break"><
 <code class="code">ocaml_version</code> is the version of OCaml.
     It is a string of the form <code class="code">&quot;major.minor[.patchlevel][+additional-info]&quot;</code>,
     where <code class="code">major</code>, <code class="code">minor</code>, and <code class="code">patchlevel</code> are integers, and
-    <code class="code">additional-info</code> is an arbitrary string. The <code class="code">[.patchlevel]</code> and
-    <code class="code">[+additional-info]</code> parts may be absent.<br>
+    <code class="code">additional - info</code> is an arbitrary string. The <code class="code">[.patchlevel]</code> and
+    <code class="code">[+ additional - info]</code> parts may be absent.<br>
 </div>
 </div>

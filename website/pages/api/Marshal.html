@@ -89,7 +89,7 @@ The flags to the <code class="code">Marshal.to_*</code> functions below.<br>
 
 <pre id="VALto_channel"><span class="keyword">let</span> to_channel: (Pervasives.out_channel, &apos;a, list(extern_flags)) =&gt; unit;
 </pre><div class="info ">
-<code class="code">Marshal.to_channel chan v flags</code> writes the representation
+<code class="code">Marshal.to_channel(chan, v, flags)</code> writes the representation
    of <code class="code">v</code> on channel <code class="code">chan</code>. The <code class="code">flags</code> argument is a
    possibly empty list of flags that governs the marshaling
    behavior with respect to sharing, functional values, and compatibility
@@ -146,7 +146,7 @@ The flags to the <code class="code">Marshal.to_*</code> functions below.<br>
 
 <pre id="VALto_bytes"><span class="keyword">let</span> to_bytes: (&apos;a, list(extern_flags)) =&gt; bytes;
 </pre><div class="info ">
-<code class="code">Marshal.to_bytes v flags</code> returns a byte sequence containing
+<code class="code">Marshal.to_bytes(v, flags)</code> returns a byte sequence containing
    the representation of <code class="code">v</code>.
    The <code class="code">flags</code> argument has the same meaning as for
    <a href="Marshal.html#VALto_channel"><code class="code">Marshal.to_channel</code></a>.<br>
@@ -161,7 +161,7 @@ Same as <code class="code">to_bytes</code> but return the result as a string ins
 
 <pre id="VALto_buffer"><span class="keyword">let</span> to_buffer: (bytes, int, int, &apos;a, list(extern_flags)) =&gt; int;
 </pre><div class="info ">
-<code class="code">Marshal.to_buffer buff ofs len v flags</code> marshals the value <code class="code">v</code>,
+<code class="code">Marshal.to_buffer(buff, ofs, len, v, flags)</code> marshals the value <code class="code">v</code>,
    storing its byte representation in the sequence <code class="code">buff</code>,
    starting at index <code class="code">ofs</code>, and writing at most
    <code class="code">len</code> bytes.  It returns the number of bytes
@@ -172,7 +172,7 @@ Same as <code class="code">to_bytes</code> but return the result as a string ins
 
 <pre id="VALfrom_channel"><span class="keyword">let</span> from_channel: Pervasives.in_channel =&gt; &apos;a;
 </pre><div class="info ">
-<code class="code">Marshal.from_channel chan</code> reads from channel <code class="code">chan</code> the
+<code class="code">Marshal.from_channel(chan)</code> reads from channel <code class="code">chan</code> the
    byte representation of a structured value, as produced by
    one of the <code class="code">Marshal.to_*</code> functions, and reconstructs and
    returns the corresponding value.<br>
@@ -180,7 +180,7 @@ Same as <code class="code">to_bytes</code> but return the result as a string ins
 
 <pre id="VALfrom_bytes"><span class="keyword">let</span> from_bytes: (bytes, int) =&gt; &apos;a;
 </pre><div class="info ">
-<code class="code">Marshal.from_bytes buff ofs</code> unmarshals a structured value
+<code class="code">Marshal.from_bytes(buff, ofs)</code> unmarshals a structured value
    like <a href="Marshal.html#VALfrom_channel"><code class="code">Marshal.from_channel</code></a> does, except that the byte
    representation is not read from a channel, but taken from
    the byte sequence <code class="code">buff</code>, starting at position <code class="code">ofs</code>.
@@ -200,10 +200,10 @@ The bytes representing a marshaled value are composed of
    a fixed-size header and a variable-sized data part,
    whose size can be determined from the header.
    <a href="Marshal.html#VALheader_size"><code class="code">Marshal.header_size</code></a> is the size, in bytes, of the header.
-   <a href="Marshal.html#VALdata_size"><code class="code">Marshal.data_size</code></a><code class="code"> buff ofs</code> is the size, in bytes,
+   <a href="Marshal.html#VALdata_size"><code class="code">Marshal.data_size</code></a><code class="code">buff(ofs)</code> is the size, in bytes,
    of the data part, assuming a valid header is stored in
    <code class="code">buff</code> starting at position <code class="code">ofs</code>.
-   Finally, <a href="Marshal.html#VALtotal_size"><code class="code">Marshal.total_size</code></a> <code class="code">buff ofs</code> is the total size,
+   Finally, <a href="Marshal.html#VALtotal_size"><code class="code">Marshal.total_size</code></a> <code class="code">buff(ofs)</code> is the total size,
    in bytes, of the marshaled value.
    Both <a href="Marshal.html#VALdata_size"><code class="code">Marshal.data_size</code></a> and <a href="Marshal.html#VALtotal_size"><code class="code">Marshal.total_size</code></a> raise <code class="code">Failure</code>
    if <code class="code">buff</code>, <code class="code">ofs</code> does not contain a valid header.

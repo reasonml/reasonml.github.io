@@ -11,22 +11,16 @@ Expressions<br>
 <hr width="100%">
 
 <pre id="VALmk"><span class="keyword">let</span> mk:
-  (
-    ~loc: Ast_helper.loc=?,
-    ~attrs: Ast_helper.attrs=?,
-    Parsetree.expression_desc
-  ) =&gt;
+  (~loc: Ast_helper.loc=?, ~attrs: Ast_helper.attrs=?, Parsetree.expression_desc) =&gt;
   Parsetree.expression;
 </pre>
 <pre id="VALattr"><span class="keyword">let</span> attr: (Parsetree.expression, Parsetree.attribute) =&gt; Parsetree.expression;
 </pre>
 <pre id="VALident"><span class="keyword">let</span> ident:
-  (~loc: Ast_helper.loc=?, ~attrs: Ast_helper.attrs=?, Ast_helper.lid) =&gt;
-  Parsetree.expression;
+  (~loc: Ast_helper.loc=?, ~attrs: Ast_helper.attrs=?, Ast_helper.lid) =&gt; Parsetree.expression;
 </pre>
 <pre id="VALconstant"><span class="keyword">let</span> constant:
-  (~loc: Ast_helper.loc=?, ~attrs: Ast_helper.attrs=?, Asttypes.constant) =&gt;
-  Parsetree.expression;
+  (~loc: Ast_helper.loc=?, ~attrs: Ast_helper.attrs=?, Asttypes.constant) =&gt; Parsetree.expression;
 </pre>
 <pre id="VALlet_"><span class="keyword">let</span> let_:
   (
@@ -81,11 +75,7 @@ Expressions<br>
   Parsetree.expression;
 </pre>
 <pre id="VALtuple"><span class="keyword">let</span> tuple:
-  (
-    ~loc: Ast_helper.loc=?,
-    ~attrs: Ast_helper.attrs=?,
-    list(Parsetree.expression)
-  ) =&gt;
+  (~loc: Ast_helper.loc=?, ~attrs: Ast_helper.attrs=?, list(Parsetree.expression)) =&gt;
   Parsetree.expression;
 </pre>
 <pre id="VALconstruct"><span class="keyword">let</span> construct:
@@ -116,12 +106,7 @@ Expressions<br>
   Parsetree.expression;
 </pre>
 <pre id="VALfield"><span class="keyword">let</span> field:
-  (
-    ~loc: Ast_helper.loc=?,
-    ~attrs: Ast_helper.attrs=?,
-    Parsetree.expression,
-    Ast_helper.lid
-  ) =&gt;
+  (~loc: Ast_helper.loc=?, ~attrs: Ast_helper.attrs=?, Parsetree.expression, Ast_helper.lid) =&gt;
   Parsetree.expression;
 </pre>
 <pre id="VALsetfield"><span class="keyword">let</span> setfield:
@@ -135,11 +120,7 @@ Expressions<br>
   Parsetree.expression;
 </pre>
 <pre id="VALarray"><span class="keyword">let</span> array:
-  (
-    ~loc: Ast_helper.loc=?,
-    ~attrs: Ast_helper.attrs=?,
-    list(Parsetree.expression)
-  ) =&gt;
+  (~loc: Ast_helper.loc=?, ~attrs: Ast_helper.attrs=?, list(Parsetree.expression)) =&gt;
   Parsetree.expression;
 </pre>
 <pre id="VALifthenelse"><span class="keyword">let</span> ifthenelse:
@@ -202,25 +183,14 @@ Expressions<br>
   Parsetree.expression;
 </pre>
 <pre id="VALsend"><span class="keyword">let</span> send:
-  (
-    ~loc: Ast_helper.loc=?,
-    ~attrs: Ast_helper.attrs=?,
-    Parsetree.expression,
-    string
-  ) =&gt;
+  (~loc: Ast_helper.loc=?, ~attrs: Ast_helper.attrs=?, Parsetree.expression, string) =&gt;
   Parsetree.expression;
 </pre>
 <pre id="VALnew_"><span class="keyword">let</span> new_:
-  (~loc: Ast_helper.loc=?, ~attrs: Ast_helper.attrs=?, Ast_helper.lid) =&gt;
-  Parsetree.expression;
+  (~loc: Ast_helper.loc=?, ~attrs: Ast_helper.attrs=?, Ast_helper.lid) =&gt; Parsetree.expression;
 </pre>
 <pre id="VALsetinstvar"><span class="keyword">let</span> setinstvar:
-  (
-    ~loc: Ast_helper.loc=?,
-    ~attrs: Ast_helper.attrs=?,
-    Ast_helper.str,
-    Parsetree.expression
-  ) =&gt;
+  (~loc: Ast_helper.loc=?, ~attrs: Ast_helper.attrs=?, Ast_helper.str, Parsetree.expression) =&gt;
   Parsetree.expression;
 </pre>
 <pre id="VALoverride"><span class="keyword">let</span> override:
@@ -259,28 +229,15 @@ Expressions<br>
   Parsetree.expression;
 </pre>
 <pre id="VALobject_"><span class="keyword">let</span> object_:
-  (
-    ~loc: Ast_helper.loc=?,
-    ~attrs: Ast_helper.attrs=?,
-    Parsetree.class_structure
-  ) =&gt;
+  (~loc: Ast_helper.loc=?, ~attrs: Ast_helper.attrs=?, Parsetree.class_structure) =&gt;
   Parsetree.expression;
 </pre>
 <pre id="VALnewtype"><span class="keyword">let</span> newtype:
-  (
-    ~loc: Ast_helper.loc=?,
-    ~attrs: Ast_helper.attrs=?,
-    string,
-    Parsetree.expression
-  ) =&gt;
+  (~loc: Ast_helper.loc=?, ~attrs: Ast_helper.attrs=?, string, Parsetree.expression) =&gt;
   Parsetree.expression;
 </pre>
 <pre id="VALpack"><span class="keyword">let</span> pack:
-  (
-    ~loc: Ast_helper.loc=?,
-    ~attrs: Ast_helper.attrs=?,
-    Parsetree.module_expr
-  ) =&gt;
+  (~loc: Ast_helper.loc=?, ~attrs: Ast_helper.attrs=?, Parsetree.module_expr) =&gt;
   Parsetree.expression;
 </pre>
 <pre id="VALopen_"><span class="keyword">let</span> open_:
@@ -294,10 +251,8 @@ Expressions<br>
   Parsetree.expression;
 </pre>
 <pre id="VALextension"><span class="keyword">let</span> extension:
-  (~loc: Ast_helper.loc=?, ~attrs: Ast_helper.attrs=?, Parsetree.extension) =&gt;
-  Parsetree.expression;
+  (~loc: Ast_helper.loc=?, ~attrs: Ast_helper.attrs=?, Parsetree.extension) =&gt; Parsetree.expression;
 </pre>
 <pre id="VALcase"><span class="keyword">let</span> case:
-  (Parsetree.pattern, ~guard: Parsetree.expression=?, Parsetree.expression) =&gt;
-  Parsetree.case;
+  (Parsetree.pattern, ~guard: Parsetree.expression=?, Parsetree.expression) =&gt; Parsetree.case;
 </pre></div>

@@ -14,8 +14,8 @@ Return the length (number of characters) of the given string.<br>
 
 <pre id="VALget"><span class="keyword">let</span> get: (string, int) =&gt; char;
 </pre><div class="info ">
-<code class="code">String.get s n</code> returns the character at index <code class="code">n</code> in string <code class="code">s</code>.
-   You can also write <code class="code">s.[n]</code> instead of <code class="code">String.get s n</code>.
+<code class="code">s.[n]</code> returns the character at index <code class="code">n</code> in string <code class="code">s</code>.
+   You can also write <code class="code">s.[n]</code> instead of <code class="code">s.[n]</code>.
 <p>
 
    Raise <code class="code">Invalid_argument</code> if <code class="code">n</code> not a valid index in <code class="code">s</code>.<br>
@@ -24,9 +24,9 @@ Return the length (number of characters) of the given string.<br>
 <pre id="VALset"><span class="keyword">let</span> set: (bytes, int, char) =&gt; unit;
 </pre><div class="info ">
 <span class="warning">Deprecated.</span>This is a deprecated alias of <a href="BytesLabels.html#VALset"><code class="code">BytesLabels.set</code></a>.<br>
-<code class="code">String.set s n c</code> modifies byte sequence <code class="code">s</code> in place,
+<code class="code">s.[n] = c</code> modifies byte sequence <code class="code">s</code> in place,
    replacing the byte at index <code class="code">n</code> with <code class="code">c</code>.
-   You can also write <code class="code">s.[n] &lt;- c</code> instead of <code class="code">String.set s n c</code>.
+   You can also write <code class="code">s.[n] = c</code> instead of <code class="code">s.[n] = c</code>.
 <p>
 
    Raise <code class="code">Invalid_argument</code> if <code class="code">n</code> is not a valid index in <code class="code">s</code>.<br>
@@ -35,7 +35,7 @@ Return the length (number of characters) of the given string.<br>
 <pre id="VALcreate"><span class="keyword">let</span> create: int =&gt; bytes;
 </pre><div class="info ">
 <span class="warning">Deprecated.</span>This is a deprecated alias of <a href="BytesLabels.html#VALcreate"><code class="code">BytesLabels.create</code></a>.<br>
-<code class="code">String.create n</code> returns a fresh byte sequence of length <code class="code">n</code>.
+<code class="code">String.create(n)</code> returns a fresh byte sequence of length <code class="code">n</code>.
    The sequence is uninitialized and contains arbitrary bytes.
 <p>
 
@@ -44,7 +44,7 @@ Return the length (number of characters) of the given string.<br>
 
 <pre id="VALmake"><span class="keyword">let</span> make: (int, char) =&gt; string;
 </pre><div class="info ">
-<code class="code">String.make n c</code> returns a fresh string of length <code class="code">n</code>,
+<code class="code">String.make(n, c)</code> returns a fresh string of length <code class="code">n</code>,
    filled with the character <code class="code">c</code>.
 <p>
 
@@ -53,8 +53,8 @@ Return the length (number of characters) of the given string.<br>
 
 <pre id="VALinit"><span class="keyword">let</span> init: (int, ~f: int =&gt; char) =&gt; string;
 </pre><div class="info ">
-<code class="code">init n f</code> returns a string of length <code class="code">n</code>,
-    with character <code class="code">i</code> initialized to the result of <code class="code">f i</code>.
+<code class="code">init(n, f)</code> returns a string of length <code class="code">n</code>,
+    with character <code class="code">i</code> initialized to the result of <code class="code">f(i)</code>.
 <p>
 
    Raise <code class="code">Invalid_argument</code> if <code class="code">n &lt; 0</code> or <code class="code">n &gt; </code><a href="Sys.html#VALmax_string_length"><code class="code">Sys.max_string_length</code></a>.<br>
@@ -67,7 +67,7 @@ Return a copy of the given string.<br>
 
 <pre id="VALsub"><span class="keyword">let</span> sub: (string, ~pos: int, ~len: int) =&gt; string;
 </pre><div class="info ">
-<code class="code">String.sub s start len</code> returns a fresh string of length <code class="code">len</code>,
+<code class="code">String.sub(s, start, len)</code> returns a fresh string of length <code class="code">len</code>,
    containing the substring of <code class="code">s</code> that starts at position <code class="code">start</code> and
    has length <code class="code">len</code>.
 <p>
@@ -79,7 +79,7 @@ Return a copy of the given string.<br>
 <pre id="VALfill"><span class="keyword">let</span> fill: (bytes, ~pos: int, ~len: int, char) =&gt; unit;
 </pre><div class="info ">
 <span class="warning">Deprecated.</span>This is a deprecated alias of <a href="BytesLabels.html#VALfill"><code class="code">BytesLabels.fill</code></a>.<br>
-<code class="code">String.fill s start len c</code> modifies byte sequence <code class="code">s</code> in place,
+<code class="code">String.fill(s, start, len, c)</code> modifies byte sequence <code class="code">s</code> in place,
    replacing <code class="code">len</code> bytes by <code class="code">c</code>, starting at <code class="code">start</code>.
 <p>
 
@@ -87,10 +87,9 @@ Return a copy of the given string.<br>
    designate a valid substring of <code class="code">s</code>.<br>
 </p></div>
 
-<pre id="VALblit"><span class="keyword">let</span> blit:
-  (~src: string, ~src_pos: int, ~dst: bytes, ~dst_pos: int, ~len: int) =&gt; unit;
+<pre id="VALblit"><span class="keyword">let</span> blit: (~src: string, ~src_pos: int, ~dst: bytes, ~dst_pos: int, ~len: int) =&gt; unit;
 </pre><div class="info ">
-<code class="code">String.blit src srcoff dst dstoff len</code> copies <code class="code">len</code> bytes
+<code class="code">String.blit(src, srcoff, dst, dstoff, len)</code> copies <code class="code">len</code> bytes
    from the string <code class="code">src</code>, starting at index <code class="code">srcoff</code>,
    to byte sequence <code class="code">dst</code>, starting at character number <code class="code">dstoff</code>.
 <p>
@@ -102,13 +101,13 @@ Return a copy of the given string.<br>
 
 <pre id="VALconcat"><span class="keyword">let</span> concat: (~sep: string, list(string)) =&gt; string;
 </pre><div class="info ">
-<code class="code">String.concat sep sl</code> concatenates the list of strings <code class="code">sl</code>,
+<code class="code">String.concat(sep, sl)</code> concatenates the list of strings <code class="code">sl</code>,
    inserting the separator string <code class="code">sep</code> between each.<br>
 </div>
 
 <pre id="VALiter"><span class="keyword">let</span> iter: (~f: char =&gt; unit, string) =&gt; unit;
 </pre><div class="info ">
-<code class="code">String.iter f s</code> applies function <code class="code">f</code> in turn to all
+<code class="code">String.iter(f, s)</code> applies function <code class="code">f</code> in turn to all
    the characters of <code class="code">s</code>.  It is equivalent to
    <code class="code">f s.[0]; f s.[1]; ...; f s.[String.length s - 1]; ()</code>.<br>
 </div>
@@ -123,7 +122,7 @@ Same as <a href="String.html#VALiter"><code class="code">String.iter</code></a>,
 
 <pre id="VALmap"><span class="keyword">let</span> map: (~f: char =&gt; char, string) =&gt; string;
 </pre><div class="info ">
-<code class="code">String.map f s</code> applies function <code class="code">f</code> in turn to all
+<code class="code">String.map(f, s)</code> applies function <code class="code">f</code> in turn to all
    the characters of <code class="code">s</code> and stores the results in a new string that
    is returned.<br>
 <b>Since</b> 4.00.0<br>
@@ -131,7 +130,7 @@ Same as <a href="String.html#VALiter"><code class="code">String.iter</code></a>,
 
 <pre id="VALmapi"><span class="keyword">let</span> mapi: (~f: (int, char) =&gt; char, string) =&gt; string;
 </pre><div class="info ">
-<code class="code">String.mapi f s</code> calls <code class="code">f</code> with each character of <code class="code">s</code> and its
+<code class="code">String.mapi(f, s)</code> calls <code class="code">f</code> with each character of <code class="code">s</code> and its
     index (in increasing index order) and stores the results in a new
     string that is returned.<br>
 <b>Since</b> 4.02.0<br>
@@ -158,7 +157,7 @@ Return a copy of the argument, with special characters
 
 <pre id="VALindex"><span class="keyword">let</span> index: (string, char) =&gt; int;
 </pre><div class="info ">
-<code class="code">String.index s c</code> returns the index of the first
+<code class="code">String.index(s, c)</code> returns the index of the first
    occurrence of character <code class="code">c</code> in string <code class="code">s</code>.
 <p>
 
@@ -167,7 +166,7 @@ Return a copy of the argument, with special characters
 
 <pre id="VALrindex"><span class="keyword">let</span> rindex: (string, char) =&gt; int;
 </pre><div class="info ">
-<code class="code">String.rindex s c</code> returns the index of the last
+<code class="code">String.rindex(s, c)</code> returns the index of the last
    occurrence of character <code class="code">c</code> in string <code class="code">s</code>.
 <p>
 
@@ -176,9 +175,9 @@ Return a copy of the argument, with special characters
 
 <pre id="VALindex_from"><span class="keyword">let</span> index_from: (string, int, char) =&gt; int;
 </pre><div class="info ">
-<code class="code">String.index_from s i c</code> returns the index of the
+<code class="code">String.index_from(s, i, c)</code> returns the index of the
    first occurrence of character <code class="code">c</code> in string <code class="code">s</code> after position <code class="code">i</code>.
-   <code class="code">String.index s c</code> is equivalent to <code class="code">String.index_from s 0 c</code>.
+   <code class="code">String.index(s, c)</code> is equivalent to <code class="code">String.index_from(s, 0, c)</code>.
 <p>
 
    Raise <code class="code">Invalid_argument</code> if <code class="code">i</code> is not a valid position in <code class="code">s</code>.
@@ -187,28 +186,28 @@ Return a copy of the argument, with special characters
 
 <pre id="VALrindex_from"><span class="keyword">let</span> rindex_from: (string, int, char) =&gt; int;
 </pre><div class="info ">
-<code class="code">String.rindex_from s i c</code> returns the index of the
-   last occurrence of character <code class="code">c</code> in string <code class="code">s</code> before position <code class="code">i+1</code>.
-   <code class="code">String.rindex s c</code> is equivalent to
-   <code class="code">String.rindex_from s (String.length s - 1) c</code>.
+<code class="code">String.rindex_from(s, i, c)</code> returns the index of the
+   last occurrence of character <code class="code">c</code> in string <code class="code">s</code> before position <code class="code">i + 1</code>.
+   <code class="code">String.rindex(s, c)</code> is equivalent to
+   <code class="code">String.rindex_from(s, String.length(s) - 1, c)</code>.
 <p>
 
-   Raise <code class="code">Invalid_argument</code> if <code class="code">i+1</code> is not a valid position in <code class="code">s</code>.
-   Raise <code class="code">Not_found</code> if <code class="code">c</code> does not occur in <code class="code">s</code> before position <code class="code">i+1</code>.<br>
+   Raise <code class="code">Invalid_argument</code> if <code class="code">i + 1</code> is not a valid position in <code class="code">s</code>.
+   Raise <code class="code">Not_found</code> if <code class="code">c</code> does not occur in <code class="code">s</code> before position <code class="code">i + 1</code>.<br>
 </p></div>
 
 <pre id="VALcontains"><span class="keyword">let</span> contains: (string, char) =&gt; bool;
 </pre><div class="info ">
-<code class="code">String.contains s c</code> tests if character <code class="code">c</code>
+<code class="code">String.contains(s, c)</code> tests if character <code class="code">c</code>
    appears in the string <code class="code">s</code>.<br>
 </div>
 
 <pre id="VALcontains_from"><span class="keyword">let</span> contains_from: (string, int, char) =&gt; bool;
 </pre><div class="info ">
-<code class="code">String.contains_from s start c</code> tests if character <code class="code">c</code>
+<code class="code">String.contains_from(s, start, c)</code> tests if character <code class="code">c</code>
    appears in <code class="code">s</code> after position <code class="code">start</code>.
-   <code class="code">String.contains s c</code> is equivalent to
-   <code class="code">String.contains_from s 0 c</code>.
+   <code class="code">String.contains(s, c)</code> is equivalent to
+   <code class="code">String.contains_from(s, 0, c)</code>.
 <p>
 
    Raise <code class="code">Invalid_argument</code> if <code class="code">start</code> is not a valid position in <code class="code">s</code>.<br>
@@ -216,11 +215,11 @@ Return a copy of the argument, with special characters
 
 <pre id="VALrcontains_from"><span class="keyword">let</span> rcontains_from: (string, int, char) =&gt; bool;
 </pre><div class="info ">
-<code class="code">String.rcontains_from s stop c</code> tests if character <code class="code">c</code>
-   appears in <code class="code">s</code> before position <code class="code">stop+1</code>.
+<code class="code">String.rcontains_from(s, stop, c)</code> tests if character <code class="code">c</code>
+   appears in <code class="code">s</code> before position <code class="code">stop + 1</code>.
 <p>
 
-   Raise <code class="code">Invalid_argument</code> if <code class="code">stop &lt; 0</code> or <code class="code">stop+1</code> is not a valid
+   Raise <code class="code">Invalid_argument</code> if <code class="code">stop &lt; 0</code> or <code class="code">stop + 1</code> is not a valid
    position in <code class="code">s</code>.<br>
 </p></div>
 

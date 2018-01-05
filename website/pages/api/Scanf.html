@@ -39,7 +39,7 @@ The module <code class="code">Scanf</code> provides formatted input functions or
 </ul>
 
     Hence, a typical call to the formatted input function <a href="Scanf.html#VALbscanf"><code class="code">Scanf.bscanf</code></a> is
-    <code class="code">bscanf ic fmt f</code>, where:
+    <code class="code">bscanf(ic, fmt, f)</code>, where:
 <p>
 </p><ul>
 <li><code class="code">ic</code> is a source of characters (typically a <em>    formatted input channel</em> with type <a href="Scanf.Scanning.html#TYPEin_channel"><code class="code">Scanf.Scanning.in_channel</code></a>),</li>
@@ -77,7 +77,7 @@ The module <code class="code">Scanf</code> provides formatted input functions or
 </ul>
 
     Hence, a typical call to the formatted input function <a href="Scanf.html#VALbscanf"><code class="code">Scanf.bscanf</code></a> is
-    <code class="code">bscanf ic fmt f</code>, where:
+    <code class="code">bscanf(ic, fmt, f)</code>, where:
 <p>
 </p><ul>
 <li><code class="code">ic</code> is a source of characters (typically a <em>    formatted input channel</em> with type <a href="Scanf.Scanning.html#TYPEin_channel"><code class="code">Scanf.Scanning.in_channel</code></a>),</li>
@@ -117,7 +117,7 @@ The module <code class="code">Scanf</code> provides formatted input functions or
 </ul>
 
     Hence, a typical call to the formatted input function <a href="Scanf.html#VALbscanf"><code class="code">Scanf.bscanf</code></a> is
-    <code class="code">bscanf ic fmt f</code>, where:
+    <code class="code">bscanf(ic, fmt, f)</code>, where:
 <p>
 </p><ul>
 <li><code class="code">ic</code> is a source of characters (typically a <em>    formatted input channel</em> with type <a href="Scanf.Scanning.html#TYPEin_channel"><code class="code">Scanf.Scanning.in_channel</code></a>),</li>
@@ -134,8 +134,8 @@ The module <code class="code">Scanf</code> provides formatted input functions or
 <br>
 <div class="h7" id="7_Asimpleexample">A simple example</div><br>
 <br>
-As suggested above, the expression <code class="code">bscanf ic &quot;%d&quot; f</code> reads a decimal
-    integer <code class="code">n</code> from the source of characters <code class="code">ic</code> and returns <code class="code">f n</code>.
+As suggested above, the expression <code class="code">bscanf(ic, &quot;%d&quot;, f)</code> reads a decimal
+    integer <code class="code">n</code> from the source of characters <code class="code">ic</code> and returns <code class="code">f(n)</code>.
 <p>
 
     For instance,
@@ -145,12 +145,12 @@ As suggested above, the expression <code class="code">bscanf ic &quot;%d&quot; f
     the predefined formatted input channel that reads from standard input),</li>
 </ul>
 <ul>
-<li>if we define the receiver <code class="code">f</code> as <code class="code">let f x = x + 1</code>,</li>
+<li>if we define the receiver <code class="code">f</code> as <code class="code">let f = (x) =&gt; x + 1</code>,</li>
 </ul>
 
-    then <code class="code">bscanf Scanning.stdin &quot;%d&quot; f</code> reads an integer <code class="code">n</code> from the
-    standard input and returns <code class="code">f n</code> (that is <code class="code">n + 1</code>). Thus, if we
-    evaluate <code class="code">bscanf stdin &quot;%d&quot; f</code>, and then enter <code class="code">41</code> at the
+    then <code class="code">bscanf(Scanning.stdin, &quot;%d&quot;, f)</code> reads an integer <code class="code">n</code> from the
+    standard input and returns <code class="code">f(n)</code> (that is <code class="code">n + 1</code>). Thus, if we
+    evaluate <code class="code">bscanf(stdin, &quot;%d&quot;, f)</code>, and then enter <code class="code">41</code> at the
     keyboard, we get <code class="code">42</code> as the final result.<br>
 <br>
 <h6 id="6_Introduction">Introduction</h6><br>
@@ -176,7 +176,7 @@ The module <code class="code">Scanf</code> provides formatted input functions or
 </ul>
 
     Hence, a typical call to the formatted input function <a href="Scanf.html#VALbscanf"><code class="code">Scanf.bscanf</code></a> is
-    <code class="code">bscanf ic fmt f</code>, where:
+    <code class="code">bscanf(ic, fmt, f)</code>, where:
 <p>
 </p><ul>
 <li><code class="code">ic</code> is a source of characters (typically a <em>    formatted input channel</em> with type <a href="Scanf.Scanning.html#TYPEin_channel"><code class="code">Scanf.Scanning.in_channel</code></a>),</li>
@@ -193,8 +193,8 @@ The module <code class="code">Scanf</code> provides formatted input functions or
 <br>
 <div class="h7" id="7_Asimpleexample">A simple example</div><br>
 <br>
-As suggested above, the expression <code class="code">bscanf ic &quot;%d&quot; f</code> reads a decimal
-    integer <code class="code">n</code> from the source of characters <code class="code">ic</code> and returns <code class="code">f n</code>.
+As suggested above, the expression <code class="code">bscanf(ic, &quot;%d&quot;, f)</code> reads a decimal
+    integer <code class="code">n</code> from the source of characters <code class="code">ic</code> and returns <code class="code">f(n)</code>.
 <p>
 
     For instance,
@@ -204,12 +204,12 @@ As suggested above, the expression <code class="code">bscanf ic &quot;%d&quot; f
     the predefined formatted input channel that reads from standard input),</li>
 </ul>
 <ul>
-<li>if we define the receiver <code class="code">f</code> as <code class="code">let f x = x + 1</code>,</li>
+<li>if we define the receiver <code class="code">f</code> as <code class="code">let f = (x) =&gt; x + 1</code>,</li>
 </ul>
 
-    then <code class="code">bscanf Scanning.stdin &quot;%d&quot; f</code> reads an integer <code class="code">n</code> from the
-    standard input and returns <code class="code">f n</code> (that is <code class="code">n + 1</code>). Thus, if we
-    evaluate <code class="code">bscanf stdin &quot;%d&quot; f</code>, and then enter <code class="code">41</code> at the
+    then <code class="code">bscanf(Scanning.stdin, &quot;%d&quot;, f)</code> reads an integer <code class="code">n</code> from the
+    standard input and returns <code class="code">f(n)</code> (that is <code class="code">n + 1</code>). Thus, if we
+    evaluate <code class="code">bscanf(stdin, &quot;%d&quot;, f)</code>, and then enter <code class="code">41</code> at the
     keyboard, we get <code class="code">42</code> as the final result.<br>
 <br>
 <div class="h7" id="7_Formattedinputasafunctionalfeature">Formatted input as a functional feature</div><br>
@@ -237,7 +237,7 @@ The module <code class="code">Scanf</code> provides formatted input functions or
 </ul>
 
     Hence, a typical call to the formatted input function <a href="Scanf.html#VALbscanf"><code class="code">Scanf.bscanf</code></a> is
-    <code class="code">bscanf ic fmt f</code>, where:
+    <code class="code">bscanf(ic, fmt, f)</code>, where:
 <p>
 </p><ul>
 <li><code class="code">ic</code> is a source of characters (typically a <em>    formatted input channel</em> with type <a href="Scanf.Scanning.html#TYPEin_channel"><code class="code">Scanf.Scanning.in_channel</code></a>),</li>
@@ -254,8 +254,8 @@ The module <code class="code">Scanf</code> provides formatted input functions or
 <br>
 <div class="h7" id="7_Asimpleexample">A simple example</div><br>
 <br>
-As suggested above, the expression <code class="code">bscanf ic &quot;%d&quot; f</code> reads a decimal
-    integer <code class="code">n</code> from the source of characters <code class="code">ic</code> and returns <code class="code">f n</code>.
+As suggested above, the expression <code class="code">bscanf(ic, &quot;%d&quot;, f)</code> reads a decimal
+    integer <code class="code">n</code> from the source of characters <code class="code">ic</code> and returns <code class="code">f(n)</code>.
 <p>
 
     For instance,
@@ -265,12 +265,12 @@ As suggested above, the expression <code class="code">bscanf ic &quot;%d&quot; f
     the predefined formatted input channel that reads from standard input),</li>
 </ul>
 <ul>
-<li>if we define the receiver <code class="code">f</code> as <code class="code">let f x = x + 1</code>,</li>
+<li>if we define the receiver <code class="code">f</code> as <code class="code">let f = (x) =&gt; x + 1</code>,</li>
 </ul>
 
-    then <code class="code">bscanf Scanning.stdin &quot;%d&quot; f</code> reads an integer <code class="code">n</code> from the
-    standard input and returns <code class="code">f n</code> (that is <code class="code">n + 1</code>). Thus, if we
-    evaluate <code class="code">bscanf stdin &quot;%d&quot; f</code>, and then enter <code class="code">41</code> at the
+    then <code class="code">bscanf(Scanning.stdin, &quot;%d&quot;, f)</code> reads an integer <code class="code">n</code> from the
+    standard input and returns <code class="code">f(n)</code> (that is <code class="code">n + 1</code>). Thus, if we
+    evaluate <code class="code">bscanf(stdin, &quot;%d&quot;, f)</code>, and then enter <code class="code">41</code> at the
     keyboard, we get <code class="code">42</code> as the final result.<br>
 <br>
 <div class="h7" id="7_Formattedinputasafunctionalfeature">Formatted input as a functional feature</div><br>
@@ -310,7 +310,7 @@ The module <code class="code">Scanf</code> provides formatted input functions or
 </ul>
 
     Hence, a typical call to the formatted input function <a href="Scanf.html#VALbscanf"><code class="code">Scanf.bscanf</code></a> is
-    <code class="code">bscanf ic fmt f</code>, where:
+    <code class="code">bscanf(ic, fmt, f)</code>, where:
 <p>
 </p><ul>
 <li><code class="code">ic</code> is a source of characters (typically a <em>    formatted input channel</em> with type <a href="Scanf.Scanning.html#TYPEin_channel"><code class="code">Scanf.Scanning.in_channel</code></a>),</li>
@@ -327,8 +327,8 @@ The module <code class="code">Scanf</code> provides formatted input functions or
 <br>
 <div class="h7" id="7_Asimpleexample">A simple example</div><br>
 <br>
-As suggested above, the expression <code class="code">bscanf ic &quot;%d&quot; f</code> reads a decimal
-    integer <code class="code">n</code> from the source of characters <code class="code">ic</code> and returns <code class="code">f n</code>.
+As suggested above, the expression <code class="code">bscanf(ic, &quot;%d&quot;, f)</code> reads a decimal
+    integer <code class="code">n</code> from the source of characters <code class="code">ic</code> and returns <code class="code">f(n)</code>.
 <p>
 
     For instance,
@@ -338,12 +338,12 @@ As suggested above, the expression <code class="code">bscanf ic &quot;%d&quot; f
     the predefined formatted input channel that reads from standard input),</li>
 </ul>
 <ul>
-<li>if we define the receiver <code class="code">f</code> as <code class="code">let f x = x + 1</code>,</li>
+<li>if we define the receiver <code class="code">f</code> as <code class="code">let f = (x) =&gt; x + 1</code>,</li>
 </ul>
 
-    then <code class="code">bscanf Scanning.stdin &quot;%d&quot; f</code> reads an integer <code class="code">n</code> from the
-    standard input and returns <code class="code">f n</code> (that is <code class="code">n + 1</code>). Thus, if we
-    evaluate <code class="code">bscanf stdin &quot;%d&quot; f</code>, and then enter <code class="code">41</code> at the
+    then <code class="code">bscanf(Scanning.stdin, &quot;%d&quot;, f)</code> reads an integer <code class="code">n</code> from the
+    standard input and returns <code class="code">f(n)</code> (that is <code class="code">n + 1</code>). Thus, if we
+    evaluate <code class="code">bscanf(stdin, &quot;%d&quot;, f)</code>, and then enter <code class="code">41</code> at the
     keyboard, we get <code class="code">42</code> as the final result.<br>
 <br>
 <div class="h7" id="7_Formattedinputasafunctionalfeature">Formatted input as a functional feature</div><br>
@@ -366,29 +366,28 @@ The OCaml scanning facility is reminiscent of the corresponding C feature.
 <h6 id="6_Typeofformattedinputfunctions">Type of formatted input functions</h6><br>
 
 <pre id="TYPEscanner"><span class="keyword">type</span> scanner(&apos;a, &apos;b, &apos;c, &apos;d) =
-  Pervasives.format6(&apos;a, Scanning.in_channel, &apos;b, &apos;c, &apos;a =&gt; &apos;d, &apos;d) =&gt; &apos;c;
+  Pervasives.format6(&apos;a, Scanning.in_channel, &apos;b, &apos;c, (&apos;a =&gt; &apos;d), &apos;d) =&gt; &apos;c;
 </pre>
 <div class="info ">
 The type of formatted input scanners: <code class="code">(&apos;a, &apos;b, &apos;c, &apos;d) scanner</code>
     is the type of a formatted input function that reads from some
     formatted input channel according to some format string; more
-    precisely, if <code class="code">scan</code> is some formatted input function, then <code class="code">scan
-    ic fmt f</code> applies <code class="code">f</code> to the arguments specified by the format
+    precisely, if <code class="code">scan</code> is some formatted input function, then <code class="code">scan(ic, fmt, f)</code> applies <code class="code">f</code> to the arguments specified by the format
     string <code class="code">fmt</code>, when <code class="code">scan</code> has read those arguments from the
     formatted input channel <code class="code">ic</code>.
 <p>
 
     For instance, the <code class="code">scanf</code> function below has type <code class="code">(&apos;a, &apos;b, &apos;c, &apos;d)
     scanner</code>, since it is a formatted input function that reads from
-    <code class="code">Scanning.stdin</code>: <code class="code">scanf fmt f</code> applies <code class="code">f</code> to the arguments specified by
+    <code class="code">Scanning.stdin</code>: <code class="code">scanf(fmt, f)</code> applies <code class="code">f</code> to the arguments specified by
     <code class="code">fmt</code>, reading those arguments from <code class="code">Pervasives.stdin</code> as expected.
 </p><p>
 
     If the format <code class="code">fmt</code> has some <code class="code">%r</code> indications, the corresponding input
     functions must be provided before the receiver <code class="code">f</code> argument. For
     instance, if <code class="code">read_elem</code> is an input function for values of type <code class="code">t</code>,
-    then <code class="code">bscanf ic &quot;%r;&quot; read_elem f</code> reads a value <code class="code">v</code> of type <code class="code">t</code> followed
-    by a <code class="code">&apos;;&apos;</code> character, and returns <code class="code">f v</code>.<br>
+    then <code class="code">bscanf(ic, &quot;%r;&quot;, read_elem, f)</code> reads a value <code class="code">v</code> of type <code class="code">t</code> followed
+    by a <code class="code">&apos;;&apos;</code> character, and returns <code class="code">f(v)</code>.<br>
 <b>Since</b> 3.10.0<br>
 </p></div>
 
@@ -409,8 +408,8 @@ The exception that formatted input functions raise when the input cannot
     applies <code class="code">f</code> to these values.
     The result of this call to <code class="code">f</code> is returned as the result of the entire
     <code class="code">bscanf</code> call.
-    For instance, if <code class="code">f</code> is the function <code class="code">fun s i -&gt; i + 1</code>, then
-    <code class="code">Scanf.sscanf &quot;x=  1&quot; &quot;%s = %i&quot; f</code> returns <code class="code">2</code>.
+    For instance, if <code class="code">f</code> is the function <code class="code">(s, i) =&gt; i + 1</code>, then
+    <code class="code">Scanf.sscanf(&quot;x=  1&quot;, &quot;%s = %i&quot;, f)</code> returns <code class="code">2</code>.
 <p>
 
     Arguments <code class="code">r1</code> to <code class="code">rN</code> are user-defined input functions that read the
@@ -476,8 +475,7 @@ As mentioned above, a plain character in the format string is just
 <p>
 
     Matching <em>any</em> amount of whitespace, a space in the format string
-    also matches no amount of whitespace at all; hence, the call <code class="code">bscanf ib
-    &quot;Price = %d $&quot; (fun p -&gt; p)</code> succeeds and returns <code class="code">1</code> when reading an
+    also matches no amount of whitespace at all; hence, the call <code class="code">bscanf(ib, &quot;Price = %d $&quot;, (p) =&gt; p)</code> succeeds and returns <code class="code">1</code> when reading an
     input with various whitespace in it, such as <code class="code">Price = 1 $</code>,
     <code class="code">Price  =  1    $</code>, or even <code class="code">Price=1$</code>.<br>
 <br>
@@ -509,8 +507,7 @@ As mentioned above, a plain character in the format string is just
 <p>
 
     Matching <em>any</em> amount of whitespace, a space in the format string
-    also matches no amount of whitespace at all; hence, the call <code class="code">bscanf ib
-    &quot;Price = %d $&quot; (fun p -&gt; p)</code> succeeds and returns <code class="code">1</code> when reading an
+    also matches no amount of whitespace at all; hence, the call <code class="code">bscanf(ib, &quot;Price = %d $&quot;, (p) =&gt; p)</code> succeeds and returns <code class="code">1</code> when reading an
     input with various whitespace in it, such as <code class="code">Price = 1 $</code>,
     <code class="code">Price  =  1    $</code>, or even <code class="code">Price=1$</code>.<br>
 <br>
@@ -544,8 +541,7 @@ As mentioned above, a plain character in the format string is just
 <p>
 
     Matching <em>any</em> amount of whitespace, a space in the format string
-    also matches no amount of whitespace at all; hence, the call <code class="code">bscanf ib
-    &quot;Price = %d $&quot; (fun p -&gt; p)</code> succeeds and returns <code class="code">1</code> when reading an
+    also matches no amount of whitespace at all; hence, the call <code class="code">bscanf(ib, &quot;Price = %d $&quot;, (p) =&gt; p)</code> succeeds and returns <code class="code">1</code> when reading an
     input with various whitespace in it, such as <code class="code">Price = 1 $</code>,
     <code class="code">Price  =  1    $</code>, or even <code class="code">Price=1$</code>.<br>
 <br>
@@ -559,7 +555,7 @@ Conversion specifications consist in the <code class="code">%</code> character, 
 </p><ul>
 <li><code class="code">d</code>: reads an optionally signed decimal integer.</li>
 <li><code class="code">i</code>: reads an optionally signed integer
-      (usual input conventions for decimal (<code class="code">0-9</code>+), hexadecimal
+      (usual input conventions for decimal (<code class="code">0 - 9</code>+), hexadecimal
        (<code class="code">0x[0-9a-f]+</code> and <code class="code">0X[0-9A-F]+</code>), octal (<code class="code">0o[0-7]+</code>), and binary
        (<code class="code">0b[0-1]+</code>) notations are understood).</li>
 <li><code class="code">u</code>: reads an unsigned decimal integer.</li>
@@ -584,8 +580,7 @@ Conversion specifications consist in the <code class="code">%</code> character, 
 <li><code class="code">C</code>: reads a single delimited character (delimiters and special
       escaped characters follow the lexical conventions of OCaml).</li>
 <li><code class="code">f</code>, <code class="code">e</code>, <code class="code">E</code>, <code class="code">g</code>, <code class="code">G</code>: reads an optionally signed
-      floating-point number in decimal notation, in the style <code class="code">dddd.ddd
-      e/E+-dd</code>.</li>
+      floating-point number in decimal notation, in the style <code class="code">dddd.ddd(e) / E +- dd</code>.</li>
 <li><code class="code">F</code>: reads a floating point number according to the lexical
       conventions of OCaml (hence the decimal point is mandatory if the
       exponent part is not mentioned).</li>
@@ -598,11 +593,11 @@ Conversion specifications consist in the <code class="code">%</code> character, 
       the format specified by the second letter for regular integers.</li>
 <li><code class="code">Ld</code>, <code class="code">Li</code>, <code class="code">Lu</code>, <code class="code">Lx</code>, <code class="code">LX</code>, <code class="code">Lo</code>: reads an <code class="code">int64</code> argument to
       the format specified by the second letter for regular integers.</li>
-<li><code class="code">[ range ]</code>: reads characters that matches one of the characters
+<li><code class="code">[range]</code>: reads characters that matches one of the characters
       mentioned in the range of characters <code class="code">range</code> (or not mentioned in
       it, if the range starts with <code class="code">^</code>). Reads a <code class="code">string</code> that can be
       empty, if the next input character does not match the range. The set of
-      characters from <code class="code">c1</code> to <code class="code">c2</code> (inclusively) is denoted by <code class="code">c1-c2</code>.
+      characters from <code class="code">c1</code> to <code class="code">c2</code> (inclusively) is denoted by <code class="code">c1 - c2</code>.
       Hence, <code class="code">%[0-9]</code> returns a string representing a decimal number
       or an empty string if no decimal digit is found; similarly,
       <code class="code">%[0-9a-f]</code> returns a string of hexadecimal digits.
@@ -619,7 +614,7 @@ Conversion specifications consist in the <code class="code">%</code> character, 
       read must have the same type as the format string specification
       <code class="code">fmt</code>. For instance, <code class="code">&quot;%{ %i %}&quot;</code> reads any format string that
       can read a value of type <code class="code">int</code>; hence, if <code class="code">s</code> is the string
-      <code class="code">&quot;fmt:\&quot;number is %u\&quot;&quot;</code>, then <code class="code">Scanf.sscanf s &quot;fmt: %{%i%}&quot;</code>
+      <code class="code">&quot;fmt:\&quot;number is %u\&quot;&quot;</code>, then <code class="code">Scanf.sscanf(s, &quot;fmt: %{%i%}&quot;)</code>
       succeeds and returns the format string <code class="code">&quot;number is %u&quot;</code>.</li>
 <li><code class="code">( fmt %)</code>: scanning sub-format substitution.
       Reads a format string <code class="code">rf</code> in the input, then goes on scanning with
@@ -631,15 +626,15 @@ Conversion specifications consist in the <code class="code">%</code> character, 
       The conversion returns the format string read <code class="code">rf</code>, and then a value
       read using <code class="code">rf</code>.
       Hence, if <code class="code">s</code> is the string <code class="code">&quot;\&quot;%4d\&quot;1234.00&quot;</code>, then
-      <code class="code">Scanf.sscanf s &quot;%(%i%)&quot; (fun fmt i -&gt; fmt, i)</code> evaluates to
+      <code class="code">Scanf.sscanf(s, &quot;%(%i%)&quot;, (fmt, i) =&gt; (fmt, i))</code> evaluates to
       <code class="code">(&quot;%4d&quot;, 1234)</code>.
       This behaviour is not mere format substitution, since the conversion
       returns the format string read as additional argument. If you need
       pure format substitution, use special flag <code class="code">_</code> to discard the
       extraneous argument: conversion <code class="code">%_( fmt %)</code> reads a format string
       <code class="code">rf</code> and then behaves the same as format string <code class="code">rf</code>.  Hence, if <code class="code">s</code> is
-      the string <code class="code">&quot;\&quot;%4d\&quot;1234.00&quot;</code>, then <code class="code">Scanf.sscanf s &quot;%_(%i%)&quot;</code> is
-      simply equivalent to <code class="code">Scanf.sscanf &quot;1234.00&quot; &quot;%4d&quot;</code>.</li>
+      the string <code class="code">&quot;\&quot;%4d\&quot;1234.00&quot;</code>, then <code class="code">Scanf.sscanf(s, &quot;%_(%i%)&quot;)</code> is
+      simply equivalent to <code class="code">Scanf.sscanf(&quot;1234.00&quot;, &quot;%4d&quot;)</code>.</li>
 <li><code class="code">l</code>: returns the number of lines read so far.</li>
 <li><code class="code">n</code>: returns the number of characters read so far.</li>
 <li><code class="code">N</code> or <code class="code">L</code>: returns the number of tokens read so far.</li>
@@ -652,8 +647,8 @@ Conversion specifications consist in the <code class="code">%</code> character, 
     Following the <code class="code">%</code> character that introduces a conversion, there may be
     the special flag <code class="code">_</code>: the conversion that follows occurs as usual,
     but the resulting value is discarded.
-    For instance, if <code class="code">f</code> is the function <code class="code">fun i -&gt; i + 1</code>, and <code class="code">s</code> is the
-    string <code class="code">&quot;x = 1&quot;</code>, then <code class="code">Scanf.sscanf s &quot;%_s = %i&quot; f</code> returns <code class="code">2</code>.
+    For instance, if <code class="code">f</code> is the function <code class="code">(i) =&gt; i + 1</code>, and <code class="code">s</code> is the
+    string <code class="code">&quot;x = 1&quot;</code>, then <code class="code">Scanf.sscanf(s, &quot;%_s = %i&quot;, f)</code> returns <code class="code">2</code>.
 <p>
 
     The field width is composed of an optional integer literal
@@ -713,8 +708,7 @@ As mentioned above, a plain character in the format string is just
 <p>
 
     Matching <em>any</em> amount of whitespace, a space in the format string
-    also matches no amount of whitespace at all; hence, the call <code class="code">bscanf ib
-    &quot;Price = %d $&quot; (fun p -&gt; p)</code> succeeds and returns <code class="code">1</code> when reading an
+    also matches no amount of whitespace at all; hence, the call <code class="code">bscanf(ib, &quot;Price = %d $&quot;, (p) =&gt; p)</code> succeeds and returns <code class="code">1</code> when reading an
     input with various whitespace in it, such as <code class="code">Price = 1 $</code>,
     <code class="code">Price  =  1    $</code>, or even <code class="code">Price=1$</code>.<br>
 <br>
@@ -728,7 +722,7 @@ Conversion specifications consist in the <code class="code">%</code> character, 
 </p><ul>
 <li><code class="code">d</code>: reads an optionally signed decimal integer.</li>
 <li><code class="code">i</code>: reads an optionally signed integer
-      (usual input conventions for decimal (<code class="code">0-9</code>+), hexadecimal
+      (usual input conventions for decimal (<code class="code">0 - 9</code>+), hexadecimal
        (<code class="code">0x[0-9a-f]+</code> and <code class="code">0X[0-9A-F]+</code>), octal (<code class="code">0o[0-7]+</code>), and binary
        (<code class="code">0b[0-1]+</code>) notations are understood).</li>
 <li><code class="code">u</code>: reads an unsigned decimal integer.</li>
@@ -753,8 +747,7 @@ Conversion specifications consist in the <code class="code">%</code> character, 
 <li><code class="code">C</code>: reads a single delimited character (delimiters and special
       escaped characters follow the lexical conventions of OCaml).</li>
 <li><code class="code">f</code>, <code class="code">e</code>, <code class="code">E</code>, <code class="code">g</code>, <code class="code">G</code>: reads an optionally signed
-      floating-point number in decimal notation, in the style <code class="code">dddd.ddd
-      e/E+-dd</code>.</li>
+      floating-point number in decimal notation, in the style <code class="code">dddd.ddd(e) / E +- dd</code>.</li>
 <li><code class="code">F</code>: reads a floating point number according to the lexical
       conventions of OCaml (hence the decimal point is mandatory if the
       exponent part is not mentioned).</li>
@@ -767,11 +760,11 @@ Conversion specifications consist in the <code class="code">%</code> character, 
       the format specified by the second letter for regular integers.</li>
 <li><code class="code">Ld</code>, <code class="code">Li</code>, <code class="code">Lu</code>, <code class="code">Lx</code>, <code class="code">LX</code>, <code class="code">Lo</code>: reads an <code class="code">int64</code> argument to
       the format specified by the second letter for regular integers.</li>
-<li><code class="code">[ range ]</code>: reads characters that matches one of the characters
+<li><code class="code">[range]</code>: reads characters that matches one of the characters
       mentioned in the range of characters <code class="code">range</code> (or not mentioned in
       it, if the range starts with <code class="code">^</code>). Reads a <code class="code">string</code> that can be
       empty, if the next input character does not match the range. The set of
-      characters from <code class="code">c1</code> to <code class="code">c2</code> (inclusively) is denoted by <code class="code">c1-c2</code>.
+      characters from <code class="code">c1</code> to <code class="code">c2</code> (inclusively) is denoted by <code class="code">c1 - c2</code>.
       Hence, <code class="code">%[0-9]</code> returns a string representing a decimal number
       or an empty string if no decimal digit is found; similarly,
       <code class="code">%[0-9a-f]</code> returns a string of hexadecimal digits.
@@ -788,7 +781,7 @@ Conversion specifications consist in the <code class="code">%</code> character, 
       read must have the same type as the format string specification
       <code class="code">fmt</code>. For instance, <code class="code">&quot;%{ %i %}&quot;</code> reads any format string that
       can read a value of type <code class="code">int</code>; hence, if <code class="code">s</code> is the string
-      <code class="code">&quot;fmt:\&quot;number is %u\&quot;&quot;</code>, then <code class="code">Scanf.sscanf s &quot;fmt: %{%i%}&quot;</code>
+      <code class="code">&quot;fmt:\&quot;number is %u\&quot;&quot;</code>, then <code class="code">Scanf.sscanf(s, &quot;fmt: %{%i%}&quot;)</code>
       succeeds and returns the format string <code class="code">&quot;number is %u&quot;</code>.</li>
 <li><code class="code">( fmt %)</code>: scanning sub-format substitution.
       Reads a format string <code class="code">rf</code> in the input, then goes on scanning with
@@ -800,15 +793,15 @@ Conversion specifications consist in the <code class="code">%</code> character, 
       The conversion returns the format string read <code class="code">rf</code>, and then a value
       read using <code class="code">rf</code>.
       Hence, if <code class="code">s</code> is the string <code class="code">&quot;\&quot;%4d\&quot;1234.00&quot;</code>, then
-      <code class="code">Scanf.sscanf s &quot;%(%i%)&quot; (fun fmt i -&gt; fmt, i)</code> evaluates to
+      <code class="code">Scanf.sscanf(s, &quot;%(%i%)&quot;, (fmt, i) =&gt; (fmt, i))</code> evaluates to
       <code class="code">(&quot;%4d&quot;, 1234)</code>.
       This behaviour is not mere format substitution, since the conversion
       returns the format string read as additional argument. If you need
       pure format substitution, use special flag <code class="code">_</code> to discard the
       extraneous argument: conversion <code class="code">%_( fmt %)</code> reads a format string
       <code class="code">rf</code> and then behaves the same as format string <code class="code">rf</code>.  Hence, if <code class="code">s</code> is
-      the string <code class="code">&quot;\&quot;%4d\&quot;1234.00&quot;</code>, then <code class="code">Scanf.sscanf s &quot;%_(%i%)&quot;</code> is
-      simply equivalent to <code class="code">Scanf.sscanf &quot;1234.00&quot; &quot;%4d&quot;</code>.</li>
+      the string <code class="code">&quot;\&quot;%4d\&quot;1234.00&quot;</code>, then <code class="code">Scanf.sscanf(s, &quot;%_(%i%)&quot;)</code> is
+      simply equivalent to <code class="code">Scanf.sscanf(&quot;1234.00&quot;, &quot;%4d&quot;)</code>.</li>
 <li><code class="code">l</code>: returns the number of lines read so far.</li>
 <li><code class="code">n</code>: returns the number of characters read so far.</li>
 <li><code class="code">N</code> or <code class="code">L</code>: returns the number of tokens read so far.</li>
@@ -821,8 +814,8 @@ Conversion specifications consist in the <code class="code">%</code> character, 
     Following the <code class="code">%</code> character that introduces a conversion, there may be
     the special flag <code class="code">_</code>: the conversion that follows occurs as usual,
     but the resulting value is discarded.
-    For instance, if <code class="code">f</code> is the function <code class="code">fun i -&gt; i + 1</code>, and <code class="code">s</code> is the
-    string <code class="code">&quot;x = 1&quot;</code>, then <code class="code">Scanf.sscanf s &quot;%_s = %i&quot; f</code> returns <code class="code">2</code>.
+    For instance, if <code class="code">f</code> is the function <code class="code">(i) =&gt; i + 1</code>, and <code class="code">s</code> is the
+    string <code class="code">&quot;x = 1&quot;</code>, then <code class="code">Scanf.sscanf(s, &quot;%_s = %i&quot;, f)</code> returns <code class="code">2</code>.
 <p>
 
     The field width is composed of an optional integer literal
@@ -884,8 +877,7 @@ As mentioned above, a plain character in the format string is just
 <p>
 
     Matching <em>any</em> amount of whitespace, a space in the format string
-    also matches no amount of whitespace at all; hence, the call <code class="code">bscanf ib
-    &quot;Price = %d $&quot; (fun p -&gt; p)</code> succeeds and returns <code class="code">1</code> when reading an
+    also matches no amount of whitespace at all; hence, the call <code class="code">bscanf(ib, &quot;Price = %d $&quot;, (p) =&gt; p)</code> succeeds and returns <code class="code">1</code> when reading an
     input with various whitespace in it, such as <code class="code">Price = 1 $</code>,
     <code class="code">Price  =  1    $</code>, or even <code class="code">Price=1$</code>.<br>
 <br>
@@ -899,7 +891,7 @@ Conversion specifications consist in the <code class="code">%</code> character, 
 </p><ul>
 <li><code class="code">d</code>: reads an optionally signed decimal integer.</li>
 <li><code class="code">i</code>: reads an optionally signed integer
-      (usual input conventions for decimal (<code class="code">0-9</code>+), hexadecimal
+      (usual input conventions for decimal (<code class="code">0 - 9</code>+), hexadecimal
        (<code class="code">0x[0-9a-f]+</code> and <code class="code">0X[0-9A-F]+</code>), octal (<code class="code">0o[0-7]+</code>), and binary
        (<code class="code">0b[0-1]+</code>) notations are understood).</li>
 <li><code class="code">u</code>: reads an unsigned decimal integer.</li>
@@ -924,8 +916,7 @@ Conversion specifications consist in the <code class="code">%</code> character, 
 <li><code class="code">C</code>: reads a single delimited character (delimiters and special
       escaped characters follow the lexical conventions of OCaml).</li>
 <li><code class="code">f</code>, <code class="code">e</code>, <code class="code">E</code>, <code class="code">g</code>, <code class="code">G</code>: reads an optionally signed
-      floating-point number in decimal notation, in the style <code class="code">dddd.ddd
-      e/E+-dd</code>.</li>
+      floating-point number in decimal notation, in the style <code class="code">dddd.ddd(e) / E +- dd</code>.</li>
 <li><code class="code">F</code>: reads a floating point number according to the lexical
       conventions of OCaml (hence the decimal point is mandatory if the
       exponent part is not mentioned).</li>
@@ -938,11 +929,11 @@ Conversion specifications consist in the <code class="code">%</code> character, 
       the format specified by the second letter for regular integers.</li>
 <li><code class="code">Ld</code>, <code class="code">Li</code>, <code class="code">Lu</code>, <code class="code">Lx</code>, <code class="code">LX</code>, <code class="code">Lo</code>: reads an <code class="code">int64</code> argument to
       the format specified by the second letter for regular integers.</li>
-<li><code class="code">[ range ]</code>: reads characters that matches one of the characters
+<li><code class="code">[range]</code>: reads characters that matches one of the characters
       mentioned in the range of characters <code class="code">range</code> (or not mentioned in
       it, if the range starts with <code class="code">^</code>). Reads a <code class="code">string</code> that can be
       empty, if the next input character does not match the range. The set of
-      characters from <code class="code">c1</code> to <code class="code">c2</code> (inclusively) is denoted by <code class="code">c1-c2</code>.
+      characters from <code class="code">c1</code> to <code class="code">c2</code> (inclusively) is denoted by <code class="code">c1 - c2</code>.
       Hence, <code class="code">%[0-9]</code> returns a string representing a decimal number
       or an empty string if no decimal digit is found; similarly,
       <code class="code">%[0-9a-f]</code> returns a string of hexadecimal digits.
@@ -959,7 +950,7 @@ Conversion specifications consist in the <code class="code">%</code> character, 
       read must have the same type as the format string specification
       <code class="code">fmt</code>. For instance, <code class="code">&quot;%{ %i %}&quot;</code> reads any format string that
       can read a value of type <code class="code">int</code>; hence, if <code class="code">s</code> is the string
-      <code class="code">&quot;fmt:\&quot;number is %u\&quot;&quot;</code>, then <code class="code">Scanf.sscanf s &quot;fmt: %{%i%}&quot;</code>
+      <code class="code">&quot;fmt:\&quot;number is %u\&quot;&quot;</code>, then <code class="code">Scanf.sscanf(s, &quot;fmt: %{%i%}&quot;)</code>
       succeeds and returns the format string <code class="code">&quot;number is %u&quot;</code>.</li>
 <li><code class="code">( fmt %)</code>: scanning sub-format substitution.
       Reads a format string <code class="code">rf</code> in the input, then goes on scanning with
@@ -971,15 +962,15 @@ Conversion specifications consist in the <code class="code">%</code> character, 
       The conversion returns the format string read <code class="code">rf</code>, and then a value
       read using <code class="code">rf</code>.
       Hence, if <code class="code">s</code> is the string <code class="code">&quot;\&quot;%4d\&quot;1234.00&quot;</code>, then
-      <code class="code">Scanf.sscanf s &quot;%(%i%)&quot; (fun fmt i -&gt; fmt, i)</code> evaluates to
+      <code class="code">Scanf.sscanf(s, &quot;%(%i%)&quot;, (fmt, i) =&gt; (fmt, i))</code> evaluates to
       <code class="code">(&quot;%4d&quot;, 1234)</code>.
       This behaviour is not mere format substitution, since the conversion
       returns the format string read as additional argument. If you need
       pure format substitution, use special flag <code class="code">_</code> to discard the
       extraneous argument: conversion <code class="code">%_( fmt %)</code> reads a format string
       <code class="code">rf</code> and then behaves the same as format string <code class="code">rf</code>.  Hence, if <code class="code">s</code> is
-      the string <code class="code">&quot;\&quot;%4d\&quot;1234.00&quot;</code>, then <code class="code">Scanf.sscanf s &quot;%_(%i%)&quot;</code> is
-      simply equivalent to <code class="code">Scanf.sscanf &quot;1234.00&quot; &quot;%4d&quot;</code>.</li>
+      the string <code class="code">&quot;\&quot;%4d\&quot;1234.00&quot;</code>, then <code class="code">Scanf.sscanf(s, &quot;%_(%i%)&quot;)</code> is
+      simply equivalent to <code class="code">Scanf.sscanf(&quot;1234.00&quot;, &quot;%4d&quot;)</code>.</li>
 <li><code class="code">l</code>: returns the number of lines read so far.</li>
 <li><code class="code">n</code>: returns the number of characters read so far.</li>
 <li><code class="code">N</code> or <code class="code">L</code>: returns the number of tokens read so far.</li>
@@ -992,8 +983,8 @@ Conversion specifications consist in the <code class="code">%</code> character, 
     Following the <code class="code">%</code> character that introduces a conversion, there may be
     the special flag <code class="code">_</code>: the conversion that follows occurs as usual,
     but the resulting value is discarded.
-    For instance, if <code class="code">f</code> is the function <code class="code">fun i -&gt; i + 1</code>, and <code class="code">s</code> is the
-    string <code class="code">&quot;x = 1&quot;</code>, then <code class="code">Scanf.sscanf s &quot;%_s = %i&quot; f</code> returns <code class="code">2</code>.
+    For instance, if <code class="code">f</code> is the function <code class="code">(i) =&gt; i + 1</code>, and <code class="code">s</code> is the
+    string <code class="code">&quot;x = 1&quot;</code>, then <code class="code">Scanf.sscanf(s, &quot;%_s = %i&quot;, f)</code> returns <code class="code">2</code>.
 <p>
 
     The field width is composed of an optional integer literal
@@ -1049,7 +1040,7 @@ Scanning indications appear just after the string conversions <code class="code"
     <code class="code">Scanf</code> format strings, compared to those used for the <code class="code">Printf</code>
     module. However, the scanning indications are similar to those used in
     the <code class="code">Format</code> module; hence, when producing formatted text to be scanned
-    by <code class="code">!Scanf.bscanf</code>, it is wise to use printing functions from the
+    by <code class="code">Scanf.bscanf^</code>, it is wise to use printing functions from the
     <code class="code">Format</code> module (or, if you need to use functions from <code class="code">Printf</code>, banish
     or carefully double check the format strings that contain <code class="code">&apos;@&apos;</code>
     characters).</li>
@@ -1084,8 +1075,7 @@ As mentioned above, a plain character in the format string is just
 <p>
 
     Matching <em>any</em> amount of whitespace, a space in the format string
-    also matches no amount of whitespace at all; hence, the call <code class="code">bscanf ib
-    &quot;Price = %d $&quot; (fun p -&gt; p)</code> succeeds and returns <code class="code">1</code> when reading an
+    also matches no amount of whitespace at all; hence, the call <code class="code">bscanf(ib, &quot;Price = %d $&quot;, (p) =&gt; p)</code> succeeds and returns <code class="code">1</code> when reading an
     input with various whitespace in it, such as <code class="code">Price = 1 $</code>,
     <code class="code">Price  =  1    $</code>, or even <code class="code">Price=1$</code>.<br>
 <br>
@@ -1099,7 +1089,7 @@ Conversion specifications consist in the <code class="code">%</code> character, 
 </p><ul>
 <li><code class="code">d</code>: reads an optionally signed decimal integer.</li>
 <li><code class="code">i</code>: reads an optionally signed integer
-      (usual input conventions for decimal (<code class="code">0-9</code>+), hexadecimal
+      (usual input conventions for decimal (<code class="code">0 - 9</code>+), hexadecimal
        (<code class="code">0x[0-9a-f]+</code> and <code class="code">0X[0-9A-F]+</code>), octal (<code class="code">0o[0-7]+</code>), and binary
        (<code class="code">0b[0-1]+</code>) notations are understood).</li>
 <li><code class="code">u</code>: reads an unsigned decimal integer.</li>
@@ -1124,8 +1114,7 @@ Conversion specifications consist in the <code class="code">%</code> character, 
 <li><code class="code">C</code>: reads a single delimited character (delimiters and special
       escaped characters follow the lexical conventions of OCaml).</li>
 <li><code class="code">f</code>, <code class="code">e</code>, <code class="code">E</code>, <code class="code">g</code>, <code class="code">G</code>: reads an optionally signed
-      floating-point number in decimal notation, in the style <code class="code">dddd.ddd
-      e/E+-dd</code>.</li>
+      floating-point number in decimal notation, in the style <code class="code">dddd.ddd(e) / E +- dd</code>.</li>
 <li><code class="code">F</code>: reads a floating point number according to the lexical
       conventions of OCaml (hence the decimal point is mandatory if the
       exponent part is not mentioned).</li>
@@ -1138,11 +1127,11 @@ Conversion specifications consist in the <code class="code">%</code> character, 
       the format specified by the second letter for regular integers.</li>
 <li><code class="code">Ld</code>, <code class="code">Li</code>, <code class="code">Lu</code>, <code class="code">Lx</code>, <code class="code">LX</code>, <code class="code">Lo</code>: reads an <code class="code">int64</code> argument to
       the format specified by the second letter for regular integers.</li>
-<li><code class="code">[ range ]</code>: reads characters that matches one of the characters
+<li><code class="code">[range]</code>: reads characters that matches one of the characters
       mentioned in the range of characters <code class="code">range</code> (or not mentioned in
       it, if the range starts with <code class="code">^</code>). Reads a <code class="code">string</code> that can be
       empty, if the next input character does not match the range. The set of
-      characters from <code class="code">c1</code> to <code class="code">c2</code> (inclusively) is denoted by <code class="code">c1-c2</code>.
+      characters from <code class="code">c1</code> to <code class="code">c2</code> (inclusively) is denoted by <code class="code">c1 - c2</code>.
       Hence, <code class="code">%[0-9]</code> returns a string representing a decimal number
       or an empty string if no decimal digit is found; similarly,
       <code class="code">%[0-9a-f]</code> returns a string of hexadecimal digits.
@@ -1159,7 +1148,7 @@ Conversion specifications consist in the <code class="code">%</code> character, 
       read must have the same type as the format string specification
       <code class="code">fmt</code>. For instance, <code class="code">&quot;%{ %i %}&quot;</code> reads any format string that
       can read a value of type <code class="code">int</code>; hence, if <code class="code">s</code> is the string
-      <code class="code">&quot;fmt:\&quot;number is %u\&quot;&quot;</code>, then <code class="code">Scanf.sscanf s &quot;fmt: %{%i%}&quot;</code>
+      <code class="code">&quot;fmt:\&quot;number is %u\&quot;&quot;</code>, then <code class="code">Scanf.sscanf(s, &quot;fmt: %{%i%}&quot;)</code>
       succeeds and returns the format string <code class="code">&quot;number is %u&quot;</code>.</li>
 <li><code class="code">( fmt %)</code>: scanning sub-format substitution.
       Reads a format string <code class="code">rf</code> in the input, then goes on scanning with
@@ -1171,15 +1160,15 @@ Conversion specifications consist in the <code class="code">%</code> character, 
       The conversion returns the format string read <code class="code">rf</code>, and then a value
       read using <code class="code">rf</code>.
       Hence, if <code class="code">s</code> is the string <code class="code">&quot;\&quot;%4d\&quot;1234.00&quot;</code>, then
-      <code class="code">Scanf.sscanf s &quot;%(%i%)&quot; (fun fmt i -&gt; fmt, i)</code> evaluates to
+      <code class="code">Scanf.sscanf(s, &quot;%(%i%)&quot;, (fmt, i) =&gt; (fmt, i))</code> evaluates to
       <code class="code">(&quot;%4d&quot;, 1234)</code>.
       This behaviour is not mere format substitution, since the conversion
       returns the format string read as additional argument. If you need
       pure format substitution, use special flag <code class="code">_</code> to discard the
       extraneous argument: conversion <code class="code">%_( fmt %)</code> reads a format string
       <code class="code">rf</code> and then behaves the same as format string <code class="code">rf</code>.  Hence, if <code class="code">s</code> is
-      the string <code class="code">&quot;\&quot;%4d\&quot;1234.00&quot;</code>, then <code class="code">Scanf.sscanf s &quot;%_(%i%)&quot;</code> is
-      simply equivalent to <code class="code">Scanf.sscanf &quot;1234.00&quot; &quot;%4d&quot;</code>.</li>
+      the string <code class="code">&quot;\&quot;%4d\&quot;1234.00&quot;</code>, then <code class="code">Scanf.sscanf(s, &quot;%_(%i%)&quot;)</code> is
+      simply equivalent to <code class="code">Scanf.sscanf(&quot;1234.00&quot;, &quot;%4d&quot;)</code>.</li>
 <li><code class="code">l</code>: returns the number of lines read so far.</li>
 <li><code class="code">n</code>: returns the number of characters read so far.</li>
 <li><code class="code">N</code> or <code class="code">L</code>: returns the number of tokens read so far.</li>
@@ -1192,8 +1181,8 @@ Conversion specifications consist in the <code class="code">%</code> character, 
     Following the <code class="code">%</code> character that introduces a conversion, there may be
     the special flag <code class="code">_</code>: the conversion that follows occurs as usual,
     but the resulting value is discarded.
-    For instance, if <code class="code">f</code> is the function <code class="code">fun i -&gt; i + 1</code>, and <code class="code">s</code> is the
-    string <code class="code">&quot;x = 1&quot;</code>, then <code class="code">Scanf.sscanf s &quot;%_s = %i&quot; f</code> returns <code class="code">2</code>.
+    For instance, if <code class="code">f</code> is the function <code class="code">(i) =&gt; i + 1</code>, and <code class="code">s</code> is the
+    string <code class="code">&quot;x = 1&quot;</code>, then <code class="code">Scanf.sscanf(s, &quot;%_s = %i&quot;, f)</code> returns <code class="code">2</code>.
 <p>
 
     The field width is composed of an optional integer literal
@@ -1249,7 +1238,7 @@ Scanning indications appear just after the string conversions <code class="code"
     <code class="code">Scanf</code> format strings, compared to those used for the <code class="code">Printf</code>
     module. However, the scanning indications are similar to those used in
     the <code class="code">Format</code> module; hence, when producing formatted text to be scanned
-    by <code class="code">!Scanf.bscanf</code>, it is wise to use printing functions from the
+    by <code class="code">Scanf.bscanf^</code>, it is wise to use printing functions from the
     <code class="code">Format</code> module (or, if you need to use functions from <code class="code">Printf</code>, banish
     or carefully double check the format strings that contain <code class="code">&apos;@&apos;</code>
     characters).</li>
@@ -1286,8 +1275,7 @@ As mentioned above, a plain character in the format string is just
 <p>
 
     Matching <em>any</em> amount of whitespace, a space in the format string
-    also matches no amount of whitespace at all; hence, the call <code class="code">bscanf ib
-    &quot;Price = %d $&quot; (fun p -&gt; p)</code> succeeds and returns <code class="code">1</code> when reading an
+    also matches no amount of whitespace at all; hence, the call <code class="code">bscanf(ib, &quot;Price = %d $&quot;, (p) =&gt; p)</code> succeeds and returns <code class="code">1</code> when reading an
     input with various whitespace in it, such as <code class="code">Price = 1 $</code>,
     <code class="code">Price  =  1    $</code>, or even <code class="code">Price=1$</code>.<br>
 <br>
@@ -1301,7 +1289,7 @@ Conversion specifications consist in the <code class="code">%</code> character, 
 </p><ul>
 <li><code class="code">d</code>: reads an optionally signed decimal integer.</li>
 <li><code class="code">i</code>: reads an optionally signed integer
-      (usual input conventions for decimal (<code class="code">0-9</code>+), hexadecimal
+      (usual input conventions for decimal (<code class="code">0 - 9</code>+), hexadecimal
        (<code class="code">0x[0-9a-f]+</code> and <code class="code">0X[0-9A-F]+</code>), octal (<code class="code">0o[0-7]+</code>), and binary
        (<code class="code">0b[0-1]+</code>) notations are understood).</li>
 <li><code class="code">u</code>: reads an unsigned decimal integer.</li>
@@ -1326,8 +1314,7 @@ Conversion specifications consist in the <code class="code">%</code> character, 
 <li><code class="code">C</code>: reads a single delimited character (delimiters and special
       escaped characters follow the lexical conventions of OCaml).</li>
 <li><code class="code">f</code>, <code class="code">e</code>, <code class="code">E</code>, <code class="code">g</code>, <code class="code">G</code>: reads an optionally signed
-      floating-point number in decimal notation, in the style <code class="code">dddd.ddd
-      e/E+-dd</code>.</li>
+      floating-point number in decimal notation, in the style <code class="code">dddd.ddd(e) / E +- dd</code>.</li>
 <li><code class="code">F</code>: reads a floating point number according to the lexical
       conventions of OCaml (hence the decimal point is mandatory if the
       exponent part is not mentioned).</li>
@@ -1340,11 +1327,11 @@ Conversion specifications consist in the <code class="code">%</code> character, 
       the format specified by the second letter for regular integers.</li>
 <li><code class="code">Ld</code>, <code class="code">Li</code>, <code class="code">Lu</code>, <code class="code">Lx</code>, <code class="code">LX</code>, <code class="code">Lo</code>: reads an <code class="code">int64</code> argument to
       the format specified by the second letter for regular integers.</li>
-<li><code class="code">[ range ]</code>: reads characters that matches one of the characters
+<li><code class="code">[range]</code>: reads characters that matches one of the characters
       mentioned in the range of characters <code class="code">range</code> (or not mentioned in
       it, if the range starts with <code class="code">^</code>). Reads a <code class="code">string</code> that can be
       empty, if the next input character does not match the range. The set of
-      characters from <code class="code">c1</code> to <code class="code">c2</code> (inclusively) is denoted by <code class="code">c1-c2</code>.
+      characters from <code class="code">c1</code> to <code class="code">c2</code> (inclusively) is denoted by <code class="code">c1 - c2</code>.
       Hence, <code class="code">%[0-9]</code> returns a string representing a decimal number
       or an empty string if no decimal digit is found; similarly,
       <code class="code">%[0-9a-f]</code> returns a string of hexadecimal digits.
@@ -1361,7 +1348,7 @@ Conversion specifications consist in the <code class="code">%</code> character, 
       read must have the same type as the format string specification
       <code class="code">fmt</code>. For instance, <code class="code">&quot;%{ %i %}&quot;</code> reads any format string that
       can read a value of type <code class="code">int</code>; hence, if <code class="code">s</code> is the string
-      <code class="code">&quot;fmt:\&quot;number is %u\&quot;&quot;</code>, then <code class="code">Scanf.sscanf s &quot;fmt: %{%i%}&quot;</code>
+      <code class="code">&quot;fmt:\&quot;number is %u\&quot;&quot;</code>, then <code class="code">Scanf.sscanf(s, &quot;fmt: %{%i%}&quot;)</code>
       succeeds and returns the format string <code class="code">&quot;number is %u&quot;</code>.</li>
 <li><code class="code">( fmt %)</code>: scanning sub-format substitution.
       Reads a format string <code class="code">rf</code> in the input, then goes on scanning with
@@ -1373,15 +1360,15 @@ Conversion specifications consist in the <code class="code">%</code> character, 
       The conversion returns the format string read <code class="code">rf</code>, and then a value
       read using <code class="code">rf</code>.
       Hence, if <code class="code">s</code> is the string <code class="code">&quot;\&quot;%4d\&quot;1234.00&quot;</code>, then
-      <code class="code">Scanf.sscanf s &quot;%(%i%)&quot; (fun fmt i -&gt; fmt, i)</code> evaluates to
+      <code class="code">Scanf.sscanf(s, &quot;%(%i%)&quot;, (fmt, i) =&gt; (fmt, i))</code> evaluates to
       <code class="code">(&quot;%4d&quot;, 1234)</code>.
       This behaviour is not mere format substitution, since the conversion
       returns the format string read as additional argument. If you need
       pure format substitution, use special flag <code class="code">_</code> to discard the
       extraneous argument: conversion <code class="code">%_( fmt %)</code> reads a format string
       <code class="code">rf</code> and then behaves the same as format string <code class="code">rf</code>.  Hence, if <code class="code">s</code> is
-      the string <code class="code">&quot;\&quot;%4d\&quot;1234.00&quot;</code>, then <code class="code">Scanf.sscanf s &quot;%_(%i%)&quot;</code> is
-      simply equivalent to <code class="code">Scanf.sscanf &quot;1234.00&quot; &quot;%4d&quot;</code>.</li>
+      the string <code class="code">&quot;\&quot;%4d\&quot;1234.00&quot;</code>, then <code class="code">Scanf.sscanf(s, &quot;%_(%i%)&quot;)</code> is
+      simply equivalent to <code class="code">Scanf.sscanf(&quot;1234.00&quot;, &quot;%4d&quot;)</code>.</li>
 <li><code class="code">l</code>: returns the number of lines read so far.</li>
 <li><code class="code">n</code>: returns the number of characters read so far.</li>
 <li><code class="code">N</code> or <code class="code">L</code>: returns the number of tokens read so far.</li>
@@ -1394,8 +1381,8 @@ Conversion specifications consist in the <code class="code">%</code> character, 
     Following the <code class="code">%</code> character that introduces a conversion, there may be
     the special flag <code class="code">_</code>: the conversion that follows occurs as usual,
     but the resulting value is discarded.
-    For instance, if <code class="code">f</code> is the function <code class="code">fun i -&gt; i + 1</code>, and <code class="code">s</code> is the
-    string <code class="code">&quot;x = 1&quot;</code>, then <code class="code">Scanf.sscanf s &quot;%_s = %i&quot; f</code> returns <code class="code">2</code>.
+    For instance, if <code class="code">f</code> is the function <code class="code">(i) =&gt; i + 1</code>, and <code class="code">s</code> is the
+    string <code class="code">&quot;x = 1&quot;</code>, then <code class="code">Scanf.sscanf(s, &quot;%_s = %i&quot;, f)</code> returns <code class="code">2</code>.
 <p>
 
     The field width is composed of an optional integer literal
@@ -1451,7 +1438,7 @@ Scanning indications appear just after the string conversions <code class="code"
     <code class="code">Scanf</code> format strings, compared to those used for the <code class="code">Printf</code>
     module. However, the scanning indications are similar to those used in
     the <code class="code">Format</code> module; hence, when producing formatted text to be scanned
-    by <code class="code">!Scanf.bscanf</code>, it is wise to use printing functions from the
+    by <code class="code">Scanf.bscanf^</code>, it is wise to use printing functions from the
     <code class="code">Format</code> module (or, if you need to use functions from <code class="code">Printf</code>, banish
     or carefully double check the format strings that contain <code class="code">&apos;@&apos;</code>
     characters).</li>
@@ -1514,8 +1501,7 @@ As mentioned above, a plain character in the format string is just
 <p>
 
     Matching <em>any</em> amount of whitespace, a space in the format string
-    also matches no amount of whitespace at all; hence, the call <code class="code">bscanf ib
-    &quot;Price = %d $&quot; (fun p -&gt; p)</code> succeeds and returns <code class="code">1</code> when reading an
+    also matches no amount of whitespace at all; hence, the call <code class="code">bscanf(ib, &quot;Price = %d $&quot;, (p) =&gt; p)</code> succeeds and returns <code class="code">1</code> when reading an
     input with various whitespace in it, such as <code class="code">Price = 1 $</code>,
     <code class="code">Price  =  1    $</code>, or even <code class="code">Price=1$</code>.<br>
 <br>
@@ -1529,7 +1515,7 @@ Conversion specifications consist in the <code class="code">%</code> character, 
 </p><ul>
 <li><code class="code">d</code>: reads an optionally signed decimal integer.</li>
 <li><code class="code">i</code>: reads an optionally signed integer
-      (usual input conventions for decimal (<code class="code">0-9</code>+), hexadecimal
+      (usual input conventions for decimal (<code class="code">0 - 9</code>+), hexadecimal
        (<code class="code">0x[0-9a-f]+</code> and <code class="code">0X[0-9A-F]+</code>), octal (<code class="code">0o[0-7]+</code>), and binary
        (<code class="code">0b[0-1]+</code>) notations are understood).</li>
 <li><code class="code">u</code>: reads an unsigned decimal integer.</li>
@@ -1554,8 +1540,7 @@ Conversion specifications consist in the <code class="code">%</code> character, 
 <li><code class="code">C</code>: reads a single delimited character (delimiters and special
       escaped characters follow the lexical conventions of OCaml).</li>
 <li><code class="code">f</code>, <code class="code">e</code>, <code class="code">E</code>, <code class="code">g</code>, <code class="code">G</code>: reads an optionally signed
-      floating-point number in decimal notation, in the style <code class="code">dddd.ddd
-      e/E+-dd</code>.</li>
+      floating-point number in decimal notation, in the style <code class="code">dddd.ddd(e) / E +- dd</code>.</li>
 <li><code class="code">F</code>: reads a floating point number according to the lexical
       conventions of OCaml (hence the decimal point is mandatory if the
       exponent part is not mentioned).</li>
@@ -1568,11 +1553,11 @@ Conversion specifications consist in the <code class="code">%</code> character, 
       the format specified by the second letter for regular integers.</li>
 <li><code class="code">Ld</code>, <code class="code">Li</code>, <code class="code">Lu</code>, <code class="code">Lx</code>, <code class="code">LX</code>, <code class="code">Lo</code>: reads an <code class="code">int64</code> argument to
       the format specified by the second letter for regular integers.</li>
-<li><code class="code">[ range ]</code>: reads characters that matches one of the characters
+<li><code class="code">[range]</code>: reads characters that matches one of the characters
       mentioned in the range of characters <code class="code">range</code> (or not mentioned in
       it, if the range starts with <code class="code">^</code>). Reads a <code class="code">string</code> that can be
       empty, if the next input character does not match the range. The set of
-      characters from <code class="code">c1</code> to <code class="code">c2</code> (inclusively) is denoted by <code class="code">c1-c2</code>.
+      characters from <code class="code">c1</code> to <code class="code">c2</code> (inclusively) is denoted by <code class="code">c1 - c2</code>.
       Hence, <code class="code">%[0-9]</code> returns a string representing a decimal number
       or an empty string if no decimal digit is found; similarly,
       <code class="code">%[0-9a-f]</code> returns a string of hexadecimal digits.
@@ -1589,7 +1574,7 @@ Conversion specifications consist in the <code class="code">%</code> character, 
       read must have the same type as the format string specification
       <code class="code">fmt</code>. For instance, <code class="code">&quot;%{ %i %}&quot;</code> reads any format string that
       can read a value of type <code class="code">int</code>; hence, if <code class="code">s</code> is the string
-      <code class="code">&quot;fmt:\&quot;number is %u\&quot;&quot;</code>, then <code class="code">Scanf.sscanf s &quot;fmt: %{%i%}&quot;</code>
+      <code class="code">&quot;fmt:\&quot;number is %u\&quot;&quot;</code>, then <code class="code">Scanf.sscanf(s, &quot;fmt: %{%i%}&quot;)</code>
       succeeds and returns the format string <code class="code">&quot;number is %u&quot;</code>.</li>
 <li><code class="code">( fmt %)</code>: scanning sub-format substitution.
       Reads a format string <code class="code">rf</code> in the input, then goes on scanning with
@@ -1601,15 +1586,15 @@ Conversion specifications consist in the <code class="code">%</code> character, 
       The conversion returns the format string read <code class="code">rf</code>, and then a value
       read using <code class="code">rf</code>.
       Hence, if <code class="code">s</code> is the string <code class="code">&quot;\&quot;%4d\&quot;1234.00&quot;</code>, then
-      <code class="code">Scanf.sscanf s &quot;%(%i%)&quot; (fun fmt i -&gt; fmt, i)</code> evaluates to
+      <code class="code">Scanf.sscanf(s, &quot;%(%i%)&quot;, (fmt, i) =&gt; (fmt, i))</code> evaluates to
       <code class="code">(&quot;%4d&quot;, 1234)</code>.
       This behaviour is not mere format substitution, since the conversion
       returns the format string read as additional argument. If you need
       pure format substitution, use special flag <code class="code">_</code> to discard the
       extraneous argument: conversion <code class="code">%_( fmt %)</code> reads a format string
       <code class="code">rf</code> and then behaves the same as format string <code class="code">rf</code>.  Hence, if <code class="code">s</code> is
-      the string <code class="code">&quot;\&quot;%4d\&quot;1234.00&quot;</code>, then <code class="code">Scanf.sscanf s &quot;%_(%i%)&quot;</code> is
-      simply equivalent to <code class="code">Scanf.sscanf &quot;1234.00&quot; &quot;%4d&quot;</code>.</li>
+      the string <code class="code">&quot;\&quot;%4d\&quot;1234.00&quot;</code>, then <code class="code">Scanf.sscanf(s, &quot;%_(%i%)&quot;)</code> is
+      simply equivalent to <code class="code">Scanf.sscanf(&quot;1234.00&quot;, &quot;%4d&quot;)</code>.</li>
 <li><code class="code">l</code>: returns the number of lines read so far.</li>
 <li><code class="code">n</code>: returns the number of characters read so far.</li>
 <li><code class="code">N</code> or <code class="code">L</code>: returns the number of tokens read so far.</li>
@@ -1622,8 +1607,8 @@ Conversion specifications consist in the <code class="code">%</code> character, 
     Following the <code class="code">%</code> character that introduces a conversion, there may be
     the special flag <code class="code">_</code>: the conversion that follows occurs as usual,
     but the resulting value is discarded.
-    For instance, if <code class="code">f</code> is the function <code class="code">fun i -&gt; i + 1</code>, and <code class="code">s</code> is the
-    string <code class="code">&quot;x = 1&quot;</code>, then <code class="code">Scanf.sscanf s &quot;%_s = %i&quot; f</code> returns <code class="code">2</code>.
+    For instance, if <code class="code">f</code> is the function <code class="code">(i) =&gt; i + 1</code>, and <code class="code">s</code> is the
+    string <code class="code">&quot;x = 1&quot;</code>, then <code class="code">Scanf.sscanf(s, &quot;%_s = %i&quot;, f)</code> returns <code class="code">2</code>.
 <p>
 
     The field width is composed of an optional integer literal
@@ -1679,7 +1664,7 @@ Scanning indications appear just after the string conversions <code class="code"
     <code class="code">Scanf</code> format strings, compared to those used for the <code class="code">Printf</code>
     module. However, the scanning indications are similar to those used in
     the <code class="code">Format</code> module; hence, when producing formatted text to be scanned
-    by <code class="code">!Scanf.bscanf</code>, it is wise to use printing functions from the
+    by <code class="code">Scanf.bscanf^</code>, it is wise to use printing functions from the
     <code class="code">Format</code> module (or, if you need to use functions from <code class="code">Printf</code>, banish
     or carefully double check the format strings that contain <code class="code">&apos;@&apos;</code>
     characters).</li>
@@ -1744,9 +1729,7 @@ Same as <a href="Scanf.html#VALbscanf"><code class="code">Scanf.bscanf</code></a
     channel <a href="Scanf.Scanning.html#VALstdin"><code class="code">Scanf.Scanning.stdin</code></a> that is connected to <code class="code">Pervasives.stdin</code>.<br>
 </div>
 
-<pre id="VALkscanf"><span class="keyword">let</span> kscanf:
-  (Scanning.in_channel, (Scanning.in_channel, exn) =&gt; &apos;d) =&gt;
-  scanner(&apos;a, &apos;b, &apos;c, &apos;d);
+<pre id="VALkscanf"><span class="keyword">let</span> kscanf: (Scanning.in_channel, (Scanning.in_channel, exn) =&gt; &apos;d) =&gt; scanner(&apos;a, &apos;b, &apos;c, &apos;d);
 </pre><div class="info ">
 Same as <a href="Scanf.html#VALbscanf"><code class="code">Scanf.bscanf</code></a>, but takes an additional function argument
     <code class="code">ef</code> that is called in case of error: if the scanning process or
@@ -1755,16 +1738,13 @@ Same as <a href="Scanf.html#VALbscanf"><code class="code">Scanf.bscanf</code></a
     exception that aborted the scanning process as arguments.<br>
 </div>
 
-<pre id="VALksscanf"><span class="keyword">let</span> ksscanf:
-  (string, (Scanning.in_channel, exn) =&gt; &apos;d) =&gt; scanner(&apos;a, &apos;b, &apos;c, &apos;d);
+<pre id="VALksscanf"><span class="keyword">let</span> ksscanf: (string, (Scanning.in_channel, exn) =&gt; &apos;d) =&gt; scanner(&apos;a, &apos;b, &apos;c, &apos;d);
 </pre><div class="info ">
 Same as <a href="Scanf.html#VALkscanf"><code class="code">Scanf.kscanf</code></a> but reads from the given string.<br>
 <b>Since</b> 4.02.0<br>
 </div>
 
-<pre id="VALkfscanf"><span class="keyword">let</span> kfscanf:
-  (Pervasives.in_channel, (Scanning.in_channel, exn) =&gt; &apos;d) =&gt;
-  scanner(&apos;a, &apos;b, &apos;c, &apos;d);
+<pre id="VALkfscanf"><span class="keyword">let</span> kfscanf: (Pervasives.in_channel, (Scanning.in_channel, exn) =&gt; &apos;d) =&gt; scanner(&apos;a, &apos;b, &apos;c, &apos;d);
 </pre><div class="info ">
 Same as <a href="Scanf.html#VALkscanf"><code class="code">Scanf.kscanf</code></a>, but reads from the given regular input channel.<br>
 <b>Since</b> 4.02.0<br>
@@ -1780,7 +1760,7 @@ Same as <a href="Scanf.html#VALkscanf"><code class="code">Scanf.kscanf</code></a
   ) =&gt;
   &apos;g;
 </pre><div class="info ">
-<code class="code">bscanf_format ic fmt f</code> reads a format string token from the formatted
+<code class="code">bscanf_format(ic, fmt, f)</code> reads a format string token from the formatted
     input channel <code class="code">ic</code>, according to the given format string <code class="code">fmt</code>, and
     applies <code class="code">f</code> to the resulting format string value.
     Raise <code class="code">Scan_failure</code> if the format string value read does not have the
@@ -1804,7 +1784,7 @@ Same as <a href="Scanf.html#VALbscanf_format"><code class="code">Scanf.bscanf_fo
   (string, Pervasives.format6(&apos;a, &apos;b, &apos;c, &apos;d, &apos;e, &apos;f)) =&gt;
   Pervasives.format6(&apos;a, &apos;b, &apos;c, &apos;d, &apos;e, &apos;f);
 </pre><div class="info ">
-<code class="code">format_from_string s fmt</code> converts a string argument to a format string,
+<code class="code">format_from_string(s, fmt)</code> converts a string argument to a format string,
     according to the given format string <code class="code">fmt</code>.
     Raise <code class="code">Scan_failure</code> if <code class="code">s</code>, considered as a format string, does not
     have the same type as <code class="code">fmt</code>.<br>

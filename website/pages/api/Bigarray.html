@@ -16,8 +16,7 @@ Large, multi-dimensional, numerical arrays.
 </p><p>
 
    Concerning the naming conventions, users of this module are encouraged
-   to do <code class="code">open Bigarray;
-</code> in their source, then refer to array types and
+   to do <code class="code">open Bigarray</code> in their source, then refer to array types and
    operations via short dot notation, e.g. <code class="code">Array1.t</code> or <code class="code">Array2.sub</code>.
 </p><p>
 
@@ -433,16 +432,16 @@ To facilitate interoperability with existing C and Fortran code,
    multi-dimensional arrays are laid out in row-major format.
    That is, for a two-dimensional array, all elements of
    row 0 are contiguous in memory, followed by all elements of
-   row 1, etc.  In other terms, the array elements at <code class="code">(x,y)</code>
-   and <code class="code">(x, y+1)</code> are adjacent in memory.
+   row 1, etc.  In other terms, the array elements at <code class="code">(x, y)</code>
+   and <code class="code">(x, y + 1)</code> are adjacent in memory.
 </p><p>
 
    In the Fortran-style layout, array indices start at 1, and
    multi-dimensional arrays are laid out in column-major format.
    That is, for a two-dimensional array, all elements of
    column 0 are contiguous in memory, followed by all elements of
-   column 1, etc.  In other terms, the array elements at <code class="code">(x,y)</code>
-   and <code class="code">(x+1, y)</code> are adjacent in memory.
+   column 1, etc.  In other terms, the array elements at <code class="code">(x, y)</code>
+   and <code class="code">(x + 1, y)</code> are adjacent in memory.
 </p><p>
 
    Each layout style is identified at the type level by the
@@ -553,11 +552,11 @@ Return the three-dimensional big array corresponding to the given
    <code class="code">N</code>-dimensional array of dimensions <code class="code">d1</code>...<code class="code">dN</code>.  The returned
    array and the original array <code class="code">b</code> share their data
    and have the same layout.  For instance, assuming that <code class="code">b</code>
-   is a one-dimensional array of dimension 12, <code class="code">reshape b [|3;4|]</code>
+   is a one-dimensional array of dimension 12, <code class="code">reshape(b, [|3, 4|])</code>
    returns a two-dimensional array <code class="code">b&apos;</code> of dimensions 3 and 4.
-   If <code class="code">b</code> has C layout, the element <code class="code">(x,y)</code> of <code class="code">b&apos;</code> corresponds
+   If <code class="code">b</code> has C layout, the element <code class="code">(x, y)</code> of <code class="code">b&apos;</code> corresponds
    to the element <code class="code">x * 3 + y</code> of <code class="code">b</code>.  If <code class="code">b</code> has Fortran layout,
-   the element <code class="code">(x,y)</code> of <code class="code">b&apos;</code> corresponds to the element
+   the element <code class="code">(x, y)</code> of <code class="code">b&apos;</code> corresponds to the element
    <code class="code">x + (y - 1) * 4</code> of <code class="code">b</code>.
    The returned big array must have exactly the same number of
    elements as the original big array <code class="code">b</code>.  That is, the product

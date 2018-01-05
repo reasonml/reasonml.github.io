@@ -54,7 +54,7 @@ The <code class="code">Exit</code> exception is not raised by any library functi
 
 <pre id="VAL(=)"><span class="keyword">let</span> (==): (&apos;a, &apos;a) =&gt; bool;
 </pre><div class="info ">
-<code class="code">e1 = e2</code> tests for structural equality of <code class="code">e1</code> and <code class="code">e2</code>.
+<code class="code">e1 == e2</code> tests for structural equality of <code class="code">e1</code> and <code class="code">e2</code>.
    Mutable structures (e.g. references and arrays) are equal
    if and only if their current contents are structurally equal,
    even if the two mutable objects are not the same physical object.
@@ -64,7 +64,7 @@ The <code class="code">Exit</code> exception is not raised by any library functi
 
 <pre id="VAL(&lt;&gt;)"><span class="keyword">let</span> (!=): (&apos;a, &apos;a) =&gt; bool;
 </pre><div class="info ">
-Negation of <a href="Pervasives.html#VAL(=)"><code class="code">Pervasives.(=)</code></a>.<br>
+Negation of <a href="Pervasives.html#VAL(=)"><code class="code">Pervasives.(==)</code></a>.<br>
 </div>
 
 <pre id="VAL(&lt;)"><span class="keyword">let</span> (&lt;): (&apos;a, &apos;a) =&gt; bool;
@@ -88,15 +88,15 @@ Structural ordering functions. These functions coincide with
    the usual orderings over integers, characters, strings, byte sequences
    and floating-point numbers, and extend them to a
    total ordering over all types.
-   The ordering is compatible with <code class="code">( = )</code>. As in the case
-   of <code class="code">( = )</code>, mutable structures are compared by contents.
+   The ordering is compatible with <code class="code">(==)</code>. As in the case
+   of <code class="code">(==)</code>, mutable structures are compared by contents.
    Comparison between functional values raises <code class="code">Invalid_argument</code>.
    Comparison between cyclic structures may not terminate.<br>
 </div>
 
 <pre id="VALcompare"><span class="keyword">let</span> compare: (&apos;a, &apos;a) =&gt; int;
 </pre><div class="info ">
-<code class="code">compare x y</code> returns <code class="code">0</code> if <code class="code">x</code> is equal to <code class="code">y</code>,
+<code class="code">compare(x, y)</code> returns <code class="code">0</code> if <code class="code">x</code> is equal to <code class="code">y</code>,
    a negative integer if <code class="code">x</code> is less than <code class="code">y</code>, and a positive integer
    if <code class="code">x</code> is greater than <code class="code">y</code>.  The ordering implemented by <code class="code">compare</code>
    is compatible with the comparison predicates <code class="code">=</code>, <code class="code">&lt;</code> and <code class="code">&gt;</code>
@@ -133,19 +133,19 @@ Return the greater of the two arguments.
 
 <pre id="VAL(==)"><span class="keyword">let</span> (===): (&apos;a, &apos;a) =&gt; bool;
 </pre><div class="info ">
-<code class="code">e1 == e2</code> tests for physical equality of <code class="code">e1</code> and <code class="code">e2</code>.
+<code class="code">e1 === e2</code> tests for physical equality of <code class="code">e1</code> and <code class="code">e2</code>.
    On mutable types such as references, arrays, byte sequences, records with
    mutable fields and objects with mutable instance variables,
-   <code class="code">e1 == e2</code> is true if and only if physical modification of <code class="code">e1</code>
+   <code class="code">e1 === e2</code> is true if and only if physical modification of <code class="code">e1</code>
    also affects <code class="code">e2</code>.
-   On non-mutable types, the behavior of <code class="code">( == )</code> is
+   On non-mutable types, the behavior of <code class="code">(===)</code> is
    implementation-dependent; however, it is guaranteed that
-   <code class="code">e1 == e2</code> implies <code class="code">compare e1 e2 = 0</code>.<br>
+   <code class="code">e1 === e2</code> implies <code class="code">compare(e1, e2) == 0</code>.<br>
 </div>
 
 <pre id="VAL(!=)"><span class="keyword">let</span> (!==): (&apos;a, &apos;a) =&gt; bool;
 </pre><div class="info ">
-Negation of <a href="Pervasives.html#VAL(==)"><code class="code">Pervasives.(==)</code></a>.<br>
+Negation of <a href="Pervasives.html#VAL(==)"><code class="code">Pervasives.(===)</code></a>.<br>
 </div>
 <br>
 <h6 id="6_Booleanoperations">Boolean operations</h6><br>
@@ -212,7 +212,7 @@ The boolean &apos;or&apos;. Evaluation is sequential, left-to-right:
 
 <pre id="VAL__POS__"><span class="keyword">let</span> __POS__: (string, int, int, int);
 </pre><div class="info ">
-<code class="code">__POS__</code> returns a tuple <code class="code">(file,lnum,cnum,enum)</code>, corresponding
+<code class="code">__POS__</code> returns a tuple <code class="code">(file, lnum, cnum, enum)</code>, corresponding
     to the location at which this expression appears in the file
     currently being parsed by the compiler. <code class="code">file</code> is the current
     filename, <code class="code">lnum</code> the line number, <code class="code">cnum</code> the character position in
@@ -222,7 +222,7 @@ The boolean &apos;or&apos;. Evaluation is sequential, left-to-right:
 
 <pre id="VAL__LOC_OF__"><span class="keyword">let</span> __LOC_OF__: &apos;a =&gt; (string, &apos;a);
 </pre><div class="info ">
-<code class="code">__LOC_OF__ expr</code> returns a pair <code class="code">(loc, expr)</code> where <code class="code">loc</code> is the
+<code class="code">__LOC_OF__(expr)</code> returns a pair <code class="code">(loc, expr)</code> where <code class="code">loc</code> is the
     location of <code class="code">expr</code> in the file currently being parsed by the
     compiler, with the standard error format of OCaml: &quot;File %S, line
     %d, characters %d-%d&quot;.<br>
@@ -231,7 +231,7 @@ The boolean &apos;or&apos;. Evaluation is sequential, left-to-right:
 
 <pre id="VAL__LINE_OF__"><span class="keyword">let</span> __LINE_OF__: &apos;a =&gt; (int, &apos;a);
 </pre><div class="info ">
-<code class="code">__LINE__ expr</code> returns a pair <code class="code">(line, expr)</code>, where <code class="code">line</code> is the
+<code class="code">__LINE__(expr)</code> returns a pair <code class="code">(line, expr)</code>, where <code class="code">line</code> is the
     line number at which the expression <code class="code">expr</code> appears in the file
     currently being parsed by the compiler.<br>
 <b>Since</b> 4.02.0<br>
@@ -239,8 +239,8 @@ The boolean &apos;or&apos;. Evaluation is sequential, left-to-right:
 
 <pre id="VAL__POS_OF__"><span class="keyword">let</span> __POS_OF__: &apos;a =&gt; ((string, int, int, int), &apos;a);
 </pre><div class="info ">
-<code class="code">__POS_OF__ expr</code> returns a pair <code class="code">(loc,expr)</code>, where <code class="code">loc</code> is a
-    tuple <code class="code">(file,lnum,cnum,enum)</code> corresponding to the location at
+<code class="code">__POS_OF__(expr)</code> returns a pair <code class="code">(loc, expr)</code>, where <code class="code">loc</code> is a
+    tuple <code class="code">(file, lnum, cnum, enum)</code> corresponding to the location at
     which the expression <code class="code">expr</code> appears in the file currently being
     parsed by the compiler. <code class="code">file</code> is the current filename, <code class="code">lnum</code> the
     line number, <code class="code">cnum</code> the character position in the line and <code class="code">enum</code>
@@ -253,14 +253,14 @@ The boolean &apos;or&apos;. Evaluation is sequential, left-to-right:
 <pre id="VAL(|&gt;)"><span class="keyword">let</span> (|&gt;): (&apos;a, &apos;a =&gt; &apos;b) =&gt; &apos;b;
 </pre><div class="info ">
 Reverse-application operator: <code class="code">x |&gt; f |&gt; g</code> is exactly equivalent
- to <code class="code">g (f (x))</code>.<br>
+ to <code class="code">g(f(x))</code>.<br>
 <b>Since</b> 4.01<br>
 </div>
 
 <pre id="VAL(@@)"><span class="keyword">let</span> (@@): (&apos;a =&gt; &apos;b, &apos;a) =&gt; &apos;b;
 </pre><div class="info ">
 Application operator: <code class="code">g @@ f @@ x</code> is exactly equivalent to
- <code class="code">g (f (x))</code>.<br>
+ <code class="code">g(f(x))</code>.<br>
 <b>Since</b> 4.01<br>
 </div>
 <br>
@@ -274,23 +274,23 @@ Integers are 31 bits wide (or 63 bits on 64-bit processors).
 
 <pre id="VAL(~-)"><span class="keyword">let</span> (~-): int =&gt; int;
 </pre><div class="info ">
-Unary negation. You can also write <code class="code">- e</code> instead of <code class="code">~- e</code>.<br>
+Unary negation. You can also write <code class="code">- e</code> instead of <code class="code">- e</code>.<br>
 </div>
 
 <pre id="VAL(~+)"><span class="keyword">let</span> (~+): int =&gt; int;
 </pre><div class="info ">
-Unary addition. You can also write <code class="code">+ e</code> instead of <code class="code">~+ e</code>.<br>
+Unary addition. You can also write <code class="code">+ e</code> instead of <code class="code">+ e</code>.<br>
 <b>Since</b> 3.12.0<br>
 </div>
 
 <pre id="VALsucc"><span class="keyword">let</span> succ: int =&gt; int;
 </pre><div class="info ">
-<code class="code">succ x</code> is <code class="code">x + 1</code>.<br>
+<code class="code">succ(x)</code> is <code class="code">x + 1</code>.<br>
 </div>
 
 <pre id="VALpred"><span class="keyword">let</span> pred: int =&gt; int;
 </pre><div class="info ">
-<code class="code">pred x</code> is <code class="code">x - 1</code>.<br>
+<code class="code">pred(x)</code> is <code class="code">x - 1</code>.<br>
 </div>
 
 <pre id="VAL(+)"><span class="keyword">let</span> (+): (int, int) =&gt; int;
@@ -315,16 +315,16 @@ Integer division.
    Integer division rounds the real quotient of its arguments towards zero.
    More precisely, if <code class="code">x &gt;= 0</code> and <code class="code">y &gt; 0</code>, <code class="code">x / y</code> is the greatest integer
    less than or equal to the real quotient of <code class="code">x</code> by <code class="code">y</code>.  Moreover,
-   <code class="code">(- x) / y = x / (- y) = - (x / y)</code>.<br>
+   <code class="code">- x / y == x / (- y) == - (x / y)</code>.<br>
 </div>
 
 <pre id="VAL(mod)"><span class="keyword">let</span> (mod): (int, int) =&gt; int;
 </pre><div class="info ">
 Integer remainder.  If <code class="code">y</code> is not zero, the result
    of <code class="code">x mod y</code> satisfies the following properties:
-   <code class="code">x = (x / y) * y + x mod y</code> and
+   <code class="code">x == x / y * y + x mod y</code> and
    <code class="code">abs(x mod y) &lt;= abs(y) - 1</code>.
-   If <code class="code">y = 0</code>, <code class="code">x mod y</code> raises <code class="code">Division_by_zero</code>.
+   If <code class="code">y == 0</code>, <code class="code">x mod y</code> raises <code class="code">Division_by_zero</code>.
    Note that <code class="code">x mod y</code> is negative only if <code class="code">x &lt; 0</code>.
    Raise <code class="code">Division_by_zero</code> if <code class="code">y</code> is zero.<br>
 </div>
@@ -398,7 +398,7 @@ Bitwise logical negation.<br>
    Floating-point operations never raise an exception on overflow,
    underflow, division by zero, etc.  Instead, special IEEE numbers
    are returned as appropriate, such as <code class="code">infinity</code> for <code class="code">1.0 /. 0.0</code>,
-   <code class="code">neg_infinity</code> for <code class="code">-1.0 /. 0.0</code>, and <code class="code">nan</code> (&apos;not a number&apos;)
+   <code class="code">neg_infinity</code> for <code class="code">(-1.0) /. 0.0</code>, and <code class="code">nan</code> (&apos;not a number&apos;)
    for <code class="code">0.0 /. 0.0</code>.  These special numbers then propagate through
    floating-point computations as expected: for instance,
    <code class="code">1.0 /. infinity</code> is <code class="code">0.0</code>, and any arithmetic operation with <code class="code">nan</code>
@@ -406,12 +406,12 @@ Bitwise logical negation.<br>
 
 </p><pre id="VAL(~-.)"><span class="keyword">let</span> (~-.): float =&gt; float;
 </pre><div class="info ">
-Unary negation. You can also write <code class="code">-. e</code> instead of <code class="code">~-. e</code>.<br>
+Unary negation. You can also write <code class="code">-. e</code> instead of <code class="code">-. e</code>.<br>
 </div>
 
 <pre id="VAL(~+.)"><span class="keyword">let</span> (~+.): float =&gt; float;
 </pre><div class="info ">
-Unary addition. You can also write <code class="code">+. e</code> instead of <code class="code">~+. e</code>.<br>
+Unary addition. You can also write <code class="code">+. e</code> instead of <code class="code">+. e</code>.<br>
 <b>Since</b> 3.12.0<br>
 </div>
 
@@ -462,14 +462,14 @@ Base 10 logarithm.<br>
 
 <pre id="VALexpm1"><span class="keyword">let</span> expm1: float =&gt; float;
 </pre><div class="info ">
-<code class="code">expm1 x</code> computes <code class="code">exp x -. 1.0</code>, giving numerically-accurate results
+<code class="code">expm1(x)</code> computes <code class="code">exp(x) -. 1.0</code>, giving numerically-accurate results
     even if <code class="code">x</code> is close to <code class="code">0.0</code>.<br>
 <b>Since</b> 3.12.0<br>
 </div>
 
 <pre id="VALlog1p"><span class="keyword">let</span> log1p: float =&gt; float;
 </pre><div class="info ">
-<code class="code">log1p x</code> computes <code class="code">log(1.0 +. x)</code> (natural logarithm),
+<code class="code">log1p(x)</code> computes <code class="code">log(1.0 +. x)</code> (natural logarithm),
     giving numerically-accurate results even if <code class="code">x</code> is close to <code class="code">0.0</code>.<br>
 <b>Since</b> 3.12.0<br>
 </div>
@@ -491,34 +491,34 @@ Tangent.  Argument is in radians.<br>
 
 <pre id="VALacos"><span class="keyword">let</span> acos: float =&gt; float;
 </pre><div class="info ">
-Arc cosine.  The argument must fall within the range <code class="code">[-1.0, 1.0]</code>.
+Arc cosine.  The argument must fall within the range <code class="code">[((-1.0), 1.0)]</code>.
     Result is in radians and is between <code class="code">0.0</code> and <code class="code">pi</code>.<br>
 </div>
 
 <pre id="VALasin"><span class="keyword">let</span> asin: float =&gt; float;
 </pre><div class="info ">
-Arc sine.  The argument must fall within the range <code class="code">[-1.0, 1.0]</code>.
-    Result is in radians and is between <code class="code">-pi/2</code> and <code class="code">pi/2</code>.<br>
+Arc sine.  The argument must fall within the range <code class="code">[((-1.0), 1.0)]</code>.
+    Result is in radians and is between <code class="code">- pi / 2</code> and <code class="code">pi / 2</code>.<br>
 </div>
 
 <pre id="VALatan"><span class="keyword">let</span> atan: float =&gt; float;
 </pre><div class="info ">
 Arc tangent.
-    Result is in radians and is between <code class="code">-pi/2</code> and <code class="code">pi/2</code>.<br>
+    Result is in radians and is between <code class="code">- pi / 2</code> and <code class="code">pi / 2</code>.<br>
 </div>
 
 <pre id="VALatan2"><span class="keyword">let</span> atan2: (float, float) =&gt; float;
 </pre><div class="info ">
-<code class="code">atan2 y x</code> returns the arc tangent of <code class="code">y /. x</code>.  The signs of <code class="code">x</code>
+<code class="code">atan2(y, x)</code> returns the arc tangent of <code class="code">y /. x</code>.  The signs of <code class="code">x</code>
     and <code class="code">y</code> are used to determine the quadrant of the result.
-    Result is in radians and is between <code class="code">-pi</code> and <code class="code">pi</code>.<br>
+    Result is in radians and is between <code class="code">- pi</code> and <code class="code">pi</code>.<br>
 </div>
 
 <pre id="VALhypot"><span class="keyword">let</span> hypot: (float, float) =&gt; float;
 </pre><div class="info ">
-<code class="code">hypot x y</code> returns <code class="code">sqrt(x *. x + y *. y)</code>, that is, the length
+<code class="code">hypot(x, y)</code> returns <code class="code">sqrt(x *. x + y *. y)</code>, that is, the length
   of the hypotenuse of a right-angled triangle with sides of length
-  <code class="code">x</code> and <code class="code">y</code>, or, equivalently, the distance of the point <code class="code">(x,y)</code>
+  <code class="code">x</code> and <code class="code">y</code>, or, equivalently, the distance of the point <code class="code">(x, y)</code>
   to origin.<br>
 <b>Since</b> 4.00.0<br>
 </div>
@@ -541,26 +541,26 @@ Hyperbolic tangent.  Argument is in radians.<br>
 <pre id="VALceil"><span class="keyword">let</span> ceil: float =&gt; float;
 </pre><div class="info ">
 Round above to an integer value.
-    <code class="code">ceil f</code> returns the least integer value greater than or equal to <code class="code">f</code>.
+    <code class="code">ceil(f)</code> returns the least integer value greater than or equal to <code class="code">f</code>.
     The result is returned as a float.<br>
 </div>
 
 <pre id="VALfloor"><span class="keyword">let</span> floor: float =&gt; float;
 </pre><div class="info ">
 Round below to an integer value.
-    <code class="code">floor f</code> returns the greatest integer value less than or
+    <code class="code">floor(f)</code> returns the greatest integer value less than or
     equal to <code class="code">f</code>.
     The result is returned as a float.<br>
 </div>
 
 <pre id="VALabs_float"><span class="keyword">let</span> abs_float: float =&gt; float;
 </pre><div class="info ">
-<code class="code">abs_float f</code> returns the absolute value of <code class="code">f</code>.<br>
+<code class="code">abs_float(f)</code> returns the absolute value of <code class="code">f</code>.<br>
 </div>
 
 <pre id="VALcopysign"><span class="keyword">let</span> copysign: (float, float) =&gt; float;
 </pre><div class="info ">
-<code class="code">copysign x y</code> returns a float whose absolute value is that of <code class="code">x</code>
+<code class="code">copysign(x, y)</code> returns a float whose absolute value is that of <code class="code">x</code>
   and whose sign is that of <code class="code">y</code>.  If <code class="code">x</code> is <code class="code">nan</code>, returns <code class="code">nan</code>.
   If <code class="code">y</code> is <code class="code">nan</code>, returns either <code class="code">x</code> or <code class="code">-. x</code>, but it is not
   specified which.<br>
@@ -569,28 +569,28 @@ Round below to an integer value.
 
 <pre id="VALmod_float"><span class="keyword">let</span> mod_float: (float, float) =&gt; float;
 </pre><div class="info ">
-<code class="code">mod_float a b</code> returns the remainder of <code class="code">a</code> with respect to
+<code class="code">mod_float(a, b)</code> returns the remainder of <code class="code">a</code> with respect to
    <code class="code">b</code>.  The returned value is <code class="code">a -. n *. b</code>, where <code class="code">n</code>
    is the quotient <code class="code">a /. b</code> rounded towards zero to an integer.<br>
 </div>
 
 <pre id="VALfrexp"><span class="keyword">let</span> frexp: float =&gt; (float, int);
 </pre><div class="info ">
-<code class="code">frexp f</code> returns the pair of the significant
+<code class="code">frexp(f)</code> returns the pair of the significant
    and the exponent of <code class="code">f</code>.  When <code class="code">f</code> is zero, the
    significant <code class="code">x</code> and the exponent <code class="code">n</code> of <code class="code">f</code> are equal to
    zero.  When <code class="code">f</code> is non-zero, they are defined by
-   <code class="code">f = x *. 2 ** n</code> and <code class="code">0.5 &lt;= x &lt; 1.0</code>.<br>
+   <code class="code">f == x *. (2 ** n)</code> and <code class="code">0.5 &lt;= x &lt; 1.0</code>.<br>
 </div>
 
 <pre id="VALldexp"><span class="keyword">let</span> ldexp: (float, int) =&gt; float;
 </pre><div class="info ">
-<code class="code">ldexp x n</code> returns <code class="code">x *. 2 ** n</code>.<br>
+<code class="code">ldexp(x, n)</code> returns <code class="code">x *. (2 ** n)</code>.<br>
 </div>
 
 <pre id="VALmodf"><span class="keyword">let</span> modf: float =&gt; (float, float);
 </pre><div class="info ">
-<code class="code">modf f</code> returns the pair of the fractional and integral
+<code class="code">modf(f)</code> returns the pair of the fractional and integral
    part of <code class="code">f</code>.<br>
 </div>
 
@@ -739,7 +739,7 @@ Return the ASCII code of the argument.<br>
 <pre id="VALchar_of_int"><span class="keyword">let</span> char_of_int: int =&gt; char;
 </pre><div class="info ">
 Return the character with the given ASCII code.
-   Raise <code class="code">Invalid_argument &quot;char_of_int&quot;</code> if the argument is
+   Raise <code class="code">Invalid_argument(&quot;char_of_int&quot;)</code> if the argument is
    outside the range 0--255.<br>
 </div>
 <br>
@@ -748,10 +748,13 @@ Return the character with the given ASCII code.
 <pre id="VALignore"><span class="keyword">let</span> ignore: &apos;a =&gt; unit;
 </pre><div class="info ">
 Discard the value of its argument and return <code class="code">()</code>.
-   For instance, <code class="code">ignore(f x)</code> discards the result of
+   For instance, <code class="code">ignore(f(x))</code> discards the result of
    the side-effecting function <code class="code">f</code>.  It is equivalent to
-   <code class="code">f x; ()</code>, except that the latter may generate a
-   compiler warning; writing <code class="code">ignore(f x)</code> instead
+   <code class="code">{
+  f(x);
+  ()
+}</code>, except that the latter may generate a
+   compiler warning; writing <code class="code">ignore(f(x))</code> instead
    avoids the warning.<br>
 </div>
 <br>
@@ -766,7 +769,7 @@ Return the string representation of a boolean. As the returned values
 <pre id="VALbool_of_string"><span class="keyword">let</span> bool_of_string: string =&gt; bool;
 </pre><div class="info ">
 Convert the given string to a boolean.
-   Raise <code class="code">Invalid_argument &quot;bool_of_string&quot;</code> if the string is not
+   Raise <code class="code">Invalid_argument(&quot;bool_of_string&quot;)</code> if the string is not
    <code class="code">&quot;true&quot;</code> or <code class="code">&quot;false&quot;</code>.<br>
 </div>
 
@@ -779,9 +782,9 @@ Return the string representation of an integer, in decimal.<br>
 </pre><div class="info ">
 Convert the given string to an integer.
    The string is read in decimal (by default) or in hexadecimal (if it
-   begins with <code class="code">0x</code> or <code class="code">0X</code>), octal (if it begins with <code class="code">0o</code> or <code class="code">0O</code>),
-   or binary (if it begins with <code class="code">0b</code> or <code class="code">0B</code>).
-   Raise <code class="code">Failure &quot;int_of_string&quot;</code> if the given string is not
+   begins with <code class="code">0(x)</code> or <code class="code">0(X)</code>), octal (if it begins with <code class="code">0(o)</code> or <code class="code">0(O)</code>),
+   or binary (if it begins with <code class="code">0(b)</code> or <code class="code">0(B)</code>).
+   Raise <code class="code">Failure(&quot;int_of_string&quot;)</code> if the given string is not
    a valid representation of an integer, or if the integer represented
    exceeds the range of integers representable in type <code class="code">int</code>.<br>
 </div>
@@ -793,7 +796,7 @@ Return the string representation of a floating-point number.<br>
 
 <pre id="VALfloat_of_string"><span class="keyword">let</span> float_of_string: string =&gt; float;
 </pre><div class="info ">
-Convert the given string to a float.  Raise <code class="code">Failure &quot;float_of_string&quot;</code>
+Convert the given string to a float.  Raise <code class="code">Failure(&quot;float_of_string&quot;)</code>
    if the given string is not a valid representation of a float.<br>
 </div>
 <br>
@@ -945,7 +948,7 @@ Flush standard output, then read characters from standard input
 <pre id="VALread_int"><span class="keyword">let</span> read_int: unit =&gt; int;
 </pre><div class="info ">
 Flush standard output, then read one line from standard input
-   and convert it to an integer. Raise <code class="code">Failure &quot;int_of_string&quot;</code>
+   and convert it to an integer. Raise <code class="code">Failure(&quot;int_of_string&quot;)</code>
    if the line read is not a valid representation of an integer.<br>
 </div>
 
@@ -1075,7 +1078,7 @@ Same as <a href="Pervasives.html#VALopen_out"><code class="code">Pervasives.open
 
 <pre id="VALopen_out_gen"><span class="keyword">let</span> open_out_gen: (list(open_flag), int, string) =&gt; out_channel;
 </pre><div class="info ">
-<code class="code">open_out_gen mode perm filename</code> opens the named file for writing,
+<code class="code">open_out_gen(mode, perm, filename)</code> opens the named file for writing,
    as described above. The extra argument <code class="code">mode</code>
    specify the opening mode. The extra argument <code class="code">perm</code> specifies
    the file permissions, in case the file must be created.
@@ -1114,9 +1117,9 @@ Write the byte sequence on the given output channel.<br>
 
 <pre id="VALoutput"><span class="keyword">let</span> output: (out_channel, bytes, int, int) =&gt; unit;
 </pre><div class="info ">
-<code class="code">output oc buf pos len</code> writes <code class="code">len</code> characters from byte sequence <code class="code">buf</code>,
+<code class="code">output(oc, buf, pos, len)</code> writes <code class="code">len</code> characters from byte sequence <code class="code">buf</code>,
    starting at offset <code class="code">pos</code>, to the given output channel <code class="code">oc</code>.
-   Raise <code class="code">Invalid_argument &quot;output&quot;</code> if <code class="code">pos</code> and <code class="code">len</code> do not
+   Raise <code class="code">Invalid_argument(&quot;output&quot;)</code> if <code class="code">pos</code> and <code class="code">len</code> do not
    designate a valid range of <code class="code">buf</code>.<br>
 </div>
 
@@ -1156,7 +1159,7 @@ Write the representation of a structured value of any type
 
 <pre id="VALseek_out"><span class="keyword">let</span> seek_out: (out_channel, int) =&gt; unit;
 </pre><div class="info ">
-<code class="code">seek_out chan pos</code> sets the current writing position to <code class="code">pos</code>
+<code class="code">seek_out(chan, pos)</code> sets the current writing position to <code class="code">pos</code>
    for channel <code class="code">chan</code>. This works only for regular files. On
    files of other kinds (such as terminals, pipes and sockets),
    the behavior is unspecified.<br>
@@ -1193,9 +1196,9 @@ Same as <code class="code">close_out</code>, but ignore all errors.<br>
 
 <pre id="VALset_binary_mode_out"><span class="keyword">let</span> set_binary_mode_out: (out_channel, bool) =&gt; unit;
 </pre><div class="info ">
-<code class="code">set_binary_mode_out oc true</code> sets the channel <code class="code">oc</code> to binary
+<code class="code">set_binary_mode_out(oc, true)</code> sets the channel <code class="code">oc</code> to binary
    mode: no translations take place during output.
-   <code class="code">set_binary_mode_out oc false</code> sets the channel <code class="code">oc</code> to text
+   <code class="code">set_binary_mode_out(oc, false)</code> sets the channel <code class="code">oc</code> to text
    mode: depending on the operating system, some translations
    may take place during output.  For instance, under Windows,
    end-of-lines will be translated from <code class="code">\n</code> to <code class="code">\r\n</code>.
@@ -1221,7 +1224,7 @@ Same as <a href="Pervasives.html#VALopen_in"><code class="code">Pervasives.open_
 
 <pre id="VALopen_in_gen"><span class="keyword">let</span> open_in_gen: (list(open_flag), int, string) =&gt; in_channel;
 </pre><div class="info ">
-<code class="code">open_in_gen mode perm filename</code> opens the named file for reading,
+<code class="code">open_in_gen(mode, perm, filename)</code> opens the named file for reading,
    as described above. The extra arguments
    <code class="code">mode</code> and <code class="code">perm</code> specify the opening mode and file permissions.
    <a href="Pervasives.html#VALopen_in"><code class="code">Pervasives.open_in</code></a> and <a href="Pervasives.html#VALopen_in_bin"><code class="code">Pervasives.open_in_bin</code></a> are special
@@ -1245,7 +1248,7 @@ Read characters from the given input channel, until a
 
 <pre id="VALinput"><span class="keyword">let</span> input: (in_channel, bytes, int, int) =&gt; int;
 </pre><div class="info ">
-<code class="code">input ic buf pos len</code> reads up to <code class="code">len</code> characters from
+<code class="code">input(ic, buf, pos, len)</code> reads up to <code class="code">len</code> characters from
    the given channel <code class="code">ic</code>, storing them in byte sequence <code class="code">buf</code>, starting at
    character number <code class="code">pos</code>.
    It returns the actual number of characters read, between 0 and
@@ -1258,23 +1261,23 @@ Read characters from the given input channel, until a
    <code class="code">input</code> must be called again to read the remaining characters,
    if desired.  (See also <a href="Pervasives.html#VALreally_input"><code class="code">Pervasives.really_input</code></a> for reading
    exactly <code class="code">len</code> characters.)
-   Exception <code class="code">Invalid_argument &quot;input&quot;</code> is raised if <code class="code">pos</code> and <code class="code">len</code>
+   Exception <code class="code">Invalid_argument(&quot;input&quot;)</code> is raised if <code class="code">pos</code> and <code class="code">len</code>
    do not designate a valid range of <code class="code">buf</code>.<br>
 </div>
 
 <pre id="VALreally_input"><span class="keyword">let</span> really_input: (in_channel, bytes, int, int) =&gt; unit;
 </pre><div class="info ">
-<code class="code">really_input ic buf pos len</code> reads <code class="code">len</code> characters from channel <code class="code">ic</code>,
+<code class="code">really_input(ic, buf, pos, len)</code> reads <code class="code">len</code> characters from channel <code class="code">ic</code>,
    storing them in byte sequence <code class="code">buf</code>, starting at character number <code class="code">pos</code>.
    Raise <code class="code">End_of_file</code> if the end of file is reached before <code class="code">len</code>
    characters have been read.
-   Raise <code class="code">Invalid_argument &quot;really_input&quot;</code> if
+   Raise <code class="code">Invalid_argument(&quot;really_input&quot;)</code> if
    <code class="code">pos</code> and <code class="code">len</code> do not designate a valid range of <code class="code">buf</code>.<br>
 </div>
 
 <pre id="VALreally_input_string"><span class="keyword">let</span> really_input_string: (in_channel, int) =&gt; string;
 </pre><div class="info ">
-<code class="code">really_input_string ic len</code> reads <code class="code">len</code> characters from channel <code class="code">ic</code>
+<code class="code">really_input_string(ic, len)</code> reads <code class="code">len</code> characters from channel <code class="code">ic</code>
    and returns them in a new string.
    Raise <code class="code">End_of_file</code> if the end of file is reached before <code class="code">len</code>
    characters have been read.<br>
@@ -1307,7 +1310,7 @@ Read the representation of a structured value, as produced
 
 <pre id="VALseek_in"><span class="keyword">let</span> seek_in: (in_channel, int) =&gt; unit;
 </pre><div class="info ">
-<code class="code">seek_in chan pos</code> sets the current reading position to <code class="code">pos</code>
+<code class="code">seek_in(chan, pos)</code> sets the current reading position to <code class="code">pos</code>
    for channel <code class="code">chan</code>. This works only for regular files. On
    files of other kinds, the behavior is unspecified.<br>
 </div>
@@ -1342,9 +1345,9 @@ Same as <code class="code">close_in</code>, but ignore all errors.<br>
 
 <pre id="VALset_binary_mode_in"><span class="keyword">let</span> set_binary_mode_in: (in_channel, bool) =&gt; unit;
 </pre><div class="info ">
-<code class="code">set_binary_mode_in ic true</code> sets the channel <code class="code">ic</code> to binary
+<code class="code">set_binary_mode_in(ic, true)</code> sets the channel <code class="code">ic</code> to binary
    mode: no translations take place during input.
-   <code class="code">set_binary_mode_out ic false</code> sets the channel <code class="code">ic</code> to text
+   <code class="code">set_binary_mode_out(ic, false)</code> sets the channel <code class="code">ic</code> to text
    mode: depending on the operating system, some translations
    may take place during input.  For instance, under Windows,
    end-of-lines will be translated from <code class="code">\r\n</code> to <code class="code">\n</code>.
@@ -1383,26 +1386,26 @@ Return a fresh reference containing the given value.<br>
 
 <pre id="VAL(!)"><span class="keyword">let</span> (^): ref(&apos;a) =&gt; &apos;a;
 </pre><div class="info ">
-<code class="code">!r</code> returns the current contents of reference <code class="code">r</code>.
-   Equivalent to <code class="code">fun r -&gt; r.contents</code>.<br>
+<code class="code">r^</code> returns the current contents of reference <code class="code">r</code>.
+   Equivalent to <code class="code">(r) =&gt; r.contents</code>.<br>
 </div>
 
 <pre id="VAL(:=)"><span class="keyword">let</span> (:=): (ref(&apos;a), &apos;a) =&gt; unit;
 </pre><div class="info ">
 <code class="code">r := a</code> stores the value of <code class="code">a</code> in reference <code class="code">r</code>.
-   Equivalent to <code class="code">fun r v -&gt; r.contents &lt;- v</code>.<br>
+   Equivalent to <code class="code">(r, v) =&gt; r.contents = v</code>.<br>
 </div>
 
 <pre id="VALincr"><span class="keyword">let</span> incr: ref(int) =&gt; unit;
 </pre><div class="info ">
 Increment the integer contained in the given reference.
-   Equivalent to <code class="code">fun r -&gt; r := succ !r</code>.<br>
+   Equivalent to <code class="code">(r) =&gt; r := succ(r^)</code>.<br>
 </div>
 
 <pre id="VALdecr"><span class="keyword">let</span> decr: ref(int) =&gt; unit;
 </pre><div class="info ">
 Decrement the integer contained in the given reference.
-   Equivalent to <code class="code">fun r -&gt; r := pred !r</code>.<br>
+   Equivalent to <code class="code">(r) =&gt; r := pred(r^)</code>.<br>
 </div>
 <br>
 <h6 id="6_Operationsonformatstrings">Operations on format strings</h6><br>
@@ -1519,8 +1522,7 @@ Format strings have a general and highly polymorphic type
 </ul>
 <br>
 
-<pre id="TYPEformat6"><span class="keyword">type</span> format6(&apos;a, &apos;b, &apos;c, &apos;d, &apos;e, &apos;f) =
-  CamlinternalFormatBasics.format6(&apos;a, &apos;b, &apos;c, &apos;d, &apos;e, &apos;f);
+<pre id="TYPEformat6"><span class="keyword">type</span> format6(&apos;a, &apos;b, &apos;c, &apos;d, &apos;e, &apos;f) = CamlinternalFormatBasics.format6(&apos;a, &apos;b, &apos;c, &apos;d, &apos;e, &apos;f);
 </pre>
 
 
@@ -1537,10 +1539,9 @@ Format strings have a general and highly polymorphic type
 Converts a format string into a string.<br>
 </div>
 
-<pre id="VALformat_of_string"><span class="keyword">let</span> format_of_string:
-  format6(&apos;a, &apos;b, &apos;c, &apos;d, &apos;e, &apos;f) =&gt; format6(&apos;a, &apos;b, &apos;c, &apos;d, &apos;e, &apos;f);
+<pre id="VALformat_of_string"><span class="keyword">let</span> format_of_string: format6(&apos;a, &apos;b, &apos;c, &apos;d, &apos;e, &apos;f) =&gt; format6(&apos;a, &apos;b, &apos;c, &apos;d, &apos;e, &apos;f);
 </pre><div class="info ">
-<code class="code">format_of_string s</code> returns a format string read from the string
+<code class="code">format_of_string(s)</code> returns a format string read from the string
     literal <code class="code">s</code>.
     Note: <code class="code">format_of_string</code> can not convert a string argument that is not a
     literal. If you need this functionality, use the more general
@@ -1566,8 +1567,8 @@ Terminate the process, returning the given status code
    to the operating system: usually 0 to indicate no errors,
    and a small positive integer to indicate failure.
    All open output channels are flushed with <code class="code">flush_all</code>.
-   An implicit <code class="code">exit 0</code> is performed each time a program
-   terminates normally.  An implicit <code class="code">exit 2</code> is performed if the program
+   An implicit <code class="code">exit(0)</code> is performed each time a program
+   terminates normally.  An implicit <code class="code">exit(2)</code> is performed if the program
    terminates early because of an uncaught exception.<br>
 </div>
 

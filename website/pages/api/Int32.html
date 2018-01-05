@@ -68,19 +68,19 @@ Integer division.  Raise <code class="code">Division_by_zero</code> if the secon
 <pre id="VALrem"><span class="keyword">let</span> rem: (int32, int32) =&gt; int32;
 </pre><div class="info ">
 Integer remainder.  If <code class="code">y</code> is not zero, the result
-   of <code class="code">Int32.rem x y</code> satisfies the following property:
-   <code class="code">x = Int32.add (Int32.mul (Int32.div x y) y) (Int32.rem x y)</code>.
-   If <code class="code">y = 0</code>, <code class="code">Int32.rem x y</code> raises <code class="code">Division_by_zero</code>.<br>
+   of <code class="code">Int32.rem(x, y)</code> satisfies the following property:
+   <code class="code">x == Int32.add(Int32.mul(Int32.div(x, y), y), Int32.rem(x, y))</code>.
+   If <code class="code">y == 0</code>, <code class="code">Int32.rem(x, y)</code> raises <code class="code">Division_by_zero</code>.<br>
 </div>
 
 <pre id="VALsucc"><span class="keyword">let</span> succ: int32 =&gt; int32;
 </pre><div class="info ">
-Successor.  <code class="code">Int32.succ x</code> is <code class="code">Int32.add x Int32.one</code>.<br>
+Successor.  <code class="code">Int32.succ(x)</code> is <code class="code">Int32.add(x, Int32.one)</code>.<br>
 </div>
 
 <pre id="VALpred"><span class="keyword">let</span> pred: int32 =&gt; int32;
 </pre><div class="info ">
-Predecessor.  <code class="code">Int32.pred x</code> is <code class="code">Int32.sub x Int32.one</code>.<br>
+Predecessor.  <code class="code">Int32.pred(x)</code> is <code class="code">Int32.sub(x, Int32.one)</code>.<br>
 </div>
 
 <pre id="VALabs"><span class="keyword">let</span> abs: int32 =&gt; int32;
@@ -120,13 +120,13 @@ Bitwise logical negation<br>
 
 <pre id="VALshift_left"><span class="keyword">let</span> shift_left: (int32, int) =&gt; int32;
 </pre><div class="info ">
-<code class="code">Int32.shift_left x y</code> shifts <code class="code">x</code> to the left by <code class="code">y</code> bits.
+<code class="code">Int32.shift_left(x, y)</code> shifts <code class="code">x</code> to the left by <code class="code">y</code> bits.
    The result is unspecified if <code class="code">y &lt; 0</code> or <code class="code">y &gt;= 32</code>.<br>
 </div>
 
 <pre id="VALshift_right"><span class="keyword">let</span> shift_right: (int32, int) =&gt; int32;
 </pre><div class="info ">
-<code class="code">Int32.shift_right x y</code> shifts <code class="code">x</code> to the right by <code class="code">y</code> bits.
+<code class="code">Int32.shift_right(x, y)</code> shifts <code class="code">x</code> to the right by <code class="code">y</code> bits.
    This is an arithmetic shift: the sign bit of <code class="code">x</code> is replicated
    and inserted in the vacated bits.
    The result is unspecified if <code class="code">y &lt; 0</code> or <code class="code">y &gt;= 32</code>.<br>
@@ -134,7 +134,7 @@ Bitwise logical negation<br>
 
 <pre id="VALshift_right_logical"><span class="keyword">let</span> shift_right_logical: (int32, int) =&gt; int32;
 </pre><div class="info ">
-<code class="code">Int32.shift_right_logical x y</code> shifts <code class="code">x</code> to the right by <code class="code">y</code> bits.
+<code class="code">Int32.shift_right_logical(x, y)</code> shifts <code class="code">x</code> to the right by <code class="code">y</code> bits.
    This is a logical shift: zeroes are inserted in the vacated bits
    regardless of the sign of <code class="code">x</code>.
    The result is unspecified if <code class="code">y &lt; 0</code> or <code class="code">y &gt;= 32</code>.<br>
@@ -172,9 +172,9 @@ Convert the given 32-bit integer to a floating-point number.<br>
 </pre><div class="info ">
 Convert the given string to a 32-bit integer.
    The string is read in decimal (by default) or in hexadecimal,
-   octal or binary if the string begins with <code class="code">0x</code>, <code class="code">0o</code> or <code class="code">0b</code>
+   octal or binary if the string begins with <code class="code">0(x)</code>, <code class="code">0(o)</code> or <code class="code">0(b)</code>
    respectively.
-   Raise <code class="code">Failure &quot;int_of_string&quot;</code> if the given string is not
+   Raise <code class="code">Failure(&quot;int_of_string&quot;)</code> if the given string is not
    a valid representation of an integer, or if the integer represented
    exceeds the range of integers representable in type <code class="code">int32</code>.<br>
 </div>

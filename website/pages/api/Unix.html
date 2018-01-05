@@ -733,7 +733,7 @@ Return a string describing the given error code.<br>
 
 <pre id="VALhandle_unix_error"><span class="keyword">let</span> handle_unix_error: (&apos;a =&gt; &apos;b, &apos;a) =&gt; &apos;b;
 </pre><div class="info ">
-<code class="code">handle_unix_error f x</code> applies <code class="code">f</code> to <code class="code">x</code> and returns the result.
+<code class="code">handle_unix_error(f, x)</code> applies <code class="code">f</code> to <code class="code">x</code> and returns the result.
    If the exception <code class="code">Unix_error</code> is raised, it prints a message
    describing the error and exits with code 2.<br>
 </div>
@@ -755,7 +755,7 @@ Return the value associated to a variable in the process
 
 <pre id="VALputenv"><span class="keyword">let</span> putenv: (string, string) =&gt; unit;
 </pre><div class="info ">
-<code class="code">Unix.putenv name value</code> sets the value associated to a
+<code class="code">Unix.putenv(name, value)</code> sets the value associated to a
    variable in the process environment.
    <code class="code">name</code> is the name of the environment variable,
    and <code class="code">value</code> its new associated value.<br>
@@ -835,7 +835,7 @@ Flags for <a href="Unix.html#VALwaitpid"><code class="code">Unix.waitpid</code><
 
 <pre id="VALexecv"><span class="keyword">let</span> execv: (string, array(string)) =&gt; &apos;a;
 </pre><div class="info ">
-<code class="code">execv prog args</code> execute the program in file <code class="code">prog</code>, with
+<code class="code">execv(prog, args)</code> execute the program in file <code class="code">prog</code>, with
    the arguments <code class="code">args</code>, and the current process environment.
    These <code class="code">execv*</code> functions never return: on success, the current
    program is replaced by the new one;
@@ -875,7 +875,7 @@ Wait until one of the children processes die, and return its pid
 <pre id="VALwaitpid"><span class="keyword">let</span> waitpid: (list(wait_flag), int) =&gt; (int, process_status);
 </pre><div class="info ">
 Same as <a href="Unix.html#VALwait"><code class="code">Unix.wait</code></a>, but waits for the child process whose pid is given.
-   A pid of <code class="code">-1</code> means wait for any child.
+   A pid of <code class="code">(-1)</code> means wait for any child.
    A pid of <code class="code">0</code> means wait for any child in the same process group
    as the current process.
    Negative pid arguments represent process groups.
@@ -889,7 +889,7 @@ Same as <a href="Unix.html#VALwait"><code class="code">Unix.wait</code></a>, but
 Execute the given command, wait until it terminates, and return
    its termination status. The string is interpreted by the shell
    <code class="code">/bin/sh</code> and therefore can contain redirections, quotes, variables,
-   etc. The result <code class="code">WEXITED 127</code> indicates that the shell couldn&apos;t
+   etc. The result <code class="code">WEXITED(127)</code> indicates that the shell couldn&apos;t
    be executed.<br>
 </div>
 
@@ -1089,7 +1089,7 @@ The flags to <a href="Unix.html#VALopenfile"><code class="code">Unix.openfile</c
 <pre id="TYPEfile_perm"><span class="keyword">type</span> file_perm = int;
 </pre>
 <div class="info ">
-The type of file access rights, e.g. <code class="code">0o640</code> is read and write for user,
+The type of file access rights, e.g. <code class="code">416</code> is read and write for user,
     read for group, none for others<br>
 </div>
 
@@ -1108,14 +1108,14 @@ Close a file descriptor.<br>
 
 <pre id="VALread"><span class="keyword">let</span> read: (file_descr, bytes, int, int) =&gt; int;
 </pre><div class="info ">
-<code class="code">read fd buff ofs len</code> reads <code class="code">len</code> bytes from descriptor <code class="code">fd</code>,
+<code class="code">read(fd, buff, ofs, len)</code> reads <code class="code">len</code> bytes from descriptor <code class="code">fd</code>,
     storing them in byte sequence <code class="code">buff</code>, starting at position <code class="code">ofs</code> in
     <code class="code">buff</code>. Return the number of bytes actually read.<br>
 </div>
 
 <pre id="VALwrite"><span class="keyword">let</span> write: (file_descr, bytes, int, int) =&gt; int;
 </pre><div class="info ">
-<code class="code">write fd buff ofs len</code> writes <code class="code">len</code> bytes to descriptor <code class="code">fd</code>,
+<code class="code">write(fd, buff, ofs, len)</code> writes <code class="code">len</code> bytes to descriptor <code class="code">fd</code>,
     taking them from byte sequence <code class="code">buff</code>, starting at position <code class="code">ofs</code>
     in <code class="code">buff</code>. Return the number of bytes actually written.  <code class="code">write</code>
     repeats the writing operation until all bytes have been written or
@@ -1147,14 +1147,14 @@ Same as <code class="code">single_write</code>, but take the data from a string 
 </pre><div class="info ">
 Create an input channel reading from the given descriptor.
    The channel is initially in binary mode; use
-   <code class="code">set_binary_mode_in ic false</code> if text mode is desired.<br>
+   <code class="code">set_binary_mode_in(ic, false)</code> if text mode is desired.<br>
 </div>
 
 <pre id="VALout_channel_of_descr"><span class="keyword">let</span> out_channel_of_descr: file_descr =&gt; Pervasives.out_channel;
 </pre><div class="info ">
 Create an output channel writing on the given descriptor.
    The channel is initially in binary mode; use
-   <code class="code">set_binary_mode_out oc false</code> if text mode is desired.<br>
+   <code class="code">set_binary_mode_out(oc, false)</code> if text mode is desired.<br>
 </div>
 
 <pre id="VALdescr_of_in_channel"><span class="keyword">let</span> descr_of_in_channel: Pervasives.in_channel =&gt; file_descr;
@@ -1470,7 +1470,7 @@ Removes the named file<br>
 
 <pre id="VALlink"><span class="keyword">let</span> link: (string, string) =&gt; unit;
 </pre><div class="info ">
-<code class="code">link source dest</code> creates a hard link named <code class="code">dest</code> to the file
+<code class="code">link(source, dest)</code> creates a hard link named <code class="code">dest</code> to the file
    named <code class="code">source</code>.<br>
 </div>
 <br>
@@ -1565,7 +1565,7 @@ Return a new file descriptor referencing the same file as
 
 <pre id="VALdup2"><span class="keyword">let</span> dup2: (file_descr, file_descr) =&gt; unit;
 </pre><div class="info ">
-<code class="code">dup2 fd1 fd2</code> duplicates <code class="code">fd1</code> to <code class="code">fd2</code>, closing <code class="code">fd2</code> if already
+<code class="code">dup2(fd1, fd2)</code> duplicates <code class="code">fd1</code> to <code class="code">fd2</code>, closing <code class="code">fd2</code> if already
    opened.<br>
 </div>
 
@@ -1670,10 +1670,9 @@ Create a named pipe with the given permissions (see <a href="Unix.html#VALumask"
 <br>
 <h6 id="6_Highlevelprocessandredirectionmanagement">High-level process and redirection management</h6><br>
 
-<pre id="VALcreate_process"><span class="keyword">let</span> create_process:
-  (string, array(string), file_descr, file_descr, file_descr) =&gt; int;
+<pre id="VALcreate_process"><span class="keyword">let</span> create_process: (string, array(string), file_descr, file_descr, file_descr) =&gt; int;
 </pre><div class="info ">
-<code class="code">create_process prog args new_stdin new_stdout new_stderr</code>
+<code class="code">create_process(prog, args, new_stdin, new_stdout, new_stderr)</code>
    forks a new process that executes the program
    in file <code class="code">prog</code>, with arguments <code class="code">args</code>. The pid of the new
    process is returned immediately; the new process executes
@@ -1688,10 +1687,9 @@ Create a named pipe with the given permissions (see <a href="Unix.html#VALumask"
 </div>
 
 <pre id="VALcreate_process_env"><span class="keyword">let</span> create_process_env:
-  (string, array(string), array(string), file_descr, file_descr, file_descr) =&gt;
-  int;
+  (string, array(string), array(string), file_descr, file_descr, file_descr) =&gt; int;
 </pre><div class="info ">
-<code class="code">create_process_env prog args env new_stdin new_stdout new_stderr</code>
+<code class="code">create_process_env(prog, args, env, new_stdin, new_stdout, new_stderr)</code>
    works as <a href="Unix.html#VALcreate_process"><code class="code">Unix.create_process</code></a>, except that the extra argument
    <code class="code">env</code> specifies the environment passed to the program.<br>
 </div>
@@ -1724,8 +1722,7 @@ Same as <a href="Unix.html#VALopen_process_out"><code class="code">Unix.open_pro
 </div>
 
 <pre id="VALopen_process_full"><span class="keyword">let</span> open_process_full:
-  (string, array(string)) =&gt;
-  (Pervasives.in_channel, Pervasives.out_channel, Pervasives.in_channel);
+  (string, array(string)) =&gt; (Pervasives.in_channel, Pervasives.out_channel, Pervasives.in_channel);
 </pre><div class="info ">
 Similar to <a href="Unix.html#VALopen_process"><code class="code">Unix.open_process</code></a>, but the second argument specifies
    the environment passed to the command.  The result is a triple
@@ -1747,8 +1744,7 @@ Close channels opened by <a href="Unix.html#VALopen_process_out"><code class="co
    and return its termination status.<br>
 </div>
 
-<pre id="VALclose_process"><span class="keyword">let</span> close_process:
-  ((Pervasives.in_channel, Pervasives.out_channel)) =&gt; process_status;
+<pre id="VALclose_process"><span class="keyword">let</span> close_process: ((Pervasives.in_channel, Pervasives.out_channel)) =&gt; process_status;
 </pre><div class="info ">
 Close channels opened by <a href="Unix.html#VALopen_process"><code class="code">Unix.open_process</code></a>,
    wait for the associated command to terminate,
@@ -1756,8 +1752,7 @@ Close channels opened by <a href="Unix.html#VALopen_process"><code class="code">
 </div>
 
 <pre id="VALclose_process_full"><span class="keyword">let</span> close_process_full:
-  ((Pervasives.in_channel, Pervasives.out_channel, Pervasives.in_channel)) =&gt;
-  process_status;
+  ((Pervasives.in_channel, Pervasives.out_channel, Pervasives.in_channel)) =&gt; process_status;
 </pre><div class="info ">
 Close channels opened by <a href="Unix.html#VALopen_process_full"><code class="code">Unix.open_process_full</code></a>,
    wait for the associated command to terminate,
@@ -1768,7 +1763,7 @@ Close channels opened by <a href="Unix.html#VALopen_process_full"><code class="c
 
 <pre id="VALsymlink"><span class="keyword">let</span> symlink: (string, string) =&gt; unit;
 </pre><div class="info ">
-<code class="code">symlink source dest</code> creates the file <code class="code">dest</code> as a symbolic link
+<code class="code">symlink(source, dest)</code> creates the file <code class="code">dest</code> as a symbolic link
    to the file <code class="code">source</code>.<br>
 </div>
 
@@ -1866,7 +1861,7 @@ Commands for <a href="Unix.html#VALlockf"><code class="code">Unix.lockf</code></
 
 <pre id="VALlockf"><span class="keyword">let</span> lockf: (file_descr, lock_command, int) =&gt; unit;
 </pre><div class="info ">
-<code class="code">lockf fd cmd size</code> puts a lock on a region of the file opened
+<code class="code">lockf(fd, cmd, size)</code> puts a lock on a region of the file opened
    as <code class="code">fd</code>. The region starts at the current read/write position for
    <code class="code">fd</code> (as set by <a href="Unix.html#VALlseek"><code class="code">Unix.lseek</code></a>), and extends <code class="code">size</code> bytes forward if
    <code class="code">size</code> is positive, <code class="code">size</code> bytes backwards if <code class="code">size</code> is negative,
@@ -1931,7 +1926,7 @@ Commands for <a href="Unix.html#VALlockf"><code class="code">Unix.lockf</code></
 
 <pre id="VALsigprocmask"><span class="keyword">let</span> sigprocmask: (sigprocmask_command, list(int)) =&gt; list(int);
 </pre><div class="info ">
-<code class="code">sigprocmask cmd sigs</code> changes the set of blocked signals.
+<code class="code">sigprocmask(cmd, sigs)</code> changes the set of blocked signals.
    If <code class="code">cmd</code> is <code class="code">SIG_SETMASK</code>, blocked signals are set to those in
    the list <code class="code">sigs</code>.
    If <code class="code">cmd</code> is <code class="code">SIG_BLOCK</code>, the signals in <code class="code">sigs</code> are added to
@@ -1948,7 +1943,7 @@ Return the set of blocked signals that are currently pending.<br>
 
 <pre id="VALsigsuspend"><span class="keyword">let</span> sigsuspend: list(int) =&gt; unit;
 </pre><div class="info ">
-<code class="code">sigsuspend sigs</code> atomically sets the blocked signals to <code class="code">sigs</code>
+<code class="code">sigsuspend(sigs)</code> atomically sets the blocked signals to <code class="code">sigs</code>
    and waits for a non-ignored, non-blocked signal to be delivered.
    On return, the blocked signals are reset to their initial value.<br>
 </div>
@@ -2238,10 +2233,9 @@ The type describing the status of an interval timer<br>
 Return the current status of the given interval timer.<br>
 </div>
 
-<pre id="VALsetitimer"><span class="keyword">let</span> setitimer:
-  (interval_timer, interval_timer_status) =&gt; interval_timer_status;
+<pre id="VALsetitimer"><span class="keyword">let</span> setitimer: (interval_timer, interval_timer_status) =&gt; interval_timer_status;
 </pre><div class="info ">
-<code class="code">setitimer t s</code> sets the interval timer <code class="code">t</code> and returns
+<code class="code">setitimer(t, s)</code> sets the interval timer <code class="code">t</code> and returns
    its previous status. The <code class="code">s</code> argument is interpreted as follows:
    <code class="code">s.it_value</code>, if nonzero, is the time to the next timer expiration;
    <code class="code">s.it_interval</code>, if nonzero, specifies a value to
@@ -2291,13 +2285,13 @@ Return the list of groups to which the user executing the process
 
 <pre id="VALsetgroups"><span class="keyword">let</span> setgroups: array(int) =&gt; unit;
 </pre><div class="info ">
-<code class="code">setgroups groups</code> sets the supplementary group IDs for the
+<code class="code">setgroups(groups)</code> sets the supplementary group IDs for the
       calling process. Appropriate privileges are required.<br>
 </div>
 
 <pre id="VALinitgroups"><span class="keyword">let</span> initgroups: (string, int) =&gt; unit;
 </pre><div class="info ">
-<code class="code">initgroups user group</code> initializes the group access list by
+<code class="code">initgroups(user, group)</code> initializes the group access list by
       reading the group database /etc/group and using all groups of
       which <code class="code">user</code> is a member. The additional group <code class="code">group</code> is also
       added to the list.<br>
@@ -2575,9 +2569,9 @@ The type of socket kinds, specifying the semantics of
 <td align="left" valign="top">
 <code>ADDR_INET of inet_addr * int</code></td>
 <td class="typefieldcomment" align="left" valign="top"><code>(*</code></td><td class="typefieldcomment" align="left" valign="top"><div class="info ">
-The type of socket addresses. <code class="code">ADDR_UNIX name</code> is a socket
+The type of socket addresses. <code class="code">ADDR_UNIX(name)</code> is a socket
    address in the Unix domain; <code class="code">name</code> is a file name in the file
-   system. <code class="code">ADDR_INET(addr,port)</code> is a socket address in the Internet
+   system. <code class="code">[@implicit_arity] ADDR_INET(addr, port)</code> is a socket address in the Internet
    domain; <code class="code">addr</code> is the Internet address of the machine, and
    <code class="code">port</code> is the port number.<br>
 </div>
@@ -2737,8 +2731,7 @@ Same as <code class="code">send</code>, but take the data from a string instead 
 Send data over an unconnected socket.<br>
 </div>
 
-<pre id="VALsendto_substring"><span class="keyword">let</span> sendto_substring:
-  (file_descr, string, int, int, list(msg_flag), sockaddr) =&gt; int;
+<pre id="VALsendto_substring"><span class="keyword">let</span> sendto_substring: (file_descr, string, int, int, list(msg_flag), sockaddr) =&gt; int;
 </pre><div class="info ">
 Same as <code class="code">sendto</code>, but take the data from a string instead of a
     byte sequence.<br>
@@ -2932,7 +2925,7 @@ Whether to linger on closed connections
 <div class="info ">
 The socket options that can be consulted with <a href="Unix.html#VALgetsockopt_optint"><code class="code">Unix.getsockopt_optint</code></a>
    and modified with <a href="Unix.html#VALsetsockopt_optint"><code class="code">Unix.setsockopt_optint</code></a>.  These options have a
-   value of type <code class="code">int option</code>, with <code class="code">None</code> meaning ``disabled&apos;&apos;.<br>
+   value of type <code class="code">int(option)</code>, with <code class="code">None</code> meaning ``disabled&apos;&apos;.<br>
 </div>
 
 
@@ -2990,13 +2983,13 @@ Same as <a href="Unix.html#VALsetsockopt"><code class="code">Unix.setsockopt</co
 <pre id="VALgetsockopt_optint"><span class="keyword">let</span> getsockopt_optint: (file_descr, socket_optint_option) =&gt; option(int);
 </pre><div class="info ">
 Same as <a href="Unix.html#VALgetsockopt"><code class="code">Unix.getsockopt</code></a> for a socket option whose value is an
-   <code class="code">int option</code>.<br>
+   <code class="code">int(option)</code>.<br>
 </div>
 
 <pre id="VALsetsockopt_optint"><span class="keyword">let</span> setsockopt_optint: (file_descr, socket_optint_option, option(int)) =&gt; unit;
 </pre><div class="info ">
 Same as <a href="Unix.html#VALsetsockopt"><code class="code">Unix.setsockopt</code></a> for a socket option whose value is an
-   <code class="code">int option</code>.<br>
+   <code class="code">int(option)</code>.<br>
 </div>
 
 <pre id="VALgetsockopt_float"><span class="keyword">let</span> getsockopt_float: (file_descr, socket_float_option) =&gt; float;
@@ -3019,8 +3012,7 @@ Return the error condition associated with the given socket,
 <br>
 <h6 id="6_Highlevelnetworkconnectionfunctions">High-level network connection functions</h6><br>
 
-<pre id="VALopen_connection"><span class="keyword">let</span> open_connection:
-  sockaddr =&gt; (Pervasives.in_channel, Pervasives.out_channel);
+<pre id="VALopen_connection"><span class="keyword">let</span> open_connection: sockaddr =&gt; (Pervasives.in_channel, Pervasives.out_channel);
 </pre><div class="info ">
 Connect to a server at the given address.
    Return a pair of buffered channels connected to the server.
@@ -3037,8 +3029,7 @@ Connect to a server at the given address.
    to free via <a href="Pervasives.html#VALclose_in"><code class="code">Pervasives.close_in</code></a>.<br>
 </div>
 
-<pre id="VALestablish_server"><span class="keyword">let</span> establish_server:
-  ((Pervasives.in_channel, Pervasives.out_channel) =&gt; unit, sockaddr) =&gt; unit;
+<pre id="VALestablish_server"><span class="keyword">let</span> establish_server: ((Pervasives.in_channel, Pervasives.out_channel) =&gt; unit, sockaddr) =&gt; unit;
 </pre><div class="info ">
 Establish a server on the given address.
    The function given as first argument is called for each connection
@@ -3321,7 +3312,7 @@ Options to <a href="Unix.html#VALgetaddrinfo"><code class="code">Unix.getaddrinf
 
 <pre id="VALgetaddrinfo"><span class="keyword">let</span> getaddrinfo: (string, string, list(getaddrinfo_option)) =&gt; list(addr_info);
 </pre><div class="info ">
-<code class="code">getaddrinfo host service opts</code> returns a list of <a href="Unix.html#TYPEaddr_info"><code class="code">Unix.addr_info</code></a>
+<code class="code">getaddrinfo(host, service, opts)</code> returns a list of <a href="Unix.html#TYPEaddr_info"><code class="code">Unix.addr_info</code></a>
     records describing socket parameters and addresses suitable for
     communicating with the given host and service.  The empty list is
     returned if the host or service names are unknown, or the constraints
@@ -3427,7 +3418,7 @@ Options to <a href="Unix.html#VALgetnameinfo"><code class="code">Unix.getnameinf
 
 <pre id="VALgetnameinfo"><span class="keyword">let</span> getnameinfo: (sockaddr, list(getnameinfo_option)) =&gt; name_info;
 </pre><div class="info ">
-<code class="code">getnameinfo addr opts</code> returns the host name and service name
+<code class="code">getnameinfo(addr, opts)</code> returns the host name and service name
     corresponding to the socket address <code class="code">addr</code>.  <code class="code">opts</code> is a possibly
     empty list of options that governs how these names are obtained.
     Raise <code class="code">Not_found</code> if an error occurs.<br>

@@ -10,12 +10,7 @@ Formatted output functions.<br>
 </div>
 <hr width="100%">
 
-<pre id="VALfprintf"><span class="keyword">let</span> fprintf:
-  (
-    Pervasives.out_channel,
-    Pervasives.format(&apos;a, Pervasives.out_channel, unit)
-  ) =&gt;
-  &apos;a;
+<pre id="VALfprintf"><span class="keyword">let</span> fprintf: (Pervasives.out_channel, Pervasives.format(&apos;a, Pervasives.out_channel, unit)) =&gt; &apos;a;
 </pre><div class="info ">
 <code class="code">fprintf outchan format arg1 ... argN</code> formats the arguments
    <code class="code">arg1</code> to <code class="code">argN</code> according to the format string <code class="code">format</code>, and
@@ -59,9 +54,9 @@ Formatted output functions.<br>
 <li><code class="code">f</code>: convert a floating-point argument to decimal notation,
      in the style <code class="code">dddd.ddd</code>.</li>
 <li><code class="code">F</code>: convert a floating-point argument to OCaml syntax (<code class="code">dddd.</code>
-     or <code class="code">dddd.ddd</code> or <code class="code">d.ddd e+-dd</code>).</li>
+     or <code class="code">dddd.ddd</code> or <code class="code">d.ddd(e) +- dd</code>).</li>
 <li><code class="code">e</code> or <code class="code">E</code>: convert a floating-point argument to decimal notation,
-     in the style <code class="code">d.ddd e+-dd</code> (mantissa and exponent).</li>
+     in the style <code class="code">d.ddd(e) +- dd</code> (mantissa and exponent).</li>
 <li><code class="code">g</code> or <code class="code">G</code>: convert a floating-point argument to decimal notation,
      in style <code class="code">f</code> or <code class="code">e</code>, <code class="code">E</code> (whichever is more compact).</li>
 <li><code class="code">B</code>: convert a boolean argument to the string <code class="code">true</code> or <code class="code">false</code></li>
@@ -191,8 +186,7 @@ Same as <code class="code">sprintf</code> above, but instead of returning the st
 <b>Since</b> 3.09.0<br>
 </div>
 
-<pre id="VALkbprintf"><span class="keyword">let</span> kbprintf:
-  (Buffer.t =&gt; &apos;a, Buffer.t, Pervasives.format4(&apos;b, Buffer.t, unit, &apos;a)) =&gt; &apos;b;
+<pre id="VALkbprintf"><span class="keyword">let</span> kbprintf: (Buffer.t =&gt; &apos;a, Buffer.t, Pervasives.format4(&apos;b, Buffer.t, unit, &apos;a)) =&gt; &apos;b;
 </pre><div class="info ">
 Same as <code class="code">bprintf</code>, but instead of returning immediately,
    passes the buffer to its first argument at the end of printing.<br>

@@ -48,8 +48,7 @@ Run-time support for objects and classes.
 </pre>
 <pre id="VALnew_variable"><span class="keyword">let</span> new_variable: (table, string) =&gt; int;
 </pre>
-<pre id="VALnew_methods_variables"><span class="keyword">let</span> new_methods_variables:
-  (table, array(string), array(string)) =&gt; array(label);
+<pre id="VALnew_methods_variables"><span class="keyword">let</span> new_methods_variables: (table, array(string), array(string)) =&gt; array(label);
 </pre>
 <pre id="VALget_variable"><span class="keyword">let</span> get_variable: (table, string) =&gt; int;
 </pre>
@@ -78,19 +77,11 @@ Run-time support for objects and classes.
 <pre id="VALinit_class"><span class="keyword">let</span> init_class: table =&gt; unit;
 </pre>
 <pre id="VALinherits"><span class="keyword">let</span> inherits:
-  (
-    table,
-    array(string),
-    array(string),
-    array(string),
-    (t, (table, obj) =&gt; Obj.t, t, obj),
-    bool
-  ) =&gt;
+  (table, array(string), array(string), array(string), (t, (table, obj) =&gt; Obj.t, t, obj), bool) =&gt;
   array(Obj.t);
 </pre>
 <pre id="VALmake_class"><span class="keyword">let</span> make_class:
-  (array(string), (table, Obj.t) =&gt; t) =&gt;
-  (t, (table, Obj.t) =&gt; t, Obj.t =&gt; t, Obj.t);
+  (array(string), (table, Obj.t) =&gt; t) =&gt; (t, (table, Obj.t) =&gt; t, Obj.t =&gt; t, Obj.t);
 </pre>
 <pre id="TYPEinit_table"><span class="keyword">type</span> init_table;
 </pre>
@@ -98,8 +89,7 @@ Run-time support for objects and classes.
 
 <pre id="VALmake_class_store"><span class="keyword">let</span> make_class_store: (array(string), table =&gt; t, init_table) =&gt; unit;
 </pre>
-<pre id="VALdummy_class"><span class="keyword">let</span> dummy_class:
-  ((string, int, int)) =&gt; (t, (table, Obj.t) =&gt; t, Obj.t =&gt; t, Obj.t);
+<pre id="VALdummy_class"><span class="keyword">let</span> dummy_class: ((string, int, int)) =&gt; (t, (table, Obj.t) =&gt; t, Obj.t =&gt; t, Obj.t);
 </pre><br>
 <h6 id="6_Objects">Objects</h6><br>
 

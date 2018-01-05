@@ -12,14 +12,14 @@ Facilities for printing exceptions and inspecting current call stack.<br>
 
 <pre id="VALto_string"><span class="keyword">let</span> to_string: exn =&gt; string;
 </pre><div class="info ">
-<code class="code">Printexc.to_string e</code> returns a string representation of
+<code class="code">Printexc.to_string(e)</code> returns a string representation of
    the exception <code class="code">e</code>.<br>
 </div>
 
 <pre id="VALprint"><span class="keyword">let</span> print: (&apos;a =&gt; &apos;b, &apos;a) =&gt; &apos;b;
 </pre><div class="info ">
-<code class="code">Printexc.print fn x</code> applies <code class="code">fn</code> to <code class="code">x</code> and returns the result.
-   If the evaluation of <code class="code">fn x</code> raises any exception, the
+<code class="code">Printexc.print(fn, x)</code> applies <code class="code">fn</code> to <code class="code">x</code> and returns the result.
+   If the evaluation of <code class="code">fn(x)</code> raises any exception, the
    name of the exception is printed on standard error output,
    and the exception is raised again.
    The typical use is to catch and report exceptions that
@@ -28,7 +28,7 @@ Facilities for printing exceptions and inspecting current call stack.<br>
 
 <pre id="VALcatch"><span class="keyword">let</span> catch: (&apos;a =&gt; &apos;b, &apos;a) =&gt; &apos;b;
 </pre><div class="info ">
-<code class="code">Printexc.catch fn x</code> is similar to <a href="Printexc.html#VALprint"><code class="code">Printexc.print</code></a>, but
+<code class="code">Printexc.catch(fn, x)</code> is similar to <a href="Printexc.html#VALprint"><code class="code">Printexc.print</code></a>, but
    aborts the program with exit code 2 after printing the
    uncaught exception.  This function is deprecated: the runtime
    system is now able to print uncaught exceptions as precisely
@@ -40,7 +40,7 @@ Facilities for printing exceptions and inspecting current call stack.<br>
 
 <pre id="VALprint_backtrace"><span class="keyword">let</span> print_backtrace: Pervasives.out_channel =&gt; unit;
 </pre><div class="info ">
-<code class="code">Printexc.print_backtrace oc</code> prints an exception backtrace
+<code class="code">Printexc.print_backtrace(oc)</code> prints an exception backtrace
     on the output channel <code class="code">oc</code>.  The backtrace lists the program
     locations where the most-recently raised exception was raised
     and where it was propagated through function calls.<br>
@@ -49,7 +49,7 @@ Facilities for printing exceptions and inspecting current call stack.<br>
 
 <pre id="VALget_backtrace"><span class="keyword">let</span> get_backtrace: unit =&gt; string;
 </pre><div class="info ">
-<code class="code">Printexc.get_backtrace ()</code> returns a string containing the
+<code class="code">Printexc.get_backtrace()</code> returns a string containing the
     same exception backtrace that <code class="code">Printexc.print_backtrace</code> would
     print.<br>
 <b>Since</b> 3.11.0<br>
@@ -57,8 +57,8 @@ Facilities for printing exceptions and inspecting current call stack.<br>
 
 <pre id="VALrecord_backtrace"><span class="keyword">let</span> record_backtrace: bool =&gt; unit;
 </pre><div class="info ">
-<code class="code">Printexc.record_backtrace b</code> turns recording of exception backtraces
-    on (if <code class="code">b = true</code>) or off (if <code class="code">b = false</code>).  Initially, backtraces
+<code class="code">Printexc.record_backtrace(b)</code> turns recording of exception backtraces
+    on (if <code class="code">b == true</code>) or off (if <code class="code">b == false</code>).  Initially, backtraces
     are not recorded, unless the <code class="code">b</code> flag is given to the program
     through the <code class="code">OCAMLRUNPARAM</code> variable.<br>
 <b>Since</b> 3.11.0<br>
@@ -73,16 +73,15 @@ Facilities for printing exceptions and inspecting current call stack.<br>
 
 <pre id="VALregister_printer"><span class="keyword">let</span> register_printer: (exn =&gt; option(string)) =&gt; unit;
 </pre><div class="info ">
-<code class="code">Printexc.register_printer fn</code> registers <code class="code">fn</code> as an exception
+<code class="code">Printexc.register_printer(fn)</code> registers <code class="code">fn</code> as an exception
     printer.  The printer should return <code class="code">None</code> or raise an exception
-    if it does not know how to convert the passed exception, and <code class="code">Some
-    s</code> with <code class="code">s</code> the resulting string if it can convert the passed
+    if it does not know how to convert the passed exception, and <code class="code">Some(s)</code> with <code class="code">s</code> the resulting string if it can convert the passed
     exception. Exceptions raised by the printer are ignored.
 <p>
 
     When converting an exception into a string, the printers will be invoked
     in the reverse order of their registrations, until a printer returns
-    a <code class="code">Some s</code> value (if no such printer exists, the runtime will use a
+    a <code class="code">Some(s)</code> value (if no such printer exists, the runtime will use a
     generic printer).
 </p><p>
 
@@ -117,7 +116,7 @@ The abstract type <code class="code">raw_backtrace</code> stores a backtrace in
 
 <pre id="VALget_raw_backtrace"><span class="keyword">let</span> get_raw_backtrace: unit =&gt; raw_backtrace;
 </pre><div class="info ">
-<code class="code">Printexc.get_raw_backtrace ()</code> returns the same exception
+<code class="code">Printexc.get_raw_backtrace()</code> returns the same exception
     backtrace that <code class="code">Printexc.print_backtrace</code> would print, but in
     a raw format.<br>
 <b>Since</b> 4.01.0<br>
@@ -141,7 +140,7 @@ Return a string from a raw backtrace, in the same format
 
 <pre id="VALget_callstack"><span class="keyword">let</span> get_callstack: int =&gt; raw_backtrace;
 </pre><div class="info ">
-<code class="code">Printexc.get_callstack n</code> returns a description of the top of the
+<code class="code">Printexc.get_callstack(n)</code> returns a description of the top of the
     call stack on the current program point (for the current thread),
     with at most <code class="code">n</code> entries.  (Note: this function is not related to
     exceptions at all, despite being part of the <code class="code">Printexc</code> module.)<br>
@@ -152,7 +151,7 @@ Return a string from a raw backtrace, in the same format
 
 <pre id="VALset_uncaught_exception_handler"><span class="keyword">let</span> set_uncaught_exception_handler: ((exn, raw_backtrace) =&gt; unit) =&gt; unit;
 </pre><div class="info ">
-<code class="code">Printexc.set_uncaught_exception_handler fn</code> registers <code class="code">fn</code> as the handler
+<code class="code">Printexc.set_uncaught_exception_handler(fn)</code> registers <code class="code">fn</code> as the handler
     for uncaught exceptions. The default handler prints the exception and
     backtrace on standard error output.
 <p>
@@ -199,9 +198,9 @@ Returns the slots of a raw backtrace, or <code class="code">None</code> if none 
 
     Some possible reasons for returning <code class="code">None</code> are as follow:</p><ul>
 <li>none of the slots in the trace come from modules compiled with
-    debug information (<code class="code">-g</code>)</li>
+    debug information (<code class="code">- g</code>)</li>
 <li>the program is a bytecode program that has not been linked with
-    debug information enabled (<code class="code">ocamlc -g</code>)</li>
+    debug information enabled (<code class="code">ocamlc - g</code>)</li>
 </ul>
 <br>
 <b>Since</b> 4.02.0<br>
@@ -270,14 +269,14 @@ This type allows direct access to raw backtrace slots, without any
 
 <pre id="VALraw_backtrace_length"><span class="keyword">let</span> raw_backtrace_length: raw_backtrace =&gt; int;
 </pre><div class="info ">
-<code class="code">raw_backtrace_length bckt</code> returns the number of slots in the
+<code class="code">raw_backtrace_length(bckt)</code> returns the number of slots in the
     backtrace <code class="code">bckt</code>.<br>
 <b>Since</b> 4.02<br>
 </div>
 
 <pre id="VALget_raw_backtrace_slot"><span class="keyword">let</span> get_raw_backtrace_slot: (raw_backtrace, int) =&gt; raw_backtrace_slot;
 </pre><div class="info ">
-<code class="code">get_slot bckt pos</code> returns the slot in position <code class="code">pos</code> in the
+<code class="code">get_slot(bckt, pos)</code> returns the slot in position <code class="code">pos</code> in the
     backtrace <code class="code">bckt</code>.<br>
 <b>Since</b> 4.02<br>
 </div>
@@ -301,7 +300,7 @@ Extracts the user-friendly <code class="code">backtrace_slot</code> from a low-l
 
 <pre id="VALexn_slot_name"><span class="keyword">let</span> exn_slot_name: exn =&gt; string;
 </pre><div class="info ">
-<code class="code">Printexc.exn_slot_id exn</code> returns the internal name of the constructor
+<code class="code">Printexc.exn_slot_id(exn)</code> returns the internal name of the constructor
     used to create the exception value <code class="code">exn</code>.<br>
 <b>Since</b> 4.02.0<br>
 </div>

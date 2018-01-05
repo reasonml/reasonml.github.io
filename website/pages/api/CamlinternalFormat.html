@@ -9,8 +9,7 @@
 
 <pre id="VALis_in_char_set"><span class="keyword">let</span> is_in_char_set: (CamlinternalFormatBasics.char_set, char) =&gt; bool;
 </pre>
-<pre id="VALrev_char_set"><span class="keyword">let</span> rev_char_set:
-  CamlinternalFormatBasics.char_set =&gt; CamlinternalFormatBasics.char_set;
+<pre id="VALrev_char_set"><span class="keyword">let</span> rev_char_set: CamlinternalFormatBasics.char_set =&gt; CamlinternalFormatBasics.char_set;
 </pre>
 <pre id="TYPEmutable_char_set"><span class="keyword">type</span> mutable_char_set = bytes;
 </pre>
@@ -170,8 +169,7 @@
   ) =&gt;
   &apos;a;
 </pre>
-<pre id="VALoutput_acc"><span class="keyword">let</span> output_acc:
-  (Pervasives.out_channel, acc(Pervasives.out_channel, unit)) =&gt; unit;
+<pre id="VALoutput_acc"><span class="keyword">let</span> output_acc: (Pervasives.out_channel, acc(Pervasives.out_channel, unit)) =&gt; unit;
 </pre>
 <pre id="VALbufput_acc"><span class="keyword">let</span> bufput_acc: (Buffer.t, acc(Buffer.t, unit)) =&gt; unit;
 </pre>
@@ -184,8 +182,7 @@
   ) =&gt;
   CamlinternalFormatBasics.fmt(&apos;a, &apos;b, &apos;c, &apos;d, &apos;e, &apos;f);
 </pre>
-<pre id="VALfmt_ebb_of_string"><span class="keyword">let</span> fmt_ebb_of_string:
-  (~legacy_behavior: bool=?, string) =&gt; fmt_ebb(&apos;b, &apos;c, &apos;e, &apos;f);
+<pre id="VALfmt_ebb_of_string"><span class="keyword">let</span> fmt_ebb_of_string: (~legacy_behavior: bool=?, string) =&gt; fmt_ebb(&apos;b, &apos;c, &apos;e, &apos;f);
 </pre>
 <pre id="VALformat_of_string_fmtty"><span class="keyword">let</span> format_of_string_fmtty:
   (string, CamlinternalFormatBasics.fmtty(&apos;a, &apos;b, &apos;c, &apos;d, &apos;e, &apos;f)) =&gt;
@@ -197,113 +194,32 @@
 </pre>
 <pre id="VALchar_of_iconv"><span class="keyword">let</span> char_of_iconv: CamlinternalFormatBasics.int_conv =&gt; char;
 </pre>
-<pre id="VALstring_of_formatting_lit"><span class="keyword">let</span> string_of_formatting_lit:
-  CamlinternalFormatBasics.formatting_lit =&gt; string;
+<pre id="VALstring_of_formatting_lit"><span class="keyword">let</span> string_of_formatting_lit: CamlinternalFormatBasics.formatting_lit =&gt; string;
 </pre>
 <pre id="VALstring_of_formatting_gen"><span class="keyword">let</span> string_of_formatting_gen:
   CamlinternalFormatBasics.formatting_gen(&apos;a, &apos;b, &apos;c, &apos;d, &apos;e, &apos;f) =&gt; string;
 </pre>
-<pre id="VALstring_of_fmtty"><span class="keyword">let</span> string_of_fmtty:
-  CamlinternalFormatBasics.fmtty(&apos;a, &apos;b, &apos;c, &apos;d, &apos;e, &apos;f) =&gt; string;
+<pre id="VALstring_of_fmtty"><span class="keyword">let</span> string_of_fmtty: CamlinternalFormatBasics.fmtty(&apos;a, &apos;b, &apos;c, &apos;d, &apos;e, &apos;f) =&gt; string;
 </pre>
-<pre id="VALstring_of_fmt"><span class="keyword">let</span> string_of_fmt:
-  CamlinternalFormatBasics.fmt(&apos;a, &apos;b, &apos;c, &apos;d, &apos;e, &apos;f) =&gt; string;
+<pre id="VALstring_of_fmt"><span class="keyword">let</span> string_of_fmt: CamlinternalFormatBasics.fmt(&apos;a, &apos;b, &apos;c, &apos;d, &apos;e, &apos;f) =&gt; string;
 </pre>
 <pre id="VALopen_box_of_string"><span class="keyword">let</span> open_box_of_string: string =&gt; (int, CamlinternalFormatBasics.block_type);
 </pre>
 <pre id="VALsymm"><span class="keyword">let</span> symm:
-  CamlinternalFormatBasics.fmtty_rel(
-    &apos;a1,
-    &apos;b1,
-    &apos;c1,
-    &apos;d1,
-    &apos;e1,
-    &apos;f1,
-    &apos;a2,
-    &apos;b2,
-    &apos;c2,
-    &apos;d2,
-    &apos;e2,
-    &apos;f2
-  ) =&gt;
-  CamlinternalFormatBasics.fmtty_rel(
-    &apos;a2,
-    &apos;b2,
-    &apos;c2,
-    &apos;d2,
-    &apos;e2,
-    &apos;f2,
-    &apos;a1,
-    &apos;b1,
-    &apos;c1,
-    &apos;d1,
-    &apos;e1,
-    &apos;f1
-  );
+  CamlinternalFormatBasics.fmtty_rel(&apos;a1, &apos;b1, &apos;c1, &apos;d1, &apos;e1, &apos;f1, &apos;a2, &apos;b2, &apos;c2, &apos;d2, &apos;e2, &apos;f2) =&gt;
+  CamlinternalFormatBasics.fmtty_rel(&apos;a2, &apos;b2, &apos;c2, &apos;d2, &apos;e2, &apos;f2, &apos;a1, &apos;b1, &apos;c1, &apos;d1, &apos;e1, &apos;f1);
 </pre>
 <pre id="VALtrans"><span class="keyword">let</span> trans:
   (
-    CamlinternalFormatBasics.fmtty_rel(
-      &apos;a1,
-      &apos;b1,
-      &apos;c1,
-      &apos;d1,
-      &apos;e1,
-      &apos;f1,
-      &apos;a2,
-      &apos;b2,
-      &apos;c2,
-      &apos;d2,
-      &apos;e2,
-      &apos;f2
-    ),
-    CamlinternalFormatBasics.fmtty_rel(
-      &apos;a2,
-      &apos;b2,
-      &apos;c2,
-      &apos;d2,
-      &apos;e2,
-      &apos;f2,
-      &apos;a3,
-      &apos;b3,
-      &apos;c3,
-      &apos;d3,
-      &apos;e3,
-      &apos;f3
-    )
+    CamlinternalFormatBasics.fmtty_rel(&apos;a1, &apos;b1, &apos;c1, &apos;d1, &apos;e1, &apos;f1, &apos;a2, &apos;b2, &apos;c2, &apos;d2, &apos;e2, &apos;f2),
+    CamlinternalFormatBasics.fmtty_rel(&apos;a2, &apos;b2, &apos;c2, &apos;d2, &apos;e2, &apos;f2, &apos;a3, &apos;b3, &apos;c3, &apos;d3, &apos;e3, &apos;f3)
   ) =&gt;
-  CamlinternalFormatBasics.fmtty_rel(
-    &apos;a1,
-    &apos;b1,
-    &apos;c1,
-    &apos;d1,
-    &apos;e1,
-    &apos;f1,
-    &apos;a3,
-    &apos;b3,
-    &apos;c3,
-    &apos;d3,
-    &apos;e3,
-    &apos;f3
-  );
+  CamlinternalFormatBasics.fmtty_rel(&apos;a1, &apos;b1, &apos;c1, &apos;d1, &apos;e1, &apos;f1, &apos;a3, &apos;b3, &apos;c3, &apos;d3, &apos;e3, &apos;f3);
 </pre>
 <pre id="VALrecast"><span class="keyword">let</span> recast:
   (
     CamlinternalFormatBasics.fmt(&apos;a1, &apos;b1, &apos;c1, &apos;d1, &apos;e1, &apos;f1),
-    CamlinternalFormatBasics.fmtty_rel(
-      &apos;a1,
-      &apos;b1,
-      &apos;c1,
-      &apos;d1,
-      &apos;e1,
-      &apos;f1,
-      &apos;a2,
-      &apos;b2,
-      &apos;c2,
-      &apos;d2,
-      &apos;e2,
-      &apos;f2
-    )
+    CamlinternalFormatBasics.fmtty_rel(&apos;a1, &apos;b1, &apos;c1, &apos;d1, &apos;e1, &apos;f1, &apos;a2, &apos;b2, &apos;c2, &apos;d2, &apos;e2, &apos;f2)
   ) =&gt;
   CamlinternalFormatBasics.fmt(&apos;a2, &apos;b2, &apos;c2, &apos;d2, &apos;e2, &apos;f2);
 </pre></div>

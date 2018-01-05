@@ -50,23 +50,23 @@ Test whether a set is empty or not.<br>
 
 <pre id="VALmem"><span class="keyword">let</span> mem: (elt, t) =&gt; bool;
 </pre><div class="info ">
-<code class="code">mem x s</code> tests whether <code class="code">x</code> belongs to the set <code class="code">s</code>.<br>
+<code class="code">mem(x, s)</code> tests whether <code class="code">x</code> belongs to the set <code class="code">s</code>.<br>
 </div>
 
 <pre id="VALadd"><span class="keyword">let</span> add: (elt, t) =&gt; t;
 </pre><div class="info ">
-<code class="code">add x s</code> returns a set containing all elements of <code class="code">s</code>,
+<code class="code">add(x, s)</code> returns a set containing all elements of <code class="code">s</code>,
        plus <code class="code">x</code>. If <code class="code">x</code> was already in <code class="code">s</code>, <code class="code">s</code> is returned unchanged.<br>
 </div>
 
 <pre id="VALsingleton"><span class="keyword">let</span> singleton: elt =&gt; t;
 </pre><div class="info ">
-<code class="code">singleton x</code> returns the one-element set containing only <code class="code">x</code>.<br>
+<code class="code">singleton(x)</code> returns the one-element set containing only <code class="code">x</code>.<br>
 </div>
 
 <pre id="VALremove"><span class="keyword">let</span> remove: (elt, t) =&gt; t;
 </pre><div class="info ">
-<code class="code">remove x s</code> returns a set containing all elements of <code class="code">s</code>,
+<code class="code">remove(x, s)</code> returns a set containing all elements of <code class="code">s</code>,
        except <code class="code">x</code>. If <code class="code">x</code> was not in <code class="code">s</code>, <code class="code">s</code> is returned unchanged.<br>
 </div>
 
@@ -93,50 +93,50 @@ Total ordering between sets. Can be used as the ordering function
 
 <pre id="VALequal"><span class="keyword">let</span> equal: (t, t) =&gt; bool;
 </pre><div class="info ">
-<code class="code">equal s1 s2</code> tests whether the sets <code class="code">s1</code> and <code class="code">s2</code> are
+<code class="code">equal(s1, s2)</code> tests whether the sets <code class="code">s1</code> and <code class="code">s2</code> are
        equal, that is, contain equal elements.<br>
 </div>
 
 <pre id="VALsubset"><span class="keyword">let</span> subset: (t, t) =&gt; bool;
 </pre><div class="info ">
-<code class="code">subset s1 s2</code> tests whether the set <code class="code">s1</code> is a subset of
+<code class="code">subset(s1, s2)</code> tests whether the set <code class="code">s1</code> is a subset of
        the set <code class="code">s2</code>.<br>
 </div>
 
 <pre id="VALiter"><span class="keyword">let</span> iter: (elt =&gt; unit, t) =&gt; unit;
 </pre><div class="info ">
-<code class="code">iter f s</code> applies <code class="code">f</code> in turn to all elements of <code class="code">s</code>.
+<code class="code">iter(f, s)</code> applies <code class="code">f</code> in turn to all elements of <code class="code">s</code>.
        The elements of <code class="code">s</code> are presented to <code class="code">f</code> in increasing order
        with respect to the ordering over the type of the elements.<br>
 </div>
 
 <pre id="VALfold"><span class="keyword">let</span> fold: ((elt, &apos;a) =&gt; &apos;a, t, &apos;a) =&gt; &apos;a;
 </pre><div class="info ">
-<code class="code">fold f s a</code> computes <code class="code">(f xN ... (f x2 (f x1 a))...)</code>,
+<code class="code">fold(f, s, a)</code> computes <code class="code">(f xN ... (f x2 (f x1 a))...)</code>,
        where <code class="code">x1 ... xN</code> are the elements of <code class="code">s</code>, in increasing order.<br>
 </div>
 
 <pre id="VALfor_all"><span class="keyword">let</span> for_all: (elt =&gt; bool, t) =&gt; bool;
 </pre><div class="info ">
-<code class="code">for_all p s</code> checks if all elements of the set
+<code class="code">for_all(p, s)</code> checks if all elements of the set
        satisfy the predicate <code class="code">p</code>.<br>
 </div>
 
 <pre id="VALexists"><span class="keyword">let</span> exists: (elt =&gt; bool, t) =&gt; bool;
 </pre><div class="info ">
-<code class="code">exists p s</code> checks if at least one element of
+<code class="code">exists(p, s)</code> checks if at least one element of
        the set satisfies the predicate <code class="code">p</code>.<br>
 </div>
 
 <pre id="VALfilter"><span class="keyword">let</span> filter: (elt =&gt; bool, t) =&gt; t;
 </pre><div class="info ">
-<code class="code">filter p s</code> returns the set of all elements in <code class="code">s</code>
+<code class="code">filter(p, s)</code> returns the set of all elements in <code class="code">s</code>
        that satisfy predicate <code class="code">p</code>.<br>
 </div>
 
 <pre id="VALpartition"><span class="keyword">let</span> partition: (elt =&gt; bool, t) =&gt; (t, t);
 </pre><div class="info ">
-<code class="code">partition p s</code> returns a pair of sets <code class="code">(s1, s2)</code>, where
+<code class="code">partition(p, s)</code> returns a pair of sets <code class="code">(s1, s2)</code>, where
        <code class="code">s1</code> is the set of all the elements of <code class="code">s</code> that satisfy the
        predicate <code class="code">p</code>, and <code class="code">s2</code> is the set of all the elements of
        <code class="code">s</code> that do not satisfy <code class="code">p</code>.<br>
@@ -177,7 +177,7 @@ Return one element of the given set, or raise <code class="code">Not_found</code
 
 <pre id="VALsplit"><span class="keyword">let</span> split: (elt, t) =&gt; (t, bool, t);
 </pre><div class="info ">
-<code class="code">split x s</code> returns a triple <code class="code">(l, present, r)</code>, where
+<code class="code">split(x, s)</code> returns a triple <code class="code">(l, present, r)</code>, where
           <code class="code">l</code> is the set of elements of <code class="code">s</code> that are
           strictly less than <code class="code">x</code>;
           <code class="code">r</code> is the set of elements of <code class="code">s</code> that are
@@ -188,7 +188,7 @@ Return one element of the given set, or raise <code class="code">Not_found</code
 
 <pre id="VALfind"><span class="keyword">let</span> find: (elt, t) =&gt; elt;
 </pre><div class="info ">
-<code class="code">find x s</code> returns the element of <code class="code">s</code> equal to <code class="code">x</code> (according
+<code class="code">find(x, s)</code> returns the element of <code class="code">s</code> equal to <code class="code">x</code> (according
         to <code class="code">Ord.compare</code>), or raise <code class="code">Not_found</code> if no such element
         exists.<br>
 <b>Since</b> 4.01.0<br>
@@ -196,7 +196,7 @@ Return one element of the given set, or raise <code class="code">Not_found</code
 
 <pre id="VALof_list"><span class="keyword">let</span> of_list: list(elt) =&gt; t;
 </pre><div class="info ">
-<code class="code">of_list l</code> creates a set from a list of elements.
+<code class="code">of_list(l)</code> creates a set from a list of elements.
         This is usually more efficient than folding <code class="code">add</code> over the list,
         except perhaps for lists with many duplicated elements.<br>
 <b>Since</b> 4.02.0<br>

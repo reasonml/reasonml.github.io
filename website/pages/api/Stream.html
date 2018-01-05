@@ -35,7 +35,7 @@ Raised by parsers when the first component of a stream pattern is
 
 <pre id="VALfrom"><span class="keyword">let</span> from: (int =&gt; option(&apos;a)) =&gt; t(&apos;a);
 </pre><div class="info ">
-<code class="code">Stream.from f</code> returns a stream built from the function <code class="code">f</code>.
+<code class="code">Stream.from(f)</code> returns a stream built from the function <code class="code">f</code>.
    To create a new stream element, the function <code class="code">f</code> is called with
    the current stream count. The user function <code class="code">f</code> must return either
    <code class="code">Some &lt;value&gt;</code> for a value or <code class="code">None</code> to specify the end of the
@@ -73,7 +73,7 @@ Return the stream of the characters read from the input channel.<br>
 
 <pre id="VALiter"><span class="keyword">let</span> iter: (&apos;a =&gt; unit, t(&apos;a)) =&gt; unit;
 </pre><div class="info ">
-<code class="code">Stream.iter f s</code> scans the whole stream s, applying function <code class="code">f</code>
+<code class="code">Stream.iter(f, s)</code> scans the whole stream s, applying function <code class="code">f</code>
    in turn to each stream element encountered.<br>
 </div>
 <br>
@@ -112,7 +112,7 @@ Return the current count of the stream elements, i.e. the number
 
 <pre id="VALnpeek"><span class="keyword">let</span> npeek: (int, t(&apos;a)) =&gt; list(&apos;a);
 </pre><div class="info ">
-<code class="code">npeek n</code> returns the list of the <code class="code">n</code> first elements of
+<code class="code">npeek(n)</code> returns the list of the <code class="code">n</code> first elements of
    the stream, or all its remaining elements if less than <code class="code">n</code>
    elements are available.<br>
 </div>

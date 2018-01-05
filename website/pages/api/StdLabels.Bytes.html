@@ -15,7 +15,7 @@ Return the length (number of bytes) of the argument.<br>
 
 <pre id="VALget"><span class="keyword">let</span> get: (bytes, int) =&gt; char;
 </pre><div class="info ">
-<code class="code">get s n</code> returns the byte at index <code class="code">n</code> in argument <code class="code">s</code>.
+<code class="code">get(s, n)</code> returns the byte at index <code class="code">n</code> in argument <code class="code">s</code>.
 <p>
 
     Raise <code class="code">Invalid_argument</code> if <code class="code">n</code> not a valid index in <code class="code">s</code>.<br>
@@ -23,7 +23,7 @@ Return the length (number of bytes) of the argument.<br>
 
 <pre id="VALset"><span class="keyword">let</span> set: (bytes, int, char) =&gt; unit;
 </pre><div class="info ">
-<code class="code">set s n c</code> modifies <code class="code">s</code> in place, replacing the byte at index <code class="code">n</code>
+<code class="code">set(s, n, c)</code> modifies <code class="code">s</code> in place, replacing the byte at index <code class="code">n</code>
     with <code class="code">c</code>.
 <p>
 
@@ -32,7 +32,7 @@ Return the length (number of bytes) of the argument.<br>
 
 <pre id="VALcreate"><span class="keyword">let</span> create: int =&gt; bytes;
 </pre><div class="info ">
-<code class="code">create n</code> returns a new byte sequence of length <code class="code">n</code>. The
+<code class="code">create(n)</code> returns a new byte sequence of length <code class="code">n</code>. The
     sequence is uninitialized and contains arbitrary bytes.
 <p>
 
@@ -41,7 +41,7 @@ Return the length (number of bytes) of the argument.<br>
 
 <pre id="VALmake"><span class="keyword">let</span> make: (int, char) =&gt; bytes;
 </pre><div class="info ">
-<code class="code">make n c</code> returns a new byte sequence of length <code class="code">n</code>, filled with
+<code class="code">make(n, c)</code> returns a new byte sequence of length <code class="code">n</code>, filled with
     the byte <code class="code">c</code>.
 <p>
 
@@ -50,8 +50,8 @@ Return the length (number of bytes) of the argument.<br>
 
 <pre id="VALinit"><span class="keyword">let</span> init: (int, ~f: int =&gt; char) =&gt; bytes;
 </pre><div class="info ">
-<code class="code">init n f</code> returns a fresh byte sequence of length <code class="code">n</code>,
-    with character <code class="code">i</code> initialized to the result of <code class="code">f i</code>.
+<code class="code">init(n, f)</code> returns a fresh byte sequence of length <code class="code">n</code>,
+    with character <code class="code">i</code> initialized to the result of <code class="code">f(i)</code>.
 <p>
 
     Raise <code class="code">Invalid_argument</code> if <code class="code">n &lt; 0</code> or <code class="code">n &gt; </code><a href="Sys.html#VALmax_string_length"><code class="code">Sys.max_string_length</code></a>.<br>
@@ -82,7 +82,7 @@ Return a new string that contains the same bytes as the given byte
 
 <pre id="VALsub"><span class="keyword">let</span> sub: (bytes, ~pos: int, ~len: int) =&gt; bytes;
 </pre><div class="info ">
-<code class="code">sub s start len</code> returns a new byte sequence of length <code class="code">len</code>,
+<code class="code">sub(s, start, len)</code> returns a new byte sequence of length <code class="code">len</code>,
     containing the subsequence of <code class="code">s</code> that starts at position <code class="code">start</code>
     and has length <code class="code">len</code>.
 <p>
@@ -98,7 +98,7 @@ Same as <code class="code">sub</code> but return a string instead of a byte sequ
 
 <pre id="VALfill"><span class="keyword">let</span> fill: (bytes, ~pos: int, ~len: int, char) =&gt; unit;
 </pre><div class="info ">
-<code class="code">fill s start len c</code> modifies <code class="code">s</code> in place, replacing <code class="code">len</code>
+<code class="code">fill(s, start, len, c)</code> modifies <code class="code">s</code> in place, replacing <code class="code">len</code>
     characters with <code class="code">c</code>, starting at <code class="code">start</code>.
 <p>
 
@@ -106,10 +106,9 @@ Same as <code class="code">sub</code> but return a string instead of a byte sequ
     valid range of <code class="code">s</code>.<br>
 </p></div>
 
-<pre id="VALblit"><span class="keyword">let</span> blit:
-  (~src: bytes, ~src_pos: int, ~dst: bytes, ~dst_pos: int, ~len: int) =&gt; unit;
+<pre id="VALblit"><span class="keyword">let</span> blit: (~src: bytes, ~src_pos: int, ~dst: bytes, ~dst_pos: int, ~len: int) =&gt; unit;
 </pre><div class="info ">
-<code class="code">blit src srcoff dst dstoff len</code> copies <code class="code">len</code> bytes from sequence
+<code class="code">blit(src, srcoff, dst, dstoff, len)</code> copies <code class="code">len</code> bytes from sequence
     <code class="code">src</code>, starting at index <code class="code">srcoff</code>, to sequence <code class="code">dst</code>, starting at
     index <code class="code">dstoff</code>. It works correctly even if <code class="code">src</code> and <code class="code">dst</code> are the
     same byte sequence, and the source and destination intervals
@@ -123,14 +122,14 @@ Same as <code class="code">sub</code> but return a string instead of a byte sequ
 
 <pre id="VALconcat"><span class="keyword">let</span> concat: (~sep: bytes, list(bytes)) =&gt; bytes;
 </pre><div class="info ">
-<code class="code">concat sep sl</code> concatenates the list of byte sequences <code class="code">sl</code>,
+<code class="code">concat(sep, sl)</code> concatenates the list of byte sequences <code class="code">sl</code>,
     inserting the separator byte sequence <code class="code">sep</code> between each, and
     returns the result as a new byte sequence.<br>
 </div>
 
 <pre id="VALiter"><span class="keyword">let</span> iter: (~f: char =&gt; unit, bytes) =&gt; unit;
 </pre><div class="info ">
-<code class="code">iter f s</code> applies function <code class="code">f</code> in turn to all the bytes of <code class="code">s</code>.
+<code class="code">iter(f, s)</code> applies function <code class="code">f</code> in turn to all the bytes of <code class="code">s</code>.
     It is equivalent to <code class="code">f (get s 0); f (get s 1); ...; f (get s
     (length s - 1)); ()</code>.<br>
 </div>
@@ -144,14 +143,14 @@ Same as <a href="Bytes.html#VALiter"><code class="code">Bytes.iter</code></a>, b
 
 <pre id="VALmap"><span class="keyword">let</span> map: (~f: char =&gt; char, bytes) =&gt; bytes;
 </pre><div class="info ">
-<code class="code">map f s</code> applies function <code class="code">f</code> in turn to all the bytes of <code class="code">s</code> and
+<code class="code">map(f, s)</code> applies function <code class="code">f</code> in turn to all the bytes of <code class="code">s</code> and
     stores the resulting bytes in a new sequence that is returned as
     the result.<br>
 </div>
 
 <pre id="VALmapi"><span class="keyword">let</span> mapi: (~f: (int, char) =&gt; char, bytes) =&gt; bytes;
 </pre><div class="info ">
-<code class="code">mapi f s</code> calls <code class="code">f</code> with each character of <code class="code">s</code> and its
+<code class="code">mapi(f, s)</code> calls <code class="code">f</code> with each character of <code class="code">s</code> and its
     index (in increasing index order) and stores the resulting bytes
     in a new sequence that is returned as the result.<br>
 </div>
@@ -171,7 +170,7 @@ Return a copy of the argument, with special characters represented
 
 <pre id="VALindex"><span class="keyword">let</span> index: (bytes, char) =&gt; int;
 </pre><div class="info ">
-<code class="code">index s c</code> returns the index of the first occurrence of byte <code class="code">c</code>
+<code class="code">index(s, c)</code> returns the index of the first occurrence of byte <code class="code">c</code>
     in <code class="code">s</code>.
 <p>
 
@@ -180,7 +179,7 @@ Return a copy of the argument, with special characters represented
 
 <pre id="VALrindex"><span class="keyword">let</span> rindex: (bytes, char) =&gt; int;
 </pre><div class="info ">
-<code class="code">rindex s c</code> returns the index of the last occurrence of byte <code class="code">c</code>
+<code class="code">rindex(s, c)</code> returns the index of the last occurrence of byte <code class="code">c</code>
     in <code class="code">s</code>.
 <p>
 
@@ -189,9 +188,9 @@ Return a copy of the argument, with special characters represented
 
 <pre id="VALindex_from"><span class="keyword">let</span> index_from: (bytes, int, char) =&gt; int;
 </pre><div class="info ">
-<code class="code">index_from s i c</code> returns the index of the first occurrence of
-    byte <code class="code">c</code> in <code class="code">s</code> after position <code class="code">i</code>.  <code class="code">Bytes.index s c</code> is
-    equivalent to <code class="code">Bytes.index_from s 0 c</code>.
+<code class="code">index_from(s, i, c)</code> returns the index of the first occurrence of
+    byte <code class="code">c</code> in <code class="code">s</code> after position <code class="code">i</code>.  <code class="code">Bytes.index(s, c)</code> is
+    equivalent to <code class="code">Bytes.index_from(s, 0, c)</code>.
 <p>
 
     Raise <code class="code">Invalid_argument</code> if <code class="code">i</code> is not a valid position in <code class="code">s</code>.
@@ -200,25 +199,24 @@ Return a copy of the argument, with special characters represented
 
 <pre id="VALrindex_from"><span class="keyword">let</span> rindex_from: (bytes, int, char) =&gt; int;
 </pre><div class="info ">
-<code class="code">rindex_from s i c</code> returns the index of the last occurrence of
-    byte <code class="code">c</code> in <code class="code">s</code> before position <code class="code">i+1</code>.  <code class="code">rindex s c</code> is equivalent
-    to <code class="code">rindex_from s (Bytes.length s - 1) c</code>.
+<code class="code">rindex_from(s, i, c)</code> returns the index of the last occurrence of
+    byte <code class="code">c</code> in <code class="code">s</code> before position <code class="code">i + 1</code>.  <code class="code">rindex(s, c)</code> is equivalent
+    to <code class="code">rindex_from(s, Bytes.length(s) - 1, c)</code>.
 <p>
 
-    Raise <code class="code">Invalid_argument</code> if <code class="code">i+1</code> is not a valid position in <code class="code">s</code>.
-    Raise <code class="code">Not_found</code> if <code class="code">c</code> does not occur in <code class="code">s</code> before position <code class="code">i+1</code>.<br>
+    Raise <code class="code">Invalid_argument</code> if <code class="code">i + 1</code> is not a valid position in <code class="code">s</code>.
+    Raise <code class="code">Not_found</code> if <code class="code">c</code> does not occur in <code class="code">s</code> before position <code class="code">i + 1</code>.<br>
 </p></div>
 
 <pre id="VALcontains"><span class="keyword">let</span> contains: (bytes, char) =&gt; bool;
 </pre><div class="info ">
-<code class="code">contains s c</code> tests if byte <code class="code">c</code> appears in <code class="code">s</code>.<br>
+<code class="code">contains(s, c)</code> tests if byte <code class="code">c</code> appears in <code class="code">s</code>.<br>
 </div>
 
 <pre id="VALcontains_from"><span class="keyword">let</span> contains_from: (bytes, int, char) =&gt; bool;
 </pre><div class="info ">
-<code class="code">contains_from s start c</code> tests if byte <code class="code">c</code> appears in <code class="code">s</code> after
-    position <code class="code">start</code>.  <code class="code">contains s c</code> is equivalent to <code class="code">contains_from
-    s 0 c</code>.
+<code class="code">contains_from(s, start, c)</code> tests if byte <code class="code">c</code> appears in <code class="code">s</code> after
+    position <code class="code">start</code>.  <code class="code">contains(s, c)</code> is equivalent to <code class="code">contains_from(s, 0, c)</code>.
 <p>
 
     Raise <code class="code">Invalid_argument</code> if <code class="code">start</code> is not a valid position in <code class="code">s</code>.<br>
@@ -226,11 +224,11 @@ Return a copy of the argument, with special characters represented
 
 <pre id="VALrcontains_from"><span class="keyword">let</span> rcontains_from: (bytes, int, char) =&gt; bool;
 </pre><div class="info ">
-<code class="code">rcontains_from s stop c</code> tests if byte <code class="code">c</code> appears in <code class="code">s</code> before
-    position <code class="code">stop+1</code>.
+<code class="code">rcontains_from(s, stop, c)</code> tests if byte <code class="code">c</code> appears in <code class="code">s</code> before
+    position <code class="code">stop + 1</code>.
 <p>
 
-    Raise <code class="code">Invalid_argument</code> if <code class="code">stop &lt; 0</code> or <code class="code">stop+1</code> is not a valid
+    Raise <code class="code">Invalid_argument</code> if <code class="code">stop &lt; 0</code> or <code class="code">stop + 1</code> is not a valid
     position in <code class="code">s</code>.<br>
 </p></div>
 

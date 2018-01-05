@@ -71,23 +71,22 @@ Integer division.  Raise <code class="code">Division_by_zero</code> if the secon
 <pre id="VALrem"><span class="keyword">let</span> rem: (nativeint, nativeint) =&gt; nativeint;
 </pre><div class="info ">
 Integer remainder.  If <code class="code">y</code> is not zero, the result
-   of <code class="code">Nativeint.rem x y</code> satisfies the following properties:
-   <code class="code">Nativeint.zero &lt;= Nativeint.rem x y &lt; Nativeint.abs y</code> and
-   <code class="code">x = Nativeint.add (Nativeint.mul (Nativeint.div x y) y)
-                      (Nativeint.rem x y)</code>.
-   If <code class="code">y = 0</code>, <code class="code">Nativeint.rem x y</code> raises <code class="code">Division_by_zero</code>.<br>
+   of <code class="code">Nativeint.rem(x, y)</code> satisfies the following properties:
+   <code class="code">Nativeint.zero &lt;= Nativeint.rem(x, y) &lt; Nativeint.abs(y)</code> and
+   <code class="code">x == Nativeint.add(Nativeint.mul(Nativeint.div(x, y), y), Nativeint.rem(x, y))</code>.
+   If <code class="code">y == 0</code>, <code class="code">Nativeint.rem(x, y)</code> raises <code class="code">Division_by_zero</code>.<br>
 </div>
 
 <pre id="VALsucc"><span class="keyword">let</span> succ: nativeint =&gt; nativeint;
 </pre><div class="info ">
 Successor.
-   <code class="code">Nativeint.succ x</code> is <code class="code">Nativeint.add x Nativeint.one</code>.<br>
+   <code class="code">Nativeint.succ(x)</code> is <code class="code">Nativeint.add(x, Nativeint.one)</code>.<br>
 </div>
 
 <pre id="VALpred"><span class="keyword">let</span> pred: nativeint =&gt; nativeint;
 </pre><div class="info ">
 Predecessor.
-   <code class="code">Nativeint.pred x</code> is <code class="code">Nativeint.sub x Nativeint.one</code>.<br>
+   <code class="code">Nativeint.pred(x)</code> is <code class="code">Nativeint.sub(x, Nativeint.one)</code>.<br>
 </div>
 
 <pre id="VALabs"><span class="keyword">let</span> abs: nativeint =&gt; nativeint;
@@ -137,7 +136,7 @@ Bitwise logical negation<br>
 
 <pre id="VALshift_left"><span class="keyword">let</span> shift_left: (nativeint, int) =&gt; nativeint;
 </pre><div class="info ">
-<code class="code">Nativeint.shift_left x y</code> shifts <code class="code">x</code> to the left by <code class="code">y</code> bits.
+<code class="code">Nativeint.shift_left(x, y)</code> shifts <code class="code">x</code> to the left by <code class="code">y</code> bits.
    The result is unspecified if <code class="code">y &lt; 0</code> or <code class="code">y &gt;= bitsize</code>,
    where <code class="code">bitsize</code> is <code class="code">32</code> on a 32-bit platform and
    <code class="code">64</code> on a 64-bit platform.<br>
@@ -145,7 +144,7 @@ Bitwise logical negation<br>
 
 <pre id="VALshift_right"><span class="keyword">let</span> shift_right: (nativeint, int) =&gt; nativeint;
 </pre><div class="info ">
-<code class="code">Nativeint.shift_right x y</code> shifts <code class="code">x</code> to the right by <code class="code">y</code> bits.
+<code class="code">Nativeint.shift_right(x, y)</code> shifts <code class="code">x</code> to the right by <code class="code">y</code> bits.
    This is an arithmetic shift: the sign bit of <code class="code">x</code> is replicated
    and inserted in the vacated bits.
    The result is unspecified if <code class="code">y &lt; 0</code> or <code class="code">y &gt;= bitsize</code>.<br>
@@ -153,7 +152,7 @@ Bitwise logical negation<br>
 
 <pre id="VALshift_right_logical"><span class="keyword">let</span> shift_right_logical: (nativeint, int) =&gt; nativeint;
 </pre><div class="info ">
-<code class="code">Nativeint.shift_right_logical x y</code> shifts <code class="code">x</code> to the right
+<code class="code">Nativeint.shift_right_logical(x, y)</code> shifts <code class="code">x</code> to the right
    by <code class="code">y</code> bits.
    This is a logical shift: zeroes are inserted in the vacated bits
    regardless of the sign of <code class="code">x</code>.
@@ -206,9 +205,9 @@ Convert the given native integer to a
 </pre><div class="info ">
 Convert the given string to a native integer.
    The string is read in decimal (by default) or in hexadecimal,
-   octal or binary if the string begins with <code class="code">0x</code>, <code class="code">0o</code> or <code class="code">0b</code>
+   octal or binary if the string begins with <code class="code">0(x)</code>, <code class="code">0(o)</code> or <code class="code">0(b)</code>
    respectively.
-   Raise <code class="code">Failure &quot;int_of_string&quot;</code> if the given string is not
+   Raise <code class="code">Failure(&quot;int_of_string&quot;)</code> if the given string is not
    a valid representation of an integer, or if the integer represented
    exceeds the range of integers representable in type <code class="code">nativeint</code>.<br>
 </div>
@@ -237,7 +236,7 @@ The comparison function for native integers, with the same specification as
 
 <pre id="VALformat"><span class="keyword">let</span> format: (string, nativeint) =&gt; string;
 </pre><div class="info ">
-<code class="code">Nativeint.format fmt n</code> return the string representation of the
+<code class="code">Nativeint.format(fmt, n)</code> return the string representation of the
    native integer <code class="code">n</code> in the format specified by <code class="code">fmt</code>.
    <code class="code">fmt</code> is a <code class="code">Printf</code>-style format consisting of exactly
    one <code class="code">%d</code>, <code class="code">%i</code>, <code class="code">%u</code>, <code class="code">%x</code>, <code class="code">%X</code> or <code class="code">%o</code> conversion specification.

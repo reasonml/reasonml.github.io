@@ -40,7 +40,7 @@ let () =
 
   This -ppx rewriter, which replaces <code class="code">[%test]</code> in expressions with
   the constant <code class="code">42</code>, can be compiled using
-  <code class="code">ocamlc -o ppx_test -I +compiler-libs ocamlcommon.cma ppx_test.ml</code>.<br>
+  <code class="code">ocamlc - o(ppx_test) - I + compiler - libs(ocamlcommon.cma, ppx_test.ml)</code>.<br>
 </p></div>
 <hr width="100%">
 <br>
@@ -374,8 +374,7 @@ Entry point to call to implement a standalone -ppx rewriter from a
 <br>
 <h2 id="2_RegistrationAPI">Registration API</h2><br>
 
-<pre id="VALregister_function"><span class="keyword">let</span> register_function:
-  Pervasives.ref((string, list(string) =&gt; mapper) =&gt; unit);
+<pre id="VALregister_function"><span class="keyword">let</span> register_function: Pervasives.ref(((string, list(string) =&gt; mapper) =&gt; unit));
 </pre>
 <pre id="VALregister"><span class="keyword">let</span> register: (string, list(string) =&gt; mapper) =&gt; unit;
 </pre><div class="info ">
@@ -418,8 +417,7 @@ Encode a warning message into an &apos;ocaml.ppwarning&apos; attribute which can
 <br>
 <h2 id="2_Helperfunctionstocallexternalmappers">Helper functions to call external mappers</h2><br>
 
-<pre id="VALadd_ppx_context_str"><span class="keyword">let</span> add_ppx_context_str:
-  (~tool_name: string, Parsetree.structure) =&gt; Parsetree.structure;
+<pre id="VALadd_ppx_context_str"><span class="keyword">let</span> add_ppx_context_str: (~tool_name: string, Parsetree.structure) =&gt; Parsetree.structure;
 </pre><div class="info ">
 Extract information from the current environment and encode it
     into an attribute which is prepended to the list of structure
@@ -427,22 +425,19 @@ Extract information from the current environment and encode it
     processor.<br>
 </div>
 
-<pre id="VALadd_ppx_context_sig"><span class="keyword">let</span> add_ppx_context_sig:
-  (~tool_name: string, Parsetree.signature) =&gt; Parsetree.signature;
+<pre id="VALadd_ppx_context_sig"><span class="keyword">let</span> add_ppx_context_sig: (~tool_name: string, Parsetree.signature) =&gt; Parsetree.signature;
 </pre><div class="info ">
 Same as <code class="code">add_ppx_context_str</code>, but for signatures.<br>
 </div>
 
-<pre id="VALdrop_ppx_context_str"><span class="keyword">let</span> drop_ppx_context_str:
-  (~restore: bool, Parsetree.structure) =&gt; Parsetree.structure;
+<pre id="VALdrop_ppx_context_str"><span class="keyword">let</span> drop_ppx_context_str: (~restore: bool, Parsetree.structure) =&gt; Parsetree.structure;
 </pre><div class="info ">
 Drop the ocaml.ppx.context attribute from a structure.  If
     <code class="code">restore</code> is true, also restore the associated data in the current
     process.<br>
 </div>
 
-<pre id="VALdrop_ppx_context_sig"><span class="keyword">let</span> drop_ppx_context_sig:
-  (~restore: bool, Parsetree.signature) =&gt; Parsetree.signature;
+<pre id="VALdrop_ppx_context_sig"><span class="keyword">let</span> drop_ppx_context_sig: (~restore: bool, Parsetree.signature) =&gt; Parsetree.signature;
 </pre><div class="info ">
 Same as <code class="code">drop_ppx_context_str</code>, but for signatures.<br>
 </div>

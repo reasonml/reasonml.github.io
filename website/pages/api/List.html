@@ -30,21 +30,21 @@ Return the length (number of elements) of the given list.<br>
 <pre id="VALhd"><span class="keyword">let</span> hd: list(&apos;a) =&gt; &apos;a;
 </pre><div class="info ">
 Return the first element of the given list. Raise
-   <code class="code">Failure &quot;hd&quot;</code> if the list is empty.<br>
+   <code class="code">Failure(&quot;hd&quot;)</code> if the list is empty.<br>
 </div>
 
 <pre id="VALtl"><span class="keyword">let</span> tl: list(&apos;a) =&gt; list(&apos;a);
 </pre><div class="info ">
 Return the given list without its first element. Raise
-   <code class="code">Failure &quot;tl&quot;</code> if the list is empty.<br>
+   <code class="code">Failure(&quot;tl&quot;)</code> if the list is empty.<br>
 </div>
 
 <pre id="VALnth"><span class="keyword">let</span> nth: (list(&apos;a), int) =&gt; &apos;a;
 </pre><div class="info ">
 Return the <code class="code">n</code>-th element of the given list.
    The first element (head of the list) is at position 0.
-   Raise <code class="code">Failure &quot;nth&quot;</code> if the list is too short.
-   Raise <code class="code">Invalid_argument &quot;List.nth&quot;</code> if <code class="code">n</code> is negative.<br>
+   Raise <code class="code">Failure(&quot;nth&quot;)</code> if the list is too short.
+   Raise <code class="code">Invalid_argument(&quot;List.nth&quot;)</code> if <code class="code">n</code> is negative.<br>
 </div>
 
 <pre id="VALrev"><span class="keyword">let</span> rev: list(&apos;a) =&gt; list(&apos;a);
@@ -61,8 +61,8 @@ Catenate two lists.  Same function as the infix operator <code class="code">@</c
 
 <pre id="VALrev_append"><span class="keyword">let</span> rev_append: (list(&apos;a), list(&apos;a)) =&gt; list(&apos;a);
 </pre><div class="info ">
-<code class="code">List.rev_append l1 l2</code> reverses <code class="code">l1</code> and concatenates it to <code class="code">l2</code>.
-   This is equivalent to <a href="List.html#VALrev"><code class="code">List.rev</code></a><code class="code"> l1 @ l2</code>, but <code class="code">rev_append</code> is
+<code class="code">List.rev_append(l1, l2)</code> reverses <code class="code">l1</code> and concatenates it to <code class="code">l2</code>.
+   This is equivalent to <a href="List.html#VALrev"><code class="code">List.rev</code></a><code class="code">l1 @ l2</code>, but <code class="code">rev_append</code> is
    tail-recursive and more efficient.<br>
 </div>
 
@@ -114,7 +114,7 @@ Same as <a href="List.html#VALmap"><code class="code">List.map</code></a>, but t
 
 <pre id="VALrev_map"><span class="keyword">let</span> rev_map: (&apos;a =&gt; &apos;b, list(&apos;a)) =&gt; list(&apos;b);
 </pre><div class="info ">
-<code class="code">List.rev_map f l</code> gives the same result as
+<code class="code">List.rev_map(f, l)</code> gives the same result as
    <a href="List.html#VALrev"><code class="code">List.rev</code></a><code class="code"> (</code><a href="List.html#VALmap"><code class="code">List.map</code></a><code class="code"> f l)</code>, but is tail-recursive and
    more efficient.<br>
 </div>
@@ -151,7 +151,7 @@ Same as <a href="List.html#VALmap"><code class="code">List.map</code></a>, but t
 
 <pre id="VALrev_map2"><span class="keyword">let</span> rev_map2: ((&apos;a, &apos;b) =&gt; &apos;c, list(&apos;a), list(&apos;b)) =&gt; list(&apos;c);
 </pre><div class="info ">
-<code class="code">List.rev_map2 f l1 l2</code> gives the same result as
+<code class="code">List.rev_map2(f, l1, l2)</code> gives the same result as
    <a href="List.html#VALrev"><code class="code">List.rev</code></a><code class="code"> (</code><a href="List.html#VALmap2"><code class="code">List.map2</code></a><code class="code"> f l1 l2)</code>, but is tail-recursive and
    more efficient.<br>
 </div>
@@ -204,7 +204,7 @@ Same as <a href="List.html#VALexists"><code class="code">List.exists</code></a>,
 
 <pre id="VALmem"><span class="keyword">let</span> mem: (&apos;a, list(&apos;a)) =&gt; bool;
 </pre><div class="info ">
-<code class="code">mem a l</code> is true if and only if <code class="code">a</code> is equal
+<code class="code">mem(a, l)</code> is true if and only if <code class="code">a</code> is equal
    to an element of <code class="code">l</code>.<br>
 </div>
 
@@ -218,7 +218,7 @@ Same as <a href="List.html#VALmem"><code class="code">List.mem</code></a>, but u
 
 <pre id="VALfind"><span class="keyword">let</span> find: (&apos;a =&gt; bool, list(&apos;a)) =&gt; &apos;a;
 </pre><div class="info ">
-<code class="code">find p l</code> returns the first element of the list <code class="code">l</code>
+<code class="code">find(p, l)</code> returns the first element of the list <code class="code">l</code>
    that satisfies the predicate <code class="code">p</code>.
    Raise <code class="code">Not_found</code> if there is no value that satisfies <code class="code">p</code> in the
    list <code class="code">l</code>.<br>
@@ -226,7 +226,7 @@ Same as <a href="List.html#VALmem"><code class="code">List.mem</code></a>, but u
 
 <pre id="VALfilter"><span class="keyword">let</span> filter: (&apos;a =&gt; bool, list(&apos;a)) =&gt; list(&apos;a);
 </pre><div class="info ">
-<code class="code">filter p l</code> returns all the elements of the list <code class="code">l</code>
+<code class="code">filter(p, l)</code> returns all the elements of the list <code class="code">l</code>
    that satisfy the predicate <code class="code">p</code>.  The order of the elements
    in the input list is preserved.<br>
 </div>
@@ -238,7 +238,7 @@ Same as <a href="List.html#VALmem"><code class="code">List.mem</code></a>, but u
 
 <pre id="VALpartition"><span class="keyword">let</span> partition: (&apos;a =&gt; bool, list(&apos;a)) =&gt; (list(&apos;a), list(&apos;a));
 </pre><div class="info ">
-<code class="code">partition p l</code> returns a pair of lists <code class="code">(l1, l2)</code>, where
+<code class="code">partition(p, l)</code> returns a pair of lists <code class="code">(l1, l2)</code>, where
    <code class="code">l1</code> is the list of all the elements of <code class="code">l</code> that
    satisfy the predicate <code class="code">p</code>, and <code class="code">l2</code> is the list of all the
    elements of <code class="code">l</code> that do not satisfy <code class="code">p</code>.
@@ -249,10 +249,10 @@ Same as <a href="List.html#VALmem"><code class="code">List.mem</code></a>, but u
 
 <pre id="VALassoc"><span class="keyword">let</span> assoc: (&apos;a, list((&apos;a, &apos;b))) =&gt; &apos;b;
 </pre><div class="info ">
-<code class="code">assoc a l</code> returns the value associated with key <code class="code">a</code> in the list of
+<code class="code">assoc(a, l)</code> returns the value associated with key <code class="code">a</code> in the list of
    pairs <code class="code">l</code>. That is,
    <code class="code">assoc a [ ...; (a,b); ...] = b</code>
-   if <code class="code">(a,b)</code> is the leftmost binding of <code class="code">a</code> in list <code class="code">l</code>.
+   if <code class="code">(a, b)</code> is the leftmost binding of <code class="code">a</code> in list <code class="code">l</code>.
    Raise <code class="code">Not_found</code> if there is no value associated with <code class="code">a</code> in the
    list <code class="code">l</code>.<br>
 </div>
@@ -277,7 +277,7 @@ Same as <a href="List.html#VALmem_assoc"><code class="code">List.mem_assoc</code
 
 <pre id="VALremove_assoc"><span class="keyword">let</span> remove_assoc: (&apos;a, list((&apos;a, &apos;b))) =&gt; list((&apos;a, &apos;b));
 </pre><div class="info ">
-<code class="code">remove_assoc a l</code> returns the list of
+<code class="code">remove_assoc(a, l)</code> returns the list of
    pairs <code class="code">l</code> without the first pair with key <code class="code">a</code>, if any.
    Not tail-recursive.<br>
 </div>
@@ -353,7 +353,7 @@ Same as <a href="List.html#VALsort"><code class="code">List.sort</code></a>, but
 </pre><div class="info ">
 Merge two lists:
     Assuming that <code class="code">l1</code> and <code class="code">l2</code> are sorted according to the
-    comparison function <code class="code">cmp</code>, <code class="code">merge cmp l1 l2</code> will return a
+    comparison function <code class="code">cmp</code>, <code class="code">merge(cmp, l1, l2)</code> will return a
     sorted list containting all the elements of <code class="code">l1</code> and <code class="code">l2</code>.
     If several elements compare equal, the elements of <code class="code">l1</code> will be
     before the elements of <code class="code">l2</code>.

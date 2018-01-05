@@ -63,7 +63,7 @@ Get the location of the current token from the <code class="code">lexbuf</code>.
 </pre>
 <pre id="VALrhs_loc"><span class="keyword">let</span> rhs_loc: int =&gt; t;
 </pre><div class="info ">
-<code class="code">rhs_loc n</code> returns the location of the symbol at position <code class="code">n</code>, starting
+<code class="code">rhs_loc(n)</code> returns the location of the symbol at position <code class="code">n</code>, starting
   at 1, in the current parser rule.<br>
 </div>
 
@@ -89,7 +89,7 @@ Get the location of the current token from the <code class="code">lexbuf</code>.
 </pre>
 <pre id="VALreset"><span class="keyword">let</span> reset: unit =&gt; unit;
 </pre>
-<pre id="VALwarning_printer"><span class="keyword">let</span> warning_printer: Pervasives.ref((t, Format.formatter, Warnings.t) =&gt; unit);
+<pre id="VALwarning_printer"><span class="keyword">let</span> warning_printer: Pervasives.ref(((t, Format.formatter, Warnings.t) =&gt; unit));
 </pre><div class="info ">
 Hook for intercepting warnings.<br>
 </div>
@@ -174,8 +174,7 @@ In -absname mode, return the absolute path for this filename.
 <pre id="EXCEPTIONError"><span class="keyword">exception</span> Error(error);
 </pre>
 
-<pre id="VALerror"><span class="keyword">let</span> error:
-  (~loc: t=?, ~sub: list(error)=?, ~if_highlight: string=?, string) =&gt; error;
+<pre id="VALerror"><span class="keyword">let</span> error: (~loc: t=?, ~sub: list(error)=?, ~if_highlight: string=?, string) =&gt; error;
 </pre>
 <pre id="VALerrorf"><span class="keyword">let</span> errorf:
   (
@@ -205,7 +204,7 @@ In -absname mode, return the absolute path for this filename.
 </pre>
 <pre id="VALreport_error"><span class="keyword">let</span> report_error: (Format.formatter, error) =&gt; unit;
 </pre>
-<pre id="VALerror_reporter"><span class="keyword">let</span> error_reporter: Pervasives.ref((Format.formatter, error) =&gt; unit);
+<pre id="VALerror_reporter"><span class="keyword">let</span> error_reporter: Pervasives.ref(((Format.formatter, error) =&gt; unit));
 </pre><div class="info ">
 Hook for intercepting error reports.<br>
 </div>

@@ -49,23 +49,23 @@ Return the digest of the given byte sequence.<br>
 
 <pre id="VALsubstring"><span class="keyword">let</span> substring: (string, int, int) =&gt; t;
 </pre><div class="info ">
-<code class="code">Digest.substring s ofs len</code> returns the digest of the substring
+<code class="code">Digest.substring(s, ofs, len)</code> returns the digest of the substring
    of <code class="code">s</code> starting at index <code class="code">ofs</code> and containing <code class="code">len</code> characters.<br>
 </div>
 
 <pre id="VALsubbytes"><span class="keyword">let</span> subbytes: (bytes, int, int) =&gt; t;
 </pre><div class="info ">
-<code class="code">Digest.subbytes s ofs len</code> returns the digest of the subsequence
+<code class="code">Digest.subbytes(s, ofs, len)</code> returns the digest of the subsequence
     of <code class="code">s</code> starting at index <code class="code">ofs</code> and containing <code class="code">len</code> bytes.<br>
 <b>Since</b> 4.02.0<br>
 </div>
 
 <pre id="VALchannel"><span class="keyword">let</span> channel: (Pervasives.in_channel, int) =&gt; t;
 </pre><div class="info ">
-If <code class="code">len</code> is nonnegative, <code class="code">Digest.channel ic len</code> reads <code class="code">len</code>
+If <code class="code">len</code> is nonnegative, <code class="code">Digest.channel(ic, len)</code> reads <code class="code">len</code>
    characters from channel <code class="code">ic</code> and returns their digest, or raises
    <code class="code">End_of_file</code> if end-of-file is reached before <code class="code">len</code> characters
-   are read.  If <code class="code">len</code> is negative, <code class="code">Digest.channel ic len</code> reads
+   are read.  If <code class="code">len</code> is negative, <code class="code">Digest.channel(ic, len)</code> reads
    all characters from <code class="code">ic</code> until end-of-file is reached and return
    their digest.<br>
 </div>

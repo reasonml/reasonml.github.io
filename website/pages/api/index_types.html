@@ -527,8 +527,7 @@ The type of scanning buffers.
 The type of formatted input scanners: <code class="code">(&apos;a, &apos;b, &apos;c, &apos;d) scanner</code>
     is the type of a formatted input function that reads from some
     formatted input channel according to some format string; more
-    precisely, if <code class="code">scan</code> is some formatted input function, then <code class="code">scan
-    ic fmt f</code> applies <code class="code">f</code> to the arguments specified by the format
+    precisely, if <code class="code">scan</code> is some formatted input function, then <code class="code">scan(ic, fmt, f)</code> applies <code class="code">f</code> to the arguments specified by the format
     string <code class="code">fmt</code>, when <code class="code">scan</code> has read those arguments from the
     formatted input channel <code class="code">ic</code>.
 </div>
@@ -555,7 +554,7 @@ The type of commands for <code class="code">shutdown</code>.
 <tr><td><a href="Sys.html#TYPEsignal_behavior">signal_behavior</a> [<a href="Sys.html">Sys</a>]</td>
 <td><div class="info">
 What to do when receiving a signal: <code class="code">Signal_default</code>: take the default behavior
-     (usually: abort the program), <code class="code">Signal_ignore</code>: ignore the signal, <code class="code">Signal_handle f</code>: call function <code class="code">f</code>, giving it the signal
+     (usually: abort the program), <code class="code">Signal_ignore</code>: ignore the signal, <code class="code">Signal_handle(f)</code>: call function <code class="code">f</code>, giving it the signal
    number as argument.
 </div>
 </td></tr>

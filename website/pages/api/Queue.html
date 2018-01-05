@@ -38,7 +38,7 @@ Return a new queue, initially empty.<br>
 
 <pre id="VALadd"><span class="keyword">let</span> add: (&apos;a, t(&apos;a)) =&gt; unit;
 </pre><div class="info ">
-<code class="code">add x q</code> adds the element <code class="code">x</code> at the end of the queue <code class="code">q</code>.<br>
+<code class="code">add(x, q)</code> adds the element <code class="code">x</code> at the end of the queue <code class="code">q</code>.<br>
 </div>
 
 <pre id="VALpush"><span class="keyword">let</span> push: (&apos;a, t(&apos;a)) =&gt; unit;
@@ -48,7 +48,7 @@ Return a new queue, initially empty.<br>
 
 <pre id="VALtake"><span class="keyword">let</span> take: t(&apos;a) =&gt; &apos;a;
 </pre><div class="info ">
-<code class="code">take q</code> removes and returns the first element in queue <code class="code">q</code>,
+<code class="code">take(q)</code> removes and returns the first element in queue <code class="code">q</code>,
    or raises <code class="code">Empty</code> if the queue is empty.<br>
 </div>
 
@@ -59,7 +59,7 @@ Return a new queue, initially empty.<br>
 
 <pre id="VALpeek"><span class="keyword">let</span> peek: t(&apos;a) =&gt; &apos;a;
 </pre><div class="info ">
-<code class="code">peek q</code> returns the first element in queue <code class="code">q</code>, without removing
+<code class="code">peek(q)</code> returns the first element in queue <code class="code">q</code>, without removing
    it from the queue, or raises <code class="code">Empty</code> if the queue is empty.<br>
 </div>
 
@@ -90,23 +90,26 @@ Return the number of elements in a queue.<br>
 
 <pre id="VALiter"><span class="keyword">let</span> iter: (&apos;a =&gt; unit, t(&apos;a)) =&gt; unit;
 </pre><div class="info ">
-<code class="code">iter f q</code> applies <code class="code">f</code> in turn to all elements of <code class="code">q</code>,
+<code class="code">iter(f, q)</code> applies <code class="code">f</code> in turn to all elements of <code class="code">q</code>,
    from the least recently entered to the most recently entered.
    The queue itself is unchanged.<br>
 </div>
 
 <pre id="VALfold"><span class="keyword">let</span> fold: ((&apos;b, &apos;a) =&gt; &apos;b, &apos;b, t(&apos;a)) =&gt; &apos;b;
 </pre><div class="info ">
-<code class="code">fold f accu q</code> is equivalent to <code class="code">List.fold_left f accu l</code>,
+<code class="code">fold(f, accu, q)</code> is equivalent to <code class="code">List.fold_left(f, accu, l)</code>,
    where <code class="code">l</code> is the list of <code class="code">q</code>&apos;s elements. The queue remains
    unchanged.<br>
 </div>
 
 <pre id="VALtransfer"><span class="keyword">let</span> transfer: (t(&apos;a), t(&apos;a)) =&gt; unit;
 </pre><div class="info ">
-<code class="code">transfer q1 q2</code> adds all of <code class="code">q1</code>&apos;s elements at the end of
+<code class="code">transfer(q1, q2)</code> adds all of <code class="code">q1</code>&apos;s elements at the end of
    the queue <code class="code">q2</code>, then clears <code class="code">q1</code>. It is equivalent to the
-   sequence <code class="code">iter (fun x -&gt; add x q2) q1; clear q1</code>, but runs
+   sequence <code class="code">{
+  iter((x) =&gt; add(x, q2), q1);
+  clear(q1)
+}</code>, but runs
    in constant time.<br>
 </div>
 </div>

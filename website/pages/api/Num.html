@@ -9,7 +9,7 @@ Operation on arbitrary-precision numbers.
 <p>
 
    Numbers (type <code class="code">num</code>) are arbitrary-precision rational numbers,
-   plus the special elements <code class="code">1/0</code> (infinity) and <code class="code">0/0</code> (undefined).<br>
+   plus the special elements <code class="code">1 / 0</code> (infinity) and <code class="code">0 / 0</code> (undefined).<br>
 </p></div>
 <hr width="100%">
 
@@ -120,22 +120,22 @@ Absolute value.<br>
 
 <pre id="VALsucc_num"><span class="keyword">let</span> succ_num: num =&gt; num;
 </pre><div class="info ">
-<code class="code">succ n</code> is <code class="code">n+1</code><br>
+<code class="code">succ(n)</code> is <code class="code">n + 1</code><br>
 </div>
 
 <pre id="VALpred_num"><span class="keyword">let</span> pred_num: num =&gt; num;
 </pre><div class="info ">
-<code class="code">pred n</code> is <code class="code">n-1</code><br>
+<code class="code">pred(n)</code> is <code class="code">n - 1</code><br>
 </div>
 
 <pre id="VALincr_num"><span class="keyword">let</span> incr_num: Pervasives.ref(num) =&gt; unit;
 </pre><div class="info ">
-<code class="code">incr r</code> is <code class="code">r:=!r+1</code>, where <code class="code">r</code> is a reference to a number.<br>
+<code class="code">incr(r)</code> is <code class="code">r := r^ + 1</code>, where <code class="code">r</code> is a reference to a number.<br>
 </div>
 
 <pre id="VALdecr_num"><span class="keyword">let</span> decr_num: Pervasives.ref(num) =&gt; unit;
 </pre><div class="info ">
-<code class="code">decr r</code> is <code class="code">r:=!r-1</code>, where <code class="code">r</code> is a reference to a number.<br>
+<code class="code">decr(r)</code> is <code class="code">r := r^ - 1</code>, where <code class="code">r</code> is a reference to a number.<br>
 </div>
 
 <pre id="VALis_integer_num"><span class="keyword">let</span> is_integer_num: num =&gt; bool;
@@ -147,29 +147,29 @@ The four following functions approximate a number by an integer :<br>
 
 <pre id="VALinteger_num"><span class="keyword">let</span> integer_num: num =&gt; num;
 </pre><div class="info ">
-<code class="code">integer_num n</code> returns the integer closest to <code class="code">n</code>. In case of ties,
+<code class="code">integer_num(n)</code> returns the integer closest to <code class="code">n</code>. In case of ties,
    rounds towards zero.<br>
 </div>
 
 <pre id="VALfloor_num"><span class="keyword">let</span> floor_num: num =&gt; num;
 </pre><div class="info ">
-<code class="code">floor_num n</code> returns the largest integer smaller or equal to <code class="code">n</code>.<br>
+<code class="code">floor_num(n)</code> returns the largest integer smaller or equal to <code class="code">n</code>.<br>
 </div>
 
 <pre id="VALround_num"><span class="keyword">let</span> round_num: num =&gt; num;
 </pre><div class="info ">
-<code class="code">round_num n</code> returns the integer closest to <code class="code">n</code>. In case of ties,
+<code class="code">round_num(n)</code> returns the integer closest to <code class="code">n</code>. In case of ties,
    rounds off zero.<br>
 </div>
 
 <pre id="VALceiling_num"><span class="keyword">let</span> ceiling_num: num =&gt; num;
 </pre><div class="info ">
-<code class="code">ceiling_num n</code> returns the smallest integer bigger or equal to <code class="code">n</code>.<br>
+<code class="code">ceiling_num(n)</code> returns the smallest integer bigger or equal to <code class="code">n</code>.<br>
 </div>
 
 <pre id="VALsign_num"><span class="keyword">let</span> sign_num: num =&gt; int;
 </pre><div class="info ">
-Return <code class="code">-1</code>, <code class="code">0</code> or <code class="code">1</code> according to the sign of the argument.<br>
+Return <code class="code">(-1)</code>, <code class="code">0</code> or <code class="code">1</code> according to the sign of the argument.<br>
 </div>
 <br>
 <div class="h7" id="7_Comparisonsbetweennumbers">Comparisons between numbers</div><br>
@@ -198,7 +198,7 @@ Return <code class="code">-1</code>, <code class="code">0</code> or <code class=
 </pre>
 <pre id="VALcompare_num"><span class="keyword">let</span> compare_num: (num, num) =&gt; int;
 </pre><div class="info ">
-Return <code class="code">-1</code>, <code class="code">0</code> or <code class="code">1</code> if the first argument is less than,
+Return <code class="code">(-1)</code>, <code class="code">0</code> or <code class="code">1</code> if the first argument is less than,
    equal to, or greater than the second argument.<br>
 </div>
 
@@ -237,7 +237,7 @@ Approximate a number by a decimal. The first argument is the
 <pre id="VALnum_of_string"><span class="keyword">let</span> num_of_string: string =&gt; num;
 </pre><div class="info ">
 Convert a string to a number.
-   Raise <code class="code">Failure &quot;num_of_string&quot;</code> if the given string is not
+   Raise <code class="code">Failure(&quot;num_of_string&quot;)</code> if the given string is not
    a valid representation of an integer<br>
 </div>
 <br>

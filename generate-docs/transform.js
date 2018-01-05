@@ -6,13 +6,19 @@ function convert(input, isInterface) {
   const result = spawn(
     'refmt',
     ['--interface=' + JSON.stringify(isInterface), '--parse=ml', '--print=re'],
-    {input: input}
+    { input: input }
   );
   if (result.status != 0) {
     return input;
   }
-
-  return result.stdout.toString();
+  if (isInterface) {
+    return result.stdout.toString();
+  }
+  let out = result.stdout.toString().trim();
+  return out.substring(
+    0,
+    out[out.length - 1] === ';' ? out.length - 1 : out.length
+  );
 }
 
 module.exports = function(fileInfo, api, options) {
@@ -20,20 +26,20 @@ module.exports = function(fileInfo, api, options) {
   const body = $('body');
   const bodyContent = body.html();
   body.empty();
-  const docContent = $('<div class="ocamldoc"></div>');
+  const docContent = $('<div class='ocamldoc'></div>');
   docContent.append(bodyContent);
-  body.append('<link rel="stylesheet" href="/css/main.css" />');
+  body.append('<link rel='stylesheet' href='/css/main.css' />');
   body.append(docContent);
 
   if (fileInfo.path.endsWith('index.html')) {
     $('h1').map((i, el) => {
       const $el = $(el);
-      $el.attr('style', 'padding-left: 24px')
+      $el.attr('style', 'padding-left: 24px');
       return $el.text($el.text().replace('OCaml library', 'Reason API'));
     });
 
-    $('.indexlist li a').attr('style', 'padding-left: 24px')
-    $('.indextable tbody tr td a').attr('style', 'padding-left: 24px')
+    $('.indexlist li a').attr('style', 'padding-left: 24px');
+    $('.indextable tbody tr td a').attr('style', 'padding-left: 24px');
     $('br').remove();
   }
 
@@ -59,7 +65,7 @@ module.exports = function(fileInfo, api, options) {
       const keyword = keywordMatch[1];
       const remainder = transformed.slice(keywordMatch[0].length);
       $el.text(remainder);
-      $el.prepend(`<span class="keyword">${keyword}</span>`);
+      $el.prepend(`<span class='keyword'>${keyword}</span>`);
       return $el;
     }
     return $el.text(transformed);
@@ -67,7 +73,7 @@ module.exports = function(fileInfo, api, options) {
   $('code').map((i, el) => {
     const $el = $(el);
     const input = $el.text();
-    const transformed = convert(input, true);
+    const transformed = convert(input, false);
     return $el.text(transformed);
   });
   return body.html();

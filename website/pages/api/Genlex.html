@@ -19,7 +19,7 @@ A generic lexical analyzer.
    </p><pre class="codepre">     let lexer = make_lexer [&quot;+&quot;;&quot;-&quot;;&quot;*&quot;;&quot;/&quot;;&quot;let&quot;;&quot;=&quot;; &quot;(&quot;; &quot;)&quot;]  </pre>
 <p>
 
-   The associated parser would be a function from <code class="code">token stream</code>
+   The associated parser would be a function from <code class="code">token(stream)</code>
    to, for instance, <code class="code">int</code>, and would have rules such as:
 </p><p>
 
@@ -100,9 +100,9 @@ The type of tokens. The lexical classes are: <code class="code">Int</code> and <
 <pre id="VALmake_lexer"><span class="keyword">let</span> make_lexer: (list(string), Stream.t(char)) =&gt; Stream.t(token);
 </pre><div class="info ">
 Construct the lexer function. The first argument is the list of
-   keywords. An identifier <code class="code">s</code> is returned as <code class="code">Kwd s</code> if <code class="code">s</code>
-   belongs to this list, and as <code class="code">Ident s</code> otherwise.
-   A special character <code class="code">s</code> is returned as <code class="code">Kwd s</code> if <code class="code">s</code>
+   keywords. An identifier <code class="code">s</code> is returned as <code class="code">Kwd(s)</code> if <code class="code">s</code>
+   belongs to this list, and as <code class="code">Ident(s)</code> otherwise.
+   A special character <code class="code">s</code> is returned as <code class="code">Kwd(s)</code> if <code class="code">s</code>
    belongs to this list, and cause a lexical error (exception
    <code class="code">Stream.Error</code> with the offending lexeme as its parameter) otherwise.
    Blanks and newlines are skipped. Comments delimited by <code class="code">(*</code> and <code class="code">*)</code>

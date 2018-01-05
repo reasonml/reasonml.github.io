@@ -29,7 +29,7 @@ The directory separator (e.g. <code class="code">/</code> in Unix).<br>
 
 <pre id="VALconcat"><span class="keyword">let</span> concat: (string, string) =&gt; string;
 </pre><div class="info ">
-<code class="code">concat dir file</code> returns a file name that designates file
+<code class="code">concat(dir, file)</code> returns a file name that designates file
    <code class="code">file</code> in directory <code class="code">dir</code>.<br>
 </div>
 
@@ -50,13 +50,13 @@ Return <code class="code">true</code> if the file name is relative and does not 
 
 <pre id="VALcheck_suffix"><span class="keyword">let</span> check_suffix: (string, string) =&gt; bool;
 </pre><div class="info ">
-<code class="code">check_suffix name suff</code> returns <code class="code">true</code> if the filename <code class="code">name</code>
+<code class="code">check_suffix(name, suff)</code> returns <code class="code">true</code> if the filename <code class="code">name</code>
    ends with the suffix <code class="code">suff</code>.<br>
 </div>
 
 <pre id="VALchop_suffix"><span class="keyword">let</span> chop_suffix: (string, string) =&gt; string;
 </pre><div class="info ">
-<code class="code">chop_suffix name suff</code> removes the suffix <code class="code">suff</code> from
+<code class="code">chop_suffix(name, suff)</code> removes the suffix <code class="code">suff</code> from
    the filename <code class="code">name</code>. The behavior is undefined if <code class="code">name</code> does not
    end with the suffix <code class="code">suff</code>.<br>
 </div>
@@ -75,10 +75,10 @@ Return the given file name without its extension. The extension
 <pre id="VALbasename"><span class="keyword">let</span> basename: string =&gt; string;
 </pre><div class="info ">
 Split a file name into directory name / base file name.
-   If <code class="code">name</code> is a valid file name, then <code class="code">concat (dirname name) (basename name)</code>
+   If <code class="code">name</code> is a valid file name, then <code class="code">concat(dirname(name), basename(name))</code>
    returns a file name which is equivalent to <code class="code">name</code>. Moreover,
-   after setting the current directory to <code class="code">dirname name</code> (with <a href="Sys.html#VALchdir"><code class="code">Sys.chdir</code></a>),
-   references to <code class="code">basename name</code> (which is a relative file name)
+   after setting the current directory to <code class="code">dirname(name)</code> (with <a href="Sys.html#VALchdir"><code class="code">Sys.chdir</code></a>),
+   references to <code class="code">basename(name)</code> (which is a relative file name)
    designate the same file as <code class="code">name</code> before the call to <a href="Sys.html#VALchdir"><code class="code">Sys.chdir</code></a>.
 <p>
 
@@ -95,13 +95,13 @@ See <a href="Filename.html#VALbasename"><code class="code">Filename.basename</co
 
 <pre id="VALtemp_file"><span class="keyword">let</span> temp_file: (~temp_dir: string=?, string, string) =&gt; string;
 </pre><div class="info ">
-<code class="code">temp_file prefix suffix</code> returns the name of a
+<code class="code">temp_file(prefix, suffix)</code> returns the name of a
    fresh temporary file in the temporary directory.
    The base name of the temporary file is formed by concatenating
    <code class="code">prefix</code>, then a suitably chosen integer number, then <code class="code">suffix</code>.
    The optional argument <code class="code">temp_dir</code> indicates the temporary directory
    to use, defaulting to the current result of <a href="Filename.html#VALget_temp_dir_name"><code class="code">Filename.get_temp_dir_name</code></a>.
-   The temporary file is created empty, with permissions <code class="code">0o600</code>
+   The temporary file is created empty, with permissions <code class="code">384</code>
    (readable and writable only by the file owner).  The file is
    guaranteed to be different from any other file that existed when
    <code class="code">temp_file</code> was called.

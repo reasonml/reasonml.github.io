@@ -23,8 +23,8 @@ The equality predicate used to compare keys.<br>
 <pre id="VALhash"><span class="keyword">let</span> hash: (int, t) =&gt; int;
 </pre><div class="info ">
 A seeded hashing function on keys.  The first argument is
-          the seed.  It must be the case that if <code class="code">equal x y</code> is true,
-          then <code class="code">hash seed x = hash seed y</code> for any value of <code class="code">seed</code>.
+          the seed.  It must be the case that if <code class="code">equal(x, y)</code> is true,
+          then <code class="code">hash(seed, x) == hash(seed, y)</code> for any value of <code class="code">seed</code>.
           A suitable choice for <code class="code">hash</code> is the function <a href="Hashtbl.html#VALseeded_hash"><code class="code">Hashtbl.seeded_hash</code></a>
           below.<br>
 </div>

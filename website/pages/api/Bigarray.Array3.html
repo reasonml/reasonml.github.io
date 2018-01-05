@@ -19,10 +19,9 @@ The type of three-dimensional big arrays whose elements have
 </div>
 
 
-<pre id="VALcreate"><span class="keyword">let</span> create:
-  (Bigarray.kind(&apos;a, &apos;b), Bigarray.layout(&apos;c), int, int, int) =&gt; t(&apos;a, &apos;b, &apos;c);
+<pre id="VALcreate"><span class="keyword">let</span> create: (Bigarray.kind(&apos;a, &apos;b), Bigarray.layout(&apos;c), int, int, int) =&gt; t(&apos;a, &apos;b, &apos;c);
 </pre><div class="info ">
-<code class="code">Array3.create kind layout dim1 dim2 dim3</code> returns a new bigarray of
+<code class="code">Array3.create(kind, layout, dim1, dim2, dim3)</code> returns a new bigarray of
      three dimension, whose size is <code class="code">dim1</code> in the first dimension,
      <code class="code">dim2</code> in the second dimension, and <code class="code">dim3</code> in the third.
      <code class="code">kind</code> and <code class="code">layout</code> determine the array element kind and
@@ -56,7 +55,7 @@ Return the layout of the given big array.<br>
 
 <pre id="VALget"><span class="keyword">let</span> get: (t(&apos;a, &apos;b, &apos;c), int, int, int) =&gt; &apos;a;
 </pre><div class="info ">
-<code class="code">Array3.get a x y z</code>, also written <code class="code">a.{x,y,z}</code>,
+<code class="code">Array3.get(a, x, y, z)</code>, also written <code class="code">a.{x y z}</code>,
      returns the element of <code class="code">a</code> at coordinates (<code class="code">x</code>, <code class="code">y</code>, <code class="code">z</code>).
      <code class="code">x</code>, <code class="code">y</code> and <code class="code">z</code> must be within the bounds of <code class="code">a</code>,
      as described for <a href="Bigarray.Genarray.html#VALget"><code class="code">Bigarray.Genarray.get</code></a>;
@@ -65,15 +64,14 @@ Return the layout of the given big array.<br>
 
 <pre id="VALset"><span class="keyword">let</span> set: (t(&apos;a, &apos;b, &apos;c), int, int, int, &apos;a) =&gt; unit;
 </pre><div class="info ">
-<code class="code">Array3.set a x y v</code>, or alternatively <code class="code">a.{x,y,z} &lt;- v</code>,
+<code class="code">Array3.set(a, x, y, v)</code>, or alternatively <code class="code">a.{x y z} = v</code>,
      stores the value <code class="code">v</code> at coordinates (<code class="code">x</code>, <code class="code">y</code>, <code class="code">z</code>) in <code class="code">a</code>.
      <code class="code">x</code>, <code class="code">y</code> and <code class="code">z</code> must be within the bounds of <code class="code">a</code>,
      as described for <a href="Bigarray.Genarray.html#VALset"><code class="code">Bigarray.Genarray.set</code></a>;
      otherwise, <code class="code">Invalid_argument</code> is raised.<br>
 </div>
 
-<pre id="VALsub_left"><span class="keyword">let</span> sub_left:
-  (t(&apos;a, &apos;b, Bigarray.c_layout), int, int) =&gt; t(&apos;a, &apos;b, Bigarray.c_layout);
+<pre id="VALsub_left"><span class="keyword">let</span> sub_left: (t(&apos;a, &apos;b, Bigarray.c_layout), int, int) =&gt; t(&apos;a, &apos;b, Bigarray.c_layout);
 </pre><div class="info ">
 Extract a three-dimensional sub-array of the given
      three-dimensional big array by restricting the first dimension.
@@ -82,8 +80,7 @@ Extract a three-dimensional sub-array of the given
 </div>
 
 <pre id="VALsub_right"><span class="keyword">let</span> sub_right:
-  (t(&apos;a, &apos;b, Bigarray.fortran_layout), int, int) =&gt;
-  t(&apos;a, &apos;b, Bigarray.fortran_layout);
+  (t(&apos;a, &apos;b, Bigarray.fortran_layout), int, int) =&gt; t(&apos;a, &apos;b, Bigarray.fortran_layout);
 </pre><div class="info ">
 Extract a three-dimensional sub-array of the given
      three-dimensional big array by restricting the second dimension.
@@ -92,8 +89,7 @@ Extract a three-dimensional sub-array of the given
 </div>
 
 <pre id="VALslice_left_1"><span class="keyword">let</span> slice_left_1:
-  (t(&apos;a, &apos;b, Bigarray.c_layout), int, int) =&gt;
-  Bigarray.Array1.t(&apos;a, &apos;b, Bigarray.c_layout);
+  (t(&apos;a, &apos;b, Bigarray.c_layout), int, int) =&gt; Bigarray.Array1.t(&apos;a, &apos;b, Bigarray.c_layout);
 </pre><div class="info ">
 Extract a one-dimensional slice of the given three-dimensional
      big array by fixing the first two coordinates.
@@ -115,8 +111,7 @@ Extract a one-dimensional slice of the given three-dimensional
 </div>
 
 <pre id="VALslice_left_2"><span class="keyword">let</span> slice_left_2:
-  (t(&apos;a, &apos;b, Bigarray.c_layout), int) =&gt;
-  Bigarray.Array2.t(&apos;a, &apos;b, Bigarray.c_layout);
+  (t(&apos;a, &apos;b, Bigarray.c_layout), int) =&gt; Bigarray.Array2.t(&apos;a, &apos;b, Bigarray.c_layout);
 </pre><div class="info ">
 Extract a  two-dimensional slice of the given three-dimensional
      big array by fixing the first coordinate.
@@ -126,8 +121,7 @@ Extract a  two-dimensional slice of the given three-dimensional
 </div>
 
 <pre id="VALslice_right_2"><span class="keyword">let</span> slice_right_2:
-  (t(&apos;a, &apos;b, Bigarray.fortran_layout), int) =&gt;
-  Bigarray.Array2.t(&apos;a, &apos;b, Bigarray.fortran_layout);
+  (t(&apos;a, &apos;b, Bigarray.fortran_layout), int) =&gt; Bigarray.Array2.t(&apos;a, &apos;b, Bigarray.fortran_layout);
 </pre><div class="info ">
 Extract a two-dimensional slice of the given
      three-dimensional big array by fixing the last coordinate.
@@ -150,8 +144,7 @@ Fill the given big array with the given value.
 </div>
 
 <pre id="VALof_array"><span class="keyword">let</span> of_array:
-  (Bigarray.kind(&apos;a, &apos;b), Bigarray.layout(&apos;c), array(array(array(&apos;a)))) =&gt;
-  t(&apos;a, &apos;b, &apos;c);
+  (Bigarray.kind(&apos;a, &apos;b), Bigarray.layout(&apos;c), array(array(array(&apos;a)))) =&gt; t(&apos;a, &apos;b, &apos;c);
 </pre><div class="info ">
 Build a three-dimensional big array initialized from the
      given array of arrays of arrays.<br>
