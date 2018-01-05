@@ -28,7 +28,7 @@ JavaScript                |   Reason
 --------------------------|--------------------------------
 `true`, `false`                      |  `true`, `false` \*
 `!true`                              |  Same
-`||`, `&&`, `<=`, `>=`, `<`, `>`     |  Same
+<code>&#124;&#124;</code>, `&&`, `<=`, `>=`, `<`, `>`     |  Same
 `a === b`, `a !== b`                 |  Same
 No deep equality (recursive compare) |  `a == b`, `a != b`
 `a == b`                             |  No equality with implicit casting (thankfully)
@@ -63,7 +63,7 @@ no static types           |  `type point = {x: int, mutable y: int}`
 
 JavaScript                |   Reason
 --------------------------|--------------------------------
-`[1, 2, 3]`               |  `[|1, 2, 3|]`
+`[1, 2, 3]`               |  <code>[&#124;1, 2, 3&#124;]</code>
 `myArray[1] = 10`         |  Same
 `[1, "Bob", true]` \*     |  `(1, "Bob", true)`
 No immutable list         |  `[1, 2, 3]`
@@ -76,7 +76,7 @@ JavaScript                |   Reason
 --------------------------|--------------------------------
 `null`, `undefined`       |  `None` \*
 
-\* Again, only a spiritual equivalent; Reason doesn't have nulls, nor null bugs! But it does have [an option type](/guide/examples#using-the-option-type) for when you actually need nullability.
+\* Again, only a spiritual equivalent; Reason doesn't have nulls, nor null bugs! But it does have [an option type](/docs/en/newcomer-examples.html#using-the-option-type) for when you actually need nullability.
 
 ## Function
 
@@ -93,20 +93,22 @@ JavaScript                            |   Reason
   <thead><tr> <th scope="col"><p >JavaScript</p></th> <th scope="col"><p>Reason</p></th></tr></thead>
   <tr>
     <td>
-      <pre>
+      <code>
+        <pre>
 const myFun = (x, y) => {
   const doubleX = x + x;
   const doubleY = y + y;
   return doubleX + doubleY
-};</pre>
+};</pre></code>
     </td>
     <td>
-      <pre>
+      <code>
+        <pre>
 let myFun = (x, y) => {
   let doubleX = x + x;
   let doubleY = y + y;
   doubleX + doubleY
-};</pre>
+};</pre></code>
     </td>
   </tr>
 </table>
@@ -134,7 +136,7 @@ JavaScript                |   Reason
 JavaScript                |   Reason
 --------------------------|--------------------------------
 `const {a, b} = data`             |  `let {a, b} = data`
-`const [a, b] = data`             |  `let [|a, b|] = data` \*
+`const [a, b] = data`             |  <code>let [&#124;a, b&#124;] = data</code> \*
 `const {a: aa, b: bb} = data`     |  `let {a: aa, b: bb} = data`
 
 \* Gives good compiler warning that `data` might not be of length 2. Switch to pattern-matching instead.
@@ -162,7 +164,7 @@ JavaScript                |   Reason
 JavaScript                |   Reason
 --------------------------|--------------------------------
 `throw new SomeError(...)`  |  `raise(SomeError(...))`
-`try (a) {...} catch (Err) {...} finally {...}`   |  `try a { | Err => ...}` \*
+`try (a) {...} catch (Err) {...} finally {...}`   |  <code>try a { &#124; Err => ...}</code> \*
 
 \* No finally.
 
@@ -174,20 +176,22 @@ In Reason, "sequence expressions" are created with `{}` and evaluate to their la
   <thead><tr> <th scope="col"><p >JavaScript</p></th> <th scope="col"><p>Reason</p></th></tr></thead>
   <tr>
     <td>
-      <pre>
+      <code>
+        <pre>
 let res = (function() {
   const x = 23;
   const y = 34;
   return x + y;
-})();</pre>
+})();</pre></code>
     </td>
     <td>
-      <pre>
+      <code>
+        <pre>
 let res = {
   let x = 23;
   let y = 34;
   x + y
-};</pre>
+};</pre></code>
     </td>
   </tr>
 </table>
