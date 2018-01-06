@@ -90,7 +90,7 @@ We've worked very hard to make Reason look like JS while preserving OCaml's grea
 ### Blocks
 
 <table>
-  <thead><tr> <th scope="col"><p>JavaScript</p></th> <th scope="col"><p>Reason</p></th></tr></thead>
+  <thead><tr> <th><p>JavaScript</p></th> <th><p>Reason</p></th></tr></thead>
   <tr>
     <td>
       <pre>
@@ -171,7 +171,7 @@ Both JavaScript and Reason support currying, but Reason currying is **built-in a
 In Reason, "sequence expressions" are created with `{}` and evaluate to their last statement. In JavaScript, this can be simulated via an immediately-invoked function expression (since function bodies have their own local scope).
 
 <table>
-  <thead><tr> <th scope="col"><p >JavaScript</p></th> <th scope="col"><p>Reason</p></th></tr></thead>
+  <thead><tr> <th><p >JavaScript</p></th> <th><p>Reason</p></th></tr></thead>
   <tr>
     <td>
       <pre>

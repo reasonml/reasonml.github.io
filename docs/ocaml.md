@@ -30,7 +30,7 @@ Reference | `x != y` | `x !== y`
 Reason's lexical scoping is exactly the same as OCaml's, but let bindings syntactically resemble "block scope" which is more familiar to many developers. In Reason, they are created with `{}` braces, which may contain both `let` bindings and imperative commands, separated by `;`. All blocks evaluate to the last line and the semicolon on the last line is optional. `{}` braces are only needed if you have more than one item to chain together via `;`.
 
 <table>
-  <thead><tr> <th scope="col"><p>OCaml</p></th><th scope="col"><p>Reason</p></th></tr></thead>
+  <thead><tr> <th><p>OCaml</p></th><th><p>Reason</p></th></tr></thead>
   <tr>
     <td>
       <pre>
@@ -64,7 +64,7 @@ Reason's `{}` syntax removes many commonly reported pain points in OCaml's synta
 In Reason, everything that can go between the `{}` in [Local Scopes](#local-scope) and in module bodies. You can usually even cut/paste code between the two contexts. In OCaml, the syntaxes for the two contexts are very different. Local scope requires trailing `in`, but module bodies do not and some imperative statements must be assigned to `_` or `()`, or else use double `;;`.
 
 <table>
-  <thead><tr> <th scope="col"><p>OCaml Module Body</p></th><th scope="col"><p>Reason Module Body</p></th></tr></thead>
+  <thead><tr> <th><p>OCaml Module Body</p></th><th><p>Reason Module Body</p></th></tr></thead>
   <tr>
     <td>
       <pre>
@@ -91,7 +91,7 @@ imperativeFunc 0 0;;</pre>
     </td>
   </tr>
 
-  <thead><tr> <th scope="col"><p>OCaml Local Scope</p></th><th scope="col"><p>Reason Local Scope</p></th></tr></thead>
+  <thead><tr> <th><p>OCaml Local Scope</p></th><th><p>Reason Local Scope</p></th></tr></thead>
   <tr>
     <td>
       <pre>
@@ -142,7 +142,7 @@ OCaml | Reason
 In Reason, record values resemble JavaScript, using `:` instead of `=`. Because Reason tuples always require wrapping parens, records may contain lambdas as values without needing extra parens.
 
 <table>
-  <thead><tr> <th scope="col"><p>OCaml</p></th><th scope="col"><p>Reason</p></th></tr></thead>
+  <thead><tr> <th><p>OCaml</p></th><th><p>Reason</p></th></tr></thead>
   <tr>
     <td>
       <pre>
@@ -211,7 +211,7 @@ function. The single case match is a natural extension of the simple lambda,
 and the multicase lambda is a natural extension of the single case lambda.
 
 <table>
-  <thead><tr> <th scope="col"><p>Form</p></th><th scope="col"><p>OCaml</p></th><th scope="col"><p>Reason</p></th></tr></thead>
+  <thead><tr> <th><p>Form</p></th><th><p>OCaml</p></th><th><p>Reason</p></th></tr></thead>
   <tr>
     <td>
       lambda
@@ -337,7 +337,7 @@ For example, you can imagine `list` being a "function" for types that accepts a
 type and returns a new type.
 
 <table>
-  <thead><tr> <th scope="col"><p>OCaml</p></th><th scope="col"><p>Reason</p></th></tr></thead>
+  <thead><tr> <th><p>OCaml</p></th><th><p>Reason</p></th></tr></thead>
   <tr>
     <td>
       <pre>
@@ -407,10 +407,10 @@ OCaml | Reason
 <table>
   <thead>
     <tr>
-      <th scope="col">
+      <th>
         <p>OCaml</p>
       </th>
-      <th scope="col">
+      <th>
         <p>Reason</p>
       </th>
     </tr>
@@ -484,7 +484,7 @@ let res = (x) =>
 ## Pattern Matching
 
 <table>
-  <thead><tr> <th scope="col"><p>OCaml</p></th><th scope="col"><p>Reason</p></th></tr></thead>
+  <thead><tr> <th><p>OCaml</p></th><th><p>Reason</p></th></tr></thead>
   <tr>
     <td>
       <pre>
@@ -525,7 +525,7 @@ Reason's mandatory `{}` around `switch` cases prevents this issue.
 ### Definition
 
 <table>
-  <thead><tr> <th scope="col"><p>OCaml</p></th><th scope="col"><p>Reason</p></th></tr></thead>
+  <thead><tr> <th><p>OCaml</p></th><th><p>Reason</p></th></tr></thead>
   <tr>
     <td>
       <pre>
@@ -567,7 +567,7 @@ module MyModule = {
 ### Functors Types
 
 <table>
-  <thead><tr> <th scope="col"><p>OCaml</p></th><th scope="col"><p>Reason</p></th></tr></thead>
+  <thead><tr> <th><p>OCaml</p></th><th><p>Reason</p></th></tr></thead>
   <tr>
     <td>
       <pre>
@@ -589,7 +589,7 @@ module type FType =
 ## Functors
 
 <table>
-  <thead><tr> <th scope="col"><p>OCaml</p></th><th scope="col"><p>Reason</p></th></tr></thead>
+  <thead><tr> <th><p>OCaml</p></th><th><p>Reason</p></th></tr></thead>
   <tr>
     <td>
       <pre>
@@ -651,7 +651,7 @@ see were very confusing when it would believe the function's return value
 was a tuple with infix `,` comma.
 
 <table>
-  <thead><tr> <th scope="col"><p>OCaml</p></th><th scope="col"><p>Reason</p></th></tr></thead>
+  <thead><tr> <th><p>OCaml</p></th><th><p>Reason</p></th></tr></thead>
   <tr>
     <td>
       <pre>
@@ -674,7 +674,7 @@ let myFuncs = {
 ### Lambdas as match results no longer need extra parens
 
 <table>
-  <thead><tr> <th scope="col"><p>OCaml</p></th><th scope="col"><p>Reason</p></th></tr></thead>
+  <thead><tr> <th><p>OCaml</p></th><th><p>Reason</p></th></tr></thead>
   <tr>
     <td>
       <pre>
@@ -712,7 +712,7 @@ With Reason, `as` has a higher precedence than `|` bar. This allows creating `as
 for entire rows in pattern matching.
 
 <table>
-  <thead><tr> <th scope="col"><p>OCaml</p></th><th scope="col"><p>Reason</p></th></tr></thead>
+  <thead><tr> <th><p>OCaml</p></th><th><p>Reason</p></th></tr></thead>
   <tr>
     <td>
       <pre>
