@@ -47,7 +47,7 @@
 <h2><a class="anchor" aria-hidden="true" name="local-scope"></a><a href="#local-scope" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Local Scope</h2>
 <p>Reason's lexical scoping is exactly the same as OCaml's, but let bindings syntactically resemble &quot;block scope&quot; which is more familiar to many developers. In Reason, they are created with <code>{}</code> braces, which may contain both <code>let</code> bindings and imperative commands, separated by <code>;</code>. All blocks evaluate to the last line and the semicolon on the last line is optional. <code>{}</code> braces are only needed if you have more than one item to chain together via <code>;</code>.</p>
 <table>
-  <thead><tr> <th scope="col"><p>OCaml</p></th><th scope="col"><p>Reason</p></th></tr></thead>
+  <thead><tr> <th><p>OCaml</p></th><th><p>Reason</p></th></tr></thead>
   <tr>
     <td>
       <pre>
@@ -78,7 +78,7 @@ let _ =
 <h2><a class="anchor" aria-hidden="true" name="local-scope-vs-module-body"></a><a href="#local-scope-vs-module-body" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Local Scope Vs. Module Body</h2>
 <p>In Reason, everything that can go between the <code>{}</code> in <a href="#local-scope">Local Scopes</a> and in module bodies. You can usually even cut/paste code between the two contexts. In OCaml, the syntaxes for the two contexts are very different. Local scope requires trailing <code>in</code>, but module bodies do not and some imperative statements must be assigned to <code>_</code> or <code>()</code>, or else use double <code>;;</code>.</p>
 <table>
-  <thead><tr> <th scope="col"><p>OCaml Module Body</p></th><th scope="col"><p>Reason Module Body</p></th></tr></thead>
+  <thead><tr> <th><p>OCaml Module Body</p></th><th><p>Reason Module Body</p></th></tr></thead>
   <tr>
     <td>
       <pre>
@@ -104,7 +104,7 @@ imperativeFunc 0 0;;</pre>
       Same as above
     </td>
   </tr>
-  <thead><tr> <th scope="col"><p>OCaml Local Scope</p></th><th scope="col"><p>Reason Local Scope</p></th></tr></thead>
+  <thead><tr> <th><p>OCaml Local Scope</p></th><th><p>Reason Local Scope</p></th></tr></thead>
   <tr>
     <td>
       <pre>
@@ -155,7 +155,7 @@ let ten = 10 in (
 </table>
 <p>In Reason, record values resemble JavaScript, using <code>:</code> instead of <code>=</code>. Because Reason tuples always require wrapping parens, records may contain lambdas as values without needing extra parens.</p>
 <table>
-  <thead><tr> <th scope="col"><p>OCaml</p></th><th scope="col"><p>Reason</p></th></tr></thead>
+  <thead><tr> <th><p>OCaml</p></th><th><p>Reason</p></th></tr></thead>
   <tr>
     <td>
       <pre>
@@ -238,7 +238,7 @@ the syntax makes it clear how it is actually an extension of a single argument
 function. The single case match is a natural extension of the simple lambda,
 and the multicase lambda is a natural extension of the single case lambda.</p>
 <table>
-  <thead><tr> <th scope="col"><p>Form</p></th><th scope="col"><p>OCaml</p></th><th scope="col"><p>Reason</p></th></tr></thead>
+  <thead><tr> <th><p>Form</p></th><th><p>OCaml</p></th><th><p>Reason</p></th></tr></thead>
   <tr>
     <td>
       lambda
@@ -334,7 +334,7 @@ also be given when constructing type instances such as <code>(int, string) tuple
 <p>For example, you can imagine <code>list</code> being a &quot;function&quot; for types that accepts a
 type and returns a new type.</p>
 <table>
-  <thead><tr> <th scope="col"><p>OCaml</p></th><th scope="col"><p>Reason</p></th></tr></thead>
+  <thead><tr> <th><p>OCaml</p></th><th><p>Reason</p></th></tr></thead>
   <tr>
     <td>
       <pre>
@@ -404,10 +404,10 @@ function application style (comma separated lists).</li>
 <table>
   <thead>
     <tr>
-      <th scope="col">
+      <th>
         <p>OCaml</p>
       </th>
-      <th scope="col">
+      <th>
         <p>Reason</p>
       </th>
     </tr>
@@ -479,7 +479,7 @@ let res = (x) =>
 </table>
 <h2><a class="anchor" aria-hidden="true" name="pattern-matching"></a><a href="#pattern-matching" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Pattern Matching</h2>
 <table>
-  <thead><tr> <th scope="col"><p>OCaml</p></th><th scope="col"><p>Reason</p></th></tr></thead>
+  <thead><tr> <th><p>OCaml</p></th><th><p>Reason</p></th></tr></thead>
   <tr>
     <td>
       <pre>
@@ -513,7 +513,7 @@ let res = switch x {
 <h2><a class="anchor" aria-hidden="true" name="modules-and-signatures"></a><a href="#modules-and-signatures" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Modules and Signatures</h2>
 <h3><a class="anchor" aria-hidden="true" name="definition"></a><a href="#definition" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Definition</h3>
 <table>
-  <thead><tr> <th scope="col"><p>OCaml</p></th><th scope="col"><p>Reason</p></th></tr></thead>
+  <thead><tr> <th><p>OCaml</p></th><th><p>Reason</p></th></tr></thead>
   <tr>
     <td>
       <pre>
@@ -553,7 +553,7 @@ module MyModule = {
 </table>
 <h3><a class="anchor" aria-hidden="true" name="functors-types"></a><a href="#functors-types" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Functors Types</h3>
 <table>
-  <thead><tr> <th scope="col"><p>OCaml</p></th><th scope="col"><p>Reason</p></th></tr></thead>
+  <thead><tr> <th><p>OCaml</p></th><th><p>Reason</p></th></tr></thead>
   <tr>
     <td>
       <pre>
@@ -573,7 +573,7 @@ module type FType =
 </table>
 <h2><a class="anchor" aria-hidden="true" name="functors"></a><a href="#functors" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Functors</h2>
 <table>
-  <thead><tr> <th scope="col"><p>OCaml</p></th><th scope="col"><p>Reason</p></th></tr></thead>
+  <thead><tr> <th><p>OCaml</p></th><th><p>Reason</p></th></tr></thead>
   <tr>
     <td>
       <pre>
@@ -630,7 +630,7 @@ more intuitively, without requiring extra wrapping in parenthesis.</p>
 see were very confusing when it would believe the function's return value
 was a tuple with infix <code>,</code> comma.</p>
 <table>
-  <thead><tr> <th scope="col"><p>OCaml</p></th><th scope="col"><p>Reason</p></th></tr></thead>
+  <thead><tr> <th><p>OCaml</p></th><th><p>Reason</p></th></tr></thead>
   <tr>
     <td>
       <pre>
@@ -650,7 +650,7 @@ let myFuncs = {
 </table>
 <h3><a class="anchor" aria-hidden="true" name="lambdas-as-match-results-no-longer-need-extra-parens"></a><a href="#lambdas-as-match-results-no-longer-need-extra-parens" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Lambdas as match results no longer need extra parens</h3>
 <table>
-  <thead><tr> <th scope="col"><p>OCaml</p></th><th scope="col"><p>Reason</p></th></tr></thead>
+  <thead><tr> <th><p>OCaml</p></th><th><p>Reason</p></th></tr></thead>
   <tr>
     <td>
       <pre>
@@ -687,7 +687,7 @@ let x =
 <p>With Reason, <code>as</code> has a higher precedence than <code>|</code> bar. This allows creating <code>as</code> aliases
 for entire rows in pattern matching.</p>
 <table>
-  <thead><tr> <th scope="col"><p>OCaml</p></th><th scope="col"><p>Reason</p></th></tr></thead>
+  <thead><tr> <th><p>OCaml</p></th><th><p>Reason</p></th></tr></thead>
   <tr>
     <td>
       <pre>
