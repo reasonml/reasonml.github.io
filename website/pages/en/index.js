@@ -123,7 +123,7 @@ class Index extends React.Component {
     const showcase = siteConfig.users
       .map(user => {
         return (
-          <a href={user.infoLink}>
+          <a href={user.infoLink} key={user.infoLink}>
             <img src={`${siteConfig.baseUrl}${user.image}`} title={user.caption} />
           </a>
         );
