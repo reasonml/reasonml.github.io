@@ -29,7 +29,7 @@ Wanna help?
 - [Improve the documentation and website](https://github.com/reasonml/reasonml.github.io/issues).
 - [Help us translate the docs!](https://github.com/reasonml/reasonml.github.io/issues/3)
 - [Suggest better error messages](https://github.com/reasonml-community/error-message-improvement/issues)
-- Contribute to [your favorite editor plugin for Reason](/guide/editor-tools/editors-plugins#officially-supported-editors)
+- Contribute to [your favorite editor plugin for Reason](editor-plugins.md#officially-supported-editors)
 - On that note: better [ocaml-language-server](https://github.com/freebroccolo/ocaml-language-server). This will potentially power all our editor integration in the future.
 - Come up with more [project names starting with "re"](https://github.com/reasonml/ideas-for-project-names-starting-with-re)
 - Make bindings! Lots and lots of bindings! Have a look at the [reasonml-community index](https://github.com/reasonml-community/index), see if there's something missing or unfinished, then just get your hands dirty! Most of them could also use better documentation, not just more code.

@@ -3,7 +3,7 @@ title: Project Structure
 id: project-structure
 ---
 
-Make sure you saw this section's [introduction](/guide/meta) first!
+These are the existing, non-codified community practices that are currently propagated through informal agreement. We might remove some of them at one point, and enforce some others. Right now, they're just recommendations for ease of newcomers.
 
 ## File Casing
 

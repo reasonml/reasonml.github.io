@@ -40,7 +40,7 @@ switch isMorning {
 }
 ```
 
-If you pass that through [`refmt`](/guide/editor-tools/extra-goodies#refmt), you'd get:
+If you pass that through [`refmt`](extra-goodies.md#refmt), you'd get:
 
 ```reason
 isMorning ? "Good morning!" : "Hello!";

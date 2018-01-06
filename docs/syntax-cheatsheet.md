@@ -33,7 +33,7 @@ We've worked very hard to make Reason look like JS while preserving OCaml's grea
 | No deep equality (recursive compare)                  | `a == b`, `a != b`                             |
 | `a == b`                                              | No equality with implicit casting (thankfully) |
 
-\* This is the Reason spiritual equivalent; it doesn't mean it compiles to JS' `true`/`false`! To compile to the latter, use `Js.true_`/`Js.false_`. See [here](/guide/language/boolean#usage).
+\* This is the Reason spiritual equivalent; it doesn't mean it compiles to JS' `true`/`false`! To compile to the latter, use `Js.true_`/`Js.false_`. See [here](boolean.md#usage).
 
 ## Number
 
@@ -57,7 +57,7 @@ We've worked very hard to make Reason look like JS while preserving OCaml's grea
 | `point.y = 30;`     | Same                                    |
 | `{...point, x: 30}` | Same                                    |
 
-\* This is the Reason spiritual equivalent; it doesn't mean it compiles to JS' object! To compile to the latter, see [here](/guide/language/object#tip--tricks).
+\* This is the Reason spiritual equivalent; it doesn't mean it compiles to JS' object! To compile to the latter, see [here](object.md#tip-tricks).
 
 ## Array
 
@@ -76,7 +76,7 @@ We've worked very hard to make Reason look like JS while preserving OCaml's grea
 | ------------------- | --------- |
 | `null`, `undefined` | `None` \* |
 
-\* Again, only a spiritual equivalent; Reason doesn't have nulls, nor null bugs! But it does have [an option type](/guide/examples#using-the-option-type) for when you actually need nullability.
+\* Again, only a spiritual equivalent; Reason doesn't have nulls, nor null bugs! But it does have [an option type](newcomer-examples.md#using-the-option-type) for when you actually need nullability.
 
 ## Function
 
@@ -125,7 +125,7 @@ Both JavaScript and Reason support currying, but Reason currying is **built-in a
 | --------------------- | --------------------------------------------------------------- |
 | `if (a) {b} else {c}` | Same \*                                                         |
 | `a ? b : c`           | Same                                                            |
-| `switch`              | `switch` but [super-powered!](/guide/language/pattern-matching) |
+| `switch`              | `switch` but [super-powered!](pattern-matching.md) |
 
 \* Reason conditionals are always expressions!
 

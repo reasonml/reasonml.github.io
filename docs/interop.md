@@ -76,8 +76,8 @@ console.log(x$1 + " back in reason land");
 We'll need a little knowledge about Bucklescript's runtime representation of various values for this to work.
 
 - `strings` are strings, `ints` and `floats` are just numbers
-- an [Array](/guide/language/list-and-array#list) is a mutable fixed-length list in OCaml, and is represented as a plain javascript array.
-- a [List](/guide/language/list-and-array#array) is an immutable functional-style linked list, and is definitely the more idiomatic one to use in most cases. However, it's representation is more complicated (try `Js.log([1,2,3,4])` to check it out). Because of this, I generally convert to & from `Array`s when I'm talking to javascript, via `Array.of_list` and `Array.to_list`.
+- an [Array](list-and-array.md#array) is a mutable fixed-length list in OCaml, and is represented as a plain javascript array.
+- a [List](list-and-array.md#list) is an immutable functional-style linked list, and is definitely the more idiomatic one to use in most cases. However, it's representation is more complicated (try `Js.log([1,2,3,4])` to check it out). Because of this, I generally convert to & from `Array`s when I'm talking to javascript, via `Array.of_list` and `Array.to_list`.
 - If you want to go deeper, there's a list [in the BuckleScript documentation](https://bucklescript.github.io/docs/en/common-data-types.html#cheat-sheet)
 
 Knowing that, we can write a function in JavaScript that just accepts an array and returns a number, without much trouble at all.
@@ -172,7 +172,7 @@ Wow! Notice how BuckleScript just inlined our `pi` variable for us? And the outp
 
 ## Using existing JavaScript libraries
 
-When folks write bindings for a particular JavaScript library, they'd usually publish it to npm. Head over to the [Libraries](/guide/javascript/libraries) to find out how to find these.
+When folks write bindings for a particular JavaScript library, they'd usually publish it to npm. Head over to the [Libraries](libraries.md) to find out how to find these.
 
 To use a library that does not have existing bindings, however, you'll want to first install the npm package as usual, e.g. using `npm install --save <package-name>`, then just go ahead and write your bindings. You'll probably find the [`bs.module`](https://bucklescript.github.io/docs/en/import-export.html#import) FFI feature particularly useful; it emits the right `import`s or `require`s, depending on the JS compilation target's module format.
 

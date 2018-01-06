@@ -54,7 +54,7 @@ That's all! This compiles Reason to Javascript in the ${code}lib/js/${code} fold
 
 - Alternatively, **to start a [ReasonReact](https://reasonml.github.io/reason-react/docs/en/installation.html) app**, try ${code}bsb -init my-react-app -theme react${code}.
 
-- Head over to [Editor Setup](/guide/editor-tools/global-installation) to get the Reason plugin for your favorite editor!`;
+- Head over to [Editor Setup](/docs/en/global-installation.html) to get the Reason plugin for your favorite editor!`;
 
 class HomeSplash extends React.Component {
   render() {

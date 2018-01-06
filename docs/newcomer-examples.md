@@ -9,7 +9,7 @@ This section is dedicated to newcomers trying to figure out general idioms & con
 
 ## Using the `option` type
 
-`option` is a [variant](/guide/language/variant) that comes with the [standard library](/api/index.html). It obviates the need for null values in other languages.
+`option` is a [variant](variant.md) that comes with the [standard library](/api/index.html). It obviates the need for null values in other languages.
 
 ```reason
 let possiblyNullValue1 = None;
@@ -36,7 +36,7 @@ let result: response(universityStudent) = fetchDataFromServer();
 
 ## Creating a JS Object
 
-Assuming you're [compiling to JS](/guide/javascript), of course.
+Assuming you're [compiling to JS](quickstart-javascript.md), of course.
 
 ```reason
 let obj1 = {
