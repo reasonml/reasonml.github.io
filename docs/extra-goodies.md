@@ -18,8 +18,6 @@ The global installation you've done in the [past section](global-installation.md
 
 `refmt` ("Reason format") is the binary that powers our editors' auto-formatting feature. It takes in your code and spits it out, nicely formatted. It also serves to convert to/from Reason/OCaml syntax. The Reason community uses it to achieve a consistent code style throughout different projects, and to avoid time-consuming manual formatting & stylistic debates. Here it is, used inside Vim:
 
-<img width="466" height="433" src="https://user-images.githubusercontent.com/1909539/28570942-3bd962a2-70f5-11e7-8934-1b7f249d7814.gif" style="max-width:466px; max-height:433px;" />
-
 It **responsively** formatted the code based on the editor width (just to show a point). In other words, it doesn't just naively break to the next line at a certain characters limit; it solves the layout constrains and arranges your code accordingly.
 
 `refmt` can be used directly in the terminal. For example, to format your code outside of the editor, do `refmt --in-place myFile.re`. **See `refmt --help` for all the options**.
@@ -33,8 +31,6 @@ To configure Merlin to understand your project, you'd write a `.merlin` file at 
 ### REPL
 
 Reason comes with a REPL called `rtop` which, once invoked, lets you interactively evaluate code. It features intelligent, type-driven autocompletion.
-
-<img src="https://user-images.githubusercontent.com/1909539/28570943-3bd9eb00-70f5-11e7-981c-4846719c0943.gif" style="width:100%; max-width:466px; max-height:433px;">
 
 Use `#quit;` to close your REPL session.
 

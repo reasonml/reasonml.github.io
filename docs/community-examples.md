@@ -3,6 +3,10 @@ title: Examples
 ---
 
 <div class="community-examples-grid">
+  <a href="https://github.com/jaredly/gravitron/tree/master">
+    <img src="/img/examples/gravitron.gif">
+    <div>Gravitron</div>
+  </a>
   <a href="https://github.com/jaredly/reason-maze">
     <img src="/img/examples/maze.png">
     <div>Reason Maze</div>
