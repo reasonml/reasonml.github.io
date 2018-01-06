@@ -116,7 +116,7 @@ const siteConfig = {
   favicon: "img/icon_50.png",
   /* colors for website */
   algolia: {
-    apiKey: "55156da6520de795d3a2c2d23786f08e",
+    apiKey: "966d1e412f67114a07dc0afe44b19b53",
     indexName: "reason"
   },
   disableHeaderTitle: true,
