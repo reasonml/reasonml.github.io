@@ -1,6 +1,5 @@
 ---
 title: Boolean
-id: boolean
 ---
 
 A boolean has the type `bool` and can be either `true` or `false`. Common operations:

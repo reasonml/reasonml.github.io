@@ -1,6 +1,5 @@
 ---
 title: Integer & Float
-id: integer-and-float
 ---
 
 ## Integers

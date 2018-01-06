@@ -1,6 +1,5 @@
 ---
 title: Pattern Matching!
-id: pattern-matching
 ---
 
 _Make sure you've read on [Variant](variant.md) first_.

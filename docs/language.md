@@ -1,6 +1,5 @@
 ---
 title: Language basics
-id: language
 ---
 
 Start your Reason learning journey here! A few pointers:

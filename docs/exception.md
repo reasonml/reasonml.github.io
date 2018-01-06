@@ -1,6 +1,5 @@
 ---
 title: Exception
-id: exception
 ---
 
 Exceptions are just a special kind of variant, "thrown" in **exceptional** cases (don't abuse them!).

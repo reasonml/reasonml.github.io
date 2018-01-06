@@ -1,6 +1,5 @@
 ---
 title: Examples
-id: community-examples
 ---
 
 <div class="community-examples-grid">

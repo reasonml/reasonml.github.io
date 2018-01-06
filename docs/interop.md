@@ -1,6 +1,5 @@
 ---
 title: Interop
-id: interop
 ---
 
 ## Just dumping JavaScript in the middle of your Reason code

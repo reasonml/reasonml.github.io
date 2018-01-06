@@ -1,6 +1,5 @@
 ---
 title: External
-id: external
 ---
 
 `external`, or "FFI" (foreign function interface), or simply "interop" (for "interoperability") is how Reason communicates with other languages, like C or JavaScript.

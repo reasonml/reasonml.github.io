@@ -1,6 +1,5 @@
 ---
 title: Global Installation
-id: global-installation
 ---
 
 **Before setting up the editor plugins**, you need to install the global binaries needed by them.

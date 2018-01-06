@@ -1,6 +1,5 @@
 ---
 title: Syntax Cheatsheet
-id: syntax-cheatsheet
 ---
 
 We've worked very hard to make Reason look like JS while preserving OCaml's great semantics & types. Hope you enjoy it!

@@ -1,6 +1,5 @@
 ---
 title: Overview
-id: overview
 ---
 
 Primitive                             | Example

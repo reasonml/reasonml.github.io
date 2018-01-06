@@ -1,6 +1,5 @@
 ---
 title: Community
-id: community
 ---
 
 This is where we keep track of all the awesome things happening in the community.

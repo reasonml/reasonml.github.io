@@ -1,6 +1,5 @@
 ---
 title: Type!
-id: type
 ---
 
 Types are the highlight of Reason! Here, you get a glimpse of why so many are excited about them.

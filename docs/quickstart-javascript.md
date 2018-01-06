@@ -1,6 +1,5 @@
 ---
 title: Quickstart
-id: quickstart-javascript
 ---
 
 ```sh

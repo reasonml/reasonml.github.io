@@ -1,6 +1,5 @@
 ---
 title: Tuple
-id: tuple
 ---
 
 Tuples are

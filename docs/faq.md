@@ -1,6 +1,5 @@
 ---
 title: Frequently Asked Questions
-order: faq
 ---
 
 ### Should I learn Reason or OCaml first?

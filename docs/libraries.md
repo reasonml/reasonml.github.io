@@ -1,6 +1,5 @@
 ---
 title: Libraries
-id: libraries
 ---
 
 The main source of libraries and bindings is the [Reason Package Index (redex)](https://redex.github.io/), which keeps a curated list of available packages, and is both searchable and browsable. It also has a section for unpublished packages, which usually means they're unfinished or experimental but might still serve your need.

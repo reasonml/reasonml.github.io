@@ -1,6 +1,5 @@
 ---
 title: Converting from OCaml
-id: convert-from-ocaml
 ---
 
 Since Reason is just another syntax for OCaml, converting an OCaml project over is straightforward and doesn't require semantic changes. However, there are a few build setup and miscellaneous changes required.

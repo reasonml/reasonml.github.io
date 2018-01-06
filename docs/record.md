@@ -1,6 +1,5 @@
 ---
 title: Record
-id: record
 ---
 
 Records are like JavaScript objects but are

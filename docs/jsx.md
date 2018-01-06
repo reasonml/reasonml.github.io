@@ -1,6 +1,5 @@
 ---
 title: JSX
-id: jsx
 ---
 
 Would you like some HTML syntax in your Reason? If not, quickly skip over this section and pretend you didn't see anything!

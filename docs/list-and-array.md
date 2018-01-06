@@ -1,6 +1,5 @@
 ---
 title: List & Array
-id: list-and-array
 ---
 
 ## List

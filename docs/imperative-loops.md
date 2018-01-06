@@ -1,6 +1,5 @@
 ---
 title: Imperative Loops
-id: imperative-loops
 ---
 
 ## For Loops

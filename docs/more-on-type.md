@@ -1,6 +1,5 @@
 ---
 title: More on Type
-id: more-on-type
 ---
 
 ## Type Argument!

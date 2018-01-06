@@ -1,6 +1,5 @@
 ---
 title: Newcomer Examples
-id: newcomer-examples
 ---
 
 An example is worth a thousand words.

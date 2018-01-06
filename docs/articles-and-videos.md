@@ -1,6 +1,5 @@
 ---
 title: Articles & Videos
-id: articles-videos
 ---
 
 ## OCaml Concepts

@@ -1,6 +1,5 @@
 ---
 title: Module
-id: module
 ---
 
 ## Basics

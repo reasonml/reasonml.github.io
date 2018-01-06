@@ -1,6 +1,5 @@
 ---
 title: Function
-id: function
 ---
 
 _Cheat sheet for the full function syntax at the end_

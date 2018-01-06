@@ -1,6 +1,5 @@
 ---
 title: Extra Goodies
-id: extra-goodies
 ---
 
 ## Browser Extension: Reason-tools

@@ -1,6 +1,5 @@
 ---
 title: String & Char
-id: string-and-char
 ---
 
 ## String

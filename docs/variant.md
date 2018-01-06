@@ -1,6 +1,5 @@
 ---
 title: Variant!
-id: variant
 ---
 
 Behold, the crown jewel of Reason data structures!

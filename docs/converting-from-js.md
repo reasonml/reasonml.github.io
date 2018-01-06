@@ -1,6 +1,5 @@
 ---
 title: Converting from JS
-id: converting-from-js
 ---
 
 Preparation
