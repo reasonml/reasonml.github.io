@@ -1,6 +1,5 @@
 ---
 title: Object
-id: object
 ---
 
 Most of time in Reason, you'd be using record to group named values together. In certain niche situations, however, you might want to use a similar feature called object; they're a bit more flexible and come with different tradeoffs.

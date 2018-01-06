@@ -26,7 +26,7 @@ All these decisions made it so that, for common use-cases, the learning curve of
 - **An eye for simplicity & pragmatism**. We allow opt-in side-effect, mutation and object for familiarity & interop, while keeping the rest of the language pure, immutable and functional.
 - **A focus on performance & size**. Reason's build system, [`bsb`](https://bucklescript.github.io/docs/en/build-overview.html), finishes building in less than 100ms (incremental). Our produced output is also [tiny](https://twitter.com/bobzhang1988/status/827562467148623875).
 - **Incremental learning & codebase conversion**. Reap the benefits of a fully typed file from day one. If everything else fails, [paste some raw JavaScript snippets right in your Reason file](interop.md).
-- **Great ecosystem & tooling**. Use [your favorite editor](editors-plugins.md), [your favorite NPM package](libraries.md), and any of your [favorite](https://github.com/reasonml/reason-react) [existing](https://github.com/reasonml-community/bs-jest) [stack](https://webpack.js.org).
+- **Great ecosystem & tooling**. Use [your favorite editor](editor-plugins.md), [your favorite NPM package](libraries.md), and any of your [favorite](https://github.com/reasonml/reason-react) [existing](https://github.com/reasonml-community/bs-jest) [stack](https://webpack.js.org).
 
 \* Don't believe us? Check our [JS -> Reason cheat sheet](syntax-cheatsheet.md) or try a few snippets of Reason in [the playground](/try.html) and observe the output at the right!
 

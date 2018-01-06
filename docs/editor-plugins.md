@@ -1,6 +1,5 @@
 ---
 title: Editors Plugins
-id: editor-plugins
 ---
 
 **Make sure you've installed reason-cli from the previous section.**
