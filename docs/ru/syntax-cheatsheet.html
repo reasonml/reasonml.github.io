@@ -46,7 +46,7 @@
 <tbody>
 <tr><td><code>true</code>, <code>false</code></td><td><code>true</code>, <code>false</code> *</td></tr>
 <tr><td><code>!true</code></td><td>Same</td></tr>
-<tr><td>`</td><td></td><td><code>,</code>&amp;&amp;<code>,</code>&lt;=<code>,</code>&gt;=<code>,</code>&lt;<code>,</code>&gt;`</td><td>Same</td></tr>
+<tr><td><code>&amp;#124;&amp;#124;</code>, <code>&amp;&amp;</code>, <code>&lt;=</code>, <code>&gt;=</code>, <code>&lt;</code>, <code>&gt;</code></td><td>Same</td></tr>
 <tr><td><code>a === b</code>, <code>a !== b</code></td><td>Same</td></tr>
 <tr><td>No deep equality (recursive compare)</td><td><code>a == b</code>, <code>a != b</code></td></tr>
 <tr><td><code>a == b</code></td><td>No equality with implicit casting (thankfully)</td></tr>
@@ -87,7 +87,7 @@
 <tr><th>JavaScript</th><th>Reason</th></tr>
 </thead>
 <tbody>
-<tr><td><code>[1, 2, 3]</code></td><td>`[</td><td>1, 2, 3</td><td>]`</td></tr>
+<tr><td><code>[1, 2, 3]</code></td><td><code>[&amp;#124;1, 2, 3&amp;#124;]</code></td></tr>
 <tr><td><code>myArray[1] = 10</code></td><td>Same</td></tr>
 <tr><td><code>[1, &quot;Bob&quot;, true]</code> *</td><td><code>(1, &quot;Bob&quot;, true)</code></td></tr>
 <tr><td>No immutable list</td><td><code>[1, 2, 3]</code></td></tr>
@@ -120,7 +120,7 @@
 <table>
   <tr>
     <th scope="col">
-      <p >
+      <p>
         JavaScript
       </p>
     </th>
@@ -180,7 +180,7 @@ doubleX + doubleY
 </thead>
 <tbody>
 <tr><td><code>const {a, b} = data</code></td><td><code>let {a, b} = data</code></td></tr>
-<tr><td><code>const [a, b] = data</code></td><td>`let [</td><td>a, b</td><td>] = data` *</td></tr>
+<tr><td><code>const [a, b] = data</code></td><td><code>let [&amp;#124;a, b&amp;#124;] = data</code> *</td></tr>
 <tr><td><code>const {a: aa, b: bb} = data</code></td><td><code>let {a: aa, b: bb} = data</code></td></tr>
 </tbody>
 </table>
@@ -215,7 +215,7 @@ doubleX + doubleY
 </thead>
 <tbody>
 <tr><td><code>throw new SomeError(...)</code></td><td><code>raise(SomeError(...))</code></td></tr>
-<tr><td><code>try (a) {...} catch (Err) {...} finally {...}</code></td><td>`try a {</td><td>Err =&gt; ...}` *</td></tr>
+<tr><td><code>try (a) {...} catch (Err) {...} finally {...}</code></td><td><code>try a { &amp;#124; Err =&gt; ...}</code> *</td></tr>
 </tbody>
 </table>
 <p>* No finally.</p>
@@ -262,7 +262,7 @@ x + y
 </thead>
 <tbody>
 <tr><td><code>/* Comment */</code></td><td>Same</td></tr>
-<tr><td><code>// line comment</code></td><td>Coming soon</td></tr>
+<tr><td><code>// Line comment</code></td><td>Coming soon</td></tr>
 </tbody>
 </table>
 </span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="interop.html">← Interop</a><a class="docs-next button" href="libraries.html">Libraries →</a></div></div></div></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.js"></script><script>window.foo = new Pjax({
