@@ -1,4 +1,4 @@
-<html><head><meta charset="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1"/><title>Let Binding · Reason</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta property="og:title" content="Let Binding · Reason"/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io/index.html"/><meta property="og:description" content="A &quot;let binding&quot;, in other languages, might be called a &quot;variable declaration/assignment&quot;. `let` gives names to values. They can be seen and referenced by code that comes after them."/><link rel="shortcut icon" href="/img/icon_50.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/arduino-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io/blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io/blog/feed.xml" title="Reason Blog RSS Feed"/><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/dummy.svg"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li><a href="/docs/ja/quickstart-javascript.html" target="_self">Docs</a></li><li><a href="/ja/try.html" target="_self">Try</a></li><li><a href="/api/index.html" target="_self">API</a></li><li><a href="/docs/ja/community.html" target="_self">Community</a></li><li><a href="/blog" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg"/>日本語</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/en">English</a></li><li><a href="/es-ES">Español</a></li><li><a href="/fr">Français</a></li><li><a href="/ko">한국어</a></li><li><a href="/pt-BR">Português (Brasil)</a></li><li><a href="/ru">Русский</a></li><li><a href="/zh-CN">中文</a></li><li><a href="/zh-TW">繁體中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank">Help Translate</a></li></ul></div></li><script>
+<html><head><meta charset="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1"/><title>Let Binding · Reason</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta property="og:title" content="Let Binding · Reason"/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io/index.html"/><meta property="og:description" content="「let 束縛」は他の言語では「変数宣言/代入」と呼ばれることがあります。`let` は値に名前を与えます。それらは後に続くコードで見たり参照できます。"/><link rel="shortcut icon" href="/img/icon_50.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/arduino-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io/blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io/blog/feed.xml" title="Reason Blog RSS Feed"/><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/dummy.svg"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li><a href="/docs/ja/quickstart-javascript.html" target="_self">Docs</a></li><li><a href="/ja/try.html" target="_self">Try</a></li><li><a href="/api/index.html" target="_self">API</a></li><li><a href="/docs/ja/community.html" target="_self">Community</a></li><li><a href="/blog" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg"/>日本語</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/en">English</a></li><li><a href="/es-ES">Español</a></li><li><a href="/fr">Français</a></li><li><a href="/ko">한국어</a></li><li><a href="/pt-BR">Português (Brasil)</a></li><li><a href="/ru">Русский</a></li><li><a href="/zh-CN">中文</a></li><li><a href="/zh-TW">繁體中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank">Help Translate</a></li></ul></div></li><script>
         const languagesMenuItem = document.getElementById("languages-menu");
         const languagesDropDown = document.getElementById("languages-dropdown");
         languagesMenuItem.addEventListener("click", function(){
@@ -14,29 +14,29 @@
           toggler.onclick = function() {
             nav.classList.toggle('docsSliderActive');
           };
-        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://crowdin.com/project/reason/ja" target="_blank">Translate</a><h1>Let Binding</h1></header><article><div><span><p>A &quot;let binding&quot;, in other languages, might be called a &quot;variable declaration/assignment&quot;. <code>let</code> gives names to values. They can be seen and referenced by code that comes after them.</p>
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://crowdin.com/project/reason/ja" target="_blank">Translate</a><h1>Let Binding</h1></header><article><div><span><p>「let 束縛」は他の言語では「変数宣言/代入」と呼ばれることがあります。<code>let</code> は値に名前を与えます。それらは後に続くコードで見たり参照できます。</p>
 <pre><code class="hljs css reason"><span class="hljs-keyword">let</span> <span class="hljs-attr">greeting</span> = <span class="hljs-string">"hello!"</span>;
 <span class="hljs-keyword">let</span> <span class="hljs-attr">score</span> = <span class="hljs-number">10</span>;
 <span class="hljs-keyword">let</span> <span class="hljs-attr">newScore</span> = <span class="hljs-number">10</span> + score;
 ...
 </code></pre>
-<h2><a class="anchor" aria-hidden="true" name="block-scope"></a><a href="#block-scope" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Block Scope</h2>
-<p>Bindings can be scoped through <code>{}</code>.</p>
+<h2><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>ブロックスコープ</h2>
+<p>束縛は <code>{}</code> 内で有効です。</p>
 <pre><code class="hljs css reason"><span class="hljs-keyword">if</span> (displayGreeting) {
   let <span class="hljs-keyword">message</span> = <span class="hljs-string">"Enjoying the docs so far?"</span>;
   print_endline(<span class="hljs-keyword">message</span>)
 };
 /* `<span class="hljs-keyword">message</span>` not accessible here! */
 </code></pre>
-<h2><a class="anchor" aria-hidden="true" name="bindings-are-immutable"></a><a href="#bindings-are-immutable" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Bindings Are Immutable</h2>
-<p>&quot;Immutable&quot; as in, &quot;doesn't change&quot;. Once a binding refers to a value, it cannot refer to anything else (unless it explicitly contains a mutable value, discussed later). However, you may create a new binding of the same name which <em>shadows</em> the previous binding; from that point onward, the binding will refer to the newly assigned value.</p>
+<h2><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>束縛は不変</h2>
+<p>「変わらない」の「不変」です。 一度値に束縛したら、それは他の値を参照することはできません。（明示的に変更可能な値と明示した場合を除いて。後で説明します）。 しかし、以前の束縛を<em>シャドウ</em>して、同じ名前で新しい束縛を作ることもできます。</p>
 <pre><code class="hljs css reason">let <span class="hljs-keyword">message</span> = <span class="hljs-string">"hello"</span>;
 print_endline(<span class="hljs-keyword">message</span>); /* Prints <span class="hljs-string">"hello"</span> */
 let <span class="hljs-keyword">message</span> = <span class="hljs-string">"bye"</span>;
 print_endline(<span class="hljs-keyword">message</span>); /* Prints <span class="hljs-string">"bye"</span> */
 </code></pre>
-<h2><a class="anchor" aria-hidden="true" name="tips-tricks"></a><a href="#tips-tricks" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Tips &amp; Tricks</h2>
-<p>Since bindings are scoped through <code>{}</code>, you can create an anonymous scope around them:</p>
+<h2><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>ヒントとコツ</h2>
+<p>束縛は <code>{}</code> 内で有効なので、周辺に匿名のスコープを作ることができます:</p>
 <pre><code class="hljs css reason"><span class="hljs-keyword">let</span> <span class="hljs-attr">message</span> = {
   <span class="hljs-keyword">let</span> <span class="hljs-attr">part1</span> = <span class="hljs-string">"hello"</span>;
   <span class="hljs-keyword">let</span> <span class="hljs-attr">part2</span> = <span class="hljs-string">"world"</span>;
@@ -44,30 +44,30 @@ print_endline(<span class="hljs-keyword">message</span>); /* Prints <span class=
 };
 <span class="hljs-comment">/* `part1` and `part2` not accessible here! */</span>
 </code></pre>
-<p>This prevents misuse of the bindings after these lines.</p>
-<h2><a class="anchor" aria-hidden="true" name="design-decisions"></a><a href="#design-decisions" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Design Decisions</h2>
-<p>Reason is backed by OCaml under the hood. A let binding, in OCaml syntax, looks like this:</p>
+<p>これらの行の後で束縛が濫用されることを防ぎます。</p>
+<h2><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>設計方針</h2>
+<p>Reason は OCaml で裏付けされています。let 束縛は OCaml のシンタックスでは次のようになります:</p>
 <pre><code class="hljs css ocaml"><span class="hljs-keyword">let</span> a = <span class="hljs-number">1</span> <span class="hljs-keyword">in</span>
 <span class="hljs-keyword">let</span> b = <span class="hljs-number">2</span> <span class="hljs-keyword">in</span>
 a + b
 </code></pre>
-<p>This could be conceptually read in this format instead:</p>
+<p>これは概念的には下記の形式に読み替えられます:</p>
 <pre><code class="hljs css ocaml"><span class="hljs-keyword">let</span> a = <span class="hljs-number">1</span> <span class="hljs-keyword">in</span>
   <span class="hljs-keyword">let</span> b = <span class="hljs-number">2</span> <span class="hljs-keyword">in</span>
     a + b
 </code></pre>
-<p>Which is the following in Reason:</p>
+<p>Reason では次のとおりです:</p>
 <pre><code class="hljs css reason">let a = <span class="hljs-number">1</span><span class="hljs-comment">;</span>
 let <span class="hljs-keyword">b </span>= <span class="hljs-number">2</span><span class="hljs-comment">;</span>
 a + <span class="hljs-keyword">b;
 </span></code></pre>
-<p>Which might remind you of:</p>
+<p>これを思い起こさせるかもしれません:</p>
 <pre><code class="hljs css reason"><span class="hljs-comment">/* Reason syntax */</span>
 <span class="hljs-comment">(a)</span> =&gt;
   <span class="hljs-comment">(b)</span> =&gt;
     a + b;
 </code></pre>
-<p>Though they're not strictly the same, hopefully you can see that <code>let</code> is just an expression and akin to a function! In Reason, we've turned <code>in</code> into <code>;</code> for visual familiarity; but don't let that hide the underlying elegance of expressions.</p>
+<p>これらは厳密には同じではありませんが、<code>let</code> が単なる式で関数みたいなものと感じられたら幸いです！ Reason では、<code>in</code> を視覚的に馴染み深い <code>;</code> に変えましたが、根底にある式の優雅さは変わっていません。</p>
 </span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="overview.html">← Overview</a><a class="docs-next button" href="type.html">Type! →</a></div></div></div></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.js"></script><script>window.foo = new Pjax({
           areas: [
             // try to use the first query.
