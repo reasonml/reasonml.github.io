@@ -115,8 +115,6 @@ Reason gave `list` a syntax sugar. `[1, 2, 3]` is conceptually equivalent to `He
 
 Did you know that you can use `switch` on string, int, float, array, and most other data structures? Try it!
 
-<!-- TODO playground link -->
-
 ## Tips & Tricks
 
 **Be careful** not to confuse a constructor carrying 2 arguments with a constructor carrying a single tuple argument:
