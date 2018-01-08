@@ -62,7 +62,7 @@ addCoordinates(<span class="hljs-number">5</span>, <span class="hljs-number">6</
 <p>Já que temos currying (explicado mais abaixo), nós podemos passar os argumentos em <strong>qualquer ordem</strong>:</p>
 <pre><code class="hljs css reason">addCoordinates(~<span class="hljs-attribute">y</span>=6, ~<span class="hljs-attribute">x</span>=5);
 </code></pre>
-<p>The <code>~x</code> part in declaration means the function accepts an argument labeled <code>x</code> and can refer to it in the function body by the same name. You can also refer to the arguments inside the function body by a different name for conciseness:</p>
+<p>O <code>~x</code> na declaração significa que a função aceita um argumento nomeado de <code>x</code> e pode se referir a ele no corpo da função pelo mesmo nome. Você também pode se referir aos argumentos dentro do corpo da função por um nome diferente para ser mais preciso:</p>
 <pre><code class="hljs css reason">let drawCircle = <span class="hljs-function"><span class="hljs-params">(~radius <span class="hljs-keyword">as</span> r, ~color <span class="hljs-keyword">as</span> c)</span> =&gt;</span> {
   setColor(c);
   startAt(r, r);
@@ -76,7 +76,7 @@ drawCircle(~radius=<span class="hljs-number">10</span>, ~color=<span class="hljs
 <pre><code class="hljs css reason"><span class="hljs-keyword">let</span> drawCircle = (~radius <span class="hljs-keyword">as</span> r: <span class="hljs-built_in">int</span>, ~color <span class="hljs-keyword">as</span> c: <span class="hljs-built_in">string</span>) =&gt; ...;
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" name="currying"></a><a href="#currying" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Currying</h3>
-<p>Reason functions can automatically be <strong>partially</strong> called:</p>
+<p>As funções de Reason podem automaticamente serem <strong>parcialmente</strong> chamadas:</p>
 <pre><code class="hljs css reason"><span class="hljs-attribute">let add</span> = (x, y) =&gt; x + y;
 <span class="hljs-attribute">let addFive</span> = add(5);
 <span class="hljs-attribute">let eleven</span> = addFive(6);
@@ -85,7 +85,7 @@ drawCircle(~radius=<span class="hljs-number">10</span>, ~color=<span class="hljs
 <p>Na verdade, o código acima <code>add</code> não é nada além de açúcar sintático para isso:</p>
 <pre><code class="hljs css reason">let add = (<span class="hljs-name">x</span>) =&gt; (<span class="hljs-name">y</span>) =&gt; x + y<span class="hljs-comment">;</span>
 </code></pre>
-<p>OCaml optimizes this to <a href="/try/?reason=DYUwLgBAhgJjEF4IAoAeBKRA+FBPTCOqEA1BLgNwBQVA9AFQTAD2zA1tJGABYgTMBXMAAchAQmhwAYgEsAbnxkBnaBAD6SmQDsA5qDUQAZgK0BjMDOZaIpqMGAT6tKqEiwYshYkkxkAVnRqF3AITWIkd08QZABGQKA">avoid the unnecessary function allocation</a> (2 functions here, naively speaking) whenever it can! This way, we get</p>
+<p>OCaml otimiza isto para <a href="/try/?reason=DYUwLgBAhgJjEF4IAoAeBKRA+FBPTCOqEA1BLgNwBQVA9AFQTAD2zA1tJGABYgTMBXMAAchAQmhwAYgEsAbnxkBnaBAD6SmQDsA5qDUQAZgK0BjMDOZaIpqMGAT6tKqEiwYshYkkxkAVnRqF3AITWIkd08QZABGQKA">evitar alocação desnecessária de função</a> (2 funções aqui, ingenuamente falando) sempre que possível! Desta forma, nós podemos obter</p>
 <ul>
 <li>Nice syntax</li>
 <li>Currying for free (every function takes a single argument, actually!)</li>
@@ -102,7 +102,7 @@ drawCircle(~radius=<span class="hljs-number">10</span>, ~color=<span class="hljs
   }
 };
 </code></pre>
-<p>When given in this syntax, <code>radius</code> is <strong>wrapped</strong> in the standard library's <code>option</code> type, defaulting to <code>None</code>. If provided, it'll be wrapped with a <code>Some</code>. So <code>radius</code>'s type value is either <code>None</code> or <code>Some int</code> here.</p>
+<p>When given in this syntax, <code>radius</code> is <strong>wrapped</strong> in the standard library's <code>option</code> type, defaulting to <code>None</code>. If provided, it'll be wrapped with a <code>Some</code>. So <code>radius</code>'s type value is either <code>None</code> or <code>Some(int)</code> here.</p>
 <p><strong>Note</strong>: <code>None | Some(foo)</code> is a data structure type called variant, described <a href="/docs/pt-BR/variant.html">earlier</a>. This particular variant type is provided by the standard library. It's called <code>option</code>. Its definition: <code>type option('a) = None | Some('a)</code>.</p>
 <p><strong>Note</strong> the unit <code>()</code> at the end of <code>drawCircle</code>. Without it, since <code>radius</code> and <code>color</code> are both labeled, can be curried, and can be applied out-of-order, it's unclear what the following means:</p>
 <pre><code class="hljs css reason"><span class="hljs-attribute">let whatIsThis</span> = drawCircle(~color);
@@ -112,7 +112,7 @@ drawCircle(~radius=<span class="hljs-number">10</span>, ~color=<span class="hljs
 <span class="hljs-attribute">let actualResultWithoutProvidingRadius</span> = drawCircle(~color, ());
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" name="explicitly-passed-optional"></a><a href="#explicitly-passed-optional" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Explicitly Passed Optional</h3>
-<p>Sometimes, you might want to forward a value to a function without knowing whether the value is <code>None</code> or <code>Some a</code>. Naively, you'd do:</p>
+<p>Sometimes, you might want to forward a value to a function without knowing whether the value is <code>None</code> or <code>Some(a)</code>. Naively, you'd do:</p>
 <pre><code class="hljs css reason"><span class="hljs-keyword">let</span> result =
   switch payloadRadius {
   | <span class="hljs-type">None</span> =&gt; drawCircle(~color, ())
