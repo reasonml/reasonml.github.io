@@ -24,7 +24,7 @@
 <tr><td><code>(* OCaml (*nest*) *)</code></td><td><code>/* Reason /*nest*/ */</code></td></tr>
 </tbody>
 </table>
-<h2><a class="anchor" aria-hidden="true" name="operator-renaming"></a><a href="#operator-renaming" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Operator Renaming</h2>
+<h2><a class="anchor" aria-hidden="true" name="renomeamento-de-operadores"></a><a href="#renomeamento-de-operadores" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Renomeamento de Operadores</h2>
 <p>Reason tem todos os operadores infixos da OCaml, mas alguns deles são expressos de maneira diferente. No Reason, igualdade estrutural é escrita com <code>= =</code> e igualdade referencial (física) é escrita com <code>=</code>. No Reason, para obter a correspondente desigualdade, simplesmente troca-se o primeiro caractere por um caractere de <code>!</code> (exclamação). (<code>!=</code> de desigualdade estrutural, e <code>!==</code> para desigualdade de referência).</p>
 <table>
 <thead>
@@ -420,7 +420,7 @@ your: (a, b) =&gt; a + b
 &lt;/table&gt;
 
 &lt;h3&gt;
-  Single argument match functions
+  Funções com casamento de argumento único
 &lt;/h3&gt;
 
 &lt;p&gt;
@@ -507,13 +507,13 @@ your: (a, b) =&gt; a + b
   Tanto o Reason como OCaml, argumentos são anotados com tipos por (como acontece com tudo o resto), envolvê-los entre parênteses depois acrescentando &lt;code&gt;: typeAnnotation&lt;/code&gt;.
 &lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&quot;reason&quot;&gt;(arg: argType) =&amp;gt; returnValue;
+&lt;pre&gt;&lt;code class=&quot;reason&quot;&gt;(arg: tipoDeArg) =&amp;gt; valorDeRetorno;
 </code></pre>
 <p></code></pre></p>
 <pre><code class="hljs">&lt;pre&gt;&lt;code class=&quot;reason&quot;&gt;(arg: argType) =&amp;gt; (arg2: arg2Type) =&amp;gt; returnValue;
 </code></pre>
 <p></code></pre></p>
-<pre><code class="hljs">&lt;pre&gt;&lt;code class=&quot;reason&quot;&gt;(arg: argType, arg2: arg2Type) =&amp;gt; returnValue;
+<pre><code class="hljs">&lt;pre&gt;&lt;code class=&quot;reason&quot;&gt;(arg: tipoDeArg, arg2: tipoDeArg2) =&amp;gt; valorDeRetorno;
 </code></pre>
 <p></code></pre></p>
 <pre><code class="hljs">&lt;p&gt;
@@ -537,7 +537,7 @@ let myFunc = (a: int, b: int): (int =&gt; int) =&gt; (x) =&gt; x + a + b;
 &lt;/p&gt;
 
 &lt;h3&gt;
-  Type Parameters
+  Parâmetros de Tipo
 &lt;/h3&gt;
 
 &lt;h4&gt;
@@ -675,7 +675,7 @@ let tuples: pairs = [(2, 3)];</pre>
 &lt;/ul&gt;
 
 &lt;h2&gt;
-  Variants
+  Variantes
 &lt;/h2&gt;
 
 &lt;h5&gt;
@@ -797,7 +797,7 @@ switch x {
 </tr>
 </table></p>
 <pre><code class="hljs">&lt;h2&gt;
-  Pattern Matching
+  Casamento de Padrões
 &lt;/h2&gt;
 
 &lt;table&gt;
@@ -917,7 +917,7 @@ let msg = &quot;hello&quot;;
 </tr>
 </table></p>
 <pre><code class="hljs">&lt;h3&gt;
-  Functors Types
+  Tipos de Functores
 &lt;/h3&gt;
 
 &lt;table&gt;
@@ -955,7 +955,7 @@ functor (B: BSig) -&gt; Result
 </tr>
 </table></p>
 <pre><code class="hljs">&lt;h2&gt;
-  Functors
+  Functores
 &lt;/h2&gt;
 
 &lt;table&gt;
@@ -1027,19 +1027,19 @@ functor (B: BSig) -&gt; struct end</pre>
 </tr>
 </table></p>
 <pre><code class="hljs">&lt;h2&gt;
-  Various Improvements
+  Melhoras variadas
 &lt;/h2&gt;
 
 &lt;p&gt;
-  OCaml doesn't require parens around sequences &lt;code&gt;(a;b;c;d)&lt;/code&gt; or tuples &lt;code&gt;(x,y)&lt;/code&gt;, so that ends up ruling out a bunch of other very convenient syntax rules. Since Reason always uses &lt;code&gt;{}&lt;/code&gt; to enclose sequences or let bindings, and Reason always requires &lt;code&gt;()&lt;/code&gt; around tuples, many other syntax constructs are expressed more intuitively, without requiring extra wrapping in parenthesis.
+  OCaml não requer parênteses ao redor de sequências &lt;code&gt;(a;b;c;d)&lt;/code&gt; ou tuplas &lt;code&gt;(x,y)&lt;/code&gt; então isso acaba impedindo a aplicação de várias outras regras sintáticas muito convenientes. Como o Reason sempre usa &lt;code&gt;{}&lt;/code&gt; para cercar sequências ou delcarações let, e o Reason sempre requer o uso de &lt;code&gt;()&lt;/code&gt; cercando tuplas, muitos outros construtos de sintaxe são expressados de forma mais intuitiva, sem precisar de parênteses extras.
 &lt;/p&gt;
 
 &lt;h3&gt;
-  Lambdas as record fields no longer need extra parens
+  Lambdas como campos de registros não precisam mais de parênteses extras
 &lt;/h3&gt;
 
 &lt;p&gt;
-  This is a welcomed improvement because the OCaml type errors the user would see were very confusing when it would believe the function's return value was a tuple with infix &lt;code&gt;,&lt;/code&gt; comma.
+  Essa é uma melhora bem-vinda porque os erros de tipo de OCaml que o usuário veriam eram muito confusos quando o sistema acreditava que o tipo de retorno da função seria uma tupla com vírgula infixa.
 &lt;/p&gt;
 
 &lt;table&gt;
@@ -1077,7 +1077,7 @@ your: (a, b) =&gt; a + b
 </tr>
 </table></p>
 <pre><code class="hljs">&lt;h3&gt;
-  Lambdas as match results no longer need extra parens
+  Lambdas como resultado de casamento de padrões não precisam mais de parênteses extras
 &lt;/h3&gt;
 
 &lt;table&gt;
@@ -1155,15 +1155,15 @@ switch prnt {
 &lt;/table&gt;
 
 &lt;h2&gt;
-  Various Differences
+  Diferenças variadas
 &lt;/h2&gt;
 
 &lt;h3&gt;
-  &lt;code&gt;as&lt;/code&gt; precedence
+  Precedência de &lt;code&gt;as&lt;/code&gt;
 &lt;/h3&gt;
 
 &lt;p&gt;
-  With Reason, &lt;code&gt;as&lt;/code&gt; has a higher precedence than &lt;code&gt;|&lt;/code&gt; bar. This allows creating &lt;code&gt;as&lt;/code&gt; aliases for entire rows in pattern matching.
+  Em Reason, o &lt;code&gt;as&lt;/code&gt; tem maior precedência que a &lt;code&gt;|&lt;/code&gt; barra. Isso permite criar pseudônimos &lt;code&gt;as&lt;/code&gt; para linhas inteiras quando casando padrões.
 &lt;/p&gt;
 
 &lt;table&gt;
@@ -1203,11 +1203,11 @@ switch (MyThing(20)) {
 </tr>
 </table></p>
 <pre><code class="hljs">&lt;h3&gt;
-  Mutable Record Field Updates
+  Atualizações de Campos de Registros Mutáveis
 &lt;/h3&gt;
 
 &lt;p&gt;
-  Because equalities and their negations have been made more consistent in Reason, the &lt;code&gt;=&lt;/code&gt; operator is available for mutable field update.
+  Como igualdades e suas negações foram tornadas mais consistentes no Reason, o operador &lt;code&gt;=&lt;/code&gt; está disponível para atualização de campos mutáveis.
 &lt;/p&gt;
 
 &lt;table&gt;
@@ -1233,11 +1233,11 @@ switch (MyThing(20)) {
 &lt;/table&gt;
 
 &lt;h3&gt;
-  Prefix operators
+  Operadores prefixos
 &lt;/h3&gt;
 
 &lt;p&gt;
-  Reason's &lt;code&gt;!&lt;/code&gt; is used for boolean &lt;code&gt;not&lt;/code&gt;. Deferencing uses the postfix &lt;code&gt;^&lt;/code&gt;.
+  No Reason, o operador &lt;code&gt;!&lt;/code&gt; é usado para a negação booleana (&lt;code&gt;not&lt;/code&gt;). O derreferenciamento usa o operador pósfixo &lt;code&gt;ˆ&lt;/code&gt;.
 &lt;/p&gt;
 
 &lt;table&gt;
@@ -1353,15 +1353,15 @@ switch (MyThing(20)) {
 &lt;/table&gt;
 
 &lt;h3&gt;
-  Comment Escaping
+  Escapando Compentários
 &lt;/h3&gt;
 
 &lt;p&gt;
-  Because Reason uses C-style comments, some obscure custom prefix/infix operators must be written differently. The rules for prefix/infix operators are the same as in OCaml syntax, but with the following exceptions:
+  Como o Reason usa comentários no estilo C, alguns operadores prefixos ou infixos obscuros precisam ser escritos de forma distinta. As regras para operadores prefixos ou infixos são as mesmas que na sintaxe de OCaml, com as seguintes exceções:
 &lt;/p&gt;
 
 &lt;p&gt;
-  Specifically, if any character except the first in an prefix/infix operator is a star or forward slash, that must be first escaped with a backslash. These will be parsed &lt;em&gt;without&lt;/em&gt; the backslash when added to the AST. When reprinted, the escape backslashes are added back in automatically.
+  Especificamente, se qualquer caractere exceto o primeiro e um operador prefixo ou infixo é um asterisco ou uma barra, esse caractere deve ser escapado com uma barra invertida. Esses operadores serão analisados &lt;em&gt;sem&lt;/em&gt; a barra invertida quando adicionados à AST. Quando impressos, as barras invertidas de escape serão adicionadas de volta automaticamente.
 &lt;/p&gt;
 
 &lt;table&gt;
@@ -1447,11 +1447,11 @@ switch (MyThing(20)) {
 &lt;/table&gt;
 
 &lt;h3&gt;
-  Operator Renaming
+  Renomeamento de Operadores
 &lt;/h3&gt;
 
 &lt;p&gt;
-  If Reason uses &lt;code&gt;==&lt;/code&gt; to represent OCaml's &lt;code&gt;=&lt;/code&gt;, and uses &lt;code&gt;===&lt;/code&gt; to represent OCaml's &lt;code&gt;==&lt;/code&gt;, then how would Reason represent OCaml's &lt;code&gt;===&lt;/code&gt; symbol (if it were defined)? Reason dá um jeito! &quot;Escape&quot; o símbolo de igual triplo!
+  Se o Reason usa &lt;code&gt;==&lt;/code&gt; para representar o &lt;code&gt;=&lt;/code&gt; de OCaml, e usa o &lt;code&gt;===&lt;/code&gt; para representar o &lt;code&gt;==&lt;/code&gt; de OCaml, então como o Reason representaria o &lt;code&gt;===&lt;/code&gt; de OCaml (se tal operador fosse definido)? Reason dá um jeito! &quot;Escape&quot; o símbolo de igual triplo!
 &lt;/p&gt;
 
 &lt;table&gt;
@@ -1497,7 +1497,7 @@ switch (MyThing(20)) {
 &lt;/h3&gt;
 
 &lt;p&gt;
-  In Reason's repl &lt;a href=&quot;extra-goodies.md#repl&quot;&gt;&lt;code&gt;rtop&lt;/code&gt;&lt;/a&gt; (a customized &lt;a href=&quot;https://github.com/diml/utop&quot;&gt;&lt;code&gt;utop&lt;/code&gt;&lt;/a&gt;), each input is submitted via a single &lt;code&gt;;&lt;/code&gt; semicolon. OCaml's repl requires two semicolons &lt;code&gt;;;&lt;/code&gt;.
+  Na REPL do Reason, &lt;a href=&quot;extra-goodies.md#repl&quot;&gt;&lt;code&gt;rtop&lt;/code&gt;&lt;/a&gt; (Uma versão customizada do &lt;a href=&quot;https://github.com/diml/utop&quot;&gt;&lt;code&gt;utop&lt;/code&gt;&lt;/a&gt;), cada entrada é submetida usando um único &lt;code&gt;;&lt;/code&gt; ponto e vírgula. A REPL do Ocaml precisa de dois pontos e vírgulas &lt;code&gt;;;&lt;/code&gt;.
 &lt;/p&gt;
 
 &lt;table&gt;
