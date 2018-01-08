@@ -156,7 +156,7 @@ let actualResultWithoutProvidingRadius = drawCircle(~color, ());
 
 ### Explicitly Passed Optional
 
-Sometimes, you might want to forward a value to a function without knowing whether the value is `None` or `Some a`. Naively, you'd do:
+Sometimes, you might want to forward a value to a function without knowing whether the value is `None` or `Some(a)`. Naively, you'd do:
 
 ```reason
 let result =
