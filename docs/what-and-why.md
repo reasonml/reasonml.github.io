@@ -55,4 +55,4 @@ Make sure you talk to us in [Discord](https://discord.gg/reasonml) first, to cle
 
 Hope that helps! Want to know more? Strike a conversation with any of us in the [community](community.md)!
 
-_Reason is a open source community project from Facebook_.
+_Reason is an open source community project from Facebook_.
