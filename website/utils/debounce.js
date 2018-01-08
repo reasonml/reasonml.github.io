@@ -1,4 +1,4 @@
-module.exports = function(func, wait, immediate) {
+export default function(func, wait, immediate) {
 	let timeout;
 	return function() {
 		let context = this, args = arguments;

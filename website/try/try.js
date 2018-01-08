@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
-import debounce from '../../src/utils/debounce';
+import debounce from '../utils/debounce';
 import * as lzString from 'lz-string';
 import codemirror from 'codemirror';
 
