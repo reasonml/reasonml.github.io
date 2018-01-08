@@ -40,20 +40,16 @@ Finally, if things still don't work, please file an issue at https://github.com/
 ### Editor Plugin Not Working
 
 - **If you're on Windows**, the current editor tooling support for Windows is shaky. Please help us improve it in https://github.com/reasonml/reasonml.github.io/issues/195. Thank you!
-
 - Make sure you restart your editor. Some of them might not pick up your new shell environment (which now includes the newly installed binaries) without one.
-
 - Try the following:
   ```
   which ocamlmerlin refmt ocamlmerlin-reason
   ```
   It should spit out three paths that contain the word `reason-cli` if the `reason-cli` installation succeeded.
-
 - Check the Merlin version:
   ```
   ocamlmerlin -version
   ```
-
   It should say "The Merlin toolkit version 2.5.x, for Ocaml 4.02.3". Not OCaml 4.03, not 4.04, etc.
 
 ### Editor Error Message: Unbound Module `Js`, Etc.
