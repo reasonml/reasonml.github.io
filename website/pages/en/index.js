@@ -188,7 +188,7 @@ class Index extends React.Component {
             <div className="more-users">
               <a
                 className="button"
-                href={`${siteConfig.baseUrl}${this.props.language}/companies-using-reason.html`}
+                href={`${siteConfig.baseUrl}${this.props.language}/users-of-reason.html`}
               >
                 <translate>See Full List</translate>
               </a>

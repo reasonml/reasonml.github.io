@@ -25,10 +25,10 @@ class Users extends React.Component {
           <div className="showcaseSection">
             <div className="prose">
               <h1>
-                <translate>Companies Using Reason</translate>
+                <translate>Users of Reason</translate>
               </h1>
               <p>
-                <translate>Here are some of the companies successfully using Reason and BuckleScript in production, today.</translate>
+                <translate>Here are some of the folks successfully using Reason and BuckleScript in production, today!</translate>
               </p>
             <a href="https://github.com/reasonml/reasonml.github.io/blob/source/website/siteConfig.js" className="button addCompanyButton">
               <translate>Add yours (SVG logo preferred)</translate>

@@ -57,7 +57,7 @@
       default: 'docs/en/articles-videos.html',
     },
     'community/companies': {
-      default: 'en/companies-using-reason.html',
+      default: 'en/users-of-reason.html',
     },
     'guide': {
       default: 'docs/en/quickstart-javascript.html',

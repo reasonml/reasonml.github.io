@@ -58,7 +58,7 @@ const users = [
   },
   {
     caption: "ephox",
-    image: "img/logos/ephox.png",
+    image: "img/logos/ephox.svg",
     infoLink: "https://www.ephox.com",
   },
 ];
