@@ -137,7 +137,7 @@ let drawCircle = (~color, ~radius=?, ()) => {
 };
 ```
 
-When given in this syntax, `radius` is **wrapped** in the standard library's `option` type, defaulting to `None`. If provided, it'll be wrapped with a `Some`. So `radius`'s type value is either `None` or `Some int` here.
+When given in this syntax, `radius` is **wrapped** in the standard library's `option` type, defaulting to `None`. If provided, it'll be wrapped with a `Some`. So `radius`'s type value is either `None` or `Some(int)` here.
 
 **Note**: `None | Some(foo)` is a data structure type called variant, described [earlier](variant.md). This particular variant type is provided by the standard library. It's called `option`. Its definition: `type option('a) = None | Some('a)`.
 
