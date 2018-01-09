@@ -15,73 +15,73 @@
             nav.classList.toggle('docsSliderActive');
           };
         </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://crowdin.com/project/reason/ru" target="_blank">Translate</a><h1>Syntax Cheatsheet</h1></header><article><div><span><p>We've worked very hard to make Reason look like JS while preserving OCaml's great semantics &amp; types. Hope you enjoy it!</p>
-<h2><a class="anchor" aria-hidden="true" name="let-binding"></a><a href="#let-binding" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Let Binding</h2>
+<h2><a class="anchor" aria-hidden="true" name="let"></a><a href="#let" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Let привязки</h2>
 <table>
 <thead>
 <tr><th>JavaScript</th><th>Reason</th></tr>
 </thead>
 <tbody>
 <tr><td><code>const x = 5;</code></td><td><code>let x = 5;</code></td></tr>
-<tr><td><code>var x = y;</code></td><td>No equivalent (thankfully)</td></tr>
+<tr><td><code>var x = y;</code></td><td>Нет эквивалента (к счастью)</td></tr>
 <tr><td><code>let x = 5; x = x + 1;</code></td><td><code>let x = ref(5); x := x^ + 1;</code></td></tr>
 </tbody>
 </table>
-<h2><a class="anchor" aria-hidden="true" name="string-char"></a><a href="#string-char" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>String &amp; Char</h2>
+<h2><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Строки и символы</h2>
 <table>
 <thead>
 <tr><th>JavaScript</th><th>Reason</th></tr>
 </thead>
 <tbody>
-<tr><td><code>&quot;Hello world!&quot;</code></td><td>Same</td></tr>
-<tr><td><code>'Hello world!'</code></td><td>Strings must use <code>&quot;</code></td></tr>
-<tr><td>Characters are strings</td><td><code>'a'</code></td></tr>
+<tr><td><code>&quot;Hello world!&quot;</code></td><td>Так же</td></tr>
+<tr><td><code>'Hello world!'</code></td><td>Строки используют <code>&quot;</code></td></tr>
+<tr><td>Символы — это строки</td><td><code>'a'</code></td></tr>
 <tr><td><code>&quot;hello &quot; + &quot;world&quot;</code></td><td><code>&quot;hello &quot; ++ &quot;world&quot;</code></td></tr>
 </tbody>
 </table>
-<h2><a class="anchor" aria-hidden="true" name="boolean"></a><a href="#boolean" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Boolean</h2>
+<h2><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Булев</h2>
 <table>
 <thead>
 <tr><th>JavaScript</th><th>Reason</th></tr>
 </thead>
 <tbody>
 <tr><td><code>true</code>, <code>false</code></td><td><code>true</code>, <code>false</code> *</td></tr>
-<tr><td><code>!true</code></td><td>Same</td></tr>
-<tr><td><code>&amp;#124;&amp;#124;</code>, <code>&amp;&amp;</code>, <code>&lt;=</code>, <code>&gt;=</code>, <code>&lt;</code>, <code>&gt;</code></td><td>Same</td></tr>
-<tr><td><code>a === b</code>, <code>a !== b</code></td><td>Same</td></tr>
+<tr><td><code>!true</code></td><td>Так же</td></tr>
+<tr><td><code>&amp;#124;&amp;#124;</code>, <code>&amp;&amp;</code>, <code>&lt;=</code>, <code>&gt;=</code>, <code>&lt;</code>, <code>&gt;</code></td><td>Так же</td></tr>
+<tr><td><code>a === b</code>, <code>a !== b</code></td><td>Так же</td></tr>
 <tr><td>No deep equality (recursive compare)</td><td><code>a == b</code>, <code>a != b</code></td></tr>
-<tr><td><code>a == b</code></td><td>No equality with implicit casting (thankfully)</td></tr>
+<tr><td><code>a == b</code></td><td>Нет сравнения с приведением (к счастью)</td></tr>
 </tbody>
 </table>
-<p>* This is the Reason spiritual equivalent; it doesn't mean it compiles to JS' <code>true</code>/<code>false</code>! To compile to the latter, use <code>Js.true_</code>/<code>Js.false_</code>. See <a href="/docs/ru/boolean.html#usage">here</a>.</p>
-<h2><a class="anchor" aria-hidden="true" name="number"></a><a href="#number" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Number</h2>
+<p>* Хотя это и эквивалент в Reason, булев не компилируется в JS <code>true</code>/<code>false</code>! Для такой необходимости используйте <code>Js.true_</code>/<code>Js.false_</code>. <a href="/docs/ru/boolean.html#usage">Подробнее</a>.</p>
+<h2><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Число</h2>
 <table>
 <thead>
 <tr><th>JavaScript</th><th>Reason</th></tr>
 </thead>
 <tbody>
-<tr><td><code>3</code></td><td>Same *</td></tr>
-<tr><td><code>3.1415</code></td><td>Same</td></tr>
-<tr><td><code>3 + 4</code></td><td>Same</td></tr>
+<tr><td><code>3</code></td><td>Так же *</td></tr>
+<tr><td><code>3.1415</code></td><td>Так же</td></tr>
+<tr><td><code>3 + 4</code></td><td>Так же</td></tr>
 <tr><td><code>3.0 + 4.5</code></td><td><code>3.0 +. 4.5</code></td></tr>
 <tr><td><code>5 % 3</code></td><td><code>5 mod 3</code></td></tr>
 </tbody>
 </table>
-<p>* JS has no distinction between integer and float.</p>
-<h2><a class="anchor" aria-hidden="true" name="object-record"></a><a href="#object-record" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Object/Record</h2>
+<p>* JS не имеет разделения на целые и числа с плавающей точкой.</p>
+<h2><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Объект/запись</h2>
 <table>
 <thead>
 <tr><th>JavaScript</th><th>Reason</th></tr>
 </thead>
 <tbody>
-<tr><td>no static types</td><td><code>type point = {x: int, mutable y: int}</code></td></tr>
-<tr><td><code>{x: 30, y: 20}</code></td><td>Same *</td></tr>
-<tr><td><code>point.x</code></td><td>Same</td></tr>
-<tr><td><code>point.y = 30;</code></td><td>Same</td></tr>
-<tr><td><code>{...point, x: 30}</code></td><td>Same</td></tr>
+<tr><td>нет типов</td><td><code>type point = {x: int, mutable y: int}</code></td></tr>
+<tr><td><code>{x: 30, y: 20}</code></td><td>Так же *</td></tr>
+<tr><td><code>point.x</code></td><td>Так же</td></tr>
+<tr><td><code>point.y = 30;</code></td><td>Так же</td></tr>
+<tr><td><code>{...point, x: 30}</code></td><td>Так же</td></tr>
 </tbody>
 </table>
-<p>* This is the Reason spiritual equivalent; it doesn't mean it compiles to JS' object! To compile to the latter, see <a href="/docs/ru/object.html#tip-tricks">here</a>.</p>
-<h2><a class="anchor" aria-hidden="true" name="array"></a><a href="#array" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Array</h2>
+<p>* Это ближайший эквивалент в Reason, но это не значит, что запись компилируется в JS объект! Про компиляции в объект подробнее <a href="/docs/ru/object.html#tip-tricks">тут</a>.</p>
+<h2><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Массив</h2>
 <table>
 <thead>
 <tr><th>JavaScript</th><th>Reason</th></tr>
@@ -90,7 +90,7 @@
 <tr><td><code>[1, 2, 3]</code></td><td><code>[&amp;#124;1, 2, 3&amp;#124;]</code></td></tr>
 <tr><td><code>myArray[1] = 10</code></td><td>Same</td></tr>
 <tr><td><code>[1, &quot;Bob&quot;, true]</code> *</td><td><code>(1, &quot;Bob&quot;, true)</code></td></tr>
-<tr><td>No immutable list</td><td><code>[1, 2, 3]</code></td></tr>
+<tr><td>Нет неизменяемых списков</td><td><code>[1, 2, 3]</code></td></tr>
 </tbody>
 </table>
 <p>* We can simulate tuples in JavaScript with arrays, because JavaScript arrays can contain multiple types of elements.</p>
@@ -104,7 +104,7 @@
 </tbody>
 </table>
 <p>* Again, only a spiritual equivalent; Reason doesn't have nulls, nor null bugs! But it does have <a href="/docs/ru/newcomer-examples.html#using-the-option-type">an option type</a> for when you actually need nullability.</p>
-<h2><a class="anchor" aria-hidden="true" name="function"></a><a href="#function" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Function</h2>
+<h2><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Функция</h2>
 <table>
 <thead>
 <tr><th>JavaScript</th><th>Reason</th></tr>
@@ -113,10 +113,10 @@
 <tr><td><code>arg =&gt; retVal</code></td><td><code>(arg) =&gt; retVal</code></td></tr>
 <tr><td><code>function named(arg) {...}</code></td><td><code>let named = (arg) =&gt; ...</code></td></tr>
 <tr><td><code>const f = function(arg) {...}</code></td><td><code>let f = (arg) =&gt; ...</code></td></tr>
-<tr><td><code>add(4, add(5, 6))</code></td><td>Same</td></tr>
+<tr><td><code>add(4, add(5, 6))</code></td><td>Так же</td></tr>
 </tbody>
 </table>
-<h3><a class="anchor" aria-hidden="true" name="blocks"></a><a href="#blocks" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Blocks</h3>
+<h3><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Блоки</h3>
 <table>
   <tr>
     <th>
@@ -151,7 +151,7 @@ doubleX + doubleY
 </td></p>
   </tr>
 </table>
-<h3><a class="anchor" aria-hidden="true" name="currying"></a><a href="#currying" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Currying</h3>
+<h3><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Каррирование</h3>
 <table>
 <thead>
 <tr><th>JavaScript</th><th>Reason</th></tr>
@@ -160,20 +160,20 @@ doubleX + doubleY
 <tr><td><code>let add = a =&gt; b =&gt; a + b</code></td><td><code>let add = (a, b) =&gt; a + b</code></td></tr>
 </tbody>
 </table>
-<p>Both JavaScript and Reason support currying, but Reason currying is <strong>built-in and optimized to avoid intermediate function allocation &amp; calls</strong>, whenever possible.</p>
+<p>Оба языка поддерживают каррирование, но в Reason каррирование <strong>встроенно и оптимизировано для избежания дополнительных аллокаций</strong>, когда это возможно.</p>
 <h2><a class="anchor" aria-hidden="true" name="if-else"></a><a href="#if-else" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>If-else</h2>
 <table>
 <thead>
 <tr><th>JavaScript</th><th>Reason</th></tr>
 </thead>
 <tbody>
-<tr><td><code>if (a) {b} else {c}</code></td><td>Same *</td></tr>
-<tr><td><code>a ? b : c</code></td><td>Same</td></tr>
-<tr><td><code>switch</code></td><td><code>switch</code> but <a href="/docs/ru/pattern-matching.html">super-powered!</a></td></tr>
+<tr><td><code>if (a) {b} else {c}</code></td><td>Так же *</td></tr>
+<tr><td><code>a ? b : c</code></td><td>Так же</td></tr>
+<tr><td><code>switch</code></td><td><code>switch</code> но <a href="/docs/ru/pattern-matching.html">совсем не такой!</a></td></tr>
 </tbody>
 </table>
-<p>* Reason conditionals are always expressions!</p>
-<h2><a class="anchor" aria-hidden="true" name="destructuring"></a><a href="#destructuring" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Destructuring</h2>
+<p>* Условия в Reason всегда выражения!</p>
+<h2><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Деструктурирование</h2>
 <table>
 <thead>
 <tr><th>JavaScript</th><th>Reason</th></tr>
@@ -185,7 +185,7 @@ doubleX + doubleY
 </tbody>
 </table>
 <p>* Gives good compiler warning that <code>data</code> might not be of length 2. Switch to pattern-matching instead.</p>
-<h2><a class="anchor" aria-hidden="true" name="loop"></a><a href="#loop" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Loop</h2>
+<h2><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Цикл</h2>
 <table>
 <thead>
 <tr><th>JavaScript</th><th>Reason</th></tr>
@@ -193,7 +193,7 @@ doubleX + doubleY
 <tbody>
 <tr><td><code>for (let i = 0; i &lt;= 10; i++) {...}</code></td><td><code>for (i in 0 to 10) {...}</code></td></tr>
 <tr><td><code>for (let i = 10; i &gt;= 0; i--) {...}</code></td><td><code>for (i in 10 downto 0) {...}</code></td></tr>
-<tr><td><code>while (true) {...}</code></td><td>Same</td></tr>
+<tr><td><code>while (true) {...}</code></td><td>Так же</td></tr>
 </tbody>
 </table>
 <h2><a class="anchor" aria-hidden="true" name="jsx"></a><a href="#jsx" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>JSX</h2>
@@ -205,10 +205,11 @@ doubleX + doubleY
 <tr><td><code>&lt;Foo bar=1 baz=&quot;hi&quot; onClick={bla} /&gt;</code></td><td>Same</td></tr>
 <tr><td><code>&lt;Foo bar=bar /&gt;</code></td><td><code>&lt;Foo bar /&gt;</code> *</td></tr>
 <tr><td><code>&lt;input checked /&gt;</code></td><td><code>&lt;input checked=true /&gt;</code></td></tr>
+<tr><td>No children spread</td><td><code>&lt;Foo&gt;...children&lt;/Foo&gt;</code></td></tr>
 </tbody>
 </table>
 <p>* Argument punning!</p>
-<h2><a class="anchor" aria-hidden="true" name="exception"></a><a href="#exception" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Exception</h2>
+<h2><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Исключения</h2>
 <table>
 <thead>
 <tr><th>JavaScript</th><th>Reason</th></tr>
@@ -218,9 +219,9 @@ doubleX + doubleY
 <tr><td><code>try (a) {...} catch (Err) {...} finally {...}</code></td><td><code>try a { &amp;#124; Err =&gt; ...}</code> *</td></tr>
 </tbody>
 </table>
-<p>* No finally.</p>
-<h2><a class="anchor" aria-hidden="true" name="blocks"></a><a href="#blocks" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Blocks</h2>
-<p>In Reason, &quot;sequence expressions&quot; are created with <code>{}</code> and evaluate to their last statement. In JavaScript, this can be simulated via an immediately-invoked function expression (since function bodies have their own local scope).</p>
+<p>* Нет finally.</p>
+<h2><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Блоки</h2>
+<p>В Reason последовательности выражений создаются с помощью <code>{}</code> и вычисляются в последнее выражение. In JavaScript, this can be simulated via an immediately-invoked function expression (since function bodies have their own local scope).</p>
 <table>
   <tr>
     <th>

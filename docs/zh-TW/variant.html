@@ -139,13 +139,13 @@
 </code></pre>
 <p>The compiler sees the variant, then</p>
 <ol>
-<li><p>conceptually turns them into <code>type animal = 0 | 1 | 2</code></p></li>
-<li><p>compiles <code>switch</code> to a constant-time format (<code>O(1)</code>).</p></li>
+<li>conceptually turns them into <code>type animal = 0 | 1 | 2</code></li>
+<li>compiles <code>switch</code> to a constant-time format (<code>O(1)</code>).</li>
 </ol>
 <p>You might wonder why typed functional languages are used so often for parsing; switching on a large tree efficiently and safely is pretty much the best-case scenario for variants.</p>
 <!-- TODO: playground link -->
 <p>Mind blown yet? Variants have a deep connection to other fields of mathematics; <a href="https://codewords.recurse.com/issues/three/algebra-and-calculus-of-algebraic-data-types">See here</a> for an interesting exploration.</p>
-<p>* It's always nicer to design away the problem rather than resorting to a type system to cover the pitfalls; In reality, it's unrealistic to do so for every problem, or even just to understand every problem fully in order to design a solution. A type system allows you to safely make a big category of changes to codebases without needing to understand the whole thing upfront. In this regard, types also allows us not needing to overly design an API just to circumvent callers' simple pitfalls. They reduce the layers of abstractions needed to &quot;get things done&quot;, which in return reduces callers' cognitive burden.</p>
+<p>* It's always nicer to design away the problem rather than resorting to a type system to cover the pitfalls; In reality, it's unrealistic to do so for every problem, or even just to understand every problem fully in order to design a solution. A type system allows you to safely make a big category of changes to codebases without needing to understand the whole thing upfront. This is great for guided exploration. In this regard, types also allows us not needing to overly design an API just to circumvent callers' simple pitfalls. They reduce the layers of abstractions needed to &quot;get things done&quot;, which in return reduces callers' cognitive burden.</p>
 </span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="record.html">← Record</a><a class="docs-next button" href="list-and-array.html">List &amp; 陣列 →</a></div></div></div></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.js"></script><script>window.foo = new Pjax({
           areas: [
             // try to use the first query.

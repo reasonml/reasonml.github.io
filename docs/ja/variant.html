@@ -139,13 +139,13 @@
 </code></pre>
 <p>コンパイラはヴァリアントを見て、</p>
 <ol>
-<li><p>概念的にそれらを<code>type animal = 0 | 1 | 2</code> に変えます。</p></li>
-<li><p><code>switch</code> を一定時間の形式（<code>O(1)</code>）にコンパイルします。</p></li>
+<li>conceptually turns them into <code>type animal = 0 | 1 | 2</code></li>
+<li>compiles <code>switch</code> to a constant-time format (<code>O(1)</code>).</li>
 </ol>
 <p>なぜ型付け関数型言語は parsing のために頻繁に使われるのか不思議に思うかもしれません。大きな木を効率的かつ安全に切り替えることは、ヴァリアントのための最良のシナリオです。</p>
 <!-- TODO: playground link -->
 <p>まだ驚かない？ ヴァリアントは数学の他の分野と深い関わりを持ちます。興味深い探求のために <a href="https://codewords.recurse.com/issues/three/algebra-and-calculus-of-algebraic-data-types">ここを見て</a>ください。</p>
-<p>落とし穴をカバーするために型システムに頼るよりも、問題を設計することが常に良い選択です。実際には、すべてのプログラムでそれをすること、または、闇雲にすべての問題を完全に理解して解決策を設計することは非現実的です。 型システムを使うと、前もってすべてを理解しなくても、コードベースの変更を安全に行うことができます。 この点でも、型によって呼び出し元の単純な落とし穴を回避するだけの過度な API 設計をする必要がありません。 彼らは「事を遂行する」ために必要な抽象レイヤを減らし、見返りに呼び出し元の認知的負荷を軽減します。</p>
+<p>落とし穴をカバーするために型システムに頼るよりも、問題を設計することが常に良い選択です。実際には、すべてのプログラムでそれをすること、または、闇雲にすべての問題を完全に理解して解決策を設計することは非現実的です。 型システムを使うと、前もってすべてを理解しなくても、コードベースの変更を安全に行うことができます。 This is great for guided exploration. In this regard, types also allows us not needing to overly design an API just to circumvent callers' simple pitfalls. They reduce the layers of abstractions needed to &quot;get things done&quot;, which in return reduces callers' cognitive burden.</p>
 </span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="record.html">← Record</a><a class="docs-next button" href="list-and-array.html">List &amp; Array →</a></div></div></div></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.js"></script><script>window.foo = new Pjax({
           areas: [
             // try to use the first query.

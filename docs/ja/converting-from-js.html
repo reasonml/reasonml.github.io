@@ -35,10 +35,10 @@
 </code></pre>
 <p>Here are some of the things you'd do at this step:</p>
 <ul>
-<li><p>Convert the function call syntax over.</p></li>
-<li><p>Convert the <code>var</code>/<code>const</code> over to <code>let</code>.</p></li>
-<li><p>Hide the <code>require</code>s.</p></li>
-<li><p>Make other such changes. For idioms that don't have a BuckleScript equivalent, use <code>bs.raw</code> (<a href="https://bucklescript.github.io/docs/en/embed-raw-javascript.html">documentation</a>).</p></li>
+<li>Convert the function call syntax over.</li>
+<li>Convert the <code>var</code>/<code>const</code> over to <code>let</code>.</li>
+<li>Hide the <code>require</code>s.</li>
+<li>Make other such changes. For idioms that don't have a BuckleScript equivalent, use <code>bs.raw</code> (<a href="https://bucklescript.github.io/docs/en/embed-raw-javascript.html">documentation</a>).</li>
 </ul>
 <p>Again, <strong>worry only about making the file syntactically valid</strong>. Trying to learn all three of syntax, types and other semantics while converting over a file reduces your iteration speed to less than a third.</p>
 <pre><code class="hljs css reason">/* syntactically valid, semantically wrong conversion */
@@ -59,13 +59,13 @@ let queryResult = (usePayload, payload) =&gt;
 <p><strong>Goal</strong>: correct the types, but just enough to move onto the next step.</p>
 <p>You might still occasionally get syntax errors, but not as drastic as the previous step's.</p>
 <ul>
-<li><p>Change <code>foo.bar</code> to <code>foo##bar</code>. This escape-hatch <a href="https://bucklescript.github.io/docs/en/object.html#object-as-record">BuckleScript feature</a> will be your medium-term friend.</p></li>
-<li><p>Convert <code>{foo: bar}</code> to <code>[%bs.obj {foo: bar}]</code> (<a href="https://bucklescript.github.io/docs/en/object.html#creation">docs</a>). After <code>refmt</code>, this will sugar to <code>{&quot;foo&quot;: bar}</code>.</p></li>
-<li><p>To communicate with external JS files, use <code>external</code>. They're BuckleScript's <a href="https://bucklescript.github.io/docs/en/intro-to-external.html">foreign function interface</a>.</p>
+<li>Change <code>foo.bar</code> to <code>foo##bar</code>. This escape-hatch <a href="https://bucklescript.github.io/docs/en/object.html#object-as-record">BuckleScript feature</a> will be your medium-term friend.</li>
+<li>Convert <code>{foo: bar}</code> to <code>[%bs.obj {foo: bar}]</code> (<a href="https://bucklescript.github.io/docs/en/object.html#creation">docs</a>). After <code>refmt</code>, this will sugar to <code>{&quot;foo&quot;: bar}</code>.</li>
+<li>To communicate with external JS files, use <code>external</code>. They're BuckleScript's <a href="https://bucklescript.github.io/docs/en/intro-to-external.html">foreign function interface</a>.
 <ul>
-<li><p>Inline externals. No need to create clean, well-separated files for externals for now. We'll come back to these.</p></li>
-<li><p>If it's too cumbersome to correctly type an <code>external</code>'s input/output, use some placeholder polymorphic types, e.g. <code>external getStudentById: 'whatever =&gt; 'whateverElse = ...</code>.</p></li>
-<li><p>For data types &amp; patterns that are hard to properly convert over, you can occasionally create converters like <code>external unsafeCast : myPayloadType =&gt; anotherDataType = &quot;%identity&quot;;</code>.</p></li>
+<li>Inline externals. No need to create clean, well-separated files for externals for now. We'll come back to these.</li>
+<li>If it's too cumbersome to correctly type an <code>external</code>'s input/output, use some placeholder polymorphic types, e.g. <code>external getStudentById: 'whatever =&gt; 'whateverElse = ...</code>.</li>
+<li>For data types &amp; patterns that are hard to properly convert over, you can occasionally create converters like <code>external unsafeCast : myPayloadType =&gt; anotherDataType = &quot;%identity&quot;;</code>.</li>
 </ul></li>
 </ul>
 <p>This is the first pass; the final types likely look different. For now, reap the rewards! Once you're finally done fixing all the type errors, your JS file should now be generated. Keep it open side-by-side. Time to come back and fix all the hacks!</p>
@@ -85,8 +85,8 @@ let queryResult = (usePayload, payload) =&gt;
 <p><strong>Goal</strong>: fix the errors in the generated JS output.</p>
 <p>Compare it with your old JS file. The output is likely incorrect; you probably mis-converted some idioms and mistyped some externals.</p>
 <ul>
-<li><p>Type the shape of JS objects (the things that required <code>##</code>).</p></li>
-<li><p>Convert whichever parts to records/variants/idiomatic OCaml types.</p></li>
+<li>Type the shape of JS objects (the things that required <code>##</code>).</li>
+<li>Convert whichever parts to records/variants/idiomatic OCaml types.</li>
 </ul>
 <p>All this time, check the output for any change.</p>
 <pre><code class="hljs css reason"><span class="hljs-keyword">type</span> student; /* abstract <span class="hljs-keyword">type</span>, described later */
@@ -108,8 +108,8 @@ let queryResult = (usePayload, payload) =&gt;
 <p><strong>Goal</strong>: make your types legit (aka, sound).</p>
 <p>Go back fix whatever you've left during the first pass.</p>
 <ul>
-<li><p>Make sure you don't have any <code>'whatever</code> types left in <code>external</code>s.</p></li>
-<li><p>You can keep the <code>external</code>s inlined, or pull them out into a file.</p></li>
+<li>Make sure you don't have any <code>'whatever</code> types left in <code>external</code>s.</li>
+<li>You can keep the <code>external</code>s inlined, or pull them out into a file.</li>
 </ul>
 <pre><code class="hljs css reason"><span class="hljs-comment">/* in the current file */</span>
 type <span class="hljs-attr">payloadType</span> = {. <span class="hljs-string">"student"</span>: School.student}; <span class="hljs-comment">/* <span class="hljs-doctag">TODO:</span> put this somewhere else! */</span>

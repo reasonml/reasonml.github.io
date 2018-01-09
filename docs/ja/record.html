@@ -108,15 +108,12 @@ getAge(me);
 <h2><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>設計方針</h2>
 <p>前のセクションの制約について読んだ後、もしあなたが動的言語から来た人だった場合、なぜ直接オブジェクトを使う代わりに最初にレコードについて説明するのか疑問に思うかもしれません。前者は明示的な型付けを必要とし、同じフィールド名の異なるレコードを関数に渡すことを許可しないなどのためです。</p>
 <ol>
-<li><p>あなたのアプリのほとんどの時間、データの形は実際は固定されていて、もしそうでなくても、潜在的にヴァリアント（次で説明します） + レコードの組み合わせでよりよく表現できるというのが実情です。</p></li>
-<li><p>レコードはそのフィールドが固定されているので、JS オブジェクトの代わりにインデックスでアクセスする配列としてコンパイルされます（プレイングラウンドで試してください！）。 ネイティブでは、基本的にフィールドへのアクセスが単に1回のフィールド検索 + 1回の実際のアクセスで可能なメモリの領域にコンパイルされます。<strong>2アセンブリ命令</strong>とも言えます。 先人たちがナノ秒で測定していた古き良き日々...</p></li>
-</ol>
-<!--TODO: sharable playground  -->
-<ol>
-<li>最後に、単一の明示的な型宣言（これを「nominal typing」と呼ぶ）を見つけることによってレコード型が解決されるため、型エラーメッセージは相手方より優れています（タプルの場合のように「構造型」）。 これにより、リファクタリングが容易になります。 レコードタイプのフィールドを変更すると、コンパイラはそれがまだ同じレコードであり、いくつかの場所で不適になっていることを自然に知ることができます。 そうでなければ、構造型の場合、誤りが定義側にあるのか、利用側にあるのかを教えることが難しくなるかもしれません。</li>
+<li>The truth is that most of the times in your app, your data's shape is actually fixed, and if it's not, it can potentially be better represented as a combination of variant (introduced next) + record instead*.</li>
+<li>Record, since its fields are fixed, is compiled to an array with array index accesses instead of JS object (try it in the playground!). On native, it compiles to basically a region of memory where a field access is just one field lookup + one actual access, aka <strong>2 assembly instructions</strong>. The good old days where folks measured in nanoseconds...</li>
+<li>Finally, since a record type is resolved through finding that single explicit type declaration (we call this &quot;nominal typing&quot;), the type error messages end up better than the counterpart (&quot;structural typing&quot;, like for tuples). This makes refactoring easier; changing a record type's fields naturally allows the compiler to know that it's still the same record, just misused in some places. Otherwise, under structural typing, it might get hard to tell whether the definition site or the usage site is wrong.</li>
 </ol>
 <p>* そして、私たちはただ自分の言い訳を探すだけではありません！Reason オブジェクトはこれらの機能をサポートします。</p>
-</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="tuple.html">← Tuple</a><a class="docs-next button" href="variant.html">Variant! →</a></div></div></div></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.js"></script><script>window.foo = new Pjax({
+<!--TODO: sharable playground for 2 --></span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="tuple.html">← Tuple</a><a class="docs-next button" href="variant.html">Variant! →</a></div></div></div></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.js"></script><script>window.foo = new Pjax({
           areas: [
             // try to use the first query.
             '.mainContainer, .docsNavContainer .toc .navWrapper',
