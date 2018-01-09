@@ -36,6 +36,7 @@ Reason is just OCaml under the hood; We don't yet cover every concept on this do
 - [What's in a Language?](https://www.youtube.com/watch?v=24S5u_4gx7w) April 2017
 - [Taming the Meta-language](https://www.youtube.com/watch?v=_0T5OSSzxms) March 2017
 - [The Age of Reason(ML)](https://www.youtube.com/watch?v=8LCmLQ1-YqQ) November 2016
+- [A 5-part introduction to ReasonML](https://scrimba.com/playlist/pZ3qcV)
 
 ## General Functional Programming & Type System
 
