@@ -144,11 +144,10 @@ The type system will complain that `me` is a `person`, and that `getAge` only wo
 After reading the constraints in the previous sections, and if you're coming from a dynamic language background, you might be wondering why one would bother with record in the first place instead of straight using object, since the former needs explicit typing and doesn't allow different records with the same field name to be passed to the same function, etc.
 
 1. The truth is that most of the times in your app, your data's shape is actually fixed, and if it's not, it can potentially be better represented as a combination of variant (introduced next) + record instead*.
-
 2. Record, since its fields are fixed, is compiled to an array with array index accesses instead of JS object (try it in the playground!). On native, it compiles to basically a region of memory where a field access is just one field lookup + one actual access, aka **2 assembly instructions**. The good old days where folks measured in nanoseconds...
-
-<!--TODO: sharable playground  -->
-
 3. Finally, since a record type is resolved through finding that single explicit type declaration (we call this "nominal typing"), the type error messages end up better than the counterpart ("structural typing", like for tuples). This makes refactoring easier; changing a record type's fields naturally allows the compiler to know that it's still the same record, just misused in some places. Otherwise, under structural typing, it might get hard to tell whether the definition site or the usage site is wrong.
 
 \* And we're not just finding excuses for ourselves! Reason objects do support these features.
+
+<!--TODO: sharable playground for 2 -->
+

@@ -80,7 +80,8 @@ obj#doYouWant();
 
 If you come from JavaScript, you're probably not looking for vanilla Reason objects, but BuckleScript's [special object](https://bucklescript.github.io/docs/en/object.html#object-as-record). These are different in that they:
 
-- access fields through `##`
+- access fields through `##`.
+- uses `#=` for mutation, if the field is mutable (using `bs.set`).
 - always come with with `Js.t` (as a type parameter to the `Js.t` type).
 - compile to actual JS objects.
 

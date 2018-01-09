@@ -35,11 +35,8 @@ function queryResult(usePayload, payload) {
 Here are some of the things you'd do at this step:
 
 - Convert the function call syntax over.
-
 - Convert the `var`/`const` over to `let`.
-
 - Hide the `require`s.
-
 - Make other such changes. For idioms that don't have a BuckleScript equivalent, use `bs.raw` ([documentation](https://bucklescript.github.io/docs/en/embed-raw-javascript.html)).
 
 Again, **worry only about making the file syntactically valid**. Trying to learn all three of syntax, types and other semantics while converting over a file reduces your iteration speed to less than a third.
@@ -68,15 +65,10 @@ Types, Pass 1
 You might still occasionally get syntax errors, but not as drastic as the previous step's.
 
 - Change `foo.bar` to `foo##bar`. This escape-hatch [BuckleScript feature](https://bucklescript.github.io/docs/en/object.html#object-as-record) will be your medium-term friend.
-
 - Convert `{foo: bar}` to `[%bs.obj {foo: bar}]` ([docs](https://bucklescript.github.io/docs/en/object.html#creation)). After `refmt`, this will sugar to `{"foo": bar}`.
-
 - To communicate with external JS files, use `external`. They're BuckleScript's [foreign function interface](https://bucklescript.github.io/docs/en/intro-to-external.html).
-
   - Inline externals. No need to create clean, well-separated files for externals for now. We'll come back to these.
-
   - If it's too cumbersome to correctly type an `external`'s input/output, use some placeholder polymorphic types, e.g. `external getStudentById: 'whatever => 'whateverElse = ...`.
-
   - For data types & patterns that are hard to properly convert over, you can occasionally create converters like `external unsafeCast : myPayloadType => anotherDataType = "%identity";`.
 
 This is the first pass; the final types likely look different. For now, reap the rewards! Once you're finally done fixing all the type errors, your JS file should now be generated. Keep it open side-by-side. Time to come back and fix all the hacks!
@@ -103,7 +95,6 @@ Runtime Semantics
 Compare it with your old JS file. The output is likely incorrect; you probably mis-converted some idioms and mistyped some externals.
 
 - Type the shape of JS objects (the things that required `##`).
-
 - Convert whichever parts to records/variants/idiomatic OCaml types.
 
 All this time, check the output for any change.
@@ -133,9 +124,7 @@ Clean Up (Types, Pass 2)
 Go back fix whatever you've left during the first pass.
 
 - Make sure you don't have any `'whatever` types left in `external`s.
-
 - You can keep the `external`s inlined, or pull them out into a file.
-
 
 ```reason
 /* in the current file */

@@ -93,11 +93,7 @@ module ActualComponent = {
 };
 ```
 
-**Note**: `include` and `open` are very different! The former literally copies
-over definitions into the new module for it to appropriate. The latter simply
-allows refering to items (values, types, constructors, etc.) in the `open`ed
-module's scope in an "unqualified" way (aka, `foo` instead of the qualified
-`MyModule.foo`).
+**Note**: `open` and `include` are very different! The former brings a module's content into your current scope, so that you don't have to refer to a value by prefixing it with the module's name every time. The latter **copies over** the definition of a module statically, then also do an `open`.
 
 ### Every `.re` file is a module
 
@@ -154,21 +150,14 @@ A signature defines the list of requirements that a module must satisfy in order
 for that module to match the signature. Those requirements are of the form:
 
 - `let x: int;` requires a `let` binding named `x`, of type `int`.
-
 - `type t = someType;` requires a type field `t` to be equal to `someType`.
-
-- `type t;` requires a type field `t`, but without imposing any requirements on
-  the actual, concrete type of `t`. We'd use `t` in other entries in the
-  signature to describe relationships, e.g. `let makePair: t => (t, t)` but we
-  cannot, for example, assume that `t` is an `int`. This gives us great,
-  enforced abstraction abilities.
+- `type t;` requires a type field `t`, but without imposing any requirements on the actual, concrete type of `t`. We'd use `t` in other entries in the signature to describe relationships, e.g. `let makePair: t => (t, t)` but we cannot, for example, assume that `t` is an `int`. This gives us great, enforced abstraction abilities.
 
 To illustrate the various kinds of type entries, consider the above signature
 `EstablishmentType` which requires that a module:
 
 - Declare a type named `profession`.
-- Must include a function that takes in a value of the type `profession` and
-  returns a string.
+- Must include a function that takes in a value of the type `profession` and returns a string.
 
 **Note**:
 

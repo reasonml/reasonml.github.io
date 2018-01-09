@@ -8,7 +8,7 @@ title: Global Installation
 
 | Platform  | Install command
 |-----------|-------------------------------------------------------------------------------------------------
-| **OSX**     | `npm install -g https://github.com/reasonml/reason-cli/archive/3.0.4-bin-darwin.tar.gz`
+| **macOS**     | `npm install -g https://github.com/reasonml/reason-cli/archive/3.0.4-bin-darwin.tar.gz`
 | **Linux**   | `npm install -g https://github.com/reasonml/reason-cli/archive/3.0.4-bin-linux.tar.gz`
 | **Windows** | Please see https://github.com/reasonml/reasonml.github.io/issues/195
 

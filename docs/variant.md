@@ -196,7 +196,6 @@ switch data {
 The compiler sees the variant, then
 
 1. conceptually turns them into `type animal = 0 | 1 | 2`
-
 2. compiles `switch` to a constant-time format (`O(1)`).
 
 You might wonder why typed functional languages are used so often for parsing; switching on a large tree efficiently and safely is pretty much the best-case scenario for variants.
@@ -205,4 +204,4 @@ You might wonder why typed functional languages are used so often for parsing; s
 
 Mind blown yet? Variants have a deep connection to other fields of mathematics; [See here](https://codewords.recurse.com/issues/three/algebra-and-calculus-of-algebraic-data-types) for an interesting exploration.
 
-\* It's always nicer to design away the problem rather than resorting to a type system to cover the pitfalls; In reality, it's unrealistic to do so for every problem, or even just to understand every problem fully in order to design a solution. A type system allows you to safely make a big category of changes to codebases without needing to understand the whole thing upfront. In this regard, types also allows us not needing to overly design an API just to circumvent callers' simple pitfalls. They reduce the layers of abstractions needed to "get things done", which in return reduces callers' cognitive burden.
+\* It's always nicer to design away the problem rather than resorting to a type system to cover the pitfalls; In reality, it's unrealistic to do so for every problem, or even just to understand every problem fully in order to design a solution. A type system allows you to safely make a big category of changes to codebases without needing to understand the whole thing upfront. This is great for guided exploration. In this regard, types also allows us not needing to overly design an API just to circumvent callers' simple pitfalls. They reduce the layers of abstractions needed to "get things done", which in return reduces callers' cognitive burden.
