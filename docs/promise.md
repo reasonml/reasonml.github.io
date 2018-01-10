@@ -1,6 +1,5 @@
 ---
-title: Promises
-order: 6
+title: Promise
 ---
 
 Reason has built-in support for [JavaScript promises through BuckleScript](https://bucklescript.github.io/bucklescript/api/Js.Promise.html). The 3 functions you generally need are:
