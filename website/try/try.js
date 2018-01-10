@@ -471,6 +471,41 @@ class Try extends Component {
       });
     }
 
+    this.reformat = () => {
+      clearTimeout(this.errorTimerId)
+
+      this.setState((prevState, _) => {
+        let newReasonCode = prevState.reason;
+        try {
+          newReasonCode = window.printRE(window.parseRE(newReasonCode))
+        } catch (e) {
+          this.errorTimerId = setTimeout(
+            () => this.setState(_ => {
+              return {
+                reasonSyntaxError: e,
+                compileError: null,
+                jsError: null,
+                js: '',
+                reason: '',
+                output: [],
+              }
+            }),
+            errorTimeout
+          )
+        }
+
+        persist('reason', newReasonCode);
+        return {
+          reason: newReasonCode,
+          reasonSyntaxError: null,
+          compileError: null,
+          ocamlSyntaxError: null,
+          jsError: null,
+          shareableUrl: generateShareableUrl('reason', newReasonCode)
+        }
+      });
+    }
+
     this.compile = (code) => {
       const _consoleError = console.error;
       let warning = '';
@@ -574,16 +609,17 @@ class Try extends Component {
     return (
       <div className="try-inner">
         <div className="try-buttons">
-          <div className="try-button try-button-examples try-button-right">
+          <div className="try-button try-button-examples try-button-right-border">
             Examples
             <ul className="try-button-examples-list">
               {examples.map(example => <li key={example.name} onClick={() => this.updateReason(example.code)}>{example.name}</li>)}
             </ul>
           </div>
-          <div className="try-button try-button-right" style={{marginRight: 'auto'}} onClick={oldSyntax}>
+          <div className="try-button" style={{marginRight: 'auto'}} onClick={oldSyntax}>
             Old Syntax
           </div>
-          <div className="try-button">
+          <div className="try-button try-button-right-border" onClick={this.reformat}>Refmt (Reformat)</div>
+          <div className="try-button try-button-right-border">
             Evaluate
             <input
               className="try-button-evaluate-checkbox"
