@@ -37,15 +37,15 @@
 </table>
 <table>
 <thead>
-<tr><th>Inequality</th><th>OCaml</th><th>Reason</th></tr>
+<tr><th>Inégalité</th><th>OCaml</th><th>Reason</th></tr>
 </thead>
 <tbody>
-<tr><td>Structural</td><td><code>x &lt;&gt; y</code></td><td><code>x != y</code></td></tr>
-<tr><td>Reference</td><td><code>x != y</code></td><td><code>x !== y</code></td></tr>
+<tr><td>Structurelle</td><td><code>x &lt;&gt; y</code></td><td><code>x != y</code></td></tr>
+<tr><td>Référence</td><td><code>x != y</code></td><td><code>x !== y</code></td></tr>
 </tbody>
 </table>
-<h2><a class="anchor" aria-hidden="true" name="local-scope"></a><a href="#local-scope" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Local Scope</h2>
-<p>Reason's lexical scoping is exactly the same as OCaml's, but let bindings syntactically resemble &quot;block scope&quot; which is more familiar to many developers. In Reason, they are created with <code>{}</code> braces, which may contain both <code>let</code> bindings and imperative commands, separated by <code>;</code>. All blocks evaluate to the last line and the semicolon on the last line is optional. <code>{}</code> braces are only needed if you have more than one item to chain together via <code>;</code>.</p>
+<h2><a class="anchor" aria-hidden="true" name="scope-local"></a><a href="#scope-local" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Scope local</h2>
+<p>Le scoping lexical de Reason est exactement le même que celui d'OCaml, mais les bindings let ressemblent syntaxiquement au &quot;block scope&quot; qui est plus familier à de nombreux développeurs. En Reason, ils sont créés avec des accolades <code>{}</code>, qui peuvent contenir à la fois des bindings <code>let</code> et des commandes impératives, séparées par <code>;</code>. Tous les blocs évaluent à la dernière ligne, où le point-virgule est facultatif. Les accolades <code>{}</code> ne sont nécessaires que si vous avez plus d'un élément à chaîner via <code>;</code>.</p>
 <table>
   <tr>
     <th>
@@ -81,25 +81,25 @@ print_string(msg2)
 </td></p>
   </tr>
 </table>
-<p>Reason's <code>{}</code> syntax removes many commonly reported pain points in OCaml's syntax:</p>
+<p>La syntaxe <code>{}</code> en Reason supprime plusieurs points de friction communément signalés dans la syntaxe d'OCaml :</p>
 <ul>
-<li>Double semicolons are removed entirely.</li>
-<li><code>begin</code>/<code>end</code> is removed entirely.</li>
-<li>Infamous imperative parsing <a href="https://github.com/ocaml/ocaml/pull/278">issues</a> are gone.</li>
-<li>Module bodies and local scope are unified.</li>
+<li>Les doubles point-virgules sont complètement retirés.</li>
+<li><code>begin</code>/<code>end</code> est complètement retiré.</li>
+<li>Les fameux <a href="https://github.com/ocaml/ocaml/pull/278">problèmes</a> de parsing impératif ont disparu.</li>
+<li>Le corps et le scope local des modules sont unifiés.</li>
 </ul>
-<h2><a class="anchor" aria-hidden="true" name="local-scope-vs-module-body"></a><a href="#local-scope-vs-module-body" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Local Scope Vs. Module Body</h2>
-<p>In Reason, everything that can go between the <code>{}</code> in <a href="#local-scope">Local Scopes</a> and in module bodies. You can usually even cut/paste code between the two contexts. In OCaml, the syntaxes for the two contexts are very different. Local scope requires trailing <code>in</code>, but module bodies do not and some imperative statements must be assigned to <code>_</code> or <code>()</code>, or else use double <code>;;</code>.</p>
+<h2><a class="anchor" aria-hidden="true" name="scope-local-vs-corps-de-module"></a><a href="#scope-local-vs-corps-de-module" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Scope local vs Corps de module</h2>
+<p>En Reason, tout ce qui peut être écrit entre les <code>{}</code> peut être dans le <a href="#local-scope">scope local</a> ou les corps de module. Vous pouvez même généralement copier/coller votre code entre ces deux contextes. En OCaml, les syntaxes pour les deux contextes sont très différentes. Le scope local requiert un trailing <code>in</code>, mais pas les corps de module. Par ailleurs, certaines déclarations impératives doivent être assignées à <code>_</code> ou <code>()</code>, voir utiliser un double <code>;;</code>.</p>
 <table>
   <tr>
     <th>
       <p>
-        OCaml Module Body
+        Corps de module OCaml
       </p>
     </th>
 <pre><code class="hljs">&lt;th&gt;
   &lt;p&gt;
-    Reason Module Body
+    Corps de module Reason
   &lt;/p&gt;
 &lt;/th&gt;
 </code></pre>
@@ -127,19 +127,19 @@ imperativeFunc ten ten;;
 imperativeFunc 0 0;;</pre>
     </td>
 <pre><code class="hljs">&lt;td&gt;
-  Same as above
+  Idem qu'au dessus
 &lt;/td&gt;
 </code></pre>
   </tr>
   <tr>
     <th>
       <p>
-        OCaml Local Scope
+        Scope local OCaml
       </p>
     </th>
 <pre><code class="hljs">&lt;th&gt;
   &lt;p&gt;
-    Reason Local Scope
+    Scope local Reason
   &lt;/p&gt;
 &lt;/th&gt;
 </code></pre>
