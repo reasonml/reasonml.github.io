@@ -483,11 +483,6 @@ class Try extends Component {
             () => this.setState(_ => {
               return {
                 reasonSyntaxError: e,
-                compileError: null,
-                jsError: null,
-                js: '',
-                reason: '',
-                output: [],
               }
             }),
             errorTimeout
@@ -498,9 +493,6 @@ class Try extends Component {
         return {
           reason: newReasonCode,
           reasonSyntaxError: null,
-          compileError: null,
-          ocamlSyntaxError: null,
-          jsError: null,
           shareableUrl: generateShareableUrl('reason', newReasonCode)
         }
       });
