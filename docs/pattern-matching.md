@@ -114,6 +114,25 @@ switch (List.find((i) => i === theItem, myItems)) {
 };
 ```
 
+### Nested Patterns
+
+Nested `|` work as intended:
+
+```reason
+switch (student) {
+| {name: "Jane" | "Joe"} => ...
+| {name: "Bob", Job: Progammer({fullTime: Yes | Maybe})} => ...
+};
+```
+
+### Patterns Everywhere
+
+You can put a pattern anywhere you'd put a normal "variable declaration":
+
+```reason
+let (Left v | Right v) = i;
+```
+
 ## Tips & Tricks
 
 **Flatten your pattern-match whenever you can**. This is a real bug remover. Example below.
