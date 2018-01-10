@@ -27,11 +27,29 @@ Button.defaultProps = {
 const pre = "```";
 const code = "`";
 
-const codeExample =`${pre}reason
+// fake, static, responsive refmt, lol. See reason.css homeCodeSnippet logic
+const codeExampleSmallScreen =`${pre}reason
+type schoolPerson =
+  | Teacher
+  | Director
+  | Student(string);
+
+let greeting = (stranger) =>
+  switch (stranger) {
+  | Teacher => "Hey professor!"
+  | Director => "Hello director."
+  | Student("Richard") =>
+    "Still here Ricky?"
+  | Student(anyOtherName) =>
+    "Hey, " ++ anyOtherName ++ "."
+  };
+${pre}`;
+
+const codeExampleLargeScreen =`${pre}reason
 type schoolPerson = Teacher | Director | Student(string);
 
 let greeting = (stranger) =>
-  switch stranger {
+  switch (stranger) {
   | Teacher => "Hey professor!"
   | Director => "Hello director."
   | Student("Richard") => "Still here Ricky?"
@@ -103,7 +121,8 @@ class HomeSplash extends React.Component {
 
             <div className="homeWrapperInner">
               <div className="homeCodeSnippet">
-                <MarkdownBlock>{codeExample}</MarkdownBlock>
+                <MarkdownBlock>{codeExampleSmallScreen}</MarkdownBlock>
+                <MarkdownBlock>{codeExampleLargeScreen}</MarkdownBlock>
               </div>
               <div className="homeTagLine">{siteConfig.tagline}</div>
             </div>
