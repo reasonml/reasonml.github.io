@@ -80,7 +80,7 @@ const examples = [
     link: "https://github.com/reasonml-community/reason-react-example/tree/master/src/todomvc",
   },
   {
-    name: "Mereo",
+    name: "Mareo",
     image: "img/examples/mareo.png",
     link: "https://github.com/reasonml-community/Mareo",
   }

@@ -199,7 +199,7 @@ class Index extends React.Component {
 
           <div className="productShowcaseSection paddingBottom">
             <h2>
-              <translate>Companies Using Reason</translate>
+              <translate>Users of Reason</translate>
             </h2>
             <div className="logos">
               {showcase}
