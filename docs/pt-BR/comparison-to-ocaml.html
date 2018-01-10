@@ -183,7 +183,7 @@ let ten = 10 in (
 </code></pre>
   </tr>
 </table>
-<h2><a class="anchor" aria-hidden="true" name="tuple-e-record"></a><a href="#tuple-e-record" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Tuple e Record</h2>
+<h2><a class="anchor" aria-hidden="true" name="tupla-e-record"></a><a href="#tupla-e-record" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Tupla e Record</h2>
 <p>No Reason, tuplas sempre requerem parênteses.</p>
 <table>
 <thead>
@@ -786,11 +786,11 @@ let a = TemMultiplasTuplas((10, 10), (10, 10));
 </code></pre>
 <p>let res = (x) =&gt;
 switch (x) {
-| HasNothing =&gt; 0
-| HasSingleInt(x) =&gt; 0
-| HasSingleTuple((x, y)) =&gt; 0
-| HasMultipleInts(x, y) =&gt; 0
-| HasMultipleTuples((x, y), (q, r)) =&gt; 0
+| TemNada =&gt; 0
+| TemUnicoInt(x) =&gt; 0
+| TemUnicaTupla((x, y)) =&gt; 0
+| TemMultiplosInts(x, y) =&gt; 0
+| TemMultiplasTuplas((x, y), (q, r)) =&gt; 0
 };
 </pre>
 </td>
@@ -821,8 +821,8 @@ switch (x) {
 </code></pre>
 <p>let res = match x with
 | A (x, y) -&gt; match y with
-| Nenhum -&gt; 0
-| Algum i -&gt; 10
+| None -&gt; 0
+| Some i -&gt; 10
 | B (x, y) -&gt; 0</pre>
 </td></p>
 <pre><code class="hljs">    &lt;td&gt;
@@ -846,8 +846,8 @@ switch (x) {
 &lt;pre&gt;&lt;code class=&quot;ocaml&quot;&gt;let res = match x with
 </code></pre>
 <p>| A (x, y) -&gt; match y with
-| Nenhum -&gt; 0
-| Algum i -&gt; 10
+| None -&gt; 0
+| Some i -&gt; 10
 | B (x, y) -&gt; 0
 </code></pre></p>
 <pre><code class="hljs">&lt;p&gt;
@@ -881,7 +881,7 @@ switch (x) {
     &lt;td&gt;
       &lt;pre&gt;
 </code></pre>
-<p>module type MinhaAssinatura = ass
+<p>module type MinhaAssinatura = sig
 type t = int
 val x: int
 end
@@ -903,11 +903,11 @@ end
 type t = int;
 let x: int;
 };
-module MeuMódulo: MinhaAssinatura = {
+module MeuModulo: MinhaAssinatura = {
 type t = int;
 let x = 10;
 };
-module MuMódulo = {
+module MeuModulo = {
 module NestedModule = {
 let msg = &quot;olá&quot;;
 };
@@ -1031,7 +1031,7 @@ functor (B: BSig) -&gt; struct end</pre>
 &lt;/h2&gt;
 
 &lt;p&gt;
-  OCaml não requer parênteses ao redor de sequências &lt;code&gt;(a;b;c;d)&lt;/code&gt; ou tuplas &lt;code&gt;(x,y)&lt;/code&gt; então isso acaba impedindo a aplicação de várias outras regras sintáticas muito convenientes. Como o Reason sempre usa &lt;code&gt;{}&lt;/code&gt; para cercar sequências ou delcarações let, e o Reason sempre requer o uso de &lt;code&gt;()&lt;/code&gt; cercando tuplas, muitos outros construtos de sintaxe são expressados de forma mais intuitiva, sem precisar de parênteses extras.
+  OCaml não requer parênteses ao redor de sequências &lt;code&gt;(a;b;c;d)&lt;/code&gt; ou tuplas &lt;code&gt;(x,y)&lt;/code&gt; então isso acaba impedindo a aplicação de várias outras regras sintáticas muito convenientes. Como o Reason sempre usa &lt;code&gt;{}&lt;/code&gt; para cercar sequências ou declarações let, e o Reason sempre requer o uso de &lt;code&gt;()&lt;/code&gt; cercando tuplas, muitos outros construtos de sintaxe são expressados de forma mais intuitiva, sem precisar de parênteses extras.
 &lt;/p&gt;
 
 &lt;h3&gt;
@@ -1061,17 +1061,17 @@ functor (B: BSig) -&gt; struct end</pre>
     &lt;td&gt;
       &lt;pre&gt;
 </code></pre>
-<p>let myFuncs = {
-myFun = (fun x -&gt; x + 1);
-your = (fun a b -&gt; a + b);
+<p>let minhasFuncoes = {
+minhaFuncao = (fun x -&gt; x + 1);
+sua = (fun a b -&gt; a + b);
 }</pre>
 </td></p>
 <pre><code class="hljs">    &lt;td&gt;
       &lt;pre&gt;
 </code></pre>
-<p>let myFuncs = {
-myFun: (x) =&gt; x + 1,
-your: (a, b) =&gt; a + b
+<p>let minhasFuncoes = {
+minhaFuncao: (x) =&gt; x + 1,
+sua: (a, b) =&gt; a + b
 };</pre>
 </td>
 </tr>
@@ -1101,7 +1101,7 @@ your: (a, b) =&gt; a + b
 </code></pre>
 <p>let x = match prnt with
 | None -&gt; fun a -&gt; blah
-(* Extra () required ! *)
+(* () extra necessário! *)
 | Some &quot;_&quot; -&gt; (fun a -&gt; ())
 | Some &quot;ml&quot; -&gt; blah
 </pre>
@@ -1145,11 +1145,11 @@ switch (prnt) {
   
   &lt;tr&gt;
     &lt;td&gt;
-      &lt;code&gt;let tuple = ((&quot;hi&quot;: string), (20: int))&lt;/code&gt;
+      &lt;code&gt;let tuple = ((&quot;olar&quot;: string), (20: int))&lt;/code&gt;
     &lt;/td&gt;
     
     &lt;td&gt;
-      &lt;code&gt;let tuple = (&quot;hi&quot;: string, 20: int);&lt;/code&gt;
+      &lt;code&gt;let tuple = (&quot;olar&quot;: string, 20: int);&lt;/code&gt;
     &lt;/td&gt;
   &lt;/tr&gt;
 &lt;/table&gt;
@@ -1185,9 +1185,9 @@ switch (prnt) {
     &lt;td&gt;
       &lt;pre&gt;
 </code></pre>
-<p>let ppp = match MyThing 20 with
-| (MyThing x as ppp)
-| (YourThing x as ppp) -&gt; ppp;
+<p>let ppp = match MinhaCoisa 20 with
+| (MinhaCoisa x as ppp)
+| (SuaCoisa x as ppp) -&gt; ppp;
 </pre>
 </td></p>
 <pre><code class="hljs">    &lt;td&gt;
@@ -1195,8 +1195,8 @@ switch (prnt) {
 </code></pre>
 <p>let ppp =
 switch (MyThing(20)) {
-| MyThing(x) as ppp
-| YourThing(x) as ppp =&gt; ppp
+| MinhaCoisa(x) as ppp
+| SuaCoisa(x) as ppp =&gt; ppp
 };
 </pre>
 </td>
@@ -1223,11 +1223,11 @@ switch (MyThing(20)) {
   
   &lt;tr&gt;
     &lt;td&gt;
-      &lt;code&gt;myRec.field &amp;lt;- &quot;next&quot;&lt;/code&gt;
+      &lt;code&gt;myRec.field &amp;lt;- &quot;proximo&quot;&lt;/code&gt;
     &lt;/td&gt;
     
     &lt;td&gt;
-      &lt;code&gt;myRec.field = &quot;next&quot;&lt;/code&gt;
+      &lt;code&gt;myRec.field = &quot;proximo&quot;&lt;/code&gt;
     &lt;/td&gt;
   &lt;/tr&gt;
 &lt;/table&gt;

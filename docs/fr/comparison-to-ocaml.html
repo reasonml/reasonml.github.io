@@ -195,7 +195,7 @@ let ten = 10 in (
 <tr><td><code>fun ((a: int), (b: int)) -&gt; a</code></td><td><code>((a: int, b: int)) =&gt; a;</code></td></tr>
 </tbody>
 </table>
-<p>In Reason, record values resemble JavaScript, using <code>:</code> instead of <code>=</code>. Because Reason tuples always require wrapping parens, records may contain lambdas as values without needing extra parens.</p>
+<p>En Reason, les valeurs des records ressemblent à du JavaScript, utilisant <code>:</code> à la place de <code>=</code>. Vu que les tuples Reason sont toujours dans des parenthèses, les records peuvent contenir des lambdas sans besoin de parenthèses supplémentaires.</p>
 <table>
   <tr>
     <th>
@@ -238,7 +238,7 @@ your: (a, b) =&gt; a + b
 };</pre>
 </td></table></p>
 <pre><code class="hljs">&lt;h2&gt;
-  Lists
+  Listes
 &lt;/h2&gt;
 
 &lt;table&gt;
@@ -258,7 +258,7 @@ your: (a, b) =&gt; a + b
     &lt;/td&gt;
     
     &lt;td&gt;
-      &lt;code&gt;let list = [1, 2, 3]&lt;/code&gt;
+      &lt;code&gt;let list = [1; 2; 3]&lt;/code&gt;
     &lt;/td&gt;
   &lt;/tr&gt;
   
@@ -274,17 +274,17 @@ your: (a, b) =&gt; a + b
 &lt;/table&gt;
 
 &lt;h2&gt;
-  Type Definitions
+  Définitions de type
 &lt;/h2&gt;
 
 &lt;table&gt;
   &lt;tr&gt;
     &lt;th&gt;
-      OCaml Tuple
+      Tuple OCaml
     &lt;/th&gt;
     
     &lt;th&gt;
-      Reason Tuple
+      Tuple Reason
     &lt;/th&gt;
   &lt;/tr&gt;
   
@@ -312,11 +312,11 @@ your: (a, b) =&gt; a + b
 &lt;table&gt;
   &lt;tr&gt;
     &lt;th&gt;
-      OCaml Record
+      Record OCaml
     &lt;/th&gt;
     
     &lt;th&gt;
-      Reason Record
+      Record Reason
     &lt;/th&gt;
   &lt;/tr&gt;
   
@@ -344,11 +344,11 @@ your: (a, b) =&gt; a + b
 &lt;table&gt;
   &lt;tr&gt;
     &lt;th&gt;
-      OCaml Function
+      Fonction OCaml
     &lt;/th&gt;
     
     &lt;th&gt;
-      Reason Function
+      Fonction Reason
     &lt;/th&gt;
   &lt;/tr&gt;
   
@@ -374,7 +374,7 @@ your: (a, b) =&gt; a + b
 &lt;/table&gt;
 
 &lt;h2&gt;
-  Functions
+  Fonctions
 &lt;/h2&gt;
 
 &lt;table&gt;
@@ -420,18 +420,18 @@ your: (a, b) =&gt; a + b
 &lt;/table&gt;
 
 &lt;h3&gt;
-  Single argument match functions
+  Fonctions match à un argument
 &lt;/h3&gt;
 
 &lt;p&gt;
-  OCaml has a function definition (&lt;code&gt;function |&lt;/code&gt;) which is considered to be equivalent of &lt;code&gt;function a -&amp;gt; match a with ...&lt;/code&gt;. Reason has the same, but the syntax makes it clear how it is actually an extension of a single argument function. The single case match is a natural extension of the simple lambda, and the multicase lambda is a natural extension of the single case lambda.
+  OCaml a une définition de fonction (&lt;code&gt;function |&lt;/code&gt;) qu'on considère équivalente à &lt;code&gt;function a -&amp;gt; match a with ...&lt;/code&gt;. Reason possède la même, mais la syntaxe ici montre plus clairement qu'il s'agit d'une extension de fonction à un seul arguement. Le match à un seul cas est une extension naturelle du lambda simple, et le lambda à plusieurs cas est une extension naturelle du lambda simple.
 &lt;/p&gt;
 
 &lt;table&gt;
   &lt;tr&gt;
     &lt;th&gt;
       &lt;p&gt;
-        Form
+        Forme
       &lt;/p&gt;
     &lt;/th&gt;
     
@@ -450,7 +450,7 @@ your: (a, b) =&gt; a + b
   
   &lt;tr&gt;
     &lt;td&gt;
-      lambda
+      Lambda
     &lt;/td&gt;
     
     &lt;td&gt;
@@ -466,7 +466,7 @@ your: (a, b) =&gt; a + b
 </tr></p>
 <pre><code class="hljs">  &lt;tr&gt;
     &lt;td&gt;
-      one match case
+      Cas à un match
     &lt;/td&gt;
     
     &lt;td&gt;
@@ -482,7 +482,7 @@ your: (a, b) =&gt; a + b
 </tr></p>
 <pre><code class="hljs">  &lt;tr&gt;
     &lt;td&gt;
-      many cases
+      Plusieurs cas
     &lt;/td&gt;
     
     &lt;td&gt;
@@ -500,11 +500,11 @@ your: (a, b) =&gt; a + b
 </tr>
 </table></p>
 <pre><code class="hljs">&lt;h3&gt;
-  Annotating Arguments
+  Annotations d'argument
 &lt;/h3&gt;
 
 &lt;p&gt;
-  In both Reason and OCaml, arguments are annotated with types by (as with everything else), wrapping them in parenthesis after appending &lt;code&gt;:typeAnnotation&lt;/code&gt;.
+  En Reason et en OCaml, les arguments sont annotés avec des types (comme pour tout le reste), les enveloppant entre parenthèses après l'ajout de &lt;code&gt;:typeAnnotation&lt;/code&gt;.
 &lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&quot;reason&quot;&gt;(arg: argType) =&amp;gt; returnValue;
@@ -517,7 +517,7 @@ your: (a, b) =&gt; a + b
 </code></pre>
 <p></code></pre></p>
 <pre><code class="hljs">&lt;p&gt;
-  Both Reason and OCaml allow annotating the return type, when using the &quot;super sugared let binding&quot; form.
+  Reason ainsi qu'OCaml permettent d'annoter le type retourné, lorsqu'on utilise la forme du &quot;super binding let sucré&quot;.
 &lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&quot;ocaml&quot;&gt;(* OCaml *)
@@ -533,11 +533,11 @@ let myFunc = (a: int, b: int) :list(int) =&gt; [1];
 let myFunc = (a: int, b: int): (int =&gt; int) =&gt; (x) =&gt; x + a + b;
 </code></pre></p>
 <pre><code class="hljs">&lt;p&gt;
-  Because we're using &lt;code&gt;=&amp;gt;&lt;/code&gt; for all functions everywhere in Reason, there's one case where we need to add extra parens around a return type that is itself a function type.
+  Parce que nous utilisons &lt;code&gt;=&amp;gt;&lt;/code&gt; pour les fonctions partout en Reason, il y a un cas où nous avons besoin d'ajouter des parenthèses supplémentaires atour du type retourné, qui est lui-même un type de fonction.
 &lt;/p&gt;
 
 &lt;h3&gt;
-  Type Parameters
+  Paramètres de type
 &lt;/h3&gt;
 
 &lt;h4&gt;
@@ -545,29 +545,29 @@ let myFunc = (a: int, b: int): (int =&gt; int) =&gt; (x) =&gt; x + a + b;
 &lt;/h4&gt;
 
 &lt;p&gt;
-  OCaml's type applications (think &quot;generics&quot;), are applied in reverse order.
+  Les applications de type en OCaml (pensez &quot;generiques&quot;), sont appliquées dans l'ordre inverse.
 &lt;/p&gt;
 
 &lt;p&gt;
-  With OCaml, there are some unintuitive consequences of this.
+  Il y a ainsi dans le langage, quelques conséquences assez peu intuitives à cela.
 &lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&quot;ocaml&quot;&gt;let x: int list = [2]
 </code></pre>
 <p>type listOfListOfInts = int list list</p>
-<p>(* Parsed as: *)
+<p>(* Parsé comme étant : *)
 type listOfListOfInts = (int list) list
 </code></pre></p>
 <pre><code class="hljs">&lt;p&gt;
-  Things get even more strange when type constructors accept multiple parameters. Multiple arguments require parenthesis and commas to separate type parameters, but those parentheses don't represent tuples. The parentheses/comma form must also be given when constructing type instances such as &lt;code&gt;(int, string) tuple&lt;/code&gt;.
+  Les choses deviennent encore plus étranges lorsque les constructeurs de type acceptent plusieurs paramètres. Les arguments multiples nécessitent des parenthèses et des virgules pour séparer les paramètres de type, mais ces parenthèses ne représentent pas les tuples. La forme parenthèses/virgule doit également être donnée lors de la construction d'instances de type tels que le tuple &lt;code&gt;(int, string) tuple&lt;/code&gt;.
 &lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&quot;ocaml&quot;&gt;type ('a, 'b) tuple = 'a * 'b
 </code></pre>
 <p>type listOfTuplesOfStringAndInt = (string, int) tuple list</p>
-<p>(* Which is parsed as: *)
+<p>(* Parsé comme étant : *)
 type listOfTuplesOfStringAndInt = ((string, int) tuple) list</p>
-<p>(* Which allows a list of (tuples of (string and int)) *)
+<p>(* Ce qui permet une liste de (tuples de (string et d'int)) *)
 let tuples: listOfTuplesOfStringAndInt = [(&quot;asdf&quot;, 3)]
 </code></pre></p>
 <pre><code class="hljs">&lt;h4&gt;
@@ -575,11 +575,11 @@ let tuples: listOfTuplesOfStringAndInt = [(&quot;asdf&quot;, 3)]
 &lt;/h4&gt;
 
 &lt;p&gt;
-  In summary, Reason unifies almost all of the syntax into simple &quot;function application&quot; style meaning that type parameters follow the same comma-separated pattern seen everywhere else in the syntax. This results in fewer syntactic patterns to learn.
+  En résumé, Reason unifie presque la totalité de la syntaxe au style d'une simple &quot;application de fonction&quot;, ce qui signifie que les paramètres de type suivent le même modèle de listes séparées par des espaces vu partout ailleurs dans la syntaxe. Le résultat de tout cela est qu'il y a moins de modèles syntaxiques à apprendre.
 &lt;/p&gt;
 
 &lt;p&gt;
-  For example, you can imagine &lt;code&gt;list&lt;/code&gt; being a &quot;function&quot; for types that accepts a type and returns a new type.
+  Par exemple, on peut imaginer &lt;code&gt;list&lt;/code&gt; comme étant une &quot;fonction&quot; pour les types qui accepte un type et retourne un nouveau type.
 &lt;/p&gt;
 
 &lt;table&gt;
@@ -619,15 +619,15 @@ let tuples: pairs = [(2, 3)];</pre>
 </tr>
 </table></p>
 <pre><code class="hljs">&lt;h2&gt;
-  Tuples as Type Parameters
+  Tuples en tant que paramètres de type
 &lt;/h2&gt;
 
 &lt;p&gt;
-  Because OCaml uses parens and commas to represent multiple arguments to type constructors, it's confusing when one of the arguments to a type constructor is itself a tuple. In OCaml, it's difficult to remember the difference between a type constructor accepting multiple arguments and a type constructor accepting a single argument which happens to be a tuple.
+  Parce qu'OCaml utilise des parenthèses et des virgules pour représenter plusieurs arguments de constructeurs de type, il est assez déroutant de voir que l'un des arguments d'un constructeur de type est lui-même un tuple. En OCaml, il est difficile de se rappeler la différence entre un constructeur de type acceptant plusieurs arguments et un constructeur de type acceptant un seul argument qui se trouve être un tuple.
 &lt;/p&gt;
 
 &lt;p&gt;
-  The following examples shows the difference between passing &lt;em&gt;two&lt;/em&gt; type parameters to &lt;code&gt;pair&lt;/code&gt;, and a &lt;em&gt;single&lt;/em&gt; type parameter that happens to be a tuple.
+  Les exemples suivants montrent la différence entre passer &lt;em&gt;deux&lt;/em&gt; paramètres de type à &lt;code&gt;pair&lt;/code&gt; et &lt;em&gt;un seul&lt;/em&gt; paramètre de type qui est un tuple.
 &lt;/p&gt;
 
 &lt;table&gt;
@@ -664,13 +664,13 @@ let tuples: pairs = [(2, 3)];</pre>
 
 &lt;ul&gt;
   &lt;li&gt;
-    In Reason, syntax that represent tuple or tuple types, always looks like tuples.
+    En Reason, la syntaxe qui représente un tuple ou des types de tuples ressemble toujours à un tuple.
   &lt;/li&gt;
   &lt;li&gt;
-    In Reason, syntax that represent records or record types, always look like records.
+    En Reason, la syntaxe qui représente un record ou des types de records ressemble toujours à un record.
   &lt;/li&gt;
   &lt;li&gt;
-    Just about everything else uses the syntactic pattern of function application (comma separated arguments).
+    À peu près tout le reste utilise le modèle syntaxique de l'application de fonction (arguments séparés par des virgules).
   &lt;/li&gt;
 &lt;/ul&gt;
 
@@ -684,13 +684,13 @@ let tuples: pairs = [(2, 3)];</pre>
 
 &lt;ul&gt;
   &lt;li&gt;
-    OCaml already expects constructor argument types to be specified in tuple form, so it's confusing when a single constructor expects a single argument that &lt;em&gt;happens&lt;/em&gt; to be a tuple type.
+    OCaml s'attend déjà à ce que les types des arguments de constructeurs soient spécifiés sous la forme de tuples, donc on est un peu confus lorsque le seul argument qu'attend un constructeur &lt;em&gt;se trouve&lt;/em&gt; être type de tuple.
   &lt;/li&gt;
   &lt;li&gt;
-    What's even more confusing is that the constructors don't &lt;em&gt;actually&lt;/em&gt; accept tuples, yet the syntax appear to resemble tuples.
+    Ce qui est encore plus surprenant, c'est que les constructeurs n'acceptent pas &lt;em&gt;réellement&lt;/em&gt; les tuples, même si la syntaxe parait ressembler à des tuples.
   &lt;/li&gt;
   &lt;li&gt;
-    Sometimes the syntax for instantiating a constructor with multiple arguments overlaps the syntax for constructing a variant with a single argument that happens to be a tuple - so it looks &lt;em&gt;exactly&lt;/em&gt; like you &lt;em&gt;are&lt;/em&gt; supplying a tuple when you are not actually supplying a tuple.
+    Parfois, la syntaxe pour l'instanciation d'un constructeur avec plusieurs arguments chevauche la syntaxe pour construire une variant avec un seul argument qui se trouve être un tuple - donc on dirait &lt;em&gt;vraiment&lt;/em&gt; que vous &lt;em&gt;êtes&lt;/em&gt; entrain d'envoyer un tuple, alors que ce n'est pas le cas.
   &lt;/li&gt;
 &lt;/ul&gt;
 
@@ -700,13 +700,13 @@ let tuples: pairs = [(2, 3)];</pre>
 
 &lt;ul&gt;
   &lt;li&gt;
-    Variant constructor types are expected to be listed as comma separated lists, using parenthesis to group precedence (as with &lt;strong&gt;everything&lt;/strong&gt; else).
+    Les types de constructeurs de variants doivent être listés sous forme de listes séparées par des virgules, en utilisant des parenthèses pour regrouper par priorité (comme &lt;strong&gt;tout&lt;/strong&gt; le reste).
   &lt;/li&gt;
   &lt;li&gt;
-    Constructing instances of the variant (as you would have guessed) follows function application style (comma separated lists).
+    La construction des instances de la variant (comme vous l'aurez deviné) suit le style d'application de la fonction (listes séparées par des virgules).
   &lt;/li&gt;
   &lt;li&gt;
-    Tuples &lt;strong&gt;always&lt;/strong&gt; &lt;em&gt;look&lt;/em&gt; like tuples, and anything that looks like a tuple &lt;em&gt;is&lt;/em&gt; a tuple.
+    Les tuples &lt;em&gt;ressemblent&lt;/em&gt; &lt;strong&gt;toujours&lt;/strong&gt; à des tuples, et tout autre chose qui ressemblerait à un type … &lt;em&gt;est&lt;/em&gt; un tuple.
   &lt;/li&gt;
 &lt;/ul&gt;
 
@@ -840,7 +840,7 @@ switch (x) {
       </tr>
     </table>
 <pre><code class="hljs">&lt;p&gt;
-  Can you spot the error in the OCaml example? This is one of the most common mistakes among OCaml programmers. The nested &lt;code&gt;match&lt;/code&gt; &lt;em&gt;must&lt;/em&gt; be wrapped in parentheses, otherwise the &lt;code&gt;Some&lt;/code&gt; case is parsed as belonging to the outer &lt;code&gt;match&lt;/code&gt;. Visually, it's actually:
+  Pouvez-vous repérer l'erreur dans l'exemple OCaml ? C'est l'une des erreurs les plus fréquentes chez les développeurs OCaml. The nested &lt;code&gt;match&lt;/code&gt; &lt;em&gt;must&lt;/em&gt; be wrapped in parentheses, otherwise the &lt;code&gt;Some&lt;/code&gt; case is parsed as belonging to the outer &lt;code&gt;match&lt;/code&gt;. Visually, it's actually:
 &lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&quot;ocaml&quot;&gt;let res = match x with

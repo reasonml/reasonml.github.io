@@ -2753,11 +2753,20 @@ pre code {
   left: 0;
   right: 0;
 }
+/* small screens size. The nav bar becomes two lines */
+@media (max-width: 735px) {
+  .try-inner {
+    padding-top: 100px;
+  }
+}
 .try-buttons {
+  position: relative;
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
   background: white;
+  text-align: center;
+  align-items: center;
 }
 .try-button {
   font-size: 14px;
@@ -2829,8 +2838,7 @@ pre code {
   display: none;
   top: 100%;
   left: 0;
-  min-width: 100%;
-  width: 50vw;
+  min-width: 50vw;
   box-shadow: 1px 1px 1px rgba(0, 0, 0, .2);
   border-top: 1px solid #d6d4d4;
   padding-top: 1em;
@@ -2855,9 +2863,14 @@ pre code {
   height: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
   /* needed so that firefox height works: https://github.com/reasonml/reasonml.github.io/issues/299 */
   min-height: 0;
+}
+/* small screens size. The nav bar becomes two lines */
+@media (max-width: 735px) {
+  .try-grid {
+    grid-template-columns: 1fr;
+  }
 }
 .try-grid-editor {
   background: #f6f4f4;
