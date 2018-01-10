@@ -26484,11 +26484,6 @@ class Try extends react_2 {
             () => this.setState(_ => {
               return {
                 reasonSyntaxError: e,
-                compileError: null,
-                jsError: null,
-                js: '',
-                reason: '',
-                output: [],
               }
             }),
             errorTimeout
@@ -26499,9 +26494,6 @@ class Try extends react_2 {
         return {
           reason: newReasonCode,
           reasonSyntaxError: null,
-          compileError: null,
-          ocamlSyntaxError: null,
-          jsError: null,
           shareableUrl: generateShareableUrl('reason', newReasonCode)
         }
       });
