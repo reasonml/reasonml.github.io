@@ -29,7 +29,7 @@
 <p>Along with a variant comes one of the most important features of Reason, the <code>switch</code> expression.</p>
 <p>A Reason <code>switch</code> is visually similar to other languages' <code>switch</code> (aka a large <code>if/elseif/elseif...</code>). It allows you to check every possible case of a variant. To use it, enumerate every variant constructor of the particular variant you'd like to use, each followed by an <code>=&gt;</code> and the expression corresponding to that case.</p>
 <pre><code class="hljs css reason"><span class="hljs-keyword">let</span> message =
-  <span class="hljs-keyword">switch</span> areYouCrushingIt {
+  <span class="hljs-keyword">switch</span> (areYouCrushingIt) {
   | <span class="hljs-function"><span class="hljs-params">No</span> =&gt;</span> <span class="hljs-string">"No worries. Keep going!"</span>
   | <span class="hljs-function"><span class="hljs-params">Yes</span> =&gt;</span> <span class="hljs-string">"Great!"</span>
   | <span class="hljs-function"><span class="hljs-params">PrettyMuch</span> =&gt;</span> <span class="hljs-string">"Nice!"</span>
@@ -63,7 +63,7 @@
 <p><strong>Notice how using a constructor is like calling a function</strong>? It's as if <code>Facebook</code> was a function that accepts two arguments. This isn't a coincidence; there's a reason why a constructor's data is called &quot;constructor argument&quot;.</p>
 <p>Using <code>switch</code>, you can pattern-match (again, described in a later section) a constructor's arguments:</p>
 <pre><code class="hljs css reason"><span class="hljs-keyword">let</span> greeting =
-  switch myAccount {
+  switch (myAccount) {
   | <span class="hljs-type">None</span> =&gt; <span class="hljs-string">"Hi!"</span>
   | <span class="hljs-type">Facebook</span>(name, age) =&gt; <span class="hljs-string">"Hi "</span> ++ name ++ <span class="hljs-string">", you're "</span> ++ string_of_int(age) ++ <span class="hljs-string">"-year-old."</span>
   | <span class="hljs-type">Instagram</span>(name) =&gt; <span class="hljs-string">"Hello "</span> ++ name ++ <span class="hljs-string">"!"</span>
@@ -103,7 +103,7 @@
   | <span class="hljs-type">MyString</span>(<span class="hljs-built_in">string</span>);
 
 <span class="hljs-keyword">let</span> betterDraw = (animal) =&gt;
-  switch animal {
+  switch (animal) {
   | <span class="hljs-type">MyFloat</span>(f) =&gt; draw(f)
   | <span class="hljs-type">MyString</span>(s) =&gt; draw(s)
   };
@@ -131,7 +131,7 @@
 <p>There's a linear amount of branch checking here (<code>O(n)</code>). Compare this to using a Reason variant:</p>
 <pre><code class="hljs css reason"><span class="hljs-class"><span class="hljs-keyword">type</span> animal = <span class="hljs-type">Dog</span> | <span class="hljs-type">Cat</span> | <span class="hljs-type">Bird</span>;</span>
 <span class="hljs-title">let</span> <span class="hljs-class"><span class="hljs-keyword">data</span> = <span class="hljs-type">Dog</span>;</span>
-<span class="hljs-title">switch</span> <span class="hljs-class"><span class="hljs-keyword">data</span> {
+<span class="hljs-title">switch</span> (<span class="hljs-class"><span class="hljs-keyword">data</span>) {
 | <span class="hljs-type">Dog</span> =&gt; ...
 | <span class="hljs-type">Cat</span> =&gt; ...
 | <span class="hljs-type">Bird</span> =&gt; ...

@@ -21,7 +21,7 @@
 <pre><code class="hljs css reason"><span class="hljs-keyword">let</span> possiblyNullValue1 = None;
 <span class="hljs-keyword">let</span> possiblyNullValue2: option(string) = Some(<span class="hljs-string">"Hello@"</span>);
 
-switch possiblyNullValue2 {
+switch (possiblyNullValue2) {
 | <span class="hljs-type">None</span> =&gt; print_endline(<span class="hljs-string">"Nothing to see here."</span>)
 | <span class="hljs-type">Some</span>(message) =&gt; print_endline(message)
 };
@@ -66,7 +66,7 @@ Js.log(<span class="hljs-keyword">store</span>)<span class="hljs-comment">;
 <p>For a function whose argument is passed a JavaScript value that's potentially <code>null</code> or <code>undefined</code>, it's idiomatic to convert it to a Reason <code>option</code>. The conversion is done through the helper functions in Bucklescript's <a href="http://bucklescript.github.io/bucklescript/api/Js.html#TYPEnullable"><code>Js.Nullable</code></a> module. In this case, <code>to_opt</code>:</p>
 <pre><code class="hljs css reason"><span class="hljs-keyword">let</span> greetByName = (possiblyNullName) =&gt; {
   <span class="hljs-keyword">let</span> optionName = Js.Nullable.to_opt(possiblyNullName);
-  switch optionName {
+  switch (optionName) {
   | <span class="hljs-type">None</span> =&gt; <span class="hljs-string">"Hi"</span>
   | <span class="hljs-type">Some</span>(name) =&gt; <span class="hljs-string">"Hello "</span> ++ name
   }

@@ -96,7 +96,7 @@ drawCircle(~radius=<span class="hljs-number">10</span>, ~color=<span class="hljs
 <pre><code class="hljs css reason"><span class="hljs-comment">/* radius can be omitted */</span>
 <span class="hljs-keyword">let</span> drawCircle = <span class="hljs-function">(<span class="hljs-params">~color, ~radius=?, (<span class="hljs-params"></span>)</span>) =&gt;</span> {
   setColor(color);
-  <span class="hljs-keyword">switch</span> radius {
+  <span class="hljs-keyword">switch</span> (radius) {
   | <span class="hljs-function"><span class="hljs-params">None</span> =&gt;</span> startAt(<span class="hljs-number">1</span>, <span class="hljs-number">1</span>)
   | Some(r_) =&gt; startAt(r_, r_)
   }
@@ -114,7 +114,7 @@ drawCircle(~radius=<span class="hljs-number">10</span>, ~color=<span class="hljs
 <h3><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>明示的に渡すオプション</h3>
 <p>Sometimes, you might want to forward a value to a function without knowing whether the value is <code>None</code> or <code>Some(a)</code>. Naively, you'd do:</p>
 <pre><code class="hljs css reason"><span class="hljs-keyword">let</span> result =
-  switch payloadRadius {
+  switch (payloadRadius) {
   | <span class="hljs-type">None</span> =&gt; drawCircle(~color, ())
   | <span class="hljs-type">Some</span>(r) =&gt; drawCircle(~color, ~radius=r, ())
   };
@@ -161,9 +161,9 @@ drawCircle(~radius=<span class="hljs-number">10</span>, ~color=<span class="hljs
 <span class="hljs-keyword">let</span> add = <span class="hljs-function">(<span class="hljs-params">~first=<span class="hljs-number">1</span>, ~second=<span class="hljs-number">2</span></span>) =&gt;</span> first + second;
 
 <span class="hljs-comment">/* optional */</span>
-<span class="hljs-keyword">let</span> add = <span class="hljs-function">(<span class="hljs-params">~first <span class="hljs-keyword">as</span> x=?, ~second <span class="hljs-keyword">as</span> y=?</span>) =&gt;</span> <span class="hljs-keyword">switch</span> x {...};
+<span class="hljs-keyword">let</span> add = <span class="hljs-function">(<span class="hljs-params">~first <span class="hljs-keyword">as</span> x=?, ~second <span class="hljs-keyword">as</span> y=?</span>) =&gt;</span> <span class="hljs-keyword">switch</span> (x) {...};
 <span class="hljs-comment">/* with punning */</span>
-<span class="hljs-keyword">let</span> add = <span class="hljs-function">(<span class="hljs-params">~first=?, ~second=?</span>) =&gt;</span> <span class="hljs-keyword">switch</span> first {...};
+<span class="hljs-keyword">let</span> add = <span class="hljs-function">(<span class="hljs-params">~first=?, ~second=?</span>) =&gt;</span> <span class="hljs-keyword">switch</span> (first) {...};
 </code></pre>
 <h4><a class="anchor" aria-hidden="true" name="with-type-annotation"></a><a href="#with-type-annotation" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>With Type Annotation</h4>
 <pre><code class="hljs css reason"><span class="hljs-comment">/* anonymous function */</span>
@@ -184,11 +184,11 @@ let add = (~first <span class="hljs-keyword">as</span> <span class="hljs-string"
 let add = (~<span class="hljs-string">first:</span> <span class="hljs-keyword">int</span>=<span class="hljs-number">1</span>, ~<span class="hljs-string">second:</span> <span class="hljs-keyword">int</span>=<span class="hljs-number">2</span>) : <span class="hljs-keyword">int</span> =&gt; first + second;
 
 <span class="hljs-comment">/* optional */</span>
-let add = (~first <span class="hljs-keyword">as</span> <span class="hljs-string">x:</span> option(<span class="hljs-keyword">int</span>)=?, ~second as y: option(<span class="hljs-keyword">int</span>)=?) : <span class="hljs-keyword">int</span> =&gt; <span class="hljs-keyword">switch</span> x {...};
+let add = (~first <span class="hljs-keyword">as</span> <span class="hljs-string">x:</span> option(<span class="hljs-keyword">int</span>)=?, ~second as y: option(<span class="hljs-keyword">int</span>)=?) : <span class="hljs-keyword">int</span> =&gt; <span class="hljs-keyword">switch</span> (x) {...};
 <span class="hljs-comment">/* with punning sugar */</span>
 <span class="hljs-comment">/* note that the caller would pass an `int`, not `option int` */</span>
 <span class="hljs-comment">/* Inside the function, `first` and `second` are `option int`. */</span>
-let add = (~<span class="hljs-string">first:</span> option(<span class="hljs-keyword">int</span>)=?, ~second: option(<span class="hljs-keyword">int</span>)=?) : <span class="hljs-keyword">int</span> =&gt; <span class="hljs-keyword">switch</span> first {...};
+let add = (~<span class="hljs-string">first:</span> option(<span class="hljs-keyword">int</span>)=?, ~second: option(<span class="hljs-keyword">int</span>)=?) : <span class="hljs-keyword">int</span> =&gt; <span class="hljs-keyword">switch</span> (first) {...};
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" name="application"></a><a href="#application" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Application</h3>
 <pre><code class="hljs css reason">/* anonymous <span class="hljs-built_in">application</span>. Listed <span class="hljs-keyword">for</span> completeness only */

@@ -785,7 +785,7 @@ let a = HasMultipleTuples((10, 10), (10, 10));
       &lt;pre&gt;
 </code></pre>
 <p>let res = (x) =&gt;
-switch x {
+switch (x) {
 | HasNothing =&gt; 0
 | HasSingleInt(x) =&gt; 0
 | HasSingleTuple((x, y)) =&gt; 0
@@ -828,8 +828,8 @@ switch x {
 <pre><code class="hljs">    &lt;td&gt;
       &lt;pre&gt;
 </code></pre>
-<p>let res = switch x {
-| A((x, y)) =&gt; switch y {
+<p>let res = switch (x) {
+| A((x, y)) =&gt; switch (y) {
 | None =&gt; 0
 | Some(i) =&gt; 10
 }
@@ -1110,7 +1110,7 @@ your: (a, b) =&gt; a + b
       &lt;pre&gt;
 </code></pre>
 <p>let x =
-switch prnt {
+switch (prnt) {
 | None =&gt; (a) =&gt; blah
 | Some(&quot;_&quot;) =&gt; (a) =&gt; ()
 | Some(&quot;ml&quot;) =&gt; blah

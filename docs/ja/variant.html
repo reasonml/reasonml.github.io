@@ -29,7 +29,7 @@
 <p>ヴァリアントに加えて、Reason の最も重要な機能の１つに、<code>switch</code> 式があります。</p>
 <p>Reason の <code>switch</code> は、見た目的に他の言語の<code>switch</code> に似ています（大きな <code>if/elseif/elseif...</code> として知られる）。 それはヴァリアントのすべてのケースをチェックすることができます。 それを使用するには、使用したい特定のヴァリアントのすべてのコンストラクタを列挙し、それぞれの後ろに <code>=&gt;</code> とそのケースに対応する式を記述します。</p>
 <pre><code class="hljs css reason"><span class="hljs-keyword">let</span> message =
-  <span class="hljs-keyword">switch</span> areYouCrushingIt {
+  <span class="hljs-keyword">switch</span> (areYouCrushingIt) {
   | <span class="hljs-function"><span class="hljs-params">No</span> =&gt;</span> <span class="hljs-string">"No worries. Keep going!"</span>
   | <span class="hljs-function"><span class="hljs-params">Yes</span> =&gt;</span> <span class="hljs-string">"Great!"</span>
   | <span class="hljs-function"><span class="hljs-params">PrettyMuch</span> =&gt;</span> <span class="hljs-string">"Nice!"</span>
@@ -63,7 +63,7 @@
 <p><strong>コンストラクタを使用するのは関数を呼び出すようなものだと気づきましたか</strong>？ <code>Facebook</code> は2つの引数を受け取る関数であるかのようでした。 これは偶然ではありません。その理由として、コンストラクタのデータは「コンストラクタ引数」と呼ばれます。</p>
 <p><code>switch</code> を使用して、コンストラクタの引数をパターンマッチ（再度、後のセクションで説明します）できます:</p>
 <pre><code class="hljs css reason"><span class="hljs-keyword">let</span> greeting =
-  switch myAccount {
+  switch (myAccount) {
   | <span class="hljs-type">None</span> =&gt; <span class="hljs-string">"Hi!"</span>
   | <span class="hljs-type">Facebook</span>(name, age) =&gt; <span class="hljs-string">"Hi "</span> ++ name ++ <span class="hljs-string">", you're "</span> ++ string_of_int(age) ++ <span class="hljs-string">"-year-old."</span>
   | <span class="hljs-type">Instagram</span>(name) =&gt; <span class="hljs-string">"Hello "</span> ++ name ++ <span class="hljs-string">"!"</span>
@@ -103,7 +103,7 @@
   | <span class="hljs-type">MyString</span>(<span class="hljs-built_in">string</span>);
 
 <span class="hljs-keyword">let</span> betterDraw = (animal) =&gt;
-  switch animal {
+  switch (animal) {
   | <span class="hljs-type">MyFloat</span>(f) =&gt; draw(f)
   | <span class="hljs-type">MyString</span>(s) =&gt; draw(s)
   };
@@ -131,7 +131,7 @@
 <p>ここには線形の計算量の分岐チェックがあります（<code>O(n)</code>）。これを Reason のヴァリアントを使用した場合とで比較してください。</p>
 <pre><code class="hljs css reason"><span class="hljs-class"><span class="hljs-keyword">type</span> animal = <span class="hljs-type">Dog</span> | <span class="hljs-type">Cat</span> | <span class="hljs-type">Bird</span>;</span>
 <span class="hljs-title">let</span> <span class="hljs-class"><span class="hljs-keyword">data</span> = <span class="hljs-type">Dog</span>;</span>
-<span class="hljs-title">switch</span> <span class="hljs-class"><span class="hljs-keyword">data</span> {
+<span class="hljs-title">switch</span> (<span class="hljs-class"><span class="hljs-keyword">data</span>) {
 | <span class="hljs-type">Dog</span> =&gt; ...
 | <span class="hljs-type">Cat</span> =&gt; ...
 | <span class="hljs-type">Bird</span> =&gt; ...
