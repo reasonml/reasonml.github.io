@@ -25,15 +25,15 @@
 let my3dCoordinates = (<span class="hljs-number">20.0</span>, <span class="hljs-number">30.5</span>, <span class="hljs-number">100.0</span>);
 </code></pre>
 <p>タプルの型は型注釈でも使用できます。タプル型は視覚的にタプルの型に似ています。</p>
-<pre><code class="hljs css reason"><span class="hljs-keyword">let</span> ageAndName: (<span class="hljs-built_in">int</span>, <span class="hljs-built_in">string</span>) = (<span class="hljs-number">24</span>, <span class="hljs-string">"Lil' Reason"</span>);
-/* a <span class="hljs-keyword">tuple</span> <span class="hljs-keyword">type</span> alias */
-<span class="hljs-keyword">type</span> coord3d = (<span class="hljs-built_in">float</span>, <span class="hljs-built_in">float</span>, <span class="hljs-built_in">float</span>);
-<span class="hljs-keyword">let</span> my3dCoordinates: coord3d = (<span class="hljs-number">20</span>.<span class="hljs-number">0</span>, <span class="hljs-number">30</span>.<span class="hljs-number">5</span>, <span class="hljs-number">100</span>.<span class="hljs-number">0</span>);
+<pre><code class="hljs css reason"><span class="hljs-keyword">let</span> ageAndName: (<span class="hljs-keyword">int</span>, <span class="hljs-keyword">string</span>) = (<span class="hljs-number">24</span>, <span class="hljs-string">"Lil' Reason"</span>);
+<span class="hljs-comment">/* タプル型エイリアス */</span>
+type coord3d = (<span class="hljs-keyword">float</span>, <span class="hljs-keyword">float</span>, <span class="hljs-keyword">float</span>);
+<span class="hljs-keyword">let</span> my3dCoordinates: coord3d = (<span class="hljs-number">20.0</span>, <span class="hljs-number">30.5</span>, <span class="hljs-number">100.0</span>);
 </code></pre>
 <p><strong>備考</strong>: サイズが1のタプルはありません。単に値自身を使います。</p>
 <h2><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>使い方</h2>
 <p>標準ライブラリは <code>fst</code> と <code>snd</code> （<a href="/api/Pervasives.html">ここ</a>の、 &quot;Pair operations&quot; の下）を提供し、2組のタプルの第1要素と第2要素にアクセスするための便利な関数です。 一般的に、デストラクチャリングを通してn組のタプルのメンバにアクセスします（サイドバーの後述のように）:</p>
-<pre><code class="hljs css reason">let (<span class="hljs-literal">_</span>, y, <span class="hljs-literal">_</span>) = my3dCoordinates; <span class="hljs-comment">/* now you've retrieved y */</span>
+<pre><code class="hljs css reason"><span class="hljs-built_in">let</span> (<span class="hljs-symbol">_</span>, y, <span class="hljs-symbol">_</span>) = my3dCoordinates; <span class="hljs-comment">/* y がバインドされました */</span>
 </code></pre>
 <p><code>_</code> は、対象のメンバを無視していることを意味します。</p>
 <p>タプルは突然更新されることはありません。古いものを破棄することで、新しいものを作ります。</p>
@@ -46,7 +46,7 @@ let my3dCoordinates = (<span class="hljs-number">20.0</span>, <span class="hljs-
 };
 </code></pre>
 <p>あるいは、可能性の組み合わせの「パターンマッチ」（後述）:</p>
-<pre><code class="hljs css reason"><span class="hljs-keyword">switch</span> (isWindowOpen, isDoorOpen) { <span class="hljs-comment">/* this is a 2-tuple */</span>
+<pre><code class="hljs css reason"><span class="hljs-keyword">switch</span> (isWindowOpen, isDoorOpen) { <span class="hljs-comment">/* これは2組のタプルです */</span>
 | <span class="hljs-function">(<span class="hljs-params"><span class="hljs-literal">true</span>, <span class="hljs-literal">true</span></span>) =&gt;</span> ...
 | <span class="hljs-function">(<span class="hljs-params"><span class="hljs-literal">true</span>, <span class="hljs-literal">false</span></span>) =&gt;</span> ...
 | <span class="hljs-function">(<span class="hljs-params"><span class="hljs-literal">false</span>, <span class="hljs-literal">true</span></span>) =&gt;</span> ...
