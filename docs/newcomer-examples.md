@@ -14,7 +14,7 @@ This section is dedicated to newcomers trying to figure out general idioms & con
 let possiblyNullValue1 = None;
 let possiblyNullValue2: option(string) = Some("Hello@");
 
-switch possiblyNullValue2 {
+switch (possiblyNullValue2) {
 | None => print_endline("Nothing to see here.")
 | Some(message) => print_endline(message)
 };
@@ -78,7 +78,7 @@ For a function whose argument is passed a JavaScript value that's potentially `n
 ```reason
 let greetByName = (possiblyNullName) => {
   let optionName = Js.Nullable.to_opt(possiblyNullName);
-  switch optionName {
+  switch (optionName) {
   | None => "Hi"
   | Some(name) => "Hello " ++ name
   }

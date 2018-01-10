@@ -43,7 +43,7 @@ Updating an arbitrary item in the middle of a list is discouraged, since its per
 
 ```reason
 let message =
-  switch myList {
+  switch (myList) {
   | [] => "This list is empty"
   | [a, ...rest] => "The head of the list is the string " ++ a
   };

@@ -19,7 +19,7 @@ module School = {
 
   let person1 = Teacher;
   let getProfession = (person) =>
-    switch person {
+    switch (person) {
     | Teacher => "A teacher"
     | Director => "A director"
     };
@@ -57,7 +57,7 @@ Local open.
 ```reason
 let message =
   School.(
-    switch person1 {
+    switch (person1) {
     | Teacher => "Hello teacher!"
     | Director => "Hello director!"
     }

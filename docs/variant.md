@@ -27,7 +27,7 @@ A Reason `switch` is visually similar to other languages' `switch` (aka a large 
 
 ```reason
 let message =
-  switch areYouCrushingIt {
+  switch (areYouCrushingIt) {
   | No => "No worries. Keep going!"
   | Yes => "Great!"
   | PrettyMuch => "Nice!"
@@ -79,7 +79,7 @@ Using `switch`, you can pattern-match (again, described in a later section) a co
 
 ```reason
 let greeting =
-  switch myAccount {
+  switch (myAccount) {
   | None => "Hi!"
   | Facebook(name, age) => "Hi " ++ name ++ ", you're " ++ string_of_int(age) ++ "-year-old."
   | Instagram(name) => "Hello " ++ name ++ "!"
@@ -143,7 +143,7 @@ type animal =
   | MyString(string);
 
 let betterDraw = (animal) =>
-  switch animal {
+  switch (animal) {
   | MyFloat(f) => draw(f)
   | MyString(s) => draw(s)
   };
@@ -186,7 +186,7 @@ There's a linear amount of branch checking here (`O(n)`). Compare this to using 
 ```reason
 type animal = Dog | Cat | Bird;
 let data = Dog;
-switch data {
+switch (data) {
 | Dog => ...
 | Cat => ...
 | Bird => ...

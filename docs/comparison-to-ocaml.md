@@ -468,7 +468,7 @@ let res x = match x with
     <td>
       <pre>
 let res = (x) =>
-  switch x {
+  switch (x) {
   | HasNothing => 0
   | HasSingleInt(x) => 0
   | HasSingleTuple((x, y)) => 0
@@ -495,8 +495,8 @@ let res = match x with
     </td>
     <td>
       <pre>
-let res = switch x {
-  | A((x, y)) => switch y {
+let res = switch (x) {
+  | A((x, y)) => switch (y) {
       | None => 0
       | Some(i) => 10
     }
@@ -687,7 +687,7 @@ let x = match prnt with
     <td>
       <pre>
 let x =
-  switch prnt {
+  switch (prnt) {
   | None => (a) => blah
   | Some("_") => (a) => ()
   | Some("ml") => blah

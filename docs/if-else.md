@@ -33,7 +33,7 @@ let message = isMorning ? "Good morning!" : "Hello!";
 Reason ternary is just a sugar for the `bool` variant and a switch:
 
 ```reason
-switch isMorning {
+switch (isMorning) {
 | true => "Good morning!"
 | false => "Hello!"
 }

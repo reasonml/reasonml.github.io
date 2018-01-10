@@ -105,7 +105,7 @@ A character [compiles to an integer ranging from 0 to 255](/try.html?reason=DYUw
 
 ```reason
 let isVowel = (theChar) =>
-  switch theChar {
+  switch (theChar) {
   | 'a'| 'e'| 'i'| 'o'| 'u'| 'y' => true
   | _ => false
   };

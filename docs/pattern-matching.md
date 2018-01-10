@@ -23,7 +23,7 @@ While using the `switch` expression on it, you can "destructure" it:
 let data = GoodResult("Product shipped!");
 
 let message =
-  switch data {
+  switch (data) {
   | GoodResult(theMessage) => "Success! " ++ theMessage
   | BadResult(errorCode) => "Something's wrong. The error code is: " ++ string_of_int(errorCode)
   };
@@ -40,12 +40,12 @@ NoResult
 Isn't that great? While matching on the shape of your data, the type system warned of an unhandled case. This **conditional** aspect is what makes it pattern matching rather than plain destructuring. Most data structures with an "**if this then that**" aspect work with it:
 
 ```reason
-switch myList {
+switch (myList) {
 | [] => print_endline("Empty list")
 | [a, ...theRest] => print_endline("list with the head value " ++ a)
 };
 
-switch myArray {
+switch (myArray) {
 | [|1, 2|] => print_endline("This is an array with item 1 and 2")
 | [||] => print_endline("This array has no element")
 | _ => print_endline("This is an array")
@@ -58,7 +58,7 @@ You can even switch on string, int and others. You can even have many patterns g
 
 ```reason
 let reply =
-  switch message {
+  switch (message) {
   | "Reason's pretty cool" => "Yep"
   | "good night" => "See ya!"
   | "hello" | "hi" | "heya" | "hey" => "hello to you too!"
@@ -70,7 +70,7 @@ Combined with other data structures, pattern matching can produce extremely conc
 
 ```reason
 let message =
-  switch data {
+  switch (data) {
   | GoodResult(theMessage) => "Success! " ++ theMessage
   | BadResult(0 | 1 | 5) => "Something's wrong. It's a server side problem."
   | BadResult(errorCode) => "Unknown error occurred. Code: " ++ string_of_int(errorCode)
@@ -82,7 +82,7 @@ let message =
 
 ```reason
 let myMessage = "Hello";
-switch greeting {
+switch (greeting) {
 | myMessage => print_endline("Hi to you")
 };
 ```
@@ -95,7 +95,7 @@ When you really need to use arbitrary logic with an otherwise clean pattern matc
 
 ```reason
 let message =
-  switch data {
+  switch (data) {
   | GoodResult(theMessage) => ...
   | BadResult(errorCode) when isServerError(errorCode) => ...
   | BadResult(errorCode) => ... /* otherwise */
@@ -139,7 +139,7 @@ Now that's just silly =). Let's turn it into pattern-matching:
 
 ```reason
 let optionBoolToJsBoolean = (opt) =>
-  switch opt {
+  switch (opt) {
   | None => Js.false_
   | Some(a) => a ? Js.true_ : Js.false_
   };
@@ -149,7 +149,7 @@ Slightly better, but still nested. Pattern-matching allows you to do this:
 
 ```reason
 let optionBoolToJsBoolean = (opt) =>
-  switch opt {
+  switch (opt) {
   | None => Js.false_
   | Some(true) => Js.true_
   | Some(false) => Js.false_
@@ -160,7 +160,7 @@ Much more linear-looking! Now, you might be tempted to do this:
 
 ```reason
 let optionBoolToJsBoolean = (opt) =>
-  switch opt {
+  switch (opt) {
   | Some(true) => Js.true_
   | _ => Js.false_
   };
@@ -170,7 +170,7 @@ Which is much more concise, but kills the exhaustiveness check mentioned above. 
 
 ```reason
 let optionBoolToJsBoolean = (opt) =>
-  switch opt {
+  switch (opt) {
   | Some(true) => Js.true_
   | Some(false)
   | None => Js.false_

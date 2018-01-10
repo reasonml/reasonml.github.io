@@ -130,7 +130,7 @@ Labeled function arguments can be made optional during declaration. You can then
 /* radius can be omitted */
 let drawCircle = (~color, ~radius=?, ()) => {
   setColor(color);
-  switch radius {
+  switch (radius) {
   | None => startAt(1, 1)
   | Some(r_) => startAt(r_, r_)
   }
@@ -160,7 +160,7 @@ Sometimes, you might want to forward a value to a function without knowing wheth
 
 ```reason
 let result =
-  switch payloadRadius {
+  switch (payloadRadius) {
   | None => drawCircle(~color, ())
   | Some(r) => drawCircle(~color, ~radius=r, ())
   };
@@ -230,9 +230,9 @@ let add = (~first as x=1, ~second as y=2) => x + y;
 let add = (~first=1, ~second=2) => first + second;
 
 /* optional */
-let add = (~first as x=?, ~second as y=?) => switch x {...};
+let add = (~first as x=?, ~second as y=?) => switch (x) {...};
 /* with punning */
-let add = (~first=?, ~second=?) => switch first {...};
+let add = (~first=?, ~second=?) => switch (first) {...};
 ```
 
 #### With Type Annotation
@@ -256,11 +256,11 @@ let add = (~first as x: int=1, ~second as y: int=2) : int => x + y;
 let add = (~first: int=1, ~second: int=2) : int => first + second;
 
 /* optional */
-let add = (~first as x: option(int)=?, ~second as y: option(int)=?) : int => switch x {...};
+let add = (~first as x: option(int)=?, ~second as y: option(int)=?) : int => switch (x) {...};
 /* with punning sugar */
 /* note that the caller would pass an `int`, not `option int` */
 /* Inside the function, `first` and `second` are `option int`. */
-let add = (~first: option(int)=?, ~second: option(int)=?) : int => switch first {...};
+let add = (~first: option(int)=?, ~second: option(int)=?) : int => switch (first) {...};
 ```
 
 ### Application
