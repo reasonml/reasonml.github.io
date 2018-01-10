@@ -2389,45 +2389,6 @@ span.CodeMirror-selectedtext { background: none; }
   padding-top: 10px;
 }
 
-/* commencing epic hack to animate header logo */
-/* our header logo image is intentionally absent. We substitude it with a css-drawn logo that looks similar to the Reason logo */
-/* this way we can animate it and turn the label RE into REI */
-/* currently we can't access the header logo config in userland (we use docusaurus). That's why we do it this way */
-.fixedHeaderContainer header > a > img {
-  display: none;
-}
-.fixedHeaderContainer header > a::before {
-  /* this is the frame */
-  border: 2px solid white;
-  position: absolute;
-  border-radius: 2px;
-  width: 34;
-  height: 34;
-  content: "";
-}
-.fixedHeaderContainer header > a::after {
-  /* the default sans-serif font at this weight is close enough to Monserrat used in the actual Reason logo */
-  /* this font config avoids us needing to load the entire Monserrat font just for this effect */
-  font-weight: 700;
-  font-size: 20px;
-  content: "REI";
-  color: white;
-
-  position: absolute;
-  width: 24;
-  height: 34;
-  left: 11;
-  top: 13;
-  overflow: hidden;
-  transition: all 0.5s cubic-bezier(0.18, 0.89, 0.31, 1.16);
-}
-.fixedHeaderContainer header > a:hover::after {
-  width: 34;
-  /* rounding is different on safari and chrome. This is the best number. Not 4, not 6 */
-  left: 5;
-}
-/* === */
-
 .productShowcaseSection .logos img {
   max-height: 70px;
   width: 70px;
@@ -2703,16 +2664,6 @@ pre code {
     font-size: 40px;
   }
 }
-/* mobile */
-@media (max-width: 480px) {
-  .projectTitle {
-    font-size: 30px;
-  }
-
-  .homeCodeSnippet .hljs {
-    font-size: 13px;
-  }
-}
 
 .homeCodeSnippet .hljs {
   background-color: transparent;
@@ -2723,6 +2674,28 @@ pre code {
   color: rgb(57, 57, 57);
   font-size: 14px;
 }
+/* hide the small code snippet on normal screens */
+.homeCodeSnippet > div:nth-child(1) {
+  display: none;
+}
+/* mobile */
+@media (max-width: 480px) {
+  .projectTitle {
+    font-size: 30px;
+  }
+
+  .homeCodeSnippet .hljs {
+    font-size: 13px;
+    padding: 0;
+  }
+  .homeCodeSnippet > div:nth-child(1) {
+    display: block;
+  }
+  /* hide the big code snippet on small screens */
+  .homeCodeSnippet > div:nth-child(2) {
+    display: none;
+  }
+}
 
 .getStarted {
   background-color: #db4d3f;
@@ -2730,6 +2703,45 @@ pre code {
   /* buttons have 10px margin. Make the right padding 10px too so that it looks nicely spaced beside the Tutorial button */
   margin: 0 10px 0 0;
 }
+
+/* commencing epic hack to animate header logo */
+/* our header logo image is intentionally absent. We substitude it with a css-drawn logo that looks similar to the Reason logo */
+/* this way we can animate it and turn the label RE into REI */
+/* currently we can't access the header logo config in userland (we use docusaurus). That's why we do it this way */
+.fixedHeaderContainer header > a > img {
+  display: none;
+}
+.fixedHeaderContainer header > a::before {
+  /* this is the frame */
+  border: 2px solid white;
+  position: absolute;
+  border-radius: 2px;
+  width: 34;
+  height: 34;
+  content: "";
+}
+.fixedHeaderContainer header > a::after {
+  /* the default sans-serif font at this weight is close enough to Monserrat used in the actual Reason logo */
+  /* this font config avoids us needing to load the entire Monserrat font just for this effect */
+  font-weight: 700;
+  font-size: 20px;
+  content: "REI";
+  color: white;
+
+  position: absolute;
+  width: 24;
+  height: 34;
+  left: 11;
+  top: 13;
+  overflow: hidden;
+  transition: all 0.5s cubic-bezier(0.18, 0.89, 0.31, 1.16);
+}
+.fixedHeaderContainer header > a:hover::after {
+  width: 34;
+  /* rounding is different on safari and chrome. This is the best number. Not 4, not 6 */
+  left: 5;
+}
+/* === */
 
 /* try playground style */
 .try-inner {
