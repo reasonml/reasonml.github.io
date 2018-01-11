@@ -61,6 +61,11 @@ const users = [
     image: "img/logos/ephox.svg",
     infoLink: "https://www.ephox.com",
   },
+  {
+    caption: "Rung",
+    image: "img/logos/rung.png",
+    infoLink: "https://rung.com.br/"
+  }
 ];
 
 const examples = [
