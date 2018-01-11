@@ -1,0 +1,101 @@
+<html><head><meta charset="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1"/><title>Converting from OCaml · Reason</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta property="og:title" content="Converting from OCaml · Reason"/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io/index.html"/><meta property="og:description" content="Since Reason is just another syntax for OCaml, converting an OCaml project over is straightforward and doesn&#x27;t require semantic changes. However, there are a few build setup and miscellaneous changes required."/><link rel="shortcut icon" href="/img/icon_50.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/arduino-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io/blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io/blog/feed.xml" title="Reason Blog RSS Feed"/><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/dummy.svg"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li><a href="/docs/uk/quickstart-javascript.html" target="_self">Docs</a></li><li><a href="/uk/try.html" target="_self">Try</a></li><li><a href="/api/index.html" target="_self">API</a></li><li><a href="/docs/uk/community.html" target="_self">Community</a></li><li><a href="/blog" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg"/>Українська</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/ja">日本語</a></li><li><a href="/en">English</a></li><li><a href="/es-ES">Español</a></li><li><a href="/fr">Français</a></li><li><a href="/ko">한국어</a></li><li><a href="/pt-BR">Português (Brasil)</a></li><li><a href="/ru">Русский</a></li><li><a href="/zh-CN">中文</a></li><li><a href="/zh-TW">繁體中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank">Help Translate</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(){
+          if(languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search"/></li><li><a href="https://github.com/facebook/reason" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>Native</span></h2></div><div class="navGroups"><div class="navGroup navGroupActive"><h3>Intro</h3><ul><li class="navListItem"><a class="navItem" href="/docs/uk/what-and-why.html">What &amp; Why</a></li></ul></div><div class="navGroup navGroupActive"><h3>Editor Setup</h3><ul><li class="navListItem"><a class="navItem" href="/docs/uk/global-installation.html">Global Installation</a></li><li class="navListItem"><a class="navItem" href="/docs/uk/editor-plugins.html">Editor Plugins</a></li><li class="navListItem"><a class="navItem" href="/docs/uk/extra-goodies.html">Extra Goodies</a></li></ul></div><div class="navGroup navGroupActive"><h3>Language Basics</h3><ul><li class="navListItem"><a class="navItem" href="/docs/uk/overview.html">Overview</a></li><li class="navListItem"><a class="navItem" href="/docs/uk/let-binding.html">Let Binding</a></li><li class="navListItem"><a class="navItem" href="/docs/uk/type.html">Type!</a></li><li class="navListItem"><a class="navItem" href="/docs/uk/string-and-char.html">String &amp; Char</a></li><li class="navListItem"><a class="navItem" href="/docs/uk/boolean.html">Boolean</a></li><li class="navListItem"><a class="navItem" href="/docs/uk/integer-and-float.html">Integer &amp; Float</a></li><li class="navListItem"><a class="navItem" href="/docs/uk/tuple.html">Tuple</a></li><li class="navListItem"><a class="navItem" href="/docs/uk/record.html">Record</a></li><li class="navListItem"><a class="navItem" href="/docs/uk/variant.html">Variant!</a></li><li class="navListItem"><a class="navItem" href="/docs/uk/list-and-array.html">List &amp; Array</a></li><li class="navListItem"><a class="navItem" href="/docs/uk/function.html">Function</a></li><li class="navListItem"><a class="navItem" href="/docs/uk/if-else.html">If-Else</a></li><li class="navListItem"><a class="navItem" href="/docs/uk/more-on-type.html">More on Type</a></li><li class="navListItem"><a class="navItem" href="/docs/uk/destructuring.html">Destructuring</a></li><li class="navListItem"><a class="navItem" href="/docs/uk/pattern-matching.html">Pattern Matching!</a></li><li class="navListItem"><a class="navItem" href="/docs/uk/mutation.html">Mutation</a></li><li class="navListItem"><a class="navItem" href="/docs/uk/imperative-loops.html">Imperative Loops</a></li><li class="navListItem"><a class="navItem" href="/docs/uk/jsx.html">JSX</a></li><li class="navListItem"><a class="navItem" href="/docs/uk/external.html">External</a></li><li class="navListItem"><a class="navItem" href="/docs/uk/exception.html">Exception</a></li><li class="navListItem"><a class="navItem" href="/docs/uk/object.html">Object</a></li><li class="navListItem"><a class="navItem" href="/docs/uk/module.html">Module</a></li><li class="navListItem"><a class="navItem" href="/docs/uk/promise.html">Promise</a></li></ul></div><div class="navGroup navGroupActive"><h3>JavaScript</h3><ul><li class="navListItem"><a class="navItem" href="/docs/uk/quickstart-javascript.html">Quickstart</a></li><li class="navListItem"><a class="navItem" href="/docs/uk/interop.html">Interop</a></li><li class="navListItem"><a class="navItem" href="/docs/uk/syntax-cheatsheet.html">Syntax Cheatsheet</a></li><li class="navListItem"><a class="navItem" href="/docs/uk/libraries.html">Libraries</a></li><li class="navListItem"><a class="navItem" href="/docs/uk/converting-from-js.html">Converting from JS</a></li></ul></div><div class="navGroup navGroupActive"><h3>Native</h3><ul><li class="navListItem"><a class="navItem" href="/docs/uk/native.html">Native</a></li><li class="navListItem"><a class="navItem" href="/docs/uk/quickstart-ocaml.html">Quickstart</a></li><li class="navListItem navListItemActive"><a class="navItem navItemActive" href="/docs/uk/convert-from-ocaml.html">Converting from OCaml</a></li></ul></div><div class="navGroup navGroupActive"><h3>Extra</h3><ul><li class="navListItem"><a class="navItem" href="/docs/uk/comparison-to-ocaml.html">Comparison to OCaml</a></li><li class="navListItem"><a class="navItem" href="/docs/uk/newcomer-examples.html">Newcomer Examples</a></li><li class="navListItem"><a class="navItem" href="/docs/uk/project-structure.html">Project Structure</a></li></ul></div></div></section></div><script>
+          var toggler = document.getElementById('navToggler');
+          var nav = document.getElementById('docsNav');
+          toggler.onclick = function() {
+            nav.classList.toggle('docsSliderActive');
+          };
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://crowdin.com/project/reason/uk" target="_blank">Translate</a><h1>Converting from OCaml</h1></header><article><div><span><p>Since Reason is just another syntax for OCaml, converting an OCaml project over is straightforward and doesn't require semantic changes. However, there are a few build setup and miscellaneous changes required.</p>
+<h2><a class="anchor" aria-hidden="true" name="ocamlbuild-rebuild"></a><a href="#ocamlbuild-rebuild" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>OCamlBuild -&gt; Rebuild</h2>
+<p>Reason comes with a drop in replacement for <code>ocamlbuild</code> called <code>rebuild</code>, that will automatically build any Reason file along with your OCaml files, with no additional configuration. This allows you to add Reason files to your existing OCaml project bit by bit. Wherever your script refers to <code>ocamlbuild</code>, just replace it with <code>rebuild</code>.</p>
+<h2><a class="anchor" aria-hidden="true" name="makefile"></a><a href="#makefile" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Makefile</h2>
+<p>If your build system executes explicit build commands, then the easiest way to use Reason with <code>ocamlopt/ocamlc</code> is by adding the following flags to each compilation step:</p>
+<pre><code class="hljs css sh"><span class="hljs-comment"># intf-suffix tells the compiler where to look for corresponding interface files</span>
+ocamlopt -pp refmt -intf-suffix rei -impl myFile.re
+ocamlopt -pp refmt -intf myFile.rei
+</code></pre>
+<p>If you are using <code>ocamlbuild</code> without <code>rebuild</code>, add the following to your <code>_tags</code> file, but this likely won't be enough because <code>ocamlc</code>/<code>ocamlopt</code> will need the <code>-intf/-impl/-intf-suffix</code> flags:</p>
+<pre><code class="hljs">&lt;**/*.{re,.rei}&gt;: package(reason), syntax(utf8)
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" name="constructor-syntax-fix"></a><a href="#constructor-syntax-fix" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Constructor Syntax Fix</h2>
+<p>The converted Reason code may attach <code>[@implicit_arity]</code> to variant constructors, like so: <code>C 1 2 [@implicit_arity]</code>. This is due to the fact that OCaml has the ambiguous syntax where a multi-arguments constructor is expecting argument in a tuple form. So at parsing time we don't know if <code>C (1, 2)</code> in OCaml should be translated to <code>C (1, 2)</code> or <code>C 1 2</code> in Reason. By default, we will convert it to <code>C 1 2 [@implicit_arity]</code>, which tells the compiler this can be either <code>C 1 2</code> or <code>C (1, 2)</code>.</p>
+<p>To prevent <code>[@implicit_arity]</code> from being generated, one can supply <code>--assume-explicit-arity</code> to <code>refmt</code>. This forces the formatter to generate <code>C 1 2</code> instead of <code>C 1 2 [@implicit_arity]</code>.</p>
+<p>However, since <code>C 1 2</code> requires multiple arguments, it may fail the compilation if it is actually a constructor with a single tuple as an argument (e.g., <code>Some</code>). We already have some internal exception rules to cover the common constructors who requires a single tuple as argument so that they will be converted correctly (e.g., <code>Some (1, 2)</code> will be converted to <code>Some (1, 2)</code> instead of <code>Some 1 2</code>, which doesn't compile).</p>
+<p>To provide your own exception list, create a line-separated file that contains all constructors (without module prefix) in your project that expects a single tuple as argument, and use <code>--heuristics-file &lt;filename&gt;</code> to tell <code>refmt</code> that all constructors listed in the file will be treated as constructor with a single tuple as argument:</p>
+<pre><code class="hljs css sh">&gt; cat heuristics.txt
+  TupleConstructor
+  And
+  Or
+</code></pre>
+<pre><code class="hljs css sh">&gt; cat test.ml
+</code></pre>
+<pre><code class="hljs css ocaml"><span class="hljs-keyword">type</span> tm =
+  <span class="hljs-type">TupleConstructor</span> <span class="hljs-keyword">of</span> (<span class="hljs-built_in">int</span> * <span class="hljs-built_in">int</span>)
+| <span class="hljs-type">MultiArgumentsConstructor</span> <span class="hljs-keyword">of</span> <span class="hljs-built_in">int</span> * <span class="hljs-built_in">int</span>
+<span class="hljs-keyword">let</span> x = <span class="hljs-type">TupleConstructor</span>(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>)
+<span class="hljs-keyword">let</span> y = <span class="hljs-type">MultiArgumentsConstructor</span>(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>)
+<span class="hljs-keyword">module</span> <span class="hljs-type">Test</span> = <span class="hljs-keyword">struct</span>
+  <span class="hljs-keyword">type</span> a = | <span class="hljs-type">And</span> <span class="hljs-keyword">of</span> (<span class="hljs-built_in">int</span> * <span class="hljs-built_in">int</span>) | <span class="hljs-type">Or</span> <span class="hljs-keyword">of</span> (<span class="hljs-built_in">int</span> * <span class="hljs-built_in">int</span>)
+<span class="hljs-keyword">end</span>;;
+<span class="hljs-keyword">let</span> a = <span class="hljs-type">Test</span>.<span class="hljs-type">And</span> (<span class="hljs-number">1</span>, <span class="hljs-number">2</span>)
+<span class="hljs-keyword">let</span> b = <span class="hljs-type">Test</span>.<span class="hljs-type">Or</span> (<span class="hljs-number">1</span>, <span class="hljs-number">2</span>)
+<span class="hljs-keyword">let</span> c = <span class="hljs-type">Some</span> (<span class="hljs-number">1</span>, <span class="hljs-number">2</span>)
+</code></pre>
+<p>Then only the constructor identifiers that were listed will be assumed to accept tuples instead of multiple arguments.</p>
+<pre><code class="hljs css sh">&gt; refmt --heuristics-file \
+    ./heuristics.txt --assume-explicit-arity \
+    --parse ml --<span class="hljs-built_in">print</span> re test.ml
+</code></pre>
+<pre><code class="hljs css reason">type tm =
+  | TupleConstructor((<span class="hljs-built_in">int</span>, <span class="hljs-built_in">int</span>))
+  | MultiArgumentsConstructor(<span class="hljs-built_in">int</span>, <span class="hljs-built_in">int</span>);
+
+<span class="hljs-keyword">let</span> x = TupleConstructor((<span class="hljs-number">1</span>, <span class="hljs-number">2</span>));
+
+<span class="hljs-keyword">let</span> y = MultiArgumentsConstructor(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>);
+
+module Test = {
+  type a =
+    | <span class="hljs-keyword">And</span>((<span class="hljs-built_in">int</span>, <span class="hljs-built_in">int</span>))
+    | <span class="hljs-keyword">Or</span>((<span class="hljs-built_in">int</span>, <span class="hljs-built_in">int</span>));
+};
+
+<span class="hljs-keyword">let</span> a = Test.<span class="hljs-keyword">And</span>((<span class="hljs-number">1</span>, <span class="hljs-number">2</span>));
+
+<span class="hljs-keyword">let</span> b = Test.<span class="hljs-keyword">Or</span>((<span class="hljs-number">1</span>, <span class="hljs-number">2</span>));
+
+<span class="hljs-keyword">let</span> c = Some((<span class="hljs-number">1</span>, <span class="hljs-number">2</span>));
+</code></pre>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="quickstart-ocaml.html">← Quickstart</a><a class="docs-next button" href="comparison-to-ocaml.html">Comparison to OCaml →</a></div></div></div></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.js"></script><script>window.foo = new Pjax({
+          areas: [
+            // try to use the first query.
+            '.mainContainer, .docsNavContainer .toc .navWrapper',
+            // fallback
+            'body'
+          ],
+          link: '.docsNavContainer:not(.docsSliderActive) a',
+          update: {
+            script: false,
+          }
+        });
+        var languagesMenuItemCopy = document.getElementById("languages-menu");
+        languagesMenuItemCopy.addEventListener("click", function(e){
+          e.preventDefault();
+          e.stopPropagation();
+          e.stopImmediatePropagation();
+        });</script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+              var search = docsearch({
+                apiKey: '966d1e412f67114a07dc0afe44b19b53',
+                indexName: 'reason',
+                inputSelector: '#search_input_react'
+              });
+            </script></body></html>
