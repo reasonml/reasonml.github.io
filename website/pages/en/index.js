@@ -62,17 +62,7 @@ npm install -g bs-platform
 bsb -init my-first-app -theme basic-reason
 cd my-first-app
 npm run start
-${pre}
-
-It runs in watch mode, so any changes to files will be picked up and compiled.
-
-That's all! This compiles Reason to Javascript in the ${code}lib/js/${code} folder.
-
-- Read more about how we compile to JavaScript through our partner project, [BuckleScript](http://bucklescript.github.io).
-
-- Alternatively, **to start a [ReasonReact](https://reasonml.github.io/reason-react/docs/en/installation.html) app**, try ${code}bsb -init my-react-app -theme react${code}.
-
-- Head over to [Editor Setup](/docs/en/global-installation.html) to get the Reason plugin for your favorite editor!`;
+${pre}`;
 
 class HomeSplash extends React.Component {
   render() {
@@ -157,16 +147,16 @@ class Index extends React.Component {
               align="center"
               contents={[
                 {
-                  title: "Types without hassle",
-                  content: "Powerful, safe type inference means you rarely have to annotate types, but everything gets checked for you.",
+                  title: <translate>Types without hassle</translate>,
+                  content: <translate>Powerful, safe type inference means you rarely have to annotate types, but everything gets checked for you.</translate>,
                 },
                 {
-                  title: "Easy JavaScript interop",
-                  content: "Use packages from NPM/Yarn with minimum hassle, or even drop in a snippet of raw JavaScript while you're learning!",
+                  title: <translate>Easy JavaScript interop</translate>,
+                  content: <translate>Use packages from NPM/Yarn with minimum hassle, or even drop in a snippet of raw JavaScript while you're learning!</translate>,
                 },
                 {
-                  title: "Flexible & Fun",
-                  content: "Make websites, animations, games, servers, cli tools, and more! Take a look at these examples to get inspired.",
+                  title: <translate>Flexible & Fun</translate>,
+                  content: <translate>Make websites, animations, games, servers, cli tools, and more! Take a look at these examples to get inspired.</translate>,
                 },
               ]}
               layout="threeColumn"
@@ -175,13 +165,17 @@ class Index extends React.Component {
 
           <Container background="light" className="quickStartAndExamples homeCodeSnippet">
             <div>
-              <h2>JavaScript Quick Start</h2>
+              <h2><translate>QuickStart</translate></h2>
               <MarkdownBlock>
                 {quickStart}
               </MarkdownBlock>
+              <p>
+                <translate>It runs in watch mode, so any changes to files will be picked up and compiled.</translate>
+                <a href="https://reasonml.github.io/reason-react/docs/en/installation.html"> <translate>Read more here!</translate></a>
+              </p>
             </div>
             <div>
-              <h2>Examples</h2>
+              <h2><translate>Examples</translate></h2>
               <GridBlock
                 className="examples"
                 align="center"
