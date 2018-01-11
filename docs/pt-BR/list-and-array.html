@@ -37,11 +37,11 @@
 <p>Alterar um item arbitrário no meio de uma lista é desencorajado, dado que a performance e gastos extras de alocação seriam lineares (<code>O(n)</code>).</p>
 <h4><a class="anchor" aria-hidden="true" name="acesso"></a><a href="#acesso" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Acesso</h4>
 <p><code>switch</code> (descrito na <a href="/docs/pt-BR/pattern-matching.html">seção de pattern matching</a>) é geralmente usado para acessar itens de listas:</p>
-<pre><code class="hljs css reason">let <span class="hljs-keyword">message</span> =
-  switch (myList) <span class="hljs-comment">{
-  | [] =&gt; "This list is empty"
-  | [a, ...rest] =&gt; "The head of the list is the string " ++ a
-  }</span>;
+<pre><code class="hljs css reason"><span class="hljs-keyword">let</span> mensagem =
+  <span class="hljs-keyword">switch</span> (minhaLista) {
+  | [] =&gt;&gt; <span class="hljs-string">"Esta lista está vazia"</span>
+  | [a, ...resto] =&gt; &gt;<span class="hljs-string">"A cabeça da lista é a string "</span> ++ a
+  };
 </code></pre>
 <p>Para acessar um item arbitrário de uma lista, use <code>List.nth</code>.</p>
 <h3><a class="anchor" aria-hidden="true" name="dicas-truques"></a><a href="#dicas-truques" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Dicas &amp; Truques</h3>

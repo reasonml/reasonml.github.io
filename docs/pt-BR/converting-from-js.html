@@ -59,13 +59,13 @@ let queryResult = (usePayload, payload) =&gt;
 <p><strong>Objetivo</strong>: corrigir os tipos, mas só o suficiente para passar à próxima etapa.</p>
 <p>Você irá ocasionalmente esbarrar em erros de sintaxe, porém não tão drásticos quanto os dos passos anteriores.</p>
 <ul>
-<li>Change <code>foo.bar</code> to <code>foo##bar</code>. This escape-hatch <a href="https://bucklescript.github.io/docs/en/object.html#object-as-record">BuckleScript feature</a> will be your medium-term friend.</li>
-<li>Convert <code>{foo: bar}</code> to <code>[%bs.obj {foo: bar}]</code> (<a href="https://bucklescript.github.io/docs/en/object.html#creation">docs</a>). After <code>refmt</code>, this will sugar to <code>{&quot;foo&quot;: bar}</code>.</li>
-<li>To communicate with external JS files, use <code>external</code>. They're BuckleScript's <a href="https://bucklescript.github.io/docs/en/intro-to-external.html">foreign function interface</a>.
+<li>Mude <code>foo.bar</code> para <code>foo##bar</code>. Esse <a href="https://bucklescript.github.io/docs/en/object.html#object-as-record">recurso &quot;saída de emergência&quot; do BuckleScript</a> será seu amigo a médio prazo.</li>
+<li>Converta <code>{foo: bar}</code> para <code>[%bs.obj {foo: bar}]</code> (<a href="https://bucklescript.github.io/docs/en/object.html#creation">documentação</a>). Após usar o <code>refmt</code>, isso será reescrito como <code>{&quot;foo&quot;: bar}</code>.</li>
+<li>Para se comunicar com arquivos JS externos, use <code>external</code>. No BuckleScript, isso é conhecido como <a href="https://bucklescript.github.io/docs/en/intro-to-external.html">foreign function interface</a>.
 <ul>
-<li>Inline externals. No need to create clean, well-separated files for externals for now. We'll come back to these.</li>
-<li>If it's too cumbersome to correctly type an <code>external</code>'s input/output, use some placeholder polymorphic types, e.g. <code>external getStudentById: 'whatever =&gt; 'whateverElse = ...</code>.</li>
-<li>For data types &amp; patterns that are hard to properly convert over, you can occasionally create converters like <code>external unsafeCast : myPayloadType =&gt; anotherDataType = &quot;%identity&quot;;</code>.</li>
+<li>Traga externals para o seu arquivo. Não há necessidade de criar arquivos limpos e bem separados para dependências externas agora. Iremos voltar a isso.</li>
+<li>Se é trabalhoso demais tipar corretamente a entrada e saída de um <code>external</code>, use alguns tipos polimórficos como substitutos, ex: <code>external estudantePorId: 'tantoFaz =&gt; 'tambemTantoFaz = ...</code>.</li>
+<li>Para tipos de dados &amp; padrões que são difíceis de converter corretamente, vocêo pode ocasionalmente criar conversores como <code>external transformacaoInsegura : meuTipoDeDados =&gt; outroTipoDeDados = &quot;%identity&quot;;</code>.</li>
 </ul></li>
 </ul>
 <p>Este é a primeira passagem; ao final os tipos provavelmente serão diferentes. Por enquanto, colha os frutos! Uma vez que você termine de consertar todos os erros de tipagem, seu arquivo JS deverá ser gerado. Mantenha-o aberto lado a lado. É chegado o momento de retornar e arrumar as gambiarras!</p>
@@ -83,10 +83,10 @@ let queryResult = (usePayload, payload) =&gt;
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" name="semantica-de-execuc-o"></a><a href="#semantica-de-execuc-o" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Semântica de Execução</h2>
 <p><strong>Objetivo</strong>: consertar os erros no JS gerado na saída.</p>
-<p>Compare-o com seu arquivo JS inicial. A saída provavelmente está incorreta; você provavelmente cometeu erros ao traduzir alguns idiomas e em alguns externals.</p>
+<p>Compare-o com seu arquivo JS inicial. A saída provavelmente está incorreta; você provavelmente cometeu erros ao traduzir alguns idiomas e alguns externals.</p>
 <ul>
-<li>Type the shape of JS objects (the things that required <code>##</code>).</li>
-<li>Convert whichever parts to records/variants/idiomatic OCaml types.</li>
+<li>Dê tipo ao formato dos objetos JS (os trechos que exigiram <code>##</code>).</li>
+<li>Converta qualquer uma dessas ocorrências para records/variants/outros tipos idiomáticos em OCaml.</li>
 </ul>
 <p>Durante essa parte, confira a saída para cada alteração.</p>
 <pre><code class="hljs css reason">type student; <span class="hljs-comment">/* tipo abstrato, descrito posteriormente */</span>
@@ -108,8 +108,8 @@ type <span class="hljs-attr">payloadType</span> = {. <span class="hljs-string">"
 <p><strong>Objetivo</strong>: tornar seus tipos corretos (aka 'sound').</p>
 <p>Retorne para consertar tudo que você ignorou durante a primeira passagem.</p>
 <ul>
-<li>Make sure you don't have any <code>'whatever</code> types left in <code>external</code>s.</li>
-<li>You can keep the <code>external</code>s inlined, or pull them out into a file.</li>
+<li>Tenha certeza que você não tem quaisquer tipos <code>'coisa</code> deixados nos <code>external</code>s.</li>
+<li>Você pode manter seus <code>external</code>s no seu arquivo ou movê-los para um arquivo a parte.</li>
 </ul>
 <pre><code class="hljs css reason"><span class="hljs-comment">/* no arquivo atual */</span>
 type <span class="hljs-attr">payloadType</span> = {. <span class="hljs-string">"student"</span>: School.student}; <span class="hljs-comment">/* <span class="hljs-doctag">TODO:</span> mover isto para outro local! */</span>

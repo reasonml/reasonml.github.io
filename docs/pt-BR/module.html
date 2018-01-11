@@ -73,7 +73,7 @@ printProfession(anotherPerson)<span class="hljs-comment">;</span>
   <span class="hljs-keyword">let</span> render = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> defaultGreeting ++ <span class="hljs-string">" "</span> ++ getAudience(~excited=<span class="hljs-literal">true</span>);
 };
 </code></pre>
-<p><strong>Note</strong>: <code>open</code> and <code>include</code> are very different! The former brings a module's content into your current scope, so that you don't have to refer to a value by prefixing it with the module's name every time. The latter <strong>copies over</strong> the definition of a module statically, then also do an <code>open</code>.</p>
+<p><strong>Nota</strong>: abrir (<code>open</code>) e incluir (<code>include</code>) são muito diferentes! O primeiro traz todo o conteúdo de um módulo para o escopo atual, de modo que você não precisa referir-se a um valor prefixando-o com o nome do módulo toda vez. O segundo <strong>transcreve</strong> a definição de um módulo estaticamente, e então também faz um <code>open</code>.</p>
 <h3><a class="anchor" aria-hidden="true" name="to-arquivo-re-e-um-modulo"></a><a href="#to-arquivo-re-e-um-modulo" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>To arquivo <code>.re</code> é um módulo</h3>
 <p>Um arquivo OCaml/Reason é mapeado para um módulo; o interessante é que isso traz alguma expressividade que em outras linguagens exigiria geração de código. O arquivo <code>react.re</code> implicitamente forma um módulo <code>React</code>, que pode ser enxergado por código em outros arquivos.</p>
 <pre><code class="hljs css reason"><span class="hljs-comment">/* arquivoA.re. Isso geralmente é compilado para o módulo ArquivoA abaixo */</span>
@@ -106,14 +106,14 @@ include ArquivoA<span class="hljs-comment">;</span>
 </code></pre>
 <p>Uma assinatura define uma lista de requerimentos que um módulo precisa satisfazer para corresponder a essa assinatura. Estes requerimentos são da forma:</p>
 <ul>
-<li><code>let x: int;</code> requires a <code>let</code> binding named <code>x</code>, of type <code>int</code>.</li>
-<li><code>type t = someType;</code> requires a type field <code>t</code> to be equal to <code>someType</code>.</li>
-<li><code>type t;</code> requires a type field <code>t</code>, but without imposing any requirements on the actual, concrete type of <code>t</code>. We'd use <code>t</code> in other entries in the signature to describe relationships, e.g. <code>let makePair: t =&gt; (t, t)</code> but we cannot, for example, assume that <code>t</code> is an <code>int</code>. This gives us great, enforced abstraction abilities.</li>
+<li><code>let x: int;``let</code> requer um binding nomeado <code>x</code>, do tipo <code>int</code>.</li>
+<li><code>type t = someType;</code> requer que um campo de tipo <code>t</code> seja igual a <code>someType</code>.</li>
+<li><code>type t;</code> requer um campo de tipo <code>t</code>, mas sem obrigar qualquer imposição no atual tipo concreto <code>t</code>. Nós podemos usar <code>t</code> em outros trechos da assinatura para descrever relacionamentos, e.g. <code>let makePair: t =&gt; (t, t)</code> porém sem assumir, por exemplo, que <code>t</code> seja um <code>int</code>. Isto nos compele a usar grandes habilidades de abstração.</li>
 </ul>
 <p>Para ilustrar as várias declarações de tipos, considere a assinatura <code>EstablishmentType</code> acima, que requer que um módulo:</p>
 <ul>
 <li>Declare um tipo com nome <code>profession</code>.</li>
-<li>Must include a function that takes in a value of the type <code>profession</code> and returns a string.</li>
+<li>Inclua uma função que tenha um valor do tipo <code>profession</code> e retorne uma string.</li>
 </ul>
 <p><strong>Observação</strong>:</p>
 <p>Módulos com o tipo <code>EstablishmentType</code> podem conter mais campos do que aqueles que a assinatura declara, tal como o módulo <code>School</code> na seção anterior (se nós escolhêssemos atribuir a ele o tipo <code>EstablishmentType</code>. Caso contrário, <code>School</code> exporia todos os campos). Isso efetivamente torna o campo <code>person1</code> um detalhe de implementação! Entidades externas não podem acessá-lo, dado que não está presente na assinatura; a assinatura <strong>restringiu</strong> o que outros podem acessar.</p>

@@ -17,7 +17,7 @@
         </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://crowdin.com/project/reason/pt-BR" target="_blank">Translate</a><h1>Exemplos para Iniciantes</h1></header><article><div><span><p>Um exemplo vale mais que mil palavras.</p>
 <p>Essa sessão é dedicada aos iniciantes tentando descobrir os idiomas gerais &amp; convenções no Reason e BuckleScript. Se você é um iniciante que tem uma boa idéia para um exemplo, por favor sugira uma edição!</p>
 <h2><a class="anchor" aria-hidden="true" name="usando-o-tipo-option"></a><a href="#usando-o-tipo-option" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Usando o tipo <code>option</code></h2>
-<p><code>option</code> is a <a href="/docs/pt-BR/variant.html">variant</a> that comes with the <a href="/api/index.html">standard library</a>. It obviates the need for null values in other languages.</p>
+<p><code>option</code> é uma <a href="/docs/pt-BR/variant.html">variante</a> que vem com a <a href="/api/index.html">biblioteca padrão</a>. Ela elimina a necessidade de valores nulos presente em outras línguagens.</p>
 <pre><code class="hljs css reason"><span class="hljs-keyword">let</span> possiblyNullValue1 = None;
 <span class="hljs-keyword">let</span> possiblyNullValue2: option(string) = Some(<span class="hljs-string">"Hello@"</span>);
 
@@ -37,14 +37,14 @@ switch (possiblyNullValue2) {
 <span class="hljs-title">let</span> result: response(universityStudent) = fetchDataFromServer();
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" name="criando-um-objeto-js"></a><a href="#criando-um-objeto-js" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Criando um Objeto JS</h2>
-<p>Assuming you're <a href="/docs/pt-BR/quickstart-javascript.html">compiling to JS</a>, of course.</p>
+<p>Assumindo que você esteja <a href="/docs/pt-BR/quickstart-javascript.html">compilando para JS </a>, é claro.</p>
 <pre><code class="hljs css reason"><span class="hljs-keyword">let</span> <span class="hljs-attr">obj1</span> = {
   <span class="hljs-string">"name"</span>: <span class="hljs-string">"John"</span>,
   <span class="hljs-string">"age"</span>: <span class="hljs-number">30</span>
 };
-<span class="hljs-comment">/* Compiles to a JS object that looks exactly like what you're seeing */</span>
+<span class="hljs-comment">/* Compila para um objeto JS da mesma maneira que você está vendo*/</span>
 </code></pre>
-<p>Note that the above isn't a record; the keys are quoted in string. That's Reason syntax sugar for <a href="https://bucklescript.github.io/docs/en/object.html#creation">bs.obj</a>. O tipo é inferido. Next example explicitly types it.</p>
+<p>Observe que o código acima não é um registro; as chaves são strings em aspas duplas. Esse é o açúcar sintático do Reason para <a href="https://bucklescript.github.io/docs/en/object.html#creation">bs.obj</a>. O tipo é inferido. O próximo exemplifica anotação de tipos explicitamente.</p>
 <h2><a class="anchor" aria-hidden="true" name="tipando-um-objeto-js"></a><a href="#tipando-um-objeto-js" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Tipando um Objeto JS</h2>
 <pre><code class="hljs css reason"><span class="hljs-keyword">type</span> payload = {.
   <span class="hljs-string">"name"</span>: <span class="hljs-built_in">string</span>,
@@ -53,7 +53,7 @@ switch (possiblyNullValue2) {
 
 <span class="hljs-keyword">let</span> obj1: payload = {<span class="hljs-string">"name"</span>: <span class="hljs-string">"John"</span>, <span class="hljs-string">"age"</span>: <span class="hljs-number">30</span>};
 </code></pre>
-<p>Note that <code>{. name: string, age: int}</code> is the syntax for a Reason/OCaml object type declaration (not a record!). It's lifted into <code>Js.t</code> so that BuckleScript sees the whole type and compiles it correctly to a regular JavaScript object. Ordinary, non-lifted OCaml objects are compiled into something else (rarely needed currently).</p>
+<p>Observe que <code>{. name: string, age: int}</code> é a sintaxe para uma declaração de tipo de objeto Reason/OCaml (não um registro!). Ele é elevado para <code>Js.t</code> para que BuckleScript veja o tipo e compile-o corretamente para um objeto JavaScript regular. Normalmente, objetos OCaml não elevados são compilados de forma diferente (raramente é necessário atualmente).</p>
 <h2><a class="anchor" aria-hidden="true" name="conectando-a-um-modulo-js-com-export-padr-o"></a><a href="#conectando-a-um-modulo-js-com-export-padr-o" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Conectando a um Módulo JS com Export Padrão</h2>
 <p>Considerando que o módulo chamado <code>store.js</code>, tem um export padrão (default) e um método chamado <code>getDate</code>.</p>
 <pre><code class="hljs css reason"><span class="hljs-keyword">type</span> <span class="hljs-keyword">store</span> = {. <span class="hljs-string">"getDate"</span>: [<span class="hljs-title">@bs.meth</span>] (unit =&gt; float)}<span class="hljs-comment">;
@@ -63,7 +63,7 @@ Js.log(<span class="hljs-keyword">store</span>)<span class="hljs-comment">;
 </span>Js.log(<span class="hljs-keyword">store</span>##getDate())<span class="hljs-comment">;
 </span></code></pre>
 <h2><a class="anchor" aria-hidden="true" name="checando-por-tipos-que-podem-ser-nulos-usando-option"></a><a href="#checando-por-tipos-que-podem-ser-nulos-usando-option" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Checando por tipos que podem ser nulos usando <code>option</code></h2>
-<p>Para uma função que potencialmente receberá argumentos <code>null</code> ou <code>undefined</code>, é idiomático converter para uma <code>option</code>. The conversion is done through the helper functions in Bucklescript's <a href="http://bucklescript.github.io/bucklescript/api/Js.html#TYPEnullable"><code>Js.Nullable</code></a> module. Nesse caso, <code>to_opt</code>:</p>
+<p>Para uma função que potencialmente receberá argumentos <code>null</code> ou <code>undefined</code>, é idiomático converter para uma <code>option</code>. A conversão é feita através das funções auxiliares do Bucklescript no módulo do BuckleScript <a href="http://bucklescript.github.io/bucklescript/api/Js.html#TYPEnullable"><code>Js.Nullable</code></a>. Nesse caso, <code>to_opt</code>:</p>
 <pre><code class="hljs css reason"><span class="hljs-keyword">let</span> greetByName = (possiblyNullName) =&gt; {
   <span class="hljs-keyword">let</span> optionName = Js.Nullable.to_opt(possiblyNullName);
   switch (optionName) {
