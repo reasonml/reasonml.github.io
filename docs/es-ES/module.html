@@ -15,17 +15,17 @@
             nav.classList.toggle('docsSliderActive');
           };
         </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://crowdin.com/project/reason/es-ES" target="_blank">Translate</a><h1>Módulo</h1></header><article><div><span><h2><a class="anchor" aria-hidden="true" name="basics"></a><a href="#basics" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Basics</h2>
-<p><strong>Modules are like mini files</strong>! They can contain type definitions, <code>let</code> bindings, nested modules, etc.</p>
-<h3><a class="anchor" aria-hidden="true" name="creation"></a><a href="#creation" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Creation</h3>
-<p>To create a module, use the <code>module</code> keyword. The module name must start with a <strong>capital letter</strong>. Whatever you could place in a <code>.re</code> file, you may place inside a module definition's <code>{}</code> block.</p>
-<pre><code class="hljs css reason"><span class="hljs-keyword">module</span> School = {
-  <span class="hljs-keyword">type</span> profession = Teacher | Director;
-
-  <span class="hljs-keyword">let</span> person1 = Teacher;
-  <span class="hljs-keyword">let</span> getProfession = <span class="hljs-function">(<span class="hljs-params">person</span>) =&gt;</span>
-    <span class="hljs-keyword">switch</span> (person) {
-    | <span class="hljs-function"><span class="hljs-params">Teacher</span> =&gt;</span> <span class="hljs-string">"A teacher"</span>
-    | <span class="hljs-function"><span class="hljs-params">Director</span> =&gt;</span> <span class="hljs-string">"A director"</span>
+<p><strong>Los módulos son como mini archivos</strong>! Pueden contener definiciones de tipo, <code>let</code> bindings, módulos anidados, etc.</p>
+<h3><a class="anchor" aria-hidden="true" name="creacion"></a><a href="#creacion" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Creación</h3>
+<p>To create a module, use the <code>module</code> keyword. El nombre del modulo debe comenzar con una <strong>letra mayúscula</strong>. Whatever you could place in a <code>.re</code> file, you may place inside a module definition's <code>{}</code> block.</p>
+<pre><code class="hljs css reason"><span class="hljs-keyword">module</span> Escuela = {
+  <span class="hljs-keyword">type</span> profesion = Maestro | Director;
+  
+  <span class="hljs-keyword">let</span> persona1 = Maestro;
+  <span class="hljs-keyword">let</span> obtenerProfesion = <span class="hljs-function">(<span class="hljs-params">persona</span>) =&gt;</span>
+    <span class="hljs-keyword">switch</span>(persona) {
+    | <span class="hljs-function"><span class="hljs-params">Maestro</span> =&gt;</span> <span class="hljs-string">"Un maestro"</span> 
+    | <span class="hljs-function"><span class="hljs-params">Director</span> =&gt;</span> <span class="hljs-string">"Un director"</span>
     };
 };
 </code></pre>
@@ -34,13 +34,13 @@
 </span>print_endline(<span class="hljs-keyword">School.getProfession(anotherPerson)); </span><span class="hljs-comment">/* "A teacher" */</span>
 </code></pre>
 <p>Nested modules work too.</p>
-<pre><code class="hljs css reason">module <span class="hljs-attr">MyModule</span> = {
-  module <span class="hljs-attr">NestedModule</span> = {
-    <span class="hljs-keyword">let</span> <span class="hljs-attr">message</span> = <span class="hljs-string">"hello"</span>;
+<pre><code class="hljs css reason">module <span class="hljs-attr">MiModulo</span> = {
+  module <span class="hljs-attr">ModuloAnidado</span> = {
+    <span class="hljs-keyword">let</span> <span class="hljs-attr">mensaje</span> = <span class="hljs-string">"hola"</span>;
   };
 };
 
-<span class="hljs-keyword">let</span> <span class="hljs-attr">message</span> = MyModule.NestedModule.message;
+<span class="hljs-keyword">let</span> <span class="hljs-attr">mensaje</span> = MiModulo.ModuloAnidado.mensaje;
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" name="open-ing-a-module"></a><a href="#open-ing-a-module" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>open</code>ing a module</h3>
 <p>Constantly referring to a value/type in a module can be tedious. We can open a module's definition and refer to its contents without prepending them with the module's name. Two ways:</p>

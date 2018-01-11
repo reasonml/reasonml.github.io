@@ -34,7 +34,7 @@
   | <span class="hljs-function"><span class="hljs-params">Yes</span> =&gt;</span> <span class="hljs-string">"Great!"</span>
   | <span class="hljs-function"><span class="hljs-params">PrettyMuch</span> =&gt;</span> <span class="hljs-string">"Nice!"</span>
   };
-<span class="hljs-comment">/* message is "Great!" */</span>
+<span class="hljs-comment">/* message は "Great!" */</span>
 </code></pre>
 <p>ヴァリアントには、非常にたくさんの型システム支援があります。 例えば、ヴァリアントの全ケースを網羅し忘れたり、2つのケースが重複したりした場合、型エラーを返します。 <a href="/docs/ja/pattern-matching.html">後のセクション</a>で switch とパターンマッチングを必ず確認してください！</p>
 <h3><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>ヴァリアントは明示的な定義が必要</h3>
@@ -95,7 +95,7 @@
 <h3><a class="anchor" aria-hidden="true" name="javascript"></a><a href="#javascript" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>JavaScript との相互運用</h3>
 <p><em>このセクションは BuckleScript の <a href="https://bucklescript.github.io/docs/en/interop-overview.html">FFI</a> の知識があることを前提としています。 もし、まだ JS の関数にバインディングするためにヴァリアントを使用することにもやもやを感じていないなら、読み飛ばしてください</em>。</p>
 <p>かなりの数の JS ライブラリは、引数に様々な型を受け入れることができる関数を使用します。 これらのケースでは、それらをヴァリアントとしてモデル化するのに非常に魅力的です。 例えば、<code>number</code> か <code>string</code> のいずれかを受け取る <code>myLibrary.draw</code> という JS 関数があるとします。 あなたはそれを次のようにバインドしたくなるかもしれません。</p>
-<pre><code class="hljs css reason">/* reserved <span class="hljs-keyword">for</span> internal usage */
+<pre><code class="hljs css reason">/* 内部で使用するために予約する */
 [@bs.<span class="hljs-keyword">module</span> <span class="hljs-string">"myLibrary"</span>] <span class="hljs-keyword">external</span> draw : <span class="hljs-symbol">'a</span> =&gt; <span class="hljs-built_in">unit</span> = <span class="hljs-string">"draw"</span>;
 
 <span class="hljs-keyword">type</span> animal =
@@ -112,7 +112,7 @@
 <pre><code class="hljs css reason">[@bs.<span class="hljs-keyword">module</span> <span class="hljs-string">"myLibrary"</span>] <span class="hljs-keyword">external</span> drawFloat : <span class="hljs-built_in">float</span> =&gt; <span class="hljs-built_in">unit</span> = <span class="hljs-string">"draw"</span>;
 [@bs.<span class="hljs-keyword">module</span> <span class="hljs-string">"myLibrary"</span>] <span class="hljs-keyword">external</span> drawString : <span class="hljs-built_in">string</span> =&gt; <span class="hljs-built_in">unit</span> = <span class="hljs-string">"draw"</span>;
 </code></pre>
-<p>BuckleScript also provides <a href="https://bucklescript.github.io/docs/en/function.html#binding-to-polymorphic-function">a few other ways</a> to do this.</p>
+<p>BuckleScript にもこれをするための <a href="https://bucklescript.github.io/docs/en/function.html#binding-to-polymorphic-function">いくつかの方法</a> があります。</p>
 <h3><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>ヴァリアントの型はフィールドの名前で特定される</h3>
 <p><a href="/docs/ja/record.html#record-types-are-found-by-field-name">レコードのセクション</a>を参照してください。 ヴァリアントも同じです。関数は2つの異なるヴァリアントによって共有する任意のコンストラクタを許容しません。 この場合もやはり、そのような機能が存在します。それはポリモーフィックヴァリアントと呼ばれています。 これについてはこの先話します =)</p>
 <h2><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>設計方針</h2>
@@ -139,13 +139,13 @@
 </code></pre>
 <p>コンパイラはヴァリアントを見て、</p>
 <ol>
-<li>conceptually turns them into <code>type animal = 0 | 1 | 2</code></li>
-<li>compiles <code>switch</code> to a constant-time format (<code>O(1)</code>).</li>
+<li>概念的にそれらを<code>type animal = 0 | 1 | 2</code> に変えます。</li>
+<li><code>switch</code> を定数時間の形式（<code>O(1)</code>）にコンパイルします。</li>
 </ol>
 <p>なぜ型付け関数型言語は parsing のために頻繁に使われるのか不思議に思うかもしれません。大きな木を効率的かつ安全に切り替えることは、ヴァリアントのための最良のシナリオです。</p>
 <!-- TODO: playground link -->
 <p>まだ驚かない？ ヴァリアントは数学の他の分野と深い関わりを持ちます。興味深い探求のために <a href="https://codewords.recurse.com/issues/three/algebra-and-calculus-of-algebraic-data-types">ここを見て</a>ください。</p>
-<p>落とし穴をカバーするために型システムに頼るよりも、問題を設計することが常に良い選択です。実際には、すべてのプログラムでそれをすること、または、闇雲にすべての問題を完全に理解して解決策を設計することは非現実的です。 型システムを使うと、前もってすべてを理解しなくても、コードベースの変更を安全に行うことができます。 This is great for guided exploration. In this regard, types also allows us not needing to overly design an API just to circumvent callers' simple pitfalls. They reduce the layers of abstractions needed to &quot;get things done&quot;, which in return reduces callers' cognitive burden.</p>
+<p>落とし穴をカバーするために型システムに頼るよりも、問題を設計することが常に良い選択です。実際には、すべてのプログラムでそれをすること、または、闇雲にすべての問題を完全に理解して解決策を設計することは非現実的です。 型システムを使うと、前もってすべてを理解しなくても、コードベースの変更を安全に行うことができます。 これはガイド付き探索に最適です。 この点でも、型によって呼び出し元の単純な落とし穴を回避するだけの過度な API 設計をする必要がありません。 彼らは「事を遂行する」ために必要な抽象レイヤを減らし、見返りに呼び出し元の認知的負荷を軽減します。</p>
 </span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="record.html">← Record</a><a class="docs-next button" href="list-and-array.html">List &amp; Array →</a></div></div></div></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.js"></script><script>window.foo = new Pjax({
           areas: [
             // try to use the first query.
