@@ -155,7 +155,7 @@ const languages = [
     tag: "tr"
   },
   {
-    enabled: false,
+    enabled: true,
     name: "Українська",
     tag: "uk"
   },
