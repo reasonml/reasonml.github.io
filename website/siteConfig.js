@@ -63,7 +63,7 @@ const users = [
   },
   {
     caption: "Rung",
-    image: "img/logos/rung.png",
+    image: "img/logos/rung.svg",
     infoLink: "https://rung.com.br/"
   }
 ];
