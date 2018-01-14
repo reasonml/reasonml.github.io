@@ -23,8 +23,8 @@ Note: Bundles are currently large (approximately `100MB`), but `npm` will not pr
 ```
 opam update
 opam switch 4.02.3 # mandatory!
-opam install reason.3.0.4
-opam install merlin.2.5.4
+eval $(opam config env)
+opam install reason.3.0.4 merlin.2.5.4
 ```
 
 ## Troubleshooting
