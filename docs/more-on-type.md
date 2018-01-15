@@ -45,7 +45,7 @@ Type arguments appear everywhere.
 let greetings = ["hello", "world", "how are you"];
 ```
 
-If types didn't accept parameters (aka, if we didn't have "type functions"), the standard library will need to define the types `listOfString`, `listOfInt`, `listOfTuplesOfInt`, etc.
+If types didn't accept parameters (ie, if we didn't have "type functions"), the standard library would need to define the types `listOfString`, `listOfInt`, `listOfTuplesOfInt`, etc.
 
 Types can receive more arguments, and be composable.
 
@@ -80,6 +80,6 @@ and teacher = {students: list(student)};
 
 A type system allowing type argument is basically allowing type-level functions. `list(int)` is really the `list` type function taking in the `int` type, and returning the final, concrete type you'd use in some places. You might have noticed that in other languages, this is more or less called "generics". For example, `ArrayList<Integer>` in Java.
 
-[The principle of least power](https://en.wikipedia.org/wiki/Rule_of_least_power) applies when you're trying to "Get Things Done". If the problem domain allows, definitely pick the least abstract (aka, the most concrete) solution available, so that the solution is reached faster and has fewer unstable indirections you'd have to traverse. For example, prefer types over free-form data, prefer data-driven configuration over turing-complete function calls, prefer function calls over macros, prefer macros over project forks, etc. When you constraint your domain and power, things become easier to analyze. That is, _if_ the domain is constrained enough to allow it.
+[The principle of least power](https://en.wikipedia.org/wiki/Rule_of_least_power) applies when you're trying to "Get Things Done". If the problem domain allows, definitely pick the least abstract (aka, the most concrete) solution available, so that the solution is reached faster and has fewer unstable indirections you'd have to traverse. For example, prefer types over free-form data, prefer data-driven configuration over turing-complete function calls, prefer function calls over macros, prefer macros over project forks, etc. When you constrain your domain and power, things become easier to analyze. That is, _if_ the domain is constrained enough to allow it.
 
 When a type system is an all-encompassing aspect of your program, we need to make sure we leave enough power order not to overly constrain your expressiveness; without "type functions", you'd end up with quite a bit of boilerplate, e.g. hard-coded `listOfInt`, `listOfString`, `listOfArrayOfFloat`, their respective helper functions, etc. However, please also make sure you don't overly abuse the power given to you through a rather powerful type system. Sometimes, it's fine to write a _little_ bit of boilerplate to reduce the need for otherwise extra powerful types. If anything, tasteful tradeoffs might show your pragmatism and judgement more than fancy types!
