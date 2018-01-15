@@ -28,13 +28,13 @@
 <h2><a class="anchor" aria-hidden="true" name="uso"></a><a href="#uso" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Uso</h2>
 <p>Junto con una variante viene una de las características más importantes de Reason, la expresión <code>switch</code>.</p>
 <p>Un <code>switch</code> Reason es visualmente similar para otros lenguajes <code>switch</code> (también conocido como un gran <code>if/elseif/elseif...</code>). Te permite chequear cada caso posible de una variante. Para usarlo, enumera cada variante de constructor de un variante particular que te gustaría usar, cada uno seguido de un <code>=&gt;</code> y la expresión correspondiente de ese caso.</p>
-<pre><code class="hljs css reason"><span class="hljs-keyword">let</span> message =
-  <span class="hljs-keyword">switch</span> (areYouCrushingIt) {
-  | <span class="hljs-function"><span class="hljs-params">No</span> =&gt;</span> <span class="hljs-string">"No worries. Keep going!"</span>
-  | <span class="hljs-function"><span class="hljs-params">Yes</span> =&gt;</span> <span class="hljs-string">"Great!"</span>
-  | <span class="hljs-function"><span class="hljs-params">PrettyMuch</span> =&gt;</span> <span class="hljs-string">"Nice!"</span>
+<pre><code class="hljs css reason"><span class="hljs-keyword">let</span> mensaje =
+  <span class="hljs-keyword">switch</span> (loEstasLogrando) {
+  | <span class="hljs-function"><span class="hljs-params">No</span> =&gt;</span> <span class="hljs-string">"No te preocupes. ¡Sigue intentando!"</span>
+  | <span class="hljs-function"><span class="hljs-params">Si</span> =&gt;</span> <span class="hljs-string">"¡Genial!"</span>
+  | <span class="hljs-function"><span class="hljs-params">Casi</span> =&gt;</span> <span class="hljs-string">"¡Muy bien!"</span>
   };
-<span class="hljs-comment">/* message is "Great!" */</span>
+<span class="hljs-comment">/* mensaje es "¡Genial!" */</span>
 </code></pre>
 <p>Un variante tiene una cantidad extremadamente rica de asistencia de tipo de sistema. Por ejemplo, te daremos un tipo de error si has olvidado cubrir un caso de tu variante, o si dos casos son redundantes. ¡Asegúrate de comprobar el switch y el patrón de coincidencia en un <a href="/docs/es-ES/pattern-matching.html"> sección posterior</a>!</p>
 <h3><a class="anchor" aria-hidden="true" name="necesidades-variantes-y-una-definicion-explicita"></a><a href="#necesidades-variantes-y-una-definicion-explicita" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Necesidades Variantes y una Definición Explícita</h3>
@@ -63,7 +63,7 @@
 <p><strong>¿Notaste como usar un constructor es como llamar una función?</strong> Eso como si <code>Facebook</code> fuese una función que acepta dos argumentos. Esto no es una coincidencia; hay una razón de por qué una data de constructor es llamado &quot;argumento constructor&quot;.</p>
 <p>Usar <code>switch</code>, puedes usar patrones coincidentes (repetimos: como descrito en la sección anterior) un argumento constructor:</p>
 <pre><code class="hljs css reason"><span class="hljs-keyword">let</span> Saludo =
-  switch (mi Cuenta) {
+  switch (miCuenta) {
   | <span class="hljs-type">Ninguno</span> =&gt; <span class="hljs-string">"¡Hola!"</span>
   | <span class="hljs-type">Facebook</span>(nombre, edad) =&gt; <span class="hljs-string">"Hola "</span> ++ nombre ++ <span class="hljs-string">", tú tienes "</span> ++ string_of_int(edad) ++ <span class="hljs-string">"de edad"</span>
   | <span class="hljs-type">Instagram</span>(name) =&gt; <span class="hljs-string">"Hola "</span> ++ nombre ++ <span class="hljs-string">"!"</span>
@@ -90,35 +90,35 @@
 <span class="hljs-keyword">type</span> cuenta2 =
   | Instagram((<span class="hljs-keyword">string</span>, <span class="hljs-keyword">int</span>)) <span class="hljs-comment">/* 1 argumento -pasa ser una 2-tupla */</span>;
 </code></pre>
-<h3><a class="anchor" aria-hidden="true" name="variants-must-have-constructors"></a><a href="#variants-must-have-constructors" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Variants Must Have constructors</h3>
-<p>If you come from an untyped language, you might be tempted to try <code>type foo = int | string</code>. This isn't possible in Reason; you'd have to give each branch a constructor: <code>type foo = Int(int) | String(string)</code>. Though usually, needing this might be an anti-pattern. The Design Decisions section below explains more.</p>
-<h3><a class="anchor" aria-hidden="true" name="interop-with-javascript"></a><a href="#interop-with-javascript" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Interop with JavaScript</h3>
-<p><em>This section assumes knowledge about BuckleScript's <a href="https://bucklescript.github.io/docs/en/interop-overview.html">FFI</a>. Skip this if you haven't felt the itch to use variants for binding to JS functions yet</em>.</p>
-<p>Quite a few JS libraries use functions that can accept many types of arguments. In these cases, it's very tempting to model them as variants. For example, suppose there's a <code>myLibrary.draw</code> JS function that takes in either a <code>number</code> or a <code>string</code>. You might be tempted to bind it like so:</p>
-<pre><code class="hljs css reason">/* reserved <span class="hljs-keyword">for</span> internal usage */
+<h3><a class="anchor" aria-hidden="true" name="variantes-debe-tener-constructores"></a><a href="#variantes-debe-tener-constructores" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Variantes debe tener constructores</h3>
+<p>Si vienes de un lenguaje sin tipo, podrías estar tentado en intentar <code>type foo = int | string</code>. Esto no es posible en Reason; tendrías que dar a cada rama un constructor: <code>type foo = Int(int) | String(string)</code>. Aunque usualmente, necesitar esto podría ser un anti-patrón. La sección de Diseño de Decisiones abajo lo explica más.</p>
+<h3><a class="anchor" aria-hidden="true" name="interoperabilidad-con-javascript"></a><a href="#interoperabilidad-con-javascript" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Interoperabilidad con JavaScript</h3>
+<p><em>Esta sección asume que se posee conocimiento sobre <a href="https://bucklescript.github.io/docs/en/interop-overview.html">FFI</a> de BuckleScript. Salta esto si no has sentido la curiosidad de usar variantes para atar funciones de JS</em>.</p>
+<p>Bastantes librerías JS usa funciones que pueden aceptar muchos tipos de argumentos. En esos casos, es muy tentador modelarlos como variantes. Por ejemplo, suponga que hay una función JS <code>miLibreria.draw</code> que toma ya sea un <code>number</code> o un <code>string</code>. Estarías tentado a atarlos así:</p>
+<pre><code class="hljs css reason">/* reservado para uso interno*/
 [@bs.<span class="hljs-keyword">module</span> <span class="hljs-string">"myLibrary"</span>] <span class="hljs-keyword">external</span> draw : <span class="hljs-symbol">'a</span> =&gt; <span class="hljs-built_in">unit</span> = <span class="hljs-string">"draw"</span>;
 
 <span class="hljs-keyword">type</span> animal =
-  | <span class="hljs-type">MyFloat</span>(<span class="hljs-built_in">float</span>)
-  | <span class="hljs-type">MyString</span>(<span class="hljs-built_in">string</span>);
+  | <span class="hljs-type">MiFloat</span>(<span class="hljs-built_in">float</span>)
+  | <span class="hljs-type">MiString</span>(<span class="hljs-built_in">string</span>);
 
-<span class="hljs-keyword">let</span> betterDraw = (animal) =&gt;
+<span class="hljs-keyword">let</span> mejorDraw = (animal) =&gt;
   switch (animal) {
-  | <span class="hljs-type">MyFloat</span>(f) =&gt; draw(f)
-  | <span class="hljs-type">MyString</span>(s) =&gt; draw(s)
+  | <span class="hljs-type">MiFloat</span>(f) =&gt; draw(f)
+  | <span class="hljs-type">MiString</span>(s) =&gt; draw(s)
   };
 </code></pre>
-<p>You could definitely do that, but there are better ways! For example, simply two <code>external</code>s that both compile to the same JS call:</p>
-<pre><code class="hljs css reason">[@bs.<span class="hljs-keyword">module</span> <span class="hljs-string">"myLibrary"</span>] <span class="hljs-keyword">external</span> drawFloat : <span class="hljs-built_in">float</span> =&gt; <span class="hljs-built_in">unit</span> = <span class="hljs-string">"draw"</span>;
-[@bs.<span class="hljs-keyword">module</span> <span class="hljs-string">"myLibrary"</span>] <span class="hljs-keyword">external</span> drawString : <span class="hljs-built_in">string</span> =&gt; <span class="hljs-built_in">unit</span> = <span class="hljs-string">"draw"</span>;
+<p>Podrías definitivamente hacer eso, pero ¡hay mejores maneras! Por ejemplo, simplemente dos <code>external</code> que compilen el mismo llamado JS:</p>
+<pre><code class="hljs css reason">[@bs.<span class="hljs-keyword">module</span> <span class="hljs-string">"mLibreria"</span>] <span class="hljs-keyword">external</span> drawFloat : <span class="hljs-built_in">float</span> =&gt; <span class="hljs-built_in">unit</span> = <span class="hljs-string">"draw"</span>;
+[@bs.<span class="hljs-keyword">module</span> <span class="hljs-string">"miLibreria"</span>] <span class="hljs-keyword">external</span> drawString : <span class="hljs-built_in">string</span> =&gt; <span class="hljs-built_in">unit</span> = <span class="hljs-string">"draw"</span>;
 </code></pre>
-<p>BuckleScript also provides <a href="https://bucklescript.github.io/docs/en/function.html#binding-to-polymorphic-function">a few other ways</a> to do this.</p>
-<h3><a class="anchor" aria-hidden="true" name="variant-types-are-found-by-field-name"></a><a href="#variant-types-are-found-by-field-name" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Variant Types Are Found By Field Name</h3>
-<p>Please refer to this <a href="/docs/es-ES/record.html#record-types-are-found-by-field-name">record section</a>. Variants are the same: a function can't accept an arbitrary constructor shared by two different variants. Again, such feature exists, it's called a polymorphic variant. We'll talk about this in the future =).</p>
-<h2><a class="anchor" aria-hidden="true" name="design-decisions"></a><a href="#design-decisions" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Design Decisions</h2>
-<p>Variants, in their many forms (polymorphic variant, open variant, GADT, etc.), are likely <em>the</em> feature of a type system such as Reason's. The aforementioned <code>option</code> variant, for example, obliterates the need for nullable types, a major source of bugs in other languages. Philosophically speaking, a problem is composed of many possible branches/conditions. Mishandling these conditions is the majority of what we call bugs. <strong>A type system doesn't magically eliminate bugs; it points out the unhandled conditions and asks you to cover them</strong>*. The ability to model &quot;this or that&quot; correctly is crucial.</p>
-<p>For example, some folks wonder how the type system can safely eliminate badly formatted JSON data from propagating into their program. They don't, not by themselves! But if the parser returns the <code>option</code> type <code>None | Some(actualData)</code>, then you'd have to handle the <code>None</code> case explicitly in later call sites. That's all there is.</p>
-<p>Performance-wise, a variant can potentially tremendously speed up your program's logic. Here's a piece of JavaScript:</p>
+<p>BuckleScript también provee <a href="https://bucklescript.github.io/docs/en/function.html#binding-to-polymorphic-function"> algunas otras manera</a> de hacer esto.</p>
+<h3><a class="anchor" aria-hidden="true" name="tipos-variante-son-encontrados-por-nombre-de-campo"></a><a href="#tipos-variante-son-encontrados-por-nombre-de-campo" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Tipos Variante son encontrados por Nombre de Campo</h3>
+<p>Por favor, diríjase a esta <a href="/docs/es-ES/record.html#record-types-are-found-by-field-name">sección de records</a>. Variantes son lo mismo: una función que no puede aceptar un constructor arbitrario aceptado por dos diferentes variantes. Otra vez, tal característica existe, se llama variante polimorfo. Hablaremos de esto en el futuro =).</p>
+<h2><a class="anchor" aria-hidden="true" name="decisiones-de-diseno"></a><a href="#decisiones-de-diseno" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Decisiones de Diseño</h2>
+<p>Variantes, en sus muchas formas (variante polimorfa, variante abierta, GADT, etc), son probables que sean <em>la</em> característica de un sistema de tipo como el de Reason. La opción variante mencionada anteriormente, por ejemplo, elimina la necesidad de usar tipos nullable, una gran fuente de error en otros lenguajes. Filosoficamente hablando, un problema es compuesto de muchos posibles ramas/condiciones. Manejar de forma inadecuada esas condiciones es lo que la mayoría llamamos bugs, o errores. <strong>Un sistema tipo no elimina mágicamente los errores; te señala las condiciones sin manejar y te pide que las trates</strong>*. La habilidad de modelar &quot;esto o aquello&quot; correctamente es crucial.</p>
+<p>Por ejemplo, algunas personas se preguntan como sistemas tipo pueden eliminar de forma segura data JSON muy mal formateada de propagarse en sus programas. ¡No lo hacen, no por ellos mismos! Pero si el analizador sintáctico devuelve el tipo <code>option</code>, <code>None | Some(actualData)</code>, entonces podrías tener como manejar el caso <code>None</code> explícitamente en otros sitios de llamada. Eso es todo lo que hay.</p>
+<p>En cuestión de desempeño, un variante puede potencialmente aumentar tu lógica de programa. Aquí hay una pieza de JavaScript:</p>
 <pre><code class="hljs css js"><span class="hljs-keyword">let</span> data = <span class="hljs-string">'dog'</span>;
 <span class="hljs-keyword">if</span> (data === <span class="hljs-string">'dog'</span>) {
   ...
@@ -128,24 +128,24 @@
   ...
 }
 </code></pre>
-<p>There's a linear amount of branch checking here (<code>O(n)</code>). Compare this to using a Reason variant:</p>
-<pre><code class="hljs css reason"><span class="hljs-class"><span class="hljs-keyword">type</span> animal = <span class="hljs-type">Dog</span> | <span class="hljs-type">Cat</span> | <span class="hljs-type">Bird</span>;</span>
-<span class="hljs-title">let</span> <span class="hljs-class"><span class="hljs-keyword">data</span> = <span class="hljs-type">Dog</span>;</span>
-<span class="hljs-title">switch</span> (<span class="hljs-class"><span class="hljs-keyword">data</span>) {
-| <span class="hljs-type">Dog</span> =&gt; ...
-| <span class="hljs-type">Cat</span> =&gt; ...
-| <span class="hljs-type">Bird</span> =&gt; ...
-}</span>
+<p>Hay una cantidad lineal de ramas comprobándose aquí (<code>O(n)</code>). Compara esto al usado en un variante Reason:</p>
+<pre><code class="hljs css reason">tipo animal = Perro | <span class="hljs-type">Gato</span> | <span class="hljs-type">P</span>ájaro;
+<span class="hljs-keyword">let</span> data = Perro;
+switch (data) {
+| <span class="hljs-type">Perro</span> =&gt; ...
+| <span class="hljs-type">Gato</span> =&gt; ...
+| <span class="hljs-type">P</span>ájaro =&gt; ...
+}
 </code></pre>
-<p>The compiler sees the variant, then</p>
+<p>El compilador ve la variante, entonces</p>
 <ol>
-<li>conceptually turns them into <code>type animal = 0 | 1 | 2</code></li>
-<li>compiles <code>switch</code> to a constant-time format (<code>O(1)</code>).</li>
+<li>conceptualmente los convierte en <code>type animal = 0 | 1 | 2</code></li>
+<li>compila <code>switch</code> a un formato de constante (<code>O(1)</code>).</li>
 </ol>
-<p>You might wonder why typed functional languages are used so often for parsing; switching on a large tree efficiently and safely is pretty much the best-case scenario for variants.</p>
+<p>Te podrías preguntar por qué tipo de lenguajes funcionales son usados tan a menudo para análisis: cambiar a un gran árbol de forma eficiente y segura es el mejor escenario para variantes.</p>
 <!-- TODO: playground link -->
-<p>Mind blown yet? Variants have a deep connection to other fields of mathematics; <a href="https://codewords.recurse.com/issues/three/algebra-and-calculus-of-algebraic-data-types">See here</a> for an interesting exploration.</p>
-<p>* It's always nicer to design away the problem rather than resorting to a type system to cover the pitfalls; In reality, it's unrealistic to do so for every problem, or even just to understand every problem fully in order to design a solution. A type system allows you to safely make a big category of changes to codebases without needing to understand the whole thing upfront. This is great for guided exploration. In this regard, types also allows us not needing to overly design an API just to circumvent callers' simple pitfalls. They reduce the layers of abstractions needed to &quot;get things done&quot;, which in return reduces callers' cognitive burden.</p>
+<p>¿Sorprendido ya? Variantes tiene una conexión profunda con otros campos de matemática <a href="https://codewords.recurse.com/issues/three/algebra-and-calculus-of-algebraic-data-types">Véase aquí</a> para una exploración interesante.</p>
+<p>* Siempre es más agradable diseñar el problema que recurrir a un sistema tipo que cubra las trampas; En verdad, es poco realista hacerlo para cada problema, o inclusive para entender cada problema completamente en orden de diseñar una solución. Un sistema tipo te permite hacer con seguridad cambios de gran categoría a base de códigos sin necesidad de entender todo por adelantado. Esto es genial para exploraciones guiadas. En este sentido, tipos también nos permite no necesitar un sobre diseñar un API justo para eludir las trampas de los callers. Ellos reducen las capas de abstracciones necesarias para &quot;hacer las cosas&quot;, las cuales en retorno reduce la carga cognitiva de los callers.</p>
 </span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="record.html">← Registro</a><a class="docs-next button" href="list-and-array.html">Lista y Matriz →</a></div></div></div></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.js"></script><script>window.foo = new Pjax({
           areas: [
             // try to use the first query.
