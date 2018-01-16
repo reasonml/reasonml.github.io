@@ -74,12 +74,12 @@ agregarCoordenadas(~<span class="hljs-attr">x=5,</span> ~<span class="hljs-attr"
 
 drawCircle(~radius=<span class="hljs-number">10</span>, ~color=<span class="hljs-string">"red"</span>);
 </code></pre>
-<p>De hecho,<code>(~radius)</code>es solo una abreviatura (llamada<strong>juego de palabras</strong>) para<code>(~radio es radio)</code>.</p>
+<p>De hecho,<code>(~radius)</code>es solo una abreviatura (llamada** juego de palabras**) para<code>(~radio es radio)</code>.</p>
 <p>He aquí la sintaxis para la escritura de los argumentos:</p>
 <pre><code class="hljs css reason"><span class="hljs-keyword">let</span> drawCircle = (~radius <span class="hljs-keyword">as</span> r: <span class="hljs-built_in">int</span>, ~color <span class="hljs-keyword">as</span> c: <span class="hljs-built_in">string</span>) =&gt; ...;
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" name="currying"></a><a href="#currying" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Currying</h3>
-<p>Las funciones de la razón pueden ser automáticamente <strong>parcialmente</strong>llamado:</p>
+<p>Las funciones de la razón pueden ser automáticamente <strong>parcialmente</strong> llamado:</p>
 <pre><code class="hljs css reason"><span class="hljs-attribute">dejar agregar</span> = (x, y) =&gt; x + y;
 <span class="hljs-attribute">dejar agregarcinco</span> = agregar(5);
 <span class="hljs-attribute">deja once</span> =agregacinco(6);
@@ -105,17 +105,17 @@ drawCircle(~radius=<span class="hljs-number">10</span>, ~color=<span class="hljs
   }
 };
 </code></pre>
-<p>Cuando se da en esta sintaxis,<code>radios</code>es<strong>envuelto</strong>en la biblioteca estandar<code>opcion</code>tipo, por defecto a<code>nada</code>. Si se proporciona, se vera envuelto con un<code>poco</code>. Entonces,<code>radio</code>el tipo de valor es cualquiera<code>ninguno</code>o<code>algunos(int)</code>aqui.</p>
-<p><strong>nota</strong><code>ninguno | algunos(foo)</code> es una estructura de dato llamada variante, descrio<a href="/docs/es-ES/variant.html">antes</a>. Esta peculiar variante es de proveniencia de la biblioteca estándar. Es llamado<code>option</code>. Su definicion:<code>tipo opcional('a) = Ninguno | Algunos('a)</code>.</p>
-<p><strong>Nota</strong>la unidad<code>()</code>al final de<code>circuloDibujado</code>. Sin eso, desde<code>radio</code>y<code>color</code>ambos están marcados, y se pueden aplicar fuera de orden, no esta claro lo que significa lo siguiente:</p>
+<p>Cuando se da en esta sintaxis,<code>radios</code> es ** envuelto **en la biblioteca estandar <code>opcion</code>tipo, por defecto a <code>nada</code>. Si se proporciona, se vera envuelto con un <code>poco</code>. Entonces,<code>radio</code> el tipo de valor es cualquiera <code>ninguno</code> o <code>algunos(int)</code> aqui.</p>
+<p><strong>nota</strong><code>ninguno | algunos(foo)</code> es una estructura de dato llamada variante, descrita <a href="/docs/es-ES/variant.html">antes</a>. Esta peculiar variante es de proveniencia de la biblioteca estándar. Es llamado<code>option</code>. Su definicion:<code>tipo opcional('a) = Ninguno | Algunos('a)</code>.</p>
+<p><strong>Nota</strong> la unidad<code>()</code>al final de <code>drawCircle</code>. Sin eso, desde<code>radio</code> y <code>color</code> ambos están marcados, y se pueden aplicar fuera de orden, no esta claro lo que significa lo siguiente:</p>
 <pre><code class="hljs css reason"><span class="hljs-attribute">let whatIsThis</span> = drawCircle(~color);
 </code></pre>
-<p>Es<code>¿whatisthis?</code>una corriente<code>DrawCircle</code>función, esperando por la opcional<code>radio</code>para ser aplicada? ¿O se termina aplicando? Para entrar en esta confusión, agregue un argumento posicional (tambien conocido como no marcado) a<code>circuloDibujado</code>(convencionalmente<code>()</code>) y OCaml supondrá, como regla en general, que el argumento marcado opcional se omite cundo se proporciona el argumento posiciona.</p>
+<p>Es <code>¿whatisthis?</code> una corriente <code>DrawCircle</code> función, esperando por la opcional <code>radio</code> para ser aplicada? ¿O se termina aplicando? Para entrar en esta confusión, agregue un argumento posicional (tambien conocido como no marcado) a<code>circuloDibujado</code>(convencionalmente<code>()</code>) y OCaml supondrá, como regla en general, que el argumento marcado opcional se omite cundo se proporciona el argumento posiciona.</p>
 <pre><code class="hljs css reason"><span class="hljs-attribute">let curriedFunction</span> = drawCircle(~color);
 <span class="hljs-attribute">let actualResultWithoutProvidingRadius</span> = drawCircle(~color, ());
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" name="paso-explicito-opcional"></a><a href="#paso-explicito-opcional" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Paso explicito opcional</h3>
-<p>De vez en cuando, es posible que desee reenviar un valor a una función sin saber si el valor es<code>ninguno</code>o<code>algunos(a)</code>. Ingenuamente, harías:</p>
+<p>De vez en cuando, es posible que desee reenviar un valor a una función sin saber si el valor es <code>ninguno</code> o <code>algunos(a)</code>. Ingenuamente, harías:</p>
 <pre><code class="hljs css reason"><span class="hljs-keyword">let</span> result =
   switch (payloadRadius) {
   | <span class="hljs-type">None</span> =&gt; drawCircle(~color, ())
@@ -125,9 +125,9 @@ drawCircle(~radius=<span class="hljs-number">10</span>, ~color=<span class="hljs
 <p>Esto se puede poner fastidioso. Aquí les dejamos un atajo:</p>
 <pre><code class="hljs css reason"><span class="hljs-built_in">let</span> result = drawCircle(~<span class="hljs-built_in">color</span>, ~<span class="hljs-built_in">radius</span>=?payloadRadius, ());
 </code></pre>
-<p>Esto signfica que yo entiendo que<code>radio</code>es opcional, y que cuando le paso un valor necesita ser un<code>int</code>, pero no se si el valor que tengo que dar es<code>ninguno</code>o<code>algunos(val)</code>, asi que te pasare todo<code>opcion</code>envuelto&quot;.</p>
+<p>Esto signfica que yo entiendo que <code>radio</code> es opcional, y que cuando le paso un valor necesita ser un <code>int</code>, pero no se si el valor que tengo que dar es <code>ninguno</code> o <code>algunos(val )</code>, asi que te pasare todo <code>opcion</code> envuelto&quot;.</p>
 <h3><a class="anchor" aria-hidden="true" name="opcional-con-valor-predeterminado"></a><a href="#opcional-con-valor-predeterminado" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Opcional con valor predeterminado</h3>
-<p>Los argumentos marcados opcionales tambien se pueden proporcionar con un valor estipulado. En este caso, no estan envueltos en una<code>opcion</code>tipo.</p>
+<p>Los argumentos marcados opcionales tambien se pueden proporcionar con un valor estipulado. En este caso, no estan envueltos en una <code>opcion</code> tipo.</p>
 <pre><code class="hljs css reason"><span class="hljs-built_in">let</span> drawCircle = (~<span class="hljs-built_in">radius</span>=<span class="hljs-number">1</span>, ~<span class="hljs-built_in">color</span>, ()) =&gt; {
   setColor(<span class="hljs-built_in">color</span>);
   startAt(<span class="hljs-built_in">radius</span>, <span class="hljs-built_in">radius</span>)
@@ -247,8 +247,8 @@ let add = (~<span class="hljs-string">first:</span> option(<span class="hljs-key
 <span class="hljs-comment">/* azúcar para el anterior */</span>
 dejar agregar: (<span class="hljs-built_in">int</span>, <span class="hljs-built_in">int</span>)=&gt; <span class="hljs-built_in">int</span>;
 </code></pre>
-<p>Las reglas son iguales que la sección anterior, excepto que reemplaza<code>tipo foo = barra</code>a continuación<code>agregue: barra</code>.</p>
-<p><strong>No</strong>confunda esto con exportar un tipo en el archivo de la interfaz. <code>deja agregar: barra</code>anota un valor existente<code>barra</code>desde el archivo de implementación. <code>tipo foo = barra</code> exporta un tipo de archivo de la misma forma de implementación.</p>
+<p>Las reglas son iguales que la sección anterior, excepto que reemplaza <code>tipo foo = barra</code> a continuación <code>agregue: barra</code>.</p>
+<p>** No <strong>confunda esto con exportar un tipo en el archivo de la interfaz.</strong> <code>deja agregar: barra</code> anota un valor existente <code>barra</code> desde el archivo de implementación. <code>tipo foo = barra</code> exporta un tipo de archivo de la misma forma de implementación.</p></p>
 </span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="list-and-array.html">← Lista y Matriz</a><a class="docs-next button" href="if-else.html">If-Else →</a></div></div></div></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.js"></script><script>window.foo = new Pjax({
           areas: [
             // try to use the first query.
