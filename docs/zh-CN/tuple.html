@@ -30,22 +30,22 @@ let my3dCoordinates = (<span class="hljs-number">20.0</span>, <span class="hljs-
 <span class="hljs-keyword">type</span> coord3d = (<span class="hljs-built_in">float</span>, <span class="hljs-built_in">float</span>, <span class="hljs-built_in">float</span>);
 <span class="hljs-keyword">let</span> my3dCoordinates: coord3d = (<span class="hljs-number">20</span>.<span class="hljs-number">0</span>, <span class="hljs-number">30</span>.<span class="hljs-number">5</span>, <span class="hljs-number">100</span>.<span class="hljs-number">0</span>);
 </code></pre>
-<p><strong>Note</strong>: there's no tuple of size 1. You'd just use the value itself.</p>
+<p>** 注意 **：没有大小为1的元组。你只需要使用这个值本身。</p>
 <h2><a class="anchor" aria-hidden="true" name="usage"></a><a href="#usage" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Usage</h2>
-<p>The standard library provides <code>fst</code> and <code>snd</code> (<a href="/api/Pervasives.html">here</a>, under &quot;Pair operations&quot;), convenience functions that allow you to access the first and second element of a 2-tuple. Generally, you'd access n-tuple members through destructuring (described later in the sidebar):</p>
+<p>标准库提供 <code>fst</code> 和 <code>snd</code>函数 (<a href="/api/Pervasives.html"> 查看此处 </a>, 在 &quot;Pair operations&quot;下面)，使你能够访问2元组的第一个和第二个元素。 通常, 你可以通过解构方法访问元组的第n个成员 (稍后在边栏中介绍)：</p>
 <pre><code class="hljs css reason">let (<span class="hljs-literal">_</span>, y, <span class="hljs-literal">_</span>) = my3dCoordinates; <span class="hljs-comment">/* now you've retrieved y */</span>
 </code></pre>
-<p>The <code>_</code> means you're ignoring the indicated members of the tuple.</p>
-<p>Tuples aren't meant to be updated mutatively; you'd create new ones by destructuring the old ones.</p>
-<h2><a class="anchor" aria-hidden="true" name="tips-tricks"></a><a href="#tips-tricks" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Tips &amp; Tricks</h2>
-<p>You'd use tuples in handy situations that pass around multiple values without too much ceremony. For example, to return many values:</p>
+<p><code>_</code> 表示你忽略了元组的该项成员。</p>
+<p>元组不可以用更新来改变，你可以通过解构旧的元组来创造新的元组。</p>
+<h2><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>提示&amp; 技巧</h2>
+<p>你可以在使用元组方便的情况下, 通过元组传递你需要的多个值。例如，当函数返回值时多个时：</p>
 <pre><code class="hljs css reason"><span class="hljs-keyword">let</span> <span class="hljs-attr">getCenterCoordinates</span> = () =&gt; {
   <span class="hljs-keyword">let</span> <span class="hljs-attr">x</span> = doSomeOperationsHere();
   <span class="hljs-keyword">let</span> <span class="hljs-attr">y</span> = doSomeMoreOperationsHere();
   (x, y)
 };
 </code></pre>
-<p>Or to &quot;pattern-match&quot; (covered later) on the conjunction of possibilities:</p>
+<p>或与 &quot;模式匹配&quot; (后面章节会讲) 结合使用：</p>
 <pre><code class="hljs css reason"><span class="hljs-keyword">switch</span> (isWindowOpen, isDoorOpen) { <span class="hljs-comment">/* this is a 2-tuple */</span>
 | <span class="hljs-function">(<span class="hljs-params"><span class="hljs-literal">true</span>, <span class="hljs-literal">true</span></span>) =&gt;</span> ...
 | <span class="hljs-function">(<span class="hljs-params"><span class="hljs-literal">true</span>, <span class="hljs-literal">false</span></span>) =&gt;</span> ...
