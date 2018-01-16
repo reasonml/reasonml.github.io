@@ -6,7 +6,7 @@ Reason has built-in support for [JavaScript promises through BuckleScript](https
 
 - `Js.Promise.resolve: 'a => Js.Promise.t('a)`
 - `Js.Promise.then_: ('a => Js.Promise.t('b), Js.Promise.t('a)) => Js.Promise.t('b)`
-- `Js.Promise.catch: (Js.Promise.exn => Js.Promise.t('a), Js.Promise.t('a)) => Js.Promise.t('a)`
+- `Js.Promise.catch: (Js.Promise.error => Js.Promise.t('a), Js.Promise.t('a)) => Js.Promise.t('a)`
 
 ## Usage
 
