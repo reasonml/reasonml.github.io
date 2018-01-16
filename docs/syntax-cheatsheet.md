@@ -162,7 +162,7 @@ Both JavaScript and Reason support currying, but Reason currying is **built-in a
 | JavaScript                                      | Reason                                     |
 | ----------------------------------------------- | ------------------------------------------ |
 | `throw new SomeError(...)`                      | `raise(SomeError(...))`                    |
-| `try (a) {...} catch (Err) {...} finally {...}` | <code>try a { &#124; Err => ...}</code> \* |
+| `try {...} catch (Err) {...} finally {...}` | <code>try a { &#124; Err => ...}</code> \* |
 
 \* No finally.
 
