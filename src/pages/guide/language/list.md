@@ -8,12 +8,7 @@ Lists are homogeneous, immutable, and support fast `O(1)` append at the head of 
 ```reason
 let myList = [1, 2, 3];
 let anotherList = [0, ...myList]; /* myList didn't mutate */
-let listOfRecords = [
-    { 
-        title: "new record"
-    },
-    ...oldRecords
-]
+let listOfRecords = [{title: "two"}, ...oldRecords];
 ```
 
 Under the hood, a list is just a normal variant with a neat syntax. To illustrate this, here's how you would declare your own int list type, without the nice syntax:
