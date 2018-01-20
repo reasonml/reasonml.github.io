@@ -1,4 +1,4 @@
-<html><head><meta charset="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1"/><title>函式 · Reason</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta property="og:title" content="函式 · Reason"/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io/index.html"/><meta property="og:description" content="*Cheat sheet for the full function syntax at the end*"/><link rel="shortcut icon" href="/img/icon_50.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/arduino-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io/blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io/blog/feed.xml" title="Reason Blog RSS Feed"/><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/dummy.svg"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li><a href="/docs/zh-TW/quickstart-javascript.html" target="_self">文件</a></li><li><a href="/zh-TW/try.html" target="_self">試試</a></li><li><a href="/api/index.html" target="_self">API</a></li><li><a href="/docs/zh-TW/community.html" target="_self">社群</a></li><li><a href="/blog" target="_self">網誌</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg"/>繁體中文</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/ja">日本語</a></li><li><a href="/en">English</a></li><li><a href="/es-ES">Español</a></li><li><a href="/fr">Français</a></li><li><a href="/ko">한국어</a></li><li><a href="/pt-BR">Português (Brasil)</a></li><li><a href="/ru">Русский</a></li><li><a href="/uk">Українська</a></li><li><a href="/zh-CN">中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank">協助翻譯</a></li></ul></div></li><script>
+<html><head><meta charset="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1"/><title>函式 · Reason</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta property="og:title" content="函式 · Reason"/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io/index.html"/><meta property="og:description" content="*最底部有完整函式語法的快捷手冊*"/><link rel="shortcut icon" href="/img/icon_50.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/arduino-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io/blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io/blog/feed.xml" title="Reason Blog RSS Feed"/><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/dummy.svg"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li><a href="/docs/zh-TW/quickstart-javascript.html" target="_self">文件</a></li><li><a href="/zh-TW/try.html" target="_self">試試</a></li><li><a href="/api/index.html" target="_self">API</a></li><li><a href="/docs/zh-TW/community.html" target="_self">社群</a></li><li><a href="/blog" target="_self">網誌</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg"/>繁體中文</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/ja">日本語</a></li><li><a href="/en">English</a></li><li><a href="/es-ES">Español</a></li><li><a href="/fr">Français</a></li><li><a href="/ko">한국어</a></li><li><a href="/pt-BR">Português (Brasil)</a></li><li><a href="/ru">Русский</a></li><li><a href="/uk">Українська</a></li><li><a href="/zh-CN">中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank">協助翻譯</a></li></ul></div></li><script>
         const languagesMenuItem = document.getElementById("languages-menu");
         const languagesDropDown = document.getElementById("languages-dropdown");
         languagesMenuItem.addEventListener("click", function(){
@@ -14,55 +14,55 @@
           toggler.onclick = function() {
             nav.classList.toggle('docsSliderActive');
           };
-        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://crowdin.com/project/reason/zh-TW" target="_blank">Translate</a><h1>函式</h1></header><article><div><span><p><em>Cheat sheet for the full function syntax at the end</em></p>
-<p>Can you believe we haven't covered function until now?</p>
-<p>Functions are declared with an arrow and return the expression.</p>
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://crowdin.com/project/reason/zh-TW" target="_blank">Translate</a><h1>函式</h1></header><article><div><span><p><em>最底部有完整函式語法的快捷手冊</em></p>
+<p>你相信嗎？直到現在我們都還沒涵蓋到函式。</p>
+<p>函式宣告需要箭頭及傳回表達式。</p>
 <pre><code class="hljs css reason">let greet = <span class="hljs-function"><span class="hljs-params">(name)</span> =&gt;</span> <span class="hljs-string">"Hello "</span> ++ name;
 </code></pre>
-<p>This declares a function and assigns to it the name <code>greet</code>, which you can call like so:</p>
+<p>這個宣告一個函式，指派給 <code>greet</code>，呼叫看起來像是：</p>
 <pre><code class="hljs css reason"><span class="hljs-selector-tag">greet</span>(<span class="hljs-string">"world!"</span>); <span class="hljs-comment">/* "Hello world!" */</span>
 </code></pre>
-<p>Multi-arguments functions have arguments separated by comma:</p>
+<p>多個參數使用逗點分隔：</p>
 <pre><code class="hljs css reason">let <span class="hljs-keyword">add</span><span class="bash"> = (x, y, z) =&gt; x + y + z;
 </span><span class="hljs-keyword">add</span><span class="bash">(1, 2, 3); /* 6 */
 </span></code></pre>
-<p>For longer functions, you'd surround the body with a block:</p>
+<p>較長的函式，可以用區域來包住內容：</p>
 <pre><code class="hljs css reason"><span class="hljs-keyword">let</span> greetMore = <span class="hljs-function">(<span class="hljs-params">name</span>) =&gt;</span> {
   <span class="hljs-keyword">let</span> part1 = <span class="hljs-string">"Hello"</span>;
   part1 ++ <span class="hljs-string">" "</span> ++ name
 };
 </code></pre>
-<h2><a class="anchor" aria-hidden="true" name="no-argument"></a><a href="#no-argument" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>No Argument</h2>
-<p>A function always takes an argument; but sometimes, we'd use it for e.g. side-effects, and don't have anything to pass to it. In other languages, we'd conceptually pass &quot;no argument&quot;. In Reason, every function takes an argument; here we'd conventionally pass it the value <code>()</code>, called &quot;unit&quot;.</p>
-<pre><code class="hljs css reason">/* receive &amp; destructure the <span class="hljs-built_in">unit</span> argument */
-<span class="hljs-keyword">let</span> logSomething = <span class="hljs-literal">()</span> =&gt; {
+<h2><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>無參數</h2>
+<p>函式必須帶參數；但有時候會用在如副作用（side-effects），且完全不會用到傳進來的東西。 其他語言，概念上傳遞 &quot;無參數&quot;。 Reason，每個函式都要參數；這裡習慣上會傳入 <code>()</code> 值，稱為 &quot;unit&quot;。</p>
+<pre><code class="hljs css reason"><span class="hljs-comment">/* 接收 &amp; 解構 unit 參數 */</span>
+<span class="hljs-keyword">let</span> logSomething = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
   print_endline(<span class="hljs-string">"hello"</span>);
   print_endline(<span class="hljs-string">"world"</span>)
 };
 
-/* call the <span class="hljs-keyword">function</span> <span class="hljs-keyword">with</span> the <span class="hljs-keyword">value</span> <span class="hljs-keyword">of</span> <span class="hljs-keyword">type</span> <span class="hljs-built_in">unit</span> */
-logSomething<span class="hljs-literal">()</span>;
+<span class="hljs-comment">/* 呼叫函式並傳入 unit 型別的值 */</span>
+logSomething();
 </code></pre>
-<p><code>()</code> is a totally normal value, the single possible value in <code>unit</code>. Reason gave it a special syntax out of convenience.</p>
-<h2><a class="anchor" aria-hidden="true" name="labeled-arguments"></a><a href="#labeled-arguments" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Labeled Arguments</h2>
-<p>Multi-arguments functions, especially those whose arguments are of the same type, can be confusing to call.</p>
+<p><code>()</code> 是完全正常的值，<code>unit</code> 的唯一可能值。為了方便 Reason 給予一個特別的語法。</p>
+<h2><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>標籤的參數</h2>
+<p>多個參數的函式，特別是有相同型別的參數，呼叫的時候容易搞混。</p>
 <pre><code class="hljs css reason"><span class="hljs-keyword">let</span> addCoordinates = <span class="hljs-function">(<span class="hljs-params">x, y</span>) =&gt;</span> {
-  <span class="hljs-comment">/* use x and y here */</span>
+  <span class="hljs-comment">/* 這裡用到 x 跟 y */</span>
 };
 ...
-addCoordinates(<span class="hljs-number">5</span>, <span class="hljs-number">6</span>); <span class="hljs-comment">/* which is x, which is y? */</span>
+addCoordinates(<span class="hljs-number">5</span>, <span class="hljs-number">6</span>); <span class="hljs-comment">/* 哪個是 x，哪個是 y？ */</span>
 </code></pre>
-<p>In OCaml/Reason, you can attach labels to an argument:</p>
+<p>在 OCaml/Reason，可以給參數附屬標籤：</p>
 <pre><code class="hljs css reason">let <span class="hljs-keyword">addCoordinates </span>= (~x, ~y) =&gt; {
-  <span class="hljs-comment">/* use x and y here */</span>
+  <span class="hljs-comment">/* 這裡用到 x 跟 y */</span>
 }<span class="hljs-comment">;</span>
 ...
 <span class="hljs-keyword">addCoordinates(~x=5, </span>~y=<span class="hljs-number">6</span>)<span class="hljs-comment">;</span>
 </code></pre>
-<p>Since we have currying (more on that below), we can provide the arguments in <strong>any order</strong>:</p>
+<p>由於 currying （稍後會作說明），可以提供參數於<strong>任何</strong>順序：</p>
 <pre><code class="hljs css reason">addCoordinates(~<span class="hljs-attribute">y</span>=6, ~<span class="hljs-attribute">x</span>=5);
 </code></pre>
-<p>The <code>~x</code> part in declaration means the function accepts an argument labeled <code>x</code> and can refer to it in the function body by the same name. You can also refer to the arguments inside the function body by a different name for conciseness:</p>
+<p>宣告的 <code>~x</code> 部份表示函式接受參數帶有標籤 <code>x</code> 且函式內部可以用相同名稱取得。 為了簡潔，也可以用在函式內部使用不同的名稱：</p>
 <pre><code class="hljs css reason">let drawCircle = <span class="hljs-function"><span class="hljs-params">(~radius <span class="hljs-keyword">as</span> r, ~color <span class="hljs-keyword">as</span> c)</span> =&gt;</span> {
   setColor(c);
   startAt(r, r);
@@ -71,29 +71,29 @@ addCoordinates(<span class="hljs-number">5</span>, <span class="hljs-number">6</
 
 drawCircle(~radius=<span class="hljs-number">10</span>, ~color=<span class="hljs-string">"red"</span>);
 </code></pre>
-<p>As a matter of fact, <code>(~radius)</code> is just a shorthand (called <strong>punning</strong>) for <code>(~radius as radius)</code>.</p>
-<p>Here's the syntax for typing the arguments:</p>
+<p>事實上，<code>(~radius)</code> 只是 <code>(~radius as radius)</code> 的速寫法（稱之為 <strong>雙關（punning）</strong>）.</p>
+<p>以下為參數撰寫型別的語法：</p>
 <pre><code class="hljs css reason"><span class="hljs-keyword">let</span> drawCircle = (~radius <span class="hljs-keyword">as</span> r: <span class="hljs-built_in">int</span>, ~color <span class="hljs-keyword">as</span> c: <span class="hljs-built_in">string</span>) =&gt; ...;
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" name="currying"></a><a href="#currying" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Currying</h3>
-<p>Reason functions can automatically be <strong>partially</strong> called:</p>
+<p>Reason 函式自動變成<strong>部份地</strong>呼叫：</p>
 <pre><code class="hljs css reason"><span class="hljs-attribute">let add</span> = (x, y) =&gt; x + y;
 <span class="hljs-attribute">let addFive</span> = add(5);
 <span class="hljs-attribute">let eleven</span> = addFive(6);
 <span class="hljs-attribute">let twelve</span> = addFive(7);
 </code></pre>
-<p>Actually, the above <code>add</code> is nothing but syntactic sugar for this:</p>
+<p>實際上，上述 <code>add</code> 只是語法糖：</p>
 <pre><code class="hljs css reason">let add = (<span class="hljs-name">x</span>) =&gt; (<span class="hljs-name">y</span>) =&gt; x + y<span class="hljs-comment">;</span>
 </code></pre>
-<p>OCaml optimizes this to <a href="/try/?reason=DYUwLgBAhgJjEF4IAoAeBKRA+FBPTCOqEA1BLgNwBQVA9AFQTAD2zA1tJGABYgTMBXMAAchAQmhwAYgEsAbnxkBnaBAD6SmQDsA5qDUQAZgK0BjMDOZaIpqMGAT6tKqEiwYshYkkxkAVnRqF3AITWIkd08QZABGQKA">avoid the unnecessary function allocation</a> (2 functions here, naively speaking) whenever it can! This way, we get</p>
+<p>OCaml 會盡量做最佳化<a href="/try/?reason=DYUwLgBAhgJjEF4IAoAeBKRA+FBPTCOqEA1BLgNwBQVA9AFQTAD2zA1tJGABYgTMBXMAAchAQmhwAYgEsAbnxkBnaBAD6SmQDsA5qDUQAZgK0BjMDOZaIpqMGAT6tKqEiwYshYkkxkAVnRqF3AITWIkd08QZABGQKA">以避免不必要的函式分配</a>（這裡有 2 個函式，直覺上來說）！ 這樣，得到</p>
 <ul>
-<li>Nice syntax</li>
-<li>Currying for free (every function takes a single argument, actually!)</li>
-<li>No performance cost</li>
+<li>更好的語法</li>
+<li>自動 currying（事實上，每個函式只有一個參數！）</li>
+<li>沒有效能成本</li>
 </ul>
-<h2><a class="anchor" aria-hidden="true" name="optional-labeled-arguments"></a><a href="#optional-labeled-arguments" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Optional Labeled Arguments</h2>
-<p>Labeled function arguments can be made optional during declaration. You can then omit them when calling the function.</p>
-<pre><code class="hljs css reason"><span class="hljs-comment">/* radius can be omitted */</span>
+<h2><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>選項的標籤式參數</h2>
+<p>標籤式函式參數可以宣告為選項。呼叫函式時可以省略。</p>
+<pre><code class="hljs css reason"><span class="hljs-comment">/* radius 可以忽略 */</span>
 <span class="hljs-keyword">let</span> drawCircle = <span class="hljs-function">(<span class="hljs-params">~color, ~radius=?, (<span class="hljs-params"></span>)</span>) =&gt;</span> {
   setColor(color);
   <span class="hljs-keyword">switch</span> (radius) {
@@ -102,16 +102,16 @@ drawCircle(~radius=<span class="hljs-number">10</span>, ~color=<span class="hljs
   }
 };
 </code></pre>
-<p>When given in this syntax, <code>radius</code> is <strong>wrapped</strong> in the standard library's <code>option</code> type, defaulting to <code>None</code>. If provided, it'll be wrapped with a <code>Some</code>. So <code>radius</code>'s type value is either <code>None</code> or <code>Some(int)</code> here.</p>
-<p><strong>Note</strong>: <code>None | Some(foo)</code> is a data structure type called variant, described <a href="/docs/zh-TW/variant.html">earlier</a>. This particular variant type is provided by the standard library. It's called <code>option</code>. Its definition: <code>type option('a) = None | Some('a)</code>.</p>
-<p><strong>Note</strong> the unit <code>()</code> at the end of <code>drawCircle</code>. Without it, since <code>radius</code> and <code>color</code> are both labeled, can be curried, and can be applied out-of-order, it's unclear what the following means:</p>
+<p>當使用此語法，<code>radius</code> 是<strong>包裝成</strong>標準函式庫的 <code>option</code> 型別，預設值是 <code>None</code>。 如果有呼叫方有提供，則會包裝成 <code>Some</code>。 所以這裡 <code>radius</code> 型別值會是 <code>None</code> 或 <code>Some(int)</code>。</p>
+<p><strong>注意</strong>：<code>None | Some(foo)</code> 是一種稱為變異的資料結構，<a href="/docs/zh-TW/variant.html">稍早</a>有說明。 此特殊變異型別係由標準函式庫所提供。 稱之為 <code>option</code>。 定義：<code>type option('a) = None | Some('a)</code>。</p>
+<p><strong>注意</strong> <code>drawCircle</code> 最後面的 unit <code>()</code>。 若少了這個，由於 <code>radius</code> 和 <code>color</code> 都是標籤式，可以 curried，可以不照順序提供，下列情況變得意義不明：</p>
 <pre><code class="hljs css reason"><span class="hljs-attribute">let whatIsThis</span> = drawCircle(~color);
 </code></pre>
-<p>Is <code>whatIsThis</code> a curried <code>drawCircle</code> function, waiting for the optional <code>radius</code> to be applied? Or did it finish applying? To address this confusion, append a positional (aka non-labeled) argument to <code>drawCircle</code> (conventionally <code>()</code>), and OCaml will, as a rule of thumb, presume the optional labeled argument is omitted when the positional argument is provided.</p>
+<p><code>whatIsThis</code> 是要 curried <code>drawCircle</code> 函式，等待選項的 <code>radius</code> 參數？ 還是已經結束呼叫了？ 為了解決這問題，<code>drawCircle</code> 附加一個位置上（又稱非標籤式）參數（方便上使用 <code>()</code>），而 OCaml 將會，以經驗法則來看，當位置上的參數已經提供，便可假設省略了選項的參數。</p>
 <pre><code class="hljs css reason"><span class="hljs-attribute">let curriedFunction</span> = drawCircle(~color);
 <span class="hljs-attribute">let actualResultWithoutProvidingRadius</span> = drawCircle(~color, ());
 </code></pre>
-<h3><a class="anchor" aria-hidden="true" name="explicitly-passed-optional"></a><a href="#explicitly-passed-optional" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Explicitly Passed Optional</h3>
+<h3><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>明確地傳遞選項</h3>
 <p>Sometimes, you might want to forward a value to a function without knowing whether the value is <code>None</code> or <code>Some(a)</code>. Naively, you'd do:</p>
 <pre><code class="hljs css reason"><span class="hljs-keyword">let</span> result =
   switch (payloadRadius) {

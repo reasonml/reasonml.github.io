@@ -29,29 +29,29 @@
 <span class="hljs-comment">/* `mensaje` no es accesible aca! */</span>
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" name="bindings-son-inmutables"></a><a href="#bindings-son-inmutables" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Bindings son Inmutables</h2>
-<p>&quot;Inmmutable&quot; como en, &quot;no cambia&quot;. Una vez que un binding hace referencia a un valor, no puede hacer referencia a nada mas (al menos que contenga un valor mutable, explicado mas adelante). Sin embargo, se puede crear un nuevo binding del mismo nombre que <em>encierre</em> el binding previo; desde ese punto en adelante, el binding va a referir al nuevo valor asignado.</p>
+<p>&quot;Inmutable&quot; como en, &quot;no cambia&quot;. Una vez que un binding hace referencia a un valor, no puede hacer referencia a nada mas (al menos que explicitamente contenga un valor mutable, explicado mas adelante). Sin embargo, podrías crear un nuevo binding con el mismo nombre que <em>ensombrece (shadows)</em> el binding previo; desde ese punto en adelante, el binding se referirá al nuevo valor asignado.</p>
 <pre><code class="hljs css reason"><span class="hljs-keyword">let</span> <span class="hljs-attr">mensaje</span> = <span class="hljs-string">"hola"</span>;
 print_endline(mensaje); <span class="hljs-comment">/* Imprime "hola" */</span>
 <span class="hljs-keyword">let</span> <span class="hljs-attr">mensaje</span> = <span class="hljs-string">"chau"</span>;
 print_endline(mensaje); <span class="hljs-comment">/* Imprime "chau" */</span>
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" name="consejos-y-trucos"></a><a href="#consejos-y-trucos" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Consejos y Trucos</h2>
-<p>Ya que los bindings estan limitados mediante <code>{}</code>, podes crear un scope anonimos mediante:</p>
+<p>Ya que los bindings están limitados mediante <code>{}</code>, puedes crear un scope anónimo alrededor de ellos:</p>
 <pre><code class="hljs css reason"><span class="hljs-keyword">let</span> <span class="hljs-attr">mensaje</span> = {
   <span class="hljs-keyword">let</span> <span class="hljs-attr">parte1</span> = <span class="hljs-string">"hola"</span>;
   <span class="hljs-keyword">let</span> <span class="hljs-attr">parte2</span> = <span class="hljs-string">"mundo"</span>;
   parte1 ^ <span class="hljs-string">" "</span> ^ parte2
 };
-<span class="hljs-comment">/* `parte1` y `parte2` no son accesibles aca! */</span>
+<span class="hljs-comment">/* `parte1` y `parte2` ¡no son accesibles aquí! */</span>
 </code></pre>
-<p>Esto prevee el mal uso de los bindings despues de estas lineas.</p>
+<p>Esto previene el mal uso de los bindings después de estas lineas.</p>
 <h2><a class="anchor" aria-hidden="true" name="decisiones-de-diseno"></a><a href="#decisiones-de-diseno" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Decisiones de diseño</h2>
-<p>Reason funciona gracias a OCaml. Un let binding, en sintaxis de OCaml, funciona asi:</p>
+<p>Reason funciona gracias a OCaml. Un let binding, en sintaxis de OCaml, funciona así:</p>
 <pre><code class="hljs css ocaml"><span class="hljs-keyword">let</span> a = <span class="hljs-number">1</span> <span class="hljs-keyword">in</span>
 <span class="hljs-keyword">let</span> b = <span class="hljs-number">2</span> <span class="hljs-keyword">in</span>
 a + b
 </code></pre>
-<p>Esto puede ser leido conceptualmente en este formato:</p>
+<p>Esto puede ser leído conceptualmente en este formato:</p>
 <pre><code class="hljs css ocaml"><span class="hljs-keyword">let</span> a = <span class="hljs-number">1</span> <span class="hljs-keyword">in</span>
   <span class="hljs-keyword">let</span> b = <span class="hljs-number">2</span> <span class="hljs-keyword">in</span>
     a + b
@@ -67,7 +67,7 @@ a + <span class="hljs-keyword">b;
   <span class="hljs-comment">(b)</span> =&gt;
     a + b;
 </code></pre>
-<p>Aunque no son estrictamente lo mismo, afortunadamente podras observar que <code>let</code> es solo una expresion! En Reason, hemos transformado <code>in</code> en <code>;</code> para tener familiaridad visual; pero no dejes que eso oculte la elegancia de la expresion.</p>
+<p>Aunque no son estrictamente lo mismo, afortunadamente puedes ver que <code>let</code> es solo una expresión y ¡se asemeja a una función! En Reason, hemos transformado <code>in</code> en <code>;</code> para tener familiaridad visual; pero no dejes que eso oculte la elegancia subyacente de la expresiones.</p>
 </span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="overview.html">← Vista global</a><a class="docs-next button" href="type.html">¡Tipo! →</a></div></div></div></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.js"></script><script>window.foo = new Pjax({
           areas: [
             // try to use the first query.

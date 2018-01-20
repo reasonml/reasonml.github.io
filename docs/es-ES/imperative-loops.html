@@ -1,4 +1,4 @@
-<html><head><meta charset="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1"/><title>Lazos imperativos · Reason</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta property="og:title" content="Lazos imperativos · Reason"/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io/index.html"/><meta property="og:description" content="## For Loops"/><link rel="shortcut icon" href="/img/icon_50.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/arduino-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io/blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io/blog/feed.xml" title="Reason Blog RSS Feed"/><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/dummy.svg"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li><a href="/docs/es-ES/quickstart-javascript.html" target="_self">Documentación</a></li><li><a href="/es-ES/try.html" target="_self">Pruebalo</a></li><li><a href="/api/index.html" target="_self">API</a></li><li><a href="/docs/es-ES/community.html" target="_self">Comunidad</a></li><li><a href="/blog" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg"/>Español</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/ja">日本語</a></li><li><a href="/en">English</a></li><li><a href="/fr">Français</a></li><li><a href="/ko">한국어</a></li><li><a href="/pt-BR">Português (Brasil)</a></li><li><a href="/ru">Русский</a></li><li><a href="/uk">Українська</a></li><li><a href="/zh-CN">中文</a></li><li><a href="/zh-TW">繁體中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank">Ayuda a traducir</a></li></ul></div></li><script>
+<html><head><meta charset="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1"/><title>Lazos imperativos · Reason</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta property="og:title" content="Lazos imperativos · Reason"/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io/index.html"/><meta property="og:description" content="## Bucles For"/><link rel="shortcut icon" href="/img/icon_50.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/arduino-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io/blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io/blog/feed.xml" title="Reason Blog RSS Feed"/><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/dummy.svg"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li><a href="/docs/es-ES/quickstart-javascript.html" target="_self">Documentación</a></li><li><a href="/es-ES/try.html" target="_self">Pruebalo</a></li><li><a href="/api/index.html" target="_self">API</a></li><li><a href="/docs/es-ES/community.html" target="_self">Comunidad</a></li><li><a href="/blog" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg"/>Español</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/ja">日本語</a></li><li><a href="/en">English</a></li><li><a href="/fr">Français</a></li><li><a href="/ko">한국어</a></li><li><a href="/pt-BR">Português (Brasil)</a></li><li><a href="/ru">Русский</a></li><li><a href="/uk">Українська</a></li><li><a href="/zh-CN">中文</a></li><li><a href="/zh-TW">繁體中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank">Ayuda a traducir</a></li></ul></div></li><script>
         const languagesMenuItem = document.getElementById("languages-menu");
         const languagesDropDown = document.getElementById("languages-dropdown");
         languagesMenuItem.addEventListener("click", function(){
@@ -14,44 +14,44 @@
           toggler.onclick = function() {
             nav.classList.toggle('docsSliderActive');
           };
-        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://crowdin.com/project/reason/es-ES" target="_blank">Translate</a><h1>Lazos imperativos</h1></header><article><div><span><h2><a class="anchor" aria-hidden="true" name="for-loops"></a><a href="#for-loops" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>For Loops</h2>
-<p>For loops iterate from a starting value up to (and including) the ending value.</p>
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://crowdin.com/project/reason/es-ES" target="_blank">Translate</a><h1>Lazos imperativos</h1></header><article><div><span><h2><a class="anchor" aria-hidden="true" name="bucles-for"></a><a href="#bucles-for" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Bucles For</h2>
+<p>Los bucles <code>for</code> se repiten empezando por un valor inicial hasta (e incluyendo) alcanzar el valor final.</p>
 <pre><code class="hljs css reason"><span class="hljs-keyword">for</span> (myBinding <span class="hljs-keyword">in</span> startValue <span class="hljs-keyword">to</span> endValue) {
-  <span class="hljs-comment">/* use myBinding here */</span>
+  <span class="hljs-comment">/* usa myBinding aquí */</span>
 };
 </code></pre>
-<p>The parenthesis around <code>startValue</code> and <code>endValue</code> may be omitted if they are unnecessary.</p>
+<p>Los paréntesis alrededor de <code>startValue</code> y <code>endValue</code> pueden omitirse si no son necesarios.</p>
 <pre><code class="hljs css reason"><span class="hljs-keyword">let</span> xStart = <span class="hljs-number">1</span>;
 <span class="hljs-keyword">let</span> xEnd = <span class="hljs-number">3</span>;
 
-<span class="hljs-comment">/* prints: 1 2 3 */</span>
+<span class="hljs-comment">/* imprime: 1 2 3 */</span>
 <span class="hljs-keyword">for</span> (x <span class="hljs-keyword">in</span> xStart <span class="hljs-keyword">to</span> xEnd) {
   print_int(x);
   print_string(<span class="hljs-string">" "</span>)
 };
 </code></pre>
-<p>You can make the <code>for</code> loop count in the opposite direction by using <code>downto</code>.</p>
-<pre><code class="hljs css reason"><span class="hljs-keyword">for</span> (myBinding <span class="hljs-keyword">in</span> startValue <span class="hljs-keyword">downto</span> endValue) {
-  statements
+<p>Puedes hacer al bucle <code>for</code> contar en la dirección opuesta usando <code>downto</code>.</p>
+<pre><code class="hljs css reason"><span class="hljs-keyword">for</span> (myBinding <span class="hljs-keyword">in</span> startValue downto endValue) {
+  <span class="hljs-comment">/* declaraciones */</span>
 };
 </code></pre>
 <pre><code class="hljs css reason"><span class="hljs-keyword">let</span> <span class="hljs-attr">xStart</span> = <span class="hljs-number">3</span>;
 <span class="hljs-keyword">let</span> <span class="hljs-attr">xEnd</span> = <span class="hljs-number">1</span>;
 
-<span class="hljs-comment">/* prints: 3 2 1 */</span>
+<span class="hljs-comment">/* imprime: 3 2 1 */</span>
 for (x <span class="hljs-keyword">in</span> xStart downto xEnd) {
   print_int(x);
   print_string(<span class="hljs-string">" "</span>)
 };
 </code></pre>
-<h2><a class="anchor" aria-hidden="true" name="while-loops"></a><a href="#while-loops" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>While Loops</h2>
-<p>While loops execute a code block while some condition is true. The form of a <code>while</code> loop includes a single expression, the condition to test.</p>
+<h2><a class="anchor" aria-hidden="true" name="bucles-while"></a><a href="#bucles-while" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Bucles While</h2>
+<p>Los bucles <code>while</code> ejecutan un bloque de código mientras una condición es verdadera. La forma de un bucle <code>while</code> incluye una única expresión, la condición a comprobar.</p>
 <pre><code class="hljs css reason"><span class="hljs-keyword">while</span> (testCondition) {
   <span class="hljs-built_in">statements</span>
 };
 </code></pre>
-<h2><a class="anchor" aria-hidden="true" name="tips-tricks"></a><a href="#tips-tricks" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Tips &amp; Tricks</h2>
-<p>There's no loop-breaking <code>break</code> keyword (nor early <code>return</code> from functions, for that matter) in Reason. However, we can break out of a while loop easily through using a <a href="/docs/es-ES/mutation.html">mutable binding</a>.</p>
+<h2><a class="anchor" aria-hidden="true" name="consejos-y-trucos"></a><a href="#consejos-y-trucos" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Consejos y Trucos</h2>
+<p>En Reason no existe una palabra clave <code>break</code> (ni siquiera <code>return</code> para volver anticipadamente de funciones). Sin embargo, podemos interrumpir un bucle <code>while</code> fácilmente usando un <a href="/docs/es-ES/mutation.html"><em>binding</em> mutable</a>.</p>
 <pre><code class="hljs css reason"><span class="hljs-built_in">Random</span>.self_init()<span class="hljs-comment">;</span>
 
 let <span class="hljs-built_in">break</span> = ref(<span class="hljs-literal">false</span>)<span class="hljs-comment">;</span>
@@ -60,11 +60,11 @@ let <span class="hljs-built_in">break</span> = ref(<span class="hljs-literal">fa
   <span class="hljs-keyword">if</span> (<span class="hljs-built_in">Random</span>.<span class="hljs-built_in">int</span>(<span class="hljs-number">10</span>) === <span class="hljs-number">3</span>) {
     <span class="hljs-built_in">break</span> := <span class="hljs-literal">true</span>
   } <span class="hljs-keyword">else</span> {
-    print_endline(<span class="hljs-string">"hello"</span>)
+    print_endline(<span class="hljs-string">"hola"</span>)
   }
 }<span class="hljs-comment">;</span>
 </code></pre>
-<p>We don't have a preference on whether you should use a loop over <code>map</code>/<code>filter</code>/<code>reduce</code>. Some algorithms are better expressed with the former, and some with the latter.</p>
+<p>No tenemos ninguna preferencia sobre si debes utilizar un bucle en vez <code>map</code>/<code>filter</code>/<code>reduce</code>. Algunos algoritmos se expresan mejor con bucles y algunos de la otra manera.</p>
 </span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="mutation.html">← Mutación</a><a class="docs-next button" href="jsx.html">JSX →</a></div></div></div></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.js"></script><script>window.foo = new Pjax({
           areas: [
             // try to use the first query.
