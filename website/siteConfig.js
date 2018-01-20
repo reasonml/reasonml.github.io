@@ -65,6 +65,11 @@ const users = [
     caption: "Rung",
     image: "img/logos/rung.svg",
     infoLink: "https://rung.com.br/"
+  },
+  {
+    caption: "Astrocoders",
+    image: "img/logos/astrocoders.png",
+    infoLink: "https://astrocoders.com",
   }
 ];
 
