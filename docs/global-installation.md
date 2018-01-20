@@ -43,7 +43,7 @@ Finally, if things still don't work, please file an issue at https://github.com/
 - Make sure you restart your editor. Some of them might not pick up your new shell environment (which now includes the newly installed binaries) without one.
 - Try the following:
   ```
-  which ocamlmerlin refmt ocamlmerlin-reason
+  readlink `which ocamlmerlin refmt ocamlmerlin-reason`
   ```
   It should spit out three paths that contain the word `reason-cli` if the `reason-cli` installation succeeded.
 - Check the Merlin version:

@@ -21,7 +21,6 @@ Reason is just OCaml under the hood; We don't yet cover every concept on this do
 - [Documentation](//reasonml.github.io/reason-react/)
 - [Interactive ReasonReact Tutorial](https://jaredforsyth.com/2017/07/05/a-reason-react-tutorial/): features runnable code and type hint on hover!
 - [A First Reason React app for Javascript developers](https://jamesfriend.com.au/a-first-reason-react-app-for-js-developers)
-- [Routing in Reason React](https://jamesfriend.com.au/routing-in-reason-react)
 
 ## Videos
 
@@ -40,6 +39,7 @@ Reason is just OCaml under the hood; We don't yet cover every concept on this do
 
 ## General Functional Programming & Type System
 
+- [Inference engines: 5 examples with TypeScript, Flow and Reason](https://medium.com/@javierwchavarri/inference-engines-5-examples-with-typescript-flow-and-reason-edef2f4cf2d3)
 - [C# and F# approaches to illegal states](http://enterprisecraftsmanship.com/2015/09/28/c-and-f-approaches-to-illegal-states/): F# is a cousin of Reason. Great article on F#'s equivalent of variants
 - [The algebra (and calculus!) of algebraic data types](https://codewords.recurse.com/issues/three/algebra-and-calculus-of-algebraic-data-types)
 
