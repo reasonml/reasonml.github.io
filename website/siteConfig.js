@@ -68,7 +68,7 @@ const users = [
   },
   {
     caption: "Astrocoders",
-    image: "img/logos/astrocoders.png",
+    image: "img/logos/astrocoders.svg",
     infoLink: "https://astrocoders.com",
   }
 ];
