@@ -23,90 +23,90 @@
   <span class="hljs-string">| GoodResult(string)</span>
   <span class="hljs-string">| NoResult;</span>
 </code></pre>
-<p>While using the <code>switch</code> expression on it, you can &quot;destructure&quot; it:</p>
-<pre><code class="hljs css reason"><span class="hljs-keyword">let</span> data = GoodResult(<span class="hljs-string">"Product shipped!"</span>);
+<p>當使用 <code>switch</code> 表達式，可以&quot;解構&quot;：</p>
+<pre><code class="hljs css reason"><span class="hljs-keyword">let</span> data = GoodResult(<span class="hljs-string">"產品送出！"</span>);
 
 <span class="hljs-keyword">let</span> message =
   switch (data) {
-  | <span class="hljs-type">GoodResult</span>(theMessage) =&gt; <span class="hljs-string">"Success! "</span> ++ theMessage
-  | <span class="hljs-type">BadResult</span>(errorCode) =&gt; <span class="hljs-string">"Something's wrong. The error code is: "</span> ++ string_of_int(errorCode)
+  | <span class="hljs-type">GoodResult</span>(theMessage) =&gt; <span class="hljs-string">"成功！ "</span> ++ theMessage
+  | <span class="hljs-type">BadResult</span>(errorCode) =&gt; <span class="hljs-string">"發生錯誤。 錯誤代碼："</span> ++ string_of_int(errorCode)
   };
 </code></pre>
-<p>Notice how we've destructured <code>data</code> while handling each different case. The above <code>switch</code> will give you a compiler warning:</p>
+<p>注意當處理不同情況時，對 <code>data</code> 的解構。上述 <code>switch</code> 會得到編譯器警告：</p>
 <pre><code class="hljs">Warning 8: this pattern-matching is not exhaustive.
 Here is an example of a value that is not matched:
 NoResult
 </code></pre>
-<p>Isn't that great? While matching on the shape of your data, the type system warned of an unhandled case. This <strong>conditional</strong> aspect is what makes it pattern matching rather than plain destructuring. Most data structures with an &quot;<strong>if this then that</strong>&quot; aspect work with it:</p>
+<p>很棒吧？ 當匹配資料外型時，型別系統會警告尚未處理的情況。 這種<strong>條件式</strong>的局面會進行樣式匹配而不是一般的解構。 大多數資料結構都帶有&quot;<strong>如果是則..</strong>&quot;的局面：</p>
 <pre><code class="hljs css reason">switch (myList) {
-| <span class="hljs-type">[] =&gt; print_endline</span>(<span class="hljs-string">"Empty list"</span>)
-| <span class="hljs-type">[a</span>, ...theRest] =&gt; print_endline(<span class="hljs-string">"list with the head value "</span> ++ a)
+| <span class="hljs-type">[] =&gt; print_endline</span>(<span class="hljs-string">"空的 list"</span>)
+| <span class="hljs-type">[a</span>, ...theRest] =&gt; print_endline(<span class="hljs-string">"list 的開頭值 "</span> ++ a)
 };
 
 switch (myArray) {
-| <span class="hljs-type">[|1</span>, <span class="hljs-number">2</span>|<span class="hljs-type">] =&gt; print_endline</span>(<span class="hljs-string">"This is an array with item 1 and 2"</span>)
-| <span class="hljs-type">[||] =&gt; print_endline</span>(<span class="hljs-string">"This array has no element"</span>)
-| <span class="hljs-type">_</span> =&gt; print_endline(<span class="hljs-string">"This is an array"</span>)
+| <span class="hljs-type">[|1</span>, <span class="hljs-number">2</span>|<span class="hljs-type">] =&gt; print_endline</span>(<span class="hljs-string">"此陣列有項目 1 和 2"</span>)
+| <span class="hljs-type">[||] =&gt; print_endline</span>(<span class="hljs-string">"此陣列沒有任何元素"</span>)
+| <span class="hljs-type">_</span> =&gt; print_endline(<span class="hljs-string">"這是個陣列"</span>)
 };
 </code></pre>
-<p>The <code>_</code> case is a special fall-through case that allows all unmatched conditions to go to that branch.</p>
-<p>You can even switch on string, int and others. You can even have many patterns going to the same result!</p>
+<p><code>_</code> 是個特殊失敗情況，允許所有條件都未匹配時進入此分支。</p>
+<p>你甚至可以 switch 字串、int 和其他。更甚至有許多樣式得到相同結果！</p>
 <pre><code class="hljs css reason"><span class="hljs-keyword">let</span> reply =
   <span class="hljs-keyword">switch</span> (message) {
-  | <span class="hljs-string">"Reason's pretty cool"</span> =&gt; <span class="hljs-string">"Yep"</span>
-  | <span class="hljs-string">"good night"</span> =&gt; <span class="hljs-string">"See ya!"</span>
-  | <span class="hljs-string">"hello"</span> | <span class="hljs-string">"hi"</span> | <span class="hljs-string">"heya"</span> | <span class="hljs-string">"hey"</span> =&gt; <span class="hljs-string">"hello to you too!"</span>
-  | _ =&gt; <span class="hljs-string">"Nice to meet you!"</span>
+  | <span class="hljs-string">"Reason 蠻酷的"</span> =&gt; <span class="hljs-string">"是啊"</span>
+  | <span class="hljs-string">"晚安"</span> =&gt; <span class="hljs-string">"再會！"</span>
+  | <span class="hljs-string">"哈嘍"</span> | <span class="hljs-string">"嗨"</span> | <span class="hljs-string">"嘿呀"</span> | <span class="hljs-string">"嘿"</span> =&gt; <span class="hljs-string">"你好啊！"</span>
+  | _ =&gt; <span class="hljs-string">"很高興認識你！"</span>
   };
 </code></pre>
-<p>Combined with other data structures, pattern matching can produce extremely concise, compiler-verified, performant code:</p>
+<p>與其他資料結構結合，樣式匹配可以產出非常簡潔、編譯器驗證、高效率的程式碼：</p>
 <pre><code class="hljs css reason"><span class="hljs-keyword">let</span> message =
   switch (data) {
-  | <span class="hljs-type">GoodResult</span>(theMessage) =&gt; <span class="hljs-string">"Success! "</span> ++ theMessage
-  | <span class="hljs-type">BadResult</span>(<span class="hljs-number">0</span> | <span class="hljs-type">1</span> | <span class="hljs-type">5</span>) =&gt; <span class="hljs-string">"Something's wrong. It's a server side problem."</span>
-  | <span class="hljs-type">BadResult</span>(errorCode) =&gt; <span class="hljs-string">"Unknown error occurred. Code: "</span> ++ string_of_int(errorCode)
-  | <span class="hljs-type">NoResult</span> =&gt; <span class="hljs-string">"Things look fine"</span>
+  | <span class="hljs-type">GoodResult</span>(theMessage) =&gt; <span class="hljs-string">"成功！ "</span> ++ theMessage
+  | <span class="hljs-type">BadResult</span>(<span class="hljs-number">0</span> | <span class="hljs-type">1</span> | <span class="hljs-type">5</span>) =&gt; <span class="hljs-string">"發錯錯誤。 It's a server side problem."</span>
+  | <span class="hljs-type">BadResult</span>(errorCode) =&gt; <span class="hljs-string">"發生未知錯誤。 錯誤代碼："</span> ++ string_of_int(errorCode)
+  | <span class="hljs-type">NoResult</span> =&gt; <span class="hljs-string">"看起來沒問題"</span>
   };
 </code></pre>
-<p><strong>Note</strong>: you can only pass literals (i.e. concrete values) as a pattern, not let-binding names or other things. The following doesn't work as expected:</p>
-<pre><code class="hljs css reason"><span class="hljs-keyword">let</span> myMessage = <span class="hljs-string">"Hello"</span>;
+<p><strong>注意</strong>：你只能傳遞字面上（如，具體的值）當作樣式，不能是 let-繫結的名字或其他。下列並不會如預期運作：</p>
+<pre><code class="hljs css reason"><span class="hljs-keyword">let</span> myMessage = <span class="hljs-string">"哈嘍"</span>;
 <span class="hljs-keyword">switch</span> (greeting) {
-| <span class="hljs-function"><span class="hljs-params">myMessage</span> =&gt;</span> print_endline(<span class="hljs-string">"Hi to you"</span>)
+| <span class="hljs-function"><span class="hljs-params">myMessage</span> =&gt;</span> print_endline(<span class="hljs-string">"嗨你好"</span>)
 };
 </code></pre>
-<p>Instead, it'd assume you're matching on any string, and binding that to the name <code>myMessage</code> in that <code>switch</code> case, which is not what you wanted.</p>
-<h3><a class="anchor" aria-hidden="true" name="when-clauses"></a><a href="#when-clauses" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>When clauses</h3>
-<p>When you really need to use arbitrary logic with an otherwise clean pattern match, you can slip in some <code>when</code> clauses, which are basically <code>if</code> sugar:</p>
+<p>反而，這會假設匹配任意字串，並將結果繫結到 <code>switch</code> 內的 <code>myMessage</code> 這個名稱，不是你所要的結果。</p>
+<h3><a class="anchor" aria-hidden="true" name="when"></a><a href="#when" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>When 條件</h3>
+<p>如果真的需要任意邏輯，具有乾淨的樣式匹配，可以使用 <code>when</code> 條件，基本上是 <code>if</code> 語法糖：</p>
 <pre><code class="hljs css reason"><span class="hljs-keyword">let</span> message =
   switch (data) {
   | <span class="hljs-type">GoodResult</span>(theMessage) =&gt; ...
   | <span class="hljs-type">BadResult</span>(errorCode) when isServerError(errorCode) =&gt; ...
-  | <span class="hljs-type">BadResult</span>(errorCode) =&gt; ... /* otherwise */
+  | <span class="hljs-type">BadResult</span>(errorCode) =&gt; ... /* 否則 */
   | <span class="hljs-type">NoResult</span> =&gt; ...
   };
 </code></pre>
-<h3><a class="anchor" aria-hidden="true" name="match-on-exceptions"></a><a href="#match-on-exceptions" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Match on Exceptions</h3>
-<p>If the function throws an exceptions (covered later), you can also match on <em>that</em>, in addition to the function's normally returned values.</p>
+<h3><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>匹配例外</h3>
+<p>如果函式會丟出例外（稍後說明），除了函式一般傳回的結果值，也可以匹配<em>例外</em>。</p>
 <pre><code class="hljs css reason"><span class="hljs-keyword">switch</span> (<span class="hljs-keyword">List</span>.find((i) =&gt; i === theItem, myItems)) {
 | item =&gt; print_endline(item)
-| <span class="hljs-keyword">exception</span> Not_found =&gt; print_endline(<span class="hljs-string">"No such item found!"</span>)
+| <span class="hljs-keyword">exception</span> Not_found =&gt; print_endline(<span class="hljs-string">"找不到該項目！"</span>)
 };
 </code></pre>
-<h3><a class="anchor" aria-hidden="true" name="nested-patterns"></a><a href="#nested-patterns" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Nested Patterns</h3>
-<p>Nested <code>|</code> work as intended:</p>
+<h3><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>巢狀樣式</h3>
+<p>巢狀 <code>|</code> 如預期運作：</p>
 <pre><code class="hljs css reason"><span class="hljs-keyword">switch</span> (student) {
 | {<span class="hljs-string">name:</span> <span class="hljs-string">"Jane"</span> | <span class="hljs-string">"Joe"</span>} =&gt; ...
 | {<span class="hljs-string">name:</span> <span class="hljs-string">"Bob"</span>, <span class="hljs-string">Job:</span> Progammer({<span class="hljs-string">fullTime:</span> Yes | Maybe})} =&gt; ...
 };
 </code></pre>
-<h3><a class="anchor" aria-hidden="true" name="patterns-everywhere"></a><a href="#patterns-everywhere" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Patterns Everywhere</h3>
-<p>You can put a pattern anywhere you'd put a normal &quot;variable declaration&quot;:</p>
+<h3><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>樣式無所不在</h3>
+<p>任何一般&quot;變數宣告&quot;的地方都可以用樣式：</p>
 <pre><code class="hljs css reason"><span class="hljs-keyword">let</span> (<span class="hljs-keyword">Left</span> v | <span class="hljs-type">Right</span> v) = i;
 </code></pre>
-<h2><a class="anchor" aria-hidden="true" name="tips-tricks"></a><a href="#tips-tricks" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Tips &amp; Tricks</h2>
-<p><strong>Flatten your pattern-match whenever you can</strong>. This is a real bug remover. Example below.</p>
-<p>Do not abuse the fall-through <code>_</code> case too much. This prevents the compiler from telling you that you've forgotten to cover a case (exhaustiveness check), which would be especially helpful after a refactoring where you add a new case to a variant. Try only using <code>_</code> against infinite possibilities, e.g. string, int, etc.</p>
-<p>Here's a series of examples, from worst to best:</p>
+<h2><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>提示 &amp; 技巧</h2>
+<p><strong>盡可能的讓樣式匹配扁平</strong>. 這是個真實的臭蟲去除劑。下列範例：</p>
+<p>不要經常濫用特殊失敗情況 <code>_</code>。 這讓編譯器無法提醒你忘記處理某些情況（徹底檢查），特別在重構之後，加入了新的變異時，特別有幫助。 試著盡量使用 <code>_</code> 於無限可能時，例如字串、int 等。</p>
+<p>下列幾個範例，從糟糕到最佳：</p>
 <pre><code class="hljs css reason"><span class="hljs-keyword">let</span> <span class="hljs-attr">optionBoolToJsBoolean</span> = (opt) =&gt;
   <span class="hljs-keyword">if</span> (<span class="hljs-attr">opt</span> == None) {
     Js.false_
@@ -118,14 +118,14 @@ switch (myArray) {
     }
   };
 </code></pre>
-<p>Now that's just silly =). Let's turn it into pattern-matching:</p>
+<p>現在，只是缺乏思考 =)。試著轉成樣式匹配：</p>
 <pre><code class="hljs css reason"><span class="hljs-keyword">let</span> optionBoolToJsBoolean = (opt) =&gt;
   switch (opt) {
   | <span class="hljs-type">None</span> =&gt; Js.false_
   | <span class="hljs-type">Some</span>(a) =&gt; a ? Js.true_ : Js.false_
   };
 </code></pre>
-<p>Slightly better, but still nested. Pattern-matching allows you to do this:</p>
+<p>好一些，但仍然是巢狀。樣式匹配可以做到：</p>
 <pre><code class="hljs css reason"><span class="hljs-keyword">let</span> optionBoolToJsBoolean = (opt) =&gt;
   switch (opt) {
   | <span class="hljs-type">None</span> =&gt; Js.false_
@@ -133,14 +133,14 @@ switch (myArray) {
   | <span class="hljs-type">Some</span>(false) =&gt; Js.false_
   };
 </code></pre>
-<p>Much more linear-looking! Now, you might be tempted to do this:</p>
+<p>看起來更加線性！現在，可能會試著：</p>
 <pre><code class="hljs css reason"><span class="hljs-keyword">let</span> optionBoolToJsBoolean = <span class="hljs-function">(<span class="hljs-params">opt</span>) =&gt;</span>
   <span class="hljs-keyword">switch</span> (opt) {
   | Some(<span class="hljs-literal">true</span>) =&gt; Js.true_
   | <span class="hljs-function"><span class="hljs-params">_</span> =&gt;</span> Js.false_
   };
 </code></pre>
-<p>Which is much more concise, but kills the exhaustiveness check mentioned above. This is the best:</p>
+<p>更加簡潔，但是抹煞了上述的徹底檢查。這個最好：</p>
 <pre><code class="hljs css reason"><span class="hljs-keyword">let</span> optionBoolToJsBoolean = <span class="hljs-function">(<span class="hljs-params">opt</span>) =&gt;</span>
   <span class="hljs-keyword">switch</span> (opt) {
   | Some(<span class="hljs-literal">true</span>) =&gt; Js.true_
@@ -148,9 +148,9 @@ switch (myArray) {
   | <span class="hljs-function"><span class="hljs-params">None</span> =&gt;</span> Js.false_
   };
 </code></pre>
-<p>Pretty darn hard to make a mistake in this code at this point! Whenever you'd like to use an if-else with many branches, prefer pattern matching instead. It's more concise and <a href="/docs/zh-TW/variant.html#design-decisions">performant</a> too.</p>
-<p>See another example, with switch + tuple <a href="/docs/zh-TW/tuple.html#tips-tricks">here</a>.</p>
-<h2><a class="anchor" aria-hidden="true" name="design-decisions"></a><a href="#design-decisions" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Design Decisions</h2>
+<p>現在這份程式碼幾乎很難犯錯！ 當有許多 if-else 分支時，偏好使用樣式匹配。 這個更加簡潔且<a href="/docs/zh-TW/variant.html#design-decisions">高效</a>。</p>
+<p>請見<a href="/docs/zh-TW/tuple.html#tips-tricks">其他</a>範例，使用 switch + tuple。</p>
+<h2><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>設計決策</h2>
 <p>The notorious <a href="https://en.wikipedia.org/wiki/Fizz_buzz#Programming_interviews">fizzbuzz problem</a> strangely trips up some people, partially due its nature of paralyzing the programmer who hopes to simplify/unify the few condition branches in search of elegance where there's none. Hopefully you can see that usually, pattern-matching's visual conciseness <a href="/try.html?reason=PQKgBAQghgzgpgEzAewHZgBYBcsAcYBcwwATsvDlAMbIJwB0yJA5sAO4CWA1h8AGIcAXoIgBXYQGIA8gGEoAWwA2YEMABQiuFjAAzIYIBG4wWAC8YABQcAlGYB8asGBicsVDJY5h5tMAGYAGjAvHyQAVlsAb0cwAB9LAAYghNtTOzAAIgFhMWEMmPiLJLAAfVT0rP18p0KS5PLM3MFquNL7ZywSDlRmEuQdEu6sK2sYgF8AbjU1HSZPYPQARjAsZDBFhJSwaKcAKRh6RWRmCz1hI2ER0cmgA">allows us to overcome decision paralysis</a>, while keeping all the benefits (and more, as you've seen) of a bunch of brute-forced <code>if-else</code>s. There's really nothing wrong with explicitly listing out all the possibilities; Pattern matching corresponds to <strong>case analysis</strong> in math, a valid problem-solving technique that proves to be extremely convenient.</p>
 <p>Using a Reason <code>switch</code> for the first time might make you feel like you've been missing out all these years. Careful, for it might ruin other languages for you =).</p>
 <p>If you've tried to refactor a big, nested if-else logic, you might realize it's very hard to get the logic right. On the other hand, pattern matching + tuple conceptually maps to a 2D table, where each cell can be independently filled. This ensures that whenever you need to add a case in the <code>switch</code>, you can target that and only that table cell, without messing other cells up.</p>
