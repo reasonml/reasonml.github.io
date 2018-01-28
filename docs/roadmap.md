@@ -9,9 +9,7 @@ Here's the place to keep up with what's happening for the Reason team! This list
 
 ### Near future
 
-- Validating another secret ReasonReact feature, then release it
-- Syntax change: JavaScript-style function calls [pull request](https://github.com/facebook/reason/pull/1299)
-- Testing data structures [immutable.re](https://github.com/facebookincubator/immutable-re)
+- Testing new data structures
 - Native compilation in bucklescript's `bsb` (see [this fork](https://github.com/bsansouci/bsb-native))
 
 ### Future
