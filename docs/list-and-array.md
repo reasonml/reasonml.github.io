@@ -45,7 +45,7 @@ Updating an arbitrary item in the middle of a list is discouraged, since its per
 let message =
   switch (myList) {
   | [] => "This list is empty"
-  | [a, ...rest] => "The head of the list is the string " ++ a
+  | [a, ...rest] => "The head of the list is the string " ++ string_of_int(a)
   };
 ```
 
