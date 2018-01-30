@@ -44,6 +44,14 @@ Reason is just OCaml under the hood; We don't yet cover every concept on this do
 - [C# and F# approaches to illegal states](http://enterprisecraftsmanship.com/2015/09/28/c-and-f-approaches-to-illegal-states/): F# is a cousin of Reason. Great article on F#'s equivalent of variants
 - [The algebra (and calculus!) of algebraic data types](https://codewords.recurse.com/issues/three/algebra-and-calculus-of-algebraic-data-types)
 
+## Coding Philosophy
+
+A few articles we find interesting, or agree with. Not to be taken as literal truth.
+
+- [Write dumb code](https://matthewrocklin.com/blog//work/2018/01/27/write-dumb-code)
+- [Not Explicit](https://boats.gitlab.io/blog/post/2017-12-27-things-explicit-is-not/)
+- [Always start with simple solution](http://buklijas.info/blog/2018/01/01/always-start-with-simple-solution/)
+
 ## Pro Links
 
 The more dated they look, the richer the content =P
