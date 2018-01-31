@@ -138,7 +138,7 @@ OCaml | Reason
 `let tup = ((1: int), (2:int))` | `let tup = (1: int, 2:int);`
 `fun ((a: int), (b: int)) -> a ` | `((a: int, b: int)) => a;`
 
-In Reason, record values resemble JavaScript, using `:` instead of `=`. Because Reason tuples always require wrapping parens, records may contain lambdas as values without needing extra parens.
+In Reason, record values resemble JavaScript, using `:` instead of `=`.
 
 <table>
   <thead><tr> <th><p>OCaml</p></th><th><p>Reason</p></th></tr></thead>
