@@ -1,4 +1,4 @@
-<html><head><meta charset="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1"/><title>Function · Reason</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta property="og:title" content="Function · Reason"/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io/index.html"/><meta property="og:description" content="*Cheat sheet for the full function syntax at the end*"/><link rel="shortcut icon" href="/img/icon_50.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/arduino-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io/blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io/blog/feed.xml" title="Reason Blog RSS Feed"/><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/dummy.svg"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li><a href="/docs/zh-CN/quickstart-javascript.html" target="_self">Docs</a></li><li><a href="/zh-CN/try.html" target="_self">Try</a></li><li><a href="/api/index.html" target="_self">API</a></li><li><a href="/docs/zh-CN/community.html" target="_self">Community</a></li><li><a href="/blog" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg"/>中文</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/ja">日本語</a></li><li><a href="/en">English</a></li><li><a href="/es-ES">Español</a></li><li><a href="/fr">Français</a></li><li><a href="/ko">한국어</a></li><li><a href="/pt-BR">Português (Brasil)</a></li><li><a href="/ru">Русский</a></li><li><a href="/uk">Українська</a></li><li><a href="/zh-TW">繁體中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank">Help Translate</a></li></ul></div></li><script>
+<html><head><meta charset="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1"/><title>Function · Reason</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta property="og:title" content="Function · Reason"/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io/index.html"/><meta property="og:description" content="*完整的函数语法备忘清单在最后*"/><link rel="shortcut icon" href="/img/icon_50.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/arduino-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io/blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io/blog/feed.xml" title="Reason Blog RSS Feed"/><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/dummy.svg"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li><a href="/docs/zh-CN/quickstart-javascript.html" target="_self">Docs</a></li><li><a href="/zh-CN/try.html" target="_self">Try</a></li><li><a href="/api/index.html" target="_self">API</a></li><li><a href="/docs/zh-CN/community.html" target="_self">Community</a></li><li><a href="/blog" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg"/>中文</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/ja">日本語</a></li><li><a href="/en">English</a></li><li><a href="/es-ES">Español</a></li><li><a href="/fr">Français</a></li><li><a href="/ko">한국어</a></li><li><a href="/pt-BR">Português (Brasil)</a></li><li><a href="/ru">Русский</a></li><li><a href="/uk">Українська</a></li><li><a href="/zh-TW">繁體中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank">Help Translate</a></li></ul></div></li><script>
         const languagesMenuItem = document.getElementById("languages-menu");
         const languagesDropDown = document.getElementById("languages-dropdown");
         languagesMenuItem.addEventListener("click", function(){
@@ -14,37 +14,37 @@
           toggler.onclick = function() {
             nav.classList.toggle('docsSliderActive');
           };
-        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://crowdin.com/project/reason/zh-CN" target="_blank">Translate</a><h1>Function</h1></header><article><div><span><p><em>Cheat sheet for the full function syntax at the end</em></p>
-<p>Can you believe we haven't covered function until now?</p>
-<p>Functions are declared with an arrow and return the expression.</p>
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://crowdin.com/project/reason/zh-CN" target="_blank">Translate</a><h1>Function</h1></header><article><div><span><p><em>完整的函数语法备忘清单在最后</em></p>
+<p>你能相信我们到现在还未谈到函数？</p>
+<p>函数通过箭头符号声明并返回表达式。</p>
 <pre><code class="hljs css reason">let greet = <span class="hljs-function"><span class="hljs-params">(name)</span> =&gt;</span> <span class="hljs-string">"Hello "</span> ++ name;
 </code></pre>
-<p>This declares a function and assigns to it the name <code>greet</code>, which you can call like so:</p>
+<p>这声明一个函数并将其赋给了<code>greet</code>，你可以这样进行调用：</p>
 <pre><code class="hljs css reason"><span class="hljs-selector-tag">greet</span>(<span class="hljs-string">"world!"</span>); <span class="hljs-comment">/* "Hello world!" */</span>
 </code></pre>
-<p>Multi-arguments functions have arguments separated by comma:</p>
+<p>多参数函数通过逗号进行分割：</p>
 <pre><code class="hljs css reason">let <span class="hljs-keyword">add</span><span class="bash"> = (x, y, z) =&gt; x + y + z;
 </span><span class="hljs-keyword">add</span><span class="bash">(1, 2, 3); /* 6 */
 </span></code></pre>
-<p>For longer functions, you'd surround the body with a block:</p>
+<p>对于更长的函数，你可以将其包裹在方括号内：</p>
 <pre><code class="hljs css reason"><span class="hljs-keyword">let</span> greetMore = <span class="hljs-function">(<span class="hljs-params">name</span>) =&gt;</span> {
   <span class="hljs-keyword">let</span> part1 = <span class="hljs-string">"Hello"</span>;
   part1 ++ <span class="hljs-string">" "</span> ++ name
 };
 </code></pre>
-<h2><a class="anchor" aria-hidden="true" name="no-argument"></a><a href="#no-argument" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>No Argument</h2>
-<p>A function always takes an argument; but sometimes, we'd use it for e.g. side-effects, and don't have anything to pass to it. In other languages, we'd conceptually pass &quot;no argument&quot;. In Reason, every function takes an argument; here we'd conventionally pass it the value <code>()</code>, called &quot;unit&quot;.</p>
-<pre><code class="hljs css reason">/* receive &amp; destructure the <span class="hljs-built_in">unit</span> argument */
-<span class="hljs-keyword">let</span> logSomething = <span class="hljs-literal">()</span> =&gt; {
+<h2><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>无参数</h2>
+<p>函数总是会带有一个参数；但有时，我们使用函数的副作用，并不会传任何参数给它。 在其他语言中，我们在理论上传递“无参数”。 在 Reason 中，每个函数都有一个参数；这里我们最终会传递一个值为 <code>()</code> 给它，被称作“unit”。</p>
+<pre><code class="hljs css reason"><span class="hljs-comment">/* 接收 &amp; 解构 unit 参数 */</span>
+<span class="hljs-keyword">let</span> logSomething = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
   print_endline(<span class="hljs-string">"hello"</span>);
   print_endline(<span class="hljs-string">"world"</span>)
 };
 
-/* call the <span class="hljs-keyword">function</span> <span class="hljs-keyword">with</span> the <span class="hljs-keyword">value</span> <span class="hljs-keyword">of</span> <span class="hljs-keyword">type</span> <span class="hljs-built_in">unit</span> */
-logSomething<span class="hljs-literal">()</span>;
+<span class="hljs-comment">/* 通过类型为 unit 的值调用函数 */</span>
+logSomething();
 </code></pre>
-<p><code>()</code> is a totally normal value, the single possible value in <code>unit</code>. Reason gave it a special syntax out of convenience.</p>
-<h2><a class="anchor" aria-hidden="true" name="labeled-arguments"></a><a href="#labeled-arguments" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Labeled Arguments</h2>
+<p><code>()</code>是在 <code>unit</code>中一个完全普通且唯一可能的值，Reason 出于方便为其提供了特殊语法。</p>
+<h2><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>标签参数</h2>
 <p>Multi-arguments functions, especially those whose arguments are of the same type, can be confusing to call.</p>
 <pre><code class="hljs css reason"><span class="hljs-keyword">let</span> addCoordinates = <span class="hljs-function">(<span class="hljs-params">x, y</span>) =&gt;</span> {
   <span class="hljs-comment">/* use x and y here */</span>
