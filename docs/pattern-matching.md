@@ -105,7 +105,7 @@ let message =
 
 ### Match on Exceptions
 
-If the function throws an exceptions (covered later), you can also match on _that_, in addition to the function's normally returned values.
+If the function throws an exception (covered later), you can also match on _that_, in addition to the function's normally returned values.
 
 ```reason
 switch (List.find((i) => i === theItem, myItems)) {
