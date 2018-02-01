@@ -51,6 +51,7 @@ A few articles we find interesting, or agree with. Not to be taken as literal tr
 - [Write dumb code](https://matthewrocklin.com/blog//work/2018/01/27/write-dumb-code)
 - [Not Explicit](https://boats.gitlab.io/blog/post/2017-12-27-things-explicit-is-not/)
 - [Always start with simple solution](http://buklijas.info/blog/2018/01/01/always-start-with-simple-solution/)
+- [Pony tutorial](https://www.gitbook.com/book/ponylang/pony-tutorial/details)
 
 ## Pro Links
 
