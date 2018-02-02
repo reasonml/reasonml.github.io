@@ -1,0 +1,198 @@
+<html><head><meta charset="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1"/><title>Pattern Matching! · Reason</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta property="og:title" content="Pattern Matching! · Reason"/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io/index.html"/><meta property="og:description" content="*最初に[ヴァリアント](/docs/ja/variant.html)を読んだことを確認してください。*"/><link rel="shortcut icon" href="/img/icon_50.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/arduino-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io/blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io/blog/feed.xml" title="Reason Blog RSS Feed"/><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/dummy.svg"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li><a href="/docs/ja/quickstart-javascript.html" target="_self">Docs</a></li><li><a href="/ja/try.html" target="_self">Try</a></li><li><a href="/api/index.html" target="_self">API</a></li><li><a href="/docs/ja/community.html" target="_self">Community</a></li><li><a href="/blog" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg"/>日本語</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/en">English</a></li><li><a href="/es-ES">Español</a></li><li><a href="/fr">Français</a></li><li><a href="/ko">한국어</a></li><li><a href="/pt-BR">Português (Brasil)</a></li><li><a href="/ru">Русский</a></li><li><a href="/uk">Українська</a></li><li><a href="/zh-CN">中文</a></li><li><a href="/zh-TW">繁體中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank">Help Translate</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(){
+          if(languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search"/></li><li><a href="https://github.com/facebook/reason" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>Language Basics</span></h2></div><div class="navGroups"><div class="navGroup navGroupActive"><h3>Intro</h3><ul><li class="navListItem"><a class="navItem" href="/docs/ja/what-and-why.html">What &amp; Why</a></li></ul></div><div class="navGroup navGroupActive"><h3>Editor Setup</h3><ul><li class="navListItem"><a class="navItem" href="/docs/ja/global-installation.html">Global Installation</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/editor-plugins.html">Editor Plugins</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/extra-goodies.html">Extra Goodies</a></li></ul></div><div class="navGroup navGroupActive"><h3>Language Basics</h3><ul><li class="navListItem"><a class="navItem" href="/docs/ja/overview.html">Overview</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/let-binding.html">Let Binding</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/type.html">Type!</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/string-and-char.html">String &amp; Char</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/boolean.html">ブール値</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/integer-and-float.html">Integer &amp; Float</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/tuple.html">Tuple</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/record.html">Record</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/variant.html">Variant!</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/list-and-array.html">List &amp; Array</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/function.html">関数</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/if-else.html">If-Else</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/more-on-type.html">More on Type</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/destructuring.html">Destructuring</a></li><li class="navListItem navListItemActive"><a class="navItem navItemActive" href="/docs/ja/pattern-matching.html">Pattern Matching!</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/mutation.html">Mutation</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/imperative-loops.html">Imperative Loops</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/jsx.html">JSX</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/external.html">External</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/exception.html">Exception</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/object.html">Object</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/module.html">Module</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/promise.html">Promise</a></li></ul></div><div class="navGroup navGroupActive"><h3>JavaScript</h3><ul><li class="navListItem"><a class="navItem" href="/docs/ja/quickstart-javascript.html">Quickstart</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/interop.html">Interop</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/syntax-cheatsheet.html">Syntax Cheatsheet</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/libraries.html">Libraries</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/converting-from-js.html">Converting from JS</a></li></ul></div><div class="navGroup navGroupActive"><h3>Native</h3><ul><li class="navListItem"><a class="navItem" href="/docs/ja/native.html">Native</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/quickstart-ocaml.html">Quickstart</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/convert-from-ocaml.html">Converting from OCaml</a></li></ul></div><div class="navGroup navGroupActive"><h3>Extra</h3><ul><li class="navListItem"><a class="navItem" href="/docs/ja/faq.html">Frequently Asked Questions</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/comparison-to-ocaml.html">Comparison to OCaml</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/newcomer-examples.html">Newcomer Examples</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/project-structure.html">Project Structure</a></li></ul></div></div></section></div><script>
+          var toggler = document.getElementById('navToggler');
+          var nav = document.getElementById('docsNav');
+          toggler.onclick = function() {
+            nav.classList.toggle('docsSliderActive');
+          };
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://crowdin.com/project/reason/ja" target="_blank">Translate</a><h1>Pattern Matching!</h1></header><article><div><span><p><em>最初に<a href="/docs/ja/variant.html">ヴァリアント</a>を読んだことを確認してください。</em></p>
+<p><strong>とうとうやってきました</strong>！パターンマッチングはこの言語の<em>ザ</em>・ベスト機能のひとつです。これは構造化代入に似ていますが、型システムの恩恵をより受けられます。</p>
+<h2><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>使い方</h2>
+<p>ヴァリアントを考えてみましょう。</p>
+<pre><code class="hljs css reason">type payload =
+  <span class="hljs-string">| BadResult(int)</span>
+  <span class="hljs-string">| GoodResult(string)</span>
+  <span class="hljs-string">| NoResult;</span>
+</code></pre>
+<p><code>switch</code> 式の中で、それを「構造分解」することができます。</p>
+<pre><code class="hljs css reason"><span class="hljs-keyword">let</span> data = GoodResult(<span class="hljs-string">"Product shipped!"</span>);
+
+<span class="hljs-keyword">let</span> message =
+  switch (data) {
+  | <span class="hljs-type">GoodResult</span>(theMessage) =&gt; <span class="hljs-string">"Success! "</span> ++ theMessage
+  | <span class="hljs-type">BadResult</span>(errorCode) =&gt; <span class="hljs-string">"Something's wrong. The error code is: "</span> ++ string_of_int(errorCode)
+  };
+</code></pre>
+<p>それぞれの異なるケースを処理している間、<code>data</code> をどのように構造分解したか注目してください。 上記の <code>switch</code> はコンパイラの警告を出力するでしょう。</p>
+<pre><code class="hljs">Warning 8: this pattern-matching is not exhaustive.
+Here is an example of a value that is not matched:
+NoResult
+</code></pre>
+<p>すごくないですか？ 型システムはあなたのデータの形をマッチングしつつ、未処理のケースについて警告しました。 この<strong>条件的</strong>側面は、単純な構造化代入ではなく、パターンマッチングを行うものです。 「<strong>これならこれ</strong>」といった体のほとんどのデータ構造で動きます。</p>
+<pre><code class="hljs css reason">switch (myList) {
+| <span class="hljs-type">[] =&gt; print_endline</span>(<span class="hljs-string">"Empty list"</span>)
+| <span class="hljs-type">[a</span>, ...theRest] =&gt; print_endline(<span class="hljs-string">"list with the head value "</span> ++ a)
+};
+
+switch (myArray) {
+| <span class="hljs-type">[|1</span>, <span class="hljs-number">2</span>|<span class="hljs-type">] =&gt; print_endline</span>(<span class="hljs-string">"This is an array with item 1 and 2"</span>)
+| <span class="hljs-type">[||] =&gt; print_endline</span>(<span class="hljs-string">"This array has no element"</span>)
+| <span class="hljs-type">_</span> =&gt; print_endline(<span class="hljs-string">"This is an array"</span>)
+};
+</code></pre>
+<p>最後の <code>_</code> のケースは、マッチしないすべて条件をその分岐に行くようにするための特別なフォールスルーケースです。</p>
+<p>string、int、その他も switch できます。同じ結果に行きつく多くのパターンを持つこともできます！</p>
+<pre><code class="hljs css reason"><span class="hljs-keyword">let</span> reply =
+  <span class="hljs-keyword">switch</span> (message) {
+  | <span class="hljs-string">"Reason's pretty cool"</span> =&gt; <span class="hljs-string">"Yep"</span>
+  | <span class="hljs-string">"good night"</span> =&gt; <span class="hljs-string">"See ya!"</span>
+  | <span class="hljs-string">"hello"</span> | <span class="hljs-string">"hi"</span> | <span class="hljs-string">"heya"</span> | <span class="hljs-string">"hey"</span> =&gt; <span class="hljs-string">"hello to you too!"</span>
+  | _ =&gt; <span class="hljs-string">"Nice to meet you!"</span>
+  };
+</code></pre>
+<p>他のデータ構造と組み合わせることで、パターンマッチングは非常に簡潔で、コンパイラによって検証された、パフォーマンスの高いコードを作り出すことができます。</p>
+<pre><code class="hljs css reason"><span class="hljs-keyword">let</span> message =
+  switch (data) {
+  | <span class="hljs-type">GoodResult</span>(theMessage) =&gt; <span class="hljs-string">"Success! "</span> ++ theMessage
+  | <span class="hljs-type">BadResult</span>(<span class="hljs-number">0</span> | <span class="hljs-type">1</span> | <span class="hljs-type">5</span>) =&gt; <span class="hljs-string">"Something's wrong. It's a server side problem."</span>
+  | <span class="hljs-type">BadResult</span>(errorCode) =&gt; <span class="hljs-string">"Unknown error occurred. Code: "</span> ++ string_of_int(errorCode)
+  | <span class="hljs-type">NoResult</span> =&gt; <span class="hljs-string">"Things look fine"</span>
+  };
+</code></pre>
+<p><strong>注</strong>: パターンとしてリテラル（つまり具体的な値）のみ渡すことができ、名前や他のものを let 束縛することはできません。下記は期待通りに動作しません。</p>
+<pre><code class="hljs css reason"><span class="hljs-keyword">let</span> myMessage = <span class="hljs-string">"Hello"</span>;
+<span class="hljs-keyword">switch</span> (greeting) {
+| <span class="hljs-function"><span class="hljs-params">myMessage</span> =&gt;</span> print_endline(<span class="hljs-string">"Hi to you"</span>)
+};
+</code></pre>
+<p>代わりに、上記は期待する結果にはならず、<code>switch</code> のケースの中で、任意の文字列にマッチングして、それに <code>myMessage</code> という名前を束縛することになるでしょう。</p>
+<h3><a class="anchor" aria-hidden="true" name="when"></a><a href="#when" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>When 節</h3>
+<p>完全なパターンマッチで任意のロジックを本当に使いたいときは、<code>when</code> 節に流すことができます。これは基本的には <code>if</code> のシュガーです。</p>
+<pre><code class="hljs css reason"><span class="hljs-keyword">let</span> message =
+  switch (data) {
+  | <span class="hljs-type">GoodResult</span>(theMessage) =&gt; ...
+  | <span class="hljs-type">BadResult</span>(errorCode) when isServerError(errorCode) =&gt; ...
+  | <span class="hljs-type">BadResult</span>(errorCode) =&gt; ... /* otherwise */
+  | <span class="hljs-type">NoResult</span> =&gt; ...
+  };
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>例外にマッチする</h3>
+<p>If the function throws an exception (covered later), you can also match on <em>that</em>, in addition to the function's normally returned values.</p>
+<pre><code class="hljs css reason"><span class="hljs-keyword">switch</span> (<span class="hljs-keyword">List</span>.find((i) =&gt; i === theItem, myItems)) {
+| item =&gt; print_endline(item)
+| <span class="hljs-keyword">exception</span> Not_found =&gt; print_endline(<span class="hljs-string">"No such item found!"</span>)
+};
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>入れ子パターン</h3>
+<p>入れ子になった <code>|</code> は意図どおり動作します。</p>
+<pre><code class="hljs css reason"><span class="hljs-keyword">switch</span> (student) {
+| {<span class="hljs-string">name:</span> <span class="hljs-string">"Jane"</span> | <span class="hljs-string">"Joe"</span>} =&gt; ...
+| {<span class="hljs-string">name:</span> <span class="hljs-string">"Bob"</span>, <span class="hljs-string">Job:</span> Progammer({<span class="hljs-string">fullTime:</span> Yes | Maybe})} =&gt; ...
+};
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>パターンはどこにでも</h3>
+<p>パターンは通常の「変数宣言」を書くであろう箇所のどこにでも書けます。</p>
+<pre><code class="hljs css reason"><span class="hljs-keyword">let</span> (<span class="hljs-keyword">Left</span> v | <span class="hljs-type">Right</span> v) = i;
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>ヒントとコツ</h2>
+<p><strong>可能な限りパターンマッチをフラット化してください</strong>。これは実際にバグの除去装置です。以下で例示します。</p>
+<p>フォールスルーの <code>_</code> ケースを乱用しないでください。 これはコンパイラがあるケースをカバーすること（網羅性チェック）し忘れていると助言してくれることを妨げてしまいます。それはあなたがヴァリアントに新しいケースを追加するリファクタリングの後、特に有用でしょう。 無限の可能性があるパターン（例: string, int など）に対してのみ <code>_</code> を試してください。</p>
+<p>最悪から最高までの一連の例がここにあります。</p>
+<pre><code class="hljs css reason"><span class="hljs-keyword">let</span> <span class="hljs-attr">optionBoolToJsBoolean</span> = (opt) =&gt;
+  <span class="hljs-keyword">if</span> (<span class="hljs-attr">opt</span> == None) {
+    Js.false_
+  } <span class="hljs-keyword">else</span> {
+    <span class="hljs-keyword">if</span> (<span class="hljs-attr">opt</span> == Some(<span class="hljs-literal">true</span>)) {
+      Js.true_
+    } <span class="hljs-keyword">else</span> {
+      Js.false_
+    }
+  };
+</code></pre>
+<p>今が最悪です =)。パターンマッチングに切り替えてみましょう。</p>
+<pre><code class="hljs css reason"><span class="hljs-keyword">let</span> optionBoolToJsBoolean = (opt) =&gt;
+  switch (opt) {
+  | <span class="hljs-type">None</span> =&gt; Js.false_
+  | <span class="hljs-type">Some</span>(a) =&gt; a ? Js.true_ : Js.false_
+  };
+</code></pre>
+<p>少しマシですが、まだ入れ子です。パターンマッチングはこうすることを許容します。</p>
+<pre><code class="hljs css reason"><span class="hljs-keyword">let</span> optionBoolToJsBoolean = (opt) =&gt;
+  switch (opt) {
+  | <span class="hljs-type">None</span> =&gt; Js.false_
+  | <span class="hljs-type">Some</span>(true) =&gt; Js.true_
+  | <span class="hljs-type">Some</span>(false) =&gt; Js.false_
+  };
+</code></pre>
+<p>かなり線形な見た目です！今、あなたはこうしたいと駆られているかもしれません。</p>
+<pre><code class="hljs css reason"><span class="hljs-keyword">let</span> optionBoolToJsBoolean = <span class="hljs-function">(<span class="hljs-params">opt</span>) =&gt;</span>
+  <span class="hljs-keyword">switch</span> (opt) {
+  | Some(<span class="hljs-literal">true</span>) =&gt; Js.true_
+  | <span class="hljs-function"><span class="hljs-params">_</span> =&gt;</span> Js.false_
+  };
+</code></pre>
+<p>これはより簡潔ですが、上記の網羅性チェックのメンションを殺してしまいます。これが最高です。</p>
+<pre><code class="hljs css reason"><span class="hljs-keyword">let</span> optionBoolToJsBoolean = <span class="hljs-function">(<span class="hljs-params">opt</span>) =&gt;</span>
+  <span class="hljs-keyword">switch</span> (opt) {
+  | Some(<span class="hljs-literal">true</span>) =&gt; Js.true_
+  | Some(<span class="hljs-literal">false</span>)
+  | <span class="hljs-function"><span class="hljs-params">None</span> =&gt;</span> Js.false_
+  };
+</code></pre>
+<p>この時点でこのコードで間違いを犯すのはかなり難しいです！ 多くの分岐で if-else を使用したい時はいつでも、代わりにパターンマッチングを選びます。 それはより簡潔で<a href="/docs/ja/variant.html#design-decisions">高性能</a>でもあります。</p>
+<p>別の例を参照してください、switch + タプルの例は<a href="/docs/ja/tuple.html#tips-tricks">ここ</a>です。</p>
+<h2><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>設計方針</h2>
+<p>悪名高き <a href="https://en.wikipedia.org/wiki/Fizz_buzz#Programming_interviews">fizzbuzz プログラム</a>は、いくつかの人々を妙に躓かせます。どこにもないエレガントな探索でいくつかの条件分岐を簡潔化/統一化すること望むプログラマーを麻痺させる性質があるためです。 うまくいけば通常、パターンマッチングの視覚的簡潔性は、総当りの <code>if-else</code> の利点のすべてを享受しつつ、<a href="/try.html?reason=PQKgBAQghgzgpgEzAewHZgBYBcsAcYBcwwATsvDlAMbIJwB0yJA5sAO4CWA1h8AGIcAXoIgBXYQGIA8gGEoAWwA2YEMABQiuFjAAzIYIBG4wWAC8YABQcAlGYB8asGBicsVDJY5h5tMAGYAGjAvHyQAVlsAb0cwAB9LAAYghNtTOzAAIgFhMWEMmPiLJLAAfVT0rP18p0KS5PLM3MFquNL7ZywSDlRmEuQdEu6sK2sYgF8AbjU1HSZPYPQARjAsZDBFhJSwaKcAKRh6RWRmCz1hI2ER0cmgA">決定の麻痺を克服させてくれます</a>。 実際にすべての可能性を明示的に一覧することは間違いはありません。パターンマッチングは妥当な問題解決テクニックとして非常に便利であることが知られている数学の<strong>場合分け</strong>に対応します。</p>
+<p>初めて Reason の <code>switch</code>を使うと、何年も過ちを犯していたのではないかと感じるかもしれません。あなたにとって他の言語が台無しになってしまうかもしれないことに注意してください =)。</p>
+<p>もし大きなリファクタリングをしようとした場合、if-else のロジックが入れ子になっていたら、そのロジックの正しさを維持することは難しいと気がついたかもしれません。 その一方で、パターンマッチング + タプルは2次元表にマッピングされ、各マスは独立して埋められます。 これにより <code>switch</code> にケースを追加する必要がある時はいつでも、他のセルを乱すことなく、そのテーブルセルのみを対象にできます。</p>
+<pre><code class="hljs css reason"><span class="hljs-keyword">type</span> animal = Dog | Cat | Bird;
+<span class="hljs-keyword">let</span> result = <span class="hljs-keyword">switch</span> (isBig, myAnimal) {
+| <span class="hljs-function">(<span class="hljs-params"><span class="hljs-literal">true</span>, Dog</span>) =&gt;</span> <span class="hljs-number">1</span>
+| <span class="hljs-function">(<span class="hljs-params"><span class="hljs-literal">true</span>, Cat</span>) =&gt;</span> <span class="hljs-number">2</span>
+| <span class="hljs-function">(<span class="hljs-params"><span class="hljs-literal">true</span>, Bird</span>) =&gt;</span> <span class="hljs-number">3</span>
+| <span class="hljs-function">(<span class="hljs-params"><span class="hljs-literal">false</span>, Dog | Cat</span>) =&gt;</span> <span class="hljs-number">4</span>
+| <span class="hljs-function">(<span class="hljs-params"><span class="hljs-literal">false</span>, Bird</span>) =&gt;</span> <span class="hljs-number">5</span>
+};
+</code></pre>
+<table>
+<thead>
+<tr><th>isBig \ myAnimal</th><th>Dog</th><th>Cat</th><th>Bird</th></tr>
+</thead>
+<tbody>
+<tr><td>true</td><td>1</td><td>2</td><td>3</td></tr>
+<tr><td>false</td><td>4</td><td>4</td><td>5</td></tr>
+</tbody>
+</table>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="destructuring.html">← Destructuring</a><a class="docs-next button" href="mutation.html">Mutation →</a></div></div></div></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.js"></script><script>window.foo = new Pjax({
+          areas: [
+            // try to use the first query.
+            '.mainContainer, .docsNavContainer .toc .navWrapper',
+            // fallback
+            'body'
+          ],
+          link: '.docsNavContainer:not(.docsSliderActive) a',
+          update: {
+            script: false,
+          }
+        });
+        var languagesMenuItemCopy = document.getElementById("languages-menu");
+        languagesMenuItemCopy.addEventListener("click", function(e){
+          e.preventDefault();
+          e.stopPropagation();
+          e.stopImmediatePropagation();
+        });</script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+              var search = docsearch({
+                apiKey: '966d1e412f67114a07dc0afe44b19b53',
+                indexName: 'reason',
+                inputSelector: '#search_input_react'
+              });
+            </script></body></html>
