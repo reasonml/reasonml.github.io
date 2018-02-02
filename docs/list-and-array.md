@@ -14,7 +14,7 @@ Lists are:
 let myList = [1, 2, 3];
 ```
 
-Reason lists are simple, singly linked list.
+Reason lists are simple, singly linked lists.
 
 ### Usage
 
