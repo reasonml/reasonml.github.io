@@ -1,0 +1,139 @@
+<html><head><meta charset="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1"/><title>Record · Reason</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta property="og:title" content="Record · Reason"/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io/index.html"/><meta property="og:description" content="类型声明很像JavaScript的object对象，但是有如下区别："/><link rel="shortcut icon" href="/img/icon_50.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/arduino-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io/blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io/blog/feed.xml" title="Reason Blog RSS Feed"/><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/dummy.svg"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li><a href="/docs/zh-CN/quickstart-javascript.html" target="_self">Docs</a></li><li><a href="/zh-CN/try.html" target="_self">Try</a></li><li><a href="/api/index.html" target="_self">API</a></li><li><a href="/docs/zh-CN/community.html" target="_self">Community</a></li><li><a href="/blog" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg"/>中文</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/ja">日本語</a></li><li><a href="/en">English</a></li><li><a href="/es-ES">Español</a></li><li><a href="/fr">Français</a></li><li><a href="/ko">한국어</a></li><li><a href="/pt-BR">Português (Brasil)</a></li><li><a href="/ru">Русский</a></li><li><a href="/uk">Українська</a></li><li><a href="/zh-TW">繁體中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank">Help Translate</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(){
+          if(languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search"/></li><li><a href="https://github.com/facebook/reason" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>Language Basics</span></h2></div><div class="navGroups"><div class="navGroup navGroupActive"><h3>Intro</h3><ul><li class="navListItem"><a class="navItem" href="/docs/zh-CN/what-and-why.html">What &amp; Why</a></li></ul></div><div class="navGroup navGroupActive"><h3>Editor Setup</h3><ul><li class="navListItem"><a class="navItem" href="/docs/zh-CN/global-installation.html">Global Installation</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/editor-plugins.html">Editor Plugins</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/extra-goodies.html">Extra Goodies</a></li></ul></div><div class="navGroup navGroupActive"><h3>Language Basics</h3><ul><li class="navListItem"><a class="navItem" href="/docs/zh-CN/overview.html">Overview</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/let-binding.html">Let Binding</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/type.html">Type!</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/string-and-char.html">String &amp; Char</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/boolean.html">Boolean</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/integer-and-float.html">Integer &amp; Float</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/tuple.html">Tuple</a></li><li class="navListItem navListItemActive"><a class="navItem navItemActive" href="/docs/zh-CN/record.html">Record</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/variant.html">Variant!</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/list-and-array.html">List &amp; Array</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/function.html">Function</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/if-else.html">If-Else</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/more-on-type.html">More on Type</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/destructuring.html">Destructuring</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/pattern-matching.html">Pattern Matching!</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/mutation.html">Mutation</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/imperative-loops.html">Imperative Loops</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/jsx.html">JSX</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/external.html">External</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/exception.html">Exception</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/object.html">Object</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/module.html">Module</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/promise.html">Promise</a></li></ul></div><div class="navGroup navGroupActive"><h3>JavaScript</h3><ul><li class="navListItem"><a class="navItem" href="/docs/zh-CN/quickstart-javascript.html">Quickstart</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/interop.html">Interop</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/syntax-cheatsheet.html">Syntax Cheatsheet</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/libraries.html">Libraries</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/converting-from-js.html">Converting from JS</a></li></ul></div><div class="navGroup navGroupActive"><h3>Native</h3><ul><li class="navListItem"><a class="navItem" href="/docs/zh-CN/native.html">Native</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/quickstart-ocaml.html">Quickstart</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/convert-from-ocaml.html">Converting from OCaml</a></li></ul></div><div class="navGroup navGroupActive"><h3>Extra</h3><ul><li class="navListItem"><a class="navItem" href="/docs/zh-CN/faq.html">Frequently Asked Questions</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/comparison-to-ocaml.html">Comparison to OCaml</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/newcomer-examples.html">Newcomer Examples</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/project-structure.html">Project Structure</a></li></ul></div></div></section></div><script>
+          var toggler = document.getElementById('navToggler');
+          var nav = document.getElementById('docsNav');
+          toggler.onclick = function() {
+            nav.classList.toggle('docsSliderActive');
+          };
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://crowdin.com/project/reason/zh-CN" target="_blank">Translate</a><h1>Record</h1></header><article><div><span><p>类型声明很像JavaScript的object对象，但是有如下区别：</p>
+<ul>
+<li>更轻量级</li>
+<li>默认不可改变</li>
+<li>值的类型和名字固定</li>
+<li>非常快</li>
+<li>类型严格</li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>用法</h2>
+<p>类型(强制声明)：</p>
+<pre><code class="hljs css reason"><span class="hljs-keyword">type</span> person = {
+  age: int,
+  name: string
+};
+</code></pre>
+<p>值 (这将被推断为 <code>person</code> 类型):</p>
+<pre><code class="hljs css reason">let <span class="hljs-keyword">me</span> = {
+  age: <span class="hljs-number">5</span>,
+  <span class="hljs-built_in">name</span>: <span class="hljs-string">"Big Reason"</span>
+};
+</code></pre>
+<p>访问 (熟悉的点表示法):</p>
+<pre><code class="hljs css reason">let <span class="hljs-built_in">name</span> = <span class="hljs-keyword">me</span>.<span class="hljs-built_in">name</span>;
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" name="record"></a><a href="#record" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Record需要显式定义</h3>
+<p>如果你只写 <code>{age: 5, name: &quot;Bady Reason&quot;}</code> 而没有在之前的某处显式声明，类型系统将给你报告一个错误。 如果类型声明定义在另一个文件中, 则需要显式的指明它是哪个文件：</p>
+<pre><code class="hljs css reason"><span class="hljs-comment">/* School.re */</span>
+
+<span class="hljs-keyword">type</span> person = {age: <span class="hljs-keyword">int</span>, name: <span class="hljs-keyword">string</span>};
+</code></pre>
+<pre><code class="hljs css reason"><span class="hljs-comment">/* example.re */</span>
+
+let <span class="hljs-string">me:</span> School.person = {<span class="hljs-string">age:</span> <span class="hljs-number">20</span>, <span class="hljs-string">name:</span> <span class="hljs-string">"Big Reason"</span>};
+<span class="hljs-comment">/* or */</span>
+let me = School.{<span class="hljs-string">age:</span> <span class="hljs-number">20</span>, <span class="hljs-string">name:</span> <span class="hljs-string">"Big Reason"</span>};
+<span class="hljs-comment">/* or */</span>
+let me = {School.<span class="hljs-string">age:</span> <span class="hljs-number">20</span>, <span class="hljs-string">name:</span> <span class="hljs-string">"Big Reason"</span>};
+</code></pre>
+<p>上述3中方法都可以表明 &quot;这个类型声明的定义是在School文件中&quot;。首选第一种常规类型注释。</p>
+<h3><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>更新不可变类型</h3>
+<p>可以使用 <code>...</code> 扩展运算符从旧的类型声明创建新的类型声明。原始记录没有被改变。</p>
+<pre><code class="hljs css reason"><span class="hljs-keyword">let</span> meNextYear = {...<span class="hljs-keyword">me</span>, age: <span class="hljs-keyword">me</span>.age + <span class="hljs-number">1</span>};
+</code></pre>
+<p>这个更新是非常高效的！你可以尝试一下<a href="/try.html">这里</a>看看类型声明是如何编译的</p>
+<p><strong>注</strong>：扩展运算不能添加新的类型，因为类型声明的结构是固定的。</p>
+<h3><a class="anchor" aria-hidden="true" name="mutable-update"></a><a href="#mutable-update" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Mutable Update</h3>
+<p>Record fields can optionally be mutable. This allows you to update those fields in-place with the <code>=</code> operator.</p>
+<pre><code class="hljs css reason">type person = {
+<span class="hljs-symbol">  name:</span> string,
+  mutable age: int
+}<span class="hljs-comment">;</span>
+let <span class="hljs-keyword">baby </span>= {name: <span class="hljs-string">"Baby Reason"</span>, age: <span class="hljs-number">5</span>}<span class="hljs-comment">;</span>
+<span class="hljs-keyword">baby.age </span>= <span class="hljs-keyword">baby.age </span>+ <span class="hljs-number">1</span><span class="hljs-comment">; /* alter `baby`. Happy birthday! */</span>
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" name="syntax-shorthand"></a><a href="#syntax-shorthand" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Syntax shorthand</h2>
+<p>To reduce redundancy, we provide <strong>punning</strong> for a record's types and values. Punning refers to the syntax shorthand you can use when the name of a field matches the name of its value/type:</p>
+<pre><code class="hljs css reason"><span class="hljs-keyword">type</span> horsePower = {power: <span class="hljs-built_in">int</span>, metric: <span class="hljs-built_in">bool</span>};
+
+<span class="hljs-keyword">let</span> metric = <span class="hljs-literal">true</span>;
+<span class="hljs-keyword">let</span> someHorsePower = {power: <span class="hljs-number">10</span>, metric};
+/* same <span class="hljs-keyword">as</span> the <span class="hljs-keyword">value</span> {power: <span class="hljs-number">10</span>, metric: metric}; */
+
+<span class="hljs-keyword">type</span> car = {name: <span class="hljs-built_in">string</span>, horsePower};
+/* same <span class="hljs-keyword">as</span> the <span class="hljs-keyword">type</span> {name: <span class="hljs-built_in">string</span>, horsePower: horsePower}; */
+</code></pre>
+<p><strong>Note that there's no punning for a single record field</strong>! <code>{foo}</code> doesn't do what you expect (it's a block that returns the value <code>foo</code>).</p>
+<h2><a class="anchor" aria-hidden="true" name="tips-tricks"></a><a href="#tips-tricks" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Tips &amp; Tricks</h2>
+<h3><a class="anchor" aria-hidden="true" name="interop-with-javascript"></a><a href="#interop-with-javascript" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Interop with JavaScript</h3>
+<p>If you're working with JavaScript, the record syntax &amp; operations should feel familiar, and you might be tempted to interop with JS by converting a JS object to a record, and vice-versa. This is fine, but we have an <strong>even better way without conversion overhead</strong>! See <a href="https://bucklescript.github.io/docs/en/object.html#object-as-record">here</a> which talks about <strong><a href="/docs/zh-CN/object.html">Reason objects</a></strong>. Here's an example:</p>
+<pre><code class="hljs css reason"><span class="hljs-keyword">type</span> payload = {. <span class="hljs-string">"name"</span>: <span class="hljs-built_in">string</span>};
+
+[@bs.<span class="hljs-keyword">module</span> <span class="hljs-string">"myAjaxLibrary"</span>] <span class="hljs-keyword">external</span> sendQuery : payload =&gt; <span class="hljs-built_in">unit</span> = <span class="hljs-string">"sendQuery"</span>;
+
+sendQuery({<span class="hljs-string">"name"</span>: <span class="hljs-string">"Reason"</span>});
+</code></pre>
+<p>Notice the dot in the type definiton. That is an object type notation, and has nothing to do with a record! Objects will be described in a later section.</p>
+<h3><a class="anchor" aria-hidden="true" name="record-types-are-found-by-field-name"></a><a href="#record-types-are-found-by-field-name" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Record Types Are Found By Field Name</h3>
+<p>With records, you <strong>cannot</strong> say &quot;I'd like this function to take any record type, as long as they have the field <code>age</code>&quot;. The following <em>works</em>, but not as expected:</p>
+<pre><code class="hljs css reason">type person = {age: int, name: string};<span class="hljs-built_in">
+type </span>monster = {age: int, hasTentacles: bool};
+
+let getAge = (entity) =&gt; entity.age;
+</code></pre>
+<p>The last line's function will infer that the parameter <code>entity</code> must be of type <code>monster</code>. The following code's last line fails:</p>
+<pre><code class="hljs css reason">let kraken = {<span class="hljs-string">age:</span> <span class="hljs-number">9999</span>, <span class="hljs-string">hasTentacles:</span> <span class="hljs-literal">true</span>};
+let me = {<span class="hljs-string">age:</span> <span class="hljs-number">5</span>, <span class="hljs-string">name:</span> <span class="hljs-string">"Baby Reason"</span>};
+
+getAge(kraken);
+getAge(me);
+</code></pre>
+<p>The type system will complain that <code>me</code> is a <code>person</code>, and that <code>getAge</code> only works on <code>monster</code>. If you need such capability, use Reason objects, mentioned in the previous section.</p>
+<h2><a class="anchor" aria-hidden="true" name="design-decisions"></a><a href="#design-decisions" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Design Decisions</h2>
+<p>After reading the constraints in the previous sections, and if you're coming from a dynamic language background, you might be wondering why one would bother with record in the first place instead of straight using object, since the former needs explicit typing and doesn't allow different records with the same field name to be passed to the same function, etc.</p>
+<ol>
+<li>The truth is that most of the times in your app, your data's shape is actually fixed, and if it's not, it can potentially be better represented as a combination of variant (introduced next) + record instead*.</li>
+<li>Record, since its fields are fixed, is compiled to an array with array index accesses instead of JS object (try it in the playground!). On native, it compiles to basically a region of memory where a field access is just one field lookup + one actual access, aka <strong>2 assembly instructions</strong>. The good old days where folks measured in nanoseconds...</li>
+<li>Finally, since a record type is resolved through finding that single explicit type declaration (we call this &quot;nominal typing&quot;), the type error messages end up better than the counterpart (&quot;structural typing&quot;, like for tuples). This makes refactoring easier; changing a record type's fields naturally allows the compiler to know that it's still the same record, just misused in some places. Otherwise, under structural typing, it might get hard to tell whether the definition site or the usage site is wrong.</li>
+</ol>
+<p>* And we're not just finding excuses for ourselves! Reason objects do support these features.</p>
+<!--TODO: sharable playground for 2 --></span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="tuple.html">← Tuple</a><a class="docs-next button" href="variant.html">Variant! →</a></div></div></div></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.js"></script><script>window.foo = new Pjax({
+          areas: [
+            // try to use the first query.
+            '.mainContainer, .docsNavContainer .toc .navWrapper',
+            // fallback
+            'body'
+          ],
+          link: '.docsNavContainer:not(.docsSliderActive) a',
+          update: {
+            script: false,
+          }
+        });
+        var languagesMenuItemCopy = document.getElementById("languages-menu");
+        languagesMenuItemCopy.addEventListener("click", function(e){
+          e.preventDefault();
+          e.stopPropagation();
+          e.stopImmediatePropagation();
+        });</script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+              var search = docsearch({
+                apiKey: '966d1e412f67114a07dc0afe44b19b53',
+                indexName: 'reason',
+                inputSelector: '#search_input_react'
+              });
+            </script></body></html>

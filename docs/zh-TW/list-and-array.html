@@ -1,0 +1,99 @@
+<html><head><meta charset="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1"/><title>List &amp; 陣列 · Reason</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta property="og:title" content="List &amp; 陣列 · Reason"/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io/index.html"/><meta property="og:description" content="## List"/><link rel="shortcut icon" href="/img/icon_50.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/arduino-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io/blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io/blog/feed.xml" title="Reason Blog RSS Feed"/><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/dummy.svg"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li><a href="/docs/zh-TW/quickstart-javascript.html" target="_self">文件</a></li><li><a href="/zh-TW/try.html" target="_self">試試</a></li><li><a href="/api/index.html" target="_self">API</a></li><li><a href="/docs/zh-TW/community.html" target="_self">社群</a></li><li><a href="/blog" target="_self">網誌</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg"/>繁體中文</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/ja">日本語</a></li><li><a href="/en">English</a></li><li><a href="/es-ES">Español</a></li><li><a href="/fr">Français</a></li><li><a href="/ko">한국어</a></li><li><a href="/pt-BR">Português (Brasil)</a></li><li><a href="/ru">Русский</a></li><li><a href="/uk">Українська</a></li><li><a href="/zh-CN">中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank">協助翻譯</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(){
+          if(languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search"/></li><li><a href="https://github.com/facebook/reason" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>Language Basics</span></h2></div><div class="navGroups"><div class="navGroup navGroupActive"><h3>簡介</h3><ul><li class="navListItem"><a class="navItem" href="/docs/zh-TW/what-and-why.html">什麼 &amp; 為何</a></li></ul></div><div class="navGroup navGroupActive"><h3>設定編輯器</h3><ul><li class="navListItem"><a class="navItem" href="/docs/zh-TW/global-installation.html">全域安裝</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/editor-plugins.html">編輯器外掛</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/extra-goodies.html">更多好物</a></li></ul></div><div class="navGroup navGroupActive"><h3>語言基礎</h3><ul><li class="navListItem"><a class="navItem" href="/docs/zh-TW/overview.html">概述</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/let-binding.html">Let 繫結</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/type.html">型別！</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/string-and-char.html">字串 &amp; 字元</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/boolean.html">布林值</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/integer-and-float.html">整數 &amp; 浮點數</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/tuple.html">Tuple</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/record.html">Record</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/variant.html">變異！</a></li><li class="navListItem navListItemActive"><a class="navItem navItemActive" href="/docs/zh-TW/list-and-array.html">List &amp; 陣列</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/function.html">函式</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/if-else.html">If-Else</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/more-on-type.html">更多有關型別</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/destructuring.html">解構</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/pattern-matching.html">樣式匹配</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/mutation.html">可突變</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/imperative-loops.html">命令式迴圈</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/jsx.html">JSX</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/external.html">外部</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/exception.html">例外</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/object.html">物件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/module.html">模組</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/promise.html">Promise</a></li></ul></div><div class="navGroup navGroupActive"><h3>JavaScript</h3><ul><li class="navListItem"><a class="navItem" href="/docs/zh-TW/quickstart-javascript.html">快速上手</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/interop.html">交互作用</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/syntax-cheatsheet.html">句法簡潔手冊</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/libraries.html">函式庫</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/converting-from-js.html">轉換自 JS</a></li></ul></div><div class="navGroup navGroupActive"><h3>原生</h3><ul><li class="navListItem"><a class="navItem" href="/docs/zh-TW/native.html">原生</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/quickstart-ocaml.html">快速上手</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/convert-from-ocaml.html">從 OCaml 轉換</a></li></ul></div><div class="navGroup navGroupActive"><h3>附加選項</h3><ul><li class="navListItem"><a class="navItem" href="/docs/zh-TW/faq.html">常見問題</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/comparison-to-ocaml.html">與 OCaml 比較</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/newcomer-examples.html">新手示範</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/project-structure.html">專案結構</a></li></ul></div></div></section></div><script>
+          var toggler = document.getElementById('navToggler');
+          var nav = document.getElementById('docsNav');
+          toggler.onclick = function() {
+            nav.classList.toggle('docsSliderActive');
+          };
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://crowdin.com/project/reason/zh-TW" target="_blank">Translate</a><h1>List &amp; 陣列</h1></header><article><div><span><h2><a class="anchor" aria-hidden="true" name="list"></a><a href="#list" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>List</h2>
+<p>Lists 是：</p>
+<ul>
+<li>同質</li>
+<li>不可變（immutable）</li>
+<li>前插十分快速</li>
+</ul>
+<pre><code class="hljs css reason">let myList = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>];
+</code></pre>
+<p>Reason lists 是個簡單、單獨地鏈結串列（linked list）。</p>
+<h3><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>用法</h3>
+<p>為了長度伸縮性，你可能會使用 list，快速前插（插入最前面），及快速分割，這些都是不可變的有效率！</p>
+<p>標準函式庫提供 <a href="/api/List.html">List 模組</a>（以及標籤化的對應模組，<code>ListLabels</code>）。</p>
+<h4><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>不可變插入首元素</h4>
+<p>使用擴散語法，就是 <code>List.cons</code>：</p>
+<pre><code class="hljs css reason"><span class="hljs-attribute">let myList</span> = [1, 2, 3];
+<span class="hljs-attribute">let anotherList</span> = [0, ...myList];
+</code></pre>
+<p><code>myList</code> 不會改變。 <code>anotherList</code> 現在是 <code>[0, 1, 2, 3]</code>。 這個十分有效率（常數時間，非線性）。 <code>anotherList</code> 的最後 3 元素與 <code>myList</code> 共享！</p>
+<p><strong>注意 <code>[a, ...b, ...c]</code> 是錯誤語法</strong>。 我們不支援同一個 list 有多個擴散。 這會造成意外地線性操作（<code>O(b)</code>），由於 <code>b</code> 的每個元素將會逐一加在 <code>c</code> 的前方。 你可以使用 <code>List.concat</code>。</p>
+<p>不鼓勵更新 lists 的任意中間項目，因為效率及配置成本將會是線性（<code>O(n)</code>）。</p>
+<h4><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>存取</h4>
+<p><code>switch</code>（<a href="/docs/zh-TW/pattern-matching.html">樣式匹配章節</a>介紹）通常用來存取 list 項目：</p>
+<pre><code class="hljs css reason"><span class="hljs-keyword">let</span> message =
+  <span class="hljs-keyword">switch</span> (myList) {
+  | [] =&gt; <span class="hljs-string">"這個 list 是空的"</span>
+  | [a, ...rest] =&gt; <span class="hljs-string">"list 的開頭是字串 "</span> ++ string_of_int(a)
+  };
+</code></pre>
+<p>若要存取任意 list item，使用<code>List.nth</code>。</p>
+<h3><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>提示 &amp; 技巧</h3>
+<p>你可以隨意配置空的 list。 如同<a href="/docs/zh-TW/variant.html#honorable-mentions">變異章節的 list</a> 說明，空的 list 實際上只是個無參數的變異建構子，只會編譯成整數。 不需要額外配置記憶體。</p>
+<p>若要了解如何同時前插不可變且 <code>O(1)</code>，請參考上一個連結。</p>
+<h3><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>設計決策</h3>
+<p>未來，我們可能會提供 list 資料結構，同時具有不可變、伸縮長度及所有快速操作的功能。</p>
+<h2><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>陣列</h2>
+<p>陣列像是 lists，但是是：</p>
+<ul>
+<li>可變的</li>
+<li>快速的隨機存取 &amp; 修改</li>
+<li>原生固定長度（JavaScript 彈性長度）</li>
+</ul>
+<p>使用 <code>[|</code> 及 <code>|]</code> 圍繞。</p>
+<pre><code class="hljs css reason"><span class="hljs-attribute">let myArray</span> = [|<span class="hljs-string">"hello"</span>, <span class="hljs-string">"world"</span>, <span class="hljs-string">"how are you"</span>|];
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>用法</h3>
+<p>標準函式庫 <a href="/api/Array.html">Array</a> 及 <a href="/api/ArrayLabels.html">ArrayLabel</a> 模組。 若要編譯 JS，這裡有熟悉的 <a href="https://bucklescript.github.io/bucklescript/api/Js.Array.html">Js.Array</a> API 綁定。</p>
+<p>存取 &amp; 修改陣列就像是：</p>
+<pre><code class="hljs css reason"><span class="hljs-keyword">let</span> <span class="hljs-attr">myArray</span> = [|<span class="hljs-string">"hello"</span>, <span class="hljs-string">"world"</span>, <span class="hljs-string">"how are you"</span>|];
+
+<span class="hljs-keyword">let</span> <span class="hljs-attr">firstItem</span> = myArray[<span class="hljs-number">0</span>]; <span class="hljs-comment">/* "hello" */</span>
+
+myArray[<span class="hljs-number">0</span>] = <span class="hljs-string">"hey"</span>;
+
+<span class="hljs-comment">/* 現在 [|"hey", "world", "how are you"|] */</span>
+</code></pre>
+<p>上述陣列存取/修改只是 <code>Array.get</code>/<code>Array.set</code> 的語法糖。</p>
+<h3><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>提示 &amp; 技巧</h3>
+<p>如果編譯 JavaScript，Reason 陣列直接地對應 JavaScript 陣列，反之亦然。 因此，儘管在原生陣列是固定長度，仍然可以使用 <code>Js.Array</code> API 調整長度。 這沒問題。</p>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="variant.html">← 變異！</a><a class="docs-next button" href="function.html">函式 →</a></div></div></div></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.js"></script><script>window.foo = new Pjax({
+          areas: [
+            // try to use the first query.
+            '.mainContainer, .docsNavContainer .toc .navWrapper',
+            // fallback
+            'body'
+          ],
+          link: '.docsNavContainer:not(.docsSliderActive) a',
+          update: {
+            script: false,
+          }
+        });
+        var languagesMenuItemCopy = document.getElementById("languages-menu");
+        languagesMenuItemCopy.addEventListener("click", function(e){
+          e.preventDefault();
+          e.stopPropagation();
+          e.stopImmediatePropagation();
+        });</script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+              var search = docsearch({
+                apiKey: '966d1e412f67114a07dc0afe44b19b53',
+                indexName: 'reason',
+                inputSelector: '#search_input_react'
+              });
+            </script></body></html>
