@@ -11,6 +11,7 @@ Then, run it as usual:
 
 ```sh
 cd my-first-app
+npm install
 npm run start
 ```
 
