@@ -74,23 +74,23 @@ addCoordinates(<span class="hljs-number">5</span>, <span class="hljs-number">6</
 <pre><code class="hljs css reason"><span class="hljs-keyword">let</span> drawCircle = (~radius <span class="hljs-keyword">as</span> r: <span class="hljs-built_in">int</span>, ~color <span class="hljs-keyword">as</span> c: <span class="hljs-built_in">string</span>)=&gt; ...;
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" name="curring"></a><a href="#curring" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Curring</h3>
-<p>Reason functions can automatically be <strong>partially</strong> called:</p>
+<p>Reason 函数能够自动地被<strong>部分</strong>调用:</p>
 <pre><code class="hljs css reason"><span class="hljs-attribute">let add</span> = (x, y) =&gt; x + y;
 <span class="hljs-attribute">let addFive</span> = add(5);
 <span class="hljs-attribute">let eleven</span> = addFive(6);
 <span class="hljs-attribute">let twelve</span> = addFive(7);
 </code></pre>
-<p>Actually, the above <code>add</code> is nothing but syntactic sugar for this:</p>
+<p>实际上，之前的<code>add</code>只不过是语法糖：</p>
 <pre><code class="hljs css reason">let add = (<span class="hljs-name">x</span>) =&gt; (<span class="hljs-name">y</span>) =&gt; x + y<span class="hljs-comment">;</span>
 </code></pre>
-<p>OCaml optimizes this to <a href="/try/?reason=DYUwLgBAhgJjEF4IAoAeBKRA+FBPTCOqEA1BLgNwBQVA9AFQTAD2zA1tJGABYgTMBXMAAchAQmhwAYgEsAbnxkBnaBAD6SmQDsA5qDUQAZgK0BjMDOZaIpqMGAT6tKqEiwYshYkkxkAVnRqF3AITWIkd08QZABGQKA">avoid the unnecessary function allocation</a> (2 functions here, naively speaking) whenever it can! This way, we get</p>
+<p>OCaml 对其进行优化以<a href="/try/?reason=DYUwLgBAhgJjEF4IAoAeBKRA+FBPTCOqEA1BLgNwBQVA9AFQTAD2zA1tJGABYgTMBXMAAchAQmhwAYgEsAbnxkBnaBAD6SmQDsA5qDUQAZgK0BjMDOZaIpqMGAT6tKqEiwYshYkkxkAVnRqF3AITWIkd08QZABGQKA">避免任何时候都能够不必要的函数分配</a>(朴实地讲，这里是两个函数)! 这样，我们就得到</p>
 <ul>
-<li>Nice syntax</li>
-<li>Currying for free (every function takes a single argument, actually!)</li>
-<li>No performance cost</li>
+<li>良好的语法</li>
+<li>免费 Currying (实际上，每个函数有一个单独的参数！)</li>
+<li>没有性能损耗</li>
 </ul>
-<h2><a class="anchor" aria-hidden="true" name="optional-labeled-arguments"></a><a href="#optional-labeled-arguments" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Optional Labeled Arguments</h2>
-<p>Labeled function arguments can be made optional during declaration. You can then omit them when calling the function.</p>
+<h2><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>可选的标签参数</h2>
+<p>标签函数参数能够在声明期间标记为可选。而后你可以在调用函数时忽略它们。</p>
 <pre><code class="hljs css reason"><span class="hljs-comment">/* radius can be omitted */</span>
 <span class="hljs-keyword">let</span> drawCircle = <span class="hljs-function">(<span class="hljs-params">~color, ~radius=?, (<span class="hljs-params"></span>)</span>) =&gt;</span> {
   setColor(color);

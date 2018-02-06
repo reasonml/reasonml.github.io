@@ -195,7 +195,7 @@ let ten = 10 in (
 <tr><td><code>fun ((a: int), (b: int)) -&gt; a</code></td><td><code>((a: int, b: int)) =&gt; a;</code></td></tr>
 </tbody>
 </table>
-<p>In Reason, record values resemble JavaScript, using <code>:</code> instead of <code>=</code>.</p>
+<p>在 Reason，record 值像是 JavaScript，使用 <code>:</code> 而不是 <code>=</code>。</p>
 <table>
   <tr>
     <th>
@@ -575,11 +575,11 @@ let tuples: listOfTuplesOfStringAndInt = [(&quot;asdf&quot;, 3)]
 &lt;/h4&gt;
 
 &lt;p&gt;
-  In summary, Reason unifies almost all of the syntax into simple &quot;function application&quot; style meaning that type parameters follow the same comma-separated pattern seen everywhere else in the syntax. This results in fewer syntactic patterns to learn.
+  總之，Reason 幾乎統一所有語法成簡單的&quot;函式應用&quot;風格，表示型別參數也遵循相同逗點分隔的樣式。 結果是可以少學習一些句法樣式。
 &lt;/p&gt;
 
 &lt;p&gt;
-  For example, you can imagine &lt;code&gt;list&lt;/code&gt; being a &quot;function&quot; for types that accepts a type and returns a new type.
+  例如，想像 &lt;code&gt;list&lt;/code&gt; 當作&quot;函式&quot;，接受一個型別傳回新的型別。 type and returns a new type.
 &lt;/p&gt;
 
 &lt;table&gt;
@@ -619,15 +619,15 @@ let tuples: pairs = [(2, 3)];</pre>
 </tr>
 </table></p>
 <pre><code class="hljs">&lt;h2&gt;
-  Tuples as Type Parameters
+  Tuples 作為型別參數
 &lt;/h2&gt;
 
 &lt;p&gt;
-  Because OCaml uses parens and commas to represent multiple arguments to type constructors, it's confusing when one of the arguments to a type constructor is itself a tuple. In OCaml, it's difficult to remember the difference between a type constructor accepting multiple arguments and a type constructor accepting a single argument which happens to be a tuple.
+  因為 OCaml 使用括號及逗點來表示型別建構子的多個參數，當參數本身是 tuple 時容易混淆。 OCaml 中，很難記住接受多個參數跟單個 tuple 參數的差別。
 &lt;/p&gt;
 
 &lt;p&gt;
-  The following examples shows the difference between passing &lt;em&gt;two&lt;/em&gt; type parameters to &lt;code&gt;pair&lt;/code&gt;, and a &lt;em&gt;single&lt;/em&gt; type parameter that happens to be a tuple.
+  下列範例展示傳遞&lt;em&gt;兩個&lt;/em&gt;型別參數到 &lt;code&gt;pair&lt;/code&gt; 和&lt;em&gt;單一&lt;/em&gt;必須是 tuple 的型別參數。
 &lt;/p&gt;
 
 &lt;table&gt;
@@ -664,13 +664,13 @@ let tuples: pairs = [(2, 3)];</pre>
 
 &lt;ul&gt;
   &lt;li&gt;
-    In Reason, syntax that represent tuple or tuple types, always looks like tuples.
+    在 Reason，代表 tuples 或 tuple 型別的語法看起來都像 tuples。
   &lt;/li&gt;
   &lt;li&gt;
-    In Reason, syntax that represent records or record types, always look like records.
+    在 Reason，代表 records 或 record 型別的語法看起來都像 records。
   &lt;/li&gt;
   &lt;li&gt;
-    Just about everything else uses the syntactic pattern of function application (comma separated arguments).
+    其他所有都是應用程式的句法樣式（逗點分隔參數）。
   &lt;/li&gt;
 &lt;/ul&gt;
 
@@ -684,13 +684,13 @@ let tuples: pairs = [(2, 3)];</pre>
 
 &lt;ul&gt;
   &lt;li&gt;
-    OCaml already expects constructor argument types to be specified in tuple form, so it's confusing when a single constructor expects a single argument that &lt;em&gt;happens&lt;/em&gt; to be a tuple type.
+    OCaml 已經預期建構子參數是 tuple 形式，當單一建構子預期單一參數且參數&lt;em&gt;為&lt;/em&gt; tuple 型別容易混淆。
   &lt;/li&gt;
   &lt;li&gt;
-    What's even more confusing is that the constructors don't &lt;em&gt;actually&lt;/em&gt; accept tuples, yet the syntax appear to resemble tuples.
+    更加混淆的是，建構子&lt;em&gt;實際上&lt;/em&gt;不接受 tuples 時，語法看起來像是 tuples。
   &lt;/li&gt;
   &lt;li&gt;
-    Sometimes the syntax for instantiating a constructor with multiple arguments overlaps the syntax for constructing a variant with a single argument that happens to be a tuple - so it looks &lt;em&gt;exactly&lt;/em&gt; like you &lt;em&gt;are&lt;/em&gt; supplying a tuple when you are not actually supplying a tuple.
+    有時候初始多個參數的建構子的語法跟建構單一參數，參數為 tuple 的建構子語法重疊 - 當你實際上不是使用 tuple 時，看起來&lt;em&gt;完全&lt;/em&gt;像是&lt;em&gt;在&lt;/em&gt;使用 tuple。
   &lt;/li&gt;
 &lt;/ul&gt;
 
@@ -700,13 +700,13 @@ let tuples: pairs = [(2, 3)];</pre>
 
 &lt;ul&gt;
   &lt;li&gt;
-    Variant constructor types are expected to be listed as comma separated lists, using parenthesis to group precedence (as with &lt;strong&gt;everything&lt;/strong&gt; else).
+    變異建構子型別預期用逗點分隔列出，使用括號來分組優先順序（&lt;strong&gt;其他&lt;/strong&gt;也是一樣）。
   &lt;/li&gt;
   &lt;li&gt;
-    Constructing instances of the variant (as you would have guessed) follows function application style (comma separated lists).
+    建構變異的實體（如你所猜想）遵循函式應用風格（逗點分隔列出）。
   &lt;/li&gt;
   &lt;li&gt;
-    Tuples &lt;strong&gt;always&lt;/strong&gt; &lt;em&gt;look&lt;/em&gt; like tuples, and anything that looks like a tuple &lt;em&gt;is&lt;/em&gt; a tuple.
+    Tuples &lt;strong&gt;永遠&lt;/strong&gt;&lt;em&gt;看起來&lt;/em&gt;像是 tuples，其他看起來像是 tuple 的 &lt;em&gt;就是&lt;/em&gt; tuple。
   &lt;/li&gt;
 &lt;/ul&gt;
 
@@ -840,7 +840,7 @@ switch (x) {
       </tr>
     </table>
 <pre><code class="hljs">&lt;p&gt;
-  Can you spot the error in the OCaml example? This is one of the most common mistakes among OCaml programmers. The nested &lt;code&gt;match&lt;/code&gt; &lt;em&gt;must&lt;/em&gt; be wrapped in parentheses, otherwise the &lt;code&gt;Some&lt;/code&gt; case is parsed as belonging to the outer &lt;code&gt;match&lt;/code&gt;. Visually, it's actually:
+  你能發現 OCaml 範例的錯誤嗎？ 這是 OCaml 開發者中最常見的錯誤之一。 巢狀 &lt;code&gt;match&lt;/code&gt; &lt;em&gt;必須&lt;/em&gt;包裝在括號裡面，否則&lt;code&gt;某些&lt;/code&gt;情況會當作隸屬於外圍 &lt;code&gt;match&lt;/code&gt;。 視覺上，實際是：
 &lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&quot;ocaml&quot;&gt;let res = match x with
@@ -851,11 +851,11 @@ switch (x) {
 | B (x, y) -&gt; 0
 </code></pre></p>
 <pre><code class="hljs">&lt;p&gt;
-  Reason's mandatory &lt;code&gt;{}&lt;/code&gt; around &lt;code&gt;switch&lt;/code&gt; cases prevents this issue.
+  Reason 強制在 &lt;code&gt;switch&lt;/code&gt; 使用 &lt;code&gt;{}&lt;/code&gt; 來避免這個問題。
 &lt;/p&gt;
 
 &lt;h2&gt;
-  Modules and Signatures
+  模組和標記式
 &lt;/h2&gt;
 
 &lt;h3&gt;
@@ -1027,19 +1027,19 @@ functor (B: BSig) -&gt; struct end</pre>
 </tr>
 </table></p>
 <pre><code class="hljs">&lt;h2&gt;
-  Various Improvements
+  各種改進
 &lt;/h2&gt;
 
 &lt;p&gt;
-  OCaml doesn't require parens around sequences &lt;code&gt;(a;b;c;d)&lt;/code&gt; or tuples &lt;code&gt;(x,y)&lt;/code&gt;, so that ends up ruling out a bunch of other very convenient syntax rules. Since Reason always uses &lt;code&gt;{}&lt;/code&gt; to enclose sequences or let bindings, and Reason always requires &lt;code&gt;()&lt;/code&gt; around tuples, many other syntax constructs are expressed more intuitively, without requiring extra wrapping in parenthesis.
+  OCaml 並不要求連續 &lt;code&gt;(a;b;c;d)&lt;/code&gt; 或 tuples &lt;code&gt;(x,y)&lt;/code&gt; 使用括號，所以終結其他非常方便語法規則。 由於 Reason 使用 &lt;code&gt;{}&lt;/code&gt; 圍起連續或 let 繫結，且 Reason 要求 &lt;code&gt;()&lt;/code&gt; 圍著 tuples，其他許多語法建構更加直覺表達，不需要額外括號。
 &lt;/p&gt;
 
 &lt;h3&gt;
-  Lambdas as record fields no longer need extra parens
+  Record 的 Lambdas 欄位不再需要額外括號
 &lt;/h3&gt;
 
 &lt;p&gt;
-  This is a welcomed improvement because the OCaml type errors the user would see were very confusing when it would believe the function's return value was a tuple with infix &lt;code&gt;,&lt;/code&gt; comma.
+  這是個受歡迎的改善，因為當函式傳回值是個 tuple 時，需要中置逗點 &lt;code&gt;,&lt;/code&gt;，使用者看到的 OCaml 型別錯誤時很容易混淆。
 &lt;/p&gt;
 
 &lt;table&gt;
@@ -1077,7 +1077,7 @@ your: (a, b) =&gt; a + b
 </tr>
 </table></p>
 <pre><code class="hljs">&lt;h3&gt;
-  Lambdas as match results no longer need extra parens
+  符合結果的 Lambdas 不再需要額外括號
 &lt;/h3&gt;
 
 &lt;table&gt;
@@ -1119,7 +1119,7 @@ switch (prnt) {
 </tr>
 </table></p>
 <pre><code class="hljs">&lt;h3&gt;
-  Lambdas and type annotations in tuples no longer require extra parens
+  Lambdas 和 tuples 的型別註記不再需要額外括號
 &lt;/h3&gt;
 
 &lt;table&gt;
@@ -1155,15 +1155,15 @@ switch (prnt) {
 &lt;/table&gt;
 
 &lt;h2&gt;
-  Various Differences
+  各種差異
 &lt;/h2&gt;
 
 &lt;h3&gt;
-  &lt;code&gt;as&lt;/code&gt; precedence
+  &lt;code&gt;as&lt;/code&gt; 優先順序
 &lt;/h3&gt;
 
 &lt;p&gt;
-  With Reason, &lt;code&gt;as&lt;/code&gt; has a higher precedence than &lt;code&gt;|&lt;/code&gt; bar. This allows creating &lt;code&gt;as&lt;/code&gt; aliases for entire rows in pattern matching.
+  Reason 中，&lt;code&gt;as&lt;/code&gt; 比 &lt;code&gt;|&lt;/code&gt; 有更高優先順序。可以新增 &lt;code&gt;as&lt;/code&gt; 別名供樣式匹配整個列使用。
 &lt;/p&gt;
 
 &lt;table&gt;
@@ -1203,11 +1203,11 @@ switch (MyThing(20)) {
 </tr>
 </table></p>
 <pre><code class="hljs">&lt;h3&gt;
-  Mutable Record Field Updates
+  可變的 Record 欄位改變
 &lt;/h3&gt;
 
 &lt;p&gt;
-  Because equalities and their negations have been made more consistent in Reason, the &lt;code&gt;=&lt;/code&gt; operator is available for mutable field update.
+  因為在 Reason 相等與否定已經更加一致，可變欄位的修改可以使用 &lt;code&gt;=&lt;/code&gt; 操作子。
 &lt;/p&gt;
 
 &lt;table&gt;
@@ -1233,7 +1233,7 @@ switch (MyThing(20)) {
 &lt;/table&gt;
 
 &lt;h3&gt;
-  Prefix operators
+  前置運算子
 &lt;/h3&gt;
 
 &lt;p&gt;

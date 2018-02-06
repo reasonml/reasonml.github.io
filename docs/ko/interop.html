@@ -37,7 +37,7 @@ console.<span class="hljs-built_in">log</span>('here is some javascript for you'
 let x = [%bs.raw {| 'here <span class="hljs-keyword">is</span> a <span class="hljs-built_in">string</span> <span class="hljs-keyword">from</span> javascript' |}];
 Js.<span class="hljs-built_in">log</span>(x ++ <span class="hljs-string">" back in reason land"</span>); /* ++ <span class="hljs-keyword">is</span> <span class="hljs-keyword">the</span> operator <span class="hljs-keyword">for</span> <span class="hljs-built_in">string</span> concat */
 </code></pre>
-<p>Now you might be wondering &quot;what magic is this?? How did ocaml know that <code>x</code> was a string? <strong>It doesn't</strong>. The type of <code>x</code> in this code is a magic type that will unify with anything! This is quite dangerous and can have cascading effects in OCaml's type inference algorithm.</p>
+<p>Now you might be wondering &quot;what magic is this?? How did ocaml know that <code>x</code> was a string?&quot; <strong>It doesn't</strong>. The type of <code>x</code> in this code is a magic type that will unify with anything! This is quite dangerous and can have cascading effects in OCaml's type inference algorithm.</p>
 <pre><code class="hljs css reason"><span class="hljs-keyword">let</span> y = [%bs.raw {| <span class="hljs-string">'something'</span> |}];
 Js.log((<span class="hljs-string">"a string"</span> ++ y, <span class="hljs-number">10</span> + y));
 <span class="hljs-comment">/* danger!! ocaml won't stop you from using y as 2 totally different types */</span>

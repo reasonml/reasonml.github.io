@@ -15,7 +15,7 @@
             nav.classList.toggle('docsSliderActive');
           };
         </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://crowdin.com/project/reason/zh-TW" target="_blank">Translate</a><h1>交互作用</h1></header><article><div><span><h2><a class="anchor" aria-hidden="true" name="reason-javascript"></a><a href="#reason-javascript" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>直接在 Reason 裡面撰寫 JavaScript</h2>
-<p>如果你只是在嘗試某些東西，這會十分方便，但也會有所有不安全的 JavaScript 程式碼</p>
+<p>If you're just hacking things together, this can be very nice, but you also have all of the unsafety of JavaScript code</p>
 <pre><code class="hljs css reason">Js.<span class="hljs-built_in">log</span>(<span class="hljs-string">"this is reason"</span>);
 
 [%%bs.raw {<span class="hljs-string">|</span>
@@ -37,7 +37,7 @@ console.<span class="hljs-built_in">log</span>('here is some javascript for you'
 <span class="hljs-built_in">let</span> x = [%bs.raw {| 'here <span class="hljs-built_in">is</span> a <span class="hljs-built_in">string</span> from javascript' |}];
 Js.<span class="hljs-built_in">log</span>(x ++ <span class="hljs-string">" back in reason land"</span>); <span class="hljs-comment">/* ++ 是字串串接操作子 */</span>
 </code></pre>
-<p>現在可能會想說 &quot;這是什麼巫術？？ OCaml 是怎麼知道 <code>x</code> 是個字串？ <strong>它不知道</strong>。 這段程式碼中 <code>x</code> 的型別是個神奇的型別，統一成任何東西！ 這有點危險而且對 OCaml 的型別推論演算法有瀑布式影響。</p>
+<p>現在可能會想說 &quot;這是什麼巫術？？ How did ocaml know that <code>x</code> was a string?&quot; <strong>It doesn't</strong>. The type of <code>x</code> in this code is a magic type that will unify with anything! This is quite dangerous and can have cascading effects in OCaml's type inference algorithm.</p>
 <pre><code class="hljs css reason"><span class="hljs-keyword">let</span> y = [%bs.raw {| <span class="hljs-string">'something'</span> |}];
 Js.log((<span class="hljs-string">"a string"</span> ++ y, <span class="hljs-number">10</span> + y));
 <span class="hljs-comment">/* 危險！！OCaml 不會阻止你把 y 當作 2 種完全不同的型別 */</span>
@@ -91,7 +91,7 @@ Js.log(calculate([<span class="hljs-number">1</span>, <span class="hljs-number">
 </code></pre>
 <p>當然，上述函式可以無痛移植到 Reason。</p>
 <p><strong>請記住</strong>對於學習這是非常有用的逃生出口，這樣就可以快速跳入並且開始做點東西，但是回到開始並將東西轉成優良型別安全的 Reason 是很好的練習。</p>
-<p>我曾經遇到一些為了節省時間而使用原生 JavaScript 的臭蟲</p>
+<p>I've run into more than a few bugs because of raw JavaScript that I added to save time</p>
 <h2><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>平靜下來且受到紀律</h2>
 <p>目前為止都在使用 <code>bs.raw</code>，非常快速和自由的方式，<strong>不</strong>適合正式環境。</p>
 <p>但是如果我們確實需要呼叫 JavaScript 的函式呢？ 需要與 DOM 交互作用、或者使用 node 模組。 在 BuckleScript，使用 <code>external</code> 宣告式（<a href="https://bucklescript.github.io/docs/en/intro-to-external.html">文件</a>）。</p>
