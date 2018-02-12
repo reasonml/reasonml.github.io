@@ -37,7 +37,7 @@ console.<span class="hljs-built_in">log</span>('here is some javascript for you'
 let x = [%bs.raw {| 'here <span class="hljs-keyword">is</span> a <span class="hljs-built_in">string</span> <span class="hljs-keyword">from</span> javascript' |}];
 Js.<span class="hljs-built_in">log</span>(x ++ <span class="hljs-string">" back in reason land"</span>); /* ++ <span class="hljs-keyword">is</span> <span class="hljs-keyword">the</span> operator <span class="hljs-keyword">for</span> <span class="hljs-built_in">string</span> concat */
 </code></pre>
-<p>Maintenant vous devez peut-être vous demander &quot;mais qu'elle est cette sorcellerie ??&quot;. How did ocaml know that <code>x</code> was a string?&quot; <strong>It doesn't</strong>. The type of <code>x</code> in this code is a magic type that will unify with anything! This is quite dangerous and can have cascading effects in OCaml's type inference algorithm.</p>
+<p>Maintenant vous devez peut-être vous demander &quot;mais qu'elle est cette sorcellerie ??&quot;. Comment ocaml fait pour savoir que <code>x</code> est une chaine de caractère ? <strong>Il ne sait pas</strong>. The type of <code>x</code> in this code is a magic type that will unify with anything! Voilà pourquoi cette méthode est très dangereuse et peut avoir des effets en cascade dans l'algorithme d'inférence de types d'OCaml.</p>
 <pre><code class="hljs css reason"><span class="hljs-keyword">let</span> y = [%bs.raw {| <span class="hljs-string">'something'</span> |}];
 Js.log((<span class="hljs-string">"a string"</span> ++ y, <span class="hljs-number">10</span> + y));
 <span class="hljs-comment">/* attention !! OCaml ne vous empêchera pas d'utiliser y comme étant 2 types totalement différents */</span>

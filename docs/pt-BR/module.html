@@ -75,49 +75,50 @@ printProfession(anotherPerson)<span class="hljs-comment">;</span>
 </code></pre>
 <p><strong>Nota</strong>: abrir (<code>open</code>) e incluir (<code>include</code>) são muito diferentes! O primeiro traz todo o conteúdo de um módulo para o escopo atual, de modo que você não precisa referir-se a um valor prefixando-o com o nome do módulo toda vez. O segundo <strong>transcreve</strong> a definição de um módulo estaticamente, e então também faz um <code>open</code>.</p>
 <h3><a class="anchor" aria-hidden="true" name="to-arquivo-re-e-um-modulo"></a><a href="#to-arquivo-re-e-um-modulo" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>To arquivo <code>.re</code> é um módulo</h3>
-<p>Um arquivo OCaml/Reason é mapeado para um módulo; o interessante é que isso traz alguma expressividade que em outras linguagens exigiria geração de código. O arquivo <code>react.re</code> implicitamente forma um módulo <code>React</code>, que pode ser enxergado por código em outros arquivos.</p>
-<pre><code class="hljs css reason"><span class="hljs-comment">/* arquivoA.re. Isso geralmente é compilado para o módulo ArquivoA abaixo */</span>
+<p>Um arquivo OCaml/Reason é mapeado para um módulo; o interessante é que isso traz alguma expressividade que em outras linguagens exigiria geração de código. The file <code>React.re</code> implicitly forms a module <code>React</code>, which can be seen by other source files.</p>
+<pre><code class="hljs css reason"><span class="hljs-comment">/* FileA.re. This typically compiles to module FileA below */</span>
 <span class="hljs-keyword">let</span> <span class="hljs-attr">a</span> = <span class="hljs-number">1</span>;
 <span class="hljs-keyword">let</span> <span class="hljs-attr">b</span> = <span class="hljs-number">2</span>;
 
-<span class="hljs-comment">/* arquivoB.re */</span>
-<span class="hljs-comment">/* Mapeia a implementação de arquivoA para uma nova API */</span>
+<span class="hljs-comment">/* FileB.re */</span>
+<span class="hljs-comment">/* Maps FileA's implementation to a new API */</span>
 <span class="hljs-keyword">let</span> <span class="hljs-attr">alpha</span> = FileA.a;
 <span class="hljs-keyword">let</span> <span class="hljs-attr">beta</span> = FileA.b;
 </code></pre>
 <p>Esse trecho inventado expressa copiar um arquivo:</p>
-<pre><code class="hljs css reason"><span class="hljs-comment">/* arquivoA.re. Isso geralmente é compilado para o módulo ArquivoA abaixo */</span>
+<pre><code class="hljs css reason"><span class="hljs-comment">/* FileA.re. This typically compiles to module FileA below */</span>
 let a = <span class="hljs-number">1</span><span class="hljs-comment">;</span>
 let <span class="hljs-keyword">b </span>= <span class="hljs-number">2</span><span class="hljs-comment">;</span>
 
-<span class="hljs-comment">/* arquivoB.re */</span>
-<span class="hljs-comment">/* compila para exatamente o mesmo conteúdo de arquivoA.re sem perda de desempenho em execução! */</span>
-include ArquivoA<span class="hljs-comment">;</span>
+<span class="hljs-comment">/* FileB.re */</span>
+<span class="hljs-comment">/* compiles to exactly fileA.re's content with no runtime overhead! */</span>
+include FileA<span class="hljs-comment">;</span>
 </code></pre>
+<p><strong>Note</strong>: Because files are modules, file names should, by convention, be capitalized so they match their module names. Uncapitalized file names are not invalid, but will be transformed into a capitalized module name. I.e. <code>file.re</code> will be compiled into the module <code>File</code>. To simplify and minimize the disconnect here, the convention is therefore to capitalize file names too.</p>
 <h2><a class="anchor" aria-hidden="true" name="assinaturas"></a><a href="#assinaturas" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Assinaturas</h2>
-<p>O tipo de um módulo é chamado de &quot;assinatura&quot;, e pode ser escrito explicitamente. Se um módulo é como um arquivo (de implementação) <code>.re</code>, então a assinatura de um módulo é como um arquivo (de interface) <code>.rei</code>.</p>
+<p>A module's type is called a &quot;signature&quot;, and can be written explicitly. If a module is like a <code>.re</code> (implementation) file, then a module's signature is like a <code>.rei</code> (interface) file.</p>
 <h3><a class="anchor" aria-hidden="true" name="criac-o"></a><a href="#criac-o" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Criação</h3>
-<p>Para criar uma assinatura, use a palavra-chave <code>module type</code>. A assinatura precisa começar com uma <strong>letra maiúscula</strong>. Qualquer coisa que você possa colocar num arquivo <code>.rei</code>, você pode colocar dentro do bloco <code>{}</code> da definição de uma assinatura.</p>
+<p>To create a signature, use the <code>module type</code> keyword. The signature name must start with a <strong>capital letter</strong>. Whatever you could place in a <code>.rei</code> file, you may place inside a signature definition's <code>{}</code> block.</p>
 <pre><code class="hljs css reason"><span class="hljs-comment">/* Partindo do exemplo da seção anterior */</span>
 <span class="hljs-keyword">module</span> type EstablishmentType = {
   <span class="hljs-keyword">type</span> profession;
   <span class="hljs-keyword">let</span> getProfession: <span class="hljs-function"><span class="hljs-params">profession</span> =&gt;</span> <span class="hljs-built_in">string</span>;
 };
 </code></pre>
-<p>Uma assinatura define uma lista de requerimentos que um módulo precisa satisfazer para corresponder a essa assinatura. Estes requerimentos são da forma:</p>
+<p>A signature defines the list of requirements that a module must satisfy in order for that module to match the signature. Those requirements are of the form:</p>
 <ul>
 <li><code>let x: int;``let</code> requer um binding nomeado <code>x</code>, do tipo <code>int</code>.</li>
 <li><code>type t = someType;</code> requer que um campo de tipo <code>t</code> seja igual a <code>someType</code>.</li>
 <li><code>type t;</code> requer um campo de tipo <code>t</code>, mas sem obrigar qualquer imposição no atual tipo concreto <code>t</code>. Nós podemos usar <code>t</code> em outros trechos da assinatura para descrever relacionamentos, e.g. <code>let makePair: t =&gt; (t, t)</code> porém sem assumir, por exemplo, que <code>t</code> seja um <code>int</code>. Isto nos compele a usar grandes habilidades de abstração.</li>
 </ul>
-<p>Para ilustrar as várias declarações de tipos, considere a assinatura <code>EstablishmentType</code> acima, que requer que um módulo:</p>
+<p>To illustrate the various kinds of type entries, consider the above signature <code>EstablishmentType</code> which requires that a module:</p>
 <ul>
 <li>Declare um tipo com nome <code>profession</code>.</li>
 <li>Inclua uma função que tenha um valor do tipo <code>profession</code> e retorne uma string.</li>
 </ul>
-<p><strong>Observação</strong>:</p>
-<p>Módulos com o tipo <code>EstablishmentType</code> podem conter mais campos do que aqueles que a assinatura declara, tal como o módulo <code>School</code> na seção anterior (se nós escolhêssemos atribuir a ele o tipo <code>EstablishmentType</code>. Caso contrário, <code>School</code> exporia todos os campos). Isso efetivamente torna o campo <code>person1</code> um detalhe de implementação! Entidades externas não podem acessá-lo, dado que não está presente na assinatura; a assinatura <strong>restringiu</strong> o que outros podem acessar.</p>
-<p>O tipo <code>EstablishmentType.profession</code> é <strong>abstrato</strong>: não possui um tipo concreto; ele está dizendo &quot;não me importa qual seja o tipo real, somente que este é usado como entrada de <code>getProfession</code>&quot;. Isto é útil para fazer vários módulos se ajustarem à mesma interface:</p>
+<p><strong>Note</strong>:</p>
+<p>Modules of the type <code>EstablishmentType</code> can contain more fields than the signature declares, just like the module <code>School</code> in the previous section (if we choose to assign it the type <code>EstablishmentType</code>. Otherwise, <code>School</code> exposes every field). This effectively makes the <code>person1</code> field an enforced implementation detail! Outsiders can't access it, since it's not present in the signature; the signature <strong>constrained</strong> what others can access.</p>
+<p>The type <code>EstablishmentType.profession</code> is <strong>abstract</strong>: it doesn't have a concrete type; it's saying &quot;I don't care what the actual type is, but it's used as input to <code>getProfession</code>&quot;. This is useful to fit many modules under the same interface:</p>
 <pre><code class="hljs css reason">module Company: EstablishmentType = {
  <span class="hljs-built_in"> type </span>profession = CEO | Designer | Engineer | <span class="hljs-built_in">..</span>.;
 
@@ -126,9 +127,9 @@ include ArquivoA<span class="hljs-comment">;</span>
   let person2 = <span class="hljs-built_in">..</span>.;
 };
 </code></pre>
-<p>Também é útil para esconder o tipo subjacente como um detalhe de implementação do qual outros não podem depender. Se você perguntar qual o é tipo de <code>Company.profession</code>, ao invés de expor a variante, vai somente ser respondido como &quot;é <code>Company.profession</code>&quot;.</p>
+<p>It's also useful to hide the underlying type as an implementation detail others can't rely on. If you ask what the type of <code>Company.profession</code> is, instead of exposing the variant, it'll only tell you &quot;it's <code>Company.profession</code>&quot;.</p>
 <h3><a class="anchor" aria-hidden="true" name="estendendo-assinaturas-de-modulos"></a><a href="#estendendo-assinaturas-de-modulos" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Estendendo assinaturas de módulos</h3>
-<p>Assim como os próprios módulos, assinaturas de módulos também podem ser estendidas através de <code>include module type of Foo</code>:</p>
+<p>Like modules themselves, module signatures can also be extended through <code>include module type of Foo</code>:</p>
 <pre><code class="hljs css reason"><span class="hljs-keyword">module</span> <span class="hljs-keyword">type</span> <span class="hljs-type">BaseComponent</span> = {
   <span class="hljs-keyword">let</span> defaultGreeting: <span class="hljs-built_in">string</span>;
   <span class="hljs-keyword">let</span> getAudience: (~excited: <span class="hljs-built_in">bool</span>) =&gt; <span class="hljs-built_in">string</span>;
@@ -141,25 +142,25 @@ include ArquivoA<span class="hljs-comment">;</span>
 };
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" name="todo-arquivo-rei-e-uma-assinatura"></a><a href="#todo-arquivo-rei-e-uma-assinatura" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Todo arquivo <code>.rei</code> é uma assinatura</h3>
-<p>Similar a como um arquivo <code>react.re</code> implicitamente define um módulo <code>React</code>, um arquivo <code>react.rei</code> implicitamente define uma assinatura para <code>React</code>. Se <code>react.rei</code> não é fornecido, a assinatura de <code>react.re</code> é assumida como o padrão, com todos os campos do módulo expostos. Por não poder conter arquivos de implementação, arquivos <code>.rei</code> também são usados no ecossistema para documentar a API pública dos módulos correspondentes.</p>
-<pre><code class="hljs css reason"><span class="hljs-comment">/* arquivo react.re (implementação. Compila para módulo React) */</span>
-<span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">state</span></span> = int;
-<span class="hljs-keyword">let</span> render = (<span class="hljs-built_in">str</span>) =&gt; <span class="hljs-built_in">str</span>;
+<p>Similar to how a <code>React.re</code> file implicitly defines a module <code>React</code>, a file <code>React.rei</code> implicitly defines a signature for <code>React</code>. If <code>React.rei</code> isn't provided, the signature of <code>React.re</code> defaults to exposing all the fields of the module. Because they don't contain implementation files, <code>.rei</code> files are used in the ecosystem to also document the public API of their corresponding modules.</p>
+<pre><code class="hljs css reason">/* file <span class="hljs-type">React</span>.re (implementation. <span class="hljs-type">Compiles</span> <span class="hljs-keyword">to</span> <span class="hljs-keyword">module</span> <span class="hljs-type">React</span>) */
+<span class="hljs-keyword">type</span> state = <span class="hljs-built_in">int</span>;
+<span class="hljs-keyword">let</span> render = (str) =&gt; str;
 </code></pre>
-<pre><code class="hljs css reason"><span class="hljs-comment">/* arquivo react.rei (interface. Compila para assinatura do módulo React) */</span>
-<span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">state</span></span> = int;
-<span class="hljs-keyword">let</span> render: <span class="hljs-built_in">str</span> =&gt; <span class="hljs-built_in">str</span>;
+<pre><code class="hljs css reason">/* file <span class="hljs-type">React</span>.rei (interface. <span class="hljs-type">Compiles</span> <span class="hljs-keyword">to</span> signature <span class="hljs-keyword">of</span> <span class="hljs-keyword">module</span> <span class="hljs-type">React</span>) */
+<span class="hljs-keyword">type</span> state = <span class="hljs-built_in">int</span>;
+<span class="hljs-keyword">let</span> render: str =&gt; str;
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" name="func-es-de-modulos-funtores"></a><a href="#func-es-de-modulos-funtores" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Funções de Módulos (funtores)</h2>
-<p>Módulos também podem ser passados para funções! Seria o equivalente a passar um arquivo como uma entidade de primeira classe. Entretanto, módulos estão em um &quot;nível&quot; diferente da linguagem em relação a outros conceitos comuns, portanto não podemos passá-los para funções <em>comuns</em>. Ao invés disso, nós passamos eles para funções especiais chamadas &quot;funtores&quot;.</p>
-<p>A sintaxe para definir e utilizar funtores é bem parecida com a sintaxe para definir e utilizar funções comuns. As principais diferenças são:</p>
+<p>Modules can be passed to functions! It would be the equivalent of passing a file as a first-class item. However, modules are at a different &quot;layer&quot; of the language than other common concepts, so we can't pass them to <em>regular</em> functions. Instead, we pass them to special functions called &quot;functors&quot;.</p>
+<p>The syntax for defining and using functors is very much like the syntax for defining and using regular functions. The primary differences are:</p>
 <ul>
 <li>Funtores usam a palavra-chave <code>module</code> ao invés de <code>let</code>.</li>
 <li>Funtores recebem módulos como argumentos e retornam um módulo.</li>
 <li>Funtores <em>exigem</em> anotação de argumentos.</li>
 <li>Funtores precisam iniciar com letra maiúscula (assim como módulos/assinaturas).</li>
 </ul>
-<p>Segue um funtor <code>MakeSet</code> de exemplo, que recebe um módulo do tipo <code>Comparable</code> e retorna um novo conjunto que pode conter tais itens comparáveis.</p>
+<p>Here's an example <code>MakeSet</code> functor, that takes in a module of the type <code>Comparable</code> and returns a new set that can contain such comparable items.</p>
 <pre><code class="hljs css reason"><span class="hljs-keyword">module</span> type Comparable = {
   <span class="hljs-keyword">type</span> t;
   <span class="hljs-keyword">let</span> equal: <span class="hljs-function">(<span class="hljs-params">t, t</span>) =&gt;</span> bool;
@@ -181,7 +182,7 @@ include ArquivoA<span class="hljs-comment">;</span>
     };
 };
 </code></pre>
-<p>Funtores podem ser aplicados usando a sintaxe de aplicação de funções. no trecho abaixo, nós estamos criando um conjunto, cujos itens são pares de inteiros.</p>
+<p>Functors can be applied using function application syntax. In this case, we're creating a set, whose items are pairs of integers.</p>
 <pre><code class="hljs css reason"><span class="hljs-keyword">module</span> IntPair = {
   <span class="hljs-keyword">type</span> t = (int, int);
   <span class="hljs-keyword">let</span> equal = <span class="hljs-function">(<span class="hljs-params">(<span class="hljs-params">x1, y1</span>), (<span class="hljs-params">x2, y2</span>)</span>) =&gt;</span> x1 == x2 &amp;&amp; y1 == y2;
@@ -192,7 +193,7 @@ include ArquivoA<span class="hljs-comment">;</span>
 <span class="hljs-keyword">module</span> SetOfIntPairs = MakeSet(IntPair);
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" name="tipos-de-func-es-de-modulos"></a><a href="#tipos-de-func-es-de-modulos" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Tipos de funções de módulos</h3>
-<p>Assim como tipos dos módulos, tipos dos funtores também agem para restringir o que podemos assumir sobre funtores. A sintaxe para tipos dos funtores é consistente com aquela de tipos das funções, porém com tipos iniciando com letra maiúscula para representar as assinaturas de módulos que o funtor aceita como argumentos e valor de retorno. No exemplo anterior, nós estamos expondo o tipo subjacente do conjunto; dando a <code>MakeSet</code> uma assinatura de funtor, nós podemos esconder a estrutura de dados subjacente!</p>
+<p>Like with module types, functor types also act to constrain and hide what we may assume about functors. The syntax for functor types are consistent with those for function types, but with types capitalized to represent the signatures of modules the functor accepts as arguments and return values. In the previous example, we're exposing the backing type of a set; by giving <code>MakeSet</code> a functor signature, we can hide the underlying data structure!</p>
 <pre><code class="hljs css reason">module<span class="hljs-built_in"> type </span>Comparable = <span class="hljs-built_in">..</span>.
 
 module<span class="hljs-built_in"> type </span>MakeSetType = (Item: Comparable) =&gt; {
@@ -206,7 +207,7 @@ module MakeSet: MakeSetType = (Item: Comparable) =&gt; {
 };
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" name="desvantagens"></a><a href="#desvantagens" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Desvantagens</h2>
-<p>Módulos e funtores estão em um &quot;nível&quot; diferente da linguagem em relação ao resto (funções, let bindings, estruturas de dados, etc.). Por exemplo, você não consegue passá-los facilmente para uma tupla ou um record. Use-os judiciosamente! Muitas das vezes, apenas um record ou uma função são o suficiente.</p>
+<p>Modules and functors are at a different &quot;layer&quot; of language than the rest ( functions, let bindings, data structures, etc.). For example, you can't easily pass them into a tuple or record. Use them judiciously! Lots of times, just a record or a function is enough.</p>
 <pre><code class="hljs css reason">module <span class="hljs-type">School</span> = <span class="hljs-meta">{...}</span>;
 
 /* isto lhe dará um erro de sintaxe! */

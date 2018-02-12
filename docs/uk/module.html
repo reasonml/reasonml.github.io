@@ -75,25 +75,26 @@ printProfession(anotherPerson)<span class="hljs-comment">;</span>
 </code></pre>
 <p><strong>Note</strong>: <code>open</code> and <code>include</code> are very different! The former brings a module's content into your current scope, so that you don't have to refer to a value by prefixing it with the module's name every time. The latter <strong>copies over</strong> the definition of a module statically, then also do an <code>open</code>.</p>
 <h3><a class="anchor" aria-hidden="true" name="every-re-file-is-a-module"></a><a href="#every-re-file-is-a-module" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Every <code>.re</code> file is a module</h3>
-<p>An OCaml/Reason file maps to a module; this unlocks some interesting expressivity that'd previously require code generation in other languages. The file <code>react.re</code> implicitly forms a module <code>React</code>, which can be seen by other source files.</p>
-<pre><code class="hljs css reason"><span class="hljs-comment">/* fileA.re. This typically compiles to module FileA below */</span>
+<p>An OCaml/Reason file maps to a module; this unlocks some interesting expressivity that'd previously require code generation in other languages. The file <code>React.re</code> implicitly forms a module <code>React</code>, which can be seen by other source files.</p>
+<pre><code class="hljs css reason"><span class="hljs-comment">/* FileA.re. This typically compiles to module FileA below */</span>
 <span class="hljs-keyword">let</span> <span class="hljs-attr">a</span> = <span class="hljs-number">1</span>;
 <span class="hljs-keyword">let</span> <span class="hljs-attr">b</span> = <span class="hljs-number">2</span>;
 
-<span class="hljs-comment">/* fileB.re */</span>
-<span class="hljs-comment">/* Maps fileA's implementation to a new API */</span>
+<span class="hljs-comment">/* FileB.re */</span>
+<span class="hljs-comment">/* Maps FileA's implementation to a new API */</span>
 <span class="hljs-keyword">let</span> <span class="hljs-attr">alpha</span> = FileA.a;
 <span class="hljs-keyword">let</span> <span class="hljs-attr">beta</span> = FileA.b;
 </code></pre>
 <p>This contrived snippet expresses &quot;copying&quot; a file:</p>
-<pre><code class="hljs css reason"><span class="hljs-comment">/* fileA.re. This typically compiles to module FileA below */</span>
+<pre><code class="hljs css reason"><span class="hljs-comment">/* FileA.re. This typically compiles to module FileA below */</span>
 let a = <span class="hljs-number">1</span><span class="hljs-comment">;</span>
 let <span class="hljs-keyword">b </span>= <span class="hljs-number">2</span><span class="hljs-comment">;</span>
 
-<span class="hljs-comment">/* fileB.re */</span>
+<span class="hljs-comment">/* FileB.re */</span>
 <span class="hljs-comment">/* compiles to exactly fileA.re's content with no runtime overhead! */</span>
 include FileA<span class="hljs-comment">;</span>
 </code></pre>
+<p><strong>Note</strong>: Because files are modules, file names should, by convention, be capitalized so they match their module names. Uncapitalized file names are not invalid, but will be transformed into a capitalized module name. I.e. <code>file.re</code> will be compiled into the module <code>File</code>. To simplify and minimize the disconnect here, the convention is therefore to capitalize file names too.</p>
 <h2><a class="anchor" aria-hidden="true" name="signatures"></a><a href="#signatures" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Signatures</h2>
 <p>A module's type is called a &quot;signature&quot;, and can be written explicitly. If a module is like a <code>.re</code> (implementation) file, then a module's signature is like a <code>.rei</code> (interface) file.</p>
 <h3><a class="anchor" aria-hidden="true" name="creation"></a><a href="#creation" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Creation</h3>
@@ -141,12 +142,12 @@ include FileA<span class="hljs-comment">;</span>
 };
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" name="every-rei-file-is-a-signature"></a><a href="#every-rei-file-is-a-signature" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Every <code>.rei</code> file is a signature</h3>
-<p>Similar to how a <code>react.re</code> file implicitly defines a module <code>React</code>, a file <code>react.rei</code> implicitly defines a signature for <code>React</code>. If <code>react.rei</code> isn't provided, the signature of <code>react.re</code> defaults to exposing all the fields of the module. Because they don't contain implementation files, <code>.rei</code> files are used in the ecosystem to also document the public API of their corresponding modules.</p>
-<pre><code class="hljs css reason">/* file react.re (implementation. <span class="hljs-type">Compiles</span> <span class="hljs-keyword">to</span> <span class="hljs-keyword">module</span> <span class="hljs-type">React</span>) */
+<p>Similar to how a <code>React.re</code> file implicitly defines a module <code>React</code>, a file <code>React.rei</code> implicitly defines a signature for <code>React</code>. If <code>React.rei</code> isn't provided, the signature of <code>React.re</code> defaults to exposing all the fields of the module. Because they don't contain implementation files, <code>.rei</code> files are used in the ecosystem to also document the public API of their corresponding modules.</p>
+<pre><code class="hljs css reason">/* file <span class="hljs-type">React</span>.re (implementation. <span class="hljs-type">Compiles</span> <span class="hljs-keyword">to</span> <span class="hljs-keyword">module</span> <span class="hljs-type">React</span>) */
 <span class="hljs-keyword">type</span> state = <span class="hljs-built_in">int</span>;
 <span class="hljs-keyword">let</span> render = (str) =&gt; str;
 </code></pre>
-<pre><code class="hljs css reason">/* file react.rei (interface. <span class="hljs-type">Compiles</span> <span class="hljs-keyword">to</span> signature <span class="hljs-keyword">of</span> <span class="hljs-keyword">module</span> <span class="hljs-type">React</span>) */
+<pre><code class="hljs css reason">/* file <span class="hljs-type">React</span>.rei (interface. <span class="hljs-type">Compiles</span> <span class="hljs-keyword">to</span> signature <span class="hljs-keyword">of</span> <span class="hljs-keyword">module</span> <span class="hljs-type">React</span>) */
 <span class="hljs-keyword">type</span> state = <span class="hljs-built_in">int</span>;
 <span class="hljs-keyword">let</span> render: str =&gt; str;
 </code></pre>

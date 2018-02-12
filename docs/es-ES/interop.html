@@ -15,7 +15,7 @@
             nav.classList.toggle('docsSliderActive');
           };
         </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://crowdin.com/project/reason/es-ES" target="_blank">Translate</a><h1>Interop</h1></header><article><div><span><h2><a class="anchor" aria-hidden="true" name="tan-solo-escribe-javascript-en-medio-de-tu-codigo-reason"></a><a href="#tan-solo-escribe-javascript-en-medio-de-tu-codigo-reason" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Tan solo escribe JavaScript en medio de tu código Reason</h2>
-<p>If you're just hacking things together, this can be very nice, but you also have all of the unsafety of JavaScript code</p>
+<p>Si sólo estas haciendo cambios puntuales <em>hacking</em>, esto puede estar muy bien, pero también tienes toda la inseguridad del código JavaScript</p>
 <pre><code class="hljs css reason">Js.<span class="hljs-built_in">log</span>(<span class="hljs-string">"esto es reason"</span>);
 
 [%%bs.raw {<span class="hljs-string">|</span>
@@ -37,7 +37,7 @@ console.<span class="hljs-built_in">log</span>('aquí hay algo de javascript par
 <span class="hljs-keyword">let</span> x = [%bs.raw {| <span class="hljs-string">'aquí un string de javascript'</span> |}];
 Js.log(x ++ <span class="hljs-string">" de vuelta en tierra de reason"</span>); <span class="hljs-comment">/* ++ es el operador para concatenar tipos string */</span>
 </code></pre>
-<p>Ahora quizás te preguntes &quot;¿qué magia es esta?&quot; How did ocaml know that <code>x</code> was a string?&quot; <strong>It doesn't</strong>. The type of <code>x</code> in this code is a magic type that will unify with anything! This is quite dangerous and can have cascading effects in OCaml's type inference algorithm.</p>
+<p>Ahora quizás te preguntes &quot;¿qué magia es esta?&quot; ¿Cómo sabia ocaml que <code>x</code> era una cadena?&quot; <strong>No es así</strong>. ¡El tipo de <code>x</code> en este código es un tipo mágico que se unificará con todo! Esto es bastante peligroso y puede tener efectos en cascada en el algoritmo de inferencia de tipos de OCaml.</p>
 <pre><code class="hljs css reason"><span class="hljs-keyword">let</span> y = [%bs.raw {| <span class="hljs-string">'algo'</span> |}];
 Js.log((<span class="hljs-string">"un string"</span> ++ y, <span class="hljs-number">10</span> + y));
 <span class="hljs-comment">/* ¡¡cuidado!! ocaml no impedirá que uses y como 2 tipos totalmente diferentes */</span>
@@ -91,7 +91,7 @@ Js.log(calculate([<span class="hljs-number">1</span>, <span class="hljs-number">
 </code></pre>
 <p>Por supuesto, esta función que he escrito en JavaScript podría ser portada a Reason sin muchas molestias.</p>
 <p><strong>Recuerda</strong> que se trata de una solución puntual que es muy útil para aprender y así poder empezar rápidamente y hacer algo, pero un buen ejercicio es volver atrás y convertirlo de nuevo en código tipado y seguro de Reason.</p>
-<p>I've run into more than a few bugs because of raw JavaScript that I added to save time</p>
+<p>He tenido más de unos cuantos fallos (<em>bugs</em>) por añadir JavaScript directamente para ahorrar tiempo</p>
 <h2><a class="anchor" aria-hidden="true" name="asentarse-y-ser-disciplinado-con-las-cosas"></a><a href="#asentarse-y-ser-disciplinado-con-las-cosas" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Asentarse y ser disciplinado con las cosas</h2>
 <p>Hasta ahora hemos estado usando <code>bs.raw</code>, que es una manera muy rápida y laxa de hacerlo y <strong>no</strong> conveniente para producción.</p>
 <p>Pero ¿qué pasa si realmente necesitamos llamar a una función en JavaScript? Esto es necesario para interactuar con el DOM, o usar módulos de <em>node</em>. En BuckleScript, se utiliza una declaración <code>external</code> (<a href="https://bucklescript.github.io/docs/en/intro-to-external.html">documentación</a>).</p>
