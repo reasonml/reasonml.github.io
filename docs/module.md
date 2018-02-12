@@ -99,16 +99,16 @@ module ActualComponent = {
 
 An OCaml/Reason file maps to a module; this unlocks some interesting
 expressivity that'd previously require code generation in other languages. The
-file `react.re` implicitly forms a module `React`, which can be seen by other
+file `React.re` implicitly forms a module `React`, which can be seen by other
 source files.
 
 ```reason
-/* fileA.re. This typically compiles to module FileA below */
+/* FileA.re. This typically compiles to module FileA below */
 let a = 1;
 let b = 2;
 
-/* fileB.re */
-/* Maps fileA's implementation to a new API */
+/* FileB.re */
+/* Maps FileA's implementation to a new API */
 let alpha = FileA.a;
 let beta = FileA.b;
 ```
@@ -116,14 +116,16 @@ let beta = FileA.b;
 This contrived snippet expresses "copying" a file:
 
 ```reason
-/* fileA.re. This typically compiles to module FileA below */
+/* FileA.re. This typically compiles to module FileA below */
 let a = 1;
 let b = 2;
 
-/* fileB.re */
+/* FileB.re */
 /* compiles to exactly fileA.re's content with no runtime overhead! */
 include FileA;
 ```
+
+**Note**: Because files are modules, file names should, by convention, be capitalized so they match their module names. Uncapitalized file names are not invalid, but will be transformed into a capitalized module name. I.e. `file.re` will be compiled into the module `File`. To simplify and minimize the disconnect here, the convention is therefore to capitalize file names too.
 
 Signatures
 ----------------------------------
@@ -206,20 +208,20 @@ module type ActualComponent = {
 
 ### Every `.rei` file is a signature
 
-Similar to how a `react.re` file implicitly defines a module `React`, a file
-`react.rei` implicitly defines a signature for `React`. If `react.rei` isn't
-provided, the signature of `react.re` defaults to exposing all the fields of the
+Similar to how a `React.re` file implicitly defines a module `React`, a file
+`React.rei` implicitly defines a signature for `React`. If `React.rei` isn't
+provided, the signature of `React.re` defaults to exposing all the fields of the
 module. Because they don't contain implementation files, `.rei` files are used
 in the ecosystem to also document the public API of their corresponding modules.
 
 ```reason
-/* file react.re (implementation. Compiles to module React) */
+/* file React.re (implementation. Compiles to module React) */
 type state = int;
 let render = (str) => str;
 ```
 
 ```reason
-/* file react.rei (interface. Compiles to signature of module React) */
+/* file React.rei (interface. Compiles to signature of module React) */
 type state = int;
 let render: str => str;
 ```
