@@ -7,6 +7,7 @@ object-assign
 @license MIT
 */
 
+/* eslint-disable no-unused-vars */
 var getOwnPropertySymbols = Object.getOwnPropertySymbols;
 var hasOwnProperty = Object.prototype.hasOwnProperty;
 var propIsEnumerable = Object.prototype.propertyIsEnumerable;
@@ -98,6 +99,13 @@ var objectAssign = shouldUseNative() ? Object.assign : function (target, source)
  *
  *
  */
+/**
+ * WARNING: DO NOT manually require this module.
+ * This is a replacement for `invariant(...)` used by the error code system
+ * and will _only_ be required by the corresponding babel pass.
+ * It always throws.
+ */
+
 function reactProdInvariant(code) {
   var argCount = arguments.length - 1;
 
@@ -117,6 +125,15 @@ function reactProdInvariant(code) {
 }
 
 var reactProdInvariant_1 = reactProdInvariant;
+
+/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ *
+ */
 
 function makeEmptyFunction(arg) {
   return function () {
@@ -144,10 +161,20 @@ emptyFunction.thatReturnsArgument = function (arg) {
 
 var emptyFunction_1 = emptyFunction;
 
+/**
+ * Similar to invariant but only logs a warning if the condition is not met.
+ * This can be used to log issues in development environments in critical
+ * paths. Removing the logging code for production environments will keep the
+ * same logic and follow the same code paths.
+ */
+
 var warning = emptyFunction_1;
 
 var warning_1 = warning;
 
+/**
+ * This is the abstract API for an update queue.
+ */
 var ReactNoopUpdateQueue = {
   /**
    * Checks whether or not this composite component is mounted.
@@ -277,6 +304,9 @@ var invariant_1 = invariant;
  *
  */
 
+/**
+ * Base class helpers for the updating state of a component.
+ */
 function ReactComponent(props, context, updater) {
   this.props = props;
   this.context = context;
@@ -347,6 +377,9 @@ ReactComponent.prototype.forceUpdate = function (callback) {
  * we would like to deprecate them, we're not going to move them over to this
  * modern base class. Instead, we define a getter that warns if it's accessed.
  */
+/**
+ * Base class helpers for the updating state of a component.
+ */
 function ReactPureComponent(props, context, updater) {
   // Duplicated from ReactComponent.
   this.props = props;
@@ -370,6 +403,13 @@ var ReactBaseClasses = {
   PureComponent: ReactPureComponent
 };
 
+/**
+ * Static poolers. Several custom versions for each potential number of
+ * arguments. A completely generic pooler is easy to implement, but would
+ * require accessing the `arguments` object. In each of these, `this` refers to
+ * the Class itself, not an instance. If any others are needed, simply add them
+ * here, or in their own files.
+ */
 var oneArgumentPooler = function (copyFieldsFrom) {
   var Klass = this;
   if (Klass.instancePool.length) {
@@ -467,6 +507,12 @@ var PooledClass_1 = PooledClass;
  *
  */
 
+/**
+ * Keeps track of the current owner.
+ *
+ * The current owner is the component who should own any components that are
+ * currently being constructed.
+ */
 var ReactCurrentOwner = {
   /**
    * @internal
@@ -485,6 +531,9 @@ var ReactCurrentOwner_1 = ReactCurrentOwner;
  *
  *
  */
+
+// The Symbol used to tag the ReactElement type. If there is no native Symbol
+// nor polyfill, then a plain number is used for performance.
 
 var REACT_ELEMENT_TYPE = typeof Symbol === 'function' && Symbol['for'] && Symbol['for']('react.element') || 0xeac7;
 
@@ -509,6 +558,26 @@ function hasValidKey(config) {
   return config.key !== undefined;
 }
 
+/**
+ * Factory method to create a new React element. This no longer adheres to
+ * the class pattern, so do not use new to call it. Also, no instanceof check
+ * will work. Instead test $$typeof field against Symbol.for('react.element') to check
+ * if something is a React Element.
+ *
+ * @param {*} type
+ * @param {*} key
+ * @param {string|object} ref
+ * @param {*} self A *temporary* helper to detect places where `this` is
+ * different from the `owner` when React.createElement is called, so that we
+ * can warn. We want to get rid of owner and replace string `ref`s with arrow
+ * functions, and as long as `this` and owner are the same, there will be no
+ * change in behavior.
+ * @param {*} source An annotation object (added by a transpiler or otherwise)
+ * indicating filename, line number, and/or other information.
+ * @param {*} owner
+ * @param {*} props
+ * @internal
+ */
 var ReactElement = function (type, key, ref, self, source, owner, props) {
   var element = {
     // This tag allow us to uniquely identify this as a React Element
@@ -694,6 +763,8 @@ var ReactElement_1 = ReactElement;
  *
  */
 
+/* global Symbol */
+
 var ITERATOR_SYMBOL = typeof Symbol === 'function' && Symbol.iterator;
 var FAUX_ITERATOR_SYMBOL = '@@iterator'; // Before Symbol spec.
 
@@ -727,6 +798,13 @@ var getIteratorFn_1 = getIteratorFn;
  * LICENSE file in the root directory of this source tree.
  *
  *
+ */
+
+/**
+ * Escape and wrap key so it is safe to use as a reactid
+ *
+ * @param {string} key to be escaped.
+ * @return {string} the escaped key.
  */
 
 function escape(key) {
@@ -772,16 +850,12 @@ var SEPARATOR = '.';
 var SUBSEPARATOR = ':';
 
 /**
- * This is inlined from ReactElement since this file is shared between
- * isomorphic and renderers. We could extract this to a
+ * Generate a key string that identifies a component within a set.
  *
+ * @param {*} component A component that could contain a manual key.
+ * @param {number} index Index that is used if a manual key is not provided.
+ * @return {string}
  */
-
-/**
- * TODO: Test that a single child and an array with one item have the same key
- * pattern.
- */
-
 function getComponentKey(component, index) {
   // Do some typechecking here since we call this blindly. We want to ensure
   // that we don't block potential future ES APIs.
@@ -1062,7 +1136,17 @@ var ReactChildren = {
 
 var ReactChildren_1 = ReactChildren;
 
+/**
+ * Create a factory that creates HTML tag elements.
+ *
+ * @private
+ */
 var createDOMFactory = ReactElement_1.createFactory;
+/**
+ * Creates a mapping from supported HTML tags to `ReactDOMComponent` classes.
+ *
+ * @public
+ */
 var ReactDOMFactories = {
   a: createDOMFactory('a'),
   abbr: createDOMFactory('abbr'),
@@ -1220,6 +1304,17 @@ var ReactPropTypesSecret_1 = ReactPropTypesSecret;
  * LICENSE file in the root directory of this source tree.
  */
 
+/**
+ * Assert that the values match with the type specs.
+ * Error messages are memorized and will only be shown once.
+ *
+ * @param {object} typeSpecs Map of name to a ReactPropType
+ * @param {object} values Runtime values that need to be type-checked
+ * @param {string} location e.g. "prop", "context", "child context"
+ * @param {string} componentName Name of the component for error messages.
+ * @param {?Function} getStack Returns the component stack.
+ * @private
+ */
 function checkPropTypes(typeSpecs, values, location, componentName, getStack) {
   
 }
@@ -1725,6 +1820,11 @@ var factoryWithTypeCheckers = function(isValidElement, throwOnDirectAccess) {
   return ReactPropTypes;
 };
 
+// React 15.5 references this module, and assumes PropTypes are still callable in production.
+// Therefore we re-export development-only version with all the PropTypes checks here.
+// However if one is migrating to the `prop-types` npm library, they will go through the
+// `index.js` entry point, and it will branch depending on the environment.
+
 var factory_1 = function(isValidElement) {
   // It is still allowed in 15.5.
   var throwOnDirectAccess = false;
@@ -1993,6 +2093,27 @@ function factory$1(ReactComponent, isValidElement, ReactNoopUpdateQueue) {
      */
     componentWillUnmount: 'DEFINE_MANY',
 
+    /**
+     * Replacement for (deprecated) `componentWillMount`.
+     *
+     * @optional
+     */
+    UNSAFE_componentWillMount: 'DEFINE_MANY',
+
+    /**
+     * Replacement for (deprecated) `componentWillReceiveProps`.
+     *
+     * @optional
+     */
+    UNSAFE_componentWillReceiveProps: 'DEFINE_MANY',
+
+    /**
+     * Replacement for (deprecated) `componentWillUpdate`.
+     *
+     * @optional
+     */
+    UNSAFE_componentWillUpdate: 'DEFINE_MANY',
+
     // ==== Advanced methods ====
 
     /**
@@ -2006,6 +2127,23 @@ function factory$1(ReactComponent, isValidElement, ReactNoopUpdateQueue) {
      * @overridable
      */
     updateComponent: 'OVERRIDE_BASE'
+  };
+
+  /**
+   * Similar to ReactClassInterface but for static methods.
+   */
+  var ReactClassStaticInterface = {
+    /**
+     * This method is invoked after a component is instantiated and when it
+     * receives new props. Return an object to update state in response to
+     * prop changes. Return null to indicate no change to state.
+     *
+     * If an object is returned, its keys will be merged into the existing state.
+     *
+     * @return {object || null}
+     * @optional
+     */
+    getDerivedStateFromProps: 'DEFINE_MANY_MERGED'
   };
 
   /**
@@ -2191,6 +2329,7 @@ function factory$1(ReactComponent, isValidElement, ReactNoopUpdateQueue) {
     if (!statics) {
       return;
     }
+
     for (var name in statics) {
       var property = statics[name];
       if (!statics.hasOwnProperty(name)) {
@@ -2207,14 +2346,25 @@ function factory$1(ReactComponent, isValidElement, ReactNoopUpdateQueue) {
         name
       );
 
-      var isInherited = name in Constructor;
-      invariant_1(
-        !isInherited,
-        'ReactClass: You are attempting to define ' +
-          '`%s` on your component more than once. This conflict may be ' +
-          'due to a mixin.',
-        name
-      );
+      var isAlreadyDefined = name in Constructor;
+      if (isAlreadyDefined) {
+        var specPolicy = ReactClassStaticInterface.hasOwnProperty(name)
+          ? ReactClassStaticInterface[name]
+          : null;
+
+        invariant_1(
+          specPolicy === 'DEFINE_MANY_MERGED',
+          'ReactClass: You are attempting to define ' +
+            '`%s` on your component more than once. This conflict may be ' +
+            'due to a mixin.',
+          name
+        );
+
+        Constructor[name] = createMergedResultFunction(Constructor[name], property);
+
+        return;
+      }
+
       Constructor[name] = property;
     }
   }
@@ -2439,6 +2589,20 @@ var isValidElement$1 = ReactElement_1.isValidElement;
 
 var createClass = factory_1$2(Component, isValidElement$1, ReactNoopUpdateQueue_1);
 
+/**
+ * Returns the first child in a collection of children and verifies that there
+ * is only one child in the collection.
+ *
+ * See https://facebook.github.io/react/docs/top-level-api.html#react.children.only
+ *
+ * The current implementation of this function assumes that a single child gets
+ * passed without a wrapper, but the purpose of this helper function is to
+ * abstract away the particular structure of children.
+ *
+ * @param {?object} children Child collection structure.
+ * @return {ReactElement} The first and only `ReactElement` contained in the
+ * structure.
+ */
 function onlyChild(children) {
   !ReactElement_1.isValidElement(children) ? reactProdInvariant_1('143') : void 0;
   return children;
@@ -2504,6 +2668,13 @@ var react_2 = react.Component;
  *
  *
  */
+/**
+ * WARNING: DO NOT manually require this module.
+ * This is a replacement for `invariant(...)` used by the error code system
+ * and will _only_ be required by the corresponding babel pass.
+ * It always throws.
+ */
+
 function reactProdInvariant$1(code) {
   var argCount = arguments.length - 1;
 
@@ -2971,6 +3142,9 @@ var ARIADOMPropertyConfig = {
 
 var ARIADOMPropertyConfig_1 = ARIADOMPropertyConfig;
 
+/**
+ * Injectable ordering of event plugins.
+ */
 var eventPluginOrder = null;
 
 /**
@@ -3243,6 +3417,14 @@ var ReactErrorUtils = {
 
 var ReactErrorUtils_1 = ReactErrorUtils;
 
+/**
+ * Injected dependencies:
+ */
+
+/**
+ * - `ComponentTree`: [required] Module that can convert between React instances
+ *   and actual node references.
+ */
 var ComponentTree;
 var TreeTraversal;
 var injection = {
@@ -3267,6 +3449,13 @@ function isStartish(topLevelType) {
   return topLevelType === 'topMouseDown' || topLevelType === 'topTouchStart';
 }
 
+/**
+ * Dispatch the event to the listener.
+ * @param {SyntheticEvent} event SyntheticEvent to handle
+ * @param {boolean} simulated If the event is simulated (changes exn behavior)
+ * @param {function} listener Application-level callback
+ * @param {*} inst Internal component instance
+ */
 function executeDispatch(event, simulated, listener, inst) {
   var type = event.type || 'unknown-event';
   event.currentTarget = EventPluginUtils.getNodeFromInstance(inst);
@@ -3406,6 +3595,19 @@ var EventPluginUtils = {
 
 var EventPluginUtils_1 = EventPluginUtils;
 
+/**
+ * Accumulates items that must not be null or undefined into the first one. This
+ * is used to conserve memory by avoiding array allocations, and thus sacrifices
+ * API cleanness. Since `current` can be null before being passed in and not
+ * null after this function, make sure to assign it back to `current`:
+ *
+ * `a = accumulateInto(a, b);`
+ *
+ * This API should be sparingly used. Try `accumulate` for something cleaner.
+ *
+ * @return {*|array<*>} An accumulation of items.
+ */
+
 function accumulateInto(current, next) {
   !(next != null) ? reactProdInvariant_1$2('30') : void 0;
 
@@ -3443,6 +3645,14 @@ var accumulateInto_1 = accumulateInto;
  *
  */
 
+/**
+ * @param {array} arr an "accumulation" of items which is either an Array or
+ * a single item. Useful when paired with the `accumulate` module. This is a
+ * simple utility that allows us to reason about a collection of items, but
+ * handling the case when there is exactly one item (and we do not need to
+ * allocate an array).
+ */
+
 function forEachAccumulated(arr, cb, scope) {
   if (Array.isArray(arr)) {
     arr.forEach(cb, scope);
@@ -3453,6 +3663,9 @@ function forEachAccumulated(arr, cb, scope) {
 
 var forEachAccumulated_1 = forEachAccumulated;
 
+/**
+ * Internal store for event listeners
+ */
 var listenerBank = {};
 
 /**
@@ -3846,6 +4059,13 @@ var ExecutionEnvironment$1 = {
 
 var ExecutionEnvironment_1 = ExecutionEnvironment$1;
 
+/**
+ * Static poolers. Several custom versions for each potential number of
+ * arguments. A completely generic pooler is easy to implement, but would
+ * require accessing the `arguments` object. In each of these, `this` refers to
+ * the Class itself, not an instance. If any others are needed, simply add them
+ * here, or in their own files.
+ */
 var oneArgumentPooler$1 = function (copyFieldsFrom) {
   var Klass = this;
   if (Klass.instancePool.length) {
@@ -3953,6 +4173,17 @@ function getTextContentAccessor() {
 
 var getTextContentAccessor_1 = getTextContentAccessor;
 
+/**
+ * This helper class stores information about text content of a target node,
+ * allowing comparison of content before and after a given event.
+ *
+ * Identify the node where selection currently begins, then observe
+ * both its text content and its current position in the DOM. Since the
+ * browser may natively replace the target node during composition, we can
+ * use its position to find its replacement.
+ *
+ * @param {DOMEventTarget} root
+ */
 function FallbackCompositionState(root) {
   this._root = root;
   this._startText = this.getText();
@@ -4195,13 +4426,9 @@ PooledClass_1$2.addPoolingTo(SyntheticEvent, PooledClass_1$2.fourArgumentPooler)
 var SyntheticEvent_1 = SyntheticEvent;
 
 /**
-  * Helper to nullify syntheticEvent instance properties when destructing
-  *
-  * @param {object} SyntheticEvent
-  * @param {String} propName
-  * @return {object} defineProperty object
-  */
-
+ * @interface Event
+ * @see http://www.w3.org/TR/DOM-Level-3-Events/#events-compositionevents
+ */
 var CompositionEventInterface = {
   data: null
 };
@@ -4220,6 +4447,11 @@ SyntheticEvent_1.augmentClass(SyntheticCompositionEvent, CompositionEventInterfa
 
 var SyntheticCompositionEvent_1 = SyntheticCompositionEvent;
 
+/**
+ * @interface Event
+ * @see http://www.w3.org/TR/2013/WD-DOM-Level-3-Events-20131105
+ *      /#events-inputevents
+ */
 var InputEventInterface = {
   data: null
 };
@@ -4726,6 +4958,11 @@ var ReactFeatureFlags = {
 
 var ReactFeatureFlags_1 = ReactFeatureFlags;
 
+/**
+ * @param {?object} object
+ * @return {boolean} True if `object` is a valid owner.
+ * @final
+ */
 function isValidOwner(object) {
   return !!(object && typeof object.attachRef === 'function' && typeof object.detachRef === 'function');
 }
@@ -4880,6 +5117,10 @@ var ReactRef_1 = ReactRef;
  *
  */
 
+/**
+ * Helper to call ReactRef.attachRefs with this composite component, split out
+ * to avoid allocations in the transaction mount-ready queue.
+ */
 function attachRefs() {
   ReactRef_1.attachRefs(this, this._currentElement);
 }
@@ -5542,6 +5783,14 @@ var inputValueTracking_1 = inputValueTracking;
  *
  */
 
+/**
+ * Gets the target node from a native browser event by accounting for
+ * inconsistencies in browser DOM APIs.
+ *
+ * @param {object} nativeEvent Native browser event.
+ * @return {DOMEventTarget} Target node.
+ */
+
 function getEventTarget(nativeEvent) {
   var target = nativeEvent.target || nativeEvent.srcElement || window;
 
@@ -5610,6 +5859,10 @@ var isEventSupported_1 = isEventSupported;
  * LICENSE file in the root directory of this source tree.
  *
  *
+ */
+
+/**
+ * @see http://www.whatwg.org/specs/web-apps/current-work/multipage/the-input-element.html#input-type-attr-summary
  */
 
 var supportedInputTypes = {
@@ -5942,10 +6195,24 @@ var ChangeEventPlugin_1 = ChangeEventPlugin;
  *
  */
 
+/**
+ * Module that is injectable into `EventPluginHub`, that specifies a
+ * deterministic ordering of `EventPlugin`s. A convenient way to reason about
+ * plugins, without having to package every one of them. This is better than
+ * having plugins be ordered in the same order that they are injected because
+ * that ordering would be influenced by the packaging order.
+ * `ResponderEventPlugin` must occur before `SimpleEventPlugin` so that
+ * preventing default on events is convenient in `SimpleEventPlugin` handlers.
+ */
+
 var DefaultEventPluginOrder = ['ResponderEventPlugin', 'SimpleEventPlugin', 'TapEventPlugin', 'EnterLeaveEventPlugin', 'ChangeEventPlugin', 'SelectEventPlugin', 'BeforeInputEventPlugin'];
 
 var DefaultEventPluginOrder_1 = DefaultEventPluginOrder;
 
+/**
+ * @interface UIEvent
+ * @see http://www.w3.org/TR/DOM-Level-3-Events/
+ */
 var UIEventInterface = {
   view: function (event) {
     if (event.view) {
@@ -6014,6 +6281,11 @@ var ViewportMetrics_1 = ViewportMetrics;
  *
  */
 
+/**
+ * Translation from modifier key to the associated property in the event.
+ * @see http://www.w3.org/TR/DOM-Level-3-Events/#keys-Modifiers
+ */
+
 var modifierKeyToProp = {
   Alt: 'altKey',
   Control: 'ctrlKey',
@@ -6040,6 +6312,10 @@ function getEventModifierState(nativeEvent) {
 
 var getEventModifierState_1 = getEventModifierState;
 
+/**
+ * @interface MouseEvent
+ * @see http://www.w3.org/TR/DOM-Level-3-Events/
+ */
 var MouseEventInterface = {
   screenX: null,
   screenY: null,
@@ -6422,6 +6698,10 @@ var DOMNamespaces_1 = DOMNamespaces;
 
 /* globals MSApp */
 
+/**
+ * Create a function which has 'unsafe' privileges (required by windows8 apps)
+ */
+
 var createMicrosoftUnsafeLocalFunction = function (func) {
   if (typeof MSApp !== 'undefined' && MSApp.execUnsafeLocalFunction) {
     return function (arg0, arg1, arg2, arg3) {
@@ -6552,6 +6832,12 @@ var setInnerHTML_1 = setInnerHTML;
  *
  */
 
+// code copied and modified from escape-html
+/**
+ * Module variables.
+ * @private
+ */
+
 var matchHtmlRegExp = /["'&<>]/;
 
 /**
@@ -6631,6 +6917,16 @@ function escapeTextContentForBrowser(text) {
 
 var escapeTextContentForBrowser_1 = escapeTextContentForBrowser;
 
+/**
+ * Set the textContent property of a node, ensuring that whitespace is preserved
+ * even in IE8. innerText is a poor substitute for textContent and, among many
+ * issues, inserts <br> instead of the literal newline chars. innerHTML behaves
+ * as it should.
+ *
+ * @param {DOMElement} node
+ * @param {string} text
+ * @internal
+ */
 var setTextContent = function (node, text) {
   if (text) {
     var firstChild = node.firstChild;
@@ -6757,6 +7053,26 @@ DOMLazyTree.queueText = queueText;
 
 var DOMLazyTree_1 = DOMLazyTree;
 
+/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ * @typechecks
+ */
+
+
+
+/**
+ * Convert array-like objects to arrays.
+ *
+ * This API assumes the caller knows the contents of the data type. For less
+ * well defined inputs use createArrayFromMixed.
+ *
+ * @param {object|function|filelist} obj
+ * @return {array}
+ */
 function toArray$1(obj) {
   var length = obj.length;
 
@@ -6860,6 +7176,23 @@ function createArrayFromMixed(obj) {
 
 var createArrayFromMixed_1 = createArrayFromMixed;
 
+/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ */
+
+/*eslint-disable fb-www/unsafe-html */
+
+
+
+
+
+/**
+ * Dummy container used to detect which wraps are necessary.
+ */
 var dummyNode$1 = ExecutionEnvironment_1.canUseDOM ? document.createElement('div') : null;
 
 /**
@@ -6934,6 +7267,26 @@ function getMarkupWrap(nodeName) {
 
 var getMarkupWrap_1 = getMarkupWrap;
 
+/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ * @typechecks
+ */
+
+/*eslint-disable fb-www/unsafe-html*/
+
+
+
+
+
+
+
+/**
+ * Dummy container used to render all markup.
+ */
 var dummyNode = ExecutionEnvironment_1.canUseDOM ? document.createElement('div') : null;
 
 /**
@@ -7113,6 +7466,9 @@ function replaceDelimitedText(openingComment, closingComment, stringText) {
 }
 
 var dangerouslyReplaceNodeWithMarkup = Danger_1.dangerouslyReplaceNodeWithMarkup;
+/**
+ * Operations for updating with DOM children.
+ */
 var DOMChildrenOperations = {
   dangerouslyReplaceNodeWithMarkup: dangerouslyReplaceNodeWithMarkup,
 
@@ -7156,6 +7512,9 @@ var DOMChildrenOperations = {
 
 var DOMChildrenOperations_1 = DOMChildrenOperations;
 
+/**
+ * Operations used to process updates to DOM nodes.
+ */
 var ReactDOMIDOperations = {
   /**
    * Updates a component's children by processing a series of updates.
@@ -7171,6 +7530,11 @@ var ReactDOMIDOperations = {
 
 var ReactDOMIDOperations_1 = ReactDOMIDOperations;
 
+/**
+ * Abstracts away all functionality of the reconciler that requires knowledge of
+ * the browser context. TODO: These callers should be refactored to avoid the
+ * need for this injection.
+ */
 var ReactComponentBrowserEnvironment = {
   processChildrenUpdates: ReactDOMIDOperations_1.dangerouslyProcessChildrenUpdates,
 
@@ -7185,6 +7549,10 @@ var ReactComponentBrowserEnvironment_1 = ReactComponentBrowserEnvironment;
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  *
+ */
+
+/**
+ * @param {DOMElement} node input/textarea to focus
  */
 
 function focusNode(node) {
@@ -7212,6 +7580,10 @@ var AutoFocusUtils_1 = AutoFocusUtils;
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  *
+ */
+
+/**
+ * CSS properties which accept numbers but are not in units of "px".
  */
 
 var isUnitlessNumber = {
@@ -7354,6 +7726,16 @@ var CSSProperty = {
 var CSSProperty_1 = CSSProperty;
 
 var isUnitlessNumber$1 = CSSProperty_1.isUnitlessNumber;
+/**
+ * Convert a value into the proper css writable value. The style name `name`
+ * should be logical (no hyphens), as specified
+ * in `CSSProperty.isUnitlessNumber`.
+ *
+ * @param {string} name CSS property name such as `topMargin`.
+ * @param {*} value CSS property value such as `10px`.
+ * @param {ReactDOMComponent} component
+ * @return {string} Normalized style value with dimensions applied.
+ */
 function dangerousStyleValue(name, value, component, isCustomProperty) {
   // Note that we've removed escapeTextForBrowser() calls here since the
   // whole string will be escaped when the attribute is injected into
@@ -7382,6 +7764,15 @@ function dangerousStyleValue(name, value, component, isCustomProperty) {
 }
 
 var dangerousStyleValue_1 = dangerousStyleValue;
+
+/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ * @typechecks
+ */
 
 var _uppercasePattern = /([A-Z])/g;
 
@@ -7437,6 +7828,10 @@ var hyphenateStyleName_1 = hyphenateStyleName;
  * @typechecks static-only
  */
 
+/**
+ * Memoizes the return value of a function that accepts one string argument.
+ */
+
 function memoizeStringOnly(callback) {
   var cache = {};
   return function (string) {
@@ -7469,6 +7864,9 @@ if (ExecutionEnvironment_1.canUseDOM) {
   }
 }
 
+/**
+ * Operations for dealing with CSS properties.
+ */
 var CSSPropertyOperations = {
   /**
    * Serializes a mapping of style properties for use as inline styles:
@@ -7540,6 +7938,12 @@ var CSSPropertyOperations = {
 
 var CSSPropertyOperations_1 = CSSPropertyOperations;
 
+/**
+ * Escapes attribute value to prevent scripting attacks.
+ *
+ * @param {*} value Value to escape.
+ * @return {string} An escaped string.
+ */
 function quoteAttributeValueForBrowser(value) {
   return '"' + escapeTextContentForBrowser_1(value) + '"';
 }
@@ -7751,6 +8155,13 @@ var ReactEventEmitterMixin = {
 
 var ReactEventEmitterMixin_1 = ReactEventEmitterMixin;
 
+/**
+ * Generate a mapping of standard vendor prefixes using the defined style property and event name.
+ *
+ * @param {string} styleProp
+ * @param {string} eventName
+ * @returns {object}
+ */
 function makePrefixMap(styleProp, eventName) {
   var prefixes = {};
 
@@ -7830,6 +8241,61 @@ function getVendorPrefixedEventName(eventName) {
 }
 
 var getVendorPrefixedEventName_1 = getVendorPrefixedEventName;
+
+/**
+ * Summary of `ReactBrowserEventEmitter` event handling:
+ *
+ *  - Top-level delegation is used to trap most native browser events. This
+ *    may only occur in the main thread and is the responsibility of
+ *    ReactEventListener, which is injected and can therefore support pluggable
+ *    event sources. This is the only work that occurs in the main thread.
+ *
+ *  - We normalize and de-duplicate events to account for browser quirks. This
+ *    may be done in the worker thread.
+ *
+ *  - Forward these native events (with the associated top-level type used to
+ *    trap it) to `EventPluginHub`, which in turn will ask plugins if they want
+ *    to extract any synthetic events.
+ *
+ *  - The `EventPluginHub` will then process each event by annotating them with
+ *    "dispatches", a sequence of listeners and IDs that care about that event.
+ *
+ *  - The `EventPluginHub` then dispatches the events.
+ *
+ * Overview of React and the event system:
+ *
+ * +------------+    .
+ * |    DOM     |    .
+ * +------------+    .
+ *       |           .
+ *       v           .
+ * +------------+    .
+ * | ReactEvent |    .
+ * |  Listener  |    .
+ * +------------+    .                         +-----------+
+ *       |           .               +--------+|SimpleEvent|
+ *       |           .               |         |Plugin     |
+ * +-----|------+    .               v         +-----------+
+ * |     |      |    .    +--------------+                    +------------+
+ * |     +-----------.--->|EventPluginHub|                    |    Event   |
+ * |            |    .    |              |     +-----------+  | Propagators|
+ * | ReactEvent |    .    |              |     |TapEvent   |  |------------|
+ * |  Emitter   |    .    |              |<---+|Plugin     |  |other plugin|
+ * |            |    .    |              |     +-----------+  |  utilities |
+ * |     +-----------.--->|              |                    +------------+
+ * |     |      |    .    +--------------+
+ * +-----|------+    .                ^        +-----------+
+ *       |           .                |        |Enter/Leave|
+ *       +           .                +-------+|Plugin     |
+ * +-------------+   .                         +-----------+
+ * | application |   .
+ * |-------------|   .
+ * |             |   .
+ * |             |   .
+ * +-------------+   .
+ *                   .
+ *    React Core     .  General Purpose Event Plugin System
+ */
 
 var hasEventPageXY;
 var alreadyListeningTo = {};
@@ -8446,6 +8912,12 @@ function updateOptionsIfPendingUpdateAndMounted() {
   }
 }
 
+/**
+ * @param {ReactDOMComponent} inst
+ * @param {boolean} multiple
+ * @param {*} propValue A stringable (with `multiple`, a list of stringables).
+ * @private
+ */
 function updateOptions(inst, multiple, propValue) {
   var selectedValue, i;
   var options = ReactDOMComponentTree_1.getNodeFromInstance(inst).options;
@@ -8813,6 +9285,15 @@ var ReactComponentEnvironment_1 = ReactComponentEnvironment;
  *
  */
 
+/**
+ * `ReactInstanceMap` maintains a mapping from a public facing stateful
+ * instance (key) and the internal representation (value). This allows public
+ * methods to accept the user facing instance as an argument and map them back
+ * to internal methods.
+ */
+
+// TODO: Replace this with ES6: var ReactInstanceMap = new Map();
+
 var ReactInstanceMap = {
   /**
    * This API should be called `delete` but we'd have to make sure to always
@@ -8931,6 +9412,18 @@ var shallowEqual_1 = shallowEqual;
  *
  */
 
+/**
+ * Given a `prevElement` and `nextElement`, determines if the existing
+ * instance should be updated as opposed to being destroyed or replaced by a new
+ * instance. Both arguments are elements. This ensures that this logic can
+ * operate on stateless trees without any backing instance.
+ *
+ * @param {?object} prevElement
+ * @param {?object} nextElement
+ * @return {boolean} True if the existing instance should be updated.
+ * @protected
+ */
+
 function shouldUpdateReactComponent(prevElement, nextElement) {
   var prevEmpty = prevElement === null || prevElement === false;
   var nextEmpty = nextElement === null || nextElement === false;
@@ -8970,7 +9463,39 @@ function isPureComponent(Component) {
   return !!(Component.prototype && Component.prototype.isPureReactComponent);
 }
 
-// Separated into a function to contain deoptimizations caused by try/finally.
+/**
+ * ------------------ The Life-Cycle of a Composite Component ------------------
+ *
+ * - constructor: Initialization of state. The instance is now retained.
+ *   - componentWillMount
+ *   - render
+ *   - [children's constructors]
+ *     - [children's componentWillMount and render]
+ *     - [children's componentDidMount]
+ *     - componentDidMount
+ *
+ *       Update Phases:
+ *       - componentWillReceiveProps (only called if parent updated)
+ *       - shouldComponentUpdate
+ *         - componentWillUpdate
+ *           - render
+ *           - [children's constructors or receive props phases]
+ *         - componentDidUpdate
+ *
+ *     - componentWillUnmount
+ *     - [children's componentWillUnmount]
+ *   - [children destroyed]
+ * - (destroyed): The instance is now blank, released by React and ready for GC.
+ *
+ * -----------------------------------------------------------------------------
+ */
+
+/**
+ * An incrementing ID assigned to each component when it is mounted. This is
+ * used to enforce the order in which `ReactUpdates` updates dirty components.
+ *
+ * @private
+ */
 var nextMountID = 1;
 
 /**
@@ -9704,6 +10229,7 @@ var ReactHostComponent_1 = ReactHostComponent;
  *
  */
 
+// To avoid a cyclic dependency, we create the final class in this module
 var ReactCompositeComponentWrapper = function (element) {
   this.construct(element);
 };
@@ -9794,6 +10320,13 @@ var instantiateReactComponent_1 = instantiateReactComponent;
  *
  */
 
+/**
+ * Escape and wrap key so it is safe to use as a reactid
+ *
+ * @param {string} key to be escaped.
+ * @return {string} the escaped key.
+ */
+
 function escape$1(key) {
   var escapeRegex = /[=:]/g;
   var escaperLookup = {
@@ -9842,6 +10375,9 @@ var KeyEscapeUtils_1$2 = KeyEscapeUtils$2;
  *
  */
 
+// The Symbol used to tag the ReactElement type. If there is no native Symbol
+// nor polyfill, then a plain number is used for performance.
+
 var REACT_ELEMENT_TYPE$2 = typeof Symbol === 'function' && Symbol['for'] && Symbol['for']('react.element') || 0xeac7;
 
 var ReactElementSymbol$2 = REACT_ELEMENT_TYPE$2;
@@ -9854,6 +10390,8 @@ var ReactElementSymbol$2 = REACT_ELEMENT_TYPE$2;
  *
  *
  */
+
+/* global Symbol */
 
 var ITERATOR_SYMBOL$1 = typeof Symbol === 'function' && Symbol.iterator;
 var FAUX_ITERATOR_SYMBOL$1 = '@@iterator'; // Before Symbol spec.
@@ -9885,16 +10423,12 @@ var SEPARATOR$1 = '.';
 var SUBSEPARATOR$1 = ':';
 
 /**
- * This is inlined from ReactElement since this file is shared between
- * isomorphic and renderers. We could extract this to a
+ * Generate a key string that identifies a component within a set.
  *
+ * @param {*} component A component that could contain a manual key.
+ * @param {number} index Index that is used if a manual key is not provided.
+ * @return {string}
  */
-
-/**
- * TODO: Test that a single child and an array with one item have the same key
- * pattern.
- */
-
 function getComponentKey$1(component, index) {
   // Do some typechecking here since we call this blindly. We want to ensure
   // that we don't block potential future ES APIs.
@@ -10197,6 +10731,13 @@ function flattenChildren$1(children, selfDebugID) {
 
 var flattenChildren_1 = flattenChildren$1;
 
+/**
+ * Make an update for markup to be rendered and inserted at a supplied index.
+ *
+ * @param {string} markup Markup that renders into an element.
+ * @param {number} toIndex Destination index.
+ * @private
+ */
 function makeInsertMarkup(markup, afterNode, toIndex) {
   // NOTE: Null values reduce hidden classes.
   return {
@@ -10303,6 +10844,12 @@ function processQueue(inst, updateQueue) {
   ReactComponentEnvironment_1.processChildrenUpdates(inst, updateQueue);
 }
 
+/**
+ * ReactMultiChild are capable of reconciling multiple children.
+ *
+ * @class ReactMultiChild
+ * @internal
+ */
 var ReactMultiChild = {
   /**
    * Provides common functionality for components that must reconcile multiple
@@ -10742,6 +11289,14 @@ function _classCallCheck$1(instance, Constructor) { if (!(instance instanceof Co
 
 
 
+/**
+ * This is the update queue used for server rendering.
+ * It delegates to ReactUpdateQueue while server rendering is in progress and
+ * switches to ReactNoopUpdateQueue after the transaction has completed.
+ * @class ReactServerUpdateQueue
+ * @param {Transaction} transaction
+ */
+
 var ReactServerUpdateQueue = function () {
   function ReactServerUpdateQueue(transaction) {
     _classCallCheck$1(this, ReactServerUpdateQueue);
@@ -10847,6 +11402,11 @@ var ReactServerUpdateQueue = function () {
 
 var ReactServerUpdateQueue_1 = ReactServerUpdateQueue;
 
+/**
+ * Executed within the scope of the `Transaction` instance. Consider these as
+ * being member methods, but with an implied ordering while being isolated from
+ * each other.
+ */
 var TRANSACTION_WRAPPERS$1 = [];
 
 var noopCallbackQueue = {
@@ -10939,6 +11499,10 @@ function getDeclarationErrorAddendum(internalInstance) {
   return '';
 }
 
+/**
+ * @param {object} component
+ * @param {?object} props
+ */
 function assertValidProps(component, props) {
   if (!props) {
     return;
@@ -10989,6 +11553,8 @@ function optionPostMount() {
   ReactDOMOption_1.postMountWrapper(inst);
 }
 
+// There are so many media events, it makes sense to just
+// maintain a list rather than create a `trapBubbledEvent` for each
 var mediaEvents = {
   topAbort: 'abort',
   topCanPlay: 'canplay',
@@ -11778,6 +12344,10 @@ objectAssign(ReactDOMEmptyComponent.prototype, {
 
 var ReactDOMEmptyComponent_1 = ReactDOMEmptyComponent;
 
+/**
+ * Return the lowest common ancestor of A and B, or null if they are in
+ * different trees.
+ */
 function getLowestCommonAncestor(instA, instB) {
   !('_hostNode' in instA) ? reactProdInvariant_1$2('33') : void 0;
   !('_hostNode' in instB) ? reactProdInvariant_1$2('33') : void 0;
@@ -11894,6 +12464,21 @@ var ReactDOMTreeTraversal = {
   traverseEnterLeave: traverseEnterLeave
 };
 
+/**
+ * Text nodes violate a couple assumptions that React makes about components:
+ *
+ *  - When mounting text into the DOM, adjacent text nodes are merged.
+ *  - Text nodes cannot be assigned a React root ID.
+ *
+ * This component is used to wrap strings between comment nodes so that they
+ * can undergo the same reconciliation that is applied to elements.
+ *
+ * TODO: Investigate representing React components in the DOM with text nodes.
+ *
+ * @class ReactDOMTextComponent
+ * @extends ReactComponent
+ * @internal
+ */
 var ReactDOMTextComponent = function (text) {
   // TODO: This is really a ReactText (ReactNode), not a ReactElement
   this._currentElement = text;
@@ -12053,6 +12638,21 @@ var ReactDefaultBatchingStrategy = {
 
 var ReactDefaultBatchingStrategy_1 = ReactDefaultBatchingStrategy;
 
+/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ * @typechecks
+ */
+
+
+
+/**
+ * Upstream version of event listener. Does not take into account specific
+ * nature of platform.
+ */
 var EventListener = {
   /**
    * Listen to DOM events during the bubble phase.
@@ -12117,6 +12717,17 @@ var EventListener_1 = EventListener;
  * @typechecks
  */
 
+/**
+ * Gets the scroll position of the supplied element or window.
+ *
+ * The return values are unbounded, unlike `getScrollPosition`. This means they
+ * may be negative or exceed the element boundaries (which is possible using
+ * inertial scrolling).
+ *
+ * @param {DOMWindow|DOMElement} scrollable
+ * @return {object} Map with `x` and `y` keys.
+ */
+
 function getUnboundedScrollPosition(scrollable) {
   if (scrollable.Window && scrollable instanceof scrollable.Window) {
     return {
@@ -12132,6 +12743,11 @@ function getUnboundedScrollPosition(scrollable) {
 
 var getUnboundedScrollPosition_1 = getUnboundedScrollPosition;
 
+/**
+ * Find the deepest React component completely containing the root of the
+ * passed-in instance (for use when entire React trees are nested within each
+ * other). If React trees are not nested, returns null.
+ */
 function findParent(inst) {
   // TODO: It may be a good idea to cache this to prevent unnecessary DOM
   // traversal, but caching is difficult to do correctly without using a
@@ -12280,6 +12896,13 @@ var ReactInjection_1 = ReactInjection;
  *
  */
 
+/**
+ * Given any node return the first leaf node without children.
+ *
+ * @param {DOMElement|DOMTextNode} node
+ * @return {DOMElement|DOMTextNode}
+ */
+
 function getLeafNode(node) {
   while (node && node.firstChild) {
     node = node.firstChild;
@@ -12335,6 +12958,11 @@ function getNodeForCharacterOffset(root, offset) {
 
 var getNodeForCharacterOffset_1 = getNodeForCharacterOffset;
 
+/**
+ * While `isCollapsed` is available on the Selection object and `collapsed`
+ * is available on the Range object, IE11 sometimes gets them wrong.
+ * If the anchor/focus nodes and offsets are the same, the range is collapsed.
+ */
 function isCollapsed(anchorNode, anchorOffset, focusNode, focusOffset) {
   return anchorNode === focusNode && anchorOffset === focusOffset;
 }
@@ -12525,6 +13153,19 @@ var ReactDOMSelection = {
 
 var ReactDOMSelection_1 = ReactDOMSelection;
 
+/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ * @typechecks
+ */
+
+/**
+ * @param {*} object The object to check.
+ * @return {boolean} Whether or not the object is a DOM node.
+ */
 function isNode(object) {
   var doc = object ? object.ownerDocument || object : document;
   var defaultView = doc.defaultView || window;
@@ -12533,12 +13174,43 @@ function isNode(object) {
 
 var isNode_1 = isNode;
 
+/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ * @typechecks
+ */
+
+
+
+/**
+ * @param {*} object The object to check.
+ * @return {boolean} Whether or not the object is a DOM text node.
+ */
 function isTextNode(object) {
   return isNode_1(object) && object.nodeType == 3;
 }
 
 var isTextNode_1 = isTextNode;
 
+/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ *
+ */
+
+
+
+/*eslint-disable no-bitwise */
+
+/**
+ * Checks if a given DOM node contains or is another DOM node.
+ */
 function containsNode(outerNode, innerNode) {
   if (!outerNode || !innerNode) {
     return false;
@@ -12559,6 +13231,27 @@ function containsNode(outerNode, innerNode) {
 
 var containsNode_1 = containsNode;
 
+/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ * @typechecks
+ */
+
+/* eslint-disable fb-www/typeof-undefined */
+
+/**
+ * Same as document.activeElement but wraps in a try-catch block. In IE it is
+ * not safe to call document.activeElement if there is nothing focused.
+ *
+ * The activeElement will be null only if the document or document body is not
+ * yet defined.
+ *
+ * @param {?DOMDocument} doc Defaults to current document.
+ * @return {?DOMElement}
+ */
 function getActiveElement(doc) /*?DOMElement*/{
   doc = doc || (typeof document !== 'undefined' ? document : undefined);
   if (typeof doc === 'undefined') {
@@ -12678,6 +13371,10 @@ var ReactInputSelection = {
 
 var ReactInputSelection_1 = ReactInputSelection;
 
+/**
+ * Ensures that, when possible, the selection range (currently selected text
+ * input) is not disturbed by performing the transaction.
+ */
 var SELECTION_RESTORATION = {
   /**
    * @return {Selection} Selection information.
@@ -12742,6 +13439,20 @@ var ON_DOM_READY_QUEUEING = {
  */
 var TRANSACTION_WRAPPERS$3 = [SELECTION_RESTORATION, EVENT_SUPPRESSION, ON_DOM_READY_QUEUEING];
 
+/**
+ * Currently:
+ * - The order that these are listed in the transaction is critical:
+ * - Suppresses events.
+ * - Restores selection range.
+ *
+ * Future:
+ * - Restore document/overflow scroll positions that were unintentionally
+ *   modified via DOM insertions above the top viewport boundary.
+ * - Implement/integrate with customized constraint based layout system and keep
+ *   track of which dimensions must be remeasured.
+ *
+ * @class ReactReconcileTransaction
+ */
 function ReactReconcileTransaction(useCreateElement) {
   this.reinitializeTransaction();
   // Only server-side rendering really needs this option (see
@@ -13273,6 +13984,11 @@ var SelectEventPlugin = {
 
 var SelectEventPlugin_1 = SelectEventPlugin;
 
+/**
+ * @interface Event
+ * @see http://www.w3.org/TR/css3-animations/#AnimationEvent-interface
+ * @see https://developer.mozilla.org/en-US/docs/Web/API/AnimationEvent
+ */
 var AnimationEventInterface = {
   animationName: null,
   elapsedTime: null,
@@ -13293,6 +14009,10 @@ SyntheticEvent_1.augmentClass(SyntheticAnimationEvent, AnimationEventInterface);
 
 var SyntheticAnimationEvent_1 = SyntheticAnimationEvent;
 
+/**
+ * @interface Event
+ * @see http://www.w3.org/TR/clipboard-apis/
+ */
 var ClipboardEventInterface = {
   clipboardData: function (event) {
     return 'clipboardData' in event ? event.clipboardData : window.clipboardData;
@@ -13313,6 +14033,10 @@ SyntheticEvent_1.augmentClass(SyntheticClipboardEvent, ClipboardEventInterface);
 
 var SyntheticClipboardEvent_1 = SyntheticClipboardEvent;
 
+/**
+ * @interface FocusEvent
+ * @see http://www.w3.org/TR/DOM-Level-3-Events/
+ */
 var FocusEventInterface = {
   relatedTarget: null
 };
@@ -13337,6 +14061,17 @@ var SyntheticFocusEvent_1 = SyntheticFocusEvent;
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
  *
+ */
+
+/**
+ * `charCode` represents the actual "character code" and is safe to use with
+ * `String.fromCharCode`. As such, only keys that correspond to printable
+ * characters produce a valid `charCode`, the only exception to this is Enter.
+ * The Tab-key is considered non-printable and does not have a `charCode`,
+ * presumably because it does not produce a tab-character in browsers.
+ *
+ * @param {object} nativeEvent Native browser event.
+ * @return {number} Normalized `charCode` property.
  */
 
 function getEventCharCode(nativeEvent) {
@@ -13366,6 +14101,10 @@ function getEventCharCode(nativeEvent) {
 
 var getEventCharCode_1 = getEventCharCode;
 
+/**
+ * Normalization of deprecated HTML5 `key` values
+ * @see https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent#Key_names
+ */
 var normalizeKey = {
   Esc: 'Escape',
   Spacebar: ' ',
@@ -13460,6 +14199,10 @@ function getEventKey(nativeEvent) {
 
 var getEventKey_1 = getEventKey;
 
+/**
+ * @interface KeyboardEvent
+ * @see http://www.w3.org/TR/DOM-Level-3-Events/
+ */
 var KeyboardEventInterface = {
   key: getEventKey_1,
   location: null,
@@ -13522,6 +14265,10 @@ SyntheticUIEvent_1.augmentClass(SyntheticKeyboardEvent, KeyboardEventInterface);
 
 var SyntheticKeyboardEvent_1 = SyntheticKeyboardEvent;
 
+/**
+ * @interface DragEvent
+ * @see http://www.w3.org/TR/DOM-Level-3-Events/
+ */
 var DragEventInterface = {
   dataTransfer: null
 };
@@ -13540,6 +14287,10 @@ SyntheticMouseEvent_1.augmentClass(SyntheticDragEvent, DragEventInterface);
 
 var SyntheticDragEvent_1 = SyntheticDragEvent;
 
+/**
+ * @interface TouchEvent
+ * @see http://www.w3.org/TR/touch-events/
+ */
 var TouchEventInterface = {
   touches: null,
   targetTouches: null,
@@ -13565,6 +14316,11 @@ SyntheticUIEvent_1.augmentClass(SyntheticTouchEvent, TouchEventInterface);
 
 var SyntheticTouchEvent_1 = SyntheticTouchEvent;
 
+/**
+ * @interface Event
+ * @see http://www.w3.org/TR/2009/WD-css3-transitions-20090320/#transition-events-
+ * @see https://developer.mozilla.org/en-US/docs/Web/API/TransitionEvent
+ */
 var TransitionEventInterface = {
   propertyName: null,
   elapsedTime: null,
@@ -13585,6 +14341,10 @@ SyntheticEvent_1.augmentClass(SyntheticTransitionEvent, TransitionEventInterface
 
 var SyntheticTransitionEvent_1 = SyntheticTransitionEvent;
 
+/**
+ * @interface WheelEvent
+ * @see http://www.w3.org/TR/DOM-Level-3-Events/
+ */
 var WheelEventInterface = {
   deltaX: function (event) {
     return 'deltaX' in event ? event.deltaX : // Fallback to `wheelDeltaX` for Webkit and normalize (right is positive).
@@ -13618,6 +14378,24 @@ SyntheticMouseEvent_1.augmentClass(SyntheticWheelEvent, WheelEventInterface);
 
 var SyntheticWheelEvent_1 = SyntheticWheelEvent;
 
+/**
+ * Turns
+ * ['abort', ...]
+ * into
+ * eventTypes = {
+ *   'abort': {
+ *     phasedRegistrationNames: {
+ *       bubbled: 'onAbort',
+ *       captured: 'onAbortCapture',
+ *     },
+ *     dependencies: ['topAbort'],
+ *   },
+ *   ...
+ * };
+ * topLevelEventsToDispatchConfig = {
+ *   'topAbort': { sameConfig }
+ * };
+ */
 var eventTypes$4 = {};
 var topLevelEventsToDispatchConfig = {};
 ['abort', 'animationEnd', 'animationIteration', 'animationStart', 'blur', 'canPlay', 'canPlayThrough', 'click', 'contextMenu', 'copy', 'cut', 'doubleClick', 'drag', 'dragEnd', 'dragEnter', 'dragExit', 'dragLeave', 'dragOver', 'dragStart', 'drop', 'durationChange', 'emptied', 'encrypted', 'ended', 'error', 'focus', 'input', 'invalid', 'keyDown', 'keyPress', 'keyUp', 'load', 'loadedData', 'loadedMetadata', 'loadStart', 'mouseDown', 'mouseMove', 'mouseOut', 'mouseOver', 'mouseUp', 'paste', 'pause', 'play', 'playing', 'progress', 'rateChange', 'reset', 'scroll', 'seeked', 'seeking', 'stalled', 'submit', 'suspend', 'timeUpdate', 'touchCancel', 'touchEnd', 'touchMove', 'touchStart', 'transitionEnd', 'volumeChange', 'waiting', 'wheel'].forEach(function (event) {
@@ -14085,24 +14863,16 @@ function hasNonRootReactChild(container) {
 }
 
 /**
- * True if the supplied DOM node is a React DOM element and
- * it has been rendered by another copy of React.
+ * True if the supplied DOM node is a valid node element.
  *
  * @param {?DOMElement} node The candidate DOM node.
- * @return {boolean} True if the DOM has been rendered by another copy of React
+ * @return {boolean} True if the DOM is a valid DOM node.
  * @internal
  */
 function isValidContainer(node) {
   return !!(node && (node.nodeType === ELEMENT_NODE_TYPE$1 || node.nodeType === DOC_NODE_TYPE || node.nodeType === DOCUMENT_FRAGMENT_NODE_TYPE$1));
 }
 
-/**
- * True if the supplied DOM node is a valid React node element.
- *
- * @param {?DOMElement} node The candidate DOM node.
- * @return {boolean} True if the DOM is a valid React DOM node.
- * @internal
- */
 function getHostRootInstanceInContainer(container) {
   var rootEl = getReactRootElementInContainer(container);
   var prevHostInstance = rootEl && ReactDOMComponentTree_1.getInstanceFromNode(rootEl);
@@ -14394,6 +15164,14 @@ function getHostComponentFromComposite(inst) {
 
 var getHostComponentFromComposite_1 = getHostComponentFromComposite;
 
+/**
+ * Returns the DOM node rendered by this element.
+ *
+ * See https://facebook.github.io/react/docs/top-level-api.html#reactdom.finddomnode
+ *
+ * @param {ReactComponent|DOMElement} componentOrElement
+ * @return {?DOMElement} The root node of this element.
+ */
 function findDOMNode(componentOrElement) {
   if (componentOrElement == null) {
     return null;
@@ -14460,7 +15238,7 @@ var ReactDOM_1 = ReactDOM$1;
 
 var reactDom = ReactDOM_1;
 
-var debounce = function(func, wait, immediate) {
+function debounce(func, wait, immediate) {
 	let timeout;
 	return function() {
 		let context = this, args = arguments;
@@ -14473,7 +15251,7 @@ var debounce = function(func, wait, immediate) {
 		timeout = setTimeout(later, wait);
 		if (callNow) func.apply(context, args);
 	};
-};
+}
 
 var commonjsGlobal = typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
 
@@ -21574,11 +22352,11 @@ function onResize(cm) {
 }
 
 var keyNames = {
-  3: "Enter", 8: "Backspace", 9: "Tab", 13: "Enter", 16: "Shift", 17: "Ctrl", 18: "Alt",
+  3: "Pause", 8: "Backspace", 9: "Tab", 13: "Enter", 16: "Shift", 17: "Ctrl", 18: "Alt",
   19: "Pause", 20: "CapsLock", 27: "Esc", 32: "Space", 33: "PageUp", 34: "PageDown", 35: "End",
   36: "Home", 37: "Left", 38: "Up", 39: "Right", 40: "Down", 44: "PrintScrn", 45: "Insert",
   46: "Delete", 59: ";", 61: "=", 91: "Mod", 92: "Mod", 93: "Mod",
-  106: "*", 107: "=", 109: "-", 110: ".", 111: "/", 127: "Delete",
+  106: "*", 107: "=", 109: "-", 110: ".", 111: "/", 127: "Delete", 145: "ScrollLock",
   173: "-", 186: ";", 187: "=", 188: ",", 189: "-", 190: ".", 191: "/", 192: "`", 219: "[", 220: "\\",
   221: "]", 222: "'", 63232: "Up", 63233: "Down", 63234: "Left", 63235: "Right", 63272: "Delete",
   63273: "Home", 63275: "End", 63276: "PageUp", 63277: "PageDown", 63302: "Insert"
@@ -21725,6 +22503,9 @@ function keyName(event, noShift) {
   if (presto && event.keyCode == 34 && event["char"]) { return false }
   var name = keyNames[event.keyCode];
   if (name == null || event.altGraphKey) { return false }
+  // Ctrl-ScrollLock has keyCode 3, same as Ctrl-Pause,
+  // so we'll use event.code when available (Chrome 48+, FF 38+, Safari 10.1+)
+  if (event.keyCode == 3 && event.code) { name = event.code; }
   return addModifierNames(name, event, noShift)
 }
 
@@ -22607,6 +23388,7 @@ function defineOptions(CodeMirror) {
     clearCaches(cm);
     regChange(cm);
   }, true);
+
   option("lineSeparator", null, function (cm, val) {
     cm.doc.lineSep = val;
     if (!val) { return }
@@ -23013,7 +23795,7 @@ function applyTextInput(cm, inserted, deleted, sel, origin) {
 
   var paste = cm.state.pasteIncoming || origin == "paste";
   var textLines = splitLinesAuto(inserted), multiPaste = null;
-  // When pasing N lines into N selections, insert one line per selection
+  // When pasting N lines into N selections, insert one line per selection
   if (paste && sel.ranges.length > 1) {
     if (lastCopied && lastCopied.text.join("\n") == inserted) {
       if (sel.ranges.length % lastCopied.text.length == 0) {
@@ -24647,7 +25429,7 @@ CodeMirror$1.fromTextArea = fromTextArea;
 
 addLegacyProps(CodeMirror$1);
 
-CodeMirror$1.version = "5.32.0";
+CodeMirror$1.version = "5.34.0";
 
 return CodeMirror$1;
 
@@ -24676,7 +25458,7 @@ CodeMirror.defineMode("javascript", function(config, parserConfig) {
     var A = kw("keyword a"), B = kw("keyword b"), C = kw("keyword c"), D = kw("keyword d");
     var operator = kw("operator"), atom = {type: "atom", style: "atom"};
 
-    var jsKeywords = {
+    return {
       "if": kw("if"), "while": A, "with": A, "else": B, "do": B, "try": B, "finally": B,
       "return": D, "break": D, "continue": D, "new": kw("new"), "delete": C, "void": C, "throw": C,
       "debugger": kw("debugger"), "var": kw("var"), "const": kw("var"), "let": kw("var"),
@@ -24688,33 +25470,6 @@ CodeMirror.defineMode("javascript", function(config, parserConfig) {
       "yield": C, "export": kw("export"), "import": kw("import"), "extends": C,
       "await": C
     };
-
-    // Extend the 'normal' keywords with the TypeScript language extensions
-    if (isTS) {
-      var type = {type: "variable", style: "type"};
-      var tsKeywords = {
-        // object-like things
-        "interface": kw("class"),
-        "implements": C,
-        "namespace": C,
-
-        // scope modifiers
-        "public": kw("modifier"),
-        "private": kw("modifier"),
-        "protected": kw("modifier"),
-        "abstract": kw("modifier"),
-        "readonly": kw("modifier"),
-
-        // types
-        "string": type, "number": type, "boolean": type, "any": type
-      };
-
-      for (var attr in tsKeywords) {
-        jsKeywords[attr] = tsKeywords[attr];
-      }
-    }
-
-    return jsKeywords;
   }();
 
   var isOperatorChar = /[+\-*&%=<>!?|~^@]/;
@@ -24960,6 +25715,10 @@ CodeMirror.defineMode("javascript", function(config, parserConfig) {
     }
   }
 
+  function isModifier(name) {
+    return name == "public" || name == "private" || name == "protected" || name == "abstract" || name == "readonly"
+  }
+
   // Combinators
 
   var defaultVars = {name: "this", next: {name: "arguments"}};
@@ -25016,16 +25775,19 @@ CodeMirror.defineMode("javascript", function(config, parserConfig) {
     }
     if (type == "function") return cont(functiondef);
     if (type == "for") return cont(pushlex("form"), forspec, statement, poplex);
+    if (type == "class" || (isTS && value == "interface")) { cx.marked = "keyword"; return cont(pushlex("form"), className, poplex); }
     if (type == "variable") {
-      if (isTS && value == "type") {
-        cx.marked = "keyword";
-        return cont(typeexpr, expect("operator"), typeexpr, expect(";"));
-      } else if (isTS && value == "declare") {
+      if (isTS && value == "declare") {
         cx.marked = "keyword";
         return cont(statement)
-      } else if (isTS && (value == "module" || value == "enum") && cx.stream.match(/^\s*\w/, false)) {
+      } else if (isTS && (value == "module" || value == "enum" || value == "type") && cx.stream.match(/^\s*\w/, false)) {
         cx.marked = "keyword";
-        return cont(pushlex("form"), pattern, expect("{"), pushlex("}"), block, poplex, poplex)
+        if (value == "enum") return cont(enumdef);
+        else if (value == "type") return cont(typeexpr, expect("operator"), typeexpr, expect(";"));
+        else return cont(pushlex("form"), pattern, expect("{"), pushlex("}"), block, poplex, poplex)
+      } else if (isTS && value == "namespace") {
+        cx.marked = "keyword";
+        return cont(pushlex("form"), expression, block, poplex)
       } else {
         return cont(pushlex("stat"), maybelabel);
       }
@@ -25036,24 +25798,23 @@ CodeMirror.defineMode("javascript", function(config, parserConfig) {
     if (type == "default") return cont(expect(":"));
     if (type == "catch") return cont(pushlex("form"), pushcontext, expect("("), funarg, expect(")"),
                                      statement, poplex, popcontext);
-    if (type == "class") return cont(pushlex("form"), className, poplex);
     if (type == "export") return cont(pushlex("stat"), afterExport, poplex);
     if (type == "import") return cont(pushlex("stat"), afterImport, poplex);
     if (type == "async") return cont(statement)
     if (value == "@") return cont(expression, statement)
     return pass(pushlex("stat"), expression, expect(";"), poplex);
   }
-  function expression(type) {
-    return expressionInner(type, false);
+  function expression(type, value) {
+    return expressionInner(type, value, false);
   }
-  function expressionNoComma(type) {
-    return expressionInner(type, true);
+  function expressionNoComma(type, value) {
+    return expressionInner(type, value, true);
   }
   function parenExpr(type) {
     if (type != "(") return pass()
     return cont(pushlex(")"), expression, expect(")"), poplex)
   }
-  function expressionInner(type, noComma) {
+  function expressionInner(type, value, noComma) {
     if (cx.state.fatArrowAt == cx.stream.start) {
       var body = noComma ? arrowBodyNoComma : arrowBody;
       if (type == "(") return cont(pushcontext, pushlex(")"), commasep(funarg, ")"), poplex, expect("=>"), body, popcontext);
@@ -25063,7 +25824,7 @@ CodeMirror.defineMode("javascript", function(config, parserConfig) {
     var maybeop = noComma ? maybeoperatorNoComma : maybeoperatorComma;
     if (atomicTypes.hasOwnProperty(type)) return cont(maybeop);
     if (type == "function") return cont(functiondef, maybeop);
-    if (type == "class") return cont(pushlex("form"), classExpression, poplex);
+    if (type == "class" || (isTS && value == "interface")) { cx.marked = "keyword"; return cont(pushlex("form"), classExpression, poplex); }
     if (type == "keyword c" || type == "async") return cont(noComma ? expressionNoComma : expression);
     if (type == "(") return cont(pushlex(")"), maybeexpression, expect(")"), poplex, maybeop);
     if (type == "operator" || type == "spread") return cont(noComma ? expressionNoComma : expression);
@@ -25161,10 +25922,11 @@ CodeMirror.defineMode("javascript", function(config, parserConfig) {
       return cont(afterprop);
     } else if (type == "jsonld-keyword") {
       return cont(afterprop);
-    } else if (type == "modifier") {
+    } else if (isTS && isModifier(value)) {
+      cx.marked = "keyword";
       return cont(objprop)
     } else if (type == "[") {
-      return cont(expression, expect("]"), afterprop);
+      return cont(expression, maybetype, expect("]"), afterprop);
     } else if (type == "spread") {
       return cont(expressionNoComma, afterprop);
     } else if (value == "*") {
@@ -25266,7 +26028,7 @@ CodeMirror.defineMode("javascript", function(config, parserConfig) {
     if (value == "<") return cont(pushlex(">"), commasep(typeexpr, ">"), poplex, afterType)
     if (value == "|" || type == ".") return cont(typeexpr)
     if (type == "[") return cont(expect("]"), afterType)
-    if (value == "extends") return cont(typeexpr)
+    if (value == "extends" || value == "implements") { cx.marked = "keyword"; return cont(typeexpr) }
   }
   function maybeTypeArgs(_, value) {
     if (value == "<") return cont(pushlex(">"), commasep(typeexpr, ">"), poplex, afterType)
@@ -25277,11 +26039,12 @@ CodeMirror.defineMode("javascript", function(config, parserConfig) {
   function maybeTypeDefault(_, value) {
     if (value == "=") return cont(typeexpr)
   }
-  function vardef() {
+  function vardef(_, value) {
+    if (value == "enum") {cx.marked = "keyword"; return cont(enumdef)}
     return pass(pattern, maybetype, maybeAssign, vardefCont);
   }
   function pattern(type, value) {
-    if (type == "modifier") return cont(pattern)
+    if (isTS && isModifier(value)) { cx.marked = "keyword"; return cont(pattern) }
     if (type == "variable") { register(value); return cont(); }
     if (type == "spread") return cont(pattern);
     if (type == "[") return contCommasep(pattern, "]");
@@ -25335,7 +26098,8 @@ CodeMirror.defineMode("javascript", function(config, parserConfig) {
   }
   function funarg(type, value) {
     if (value == "@") cont(expression, funarg);
-    if (type == "spread" || type == "modifier") return cont(funarg);
+    if (type == "spread") return cont(funarg);
+    if (isTS && isModifier(value)) { cx.marked = "keyword"; return cont(funarg); }
     return pass(pattern, maybetype, maybeAssign);
   }
   function classExpression(type, value) {
@@ -25348,14 +26112,16 @@ CodeMirror.defineMode("javascript", function(config, parserConfig) {
   }
   function classNameAfter(type, value) {
     if (value == "<") return cont(pushlex(">"), commasep(typeparam, ">"), poplex, classNameAfter)
-    if (value == "extends" || value == "implements" || (isTS && type == ","))
+    if (value == "extends" || value == "implements" || (isTS && type == ",")) {
+      if (value == "implements") cx.marked = "keyword";
       return cont(isTS ? typeexpr : expression, classNameAfter);
+    }
     if (type == "{") return cont(pushlex("}"), classBody, poplex);
   }
   function classBody(type, value) {
-    if (type == "modifier" || type == "async" ||
+    if (type == "async" ||
         (type == "variable" &&
-         (value == "static" || value == "get" || value == "set") &&
+         (value == "static" || value == "get" || value == "set" || (isTS && isModifier(value))) &&
          cx.stream.match(/^\s+[\w$\xa1-\uffff]/, false))) {
       cx.marked = "keyword";
       return cont(classBody);
@@ -25365,7 +26131,7 @@ CodeMirror.defineMode("javascript", function(config, parserConfig) {
       return cont(isTS ? classfield : functiondef, classBody);
     }
     if (type == "[")
-      return cont(expression, expect("]"), isTS ? classfield : functiondef, classBody)
+      return cont(expression, maybetype, expect("]"), isTS ? classfield : functiondef, classBody)
     if (value == "*") {
       cx.marked = "keyword";
       return cont(classBody);
@@ -25412,6 +26178,12 @@ CodeMirror.defineMode("javascript", function(config, parserConfig) {
   function arrayLiteral(type) {
     if (type == "]") return cont();
     return pass(commasep(expressionNoComma, "]"));
+  }
+  function enumdef() {
+    return pass(pushlex("form"), pattern, expect("{"), pushlex("}"), commasep(enummember, "}"), poplex, poplex)
+  }
+  function enummember() {
+    return pass(pattern, maybeAssign);
   }
 
   function isContinuedStatement(state, textAfter) {
@@ -25534,31 +26306,26 @@ var mllike = createCommonjsModule(function (module, exports) {
 })(function(CodeMirror) {
 CodeMirror.defineMode('mllike', function(_config, parserConfig) {
   var words = {
-    'let': 'keyword',
-    'rec': 'keyword',
-    'in': 'keyword',
-    'of': 'keyword',
-    'and': 'keyword',
-    'if': 'keyword',
-    'then': 'keyword',
-    'else': 'keyword',
-    'for': 'keyword',
-    'to': 'keyword',
-    'while': 'keyword',
+    'as': 'keyword',
     'do': 'keyword',
-    'done': 'keyword',
+    'else': 'keyword',
+    'end': 'keyword',
+    'exception': 'keyword',
     'fun': 'keyword',
-    'function': 'keyword',
-    'val': 'keyword',
+    'functor': 'keyword',
+    'if': 'keyword',
+    'in': 'keyword',
+    'include': 'keyword',
+    'let': 'keyword',
+    'of': 'keyword',
+    'open': 'keyword',
+    'rec': 'keyword',
+    'struct': 'keyword',
+    'then': 'keyword',
     'type': 'keyword',
-    'mutable': 'keyword',
-    'match': 'keyword',
-    'with': 'keyword',
-    'try': 'keyword',
-    'open': 'builtin',
-    'ignore': 'builtin',
-    'begin': 'keyword',
-    'end': 'keyword'
+    'val': 'keyword',
+    'while': 'keyword',
+    'with': 'keyword'
   };
 
   var extraWords = parserConfig.extraWords || {};
@@ -25575,6 +26342,13 @@ CodeMirror.defineMode('mllike', function(_config, parserConfig) {
       state.tokenize = tokenString;
       return state.tokenize(stream, state);
     }
+    if (ch === '{') {
+      if (stream.eat('|')) {
+        state.longString = true;
+        state.tokenize = tokenLongString;
+        return state.tokenize(stream, state);
+      }
+    }
     if (ch === '(') {
       if (stream.eat('*')) {
         state.commentLevel++;
@@ -25582,7 +26356,7 @@ CodeMirror.defineMode('mllike', function(_config, parserConfig) {
         return state.tokenize(stream, state);
       }
     }
-    if (ch === '~') {
+    if (ch === '~' || ch === '?') {
       stream.eatWhile(/\w/);
       return 'variable-2';
     }
@@ -25595,13 +26369,24 @@ CodeMirror.defineMode('mllike', function(_config, parserConfig) {
       return 'comment';
     }
     if (/\d/.test(ch)) {
-      stream.eatWhile(/[\d]/);
-      if (stream.eat('.')) {
-        stream.eatWhile(/[\d]/);
+      if (ch === '0' && stream.eat(/[bB]/)) {
+        stream.eatWhile(/[01]/);
+      } if (ch === '0' && stream.eat(/[xX]/)) {
+        stream.eatWhile(/[0-9a-fA-F]/);
+      } if (ch === '0' && stream.eat(/[oO]/)) {
+        stream.eatWhile(/[0-7]/);
+      } else {
+        stream.eatWhile(/[\d_]/);
+        if (stream.eat('.')) {
+          stream.eatWhile(/[\d]/);
+        }
+        if (stream.eat(/[eE]/)) {
+          stream.eatWhile(/[\d\-+]/);
+        }
       }
       return 'number';
     }
-    if ( /[+\-*&%=<>!?|]/.test(ch)) {
+    if ( /[+\-*&%=<>!?|@\.~:]/.test(ch)) {
       return 'operator';
     }
     if (/[\w\xa1-\uffff]/.test(ch)) {
@@ -25640,8 +26425,20 @@ CodeMirror.defineMode('mllike', function(_config, parserConfig) {
     return 'comment';
   }
 
+  function tokenLongString(stream, state) {
+    var prev, next;
+    while (state.longString && (next = stream.next()) != null) {
+      if (prev === '|' && next === '}') state.longString = false;
+      prev = next;
+    }
+    if (!state.longString) {
+      state.tokenize = tokenBase;
+    }
+    return 'string';
+  }
+
   return {
-    startState: function() {return {tokenize: tokenBase, commentLevel: 0};},
+    startState: function() {return {tokenize: tokenBase, commentLevel: 0, longString: false};},
     token: function(stream, state) {
       if (stream.eatSpace()) return null;
       return state.tokenize(stream, state);
@@ -25656,14 +26453,64 @@ CodeMirror.defineMode('mllike', function(_config, parserConfig) {
 CodeMirror.defineMIME('text/x-ocaml', {
   name: 'mllike',
   extraWords: {
-    'succ': 'keyword',
+    'and': 'keyword',
+    'assert': 'keyword',
+    'begin': 'keyword',
+    'class': 'keyword',
+    'constraint': 'keyword',
+    'done': 'keyword',
+    'downto': 'keyword',
+    'external': 'keyword',
+    'function': 'keyword',
+    'initializer': 'keyword',
+    'lazy': 'keyword',
+    'match': 'keyword',
+    'method': 'keyword',
+    'module': 'keyword',
+    'mutable': 'keyword',
+    'new': 'keyword',
+    'nonrec': 'keyword',
+    'object': 'keyword',
+    'private': 'keyword',
+    'sig': 'keyword',
+    'to': 'keyword',
+    'try': 'keyword',
+    'value': 'keyword',
+    'virtual': 'keyword',
+    'when': 'keyword',
+
+    // builtins
+    'raise': 'builtin',
+    'failwith': 'builtin',
+    'true': 'builtin',
+    'false': 'builtin',
+
+    // Pervasives builtins
+    'asr': 'builtin',
+    'land': 'builtin',
+    'lor': 'builtin',
+    'lsl': 'builtin',
+    'lsr': 'builtin',
+    'lxor': 'builtin',
+    'mod': 'builtin',
+    'or': 'builtin',
+
+    // More Pervasives
+    'raise_notrace': 'builtin',
     'trace': 'builtin',
     'exit': 'builtin',
     'print_string': 'builtin',
     'print_endline': 'builtin',
-    'true': 'atom',
-    'false': 'atom',
-    'raise': 'keyword'
+
+     'int': 'type',
+     'float': 'type',
+     'bool': 'type',
+     'char': 'type',
+     'string': 'type',
+     'unit': 'type',
+
+     // Modules
+     'List': 'builtin'
   }
 });
 
@@ -25671,18 +26518,21 @@ CodeMirror.defineMIME('text/x-fsharp', {
   name: 'mllike',
   extraWords: {
     'abstract': 'keyword',
-    'as': 'keyword',
     'assert': 'keyword',
     'base': 'keyword',
+    'begin': 'keyword',
     'class': 'keyword',
     'default': 'keyword',
     'delegate': 'keyword',
+    'do!': 'keyword',
+    'done': 'keyword',
     'downcast': 'keyword',
     'downto': 'keyword',
     'elif': 'keyword',
-    'exception': 'keyword',
     'extern': 'keyword',
     'finally': 'keyword',
+    'for': 'keyword',
+    'function': 'keyword',
     'global': 'keyword',
     'inherit': 'keyword',
     'inline': 'keyword',
@@ -25690,38 +26540,108 @@ CodeMirror.defineMIME('text/x-fsharp', {
     'internal': 'keyword',
     'lazy': 'keyword',
     'let!': 'keyword',
-    'member' : 'keyword',
+    'match': 'keyword',
+    'member': 'keyword',
     'module': 'keyword',
+    'mutable': 'keyword',
     'namespace': 'keyword',
     'new': 'keyword',
     'null': 'keyword',
     'override': 'keyword',
     'private': 'keyword',
     'public': 'keyword',
-    'return': 'keyword',
     'return!': 'keyword',
+    'return': 'keyword',
     'select': 'keyword',
     'static': 'keyword',
-    'struct': 'keyword',
+    'to': 'keyword',
+    'try': 'keyword',
     'upcast': 'keyword',
-    'use': 'keyword',
     'use!': 'keyword',
-    'val': 'keyword',
+    'use': 'keyword',
+    'void': 'keyword',
     'when': 'keyword',
-    'yield': 'keyword',
     'yield!': 'keyword',
+    'yield': 'keyword',
 
+    // Reserved words
+    'atomic': 'keyword',
+    'break': 'keyword',
+    'checked': 'keyword',
+    'component': 'keyword',
+    'const': 'keyword',
+    'constraint': 'keyword',
+    'constructor': 'keyword',
+    'continue': 'keyword',
+    'eager': 'keyword',
+    'event': 'keyword',
+    'external': 'keyword',
+    'fixed': 'keyword',
+    'method': 'keyword',
+    'mixin': 'keyword',
+    'object': 'keyword',
+    'parallel': 'keyword',
+    'process': 'keyword',
+    'protected': 'keyword',
+    'pure': 'keyword',
+    'sealed': 'keyword',
+    'tailcall': 'keyword',
+    'trait': 'keyword',
+    'virtual': 'keyword',
+    'volatile': 'keyword',
+
+    // builtins
     'List': 'builtin',
     'Seq': 'builtin',
     'Map': 'builtin',
     'Set': 'builtin',
+    'Option': 'builtin',
     'int': 'builtin',
     'string': 'builtin',
-    'raise': 'builtin',
-    'failwith': 'builtin',
     'not': 'builtin',
     'true': 'builtin',
-    'false': 'builtin'
+    'false': 'builtin',
+
+    'raise': 'builtin',
+    'failwith': 'builtin'
+  },
+  slashComments: true
+});
+
+
+CodeMirror.defineMIME('text/x-sml', {
+  name: 'mllike',
+  extraWords: {
+    'abstype': 'keyword',
+    'and': 'keyword',
+    'andalso': 'keyword',
+    'case': 'keyword',
+    'datatype': 'keyword',
+    'fn': 'keyword',
+    'handle': 'keyword',
+    'infix': 'keyword',
+    'infixr': 'keyword',
+    'local': 'keyword',
+    'nonfix': 'keyword',
+    'op': 'keyword',
+    'orelse': 'keyword',
+    'raise': 'keyword',
+    'withtype': 'keyword',
+    'eqtype': 'keyword',
+    'sharing': 'keyword',
+    'sig': 'keyword',
+    'signature': 'keyword',
+    'structure': 'keyword',
+    'where': 'keyword',
+    'true': 'keyword',
+    'false': 'keyword',
+
+    // types
+    'int': 'builtin',
+    'real': 'builtin',
+    'string': 'builtin',
+    'char': 'builtin',
+    'bool': 'builtin'
   },
   slashComments: true
 });
