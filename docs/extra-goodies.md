@@ -40,6 +40,10 @@ Use `#quit;` to close your REPL session.
 
 [re:bench](https://rebench.github.io) is an online benchmarking playground. It supports test cases written in Reason, OCaml and JavaScript, and allows sharing of benchmarks through unique URLs. It's compiled to JS using BuckleScript.
 
+### Redex
+
+[Redex](https://redex.github.io): the Reason packages registry.
+
 ### ocamlc, ocamlopt, ocamlrun, rebuild
 
 `ocamlc` and `ocamlopt` are the bare ocaml compilers.
