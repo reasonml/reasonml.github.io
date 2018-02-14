@@ -7,7 +7,7 @@ title: Articles & Videos
 Reason is just OCaml under the hood; We don't yet cover every concept on this documentation site. These external articles might help! If they're in OCaml syntax, **you can install [reason-tools](https://github.com/reasonml/reason-tools) to translate them to Reason.**
 
 - [2ality](http://2ality.com/2017/11/about-reasonml.html): Great intro blog posts on Reason/OCaml features.
-- [Exploring ReasonML and functional programming](https://reasonml.github.io/docs/en/articles-and-videos.html): a book by the 2ality author.
+- [Exploring ReasonML and functional programming](http://reasonmlhub.com/exploring-reasonml): a book by the 2ality author.
 
 ## BuckleScript
 
