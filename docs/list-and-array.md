@@ -27,7 +27,7 @@ The standard lib provides a [List module](/api/List.html) (and its counterpart w
 Use the spread syntax, which is just `List.cons`:
 
 ```reason
-let myList = [1, 2, 3];
+let myList: list(int) = [1, 2, 3];
 let anotherList = [0, ...myList];
 ```
 
@@ -82,7 +82,7 @@ Standard library [Array](/api/Array.html) and [ArrayLabel](/api/ArrayLabels.html
 Access & update an array item like so:
 
 ```reason
-let myArray = [|"hello", "world", "how are you"|];
+let myArray: array(string) = [|"hello", "world", "how are you"|];
 
 let firstItem = myArray[0]; /* "hello" */
 
