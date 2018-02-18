@@ -1,0 +1,108 @@
+<html><head><meta charset="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1"/><title>String &amp; Char · Reason</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta property="og:title" content="String &amp; Char · Reason"/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io/index.html"/><meta property="og:description" content="## 文字列"/><link rel="shortcut icon" href="/img/icon_50.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/arduino-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io/blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io/blog/feed.xml" title="Reason Blog RSS Feed"/><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/dummy.svg"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li><a href="/docs/ja/quickstart-javascript.html" target="_self">Docs</a></li><li><a href="/ja/try.html" target="_self">Try</a></li><li><a href="/api/index.html" target="_self">API</a></li><li><a href="/docs/ja/community.html" target="_self">Community</a></li><li><a href="/blog" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg"/>日本語</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/en">English</a></li><li><a href="/es-ES">Español</a></li><li><a href="/fr">Français</a></li><li><a href="/ko">한국어</a></li><li><a href="/pt-BR">Português (Brasil)</a></li><li><a href="/ru">Русский</a></li><li><a href="/uk">Українська</a></li><li><a href="/zh-CN">中文</a></li><li><a href="/zh-TW">繁體中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank">Help Translate</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(){
+          if(languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search"/></li><li><a href="https://github.com/facebook/reason" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>Language Basics</span></h2></div><div class="navGroups"><div class="navGroup navGroupActive"><h3>Intro</h3><ul><li class="navListItem"><a class="navItem" href="/docs/ja/what-and-why.html">What &amp; Why</a></li></ul></div><div class="navGroup navGroupActive"><h3>Editor Setup</h3><ul><li class="navListItem"><a class="navItem" href="/docs/ja/global-installation.html">Global Installation</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/editor-plugins.html">Editor Plugins</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/extra-goodies.html">Extra Goodies</a></li></ul></div><div class="navGroup navGroupActive"><h3>Language Basics</h3><ul><li class="navListItem"><a class="navItem" href="/docs/ja/overview.html">Overview</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/let-binding.html">Let Binding</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/type.html">Type!</a></li><li class="navListItem navListItemActive"><a class="navItem navItemActive" href="/docs/ja/string-and-char.html">String &amp; Char</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/boolean.html">ブール値</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/integer-and-float.html">Integer &amp; Float</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/tuple.html">Tuple</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/record.html">Record</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/variant.html">Variant!</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/list-and-array.html">List &amp; Array</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/function.html">関数</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/if-else.html">If-Else</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/more-on-type.html">More on Type</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/destructuring.html">Destructuring</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/pattern-matching.html">Pattern Matching!</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/mutation.html">Mutation</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/imperative-loops.html">Imperative Loops</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/jsx.html">JSX</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/external.html">External</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/exception.html">Exception</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/object.html">Object</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/module.html">Module</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/promise.html">Promise</a></li></ul></div><div class="navGroup navGroupActive"><h3>JavaScript</h3><ul><li class="navListItem"><a class="navItem" href="/docs/ja/quickstart-javascript.html">Quickstart</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/interop.html">Interop</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/syntax-cheatsheet.html">Syntax Cheatsheet</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/libraries.html">Libraries</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/converting-from-js.html">Converting from JS</a></li></ul></div><div class="navGroup navGroupActive"><h3>Native</h3><ul><li class="navListItem"><a class="navItem" href="/docs/ja/native.html">Native</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/quickstart-ocaml.html">Quickstart</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/convert-from-ocaml.html">Converting from OCaml</a></li></ul></div><div class="navGroup navGroupActive"><h3>Extra</h3><ul><li class="navListItem"><a class="navItem" href="/docs/ja/faq.html">Frequently Asked Questions</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/comparison-to-ocaml.html">Comparison to OCaml</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/newcomer-examples.html">Newcomer Examples</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/project-structure.html">Project Structure</a></li></ul></div></div></section></div><script>
+          var toggler = document.getElementById('navToggler');
+          var nav = document.getElementById('docsNav');
+          toggler.onclick = function() {
+            nav.classList.toggle('docsSliderActive');
+          };
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://crowdin.com/project/reason/ja" target="_blank">Translate</a><h1>String &amp; Char</h1></header><article><div><span><h2><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>文字列</h2>
+<p>Reason の文字列は<strong>ダブル</strong>クォートで区切ります（シングルクォートは以下の文字型のために予約されています）。</p>
+<pre><code class="hljs css reason"><span class="hljs-keyword">let</span> <span class="hljs-attr">greeting</span> = <span class="hljs-string">"Hello world!"</span>;
+<span class="hljs-keyword">let</span> <span class="hljs-attr">multilineGreeting</span> = <span class="hljs-string">"Hello
+ world!"</span>;
+</code></pre>
+<p>文字列内の特殊文字はエスケープする必要があります：</p>
+<pre><code class="hljs css reason"><span class="hljs-attribute">let oneSlash</span> = <span class="hljs-string">"\\"</span>;
+</code></pre>
+<p>文字列を結合するには <code>++</code>を使います：</p>
+<pre><code class="hljs css reason"><span class="hljs-attribute">let greetings</span> = <span class="hljs-string">"Hello "</span> ++ <span class="hljs-string">"world!"</span>;
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>クォートされた文字列</h3>
+<p>文字列のための特別な構文があります。</p>
+<ul>
+<li>前述のような複数行文字列</li>
+<li>特殊文字がエスケープされない</li>
+<li>特別なプリプロセッサ用のフック</li>
+</ul>
+<pre><code class="hljs css reason"><span class="hljs-keyword">let</span> greetingAndOneSlash = {|Hello
+World
+\
+Hehe...
+|};
+</code></pre>
+<p>特殊文字をエスケープする必要がないことと、組み込みの変数補完をしないことを除けば、JavaScript のバックティック文字列補完に似ています。 ただ、後者の機能は <a href="https://bucklescript.github.io/docs/en/common-data-types.html#interpolation">BuckleScript</a> のように簡単に実現できます：</p>
+<pre><code class="hljs css reason"><span class="hljs-keyword">let</span> <span class="hljs-attr">world</span> = {js|世界|js}; <span class="hljs-comment">/* Unicode 文字をサポート */</span>
+<span class="hljs-keyword">let</span> <span class="hljs-attr">helloWorld</span> = {j|你好，$world|j}; <span class="hljs-comment">/* Unicode と変数展開をサポート */</span>
+</code></pre>
+<p>BuckeScript の特別なプリプロセッサは、文字列の周辺にある <code>js</code> や <code>j</code> のようなマーカーを探して、別のものに変換することができます。</p>
+<h3><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>使い方</h3>
+<p><a href="/api/String.html">多くの文字列操作は標準ライブラリにあります</a>。 JS のコンパイルについては、 <a href="http://bucklescript.github.io/bucklescript/api/Js.String.html">BuckleScript API ドキュメント</a> の <code>Js.String</code> API バインディングあたりを参照してください。 Reason の文字列は JavaScript の文字列にマッピングされるので、両方の標準ライブラリでミックスしたりマッチさせたりできます。</p>
+<h3><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>ヒントとコツ</h3>
+<p><a href="https://twitter.com/jusrin00/status/875238742621028355">https://twitter.com/jusrin00/status/875238742621028355</a></p>
+<p><strong>表現力豊かなタイプシステムがあります</strong>！型付けされていない言語では、しばしば、次のようにして文字列の意味をオーバーロードすることでしょう：</p>
+<ul>
+<li>一意の id：<code>var BLUE_COLOR = &quot;blue&quot;</code></li>
+<li>データ構造の中に識別子を入れる：<code>var BLUE = &quot;blue&quot;; var RED = &quot;red&quot;; var colors = [BLUE, RED]</code></li>
+<li>オブジェクトのフィールド名：<code>person[&quot;age&quot;] = 24</code></li>
+<li>列挙型：<code>if (audio.canPlayType() === 'probably') {...}</code> <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/canPlayType#Return_value">(ಠ_ಠ)</a></li>
+<li>Reason の代替を知った後には、すぐに恐ろしいとわかるであろう、その他のクレイジーなパターン。</li>
+</ul>
+<p>貧弱な文字列型をオーバーロードすればするほど、型システム（またはチームメイト）はあなたを助けられなくなります！ Reason は、上記のユースケース（例えば後のセクションのヴァリアント）の代わりとなる、簡潔で高速なメンテナブルな型とデータ構造を提供します。</p>
+<p>ネイティブコンパイルでは、 Reason の文字列は直接パフォーマンスを分析できる単純な表現にコンパイルされ、手動のパフォーマンスチューニングが必要になることもあります。 例えば、<code>&quot;hi &quot; ++ &quot;how &quot; ++ &quot;are &quot; ++ &quot;you?&quot;</code> のような素朴な文字列を連結すると、中間の文字列 <code>&quot;are you?&quot;</code> と <code>&quot;how are you?&quot;</code> が不必要に割り当てられます。 この場合、<a href="/api/String.html"><code>String.concat</code></a> が適しています。 ある意味では、学校で学んだ伝統的なランタイム分析が最終的にはもう一度役立つかもしれません。</p>
+<p>JavaScript のコンパイルでは Reason 文字列は JavaScript 文字列にマッピングされるので（逆も）、上記の懸念や分析の機会はありません。</p>
+<h3><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>設計方針</h3>
+<p>クォートされた文字列の特殊文字をエスケープしないという特徴は、<a href="/api/Str.html">正規表現</a>のような DSL をスッキリ記述することを可能にします：</p>
+<pre><code class="hljs css reason"><span class="hljs-keyword">let</span> r = Str.regexp({|hello \([A-Za-z]+\)|});
+</code></pre>
+<p>下記とは対照的に</p>
+<pre><code class="hljs css reason"><span class="hljs-attribute">let r</span> = Str.regexp(<span class="hljs-string">"hello \\([A-Za-z]+\\)"</span>);
+</code></pre>
+<p>JS コンパイルでは、<code>Str</code> は利用できないので、代わりに [%bs.re]</code> と <a href="https://bucklescript.github.io/bucklescript/api/Js.Re.html">Js.Re</code></a> を使用します。</p></p>
+<p>Reason/OCaml は、単純なネイティブの文字列の実装を通して、ここで賢明さよりもシンプルさを重視しています。 あまりに洗練された文字列の実装は、時に<a href="http://mrale.ph/blog/2016/11/23/making-less-dart-faster.html">裏目</a>に出ることがあります。</p>
+<h2><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>文字</h2>
+<p>Reason は 1 文字の文字列の型を持ちます：</p>
+<pre><code class="hljs css reason"><span class="hljs-attribute">let firstLetterOfAlphabet</span> = <span class="hljs-string">'a'</span>;
+</code></pre>
+<p><strong>備考</strong>：文字は Unicode または UTF-8 をサポートしていません。</p>
+<h3><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>ヒントとコツ</h3>
+<p>余分な速度のために、文字は <a href="/try.html?reason=DYUwLgBAhhC8EHIoKA">0 から 255 の範囲の整数にコンパイルされます</a>。 また、パターンマッチ（後で説明します）することもできます：</p>
+<pre><code class="hljs css reason"><span class="hljs-keyword">let</span> isVowel = <span class="hljs-function">(<span class="hljs-params">theChar</span>) =&gt;</span>
+  <span class="hljs-keyword">switch</span> (theChar) {
+  | <span class="hljs-string">'a'</span>| <span class="hljs-string">'e'</span>| <span class="hljs-string">'i'</span>| <span class="hljs-string">'o'</span>| <span class="hljs-string">'u'</span>| <span class="hljs-string">'y'</span> =&gt; <span class="hljs-literal">true</span>
+  | <span class="hljs-function"><span class="hljs-params">_</span> =&gt;</span> <span class="hljs-literal">false</span>
+  };
+</code></pre>
+<p>ある文字列をある文字に変換するには、<code>&quot;a&quot;.[0]</code> を使います。ある文字をある文字列に変換するには、<code>String.make(1, 'a')</code> を使います。</p>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="type.html">← Type!</a><a class="docs-next button" href="boolean.html">ブール値 →</a></div></div></div></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.js"></script><script>window.foo = new Pjax({
+          areas: [
+            // try to use the first query.
+            '.mainContainer, .docsNavContainer .toc .navWrapper',
+            // fallback
+            'body'
+          ],
+          link: '.docsNavContainer:not(.docsSliderActive) a',
+          update: {
+            script: false,
+          }
+        });
+        var languagesMenuItemCopy = document.getElementById("languages-menu");
+        languagesMenuItemCopy.addEventListener("click", function(e){
+          e.preventDefault();
+          e.stopPropagation();
+          e.stopImmediatePropagation();
+        });</script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+              var search = docsearch({
+                apiKey: '966d1e412f67114a07dc0afe44b19b53',
+                indexName: 'reason',
+                inputSelector: '#search_input_react'
+              });
+            </script></body></html>
