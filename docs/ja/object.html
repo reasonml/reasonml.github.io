@@ -47,7 +47,7 @@
 </code></pre>
 <p>このオブジェクトはオブジェクト型が tesla で、パブリックメソッド <code>drive</code> を持ちます。それはオブジェクト内からのみアクセスできるプライベートメソッド <code>enableEnvy</code> も含みます。</p>
 <p>ご覧のとおり、Reason オブジェクトは <code>this</code> にアクセスすることもできます。JavaScript オブジェクトの <code>this</code> の振る舞いは奇妙なことがあります。Reason の <code>this</code> は常に正確にオブジェクト自身を指します。</p>
-<p>The following example shows an open object type which uses a type as parameter. The object type parameter is required to implement all the methods of the open object type.</p>
+<p>次の例は型をパラメータとして使用する開かれたオブジェクトを示しています。オブジェクト型パラメータは開かれたオブジェクト型のすべてのメソッドを実装するために必要です。</p>
 <pre><code class="hljs css reason"><span class="hljs-keyword">type</span> tesla(<span class="hljs-symbol">'a</span>) = {
   ..
   drive: <span class="hljs-built_in">int</span> =&gt; <span class="hljs-built_in">int</span>
@@ -63,13 +63,13 @@
   pri enableEnvy = (envy) =&gt; hasEnvy := envy
 };
 </code></pre>
-<p>You can use the above object like so:</p>
+<p>上記のオブジェクトを下記のように使用できます。</p>
 <pre><code class="hljs css reason">obj<span class="hljs-function"><span class="hljs-keyword">#</span><span class="hljs-title">doYouWant</span><span class="hljs-params">()</span></span>;
 </code></pre>
-<h2><a class="anchor" aria-hidden="true" name="tip-tricks"></a><a href="#tip-tricks" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Tip &amp; Tricks</h2>
-<p>If you come from JavaScript, you're probably not looking for vanilla Reason objects, but BuckleScript's <a href="https://bucklescript.github.io/docs/en/object.html#object-as-record">special object</a>. These are different in that they:</p>
+<h2><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>ヒントとコツ</h2>
+<p>もし JavaScript から来ているなら、あなたはおそらく素の Reason オブジェクトは探しているわけではなく、BuckleScript の<a href="https://bucklescript.github.io/docs/en/object.html#object-as-record">特別なオブジェクト</a>を探しています。 これらは次の点で異なります。</p>
 <ul>
-<li>access fields through <code>##</code>.</li>
+<li><code>##</code> によってフィールドにアクセスする</li>
 <li>uses <code>#=</code> for mutation, if the field is mutable (using <code>bs.set</code>).</li>
 <li>always come with with <code>Js.t</code> (as a type parameter to the <code>Js.t</code> type).</li>
 <li>compile to actual JS objects.</li>

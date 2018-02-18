@@ -29,8 +29,8 @@
 <p>A biblioteca padrão provê o <a href="/api/List.html">módulo de Lista</a> (e sua contraparte com argumentos nomeados, <code>ListLabels</code>).</p>
 <h4><a class="anchor" aria-hidden="true" name="prefixagem-imutavel"></a><a href="#prefixagem-imutavel" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Prefixagem Imutável</h4>
 <p>Use o operador de expansão, que é apenas <code>List.cons</code>:</p>
-<pre><code class="hljs css reason"><span class="hljs-attribute">let myList</span> = [1, 2, 3];
-<span class="hljs-attribute">let anotherList</span> = [0, ...myList];
+<pre><code class="hljs css reason"><span class="hljs-keyword">let</span> myList: <span class="hljs-built_in">list</span>(<span class="hljs-built_in">int</span>) = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>];
+<span class="hljs-keyword">let</span> anotherList = [<span class="hljs-number">0</span>, ...myList];
 </code></pre>
 <p><code>myList</code> não foi modificado. <code>anotherList</code> agora é <code>[0, 1, 2, 3]</code>. Isto é eficiente (tempo constante, não linear). Os últimos 3 elementos de <code>anotherList</code>são compartilhados com <code>myList</code>!</p>
 <p><strong>Note que <code>[a, ...b, ...c]</code> é um erro de sintaxe</strong>. Nós não suportamos múltiplas expansões em uma lista. Isso seria acidentalmente uma operação com tempo linear (<code>O(b)</code>), dado que cada item de b seria adicionado um a um à cabeça de <code>c</code>. Você poder usar <code>List.concat</code> para isso.</p>
@@ -62,13 +62,13 @@
 <h3><a class="anchor" aria-hidden="true" name="uso"></a><a href="#uso" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Uso</h3>
 <p>Módulos <a href="/api/Array.html">Array</a> e <a href="/api/ArrayLabels.html">ArrayLabel</a> da biblioteca padrão. Para compilação para JS, você também pode usar a habitual API de ligação com <a href="https://bucklescript.github.io/bucklescript/api/Js.Array.html">Js.Array</a>.</p>
 <p>Acesse &amp; altere um item de um array conforme:</p>
-<pre><code class="hljs css reason"><span class="hljs-keyword">let</span> <span class="hljs-attr">myArray</span> = [|<span class="hljs-string">"hello"</span>, <span class="hljs-string">"world"</span>, <span class="hljs-string">"how are you"</span>|];
+<pre><code class="hljs css reason"><span class="hljs-keyword">let</span> myArray: <span class="hljs-built_in">array</span>(<span class="hljs-built_in">string</span>) = [|<span class="hljs-string">"hello"</span>, <span class="hljs-string">"world"</span>, <span class="hljs-string">"how are you"</span>|];
 
-<span class="hljs-keyword">let</span> <span class="hljs-attr">firstItem</span> = myArray[<span class="hljs-number">0</span>]; <span class="hljs-comment">/* "hello" */</span>
+<span class="hljs-keyword">let</span> firstItem = myArray[<span class="hljs-number">0</span>]; /* <span class="hljs-string">"hello"</span> */
 
 myArray[<span class="hljs-number">0</span>] = <span class="hljs-string">"hey"</span>;
 
-<span class="hljs-comment">/* agora [|"hey", "world", "how are you"|] */</span>
+/* <span class="hljs-built_in">now</span> [|<span class="hljs-string">"hey"</span>, <span class="hljs-string">"world"</span>, <span class="hljs-string">"how are you"</span>|] */
 </code></pre>
 <p>Os acesso e alteração de item de array acima são somente açúcar sintático para <code>Array.get</code>/<code>Array.set</code>.</p>
 <h3><a class="anchor" aria-hidden="true" name="dicas-truques"></a><a href="#dicas-truques" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Dicas &amp; Truques</h3>

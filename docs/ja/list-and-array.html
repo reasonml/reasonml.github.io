@@ -29,8 +29,8 @@
 <p>標準ライブラリは <a href="/api/List.html">List モジュール</a> (およびラベル付き引数版の <code>ListLabels</code>）を提供しています。</p>
 <h4><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>不変リストの前置</h4>
 <p>ちょうど <code>List.cons</code> に相当する、スプレッドシンタックスを使用します。</p>
-<pre><code class="hljs css reason"><span class="hljs-attribute">let myList</span> = [1, 2, 3];
-<span class="hljs-attribute">let anotherList</span> = [0, ...myList];
+<pre><code class="hljs css reason"><span class="hljs-keyword">let</span> myList: <span class="hljs-built_in">list</span>(<span class="hljs-built_in">int</span>) = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>];
+<span class="hljs-keyword">let</span> anotherList = [<span class="hljs-number">0</span>, ...myList];
 </code></pre>
 <p><code>myList</code> は変更されていません。 <code>anotherList</code> は、現在 <code>[0, 1, 2, 3]</code> です。 これは効率的です。（線形ではなく定数時間） <code>anotherList</code> の最後の三要素は、<code>myList</code> と共有されます！</p>
 <p><strong>注意 <code>[a, ...b, ...c]</code> はシンタックスエラーになります。</strong> リストの複数のスプレッドはサポートしていません。 これは b のそれぞれの要素が <code>c</code> の先頭に一つづつ追加されるので、偶発的な線形演算（<code>O(b)</code>）になります。 これのために <code>List.concat</code> が使用できます。</p>
@@ -62,13 +62,13 @@
 <h3><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>使用法</h3>
 <p>標準ライブラリの <a href="/api/Array.html">Array</a> と <a href="/api/ArrayLabels.html">ArrayLabel</a> モジュール。 JS のコンパイルについては、おなじみの <a href="https://bucklescript.github.io/bucklescript/api/Js.Array.html">Js.Array</a> バインディング API もあります。</p>
 <p>配列の要素へのアクセスと更新は下記のようにします。</p>
-<pre><code class="hljs css reason"><span class="hljs-keyword">let</span> <span class="hljs-attr">myArray</span> = [|<span class="hljs-string">"hello"</span>, <span class="hljs-string">"world"</span>, <span class="hljs-string">"how are you"</span>|];
+<pre><code class="hljs css reason"><span class="hljs-keyword">let</span> myArray: <span class="hljs-built_in">array</span>(<span class="hljs-built_in">string</span>) = [|<span class="hljs-string">"hello"</span>, <span class="hljs-string">"world"</span>, <span class="hljs-string">"how are you"</span>|];
 
-<span class="hljs-keyword">let</span> <span class="hljs-attr">firstItem</span> = myArray[<span class="hljs-number">0</span>]; <span class="hljs-comment">/* "hello" */</span>
+<span class="hljs-keyword">let</span> firstItem = myArray[<span class="hljs-number">0</span>]; /* <span class="hljs-string">"hello"</span> */
 
 myArray[<span class="hljs-number">0</span>] = <span class="hljs-string">"hey"</span>;
 
-<span class="hljs-comment">/* now [|"hey", "world", "how are you"|] */</span>
+/* <span class="hljs-built_in">now</span> [|<span class="hljs-string">"hey"</span>, <span class="hljs-string">"world"</span>, <span class="hljs-string">"how are you"</span>|] */
 </code></pre>
 <p>上記の例の配列のアクセス/更新は <code>Array.get</code>/<code>Array.set</code> の単なるシンタックスシュガーです。</p>
 <h3><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>ヒントとコツ</h3>
