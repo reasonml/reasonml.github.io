@@ -18,6 +18,8 @@ let message = if (isMorning) {
 };
 ```
 
+**NOTE:** if you care about the returned expression (like above), you need to provide expressions _of the same type_ for both the `if` and `else` branches. If you forget the `else` branch, you'll get a type error, like [this one](https://github.com/reasonml-community/error-message-improvement/issues/30).
+
 We also have ternary sugar.
 
 ```reason
