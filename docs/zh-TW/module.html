@@ -75,23 +75,23 @@ printProfession(anotherPerson)<span class="hljs-comment">;</span>
 </code></pre>
 <p><strong>注意</strong>：<code>open</code> 和 <code>include</code> 非常不同！ 前者將模組內容帶入目前範疇，因此不需要每次前面加上模組名稱來提及該模組值。 後者靜態地<strong>拷貝所有</strong>模組定義，接著 <code>open</code> 模組。</p>
 <h3><a class="anchor" aria-hidden="true" name="re"></a><a href="#re" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>每個 <code>.re</code> 檔案都是個模組</h3>
-<p>一個 OCaml/Reason 檔案對應到一個模組；解開某些有趣的表達性，其他語言必須先要求產生程式碼。 The file <code>React.re</code> implicitly forms a module <code>React</code>, which can be seen by other source files.</p>
-<pre><code class="hljs css reason"><span class="hljs-comment">/* FileA.re. This typically compiles to module FileA below */</span>
+<p>一個 OCaml/Reason 檔案對應到一個模組；解開某些有趣的表達性，其他語言必須先要求產生程式碼。 檔案 <code>react.re</code> 隱喻地形成一個 <code>React</code> 模組，可以給其他檔案使用。</p>
+<pre><code class="hljs css reason"><span class="hljs-comment">/* FileA.re。典型地編譯成下列 FileA 模組 */</span>
 <span class="hljs-keyword">let</span> <span class="hljs-attr">a</span> = <span class="hljs-number">1</span>;
 <span class="hljs-keyword">let</span> <span class="hljs-attr">b</span> = <span class="hljs-number">2</span>;
 
 <span class="hljs-comment">/* FileB.re */</span>
-<span class="hljs-comment">/* Maps FileA's implementation to a new API */</span>
+<span class="hljs-comment">/* 對應 FileA 的實作到新的 API */</span>
 <span class="hljs-keyword">let</span> <span class="hljs-attr">alpha</span> = FileA.a;
 <span class="hljs-keyword">let</span> <span class="hljs-attr">beta</span> = FileA.b;
 </code></pre>
 <p>這個假的片段表達&quot;複製&quot;檔案：</p>
-<pre><code class="hljs css reason"><span class="hljs-comment">/* FileA.re. This typically compiles to module FileA below */</span>
+<pre><code class="hljs css reason"><span class="hljs-comment">/* FileA.re。典型地編譯成下列 FileA 模組 */</span>
 let a = <span class="hljs-number">1</span><span class="hljs-comment">;</span>
 let <span class="hljs-keyword">b </span>= <span class="hljs-number">2</span><span class="hljs-comment">;</span>
 
 <span class="hljs-comment">/* FileB.re */</span>
-<span class="hljs-comment">/* compiles to exactly fileA.re's content with no runtime overhead! */</span>
+<span class="hljs-comment">/* 編譯成跟 fileA.re 一樣的內容，沒有執行期的開銷！ */</span>
 include FileA<span class="hljs-comment">;</span>
 </code></pre>
 <p><strong>Note</strong>: Because files are modules, file names should, by convention, be capitalized so they match their module names. Uncapitalized file names are not invalid, but will be transformed into a capitalized module name. I.e. <code>file.re</code> will be compiled into the module <code>File</code>. To simplify and minimize the disconnect here, the convention is therefore to capitalize file names too.</p>
