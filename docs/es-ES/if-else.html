@@ -25,22 +25,23 @@
   <span class="hljs-string">"¡Hola!"</span>
 };
 </code></pre>
-<p>También tenemos endulzamiento ternario (<em>ternary sugar</em>).</p>
+<p><strong>NOTE:</strong> if you care about the returned expression (like above), you need to provide expressions <em>of the same type</em> for both the <code>if</code> and <code>else</code> branches. If you forget the <code>else</code> branch, you'll get a type error, like <a href="https://github.com/reasonml-community/error-message-improvement/issues/30">this one</a>.</p>
+<p>We also have ternary sugar.</p>
 <pre><code class="hljs css reason"><span class="hljs-attribute">let message</span> = isMorning ? <span class="hljs-string">"¡Buenos días!"</span> : <span class="hljs-string">"¡Hola!"</span>;
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" name="uso"></a><a href="#uso" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Uso</h2>
-<p><strong><code>if-else</code> y las expresiones ternarias se utilizan menos</strong> en Reason que en otros lenguajes; <a href="/docs/es-ES/pattern-matching.html">Coincidencia de patrones <em>Pattern-matching</em></a>, elimina una categoría entera de código que antes requería condicionales. Da preferencia a <code>if-else</code> si sólo tienes, por ejemplo, 2 ramas.</p>
+<p><strong><code>if-else</code> and ternary are much less used</strong> in Reason than in other languages; <a href="/docs/es-ES/pattern-matching.html">Pattern-matching</a> kills a whole category of code that previously required conditionals. Prefer <code>if-else</code> if you only have, say, 2 branches.</p>
 <h2><a class="anchor" aria-hidden="true" name="decisiones-de-diseno"></a><a href="#decisiones-de-diseno" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Decisiones de Diseño</h2>
-<p>Ternarios en Reason son solo un endulzamiento (<em>sugar</em>) para variantes <code>bool</code> y un <em>switch</em>:</p>
+<p>Reason ternary is just a sugar for the <code>bool</code> variant and a switch:</p>
 <pre><code class="hljs css reason"><span class="hljs-keyword">switch</span> (isMorning) {
 | <span class="hljs-keyword">true</span> =&gt; <span class="hljs-string">"¡Buenos días!"</span>
 | <span class="hljs-keyword">false</span> =&gt; <span class="hljs-string">"¡Hola!"</span>
 }
 </code></pre>
-<p>Si lo pasas a través de <a href="/docs/es-ES/extra-goodies.html#refmt"> <code>refmt</code></a>, obtendrás:</p>
+<p>If you pass that through <a href="/docs/es-ES/extra-goodies.html#refmt"><code>refmt</code></a>, you'd get:</p>
 <pre><code class="hljs css reason">isMorning ? <span class="hljs-string">"¡Buenos días!"</span> : <span class="hljs-string">"¡Hola!"</span><span class="hljs-comment">;</span>
 </code></pre>
-<p>¿Interesado? Aquí tienes una <a href="https://medium.com/@chenglou/cool-things-reason-formatter-does-9e1f79e25a82">entrada de blog</a> sobre el espíritu de nuestro <code>refmt</code>.</p>
+<p>Interested? Here's a <a href="https://medium.com/@chenglou/cool-things-reason-formatter-does-9e1f79e25a82">blog post</a> about the spirit of our <code>refmt</code>.</p>
 </span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="function.html">← Función</a><a class="docs-next button" href="more-on-type.html">Más de tipo →</a></div></div></div></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.js"></script><script>window.foo = new Pjax({
           areas: [
             // try to use the first query.

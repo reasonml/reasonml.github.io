@@ -1,0 +1,172 @@
+<html><head><meta charset="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1"/><title>Variant! · Reason</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta property="og:title" content="Variant! · Reason"/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io/index.html"/><meta property="og:description" content="보아라, Reason의 크라운 주얼 같은 데이터 구조를!"/><link rel="shortcut icon" href="/img/icon_50.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/arduino-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io/blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io/blog/feed.xml" title="Reason Blog RSS Feed"/><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/dummy.svg"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li><a href="/docs/ko/quickstart-javascript.html" target="_self">문서</a></li><li><a href="/ko/try.html" target="_self">Try</a></li><li><a href="/api/index.html" target="_self">API</a></li><li><a href="/docs/ko/community.html" target="_self">Community</a></li><li><a href="/blog" target="_self">블로그</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg"/>한국어</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/ja">日本語</a></li><li><a href="/en">English</a></li><li><a href="/es-ES">Español</a></li><li><a href="/fr">Français</a></li><li><a href="/pt-BR">Português (Brasil)</a></li><li><a href="/ru">Русский</a></li><li><a href="/uk">Українська</a></li><li><a href="/zh-CN">中文</a></li><li><a href="/zh-TW">繁體中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank">번역 돕기</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(){
+          if(languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search"/></li><li><a href="https://github.com/facebook/reason" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>Language Basics</span></h2></div><div class="navGroups"><div class="navGroup navGroupActive"><h3>Intro</h3><ul><li class="navListItem"><a class="navItem" href="/docs/ko/what-and-why.html">What &amp; Why</a></li></ul></div><div class="navGroup navGroupActive"><h3>Editor Setup</h3><ul><li class="navListItem"><a class="navItem" href="/docs/ko/global-installation.html">Global Installation</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/editor-plugins.html">에디터 플러그인</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/extra-goodies.html">Extra Goodies</a></li></ul></div><div class="navGroup navGroupActive"><h3>언어 기본</h3><ul><li class="navListItem"><a class="navItem" href="/docs/ko/overview.html">개요</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/let-binding.html">Let 바인딩</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/type.html">타입!</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/string-and-char.html">문자열 &amp; 문자</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/boolean.html">부울</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/integer-and-float.html">정수 &amp; 실수</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/tuple.html">튜플</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/record.html">Record</a></li><li class="navListItem navListItemActive"><a class="navItem navItemActive" href="/docs/ko/variant.html">Variant!</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/list-and-array.html">리스트 &amp; 배열</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/function.html">함수</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/if-else.html">If-Else</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/more-on-type.html">More on Type</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/destructuring.html">비구조화</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/pattern-matching.html">패턴 매칭!</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/mutation.html">Mutation</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/imperative-loops.html">Imperative Loops</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/jsx.html">JSX</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/external.html">External</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/exception.html">예외</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/object.html">Object</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/module.html">모듈</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/promise.html">프라미스</a></li></ul></div><div class="navGroup navGroupActive"><h3>JavaScript</h3><ul><li class="navListItem"><a class="navItem" href="/docs/ko/quickstart-javascript.html">빠른 시작</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/interop.html">Interop</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/syntax-cheatsheet.html">Syntax Cheatsheet</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/libraries.html">라이브러리</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/converting-from-js.html">Converting from JS</a></li></ul></div><div class="navGroup navGroupActive"><h3>Native</h3><ul><li class="navListItem"><a class="navItem" href="/docs/ko/native.html">Native</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/quickstart-ocaml.html">빠른 시작</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/convert-from-ocaml.html">Converting from OCaml</a></li></ul></div><div class="navGroup navGroupActive"><h3>Extra</h3><ul><li class="navListItem"><a class="navItem" href="/docs/ko/faq.html">Frequently Asked Questions</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/comparison-to-ocaml.html">OCaml과 비교</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/newcomer-examples.html">신입들을 위한 예시</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/project-structure.html">프로젝트 구조</a></li></ul></div></div></section></div><script>
+          var toggler = document.getElementById('navToggler');
+          var nav = document.getElementById('docsNav');
+          toggler.onclick = function() {
+            nav.classList.toggle('docsSliderActive');
+          };
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://crowdin.com/project/reason/ko" target="_blank">Translate</a><h1>Variant!</h1></header><article><div><span><p>보아라, Reason의 크라운 주얼 같은 데이터 구조를!</p>
+<p>대다수의 언어가 &quot;이것<strong>과</strong> 저것&quot;이라는 데이터 구조를 갖습니다. variant는 우리가 &quot;이것<strong>이나</strong> 저것&quot;을 나타내게 해줍니다.</p>
+<pre><code class="hljs css reason">type myResponseVariant =
+  | <span class="hljs-type">Yes</span>
+  | <span class="hljs-type">No</span>
+  | <span class="hljs-type">PrettyMuch</span>;
+
+<span class="hljs-keyword">let</span> areYouCrushingIt = Yes;
+</code></pre>
+<p><code>Yes</code>, <code>No</code> and <code>PrettyMuch</code> aren't strings, nor references, nor some special data type. They're called &quot;constructors&quot; (or &quot;tag&quot;). The <code>|</code> bar separates each constructor.</p>
+<p><strong>주의</strong>: variant의 생성자는 대소문자를 구분합니다.</p>
+<h2><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>사용</h2>
+<p>Along with a variant comes one of the most important features of Reason, the <code>switch</code> expression.</p>
+<p>Reason의 <code>switch</code>는 다른 언어의 <code>switch</code> (<code>if/elseif/elseif</code>의 반복처럼) 와 비슷하게 보입니다. It allows you to check every possible case of a variant. To use it, enumerate every variant constructor of the particular variant you'd like to use, each followed by an <code>=&gt;</code> and the expression corresponding to that case.</p>
+<pre><code class="hljs css reason"><span class="hljs-keyword">let</span> message =
+  <span class="hljs-keyword">switch</span> (areYouCrushingIt) {
+  | <span class="hljs-function"><span class="hljs-params">No</span> =&gt;</span> <span class="hljs-string">"No worries. Keep going!"</span>
+  | <span class="hljs-function"><span class="hljs-params">Yes</span> =&gt;</span> <span class="hljs-string">"Great!"</span>
+  | <span class="hljs-function"><span class="hljs-params">PrettyMuch</span> =&gt;</span> <span class="hljs-string">"Nice!"</span>
+  };
+<span class="hljs-comment">/* message 는 "Great!" 입니다 */</span>
+</code></pre>
+<p>A variant has an extremely rich amount of type system assistance. For example, we'll give you a type error if you've forgotten to cover a case of your variant, or if two cases are redundant. Be sure to check out switch and pattern-matching in a <a href="/docs/ko/pattern-matching.html">later section</a>!</p>
+<h3><a class="anchor" aria-hidden="true" name="variant-needs-an-explicit-definition"></a><a href="#variant-needs-an-explicit-definition" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Variant Needs an Explicit Definition</h3>
+<p>If the variant you're using is in a different file, bring it into scope like you'd do <a href="/docs/ko/record.html#record-needs-an-explicit-definition">for a record</a>:</p>
+<pre><code class="hljs css reason"><span class="hljs-comment">/* Zoo.re */</span>
+
+<span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">animal</span></span> = Dog | Cat | Bird;
+</code></pre>
+<pre><code class="hljs css reason"><span class="hljs-comment">/* example.re */</span>
+
+<span class="hljs-keyword">let</span> pet: Zoo.<span class="hljs-attr">animal</span> = Dog; <span class="hljs-comment">/* preferred */</span>
+<span class="hljs-comment">/* or */</span>
+<span class="hljs-keyword">let</span> <span class="hljs-attr">pet</span> = Zoo.Dog;
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>생성자 인자</h3>
+<p>A variant's constructors can hold extra data separated by comma.</p>
+<pre><code class="hljs css reason"><span class="hljs-keyword">type</span> account =
+  | None
+  | Instagram(<span class="hljs-keyword">string</span>)
+  | Facebook(<span class="hljs-keyword">string</span>, <span class="hljs-keyword">int</span>);
+</code></pre>
+<p>이렇게 하면 <code>Instagram</code> 은 <code>string</code>을 갖고, <code>Facebook</code>은 <code>string</code>과 <code>int</code>를 가집니다. 또 이는 다음과 같이 사용합니다:</p>
+<pre><code class="hljs css reason"><span class="hljs-attribute">let myAccount</span> = Facebook(<span class="hljs-string">"Josh"</span>, 26);
+<span class="hljs-attribute">let friendAccount</span> = Instagram(<span class="hljs-string">"Jenny"</span>);
+</code></pre>
+<p><strong>Notice how using a constructor is like calling a function</strong>? It's as if <code>Facebook</code> was a function that accepts two arguments. This isn't a coincidence; there's a reason why a constructor's data is called &quot;constructor argument&quot;.</p>
+<p>Using <code>switch</code>, you can pattern-match (again, described in a later section) a constructor's arguments:</p>
+<pre><code class="hljs css reason"><span class="hljs-keyword">let</span> greeting =
+  switch (myAccount) {
+  | <span class="hljs-type">None</span> =&gt; <span class="hljs-string">"Hi!"</span>
+  | <span class="hljs-type">Facebook</span>(name, age) =&gt; <span class="hljs-string">"Hi "</span> ++ name ++ <span class="hljs-string">", you're "</span> ++ string_of_int(age) ++ <span class="hljs-string">"-year-old."</span>
+  | <span class="hljs-type">Instagram</span>(name) =&gt; <span class="hljs-string">"Hello "</span> ++ name ++ <span class="hljs-string">"!"</span>
+  };
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>명예로운 언급</h3>
+<p><a href="/api/index.html">표준 라이브러리</a>는 많이 사용되는 두 개의 중요한 variant를 제공합니다.</p>
+<h4><a class="anchor" aria-hidden="true" name="option"></a><a href="#option" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>option</code></h4>
+<pre><code class="hljs css reason"><span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">option</span></span>(<span class="hljs-symbol">'a</span>) = <span class="hljs-literal">None</span> | <span class="hljs-literal">Some</span>(<span class="hljs-symbol">'a</span>);
+</code></pre>
+<p>이는 다른 언어에서 &quot;nullable&quot; (<code>undefined</code> 나 <code>null</code>이 값이 될 수 있는) 값을 사용하는 코드를 대체하기 위해 사용됩니다. Thanks to this convenience type definition, Reason can default every value to be non-nullable. <code>int</code>는 언제나 정수여야하고, &quot;<code>int</code><strong>거나</strong> <code>null</code><strong>이거나</strong> <code>undefined</code>&quot;여서는 안됩니다. If you do want to express a &quot;nullable int&quot;, you'd use <code>option(int)</code>, whose possible values are <code>None</code> or <code>Some(int)</code>. <code>switch</code> forces you to handle both cases; therefore, <strong>a pure Reason program doesn't have null errors</strong>.</p>
+<h4><a class="anchor" aria-hidden="true" name="list"></a><a href="#list" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>list</code></h4>
+<pre><code class="hljs css reason"><span class="hljs-keyword">type</span> <span class="hljs-built_in">list</span>(<span class="hljs-symbol">'a</span>) = <span class="hljs-type">Empty</span> | <span class="hljs-type">Head</span>(<span class="hljs-symbol">'a</span>, <span class="hljs-built_in">list</span>(<span class="hljs-symbol">'a</span>));
+</code></pre>
+<p><em>Not the actual type definition. Just an illustration</em>.</p>
+<p>This says: &quot;a list that holds a value of type <code>a</code> (whatever it is) is either empty, or holds that value plus another list&quot;.</p>
+<p>Reason gave <code>list</code> a syntax sugar. <code>[1, 2, 3]</code> is conceptually equivalent to <code>Head(1, Head(2, Head(3, Empty)))</code>. Once again, <code>switch</code> forces you to handle every case of this variant, including <code>Empty</code> (aka <code>[]</code>). <strong>This eliminates another big category of access bugs</strong>.</p>
+<h4><a class="anchor" aria-hidden="true" name="variant"></a><a href="#variant" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>다른 Variant 같은 타입들</h4>
+<p>Did you know that you can use <code>switch</code> on string, int, float, array, and most other data structures? Try it!</p>
+<h2><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>팁 &amp; 트릭</h2>
+<p>2개의 인자를 가진 생성자와 하나의 튜플을 가진 생성자를 <strong>혼동하지 마세요</strong>:</p>
+<pre><code class="hljs css reason"><span class="hljs-keyword">type</span> account =
+  | Facebook(<span class="hljs-keyword">string</span>, <span class="hljs-keyword">int</span>) <span class="hljs-comment">/* 2개의 인자 */</span>;
+<span class="hljs-keyword">type</span> account2 =
+  | Instagram((<span class="hljs-keyword">string</span>, <span class="hljs-keyword">int</span>)) <span class="hljs-comment">/* 1개의 인자 - 2개의 값을 가진 튜플 요구*/</span>;
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" name="variant"></a><a href="#variant" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Variant는 무조건 생성자를 요구합니다</h3>
+<p>If you come from an untyped language, you might be tempted to try <code>type foo = int | string</code>. This isn't possible in Reason; you'd have to give each branch a constructor: <code>type foo = Int(int) | String(string)</code>. Though usually, needing this might be an anti-pattern. The Design Decisions section below explains more.</p>
+<h3><a class="anchor" aria-hidden="true" name="interop-with-javascript"></a><a href="#interop-with-javascript" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Interop with JavaScript</h3>
+<p><em>This section assumes knowledge about BuckleScript's <a href="https://bucklescript.github.io/docs/en/interop-overview.html">FFI</a>. Skip this if you haven't felt the itch to use variants for binding to JS functions yet</em>.</p>
+<p>Quite a few JS libraries use functions that can accept many types of arguments. In these cases, it's very tempting to model them as variants. For example, suppose there's a <code>myLibrary.draw</code> JS function that takes in either a <code>number</code> or a <code>string</code>. You might be tempted to bind it like so:</p>
+<pre><code class="hljs css reason">/* reserved <span class="hljs-keyword">for</span> internal usage */
+[@bs.<span class="hljs-keyword">module</span> <span class="hljs-string">"myLibrary"</span>] <span class="hljs-keyword">external</span> draw : <span class="hljs-symbol">'a</span> =&gt; <span class="hljs-built_in">unit</span> = <span class="hljs-string">"draw"</span>;
+
+<span class="hljs-keyword">type</span> animal =
+  | <span class="hljs-type">MyFloat</span>(<span class="hljs-built_in">float</span>)
+  | <span class="hljs-type">MyString</span>(<span class="hljs-built_in">string</span>);
+
+<span class="hljs-keyword">let</span> betterDraw = (animal) =&gt;
+  switch (animal) {
+  | <span class="hljs-type">MyFloat</span>(f) =&gt; draw(f)
+  | <span class="hljs-type">MyString</span>(s) =&gt; draw(s)
+  };
+</code></pre>
+<p>You could definitely do that, but there are better ways! For example, simply two <code>external</code>s that both compile to the same JS call:</p>
+<pre><code class="hljs css reason">[@bs.<span class="hljs-keyword">module</span> <span class="hljs-string">"myLibrary"</span>] <span class="hljs-keyword">external</span> drawFloat : <span class="hljs-built_in">float</span> =&gt; <span class="hljs-built_in">unit</span> = <span class="hljs-string">"draw"</span>;
+[@bs.<span class="hljs-keyword">module</span> <span class="hljs-string">"myLibrary"</span>] <span class="hljs-keyword">external</span> drawString : <span class="hljs-built_in">string</span> =&gt; <span class="hljs-built_in">unit</span> = <span class="hljs-string">"draw"</span>;
+</code></pre>
+<p>BuckleScript also provides <a href="https://bucklescript.github.io/docs/en/function.html#binding-to-polymorphic-function">a few other ways</a> to do this.</p>
+<h3><a class="anchor" aria-hidden="true" name="variant-types-are-found-by-field-name"></a><a href="#variant-types-are-found-by-field-name" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Variant Types Are Found By Field Name</h3>
+<p>Please refer to this <a href="/docs/ko/record.html#record-types-are-found-by-field-name">record section</a>. Variants are the same: a function can't accept an arbitrary constructor shared by two different variants. Again, such feature exists, it's called a polymorphic variant. We'll talk about this in the future =).</p>
+<h2><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>디자인 결정</h2>
+<p>Variants, in their many forms (polymorphic variant, open variant, GADT, etc.), are likely <em>the</em> feature of a type system such as Reason's. The aforementioned <code>option</code> variant, for example, obliterates the need for nullable types, a major source of bugs in other languages. Philosophically speaking, a problem is composed of many possible branches/conditions. Mishandling these conditions is the majority of what we call bugs. <strong>A type system doesn't magically eliminate bugs; it points out the unhandled conditions and asks you to cover them</strong>*. The ability to model &quot;this or that&quot; correctly is crucial.</p>
+<p>For example, some folks wonder how the type system can safely eliminate badly formatted JSON data from propagating into their program. They don't, not by themselves! But if the parser returns the <code>option</code> type <code>None | Some(actualData)</code>, then you'd have to handle the <code>None</code> case explicitly in later call sites. That's all there is.</p>
+<p>Performance-wise, a variant can potentially tremendously speed up your program's logic. Here's a piece of JavaScript:</p>
+<pre><code class="hljs css js"><span class="hljs-keyword">let</span> data = <span class="hljs-string">'dog'</span>;
+<span class="hljs-keyword">if</span> (data === <span class="hljs-string">'dog'</span>) {
+  ...
+} <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (data === <span class="hljs-string">'cat'</span>) {
+  ...
+} <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (data === <span class="hljs-string">'bird'</span>) {
+  ...
+}
+</code></pre>
+<p>There's a linear amount of branch checking here (<code>O(n)</code>). Compare this to using a Reason variant:</p>
+<pre><code class="hljs css reason"><span class="hljs-class"><span class="hljs-keyword">type</span> animal = <span class="hljs-type">Dog</span> | <span class="hljs-type">Cat</span> | <span class="hljs-type">Bird</span>;</span>
+<span class="hljs-title">let</span> <span class="hljs-class"><span class="hljs-keyword">data</span> = <span class="hljs-type">Dog</span>;</span>
+<span class="hljs-title">switch</span> (<span class="hljs-class"><span class="hljs-keyword">data</span>) {
+| <span class="hljs-type">Dog</span> =&gt; ...
+| <span class="hljs-type">Cat</span> =&gt; ...
+| <span class="hljs-type">Bird</span> =&gt; ...
+}</span>
+</code></pre>
+<p>The compiler sees the variant, then</p>
+<ol>
+<li>conceptually turns them into <code>type animal = 0 | 1 | 2</code></li>
+<li>compiles <code>switch</code> to a constant-time format (<code>O(1)</code>).</li>
+</ol>
+<p>You might wonder why typed functional languages are used so often for parsing; switching on a large tree efficiently and safely is pretty much the best-case scenario for variants.</p>
+<!-- TODO: playground link -->
+<p>Mind blown yet? Variants have a deep connection to other fields of mathematics; <a href="https://codewords.recurse.com/issues/three/algebra-and-calculus-of-algebraic-data-types">See here</a> for an interesting exploration.</p>
+<p>* It's always nicer to design away the problem rather than resorting to a type system to cover the pitfalls; In reality, it's unrealistic to do so for every problem, or even just to understand every problem fully in order to design a solution. A type system allows you to safely make a big category of changes to codebases without needing to understand the whole thing upfront. This is great for guided exploration. In this regard, types also allows us not needing to overly design an API just to circumvent callers' simple pitfalls. They reduce the layers of abstractions needed to &quot;get things done&quot;, which in return reduces callers' cognitive burden.</p>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="record.html">← Record</a><a class="docs-next button" href="list-and-array.html">리스트 &amp; 배열 →</a></div></div></div></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.js"></script><script>window.foo = new Pjax({
+          areas: [
+            // try to use the first query.
+            '.mainContainer, .docsNavContainer .toc .navWrapper',
+            // fallback
+            'body'
+          ],
+          link: '.docsNavContainer:not(.docsSliderActive) a',
+          update: {
+            script: false,
+          }
+        });
+        var languagesMenuItemCopy = document.getElementById("languages-menu");
+        languagesMenuItemCopy.addEventListener("click", function(e){
+          e.preventDefault();
+          e.stopPropagation();
+          e.stopImmediatePropagation();
+        });</script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+              var search = docsearch({
+                apiKey: '966d1e412f67114a07dc0afe44b19b53',
+                indexName: 'reason',
+                inputSelector: '#search_input_react'
+              });
+            </script></body></html>

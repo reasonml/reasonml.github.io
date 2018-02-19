@@ -1,0 +1,107 @@
+<html><head><meta charset="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1"/><title>JSX · Reason</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta property="og:title" content="JSX · Reason"/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io/index.html"/><meta property="og:description" content="想要在 Reason 來點 HTML 語法嗎？如果不想，快速略過這個章節，假裝什麼都沒看見！"/><link rel="shortcut icon" href="/img/icon_50.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/arduino-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io/blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io/blog/feed.xml" title="Reason Blog RSS Feed"/><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/dummy.svg"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li><a href="/docs/zh-TW/quickstart-javascript.html" target="_self">文件</a></li><li><a href="/zh-TW/try.html" target="_self">試用</a></li><li><a href="/api/index.html" target="_self">API</a></li><li><a href="/docs/zh-TW/community.html" target="_self">社群</a></li><li><a href="/blog" target="_self">部落格</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg"/>繁體中文</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/ja">日本語</a></li><li><a href="/en">English</a></li><li><a href="/es-ES">Español</a></li><li><a href="/fr">Français</a></li><li><a href="/ko">한국어</a></li><li><a href="/pt-BR">Português (Brasil)</a></li><li><a href="/ru">Русский</a></li><li><a href="/uk">Українська</a></li><li><a href="/zh-CN">中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank">協助翻譯</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(){
+          if(languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search"/></li><li><a href="https://github.com/facebook/reason" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>Language Basics</span></h2></div><div class="navGroups"><div class="navGroup navGroupActive"><h3>簡介</h3><ul><li class="navListItem"><a class="navItem" href="/docs/zh-TW/what-and-why.html">什麼 &amp; 為何</a></li></ul></div><div class="navGroup navGroupActive"><h3>編輯器設置</h3><ul><li class="navListItem"><a class="navItem" href="/docs/zh-TW/global-installation.html">全域安裝</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/editor-plugins.html">編輯器外掛</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/extra-goodies.html">更多好物</a></li></ul></div><div class="navGroup navGroupActive"><h3>語言基礎</h3><ul><li class="navListItem"><a class="navItem" href="/docs/zh-TW/overview.html">概述</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/let-binding.html">Let 繫結</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/type.html">型別！</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/string-and-char.html">字串 &amp; 字元</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/boolean.html">布林值</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/integer-and-float.html">整數 &amp; 浮點數</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/tuple.html">Tuple</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/record.html">Record</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/variant.html">變異！</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/list-and-array.html">List &amp; 陣列</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/function.html">函式</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/if-else.html">If-Else</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/more-on-type.html">更多有關型別</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/destructuring.html">解構</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/pattern-matching.html">樣式匹配</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/mutation.html">可突變</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/imperative-loops.html">命令式迴圈</a></li><li class="navListItem navListItemActive"><a class="navItem navItemActive" href="/docs/zh-TW/jsx.html">JSX</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/external.html">外部</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/exception.html">例外</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/object.html">物件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/module.html">模組</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/promise.html">Promise</a></li></ul></div><div class="navGroup navGroupActive"><h3>JavaScript</h3><ul><li class="navListItem"><a class="navItem" href="/docs/zh-TW/quickstart-javascript.html">快速上手</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/interop.html">交互作用</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/syntax-cheatsheet.html">句法簡潔手冊</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/libraries.html">函式庫</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/converting-from-js.html">轉換 JS</a></li></ul></div><div class="navGroup navGroupActive"><h3>原生</h3><ul><li class="navListItem"><a class="navItem" href="/docs/zh-TW/native.html">原生</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/quickstart-ocaml.html">快速上手</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/convert-from-ocaml.html">轉換 OCaml</a></li></ul></div><div class="navGroup navGroupActive"><h3>附加選項</h3><ul><li class="navListItem"><a class="navItem" href="/docs/zh-TW/faq.html">常見問題</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/comparison-to-ocaml.html">與 OCaml 比較</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/newcomer-examples.html">新手示範</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/project-structure.html">專案結構</a></li></ul></div></div></section></div><script>
+          var toggler = document.getElementById('navToggler');
+          var nav = document.getElementById('docsNav');
+          toggler.onclick = function() {
+            nav.classList.toggle('docsSliderActive');
+          };
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://crowdin.com/project/reason/zh-TW" target="_blank">Translate</a><h1>JSX</h1></header><article><div><span><p>想要在 Reason 來點 HTML 語法嗎？如果不想，快速略過這個章節，假裝什麼都沒看見！</p>
+<p>Reason 支援 JSX 語法，跟 <a href="https://facebook.github.io/react/docs/introducing-jsx.html">ReactJS</a> 的比起來有些微小差異。 Reason JSX 沒有跟 ReatJS 綁在一起；只是轉譯成普通的函式呼叫：</p>
+<p><strong>注意</strong> 給 <a href="//reasonml.github.io/reason-react/">ReasonReact</a> 讀者：這不是ReasonReact 轉換 JSX。詳情請見用法章節。</p>
+<h2><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>大寫字首標籤</h2>
+<pre><code class="hljs css reason"><span class="hljs-tag">&lt;<span class="hljs-name">MyComponent</span> <span class="hljs-attr">foo</span>=<span class="hljs-string">{bar}</span> /&gt;</span>
+</code></pre>
+<p>變成</p>
+<pre><code class="hljs css reason">([<span class="hljs-name">@JSX</span>] MyComponent.make(<span class="hljs-name">~foo=bar</span>, ~children=[], ()))<span class="hljs-comment">;</span>
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>非大寫字首標籤</h2>
+<pre><code class="hljs css reason"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">foo</span>=<span class="hljs-string">{bar}</span>&gt;</span> child1 child2 <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>;
+</code></pre>
+<p>變成</p>
+<pre><code class="hljs css reason">([<span class="hljs-name">@JSX</span>] div(<span class="hljs-name">~foo=bar</span>, ~children=[<span class="hljs-name">child1</span>, child2], ()))<span class="hljs-comment">;</span>
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" name="children"></a><a href="#children" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Children</h3>
+<pre><code class="hljs css reason"><span class="hljs-tag">&lt;<span class="hljs-name">MyComponent</span>&gt;</span> foo bar <span class="hljs-tag">&lt;/<span class="hljs-name">MyComponent</span>&gt;</span>
+</code></pre>
+<p>這是傳遞兩個元素 list 的語法，<code>foo</code> 和 <code>bar</code> 到 children 位置。這會解開成為 list 包含 <code>foo</code> 和 <code>bar</code>：</p>
+<pre><code class="hljs css reason">([<span class="hljs-name">@JSX</span>] MyComponent.createElement(<span class="hljs-name">~children=</span>[<span class="hljs-name">foo</span>, bar], ()))<span class="hljs-comment">;</span>
+</code></pre>
+<p><strong>注意</strong> 這不是為了 ReasonReact 的轉換；ReasonReact 將最終的 list 傳換成 array。概念仍然相同。</p>
+<p>所以自然地，<code>&lt;MyComponent&gt; foo &lt;/MyComponent&gt;</code> 解糖成 <code>([@JSX] MyComponent.createElement(~children=[foo], ()))</code>。 例如，無論你做什麼，放在 children 的參數都會被包裝成 list。 那如果不想要這樣呢？ <strong>如果想要直接傳遞 <code>foo</code> 而不被包裝呢</strong>？</p>
+<h4><a class="anchor" aria-hidden="true" name="children"></a><a href="#children" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>展開 Children</h4>
+<p>為了解決這個問題，我們引入</p>
+<pre><code class="hljs css reason"><span class="hljs-tag">&lt;<span class="hljs-name">MyComponent</span>&gt;</span> ...foo <span class="hljs-tag">&lt;/<span class="hljs-name">MyComponent</span>&gt;</span>
+</code></pre>
+<p>傳遞 <code>foo</code> 且<em>不會</em>包裝在 list（或者 array，以 ReasonReact 案例）。意即，這會解糖成：</p>
+<pre><code class="hljs css reason">([<span class="hljs-name">@JSX</span>] MyComponent.createElement(<span class="hljs-name">~children=foo</span>, ()))<span class="hljs-comment">;</span>
+</code></pre>
+<p>當你處理 <code>foo</code> 本身就是字串 list 且希望能夠繼續傳遞而不希望有額外的包裝時（也可能有型別錯誤），這個十分有幫助。 這也允許你傳遞任意資料結構到 <code>children</code> 位置（記得，JSX <code>children</code> 只是一般的 prop）：</p>
+<pre><code class="hljs css reason"><span class="hljs-params">&lt;MyComponent&gt;</span> ...((theClassName) =&gt; <span class="hljs-params">&lt;div className=theClassName /&gt;</span>) <span class="hljs-params">&lt;/MyComponent&gt;</span>;
+<span class="hljs-params">&lt;MyForm&gt;</span> ...(<span class="hljs-string">"Hello"</span>, <span class="hljs-string">"Submit"</span>) <span class="hljs-params">&lt;/MyForm&gt;</span>;
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>用法</h2>
+<p>請見 <a href="//reasonml.github.io/reason-react/docs/jsx">ReasonReact</a> 有 JSX 應用程式範例，轉換上述呼叫成 ReasonReact 特定呼叫。</p>
+<p>下列為 JSX 標籤，列出大多數的功能。</p>
+<pre><code class="hljs css reason"><span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">MyComponent</span>
+  <span class="hljs-attr">booleanAttribute</span>=</span></span><span class="hljs-template-variable">{true}</span><span class="xml"><span class="hljs-tag">
+  <span class="hljs-attr">stringAttribute</span>=<span class="hljs-string">"string"</span>
+  <span class="hljs-attr">intAttribute</span>=<span class="hljs-string">1</span>
+  <span class="hljs-attr">forcedOptional</span>=<span class="hljs-string">?</span></span></span><span class="hljs-template-variable">{Some("hello")}</span><span class="xml"><span class="hljs-tag">
+  <span class="hljs-attr">onClick</span>=</span></span><span class="hljs-template-variable">{reduce(handleClick)}</span><span class="xml"><span class="hljs-tag">&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span> </span><span class="hljs-template-variable">{ReasonReact.stringToElement("hello")}</span><span class="xml"> <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">MyComponent</span>&gt;</span>
+</span></code></pre>
+<h2><a class="anchor" aria-hidden="true" name="js-jsx"></a><a href="#js-jsx" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>自 JS JSX 後的新方針</h2>
+<ul>
+<li>屬性和 children 不需要用 <code>{}</code> 包起來，這裡為了容易學習將它顯示出來。一旦 <code>refmt</code> 你的檔案，某些會消失，某些會變成括弧。</li>
+<li>這裡不支援 JSX 展開 props： <code>&lt;Foo {...bar} /&gt;</code>。儘管某些相關，這裡有展開 children，如上述： <code>&lt;Foo&gt; ...baz &lt;/Foo&gt;</code>。</li>
+<li>雙關！</li>
+</ul>
+<h3><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>雙關</h3>
+<p>&quot;雙關&quot;指的是速寫語法，當標籤和值相同時使用。 例如，JavaScript 中，可以用 <code>return {name}</code> 寫法來取代 <code>return {name: name}</code>。</p>
+<p>Reason JSX 支援雙關。 <code>&lt;input checked /&gt;</code> 是 <code>&lt;input checked=checked /&gt;</code> 的速寫。 當允許時，formatter 將幫你格式化成後者。 當有許多 props 時十分方便：</p>
+<pre><code class="hljs css reason"><span class="hljs-section">&lt;MyComponent isLoading text onClick /&gt;</span>
+</code></pre>
+<p>因此，在達到使用額外函式庫來避免傳遞 props 的極限之前，Reason JSX 可以塞的下更多的 props。</p>
+<p><strong>注意</strong> 這是從 ReactJS JSX 之後的新方針，原本<strong>沒有</strong>雙關。 ReactJS 的 <code>&lt;input checked /&gt;</code> 解糖成 <code>&lt;input checked=true /&gt;</code>，為了符合遵循 DOM 的慣用語和向下相容性。</p>
+<h2><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>提示 &amp; 技巧</h2>
+<p>給希望用到 JSX 優點的函式庫作者：上述的 <code>[@JSX]</code> 是個掛勾，供潛在的 ppx macros 發覺有個函式希望格式化成 JSX。 一旦發覺到函式，你可以將它轉換成其他表達式。</p>
+<p>這樣，每個人都可以獲得 JSX 語法的好處而不需要引入特定的函式庫，例如 ReasonRact。</p>
+<p>JSX 支援<a href="/docs/zh-TW/function.html#labeled-arguments">標籤式函式</a>的功能：選項、明確地傳入選項和選項預設值。</p>
+<h2><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>設計決策</h2>
+<p>這樣設計 JSX 跟我們希望如何幫助語言發展有關。 請見<a href="https://medium.com/@chenglou/cool-things-reason-formatter-does-9e1f79e25a82">這篇文章</a>的 &quot;What's the point?&quot; 章節。</p>
+<p>語言有巨集的能力 + 函式不可知的 JSX 語法允許每個函式庫可能地擁有 JSX 不須額外煩惱。 這樣，省去語意妥協（意即如何執行）便可加入一些視覺熟悉到底層 OCaml 語言。 Reason 其中一個重要目標是讓更多人可以獲得 OCaml 語言的美妙之處，同時免去在語法和格式上耗時的爭論。</p>
+<p>* 你可能會想為什麼在 ReactJS 從來都不需要展開 children；ReactJS 用了某些特別的執行時期邏輯 + 特別語法轉換 + 多個參數偵測 &amp; 標記來避免這些情況（<a href="https://github.com/facebook/react/blob/9b36df86c6ccecb73ca44899386e6a72a83ad445/packages/react/src/ReactElement.js#L207">請見這裡</a>）。 這種動態用法讓型別系統偵測<em>更加困難</em>。 由於我們控制了整個語法和 ReasonReact，我們決定引入展開 children 來消除包裝與不包裝的歧義，不需要編譯 &amp; 執行時期成本！</p>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="imperative-loops.html">← 命令式迴圈</a><a class="docs-next button" href="external.html">外部 →</a></div></div></div></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.js"></script><script>window.foo = new Pjax({
+          areas: [
+            // try to use the first query.
+            '.mainContainer, .docsNavContainer .toc .navWrapper',
+            // fallback
+            'body'
+          ],
+          link: '.docsNavContainer:not(.docsSliderActive) a',
+          update: {
+            script: false,
+          }
+        });
+        var languagesMenuItemCopy = document.getElementById("languages-menu");
+        languagesMenuItemCopy.addEventListener("click", function(e){
+          e.preventDefault();
+          e.stopPropagation();
+          e.stopImmediatePropagation();
+        });</script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+              var search = docsearch({
+                apiKey: '966d1e412f67114a07dc0afe44b19b53',
+                indexName: 'reason',
+                inputSelector: '#search_input_react'
+              });
+            </script></body></html>
