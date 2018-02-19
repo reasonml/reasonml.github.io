@@ -1,4 +1,4 @@
-<html><head><meta charset="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1"/><title>If-Else · Reason</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta property="og:title" content="If-Else · Reason"/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io/index.html"/><meta property="og:description" content="```reason"/><link rel="shortcut icon" href="/img/icon_50.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/arduino-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io/blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io/blog/feed.xml" title="Reason Blog RSS Feed"/><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/dummy.svg"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li><a href="/docs/ru/quickstart-javascript.html" target="_self">Документация</a></li><li><a href="/ru/try.html" target="_self">Попробовать</a></li><li><a href="/api/index.html" target="_self">API</a></li><li><a href="/docs/ru/community.html" target="_self">Сообщество</a></li><li><a href="/blog" target="_self">Блог</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg"/>Русский</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/ja">日本語</a></li><li><a href="/en">English</a></li><li><a href="/es-ES">Español</a></li><li><a href="/fr">Français</a></li><li><a href="/ko">한국어</a></li><li><a href="/pt-BR">Português (Brasil)</a></li><li><a href="/uk">Українська</a></li><li><a href="/zh-CN">中文</a></li><li><a href="/zh-TW">繁體中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank">Help Translate</a></li></ul></div></li><script>
+<html><head><meta charset="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1"/><title>If-Else · Reason</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta property="og:title" content="If-Else · Reason"/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io/index.html"/><meta property="og:description" content="В Reason `if` являются выражениями и их значение вычисляется как последнее выражение тела:"/><link rel="shortcut icon" href="/img/icon_50.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/arduino-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io/blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io/blog/feed.xml" title="Reason Blog RSS Feed"/><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/dummy.svg"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li><a href="/docs/ru/quickstart-javascript.html" target="_self">Документация</a></li><li><a href="/ru/try.html" target="_self">Попробовать</a></li><li><a href="/api/index.html" target="_self">API</a></li><li><a href="/docs/ru/community.html" target="_self">Сообщество</a></li><li><a href="/blog" target="_self">Блог</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg"/>Русский</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/ja">日本語</a></li><li><a href="/en">English</a></li><li><a href="/es-ES">Español</a></li><li><a href="/fr">Français</a></li><li><a href="/ko">한국어</a></li><li><a href="/pt-BR">Português (Brasil)</a></li><li><a href="/uk">Українська</a></li><li><a href="/zh-CN">中文</a></li><li><a href="/zh-TW">繁體中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank">Help Translate</a></li></ul></div></li><script>
         const languagesMenuItem = document.getElementById("languages-menu");
         const languagesDropDown = document.getElementById("languages-dropdown");
         languagesMenuItem.addEventListener("click", function(){
@@ -14,18 +14,32 @@
           toggler.onclick = function() {
             nav.classList.toggle('docsSliderActive');
           };
-        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://crowdin.com/project/reason/ru" target="_blank">Translate</a><h1>If-Else</h1></header><article><div><span><pre><code class="hljs css reason">if (<span class="hljs-keyword">showMenu) </span>{
-  <span class="hljs-keyword">displayMenu()
-</span>}<span class="hljs-comment">;</span>
-</code></pre>
-<p>В Reason <code>if</code> являются выражениями и их значение вычисляется как последнее выражение тела:</p>
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://crowdin.com/project/reason/ru" target="_blank">Translate</a><h1>If-Else</h1></header><article><div><span><p>В Reason <code>if</code> являются выражениями и их значение вычисляется как последнее выражение тела:</p>
 <pre><code class="hljs css reason"><span class="hljs-keyword">let</span> message = <span class="hljs-keyword">if</span> (isMorning) {
   <span class="hljs-string">"Good morning!"</span>
 } <span class="hljs-keyword">else</span> {
   <span class="hljs-string">"Hello!"</span>
 };
 </code></pre>
-<p><strong>NOTE:</strong> if you care about the returned expression (like above), you need to provide expressions <em>of the same type</em> for both the <code>if</code> and <code>else</code> branches. If you forget the <code>else</code> branch, you'll get a type error, like <a href="https://github.com/reasonml-community/error-message-improvement/issues/30">this one</a>.</p>
+<p><strong>Note:</strong> an <code>if-elseif-else</code> expression without the final <code>else</code> branch implicitly gives <code>()</code>. So this:</p>
+<pre><code class="hljs css reason">if (<span class="hljs-keyword">showMenu) </span>{
+  <span class="hljs-keyword">displayMenu()
+</span>}<span class="hljs-comment">;</span>
+</code></pre>
+<p>is basically the same as:</p>
+<pre><code class="hljs css reason"><span class="hljs-keyword">if</span> (showMenu) {
+  displayMenu()
+} <span class="hljs-keyword">else</span> {
+  ()
+};
+</code></pre>
+<p>Which is usually what you'd expect; <code>displayMenu()</code> should return unit too.</p>
+<p>Here's another way too look at it. This is clearly wrong:</p>
+<pre><code class="hljs css reason"><span class="hljs-keyword">let</span> <span class="hljs-literal">result</span> = <span class="hljs-keyword">if</span> (showMenu) {
+  <span class="hljs-number">1</span> + <span class="hljs-number">2</span>
+};
+</code></pre>
+<p>It'll give a type error, saying basically that the implicit <code>else</code> branch has the type <code>unit</code> while the <code>if</code> branch has type <code>int</code>. Intuitively, this makes sense: what would <code>result</code>'s value be, if <code>showMenu</code> was <code>false</code>?</p>
 <p>We also have ternary sugar.</p>
 <pre><code class="hljs css reason"><span class="hljs-attribute">let message</span> = isMorning ? <span class="hljs-string">"Good morning!"</span> : <span class="hljs-string">"Hello!"</span>;
 </code></pre>

@@ -1,4 +1,4 @@
-<html><head><meta charset="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1"/><title>If-Else · Reason</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta property="og:title" content="If-Else · Reason"/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io/index.html"/><meta property="og:description" content="```reason"/><link rel="shortcut icon" href="/img/icon_50.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/arduino-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io/blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io/blog/feed.xml" title="Reason Blog RSS Feed"/><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/dummy.svg"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li><a href="/docs/fr/quickstart-javascript.html" target="_self">Docs</a></li><li><a href="/fr/try.html" target="_self">Éditeur</a></li><li><a href="/api/index.html" target="_self">API</a></li><li><a href="/docs/fr/community.html" target="_self">Communauté</a></li><li><a href="/blog" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg"/>Français</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/ja">日本語</a></li><li><a href="/en">English</a></li><li><a href="/es-ES">Español</a></li><li><a href="/ko">한국어</a></li><li><a href="/pt-BR">Português (Brasil)</a></li><li><a href="/ru">Русский</a></li><li><a href="/uk">Українська</a></li><li><a href="/zh-CN">中文</a></li><li><a href="/zh-TW">繁體中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank">Aider à la traduction</a></li></ul></div></li><script>
+<html><head><meta charset="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1"/><title>If-Else · Reason</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta property="og:title" content="If-Else · Reason"/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io/index.html"/><meta property="og:description" content="Les `if`s en Reason sont des expressions, ils évaluent leur contenu :"/><link rel="shortcut icon" href="/img/icon_50.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/arduino-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io/blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io/blog/feed.xml" title="Reason Blog RSS Feed"/><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/dummy.svg"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li><a href="/docs/fr/quickstart-javascript.html" target="_self">Docs</a></li><li><a href="/fr/try.html" target="_self">Éditeur</a></li><li><a href="/api/index.html" target="_self">API</a></li><li><a href="/docs/fr/community.html" target="_self">Communauté</a></li><li><a href="/blog" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg"/>Français</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/ja">日本語</a></li><li><a href="/en">English</a></li><li><a href="/es-ES">Español</a></li><li><a href="/ko">한국어</a></li><li><a href="/pt-BR">Português (Brasil)</a></li><li><a href="/ru">Русский</a></li><li><a href="/uk">Українська</a></li><li><a href="/zh-CN">中文</a></li><li><a href="/zh-TW">繁體中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank">Aider à la traduction</a></li></ul></div></li><script>
         const languagesMenuItem = document.getElementById("languages-menu");
         const languagesDropDown = document.getElementById("languages-dropdown");
         languagesMenuItem.addEventListener("click", function(){
@@ -14,33 +14,48 @@
           toggler.onclick = function() {
             nav.classList.toggle('docsSliderActive');
           };
-        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://crowdin.com/project/reason/fr" target="_blank">Translate</a><h1>If-Else</h1></header><article><div><span><pre><code class="hljs css reason">if (<span class="hljs-keyword">showMenu) </span>{
-  <span class="hljs-keyword">displayMenu()
-</span>}<span class="hljs-comment">;</span>
-</code></pre>
-<p>Les <code>if</code>s en Reason sont des expressions, ils évaluent leur contenu :</p>
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://crowdin.com/project/reason/fr" target="_blank">Translate</a><h1>If-Else</h1></header><article><div><span><p>Les <code>if</code>s en Reason sont des expressions, ils évaluent leur contenu :</p>
 <pre><code class="hljs css reason"><span class="hljs-keyword">let</span> message = <span class="hljs-keyword">if</span> (isMorning) {
   <span class="hljs-string">"Good morning!"</span>
 } <span class="hljs-keyword">else</span> {
   <span class="hljs-string">"Hello!"</span>
 };
 </code></pre>
-<p>Nous avons aussi le sucre syntaxique ternaire.</p>
+<p><strong>Note:</strong> an <code>if-elseif-else</code> expression without the final <code>else</code> branch implicitly gives <code>()</code>. So this:</p>
+<pre><code class="hljs css reason">if (<span class="hljs-keyword">showMenu) </span>{
+  <span class="hljs-keyword">displayMenu()
+</span>}<span class="hljs-comment">;</span>
+</code></pre>
+<p>is basically the same as:</p>
+<pre><code class="hljs css reason"><span class="hljs-keyword">if</span> (showMenu) {
+  displayMenu()
+} <span class="hljs-keyword">else</span> {
+  ()
+};
+</code></pre>
+<p>Which is usually what you'd expect; <code>displayMenu()</code> should return unit too.</p>
+<p>Here's another way too look at it. This is clearly wrong:</p>
+<pre><code class="hljs css reason"><span class="hljs-keyword">let</span> <span class="hljs-literal">result</span> = <span class="hljs-keyword">if</span> (showMenu) {
+  <span class="hljs-number">1</span> + <span class="hljs-number">2</span>
+};
+</code></pre>
+<p>It'll give a type error, saying basically that the implicit <code>else</code> branch has the type <code>unit</code> while the <code>if</code> branch has type <code>int</code>. Intuitively, this makes sense: what would <code>result</code>'s value be, if <code>showMenu</code> was <code>false</code>?</p>
+<p>We also have ternary sugar.</p>
 <pre><code class="hljs css reason"><span class="hljs-attribute">let message</span> = isMorning ? <span class="hljs-string">"Good morning!"</span> : <span class="hljs-string">"Hello!"</span>;
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" name="utilisation"></a><a href="#utilisation" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Utilisation</h2>
-<p><strong><code>if-else</code> et le ternaire sont beaucoup moins utilisés</strong> en Reason que dans d'autres langages. Le <a href="/docs/fr/pattern-matching.html">pattern-matching</a> supprime toute une catégorie de code qui nécessitait auparavant des conditionnels. Ne préférez <code>if-else</code> que si vous n'avez, disons, que deux branches par exemple.</p>
+<p><strong><code>if-else</code> and ternary are much less used</strong> in Reason than in other languages; <a href="/docs/fr/pattern-matching.html">Pattern-matching</a> kills a whole category of code that previously required conditionals. Prefer <code>if-else</code> if you only have, say, 2 branches.</p>
 <h2><a class="anchor" aria-hidden="true" name="decisions-de-conception"></a><a href="#decisions-de-conception" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Décisions de conception</h2>
-<p>Le ternaire Reason est juste un sucre syntaxique pour la variant <code>bool</code> et un <code>switch</code> :</p>
+<p>Reason ternary is just a sugar for the <code>bool</code> variant and a switch:</p>
 <pre><code class="hljs css reason"><span class="hljs-keyword">switch</span> (isMorning) {
 | <span class="hljs-keyword">true</span> =&gt; <span class="hljs-string">"Good morning!"</span>
 | <span class="hljs-keyword">false</span> =&gt; <span class="hljs-string">"Hello!"</span>
 }
 </code></pre>
-<p>Si vous passez ce bout de code dans <a href="/docs/fr/extra-goodies.html#refmt"><code>refmt</code></a>, vous aurez :</p>
+<p>If you pass that through <a href="/docs/fr/extra-goodies.html#refmt"><code>refmt</code></a>, you'd get:</p>
 <pre><code class="hljs css reason">isMorning ? <span class="hljs-string">"Good morning!"</span> : <span class="hljs-string">"Hello!"</span><span class="hljs-comment">;</span>
 </code></pre>
-<p>Intéressé(e) ? Voici un <a href="https://medium.com/@chenglou/cool-things-reason-formatter-does-9e1f79e25a82">article</a> à propos de la philosophie de <code>refmt</code>.</p>
+<p>Interested? Here's a <a href="https://medium.com/@chenglou/cool-things-reason-formatter-does-9e1f79e25a82">blog post</a> about the spirit of our <code>refmt</code>.</p>
 </span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="function.html">← Fonction</a><a class="docs-next button" href="more-on-type.html">Plus sur les types →</a></div></div></div></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.js"></script><script>window.foo = new Pjax({
           areas: [
             // try to use the first query.
