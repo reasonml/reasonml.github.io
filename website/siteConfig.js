@@ -70,6 +70,11 @@ const users = [
     caption: "Astrocoders",
     image: "img/logos/astrocoders.svg",
     infoLink: "https://astrocoders.com",
+  },
+  {
+    caption: "Ahrefs",
+    image: "img/logos/ahrefs.svg",
+    infoLink: "https://ahrefs.com",
   }
 ];
 
