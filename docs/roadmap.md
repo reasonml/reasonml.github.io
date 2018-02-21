@@ -33,4 +33,4 @@ Wanna help?
 - Make bindings! Lots and lots of bindings! Have a look at our [Redex](https://redex.github.io/); see if there's something missing or unfinished, then just get your hands dirty! Most of them could also use better documentation, not just more code.
 - Whatever project you'd normally do in JavaScript, try it in Reason + BuckleScript!
 - Talk about Reason and BuckleScript!
-- Ping @chenglou in [Discord](https://discord.gg/reasonml) for more tasks.
+- Ping @chenglou on [Forum](https://reasonml.chat) and on [Discord](https://discord.gg/reasonml) for more tasks.
