@@ -15,7 +15,7 @@
             nav.classList.toggle('docsSliderActive');
           };
         </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://crowdin.com/project/reason/fr" target="_blank">Translate</a><h1>Interopérabilité</h1></header><article><div><span><h2><a class="anchor" aria-hidden="true" name="ajouter-du-javascript-en-plein-milieu-de-votre-code-reason"></a><a href="#ajouter-du-javascript-en-plein-milieu-de-votre-code-reason" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Ajouter du JavaScript en plein milieu de votre code Reason</h2>
-<p>If you're just hacking things together, this can be very nice, but you also have all of the unsafety of JavaScript code</p>
+<p>Si vous ne faites que tester des choses, cela peut être très agréable, mais vous avez également toute l'insécurité du code JavaScript</p>
 <pre><code class="hljs css reason">Js.<span class="hljs-built_in">log</span>(<span class="hljs-string">"this is reason"</span>);
 
 [%%bs.raw {<span class="hljs-string">|</span>
@@ -37,7 +37,7 @@ console.<span class="hljs-built_in">log</span>('here is some javascript for you'
 let x = [%bs.raw {| 'here <span class="hljs-keyword">is</span> a <span class="hljs-built_in">string</span> <span class="hljs-keyword">from</span> javascript' |}];
 Js.<span class="hljs-built_in">log</span>(x ++ <span class="hljs-string">" back in reason land"</span>); /* ++ <span class="hljs-keyword">is</span> <span class="hljs-keyword">the</span> operator <span class="hljs-keyword">for</span> <span class="hljs-built_in">string</span> concat */
 </code></pre>
-<p>Maintenant vous devez peut-être vous demander &quot;mais qu'elle est cette sorcellerie ??&quot;. Comment ocaml fait pour savoir que <code>x</code> est une chaine de caractère ? <strong>Il ne sait pas</strong>. The type of <code>x</code> in this code is a magic type that will unify with anything! Voilà pourquoi cette méthode est très dangereuse et peut avoir des effets en cascade dans l'algorithme d'inférence de types d'OCaml.</p>
+<p>Maintenant vous devez peut-être vous demander &quot;mais qu'elle est cette sorcellerie ??&quot;. Comment ocaml fait pour savoir que <code>x</code> est une chaine de caractère ? <strong>Il ne sait pas</strong>. Le type de <code>x</code> dans ce code est un type magique qui s'unifiera avec n'importe quoi ! Voilà pourquoi cette méthode est très dangereuse et peut avoir des effets en cascade dans l'algorithme d'inférence de types d'OCaml.</p>
 <pre><code class="hljs css reason"><span class="hljs-keyword">let</span> y = [%bs.raw {| <span class="hljs-string">'something'</span> |}];
 Js.log((<span class="hljs-string">"a string"</span> ++ y, <span class="hljs-number">10</span> + y));
 <span class="hljs-comment">/* attention !! OCaml ne vous empêchera pas d'utiliser y comme étant 2 types totalement différents */</span>
@@ -91,7 +91,7 @@ Js.log(calculate([<span class="hljs-number">1</span>, <span class="hljs-number">
 </code></pre>
 <p>Bien sûr, cette fonction que nous avons écrit en JavaScript pourrait être portée en Reason sans trop de tracas.</p>
 <p><strong>Souvenez-vous</strong> que c'est une porte de secours qui est très utile pour apprendre afin que vous puissiez vous faire la main rapidement et construire quelque chose, mais c'est un bon exercice que de revenir sur ses pas et réécrire le tout en un beau code Reason bien typé comme il faut.</p>
-<p>I've run into more than a few bugs because of raw JavaScript that I added to save time</p>
+<p>J'ai rencontré pas mal de bugs à cause du JavaScript brut que j'ai ajouté pour gagner du temps à la base</p>
 <h2><a class="anchor" aria-hidden="true" name="s-installer-et-se-discipliner-sur-certains-points"></a><a href="#s-installer-et-se-discipliner-sur-certains-points" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>S'installer et se discipliner sur certains points</h2>
 <p>Jusqu'à maintenant nous avons utilisé <code>bs.raw</code>, ce qui est un moyen très rapide de procéder mais qui n'est <strong>pas</strong> adapté à la production.</p>
 <p>Mais que faire si nous avons besoin d'appeler une fonction qui est en JavaScript ? Ce qui est chose nécessaire pour interagir avec le DOM ou utiliser des nodes modules. Dans BuckleScript, vous utilisez une déclaration <code>externe</code> (<a href="https://bucklescript.github.io/docs/en/intro-to-external.html">docs</a>).</p>
