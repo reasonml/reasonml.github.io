@@ -607,8 +607,20 @@ class Try extends Component {
               {examples.map(example => <li key={example.name} onClick={() => this.updateReason(example.code)}>{example.name}</li>)}
             </ul>
           </div>
-          <div className="try-button" style={{marginRight: 'auto'}} onClick={oldSyntax}>
+          <div className="try-button try-button-right-border" onClick={oldSyntax}>
             Old Syntax
+          </div>
+          <div className="try-button try-button-note" style={{marginRight: 'auto'}}>
+            Note on foo##bar
+            <div className="try-tooltip">
+              <span className="arrow"></span>
+              Currently, typing `foo##bar` in the Reason syntax section gives a
+              syntax error; the playground translates Reason syntax to OCaml syntax
+              first before feeding it into the compiler. But OCaml mis-prints `foo##bar` as
+              the syntactically invalid `## foo bar` (a fix will be released soon).
+              For now, whenever this happens, please manually edit the OCaml 
+              section to use `foo##bar` instead. Sorry!
+            </div>
           </div>
           <div className="try-button try-button-right-border" onClick={this.reformat}>Refmt (Reformat)</div>
           <div className="try-button try-button-right-border">
