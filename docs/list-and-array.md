@@ -97,4 +97,4 @@ The above array access/update is just syntax sugar for `Array.get`/`Array.set`.
 
 If you're compiling to JavaScript, know that Reason arrays map straightforwardly to JavaScript arrays, and vice-versa. Thus, even though arrays are fix-sized on native, you can still use the `Js.Array` API to resize them. This is fine.
 
-If you need to map through the `Js.Array` and get an index in the callback use `.mapi` instead of `.map` as `.map` does not provide the index.
+If you're coming from JavaScript, iterables behave differently. To get the more familiar callback signature of `(element, index) => {}`, you would use `.mapi()` or `.iteri()`. If you just need an element in the callback, use `.map()`. See the [API reference](https://reasonml.github.io/api/Array.html#VALmapi).
