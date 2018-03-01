@@ -96,3 +96,5 @@ The above array access/update is just syntax sugar for `Array.get`/`Array.set`.
 ### Tips & Tricks
 
 If you're compiling to JavaScript, know that Reason arrays map straightforwardly to JavaScript arrays, and vice-versa. Thus, even though arrays are fix-sized on native, you can still use the `Js.Array` API to resize them. This is fine.
+
+If you need to map through the `Js.Array` and get an index in the callback use `.mapi` instead of `.map` as `.map` does not provide the index.
