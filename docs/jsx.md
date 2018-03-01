@@ -81,7 +81,7 @@ Here's a JSX tag that shows most of the features.
   stringAttribute="string"
   intAttribute=1
   forcedOptional=?{Some("hello")}
-  onClick={reduce(handleClick)}>
+  onClick={send(handleClick)}>
   <div> {ReasonReact.stringToElement("hello")} </div>
 </MyComponent>
 ```
