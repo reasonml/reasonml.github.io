@@ -2,6 +2,7 @@ import jsx from 'rollup-plugin-jsx';
 import commonjs from 'rollup-plugin-commonjs';
 import nodeResolve from 'rollup-plugin-node-resolve';
 import replace from 'rollup-plugin-replace';
+import uglify from 'rollup-plugin-uglify';
 
 export default {
   input: 'try/try.js',
@@ -32,5 +33,6 @@ export default {
         'node_modules/lz-string/libs/lz-string.js': ['compressToEncodedURIComponent', 'decompressFromEncodedURIComponent'],
       }
     }),
+    uglify(),
   ],
 };
