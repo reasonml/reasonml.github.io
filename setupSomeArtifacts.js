@@ -30,7 +30,7 @@ const stdlibDir = path.join(__dirname, 'static', 'js');
 
 let stdlibDirFiles;
 try {
-  stdlibDirFiles = fs.readdirSync(stdlibDir);
+  stdlibDirFiles = fs.readdirSync(stdlibDir).filter(file => path.extname(file) === '.js');
 } catch (e) {
   console.log(`
 ** There's an error while reading ${stdlibDir}. Is this your first time setting things up?
