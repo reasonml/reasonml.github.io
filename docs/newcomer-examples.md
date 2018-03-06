@@ -60,7 +60,7 @@ let obj1: payload = {"name": "John", "age": 30};
 
 Note that `{. name: string, age: int}` is the syntax for a Reason/OCaml object type declaration (not a record!). It's lifted into `Js.t` so that BuckleScript sees the whole type and compiles it correctly to a regular JavaScript object. Ordinary, non-lifted OCaml objects are compiled into something else (rarely needed currently).
 
-## Binding to a JS Module with Default Export
+## Modeling a JS Module with Default Export
 
 Assuming the module's called `store.js`, and has a default export, plus a method called `getDate`.
 

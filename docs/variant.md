@@ -130,7 +130,7 @@ If you come from an untyped language, you might be tempted to try `type foo = in
 
 ### Interop with JavaScript
 
-_This section assumes knowledge about BuckleScript's [FFI](https://bucklescript.github.io/docs/en/interop-overview.html). Skip this if you haven't felt the itch to use variants for binding to JS functions yet_.
+_This section assumes knowledge about BuckleScript's [FFI](https://bucklescript.github.io/docs/en/interop-overview.html). Skip this if you haven't felt the itch to use variants for wrapping JS functions yet_.
 
 Quite a few JS libraries use functions that can accept many types of arguments. In these cases, it's very tempting to model them as variants. For example, suppose there's a `myLibrary.draw` JS function that takes in either a `number` or a `string`. You might be tempted to bind it like so:
 
@@ -156,7 +156,7 @@ You could definitely do that, but there are better ways! For example, simply two
 [@bs.module "myLibrary"] external drawString : string => unit = "draw";
 ```
 
-BuckleScript also provides [a few other ways](https://bucklescript.github.io/docs/en/function.html#binding-to-polymorphic-function) to do this.
+BuckleScript also provides [a few other ways](https://bucklescript.github.io/docs/en/function.html#modeling-polymorphic-function) to do this.
 
 ### Variant Types Are Found By Field Name
 

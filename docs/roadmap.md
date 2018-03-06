@@ -30,7 +30,7 @@ Wanna help?
 - Contribute to [your favorite editor plugin for Reason](editor-plugins.md#officially-supported-editors)
 - On that note: better [ocaml-language-server](https://github.com/freebroccolo/ocaml-language-server). This will potentially power all our editor integration in the future.
 - Come up with more [project names starting with "re"](https://github.com/reasonml/ideas-for-project-names-starting-with-re)
-- Make bindings! Lots and lots of bindings! Have a look at our [Redex](https://redex.github.io/); see if there's something missing or unfinished, then just get your hands dirty! Most of them could also use better documentation, not just more code.
+- Make wrappers for existing libraries! Have a look at our [Redex](https://redex.github.io/); see if there's something missing or unfinished, then just get your hands dirty! Most of them could also use better documentation, not just more code.
 - Whatever project you'd normally do in JavaScript, try it in Reason + BuckleScript!
 - Talk about Reason and BuckleScript!
 - Ping @chenglou on [Forum](https://reasonml.chat) and on [Discord](https://discord.gg/reasonml) for more tasks.

@@ -171,11 +171,11 @@ Wow! Notice how BuckleScript just inlined our `pi` variable for us? And the outp
 
 ## Using existing JavaScript libraries
 
-When folks write bindings for a particular JavaScript library, they'd usually publish it to npm. Head over to the [Libraries](libraries.md) to find out how to find these.
+When folks write wrappers for a particular JavaScript library, they'd usually publish it to npm. Head over to the [Libraries](libraries.md) to find out how to find these.
 
-To use a library that does not have existing bindings, however, you'll want to first install the npm package as usual, e.g. using `npm install --save <package-name>`, then just go ahead and write your bindings. You'll probably find the [`bs.module`](https://bucklescript.github.io/docs/en/import-export.html#import) FFI feature particularly useful; it emits the right `import`s or `require`s, depending on the JS compilation target's module format.
+To use a library that does not have existing wrappers, however, you'll want to first install the npm package as usual, e.g. using `npm install --save <package-name>`, then just go ahead and write your wrapper. You'll probably find the [`bs.module`](https://bucklescript.github.io/docs/en/import-export.html#import) FFI feature particularly useful; it emits the right `import`s or `require`s, depending on the JS compilation target's module format.
 
-As an example, here's the entire source code of the [`bs.glob`](https://github.com/reasonml-community/bs-glob) bindings (converted to Reason, the original is OCaml):
+As an example, here's the entire source code of the [`bs.glob`](https://github.com/reasonml-community/bs-glob) wrapper (converted to Reason, the original is OCaml):
 
 ```reason
 type error;

@@ -77,7 +77,7 @@ let myArray = [|"hello", "world", "how are you"|];
 
 ### Usage
 
-Standard library [Array](/api/Array.html) and [ArrayLabel](/api/ArrayLabels.html) module. For JS compilation, you also have the familiar [Js.Array](https://bucklescript.github.io/bucklescript/api/Js.Array.html) bindings API.
+Standard library [Array](/api/Array.html) and [ArrayLabel](/api/ArrayLabels.html) module. For JS compilation, you also have the familiar [Js.Array](https://bucklescript.github.io/bucklescript/api/Js.Array.html) API.
 
 Access & update an array item like so:
 
