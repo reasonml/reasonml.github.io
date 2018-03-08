@@ -16,7 +16,7 @@ Float Exponentiation                  |  `2.0 ** 2.0`
 String Concatenation                  |  `"Hello " ++ "World"`
 Comparison                            |  `>`, `<`, `>=`, `=<`
 Boolean operations                    |  `!`, `&&`, <code>&#124;&#124;</code>
-Reference, Physical (deep) Equality   |  `===`, `==`
+Reference, Structural (deep) Equality |  `===`, `==`
 Immutable Lists                       |  `[1, 2, 3]`
 Immutable Prepend                     |  `[item1, item2, ...theRest]`
 Arrays                                |  <code>[&#124;1, 2, 3&#124;]</code>
