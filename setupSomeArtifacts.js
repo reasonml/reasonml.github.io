@@ -52,4 +52,4 @@ b
   .transform('uglifyify', { global: true })
   .require(path.join(__dirname, 'static', 'dummy.js'), {expose: 'fs'})
   .bundle()
-  .pipe(fs.createWriteStream(path.join(__dirname, 'static', 'stdlibBundle.js')));
+  .pipe(fs.createWriteStream(path.join(__dirname, 'website', 'static', 'js', 'stdlibBundle.js')));
