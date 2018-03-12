@@ -5,7 +5,7 @@ import replace from 'rollup-plugin-replace';
 import uglify from 'rollup-plugin-uglify';
 
 export default {
-  input: 'try/try.js',
+  input: 'playground/try.js',
   name: 'tryReason',
   output: {
     file: 'static/js/try.js',

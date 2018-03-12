@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
-import debounce from '../utils/debounce';
+import debounce from './utils/debounce';
 import * as lzString from 'lz-string';
 import codemirror from 'codemirror';
 
@@ -618,7 +618,7 @@ class Try extends Component {
               syntax error; the playground translates Reason syntax to OCaml syntax
               first before feeding it into the compiler. But OCaml mis-prints `foo##bar` as
               the syntactically invalid `## foo bar` (a fix will be released soon).
-              For now, whenever this happens, please manually edit the OCaml 
+              For now, whenever this happens, please manually edit the OCaml
               section to use `foo##bar` instead. Sorry!
             </div>
           </div>

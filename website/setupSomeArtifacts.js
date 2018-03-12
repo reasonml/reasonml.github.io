@@ -5,17 +5,13 @@ const fs = require('fs');
 const path = require('path');
 const browserify = require('browserify');
 
+const playgroundDir = path.join(__dirname, 'playground');
+const docusaurusJsDir = path.join(__dirname, 'static', 'js');
 // === first task
 
 const refmtFileSource = path.join(__dirname, 'node_modules', 'reason', 'refmt.js');
-const refmtFileDest = path.join(__dirname, 'static', 'refmt.js');
-try {
-  fs.copyFileSync(refmtFileSource, refmtFileDest);
-} catch(e) {
-  console.log(`
-** There's an error while reading ${refmtFileSource}. Make sure you've done \`yarn install\`.`);
-  process.exit(1)
-}
+const refmtFileDest = path.join(docusaurusJsDir, 'refmt.js');
+fs.copyFileSync(refmtFileSource, refmtFileDest);
 
 // === second task
 
@@ -26,7 +22,7 @@ try {
 
 const b = browserify();
 
-const stdlibDir = path.join(__dirname, 'static', 'js');
+const stdlibDir = path.join(playgroundDir, 'stdlib');
 
 let stdlibDirFiles;
 try {
@@ -50,6 +46,6 @@ stdlibDirFiles.forEach(file => {
 
 b
   .transform('uglifyify', { global: true })
-  .require(path.join(__dirname, 'static', 'dummy.js'), {expose: 'fs'})
+  .require(path.join(playgroundDir, 'dummy.js'), {expose: 'fs'})
   .bundle()
-  .pipe(fs.createWriteStream(path.join(__dirname, 'website', 'static', 'js', 'stdlibBundle.js')));
+  .pipe(fs.createWriteStream(path.join(docusaurusJsDir, 'stdlibBundle.js')));
