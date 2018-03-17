@@ -21,31 +21,31 @@
   <span class="hljs-string">"Hello!"</span>
 };
 </code></pre>
-<p><strong>Note:</strong> an <code>if-elseif-else</code> expression without the final <code>else</code> branch implicitly gives <code>()</code>. So this:</p>
+<p><strong>주의</strong> <code>if-elseif-else</code> 식이 마지막에 <code>else</code> 브랜치로 끝나지 않을 경우 암시적으로 <code>()</code>를 반환합니다.</p>
 <pre><code class="hljs css reason">if (<span class="hljs-keyword">showMenu) </span>{
   <span class="hljs-keyword">displayMenu()
 </span>}<span class="hljs-comment">;</span>
 </code></pre>
-<p>is basically the same as:</p>
+<p>는 기본적으로 다음과 같습니다.</p>
 <pre><code class="hljs css reason"><span class="hljs-keyword">if</span> (showMenu) {
   displayMenu()
 } <span class="hljs-keyword">else</span> {
   ()
 };
 </code></pre>
-<p>Which is usually what you'd expect; <code>displayMenu()</code> should return unit too.</p>
+<p>예상하신대로 <code>displayMenu()</code>는 unit을 반환합니다.</p>
 <p>Here's another way too look at it. This is clearly wrong:</p>
 <pre><code class="hljs css reason"><span class="hljs-keyword">let</span> <span class="hljs-literal">result</span> = <span class="hljs-keyword">if</span> (showMenu) {
   <span class="hljs-number">1</span> + <span class="hljs-number">2</span>
 };
 </code></pre>
-<p>It'll give a type error, saying basically that the implicit <code>else</code> branch has the type <code>unit</code> while the <code>if</code> branch has type <code>int</code>. Intuitively, this makes sense: what would <code>result</code>'s value be, if <code>showMenu</code> was <code>false</code>?</p>
-<p>We also have ternary sugar.</p>
+<p>이 식은 타입 오류를 냅니다. 암시적으로 존재하던 <code>else</code> 브랜치는 <code>unit</code>을 반환하므로 <code>if</code> 브랜치가 반환하는 <code>int</code>와 타입이 다르기 때문입니다. Intuitively, this makes sense: what would <code>result</code>'s value be, if <code>showMenu</code> was <code>false</code>?</p>
+<p>또 Reason에는 삼항식이라는 문법적 설탕이 있습니다.</p>
 <pre><code class="hljs css reason"><span class="hljs-attribute">let message</span> = isMorning ? <span class="hljs-string">"Good morning!"</span> : <span class="hljs-string">"Hello!"</span>;
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>사용</h2>
 <p><strong><code>if-else</code> and ternary are much less used</strong> in Reason than in other languages; <a href="/docs/ko/pattern-matching.html">Pattern-matching</a> kills a whole category of code that previously required conditionals. Prefer <code>if-else</code> if you only have, say, 2 branches.</p>
-<h2><a class="anchor" aria-hidden="true" name="design-decisions"></a><a href="#design-decisions" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Design Decisions</h2>
+<h2><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>디자인 결정</h2>
 <p>Reason ternary is just a sugar for the <code>bool</code> variant and a switch:</p>
 <pre><code class="hljs css reason"><span class="hljs-keyword">switch</span> (isMorning) {
 | <span class="hljs-keyword">true</span> =&gt; <span class="hljs-string">"Good morning!"</span>
