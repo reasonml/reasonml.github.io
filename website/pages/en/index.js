@@ -109,6 +109,10 @@ class HomeSplash extends React.Component {
               <img alt={siteConfig.title} src={`${siteConfig.baseUrl}img/reason.svg`} />
             </div>
 
+            <div className="homeWrapperPromo">
+              <a href="https://www.reason-conf.com">Reason Conf</a> is happening, Get your ticket soon!
+            </div>
+
             <div className="homeWrapperInner">
               <div className="homeCodeSnippet">
                 <MarkdownBlock>{codeExampleSmallScreen}</MarkdownBlock>
