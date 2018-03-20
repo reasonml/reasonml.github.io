@@ -20,34 +20,28 @@
 <li><code>Js.Promise.then_: ('a =&gt; Js.Promise.t('b), Js.Promise.t('a)) =&gt; Js.Promise.t('b)</code></li>
 <li><code>Js.Promise.catch: (Js.Promise.error =&gt; Js.Promise.t('a), Js.Promise.t('a)) =&gt; Js.Promise.t('a)</code></li>
 </ul>
+<p>Additionally, here's how to create a JS promise on the Reason side:</p>
+<ul>
+<li><code>Js.Promise.make: ( ( ~resolve: (. 'a) =&gt; unit, ~reject: (. exn) =&gt; unit ) =&gt; unit ) =&gt; Js.Promise.t('a)</code></li>
+</ul>
+<p>This type signature means that <code>make</code> takes a callback that takes 2 named arguments, <code>resolve</code> and <code>reject</code>. Both arguments are themselves <a href="https://bucklescript.github.io/docs/en/function.html#solution-guaranteed-uncurrying">uncurried callbacks</a> (they have a dot). <code>make</code> returns the created promise.</p>
 <h2><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>用法</h2>
-<p>使用管道操作子（請見 <a href="https://reasonml.github.io/api/Pervasives.html">Pervasives 模組</a>的&quot;組合操作子&quot;）：</p>
-<pre><code class="hljs">Js.Promise.make((~resolve, ~reject) =&gt; [@bs] resolve(2))
-|&gt; Js.Promise.then_(value =&gt; {
-     Js.log(value);
-     Js.Promise.resolve(value + 2);
+<p>Using the pipe operator (see &quot;Composition operators&quot; in the <a href="https://reasonml.github.io/api/Pervasives.html">Pervasives module</a>):</p>
+<pre><code class="hljs css reason"><span class="hljs-keyword">let</span> myPromise = <span class="hljs-type">Js</span>.<span class="hljs-type">Promise</span>.make((~resolve, ~reject) =&gt; resolve(. <span class="hljs-number">2</span>));
+
+myPromise
+|&gt; <span class="hljs-type">Js</span>.<span class="hljs-type">Promise</span>.then_(<span class="hljs-keyword">value</span> =&gt; {
+     <span class="hljs-type">Js</span>.log(<span class="hljs-keyword">value</span>);
+     <span class="hljs-type">Js</span>.<span class="hljs-type">Promise</span>.resolve(<span class="hljs-keyword">value</span> + <span class="hljs-number">2</span>);
    })
-|&gt; Js.Promise.then_(value =&gt; {
-     Js.log(value);
-     Js.Promise.resolve(value + 3);
+|&gt; <span class="hljs-type">Js</span>.<span class="hljs-type">Promise</span>.then_(<span class="hljs-keyword">value</span> =&gt; {
+     <span class="hljs-type">Js</span>.log(<span class="hljs-keyword">value</span>);
+     <span class="hljs-type">Js</span>.<span class="hljs-type">Promise</span>.resolve(<span class="hljs-keyword">value</span> + <span class="hljs-number">3</span>);
    })
-|&gt; Js.Promise.catch(err =&gt; {
-     Js.log2(&quot;Failure!!&quot;, err);
-     Js.Promise.resolve(-2);
+|&gt; <span class="hljs-type">Js</span>.<span class="hljs-type">Promise</span>.catch(err =&gt; {
+     <span class="hljs-type">Js</span>.log2(<span class="hljs-string">"Failure!!"</span>, err);
+     <span class="hljs-type">Js</span>.<span class="hljs-type">Promise</span>.resolve(-<span class="hljs-number">2</span>);
    });
-</code></pre>
-<p>You can also pass a promise as a function parameter like so:</p>
-<pre><code class="hljs">let doSomethingToAPromise = (somePromise) =&gt; {
-  somePromise
-  |&gt; Js.Promise.then_(value =&gt; {
-    Js.log(value);
-    Js.Promise.resolve(value + 2)
-  })
-  |&gt; Js.Promise.catch(err =&gt; {
-    Js.log2(&quot;Failure!!&quot;, err);
-    Js.Promise.resolve(-2)
-  })
-}
 </code></pre>
 <p><strong>Note</strong>: we might offer a dedicated syntax for JS promises (async/await) in the future. Stay tuned!</p>
 </span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="module.html">← 模組</a><a class="docs-next button" href="quickstart-javascript.html">快速上手 →</a></div></div></div></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.js"></script><script>window.foo = new Pjax({
