@@ -15,7 +15,7 @@ A boolean has the type `bool` and can be either `true` or `false`. Common operat
 
 ## Usage
 
-**Note: JS `true` and `false` [aren't the same as the Reason/BuckleScript `true` and `false`](https://bucklescript.github.io/docs/en/boolean.html)! Don't use them interchangeably without proper conversion using BuckleScript's `Js.to_bool` and `Js.Boolean.to_js_boolean`.
+**Note**: JS `true` and `false` [aren't the same as the Reason/BuckleScript `true` and `false`](https://bucklescript.github.io/docs/en/boolean.html)! Don't use them interchangeably without proper conversion using BuckleScript's `Js.to_bool` and `Js.Boolean.to_js_boolean`.
 
 ## Tips & Tricks
 
