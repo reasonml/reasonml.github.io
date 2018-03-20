@@ -8,12 +8,25 @@ Reason has built-in support for [JavaScript promises through BuckleScript](https
 - `Js.Promise.then_: ('a => Js.Promise.t('b), Js.Promise.t('a)) => Js.Promise.t('b)`
 - `Js.Promise.catch: (Js.Promise.error => Js.Promise.t('a), Js.Promise.t('a)) => Js.Promise.t('a)`
 
+Additionally, here's how to create a JS promise on the Reason side:
+
+- `Js.Promise.make: (
+      (
+        ~resolve: (. 'a) => unit,
+        ~reject: (. exn) => unit
+      ) => unit
+    ) => Js.Promise.t('a)`
+
+This type signature means that `make` takes a callback that takes 2 named arguments, `resolve` and `reject`. Both arguments are themselves [uncurried callbacks](https://bucklescript.github.io/docs/en/function.html#solution-guaranteed-uncurrying) (they have a dot). `make` returns the created promise.
+
 ## Usage
 
 Using the pipe operator (see "Composition operators" in the [Pervasives module](https://reasonml.github.io/api/Pervasives.html)):
 
-```
-Js.Promise.make((~resolve, ~reject) => [@bs] resolve(2))
+```reason
+let myPromise = Js.Promise.make((~resolve, ~reject) => resolve(. 2));
+
+myPromise
 |> Js.Promise.then_(value => {
      Js.log(value);
      Js.Promise.resolve(value + 2);
@@ -28,21 +41,4 @@ Js.Promise.make((~resolve, ~reject) => [@bs] resolve(2))
    });
 ```
 
-You can also pass a promise as a function parameter like so:
-
-```
-let doSomethingToAPromise = (somePromise) => {
-  somePromise
-  |> Js.Promise.then_(value => {
-    Js.log(value);
-    Js.Promise.resolve(value + 2)
-  })
-  |> Js.Promise.catch(err => {
-    Js.log2("Failure!!", err);
-    Js.Promise.resolve(-2)
-  })
-}
-```
-
 **Note**: we might offer a dedicated syntax for JS promises (async/await) in the future. Stay tuned!
-
