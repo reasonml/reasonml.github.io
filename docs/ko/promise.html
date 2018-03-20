@@ -22,6 +22,21 @@
 </ul>
 <h2><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>사용</h2>
 <p>Using the pipe operator (see &quot;Composition operators&quot; in the <a href="https://reasonml.github.io/api/Pervasives.html">Pervasives module</a>):</p>
+<pre><code class="hljs">Js.Promise.make((~resolve, ~reject) =&gt; [@bs] resolve(2))
+|&gt; Js.Promise.then_(value =&gt; {
+     Js.log(value);
+     Js.Promise.resolve(value + 2);
+   })
+|&gt; Js.Promise.then_(value =&gt; {
+     Js.log(value);
+     Js.Promise.resolve(value + 3);
+   })
+|&gt; Js.Promise.catch(err =&gt; {
+     Js.log2(&quot;Failure!!&quot;, err);
+     Js.Promise.resolve(-2);
+   });
+</code></pre>
+<p>You can also pass a promise as a function parameter like so:</p>
 <pre><code class="hljs">let doSomethingToAPromise = (somePromise) =&gt; {
   somePromise
   |&gt; Js.Promise.then_(value =&gt; {
@@ -29,12 +44,12 @@
     Js.Promise.resolve(value + 2)
   })
   |&gt; Js.Promise.catch(err =&gt; {
-    Js.log2(&quot;실패!!&quot;, err);
+    Js.log2(&quot;Failure!!&quot;, err);
     Js.Promise.resolve(-2)
   })
 }
 </code></pre>
-<p><strong>주의</strong>: 우리는 미래에 JS 프라미스 (async/await) 를 위한 전용 문법을 추가할겁니다. 채널을 고정해주세요!</p>
+<p><strong>Note</strong>: we might offer a dedicated syntax for JS promises (async/await) in the future. Stay tuned!</p>
 </span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="module.html">← 모듈</a><a class="docs-next button" href="quickstart-javascript.html">빠른 시작 →</a></div></div></div></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.js"></script><script>window.foo = new Pjax({
           areas: [
             // try to use the first query.
