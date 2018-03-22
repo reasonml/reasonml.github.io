@@ -43,7 +43,7 @@ const users = [
   },
   {
     caption: "Broadsheet",
-    image: "img/logos/broadsheet.jpg",
+    image: "img/logos/broadsheet.svg",
     infoLink: "https://www.broadsheet.com.au",
   },
   {
