@@ -33,6 +33,6 @@ export default {
         'node_modules/lz-string/libs/lz-string.js': ['compressToEncodedURIComponent', 'decompressFromEncodedURIComponent'],
       }
     }),
-    uglify(),
+    // uglify(),
   ],
 };
