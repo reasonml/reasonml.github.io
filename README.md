@@ -4,6 +4,9 @@ This code is used to generate https://reasonml.github.io. It pulls in files from
 
 `website/` contains the JS, CSS, images and other files (and blog, which contains some markdown files too, these are separated from `docs/`, not too important).
 
+To rebuild the playground, you will need `bs-platform` installed globally
+(`npm install -g bs-platform`).
+
 `cd website && npm install && npm start` to start the development server & watcher.
 
 Don't use `npm build`. It's mostly for debugging.
