@@ -6,6 +6,7 @@ const Container = CompLibrary.Container;
 const GridBlock = CompLibrary.GridBlock;
 
 const translate = require("../../server/translate.js").translate;
+const translation = require('../../server/translation.js');
 
 const siteConfig = require(process.cwd() + "/siteConfig.js");
 
@@ -28,7 +29,7 @@ const pre = "```";
 const code = "`";
 
 // fake, static, responsive refmt, lol. See reason.css homeCodeSnippet logic
-const codeExampleSmallScreen =`${pre}reason
+const codeExampleSmallScreen = `${pre}reason
 type schoolPerson =
   | Teacher
   | Director
@@ -45,7 +46,7 @@ let greeting = (stranger) =>
   };
 ${pre}`;
 
-const codeExampleLargeScreen =`${pre}reason
+const codeExampleLargeScreen = `${pre}reason
 type schoolPerson = Teacher | Director | Student(string);
 
 let greeting = (stranger) =>
@@ -98,7 +99,7 @@ class HomeSplash extends React.Component {
 
         <div id="redirectBanner">
           <div>
-            Hello! This particular page hash has moved to <a id="redirectLink"/>.
+            Hello! This particular page hash has moved to <a id="redirectLink" />.
             Please update the URLs to reflect it. Thanks!
           </div>
         </div>
@@ -110,7 +111,11 @@ class HomeSplash extends React.Component {
             </div>
 
             <div className="homeWrapperPromo">
-              <a href="https://www.reason-conf.com">Reason Conf</a> is happening, Get your ticket soon!
+              <a href="https://www.reason-conf.com">
+                <translate>
+                  Reason Conf is happening, Get your ticket soon!
+                </translate>
+              </a>
             </div>
 
             <div className="homeWrapperInner">
@@ -118,7 +123,9 @@ class HomeSplash extends React.Component {
                 <MarkdownBlock>{codeExampleSmallScreen}</MarkdownBlock>
                 <MarkdownBlock>{codeExampleLargeScreen}</MarkdownBlock>
               </div>
-              <div className="homeTagLine">{siteConfig.tagline}</div>
+              <div className="homeTagLine">
+                {translation[this.props.language]['localized-strings'].tagline}
+              </div>
             </div>
 
             {promoSection}
@@ -192,7 +199,7 @@ class Index extends React.Component {
                 }))}
                 layout="twoColumn"
               />
-          </div>
+            </div>
           </Container>
 
           <div className="productShowcaseSection paddingBottom">
