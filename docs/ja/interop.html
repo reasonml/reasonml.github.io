@@ -1,4 +1,4 @@
-<html><head><meta charset="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1"/><title>Interop · Reason</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta property="og:title" content="Interop · Reason"/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io/index.html"/><meta property="og:description" content="## Just dumping JavaScript in the middle of your Reason code"/><link rel="shortcut icon" href="/img/icon_50.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/arduino-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io/blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io/blog/feed.xml" title="Reason Blog RSS Feed"/><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/dummy.svg"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li><a href="/docs/ja/quickstart-javascript.html" target="_self">Docs</a></li><li><a href="/ja/try.html" target="_self">Try</a></li><li><a href="/api/index.html" target="_self">API</a></li><li><a href="/docs/ja/community.html" target="_self">Community</a></li><li><a href="/blog" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg"/>日本語</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/en">English</a></li><li><a href="/es-ES">Español</a></li><li><a href="/fr">Français</a></li><li><a href="/ko">한국어</a></li><li><a href="/pt-BR">Português (Brasil)</a></li><li><a href="/ru">Русский</a></li><li><a href="/uk">Українська</a></li><li><a href="/zh-CN">中文</a></li><li><a href="/zh-TW">繁體中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank">Help Translate</a></li></ul></div></li><script>
+<html><head><meta charset="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1"/><title>Interop · Reason</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta property="og:title" content="Interop · Reason"/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io/index.html"/><meta property="og:description" content="## あなたの Reason コードの途中で、JavaScript にダンプするだけです。"/><link rel="shortcut icon" href="/img/icon_50.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/arduino-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io/blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io/blog/feed.xml" title="Reason Blog RSS Feed"/><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/"><img class="logo" src="/img/dummy.svg"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li><a href="/docs/ja/quickstart-javascript.html" target="_self">Docs</a></li><li><a href="/ja/try.html" target="_self">Try</a></li><li><a href="/api/index.html" target="_self">API</a></li><li><a href="/docs/ja/community.html" target="_self">Community</a></li><li><a href="/blog" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg"/>日本語</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/en">English</a></li><li><a href="/es-ES">Español</a></li><li><a href="/fr">Français</a></li><li><a href="/ko">한국어</a></li><li><a href="/pt-BR">Português (Brasil)</a></li><li><a href="/ru">Русский</a></li><li><a href="/uk">Українська</a></li><li><a href="/zh-CN">中文</a></li><li><a href="/zh-TW">繁體中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank">Help Translate</a></li></ul></div></li><script>
         const languagesMenuItem = document.getElementById("languages-menu");
         const languagesDropDown = document.getElementById("languages-dropdown");
         languagesMenuItem.addEventListener("click", function(){
@@ -14,8 +14,8 @@
           toggler.onclick = function() {
             nav.classList.toggle('docsSliderActive');
           };
-        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://crowdin.com/project/reason/ja" target="_blank">Translate</a><h1>Interop</h1></header><article><div><span><h2><a class="anchor" aria-hidden="true" name="just-dumping-javascript-in-the-middle-of-your-reason-code"></a><a href="#just-dumping-javascript-in-the-middle-of-your-reason-code" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Just dumping JavaScript in the middle of your Reason code</h2>
-<p>If you're just hacking things together, this can be very nice, but you also have all of the unsafety of JavaScript code</p>
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://crowdin.com/project/reason/ja" target="_blank">Translate</a><h1>Interop</h1></header><article><div><span><h2><a class="anchor" aria-hidden="true" name="reason-javascript"></a><a href="#reason-javascript" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>あなたの Reason コードの途中で、JavaScript にダンプするだけです。</h2>
+<p>もしあなたが一緒にハックしているだけであれば、これは非常に素晴らしものになり得ますが、すべての安全でない JavaScript コードを保持することにもなります。</p>
 <pre><code class="hljs css reason">Js.<span class="hljs-built_in">log</span>(<span class="hljs-string">"this is reason"</span>);
 
 [%%bs.raw {<span class="hljs-string">|</span>
@@ -23,31 +23,31 @@ console.<span class="hljs-built_in">log</span>('here is some javascript for you'
 <span class="hljs-string">|}];</span>
 </code></pre>
 <blockquote>
-<p><code>{|</code> and <code>|}</code> are the delimiters of a multi-line string in OCaml. You can also put a tag in there e.g. <code>{something|</code> and then it will look for a matching <code>|something}</code> to close.</p>
+<p><code>{|</code> と <code>|}</code> は OCaml の複数行文字列のデリミタです。 そこにタグを置くこともできます。例えば <code>{something|</code>、次に、閉じるためにマッチする <code>|something}</code> を探します。</p>
 </blockquote>
-<p>And here's the resulting javascript:</p>
+<p>そして、結果として得られる javascript が下記です。</p>
 <pre><code class="hljs css js"><span class="hljs-comment">// Generated by BUCKLESCRIPT VERSION 1.7.4, PLEASE EDIT WITH CARE</span>
 <span class="hljs-meta">'use strict'</span>;
 <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"this is reason"</span>);
 <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'here is some javascript for you'</span>);
 </code></pre>
-<h2><a class="anchor" aria-hidden="true" name="dumping-in-some-javascript-and-making-it-accessible-from-reason"></a><a href="#dumping-in-some-javascript-and-making-it-accessible-from-reason" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Dumping in some JavaScript, and making it accessible from Reason</h2>
-<p>What if you want a value that can be used from your Reason code?</p>
+<h2><a class="anchor" aria-hidden="true" name="javascript-reason"></a><a href="#javascript-reason" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>いくつかの JavaScript をダンプし、Reason からアクセスできるようにします。</h2>
+<p>Reason コードから使うことができる値が欲しい場合はどうしますか？</p>
 <pre><code class="hljs css reason">Js.<span class="hljs-built_in">log</span>(<span class="hljs-string">"this is reason"</span>);
-let x = [%bs.raw {| 'here <span class="hljs-keyword">is</span> a <span class="hljs-built_in">string</span> <span class="hljs-keyword">from</span> javascript' |}];
-Js.<span class="hljs-built_in">log</span>(x ++ <span class="hljs-string">" back in reason land"</span>); /* ++ <span class="hljs-keyword">is</span> <span class="hljs-keyword">the</span> operator <span class="hljs-keyword">for</span> <span class="hljs-built_in">string</span> concat */
+<span class="hljs-built_in">let</span> x = [%bs.raw {| 'here <span class="hljs-built_in">is</span> a <span class="hljs-built_in">string</span> from javascript' |}];
+Js.<span class="hljs-built_in">log</span>(x ++ <span class="hljs-string">" back in reason land"</span>); <span class="hljs-comment">/* ++ は文字列結合のための演算子です */</span>
 </code></pre>
-<p>Now you might be wondering &quot;what magic is this?? How did ocaml know that <code>x</code> was a string?&quot; <strong>It doesn't</strong>. The type of <code>x</code> in this code is a magic type that will unify with anything! This is quite dangerous and can have cascading effects in OCaml's type inference algorithm.</p>
+<p>今、次のように疑問に思っているかもしれません。「これはどんな魔法？？ Ocaml はどのようにして <code>x</code> が文字であるとわかったの？」<strong>そうではありません</strong>。 このコードの <code>x</code> の型は何かと統合される魔法の型です！ これは非常に危険で、OCaml の型推論アルゴリズムに連鎖的な影響をもたらす可能性があります。</p>
 <pre><code class="hljs css reason"><span class="hljs-keyword">let</span> y = [%bs.raw {| <span class="hljs-string">'something'</span> |}];
 Js.log((<span class="hljs-string">"a string"</span> ++ y, <span class="hljs-number">10</span> + y));
-<span class="hljs-comment">/* danger!! ocaml won't stop you from using y as 2 totally different types */</span>
+<span class="hljs-comment">/* 危険！！ ocaml は2つの全く異なる型として y を使用しても、あなたを止めてくれません */</span>
 </code></pre>
-<p>To fix this, you should <strong>always</strong> provide a concrete type for the result of <code>bs.raw</code>.</p>
-<pre><code class="hljs css reason">let x: <span class="hljs-built_in">string</span> = [%bs.raw {| 'well-typed' |}];
-Js.<span class="hljs-built_in">log</span>(x ++ <span class="hljs-string">" back in reason land"</span>);
-/* ocaml will <span class="hljs-keyword">error</span> out <span class="hljs-keyword">if</span> you <span class="hljs-keyword">try</span> <span class="hljs-keyword">to</span> use x <span class="hljs-keyword">as</span> anything other than a <span class="hljs-built_in">string</span> */
+<p>これを修正するには、<code>bs.raw</code> の結果に対して、<strong>常に</strong>具体的な型を示す必要があります。</p>
+<pre><code class="hljs css reason"><span class="hljs-keyword">let</span> x: string = [%bs.raw {| <span class="hljs-string">'well-typed'</span> |}];
+Js.log(x ++ <span class="hljs-string">" back in reason land"</span>);
+<span class="hljs-comment">/* ocaml は x を文字列とは異なる別の型として x を使用しようとしたら、エラーを送出します */</span>
 </code></pre>
-<p>And here's the output!</p>
+<p>そして、これが出力結果です！</p>
 <pre><code class="hljs css js"><span class="hljs-comment">// Generated by BUCKLESCRIPT VERSION 1.7.4, PLEASE EDIT WITH CARE</span>
 <span class="hljs-meta">'use strict'</span>;
 <span class="hljs-built_in">console</span>.log(<span class="hljs-string">"this is reason"</span>);
@@ -62,17 +62,17 @@ Js.<span class="hljs-built_in">log</span>(x ++ <span class="hljs-string">" back 
 <span class="hljs-built_in">console</span>.log(x$<span class="hljs-number">1</span> + <span class="hljs-string">" back in reason land"</span>);
 </code></pre>
 <blockquote>
-<p>The difference between the 2 <code>%%</code> from the previous section and the 1 <code>%</code> here is important! <code>[%%something ...]</code> is an OCaml &quot;extension point&quot; that represents a <em>top-level</em> statement (it can't show up inside a function or value, for example). <code>[%something ...]</code> is an extension point that stands in for an <em>expression</em>, and can be put just about anywhere -- but make sure that the JavaScript you put inside is actually an expression! E.g. don't put a semicolon after it, or you'll get a syntax error when you try to run the resulting JavaScript.</p>
+<p>前のセクションの2つの <code>%%</code> と、ここの1つの <code>%</code> の違いは重要です！ <code>[%%something ...]</code> は、<em>トップレベル</em>の文を表す OCaml の「拡張ポイント」です（それは例えば、関数の中や値には現れません）。 <code>[%something ...]</code> は<em>式</em>の代わりをする拡張ポイントで、どこにでも置かれる可能性があります -- が、中に置いた JavaScript が実際に式であるかを確認してください！ 例えば、セミコロンをその後に置いたり、JavaScript の実行結果を得た時にシンタックスエラーが発生したりしないようにしてください。</p>
 </blockquote>
-<h2><a class="anchor" aria-hidden="true" name="dumping-in-a-function-passing-values"></a><a href="#dumping-in-a-function-passing-values" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Dumping in a function &amp; passing values</h2>
-<p>We'll need a little knowledge about Bucklescript's runtime representation of various values for this to work.</p>
+<h2><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>関数をダンプする &amp; 値を渡す</h2>
+<p>Bucklescript の様々な値のランタイム表現を機能させるために少し知識を必要とします。</p>
 <ul>
-<li><code>strings</code> are strings, <code>ints</code> and <code>floats</code> are just numbers</li>
-<li>an <a href="/docs/ja/list-and-array.html#array">Array</a> is a mutable fixed-length list in OCaml, and is represented as a plain javascript array.</li>
-<li>a <a href="/docs/ja/list-and-array.html#list">List</a> is an immutable functional-style linked list, and is definitely the more idiomatic one to use in most cases. However, it's representation is more complicated (try <code>Js.log([1,2,3,4])</code> to check it out). Because of this, I generally convert to &amp; from <code>Array</code>s when I'm talking to javascript, via <code>Array.of_list</code> and <code>Array.to_list</code>.</li>
-<li>If you want to go deeper, there's a list <a href="https://bucklescript.github.io/docs/en/common-data-types.html#cheat-sheet">in the BuckleScript documentation</a></li>
+<li><code>strings</code> は文字列、<code>ints</code> と <code>floats</code> は単に数値です。</li>
+<li><a href="/docs/ja/list-and-array.html#array">配列</a> は OCaml ではミュータブルな固定長のリストで、プレーンな javascript の配列として表現されます。</li>
+<li><a href="/docs/ja/list-and-array.html#list">リスト</a> はイミュータブルな関数型スタイルの連結リストで、間違いなくほとんどのケースで使用する慣用的なものです。 しかし、その表現はもっと複雑です（<code>Js.log([1,2,3,4])</code> を試して確認してください）。 このため、javascript とやり取りする時は大抵、 <code>Array.of_list</code> を介して <code>Array</code> へ、または <code>Array.to_list&lt;code&gt; を介して &lt;code&gt;Array</code> から変換します。</li>
+<li>より深めたい場合は、<a href="https://bucklescript.github.io/docs/en/common-data-types.html#cheat-sheet">BuckleScript のドキュメント</a>にリストがあります。</li>
 </ul>
-<p>Knowing that, we can write a function in JavaScript that just accepts an array and returns a number, without much trouble at all.</p>
+<p>配列を受け取り、数値を返す関数を、全く苦労することなく JavaScript で書けることを知っています。</p>
 <pre><code class="hljs css reason"><span class="hljs-keyword">let</span> jsCalculate: (<span class="hljs-keyword">array</span>(<span class="hljs-keyword">int</span>), <span class="hljs-keyword">int</span>) =&gt; <span class="hljs-keyword">int</span> = [%bs.raw
   {|
  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(numbers, scaleFactor)</span> </span>{
@@ -89,42 +89,42 @@ Js.<span class="hljs-built_in">log</span>(x ++ <span class="hljs-string">" back 
 
 Js.log(calculate([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>], <span class="hljs-number">10</span>)); <span class="hljs-comment">/* -&gt; 60 */</span>
 </code></pre>
-<p>Of course, this function that I wrote in JavaScript could be ported over to Reason without much hassle.</p>
-<p><strong>Remember</strong> that this is an escape hatch that's very useful for learning so you can jump in quickly and make something, but it's a good exercise to go back through and convert things back into nice type safe reason code.</p>
-<p>I've run into more than a few bugs because of raw JavaScript that I added to save time</p>
-<h2><a class="anchor" aria-hidden="true" name="settling-down-and-getting-disciplined-about-things"></a><a href="#settling-down-and-getting-disciplined-about-things" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Settling down and getting disciplined about things</h2>
-<p>So far we've been using <code>bs.raw</code>, which is a very fast and loose way to do it, and <strong>not</strong> suitable for production.</p>
-<p>But what if we actually need to call a function that's in JavaScript? It's needed for interacting with the DOM, or using node modules. In BuckleScript, you use an <code>external</code> declaration (<a href="https://bucklescript.github.io/docs/en/intro-to-external.html">docs</a>).</p>
-<p>Getting a value and getting a function are both pretty easy:</p>
+<p>もちろん、Reason にJavaScript で書いたこの関数は、手間なく Reason に移植することができました。</p>
+<p>これは学習の際にとても有用な非常口であることを<strong>忘れないでください</strong>。すぐに飛びついて、何かを作ることができますが、立ち戻って、コンバートしたものを素晴らしい型安全な Reason コードに戻すのは良いエクササイズになります。</p>
+<p>私は時間を節約するために追加した生の JavaScript のせいで、いくつかのバグ以上のものに出くわしたことがあります。</p>
+<h2><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>落ち着いて物事を学ぶ</h2>
+<p>これまで、私達は非常に速く、緩い方法で、プロダクションには適<strong>さない</strong>、<code>bs.raw</code> を使用してきました。</p>
+<p>しかし、実際に JavaScript にある関数を呼び出す必要がする場合、どうすれば良いでしょう？ それは DOM や node モジュールの使用等で相互作用するために必要になります。 BuckleScript では、<code>external</code> 宣言を使用します（<a href="https://bucklescript.github.io/docs/en/intro-to-external.html">ドキュメント</a>）。</p>
+<p>値を取得したり、関数を取得したりすることの両方とも、とても簡単です。</p>
 <pre><code class="hljs css reason">[@bs.<span class="hljs-keyword">val</span>] <span class="hljs-keyword">external</span> pi : <span class="hljs-built_in">float</span> = <span class="hljs-string">"Math.PI"</span>;
 <span class="hljs-keyword">let</span> tau = pi *. <span class="hljs-number">2.0</span>;
 [@bs.<span class="hljs-keyword">val</span>] <span class="hljs-keyword">external</span> alert : <span class="hljs-built_in">string</span> =&gt; <span class="hljs-built_in">unit</span> = <span class="hljs-string">"alert"</span>;
 alert(<span class="hljs-string">"hello"</span>);
 </code></pre>
-<p>But what about when we want something more complicated? Here's how we could call <code>getContext</code> on a Canvas DOM node:</p>
+<p>しかし、何かもっと複雑な何かが欲しい時はどうでしょうか？Canvas の DOM ノードで <code>getContext</code> を呼び出す方法は以下のとおりです。</p>
 <pre><code class="hljs css reason">type canvas<span class="hljs-comment">;</span>
 
 type <span class="hljs-built_in">context</span><span class="hljs-comment">;</span>
 
-<span class="hljs-comment">/* we're leaving these types abstract, because we won't
- * be using them directly anywhere */</span>
+<span class="hljs-comment">/* これらの抽象化した型を残しているのは、
+ * どこにおいても直接使用することはないためです */</span>
 [@<span class="hljs-keyword">bs.send] </span><span class="hljs-keyword">external </span>getContext : (canvas, string) =&gt; <span class="hljs-built_in">context</span> = <span class="hljs-string">""</span><span class="hljs-comment">;</span>
 
 let myCanvas: canvas = [%<span class="hljs-keyword">bs.raw </span>{<span class="hljs-title">| document.getElementById("mycanvas") |</span>}]<span class="hljs-comment">;</span>
 
 let ctx = getContext(myCanvas, <span class="hljs-string">"2d"</span>)<span class="hljs-comment">;</span>
 </code></pre>
-<p>So let's unpack what's going on. We created some abstract types for the Canvas DOM node and the associated RenderingContext object.</p>
-<p>Then we made a <code>getContext</code> function, but instead of <code>@bs.val</code> we used <code>@bs.send</code>, and we used an empty string for the text of the external. <code>@bs.send</code> means &quot;we're calling a method on the first argument&quot;, which in this case is the canvas. Given the above, BuckleScript will translate <code>getContext(theFirstArgument, theSecondArgument)</code> into <code>theFirstArgument.getContext(theSecondArgument, ...)</code>.</p>
-<p>The empty string means &quot;the JS name is the same as the name we're giving the external in BuckleScript-land&quot; – in this case <code>getContext</code>. If we wanted to name it something else (like <code>getRenderingContext</code>), then we'd have to supply the string <code>&quot;getContext&quot;</code> so that BuckleScript calls the right function.</p>
-<p>Let's add one more function just so it's interesting.</p>
+<p>さて、何が起こっているか荷解きしましょう。Canvas DOM ノードと、関連付けられた RenderingContext オブジェクトのために、いくつかの抽象型が作成されました。</p>
+<p>そして、<code>getContext</code> 関数を作成しましたが、<code>@bs.val</code> の代わりに、<code>@bs.send</code> を使用し、external のテキストに空文字列を使用しました。 <code>@bs.send</code> は「私達は第一引数上のメソッドを呼び出しています」ということを意味します。このケースでは（第一引数は） canvas です。 上記を踏まえて、BuckleScript は <code>getContext(theFirstArgument, theSecondArgument)</code> を <code>heFirstArgument.getContext(theSecondArgument, ...)</code> に翻訳します。</p>
+<p>空文字列は「JS 上の名前は BuckleScript 上で external に与えた名前と同じです」ということを意味します。 – このケースでは（external に与えた名前は） <code>getContext</code> です。 他の名前（<code>getRenderingContext</code> のような）を付けたい場合は、BuckleScript が正しい関数を呼べるように、<code>&quot;getContext&quot;</code> という文字列を指定する必要があります。</p>
+<p>面白い関数をもうひとつ追加しましょう。</p>
 <pre><code class="hljs css reason">[@bs.send] <span class="hljs-keyword">external</span> fillRect : (context, <span class="hljs-built_in">float</span>, <span class="hljs-built_in">float</span>, <span class="hljs-built_in">float</span>, <span class="hljs-built_in">float</span>) =&gt; <span class="hljs-built_in">unit</span> = <span class="hljs-string">""</span>;
 </code></pre>
-<p>And now we can draw something!</p>
+<p>そして今、何かを描くことができるようになりました！</p>
 <pre><code class="hljs css reason"><span class="hljs-selector-tag">fillRect</span>(<span class="hljs-selector-tag">ctx</span>, 0<span class="hljs-selector-class">.0</span>, 0<span class="hljs-selector-class">.0</span>, 100<span class="hljs-selector-class">.0</span>, 100<span class="hljs-selector-class">.0</span>);
 </code></pre>
-<p>It's not much, but adding other canvas methods is similar, and then you can start doing some <a href="https://twitter.com/jaredforsyth/status/871062358076030976">really fun things</a>.</p>
-<p>So what does the compiled JavaScript look like?</p>
+<p>それほど多くはありませんが、他の canvas メソッドを追加することは似ており、いくつかの<a href="https://twitter.com/jaredforsyth/status/871062358076030976">本当に楽しいこと</a>をやり始めることができます。</p>
+<p>コンパイルされた JavaScript の見た目はどうでしょうか？</p>
 <pre><code class="hljs css js"><span class="hljs-meta">'use strict'</span>;
 <span class="hljs-keyword">var</span> tau = <span class="hljs-built_in">Math</span>.PI * <span class="hljs-number">2.0</span>;
 alert(<span class="hljs-string">"hello"</span>);
@@ -132,18 +132,18 @@ alert(<span class="hljs-string">"hello"</span>);
 <span class="hljs-keyword">var</span> ctx = myCanvas.getContext(<span class="hljs-string">"2d"</span>);
 ctx.fillRect(<span class="hljs-number">0.0</span>, <span class="hljs-number">0.0</span>, <span class="hljs-number">100.0</span>, <span class="hljs-number">100.0</span>);
 </code></pre>
-<p>Wow! Notice how BuckleScript just inlined our <code>pi</code> variable for us? And the output looks almost exactly like it was written by hand.</p>
-<h2><a class="anchor" aria-hidden="true" name="using-existing-javascript-libraries"></a><a href="#using-existing-javascript-libraries" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Using existing JavaScript libraries</h2>
-<p>When folks write wrappers for a particular JavaScript library, they'd usually publish it to npm. Head over to the <a href="/docs/ja/libraries.html">Libraries</a> to find out how to find these.</p>
-<p>To use a library that does not have existing wrappers, however, you'll want to first install the npm package as usual, e.g. using <code>npm install --save &lt;package-name&gt;</code>, then just go ahead and write your wrapper. You'll probably find the <a href="https://bucklescript.github.io/docs/en/import-export.html#import"><code>bs.module</code></a> FFI feature particularly useful; it emits the right <code>import</code>s or <code>require</code>s, depending on the JS compilation target's module format.</p>
-<p>As an example, here's the entire source code of the <a href="https://github.com/reasonml-community/bs-glob"><code>bs.glob</code></a> wrapper (converted to Reason, the original is OCaml):</p>
+<p>おぉ！BuckleScript が <code>pi</code> 変数を私達のためにどのようにインライン化したか注目してもらえますか？出力結果も手動で書かれたものとほぼ同じように見えます。</p>
+<h2><a class="anchor" aria-hidden="true" name="javascript"></a><a href="#javascript" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>既存の JavaScript ライブラリを使用する</h2>
+<p>人々が特定の JavaScript ラッパーを書く時、彼らは大抵 npm に公開すると思います。<a href="/docs/ja/libraries.html">Libraries</a> に進み、それらを見つける方法を探してください。</p>
+<p>既存のラッパーのないライブラリを使う場合でも、いつもどおり最初に npm パッケージをインストールする必要があります。例えば、<code>npm install --save &lt;package-name&gt;</code> を使用し、それから、ラッパーを書いてください。 おそらく、特に便利な <a href="https://bucklescript.github.io/docs/en/import-export.html#import"><code>bs.module</code></a> のFFI 機能を見つけることになると思います。それは JS コンパイルのターゲットのモジュール形式に応じて、適切な <code>import</code> や <code>require</code> を発火します。</p>
+<p>一例として、ここに（Reason にコンバートされた、オリジナルが OCaml の）<a href="https://github.com/reasonml-community/bs-glob"><code>bs.glob</code></a> ラッパーのソースコード全体を記載します。</p>
 <pre><code class="hljs css reason"><span class="hljs-built_in">type</span> <span class="hljs-built_in">error</span>;
 
 [@bs.<span class="hljs-built_in">module</span>] external glob : <span class="hljs-function"><span class="hljs-params">(<span class="hljs-built_in">string</span>, (Js.nullable(<span class="hljs-built_in">error</span>), array(<span class="hljs-built_in">string</span>)) =&gt; unit)</span> =&gt;</span> unit = <span class="hljs-string">""</span>;
 
 [@bs.val] [@bs.<span class="hljs-built_in">module</span> <span class="hljs-string">"glob"</span>] external sync : <span class="hljs-built_in">string</span> =&gt; array(<span class="hljs-built_in">string</span>) = <span class="hljs-string">""</span>;
 </code></pre>
-<p>And the relevant parts of <code>package.json</code>:</p>
+<p>そして、<code>package.json</code> の関連部分です。</p>
 <pre><code class="hljs css json">{
   "name": "bs-glob",
   "version": "0.1.0",

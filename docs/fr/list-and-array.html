@@ -33,7 +33,7 @@
 <span class="hljs-keyword">let</span> anotherList = [<span class="hljs-number">0</span>, ...myList];
 </code></pre>
 <p><code>myList</code> n’a pas été muté. <code>anotherList</code> vaut maintenant <code>[0, 1, 2, 3]</code>. Cette méthode est efficace (temps constant, pas linéaire). les 3 derniers éléments d'<code>anotherList</code> sont partagés avec <code>myList</code> !</p>
-<p><strong>Noter que <code>[un,... b... c]</code> est une erreur de syntaxe</strong>. Nous ne supportons pas plusieurs spreads pour une seule list. Ce serait une opération linéaire accidentelle (<code>O(b)</code>), étant donné que chaque élément de b serait ajouté au début de <code>c</code> un par un. Vous pouvez utiliser <code>List.concat</code> pour cela.</p>
+<p><strong>Noter que <code>[un, ...b, ... c]</code> est une erreur de syntaxe</strong>. Nous ne supportons pas plusieurs spreads pour une seule list. Ce serait une opération linéaire accidentelle (<code>O(b)</code>), étant donné que chaque élément de b serait ajouté au début de <code>c</code> un par un. Vous pouvez utiliser <code>List.concat</code> pour cela.</p>
 <p>Mettre à jour de façon arbitraire un élément au milieu d'une liste est déconseillez car ses performances et ses frais généraux d'allocation seraient linéaires (<code>O(n)</code>).</p>
 <h4><a class="anchor" aria-hidden="true" name="acces"></a><a href="#acces" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Accès</h4>
 <p><code>switch</code> (abordé dans la <a href="/docs/fr/pattern-matching.html">section pattern matching</a>) est habituellement utilisé pour accéder aux éléments d'une list :</p>
@@ -46,21 +46,21 @@
 <p>Pour accéder à un élément précis d'une list, utilisez <code>List.nth</code>.</p>
 <h3><a class="anchor" aria-hidden="true" name="conseils-astuces"></a><a href="#conseils-astuces" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Conseils &amp; astuces</h3>
 <p>N'hésitez pas à allouer autant de lists vides que vous le souhaitez. Comme expliqué dans la section <a href="/docs/fr/variant.html#honorable-mentions">variant pour list</a>, une liste vide est en fait un constructeur de variant sans paramètre, qui compile en un simple integer. Aucune allocation de mémoire supplémentaire n'est nécessaire.</p>
-<p>Pour comprendre comment le <em>prepred</em> peut être immuable et `O(1)&lt;/ code&gt; en même temps, voir aussi le lien précédent.</p></p>
-<p><h3>Décisions de conception</h3></p>
+<p>Pour comprendre comment le <em>prepred</em> peut être immuable et <code>O(1)</code> en même temps, voir aussi le lien précédent.</p>
+<h3><a class="anchor" aria-hidden="true" name="decisions-de-conception"></a><a href="#decisions-de-conception" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Décisions de conception</h3>
 <p>Dans l'avenir, nous pourrions fournir une structure de données listée immutable, redimensionnable et dotée d'opérations rapides.</p>
-<p><h2>Array</h2></p>
+<h2><a class="anchor" aria-hidden="true" name="array"></a><a href="#array" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Array</h2>
 <p>Les arrays sont comme les lists, sauf qu'ils sont :</p>
 <ul>
 <li>muables</li>
 <li>rapides pour les accès aléatoires et les mises à jour</li>
 <li>de taille fixe en natif (flexible en JavaScript)</li>
 </ul>
-<p>Vous les entourerez avec <code>[|` et `|]`.
+<p>Vous les entourerez avec <code>[|</code> et <code>|]</code>.</p>
 <pre><code class="hljs css reason"><span class="hljs-attribute">let myArray</span> = [|<span class="hljs-string">"hello"</span>, <span class="hljs-string">"world"</span>, <span class="hljs-string">"how are you"</span>|];
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" name="utilisation"></a><a href="#utilisation" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Utilisation</h3>
-<p>Les modules <a href="/api/Array.html">Array</a> et <a href="/api/ArrayLabels.html">ArrayLabel</a> de la librairie standard. For JS compilation, you also have the familiar <a href="https://bucklescript.github.io/bucklescript/api/Js.Array.html">Js.Array</a> API.</p>
+<p>Les modules <a href="/api/Array.html">Array</a> et <a href="/api/ArrayLabels.html">ArrayLabel</a> de la librairie standard. Pour la compilation JavaScript, vous avez aussi l'API <a href="https://bucklescript.github.io/bucklescript/api/Js.Array.html">Js.Array</a> qui doit vous être un peu plus familière.</p>
 <p>L'accès et la mise à jour d'un array se font comme suit :</p>
 <pre><code class="hljs css reason"><span class="hljs-keyword">let</span> myArray: <span class="hljs-built_in">array</span>(<span class="hljs-built_in">string</span>) = [|<span class="hljs-string">"hello"</span>, <span class="hljs-string">"world"</span>, <span class="hljs-string">"how are you"</span>|];
 
