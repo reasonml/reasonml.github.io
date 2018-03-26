@@ -9,7 +9,7 @@ class Index extends React.Component {
       <script type="text/javascript" src="/js/refmt.js" />
       <script type="text/javascript" src="/js/stdlibBundle.js" />
       <script type="text/javascript" src="/js/reasonReactBundle.js" />
-      <script type="text/javascript" src="/js/jsxV2.js" />
+      <script type="text/javascript" src="/js/jsoo_reactjs_jsx_ppx_v2.js" />
       <script type="text/javascript" src="/js/try.js" />
     </span>;
   }
