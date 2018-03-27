@@ -4,9 +4,6 @@ This code is used to generate https://reasonml.github.io. It pulls in files from
 
 `website/` contains the JS, CSS, images and other files (and blog, which contains some markdown files too, these are separated from `docs/`, not too important).
 
-To rebuild the playground, you will need `bs-platform` installed globally
-(`npm install -g bs-platform`).
-
 `cd website && npm install && npm start` to start the development server & watcher.
 
 Don't use `npm build`. It's mostly for debugging.
@@ -31,3 +28,19 @@ The entire site can be translated via the [Crowdin project](https://crowdin.com/
 ## Building and Deploying
 
 Changes from `source` branch are automatically picked into `master` branch by CI, then published. Translation download/uploads are still manual right now (needs API key, which @rickyvetter and @chenglou have).
+
+# Build the Playground
+
+```
+cd website && yarn
+```
+
+For modifying the actual try playground source code, run `yarn bundle-try-playground:dev` to start a watcher. Once you're done, run `yarn bundle-try-playground:prod` once.
+
+If you're hardcore and want to build the actual `bsReasonReact.js`, `refmt.js`, `stdlibBundle.js`, `reasonReactBundle.js` or `jsoo_reactjs_jsx_ppx_v2.js`, then run the following
+
+- `cd website && yarn`
+- `yarn prepare`
+- `node setupSomeArtifacts.js`
+
+This only needs to be run once (per bs-platform/reason-react update). This step _will_ break the first time you do it, from some BS syncing stuff. Go into your cloned `bucklescript` project and go in `jscomp` and run `BS_PLAYGROUND=path/to/your/reasonml.github.io/website/playground/bs/ node repl.js`. If this command fails, ping @chenglou in Discord.
