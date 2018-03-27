@@ -130,7 +130,14 @@ switch (student) {
 You can put a pattern anywhere you'd put a normal "variable declaration":
 
 ```reason
-let (Left v | Right v) = i;
+type leftOrRight =
+  | Left(int)
+  | Right(int);
+
+let i = Left(1);
+
+/* magic! */
+let Left(v) | Right(v) = i;
 ```
 
 ## Tips & Tricks
