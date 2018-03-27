@@ -43,4 +43,14 @@ If you're hardcore and want to build the actual `bsReasonReact.js`, `refmt.js`, 
 - `yarn prepare`
 - `node setupSomeArtifacts.js`
 
-This only needs to be run once (per bs-platform/reason-react update). This step _will_ break the first time you do it, from some BS syncing stuff. Go into your cloned `bucklescript` project and go in `jscomp` and run `BS_PLAYGROUND=path/to/your/reasonml.github.io/website/playground/bs/ node repl.js`. If this command fails, ping @chenglou in Discord.
+This only needs to be run once (per bs-platform/reason-react update). This step _will_ break the first time you do it, from some BS syncing stuff. Go into your cloned `bucklescript` project and go in `jscomp` and run:
+
+```sh
+BS_PLAYGROUND=path/to/your/reasonml.github.io/website/playground/bs/ node repl.js
+cd ..
+make
+make install
+npm install -g .
+```
+
+If this command fails, ping @chenglou in Discord.
