@@ -189,7 +189,7 @@ input
 `for (a in 1 to 10) {
   for (b in 1 to 10) {
     let product = a * b;
-    Js.log({j|$a times $b is $product|j})
+    Js.log({j|🐙 $a times $b is $product|j})
   }
 };`
 }, {
@@ -238,7 +238,7 @@ const retrieve = () => {
 
   const isReason = !!getUrlParameter('reason');
   const isOCaml = !!getUrlParameter('ocaml');
-  const useReasonReactJSX = getUrlParameter('rrjsx') === 'false';
+  const useReasonReactJSX = getUrlParameter('rrjsx') !== 'false';
 
   if (isReason) {
     const compressedCode = getUrlParameter('reason');
@@ -281,17 +281,6 @@ const persist = debounce((language, code, useReasonReactJSX) => {
 }, 100);
 
 const errorTimeout = 500
-
-// we now sync load the scripts (for now). This is basically no-op
-const waitUntilScriptsLoaded = done => {
-  const tout = setInterval(() => {
-    // test for bucklescript compiler existence and refmt existence (one of the exposed method is printML)
-    if (window.ocaml && window.printML) {
-      clearInterval(tout)
-      done()
-    }
-  }, 10)
-}
 
 class ShareButton extends Component {
   constructor(props) {
@@ -358,7 +347,7 @@ class Try extends Component {
       ocaml: '(* loading *)',
       js: '// loading',
       jsIsLatest: false,
-      useReasonReactJSX: true,
+      useReasonReactJSX: getUrlParameter('rrjsx') !== 'false',
       output: [],
     }
 
@@ -615,7 +604,7 @@ class Try extends Component {
     }
 
     this.postProcessOCamlCodeWithPpx = (code) => {
-      const ppxRes = JSON.parse(window.jsxv2.rewrite(code));
+      const ppxRes = window.jsxv2.rewrite(code);
       const err = ppxRes.ppx_error_msg || ppxRes.js_error_msg;
       if (err) {
         return {result: '', error: {message: err}};
@@ -630,7 +619,7 @@ class Try extends Component {
       console.error = (...args) => {
         return filterBuckleScriptWarnings(args).forEach(argument => warning += argument + `\n`);
       }
-      const res = JSON.parse(window.ocaml.compile(code));
+      let res = window.ocaml.compile(code);
       console.error = _consoleError;
       return [res, warning || null];
     }
@@ -694,11 +683,9 @@ class Try extends Component {
   }
 
   componentDidMount() {
-    waitUntilScriptsLoaded(() => {
-      this.initEvalWorker();
-      const {language, code, useReasonReactJSX} = retrieve();
-      language === 'reason' ? this.updateReason(code) : this.updateOCaml(code)
-    })
+    this.initEvalWorker();
+    const {language, code, useReasonReactJSX} = retrieve();
+    language === 'reason' ? this.updateReason(code) : this.updateOCaml(code)
   }
 
   componentWillUnmount() {

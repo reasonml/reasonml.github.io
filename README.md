@@ -47,10 +47,7 @@ This only needs to be run once (per bs-platform/reason-react update). This step 
 
 ```sh
 BS_PLAYGROUND=path/to/your/reasonml.github.io/website/playground/bs/ node repl.js
-cd ..
-make
-make install
-npm install -g .
+npm install -g ..
 ```
 
 If this command fails, ping @chenglou in Discord.
