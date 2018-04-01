@@ -18,7 +18,7 @@ The global installation you've done in the [past section](global-installation.md
 
 `refmt` ("Reason format") is the binary that powers our editors' auto-formatting feature. It takes in your code and spits it out, nicely formatted. It also serves to convert to/from Reason/OCaml syntax. The Reason community uses it to achieve a consistent code style throughout different projects, and to avoid time-consuming manual formatting & stylistic debates.
 
-It **responsively** formatted the code based on the editor width. In other words, it doesn't just naively break to the next line at a certain characters limit; it solves the layout constrains and arranges your code accordingly.
+It **responsively** formats the code based on the editor width. In other words, it doesn't just naively break to the next line at a certain characters limit; it solves the layout constraints and arranges your code accordingly.
 
 `refmt` can be used directly in the terminal. For example, to format your code outside of the editor, do `refmt --in-place myFile.re`. **See `refmt --help` for all the options**.
 
