@@ -19,7 +19,7 @@ It runs in watch mode, so any changes to files will be picked up and compiled.
 At this point, what's left simply follows the familiar JavaScript workflow. For example, with [`node`](https://nodejs.org/en/):
 
 ```sh
-> node src/demo.bs.js
+> node src/Demo.bs.js
 Hello, BuckleScript and Reason!
 ```
 
