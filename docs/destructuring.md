@@ -34,7 +34,7 @@ let (ten: int, twenty: int) = someInts;
 let {name: (n: string), age: (a: int)} = somePerson;
 ```
 
-Destructuring a functions' labeled arguments is also possible.
+Destructuring a function's labeled arguments is also possible.
 
 ```reason
 type person = {
