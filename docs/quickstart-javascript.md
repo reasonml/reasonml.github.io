@@ -3,27 +3,25 @@ title: Quickstart
 ---
 
 ```sh
-npm install -g bs-platform
-bsb -init my-first-app -theme basic-reason
-```
-
-Then, run it as usual:
-
-```sh
+npm install -g bs-platform                  # provides the BuckleScript compiler
+bsb -init my-first-app -theme basic-reason  # creates project my-first-app/
 cd my-first-app
-npm run start
+npm run build                               # Compiles to src/Demo.bs.js using BuckleScript compiler
+node src/Demo.bs.js                         # Runs the demo using NodeJS
 ```
 
-It runs in watch mode, so any changes to files will be picked up and compiled.
+You should see some "hello world" output:
 
-At this point, what's left simply follows the familiar JavaScript workflow. For example, with [`node`](https://nodejs.org/en/):
-
-```sh
-> node src/demo.bs.js
+```console
+> node src/Demo.bs.js
 Hello, BuckleScript and Reason!
 ```
 
-That's all!
+We use the BuckleScript compiler to compile BuckleScript to JavaScript, then we use NodeJS to run the JavaScript. After running the compiler, what's left follows the familiar JavaScript workflow (such as running `node` or the browser).
+
+When developing, instead of running `npm run build` each time, run `npm run start`. Any changes to files will be picked up and compiled.
+
+Next:
 
 - Read more about how we compile to JavaScript through our partner project, [BuckleScript](https://bucklescript.github.io).
 - Alternatively, **to start a [ReasonReact](//reasonml.github.io/reason-react/docs/en/installation.html) app**, try `bsb -init my-react-app -theme react`.
