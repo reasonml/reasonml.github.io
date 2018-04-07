@@ -629,7 +629,12 @@ class Try extends Component {
       // super-errors pads the line with two spaces. Remove them can't just do
       // it in the above args.forEach, since every console.error msg might
       // contain multiple line breaks
-      return [res, errs.replace(/^  /gm, '')];
+      let startPadding = /^  /gm;
+      let noFileName = /\(No file name\)/gm;
+      errs = errs
+        .replace(startPadding, '')
+        .replace(noFileName, 'OCaml preview')
+      return [res, errs];
     }
 
     this.tryCompiling = debounce((reason, ocaml) => {
