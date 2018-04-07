@@ -764,14 +764,12 @@ class Try extends Component {
               }}
               onChange={this.updateReason}
             />
-            <div>
-              {reasonSyntaxError &&
-                <pre className="try-error-warning">
-                  {formatErrorLocation(reasonSyntaxError.location)}
-                  {' '}
-                  {capitalizeFirstChar(stripErrorNumberFromReasonSyntaxError(reasonSyntaxError.message))}
-                </pre>}
-            </div>
+            {reasonSyntaxError &&
+              <pre className="try-error-warning">
+                {formatErrorLocation(reasonSyntaxError.location)}
+                {' '}
+                {capitalizeFirstChar(stripErrorNumberFromReasonSyntaxError(reasonSyntaxError.message))}
+              </pre>}
           </div>
 
           <div className="try-grid-editor">
@@ -785,9 +783,7 @@ class Try extends Component {
                 readOnly: true,
               }}
             />
-            <div>
-              {jsError && <pre className="try-error-warning">{jsError.message}</pre>}
-            </div>
+            {jsError && <pre className="try-error-warning">{jsError.message}</pre>}
           </div>
 
           <div className="try-grid-editor">
@@ -801,18 +797,16 @@ class Try extends Component {
               }}
               onChange={this.updateOCaml}
             />
-            <div>
-              {ocamlSyntaxError && <pre className="try-error-warning">{ocamlSyntaxError.message}</pre>}
-              {errorsFromCompilation &&
-                <pre
-                  className="try-error-warning"
-                  dangerouslySetInnerHTML={{__html: ansiUp.ansi_to_html(
-                    errorsFromCompilation
-                  )}}
-                  >
-                </pre>
-              }
-            </div>
+            {ocamlSyntaxError && <pre className="try-error-warning">{ocamlSyntaxError.message}</pre>}
+            {errorsFromCompilation &&
+              <pre
+                className="try-error-warning"
+                dangerouslySetInnerHTML={{__html: ansiUp.ansi_to_html(
+                  errorsFromCompilation
+                )}}
+                >
+              </pre>
+            }
           </div>
 
           <div className="try-output">
