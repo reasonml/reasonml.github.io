@@ -626,7 +626,10 @@ class Try extends Component {
       }
       let res = window.ocaml.compile_super_errors(code);
       console.error = _consoleError;
-      return [res, errs.trim()];
+      // super-errors pads the line with two spaces. Remove them can't just do
+      // it in the above args.forEach, since every console.error msg might
+      // contain multiple line breaks
+      return [res, errs.replace(/^  /gm, '')];
     }
 
     this.tryCompiling = debounce((reason, ocaml) => {
