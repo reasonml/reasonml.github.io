@@ -485,6 +485,7 @@ class Try extends Component {
               return {
                 reasonSyntaxError: e,
                 ocamlSyntaxError: null,
+                errorsFromCompilation: null,
                 jsError: null,
                 js: '',
                 ocaml: '',
@@ -765,7 +766,7 @@ class Try extends Component {
               onChange={this.updateReason}
             />
             {reasonSyntaxError &&
-              <pre className="try-error-warning">
+              <pre className="try-error-warning" style={{padding: 15}}>
                 {formatErrorLocation(reasonSyntaxError.location)}
                 {' '}
                 {capitalizeFirstChar(stripErrorNumberFromReasonSyntaxError(reasonSyntaxError.message))}
@@ -783,7 +784,7 @@ class Try extends Component {
                 readOnly: true,
               }}
             />
-            {jsError && <pre className="try-error-warning">{jsError.message}</pre>}
+            {jsError && <pre className="try-error-warning" style={{padding: 15}}>{jsError.message}</pre>}
           </div>
 
           <div className="try-grid-editor">
@@ -797,7 +798,7 @@ class Try extends Component {
               }}
               onChange={this.updateOCaml}
             />
-            {ocamlSyntaxError && <pre className="try-error-warning">{ocamlSyntaxError.message}</pre>}
+            {ocamlSyntaxError && <pre className="try-error-warning" style={{padding: 15}}>{ocamlSyntaxError.message}</pre>}
             {errorsFromCompilation &&
               <pre
                 className="try-error-warning"
