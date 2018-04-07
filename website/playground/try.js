@@ -620,7 +620,7 @@ class Try extends Component {
           // WARN: File "js_cmj_load.ml", line 53, characters 23-30 ReactDOMRe.cmj not found
           // TODO: not sure why; investigate into it
           if (argument.indexOf('WARN: File "js_cmj_load.ml"') < 0) {
-            errs += argument.trim() + '\n'
+            errs += argument + '\n'
           }
         });
       }
