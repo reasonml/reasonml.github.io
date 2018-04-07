@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
+import AnsiUp from 'ansi_up';
 import debounce from './utils/debounce';
 import * as lzString from 'lz-string';
 import codemirror from 'codemirror';
-import filterBuckleScriptWarnings from './utils/filterBuckleScriptWarnings'
 
 import javascript from 'codemirror/mode/javascript/javascript';
 import mllike from 'codemirror/mode/mllike/mllike';
@@ -11,6 +11,8 @@ import rust from 'codemirror/mode/rust/rust';
 
 const compress = lzString.compressToEncodedURIComponent;
 const decompress = lzString.decompressFromEncodedURIComponent;
+
+let ansiUp = new AnsiUp();
 
 class CodeMirror extends Component {
   constructor(props) {
@@ -199,7 +201,7 @@ input
   let component = ReasonReact.statelessComponent("Greeting");
   let make = _children => {
     ...component,
-    render: self =>
+    render: _self =>
       <button> (ReasonReact.stringToElement("Hello!")) </button>,
   };
 };
@@ -349,6 +351,8 @@ class Try extends Component {
       jsIsLatest: false,
       useReasonReactJSX: getUrlParameter('rrjsx') !== 'false',
       output: [],
+      shareableUrl: '',
+      errorsFromCompilation: null,
     }
 
     this._output = item =>
@@ -390,14 +394,15 @@ class Try extends Component {
 
     this.evalJs = (code) => {
       this.outputOverloaded = false;
-      const hasReact = 'var React = require("react");';
+      const requireReactString = 'var React = require("react");';
+      const requireReasonReactString = 'var ReasonReact = require("stdlib/reasonReact");';
       this.setState(
         state => ({ output: [] }),
         () => {
           // the code to evaluate might be expensive, so we're sending it into a
           // worker. But if it's DOM manipulation, then don't use it; worker
           // doesn't have access to DOM
-          if (code.indexOf(hasReact) >= 0) {
+          if (code.indexOf(requireReactString) >= 0 || code.indexOf(requireReasonReactString) >= 0) {
             // https://github.com/rollup/rollup/wiki/Troubleshooting#avoiding-eval
             const eval2 = eval;
             try {
@@ -408,7 +413,6 @@ class Try extends Component {
                 () => this.setState(_ => {
                   return {
                     reasonSyntaxError: null,
-                    compileError: null,
                     ocamlSyntaxError: null,
                     jsError: e,
                     js: '',
@@ -451,7 +455,7 @@ class Try extends Component {
                 () => this.setState(_ => {
                   return {
                     reasonSyntaxError: null,
-                    compileError: res.error,
+                    errorsFromCompilation: res.error.message,
                     ocamlSyntaxError: null,
                     jsError: null,
                     js: '',
@@ -465,7 +469,6 @@ class Try extends Component {
               return {
                 reason: newReasonCode,
                 reasonSyntaxError: null,
-                compileError: null,
                 ocamlSyntaxError: null,
                 jsError: null,
                 shareableUrl: generateShareableUrl('reason', newReasonCode, this.state.useReasonReactJSX)
@@ -481,7 +484,6 @@ class Try extends Component {
             () => this.setState(_ => {
               return {
                 reasonSyntaxError: e,
-                compileError: null,
                 ocamlSyntaxError: null,
                 jsError: null,
                 js: '',
@@ -497,7 +499,6 @@ class Try extends Component {
           reason: newReasonCode,
           ocaml: newOcamlCode,
           reasonSyntaxError: null,
-          compileError: null,
           ocamlSyntaxError: null,
           jsError: null,
           shareableUrl: generateShareableUrl('reason', newReasonCode, this.state.useReasonReactJSX)
@@ -523,7 +524,7 @@ class Try extends Component {
                 () => this.setState(_ => {
                   return {
                     reasonSyntaxError: null,
-                    compileError: res.error,
+                    errorsFromCompilation: res.error.message,
                     ocamlSyntaxError: null,
                     jsError: null,
                     js: '',
@@ -536,7 +537,6 @@ class Try extends Component {
               return {
                 ocaml: newOcamlCode,
                 reasonSyntaxError: null,
-                compileError: null,
                 ocamlSyntaxError: null,
                 jsError: null,
                 shareableUrl: generateShareableUrl('ocaml', newOcamlCode, this.state.useReasonReactJSX)
@@ -552,7 +552,6 @@ class Try extends Component {
             () => this.setState(_ => {
               return {
                 ocamlSyntaxError: e,
-                compileError: null,
                 reasonSyntaxError: null,
                 jsError: null,
                 js: '',
@@ -568,7 +567,6 @@ class Try extends Component {
           reason: newReasonCode,
           ocaml: newOcamlCode,
           reasonSyntaxError: null,
-          compileError: null,
           ocamlSyntaxError: null,
           jsError: null,
           shareableUrl: generateShareableUrl('ocaml', newOcamlCode, this.state.useReasonReactJSX)
@@ -615,31 +613,37 @@ class Try extends Component {
 
     this.compile = (code) => {
       const _consoleError = console.error;
-      let warning = '';
+      let errs = '';
       console.error = (...args) => {
-        return filterBuckleScriptWarnings(args).forEach(argument => warning += argument + `\n`);
+        return args.forEach(argument => {
+          // this is a warning we get:
+          // WARN: File "js_cmj_load.ml", line 53, characters 23-30 ReactDOMRe.cmj not found
+          // TODO: not sure why; investigate into it
+          if (argument.indexOf('WARN: File "js_cmj_load.ml"') < 0) {
+            errs += argument.trim() + '\n'
+          }
+        });
       }
-      let res = window.ocaml.compile(code);
+      let res = window.ocaml.compile_super_errors(code);
       console.error = _consoleError;
-      return [res, warning || null];
+      return [res, errs.trim()];
     }
 
     this.tryCompiling = debounce((reason, ocaml) => {
       try {
-        const [res, warning] = this.compile(ocaml);
+        const [res, errs] = this.compile(ocaml);
         if (res.js_code) {
           this.setState(_ => ({
             js: res.js_code,
             jsIsLatest: true,
-            compileWarning: warning
+            errorsFromCompilation: errs
           }));
           this.evalJs(res.js_code);
           return
         } else {
           this.errorTimerId = setTimeout(
             () => this.setState(_ => ({
-              compileError: res,
-              compileWarning: null,
+              errorsFromCompilation: errs,
               js: '',
             })),
             errorTimeout
@@ -648,8 +652,7 @@ class Try extends Component {
       } catch (err) {
         this.errorTimerId = setTimeout(
           () => this.setState(_ => ({
-            compileError: err,
-            compileWarning: null,
+            errorsFromCompilation: err,
             js: '',
           })),
           errorTimeout
@@ -657,8 +660,7 @@ class Try extends Component {
       }
       this.setState(_ => {
         return {
-          compileError: null,
-          compileWarning: null,
+          errorsFromCompilation: null,
           jsIsLatest: false,
           output: [],
         }
@@ -698,8 +700,7 @@ class Try extends Component {
       ocaml,
       js,
       reasonSyntaxError,
-      compileError,
-      compileWarning,
+      errorsFromCompilation,
       ocamlSyntaxError,
       jsError,
     } = this.state;
@@ -757,11 +758,11 @@ class Try extends Component {
             />
             <div>
               {reasonSyntaxError &&
-                <div className="try-error">
+                <pre className="try-error-warning">
                   {formatErrorLocation(reasonSyntaxError.location)}
                   {' '}
                   {capitalizeFirstChar(stripErrorNumberFromReasonSyntaxError(reasonSyntaxError.message))}
-                </div>}
+                </pre>}
             </div>
           </div>
 
@@ -777,7 +778,7 @@ class Try extends Component {
               }}
             />
             <div>
-              {jsError && <div className="try-error">{jsError.message}</div>}
+              {jsError && <pre className="try-error-warning">{jsError.message}</pre>}
             </div>
           </div>
 
@@ -793,14 +794,16 @@ class Try extends Component {
               onChange={this.updateOCaml}
             />
             <div>
-              {ocamlSyntaxError && <div className="try-error">{ocamlSyntaxError.message}</div>}
-              {compileError &&
-                <div className="try-error">{compileError.js_error_msg
-                  ? compileError.js_error_msg
-                  : compileError.message}
-                </div>
+              {ocamlSyntaxError && <pre className="try-error-warning">{ocamlSyntaxError.message}</pre>}
+              {errorsFromCompilation &&
+                <pre
+                  className="try-error-warning"
+                  dangerouslySetInnerHTML={{__html: ansiUp.ansi_to_html(
+                    errorsFromCompilation
+                  )}}
+                  >
+                </pre>
               }
-              {compileWarning && <div className="try-warning">{compileWarning}</div>}
             </div>
           </div>
 
