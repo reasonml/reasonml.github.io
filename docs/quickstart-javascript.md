@@ -17,9 +17,9 @@ You should see some "hello world" output:
 Hello, BuckleScript and Reason!
 ```
 
-We use the BuckleScript compiler to compile BuckleScript to JavaScript, then we use NodeJS to run the JavaScript. After running the compiler, what's left follows the familiar JavaScript workflow (such as running `node` or the browser).
+We use the BuckleScript compiler to compile Reason to JavaScript, then we use NodeJS to run the JavaScript. After running the compiler, what's left follows the familiar JavaScript workflow (such as running `node` or the browser).
 
-When developing, instead of running `npm run build` each time, run `npm run start`. Any changes to files will be picked up and compiled.
+When developing, instead of running `npm run build` each time, run `npm run start` to start a watcher that recompiles on file change.
 
 Next:
 
