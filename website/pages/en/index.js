@@ -35,7 +35,7 @@ type schoolPerson =
   | Director
   | Student(string);
 
-let greeting = (stranger) =>
+let greeting = stranger =>
   switch (stranger) {
   | Teacher => "Hey professor!"
   | Director => "Hello director."
@@ -49,7 +49,7 @@ ${pre}`;
 const codeExampleLargeScreen = `${pre}reason
 type schoolPerson = Teacher | Director | Student(string);
 
-let greeting = (stranger) =>
+let greeting = stranger =>
   switch (stranger) {
   | Teacher => "Hey professor!"
   | Director => "Hello director."
