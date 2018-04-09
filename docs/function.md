@@ -79,7 +79,7 @@ Since we have currying (more on that below), we can provide the arguments in **a
 addCoordinates(~y=6, ~x=5);
 ```
 
-The `~x` part in declaration means the function accepts an argument labeled `x` and can refer to it in the function body by the same name. You can also refer to the arguments inside the function body by a different name for conciseness:
+The `~x` part in the declaration means the function accepts an argument labeled `x` and can refer to it in the function body by the same name. You can also refer to the arguments inside the function body by a different name for conciseness:
 
 ```reason
 let drawCircle = (~radius as r, ~color as c) => {
