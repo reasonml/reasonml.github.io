@@ -62,7 +62,7 @@ addCoordinates(<span class="hljs-number">5</span>, <span class="hljs-number">6</
 <p>由於 currying （稍後會作說明），可以提供參數於<strong>任何</strong>順序：</p>
 <pre><code class="hljs css reason">addCoordinates(~<span class="hljs-attribute">y</span>=6, ~<span class="hljs-attribute">x</span>=5);
 </code></pre>
-<p>宣告的 <code>~x</code> 部份表示函式接受參數帶有標籤 <code>x</code> 且函式內部可以用相同名稱取得。 為了簡潔，也可以用在函式內部使用不同的名稱：</p>
+<p>The <code>~x</code> part in the declaration means the function accepts an argument labeled <code>x</code> and can refer to it in the function body by the same name. 為了簡潔，也可以用在函式內部使用不同的名稱：</p>
 <pre><code class="hljs css reason">let drawCircle = <span class="hljs-function"><span class="hljs-params">(~radius <span class="hljs-keyword">as</span> r, ~color <span class="hljs-keyword">as</span> c)</span> =&gt;</span> {
   setColor(c);
   startAt(r, r);

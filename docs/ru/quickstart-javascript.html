@@ -14,19 +14,19 @@
           toggler.onclick = function() {
             nav.classList.toggle('docsSliderActive');
           };
-        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://crowdin.com/project/reason/ru" target="_blank">Translate</a><h1>Краткое руководство</h1></header><article><div><span><pre><code class="hljs css sh">npm install -g bs-platform
-bsb -init my-first-app -theme basic-reason
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://crowdin.com/project/reason/ru" target="_blank">Translate</a><h1>Краткое руководство</h1></header><article><div><span><pre><code class="hljs css sh">npm install -g bs-platform  <span class="hljs-comment"># provides the BuckleScript compiler</span>
+bsb -init my-first-app -theme basic-reason  <span class="hljs-comment"># creates project my-first-app/</span>
+<span class="hljs-built_in">cd</span> my-first-app
+npm run build  <span class="hljs-comment"># Compiles to src/Demo.bs.js using BuckleScript compiler</span>
+node src/Demo.bs.js  <span class="hljs-comment"># Runs the demo using NodeJS</span>
 </code></pre>
-<p>И потом запустите как обычно:</p>
-<pre><code class="hljs css sh"><span class="hljs-built_in">cd</span> my-first-app
-npm run start
-</code></pre>
-<p>Это работает в интерактивном режиме, поэтому любые внесенные изменения в файлы будут собраны и скомпилированы.</p>
-<p>На этом этапе, осталось только запустить рабочий JavaScript проект. Например с помощью <a href="https://nodejs.org/en/"> <code>node</code></a>:</p>
-<pre><code class="hljs css sh">&gt; node src/Demo.bs.js
+<p>You should see some &quot;hello world&quot; output:</p>
+<pre><code class="hljs css console"><span class="hljs-meta">&gt;</span><span class="bash"> node src/Demo.bs.js</span>
 Hello, BuckleScript and Reason!
 </code></pre>
-<p>Вот и всё!</p>
+<p>We use the BuckleScript compiler to compile Reason to JavaScript, then we use NodeJS to run the JavaScript. After running the compiler, what's left follows the familiar JavaScript workflow (such as running <code>node</code> or the browser).</p>
+<p>When developing, instead of running <code>npm run build</code> each time, run <code>npm run start</code> to start a watcher that recompiles on file change.</p>
+<p>Next:</p>
 <ul>
 <li>Подробнее о том, как мы компилируем в JavaScript можно узнать на нашем партнерском проекте, <a href="https://bucklescript.github.io"> BuckleScript</a>.</li>
 <li>Или, <strong>чтобы начать <a href="//reasonml.github.io/reason-react/docs/en/installation.html">ReasonReact</a> приложение</strong>, попробуйте <code>bsb -init my-react-app -theme react</code>.</li>
