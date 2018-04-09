@@ -23,5 +23,6 @@ There are a Reason meetups all around the world, among others:
 - [Vancouver](https://www.meetup.com/Reason-Vancouver/)
 - [Munich](https://www.meetup.com/Munich-ReasonML-Meetup)
 - [Lisbon](https://www.meetup.com/ReasonML-Lisbon)
+- [Prague](https://www.meetup.com/Reason-Prague/) ([Twitter](https://twitter.com/ReasonPrague))
 
 If you don't find your local area's Reason meetup, search on https://meetup.com or start one!

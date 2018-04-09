@@ -43,11 +43,23 @@ If you're hardcore and want to build the actual `bsReasonReact.js`, `refmt.js`, 
 - `yarn prepare`
 - `node setupSomeArtifacts.js`
 
-This only needs to be run once (per bs-platform/reason-react update). This step _will_ break the first time you do it, from some BS syncing stuff. Go into your cloned `bucklescript` project and go in `jscomp` and run:
+This only needs to be run once (per bs-platform/reason-react update). This step _will_ break the first time you do it, from some BS syncing stuff. Go into your cloned `bucklescript` project and go in `jscomp` and do the following:
 
-```sh
-BS_PLAYGROUND=path/to/your/reasonml.github.io/website/playground/bs/ node repl.js
-npm install -g ..
-```
+- Modify `repl.js`'s occurrences of `js_of_ocaml` to an absolute path that points to it. You can get a `js_of_ocaml` binary from another opam switch that's not `4.02.3+buckle-master`:
+  ```sh
+  opam switch 4.02.3
+  eval `opam config env`
+  opam install js_of_ocaml.3.0
+  which js_of_ocaml # use this absolute path for the task above
+  # switch back now
+  opam switch 4.02.3+buckle-master
+  eval `opam config env`
+  ```
+- Back to `repl.js`, change the one occurrences of `amdjs` to `js`
+- Run:
+  ```sh
+  BS_PLAYGROUND=path/to/your/reasonml.github.io/website/playground/bs/ node repl.js
+  npm install -g ..
+  ```
 
 If this command fails, ping @chenglou in Discord.
