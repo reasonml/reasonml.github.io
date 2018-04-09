@@ -3,11 +3,11 @@ title: Quickstart
 ---
 
 ```sh
-npm install -g bs-platform                  # provides the BuckleScript compiler
+npm install -g bs-platform  # provides the BuckleScript compiler
 bsb -init my-first-app -theme basic-reason  # creates project my-first-app/
 cd my-first-app
-npm run build                               # Compiles to src/Demo.bs.js using BuckleScript compiler
-node src/Demo.bs.js                         # Runs the demo using NodeJS
+npm run build  # Compiles to src/Demo.bs.js using BuckleScript compiler
+node src/Demo.bs.js  # Runs the demo using NodeJS
 ```
 
 You should see some "hello world" output:
