@@ -9,7 +9,7 @@ If you're just hacking things together, this can be very nice, but you also have
 ```reason
 Js.log("this is reason");
 
-[%%bs.raw {|
+[%bs.raw {|
 console.log('here is some javascript for you');
 |}];
 ```
