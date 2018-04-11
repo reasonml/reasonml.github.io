@@ -75,6 +75,11 @@ const users = [
     caption: "Ahrefs",
     image: "img/logos/ahrefs.svg",
     infoLink: "https://ahrefs.com",
+  },
+  {
+    caption: "Root",
+    image: "img/logos/root.svg",
+    infoLink: "https://root.co.za",
   }
 ];
 
