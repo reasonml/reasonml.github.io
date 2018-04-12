@@ -57,7 +57,7 @@ A module name is the file name, capitalized. It has to be unique per project; th
 They're ordinary variants/records/module definitions that comes with the [standard library](/api/index.html), `open`ed by default during compilation out of convenience.
 
 ### What does an argument with a prepended underscore (e.g. `_` or `_foo`) mean?
-Say you have `List.map(item => 1, myList);`. The argument `item` isn't used and will generate a compiler warning. Using `item => 1` instead indicates that you're intentionally receiving and ignoring the argument, therefore bypassing the warning. Alternatively, `_item => 1` has the same effect, but indicates more descriptively what you're ignoring.
+Say you have `List.map(item => 1, myList);`. The argument `item` isn't used and will generate a compiler warning. Using `_ => 1` instead indicates that you're intentionally receiving and ignoring the argument, therefore bypassing the warning. Alternatively, `_item => 1` has the same effect, but indicates more descriptively what you're ignoring.
 
 ### What's this `MyModule.t` I keep seeing?
 Assuming `MyModule` is a module's name, `t` is a community convention that indicates "the type that represents that module, whatever that means". For example, for the [`Js.String`](http://bucklescript.github.io/bucklescript/api/Js.String.html) module, [`String.t`](http://bucklescript.github.io/bucklescript/api/Js.String.html#TYPEt) is the type carried around and representing "a string".
