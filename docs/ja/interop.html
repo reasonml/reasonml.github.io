@@ -15,7 +15,7 @@
             nav.classList.toggle('docsSliderActive');
           };
         </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://crowdin.com/project/reason/ja" target="_blank">Translate</a><h1>Interop</h1></header><article><div><span><h2><a class="anchor" aria-hidden="true" name="reason-javascript"></a><a href="#reason-javascript" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>あなたの Reason コードの途中で、JavaScript にダンプするだけです。</h2>
-<p>もしあなたが一緒にハックしているだけであれば、これは非常に素晴らしものになり得ますが、すべての安全でない JavaScript コードを保持することにもなります。</p>
+<p>If you're just hacking things together, this can be very nice, but you also have all of the unsafety of JavaScript code</p>
 <pre><code class="hljs css reason">Js.<span class="hljs-built_in">log</span>(<span class="hljs-string">"this is reason"</span>);
 
 [%%bs.raw {<span class="hljs-string">|</span>
@@ -69,7 +69,7 @@ Js.log(x ++ <span class="hljs-string">" back in reason land"</span>);
 <ul>
 <li><code>strings</code> は文字列、<code>ints</code> と <code>floats</code> は単に数値です。</li>
 <li><a href="/docs/ja/list-and-array.html#array">配列</a> は OCaml ではミュータブルな固定長のリストで、プレーンな javascript の配列として表現されます。</li>
-<li><a href="/docs/ja/list-and-array.html#list">リスト</a> はイミュータブルな関数型スタイルの連結リストで、間違いなくほとんどのケースで使用する慣用的なものです。 しかし、その表現はもっと複雑です（<code>Js.log([1,2,3,4])</code> を試して確認してください）。 このため、javascript とやり取りする時は大抵、 <code>Array.of_list</code> を介して <code>Array</code> へ、または <code>Array.to_list&lt;code&gt; を介して &lt;code&gt;Array</code> から変換します。</li>
+<li><a href="/docs/ja/list-and-array.html#list">リスト</a> はイミュータブルな関数型スタイルの連結リストで、間違いなくほとんどのケースで使用する慣用的なものです。 However, its representation is more complicated (try <code>Js.log([1,2,3,4])</code> to check it out). このため、javascript とやり取りする時は大抵、 <code>Array.of_list</code> を介して <code>Array</code> へ、または <code>Array.to_list&lt;code&gt; を介して &lt;code&gt;Array</code> から変換します。</li>
 <li>より深めたい場合は、<a href="https://bucklescript.github.io/docs/en/common-data-types.html#cheat-sheet">BuckleScript のドキュメント</a>にリストがあります。</li>
 </ul>
 <p>配列を受け取り、数値を返す関数を、全く苦労することなく JavaScript で書けることを知っています。</p>
@@ -91,7 +91,7 @@ Js.log(calculate([<span class="hljs-number">1</span>, <span class="hljs-number">
 </code></pre>
 <p>もちろん、Reason にJavaScript で書いたこの関数は、手間なく Reason に移植することができました。</p>
 <p>これは学習の際にとても有用な非常口であることを<strong>忘れないでください</strong>。すぐに飛びついて、何かを作ることができますが、立ち戻って、コンバートしたものを素晴らしい型安全な Reason コードに戻すのは良いエクササイズになります。</p>
-<p>私は時間を節約するために追加した生の JavaScript のせいで、いくつかのバグ以上のものに出くわしたことがあります。</p>
+<p>I've run into more than a few bugs because of raw JavaScript that I added to save time</p>
 <h2><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>落ち着いて物事を学ぶ</h2>
 <p>これまで、私達は非常に速く、緩い方法で、プロダクションには適<strong>さない</strong>、<code>bs.raw</code> を使用してきました。</p>
 <p>しかし、実際に JavaScript にある関数を呼び出す必要がする場合、どうすれば良いでしょう？ それは DOM や node モジュールの使用等で相互作用するために必要になります。 BuckleScript では、<code>external</code> 宣言を使用します（<a href="https://bucklescript.github.io/docs/en/intro-to-external.html">ドキュメント</a>）。</p>
