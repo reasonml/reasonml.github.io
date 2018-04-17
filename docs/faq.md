@@ -3,7 +3,7 @@ title: Frequently Asked Questions
 ---
 
 ### Should I learn Reason or OCaml first?
-There's no need to pick! Reason and OCaml share the exact same semantics (i.e. how the code runs). Only the syntax differ. Carry [Reason-tools](https://github.com/reasonml/reason-tools) around so that you can freely convert between the two syntaxes. A Reason tutorial is an OCaml tutorial, vice-versa. In the terminal, you can have these alises:
+There's no need to pick! Reason and OCaml share the exact same semantics (i.e. how the code runs). Only the syntax differ. Carry [Reason-tools](https://github.com/reasonml/reason-tools) around so that you can freely convert between the two syntaxes. A Reason tutorial is an OCaml tutorial, vice-versa. In the terminal, you can have these aliases:
 
 ```sh
 # converts ocaml code into reason
@@ -54,7 +54,7 @@ Reason/OCaml doesn't require you to write any import; modules being referred to 
 A module name is the file name, capitalized. It has to be unique per project; this abstracts away the file system and allows you to move files around without changing code.
 
 ### Is `Some | None`, `contents`, `Array`, `List` and all of these special? Where do they come from?
-They're ordinary variants/records/module definitions that comes with the [standard library](/api/index.html), `open`ed by default during compilation out of convenience.
+They're ordinary variants/records/module definitions that come with the [standard library](/api/index.html), `open`ed by default during compilation out of convenience.
 
 ### What does an argument with a prepended underscore (e.g. `_` or `_foo`) mean?
 Say you have `List.map(item => 1, myList);`. The argument `item` isn't used and will generate a compiler warning. Using `_ => 1` instead indicates that you're intentionally receiving and ignoring the argument, therefore bypassing the warning. Alternatively, `_item => 1` has the same effect, but indicates more descriptively what you're ignoring.
@@ -106,8 +106,8 @@ The OCaml community frequently uses file extensions to distinguish between types
 - `.mly`: ocamlyacc parser generator definition file
 - `.mldylib`: Contains a list of module paths that will be compiled and archived together to build a corresponding `.cmxs` target (native plugin)
 - `.mliv`: Batteries-specific files for some [custom preprocessing](https://github.com/ocaml-batteries-team/batteries-included/blob/f019927b9503ec65ef816f02315de78d4bae3481/src/batArray.mliv).
-- `.mllib`: Ocaml library (cma and cmxa)
-- `.mlpack`: Ocaml package (cmo built with the -pack flag)
+- `.mllib`: OCaml library (cma and cmxa)
+- `.mlpack`: OCaml package (cmo built with the -pack flag)
 - `.mlpp`: [Extlib](https://github.com/ygrek/ocaml-extlib)-specific files for some custom preprocessing
 - `.mltop`: [OCamlbuild top-level file](https://shonkychef.wordpress.com/2009/07/28/making-an-ocaml-toplevel-with-ocamlbuild/), used by OCamlbuild to generate a .top file
 - `.odocl`: OCaml documentation file
