@@ -15,7 +15,7 @@
             nav.classList.toggle('docsSliderActive');
           };
         </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://crowdin.com/project/reason/zh-TW" target="_blank">Translate</a><h1>常見問題</h1></header><article><div><span><h3><a class="anchor" aria-hidden="true" name="reason-ocaml"></a><a href="#reason-ocaml" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>我應該先學 Reason 還是 OCaml？</h3>
-<p>無須選擇！ Reason 與 OCaml 共享相同語義（例如，如何執行程式）。 差別在於句法。 隨時帶著 <a href="https://github.com/reasonml/reason-tools">Reason-tools</a> 在身邊，隨時轉換兩者句法。 Reason 教學就是 OCaml 教學，反之亦然。 在終端機中，你可以設定下列別名：</p>
+<p>無須選擇！ Reason 與 OCaml 共享相同語義（例如，如何執行程式）。 差別在於句法。 隨時帶著 <a href="https://github.com/reasonml/reason-tools">Reason-tools</a> 在身邊，隨時轉換兩者句法。 Reason 教學就是 OCaml 教學，反之亦然。 In the terminal, you can have these aliases:</p>
 <pre><code class="hljs css sh"><span class="hljs-comment"># converts ocaml code into reason</span>
 <span class="hljs-built_in">alias</span> mlre=<span class="hljs-string">"pbpaste | refmt --parse ml --print re --interface false | pbcopy"</span>
 <span class="hljs-comment"># converts reason code into ocaml</span>
@@ -48,7 +48,7 @@
 <p>Reason/OCaml 不需要你撰寫任何匯入；檔案內的模組會自動在專案中搜尋。 具體來說，<code>Hello</code> 模組編譯器會找尋 code&gt;hello.re</code> 或 <code>hello.ml</code> 檔案（以及相對應的<a href="/docs/zh-TW/module.html#signatures">介面檔案</a>，<code>hello.rei</code> 或 <code>hello.mli</code>，如果有的話）。</p>
 <p>模組名稱即檔案名稱，模組字首大寫。名稱在專案內必須是獨一無二；這從檔案系統中抽象出來並且讓你能夠隨意移動位置而不需修改程式碼。</p>
 <h3><a class="anchor" aria-hidden="true" name="some-none-contents-array-list"></a><a href="#some-none-contents-array-list" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>這些 <code>Some | None</code>，<code>contents</code>，<code>Array</code>，<code>List</code> 都是特別東西？這些是從哪裡來的？</h3>
-<p>它們只是平凡的 variants/records/module 定義，來自於<a href="/api/index.html">標準函式庫</a>，預設在編譯期間 <code>open</code>。</p>
+<p>They're ordinary variants/records/module definitions that come with the <a href="/api/index.html">standard library</a>, <code>open</code>ed by default during compilation out of convenience.</p>
 <h3><a class="anchor" aria-hidden="true" name="foo"></a><a href="#foo" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>參數前面有個底線（例如， <code>_</code> 或 <code>_foo</code>）是什麼意思？</h3>
 <p>Say you have <code>List.map(item =&gt; 1, myList);</code>. 若參數 <code>item</code> 不曾使用，編譯器將會產生警告。 Using <code>_ =&gt; 1</code> instead indicates that you're intentionally receiving and ignoring the argument, therefore bypassing the warning. Alternatively, <code>_item =&gt; 1</code> has the same effect, but indicates more descriptively what you're ignoring.</p>
 <h3><a class="anchor" aria-hidden="true" name="mymodulet"></a><a href="#mymodulet" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>為什麼一直看到 <code>MyModule.t</code>，這是什麼？</h3>
@@ -93,8 +93,8 @@
 <li><code>.mly</code>: ocamlyacc 剖析器產生器定義檔案</li>
 <li><code>.mldylib</code>：包含所有將被用來編譯及封存在一起的模組路徑，建置相對應 <code>.cmxs</code> 目標（原生外掛）</li>
 <li><code>.mliv</code>：供某些內建特定 <a href="https://github.com/ocaml-batteries-team/batteries-included/blob/f019927b9503ec65ef816f02315de78d4bae3481/src/batArray.mliv">自製前處理 </a> 使用。</li>
-<li><code>.mllib</code>：Ocaml 函式庫（cma 及 cmxa）</li>
-<li><code>.mlpack</code>：Ocaml 套件（cmo 建置使用 -pack 旗標）</li>
+<li><code>.mllib</code>: OCaml library (cma and cmxa)</li>
+<li><code>.mlpack</code>: OCaml package (cmo built with the -pack flag)</li>
 <li><code>.mlpp</code>：<a href="https://github.com/ygrek/ocaml-extlib">Extlib</a>-特定檔案供自製前處理使用</li>
 <li><code>.mltop</code>：<a href="https://shonkychef.wordpress.com/2009/07/28/making-an-ocaml-toplevel-with-ocamlbuild/">OCamlbuild 最上層檔案</a>，由 OCamlbuild 所使用用來產生 .top 檔案</li>
 <li><code>.odocl</code>：OCaml 文件檔案</li>
