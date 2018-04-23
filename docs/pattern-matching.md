@@ -149,57 +149,54 @@ Do not abuse the fall-through `_` case too much. This prevents the compiler from
 Here's a series of examples, from worst to best:
 
 ```reason
-let optionBoolToJsBoolean = (opt) =>
+let optionBoolToBool = opt =>
   if (opt == None) {
-    Js.false_
+    false;
+  } else if (opt == Some(true)) {
+    true;
   } else {
-    if (opt == Some(true)) {
-      Js.true_
-    } else {
-      Js.false_
-    }
+    false;
   };
 ```
 
 Now that's just silly =). Let's turn it into pattern-matching:
 
 ```reason
-let optionBoolToJsBoolean = (opt) =>
+let optionBoolToBool = opt =>
   switch (opt) {
-  | None => Js.false_
-  | Some(a) => a ? Js.true_ : Js.false_
+  | None => false
+  | Some(a) => a ? true : false
   };
 ```
 
 Slightly better, but still nested. Pattern-matching allows you to do this:
 
 ```reason
-let optionBoolToJsBoolean = (opt) =>
+let optionBoolToBool = opt =>
   switch (opt) {
-  | None => Js.false_
-  | Some(true) => Js.true_
-  | Some(false) => Js.false_
+  | None => false
+  | Some(true) => true
+  | Some(false) => false
   };
 ```
 
 Much more linear-looking! Now, you might be tempted to do this:
 
 ```reason
-let optionBoolToJsBoolean = (opt) =>
+let optionBoolToBool = opt =>
   switch (opt) {
-  | Some(true) => Js.true_
-  | _ => Js.false_
+  | Some(true) => true
+  | _ => false
   };
 ```
 
 Which is much more concise, but kills the exhaustiveness check mentioned above. This is the best:
 
 ```reason
-let optionBoolToJsBoolean = (opt) =>
+let optionBoolToBool = opt =>
   switch (opt) {
-  | Some(true) => Js.true_
-  | Some(false)
-  | None => Js.false_
+  | Some((true | false) as trueOrFalse) => trueOrFalse
+  | None => false
   };
 ```
 

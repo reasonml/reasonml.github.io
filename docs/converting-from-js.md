@@ -109,7 +109,7 @@ type payloadType = {. "student": student};
 let defaultId = 10;
 
 let queryResult = (usePayload, payload: payloadType) =>
-  if (Js.to_bool(usePayload)) {
+  if (usePayload) {
     payload##student
   } else {
     getStudentById(defaultId)
@@ -133,7 +133,7 @@ type payloadType = {. "student": School.student}; /* TODO: put this somewhere el
 let defaultId = 10;
 
 let queryResult = (usePayload, payload: payloadType) =>
-  if (Js.to_bool(usePayload)) {
+  if (usePayload) {
     payload##student
   } else {
     School.getStudentById(defaultId)
@@ -157,7 +157,7 @@ Tips
 
 **Don't** try to fully convert a JS file into a pristine Reason file in a single shot. Such method might actually slow you down! It's fine to have externals and `bs.obj` left, and temporarily not take advantage of nice OCaml features (variants, labeled arguments, etc.). Once you've converted a few other related files, you can come back and now refactor **faster** by banking on the type system.
 
-Whatever nice utilities you find (e.g. convert a `Js.null_undefined(Js.boolean)` to a `bool`), put them in a `tempUtils.re` file or something. They're easy examples for your colleagues and removes some conversion churns.
+Whatever nice utilities you find, put them in a `tempUtils.re` file or something. They're easy examples for your colleagues and removes some conversion churns.
 
 We **highly recommend** you to check the JS output into version control. It makes your build system integration quasi-nonexistent, and makes sure that when you're not there, your teammates can make small changes, audit the output diff, and catch any mistakes. It's also a great selling point that the checked in JS output is friendly to emergency hot patches (a big selling point for managers!). Even if you're upgrading BuckleScript version, you'd catch any output difference. It's like [Jest snapshots](https://facebook.github.io/jest/docs/snapshot-testing.html), for free!
 
