@@ -25,14 +25,12 @@ We've worked very hard to make Reason look like JS while preserving OCaml's grea
 
 | JavaScript                                            | Reason                                         |
 | ----------------------------------------------------- | ---------------------------------------------- |
-| `true`, `false`                                       | `true`, `false` \*                             |
+| `true`, `false`                                       | `true`, `false`                                |
 | `!true`                                               | Same                                           |
 | <code>&#124;&#124;</code>, `&&`, `<=`, `>=`, `<`, `>` | Same                                           |
 | `a === b`, `a !== b`                                  | Same                                           |
 | No deep equality (recursive compare)                  | `a == b`, `a != b`                             |
 | `a == b`                                              | No equality with implicit casting (thankfully) |
-
-\* This is the Reason spiritual equivalent; it doesn't mean it compiles to JS' `true`/`false`! To compile to the latter, use `Js.true_`/`Js.false_`. See [here](boolean.md#usage).
 
 ## Number
 
