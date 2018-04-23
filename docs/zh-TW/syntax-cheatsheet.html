@@ -44,7 +44,7 @@
 <tr><th>JavaScript</th><th>Reason</th></tr>
 </thead>
 <tbody>
-<tr><td><code>true</code>、<code>false</code></td><td><code>true</code>、<code>false</code> *</td></tr>
+<tr><td><code>true</code>、<code>false</code></td><td><code>true</code>, <code>false</code></td></tr>
 <tr><td><code>!true</code></td><td>一樣</td></tr>
 <tr><td><code>&amp;#124;&amp;#124;</code>、<code>&amp;&amp;</code>、<code>&lt;=</code>、<code>&gt;=</code>、<code>&lt;</code>、<code>&gt;</code></td><td>一樣</td></tr>
 <tr><td><code>a === b</code>、<code>a !== b</code></td><td>一樣</td></tr>
@@ -52,7 +52,6 @@
 <tr><td><code>a == b</code></td><td>沒有隱晦轉型相等（謝天謝地）</td></tr>
 </tbody>
 </table>
-<p>* 這是 Reason 的精神上等價；並不表示編譯成 JS 的 <code>true</code>/<code>false</code>！ 若要編譯成後者，使用 <code>Js.true_</code>/<code>Js.false_</code>。 請見<a href="/docs/zh-TW/boolean.html#usage">這裡</a>。</p>
 <h2><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>數值</h2>
 <table>
 <thead>
@@ -66,7 +65,7 @@
 <tr><td><code>5 % 3</code></td><td><code>5 mod 3</code></td></tr>
 </tbody>
 </table>
-<p>* JS 沒有整數與浮點數的差異。</p>
+<p>* JS has no distinction between integer and float.</p>
 <h2><a class="anchor" aria-hidden="true" name="record"></a><a href="#record" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>物件/Record</h2>
 <table>
 <thead>
@@ -80,7 +79,7 @@
 <tr><td><code>{...point, x: 30}</code></td><td>一樣</td></tr>
 </tbody>
 </table>
-<p>* 這是 Reason 的精神上等價；並不表示編譯成 JS 物件！若要編譯成後者，請見<a href="/docs/zh-TW/object.html#tip-tricks">這裡</a>。</p>
+<p>* This is the Reason spiritual equivalent; it doesn't mean it compiles to JS' object! To compile to the latter, see <a href="/docs/zh-TW/object.html#tip-tricks">here</a>.</p>
 <h2><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>陣列</h2>
 <table>
 <thead>
@@ -93,7 +92,7 @@
 <tr><td>沒有不可變 list</td><td><code>[1, 2, 3]</code></td></tr>
 </tbody>
 </table>
-<p>* JavaScript 的陣列可以模擬 tuples，因為 JavaScript 陣列可以包含多種型別的元素。</p>
+<p>* We can simulate tuples in JavaScript with arrays, because JavaScript arrays can contain multiple types of elements.</p>
 <h2><a class="anchor" aria-hidden="true" name="null"></a><a href="#null" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Null</h2>
 <table>
 <thead>
@@ -103,7 +102,7 @@
 <tr><td><code>null</code>、<code>undefined</code></td><td><code>None</code> *</td></tr>
 </tbody>
 </table>
-<p>* 同樣，只有精神上等價；Reason 沒有 nulls，也沒有 null 臭蟲！ 當你需要 null 特性時，可以用 <a href="/docs/zh-TW/newcomer-examples.html#using-the-option-type">option 型別</a>。</p>
+<p>* Again, only a spiritual equivalent; Reason doesn't have nulls, nor null bugs! But it does have <a href="/docs/zh-TW/newcomer-examples.html#using-the-option-type">an option type</a> for when you actually need nullability.</p>
 <h2><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>函式</h2>
 <table>
 <thead>
@@ -160,7 +159,7 @@ doubleX + doubleY
 <tr><td><code>let add = a =&gt; b =&gt; a + b</code></td><td><code>let add = (a, b) =&gt; a + b</code></td></tr>
 </tbody>
 </table>
-<p>JavaScript 和 Reason 都支援 currying，不過 Reason 的 currying 是<strong>內建且最佳化過，避免中介函式的配置 &amp; 呼叫</strong>，無論在那。</p>
+<p>Both JavaScript and Reason support currying, but Reason currying is <strong>built-in and optimized to avoid intermediate function allocation &amp; calls</strong>, whenever possible.</p>
 <h2><a class="anchor" aria-hidden="true" name="if-else"></a><a href="#if-else" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>If-else</h2>
 <table>
 <thead>
@@ -172,7 +171,7 @@ doubleX + doubleY
 <tr><td><code>switch</code></td><td><code>switch</code> 但<a href="/docs/zh-TW/pattern-matching.html">非常強大！</a></td></tr>
 </tbody>
 </table>
-<p>* Reason 條件式永遠是表達式！</p>
+<p>* Reason conditionals are always expressions!</p>
 <h2><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>解構</h2>
 <table>
 <thead>
@@ -184,7 +183,7 @@ doubleX + doubleY
 <tr><td><code>const {a: aa, b: bb} = data</code></td><td><code>let {a: aa, b: bb} = data</code></td></tr>
 </tbody>
 </table>
-<p>* 提供良好的編譯器警告 <code>data</code> 可能不是長度 2。改用樣式匹配。</p>
+<p>* Gives good compiler warning that <code>data</code> might not be of length 2. Switch to pattern-matching instead.</p>
 <h2><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>循環</h2>
 <table>
 <thead>
@@ -208,7 +207,7 @@ doubleX + doubleY
 <tr><td>沒有展開 children</td><td><code>&lt;Foo&gt;...children&lt;/Foo&gt;</code></td></tr>
 </tbody>
 </table>
-<p>* 參數雙關！</p>
+<p>* Argument punning!</p>
 <h2><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>例外</h2>
 <table>
 <thead>
@@ -219,9 +218,9 @@ doubleX + doubleY
 <tr><td><code>try {a} catch (Err) {...} finally {...}</code></td><td><code>try (a) { &amp;#124; Err =&gt; ...}</code> *</td></tr>
 </tbody>
 </table>
-<p>* 沒有 finally。</p>
+<p>* No finally.</p>
 <h2><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>區塊</h2>
-<p>在 Reason，使用 <code>{}</code> 新增&quot;連續表達式&quot;，評估最後一個語句。 在 JavaScript，可以透過立即函式表達式（immediately-invoked function expression）模擬（因為函式內容有自己的區域生存空間）。</p>
+<p>In Reason, &quot;sequence expressions&quot; are created with <code>{}</code> and evaluate to their last statement. In JavaScript, this can be simulated via an immediately-invoked function expression (since function bodies have their own local scope).</p>
 <table>
   <tr>
     <th>

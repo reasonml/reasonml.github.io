@@ -44,7 +44,7 @@
 <tr><th>JavaScript</th><th>Reason</th></tr>
 </thead>
 <tbody>
-<tr><td><code>true</code>, <code>false</code></td><td><code>true</code>, <code>false</code> *</td></tr>
+<tr><td><code>true</code>, <code>false</code></td><td><code>true</code>, <code>false</code></td></tr>
 <tr><td><code>!true</code></td><td>Так же</td></tr>
 <tr><td><code>&amp;#124;&amp;#124;</code>, <code>&amp;&amp;</code>, <code>&lt;=</code>, <code>&gt;=</code>, <code>&lt;</code>, <code>&gt;</code></td><td>Так же</td></tr>
 <tr><td><code>a === b</code>, <code>a !== b</code></td><td>Так же</td></tr>
@@ -52,7 +52,6 @@
 <tr><td><code>a == b</code></td><td>Нет сравнения с приведением (к счастью)</td></tr>
 </tbody>
 </table>
-<p>* Хотя это и эквивалент в Reason, булев не компилируется в JS <code>true</code>/<code>false</code>! Для такой необходимости используйте <code>Js.true_</code>/<code>Js.false_</code>. <a href="/docs/ru/boolean.html#usage">Подробнее</a>.</p>
 <h2><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Число</h2>
 <table>
 <thead>
@@ -66,7 +65,7 @@
 <tr><td><code>5 % 3</code></td><td><code>5 mod 3</code></td></tr>
 </tbody>
 </table>
-<p>* JS не имеет разделения на целые и числа с плавающей точкой.</p>
+<p>* JS has no distinction between integer and float.</p>
 <h2><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Объект/запись</h2>
 <table>
 <thead>
@@ -80,7 +79,7 @@
 <tr><td><code>{...point, x: 30}</code></td><td>Так же</td></tr>
 </tbody>
 </table>
-<p>* Это ближайший эквивалент в Reason, но это не значит, что запись компилируется в JS объект! Про компиляции в объект подробнее <a href="/docs/ru/object.html#tip-tricks">тут</a>.</p>
+<p>* This is the Reason spiritual equivalent; it doesn't mean it compiles to JS' object! To compile to the latter, see <a href="/docs/ru/object.html#tip-tricks">here</a>.</p>
 <h2><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Массив</h2>
 <table>
 <thead>
@@ -160,7 +159,7 @@ doubleX + doubleY
 <tr><td><code>let add = a =&gt; b =&gt; a + b</code></td><td><code>let add = (a, b) =&gt; a + b</code></td></tr>
 </tbody>
 </table>
-<p>Оба языка поддерживают каррирование, но в Reason каррирование <strong>встроенно и оптимизировано для избежания дополнительных аллокаций</strong>, когда это возможно.</p>
+<p>Both JavaScript and Reason support currying, but Reason currying is <strong>built-in and optimized to avoid intermediate function allocation &amp; calls</strong>, whenever possible.</p>
 <h2><a class="anchor" aria-hidden="true" name="if-else"></a><a href="#if-else" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>If-else</h2>
 <table>
 <thead>
@@ -172,7 +171,7 @@ doubleX + doubleY
 <tr><td><code>switch</code></td><td><code>switch</code> но <a href="/docs/ru/pattern-matching.html">совсем не такой!</a></td></tr>
 </tbody>
 </table>
-<p>* Условия в Reason всегда выражения!</p>
+<p>* Reason conditionals are always expressions!</p>
 <h2><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Деструктурирование</h2>
 <table>
 <thead>
@@ -219,9 +218,9 @@ doubleX + doubleY
 <tr><td><code>try {a} catch (Err) {...} finally {...}</code></td><td><code>try (a) { &amp;#124; Err =&gt; ...}</code> *</td></tr>
 </tbody>
 </table>
-<p>* Нет finally.</p>
+<p>* No finally.</p>
 <h2><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Блоки</h2>
-<p>В Reason последовательности выражений создаются с помощью <code>{}</code> и вычисляются в последнее выражение. In JavaScript, this can be simulated via an immediately-invoked function expression (since function bodies have their own local scope).</p>
+<p>In Reason, &quot;sequence expressions&quot; are created with <code>{}</code> and evaluate to their last statement. In JavaScript, this can be simulated via an immediately-invoked function expression (since function bodies have their own local scope).</p>
 <table>
   <tr>
     <th>

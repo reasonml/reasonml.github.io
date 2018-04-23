@@ -114,45 +114,42 @@ switch (myArray) {
 <p><strong>可能な限りパターンマッチをフラット化してください</strong>。これは実際にバグの除去装置です。以下で例示します。</p>
 <p>フォールスルーの <code>_</code> ケースを乱用しないでください。 これはコンパイラがあるケースをカバーすること（網羅性チェック）し忘れていると助言してくれることを妨げてしまいます。それはあなたがヴァリアントに新しいケースを追加するリファクタリングの後、特に有用でしょう。 無限の可能性があるパターン（例: string, int など）に対してのみ <code>_</code> を試してください。</p>
 <p>最悪から最高までの一連の例がここにあります。</p>
-<pre><code class="hljs css reason"><span class="hljs-keyword">let</span> <span class="hljs-attr">optionBoolToJsBoolean</span> = (opt) =&gt;
+<pre><code class="hljs css reason"><span class="hljs-keyword">let</span> <span class="hljs-attr">optionBoolToBool</span> = <span class="hljs-attr">opt</span> =&gt;
   <span class="hljs-keyword">if</span> (<span class="hljs-attr">opt</span> == None) {
-    Js.false_
+    <span class="hljs-literal">false</span>;
+  } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-attr">opt</span> == Some(<span class="hljs-literal">true</span>)) {
+    <span class="hljs-literal">true</span>;
   } <span class="hljs-keyword">else</span> {
-    <span class="hljs-keyword">if</span> (<span class="hljs-attr">opt</span> == Some(<span class="hljs-literal">true</span>)) {
-      Js.true_
-    } <span class="hljs-keyword">else</span> {
-      Js.false_
-    }
+    <span class="hljs-literal">false</span>;
   };
 </code></pre>
 <p>今が最悪です =)。パターンマッチングに切り替えてみましょう。</p>
-<pre><code class="hljs css reason"><span class="hljs-keyword">let</span> optionBoolToJsBoolean = (opt) =&gt;
-  switch (opt) {
-  | <span class="hljs-type">None</span> =&gt; Js.false_
-  | <span class="hljs-type">Some</span>(a) =&gt; a ? Js.true_ : Js.false_
+<pre><code class="hljs css reason"><span class="hljs-keyword">let</span> optionBoolToBool = <span class="hljs-function"><span class="hljs-params">opt</span> =&gt;</span>
+  <span class="hljs-keyword">switch</span> (opt) {
+  | <span class="hljs-function"><span class="hljs-params">None</span> =&gt;</span> <span class="hljs-literal">false</span>
+  | Some(a) =&gt; a ? <span class="hljs-literal">true</span> : <span class="hljs-literal">false</span>
   };
 </code></pre>
 <p>少しマシですが、まだ入れ子です。パターンマッチングはこうすることを許容します。</p>
-<pre><code class="hljs css reason"><span class="hljs-keyword">let</span> optionBoolToJsBoolean = (opt) =&gt;
-  switch (opt) {
-  | <span class="hljs-type">None</span> =&gt; Js.false_
-  | <span class="hljs-type">Some</span>(true) =&gt; Js.true_
-  | <span class="hljs-type">Some</span>(false) =&gt; Js.false_
+<pre><code class="hljs css reason"><span class="hljs-keyword">let</span> optionBoolToBool = <span class="hljs-function"><span class="hljs-params">opt</span> =&gt;</span>
+  <span class="hljs-keyword">switch</span> (opt) {
+  | <span class="hljs-function"><span class="hljs-params">None</span> =&gt;</span> <span class="hljs-literal">false</span>
+  | Some(<span class="hljs-literal">true</span>) =&gt; <span class="hljs-literal">true</span>
+  | Some(<span class="hljs-literal">false</span>) =&gt; <span class="hljs-literal">false</span>
   };
 </code></pre>
 <p>かなり線形な見た目です！今、あなたはこうしたいと駆られているかもしれません。</p>
-<pre><code class="hljs css reason"><span class="hljs-keyword">let</span> optionBoolToJsBoolean = <span class="hljs-function">(<span class="hljs-params">opt</span>) =&gt;</span>
+<pre><code class="hljs css reason"><span class="hljs-keyword">let</span> optionBoolToBool = <span class="hljs-function"><span class="hljs-params">opt</span> =&gt;</span>
   <span class="hljs-keyword">switch</span> (opt) {
-  | Some(<span class="hljs-literal">true</span>) =&gt; Js.true_
-  | <span class="hljs-function"><span class="hljs-params">_</span> =&gt;</span> Js.false_
+  | Some(<span class="hljs-literal">true</span>) =&gt; <span class="hljs-literal">true</span>
+  | <span class="hljs-function"><span class="hljs-params">_</span> =&gt;</span> <span class="hljs-literal">false</span>
   };
 </code></pre>
 <p>これはより簡潔ですが、上記の網羅性チェックのメンションを殺してしまいます。これが最高です。</p>
-<pre><code class="hljs css reason"><span class="hljs-keyword">let</span> optionBoolToJsBoolean = <span class="hljs-function">(<span class="hljs-params">opt</span>) =&gt;</span>
+<pre><code class="hljs css reason"><span class="hljs-keyword">let</span> optionBoolToBool = <span class="hljs-function"><span class="hljs-params">opt</span> =&gt;</span>
   <span class="hljs-keyword">switch</span> (opt) {
-  | Some(<span class="hljs-literal">true</span>) =&gt; Js.true_
-  | Some(<span class="hljs-literal">false</span>)
-  | <span class="hljs-function"><span class="hljs-params">None</span> =&gt;</span> Js.false_
+  | Some(<span class="hljs-function">(<span class="hljs-params"><span class="hljs-literal">true</span> | <span class="hljs-literal">false</span></span>) <span class="hljs-params">as</span> <span class="hljs-params">trueOrFalse</span>) =&gt;</span> trueOrFalse
+  | <span class="hljs-function"><span class="hljs-params">None</span> =&gt;</span> <span class="hljs-literal">false</span>
   };
 </code></pre>
 <p>この時点でこのコードで間違いを犯すのはかなり難しいです！ 多くの分岐で if-else を使用したい時はいつでも、代わりにパターンマッチングを選びます。 それはより簡潔で<a href="/docs/ja/variant.html#design-decisions">高性能</a>でもあります。</p>

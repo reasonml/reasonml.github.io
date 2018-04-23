@@ -98,7 +98,7 @@ type <span class="hljs-attr">payloadType</span> = {. <span class="hljs-string">"
 <span class="hljs-keyword">let</span> <span class="hljs-attr">defaultId</span> = <span class="hljs-number">10</span>;
 
 <span class="hljs-keyword">let</span> <span class="hljs-attr">queryResult</span> = (usePayload, payload: payloadType) =&gt;
-  <span class="hljs-keyword">if</span> (Js.to_bool(usePayload)) {
+  <span class="hljs-keyword">if</span> (usePayload) {
     payload<span class="hljs-comment">##student</span>
   } <span class="hljs-keyword">else</span> {
     getStudentById(defaultId)
@@ -117,7 +117,7 @@ type <span class="hljs-attr">payloadType</span> = {. <span class="hljs-string">"
 <span class="hljs-keyword">let</span> <span class="hljs-attr">defaultId</span> = <span class="hljs-number">10</span>;
 
 <span class="hljs-keyword">let</span> <span class="hljs-attr">queryResult</span> = (usePayload, payload: payloadType) =&gt;
-  <span class="hljs-keyword">if</span> (Js.to_bool(usePayload)) {
+  <span class="hljs-keyword">if</span> (usePayload) {
     payload<span class="hljs-comment">##student</span>
   } <span class="hljs-keyword">else</span> {
     School.getStudentById(defaultId)
@@ -133,7 +133,7 @@ type <span class="hljs-attr">payloadType</span> = {. <span class="hljs-string">"
 <p>Com isso, tá tudo certinho!</p>
 <h2><a class="anchor" aria-hidden="true" name="dicas"></a><a href="#dicas" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Dicas</h2>
 <p><strong>Não</strong> tenta converter um arquivo JS em um arquivo Reason irretocável de uma vez só. Tal método provavelmente irá ser mais lento! Está ok ter externals e <code>bs.obj</code> remanescentes, e temporariamente não aproveitar recursos agradáveis de OCaml (variants, argumentos nomeados, etc.). Uma vez que você tenha convertido outros arquivos relacionados, você pode retornar e refatorar de maneira <strong>mais rápida</strong> tomando proveito do sistema de tipos.</p>
-<p>Quaisquer utilitários que você faça uso (e.g. converter <code>Js.null_undefined(Js.boolean)</code> para <code>bool</code>), coloque-os em um arquivo <code>tempUtils.re</code> ou semelhante. Eles serão modelos fáceis de seguir para seus colegas e removerão alguns atritos do processo de conversão.</p>
+<p>Whatever nice utilities you find, put them in a <code>tempUtils.re</code> file or something. They're easy examples for your colleagues and removes some conversion churns.</p>
 <p>Nós <strong>recomendamos fortemente</strong> que você realize o controle de versão da saída JS. Isto torna a integração com seu sistema de build quase transparente, e garante que quando você não está presente seus colegas ainda conseguem fazer pequenas mudanças, conferir as diferenças na saída e corrigir pequenos erros. Também é um ótimo argumento para o uso da tecnologia (principalmente para gerentes!) que a saída JS seja versionada e portanto diretamente modificável em caso de correções de emergência. Até mesmo em caso de atualização da versão do BuckleScript você será alertado de qualquer diferença na saída. É como o <a href="https://facebook.github.io/jest/docs/snapshot-testing.html">Jest snapshots</a>, embutido!</p>
 <p>As always, ping us on <a href="https://discord.gg/reasonml">Discord</a> or <a href="https://reasonml.chat">Forum</a> for more help!</p>
 </span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="libraries.html">← Bibliotecas</a><a class="docs-next button" href="native.html">Nativo →</a></div></div></div></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.js"></script><script>window.foo = new Pjax({

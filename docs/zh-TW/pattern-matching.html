@@ -114,45 +114,42 @@ switch (myArray) {
 <p><strong>盡可能的讓樣式匹配扁平</strong>. 這是個真實的臭蟲去除劑。下列範例：</p>
 <p>不要經常濫用特殊失敗情況 <code>_</code>。 這讓編譯器無法提醒你忘記處理某些情況（徹底檢查），特別在重構之後，加入了新的變異時，特別有幫助。 試著盡量使用 <code>_</code> 於無限可能時，例如字串、int 等。</p>
 <p>下列幾個範例，從糟糕到最佳：</p>
-<pre><code class="hljs css reason"><span class="hljs-keyword">let</span> <span class="hljs-attr">optionBoolToJsBoolean</span> = (opt) =&gt;
+<pre><code class="hljs css reason"><span class="hljs-keyword">let</span> <span class="hljs-attr">optionBoolToBool</span> = <span class="hljs-attr">opt</span> =&gt;
   <span class="hljs-keyword">if</span> (<span class="hljs-attr">opt</span> == None) {
-    Js.false_
+    <span class="hljs-literal">false</span>;
+  } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-attr">opt</span> == Some(<span class="hljs-literal">true</span>)) {
+    <span class="hljs-literal">true</span>;
   } <span class="hljs-keyword">else</span> {
-    <span class="hljs-keyword">if</span> (<span class="hljs-attr">opt</span> == Some(<span class="hljs-literal">true</span>)) {
-      Js.true_
-    } <span class="hljs-keyword">else</span> {
-      Js.false_
-    }
+    <span class="hljs-literal">false</span>;
   };
 </code></pre>
 <p>現在，只是缺乏思考 =)。試著轉成樣式匹配：</p>
-<pre><code class="hljs css reason"><span class="hljs-keyword">let</span> optionBoolToJsBoolean = (opt) =&gt;
-  switch (opt) {
-  | <span class="hljs-type">None</span> =&gt; Js.false_
-  | <span class="hljs-type">Some</span>(a) =&gt; a ? Js.true_ : Js.false_
+<pre><code class="hljs css reason"><span class="hljs-keyword">let</span> optionBoolToBool = <span class="hljs-function"><span class="hljs-params">opt</span> =&gt;</span>
+  <span class="hljs-keyword">switch</span> (opt) {
+  | <span class="hljs-function"><span class="hljs-params">None</span> =&gt;</span> <span class="hljs-literal">false</span>
+  | Some(a) =&gt; a ? <span class="hljs-literal">true</span> : <span class="hljs-literal">false</span>
   };
 </code></pre>
 <p>好一些，但仍然是巢狀。樣式匹配可以做到：</p>
-<pre><code class="hljs css reason"><span class="hljs-keyword">let</span> optionBoolToJsBoolean = (opt) =&gt;
-  switch (opt) {
-  | <span class="hljs-type">None</span> =&gt; Js.false_
-  | <span class="hljs-type">Some</span>(true) =&gt; Js.true_
-  | <span class="hljs-type">Some</span>(false) =&gt; Js.false_
+<pre><code class="hljs css reason"><span class="hljs-keyword">let</span> optionBoolToBool = <span class="hljs-function"><span class="hljs-params">opt</span> =&gt;</span>
+  <span class="hljs-keyword">switch</span> (opt) {
+  | <span class="hljs-function"><span class="hljs-params">None</span> =&gt;</span> <span class="hljs-literal">false</span>
+  | Some(<span class="hljs-literal">true</span>) =&gt; <span class="hljs-literal">true</span>
+  | Some(<span class="hljs-literal">false</span>) =&gt; <span class="hljs-literal">false</span>
   };
 </code></pre>
 <p>看起來更加線性！現在，可能會試著：</p>
-<pre><code class="hljs css reason"><span class="hljs-keyword">let</span> optionBoolToJsBoolean = <span class="hljs-function">(<span class="hljs-params">opt</span>) =&gt;</span>
+<pre><code class="hljs css reason"><span class="hljs-keyword">let</span> optionBoolToBool = <span class="hljs-function"><span class="hljs-params">opt</span> =&gt;</span>
   <span class="hljs-keyword">switch</span> (opt) {
-  | Some(<span class="hljs-literal">true</span>) =&gt; Js.true_
-  | <span class="hljs-function"><span class="hljs-params">_</span> =&gt;</span> Js.false_
+  | Some(<span class="hljs-literal">true</span>) =&gt; <span class="hljs-literal">true</span>
+  | <span class="hljs-function"><span class="hljs-params">_</span> =&gt;</span> <span class="hljs-literal">false</span>
   };
 </code></pre>
 <p>更加簡潔，但是抹煞了上述的徹底檢查。這個最好：</p>
-<pre><code class="hljs css reason"><span class="hljs-keyword">let</span> optionBoolToJsBoolean = <span class="hljs-function">(<span class="hljs-params">opt</span>) =&gt;</span>
+<pre><code class="hljs css reason"><span class="hljs-keyword">let</span> optionBoolToBool = <span class="hljs-function"><span class="hljs-params">opt</span> =&gt;</span>
   <span class="hljs-keyword">switch</span> (opt) {
-  | Some(<span class="hljs-literal">true</span>) =&gt; Js.true_
-  | Some(<span class="hljs-literal">false</span>)
-  | <span class="hljs-function"><span class="hljs-params">None</span> =&gt;</span> Js.false_
+  | Some(<span class="hljs-function">(<span class="hljs-params"><span class="hljs-literal">true</span> | <span class="hljs-literal">false</span></span>) <span class="hljs-params">as</span> <span class="hljs-params">trueOrFalse</span>) =&gt;</span> trueOrFalse
+  | <span class="hljs-function"><span class="hljs-params">None</span> =&gt;</span> <span class="hljs-literal">false</span>
   };
 </code></pre>
 <p>現在這份程式碼幾乎很難犯錯！ 當有許多 if-else 分支時，偏好使用樣式匹配。 這個更加簡潔且<a href="/docs/zh-TW/variant.html#design-decisions">高效</a>。</p>

@@ -114,45 +114,42 @@ switch (myArray) {
 <p><strong>Flatten your pattern-match whenever you can</strong>. This is a real bug remover. Example below.</p>
 <p>Do not abuse the fall-through <code>_</code> case too much. This prevents the compiler from telling you that you've forgotten to cover a case (exhaustiveness check), which would be especially helpful after a refactoring where you add a new case to a variant. Try only using <code>_</code> against infinite possibilities, e.g. string, int, etc.</p>
 <p>Here's a series of examples, from worst to best:</p>
-<pre><code class="hljs css reason"><span class="hljs-keyword">let</span> <span class="hljs-attr">optionBoolToJsBoolean</span> = (opt) =&gt;
+<pre><code class="hljs css reason"><span class="hljs-keyword">let</span> <span class="hljs-attr">optionBoolToBool</span> = <span class="hljs-attr">opt</span> =&gt;
   <span class="hljs-keyword">if</span> (<span class="hljs-attr">opt</span> == None) {
-    Js.false_
+    <span class="hljs-literal">false</span>;
+  } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-attr">opt</span> == Some(<span class="hljs-literal">true</span>)) {
+    <span class="hljs-literal">true</span>;
   } <span class="hljs-keyword">else</span> {
-    <span class="hljs-keyword">if</span> (<span class="hljs-attr">opt</span> == Some(<span class="hljs-literal">true</span>)) {
-      Js.true_
-    } <span class="hljs-keyword">else</span> {
-      Js.false_
-    }
+    <span class="hljs-literal">false</span>;
   };
 </code></pre>
 <p>Now that's just silly =). Let's turn it into pattern-matching:</p>
-<pre><code class="hljs css reason"><span class="hljs-keyword">let</span> optionBoolToJsBoolean = (opt) =&gt;
-  switch (opt) {
-  | <span class="hljs-type">None</span> =&gt; Js.false_
-  | <span class="hljs-type">Some</span>(a) =&gt; a ? Js.true_ : Js.false_
+<pre><code class="hljs css reason"><span class="hljs-keyword">let</span> optionBoolToBool = <span class="hljs-function"><span class="hljs-params">opt</span> =&gt;</span>
+  <span class="hljs-keyword">switch</span> (opt) {
+  | <span class="hljs-function"><span class="hljs-params">None</span> =&gt;</span> <span class="hljs-literal">false</span>
+  | Some(a) =&gt; a ? <span class="hljs-literal">true</span> : <span class="hljs-literal">false</span>
   };
 </code></pre>
 <p>Slightly better, but still nested. Pattern-matching allows you to do this:</p>
-<pre><code class="hljs css reason"><span class="hljs-keyword">let</span> optionBoolToJsBoolean = (opt) =&gt;
-  switch (opt) {
-  | <span class="hljs-type">None</span> =&gt; Js.false_
-  | <span class="hljs-type">Some</span>(true) =&gt; Js.true_
-  | <span class="hljs-type">Some</span>(false) =&gt; Js.false_
+<pre><code class="hljs css reason"><span class="hljs-keyword">let</span> optionBoolToBool = <span class="hljs-function"><span class="hljs-params">opt</span> =&gt;</span>
+  <span class="hljs-keyword">switch</span> (opt) {
+  | <span class="hljs-function"><span class="hljs-params">None</span> =&gt;</span> <span class="hljs-literal">false</span>
+  | Some(<span class="hljs-literal">true</span>) =&gt; <span class="hljs-literal">true</span>
+  | Some(<span class="hljs-literal">false</span>) =&gt; <span class="hljs-literal">false</span>
   };
 </code></pre>
 <p>Much more linear-looking! Now, you might be tempted to do this:</p>
-<pre><code class="hljs css reason"><span class="hljs-keyword">let</span> optionBoolToJsBoolean = <span class="hljs-function">(<span class="hljs-params">opt</span>) =&gt;</span>
+<pre><code class="hljs css reason"><span class="hljs-keyword">let</span> optionBoolToBool = <span class="hljs-function"><span class="hljs-params">opt</span> =&gt;</span>
   <span class="hljs-keyword">switch</span> (opt) {
-  | Some(<span class="hljs-literal">true</span>) =&gt; Js.true_
-  | <span class="hljs-function"><span class="hljs-params">_</span> =&gt;</span> Js.false_
+  | Some(<span class="hljs-literal">true</span>) =&gt; <span class="hljs-literal">true</span>
+  | <span class="hljs-function"><span class="hljs-params">_</span> =&gt;</span> <span class="hljs-literal">false</span>
   };
 </code></pre>
 <p>Which is much more concise, but kills the exhaustiveness check mentioned above. This is the best:</p>
-<pre><code class="hljs css reason"><span class="hljs-keyword">let</span> optionBoolToJsBoolean = <span class="hljs-function">(<span class="hljs-params">opt</span>) =&gt;</span>
+<pre><code class="hljs css reason"><span class="hljs-keyword">let</span> optionBoolToBool = <span class="hljs-function"><span class="hljs-params">opt</span> =&gt;</span>
   <span class="hljs-keyword">switch</span> (opt) {
-  | Some(<span class="hljs-literal">true</span>) =&gt; Js.true_
-  | Some(<span class="hljs-literal">false</span>)
-  | <span class="hljs-function"><span class="hljs-params">None</span> =&gt;</span> Js.false_
+  | Some(<span class="hljs-function">(<span class="hljs-params"><span class="hljs-literal">true</span> | <span class="hljs-literal">false</span></span>) <span class="hljs-params">as</span> <span class="hljs-params">trueOrFalse</span>) =&gt;</span> trueOrFalse
+  | <span class="hljs-function"><span class="hljs-params">None</span> =&gt;</span> <span class="hljs-literal">false</span>
   };
 </code></pre>
 <p>Pretty darn hard to make a mistake in this code at this point! Whenever you'd like to use an if-else with many branches, prefer pattern matching instead. It's more concise and <a href="/docs/en/variant.html#design-decisions">performant</a> too.</p>
