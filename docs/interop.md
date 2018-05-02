@@ -9,9 +9,7 @@ If you're just hacking things together, this can be very nice, but you also have
 ```reason
 Js.log("this is reason");
 
-[%bs.raw {|
-console.log('here is some javascript for you');
-|}];
+[%bs.raw {| console.log('here is some javascript for you') |}];
 ```
 
 > `{|` and `|}` are the delimiters of a multi-line string in OCaml. You can also put a tag in there e.g. `{something|` and then it will look for a matching `|something}` to close.
