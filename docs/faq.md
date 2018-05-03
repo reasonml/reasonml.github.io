@@ -23,6 +23,10 @@ See [here](quickstart-javascript.md). Reason's a syntax for OCaml and supports a
 ### Where do all these `print_endline`, `string_of_int` functions come from?
 They're from the standard library, pre-`open`ed during the compilation of your file. This is why you see them in scope.
 
+You can read more about the Pervasives library in the api documentation:
+
+https://reasonml.github.io/api/Pervasives.html
+
 ### Can I have a function to print arbitrary data structures?
 If you're compiling to JavaScript through BuckleScript, you can use the JS `console.log` through [`Js.log`](https://bucklescript.github.io/bucklescript/api/Js.html#VALlog). If you're compiling to native, you'll need something like [ppx_show](https://github.com/diml/ppx_show). A future OCaml feature (called modular implicit) will solve this directly in the language.
 
