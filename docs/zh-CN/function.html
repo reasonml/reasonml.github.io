@@ -47,27 +47,29 @@ logSomething();
 <h2><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>标签参数</h2>
 <p>多参函数——尤其参数是相同类型的——调用时会给人带来困惑。</p>
 <pre><code class="hljs css reason"><span class="hljs-keyword">let</span> addCoordinates = <span class="hljs-function">(<span class="hljs-params">x, y</span>) =&gt;</span> {
-  <span class="hljs-comment">/* 这里使用 x 和 y */</span>
+  <span class="hljs-comment">/* use x and y here */</span>
 };
-...
-addCoordinates(<span class="hljs-number">5</span>, <span class="hljs-number">6</span>); <span class="hljs-comment">/* 哪个是 x，哪个是y ？*/</span>
+<span class="hljs-comment">/* ... */</span>
+addCoordinates(<span class="hljs-number">5</span>, <span class="hljs-number">6</span>); <span class="hljs-comment">/* which is x, which is y? */</span>
 </code></pre>
 <p>在 OCaml/Reason 中，你可以给参数附上标签：</p>
 <pre><code class="hljs css reason">let <span class="hljs-keyword">addCoordinates </span>= (~x, ~y) =&gt; {
-  <span class="hljs-comment">/* 这里使用 x 和 y */</span>
+  <span class="hljs-comment">/* use x and y here */</span>
 }<span class="hljs-comment">;</span>
-...
+<span class="hljs-comment">/* ... */</span>
 <span class="hljs-keyword">addCoordinates(~x=5, </span>~y=<span class="hljs-number">6</span>)<span class="hljs-comment">;</span>
 </code></pre>
 <p>因为可以自动柯里化（稍后会详细说明），我们可以以<strong>任意顺序</strong>提供参数：</p>
 <pre><code class="hljs css reason">addCoordinates(~<span class="hljs-attribute">y</span>=6, ~<span class="hljs-attribute">x</span>=5);
 </code></pre>
 <p>The <code>~x</code> part in the declaration means the function accepts an argument labeled <code>x</code> and can refer to it in the function body by the same name. 你还可以为了方便在函数体内通过不同的名称引用参数：</p>
-<pre><code class="hljs css reason">let drawCircle = <span class="hljs-function"><span class="hljs-params">(~radius <span class="hljs-keyword">as</span> r, ~color <span class="hljs-keyword">as</span> c)</span> =&gt;</span> {
- setColor(c);
- startAt(r, r);
- ...
+<pre><code class="hljs css reason"><span class="hljs-keyword">let</span> drawCircle = <span class="hljs-function">(<span class="hljs-params">~radius <span class="hljs-keyword">as</span> r, ~color <span class="hljs-keyword">as</span> c</span>) =&gt;</span> {
+  setColor(c);
+  startAt(r, r);
+  <span class="hljs-comment">/* ... */</span>
 };
+
+drawCircle(~radius=<span class="hljs-number">10</span>, ~color=<span class="hljs-string">"red"</span>);
 </code></pre>
 <p>实际上，<code>(~radius)</code>仅仅是对 <code>(~radius as radius)</code> 的缩写 (称为<strong>双关语</strong>).</p>
 <p>下面是关于参数输入的语法：</p>

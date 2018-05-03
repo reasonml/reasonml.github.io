@@ -47,26 +47,26 @@ logSomething();
 <h2><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>이름 있는 인자</h2>
 <p>다인자 함수, 특히 같은 타입의 인자들을 가진 다인자 함수는 호출시에 헷갈릴 수 있습니다.</p>
 <pre><code class="hljs css reason"><span class="hljs-keyword">let</span> addCoordinates = <span class="hljs-function">(<span class="hljs-params">x, y</span>) =&gt;</span> {
-  <span class="hljs-comment">/* 여기서 x, y 사용 */</span>
+  <span class="hljs-comment">/* use x and y here */</span>
 };
-...
-addCoordinates(<span class="hljs-number">5</span>, <span class="hljs-number">6</span>); <span class="hljs-comment">/* 무엇이 x고, 무엇이 y일까요? */</span>
+<span class="hljs-comment">/* ... */</span>
+addCoordinates(<span class="hljs-number">5</span>, <span class="hljs-number">6</span>); <span class="hljs-comment">/* which is x, which is y? */</span>
 </code></pre>
 <p>OCaml/Reason에선, 인자에 이름을 붙일 수 있습니다:</p>
 <pre><code class="hljs css reason">let <span class="hljs-keyword">addCoordinates </span>= (~x, ~y) =&gt; {
-  <span class="hljs-comment">/* 여기서 x, y 사용 */</span>
+  <span class="hljs-comment">/* use x and y here */</span>
 }<span class="hljs-comment">;</span>
-...
+<span class="hljs-comment">/* ... */</span>
 <span class="hljs-keyword">addCoordinates(~x=5, </span>~y=<span class="hljs-number">6</span>)<span class="hljs-comment">;</span>
 </code></pre>
 <p>Reason은 커링을 지원하므로(밑에 구체적인 설명이 있습니다), 인수를 <strong>어떤 순서로든</strong> 배열해도 상관 없습니다:</p>
 <pre><code class="hljs css reason">addCoordinates(~<span class="hljs-attribute">y</span>=6, ~<span class="hljs-attribute">x</span>=5);
 </code></pre>
 <p>The <code>~x</code> part in the declaration means the function accepts an argument labeled <code>x</code> and can refer to it in the function body by the same name. 간결함을 위해, 함수 몸통에서 인자를 또 다른 이름으로 사용할 수 있습니다:</p>
-<pre><code class="hljs css reason">let drawCircle = <span class="hljs-function"><span class="hljs-params">(~radius <span class="hljs-keyword">as</span> r, ~color <span class="hljs-keyword">as</span> c)</span> =&gt;</span> {
+<pre><code class="hljs css reason"><span class="hljs-keyword">let</span> drawCircle = <span class="hljs-function">(<span class="hljs-params">~radius <span class="hljs-keyword">as</span> r, ~color <span class="hljs-keyword">as</span> c</span>) =&gt;</span> {
   setColor(c);
   startAt(r, r);
-  ...
+  <span class="hljs-comment">/* ... */</span>
 };
 
 drawCircle(~radius=<span class="hljs-number">10</span>, ~color=<span class="hljs-string">"red"</span>);
