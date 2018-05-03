@@ -21,6 +21,7 @@ Reason is just OCaml under the hood; We don't yet cover every concept on this do
 - [Documentation](//reasonml.github.io/reason-react/)
 - [Interactive ReasonReact Tutorial](https://jaredforsyth.com/2017/07/05/a-reason-react-tutorial/): features runnable code and type hint on hover!
 - [Deploying ReasonReact with Docker](https://medium.com/@anirudhmurali/how-i-deployed-a-reasonml-react-app-with-docker-29dd2ce6de82)
+- [Building a Marvel Heroes App using ReasonReact](https://medium.com/oke-software-poland/reasonml-marvel-tutorial-part-0-e38e1bfe1866)
 
 ## Videos
 
