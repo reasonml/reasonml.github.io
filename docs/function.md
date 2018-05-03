@@ -59,7 +59,7 @@ Multi-arguments functions, especially those whose arguments are of the same type
 let addCoordinates = (x, y) => {
   /* use x and y here */
 };
-...
+/* ... */
 addCoordinates(5, 6); /* which is x, which is y? */
 ```
 
@@ -69,7 +69,7 @@ In OCaml/Reason, you can attach labels to an argument:
 let addCoordinates = (~x, ~y) => {
   /* use x and y here */
 };
-...
+/* ... */
 addCoordinates(~x=5, ~y=6);
 ```
 
@@ -85,7 +85,7 @@ The `~x` part in the declaration means the function accepts an argument labeled 
 let drawCircle = (~radius as r, ~color as c) => {
   setColor(c);
   startAt(r, r);
-  ...
+  /* ... */
 };
 
 drawCircle(~radius=10, ~color="red");
