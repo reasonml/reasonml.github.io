@@ -12,7 +12,7 @@ let message = if (isMorning) {
 };
 ```
 
-**Note:** an `if-elseif-else` expression without the final `else` branch implicitly gives `()`. So this:
+**Note:** an `if-else` expression without the final `else` branch implicitly gives `()`. So this:
 
 ```reason
 if (showMenu) {
