@@ -32,6 +32,12 @@ opam install reason.3.0.4 merlin.2.5.4
 
 If your installation fails, it might be because you're on npm 5.4.0 (`npm --version`). There was a known bug in npm that's fixed in 5.4.2. Upgrade `npm` and things should work.
 
+If _that_ fails, try using Yarn instead of npm (Yarn hides deep-path issues from OCaml):
+
+```
+yarn global add <package>
+```
+
 If _that_ fails, try https://github.com/reasonml/reasonml.github.io/pull/157. If that succeeds, please upvote that issue. We aren't sure it's the adequate fix in the meantime.
 
 Finally, if things still don't work, please file an issue at https://github.com/reasonml/reason-cli/issues. Sorry for the trouble.
