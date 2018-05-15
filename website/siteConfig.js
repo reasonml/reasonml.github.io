@@ -27,14 +27,9 @@ const users = [
     infoLink: "https://beopinion.com",
   },
   {
-    caption: "Sentia",
-    image: "img/logos/sentia.jpg",
-    infoLink: "https://www.sentia.ai",
-  },
-  {
-    caption: "Gain by Sentia",
-    image: "img/logos/gain.svg",
-    infoLink: "https://gain.ai",
+    caption: "Mesopo",
+    image: "img/logos/mesopo.svg",
+    infoLink: "https://mesopo.ai",
   },
   {
     caption: "Social Tables",
