@@ -32,9 +32,9 @@ const users = [
     infoLink: "https://www.sentia.ai",
   },
   {
-    caption: "Gain by Sentia",
-    image: "img/logos/gain.svg",
-    infoLink: "https://gain.ai",
+    caption: "Mesopo",
+    image: "img/logos/mesopo.svg",
+    infoLink: "https://mesopo.ai",
   },
   {
     caption: "Social Tables",
