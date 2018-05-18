@@ -152,7 +152,7 @@ function removeMany(t, keys) {
   }
 }
 
-function mergeArray(h, arr) {
+function mergeMany(h, arr) {
   var len = arr.length;
   var v = h;
   for(var i = 0 ,i_finish = len - 1 | 0; i <= i_finish; ++i){
@@ -198,8 +198,6 @@ var toList = Belt_internalAVLtree.toList;
 
 var toArray = Belt_internalAVLtree.toArray;
 
-var ofArray = Belt_internalMapInt.fromArray;
-
 var fromArray = Belt_internalMapInt.fromArray;
 
 var keysToArray = Belt_internalAVLtree.keysToArray;
@@ -230,6 +228,8 @@ var getWithDefault = Belt_internalMapInt.getWithDefault;
 
 var getExn = Belt_internalMapInt.getExn;
 
+var checkInvariantInternal = Belt_internalAVLtree.checkInvariantInternal;
+
 var mergeU = Belt_internalMapInt.mergeU;
 
 var merge = Belt_internalMapInt.merge;
@@ -252,8 +252,6 @@ var mapWithKeyU = Belt_internalAVLtree.mapWithKeyU;
 
 var mapWithKey = Belt_internalAVLtree.mapWithKey;
 
-var checkInvariantInternal = Belt_internalAVLtree.checkInvariantInternal;
-
 exports.empty = empty;
 exports.isEmpty = isEmpty;
 exports.has = has;
@@ -272,7 +270,6 @@ exports.some = some;
 exports.size = size;
 exports.toList = toList;
 exports.toArray = toArray;
-exports.ofArray = ofArray;
 exports.fromArray = fromArray;
 exports.keysToArray = keysToArray;
 exports.valuesToArray = valuesToArray;
@@ -288,14 +285,15 @@ exports.get = get;
 exports.getUndefined = getUndefined;
 exports.getWithDefault = getWithDefault;
 exports.getExn = getExn;
+exports.checkInvariantInternal = checkInvariantInternal;
 exports.remove = remove;
 exports.removeMany = removeMany;
 exports.set = set;
 exports.updateU = updateU;
 exports.update = update;
-exports.mergeArray = mergeArray;
 exports.mergeU = mergeU;
 exports.merge = merge;
+exports.mergeMany = mergeMany;
 exports.keepU = keepU;
 exports.keep = keep;
 exports.partitionU = partitionU;
@@ -305,5 +303,4 @@ exports.mapU = mapU;
 exports.map = map;
 exports.mapWithKeyU = mapWithKeyU;
 exports.mapWithKey = mapWithKey;
-exports.checkInvariantInternal = checkInvariantInternal;
 /* No side effect */

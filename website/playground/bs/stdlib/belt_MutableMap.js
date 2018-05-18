@@ -333,7 +333,7 @@ function set(m, e, v) {
   }
 }
 
-function mergeArrayAux(t, xs, cmp) {
+function mergeManyAux(t, xs, cmp) {
   var v = t;
   for(var i = 0 ,i_finish = xs.length - 1 | 0; i <= i_finish; ++i){
     var match = xs[i];
@@ -344,7 +344,7 @@ function mergeArrayAux(t, xs, cmp) {
 
 function mergeMany(d, xs) {
   var oldRoot = d.data;
-  var newRoot = mergeArrayAux(oldRoot, xs, d.cmp);
+  var newRoot = mergeManyAux(oldRoot, xs, d.cmp);
   if (newRoot !== oldRoot) {
     d.data = newRoot;
     return /* () */0;
@@ -356,8 +356,6 @@ function mergeMany(d, xs) {
 var Int = 0;
 
 var $$String = 0;
-
-var ofArray = fromArray;
 
 exports.Int = Int;
 exports.$$String = $$String;
@@ -396,7 +394,6 @@ exports.getUndefined = getUndefined;
 exports.getWithDefault = getWithDefault;
 exports.getExn = getExn;
 exports.checkInvariantInternal = checkInvariantInternal;
-exports.ofArray = ofArray;
 exports.remove = remove;
 exports.removeMany = removeMany;
 exports.set = set;
