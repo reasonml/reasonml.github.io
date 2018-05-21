@@ -202,7 +202,7 @@ input
   let make = _children => {
     ...component,
     render: _self =>
-      <button> (ReasonReact.stringToElement("Hello!")) </button>,
+      <button> (ReasonReact.string("Hello!")) </button>,
   };
 };
 
