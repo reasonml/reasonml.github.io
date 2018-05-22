@@ -80,7 +80,12 @@ const users = [
     caption: "Dernier Cri",
     image: "img/logos/derniercri.svg",
     infoLink: "https://derniercri.io",
-  }
+  },
+  {
+    caption: "Backtrace",
+    image: "img/logos/backtrace.svg",
+    infoLink: "https://backtrace.io",
+  },
 ];
 
 const examples = [
