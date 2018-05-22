@@ -2,7 +2,7 @@
 title: Pattern Matching!
 ---
 
-_Make sure you've read on [Variant](variant.md) first_.
+_Make sure you've read up on [Variant](variant.md) first_.
 
 **We're finally here**! Pattern matching is one of _the_ best features of the language. It's like destructuring, but comes with even more help from the type system.
 
