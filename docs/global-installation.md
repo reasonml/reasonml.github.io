@@ -8,11 +8,13 @@ title: Global Installation
 
 | Platform  | Install command
 |-----------|-------------------------------------------------------------------------------------------------
-| **macOS**     | `npm install -g reason-cli@3.1.0-darwin`
+| **macOS**     | `npm install -g reason-cli` or `npm install -g reason-cli@3.1.0-darwin`
 | **Linux**   | `npm install -g reason-cli@3.1.0-linux`
 | **Windows** | Please see https://github.com/reasonml/reasonml.github.io/issues/195
 
-Note: Bundles are currently large (approximately `100MB`), but `npm` will not provide progress while downloading.
+Note 1: Running `npm install -g reason-cli` without version specification will install Darwin executables on *any* host system. This bug is not yet fixed but will be fixed in near future.
+
+Note 2: Bundles are currently large (approximately `100MB`), but `npm` will not provide progress while downloading.
 
 ## (Alternative) Through OPAM
 
