@@ -25,18 +25,18 @@
 </code></pre>
 <p><code>Yes</code>，<code>No</code>和<code>PrettyMuch</code>既不是字符串，不是引用，也不是任何其他的特殊数据类型。 它们被称为 “constructors”（或”tag“）。 <code>|</code>符号分隔了每一个 constructor。</p>
 <p><strong>注意</strong>：一个 variant 的 constructors 必须是首字母大写。</p>
-<h2><a class="anchor" aria-hidden="true" name="usage"></a><a href="#usage" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Usage</h2>
-<p>Along with a variant comes one of the most important features of Reason, the <code>switch</code> expression.</p>
-<p>A Reason <code>switch</code> is visually similar to other languages' <code>switch</code> (aka a large <code>if/elseif/elseif...</code>). It allows you to check every possible case of a variant. To use it, enumerate every variant constructor of the particular variant you'd like to use, each followed by an <code>=&gt;</code> and the expression corresponding to that case.</p>
+<h2><a class="anchor" aria-hidden="true" name=""></a><a href="#" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>用法</h2>
+<p>除了 Variant，Reason 中还有一个非常重要的特性，<code>swtich</code> 表达式。</p>
+<p>Reason 中的 <code>switch</code> 看上去很像其他语言中的 <code>switch</code>（或者说一个巨大的<code>if/elseif/elseif</code>）。 它允许你检查一个 variant 的每种可能情况。 要使用它，请枚举该 variant 的每一个 variant 构造函数，每个构造函数之后跟一个 <code>=&gt;</code> 及其对应的表达式。</p>
 <pre><code class="hljs css reason"><span class="hljs-keyword">let</span> message =
   <span class="hljs-keyword">switch</span> (areYouCrushingIt) {
   | <span class="hljs-function"><span class="hljs-params">No</span> =&gt;</span> <span class="hljs-string">"No worries. Keep going!"</span>
   | <span class="hljs-function"><span class="hljs-params">Yes</span> =&gt;</span> <span class="hljs-string">"Great!"</span>
   | <span class="hljs-function"><span class="hljs-params">PrettyMuch</span> =&gt;</span> <span class="hljs-string">"Nice!"</span>
   };
-<span class="hljs-comment">/* message is "Great!" */</span>
+<span class="hljs-comment">/* message 为 "Great!" */</span>
 </code></pre>
-<p>A variant has an extremely rich amount of type system assistance. For example, we'll give you a type error if you've forgotten to cover a case of your variant, or if two cases are redundant. Be sure to check out switch and pattern-matching in a <a href="/docs/zh-CN/pattern-matching.html">later section</a>!</p>
+<p>Variant 拥有极为丰富的类型系统辅助。 例如，如果你没有列全一个 variant 的所有 case，或者两个 case 是重复的，我们都会抛出一个类型错误。 请务必在 <a href="/docs/zh-CN/pattern-matching.html">稍后的章节</a> 中查看 switch 和模式匹配的更多细节！</p>
 <h3><a class="anchor" aria-hidden="true" name="variant-needs-an-explicit-definition"></a><a href="#variant-needs-an-explicit-definition" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Variant Needs an Explicit Definition</h3>
 <p>If the variant you're using is in a different file, bring it into scope like you'd do <a href="/docs/zh-CN/record.html#record-needs-an-explicit-definition">for a record</a>:</p>
 <pre><code class="hljs css reason"><span class="hljs-comment">/* Zoo.re */</span>
