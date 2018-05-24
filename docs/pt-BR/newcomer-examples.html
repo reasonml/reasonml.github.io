@@ -38,41 +38,30 @@ switch (possiblyNullValue2) {
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" name="criando-um-objeto-js"></a><a href="#criando-um-objeto-js" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Criando um Objeto JS</h2>
 <p>Assumindo que você esteja <a href="/docs/pt-BR/quickstart-javascript.html">compilando para JS </a>, é claro.</p>
-<pre><code class="hljs css reason"><span class="hljs-keyword">let</span> <span class="hljs-attr">obj1</span> = {
-  <span class="hljs-string">"name"</span>: <span class="hljs-string">"John"</span>,
-  <span class="hljs-string">"age"</span>: <span class="hljs-number">30</span>
-};
-<span class="hljs-comment">/* Compila para um objeto JS da mesma maneira que você está vendo*/</span>
-</code></pre>
-<p>Observe que o código acima não é um registro; as chaves são strings em aspas duplas. Esse é o açúcar sintático do Reason para <a href="https://bucklescript.github.io/docs/en/object.html#creation">bs.obj</a>. O tipo é inferido. O próximo exemplifica anotação de tipos explicitamente.</p>
-<h2><a class="anchor" aria-hidden="true" name="tipando-um-objeto-js"></a><a href="#tipando-um-objeto-js" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Tipando um Objeto JS</h2>
-<pre><code class="hljs css reason"><span class="hljs-keyword">type</span> payload = {.
-  <span class="hljs-string">"name"</span>: <span class="hljs-built_in">string</span>,
-  <span class="hljs-string">"age"</span>: <span class="hljs-built_in">int</span>
+<pre><code class="hljs css reason">[<span class="hljs-meta">@bs</span>.deriving <span class="hljs-keyword">abstract</span>]
+<span class="hljs-keyword">type</span> payload = {
+  name: <span class="hljs-built_in">string</span>,
+  age: int
 };
 
-<span class="hljs-keyword">let</span> obj1: payload = {<span class="hljs-string">"name"</span>: <span class="hljs-string">"John"</span>, <span class="hljs-string">"age"</span>: <span class="hljs-number">30</span>};
+<span class="hljs-keyword">let</span> obj1 = payload(~name=<span class="hljs-string">"John"</span>, ~age=<span class="hljs-number">30</span>);
+
+<span class="hljs-comment">/* Compiles to a JS object with the above fields */</span>
 </code></pre>
-<p>Observe que <code>{. name: string, age: int}</code> é a sintaxe para uma declaração de tipo de objeto Reason/OCaml (não um registro!). Ele é elevado para <code>Js.t</code> para que BuckleScript veja o tipo e compile-o corretamente para um objeto JavaScript regular. Normalmente, objetos OCaml não elevados são compilados de forma diferente (raramente é necessário atualmente).</p>
+<p>Note that the above isn't a record; this is a <a href="https://bucklescript.github.io/docs/en/object.html#record-mode">special BuckleScript feature</a>.</p>
 <h2><a class="anchor" aria-hidden="true" name="modeling-a-js-module-with-default-export"></a><a href="#modeling-a-js-module-with-default-export" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Modeling a JS Module with Default Export</h2>
-<p>Considerando que o módulo chamado <code>store.js</code>, tem um export padrão (default) e um método chamado <code>getDate</code>.</p>
-<pre><code class="hljs css reason"><span class="hljs-keyword">type</span> <span class="hljs-keyword">store</span> = {. <span class="hljs-string">"getDate"</span>: [<span class="hljs-title">@bs.meth</span>] (unit =&gt; float)}<span class="hljs-comment">;
-</span>[<span class="hljs-title">@bs.module</span>] <span class="hljs-keyword">external</span> <span class="hljs-keyword">store</span> : <span class="hljs-keyword">store</span> = <span class="hljs-string">"./store"</span><span class="hljs-comment">;
-</span>
-Js.log(<span class="hljs-keyword">store</span>)<span class="hljs-comment">;
-</span>Js.log(<span class="hljs-keyword">store</span>##getDate())<span class="hljs-comment">;
-</span></code></pre>
-<h2><a class="anchor" aria-hidden="true" name="checando-por-tipos-que-podem-ser-nulos-usando-option"></a><a href="#checando-por-tipos-que-podem-ser-nulos-usando-option" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Checando por tipos que podem ser nulos usando <code>option</code></h2>
-<p>Para uma função que potencialmente receberá argumentos <code>null</code> ou <code>undefined</code>, é idiomático converter para uma <code>option</code>. A conversão é feita através das funções auxiliares do Bucklescript no módulo do BuckleScript <a href="http://bucklescript.github.io/bucklescript/api/Js.html#TYPEnullable"><code>Js.Nullable</code></a>. Nesse caso, <code>to_opt</code>:</p>
+<p>See <a href="https://bucklescript.github.io/docs/en/import-export.html#import-a-default-value">here</a>.</p>
+<h2><a class="anchor" aria-hidden="true" name="checking-for-js-nullable-types-using-the-option-type"></a><a href="#checking-for-js-nullable-types-using-the-option-type" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Checking for JS nullable types using the <code>option</code> type</h2>
+<p>For a function whose argument is passed a JavaScript value that's potentially <code>null</code> or <code>undefined</code>, it's idiomatic to convert it to a Reason <code>option</code>. The conversion is done through the helper functions in Bucklescript's <a href="http://bucklescript.github.io/bucklescript/api/Js.html#TYPEnullable"><code>Js.Nullable</code></a> module. In this case, <code>toOption</code>:</p>
 <pre><code class="hljs css reason"><span class="hljs-keyword">let</span> greetByName = (possiblyNullName) =&gt; {
-  <span class="hljs-keyword">let</span> optionName = Js.Nullable.to_opt(possiblyNullName);
+  <span class="hljs-keyword">let</span> optionName = Js.Nullable.toOption(possiblyNullName);
   switch (optionName) {
   | <span class="hljs-type">None</span> =&gt; <span class="hljs-string">"Hi"</span>
   | <span class="hljs-type">Some</span>(name) =&gt; <span class="hljs-string">"Hello "</span> ++ name
   }
 };
 </code></pre>
-<p>Essa verificação compila para <code>possiblyNullName == null</code> em JS, assim ela verifica a presença de <code>null</code> ou <code>undefined</code>.</p>
+<p>This check compiles to <code>possiblyNullName == null</code> in JS, so checks for the presence of <code>null</code> or <code>undefined</code>.</p>
 </span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="comparison-to-ocaml.html">← Comparação com OCaml</a><a class="docs-next button" href="project-structure.html">Estrutura de Projeto →</a></div></div></div></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.js"></script><script>window.foo = new Pjax({
           areas: [
             // try to use the first query.
