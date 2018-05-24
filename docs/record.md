@@ -104,17 +104,7 @@ type car = {name: string, horsePower};
 
 ### Interop with JavaScript
 
-If you're working with JavaScript, the record syntax & operations should feel familiar, and you might be tempted to interop with JS by converting a JS object to a record, and vice-versa. This is fine, but we have an **even better way without conversion overhead**! See [here](https://bucklescript.github.io/docs/en/object.html#object-as-record) which talks about **[Reason objects](object.md)**. Here's an example:
-
-```reason
-type payload = {. "name": string};
-
-[@bs.module "myAjaxLibrary"] external sendQuery : payload => unit = "sendQuery";
-
-sendQuery({"name": "Reason"});
-```
-
-Notice the dot in the type definiton. That is an object type notation, and has nothing to do with a record! Objects will be described in a later section.
+If you're working with JavaScript, the record syntax & operations should feel familiar, and you might be tempted to interop with JS by converting a JS object to a record, and vice-versa. This is fine, but we have an **even better way without conversion overhead**! See [here](https://bucklescript.github.io/docs/en/object.html#record-mode)
 
 ### Record Types Are Found By Field Name
 

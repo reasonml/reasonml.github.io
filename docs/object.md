@@ -78,11 +78,4 @@ obj#doYouWant();
 
 ## Tip & Tricks
 
-If you come from JavaScript, you're probably not looking for vanilla Reason objects, but BuckleScript's [special object](https://bucklescript.github.io/docs/en/object.html#object-as-record). These are different in that they:
-
-- access fields through `##`.
-- uses `#=` for mutation, if the field is mutable (using `bs.set`).
-- always come with with `Js.t` (as a type parameter to the `Js.t` type).
-- compile to actual JS objects.
-
-Because they're used so often, Reason give the BS object value `[%bs.obj {foo: bar}]` a special syntax sugar: `{"foo": bar}`. It looks like a quoted record, basically. Likewise for types: `{. "foo": string}`
+If you come from JavaScript, **a Reason object doesn't compile to a JS object**. For that, try BuckleScript's [special feature](https://bucklescript.github.io/docs/en/object.html#record-mode).

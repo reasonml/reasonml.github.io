@@ -38,46 +38,30 @@ let result: response(universityStudent) = fetchDataFromServer();
 Assuming you're [compiling to JS](quickstart-javascript.md), of course.
 
 ```reason
-let obj1 = {
-  "name": "John",
-  "age": 30
-};
-/* Compiles to a JS object that looks exactly like what you're seeing */
-```
-
-Note that the above isn't a record; the keys are quoted in string. That's Reason syntax sugar for [bs.obj](https://bucklescript.github.io/docs/en/object.html#creation). The type is inferred. Next example explicitly types it.
-
-## Typing a JS Object
-
-```reason
-type payload = {.
-  "name": string,
-  "age": int
+[@bs.deriving abstract]
+type payload = {
+  name: string,
+  age: int
 };
 
-let obj1: payload = {"name": "John", "age": 30};
+let obj1 = payload(~name="John", ~age=30);
+
+/* Compiles to a JS object with the above fields */
 ```
 
-Note that `{. name: string, age: int}` is the syntax for a Reason/OCaml object type declaration (not a record!). It's lifted into `Js.t` so that BuckleScript sees the whole type and compiles it correctly to a regular JavaScript object. Ordinary, non-lifted OCaml objects are compiled into something else (rarely needed currently).
+Note that the above isn't a record; this is a [special BuckleScript feature](https://bucklescript.github.io/docs/en/object.html#record-mode).
 
 ## Modeling a JS Module with Default Export
 
-Assuming the module's called `store.js`, and has a default export, plus a method called `getDate`.
-
-```reason
-type store = {. "getDate": [@bs.meth] (unit => float)};
-[@bs.module] external store : store = "./store";
-
-Js.log(store);
-Js.log(store##getDate());
-```
+See [here](https://bucklescript.github.io/docs/en/import-export.html#import-a-default-value).
 
 ## Checking for JS nullable types using the `option` type
-For a function whose argument is passed a JavaScript value that's potentially `null` or `undefined`, it's idiomatic to convert it to a Reason `option`. The conversion is done through the helper functions in Bucklescript's [`Js.Nullable`](http://bucklescript.github.io/bucklescript/api/Js.html#TYPEnullable) module. In this case, `to_opt`:
+
+For a function whose argument is passed a JavaScript value that's potentially `null` or `undefined`, it's idiomatic to convert it to a Reason `option`. The conversion is done through the helper functions in Bucklescript's [`Js.Nullable`](http://bucklescript.github.io/bucklescript/api/Js.html#TYPEnullable) module. In this case, `toOption`:
 
 ```reason
 let greetByName = (possiblyNullName) => {
-  let optionName = Js.Nullable.to_opt(possiblyNullName);
+  let optionName = Js.Nullable.toOption(possiblyNullName);
   switch (optionName) {
   | None => "Hi"
   | Some(name) => "Hello " ++ name
