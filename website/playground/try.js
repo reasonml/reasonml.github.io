@@ -190,7 +190,7 @@ Belt.Array.makeBy(42, (_) => random_gaussian()) |. Belt.Array.forEach(Js.log);`
   </html>
 |};
 
-let result = Js.String.match([%re {|/<p>(.*?)<\/p>/gi|}], input);
+let result = Js.String.match([%re {|/<p>(.*?)<\\/p>/gi|}], input);
 
 switch (result) {
 | Some(result) => Js.Array.forEach(Js.log, result)
