@@ -27,15 +27,15 @@ Using the pipe operator (see "Composition operators" in the [Pervasives module](
 let myPromise = Js.Promise.make((~resolve, ~reject) => resolve(. 2));
 
 myPromise
-|> Js.Promise.then_(value => {
+|. Js.Promise.then_(value => {
      Js.log(value);
      Js.Promise.resolve(value + 2);
    })
-|> Js.Promise.then_(value => {
+|. Js.Promise.then_(value => {
      Js.log(value);
      Js.Promise.resolve(value + 3);
    })
-|> Js.Promise.catch(err => {
+|. Js.Promise.catch(err => {
      Js.log2("Failure!!", err);
      Js.Promise.resolve(-2);
    });

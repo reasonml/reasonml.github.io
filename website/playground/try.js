@@ -63,7 +63,7 @@ let myTree =
     Node(3, Node(5, Leaf, Leaf), Node(7, Leaf, Leaf))
   );
 
-sum(myTree) |> Js.log;`
+Js.log(sum(myTree));`
 }, {
   name: 'FFI - Base64',
   code:
@@ -71,8 +71,8 @@ sum(myTree) |> Js.log;`
 [@bs.val] external atob : string => string = "";
 
 let text = "Hello World!";
-Js.log(text |> btoa);
-Js.log(text |> btoa |> atob);`
+Js.log(btoa(text));
+Js.log(text |. btoa |. atob);`
 }, {
   name: 'Factorial',
   code:
@@ -109,33 +109,45 @@ hanoi(4, 1, 2, 3);`
 }, {
   name: 'Json',
   code:
-`let person = {
-  "name": {"first": "Bob", "last": "Zhmith"},
-  "age": 32
+`open Belt;
+
+[@bs.deriving abstract]
+type fullName = {
+  first: string,
+  last: string,
 };
 
+[@bs.deriving abstract]
+type person = {
+  name: fullName,
+  age: int,
+};
+
+let person1 = person(~name=fullName(~first="Ricky", ~last="Zhang"), ~age=10);
+
+/* encode person1, then decode it */
 let json =
-  person
-  |> Js.Json.stringifyAny
-  |> Js.Option.getExn
-  |> Js.Json.parseExn;
+  person1
+  |. Js.Json.stringifyAny
+  |. Option.getExn
+  |. Js.Json.parseExn;
 
 let name =
   json
-  |> Js.Json.decodeObject
-  |> Js.Option.andThen([@bs] ((p) => Js.Dict.get(p, "name")))
-  |> Js.Option.andThen([@bs] ((json) => Js.Json.decodeObject(json)))
-  |> Js.Option.getExn;
+  |. Js.Json.decodeObject
+  |. Option.flatMap(p => Js.Dict.get(p, "name"))
+  |. Option.flatMap(json => Js.Json.decodeObject(json))
+  |. Option.getExn;
 
 let firstName =
   Js.Dict.get(name, "first")
-  |> Js.Option.andThen([@bs] ((json) => Js.Json.decodeString(json)))
-  |> Js.Option.getExn;
+  |. Option.flatMap(json => Js.Json.decodeString(json))
+  |. Option.getExn;
 
 let lastName =
   Js.Dict.get(name, "last")
-  |> Js.Option.andThen([@bs] ((json) => Js.Json.decodeString(json)))
-  |> Js.Option.getExn;
+  |. Option.flatMap(json => Js.Json.decodeString(json))
+  |. Option.getExn;
 
 Js.log({j|Hello, $firstName $lastName|j});`
 }, {
@@ -162,7 +174,7 @@ let pi = 4. *. atan(1.);
 let random_gaussian = () =>
   1. +. sqrt((-2.) *. log(Random.float(1.))) *. cos(2. *. pi *. Random.float(1.));
 
-Array.init(42, (_) => random_gaussian()) |> Array.iter(Js.log);`
+Belt.Array.makeBy(42, (_) => random_gaussian()) |. Belt.Array.forEach(Js.log);`
 }, {
   name: 'Regex',
   code:
@@ -178,13 +190,12 @@ Array.init(42, (_) => random_gaussian()) |> Array.iter(Js.log);`
   </html>
 |};
 
-input
-|> Js.String.match([%re "/<p\\b[^>]*>(.*?)<\\/p>/gi"])
-|> (
-  fun
-  | Some(result) => result |> Js.Array.forEach(Js.log)
-  | None => Js.log("no matches")
-);`
+let result = Js.String.match([%re {|/<p>(.*?)<\/p>/gi|}], input);
+
+switch (result) {
+| Some(result) => Js.Array.forEach(Js.log, result)
+| None => Js.log("no matches")
+};`
 }, {
   name: 'String interpolation',
   code:
