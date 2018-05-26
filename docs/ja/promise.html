@@ -30,15 +30,15 @@
 <pre><code class="hljs css reason"><span class="hljs-keyword">let</span> myPromise = <span class="hljs-type">Js</span>.<span class="hljs-type">Promise</span>.make((~resolve, ~reject) =&gt; resolve(. <span class="hljs-number">2</span>));
 
 myPromise
-|. <span class="hljs-type">Js</span>.<span class="hljs-type">Promise</span>.then_(<span class="hljs-keyword">value</span> =&gt; {
+|&gt; <span class="hljs-type">Js</span>.<span class="hljs-type">Promise</span>.then_(<span class="hljs-keyword">value</span> =&gt; {
      <span class="hljs-type">Js</span>.log(<span class="hljs-keyword">value</span>);
      <span class="hljs-type">Js</span>.<span class="hljs-type">Promise</span>.resolve(<span class="hljs-keyword">value</span> + <span class="hljs-number">2</span>);
    })
-|. <span class="hljs-type">Js</span>.<span class="hljs-type">Promise</span>.then_(<span class="hljs-keyword">value</span> =&gt; {
+|&gt; <span class="hljs-type">Js</span>.<span class="hljs-type">Promise</span>.then_(<span class="hljs-keyword">value</span> =&gt; {
      <span class="hljs-type">Js</span>.log(<span class="hljs-keyword">value</span>);
      <span class="hljs-type">Js</span>.<span class="hljs-type">Promise</span>.resolve(<span class="hljs-keyword">value</span> + <span class="hljs-number">3</span>);
    })
-|. <span class="hljs-type">Js</span>.<span class="hljs-type">Promise</span>.catch(err =&gt; {
+|&gt; <span class="hljs-type">Js</span>.<span class="hljs-type">Promise</span>.catch(err =&gt; {
      <span class="hljs-type">Js</span>.log2(<span class="hljs-string">"Failure!!"</span>, err);
      <span class="hljs-type">Js</span>.<span class="hljs-type">Promise</span>.resolve(-<span class="hljs-number">2</span>);
    });
