@@ -8,8 +8,8 @@ title: Global Installation
 
 | Platform  | Install command
 |-----------|-------------------------------------------------------------------------------------------------
-| **macOS**     | `npm install -g reason-cli@3.1.0-darwin`
-| **Linux**   | `npm install -g reason-cli@3.1.0-linux`
+| **macOS**   | `npm install -g reason-cli@3.2.0-darwin`
+| **Linux**   | `npm install -g reason-cli@3.2.0-linux`
 | **Windows** | Please see https://github.com/reasonml/reasonml.github.io/issues/195
 
 Note: Bundles are currently large (approximately `100MB`), but `npm` will not provide progress while downloading.
