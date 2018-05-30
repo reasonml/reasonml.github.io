@@ -86,6 +86,11 @@ const users = [
     image: "img/logos/backtrace.svg",
     infoLink: "https://backtrace.io",
   },
+  {
+    caption: "Mobilunity",
+    image: "img/logos/mobilunity.svg",
+    infoLink: "https://mobilunity.com",
+  },
 ];
 
 const examples = [
