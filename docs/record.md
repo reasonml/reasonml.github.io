@@ -127,7 +127,7 @@ getAge(kraken);
 getAge(me);
 ```
 
-The type system will complain that `me` is a `person`, and that `getAge` only works on `monster`. If you need such capability, use Reason objects, mentioned in the previous section.
+The type system will complain that `me` is a `person`, and that `getAge` only works on `monster`. If you need such capability, use Reason objects, described [here](object.md).
 
 ## Design Decisions
 
