@@ -44,6 +44,6 @@ Use `#quit;` to close your REPL session.
 
 [Redex](https://redex.github.io): the Reason packages registry.
 
-### ocamlc, ocamlopt, ocamlrun, rebuild
+### ocamlc, ocamlopt, ocamlrun
 
 `ocamlc` and `ocamlopt` are the bare ocaml compilers.
