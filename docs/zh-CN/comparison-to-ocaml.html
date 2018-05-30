@@ -114,17 +114,13 @@ let () = imperativeFunc 0 0</pre>
 <pre><code class="hljs">&lt;td&gt;
   &lt;pre&gt;
 </code></pre>
-<p>let ten = 10;
-imperativeFunc(ten, ten);
-imperativeFunc(0, 0);</pre>
-</td></p>
+</pre>
+    </td>
   </tr>
   <tr>
     <td>
       <pre>
-let ten = 10;;
-imperativeFunc ten ten;;
-imperativeFunc 0 0;;</pre>
+</pre>
     </td>
 <pre><code class="hljs">&lt;td&gt;
   Same as above
@@ -147,9 +143,7 @@ imperativeFunc 0 0;;</pre>
   <tr>
     <td>
       <pre>
-let ten = 10 in
-let _ = imperativeFunc ten ten in
-imperativeFunc 0 0</pre>
+</pre>
     </td>
 <pre><code class="hljs">&lt;td&gt;
   same as above
@@ -159,10 +153,7 @@ imperativeFunc 0 0</pre>
   <tr>
     <td>
       <pre>
-let ten = 10 in begin
-  imperativeFunc ten ten;
-  imperativeFunc 0 0
-end</pre>
+</pre>
     </td>
 <pre><code class="hljs">&lt;td&gt;
   same as above
@@ -172,10 +163,7 @@ end</pre>
   <tr>
     <td>
       <pre>
-let ten = 10 in (
-  imperativeFunc ten ten;
-  imperativeFunc 0 0
-)</pre>
+</pre>
     </td>
 <pre><code class="hljs">&lt;td&gt;
   same as above
@@ -213,30 +201,24 @@ let ten = 10 in (
   <tr>
     <td>
       <pre>
-let myRec = {x = 0; y = 10}</pre>
+</pre>
     </td>
 <pre><code class="hljs">&lt;td&gt;
   &lt;pre&gt;
 </code></pre>
-<p>let myRec = {x: 0, y: 10};</pre>
-</td></p>
+</pre>
+    </td>
   </tr>
   <tr>
     <td>
       <pre>
-let myFuncs = {
-  myFun = (fun x -> x + 1);
-  your = (fun a b -> a + b);
-}</pre>
+</pre>
     </td>
 <pre><code class="hljs">&lt;td&gt;
   &lt;pre&gt;
 </code></pre>
-<p>let myFuncs = {
-myFun: (x) =&gt; x + 1,
-your: (a, b) =&gt; a + b
-};</pre>
-</td></table></p>
+</pre>
+    </td></table> 
 <pre><code class="hljs">&lt;h2&gt;
   序列
 &lt;/h2&gt;
@@ -456,14 +438,14 @@ your: (a, b) =&gt; a + b
     &lt;td&gt;
       &lt;pre&gt;
 </code></pre>
-<p>fun pat -&gt; e</pre>
-</td></p>
+</pre>
+        </td>
 <pre><code class="hljs">    &lt;td&gt;
       &lt;pre&gt;
 </code></pre>
-<p>fun pat =&gt; e</pre>
-</td>
-</tr></p>
+</pre>
+        </td>
+      </tr>
 <pre><code class="hljs">  &lt;tr&gt;
     &lt;td&gt;
       one match case
@@ -472,14 +454,14 @@ your: (a, b) =&gt; a + b
     &lt;td&gt;
       &lt;pre&gt;
 </code></pre>
-<p>function | pat -&gt; e</pre>
-</td></p>
+</pre>
+        </td>
 <pre><code class="hljs">    &lt;td&gt;
       &lt;pre&gt;
 </code></pre>
-<p>fun | pat =&gt; e</pre>
-</td>
-</tr></p>
+</pre>
+        </td>
+      </tr>
 <pre><code class="hljs">  &lt;tr&gt;
     &lt;td&gt;
       many cases
@@ -488,17 +470,15 @@ your: (a, b) =&gt; a + b
     &lt;td&gt;
       &lt;pre&gt;
 </code></pre>
-<p>function | pat -&gt; e
-| pat2 -&gt; e</pre>
-</td></p>
+</pre>
+        </td>
 <pre><code class="hljs">    &lt;td&gt;
       &lt;pre&gt;
 </code></pre>
-<p>fun | pat =&gt; e
-| pat2 =&gt; e</pre>
-</td>
-</tr>
-</table></p>
+</pre>
+        </td>
+      </tr>
+    </table>
 <pre><code class="hljs">&lt;h3&gt;
   注释参数
 &lt;/h3&gt;
@@ -601,23 +581,15 @@ let tuples: listOfTuplesOfStringAndInt = [(&quot;asdf&quot;, 3)]
     &lt;td&gt;
       &lt;pre&gt;
 </code></pre>
-<p>let x: int list = [2]
-type listOfListOfInts = int list list
-type ('a, 'b) tup = ('a * 'b)
-type pairs = (int, int) tup list
-let tuples: pairs = [(2, 3)]</pre>
-</td></p>
+</pre>
+        </td>
 <pre><code class="hljs">    &lt;td&gt;
       &lt;pre&gt;
 </code></pre>
-<p>let x: list(int) = [2];
-type listOfListOfInts = list(list(int));
-type tup('a, 'b) = ('a, 'b);
-type pairs = list(tup(int, int));
-let tuples: pairs = [(2, 3)];</pre>
-</td>
-</tr>
-</table></p>
+</pre>
+        </td>
+      </tr>
+    </table>
 <pre><code class="hljs">&lt;h2&gt;
   作为类型参数的元组
 &lt;/h2&gt;
@@ -709,93 +681,55 @@ let tuples: pairs = [(2, 3)];</pre>
     元组 &lt;strong&gt; 总是 &lt;/strong&gt; &lt;em&gt; 看起来 &lt;/em&gt; 类似元组, 而任何看起来像元数组 &lt;em&gt; 的内容都是 &lt;/em&gt; 元组。
   &lt;/li&gt;
 &lt;/ul&gt;
+</code></pre>
+<table>
+  <thead>
+    <tr>
+      <th>
+        <p>OCaml</p>
+      </th>
+      <th>
+        <p>Reason</p>
+      </th>
+    </tr>
+  </thead>
+  <tr>
+    <td>
+      <pre>
+<pre><code class="hljs">  &lt;/pre&gt;
+&lt;/td&gt;
+&lt;td&gt;
+  &lt;pre&gt;
 
-&lt;table&gt;
-  &lt;tr&gt;
-    &lt;th&gt;
-      &lt;p&gt;
-        OCaml
-      &lt;/p&gt;
-    &lt;/th&gt;
-    
-    &lt;th&gt;
-      &lt;p&gt;
-        Reason
-      &lt;/p&gt;
-    &lt;/th&gt;
-  &lt;/tr&gt;
-  
-  &lt;tr&gt;
-    &lt;td&gt;
-      &lt;pre&gt;
+  &lt;/pre&gt;
+&lt;/td&gt;
 </code></pre>
-<p>type myVariant =
-| HasNothing
-| HasSingleInt of int
-| HasSingleTuple of (int * int)
-| HasMultipleInts of int * int
-| HasMultipleTuples of (int * int) * (int * int)
-</pre>
-</td></p>
-<pre><code class="hljs">    &lt;td&gt;
-      &lt;pre&gt;
+  </tr>
+  <tr>
+    <td>
+      <pre>
+<pre><code class="hljs">  &lt;/pre&gt;
+&lt;/td&gt;
+&lt;td&gt;
+  &lt;pre&gt;
+
+  &lt;/pre&gt;
+&lt;/td&gt;
 </code></pre>
-<p>type myVariant =
-| HasNothing
-| HasSingleInt(int)
-| HasSingleTuple((int, int))
-| HasMultipleInts(int, int)
-| HasMultipleTuples((int, int), (int, int));
-</pre>
-</td>
-</tr></p>
-<pre><code class="hljs">  &lt;tr&gt;
-    &lt;td&gt;
-      &lt;pre&gt;
+  </tr>
+  <tr>
+    <td>
+      <pre>
+<pre><code class="hljs">  &lt;/pre&gt;
+&lt;/td&gt;
+&lt;td&gt;
+  &lt;pre&gt;
+
+  &lt;/pre&gt;
+&lt;/td&gt;
 </code></pre>
-<p>let a = HasSingleInt 10
-let a = HasSingleTuple (10, 10)
-let a = HasMultipleInts (10, 10)
-let a = HasMultipleTuples ((10, 10), (10, 10))
-</pre>
-</td></p>
-<pre><code class="hljs">    &lt;td&gt;
-      &lt;pre&gt;
-</code></pre>
-<p>let a = HasSingleInt(10);
-let a = HasSingleTuple((10, 10));
-let a = HasMultipleInts(10, 10);
-let a = HasMultipleTuples((10, 10), (10, 10));
-</pre>
-</td>
-</tr></p>
-<pre><code class="hljs">  &lt;tr&gt;
-    &lt;td&gt;
-      &lt;pre&gt;
-</code></pre>
-<p>let res x = match x with
-| HasNothing -&gt; 0
-| HasSingleInt x -&gt; 0
-| HasSingleTuple (x, y) -&gt; 0
-| HasMultipleInts (x, y) -&gt; 0
-| HasMultipleTuples ((x, y), (q, r)) -&gt; 0
-</pre>
-</td></p>
-<pre><code class="hljs">    &lt;td&gt;
-      &lt;pre&gt;
-</code></pre>
-<p>let res = (x) =&gt;
-switch (x) {
-| HasNothing =&gt; 0
-| HasSingleInt(x) =&gt; 0
-| HasSingleTuple((x, y)) =&gt; 0
-| HasMultipleInts(x, y) =&gt; 0
-| HasMultipleTuples((x, y), (q, r)) =&gt; 0
-};
-</pre>
-</td>
-</tr>
-</table></p>
+  </tr>
+</table>
 <pre><code class="hljs">&lt;h2&gt;
   模式匹配
 &lt;/h2&gt;
@@ -819,22 +753,11 @@ switch (x) {
     &lt;td&gt;
       &lt;pre&gt;
 </code></pre>
-<p>let res = match x with
-| A (x, y) -&gt; match y with
-| None -&gt; 0
-| Some i -&gt; 10
-| B (x, y) -&gt; 0</pre>
-</td></p>
+</pre>
+        </td>
 <pre><code class="hljs">    &lt;td&gt;
       &lt;pre&gt;
 </code></pre>
-<p>let res = switch (x) {
-| A((x, y)) =&gt; switch (y) {
-| None =&gt; 0
-| Some(i) =&gt; 10
-}
-| B((x, y)) =&gt; 0
-};</p>
 </pre>
         </td>
       </tr>
@@ -861,99 +784,41 @@ switch (x) {
 &lt;h3&gt;
   定义
 &lt;/h3&gt;
+</code></pre>
+<table>
+  <thead><tr> <th><p>OCaml</p></th><th><p>Reason</p></th></tr></thead>
+  <tr>
+    <td>
+      <pre>
+<pre><code class="hljs">  &lt;/pre&gt;
+&lt;/td&gt;
+&lt;td&gt;
+  &lt;pre&gt;
 
-&lt;table&gt;
-  &lt;tr&gt;
-    &lt;th&gt;
-      &lt;p&gt;
-        OCaml
-      &lt;/p&gt;
-    &lt;/th&gt;
-    
-    &lt;th&gt;
-      &lt;p&gt;
-        Reason
-      &lt;/p&gt;
-    &lt;/th&gt;
-  &lt;/tr&gt;
-  
-  &lt;tr&gt;
-    &lt;td&gt;
-      &lt;pre&gt;
+  &lt;/pre&gt;
+&lt;/td&gt;
 </code></pre>
-<p>module type MySig = sig
-type t = int
-val x: int
-end
-module MyModule: MySig = struct
-type t = int
-let x = 10
-end
-module MyModule = struct
-module NestedModule = struct
-let msg = &quot;hello&quot;;
-end
-end
-</pre>
-</td></p>
-<pre><code class="hljs">    &lt;td&gt;
-      &lt;pre&gt;
-</code></pre>
-<p>module type MySig = {
-type t = int;
-let x: int;
-};
-module MyModule: MySig = {
-type t = int;
-let x = 10;
-};
-module MyModule = {
-module NestedModule = {
-let msg = &quot;hello&quot;;
-};
-};
-</pre>
-</td>
-</tr>
-</table></p>
+  </tr>
+</table>
 <pre><code class="hljs">&lt;h3&gt;
   函子类型
 &lt;/h3&gt;
+</code></pre>
+<table>
+  <thead><tr> <th><p>OCaml</p></th><th><p>Reason</p></th></tr></thead>
+  <tr>
+    <td>
+      <pre>
+<pre><code class="hljs">  &lt;/pre&gt;
+&lt;/td&gt;
+&lt;td&gt;
+  &lt;pre&gt;
 
-&lt;table&gt;
-  &lt;tr&gt;
-    &lt;th&gt;
-      &lt;p&gt;
-        OCaml
-      &lt;/p&gt;
-    &lt;/th&gt;
-    
-    &lt;th&gt;
-      &lt;p&gt;
-        Reason
-      &lt;/p&gt;
-    &lt;/th&gt;
-  &lt;/tr&gt;
-  
-  &lt;tr&gt;
-    &lt;td&gt;
-      &lt;pre&gt;
+  &lt;/pre&gt;
+&lt;/td&gt;
 </code></pre>
-<p>module type FType =
-functor (A: ASig) -&gt;
-functor (B: BSig) -&gt; Result
-</pre>
-</td></p>
-<pre><code class="hljs">    &lt;td&gt;
-      &lt;pre&gt;
-</code></pre>
-<p>module type FType =
-(A: ASig) =&gt;
-(B: BSig) =&gt; Result;
-</pre>
-</td>
-</tr>
-</table></p>
+  </tr>
+</table>
 <pre><code class="hljs">&lt;h2&gt;
   函子
 &lt;/h2&gt;
@@ -977,55 +842,51 @@ functor (B: BSig) -&gt; Result
     &lt;td&gt;
       &lt;pre&gt;
 </code></pre>
-<p>module F =
-functor (A: ASig) -&gt;
-functor (B: BSig) -&gt; struct end</pre>
-</td></p>
+</pre>
+        </td>
 <pre><code class="hljs">    &lt;td&gt;
       &lt;pre&gt;
 </code></pre>
-<p>module F =
-(A: ASig) =&gt;
-(B: BSig) =&gt; {};</pre>
-</td>
-</tr></p>
+</pre>
+        </td>
+      </tr>
 <pre><code class="hljs">  &lt;tr&gt;
     &lt;td&gt;
       &lt;pre&gt;
 </code></pre>
-<p>module F = functor (A: ASig) (B: BSig) -&gt; struct end</pre>
-</td></p>
+</pre>
+        </td>
 <pre><code class="hljs">    &lt;td&gt;
       &lt;pre&gt;
 </code></pre>
-<p>module F = (A: ASig, B: BSig) =&gt; {};</pre>
-</td>
-</tr></p>
+</pre>
+        </td>
+      </tr>
 <pre><code class="hljs">  &lt;tr&gt;
     &lt;td&gt;
       &lt;pre&gt;
 </code></pre>
-<p>module F (A: ASig) (B: BSig) = struct end</pre>
-</td></p>
+</pre>
+        </td>
 <pre><code class="hljs">    &lt;td&gt;
       &lt;pre&gt;
 </code></pre>
-<p>module F = (A: ASig, B: BSig) =&gt; {};</pre>
-</td>
-</tr></p>
+</pre>
+        </td>
+      </tr>
 <pre><code class="hljs">  &lt;tr&gt;
     &lt;td&gt;
       &lt;pre&gt;
 </code></pre>
-<p>module Res = F(A)(B)</pre>
-</td></p>
+</pre>
+        </td>
 <pre><code class="hljs">    &lt;td&gt;
       &lt;pre&gt;
 </code></pre>
-<p>module Res = F(A, B);</pre>
-</td>
-</tr>
-</table></p>
+</pre>
+        </td>
+      </tr>
+    </table>
 <pre><code class="hljs">&lt;h2&gt;
   各种改进
 &lt;/h2&gt;
@@ -1061,21 +922,15 @@ functor (B: BSig) -&gt; struct end</pre>
     &lt;td&gt;
       &lt;pre&gt;
 </code></pre>
-<p>let myFuncs = {
-myFun = (fun x -&gt; x + 1);
-your = (fun a b -&gt; a + b);
-}</pre>
-</td></p>
+</pre>
+        </td>
 <pre><code class="hljs">    &lt;td&gt;
       &lt;pre&gt;
 </code></pre>
-<p>let myFuncs = {
-myFun: (x) =&gt; x + 1,
-your: (a, b) =&gt; a + b
-};</pre>
-</td>
-</tr>
-</table></p>
+</pre>
+        </td>
+      </tr>
+    </table>
 <pre><code class="hljs">&lt;h3&gt;
   Lambda 作为匹配结果不再需要额外的括号
 &lt;/h3&gt;
@@ -1098,26 +953,17 @@ your: (a, b) =&gt; a + b
   &lt;tr&gt;
     &lt;td&gt;
       &lt;pre&gt;
-</code></pre>
-<p>let x = match prnt with
-| None -&gt; fun a -&gt; blah
-(* Extra () required ! *)
-| Some &quot;_&quot; -&gt; (fun a -&gt; ())
-| Some &quot;ml&quot; -&gt; blah
-</pre>
-</td></p>
-<pre><code class="hljs">    &lt;td&gt;
+
+  &lt;/pre&gt;
+    &lt;/td&gt;
+    
+    &lt;td&gt;
       &lt;pre&gt;
 </code></pre>
-<p>let x =
-switch (prnt) {
-| None =&gt; (a) =&gt; blah
-| Some(&quot;_&quot;) =&gt; (a) =&gt; ()
-| Some(&quot;ml&quot;) =&gt; blah
-};</pre>
-</td>
-</tr>
-</table></p>
+</pre>
+        </td>
+      </tr>
+    </table>
 <pre><code class="hljs">&lt;h3&gt;
   元组中的 lambda 和类型注释不再需要额外的括号
 &lt;/h3&gt;
@@ -1165,43 +1011,22 @@ switch (prnt) {
 &lt;p&gt;
   Reason中, &lt;code&gt; as &lt;/code&gt; 的优先级高于 &lt;code&gt; | &lt;/code&gt;。这允许在模式匹配中为整个行创建 &lt;code&gt; as &lt;/code&gt; 别名。
 &lt;/p&gt;
+</code></pre>
+<table>
+  <thead><tr> <th><p>OCaml</p></th><th><p>Reason</p></th></tr></thead>
+  <tr>
+    <td>
+      <pre>
+<pre><code class="hljs">  &lt;/pre&gt;
+&lt;/td&gt;
+&lt;td&gt;
+  &lt;pre&gt;
 
-&lt;table&gt;
-  &lt;tr&gt;
-    &lt;th&gt;
-      &lt;p&gt;
-        OCaml
-      &lt;/p&gt;
-    &lt;/th&gt;
-    
-    &lt;th&gt;
-      &lt;p&gt;
-        Reason
-      &lt;/p&gt;
-    &lt;/th&gt;
-  &lt;/tr&gt;
-  
-  &lt;tr&gt;
-    &lt;td&gt;
-      &lt;pre&gt;
+  &lt;/pre&gt;
+&lt;/td&gt;
 </code></pre>
-<p>let ppp = match MyThing 20 with
-| (MyThing x as ppp)
-| (YourThing x as ppp) -&gt; ppp;
-</pre>
-</td></p>
-<pre><code class="hljs">    &lt;td&gt;
-      &lt;pre&gt;
-</code></pre>
-<p>let ppp =
-switch (MyThing(20)) {
-| MyThing(x) as ppp
-| YourThing(x) as ppp =&gt; ppp
-};
-</pre>
-</td>
-</tr>
-</table></p>
+  </tr>
+</table>
 <pre><code class="hljs">&lt;h3&gt;
   可变记录字段更新
 &lt;/h3&gt;
