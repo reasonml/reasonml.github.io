@@ -93,7 +93,7 @@
       '#merlin': 'docs/en/extra-goodies.html#merlin',
       '#repl': 'docs/en/extra-goodies.html#repl',
       '#rebench': 'docs/en/extra-goodies.html#re-bench',
-      '#ocamlc-ocamlopt-ocamlrun-rebuild': 'docs/en/extra-goodies.html#ocamlc-ocamlopt-ocamlrun-rebuild',
+      '#ocamlc-ocamlopt-ocamlrun-rebuild': 'docs/en/extra-goodies.html#ocamlc-ocamlopt-ocamlrun',
       default: 'docs/en/global-installation.html',
     },
     'guide/language/overview': {
@@ -321,7 +321,7 @@
       default: 'docs/en/quickstart-ocaml.html',
     },
     'guide/native/convert-from-ocaml': {
-      '#ocamlbuild---rebuild': 'docs/en/convert-from-ocaml.html#ocamlbuild-rebuild',
+      '#ocamlbuild---rebuild': 'docs/en/convert-from-ocaml.html#ocamlbuild',
       '#makefile': 'docs/en/convert-from-ocaml.html#makefile',
       '#constructor-syntax-fix': 'docs/en/convert-from-ocaml.html#constructor-syntax-fix',
       default: 'docs/en/convert-from-ocaml.html',
