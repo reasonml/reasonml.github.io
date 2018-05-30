@@ -46,13 +46,13 @@ switch (possiblyNullValue2) {
 
 <span class="hljs-keyword">let</span> obj1 = payload(~name=<span class="hljs-string">"John"</span>, ~age=<span class="hljs-number">30</span>);
 
-<span class="hljs-comment">/* Compiles to a JS object with the above fields */</span>
+<span class="hljs-comment">/* 編譯成 JS 物件，含有上述欄位 */</span>
 </code></pre>
-<p>Note that the above isn't a record; this is a <a href="https://bucklescript.github.io/docs/en/object.html#record-mode">special BuckleScript feature</a>.</p>
-<h2><a class="anchor" aria-hidden="true" name="modeling-a-js-module-with-default-export"></a><a href="#modeling-a-js-module-with-default-export" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Modeling a JS Module with Default Export</h2>
-<p>See <a href="https://bucklescript.github.io/docs/en/import-export.html#import-a-default-value">here</a>.</p>
-<h2><a class="anchor" aria-hidden="true" name="checking-for-js-nullable-types-using-the-option-type"></a><a href="#checking-for-js-nullable-types-using-the-option-type" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Checking for JS nullable types using the <code>option</code> type</h2>
-<p>For a function whose argument is passed a JavaScript value that's potentially <code>null</code> or <code>undefined</code>, it's idiomatic to convert it to a Reason <code>option</code>. The conversion is done through the helper functions in Bucklescript's <a href="http://bucklescript.github.io/bucklescript/api/Js.html#TYPEnullable"><code>Js.Nullable</code></a> module. In this case, <code>toOption</code>:</p>
+<p>注意上述並不是 record，這是個<a href="https://bucklescript.github.io/docs/en/object.html#record-mode">特別的 BuckleScript 功能</a>。</p>
+<h2><a class="anchor" aria-hidden="true" name="js-default"></a><a href="#js-default" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>綁定到 JS 模組的 Default 輸出</h2>
+<p>請見<a href="https://bucklescript.github.io/docs/en/import-export.html#import-a-default-value">這裡</a>.</p>
+<h2><a class="anchor" aria-hidden="true" name="option-js-nullable"></a><a href="#option-js-nullable" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>使用 <code>option</code> 型別檢查 JS nullable 型別</h2>
+<p>當函式的某些參數帶入的 JavaScript 值可能是 <code>null</code> 或者 <code>undefined</code> 時，Reason 語言習慣將它轉換成 <code>option</code>。 透過 BuckleScript 的 <a href="http://bucklescript.github.io/bucklescript/api/Js.html#TYPEnullable"><code>Js.Nullable</code></a> 模組輔助函式進行轉換。 此範例，<code>toOption</code>：</p>
 <pre><code class="hljs css reason"><span class="hljs-keyword">let</span> greetByName = (possiblyNullName) =&gt; {
   <span class="hljs-keyword">let</span> optionName = Js.Nullable.toOption(possiblyNullName);
   switch (optionName) {
@@ -61,7 +61,7 @@ switch (possiblyNullValue2) {
   }
 };
 </code></pre>
-<p>This check compiles to <code>possiblyNullName == null</code> in JS, so checks for the presence of <code>null</code> or <code>undefined</code>.</p>
+<p>這在 JS 將編譯成 <code>possiblyNullName == null</code>，用來檢查 <code>null</code> 或 <code>undefined</code> 是否存在。</p>
 </span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="comparison-to-ocaml.html">← 與 OCaml 比較</a><a class="docs-next button" href="project-structure.html">專案結構 →</a></div></div></div></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.js"></script><script>window.foo = new Pjax({
           areas: [
             // try to use the first query.
