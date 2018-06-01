@@ -123,7 +123,8 @@ const siteConfig = {
   editUrl: "https://github.com/reasonml/reasonml.github.io/tree/source/docs/",
   translationRecruitingLink: "https://crowdin.com/project/reason",
   baseUrl: "/" /* base url for your project */,
-  projectName: "",
+  organizationName: "reasonml",
+  projectName: "reasonml.github.io",
   wrapPagesHTML: true,
   headerLinks: [
     // { doc: "installation", label: "Docs" },
