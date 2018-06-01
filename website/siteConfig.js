@@ -140,6 +140,8 @@ const siteConfig = {
   ],
   users,
   examples,
+  onPageNav: 'separate',
+  scripts: ['/js/pjax-api.min.js'],
   /* path to images for header/footer */
   headerIcon: "img/dummy.svg",
   footerIcon: "img/icon_50.png",

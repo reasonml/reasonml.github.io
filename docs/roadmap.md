@@ -1,6 +1,5 @@
 ---
 title: Roadmap & Contribution
-order: roadmap
 ---
 
 ## Reason Team TODOs
