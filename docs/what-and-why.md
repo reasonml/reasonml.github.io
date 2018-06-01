@@ -48,7 +48,7 @@ Make sure you talk to us in [Discord](https://discord.gg/reasonml) first, to cle
 
 - [OCaml](http://ocaml.org). Reason's just a syntax and toolchain layer on top of OCaml. The OCaml<->Reason interop should be seamless since we share the same abstract syntax tree. BuckleScript works fine in OCaml, naturally. [Js_of_ocaml](http://ocsigen.org/js_of_ocaml/) too.
 - [Rust](http://rust-lang.org). Close cousin of ours! Not garbage collected, focused on speed & safety.
-- [Elm](http://elm-lang.org). A cousin of ours! Make clean, fun webapps.
+- [Elm](http://elm-lang.org). A cousin of ours! Make clean, fun web apps.
 - [PureScript](http://www.purescript.org). Inspired by Haskell, compiled to the web.
 - [Fable](http://fable.io/). Based on F#, which is closely related to OCaml.
 - [ClojureScript](https://clojurescript.org). Nothing in common with us on the surface, but prioritizes simplicity & great interop too.
