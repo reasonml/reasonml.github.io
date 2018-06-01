@@ -26,7 +26,6 @@ Button.defaultProps = {
   target: "_self"
 };
 const pre = "```";
-const code = "`";
 
 // fake, static, responsive refmt, lol. See reason.css homeCodeSnippet logic
 const codeExampleSmallScreen = `${pre}reason
@@ -145,7 +144,7 @@ class Index extends React.Component {
       <div>
         <HomeSplash language={language} />
         <div className="mainContainer">
-          <Container className="homeThreePoints">
+          <Container>
             <GridBlock
               align="center"
               contents={[
