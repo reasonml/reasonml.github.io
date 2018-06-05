@@ -37,29 +37,36 @@ cd website && yarn
 
 For modifying the actual try playground source code, run `yarn bundle-try-playground:dev` to start a watcher. Once you're done, run `yarn bundle-try-playground:prod` once.
 
-If you're hardcore and want to build the actual `bsReasonReact.js`, `refmt.js`, `stdlibBundle.js`, `reasonReactBundle.js` or `jsoo_reactjs_jsx_ppx_v2.js`, then run the following
+## Building with custom BuckleScript/etc
 
-- `cd website && yarn`
-- `yarn prepare`
-- `node setupSomeArtifacts.js`
+To build the actual `bsReasonReact.js`, `refmt.js`, `stdlibBundle.js`, `reasonReactBundle.js` or `jsoo_reactjs_jsx_ppx_v2.js`:
 
-This only needs to be run once (per bs-platform/reason-react update). This step _will_ break the first time you do it, from some BS syncing stuff. Go into your cloned `bucklescript` project and go in `jscomp` and do the following:
+You'll need to have this repository and the [BuckleScript](https://github.com/BuckleScript/bucklescript) repository cloned. These will likely be next to each other in the directory structure.
 
-- Modify `repl.js`'s occurrences of `js_of_ocaml` to an absolute path that points to it. You can get a `js_of_ocaml` binary from another opam switch that's not `4.02.3+buckle-master`:
-  ```sh
-  opam switch 4.02.3
-  eval `opam config env`
-  opam install js_of_ocaml.3.0
-  which js_of_ocaml # use this absolute path for the task above
-  # switch back now
-  opam switch 4.02.3+buckle-master
-  eval `opam config env`
-  ```
-- Back to `repl.js`, change the one occurrences of `amdjs` to `js`
-- Run:
-  ```sh
-  BS_PLAYGROUND=path/to/your/reasonml.github.io/website/playground/bs/ node repl.js
-  npm install -g ..
-  ```
+1. Inside the BuckleScript repository, follow the [Setup](https://github.com/BuckleScript/bucklescript/blob/master/CONTRIBUTING.md#setup) guide.
+
+2. Navigate to the `jscomp` directory in the BuckleScript repository.
+
+3. Install or switch to `js_of_ocaml` 3.0 using:
+
+```sh
+opam switch 4.02.3
+eval `opam config env`
+opam install js_of_ocaml.3.0
+which js_of_ocaml # use this absolute path for the task above or symlink this into your $PATH, maybe /usr/local/bin or something
+# switch back now
+opam switch 4.02.3+buckle-master
+eval `opam config env`
+```
+
+4. Inside `jscomp`, either modify `repl.js`'s occurrences of `js_of_ocaml` to an absolute path that points to it or symlink `js_of_ocaml` into your $PATH.
+
+5. Run `BS_PLAYGROUND=../../reasonml.github.io/website/playground/bs/ node repl.js`
+
+6. Inside the `reasonml.github.io` repository, run `cd website && yarn`
+
+7. Then run, `yarn prepare` in the same place.
+
+8. Finally, run `node setupSomeArtifacts.js`
 
 If this command fails, ping @chenglou in Discord.
