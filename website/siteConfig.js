@@ -89,6 +89,11 @@ const users = [
     image: "img/logos/mobilunity.svg",
     infoLink: "https://mobilunity.com",
   },
+  {
+    caption: "Appier",
+    image: "img/logos/appier.svg",
+    infoLink: "https://appier.com",
+  },
 ];
 
 const examples = [
