@@ -17,7 +17,7 @@ Reason supports the JSX syntax, with some slight differences compared to the one
 becomes
 
 ```reason
-([@JSX] MyComponent.make(~foo=bar, ~children=[], ()));
+([@JSX] MyComponent.createElement(~foo=bar, ~children=[], ()));
 ```
 
 ## Uncapitalized Tag
