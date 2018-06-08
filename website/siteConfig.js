@@ -269,7 +269,10 @@ const siteConfig = {
   },
   algolia: {
     apiKey: "966d1e412f67114a07dc0afe44b19b53",
-    indexName: "reason"
+    indexName: "reason",
+    algoliaOptions: {
+      facetFilters: ["lang:LANGUAGE"] 
+    }
   },
   disableHeaderTitle: true,
 };
