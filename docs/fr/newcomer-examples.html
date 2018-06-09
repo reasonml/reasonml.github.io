@@ -46,13 +46,13 @@ switch (possiblyNullValue2) {
 
 <span class="hljs-keyword">let</span> obj1 = payload(~name=<span class="hljs-string">"John"</span>, ~age=<span class="hljs-number">30</span>);
 
-<span class="hljs-comment">/* Compiles to a JS object with the above fields */</span>
+<span class="hljs-comment">/* Compile en un object JS avec les champs ci-dessus */</span>
 </code></pre>
-<p>Note that the above isn't a record; this is a <a href="https://bucklescript.github.io/docs/en/object.html#record-mode">special BuckleScript feature</a>.</p>
-<h2><a class="anchor" aria-hidden="true" id="modeling-a-js-module-with-default-export"></a><a href="#modeling-a-js-module-with-default-export" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Modeling a JS Module with Default Export</h2>
-<p>See <a href="https://bucklescript.github.io/docs/en/import-export.html#import-a-default-value">here</a>.</p>
-<h2><a class="anchor" aria-hidden="true" id="checking-for-js-nullable-types-using-the-option-type"></a><a href="#checking-for-js-nullable-types-using-the-option-type" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Checking for JS nullable types using the <code>option</code> type</h2>
-<p>For a function whose argument is passed a JavaScript value that's potentially <code>null</code> or <code>undefined</code>, it's idiomatic to convert it to a Reason <code>option</code>. The conversion is done through the helper functions in Bucklescript's <a href="http://bucklescript.github.io/bucklescript/api/Js.html#TYPEnullable"><code>Js.Nullable</code></a> module. In this case, <code>toOption</code>:</p>
+<p>Notez que le résultat ci-dessus n'est pas un record; c'est une <a href="https://bucklescript.github.io/docs/en/object.html#record-mode">fonctionnalité BuckleScript spéciale</a>.</p>
+<h2><a class="anchor" aria-hidden="true" id="modeliser-un-module-js-avec-un-export-par-defaut"></a><a href="#modeliser-un-module-js-avec-un-export-par-defaut" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Modéliser un module JS avec un export par défaut</h2>
+<p>Voir <a href="https://bucklescript.github.io/docs/en/import-export.html#import-a-default-value">ici</a>.</p>
+<h2><a class="anchor" aria-hidden="true" id="verifier-des-types-js-nullables-en-utilisant-le-type-option"></a><a href="#verifier-des-types-js-nullables-en-utilisant-le-type-option" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Vérifier des types JS &quot;nullables&quot; en utilisant le type <code>option</code></h2>
+<p>Pour une fonction qui reçoit une valeur JavaScript qui est potentiellement <code>null</code> ou <code>undefined</code>, il est idiomatique de le convertir en un <code>option</code> Reason. La conversion est faîte via une fonction helper dans le module <a href="http://bucklescript.github.io/bucklescript/api/Js.html#TYPEnullable"><code>Js.Nullable</code></a> de Bucklescript. Dans ce cas, <code>toOption</code>:</p>
 <pre><code class="hljs css reason"><span class="hljs-keyword">let</span> greetByName = (possiblyNullName) =&gt; {
   <span class="hljs-keyword">let</span> optionName = Js.Nullable.toOption(possiblyNullName);
   switch (optionName) {
@@ -61,8 +61,8 @@ switch (possiblyNullValue2) {
   }
 };
 </code></pre>
-<p>This check compiles to <code>possiblyNullName == null</code> in JS, so checks for the presence of <code>null</code> or <code>undefined</code>.</p>
-</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="comparison-to-ocaml.html">← Comparaison avec OCaml</a><a class="docs-next button" href="project-structure.html">Structure de projet →</a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#utilisation-du-type-option">Utilisation du type <code>option</code></a></li><li><a href="#creation-d-un-type-parametre">Création d’un type paramétré</a></li><li><a href="#creer-un-objet-javascript">Créer un objet JavaScript</a></li><li><a href="#modeling-a-js-module-with-default-export">Modeling a JS Module with Default Export</a></li><li><a href="#checking-for-js-nullable-types-using-the-option-type">Checking for JS nullable types using the <code>option</code> type</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.min.js"></script><script>window.foo = new Pjax({
+<p>Cette vérification compile en <code>possiblyNullName == null</code> en JS, et vérifie donc la présence de <code>null</code> ou <code>undefined</code>.</p>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="comparison-to-ocaml.html">← Comparaison avec OCaml</a><a class="docs-next button" href="project-structure.html">Structure de projet →</a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#utilisation-du-type-option">Utilisation du type <code>option</code></a></li><li><a href="#creation-d-un-type-parametre">Création d’un type paramétré</a></li><li><a href="#creer-un-objet-javascript">Créer un objet JavaScript</a></li><li><a href="#modeliser-un-module-js-avec-un-export-par-defaut">Modéliser un module JS avec un export par défaut</a></li><li><a href="#verifier-des-types-js-nullables-en-utilisant-le-type-option">Vérifier des types JS &quot;nullables&quot; en utilisant le type <code>option</code></a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.min.js"></script><script>window.foo = new Pjax({
           areas: [
             // try to use the first query.
             '.mainContainer, .docsNavContainer .toc .navWrapper, .onPageNav',
@@ -84,6 +84,7 @@ switch (possiblyNullValue2) {
                 
                 apiKey: '966d1e412f67114a07dc0afe44b19b53',
                 indexName: 'reason',
-                inputSelector: '#search_input_react'
+                inputSelector: '#search_input_react',
+                algoliaOptions: {"facetFilters":["lang:fr"]}
               });
             </script></body></html>
