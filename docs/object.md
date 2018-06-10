@@ -32,6 +32,25 @@ Two dots, also called an elision, indicate that this is an "open" object type, a
 
 ### Creation
 
+## Simple
+
+```reason
+type tesla = {
+  .
+  color: string,
+};
+
+let obj: tesla = {
+  pub color = "Red"
+};
+
+Js.log(obj#color) /* "Red" */
+```
+
+Here we have a simple object with only a color property. When we create the object we set the color property to be public and assign it the value `"Red"`. Because `color` is a public property we can access it using object notation and log it to the console. 
+
+## Advanced
+
 ```reason
 type tesla = {.
   drive: int => int
