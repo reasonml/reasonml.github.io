@@ -41,13 +41,14 @@ type tesla = {
 };
 
 let obj: tesla = {
-  pub color = "Red"
+  val red = "Red";
+  pub color = red;
 };
 
 Js.log(obj#color) /* "Red" */
 ```
 
-Here we have a simple object with only a color property. When we create the object we set the color property to be public and assign it the value `"Red"`. Because `color` is a public property we can access it using object notation and log it to the console. 
+Here we have a simple object with the method `color` and the property `red`. This method takes no arguments and returns the private proptery `red`. Because the method `color` is a public method we can access it using object notation. Remember, objects only export methods and all properties are private.
 
 ## Advanced
 
