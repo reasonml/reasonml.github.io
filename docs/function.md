@@ -316,8 +316,8 @@ type foo = (int, int) => int;
 /* labeled */
 type foo = (~first: int, ~second: int) => int;
 
-/* labeled with default value */
-type foo = (~first: int=?, ~second: int=?) => int;
+/* labeled */
+type foo = (~first: int=?, ~second: int=?, unit) => int;
 ```
 
 #### In Interface Files
