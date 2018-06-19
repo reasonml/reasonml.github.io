@@ -7,13 +7,13 @@ npm install -g bs-platform  # provides the BuckleScript compiler
 bsb -init my-first-app -theme basic-reason  # creates project my-first-app/
 cd my-first-app
 npm run build  # Compiles to src/Demo.bs.js using BuckleScript compiler
-node src/Demo.bs.js  # Runs the demo using NodeJS
+node lib/js/src/demo.js  # Runs the demo using NodeJS
 ```
 
 You should see some "hello world" output:
 
 ```console
-> node src/Demo.bs.js
+> node lib/js/src/demo.js
 Hello, BuckleScript and Reason!
 ```
 
