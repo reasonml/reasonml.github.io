@@ -23,7 +23,7 @@ Note: Bundles are currently large (approximately `100MB`), and `npm` will not pr
 ```
 opam update
 eval $(opam config env)
-opam install reason.3.0.4 merlin.2.5.4
+opam install reason.3.2.0 merlin.2.5.4
 ```
 
 ## Troubleshooting
