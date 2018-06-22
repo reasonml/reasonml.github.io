@@ -1,0 +1,1549 @@
+<!DOCTYPE html><html lang="ko"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>OCaml과 비교 · Reason</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta property="og:title" content="OCaml과 비교 · Reason"/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io/index.html"/><meta property="og:description" content="당신이 OCaml을 배웠었거나 OCaml로 쓰여진 튜토리얼을 읽고 있는 초보자라면, 당신을 위한 가이드가 여기 있습니다! 참고로, [reason-tools](https://github.com/reasonml/reason-tools) 는 OCaml과 Reason 문법을 서로 변환할 수 있다는 것을 잊지 마세요."/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/icon_50.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/arduino-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io/blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io/blog/feed.xml" title="Reason Blog RSS Feed"/><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible doc separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/ko"><img class="logo" src="/img/dummy.svg" alt="Reason"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/ko/quickstart-javascript.html" target="_self">문서</a></li><li class=""><a href="/ko/try.html" target="_self">해보기</a></li><li class=""><a href="/api/index.html" target="_self">API</a></li><li class=""><a href="/docs/ko/community.html" target="_self">커뮤니티</a></li><li class=""><a href="/blog" target="_self">블로그</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg"/>한국어</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/ja">日本語</a></li><li><a href="/en">English</a></li><li><a href="/de">Deutsch</a></li><li><a href="/es-ES">Español</a></li><li><a href="/fr">Français</a></li><li><a href="/pt-BR">Português (Brasil)</a></li><li><a href="/ru">Русский</a></li><li><a href="/uk">Українська</a></li><li><a href="/zh-CN">中文</a></li><li><a href="/zh-TW">繁體中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank" rel="noreferrer noopener">번역 돕기</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(){
+          if(languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/facebook/reason" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>추가 사항</span></h2></div><div class="navGroups"><div class="navGroup navGroupActive"><h3>소개</h3><ul><li class="navListItem"><a class="navItem" href="/docs/ko/what-and-why.html">What &amp; Why</a></li></ul></div><div class="navGroup navGroupActive"><h3>에디터 설정</h3><ul><li class="navListItem"><a class="navItem" href="/docs/ko/global-installation.html">전역 설치</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/editor-plugins.html">에디터 플러그인</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/extra-goodies.html">추가적으로 매력적인 것들</a></li></ul></div><div class="navGroup navGroupActive"><h3>언어 기본</h3><ul><li class="navListItem"><a class="navItem" href="/docs/ko/overview.html">개요</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/let-binding.html">Let 바인딩</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/type.html">타입!</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/string-and-char.html">문자열 &amp; 문자</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/boolean.html">부울</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/integer-and-float.html">정수 &amp; 실수</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/tuple.html">튜플</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/record.html">레코드</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/variant.html">Variant!</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/list-and-array.html">리스트 &amp; 배열</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/function.html">함수</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/if-else.html">If-Else</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/more-on-type.html">More on Type</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/destructuring.html">비구조화</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/pattern-matching.html">패턴 매칭!</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/mutation.html">Mutation</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/imperative-loops.html">Imperative Loops</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/jsx.html">JSX</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/external.html">외부 접근</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/exception.html">예외</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/object.html">오브젝트</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/module.html">모듈</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/promise.html">프라미스</a></li></ul></div><div class="navGroup navGroupActive"><h3>JavaScript</h3><ul><li class="navListItem"><a class="navItem" href="/docs/ko/quickstart-javascript.html">빠른 시작</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/interop.html">연동</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/syntax-cheatsheet.html">문법 치트시트</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/libraries.html">라이브러리</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/converting-from-js.html">JS에서 변환</a></li></ul></div><div class="navGroup navGroupActive"><h3>네이티브</h3><ul><li class="navListItem"><a class="navItem" href="/docs/ko/native.html">네이티브</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/quickstart-ocaml.html">빠른 시작</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/convert-from-ocaml.html">OCaml에서 변환</a></li></ul></div><div class="navGroup navGroupActive"><h3>추가 사항</h3><ul><li class="navListItem"><a class="navItem" href="/docs/ko/faq.html">자주 물어보는 질문</a></li><li class="navListItem navListItemActive"><a class="navItem navItemActive" href="/docs/ko/comparison-to-ocaml.html">OCaml과 비교</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/newcomer-examples.html">신입들을 위한 예시</a></li><li class="navListItem"><a class="navItem" href="/docs/ko/project-structure.html">프로젝트 구조</a></li></ul></div></div></section></div><script>
+          var toggler = document.getElementById('navToggler');
+          var nav = document.getElementById('docsNav');
+          toggler.onclick = function() {
+            nav.classList.toggle('docsSliderActive');
+          };
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://crowdin.com/project/reason/ko" target="_blank" rel="noreferrer noopener">Translate</a><h1>OCaml과 비교</h1></header><article><div><span><p>당신이 OCaml을 배웠었거나 OCaml로 쓰여진 튜토리얼을 읽고 있는 초보자라면, 당신을 위한 가이드가 여기 있습니다! 참고로, <a href="https://github.com/reasonml/reason-tools">reason-tools</a> 는 OCaml과 Reason 문법을 서로 변환할 수 있다는 것을 잊지 마세요.</p>
+<h2><a class="anchor" aria-hidden="true" id="주석"></a><a href="#주석" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>주석</h2>
+<table>
+<thead>
+<tr><th>OCaml</th><th>Reason</th></tr>
+</thead>
+<tbody>
+<tr><td><code>(* OCaml (*중첩 주석*) *)</code></td><td><code>/* Reason /*중첩 주석*/ */</code></td></tr>
+</tbody>
+</table>
+<h2><a class="anchor" aria-hidden="true" id="연산자-변경점"></a><a href="#연산자-변경점" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>연산자 변경점</h2>
+<p>Reason은 OCaml의 모든 중위 연산자를 지원하는데, 그 중 두 개는 다르게 표현됩니다. Reason에서 구조적 등위 연산자는 <code>==</code> 로 쓰여지고, 참조(물리적) 등위 연산자는 <code>===</code> 으로 쓰여집니다. In Reason, to achieve the corresponding inequality, simply swap the first character with a <code>!</code> character. (<code>!=</code> for structural inequality, and <code>!==</code> for reference inequality).</p>
+<table>
+<thead>
+<tr><th>Equality</th><th>OCaml</th><th>Reason</th></tr>
+</thead>
+<tbody>
+<tr><td>Structural</td><td><code>x = y</code></td><td><code>x == y</code></td></tr>
+<tr><td>Reference</td><td><code>x == y</code></td><td><code>x === y</code></td></tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr><th>Inequality</th><th>OCaml</th><th>Reason</th></tr>
+</thead>
+<tbody>
+<tr><td>Structural</td><td><code>x &lt;&gt; y</code></td><td><code>x != y</code></td></tr>
+<tr><td>Reference</td><td><code>x != y</code></td><td><code>x !== y</code></td></tr>
+</tbody>
+</table>
+<h2><a class="anchor" aria-hidden="true" id="local-scope"></a><a href="#local-scope" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Local Scope</h2>
+<p>Reason's lexical scoping is exactly the same as OCaml's, but let bindings syntactically resemble &quot;block scope&quot; which is more familiar to many developers. In Reason, they are created with <code>{}</code> braces, which may contain both <code>let</code> bindings and imperative commands, separated by <code>;</code>. All blocks evaluate to the last line and the semicolon on the last line is optional. <code>{}</code> braces are only needed if you have more than one item to chain together via <code>;</code>.</p>
+<table>
+  <tr>
+    <th>
+      <p>
+        OCaml
+      </p>
+    </th>
+<pre><code class="hljs">&lt;th&gt;
+  &lt;p&gt;
+    Reason
+  &lt;/p&gt;
+&lt;/th&gt;
+</code></pre>
+  </tr>
+  <tr>
+    <td>
+      <code>&lt;pre>
+let _ =
+  let msg = "Hello" in
+  print_string msg;
+  let msg2 = "Goodbye" in
+  print_string msg2&lt;/pre></code>
+    </td>
+<pre><code class="hljs">&lt;td&gt;
+  &lt;code&gt;&amp;lt;pre&gt;
+</code></pre>
+<p>{
+let msg = &quot;Hello&quot;;
+print_string(msg);
+let msg2 = &quot;Goodbye&quot;;
+print_string(msg2)
+};&lt;/pre&gt;</code>
+</td></p>
+  </tr>
+</table>
+<p>Reason's <code>{}</code> syntax removes many commonly reported pain points in OCaml's syntax:</p>
+<ul>
+<li>Double semicolons are removed entirely.</li>
+<li><code>begin</code>/<code>end</code> is removed entirely.</li>
+<li>Infamous imperative parsing <a href="https://github.com/ocaml/ocaml/pull/278">issues</a> are gone.</li>
+<li>Module bodies and local scope are unified.</li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="local-scope-vs-module-body"></a><a href="#local-scope-vs-module-body" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Local Scope Vs. Module Body</h2>
+<p>In Reason, everything that can go between the <code>{}</code> in <a href="#local-scope">Local Scopes</a> and in module bodies. You can usually even cut/paste code between the two contexts. In OCaml, the syntaxes for the two contexts are very different. Local scope requires trailing <code>in</code>, but module bodies do not and some imperative statements must be assigned to <code>_</code> or <code>()</code>, or else use double <code>;;</code>.</p>
+<table>
+  <tr>
+    <th>
+      <p>
+        OCaml Module Body
+      </p>
+    </th>
+<pre><code class="hljs">&lt;th&gt;
+  &lt;p&gt;
+    Reason Module Body
+  &lt;/p&gt;
+&lt;/th&gt;
+</code></pre>
+  </tr>
+  <tr>
+    <td>
+      <code>&lt;pre>
+let ten = 10
+let () = imperativeFunc ten ten
+let () = imperativeFunc 0 0&lt;/pre></code>
+    </td>
+<pre><code class="hljs">&lt;td&gt;
+  &lt;code&gt;&amp;lt;pre&gt;
+</code></pre>
+<p>let ten = 10;
+imperativeFunc(ten, ten);
+imperativeFunc(0, 0);&lt;/pre&gt;</code>
+</td></p>
+  </tr>
+  <tr>
+    <td>
+      <code>&lt;pre>
+let ten = 10;;
+imperativeFunc ten ten;;
+imperativeFunc 0 0;;&lt;/pre></code>
+    </td>
+<pre><code class="hljs">&lt;td&gt;
+  위와 같음
+&lt;/td&gt;
+</code></pre>
+  </tr>
+  <tr>
+    <th>
+      <p>
+        OCaml Local Scope
+      </p>
+    </th>
+<pre><code class="hljs">&lt;th&gt;
+  &lt;p&gt;
+    Reason Local Scope
+  &lt;/p&gt;
+&lt;/th&gt;
+</code></pre>
+  </tr>
+  <tr>
+    <td>
+      <code>&lt;pre>
+let ten = 10 in
+let _ = imperativeFunc ten ten in
+imperativeFunc 0 0&lt;/pre></code>
+    </td>
+<pre><code class="hljs">&lt;td&gt;
+  위와 같음
+&lt;/td&gt;
+</code></pre>
+  </tr>
+  <tr>
+    <td>
+      <code>&lt;pre>
+let ten = 10 in begin
+  imperativeFunc ten ten;
+  imperativeFunc 0 0
+end&lt;/pre></code>
+    </td>
+<pre><code class="hljs">&lt;td&gt;
+  위와 같음
+&lt;/td&gt;
+</code></pre>
+  </tr>
+  <tr>
+    <td>
+      <code>&lt;pre>
+let ten = 10 in (
+  imperativeFunc ten ten;
+  imperativeFunc 0 0
+)&lt;/pre></code>
+    </td>
+<pre><code class="hljs">&lt;td&gt;
+  위와 같음
+&lt;/td&gt;
+</code></pre>
+  </tr>
+</table>
+<h2><a class="anchor" aria-hidden="true" id="tuple-and-record"></a><a href="#tuple-and-record" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Tuple and Record</h2>
+<p>In Reason, tuples always require parentheses.</p>
+<table>
+<thead>
+<tr><th>OCaml</th><th>Reason</th></tr>
+</thead>
+<tbody>
+<tr><td><code>let tup = 4, 5</code></td><td><code>let tup = (4, 5);</code></td></tr>
+<tr><td><code>let tup = ((1: int), (2:int))</code></td><td><code>let tup = (1: int, 2:int);</code></td></tr>
+<tr><td><code>fun ((a: int), (b: int)) -&gt; a</code></td><td><code>((a: int, b: int)) =&gt; a;</code></td></tr>
+</tbody>
+</table>
+<p>In Reason, record values resemble JavaScript, using <code>:</code> instead of <code>=</code>.</p>
+<table>
+  <tr>
+    <th>
+      <p>
+        OCaml
+      </p>
+    </th>
+<pre><code class="hljs">&lt;th&gt;
+  &lt;p&gt;
+    Reason
+  &lt;/p&gt;
+&lt;/th&gt;
+</code></pre>
+  </tr>
+  <tr>
+    <td>
+      <code>&lt;pre>
+let myRec = {x = 0; y = 10}&lt;/pre></code>
+    </td>
+<pre><code class="hljs">&lt;td&gt;
+  &lt;code&gt;&amp;lt;pre&gt;
+</code></pre>
+<p>let myRec = {x: 0, y: 10};&lt;/pre&gt;</code>
+</td></p>
+  </tr>
+  <tr>
+    <td>
+      <code>&lt;pre>
+let myFuncs = {
+  myFun = (fun x -> x + 1);
+  your = (fun a b -> a + b);
+}&lt;/pre></code>
+    </td>
+<pre><code class="hljs">&lt;td&gt;
+  &lt;code&gt;&amp;lt;pre&gt;
+</code></pre>
+<p>let myFuncs = {
+myFun: (x) =&gt; x + 1,
+your: (a, b) =&gt; a + b
+};&lt;/pre&gt;</code>
+</td></table></p>
+<pre><code class="hljs">&lt;h2&gt;
+  리스트
+&lt;/h2&gt;
+
+&lt;table&gt;
+  &lt;tr&gt;
+    &lt;th&gt;
+      OCaml
+    &lt;/th&gt;
+    
+    &lt;th&gt;
+      Reason
+    &lt;/th&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;code&gt;let list = [1; 2; 3]&lt;/code&gt;
+    &lt;/td&gt;
+    
+    &lt;td&gt;
+      &lt;code&gt;let list = [1, 2, 3]&lt;/code&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;code&gt;let list = hd :: tl&lt;/code&gt;
+    &lt;/td&gt;
+    
+    &lt;td&gt;
+      &lt;code&gt;let list = [hd, ...tl];&lt;/code&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;h2&gt;
+  타입 정의
+&lt;/h2&gt;
+
+&lt;table&gt;
+  &lt;tr&gt;
+    &lt;th&gt;
+      OCaml 튜플
+    &lt;/th&gt;
+    
+    &lt;th&gt;
+      Reason 튜플
+    &lt;/th&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;code&gt;type tuple = int * int&lt;/code&gt;
+    &lt;/td&gt;
+    
+    &lt;td&gt;
+      &lt;code&gt;type tuple = (int, int);&lt;/code&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;code&gt;let tup: tuple = (10, 30)&lt;/code&gt;
+    &lt;/td&gt;
+    
+    &lt;td&gt;
+      &lt;code&gt;let tup: tuple = (10, 30);&lt;/code&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;table&gt;
+  &lt;tr&gt;
+    &lt;th&gt;
+      OCaml Record
+    &lt;/th&gt;
+    
+    &lt;th&gt;
+      Reason Record
+    &lt;/th&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;code&gt;type r = {x: int; y: int}&lt;/code&gt;
+    &lt;/td&gt;
+    
+    &lt;td&gt;
+      &lt;code&gt;type r = {x: int, y: int};&lt;/code&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;code&gt;let myRec: r = {x = 0; y = 10}&lt;/code&gt;
+    &lt;/td&gt;
+    
+    &lt;td&gt;
+      &lt;code&gt;let myRec: r = {x: 0, y: 10};&lt;/code&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;table&gt;
+  &lt;tr&gt;
+    &lt;th&gt;
+      OCaml 함수
+    &lt;/th&gt;
+    
+    &lt;th&gt;
+      Reason 함수
+    &lt;/th&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;code&gt;type func = int -&amp;gt; int&lt;/code&gt;
+    &lt;/td&gt;
+    
+    &lt;td&gt;
+      &lt;code&gt;type func = int =&amp;gt; int;&lt;/code&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;code&gt;let x: func = fun a -&amp;gt; a + 1&lt;/code&gt;
+    &lt;/td&gt;
+    
+    &lt;td&gt;
+      &lt;code&gt;let x: func = (a) =&amp;gt; a + 1;&lt;/code&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;h2&gt;
+  함수
+&lt;/h2&gt;
+
+&lt;table&gt;
+  &lt;tr&gt;
+    &lt;th&gt;
+      OCaml
+    &lt;/th&gt;
+    
+    &lt;th&gt;
+      Reason
+    &lt;/th&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;code&gt;let x a b = e&lt;/code&gt;
+    &lt;/td&gt;
+    
+    &lt;td&gt;
+      &lt;code&gt;let x = (a, b) =&amp;gt; e&lt;/code&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;code&gt;let x = fun a b -&amp;gt; e&lt;/code&gt;
+    &lt;/td&gt;
+    
+    &lt;td&gt;
+      &lt;code&gt;let x = (a, b) =&amp;gt; e&lt;/code&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;code&gt;let x = fun a -&amp;gt; fun b -&amp;gt; e&lt;/code&gt;
+    &lt;/td&gt;
+    
+    &lt;td&gt;
+      &lt;code&gt;let x = (a, b) =&amp;gt; e&lt;/code&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;h3&gt;
+  Single argument match functions
+&lt;/h3&gt;
+
+&lt;p&gt;
+  OCaml has a function definition (&lt;code&gt;function |&lt;/code&gt;) which is considered to be equivalent of &lt;code&gt;function a -&amp;gt; match a with ...&lt;/code&gt;. Reason has the same, but the syntax makes it clear how it is actually an extension of a single argument function. The single case match is a natural extension of the simple lambda, and the multicase lambda is a natural extension of the single case lambda.
+&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;tr&gt;
+    &lt;th&gt;
+      &lt;p&gt;
+        형식
+      &lt;/p&gt;
+    &lt;/th&gt;
+    
+    &lt;th&gt;
+      &lt;p&gt;
+        OCaml
+      &lt;/p&gt;
+    &lt;/th&gt;
+    
+    &lt;th&gt;
+      &lt;p&gt;
+        Reason
+      &lt;/p&gt;
+    &lt;/th&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td&gt;
+      lambda
+    &lt;/td&gt;
+    
+    &lt;td&gt;
+      &lt;code&gt;&amp;lt;pre&gt;
+</code></pre>
+<p>fun pat -&gt; e&lt;/pre&gt;</code>
+</td></p>
+<pre><code class="hljs">    &lt;td&gt;
+      &lt;code&gt;&amp;lt;pre&gt;
+</code></pre>
+<p>fun pat =&gt; e&lt;/pre&gt;</code>
+</td>
+</tr></p>
+<pre><code class="hljs">  &lt;tr&gt;
+    &lt;td&gt;
+      one match case
+    &lt;/td&gt;
+    
+    &lt;td&gt;
+      &lt;code&gt;&amp;lt;pre&gt;
+</code></pre>
+<p>function | pat -&gt; e&lt;/pre&gt;</code>
+</td></p>
+<pre><code class="hljs">    &lt;td&gt;
+      &lt;code&gt;&amp;lt;pre&gt;
+</code></pre>
+<p>fun | pat =&gt; e&lt;/pre&gt;</code>
+</td>
+</tr></p>
+<pre><code class="hljs">  &lt;tr&gt;
+    &lt;td&gt;
+      many cases
+    &lt;/td&gt;
+    
+    &lt;td&gt;
+      &lt;code&gt;&amp;lt;pre&gt;
+</code></pre>
+<p>function | pat -&gt; e
+| pat2 -&gt; e&lt;/pre&gt;</code>
+</td></p>
+<pre><code class="hljs">    &lt;td&gt;
+      &lt;code&gt;&amp;lt;pre&gt;
+</code></pre>
+<p>fun | pat =&gt; e
+| pat2 =&gt; e&lt;/pre&gt;</code>
+</td>
+</tr>
+</table></p>
+<pre><code class="hljs">&lt;h3&gt;
+  Annotating Arguments
+&lt;/h3&gt;
+
+&lt;p&gt;
+  In both Reason and OCaml, arguments are annotated with types by (as with everything else), wrapping them in parenthesis after appending &lt;code&gt;:typeAnnotation&lt;/code&gt;.
+&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;reason&quot;&gt;(arg: argType) =&amp;gt; returnValue;
+</code></pre>
+<p></code></pre></p>
+<pre><code class="hljs">&lt;pre&gt;&lt;code class=&quot;reason&quot;&gt;(arg: argType) =&amp;gt; (arg2: arg2Type) =&amp;gt; returnValue;
+</code></pre>
+<p></code></pre></p>
+<pre><code class="hljs">&lt;pre&gt;&lt;code class=&quot;reason&quot;&gt;(arg: argType, arg2: arg2Type) =&amp;gt; returnValue;
+</code></pre>
+<p></code></pre></p>
+<pre><code class="hljs">&lt;p&gt;
+  Both Reason and OCaml allow annotating the return type, when using the &quot;super sugared let binding&quot; form.
+&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;ocaml&quot;&gt;(* OCaml *)
+</code></pre>
+<p>let myFunc (a:int) (b:int) :int * int = (a, b)
+let myFunc (a:int) (b:int) :int list = [1]
+let myFunc (a:int) (b:int) :int -&gt; int = fun x -&gt; x + a + b
+</code></pre></p>
+<pre><code class="hljs">&lt;pre&gt;&lt;code class=&quot;reason&quot;&gt;/* Reason */
+</code></pre>
+<p>let myFunc = (a: int, b: int) :(int, int) =&gt; (a, b);
+let myFunc = (a: int, b: int) :list(int) =&gt; [1];
+let myFunc = (a: int, b: int): (int =&gt; int) =&gt; (x) =&gt; x + a + b;
+</code></pre></p>
+<pre><code class="hljs">&lt;p&gt;
+  Because we're using &lt;code&gt;=&amp;gt;&lt;/code&gt; for all functions everywhere in Reason, there's one case where we need to add extra parens around a return type that is itself a function type.
+&lt;/p&gt;
+
+&lt;h3&gt;
+  Type Parameters
+&lt;/h3&gt;
+
+&lt;h4&gt;
+  OCaml
+&lt;/h4&gt;
+
+&lt;p&gt;
+  OCaml's type applications (think &quot;generics&quot;), are applied in reverse order.
+&lt;/p&gt;
+
+&lt;p&gt;
+  With OCaml, there are some unintuitive consequences of this.
+&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;ocaml&quot;&gt;let x: int list = [2]
+</code></pre>
+<p>type listOfListOfInts = int list list</p>
+<p>(* 다음과 같이 파싱됨: *)
+type listOfListOfInts = (int list) list
+</code></pre></p>
+<pre><code class="hljs">&lt;p&gt;
+  Things get even more strange when type constructors accept multiple parameters. Multiple arguments require parenthesis and commas to separate type parameters, but those parentheses don't represent tuples. The parentheses/comma form must also be given when constructing type instances such as &lt;code&gt;(int, string) tuple&lt;/code&gt;.
+&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;ocaml&quot;&gt;type ('a, 'b) tuple = 'a * 'b
+</code></pre>
+<p>type listOfTuplesOfStringAndInt = (string, int) tuple list</p>
+<p>(* Which is parsed as: *)
+type listOfTuplesOfStringAndInt = ((string, int) tuple) list</p>
+<p>(* Which allows a list of (tuples of (string and int)) *)
+let tuples: listOfTuplesOfStringAndInt = [(&quot;asdf&quot;, 3)]
+</code></pre></p>
+<pre><code class="hljs">&lt;h4&gt;
+  Reason
+&lt;/h4&gt;
+
+&lt;p&gt;
+  In summary, Reason unifies almost all of the syntax into simple &quot;function application&quot; style meaning that type parameters follow the same comma-separated pattern seen everywhere else in the syntax. This results in fewer syntactic patterns to learn.
+&lt;/p&gt;
+
+&lt;p&gt;
+  For example, you can imagine &lt;code&gt;list&lt;/code&gt; being a &quot;function&quot; for types that accepts a type and returns a new type.
+&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;tr&gt;
+    &lt;th&gt;
+      &lt;p&gt;
+        OCaml
+      &lt;/p&gt;
+    &lt;/th&gt;
+    
+    &lt;th&gt;
+      &lt;p&gt;
+        Reason
+      &lt;/p&gt;
+    &lt;/th&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;code&gt;&amp;lt;pre&gt;
+</code></pre>
+<p>let x: int list = [2]
+type listOfListOfInts = int list list
+type ('a, 'b) tup = ('a * 'b)
+type pairs = (int, int) tup list
+let tuples: pairs = [(2, 3)]&lt;/pre&gt;</code>
+</td></p>
+<pre><code class="hljs">    &lt;td&gt;
+      &lt;code&gt;&amp;lt;pre&gt;
+</code></pre>
+<p>let x: list(int) = [2];
+type listOfListOfInts = list(list(int));
+type tup('a, 'b) = ('a, 'b);
+type pairs = list(tup(int, int));
+let tuples: pairs = [(2, 3)];&lt;/pre&gt;</code>
+</td>
+</tr>
+</table></p>
+<pre><code class="hljs">&lt;h2&gt;
+  Tuples as Type Parameters
+&lt;/h2&gt;
+
+&lt;p&gt;
+  Because OCaml uses parens and commas to represent multiple arguments to type constructors, it's confusing when one of the arguments to a type constructor is itself a tuple. In OCaml, it's difficult to remember the difference between a type constructor accepting multiple arguments and a type constructor accepting a single argument which happens to be a tuple.
+&lt;/p&gt;
+
+&lt;p&gt;
+  The following examples shows the difference between passing &lt;em&gt;two&lt;/em&gt; type parameters to &lt;code&gt;pair&lt;/code&gt;, and a &lt;em&gt;single&lt;/em&gt; type parameter that happens to be a tuple.
+&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;tr&gt;
+    &lt;th&gt;
+      OCaml
+    &lt;/th&gt;
+    
+    &lt;th&gt;
+      Reason
+    &lt;/th&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;code&gt;type intPair = (int, int) pair&lt;/code&gt;
+    &lt;/td&gt;
+    
+    &lt;td&gt;
+      &lt;code&gt;type intPair = pair(int, int)&lt;/code&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;code&gt;type pairList = (int * int) list&lt;/code&gt;
+    &lt;/td&gt;
+    
+    &lt;td&gt;
+      &lt;code&gt;type pairList = list((int, int))&lt;/code&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    In Reason, syntax that represent tuple or tuple types, always looks like tuples.
+  &lt;/li&gt;
+  &lt;li&gt;
+    In Reason, syntax that represent records or record types, always look like records.
+  &lt;/li&gt;
+  &lt;li&gt;
+    Just about everything else uses the syntactic pattern of function application (comma separated arguments).
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;
+  Variants
+&lt;/h2&gt;
+
+&lt;h5&gt;
+  OCaml
+&lt;/h5&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    OCaml already expects constructor argument types to be specified in tuple form, so it's confusing when a single constructor expects a single argument that &lt;em&gt;happens&lt;/em&gt; to be a tuple type.
+  &lt;/li&gt;
+  &lt;li&gt;
+    What's even more confusing is that the constructors don't &lt;em&gt;actually&lt;/em&gt; accept tuples, yet the syntax appear to resemble tuples.
+  &lt;/li&gt;
+  &lt;li&gt;
+    Sometimes the syntax for instantiating a constructor with multiple arguments overlaps the syntax for constructing a variant with a single argument that happens to be a tuple - so it looks &lt;em&gt;exactly&lt;/em&gt; like you &lt;em&gt;are&lt;/em&gt; supplying a tuple when you are not actually supplying a tuple.
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h5&gt;
+  Reason
+&lt;/h5&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    Variant constructor types are expected to be listed as comma separated lists, using parenthesis to group precedence (as with &lt;strong&gt;everything&lt;/strong&gt; else).
+  &lt;/li&gt;
+  &lt;li&gt;
+    Constructing instances of the variant (as you would have guessed) follows function application style (comma separated lists).
+  &lt;/li&gt;
+  &lt;li&gt;
+    Tuples &lt;strong&gt;always&lt;/strong&gt; &lt;em&gt;look&lt;/em&gt; like tuples, and anything that looks like a tuple &lt;em&gt;is&lt;/em&gt; a tuple.
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;table&gt;
+  &lt;tr&gt;
+    &lt;th&gt;
+      &lt;p&gt;
+        OCaml
+      &lt;/p&gt;
+    &lt;/th&gt;
+    
+    &lt;th&gt;
+      &lt;p&gt;
+        Reason
+      &lt;/p&gt;
+    &lt;/th&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;code&gt;&amp;lt;pre&gt;
+</code></pre>
+<p>type myVariant =
+| HasNothing
+| HasSingleInt of int
+| HasSingleTuple of (int * int)
+| HasMultipleInts of int * int
+| HasMultipleTuples of (int * int) * (int * int)
+&lt;/pre&gt;</code>
+</td></p>
+<pre><code class="hljs">    &lt;td&gt;
+      &lt;code&gt;&amp;lt;pre&gt;
+</code></pre>
+<p>type myVariant =
+| HasNothing
+| HasSingleInt(int)
+| HasSingleTuple((int, int))
+| HasMultipleInts(int, int)
+| HasMultipleTuples((int, int), (int, int));
+&lt;/pre&gt;</code>
+</td>
+</tr></p>
+<pre><code class="hljs">  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;code&gt;&amp;lt;pre&gt;
+</code></pre>
+<p>let a = HasSingleInt 10
+let a = HasSingleTuple (10, 10)
+let a = HasMultipleInts (10, 10)
+let a = HasMultipleTuples ((10, 10), (10, 10))
+&lt;/pre&gt;</code>
+</td></p>
+<pre><code class="hljs">    &lt;td&gt;
+      &lt;code&gt;&amp;lt;pre&gt;
+</code></pre>
+<p>let a = HasSingleInt(10);
+let a = HasSingleTuple((10, 10));
+let a = HasMultipleInts(10, 10);
+let a = HasMultipleTuples((10, 10), (10, 10));
+&lt;/pre&gt;</code>
+</td>
+</tr></p>
+<pre><code class="hljs">  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;code&gt;&amp;lt;pre&gt;
+</code></pre>
+<p>let res x = match x with
+| HasNothing -&gt; 0
+| HasSingleInt x -&gt; 0
+| HasSingleTuple (x, y) -&gt; 0
+| HasMultipleInts (x, y) -&gt; 0
+| HasMultipleTuples ((x, y), (q, r)) -&gt; 0
+&lt;/pre&gt;</code>
+</td></p>
+<pre><code class="hljs">    &lt;td&gt;
+      &lt;code&gt;&amp;lt;pre&gt;
+</code></pre>
+<p>let res = (x) =&gt;
+switch (x) {
+| HasNothing =&gt; 0
+| HasSingleInt(x) =&gt; 0
+| HasSingleTuple((x, y)) =&gt; 0
+| HasMultipleInts(x, y) =&gt; 0
+| HasMultipleTuples((x, y), (q, r)) =&gt; 0
+};
+&lt;/pre&gt;</code>
+</td>
+</tr>
+</table></p>
+<pre><code class="hljs">&lt;h2&gt;
+  Pattern Matching
+&lt;/h2&gt;
+
+&lt;table&gt;
+  &lt;tr&gt;
+    &lt;th&gt;
+      &lt;p&gt;
+        OCaml
+      &lt;/p&gt;
+    &lt;/th&gt;
+    
+    &lt;th&gt;
+      &lt;p&gt;
+        Reason
+      &lt;/p&gt;
+    &lt;/th&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;code&gt;&amp;lt;pre&gt;
+</code></pre>
+<p>let res = match x with
+| A (x, y) -&gt; match y with
+| None -&gt; 0
+| Some i -&gt; 10
+| B (x, y) -&gt; 0&lt;/pre&gt;</code>
+</td></p>
+<pre><code class="hljs">    &lt;td&gt;
+      &lt;code&gt;&amp;lt;pre&gt;
+</code></pre>
+<p>let res = switch (x) {
+| A((x, y)) =&gt; switch (y) {
+| None =&gt; 0
+| Some(i) =&gt; 10
+}
+| B((x, y)) =&gt; 0
+};
+&lt;/pre&gt;</code>
+</td>
+</tr>
+</table></p>
+<pre><code class="hljs">&lt;p&gt;
+  Can you spot the error in the OCaml example? This is one of the most common mistakes among OCaml programmers. The nested &lt;code&gt;match&lt;/code&gt; &lt;em&gt;must&lt;/em&gt; be wrapped in parentheses, otherwise the &lt;code&gt;Some&lt;/code&gt; case is parsed as belonging to the outer &lt;code&gt;match&lt;/code&gt;. Visually, it's actually:
+&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&quot;ocaml&quot;&gt;let res = match x with
+</code></pre>
+<p>| A (x, y) -&gt; match y with
+| None -&gt; 0
+| Some i -&gt; 10
+| B (x, y) -&gt; 0
+</code></pre></p>
+<pre><code class="hljs">&lt;p&gt;
+  Reason's mandatory &lt;code&gt;{}&lt;/code&gt; around &lt;code&gt;switch&lt;/code&gt; cases prevents this issue.
+&lt;/p&gt;
+
+&lt;h2&gt;
+  Modules and Signatures
+&lt;/h2&gt;
+
+&lt;h3&gt;
+  정의
+&lt;/h3&gt;
+
+&lt;table&gt;
+  &lt;tr&gt;
+    &lt;th&gt;
+      &lt;p&gt;
+        OCaml
+      &lt;/p&gt;
+    &lt;/th&gt;
+    
+    &lt;th&gt;
+      &lt;p&gt;
+        Reason
+      &lt;/p&gt;
+    &lt;/th&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;code&gt;&amp;lt;pre&gt;
+</code></pre>
+<p>module type MySig = sig
+type t = int
+val x: int
+end
+module MyModule: MySig = struct
+type t = int
+let x = 10
+end
+module MyModule = struct
+module NestedModule = struct
+let msg = &quot;hello&quot;;
+end
+end
+&lt;/pre&gt;</code>
+</td></p>
+<pre><code class="hljs">    &lt;td&gt;
+      &lt;code&gt;&amp;lt;pre&gt;
+</code></pre>
+<p>module type MySig = {
+type t = int;
+let x: int;
+};
+module MyModule: MySig = {
+type t = int;
+let x = 10;
+};
+module MyModule = {
+module NestedModule = {
+let msg = &quot;hello&quot;;
+};
+};
+&lt;/pre&gt;</code>
+</td>
+</tr>
+</table></p>
+<pre><code class="hljs">&lt;h3&gt;
+  Functors Types
+&lt;/h3&gt;
+
+&lt;table&gt;
+  &lt;tr&gt;
+    &lt;th&gt;
+      &lt;p&gt;
+        OCaml
+      &lt;/p&gt;
+    &lt;/th&gt;
+    
+    &lt;th&gt;
+      &lt;p&gt;
+        Reason
+      &lt;/p&gt;
+    &lt;/th&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;code&gt;&amp;lt;pre&gt;
+</code></pre>
+<p>module type FType =
+functor (A: ASig) -&gt;
+functor (B: BSig) -&gt; Result
+&lt;/pre&gt;</code>
+</td></p>
+<pre><code class="hljs">    &lt;td&gt;
+      &lt;code&gt;&amp;lt;pre&gt;
+</code></pre>
+<p>module type FType =
+(A: ASig) =&gt;
+(B: BSig) =&gt; Result;
+&lt;/pre&gt;</code>
+</td>
+</tr>
+</table></p>
+<pre><code class="hljs">&lt;h2&gt;
+  Functors
+&lt;/h2&gt;
+
+&lt;table&gt;
+  &lt;tr&gt;
+    &lt;th&gt;
+      &lt;p&gt;
+        OCaml
+      &lt;/p&gt;
+    &lt;/th&gt;
+    
+    &lt;th&gt;
+      &lt;p&gt;
+        Reason
+      &lt;/p&gt;
+    &lt;/th&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;code&gt;&amp;lt;pre&gt;
+</code></pre>
+<p>module F =
+functor (A: ASig) -&gt;
+functor (B: BSig) -&gt; struct end&lt;/pre&gt;</code>
+</td></p>
+<pre><code class="hljs">    &lt;td&gt;
+      &lt;code&gt;&amp;lt;pre&gt;
+</code></pre>
+<p>module F =
+(A: ASig) =&gt;
+(B: BSig) =&gt; {};&lt;/pre&gt;</code>
+</td>
+</tr></p>
+<pre><code class="hljs">  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;code&gt;&amp;lt;pre&gt;
+</code></pre>
+<p>module F = functor (A: ASig) (B: BSig) -&gt; struct end&lt;/pre&gt;</code>
+</td></p>
+<pre><code class="hljs">    &lt;td&gt;
+      &lt;code&gt;&amp;lt;pre&gt;
+</code></pre>
+<p>module F = (A: ASig, B: BSig) =&gt; {};&lt;/pre&gt;</code>
+</td>
+</tr></p>
+<pre><code class="hljs">  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;code&gt;&amp;lt;pre&gt;
+</code></pre>
+<p>module F (A: ASig) (B: BSig) = struct end&lt;/pre&gt;</code>
+</td></p>
+<pre><code class="hljs">    &lt;td&gt;
+      &lt;code&gt;&amp;lt;pre&gt;
+</code></pre>
+<p>module F = (A: ASig, B: BSig) =&gt; {};&lt;/pre&gt;</code>
+</td>
+</tr></p>
+<pre><code class="hljs">  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;code&gt;&amp;lt;pre&gt;
+</code></pre>
+<p>module Res = F(A)(B)&lt;/pre&gt;</code>
+</td></p>
+<pre><code class="hljs">    &lt;td&gt;
+      &lt;code&gt;&amp;lt;pre&gt;
+</code></pre>
+<p>module Res = F(A, B);&lt;/pre&gt;</code>
+</td>
+</tr>
+</table></p>
+<pre><code class="hljs">&lt;h2&gt;
+  Various Improvements
+&lt;/h2&gt;
+
+&lt;p&gt;
+  OCaml doesn't require parens around sequences &lt;code&gt;(a;b;c;d)&lt;/code&gt; or tuples &lt;code&gt;(x,y)&lt;/code&gt;, so that ends up ruling out a bunch of other very convenient syntax rules. Since Reason always uses &lt;code&gt;{}&lt;/code&gt; to enclose sequences or let bindings, and Reason always requires &lt;code&gt;()&lt;/code&gt; around tuples, many other syntax constructs are expressed more intuitively, without requiring extra wrapping in parenthesis.
+&lt;/p&gt;
+
+&lt;h3&gt;
+  Lambdas as record fields no longer need extra parens
+&lt;/h3&gt;
+
+&lt;p&gt;
+  This is a welcomed improvement because the OCaml type errors the user would see were very confusing when it would believe the function's return value was a tuple with infix &lt;code&gt;,&lt;/code&gt; comma.
+&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;tr&gt;
+    &lt;th&gt;
+      &lt;p&gt;
+        OCaml
+      &lt;/p&gt;
+    &lt;/th&gt;
+    
+    &lt;th&gt;
+      &lt;p&gt;
+        Reason
+      &lt;/p&gt;
+    &lt;/th&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;code&gt;&amp;lt;pre&gt;
+</code></pre>
+<p>let myFuncs = {
+myFun = (fun x -&gt; x + 1);
+your = (fun a b -&gt; a + b);
+}&lt;/pre&gt;</code>
+</td></p>
+<pre><code class="hljs">    &lt;td&gt;
+      &lt;code&gt;&amp;lt;pre&gt;
+</code></pre>
+<p>let myFuncs = {
+myFun: (x) =&gt; x + 1,
+your: (a, b) =&gt; a + b
+};&lt;/pre&gt;</code>
+</td>
+</tr>
+</table></p>
+<pre><code class="hljs">&lt;h3&gt;
+  Lambdas as match results no longer need extra parens
+&lt;/h3&gt;
+
+&lt;table&gt;
+  &lt;tr&gt;
+    &lt;th&gt;
+      &lt;p&gt;
+        OCaml
+      &lt;/p&gt;
+    &lt;/th&gt;
+    
+    &lt;th&gt;
+      &lt;p&gt;
+        Reason
+      &lt;/p&gt;
+    &lt;/th&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;code&gt;&amp;lt;pre&gt;
+</code></pre>
+<p>let x = match prnt with
+| None -&gt; fun a -&gt; blah
+(* Extra () required ! *)
+| Some &quot;_&quot; -&gt; (fun a -&gt; ())
+| Some &quot;ml&quot; -&gt; blah
+&lt;/pre&gt;</code>
+</td></p>
+<pre><code class="hljs">    &lt;td&gt;
+      &lt;code&gt;&amp;lt;pre&gt;
+</code></pre>
+<p>let x =
+switch (prnt) {
+| None =&gt; (a) =&gt; blah
+| Some(&quot;_&quot;) =&gt; (a) =&gt; ()
+| Some(&quot;ml&quot;) =&gt; blah
+};&lt;/pre&gt;</code>
+</td>
+</tr>
+</table></p>
+<pre><code class="hljs">&lt;h3&gt;
+  Lambdas and type annotations in tuples no longer require extra parens
+&lt;/h3&gt;
+
+&lt;table&gt;
+  &lt;tr&gt;
+    &lt;th&gt;
+      OCaml
+    &lt;/th&gt;
+    
+    &lt;th&gt;
+      Reason
+    &lt;/th&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;code&gt;let tuple = ((fun x -&amp;gt; x), 20)&lt;/code&gt;
+    &lt;/td&gt;
+    
+    &lt;td&gt;
+      &lt;code&gt;let tuple = ((x) =&amp;gt; x, 20);&lt;/code&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;code&gt;let tuple = ((&quot;hi&quot;: string), (20: int))&lt;/code&gt;
+    &lt;/td&gt;
+    
+    &lt;td&gt;
+      &lt;code&gt;let tuple = (&quot;hi&quot;: string, 20: int);&lt;/code&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;h2&gt;
+  Various Differences
+&lt;/h2&gt;
+
+&lt;h3&gt;
+  &lt;code&gt;as&lt;/code&gt; precedence
+&lt;/h3&gt;
+
+&lt;p&gt;
+  With Reason, &lt;code&gt;as&lt;/code&gt; has a higher precedence than &lt;code&gt;|&lt;/code&gt; bar. This allows creating &lt;code&gt;as&lt;/code&gt; aliases for entire rows in pattern matching.
+&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;tr&gt;
+    &lt;th&gt;
+      &lt;p&gt;
+        OCaml
+      &lt;/p&gt;
+    &lt;/th&gt;
+    
+    &lt;th&gt;
+      &lt;p&gt;
+        Reason
+      &lt;/p&gt;
+    &lt;/th&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;code&gt;&amp;lt;pre&gt;
+</code></pre>
+<p>let ppp = match MyThing 20 with
+| (MyThing x as ppp)
+| (YourThing x as ppp) -&gt; ppp;
+&lt;/pre&gt;</code>
+</td></p>
+<pre><code class="hljs">    &lt;td&gt;
+      &lt;code&gt;&amp;lt;pre&gt;
+</code></pre>
+<p>let ppp =
+switch (MyThing(20)) {
+| MyThing(x) as ppp
+| YourThing(x) as ppp =&gt; ppp
+};
+&lt;/pre&gt;</code>
+</td>
+</tr>
+</table></p>
+<pre><code class="hljs">&lt;h3&gt;
+  Mutable Record Field Updates
+&lt;/h3&gt;
+
+&lt;p&gt;
+  Because equalities and their negations have been made more consistent in Reason, the &lt;code&gt;=&lt;/code&gt; operator is available for mutable field update.
+&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;tr&gt;
+    &lt;th&gt;
+      OCaml
+    &lt;/th&gt;
+    
+    &lt;th&gt;
+      Reason
+    &lt;/th&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;code&gt;myRec.field &amp;lt;- &quot;next&quot;&lt;/code&gt;
+    &lt;/td&gt;
+    
+    &lt;td&gt;
+      &lt;code&gt;myRec.field = &quot;next&quot;&lt;/code&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;h3&gt;
+  Prefix operators
+&lt;/h3&gt;
+
+&lt;p&gt;
+  Reason's &lt;code&gt;!&lt;/code&gt; is used for boolean &lt;code&gt;not&lt;/code&gt;. Deferencing uses the postfix &lt;code&gt;^&lt;/code&gt;.
+&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;tr&gt;
+    &lt;th&gt;
+      OCaml
+    &lt;/th&gt;
+    
+    &lt;th&gt;
+      Reason
+    &lt;/th&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;code&gt;let x = !(foo.bar)&lt;/code&gt;
+    &lt;/td&gt;
+    
+    &lt;td&gt;
+      &lt;code&gt;let x = foo.bar^;&lt;/code&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;code&gt;let x = !(foo#bar)&lt;/code&gt;
+    &lt;/td&gt;
+    
+    &lt;td&gt;
+      &lt;code&gt;let x = foo#bar^;&lt;/code&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;code&gt;let x = !(!foo.bar)&lt;/code&gt;
+    &lt;/td&gt;
+    
+    &lt;td&gt;
+      &lt;code&gt;let x = foo^.bar^;&lt;/code&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;code&gt;let x = !(!foo#bar)&lt;/code&gt;
+    &lt;/td&gt;
+    
+    &lt;td&gt;
+      &lt;code&gt;let x = (foo^)#bar^;&lt;/code&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;code&gt;let x = !(!(foo.bar))&lt;/code&gt;
+    &lt;/td&gt;
+    
+    &lt;td&gt;
+      &lt;code&gt;let x = foo.bar^ ^;&lt;/code&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;code&gt;let x = !(!(foo#bar))&lt;/code&gt;
+    &lt;/td&gt;
+    
+    &lt;td&gt;
+      &lt;code&gt;let x = foo#bar^ ^;&lt;/code&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;code&gt;let x = !!(foo.bar)&lt;/code&gt;
+    &lt;/td&gt;
+    
+    &lt;td&gt;
+      &lt;code&gt;let x = !!foo.bar;&lt;/code&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;code&gt;let x = !!(foo#bar)&lt;/code&gt;
+    &lt;/td&gt;
+    
+    &lt;td&gt;
+      &lt;code&gt;let x = !!foo#bar;&lt;/code&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;code&gt;let x = !~(foo.bar)&lt;/code&gt;
+    &lt;/td&gt;
+    
+    &lt;td&gt;
+      &lt;code&gt;let x = !~foo.bar;&lt;/code&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;code&gt;let x = !~(foo#bar)&lt;/code&gt;
+    &lt;/td&gt;
+    
+    &lt;td&gt;
+      &lt;code&gt;let x = !~foo#bar;&lt;/code&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;h3&gt;
+  Comment Escaping
+&lt;/h3&gt;
+
+&lt;p&gt;
+  Because Reason uses C-style comments, some obscure custom prefix/infix operators must be written differently. The rules for prefix/infix operators are the same as in OCaml syntax, but with the following exceptions:
+&lt;/p&gt;
+
+&lt;p&gt;
+  Specifically, if any character except the first in an prefix/infix operator is a star or forward slash, that must be first escaped with a backslash. These will be parsed &lt;em&gt;without&lt;/em&gt; the backslash when added to the AST. When reprinted, the escape backslashes are added back in automatically.
+&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;tr&gt;
+    &lt;th&gt;
+      OCaml
+    &lt;/th&gt;
+    
+    &lt;th&gt;
+      Reason
+    &lt;/th&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;code&gt;let (/*) a b = a + b&lt;/code&gt;
+    &lt;/td&gt;
+    
+    &lt;td&gt;
+      &lt;code&gt;let (/\*) a b =&amp;gt; a + b;&lt;/code&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;code&gt;let x = 12 /-* 23 /-* 12&lt;/code&gt;
+    &lt;/td&gt;
+    
+    &lt;td&gt;
+      &lt;code&gt;let x = 12 /-* 23 /-* 12;&lt;/code&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;code&gt;let y = (/*) a b&lt;/code&gt;
+    &lt;/td&gt;
+    
+    &lt;td&gt;
+      &lt;code&gt;let y = a /\* b;&lt;/code&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;code&gt;let (!=*) q r = q + r&lt;/code&gt;
+    &lt;/td&gt;
+    
+    &lt;td&gt;
+      &lt;code&gt;let ( !=* ) = (q, r) =&amp;gt; q + r;&lt;/code&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;code&gt;let res = q (!=*) r&lt;/code&gt;
+    &lt;/td&gt;
+    
+    &lt;td&gt;
+      &lt;code&gt;let res = q(( !=* ), r);&lt;/code&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;code&gt;let (!=/*) q r = q + r&lt;/code&gt;
+    &lt;/td&gt;
+    
+    &lt;td&gt;
+      &lt;code&gt;let ( !=/\* ) = (q, r) =&amp;gt; q + r;&lt;/code&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;code&gt;let res = q (!=/*) r&lt;/code&gt;
+    &lt;/td&gt;
+    
+    &lt;td&gt;
+      &lt;code&gt;let res = q(( !=/\* ), r);&lt;/code&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;h3&gt;
+  Operator Renaming
+&lt;/h3&gt;
+
+&lt;p&gt;
+  If Reason uses &lt;code&gt;==&lt;/code&gt; to represent OCaml's &lt;code&gt;=&lt;/code&gt;, and uses &lt;code&gt;===&lt;/code&gt; to represent OCaml's &lt;code&gt;==&lt;/code&gt;, then how would Reason represent OCaml's &lt;code&gt;===&lt;/code&gt; symbol (if it were defined)? Reason provides a way! &quot;Escape&quot; the triple equals symbol!
+&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;tr&gt;
+    &lt;th&gt;
+      Identifier
+    &lt;/th&gt;
+    
+    &lt;th&gt;
+      Meaning
+    &lt;/th&gt;
+    
+    &lt;th&gt;
+      OCaml
+    &lt;/th&gt;
+    
+    &lt;th&gt;
+      Reason
+    &lt;/th&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;code&gt;&quot;===&quot;&lt;/code&gt;
+    &lt;/td&gt;
+    
+    &lt;td&gt;
+      Custom value
+    &lt;/td&gt;
+    
+    &lt;td&gt;
+      &lt;code&gt;x === y&lt;/code&gt;
+    &lt;/td&gt;
+    
+    &lt;td&gt;
+      &lt;code&gt;x \=== y&lt;/code&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;h3&gt;
+  REPL
+&lt;/h3&gt;
+
+&lt;p&gt;
+  In Reason's repl &lt;a href=&quot;extra-goodies.md#repl&quot;&gt;&lt;code&gt;rtop&lt;/code&gt;&lt;/a&gt; (a customized &lt;a href=&quot;https://github.com/diml/utop&quot;&gt;&lt;code&gt;utop&lt;/code&gt;&lt;/a&gt;), each input is submitted via a single &lt;code&gt;;&lt;/code&gt; semicolon. OCaml's repl requires two semicolons &lt;code&gt;;;&lt;/code&gt;.
+&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;tr&gt;
+    &lt;th&gt;
+      OCaml
+    &lt;/th&gt;
+    
+    &lt;th&gt;
+      Reason
+    &lt;/th&gt;
+  &lt;/tr&gt;
+  
+  &lt;tr&gt;
+    &lt;td&gt;
+      &lt;code&gt;;;&lt;/code&gt;
+    &lt;/td&gt;
+    
+    &lt;td&gt;
+      &lt;code&gt;;&lt;/code&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;</code></pre>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="faq.html">← 자주 물어보는 질문</a><a class="docs-next button" href="newcomer-examples.html">신입들을 위한 예시 →</a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#주석">주석</a></li><li><a href="#연산자-변경점">연산자 변경점</a></li><li><a href="#local-scope">Local Scope</a></li><li><a href="#local-scope-vs-module-body">Local Scope Vs. Module Body</a></li><li><a href="#tuple-and-record">Tuple and Record</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.min.js"></script><script>window.foo = new Pjax({
+          areas: [
+            // try to use the first query.
+            '.mainContainer, .docsNavContainer .toc .navWrapper, .onPageNav',
+            // fallback
+            'body'
+          ],
+          link: '.docsNavContainer:not(.docsSliderActive) a',
+          update: {
+            script: false,
+          }
+        });
+        var languagesMenuItemCopy = document.getElementById("languages-menu");
+        languagesMenuItemCopy.addEventListener("click", function(e){
+          e.preventDefault();
+          e.stopPropagation();
+          e.stopImmediatePropagation();
+        });</script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+              var search = docsearch({
+                
+                apiKey: '966d1e412f67114a07dc0afe44b19b53',
+                indexName: 'reason',
+                inputSelector: '#search_input_react',
+                algoliaOptions: {"facetFilters":["lang:ko"]}
+              });
+            </script></body></html>

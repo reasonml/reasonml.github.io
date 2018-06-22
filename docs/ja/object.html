@@ -1,0 +1,111 @@
+<!DOCTYPE html><html lang="ja"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Object · Reason</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta property="og:title" content="Object · Reason"/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io/index.html"/><meta property="og:description" content="Reason のほとんどの時間、レコードを使って名前付きの値をグループ化するでしょう。 しかし、あるニッチな状況では、オブジェクトと呼ばれるこれに似た機能を使用したいと思うかもしれません。それらは幾分か柔軟で、異なるトレードオフが備わっています。"/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/icon_50.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/arduino-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io/blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io/blog/feed.xml" title="Reason Blog RSS Feed"/><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible doc separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/ja"><img class="logo" src="/img/dummy.svg" alt="Reason"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/ja/quickstart-javascript.html" target="_self">Docs</a></li><li class=""><a href="/ja/try.html" target="_self">Try</a></li><li class=""><a href="/api/index.html" target="_self">API</a></li><li class=""><a href="/docs/ja/community.html" target="_self">Community</a></li><li class=""><a href="/blog" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg"/>日本語</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/en">English</a></li><li><a href="/de">Deutsch</a></li><li><a href="/es-ES">Español</a></li><li><a href="/fr">Français</a></li><li><a href="/ko">한국어</a></li><li><a href="/pt-BR">Português (Brasil)</a></li><li><a href="/ru">Русский</a></li><li><a href="/uk">Українська</a></li><li><a href="/zh-CN">中文</a></li><li><a href="/zh-TW">繁體中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank" rel="noreferrer noopener">Help Translate</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(){
+          if(languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/facebook/reason" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>Language Basics</span></h2></div><div class="navGroups"><div class="navGroup navGroupActive"><h3>Intro</h3><ul><li class="navListItem"><a class="navItem" href="/docs/ja/what-and-why.html">What &amp; Why</a></li></ul></div><div class="navGroup navGroupActive"><h3>Editor Setup</h3><ul><li class="navListItem"><a class="navItem" href="/docs/ja/global-installation.html">Global Installation</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/editor-plugins.html">Editor Plugins</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/extra-goodies.html">Extra Goodies</a></li></ul></div><div class="navGroup navGroupActive"><h3>Language Basics</h3><ul><li class="navListItem"><a class="navItem" href="/docs/ja/overview.html">Overview</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/let-binding.html">Let Binding</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/type.html">Type!</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/string-and-char.html">String &amp; Char</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/boolean.html">ブール値</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/integer-and-float.html">Integer &amp; Float</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/tuple.html">Tuple</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/record.html">Record</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/variant.html">Variant!</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/list-and-array.html">List &amp; Array</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/function.html">関数</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/if-else.html">If-Else</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/more-on-type.html">More on Type</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/destructuring.html">Destructuring</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/pattern-matching.html">Pattern Matching!</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/mutation.html">Mutation</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/imperative-loops.html">Imperative Loops</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/jsx.html">JSX</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/external.html">External</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/exception.html">Exception</a></li><li class="navListItem navListItemActive"><a class="navItem navItemActive" href="/docs/ja/object.html">Object</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/module.html">Module</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/promise.html">Promise</a></li></ul></div><div class="navGroup navGroupActive"><h3>JavaScript</h3><ul><li class="navListItem"><a class="navItem" href="/docs/ja/quickstart-javascript.html">Quickstart</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/interop.html">Interop</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/syntax-cheatsheet.html">Syntax Cheatsheet</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/libraries.html">Libraries</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/converting-from-js.html">Converting from JS</a></li></ul></div><div class="navGroup navGroupActive"><h3>Native</h3><ul><li class="navListItem"><a class="navItem" href="/docs/ja/native.html">Native</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/quickstart-ocaml.html">Quickstart</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/convert-from-ocaml.html">Converting from OCaml</a></li></ul></div><div class="navGroup navGroupActive"><h3>Extra</h3><ul><li class="navListItem"><a class="navItem" href="/docs/ja/faq.html">Frequently Asked Questions</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/comparison-to-ocaml.html">Comparison to OCaml</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/newcomer-examples.html">Newcomer Examples</a></li><li class="navListItem"><a class="navItem" href="/docs/ja/project-structure.html">Project Structure</a></li></ul></div></div></section></div><script>
+          var toggler = document.getElementById('navToggler');
+          var nav = document.getElementById('docsNav');
+          toggler.onclick = function() {
+            nav.classList.toggle('docsSliderActive');
+          };
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://crowdin.com/project/reason/ja" target="_blank" rel="noreferrer noopener">Translate</a><h1>Object</h1></header><article><div><span><p>Reason のほとんどの時間、レコードを使って名前付きの値をグループ化するでしょう。 しかし、あるニッチな状況では、オブジェクトと呼ばれるこれに似た機能を使用したいと思うかもしれません。それらは幾分か柔軟で、異なるトレードオフが備わっています。</p>
+<p><strong>もし JavaScript から来るなら</strong>、大抵、おそらくプレーンな Reason オブジェクトを探しては<strong>いません</strong>。下部のヒントとコツのセクションにスキップしてください。</p>
+<h2><a class="anchor" aria-hidden="true" id="使い方"></a><a href="#使い方" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>使い方</h2>
+<h3><a class="anchor" aria-hidden="true" id="型宣言"></a><a href="#型宣言" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>型宣言</h3>
+<p>オブジェクトは何かを保有することができるにも関わらず、<strong>型宣言を必要としません</strong>。それは <code>.</code> を除けばレコードのように見えます。</p>
+<pre><code class="hljs css reason"><span class="hljs-keyword">type</span> tesla = {
+  .
+  color: string
+};
+</code></pre>
+<p>始めにあるドットはこれが「閉じられた」オブジェクト型であることを表します。それはこの型に基づくオブジェクトは、正確にこの形状でなければならないこと意味します。</p>
+<pre><code class="hljs css reason"><span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">car</span></span>(<span class="hljs-symbol">'a</span>) = {
+  ..
+  color: string
+} <span class="hljs-keyword">as</span> <span class="hljs-symbol">'a</span>;
+</code></pre>
+<p>エリジオン（elision）とも呼ばれるふたつのドットは、これが「開かれた」オブジェクト型で、他の値やメソッドを含めることもできることを表しています。 開かれたオブジェクトは、多相でもあり、パラメータが必要です。</p>
+<h3><a class="anchor" aria-hidden="true" id="作成"></a><a href="#作成" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>作成</h3>
+<h2><a class="anchor" aria-hidden="true" id="simple"></a><a href="#simple" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Simple</h2>
+<pre><code class="hljs css reason">type tesla = {
+  .
+  <span class="hljs-built_in">color</span>: <span class="hljs-built_in">string</span>,
+};
+
+<span class="hljs-built_in">let</span> obj: tesla = {
+  val red = <span class="hljs-string">"Red"</span>;
+  pub <span class="hljs-built_in">color</span> = red;
+};
+
+Js.<span class="hljs-built_in">log</span>(obj#<span class="hljs-built_in">color</span>) <span class="hljs-comment">/* "Red" */</span>
+</code></pre>
+<p>Here we have a simple object with the method <code>color</code> and the property <code>red</code>. This method takes no arguments and returns the private proptery <code>red</code>. Because the method <code>color</code> is a public method we can access it using object notation. Remember, objects only export methods and all properties are private.</p>
+<h2><a class="anchor" aria-hidden="true" id="advanced"></a><a href="#advanced" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Advanced</h2>
+<pre><code class="hljs css reason"><span class="hljs-keyword">type</span> tesla = {.
+  drive: <span class="hljs-built_in">int</span> =&gt; <span class="hljs-built_in">int</span>
+};
+
+<span class="hljs-keyword">let</span> obj: tesla = {
+  <span class="hljs-keyword">val</span> hasEnvy = <span class="hljs-built_in">ref</span>(<span class="hljs-literal">false</span>);
+  pub drive = (speed) =&gt; {
+    this#enableEnvy(<span class="hljs-literal">true</span>);
+    speed
+  };
+  pri enableEnvy = (envy) =&gt; hasEnvy := envy
+};
+</code></pre>
+<p>This object is of object type tesla and has a public method <code>drive</code>. It also contains a private method <code>enableEnvy</code> that is only accessible from within the object.</p>
+<p>As you can see, a Reason object can also access <code>this</code>. JavaScript object's <code>this</code> behavior can be quirky; Reason <code>this</code> always points to the object itself correctly.</p>
+<p>The following example shows an open object type which uses a type as parameter. The object type parameter is required to implement all the methods of the open object type.</p>
+<pre><code class="hljs css reason"><span class="hljs-keyword">type</span> tesla(<span class="hljs-symbol">'a</span>) = {
+  ..
+  drive: <span class="hljs-built_in">int</span> =&gt; <span class="hljs-built_in">int</span>
+} <span class="hljs-keyword">as</span> <span class="hljs-symbol">'a</span>;
+
+<span class="hljs-keyword">let</span> obj: tesla({. drive: <span class="hljs-built_in">int</span> =&gt; <span class="hljs-built_in">int</span>, doYouWant: <span class="hljs-built_in">unit</span> =&gt; <span class="hljs-built_in">bool</span>}) = {
+  <span class="hljs-keyword">val</span> hasEnvy = <span class="hljs-built_in">ref</span>(<span class="hljs-literal">false</span>);
+  pub drive = (speed) =&gt; {
+    this#enableEnvy(<span class="hljs-literal">true</span>);
+    speed
+  };
+  pub doYouWant = <span class="hljs-literal">()</span> =&gt; hasEnvy^;
+  pri enableEnvy = (envy) =&gt; hasEnvy := envy
+};
+</code></pre>
+<p>You can use the above object like so:</p>
+<pre><code class="hljs css reason">obj<span class="hljs-function"><span class="hljs-keyword">#</span><span class="hljs-title">doYouWant</span><span class="hljs-params">()</span></span>;
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="tip-tricks"></a><a href="#tip-tricks" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Tip &amp; Tricks</h2>
+<p>If you come from JavaScript, <strong>a Reason object doesn't compile to a JS object</strong>. For that, try BuckleScript's <a href="https://bucklescript.github.io/docs/en/object.html#record-mode">special feature</a>.</p>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="exception.html">← Exception</a><a class="docs-next button" href="module.html">Module →</a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#使い方">使い方</a><ul class="toc-headings"><li><a href="#型宣言">型宣言</a></li><li><a href="#作成">作成</a></li></ul></li><li><a href="#simple">Simple</a></li><li><a href="#advanced">Advanced</a></li><li><a href="#tip-tricks">Tip &amp; Tricks</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.min.js"></script><script>window.foo = new Pjax({
+          areas: [
+            // try to use the first query.
+            '.mainContainer, .docsNavContainer .toc .navWrapper, .onPageNav',
+            // fallback
+            'body'
+          ],
+          link: '.docsNavContainer:not(.docsSliderActive) a',
+          update: {
+            script: false,
+          }
+        });
+        var languagesMenuItemCopy = document.getElementById("languages-menu");
+        languagesMenuItemCopy.addEventListener("click", function(e){
+          e.preventDefault();
+          e.stopPropagation();
+          e.stopImmediatePropagation();
+        });</script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+              var search = docsearch({
+                
+                apiKey: '966d1e412f67114a07dc0afe44b19b53',
+                indexName: 'reason',
+                inputSelector: '#search_input_react',
+                algoliaOptions: {"facetFilters":["lang:ja"]}
+              });
+            </script></body></html>

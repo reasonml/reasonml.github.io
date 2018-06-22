@@ -1,0 +1,164 @@
+<!DOCTYPE html><html lang="zh-TW"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>轉換 JS · Reason</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta property="og:title" content="轉換 JS · Reason"/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io/index.html"/><meta property="og:description" content="## 準備"/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/icon_50.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/arduino-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io/blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io/blog/feed.xml" title="Reason Blog RSS Feed"/><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible doc separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/zh-TW"><img class="logo" src="/img/dummy.svg" alt="Reason"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/zh-TW/quickstart-javascript.html" target="_self">文件</a></li><li class=""><a href="/zh-TW/try.html" target="_self">試用</a></li><li class=""><a href="/api/index.html" target="_self">API</a></li><li class=""><a href="/docs/zh-TW/community.html" target="_self">社群</a></li><li class=""><a href="/blog" target="_self">部落格</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg"/>繁體中文</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/ja">日本語</a></li><li><a href="/en">English</a></li><li><a href="/de">Deutsch</a></li><li><a href="/es-ES">Español</a></li><li><a href="/fr">Français</a></li><li><a href="/ko">한국어</a></li><li><a href="/pt-BR">Português (Brasil)</a></li><li><a href="/ru">Русский</a></li><li><a href="/uk">Українська</a></li><li><a href="/zh-CN">中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank" rel="noreferrer noopener">協助翻譯</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(){
+          if(languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/facebook/reason" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>JavaScript</span></h2></div><div class="navGroups"><div class="navGroup navGroupActive"><h3>簡介</h3><ul><li class="navListItem"><a class="navItem" href="/docs/zh-TW/what-and-why.html">什麼 &amp; 為何</a></li></ul></div><div class="navGroup navGroupActive"><h3>編輯器設置</h3><ul><li class="navListItem"><a class="navItem" href="/docs/zh-TW/global-installation.html">全域安裝</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/editor-plugins.html">編輯器外掛</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/extra-goodies.html">更多好物</a></li></ul></div><div class="navGroup navGroupActive"><h3>語言基礎</h3><ul><li class="navListItem"><a class="navItem" href="/docs/zh-TW/overview.html">概述</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/let-binding.html">Let 繫結</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/type.html">型別！</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/string-and-char.html">字串 &amp; 字元</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/boolean.html">布林值</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/integer-and-float.html">整數 &amp; 浮點數</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/tuple.html">Tuple</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/record.html">Record</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/variant.html">變異！</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/list-and-array.html">List &amp; 陣列</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/function.html">函式</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/if-else.html">If-Else</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/more-on-type.html">更多有關型別</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/destructuring.html">解構</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/pattern-matching.html">樣式匹配</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/mutation.html">可突變</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/imperative-loops.html">命令式迴圈</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/jsx.html">JSX</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/external.html">外部</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/exception.html">例外</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/object.html">物件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/module.html">模組</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/promise.html">Promise</a></li></ul></div><div class="navGroup navGroupActive"><h3>JavaScript</h3><ul><li class="navListItem"><a class="navItem" href="/docs/zh-TW/quickstart-javascript.html">快速上手</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/interop.html">交互作用</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/syntax-cheatsheet.html">句法簡潔手冊</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/libraries.html">函式庫</a></li><li class="navListItem navListItemActive"><a class="navItem navItemActive" href="/docs/zh-TW/converting-from-js.html">轉換 JS</a></li></ul></div><div class="navGroup navGroupActive"><h3>原生</h3><ul><li class="navListItem"><a class="navItem" href="/docs/zh-TW/native.html">原生</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/quickstart-ocaml.html">快速上手</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/convert-from-ocaml.html">轉換 OCaml</a></li></ul></div><div class="navGroup navGroupActive"><h3>附加選項</h3><ul><li class="navListItem"><a class="navItem" href="/docs/zh-TW/faq.html">常見問題</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/comparison-to-ocaml.html">與 OCaml 比較</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/newcomer-examples.html">新手示範</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-TW/project-structure.html">專案結構</a></li></ul></div></div></section></div><script>
+          var toggler = document.getElementById('navToggler');
+          var nav = document.getElementById('docsNav');
+          toggler.onclick = function() {
+            nav.classList.toggle('docsSliderActive');
+          };
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://crowdin.com/project/reason/zh-TW" target="_blank" rel="noreferrer noopener">Translate</a><h1>轉換 JS</h1></header><article><div><span><h2><a class="anchor" aria-hidden="true" id="準備"></a><a href="#準備" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>準備</h2>
+<p><strong>在開始之前</strong>，請確定 Reason 是你團隊所需！ 儘管我們擔保 Reason 和 BuckleScript 的名聲，請不要鞭策你的同事讓他們有壞的第一印象。 之後就很難挽回了。</p>
+<p>此指南涵蓋一個工作流，幫助我們快速且有效地轉換東西。 並不打算走過整個語言/FFI 功能（雖然有放在上下文）。 假設有基本 Reason/BuckleScript 認知。</p>
+<h2><a class="anchor" aria-hidden="true" id="語法"></a><a href="#語法" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>語法</h2>
+<p><strong>目標</strong>：第一及首要，<strong>讓檔案在語法上有效</strong>。 不要管型別錯誤、缺少模組、錯誤的檔案組織、太多 externals 等。 設置回歸測試，確定沒有更多語法錯誤之後，將回頭清理這些東西。</p>
+<p>由於 Reason 語法與 JavaScript 相似，直接複製既有 JS 檔案，直接在上面修改，而不是從全新 Reason 檔開始。</p>
+<p><em>提示</em>：請別忘了使用編輯器/終端機的 <code>refmt</code>！ 如果不曉得某些操作子的優先順序，將它們包在括號裡面，想括多少就括多少，接著 <code>refmt</code> 程式碼，看剩下哪些。 同樣地，不需要浪費時間做排列對齊跟空白； <code>refmt</code> 會處理好它們。</p>
+<pre><code class="hljs css js"><span class="hljs-comment">/* 從原始 JavaScript 檔案複製過來 */</span>
+<span class="hljs-keyword">const</span> school = <span class="hljs-built_in">require</span>(<span class="hljs-string">'school'</span>);
+
+<span class="hljs-keyword">const</span> defaultId = <span class="hljs-number">10</span>;
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">queryResult</span>(<span class="hljs-params">usePayload, payload</span>) </span>{
+  <span class="hljs-keyword">if</span> (usePayload) {
+    <span class="hljs-keyword">return</span> payload.student
+  }
+  <span class="hljs-keyword">return</span> school.getStudentById(defaultId);
+}
+</code></pre>
+<p>這個步驟你會做到幾件事情：</p>
+<ul>
+<li>轉換函式呼叫語法。</li>
+<li>轉換 <code>var</code>/<code>const</code> 成 <code>let</code>。</li>
+<li>隱藏 <code>require</code>。</li>
+<li>其他修改。如果沒有 BuckleScript 等價慣用語法，直接使用 <code>bs.raw</code>（<a href="https://bucklescript.github.io/docs/en/embed-raw-javascript.html">文件</a>）。</li>
+</ul>
+<p>再一次，<strong>只需要操心讓檔案句法上合法</strong>。 試著在轉換過程中學習這三個語法，型別和其他語意，每次都能加快你的速度。</p>
+<pre><code class="hljs css reason"><span class="hljs-comment">/* 句法上有效，語意上錯誤的轉換 */</span>
+<span class="hljs-comment">/* const school = require('school'); */</span>
+<span class="hljs-keyword">let</span> defaultId = <span class="hljs-number">10</span>;
+
+<span class="hljs-keyword">let</span> queryResult = <span class="hljs-function">(<span class="hljs-params">usePayload, payload</span>) =&gt;</span>
+  <span class="hljs-keyword">if</span> (usePayload) {
+    payload.student
+  } <span class="hljs-keyword">else</span> {
+    <span class="hljs-comment">/* Reason 中不需要提前傳回；if-else 是個表達式 */</span>
+    school.getStudentById(
+      defaultId
+    )
+  };
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="型別-第-1-關"></a><a href="#型別-第-1-關" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>型別，第 1 關</h2>
+<p><strong>目標</strong>：修正型別，只需要做到足夠下一步即可。</p>
+<p>可能會時常碰到語法錯誤，但不會比前個步驟猛烈。</p>
+<ul>
+<li>修改 <code>foo.bar</code> 成 <code>foo##bar</code>。 這個 <a href="https://bucklescript.github.io/docs/en/object.html#object-as-record">BuckleScript 逃生出口</a>功能將會是你中期的好朋友。</li>
+<li>轉換 <code>{foo: bar}</code> 成 <code>[%bs.obj {foo: bar}]</code>（<a href="https://bucklescript.github.io/docs/en/object.html#creation">文件</a>）。 經過 <code>refmt</code>，這會改成語法糖 <code>{&quot;foo&quot;: bar}</code>。</li>
+<li>與外部 JS 檔案溝通，使用 <code>external</code>。這是 BuckleScript 的 <a href="https://bucklescript.github.io/docs/en/intro-to-external.html">外部函式介面</a>。
+<ul>
+<li>內聯 externals。現在不需要新增整潔，分離良好的 externals。稍後會回來做。</li>
+<li>如果處理 <code>external</code> 的輸入/輸出正確型別太麻煩，使用某些佔位符多形型別，例如 <code>external getStudentById: 'whatever =&gt; 'whateverElse = ...</code>。</li>
+<li>對於難以適當轉換的資料型別 &amp; 樣式，有時候可以新增轉換器，像是 <code>external unsafeCast : myPayloadType =&gt; anotherDataType = &quot;%identity&quot;;</code>。</li>
+</ul></li>
+</ul>
+<p>這是第一關；最終型別可能會看起來不一樣。 現在，收割付出！ 一旦最後修正所有的型別錯誤，JS 檔案就能自動產生。 並排開啟檔案。 是時候來回檢查並修正！</p>
+<pre><code class="hljs css reason">/* 句法上合法，仍然語意上錯誤，但好一些 */
+[@bs.<span class="hljs-keyword">module</span> <span class="hljs-string">"school"</span>] <span class="hljs-keyword">external</span> getStudentById : <span class="hljs-symbol">'whatever</span> =&gt; <span class="hljs-symbol">'whateverElse</span> = <span class="hljs-string">"getStudentById"</span>;
+
+<span class="hljs-keyword">let</span> defaultId = <span class="hljs-number">10</span>;
+
+<span class="hljs-keyword">let</span> queryResult = (usePayload, payload) =&gt;
+  <span class="hljs-keyword">if</span> (usePayload) {
+    payload##student /* 這會推斷成 <span class="hljs-type">`Js</span>.t <span class="hljs-symbol">'a</span>` */
+  } <span class="hljs-keyword">else</span> {
+    getStudentById(defaultId)
+  };
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="執行期間語意"></a><a href="#執行期間語意" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>執行期間語意</h2>
+<p><strong>目標</strong>：修正產生出來的 JS 結果。</p>
+<p>跟你舊有的 JS 檔案比較。結果可能是錯的；可能是錯誤使用某些慣用和某些 externals 型別錯誤。</p>
+<ul>
+<li>輸入 JS 物件外型（那些使用 <code>##</code> 的東西）。</li>
+<li>轉換那些部份成 records/變異/慣用的 OCaml 型別。</li>
+</ul>
+<p>持續不斷檢查每個修改的結果。</p>
+<pre><code class="hljs css reason">type student; <span class="hljs-comment">/* 抽象型別，稍後解釋 */</span>
+
+[@bs.module <span class="hljs-string">"school"</span>] external getStudentById : '<span class="hljs-attr">whatever</span> =&gt; <span class="hljs-attr">student</span> = <span class="hljs-string">"getStudentById"</span>;
+
+type <span class="hljs-attr">payloadType</span> = {. <span class="hljs-string">"student"</span>: student};
+
+<span class="hljs-keyword">let</span> <span class="hljs-attr">defaultId</span> = <span class="hljs-number">10</span>;
+
+<span class="hljs-keyword">let</span> <span class="hljs-attr">queryResult</span> = (usePayload, payload: payloadType) =&gt;
+  <span class="hljs-keyword">if</span> (usePayload) {
+    payload<span class="hljs-comment">##student</span>
+  } <span class="hljs-keyword">else</span> {
+    getStudentById(defaultId)
+  };
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="清理-型別-第-2-關"></a><a href="#清理-型別-第-2-關" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>清理（型別，第 2 關）</h2>
+<p><strong>目標</strong>：確保型別合法（又稱為，聽起來像是）。</p>
+<p>回到第 1 關留下的東西並修好它。</p>
+<ul>
+<li>確保 <code>external</code> 沒有留下任何 <code>'whatever</code> 型別。</li>
+<li>可以保持 <code>external</code> 內聯，或者另外抽到別的檔案。</li>
+</ul>
+<pre><code class="hljs css reason"><span class="hljs-comment">/* 目前檔案 */</span>
+type <span class="hljs-attr">payloadType</span> = {. <span class="hljs-string">"student"</span>: School.student}; <span class="hljs-comment">/* TODO：放在別的地方！ */</span>
+
+<span class="hljs-keyword">let</span> <span class="hljs-attr">defaultId</span> = <span class="hljs-number">10</span>;
+
+<span class="hljs-keyword">let</span> <span class="hljs-attr">queryResult</span> = (usePayload, payload: payloadType) =&gt;
+  <span class="hljs-keyword">if</span> (usePayload) {
+    payload<span class="hljs-comment">##student</span>
+  } <span class="hljs-keyword">else</span> {
+    School.getStudentById(defaultId)
+  };
+</code></pre>
+<pre><code class="hljs css reason">/* 專屬 <span class="hljs-type">School</span>.re 檔案 */
+<span class="hljs-keyword">type</span> student;
+
+[@bs.<span class="hljs-keyword">module</span> <span class="hljs-string">"School"</span>] <span class="hljs-keyword">external</span> getStudentById : <span class="hljs-built_in">int</span> =&gt; student = <span class="hljs-string">"getStudentById"</span>;
+[@bs.<span class="hljs-keyword">module</span> <span class="hljs-string">"School"</span>] <span class="hljs-keyword">external</span> getAllStudents : <span class="hljs-built_in">unit</span> =&gt; <span class="hljs-built_in">array</span>(student) = <span class="hljs-string">"getAllStudents"</span>;
+</code></pre>
+<p><code>student</code> 型別沒有實際內容；這個稱為<a href="/docs/zh-TW/module.html#signatures">抽象型別</a>。 這是方便指定外部呼叫關係的方法，不需要知道底部實際的資料外型。</p>
+<p>這樣就完成了！</p>
+<h2><a class="anchor" aria-hidden="true" id="提示"></a><a href="#提示" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>提示</h2>
+<p><strong>不要</strong>試著一次完全轉換 JS 檔案到純 Reason 檔。 這樣的方式可能實際上會拖慢你的速度！ 如果有 externals 和 <code>bs.obj</code> 沒什麼問題並且暫時缺少 OCaml 功能好處（變異、標籤式引數等）。 一旦轉換好其他相關檔案之後，藉由型別系統可以再回來做<strong>更快</strong>的重構。</p>
+<p>無論你找到什麼好用的工具，將它們放在 <code>tempUtils.re</code> 或其他檔案中。這些是給你同事的簡單範例，省去一些溝通成本。</p>
+<p>我們<strong>強烈建議</strong>你將 JS 結果納入版本控制。 這讓你的建構系統統合準不存在和當你不在旁邊時，你的隊友可以做些小調整，稽查結果差異和捕獲任何錯誤。 這也是個好的賣點，納入版本控制的 JS 結果對緊急更新很有善（對管理階層一大賣點）。 甚至當你升級 BuckleScript 版本，你也可以獲得任何結果差異。 就像是 <a href="https://facebook.github.io/jest/docs/snapshot-testing.html">Jest snapshots</a>，免費！</p>
+<p>一如既往，在 <a href="https://discord.gg/reasonml">Discord</a> 或<a href="https://reasonml.chat">討論區</a>尋求幫助！</p>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="libraries.html">← 函式庫</a><a class="docs-next button" href="native.html">原生 →</a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#準備">準備</a></li><li><a href="#語法">語法</a></li><li><a href="#型別-第-1-關">型別，第 1 關</a></li><li><a href="#執行期間語意">執行期間語意</a></li><li><a href="#清理-型別-第-2-關">清理（型別，第 2 關）</a></li><li><a href="#提示">提示</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.min.js"></script><script>window.foo = new Pjax({
+          areas: [
+            // try to use the first query.
+            '.mainContainer, .docsNavContainer .toc .navWrapper, .onPageNav',
+            // fallback
+            'body'
+          ],
+          link: '.docsNavContainer:not(.docsSliderActive) a',
+          update: {
+            script: false,
+          }
+        });
+        var languagesMenuItemCopy = document.getElementById("languages-menu");
+        languagesMenuItemCopy.addEventListener("click", function(e){
+          e.preventDefault();
+          e.stopPropagation();
+          e.stopImmediatePropagation();
+        });</script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+              var search = docsearch({
+                
+                apiKey: '966d1e412f67114a07dc0afe44b19b53',
+                indexName: 'reason',
+                inputSelector: '#search_input_react',
+                algoliaOptions: {"facetFilters":["lang:zh-TW"]}
+              });
+            </script></body></html>

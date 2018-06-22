@@ -1,0 +1,274 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>函数 · Reason</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta property="og:title" content="函数 · Reason"/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io/index.html"/><meta property="og:description" content="*完整的函数语法备忘清单在最后*"/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/icon_50.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/arduino-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io/blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io/blog/feed.xml" title="Reason Blog RSS Feed"/><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible doc separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/zh-CN"><img class="logo" src="/img/dummy.svg" alt="Reason"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/zh-CN/quickstart-javascript.html" target="_self">文档</a></li><li class=""><a href="/zh-CN/try.html" target="_self">体验</a></li><li class=""><a href="/api/index.html" target="_self">API</a></li><li class=""><a href="/docs/zh-CN/community.html" target="_self">社区</a></li><li class=""><a href="/blog" target="_self">博客</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg"/>中文</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/ja">日本語</a></li><li><a href="/en">English</a></li><li><a href="/de">Deutsch</a></li><li><a href="/es-ES">Español</a></li><li><a href="/fr">Français</a></li><li><a href="/ko">한국어</a></li><li><a href="/pt-BR">Português (Brasil)</a></li><li><a href="/ru">Русский</a></li><li><a href="/uk">Українська</a></li><li><a href="/zh-TW">繁體中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank" rel="noreferrer noopener">帮助翻译</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(){
+          if(languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/facebook/reason" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>语言基础</span></h2></div><div class="navGroups"><div class="navGroup navGroupActive"><h3>介绍</h3><ul><li class="navListItem"><a class="navItem" href="/docs/zh-CN/what-and-why.html">缘何</a></li></ul></div><div class="navGroup navGroupActive"><h3>编辑器设置</h3><ul><li class="navListItem"><a class="navItem" href="/docs/zh-CN/global-installation.html">全局安装</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/editor-plugins.html">编辑器插件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/extra-goodies.html">更多好东西</a></li></ul></div><div class="navGroup navGroupActive"><h3>语言基础</h3><ul><li class="navListItem"><a class="navItem" href="/docs/zh-CN/overview.html">概述</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/let-binding.html">Let 绑定</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/type.html">Type!</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/string-and-char.html">String &amp; Char</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/boolean.html">布尔值</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/integer-and-float.html">整数和浮点数</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/tuple.html">Tuple</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/record.html">Record</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/variant.html">Variant!</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/list-and-array.html">List 和 Array</a></li><li class="navListItem navListItemActive"><a class="navItem navItemActive" href="/docs/zh-CN/function.html">函数</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/if-else.html">If-Else</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/more-on-type.html">深入 Type</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/destructuring.html">解构</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/pattern-matching.html">模式匹配！</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/mutation.html">Mutation</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/imperative-loops.html">命令式循环</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/jsx.html">JSX</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/external.html">外部</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/exception.html">异常</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/object.html">Object</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/module.html">模块</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/promise.html">Promise</a></li></ul></div><div class="navGroup navGroupActive"><h3>JavaScript</h3><ul><li class="navListItem"><a class="navItem" href="/docs/zh-CN/quickstart-javascript.html">快速上手</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/interop.html">交互操作</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/syntax-cheatsheet.html">语法手册</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/libraries.html">库</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/converting-from-js.html">转换自 JS</a></li></ul></div><div class="navGroup navGroupActive"><h3>原生</h3><ul><li class="navListItem"><a class="navItem" href="/docs/zh-CN/native.html">原生</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/quickstart-ocaml.html">快速上手</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/convert-from-ocaml.html">转换自 OCaml</a></li></ul></div><div class="navGroup navGroupActive"><h3>额外</h3><ul><li class="navListItem"><a class="navItem" href="/docs/zh-CN/faq.html">常见问题</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/comparison-to-ocaml.html">与 OCaml 比较</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/newcomer-examples.html">新手示例</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/project-structure.html">项目结构</a></li></ul></div></div></section></div><script>
+          var toggler = document.getElementById('navToggler');
+          var nav = document.getElementById('docsNav');
+          toggler.onclick = function() {
+            nav.classList.toggle('docsSliderActive');
+          };
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://crowdin.com/project/reason/zh-CN" target="_blank" rel="noreferrer noopener">Translate</a><h1>函数</h1></header><article><div><span><p><em>完整的函数语法备忘清单在最后</em></p>
+<p>你能相信我们到现在还未谈到函数？</p>
+<p>函数通过箭头符号声明并返回表达式。</p>
+<pre><code class="hljs css reason">let greet = <span class="hljs-function"><span class="hljs-params">(name)</span> =&gt;</span> <span class="hljs-string">"Hello "</span> ++ name;
+</code></pre>
+<p>这声明一个函数并将其赋给了<code>greet</code>，你可以这样进行调用：</p>
+<pre><code class="hljs css reason"><span class="hljs-selector-tag">greet</span>(<span class="hljs-string">"world!"</span>); <span class="hljs-comment">/* "Hello world!" */</span>
+</code></pre>
+<p>多参数函数通过逗号进行分割：</p>
+<pre><code class="hljs css reason">let <span class="hljs-keyword">add</span><span class="bash"> = (x, y, z) =&gt; x + y + z;
+</span><span class="hljs-keyword">add</span><span class="bash">(1, 2, 3); /* 6 */
+</span></code></pre>
+<p>对于更长的函数，你可以将其包裹在方括号内：</p>
+<pre><code class="hljs css reason"><span class="hljs-keyword">let</span> greetMore = <span class="hljs-function">(<span class="hljs-params">name</span>) =&gt;</span> {
+  <span class="hljs-keyword">let</span> part1 = <span class="hljs-string">"Hello"</span>;
+  part1 ++ <span class="hljs-string">" "</span> ++ name
+};
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="无参数"></a><a href="#无参数" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>无参数</h2>
+<p>函数总是会带有一个参数；但有时，我们使用函数的副作用，并不会传任何参数给它。 在其他语言中，我们在理论上传递“无参数”。 在 Reason 中，每个函数都有一个参数；这里我们最终会传递一个值为 <code>()</code> 给它，被称作“unit”。</p>
+<pre><code class="hljs css reason"><span class="hljs-comment">/* 接收 &amp; 解构 unit 参数 */</span>
+<span class="hljs-keyword">let</span> logSomething = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+  print_endline(<span class="hljs-string">"hello"</span>);
+  print_endline(<span class="hljs-string">"world"</span>)
+};
+
+<span class="hljs-comment">/* 通过类型为 unit 的值调用函数 */</span>
+logSomething();
+</code></pre>
+<p><code>()</code>是在 <code>unit</code>中一个完全普通且唯一可能的值，Reason 出于方便为其提供了特殊语法。</p>
+<h2><a class="anchor" aria-hidden="true" id="标签参数"></a><a href="#标签参数" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>标签参数</h2>
+<p>多参函数——尤其参数是相同类型的——调用时会给人带来困惑。</p>
+<pre><code class="hljs css reason"><span class="hljs-keyword">let</span> addCoordinates = <span class="hljs-function">(<span class="hljs-params">x, y</span>) =&gt;</span> {
+  <span class="hljs-comment">/* use x and y here */</span>
+};
+<span class="hljs-comment">/* ... */</span>
+addCoordinates(<span class="hljs-number">5</span>, <span class="hljs-number">6</span>); <span class="hljs-comment">/* which is x, which is y? */</span>
+</code></pre>
+<p>在 OCaml/Reason 中，你可以给参数附上标签：</p>
+<pre><code class="hljs css reason">let <span class="hljs-keyword">addCoordinates </span>= (~x, ~y) =&gt; {
+  <span class="hljs-comment">/* use x and y here */</span>
+}<span class="hljs-comment">;</span>
+<span class="hljs-comment">/* ... */</span>
+<span class="hljs-keyword">addCoordinates(~x=5, </span>~y=<span class="hljs-number">6</span>)<span class="hljs-comment">;</span>
+</code></pre>
+<p>因为可以自动柯里化（稍后会详细说明），我们可以以<strong>任意顺序</strong>提供参数：</p>
+<pre><code class="hljs css reason">addCoordinates(~<span class="hljs-attribute">y</span>=6, ~<span class="hljs-attribute">x</span>=5);
+</code></pre>
+<p>The <code>~x</code> part in the declaration means the function accepts an argument labeled <code>x</code> and can refer to it in the function body by the same name. 你还可以为了方便在函数体内通过不同的名称引用参数：</p>
+<pre><code class="hljs css reason"><span class="hljs-keyword">let</span> drawCircle = <span class="hljs-function">(<span class="hljs-params">~radius <span class="hljs-keyword">as</span> r, ~color <span class="hljs-keyword">as</span> c</span>) =&gt;</span> {
+  setColor(c);
+  startAt(r, r);
+  <span class="hljs-comment">/* ... */</span>
+};
+
+drawCircle(~radius=<span class="hljs-number">10</span>, ~color=<span class="hljs-string">"red"</span>);
+</code></pre>
+<p>实际上，<code>(~radius)</code>仅仅是对 <code>(~radius as radius)</code> 的缩写 (称为<strong>双关语</strong>).</p>
+<p>下面是关于参数输入的语法：</p>
+<pre><code class="hljs css reason"><span class="hljs-keyword">let</span> drawCircle = (~radius <span class="hljs-keyword">as</span> r: <span class="hljs-built_in">int</span>, ~color <span class="hljs-keyword">as</span> c: <span class="hljs-built_in">string</span>)=&gt; ...;
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="curring"></a><a href="#curring" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Curring</h3>
+<p>Reason 函数能够自动地被<strong>部分</strong>调用:</p>
+<pre><code class="hljs css reason"><span class="hljs-attribute">let add</span> = (x, y) =&gt; x + y;
+<span class="hljs-attribute">let addFive</span> = add(5);
+<span class="hljs-attribute">let eleven</span> = addFive(6);
+<span class="hljs-attribute">let twelve</span> = addFive(7);
+</code></pre>
+<p>实际上，之前的<code>add</code>只不过是语法糖：</p>
+<pre><code class="hljs css reason">let add = (<span class="hljs-name">x</span>) =&gt; (<span class="hljs-name">y</span>) =&gt; x + y<span class="hljs-comment">;</span>
+</code></pre>
+<p>OCaml 对其进行优化以<a href="/try/?reason=DYUwLgBAhgJjEF4IAoAeBKRA+FBPTCOqEA1BLgNwBQVA9AFQTAD2zA1tJGABYgTMBXMAAchAQmhwAYgEsAbnxkBnaBAD6SmQDsA5qDUQAZgK0BjMDOZaIpqMGAT6tKqEiwYshYkkxkAVnRqF3AITWIkd08QZABGQKA">避免任何时候都能够不必要的函数分配</a>(朴实地讲，这里是两个函数)! 这样，我们就得到</p>
+<ul>
+<li>良好的语法</li>
+<li>免费 Currying (实际上，每个函数有一个单独的参数！)</li>
+<li>没有性能损耗</li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="可选的标签参数"></a><a href="#可选的标签参数" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>可选的标签参数</h2>
+<p>标签函数参数能够在声明期间标记为可选。而后你可以在调用函数时忽略它们。</p>
+<pre><code class="hljs css reason"><span class="hljs-comment">/* radius can be omitted */</span>
+<span class="hljs-keyword">let</span> drawCircle = <span class="hljs-function">(<span class="hljs-params">~color, ~radius=?, (<span class="hljs-params"></span>)</span>) =&gt;</span> {
+  setColor(color);
+  <span class="hljs-keyword">switch</span> (radius) {
+  | <span class="hljs-function"><span class="hljs-params">None</span> =&gt;</span> startAt(<span class="hljs-number">1</span>, <span class="hljs-number">1</span>)
+  | Some(r_) =&gt; startAt(r_, r_)
+  }
+};
+</code></pre>
+<p>当在给定的语法时，<code>radius</code>被<strong>包装</strong>在标准库的<code>option</code>类型中，默认值为<code>None</code>。 若提供，其将会被包装在<code>Some</code>中。 因此 <code>radius</code> 的类型值要么是 <code>None</code>，要么是 <code>Some(int)</code>。</p>
+<p><strong>Note</strong>：<code>None | Some(foo)</code> 是一种<a href="/docs/zh-CN/variant.html">之前</a>所描述的称为 variant 的数据结构类型， 特殊的 variant 类型由标准库提供。 其被称为<code>option</code>。 它的定义：<code>type option('a) = None | Some('a)</code>。</p>
+<p><strong>Note</strong> unit <code>()</code> 在 <code>drawCircle</code> 的末尾。 缺少它，由于 <code>radius</code> 和 <code>color</code> 都是标签参数，能够被柯里化，并能不按顺序调用，则对于下面代码的意义则不清晰：</p>
+<pre><code class="hljs css reason"><span class="hljs-attribute">let whatIsThis</span> = drawCircle(~color);
+</code></pre>
+<p><code>whatIsThis</code> 是一个等待可选的 <code>radius</code> 参数应用的柯里化的 <code>drawCircle</code> 函数？ 或已经完成应用？ 为了处理这一困惑，添加一个位置 (亦称 非标签) 参数到 <code>drawCircle</code> (一般为 <code>()</code>)，OCaml 也会，一般来说，当提供了可选参数时，会假定可选的标记参数会被忽略。</p>
+<pre><code class="hljs css reason"><span class="hljs-attribute">let curriedFunction</span> = drawCircle(~color);
+<span class="hljs-attribute">let actualResultWithoutProvidingRadius</span> = drawCircle(~color, ());
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="显示传递可选参数"></a><a href="#显示传递可选参数" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>显示传递可选参数</h3>
+<p>有时，你可能想要将某个值传递给函数却不知道这一个值是<code>None</code> 或 <code>Some(a)</code>. 简单底，你可以这么处理：</p>
+<pre><code class="hljs css reason"><span class="hljs-keyword">let</span> result =
+ switch (payloadRadius) {
+ | <span class="hljs-type">None</span> =&gt; drawCircle(~color, ())
+ | <span class="hljs-type">Some</span>(r) =&gt; drawCircle(~color, ~radius=r, ())
+ };
+</code></pre>
+<p>这很快就变得十分冗长。我们提供了一个快捷方式：</p>
+<pre><code class="hljs css reason"><span class="hljs-built_in">let</span> result = drawCircle(~<span class="hljs-built_in">color</span>, ~<span class="hljs-built_in">radius</span>=?payloadRadius, ());
+</code></pre>
+<p>这意味着”我理解 <code>radius</code> 是可选的，当我传递给它一个值时需要是 <code>int</code> 类型，但我不确定我穿的值是 <code>None</code> 还是 <code>Some(val)</code>，因此我将会传递给你整个 <code>option</code> 包装器。</p>
+<h3><a class="anchor" aria-hidden="true" id="带默认值的可选参数"></a><a href="#带默认值的可选参数" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>带默认值的可选参数</h3>
+<p>可选的标签参数也可以提供一个默认值。这一情况下，它们不是包装在 <code>option</code> 类型中。</p>
+<pre><code class="hljs css reason"><span class="hljs-built_in">let</span> drawCircle = (~<span class="hljs-built_in">radius</span>=<span class="hljs-number">1</span>, ~<span class="hljs-built_in">color</span>, ()) =&gt; {
+  setColor(<span class="hljs-built_in">color</span>);
+  startAt(<span class="hljs-built_in">radius</span>, <span class="hljs-built_in">radius</span>)
+};
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="递归函数"></a><a href="#递归函数" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>递归函数</h3>
+<p>默认情况，值是无法看到指向自身的绑定，但若在 <code>let</code> 绑定中包含了 <code>rec</code> 关键字则使这成为可能。 这允许函数通过递归赋予的能力看到和调用它们自身。</p>
+<pre><code class="hljs css reason">let rec neverTerminate = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> neverTerminate();
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="互相递归函数"></a><a href="#互相递归函数" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>互相递归函数</h3>
+<p>互相递归函数从一个使用 <code>rec</code> 的关键字单独的递归函数开始，然后通过 <code>and</code> 链接在一起：</p>
+<pre><code class="hljs css reason">let rec callSecond = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> callFirst()
+<span class="hljs-keyword">and</span> callFirst = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> callsecond();
+</code></pre>
+<p><strong>注意</strong>第一行没有以分号结尾而第二行没有 <code>let</code>。</p>
+<h2><a class="anchor" aria-hidden="true" id="提示-技巧"></a><a href="#提示-技巧" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>提示 &amp; 技巧</h2>
+<p>函数语法备忘清单：</p>
+<h3><a class="anchor" aria-hidden="true" id="声明"></a><a href="#声明" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>声明</h3>
+<pre><code class="hljs css reason"><span class="hljs-comment">/* anonymous function. Listed for completeness only */</span>
+(x) =&gt; <span class="hljs-function">(<span class="hljs-params">y</span>) =&gt;</span> <span class="hljs-number">1</span>;
+<span class="hljs-comment">/* sugar for the above */</span>
+(x, y) =&gt; <span class="hljs-number">1</span>;
+<span class="hljs-comment">/* assign to a name */</span>
+<span class="hljs-keyword">let</span> add = <span class="hljs-function">(<span class="hljs-params">x, y</span>) =&gt;</span> <span class="hljs-number">1</span>;
+
+<span class="hljs-comment">/* labeled */</span>
+<span class="hljs-keyword">let</span> add = <span class="hljs-function">(<span class="hljs-params">~first <span class="hljs-keyword">as</span> x, ~second <span class="hljs-keyword">as</span> y</span>) =&gt;</span> x + y;
+<span class="hljs-comment">/* with punning sugar */</span>
+<span class="hljs-keyword">let</span> add = <span class="hljs-function">(<span class="hljs-params">~first, ~second</span>) =&gt;</span> first + second;
+
+<span class="hljs-comment">/* labeled with default value */</span>
+<span class="hljs-keyword">let</span> add = <span class="hljs-function">(<span class="hljs-params">~first <span class="hljs-keyword">as</span> x=<span class="hljs-number">1</span>, ~second <span class="hljs-keyword">as</span> y = <span class="hljs-number">2</span></span>) =&gt;</span> x + y;
+<span class="hljs-comment">/* with punning */</span>
+<span class="hljs-keyword">let</span> add = <span class="hljs-function">(<span class="hljs-params">~first=<span class="hljs-number">1</span>, ~second=<span class="hljs-number">2</span></span>) =&gt;</span> first + second;
+
+<span class="hljs-comment">/* optional */</span>
+<span class="hljs-keyword">let</span> add = <span class="hljs-function">(<span class="hljs-params">~first <span class="hljs-keyword">as</span> x=?, ~second <span class="hljs-keyword">as</span> y=?</span>) =&gt;</span> <span class="hljs-keyword">switch</span> (x) {...};
+<span class="hljs-comment">/* with punning */</span>
+<span class="hljs-keyword">let</span> add = <span class="hljs-function">(<span class="hljs-params">~first=?, ~second=?</span>) =&gt;</span> <span class="hljs-keyword">switch</span> (first) {...};
+</code></pre>
+<h4><a class="anchor" aria-hidden="true" id="带类型标记"></a><a href="#带类型标记" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>带类型标记</h4>
+<pre><code class="hljs css reason"><span class="hljs-comment">/* anonymous function */</span>
+(<span class="hljs-string">x:</span> <span class="hljs-keyword">int</span>) =&gt; (<span class="hljs-string">y:</span> <span class="hljs-keyword">int</span>): <span class="hljs-keyword">int</span> =&gt; <span class="hljs-number">1</span>;
+<span class="hljs-comment">/* sugar for the above */</span>
+(<span class="hljs-string">x:</span> <span class="hljs-keyword">int</span>, <span class="hljs-string">y:</span> <span class="hljs-keyword">int</span>): <span class="hljs-keyword">int</span> =&gt; <span class="hljs-number">1</span>;
+<span class="hljs-comment">/* assign to a name */</span>
+let add = (<span class="hljs-string">x:</span> <span class="hljs-keyword">int</span>, <span class="hljs-string">y:</span> <span class="hljs-keyword">int</span>): <span class="hljs-keyword">int</span> =&gt; <span class="hljs-number">1</span>;
+
+<span class="hljs-comment">/* labeled */</span>
+let add = (~first <span class="hljs-keyword">as</span> <span class="hljs-string">x:</span> <span class="hljs-keyword">int</span>, ~second <span class="hljs-keyword">as</span> <span class="hljs-string">y:</span> <span class="hljs-keyword">int</span>) : <span class="hljs-keyword">int</span> =&gt; x + y;
+<span class="hljs-comment">/* with punning sugar */</span>
+let add = (~<span class="hljs-string">first:</span> <span class="hljs-keyword">int</span>, ~<span class="hljs-string">second:</span> <span class="hljs-keyword">int</span>) : <span class="hljs-keyword">int</span> =&gt; first + second;
+
+<span class="hljs-comment">/* labeled with default value */</span>
+let add = (~first <span class="hljs-keyword">as</span> <span class="hljs-string">x:</span> <span class="hljs-keyword">int</span>=<span class="hljs-number">1</span>, ~second <span class="hljs-keyword">as</span> <span class="hljs-string">y:</span> <span class="hljs-keyword">int</span>=<span class="hljs-number">2</span>) : <span class="hljs-keyword">int</span> =&gt; x + y;
+<span class="hljs-comment">/* with punning sugar */</span>
+let add = (~<span class="hljs-string">first:</span> <span class="hljs-keyword">int</span>=<span class="hljs-number">1</span>, ~<span class="hljs-string">second:</span> <span class="hljs-keyword">int</span>=<span class="hljs-number">2</span>) : <span class="hljs-keyword">int</span> =&gt; first + second;
+
+<span class="hljs-comment">/* optional */</span>
+let add = (~first <span class="hljs-keyword">as</span> <span class="hljs-string">x:</span> option(<span class="hljs-keyword">int</span>)=?, ~second as y: option(<span class="hljs-keyword">int</span>)=?) : <span class="hljs-keyword">int</span> =&gt; <span class="hljs-keyword">switch</span> (x) {...};
+<span class="hljs-comment">/* with punning sugar */</span>
+<span class="hljs-comment">/* note that the caller would pass an `int`, not `option int` */</span>
+<span class="hljs-comment">/* Inside the function, `first` and `second` are `option int`. */</span>
+let add = (~<span class="hljs-string">first:</span> option(<span class="hljs-keyword">int</span>)=?, ~second: option(<span class="hljs-keyword">int</span>)=?): <span class="hljs-keyword">int</span> =&gt; <span class="hljs-keyword">switch</span> (first) {...};
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="应用"></a><a href="#应用" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>应用</h3>
+<pre><code class="hljs css reason">/* anonymous <span class="hljs-built_in">application</span>. Listed <span class="hljs-keyword">for</span> completeness only */
+add(x)(y);
+/* sugar <span class="hljs-keyword">for</span> <span class="hljs-keyword">the</span> <span class="hljs-keyword">above</span> */
+add(x, y);
+
+/* labeled */
+add(~<span class="hljs-keyword">first</span>=<span class="hljs-number">1</span>, ~<span class="hljs-keyword">second</span>=<span class="hljs-number">2</span>);
+/* <span class="hljs-keyword">with</span> punning sugar */
+add(~<span class="hljs-keyword">first</span>, ~<span class="hljs-keyword">second</span>);
+
+/* <span class="hljs-built_in">application</span> <span class="hljs-keyword">with</span> default value. Same <span class="hljs-keyword">as</span> normal <span class="hljs-built_in">application</span> */
+add(~<span class="hljs-keyword">first</span>=<span class="hljs-number">1</span>, ~<span class="hljs-keyword">second</span>=<span class="hljs-number">2</span>);
+
+/* explicit optional <span class="hljs-built_in">application</span> */
+add(~<span class="hljs-keyword">first</span>=?Some(<span class="hljs-number">1</span>), ~<span class="hljs-keyword">second</span>=?Some(<span class="hljs-number">2</span>));
+/* <span class="hljs-keyword">with</span> punning */
+add(~<span class="hljs-keyword">first</span>?, ~<span class="hljs-keyword">second</span>?);
+</code></pre>
+<h4><a class="anchor" aria-hidden="true" id="带类型标记-1"></a><a href="#带类型标记-1" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>带类型标记</h4>
+<pre><code class="hljs css reason"><span class="hljs-comment">/* anonymous application */</span>
+<span class="hljs-built_in">add</span>(x: <span class="hljs-built_in">int</span>)(y: <span class="hljs-built_in">int</span>);
+
+<span class="hljs-comment">/* labeled */</span>
+<span class="hljs-built_in">add</span>(~first=<span class="hljs-number">1</span>: <span class="hljs-built_in">int</span>, ~<span class="hljs-built_in">second</span>=<span class="hljs-number">2</span>: <span class="hljs-built_in">int</span>);
+<span class="hljs-comment">/* with punning sugar */</span>
+<span class="hljs-built_in">add</span>(~first: <span class="hljs-built_in">int</span>, ~<span class="hljs-built_in">second</span>: <span class="hljs-built_in">int</span>);
+
+<span class="hljs-comment">/* application with default value. Same as normal application */</span>
+<span class="hljs-built_in">add</span>(~first=<span class="hljs-number">1</span>: <span class="hljs-built_in">int</span>, ~<span class="hljs-built_in">second</span>=<span class="hljs-number">2</span>: <span class="hljs-built_in">int</span>);
+
+<span class="hljs-comment">/* explicit optional application */</span>
+<span class="hljs-built_in">add</span>(~first=?Some(<span class="hljs-number">1</span>): option(<span class="hljs-built_in">int</span>), ~<span class="hljs-built_in">second</span>=?Some(<span class="hljs-number">2</span>): option(<span class="hljs-built_in">int</span>));
+<span class="hljs-comment">/* with punning sugar */</span>
+<span class="hljs-built_in">add</span>(~first: option(<span class="hljs-built_in">int</span>)?, ~<span class="hljs-built_in">second</span>: option(<span class="hljs-built_in">int</span>)?);
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="单独的类型签名"></a><a href="#单独的类型签名" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>单独的类型签名</h3>
+<pre><code class="hljs css reason">/* first arg <span class="hljs-keyword">type</span>, second arg <span class="hljs-keyword">type</span>, return <span class="hljs-keyword">type</span> */
+<span class="hljs-keyword">type</span> foo = <span class="hljs-built_in">int</span> =&gt; <span class="hljs-built_in">int</span> =&gt; <span class="hljs-built_in">int</span>;
+/* sugar <span class="hljs-keyword">for</span> the above */
+<span class="hljs-keyword">type</span> foo = (<span class="hljs-built_in">int</span>, <span class="hljs-built_in">int</span>) =&gt; <span class="hljs-built_in">int</span>;
+
+/* labeled */
+<span class="hljs-keyword">type</span> foo = (~first: <span class="hljs-built_in">int</span>, ~second: <span class="hljs-built_in">int</span>) =&gt; <span class="hljs-built_in">int</span>;
+
+/* labeled */
+<span class="hljs-keyword">type</span> foo = (~first: <span class="hljs-built_in">int</span>=?, ~second: <span class="hljs-built_in">int</span>=?, <span class="hljs-built_in">unit</span>) =&gt; <span class="hljs-built_in">int</span>;
+</code></pre>
+<h4><a class="anchor" aria-hidden="true" id="接口文件"></a><a href="#接口文件" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>接口文件</h4>
+<p>从实现文件(<code>.re</code>)中标记函数：</p>
+<pre><code class="hljs css reason"><span class="hljs-keyword">let</span> add: <span class="hljs-keyword">int</span> =&gt; <span class="hljs-keyword">int</span> =&gt; <span class="hljs-keyword">int</span>;
+<span class="hljs-comment">/* sugar for the above */</span>
+<span class="hljs-keyword">let</span> add: (<span class="hljs-keyword">int</span>, <span class="hljs-keyword">int</span>) =&gt; <span class="hljs-keyword">int</span>;
+</code></pre>
+<p>与上一节规则相同，除了将 <code>type foo = bar</code> 替换为 <code>let add: bar</code>。</p>
+<p><strong>不要</strong>对类型文件里实际导出的类型感到困惑。 <code>let add: bar</code>在具体实现的文件中标记了一个已有的值<code>bar</code>。 <code>type foo = bar</code>从具体实现文件中导出了一个相同模型的类型。</p>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="list-and-array.html">← List 和 Array</a><a class="docs-next button" href="if-else.html">If-Else →</a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#无参数">无参数</a></li><li><a href="#标签参数">标签参数</a><ul class="toc-headings"><li><a href="#curring">Curring</a></li></ul></li><li><a href="#可选的标签参数">可选的标签参数</a><ul class="toc-headings"><li><a href="#显示传递可选参数">显示传递可选参数</a></li><li><a href="#带默认值的可选参数">带默认值的可选参数</a></li><li><a href="#递归函数">递归函数</a></li><li><a href="#互相递归函数">互相递归函数</a></li></ul></li><li><a href="#提示-技巧">提示 &amp; 技巧</a><ul class="toc-headings"><li><a href="#声明">声明</a></li><li><a href="#应用">应用</a></li><li><a href="#单独的类型签名">单独的类型签名</a></li></ul></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.min.js"></script><script>window.foo = new Pjax({
+          areas: [
+            // try to use the first query.
+            '.mainContainer, .docsNavContainer .toc .navWrapper, .onPageNav',
+            // fallback
+            'body'
+          ],
+          link: '.docsNavContainer:not(.docsSliderActive) a',
+          update: {
+            script: false,
+          }
+        });
+        var languagesMenuItemCopy = document.getElementById("languages-menu");
+        languagesMenuItemCopy.addEventListener("click", function(e){
+          e.preventDefault();
+          e.stopPropagation();
+          e.stopImmediatePropagation();
+        });</script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+              var search = docsearch({
+                
+                apiKey: '966d1e412f67114a07dc0afe44b19b53',
+                indexName: 'reason',
+                inputSelector: '#search_input_react',
+                algoliaOptions: {"facetFilters":["lang:zh-CN"]}
+              });
+            </script></body></html>

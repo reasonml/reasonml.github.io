@@ -1,0 +1,164 @@
+<!DOCTYPE html><html lang="pt-BR"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Convertendo de JS · Reason</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta property="og:title" content="Convertendo de JS · Reason"/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io/index.html"/><meta property="og:description" content="## Preparação"/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/icon_50.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/arduino-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io/blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io/blog/feed.xml" title="Reason Blog RSS Feed"/><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible doc separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/pt-BR"><img class="logo" src="/img/dummy.svg" alt="Reason"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/pt-BR/quickstart-javascript.html" target="_self">Documentação</a></li><li class=""><a href="/pt-BR/try.html" target="_self">Tentar</a></li><li class=""><a href="/api/index.html" target="_self">API</a></li><li class=""><a href="/docs/pt-BR/community.html" target="_self">Comunidade</a></li><li class=""><a href="/blog" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg"/>Português (Brasil)</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/ja">日本語</a></li><li><a href="/en">English</a></li><li><a href="/de">Deutsch</a></li><li><a href="/es-ES">Español</a></li><li><a href="/fr">Français</a></li><li><a href="/ko">한국어</a></li><li><a href="/ru">Русский</a></li><li><a href="/uk">Українська</a></li><li><a href="/zh-CN">中文</a></li><li><a href="/zh-TW">繁體中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank" rel="noreferrer noopener">Ajude a Traduzir</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(){
+          if(languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/facebook/reason" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>JavaScript</span></h2></div><div class="navGroups"><div class="navGroup navGroupActive"><h3>Introdução</h3><ul><li class="navListItem"><a class="navItem" href="/docs/pt-BR/what-and-why.html">O quê &amp; porquê</a></li></ul></div><div class="navGroup navGroupActive"><h3>Configuração do Editor</h3><ul><li class="navListItem"><a class="navItem" href="/docs/pt-BR/global-installation.html">Instalação Global</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/editor-plugins.html">Plugins para Editores</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/extra-goodies.html">Miscelânea</a></li></ul></div><div class="navGroup navGroupActive"><h3>Noções Básicas da Linguagem</h3><ul><li class="navListItem"><a class="navItem" href="/docs/pt-BR/overview.html">Visão geral</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/let-binding.html">Let Binding</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/type.html">Tipo!</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/string-and-char.html">String &amp; Char</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/boolean.html">Boolean</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/integer-and-float.html">Inteiro &amp; Float</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/tuple.html">Tupla</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/record.html">Record</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/variant.html">Variantes!</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/list-and-array.html">Lista &amp; Array</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/function.html">Função</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/if-else.html">If-Else</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/more-on-type.html">Mais sobre Tipos</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/destructuring.html">Destructuring</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/pattern-matching.html">Correspondência de Padrões!</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/mutation.html">Mutação</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/imperative-loops.html">Loops Imperativos</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/jsx.html">JSX</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/external.html">External</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/exception.html">Exceção</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/object.html">Objeto</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/module.html">Módulos</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/promise.html">Promise</a></li></ul></div><div class="navGroup navGroupActive"><h3>JavaScript</h3><ul><li class="navListItem"><a class="navItem" href="/docs/pt-BR/quickstart-javascript.html">Introdução</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/interop.html">Interoperabilidade</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/syntax-cheatsheet.html">Sintaxe</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/libraries.html">Bibliotecas</a></li><li class="navListItem navListItemActive"><a class="navItem navItemActive" href="/docs/pt-BR/converting-from-js.html">Convertendo de JS</a></li></ul></div><div class="navGroup navGroupActive"><h3>Nativo</h3><ul><li class="navListItem"><a class="navItem" href="/docs/pt-BR/native.html">Nativo</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/quickstart-ocaml.html">Introdução</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/convert-from-ocaml.html">Convertendo de OCaml</a></li></ul></div><div class="navGroup navGroupActive"><h3>Extra</h3><ul><li class="navListItem"><a class="navItem" href="/docs/pt-BR/faq.html">Perguntas Frequentes</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/comparison-to-ocaml.html">Comparação com OCaml</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/newcomer-examples.html">Exemplos para Iniciantes</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/project-structure.html">Estrutura de Projeto</a></li></ul></div></div></section></div><script>
+          var toggler = document.getElementById('navToggler');
+          var nav = document.getElementById('docsNav');
+          toggler.onclick = function() {
+            nav.classList.toggle('docsSliderActive');
+          };
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://crowdin.com/project/reason/pt-BR" target="_blank" rel="noreferrer noopener">Translate</a><h1>Convertendo de JS</h1></header><article><div><span><h2><a class="anchor" aria-hidden="true" id="preparacão"></a><a href="#preparacão" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Preparação</h2>
+<p><strong>Antes de prosseguir</strong>, tenha certeza que Reason é o que seu time necessita! Enquanto nós atestamos a popularidade de Reason e BuckleScript, não crie discussões desnecessárias com seus colegas, deixando uma má primeira impressão. Isto é difícil de corrigir posteriormente.</p>
+<p>Este guia cobre um fluxo de trabalho que tem nos ajudado a converter os programas rápida e eficientemente. Não foi feito para abordar características de linguagem e FFI (apesar disso, coloca-as no contexto). É assumido um conhecimento básico de Reason e BuckleScript.</p>
+<h2><a class="anchor" aria-hidden="true" id="sintaxe"></a><a href="#sintaxe" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Sintaxe</h2>
+<p><strong>Objetivo</strong>: antes de mais nada, <strong>torne a sintaxe do arquivo válida</strong>. Ignore tipos errados, módulos ausentes, má organização de arquivos, dependências externas em excesso, etc. Nós iremos retornar para corrigir estes problemas após estabelecer o teste de regressão &quot;sem erros de sintaxe&quot;.</p>
+<p>Dado que a sintaxe de Reason se assemelha o suficiente a de JavaScript, ao invés de iniciar um arquivo Reason em branco, simplesmente copie o arquivo js existente e trabalhe a partir dele.</p>
+<p><em>Dica</em>: não esqueça que você pode usar <code>refmt</code> no seu editor/terminal! Se você não souber, por exemplo, a precedência de algumas operações, coloque em volta tantos parênteses quantos quiser, e aí aplique <code>refmt</code> ao seu código e veja quais são mantidos. Da mesma forma, não há necessidade de perder tempo em indentação e espaçamentos; <code>refmt</code> cuida disso.</p>
+<pre><code class="hljs css js"><span class="hljs-comment">/* arquivo JS original que você copiou */</span>
+<span class="hljs-keyword">const</span> school = <span class="hljs-built_in">require</span>(<span class="hljs-string">'school'</span>);
+
+<span class="hljs-keyword">const</span> defaultId = <span class="hljs-number">10</span>;
+
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">queryResult</span>(<span class="hljs-params">usePayload, payload</span>) </span>{
+  <span class="hljs-keyword">if</span> (usePayload) {
+    <span class="hljs-keyword">return</span> payload.student
+  }
+  <span class="hljs-keyword">return</span> school.getStudentById(defaultId);
+}
+</code></pre>
+<p>Segue algumas coisas que você faria nessa etapa:</p>
+<ul>
+<li>Converta a sintaxe para chamada de função.</li>
+<li>Converta <code>var</code> e <code>const</code> para <code>let</code>.</li>
+<li>Apague os <code>require</code>s.</li>
+<li>Faça outras modificações semelhantes. Para trechos que não tem um equivalente em BuckleScript, use <code>bs.raw</code> (<a href="https://bucklescript.github.io/docs/en/embed-raw-javascript.html">documentação</a>).</li>
+</ul>
+<p>Novamente, <strong>se preocupe somente em tornar o arquivo sintaticamente válido</strong>. Tentar aprender ao mesmo tempo 1) sintaxe, 2) tipos e 3) outras semânticas ao mesmo tempo que se faz a conversão de um arquivo reduzirá sua velocidade de iteração a menos de um terço.</p>
+<pre><code class="hljs css reason">/* conversão sintaticamente válida, semanticamente incorreta */
+/*<span class="hljs-built_in"> const </span>school = require('school'); */
+let defaultId = 10;
+
+let queryResult = (usePayload, payload) =&gt;
+ <span class="hljs-built_in"> if </span>(usePayload) {
+    payload.student
+  } else {
+    /* não há necessidade de um<span class="hljs-built_in"> return </span>prematuro em Reason,<span class="hljs-built_in"> if-else </span>é uma expressão */
+    school.getStudentById(
+      defaultId
+    )
+  };
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="tipos-passo-1"></a><a href="#tipos-passo-1" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Tipos, passo 1</h2>
+<p><strong>Objetivo</strong>: corrigir os tipos, mas só o suficiente para passar à próxima etapa.</p>
+<p>Você irá ocasionalmente esbarrar em erros de sintaxe, porém não tão drásticos quanto os dos passos anteriores.</p>
+<ul>
+<li>Mude <code>foo.bar</code> para <code>foo##bar</code>. Esse <a href="https://bucklescript.github.io/docs/en/object.html#object-as-record">recurso &quot;saída de emergência&quot; do BuckleScript</a> será seu amigo a médio prazo.</li>
+<li>Converta <code>{foo: bar}</code> para <code>[%bs.obj {foo: bar}]</code> (<a href="https://bucklescript.github.io/docs/en/object.html#creation">documentação</a>). Após usar o <code>refmt</code>, isso será reescrito como <code>{&quot;foo&quot;: bar}</code>.</li>
+<li>Para se comunicar com arquivos JS externos, use <code>external</code>. No BuckleScript, isso é conhecido como <a href="https://bucklescript.github.io/docs/en/intro-to-external.html">foreign function interface</a>.
+<ul>
+<li>Traga externals para o seu arquivo. Não há necessidade de criar arquivos limpos e bem separados para dependências externas agora. Iremos voltar a isso.</li>
+<li>Se é trabalhoso demais tipar corretamente a entrada e saída de um <code>external</code>, use alguns tipos polimórficos como substitutos, ex: <code>external estudantePorId: 'tantoFaz =&gt; 'tambemTantoFaz = ...</code>.</li>
+<li>Para tipos de dados &amp; padrões que são difíceis de converter corretamente, vocêo pode ocasionalmente criar conversores como <code>external transformacaoInsegura : meuTipoDeDados =&gt; outroTipoDeDados = &quot;%identity&quot;;</code>.</li>
+</ul></li>
+</ul>
+<p>Este é a primeira passagem; ao final os tipos provavelmente serão diferentes. Por enquanto, colha os frutos! Uma vez que você termine de consertar todos os erros de tipagem, seu arquivo JS deverá ser gerado. Mantenha-o aberto lado a lado. É chegado o momento de retornar e arrumar as gambiarras!</p>
+<pre><code class="hljs css reason">/* sintaticamente válido, ainda incorreto semanticamente, porém melhor */
+[@bs.<span class="hljs-keyword">module</span> <span class="hljs-string">"school"</span>] <span class="hljs-keyword">external</span> getStudentById : <span class="hljs-symbol">'whatever</span> =&gt; <span class="hljs-symbol">'whateverElse</span> = <span class="hljs-string">"getStudentById"</span>;
+
+<span class="hljs-keyword">let</span> defaultId = <span class="hljs-number">10</span>;
+
+<span class="hljs-keyword">let</span> queryResult = (usePayload, payload) =&gt;
+  <span class="hljs-keyword">if</span> (usePayload) {
+    payload##student /* isto será inferido como <span class="hljs-type">`Js</span>.t <span class="hljs-symbol">'a</span>` */
+  } <span class="hljs-keyword">else</span> {
+    getStudentById(defaultId)
+  };
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="semantica-de-execucão"></a><a href="#semantica-de-execucão" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Semântica de Execução</h2>
+<p><strong>Objetivo</strong>: consertar os erros no JS gerado na saída.</p>
+<p>Compare-o com seu arquivo JS inicial. A saída provavelmente está incorreta; você provavelmente cometeu erros ao traduzir alguns idiomas e alguns externals.</p>
+<ul>
+<li>Dê tipo ao formato dos objetos JS (os trechos que exigiram <code>##</code>).</li>
+<li>Converta qualquer uma dessas ocorrências para records/variants/outros tipos idiomáticos em OCaml.</li>
+</ul>
+<p>Durante essa parte, confira a saída para cada alteração.</p>
+<pre><code class="hljs css reason">type student; <span class="hljs-comment">/* tipo abstrato, descrito posteriormente */</span>
+
+[@bs.module <span class="hljs-string">"school"</span>] external getStudentById : '<span class="hljs-attr">whatever</span> =&gt; <span class="hljs-attr">student</span> = <span class="hljs-string">"getStudentById"</span>;
+
+type <span class="hljs-attr">payloadType</span> = {. <span class="hljs-string">"student"</span>: student};
+
+<span class="hljs-keyword">let</span> <span class="hljs-attr">defaultId</span> = <span class="hljs-number">10</span>;
+
+<span class="hljs-keyword">let</span> <span class="hljs-attr">queryResult</span> = (usePayload, payload: payloadType) =&gt;
+  <span class="hljs-keyword">if</span> (usePayload) {
+    payload<span class="hljs-comment">##student</span>
+  } <span class="hljs-keyword">else</span> {
+    getStudentById(defaultId)
+  };
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="limpeza-tipos-passagem-2"></a><a href="#limpeza-tipos-passagem-2" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Limpeza (Tipos, Passagem 2)</h2>
+<p><strong>Objetivo</strong>: tornar seus tipos corretos (aka 'sound').</p>
+<p>Retorne para consertar tudo que você ignorou durante a primeira passagem.</p>
+<ul>
+<li>Tenha certeza que você não tem quaisquer tipos <code>'coisa</code> deixados nos <code>external</code>s.</li>
+<li>Você pode manter seus <code>external</code>s no seu arquivo ou movê-los para um arquivo a parte.</li>
+</ul>
+<pre><code class="hljs css reason"><span class="hljs-comment">/* no arquivo atual */</span>
+type <span class="hljs-attr">payloadType</span> = {. <span class="hljs-string">"student"</span>: School.student}; <span class="hljs-comment">/* <span class="hljs-doctag">TODO:</span> mover isto para outro local! */</span>
+
+<span class="hljs-keyword">let</span> <span class="hljs-attr">defaultId</span> = <span class="hljs-number">10</span>;
+
+<span class="hljs-keyword">let</span> <span class="hljs-attr">queryResult</span> = (usePayload, payload: payloadType) =&gt;
+  <span class="hljs-keyword">if</span> (usePayload) {
+    payload<span class="hljs-comment">##student</span>
+  } <span class="hljs-keyword">else</span> {
+    School.getStudentById(defaultId)
+  };
+</code></pre>
+<pre><code class="hljs css reason">/* em um arquivo <span class="hljs-type">School</span>.re dedicado */
+<span class="hljs-keyword">type</span> student;
+
+[@bs.<span class="hljs-keyword">module</span> <span class="hljs-string">"School"</span>] <span class="hljs-keyword">external</span> getStudentById : <span class="hljs-built_in">int</span> =&gt; student = <span class="hljs-string">"getStudentById"</span>;
+[@bs.<span class="hljs-keyword">module</span> <span class="hljs-string">"School"</span>] <span class="hljs-keyword">external</span> getAllStudents : <span class="hljs-built_in">unit</span> =&gt; <span class="hljs-built_in">array</span>(student) = <span class="hljs-string">"getAllStudents"</span>;
+</code></pre>
+<p>O tipo <code>student</code> não tem conteúdo; isto é chamado de <a href="/docs/pt-BR/module.html#signatures">tipo abstrato (abstract type)</a>. Esta é uma maneira conveniente de descrever um relacionamento entre chamadas a código externo sem saber o real formato dos dados sendo passado.</p>
+<p>Com isso, tá tudo certinho!</p>
+<h2><a class="anchor" aria-hidden="true" id="dicas"></a><a href="#dicas" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Dicas</h2>
+<p><strong>Não</strong> tenta converter um arquivo JS em um arquivo Reason irretocável de uma vez só. Tal método provavelmente irá ser mais lento! Está ok ter externals e <code>bs.obj</code> remanescentes, e temporariamente não aproveitar recursos agradáveis de OCaml (variants, argumentos nomeados, etc.). Uma vez que você tenha convertido outros arquivos relacionados, você pode retornar e refatorar de maneira <strong>mais rápida</strong> tomando proveito do sistema de tipos.</p>
+<p>Whatever nice utilities you find, put them in a <code>tempUtils.re</code> file or something. They're easy examples for your colleagues and removes some conversion churns.</p>
+<p>Nós <strong>recomendamos fortemente</strong> que você realize o controle de versão da saída JS. Isto torna a integração com seu sistema de build quase transparente, e garante que quando você não está presente seus colegas ainda conseguem fazer pequenas mudanças, conferir as diferenças na saída e corrigir pequenos erros. Também é um ótimo argumento para o uso da tecnologia (principalmente para gerentes!) que a saída JS seja versionada e portanto diretamente modificável em caso de correções de emergência. Até mesmo em caso de atualização da versão do BuckleScript você será alertado de qualquer diferença na saída. É como o <a href="https://facebook.github.io/jest/docs/snapshot-testing.html">Jest snapshots</a>, embutido!</p>
+<p>As always, ping us on <a href="https://discord.gg/reasonml">Discord</a> or <a href="https://reasonml.chat">Forum</a> for more help!</p>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="libraries.html">← Bibliotecas</a><a class="docs-next button" href="native.html">Nativo →</a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#preparacão">Preparação</a></li><li><a href="#sintaxe">Sintaxe</a></li><li><a href="#tipos-passo-1">Tipos, passo 1</a></li><li><a href="#semantica-de-execucão">Semântica de Execução</a></li><li><a href="#limpeza-tipos-passagem-2">Limpeza (Tipos, Passagem 2)</a></li><li><a href="#dicas">Dicas</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.min.js"></script><script>window.foo = new Pjax({
+          areas: [
+            // try to use the first query.
+            '.mainContainer, .docsNavContainer .toc .navWrapper, .onPageNav',
+            // fallback
+            'body'
+          ],
+          link: '.docsNavContainer:not(.docsSliderActive) a',
+          update: {
+            script: false,
+          }
+        });
+        var languagesMenuItemCopy = document.getElementById("languages-menu");
+        languagesMenuItemCopy.addEventListener("click", function(e){
+          e.preventDefault();
+          e.stopPropagation();
+          e.stopImmediatePropagation();
+        });</script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+              var search = docsearch({
+                
+                apiKey: '966d1e412f67114a07dc0afe44b19b53',
+                indexName: 'reason',
+                inputSelector: '#search_input_react',
+                algoliaOptions: {"facetFilters":["lang:pt-BR"]}
+              });
+            </script></body></html>
