@@ -94,6 +94,11 @@ const users = [
     image: "img/logos/appier.svg",
     infoLink: "https://appier.com",
   },
+  {
+    caption: "InVision",
+    image: "img/logos/invision.svg",
+    infoLink: "https://www.invision.de",
+  },
 ];
 
 const examples = [
