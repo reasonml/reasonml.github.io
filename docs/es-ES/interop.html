@@ -1,0 +1,182 @@
+<!DOCTYPE html><html lang="es-ES"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Interop · Reason</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta property="og:title" content="Interop · Reason"/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io/index.html"/><meta property="og:description" content="## Tan solo escribe JavaScript en medio de tu código Reason"/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/icon_50.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/arduino-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io/blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io/blog/feed.xml" title="Reason Blog RSS Feed"/><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible doc separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/es-ES"><img class="logo" src="/img/dummy.svg" alt="Reason"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/es-ES/quickstart-javascript.html" target="_self">Documentación</a></li><li class=""><a href="/es-ES/try.html" target="_self">Pruebalo</a></li><li class=""><a href="/api/index.html" target="_self">API</a></li><li class=""><a href="/docs/es-ES/community.html" target="_self">Comunidad</a></li><li class=""><a href="/blog" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg"/>Español</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/ja">日本語</a></li><li><a href="/en">English</a></li><li><a href="/de">Deutsch</a></li><li><a href="/fr">Français</a></li><li><a href="/ko">한국어</a></li><li><a href="/pt-BR">Português (Brasil)</a></li><li><a href="/ru">Русский</a></li><li><a href="/uk">Українська</a></li><li><a href="/zh-CN">中文</a></li><li><a href="/zh-TW">繁體中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank" rel="noreferrer noopener">Ayuda a traducir</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(){
+          if(languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/facebook/reason" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>JavaScript</span></h2></div><div class="navGroups"><div class="navGroup navGroupActive"><h3>Intro</h3><ul><li class="navListItem"><a class="navItem" href="/docs/es-ES/what-and-why.html">Qué y para qué</a></li></ul></div><div class="navGroup navGroupActive"><h3>Configuración de Editor</h3><ul><li class="navListItem"><a class="navItem" href="/docs/es-ES/global-installation.html">Instalación global</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/editor-plugins.html">Plugins para el editor</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/extra-goodies.html">Regalos extras</a></li></ul></div><div class="navGroup navGroupActive"><h3>Fundamentos del Idioma</h3><ul><li class="navListItem"><a class="navItem" href="/docs/es-ES/overview.html">Vista global</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/let-binding.html">Let Binding</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/type.html">¡Tipo!</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/string-and-char.html">String &amp; Char</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/boolean.html">Booleano</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/integer-and-float.html">Integer y Float</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/tuple.html">Tupla</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/record.html">Registro</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/variant.html">¡Variante!</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/list-and-array.html">Lista y Matriz</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/function.html">Función</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/if-else.html">If-Else</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/more-on-type.html">Más de tipo</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/destructuring.html">Desestructurando</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/pattern-matching.html">¡Coincidencia de patrones!</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/mutation.html">Mutación</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/imperative-loops.html">Lazos imperativos</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/jsx.html">JSX</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/external.html">Externo</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/exception.html">Excepción</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/object.html">Objeto</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/module.html">Módulo</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/promise.html">Promesa</a></li></ul></div><div class="navGroup navGroupActive"><h3>JavaScript</h3><ul><li class="navListItem"><a class="navItem" href="/docs/es-ES/quickstart-javascript.html">Inicio rápido</a></li><li class="navListItem navListItemActive"><a class="navItem navItemActive" href="/docs/es-ES/interop.html">Interop</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/syntax-cheatsheet.html">Hoja de Apoyo de sintaxis</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/libraries.html">Librerías</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/converting-from-js.html">Convertir de JS</a></li></ul></div><div class="navGroup navGroupActive"><h3>Nativo</h3><ul><li class="navListItem"><a class="navItem" href="/docs/es-ES/native.html">Nativo</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/quickstart-ocaml.html">Inicio rápido</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/convert-from-ocaml.html">Convertir de OCami</a></li></ul></div><div class="navGroup navGroupActive"><h3>Extra</h3><ul><li class="navListItem"><a class="navItem" href="/docs/es-ES/faq.html">Preguntas Frecuentes</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/comparison-to-ocaml.html">Comparación a OCaml</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/newcomer-examples.html">Ejemplos de novato</a></li><li class="navListItem"><a class="navItem" href="/docs/es-ES/project-structure.html">Estructura del proyecto</a></li></ul></div></div></section></div><script>
+          var toggler = document.getElementById('navToggler');
+          var nav = document.getElementById('docsNav');
+          toggler.onclick = function() {
+            nav.classList.toggle('docsSliderActive');
+          };
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://crowdin.com/project/reason/es-ES" target="_blank" rel="noreferrer noopener">Translate</a><h1>Interop</h1></header><article><div><span><h2><a class="anchor" aria-hidden="true" id="tan-solo-escribe-javascript-en-medio-de-tu-codigo-reason"></a><a href="#tan-solo-escribe-javascript-en-medio-de-tu-codigo-reason" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Tan solo escribe JavaScript en medio de tu código Reason</h2>
+<p>If you're just hacking things together, this can be very nice, but you also have all of the unsafety of JavaScript code</p>
+<pre><code class="hljs css reason">Js.<span class="hljs-built_in">log</span>(<span class="hljs-string">"this is reason"</span>);
+
+[%bs.raw {| console.<span class="hljs-built_in">log</span>('here <span class="hljs-keyword">is</span> <span class="hljs-keyword">some</span> javascript <span class="hljs-keyword">for</span> you') |}];
+</code></pre>
+<blockquote>
+<p><code>{|</code> and <code>|}</code> son los delimitadores de una cadena OCaml en multiples líneas. También puedes poner una etiqueta ahí e.g. <code>{something|</code> y entonces buscará una coincidencia <code>|something}</code> de cierre.</p>
+</blockquote>
+<p>Y este es el JavaScript resultante:</p>
+<pre><code class="hljs css js"><span class="hljs-comment">// Generado por BUCKLESCRIPT VERSION 1.7.4, POR FAVOR EDITAR CON CUIDADO</span>
+<span class="hljs-meta">'use strict'</span>;
+<span class="hljs-built_in">console</span>.log(<span class="hljs-string">"esto es reason"</span>);
+<span class="hljs-built_in">console</span>.log(<span class="hljs-string">'aquí hay algo de javascript para ti'</span>);
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="poniendo-algo-de-javascript-y-haciendolo-accesible-desde-reason"></a><a href="#poniendo-algo-de-javascript-y-haciendolo-accesible-desde-reason" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Poniendo algo de JavaScript, y haciéndolo accesible desde Reason</h2>
+<p>¿Qué pasa si quieres un valor que pueda ser usado desde tu código Reason?</p>
+<pre><code class="hljs css reason">Js.log(<span class="hljs-string">"esto es reason"</span>);
+<span class="hljs-keyword">let</span> x = [%bs.raw {| <span class="hljs-string">'aquí un string de javascript'</span> |}];
+Js.log(x ++ <span class="hljs-string">" de vuelta en tierra de reason"</span>); <span class="hljs-comment">/* ++ es el operador para concatenar tipos string */</span>
+</code></pre>
+<p>Ahora quizás te preguntes &quot;¿qué magia es esta?&quot; ¿Cómo sabia ocaml que <code>x</code> era una cadena?&quot; <strong>No es así</strong>. ¡El tipo de <code>x</code> en este código es un tipo mágico que se unificará con todo! Esto es bastante peligroso y puede tener efectos en cascada en el algoritmo de inferencia de tipos de OCaml.</p>
+<pre><code class="hljs css reason"><span class="hljs-keyword">let</span> y = [%bs.raw {| <span class="hljs-string">'algo'</span> |}];
+Js.log((<span class="hljs-string">"un string"</span> ++ y, <span class="hljs-number">10</span> + y));
+<span class="hljs-comment">/* ¡¡cuidado!! ocaml no impedirá que uses y como 2 tipos totalmente diferentes */</span>
+</code></pre>
+<p>Para solucionar esto, <strong>siempre</strong> debes proporcionar un tipo concreto para el resultado de <code>bs.raw</code>.</p>
+<pre><code class="hljs css reason"><span class="hljs-keyword">let</span> x: string = [%bs.raw {| <span class="hljs-string">'bien tipado'</span> |}];
+Js.log(x ++ <span class="hljs-string">" de vuelta en tierra de reason"</span>);
+<span class="hljs-comment">/* ocaml generará un error si intentas usar x como algo distinto a un string */</span>
+</code></pre>
+<p>¡Y aquí está la salida!</p>
+<pre><code class="hljs css js"><span class="hljs-comment">// Generado por BUCKLESCRIPT VERSION 1.7.4, POR FAVOR EDITAR CON CUIDADO</span>
+<span class="hljs-meta">'use strict'</span>;
+<span class="hljs-built_in">console</span>.log(<span class="hljs-string">"esto es reason"</span>);
+<span class="hljs-keyword">var</span> x = ( <span class="hljs-string">'aquí un string de javascript'</span> );
+<span class="hljs-built_in">console</span>.log(x + <span class="hljs-string">" de vuelta en tierra de reason"</span>);
+<span class="hljs-keyword">var</span> y = ( <span class="hljs-string">'algo'</span> );
+<span class="hljs-built_in">console</span>.log(<span class="hljs-comment">/* tupla */</span>[
+      <span class="hljs-string">"un string"</span> + y,
+      <span class="hljs-number">10</span> + y | <span class="hljs-number">0</span>
+    ]);
+<span class="hljs-keyword">var</span> x$<span class="hljs-number">1</span> = ( <span class="hljs-string">'bien tipado'</span> );
+<span class="hljs-built_in">console</span>.log(x$<span class="hljs-number">1</span> + <span class="hljs-string">" de vuelta en tierra de reason"</span>);
+</code></pre>
+<blockquote>
+<p>¡La diferencia entre los 2 <code>%%</code> de la anterior sección y el 1 <code>%</code> aquí es importante! <code>[%%something...]</code> es un &quot;punto de extensión&quot; (<em>&quot;extension point&quot;</em>) de OCaml que representa una declaración de <em>nivel superior</em> (no se puede mostrar dentro de una función o valor, por ejemplo). <code>[%something...]</code> es un punto de extensión que substituye una <em>expresión</em> y se puede poner casi en cualquier lugar -- ¡pero asegúrate de que el JavaScript que pones dentro es realmente una expresión! Por ejemplo, no pongas un punto y coma después de él, u obtendrás un error de sintaxis cuando intentes ejecutar el JavaScript resultante.</p>
+</blockquote>
+<h2><a class="anchor" aria-hidden="true" id="insertando-en-una-funcion-y-pasanso-valores"></a><a href="#insertando-en-una-funcion-y-pasanso-valores" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Insertando en una función y pasanso valores</h2>
+<p>Necesitaremos saber un poco de la representación de varios valores que Bucklescript hace en tiempo de ejecución para este trabajo.</p>
+<ul>
+<li><code>strings</code> son cadenas de caracteres, <code>ints</code> y <code>floats</code> son sólo números</li>
+<li>una <a href="/docs/es-ES/list-and-array.html#array">Array</a> es una lista de longitud fija mutable en OCaml y se representa como un array simple JavaScript.</li>
+<li>un <a href="/docs/es-ES/list-and-array.html#list">List</a> es una lista encadenada inmutable de estilo funcional y es definitivamente lo más idiomático para utilizar en la mayoría de los casos. However, its representation is more complicated (try <code>Js.log([1,2,3,4])</code> to check it out). Debido a esto, generalmente convierto desde y hacia <code>Array</code>s cuando estoy hablando con JavaScript, a través de <code>Array.of_list</code> y <code>Array.to_list</code>.</li>
+<li>Si desea profundizar más, existe una lista <a href="https://bucklescript.github.io/docs/en/common-data-types.html#cheat-sheet"> en la documentación de BuckleScript</a></li>
+</ul>
+<p>Sabiendo esto, podemos escribir una función en JavaScript que sólo acepte un array y devuelve un número, sin mucha dificultad.</p>
+<pre><code class="hljs css reason"><span class="hljs-keyword">let</span> jsCalculate: (<span class="hljs-keyword">array</span>(<span class="hljs-keyword">int</span>), <span class="hljs-keyword">int</span>) =&gt; <span class="hljs-keyword">int</span> = [%bs.raw
+  {|
+ <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(numbers, scaleFactor)</span> </span>{
+   <span class="hljs-keyword">var</span> result = <span class="hljs-number">0</span>;
+   numbers.<span class="hljs-keyword">forEach</span>(number =&gt; {
+     result += number;
+   });
+   <span class="hljs-keyword">return</span> result * scaleFactor;
+ }
+|}
+];
+
+<span class="hljs-keyword">let</span> calculate = (numbers, scaleFactor) =&gt; jsCalculate(<span class="hljs-keyword">Array</span>.of_list(numbers), scaleFactor);
+
+Js.log(calculate([<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>], <span class="hljs-number">10</span>)); <span class="hljs-comment">/* -&gt; 60 */</span>
+</code></pre>
+<p>Por supuesto, esta función que he escrito en JavaScript podría ser portada a Reason sin muchas molestias.</p>
+<p><strong>Recuerda</strong> que se trata de una solución puntual que es muy útil para aprender y así poder empezar rápidamente y hacer algo, pero un buen ejercicio es volver atrás y convertirlo de nuevo en código tipado y seguro de Reason.</p>
+<p>I've run into more than a few bugs because of raw JavaScript that I added to save time</p>
+<h2><a class="anchor" aria-hidden="true" id="asentarse-y-ser-disciplinado-con-las-cosas"></a><a href="#asentarse-y-ser-disciplinado-con-las-cosas" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Asentarse y ser disciplinado con las cosas</h2>
+<p>Hasta ahora hemos estado usando <code>bs.raw</code>, que es una manera muy rápida y laxa de hacerlo y <strong>no</strong> conveniente para producción.</p>
+<p>Pero ¿qué pasa si realmente necesitamos llamar a una función en JavaScript? Esto es necesario para interactuar con el DOM, o usar módulos de <em>node</em>. En BuckleScript, se utiliza una declaración <code>external</code> (<a href="https://bucklescript.github.io/docs/en/intro-to-external.html">documentación</a>).</p>
+<p>Obtener un valor y obtener una función es en ambos casos muy fácil:</p>
+<pre><code class="hljs css reason">[@bs.<span class="hljs-keyword">val</span>] <span class="hljs-keyword">external</span> pi : <span class="hljs-built_in">float</span> = <span class="hljs-string">"Math.PI"</span>;
+<span class="hljs-keyword">let</span> tau = pi *. <span class="hljs-number">2.0</span>;
+[@bs.<span class="hljs-keyword">val</span>] <span class="hljs-keyword">external</span> alert : <span class="hljs-built_in">string</span> =&gt; <span class="hljs-built_in">unit</span> = <span class="hljs-string">"alert"</span>;
+alert(<span class="hljs-string">"hola"</span>);
+</code></pre>
+<p>Pero ¿qué pasa cuando queremos algo más complicado? Así es como podríamos llamar a <code>getContext</code> en un nodo DOM de Canvas:</p>
+<pre><code class="hljs css reason">type canvas<span class="hljs-comment">;</span>
+
+type <span class="hljs-built_in">context</span><span class="hljs-comment">;</span>
+
+<span class="hljs-comment">/* estamos dejando estaos tipos abstractos, porque
+ * no los usaremos directamente en ningún sitio */</span>
+[@<span class="hljs-keyword">bs.send] </span><span class="hljs-keyword">external </span>getContext : (canvas, string) =&gt; <span class="hljs-built_in">context</span> = <span class="hljs-string">""</span><span class="hljs-comment">;</span>
+
+let myCanvas: canvas = [%<span class="hljs-keyword">bs.raw </span>{<span class="hljs-title">| document.getElementById("mycanvas") |</span>}]<span class="hljs-comment">;</span>
+
+let ctx = getContext(myCanvas, <span class="hljs-string">"2d"</span>)<span class="hljs-comment">;</span>
+</code></pre>
+<p>Expliquemos lo que está sucediendo. Hemos creado algunos tipos abstractos para el nodo DOM de Canvas y el objeto RenderingContext asociado.</p>
+<p>Luego hemos hecho una función <code>getContext</code>, pero en vez de <code>@bs.val</code> usamos <code>@bs.send</code> y utilizamos una cadena vacía para el texto del <em>externa</em>l. <code>@bs.send</code> significa &quot;Estamos llamando un método de el primer argumento&quot;, que en este caso es Canvas. Dado lo anterior, BuckleScript se traducirá <code>getContext (theFirstArgument, theSecondArgument)</code> a <code>theFirstArgument.getContext(theSecondArgument, ...)</code>.</p>
+<p>La cadena vacía significa &quot;el nombre JS es el mismo que el nombre que estamos dando al external en BuckleScript&quot; - en este caso <code>getContext</code>. Si quisiéramos llamarle de otra manera (como <code>getRenderingContext</code>), tendríamos que suministrar la cadena <code>&quot;getContext&quot;</code> así BuckleScript llamará a la función correcta.</p>
+<p>Añadamos una función más solo porque es interesante.</p>
+<pre><code class="hljs css reason">[@bs.send] <span class="hljs-keyword">external</span> fillRect : (context, <span class="hljs-built_in">float</span>, <span class="hljs-built_in">float</span>, <span class="hljs-built_in">float</span>, <span class="hljs-built_in">float</span>) =&gt; <span class="hljs-built_in">unit</span> = <span class="hljs-string">""</span>;
+</code></pre>
+<p>¡Y ahora podemos dibujar algo!</p>
+<pre><code class="hljs css reason"><span class="hljs-selector-tag">fillRect</span>(<span class="hljs-selector-tag">ctx</span>, 0<span class="hljs-selector-class">.0</span>, 0<span class="hljs-selector-class">.0</span>, 100<span class="hljs-selector-class">.0</span>, 100<span class="hljs-selector-class">.0</span>);
+</code></pre>
+<p>No es mucho, pero agregar otros métodos del canvas es similar, y entonces puedes comenzar haciendo algunas <a href="https://twitter.com/jaredforsyth/status/871062358076030976"> cosas realmente divertidas</a>.</p>
+<p>Así que ¿como es el JavaScript compilado?</p>
+<pre><code class="hljs css js"><span class="hljs-meta">'use strict'</span>;
+<span class="hljs-keyword">var</span> tau = <span class="hljs-built_in">Math</span>.PI * <span class="hljs-number">2.0</span>;
+alert(<span class="hljs-string">"hello"</span>);
+<span class="hljs-keyword">var</span> myCanvas = ( <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"mycanvas"</span>) );
+<span class="hljs-keyword">var</span> ctx = myCanvas.getContext(<span class="hljs-string">"2d"</span>);
+ctx.fillRect(<span class="hljs-number">0.0</span>, <span class="hljs-number">0.0</span>, <span class="hljs-number">100.0</span>, <span class="hljs-number">100.0</span>);
+</code></pre>
+<p>¡Wow! ¿Ves cómo BuckleScript solo introdujo nuestra variable <code>pi</code> por nuestra cuenta? Y el resultado es casi exactamente como si fuera escrito a mano.</p>
+<h2><a class="anchor" aria-hidden="true" id="usando-librerias-javascript-existentes"></a><a href="#usando-librerias-javascript-existentes" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Usando librerías JavaScript existentes</h2>
+<p>When folks write wrappers for a particular JavaScript library, they'd usually publish it to npm. Head over to the <a href="/docs/es-ES/libraries.html">Libraries</a> to find out how to find these.</p>
+<p>To use a library that does not have existing wrappers, however, you'll want to first install the npm package as usual, e.g. using <code>npm install --save &lt;package-name&gt;</code>, then just go ahead and write your wrapper. Probablemente encontrarás la herramienta FFI de <a href="https://bucklescript.github.io/docs/en/import-export.html#import"><code>bs.module</code></a> particularmente útil; esta emite los <code>import</code>s o <code>require</code>s correctos, dependiendo del formato de compilación del módulo de destino de JS.</p>
+<p>As an example, here's the entire source code of the <a href="https://github.com/reasonml-community/bs-glob"><code>bs.glob</code></a> wrapper (converted to Reason, the original is OCaml):</p>
+<pre><code class="hljs css reason"><span class="hljs-built_in">type</span> <span class="hljs-built_in">error</span>;
+
+[@bs.<span class="hljs-built_in">module</span>] external glob : <span class="hljs-function"><span class="hljs-params">(<span class="hljs-built_in">string</span>, (Js.nullable(<span class="hljs-built_in">error</span>), array(<span class="hljs-built_in">string</span>)) =&gt; unit)</span> =&gt;</span> unit = <span class="hljs-string">""</span>;
+
+[@bs.val] [@bs.<span class="hljs-built_in">module</span> <span class="hljs-string">"glob"</span>] external sync : <span class="hljs-built_in">string</span> =&gt; array(<span class="hljs-built_in">string</span>) = <span class="hljs-string">""</span>;
+</code></pre>
+<p>Y las partes relevantes de <code>package.json</code>:</p>
+<pre><code class="hljs css json">{
+  "name": "bs-glob",
+  "version": "0.1.0",
+  ...
+  "devDependencies": {
+    "bs-platform": "^1.9.1"
+  },
+  "dependencies": {
+    "glob": "^7.1.2"
+  }
+}
+</code></pre>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="quickstart-javascript.html">← Inicio rápido</a><a class="docs-next button" href="syntax-cheatsheet.html">Hoja de Apoyo de sintaxis →</a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#tan-solo-escribe-javascript-en-medio-de-tu-codigo-reason">Tan solo escribe JavaScript en medio de tu código Reason</a></li><li><a href="#poniendo-algo-de-javascript-y-haciendolo-accesible-desde-reason">Poniendo algo de JavaScript, y haciéndolo accesible desde Reason</a></li><li><a href="#insertando-en-una-funcion-y-pasanso-valores">Insertando en una función y pasanso valores</a></li><li><a href="#asentarse-y-ser-disciplinado-con-las-cosas">Asentarse y ser disciplinado con las cosas</a></li><li><a href="#usando-librerias-javascript-existentes">Usando librerías JavaScript existentes</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.min.js"></script><script>window.foo = new Pjax({
+          areas: [
+            // try to use the first query.
+            '.mainContainer, .docsNavContainer .toc .navWrapper, .onPageNav',
+            // fallback
+            'body'
+          ],
+          link: '.docsNavContainer:not(.docsSliderActive) a',
+          update: {
+            script: false,
+          }
+        });
+        var languagesMenuItemCopy = document.getElementById("languages-menu");
+        languagesMenuItemCopy.addEventListener("click", function(e){
+          e.preventDefault();
+          e.stopPropagation();
+          e.stopImmediatePropagation();
+        });</script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+              var search = docsearch({
+                
+                apiKey: '966d1e412f67114a07dc0afe44b19b53',
+                indexName: 'reason',
+                inputSelector: '#search_input_react',
+                algoliaOptions: {"facetFilters":["lang:es-ES"]}
+              });
+            </script></body></html>
