@@ -12,7 +12,7 @@ Come say hi!
 - [Reddit](https://www.reddit.com/r/reasonml/)
 - [Stack Overflow](http://stackoverflow.com/questions/tagged/reason)
 
-## Github
+## GitHub
 
 - [Reason Org](https://github.com/reasonml)
 - [Reason Community Org](https://github.com/reasonml-community)

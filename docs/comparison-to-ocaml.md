@@ -29,26 +29,31 @@ Reference | `x != y` | `x !== y`
 Reason's lexical scoping is exactly the same as OCaml's, but let bindings syntactically resemble "block scope" which is more familiar to many developers. In Reason, they are created with `{}` braces, which may contain both `let` bindings and imperative commands, separated by `;`. All blocks evaluate to the last line and the semicolon on the last line is optional. `{}` braces are only needed if you have more than one item to chain together via `;`.
 
 <table>
-  <thead><tr> <th><p>OCaml</p></th><th><p>Reason</p></th></tr></thead>
+  <thead>
+    <tr>
+      <th>OCaml</th>
+      <th>Reason</th>
+    </tr>
+  </thead>
+  <tbody>
   <tr>
     <td>
-      <code><pre>
-let _ =
+      <pre><code>let _ =
   let msg = "Hello" in
   print_string msg;
   let msg2 = "Goodbye" in
-  print_string msg2</pre></code>
+  print_string msg2</code></pre>
     </td>
     <td>
-      <code><pre>
-{
+      <pre><code>{
   let msg = "Hello";
   print_string(msg);
   let msg2 = "Goodbye";
   print_string(msg2)
-};</pre></code>
+};</code></pre>
     </td>
   </tr>
+</tbody>
 </table>
 
 Reason's `{}` syntax removes many commonly reported pain points in OCaml's syntax:
@@ -63,69 +68,77 @@ Reason's `{}` syntax removes many commonly reported pain points in OCaml's synta
 In Reason, everything that can go between the `{}` in [Local Scopes](#local-scope) and in module bodies. You can usually even cut/paste code between the two contexts. In OCaml, the syntaxes for the two contexts are very different. Local scope requires trailing `in`, but module bodies do not and some imperative statements must be assigned to `_` or `()`, or else use double `;;`.
 
 <table>
-  <thead><tr> <th><p>OCaml Module Body</p></th><th><p>Reason Module Body</p></th></tr></thead>
-  <tr>
-    <td>
-      <code><pre>
-let ten = 10
+  <thead>
+    <tr>
+      <th>OCaml Module Body</th>
+      <th>Reason Module Body</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <pre><code>let ten = 10
 let () = imperativeFunc ten ten
-let () = imperativeFunc 0 0</pre></code>
-    </td>
-    <td>
-      <code><pre>
-let ten = 10;
+let () = imperativeFunc 0 0</code></pre>
+      </td>
+      <td>
+        <pre><code>let ten = 10;
 imperativeFunc(ten, ten);
-imperativeFunc(0, 0);</pre></code>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <code><pre>
-let ten = 10;;
+imperativeFunc(0, 0);</code></pre>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <pre><code>let ten = 10;;
 imperativeFunc ten ten;;
-imperativeFunc 0 0;;</pre></code>
-    </td>
-    <td>
-      Same as above
-    </td>
-  </tr>
+imperativeFunc 0 0;;</code></pre>
+      </td>
+      <td>
+        Same as above
+      </td>
+    </tr>
+  </tbody>
 
-  <thead><tr> <th><p>OCaml Local Scope</p></th><th><p>Reason Local Scope</p></th></tr></thead>
-  <tr>
-    <td>
-      <code><pre>
-let ten = 10 in
+  <thead>
+    <tr>
+      <th>OCaml Local Scope</th>
+      <th>Reason Local Scope</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <pre><code>let ten = 10 in
 let _ = imperativeFunc ten ten in
-imperativeFunc 0 0</pre></code>
-    </td>
-    <td>
-       same as above
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <code><pre>
-let ten = 10 in begin
+imperativeFunc 0 0</code></pre>
+      </td>
+      <td>
+        Same as above
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <pre><code>let ten = 10 in begin
   imperativeFunc ten ten;
   imperativeFunc 0 0
-end</pre></code>
-    </td>
-    <td>
-       same as above
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <code><pre>
-let ten = 10 in (
+end</code></pre>
+      </td>
+      <td>
+        Same as above
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <pre><code>let ten = 10 in (
   imperativeFunc ten ten;
   imperativeFunc 0 0
-)</pre></code>
-    </td>
-    <td>
-       same as above
-    </td>
-  </tr>
+)</code></pre>
+      </td>
+      <td>
+        Same as above
+      </td>
+    </tr>
+  </tbody>
 </table>
 
 ## Tuple and Record
@@ -141,32 +154,36 @@ OCaml | Reason
 In Reason, record values resemble JavaScript, using `:` instead of `=`.
 
 <table>
-  <thead><tr> <th><p>OCaml</p></th><th><p>Reason</p></th></tr></thead>
-  <tr>
-    <td>
-      <code><pre>
-let myRec = {x = 0; y = 10}</pre></code>
-    </td>
-    <td>
-      <code><pre>
-let myRec = {x: 0, y: 10};</pre></code>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <code><pre>
-let myFuncs = {
-  myFun = (fun x -> x + 1);
-  your = (fun a b -> a + b);
-}</pre></code>
-    </td>
-    <td>
-      <code><pre>
-let myFuncs = {
-  myFun: (x) => x + 1,
-  your: (a, b) => a + b
-};</pre></code>
-    </td>
+  <thead>
+    <tr>
+      <th>OCaml</th>
+      <th>Reason</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <pre><code>let myRec = {x = 0; y = 10}</code></pre>
+      </td>
+      <td>
+        <pre><code>let myRec = {x: 0, y: 10};</code></pre>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <pre><code>let myFuncs = {
+    myFun = (fun x -> x + 1);
+    your = (fun a b -> a + b);
+  }</code></pre>
+      </td>
+      <td>
+        <pre><code>let myFuncs = {
+    myFun: (x) => x + 1,
+    your: (a, b) => a + b
+  };</code></pre>
+      </td>
+    </tr>
+  </tbody>
 </table>
 
 ## Lists
@@ -210,48 +227,50 @@ function. The single case match is a natural extension of the simple lambda,
 and the multicase lambda is a natural extension of the single case lambda.
 
 <table>
-  <thead><tr> <th><p>Form</p></th><th><p>OCaml</p></th><th><p>Reason</p></th></tr></thead>
-  <tr>
-    <td>
-      lambda
-    </td>
-    <td>
-      <code><pre>
-fun pat -> e</pre></code>
-    </td>
-    <td>
-      <code><pre>
-fun pat => e</pre></code>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      one match case
-    </td>
-    <td>
-      <code><pre>
-function | pat -> e</pre></code>
-    </td>
-    <td>
-      <code><pre>
-fun | pat => e</pre></code>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      many cases
-    </td>
-    <td>
-      <code><pre>
-function | pat -> e
-         | pat2 -> e</pre></code>
-    </td>
-    <td>
-      <code><pre>
-fun | pat => e
-    | pat2 => e</pre></code>
-    </td>
-  </tr>
+  <thead>
+    <tr>
+      <th>Form</th>
+      <th>OCaml</th>
+      <th>Reason</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        Lambda
+      </td>
+      <td>
+        <pre><code>fun pat -> e</code></pre>
+      </td>
+      <td>
+        <pre><code>fun pat => e</code></pre>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        One match case
+      </td>
+      <td>
+        <pre><code>function | pat -> e</code></pre>
+      </td>
+      <td>
+        <pre><code>fun | pat => e</code></pre>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Many cases
+      </td>
+      <td>
+        <pre><code>function | pat -> e
+           | pat2 -> e</code></pre>
+      </td>
+      <td>
+        <pre><code>fun | pat => e
+      | pat2 => e</code></pre>
+      </td>
+    </tr>
+  </tbody>
 </table>
 
 ### Annotating Arguments
@@ -336,25 +355,30 @@ For example, you can imagine `list` being a "function" for types that accepts a
 type and returns a new type.
 
 <table>
-  <thead><tr> <th><p>OCaml</p></th><th><p>Reason</p></th></tr></thead>
-  <tr>
-    <td>
-      <code><pre>
-let x: int list = [2]
+  <thead>
+    <tr>
+      <th>OCaml</th>
+      <th>Reason</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <pre><code>let x: int list = [2]
 type listOfListOfInts = int list list
 type ('a, 'b) tup = ('a * 'b)
 type pairs = (int, int) tup list
-let tuples: pairs = [(2, 3)]</pre></code>
-    </td>
-    <td>
-      <code><pre>
-let x: list(int) = [2];
+let tuples: pairs = [(2, 3)]</code></pre>
+      </td>
+      <td>
+        <pre><code>let x: list(int) = [2];
 type listOfListOfInts = list(list(int));
 type tup('a, 'b) = ('a, 'b);
 type pairs = list(tup(int, int));
-let tuples: pairs = [(2, 3)];</pre></code>
-    </td>
-  </tr>
+let tuples: pairs = [(2, 3)];</code></pre>
+      </td>
+    </tr>
+  </tbody>
 </table>
 
 ## Tuples as Type Parameters
@@ -406,105 +430,95 @@ OCaml | Reason
 <table>
   <thead>
     <tr>
-      <th>
-        <p>OCaml</p>
-      </th>
-      <th>
-        <p>Reason</p>
-      </th>
+      <th>OCaml</th>
+      <th>Reason</th>
     </tr>
   </thead>
-  <tr>
-    <td>
-      <code><pre>
-type myVariant =
-  | HasNothing
-  | HasSingleInt of int
-  | HasSingleTuple of (int * int)
-  | HasMultipleInts of int * int
-  | HasMultipleTuples of (int * int) * (int * int)
-      </pre></code>
-    </td>
-    <td>
-      <code><pre>
-type myVariant =
-  | HasNothing
-  | HasSingleInt(int)
-  | HasSingleTuple((int, int))
-  | HasMultipleInts(int, int)
-  | HasMultipleTuples((int, int), (int, int));
-      </pre></code>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <code><pre>
-let a = HasSingleInt 10
-let a = HasSingleTuple (10, 10)
-let a = HasMultipleInts (10, 10)
-let a = HasMultipleTuples ((10, 10), (10, 10))
-      </pre></code>
-    </td>
-    <td>
-      <code><pre>
-let a = HasSingleInt(10);
-let a = HasSingleTuple((10, 10));
-let a = HasMultipleInts(10, 10);
-let a = HasMultipleTuples((10, 10), (10, 10));
-      </pre></code>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <code><pre>
-let res x = match x with
-  | HasNothing -> 0
-  | HasSingleInt x -> 0
-  | HasSingleTuple (x, y) -> 0
-  | HasMultipleInts (x, y) -> 0
-  | HasMultipleTuples ((x, y), (q, r)) -> 0
-      </pre></code>
-    </td>
-    <td>
-      <code><pre>
-let res = (x) =>
-  switch (x) {
-  | HasNothing => 0
-  | HasSingleInt(x) => 0
-  | HasSingleTuple((x, y)) => 0
-  | HasMultipleInts(x, y) => 0
-  | HasMultipleTuples((x, y), (q, r)) => 0
-  };
-      </pre></code>
-    </td>
-  </tr>
+  <tbody>
+    <tr>
+      <td>
+        <pre><code>type myVariant =
+    | HasNothing
+    | HasSingleInt of int
+    | HasSingleTuple of (int * int)
+    | HasMultipleInts of int * int
+    | HasMultipleTuples of (int * int) * (int * int)</code></pre>
+      </td>
+      <td>
+        <pre><code>type myVariant =
+    | HasNothing
+    | HasSingleInt(int)
+    | HasSingleTuple((int, int))
+    | HasMultipleInts(int, int)
+    | HasMultipleTuples((int, int), (int, int));</code></pre>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <pre><code>let a = HasSingleInt 10
+  let a = HasSingleTuple (10, 10)
+  let a = HasMultipleInts (10, 10)
+  let a = HasMultipleTuples ((10, 10), (10, 10))</code></pre>
+      </td>
+      <td>
+        <pre><code>let a = HasSingleInt(10);
+  let a = HasSingleTuple((10, 10));
+  let a = HasMultipleInts(10, 10);
+  let a = HasMultipleTuples((10, 10), (10, 10));</code></pre>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <pre><code>let res x = match x with
+    | HasNothing -> 0
+    | HasSingleInt x -> 0
+    | HasSingleTuple (x, y) -> 0
+    | HasMultipleInts (x, y) -> 0
+    | HasMultipleTuples ((x, y), (q, r)) -> 0</code></pre>
+      </td>
+      <td>
+        <pre><code>let res = (x) =>
+    switch (x) {
+    | HasNothing => 0
+    | HasSingleInt(x) => 0
+    | HasSingleTuple((x, y)) => 0
+    | HasMultipleInts(x, y) => 0
+    | HasMultipleTuples((x, y), (q, r)) => 0
+    };</code></pre>
+      </td>
+    </tr>
+  </tbody>
 </table>
 
 ## Pattern Matching
 
 <table>
-  <thead><tr> <th><p>OCaml</p></th><th><p>Reason</p></th></tr></thead>
-  <tr>
-    <td>
-      <code><pre>
-let res = match x with
-  | A (x, y) -> match y with
-    | None -> 0
-    | Some i -> 10
-  | B (x, y) -> 0</pre></code>
-    </td>
-    <td>
-      <code><pre>
-let res = switch (x) {
-  | A((x, y)) => switch (y) {
-      | None => 0
-      | Some(i) => 10
-    }
-  | B((x, y)) => 0
-};
-</pre></code>
-    </td>
-  </tr>
+  <thead>
+    <tr>
+      <th>OCaml</th>
+      <th>Reason</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <pre><code>let res = match x with
+    | A (x, y) -> match y with
+      | None -> 0
+      | Some i -> 10
+    | B (x, y) -> 0</code></pre>
+      </td>
+      <td>
+        <pre><code>let res = switch (x) {
+    | A((x, y)) => switch (y) {
+        | None => 0
+        | Some(i) => 10
+      }
+    | B((x, y)) => 0
+  };</code></pre>
+      </td>
+    </tr>
+  </tbody>
 </table>
 
 Can you spot the error in the OCaml example? This is one of the most common mistakes among OCaml programmers. The nested `match` *must* be wrapped in parentheses, otherwise the `Some` case is parsed as belonging to the outer `match`. Visually, it's actually:
@@ -524,115 +538,120 @@ Reason's mandatory `{}` around `switch` cases prevents this issue.
 ### Definition
 
 <table>
-  <thead><tr> <th><p>OCaml</p></th><th><p>Reason</p></th></tr></thead>
-  <tr>
-    <td>
-      <code><pre>
-module type MySig = sig
-  type t = int
-  val x: int
-end
-module MyModule: MySig = struct
-  type t = int
-  let x = 10
-end
-module MyModule = struct
-  module NestedModule = struct
-     let msg = "hello";
+  <thead>
+    <tr>
+      <th>OCaml</th>
+      <th>Reason</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <pre><code>module type MySig = sig
+    type t = int
+    val x: int
   end
-end
-      </pre></code>
-    </td>
-    <td>
-      <code><pre>
-module type MySig = {
-  type t = int;
-  let x: int;
-};
-module MyModule: MySig = {
-  type t = int;
-  let x = 10;
-};
-module MyModule = {
-  module NestedModule = {
-    let msg = "hello";
+  module MyModule: MySig = struct
+    type t = int
+    let x = 10
+  end
+  module MyModule = struct
+    module NestedModule = struct
+       let msg = "hello";
+    end
+  end</code></pre>
+      </td>
+      <td>
+        <pre><code>module type MySig = {
+    type t = int;
+    let x: int;
   };
-};
-      </pre></code>
-    </td>
-  </tr>
+  module MyModule: MySig = {
+    type t = int;
+    let x = 10;
+  };
+  module MyModule = {
+    module NestedModule = {
+      let msg = "hello";
+    };
+  };</code></pre>
+      </td>
+    </tr>
+  </tbody>
 </table>
 
 ### Functors Types
 
 <table>
-  <thead><tr> <th><p>OCaml</p></th><th><p>Reason</p></th></tr></thead>
-  <tr>
-    <td>
-      <code><pre>
-module type FType =
-  functor (A: ASig) ->
-  functor (B: BSig) -> Result
-      </pre></code>
-    </td>
-    <td>
-      <code><pre>
-module type FType =
-  (A: ASig) =>
-  (B: BSig) => Result;
-      </pre></code>
-    </td>
-  </tr>
+  <thead>
+    <tr>
+      <th>OCaml</th>
+      <th>Reason</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <pre><code>module type FType =
+    functor (A: ASig) ->
+    functor (B: BSig) -> Result</code></pre>
+      </td>
+      <td>
+        <pre><code>module type FType =
+    (A: ASig) =>
+    (B: BSig) => Result;</code></pre>
+      </td>
+    </tr>
+  </tbody>
 </table>
 
 ## Functors
 
 <table>
-  <thead><tr> <th><p>OCaml</p></th><th><p>Reason</p></th></tr></thead>
-  <tr>
-    <td>
-      <code><pre>
-module F =
-  functor (A: ASig) ->
-  functor (B: BSig) -> struct end</pre></code>
-    </td>
-    <td>
-      <code><pre>
-module F =
-  (A: ASig) =>
-  (B: BSig) => {};</pre></code>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <code><pre>
-module F = functor (A: ASig) (B: BSig) -> struct end</pre></code>
-    </td>
-    <td>
-      <code><pre>
-module F = (A: ASig, B: BSig) => {};</pre></code>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <code><pre>
-module F (A: ASig) (B: BSig) = struct end</pre></code>
-    </td>
-    <td>
-      <code><pre>
-module F = (A: ASig, B: BSig) => {};</pre></code>
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <code><pre>
-module Res = F(A)(B)</pre></code>
-    </td>
-    <td>
-      <code><pre>
-module Res = F(A, B);</pre></code>
-    </td>
-  </tr>
+  <thead>
+    <tr>
+      <th>OCaml</th>
+      <th>Reason</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <pre><code>module F =
+    functor (A: ASig) ->
+    functor (B: BSig) -> struct end</code></pre>
+      </td>
+      <td>
+        <pre><code>module F =
+    (A: ASig) =>
+    (B: BSig) => {};</code></pre>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <pre><code>module F = functor (A: ASig) (B: BSig) -> struct end</code></pre>
+      </td>
+      <td>
+        <pre><code>module F = (A: ASig, B: BSig) => {};</code></pre>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <pre><code>module F (A: ASig) (B: BSig) = struct end</code></pre>
+      </td>
+      <td>
+        <pre><code>module F = (A: ASig, B: BSig) => {};</code></pre>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <pre><code>module Res = F(A)(B)</code></pre>
+      </td>
+      <td>
+        <pre><code>module Res = F(A, B);</code></pre>
+      </td>
+    </tr>
+  </tbody>
 </table>
 
 ## Various Improvements
@@ -650,50 +669,59 @@ see were very confusing when it would believe the function's return value
 was a tuple with infix `,` comma.
 
 <table>
-  <thead><tr> <th><p>OCaml</p></th><th><p>Reason</p></th></tr></thead>
-  <tr>
-    <td>
-      <code><pre>
-let myFuncs = {
-  myFun = (fun x -> x + 1);
-  your = (fun a b -> a + b);
-}</pre></code>
-    </td>
-    <td>
-      <code><pre>
-let myFuncs = {
-  myFun: (x) => x + 1,
-  your: (a, b) => a + b
-};</pre></code>
-    </td>
-  </tr>
+  <thead>
+    <tr>
+      <th>OCaml</th>
+      <th>Reason</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <pre><code>let myFuncs = {
+    myFun = (fun x -> x + 1);
+    your = (fun a b -> a + b);
+  }</code></pre>
+      </td>
+      <td>
+        <pre><code>let myFuncs = {
+    myFun: (x) => x + 1,
+    your: (a, b) => a + b
+  };</code></pre>
+      </td>
+    </tr>
+  </tbody>
 </table>
 
 
 ### Lambdas as match results no longer need extra parens
 
 <table>
-  <thead><tr> <th><p>OCaml</p></th><th><p>Reason</p></th></tr></thead>
-  <tr>
-    <td>
-      <code><pre>
-let x = match prnt with
-  | None -> fun a -> blah
-  (* Extra () required ! *)
-  | Some "_" -> (fun a -> ())
-  | Some "ml" -> blah
-      </pre></code>
-    </td>
-    <td>
-      <code><pre>
-let x =
-  switch (prnt) {
-  | None => (a) => blah
-  | Some("_") => (a) => ()
-  | Some("ml") => blah
-  };</pre></code>
-    </td>
-  </tr>
+  <thead>
+    <tr>
+      <th>OCaml</th>
+      <th>Reason</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <pre><code>let x = match prnt with
+    | None -> fun a -> blah
+    (* Extra () required ! *)
+    | Some "_" -> (fun a -> ())
+    | Some "ml" -> blah</code></pre>
+      </td>
+      <td>
+        <pre><code>let x =
+    switch (prnt) {
+    | None => (a) => blah
+    | Some("_") => (a) => ()
+    | Some("ml") => blah
+    };</code></pre>
+      </td>
+    </tr>
+  </tbody>
 </table>
 
 ### Lambdas and type annotations in tuples no longer require extra parens
@@ -711,25 +739,28 @@ With Reason, `as` has a higher precedence than `|` bar. This allows creating `as
 for entire rows in pattern matching.
 
 <table>
-  <thead><tr> <th><p>OCaml</p></th><th><p>Reason</p></th></tr></thead>
-  <tr>
-    <td>
-      <code><pre>
-let ppp = match MyThing 20 with
-  | (MyThing x as ppp)
-  | (YourThing x as ppp) -> ppp;
-      </pre></code>
-    </td>
-    <td>
-      <code><pre>
-let ppp =
-  switch (MyThing(20)) {
-  | MyThing(x) as ppp
-  | YourThing(x) as ppp => ppp
-  };
-      </pre></code>
-    </td>
-  </tr>
+  <thead>
+    <tr>
+      <th>OCaml</th>
+      <th>Reason</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <pre><code>let ppp = match MyThing 20 with
+    | (MyThing x as ppp)
+    | (YourThing x as ppp) -> ppp;</code></pre>
+      </td>
+      <td>
+        <pre><code>let ppp =
+    switch (MyThing(20)) {
+    | MyThing(x) as ppp
+    | YourThing(x) as ppp => ppp
+    };</code></pre>
+      </td>
+    </tr>
+  </tbody>
 </table>
 
 ### Mutable Record Field Updates
