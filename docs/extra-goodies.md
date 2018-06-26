@@ -32,7 +32,7 @@ To configure Merlin to understand your project, you'd write a `.merlin` file at 
 
 Reason comes with a REPL called `rtop` which, once invoked, lets you interactively evaluate code. It features intelligent, type-driven autocompletion.
 
-Use `#quit;` to close your REPL session.
+Use `#show <symbol>;` to inspect the environment, `#toggle_syntax;` to switch between syntax and `#quit;` to close your REPL session.
 
 **Note that `rtop` currently doesn't work easily with packages and `external`s**. We recommend evaluating code inside our [Try](/try.html) playground.
 
