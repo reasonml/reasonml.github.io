@@ -12,7 +12,9 @@ title: Global Installation
 | **Linux**   | `npm install -g reason-cli@3.2.0-linux`
 | **Windows** | Please see https://github.com/reasonml/reasonml.github.io/issues/195
 
-Note: Bundles are currently large (approximately `100MB`), and `npm` will not provide accurate progress of the download. This may take several minutes, depending on your connection. Be patient. In most cases, the installation is not hanging and will finish.
+> Note: Bundles are currently large (approximately `100MB`), and `npm` will not provide accurate progress of the download. This may take several minutes, depending on your connection. Be patient. In most cases, the installation is not hanging and will finish.
+
+> Note: **don't** use [nvm](https://github.com/creationix/nvm) when installing these tools; it [won't work well](https://github.com/reasonml-editor/vscode-reasonml/issues/229#issuecomment-399138264).
 
 ## (Alternative) Through OPAM
 
