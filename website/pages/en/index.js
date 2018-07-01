@@ -75,7 +75,7 @@ class HomeSplash extends React.Component {
               href={
                 siteConfig.baseUrl +
                 this.props.language +
-                "/try.html"
+                "/try"
               }
             >
               <translate>Try Online</translate>
@@ -85,7 +85,7 @@ class HomeSplash extends React.Component {
                 siteConfig.baseUrl +
                 "docs/" +
                 this.props.language +
-                "/quickstart-javascript.html"
+                "/quickstart-javascript"
               }>
               Quick Start
             </Button>
@@ -173,7 +173,7 @@ class Index extends React.Component {
               </MarkdownBlock>
               <p>
                 <translate>It runs in watch mode, so any changes to files will be picked up and compiled.</translate>
-                <a href="https://reasonml.github.io/reason-react/docs/en/installation.html"> <translate>Read more here!</translate></a>
+                <a href="https://reasonml.github.io/reason-react/docs/en/installation"> <translate>Read more here!</translate></a>
               </p>
             </div>
             <div>
@@ -202,7 +202,7 @@ class Index extends React.Component {
             <div className="more-users">
               <a
                 className="button"
-                href={`${siteConfig.baseUrl}${this.props.language}/users-of-reason.html`}
+                href={`${siteConfig.baseUrl}${this.props.language}/users-of-reason`}
               >
                 <translate>See Full List</translate>
               </a>

@@ -137,7 +137,7 @@ const siteConfig = {
   headerLinks: [
     { doc: "quickstart-javascript", label: "Docs" },
     { page: "try", label: "Try" },
-    { href: "/api/index.html", label: "API" },
+    { href: "/api/index", label: "API" },
     { doc: "community", label: "Community" },
     { blog: true, label: "Blog" },
     { languages: true },
@@ -157,6 +157,10 @@ const siteConfig = {
     // darkened 10%
     secondaryColor: "#C23426",
   },
+  // for the api page
+  wrapPagesHTML: true,
+  // no .html suffix needed
+  cleanUrl: true,
   highlight: {
     theme: 'atom-one-light',
     hljs: function(hljs) {
