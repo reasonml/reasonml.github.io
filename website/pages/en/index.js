@@ -188,7 +188,6 @@ class Index extends React.Component {
                   imageAlign: "top",
                   content: "",
                 }))}
-                layout="twoColumn"
               />
             </div>
           </Container>
