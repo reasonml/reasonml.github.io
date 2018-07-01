@@ -1,20 +1,39 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>与 OCaml 比较 · Reason</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta property="og:title" content="与 OCaml 比较 · Reason"/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io/index.html"/><meta property="og:description" content="如果你是一个OCaml的新手或者是一个正在学习OCaml的人，那么这个入门指导适合你。 但是别忘了 [reason-tools](https://github.com/reasonml/reason-tools)可以自由的在OCaml和Reason语法间转换"/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/icon_50.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/arduino-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io/blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io/blog/feed.xml" title="Reason Blog RSS Feed"/><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible doc separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/zh-CN"><img class="logo" src="/img/dummy.svg" alt="Reason"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/zh-CN/quickstart-javascript.html" target="_self">文档</a></li><li class=""><a href="/zh-CN/try.html" target="_self">体验</a></li><li class=""><a href="/api/index.html" target="_self">API</a></li><li class=""><a href="/docs/zh-CN/community.html" target="_self">社区</a></li><li class=""><a href="/blog" target="_self">博客</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg"/>中文</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/ja">日本語</a></li><li><a href="/en">English</a></li><li><a href="/de">Deutsch</a></li><li><a href="/es-ES">Español</a></li><li><a href="/fr">Français</a></li><li><a href="/ko">한국어</a></li><li><a href="/pt-BR">Português (Brasil)</a></li><li><a href="/ru">Русский</a></li><li><a href="/uk">Українська</a></li><li><a href="/zh-TW">繁體中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank" rel="noreferrer noopener">帮助翻译</a></li></ul></div></li><script>
+<!DOCTYPE html><html lang="zh-CN"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>与 OCaml 比较 · Reason</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="如果你是一个OCaml的新手或者是一个正在学习OCaml的人，那么这个入门指导适合你。 但是别忘了 [reason-tools](https://github.com/reasonml/reason-tools)可以自由的在OCaml和Reason语法间转换"/><meta name="docsearch:language" content="zh-CN"/><meta property="og:title" content="与 OCaml 比较 · Reason"/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io/index.html"/><meta property="og:description" content="如果你是一个OCaml的新手或者是一个正在学习OCaml的人，那么这个入门指导适合你。 但是别忘了 [reason-tools](https://github.com/reasonml/reason-tools)可以自由的在OCaml和Reason语法间转换"/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/icon_50.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/arduino-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io/blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io/blog/feed.xml" title="Reason Blog RSS Feed"/><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/zh-CN"><img class="logo" src="/img/dummy.svg" alt="Reason"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/zh-CN/quickstart-javascript.html" target="_self">文档</a></li><li class=""><a href="/zh-CN/try.html" target="_self">体验</a></li><li class=""><a href="/api/index.html" target="_self">API</a></li><li class=""><a href="/docs/zh-CN/community.html" target="_self">社区</a></li><li class=""><a href="/blog" target="_self">博客</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg"/>中文</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/docs/ja/comparison-to-ocaml.html">日本語</a></li><li><a href="/docs/en/comparison-to-ocaml.html">English</a></li><li><a href="/docs/de/comparison-to-ocaml.html">Deutsch</a></li><li><a href="/docs/es-ES/comparison-to-ocaml.html">Español</a></li><li><a href="/docs/fr/comparison-to-ocaml.html">Français</a></li><li><a href="/docs/ko/comparison-to-ocaml.html">한국어</a></li><li><a href="/docs/pt-BR/comparison-to-ocaml.html">Português (Brasil)</a></li><li><a href="/docs/ru/comparison-to-ocaml.html">Русский</a></li><li><a href="/docs/uk/comparison-to-ocaml.html">Українська</a></li><li><a href="/docs/zh-TW/comparison-to-ocaml.html">繁體中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank" rel="noreferrer noopener">帮助翻译</a></li></ul></div></li><script>
         const languagesMenuItem = document.getElementById("languages-menu");
         const languagesDropDown = document.getElementById("languages-dropdown");
-        languagesMenuItem.addEventListener("click", function(){
-          if(languagesDropDown.className == "hide") {
+        languagesMenuItem.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (languagesDropDown.className == "hide") {
             languagesDropDown.className = "visible";
           } else {
             languagesDropDown.className = "hide";
           }
         });
-      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/facebook/reason" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>额外</span></h2></div><div class="navGroups"><div class="navGroup navGroupActive"><h3>介绍</h3><ul><li class="navListItem"><a class="navItem" href="/docs/zh-CN/what-and-why.html">缘何</a></li></ul></div><div class="navGroup navGroupActive"><h3>编辑器设置</h3><ul><li class="navListItem"><a class="navItem" href="/docs/zh-CN/global-installation.html">全局安装</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/editor-plugins.html">编辑器插件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/extra-goodies.html">更多好东西</a></li></ul></div><div class="navGroup navGroupActive"><h3>语言基础</h3><ul><li class="navListItem"><a class="navItem" href="/docs/zh-CN/overview.html">概述</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/let-binding.html">Let 绑定</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/type.html">Type!</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/string-and-char.html">String &amp; Char</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/boolean.html">布尔值</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/integer-and-float.html">整数和浮点数</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/tuple.html">Tuple</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/record.html">Record</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/variant.html">Variant!</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/list-and-array.html">List 和 Array</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/function.html">函数</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/if-else.html">If-Else</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/more-on-type.html">深入 Type</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/destructuring.html">解构</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/pattern-matching.html">模式匹配！</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/mutation.html">Mutation</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/imperative-loops.html">命令式循环</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/jsx.html">JSX</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/external.html">外部</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/exception.html">异常</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/object.html">Object</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/module.html">模块</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/promise.html">Promise</a></li></ul></div><div class="navGroup navGroupActive"><h3>JavaScript</h3><ul><li class="navListItem"><a class="navItem" href="/docs/zh-CN/quickstart-javascript.html">快速上手</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/interop.html">交互操作</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/syntax-cheatsheet.html">语法手册</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/libraries.html">库</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/converting-from-js.html">转换自 JS</a></li></ul></div><div class="navGroup navGroupActive"><h3>原生</h3><ul><li class="navListItem"><a class="navItem" href="/docs/zh-CN/native.html">原生</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/quickstart-ocaml.html">快速上手</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/convert-from-ocaml.html">转换自 OCaml</a></li></ul></div><div class="navGroup navGroupActive"><h3>额外</h3><ul><li class="navListItem"><a class="navItem" href="/docs/zh-CN/faq.html">常见问题</a></li><li class="navListItem navListItemActive"><a class="navItem navItemActive" href="/docs/zh-CN/comparison-to-ocaml.html">与 OCaml 比较</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/newcomer-examples.html">新手示例</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/project-structure.html">项目结构</a></li></ul></div></div></section></div><script>
-          var toggler = document.getElementById('navToggler');
-          var nav = document.getElementById('docsNav');
-          toggler.onclick = function() {
-            nav.classList.toggle('docsSliderActive');
-          };
-        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://crowdin.com/project/reason/zh-CN" target="_blank" rel="noreferrer noopener">Translate</a><h1>与 OCaml 比较</h1></header><article><div><span><p>如果你是一个OCaml的新手或者是一个正在学习OCaml的人，那么这个入门指导适合你。 但是别忘了 <a href="https://github.com/reasonml/reason-tools">reason-tools</a>可以自由的在OCaml和Reason语法间转换</p>
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/facebook/reason" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>额外</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">介绍</h3><ul><li class="navListItem"><a class="navItem" href="/docs/zh-CN/what-and-why.html">缘何</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">编辑器设置</h3><ul><li class="navListItem"><a class="navItem" href="/docs/zh-CN/global-installation.html">全局安装</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/editor-plugins.html">编辑器插件</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/extra-goodies.html">更多好东西</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">语言基础</h3><ul><li class="navListItem"><a class="navItem" href="/docs/zh-CN/overview.html">概述</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/let-binding.html">Let 绑定</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/type.html">Type!</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/string-and-char.html">String &amp; Char</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/boolean.html">布尔值</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/integer-and-float.html">整数和浮点数</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/tuple.html">Tuple</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/record.html">Record</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/variant.html">Variant!</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/list-and-array.html">List 和 Array</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/function.html">函数</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/if-else.html">If-Else</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/more-on-type.html">深入 Type</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/destructuring.html">解构</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/pattern-matching.html">模式匹配！</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/mutation.html">Mutation</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/imperative-loops.html">命令式循环</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/jsx.html">JSX</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/external.html">外部</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/exception.html">异常</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/object.html">Object</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/module.html">模块</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/promise.html">Promise</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">JavaScript</h3><ul><li class="navListItem"><a class="navItem" href="/docs/zh-CN/quickstart-javascript.html">快速上手</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/interop.html">交互操作</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/syntax-cheatsheet.html">语法手册</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/libraries.html">库</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/converting-from-js.html">转换自 JS</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">原生</h3><ul><li class="navListItem"><a class="navItem" href="/docs/zh-CN/native.html">原生</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/quickstart-ocaml.html">快速上手</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/convert-from-ocaml.html">转换自 OCaml</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">额外</h3><ul><li class="navListItem"><a class="navItem" href="/docs/zh-CN/faq.html">常见问题</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/docs/zh-CN/comparison-to-ocaml.html">与 OCaml 比较</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/newcomer-examples.html">新手示例</a></li><li class="navListItem"><a class="navItem" href="/docs/zh-CN/project-structure.html">项目结构</a></li></ul></div></div></section></div><script>
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              const headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                if (event.target.tagName === 'A') {
+                  document.body.classList.remove('tocActive');
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://crowdin.com/project/reason/zh-CN" target="_blank" rel="noreferrer noopener">Translate</a><h1 class="postHeaderTitle">与 OCaml 比较</h1></header><article><div><span><p>如果你是一个OCaml的新手或者是一个正在学习OCaml的人，那么这个入门指导适合你。 但是别忘了 <a href="https://github.com/reasonml/reason-tools">reason-tools</a>可以自由的在OCaml和Reason语法间转换</p>
 <h2><a class="anchor" aria-hidden="true" id="注释"></a><a href="#注释" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>注释</h2>
 <table>
 <thead>
@@ -49,35 +68,29 @@
 <table>
   <tr>
     <th>
-      <p>
-        OCaml
-      </p>
+      OCaml
     </th>
 <pre><code class="hljs">&lt;th&gt;
-  &lt;p&gt;
-    Reason
-  &lt;/p&gt;
+  Reason
 &lt;/th&gt;
 </code></pre>
   </tr>
   <tr>
     <td>
-      <code>&lt;pre>
-let _ =
+      <pre><code class="hljs">let _ =
   let msg = "Hello" in
   print_string msg;
   let msg2 = "Goodbye" in
-  print_string msg2&lt;/pre></code>
+  print_string msg2</code></pre>
     </td>
 <pre><code class="hljs">&lt;td&gt;
-  &lt;code&gt;&amp;lt;pre&gt;
+  &lt;pre&gt;&lt;code&gt;{
 </code></pre>
-<p>{
-let msg = &quot;Hello&quot;;
+<p>let msg = &quot;Hello&quot;;
 print_string(msg);
 let msg2 = &quot;Goodbye&quot;;
 print_string(msg2)
-};&lt;/pre&gt;</code>
+};</code></pre>
 </td></p>
   </tr>
 </table>
@@ -93,38 +106,31 @@ print_string(msg2)
 <table>
   <tr>
     <th>
-      <p>
-        OCaml 模块体
-      </p>
+      OCaml Module Body
     </th>
 <pre><code class="hljs">&lt;th&gt;
-  &lt;p&gt;
-    Reason模块体
-  &lt;/p&gt;
+  Reason Module Body
 &lt;/th&gt;
 </code></pre>
   </tr>
   <tr>
     <td>
-      <code>&lt;pre>
-let ten = 10
+      <pre><code class="hljs">let ten = 10
 let () = imperativeFunc ten ten
-let () = imperativeFunc 0 0&lt;/pre></code>
+let () = imperativeFunc 0 0</code></pre>
     </td>
 <pre><code class="hljs">&lt;td&gt;
-  &lt;code&gt;&amp;lt;pre&gt;
+  &lt;pre&gt;&lt;code&gt;let ten = 10;
 </code></pre>
-<p>let ten = 10;
-imperativeFunc(ten, ten);
-imperativeFunc(0, 0);&lt;/pre&gt;</code>
+<p>imperativeFunc(ten, ten);
+imperativeFunc(0, 0);</code></pre>
 </td></p>
   </tr>
   <tr>
     <td>
-      <code>&lt;pre>
-let ten = 10;;
+      <pre><code class="hljs">let ten = 10;;
 imperativeFunc ten ten;;
-imperativeFunc 0 0;;&lt;/pre></code>
+imperativeFunc 0 0;;</code></pre>
     </td>
 <pre><code class="hljs">&lt;td&gt;
   Same as above
@@ -133,52 +139,45 @@ imperativeFunc 0 0;;&lt;/pre></code>
   </tr>
   <tr>
     <th>
-      <p>
-        OCaml 局部作用域
-      </p>
+      OCaml Local Scope
     </th>
 <pre><code class="hljs">&lt;th&gt;
-  &lt;p&gt;
-    Reason局部作用域
-  &lt;/p&gt;
+  Reason Local Scope
 &lt;/th&gt;
 </code></pre>
   </tr>
   <tr>
     <td>
-      <code>&lt;pre>
-let ten = 10 in
+      <pre><code class="hljs">let ten = 10 in
 let _ = imperativeFunc ten ten in
-imperativeFunc 0 0&lt;/pre></code>
+imperativeFunc 0 0</code></pre>
     </td>
 <pre><code class="hljs">&lt;td&gt;
-  same as above
+  Same as above
 &lt;/td&gt;
 </code></pre>
   </tr>
   <tr>
     <td>
-      <code>&lt;pre>
-let ten = 10 in begin
+      <pre><code class="hljs">let ten = 10 in begin
   imperativeFunc ten ten;
   imperativeFunc 0 0
-end&lt;/pre></code>
+end</code></pre>
     </td>
 <pre><code class="hljs">&lt;td&gt;
-  same as above
+  Same as above
 &lt;/td&gt;
 </code></pre>
   </tr>
   <tr>
     <td>
-      <code>&lt;pre>
-let ten = 10 in (
+      <pre><code class="hljs">let ten = 10 in (
   imperativeFunc ten ten;
   imperativeFunc 0 0
-)&lt;/pre></code>
+)</code></pre>
     </td>
 <pre><code class="hljs">&lt;td&gt;
-  same as above
+  Same as above
 &lt;/td&gt;
 </code></pre>
   </tr>
@@ -199,710 +198,387 @@ let ten = 10 in (
 <table>
   <tr>
     <th>
-      <p>
-        OCaml
-      </p>
+      OCaml
     </th>
 <pre><code class="hljs">&lt;th&gt;
-  &lt;p&gt;
-    Reason
-  &lt;/p&gt;
+  Reason
 &lt;/th&gt;
 </code></pre>
   </tr>
   <tr>
     <td>
-      <code>&lt;pre>
-let myRec = {x = 0; y = 10}&lt;/pre></code>
+      <pre><code class="hljs">let myRec = {x = 0; y = 10}</code></pre>
     </td>
 <pre><code class="hljs">&lt;td&gt;
-  &lt;code&gt;&amp;lt;pre&gt;
+  &lt;pre&gt;&lt;code&gt;let myRec = {x: 0, y: 10};&lt;/code&gt;&lt;/pre&gt;
+&lt;/td&gt;
 </code></pre>
-<p>let myRec = {x: 0, y: 10};&lt;/pre&gt;</code>
-</td></p>
   </tr>
   <tr>
     <td>
-      <code>&lt;pre>
-let myFuncs = {
-  myFun = (fun x -> x + 1);
-  your = (fun a b -> a + b);
-}&lt;/pre></code>
+      <pre><code class="hljs">let myFuncs = {
+    myFun = (fun x -> x + 1);
+    your = (fun a b -> a + b);
+  }</code></pre>
     </td>
 <pre><code class="hljs">&lt;td&gt;
-  &lt;code&gt;&amp;lt;pre&gt;
-</code></pre>
-<p>let myFuncs = {
+  &lt;pre&gt;&lt;code&gt;let myFuncs = {
 myFun: (x) =&gt; x + 1,
 your: (a, b) =&gt; a + b
-};&lt;/pre&gt;</code>
-</td></table></p>
-<pre><code class="hljs">&lt;h2&gt;
-  序列
-&lt;/h2&gt;
-
-&lt;table&gt;
-  &lt;tr&gt;
-    &lt;th&gt;
-      OCaml
-    &lt;/th&gt;
-    
-    &lt;th&gt;
-      Reason
-    &lt;/th&gt;
-  &lt;/tr&gt;
-  
-  &lt;tr&gt;
-    &lt;td&gt;
-      &lt;code&gt;let list = [1; 2; 3]&lt;/code&gt;
-    &lt;/td&gt;
-    
-    &lt;td&gt;
-      &lt;code&gt;let list = [1, 2, 3]&lt;/code&gt;
-    &lt;/td&gt;
-  &lt;/tr&gt;
-  
-  &lt;tr&gt;
-    &lt;td&gt;
-      &lt;code&gt;let list = hd :: tl&lt;/code&gt;
-    &lt;/td&gt;
-    
-    &lt;td&gt;
-      &lt;code&gt;let list = [hd, ...tl];&lt;/code&gt;
-    &lt;/td&gt;
-  &lt;/tr&gt;
-&lt;/table&gt;
-
-&lt;h2&gt;
-  类型定义
-&lt;/h2&gt;
-
-&lt;table&gt;
-  &lt;tr&gt;
-    &lt;th&gt;
-      OCaml Tuple
-    &lt;/th&gt;
-    
-    &lt;th&gt;
-      Reason Tuple
-    &lt;/th&gt;
-  &lt;/tr&gt;
-  
-  &lt;tr&gt;
-    &lt;td&gt;
-      &lt;code&gt;type tuple = int * int&lt;/code&gt;
-    &lt;/td&gt;
-    
-    &lt;td&gt;
-      &lt;code&gt;type tuple = (int, int);&lt;/code&gt;
-    &lt;/td&gt;
-  &lt;/tr&gt;
-  
-  &lt;tr&gt;
-    &lt;td&gt;
-      &lt;code&gt;let tup: tuple = (10, 30)&lt;/code&gt;
-    &lt;/td&gt;
-    
-    &lt;td&gt;
-      &lt;code&gt;let tup: tuple = (10, 30);&lt;/code&gt;
-    &lt;/td&gt;
-  &lt;/tr&gt;
-&lt;/table&gt;
-
-&lt;table&gt;
-  &lt;tr&gt;
-    &lt;th&gt;
-      OCaml Record
-    &lt;/th&gt;
-    
-    &lt;th&gt;
-      Reason Record
-    &lt;/th&gt;
-  &lt;/tr&gt;
-  
-  &lt;tr&gt;
-    &lt;td&gt;
-      &lt;code&gt;type r = {x: int; y: int}&lt;/code&gt;
-    &lt;/td&gt;
-    
-    &lt;td&gt;
-      &lt;code&gt;type r = {x: int, y: int};&lt;/code&gt;
-    &lt;/td&gt;
-  &lt;/tr&gt;
-  
-  &lt;tr&gt;
-    &lt;td&gt;
-      &lt;code&gt;let myRec: r = {x = 0; y = 10}&lt;/code&gt;
-    &lt;/td&gt;
-    
-    &lt;td&gt;
-      &lt;code&gt;let myRec: r = {x: 0, y: 10};&lt;/code&gt;
-    &lt;/td&gt;
-  &lt;/tr&gt;
-&lt;/table&gt;
-
-&lt;table&gt;
-  &lt;tr&gt;
-    &lt;th&gt;
-      OCaml Function
-    &lt;/th&gt;
-    
-    &lt;th&gt;
-      Reason Function
-    &lt;/th&gt;
-  &lt;/tr&gt;
-  
-  &lt;tr&gt;
-    &lt;td&gt;
-      &lt;code&gt;type func = int -&amp;gt; int&lt;/code&gt;
-    &lt;/td&gt;
-    
-    &lt;td&gt;
-      &lt;code&gt;type func = int =&amp;gt; int;&lt;/code&gt;
-    &lt;/td&gt;
-  &lt;/tr&gt;
-  
-  &lt;tr&gt;
-    &lt;td&gt;
-      &lt;code&gt;let x: func = fun a -&amp;gt; a + 1&lt;/code&gt;
-    &lt;/td&gt;
-    
-    &lt;td&gt;
-      &lt;code&gt;let x: func = (a) =&amp;gt; a + 1;&lt;/code&gt;
-    &lt;/td&gt;
-  &lt;/tr&gt;
-&lt;/table&gt;
-
-&lt;h2&gt;
-  函数
-&lt;/h2&gt;
-
-&lt;table&gt;
-  &lt;tr&gt;
-    &lt;th&gt;
-      OCaml
-    &lt;/th&gt;
-    
-    &lt;th&gt;
-      Reason
-    &lt;/th&gt;
-  &lt;/tr&gt;
-  
-  &lt;tr&gt;
-    &lt;td&gt;
-      &lt;code&gt;let x a b = e&lt;/code&gt;
-    &lt;/td&gt;
-    
-    &lt;td&gt;
-      &lt;code&gt;let x = (a, b) =&amp;gt; e&lt;/code&gt;
-    &lt;/td&gt;
-  &lt;/tr&gt;
-  
-  &lt;tr&gt;
-    &lt;td&gt;
-      &lt;code&gt;let x = fun a b -&amp;gt; e&lt;/code&gt;
-    &lt;/td&gt;
-    
-    &lt;td&gt;
-      &lt;code&gt;let x = (a, b) =&amp;gt; e&lt;/code&gt;
-    &lt;/td&gt;
-  &lt;/tr&gt;
-  
-  &lt;tr&gt;
-    &lt;td&gt;
-      &lt;code&gt;let x = fun a -&amp;gt; fun b -&amp;gt; e&lt;/code&gt;
-    &lt;/td&gt;
-    
-    &lt;td&gt;
-      &lt;code&gt;let x = (a, b) =&amp;gt; e&lt;/code&gt;
-    &lt;/td&gt;
-  &lt;/tr&gt;
-&lt;/table&gt;
-
-&lt;h3&gt;
-  单个参数匹配函数
-&lt;/h3&gt;
-
-&lt;p&gt;
-  OCaml 有一个函数定义 (&lt;code&gt;function |&lt;/code&gt;), 它被认为等同于 &lt;code&gt;function a -&amp;gt; match a with ...&lt;/code&gt;。 Reason是相同的, 但语法清楚说明它实际上是单个参数函数的扩展。 单例匹配是简单 lambda 的自然扩展, multicase lambda 是单个事例 lambda 的自然扩展。
-&lt;/p&gt;
-
-&lt;table&gt;
-  &lt;tr&gt;
-    &lt;th&gt;
-      &lt;p&gt;
-        Form
-      &lt;/p&gt;
-    &lt;/th&gt;
-    
-    &lt;th&gt;
-      &lt;p&gt;
-        OCaml
-      &lt;/p&gt;
-    &lt;/th&gt;
-    
-    &lt;th&gt;
-      &lt;p&gt;
-        Reason
-      &lt;/p&gt;
-    &lt;/th&gt;
-  &lt;/tr&gt;
-  
-  &lt;tr&gt;
-    &lt;td&gt;
-      lambda
-    &lt;/td&gt;
-    
-    &lt;td&gt;
-      &lt;code&gt;&amp;lt;pre&gt;
 </code></pre>
-<p>fun pat -&gt; e&lt;/pre&gt;</code>
+<p>};</code></pre>
 </td></p>
-<pre><code class="hljs">    &lt;td&gt;
-      &lt;code&gt;&amp;lt;pre&gt;
-</code></pre>
-<p>fun pat =&gt; e&lt;/pre&gt;</code>
-</td>
-</tr></p>
-<pre><code class="hljs">  &lt;tr&gt;
-    &lt;td&gt;
-      one match case
-    &lt;/td&gt;
-    
-    &lt;td&gt;
-      &lt;code&gt;&amp;lt;pre&gt;
-</code></pre>
-<p>function | pat -&gt; e&lt;/pre&gt;</code>
-</td></p>
-<pre><code class="hljs">    &lt;td&gt;
-      &lt;code&gt;&amp;lt;pre&gt;
-</code></pre>
-<p>fun | pat =&gt; e&lt;/pre&gt;</code>
-</td>
-</tr></p>
-<pre><code class="hljs">  &lt;tr&gt;
-    &lt;td&gt;
-      many cases
-    &lt;/td&gt;
-    
-    &lt;td&gt;
-      &lt;code&gt;&amp;lt;pre&gt;
-</code></pre>
-<p>function | pat -&gt; e
-| pat2 -&gt; e&lt;/pre&gt;</code>
-</td></p>
-<pre><code class="hljs">    &lt;td&gt;
-      &lt;code&gt;&amp;lt;pre&gt;
-</code></pre>
-<p>fun | pat =&gt; e
-| pat2 =&gt; e&lt;/pre&gt;</code>
-</td>
-</tr>
-</table></p>
-<pre><code class="hljs">&lt;h3&gt;
-  注释参数
-&lt;/h3&gt;
-
-&lt;p&gt;
-  在Reason和 OCaml 中, 参数通过类型批注 (与其他内容一样), 在追加 &lt;code&gt;: typeAnnotation &lt;/code&gt; 后将它们包装在括号中。
-&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;reason&quot;&gt;(arg: argType) =&amp;gt; returnValue;
-</code></pre>
-<p></code></pre></p>
-<pre><code class="hljs">&lt;pre&gt;&lt;code class=&quot;reason&quot;&gt;(arg: argType) =&amp;gt; (arg2: arg2Type) =&amp;gt; returnValue;
-</code></pre>
-<p></code></pre></p>
-<pre><code class="hljs">&lt;pre&gt;&lt;code class=&quot;reason&quot;&gt;(arg: argType, arg2: arg2Type) =&amp;gt; returnValue;
-</code></pre>
-<p></code></pre></p>
-<pre><code class="hljs">&lt;p&gt;
-  Reason和 OCaml 允许注释返回类型, 当使用 &quot;let&quot;的超级语法糖 形式。
-&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;ocaml&quot;&gt;(* OCaml *)
-</code></pre>
-<p>let myFunc (a:int) (b:int) :int * int = (a, b)
-let myFunc (a:int) (b:int) :int list = [1]
-let myFunc (a:int) (b:int) :int -&gt; int = fun x -&gt; x + a + b
-</code></pre></p>
-<pre><code class="hljs">&lt;pre&gt;&lt;code class=&quot;reason&quot;&gt;/* Reason */
-</code></pre>
-<p>let myFunc = (a: int, b: int) :(int, int) =&gt; (a, b);
-let myFunc = (a: int, b: int) :list(int) =&gt; [1];
-let myFunc = (a: int, b: int): (int =&gt; int) =&gt; (x) =&gt; x + a + b;
-</code></pre></p>
-<pre><code class="hljs">&lt;p&gt;
-  因为我们在Reason中对所有函数都使用 &lt;code&gt; = &amp;gt; &lt;/code&gt;, 所以有一种情况是, 我们需要在一个本身是函数类型的返回类型周围添加额外的括号。
-&lt;/p&gt;
-
-&lt;h3&gt;
-  类型参数
-&lt;/h3&gt;
-
-&lt;h4&gt;
+  </tr>
+</table>
+<h2><a class="anchor" aria-hidden="true" id="序列"></a><a href="#序列" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>序列</h2>
+<table>
+<thead>
+<tr><th>OCaml</th><th>Reason</th></tr>
+</thead>
+<tbody>
+<tr><td><code>let list = [1; 2; 3]</code></td><td><code>let list = [1, 2, 3]</code></td></tr>
+<tr><td><code>let list = hd :: tl</code></td><td><code>let list = [hd, ...tl];</code></td></tr>
+</tbody>
+</table>
+<h2><a class="anchor" aria-hidden="true" id="类型定义"></a><a href="#类型定义" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>类型定义</h2>
+<table>
+<thead>
+<tr><th>OCaml Tuple</th><th>Reason Tuple</th></tr>
+</thead>
+<tbody>
+<tr><td><code>type tuple = int * int</code></td><td><code>type tuple = (int, int);</code></td></tr>
+<tr><td><code>let tup: tuple = (10, 30)</code></td><td><code>let tup: tuple = (10, 30);</code></td></tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr><th>OCaml Record</th><th>Reason Record</th></tr>
+</thead>
+<tbody>
+<tr><td><code>type r = {x: int; y: int}</code></td><td><code>type r = {x: int, y: int};</code></td></tr>
+<tr><td><code>let myRec: r = {x = 0; y = 10}</code></td><td><code>let myRec: r = {x: 0, y: 10};</code></td></tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr><th>OCaml Function</th><th>Reason Function</th></tr>
+</thead>
+<tbody>
+<tr><td><code>type func = int -&gt; int</code></td><td><code>type func = int =&gt; int;</code></td></tr>
+<tr><td><code>let x: func = fun a -&gt; a + 1</code></td><td><code>let x: func = (a) =&gt; a + 1;</code></td></tr>
+</tbody>
+</table>
+<h2><a class="anchor" aria-hidden="true" id="函数"></a><a href="#函数" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>函数</h2>
+<table>
+<thead>
+<tr><th>OCaml</th><th>Reason</th></tr>
+</thead>
+<tbody>
+<tr><td><code>let x a b = e</code></td><td><code>let x = (a, b) =&gt; e</code></td></tr>
+<tr><td><code>let x = fun a b -&gt; e</code></td><td><code>let x = (a, b) =&gt; e</code></td></tr>
+<tr><td><code>let x = fun a -&gt; fun b -&gt; e</code></td><td><code>let x = (a, b) =&gt; e</code></td></tr>
+</tbody>
+</table>
+<h3><a class="anchor" aria-hidden="true" id="单个参数匹配函数"></a><a href="#单个参数匹配函数" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>单个参数匹配函数</h3>
+<p>OCaml 有一个函数定义 (<code>function |</code>), 它被认为等同于 <code>function a -&gt; match a with ...</code>。 Reason是相同的, 但语法清楚说明它实际上是单个参数函数的扩展。 单例匹配是简单 lambda 的自然扩展, multicase lambda 是单个事例 lambda 的自然扩展。</p>
+<table>
+  <tr>
+    <th>
+      Form
+    </th>
+<pre><code class="hljs">&lt;th&gt;
   OCaml
-&lt;/h4&gt;
+&lt;/th&gt;
 
-&lt;p&gt;
-  OCaml 的类型应用程序 (认为 &quot;泛型&quot;) 以相反的顺序应用。
-&lt;/p&gt;
-
-&lt;p&gt;
-  在 OCaml中, 会导致一些直观的后果。
-&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;ocaml&quot;&gt;let x: int list = [2]
-</code></pre>
-<p>type listOfListOfInts = int list list</p>
-<p>(* Parsed as: *)
-type listOfListOfInts = (int list) list
-</code></pre></p>
-<pre><code class="hljs">&lt;p&gt;
-  当类型构造接受多个参数时，事情变得更加奇怪了。 多个参数需要括号和分号分割类型参数，但是这些括号不代表元组。 括号/逗号形式必须在&lt;code&gt;(int, string) tuple&lt;/code&gt;这样的构造类型示例中给出。
-&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;ocaml&quot;&gt;type ('a, 'b) tuple = 'a * 'b
-</code></pre>
-<p>type listOfTuplesOfStringAndInt = (string, int) tuple list</p>
-<p>(* Which is parsed as: *)
-type listOfTuplesOfStringAndInt = ((string, int) tuple) list</p>
-<p>(* Which allows a list of (tuples of (string and int)) *)
-let tuples: listOfTuplesOfStringAndInt = [(&quot;asdf&quot;, 3)]
-</code></pre></p>
-<pre><code class="hljs">&lt;h4&gt;
+&lt;th&gt;
   Reason
-&lt;/h4&gt;
-
-&lt;p&gt;
-  总之, Reason将几乎所有的语法都统一为简单的 &quot;函数应用程序&quot; 样式, 这意味着类型参数遵循语法中其他地方所看到的相同的逗号分隔模式。 这将导致学习的语法模式更少。
-&lt;/p&gt;
-
-&lt;p&gt;
-  例如, 可以将 &lt;code&gt; list &lt;/code&gt; 作为接受类型并返回新类型的类型的 &quot;函数&quot;。
-&lt;/p&gt;
-
-&lt;table&gt;
-  &lt;tr&gt;
-    &lt;th&gt;
-      &lt;p&gt;
-        OCaml
-      &lt;/p&gt;
-    &lt;/th&gt;
-    
-    &lt;th&gt;
-      &lt;p&gt;
-        Reason
-      &lt;/p&gt;
-    &lt;/th&gt;
-  &lt;/tr&gt;
-  
-  &lt;tr&gt;
-    &lt;td&gt;
-      &lt;code&gt;&amp;lt;pre&gt;
+&lt;/th&gt;
 </code></pre>
-<p>let x: int list = [2]
+  </tr>
+  <tr>
+    <td>
+      Lambda
+    </td>
+<pre><code class="hljs">&lt;td&gt;
+  &lt;pre&gt;&lt;code&gt;fun pat -&gt; e&lt;/code&gt;&lt;/pre&gt;
+&lt;/td&gt;
+
+&lt;td&gt;
+  &lt;pre&gt;&lt;code&gt;fun pat =&gt; e&lt;/code&gt;&lt;/pre&gt;
+&lt;/td&gt;
+</code></pre>
+  </tr>
+  <tr>
+    <td>
+      One match case
+    </td>
+<pre><code class="hljs">&lt;td&gt;
+  &lt;pre&gt;&lt;code&gt;function | pat -&gt; e&lt;/code&gt;&lt;/pre&gt;
+&lt;/td&gt;
+
+&lt;td&gt;
+  &lt;pre&gt;&lt;code&gt;fun | pat =&gt; e&lt;/code&gt;&lt;/pre&gt;
+&lt;/td&gt;
+</code></pre>
+  </tr>
+  <tr>
+    <td>
+      Many cases
+    </td>
+<pre><code class="hljs">&lt;td&gt;
+  &lt;pre&gt;&lt;code&gt;function | pat -&gt; e
+       | pat2 -&gt; e&lt;/code&gt;&lt;/pre&gt;
+&lt;/td&gt;
+
+&lt;td&gt;
+  &lt;pre&gt;&lt;code&gt;fun | pat =&gt; e
+  | pat2 =&gt; e&lt;/code&gt;&lt;/pre&gt;
+&lt;/td&gt;
+</code></pre>
+  </tr>
+</table>
+<h3><a class="anchor" aria-hidden="true" id="注释参数"></a><a href="#注释参数" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>注释参数</h3>
+<p>在Reason和 OCaml 中, 参数通过类型批注 (与其他内容一样), 在追加 <code>: typeAnnotation</code> 后将它们包装在括号中。</p>
+<pre><code class="hljs css languages- reason">(<span class="hljs-name">arg</span>: argType) =&gt; returnValue<span class="hljs-comment">;</span>
+</code></pre>
+<pre><code class="hljs css languages- reason">(<span class="hljs-name">arg</span>: argType) =&gt; (<span class="hljs-name">arg2</span>: arg2Type) =&gt; returnValue<span class="hljs-comment">;</span>
+</code></pre>
+<pre><code class="hljs css languages- reason">(<span class="hljs-string">arg:</span> argType, <span class="hljs-string">arg2:</span> arg2Type) =&gt; returnValue;
+</code></pre>
+<p>Reason和 OCaml 允许注释返回类型, 当使用 &quot;let&quot;的超级语法糖 形式。</p>
+<pre><code class="hljs css languages- ocaml"><span class="hljs-comment">(* OCaml *)</span>
+<span class="hljs-keyword">let</span> myFunc (a:<span class="hljs-built_in">int</span>) (b:<span class="hljs-built_in">int</span>) :<span class="hljs-built_in">int</span> * <span class="hljs-built_in">int</span> = (a, b)
+<span class="hljs-keyword">let</span> myFunc (a:<span class="hljs-built_in">int</span>) (b:<span class="hljs-built_in">int</span>) :<span class="hljs-built_in">int</span> <span class="hljs-built_in">list</span> = [<span class="hljs-number">1</span>]
+<span class="hljs-keyword">let</span> myFunc (a:<span class="hljs-built_in">int</span>) (b:<span class="hljs-built_in">int</span>) :<span class="hljs-built_in">int</span> -&gt; <span class="hljs-built_in">int</span> = <span class="hljs-keyword">fun</span> x -&gt; x + a + b
+</code></pre>
+<pre><code class="hljs css languages- reason"><span class="hljs-comment">/* Reason */</span>
+<span class="hljs-keyword">let</span> myFunc = (a: <span class="hljs-keyword">int</span>, b: <span class="hljs-keyword">int</span>) :(<span class="hljs-keyword">int</span>, <span class="hljs-keyword">int</span>) =&gt; (a, b);
+<span class="hljs-keyword">let</span> myFunc = (a: <span class="hljs-keyword">int</span>, b: <span class="hljs-keyword">int</span>) :<span class="hljs-keyword">list</span>(<span class="hljs-keyword">int</span>) =&gt; [<span class="hljs-number">1</span>];
+<span class="hljs-keyword">let</span> myFunc = (a: <span class="hljs-keyword">int</span>, b: <span class="hljs-keyword">int</span>): (<span class="hljs-keyword">int</span> =&gt; <span class="hljs-keyword">int</span>) =&gt; (x) =&gt; x + a + b;
+</code></pre>
+<p>因为我们在Reason中对所有函数都使用 <code>= &gt;</code>, 所以有一种情况是, 我们需要在一个本身是函数类型的返回类型周围添加额外的括号。</p>
+<h3><a class="anchor" aria-hidden="true" id="类型参数"></a><a href="#类型参数" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>类型参数</h3>
+<h4><a class="anchor" aria-hidden="true" id="ocaml"></a><a href="#ocaml" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>OCaml</h4>
+<p>OCaml 的类型应用程序 (认为 &quot;泛型&quot;) 以相反的顺序应用。</p>
+<p>在 OCaml中, 会导致一些直观的后果。</p>
+<pre><code class="hljs css languages- ocaml"><span class="hljs-keyword">let</span> x: <span class="hljs-built_in">int</span> <span class="hljs-built_in">list</span> = [<span class="hljs-number">2</span>]
+
+<span class="hljs-keyword">type</span> listOfListOfInts = <span class="hljs-built_in">int</span> <span class="hljs-built_in">list</span> <span class="hljs-built_in">list</span>
+
+<span class="hljs-comment">(* Parsed as: *)</span>
+<span class="hljs-keyword">type</span> listOfListOfInts = (<span class="hljs-built_in">int</span> <span class="hljs-built_in">list</span>) <span class="hljs-built_in">list</span>
+</code></pre>
+<p>当类型构造接受多个参数时，事情变得更加奇怪了。 多个参数需要括号和分号分割类型参数，但是这些括号不代表元组。 括号/逗号形式必须在<code>(int, string) tuple</code>这样的构造类型示例中给出。</p>
+<pre><code class="hljs css languages- ocaml"><span class="hljs-keyword">type</span> (<span class="hljs-symbol">'a</span>, <span class="hljs-symbol">'b</span>) tuple = <span class="hljs-symbol">'a</span> * <span class="hljs-symbol">'b</span>
+
+<span class="hljs-keyword">type</span> listOfTuplesOfStringAndInt = (<span class="hljs-built_in">string</span>, <span class="hljs-built_in">int</span>) tuple <span class="hljs-built_in">list</span>
+
+<span class="hljs-comment">(* Which is parsed as: *)</span>
+<span class="hljs-keyword">type</span> listOfTuplesOfStringAndInt = ((<span class="hljs-built_in">string</span>, <span class="hljs-built_in">int</span>) tuple) <span class="hljs-built_in">list</span>
+
+<span class="hljs-comment">(* Which allows a list of (tuples of (string and int)) *)</span>
+<span class="hljs-keyword">let</span> tuples: listOfTuplesOfStringAndInt = [(<span class="hljs-string">"asdf"</span>, <span class="hljs-number">3</span>)]
+</code></pre>
+<h4><a class="anchor" aria-hidden="true" id="reason"></a><a href="#reason" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Reason</h4>
+<p>总之, Reason将几乎所有的语法都统一为简单的 &quot;函数应用程序&quot; 样式, 这意味着类型参数遵循语法中其他地方所看到的相同的逗号分隔模式。 这将导致学习的语法模式更少。</p>
+<p>例如, 可以将 <code>list</code> 作为接受类型并返回新类型的类型的 &quot;函数&quot;。</p>
+<table>
+  <tr>
+    <th>
+      OCaml
+    </th>
+<pre><code class="hljs">&lt;th&gt;
+  Reason
+&lt;/th&gt;
+</code></pre>
+  </tr>
+  <tr>
+    <td>
+      <pre><code class="hljs">let x: int list = [2]
 type listOfListOfInts = int list list
 type ('a, 'b) tup = ('a * 'b)
 type pairs = (int, int) tup list
-let tuples: pairs = [(2, 3)]&lt;/pre&gt;</code>
-</td></p>
-<pre><code class="hljs">    &lt;td&gt;
-      &lt;code&gt;&amp;lt;pre&gt;
+let tuples: pairs = [(2, 3)]</code></pre>
+    </td>
+<pre><code class="hljs">&lt;td&gt;
+  &lt;pre&gt;&lt;code&gt;let x: list(int) = [2];
 </code></pre>
-<p>let x: list(int) = [2];
-type listOfListOfInts = list(list(int));
+<p>type listOfListOfInts = list(list(int));
 type tup('a, 'b) = ('a, 'b);
 type pairs = list(tup(int, int));
-let tuples: pairs = [(2, 3)];&lt;/pre&gt;</code>
-</td>
-</tr>
-</table></p>
-<pre><code class="hljs">&lt;h2&gt;
-  作为类型参数的元组
-&lt;/h2&gt;
-
-&lt;p&gt;
-  因为 OCaml 使用括号和逗号来表示类型构造函数的多个参数, 所以当类型构造函数的一个参数本身是一个元组时, 它会混淆。 在 OCaml 中, 很难记住一个类型构造函数接受多个参数和一个类型构造函数接受一个恰好是元组的参数的区别。
-&lt;/p&gt;
-
-&lt;p&gt;
-  下面的示例显示了将 &lt;em&gt; 两个 &lt;/em&gt; 类型参数传递给 &lt;code&gt; pair &lt;/code&gt; 和一个恰好为元组的 &lt;em&gt; 单个 &lt;/em&gt; 类型参数之间的区别。
-&lt;/p&gt;
-
-&lt;table&gt;
-  &lt;tr&gt;
-    &lt;th&gt;
-      OCaml
-    &lt;/th&gt;
-    
-    &lt;th&gt;
-      Reason
-    &lt;/th&gt;
-  &lt;/tr&gt;
-  
-  &lt;tr&gt;
-    &lt;td&gt;
-      &lt;code&gt;type intPair = (int, int) pair&lt;/code&gt;
-    &lt;/td&gt;
-    
-    &lt;td&gt;
-      &lt;code&gt;type intPair = pair(int, int)&lt;/code&gt;
-    &lt;/td&gt;
-  &lt;/tr&gt;
-  
-  &lt;tr&gt;
-    &lt;td&gt;
-      &lt;code&gt;type pairList = (int * int) list&lt;/code&gt;
-    &lt;/td&gt;
-    
-    &lt;td&gt;
-      &lt;code&gt;type pairList = list((int, int))&lt;/code&gt;
-    &lt;/td&gt;
-  &lt;/tr&gt;
-&lt;/table&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    在Reason中, 表示元组或元组类型的语法总是看起来像元数组。
-  &lt;/li&gt;
-  &lt;li&gt;
-    在Reason中, 表示记录或记录类型的语法始终看起来像记录。
-  &lt;/li&gt;
-  &lt;li&gt;
-    其他一切都使用函数应用程序的语法模式 (逗号分隔参数)。
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2&gt;
-  变体
-&lt;/h2&gt;
-
-&lt;h5&gt;
-  OCaml
-&lt;/h5&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    OCaml 已经期望构造函数参数类型以元组形式指定, 因此当一个构造函数需要一个 &lt;em&gt; 碰巧 &lt;/em&gt; 为元组类型的单个参数时, 就会混淆。
-  &lt;/li&gt;
-  &lt;li&gt;
-    更让人费解的是, 构造函数 &lt;em&gt; 实际上 &lt;/em&gt; 不接受元组, 但语法看起来像元组。
-  &lt;/li&gt;
-  &lt;li&gt;
-    有时, 用于实例化具有多个参数的构造函数的语法与构造变量的语法重叠, 该变量使用恰好是一个元组的单个参数, 因此它看起来像你支持了元组，事实上并没有。
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h5&gt;
-  Reason
-&lt;/h5&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    变量构造函数类型应以逗号分隔列表的形式列出, 并使用括号来分组优先级 (与 &lt;strong&gt; &quot;其他内容&quot; &lt;/strong&gt; 一样)。
-  &lt;/li&gt;
-  &lt;li&gt;
-    构造变量的实例 (如您所猜到的) 遵循函数应用程序样式 (逗号分隔列表)。
-  &lt;/li&gt;
-  &lt;li&gt;
-    元组 &lt;strong&gt; 总是 &lt;/strong&gt; &lt;em&gt; 看起来 &lt;/em&gt; 类似元组, 而任何看起来像元数组 &lt;em&gt; 的内容都是 &lt;/em&gt; 元组。
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;table&gt;
-  &lt;tr&gt;
-    &lt;th&gt;
-      &lt;p&gt;
-        OCaml
-      &lt;/p&gt;
-    &lt;/th&gt;
-    
-    &lt;th&gt;
-      &lt;p&gt;
-        Reason
-      &lt;/p&gt;
-    &lt;/th&gt;
-  &lt;/tr&gt;
-  
-  &lt;tr&gt;
-    &lt;td&gt;
-      &lt;code&gt;&amp;lt;pre&gt;
-</code></pre>
-<p>type myVariant =
-| HasNothing
-| HasSingleInt of int
-| HasSingleTuple of (int * int)
-| HasMultipleInts of int * int
-| HasMultipleTuples of (int * int) * (int * int)
-&lt;/pre&gt;</code>
+let tuples: pairs = [(2, 3)];</code></pre>
 </td></p>
-<pre><code class="hljs">    &lt;td&gt;
-      &lt;code&gt;&amp;lt;pre&gt;
+  </tr>
+</table>
+<h2><a class="anchor" aria-hidden="true" id="作为类型参数的元组"></a><a href="#作为类型参数的元组" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>作为类型参数的元组</h2>
+<p>因为 OCaml 使用括号和逗号来表示类型构造函数的多个参数, 所以当类型构造函数的一个参数本身是一个元组时, 它会混淆。 在 OCaml 中, 很难记住一个类型构造函数接受多个参数和一个类型构造函数接受一个恰好是元组的参数的区别。</p>
+<p>下面的示例显示了将 * 两个 * 类型参数传递给 <code>pair</code> 和一个恰好为元组的 * 单个 * 类型参数之间的区别。</p>
+<table>
+<thead>
+<tr><th>OCaml</th><th>Reason</th></tr>
+</thead>
+<tbody>
+<tr><td><code>type intPair = (int, int) pair</code></td><td><code>type intPair = pair(int, int)</code></td></tr>
+<tr><td><code>type pairList = (int * int) list</code></td><td><code>type pairList = list((int, int))</code></td></tr>
+</tbody>
+</table>
+<ul>
+<li>在Reason中, 表示元组或元组类型的语法总是看起来像元数组。</li>
+<li>在Reason中, 表示记录或记录类型的语法始终看起来像记录。</li>
+<li>其他一切都使用函数应用程序的语法模式 (逗号分隔参数)。</li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="变体"></a><a href="#变体" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>变体</h2>
+<h5><a class="anchor" aria-hidden="true" id="ocaml-1"></a><a href="#ocaml-1" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>OCaml</h5>
+<ul>
+<li>OCaml 已经期望构造函数参数类型以元组形式指定, 因此当一个构造函数需要一个 * 碰巧 * 为元组类型的单个参数时, 就会混淆。</li>
+<li>更让人费解的是, 构造函数 * 实际上 * 不接受元组, 但语法看起来像元组。</li>
+<li>有时, 用于实例化具有多个参数的构造函数的语法与构造变量的语法重叠, 该变量使用恰好是一个元组的单个参数, 因此它看起来像你支持了元组，事实上并没有。</li>
+</ul>
+<h5><a class="anchor" aria-hidden="true" id="reason-1"></a><a href="#reason-1" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Reason</h5>
+<ul>
+<li>变量构造函数类型应以逗号分隔列表的形式列出, 并使用括号来分组优先级 (与 ** &quot;其他内容&quot; ** 一样)。</li>
+<li>构造变量的实例 (如您所猜到的) 遵循函数应用程序样式 (逗号分隔列表)。</li>
+<li>元组 ** 总是 ** * 看起来 * 类似元组, 而任何看起来像元数组 * 的内容都是 * 元组。</li>
+</ul>
+<table>
+  <tr>
+    <th>
+      OCaml
+    </th>
+<pre><code class="hljs">&lt;th&gt;
+  Reason
+&lt;/th&gt;
 </code></pre>
-<p>type myVariant =
+  </tr>
+  <tr>
+    <td>
+      <pre><code class="hljs">type myVariant =
+    | HasNothing
+    | HasSingleInt of int
+    | HasSingleTuple of (int * int)
+    | HasMultipleInts of int * int
+    | HasMultipleTuples of (int * int) * (int * int)</code></pre>
+    </td>
+<pre><code class="hljs">&lt;td&gt;
+  &lt;pre&gt;&lt;code&gt;type myVariant =
 | HasNothing
 | HasSingleInt(int)
 | HasSingleTuple((int, int))
 | HasMultipleInts(int, int)
-| HasMultipleTuples((int, int), (int, int));
-&lt;/pre&gt;</code>
-</td>
-</tr></p>
-<pre><code class="hljs">  &lt;tr&gt;
-    &lt;td&gt;
-      &lt;code&gt;&amp;lt;pre&gt;
+| HasMultipleTuples((int, int), (int, int));&lt;/code&gt;&lt;/pre&gt;
+&lt;/td&gt;
 </code></pre>
-<p>let a = HasSingleInt 10
-let a = HasSingleTuple (10, 10)
-let a = HasMultipleInts (10, 10)
-let a = HasMultipleTuples ((10, 10), (10, 10))
-&lt;/pre&gt;</code>
-</td></p>
-<pre><code class="hljs">    &lt;td&gt;
-      &lt;code&gt;&amp;lt;pre&gt;
+  </tr>
+  <tr>
+    <td>
+      <pre><code class="hljs">let a = HasSingleInt 10
+  let a = HasSingleTuple (10, 10)
+  let a = HasMultipleInts (10, 10)
+  let a = HasMultipleTuples ((10, 10), (10, 10))</code></pre>
+    </td>
+<pre><code class="hljs">&lt;td&gt;
+  &lt;pre&gt;&lt;code&gt;let a = HasSingleInt(10);
 </code></pre>
-<p>let a = HasSingleInt(10);
-let a = HasSingleTuple((10, 10));
+<p>let a = HasSingleTuple((10, 10));
 let a = HasMultipleInts(10, 10);
-let a = HasMultipleTuples((10, 10), (10, 10));
-&lt;/pre&gt;</code>
-</td>
-</tr></p>
-<pre><code class="hljs">  &lt;tr&gt;
-    &lt;td&gt;
-      &lt;code&gt;&amp;lt;pre&gt;
-</code></pre>
-<p>let res x = match x with
-| HasNothing -&gt; 0
-| HasSingleInt x -&gt; 0
-| HasSingleTuple (x, y) -&gt; 0
-| HasMultipleInts (x, y) -&gt; 0
-| HasMultipleTuples ((x, y), (q, r)) -&gt; 0
-&lt;/pre&gt;</code>
+let a = HasMultipleTuples((10, 10), (10, 10));</code></pre>
 </td></p>
-<pre><code class="hljs">    &lt;td&gt;
-      &lt;code&gt;&amp;lt;pre&gt;
-</code></pre>
-<p>let res = (x) =&gt;
+  </tr>
+  <tr>
+    <td>
+      <pre><code class="hljs">let res x = match x with
+    | HasNothing -> 0
+    | HasSingleInt x -> 0
+    | HasSingleTuple (x, y) -> 0
+    | HasMultipleInts (x, y) -> 0
+    | HasMultipleTuples ((x, y), (q, r)) -> 0</code></pre>
+    </td>
+<pre><code class="hljs">&lt;td&gt;
+  &lt;pre&gt;&lt;code&gt;let res = (x) =&gt;
 switch (x) {
 | HasNothing =&gt; 0
 | HasSingleInt(x) =&gt; 0
 | HasSingleTuple((x, y)) =&gt; 0
 | HasMultipleInts(x, y) =&gt; 0
 | HasMultipleTuples((x, y), (q, r)) =&gt; 0
-};
-&lt;/pre&gt;</code>
-</td>
-</tr>
-</table></p>
-<pre><code class="hljs">&lt;h2&gt;
-  模式匹配
-&lt;/h2&gt;
-
-&lt;table&gt;
-  &lt;tr&gt;
-    &lt;th&gt;
-      &lt;p&gt;
-        OCaml
-      &lt;/p&gt;
-    &lt;/th&gt;
-    
-    &lt;th&gt;
-      &lt;p&gt;
-        Reason
-      &lt;/p&gt;
-    &lt;/th&gt;
-  &lt;/tr&gt;
-  
-  &lt;tr&gt;
-    &lt;td&gt;
-      &lt;code&gt;&amp;lt;pre&gt;
+};&lt;/code&gt;&lt;/pre&gt;
+&lt;/td&gt;
 </code></pre>
-<p>let res = match x with
-| A (x, y) -&gt; match y with
-| None -&gt; 0
-| Some i -&gt; 10
-| B (x, y) -&gt; 0&lt;/pre&gt;</code>
-</td></p>
-<pre><code class="hljs">    &lt;td&gt;
-      &lt;code&gt;&amp;lt;pre&gt;
+  </tr>
+</table>
+<h2><a class="anchor" aria-hidden="true" id="模式匹配"></a><a href="#模式匹配" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>模式匹配</h2>
+<table>
+  <tr>
+    <th>
+      OCaml
+    </th>
+<pre><code class="hljs">&lt;th&gt;
+  Reason
+&lt;/th&gt;
 </code></pre>
-<p>let res = switch (x) {
+  </tr>
+  <tr>
+    <td>
+      <pre><code class="hljs">let res = match x with
+    | A (x, y) -> match y with
+      | None -> 0
+      | Some i -> 10
+    | B (x, y) -> 0</code></pre>
+    </td>
+<pre><code class="hljs">&lt;td&gt;
+  &lt;pre&gt;&lt;code&gt;let res = switch (x) {
 | A((x, y)) =&gt; switch (y) {
-| None =&gt; 0
-| Some(i) =&gt; 10
-}
+    | None =&gt; 0
+    | Some(i) =&gt; 10
+  }
 | B((x, y)) =&gt; 0
-};
-&lt;/pre&gt;</code>
-</td>
-</tr>
-</table></p>
-<pre><code class="hljs">&lt;p&gt;
-  你能支出OCaml中的错误吗？ 这是一个在OCaml程序中司空见惯的错误。 嵌套的&lt;code&gt;match&lt;/code&gt; 函数必须包裹在括号中，否则&lt;code&gt;Some&lt;/code&gt;会被外部的&lt;code&gt;match&lt;/code&gt;函数解析。 看起来就像这样。
-&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;ocaml&quot;&gt;let res = match x with
 </code></pre>
-<p>| A (x, y) -&gt; match y with
-| None -&gt; 0
-| Some i -&gt; 10
-| B (x, y) -&gt; 0
-</code></pre></p>
-<pre><code class="hljs">&lt;p&gt;
-  Reason强制在&lt;code&gt;switch&lt;/code&gt;外使用&lt;code&gt;{}&lt;/code&gt;解决这个问题。
-&lt;/p&gt;
-
-&lt;h2&gt;
-  模块和签名
-&lt;/h2&gt;
-
-&lt;h3&gt;
-  定义
-&lt;/h3&gt;
-
-&lt;table&gt;
-  &lt;tr&gt;
-    &lt;th&gt;
-      &lt;p&gt;
-        OCaml
-      &lt;/p&gt;
-    &lt;/th&gt;
-    
-    &lt;th&gt;
-      &lt;p&gt;
-        Reason
-      &lt;/p&gt;
-    &lt;/th&gt;
-  &lt;/tr&gt;
-  
-  &lt;tr&gt;
-    &lt;td&gt;
-      &lt;code&gt;&amp;lt;pre&gt;
-</code></pre>
-<p>module type MySig = sig
-type t = int
-val x: int
-end
-module MyModule: MySig = struct
-type t = int
-let x = 10
-end
-module MyModule = struct
-module NestedModule = struct
-let msg = &quot;hello&quot;;
-end
-end
-&lt;/pre&gt;</code>
+<p>};</code></pre>
 </td></p>
-<pre><code class="hljs">    &lt;td&gt;
-      &lt;code&gt;&amp;lt;pre&gt;
+  </tr>
+</table>
+<p>你能支出OCaml中的错误吗？ 这是一个在OCaml程序中司空见惯的错误。 嵌套的<code>match</code> 函数必须包裹在括号中，否则<code>Some</code>会被外部的<code>match</code>函数解析。 看起来就像这样。</p>
+<pre><code class="hljs css languages- ocaml"><span class="hljs-keyword">let</span> res = <span class="hljs-keyword">match</span> x <span class="hljs-keyword">with</span>
+  | <span class="hljs-type">A</span> (x, y) -&gt; <span class="hljs-keyword">match</span> y <span class="hljs-keyword">with</span>
+    | <span class="hljs-type">None</span> -&gt; <span class="hljs-number">0</span>
+    | <span class="hljs-type">Some</span> i -&gt; <span class="hljs-number">10</span>
+    | <span class="hljs-type">B</span> (x, y) -&gt; <span class="hljs-number">0</span>
 </code></pre>
-<p>module type MySig = {
+<p>Reason强制在<code>switch</code>外使用<code>{}</code>解决这个问题。</p>
+<h2><a class="anchor" aria-hidden="true" id="模块和签名"></a><a href="#模块和签名" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>模块和签名</h2>
+<h3><a class="anchor" aria-hidden="true" id="定义"></a><a href="#定义" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>定义</h3>
+<table>
+  <tr>
+    <th>
+      OCaml
+    </th>
+<pre><code class="hljs">&lt;th&gt;
+  Reason
+&lt;/th&gt;
+</code></pre>
+  </tr>
+  <tr>
+    <td>
+      <pre><code class="hljs">module type MySig = sig
+    type t = int
+    val x: int
+  end
+  module MyModule: MySig = struct
+    type t = int
+    let x = 10
+  end
+  module MyModule = struct
+    module NestedModule = struct
+       let msg = "hello";
+    end
+  end</code></pre>
+    </td>
+<pre><code class="hljs">&lt;td&gt;
+  &lt;pre&gt;&lt;code&gt;module type MySig = {
 type t = int;
 let x: int;
-};
+</code></pre>
+<p>};
 module MyModule: MySig = {
 type t = int;
 let x = 10;
@@ -911,617 +587,253 @@ module MyModule = {
 module NestedModule = {
 let msg = &quot;hello&quot;;
 };
-};
-&lt;/pre&gt;</code>
-</td>
-</tr>
-</table></p>
-<pre><code class="hljs">&lt;h3&gt;
-  函子类型
-&lt;/h3&gt;
-
-&lt;table&gt;
-  &lt;tr&gt;
-    &lt;th&gt;
-      &lt;p&gt;
-        OCaml
-      &lt;/p&gt;
-    &lt;/th&gt;
-    
-    &lt;th&gt;
-      &lt;p&gt;
-        Reason
-      &lt;/p&gt;
-    &lt;/th&gt;
-  &lt;/tr&gt;
-  
-  &lt;tr&gt;
-    &lt;td&gt;
-      &lt;code&gt;&amp;lt;pre&gt;
-</code></pre>
-<p>module type FType =
-functor (A: ASig) -&gt;
-functor (B: BSig) -&gt; Result
-&lt;/pre&gt;</code>
+};</code></pre>
 </td></p>
-<pre><code class="hljs">    &lt;td&gt;
-      &lt;code&gt;&amp;lt;pre&gt;
+  </tr>
+</table>
+<h3><a class="anchor" aria-hidden="true" id="函子类型"></a><a href="#函子类型" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>函子类型</h3>
+<table>
+  <tr>
+    <th>
+      OCaml
+    </th>
+<pre><code class="hljs">&lt;th&gt;
+  Reason
+&lt;/th&gt;
 </code></pre>
-<p>module type FType =
+  </tr>
+  <tr>
+    <td>
+      <pre><code class="hljs">module type FType =
+    functor (A: ASig) ->
+    functor (B: BSig) -> Result</code></pre>
+    </td>
+<pre><code class="hljs">&lt;td&gt;
+  &lt;pre&gt;&lt;code&gt;module type FType =
 (A: ASig) =&gt;
-(B: BSig) =&gt; Result;
-&lt;/pre&gt;</code>
-</td>
-</tr>
-</table></p>
-<pre><code class="hljs">&lt;h2&gt;
-  函子
-&lt;/h2&gt;
-
-&lt;table&gt;
-  &lt;tr&gt;
-    &lt;th&gt;
-      &lt;p&gt;
-        OCaml
-      &lt;/p&gt;
-    &lt;/th&gt;
-    
-    &lt;th&gt;
-      &lt;p&gt;
-        Reason
-      &lt;/p&gt;
-    &lt;/th&gt;
-  &lt;/tr&gt;
-  
-  &lt;tr&gt;
-    &lt;td&gt;
-      &lt;code&gt;&amp;lt;pre&gt;
+(B: BSig) =&gt; Result;&lt;/code&gt;&lt;/pre&gt;
+&lt;/td&gt;
 </code></pre>
-<p>module F =
-functor (A: ASig) -&gt;
-functor (B: BSig) -&gt; struct end&lt;/pre&gt;</code>
-</td></p>
-<pre><code class="hljs">    &lt;td&gt;
-      &lt;code&gt;&amp;lt;pre&gt;
+  </tr>
+</table>
+<h2><a class="anchor" aria-hidden="true" id="函子"></a><a href="#函子" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>函子</h2>
+<table>
+  <tr>
+    <th>
+      OCaml
+    </th>
+<pre><code class="hljs">&lt;th&gt;
+  Reason
+&lt;/th&gt;
 </code></pre>
-<p>module F =
+  </tr>
+  <tr>
+    <td>
+      <pre><code class="hljs">module F =
+    functor (A: ASig) ->
+    functor (B: BSig) -> struct end</code></pre>
+    </td>
+<pre><code class="hljs">&lt;td&gt;
+  &lt;pre&gt;&lt;code&gt;module F =
 (A: ASig) =&gt;
-(B: BSig) =&gt; {};&lt;/pre&gt;</code>
-</td>
-</tr></p>
-<pre><code class="hljs">  &lt;tr&gt;
-    &lt;td&gt;
-      &lt;code&gt;&amp;lt;pre&gt;
+(B: BSig) =&gt; {};&lt;/code&gt;&lt;/pre&gt;
+&lt;/td&gt;
 </code></pre>
-<p>module F = functor (A: ASig) (B: BSig) -&gt; struct end&lt;/pre&gt;</code>
-</td></p>
-<pre><code class="hljs">    &lt;td&gt;
-      &lt;code&gt;&amp;lt;pre&gt;
+  </tr>
+  <tr>
+    <td>
+      <pre><code class="hljs">module F = functor (A: ASig) (B: BSig) -> struct end</code></pre>
+    </td>
+<pre><code class="hljs">&lt;td&gt;
+  &lt;pre&gt;&lt;code&gt;module F = (A: ASig, B: BSig) =&gt; {};&lt;/code&gt;&lt;/pre&gt;
+&lt;/td&gt;
 </code></pre>
-<p>module F = (A: ASig, B: BSig) =&gt; {};&lt;/pre&gt;</code>
-</td>
-</tr></p>
-<pre><code class="hljs">  &lt;tr&gt;
-    &lt;td&gt;
-      &lt;code&gt;&amp;lt;pre&gt;
+  </tr>
+  <tr>
+    <td>
+      <pre><code class="hljs">module F (A: ASig) (B: BSig) = struct end</code></pre>
+    </td>
+<pre><code class="hljs">&lt;td&gt;
+  &lt;pre&gt;&lt;code&gt;module F = (A: ASig, B: BSig) =&gt; {};&lt;/code&gt;&lt;/pre&gt;
+&lt;/td&gt;
 </code></pre>
-<p>module F (A: ASig) (B: BSig) = struct end&lt;/pre&gt;</code>
-</td></p>
-<pre><code class="hljs">    &lt;td&gt;
-      &lt;code&gt;&amp;lt;pre&gt;
+  </tr>
+  <tr>
+    <td>
+      <pre><code class="hljs">module Res = F(A)(B)</code></pre>
+    </td>
+<pre><code class="hljs">&lt;td&gt;
+  &lt;pre&gt;&lt;code&gt;module Res = F(A, B);&lt;/code&gt;&lt;/pre&gt;
+&lt;/td&gt;
 </code></pre>
-<p>module F = (A: ASig, B: BSig) =&gt; {};&lt;/pre&gt;</code>
-</td>
-</tr></p>
-<pre><code class="hljs">  &lt;tr&gt;
-    &lt;td&gt;
-      &lt;code&gt;&amp;lt;pre&gt;
+  </tr>
+</table>
+<h2><a class="anchor" aria-hidden="true" id="各种改进"></a><a href="#各种改进" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>各种改进</h2>
+<p>OCaml不强制在序列<code>(a;b;c;d)</code> 或者元组<code>(x,y)</code>外面加括号。 但是Reason总是用<code>{}</code>去包住序列或者let声明，而且Reason总是要求元组要有<code>()</code>，其他更直观的语法则不需要用括号去包裹。</p>
+<h3><a class="anchor" aria-hidden="true" id="lambdas-作为作用域不需要额外的上下文"></a><a href="#lambdas-作为作用域不需要额外的上下文" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Lambdas 作为作用域不需要额外的上下文</h3>
+<p>这是一个受欢迎的改进，因为OCaml中的类型错误发生时，用户将会看到一个返回带有中缀<code>,</code>的元组。</p>
+<table>
+  <tr>
+    <th>
+      OCaml
+    </th>
+<pre><code class="hljs">&lt;th&gt;
+  Reason
+&lt;/th&gt;
 </code></pre>
-<p>module Res = F(A)(B)&lt;/pre&gt;</code>
-</td></p>
-<pre><code class="hljs">    &lt;td&gt;
-      &lt;code&gt;&amp;lt;pre&gt;
-</code></pre>
-<p>module Res = F(A, B);&lt;/pre&gt;</code>
-</td>
-</tr>
-</table></p>
-<pre><code class="hljs">&lt;h2&gt;
-  各种改进
-&lt;/h2&gt;
-
-&lt;p&gt;
-  OCaml不强制在序列&lt;code&gt;(a;b;c;d)&lt;/code&gt; 或者元组&lt;code&gt;(x,y)&lt;/code&gt;外面加括号。 但是Reason总是用&lt;code&gt;{}&lt;/code&gt;去包住序列或者let声明，而且Reason总是要求元组要有&lt;code&gt;()&lt;/code&gt;，其他更直观的语法则不需要用括号去包裹。
-&lt;/p&gt;
-
-&lt;h3&gt;
-  Lambdas 作为作用域不需要额外的上下文
-&lt;/h3&gt;
-
-&lt;p&gt;
-  这是一个受欢迎的改进，因为OCaml中的类型错误发生时，用户将会看到一个返回带有中缀&lt;code&gt;,&lt;/code&gt;的元组。
-&lt;/p&gt;
-
-&lt;table&gt;
-  &lt;tr&gt;
-    &lt;th&gt;
-      &lt;p&gt;
-        OCaml
-      &lt;/p&gt;
-    &lt;/th&gt;
-    
-    &lt;th&gt;
-      &lt;p&gt;
-        Reason
-      &lt;/p&gt;
-    &lt;/th&gt;
-  &lt;/tr&gt;
-  
-  &lt;tr&gt;
-    &lt;td&gt;
-      &lt;code&gt;&amp;lt;pre&gt;
-</code></pre>
-<p>let myFuncs = {
-myFun = (fun x -&gt; x + 1);
-your = (fun a b -&gt; a + b);
-}&lt;/pre&gt;</code>
-</td></p>
-<pre><code class="hljs">    &lt;td&gt;
-      &lt;code&gt;&amp;lt;pre&gt;
-</code></pre>
-<p>let myFuncs = {
+  </tr>
+  <tr>
+    <td>
+      <pre><code class="hljs">let myFuncs = {
+    myFun = (fun x -> x + 1);
+    your = (fun a b -> a + b);
+  }</code></pre>
+    </td>
+<pre><code class="hljs">&lt;td&gt;
+  &lt;pre&gt;&lt;code&gt;let myFuncs = {
 myFun: (x) =&gt; x + 1,
 your: (a, b) =&gt; a + b
-};&lt;/pre&gt;</code>
-</td>
-</tr>
-</table></p>
-<pre><code class="hljs">&lt;h3&gt;
-  Lambda 作为匹配结果不再需要额外的括号
-&lt;/h3&gt;
-
-&lt;table&gt;
-  &lt;tr&gt;
-    &lt;th&gt;
-      &lt;p&gt;
-        OCaml
-      &lt;/p&gt;
-    &lt;/th&gt;
-    
-    &lt;th&gt;
-      &lt;p&gt;
-        Reason
-      &lt;/p&gt;
-    &lt;/th&gt;
-  &lt;/tr&gt;
-  
-  &lt;tr&gt;
-    &lt;td&gt;
-      &lt;code&gt;&amp;lt;pre&gt;
 </code></pre>
-<p>let x = match prnt with
-| None -&gt; fun a -&gt; blah
-(* Extra () required ! *)
-| Some &quot;_&quot; -&gt; (fun a -&gt; ())
-| Some &quot;ml&quot; -&gt; blah
-&lt;/pre&gt;</code>
+<p>};</code></pre>
 </td></p>
-<pre><code class="hljs">    &lt;td&gt;
-      &lt;code&gt;&amp;lt;pre&gt;
+  </tr>
+</table>
+<h3><a class="anchor" aria-hidden="true" id="lambda-作为匹配结果不再需要额外的括号"></a><a href="#lambda-作为匹配结果不再需要额外的括号" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Lambda 作为匹配结果不再需要额外的括号</h3>
+<table>
+  <tr>
+    <th>
+      OCaml
+    </th>
+<pre><code class="hljs">&lt;th&gt;
+  Reason
+&lt;/th&gt;
 </code></pre>
-<p>let x =
+  </tr>
+  <tr>
+    <td>
+      <pre><code class="hljs">let x = match prnt with
+    | None -> fun a -> blah
+    (* Extra () required ! *)
+    | Some "_" -> (fun a -> ())
+    | Some "ml" -> blah</code></pre>
+    </td>
+<pre><code class="hljs">&lt;td&gt;
+  &lt;pre&gt;&lt;code&gt;let x =
 switch (prnt) {
 | None =&gt; (a) =&gt; blah
 | Some(&quot;_&quot;) =&gt; (a) =&gt; ()
 | Some(&quot;ml&quot;) =&gt; blah
-};&lt;/pre&gt;</code>
-</td>
-</tr>
-</table></p>
-<pre><code class="hljs">&lt;h3&gt;
-  元组中的 lambda 和类型注释不再需要额外的括号
-&lt;/h3&gt;
-
-&lt;table&gt;
-  &lt;tr&gt;
-    &lt;th&gt;
+};&lt;/code&gt;&lt;/pre&gt;
+&lt;/td&gt;
+</code></pre>
+  </tr>
+</table>
+<h3><a class="anchor" aria-hidden="true" id="元组中的-lambda-和类型注释不再需要额外的括号"></a><a href="#元组中的-lambda-和类型注释不再需要额外的括号" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>元组中的 lambda 和类型注释不再需要额外的括号</h3>
+<table>
+<thead>
+<tr><th>OCaml</th><th>Reason</th></tr>
+</thead>
+<tbody>
+<tr><td><code>let tuple = ((fun x -&gt; x), 20)</code></td><td><code>let tuple = ((x) =&gt; x, 20);</code></td></tr>
+<tr><td><code>let tuple = ((&quot;hi&quot;: string), (20: int))</code></td><td><code>let tuple = (&quot;hi&quot;: string, 20: int);</code></td></tr>
+</tbody>
+</table>
+<h2><a class="anchor" aria-hidden="true" id="各种差异"></a><a href="#各种差异" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>各种差异</h2>
+<h3><a class="anchor" aria-hidden="true" id="as-优先级"></a><a href="#as-优先级" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>as</code> 优先级</h3>
+<p>Reason中, <code>as</code> 的优先级高于 <code>|</code>。这允许在模式匹配中为整个行创建 <code>as</code> 别名。</p>
+<table>
+  <tr>
+    <th>
       OCaml
-    &lt;/th&gt;
-    
-    &lt;th&gt;
-      Reason
-    &lt;/th&gt;
-  &lt;/tr&gt;
-  
-  &lt;tr&gt;
-    &lt;td&gt;
-      &lt;code&gt;let tuple = ((fun x -&amp;gt; x), 20)&lt;/code&gt;
-    &lt;/td&gt;
-    
-    &lt;td&gt;
-      &lt;code&gt;let tuple = ((x) =&amp;gt; x, 20);&lt;/code&gt;
-    &lt;/td&gt;
-  &lt;/tr&gt;
-  
-  &lt;tr&gt;
-    &lt;td&gt;
-      &lt;code&gt;let tuple = ((&quot;hi&quot;: string), (20: int))&lt;/code&gt;
-    &lt;/td&gt;
-    
-    &lt;td&gt;
-      &lt;code&gt;let tuple = (&quot;hi&quot;: string, 20: int);&lt;/code&gt;
-    &lt;/td&gt;
-  &lt;/tr&gt;
-&lt;/table&gt;
-
-&lt;h2&gt;
-  各种差异
-&lt;/h2&gt;
-
-&lt;h3&gt;
-  &lt;code&gt; as &lt;/code&gt; 优先级
-&lt;/h3&gt;
-
-&lt;p&gt;
-  Reason中, &lt;code&gt; as &lt;/code&gt; 的优先级高于 &lt;code&gt; | &lt;/code&gt;。这允许在模式匹配中为整个行创建 &lt;code&gt; as &lt;/code&gt; 别名。
-&lt;/p&gt;
-
-&lt;table&gt;
-  &lt;tr&gt;
-    &lt;th&gt;
-      &lt;p&gt;
-        OCaml
-      &lt;/p&gt;
-    &lt;/th&gt;
-    
-    &lt;th&gt;
-      &lt;p&gt;
-        Reason
-      &lt;/p&gt;
-    &lt;/th&gt;
-  &lt;/tr&gt;
-  
-  &lt;tr&gt;
-    &lt;td&gt;
-      &lt;code&gt;&amp;lt;pre&gt;
+    </th>
+<pre><code class="hljs">&lt;th&gt;
+  Reason
+&lt;/th&gt;
 </code></pre>
-<p>let ppp = match MyThing 20 with
-| (MyThing x as ppp)
-| (YourThing x as ppp) -&gt; ppp;
-&lt;/pre&gt;</code>
-</td></p>
-<pre><code class="hljs">    &lt;td&gt;
-      &lt;code&gt;&amp;lt;pre&gt;
-</code></pre>
-<p>let ppp =
+  </tr>
+  <tr>
+    <td>
+      <pre><code class="hljs">let ppp = match MyThing 20 with
+    | (MyThing x as ppp)
+    | (YourThing x as ppp) -> ppp;</code></pre>
+    </td>
+<pre><code class="hljs">&lt;td&gt;
+  &lt;pre&gt;&lt;code&gt;let ppp =
 switch (MyThing(20)) {
 | MyThing(x) as ppp
 | YourThing(x) as ppp =&gt; ppp
-};
-&lt;/pre&gt;</code>
-</td>
-</tr>
-</table></p>
-<pre><code class="hljs">&lt;h3&gt;
-  可变记录字段更新
-&lt;/h3&gt;
-
-&lt;p&gt;
-  由于Reason中等式及其否定更加一致, 因此 &lt;code&gt; = &lt;/code&gt; 运算符可用于可变字段更新。
-&lt;/p&gt;
-
-&lt;table&gt;
-  &lt;tr&gt;
-    &lt;th&gt;
-      OCaml
-    &lt;/th&gt;
-    
-    &lt;th&gt;
-      Reason
-    &lt;/th&gt;
-  &lt;/tr&gt;
-  
-  &lt;tr&gt;
-    &lt;td&gt;
-      &lt;code&gt;myRec.field &amp;lt;- &quot;next&quot;&lt;/code&gt;
-    &lt;/td&gt;
-    
-    &lt;td&gt;
-      &lt;code&gt;myRec.field = &quot;next&quot;&lt;/code&gt;
-    &lt;/td&gt;
-  &lt;/tr&gt;
-&lt;/table&gt;
-
-&lt;h3&gt;
-  前缀运算符
-&lt;/h3&gt;
-
-&lt;p&gt;
-  Reason的 &lt;code&gt;! &lt;/code&gt; 用于布尔型 &lt;code&gt; not &lt;/code&gt;。Deferencing 使用后缀 &lt;code&gt; ^ &lt;/code&gt;。
-&lt;/p&gt;
-
-&lt;table&gt;
-  &lt;tr&gt;
-    &lt;th&gt;
-      OCaml
-    &lt;/th&gt;
-    
-    &lt;th&gt;
-      Reason
-    &lt;/th&gt;
-  &lt;/tr&gt;
-  
-  &lt;tr&gt;
-    &lt;td&gt;
-      &lt;code&gt;let x = !(foo.bar)&lt;/code&gt;
-    &lt;/td&gt;
-    
-    &lt;td&gt;
-      &lt;code&gt;let x = foo.bar^;&lt;/code&gt;
-    &lt;/td&gt;
-  &lt;/tr&gt;
-  
-  &lt;tr&gt;
-    &lt;td&gt;
-      &lt;code&gt;let x = !(foo#bar)&lt;/code&gt;
-    &lt;/td&gt;
-    
-    &lt;td&gt;
-      &lt;code&gt;let x = foo#bar^;&lt;/code&gt;
-    &lt;/td&gt;
-  &lt;/tr&gt;
-  
-  &lt;tr&gt;
-    &lt;td&gt;
-      &lt;code&gt;let x = !(!foo.bar)&lt;/code&gt;
-    &lt;/td&gt;
-    
-    &lt;td&gt;
-      &lt;code&gt;let x = foo^.bar^;&lt;/code&gt;
-    &lt;/td&gt;
-  &lt;/tr&gt;
-  
-  &lt;tr&gt;
-    &lt;td&gt;
-      &lt;code&gt;let x = !(!foo#bar)&lt;/code&gt;
-    &lt;/td&gt;
-    
-    &lt;td&gt;
-      &lt;code&gt;let x = (foo^)#bar^;&lt;/code&gt;
-    &lt;/td&gt;
-  &lt;/tr&gt;
-  
-  &lt;tr&gt;
-    &lt;td&gt;
-      &lt;code&gt;let x = !(!(foo.bar))&lt;/code&gt;
-    &lt;/td&gt;
-    
-    &lt;td&gt;
-      &lt;code&gt;let x = foo.bar^ ^;&lt;/code&gt;
-    &lt;/td&gt;
-  &lt;/tr&gt;
-  
-  &lt;tr&gt;
-    &lt;td&gt;
-      &lt;code&gt;let x = !(!(foo#bar))&lt;/code&gt;
-    &lt;/td&gt;
-    
-    &lt;td&gt;
-      &lt;code&gt;let x = foo#bar^ ^;&lt;/code&gt;
-    &lt;/td&gt;
-  &lt;/tr&gt;
-  
-  &lt;tr&gt;
-    &lt;td&gt;
-      &lt;code&gt;let x = !!(foo.bar)&lt;/code&gt;
-    &lt;/td&gt;
-    
-    &lt;td&gt;
-      &lt;code&gt;let x = !!foo.bar;&lt;/code&gt;
-    &lt;/td&gt;
-  &lt;/tr&gt;
-  
-  &lt;tr&gt;
-    &lt;td&gt;
-      &lt;code&gt;let x = !!(foo#bar)&lt;/code&gt;
-    &lt;/td&gt;
-    
-    &lt;td&gt;
-      &lt;code&gt;let x = !!foo#bar;&lt;/code&gt;
-    &lt;/td&gt;
-  &lt;/tr&gt;
-  
-  &lt;tr&gt;
-    &lt;td&gt;
-      &lt;code&gt;let x = !~(foo.bar)&lt;/code&gt;
-    &lt;/td&gt;
-    
-    &lt;td&gt;
-      &lt;code&gt;let x = !~foo.bar;&lt;/code&gt;
-    &lt;/td&gt;
-  &lt;/tr&gt;
-  
-  &lt;tr&gt;
-    &lt;td&gt;
-      &lt;code&gt;let x = !~(foo#bar)&lt;/code&gt;
-    &lt;/td&gt;
-    
-    &lt;td&gt;
-      &lt;code&gt;let x = !~foo#bar;&lt;/code&gt;
-    &lt;/td&gt;
-  &lt;/tr&gt;
-&lt;/table&gt;
-
-&lt;h3&gt;
-  注释转义
-&lt;/h3&gt;
-
-&lt;p&gt;
-  因为Reason使用C类型的注释，一些模糊的自定义前缀/中缀必须区分开来。 这些前缀/中缀操作符的规则类似于OCaml的语法，但是下面这些例外。
-&lt;/p&gt;
-
-&lt;p&gt;
-  特别的，如果如果前缀或者中缀字符的第一个字符是型号或者斜线，那么必须在前面加上反斜线。 在AST解析时反斜线会被去掉。 当打印时这些，反斜线会再次被加进去。
-&lt;/p&gt;
-
-&lt;table&gt;
-  &lt;tr&gt;
-    &lt;th&gt;
-      OCaml
-    &lt;/th&gt;
-    
-    &lt;th&gt;
-      Reason
-    &lt;/th&gt;
-  &lt;/tr&gt;
-  
-  &lt;tr&gt;
-    &lt;td&gt;
-      &lt;code&gt;let (/*) a b = a + b&lt;/code&gt;
-    &lt;/td&gt;
-    
-    &lt;td&gt;
-      &lt;code&gt;let (/\*) a b =&amp;gt; a + b;&lt;/code&gt;
-    &lt;/td&gt;
-  &lt;/tr&gt;
-  
-  &lt;tr&gt;
-    &lt;td&gt;
-      &lt;code&gt;let x = 12 /-* 23 /-* 12&lt;/code&gt;
-    &lt;/td&gt;
-    
-    &lt;td&gt;
-      &lt;code&gt;let x = 12 /-* 23 /-* 12;&lt;/code&gt;
-    &lt;/td&gt;
-  &lt;/tr&gt;
-  
-  &lt;tr&gt;
-    &lt;td&gt;
-      &lt;code&gt;let y = (/*) a b&lt;/code&gt;
-    &lt;/td&gt;
-    
-    &lt;td&gt;
-      &lt;code&gt;let y = a /\* b;&lt;/code&gt;
-    &lt;/td&gt;
-  &lt;/tr&gt;
-  
-  &lt;tr&gt;
-    &lt;td&gt;
-      &lt;code&gt;let (!=*) q r = q + r&lt;/code&gt;
-    &lt;/td&gt;
-    
-    &lt;td&gt;
-      &lt;code&gt;let ( !=* ) = (q, r) =&amp;gt; q + r;&lt;/code&gt;
-    &lt;/td&gt;
-  &lt;/tr&gt;
-  
-  &lt;tr&gt;
-    &lt;td&gt;
-      &lt;code&gt;let res = q (!=*) r&lt;/code&gt;
-    &lt;/td&gt;
-    
-    &lt;td&gt;
-      &lt;code&gt;let res = q(( !=* ), r);&lt;/code&gt;
-    &lt;/td&gt;
-  &lt;/tr&gt;
-  
-  &lt;tr&gt;
-    &lt;td&gt;
-      &lt;code&gt;let (!=/*) q r = q + r&lt;/code&gt;
-    &lt;/td&gt;
-    
-    &lt;td&gt;
-      &lt;code&gt;let ( !=/\* ) = (q, r) =&amp;gt; q + r;&lt;/code&gt;
-    &lt;/td&gt;
-  &lt;/tr&gt;
-  
-  &lt;tr&gt;
-    &lt;td&gt;
-      &lt;code&gt;let res = q (!=/*) r&lt;/code&gt;
-    &lt;/td&gt;
-    
-    &lt;td&gt;
-      &lt;code&gt;let res = q(( !=/\* ), r);&lt;/code&gt;
-    &lt;/td&gt;
-  &lt;/tr&gt;
-&lt;/table&gt;
-
-&lt;h3&gt;
-  运算符重命名
-&lt;/h3&gt;
-
-&lt;p&gt;
-  在Reason中用&lt;code&gt;==&lt;/code&gt;代表OCaml中的&lt;code&gt;=&lt;/code&gt;，用&lt;code&gt;===&lt;/code&gt;代表OCaml中的&lt;code&gt;==&lt;/code&gt;，那么Reason怎么表示OCaml中的&lt;code&gt;===&lt;/code&gt;呢？ Reason提供了一个新方法！ 转义三等号。
-&lt;/p&gt;
-
-&lt;table&gt;
-  &lt;tr&gt;
-    &lt;th&gt;
-      Identifier
-    &lt;/th&gt;
-    
-    &lt;th&gt;
-      Meaning
-    &lt;/th&gt;
-    
-    &lt;th&gt;
-      OCaml
-    &lt;/th&gt;
-    
-    &lt;th&gt;
-      Reason
-    &lt;/th&gt;
-  &lt;/tr&gt;
-  
-  &lt;tr&gt;
-    &lt;td&gt;
-      &lt;code&gt;&quot;===&quot;&lt;/code&gt;
-    &lt;/td&gt;
-    
-    &lt;td&gt;
-      Custom value
-    &lt;/td&gt;
-    
-    &lt;td&gt;
-      &lt;code&gt;x === y&lt;/code&gt;
-    &lt;/td&gt;
-    
-    &lt;td&gt;
-      &lt;code&gt;x \=== y&lt;/code&gt;
-    &lt;/td&gt;
-  &lt;/tr&gt;
-&lt;/table&gt;
-
-&lt;h3&gt;
-  REPL
-&lt;/h3&gt;
-
-&lt;p&gt;
-  In Reason's repl &lt;a href=&quot;extra-goodies.md#repl&quot;&gt;&lt;code&gt;rtop&lt;/code&gt;&lt;/a&gt; (a customized &lt;a href=&quot;https://github.com/diml/utop&quot;&gt;&lt;code&gt;utop&lt;/code&gt;&lt;/a&gt;), each input is submitted via a single &lt;code&gt;;&lt;/code&gt; semicolon. OCaml's repl requires two semicolons &lt;code&gt;;;&lt;/code&gt;.
-&lt;/p&gt;
-
-&lt;table&gt;
-  &lt;tr&gt;
-    &lt;th&gt;
-      OCaml
-    &lt;/th&gt;
-    
-    &lt;th&gt;
-      Reason
-    &lt;/th&gt;
-  &lt;/tr&gt;
-  
-  &lt;tr&gt;
-    &lt;td&gt;
-      &lt;code&gt;;;&lt;/code&gt;
-    &lt;/td&gt;
-    
-    &lt;td&gt;
-      &lt;code&gt;;&lt;/code&gt;
-    &lt;/td&gt;
-  &lt;/tr&gt;
-&lt;/table&gt;</code></pre>
-</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="faq.html">← 常见问题</a><a class="docs-next button" href="newcomer-examples.html">新手示例 →</a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#注释">注释</a></li><li><a href="#运算符重命名">运算符重命名</a></li><li><a href="#local-scope">Local Scope</a></li><li><a href="#局部作用域-vs-模块体">局部作用域 Vs 模块体</a></li><li><a href="#元组和记录">元组和记录</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.min.js"></script><script>window.foo = new Pjax({
+};&lt;/code&gt;&lt;/pre&gt;
+&lt;/td&gt;
+</code></pre>
+  </tr>
+</table>
+<h3><a class="anchor" aria-hidden="true" id="可变记录字段更新"></a><a href="#可变记录字段更新" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>可变记录字段更新</h3>
+<p>由于Reason中等式及其否定更加一致, 因此 <code>=</code> 运算符可用于可变字段更新。</p>
+<table>
+<thead>
+<tr><th>OCaml</th><th>Reason</th></tr>
+</thead>
+<tbody>
+<tr><td><code>myRec.field &lt;- &quot;next&quot;</code></td><td><code>myRec.field = &quot;next&quot;</code></td></tr>
+</tbody>
+</table>
+<h3><a class="anchor" aria-hidden="true" id="前缀运算符"></a><a href="#前缀运算符" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>前缀运算符</h3>
+<p>Reason的 <code>!</code> 用于布尔型 <code>not</code>。Deferencing 使用后缀 <code>^</code>。</p>
+<table>
+<thead>
+<tr><th>OCaml</th><th>Reason</th></tr>
+</thead>
+<tbody>
+<tr><td><code>let x = !(foo.bar)</code></td><td><code>let x = foo.bar^;</code></td></tr>
+<tr><td><code>let x = !(foo#bar)</code></td><td><code>let x = foo#bar^;</code></td></tr>
+<tr><td><code>let x = !(!foo.bar)</code></td><td><code>let x = foo^.bar^;</code></td></tr>
+<tr><td><code>let x = !(!foo#bar)</code></td><td><code>let x = (foo^)#bar^;</code></td></tr>
+<tr><td><code>let x = !(!(foo.bar))</code></td><td><code>let x = foo.bar^ ^;</code></td></tr>
+<tr><td><code>let x = !(!(foo#bar))</code></td><td><code>let x = foo#bar^ ^;</code></td></tr>
+<tr><td><code>let x = !!(foo.bar)</code></td><td><code>let x = !!foo.bar;</code></td></tr>
+<tr><td><code>let x = !!(foo#bar)</code></td><td><code>let x = !!foo#bar;</code></td></tr>
+<tr><td><code>let x = !~(foo.bar)</code></td><td><code>let x = !~foo.bar;</code></td></tr>
+<tr><td><code>let x = !~(foo#bar)</code></td><td><code>let x = !~foo#bar;</code></td></tr>
+</tbody>
+</table>
+<h3><a class="anchor" aria-hidden="true" id="注释转义"></a><a href="#注释转义" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>注释转义</h3>
+<p>因为Reason使用C类型的注释，一些模糊的自定义前缀/中缀必须区分开来。 这些前缀/中缀操作符的规则类似于OCaml的语法，但是下面这些例外。</p>
+<p>特别的，如果如果前缀或者中缀字符的第一个字符是型号或者斜线，那么必须在前面加上反斜线。 在AST解析时反斜线会被去掉。 当打印时这些，反斜线会再次被加进去。</p>
+<table>
+<thead>
+<tr><th>OCaml</th><th>Reason</th></tr>
+</thead>
+<tbody>
+<tr><td><code>let (/*) a b = a + b</code></td><td><code>let (/\*) a b =&gt; a + b;</code></td></tr>
+<tr><td><code>let x = 12 /-* 23 /-* 12</code></td><td><code>let x = 12 /-* 23 /-* 12;</code></td></tr>
+<tr><td><code>let y = (/*) a b</code></td><td><code>let y = a /\* b;</code></td></tr>
+<tr><td><code>let (!=*) q r = q + r</code></td><td><code>let ( !=* ) = (q, r) =&gt; q + r;</code></td></tr>
+<tr><td><code>let res = q (!=*) r</code></td><td><code>let res = q(( !=* ), r);</code></td></tr>
+<tr><td><code>let (!=/*) q r = q + r</code></td><td><code>let ( !=/\* ) = (q, r) =&gt; q + r;</code></td></tr>
+<tr><td><code>let res = q (!=/*) r</code></td><td><code>let res = q(( !=/\* ), r);</code></td></tr>
+</tbody>
+</table>
+<h3><a class="anchor" aria-hidden="true" id="运算符重命名-1"></a><a href="#运算符重命名-1" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>运算符重命名</h3>
+<p>在Reason中用<code>==</code>代表OCaml中的<code>=</code>，用<code>===</code>代表OCaml中的<code>==</code>，那么Reason怎么表示OCaml中的<code>===</code>呢？ Reason提供了一个新方法！ 转义三等号。</p>
+<table>
+<thead>
+<tr><th>Identifier</th><th>Meaning</th><th>OCaml</th><th>Reason</th></tr>
+</thead>
+<tbody>
+<tr><td><code>&quot;===&quot;</code></td><td>Custom value</td><td><code>x === y</code></td><td><code>x \=== y</code></td></tr>
+</tbody>
+</table>
+<h3><a class="anchor" aria-hidden="true" id="repl"></a><a href="#repl" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>REPL</h3>
+<p>In Reason's repl <a href="/docs/zh-CN/extra-goodies.html#repl"><code>rtop</code></a> (a customized <a href="https://github.com/diml/utop"><code>utop</code></a>), each input is submitted via a single <code>;</code> semicolon. OCaml's repl requires two semicolons <code>;;</code>.</p>
+<table>
+<thead>
+<tr><th>OCaml</th><th>Reason</th></tr>
+</thead>
+<tbody>
+<tr><td><code>;;</code></td><td><code>;</code></td></tr>
+</tbody>
+</table>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/zh-CN/faq.html">← 常见问题</a><a class="docs-next button" href="/docs/zh-CN/newcomer-examples.html">新手示例 →</a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#注释">注释</a></li><li><a href="#运算符重命名">运算符重命名</a></li><li><a href="#local-scope">Local Scope</a></li><li><a href="#局部作用域-vs-模块体">局部作用域 Vs 模块体</a></li><li><a href="#元组和记录">元组和记录</a></li><li><a href="#序列">序列</a></li><li><a href="#类型定义">类型定义</a></li><li><a href="#函数">函数</a><ul class="toc-headings"><li><a href="#单个参数匹配函数">单个参数匹配函数</a></li><li><a href="#注释参数">注释参数</a></li><li><a href="#类型参数">类型参数</a></li></ul></li><li><a href="#作为类型参数的元组">作为类型参数的元组</a></li><li><a href="#变体">变体</a></li><li><a href="#模式匹配">模式匹配</a></li><li><a href="#模块和签名">模块和签名</a><ul class="toc-headings"><li><a href="#定义">定义</a></li><li><a href="#函子类型">函子类型</a></li></ul></li><li><a href="#函子">函子</a></li><li><a href="#各种改进">各种改进</a><ul class="toc-headings"><li><a href="#lambdas-作为作用域不需要额外的上下文">Lambdas 作为作用域不需要额外的上下文</a></li><li><a href="#lambda-作为匹配结果不再需要额外的括号">Lambda 作为匹配结果不再需要额外的括号</a></li><li><a href="#元组中的-lambda-和类型注释不再需要额外的括号">元组中的 lambda 和类型注释不再需要额外的括号</a></li></ul></li><li><a href="#各种差异">各种差异</a><ul class="toc-headings"><li><a href="#as-优先级"><code>as</code> 优先级</a></li><li><a href="#可变记录字段更新">可变记录字段更新</a></li><li><a href="#前缀运算符">前缀运算符</a></li><li><a href="#注释转义">注释转义</a></li><li><a href="#运算符重命名-1">运算符重命名</a></li><li><a href="#repl">REPL</a></li></ul></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.min.js"></script><script>window.foo = new Pjax({
           areas: [
             // try to use the first query.
             '.mainContainer, .docsNavContainer .toc .navWrapper, .onPageNav',
