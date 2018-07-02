@@ -172,15 +172,15 @@ In Reason, record values resemble JavaScript, using `:` instead of `=`.
     <tr>
       <td>
         <pre><code>let myFuncs = {
-    myFun = (fun x -> x + 1);
-    your = (fun a b -> a + b);
-  }</code></pre>
+  myFun = (fun x -> x + 1);
+  your = (fun a b -> a + b);
+}</code></pre>
       </td>
       <td>
         <pre><code>let myFuncs = {
-    myFun: (x) => x + 1,
-    your: (a, b) => a + b
-  };</code></pre>
+  myFun: (x) => x + 1,
+  your: (a, b) => a + b
+};</code></pre>
       </td>
     </tr>
   </tbody>
@@ -263,11 +263,11 @@ and the multicase lambda is a natural extension of the single case lambda.
       </td>
       <td>
         <pre><code>function | pat -> e
-           | pat2 -> e</code></pre>
+         | pat2 -> e</code></pre>
       </td>
       <td>
         <pre><code>fun | pat => e
-      | pat2 => e</code></pre>
+    | pat2 => e</code></pre>
       </td>
     </tr>
   </tbody>
@@ -438,53 +438,53 @@ OCaml | Reason
     <tr>
       <td>
         <pre><code>type myVariant =
-    | HasNothing
-    | HasSingleInt of int
-    | HasSingleTuple of (int * int)
-    | HasMultipleInts of int * int
-    | HasMultipleTuples of (int * int) * (int * int)</code></pre>
+  | HasNothing
+  | HasSingleInt of int
+  | HasSingleTuple of (int * int)
+  | HasMultipleInts of int * int
+  | HasMultipleTuples of (int * int) * (int * int)</code></pre>
       </td>
       <td>
         <pre><code>type myVariant =
-    | HasNothing
-    | HasSingleInt(int)
-    | HasSingleTuple((int, int))
-    | HasMultipleInts(int, int)
-    | HasMultipleTuples((int, int), (int, int));</code></pre>
+  | HasNothing
+  | HasSingleInt(int)
+  | HasSingleTuple((int, int))
+  | HasMultipleInts(int, int)
+  | HasMultipleTuples((int, int), (int, int));</code></pre>
       </td>
     </tr>
     <tr>
       <td>
         <pre><code>let a = HasSingleInt 10
-  let a = HasSingleTuple (10, 10)
-  let a = HasMultipleInts (10, 10)
-  let a = HasMultipleTuples ((10, 10), (10, 10))</code></pre>
+let a = HasSingleTuple (10, 10)
+let a = HasMultipleInts (10, 10)
+let a = HasMultipleTuples ((10, 10), (10, 10))</code></pre>
       </td>
       <td>
         <pre><code>let a = HasSingleInt(10);
-  let a = HasSingleTuple((10, 10));
-  let a = HasMultipleInts(10, 10);
-  let a = HasMultipleTuples((10, 10), (10, 10));</code></pre>
+let a = HasSingleTuple((10, 10));
+let a = HasMultipleInts(10, 10);
+let a = HasMultipleTuples((10, 10), (10, 10));</code></pre>
       </td>
     </tr>
     <tr>
       <td>
         <pre><code>let res x = match x with
-    | HasNothing -> 0
-    | HasSingleInt x -> 0
-    | HasSingleTuple (x, y) -> 0
-    | HasMultipleInts (x, y) -> 0
-    | HasMultipleTuples ((x, y), (q, r)) -> 0</code></pre>
+  | HasNothing -> 0
+  | HasSingleInt x -> 0
+  | HasSingleTuple (x, y) -> 0
+  | HasMultipleInts (x, y) -> 0
+  | HasMultipleTuples ((x, y), (q, r)) -> 0</code></pre>
       </td>
       <td>
         <pre><code>let res = (x) =>
-    switch (x) {
-    | HasNothing => 0
-    | HasSingleInt(x) => 0
-    | HasSingleTuple((x, y)) => 0
-    | HasMultipleInts(x, y) => 0
-    | HasMultipleTuples((x, y), (q, r)) => 0
-    };</code></pre>
+  switch (x) {
+  | HasNothing => 0
+  | HasSingleInt(x) => 0
+  | HasSingleTuple((x, y)) => 0
+  | HasMultipleInts(x, y) => 0
+  | HasMultipleTuples((x, y), (q, r)) => 0
+  };</code></pre>
       </td>
     </tr>
   </tbody>
@@ -503,19 +503,19 @@ OCaml | Reason
     <tr>
       <td>
         <pre><code>let res = match x with
-    | A (x, y) -> match y with
-      | None -> 0
-      | Some i -> 10
-    | B (x, y) -> 0</code></pre>
+  | A (x, y) -> match y with
+    | None -> 0
+    | Some i -> 10
+  | B (x, y) -> 0</code></pre>
       </td>
       <td>
         <pre><code>let res = switch (x) {
-    | A((x, y)) => switch (y) {
-        | None => 0
-        | Some(i) => 10
-      }
-    | B((x, y)) => 0
-  };</code></pre>
+  | A((x, y)) => switch (y) {
+      | None => 0
+      | Some(i) => 10
+    }
+  | B((x, y)) => 0
+};</code></pre>
       </td>
     </tr>
   </tbody>
@@ -548,33 +548,33 @@ Reason's mandatory `{}` around `switch` cases prevents this issue.
     <tr>
       <td>
         <pre><code>module type MySig = sig
-    type t = int
-    val x: int
+  type t = int
+  val x: int
+end
+module MyModule: MySig = struct
+  type t = int
+  let x = 10
+end
+module MyModule = struct
+  module NestedModule = struct
+     let msg = "hello";
   end
-  module MyModule: MySig = struct
-    type t = int
-    let x = 10
-  end
-  module MyModule = struct
-    module NestedModule = struct
-       let msg = "hello";
-    end
-  end</code></pre>
+end</code></pre>
       </td>
       <td>
         <pre><code>module type MySig = {
-    type t = int;
-    let x: int;
+  type t = int;
+  let x: int;
+};
+module MyModule: MySig = {
+  type t = int;
+  let x = 10;
+};
+module MyModule = {
+  module NestedModule = {
+    let msg = "hello";
   };
-  module MyModule: MySig = {
-    type t = int;
-    let x = 10;
-  };
-  module MyModule = {
-    module NestedModule = {
-      let msg = "hello";
-    };
-  };</code></pre>
+};</code></pre>
       </td>
     </tr>
   </tbody>
@@ -593,13 +593,13 @@ Reason's mandatory `{}` around `switch` cases prevents this issue.
     <tr>
       <td>
         <pre><code>module type FType =
-    functor (A: ASig) ->
-    functor (B: BSig) -> Result</code></pre>
+  functor (A: ASig) ->
+  functor (B: BSig) -> Result</code></pre>
       </td>
       <td>
         <pre><code>module type FType =
-    (A: ASig) =>
-    (B: BSig) => Result;</code></pre>
+  (A: ASig) =>
+  (B: BSig) => Result;</code></pre>
       </td>
     </tr>
   </tbody>
@@ -618,13 +618,13 @@ Reason's mandatory `{}` around `switch` cases prevents this issue.
     <tr>
       <td>
         <pre><code>module F =
-    functor (A: ASig) ->
-    functor (B: BSig) -> struct end</code></pre>
+  functor (A: ASig) ->
+  functor (B: BSig) -> struct end</code></pre>
       </td>
       <td>
         <pre><code>module F =
-    (A: ASig) =>
-    (B: BSig) => {};</code></pre>
+  (A: ASig) =>
+  (B: BSig) => {};</code></pre>
       </td>
     </tr>
     <tr>
@@ -679,15 +679,15 @@ was a tuple with infix `,` comma.
     <tr>
       <td>
         <pre><code>let myFuncs = {
-    myFun = (fun x -> x + 1);
-    your = (fun a b -> a + b);
-  }</code></pre>
+  myFun = (fun x -> x + 1);
+  your = (fun a b -> a + b);
+}</code></pre>
       </td>
       <td>
         <pre><code>let myFuncs = {
-    myFun: (x) => x + 1,
-    your: (a, b) => a + b
-  };</code></pre>
+  myFun: (x) => x + 1,
+  your: (a, b) => a + b
+};</code></pre>
       </td>
     </tr>
   </tbody>
@@ -707,18 +707,18 @@ was a tuple with infix `,` comma.
     <tr>
       <td>
         <pre><code>let x = match prnt with
-    | None -> fun a -> blah
-    (* Extra () required ! *)
-    | Some "_" -> (fun a -> ())
-    | Some "ml" -> blah</code></pre>
+  | None -> fun a -> blah
+  (* Extra () required ! *)
+  | Some "_" -> (fun a -> ())
+  | Some "ml" -> blah</code></pre>
       </td>
       <td>
         <pre><code>let x =
-    switch (prnt) {
-    | None => (a) => blah
-    | Some("_") => (a) => ()
-    | Some("ml") => blah
-    };</code></pre>
+  switch (prnt) {
+  | None => (a) => blah
+  | Some("_") => (a) => ()
+  | Some("ml") => blah
+  };</code></pre>
       </td>
     </tr>
   </tbody>
@@ -749,15 +749,15 @@ for entire rows in pattern matching.
     <tr>
       <td>
         <pre><code>let ppp = match MyThing 20 with
-    | (MyThing x as ppp)
-    | (YourThing x as ppp) -> ppp;</code></pre>
+  | (MyThing x as ppp)
+  | (YourThing x as ppp) -> ppp;</code></pre>
       </td>
       <td>
         <pre><code>let ppp =
-    switch (MyThing(20)) {
-    | MyThing(x) as ppp
-    | YourThing(x) as ppp => ppp
-    };</code></pre>
+  switch (MyThing(20)) {
+  | MyThing(x) as ppp
+  | YourThing(x) as ppp => ppp
+  };</code></pre>
       </td>
     </tr>
   </tbody>

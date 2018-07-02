@@ -97,17 +97,17 @@ We've worked very hard to make Reason look like JS while preserving OCaml's grea
     <tr>
       <td>
   <pre><code>const myFun = (x, y) => {
-    const doubleX = x + x;
-    const doubleY = y + y;
-    return doubleX + doubleY
-  };</code></pre>
+  const doubleX = x + x;
+  const doubleY = y + y;
+  return doubleX + doubleY
+};</code></pre>
       </td>
       <td>
   <pre><code>let myFun = (x, y) => {
-    let doubleX = x + x;
-    let doubleY = y + y;
-    doubleX + doubleY
-  };</code></pre>
+  let doubleX = x + x;
+  let doubleY = y + y;
+  doubleX + doubleY
+};</code></pre>
       </td>
     </tr>
   </tbody>
@@ -184,17 +184,17 @@ In Reason, "sequence expressions" are created with `{}` and evaluate to their la
     <tr>
       <td>
   <pre><code>let res = (function() {
-    const x = 23;
-    const y = 34;
-    return x + y;
-  })();</code></pre>
+  const x = 23;
+  const y = 34;
+  return x + y;
+})();</code></pre>
       </td>
       <td>
   <pre><code>let res = {
-    let x = 23;
-    let y = 34;
-    x + y
-  };</code></pre>
+  let x = 23;
+  let y = 34;
+  x + y
+};</code></pre>
       </td>
     </tr>
   </tbody>
