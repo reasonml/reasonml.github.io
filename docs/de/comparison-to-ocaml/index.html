@@ -217,16 +217,16 @@ end</code></pre>
   <tr>
     <td>
       <pre><code class="hljs">let myFuncs = {
-    myFun = (fun x -> x + 1);
-    your = (fun a b -> a + b);
-  }</code></pre>
+  myFun = (fun x -> x + 1);
+  your = (fun a b -> a + b);
+}</code></pre>
     </td>
 <pre><code class="hljs">&lt;td&gt;
   &lt;pre&gt;&lt;code&gt;let myFuncs = {
-myFun: (x) =&gt; x + 1,
-your: (a, b) =&gt; a + b
 </code></pre>
-<p>};</code></pre>
+<p>myFun: (x) =&gt; x + 1,
+your: (a, b) =&gt; a + b
+};</code></pre>
 </td></p>
   </tr>
 </table>
@@ -327,12 +327,12 @@ your: (a, b) =&gt; a + b
     </td>
 <pre><code class="hljs">&lt;td&gt;
   &lt;pre&gt;&lt;code&gt;function | pat -&gt; e
-       | pat2 -&gt; e&lt;/code&gt;&lt;/pre&gt;
+     | pat2 -&gt; e&lt;/code&gt;&lt;/pre&gt;
 &lt;/td&gt;
 
 &lt;td&gt;
   &lt;pre&gt;&lt;code&gt;fun | pat =&gt; e
-  | pat2 =&gt; e&lt;/code&gt;&lt;/pre&gt;
+| pat2 =&gt; e&lt;/code&gt;&lt;/pre&gt;
 &lt;/td&gt;
 </code></pre>
   </tr>
@@ -453,28 +453,28 @@ let tuples: pairs = [(2, 3)];</code></pre>
   <tr>
     <td>
       <pre><code class="hljs">type myVariant =
-    | HasNothing
-    | HasSingleInt of int
-    | HasSingleTuple of (int * int)
-    | HasMultipleInts of int * int
-    | HasMultipleTuples of (int * int) * (int * int)</code></pre>
+  | HasNothing
+  | HasSingleInt of int
+  | HasSingleTuple of (int * int)
+  | HasMultipleInts of int * int
+  | HasMultipleTuples of (int * int) * (int * int)</code></pre>
     </td>
 <pre><code class="hljs">&lt;td&gt;
   &lt;pre&gt;&lt;code&gt;type myVariant =
-| HasNothing
+</code></pre>
+<p>| HasNothing
 | HasSingleInt(int)
 | HasSingleTuple((int, int))
 | HasMultipleInts(int, int)
-| HasMultipleTuples((int, int), (int, int));&lt;/code&gt;&lt;/pre&gt;
-&lt;/td&gt;
-</code></pre>
+| HasMultipleTuples((int, int), (int, int));</code></pre>
+</td></p>
   </tr>
   <tr>
     <td>
       <pre><code class="hljs">let a = HasSingleInt 10
-  let a = HasSingleTuple (10, 10)
-  let a = HasMultipleInts (10, 10)
-  let a = HasMultipleTuples ((10, 10), (10, 10))</code></pre>
+let a = HasSingleTuple (10, 10)
+let a = HasMultipleInts (10, 10)
+let a = HasMultipleTuples ((10, 10), (10, 10))</code></pre>
     </td>
 <pre><code class="hljs">&lt;td&gt;
   &lt;pre&gt;&lt;code&gt;let a = HasSingleInt(10);
@@ -487,23 +487,23 @@ let a = HasMultipleTuples((10, 10), (10, 10));</code></pre>
   <tr>
     <td>
       <pre><code class="hljs">let res x = match x with
-    | HasNothing -> 0
-    | HasSingleInt x -> 0
-    | HasSingleTuple (x, y) -> 0
-    | HasMultipleInts (x, y) -> 0
-    | HasMultipleTuples ((x, y), (q, r)) -> 0</code></pre>
+  | HasNothing -> 0
+  | HasSingleInt x -> 0
+  | HasSingleTuple (x, y) -> 0
+  | HasMultipleInts (x, y) -> 0
+  | HasMultipleTuples ((x, y), (q, r)) -> 0</code></pre>
     </td>
 <pre><code class="hljs">&lt;td&gt;
   &lt;pre&gt;&lt;code&gt;let res = (x) =&gt;
-switch (x) {
+</code></pre>
+<p>switch (x) {
 | HasNothing =&gt; 0
 | HasSingleInt(x) =&gt; 0
 | HasSingleTuple((x, y)) =&gt; 0
 | HasMultipleInts(x, y) =&gt; 0
 | HasMultipleTuples((x, y), (q, r)) =&gt; 0
-};&lt;/code&gt;&lt;/pre&gt;
-&lt;/td&gt;
-</code></pre>
+};</code></pre>
+</td></p>
   </tr>
 </table>
 <h2><a class="anchor" aria-hidden="true" id="pattern-matching"></a><a href="#pattern-matching" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Pattern-Matching</h2>
@@ -520,20 +520,20 @@ switch (x) {
   <tr>
     <td>
       <pre><code class="hljs">let res = match x with
-    | A (x, y) -> match y with
-      | None -> 0
-      | Some i -> 10
-    | B (x, y) -> 0</code></pre>
+  | A (x, y) -> match y with
+    | None -> 0
+    | Some i -> 10
+  | B (x, y) -> 0</code></pre>
     </td>
 <pre><code class="hljs">&lt;td&gt;
   &lt;pre&gt;&lt;code&gt;let res = switch (x) {
-| A((x, y)) =&gt; switch (y) {
-    | None =&gt; 0
-    | Some(i) =&gt; 10
-  }
-| B((x, y)) =&gt; 0
 </code></pre>
-<p>};</code></pre>
+<p>| A((x, y)) =&gt; switch (y) {
+| None =&gt; 0
+| Some(i) =&gt; 10
+}
+| B((x, y)) =&gt; 0
+};</code></pre>
 </td></p>
   </tr>
 </table>
@@ -560,25 +560,25 @@ switch (x) {
   <tr>
     <td>
       <pre><code class="hljs">module type MySig = sig
-    type t = int
-    val x: int
+  type t = int
+  val x: int
+end
+module MyModule: MySig = struct
+  type t = int
+  let x = 10
+end
+module MyModule = struct
+  module NestedModule = struct
+     let msg = "hello";
   end
-  module MyModule: MySig = struct
-    type t = int
-    let x = 10
-  end
-  module MyModule = struct
-    module NestedModule = struct
-       let msg = "hello";
-    end
-  end</code></pre>
+end</code></pre>
     </td>
 <pre><code class="hljs">&lt;td&gt;
   &lt;pre&gt;&lt;code&gt;module type MySig = {
-type t = int;
-let x: int;
 </code></pre>
-<p>};
+<p>type t = int;
+let x: int;
+};
 module MyModule: MySig = {
 type t = int;
 let x = 10;
@@ -605,15 +605,15 @@ let msg = &quot;hello&quot;;
   <tr>
     <td>
       <pre><code class="hljs">module type FType =
-    functor (A: ASig) ->
-    functor (B: BSig) -> Result</code></pre>
+  functor (A: ASig) ->
+  functor (B: BSig) -> Result</code></pre>
     </td>
 <pre><code class="hljs">&lt;td&gt;
   &lt;pre&gt;&lt;code&gt;module type FType =
-(A: ASig) =&gt;
-(B: BSig) =&gt; Result;&lt;/code&gt;&lt;/pre&gt;
-&lt;/td&gt;
 </code></pre>
+<p>(A: ASig) =&gt;
+(B: BSig) =&gt; Result;</code></pre>
+</td></p>
   </tr>
 </table>
 <h2><a class="anchor" aria-hidden="true" id="functors"></a><a href="#functors" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Functors</h2>
@@ -630,15 +630,15 @@ let msg = &quot;hello&quot;;
   <tr>
     <td>
       <pre><code class="hljs">module F =
-    functor (A: ASig) ->
-    functor (B: BSig) -> struct end</code></pre>
+  functor (A: ASig) ->
+  functor (B: BSig) -> struct end</code></pre>
     </td>
 <pre><code class="hljs">&lt;td&gt;
   &lt;pre&gt;&lt;code&gt;module F =
-(A: ASig) =&gt;
-(B: BSig) =&gt; {};&lt;/code&gt;&lt;/pre&gt;
-&lt;/td&gt;
 </code></pre>
+<p>(A: ASig) =&gt;
+(B: BSig) =&gt; {};</code></pre>
+</td></p>
   </tr>
   <tr>
     <td>
@@ -685,16 +685,16 @@ let msg = &quot;hello&quot;;
   <tr>
     <td>
       <pre><code class="hljs">let myFuncs = {
-    myFun = (fun x -> x + 1);
-    your = (fun a b -> a + b);
-  }</code></pre>
+  myFun = (fun x -> x + 1);
+  your = (fun a b -> a + b);
+}</code></pre>
     </td>
 <pre><code class="hljs">&lt;td&gt;
   &lt;pre&gt;&lt;code&gt;let myFuncs = {
-myFun: (x) =&gt; x + 1,
-your: (a, b) =&gt; a + b
 </code></pre>
-<p>};</code></pre>
+<p>myFun: (x) =&gt; x + 1,
+your: (a, b) =&gt; a + b
+};</code></pre>
 </td></p>
   </tr>
 </table>
@@ -712,20 +712,20 @@ your: (a, b) =&gt; a + b
   <tr>
     <td>
       <pre><code class="hljs">let x = match prnt with
-    | None -> fun a -> blah
-    (* Extra () required ! *)
-    | Some "_" -> (fun a -> ())
-    | Some "ml" -> blah</code></pre>
+  | None -> fun a -> blah
+  (* Extra () required ! *)
+  | Some "_" -> (fun a -> ())
+  | Some "ml" -> blah</code></pre>
     </td>
 <pre><code class="hljs">&lt;td&gt;
   &lt;pre&gt;&lt;code&gt;let x =
-switch (prnt) {
+</code></pre>
+<p>switch (prnt) {
 | None =&gt; (a) =&gt; blah
 | Some(&quot;_&quot;) =&gt; (a) =&gt; ()
 | Some(&quot;ml&quot;) =&gt; blah
-};&lt;/code&gt;&lt;/pre&gt;
-&lt;/td&gt;
-</code></pre>
+};</code></pre>
+</td></p>
   </tr>
 </table>
 <h3><a class="anchor" aria-hidden="true" id="lambdas-und-typannotationen-in-tupeln-brauchen-nicht-mehr-extra-klammern"></a><a href="#lambdas-und-typannotationen-in-tupeln-brauchen-nicht-mehr-extra-klammern" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Lambdas und Typannotationen in Tupeln brauchen nicht mehr extra Klammern</h3>
@@ -754,17 +754,17 @@ switch (prnt) {
   <tr>
     <td>
       <pre><code class="hljs">let ppp = match MyThing 20 with
-    | (MyThing x as ppp)
-    | (YourThing x as ppp) -> ppp;</code></pre>
+  | (MyThing x as ppp)
+  | (YourThing x as ppp) -> ppp;</code></pre>
     </td>
 <pre><code class="hljs">&lt;td&gt;
   &lt;pre&gt;&lt;code&gt;let ppp =
-switch (MyThing(20)) {
+</code></pre>
+<p>switch (MyThing(20)) {
 | MyThing(x) as ppp
 | YourThing(x) as ppp =&gt; ppp
-};&lt;/code&gt;&lt;/pre&gt;
-&lt;/td&gt;
-</code></pre>
+};</code></pre>
+</td></p>
   </tr>
 </table>
 <h3><a class="anchor" aria-hidden="true" id="anderungen-mutierbarer-record-felder"></a><a href="#anderungen-mutierbarer-record-felder" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Änderungen mutierbarer Record-Felder</h3>
