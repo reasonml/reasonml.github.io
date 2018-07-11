@@ -9,7 +9,9 @@ title: Global Installation
 | Platform  | Install command
 |-----------|-------------------------------------------------------------------------------------------------
 | **macOS**   | `npm install -g reason-cli@3.2.0-darwin`
+| | or `yarn global add reason-cli@3.2.0-darwin`
 | **Linux**   | `npm install -g reason-cli@3.2.0-linux`
+| | or `yarn global add reason-cli@3.2.0-linux`
 | **Windows** | Please see https://github.com/reasonml/reasonml.github.io/issues/195
 
 > Note: Bundles are currently large (approximately `100MB`), and `npm` will not provide accurate progress of the download. This may take several minutes, depending on your connection. Be patient. In most cases, the installation is not hanging and will finish.
