@@ -27,5 +27,3 @@ There's no Float module in the current standard library. For JS compilation, see
 "Why the heck can't I just use an overloaded `+` for both int and float?"
 
 There's a lot of history to this, but one day we'll be able to. Let's hang in there =)
-
-Additionally, floats are rather special in Reason/OCaml native. [Check here](http://www.lexifi.com/blog/unboxed-floats-ocaml) if you're interested in learning some rather interesting optimizations!
