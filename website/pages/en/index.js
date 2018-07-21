@@ -36,8 +36,8 @@ type schoolPerson =
 
 let greeting = person =>
   switch (person) {
-  | Teacher => "Hey professor!"
-  | Director => "Hello director."
+  | Teacher => "Hey Professor!"
+  | Director => "Hello Director."
   | Student("Richard") =>
     "Still here Ricky?"
   | Student(anyOtherName) =>
@@ -50,8 +50,8 @@ type schoolPerson = Teacher | Director | Student(string);
 
 let greeting = person =>
   switch (person) {
-  | Teacher => "Hey professor!"
-  | Director => "Hello director."
+  | Teacher => "Hey Professor!"
+  | Director => "Hello Director."
   | Student("Richard") => "Still here Ricky?"
   | Student(anyOtherName) => "Hey, " ++ anyOtherName ++ "."
   };
