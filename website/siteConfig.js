@@ -10,6 +10,11 @@ const users = [
     infoLink: "https://messenger.com",
   },
   {
+      caption: "OneGraph",
+      image: "img/logos/onegraph.svg",
+      infoLink: "https://onegraph.com",
+  },
+  {
     caption: "WOW air",
     image: "img/logos/wowair.svg",
     infoLink: "https://wowair.com",
