@@ -104,6 +104,11 @@ const users = [
     image: "img/logos/invision.svg",
     infoLink: "https://www.invision.de",
   },
+  {
+    caption: "Coursebase",
+    image: "img/logos/coursebase.svg",
+    infoLink: "https://coursebase.co",
+  },
 ];
 
 const examples = [
