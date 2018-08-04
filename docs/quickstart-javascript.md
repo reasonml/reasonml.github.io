@@ -21,6 +21,8 @@ We use the BuckleScript compiler to compile Reason to JavaScript, then we use No
 
 When developing, instead of running `npm run build` each time, run `npm run start` to start a watcher that recompiles on file change.
 
+By default, the `basic-reason` theme configures BuckleScript to output compiled JavaScript files to the `src` directory, alongside the Reason files they were produced from. If you prefer to keep your handwritten and generated files separate, editing `bsconfig.json` to set `in-source` to `false` will cause the compiled files to be output to the `lib` directory instead.
+
 Next:
 
 - Read more about how we compile to JavaScript through our partner project, [BuckleScript](https://bucklescript.github.io).
