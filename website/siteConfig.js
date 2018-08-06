@@ -10,9 +10,9 @@ const users = [
     infoLink: "https://messenger.com",
   },
   {
-      caption: "OneGraph",
-      image: "img/logos/onegraph.svg",
-      infoLink: "https://onegraph.com",
+    caption: "OneGraph",
+    image: "img/logos/onegraph.svg",
+    infoLink: "https://onegraph.com",
   },
   {
     caption: "WOW air",
@@ -109,6 +109,12 @@ const users = [
     image: "img/logos/coursebase.svg",
     infoLink: "https://coursebase.co",
   },
+  {
+    caption: "Aesthetic Integration",
+    image: "img/logos/aesthetic-integration.svg",
+    infoLink: "https://www.imandra.ai",
+  }
+
 ];
 
 const examples = [
