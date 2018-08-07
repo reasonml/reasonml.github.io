@@ -48,7 +48,7 @@ let obj: tesla = {
 Js.log(obj#color) /* "Red" */
 ```
 
-Here we have a simple object with the method `color` and the property `red`. This method takes no arguments and returns the private proptery `red`. Because the method `color` is a public method we can access it using object notation. Remember, objects only export methods and all properties are private.
+Here we have a simple object with the method `color` and the property `red`. This method takes no arguments and returns the private property `red`. Because the method `color` is a public method we can access it using object notation. Remember, objects only export methods and all properties are private.
 
 ## Advanced
 
