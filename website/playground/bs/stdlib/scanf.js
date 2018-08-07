@@ -124,7 +124,7 @@ function create(iname, next) {
 }
 
 function from_string(s) {
-  var i = [0];
+  var i = /* record */[/* contents */0];
   var len = s.length;
   var next = function () {
     if (i[0] >= len) {
@@ -142,7 +142,7 @@ function from_function(param) {
   return create(/* From_function */1, param);
 }
 
-var file_buffer_size = [1024];
+var file_buffer_size = /* record */[/* contents */1024];
 
 function scan_close_at_end() {
   Caml_missing_polyfill.not_implemented("caml_ml_close_channel");
@@ -156,9 +156,9 @@ function scan_raise_at_end() {
 function from_ic(scan_close_ic, iname, ic) {
   var len = file_buffer_size[0];
   var buf = Caml_string.caml_create_string(len);
-  var i = [0];
-  var lim = [0];
-  var eof = [false];
+  var i = /* record */[/* contents */0];
+  var lim = /* record */[/* contents */0];
+  var eof = /* record */[/* contents */false];
   var next = function () {
     if (i[0] < lim[0]) {
       var c = Caml_bytes.get(buf, i[0]);
@@ -209,7 +209,7 @@ function open_in_bin(fname) {
   }
 }
 
-var memo = [/* [] */0];
+var memo = /* record */[/* contents : [] */0];
 
 function memo_from_ic(scan_close_ic, ic) {
   try {
@@ -432,7 +432,7 @@ function token_int_literal(conv, ib) {
   if (exit === 1) {
     throw [
           Caml_builtin_exceptions.assert_failure,
-          [
+          /* tuple */[
             "scanf.ml",
             507,
             11
@@ -690,7 +690,7 @@ function scan_int_conv(conv, width, ib) {
   if (exit === 1) {
     throw [
           Caml_builtin_exceptions.assert_failure,
-          [
+          /* tuple */[
             "scanf.ml",
             674,
             9
@@ -812,8 +812,8 @@ function scan_string(stp, width, ib) {
       var c = peek_char(ib);
       if (ib[/* eof */0]) {
         return width$1;
-      } else if (stp) {
-        if (c === stp[0]) {
+      } else if (stp !== undefined) {
+        if (c === stp) {
           ib[/* current_char_is_valid */2] = false;
           return width$1;
         } else {
@@ -1153,7 +1153,7 @@ function scan_bool(ib) {
   } else {
     m = 5;
   }
-  return scan_string(/* None */0, m, ib);
+  return scan_string(undefined, m, ib);
 }
 
 function scan_chars_in_char_set(char_set, scan_indic, width, ib) {
@@ -1170,8 +1170,8 @@ function scan_chars_in_char_set(char_set, scan_indic, width, ib) {
       }
     };
   };
-  if (scan_indic) {
-    var c = scan_indic[0];
+  if (scan_indic !== undefined) {
+    var c = scan_indic;
     scan_chars(width, c);
     if (ib[/* eof */0]) {
       return 0;
@@ -1246,8 +1246,8 @@ function get_counter(ib, counter) {
 }
 
 function width_of_pad_opt(pad_opt) {
-  if (pad_opt) {
-    return pad_opt[0];
+  if (pad_opt !== undefined) {
+    return pad_opt;
   } else {
     return Pervasives.max_int;
   }
@@ -1430,7 +1430,7 @@ function make_scanf(ib, _fmt, readers) {
                     var stp = match[0];
                     var scan = (function(stp){
                     return function scan(width, _, ib) {
-                      return scan_string(/* Some */[stp], width, ib);
+                      return scan_string(stp, width, ib);
                     }
                     }(stp));
                     var str_rest_000 = match[1];
@@ -1444,12 +1444,12 @@ function make_scanf(ib, _fmt, readers) {
                     var match$1 = rest[0];
                     if (match$1.tag) {
                       var scan$1 = function (width, _, ib) {
-                        return scan_string(/* Some */[/* "[" */91], width, ib);
+                        return scan_string(/* "[" */91, width, ib);
                       };
                       return pad_prec_scanf(ib, CamlinternalFormatBasics.concat_fmt(match$1[0][0], rest[1]), readers, pad, /* No_precision */0, scan$1, token);
                     } else {
                       var scan$2 = function (width, _, ib) {
-                        return scan_string(/* Some */[/* "{" */123], width, ib);
+                        return scan_string(/* "{" */123, width, ib);
                       };
                       return pad_prec_scanf(ib, CamlinternalFormatBasics.concat_fmt(match$1[0][0], rest[1]), readers, pad, /* No_precision */0, scan$2, token);
                     }
@@ -1459,7 +1459,7 @@ function make_scanf(ib, _fmt, readers) {
             }
             if (exit === 1) {
               var scan$3 = function (width, _, ib) {
-                return scan_string(/* None */0, width, ib);
+                return scan_string(undefined, width, ib);
               };
               return pad_prec_scanf(ib, rest, readers, pad, /* No_precision */0, scan$3, token);
             }
@@ -1579,8 +1579,8 @@ function make_scanf(ib, _fmt, readers) {
             var s$1 = token(ib);
             var match$2;
             try {
-              var match$3 = CamlinternalFormat.fmt_ebb_of_string(/* None */0, s$1);
-              var match$4 = CamlinternalFormat.fmt_ebb_of_string(/* None */0, s$1);
+              var match$3 = CamlinternalFormat.fmt_ebb_of_string(undefined, s$1);
+              var match$4 = CamlinternalFormat.fmt_ebb_of_string(undefined, s$1);
               match$2 = /* tuple */[
                 CamlinternalFormat.type_format(match$3[0], CamlinternalFormatBasics.erase_rel(fmtty)),
                 CamlinternalFormat.type_format(match$4[0], CamlinternalFormatBasics.erase_rel(CamlinternalFormat.symm(fmtty)))
@@ -1650,7 +1650,7 @@ function make_scanf(ib, _fmt, readers) {
             } else {
               var match$6 = stopper_of_formatting_lit(rest$1[0]);
               var width = width_of_pad_opt(width_opt);
-              scan_chars_in_char_set(char_set, /* Some */[match$6[0]], width, ib);
+              scan_chars_in_char_set(char_set, match$6[0], width, ib);
               var s$3 = token(ib);
               var str_rest_000$1 = match$6[1];
               var str_rest_001$1 = rest$1[1];
@@ -1665,7 +1665,7 @@ function make_scanf(ib, _fmt, readers) {
             }
             if (exit$1 === 1) {
               var width$1 = width_of_pad_opt(width_opt);
-              scan_chars_in_char_set(char_set, /* None */0, width$1, ib);
+              scan_chars_in_char_set(char_set, undefined, width$1, ib);
               var s$4 = token(ib);
               return /* Cons */[
                       s$4,
@@ -1693,7 +1693,7 @@ function make_scanf(ib, _fmt, readers) {
             } else {
               throw [
                     Caml_builtin_exceptions.assert_failure,
-                    [
+                    /* tuple */[
                       "scanf.ml",
                       1258,
                       13
@@ -1783,11 +1783,7 @@ function kscanf(ib, ef, param) {
     }
     catch (raw_exc){
       var exc = Js_exn.internalToOCamlException(raw_exc);
-      if (exc[0] === Scan_failure) {
-        match = /* Exc */Block.__(1, [exc]);
-      } else if (exc[0] === Caml_builtin_exceptions.failure) {
-        match = /* Exc */Block.__(1, [exc]);
-      } else if (exc === Caml_builtin_exceptions.end_of_file) {
+      if (exc[0] === Scan_failure || exc[0] === Caml_builtin_exceptions.failure || exc === Caml_builtin_exceptions.end_of_file) {
         match = /* Exc */Block.__(1, [exc]);
       } else if (exc[0] === Caml_builtin_exceptions.invalid_argument) {
         var s = exc[1] + (" in format \"" + ($$String.escaped(str) + "\""));

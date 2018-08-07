@@ -1,5 +1,6 @@
 'use strict';
 
+var Js_primitive = require("./js_primitive.js");
 
 function test(x) {
   return x === undefined;
@@ -20,9 +21,8 @@ function getExn(f) {
 function bind(x, f) {
   if (x !== undefined) {
     return f(x);
-  } else {
-    return undefined;
   }
+  
 }
 
 function iter(x, f) {
@@ -34,11 +34,10 @@ function iter(x, f) {
 }
 
 function fromOption(x) {
-  if (x) {
-    return x[0];
-  } else {
-    return undefined;
+  if (x !== undefined) {
+    return Js_primitive.valFromOption(x);
   }
+  
 }
 
 var from_opt = fromOption;

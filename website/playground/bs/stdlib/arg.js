@@ -184,10 +184,10 @@ function usage(speclist, errmsg) {
                 ]), usage_string(speclist, errmsg));
 }
 
-var current = [0];
+var current = /* record */[/* contents */0];
 
 function parse_argv_dynamic($staropt$star, argv, speclist, anonfun, errmsg) {
-  var current$1 = $staropt$star ? $staropt$star[0] : current;
+  var current$1 = $staropt$star !== undefined ? $staropt$star : current;
   var l = argv.length;
   var b = $$Buffer.create(200);
   var initpos = current$1[0];
@@ -583,13 +583,13 @@ function parse_argv_dynamic($staropt$star, argv, speclist, anonfun, errmsg) {
 }
 
 function parse_argv($staropt$star, argv, speclist, anonfun, errmsg) {
-  var current$1 = $staropt$star ? $staropt$star[0] : current;
-  return parse_argv_dynamic(/* Some */[current$1], argv, [speclist], anonfun, errmsg);
+  var current$1 = $staropt$star !== undefined ? $staropt$star : current;
+  return parse_argv_dynamic(current$1, argv, /* record */[/* contents */speclist], anonfun, errmsg);
 }
 
 function parse(l, f, msg) {
   try {
-    return parse_argv(/* None */0, Sys.argv, l, f, msg);
+    return parse_argv(undefined, Sys.argv, l, f, msg);
   }
   catch (raw_exn){
     var exn = Js_exn.internalToOCamlException(raw_exn);
@@ -619,7 +619,7 @@ function parse(l, f, msg) {
 
 function parse_dynamic(l, f, msg) {
   try {
-    return parse_argv_dynamic(/* None */0, Sys.argv, l, f, msg);
+    return parse_argv_dynamic(undefined, Sys.argv, l, f, msg);
   }
   catch (raw_exn){
     var exn = Js_exn.internalToOCamlException(raw_exn);
@@ -682,7 +682,7 @@ function max_arg_len(cur, param) {
 }
 
 function align($staropt$star, speclist) {
-  var limit = $staropt$star ? $staropt$star[0] : Pervasives.max_int;
+  var limit = $staropt$star !== undefined ? $staropt$star : Pervasives.max_int;
   var completed = add_help(speclist);
   var len = List.fold_left(max_arg_len, 0, completed);
   var len$1 = len < limit ? len : limit;

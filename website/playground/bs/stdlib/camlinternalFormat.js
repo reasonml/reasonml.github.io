@@ -48,10 +48,10 @@ function is_in_char_set(char_set, c) {
 }
 
 function pad_of_pad_opt(pad_opt) {
-  if (pad_opt) {
+  if (pad_opt !== undefined) {
     return /* Lit_padding */Block.__(0, [
               /* Right */1,
-              pad_opt[0]
+              pad_opt
             ]);
   } else {
     return /* No_padding */0;
@@ -59,8 +59,8 @@ function pad_of_pad_opt(pad_opt) {
 }
 
 function prec_of_prec_opt(prec_opt) {
-  if (prec_opt) {
-    return /* Lit_precision */[prec_opt[0]];
+  if (prec_opt !== undefined) {
+    return /* Lit_precision */[prec_opt];
   } else {
     return /* No_precision */0;
   }
@@ -395,8 +395,8 @@ function bprint_ignored_flag(buf, ign_flag) {
 }
 
 function bprint_pad_opt(buf, pad_opt) {
-  if (pad_opt) {
-    return buffer_add_string(buf, String(pad_opt[0]));
+  if (pad_opt !== undefined) {
+    return buffer_add_string(buf, String(pad_opt));
   } else {
     return /* () */0;
   }
@@ -1201,7 +1201,7 @@ function trans(ty1, ty2) {
         default:
           throw [
                 Caml_builtin_exceptions.assert_failure,
-                [
+                /* tuple */[
                   "camlinternalFormat.ml",
                   816,
                   23
@@ -1471,7 +1471,7 @@ function trans(ty1, ty2) {
           if (typeof ty2 === "number") {
             throw [
                   Caml_builtin_exceptions.assert_failure,
-                  [
+                  /* tuple */[
                     "camlinternalFormat.ml",
                     802,
                     26
@@ -1502,7 +1502,7 @@ function trans(ty1, ty2) {
               default:
                 throw [
                       Caml_builtin_exceptions.assert_failure,
-                      [
+                      /* tuple */[
                         "camlinternalFormat.ml",
                         802,
                         26
@@ -1515,7 +1515,7 @@ function trans(ty1, ty2) {
           if (typeof ty2 === "number") {
             throw [
                   Caml_builtin_exceptions.assert_failure,
-                  [
+                  /* tuple */[
                     "camlinternalFormat.ml",
                     812,
                     28
@@ -1554,7 +1554,7 @@ function trans(ty1, ty2) {
               default:
                 throw [
                       Caml_builtin_exceptions.assert_failure,
-                      [
+                      /* tuple */[
                         "camlinternalFormat.ml",
                         812,
                         28
@@ -1567,7 +1567,7 @@ function trans(ty1, ty2) {
           if (typeof ty2 === "number") {
             throw [
                   Caml_builtin_exceptions.assert_failure,
-                  [
+                  /* tuple */[
                     "camlinternalFormat.ml",
                     780,
                     21
@@ -1578,7 +1578,7 @@ function trans(ty1, ty2) {
           } else {
             throw [
                   Caml_builtin_exceptions.assert_failure,
-                  [
+                  /* tuple */[
                     "camlinternalFormat.ml",
                     780,
                     21
@@ -1589,7 +1589,7 @@ function trans(ty1, ty2) {
           if (typeof ty2 === "number") {
             throw [
                   Caml_builtin_exceptions.assert_failure,
-                  [
+                  /* tuple */[
                     "camlinternalFormat.ml",
                     784,
                     21
@@ -1605,7 +1605,7 @@ function trans(ty1, ty2) {
               default:
                 throw [
                       Caml_builtin_exceptions.assert_failure,
-                      [
+                      /* tuple */[
                         "camlinternalFormat.ml",
                         784,
                         21
@@ -1618,7 +1618,7 @@ function trans(ty1, ty2) {
           if (typeof ty2 === "number") {
             throw [
                   Caml_builtin_exceptions.assert_failure,
-                  [
+                  /* tuple */[
                     "camlinternalFormat.ml",
                     788,
                     19
@@ -1637,7 +1637,7 @@ function trans(ty1, ty2) {
               default:
                 throw [
                       Caml_builtin_exceptions.assert_failure,
-                      [
+                      /* tuple */[
                         "camlinternalFormat.ml",
                         788,
                         19
@@ -1650,7 +1650,7 @@ function trans(ty1, ty2) {
           if (typeof ty2 === "number") {
             throw [
                   Caml_builtin_exceptions.assert_failure,
-                  [
+                  /* tuple */[
                     "camlinternalFormat.ml",
                     792,
                     22
@@ -1672,7 +1672,7 @@ function trans(ty1, ty2) {
               default:
                 throw [
                       Caml_builtin_exceptions.assert_failure,
-                      [
+                      /* tuple */[
                         "camlinternalFormat.ml",
                         792,
                         22
@@ -1685,7 +1685,7 @@ function trans(ty1, ty2) {
           if (typeof ty2 === "number") {
             throw [
                   Caml_builtin_exceptions.assert_failure,
-                  [
+                  /* tuple */[
                     "camlinternalFormat.ml",
                     797,
                     30
@@ -1710,7 +1710,7 @@ function trans(ty1, ty2) {
               default:
                 throw [
                       Caml_builtin_exceptions.assert_failure,
-                      [
+                      /* tuple */[
                         "camlinternalFormat.ml",
                         797,
                         30
@@ -1726,7 +1726,7 @@ function trans(ty1, ty2) {
     case 1 : 
         throw [
               Caml_builtin_exceptions.assert_failure,
-              [
+              /* tuple */[
                 "camlinternalFormat.ml",
                 781,
                 21
@@ -1735,7 +1735,7 @@ function trans(ty1, ty2) {
     case 2 : 
         throw [
               Caml_builtin_exceptions.assert_failure,
-              [
+              /* tuple */[
                 "camlinternalFormat.ml",
                 785,
                 21
@@ -1744,7 +1744,7 @@ function trans(ty1, ty2) {
     case 3 : 
         throw [
               Caml_builtin_exceptions.assert_failure,
-              [
+              /* tuple */[
                 "camlinternalFormat.ml",
                 789,
                 19
@@ -1753,7 +1753,7 @@ function trans(ty1, ty2) {
     case 4 : 
         throw [
               Caml_builtin_exceptions.assert_failure,
-              [
+              /* tuple */[
                 "camlinternalFormat.ml",
                 793,
                 22
@@ -1762,7 +1762,7 @@ function trans(ty1, ty2) {
     case 5 : 
         throw [
               Caml_builtin_exceptions.assert_failure,
-              [
+              /* tuple */[
                 "camlinternalFormat.ml",
                 798,
                 30
@@ -1771,7 +1771,7 @@ function trans(ty1, ty2) {
     case 6 : 
         throw [
               Caml_builtin_exceptions.assert_failure,
-              [
+              /* tuple */[
                 "camlinternalFormat.ml",
                 803,
                 26
@@ -1780,7 +1780,7 @@ function trans(ty1, ty2) {
     case 7 : 
         throw [
               Caml_builtin_exceptions.assert_failure,
-              [
+              /* tuple */[
                 "camlinternalFormat.ml",
                 813,
                 28
@@ -1789,7 +1789,7 @@ function trans(ty1, ty2) {
     case 8 : 
         throw [
               Caml_builtin_exceptions.assert_failure,
-              [
+              /* tuple */[
                 "camlinternalFormat.ml",
                 817,
                 23
@@ -3268,7 +3268,7 @@ function make_printf(_k, o, _acc, _fmt) {
         case 19 : 
             throw [
                   Caml_builtin_exceptions.assert_failure,
-                  [
+                  /* tuple */[
                     "camlinternalFormat.ml",
                     1449,
                     4
@@ -3318,7 +3318,7 @@ function make_printf(_k, o, _acc, _fmt) {
               if (ign === 3) {
                 throw [
                       Caml_builtin_exceptions.assert_failure,
-                      [
+                      /* tuple */[
                         "camlinternalFormat.ml",
                         1517,
                         39
@@ -3414,7 +3414,7 @@ function make_from_fmtty(k, o, acc, fmtty, fmt) {
       case 13 : 
           throw [
                 Caml_builtin_exceptions.assert_failure,
-                [
+                /* tuple */[
                   "camlinternalFormat.ml",
                   1540,
                   31
@@ -3423,7 +3423,7 @@ function make_from_fmtty(k, o, acc, fmtty, fmt) {
       case 14 : 
           throw [
                 Caml_builtin_exceptions.assert_failure,
-                [
+                /* tuple */[
                   "camlinternalFormat.ml",
                   1541,
                   31
@@ -3981,7 +3981,7 @@ function make_padprec_fmt_ebb(pad, prec, fmt) {
 }
 
 function fmt_ebb_of_string(legacy_behavior, str) {
-  var legacy_behavior$1 = legacy_behavior ? legacy_behavior[0] : true;
+  var legacy_behavior$1 = legacy_behavior !== undefined ? legacy_behavior : true;
   var invalid_format_message = function (str_ind, msg) {
     return Curry._3(failwith_message(/* Format */[
                     /* String_literal */Block.__(11, [
@@ -4264,7 +4264,7 @@ function fmt_ebb_of_string(legacy_behavior, str) {
         } else {
           throw [
                 Caml_builtin_exceptions.assert_failure,
-                [
+                /* tuple */[
                   "camlinternalFormat.ml",
                   2719,
                   28
@@ -4636,16 +4636,7 @@ function fmt_ebb_of_string(legacy_behavior, str) {
                 }
                 catch (raw_exn){
                   var exn = Js_exn.internalToOCamlException(raw_exn);
-                  if (exn === Caml_builtin_exceptions.not_found) {
-                    match$7 = /* tuple */[
-                      str_ind$1,
-                      /* Break */Block.__(0, [
-                          "@;",
-                          1,
-                          0
-                        ])
-                    ];
-                  } else if (exn[0] === Caml_builtin_exceptions.failure) {
+                  if (exn === Caml_builtin_exceptions.not_found || exn[0] === Caml_builtin_exceptions.failure) {
                     match$7 = /* tuple */[
                       str_ind$1,
                       /* Break */Block.__(0, [
@@ -4674,12 +4665,12 @@ function fmt_ebb_of_string(legacy_behavior, str) {
                   var exit$2 = 0;
                   if (match$14 >= 48) {
                     if (match$14 >= 58) {
-                      match$13 = /* None */0;
+                      match$13 = undefined;
                     } else {
                       exit$2 = 1;
                     }
                   } else if (match$14 !== 45) {
-                    match$13 = /* None */0;
+                    match$13 = undefined;
                   } else {
                     exit$2 = 1;
                   }
@@ -4690,26 +4681,26 @@ function fmt_ebb_of_string(legacy_behavior, str) {
                       throw Caml_builtin_exceptions.not_found;
                     }
                     var s$2 = $$String.sub(str, str_ind$2 - 2 | 0, (str_ind_3$1 - str_ind$2 | 0) + 3 | 0);
-                    match$13 = /* Some */[/* tuple */[
-                        str_ind_3$1 + 1 | 0,
-                        /* Magic_size */Block.__(1, [
-                            s$2,
-                            match$15[1]
-                          ])
-                      ]];
+                    match$13 = /* tuple */[
+                      str_ind_3$1 + 1 | 0,
+                      /* Magic_size */Block.__(1, [
+                          s$2,
+                          match$15[1]
+                        ])
+                    ];
                   }
                   
                 }
                 catch (raw_exn$1){
                   var exn$1 = Js_exn.internalToOCamlException(raw_exn$1);
                   if (exn$1 === Caml_builtin_exceptions.not_found || exn$1[0] === Caml_builtin_exceptions.failure) {
-                    match$13 = /* None */0;
+                    match$13 = undefined;
                   } else {
                     throw exn$1;
                   }
                 }
-                if (match$13) {
-                  var match$16 = match$13[0];
+                if (match$13 !== undefined) {
+                  var match$16 = match$13;
                   var next_ind$1 = match$16[0];
                   var match$17 = parse_literal(next_ind$1, next_ind$1, end_ind$2);
                   return /* Fmt_EBB */[/* Formatting_lit */Block.__(17, [
@@ -4829,7 +4820,7 @@ function fmt_ebb_of_string(legacy_behavior, str) {
       if (match >= 58) {
         throw [
               Caml_builtin_exceptions.assert_failure,
-              [
+              /* tuple */[
                 "camlinternalFormat.ml",
                 2624,
                 11
@@ -4841,7 +4832,7 @@ function fmt_ebb_of_string(legacy_behavior, str) {
     } else if (match !== 45) {
       throw [
             Caml_builtin_exceptions.assert_failure,
-            [
+            /* tuple */[
               "camlinternalFormat.ml",
               2624,
               11
@@ -4961,7 +4952,7 @@ function fmt_ebb_of_string(legacy_behavior, str) {
         if (switcher$2 > 2 || switcher$2 < 0) {
           throw [
                 Caml_builtin_exceptions.assert_failure,
-                [
+                /* tuple */[
                   "camlinternalFormat.ml",
                   2747,
                   25
@@ -4991,7 +4982,7 @@ function fmt_ebb_of_string(legacy_behavior, str) {
       } else {
         throw [
               Caml_builtin_exceptions.assert_failure,
-              [
+              /* tuple */[
                 "camlinternalFormat.ml",
                 2747,
                 25
@@ -5106,9 +5097,9 @@ function fmt_ebb_of_string(legacy_behavior, str) {
     var plus_used = false;
     var sharp_used = false;
     var space_used = false;
-    var ign_used = [false];
+    var ign_used = /* record */[/* contents */false];
     var pad_used = false;
-    var prec_used = [false];
+    var prec_used = /* record */[/* contents */false];
     var check_no_0 = function (symb, pad) {
       if (typeof pad === "number") {
         return pad;
@@ -5137,22 +5128,22 @@ function fmt_ebb_of_string(legacy_behavior, str) {
     };
     var opt_of_pad = function (c, pad) {
       if (typeof pad === "number") {
-        return /* None */0;
+        return undefined;
       } else if (pad.tag) {
         return incompatible_flag(pct_ind, str_ind, c, "'*'");
       } else {
         switch (pad[0]) {
           case 0 : 
               if (legacy_behavior$1) {
-                return /* Some */[pad[1]];
+                return pad[1];
               } else {
                 return incompatible_flag(pct_ind, str_ind, c, "'-'");
               }
           case 1 : 
-              return /* Some */[pad[1]];
+              return pad[1];
           case 2 : 
               if (legacy_behavior$1) {
-                return /* Some */[pad[1]];
+                return pad[1];
               } else {
                 return incompatible_flag(pct_ind, str_ind, c, "'0'");
               }
@@ -5166,10 +5157,10 @@ function fmt_ebb_of_string(legacy_behavior, str) {
         if (prec !== 0) {
           return incompatible_flag(pct_ind, str_ind, /* "_" */95, "'*'");
         } else {
-          return /* None */0;
+          return undefined;
         }
       } else {
-        return /* Some */[prec[0]];
+        return prec[0];
       }
     };
     var fmt_result;
@@ -5328,8 +5319,8 @@ function fmt_ebb_of_string(legacy_behavior, str) {
             var fmt_rest$5 = match$10[0];
             pad_used = true;
             var match$11 = opt_of_pad(/* "c" */99, pad);
-            fmt_result = match$11 ? (
-                match$11[0] !== 0 ? (
+            fmt_result = match$11 !== undefined ? (
+                match$11 !== 0 ? (
                     legacy_behavior$1 ? char_format(fmt_rest$5) : invalid_format_message(str_ind, "non-zero widths are unsupported for %c conversions")
                   ) : scan_format(fmt_rest$5)
               ) : char_format(fmt_rest$5);
@@ -5851,11 +5842,11 @@ function fmt_ebb_of_string(legacy_behavior, str) {
     return fmt_result;
   };
   var parse_flags = function (pct_ind, str_ind, end_ind, ign) {
-    var zero = [false];
-    var minus = [false];
-    var plus = [false];
-    var space = [false];
-    var sharp = [false];
+    var zero = /* record */[/* contents */false];
+    var minus = /* record */[/* contents */false];
+    var plus = /* record */[/* contents */false];
+    var space = /* record */[/* contents */false];
+    var sharp = /* record */[/* contents */false];
     var set_flag = function (str_ind, flag) {
       if (flag[0] && !legacy_behavior$1) {
         Curry._3(failwith_message(/* Format */[
@@ -6062,7 +6053,7 @@ function fmt_ebb_of_string(legacy_behavior, str) {
     if (exit === 1) {
       throw [
             Caml_builtin_exceptions.assert_failure,
-            [
+            /* tuple */[
               "camlinternalFormat.ml",
               2686,
               34
@@ -6315,7 +6306,7 @@ function fmt_ebb_of_string(legacy_behavior, str) {
 }
 
 function format_of_string_fmtty(str, fmtty) {
-  var match = fmt_ebb_of_string(/* None */0, str);
+  var match = fmt_ebb_of_string(undefined, str);
   try {
     return /* Format */[
             type_format(match[0], fmtty),
@@ -6347,7 +6338,7 @@ function format_of_string_fmtty(str, fmtty) {
 }
 
 function format_of_string_format(str, param) {
-  var match = fmt_ebb_of_string(/* None */0, str);
+  var match = fmt_ebb_of_string(undefined, str);
   try {
     return /* Format */[
             type_format(match[0], fmtty_of_fmt(param[0])),

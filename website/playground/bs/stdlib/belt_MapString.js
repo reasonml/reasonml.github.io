@@ -1,6 +1,7 @@
 'use strict';
 
 var Curry = require("./curry.js");
+var Js_primitive = require("./js_primitive.js");
 var Belt_internalAVLtree = require("./belt_internalAVLtree.js");
 var Belt_internalMapString = require("./belt_internalMapString.js");
 
@@ -26,16 +27,16 @@ function updateU(t, x, f) {
   if (t !== null) {
     var k = t.key;
     if (x === k) {
-      var match = f(/* Some */[t.value]);
-      if (match) {
-        return Belt_internalAVLtree.updateValue(t, match[0]);
+      var match = f(Js_primitive.some(t.value));
+      if (match !== undefined) {
+        return Belt_internalAVLtree.updateValue(t, Js_primitive.valFromOption(match));
       } else {
         var l = t.left;
         var r = t.right;
         if (l !== null) {
           if (r !== null) {
-            var kr = [r.key];
-            var vr = [r.value];
+            var kr = /* record */[/* contents */r.key];
+            var vr = /* record */[/* contents */r.value];
             var r$1 = Belt_internalAVLtree.removeMinAuxWithRef(r, kr, vr);
             return Belt_internalAVLtree.bal(l, kr[0], vr[0], r$1);
           } else {
@@ -66,9 +67,9 @@ function updateU(t, x, f) {
       }
     }
   } else {
-    var match$1 = f(/* None */0);
-    if (match$1) {
-      return Belt_internalAVLtree.singleton(x, match$1[0]);
+    var match$1 = f(undefined);
+    if (match$1 !== undefined) {
+      return Belt_internalAVLtree.singleton(x, Js_primitive.valFromOption(match$1));
     } else {
       return t;
     }
@@ -86,8 +87,8 @@ function removeAux(n, x) {
   if (x === v) {
     if (l !== null) {
       if (r !== null) {
-        var kr = [r.key];
-        var vr = [r.value];
+        var kr = /* record */[/* contents */r.key];
+        var vr = /* record */[/* contents */r.value];
         var r$1 = Belt_internalAVLtree.removeMinAuxWithRef(r, kr, vr);
         return Belt_internalAVLtree.bal(l, kr[0], vr[0], r$1);
       } else {
@@ -176,6 +177,10 @@ var eqU = Belt_internalMapString.eqU;
 
 var eq = Belt_internalMapString.eq;
 
+var findFirstByU = Belt_internalAVLtree.findFirstByU;
+
+var findFirstBy = Belt_internalAVLtree.findFirstBy;
+
 var forEachU = Belt_internalAVLtree.forEachU;
 
 var forEach = Belt_internalAVLtree.forEach;
@@ -259,6 +264,8 @@ exports.cmpU = cmpU;
 exports.cmp = cmp;
 exports.eqU = eqU;
 exports.eq = eq;
+exports.findFirstByU = findFirstByU;
+exports.findFirstBy = findFirstBy;
 exports.forEachU = forEachU;
 exports.forEach = forEach;
 exports.reduceU = reduceU;

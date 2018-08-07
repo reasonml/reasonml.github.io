@@ -13,7 +13,7 @@ var Pervasives = require("./pervasives.js");
 var Caml_backtrace = require("./caml_backtrace.js");
 var Caml_builtin_exceptions = require("./caml_builtin_exceptions.js");
 
-var printers = [/* [] */0];
+var printers = /* record */[/* contents : [] */0];
 
 var locfmt = /* Format */[
   /* String_literal */Block.__(11, [
@@ -156,10 +156,10 @@ function to_string(x) {
         match = Curry._1(param[0], x);
       }
       catch (exn){
-        match = /* None */0;
+        match = undefined;
       }
-      if (match) {
-        return match[0];
+      if (match !== undefined) {
+        return match;
       } else {
         _param = param[1];
         continue ;
@@ -239,12 +239,12 @@ function $$catch(fct, arg) {
 
 function convert_raw_backtrace(rbckt) {
   try {
-    return /* Some */[$$Array.map(Caml_backtrace.caml_convert_raw_backtrace_slot, rbckt)];
+    return $$Array.map(Caml_backtrace.caml_convert_raw_backtrace_slot, rbckt);
   }
   catch (raw_exn){
     var exn = Js_exn.internalToOCamlException(raw_exn);
     if (exn[0] === Caml_builtin_exceptions.failure) {
-      return /* None */0;
+      return undefined;
     } else {
       throw exn;
     }
@@ -267,68 +267,68 @@ function format_backtrace_slot(pos, slot) {
   };
   if (slot.tag) {
     if (slot[0]) {
-      return /* None */0;
+      return undefined;
     } else {
-      return /* Some */[Curry._1(Printf.sprintf(/* Format */[
-                        /* String */Block.__(2, [
-                            /* No_padding */0,
-                            /* String_literal */Block.__(11, [
-                                " unknown location",
-                                /* End_of_format */0
-                              ])
-                          ]),
-                        "%s unknown location"
-                      ]), info(false))];
-    }
-  } else {
-    return /* Some */[Curry._5(Printf.sprintf(/* Format */[
+      return Curry._1(Printf.sprintf(/* Format */[
                       /* String */Block.__(2, [
                           /* No_padding */0,
                           /* String_literal */Block.__(11, [
-                              " file \"",
-                              /* String */Block.__(2, [
-                                  /* No_padding */0,
-                                  /* String_literal */Block.__(11, [
-                                      "\", line ",
-                                      /* Int */Block.__(4, [
-                                          /* Int_d */0,
-                                          /* No_padding */0,
-                                          /* No_precision */0,
-                                          /* String_literal */Block.__(11, [
-                                              ", characters ",
-                                              /* Int */Block.__(4, [
-                                                  /* Int_d */0,
-                                                  /* No_padding */0,
-                                                  /* No_precision */0,
-                                                  /* Char_literal */Block.__(12, [
-                                                      /* "-" */45,
-                                                      /* Int */Block.__(4, [
-                                                          /* Int_d */0,
-                                                          /* No_padding */0,
-                                                          /* No_precision */0,
-                                                          /* End_of_format */0
-                                                        ])
-                                                    ])
-                                                ])
-                                            ])
-                                        ])
-                                    ])
-                                ])
+                              " unknown location",
+                              /* End_of_format */0
                             ])
                         ]),
-                      "%s file \"%s\", line %d, characters %d-%d"
-                    ]), info(slot[0]), slot[1], slot[2], slot[3], slot[4])];
+                      "%s unknown location"
+                    ]), info(false));
+    }
+  } else {
+    return Curry._5(Printf.sprintf(/* Format */[
+                    /* String */Block.__(2, [
+                        /* No_padding */0,
+                        /* String_literal */Block.__(11, [
+                            " file \"",
+                            /* String */Block.__(2, [
+                                /* No_padding */0,
+                                /* String_literal */Block.__(11, [
+                                    "\", line ",
+                                    /* Int */Block.__(4, [
+                                        /* Int_d */0,
+                                        /* No_padding */0,
+                                        /* No_precision */0,
+                                        /* String_literal */Block.__(11, [
+                                            ", characters ",
+                                            /* Int */Block.__(4, [
+                                                /* Int_d */0,
+                                                /* No_padding */0,
+                                                /* No_precision */0,
+                                                /* Char_literal */Block.__(12, [
+                                                    /* "-" */45,
+                                                    /* Int */Block.__(4, [
+                                                        /* Int_d */0,
+                                                        /* No_padding */0,
+                                                        /* No_precision */0,
+                                                        /* End_of_format */0
+                                                      ])
+                                                  ])
+                                              ])
+                                          ])
+                                      ])
+                                  ])
+                              ])
+                          ])
+                      ]),
+                    "%s file \"%s\", line %d, characters %d-%d"
+                  ]), info(slot[0]), slot[1], slot[2], slot[3], slot[4]);
   }
 }
 
 function print_raw_backtrace(outchan, raw_backtrace) {
   var outchan$1 = outchan;
   var backtrace = convert_raw_backtrace(raw_backtrace);
-  if (backtrace) {
-    var a = backtrace[0];
+  if (backtrace !== undefined) {
+    var a = backtrace;
     for(var i = 0 ,i_finish = a.length - 1 | 0; i <= i_finish; ++i){
       var match = format_backtrace_slot(i, Caml_array.caml_array_get(a, i));
-      if (match) {
+      if (match !== undefined) {
         Curry._1(Printf.fprintf(outchan$1, /* Format */[
                   /* String */Block.__(2, [
                       /* No_padding */0,
@@ -338,7 +338,7 @@ function print_raw_backtrace(outchan, raw_backtrace) {
                         ])
                     ]),
                   "%s\n"
-                ]), match[0]);
+                ]), match);
       }
       
     }
@@ -359,12 +359,12 @@ function print_backtrace(outchan) {
 }
 
 function backtrace_to_string(backtrace) {
-  if (backtrace) {
-    var a = backtrace[0];
+  if (backtrace !== undefined) {
+    var a = backtrace;
     var b = $$Buffer.create(1024);
     for(var i = 0 ,i_finish = a.length - 1 | 0; i <= i_finish; ++i){
       var match = format_backtrace_slot(i, Caml_array.caml_array_get(a, i));
-      if (match) {
+      if (match !== undefined) {
         Curry._1(Printf.bprintf(b, /* Format */[
                   /* String */Block.__(2, [
                       /* No_padding */0,
@@ -374,7 +374,7 @@ function backtrace_to_string(backtrace) {
                         ])
                     ]),
                   "%s\n"
-                ]), match[0]);
+                ]), match);
       }
       
     }
@@ -394,21 +394,21 @@ function backtrace_slot_is_raise(param) {
 
 function backtrace_slot_location(param) {
   if (param.tag) {
-    return /* None */0;
+    return undefined;
   } else {
-    return /* Some */[/* record */[
-              /* filename */param[1],
-              /* line_number */param[2],
-              /* start_char */param[3],
-              /* end_char */param[4]
-            ]];
+    return /* record */[
+            /* filename */param[1],
+            /* line_number */param[2],
+            /* start_char */param[3],
+            /* end_char */param[4]
+          ];
   }
 }
 
 function backtrace_slots(raw_backtrace) {
   var match = convert_raw_backtrace(raw_backtrace);
-  if (match) {
-    var backtrace = match[0];
+  if (match !== undefined) {
+    var backtrace = match;
     var usable_slot = function (param) {
       if (param.tag) {
         return false;
@@ -432,13 +432,12 @@ function backtrace_slots(raw_backtrace) {
       };
     };
     if (exists_usable(backtrace.length - 1 | 0)) {
-      return /* Some */[backtrace];
+      return backtrace;
     } else {
-      return /* None */0;
+      return undefined;
     }
-  } else {
-    return /* None */0;
   }
+  
 }
 
 function raw_backtrace_length(bckt) {
@@ -477,10 +476,10 @@ function exn_slot_name(x) {
   return slot[0];
 }
 
-var uncaught_exception_handler = [/* None */0];
+var uncaught_exception_handler = /* record */[/* contents */undefined];
 
 function set_uncaught_exception_handler(fn) {
-  uncaught_exception_handler[0] = /* Some */[fn];
+  uncaught_exception_handler[0] = fn;
   return /* () */0;
 }
 

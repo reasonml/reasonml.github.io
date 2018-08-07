@@ -2,14 +2,14 @@
 
 var Curry = require("./curry.js");
 var Js_math = require("./js_math.js");
+var Js_primitive = require("./js_primitive.js");
 var Caml_primitive = require("./caml_primitive.js");
 
 function get(arr, i) {
   if (i >= 0 && i < arr.length) {
-    return /* Some */[arr[i]];
-  } else {
-    return /* None */0;
+    return Js_primitive.some(arr[i]);
   }
+  
 }
 
 function getExn(arr, i) {
@@ -224,6 +224,17 @@ function slice(a, offset, len) {
   }
 }
 
+function sliceToEnd(a, offset) {
+  var lena = a.length;
+  var ofs = offset < 0 ? Caml_primitive.caml_int_max(lena + offset | 0, 0) : offset;
+  var len = lena - ofs | 0;
+  var result = new Array(len);
+  for(var i = 0 ,i_finish = len - 1 | 0; i <= i_finish; ++i){
+    result[i] = a[ofs + i | 0];
+  }
+  return result;
+}
+
 function fill(a, offset, len, v) {
   if (len > 0) {
     var lena = a.length;
@@ -320,6 +331,26 @@ function keep(a, f) {
   return keepU(a, Curry.__1(f));
 }
 
+function keepWithIndexU(a, f) {
+  var l = a.length;
+  var r = new Array(l);
+  var j = 0;
+  for(var i = 0 ,i_finish = l - 1 | 0; i <= i_finish; ++i){
+    var v = a[i];
+    if (f(v, i)) {
+      r[j] = v;
+      j = j + 1 | 0;
+    }
+    
+  }
+  r.length = j;
+  return r;
+}
+
+function keepWithIndex(a, f) {
+  return keepWithIndexU(a, Curry.__2(f));
+}
+
 function keepMapU(a, f) {
   var l = a.length;
   var r = new Array(l);
@@ -327,8 +358,8 @@ function keepMapU(a, f) {
   for(var i = 0 ,i_finish = l - 1 | 0; i <= i_finish; ++i){
     var v = a[i];
     var match = f(v);
-    if (match) {
-      r[j] = match[0];
+    if (match !== undefined) {
+      r[j] = Js_primitive.valFromOption(match);
       j = j + 1 | 0;
     }
     
@@ -606,6 +637,7 @@ exports.unzip = unzip;
 exports.concat = concat;
 exports.concatMany = concatMany;
 exports.slice = slice;
+exports.sliceToEnd = sliceToEnd;
 exports.fill = fill;
 exports.blit = blit;
 exports.blitUnsafe = blitUnsafe;
@@ -615,6 +647,8 @@ exports.mapU = mapU;
 exports.map = map;
 exports.keepU = keepU;
 exports.keep = keep;
+exports.keepWithIndexU = keepWithIndexU;
+exports.keepWithIndex = keepWithIndex;
 exports.keepMapU = keepMapU;
 exports.keepMap = keepMap;
 exports.forEachWithIndexU = forEachWithIndexU;

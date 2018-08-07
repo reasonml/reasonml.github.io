@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import AnsiUp from 'ansi_up';
 import debounce from './utils/debounce';
@@ -14,7 +14,7 @@ const decompress = lzString.decompressFromEncodedURIComponent;
 
 let ansiUp = new AnsiUp();
 
-class CodeMirror extends Component {
+class CodeMirror extends React.Component {
   constructor(props) {
     super();
   }
@@ -295,7 +295,7 @@ const persist = debounce((language, code, useReasonReactJSX) => {
 
 const errorTimeout = 500
 
-class ShareButton extends Component {
+class ShareButton extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -350,7 +350,7 @@ const capitalizeFirstChar = (str) => {
   return str[0].toUpperCase() + str.slice(1);
 };
 
-class Try extends Component {
+class Try extends React.Component {
 
   constructor(props) {
     super(props);

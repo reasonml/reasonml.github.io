@@ -255,34 +255,33 @@ Printexc.register_printer((function (param) {
                       "EUNKNOWNERR %d"
                     ]), e[0]);
           }
-          return /* Some */[Curry._3(Printf.sprintf(/* Format */[
-                            /* String_literal */Block.__(11, [
-                                "Unix.Unix_error(Unix.",
-                                /* String */Block.__(2, [
-                                    /* No_padding */0,
-                                    /* String_literal */Block.__(11, [
-                                        ", ",
-                                        /* Caml_string */Block.__(3, [
-                                            /* No_padding */0,
-                                            /* String_literal */Block.__(11, [
-                                                ", ",
-                                                /* Caml_string */Block.__(3, [
-                                                    /* No_padding */0,
-                                                    /* Char_literal */Block.__(12, [
-                                                        /* ")" */41,
-                                                        /* End_of_format */0
-                                                      ])
-                                                  ])
-                                              ])
-                                          ])
-                                      ])
-                                  ])
-                              ]),
-                            "Unix.Unix_error(Unix.%s, %S, %S)"
-                          ]), msg, param[2], param[3])];
-        } else {
-          return /* None */0;
+          return Curry._3(Printf.sprintf(/* Format */[
+                          /* String_literal */Block.__(11, [
+                              "Unix.Unix_error(Unix.",
+                              /* String */Block.__(2, [
+                                  /* No_padding */0,
+                                  /* String_literal */Block.__(11, [
+                                      ", ",
+                                      /* Caml_string */Block.__(3, [
+                                          /* No_padding */0,
+                                          /* String_literal */Block.__(11, [
+                                              ", ",
+                                              /* Caml_string */Block.__(3, [
+                                                  /* No_padding */0,
+                                                  /* Char_literal */Block.__(12, [
+                                                      /* ")" */41,
+                                                      /* End_of_format */0
+                                                    ])
+                                                ])
+                                            ])
+                                        ])
+                                    ])
+                                ])
+                            ]),
+                          "Unix.Unix_error(Unix.%s, %S, %S)"
+                        ]), msg, param[2], param[3]);
         }
+        
       }));
 
 function handle_unix_error(f, arg) {
@@ -521,9 +520,9 @@ function getaddrinfo(node, service, opts) {
       var node$1 = node;
       var service$1 = service;
       var opts$1 = opts;
-      var opt_socktype = [/* None */0];
-      var opt_protocol = [0];
-      var opt_passive = [false];
+      var opt_socktype = /* record */[/* contents */undefined];
+      var opt_protocol = /* record */[/* contents */0];
+      var opt_passive = /* record */[/* contents */false];
       List.iter((function (param) {
               if (typeof param === "number") {
                 if (param === 2) {
@@ -535,7 +534,7 @@ function getaddrinfo(node, service, opts) {
               } else {
                 switch (param.tag | 0) {
                   case 1 : 
-                      opt_socktype[0] = /* Some */[param[0]];
+                      opt_socktype[0] = param[0];
                       return /* () */0;
                   case 2 : 
                       opt_protocol[0] = param[0];
@@ -591,8 +590,8 @@ function getaddrinfo(node, service, opts) {
       };
       var match = opt_socktype[0];
       var ports;
-      if (match) {
-        var ty = match[0];
+      if (match !== undefined) {
+        var ty = match;
         ports = ty !== 1 ? (
             ty !== 0 ? (
                 service$1 === "" ? /* :: */[
@@ -846,7 +845,7 @@ function create_process_env(_, _$1, _$2, new_stdin, new_stdout, new_stderr) {
   }
 }
 
-var popen_processes = Hashtbl.create(/* None */0, 7);
+var popen_processes = Hashtbl.create(undefined, 7);
 
 function open_proc(_, proc, input, output, toclose) {
   var cloexec = List.for_all(try_set_close_on_exec, toclose);

@@ -16,7 +16,7 @@ function caml_hash(count, _, seed, obj) {
   } else {
     var queue = /* record */[
       /* length */0,
-      /* tail : None */0
+      /* tail */undefined
     ];
     var num = count;
     Caml_queue.push(obj, queue);
@@ -35,7 +35,7 @@ function caml_hash(count, _, seed, obj) {
           if (typeof obj$1 === "symbol") {
             throw [
                   Caml_builtin_exceptions.assert_failure,
-                  [
+                  /* tuple */[
                     "caml_hash.ml",
                     72,
                     8

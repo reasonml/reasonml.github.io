@@ -1,18 +1,19 @@
 'use strict';
 
 var Curry = require("./curry.js");
+var Js_primitive = require("./js_primitive.js");
 
 function getExn(param) {
-  if (param) {
-    return param[0];
+  if (param !== undefined) {
+    return Js_primitive.valFromOption(param);
   } else {
     throw new Error("getExn");
   }
 }
 
 function mapWithDefaultU(opt, $$default, f) {
-  if (opt) {
-    return f(opt[0]);
+  if (opt !== undefined) {
+    return f(Js_primitive.valFromOption(opt));
   } else {
     return $$default;
   }
@@ -23,11 +24,10 @@ function mapWithDefault(opt, $$default, f) {
 }
 
 function mapU(opt, f) {
-  if (opt) {
-    return /* Some */[f(opt[0])];
-  } else {
-    return /* None */0;
+  if (opt !== undefined) {
+    return Js_primitive.some(f(Js_primitive.valFromOption(opt)));
   }
+  
 }
 
 function map(opt, f) {
@@ -35,11 +35,10 @@ function map(opt, f) {
 }
 
 function flatMapU(opt, f) {
-  if (opt) {
-    return f(opt[0]);
-  } else {
-    return /* None */0;
+  if (opt !== undefined) {
+    return f(Js_primitive.valFromOption(opt));
   }
+  
 }
 
 function flatMap(opt, f) {
@@ -47,40 +46,30 @@ function flatMap(opt, f) {
 }
 
 function getWithDefault(opt, $$default) {
-  if (opt) {
-    return opt[0];
+  if (opt !== undefined) {
+    return Js_primitive.valFromOption(opt);
   } else {
     return $$default;
   }
 }
 
 function isSome(param) {
-  if (param) {
-    return true;
-  } else {
-    return false;
-  }
+  return param !== undefined;
 }
 
-function isNone(param) {
-  if (param) {
-    return false;
-  } else {
-    return true;
-  }
+function isNone(x) {
+  return x === undefined;
 }
 
 function eqU(a, b, f) {
-  if (a) {
-    if (b) {
-      return f(a[0], b[0]);
+  if (a !== undefined) {
+    if (b !== undefined) {
+      return f(Js_primitive.valFromOption(a), Js_primitive.valFromOption(b));
     } else {
       return false;
     }
-  } else if (b) {
-    return false;
   } else {
-    return true;
+    return b === undefined;
   }
 }
 
@@ -89,13 +78,13 @@ function eq(a, b, f) {
 }
 
 function cmpU(a, b, f) {
-  if (a) {
-    if (b) {
-      return f(a[0], b[0]);
+  if (a !== undefined) {
+    if (b !== undefined) {
+      return f(Js_primitive.valFromOption(a), Js_primitive.valFromOption(b));
     } else {
       return 1;
     }
-  } else if (b) {
+  } else if (b !== undefined) {
     return -1;
   } else {
     return 0;

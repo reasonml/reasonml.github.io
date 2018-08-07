@@ -1,6 +1,7 @@
 'use strict';
 
 var Curry = require("./curry.js");
+var Js_primitive = require("./js_primitive.js");
 
 function make() {
   return {
@@ -31,18 +32,16 @@ function topUndefined(s) {
   var match = s.root;
   if (match !== null) {
     return match.head;
-  } else {
-    return undefined;
   }
+  
 }
 
 function top(s) {
   var match = s.root;
   if (match !== null) {
-    return /* Some */[match.head];
-  } else {
-    return /* None */0;
+    return Js_primitive.some(match.head);
   }
+  
 }
 
 function isEmpty(s) {
@@ -54,19 +53,17 @@ function popUndefined(s) {
   if (match !== null) {
     s.root = match.tail;
     return match.head;
-  } else {
-    return undefined;
   }
+  
 }
 
 function pop(s) {
   var match = s.root;
   if (match !== null) {
     s.root = match.tail;
-    return /* Some */[match.head];
-  } else {
-    return /* None */0;
+    return Js_primitive.some(match.head);
   }
+  
 }
 
 function size(s) {

@@ -1,6 +1,7 @@
 'use strict';
 
 var Curry = require("./curry.js");
+var Js_primitive = require("./js_primitive.js");
 var Belt_SortArray = require("./belt_SortArray.js");
 
 function treeHeight(n) {
@@ -110,18 +111,16 @@ function min0Aux(_n) {
 
 function minimum(n) {
   if (n !== null) {
-    return /* Some */[min0Aux(n)];
-  } else {
-    return /* None */0;
+    return Js_primitive.some(min0Aux(n));
   }
+  
 }
 
 function minUndefined(n) {
   if (n !== null) {
     return min0Aux(n);
-  } else {
-    return undefined;
   }
+  
 }
 
 function max0Aux(_n) {
@@ -139,18 +138,16 @@ function max0Aux(_n) {
 
 function maximum(n) {
   if (n !== null) {
-    return /* Some */[max0Aux(n)];
-  } else {
-    return /* None */0;
+    return Js_primitive.some(max0Aux(n));
   }
+  
 }
 
 function maxUndefined(n) {
   if (n !== null) {
     return max0Aux(n);
-  } else {
-    return undefined;
   }
+  
 }
 
 function removeMinAuxWithRef(n, v) {
@@ -304,7 +301,7 @@ function joinShared(ln, v, rn) {
 function concatShared(t1, t2) {
   if (t1 !== null) {
     if (t2 !== null) {
-      var v = [t2.value];
+      var v = /* record */[/* contents */t2.value];
       var t2r = removeMinAuxWithRef(t2, v);
       return joinShared(t1, v[0], t2r);
     } else {
@@ -731,13 +728,13 @@ function get(_n, x, cmp) {
       var v = n.value;
       var c = cmp(x, v);
       if (c === 0) {
-        return /* Some */[v];
+        return Js_primitive.some(v);
       } else {
         _n = c < 0 ? n.left : n.right;
         continue ;
       }
     } else {
-      return /* None */0;
+      return undefined;
     }
   };
 }

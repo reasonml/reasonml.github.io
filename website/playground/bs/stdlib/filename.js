@@ -245,7 +245,7 @@ function temp_file_name(temp_dir, prefix, suffix) {
                     ]), prefix, rnd, suffix));
 }
 
-var current_temp_dir_name = [temp_dir_name$2];
+var current_temp_dir_name = /* record */[/* contents */temp_dir_name$2];
 
 function set_temp_dir_name(s) {
   current_temp_dir_name[0] = s;
@@ -257,7 +257,7 @@ function get_temp_dir_name() {
 }
 
 function temp_file($staropt$star, prefix, suffix) {
-  var temp_dir = $staropt$star ? $staropt$star[0] : current_temp_dir_name[0];
+  var temp_dir = $staropt$star !== undefined ? $staropt$star : current_temp_dir_name[0];
   var _counter = 0;
   while(true) {
     var counter = _counter;
@@ -283,11 +283,11 @@ function temp_file($staropt$star, prefix, suffix) {
 }
 
 function open_temp_file($staropt$star, $staropt$star$1, prefix, suffix) {
-  var mode = $staropt$star ? $staropt$star[0] : /* :: */[
+  var mode = $staropt$star !== undefined ? $staropt$star : /* :: */[
       /* Open_text */7,
       /* [] */0
     ];
-  var temp_dir = $staropt$star$1 ? $staropt$star$1[0] : current_temp_dir_name[0];
+  var temp_dir = $staropt$star$1 !== undefined ? $staropt$star$1 : current_temp_dir_name[0];
   var _counter = 0;
   while(true) {
     var counter = _counter;

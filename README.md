@@ -56,10 +56,11 @@ opam install js_of_ocaml.3.0
 which js_of_ocaml # use this absolute path for the task above or symlink this into your $PATH, maybe /usr/local/bin or something
 # switch back now
 opam switch 4.02.3+buckle-master
+opam install ocp-ocamlres
 eval `opam config env`
 ```
 
-4. Inside `jscomp`, either modify `repl.js`'s occurrences of `js_of_ocaml` to an absolute path that points to it or symlink `js_of_ocaml` into your $PATH.
+4. Inside `jscomp`, either modify `repl.js`'s occurrences of `js_of_ocaml` to an absolute path that points to it or symlink `js_of_ocaml` into your `$PATH`.
 
 5. Run `BS_PLAYGROUND=../../reasonml.github.io/website/playground/bs/ node repl.js`
 

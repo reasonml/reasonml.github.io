@@ -1,6 +1,7 @@
 'use strict';
 
 var Curry = require("./curry.js");
+var Js_primitive = require("./js_primitive.js");
 var Belt_SortArray = require("./belt_SortArray.js");
 
 function treeHeight(n) {
@@ -132,18 +133,16 @@ function minKey0Aux(_n) {
 
 function minKey(n) {
   if (n !== null) {
-    return /* Some */[minKey0Aux(n)];
-  } else {
-    return /* None */0;
+    return Js_primitive.some(minKey0Aux(n));
   }
+  
 }
 
 function minKeyUndefined(n) {
   if (n !== null) {
     return minKey0Aux(n);
-  } else {
-    return undefined;
   }
+  
 }
 
 function maxKey0Aux(_n) {
@@ -161,18 +160,16 @@ function maxKey0Aux(_n) {
 
 function maxKey(n) {
   if (n !== null) {
-    return /* Some */[maxKey0Aux(n)];
-  } else {
-    return /* None */0;
+    return Js_primitive.some(maxKey0Aux(n));
   }
+  
 }
 
 function maxKeyUndefined(n) {
   if (n !== null) {
     return maxKey0Aux(n);
-  } else {
-    return undefined;
   }
+  
 }
 
 function minKV0Aux(_n) {
@@ -193,18 +190,16 @@ function minKV0Aux(_n) {
 
 function minimum(n) {
   if (n !== null) {
-    return /* Some */[minKV0Aux(n)];
-  } else {
-    return /* None */0;
+    return minKV0Aux(n);
   }
+  
 }
 
 function minUndefined(n) {
   if (n !== null) {
     return minKV0Aux(n);
-  } else {
-    return undefined;
   }
+  
 }
 
 function maxKV0Aux(_n) {
@@ -225,18 +220,16 @@ function maxKV0Aux(_n) {
 
 function maximum(n) {
   if (n !== null) {
-    return /* Some */[maxKV0Aux(n)];
-  } else {
-    return /* None */0;
+    return maxKV0Aux(n);
   }
+  
 }
 
 function maxUndefined(n) {
   if (n !== null) {
     return maxKV0Aux(n);
-  } else {
-    return undefined;
   }
+  
 }
 
 function removeMinAuxWithRef(n, kr, vr) {
@@ -272,6 +265,37 @@ function stackAllLeft(_v, _s) {
       return s;
     }
   };
+}
+
+function findFirstByU(n, p) {
+  if (n !== null) {
+    var left = findFirstByU(n.left, p);
+    if (left !== undefined) {
+      return left;
+    } else {
+      var v = n.key;
+      var d = n.value;
+      var pvd = p(v, d);
+      if (pvd) {
+        return /* tuple */[
+                v,
+                d
+              ];
+      } else {
+        var right = findFirstByU(n.right, p);
+        if (right !== undefined) {
+          return right;
+        } else {
+          return undefined;
+        }
+      }
+    }
+  }
+  
+}
+
+function findFirstBy(n, p) {
+  return findFirstByU(n, Curry.__2(p));
 }
 
 function forEachU(_n, f) {
@@ -444,8 +468,8 @@ function join(ln, v, d, rn) {
 function concat(t1, t2) {
   if (t1 !== null) {
     if (t2 !== null) {
-      var kr = [t2.key];
-      var vr = [t2.value];
+      var kr = /* record */[/* contents */t2.key];
+      var vr = /* record */[/* contents */t2.value];
       var t2r = removeMinAuxWithRef(t2, kr, vr);
       return join(t1, kr[0], vr[0], t2r);
     } else {
@@ -457,8 +481,8 @@ function concat(t1, t2) {
 }
 
 function concatOrJoin(t1, v, d, t2) {
-  if (d) {
-    return join(t1, v, d[0], t2);
+  if (d !== undefined) {
+    return join(t1, v, Js_primitive.valFromOption(d), t2);
   } else {
     return concat(t1, t2);
   }
@@ -492,8 +516,8 @@ function keepMapU(n, p) {
     var newLeft = keepMapU(n.left, p);
     var pvd = p(v, d);
     var newRight = keepMapU(n.right, p);
-    if (pvd) {
-      return join(newLeft, v, pvd[0], newRight);
+    if (pvd !== undefined) {
+      return join(newLeft, v, Js_primitive.valFromOption(pvd), newRight);
     } else {
       return concat(newLeft, newRight);
     }
@@ -592,7 +616,7 @@ function checkInvariantInternal(_v) {
       var r = v.right;
       var diff = treeHeight(l) - treeHeight(r) | 0;
       if (!(diff <= 2 && diff >= -2)) {
-        throw new Error("File \"belt_internalAVLtree.ml\", line 369, characters 6-12");
+        throw new Error("File \"belt_internalAVLtree.ml\", line 385, characters 6-12");
       }
       checkInvariantInternal(l);
       _v = r;
@@ -875,13 +899,13 @@ function get(_n, x, cmp) {
       var v = n.key;
       var c = cmp(x, v);
       if (c === 0) {
-        return /* Some */[n.value];
+        return Js_primitive.some(n.value);
       } else {
         _n = c < 0 ? n.left : n.right;
         continue ;
       }
     } else {
-      return /* None */0;
+      return undefined;
     }
   };
 }
@@ -1119,6 +1143,8 @@ exports.removeMinAuxWithRef = removeMinAuxWithRef;
 exports.empty = empty;
 exports.isEmpty = isEmpty;
 exports.stackAllLeft = stackAllLeft;
+exports.findFirstByU = findFirstByU;
+exports.findFirstBy = findFirstBy;
 exports.forEachU = forEachU;
 exports.forEach = forEach;
 exports.mapU = mapU;

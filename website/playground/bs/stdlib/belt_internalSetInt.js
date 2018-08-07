@@ -108,13 +108,13 @@ function get(_n, x) {
     if (n !== null) {
       var v = n.value;
       if (x === v) {
-        return /* Some */[v];
+        return v;
       } else {
         _n = x < v ? n.left : n.right;
         continue ;
       }
     } else {
-      return /* None */0;
+      return undefined;
     }
   };
 }

@@ -1,20 +1,20 @@
 'use strict';
 
+var Js_primitive = require("./js_primitive.js");
 
 function some(x) {
-  return /* Some */[x];
+  return Js_primitive.some(x);
 }
 
 function is_none(x) {
-  return x === /* None */0;
+  return x === undefined;
 }
 
 function to_def(x) {
-  if (x) {
-    return x[0];
-  } else {
-    return undefined;
+  if (x !== undefined) {
+    return Js_primitive.valFromOption(x);
   }
+  
 }
 
 function cons(x, y) {
@@ -28,7 +28,7 @@ function is_list_empty(x) {
   return x === /* [] */0;
 }
 
-var none = /* None */0;
+var none = undefined;
 
 exports.none = none;
 exports.some = some;

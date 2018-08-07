@@ -685,7 +685,7 @@ function pp_open_tbox(state, _) {
   if (state[/* pp_curr_depth */13] < state[/* pp_max_boxes */14]) {
     var elem = /* record */[
       /* elem_size */0,
-      /* token : Pp_tbegin */Block.__(4, [/* Pp_tbox */[[/* [] */0]]]),
+      /* token : Pp_tbegin */Block.__(4, [/* Pp_tbox */[/* record */[/* contents : [] */0]]]),
       /* length */0
     ];
     return enqueue_advance(state, elem);
@@ -746,7 +746,7 @@ function pp_print_list(_$staropt$star, pp_v, ppf, _param) {
   while(true) {
     var param = _param;
     var $staropt$star = _$staropt$star;
-    var pp_sep = $staropt$star ? $staropt$star[0] : pp_print_cut;
+    var pp_sep = $staropt$star !== undefined ? $staropt$star : pp_print_cut;
     if (param) {
       var vs = param[1];
       var v = param[0];
@@ -754,7 +754,7 @@ function pp_print_list(_$staropt$star, pp_v, ppf, _param) {
         Curry._2(pp_v, ppf, v);
         Curry._2(pp_sep, ppf, /* () */0);
         _param = vs;
-        _$staropt$star = /* Some */[pp_sep];
+        _$staropt$star = pp_sep;
         continue ;
       } else {
         return Curry._2(pp_v, ppf, v);
@@ -767,8 +767,8 @@ function pp_print_list(_$staropt$star, pp_v, ppf, _param) {
 
 function pp_print_text(ppf, s) {
   var len = s.length;
-  var left = [0];
-  var right = [0];
+  var left = /* record */[/* contents */0];
+  var right = /* record */[/* contents */0];
   var flush = function () {
     pp_print_string(ppf, $$String.sub(s, left[0], right[0] - left[0] | 0));
     right[0] = right[0] + 1 | 0;

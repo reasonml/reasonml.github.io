@@ -1,6 +1,7 @@
 'use strict';
 
 var Curry = require("./curry.js");
+var Js_primitive = require("./js_primitive.js");
 
 var $$null = null;
 
@@ -41,19 +42,17 @@ function add(q, x) {
 function peek(q) {
   var match = q.first;
   if (match !== null) {
-    return /* Some */[match.content];
-  } else {
-    return /* None */0;
+    return Js_primitive.some(match.content);
   }
+  
 }
 
 function peekUndefined(q) {
   var match = q.first;
   if (match !== null) {
     return match.content;
-  } else {
-    return undefined;
   }
+  
 }
 
 function peekExn(q) {
@@ -71,15 +70,14 @@ function pop(q) {
     var next = match.next;
     if (next === null) {
       clear(q);
-      return /* Some */[match.content];
+      return Js_primitive.some(match.content);
     } else {
       q.length = q.length - 1 | 0;
       q.first = next;
-      return /* Some */[match.content];
+      return Js_primitive.some(match.content);
     }
-  } else {
-    return /* None */0;
   }
+  
 }
 
 function popExn(q) {
@@ -111,9 +109,8 @@ function popUndefined(q) {
       q.first = next;
       return match.content;
     }
-  } else {
-    return undefined;
   }
+  
 }
 
 function copy(q) {

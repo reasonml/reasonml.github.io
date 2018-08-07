@@ -24,7 +24,7 @@ function seeded_hash(seed, x) {
   return Caml_hash.caml_hash(10, 100, seed, x);
 }
 
-var randomized = [false];
+var randomized = /* record */[/* contents */false];
 
 function randomize() {
   randomized[0] = true;
@@ -48,7 +48,7 @@ function power_2_above(_x, n) {
 }
 
 function create($staropt$star, initial_size) {
-  var random = $staropt$star ? $staropt$star[0] : randomized[0];
+  var random = $staropt$star !== undefined ? $staropt$star : randomized[0];
   var s = power_2_above(16, initial_size);
   var seed;
   if (random) {
@@ -732,7 +732,7 @@ function Make(H) {
     };
   };
   var create$1 = function (sz) {
-    return create(/* Some */[false], sz);
+    return create(false, sz);
   };
   return /* module */[
           /* create */create$1,
