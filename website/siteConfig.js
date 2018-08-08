@@ -113,8 +113,12 @@ const users = [
     caption: "Aesthetic Integration",
     image: "img/logos/aesthetic-integration.svg",
     infoLink: "https://www.imandra.ai",
+  },
+  {
+    caption: "Tail Recursive",
+    image: "img/logos/tailrecursive.svg",
+    infoLink: "https://www.tailrecursive.co",
   }
-
 ];
 
 const examples = [
