@@ -32,6 +32,18 @@ becomes
 ([@JSX] div(~foo=bar, ~children=[child1, child2], ()));
 ```
 
+## Fragment
+
+```reason
+<> child1 child2 </>;
+```
+
+becomes
+
+```reason
+([@JSX] [child1, child2]);
+```
+
 ### Children
 
 ```reason
