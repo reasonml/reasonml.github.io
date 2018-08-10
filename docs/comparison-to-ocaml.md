@@ -803,7 +803,7 @@ escape backslashes are added back in automatically.
 
 OCaml                                        | Reason
 ---------------------------------------------|--------------------------------
-`let (/*) a b = a + b`      |  `let (/\*) a b => a + b;`
+`let (/*) a b = a + b`      |  `let (/\*) = (a, b) => a + b;`
 `let x = 12 /-* 23 /-* 12`   |  `let x = 12 /-* 23 /-* 12;`
 `let y = (/*) a b`           |  `let y = a /\* b;`
 `let (!=*) q r = q + r`     |  `let ( !=* ) = (q, r) => q + r;`
