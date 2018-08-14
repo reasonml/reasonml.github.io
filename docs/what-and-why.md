@@ -53,6 +53,7 @@ Make sure you talk to us in [Discord](https://discord.gg/reasonml) first, to cle
 - [Fable](http://fable.io/). Based on F#, which is closely related to OCaml.
 - [ClojureScript](https://clojurescript.org). Nothing in common with us on the surface, but prioritizes simplicity & great interop too.
 - [Swift](https://www.apple.com/swift/). Fruit-flavored OCaml!
+- [Haxe](https://haxe.org). Compiles to basically anything.
 
 Hope that helps! Want to know more? Strike a conversation with any of us in the [community](community.md)!
 
