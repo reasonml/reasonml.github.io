@@ -1,0 +1,80 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Fast pipe · Reason</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="You can use the fast pipe operator `-&gt;` to simplify code so it becomes easier to"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Fast pipe · Reason"/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io/index.html"/><meta property="og:description" content="You can use the fast pipe operator `-&gt;` to simplify code so it becomes easier to"/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/icon_50.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io/blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io/blog/feed.xml" title="Reason Blog RSS Feed"/><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/en"><img class="logo" src="/img/dummy.svg" alt="Reason"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/en/quickstart-javascript" target="_self">Docs</a></li><li class=""><a href="/en/try" target="_self">Try</a></li><li class=""><a href="/api/index" target="_self">API</a></li><li class=""><a href="/docs/en/community" target="_self">Community</a></li><li class=""><a href="/blog" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg"/>English</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/docs/ja/fast-pipe">日本語</a></li><li><a href="/docs/de/fast-pipe">Deutsch</a></li><li><a href="/docs/es-ES/fast-pipe">Español</a></li><li><a href="/docs/fr/fast-pipe">Français</a></li><li><a href="/docs/ko/fast-pipe">한국어</a></li><li><a href="/docs/pt-BR/fast-pipe">Português (Brasil)</a></li><li><a href="/docs/ru/fast-pipe">Русский</a></li><li><a href="/docs/uk/fast-pipe">Українська</a></li><li><a href="/docs/zh-CN/fast-pipe">中文</a></li><li><a href="/docs/zh-TW/fast-pipe">繁體中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank" rel="noreferrer noopener">Help Translate</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/facebook/reason" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>Language Basics</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Intro</h3><ul><li class="navListItem"><a class="navItem" href="/docs/en/what-and-why">What &amp; Why</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Setup</h3><ul><li class="navListItem"><a class="navItem" href="/docs/en/installation">Installation</a></li><li class="navListItem"><a class="navItem" href="/docs/en/editor-plugins">Editor Plugins</a></li><li class="navListItem"><a class="navItem" href="/docs/en/extra-goodies">Extra Goodies</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Language Basics</h3><ul><li class="navListItem"><a class="navItem" href="/docs/en/overview">Overview</a></li><li class="navListItem"><a class="navItem" href="/docs/en/let-binding">Let Binding</a></li><li class="navListItem"><a class="navItem" href="/docs/en/type">Type!</a></li><li class="navListItem"><a class="navItem" href="/docs/en/string-and-char">String &amp; Char</a></li><li class="navListItem"><a class="navItem" href="/docs/en/boolean">Boolean</a></li><li class="navListItem"><a class="navItem" href="/docs/en/integer-and-float">Integer &amp; Float</a></li><li class="navListItem"><a class="navItem" href="/docs/en/tuple">Tuple</a></li><li class="navListItem"><a class="navItem" href="/docs/en/record">Record</a></li><li class="navListItem"><a class="navItem" href="/docs/en/variant">Variant!</a></li><li class="navListItem"><a class="navItem" href="/docs/en/list-and-array">List &amp; Array</a></li><li class="navListItem"><a class="navItem" href="/docs/en/function">Function</a></li><li class="navListItem"><a class="navItem" href="/docs/en/if-else">If-Else</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/docs/en/fast-pipe">Fast pipe</a></li><li class="navListItem"><a class="navItem" href="/docs/en/more-on-type">More on Type</a></li><li class="navListItem"><a class="navItem" href="/docs/en/destructuring">Destructuring</a></li><li class="navListItem"><a class="navItem" href="/docs/en/pattern-matching">Pattern Matching!</a></li><li class="navListItem"><a class="navItem" href="/docs/en/mutation">Mutation</a></li><li class="navListItem"><a class="navItem" href="/docs/en/imperative-loops">Imperative Loops</a></li><li class="navListItem"><a class="navItem" href="/docs/en/jsx">JSX</a></li><li class="navListItem"><a class="navItem" href="/docs/en/external">External</a></li><li class="navListItem"><a class="navItem" href="/docs/en/exception">Exception</a></li><li class="navListItem"><a class="navItem" href="/docs/en/object">Object</a></li><li class="navListItem"><a class="navItem" href="/docs/en/module">Module</a></li><li class="navListItem"><a class="navItem" href="/docs/en/promise">Promise</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">JavaScript</h3><ul><li class="navListItem"><a class="navItem" href="/docs/en/quickstart-javascript">Quickstart</a></li><li class="navListItem"><a class="navItem" href="/docs/en/interop">Interop</a></li><li class="navListItem"><a class="navItem" href="/docs/en/syntax-cheatsheet">Syntax Cheatsheet</a></li><li class="navListItem"><a class="navItem" href="/docs/en/libraries">Libraries</a></li><li class="navListItem"><a class="navItem" href="/docs/en/converting-from-js">Converting from JS</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Native</h3><ul><li class="navListItem"><a class="navItem" href="/docs/en/native">Native</a></li><li class="navListItem"><a class="navItem" href="/docs/en/quickstart-ocaml">Quickstart</a></li><li class="navListItem"><a class="navItem" href="/docs/en/convert-from-ocaml">Converting from OCaml</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Extra</h3><ul><li class="navListItem"><a class="navItem" href="/docs/en/faq">Frequently Asked Questions</a></li><li class="navListItem"><a class="navItem" href="/docs/en/comparison-to-ocaml">Comparison to OCaml</a></li><li class="navListItem"><a class="navItem" href="/docs/en/newcomer-examples">Newcomer Examples</a></li><li class="navListItem"><a class="navItem" href="/docs/en/project-structure">Project Structure</a></li></ul></div></div></section></div><script>
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              const headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                if (event.target.tagName === 'A') {
+                  document.body.classList.remove('tocActive');
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/reasonml/reasonml.github.io/tree/source/docs/fast-pipe.md" target="_blank" rel="noreferrer noopener">Edit</a><h1 class="postHeaderTitle">Fast pipe</h1></header><article><div><span><p>You can use the fast pipe operator <code>-&gt;</code> to simplify code so it becomes easier to
+read.</p>
+<pre><code class="hljs">second(<span class="hljs-name">first</span>(<span class="hljs-name">name</span>))
+</code></pre>
+<p>You can turn around the functions to be in the order they execute.</p>
+<pre><code class="hljs">name
+-<span class="ruby">&gt;first
+</span>-<span class="ruby">&gt;second
+</span></code></pre>
+<p>The variable will be giving as the first argument to each function. If the
+function take two argument, the fast pipe operator will always give it as the
+first argument.</p>
+<pre><code class="hljs">name
+-<span class="ruby">&gt;first(age)
+</span>-<span class="ruby">&gt;second
+</span></code></pre>
+<p>is equally to</p>
+<pre><code class="hljs">second(<span class="hljs-name">first</span>(<span class="hljs-name">name</span>, age))
+</code></pre>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/en/if-else">← If-Else</a><a class="docs-next button" href="/docs/en/more-on-type">More on Type →</a></div></div></div><nav class="onPageNav"></nav></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.min.js"></script><script>window.foo = new Pjax({
+          areas: [
+            // try to use the first query.
+            '.mainContainer, .docsNavContainer .toc .navWrapper, .onPageNav',
+            // fallback
+            'body'
+          ],
+          link: '.docsNavContainer:not(.docsSliderActive) a',
+          update: {
+            script: false,
+          }
+        });
+        var languagesMenuItemCopy = document.getElementById("languages-menu");
+        languagesMenuItemCopy.addEventListener("click", function(e){
+          e.preventDefault();
+          e.stopPropagation();
+          e.stopImmediatePropagation();
+        });</script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+              var search = docsearch({
+                
+                apiKey: '966d1e412f67114a07dc0afe44b19b53',
+                indexName: 'reason',
+                inputSelector: '#search_input_react',
+                algoliaOptions: {"facetFilters":["lang:en"]}
+              });
+            </script></body></html>
