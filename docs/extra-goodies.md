@@ -6,10 +6,6 @@ title: Extra Goodies
 
 [Reason-tools](https://github.com/reasonml/reason-tools) lets you quickly toggle between OCaml syntax and Reason syntax when you're browsing tutorials and documentations written in either syntax.
 
-## BuckleScript
-
-You'll be seeing [BuckleScript](https://bucklescript.github.io) extensively throughout the rest of this documentation, since it's the engine that powers our JS compilation. Its global binaries are installed through `npm install -g bs-platform`.
-
 ## REPL
 
 https://sketch.sh/
@@ -21,3 +17,7 @@ https://sketch.sh/
 ## Redex
 
 [Redex](https://redex.github.io): the Reason packages registry.
+
+## Bsb-native
+
+[Bsb-native](https://github.com/bsansouci/bsb-native) is a tiny fork of our `bsb` build system (used by Reason and BuckleScript) that compiles to native assembly code through the familiar setup you've been using.
