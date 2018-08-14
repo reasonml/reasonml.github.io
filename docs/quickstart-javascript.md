@@ -24,5 +24,5 @@ When developing, instead of running `npm run build` each time, run `npm run star
 Next:
 
 - Read more about how we compile to JavaScript through our partner project, [BuckleScript](https://bucklescript.github.io).
-- Alternatively, **to start a [ReasonReact](//reasonml.github.io/reason-react/docs/en/installation.html) app**, follow the instructions [here](https://reasonml.github.io/reason-react/docs/en/installation).
-- Head over to [Editor Setup](global-installation.md) to get the Reason plugin for your favorite editor!
+- Alternatively, **to start a [ReasonReact](https://reasonml.github.io/reason-react/docs/en/installation.html) app**, follow the instructions [here](https://reasonml.github.io/reason-react/docs/en/installation).
+- Head over to [Editor Setup](editor-plugins.md) to get the Reason plugin for your favorite editor!
