@@ -35,7 +35,7 @@ let result: response(universityStudent) = fetchDataFromServer();
 
 ## Creating a JS Object
 
-Assuming you're [compiling to JS](quickstart-javascript.md), of course.
+Assuming you're compiling to JavaScript.
 
 ```reason
 [@bs.deriving abstract]

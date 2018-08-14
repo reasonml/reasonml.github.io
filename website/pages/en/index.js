@@ -85,7 +85,7 @@ class HomeSplash extends React.Component {
                 siteConfig.baseUrl +
                 "docs/" +
                 this.props.language +
-                "/quickstart-javascript"
+                "/installation"
               }>
               Quick Start
             </Button>

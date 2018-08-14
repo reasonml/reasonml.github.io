@@ -15,10 +15,10 @@ alias reml="pbpaste | refmt --parse re --print ml --interface false | pbcopy"
 They'll take your code from the (macOS) clipboard, convert it, and paste it back into your clipboard! Swap out pbpaste/pbcopy with your system's clipboard functions.
 
 ### I'm not sure what to do with Reason
-[We compile to JS very well](quickstart-javascript.md). Think of what project you'd usually make if it was pure JavaScript; try porting/writing that in Reason + BuckleScript instead! We recommend trying to make concrete, end-user projects (e.g. a little command line util) rather than infra-level projects (e.g. a boilerplate generator). The latter category requires expertise and understanding idiomatic Reason code.
+Think of what project you'd usually make if it was pure JavaScript; try porting/writing that in Reason + BuckleScript instead! We recommend trying to make concrete, end-user projects (e.g. a little command line util) rather than infra-level projects (e.g. a boilerplate generator). The latter category requires expertise and understanding idiomatic Reason code.
 
 ### What's the relation between Reason, BuckleScript and OCaml?
-See [here](quickstart-javascript.md). Reason's a syntax for OCaml and supports all its features. BuckleScript compiles OCaml/Reason code into JavaScript.
+Reason's a syntax for OCaml and supports all its features. BuckleScript compiles OCaml/Reason code into JavaScript.
 
 ### Where do all these `print_endline`, `string_of_int` functions come from?
 They're from the standard library, pre-`open`ed during the compilation of your file. This is why you see them in scope.
@@ -50,7 +50,7 @@ For a more idiomatic OCaml solution: on the native OCaml side, we have [lwt](htt
 Some of OCaml's language features (not just types) might be able to defer the need for unit testing until later. In the meantime, for compilation to JS, we're working on [Jest wrapper](https://github.com/BuckleTypes/bs-jest). We'll look into using Jest for native too, if Jest is written using Reason in the future (no concrete plan yet). [OUnit](http://ounit.forge.ocamlcore.org) is a good, small native OCaml testing library right now.
 
 ### What's the `.merlin` file at the root of my project?
-That's the metadata file for [Merlin](extra-goodies.md#merlin), the shared editor integration backend for autocomplete, jump-to-definition, etc. For the [JavaScript Workflow](quickstart-javascript.md), `bsb` the build system generates the `.merlin` for you; You don't need to check that into your version control and don't have to manually modify it.
+That's the metadata file for [editor support](editor-plugins.md). This is usually generated for you; You don't need to check that into your version control and don't have to manually modify it.
 
 ### I don't see any `import` or `require` in my file; how does module resolution work?
 Reason/OCaml doesn't require you to write any import; modules being referred to in the file are automatically searched in the project. Specifically, a module `Hello` asks the compiler to look for the file `hello.re` or `hello.ml` (and their corresponding [interface file](module.md#signatures), `hello.rei` or `hello.mli`, if available).

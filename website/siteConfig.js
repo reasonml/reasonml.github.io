@@ -155,7 +155,7 @@ const siteConfig = {
   projectName: "reasonml.github.io",
   wrapPagesHTML: true,
   headerLinks: [
-    { doc: "quickstart-javascript", label: "Docs" },
+    { doc: "what-and-why", label: "Docs" },
     { page: "try", label: "Try" },
     { href: "/api/index", label: "API" },
     { doc: "community", label: "Community" },

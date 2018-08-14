@@ -60,7 +60,7 @@
       default: 'en/users-of-reason.html',
     },
     'guide': {
-      default: 'docs/en/quickstart-javascript.html',
+      default: 'docs/en/installation.html',
     },
     'guide/what-and-why': {
       '#what-is-reason': 'docs/en/what-and-why.html#what-is-reason',
@@ -270,10 +270,10 @@
       default: 'docs/en/module.html',
     },
     'guide/javascript': {
-      default: 'docs/en/quickstart-javascript.html',
+      default: 'docs/en/installation.html',
     },
     'guide/javascript/quickstart': {
-      default: 'docs/en/quickstart-javascript.html',
+      default: 'docs/en/installation.html',
     },
     'guide/javascript/interop': {
       '#just-dumping-javascript-in-the-middle-of-your-reason-code': 'docs/en/interop.html#just-dumping-javascript-in-the-middle-of-your-reason-code',

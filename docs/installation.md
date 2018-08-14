@@ -26,11 +26,17 @@ To compile & run the project you just created:
 
 ```sh
 cd my-new-project
-npm run build
+yarn build # or npm run build, for npm
 node src/demo.bs.js
 ```
 
-And that's it! You've just built the project once and ran the JS output. Feel free to inspect the js output, add a few files in `my-new-project/src`, etc.
+That's it! We use BuckleScript to compile Reason to JavaScript, then we use NodeJS to run the JavaScript. Feel free to use the generated JS files in whichever way you'd like, as if they're hand-written by you.
+
+During development, instead of running `npm run build` each time to compile, run `npm run start` to start a watcher that recompiles automatically after file changes.
+
+By default, the `basic-reason` theme configures BuckleScript to output the generated JS files alongside the Reason files they were produced from. [There's a reason we do that](https://bucklescript.github.io/docs/en/build-overview#tips-tricks). If you prefer to keep the generated files somewhere else, edit `bsconfig.json` to set `in-source` to `false`; the JS files will then be output to the `lib/js` directory instead.
+
+Alternatively, **to start a [ReasonReact](https://reasonml.github.io/reason-react/docs/en/installation.html) app**, follow the instructions [here](https://reasonml.github.io/reason-react/docs/en/installation).
 
 ## Existing Project
 
@@ -41,3 +47,5 @@ yarn add --dev bs-platform
 ```
 
 (or `npm install --save-dev bs-platform` for npm).
+
+The rest is the same as above.
