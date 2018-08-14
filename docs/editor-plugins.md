@@ -11,7 +11,7 @@ Reason's nature lends itself to great editor support. Most of our editor plugins
 - Type-driven autocomplete.
 - Jump to definition.
 
-And other features. See, for example, our VSCode plugin's [feature section](https://github.com/reasonml-editor/vscode-reasonml#features)!
+And other features.
 
 ## Officially Supported Editors
 
