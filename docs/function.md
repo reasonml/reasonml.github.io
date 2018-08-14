@@ -63,7 +63,7 @@ let addCoordinates = (x, y) => {
 addCoordinates(5, 6); /* which is x, which is y? */
 ```
 
-In OCaml/Reason, you can attach labels to an argument:
+In OCaml/Reason, you can attach labels to an argument by prefixing the name with the `~` symbol:
 
 ```reason
 let addCoordinates = (~x, ~y) => {
