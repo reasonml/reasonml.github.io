@@ -2,8 +2,8 @@
 title: Native
 ---
 
-We currently use the default OCaml workflow to compile to native, although [there's work underway](https://github.com/bsansouci/bsb-native) to bring native compilation support to the BuckleScript builder.
+[Bsb-native](https://github.com/bsansouci/bsb-native) is like our JS-side build tool, but that compiles to native code instead.
 
-For native package management, we're testing [Esy](https://esy.sh).
+For a dedicated native packager, we're testing [Esy](https://esy.sh).
 
 > **Note**: Esy doesn't currently work on windows yet; we're working on it.
