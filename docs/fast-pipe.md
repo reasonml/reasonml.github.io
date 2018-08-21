@@ -21,7 +21,19 @@ person
 
 Basically, `parseData(person)` is transformed into `person->parseData`, and `getAge(person->parseData)` is transformed into `person->parseData->getAge`, etc.
 
-**This works when the function takes more than one argument too**. `a(one, two, three)` becomes `one->a(two, three)`. This works with labeled arguments too.
+**This works when the function takes more than one argument too**. 
+
+```reason
+a(one, two, three)
+``` 
+
+is the same as
+
+```reason
+one->a(two, three)
+```
+
+This works with labeled arguments too.
 
 ### Tips & Tricks
 
