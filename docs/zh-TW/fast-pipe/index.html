@@ -44,7 +44,13 @@
 </span>  -<span class="ruby">&gt;validateAge
 </span></code></pre>
 <p>Basically, <code>parseData(person)</code> is transformed into <code>person-&gt;parseData</code>, and <code>getAge(person-&gt;parseData)</code> is transformed into <code>person-&gt;parseData-&gt;getAge</code>, etc.</p>
-<p><strong>This works when the function takes more than one argument too</strong>. <code>a(one, two, three)</code> becomes <code>one-&gt;a(two, three)</code>. This works with labeled arguments too.</p>
+<p><strong>This works when the function takes more than one argument too</strong>.</p>
+<pre><code class="hljs css languages- reason"><span class="hljs-keyword">a</span>(<span class="hljs-literal">one</span>, <span class="hljs-literal">two</span>, <span class="hljs-literal">three</span>)
+</code></pre>
+<p>is the same as</p>
+<pre><code class="hljs css languages- reason"><span class="hljs-literal">one</span>-&gt;<span class="hljs-keyword">a</span>(<span class="hljs-literal">two</span>, <span class="hljs-literal">three</span>)
+</code></pre>
+<p>This works with labeled arguments too.</p>
 <h3><a class="anchor" aria-hidden="true" id="tips-tricks"></a><a href="#tips-tricks" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Tips &amp; Tricks</h3>
 <p>Try not to abuse pipes; they're a mean to an end. Newcomers sometimes shape a library's API to take advantage of the pipe. This is rather backward.</p>
 <p>Conventionally, we don't turn the innermost layer of function call into a pipe. So the above example would usually be written as:</p>
