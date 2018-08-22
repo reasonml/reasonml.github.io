@@ -118,6 +118,11 @@ const users = [
     caption: "Tail Recursive",
     image: "img/logos/tailrecursive.svg",
     infoLink: "https://www.tailrecursive.co",
+  },
+  {
+    caption: "Gangverk",
+    image: "img/logos/gangverk.svg",
+    infoLink: "http://gangverk.is",
   }
 ];
 
