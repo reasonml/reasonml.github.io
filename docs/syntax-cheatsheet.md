@@ -149,6 +149,13 @@ Both JavaScript and Reason support currying, but Reason currying is **built-in a
 | `for (let i = 10; i >= 0; i--) {...}` | `for (i in 10 downto 0) {...}` |
 | `while (true) {...}`                  | Same                           |
 
+## forEach / map
+
+| JavaScript                               | Reason                                    |
+|------------------------------------------|-------------------------------------------|
+|`[1,2,3].forEach(i => { console.log(i) })`|`Array.iter(i => { Js.log(i) }, [|1,2,3|])`|
+|`[1,2,3].map(i => { return i + 1 })`      |`Array.map(i => i + 1, [|1,2,3|])`         |
+
 ## JSX
 
 | JavaScript                             | Reason                   |
