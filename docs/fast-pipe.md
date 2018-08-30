@@ -103,3 +103,35 @@ We turn this into:
 ```reason
 let result = Some(preprocess(name))
 ```
+
+## Pipe Placeholders
+
+A placeholder is written as an underscore and it tells Reason that you want to fill in an argument of a function later. These two have equivalent meaning:
+
+```reason
+let addTo7 = (x) => add3(3, x, 4);
+let addTo7 = add3(3, _, 4);
+```
+
+Sometimes you don't want to pipe the value you have into the first position. In these cases you can mark a placeholder value to show which argument you would like to pipe into.
+
+Let's say you have a function `namePerson`, which takes a `person` then a `name` argument. If you are transforming a person then pipe will work as-is:
+
+```reason
+makePerson(~age=47, ())
+  ->namePerson("Jane");
+```
+
+If you have a name that you want to apply to a person object, you can use a placeholder:
+
+```reason
+getName(input)
+  ->namePerson(personDetails, _);
+```
+
+This allows you to pipe into any positional argument. It also works for named arguments:
+
+```reason
+getName(input)
+  ->namePerson(~person=personDetails, ~name=_);
+```
