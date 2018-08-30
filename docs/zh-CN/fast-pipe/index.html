@@ -93,7 +93,25 @@ asyncRequest<span class="hljs-function"><span class="hljs-params">()</span>-&gt;
 <p>We turn this into:</p>
 <pre><code class="hljs css languages- reason">let result = Some(<span class="hljs-name">preprocess</span>(<span class="hljs-name">name</span>))
 </code></pre>
-</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/zh-CN/if-else">← If-Else</a><a class="docs-next button" href="/docs/zh-CN/more-on-type">深入 Type →</a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#js-method-chaining">JS Method Chaining</a></li><li><a href="#pipe-into-variants">Pipe Into Variants</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.min.js"></script><script>window.foo = new Pjax({
+<h2><a class="anchor" aria-hidden="true" id="pipe-placeholders"></a><a href="#pipe-placeholders" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Pipe Placeholders</h2>
+<p>A placeholder is written as an underscore and it tells Reason that you want to fill in an argument of a function later. These two have equivalent meaning:</p>
+<pre><code class="hljs css languages- reason">let <span class="hljs-keyword">addTo7 </span>= (x) =&gt; <span class="hljs-keyword">add3(3, </span>x, <span class="hljs-number">4</span>)<span class="hljs-comment">;</span>
+let <span class="hljs-keyword">addTo7 </span>= <span class="hljs-keyword">add3(3, </span>_, <span class="hljs-number">4</span>)<span class="hljs-comment">;</span>
+</code></pre>
+<p>Sometimes you don't want to pipe the value you have into the first position. In these cases you can mark a placeholder value to show which argument you would like to pipe into.</p>
+<p>Let's say you have a function <code>namePerson</code>, which takes a <code>person</code> then a <code>name</code> argument. If you are transforming a person then pipe will work as-is:</p>
+<pre><code class="hljs css languages- reason">makePerson<span class="hljs-function"><span class="hljs-params">(~age=<span class="hljs-number">47</span>, ())</span>
+  -&gt;</span>namePerson(<span class="hljs-string">"Jane"</span>);
+</code></pre>
+<p>If you have a name that you want to apply to a person object, you can use a placeholder:</p>
+<pre><code class="hljs css languages- reason">getName(<span class="hljs-name">input</span>)
+  -&gt;namePerson(<span class="hljs-name">personDetails</span>, _)<span class="hljs-comment">;</span>
+</code></pre>
+<p>This allows you to pipe into any positional argument. It also works for named arguments:</p>
+<pre><code class="hljs css languages- reason">getName(input)
+  -&gt;namePerson(~<span class="hljs-attribute">person</span>=personDetails, ~<span class="hljs-attribute">name</span>=_);
+</code></pre>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/zh-CN/if-else">← If-Else</a><a class="docs-next button" href="/docs/zh-CN/more-on-type">深入 Type →</a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#js-method-chaining">JS Method Chaining</a></li><li><a href="#pipe-into-variants">Pipe Into Variants</a></li><li><a href="#pipe-placeholders">Pipe Placeholders</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.min.js"></script><script>window.foo = new Pjax({
           areas: [
             // try to use the first query.
             '.mainContainer, .docsNavContainer .toc .navWrapper, .onPageNav',
