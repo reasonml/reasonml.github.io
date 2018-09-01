@@ -27,7 +27,7 @@ To compile & run the project you just created:
 ```sh
 cd my-new-project
 yarn build # or npm run build, for npm
-node src/demo.bs.js
+node src/Demo.bs.js
 ```
 
 That's it! We use BuckleScript to compile Reason to JavaScript, then we use NodeJS to run the JavaScript. Feel free to use the generated JS files in whichever way you'd like, as if they're hand-written by you.
