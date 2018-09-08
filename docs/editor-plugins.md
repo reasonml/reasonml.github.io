@@ -16,7 +16,7 @@ And other features.
 ## Officially Supported Editors
 
 - [VSCode](https://github.com/jaredly/reason-language-server): **recommended**.
-- [Atom](https://github.com/zaaack/atom-ide-reason)
+- [Atom](https://github.com/reasonml-editor/atom-ide-reason)
 - [Vim/Neovim](https://github.com/reasonml-editor/vim-reason-plus)
 - [Sublime Text](https://github.com/reasonml-editor/sublime-reason)
 - [IDEA](https://github.com/reasonml-editor/reasonml-idea-plugin)
