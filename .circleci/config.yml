@@ -17,11 +17,14 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Deploying to GitHub Pages
+          name: Configure GitHub Bot
           command: |
             git config --global user.email "rickyvetter@users.noreply.github.com"
             git config --global user.name "Temporary Ricky Bot"
             echo "machine github.com login rickyvetter password $GITHUB_TOKEN" > ~/.netrc
+      - run:
+          name: Sync Translations
+          command: |
             # install Docusaurus and generate file of English strings
             cd website && sudo yarn install && yarn run write-translations && cd ..
             # crowdin install
@@ -34,7 +37,9 @@ jobs:
             export CROWDIN_DOCUSAURUS_API_KEY=$REASON_CROWDIN_API_KEY
             crowdin --config crowdin.yaml upload sources --auto-update -b master
             crowdin --config crowdin.yaml download -b master
-            # build and publish website
+      - run:
+          name: Deploying to GitHub Pages
+          command: |
             cd website && GIT_USER=rickyvetter sudo yarn run docusaurus-publish
 
 workflows:
