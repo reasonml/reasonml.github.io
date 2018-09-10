@@ -30,8 +30,10 @@ jobs:
             wget https://artifacts.crowdin.com/repo/deb/crowdin.deb -O crowdin.deb
             sudo dpkg -i crowdin.deb
             # translations upload/download
-            yarn crowdin-upload
-            yarn crowdin-download
+            export CROWDIN_DOCUSAURUS_PROJECT_ID="reason"
+            export CROWDIN_DOCUSAURUS_API_KEY=$REASON_CROWDIN_API_KEY
+            crowdin --config crowdin.yaml upload sources --auto-update -b master
+            crowdin --config crowdin.yaml download -b master
             # build and publish website
             cd website && GIT_USER=rickyvetter sudo yarn run docusaurus-publish
 
