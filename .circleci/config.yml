@@ -25,6 +25,7 @@ jobs:
             # install Docusaurus and generate file of English strings
             cd website && sudo yarn install && yarn run write-translations && cd ..
             # crowdin install
+            sudo apt-get update
             sudo apt-get install default-jre
             wget https://artifacts.crowdin.com/repo/deb/crowdin.deb -O crowdin.deb
             sudo dpkg -i crowdin.deb
