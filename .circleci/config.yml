@@ -19,8 +19,8 @@ jobs:
       - run:
           name: Configure GitHub Bot
           command: |
-            git config user.email "rickyvetter@users.noreply.github.com"
-            git config user.name "Temporary Ricky Bot"
+            git config --global user.email "rickyvetter@users.noreply.github.com"
+            git config --global user.name "Temporary Ricky Bot"
             echo "machine github.com login rickyvetter password $GITHUB_TOKEN" > ~/.netrc
       - run:
           name: Sync Translations
@@ -40,7 +40,7 @@ jobs:
       - run:
           name: Deploying to GitHub Pages
           command: |
-            cd website && GIT_USER=rickyvetter sudo yarn run docusaurus-publish
+            cd website && GIT_USER=rickyvetter USE_SSH=true sudo yarn run docusaurus-publish
 
 workflows:
   version: 2
