@@ -40,7 +40,10 @@ jobs:
       - run:
           name: Deploying to GitHub Pages
           command: |
-            cd website && GIT_USER=rickyvetter USE_SSH=true sudo yarn run docusaurus-publish
+            cd website
+            export GIT_USER=rickyvetter
+            export USE_SSH=true
+            sudo yarn run docusaurus-publish
 
 workflows:
   version: 2
