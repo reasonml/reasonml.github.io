@@ -43,9 +43,11 @@ jobs:
       - run:
           name: Deploying to GitHub Pages
           command: |
-            export GIT_USER=chenglou
-            export USE_SSH=false
-            sudo yarn run docusaurus-publish
+            cd website
+            git config --global user.email "chenglou@users.noreply.github.com"
+            git config --global user.name "Chenglou"
+            echo "machine github.com login chenglou password $GITHUB_TOKEN" > ~/.netrc
+            GIT_USER=chenglou yarn run docusaurus-publish
 
 workflows:
   version: 2
