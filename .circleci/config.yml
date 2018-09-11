@@ -19,8 +19,8 @@ jobs:
       - run:
           name: Configure GitHub Bot
           command: |
-            git config --global user.email "rickyvetter@users.noreply.github.com"
-            git config --global user.name "Temporary Ricky Bot"
+            git config user.email "rickyvetter@users.noreply.github.com"
+            git config user.name "Temporary Ricky Bot"
             echo "machine github.com login rickyvetter password $GITHUB_TOKEN" > ~/.netrc
       - run:
           name: Sync Translations
@@ -29,7 +29,7 @@ jobs:
             cd website && sudo yarn install && yarn run write-translations && cd ..
             # crowdin install
             sudo apt-get update
-            sudo apt-get install default-jre git
+            sudo apt-get install default-jre
             wget https://artifacts.crowdin.com/repo/deb/crowdin.deb -O crowdin.deb
             sudo dpkg -i crowdin.deb
             # translations upload/download
