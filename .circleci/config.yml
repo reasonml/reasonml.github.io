@@ -49,13 +49,10 @@ jobs:
             git config --global user.name "Website Deployment Script"
             echo "machine github.com login docusaurus-bot password $GITHUB_TOKEN" > ~/.netrc
       - run:
-          name: Deploy Website
-          # Skip the deploy if we don't have the right org (facebook), or if this is just a pull request
+          name: Sync Translations
           command: |
             cd website
-            echo "Deploying website..."
-            # install Docusaurus and generate file of English strings
-            yarn && cd website && yarn run write-translations
+            yarn && yarn run write-translations
             # install Crowdin
             sudo apt-get update
             sudo apt-get install default-jre rsync
@@ -65,7 +62,9 @@ jobs:
             # upload translation strings and download translations
             yarn run crowdin-upload
             yarn run crowdin-download
-            # publish
+      - run:
+          name: Deploy Website
+          command: |
             GIT_USER=docusaurus-bot USE_SSH=false yarn run docusaurus-publish
 # Workflows enables us to run multiple jobs in parallel
 workflows:
