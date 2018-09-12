@@ -40,21 +40,22 @@ jobs:
             git config --global user.name "Website Deployment Script"
             echo "machine github.com login chenglou password $GITHUB_TOKEN" > ~/.netrc
       - run:
-          name: Sync Translations
+          name: Deploying to GitHub Pages
           command: |
-            # install Docusaurus and generate file of English strings
-            cd website && sudo yarn install && yarn run write-translations && cd ..
-            # crowdin install
+            cd website
+            yarn && yarn run docusaurus-write-translations
+            # install Crowdin
             sudo apt-get update
             sudo apt-get install default-jre
             wget https://artifacts.crowdin.com/repo/deb/crowdin.deb -O crowdin.deb
             sudo dpkg -i crowdin.deb
-            # translations upload/download
+            sleep 5
+            # upload translation strings and download translations
             export CROWDIN_DOCUSAURUS_PROJECT_ID="reason"
             export CROWDIN_DOCUSAURUS_API_KEY=$REASON_CROWDIN_API_KEY
-            crowdin --config crowdin.yaml upload sources --auto-update -b master
-            crowdin --config crowdin.yaml download -b master
-            GIT_USER=chenglou yarn run docusaurus-publish
+            crowdin --config ../crowdin.yaml upload sources --auto-update -b master
+            crowdin --config ../crowdin.yaml download -b master
+            GIT_USER=chenglou USE_SSH=false yarn run docusaurus-publish
 # Workflows enables us to run multiple jobs in parallel
 workflows:
   version: 2
