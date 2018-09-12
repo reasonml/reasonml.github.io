@@ -6,4 +6,4 @@ title: Native
 
 For a dedicated native packager, we're testing [Esy](https://esy.sh).
 
-> **Note**: Esy doesn't currently work on windows yet; we're working on it.
+> **Note**: Esy doesn't currently work on windows.
