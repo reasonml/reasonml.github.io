@@ -10,7 +10,7 @@ jobs:
     steps:
       - run:
           name: Ignore everything
-          command: echo "hi"
+          command: exit 0
 
 workflows:
   version: 2
@@ -20,4 +20,4 @@ workflows:
       - dummy:
           filters:
             branches:
-              only: master
+              ignore: master
