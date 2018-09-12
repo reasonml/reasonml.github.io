@@ -43,7 +43,7 @@ jobs:
           name: Deploying to GitHub Pages
           command: |
             cd website
-            yarn && yarn run write-translations
+            yarn && yarn run docusaurus-write-translations
             # install Crowdin
             sudo apt-get update
             sudo apt-get install default-jre
@@ -51,8 +51,10 @@ jobs:
             sudo dpkg -i crowdin.deb
             sleep 5
             # upload translation strings and download translations
-            yarn run crowdin-upload
-            yarn run crowdin-download
+            export CROWDIN_DOCUSAURUS_PROJECT_ID="reason"
+            export CROWDIN_DOCUSAURUS_API_KEY=$REASON_CROWDIN_API_KEY
+            crowdin --config ../crowdin.yaml upload sources --auto-update -b master
+            crowdin --config ../crowdin.yaml download -b master
             GIT_USER=docusaurus-bot USE_SSH=false yarn run docusaurus-publish
 # Workflows enables us to run multiple jobs in parallel
 workflows:
