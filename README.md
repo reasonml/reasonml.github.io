@@ -27,7 +27,7 @@ The entire site can be translated via the [Crowdin project](https://crowdin.com/
 
 ## Building and Deploying
 
-Changes from `source` branch are automatically picked into `master` branch by CI, then published. Translation download/uploads are still manual right now (needs API key, which @rickyvetter and @chenglou have).
+Changes from `source` branch are automatically picked into `master` branch by CI, then published.
 
 # Build the Playground
 
