@@ -16,10 +16,6 @@ aliases:
       only:
         - source
 
-  - &filter-ignore-gh-pages
-    branches:
-      ignore: gh-pages
-
   - &yarn
     |
       yarn install --non-interactive --cache-folder ~/.cache/yarn
@@ -51,13 +47,16 @@ jobs:
             yarn && yarn run write-translations
             # install Crowdin
             sudo apt-get update
-            sudo apt-get install default-jre rsync
+            sudo apt-get install default-jre
             wget https://artifacts.crowdin.com/repo/deb/crowdin.deb -O crowdin.deb
             sudo dpkg -i crowdin.deb
             sleep 5
             # upload translation strings and download translations
             yarn run crowdin-upload
             yarn run crowdin-download
+      - run:
+          name: Deploying to GitHub Pages
+          command: |
             GIT_USER=docusaurus-bot USE_SSH=false yarn run docusaurus-publish
 # Workflows enables us to run multiple jobs in parallel
 workflows:
