@@ -4,7 +4,7 @@ title: External
 
 `external`, or "FFI" (foreign function interface), or simply "interop" (for "interoperability") is how Reason communicates with other languages, like C or JavaScript.
 
-Imagine writing a let binding, but with its body omitted and its type mandatorily written down:
+Imagine writing a let binding, but with its body omitted and its (mandatory) type written down:
 
 ```reason
 external myCFunction : int => string = "theCFunction";
