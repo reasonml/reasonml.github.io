@@ -48,29 +48,46 @@ let message = MyModule.NestedModule.message;
 
 ### `open`ing a module
 
-Constantly referring to a value/type in a module can be tedious. We can open a
-module's definition and refer to its contents without prepending them with the
-module's name. Two ways:
-
-Local open.
+Constantly referring to a value/type in a module can be tedious. Instead, we can "open" a module and refer to its contents without always prepending them with the
+module's name. Instead of writing:
 
 ```reason
-let message =
-  School.(
-    switch (person1) {
-    | Teacher => "Hello teacher!"
-    | Director => "Hello director!"
-    }
-  );
+let p: School.profession = School.getProfession(School.person1);
 ```
 
-Global open. **Use this sparingly as it allows convenience at the cost of ease
-of reasoning**:
+We can write:
 
 ```reason
 open School;
-let anotherPerson: profession = Teacher;
-printProfession(anotherPerson);
+let p: profession = getProfession(person1);
+```
+
+The content of `School` module are made visible (**not** copied into the file, but simply made visible!) in scope. `profession`, `getProfession` and `person1` will thus correctly be found.
+
+**Use `open` this sparingly, it's convenient, but makes it hard to know where some values come from**. You should usually use `open` in a local scope:
+
+```reason
+let p = {
+  open School;
+  getProfession(person1);
+};
+/* School's content isn't visible here anymore */
+```
+
+For an `open` followed by a single expression, we have a dedicated syntax sugar:
+
+```reason
+let p = School.(getProfession(person1));
+```
+
+Anything else needs to be written in the first way:
+
+```reason
+let p = {
+  open School;
+  print_endline("hello!");
+  getProfession(person1);
+};
 ```
 
 ### Extending modules
