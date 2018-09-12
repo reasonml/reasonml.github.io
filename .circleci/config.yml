@@ -24,18 +24,14 @@ aliases:
     |
       yarn install --non-interactive --cache-folder ~/.cache/yarn
 
-defaults: &defaults
-  working_directory: ~/docusaurus
-  docker:
-    - image: circleci/node:8
-  resource_class: large
-
 version: 2
 jobs:
   # The CIRCLE_ variables are defined during the CircleCI build process
   # https://circleci.com/docs/1.0/environment-variables/
   deploy-website:
-    <<: *defaults
+    docker:
+      - image: circleci/node:8
+
     steps:
       - checkout
       - restore-cache: *restore-yarn-cache
