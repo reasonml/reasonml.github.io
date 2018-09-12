@@ -66,82 +66,92 @@
 <span class="hljs-keyword">let</span> <span class="hljs-attr">message</span> = MyModule.NestedModule.message;
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="open-模組"></a><a href="#open-模組" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>open</code> 模組</h3>
-<p>不斷地提及特定模組的值/型別可能會冗長且乏味。我們可以開啟模組定義，提及其內容就不需要前面加上模組名稱。兩個方式：</p>
-<p>區域開啟。</p>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> message =
-  School.(
-    <span class="hljs-keyword">switch</span> (person1) {
-    | <span class="hljs-function"><span class="hljs-params">Teacher</span> =&gt;</span> <span class="hljs-string">"哈嘍老師！"</span>
-    | <span class="hljs-function"><span class="hljs-params">Director</span> =&gt;</span> <span class="hljs-string">"哈嘍校長！"</span>
-    }
-  );
+<p>Constantly referring to a value/type in a module can be tedious. Instead, we can &quot;open&quot; a module and refer to its contents without always prepending them with the module's name. Instead of writing:</p>
+<pre><code class="hljs css language-reason">let p: <span class="hljs-keyword">School.profession </span>= <span class="hljs-keyword">School.getProfession(School.person1);
+</span></code></pre>
+<p>We can write:</p>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">open</span> School;
+<span class="hljs-keyword">let</span> p: profession = getProfession(person1);
 </code></pre>
-<p>全域開放。<strong>謹慎使用，方便但帶來額外代價</strong>：</p>
-<pre><code class="hljs css language-reason">open <span class="hljs-keyword">School;
-</span>let anotherPerson: profession = Teacher<span class="hljs-comment">;</span>
-printProfession(anotherPerson)<span class="hljs-comment">;</span>
+<p>The content of <code>School</code> module are made visible (<strong>not</strong> copied into the file, but simply made visible!) in scope. <code>profession</code>, <code>getProfession</code> and <code>person1</code> will thus correctly be found.</p>
+<p><strong>Use <code>open</code> this sparingly, it's convenient, but makes it hard to know where some values come from</strong>. You should usually use <code>open</code> in a local scope:</p>
+<pre><code class="hljs css language-reason">let p = {
+  open <span class="hljs-keyword">School;
+</span>  getProfession(person1)<span class="hljs-comment">;</span>
+}<span class="hljs-comment">;</span>
+<span class="hljs-comment">/* School's content isn't visible here anymore */</span>
+</code></pre>
+<p>For an <code>open</code> followed by a single expression, we have a dedicated syntax sugar:</p>
+<pre><code class="hljs css language-reason"><span class="hljs-attribute">let p</span> = School.(getProfession(person1));
+</code></pre>
+<p>Anything else needs to be written in the first way:</p>
+<pre><code class="hljs css language-reason">let p = {
+  open School<span class="hljs-comment">;</span>
+  print_endline(<span class="hljs-string">"hello!"</span>)<span class="hljs-comment">;</span>
+  getProfession(person1)<span class="hljs-comment">;</span>
+}<span class="hljs-comment">;</span>
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="擴展模組"></a><a href="#擴展模組" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>擴展模組</h3>
-<p>模組內使用 <code>include</code> 靜態地&quot;展開&quot;模組內容成為新的一個，因此經常滿足&quot;繼承&quot;或&quot;mixin&quot; 的角色。</p>
+<p>Using <code>include</code> in a module statically &quot;spreads&quot; a module's content into a new one, thus often fulfill the role of &quot;inheritance&quot; or &quot;mixin&quot;.</p>
 <pre><code class="hljs css language-reason"><span class="hljs-keyword">module</span> BaseComponent = {
   <span class="hljs-keyword">let</span> defaultGreeting = <span class="hljs-string">"Hello"</span>;
   <span class="hljs-keyword">let</span> getAudience = <span class="hljs-function">(<span class="hljs-params">~excited</span>) =&gt;</span> excited ? <span class="hljs-string">"world!"</span> : <span class="hljs-string">"world"</span>;
 };
 
 <span class="hljs-keyword">module</span> ActualComponent = {
-  <span class="hljs-comment">/* 複製所有內容 */</span>
+  <span class="hljs-comment">/* the content is copied over */</span>
   include BaseComponent;
-  <span class="hljs-comment">/* 重載 BaseComponent.defaultGreeting */</span>
-  <span class="hljs-keyword">let</span> defaultGreeting = <span class="hljs-string">"嘿"</span>;
+  <span class="hljs-comment">/* overrides BaseComponent.defaultGreeting */</span>
+  <span class="hljs-keyword">let</span> defaultGreeting = <span class="hljs-string">"Hey"</span>;
   <span class="hljs-keyword">let</span> render = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> defaultGreeting ++ <span class="hljs-string">" "</span> ++ getAudience(~excited=<span class="hljs-literal">true</span>);
 };
 </code></pre>
-<p><strong>注意</strong>：<code>open</code> 和 <code>include</code> 非常不同！ 前者將模組內容帶入目前範疇，因此不需要每次前面加上模組名稱來提及該模組值。 後者靜態地<strong>拷貝所有</strong>模組定義，接著 <code>open</code> 模組。</p>
+<p><strong>Note</strong>: <code>open</code> and <code>include</code> are very different! The former brings a module's content into your current scope, so that you don't have to refer to a value by prefixing it with the module's name every time. The latter <strong>copies over</strong> the definition of a module statically, then also do an <code>open</code>.</p>
 <h3><a class="anchor" aria-hidden="true" id="每個-re-檔案都是個模組"></a><a href="#每個-re-檔案都是個模組" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>每個 <code>.re</code> 檔案都是個模組</h3>
-<p>一個 OCaml/Reason 檔案對應到一個模組；解開某些有趣的表達性，其他語言必須先要求產生程式碼。 檔案 <code>React.re</code> 隱喻地形成一個 <code>React</code> 模組，可以給其他檔案使用。</p>
-<pre><code class="hljs css language-reason"><span class="hljs-comment">/* FileA.re。典型地編譯成下列 FileA 模組 */</span>
+<p>An OCaml/Reason file maps to a module; this unlocks some interesting expressivity that'd previously require code generation in other languages. The file <code>React.re</code> implicitly forms a module <code>React</code>, which can be seen by other source files.</p>
+<pre><code class="hljs css language-reason"><span class="hljs-comment">/* FileA.re. This typically compiles to module FileA below */</span>
 <span class="hljs-keyword">let</span> <span class="hljs-attr">a</span> = <span class="hljs-number">1</span>;
 <span class="hljs-keyword">let</span> <span class="hljs-attr">b</span> = <span class="hljs-number">2</span>;
 
 <span class="hljs-comment">/* FileB.re */</span>
-<span class="hljs-comment">/* 對應 FileA 的實作到新的 API */</span>
+<span class="hljs-comment">/* Maps FileA's implementation to a new API */</span>
 <span class="hljs-keyword">let</span> <span class="hljs-attr">alpha</span> = FileA.a;
 <span class="hljs-keyword">let</span> <span class="hljs-attr">beta</span> = FileA.b;
 </code></pre>
-<p>這個假的片段表達&quot;複製&quot;檔案：</p>
-<pre><code class="hljs css language-reason"><span class="hljs-comment">/* FileA.re。典型地編譯成下列 FileA 模組 */</span>
+<p>This contrived snippet expresses &quot;copying&quot; a file:</p>
+<pre><code class="hljs css language-reason"><span class="hljs-comment">/* FileA.re. This typically compiles to module FileA below */</span>
 let a = <span class="hljs-number">1</span><span class="hljs-comment">;</span>
 let <span class="hljs-keyword">b </span>= <span class="hljs-number">2</span><span class="hljs-comment">;</span>
 
 <span class="hljs-comment">/* FileB.re */</span>
-<span class="hljs-comment">/* 編譯成跟 fileA.re 一樣的內容，沒有執行期的開銷！ */</span>
+<span class="hljs-comment">/* compiles to exactly fileA.re's content with no runtime overhead! */</span>
 include FileA<span class="hljs-comment">;</span>
 </code></pre>
-<p><strong>注意</strong>：由於檔案也是模組，習慣上檔案名稱會是第一個字母大寫，以符合其模組名稱。 第一個字母非大寫的檔案名稱是合法的，但會轉變成第一個字母大寫的模組名稱。 例如，<code>file.re</code> 編譯成 <code>File</code> 模組。 為了簡易且簡化這個分化，所以慣例上也會是第一個字母大寫。</p>
+<p><strong>Note</strong>: Because files are modules, file names should, by convention, be capitalized so they match their module names. Uncapitalized file names are not invalid, but will be transformed into a capitalized module name. I.e. <code>file.re</code> will be compiled into the module <code>File</code>. To simplify and minimize the disconnect here, the convention is therefore to capitalize file names too.</p>
 <h2><a class="anchor" aria-hidden="true" id="標記式"></a><a href="#標記式" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>標記式</h2>
-<p>模組型別稱之為&quot;標記式（signature）&quot;，可以明確地寫出來。 如果是 <code>.re</code> （實作）的模組，則標記式則是 <code>.rei</code> （界面）檔。</p>
+<p>A module's type is called a &quot;signature&quot;, and can be written explicitly. If a module is like a <code>.re</code> (implementation) file, then a module's signature is like a <code>.rei</code> (interface) file.</p>
 <h3><a class="anchor" aria-hidden="true" id="新增-1"></a><a href="#新增-1" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>新增</h3>
-<p>使用 <code>module type</code> 關鍵字來新增標記式。 標記式名稱必須是<strong>大寫字母</strong>開頭。 任何可以放在 <code>.rei</code> 檔案裡面的東西，可以放在標記式定義的 <code>{}</code> 區塊裡。</p>
-<pre><code class="hljs css language-reason"><span class="hljs-comment">/* 取用上個章節範例 */</span>
+<p>To create a signature, use the <code>module type</code> keyword. The signature name must start with a <strong>capital letter</strong>. Whatever you could place in a <code>.rei</code> file, you may place inside a signature definition's <code>{}</code> block.</p>
+<pre><code class="hljs css language-reason"><span class="hljs-comment">/* Picking up previous section's example */</span>
 <span class="hljs-keyword">module</span> type EstablishmentType = {
   <span class="hljs-keyword">type</span> profession;
   <span class="hljs-keyword">let</span> getProfession: <span class="hljs-function"><span class="hljs-params">profession</span> =&gt;</span> <span class="hljs-built_in">string</span>;
 };
 </code></pre>
-<p>標記式預定義需求清單，表示模組必須滿足，為了讓模組符合標記式。這些需求形式如下：</p>
+<p>A signature defines the list of requirements that a module must satisfy in order for that module to match the signature. Those requirements are of the form:</p>
 <ul>
 <li><code>let x: int;</code> 要求 <code>let</code> 繫結名稱必須是 <code>x</code>，型別是 <code>int</code>。</li>
 <li><code>type t = someType;</code> 要求型別欄位 <code>t</code> 必須與 <code>someType</code> 相同。</li>
 <li><code>type t;</code> 要求型別欄位 <code>t</code>，但並不強迫任何要求於 <code>t</code> 的實際、具體型別。 標記式內我們使用 <code>t</code> 於其他項目以描述關係，例如 <code>let makePair: t =&gt; (t, t)</code> 但我們不能，例如，假定 <code>t</code> 是個 <code>int</code>。 賦予我們強大，強迫的抽象能力。</li>
 </ul>
-<p>為了表明各種型別項目，考慮上述標記式 <code>EstablishmentType</code> 要求模組：</p>
+<p>To illustrate the various kinds of type entries, consider the above signature <code>EstablishmentType</code> which requires that a module:</p>
 <ul>
 <li>宣告一個名稱為 <code>profession</code> 的型別。</li>
 <li>必須包含一個函式，接受 <code>profession</code> 型別的值並傳回字串。</li>
 </ul>
-<p><strong>注意</strong>：</p>
-<p>模組的型別 <code>EstablishmentType</code> 可包含更多欄位，不在標記式宣告裡，就像前個章節的 <code>School</code> 模組（如果我們選擇指派 <code>EstablishmentType</code> 型別。 否則，<code>School</code> 暴露每一個欄位）。 這有力地強迫讓 <code>person1</code> 欄位實作細節！ 外部無法存取，由於並非出現於標記式；標記式<strong>限制</strong>其他人可以存取的東西。</p>
-<p><code>EstablishmentType.profession</code> 型別是<strong>抽象的</strong>：沒有具體型別；表示&quot;我不在意實際型別是什麼，但是是用來作為 <code>getProfession</code> 的輸入&quot;。 這個十分有用，讓許多模組滿足同個介面：</p>
+<p><strong>Note</strong>:</p>
+<p>Modules of the type <code>EstablishmentType</code> can contain more fields than the signature declares, just like the module <code>School</code> in the previous section (if we choose to assign it the type <code>EstablishmentType</code>. Otherwise, <code>School</code> exposes every field). This effectively makes the <code>person1</code> field an enforced implementation detail! Outsiders can't access it, since it's not present in the signature; the signature <strong>constrained</strong> what others can access.</p>
+<p>The type <code>EstablishmentType.profession</code> is <strong>abstract</strong>: it doesn't have a concrete type; it's saying &quot;I don't care what the actual type is, but it's used as input to <code>getProfession</code>&quot;. This is useful to fit many modules under the same interface:</p>
 <pre><code class="hljs css language-reason">module Company: EstablishmentType = {
  <span class="hljs-built_in"> type </span>profession = CEO | Designer | Engineer | <span class="hljs-built_in">..</span>.;
 
@@ -150,73 +160,73 @@ include FileA<span class="hljs-comment">;</span>
   let person2 = <span class="hljs-built_in">..</span>.;
 };
 </code></pre>
-<p>對於隱藏底部型別，作為其他人無法依賴的實作細節十分有用。 如果你問 <code>Company.profession</code> 型別是什麼，它會告訴你&quot;這是個 <code>Company.profession</code>&quot; 而不是暴露變異。</p>
+<p>It's also useful to hide the underlying type as an implementation detail others can't rely on. If you ask what the type of <code>Company.profession</code> is, instead of exposing the variant, it'll only tell you &quot;it's <code>Company.profession</code>&quot;.</p>
 <h3><a class="anchor" aria-hidden="true" id="擴展模組標記式"></a><a href="#擴展模組標記式" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>擴展模組標記式</h3>
-<p>就像模組本身，模組標記式也可以透過 <code>include module type of Foo</code> 來擴展：</p>
+<p>Like modules themselves, module signatures can also be extended through <code>include module type of Foo</code>:</p>
 <pre><code class="hljs css language-reason"><span class="hljs-keyword">module</span> <span class="hljs-keyword">type</span> <span class="hljs-type">BaseComponent</span> = {
   <span class="hljs-keyword">let</span> defaultGreeting: <span class="hljs-built_in">string</span>;
   <span class="hljs-keyword">let</span> getAudience: (~excited: <span class="hljs-built_in">bool</span>) =&gt; <span class="hljs-built_in">string</span>;
 };
 
 <span class="hljs-keyword">module</span> <span class="hljs-keyword">type</span> <span class="hljs-type">ActualComponent</span> = {
-  /* 複製所有標記式 */
+  /* the signature is copied over */
   <span class="hljs-keyword">include</span> (<span class="hljs-keyword">module</span> <span class="hljs-keyword">type</span> <span class="hljs-keyword">of</span> <span class="hljs-type">BaseComponent</span>);
   <span class="hljs-keyword">let</span> render: <span class="hljs-built_in">unit</span> =&gt; <span class="hljs-built_in">string</span>;
 };
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="每個-rei-檔案都是一個標記式"></a><a href="#每個-rei-檔案都是一個標記式" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>每個 <code>.rei</code> 檔案都是一個標記式</h3>
-<p>類似於 <code>React.re</code> 隱喻地定義 <code>React</code> 模組，<code>React.rei</code> 檔案隱喻地定義<code>React</code> 標記式。 如果沒有提供 <code>React.rei</code>，<code>React.re</code> 的標記式預設是暴露所有模組內欄位。 因為沒有包含實作檔案，<code>.rei</code> 在生態圈也用來作為相對應模組的文件，紀錄開放的 API。</p>
-<pre><code class="hljs css language-reason"><span class="hljs-comment">/* React.re 檔（實作，編譯成 React 模組） */</span>
-<span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">state</span></span> = int;
-<span class="hljs-keyword">let</span> render = (<span class="hljs-built_in">str</span>) =&gt; <span class="hljs-built_in">str</span>;
+<p>Similar to how a <code>React.re</code> file implicitly defines a module <code>React</code>, a file <code>React.rei</code> implicitly defines a signature for <code>React</code>. If <code>React.rei</code> isn't provided, the signature of <code>React.re</code> defaults to exposing all the fields of the module. Because they don't contain implementation files, <code>.rei</code> files are used in the ecosystem to also document the public API of their corresponding modules.</p>
+<pre><code class="hljs css language-reason">/* file <span class="hljs-type">React</span>.re (implementation. <span class="hljs-type">Compiles</span> <span class="hljs-keyword">to</span> <span class="hljs-keyword">module</span> <span class="hljs-type">React</span>) */
+<span class="hljs-keyword">type</span> state = <span class="hljs-built_in">int</span>;
+<span class="hljs-keyword">let</span> render = (str) =&gt; str;
 </code></pre>
-<pre><code class="hljs css language-reason"><span class="hljs-comment">/* React.rei 檔（介面。編譯成 React 模組的標記式）*/</span>
-<span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">state</span></span> = int;
-<span class="hljs-keyword">let</span> render: <span class="hljs-built_in">str</span> =&gt; <span class="hljs-built_in">str</span>;
+<pre><code class="hljs css language-reason">/* file <span class="hljs-type">React</span>.rei (interface. <span class="hljs-type">Compiles</span> <span class="hljs-keyword">to</span> signature <span class="hljs-keyword">of</span> <span class="hljs-keyword">module</span> <span class="hljs-type">React</span>) */
+<span class="hljs-keyword">type</span> state = <span class="hljs-built_in">int</span>;
+<span class="hljs-keyword">let</span> render: str =&gt; str;
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" id="模組函式-functors"></a><a href="#模組函式-functors" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>模組函式（functors）</h2>
-<p>模組可以傳遞給函式！ 相當於傳遞檔案作為頭等（first-class）項目。 然而，語言中模組與其他常見概念處於不同的&quot;層面&quot;，所以無法傳遞給<em>普通</em>函式。 作為替代，傳遞到特殊函式稱之為 &quot;functors&quot;。</p>
-<p>定義及使用 functors 的語法非常類似普通函式。主要差異有：</p>
+<p>Modules can be passed to functions! It would be the equivalent of passing a file as a first-class item. However, modules are at a different &quot;layer&quot; of the language than other common concepts, so we can't pass them to <em>regular</em> functions. Instead, we pass them to special functions called &quot;functors&quot;.</p>
+<p>The syntax for defining and using functors is very much like the syntax for defining and using regular functions. The primary differences are:</p>
 <ul>
 <li>Functors 使用 <code>module</code> 關鍵字而非 <code>let</code>。</li>
 <li>Functors 接受一個或多個模組作為參數並傳回一個模組。</li>
 <li>Functors <em>要求</em>註釋參數。</li>
 <li>Functors 必須大寫字母開頭（就像是模組/標記式）。</li>
 </ul>
-<p>下列為 <code>MakeSet</code> functor，接受 <code>Comparable</code> 型別的模組並傳回新的 set 可以包含如可比對項目。</p>
+<p>Here's an example <code>MakeSet</code> functor, that takes in a module of the type <code>Comparable</code> and returns a new set that can contain such comparable items.</p>
 <pre><code class="hljs css language-reason"><span class="hljs-keyword">module</span> type Comparable = {
   <span class="hljs-keyword">type</span> t;
   <span class="hljs-keyword">let</span> equal: <span class="hljs-function">(<span class="hljs-params">t, t</span>) =&gt;</span> bool;
 };
 
 <span class="hljs-keyword">module</span> MakeSet = (Item: Comparable) =&gt; {
-  <span class="hljs-comment">/* 使用 list 作為天真背後的資料結構 */</span>
+  <span class="hljs-comment">/* let's use a list as our naive backing data structure */</span>
   <span class="hljs-keyword">type</span> backingType = list(Item.t);
   <span class="hljs-keyword">let</span> empty = [];
   <span class="hljs-keyword">let</span> add = (currentSet: backingType, newItem: Item.t) : <span class="hljs-function"><span class="hljs-params">backingType</span> =&gt;</span>
-    <span class="hljs-comment">/* 如果項目存在 */</span>
+    <span class="hljs-comment">/* if item exists */</span>
     <span class="hljs-keyword">if</span> (List.exists(<span class="hljs-function">(<span class="hljs-params">x</span>) =&gt;</span> Item.equal(x, newItem), currentSet)) {
-      currentSet <span class="hljs-comment">/* 傳回同樣（immutable）set（其實是個 list） */</span>
+      currentSet <span class="hljs-comment">/* return the same (immutable) set (a list really) */</span>
     } <span class="hljs-keyword">else</span> {
       [
         newItem,
-        ...currentSet <span class="hljs-comment">/* 前面加入 set 並傳回 */</span>
+        ...currentSet <span class="hljs-comment">/* prepend to the set and return it */</span>
       ]
     };
 };
 </code></pre>
-<p>使用函式應用語法來套用 Functors 。這個例子，我們新增一個 set，每個項目是一對整數。</p>
+<p>Functors can be applied using function application syntax. In this case, we're creating a set, whose items are pairs of integers.</p>
 <pre><code class="hljs css language-reason"><span class="hljs-keyword">module</span> IntPair = {
   <span class="hljs-keyword">type</span> t = (int, int);
   <span class="hljs-keyword">let</span> equal = <span class="hljs-function">(<span class="hljs-params">(<span class="hljs-params">x1, y1</span>), (<span class="hljs-params">x2, y2</span>)</span>) =&gt;</span> x1 == x2 &amp;&amp; y1 == y2;
   <span class="hljs-keyword">let</span> create = <span class="hljs-function">(<span class="hljs-params">x, y</span>) =&gt;</span> (x, y);
 };
 
-<span class="hljs-comment">/* IntPair 遵守 Comparable 標記式，由 MakeSet 要求 */</span>
+<span class="hljs-comment">/* IntPair abides by the Comparable signature required by MakeSet */</span>
 <span class="hljs-keyword">module</span> SetOfIntPairs = MakeSet(IntPair);
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="模組函式型別"></a><a href="#模組函式型別" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>模組函式型別</h3>
-<p>像是模組型別，functor 型別也遵循限制並隱藏了有關 functors 的假設。 Functor 型別語法與那些函式型別一致，除了型別是使用大寫字幕開頭代表模組的標記式，functors 接收的參數及傳回值。 前述範例中，我們暴露後面的 set 型別；透過 <code>MakeSet</code> 的 functor 標記式，可以隱藏底層資料結構！</p>
+<p>Like with module types, functor types also act to constrain and hide what we may assume about functors. The syntax for functor types are consistent with those for function types, but with types capitalized to represent the signatures of modules the functor accepts as arguments and return values. In the previous example, we're exposing the backing type of a set; by giving <code>MakeSet</code> a functor signature, we can hide the underlying data structure!</p>
 <pre><code class="hljs css language-reason">module<span class="hljs-built_in"> type </span>Comparable = <span class="hljs-built_in">..</span>.
 
 module<span class="hljs-built_in"> type </span>MakeSetType = (Item: Comparable) =&gt; {
@@ -230,10 +240,10 @@ module MakeSet: MakeSetType = (Item: Comparable) =&gt; {
 };
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" id="缺點"></a><a href="#缺點" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>缺點</h2>
-<p>語言中，模組與 functors 與其他（函式、let 繫結、資料結構等）處於不同的&quot;層面&quot;。 例如，你無法輕易地將它們傳遞到 tuple 或 record。 明智地使用它們！ 許多時候，單純 record 或 function 便已足夠。</p>
+<p>Modules and functors are at a different &quot;layer&quot; of language than the rest ( functions, let bindings, data structures, etc.). For example, you can't easily pass them into a tuple or record. Use them judiciously! Lots of times, just a record or a function is enough.</p>
 <pre><code class="hljs css language-reason">module <span class="hljs-type">School</span> = <span class="hljs-meta">{...}</span>;
 
-/* 這會直接給你語法錯誤！ */
+/* this will straight up give you a syntax error! */
 <span class="hljs-keyword">let</span> schools = (<span class="hljs-type">School</span>, <span class="hljs-type">School</span>);
 </code></pre>
 </span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/zh-TW/object"><span class="arrow-prev">← </span><span>上一步</span></a><a class="docs-next button" href="/docs/zh-TW/promise"><span>下一步</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav docOnPageNav"><ul class="toc-headings"><li><a href="#基礎">基礎</a><ul class="toc-headings"><li><a href="#新增">新增</a></li><li><a href="#open-模組"><code>open</code> 模組</a></li><li><a href="#擴展模組">擴展模組</a></li><li><a href="#每個-re-檔案都是個模組">每個 <code>.re</code> 檔案都是個模組</a></li></ul></li><li><a href="#標記式">標記式</a><ul class="toc-headings"><li><a href="#新增-1">新增</a></li><li><a href="#擴展模組標記式">擴展模組標記式</a></li><li><a href="#每個-rei-檔案都是一個標記式">每個 <code>.rei</code> 檔案都是一個標記式</a></li></ul></li><li><a href="#模組函式-functors">模組函式（functors）</a><ul class="toc-headings"><li><a href="#模組函式型別">模組函式型別</a></li></ul></li><li><a href="#缺點">缺點</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.min.js"></script><script>window.foo = new Pjax({
