@@ -36,9 +36,9 @@ jobs:
       - run:
           name: Configure GitHub Bot
           command: |
-            git config --global user.email "docusaurus-bot@users.noreply.github.com"
+            git config --global user.email "chenglou@users.noreply.github.com"
             git config --global user.name "Website Deployment Script"
-            echo "machine github.com login docusaurus-bot password $GITHUB_TOKEN" > ~/.netrc
+            echo "machine github.com login chenglou password $GITHUB_TOKEN" > ~/.netrc
       - run:
           name: Sync Translations
           command: |
@@ -54,9 +54,6 @@ jobs:
             export CROWDIN_DOCUSAURUS_API_KEY=$REASON_CROWDIN_API_KEY
             crowdin --config crowdin.yaml upload sources --auto-update -b master
             crowdin --config crowdin.yaml download -b master
-      - run:
-          name: Deploying to GitHub Pages
-          command: |
             GIT_USER=chenglou yarn run docusaurus-publish
 # Workflows enables us to run multiple jobs in parallel
 workflows:
