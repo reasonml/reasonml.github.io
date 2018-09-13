@@ -4,9 +4,9 @@ This code is used to generate https://reasonml.github.io. It pulls in files from
 
 `website/` contains the JS, CSS, images and other files (and blog, which contains some markdown files too, these are separated from `docs/`, not too important).
 
-`cd website && npm install && npm start` to start the development server & watcher.
+`cd website && yarn && yarn start` to start the development server & watcher.
 
-Don't use `npm build`. It's mostly for debugging.
+Don't use `yarn build`. It's mostly for debugging.
 
 In the end, we spit out normal HTML, with all the JS dependencies (barring a few critical ones) removed, including ReactJS itself. It's a full, static website, super lightweight, portable, unfancy but good looking. Works with JS turned off too.
 
