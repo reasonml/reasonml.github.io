@@ -91,8 +91,7 @@ asyncRequest()->setWaitDuration(400)->send;
 
 ## Pipe Into Variants
 
-There are good justifications on why a variant's contructors are not function calls. Though it's a bit inconvenient practically still. For example, it'd be nice to be able to
-Variant constructors not being functions are sometimes a bit inconvenient. We've piggy-backed on top of fast pipe to make this work:
+A variant's constructors, like `Some` or `Student`, look like functions, but unfortunately aren't, due to historical reasons. Sometime, it'd still be nice to be able to use them as functions. Fast pipe takes the occasion to enable that for you!
 
 ```reason
 let result = name->preprocess->Some
@@ -103,6 +102,8 @@ We turn this into:
 ```reason
 let result = Some(preprocess(name))
 ```
+
+**Note** that using a variant constructor as a function wouldn't work anywhere else.
 
 ## Pipe Placeholders
 
