@@ -8,7 +8,7 @@ Exceptions are just a special kind of variant, "thrown" in **exceptional** cases
 
 ```reason
 let getItem = (theList) =>
-  if (...) {
+  if (callSomeFunctionThatThrows()) {
     /* return the found item here */
   } else {
     raise(Not_found)

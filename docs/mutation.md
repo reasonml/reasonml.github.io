@@ -16,13 +16,13 @@ let foo = ref(5);
 
 You can get the actual value of a `ref` through the postfix `^` operator:
 
-```
+```reason
 let five = foo^; /* 5 */
 ```
 
 Assign a new value to `foo` like so:
 
-```
+```reason
 foo := 6;
 ```
 

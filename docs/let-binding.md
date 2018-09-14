@@ -8,7 +8,6 @@ A "let binding", in other languages, might be called a "variable declaration/ass
 let greeting = "hello!";
 let score = 10;
 let newScore = 10 + score;
-...
 ```
 
 ## Block Scope

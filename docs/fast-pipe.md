@@ -21,11 +21,11 @@ person
 
 Basically, `parseData(person)` is transformed into `person->parseData`, and `getAge(person->parseData)` is transformed into `person->parseData->getAge`, etc.
 
-**This works when the function takes more than one argument too**. 
+**This works when the function takes more than one argument too**.
 
 ```reason
 a(one, two, three)
-``` 
+```
 
 is the same as
 
