@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="zh-TW"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>More on Type · Reason</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="## 型別參數！"/><meta name="docsearch:language" content="zh-TW"/><meta property="og:title" content="More on Type · Reason"/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io/index.html"/><meta property="og:description" content="## 型別參數！"/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/icon_50.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io/blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io/blog/feed.xml" title="Reason Blog RSS Feed"/><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/zh-TW"><img class="logo" src="/img/dummy.svg" alt="Reason"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/zh-TW/what-and-why" target="_self">Docs</a></li><li class=""><a href="/zh-TW/try" target="_self">Try</a></li><li class=""><a href="/api/index" target="_self">API</a></li><li class=""><a href="/docs/zh-TW/community" target="_self">Community</a></li><li class=""><a href="/blog" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg" alt="Languages icon"/>繁體中文</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/docs/ja/more-on-type">日本語</a></li><li><a href="/docs/en/more-on-type">English</a></li><li><a href="/docs/de/more-on-type">Deutsch</a></li><li><a href="/docs/es-ES/more-on-type">Español</a></li><li><a href="/docs/fr/more-on-type">Français</a></li><li><a href="/docs/ko/more-on-type">한국어</a></li><li><a href="/docs/pt-BR/more-on-type">Português (Brasil)</a></li><li><a href="/docs/ru/more-on-type">Русский</a></li><li><a href="/docs/uk/more-on-type">Українська</a></li><li><a href="/docs/zh-CN/more-on-type">中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank" rel="noreferrer noopener">協助翻譯</a></li></ul></div></li><script>
+<!DOCTYPE html><html lang="zh-TW"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>More on Type · Reason</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="## 型別參數！"/><meta name="docsearch:language" content="zh-TW"/><meta property="og:title" content="More on Type · Reason"/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io/index.html"/><meta property="og:description" content="## 型別參數！"/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/icon_50.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io/blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io/blog/feed.xml" title="Reason Blog RSS Feed"/><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/zh-TW"><img class="logo" src="/img/dummy.svg" alt="Reason"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/zh-TW/what-and-why" target="_self">Docs</a></li><li class=""><a href="/zh-TW/try" target="_self">Try</a></li><li class=""><a href="/api/index" target="_self">API</a></li><li class=""><a href="/docs/zh-TW/community" target="_self">Community</a></li><li class=""><a href="/blog/" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg" alt="Languages icon"/>繁體中文</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/docs/ja/more-on-type">日本語</a></li><li><a href="/docs/en/more-on-type">English</a></li><li><a href="/docs/de/more-on-type">Deutsch</a></li><li><a href="/docs/es-ES/more-on-type">Español</a></li><li><a href="/docs/fr/more-on-type">Français</a></li><li><a href="/docs/ko/more-on-type">한국어</a></li><li><a href="/docs/pt-BR/more-on-type">Português (Brasil)</a></li><li><a href="/docs/ru/more-on-type">Русский</a></li><li><a href="/docs/uk/more-on-type">Українська</a></li><li><a href="/docs/zh-CN/more-on-type">中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank" rel="noreferrer noopener">協助翻譯</a></li></ul></div></li><script>
         const languagesMenuItem = document.getElementById("languages-menu");
         const languagesDropDown = document.getElementById("languages-dropdown");
         languagesMenuItem.addEventListener("click", function(event) {
@@ -37,61 +37,61 @@
                 };
               }
             });
-        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://crowdin.com/project/reason/zh-TW" target="_blank" rel="noreferrer noopener">Translate</a><h1 class="postHeaderTitle">More on Type</h1></header><article><div><span><h2><a class="anchor" aria-hidden="true" id="型別參數"></a><a href="#型別參數" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>型別參數！</h2>
+        </script></nav></div><div class="container mainContainer docMainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://crowdin.com/project/reason/zh-TW" target="_blank" rel="noreferrer noopener">Translate</a><h1 class="postHeaderTitle">More on Type</h1></header><article><div><span><h2><a class="anchor" aria-hidden="true" id="型別參數"></a><a href="#型別參數" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>型別參數！</h2>
 <p>型別可以接受參數，類似其他語言的泛型（generics）。 就像型別是個函式接受參數傳回新的型別！ 參數<strong>必須</strong>使用 <code>'</code> 開頭。</p>
 <p>參數化型別的用途在於減少重複。使用前：</p>
-<pre><code class="hljs css language-reason">/* 這是 <span class="hljs-number">3</span> 個項目的 <span class="hljs-keyword">tuple</span>，稍後解釋 */
+<pre><code class="hljs css language-reason"><span class="hljs-comment">/* 這是 3 個項目的 tuple，稍後解釋 */</span>
 <span class="hljs-keyword">type</span> intCoordinates = (<span class="hljs-built_in">int</span>, <span class="hljs-built_in">int</span>, <span class="hljs-built_in">int</span>);
 <span class="hljs-keyword">type</span> floatCoordinates = (<span class="hljs-built_in">float</span>, <span class="hljs-built_in">float</span>, <span class="hljs-built_in">float</span>);
 
 <span class="hljs-keyword">let</span> buddy: intCoordinates = (<span class="hljs-number">10</span>, <span class="hljs-number">20</span>, <span class="hljs-number">20</span>);
 </code></pre>
 <p>使用後：</p>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> coordinates(<span class="hljs-symbol">'a</span>) = (<span class="hljs-symbol">'a</span>, <span class="hljs-symbol">'a</span>, <span class="hljs-symbol">'a</span>);
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> coordinates('a) = ('a, 'a, 'a);
 
-/* 套用同等的 <span class="hljs-string">"型別函式"</span> 傳回 (<span class="hljs-built_in">int</span>, <span class="hljs-built_in">int</span>, <span class="hljs-built_in">int</span>) 型別 */
+<span class="hljs-comment">/* 套用同等的 "型別函式" 傳回 (int, int, int) 型別 */</span>
 <span class="hljs-keyword">type</span> intCoordinatesAlias = coordinates(<span class="hljs-built_in">int</span>);
 
 <span class="hljs-keyword">let</span> buddy: intCoordinatesAlias = (<span class="hljs-number">10</span>, <span class="hljs-number">20</span>, <span class="hljs-number">20</span>);
 
-/* 或者，更常見的，撰寫成內嵌（inline） */
+<span class="hljs-comment">/* 或者，更常見的，撰寫成內嵌（inline） */</span>
 <span class="hljs-keyword">let</span> buddy: coordinates(<span class="hljs-built_in">float</span>) = (<span class="hljs-number">10.5</span>, <span class="hljs-number">20.5</span>, <span class="hljs-number">20.5</span>);
 </code></pre>
 <p>實際上，型別會幫你推論。所以上述更簡潔的版本會是：</p>
-<pre><code class="hljs css language-reason">let buddy = (<span class="hljs-number">10</span>, <span class="hljs-number">20</span>, <span class="hljs-number">20</span>);
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> buddy = (<span class="hljs-number">10</span>, <span class="hljs-number">20</span>, <span class="hljs-number">20</span>);
 </code></pre>
 <p>型別系統推論它是 <code>(int, int, int)</code> 型別。不需要額外撰寫。</p>
 <p>型別參數出現在任何地方。</p>
 <pre><code class="hljs css language-reason"><span class="hljs-comment">/* 推論出 `list(string)` */</span>
-<span class="hljs-keyword">let</span> <span class="hljs-attr">greetings</span> = [<span class="hljs-string">"hello"</span>, <span class="hljs-string">"world"</span>, <span class="hljs-string">"how are you"</span>];
+<span class="hljs-keyword">let</span> greetings = <span class="hljs-literal">[</span><span class="hljs-string">"hello"</span>, <span class="hljs-string">"world"</span>, <span class="hljs-string">"how are you"</span><span class="hljs-literal">]</span>;
 </code></pre>
 <p>如果型別不接受參數（例如，沒有 &quot;型別函式&quot;），標準函式庫就會需要定義 <code>listOfString</code> 、<code>listOfInt</code>、<code>listOfTuplesOfInt</code> 等型別。</p>
 <p>型別可以接受多個參數，並且組合在一起。</p>
-<pre><code class="hljs css language-reason"><span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">result</span></span>(<span class="hljs-symbol">'a</span>, <span class="hljs-symbol">'b</span>) =
-  | <span class="hljs-literal">Ok</span>(<span class="hljs-symbol">'a</span>)
-  | Error(<span class="hljs-symbol">'b</span>);
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> result('a, 'b) =
+  | <span class="hljs-constructor">Ok</span>('a)
+  | <span class="hljs-constructor">Error</span>('b);
 
-<span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">myPayload</span></span> = {data: string};
+<span class="hljs-keyword">type</span> myPayload = {data: <span class="hljs-built_in">string</span>};
 
-<span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">myPayloadResults</span></span>(<span class="hljs-symbol">'errorType</span>) = list(result(myPayload, <span class="hljs-symbol">'errorType</span>));
+<span class="hljs-keyword">type</span> myPayloadResults('errorType) = <span class="hljs-built_in">list</span>(result(myPayload, 'errorType));
 
-<span class="hljs-keyword">let</span> payloadResults: myPayloadResults(string) = [
-  <span class="hljs-literal">Ok</span>({data: <span class="hljs-string">"hi"</span>}),
-  <span class="hljs-literal">Ok</span>({data: <span class="hljs-string">"bye"</span>}),
-  Error(<span class="hljs-string">"Something wrong happened!"</span>)
-];
+<span class="hljs-keyword">let</span> payloadResults: myPayloadResults(<span class="hljs-built_in">string</span>) = <span class="hljs-literal">[</span>
+  <span class="hljs-constructor">Ok</span>({data: <span class="hljs-string">"hi"</span>}),
+  <span class="hljs-constructor">Ok</span>({data: <span class="hljs-string">"bye"</span>}),
+  <span class="hljs-constructor">Error</span>(<span class="hljs-string">"Something wrong happened!"</span>)
+<span class="hljs-literal">]</span>;
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" id="相互遞迴型別"></a><a href="#相互遞迴型別" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>相互遞迴型別</h2>
 <p>就像是函式，型別可以用 <code>and</code> 相互遞迴：</p>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> <span class="hljs-type">student </span>= {taughtBy: teacher}
-<span class="hljs-keyword">and</span> teacher = {students: list(student)};
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> student = {taughtBy: teacher}
+<span class="hljs-keyword">and</span> teacher = {students: <span class="hljs-built_in">list</span>(student)};
 </code></pre>
 <p><strong>注意</strong>第一行結尾沒有分號，第二行沒有 <code>type</code>。</p>
 <h2><a class="anchor" aria-hidden="true" id="設計決策"></a><a href="#設計決策" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>設計決策</h2>
 <p>型別系統接受型別參數基本上允許型別階層（type-level）函式。 <code>list(int)</code> 實際是 <code>list</code> 型別函式，接受 <code>int</code> 型別，傳回會拿來使用的最終、具體型別。 你可能注意到其他語言，或多或少稱這個為 &quot;泛型（generics）&quot;。 例如：Java 的 <code>ArrayList&lt;Integer&gt;</code>。</p>
 <p>當你使著 &quot;完成事情&quot; 時，套用 <a href="https://en.wikipedia.org/wiki/Rule_of_least_power">The principle of least power</a>。 如果問題領域允許，一定選擇最不抽象（又稱，最具體）解決方法，這樣解決方法才會達到快速和更少需要跨越不穩定的方向。 例如，偏好型別更勝於自由格式的資料，偏好資料導向配置更勝於完全圖靈函式呼叫，偏好函式呼叫更勝於巨集，偏好巨集更勝於專案分叉等。 當你限制領域及能力，事情變得個容易分析。 即，<em>如果</em> 領域是限制的，足以允許它。</p>
 <p>當型別系統是你程式的全部面向，我們需要確保留下足夠能力不會過度限制你的表達力；缺少 &quot;型別參數&quot;，結果是產生許多 boilerplate，例如，徒手撰寫 <code>listOfInt</code>、<code>listOfString</code>、<code>listOfArrayOfFloat</code>、各別輔助函式，等。 然而，請也確保不會透過這個稍微強大的型別系統過度濫用這個能力。 有時候，寫些<em>小型</em>的 boilerplate 減少對其他額外強大型別的需求。 如果有區別的話，品味權衡突顯你的實用主義及判斷更甚於花俏的型別！</p>
-</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/zh-TW/fast-pipe">← Fast Pipe</a><a class="docs-next button" href="/docs/zh-TW/destructuring">Destructuring →</a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#型別參數">型別參數！</a></li><li><a href="#相互遞迴型別">相互遞迴型別</a></li><li><a href="#設計決策">設計決策</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.min.js"></script><script>window.foo = new Pjax({
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/zh-TW/fast-pipe"><span class="arrow-prev">← </span><span>上一步</span></a><a class="docs-next button" href="/docs/zh-TW/destructuring"><span>下一步</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav docOnPageNav"><ul class="toc-headings"><li><a href="#型別參數">型別參數！</a></li><li><a href="#相互遞迴型別">相互遞迴型別</a></li><li><a href="#設計決策">設計決策</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.min.js"></script><script>window.foo = new Pjax({
           areas: [
             // try to use the first query.
             '.mainContainer, .docsNavContainer .toc .navWrapper, .onPageNav',

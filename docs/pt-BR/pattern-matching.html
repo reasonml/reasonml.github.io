@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="pt-BR"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Pattern Matching! · Reason</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="*Make sure you&#x27;ve read up on [Variant](/docs/pt-BR/variant) first*."/><meta name="docsearch:language" content="pt-BR"/><meta property="og:title" content="Pattern Matching! · Reason"/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io/index.html"/><meta property="og:description" content="*Make sure you&#x27;ve read up on [Variant](/docs/pt-BR/variant) first*."/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/icon_50.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io/blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io/blog/feed.xml" title="Reason Blog RSS Feed"/><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/pt-BR"><img class="logo" src="/img/dummy.svg" alt="Reason"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/pt-BR/what-and-why" target="_self">Docs</a></li><li class=""><a href="/pt-BR/try" target="_self">Try</a></li><li class=""><a href="/api/index" target="_self">API</a></li><li class=""><a href="/docs/pt-BR/community" target="_self">Community</a></li><li class=""><a href="/blog" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg" alt="Languages icon"/>Português (Brasil)</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/docs/ja/pattern-matching">日本語</a></li><li><a href="/docs/en/pattern-matching">English</a></li><li><a href="/docs/de/pattern-matching">Deutsch</a></li><li><a href="/docs/es-ES/pattern-matching">Español</a></li><li><a href="/docs/fr/pattern-matching">Français</a></li><li><a href="/docs/ko/pattern-matching">한국어</a></li><li><a href="/docs/ru/pattern-matching">Русский</a></li><li><a href="/docs/uk/pattern-matching">Українська</a></li><li><a href="/docs/zh-CN/pattern-matching">中文</a></li><li><a href="/docs/zh-TW/pattern-matching">繁體中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank" rel="noreferrer noopener">Ajude a Traduzir</a></li></ul></div></li><script>
+<!DOCTYPE html><html lang="pt-BR"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Pattern Matching! · Reason</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="*Make sure you&#x27;ve read up on [Variant](/docs/pt-BR/variant) first*."/><meta name="docsearch:language" content="pt-BR"/><meta property="og:title" content="Pattern Matching! · Reason"/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io/index.html"/><meta property="og:description" content="*Make sure you&#x27;ve read up on [Variant](/docs/pt-BR/variant) first*."/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/icon_50.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io/blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io/blog/feed.xml" title="Reason Blog RSS Feed"/><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/pt-BR"><img class="logo" src="/img/dummy.svg" alt="Reason"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/pt-BR/what-and-why" target="_self">Docs</a></li><li class=""><a href="/pt-BR/try" target="_self">Try</a></li><li class=""><a href="/api/index" target="_self">API</a></li><li class=""><a href="/docs/pt-BR/community" target="_self">Community</a></li><li class=""><a href="/blog/" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg" alt="Languages icon"/>Português (Brasil)</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/docs/ja/pattern-matching">日本語</a></li><li><a href="/docs/en/pattern-matching">English</a></li><li><a href="/docs/de/pattern-matching">Deutsch</a></li><li><a href="/docs/es-ES/pattern-matching">Español</a></li><li><a href="/docs/fr/pattern-matching">Français</a></li><li><a href="/docs/ko/pattern-matching">한국어</a></li><li><a href="/docs/ru/pattern-matching">Русский</a></li><li><a href="/docs/uk/pattern-matching">Українська</a></li><li><a href="/docs/zh-CN/pattern-matching">中文</a></li><li><a href="/docs/zh-TW/pattern-matching">繁體中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank" rel="noreferrer noopener">Ajude a Traduzir</a></li></ul></div></li><script>
         const languagesMenuItem = document.getElementById("languages-menu");
         const languagesDropDown = document.getElementById("languages-dropdown");
         languagesMenuItem.addEventListener("click", function(event) {
@@ -37,22 +37,22 @@
                 };
               }
             });
-        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://crowdin.com/project/reason/pt-BR" target="_blank" rel="noreferrer noopener">Translate</a><h1 class="postHeaderTitle">Pattern Matching!</h1></header><article><div><span><p><em>Make sure you've read up on <a href="/docs/pt-BR/variant">Variant</a> first</em>.</p>
+        </script></nav></div><div class="container mainContainer docMainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://crowdin.com/project/reason/pt-BR" target="_blank" rel="noreferrer noopener">Translate</a><h1 class="postHeaderTitle">Pattern Matching!</h1></header><article><div><span><p><em>Make sure you've read up on <a href="/docs/pt-BR/variant">Variant</a> first</em>.</p>
 <p><strong>Finalmente chegamos aqui</strong>! Pattern matching é um <em>dos melhores</em> recursos da linguagem. É como desestruturação, mas obtendo ainda mais auxílio do sistema de tipos.</p>
 <h2><a class="anchor" aria-hidden="true" id="uso"></a><a href="#uso" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Uso</h2>
 <p>Considere um variante:</p>
-<pre><code class="hljs css language-reason">type resultado =
-  <span class="hljs-string">| ResultadoRuim(int)</span>
-  <span class="hljs-string">| ResultadoBom(string)</span>
-  <span class="hljs-string">| SemResultado;</span>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> resultado =
+  | <span class="hljs-constructor">ResultadoRuim</span>(<span class="hljs-built_in">int</span>)
+  | <span class="hljs-constructor">ResultadoBom</span>(<span class="hljs-built_in">string</span>)
+  | <span class="hljs-constructor">SemResultado</span>;
 </code></pre>
 <p>Ao usar a expressão <code>switch</code> nele, você pode &quot;desestruturá-lo&quot;:</p>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> dados = ResultadoBom(<span class="hljs-string">"Produto enviado!"</span>);
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> dados = <span class="hljs-constructor">ResultadoBom</span>(<span class="hljs-string">"Produto enviado!"</span>);
 
 <span class="hljs-keyword">let</span> mensagem =
-  switch (dados) {
-  | <span class="hljs-type">ResultadoBom</span>(aMensagem) =&gt; <span class="hljs-string">"Sucesso! "</span> ++ aMensagem
-  | <span class="hljs-type">ResultadoRuim</span>(codigoDeErro) =&gt; <span class="hljs-string">"Algo está errado. O código de erro é: "</span>++ string_of_int (codigoDeErro)
+  <span class="hljs-keyword">switch</span> (dados) {
+  | <span class="hljs-constructor">ResultadoBom</span>(aMensagem) =&gt; <span class="hljs-string">"Sucesso! "</span> <span class="hljs-operator">++</span> aMensagem
+  | <span class="hljs-constructor">ResultadoRuim</span>(codigoDeErro) =&gt; <span class="hljs-string">"Algo está errado. O código de erro é: "</span><span class="hljs-operator">++</span> string_of_int (codigoDeErro)
    };
 </code></pre>
 <p>Note como desestruturamos <code>data</code> ao mesmo tempo que tratamos cada uma das variações. O <code>switch</code> no trecho acima vai gerar um alerta do compilador:</p>
@@ -61,15 +61,15 @@ Here is an example of a value that is not matched:
 NoResult
 </code></pre>
 <p>Não é ótimo? Enquanto checava o formato do nosso dado, o sistema de tipos nos alertou de uma variação não tratada. Este aspecto <strong>condicional</strong> é o que diferencia pattern matching da simples desestruturação. A maioria das estruturas de dados com um aspecto &quot;<strong>se isso então aquilo</strong>&quot; tomam proveito funcionalidade:</p>
-<pre><code class="hljs css language-reason">switch (minhaLista) {
-| <span class="hljs-type">[] =&gt; print_endline</span>(<span class="hljs-string">"Lista vazia"</span>)
-| <span class="hljs-type">[a</span>, ...oResto] =&gt; print_endline(<span class="hljs-string">"lista com valor de cabeça "</span> ++ a)
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">switch</span> (minhaLista) {
+| <span class="hljs-literal">[</span><span class="hljs-literal">]</span> =&gt; print_endline(<span class="hljs-string">"Lista vazia"</span>)
+| <span class="hljs-literal">[</span>a, <span class="hljs-operator">...</span>oResto<span class="hljs-literal">]</span> =&gt; print_endline(<span class="hljs-string">"lista com valor de cabeça "</span> <span class="hljs-operator">++</span> a)
 };
 
-switch (meuArray) {
-| <span class="hljs-type">[|1</span>, <span class="hljs-number">2</span>|<span class="hljs-type">] =&gt; print_endline</span>(<span class="hljs-string">"Este é um array com os itens 1 e 2"</span>)
-| <span class="hljs-type">[||] =&gt; print_endline</span>(<span class="hljs-string">"Este é um array sem elementos"</span>)
-| <span class="hljs-type">_</span> =&gt; print_endline(<span class="hljs-string">"Este é um array"</span>)
+<span class="hljs-keyword">switch</span> (meuArray) {
+| <span class="hljs-literal">[|</span><span class="hljs-number">1</span>, <span class="hljs-number">2</span><span class="hljs-literal">|]</span> =&gt; print_endline(<span class="hljs-string">"Este é um array com os itens 1 e 2"</span>)
+| <span class="hljs-literal">[|</span><span class="hljs-literal">|]</span> =&gt; print_endline(<span class="hljs-string">"Este é um array sem elementos"</span>)
+| _ =&gt; print_endline(<span class="hljs-string">"Este é um array"</span>)
 };
 </code></pre>
 <p>O caso <code>_</code> é um caso especial &quot;pega-tudo&quot; que permite que casos não considerados nas alternativas anteriores sejam processados neste ramo.</p>
@@ -84,95 +84,95 @@ switch (meuArray) {
 </code></pre>
 <p>Combinado com outras estruturas de dados, pattern matching pode resultar em código extremamente conciso, verificado pelo compilador e com grande performance:</p>
 <pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> mensagem = 
-  switch (dados) {
-  | <span class="hljs-type">ResultadoBom</span>(aMensagem) =&gt; <span class="hljs-string">"Sucesso! "</span> ++ aMensagem
-  | <span class="hljs-type">ResultadoRuim</span>(<span class="hljs-number">0</span> | <span class="hljs-type">1</span> | <span class="hljs-type">5</span>) =&gt; <span class="hljs-string">"Algo está errado. É um problema com o servidor."</span>
-  | <span class="hljs-type">ResultadoRuim</span>(codigoDeErro) =&gt; <span class="hljs-string">"Erro desconhecido ocorreu. Code: "</span> ++ string_of_int(errorCode)
-  | <span class="hljs-type">NoResult</span> =&gt; <span class="hljs-string">"Things look fine"</span>
+  <span class="hljs-keyword">switch</span> (dados) {
+  | <span class="hljs-constructor">ResultadoBom</span>(aMensagem) =&gt; <span class="hljs-string">"Sucesso! "</span> <span class="hljs-operator">++</span> aMensagem
+  | <span class="hljs-constructor">ResultadoRuim</span>(<span class="hljs-number">0</span> | <span class="hljs-number">1</span> | <span class="hljs-number">5</span>) =&gt; <span class="hljs-string">"Algo está errado. É um problema com o servidor."</span>
+  | <span class="hljs-constructor">ResultadoRuim</span>(codigoDeErro) =&gt; <span class="hljs-string">"Erro desconhecido ocorreu. Code: "</span> <span class="hljs-operator">++</span> string_of_int(errorCode)
+  | <span class="hljs-constructor">NoResult</span> =&gt; <span class="hljs-string">"Things look fine"</span>
   };
 </code></pre>
 <p><strong>Observação</strong>: você pode passar somente literais (i.e. valores concretos) como um formato de dado, e não nomes definidos com let binding e outras coisas. O trecho a seguir não funciona como esperado:</p>
 <pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> minhaMensagem = <span class="hljs-string">"Olá"</span>;
 <span class="hljs-keyword">switch</span> (saudacao) {
-| <span class="hljs-function"><span class="hljs-params">minhaMensagem</span> =&gt;</span> print_endline(<span class="hljs-string">"Olá para você"</span>)
+| minhaMensagem =&gt; print_endline(<span class="hljs-string">"Olá para você"</span>)
 };
 </code></pre>
 <p>Ao contrário, ele estará correspondendo a qualquer string, e atribuindo esta ao nome <code>myMessage</code> naquele ramo do <code>switch</code>, o que não é o resultado almejado.</p>
 <h3><a class="anchor" aria-hidden="true" id="clausulas-when-quando"></a><a href="#clausulas-when-quando" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Cláusulas When (Quando)</h3>
 <p>Quando você realmente precisar de alguma lógica arbitrária num pattern match simples, você inserir algumas cláusulas <code>when</code>, que são basicamente açúcar sintático para <code>if</code>:</p>
 <pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> mensagem =
-  switch (dados) {
-  | <span class="hljs-type">ResultadoBom</span>(aMensagem) =&gt; ...
-  | <span class="hljs-type">ResultadoRuim</span>(codigoDeErro) when erroDeServidor(codigoDeErro) =&gt; ...
-  | <span class="hljs-type">ResultadoRuim</span>(codigoDeErro) =&gt; ... /* se não <span class="hljs-keyword">for</span> erro de servidor */
-  | <span class="hljs-type">SemResultado</span> =&gt; ...
+  <span class="hljs-keyword">switch</span> (dados) {
+  | <span class="hljs-constructor">ResultadoBom</span>(aMensagem) =&gt; <span class="hljs-operator">...</span>
+  | <span class="hljs-constructor">ResultadoRuim</span>(codigoDeErro) when erroDeServidor(codigoDeErro) =&gt; <span class="hljs-operator">...</span>
+  | <span class="hljs-constructor">ResultadoRuim</span>(codigoDeErro) =&gt; <span class="hljs-operator">...</span> <span class="hljs-comment">/* se não for erro de servidor */</span>
+  | <span class="hljs-constructor">SemResultado</span> =&gt; <span class="hljs-operator">...</span>
   };
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="match-em-excecões"></a><a href="#match-em-excecões" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Match em Exceções</h3>
 <p>If the function throws an exception (covered later), you can also match on <em>that</em>, in addition to the function's normally returned values.</p>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">switch</span> (<span class="hljs-keyword">List</span>.find((i) =&gt; i === theItem, myItems)) {
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">switch</span> (<span class="hljs-module-access"><span class="hljs-identifier">List</span></span>.find((i) =&gt; i <span class="hljs-operator">===</span> theItem, myItems)) {
 | item =&gt; print_endline(item)
-| <span class="hljs-keyword">exception</span> Not_found =&gt; print_endline(<span class="hljs-string">"No such item found!"</span>)
+| <span class="hljs-keyword">exception</span> <span class="hljs-constructor">Not_found</span> =&gt; print_endline(<span class="hljs-string">"No such item found!"</span>)
 };
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="padrões-aninhados"></a><a href="#padrões-aninhados" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Padrões aninhados</h3>
 <p>Barras <code>|</code> aninhadas funcionam como esperado:</p>
 <pre><code class="hljs css language-reason"><span class="hljs-keyword">switch</span> (student) {
-| {<span class="hljs-string">name:</span> <span class="hljs-string">"Jane"</span> | <span class="hljs-string">"Joe"</span>} =&gt; ...
-| {<span class="hljs-string">name:</span> <span class="hljs-string">"Bob"</span>, <span class="hljs-string">Job:</span> Programmer({<span class="hljs-string">fullTime:</span> Yes | Maybe})} =&gt; ...
+| {name: <span class="hljs-string">"Jane"</span> | <span class="hljs-string">"Joe"</span>} =&gt; <span class="hljs-operator">...</span>
+| {name: <span class="hljs-string">"Bob"</span>, <span class="hljs-constructor">Job</span>: <span class="hljs-constructor">Programmer</span>({fullTime: <span class="hljs-constructor">Yes</span> | <span class="hljs-constructor">Maybe</span>})} =&gt; <span class="hljs-operator">...</span>
 };
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="padrões-em-todo-lugar"></a><a href="#padrões-em-todo-lugar" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Padrões em Todo Lugar</h3>
 <p>Você pode colocar um padrão em todo lugar onde colocaria uma &quot;declaração de variável&quot; normal:</p>
-<pre><code class="hljs css language-reason">type leftOrRight =
-  | <span class="hljs-built_in">Left</span>(<span class="hljs-built_in">int</span>)
-  | <span class="hljs-built_in">Right</span>(<span class="hljs-built_in">int</span>);
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> leftOrRight =
+  | <span class="hljs-constructor">Left</span>(<span class="hljs-built_in">int</span>)
+  | <span class="hljs-constructor">Right</span>(<span class="hljs-built_in">int</span>);
 
-<span class="hljs-keyword">let</span> i = <span class="hljs-built_in">Left</span>(<span class="hljs-number">1</span>);
+<span class="hljs-keyword">let</span> i = <span class="hljs-constructor">Left</span>(<span class="hljs-number">1</span>);
 
-/* magic! */
-<span class="hljs-keyword">let</span> <span class="hljs-built_in">Left</span>(v) | <span class="hljs-built_in">Right</span>(v) = i;
+<span class="hljs-comment">/* magic! */</span>
+<span class="hljs-keyword">let</span> <span class="hljs-constructor">Left</span>(v) | <span class="hljs-constructor">Right</span>(v) = i;
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" id="dicas-truques"></a><a href="#dicas-truques" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Dicas &amp; Truques</h2>
 <p><strong>Desaninhe seus casamentos de padrões sempre que possível</strong>. Esse é um jeito confiável de remover bugs. Exemplo abaixo.</p>
 <p>Não use o caso &quot;pega-tudo&quot; <code>_</code> demais. Ele impede que o compilador avise que você esqueceu de cobrir um caso (checagem de exaustividade), o que seria especialmente útil após uma refatoração onde um novo caso foi adicionado a uma variante. Tente usar <code>_</code> apenas quando houver infinitas possibilidades. Ex: string, int, etc.</p>
 <p>Segue uma série de exemplos, de pior para melhor:</p>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> <span class="hljs-attr">optionBoolToBool</span> = <span class="hljs-attr">opt</span> =&gt;
-  <span class="hljs-keyword">if</span> (<span class="hljs-attr">opt</span> == None) {
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> optionBoolToBool = opt =&gt;
+  <span class="hljs-keyword">if</span> (opt <span class="hljs-operator">==</span> <span class="hljs-constructor">None</span>) {
     <span class="hljs-literal">false</span>;
-  } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-attr">opt</span> == Some(<span class="hljs-literal">true</span>)) {
+  } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (opt <span class="hljs-operator">==</span> <span class="hljs-constructor">Some</span>(<span class="hljs-literal">true</span>)) {
     <span class="hljs-literal">true</span>;
   } <span class="hljs-keyword">else</span> {
     <span class="hljs-literal">false</span>;
   };
 </code></pre>
 <p>Isso é simplesmente bobo =). Vamos transformar em casamento de padrões:</p>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> optionBoolToBool = <span class="hljs-function"><span class="hljs-params">opt</span> =&gt;</span>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> optionBoolToBool = opt =&gt;
   <span class="hljs-keyword">switch</span> (opt) {
-  | <span class="hljs-function"><span class="hljs-params">None</span> =&gt;</span> <span class="hljs-literal">false</span>
-  | Some(a) =&gt; a ? <span class="hljs-literal">true</span> : <span class="hljs-literal">false</span>
+  | <span class="hljs-constructor">None</span> =&gt; <span class="hljs-literal">false</span>
+  | <span class="hljs-constructor">Some</span>(a) =&gt; a ? <span class="hljs-literal">true</span> : <span class="hljs-literal">false</span>
   };
 </code></pre>
 <p>Levemente melhor, mas ainda aninhado. O casamento de padrões permite que você faça isto:</p>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> optionBoolToBool = <span class="hljs-function"><span class="hljs-params">opt</span> =&gt;</span>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> optionBoolToBool = opt =&gt;
   <span class="hljs-keyword">switch</span> (opt) {
-  | <span class="hljs-function"><span class="hljs-params">None</span> =&gt;</span> <span class="hljs-literal">false</span>
-  | Some(<span class="hljs-literal">true</span>) =&gt; <span class="hljs-literal">true</span>
-  | Some(<span class="hljs-literal">false</span>) =&gt; <span class="hljs-literal">false</span>
+  | <span class="hljs-constructor">None</span> =&gt; <span class="hljs-literal">false</span>
+  | <span class="hljs-constructor">Some</span>(<span class="hljs-literal">true</span>) =&gt; <span class="hljs-literal">true</span>
+  | <span class="hljs-constructor">Some</span>(<span class="hljs-literal">false</span>) =&gt; <span class="hljs-literal">false</span>
   };
 </code></pre>
 <p>A aparência ficou muito mais linear! Agora, você pode ser tentado a fazer o seguinte:</p>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> optionBoolToBool = <span class="hljs-function"><span class="hljs-params">opt</span> =&gt;</span>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> optionBoolToBool = opt =&gt;
   <span class="hljs-keyword">switch</span> (opt) {
-  | Some(<span class="hljs-literal">true</span>) =&gt; <span class="hljs-literal">true</span>
-  | <span class="hljs-function"><span class="hljs-params">_</span> =&gt;</span> <span class="hljs-literal">false</span>
+  | <span class="hljs-constructor">Some</span>(<span class="hljs-literal">true</span>) =&gt; <span class="hljs-literal">true</span>
+  | _ =&gt; <span class="hljs-literal">false</span>
   };
 </code></pre>
 <p>Que é muito mais conciso, mas acaba com a exaustividade mencionada acima. Este é o melhor jeito:</p>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> optionBoolToBool = <span class="hljs-function"><span class="hljs-params">opt</span> =&gt;</span>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> optionBoolToBool = opt =&gt;
   <span class="hljs-keyword">switch</span> (opt) {
-  | Some(<span class="hljs-function">(<span class="hljs-params"><span class="hljs-literal">true</span> | <span class="hljs-literal">false</span></span>) <span class="hljs-params">as</span> <span class="hljs-params">trueOrFalse</span>) =&gt;</span> trueOrFalse
-  | <span class="hljs-function"><span class="hljs-params">None</span> =&gt;</span> <span class="hljs-literal">false</span>
+  | <span class="hljs-constructor">Some</span>((<span class="hljs-literal">true</span> | <span class="hljs-literal">false</span>) <span class="hljs-keyword">as</span> trueOrFalse) =&gt; trueOrFalse
+  | <span class="hljs-constructor">None</span> =&gt; <span class="hljs-literal">false</span>
   };
 </code></pre>
 <p>Muito difícil fazer um erro no código nesse ponto! Sempre que você pensar em usar um if-else com vários, ramos, prefira casamento de padrões ao invés disso. É mais conciso, além de <a href="/docs/pt-BR/variant#design-decisions">eficiente</a> também.</p>
@@ -181,13 +181,13 @@ switch (meuArray) {
 <p>O famoso <a href="https://en.wikipedia.org/wiki/Fizz_buzz#Programming_interviews">problema FizzBuzz</a> estranhamente faz algumas pessoas &quot;empacarem&quot;, parcialmente devido à sua natureza de paralisar programadores que buscam simplificar ou unificar os ramos condicionais em busca de elegância onde não a há. Esperamos que seja possível ver que, em geral, a concisão visual do casamento de padrões <a href="/try.html?reason=PQKgBAQghgzgpgEzAewHZgBYBcsAcYBcwwATsvDlAMbIJwB0yJA5sAO4CWA1h8AGIcAXoIgBXYQGIA8gGEoAWwA2YEMABQiuFjAAzIYIBG4wWAC8YABQcAlGYB8asGBicsVDJY5h5tMAGYAGjAvHyQAVlsAb0cwAB9LAAYghNtTOzAAIgFhMWEMmPiLJLAAfVT0rP18p0KS5PLM3MFquNL7ZywSDlRmEuQdEu6sK2sYgF8AbjU1HSZPYPQARjAsZDBFhJSwaKcAKRh6RWRmCz1hI2ER0cmgA">nos permite evitar a paralisia de decisão</a>, simultaneamente mantendo todas as vantagens (e mais, como você viu) de usar vários <code>if-else</code>s. Não há nada errado com explicitamente listar todas as possibilidades; Casamento de padrões corresponde, na matemática, à <strong>análise de casos</strong>, uma técnica válida de resolução de problemas que costuma ser extremamente conveniente.</p>
 <p>Usar um <code>switch</code> do Reason pela primeira vez pode fazer você sentir que estava perdendo algo todos esses anos. Cuidado, ele pode estragar outras linguagens para você =).</p>
 <p>Se você já tentou refatorar um if-else grande e aninhado, você pode ter percebido que é muito difícil acertar a lógica. Por outro lado, o uso casamento de padrões + tuplas mapeia conceitualmente para uma tabela 2D, em que cada célula pode ser independentemente preenchida. Isso garante que, sempre que você precisa adicionar um caso no <code>switch</code>, você pode atacar aquela e apenas aquela célula da tabela, sem quebrar outras células.</p>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> animal = Cachorro | Gato | Passaro;
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> animal = <span class="hljs-constructor">Cachorro</span> | <span class="hljs-constructor">Gato</span> | <span class="hljs-constructor">Passaro</span>;
 <span class="hljs-keyword">let</span> resultado = <span class="hljs-keyword">switch</span>(eGrande, meuAnimal) {
- | <span class="hljs-function">(<span class="hljs-params"><span class="hljs-literal">true</span>, Cachorro</span>) =&gt;</span> <span class="hljs-number">1</span>
- | <span class="hljs-function">(<span class="hljs-params"><span class="hljs-literal">true</span>, Cat</span>) =&gt;</span> <span class="hljs-number">2</span>
- | <span class="hljs-function">(<span class="hljs-params"><span class="hljs-literal">true</span>, Passaro</span>) =&gt;</span> <span class="hljs-number">3</span>
- | <span class="hljs-function">(<span class="hljs-params"><span class="hljs-literal">false</span>, Cachorro | Gato</span>) =&gt;</span> <span class="hljs-number">4</span>
- | <span class="hljs-function">(<span class="hljs-params"><span class="hljs-literal">false</span>, Passaro</span>) =&gt;</span> <span class="hljs-number">5</span>
+ | (<span class="hljs-literal">true</span>, <span class="hljs-constructor">Cachorro</span>) =&gt; <span class="hljs-number">1</span>
+ | (<span class="hljs-literal">true</span>, <span class="hljs-constructor">Cat</span>) =&gt; <span class="hljs-number">2</span>
+ | (<span class="hljs-literal">true</span>, <span class="hljs-constructor">Passaro</span>) =&gt; <span class="hljs-number">3</span>
+ | (<span class="hljs-literal">false</span>, <span class="hljs-constructor">Cachorro</span> | <span class="hljs-constructor">Gato</span>) =&gt; <span class="hljs-number">4</span>
+ | (<span class="hljs-literal">false</span>, <span class="hljs-constructor">Passaro</span>) =&gt; <span class="hljs-number">5</span>
 };
 </code></pre>
 <table>
@@ -199,7 +199,7 @@ switch (meuArray) {
 <tr><td>false</td><td>4</td><td>4</td><td>5</td></tr>
 </tbody>
 </table>
-</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/pt-BR/destructuring">← Destructuring</a><a class="docs-next button" href="/docs/pt-BR/mutation">Mutation →</a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#uso">Uso</a><ul class="toc-headings"><li><a href="#clausulas-when-quando">Cláusulas When (Quando)</a></li><li><a href="#match-em-excecões">Match em Exceções</a></li><li><a href="#padrões-aninhados">Padrões aninhados</a></li><li><a href="#padrões-em-todo-lugar">Padrões em Todo Lugar</a></li></ul></li><li><a href="#dicas-truques">Dicas &amp; Truques</a></li><li><a href="#decisões-de-design">Decisões de Design</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.min.js"></script><script>window.foo = new Pjax({
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/pt-BR/destructuring"><span class="arrow-prev">← </span><span>Anterior</span></a><a class="docs-next button" href="/docs/pt-BR/mutation"><span>Próximo</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav docOnPageNav"><ul class="toc-headings"><li><a href="#uso">Uso</a><ul class="toc-headings"><li><a href="#clausulas-when-quando">Cláusulas When (Quando)</a></li><li><a href="#match-em-excecões">Match em Exceções</a></li><li><a href="#padrões-aninhados">Padrões aninhados</a></li><li><a href="#padrões-em-todo-lugar">Padrões em Todo Lugar</a></li></ul></li><li><a href="#dicas-truques">Dicas &amp; Truques</a></li><li><a href="#decisões-de-design">Decisões de Design</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.min.js"></script><script>window.foo = new Pjax({
           areas: [
             // try to use the first query.
             '.mainContainer, .docsNavContainer .toc .navWrapper, .onPageNav',
