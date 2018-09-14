@@ -2,7 +2,7 @@
 title: Let Binding
 ---
 
-A "let binding", in other languages, might be called a "variable declaration/assignment". `let` gives names to values. They can be seen and referenced by code that comes after them.
+A "let binding", in other languages, might be called a "variable declaration". `let` gives names to values. They can be seen and referenced by code that comes after them.
 
 ```reason
 let greeting = "hello!";
