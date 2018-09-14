@@ -208,7 +208,7 @@ exposing the variant, it'll only tell you "it's `Company.profession`".
 
 ### Extending module signatures
 
-Like modules themselves, module signatures can also be extended through `include module type of Foo`:
+Like modules themselves, module signatures can also be extended using `include`:
 
 ```reason
 module type BaseComponent = {
@@ -218,8 +218,20 @@ module type BaseComponent = {
 
 module type ActualComponent = {
   /* the signature is copied over */
-  include (module type of BaseComponent);
+  include BaseComponent;
   let render: unit => string;
+};
+```
+
+If you do not have a defined module type you can extract it from a module
+using `include (module type of ModuleName)`. For example, we can extend the
+`List` module from the OCaml standard library which does not define a module
+type.
+
+```reason
+module type MyList = {
+  include (module type of List);
+  let myListFun: list('a) => list('a);
 };
 ```
 
