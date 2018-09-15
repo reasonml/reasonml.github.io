@@ -123,7 +123,12 @@ const users = [
     caption: "Gangverk",
     image: "img/logos/gangverk.svg",
     infoLink: "http://gangverk.is",
-  }
+  },
+  {
+    caption: "LaTeX Base",
+    image: "img/logos/latex-base.png",
+    infoLink: "https://latexbase.com",
+  },
 ];
 
 const examples = [
