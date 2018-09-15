@@ -126,7 +126,7 @@ const users = [
   },
   {
     caption: "LaTeX Base",
-    image: "img/logos/latex-base.png",
+    image: "img/logos/latexbase.svg",
     infoLink: "https://latexbase.com",
   },
 ];
