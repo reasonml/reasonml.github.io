@@ -322,17 +322,6 @@ module MakeSet: MakeSetType = (Item: Comparable) => {
 };
 ```
 
-Drawbacks
-----------------------------------
+## Tips & Tricks
 
-Modules and functors are at a different "layer" of language than the rest (
-functions, let bindings, data structures, etc.). For example, you can't easily
-pass them into a tuple or record. Use them judiciously! Lots of times, just a
-record or a function is enough.
-
-```reason
-module School = {...};
-
-/* this will straight up give you a syntax error! */
-let schools = (School, School);
-```
+Modules and functors are at a different "layer" of language than the rest (functions, let bindings, data structures, etc.). For example, you can't easily pass them into a tuple or record. Use them judiciously, if ever! Lots of times, just a record or a function is enough.

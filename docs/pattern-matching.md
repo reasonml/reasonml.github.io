@@ -190,12 +190,12 @@ let optionBoolToBool = opt =>
   };
 ```
 
-Which is much more concise, but kills the exhaustiveness check mentioned above. This is the best:
+Which is much more concise, but kills the exhaustiveness check mentioned above; refrain from using that. This is the best:
 
 ```reason
 let optionBoolToBool = opt =>
   switch (opt) {
-  | Some((true | false) as trueOrFalse) => trueOrFalse
+  | Some(trueOrFalse) => trueOrFalse
   | None => false
   };
 ```
