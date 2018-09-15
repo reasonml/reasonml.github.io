@@ -41,7 +41,7 @@
 <p><strong>Modules are like mini files</strong>! They can contain type definitions, <code>let</code> bindings, nested modules, etc.</p>
 <h3><a class="anchor" aria-hidden="true" id="creation"></a><a href="#creation" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Creation</h3>
 <p>To create a module, use the <code>module</code> keyword. The module name must start with a <strong>capital letter</strong>. Whatever you could place in a <code>.re</code> file, you may place inside a module definition's <code>{}</code> block.</p>
-<pre><code class="hljs css language-reason"><span class="hljs-module-declaration"><span class="hljs-keyword">module</span> <span class="hljs-identifier">School</span> = </span>{
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">module</span> <span class="hljs-module-identifier">School</span> = {
   <span class="hljs-keyword">type</span> profession = <span class="hljs-constructor">Teacher</span> | <span class="hljs-constructor">Director</span>;
 
   <span class="hljs-keyword">let</span> person1 = <span class="hljs-constructor">Teacher</span>;
@@ -53,54 +53,54 @@
 };
 </code></pre>
 <p>A module's contents (including types!) can be accessed much like a record's, using the <code>.</code> notation. This demonstrates modules' utility for namespacing.</p>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> anotherPerson: <span class="hljs-module-access"><span class="hljs-identifier">School</span></span>.profession = <span class="hljs-module-access"><span class="hljs-identifier">School</span></span>.<span class="hljs-constructor">Teacher</span>;
-print_endline(<span class="hljs-module-access"><span class="hljs-identifier">School</span></span>.getProfession(anotherPerson)); <span class="hljs-comment">/* "A teacher" */</span>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> anotherPerson: <span class="hljs-module-identifier">School</span>.profession = <span class="hljs-module-identifier">School</span>.<span class="hljs-constructor">Teacher</span>;
+print_endline(<span class="hljs-module-identifier">School</span>.getProfession(anotherPerson)); <span class="hljs-comment">/* "A teacher" */</span>
 </code></pre>
 <p>Nested modules work too.</p>
-<pre><code class="hljs css language-reason"><span class="hljs-module-declaration"><span class="hljs-keyword">module</span> <span class="hljs-identifier">MyModule</span> = </span>{
-  <span class="hljs-module-declaration"><span class="hljs-keyword">module</span> <span class="hljs-identifier">NestedModule</span> = </span>{
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">module</span> <span class="hljs-module-identifier">MyModule</span> = {
+  <span class="hljs-keyword">module</span> <span class="hljs-module-identifier">NestedModule</span> = {
     <span class="hljs-keyword">let</span> message = <span class="hljs-string">"hello"</span>;
   };
 };
 
-<span class="hljs-keyword">let</span> message = <span class="hljs-module-access"><span class="hljs-identifier">MyModule</span></span>.<span class="hljs-module-access"><span class="hljs-identifier">NestedModule</span></span>.message;
+<span class="hljs-keyword">let</span> message = <span class="hljs-module-identifier">MyModule</span>.<span class="hljs-module-identifier">NestedModule</span>.message;
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="open-ing-a-module"></a><a href="#open-ing-a-module" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>open</code>ing a module</h3>
 <p>Constantly referring to a value/type in a module can be tedious. Instead, we can &quot;open&quot; a module and refer to its contents without always prepending them with the module's name. Instead of writing:</p>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> p: <span class="hljs-module-access"><span class="hljs-identifier">School</span></span>.profession = <span class="hljs-module-access"><span class="hljs-identifier">School</span></span>.getProfession(<span class="hljs-module-access"><span class="hljs-identifier">School</span></span>.person1);
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> p: <span class="hljs-module-identifier">School</span>.profession = <span class="hljs-module-identifier">School</span>.getProfession(<span class="hljs-module-identifier">School</span>.person1);
 </code></pre>
 <p>We can write:</p>
-<pre><code class="hljs css language-reason"><span class="hljs-module-open"><span class="hljs-keyword">open</span> <span class="hljs-identifier">School</span></span>;
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">open</span> <span class="hljs-module-identifier">School</span>;
 <span class="hljs-keyword">let</span> p: profession = getProfession(person1);
 </code></pre>
 <p>The content of <code>School</code> module are made visible (<strong>not</strong> copied into the file, but simply made visible!) in scope. <code>profession</code>, <code>getProfession</code> and <code>person1</code> will thus correctly be found.</p>
 <p><strong>Use <code>open</code> this sparingly, it's convenient, but makes it hard to know where some values come from</strong>. You should usually use <code>open</code> in a local scope:</p>
 <pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> p = {
-  <span class="hljs-module-open"><span class="hljs-keyword">open</span> <span class="hljs-identifier">School</span></span>;
+  <span class="hljs-keyword">open</span> <span class="hljs-module-identifier">School</span>;
   getProfession(person1);
 };
 <span class="hljs-comment">/* School's content isn't visible here anymore */</span>
 </code></pre>
 <p>For an <code>open</code> followed by a single expression, we have a dedicated syntax sugar:</p>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> p = <span class="hljs-module-access"><span class="hljs-identifier">School</span></span>.(getProfession(person1));
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> p = <span class="hljs-module-identifier">School</span>.(getProfession(person1));
 </code></pre>
 <p>Anything else needs to be written in the first way:</p>
 <pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> p = {
-  <span class="hljs-module-open"><span class="hljs-keyword">open</span> <span class="hljs-identifier">School</span></span>;
+  <span class="hljs-keyword">open</span> <span class="hljs-module-identifier">School</span>;
   print_endline(<span class="hljs-string">"hello!"</span>);
   getProfession(person1);
 };
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="extending-modules"></a><a href="#extending-modules" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Extending modules</h3>
 <p>Using <code>include</code> in a module statically &quot;spreads&quot; a module's content into a new one, thus often fulfill the role of &quot;inheritance&quot; or &quot;mixin&quot;.</p>
-<pre><code class="hljs css language-reason"><span class="hljs-module-declaration"><span class="hljs-keyword">module</span> <span class="hljs-identifier">BaseComponent</span> = </span>{
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">module</span> <span class="hljs-module-identifier">BaseComponent</span> = {
   <span class="hljs-keyword">let</span> defaultGreeting = <span class="hljs-string">"Hello"</span>;
   <span class="hljs-keyword">let</span> getAudience = (~excited) =&gt; excited ? <span class="hljs-string">"world!"</span> : <span class="hljs-string">"world"</span>;
 };
 
-<span class="hljs-module-declaration"><span class="hljs-keyword">module</span> <span class="hljs-identifier">ActualComponent</span> = </span>{
+<span class="hljs-keyword">module</span> <span class="hljs-module-identifier">ActualComponent</span> = {
   <span class="hljs-comment">/* the content is copied over */</span>
-  <span class="hljs-module-open"><span class="hljs-keyword">include</span> <span class="hljs-identifier">BaseComponent</span></span>;
+  <span class="hljs-keyword">include</span> <span class="hljs-module-identifier">BaseComponent</span>;
   <span class="hljs-comment">/* overrides BaseComponent.defaultGreeting */</span>
   <span class="hljs-keyword">let</span> defaultGreeting = <span class="hljs-string">"Hey"</span>;
   <span class="hljs-keyword">let</span> render = () =&gt; defaultGreeting <span class="hljs-operator">++</span> <span class="hljs-string">" "</span> <span class="hljs-operator">++</span> getAudience(~excited=<span class="hljs-literal">true</span>);
@@ -115,8 +115,8 @@ print_endline(<span class="hljs-module-access"><span class="hljs-identifier">Sch
 
 <span class="hljs-comment">/* FileB.re */</span>
 <span class="hljs-comment">/* Maps FileA's implementation to a new API */</span>
-<span class="hljs-keyword">let</span> alpha = <span class="hljs-module-access"><span class="hljs-identifier">FileA</span></span>.a;
-<span class="hljs-keyword">let</span> beta = <span class="hljs-module-access"><span class="hljs-identifier">FileA</span></span>.b;
+<span class="hljs-keyword">let</span> alpha = <span class="hljs-module-identifier">FileA</span>.a;
+<span class="hljs-keyword">let</span> beta = <span class="hljs-module-identifier">FileA</span>.b;
 </code></pre>
 <p>This contrived snippet expresses &quot;copying&quot; a file:</p>
 <pre><code class="hljs css language-reason"><span class="hljs-comment">/* FileA.re. This typically compiles to module FileA below */</span>
@@ -125,7 +125,7 @@ print_endline(<span class="hljs-module-access"><span class="hljs-identifier">Sch
 
 <span class="hljs-comment">/* FileB.re */</span>
 <span class="hljs-comment">/* compiles to exactly fileA.re's content with no runtime overhead! */</span>
-<span class="hljs-module-open"><span class="hljs-keyword">include</span> <span class="hljs-identifier">FileA</span></span>;
+<span class="hljs-keyword">include</span> <span class="hljs-module-identifier">FileA</span>;
 </code></pre>
 <p><strong>Note</strong>: Because files are modules, file names should, by convention, be capitalized so they match their module names. Uncapitalized file names are not invalid, but will be transformed into a capitalized module name. I.e. <code>file.re</code> will be compiled into the module <code>File</code>. To simplify and minimize the disconnect here, the convention is therefore to capitalize file names too.</p>
 <h2><a class="anchor" aria-hidden="true" id="signatures"></a><a href="#signatures" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Signatures</h2>
@@ -133,7 +133,7 @@ print_endline(<span class="hljs-module-access"><span class="hljs-identifier">Sch
 <h3><a class="anchor" aria-hidden="true" id="creation-1"></a><a href="#creation-1" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Creation</h3>
 <p>To create a signature, use the <code>module type</code> keyword. The signature name must start with a <strong>capital letter</strong>. Whatever you could place in a <code>.rei</code> file, you may place inside a signature definition's <code>{}</code> block.</p>
 <pre><code class="hljs css language-reason"><span class="hljs-comment">/* Picking up previous section's example */</span>
-<span class="hljs-module-declaration"><span class="hljs-keyword">module</span> <span class="hljs-keyword">type</span> <span class="hljs-identifier">EstablishmentType</span> = </span>{
+<span class="hljs-keyword">module</span> <span class="hljs-keyword">type</span> <span class="hljs-module-identifier">EstablishmentType</span> = {
   <span class="hljs-keyword">type</span> profession;
   <span class="hljs-keyword">let</span> getProfession: profession =&gt; <span class="hljs-built_in">string</span>;
 };
@@ -152,7 +152,7 @@ print_endline(<span class="hljs-module-access"><span class="hljs-identifier">Sch
 <p><strong>Note</strong>:</p>
 <p>Modules of the type <code>EstablishmentType</code> can contain more fields than the signature declares, just like the module <code>School</code> in the previous section (if we choose to assign it the type <code>EstablishmentType</code>. Otherwise, <code>School</code> exposes every field). This effectively makes the <code>person1</code> field an enforced implementation detail! Outsiders can't access it, since it's not present in the signature; the signature <strong>constrained</strong> what others can access.</p>
 <p>The type <code>EstablishmentType.profession</code> is <strong>abstract</strong>: it doesn't have a concrete type; it's saying &quot;I don't care what the actual type is, but it's used as input to <code>getProfession</code>&quot;. This is useful to fit many modules under the same interface:</p>
-<pre><code class="hljs css language-reason"><span class="hljs-module-declaration"><span class="hljs-keyword">module</span> <span class="hljs-identifier">Company</span>: EstablishmentType = </span>{
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">module</span> <span class="hljs-module-identifier">Company</span>: <span class="hljs-module-identifier">EstablishmentType</span> = {
   <span class="hljs-keyword">type</span> profession = <span class="hljs-constructor">CEO</span> | <span class="hljs-constructor">Designer</span> | <span class="hljs-constructor">Engineer</span> | <span class="hljs-operator">...</span>;
 
   <span class="hljs-keyword">let</span> getProfession = (person) =&gt; <span class="hljs-operator">...</span>;
@@ -163,14 +163,14 @@ print_endline(<span class="hljs-module-access"><span class="hljs-identifier">Sch
 <p>It's also useful to hide the underlying type as an implementation detail others can't rely on. If you ask what the type of <code>Company.profession</code> is, instead of exposing the variant, it'll only tell you &quot;it's <code>Company.profession</code>&quot;.</p>
 <h3><a class="anchor" aria-hidden="true" id="extending-module-signatures"></a><a href="#extending-module-signatures" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Extending module signatures</h3>
 <p>Like modules themselves, module signatures can also be extended through <code>include module type of Foo</code>:</p>
-<pre><code class="hljs css language-reason"><span class="hljs-module-declaration"><span class="hljs-keyword">module</span> <span class="hljs-keyword">type</span> <span class="hljs-identifier">BaseComponent</span> = </span>{
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">module</span> <span class="hljs-keyword">type</span> <span class="hljs-module-identifier">BaseComponent</span> = {
   <span class="hljs-keyword">let</span> defaultGreeting: <span class="hljs-built_in">string</span>;
   <span class="hljs-keyword">let</span> getAudience: (~excited: <span class="hljs-built_in">bool</span>) =&gt; <span class="hljs-built_in">string</span>;
 };
 
-<span class="hljs-module-declaration"><span class="hljs-keyword">module</span> <span class="hljs-keyword">type</span> <span class="hljs-identifier">ActualComponent</span> = </span>{
+<span class="hljs-keyword">module</span> <span class="hljs-keyword">type</span> <span class="hljs-module-identifier">ActualComponent</span> = {
   <span class="hljs-comment">/* the signature is copied over */</span>
-  <span class="hljs-keyword">include</span> (<span class="hljs-module-type-of"><span class="hljs-keyword">module</span> <span class="hljs-keyword">type</span> <span class="hljs-keyword">of</span> <span class="hljs-identifier">BaseComponent</span></span>);
+  <span class="hljs-keyword">include</span> (<span class="hljs-keyword">module</span> <span class="hljs-keyword">type</span> <span class="hljs-keyword">of</span> <span class="hljs-module-identifier">BaseComponent</span>);
   <span class="hljs-keyword">let</span> render: <span class="hljs-built_in">unit</span> =&gt; <span class="hljs-built_in">string</span>;
 };
 </code></pre>
@@ -194,18 +194,18 @@ print_endline(<span class="hljs-module-access"><span class="hljs-identifier">Sch
 <li>Functors must start with a capital letter (just like modules/signatures).</li>
 </ul>
 <p>Here's an example <code>MakeSet</code> functor, that takes in a module of the type <code>Comparable</code> and returns a new set that can contain such comparable items.</p>
-<pre><code class="hljs css language-reason"><span class="hljs-module-declaration"><span class="hljs-keyword">module</span> <span class="hljs-keyword">type</span> <span class="hljs-identifier">Comparable</span> = </span>{
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">module</span> <span class="hljs-keyword">type</span> <span class="hljs-module-identifier">Comparable</span> = {
   <span class="hljs-keyword">type</span> t;
   <span class="hljs-keyword">let</span> equal: (t, t) =&gt; <span class="hljs-built_in">bool</span>;
 };
 
-<span class="hljs-functor-declaration"><span class="hljs-keyword">module</span> <span class="hljs-identifier">MakeSet</span> = (Item: Comparable) =&gt; </span>{
+<span class="hljs-keyword">module</span> <span class="hljs-module-identifier">MakeSet</span> = (<span class="hljs-module-identifier">Item</span>: <span class="hljs-module-identifier">Comparable</span>) =&gt; {
   <span class="hljs-comment">/* let's use a list as our naive backing data structure */</span>
-  <span class="hljs-keyword">type</span> backingType = <span class="hljs-built_in">list</span>(<span class="hljs-module-access"><span class="hljs-identifier">Item</span></span>.t);
+  <span class="hljs-keyword">type</span> backingType = <span class="hljs-built_in">list</span>(<span class="hljs-module-identifier">Item</span>.t);
   <span class="hljs-keyword">let</span> empty = <span class="hljs-literal">[</span><span class="hljs-literal">]</span>;
-  <span class="hljs-keyword">let</span> add = (currentSet: backingType, newItem: <span class="hljs-module-access"><span class="hljs-identifier">Item</span></span>.t) : backingType =&gt;
+  <span class="hljs-keyword">let</span> add = (currentSet: backingType, newItem: <span class="hljs-module-identifier">Item</span>.t) : backingType =&gt;
     <span class="hljs-comment">/* if item exists */</span>
-    <span class="hljs-keyword">if</span> (<span class="hljs-module-access"><span class="hljs-identifier">List</span></span>.exists((x) =&gt; <span class="hljs-module-access"><span class="hljs-identifier">Item</span></span>.equal(x, newItem), currentSet)) {
+    <span class="hljs-keyword">if</span> (<span class="hljs-module-identifier">List</span>.exists((x) =&gt; <span class="hljs-module-identifier">Item</span>.equal(x, newItem), currentSet)) {
       currentSet <span class="hljs-comment">/* return the same (immutable) set (a list really) */</span>
     } <span class="hljs-keyword">else</span> {
       <span class="hljs-literal">[</span>
@@ -216,37 +216,32 @@ print_endline(<span class="hljs-module-access"><span class="hljs-identifier">Sch
 };
 </code></pre>
 <p>Functors can be applied using function application syntax. In this case, we're creating a set, whose items are pairs of integers.</p>
-<pre><code class="hljs css language-reason"><span class="hljs-module-declaration"><span class="hljs-keyword">module</span> <span class="hljs-identifier">IntPair</span> = </span>{
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">module</span> <span class="hljs-module-identifier">IntPair</span> = {
   <span class="hljs-keyword">type</span> t = (<span class="hljs-built_in">int</span>, <span class="hljs-built_in">int</span>);
   <span class="hljs-keyword">let</span> equal = ((x1, y1), (x2, y2)) =&gt; x1 <span class="hljs-operator">==</span> x2 <span class="hljs-operator">&amp;&amp;</span> y1 <span class="hljs-operator">==</span> y2;
   <span class="hljs-keyword">let</span> create = (x, y) =&gt; (x, y);
 };
 
 <span class="hljs-comment">/* IntPair abides by the Comparable signature required by MakeSet */</span>
-<span class="hljs-module-declaration"><span class="hljs-keyword">module</span> <span class="hljs-identifier">SetOfIntPairs</span> = <span class="hljs-identifier">MakeSet</span></span>(<span class="hljs-constructor">IntPair</span>);
+<span class="hljs-keyword">module</span> <span class="hljs-module-identifier">SetOfIntPairs</span> = <span class="hljs-module-identifier">MakeSet</span>(<span class="hljs-module-identifier">IntPair</span>);
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="module-functions-types"></a><a href="#module-functions-types" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Module functions types</h3>
 <p>Like with module types, functor types also act to constrain and hide what we may assume about functors. The syntax for functor types are consistent with those for function types, but with types capitalized to represent the signatures of modules the functor accepts as arguments and return values. In the previous example, we're exposing the backing type of a set; by giving <code>MakeSet</code> a functor signature, we can hide the underlying data structure!</p>
-<pre><code class="hljs css language-reason"><span class="hljs-module-declaration"><span class="hljs-keyword">module</span> <span class="hljs-keyword">type</span> <span class="hljs-identifier">Comparable</span> = </span><span class="hljs-operator">...</span>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">module</span> <span class="hljs-keyword">type</span> <span class="hljs-module-identifier">Comparable</span> = <span class="hljs-operator">...</span>
 
-<span class="hljs-functor-declaration"><span class="hljs-keyword">module</span> <span class="hljs-keyword">type</span> <span class="hljs-identifier">MakeSetType</span> = (Item: Comparable) =&gt; </span>{
+<span class="hljs-keyword">module</span> <span class="hljs-keyword">type</span> <span class="hljs-module-identifier">MakeSetType</span> = (<span class="hljs-module-identifier">Item</span>: <span class="hljs-module-identifier">Comparable</span>) =&gt; {
   <span class="hljs-keyword">type</span> backingType;
   <span class="hljs-keyword">let</span> empty: backingType;
-  <span class="hljs-keyword">let</span> add: (backingType, <span class="hljs-module-access"><span class="hljs-identifier">Item</span></span>.t) =&gt; backingType;
+  <span class="hljs-keyword">let</span> add: (backingType, <span class="hljs-module-identifier">Item</span>.t) =&gt; backingType;
 };
 
-<span class="hljs-functor-declaration"><span class="hljs-keyword">module</span> <span class="hljs-identifier">MakeSet</span>: MakeSetType = (Item: Comparable) =&gt; </span>{
+<span class="hljs-keyword">module</span> <span class="hljs-module-identifier">MakeSet</span>: <span class="hljs-module-identifier">MakeSetType</span> = (<span class="hljs-module-identifier">Item</span>: <span class="hljs-module-identifier">Comparable</span>) =&gt; {
   <span class="hljs-operator">...</span>
 };
 </code></pre>
-<h2><a class="anchor" aria-hidden="true" id="drawbacks"></a><a href="#drawbacks" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Drawbacks</h2>
-<p>Modules and functors are at a different &quot;layer&quot; of language than the rest ( functions, let bindings, data structures, etc.). For example, you can't easily pass them into a tuple or record. Use them judiciously! Lots of times, just a record or a function is enough.</p>
-<pre><code class="hljs css language-reason"><span class="hljs-module-declaration"><span class="hljs-keyword">module</span> <span class="hljs-identifier">School</span> = </span>{<span class="hljs-operator">...</span>};
-
-<span class="hljs-comment">/* this will straight up give you a syntax error! */</span>
-<span class="hljs-keyword">let</span> schools = (<span class="hljs-constructor">School</span>, <span class="hljs-constructor">School</span>);
-</code></pre>
-</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/uk/object"><span class="arrow-prev">← </span><span>Назад</span></a><a class="docs-next button" href="/docs/uk/promise"><span>Наступне</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav docOnPageNav"><ul class="toc-headings"><li><a href="#basics">Basics</a><ul class="toc-headings"><li><a href="#creation">Creation</a></li><li><a href="#open-ing-a-module"><code>open</code>ing a module</a></li><li><a href="#extending-modules">Extending modules</a></li><li><a href="#every-re-file-is-a-module">Every <code>.re</code> file is a module</a></li></ul></li><li><a href="#signatures">Signatures</a><ul class="toc-headings"><li><a href="#creation-1">Creation</a></li><li><a href="#extending-module-signatures">Extending module signatures</a></li><li><a href="#every-rei-file-is-a-signature">Every <code>.rei</code> file is a signature</a></li></ul></li><li><a href="#module-functions-functors">Module Functions (functors)</a><ul class="toc-headings"><li><a href="#module-functions-types">Module functions types</a></li></ul></li><li><a href="#drawbacks">Drawbacks</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.min.js"></script><script>window.foo = new Pjax({
+<h2><a class="anchor" aria-hidden="true" id="tips-tricks"></a><a href="#tips-tricks" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Tips &amp; Tricks</h2>
+<p>Modules and functors are at a different &quot;layer&quot; of language than the rest (functions, let bindings, data structures, etc.). For example, you can't easily pass them into a tuple or record. Use them judiciously, if ever! Lots of times, just a record or a function is enough.</p>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/uk/object"><span class="arrow-prev">← </span><span>Назад</span></a><a class="docs-next button" href="/docs/uk/promise"><span>Наступне</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav docOnPageNav"><ul class="toc-headings"><li><a href="#basics">Basics</a><ul class="toc-headings"><li><a href="#creation">Creation</a></li><li><a href="#open-ing-a-module"><code>open</code>ing a module</a></li><li><a href="#extending-modules">Extending modules</a></li><li><a href="#every-re-file-is-a-module">Every <code>.re</code> file is a module</a></li></ul></li><li><a href="#signatures">Signatures</a><ul class="toc-headings"><li><a href="#creation-1">Creation</a></li><li><a href="#extending-module-signatures">Extending module signatures</a></li><li><a href="#every-rei-file-is-a-signature">Every <code>.rei</code> file is a signature</a></li></ul></li><li><a href="#module-functions-functors">Module Functions (functors)</a><ul class="toc-headings"><li><a href="#module-functions-types">Module functions types</a></li></ul></li><li><a href="#tips-tricks">Tips &amp; Tricks</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.min.js"></script><script>window.foo = new Pjax({
           areas: [
             // try to use the first query.
             '.mainContainer, .docsNavContainer .toc .navWrapper, .onPageNav',

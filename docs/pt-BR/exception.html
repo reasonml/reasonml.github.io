@@ -43,17 +43,17 @@
   <span class="hljs-keyword">if</span> (callSomeFunctionThatThrows()) {
     <span class="hljs-comment">/* return the found item here */</span>
   } <span class="hljs-keyword">else</span> {
-    raise(<span class="hljs-constructor">Not_found</span>)
+    <span class="hljs-keyword">raise</span>(<span class="hljs-constructor">Not_found</span>)
   };
 
 <span class="hljs-keyword">let</span> result =
-  try (getItem(<span class="hljs-literal">[</span><span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span><span class="hljs-literal">]</span>)) {
+  <span class="hljs-keyword">try</span> (getItem(<span class="hljs-literal">[</span><span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span><span class="hljs-literal">]</span>)) {
   | <span class="hljs-constructor">Not_found</span> =&gt; <span class="hljs-number">0</span> <span class="hljs-comment">/* Default value if getItem throws */</span>
   };
 </code></pre>
 <p>Note que o trecho acima é somente para demonstração; o mais correto é você retornar um <code>option(int)</code> diretamente de <code>getItem</code> e evitar o <code>try</code> completamente.</p>
 <p>Você pode casar expressões com exceções diretamente <em>enquanto</em> espera outro valor retornado por uma função:</p>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">switch</span> (<span class="hljs-module-access"><span class="hljs-identifier">List</span></span>.find((i) =&gt; i <span class="hljs-operator">===</span> oItem, meusItems)) {
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">switch</span> (<span class="hljs-module-identifier">List</span>.find((i) =&gt; i <span class="hljs-operator">===</span> oItem, meusItems)) {
 | item =&gt; print_endline(item)
 | <span class="hljs-keyword">exception</span> <span class="hljs-constructor">Not_found</span> =&gt; print_endline(<span class="hljs-string">"O item não foi encontrado!"</span>)
 };

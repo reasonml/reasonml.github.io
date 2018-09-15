@@ -43,17 +43,17 @@
   <span class="hljs-keyword">if</span> (callSomeFunctionThatThrows()) {
     <span class="hljs-comment">/* return the found item here */</span>
   } <span class="hljs-keyword">else</span> {
-    raise(<span class="hljs-constructor">Not_found</span>)
+    <span class="hljs-keyword">raise</span>(<span class="hljs-constructor">Not_found</span>)
   };
 
 <span class="hljs-keyword">let</span> result =
-  try (getItem(<span class="hljs-literal">[</span><span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span><span class="hljs-literal">]</span>)) {
+  <span class="hljs-keyword">try</span> (getItem(<span class="hljs-literal">[</span><span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span><span class="hljs-literal">]</span>)) {
   | <span class="hljs-constructor">Not_found</span> =&gt; <span class="hljs-number">0</span> <span class="hljs-comment">/* Default value if getItem throws */</span>
   };
 </code></pre>
 <p>Note that the above is just for demonstration purposes; in reality, you'd return an <code>option(int)</code> directly from <code>getItem</code> and avoid the <code>try</code> altogether.</p>
 <p>You can directly match on exceptions <em>while</em> getting another return value from a function:</p>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">switch</span> (<span class="hljs-module-access"><span class="hljs-identifier">List</span></span>.find((i) =&gt; i <span class="hljs-operator">===</span> theItem, myItems)) {
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">switch</span> (<span class="hljs-module-identifier">List</span>.find((i) =&gt; i <span class="hljs-operator">===</span> theItem, myItems)) {
 | item =&gt; print_endline(item)
 | <span class="hljs-keyword">exception</span> <span class="hljs-constructor">Not_found</span> =&gt; print_endline(<span class="hljs-string">"아이템을 찾을 수 없습니다!"</span>)
 };

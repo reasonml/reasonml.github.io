@@ -84,7 +84,7 @@
 <ul>
 <li>修改 <code>foo.bar</code> 成 <code>foo##bar</code>。 這個 <a href="https://bucklescript.github.io/docs/en/object.html#object-as-record">BuckleScript 逃生出口</a>功能將會是你中期的好朋友。</li>
 <li>轉換 <code>{foo: bar}</code> 成 <code>[%bs.obj {foo: bar}]</code>（<a href="https://bucklescript.github.io/docs/en/object.html#creation">文件</a>）。 經過 <code>refmt</code>，這會改成語法糖 <code>{&quot;foo&quot;: bar}</code>。</li>
-<li>與外部 JS 檔案溝通，使用 <code>external</code>。這是 BuckleScript 的 <a href="https://bucklescript.github.io/docs/en/intro-to-external.html">外部函式介面</a>86。
+<li>與外部 JS 檔案溝通，使用 <code>external</code>。這是 BuckleScript 的 <a href="https://bucklescript.github.io/docs/en/intro-to-external.html">外部函式介面</a>14。
 <ul>
 <li>內聯 externals。現在不需要新增整潔，分離良好的 externals。稍後會回來做。</li>
 <li>如果處理 <code>external</code> 的輸入/輸出正確型別太麻煩，使用某些佔位符多形型別，例如 <code>external getStudentById: 'whatever =&gt; 'whateverElse = ...</code>。</li>
@@ -135,7 +135,7 @@
 <li>可以保持 <code>external</code> 內聯，或者另外抽到別的檔案。</li>
 </ul>
 <pre><code class="hljs css language-reason"><span class="hljs-comment">/* 目前檔案 */</span>
-<span class="hljs-keyword">type</span> payloadType = {. <span class="hljs-string">"student"</span>: <span class="hljs-module-access"><span class="hljs-identifier">School</span></span>.student}; <span class="hljs-comment">/* TODO：放在別的地方！ */</span>
+<span class="hljs-keyword">type</span> payloadType = {. <span class="hljs-string">"student"</span>: <span class="hljs-module-identifier">School</span>.student}; <span class="hljs-comment">/* TODO：放在別的地方！ */</span>
 
 <span class="hljs-keyword">let</span> defaultId = <span class="hljs-number">10</span>;
 
@@ -143,7 +143,7 @@
   <span class="hljs-keyword">if</span> (usePayload) {
     payload##student
   } <span class="hljs-keyword">else</span> {
-    <span class="hljs-module-access"><span class="hljs-identifier">School</span></span>.getStudentById(defaultId)
+    <span class="hljs-module-identifier">School</span>.getStudentById(defaultId)
   };
 </code></pre>
 <pre><code class="hljs css language-reason"><span class="hljs-comment">/* 專屬 School.re 檔案 */</span>

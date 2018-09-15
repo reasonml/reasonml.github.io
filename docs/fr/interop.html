@@ -39,7 +39,7 @@
             });
         </script></nav></div><div class="container mainContainer docMainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://crowdin.com/project/reason/fr" target="_blank" rel="noreferrer noopener">Translate</a><h1 class="postHeaderTitle">Interop</h1></header><article><div><span><h2><a class="anchor" aria-hidden="true" id="ajouter-du-javascript-en-plein-milieu-de-votre-code-reason"></a><a href="#ajouter-du-javascript-en-plein-milieu-de-votre-code-reason" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Ajouter du JavaScript en plein milieu de votre code Reason</h2>
 <p>Si vous ne faites que tester des choses, cela peut être très agréable, mais vous avez également toute l'insécurité du code JavaScript</p>
-<pre><code class="hljs css language-reason"><span class="hljs-module-access"><span class="hljs-identifier">Js</span></span>.log(<span class="hljs-string">"this is reason"</span>);
+<pre><code class="hljs css language-reason"><span class="hljs-module-identifier">Js</span>.log(<span class="hljs-string">"this is reason"</span>);
 
 <span class="hljs-literal">[</span>%bs.raw <span class="hljs-string">{| console.log('here is some javascript for you') |}</span><span class="hljs-literal">]</span>;
 </code></pre>
@@ -54,18 +54,18 @@
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" id="rajouter-du-javascript-et-rendre-le-tout-accessible-depuis-reason"></a><a href="#rajouter-du-javascript-et-rendre-le-tout-accessible-depuis-reason" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Rajouter du JavaScript et rendre le tout accessible depuis Reason</h2>
 <p>Que faire si vous voulez une valeur qui peut être utilisée à partir de votre code Reason ?</p>
-<pre><code class="hljs css language-reason"><span class="hljs-module-access"><span class="hljs-identifier">Js</span></span>.log(<span class="hljs-string">"this is reason"</span>);
+<pre><code class="hljs css language-reason"><span class="hljs-module-identifier">Js</span>.log(<span class="hljs-string">"this is reason"</span>);
 <span class="hljs-keyword">let</span> x = <span class="hljs-literal">[</span>%bs.raw <span class="hljs-string">{| 'here is a string from javascript' |}</span><span class="hljs-literal">]</span>;
-<span class="hljs-module-access"><span class="hljs-identifier">Js</span></span>.log(x <span class="hljs-operator">++</span> <span class="hljs-string">" back in reason land"</span>); <span class="hljs-comment">/* ++ is the operator for string concat */</span>
+<span class="hljs-module-identifier">Js</span>.log(x <span class="hljs-operator">++</span> <span class="hljs-string">" back in reason land"</span>); <span class="hljs-comment">/* ++ is the operator for string concat */</span>
 </code></pre>
 <p>Maintenant vous devez peut-être vous demander &quot;mais qu'elle est cette sorcellerie ??&quot;. Comment ocaml fait pour savoir que <code>x</code> est une chaine de caractère ? <strong>Il ne sait pas</strong>. Le type de <code>x</code> dans ce code est un type magique qui s'unifiera avec n'importe quoi ! Voilà pourquoi cette méthode est très dangereuse et peut avoir des effets en cascade dans l'algorithme d'inférence de types d'OCaml.</p>
 <pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> y = <span class="hljs-literal">[</span>%bs.raw <span class="hljs-string">{| 'something' |}</span><span class="hljs-literal">]</span>;
-<span class="hljs-module-access"><span class="hljs-identifier">Js</span></span>.log((<span class="hljs-string">"a string"</span> <span class="hljs-operator">++</span> y, <span class="hljs-number">10</span> <span class="hljs-operator">+</span> y));
+<span class="hljs-module-identifier">Js</span>.log((<span class="hljs-string">"a string"</span> <span class="hljs-operator">++</span> y, <span class="hljs-number">10</span> <span class="hljs-operator">+</span> y));
 <span class="hljs-comment">/* attention !! OCaml ne vous empêchera pas d'utiliser y comme étant 2 types totalement différents */</span>
 </code></pre>
 <p>Pour pallier cela, vous devez <strong>toujours</strong> précisez le type concret du résultat de <code>bs.raw</code>.</p>
 <pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> x: <span class="hljs-built_in">string</span> = <span class="hljs-literal">[</span>%bs.raw <span class="hljs-string">{| 'well-typed' |}</span><span class="hljs-literal">]</span>;
-<span class="hljs-module-access"><span class="hljs-identifier">Js</span></span>.log(x <span class="hljs-operator">++</span> <span class="hljs-string">" back in reason land"</span>);
+<span class="hljs-module-identifier">Js</span>.log(x <span class="hljs-operator">++</span> <span class="hljs-string">" back in reason land"</span>);
 <span class="hljs-comment">/* OCaml générera une erreur si vous essayez d'utiliser x comme étant autre chose qu'une string */</span>
 </code></pre>
 <p>Et voici le résulat !</p>
@@ -106,9 +106,9 @@
 |}</span>
 <span class="hljs-literal">]</span>;
 
-<span class="hljs-keyword">let</span> calculate = (numbers, scaleFactor) =&gt; jsCalculate(<span class="hljs-module-access"><span class="hljs-identifier">Array</span></span>.of_list(numbers), scaleFactor);
+<span class="hljs-keyword">let</span> calculate = (numbers, scaleFactor) =&gt; jsCalculate(<span class="hljs-module-identifier">Array</span>.of_list(numbers), scaleFactor);
 
-<span class="hljs-module-access"><span class="hljs-identifier">Js</span></span>.log(calculate(<span class="hljs-literal">[</span><span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span><span class="hljs-literal">]</span>, <span class="hljs-number">10</span>)); <span class="hljs-comment">/* -&gt; 60 */</span>
+<span class="hljs-module-identifier">Js</span>.log(calculate(<span class="hljs-literal">[</span><span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span><span class="hljs-literal">]</span>, <span class="hljs-number">10</span>)); <span class="hljs-comment">/* -&gt; 60 */</span>
 </code></pre>
 <p>Bien sûr, cette fonction que nous avons écrit en JavaScript pourrait être portée en Reason sans trop de tracas.</p>
 <p><strong>Souvenez-vous</strong> que c'est une porte de secours qui est très utile pour apprendre afin que vous puissiez vous faire la main rapidement et construire quelque chose, mais c'est un bon exercice que de revenir sur ses pas et réécrire le tout en un beau code Reason bien typé comme il faut.</p>
@@ -160,7 +160,7 @@ ctx.fillRect(<span class="hljs-number">0.0</span>, <span class="hljs-number">0.0
 <p>À titre d'exemple, voici le code source entier du wrapper <a href="https://github.com/reasonml-community/bs-glob"><code>bs.glob</code></a> (convertit en Reason, l'original est en OCaml) :</p>
 <pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> error;
 
-<span class="hljs-attribute">[@bs.module]</span> <span class="hljs-keyword">external</span> glob : (<span class="hljs-built_in">string</span>, (<span class="hljs-module-access"><span class="hljs-identifier">Js</span></span>.nullable(error), <span class="hljs-built_in">array</span>(<span class="hljs-built_in">string</span>)) =&gt; <span class="hljs-built_in">unit</span>) =&gt; <span class="hljs-built_in">unit</span> = <span class="hljs-string">""</span>;
+<span class="hljs-attribute">[@bs.module]</span> <span class="hljs-keyword">external</span> glob : (<span class="hljs-built_in">string</span>, (<span class="hljs-module-identifier">Js</span>.nullable(error), <span class="hljs-built_in">array</span>(<span class="hljs-built_in">string</span>)) =&gt; <span class="hljs-built_in">unit</span>) =&gt; <span class="hljs-built_in">unit</span> = <span class="hljs-string">""</span>;
 
 <span class="hljs-attribute">[@bs.val]</span> <span class="hljs-attribute">[@bs.module "glob"]</span> <span class="hljs-keyword">external</span> sync : <span class="hljs-built_in">string</span> =&gt; <span class="hljs-built_in">array</span>(<span class="hljs-built_in">string</span>) = <span class="hljs-string">""</span>;
 </code></pre>
