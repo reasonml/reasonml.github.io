@@ -74,7 +74,7 @@ print_endline(<span class="hljs-module-identifier">School</span>.getProfession(a
 <span class="hljs-keyword">let</span> p: profession = getProfession(person1);
 </code></pre>
 <p>The content of <code>School</code> module are made visible (<strong>not</strong> copied into the file, but simply made visible!) in scope. <code>profession</code>, <code>getProfession</code> and <code>person1</code> will thus correctly be found.</p>
-<p><strong>Use <code>open</code> this sparingly, it's convenient, but makes it hard to know where some values come from</strong>. You should usually use <code>open</code> in a local scope:</p>
+<p><strong>要謹慎使用<code>open</code></strong>。這很方便，但很難知道某些值來自哪裡。你通常應該在local scope中使用<code>open</code>。</p>
 <pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> p = {
   <span class="hljs-keyword">open</span> <span class="hljs-module-identifier">School</span>;
   getProfession(person1);
