@@ -44,7 +44,7 @@
 <span class="hljs-keyword">let</span> (ten, twenty) = someInts;
 </code></pre>
 <p>以下は変数を束縛します: <code>name = &quot;Guy&quot;</code>, <code>age = 30</code></p>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> person = {name: <span class="hljs-built_in">string</span>, age: <span class="hljs-built_in">int</span>};
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> person = {name: string, age: int};
 <span class="hljs-keyword">let</span> somePerson = {name: <span class="hljs-string">"Guy"</span>, age: <span class="hljs-number">30</span>};
 <span class="hljs-keyword">let</span> {name, age} = somePerson;
 </code></pre>
@@ -52,13 +52,13 @@
 <pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> {name: n, age: a} = somePerson;
 </code></pre>
 <p>構造化代入でも型注釈を指定できます。</p>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> (ten: <span class="hljs-built_in">int</span>, twenty: <span class="hljs-built_in">int</span>) = someInts;
-<span class="hljs-keyword">let</span> {name: (n: <span class="hljs-built_in">string</span>), age: (a: <span class="hljs-built_in">int</span>)} = somePerson;
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> (ten: int, twenty: int) = someInts;
+<span class="hljs-keyword">let</span> {name: (n: string), age: (a: int)} = somePerson;
 </code></pre>
 <p>Destructuring a function's labeled arguments is also possible.</p>
 <pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> person = {
-  name: <span class="hljs-built_in">string</span>,
-  age: <span class="hljs-built_in">int</span>
+  name: string,
+  age: int
 };
 
 <span class="hljs-keyword">let</span> someFunction = (~person <span class="hljs-keyword">as</span> {name}) =&gt; {

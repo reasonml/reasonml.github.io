@@ -149,8 +149,8 @@
 <pre><code class="hljs css language-reason"><span class="hljs-comment">/* in a dedicated School.re file */</span>
 <span class="hljs-keyword">type</span> student;
 
-<span class="hljs-attribute">[@bs.module "School"]</span> <span class="hljs-keyword">external</span> getStudentById : <span class="hljs-built_in">int</span> =&gt; student = <span class="hljs-string">"getStudentById"</span>;
-<span class="hljs-attribute">[@bs.module "School"]</span> <span class="hljs-keyword">external</span> getAllStudents : <span class="hljs-built_in">unit</span> =&gt; <span class="hljs-built_in">array</span>(student) = <span class="hljs-string">"getAllStudents"</span>;
+<span class="hljs-attribute">[@bs.module "School"]</span> <span class="hljs-keyword">external</span> getStudentById : int =&gt; student = <span class="hljs-string">"getStudentById"</span>;
+<span class="hljs-attribute">[@bs.module "School"]</span> <span class="hljs-keyword">external</span> getAllStudents : unit =&gt; array(student) = <span class="hljs-string">"getAllStudents"</span>;
 </code></pre>
 <p>Type <code>student</code> doesn't have an actual content; that's called an <a href="/docs/zh-CN/module#signatures">abstract type</a>. It's a convenient way of specifying the relationship between external calls without knowing what the shape of the data is under the hood.</p>
 <p>And then you're done!</p>

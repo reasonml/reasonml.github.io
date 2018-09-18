@@ -96,7 +96,7 @@ drawCircle(~radius=<span class="hljs-number">10</span>, ~color=<span class="hljs
 </code></pre>
 <p>사실은, <code>(~radius)</code> 는 그저 <code>(~radius as radius)</code>의 줄임(<strong>punning</strong>이라 불림) 일 뿐입니다.</p>
 <p>인자 타입의 명시는 다음과 같이 할 수 있습니다:</p>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> drawCircle = (~radius <span class="hljs-keyword">as</span> r: <span class="hljs-built_in">int</span>, ~color <span class="hljs-keyword">as</span> c: <span class="hljs-built_in">string</span>) =&gt; <span class="hljs-operator">...</span>;
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> drawCircle = (~radius <span class="hljs-keyword">as</span> r: int, ~color <span class="hljs-keyword">as</span> c: string) =&gt; <span class="hljs-operator">...</span>;
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="커링"></a><a href="#커링" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>커링</h3>
 <p>Reason의 함수는 <strong>부분적으로</strong> 호출될 수 있습니다:</p>
@@ -190,28 +190,28 @@ drawCircle(~radius=<span class="hljs-number">10</span>, ~color=<span class="hljs
 </code></pre>
 <h4><a class="anchor" aria-hidden="true" id="타입-명시와-함께"></a><a href="#타입-명시와-함께" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>타입 명시와 함께</h4>
 <pre><code class="hljs css language-reason"><span class="hljs-comment">/* 익명 함수 */</span>
-(x: <span class="hljs-built_in">int</span>) =&gt; (y: <span class="hljs-built_in">int</span>): <span class="hljs-built_in">int</span> =&gt; <span class="hljs-number">1</span>;
+(x: int) =&gt; (y: int): int =&gt; <span class="hljs-number">1</span>;
 <span class="hljs-comment">/* 위에 대한 문법적 설탕 */</span>
-(x: <span class="hljs-built_in">int</span>, y: <span class="hljs-built_in">int</span>): <span class="hljs-built_in">int</span> =&gt; <span class="hljs-number">1</span>;
+(x: int, y: int): int =&gt; <span class="hljs-number">1</span>;
 <span class="hljs-comment">/* 이름 할당 */</span>
-<span class="hljs-keyword">let</span> add = (x: <span class="hljs-built_in">int</span>, y: <span class="hljs-built_in">int</span>): <span class="hljs-built_in">int</span> =&gt; <span class="hljs-number">1</span>;
+<span class="hljs-keyword">let</span> add = (x: int, y: int): int =&gt; <span class="hljs-number">1</span>;
 
 <span class="hljs-comment">/* 이름 있는 인자 */</span>
-<span class="hljs-keyword">let</span> add = (~first <span class="hljs-keyword">as</span> x: <span class="hljs-built_in">int</span>, ~second <span class="hljs-keyword">as</span> y: <span class="hljs-built_in">int</span>) : <span class="hljs-built_in">int</span> =&gt; x <span class="hljs-operator">+</span> y;
+<span class="hljs-keyword">let</span> add = (~first <span class="hljs-keyword">as</span> x: int, ~second <span class="hljs-keyword">as</span> y: int) : int =&gt; x <span class="hljs-operator">+</span> y;
 <span class="hljs-comment">/* punning 문법적 설탕과 함께 */</span>
-<span class="hljs-keyword">let</span> add = (~first: <span class="hljs-built_in">int</span>, ~second: <span class="hljs-built_in">int</span>) : <span class="hljs-built_in">int</span> =&gt; first <span class="hljs-operator">+</span> second;
+<span class="hljs-keyword">let</span> add = (~first: int, ~second: int) : int =&gt; first <span class="hljs-operator">+</span> second;
 
 <span class="hljs-comment">/* 기본값과 함께 이름 붙여짐 */</span>
-<span class="hljs-keyword">let</span> add = (~first <span class="hljs-keyword">as</span> x: <span class="hljs-built_in">int</span>=<span class="hljs-number">1</span>, ~second <span class="hljs-keyword">as</span> y: <span class="hljs-built_in">int</span>=<span class="hljs-number">2</span>) : <span class="hljs-built_in">int</span> =&gt; x <span class="hljs-operator">+</span> y;
+<span class="hljs-keyword">let</span> add = (~first <span class="hljs-keyword">as</span> x: int=<span class="hljs-number">1</span>, ~second <span class="hljs-keyword">as</span> y: int=<span class="hljs-number">2</span>) : int =&gt; x <span class="hljs-operator">+</span> y;
 <span class="hljs-comment">/* punning 문법적 설탕과 함께 */</span>
-<span class="hljs-keyword">let</span> add = (~first: <span class="hljs-built_in">int</span>=<span class="hljs-number">1</span>, ~second: <span class="hljs-built_in">int</span>=<span class="hljs-number">2</span>) : <span class="hljs-built_in">int</span> =&gt; first <span class="hljs-operator">+</span> second;
+<span class="hljs-keyword">let</span> add = (~first: int=<span class="hljs-number">1</span>, ~second: int=<span class="hljs-number">2</span>) : int =&gt; first <span class="hljs-operator">+</span> second;
 
 <span class="hljs-comment">/* 선택적 인자 */</span>
-<span class="hljs-keyword">let</span> add = (~first <span class="hljs-keyword">as</span> x: option(<span class="hljs-built_in">int</span>)=?, ~second <span class="hljs-keyword">as</span> y: option(<span class="hljs-built_in">int</span>)=?) : <span class="hljs-built_in">int</span> =&gt; <span class="hljs-keyword">switch</span> (x) {<span class="hljs-operator">...</span>};
+<span class="hljs-keyword">let</span> add = (~first <span class="hljs-keyword">as</span> x: option(int)=?, ~second <span class="hljs-keyword">as</span> y: option(int)=?) : int =&gt; <span class="hljs-keyword">switch</span> (x) {<span class="hljs-operator">...</span>};
 <span class="hljs-comment">/* punning 문법적 설탕과 함께 */</span>
 <span class="hljs-comment">/* 호출자는 `option int`가 아닌 `int`를 넘길 것입니다 */</span>
 <span class="hljs-comment">/* 함수 안에선 `first`와 `second`는 `option int` 입니다. */</span>
-<span class="hljs-keyword">let</span> add = (~first: option(<span class="hljs-built_in">int</span>)=?, ~second: option(<span class="hljs-built_in">int</span>)=?) : <span class="hljs-built_in">int</span> =&gt; <span class="hljs-keyword">switch</span> (first) {<span class="hljs-operator">...</span>};
+<span class="hljs-keyword">let</span> add = (~first: option(int)=?, ~second: option(int)=?) : int =&gt; <span class="hljs-keyword">switch</span> (first) {<span class="hljs-operator">...</span>};
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="적용"></a><a href="#적용" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>적용</h3>
 <pre><code class="hljs css language-reason"><span class="hljs-comment">/* 익명 적용 완전함을 위해서만 리스트에 포함 */</span>
@@ -234,38 +234,38 @@ add(~first?, ~second?);
 </code></pre>
 <h4><a class="anchor" aria-hidden="true" id="타입-명시와-함께-1"></a><a href="#타입-명시와-함께-1" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>타입 명시와 함께</h4>
 <pre><code class="hljs css language-reason"><span class="hljs-comment">/* 익명 적용 */</span>
-add(x: <span class="hljs-built_in">int</span>)(y: <span class="hljs-built_in">int</span>);
+add(x: int)(y: int);
 
 <span class="hljs-comment">/* 이름 있는 인자 */</span>
-add(~first=<span class="hljs-number">1</span>: <span class="hljs-built_in">int</span>, ~second=<span class="hljs-number">2</span>: <span class="hljs-built_in">int</span>);
+add(~first=<span class="hljs-number">1</span>: int, ~second=<span class="hljs-number">2</span>: int);
 <span class="hljs-comment">/* punning 문법적 설탕과 함께 */</span>
-add(~first: <span class="hljs-built_in">int</span>, ~second: <span class="hljs-built_in">int</span>);
+add(~first: int, ~second: int);
 
 <span class="hljs-comment">/* 기본값이 있는 적용. 일반 적용과 같음 */</span>
-add(~first=<span class="hljs-number">1</span>: <span class="hljs-built_in">int</span>, ~second=<span class="hljs-number">2</span>: <span class="hljs-built_in">int</span>);
+add(~first=<span class="hljs-number">1</span>: int, ~second=<span class="hljs-number">2</span>: int);
 
 <span class="hljs-comment">/* 명시적 선택적 인자 적용 */</span>
-add(~first=?<span class="hljs-constructor">Some</span>(<span class="hljs-number">1</span>): option(<span class="hljs-built_in">int</span>), ~second=?<span class="hljs-constructor">Some</span>(<span class="hljs-number">2</span>): option(<span class="hljs-built_in">int</span>));
+add(~first=?<span class="hljs-constructor">Some</span>(<span class="hljs-number">1</span>): option(int), ~second=?<span class="hljs-constructor">Some</span>(<span class="hljs-number">2</span>): option(int));
 <span class="hljs-comment">/* punning 문법적 설탕과 함께 */</span>
-add(~first: option(<span class="hljs-built_in">int</span>)?, ~second: option(<span class="hljs-built_in">int</span>)?);
+add(~first: option(int)?, ~second: option(int)?);
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="독립된-타입-시그니쳐"></a><a href="#독립된-타입-시그니쳐" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>독립된 타입 시그니쳐</h3>
 <pre><code class="hljs css language-reason"><span class="hljs-comment">/* first arg type, second arg type, return type */</span>
-<span class="hljs-keyword">type</span> foo = <span class="hljs-built_in">int</span> =&gt; <span class="hljs-built_in">int</span> =&gt; <span class="hljs-built_in">int</span>;
+<span class="hljs-keyword">type</span> foo = int =&gt; int =&gt; int;
 <span class="hljs-comment">/* sugar for the above */</span>
-<span class="hljs-keyword">type</span> foo = (<span class="hljs-built_in">int</span>, <span class="hljs-built_in">int</span>) =&gt; <span class="hljs-built_in">int</span>;
+<span class="hljs-keyword">type</span> foo = (int, int) =&gt; int;
 
 <span class="hljs-comment">/* labeled */</span>
-<span class="hljs-keyword">type</span> foo = (~first: <span class="hljs-built_in">int</span>, ~second: <span class="hljs-built_in">int</span>) =&gt; <span class="hljs-built_in">int</span>;
+<span class="hljs-keyword">type</span> foo = (~first: int, ~second: int) =&gt; int;
 
 <span class="hljs-comment">/* labeled */</span>
-<span class="hljs-keyword">type</span> foo = (~first: <span class="hljs-built_in">int</span>=?, ~second: <span class="hljs-built_in">int</span>=?, <span class="hljs-built_in">unit</span>) =&gt; <span class="hljs-built_in">int</span>;
+<span class="hljs-keyword">type</span> foo = (~first: int=?, ~second: int=?, unit) =&gt; int;
 </code></pre>
 <h4><a class="anchor" aria-hidden="true" id="인터페이스-파일에서"></a><a href="#인터페이스-파일에서" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>인터페이스 파일에서</h4>
 <p>구현 파일(<code>.re</code>)에 있는 함수를 명시하려면:</p>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> add: <span class="hljs-built_in">int</span> =&gt; <span class="hljs-built_in">int</span> =&gt; <span class="hljs-built_in">int</span>;
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> add: int =&gt; int =&gt; int;
 <span class="hljs-comment">/* 위에 대한 문법적 설탕 */</span>
-<span class="hljs-keyword">let</span> add: (<span class="hljs-built_in">int</span>, <span class="hljs-built_in">int</span>) =&gt; <span class="hljs-built_in">int</span>;
+<span class="hljs-keyword">let</span> add: (int, int) =&gt; int;
 </code></pre>
 <p><code>type foo = bar</code>를 <code>let add: bar</code>로 바꿔야 한다는 것만 제외하면 같은 규칙이 적용됩니다.</p>
 <p>이것을 인터페이스 타입에서 실제로 타입을 export 하는 것과 헷갈리지 마세요. <code>let add: bar</code>는 구현 파일에 이미 존재하는 <code>bar</code> 값을 명시합니다. <code>type foo = bar</code>는 구현 파일에서 같은 형태를 가진 타입을 export 합니다.</p>

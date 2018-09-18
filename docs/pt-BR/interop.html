@@ -41,7 +41,7 @@
 <p>If you're just hacking things together, this can be very nice, but you also have all of the unsafety of JavaScript code</p>
 <pre><code class="hljs css language-reason"><span class="hljs-module-identifier">Js</span>.log(<span class="hljs-string">"this is reason"</span>);
 
-<span class="hljs-literal">[</span>%bs.raw <span class="hljs-string">{| console.log('here is some javascript for you') |}</span><span class="hljs-literal">]</span>;
+<span class="hljs-attribute">[%bs.raw {| console.log('here is some javascript for you') |}]</span>;
 </code></pre>
 <blockquote>
 <p><code>{|</code> e <code>|}</code> são os delimitadores de strings multi-linha em OCaml. Você também pode colocar uma tag ali, ex. <code>{algo|</code> e então ela irá procurar por um <code>|algo}</code> correspondente para fechamento.</p>
@@ -55,16 +55,16 @@
 <h2><a class="anchor" aria-hidden="true" id="inserindo-javascript-no-seu-codigo-e-tornando-o-acessivel-pelo-reason"></a><a href="#inserindo-javascript-no-seu-codigo-e-tornando-o-acessivel-pelo-reason" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Inserindo Javascript no seu código e tornando-o acessível pelo Reason</h2>
 <p>E se você quiser um valor que possa ser usado por seu código Reason?</p>
 <pre><code class="hljs css language-reason"><span class="hljs-module-identifier">Js</span>.log(<span class="hljs-string">"this is reason"</span>);
-<span class="hljs-keyword">let</span> x = <span class="hljs-literal">[</span>%bs.raw <span class="hljs-string">{| 'here is a string from javascript' |}</span><span class="hljs-literal">]</span>;
+<span class="hljs-keyword">let</span> x = <span class="hljs-attribute">[%bs.raw {| 'here is a string from javascript' |}]</span>;
 <span class="hljs-module-identifier">Js</span>.log(x <span class="hljs-operator">++</span> <span class="hljs-string">" back in reason land"</span>); <span class="hljs-comment">/* ++ is the operator for string concat */</span>
 </code></pre>
 <p>Agora você deve estar pensando &quot;que mágica é essa?? How did ocaml know that <code>x</code> was a string?&quot; <strong>It doesn't</strong>. The type of <code>x</code> in this code is a magic type that will unify with anything! This is quite dangerous and can have cascading effects in OCaml's type inference algorithm.</p>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> y = <span class="hljs-literal">[</span>%bs.raw <span class="hljs-string">{| 'something' |}</span><span class="hljs-literal">]</span>;
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> y = <span class="hljs-attribute">[%bs.raw {| 'something' |}]</span>;
 <span class="hljs-module-identifier">Js</span>.log((<span class="hljs-string">"a string"</span> <span class="hljs-operator">++</span> y, <span class="hljs-number">10</span> <span class="hljs-operator">+</span> y));
 <span class="hljs-comment">/* perigo!! OCaml não irá impedi-lo de usar y como tendo 2 tipos totalmente distintos */</span>
 </code></pre>
 <p>Para consertar isso, você deve <strong>sempre</strong> prover um tipo concreto para o resultado de um <code>bs.raw</code>.</p>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> x: <span class="hljs-built_in">string</span> = <span class="hljs-literal">[</span>%bs.raw <span class="hljs-string">{| 'bem-tipada' |}</span><span class="hljs-literal">]</span>;
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> x: string = <span class="hljs-attribute">[%bs.raw {| 'bem-tipada' |}]</span>;
 <span class="hljs-module-identifier">Js</span>.log(x <span class="hljs-operator">++</span> <span class="hljs-string">"de volta na terra do Reason"</span>);
 <span class="hljs-comment">/* OCaml acusará um erro caso você tente usar x como qualquer outra coisa além de string */</span>
 </code></pre>
@@ -94,8 +94,8 @@
 <li>Se você quiser se aprofundar, existe uma lista <a href="https://bucklescript.github.io/docs/en/common-data-types.html#cheat-sheet">na documentação de BuckleScript</a></li>
 </ul>
 <p>Sabendo disto, nós podemos escrever uma função em JavaScript que aceita um array e retorna um número, sem grandes problemas.</p>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> calcularComJs: (<span class="hljs-built_in">array</span>(<span class="hljs-built_in">int</span>), <span class="hljs-built_in">int</span>) =&gt; <span class="hljs-built_in">int</span> = <span class="hljs-literal">[</span>%bs.raw
-  <span class="hljs-string">{|
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> calcularComJs: (array(int), int) =&gt; int = <span class="hljs-attribute">[%bs.raw
+  {|
  function (numeros, fatorDeEscala) {
    var resultado = 0;
    numeros.forEach(numero =&gt; {
@@ -103,8 +103,8 @@
    });
    return resultado * fatorDeEscala;
  }
-|}</span>
-<span class="hljs-literal">]</span>;
+|}
+]</span>;
 
 <span class="hljs-keyword">let</span> calcular = (numeros, fatorDeEscala) =&gt; calcularComJs(<span class="hljs-module-identifier">Array</span>.of_list(numeros), fatorDeEscala);
 
@@ -117,9 +117,9 @@
 <p>Até agora nós temos usado <code>bs.raw</code>, que é uma maneira rápida e vaga de fazer as coisas, e <strong>não</strong> é recomendada para produção.</p>
 <p>Mas e se realmente precisarmos chamar uma função que está em código JavaScript? Isso é necessário para interagir com DOM ou usar módulos do Node. Em BuckleScript, você usa uma declaração <code>external</code> (<a href="https://bucklescript.github.io/docs/en/intro-to-external.html">documentação</a>).</p>
 <p>Obter um valor e obter uma função são ambos bem simples:</p>
-<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.val]</span> <span class="hljs-keyword">external</span> pi : <span class="hljs-built_in">float</span> = <span class="hljs-string">"Math.PI"</span>;
+<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.val]</span> <span class="hljs-keyword">external</span> pi : float = <span class="hljs-string">"Math.PI"</span>;
 <span class="hljs-keyword">let</span> tau = pi <span class="hljs-operator">*.</span> <span class="hljs-number">2.0</span>;
-<span class="hljs-attribute">[@bs.val]</span> <span class="hljs-keyword">external</span> alert : <span class="hljs-built_in">string</span> =&gt; <span class="hljs-built_in">unit</span> = <span class="hljs-string">"alert"</span>;
+<span class="hljs-attribute">[@bs.val]</span> <span class="hljs-keyword">external</span> alert : string =&gt; unit = <span class="hljs-string">"alert"</span>;
 alert(<span class="hljs-string">"olar"</span>);
 </code></pre>
 <p>Mas e no caso de precisarmos de algo mais complexo? Aqui está como poderíamos chamar <code>getContext</code> em um nó Canvas do DOM:</p>
@@ -129,9 +129,9 @@ alert(<span class="hljs-string">"olar"</span>);
 
 <span class="hljs-comment">/* vamos deixar os tipos abstratos, 
  * já que não iremos utilizá-los diretamente aqui */</span>
-<span class="hljs-attribute">[@bs.send]</span> <span class="hljs-keyword">external</span> getContext : (canvas, <span class="hljs-built_in">string</span>) =&gt; context = <span class="hljs-string">""</span>;
+<span class="hljs-attribute">[@bs.send]</span> <span class="hljs-keyword">external</span> getContext : (canvas, string) =&gt; context = <span class="hljs-string">""</span>;
 
-<span class="hljs-keyword">let</span> myCanvas: canvas = <span class="hljs-literal">[</span>%bs.raw <span class="hljs-string">{| document.getElementById("mycanvas") |}</span><span class="hljs-literal">]</span>;
+<span class="hljs-keyword">let</span> myCanvas: canvas = <span class="hljs-attribute">[%bs.raw {| document.getElementById("mycanvas") |}]</span>;
 
 <span class="hljs-keyword">let</span> ctx = getContext(myCanvas, <span class="hljs-string">"2d"</span>);
 </code></pre>
@@ -139,7 +139,7 @@ alert(<span class="hljs-string">"olar"</span>);
 <p>Então, nós criamos uma função <code>getContext</code>, mas ao invés de <code>@bs.val</code> nós usamos <code>@bs.send</code>, e usamos uma string vazia para o texto do external. <code>@bs.send</code> significa &quot;nós estaremos chamando um método do primeiro argumento&quot;, que neste caso é o canvas. Dado o trecho acima, BuckleScript vai traduzir <code>getContext(theFirstArgument, theSecondArgument)</code> para <code>theFirstArgument.getContext(theSecondArgument, ...)</code>.</p>
 <p>A string vazia significa &quot;o nome em JS é o mesmo que o nome que estamos dando ao external no domínio do BuckleScript&quot; – neste caso <code>getContext</code>. Se nós desejássemos dar um outro nome (como <code>getRenderingContext</code>), aí necessitaríamos prover a string <code>&quot;getContext&quot;</code> para que o BuckleScript chame a função correta.</p>
 <p>Vamos só adicionar mais uma função para tornar as coisas mais interessantes.</p>
-<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.send]</span> <span class="hljs-keyword">external</span> fillRect : (context, <span class="hljs-built_in">float</span>, <span class="hljs-built_in">float</span>, <span class="hljs-built_in">float</span>, <span class="hljs-built_in">float</span>) =&gt; <span class="hljs-built_in">unit</span> = <span class="hljs-string">""</span>;
+<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.send]</span> <span class="hljs-keyword">external</span> fillRect : (context, float, float, float, float) =&gt; unit = <span class="hljs-string">""</span>;
 </code></pre>
 <p>Agora podemos desenhar!</p>
 <pre><code class="hljs css language-reason">fillRect(ctx, <span class="hljs-number">0.0</span>, <span class="hljs-number">0.0</span>, <span class="hljs-number">100.0</span>, <span class="hljs-number">100.0</span>);
@@ -160,9 +160,9 @@ ctx.fillRect(<span class="hljs-number">0.0</span>, <span class="hljs-number">0.0
 <p>As an example, here's the entire source code of the <a href="https://github.com/reasonml-community/bs-glob"><code>bs.glob</code></a> wrapper (converted to Reason, the original is OCaml):</p>
 <pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> error;
 
-<span class="hljs-attribute">[@bs.module]</span> <span class="hljs-keyword">external</span> glob : (<span class="hljs-built_in">string</span>, (<span class="hljs-module-identifier">Js</span>.nullable(error), <span class="hljs-built_in">array</span>(<span class="hljs-built_in">string</span>)) =&gt; <span class="hljs-built_in">unit</span>) =&gt; <span class="hljs-built_in">unit</span> = <span class="hljs-string">""</span>;
+<span class="hljs-attribute">[@bs.module]</span> <span class="hljs-keyword">external</span> glob : (string, (<span class="hljs-module-identifier">Js</span>.nullable(error), array(string)) =&gt; unit) =&gt; unit = <span class="hljs-string">""</span>;
 
-<span class="hljs-attribute">[@bs.val]</span> <span class="hljs-attribute">[@bs.module "glob"]</span> <span class="hljs-keyword">external</span> sync : <span class="hljs-built_in">string</span> =&gt; <span class="hljs-built_in">array</span>(<span class="hljs-built_in">string</span>) = <span class="hljs-string">""</span>;
+<span class="hljs-attribute">[@bs.val]</span> <span class="hljs-attribute">[@bs.module "glob"]</span> <span class="hljs-keyword">external</span> sync : string =&gt; array(string) = <span class="hljs-string">""</span>;
 </code></pre>
 <p>E as partes relevantes do <code>package.json</code>:</p>
 <pre><code class="hljs css language-json">{

@@ -77,10 +77,10 @@
 <p>В Reason нет способа остановить цикл в середине (<code>break</code> в других языках) и нет способа сделать возврат из середины функции (<code>return</code>). However, we can break out of a while loop easily through using a <a href="/docs/ru/mutation">mutable binding</a>.</p>
 <pre><code class="hljs css language-reason"><span class="hljs-module-identifier">Random</span>.self_init();
 
-<span class="hljs-keyword">let</span> break = <span class="hljs-built_in">ref</span>(<span class="hljs-literal">false</span>);
+<span class="hljs-keyword">let</span> break = ref(<span class="hljs-literal">false</span>);
 
 <span class="hljs-keyword">while</span> (<span class="hljs-operator">!</span> break<span class="hljs-operator">^</span>) {
-  <span class="hljs-keyword">if</span> (<span class="hljs-module-identifier">Random</span>.<span class="hljs-built_in">int</span>(<span class="hljs-number">10</span>) <span class="hljs-operator">===</span> <span class="hljs-number">3</span>) {
+  <span class="hljs-keyword">if</span> (<span class="hljs-module-identifier">Random</span>.int(<span class="hljs-number">10</span>) <span class="hljs-operator">===</span> <span class="hljs-number">3</span>) {
     break <span class="hljs-operator">:=</span> <span class="hljs-literal">true</span>
   } <span class="hljs-keyword">else</span> {
     print_endline(<span class="hljs-string">"hello"</span>)

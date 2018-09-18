@@ -77,10 +77,10 @@
 <p>在Reason中没有循环跳出<code>break</code>关键字(函数也没有<code>return</code>)。 但是，我们可以通过使用 <a href="/docs/zh-CN/mutation"> 可变绑定 </a> 来轻松地中断 while 循环。</p>
 <pre><code class="hljs css language-reason"><span class="hljs-module-identifier">Random</span>.self_init();
 
-<span class="hljs-keyword">let</span> break = <span class="hljs-built_in">ref</span>(<span class="hljs-literal">false</span>);
+<span class="hljs-keyword">let</span> break = ref(<span class="hljs-literal">false</span>);
 
 <span class="hljs-keyword">while</span> (<span class="hljs-operator">!</span> break<span class="hljs-operator">^</span>) {
-  <span class="hljs-keyword">if</span> (<span class="hljs-module-identifier">Random</span>.<span class="hljs-built_in">int</span>(<span class="hljs-number">10</span>) <span class="hljs-operator">===</span> <span class="hljs-number">3</span>) {
+  <span class="hljs-keyword">if</span> (<span class="hljs-module-identifier">Random</span>.int(<span class="hljs-number">10</span>) <span class="hljs-operator">===</span> <span class="hljs-number">3</span>) {
     break <span class="hljs-operator">:=</span> <span class="hljs-literal">true</span>
   } <span class="hljs-keyword">else</span> {
     print_endline(<span class="hljs-string">"hello"</span>)

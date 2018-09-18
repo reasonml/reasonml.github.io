@@ -76,8 +76,8 @@
 <p>Um construtor de uma variante pode suportar dados adicionais separados por vírgulas.</p>
 <pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> account =
   | <span class="hljs-constructor">None</span>
-  | <span class="hljs-constructor">Instagram</span>(<span class="hljs-built_in">string</span>)
-  | <span class="hljs-constructor">Facebook</span>(<span class="hljs-built_in">string</span>, <span class="hljs-built_in">int</span>);
+  | <span class="hljs-constructor">Instagram</span>(string)
+  | <span class="hljs-constructor">Facebook</span>(string, int);
 </code></pre>
 <p>Aqui, <code>Instagram</code> possui uma <code>string</code>, e <code>Facebook</code> possui uma <code>string</code> e um <code>int</code>. Uso:</p>
 <pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> myAccount = <span class="hljs-constructor">Facebook</span>(<span class="hljs-string">"Josh"</span>, <span class="hljs-number">26</span>);
@@ -99,7 +99,7 @@
 </code></pre>
 <p>Esta é a convenção usada para simular um valor &quot;nullable&quot; (anulável, também conhecido como <code>undefined</code> ou <code>null</code>) em outras linguagens. Graças a esta conveniência de definição de tipo, Reason pode, por padrão, assumir que todos os valores são não-anuláveis. Um <code>int</code> sempre vai ser um int, nunca &quot;<code>int</code> <strong>ou</strong> <code>null</code> <strong>ou</strong> <code>undefined</code>&quot;. Caso você queira expressar um &quot;nullable int&quot;, você pode usar <code>option(int)</code>, que pode ser <code>None</code> ou <code>Some(int)</code>. <code>switch</code> força você a tratar os dois casos; porém <strong>um programa Reason não contém erros ocasionados por null</strong>.</p>
 <h4><a class="anchor" aria-hidden="true" id="list"></a><a href="#list" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>list</code></h4>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> <span class="hljs-built_in">list</span>('a) = <span class="hljs-constructor">Empty</span> | <span class="hljs-constructor">Head</span>('a, <span class="hljs-built_in">list</span>('a));
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> list('a) = <span class="hljs-constructor">Empty</span> | <span class="hljs-constructor">Head</span>('a, list('a));
 </code></pre>
 <p><em>Não é a definição real. Apenas uma ilustração</em>.</p>
 <p>Significado: &quot;uma lista que contém valores de um tipo <code>a</code> (não importa o que é) é vazia, ou contém esses valores mais uma outra lista&quot;.</p>
@@ -109,9 +109,9 @@
 <h2><a class="anchor" aria-hidden="true" id="dicas-truques"></a><a href="#dicas-truques" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Dicas &amp; Truques</h2>
 <p><strong>Tenha cuidado</strong> para não confundir um construtor carregando 2 argumentos com um construtor carregando apenas 1 argumento do tipo tupla:</p>
 <pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> account =
-  | <span class="hljs-constructor">Facebook</span>(<span class="hljs-built_in">string</span>, <span class="hljs-built_in">int</span>) <span class="hljs-comment">/* 2 argumentos */</span>;
+  | <span class="hljs-constructor">Facebook</span>(string, int) <span class="hljs-comment">/* 2 argumentos */</span>;
 <span class="hljs-keyword">type</span> account2 =
-  | <span class="hljs-constructor">Instagram</span>((<span class="hljs-built_in">string</span>, <span class="hljs-built_in">int</span>)) <span class="hljs-comment">/* 1 argumento - passa a ser uma tupla com 2 valores */</span>;
+  | <span class="hljs-constructor">Instagram</span>((string, int)) <span class="hljs-comment">/* 1 argumento - passa a ser uma tupla com 2 valores */</span>;
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="variantes-devem-possuir-construtores"></a><a href="#variantes-devem-possuir-construtores" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Variantes Devem Possuir Construtores</h3>
 <p>Se você vem de uma linguagem não tipada, você pode ser tentado a experimentar <code>type foo = int | string</code>. Isso não é possível em Reason; você teria que dar um construtor a cada ramificação: <code>type foo = Int(int) | String(string)</code>. Embora geralmente precisar disso pode ser um anti-padrão. A seção Decisões de Design abaixo explica mais.</p>
@@ -119,11 +119,11 @@
 <p><em>Esta seção assume conhecimento sobre <a href="https://bucklescript.github.io/docs/en/interop-overview.html">FFI</a> do BuckleScript. Skip this if you haven't felt the itch to use variants for wrapping JS functions yet</em>.</p>
 <p>Poucas bibliotecas JS usam funções que podem aceitar vários tipos de argumentos. Nesses casos, é bastante tentador modelar eles como variantes. Por exemplo, imagine uma função chamada <code>myLibrary.draw</code> que recebe vários <code>number</code> ou <code>string</code>. Você pode tentar dar um bind assim:</p>
 <pre><code class="hljs css language-reason"><span class="hljs-comment">/* reservado para uso interno */</span>
-<span class="hljs-attribute">[@bs.module "myLibrary"]</span> <span class="hljs-keyword">external</span> draw : 'a =&gt; <span class="hljs-built_in">unit</span> = <span class="hljs-string">"draw"</span>;
+<span class="hljs-attribute">[@bs.module "myLibrary"]</span> <span class="hljs-keyword">external</span> draw : 'a =&gt; unit = <span class="hljs-string">"draw"</span>;
 
 <span class="hljs-keyword">type</span> animal =
-  | <span class="hljs-constructor">MyFloat</span>(<span class="hljs-built_in">float</span>)
-  | <span class="hljs-constructor">MyString</span>(<span class="hljs-built_in">string</span>);
+  | <span class="hljs-constructor">MyFloat</span>(float)
+  | <span class="hljs-constructor">MyString</span>(string);
 
 <span class="hljs-keyword">let</span> betterDraw = (animal) =&gt;
   <span class="hljs-keyword">switch</span> (animal) {
@@ -132,8 +132,8 @@
   };
 </code></pre>
 <p>Você realmente pode fazer isso, mas existem formas muito melhores! Por exemplo, simplesmente dois <code>external</code>s que compilam para a mesma chamada JS:</p>
-<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.module "myLibrary"]</span> <span class="hljs-keyword">external</span> drawFloat : <span class="hljs-built_in">float</span> =&gt; <span class="hljs-built_in">unit</span> = <span class="hljs-string">"draw"</span>;
-<span class="hljs-attribute">[@bs.module "myLibrary"]</span> <span class="hljs-keyword">external</span> drawString : <span class="hljs-built_in">string</span> =&gt; <span class="hljs-built_in">unit</span> = <span class="hljs-string">"draw"</span>;
+<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.module "myLibrary"]</span> <span class="hljs-keyword">external</span> drawFloat : float =&gt; unit = <span class="hljs-string">"draw"</span>;
+<span class="hljs-attribute">[@bs.module "myLibrary"]</span> <span class="hljs-keyword">external</span> drawString : string =&gt; unit = <span class="hljs-string">"draw"</span>;
 </code></pre>
 <p>BuckleScript also provides <a href="https://bucklescript.github.io/docs/en/function.html#modeling-polymorphic-function">a few other ways</a> to do this.</p>
 <h3><a class="anchor" aria-hidden="true" id="tipos-variantes-são-encontrados-pelo-nome-do-campo"></a><a href="#tipos-variantes-são-encontrados-pelo-nome-do-campo" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Tipos variantes são encontrados pelo nome do campo</h3>

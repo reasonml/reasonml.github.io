@@ -148,7 +148,7 @@ inside a signature definition's <code>{}</code> block.</p>
 <pre><code class="hljs css language-reason"><span class="hljs-comment">/* Picking up previous section's example */</span>
 <span class="hljs-keyword">module</span> <span class="hljs-keyword">type</span> <span class="hljs-module-identifier">EstablishmentType</span> = {
   <span class="hljs-keyword">type</span> profession;
-  <span class="hljs-keyword">let</span> getProfession: profession =&gt; <span class="hljs-built_in">string</span>;
+  <span class="hljs-keyword">let</span> getProfession: profession =&gt; string;
 };
 </code></pre>
 <p>A signature defines the list of requirements that a module must satisfy in order
@@ -189,14 +189,14 @@ exposing the variant, it'll only tell you &quot;it's <code>Company.profession</c
 <h3><a class="anchor" aria-hidden="true" id="extending-module-signatures"></a><a href="#extending-module-signatures" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Extending module signatures</h3>
 <p>Like modules themselves, module signatures can also be extended through <code>include module type of Foo</code>:</p>
 <pre><code class="hljs css language-reason"><span class="hljs-keyword">module</span> <span class="hljs-keyword">type</span> <span class="hljs-module-identifier">BaseComponent</span> = {
-  <span class="hljs-keyword">let</span> defaultGreeting: <span class="hljs-built_in">string</span>;
-  <span class="hljs-keyword">let</span> getAudience: (~excited: <span class="hljs-built_in">bool</span>) =&gt; <span class="hljs-built_in">string</span>;
+  <span class="hljs-keyword">let</span> defaultGreeting: string;
+  <span class="hljs-keyword">let</span> getAudience: (~excited: bool) =&gt; string;
 };
 
 <span class="hljs-keyword">module</span> <span class="hljs-keyword">type</span> <span class="hljs-module-identifier">ActualComponent</span> = {
   <span class="hljs-comment">/* the signature is copied over */</span>
   <span class="hljs-keyword">include</span> (<span class="hljs-keyword">module</span> <span class="hljs-keyword">type</span> <span class="hljs-keyword">of</span> <span class="hljs-module-identifier">BaseComponent</span>);
-  <span class="hljs-keyword">let</span> render: <span class="hljs-built_in">unit</span> =&gt; <span class="hljs-built_in">string</span>;
+  <span class="hljs-keyword">let</span> render: unit =&gt; string;
 };
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="every-rei-file-is-a-signature"></a><a href="#every-rei-file-is-a-signature" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Every <code>.rei</code> file is a signature</h3>
@@ -206,11 +206,11 @@ provided, the signature of <code>React.re</code> defaults to exposing all the fi
 module. Because they don't contain implementation files, <code>.rei</code> files are used
 in the ecosystem to also document the public API of their corresponding modules.</p>
 <pre><code class="hljs css language-reason"><span class="hljs-comment">/* file React.re (implementation. Compiles to module React) */</span>
-<span class="hljs-keyword">type</span> state = <span class="hljs-built_in">int</span>;
+<span class="hljs-keyword">type</span> state = int;
 <span class="hljs-keyword">let</span> render = (str) =&gt; str;
 </code></pre>
 <pre><code class="hljs css language-reason"><span class="hljs-comment">/* file React.rei (interface. Compiles to signature of module React) */</span>
-<span class="hljs-keyword">type</span> state = <span class="hljs-built_in">int</span>;
+<span class="hljs-keyword">type</span> state = int;
 <span class="hljs-keyword">let</span> render: str =&gt; str;
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" id="module-functions-functors"></a><a href="#module-functions-functors" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Module Functions (functors)</h2>
@@ -230,12 +230,12 @@ for defining and using regular functions. The primary differences are:</p>
 <code>Comparable</code> and returns a new set that can contain such comparable items.</p>
 <pre><code class="hljs css language-reason"><span class="hljs-keyword">module</span> <span class="hljs-keyword">type</span> <span class="hljs-module-identifier">Comparable</span> = {
   <span class="hljs-keyword">type</span> t;
-  <span class="hljs-keyword">let</span> equal: (t, t) =&gt; <span class="hljs-built_in">bool</span>;
+  <span class="hljs-keyword">let</span> equal: (t, t) =&gt; bool;
 };
 
 <span class="hljs-keyword">module</span> <span class="hljs-module-identifier">MakeSet</span> = (<span class="hljs-module-identifier">Item</span>: <span class="hljs-module-identifier">Comparable</span>) =&gt; {
   <span class="hljs-comment">/* let's use a list as our naive backing data structure */</span>
-  <span class="hljs-keyword">type</span> backingType = <span class="hljs-built_in">list</span>(<span class="hljs-module-identifier">Item</span>.t);
+  <span class="hljs-keyword">type</span> backingType = list(<span class="hljs-module-identifier">Item</span>.t);
   <span class="hljs-keyword">let</span> empty = <span class="hljs-literal">[</span><span class="hljs-literal">]</span>;
   <span class="hljs-keyword">let</span> add = (currentSet: backingType, newItem: <span class="hljs-module-identifier">Item</span>.t) : backingType =&gt;
     <span class="hljs-comment">/* if item exists */</span>
@@ -252,7 +252,7 @@ for defining and using regular functions. The primary differences are:</p>
 <p>Functors can be applied using function application syntax. In this case, we're
 creating a set, whose items are pairs of integers.</p>
 <pre><code class="hljs css language-reason"><span class="hljs-keyword">module</span> <span class="hljs-module-identifier">IntPair</span> = {
-  <span class="hljs-keyword">type</span> t = (<span class="hljs-built_in">int</span>, <span class="hljs-built_in">int</span>);
+  <span class="hljs-keyword">type</span> t = (int, int);
   <span class="hljs-keyword">let</span> equal = ((x1, y1), (x2, y2)) =&gt; x1 <span class="hljs-operator">==</span> x2 <span class="hljs-operator">&amp;&amp;</span> y1 <span class="hljs-operator">==</span> y2;
   <span class="hljs-keyword">let</span> create = (x, y) =&gt; (x, y);
 };

@@ -48,8 +48,8 @@
 <h2><a class="anchor" aria-hidden="true" id="使い方"></a><a href="#使い方" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>使い方</h2>
 <p>型（必須）:</p>
 <pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> person = {
-  age: <span class="hljs-built_in">int</span>,
-  name: <span class="hljs-built_in">string</span>
+  age: int,
+  name: string
 };
 </code></pre>
 <p>値（<code>person</code> 型と推論される）</p>
@@ -65,7 +65,7 @@
 <p>もし、明示的な宣言を事前ににせずに、<code>{age: 5, name: &quot;Baby Reason&quot;}</code> とだけ書いたら、型システムはエラーを返します。 もし型定義が別のファイルにある場合は、どのファイルのものであるかを明示的に指す必要があります。</p>
 <pre><code class="hljs css language-reason"><span class="hljs-comment">/* School.re */</span>
 
-<span class="hljs-keyword">type</span> person = {age: <span class="hljs-built_in">int</span>, name: <span class="hljs-built_in">string</span>};
+<span class="hljs-keyword">type</span> person = {age: int, name: string};
 </code></pre>
 <pre><code class="hljs css language-reason"><span class="hljs-comment">/* example.re */</span>
 
@@ -85,21 +85,21 @@
 <h3><a class="anchor" aria-hidden="true" id="ミュータブルな更新"></a><a href="#ミュータブルな更新" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>ミュータブルな更新</h3>
 <p>レコードのフィールドはオプションでミュータブルにすることができます。<code>=</code> 演算子を使ってミュータブルなフィールドを更新することを許可します。</p>
 <pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> person = {
-  name: <span class="hljs-built_in">string</span>,
-  <span class="hljs-keyword">mutable</span> age: <span class="hljs-built_in">int</span>
+  name: string,
+  <span class="hljs-keyword">mutable</span> age: int
 };
 <span class="hljs-keyword">let</span> baby = {name: <span class="hljs-string">"Baby Reason"</span>, age: <span class="hljs-number">5</span>};
 baby.age = baby.age <span class="hljs-operator">+</span> <span class="hljs-number">1</span>; <span class="hljs-comment">/* `baby` を変更. ハッピーバースデー! */</span>
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" id="シンタックスの省略形"></a><a href="#シンタックスの省略形" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>シンタックスの省略形</h2>
 <p>冗長性を減らすために、私たちはレコードの型と値に <strong>punning</strong> を提供します。 Punning とは、フィールドの名前がその値/型の名前と一致するときに使用できるシンタックスの省略系を指します。</p>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> horsePower = {power: <span class="hljs-built_in">int</span>, metric: <span class="hljs-built_in">bool</span>};
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> horsePower = {power: int, metric: bool};
 
 <span class="hljs-keyword">let</span> metric = <span class="hljs-literal">true</span>;
 <span class="hljs-keyword">let</span> someHorsePower = {power: <span class="hljs-number">10</span>, metric};
 <span class="hljs-comment">/* {power: 10, metric: metric}; という値と同等 */</span>
 
-<span class="hljs-keyword">type</span> car = {name: <span class="hljs-built_in">string</span>, horsePower};
+<span class="hljs-keyword">type</span> car = {name: string, horsePower};
 <span class="hljs-comment">/* {name: string, horsePower: horsePower}; という型と同等 */</span>
 </code></pre>
 <p><strong>単一のフィールドには punning が使えないことに注意してください</strong>！<code>{foo}</code> はあなたが期待するようには動きません。（それは <code>foo</code> という値を返すブロックです。）</p>
@@ -108,8 +108,8 @@ baby.age = baby.age <span class="hljs-operator">+</span> <span class="hljs-numbe
 <p>もし JavaScript を使用しているなら、レコードのシンタックスと操作は使い慣れているはずで、JS オブジェクトをレコードに変換し、逆にレコードを JS オブジェクトに変換して相互運用することに誘惑されるかもしれません。 それは問題なくできますが、<strong>変換のオーバーヘッドのないさらに良い方法</strong>があります！ See <a href="https://bucklescript.github.io/docs/en/object.html#record-mode">here</a></p>
 <h3><a class="anchor" aria-hidden="true" id="レコードの型はフィールドの名前で特定される"></a><a href="#レコードの型はフィールドの名前で特定される" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>レコードの型はフィールドの名前で特定される</h3>
 <p>With records, you <strong>cannot</strong> say &quot;I'd like this function to take any record type, as long as they have the field <code>age</code>&quot;. The following <em>works</em>, but not as expected:</p>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> person = {age: <span class="hljs-built_in">int</span>, name: <span class="hljs-built_in">string</span>};
-<span class="hljs-keyword">type</span> monster = {age: <span class="hljs-built_in">int</span>, hasTentacles: <span class="hljs-built_in">bool</span>};
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> person = {age: int, name: string};
+<span class="hljs-keyword">type</span> monster = {age: int, hasTentacles: bool};
 
 <span class="hljs-keyword">let</span> getAge = (entity) =&gt; entity.age;
 </code></pre>
