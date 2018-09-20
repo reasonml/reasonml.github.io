@@ -123,6 +123,11 @@ const users = [
     caption: "Gangverk",
     image: "img/logos/gangverk.svg",
     infoLink: "http://gangverk.is",
+  },
+  {
+    caption: "Sotheby's",
+    image: "img/logos/sothebys.svg",
+    infoLink: "https://sothebys.com",
   }
 ];
 
