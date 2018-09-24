@@ -125,6 +125,11 @@ const users = [
     infoLink: "http://gangverk.is",
   },
   {
+    caption: "LaTeX Base",
+    image: "img/logos/latexbase.svg",
+    infoLink: "https://latexbase.com",
+  },
+  {
     caption: "Sotheby's",
     image: "img/logos/sothebys.svg",
     infoLink: "https://sothebys.com",
@@ -133,7 +138,7 @@ const users = [
     caption: "上线了 SXL.CN",
     image: "img/logos/sxl.svg",
     infoLink: "https://www.sxl.cn",
-  }
+  },
 ];
 
 const examples = [
