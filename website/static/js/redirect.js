@@ -70,20 +70,20 @@
       default: 'docs/en/what-and-why.html',
     },
     'guide/editor-tools': {
-      default: 'docs/en/global-installation.html',
+      default: 'docs/en/editor-plugins',
     },
-    'guide/editor-tools/global-installation': {
-      '#recommended-through-npmyarn': 'docs/en/global-installation.html#recommended-through-npm-yarn',
-      '#alternative-through-opam': 'docs/en/global-installation.html#alternative-through-opam',
-      '#troubleshooting': 'docs/en/global-installation.html#troubleshooting',
-      '#bad-installation': 'docs/en/global-installation.html#bad-installation',
-      '#editor-plugin-not-working': 'docs/en/global-installation.html#editor-plugin-not-working',
-      '#editor-error-message-unbound-module-js-etc': 'docs/en/global-installation.html#editor-error-message-unbound-module-js-etc',
-      default: 'docs/en/global-installation.html',
+    'guide/editor-tools/installation': {
+      '#recommended-through-npmyarn': 'docs/en/editor-plugins',
+      '#alternative-through-opam': 'docs/en/editor-plugins',
+      '#troubleshooting': 'docs/en/editor-plugins',
+      '#bad-installation': 'docs/en/editor-plugins',
+      '#editor-plugin-not-working': 'docs/en/editor-plugins',
+      '#editor-error-message-unbound-module-js-etc': 'docs/en/editor-plugins',
+      default: 'docs/en/editor-plugins',
     },
     'guide/editor-tools/editors-plugins': {
       '#officially-supported-editors': 'docs/en/editor-plugins.html#officially-supported-editors',
-      default: 'docs/en/global-installation.html',
+      default: 'docs/en/editor-plugins.html',
     },
     'guide/editor-tools/extra-goodies': {
       '#browser-extension-reason-tools': 'docs/en/extra-goodies.html#browser-extension-reason-tools',
@@ -94,7 +94,7 @@
       '#repl': 'docs/en/extra-goodies.html#repl',
       '#rebench': 'docs/en/extra-goodies.html#re-bench',
       '#ocamlc-ocamlopt-ocamlrun-rebuild': 'docs/en/extra-goodies.html#ocamlc-ocamlopt-ocamlrun',
-      default: 'docs/en/global-installation.html',
+      default: 'docs/en/installation.html',
     },
     'guide/language/overview': {
       default: 'docs/en/overview.html',

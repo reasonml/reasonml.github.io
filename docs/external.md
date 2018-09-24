@@ -7,11 +7,11 @@ title: External
 Imagine writing a let binding, but with its body omitted and its (mandatory) type written down:
 
 ```reason
-external myCFunction : int => string = "theCFunction";
+external myCFunction: int => string = "theCFunction";
 ```
 
 ```reason
-[@bs.val] external getElementsByClassName : string => array(Dom.element) =
+[@bs.val] external getElementsByClassName: string => array(Dom.element) =
   "document.getElementsByClassName";
 ```
 
