@@ -130,6 +130,11 @@ const users = [
     infoLink: "https://latexbase.com",
   },
   {
+    caption: "ohne-Makler",
+    image: "img/logos/ohne-makler.svg",
+    infoLink: "https://www.ohne-makler.net/",
+  },
+  {
     caption: "Sotheby's",
     image: "img/logos/sothebys.svg",
     infoLink: "https://sothebys.com",
