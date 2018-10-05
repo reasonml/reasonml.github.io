@@ -91,13 +91,13 @@ NoResult
   | <span class="hljs-constructor">NoResult</span> =&gt; <span class="hljs-string">"Things look fine"</span>
   };
 </code></pre>
-<p><strong>Note</strong>: you can only pass literals (i.e. concrete values) as a pattern, not let-binding names or other things. The following doesn't work as expected:</p>
+<p><strong>Note</strong>:Вы можете передавать только literals (т.е., конкретные значения) в качестве шаблона. Не let-биндинги или другие вещи. Следующий код не будет работать:</p>
 <pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> myMessage = <span class="hljs-string">"Hello"</span>;
 <span class="hljs-keyword">switch</span> (greeting) {
 | myMessage =&gt; print_endline(<span class="hljs-string">"Hi to you"</span>)
 };
 </code></pre>
-<p>Instead, it'd assume you're matching on any string, and binding that to the name <code>myMessage</code> in that <code>switch</code> case, which is not what you wanted.</p>
+<p>Вместо этого &quot;оно&quot; предположит, что подходит любая строка и Вы привязываете это к <code>myMessage</code> в этом <code>switch</code> кейсе, а это не то, что нам нужно.</p>
 <h3><a class="anchor" aria-hidden="true" id="when-проверки"></a><a href="#when-проверки" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>When проверки</h3>
 <p>Когда вам действительно нужно проверить некоторую логику внутри паттерна, вы можете использовать <code>when</code>, который является синтаксическим сахаром для <code>if</code>:</p>
 <pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> message =
@@ -108,22 +108,22 @@ NoResult
   | <span class="hljs-constructor">NoResult</span> =&gt; <span class="hljs-operator">...</span>
   };
 </code></pre>
-<h3><a class="anchor" aria-hidden="true" id="match-on-exceptions"></a><a href="#match-on-exceptions" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Match on Exceptions</h3>
-<p>If the function throws an exception (covered later), you can also match on <em>that</em>, in addition to the function's normally returned values.</p>
+<h3><a class="anchor" aria-hidden="true" id="match-на-исключения"></a><a href="#match-на-исключения" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Match на исключения</h3>
+<p>Если функция выбрасывает исключение (в дальнейшем), вы также можете сопоставить <em>это</em> в дополнение к обычным возвращаемым значениям.</p>
 <pre><code class="hljs css language-reason"><span class="hljs-keyword">switch</span> (<span class="hljs-module-identifier">List</span>.find((i) =&gt; i <span class="hljs-operator">===</span> theItem, myItems)) {
 | item =&gt; print_endline(item)
 | <span class="hljs-keyword">exception</span> <span class="hljs-constructor">Not_found</span> =&gt; print_endline(<span class="hljs-string">"No such item found!"</span>)
 };
 </code></pre>
-<h3><a class="anchor" aria-hidden="true" id="nested-patterns"></a><a href="#nested-patterns" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Nested Patterns</h3>
-<p>Nested <code>|</code> work as intended:</p>
+<h3><a class="anchor" aria-hidden="true" id="вложенные-паттерны"></a><a href="#вложенные-паттерны" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Вложенные паттерны</h3>
+<p>Вложенные <code>|</code> работают как ожидается:</p>
 <pre><code class="hljs css language-reason"><span class="hljs-keyword">switch</span> (student) {
 | {name: <span class="hljs-string">"Jane"</span> | <span class="hljs-string">"Joe"</span>} =&gt; <span class="hljs-operator">...</span>
 | {name: <span class="hljs-string">"Bob"</span>, <span class="hljs-constructor">Job</span>: <span class="hljs-constructor">Programmer</span>({fullTime: <span class="hljs-constructor">Yes</span> | <span class="hljs-constructor">Maybe</span>})} =&gt; <span class="hljs-operator">...</span>
 };
 </code></pre>
-<h3><a class="anchor" aria-hidden="true" id="patterns-everywhere"></a><a href="#patterns-everywhere" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Patterns Everywhere</h3>
-<p>You can put a pattern anywhere you'd put a normal &quot;variable declaration&quot;:</p>
+<h3><a class="anchor" aria-hidden="true" id="паттерны-везде"></a><a href="#паттерны-везде" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Паттерны везде</h3>
+<p>Вы можете использовать паттерн везде, где бы вы использовали обычное &quot;объявление переменной&quot;:</p>
 <pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> leftOrRight =
   | <span class="hljs-constructor">Left</span>(int)
   | <span class="hljs-constructor">Right</span>(int);
@@ -134,7 +134,7 @@ NoResult
 <span class="hljs-keyword">let</span> <span class="hljs-constructor">Left</span>(v) | <span class="hljs-constructor">Right</span>(v) = i;
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" id="советы-и-трюки"></a><a href="#советы-и-трюки" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Советы и трюки</h2>
-<p><strong>Flatten your pattern-match whenever you can</strong>. This is a real bug remover. Example below.</p>
+<p><strong>Выравнивайте свой pattern-match везде, где можете.</strong>. Это позволяет хорошо отслеживать ошибки. Пример ниже.</p>
 <p>Do not abuse the fall-through <code>_</code> case too much. This prevents the compiler from telling you that you've forgotten to cover a case (exhaustiveness check), which would be especially helpful after a refactoring where you add a new case to a variant. Try only using <code>_</code> against infinite possibilities, e.g. string, int, etc.</p>
 <p>Here's a series of examples, from worst to best:</p>
 <pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> optionBoolToBool = opt =&gt;
@@ -199,7 +199,7 @@ NoResult
 <tr><td>false</td><td>4</td><td>4</td><td>5</td></tr>
 </tbody>
 </table>
-</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/ru/destructuring"><span class="arrow-prev">← </span><span>Предыдущий</span></a><a class="docs-next button" href="/docs/ru/mutation"><span>Далее</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav docOnPageNav"><ul class="toc-headings"><li><a href="#использование">Использование</a><ul class="toc-headings"><li><a href="#when-проверки">When проверки</a></li><li><a href="#match-on-exceptions">Match on Exceptions</a></li><li><a href="#nested-patterns">Nested Patterns</a></li><li><a href="#patterns-everywhere">Patterns Everywhere</a></li></ul></li><li><a href="#советы-и-трюки">Советы и трюки</a></li><li><a href="#design-decisions">Design Decisions</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.min.js"></script><script>window.foo = new Pjax({
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/ru/destructuring"><span class="arrow-prev">← </span><span>Предыдущий</span></a><a class="docs-next button" href="/docs/ru/mutation"><span>Далее</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav docOnPageNav"><ul class="toc-headings"><li><a href="#использование">Использование</a><ul class="toc-headings"><li><a href="#when-проверки">When проверки</a></li><li><a href="#match-на-исключения">Match на исключения</a></li><li><a href="#вложенные-паттерны">Вложенные паттерны</a></li><li><a href="#паттерны-везде">Паттерны везде</a></li></ul></li><li><a href="#советы-и-трюки">Советы и трюки</a></li><li><a href="#design-decisions">Design Decisions</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.min.js"></script><script>window.foo = new Pjax({
           areas: [
             // try to use the first query.
             '.mainContainer, .docsNavContainer .toc .navWrapper, .onPageNav',
