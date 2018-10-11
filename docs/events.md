@@ -16,6 +16,7 @@ There are a Reason meetups all around the world, among others:
 - [New York](https://www.meetup.com/ReasonML-NYC/) ([Twitter](https://twitter.com/nycreasonml))
 - [Oslo](https://www.meetup.com/Reason-Oslo/) ([Twitter](http://twitter.com/reasonoslo/))
 - [Paris](https://www.meetup.com/ReasonML-Paris/)
+- [Phoenix](https://www.meetup.com/Phoenix-Reason/events/255430807/)
 - [Portland](https://www.meetup.com/Portland-ReasonML/) ([Twitter](https://twitter.com/ReasonPDX))
 - [Prague](https://www.meetup.com/Reason-Prague/) ([Twitter](https://twitter.com/ReasonPrague))
 - [San Francisco](https://www.meetup.com/sv-ocaml/)
