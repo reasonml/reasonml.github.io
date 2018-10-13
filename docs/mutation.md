@@ -33,7 +33,7 @@ Note that the previous binding `five` stays `5`, since it got the underlying ite
 **Just kidding**! `ref` isn't actually a special feature! It's just an ordinary syntax sugar for a [predefined mutable record type called `ref`](/api/Pervasives.html#TYPEref) in the standard library (search "References" in that page). Here's the desugared version:
 
 ```reason
-let foo = {contents: 5};
+let foo = {mutable contents: 5};
 let five = foo.contents;
 foo.contents = 6;
 ```
