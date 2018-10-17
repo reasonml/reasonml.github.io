@@ -171,12 +171,12 @@ For example, some folks wonder how the type system can safely eliminate badly fo
 Performance-wise, a variant can potentially tremendously speed up your program's logic. Here's a piece of JavaScript:
 
 ```js
-let data = 'dog';
-if (data === 'dog') {
+let data = "dog";
+if (data === "dog") {
   ...
-} else if (data === 'cat') {
+} else if (data === "cat") {
   ...
-} else if (data === 'bird') {
+} else if (data === "bird") {
   ...
 }
 ```
@@ -189,7 +189,7 @@ let data = Dog;
 switch (data) {
 | Dog => ...
 | Cat => ...
-| Bird => ...
+| Bird => ...break
 }
 ```
 
