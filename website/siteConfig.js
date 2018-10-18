@@ -144,6 +144,11 @@ const users = [
     image: "img/logos/sxl.svg",
     infoLink: "https://www.sxl.cn",
   },
+  {
+    caption: "JoinUp",
+    image: "img/logos/joinup.png",
+    infoLink: "https://www.joinup.io",
+  },
 ];
 
 const examples = [
