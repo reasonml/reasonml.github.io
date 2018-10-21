@@ -149,6 +149,11 @@ const users = [
     image: "img/logos/joinup.png",
     infoLink: "https://www.joinup.io",
   },
+  {
+    caption: "Lenus eHealth",
+    image: "img/logos/lenus.svg",
+    infoLink: "https://lenus.io",
+  },
 ];
 
 const examples = [
