@@ -15,6 +15,8 @@ And other features.
 
 ## Officially Supported Editors
 
+**Note:** You'll also need to globally install the [reason-cli tools](https://github.com/reasonml/reason-cli) for these integrations to work.
+
 - [VSCode](https://github.com/jaredly/reason-language-server): **recommended**.
 - [Atom](https://github.com/reasonml-editor/atom-ide-reason)
 - [Vim/Neovim](https://github.com/reasonml-editor/vim-reason-plus)
