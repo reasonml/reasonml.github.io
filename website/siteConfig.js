@@ -154,6 +154,11 @@ const users = [
     image: "img/logos/lenus.svg",
     infoLink: "https://lenus.io",
   },
+  {
+    caption: "SV.CO",
+    image: "img/logos/sv.svg",
+    infoLink: "https://sv.co",
+  },
 ];
 
 const examples = [
