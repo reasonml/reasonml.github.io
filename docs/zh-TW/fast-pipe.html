@@ -47,29 +47,29 @@
   <span class="hljs-operator">-&gt;</span>getAge
   <span class="hljs-operator">-&gt;</span>validateAge
 </code></pre>
-<p>Basically, <code>parseData(person)</code> is transformed into <code>person-&gt;parseData</code>, and <code>getAge(person-&gt;parseData)</code> is transformed into <code>person-&gt;parseData-&gt;getAge</code>, etc.</p>
-<p><strong>This works when the function takes more than one argument too</strong>.</p>
+<p>基本上，<code>parseData(person)</code> 會被轉變為 <code>person-&gt;parseData</code> ，<code>getAge(person-&gt;parseData)</code> 會被轉變為 <code>person-&gt;parseData-&gt;getAge</code>，以此類推。</p>
+<p><strong>當函式擁有多個參數 (argument) 的時候依然有效</strong>。</p>
 <pre><code class="hljs css language-reason">a(one, two, three)
 </code></pre>
-<p>is the same as</p>
+<p>等同於</p>
 <pre><code class="hljs css language-reason">one<span class="hljs-operator">-&gt;</span>a(two, three)
 </code></pre>
-<p>This works with labeled arguments too.</p>
-<h3><a class="anchor" aria-hidden="true" id="tips-tricks"></a><a href="#tips-tricks" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Tips &amp; Tricks</h3>
-<p>Try not to abuse pipes; they're a mean to an end. Newcomers sometimes shape a library's API to take advantage of the pipe. This is rather backward.</p>
-<p>Conventionally, we don't turn the innermost layer of function call into a pipe. So the above example would usually be written as:</p>
+<p>這個對於標記的參數 (labeled argument) 也有效。</p>
+<h3><a class="anchor" aria-hidden="true" id="提示-技巧"></a><a href="#提示-技巧" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>提示 &amp; 技巧</h3>
+<p>請不要錯用 pipes。它們是被用來達成目的的。新手有時候會為了使用 pipe 的好處來改變函式庫的 API 。這樣是本末倒置的。</p>
+<p>習慣上，我們不會把函式最裡面的部分放到 pipe 裡。所以上面的範例通常會被寫成：</p>
 <pre><code class="hljs css language-reason">parseData(person)
   <span class="hljs-operator">-&gt;</span>getAge
   <span class="hljs-operator">-&gt;</span>validateAge
 </code></pre>
-<h2><a class="anchor" aria-hidden="true" id="js-method-chaining"></a><a href="#js-method-chaining" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>JS Method Chaining</h2>
-<p><em>This section requires understanding of <a href="https://bucklescript.github.io/docs/en/function#object-method">Bucklescript's binding API</a></em>.</p>
-<p>JavaScript's APIs are often attached to objects, and often chainable, like so:</p>
+<h2><a class="anchor" aria-hidden="true" id="js-函式串接"></a><a href="#js-函式串接" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>JS 函式串接</h2>
+<p>閱讀以下的章節之前，需要先讀懂 <a href="https://bucklescript.github.io/docs/en/function#object-method">Bucklescript's binding API</a></em>。</p>
+<p>JavaScript 的 API 通常會依附在物件 (object) 上，而且通常可以被串接，例如：</p>
 <pre><code class="hljs css language-js"><span class="hljs-keyword">const</span> result = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>].map(<span class="hljs-function"><span class="hljs-params">a</span> =&gt;</span> a + <span class="hljs-number">1</span>).filter(<span class="hljs-function"><span class="hljs-params">a</span> =&gt;</span> a % <span class="hljs-number">2</span> === <span class="hljs-number">0</span>);
 
 asyncRequest().setWaitDuration(<span class="hljs-number">4000</span>).send();
 </code></pre>
-<p>Assuming we don't need the chaining behavior above, we'd bind to each case this using <code>bs.send</code> from the previous section:</p>
+<p>假設我們不需要上面的串接行為，我們可以使用前一章節裡提到的 <code>bs.send</code> 來繫結 (bind) 每個情況。</p>
 <pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.send]</span> <span class="hljs-keyword">external</span> map : (array('a), 'a =&gt; 'b) =&gt; array('b) = <span class="hljs-string">""</span>;
 <span class="hljs-attribute">[@bs.send]</span> <span class="hljs-keyword">external</span> filter : (array('a), 'a =&gt; 'b) =&gt; array('b) = <span class="hljs-string">""</span>;
 
@@ -78,45 +78,45 @@ asyncRequest().setWaitDuration(<span class="hljs-number">4000</span>).send();
 <span class="hljs-attribute">[@bs.send]</span> <span class="hljs-keyword">external</span> setWaitDuration: (request, int) =&gt; request = <span class="hljs-string">""</span>;
 <span class="hljs-attribute">[@bs.send]</span> <span class="hljs-keyword">external</span> send: request =&gt; unit = <span class="hljs-string">""</span>;
 </code></pre>
-<p>You'd use them like this:</p>
+<p>你可以這樣使用它們：</p>
 <pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> result = filter(map(<span class="hljs-literal">[|</span><span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span><span class="hljs-literal">|]</span>, a =&gt; a <span class="hljs-operator">+</span> <span class="hljs-number">1</span>), a =&gt; a mod <span class="hljs-number">2</span> <span class="hljs-operator">==</span> <span class="hljs-number">0</span>);
 
 send(setWaitDuration(asyncRequest(), <span class="hljs-number">4000</span>));
 </code></pre>
-<p>This looks much worse than the JS counterpart! Now we need to read the actual logic inside-out. We also cannot use the <code>|&gt;</code> operator here, since the object comes <em>first</em> in the binding. But <code>-&gt;</code> works!</p>
+<p>這比起 JS 相對來說看起來糟多了。 現在我們必須從最裡面讀到最外面來讀懂真正的邏輯。 我們也無法在這裡使用 <code>|&gt;</code> 運算子，因為物件在繫結 (binding) 裡跑到最前面了。 不過 <code>-&gt;</code> 卻仍然有效！</p>
 <pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> result = <span class="hljs-literal">[|</span><span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span><span class="hljs-literal">|]</span>
   <span class="hljs-operator">-&gt;</span>map(a =&gt; a <span class="hljs-operator">+</span> <span class="hljs-number">1</span>)
   <span class="hljs-operator">-&gt;</span>filter(a =&gt; a mod <span class="hljs-number">2</span> <span class="hljs-operator">===</span> <span class="hljs-number">0</span>);
 
 asyncRequest()<span class="hljs-operator">-&gt;</span>setWaitDuration(<span class="hljs-number">400</span>)<span class="hljs-operator">-&gt;</span>send;
 </code></pre>
-<h2><a class="anchor" aria-hidden="true" id="pipe-into-variants"></a><a href="#pipe-into-variants" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Pipe Into Variants</h2>
-<p>A variant's constructors, like <code>Some</code> or <code>Student</code>, look like functions, but unfortunately aren't, due to historical reasons. Sometime, it'd still be nice to be able to use them as functions. Fast pipe takes the occasion to enable that for you!</p>
+<h2><a class="anchor" aria-hidden="true" id="pipe-到-variants"></a><a href="#pipe-到-variants" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Pipe 到 Variants</h2>
+<p>變異建構子，如 <code>Some</code> 或 <code>Student</code>，看起來像是函式，但它們不是，因為歷史因素。 有些時候，最好能夠當作函式使用。 Fast pipe 讓你可以這樣用！</p>
 <pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> result = name<span class="hljs-operator">-&gt;</span>preprocess<span class="hljs-operator">-&gt;</span><span class="hljs-constructor">Some</span>
 </code></pre>
-<p>We turn this into:</p>
+<p>轉換成：</p>
 <pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> result = <span class="hljs-constructor">Some</span>(preprocess(name))
 </code></pre>
-<p><strong>Note</strong> that using a variant constructor as a function wouldn't work anywhere else.</p>
-<h2><a class="anchor" aria-hidden="true" id="pipe-placeholders"></a><a href="#pipe-placeholders" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Pipe Placeholders</h2>
-<p>A placeholder is written as an underscore and it tells Reason that you want to fill in an argument of a function later. These two have equivalent meaning:</p>
+<p><strong>注意</strong> 把變異建構子當作函數在其他地方不會運作。</p>
+<h2><a class="anchor" aria-hidden="true" id="pipe-佔位符"></a><a href="#pipe-佔位符" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Pipe 佔位符</h2>
+<p>佔位符寫成底線告訴 Reason 你希望填入在後面的函數引數。下列兩個意義同等：</p>
 <pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> addTo7 = (x) =&gt; add3(<span class="hljs-number">3</span>, x, <span class="hljs-number">4</span>);
 <span class="hljs-keyword">let</span> addTo7 = add3(<span class="hljs-number">3</span>, _, <span class="hljs-number">4</span>);
 </code></pre>
-<p>Sometimes you don't want to pipe the value you have into the first position. In these cases you can mark a placeholder value to show which argument you would like to pipe into.</p>
-<p>Let's say you have a function <code>namePerson</code>, which takes a <code>person</code> then a <code>name</code> argument. If you are transforming a person then pipe will work as-is:</p>
+<p>有些時候你不希望將值 pipe 到第一個位置。這種情況可以標注佔位符表示哪個你希望 pipe 進去的引數。</p>
+<p>假設你有個函式 <code>namePerson</code>，接受 <code>person</code> 接著 <code>name</code> 引數。如果要轉換一個 person，則 pipe 會這樣寫：</p>
 <pre><code class="hljs css language-reason">makePerson(~age=<span class="hljs-number">47</span>, ())
   <span class="hljs-operator">-&gt;</span>namePerson(<span class="hljs-string">"Jane"</span>);
 </code></pre>
-<p>If you have a name that you want to apply to a person object, you can use a placeholder:</p>
+<p>如果有個 name 想要套用到 person 物件上，可以使用佔位符：</p>
 <pre><code class="hljs css language-reason">getName(input)
   <span class="hljs-operator">-&gt;</span>namePerson(personDetails, _);
 </code></pre>
-<p>This allows you to pipe into any positional argument. It also works for named arguments:</p>
+<p>這讓你任何 pipe 到任意引數位置。同樣可以在具名引數使用：</p>
 <pre><code class="hljs css language-reason">getName(input)
   <span class="hljs-operator">-&gt;</span>namePerson(~person=personDetails, ~name=_);
 </code></pre>
-</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/zh-TW/if-else"><span class="arrow-prev">← </span><span>上一步</span></a><a class="docs-next button" href="/docs/zh-TW/more-on-type"><span>下一步</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav docOnPageNav"><ul class="toc-headings"><li><a href="#js-method-chaining">JS Method Chaining</a></li><li><a href="#pipe-into-variants">Pipe Into Variants</a></li><li><a href="#pipe-placeholders">Pipe Placeholders</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.min.js"></script><script>window.foo = new Pjax({
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/zh-TW/if-else"><span class="arrow-prev">← </span><span>上一步</span></a><a class="docs-next button" href="/docs/zh-TW/more-on-type"><span>下一步</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav docOnPageNav"><ul class="toc-headings"><li><a href="#js-函式串接">JS 函式串接</a></li><li><a href="#pipe-到-variants">Pipe 到 Variants</a></li><li><a href="#pipe-佔位符">Pipe 佔位符</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.min.js"></script><script>window.foo = new Pjax({
           areas: [
             // try to use the first query.
             '.mainContainer, .docsNavContainer .toc .navWrapper, .onPageNav',
