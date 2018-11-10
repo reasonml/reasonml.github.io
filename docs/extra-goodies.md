@@ -8,9 +8,7 @@ title: Extra Goodies
 
 ## REPL
 
-An online REPL: https://sketch.sh/.
-
-The command line REPL [`rtop`](https://github.com/reasonml/reason-cli) is one part of a (slightly) bigger toolchain of CLI tools for Reason.
+https://sketch.sh/
 
 ## re:bench
 
