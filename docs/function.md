@@ -141,17 +141,22 @@ When given in this syntax, `radius` is **wrapped** in the standard library's `op
 
 **Note**: `None | Some(foo)` is a data structure type called variant, described [earlier](variant.md). This particular variant type is provided by the standard library. It's called `option`. Its definition: `type option('a) = None | Some('a)`.
 
-**Note** the unit `()` at the end of `drawCircle`. Without it, since `radius` and `color` are both labeled, can be curried, and can be applied out-of-order, it's unclear what the following means:
+**Note** the unit `()` at the end of `drawCircle`. Writing this particular function without the unit `()` would lead to the following problem. Because `radius` and `color` are both labeled, the function can be curried, and it can be applied out-of-order, it's unclear what the following means:
 
 ```reason
 let whatIsThis = drawCircle(~color);
 ```
 
-Is `whatIsThis` a curried `drawCircle` function, waiting for the optional `radius` to be applied? Or did it finish applying? To address this confusion, append a positional (aka non-labeled) argument to `drawCircle` (conventionally `()`), and OCaml will, as a rule of thumb, presume the optional labeled argument is omitted when the positional argument is provided.
+Is `whatIsThis` a curried `drawCircle` function, waiting for the optional `radius` to be applied? Or did it finish applying because the `radius` is optional? To address this confusion, append a positional (aka non-labeled) argument to `drawCircle` (conventionally `()`), and OCaml will, as a rule of thumb, presume the optional labeled argument is omitted when the positional argument is provided.
 
+Because we don't supply the unit OCaml knows we want to curry the function.
 ```reason
 let curriedFunction = drawCircle(~color);
-let actualResultWithoutProvidingRadius = drawCircle(~color, ());
+```
+
+Because we _do_ supply the unit OCaml knows we deliberately omit the `radius` parameter, and the function is executed.
+```reason
+let circle = drawCircle(~color, ());
 ```
 
 ### Explicitly Passed Optional
