@@ -127,126 +127,129 @@ drawCircle(~radius=<span class="hljs-number">10</span>, ~color=<span class="hljs
 </code></pre>
 <p>Cuando se da esta sintaxis, <code>radius</code> es ** englobado **con el tipo <code>option</code> de la biblioteca estándar, con el valor por defecto de <code>None</code>. Si es proporcionado, será englobado con <code>Some</code>. Entonces, el valor del tipo de <code>radius</code> es <code>None</code> o <code>Some(int)</code>.</p>
 <p><strong>Nota</strong>: <code>None | Some(foo)</code> es un tipo de estructura de datos llamado variante, descrita <a href="/docs/es-ES/variant">anteriormente</a>. Este particular tipo variante es proporcionado por la biblioteca estándar. Es llamado <code>option</code>. Su definición: <code>type option('a) = None | Some('a)</code>.</p>
-<p><strong>Nota</strong> el <em>unit</em> <code>()</code> al final de <code>drawCircle</code>. Sin eso, como <code>radius</code> y <code>color</code> están ambos etiquetados, pueden ser <em>curried</em>, y pueden ser aplicados fuera de orden, no esta claro que significa lo siguiente:</p>
+<p><strong>Nota</strong> el <em>unit</em> <code>()</code> al final de <code>drawCircle</code>. Writing this particular function without the unit <code>()</code> would lead to the following problem. Because <code>radius</code> and <code>color</code> are both labeled, the function can be curried, and it can be applied out-of-order, it's unclear what the following means:</p>
 <pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> whatIsThis = drawCircle(~color);
 </code></pre>
-<p>¿Es <code>whatIsThis</code> una función <code>drawCircle</code> <em>curried</em>, esperando el parámetro opcional <code>radius</code> para ser aplicado? ¿O se terminó aplicando? Para hacer frente a esta confusión, añadir un argumento posicional (también conocido como no-etiquetado) a <code>drawCircle</code> (convencionalmente <code>()</code>) y OCaml, como regla general, asumirá que el argumento opcional etiquetado es omitido cuando el argumento posicional es siempre proporcionado.</p>
+<p>¿Es <code>whatIsThis</code> una función <code>drawCircle</code> <em>curried</em>, esperando el parámetro opcional <code>radius</code> para ser aplicado? Or did it finish applying because the <code>radius</code> is optional? Para hacer frente a esta confusión, añadir un argumento posicional (también conocido como no-etiquetado) a <code>drawCircle</code> (convencionalmente <code>()</code>) y OCaml, como regla general, asumirá que el argumento opcional etiquetado es omitido cuando el argumento posicional es siempre proporcionado.</p>
+<p>Because we don't supply the unit OCaml knows we want to curry the function.</p>
 <pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> curriedFunction = drawCircle(~color);
-<span class="hljs-keyword">let</span> actualResultWithoutProvidingRadius = drawCircle(~color, ());
+</code></pre>
+<p>Because we <em>do</em> supply the unit OCaml knows we deliberately omit the <code>radius</code> parameter, and the function is executed.</p>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> circle = drawCircle(~color, ());
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="opcional-pasado-explicitamente"></a><a href="#opcional-pasado-explicitamente" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Opcional pasado explicitamente</h3>
-<p>A veces, querrás enviar un valor a una función sin saber si el valor es <code>None</code> o <code>Some(a)</code>. Ingenuamente, lo harías:</p>
+<p>Sometimes, you might want to forward a value to a function without knowing whether the value is <code>None</code> or <code>Some(a)</code>. Naively, you'd do:</p>
 <pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> result =
   <span class="hljs-keyword">switch</span> (payloadRadius) {
   | <span class="hljs-constructor">None</span> =&gt; drawCircle(~color, ())
   | <span class="hljs-constructor">Some</span>(r) =&gt; drawCircle(~color, ~radius=r, ())
   };
 </code></pre>
-<p>Rápidamente esto se hace tedioso. Proporcionamos un atajo:</p>
+<p>This quickly gets tedious. We provide a shortcut:</p>
 <pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> result = drawCircle(~color, ~radius=?payloadRadius, ());
 </code></pre>
-<p>Esto significa &quot;entiendo que <code>radius</code> es opcional, y que cuando le paso un valor necesita ser un <code>int</code>, pero no se si el valor que tengo que pasar es <code>None</code> o <code>Some(val)</code>, así que te pasaré todo el <code>option</code> encapsulado&quot;.</p>
+<p>This means &quot;I understand <code>radius</code> is optional, and that when I pass it a value it needs to be an <code>int</code>, but I don't know whether the value I'm passing is <code>None</code> or <code>Some(val)</code>, so I'll pass you the whole <code>option</code> wrapper&quot;.</p>
 <h3><a class="anchor" aria-hidden="true" id="opcional-con-valor-por-defecto"></a><a href="#opcional-con-valor-por-defecto" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Opcional con valor por defecto</h3>
-<p>A los argumentos etiquetados opcionales también se les puede proporcionar un valor por defecto. En este caso, no son encapsulados en un tipo <code>option</code>.</p>
+<p>Optional labeled arguments can also be provided a default value. In this case, they aren't wrapped in an <code>option</code> type.</p>
 <pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> drawCircle = (~radius=<span class="hljs-number">1</span>, ~color, ()) =&gt; {
   setColor(color);
   startAt(radius, radius)
 };
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="funciones-recursivas"></a><a href="#funciones-recursivas" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Funciones recursivas</h3>
-<p>Por defecto, un valor no puede ver un <em>binding</em> que le apunte, pero incluyendo la palabra clave <code>rec</code> en un <em>binding</em> <code>let</code> hace esto posible. Esto permite que las funciones se llamen y se vean a si mismas, dándonos el poder de la recursión.</p>
+<p>By default, a value can't see a binding that points to it, but including the <code>rec</code> keyword in a <code>let</code> binding makes this possible. This allows functions to see and call themselves, giving us the power of recursion.</p>
 <pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> <span class="hljs-keyword">rec</span> neverTerminate = () =&gt; neverTerminate();
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="funciones-mutuamente-recursivas"></a><a href="#funciones-mutuamente-recursivas" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Funciones mutuamente recursivas</h3>
-<p>Las funciones mutuamente recursivas comienzan como una única función recursiva usando la palabra clave <code>rec</code>, y entonces son todas encadenadas juntas con <code>and</code>:</p>
+<p>Mutually recursive functions start like a single recursive function using the <code>rec</code> keyword, and then are chained together with <code>and</code>:</p>
 <pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> <span class="hljs-keyword">rec</span> callSecond = () =&gt; callFirst()
 <span class="hljs-keyword">and</span> callFirst = () =&gt; callSecond();
 </code></pre>
-<p><strong>Nota</strong> que no haya punto y coma al finalizar la primera linea y que no haya <code>let</code> en la segunda linea.</p>
+<p><strong>Note</strong> that there's no semicolon ending the first line and no <code>let</code> on the second line.</p>
 <h2><a class="anchor" aria-hidden="true" id="consejos-y-trucos"></a><a href="#consejos-y-trucos" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Consejos y Trucos</h2>
-<p>Hoja de referencia de las sintaxis de función:</p>
+<p>Cheat sheet for the function syntaxes:</p>
 <h3><a class="anchor" aria-hidden="true" id="declaracion"></a><a href="#declaracion" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Declaración</h3>
-<pre><code class="hljs css language-reason"><span class="hljs-comment">/* función anónima. Listada para completar */</span>
+<pre><code class="hljs css language-reason"><span class="hljs-comment">/* anonymous function. Listed for completeness only */</span>
 (x) =&gt; (y) =&gt; <span class="hljs-number">1</span>;
-<span class="hljs-comment">/* sugar de lo anterior */</span>
+<span class="hljs-comment">/* sugar for the above */</span>
 (x, y) =&gt; <span class="hljs-number">1</span>;
-<span class="hljs-comment">/* asignar a un nombre */</span>
+<span class="hljs-comment">/* assign to a name */</span>
 <span class="hljs-keyword">let</span> add = (x, y) =&gt; <span class="hljs-number">1</span>;
 
-<span class="hljs-comment">/* etiquetado */</span>
+<span class="hljs-comment">/* labeled */</span>
 <span class="hljs-keyword">let</span> add = (~first <span class="hljs-keyword">as</span> x, ~second <span class="hljs-keyword">as</span> y) =&gt; x <span class="hljs-operator">+</span> y;
-<span class="hljs-comment">/* con sugar rompecabezas */</span>
+<span class="hljs-comment">/* with punning sugar */</span>
 <span class="hljs-keyword">let</span> add = (~first, ~second) =&gt; first <span class="hljs-operator">+</span> second;
 
-<span class="hljs-comment">/* etiquetado con valor opcional */</span>
+<span class="hljs-comment">/* labeled with default value */</span>
 <span class="hljs-keyword">let</span> add = (~first <span class="hljs-keyword">as</span> x=<span class="hljs-number">1</span>, ~second <span class="hljs-keyword">as</span> y=<span class="hljs-number">2</span>) =&gt; x <span class="hljs-operator">+</span> y;
-<span class="hljs-comment">/* con rompecabezas */</span>
+<span class="hljs-comment">/* with punning */</span>
 <span class="hljs-keyword">let</span> add = (~first=<span class="hljs-number">1</span>, ~second=<span class="hljs-number">2</span>) =&gt; first <span class="hljs-operator">+</span> second;
 
-<span class="hljs-comment">/* opcional */</span>
+<span class="hljs-comment">/* optional */</span>
 <span class="hljs-keyword">let</span> add = (~first <span class="hljs-keyword">as</span> x=?, ~second <span class="hljs-keyword">as</span> y=?) =&gt; <span class="hljs-keyword">switch</span> (x) {<span class="hljs-operator">...</span>};
-<span class="hljs-comment">/* con rompecabezas */</span>
+<span class="hljs-comment">/* with punning */</span>
 <span class="hljs-keyword">let</span> add = (~first=?, ~second=?) =&gt; <span class="hljs-keyword">switch</span> (first) {<span class="hljs-operator">...</span>};
 </code></pre>
 <h4><a class="anchor" aria-hidden="true" id="con-anotaciones-de-tipo"></a><a href="#con-anotaciones-de-tipo" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Con anotaciones de tipo</h4>
-<pre><code class="hljs css language-reason"><span class="hljs-comment">/* función anónima */</span>
+<pre><code class="hljs css language-reason"><span class="hljs-comment">/* anonymous function */</span>
 (x: int) =&gt; (y: int): int =&gt; <span class="hljs-number">1</span>;
-<span class="hljs-comment">/* sugar de lo anterior */</span>
+<span class="hljs-comment">/* sugar for the above */</span>
 (x: int, y: int): int =&gt; <span class="hljs-number">1</span>;
-<span class="hljs-comment">/* asignar a un nombre */</span>
+<span class="hljs-comment">/* assign to a name */</span>
 <span class="hljs-keyword">let</span> add = (x: int, y: int): int =&gt; <span class="hljs-number">1</span>;
 
-<span class="hljs-comment">/* etiquetado */</span>
+<span class="hljs-comment">/* labeled */</span>
 <span class="hljs-keyword">let</span> add = (~first <span class="hljs-keyword">as</span> x: int, ~second <span class="hljs-keyword">as</span> y: int) : int =&gt; x <span class="hljs-operator">+</span> y;
-<span class="hljs-comment">/* con sugar de rompecabezas */</span>
+<span class="hljs-comment">/* with punning sugar */</span>
 <span class="hljs-keyword">let</span> add = (~first: int, ~second: int) : int =&gt; first <span class="hljs-operator">+</span> second;
 
-<span class="hljs-comment">/* etiquetado con valor por defecto */</span>
+<span class="hljs-comment">/* labeled with default value */</span>
 <span class="hljs-keyword">let</span> add = (~first <span class="hljs-keyword">as</span> x: int=<span class="hljs-number">1</span>, ~second <span class="hljs-keyword">as</span> y: int=<span class="hljs-number">2</span>) : int =&gt; x <span class="hljs-operator">+</span> y;
-<span class="hljs-comment">/* con sugar de rompecabezas */</span>
+<span class="hljs-comment">/* with punning sugar */</span>
 <span class="hljs-keyword">let</span> add = (~first: int=<span class="hljs-number">1</span>, ~second: int=<span class="hljs-number">2</span>) : int =&gt; first <span class="hljs-operator">+</span> second;
 
-<span class="hljs-comment">/* opcional */</span>
+<span class="hljs-comment">/* optional */</span>
 <span class="hljs-keyword">let</span> add = (~first <span class="hljs-keyword">as</span> x: option(int)=?, ~second <span class="hljs-keyword">as</span> y: option(int)=?) : int =&gt; <span class="hljs-keyword">switch</span> (x) {<span class="hljs-operator">...</span>};
-<span class="hljs-comment">/* con sugar de rompecabezas */</span>
-<span class="hljs-comment">/* observar que la llamada pasaría un `int`, no `option int` */</span>
-<span class="hljs-comment">/* dentro de la función, `first` y `second` son `option int`. */</span>
+<span class="hljs-comment">/* with punning sugar */</span>
+<span class="hljs-comment">/* note that the caller would pass an `int`, not `option int` */</span>
+<span class="hljs-comment">/* Inside the function, `first` and `second` are `option int`. */</span>
 <span class="hljs-keyword">let</span> add = (~first: option(int)=?, ~second: option(int)=?) : int =&gt; <span class="hljs-keyword">switch</span> (first) {<span class="hljs-operator">...</span>};
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="aplicacion"></a><a href="#aplicacion" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Aplicación</h3>
-<pre><code class="hljs css language-reason"><span class="hljs-comment">/* aplicación anónima. Listado solo para completar */</span>
+<pre><code class="hljs css language-reason"><span class="hljs-comment">/* anonymous application. Listed for completeness only */</span>
 add(x)(y);
-<span class="hljs-comment">/* sugar para lo anterior */</span>
+<span class="hljs-comment">/* sugar for the above */</span>
 add(x, y);
 
-<span class="hljs-comment">/* etiquetado */</span>
+<span class="hljs-comment">/* labeled */</span>
 add(~first=<span class="hljs-number">1</span>, ~second=<span class="hljs-number">2</span>);
-<span class="hljs-comment">/* con sugar de rompecabezas */</span>
+<span class="hljs-comment">/* with punning sugar */</span>
 add(~first, ~second);
 
-<span class="hljs-comment">/* aplicación con valor por defecto. Igual que la aplicación normal */</span>
+<span class="hljs-comment">/* application with default value. Same as normal application */</span>
 add(~first=<span class="hljs-number">1</span>, ~second=<span class="hljs-number">2</span>);
 
-<span class="hljs-comment">/* aplicación opcional explicita */</span>
+<span class="hljs-comment">/* explicit optional application */</span>
 add(~first=?<span class="hljs-constructor">Some</span>(<span class="hljs-number">1</span>), ~second=?<span class="hljs-constructor">Some</span>(<span class="hljs-number">2</span>));
-<span class="hljs-comment">/* with rompecabezas */</span>
+<span class="hljs-comment">/* with punning */</span>
 add(~first?, ~second?);
 </code></pre>
 <h4><a class="anchor" aria-hidden="true" id="con-anotaciones-de-tipo-1"></a><a href="#con-anotaciones-de-tipo-1" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Con anotaciones de tipo</h4>
-<pre><code class="hljs css language-reason"><span class="hljs-comment">/* aplicación anónima */</span>
+<pre><code class="hljs css language-reason"><span class="hljs-comment">/* anonymous application */</span>
 add(x: int)(y: int);
 
-<span class="hljs-comment">/* etiquetado */</span>
+<span class="hljs-comment">/* labeled */</span>
 add(~first=<span class="hljs-number">1</span>: int, ~second=<span class="hljs-number">2</span>: int);
-<span class="hljs-comment">/* con sugar de rompecabezas*/</span>
+<span class="hljs-comment">/* with punning sugar */</span>
 add(~first: int, ~second: int);
 
-<span class="hljs-comment">/* aplicación valor por defecto. Igual que la aplicación normal */</span>
+<span class="hljs-comment">/* application with default value. Same as normal application */</span>
 add(~first=<span class="hljs-number">1</span>: int, ~second=<span class="hljs-number">2</span>: int);
 
-<span class="hljs-comment">/* aplicación opcional explicita */</span>
+<span class="hljs-comment">/* explicit optional application */</span>
 add(~first=?<span class="hljs-constructor">Some</span>(<span class="hljs-number">1</span>): option(int), ~second=?<span class="hljs-constructor">Some</span>(<span class="hljs-number">2</span>): option(int));
-<span class="hljs-comment">/* con sugar de rompecabezas */</span>
+<span class="hljs-comment">/* with punning sugar */</span>
 add(~first: option(int)?, ~second: option(int)?);
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="firma-de-tipo-autonomo"></a><a href="#firma-de-tipo-autonomo" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Firma de Tipo autónomo</h3>
@@ -262,13 +265,13 @@ add(~first: option(int)?, ~second: option(int)?);
 <span class="hljs-keyword">type</span> foo = (~first: int=?, ~second: int=?, unit) =&gt; int;
 </code></pre>
 <h4><a class="anchor" aria-hidden="true" id="en-archivos-de-la-interfaz"></a><a href="#en-archivos-de-la-interfaz" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>En archivos de la interfaz</h4>
-<p>Para anotar una función desde el archivo de implementación (<code>.re</code>):</p>
+<p>To annotate a function from the implementation file (<code>.re</code>):</p>
 <pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> add: int =&gt; int =&gt; int;
-<span class="hljs-comment">/* sugar para el anterior */</span>
+<span class="hljs-comment">/* sugar for the above */</span>
 <span class="hljs-keyword">let</span> add: (int, int) =&gt; int;
 </code></pre>
-<p>Las mismas reglas que en la sección anterior, excepto que se reemplaza <code>type foo = bar</code> con <code>let add: bar</code>.</p>
-<p><strong>No</strong> confunda esto con realmente exportar un tipo en el archivo de la interfaz.**. <code>let add: bar</code> anota un valor existente <code>bar</code> desde el archivo de implementación. <code>type foo = bar</code> exporta un tipo con la misma forma desde el archivo de implementación.</p></p>
+<p>Same rules as the previous section, except replacing <code>type foo = bar</code> with <code>let add: bar</code>.</p>
+<p><strong>Don't</strong> confuse this with actually exporting a type in the interface file. <code>let add: bar</code> annotates an existing value <code>bar</code> from the implementation file. <code>type foo = bar</code> exports a type of the same shape from the implementation file.</p>
 </span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/es-ES/list-and-array"><span class="arrow-prev">← </span><span>Anterior</span></a><a class="docs-next button" href="/docs/es-ES/if-else"><span>Siguiente</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav docOnPageNav"><ul class="toc-headings"><li><a href="#sin-argumento">Sin Argumento</a></li><li><a href="#argumentos-etiquetados">Argumentos Etiquetados</a><ul class="toc-headings"><li><a href="#currying">Currying</a></li></ul></li><li><a href="#argumentos-etiquetados-opcionales">Argumentos etiquetados opcionales</a><ul class="toc-headings"><li><a href="#opcional-pasado-explicitamente">Opcional pasado explicitamente</a></li><li><a href="#opcional-con-valor-por-defecto">Opcional con valor por defecto</a></li><li><a href="#funciones-recursivas">Funciones recursivas</a></li><li><a href="#funciones-mutuamente-recursivas">Funciones mutuamente recursivas</a></li></ul></li><li><a href="#consejos-y-trucos">Consejos y Trucos</a><ul class="toc-headings"><li><a href="#declaracion">Declaración</a></li><li><a href="#aplicacion">Aplicación</a></li><li><a href="#firma-de-tipo-autonomo">Firma de Tipo autónomo</a></li></ul></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.min.js"></script><script>window.foo = new Pjax({
           areas: [
             // try to use the first query.

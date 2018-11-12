@@ -127,44 +127,47 @@ drawCircle(~radius=<span class="hljs-number">10</span>, ~color=<span class="hljs
 </code></pre>
 <p>当在给定的语法时，<code>radius</code>被<strong>包装</strong>在标准库的<code>option</code>类型中，默认值为<code>None</code>。 若提供，其将会被包装在<code>Some</code>中。 因此 <code>radius</code> 的类型值要么是 <code>None</code>，要么是 <code>Some(int)</code>。</p>
 <p><strong>Note</strong>：<code>None | Some(foo)</code> 是一种<a href="/docs/zh-CN/variant">之前</a>所描述的称为 variant 的数据结构类型， 特殊的 variant 类型由标准库提供。 其被称为<code>option</code>。 它的定义：<code>type option('a) = None | Some('a)</code>。</p>
-<p><strong>Note</strong> unit <code>()</code> 在 <code>drawCircle</code> 的末尾。 缺少它，由于 <code>radius</code> 和 <code>color</code> 都是标签参数，能够被柯里化，并能不按顺序调用，则对于下面代码的意义则不清晰：</p>
+<p><strong>Note</strong> unit <code>()</code> 在 <code>drawCircle</code> 的末尾。 Writing this particular function without the unit <code>()</code> would lead to the following problem. Because <code>radius</code> and <code>color</code> are both labeled, the function can be curried, and it can be applied out-of-order, it's unclear what the following means:</p>
 <pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> whatIsThis = drawCircle(~color);
 </code></pre>
-<p><code>whatIsThis</code> 是一个等待可选的 <code>radius</code> 参数应用的柯里化的 <code>drawCircle</code> 函数？ 或已经完成应用？ 为了处理这一困惑，添加一个位置 (亦称 非标签) 参数到 <code>drawCircle</code> (一般为 <code>()</code>)，OCaml 也会，一般来说，当提供了可选参数时，会假定可选的标记参数会被忽略。</p>
+<p><code>whatIsThis</code> 是一个等待可选的 <code>radius</code> 参数应用的柯里化的 <code>drawCircle</code> 函数？ Or did it finish applying because the <code>radius</code> is optional? 为了处理这一困惑，添加一个位置 (亦称 非标签) 参数到 <code>drawCircle</code> (一般为 <code>()</code>)，OCaml 也会，一般来说，当提供了可选参数时，会假定可选的标记参数会被忽略。</p>
+<p>Because we don't supply the unit OCaml knows we want to curry the function.</p>
 <pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> curriedFunction = drawCircle(~color);
-<span class="hljs-keyword">let</span> actualResultWithoutProvidingRadius = drawCircle(~color, ());
+</code></pre>
+<p>Because we <em>do</em> supply the unit OCaml knows we deliberately omit the <code>radius</code> parameter, and the function is executed.</p>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> circle = drawCircle(~color, ());
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="显示传递可选参数"></a><a href="#显示传递可选参数" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>显示传递可选参数</h3>
-<p>有时，你可能想要将某个值传递给函数却不知道这一个值是<code>None</code> 或 <code>Some(a)</code>. 简单底，你可以这么处理：</p>
+<p>Sometimes, you might want to forward a value to a function without knowing whether the value is <code>None</code> or <code>Some(a)</code>. Naively, you'd do:</p>
 <pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> result =
- <span class="hljs-keyword">switch</span> (payloadRadius) {
- | <span class="hljs-constructor">None</span> =&gt; drawCircle(~color, ())
- | <span class="hljs-constructor">Some</span>(r) =&gt; drawCircle(~color, ~radius=r, ())
- };
+  <span class="hljs-keyword">switch</span> (payloadRadius) {
+  | <span class="hljs-constructor">None</span> =&gt; drawCircle(~color, ())
+  | <span class="hljs-constructor">Some</span>(r) =&gt; drawCircle(~color, ~radius=r, ())
+  };
 </code></pre>
-<p>这很快就变得十分冗长。我们提供了一个快捷方式：</p>
+<p>This quickly gets tedious. We provide a shortcut:</p>
 <pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> result = drawCircle(~color, ~radius=?payloadRadius, ());
 </code></pre>
-<p>这意味着”我理解 <code>radius</code> 是可选的，当我传递给它一个值时需要是 <code>int</code> 类型，但我不确定我穿的值是 <code>None</code> 还是 <code>Some(val)</code>，因此我将会传递给你整个 <code>option</code> 包装器。</p>
+<p>This means &quot;I understand <code>radius</code> is optional, and that when I pass it a value it needs to be an <code>int</code>, but I don't know whether the value I'm passing is <code>None</code> or <code>Some(val)</code>, so I'll pass you the whole <code>option</code> wrapper&quot;.</p>
 <h3><a class="anchor" aria-hidden="true" id="带默认值的可选参数"></a><a href="#带默认值的可选参数" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>带默认值的可选参数</h3>
-<p>可选的标签参数也可以提供一个默认值。这一情况下，它们不是包装在 <code>option</code> 类型中。</p>
+<p>Optional labeled arguments can also be provided a default value. In this case, they aren't wrapped in an <code>option</code> type.</p>
 <pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> drawCircle = (~radius=<span class="hljs-number">1</span>, ~color, ()) =&gt; {
   setColor(color);
   startAt(radius, radius)
 };
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="递归函数"></a><a href="#递归函数" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>递归函数</h3>
-<p>默认情况，值是无法看到指向自身的绑定，但若在 <code>let</code> 绑定中包含了 <code>rec</code> 关键字则使这成为可能。 这允许函数通过递归赋予的能力看到和调用它们自身。</p>
+<p>By default, a value can't see a binding that points to it, but including the <code>rec</code> keyword in a <code>let</code> binding makes this possible. This allows functions to see and call themselves, giving us the power of recursion.</p>
 <pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> <span class="hljs-keyword">rec</span> neverTerminate = () =&gt; neverTerminate();
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="互相递归函数"></a><a href="#互相递归函数" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>互相递归函数</h3>
-<p>互相递归函数从一个使用 <code>rec</code> 的关键字单独的递归函数开始，然后通过 <code>and</code> 链接在一起：</p>
+<p>Mutually recursive functions start like a single recursive function using the <code>rec</code> keyword, and then are chained together with <code>and</code>:</p>
 <pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> <span class="hljs-keyword">rec</span> callSecond = () =&gt; callFirst()
-<span class="hljs-keyword">and</span> callFirst = () =&gt; callsecond();
+<span class="hljs-keyword">and</span> callFirst = () =&gt; callSecond();
 </code></pre>
-<p><strong>注意</strong>第一行没有以分号结尾而第二行没有 <code>let</code>。</p>
+<p><strong>Note</strong> that there's no semicolon ending the first line and no <code>let</code> on the second line.</p>
 <h2><a class="anchor" aria-hidden="true" id="提示-技巧"></a><a href="#提示-技巧" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>提示 &amp; 技巧</h2>
-<p>函数语法备忘清单：</p>
+<p>Cheat sheet for the function syntaxes:</p>
 <h3><a class="anchor" aria-hidden="true" id="声明"></a><a href="#声明" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>声明</h3>
 <pre><code class="hljs css language-reason"><span class="hljs-comment">/* anonymous function. Listed for completeness only */</span>
 (x) =&gt; (y) =&gt; <span class="hljs-number">1</span>;
@@ -179,7 +182,7 @@ drawCircle(~radius=<span class="hljs-number">10</span>, ~color=<span class="hljs
 <span class="hljs-keyword">let</span> add = (~first, ~second) =&gt; first <span class="hljs-operator">+</span> second;
 
 <span class="hljs-comment">/* labeled with default value */</span>
-<span class="hljs-keyword">let</span> add = (~first <span class="hljs-keyword">as</span> x=<span class="hljs-number">1</span>, ~second <span class="hljs-keyword">as</span> y = <span class="hljs-number">2</span>) =&gt; x <span class="hljs-operator">+</span> y;
+<span class="hljs-keyword">let</span> add = (~first <span class="hljs-keyword">as</span> x=<span class="hljs-number">1</span>, ~second <span class="hljs-keyword">as</span> y=<span class="hljs-number">2</span>) =&gt; x <span class="hljs-operator">+</span> y;
 <span class="hljs-comment">/* with punning */</span>
 <span class="hljs-keyword">let</span> add = (~first=<span class="hljs-number">1</span>, ~second=<span class="hljs-number">2</span>) =&gt; first <span class="hljs-operator">+</span> second;
 
@@ -211,7 +214,7 @@ drawCircle(~radius=<span class="hljs-number">10</span>, ~color=<span class="hljs
 <span class="hljs-comment">/* with punning sugar */</span>
 <span class="hljs-comment">/* note that the caller would pass an `int`, not `option int` */</span>
 <span class="hljs-comment">/* Inside the function, `first` and `second` are `option int`. */</span>
-<span class="hljs-keyword">let</span> add = (~first: option(int)=?, ~second: option(int)=?): int =&gt; <span class="hljs-keyword">switch</span> (first) {<span class="hljs-operator">...</span>};
+<span class="hljs-keyword">let</span> add = (~first: option(int)=?, ~second: option(int)=?) : int =&gt; <span class="hljs-keyword">switch</span> (first) {<span class="hljs-operator">...</span>};
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="应用"></a><a href="#应用" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>应用</h3>
 <pre><code class="hljs css language-reason"><span class="hljs-comment">/* anonymous application. Listed for completeness only */</span>
@@ -250,25 +253,25 @@ add(~first=?<span class="hljs-constructor">Some</span>(<span class="hljs-number"
 add(~first: option(int)?, ~second: option(int)?);
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="单独的类型签名"></a><a href="#单独的类型签名" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>单独的类型签名</h3>
-<pre><code class="hljs css language-reason"><span class="hljs-comment">/* 第一个参数类型，第二个参数类型，返回类型 */</span>
+<pre><code class="hljs css language-reason"><span class="hljs-comment">/* first arg type, second arg type, return type */</span>
 <span class="hljs-keyword">type</span> foo = int =&gt; int =&gt; int;
-<span class="hljs-comment">/* 上述代码的语法糖 */</span>
+<span class="hljs-comment">/* sugar for the above */</span>
 <span class="hljs-keyword">type</span> foo = (int, int) =&gt; int;
 
-<span class="hljs-comment">/* 标签参数 */</span>
+<span class="hljs-comment">/* labeled */</span>
 <span class="hljs-keyword">type</span> foo = (~first: int, ~second: int) =&gt; int;
 
-<span class="hljs-comment">/* 标签参数 */</span>
+<span class="hljs-comment">/* labeled */</span>
 <span class="hljs-keyword">type</span> foo = (~first: int=?, ~second: int=?, unit) =&gt; int;
 </code></pre>
 <h4><a class="anchor" aria-hidden="true" id="接口文件"></a><a href="#接口文件" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>接口文件</h4>
-<p>从实现文件(<code>.re</code>)中标记函数：</p>
+<p>To annotate a function from the implementation file (<code>.re</code>):</p>
 <pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> add: int =&gt; int =&gt; int;
 <span class="hljs-comment">/* sugar for the above */</span>
 <span class="hljs-keyword">let</span> add: (int, int) =&gt; int;
 </code></pre>
-<p>与上一节规则相同，除了将 <code>type foo = bar</code> 替换为 <code>let add: bar</code>。</p>
-<p><strong>不要</strong>对类型文件里实际导出的类型感到困惑。 <code>let add: bar</code>在具体实现的文件中标记了一个已有的值<code>bar</code>。 <code>type foo = bar</code>从具体实现文件中导出了一个相同模型的类型。</p>
+<p>Same rules as the previous section, except replacing <code>type foo = bar</code> with <code>let add: bar</code>.</p>
+<p><strong>Don't</strong> confuse this with actually exporting a type in the interface file. <code>let add: bar</code> annotates an existing value <code>bar</code> from the implementation file. <code>type foo = bar</code> exports a type of the same shape from the implementation file.</p>
 </span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/zh-CN/list-and-array"><span class="arrow-prev">← </span><span>上一步</span></a><a class="docs-next button" href="/docs/zh-CN/if-else"><span>下一步</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav docOnPageNav"><ul class="toc-headings"><li><a href="#无参数">无参数</a></li><li><a href="#标签参数">标签参数</a><ul class="toc-headings"><li><a href="#curring">Curring</a></li></ul></li><li><a href="#可选的标签参数">可选的标签参数</a><ul class="toc-headings"><li><a href="#显示传递可选参数">显示传递可选参数</a></li><li><a href="#带默认值的可选参数">带默认值的可选参数</a></li><li><a href="#递归函数">递归函数</a></li><li><a href="#互相递归函数">互相递归函数</a></li></ul></li><li><a href="#提示-技巧">提示 &amp; 技巧</a><ul class="toc-headings"><li><a href="#声明">声明</a></li><li><a href="#应用">应用</a></li><li><a href="#单独的类型签名">单独的类型签名</a></li></ul></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.min.js"></script><script>window.foo = new Pjax({
           areas: [
             // try to use the first query.
