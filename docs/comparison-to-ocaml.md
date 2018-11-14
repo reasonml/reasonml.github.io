@@ -12,7 +12,7 @@ OCaml | Reason
 
 ## Operator Renaming
 
-Reason has all of OCaml's infix operators, but a couple of operators are expressed differently. In Reason, structural equality is written as `==`, and reference (physical) equality is written as `===`. In Reason, to achieve the corresponding inequality, simply swap the first character with a `!` character. (`!=` for structural inequality, and `!==` for reference inequality).
+Reason has all of OCaml's infix operators, but a couple of operators are expressed differently. In Reason, structural equality is written as `==`, and reference (physical) equality is written as `===`. For the corresponding inequality, simply swap the first character with a `!` character: `!=` for structural inequality, and `!==` for reference inequality.
 
 Equality | OCaml | Reason
 ---------|-------|-------
