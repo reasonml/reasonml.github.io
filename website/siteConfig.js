@@ -159,6 +159,11 @@ const users = [
     image: "img/logos/sv.svg",
     infoLink: "https://sv.co",
   },
+  {
+    caption: "ill",
+    image: "img/logos/ill.svg",
+    infoLink: "https://ill.fi"
+  },
 ];
 
 const examples = [
