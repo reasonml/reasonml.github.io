@@ -4,6 +4,7 @@ title: Events
 
 There are a Reason meetups all around the world, among others:
 
+- [Alicante](https://www.meetup.com/Alicante-Frontend/events/256373865/)
 - [Budapest](https://www.meetup.com/ReasonML-Budapest/)
 - [Brussels](https://www.meetup.com/ReasonML-BXL/)
 - [Chicago](https://www.meetup.com/Chicago-ReasonML/)
