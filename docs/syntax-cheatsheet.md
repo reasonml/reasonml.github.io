@@ -25,7 +25,7 @@ We've worked very hard to make Reason look like JS while preserving OCaml's grea
 
 | JavaScript                                            | Reason                                         |
 | ----------------------------------------------------- | ---------------------------------------------- |
-| `true`, `false`                                       | `true`, `false`                                |
+| `true`, `false`                                       | Same                                |
 | `!true`                                               | Same                                           |
 | <code>&#124;&#124;</code>, `&&`, `<=`, `>=`, `<`, `>` | Same                                           |
 | `a === b`, `a !== b`                                  | Same                                           |
