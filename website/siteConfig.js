@@ -159,6 +159,11 @@ const users = [
     image: "img/logos/sv.svg",
     infoLink: "https://sv.co",
   },
+  {
+    caption: "nittygritty",
+    image: "img/logos/nittygritty.svg",
+    infoLink: "https://nittygritty.net",
+  },
 ];
 
 const examples = [
@@ -225,7 +230,7 @@ const siteConfig = {
   cleanUrl: true,
   highlight: {
     theme: 'atom-one-light',
-    hljs: function(hljs) {
+    hljs: function (hljs) {
       hljs.registerLanguage('reason', reasonHighlightJs)
     }
   },
