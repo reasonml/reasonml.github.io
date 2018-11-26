@@ -169,6 +169,11 @@ const users = [
     image: "img/logos/leon-software.svg",
     infoLink: "https://www.leonsoftware.com/",
   },
+  {
+    caption: "xorlab",
+    image: "img/logos/xorlab.svg",
+    infoLink: "https://www.xorlab.com/",
+  },
 ];
 
 const examples = [
