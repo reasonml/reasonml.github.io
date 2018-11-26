@@ -164,6 +164,11 @@ const users = [
     image: "img/logos/nittygritty.svg",
     infoLink: "https://nittygritty.net",
   },
+  {
+    caption: "Leon Software",
+    image: "img/logos/leon-software.svg",
+    infoLink: "https://www.leonsoftware.com/",
+  },
 ];
 
 const examples = [
