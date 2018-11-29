@@ -174,6 +174,11 @@ const users = [
     image: "img/logos/xorlab.svg",
     infoLink: "https://www.xorlab.com/",
   },
+  {
+    caption: "石墨文档",
+    image: "img/logos/shimo.svg",
+    infoLink: "https://www.shimo.im",
+  },
 ];
 
 const examples = [
