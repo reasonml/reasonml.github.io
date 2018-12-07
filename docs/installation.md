@@ -32,7 +32,7 @@ node src/Demo.bs.js
 
 That's it! We use BuckleScript to compile Reason to JavaScript, then we use NodeJS to run the JavaScript. Feel free to use the generated JS files in whichever way you'd like, as if they're hand-written by you.
 
-During development, instead of running `npm run build` each time to compile, run `npm run start` to start a watcher that recompiles automatically after file changes.
+During development, instead of running `yarn build` each time to compile, run `yarn start` (or `npm run start` for npm) to start a watcher that recompiles automatically after file changes.
 
 By default, the `basic-reason` theme configures BuckleScript to output the generated JS files alongside the Reason files they were produced from. [There's a reason we do that](https://bucklescript.github.io/docs/en/build-overview#tips-tricks). If you prefer to keep the generated files somewhere else, edit `bsconfig.json` to set `in-source` to `false`; the JS files will then be output to the `lib/js` directory instead.
 
