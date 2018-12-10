@@ -2,7 +2,7 @@
 title: Fast Pipe
 ---
 
-`->` is a convenient operator that allows you to "flip" your code inside-out. `a(b)` becomes `b->a`. It's a piece of syntax that doesn't have any runtime cost.
+`->` is a convenient operator that allows you to "flip" your code inside-out. `b(a)` becomes `a->b`. It's a piece of syntax that doesn't have any runtime cost.
 
 Imagine you have the following:
 
