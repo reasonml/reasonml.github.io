@@ -31,7 +31,7 @@ let test_mapper argv =
     expr = fun mapper expr -&gt;
       match expr with
       | { pexp_desc = Pexp_extension ({ txt = &quot;test&quot; }, PStr [])} -&gt;
-        Ast_helper.Exp.constant (Const_int 42)
+        Ast_helper.Exp.constant (Pconst_integer ("42", None))
       | other -&gt; default_mapper.expr mapper other; }
 
 let () =
