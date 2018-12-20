@@ -63,7 +63,7 @@ Assuming we don't need the chaining behavior above, we'd bind to each case this 
 
 ```reason
 [@bs.send] external map : (array('a), 'a => 'b) => array('b) = "";
-[@bs.send] external filter : (array('a), 'a => 'b) => array('b) = "";
+[@bs.send] external filter : (array('a), 'a => bool) => array('a) = "";
 
 type request;
 external asyncRequest: unit => request = "";
