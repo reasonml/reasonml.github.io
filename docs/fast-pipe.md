@@ -10,7 +10,7 @@ Imagine you have the following:
 validateAge(getAge(parseData(person)))
 ```
 
-This is slightly hard to read, since you need to read the code from the innermost part, to the outer parts. Use fast pipe to streamline it
+This is slightly hard to read, since you need to read the code from the innermost part, to the outer parts. Use Pipe First to streamline it
 
 ```reason
 person
@@ -56,7 +56,9 @@ JavaScript's APIs are often attached to objects, and often chainable, like so:
 ```js
 const result = [1, 2, 3].map(a => a + 1).filter(a => a % 2 === 0);
 
-asyncRequest().setWaitDuration(4000).send();
+asyncRequest()
+  .setWaitDuration(4000)
+  .send();
 ```
 
 Assuming we don't need the chaining behavior above, we'd bind to each case this using `bs.send` from the previous section:
@@ -91,7 +93,7 @@ asyncRequest()->setWaitDuration(400)->send;
 
 ## Pipe Into Variants
 
-A variant's constructors, like `Some` or `Student`, look like functions, but unfortunately aren't, due to historical reasons. Sometime, it'd still be nice to be able to use them as functions. Fast pipe takes the occasion to enable that for you!
+A variant's constructors, like `Some` or `Student`, look like functions, but unfortunately aren't, due to historical reasons. Sometime, it'd still be nice to be able to use them as functions. Pipe First takes the occasion to enable that for you!
 
 ```reason
 let result = name->preprocess->Some
