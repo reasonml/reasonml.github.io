@@ -1,0 +1,146 @@
+<!DOCTYPE html><html lang="ru"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Pipe First · Reason</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="`-&gt;` is a convenient operator that allows you to &quot;flip&quot; your code inside-out. `a(b)` becomes `b-&gt;a`. It&#x27;s a piece of syntax that doesn&#x27;t have any runtime cost."/><meta name="docsearch:language" content="ru"/><meta property="og:title" content="Pipe First · Reason"/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io/index.html"/><meta property="og:description" content="`-&gt;` is a convenient operator that allows you to &quot;flip&quot; your code inside-out. `a(b)` becomes `b-&gt;a`. It&#x27;s a piece of syntax that doesn&#x27;t have any runtime cost."/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/icon_50.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io/blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io/blog/feed.xml" title="Reason Blog RSS Feed"/><link rel="stylesheet" href="/css/main.css"/></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/ru"><img class="logo" src="/img/dummy.svg" alt="Reason"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/ru/what-and-why" target="_self">Docs</a></li><li class=""><a href="/ru/try" target="_self">Try</a></li><li class=""><a href="/api/index" target="_self">API</a></li><li class=""><a href="/docs/ru/community" target="_self">Community</a></li><li class=""><a href="/blog/" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg" alt="Languages icon"/>Русский</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/docs/ja/pipe-first">日本語</a></li><li><a href="/docs/en/pipe-first">English</a></li><li><a href="/docs/de/pipe-first">Deutsch</a></li><li><a href="/docs/es-ES/pipe-first">Español</a></li><li><a href="/docs/fr/pipe-first">Français</a></li><li><a href="/docs/ko/pipe-first">한국어</a></li><li><a href="/docs/pt-BR/pipe-first">Português (Brasil)</a></li><li><a href="/docs/uk/pipe-first">Українська</a></li><li><a href="/docs/zh-CN/pipe-first">中文</a></li><li><a href="/docs/zh-TW/pipe-first">繁體中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank" rel="noreferrer noopener">Помочь с переводом</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/facebook/reason" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>Language Basics</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Intro</h3><ul><li class="navListItem"><a class="navItem" href="/docs/ru/what-and-why">What &amp; Why</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Setup</h3><ul><li class="navListItem"><a class="navItem" href="/docs/ru/installation">Installation</a></li><li class="navListItem"><a class="navItem" href="/docs/ru/editor-plugins">Editor Plugins</a></li><li class="navListItem"><a class="navItem" href="/docs/ru/extra-goodies">Extra Goodies</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Language Basics</h3><ul><li class="navListItem"><a class="navItem" href="/docs/ru/overview">Overview</a></li><li class="navListItem"><a class="navItem" href="/docs/ru/let-binding">Let Binding</a></li><li class="navListItem"><a class="navItem" href="/docs/ru/type">Type!</a></li><li class="navListItem"><a class="navItem" href="/docs/ru/string-and-char">String &amp; Char</a></li><li class="navListItem"><a class="navItem" href="/docs/ru/boolean">Boolean</a></li><li class="navListItem"><a class="navItem" href="/docs/ru/integer-and-float">Integer &amp; Float</a></li><li class="navListItem"><a class="navItem" href="/docs/ru/tuple">Tuple</a></li><li class="navListItem"><a class="navItem" href="/docs/ru/record">Record</a></li><li class="navListItem"><a class="navItem" href="/docs/ru/variant">Variant!</a></li><li class="navListItem"><a class="navItem" href="/docs/ru/null-undefined-option">Null, Undefined &amp; Option</a></li><li class="navListItem"><a class="navItem" href="/docs/ru/list-and-array">List &amp; Array</a></li><li class="navListItem"><a class="navItem" href="/docs/ru/function">Function</a></li><li class="navListItem"><a class="navItem" href="/docs/ru/if-else">If-Else</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/docs/ru/pipe-first">Pipe First</a></li><li class="navListItem"><a class="navItem" href="/docs/ru/more-on-type">More on Type</a></li><li class="navListItem"><a class="navItem" href="/docs/ru/destructuring">Destructuring</a></li><li class="navListItem"><a class="navItem" href="/docs/ru/pattern-matching">Pattern Matching!</a></li><li class="navListItem"><a class="navItem" href="/docs/ru/mutation">Mutation</a></li><li class="navListItem"><a class="navItem" href="/docs/ru/imperative-loops">Imperative Loops</a></li><li class="navListItem"><a class="navItem" href="/docs/ru/jsx">JSX</a></li><li class="navListItem"><a class="navItem" href="/docs/ru/external">External</a></li><li class="navListItem"><a class="navItem" href="/docs/ru/exception">Exception</a></li><li class="navListItem"><a class="navItem" href="/docs/ru/object">Object</a></li><li class="navListItem"><a class="navItem" href="/docs/ru/module">Module</a></li><li class="navListItem"><a class="navItem" href="/docs/ru/promise">Promise</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">JavaScript</h3><ul><li class="navListItem"><a class="navItem" href="/docs/ru/interop">Interop</a></li><li class="navListItem"><a class="navItem" href="/docs/ru/syntax-cheatsheet">Syntax Cheatsheet</a></li><li class="navListItem"><a class="navItem" href="/docs/ru/libraries">Libraries</a></li><li class="navListItem"><a class="navItem" href="/docs/ru/converting-from-js">Converting from JS</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Native</h3><ul><li class="navListItem"><a class="navItem" href="/docs/ru/native">Native</a></li><li class="navListItem"><a class="navItem" href="/docs/ru/quickstart-ocaml">Quickstart</a></li><li class="navListItem"><a class="navItem" href="/docs/ru/convert-from-ocaml">Converting from OCaml</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Extra</h3><ul><li class="navListItem"><a class="navItem" href="/docs/ru/faq">Frequently Asked Questions</a></li><li class="navListItem"><a class="navItem" href="/docs/ru/comparison-to-ocaml">Comparison to OCaml</a></li><li class="navListItem"><a class="navItem" href="/docs/ru/newcomer-examples">Newcomer Examples</a></li><li class="navListItem"><a class="navItem" href="/docs/ru/project-structure">Project Structure</a></li></ul></div></div></section></div><script>
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              const headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                if (event.target.tagName === 'A') {
+                  document.body.classList.remove('tocActive');
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer docMainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://crowdin.com/project/reason/ru" target="_blank" rel="noreferrer noopener">Translate</a><h1 class="postHeaderTitle">Pipe First</h1></header><article><div><span><p><code>-&gt;</code> is a convenient operator that allows you to &quot;flip&quot; your code inside-out. <code>a(b)</code> becomes <code>b-&gt;a</code>. It's a piece of syntax that doesn't have any runtime cost.</p>
+<p>Imagine you have the following:</p>
+<pre><code class="hljs css language-reason">validateAge(getAge(parseData(person)))
+</code></pre>
+<p>This is slightly hard to read, since you need to read the code from the innermost part, to the outer parts. Use Pipe First to streamline it</p>
+<pre><code class="hljs css language-reason">person
+  <span class="hljs-operator">-&gt;</span>parseData
+  <span class="hljs-operator">-&gt;</span>getAge
+  <span class="hljs-operator">-&gt;</span>validateAge
+</code></pre>
+<p>Basically, <code>parseData(person)</code> is transformed into <code>person-&gt;parseData</code>, and <code>getAge(person-&gt;parseData)</code> is transformed into <code>person-&gt;parseData-&gt;getAge</code>, etc.</p>
+<p><strong>This works when the function takes more than one argument too</strong>.</p>
+<pre><code class="hljs css language-reason">a(one, two, three)
+</code></pre>
+<p>is the same as</p>
+<pre><code class="hljs css language-reason">one<span class="hljs-operator">-&gt;</span>a(two, three)
+</code></pre>
+<p>This works with labeled arguments too.</p>
+<h3><a class="anchor" aria-hidden="true" id="tips-tricks"></a><a href="#tips-tricks" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Tips &amp; Tricks</h3>
+<p>Try not to abuse pipes; they're a mean to an end. Newcomers sometimes shape a library's API to take advantage of the pipe. This is rather backward.</p>
+<p>Conventionally, we don't turn the innermost layer of function call into a pipe. So the above example would usually be written as:</p>
+<pre><code class="hljs css language-reason">parseData(person)
+  <span class="hljs-operator">-&gt;</span>getAge
+  <span class="hljs-operator">-&gt;</span>validateAge
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="js-method-chaining"></a><a href="#js-method-chaining" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>JS Method Chaining</h2>
+<p><em>This section requires understanding of <a href="https://bucklescript.github.io/docs/en/function#object-method">Bucklescript's binding API</a></em>.</p>
+<p>JavaScript's APIs are often attached to objects, and often chainable, like so:</p>
+<pre><code class="hljs css language-js"><span class="hljs-keyword">const</span> result = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>].map(<span class="hljs-function"><span class="hljs-params">a</span> =&gt;</span> a + <span class="hljs-number">1</span>).filter(<span class="hljs-function"><span class="hljs-params">a</span> =&gt;</span> a % <span class="hljs-number">2</span> === <span class="hljs-number">0</span>);
+
+asyncRequest()
+  .setWaitDuration(<span class="hljs-number">4000</span>)
+  .send();
+</code></pre>
+<p>Assuming we don't need the chaining behavior above, we'd bind to each case this using <code>bs.send</code> from the previous section:</p>
+<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.send]</span> <span class="hljs-keyword">external</span> map : (array('a), 'a =&gt; 'b) =&gt; array('b) = <span class="hljs-string">""</span>;
+<span class="hljs-attribute">[@bs.send]</span> <span class="hljs-keyword">external</span> filter : (array('a), 'a =&gt; 'b) =&gt; array('b) = <span class="hljs-string">""</span>;
+
+<span class="hljs-keyword">type</span> request;
+<span class="hljs-keyword">external</span> asyncRequest: unit =&gt; request = <span class="hljs-string">""</span>;
+<span class="hljs-attribute">[@bs.send]</span> <span class="hljs-keyword">external</span> setWaitDuration: (request, int) =&gt; request = <span class="hljs-string">""</span>;
+<span class="hljs-attribute">[@bs.send]</span> <span class="hljs-keyword">external</span> send: request =&gt; unit = <span class="hljs-string">""</span>;
+</code></pre>
+<p>You'd use them like this:</p>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> result = filter(map(<span class="hljs-literal">[|</span><span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span><span class="hljs-literal">|]</span>, a =&gt; a <span class="hljs-operator">+</span> <span class="hljs-number">1</span>), a =&gt; a mod <span class="hljs-number">2</span> <span class="hljs-operator">==</span> <span class="hljs-number">0</span>);
+
+send(setWaitDuration(asyncRequest(), <span class="hljs-number">4000</span>));
+</code></pre>
+<p>This looks much worse than the JS counterpart! Now we need to read the actual logic inside-out. We also cannot use the <code>|&gt;</code> operator here, since the object comes <em>first</em> in the binding. But <code>-&gt;</code> works!</p>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> result = <span class="hljs-literal">[|</span><span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span><span class="hljs-literal">|]</span>
+  <span class="hljs-operator">-&gt;</span>map(a =&gt; a <span class="hljs-operator">+</span> <span class="hljs-number">1</span>)
+  <span class="hljs-operator">-&gt;</span>filter(a =&gt; a mod <span class="hljs-number">2</span> <span class="hljs-operator">===</span> <span class="hljs-number">0</span>);
+
+asyncRequest()<span class="hljs-operator">-&gt;</span>setWaitDuration(<span class="hljs-number">400</span>)<span class="hljs-operator">-&gt;</span>send;
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="pipe-into-variants"></a><a href="#pipe-into-variants" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Pipe Into Variants</h2>
+<p>A variant's constructors, like <code>Some</code> or <code>Student</code>, look like functions, but unfortunately aren't, due to historical reasons. Sometime, it'd still be nice to be able to use them as functions. Pipe First takes the occasion to enable that for you!</p>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> result = name<span class="hljs-operator">-&gt;</span>preprocess<span class="hljs-operator">-&gt;</span><span class="hljs-constructor">Some</span>
+</code></pre>
+<p>We turn this into:</p>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> result = <span class="hljs-constructor">Some</span>(preprocess(name))
+</code></pre>
+<p><strong>Note</strong> that using a variant constructor as a function wouldn't work anywhere else.</p>
+<h2><a class="anchor" aria-hidden="true" id="pipe-placeholders"></a><a href="#pipe-placeholders" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Pipe Placeholders</h2>
+<p>A placeholder is written as an underscore and it tells Reason that you want to fill in an argument of a function later. These two have equivalent meaning:</p>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> addTo7 = (x) =&gt; add3(<span class="hljs-number">3</span>, x, <span class="hljs-number">4</span>);
+<span class="hljs-keyword">let</span> addTo7 = add3(<span class="hljs-number">3</span>, _, <span class="hljs-number">4</span>);
+</code></pre>
+<p>Sometimes you don't want to pipe the value you have into the first position. In these cases you can mark a placeholder value to show which argument you would like to pipe into.</p>
+<p>Let's say you have a function <code>namePerson</code>, which takes a <code>person</code> then a <code>name</code> argument. If you are transforming a person then pipe will work as-is:</p>
+<pre><code class="hljs css language-reason">makePerson(~age=<span class="hljs-number">47</span>, ())
+  <span class="hljs-operator">-&gt;</span>namePerson(<span class="hljs-string">"Jane"</span>);
+</code></pre>
+<p>If you have a name that you want to apply to a person object, you can use a placeholder:</p>
+<pre><code class="hljs css language-reason">getName(input)
+  <span class="hljs-operator">-&gt;</span>namePerson(personDetails, _);
+</code></pre>
+<p>This allows you to pipe into any positional argument. It also works for named arguments:</p>
+<pre><code class="hljs css language-reason">getName(input)
+  <span class="hljs-operator">-&gt;</span>namePerson(~person=personDetails, ~name=_);
+</code></pre>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/ru/if-else"><span class="arrow-prev">← </span><span>Предыдущий</span></a><a class="docs-next button" href="/docs/ru/more-on-type"><span>Далее</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav docOnPageNav"><ul class="toc-headings"><li><a href="#js-method-chaining">JS Method Chaining</a></li><li><a href="#pipe-into-variants">Pipe Into Variants</a></li><li><a href="#pipe-placeholders">Pipe Placeholders</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.min.js"></script><script>window.foo = new Pjax({
+          areas: [
+            // try to use the first query.
+            '.mainContainer, .docsNavContainer .toc .navWrapper, .onPageNav',
+            // fallback
+            'body'
+          ],
+          link: '.docsNavContainer:not(.docsSliderActive) a',
+          update: {
+            script: false,
+          }
+        });
+        var languagesMenuItemCopy = document.getElementById("languages-menu");
+        languagesMenuItemCopy.addEventListener("click", function(e){
+          e.preventDefault();
+          e.stopPropagation();
+          e.stopImmediatePropagation();
+        });</script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+              var search = docsearch({
+                
+                apiKey: '966d1e412f67114a07dc0afe44b19b53',
+                indexName: 'reason',
+                inputSelector: '#search_input_react',
+                algoliaOptions: {"facetFilters":["lang:ru"]}
+              });
+            </script></body></html>
