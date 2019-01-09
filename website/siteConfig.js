@@ -174,6 +174,11 @@ const users = [
     image: "img/logos/xorlab.svg",
     infoLink: "https://www.xorlab.com/",
   },
+  {
+    caption: "iterate",
+    image: "img/logos/iterate.svg",
+    infoLink: "https://www.iterate.no/",
+  },
 ];
 
 const examples = [
