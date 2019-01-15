@@ -174,6 +174,11 @@ const users = [
     image: "img/logos/xorlab.svg",
     infoLink: "https://www.xorlab.com/",
   },
+  {
+    caption: "codeheroes",
+    image: "img/logos/codeheroes.svg",
+    infoLink: "https://codeheroes.io/",
+  },
 ];
 
 const examples = [
