@@ -175,6 +175,11 @@ const users = [
     infoLink: "https://www.xorlab.com/",
   },
   {
+    caption: "codeheroes",
+    image: "img/logos/codeheroes.svg",
+    infoLink: "https://codeheroes.io/",
+  },
+  {
     caption: "iterate",
     image: "img/logos/iterate.svg",
     infoLink: "https://www.iterate.no/",
