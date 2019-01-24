@@ -88,7 +88,7 @@ let result = [|1, 2, 3|]
   ->map(a => a + 1)
   ->filter(a => a mod 2 === 0);
 
-asyncRequest()->setWaitDuration(400)->send;
+asyncRequest()->setWaitDuration(4000)->send;
 ```
 
 ## Pipe Into Variants
