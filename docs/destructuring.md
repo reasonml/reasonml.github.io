@@ -51,7 +51,7 @@ let otherFunction = (~person as {name} as thePerson) => {
 };
 ```
 
-**Keep reading the section, pattern matching, for a crazier form of destructuring**!
+**Keep reading. The next section, pattern matching, has a crazier form of destructuring**!
 
 ## Tips & Tricks
 
