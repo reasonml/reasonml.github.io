@@ -60,9 +60,9 @@ const users = [
     infoLink: "http://g2i.co",
   },
   {
-    caption: "ephox",
-    image: "img/logos/ephox.svg",
-    infoLink: "https://www.ephox.com",
+    caption: "Tiny",
+    image: "img/logos/tiny.svg",
+    infoLink: "https://www.tiny.cloud",
   },
   {
     caption: "Rung",
