@@ -114,7 +114,7 @@ If you're receiving, for example, a JS string that can be `null` and `undefined`
 [@bs.module "MyConstant"] external myId: Js.Nullable.t(string) = "myId"
 ```
 
-To create such a nullable string from our side (presumably to pass it to the JS side, for interop purpose), do:
+To create such a nullable string from our side (presumably to pass it to the JS side, for interop purposes), do:
 
 ```reason
 [@bs.module "MyIdValidator"] external validate: Js.Nullable.t(string) => bool = "validate";
@@ -127,4 +127,4 @@ The `return` part "wraps" a string into a nullable string, to make the type syst
 
 #### Convert to/from `option`
 
-`Js.Nullable.fromOption` converts from a `option` to `Js.Nullable.t`. `Js.Nullable.toOption` does the opposite.
+`Js.Nullable.fromOption` converts from an `option` to `Js.Nullable.t`. `Js.Nullable.toOption` does the opposite.
