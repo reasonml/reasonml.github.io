@@ -184,6 +184,11 @@ const users = [
     image: "img/logos/codeheroes.svg",
     infoLink: "https://codeheroes.io/",
   },
+  {
+    caption: "Control Center Apps",
+    image: "img/logos/control-center-apps.svg",
+    infoLink: "https://www.cca.io/",
+  },
 ];
 
 const examples = [
