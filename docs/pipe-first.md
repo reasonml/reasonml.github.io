@@ -37,7 +37,7 @@ This works with labeled arguments too.
 
 ### Tips & Tricks
 
-Try not to abuse pipes; they're a mean to an end. Newcomers sometimes shape a library's API to take advantage of the pipe. This is rather backward.
+Try not to abuse pipes; they're a means to an end. Newcomers sometimes shape a library's API to take advantage of the pipe. This is rather backward.
 
 Conventionally, we don't turn the innermost layer of function call into a pipe. So the above example would usually be written as:
 
@@ -61,7 +61,7 @@ asyncRequest()
   .send();
 ```
 
-Assuming we don't need the chaining behavior above, we'd bind to each case this using `bs.send` from the previous section:
+Assuming we don't need the chaining behavior above, we'd bind to each case of `this` using `bs.send` from the previous section:
 
 ```reason
 [@bs.send] external map : (array('a), 'a => 'b) => array('b) = "";
