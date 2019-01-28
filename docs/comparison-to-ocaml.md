@@ -795,7 +795,7 @@ Because Reason uses C-style comments, some obscure custom prefix/infix
 operators must be written differently.  The rules for prefix/infix operators
 are the same as in OCaml syntax, but with the following exceptions:
 
-Specifically, if any character except the first in an prefix/infix operator is
+Specifically, if any character except the first in a prefix/infix operator is
 a star or forward slash, that must be first escaped with a backslash. These will
 be parsed *without* the backslash when added to the AST. When reprinted, the
 escape backslashes are added back in automatically.
