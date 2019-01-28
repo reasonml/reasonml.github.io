@@ -44,16 +44,16 @@ First, if you're not interfacing with any library that uses promises, you can si
 
 If you need to bind to a JS library that uses promises, or communicate with such library, you can use BS's [Js.Promise](http://bucklescript.github.io/bucklescript/api/Js.Promise.html). There's also potential to have some syntactic sugar in the future. In the long run, we'd like to implement a spec-compliant promises implementation in OCaml/Reason proper, so that the compiler optimizations could kick in.
 
-For a more idiomatic OCaml solution: on the native OCaml side, we have [lwt](http://ocsigen.org/lwt/) and [Async](https://ocaml.janestreet.com/ocaml-core/111.03.00/doc/async/#Std). We don't use them in web right now, but we might in the future.
+For a more idiomatic OCaml solution, on the native OCaml side, we have [lwt](http://ocsigen.org/lwt/) and [Async](https://ocaml.janestreet.com/ocaml-core/111.03.00/doc/async/#Std). We don't use them in web right now, but we might in the future.
 
 ### What's the (unit) test story?
 Some of OCaml's language features (not just types) might be able to defer the need for unit testing until later. In the meantime, for compilation to JS, we're working on [Jest wrapper](https://github.com/BuckleTypes/bs-jest). We'll look into using Jest for native too, if Jest is written using Reason in the future (no concrete plan yet). [OUnit](http://ounit.forge.ocamlcore.org) is a good, small native OCaml testing library right now.
 
 ### What's the `.merlin` file at the root of my project?
-That's the metadata file for [editor support](editor-plugins.md). This is usually generated for you; You don't need to check that into your version control and don't have to manually modify it.
+That's the metadata file for [editor support](editor-plugins.md) and it is usually generated for you. You don't need to check that into your version control and don't have to manually modify it.
 
 ### I don't see any `import` or `require` in my file; how does module resolution work?
-Reason/OCaml doesn't require you to write any import; modules being referred to in the file are automatically searched in the project. Specifically, a module `Hello` asks the compiler to look for the file `hello.re` or `hello.ml` (and their corresponding [interface file](module.md#signatures), `hello.rei` or `hello.mli`, if available).
+Reason/OCaml doesn't require you to write any import statements; modules being referred to in the file are automatically searched in the project. Specifically, a module `Hello` asks the compiler to look for the file `hello.re` or `hello.ml` (and their corresponding [interface file](module.md#signatures), `hello.rei` or `hello.mli`, if available).
 
 A module name is the file name, capitalized. It has to be unique per project; this abstracts away the file system and allows you to move files around without changing code.
 
