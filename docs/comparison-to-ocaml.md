@@ -521,7 +521,7 @@ let a = HasMultipleTuples((10, 10), (10, 10));</code></pre>
   </tbody>
 </table>
 
-Can you spot the error in the OCaml example? This is one of the most common mistakes among OCaml programmers. The nested `match` *must* be wrapped in parentheses, otherwise the `Some` case is parsed as belonging to the outer `match`. Visually, it's actually:
+Can you spot the error in the OCaml example? This is one of the most common mistakes among OCaml programmers. The nested `match` *must* be wrapped in parentheses, otherwise the `B (x, y)` case is parsed as belonging to the inner `match`. Visually, it's actually:
 
 ```ocaml
 let res = match x with
