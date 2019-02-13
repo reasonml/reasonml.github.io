@@ -189,6 +189,11 @@ const users = [
     image: "img/logos/control-center-apps.svg",
     infoLink: "https://www.cca.io/",
   },
+  {
+    caption: "ruangguru",
+    image: "img/logos/ruangguru.svg",
+    infoLink: "https://ruangguru.com/"
+  }
 ];
 
 const examples = [
