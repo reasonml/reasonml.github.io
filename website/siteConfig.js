@@ -35,11 +35,6 @@ const users = [
     infoLink: "https://beop.io",
   },
   {
-    caption: "Mesopo",
-    image: "img/logos/mesopo.svg",
-    infoLink: "https://mesopo.ai",
-  },
-  {
     caption: "Social Tables",
     image: "img/logos/socialtables.svg",
     infoLink: "https://www.socialtables.com",
