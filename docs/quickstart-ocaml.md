@@ -13,7 +13,7 @@ opam init
 # **Note**: add the line below to your ~/.bashrc or ~/.zshrc too; it's needed at every shell startup
 eval $(opam config env)
 opam update
-opam switch 4.02.3
+opam switch create 4.02.3
 ```
 
 Then clone our example [`ReasonNativeProject`](https://github.com/reasonml/ReasonNativeProject) repo, and you're good to go!
