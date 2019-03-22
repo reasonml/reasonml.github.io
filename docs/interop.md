@@ -127,7 +127,7 @@ type context;
 
 /* we're leaving these types abstract, because we won't
  * be using them directly anywhere */
-[@bs.send] external getContext : (canvas, string) => context = "";
+[@bs.send] external getContext : (canvas, string) => context = "getContext";
 
 let myCanvas: canvas = [%bs.raw {| document.getElementById("mycanvas") |}];
 
@@ -143,7 +143,7 @@ The empty string means "the JS name is the same as the name we're giving the ext
 Let's add one more function just so it's interesting.
 
 ```reason
-[@bs.send] external fillRect : (context, float, float, float, float) => unit = "";
+[@bs.send] external fillRect : (context, float, float, float, float) => unit = "fillRect";
 ```
 
 And now we can draw something!
@@ -178,9 +178,9 @@ As an example, here's the entire source code of the [`bs.glob`](https://github.c
 ```reason
 type error;
 
-[@bs.module] external glob : (string, (Js.nullable(error), array(string)) => unit) => unit = "";
+[@bs.module] external glob : (string, (Js.nullable(error), array(string)) => unit) => unit = "glob";
 
-[@bs.val] [@bs.module "glob"] external sync : string => array(string) = "";
+[@bs.val] [@bs.module "glob"] external sync : string => array(string) = "glob";
 ```
 
 And the relevant parts of `package.json`:

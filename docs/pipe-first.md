@@ -64,13 +64,13 @@ asyncRequest()
 Assuming we don't need the chaining behavior above, we'd bind to each case this using `bs.send` from the previous section:
 
 ```reason
-[@bs.send] external map : (array('a), 'a => 'b) => array('b) = "";
-[@bs.send] external filter : (array('a), 'a => 'b) => array('b) = "";
+[@bs.send] external map : (array('a), 'a => 'b) => array('b) = "map";
+[@bs.send] external filter : (array('a), 'a => 'b) => array('b) = "filter";
 
 type request;
-external asyncRequest: unit => request = "";
-[@bs.send] external setWaitDuration: (request, int) => request = "";
-[@bs.send] external send: request => unit = "";
+external asyncRequest: unit => request = "asyncRequest";
+[@bs.send] external setWaitDuration: (request, int) => request = "setWaitDuration";
+[@bs.send] external send: request => unit = "send";
 ```
 
 You'd use them like this:
