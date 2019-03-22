@@ -127,9 +127,9 @@ alert(<span class="hljs-string">"hello"</span>);
 
 <span class="hljs-keyword">type</span> context;
 
-<span class="hljs-comment">/* wir lassen diese Typen abstrakt, weil wir 
- * diese nirgends direkt verwenden */</span>
-<span class="hljs-attribute">[@bs.send]</span> <span class="hljs-keyword">external</span> getContext : (canvas, string) =&gt; context = <span class="hljs-string">""</span>;
+<span class="hljs-comment">/* we're leaving these types abstract, because we won't
+ * be using them directly anywhere */</span>
+<span class="hljs-attribute">[@bs.send]</span> <span class="hljs-keyword">external</span> getContext : (canvas, string) =&gt; context = <span class="hljs-string">"getContext"</span>;
 
 <span class="hljs-keyword">let</span> myCanvas: canvas = <span class="hljs-attribute">[%bs.raw {| document.getElementById("mycanvas") |}]</span>;
 
@@ -139,7 +139,7 @@ alert(<span class="hljs-string">"hello"</span>);
 <p>Denn erstellten wir eine <code>getContext</code>-Funktion, aber anstatt <code>@bs.val</code> haben wir <code>@bs.send</code> verwendet, und wir setzten einen leeren String für den Text bei external ein. <code>@bs.send</code> bedeutet „wir rufen eine Methode für das erste Argument auf“, was in diesem Fall das Canvas-Objekt ist. In Anbetracht des oben Gesagten übersetzt BuckleScript <code>getContext(theFirstArgument, theSecondArgument)</code> in <code>theFirstArgument.getContext (theSecondArgument, ...)</code>.</p>
 <p>Der leere String bedeutet „dieser JS-Name ist der gleiche wie der Name, den wir dem external im BuckleScript-Land geben“ – in diesem Fall <code>getContext</code>. Wenn wir ihn anders benennen möchten (wie <code>getRenderingContext</code>), müssten wir den String <code>&quot;getContext&quot;</code> angeben, damit BuckleScript die richtige Funktion aufruft.</p>
 <p>Lass uns eine weitere Funktion hinzufügen, nur damit es interessant ist.</p>
-<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.send]</span> <span class="hljs-keyword">external</span> fillRect : (context, float, float, float, float) =&gt; unit = <span class="hljs-string">""</span>;
+<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.send]</span> <span class="hljs-keyword">external</span> fillRect : (context, float, float, float, float) =&gt; unit = <span class="hljs-string">"fillRect"</span>;
 </code></pre>
 <p>Und jetzt können wir etwas malen!</p>
 <pre><code class="hljs css language-reason">fillRect(ctx, <span class="hljs-number">0.0</span>, <span class="hljs-number">0.0</span>, <span class="hljs-number">100.0</span>, <span class="hljs-number">100.0</span>);
@@ -160,9 +160,9 @@ ctx.fillRect(<span class="hljs-number">0.0</span>, <span class="hljs-number">0.0
 <p>Als Beispiel hier ist der gesamte Quellcode des <a href="https://github.com/reasonml-community/sb-glob"><code>bs.glob</code></a>-Wrappers (konvertiert zu Reason, das Original ist OCaml):</p>
 <pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> error;
 
-<span class="hljs-attribute">[@bs.module]</span> <span class="hljs-keyword">external</span> glob : (string, (<span class="hljs-module-identifier">Js</span>.nullable(error), array(string)) =&gt; unit) =&gt; unit = <span class="hljs-string">""</span>;
+<span class="hljs-attribute">[@bs.module]</span> <span class="hljs-keyword">external</span> glob : (string, (<span class="hljs-module-identifier">Js</span>.nullable(error), array(string)) =&gt; unit) =&gt; unit = <span class="hljs-string">"glob"</span>;
 
-<span class="hljs-attribute">[@bs.val]</span> <span class="hljs-attribute">[@bs.module "glob"]</span> <span class="hljs-keyword">external</span> sync : string =&gt; array(string) = <span class="hljs-string">""</span>;
+<span class="hljs-attribute">[@bs.val]</span> <span class="hljs-attribute">[@bs.module "glob"]</span> <span class="hljs-keyword">external</span> sync : string =&gt; array(string) = <span class="hljs-string">"glob"</span>;
 </code></pre>
 <p>Und die relevanten Teil aus <code>package.json</code>:</p>
 <pre><code class="hljs css language-json">{

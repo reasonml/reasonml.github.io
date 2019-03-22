@@ -38,7 +38,7 @@
               }
             });
         </script></nav></div><div class="container mainContainer docMainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://crowdin.com/project/reason/zh-TW" target="_blank" rel="noreferrer noopener">Translate</a><h1 class="postHeaderTitle">Interop</h1></header><article><div><span><h2><a class="anchor" aria-hidden="true" id="直接在-reason-撰寫-javascript"></a><a href="#直接在-reason-撰寫-javascript" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>直接在 Reason 撰寫 JavaScript</h2>
-<p>如果你只是在嘗試某些東西，這很方便，但也會有不安全的 JavaScript 程式碼</p>
+<p>If you're just hacking things together, this can be very nice, but you also have all of the unsafety of JavaScript code</p>
 <pre><code class="hljs css language-reason"><span class="hljs-module-identifier">Js</span>.log(<span class="hljs-string">"this is reason"</span>);
 
 <span class="hljs-attribute">[%bs.raw {| console.log('here is some javascript for you') |}]</span>;
@@ -112,7 +112,7 @@
 </code></pre>
 <p>當然，上述函式可以無痛移植到 Reason。</p>
 <p><strong>請記住</strong>對於學習這是非常有用的逃生出口，這樣就可以快速跳入並且開始做點東西，但是回到開始並將東西轉成優良型別安全的 Reason 是很好的練習。</p>
-<p>我曾經遇到一些為了省時間使用原生 JavaScript 的臭蟲</p>
+<p>I've run into more than a few bugs because of raw JavaScript that I added to save time</p>
 <h2><a class="anchor" aria-hidden="true" id="平靜下來且受到紀律"></a><a href="#平靜下來且受到紀律" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>平靜下來且受到紀律</h2>
 <p>目前為止都在使用 <code>bs.raw</code>，非常快速和自由的方式，<strong>不</strong>適合正式環境。</p>
 <p>但是如果我們確實需要呼叫 JavaScript 的函式呢？ 需要與 DOM 交互作用、或者使用 node 模組。 在 BuckleScript，使用 <code>external</code> 宣告式（<a href="https://bucklescript.github.io/docs/en/intro-to-external.html">文件</a>）。</p>
@@ -127,9 +127,9 @@ alert(<span class="hljs-string">"哈嘍"</span>);
 
 <span class="hljs-keyword">type</span> context;
 
-<span class="hljs-comment">/* 這裡留下型別抽象，因為不會
- * 在其他地方直接使用 */</span>
-<span class="hljs-attribute">[@bs.send]</span> <span class="hljs-keyword">external</span> getContext : (canvas, string) =&gt; context = <span class="hljs-string">""</span>;
+<span class="hljs-comment">/* we're leaving these types abstract, because we won't
+ * be using them directly anywhere */</span>
+<span class="hljs-attribute">[@bs.send]</span> <span class="hljs-keyword">external</span> getContext : (canvas, string) =&gt; context = <span class="hljs-string">"getContext"</span>;
 
 <span class="hljs-keyword">let</span> myCanvas: canvas = <span class="hljs-attribute">[%bs.raw {| document.getElementById("mycanvas") |}]</span>;
 
@@ -139,7 +139,7 @@ alert(<span class="hljs-string">"哈嘍"</span>);
 <p>接著製作 <code>getContext</code> 函式， 我們使用 <code>@bs.send</code> 而不是 <code>@bs.val</code>，接著給空字串。 <code>@bs.send</code> 表示&quot;我們呼叫第一個參數的方法&quot;，這個例子是 canvas。 給定上述，BuckleScript 將轉譯 <code>getContext(theFirstArgument, theSecondArgument)</code> 成 <code>theFirstArgument.getContext(theSecondArgument, ...)</code>。</p>
 <p>空字串表示&quot;JS的名稱就跟 BuckleScript 的 external 名稱相同&quot; – 這個例子 <code>getContext</code>。 如果想要給予別的名稱（像是 <code>getRenderingContext</code>），那就必須提供 <code>&quot;getContext&quot;</code> 字串，這樣 BuckleScript 才會呼叫正確的函式。</p>
 <p>加入更多有趣的函式。</p>
-<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.send]</span> <span class="hljs-keyword">external</span> fillRect : (context, float, float, float, float) =&gt; unit = <span class="hljs-string">""</span>;
+<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.send]</span> <span class="hljs-keyword">external</span> fillRect : (context, float, float, float, float) =&gt; unit = <span class="hljs-string">"fillRect"</span>;
 </code></pre>
 <p>現在可以畫些東西！</p>
 <pre><code class="hljs css language-reason">fillRect(ctx, <span class="hljs-number">0.0</span>, <span class="hljs-number">0.0</span>, <span class="hljs-number">100.0</span>, <span class="hljs-number">100.0</span>);
@@ -160,9 +160,9 @@ ctx.fillRect(<span class="hljs-number">0.0</span>, <span class="hljs-number">0.0
 <p>例如，這是 <a href="https://github.com/reasonml-community/bs-glob"><code>bs.glob</code></a> 繫結程式碼（原始版本為 OCaml，已轉成 Reason）：</p>
 <pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> error;
 
-<span class="hljs-attribute">[@bs.module]</span> <span class="hljs-keyword">external</span> glob : (string, (<span class="hljs-module-identifier">Js</span>.nullable(error), array(string)) =&gt; unit) =&gt; unit = <span class="hljs-string">""</span>;
+<span class="hljs-attribute">[@bs.module]</span> <span class="hljs-keyword">external</span> glob : (string, (<span class="hljs-module-identifier">Js</span>.nullable(error), array(string)) =&gt; unit) =&gt; unit = <span class="hljs-string">"glob"</span>;
 
-<span class="hljs-attribute">[@bs.val]</span> <span class="hljs-attribute">[@bs.module "glob"]</span> <span class="hljs-keyword">external</span> sync : string =&gt; array(string) = <span class="hljs-string">""</span>;
+<span class="hljs-attribute">[@bs.val]</span> <span class="hljs-attribute">[@bs.module "glob"]</span> <span class="hljs-keyword">external</span> sync : string =&gt; array(string) = <span class="hljs-string">"glob"</span>;
 </code></pre>
 <p>相關的 <code>package.json</code> 部份：</p>
 <pre><code class="hljs css language-json">{

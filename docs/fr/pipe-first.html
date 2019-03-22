@@ -72,13 +72,13 @@ asyncRequest()
   .send();
 </code></pre>
 <p>En supposant que nous n’ayons pas besoin du chaînage ci-dessus, nous lierons (<em>bind</em>) this à chaque cas en utilisant <code>bs.send</code> de la section précédente :</p>
-<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.send]</span> <span class="hljs-keyword">external</span> map : (array('a), 'a =&gt; 'b) =&gt; array('b) = <span class="hljs-string">""</span>;
-<span class="hljs-attribute">[@bs.send]</span> <span class="hljs-keyword">external</span> filter : (array('a), 'a =&gt; 'b) =&gt; array('b) = <span class="hljs-string">""</span>;
+<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.send]</span> <span class="hljs-keyword">external</span> map : (array('a), 'a =&gt; 'b) =&gt; array('b) = <span class="hljs-string">"map"</span>;
+<span class="hljs-attribute">[@bs.send]</span> <span class="hljs-keyword">external</span> filter : (array('a), 'a =&gt; 'b) =&gt; array('b) = <span class="hljs-string">"filter"</span>;
 
 <span class="hljs-keyword">type</span> request;
-<span class="hljs-keyword">external</span> asyncRequest: unit =&gt; request = <span class="hljs-string">""</span>;
-<span class="hljs-attribute">[@bs.send]</span> <span class="hljs-keyword">external</span> setWaitDuration: (request, int) =&gt; request = <span class="hljs-string">""</span>;
-<span class="hljs-attribute">[@bs.send]</span> <span class="hljs-keyword">external</span> send: request =&gt; unit = <span class="hljs-string">""</span>;
+<span class="hljs-keyword">external</span> asyncRequest: unit =&gt; request = <span class="hljs-string">"asyncRequest"</span>;
+<span class="hljs-attribute">[@bs.send]</span> <span class="hljs-keyword">external</span> setWaitDuration: (request, int) =&gt; request = <span class="hljs-string">"setWaitDuration"</span>;
+<span class="hljs-attribute">[@bs.send]</span> <span class="hljs-keyword">external</span> send: request =&gt; unit = <span class="hljs-string">"send"</span>;
 </code></pre>
 <p>Vous les utiliseriez comme ceci :</p>
 <pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> result = filter(map(<span class="hljs-literal">[|</span><span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span><span class="hljs-literal">|]</span>, a =&gt; a <span class="hljs-operator">+</span> <span class="hljs-number">1</span>), a =&gt; a mod <span class="hljs-number">2</span> <span class="hljs-operator">==</span> <span class="hljs-number">0</span>);

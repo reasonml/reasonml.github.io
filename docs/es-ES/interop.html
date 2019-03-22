@@ -127,9 +127,9 @@ alert(<span class="hljs-string">"hola"</span>);
 
 <span class="hljs-keyword">type</span> context;
 
-<span class="hljs-comment">/* estamos dejando estaos tipos abstractos, porque
- * no los usaremos directamente en ningún sitio */</span>
-<span class="hljs-attribute">[@bs.send]</span> <span class="hljs-keyword">external</span> getContext : (canvas, string) =&gt; context = <span class="hljs-string">""</span>;
+<span class="hljs-comment">/* we're leaving these types abstract, because we won't
+ * be using them directly anywhere */</span>
+<span class="hljs-attribute">[@bs.send]</span> <span class="hljs-keyword">external</span> getContext : (canvas, string) =&gt; context = <span class="hljs-string">"getContext"</span>;
 
 <span class="hljs-keyword">let</span> myCanvas: canvas = <span class="hljs-attribute">[%bs.raw {| document.getElementById("mycanvas") |}]</span>;
 
@@ -139,7 +139,7 @@ alert(<span class="hljs-string">"hola"</span>);
 <p>Luego hemos hecho una función <code>getContext</code>, pero en vez de <code>@bs.val</code> usamos <code>@bs.send</code> y utilizamos una cadena vacía para el texto del <em>externa</em>l. <code>@bs.send</code> significa &quot;Estamos llamando un método de el primer argumento&quot;, que en este caso es Canvas. Dado lo anterior, BuckleScript se traducirá <code>getContext (theFirstArgument, theSecondArgument)</code> a <code>theFirstArgument.getContext(theSecondArgument, ...)</code>.</p>
 <p>La cadena vacía significa &quot;el nombre JS es el mismo que el nombre que estamos dando al external en BuckleScript&quot; - en este caso <code>getContext</code>. Si quisiéramos llamarle de otra manera (como <code>getRenderingContext</code>), tendríamos que suministrar la cadena <code>&quot;getContext&quot;</code> así BuckleScript llamará a la función correcta.</p>
 <p>Añadamos una función más solo porque es interesante.</p>
-<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.send]</span> <span class="hljs-keyword">external</span> fillRect : (context, float, float, float, float) =&gt; unit = <span class="hljs-string">""</span>;
+<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.send]</span> <span class="hljs-keyword">external</span> fillRect : (context, float, float, float, float) =&gt; unit = <span class="hljs-string">"fillRect"</span>;
 </code></pre>
 <p>¡Y ahora podemos dibujar algo!</p>
 <pre><code class="hljs css language-reason">fillRect(ctx, <span class="hljs-number">0.0</span>, <span class="hljs-number">0.0</span>, <span class="hljs-number">100.0</span>, <span class="hljs-number">100.0</span>);
@@ -160,9 +160,9 @@ ctx.fillRect(<span class="hljs-number">0.0</span>, <span class="hljs-number">0.0
 <p>As an example, here's the entire source code of the <a href="https://github.com/reasonml-community/bs-glob"><code>bs.glob</code></a> wrapper (converted to Reason, the original is OCaml):</p>
 <pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> error;
 
-<span class="hljs-attribute">[@bs.module]</span> <span class="hljs-keyword">external</span> glob : (string, (<span class="hljs-module-identifier">Js</span>.nullable(error), array(string)) =&gt; unit) =&gt; unit = <span class="hljs-string">""</span>;
+<span class="hljs-attribute">[@bs.module]</span> <span class="hljs-keyword">external</span> glob : (string, (<span class="hljs-module-identifier">Js</span>.nullable(error), array(string)) =&gt; unit) =&gt; unit = <span class="hljs-string">"glob"</span>;
 
-<span class="hljs-attribute">[@bs.val]</span> <span class="hljs-attribute">[@bs.module "glob"]</span> <span class="hljs-keyword">external</span> sync : string =&gt; array(string) = <span class="hljs-string">""</span>;
+<span class="hljs-attribute">[@bs.val]</span> <span class="hljs-attribute">[@bs.module "glob"]</span> <span class="hljs-keyword">external</span> sync : string =&gt; array(string) = <span class="hljs-string">"glob"</span>;
 </code></pre>
 <p>Y las partes relevantes de <code>package.json</code>:</p>
 <pre><code class="hljs css language-json">{

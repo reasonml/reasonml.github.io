@@ -129,7 +129,7 @@ alert(<span class="hljs-string">"hello"</span>);
 
 <span class="hljs-comment">/* we're leaving these types abstract, because we won't
  * be using them directly anywhere */</span>
-<span class="hljs-attribute">[@bs.send]</span> <span class="hljs-keyword">external</span> getContext : (canvas, string) =&gt; context = <span class="hljs-string">""</span>;
+<span class="hljs-attribute">[@bs.send]</span> <span class="hljs-keyword">external</span> getContext : (canvas, string) =&gt; context = <span class="hljs-string">"getContext"</span>;
 
 <span class="hljs-keyword">let</span> myCanvas: canvas = <span class="hljs-attribute">[%bs.raw {| document.getElementById("mycanvas") |}]</span>;
 
@@ -139,7 +139,7 @@ alert(<span class="hljs-string">"hello"</span>);
 <p>Then we made a <code>getContext</code> function, but instead of <code>@bs.val</code> we used <code>@bs.send</code>, and we used an empty string for the text of the external. <code>@bs.send</code> means &quot;we're calling a method on the first argument&quot;, which in this case is the canvas. Given the above, BuckleScript will translate <code>getContext(theFirstArgument, theSecondArgument)</code> into <code>theFirstArgument.getContext(theSecondArgument, ...)</code>.</p>
 <p>The empty string means &quot;the JS name is the same as the name we're giving the external in BuckleScript-land&quot; – in this case <code>getContext</code>. If we wanted to name it something else (like <code>getRenderingContext</code>), then we'd have to supply the string <code>&quot;getContext&quot;</code> so that BuckleScript calls the right function.</p>
 <p>Let's add one more function just so it's interesting.</p>
-<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.send]</span> <span class="hljs-keyword">external</span> fillRect : (context, float, float, float, float) =&gt; unit = <span class="hljs-string">""</span>;
+<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.send]</span> <span class="hljs-keyword">external</span> fillRect : (context, float, float, float, float) =&gt; unit = <span class="hljs-string">"fillRect"</span>;
 </code></pre>
 <p>And now we can draw something!</p>
 <pre><code class="hljs css language-reason">fillRect(ctx, <span class="hljs-number">0.0</span>, <span class="hljs-number">0.0</span>, <span class="hljs-number">100.0</span>, <span class="hljs-number">100.0</span>);
@@ -160,9 +160,9 @@ ctx.fillRect(<span class="hljs-number">0.0</span>, <span class="hljs-number">0.0
 <p>As an example, here's the entire source code of the <a href="https://github.com/reasonml-community/bs-glob"><code>bs.glob</code></a> wrapper (converted to Reason, the original is OCaml):</p>
 <pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> error;
 
-<span class="hljs-attribute">[@bs.module]</span> <span class="hljs-keyword">external</span> glob : (string, (<span class="hljs-module-identifier">Js</span>.nullable(error), array(string)) =&gt; unit) =&gt; unit = <span class="hljs-string">""</span>;
+<span class="hljs-attribute">[@bs.module]</span> <span class="hljs-keyword">external</span> glob : (string, (<span class="hljs-module-identifier">Js</span>.nullable(error), array(string)) =&gt; unit) =&gt; unit = <span class="hljs-string">"glob"</span>;
 
-<span class="hljs-attribute">[@bs.val]</span> <span class="hljs-attribute">[@bs.module "glob"]</span> <span class="hljs-keyword">external</span> sync : string =&gt; array(string) = <span class="hljs-string">""</span>;
+<span class="hljs-attribute">[@bs.val]</span> <span class="hljs-attribute">[@bs.module "glob"]</span> <span class="hljs-keyword">external</span> sync : string =&gt; array(string) = <span class="hljs-string">"glob"</span>;
 </code></pre>
 <p>And the relevant parts of <code>package.json</code>:</p>
 <pre><code class="hljs css language-json">{

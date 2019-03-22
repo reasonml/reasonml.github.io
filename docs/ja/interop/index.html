@@ -127,9 +127,9 @@ alert(<span class="hljs-string">"hello"</span>);
 
 <span class="hljs-keyword">type</span> context;
 
-<span class="hljs-comment">/* これらの抽象化した型を残しているのは、
- * どこにおいても直接使用することはないためです */</span>
-<span class="hljs-attribute">[@bs.send]</span> <span class="hljs-keyword">external</span> getContext : (canvas, string) =&gt; context = <span class="hljs-string">""</span>;
+<span class="hljs-comment">/* we're leaving these types abstract, because we won't
+ * be using them directly anywhere */</span>
+<span class="hljs-attribute">[@bs.send]</span> <span class="hljs-keyword">external</span> getContext : (canvas, string) =&gt; context = <span class="hljs-string">"getContext"</span>;
 
 <span class="hljs-keyword">let</span> myCanvas: canvas = <span class="hljs-attribute">[%bs.raw {| document.getElementById("mycanvas") |}]</span>;
 
@@ -139,7 +139,7 @@ alert(<span class="hljs-string">"hello"</span>);
 <p>そして、<code>getContext</code> 関数を作成しましたが、<code>@bs.val</code> の代わりに、<code>@bs.send</code> を使用し、external のテキストに空文字列を使用しました。 <code>@bs.send</code> は「私達は第一引数上のメソッドを呼び出しています」ということを意味します。このケースでは（第一引数は） canvas です。 上記を踏まえて、BuckleScript は <code>getContext(theFirstArgument, theSecondArgument)</code> を <code>heFirstArgument.getContext(theSecondArgument, ...)</code> に翻訳します。</p>
 <p>空文字列は「JS 上の名前は BuckleScript 上で external に与えた名前と同じです」ということを意味します。 – このケースでは（external に与えた名前は） <code>getContext</code> です。 他の名前（<code>getRenderingContext</code> のような）を付けたい場合は、BuckleScript が正しい関数を呼べるように、<code>&quot;getContext&quot;</code> という文字列を指定する必要があります。</p>
 <p>面白い関数をもうひとつ追加しましょう。</p>
-<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.send]</span> <span class="hljs-keyword">external</span> fillRect : (context, float, float, float, float) =&gt; unit = <span class="hljs-string">""</span>;
+<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.send]</span> <span class="hljs-keyword">external</span> fillRect : (context, float, float, float, float) =&gt; unit = <span class="hljs-string">"fillRect"</span>;
 </code></pre>
 <p>そして今、何かを描くことができるようになりました！</p>
 <pre><code class="hljs css language-reason">fillRect(ctx, <span class="hljs-number">0.0</span>, <span class="hljs-number">0.0</span>, <span class="hljs-number">100.0</span>, <span class="hljs-number">100.0</span>);
@@ -160,9 +160,9 @@ ctx.fillRect(<span class="hljs-number">0.0</span>, <span class="hljs-number">0.0
 <p>一例として、ここに（Reason にコンバートされた、オリジナルが OCaml の）<a href="https://github.com/reasonml-community/bs-glob"><code>bs.glob</code></a> ラッパーのソースコード全体を記載します。</p>
 <pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> error;
 
-<span class="hljs-attribute">[@bs.module]</span> <span class="hljs-keyword">external</span> glob : (string, (<span class="hljs-module-identifier">Js</span>.nullable(error), array(string)) =&gt; unit) =&gt; unit = <span class="hljs-string">""</span>;
+<span class="hljs-attribute">[@bs.module]</span> <span class="hljs-keyword">external</span> glob : (string, (<span class="hljs-module-identifier">Js</span>.nullable(error), array(string)) =&gt; unit) =&gt; unit = <span class="hljs-string">"glob"</span>;
 
-<span class="hljs-attribute">[@bs.val]</span> <span class="hljs-attribute">[@bs.module "glob"]</span> <span class="hljs-keyword">external</span> sync : string =&gt; array(string) = <span class="hljs-string">""</span>;
+<span class="hljs-attribute">[@bs.val]</span> <span class="hljs-attribute">[@bs.module "glob"]</span> <span class="hljs-keyword">external</span> sync : string =&gt; array(string) = <span class="hljs-string">"glob"</span>;
 </code></pre>
 <p>そして、<code>package.json</code> の関連部分です。</p>
 <pre><code class="hljs css language-json">{

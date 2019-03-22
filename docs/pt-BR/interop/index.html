@@ -127,9 +127,9 @@ alert(<span class="hljs-string">"olar"</span>);
 
 <span class="hljs-keyword">type</span> context;
 
-<span class="hljs-comment">/* vamos deixar os tipos abstratos, 
- * já que não iremos utilizá-los diretamente aqui */</span>
-<span class="hljs-attribute">[@bs.send]</span> <span class="hljs-keyword">external</span> getContext : (canvas, string) =&gt; context = <span class="hljs-string">""</span>;
+<span class="hljs-comment">/* we're leaving these types abstract, because we won't
+ * be using them directly anywhere */</span>
+<span class="hljs-attribute">[@bs.send]</span> <span class="hljs-keyword">external</span> getContext : (canvas, string) =&gt; context = <span class="hljs-string">"getContext"</span>;
 
 <span class="hljs-keyword">let</span> myCanvas: canvas = <span class="hljs-attribute">[%bs.raw {| document.getElementById("mycanvas") |}]</span>;
 
@@ -139,7 +139,7 @@ alert(<span class="hljs-string">"olar"</span>);
 <p>Então, nós criamos uma função <code>getContext</code>, mas ao invés de <code>@bs.val</code> nós usamos <code>@bs.send</code>, e usamos uma string vazia para o texto do external. <code>@bs.send</code> significa &quot;nós estaremos chamando um método do primeiro argumento&quot;, que neste caso é o canvas. Dado o trecho acima, BuckleScript vai traduzir <code>getContext(theFirstArgument, theSecondArgument)</code> para <code>theFirstArgument.getContext(theSecondArgument, ...)</code>.</p>
 <p>A string vazia significa &quot;o nome em JS é o mesmo que o nome que estamos dando ao external no domínio do BuckleScript&quot; – neste caso <code>getContext</code>. Se nós desejássemos dar um outro nome (como <code>getRenderingContext</code>), aí necessitaríamos prover a string <code>&quot;getContext&quot;</code> para que o BuckleScript chame a função correta.</p>
 <p>Vamos só adicionar mais uma função para tornar as coisas mais interessantes.</p>
-<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.send]</span> <span class="hljs-keyword">external</span> fillRect : (context, float, float, float, float) =&gt; unit = <span class="hljs-string">""</span>;
+<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.send]</span> <span class="hljs-keyword">external</span> fillRect : (context, float, float, float, float) =&gt; unit = <span class="hljs-string">"fillRect"</span>;
 </code></pre>
 <p>Agora podemos desenhar!</p>
 <pre><code class="hljs css language-reason">fillRect(ctx, <span class="hljs-number">0.0</span>, <span class="hljs-number">0.0</span>, <span class="hljs-number">100.0</span>, <span class="hljs-number">100.0</span>);
@@ -160,9 +160,9 @@ ctx.fillRect(<span class="hljs-number">0.0</span>, <span class="hljs-number">0.0
 <p>As an example, here's the entire source code of the <a href="https://github.com/reasonml-community/bs-glob"><code>bs.glob</code></a> wrapper (converted to Reason, the original is OCaml):</p>
 <pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> error;
 
-<span class="hljs-attribute">[@bs.module]</span> <span class="hljs-keyword">external</span> glob : (string, (<span class="hljs-module-identifier">Js</span>.nullable(error), array(string)) =&gt; unit) =&gt; unit = <span class="hljs-string">""</span>;
+<span class="hljs-attribute">[@bs.module]</span> <span class="hljs-keyword">external</span> glob : (string, (<span class="hljs-module-identifier">Js</span>.nullable(error), array(string)) =&gt; unit) =&gt; unit = <span class="hljs-string">"glob"</span>;
 
-<span class="hljs-attribute">[@bs.val]</span> <span class="hljs-attribute">[@bs.module "glob"]</span> <span class="hljs-keyword">external</span> sync : string =&gt; array(string) = <span class="hljs-string">""</span>;
+<span class="hljs-attribute">[@bs.val]</span> <span class="hljs-attribute">[@bs.module "glob"]</span> <span class="hljs-keyword">external</span> sync : string =&gt; array(string) = <span class="hljs-string">"glob"</span>;
 </code></pre>
 <p>E as partes relevantes do <code>package.json</code>:</p>
 <pre><code class="hljs css language-json">{
