@@ -188,6 +188,11 @@ const users = [
     caption: "ruangguru",
     image: "img/logos/ruangguru.svg",
     infoLink: "https://ruangguru.com/"
+  },
+  {
+    caption: "Draftbit",
+    image: "img/logos/draftbit.svg",
+    infoLink: "https://draftbit.com"
   }
 ];
 
@@ -211,6 +216,11 @@ const examples = [
     name: "Mareo",
     image: "img/examples/mareo.png",
     link: "https://github.com/reasonml-community/Mareo",
+  },
+  {
+    name: "Avatar Generator",
+    image: "img/examples/avatar-generator.png",
+    link: "https://github.com/draftbit/avatar-generator"
   }
 ]
 
