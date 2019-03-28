@@ -20,11 +20,6 @@ const users = [
     infoLink: "https://onegraph.com",
   },
   {
-    caption: "WOW air",
-    image: "img/logos/wowair.svg",
-    infoLink: "https://wowair.com",
-  },
-  {
     caption: "Viska",
     image: "img/logos/viska.png",
     infoLink: "https://www.viska.com",
