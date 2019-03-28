@@ -80,11 +80,6 @@ const users = [
     infoLink: "https://ahrefs.com",
   },
   {
-    caption: "Root",
-    image: "img/logos/root.svg",
-    infoLink: "https://root.co.za",
-  },
-  {
     caption: "Dernier Cri",
     image: "img/logos/derniercri.svg",
     infoLink: "https://derniercri.io",
