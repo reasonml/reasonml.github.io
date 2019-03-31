@@ -124,7 +124,11 @@ imperativeFunc 0 0</code></pre>
 end</code></pre>
       </td>
       <td>
-        Same as above
+        <pre><code>{
+  let ten = 10;
+  imperativeFunc(ten, ten);
+  imperativeFunc(0, 0);
+}</code></pre>
       </td>
     </tr>
     <tr>
