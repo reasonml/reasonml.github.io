@@ -188,6 +188,11 @@ const users = [
     caption: "Draftbit",
     image: "img/logos/draftbit.svg",
     infoLink: "https://draftbit.com"
+  },
+  {
+    caption: "Qwick",
+    image: "img/logos/qwick.svg",
+    infoLink: "https://qwick.com"
   }
 ];
 
@@ -275,4 +280,3 @@ const siteConfig = {
 };
 
 module.exports = siteConfig;
-
