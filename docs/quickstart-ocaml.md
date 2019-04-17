@@ -1,5 +1,5 @@
 ---
-title: Quickstart
+title: Native Quickstart
 ---
 
 ##  [esy](http://esy.sh)
