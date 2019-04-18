@@ -2,12 +2,12 @@
 
 var $$Array = require("./array.js");
 var Curry = require("./curry.js");
-var Js_exn = require("./js_exn.js");
 var Lexing = require("./lexing.js");
 var Caml_obj = require("./caml_obj.js");
 var Caml_array = require("./caml_array.js");
 var Caml_parser = require("./caml_parser.js");
 var Caml_exceptions = require("./caml_exceptions.js");
+var Caml_js_exceptions = require("./caml_js_exceptions.js");
 
 var YYexit = Caml_exceptions.create("Parsing.YYexit");
 
@@ -32,7 +32,7 @@ var env = /* record */[
   /* errflag */0
 ];
 
-function grow_stacks() {
+function grow_stacks(param) {
   var oldsize = env[/* stacksize */4];
   var newsize = (oldsize << 1);
   var new_s = Caml_array.caml_make_vect(newsize, 0);
@@ -51,13 +51,13 @@ function grow_stacks() {
   return /* () */0;
 }
 
-function clear_parser() {
+function clear_parser(param) {
   $$Array.fill(env[/* v_stack */1], 0, env[/* stacksize */4], /* () */0);
   env[/* lval */7] = /* () */0;
   return /* () */0;
 }
 
-var current_lookahead_fun = /* record */[/* contents */(function () {
+var current_lookahead_fun = /* record */[/* contents */(function (x) {
       return false;
     })];
 
@@ -130,7 +130,7 @@ function yyparse(tables, start, lexer, lexbuf) {
     };
   }
   catch (raw_exn){
-    var exn$1 = Js_exn.internalToOCamlException(raw_exn);
+    var exn$1 = Caml_js_exceptions.internalToOCamlException(raw_exn);
     var curr_char = env[/* curr_char */6];
     env[/* asp */10] = init_asp;
     env[/* sp */13] = init_sp;
@@ -143,7 +143,7 @@ function yyparse(tables, start, lexer, lexbuf) {
       return exn$1[1];
     } else {
       current_lookahead_fun[0] = (function (tok) {
-          if (tok.length !== undefined) {
+          if (typeof tok !== "number") {
             return Caml_array.caml_array_get(tables[/* transl_block */2], tok.tag | 0) === curr_char;
           } else {
             return Caml_array.caml_array_get(tables[/* transl_const */1], tok) === curr_char;
@@ -158,7 +158,7 @@ function peek_val(env, n) {
   return Caml_array.caml_array_get(env[/* v_stack */1], env[/* asp */10] - n | 0);
 }
 
-function symbol_start_pos() {
+function symbol_start_pos(param) {
   var _i = env[/* rule_len */11];
   while(true) {
     var i = _i;
@@ -177,7 +177,7 @@ function symbol_start_pos() {
   };
 }
 
-function symbol_end_pos() {
+function symbol_end_pos(param) {
   return Caml_array.caml_array_get(env[/* symb_end_stack */3], env[/* asp */10]);
 }
 
@@ -189,11 +189,11 @@ function rhs_end_pos(n) {
   return Caml_array.caml_array_get(env[/* symb_end_stack */3], env[/* asp */10] - (env[/* rule_len */11] - n | 0) | 0);
 }
 
-function symbol_start() {
+function symbol_start(param) {
   return symbol_start_pos(/* () */0)[/* pos_cnum */3];
 }
 
-function symbol_end() {
+function symbol_end(param) {
   return symbol_end_pos(/* () */0)[/* pos_cnum */3];
 }
 
@@ -209,7 +209,7 @@ function is_current_lookahead(tok) {
   return Curry._1(current_lookahead_fun[0], tok);
 }
 
-function parse_error() {
+function parse_error(msg) {
   return /* () */0;
 }
 

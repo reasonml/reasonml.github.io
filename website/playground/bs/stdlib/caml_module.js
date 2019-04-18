@@ -4,7 +4,7 @@ var Caml_obj = require("./caml_obj.js");
 var Caml_builtin_exceptions = require("./caml_builtin_exceptions.js");
 
 function init_mod(loc, shape) {
-  var undef_module = function () {
+  var undef_module = function (param) {
     throw [
           Caml_builtin_exceptions.undefined_recursive_module,
           loc
@@ -73,7 +73,7 @@ function update_mod(shape, o, n) {
           Caml_builtin_exceptions.assert_failure,
           /* tuple */[
             "caml_module.ml",
-            82,
+            95,
             10
           ]
         ];
@@ -82,7 +82,7 @@ function update_mod(shape, o, n) {
           Caml_builtin_exceptions.assert_failure,
           /* tuple */[
             "caml_module.ml",
-            82,
+            95,
             10
           ]
         ];

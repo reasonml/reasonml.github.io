@@ -2,12 +2,12 @@
 
 var Curry = require("./curry.js");
 var Belt_Array = require("./belt_Array.js");
-var Js_primitive = require("./js_primitive.js");
+var Caml_option = require("./caml_option.js");
 var Belt_SortArray = require("./belt_SortArray.js");
 
 function head(x) {
   if (x) {
-    return Js_primitive.some(x[0]);
+    return Caml_option.some(x[0]);
   }
   
 }
@@ -53,7 +53,7 @@ function get(x, n) {
       var x$1 = _x;
       if (x$1) {
         if (n$1 === 0) {
-          return Js_primitive.some(x$1[0]);
+          return Caml_option.some(x$1[0]);
         } else {
           _n = n$1 - 1 | 0;
           _x = x$1[1];
@@ -191,6 +191,35 @@ function copyAuxWitFilter(f, _cellX, _prec) {
   };
 }
 
+function copyAuxWithFilterIndex(f, _cellX, _prec, _i) {
+  while(true) {
+    var i = _i;
+    var prec = _prec;
+    var cellX = _cellX;
+    if (cellX) {
+      var t = cellX[1];
+      var h = cellX[0];
+      if (f(h, i)) {
+        var next = /* :: */[
+          h,
+          /* [] */0
+        ];
+        prec[1] = next;
+        _i = i + 1 | 0;
+        _prec = next;
+        _cellX = t;
+        continue ;
+      } else {
+        _i = i + 1 | 0;
+        _cellX = t;
+        continue ;
+      }
+    } else {
+      return /* () */0;
+    }
+  };
+}
+
 function copyAuxWitFilterMap(f, _cellX, _prec) {
   while(true) {
     var prec = _prec;
@@ -200,7 +229,7 @@ function copyAuxWitFilterMap(f, _cellX, _prec) {
       var match = f(cellX[0]);
       if (match !== undefined) {
         var next = /* :: */[
-          Js_primitive.valFromOption(match),
+          Caml_option.valFromOption(match),
           /* [] */0
         ];
         prec[1] = next;
@@ -832,6 +861,30 @@ function reduceReverse(l, accu, f) {
   return reduceReverseU(l, accu, Curry.__2(f));
 }
 
+function reduceWithIndexU(l, acc, f) {
+  var _l = l;
+  var _acc = acc;
+  var f$1 = f;
+  var _i = 0;
+  while(true) {
+    var i = _i;
+    var acc$1 = _acc;
+    var l$1 = _l;
+    if (l$1) {
+      _i = i + 1 | 0;
+      _acc = f$1(acc$1, l$1[0], i);
+      _l = l$1[1];
+      continue ;
+    } else {
+      return acc$1;
+    }
+  };
+}
+
+function reduceWithIndex(l, acc, f) {
+  return reduceWithIndexU(l, acc, Curry.__3(f));
+}
+
 function mapReverse2U(l1, l2, f) {
   var _l1 = l1;
   var _l2 = l2;
@@ -1102,7 +1155,7 @@ function getAssocU(_xs, x, eq) {
     if (xs) {
       var match = xs[0];
       if (eq(match[0], x)) {
-        return Js_primitive.some(match[1]);
+        return Caml_option.some(match[1]);
       } else {
         _xs = xs[1];
         continue ;
@@ -1225,7 +1278,7 @@ function getByU(_xs, p) {
     if (xs) {
       var x = xs[0];
       if (p(x)) {
-        return Js_primitive.some(x);
+        return Caml_option.some(x);
       } else {
         _xs = xs[1];
         continue ;
@@ -1267,6 +1320,38 @@ function keep(xs, p) {
   return keepU(xs, Curry.__1(p));
 }
 
+function keepWithIndexU(xs, p) {
+  var _xs = xs;
+  var p$1 = p;
+  var _i = 0;
+  while(true) {
+    var i = _i;
+    var xs$1 = _xs;
+    if (xs$1) {
+      var t = xs$1[1];
+      var h = xs$1[0];
+      if (p$1(h, i)) {
+        var cell = /* :: */[
+          h,
+          /* [] */0
+        ];
+        copyAuxWithFilterIndex(p$1, t, cell, i + 1 | 0);
+        return cell;
+      } else {
+        _i = i + 1 | 0;
+        _xs = t;
+        continue ;
+      }
+    } else {
+      return /* [] */0;
+    }
+  };
+}
+
+function keepWithIndex(xs, p) {
+  return keepWithIndexU(xs, Curry.__2(p));
+}
+
 function keepMapU(_xs, p) {
   while(true) {
     var xs = _xs;
@@ -1275,7 +1360,7 @@ function keepMapU(_xs, p) {
       var match = p(xs[0]);
       if (match !== undefined) {
         var cell = /* :: */[
-          Js_primitive.valFromOption(match),
+          Caml_option.valFromOption(match),
           /* [] */0
         ];
         copyAuxWitFilterMap(p, t, cell);
@@ -1372,6 +1457,10 @@ function zip(l1, l2) {
 
 var size = length;
 
+var filter = keep;
+
+var filterWithIndex = keepWithIndex;
+
 exports.length = length;
 exports.size = size;
 exports.head = head;
@@ -1410,6 +1499,8 @@ exports.forEachWithIndexU = forEachWithIndexU;
 exports.forEachWithIndex = forEachWithIndex;
 exports.reduceU = reduceU;
 exports.reduce = reduce;
+exports.reduceWithIndexU = reduceWithIndexU;
+exports.reduceWithIndex = reduceWithIndex;
 exports.reduceReverseU = reduceReverseU;
 exports.reduceReverse = reduceReverse;
 exports.mapReverse2U = mapReverse2U;
@@ -1439,6 +1530,10 @@ exports.getByU = getByU;
 exports.getBy = getBy;
 exports.keepU = keepU;
 exports.keep = keep;
+exports.filter = filter;
+exports.keepWithIndexU = keepWithIndexU;
+exports.keepWithIndex = keepWithIndex;
+exports.filterWithIndex = filterWithIndex;
 exports.keepMapU = keepMapU;
 exports.keepMap = keepMap;
 exports.partitionU = partitionU;

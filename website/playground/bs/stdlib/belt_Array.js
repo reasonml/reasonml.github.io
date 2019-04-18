@@ -2,12 +2,12 @@
 
 var Curry = require("./curry.js");
 var Js_math = require("./js_math.js");
-var Js_primitive = require("./js_primitive.js");
+var Caml_option = require("./caml_option.js");
 var Caml_primitive = require("./caml_primitive.js");
 
 function get(arr, i) {
   if (i >= 0 && i < arr.length) {
-    return Js_primitive.some(arr[i]);
+    return Caml_option.some(arr[i]);
   }
   
 }
@@ -311,6 +311,42 @@ function map(a, f) {
   return mapU(a, Curry.__1(f));
 }
 
+function getByU(a, p) {
+  var l = a.length;
+  var i = 0;
+  var r = undefined;
+  while(r === undefined && i < l) {
+    var v = a[i];
+    if (p(v)) {
+      r = Caml_option.some(v);
+    }
+    i = i + 1 | 0;
+  };
+  return r;
+}
+
+function getBy(a, p) {
+  return getByU(a, Curry.__1(p));
+}
+
+function getIndexByU(a, p) {
+  var l = a.length;
+  var i = 0;
+  var r = undefined;
+  while(r === undefined && i < l) {
+    var v = a[i];
+    if (p(v)) {
+      r = i;
+    }
+    i = i + 1 | 0;
+  };
+  return r;
+}
+
+function getIndexBy(a, p) {
+  return getIndexByU(a, Curry.__1(p));
+}
+
 function keepU(a, f) {
   var l = a.length;
   var r = new Array(l);
@@ -359,7 +395,7 @@ function keepMapU(a, f) {
     var v = a[i];
     var match = f(v);
     if (match !== undefined) {
-      r[j] = Js_primitive.valFromOption(match);
+      r[j] = Caml_option.valFromOption(match);
       j = j + 1 | 0;
     }
     
@@ -431,6 +467,18 @@ function reduceReverse2U(a, b, x, f) {
 
 function reduceReverse2(a, b, x, f) {
   return reduceReverse2U(a, b, x, Curry.__3(f));
+}
+
+function reduceWithIndexU(a, x, f) {
+  var r = x;
+  for(var i = 0 ,i_finish = a.length - 1 | 0; i <= i_finish; ++i){
+    r = f(r, a[i], i);
+  }
+  return r;
+}
+
+function reduceWithIndex(a, x, f) {
+  return reduceWithIndexU(a, x, Curry.__3(f));
 }
 
 function everyU(arr, b) {
@@ -645,6 +693,10 @@ exports.forEachU = forEachU;
 exports.forEach = forEach;
 exports.mapU = mapU;
 exports.map = map;
+exports.getByU = getByU;
+exports.getBy = getBy;
+exports.getIndexByU = getIndexByU;
+exports.getIndexBy = getIndexBy;
 exports.keepU = keepU;
 exports.keep = keep;
 exports.keepWithIndexU = keepWithIndexU;
@@ -663,6 +715,8 @@ exports.reduceReverseU = reduceReverseU;
 exports.reduceReverse = reduceReverse;
 exports.reduceReverse2U = reduceReverse2U;
 exports.reduceReverse2 = reduceReverse2;
+exports.reduceWithIndexU = reduceWithIndexU;
+exports.reduceWithIndex = reduceWithIndex;
 exports.someU = someU;
 exports.some = some;
 exports.everyU = everyU;

@@ -1,12 +1,18 @@
 'use strict';
 
+var Caml_option = require("./caml_option.js");
 
-var unsafeDeleteKey = (
-  function(dict,key){
+function get(dict, k) {
+  if ((k in dict)) {
+    return Caml_option.some(dict[k]);
+  }
+  
+}
+
+function unsafeDeleteKey (dict,key){
      delete dict[key];
      return 0
-   }
-);
+  };
 
 function entries(dict) {
   var keys = Object.keys(dict);
@@ -69,10 +75,11 @@ function map(f, source) {
   return target;
 }
 
+exports.get = get;
 exports.unsafeDeleteKey = unsafeDeleteKey;
 exports.entries = entries;
 exports.values = values;
 exports.fromList = fromList;
 exports.fromArray = fromArray;
 exports.map = map;
-/* unsafeDeleteKey Not a pure module */
+/* No side effect */

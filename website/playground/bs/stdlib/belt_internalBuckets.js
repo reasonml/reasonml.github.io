@@ -2,7 +2,7 @@
 
 var Curry = require("./curry.js");
 var Belt_Array = require("./belt_Array.js");
-var Js_primitive = require("./js_primitive.js");
+var Caml_option = require("./caml_option.js");
 
 function copyAuxCont(_c, _prec) {
   while(true) {
@@ -135,7 +135,7 @@ function getMaxBucketLength(h) {
 
 function getBucketHistogram(h) {
   var mbl = getMaxBucketLength(h);
-  var histo = Belt_Array.makeByU(mbl + 1 | 0, (function () {
+  var histo = Belt_Array.makeByU(mbl + 1 | 0, (function (param) {
           return 0;
         }));
   Belt_Array.forEachU(h.buckets, (function (b) {
@@ -168,7 +168,7 @@ function filterMapInplaceBucket(f, h, i, _prec, _cell) {
       } else {
         h.buckets[i] = cell;
       }
-      cell.value = Js_primitive.valFromOption(match);
+      cell.value = Caml_option.valFromOption(match);
       if (n !== undefined) {
         _cell = n;
         _prec = cell;

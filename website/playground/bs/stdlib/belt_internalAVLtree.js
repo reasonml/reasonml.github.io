@@ -1,7 +1,7 @@
 'use strict';
 
 var Curry = require("./curry.js");
-var Js_primitive = require("./js_primitive.js");
+var Caml_option = require("./caml_option.js");
 var Belt_SortArray = require("./belt_SortArray.js");
 
 function treeHeight(n) {
@@ -133,7 +133,7 @@ function minKey0Aux(_n) {
 
 function minKey(n) {
   if (n !== null) {
-    return Js_primitive.some(minKey0Aux(n));
+    return Caml_option.some(minKey0Aux(n));
   }
   
 }
@@ -160,7 +160,7 @@ function maxKey0Aux(_n) {
 
 function maxKey(n) {
   if (n !== null) {
-    return Js_primitive.some(maxKey0Aux(n));
+    return Caml_option.some(maxKey0Aux(n));
   }
   
 }
@@ -482,7 +482,7 @@ function concat(t1, t2) {
 
 function concatOrJoin(t1, v, d, t2) {
   if (d !== undefined) {
-    return join(t1, v, Js_primitive.valFromOption(d), t2);
+    return join(t1, v, Caml_option.valFromOption(d), t2);
   } else {
     return concat(t1, t2);
   }
@@ -517,7 +517,7 @@ function keepMapU(n, p) {
     var pvd = p(v, d);
     var newRight = keepMapU(n.right, p);
     if (pvd !== undefined) {
-      return join(newLeft, v, Js_primitive.valFromOption(pvd), newRight);
+      return join(newLeft, v, Caml_option.valFromOption(pvd), newRight);
     } else {
       return concat(newLeft, newRight);
     }
@@ -723,92 +723,86 @@ function valuesToArray(n) {
 }
 
 function fromSortedArrayRevAux(arr, off, len) {
-  if (len > 3 || len < 0) {
-    var nl = len / 2 | 0;
-    var left = fromSortedArrayRevAux(arr, off, nl);
-    var match = arr[off - nl | 0];
-    var right = fromSortedArrayRevAux(arr, (off - nl | 0) - 1 | 0, (len - nl | 0) - 1 | 0);
-    return create(left, match[0], match[1], right);
-  } else {
-    switch (len) {
-      case 0 : 
-          return null;
-      case 1 : 
-          var match$1 = arr[off];
-          return singleton(match$1[0], match$1[1]);
-      case 2 : 
-          var match_000 = arr[off];
-          var match_001 = arr[off - 1 | 0];
-          var match$2 = match_001;
-          var match$3 = match_000;
-          return {
-                  key: match$2[0],
-                  value: match$2[1],
-                  height: 2,
-                  left: singleton(match$3[0], match$3[1]),
-                  right: null
-                };
-      case 3 : 
-          var match_000$1 = arr[off];
-          var match_001$1 = arr[off - 1 | 0];
-          var match_002 = arr[off - 2 | 0];
-          var match$4 = match_002;
-          var match$5 = match_001$1;
-          var match$6 = match_000$1;
-          return {
-                  key: match$5[0],
-                  value: match$5[1],
-                  height: 2,
-                  left: singleton(match$6[0], match$6[1]),
-                  right: singleton(match$4[0], match$4[1])
-                };
-      
-    }
+  switch (len) {
+    case 0 : 
+        return null;
+    case 1 : 
+        var match = arr[off];
+        return singleton(match[0], match[1]);
+    case 2 : 
+        var match_000 = arr[off];
+        var match_001 = arr[off - 1 | 0];
+        var match$1 = match_001;
+        var match$2 = match_000;
+        return {
+                key: match$1[0],
+                value: match$1[1],
+                height: 2,
+                left: singleton(match$2[0], match$2[1]),
+                right: null
+              };
+    case 3 : 
+        var match_000$1 = arr[off];
+        var match_001$1 = arr[off - 1 | 0];
+        var match_002 = arr[off - 2 | 0];
+        var match$3 = match_002;
+        var match$4 = match_001$1;
+        var match$5 = match_000$1;
+        return {
+                key: match$4[0],
+                value: match$4[1],
+                height: 2,
+                left: singleton(match$5[0], match$5[1]),
+                right: singleton(match$3[0], match$3[1])
+              };
+    default:
+      var nl = len / 2 | 0;
+      var left = fromSortedArrayRevAux(arr, off, nl);
+      var match$6 = arr[off - nl | 0];
+      var right = fromSortedArrayRevAux(arr, (off - nl | 0) - 1 | 0, (len - nl | 0) - 1 | 0);
+      return create(left, match$6[0], match$6[1], right);
   }
 }
 
 function fromSortedArrayAux(arr, off, len) {
-  if (len > 3 || len < 0) {
-    var nl = len / 2 | 0;
-    var left = fromSortedArrayAux(arr, off, nl);
-    var match = arr[off + nl | 0];
-    var right = fromSortedArrayAux(arr, (off + nl | 0) + 1 | 0, (len - nl | 0) - 1 | 0);
-    return create(left, match[0], match[1], right);
-  } else {
-    switch (len) {
-      case 0 : 
-          return null;
-      case 1 : 
-          var match$1 = arr[off];
-          return singleton(match$1[0], match$1[1]);
-      case 2 : 
-          var match_000 = arr[off];
-          var match_001 = arr[off + 1 | 0];
-          var match$2 = match_001;
-          var match$3 = match_000;
-          return {
-                  key: match$2[0],
-                  value: match$2[1],
-                  height: 2,
-                  left: singleton(match$3[0], match$3[1]),
-                  right: null
-                };
-      case 3 : 
-          var match_000$1 = arr[off];
-          var match_001$1 = arr[off + 1 | 0];
-          var match_002 = arr[off + 2 | 0];
-          var match$4 = match_002;
-          var match$5 = match_001$1;
-          var match$6 = match_000$1;
-          return {
-                  key: match$5[0],
-                  value: match$5[1],
-                  height: 2,
-                  left: singleton(match$6[0], match$6[1]),
-                  right: singleton(match$4[0], match$4[1])
-                };
-      
-    }
+  switch (len) {
+    case 0 : 
+        return null;
+    case 1 : 
+        var match = arr[off];
+        return singleton(match[0], match[1]);
+    case 2 : 
+        var match_000 = arr[off];
+        var match_001 = arr[off + 1 | 0];
+        var match$1 = match_001;
+        var match$2 = match_000;
+        return {
+                key: match$1[0],
+                value: match$1[1],
+                height: 2,
+                left: singleton(match$2[0], match$2[1]),
+                right: null
+              };
+    case 3 : 
+        var match_000$1 = arr[off];
+        var match_001$1 = arr[off + 1 | 0];
+        var match_002 = arr[off + 2 | 0];
+        var match$3 = match_002;
+        var match$4 = match_001$1;
+        var match$5 = match_000$1;
+        return {
+                key: match$4[0],
+                value: match$4[1],
+                height: 2,
+                left: singleton(match$5[0], match$5[1]),
+                right: singleton(match$3[0], match$3[1])
+              };
+    default:
+      var nl = len / 2 | 0;
+      var left = fromSortedArrayAux(arr, off, nl);
+      var match$6 = arr[off + nl | 0];
+      var right = fromSortedArrayAux(arr, (off + nl | 0) + 1 | 0, (len - nl | 0) - 1 | 0);
+      return create(left, match$6[0], match$6[1], right);
   }
 }
 
@@ -899,7 +893,7 @@ function get(_n, x, cmp) {
       var v = n.key;
       var c = cmp(x, v);
       if (c === 0) {
-        return Js_primitive.some(n.value);
+        return Caml_option.some(n.value);
       } else {
         _n = c < 0 ? n.left : n.right;
         continue ;

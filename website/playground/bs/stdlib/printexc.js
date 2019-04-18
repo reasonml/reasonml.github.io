@@ -5,12 +5,11 @@ var $$Array = require("./array.js");
 var Block = require("./block.js");
 var Curry = require("./curry.js");
 var $$Buffer = require("./buffer.js");
-var Js_exn = require("./js_exn.js");
 var Printf = require("./printf.js");
 var Caml_io = require("./caml_io.js");
 var Caml_array = require("./caml_array.js");
 var Pervasives = require("./pervasives.js");
-var Caml_backtrace = require("./caml_backtrace.js");
+var Caml_js_exceptions = require("./caml_js_exceptions.js");
 var Caml_builtin_exceptions = require("./caml_builtin_exceptions.js");
 
 var printers = /* record */[/* contents : [] */0];
@@ -58,7 +57,7 @@ var locfmt = /* Format */[
 
 function field(x, i) {
   var f = x[i];
-  if (f.length === undefined) {
+  if (typeof f === "number") {
     return Curry._1(Printf.sprintf(/* Format */[
                     /* Int */Block.__(4, [
                         /* Int_d */0,
@@ -105,12 +104,14 @@ function other_fields(x, i) {
 
 function fields(x) {
   var n = x.length;
-  if (n > 2 || n < 0) {
-    return Curry._2(Printf.sprintf(/* Format */[
-                    /* Char_literal */Block.__(12, [
-                        /* "(" */40,
-                        /* String */Block.__(2, [
-                            /* No_padding */0,
+  switch (n) {
+    case 0 : 
+    case 1 : 
+        return "";
+    case 2 : 
+        return Curry._1(Printf.sprintf(/* Format */[
+                        /* Char_literal */Block.__(12, [
+                            /* "(" */40,
                             /* String */Block.__(2, [
                                 /* No_padding */0,
                                 /* Char_literal */Block.__(12, [
@@ -118,19 +119,15 @@ function fields(x) {
                                     /* End_of_format */0
                                   ])
                               ])
-                          ])
-                      ]),
-                    "(%s%s)"
-                  ]), field(x, 1), other_fields(x, 2));
-  } else {
-    switch (n) {
-      case 0 : 
-      case 1 : 
-          return "";
-      case 2 : 
-          return Curry._1(Printf.sprintf(/* Format */[
-                          /* Char_literal */Block.__(12, [
-                              /* "(" */40,
+                          ]),
+                        "(%s)"
+                      ]), field(x, 1));
+    default:
+      return Curry._2(Printf.sprintf(/* Format */[
+                      /* Char_literal */Block.__(12, [
+                          /* "(" */40,
+                          /* String */Block.__(2, [
+                              /* No_padding */0,
                               /* String */Block.__(2, [
                                   /* No_padding */0,
                                   /* Char_literal */Block.__(12, [
@@ -138,11 +135,10 @@ function fields(x) {
                                       /* End_of_format */0
                                     ])
                                 ])
-                            ]),
-                          "(%s)"
-                        ]), field(x, 1));
-      
-    }
+                            ])
+                        ]),
+                      "(%s%s)"
+                    ]), field(x, 1), other_fields(x, 2));
   }
 }
 
@@ -194,7 +190,7 @@ function print(fct, arg) {
     return Curry._1(fct, arg);
   }
   catch (raw_x){
-    var x = Js_exn.internalToOCamlException(raw_x);
+    var x = Caml_js_exceptions.internalToOCamlException(raw_x);
     Curry._1(Printf.eprintf(/* Format */[
               /* String_literal */Block.__(11, [
                   "Uncaught exception: ",
@@ -218,7 +214,7 @@ function $$catch(fct, arg) {
     return Curry._1(fct, arg);
   }
   catch (raw_x){
-    var x = Js_exn.internalToOCamlException(raw_x);
+    var x = Caml_js_exceptions.internalToOCamlException(raw_x);
     Caml_io.caml_ml_flush(Pervasives.stdout);
     Curry._1(Printf.eprintf(/* Format */[
               /* String_literal */Block.__(11, [
@@ -237,12 +233,19 @@ function $$catch(fct, arg) {
   }
 }
 
+function convert_raw_backtrace_slot(param) {
+  throw [
+        Caml_builtin_exceptions.failure,
+        "convert_raw_backtrace_slot not implemented"
+      ];
+}
+
 function convert_raw_backtrace(rbckt) {
   try {
-    return $$Array.map(Caml_backtrace.caml_convert_raw_backtrace_slot, rbckt);
+    return $$Array.map(convert_raw_backtrace_slot, rbckt);
   }
   catch (raw_exn){
-    var exn = Js_exn.internalToOCamlException(raw_exn);
+    var exn = Caml_js_exceptions.internalToOCamlException(raw_exn);
     if (exn[0] === Caml_builtin_exceptions.failure) {
       return undefined;
     } else {
@@ -446,7 +449,7 @@ function raw_backtrace_length(bckt) {
 
 var get_raw_backtrace_slot = Caml_array.caml_array_get;
 
-function get_backtrace() {
+function get_backtrace(param) {
   return backtrace_to_string(convert_raw_backtrace(/* () */0));
 }
 
@@ -483,19 +486,19 @@ function set_uncaught_exception_handler(fn) {
   return /* () */0;
 }
 
-function record_backtrace() {
+function record_backtrace(prim) {
   return /* () */0;
 }
 
-function backtrace_status() {
+function backtrace_status(prim) {
   return /* () */0;
 }
 
-function get_raw_backtrace() {
+function get_raw_backtrace(prim) {
   return /* () */0;
 }
 
-function get_callstack() {
+function get_callstack(prim) {
   return /* () */0;
 }
 
@@ -504,8 +507,6 @@ var Slot = [
   backtrace_slot_location,
   format_backtrace_slot
 ];
-
-var convert_raw_backtrace_slot = Caml_backtrace.caml_convert_raw_backtrace_slot;
 
 exports.to_string = to_string;
 exports.print = print;

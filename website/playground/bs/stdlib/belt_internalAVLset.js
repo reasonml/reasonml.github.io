@@ -1,7 +1,7 @@
 'use strict';
 
 var Curry = require("./curry.js");
-var Js_primitive = require("./js_primitive.js");
+var Caml_option = require("./caml_option.js");
 var Belt_SortArray = require("./belt_SortArray.js");
 
 function treeHeight(n) {
@@ -111,7 +111,7 @@ function min0Aux(_n) {
 
 function minimum(n) {
   if (n !== null) {
-    return Js_primitive.some(min0Aux(n));
+    return Caml_option.some(min0Aux(n));
   }
   
 }
@@ -138,7 +138,7 @@ function max0Aux(_n) {
 
 function maximum(n) {
   if (n !== null) {
-    return Js_primitive.some(max0Aux(n));
+    return Caml_option.some(max0Aux(n));
   }
   
 }
@@ -390,7 +390,7 @@ function checkInvariantInternal(_v) {
       var r = v.right;
       var diff = treeHeight(l) - treeHeight(r) | 0;
       if (!(diff <= 2 && diff >= -2)) {
-        throw new Error("File \"belt_internalAVLset.ml\", line 302, characters 6-12");
+        throw new Error("File \"belt_internalAVLset.ml\", line 304, characters 6-12");
       }
       checkInvariantInternal(l);
       _v = r;
@@ -479,76 +479,70 @@ function toArray(n) {
 }
 
 function fromSortedArrayRevAux(arr, off, len) {
-  if (len > 3 || len < 0) {
-    var nl = len / 2 | 0;
-    var left = fromSortedArrayRevAux(arr, off, nl);
-    var mid = arr[off - nl | 0];
-    var right = fromSortedArrayRevAux(arr, (off - nl | 0) - 1 | 0, (len - nl | 0) - 1 | 0);
-    return create(left, mid, right);
-  } else {
-    switch (len) {
-      case 0 : 
-          return null;
-      case 1 : 
-          return singleton(arr[off]);
-      case 2 : 
-          var x0 = arr[off];
-          var x1 = arr[off - 1 | 0];
-          return {
-                  value: x1,
-                  height: 2,
-                  left: singleton(x0),
-                  right: null
-                };
-      case 3 : 
-          var x0$1 = arr[off];
-          var x1$1 = arr[off - 1 | 0];
-          var x2 = arr[off - 2 | 0];
-          return {
-                  value: x1$1,
-                  height: 2,
-                  left: singleton(x0$1),
-                  right: singleton(x2)
-                };
-      
-    }
+  switch (len) {
+    case 0 : 
+        return null;
+    case 1 : 
+        return singleton(arr[off]);
+    case 2 : 
+        var x0 = arr[off];
+        var x1 = arr[off - 1 | 0];
+        return {
+                value: x1,
+                height: 2,
+                left: singleton(x0),
+                right: null
+              };
+    case 3 : 
+        var x0$1 = arr[off];
+        var x1$1 = arr[off - 1 | 0];
+        var x2 = arr[off - 2 | 0];
+        return {
+                value: x1$1,
+                height: 2,
+                left: singleton(x0$1),
+                right: singleton(x2)
+              };
+    default:
+      var nl = len / 2 | 0;
+      var left = fromSortedArrayRevAux(arr, off, nl);
+      var mid = arr[off - nl | 0];
+      var right = fromSortedArrayRevAux(arr, (off - nl | 0) - 1 | 0, (len - nl | 0) - 1 | 0);
+      return create(left, mid, right);
   }
 }
 
 function fromSortedArrayAux(arr, off, len) {
-  if (len > 3 || len < 0) {
-    var nl = len / 2 | 0;
-    var left = fromSortedArrayAux(arr, off, nl);
-    var mid = arr[off + nl | 0];
-    var right = fromSortedArrayAux(arr, (off + nl | 0) + 1 | 0, (len - nl | 0) - 1 | 0);
-    return create(left, mid, right);
-  } else {
-    switch (len) {
-      case 0 : 
-          return null;
-      case 1 : 
-          return singleton(arr[off]);
-      case 2 : 
-          var x0 = arr[off];
-          var x1 = arr[off + 1 | 0];
-          return {
-                  value: x1,
-                  height: 2,
-                  left: singleton(x0),
-                  right: null
-                };
-      case 3 : 
-          var x0$1 = arr[off];
-          var x1$1 = arr[off + 1 | 0];
-          var x2 = arr[off + 2 | 0];
-          return {
-                  value: x1$1,
-                  height: 2,
-                  left: singleton(x0$1),
-                  right: singleton(x2)
-                };
-      
-    }
+  switch (len) {
+    case 0 : 
+        return null;
+    case 1 : 
+        return singleton(arr[off]);
+    case 2 : 
+        var x0 = arr[off];
+        var x1 = arr[off + 1 | 0];
+        return {
+                value: x1,
+                height: 2,
+                left: singleton(x0),
+                right: null
+              };
+    case 3 : 
+        var x0$1 = arr[off];
+        var x1$1 = arr[off + 1 | 0];
+        var x2 = arr[off + 2 | 0];
+        return {
+                value: x1$1,
+                height: 2,
+                left: singleton(x0$1),
+                right: singleton(x2)
+              };
+    default:
+      var nl = len / 2 | 0;
+      var left = fromSortedArrayAux(arr, off, nl);
+      var mid = arr[off + nl | 0];
+      var right = fromSortedArrayAux(arr, (off + nl | 0) + 1 | 0, (len - nl | 0) - 1 | 0);
+      return create(left, mid, right);
   }
 }
 
@@ -728,7 +722,7 @@ function get(_n, x, cmp) {
       var v = n.value;
       var c = cmp(x, v);
       if (c === 0) {
-        return Js_primitive.some(v);
+        return Caml_option.some(v);
       } else {
         _n = c < 0 ? n.left : n.right;
         continue ;

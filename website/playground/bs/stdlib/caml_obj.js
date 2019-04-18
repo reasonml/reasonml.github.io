@@ -56,7 +56,7 @@ function caml_update_dummy(x, y) {
   }
 }
 
-var for_in = function (o,foo){
+function for_in (o,foo){
         for (var x in o) { foo(x) }
       };
 
@@ -196,6 +196,8 @@ function caml_compare(_a, _b) {
                         }
                       }
                     };
+                  } else if ((a instanceof Date && b instanceof Date)) {
+                    return (a - b);
                   } else {
                     var a$2 = a;
                     var b$2 = b;
@@ -359,6 +361,8 @@ function caml_equal(_a, _b) {
                     return false;
                   }
                 };
+              } else if ((a instanceof Date && b instanceof Date)) {
+                return !(a > b || a < b);
               } else {
                 var a$2 = a;
                 var b$2 = b;
@@ -459,6 +463,11 @@ function caml_max(x, y) {
   }
 }
 
+function caml_obj_set_tag(prim, prim$1) {
+  prim.tag = prim$1;
+  return /* () */0;
+}
+
 exports.caml_obj_block = caml_obj_block;
 exports.caml_obj_dup = caml_obj_dup;
 exports.caml_obj_truncate = caml_obj_truncate;
@@ -476,4 +485,5 @@ exports.caml_lessthan = caml_lessthan;
 exports.caml_lessequal = caml_lessequal;
 exports.caml_min = caml_min;
 exports.caml_max = caml_max;
+exports.caml_obj_set_tag = caml_obj_set_tag;
 /* No side effect */

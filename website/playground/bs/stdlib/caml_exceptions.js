@@ -9,13 +9,13 @@ function caml_set_oo_id(b) {
   return b;
 }
 
-function get_id() {
+function caml_fresh_oo_id(param) {
   id[0] += 1;
   return id[0];
 }
 
 function create(str) {
-  var v_001 = get_id(/* () */0);
+  var v_001 = caml_fresh_oo_id(/* () */0);
   var v = /* tuple */[
     str,
     v_001
@@ -24,7 +24,7 @@ function create(str) {
   return v;
 }
 
-function isCamlExceptionOrOpenVariant(e) {
+function caml_is_extension(e) {
   if (e === undefined) {
     return false;
   } else if (e.tag === 248) {
@@ -40,7 +40,7 @@ function isCamlExceptionOrOpenVariant(e) {
 }
 
 exports.caml_set_oo_id = caml_set_oo_id;
-exports.get_id = get_id;
+exports.caml_fresh_oo_id = caml_fresh_oo_id;
 exports.create = create;
-exports.isCamlExceptionOrOpenVariant = isCamlExceptionOrOpenVariant;
+exports.caml_is_extension = caml_is_extension;
 /* No side effect */

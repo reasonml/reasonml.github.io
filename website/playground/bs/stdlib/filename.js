@@ -3,7 +3,6 @@
 var Block = require("./block.js");
 var Curry = require("./curry.js");
 var $$Buffer = require("./buffer.js");
-var Js_exn = require("./js_exn.js");
 var Printf = require("./printf.js");
 var Random = require("./random.js");
 var $$String = require("./string.js");
@@ -11,6 +10,7 @@ var Caml_sys = require("./caml_sys.js");
 var Pervasives = require("./pervasives.js");
 var Caml_string = require("./caml_string.js");
 var CamlinternalLazy = require("./camlinternalLazy.js");
+var Caml_js_exceptions = require("./caml_js_exceptions.js");
 var Caml_missing_polyfill = require("./caml_missing_polyfill.js");
 var Caml_builtin_exceptions = require("./caml_builtin_exceptions.js");
 
@@ -216,7 +216,7 @@ function chop_extension(name) {
   };
 }
 
-var prng = Block.__(246, [(function () {
+var prng = Block.__(246, [(function (param) {
         return Random.State[/* make_self_init */1](/* () */0);
       })]);
 
@@ -252,7 +252,7 @@ function set_temp_dir_name(s) {
   return /* () */0;
 }
 
-function get_temp_dir_name() {
+function get_temp_dir_name(param) {
   return current_temp_dir_name[0];
 }
 
@@ -267,7 +267,7 @@ function temp_file($staropt$star, prefix, suffix) {
       return name;
     }
     catch (raw_e){
-      var e = Js_exn.internalToOCamlException(raw_e);
+      var e = Caml_js_exceptions.internalToOCamlException(raw_e);
       if (e[0] === Caml_builtin_exceptions.sys_error) {
         if (counter >= 1000) {
           throw e;
@@ -308,7 +308,7 @@ function open_temp_file($staropt$star, $staropt$star$1, prefix, suffix) {
             ];
     }
     catch (raw_e){
-      var e = Js_exn.internalToOCamlException(raw_e);
+      var e = Caml_js_exceptions.internalToOCamlException(raw_e);
       if (e[0] === Caml_builtin_exceptions.sys_error) {
         if (counter >= 1000) {
           throw e;

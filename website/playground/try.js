@@ -453,12 +453,12 @@ class Try extends React.Component {
       if (newReasonCode === this.state.reason && !forceUpdate) return
       persist('reason', newReasonCode, this.state.useReasonReactJSX);
       clearTimeout(this.errorTimerId)
-
+      
       this.setState((prevState, _) => {
         let newOcamlCode = prevState.ocaml;
         try {
           newOcamlCode = window.printML(window.parseRE(newReasonCode))
-
+          
           if (this.state.useReasonReactJSX) {
             let res = this.postProcessOCamlCodeWithPpx(newOcamlCode)
             if (res.error != null) {
@@ -614,13 +614,14 @@ class Try extends React.Component {
     }
 
     this.postProcessOCamlCodeWithPpx = (code) => {
-      const ppxRes = window.jsxv2.rewrite(code);
-      const err = ppxRes.ppx_error_msg || ppxRes.js_error_msg;
-      if (err) {
-        return {result: '', error: {message: err}};
-      } else {
-        return {result: ppxRes.ocaml_code, error: null};
-      }
+      // const ppxRes = window.jsxv2.rewrite(code);
+      // const err = ppxRes.ppx_error_msg || ppxRes.js_error_msg;
+      // if (err) {
+      //   return {result: '', error: {message: err}};
+      // } else {
+      //   return {result: ppxRes.ocaml_code, error: null};
+      // }
+      return { result: code, error: null };
     }
 
     this.compile = (code) => {

@@ -1,32 +1,13 @@
 'use strict';
 
 
-function caml_int32_float_of_bits(x) {
-  var int32 = new Int32Array(/* array */[x]);
-  var float32 = new Float32Array(int32.buffer);
-  return float32[0];
-}
+function caml_int32_float_of_bits (x){
+    return new Float32Array(new Int32Array([x]).buffer)[0] 
+};
 
-function caml_int32_bits_of_float(x) {
-  var float32 = new Float32Array(/* array */[x]);
-  return new Int32Array(float32.buffer)[0];
-}
-
-function caml_classify_float(x) {
-  if (isFinite(x)) {
-    if (Math.abs(x) >= 2.2250738585072014e-308) {
-      return /* FP_normal */0;
-    } else if (x !== 0) {
-      return /* FP_subnormal */1;
-    } else {
-      return /* FP_zero */2;
-    }
-  } else if (isNaN(x)) {
-    return /* FP_nan */4;
-  } else {
-    return /* FP_infinite */3;
-  }
-}
+function caml_int32_bits_of_float (x){ 
+  return new Int32Array(new Float32Array([x]).buffer)[0] 
+};
 
 function caml_modf_float(x) {
   if (isFinite(x)) {
@@ -126,8 +107,10 @@ function caml_expm1_float(x) {
 function caml_hypot_float(x, y) {
   var x0 = Math.abs(x);
   var y0 = Math.abs(y);
-  var a = Math.max(x0, y0);
-  var b = Math.min(x0, y0) / (
+  var a = x0 > y0 ? x0 : y0;
+  var b = (
+    x0 < y0 ? x0 : y0
+  ) / (
     a !== 0 ? a : 1
   );
   return a * Math.sqrt(1 + b * b);
@@ -139,7 +122,6 @@ function caml_log10_float(x) {
 
 exports.caml_int32_float_of_bits = caml_int32_float_of_bits;
 exports.caml_int32_bits_of_float = caml_int32_bits_of_float;
-exports.caml_classify_float = caml_classify_float;
 exports.caml_modf_float = caml_modf_float;
 exports.caml_ldexp_float = caml_ldexp_float;
 exports.caml_frexp_float = caml_frexp_float;

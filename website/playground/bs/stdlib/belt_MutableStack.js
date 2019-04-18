@@ -1,9 +1,9 @@
 'use strict';
 
 var Curry = require("./curry.js");
-var Js_primitive = require("./js_primitive.js");
+var Caml_option = require("./caml_option.js");
 
-function make() {
+function make(param) {
   return {
           root: null
         };
@@ -39,7 +39,7 @@ function topUndefined(s) {
 function top(s) {
   var match = s.root;
   if (match !== null) {
-    return Js_primitive.some(match.head);
+    return Caml_option.some(match.head);
   }
   
 }
@@ -61,7 +61,7 @@ function pop(s) {
   var match = s.root;
   if (match !== null) {
     s.root = match.tail;
-    return Js_primitive.some(match.head);
+    return Caml_option.some(match.head);
   }
   
 }

@@ -6,16 +6,17 @@ var Block = require("./block.js");
 var Bytes = require("./bytes.js");
 var Curry = require("./curry.js");
 var $$Buffer = require("./buffer.js");
-var Js_exn = require("./js_exn.js");
 var Printf = require("./printf.js");
 var $$String = require("./string.js");
 var Caml_obj = require("./caml_obj.js");
 var Caml_array = require("./caml_array.js");
+var Caml_bytes = require("./caml_bytes.js");
 var Pervasives = require("./pervasives.js");
 var Caml_format = require("./caml_format.js");
 var Caml_string = require("./caml_string.js");
 var Caml_primitive = require("./caml_primitive.js");
 var Caml_exceptions = require("./caml_exceptions.js");
+var Caml_js_exceptions = require("./caml_js_exceptions.js");
 var Caml_builtin_exceptions = require("./caml_builtin_exceptions.js");
 
 var Bad = Caml_exceptions.create("Arg.Bad");
@@ -51,7 +52,7 @@ function make_symlist(prefix, sep, suffix, l) {
   }
 }
 
-function help_action() {
+function help_action(param) {
   throw [
         Stop,
         /* Unknown */Block.__(0, ["-help"])
@@ -115,7 +116,7 @@ function usage_b(buf, speclist, errmsg) {
                 var buf$1 = buf;
                 var param$1 = param;
                 var doc = param$1[2];
-                if (doc.length) {
+                if (doc.length !== 0) {
                   var spec = param$1[1];
                   var key = param$1[0];
                   if (spec.tag === 11) {
@@ -328,7 +329,7 @@ function parse_argv_dynamic($staropt$star, argv, speclist, anonfun, errmsg) {
                     Curry._1(param[0], Pervasives.bool_of_string(arg));
                   }
                   catch (raw_exn){
-                    var exn = Js_exn.internalToOCamlException(raw_exn);
+                    var exn = Caml_js_exceptions.internalToOCamlException(raw_exn);
                     if (exn[0] === Caml_builtin_exceptions.invalid_argument) {
                       if (exn[1] === "bool_of_string") {
                         throw [
@@ -389,7 +390,7 @@ function parse_argv_dynamic($staropt$star, argv, speclist, anonfun, errmsg) {
                     Curry._1(param[0], Caml_format.caml_int_of_string(arg$1));
                   }
                   catch (raw_exn$1){
-                    var exn$1 = Js_exn.internalToOCamlException(raw_exn$1);
+                    var exn$1 = Caml_js_exceptions.internalToOCamlException(raw_exn$1);
                     if (exn$1[0] === Caml_builtin_exceptions.failure) {
                       if (exn$1[1] === "int_of_string") {
                         throw [
@@ -422,7 +423,7 @@ function parse_argv_dynamic($staropt$star, argv, speclist, anonfun, errmsg) {
                     param[0][0] = Caml_format.caml_int_of_string(arg$2);
                   }
                   catch (raw_exn$2){
-                    var exn$2 = Js_exn.internalToOCamlException(raw_exn$2);
+                    var exn$2 = Caml_js_exceptions.internalToOCamlException(raw_exn$2);
                     if (exn$2[0] === Caml_builtin_exceptions.failure) {
                       if (exn$2[1] === "int_of_string") {
                         throw [
@@ -455,7 +456,7 @@ function parse_argv_dynamic($staropt$star, argv, speclist, anonfun, errmsg) {
                     Curry._1(param[0], Caml_format.caml_float_of_string(arg$3));
                   }
                   catch (raw_exn$3){
-                    var exn$3 = Js_exn.internalToOCamlException(raw_exn$3);
+                    var exn$3 = Caml_js_exceptions.internalToOCamlException(raw_exn$3);
                     if (exn$3[0] === Caml_builtin_exceptions.failure) {
                       if (exn$3[1] === "float_of_string") {
                         throw [
@@ -488,7 +489,7 @@ function parse_argv_dynamic($staropt$star, argv, speclist, anonfun, errmsg) {
                     param[0][0] = Caml_format.caml_float_of_string(arg$4);
                   }
                   catch (raw_exn$4){
-                    var exn$4 = Js_exn.internalToOCamlException(raw_exn$4);
+                    var exn$4 = Caml_js_exceptions.internalToOCamlException(raw_exn$4);
                     if (exn$4[0] === Caml_builtin_exceptions.failure) {
                       if (exn$4[1] === "float_of_string") {
                         throw [
@@ -554,7 +555,7 @@ function parse_argv_dynamic($staropt$star, argv, speclist, anonfun, errmsg) {
         treat_action(action);
       }
       catch (raw_exn){
-        var exn$1 = Js_exn.internalToOCamlException(raw_exn);
+        var exn$1 = Caml_js_exceptions.internalToOCamlException(raw_exn);
         if (exn$1[0] === Bad) {
           stop(/* Message */Block.__(3, [exn$1[1]]));
         } else if (exn$1[0] === Stop) {
@@ -569,7 +570,7 @@ function parse_argv_dynamic($staropt$star, argv, speclist, anonfun, errmsg) {
         Curry._1(anonfun, s);
       }
       catch (raw_exn$1){
-        var exn$2 = Js_exn.internalToOCamlException(raw_exn$1);
+        var exn$2 = Caml_js_exceptions.internalToOCamlException(raw_exn$1);
         if (exn$2[0] === Bad) {
           stop(/* Message */Block.__(3, [exn$2[1]]));
         } else {
@@ -592,7 +593,7 @@ function parse(l, f, msg) {
     return parse_argv(undefined, Sys.argv, l, f, msg);
   }
   catch (raw_exn){
-    var exn = Js_exn.internalToOCamlException(raw_exn);
+    var exn = Caml_js_exceptions.internalToOCamlException(raw_exn);
     if (exn[0] === Bad) {
       Curry._1(Printf.eprintf(/* Format */[
                 /* String */Block.__(2, [
@@ -622,7 +623,7 @@ function parse_dynamic(l, f, msg) {
     return parse_argv_dynamic(undefined, Sys.argv, l, f, msg);
   }
   catch (raw_exn){
-    var exn = Js_exn.internalToOCamlException(raw_exn);
+    var exn = Caml_js_exceptions.internalToOCamlException(raw_exn);
     if (exn[0] === Bad) {
       Curry._1(Printf.eprintf(/* Format */[
                 /* String */Block.__(2, [
@@ -650,7 +651,7 @@ function parse_dynamic(l, f, msg) {
 function second_word(s) {
   var len = s.length;
   try {
-    var _n = Bytes.index(Caml_string.bytes_of_string(s), /* " " */32);
+    var _n = $$String.index(s, /* " " */32);
     while(true) {
       var n = _n;
       if (n >= len) {
@@ -697,7 +698,7 @@ function align($staropt$star, speclist) {
                   var msg = ksd[2];
                   var cutcol = second_word(msg);
                   var n = Caml_primitive.caml_int_max(0, len$2 - cutcol | 0) + 3 | 0;
-                  var spaces = Caml_string.bytes_to_string(Bytes.make(n, /* " " */32));
+                  var spaces = Caml_bytes.bytes_to_string(Bytes.make(n, /* " " */32));
                   return /* tuple */[
                           kwd,
                           spec,
@@ -715,7 +716,7 @@ function align($staropt$star, speclist) {
                             msg$1
                           ];
                   } else {
-                    var spaces$1 = Caml_string.bytes_to_string(Bytes.make(diff, /* " " */32));
+                    var spaces$1 = Caml_bytes.bytes_to_string(Bytes.make(diff, /* " " */32));
                     var prefix = $$String.sub(msg$1, 0, cutcol$1);
                     var suffix = $$String.sub(msg$1, cutcol$1, msg$1.length - cutcol$1 | 0);
                     return /* tuple */[
