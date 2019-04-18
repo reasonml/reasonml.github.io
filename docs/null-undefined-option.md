@@ -91,7 +91,7 @@ This is compiled into the following JS:
 Js_primitive.some(undefined);
 ```
 
-What's this `Js_primitive` thing? Why can't this compile to `undefined`? Long story short, when dealing polymorphic `option` type (aka `option('a)`, for any `'a`), many operations become tricky if we don't mark the value with some special annotation. If this doesn't make sense, don't worry; just remember the following rule:
+What's this `Js_primitive` thing? Why can't this compile to `undefined`? Long story short, when dealing with a polymorphic `option` type (aka `option('a)`, for any `'a`), many operations become tricky if we don't mark the value with some special annotation. If this doesn't make sense, don't worry; just remember the following rule:
 
 - **Never, EVER, pass a nested `option` value (e.g. `Some(Some(Some(5)))`) into the JS side.**
 - **Never, EVER, annotate a value coming from JS as `option('a)`. Always give the concrete, non-polymorphic type.**
