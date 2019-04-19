@@ -116,7 +116,7 @@ Actually, the above `add` is nothing but syntactic sugar for this:
 let add = (x) => (y) => x + y;
 ```
 
-OCaml optimizes this to [avoid the unnecessary function allocation](/try/?reason=DYUwLgBAhgJjEF4IAoAeBKRA+FBPTCOqEA1BLgNwBQVA9AFQTAD2zA1tJGABYgTMBXMAAchAQmhwAYgEsAbnxkBnaBAD6SmQDsA5qDUQAZgK0BjMDOZaIpqMGAT6tKqEiwYshYkkxkAVnRqF3AITWIkd08QZABGQKA) (2 functions here, naively speaking) whenever it can! This way, we get
+OCaml optimizes this to [avoid the unnecessary function allocation](https://reasonml.github.io/en/try.html?reason=DYUwLgBAhgJjEF4IAoAeBKRA+FBPTCOqEA1BLgNwBQVA9AFQTAD2zA1tJGABYgTMBXMAAchAQmhwAYgEsAbnxkBnaBAD6SmQDsA5qDUQAZgK0BjMDOZaIpqMGAT6tKqEiwYshYkkxkAVnRqF3AITWIkd08QZABGQKA) (2 functions here, naively speaking) whenever it can! This way, we get
 
 - Nice syntax
 - Currying for free (every function takes a single argument, actually!)
