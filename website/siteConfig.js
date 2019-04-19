@@ -193,6 +193,16 @@ const users = [
     caption: "Qwick",
     image: "img/logos/qwick.svg",
     infoLink: "https://qwick.com"
+  },
+  {
+    caption: "Revery",
+    image: "img/logos/revery.png",
+    infoLink: "https://outrunlabs.com/revery"
+  },
+  {
+    caption: "Onivim 2",
+    image: "img/logos/onivim2.png",
+    infoLink: "https://v2.onivim.io"
   }
 ];
 
