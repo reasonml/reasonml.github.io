@@ -39,7 +39,7 @@ For modifying the actual try playground source code, run `yarn bundle-try-playgr
 
 ## Building with custom BuckleScript/etc
 
-To build the actual `bsReasonReact.js`, `refmt.js`, `stdlibBundle.js`, `reasonReactBundle.js` or `jsoo_reactjs_jsx_ppx_v2.js`:
+To build the actual `bsReasonReact.js`, `refmt.js`, `stdlibBundle.js`, `reasonReactBundle.js`:
 
 You'll need to have this repository and the [BuckleScript](https://github.com/BuckleScript/bucklescript) repository cloned. These will likely be next to each other in the directory structure.
 
