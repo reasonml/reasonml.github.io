@@ -20,13 +20,6 @@ fs.copyFileSync(refmtFileSource, refmtFileDest);
 
 // === second task
 
-console.log("2. Copying jsoo_reactjs_jsx_ppx_v2.js");
-const jsxFileSource = path.join(playgroundDir, 'bs', 'jsoo_reactjs_jsx_ppx_v2.js');
-const jsxFileDest = path.join(docusaurusJsDir, 'jsoo_reactjs_jsx_ppx_v2.js');
-fs.copyFileSync(jsxFileSource, jsxFileDest);
-
-// === second task
-
 // BuckleScript's standard library has a special integration when used in the
 // browser playground:
 // https://github.com/BuckleScript/bucklescript/blob/d21cdfbbe61afb0ae6b79735765de949409947ea/jscomp/core/js_packages_info.ml#L174

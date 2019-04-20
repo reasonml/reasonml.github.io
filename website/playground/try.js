@@ -460,33 +460,7 @@ class Try extends React.Component {
           newOcamlCode = window.printML(window.parseRE(newReasonCode))
           
           if (this.state.useReasonReactJSX) {
-            let res = this.postProcessOCamlCodeWithPpx(newOcamlCode)
-            if (res.error != null) {
-              this.errorTimerId = setTimeout(
-                () => this.setState(_ => {
-                  return {
-                    reasonSyntaxError: null,
-                    errorsFromCompilation: res.error.message,
-                    ocamlSyntaxError: null,
-                    jsError: null,
-                    js: '',
-                    ocaml: '',
-                    output: [],
-                  }
-                }),
-                errorTimeout
-              );
-
-              return {
-                reason: newReasonCode,
-                reasonSyntaxError: null,
-                ocamlSyntaxError: null,
-                jsError: null,
-                shareableUrl: generateShareableUrl('reason', newReasonCode, this.state.useReasonReactJSX)
-              }
-            } else {
-              this.tryCompiling(newReasonCode, res.result)
-            }
+            this.tryCompiling(newReasonCode, res.result)
           } else {
             this.tryCompiling(newReasonCode, newOcamlCode)
           }
@@ -529,36 +503,7 @@ class Try extends React.Component {
         try {
           newReasonCode = window.printRE(window.parseML(newOcamlCode))
 
-          if (this.state.useReasonReactJSX) {
-            let res = this.postProcessOCamlCodeWithPpx(newOcamlCode)
-            if (res.error != null) {
-              this.errorTimerId = setTimeout(
-                () => this.setState(_ => {
-                  return {
-                    reasonSyntaxError: null,
-                    errorsFromCompilation: res.error.message,
-                    ocamlSyntaxError: null,
-                    jsError: null,
-                    js: '',
-                    output: [],
-                  }
-                }),
-                errorTimeout
-              );
-
-              return {
-                ocaml: newOcamlCode,
-                reasonSyntaxError: null,
-                ocamlSyntaxError: null,
-                jsError: null,
-                shareableUrl: generateShareableUrl('ocaml', newOcamlCode, this.state.useReasonReactJSX)
-              }
-            } else {
-              this.tryCompiling(newReasonCode, res.result)
-            }
-          } else {
-            this.tryCompiling(newReasonCode, newOcamlCode)
-          }
+          this.tryCompiling(newReasonCode, newOcamlCode)
         } catch (e) {
           this.errorTimerId = setTimeout(
             () => this.setState(_ => {
@@ -613,17 +558,6 @@ class Try extends React.Component {
       });
     }
 
-    this.postProcessOCamlCodeWithPpx = (code) => {
-      // const ppxRes = window.jsxv2.rewrite(code);
-      // const err = ppxRes.ppx_error_msg || ppxRes.js_error_msg;
-      // if (err) {
-      //   return {result: '', error: {message: err}};
-      // } else {
-      //   return {result: ppxRes.ocaml_code, error: null};
-      // }
-      return { result: code, error: null };
-    }
-
     this.compile = (code) => {
       const _consoleError = console.error;
       let errs = '';
@@ -637,7 +571,7 @@ class Try extends React.Component {
           }
         });
       }
-      let res = window.ocaml.compile_super_errors(code);
+      let res = window.ocaml.compile_super_errors_ppx_v2(code);
       console.error = _consoleError;
       // super-errors pads the line with two spaces. Remove them can't just do
       // it in the above args.forEach, since every console.error msg might
