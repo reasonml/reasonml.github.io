@@ -108,7 +108,7 @@ drawCircle(~radius=<span class="hljs-number">10</span>, ~color=<span class="hljs
 <p>实际上，之前的<code>add</code>只不过是语法糖：</p>
 <pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> add = (x) =&gt; (y) =&gt; x <span class="hljs-operator">+</span> y;
 </code></pre>
-<p>OCaml 对其进行优化以<a href="/try/?reason=DYUwLgBAhgJjEF4IAoAeBKRA+FBPTCOqEA1BLgNwBQVA9AFQTAD2zA1tJGABYgTMBXMAAchAQmhwAYgEsAbnxkBnaBAD6SmQDsA5qDUQAZgK0BjMDOZaIpqMGAT6tKqEiwYshYkkxkAVnRqF3AITWIkd08QZABGQKA">避免任何时候都能够不必要的函数分配</a>(朴实地讲，这里是两个函数)! 这样，我们就得到</p>
+<p>OCaml optimizes this to <a href="https://reasonml.github.io/en/try.html?reason=DYUwLgBAhgJjEF4IAoAeBKRA+FBPTCOqEA1BLgNwBQVA9AFQTAD2zA1tJGABYgTMBXMAAchAQmhwAYgEsAbnxkBnaBAD6SmQDsA5qDUQAZgK0BjMDOZaIpqMGAT6tKqEiwYshYkkxkAVnRqF3AITWIkd08QZABGQKA">avoid the unnecessary function allocation</a> (2 functions here, naively speaking) whenever it can! 这样，我们就得到</p>
 <ul>
 <li>良好的语法</li>
 <li>免费 Currying (实际上，每个函数有一个单独的参数！)</li>

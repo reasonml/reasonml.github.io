@@ -108,7 +108,7 @@ drawCircle(~radius=<span class="hljs-number">10</span>, ~color=<span class="hljs
 <p>En fait, le <code>add</code> ci-dessus n'est rien d'autre que du <em>sucre syntaxique</em> pour :</p>
 <pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> add = (x) =&gt; (y) =&gt; x <span class="hljs-operator">+</span> y;
 </code></pre>
-<p>OCaml optimise ceci pour <a href="/try/?reason=DYUwLgBAhgJjEF4IAoAeBKRA+FBPTCOqEA1BLgNwBQVA9AFQTAD2zA1tJGABYgTMBXMAAchAQmhwAYgEsAbnxkBnaBAD6SmQDsA5qDUQAZgK0BjMDOZaIpqMGAT6tKqEiwYshYkkxkAVnRqF3AITWIkd08QZABGQKA">éviter l'allocation inutile de fonctions</a> (2 fonctions ici) chaque fois qu'il le peut ! De cette façon, nous obtenons</p>
+<p>OCaml optimizes this to <a href="https://reasonml.github.io/en/try.html?reason=DYUwLgBAhgJjEF4IAoAeBKRA+FBPTCOqEA1BLgNwBQVA9AFQTAD2zA1tJGABYgTMBXMAAchAQmhwAYgEsAbnxkBnaBAD6SmQDsA5qDUQAZgK0BjMDOZaIpqMGAT6tKqEiwYshYkkxkAVnRqF3AITWIkd08QZABGQKA">avoid the unnecessary function allocation</a> (2 functions here, naively speaking) whenever it can! De cette façon, nous obtenons</p>
 <ul>
 <li>une belle syntaxe</li>
 <li>la curryfication sans effort supplémentaire (chaque fonction prend un seul argument, en fait !)</li>

@@ -108,7 +108,7 @@ drawCircle(~radius=<span class="hljs-number">10</span>, ~color=<span class="hljs
 <p>實際上，上述 <code>add</code> 只是語法糖：</p>
 <pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> add = (x) =&gt; (y) =&gt; x <span class="hljs-operator">+</span> y;
 </code></pre>
-<p>OCaml 會盡量做最佳化<a href="/try/?reason=DYUwLgBAhgJjEF4IAoAeBKRA+FBPTCOqEA1BLgNwBQVA9AFQTAD2zA1tJGABYgTMBXMAAchAQmhwAYgEsAbnxkBnaBAD6SmQDsA5qDUQAZgK0BjMDOZaIpqMGAT6tKqEiwYshYkkxkAVnRqF3AITWIkd08QZABGQKA">以避免不必要的函式分配</a>（這裡有 2 個函式，直覺上來說）！ 這樣，得到</p>
+<p>OCaml optimizes this to <a href="https://reasonml.github.io/en/try.html?reason=DYUwLgBAhgJjEF4IAoAeBKRA+FBPTCOqEA1BLgNwBQVA9AFQTAD2zA1tJGABYgTMBXMAAchAQmhwAYgEsAbnxkBnaBAD6SmQDsA5qDUQAZgK0BjMDOZaIpqMGAT6tKqEiwYshYkkxkAVnRqF3AITWIkd08QZABGQKA">avoid the unnecessary function allocation</a> (2 functions here, naively speaking) whenever it can! 這樣，得到</p>
 <ul>
 <li>更好的語法</li>
 <li>自動 currying（事實上，每個函式只有一個參數！）</li>
