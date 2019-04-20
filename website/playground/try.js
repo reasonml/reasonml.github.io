@@ -459,11 +459,8 @@ class Try extends React.Component {
         try {
           newOcamlCode = window.printML(window.parseRE(newReasonCode))
           
-          if (this.state.useReasonReactJSX) {
-            this.tryCompiling(newReasonCode, res.result)
-          } else {
-            this.tryCompiling(newReasonCode, newOcamlCode)
-          }
+
+          this.tryCompiling(newReasonCode, newOcamlCode)
         } catch (e) {
           this.errorTimerId = setTimeout(
             () => this.setState(_ => {
@@ -659,6 +656,7 @@ class Try extends React.Component {
       ocamlSyntaxError,
       jsError,
     } = this.state;
+    console.log(reasonSyntaxError);
     return (
       <div className="try-inner">
         <div className="try-buttons">
