@@ -466,12 +466,12 @@ class Try extends React.Component {
       if (newReasonCode === this.state.reason && !forceUpdate) return
       persist('reason', newReasonCode, this.state.useReasonReactJSX);
       clearTimeout(this.errorTimerId)
-      
+
       this.setState((prevState, _) => {
         let newOcamlCode = prevState.ocaml;
         try {
           newOcamlCode = window.printML(window.parseRE(newReasonCode))
-          
+
 
           this.tryCompiling(newReasonCode, newOcamlCode)
         } catch (e) {
