@@ -206,7 +206,20 @@ switch (result) {
   }
 };`
 }, {
-  name: 'ReasonReact Greetings',
+  name: 'React Greetings',
+  code:
+`[@bs.config {jsx: 3}];
+
+module Greeting = {
+  [@react.component]
+  let make = () => {
+    <button> {React.string("Hello!")} </button>
+  };
+};
+
+ReactDOMRe.renderToElementWithId(<Greeting />, "preview");`
+}, {
+  name: '(Legacy Record API) ReasonReact Greetings',
   code:
 `module Greeting = {
   let component = ReasonReact.statelessComponent("Greeting");
