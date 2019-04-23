@@ -44,6 +44,26 @@ class CodeMirror extends React.Component {
   }
 }
 
+class PreviewPanel extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    return (
+      <div id="preview" className="cleanslate">
+        <p>
+          This div has the ID <code>preview</code>.
+        </p>
+        <p>
+          Feel free to override its content, or choose "React Greetings"
+          in the Examples menu!
+        </p>
+      </div>
+    )
+  }
+}
+
 const examples = [{
   name: 'Tree sum',
   code:
@@ -399,6 +419,8 @@ class Try extends React.Component {
       errorsFromCompilation: null,
     }
 
+    this.previewPanel = React.createRef();
+
     this._output = item =>
       this.setState(state => ({
         output: state.output.concat(item)
@@ -437,6 +459,11 @@ class Try extends React.Component {
     }
 
     this.evalJs = (code) => {
+      // Remove the currently rendered DOM elements when the code changes
+      ReactDOM.unmountComponentAtNode(this.previewPanel.current);
+      // Then reset to the default PreviewPanel
+      // TODO: Is there a better way to do this?
+      ReactDOM.render(<PreviewPanel />, this.previewPanel.current);
       this.outputOverloaded = false;
       const requireReactString = 'var React = require("react");';
       const requireReasonReactString = 'var ReasonReact = require("stdlib/reasonReact");';
@@ -802,16 +829,8 @@ class Try extends React.Component {
 
             <div className="try-grid-editor">
               <div className="try-label">Preview</div>
-              <div style={{padding: 10}}>
-                <div id="preview" className="cleanslate">
-                  <p>
-                    This div has the ID <code>preview</code>.
-                  </p>
-                  <p>
-                    Feel free to override its content, or choose "ReasonReact Greeting"
-                    in the Examples menu!
-                  </p>
-                </div>
+              <div ref={this.previewPanel} style={{padding: 10}}>
+                <PreviewPanel />
               </div>
             </div>
 
