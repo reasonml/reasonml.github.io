@@ -689,7 +689,7 @@ class Try extends React.Component {
       ocamlSyntaxError,
       jsError,
     } = this.state;
-    console.log(reasonSyntaxError);
+
     return (
       <div className="try-inner">
         <div className="try-buttons">
