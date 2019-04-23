@@ -24,8 +24,8 @@ if (process.env.DEV) {
         'node_modules/**',
       ],
       namedExports: {
-        'node_modules/react/react.js': ['Children', 'Component', 'PropTypes', 'createElement'],
-        'node_modules/react-dom/index.js': ['render'],
+        'node_modules/react/react.js': ['Children', 'Component', 'PropTypes', 'createElement', 'createRef'],
+        'node_modules/react-dom/index.js': ['render', 'unmountComponentAtNode'],
         'node_modules/lz-string/libs/lz-string.js': ['compressToEncodedURIComponent', 'decompressFromEncodedURIComponent'],
       }
     }),
@@ -48,8 +48,8 @@ if (process.env.DEV) {
         'node_modules/**',
       ],
       namedExports: {
-        'node_modules/react/react.js': ['Children', 'Component', 'PropTypes', 'createElement'],
-        'node_modules/react-dom/index.js': ['render'],
+        'node_modules/react/react.js': ['Children', 'Component', 'PropTypes', 'createElement', 'createRef'],
+        'node_modules/react-dom/index.js': ['render', 'unmountComponentAtNode'],
         'node_modules/lz-string/libs/lz-string.js': ['compressToEncodedURIComponent', 'decompressFromEncodedURIComponent'],
       }
     }),

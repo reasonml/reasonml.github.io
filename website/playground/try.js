@@ -44,6 +44,26 @@ class CodeMirror extends React.Component {
   }
 }
 
+class PreviewPanel extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    return (
+      <div id="preview" className="cleanslate">
+        <p>
+          This div has the ID <code>preview</code>.
+        </p>
+        <p>
+          Feel free to override its content, or choose "React Greetings"
+          in the Examples menu!
+        </p>
+      </div>
+    )
+  }
+}
+
 const examples = [{
   name: 'Tree sum',
   code:
@@ -206,7 +226,40 @@ switch (result) {
   }
 };`
 }, {
-  name: 'ReasonReact Greetings',
+  name: 'React Greetings',
+  code:
+`[@bs.config {jsx: 3}];
+
+module Greeting = {
+  [@react.component]
+  let make = () => {
+    <button> {React.string("Hello!")} </button>
+  };
+};
+
+ReactDOMRe.renderToElementWithId(<Greeting />, "preview");`
+}, {
+  name: 'React Hooks',
+  code:
+`[@bs.config {jsx: 3}];
+
+module Counter = {
+  [@react.component]
+  let make = (~name) => {
+    let (count, setCount) = React.useState(() => 0);
+
+    <div>
+      <p> {React.string(name ++ " clicked " ++ string_of_int(count) ++ " times")} </p>
+      <button onClick={_ => setCount(_ => count + 1)}>
+        {React.string("Click me")}
+      </button>
+    </div>
+  };
+};
+
+ReactDOMRe.renderToElementWithId(<Counter name="Counter" />, "preview");`
+}, {
+  name: '(Legacy Record API) ReasonReact Greetings',
   code:
 `module Greeting = {
   let component = ReasonReact.statelessComponent("Greeting");
@@ -366,6 +419,8 @@ class Try extends React.Component {
       errorsFromCompilation: null,
     }
 
+    this.previewPanel = React.createRef();
+
     this._output = item =>
       this.setState(state => ({
         output: state.output.concat(item)
@@ -404,6 +459,11 @@ class Try extends React.Component {
     }
 
     this.evalJs = (code) => {
+      // Remove the currently rendered DOM elements when the code changes
+      ReactDOM.unmountComponentAtNode(this.previewPanel.current);
+      // Then reset to the default PreviewPanel
+      // TODO: Is there a better way to do this?
+      ReactDOM.render(<PreviewPanel />, this.previewPanel.current);
       this.outputOverloaded = false;
       const requireReactString = 'var React = require("react");';
       const requireReasonReactString = 'var ReasonReact = require("stdlib/reasonReact");';
@@ -453,12 +513,12 @@ class Try extends React.Component {
       if (newReasonCode === this.state.reason && !forceUpdate) return
       persist('reason', newReasonCode, this.state.useReasonReactJSX);
       clearTimeout(this.errorTimerId)
-      
+
       this.setState((prevState, _) => {
         let newOcamlCode = prevState.ocaml;
         try {
           newOcamlCode = window.printML(window.parseRE(newReasonCode))
-          
+
 
           this.tryCompiling(newReasonCode, newOcamlCode)
         } catch (e) {
@@ -656,7 +716,7 @@ class Try extends React.Component {
       ocamlSyntaxError,
       jsError,
     } = this.state;
-    console.log(reasonSyntaxError);
+
     return (
       <div className="try-inner">
         <div className="try-buttons">
@@ -769,16 +829,8 @@ class Try extends React.Component {
 
             <div className="try-grid-editor">
               <div className="try-label">Preview</div>
-              <div style={{padding: 10}}>
-                <div id="preview" className="cleanslate">
-                  <p>
-                    This div has the ID <code>preview</code>.
-                  </p>
-                  <p>
-                    Feel free to override its content, or choose "ReasonReact Greeting"
-                    in the Examples menu!
-                  </p>
-                </div>
+              <div ref={this.previewPanel} style={{padding: 10}}>
+                <PreviewPanel />
               </div>
             </div>
 
