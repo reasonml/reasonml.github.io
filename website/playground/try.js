@@ -334,7 +334,7 @@ const generateShareableUrl = (language, code, useReasonReactJSX) => {
   return result;
 }
 
-const persist = debounce((language, code, useReasonReactJSX) => {
+const persist = debounce((language, code, useReasonReactJSX, updateURL) => {
   try {
     localStorage.setItem('try-reason', JSON.stringify({ language, code, useReasonReactJSX }));
   } catch (e) {
@@ -343,7 +343,9 @@ const persist = debounce((language, code, useReasonReactJSX) => {
 
   // avoid a refresh of the page; we also don't want every few keystrokes to
   // create a new history for the back button, so replace the current one
-  window.history.replaceState(null, '', generateShareableUrl(language, code, useReasonReactJSX));
+  if (updateURL) {
+    window.history.replaceState(null, '', generateShareableUrl(language, code, useReasonReactJSX));
+  }
 }, 100);
 
 const errorTimeout = 500
@@ -403,6 +405,20 @@ const capitalizeFirstChar = (str) => {
   return str[0].toUpperCase() + str.slice(1);
 };
 
+const getUpdateUrl = () => {
+  var val = localStorage.getItem('try-reason-update-url');
+  if (val === 'true') {
+    return true;
+  }
+
+  if (val === 'false') {
+    return false;
+  }
+
+  // Default to true
+  return true;
+}
+
 class Try extends React.Component {
 
   constructor(props) {
@@ -417,6 +433,7 @@ class Try extends React.Component {
       output: [],
       shareableUrl: '',
       errorsFromCompilation: null,
+      updateURL: getUpdateUrl(),
     }
 
     this.previewPanel = React.createRef();
@@ -511,7 +528,7 @@ class Try extends React.Component {
 
     this.updateReason = (newReasonCode, forceUpdate) => {
       if (newReasonCode === this.state.reason && !forceUpdate) return
-      persist('reason', newReasonCode, this.state.useReasonReactJSX);
+      persist('reason', newReasonCode, this.state.useReasonReactJSX, this.state.updateURL);
       clearTimeout(this.errorTimerId)
 
       this.setState((prevState, _) => {
@@ -551,7 +568,7 @@ class Try extends React.Component {
 
     this.updateOCaml = (newOcamlCode) => {
       if (newOcamlCode === this.state.ocaml) return;
-      persist('ocaml', newOcamlCode, this.state.useReasonReactJSX);
+      persist('ocaml', newOcamlCode, this.state.useReasonReactJSX, this.state.updateURL);
 
       clearTimeout(this.errorTimerId)
 
@@ -606,7 +623,7 @@ class Try extends React.Component {
           )
         }
 
-        persist('reason', newReasonCode, this.state.useReasonReactJSX);
+        persist('reason', newReasonCode, this.state.useReasonReactJSX, this.state.updateURL);
         return {
           reason: newReasonCode,
           reasonSyntaxError: null,
@@ -694,6 +711,16 @@ class Try extends React.Component {
         this.updateReason(this.state.reason, true);
       });
     }
+
+    this.toggleUpdateURL = () => {
+      this.setState(_ => {
+        return {
+          updateURL: !this.state.updateURL
+        }
+      }, () => {
+        localStorage.setItem('try-reason-update-url', this.state.updateURL);
+      });
+    }
   }
 
   componentDidMount() {
@@ -740,6 +767,15 @@ class Try extends React.Component {
           </div>
           <div className="try-button try-button-right-border" onClick={this.reformat}>
             Refmt (Reformat)
+          </div>
+          <div className="try-button try-button-right-border" onClick={this.toggleUpdateURL}>
+            Update URL
+            <input
+              className="try-button-reasonreact-checkbox"
+              type="checkbox"
+              checked={this.state.updateURL}
+              onChange={this.toggleUpdateURL}
+            />
           </div>
           <div className="try-button try-button-right-border" onClick={this.toggleUseReasonReact}>
             ReasonReact JSX
