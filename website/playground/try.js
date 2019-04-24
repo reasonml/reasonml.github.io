@@ -769,7 +769,7 @@ class Try extends React.Component {
             Refmt (Reformat)
           </div>
           <div className="try-button try-button-right-border" onClick={this.toggleUpdateURL}>
-            Update URL
+            Auto Update URL
             <input
               className="try-button-reasonreact-checkbox"
               type="checkbox"
