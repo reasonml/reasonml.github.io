@@ -34,6 +34,8 @@ let message = "bye";
 print_endline(message); /* Prints "bye" */
 ```
 
+Even though let bindings themselves are immutable, there is a way to make a let binding that acts mutable. Check out [Mutation](https://reasonml.github.io/docs/en/mutation) for more info.
+
 ## Tips & Tricks
 
 Since bindings are scoped through `{}`, you can create an anonymous scope around them:
