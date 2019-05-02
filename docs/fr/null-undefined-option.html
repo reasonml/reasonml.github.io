@@ -111,7 +111,7 @@
 <p>Qui compile en JavaScript :</p>
 <pre><code class="hljs css language-js">Js_primitive.some(<span class="hljs-literal">undefined</span>);
 </code></pre>
-<p>Quel est ce <code>Js_primitive</code> ? Pourquoi ceci ne peut-il pas compiler vers <code>undefined</code> ? Pour faire simple, lorsqu’il s’agit du type polymorphe <code>option</code> (alias <code>option('a)</code>, pour tout <code>'a</code>), de nombreuses opérations deviennent délicates si vous ne marquez pas la valeur avec une annotation spéciale. Si tout ceci n'a pas de sens, ne vous inquiétez pas. Rappelez-vous simplement la règle suivante :</p>
+<p>Quel est ce <code>Js_primitive</code> ? Pourquoi ceci ne peut-il pas compiler vers <code>undefined</code> ? Long story short, when dealing with a polymorphic <code>option</code> type (aka <code>option('a)</code>, for any <code>'a</code>), many operations become tricky if we don't mark the value with some special annotation. Si tout ceci n'a pas de sens, ne vous inquiétez pas. Rappelez-vous simplement la règle suivante :</p>
 <ul>
 <li><strong>Ne jamais, JAMAIS, transmettre une valeur <code>option</code> (ie : <code>Some(Some(Some(5)))</code>) imbriquée au côté JavaScript.</strong></li>
 <li><strong>Ne jamais, JAMAIS, annoter une valeur venant du côté JavaScript comme étant <code>option('a)</code>. Toujours donner le type concret, non polymorphe.</strong></li>

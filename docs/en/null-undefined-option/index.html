@@ -111,7 +111,7 @@
 <p>This is compiled into the following JS:</p>
 <pre><code class="hljs css language-js">Js_primitive.some(<span class="hljs-literal">undefined</span>);
 </code></pre>
-<p>What's this <code>Js_primitive</code> thing? Why can't this compile to <code>undefined</code>? Long story short, when dealing polymorphic <code>option</code> type (aka <code>option('a)</code>, for any <code>'a</code>), many operations become tricky if we don't mark the value with some special annotation. If this doesn't make sense, don't worry; just remember the following rule:</p>
+<p>What's this <code>Js_primitive</code> thing? Why can't this compile to <code>undefined</code>? Long story short, when dealing with a polymorphic <code>option</code> type (aka <code>option('a)</code>, for any <code>'a</code>), many operations become tricky if we don't mark the value with some special annotation. If this doesn't make sense, don't worry; just remember the following rule:</p>
 <ul>
 <li><strong>Never, EVER, pass a nested <code>option</code> value (e.g. <code>Some(Some(Some(5)))</code>) into the JS side.</strong></li>
 <li><strong>Never, EVER, annotate a value coming from JS as <code>option('a)</code>. Always give the concrete, non-polymorphic type.</strong></li>

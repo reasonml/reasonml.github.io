@@ -111,7 +111,7 @@
 <p>這被編譯為以下的 js:</p>
 <pre><code class="hljs css language-js">Js_primitive.some(<span class="hljs-literal">undefined</span>);
 </code></pre>
-<p><code>Js_primitive</code> 是什麼呢？ 為什麼它不能被編譯成 <code>undefined</code>？ Long story short, when dealing polymorphic <code>option</code> type (aka <code>option('a)</code>, for any <code>'a</code>), many operations become tricky if we don't mark the value with some special annotation. 如果這聽起來不合理，不要擔心；只需記住以下規則：</p>
+<p><code>Js_primitive</code> 是什麼呢？ 為什麼它不能被編譯成 <code>undefined</code>？ Long story short, when dealing with a polymorphic <code>option</code> type (aka <code>option('a)</code>, for any <code>'a</code>), many operations become tricky if we don't mark the value with some special annotation. 如果這聽起來不合理，不要擔心；只需記住以下規則：</p>
 <ul>
 <li><strong>千萬不要傳入嵌套的 <code>option</code> 值（例如 <code>Some(Some(Some(5)))</code>）到 JS 端。</strong></li>
 <li><strong>千萬不要標記從 JS 端來的值為 <code>option('a)</code>。一定要給出具體、非多態的型別。</strong></li>
