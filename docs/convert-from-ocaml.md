@@ -58,7 +58,7 @@ Syntax but you may need to selectively convert some `C(1,2)` variants to `C((1,2
 to make the type checker happy.
 
 There are already some internal exception rules to cover the common constructors that require
-a single tuple as argument so `refmt` will be convert them correctly withour requiring your
+a single tuple as argument so `refmt` will be convert them correctly without requiring your
 manual cleanup (e.g., `Some (1, 2)` in OCaml will be converted to `Some((1, 2))` instead of
 `Some(1, 2)`).
 
