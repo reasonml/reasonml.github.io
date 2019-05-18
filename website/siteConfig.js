@@ -203,6 +203,11 @@ const users = [
     caption: "Onivim 2",
     image: "img/logos/onivim2.png",
     infoLink: "https://v2.onivim.io"
+  },
+  {
+    caption: "O(1) Labs",
+    image: "img/logos/o1labs.svg",
+    infoLink: "https://o1labs.org"
   }
 ];
 
