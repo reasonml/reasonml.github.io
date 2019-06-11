@@ -151,12 +151,12 @@ Both JavaScript and Reason support currying, but Reason currying is **built-in a
 
 ## JSX
 
-| JavaScript                             | Reason                   |
-| -------------------------------------- | ------------------------ |
-| `<Foo bar=1 baz="hi" onClick={bla} />` | Same                     |
-| `<Foo bar=bar />`                      | `<Foo bar />` \*         |
-| `<input checked />`                    | `<input checked=true />` |
-| No children spread                     | `<Foo>...children</Foo>` |
+| JavaScript                               | Reason                   |
+| ---------------------------------------- | ------------------------ |
+| `<Foo bar={1} baz="hi" onClick={bla} />` | Same                     |
+| `<Foo bar={bar} />`                      | `<Foo bar />` \*         |
+| `<input checked />`                      | `<input checked=true />` |
+| No children spread                       | `<Foo>...children</Foo>` |
 
 \* Argument punning!
 
