@@ -208,6 +208,11 @@ const users = [
     caption: "O(1) Labs",
     image: "img/logos/o1labs.svg",
     infoLink: "https://o1labs.org"
+  },
+  {
+    caption: "minima",
+    image: "img/logos/minima.svg",
+    infoLink: "https://minima.app"
   }
 ];
 
