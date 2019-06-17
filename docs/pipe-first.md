@@ -138,3 +138,10 @@ This allows you to pipe into any positional argument. It also works for named ar
 getName(input)
   ->namePerson(~person=personDetails, ~name=_);
 ```
+
+**Note** that we support only one placeholder per function call. If you use more than one, they are considered to be the same argument, repeated. So the following are equivalent:
+
+```reason
+let f = List.append(_, _);
+let f = list => List.append(list, list);
+```
