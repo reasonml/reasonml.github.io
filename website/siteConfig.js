@@ -213,6 +213,11 @@ const users = [
     caption: "minima",
     image: "img/logos/minima.svg",
     infoLink: "https://minima.app"
+  },
+  {
+    caption: "Iteam",
+    image: "img/logos/iteam.svg",
+    infoLink: "https://iteam.se"
   }
 ];
 
