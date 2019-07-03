@@ -2,9 +2,9 @@
 title: Object
 ---
 
-Most of time in Reason, you'd be using record to group named values together. In certain niche situations, however, you might want to use a similar feature called object; they're a bit more flexible and come with different tradeoffs.
+Most of the time in Reason, you'd be using record to group named values together. In certain niche situations, however, you might want to use a similar feature called object; they're a bit more flexible and come with different tradeoffs.
 
-**If you come from JavaScript**, you're mostly likely **not** looking for plain Reason objects. Skip right to the Tip & Tricks section below.
+**If you come from JavaScript**, you're most likely **not** looking for plain Reason objects. Skip right to the Tip & Tricks section below.
 
 ## Usage
 
