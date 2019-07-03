@@ -64,7 +64,7 @@ let p: profession = getProfession(person1);
 
 The content of `School` module are made visible (**not** copied into the file, but simply made visible!) in scope. `profession`, `getProfession` and `person1` will thus correctly be found.
 
-**Use `open` this sparingly, it's convenient, but makes it hard to know where some values come from**. You should usually use `open` in a local scope:
+**Use `open` sparingly, it's convenient, but makes it hard to know where some values come from**. You should usually use `open` in a local scope:
 
 ```reason
 let p = {
