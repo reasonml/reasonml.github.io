@@ -316,8 +316,8 @@ module SetOfIntPairs = MakeSet(IntPair);
 ### Module functions types
 
 Like with module types, functor types also act to constrain and hide what we may
-assume about functors. The syntax for functor types are consistent with those
-for function types, but with types capitalized to represent the signatures of
+assume about functors. The syntax of functor types is consistent with that
+of function types, but with types capitalized to represent the signatures of
 modules the functor accepts as arguments and return values. In the
 previous example, we're exposing the backing type of a set; by giving `MakeSet`
 a functor signature, we can hide the underlying data structure!
