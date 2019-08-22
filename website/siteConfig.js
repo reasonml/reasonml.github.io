@@ -218,6 +218,11 @@ const users = [
     caption: "Iteam",
     image: "img/logos/iteam.svg",
     infoLink: "https://iteam.se"
+  },
+  {
+    caption: "Astrolabe Diagnostics",
+    image: "img/logos/astrolabe.svg",
+    infoLink: "https://astrolabediagnostics.com/"
   }
 ];
 
