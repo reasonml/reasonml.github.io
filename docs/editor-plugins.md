@@ -20,7 +20,7 @@ And other features.
 - [Vim/Neovim](https://github.com/reasonml-editor/vim-reason-plus)
 - [Sublime Text](https://github.com/reasonml-editor/sublime-reason)
 - [IDEA](https://github.com/reasonml-editor/reasonml-idea-plugin)
-- [Emacs](https://github.com/reasonml-editor/reason-mode): **Currently unmaintained**. We'd like to upgrade it to [reason-language-server](https://github.com/jaredly/reason-language-server) one day. Contributions welcome!
+- [Emacs](https://github.com/reasonml-editor/reason-mode): Use [reason-mode](https://github.com/reasonml-editor/reason-mode) and install [reason-language-server](https://github.com/jaredly/reason-language-server#emacs).
 
 ## Native Project Development (Community Supported):
 
