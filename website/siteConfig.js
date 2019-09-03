@@ -150,9 +150,9 @@ const users = [
     infoLink: "https://lenus.io",
   },
   {
-    caption: "SV.CO",
-    image: "img/logos/sv.svg",
-    infoLink: "https://sv.co",
+    caption: "Pupilfirst",
+    image: "img/logos/pupilfirst.svg",
+    infoLink: "https://pupilfirst.com",
   },
   {
     caption: "nittygritty",
