@@ -27,4 +27,8 @@ title: Examples
     <img src="/img/examples/todomvc.png">
     <div>TodoMVC</div>
   </a>
+  <a href="https://github.com/SVdotCO/pupilfirst">
+    <img src="/img/examples/pupilfirst-lms.png">
+    <div>Pupilfirst LMS</div>
+  </a>
 </div>

@@ -251,6 +251,11 @@ const examples = [
     name: "Avatar Generator",
     image: "img/examples/avatar-generator.png",
     link: "https://github.com/draftbit/avatar-generator"
+  },
+  {
+    name: "Pupilfirst LMS",
+    image: "img/examples/pupilfirst-lms.png",
+    link: "https://github.com/SVdotCO/pupilfirst"
   }
 ]
 
