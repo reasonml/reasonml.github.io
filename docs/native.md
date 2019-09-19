@@ -2,7 +2,7 @@
 title: Native
 ---
 
-[Bsb-native](https://github.com/bsansouci/bucklescript) is a fork of BuckleScript's bsb that compiles to native OCaml instead.
+[Bsb-native](https://github.com/bsansouci/bsb-native) is a fork of BuckleScript's bsb that compiles to native OCaml instead.
 
 [Esy](https://esy.sh) is a project package manager for native Reason.
 - Esy can install packages from [opam](https://opam.ocaml.org/packages/).
