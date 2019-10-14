@@ -151,7 +151,7 @@ drawCircle(~radius=<span class="hljs-number">10</span>, ~color=<span class="hljs
 };
 </code></pre>
 <p>В таком случае переменная <code>radius</code> <strong>обернута</strong> в тип <code>option</code>, со значением по умолчанию равным <code>None</code>. Если аргумент будет предоставлен, то он будет обернут в <code>Some</code>. So <code>radius</code>'s type value is either <code>None</code> or <code>Some(int)</code> here.</p>
-<p><strong>Важно</strong>: <code>None | Some(foo)</code> это структура данных, описанная <a href="/docs/ru/variant">выше</a>. This particular variant type is provided by the standard library. It's called <code>option</code>. Его определение: <code>type option('a) = None | Some('a)</code>.</p>
+<p><strong>Важно</strong>: <code>None | Some(foo)</code> это структура данных, описанная <a href="/docs/ru/variant">выше</a>. Этот конкретный тип варианта предоставляется стандартной библиотекой. Это называется <code>option</code>. Его определение: <code>type option('a) = None | Some('a)</code>.</p>
 <p><strong>Важно</strong> что юнит <code>()</code> находится в конце <code>drawCircle</code>. Writing this particular function without the unit <code>()</code> would lead to the following problem. Because <code>radius</code> and <code>color</code> are both labeled, the function can be curried, and it can be applied out-of-order, it's unclear what the following means:</p>
 <pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> whatIsThis = drawCircle(~color);
 </code></pre>
