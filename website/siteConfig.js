@@ -223,6 +223,11 @@ const users = [
     caption: "Astrolabe Diagnostics",
     image: "img/logos/astrolabe.svg",
     infoLink: "https://astrolabediagnostics.com/"
+  },
+  {
+    caption: "Auditless",
+    image: "img/logos/auditless.svg",
+    infoLink: "https://auditless.com"
   }
 ];
 
