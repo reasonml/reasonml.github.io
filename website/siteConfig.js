@@ -105,8 +105,8 @@ const users = [
     infoLink: "https://coursebase.co",
   },
   {
-    caption: "Aesthetic Integration",
-    image: "img/logos/aesthetic-integration.svg",
+    caption: "Imandra Inc",
+    image: "img/logos/imandra-inc.svg",
     infoLink: "https://www.imandra.ai",
   },
   {
