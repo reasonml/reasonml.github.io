@@ -228,6 +228,11 @@ const users = [
     caption: "Auditless",
     image: "img/logos/auditless.svg",
     infoLink: "https://auditless.com"
+  },
+  {
+    caption: "Cutii",
+    image: "img/logos/cutii.svg",
+    infoLink: "https://www.cutii.io/en"
   }
 ];
 
