@@ -200,6 +200,18 @@ let optionBoolToBool = opt =>
   };
 ```
 
+### Fun
+
+We have one last convenient syntax sugar for a function that takes a single parameter and immediately pattern-matches on it:
+
+```reason
+let optionBoolToBool = fun
+  | Some(trueOrFalse) => trueOrFalse
+  | None => false;
+```
+
+This allows you to "cut out the middleman" of declaring a formal parameter and then a `switch` expression, and cut straight to the pattern match.
+
 Pretty darn hard to make a mistake in this code at this point! Whenever you'd like to use an if-else with many branches, prefer pattern matching instead. It's more concise and [performant](variant.md#design-decisions) too.
 
 See another example, with switch + tuple [here](tuple.md#tips-tricks).
