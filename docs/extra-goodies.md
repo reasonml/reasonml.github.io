@@ -8,7 +8,7 @@ title: Extra Goodies
 
 ## REPL
 
-https://sketch.sh/
+https://github.com/joelmoniz/REPLmode
 
 ## re:bench
 
