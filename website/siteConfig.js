@@ -233,6 +233,11 @@ const users = [
     caption: "Cutii",
     image: "img/logos/cutii.svg",
     infoLink: "https://www.cutii.io/en"
+  },
+  {
+    caption: "Velvon",
+    image: "img/logos/velvon.svg",
+    infoLink: "https://velvon.com/en/home/"
   }
 ];
 
