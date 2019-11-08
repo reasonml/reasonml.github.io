@@ -1,6 +1,4 @@
-<!DOCTYPE html><html lang="pt-BR"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Function · Reason</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="&lt;p&gt;&lt;em&gt;Cheat sheet com exemplos completo de syntax para criação de funções no final da página&lt;/em&gt;&lt;/p&gt;
-"/><meta name="docsearch:language" content="pt-BR"/><meta property="og:title" content="Function · Reason"/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io/"/><meta property="og:description" content="&lt;p&gt;&lt;em&gt;Cheat sheet com exemplos completo de syntax para criação de funções no final da página&lt;/em&gt;&lt;/p&gt;
-"/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/icon_50.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io/blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io/blog/feed.xml" title="Reason Blog RSS Feed"/><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/pt-BR"><img class="logo" src="/img/dummy.svg" alt="Reason"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/pt-BR/what-and-why" target="_self">Docs</a></li><li class=""><a href="/pt-BR/try" target="_self">Try</a></li><li class=""><a href="/api/index" target="_self">API</a></li><li class=""><a href="/docs/pt-BR/community" target="_self">Community</a></li><li class=""><a href="/blog/" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg" alt="Languages icon"/>Português (Brasil)</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/docs/ja/function">日本語</a></li><li><a href="/docs/en/function">English</a></li><li><a href="/docs/de/function">Deutsch</a></li><li><a href="/docs/es-ES/function">Español</a></li><li><a href="/docs/fr/function">Français</a></li><li><a href="/docs/ko/function">한국어</a></li><li><a href="/docs/ru/function">Русский</a></li><li><a href="/docs/uk/function">Українська</a></li><li><a href="/docs/zh-CN/function">中文</a></li><li><a href="/docs/zh-TW/function">繁體中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank" rel="noreferrer noopener">Ajude a Traduzir</a></li></ul></div></li><script>
+<!DOCTYPE html><html lang="pt-BR"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Function · Reason</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="*Cheat sheet com exemplos completo de syntax para criação de funções no final da página*"/><meta name="docsearch:language" content="pt-BR"/><meta property="og:title" content="Function · Reason"/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io/"/><meta property="og:description" content="*Cheat sheet com exemplos completo de syntax para criação de funções no final da página*"/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/icon_50.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io/blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io/blog/feed.xml" title="Reason Blog RSS Feed"/><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/pt-BR"><img class="logo" src="/img/dummy.svg" alt="Reason"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/pt-BR/what-and-why" target="_self">Docs</a></li><li class=""><a href="/pt-BR/try" target="_self">Try</a></li><li class=""><a href="/api/index" target="_self">API</a></li><li class=""><a href="/docs/pt-BR/community" target="_self">Community</a></li><li class=""><a href="/blog/" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg" alt="Languages icon"/>Português (Brasil)</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/docs/ja/function">日本語</a></li><li><a href="/docs/en/function">English</a></li><li><a href="/docs/de/function">Deutsch</a></li><li><a href="/docs/es-ES/function">Español</a></li><li><a href="/docs/fr/function">Français</a></li><li><a href="/docs/ko/function">한국어</a></li><li><a href="/docs/ru/function">Русский</a></li><li><a href="/docs/uk/function">Українська</a></li><li><a href="/docs/zh-CN/function">中文</a></li><li><a href="/docs/zh-TW/function">繁體中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank" rel="noreferrer noopener">Ajude a Traduzir</a></li></ul></div></li><script>
         const languagesMenuItem = document.getElementById("languages-menu");
         const languagesDropDown = document.getElementById("languages-dropdown");
         languagesMenuItem.addEventListener("click", function(event) {
@@ -12,7 +10,7 @@
             languagesDropDown.className = "hide";
           }
         });
-      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/facebook/reason" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>Language Basics</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Intro</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/pt-BR/what-and-why">What &amp; Why</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Setup</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/pt-BR/installation">Installation</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/editor-plugins">Editor Plugins</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/extra-goodies">Extra Goodies</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Language Basics</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/pt-BR/overview">Overview</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/let-binding">Let Binding</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/type">Type!</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/string-and-char">String &amp; Char</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/boolean">Boolean</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/integer-and-float">Integer &amp; Float</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/tuple">Tuple</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/record">Record</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/variant">Variant!</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/null-undefined-option">Null, Undefined &amp; Option</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/list-and-array">List &amp; Array</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/docs/pt-BR/function">Function</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/if-else">If-Else</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/pipe-first">Pipe First</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/more-on-type">More on Type</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/destructuring">Destructuring</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/pattern-matching">Pattern Matching!</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/mutation">Mutation</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/imperative-loops">Imperative Loops</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/jsx">JSX</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/external">External</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/exception">Exception</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/object">Object</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/module">Module</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/promise">Promise</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">JavaScript</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/pt-BR/interop">Interop</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/syntax-cheatsheet">Syntax Cheatsheet</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/libraries">Libraries</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/converting-from-js">Converting from JS</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Native</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/pt-BR/native">Native</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/quickstart-ocaml">Native Quickstart</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/convert-from-ocaml">Converting from OCaml</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Extra</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/pt-BR/faq">Frequently Asked Questions</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/comparison-to-ocaml">Comparison to OCaml</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/newcomer-examples">Newcomer Examples</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/project-structure">Project Structure</a></li></ul></div></div></section></div><script>
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/facebook/reason" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Language Basics</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Intro</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/pt-BR/what-and-why">What &amp; Why</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Setup</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/pt-BR/installation">Installation</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/editor-plugins">Editor Plugins</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/extra-goodies">Extra Goodies</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Language Basics</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/pt-BR/overview">Overview</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/let-binding">Let Binding</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/type">Type!</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/string-and-char">String &amp; Char</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/boolean">Boolean</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/integer-and-float">Integer &amp; Float</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/tuple">Tuple</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/record">Record</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/variant">Variant!</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/null-undefined-option">Null, Undefined &amp; Option</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/list-and-array">List &amp; Array</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/docs/pt-BR/function">Function</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/if-else">If-Else</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/pipe-first">Pipe First</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/more-on-type">More on Type</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/destructuring">Destructuring</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/pattern-matching">Pattern Matching!</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/mutation">Mutation</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/imperative-loops">Imperative Loops</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/jsx">JSX</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/external">External</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/exception">Exception</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/object">Object</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/module">Module</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/promise">Promise</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">JavaScript</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/pt-BR/interop">Interop</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/syntax-cheatsheet">Syntax Cheatsheet</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/libraries">Libraries</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/converting-from-js">Converting from JS</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Native</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/pt-BR/native">Native</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/quickstart-ocaml">Native Quickstart</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/convert-from-ocaml">Converting from OCaml</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Extra</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/pt-BR/faq">Frequently Asked Questions</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/comparison-to-ocaml">Comparison to OCaml</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/newcomer-examples">Newcomer Examples</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/project-structure">Project Structure</a></li></ul></div></div></section></div><script>
             var coll = document.getElementsByClassName('collapsible');
             var checkActiveCategory = true;
             for (var i = 0; i < coll.length; i++) {
@@ -40,10 +38,16 @@
               createToggler('#navToggler', '#docsNav', 'docsSliderActive');
               createToggler('#tocToggler', 'body', 'tocActive');
 
-              const headings = document.querySelector('.toc-headings');
+              var headings = document.querySelector('.toc-headings');
               headings && headings.addEventListener('click', function(event) {
-                if (event.target.tagName === 'A') {
-                  document.body.classList.remove('tocActive');
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
                 }
               }, false);
 
@@ -65,73 +69,73 @@
         </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://crowdin.com/project/reason/pt-BR" target="_blank" rel="noreferrer noopener">Translate</a><h1 class="postHeaderTitle">Function</h1></header><article><div><span><p><em>Cheat sheet com exemplos completo de syntax para criação de funções no final da página</em></p>
 <p>Você acredita que ainda não vimos funções até agora?</p>
 <p>Funções são declaradas com o uso de setas ( =&gt; ) e uma expressão de retorno.</p>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> greet = (name) =&gt; <span class="hljs-string">"Hello "</span> <span class="hljs-operator">++</span> name;
+<pre><code class="hljs css language-reason">let greet = (name) =&gt; &quot;Hello &quot; ++ name;
 </code></pre>
 <p>Este trecho declara uma função com o nome <code>greet</code>, podemos chama-la da seguinte forma:</p>
-<pre><code class="hljs css language-reason">greet(<span class="hljs-string">"world!"</span>); <span class="hljs-comment">/* "Hello world!" */</span>
+<pre><code class="hljs css language-reason">greet(&quot;world!&quot;); /* &quot;Hello world!&quot; */
 </code></pre>
 <p>Funcões com multiplos argumentos tem seus argumentos separados por vírgula:</p>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> add = (x, y, z) =&gt; x <span class="hljs-operator">+</span> y <span class="hljs-operator">+</span> z;
-add(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>); <span class="hljs-comment">/* 6 */</span>
+<pre><code class="hljs css language-reason">let add = (x, y, z) =&gt; x + y + z;
+add(1, 2, 3); /* 6 */
 </code></pre>
 <p>Para funções com corpo grande, utilize blocos para sua definição:</p>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> greetMore = (name) =&gt; {
-  <span class="hljs-keyword">let</span> part1 = <span class="hljs-string">"Hello"</span>;
-  part1 <span class="hljs-operator">++</span> <span class="hljs-string">" "</span> <span class="hljs-operator">++</span> name
+<pre><code class="hljs css language-reason">let greetMore = (name) =&gt; {
+  let part1 = &quot;Hello&quot;;
+  part1 ++ &quot; &quot; ++ name
 };
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" id="sem-argumento"></a><a href="#sem-argumento" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Sem Argumento</h2>
 <p>Uma função sempre recebe um argumento; mas às vezes a utilizamos para, ex. efeitos colaterais, e não temos nada para passar na chamada da função. Em outras linguagens nós conceitualmente &quot;não passamos um argumento&quot;. No Reason, todas as função recebem um argumento; nós convencionalmente passamos o valor <code>()</code>, que é chamado de &quot;unit&quot;.</p>
-<pre><code class="hljs css language-reason"><span class="hljs-comment">/* recebe &amp; destrutura o argumento unit */</span>
-<span class="hljs-keyword">let</span> logSomething = () =&gt; {
-  print_endline(<span class="hljs-string">"hello"</span>);
-  print_endline(<span class="hljs-string">"world"</span>)
+<pre><code class="hljs css language-reason">/* recebe &amp; destrutura o argumento unit */
+let logSomething = () =&gt; {
+  print_endline(&quot;hello&quot;);
+  print_endline(&quot;world&quot;)
 };
 
-<span class="hljs-comment">/* chama a função com o valor do tipo unit */</span>
+/* chama a função com o valor do tipo unit */
 logSomething();
 </code></pre>
 <p><code>()</code> é um valor totalmente normal, o único valor possível para <code>unit</code>. Reason fornece essa conveniência na sintaxe.</p>
 <h2><a class="anchor" aria-hidden="true" id="argumentos-nomeados"></a><a href="#argumentos-nomeados" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Argumentos Nomeados</h2>
 <p>Funções com vários argumentos, especialmente aqueles argumentos que são do mesmo tipo, podem ser confusas para chamar.</p>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> addCoordinates = (x, y) =&gt; {
-  <span class="hljs-comment">/* use x and y here */</span>
+<pre><code class="hljs css language-reason">let addCoordinates = (x, y) =&gt; {
+  /* use x and y here */
 };
-<span class="hljs-comment">/* ... */</span>
-addCoordinates(<span class="hljs-number">5</span>, <span class="hljs-number">6</span>); <span class="hljs-comment">/* which is x, which is y? */</span>
+/* ... */
+addCoordinates(5, 6); /* which is x, which is y? */
 </code></pre>
 <p>In OCaml/Reason, you can attach labels to an argument by prefixing the name with the <code>~</code> symbol:</p>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> addCoordinates = (~x, ~y) =&gt; {
-  <span class="hljs-comment">/* use x and y here */</span>
+<pre><code class="hljs css language-reason">let addCoordinates = (~x, ~y) =&gt; {
+  /* use x and y here */
 };
-<span class="hljs-comment">/* ... */</span>
-addCoordinates(~x=<span class="hljs-number">5</span>, ~y=<span class="hljs-number">6</span>);
+/* ... */
+addCoordinates(~x=5, ~y=6);
 </code></pre>
 <p>Já que temos currying (explicado mais abaixo), nós podemos passar os argumentos em <strong>qualquer ordem</strong>:</p>
-<pre><code class="hljs css language-reason">addCoordinates(~y=<span class="hljs-number">6</span>, ~x=<span class="hljs-number">5</span>);
+<pre><code class="hljs css language-reason">addCoordinates(~y=6, ~x=5);
 </code></pre>
 <p>The <code>~x</code> part in the declaration means the function accepts an argument labeled <code>x</code> and can refer to it in the function body by the same name. Você também pode se referir aos argumentos dentro do corpo da função por um nome diferente para ser mais preciso:</p>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> drawCircle = (~radius <span class="hljs-keyword">as</span> r, ~color <span class="hljs-keyword">as</span> c) =&gt; {
+<pre><code class="hljs css language-reason">let drawCircle = (~radius as r, ~color as c) =&gt; {
   setColor(c);
   startAt(r, r);
-  <span class="hljs-comment">/* ... */</span>
+  /* ... */
 };
 
-drawCircle(~radius=<span class="hljs-number">10</span>, ~color=<span class="hljs-string">"red"</span>);
+drawCircle(~radius=10, ~color=&quot;red&quot;);
 </code></pre>
 <p>De fato, <code>(~radius)</code> é apenas um abreviação (chamado de <strong>punning</strong>) para <code>(~radius as radius)</code>.</p>
 <p>Aqui está a sintaxe para argumentos tipados:</p>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> drawCircle = (~radius <span class="hljs-keyword">as</span> r: int, ~color <span class="hljs-keyword">as</span> c: string) =&gt; <span class="hljs-operator">...</span>;
+<pre><code class="hljs css language-reason">let drawCircle = (~radius as r: int, ~color as c: string) =&gt; ...;
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="currying"></a><a href="#currying" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Currying</h3>
 <p>As funções de Reason podem automaticamente serem <strong>parcialmente</strong> chamadas:</p>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> add = (x, y) =&gt; x <span class="hljs-operator">+</span> y;
-<span class="hljs-keyword">let</span> addFive = add(<span class="hljs-number">5</span>);
-<span class="hljs-keyword">let</span> eleven = addFive(<span class="hljs-number">6</span>);
-<span class="hljs-keyword">let</span> twelve = addFive(<span class="hljs-number">7</span>);
+<pre><code class="hljs css language-reason">let add = (x, y) =&gt; x + y;
+let addFive = add(5);
+let eleven = addFive(6);
+let twelve = addFive(7);
 </code></pre>
 <p>Na verdade, o código acima <code>add</code> não é nada além de açúcar sintático para isso:</p>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> add = (x) =&gt; (y) =&gt; x <span class="hljs-operator">+</span> y;
+<pre><code class="hljs css language-reason">let add = (x) =&gt; (y) =&gt; x + y;
 </code></pre>
 <p>OCaml optimizes this to <a href="https://reasonml.github.io/en/try.html?reason=DYUwLgBAhgJjEF4IAoAeBKRA+FBPTCOqEA1BLgNwBQVA9AFQTAD2zA1tJGABYgTMBXMAAchAQmhwAYgEsAbnxkBnaBAD6SmQDsA5qDUQAZgK0BjMDOZaIpqMGAT6tKqEiwYshYkkxkAVnRqF3AITWIkd08QZABGQKA">avoid the unnecessary function allocation</a> (2 functions here, naively speaking) whenever it can! Desta forma, nós podemos obter</p>
 <ul>
@@ -141,163 +145,163 @@ drawCircle(~radius=<span class="hljs-number">10</span>, ~color=<span class="hljs
 </ul>
 <h2><a class="anchor" aria-hidden="true" id="argumento-opcional-nomeado"></a><a href="#argumento-opcional-nomeado" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Argumento Opcional Nomeado</h2>
 <p>Funções com argumentos nomeados podem ter parâmetros opcionais em sua declaração. Você pode então omiti-los quando chamar a função.</p>
-<pre><code class="hljs css language-reason"><span class="hljs-comment">/* o parâmetro radius é opcional */</span>
-<span class="hljs-keyword">let</span> drawCircle = (~color, ~radius=?, ()) =&gt; {
+<pre><code class="hljs css language-reason">/* o parâmetro radius é opcional */
+let drawCircle = (~color, ~radius=?, ()) =&gt; {
   setColor(color);
-  <span class="hljs-keyword">switch</span> (radius) {
-  | <span class="hljs-constructor">None</span> =&gt; startAt(<span class="hljs-number">1</span>, <span class="hljs-number">1</span>)
-  | <span class="hljs-constructor">Some</span>(r_) =&gt; startAt(r_, r_)
+  switch (radius) {
+  | None =&gt; startAt(1, 1)
+  | Some(r_) =&gt; startAt(r_, r_)
   }
 };
 </code></pre>
 <p>Quando é dada essa sintaxe, <code>radius</code> é <strong>encapsulado</strong> com o tipo <code>option</code>, provido pela biblioteca padrão, cujo valor default é <code>None</code>. Se provido, ele será encapsulado com <code>Some</code>. Então, o tipo <code>radius</code> pode ser <code>None</code> ou <code>Some(int)</code> aqui.</p>
 <p><strong>Nota</strong>: <code>None | Some(foo)</code> é um tipo de estrutura de dado chamado de variante, descrito <a href="/docs/pt-BR/variant">mais cedo</a>. Especificamente esse variante é provido pela biblioteca padrão. Ele é chamado de <code>option</code>. Sua definição é: <code>type option('a) = None | Some('a)</code>.</p>
 <p><strong>Note</strong> o unit <code>()</code> no final de <code>drawCircle</code>. Writing this particular function without the unit <code>()</code> would lead to the following problem. Because <code>radius</code> and <code>color</code> are both labeled, the function can be curried, and it can be applied out-of-order, it's unclear what the following means:</p>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> whatIsThis = drawCircle(~color);
+<pre><code class="hljs css language-reason">let whatIsThis = drawCircle(~color);
 </code></pre>
 <p>O <code>whatIsThis</code> é uma função curried <code>drawCircle</code> esperando um parâmetro opcional <code>radius</code> para ser aplicado? Or did it finish applying because the <code>radius</code> is optional? Para evitar essa confusão, adiciona-se um argumento posicional (ou seja, um não nomeado) ao <code>drawCircle</code> (convencionalmente <code>()</code>), e então OCaml irá, como uma regra de ouro, presumir que o argumento opcional nomeado foi provido.</p>
 <p>Because we don't supply the unit OCaml knows we want to curry the function.</p>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> curriedFunction = drawCircle(~color);
+<pre><code class="hljs css language-reason">let curriedFunction = drawCircle(~color);
 </code></pre>
 <p>Because we <em>do</em> supply the unit OCaml knows we deliberately omit the <code>radius</code> parameter, and the function is executed.</p>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> circle = drawCircle(~color, ());
+<pre><code class="hljs css language-reason">let circle = drawCircle(~color, ());
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="optional-passado-explicitamente"></a><a href="#optional-passado-explicitamente" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Optional Passado Explícitamente</h3>
 <p>Sometimes, you might want to forward a value to a function without knowing whether the value is <code>None</code> or <code>Some(a)</code>. Naively, you'd do:</p>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> result =
-  <span class="hljs-keyword">switch</span> (payloadRadius) {
-  | <span class="hljs-constructor">None</span> =&gt; drawCircle(~color, ())
-  | <span class="hljs-constructor">Some</span>(r) =&gt; drawCircle(~color, ~radius=r, ())
+<pre><code class="hljs css language-reason">let result =
+  switch (payloadRadius) {
+  | None =&gt; drawCircle(~color, ())
+  | Some(r) =&gt; drawCircle(~color, ~radius=r, ())
   };
 </code></pre>
 <p>This quickly gets tedious. We provide a shortcut:</p>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> result = drawCircle(~color, ~radius=?payloadRadius, ());
+<pre><code class="hljs css language-reason">let result = drawCircle(~color, ~radius=?payloadRadius, ());
 </code></pre>
 <p>This means &quot;I understand <code>radius</code> is optional, and that when I pass it a value it needs to be an <code>int</code>, but I don't know whether the value I'm passing is <code>None</code> or <code>Some(val)</code>, so I'll pass you the whole <code>option</code> wrapper&quot;.</p>
 <h3><a class="anchor" aria-hidden="true" id="optional-com-valores-padrões"></a><a href="#optional-com-valores-padrões" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Optional com Valores Padrões</h3>
 <p>Optional labeled arguments can also be provided a default value. In this case, they aren't wrapped in an <code>option</code> type.</p>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> drawCircle = (~radius=<span class="hljs-number">1</span>, ~color, ()) =&gt; {
+<pre><code class="hljs css language-reason">let drawCircle = (~radius=1, ~color, ()) =&gt; {
   setColor(color);
   startAt(radius, radius)
 };
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="funcões-recursivas"></a><a href="#funcões-recursivas" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Funções Recursivas</h3>
 <p>By default, a value can't see a binding that points to it, but including the <code>rec</code> keyword in a <code>let</code> binding makes this possible. This allows functions to see and call themselves, giving us the power of recursion.</p>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> <span class="hljs-keyword">rec</span> neverTerminate = () =&gt; neverTerminate();
+<pre><code class="hljs css language-reason">let rec neverTerminate = () =&gt; neverTerminate();
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="funcões-mutualmente-recursivas"></a><a href="#funcões-mutualmente-recursivas" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Funções Mutualmente Recursivas</h3>
 <p>Mutually recursive functions start like a single recursive function using the <code>rec</code> keyword, and then are chained together with <code>and</code>:</p>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> <span class="hljs-keyword">rec</span> callSecond = () =&gt; callFirst()
-<span class="hljs-keyword">and</span> callFirst = () =&gt; callSecond();
+<pre><code class="hljs css language-reason">let rec callSecond = () =&gt; callFirst()
+and callFirst = () =&gt; callSecond();
 </code></pre>
 <p><strong>Note</strong> that there's no semicolon ending the first line and no <code>let</code> on the second line.</p>
 <h2><a class="anchor" aria-hidden="true" id="dicas-truques"></a><a href="#dicas-truques" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Dicas &amp; Truques</h2>
 <p>Cheat sheet for the function syntaxes:</p>
 <h3><a class="anchor" aria-hidden="true" id="declaracão"></a><a href="#declaracão" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Declaração</h3>
-<pre><code class="hljs css language-reason"><span class="hljs-comment">/* anonymous function. Listed for completeness only */</span>
-(x) =&gt; (y) =&gt; <span class="hljs-number">1</span>;
-<span class="hljs-comment">/* sugar for the above */</span>
-(x, y) =&gt; <span class="hljs-number">1</span>;
-<span class="hljs-comment">/* assign to a name */</span>
-<span class="hljs-keyword">let</span> add = (x, y) =&gt; <span class="hljs-number">1</span>;
+<pre><code class="hljs css language-reason">/* anonymous function. Listed for completeness only */
+(x) =&gt; (y) =&gt; 1;
+/* sugar for the above */
+(x, y) =&gt; 1;
+/* assign to a name */
+let add = (x, y) =&gt; 1;
 
-<span class="hljs-comment">/* labeled */</span>
-<span class="hljs-keyword">let</span> add = (~first <span class="hljs-keyword">as</span> x, ~second <span class="hljs-keyword">as</span> y) =&gt; x <span class="hljs-operator">+</span> y;
-<span class="hljs-comment">/* with punning sugar */</span>
-<span class="hljs-keyword">let</span> add = (~first, ~second) =&gt; first <span class="hljs-operator">+</span> second;
+/* labeled */
+let add = (~first as x, ~second as y) =&gt; x + y;
+/* with punning sugar */
+let add = (~first, ~second) =&gt; first + second;
 
-<span class="hljs-comment">/* labeled with default value */</span>
-<span class="hljs-keyword">let</span> add = (~first <span class="hljs-keyword">as</span> x=<span class="hljs-number">1</span>, ~second <span class="hljs-keyword">as</span> y=<span class="hljs-number">2</span>) =&gt; x <span class="hljs-operator">+</span> y;
-<span class="hljs-comment">/* with punning */</span>
-<span class="hljs-keyword">let</span> add = (~first=<span class="hljs-number">1</span>, ~second=<span class="hljs-number">2</span>) =&gt; first <span class="hljs-operator">+</span> second;
+/* labeled with default value */
+let add = (~first as x=1, ~second as y=2) =&gt; x + y;
+/* with punning */
+let add = (~first=1, ~second=2) =&gt; first + second;
 
-<span class="hljs-comment">/* optional */</span>
-<span class="hljs-keyword">let</span> add = (~first <span class="hljs-keyword">as</span> x=?, ~second <span class="hljs-keyword">as</span> y=?) =&gt; <span class="hljs-keyword">switch</span> (x) {<span class="hljs-operator">...</span>};
-<span class="hljs-comment">/* with punning */</span>
-<span class="hljs-keyword">let</span> add = (~first=?, ~second=?) =&gt; <span class="hljs-keyword">switch</span> (first) {<span class="hljs-operator">...</span>};
+/* optional */
+let add = (~first as x=?, ~second as y=?) =&gt; switch (x) {...};
+/* with punning */
+let add = (~first=?, ~second=?) =&gt; switch (first) {...};
 </code></pre>
 <h4><a class="anchor" aria-hidden="true" id="com-anotacão-de-tipo"></a><a href="#com-anotacão-de-tipo" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Com Anotação de Tipo</h4>
-<pre><code class="hljs css language-reason"><span class="hljs-comment">/* anonymous function */</span>
-(x: int) =&gt; (y: int): int =&gt; <span class="hljs-number">1</span>;
-<span class="hljs-comment">/* sugar for the above */</span>
-(x: int, y: int): int =&gt; <span class="hljs-number">1</span>;
-<span class="hljs-comment">/* assign to a name */</span>
-<span class="hljs-keyword">let</span> add = (x: int, y: int): int =&gt; <span class="hljs-number">1</span>;
+<pre><code class="hljs css language-reason">/* anonymous function */
+(x: int) =&gt; (y: int): int =&gt; 1;
+/* sugar for the above */
+(x: int, y: int): int =&gt; 1;
+/* assign to a name */
+let add = (x: int, y: int): int =&gt; 1;
 
-<span class="hljs-comment">/* labeled */</span>
-<span class="hljs-keyword">let</span> add = (~first <span class="hljs-keyword">as</span> x: int, ~second <span class="hljs-keyword">as</span> y: int) : int =&gt; x <span class="hljs-operator">+</span> y;
-<span class="hljs-comment">/* with punning sugar */</span>
-<span class="hljs-keyword">let</span> add = (~first: int, ~second: int) : int =&gt; first <span class="hljs-operator">+</span> second;
+/* labeled */
+let add = (~first as x: int, ~second as y: int) : int =&gt; x + y;
+/* with punning sugar */
+let add = (~first: int, ~second: int) : int =&gt; first + second;
 
-<span class="hljs-comment">/* labeled with default value */</span>
-<span class="hljs-keyword">let</span> add = (~first <span class="hljs-keyword">as</span> x: int=<span class="hljs-number">1</span>, ~second <span class="hljs-keyword">as</span> y: int=<span class="hljs-number">2</span>) : int =&gt; x <span class="hljs-operator">+</span> y;
-<span class="hljs-comment">/* with punning sugar */</span>
-<span class="hljs-keyword">let</span> add = (~first: int=<span class="hljs-number">1</span>, ~second: int=<span class="hljs-number">2</span>) : int =&gt; first <span class="hljs-operator">+</span> second;
+/* labeled with default value */
+let add = (~first as x: int=1, ~second as y: int=2) : int =&gt; x + y;
+/* with punning sugar */
+let add = (~first: int=1, ~second: int=2) : int =&gt; first + second;
 
-<span class="hljs-comment">/* optional */</span>
-<span class="hljs-keyword">let</span> add = (~first <span class="hljs-keyword">as</span> x: option(int)=?, ~second <span class="hljs-keyword">as</span> y: option(int)=?) : int =&gt; <span class="hljs-keyword">switch</span> (x) {<span class="hljs-operator">...</span>};
-<span class="hljs-comment">/* with punning sugar */</span>
-<span class="hljs-comment">/* note that the caller would pass an `int`, not `option int` */</span>
-<span class="hljs-comment">/* Inside the function, `first` and `second` are `option int`. */</span>
-<span class="hljs-keyword">let</span> add = (~first: option(int)=?, ~second: option(int)=?) : int =&gt; <span class="hljs-keyword">switch</span> (first) {<span class="hljs-operator">...</span>};
+/* optional */
+let add = (~first as x: option(int)=?, ~second as y: option(int)=?) : int =&gt; switch (x) {...};
+/* with punning sugar */
+/* note that the caller would pass an `int`, not `option int` */
+/* Inside the function, `first` and `second` are `option int`. */
+let add = (~first: option(int)=?, ~second: option(int)=?) : int =&gt; switch (first) {...};
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="aplicacão"></a><a href="#aplicacão" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Aplicação</h3>
-<pre><code class="hljs css language-reason"><span class="hljs-comment">/* anonymous application. Listed for completeness only */</span>
+<pre><code class="hljs css language-reason">/* anonymous application. Listed for completeness only */
 add(x)(y);
-<span class="hljs-comment">/* sugar for the above */</span>
+/* sugar for the above */
 add(x, y);
 
-<span class="hljs-comment">/* labeled */</span>
-add(~first=<span class="hljs-number">1</span>, ~second=<span class="hljs-number">2</span>);
-<span class="hljs-comment">/* with punning sugar */</span>
+/* labeled */
+add(~first=1, ~second=2);
+/* with punning sugar */
 add(~first, ~second);
 
-<span class="hljs-comment">/* application with default value. Same as normal application */</span>
-add(~first=<span class="hljs-number">1</span>, ~second=<span class="hljs-number">2</span>);
+/* application with default value. Same as normal application */
+add(~first=1, ~second=2);
 
-<span class="hljs-comment">/* explicit optional application */</span>
-add(~first=?<span class="hljs-constructor">Some</span>(<span class="hljs-number">1</span>), ~second=?<span class="hljs-constructor">Some</span>(<span class="hljs-number">2</span>));
-<span class="hljs-comment">/* with punning */</span>
+/* explicit optional application */
+add(~first=?Some(1), ~second=?Some(2));
+/* with punning */
 add(~first?, ~second?);
 </code></pre>
 <h4><a class="anchor" aria-hidden="true" id="com-anotacão-de-tipo-1"></a><a href="#com-anotacão-de-tipo-1" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Com Anotação de Tipo</h4>
-<pre><code class="hljs css language-reason"><span class="hljs-comment">/* anonymous application */</span>
+<pre><code class="hljs css language-reason">/* anonymous application */
 add(x: int)(y: int);
 
-<span class="hljs-comment">/* labeled */</span>
-add(~first=<span class="hljs-number">1</span>: int, ~second=<span class="hljs-number">2</span>: int);
-<span class="hljs-comment">/* with punning sugar */</span>
+/* labeled */
+add(~first=1: int, ~second=2: int);
+/* with punning sugar */
 add(~first: int, ~second: int);
 
-<span class="hljs-comment">/* application with default value. Same as normal application */</span>
-add(~first=<span class="hljs-number">1</span>: int, ~second=<span class="hljs-number">2</span>: int);
+/* application with default value. Same as normal application */
+add(~first=1: int, ~second=2: int);
 
-<span class="hljs-comment">/* explicit optional application */</span>
-add(~first=?<span class="hljs-constructor">Some</span>(<span class="hljs-number">1</span>): option(int), ~second=?<span class="hljs-constructor">Some</span>(<span class="hljs-number">2</span>): option(int));
-<span class="hljs-comment">/* with punning sugar */</span>
+/* explicit optional application */
+add(~first=?Some(1): option(int), ~second=?Some(2): option(int));
+/* with punning sugar */
 add(~first: option(int)?, ~second: option(int)?);
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="assinatura-de-tipo-independente"></a><a href="#assinatura-de-tipo-independente" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Assinatura de Tipo Independente</h3>
-<pre><code class="hljs css language-reason"><span class="hljs-comment">/* first arg type, second arg type, return type */</span>
-<span class="hljs-keyword">type</span> foo = int =&gt; int =&gt; int;
-<span class="hljs-comment">/* sugar for the above */</span>
-<span class="hljs-keyword">type</span> foo = (int, int) =&gt; int;
+<pre><code class="hljs css language-reason">/* first arg type, second arg type, return type */
+type foo = int =&gt; int =&gt; int;
+/* sugar for the above */
+type foo = (int, int) =&gt; int;
 
-<span class="hljs-comment">/* labeled */</span>
-<span class="hljs-keyword">type</span> foo = (~first: int, ~second: int) =&gt; int;
+/* labeled */
+type foo = (~first: int, ~second: int) =&gt; int;
 
-<span class="hljs-comment">/* labeled */</span>
-<span class="hljs-keyword">type</span> foo = (~first: int=?, ~second: int=?, unit) =&gt; int;
+/* labeled */
+type foo = (~first: int=?, ~second: int=?, unit) =&gt; int;
 </code></pre>
 <h4><a class="anchor" aria-hidden="true" id="em-arquivos-de-interface"></a><a href="#em-arquivos-de-interface" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Em arquivos de interface</h4>
 <p>To annotate a function from the implementation file (<code>.re</code>):</p>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> add: int =&gt; int =&gt; int;
-<span class="hljs-comment">/* sugar for the above */</span>
-<span class="hljs-keyword">let</span> add: (int, int) =&gt; int;
+<pre><code class="hljs css language-reason">let add: int =&gt; int =&gt; int;
+/* sugar for the above */
+let add: (int, int) =&gt; int;
 </code></pre>
 <p>Same rules as the previous section, except replacing <code>type foo = bar</code> with <code>let add: bar</code>.</p>
 <p><strong>Don't</strong> confuse this with actually exporting a type in the interface file. <code>let add: bar</code> annotates an existing value <code>bar</code> from the implementation file. <code>type foo = bar</code> exports a type of the same shape from the implementation file.</p>
-</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/pt-BR/list-and-array"><span class="arrow-prev">← </span><span>List &amp; Array</span></a><a class="docs-next button" href="/docs/pt-BR/if-else"><span>If-Else</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#sem-argumento">Sem Argumento</a></li><li><a href="#argumentos-nomeados">Argumentos Nomeados</a><ul class="toc-headings"><li><a href="#currying">Currying</a></li></ul></li><li><a href="#argumento-opcional-nomeado">Argumento Opcional Nomeado</a><ul class="toc-headings"><li><a href="#optional-passado-explicitamente">Optional Passado Explícitamente</a></li><li><a href="#optional-com-valores-padrões">Optional com Valores Padrões</a></li><li><a href="#funcões-recursivas">Funções Recursivas</a></li><li><a href="#funcões-mutualmente-recursivas">Funções Mutualmente Recursivas</a></li></ul></li><li><a href="#dicas-truques">Dicas &amp; Truques</a><ul class="toc-headings"><li><a href="#declaracão">Declaração</a></li><li><a href="#aplicacão">Aplicação</a></li><li><a href="#assinatura-de-tipo-independente">Assinatura de Tipo Independente</a></li></ul></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.min.js"></script><script>window.foo = new Pjax({
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/pt-BR/list-and-array"><span class="arrow-prev">← </span><span>List &amp; Array</span></a><a class="docs-next button" href="/docs/pt-BR/if-else"><span>If-Else</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#sem-argumento">Sem Argumento</a></li><li><a href="#argumentos-nomeados">Argumentos Nomeados</a><ul class="toc-headings"><li><a href="#currying">Currying</a></li></ul></li><li><a href="#argumento-opcional-nomeado">Argumento Opcional Nomeado</a><ul class="toc-headings"><li><a href="#optional-passado-explicitamente">Optional Passado Explícitamente</a></li><li><a href="#optional-com-valores-padrões">Optional com Valores Padrões</a></li><li><a href="#funcões-recursivas">Funções Recursivas</a></li><li><a href="#funcões-mutualmente-recursivas">Funções Mutualmente Recursivas</a></li></ul></li><li><a href="#dicas-amp-truques">Dicas &amp; Truques</a><ul class="toc-headings"><li><a href="#declaracão">Declaração</a></li><li><a href="#aplicacão">Aplicação</a></li><li><a href="#assinatura-de-tipo-independente">Assinatura de Tipo Independente</a></li></ul></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.min.js"></script><script>window.foo = new Pjax({
           areas: [
             // try to use the first query.
             '.mainContainer, .docsNavContainer .toc .navWrapper, .onPageNav',
