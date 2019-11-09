@@ -4,7 +4,7 @@ This code is used to generate https://reasonml.github.io. It pulls in files from
 
 `website/` contains the JS, CSS, images and other files (and blog, which contains some markdown files too, these are separated from `docs/`, not too important).
 
-`cd website && yarn && yarn start` to start the development server & watcher.
+`cd website && yarn && yarn start` to start the development server & watcher. **Don't use `npm install`**. It's broken for us for various reasons.
 
 Don't use `yarn build`. It's mostly for debugging.
 
