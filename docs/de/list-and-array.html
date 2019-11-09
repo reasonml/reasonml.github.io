@@ -73,7 +73,7 @@
 <li>unveränderlich (<em>immutable</em>)</li>
 <li>schnell um Elemente vorne einzufügen</li>
 </ul>
-<pre><code class="hljs css language-reason">let myList = [1, 2, 3];
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> myList = <span class="hljs-literal">[</span><span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span><span class="hljs-literal">]</span>;
 </code></pre>
 <p>Reason-Listen sind einfach verkettete Listen.</p>
 <h3><a class="anchor" aria-hidden="true" id="verwendung"></a><a href="#verwendung" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Verwendung</h3>
@@ -81,18 +81,18 @@
 <p>Die Standardbibliothek stellt ein <a href="/api/List.html">Listenmodul</a> (und sein Gegenstück mit benannten Argumenten, nämlich <code>ListLabels</code>) bereit.</p>
 <h4><a class="anchor" aria-hidden="true" id="unveranderliches-voranstellen"></a><a href="#unveranderliches-voranstellen" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Unveränderliches Voranstellen</h4>
 <p>Verwende die Spread-Syntax, die lediglich <code>List.cons</code> entspricht:</p>
-<pre><code class="hljs css language-reason">let myList: list(int) = [1, 2, 3];
-let anotherList = [0, ...myList];
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> myList: list(int) = <span class="hljs-literal">[</span><span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span><span class="hljs-literal">]</span>;
+<span class="hljs-keyword">let</span> anotherList = <span class="hljs-literal">[</span><span class="hljs-number">0</span>, <span class="hljs-operator">...</span>myList<span class="hljs-literal">]</span>;
 </code></pre>
 <p><code>myList</code> hat sich nicht verändert. <code>anotherList</code> ist nun <code>[0, 1, 2, 3]</code>. Dies ist effizient (konstante Zeit, nicht lineare). Die letzten 3 Elemente in <code>anotherList</code> werden auch von <code>myList</code> verwendet!</p>
 <p><strong>Beachte dass<code>[a, ...b, ...c]</code> einen Syntaxfehler ergibt</strong>. Wir unterstützen kein mehrfaches Spread für eine Liste. Das wäre eine versehentliche lineare Operation (<code>O(b)</code>), denn jedes Element in b würde eins nach dem anderen dem Anfang von <code>c</code> hinzugefügt. Du kannst hierfür <code>List.concat</code> einsetzen.</p>
 <p>Es wird davon abgeraten, ein beliebiges Element in der Mitte einer Liste zu ändern, denn dessen Performance und Speicheraufwand wäre linear (<code>O(n)</code>).</p>
 <h4><a class="anchor" aria-hidden="true" id="zugriff"></a><a href="#zugriff" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Zugriff</h4>
 <p><code>switch</code> (beschrieben im <a href="/docs/de/pattern-matching">Abschnitt zu Pattern-Matching</a>) wird gewöhnlich verwendet, um auf Listenelemente zuzugreifen:</p>
-<pre><code class="hljs css language-reason">let message =
-  switch (myList) {
-  | [] =&gt; &quot;This list is empty&quot;
-  | [a, ...rest] =&gt; &quot;The head of the list is the string &quot; ++ string_of_int(a)
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> message =
+  <span class="hljs-keyword">switch</span> (myList) {
+  | <span class="hljs-literal">[</span><span class="hljs-literal">]</span> =&gt; <span class="hljs-string">"This list is empty"</span>
+  | <span class="hljs-literal">[</span>a, <span class="hljs-operator">...</span>rest<span class="hljs-literal">]</span> =&gt; <span class="hljs-string">"The head of the list is the string "</span> <span class="hljs-operator">++</span> string_of_int(a)
   };
 </code></pre>
 <p>Um auf ein beliebiges Listenelement zuzugreifen, verwende <code>List.nth</code>.</p>
@@ -109,18 +109,18 @@ let anotherList = [0, ...myList];
 <li>eine feste Größe in nativer Umgebung haben (mit flexiblen Größen in JavaScript)</li>
 </ul>
 <p>Du würdest sie mit <code>[|</code> und <code>|]</code> umgeben.</p>
-<pre><code class="hljs css language-reason">let myArray = [|&quot;hello&quot;, &quot;world&quot;, &quot;how are you&quot;|];
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> myArray = <span class="hljs-literal">[|</span><span class="hljs-string">"hello"</span>, <span class="hljs-string">"world"</span>, <span class="hljs-string">"how are you"</span><span class="hljs-literal">|]</span>;
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="verwendung-1"></a><a href="#verwendung-1" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Verwendung</h3>
 <p>Die Module <a href="/api/Array.html">Array</a> und <a href="/api/ArrayLabels.html">ArrayLabel</a> der Standardbibliothek. Für die JS-Kompilierung hast du auch die bekannte API <a href="https://bucklescript.github.io/bucklescript/api/Js.Array.html">Js.Array</a>.</p>
 <p>Zugriff &amp; Änderungen mit Arrays geht so:</p>
-<pre><code class="hljs css language-reason">let myArray: array(string) = [|&quot;hello&quot;, &quot;world&quot;, &quot;how are you&quot;|];
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> myArray: array(string) = <span class="hljs-literal">[|</span><span class="hljs-string">"hello"</span>, <span class="hljs-string">"world"</span>, <span class="hljs-string">"how are you"</span><span class="hljs-literal">|]</span>;
 
-let firstItem = myArray[0]; /* &quot;hello&quot; */
+<span class="hljs-keyword">let</span> firstItem = myArray<span class="hljs-literal">[</span><span class="hljs-number">0</span><span class="hljs-literal">]</span>; <span class="hljs-comment">/* "hello" */</span>
 
-myArray[0] = &quot;hey&quot;;
+myArray<span class="hljs-literal">[</span><span class="hljs-number">0</span><span class="hljs-literal">]</span> = <span class="hljs-string">"hey"</span>;
 
-/* now [|&quot;hey&quot;, &quot;world&quot;, &quot;how are you&quot;|] */
+<span class="hljs-comment">/* now [|"hey", "world", "how are you"|] */</span>
 </code></pre>
 <p>Obiger Zugriff und Änderung sind bloß syntaktischer Zucker für <code>Array.get</code> bzw. <code>Array.set</code>.</p>
 <h3><a class="anchor" aria-hidden="true" id="tips-tricks-1"></a><a href="#tips-tricks-1" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Tips &amp; Tricks</h3>

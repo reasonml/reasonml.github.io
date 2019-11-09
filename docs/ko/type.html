@@ -70,24 +70,24 @@
 <p>이 섹션에선 타입 문법을 간단히 소개함으로써 이후의 섹션을 헷갈림 없이 나아갈 수 있도록 합니다. 타입에 대한 더 심층적인 주제는 <a href="/docs/ko/more-on-type">More On Type</a> 섹션에서 볼 수 있습니다.</p>
 <h2><a class="anchor" aria-hidden="true" id="명시"></a><a href="#명시" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>명시</h2>
 <p>이 let 바인딩은 명시적 타입을 포함하고 있지 않습니다.</p>
-<pre><code class="hljs css language-reason">let score = 10;
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> score = <span class="hljs-number">10</span>;
 </code></pre>
 <p>Reason은 <code>score</code>가 <code>10</code>이라는 값을 바탕으로 타입이 <code>int</code>라는 것을 압니다. 이것은 <strong>추론</strong>이라고 불립니다.</p>
 <p>하지만 타입은 명시적으로도 작성될 수 있습니다:</p>
-<pre><code class="hljs css language-reason">let score: int = 10;
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> score: int = <span class="hljs-number">10</span>;
 </code></pre>
 <p>또 당신은 표현식을 괄호 속에 감싸고 명시를 할 수도 있습니다:</p>
-<pre><code class="hljs css language-reason">let myInt = 5;
-let myInt: int = 5;
-let myInt = (5: int) + (4: int);
-let add = (x: int, y: int) : int =&gt; x + y;
-let drawCircle = (~radius as r: int) : unit =&gt; ...;
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> myInt = <span class="hljs-number">5</span>;
+<span class="hljs-keyword">let</span> myInt: int = <span class="hljs-number">5</span>;
+<span class="hljs-keyword">let</span> myInt = (<span class="hljs-number">5</span>: int) <span class="hljs-operator">+</span> (<span class="hljs-number">4</span>: int);
+<span class="hljs-keyword">let</span> add = (x: int, y: int) : int =&gt; x <span class="hljs-operator">+</span> y;
+<span class="hljs-keyword">let</span> drawCircle = (~radius <span class="hljs-keyword">as</span> r: int) : unit =&gt; <span class="hljs-operator">...</span>;
 </code></pre>
 <p>참고: 마지막 줄에서, <code>(~radius as r: int)</code>는 이름 있는 인자입니다. 이에 대해 더 구체적인 설명은 <a href="/docs/ko/function">이 곳</a>에 있습니다.</p>
 <h2><a class="anchor" aria-hidden="true" id="별칭"></a><a href="#별칭" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>별칭</h2>
 <p>당신은 어떤 타입을 다른 이름으로 참조할 수 있습니다. 그들은 동일합니다:</p>
-<pre><code class="hljs css language-reason">type scoreType = int;
-let x: scoreType = 10;
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> scoreType = int;
+<span class="hljs-keyword">let</span> x: scoreType = <span class="hljs-number">10</span>;
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" id="디자인-결정"></a><a href="#디자인-결정" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>디자인 결정</h2>
 <p>Reason은 타입 시스템이 수십년간 발전해온 OCaml을 기반으로 합니다. 다음과 같은 강점이 존재합니다:</p>

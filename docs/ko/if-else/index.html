@@ -67,45 +67,45 @@
               }
             });
         </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://crowdin.com/project/reason/ko" target="_blank" rel="noreferrer noopener">Translate</a><h1 class="postHeaderTitle">If-Else</h1></header><article><div><span><p>Reason의 <code>if</code>는 식입니다, if는 몸통의 요소에 의해 평가됩니다:</p>
-<pre><code class="hljs css language-reason">let message = if (isMorning) {
-  &quot;Good morning!&quot;
-} else {
-  &quot;Hello!&quot;
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> message = <span class="hljs-keyword">if</span> (isMorning) {
+  <span class="hljs-string">"Good morning!"</span>
+} <span class="hljs-keyword">else</span> {
+  <span class="hljs-string">"Hello!"</span>
 };
 </code></pre>
 <p><strong>주의</strong> <code>if-else</code> 식이 마지막에 <code>else</code> 로 끝나지 않을 경우 암시적으로 <code>()</code>를 반환합니다.</p>
-<pre><code class="hljs css language-reason">if (showMenu) {
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">if</span> (showMenu) {
   displayMenu()
 };
 </code></pre>
 <p>는 기본적으로 다음과 같습니다.</p>
-<pre><code class="hljs css language-reason">if (showMenu) {
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">if</span> (showMenu) {
   displayMenu()
-} else {
+} <span class="hljs-keyword">else</span> {
   ()
 };
 </code></pre>
 <p>예상하신대로 <code>displayMenu()</code>는 unit을 반환합니다.</p>
 <p>그걸 확인하는 다른 방법이 있습니다. 아래 코드는 확실히 잘못되었죠.</p>
-<pre><code class="hljs css language-reason">let result = if (showMenu) {
-  1 + 2
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> result = <span class="hljs-keyword">if</span> (showMenu) {
+  <span class="hljs-number">1</span> <span class="hljs-operator">+</span> <span class="hljs-number">2</span>
 };
 </code></pre>
 <p>이 식은 타입 오류를 냅니다. 암시적으로 존재하던 <code>else</code> 브랜치는 <code>unit</code>을 반환하므로 <code>if</code> 브랜치가 반환하는 <code>int</code>와 타입이 다르기 때문입니다. 이건 직관적으로 이해가 됩니다. 만약 <code>showMenu</code>가 <code>false</code>라면 <code>result</code>에는 대체 무슨 값이 들어가겠습니까?</p>
 <p>또 Reason에는 삼항식이라는 문법적 설탕이 있습니다.</p>
-<pre><code class="hljs css language-reason">let message = isMorning ? &quot;Good morning!&quot; : &quot;Hello!&quot;;
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> message = isMorning ? <span class="hljs-string">"Good morning!"</span> : <span class="hljs-string">"Hello!"</span>;
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" id="사용"></a><a href="#사용" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>사용</h2>
 <p>다른 언어에 비해 Reason에서 <strong><code>if-else</code>와 삼항식은 매우 적게</strong>쓰입니다. 왜냐하면 예전에 쓰던 조건문은 <a href="/docs/ko/pattern-matching">패턴 매칭</a>으로 처리할 수 있을 거니까요. 단 두 가지의 경우만 있을 때만 <code>if-else</code>를 선택하세요.</p>
 <h2><a class="anchor" aria-hidden="true" id="디자인-결정"></a><a href="#디자인-결정" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>디자인 결정</h2>
 <p>Reason의 삼항식은 그냥 <code>bool</code> variant와 switch의 문법적 설탕입니다.</p>
-<pre><code class="hljs css language-reason">switch (isMorning) {
-| true =&gt; &quot;Good morning!&quot;
-| false =&gt; &quot;Hello!&quot;
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">switch</span> (isMorning) {
+| <span class="hljs-literal">true</span> =&gt; <span class="hljs-string">"Good morning!"</span>
+| <span class="hljs-literal">false</span> =&gt; <span class="hljs-string">"Hello!"</span>
 }
 </code></pre>
 <p><a href="/docs/ko/extra-goodies#refmt"><code>refmt</code></a>를 돌리면, 아래 코드가 나올 겁니다.</p>
-<pre><code class="hljs css language-reason">isMorning ? &quot;Good morning!&quot; : &quot;Hello!&quot;;
+<pre><code class="hljs css language-reason">isMorning ? <span class="hljs-string">"Good morning!"</span> : <span class="hljs-string">"Hello!"</span>;
 </code></pre>
 <p>흥미롭나요? 여기, <code>refmt</code>에 관한 <a href="https://medium.com/@chenglou/cool-things-reason-formatter-does-9e1f79e25a82">블로그 게시물</a>이 있습니다.</p>
 </span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/ko/function"><span class="arrow-prev">← </span><span>함수</span></a><a class="docs-next button" href="/docs/ko/pipe-first"><span>Pipe First</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#사용">사용</a></li><li><a href="#디자인-결정">디자인 결정</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.min.js"></script><script>window.foo = new Pjax({

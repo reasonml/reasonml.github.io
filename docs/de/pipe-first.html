@@ -72,24 +72,24 @@
 </code></pre>
 <p>This is slightly hard to read, since you need to read the code from the innermost part, to the outer parts. Use Pipe First to streamline it</p>
 <pre><code class="hljs css language-reason">person
-  -&gt;parseData
-  -&gt;getAge
-  -&gt;validateAge
+  <span class="hljs-operator">-&gt;</span>parseData
+  <span class="hljs-operator">-&gt;</span>getAge
+  <span class="hljs-operator">-&gt;</span>validateAge
 </code></pre>
 <p>Basically, <code>parseData(person)</code> is transformed into <code>person-&gt;parseData</code>, and <code>getAge(person-&gt;parseData)</code> is transformed into <code>person-&gt;parseData-&gt;getAge</code>, etc.</p>
 <p><strong>This works when the function takes more than one argument too</strong>.</p>
 <pre><code class="hljs css language-reason">a(one, two, three)
 </code></pre>
 <p>is the same as</p>
-<pre><code class="hljs css language-reason">one-&gt;a(two, three)
+<pre><code class="hljs css language-reason">one<span class="hljs-operator">-&gt;</span>a(two, three)
 </code></pre>
 <p>This works with labeled arguments too.</p>
 <h3><a class="anchor" aria-hidden="true" id="tips-tricks"></a><a href="#tips-tricks" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Tips &amp; Tricks</h3>
 <p>Try not to abuse pipes; they're a mean to an end. Newcomers sometimes shape a library's API to take advantage of the pipe. This is rather backward.</p>
 <p>Conventionally, we don't turn the innermost layer of function call into a pipe. So the above example would usually be written as:</p>
 <pre><code class="hljs css language-reason">parseData(person)
-  -&gt;getAge
-  -&gt;validateAge
+  <span class="hljs-operator">-&gt;</span>getAge
+  <span class="hljs-operator">-&gt;</span>validateAge
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" id="js-method-chaining"></a><a href="#js-method-chaining" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>JS Method Chaining</h2>
 <p><em>This section requires understanding of <a href="https://bucklescript.github.io/docs/en/function#object-method">Bucklescript's binding API</a></em>.</p>
@@ -101,51 +101,51 @@ asyncRequest()
   .send();
 </code></pre>
 <p>Assuming we don't need the chaining behavior above, we'd bind to each case this using <code>bs.send</code> from the previous section:</p>
-<pre><code class="hljs css language-reason">[@bs.send] external map : (array('a), 'a =&gt; 'b) =&gt; array('b) = &quot;map&quot;;
-[@bs.send] external filter : (array('a), 'a =&gt; 'b) =&gt; array('b) = &quot;filter&quot;;
+<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.send]</span> <span class="hljs-keyword">external</span> map : (array('a), 'a =&gt; 'b) =&gt; array('b) = <span class="hljs-string">"map"</span>;
+<span class="hljs-attribute">[@bs.send]</span> <span class="hljs-keyword">external</span> filter : (array('a), 'a =&gt; 'b) =&gt; array('b) = <span class="hljs-string">"filter"</span>;
 
-type request;
-external asyncRequest: unit =&gt; request = &quot;asyncRequest&quot;;
-[@bs.send] external setWaitDuration: (request, int) =&gt; request = &quot;setWaitDuration&quot;;
-[@bs.send] external send: request =&gt; unit = &quot;send&quot;;
+<span class="hljs-keyword">type</span> request;
+<span class="hljs-keyword">external</span> asyncRequest: unit =&gt; request = <span class="hljs-string">"asyncRequest"</span>;
+<span class="hljs-attribute">[@bs.send]</span> <span class="hljs-keyword">external</span> setWaitDuration: (request, int) =&gt; request = <span class="hljs-string">"setWaitDuration"</span>;
+<span class="hljs-attribute">[@bs.send]</span> <span class="hljs-keyword">external</span> send: request =&gt; unit = <span class="hljs-string">"send"</span>;
 </code></pre>
 <p>You'd use them like this:</p>
-<pre><code class="hljs css language-reason">let result = filter(map([|1, 2, 3|], a =&gt; a + 1), a =&gt; a mod 2 == 0);
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> result = filter(map(<span class="hljs-literal">[|</span><span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span><span class="hljs-literal">|]</span>, a =&gt; a <span class="hljs-operator">+</span> <span class="hljs-number">1</span>), a =&gt; a mod <span class="hljs-number">2</span> <span class="hljs-operator">==</span> <span class="hljs-number">0</span>);
 
-send(setWaitDuration(asyncRequest(), 4000));
+send(setWaitDuration(asyncRequest(), <span class="hljs-number">4000</span>));
 </code></pre>
 <p>This looks much worse than the JS counterpart! Now we need to read the actual logic inside-out. We also cannot use the <code>|&gt;</code> operator here, since the object comes <em>first</em> in the binding. But <code>-&gt;</code> works!</p>
-<pre><code class="hljs css language-reason">let result = [|1, 2, 3|]
-  -&gt;map(a =&gt; a + 1)
-  -&gt;filter(a =&gt; a mod 2 === 0);
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> result = <span class="hljs-literal">[|</span><span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span><span class="hljs-literal">|]</span>
+  <span class="hljs-operator">-&gt;</span>map(a =&gt; a <span class="hljs-operator">+</span> <span class="hljs-number">1</span>)
+  <span class="hljs-operator">-&gt;</span>filter(a =&gt; a mod <span class="hljs-number">2</span> <span class="hljs-operator">===</span> <span class="hljs-number">0</span>);
 
-asyncRequest()-&gt;setWaitDuration(4000)-&gt;send;
+asyncRequest()<span class="hljs-operator">-&gt;</span>setWaitDuration(<span class="hljs-number">4000</span>)<span class="hljs-operator">-&gt;</span>send;
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" id="pipe-into-variants"></a><a href="#pipe-into-variants" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Pipe Into Variants</h2>
 <p>A variant's constructors, like <code>Some</code> or <code>Student</code>, look like functions, but unfortunately aren't, due to historical reasons. Sometime, it'd still be nice to be able to use them as functions. Pipe First takes the occasion to enable that for you!</p>
-<pre><code class="hljs css language-reason">let result = name-&gt;preprocess-&gt;Some
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> result = name<span class="hljs-operator">-&gt;</span>preprocess<span class="hljs-operator">-&gt;</span><span class="hljs-constructor">Some</span>
 </code></pre>
 <p>We turn this into:</p>
-<pre><code class="hljs css language-reason">let result = Some(preprocess(name))
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> result = <span class="hljs-constructor">Some</span>(preprocess(name))
 </code></pre>
 <p><strong>Note</strong> that using a variant constructor as a function wouldn't work anywhere else.</p>
 <h2><a class="anchor" aria-hidden="true" id="pipe-placeholders"></a><a href="#pipe-placeholders" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Pipe Placeholders</h2>
 <p>A placeholder is written as an underscore and it tells Reason that you want to fill in an argument of a function later. These two have equivalent meaning:</p>
-<pre><code class="hljs css language-reason">let addTo7 = (x) =&gt; add3(3, x, 4);
-let addTo7 = add3(3, _, 4);
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> addTo7 = (x) =&gt; add3(<span class="hljs-number">3</span>, x, <span class="hljs-number">4</span>);
+<span class="hljs-keyword">let</span> addTo7 = add3(<span class="hljs-number">3</span>, _, <span class="hljs-number">4</span>);
 </code></pre>
 <p>Sometimes you don't want to pipe the value you have into the first position. In these cases you can mark a placeholder value to show which argument you would like to pipe into.</p>
 <p>Let's say you have a function <code>namePerson</code>, which takes a <code>person</code> then a <code>name</code> argument. If you are transforming a person then pipe will work as-is:</p>
-<pre><code class="hljs css language-reason">makePerson(~age=47, ())
-  -&gt;namePerson(&quot;Jane&quot;);
+<pre><code class="hljs css language-reason">makePerson(~age=<span class="hljs-number">47</span>, ())
+  <span class="hljs-operator">-&gt;</span>namePerson(<span class="hljs-string">"Jane"</span>);
 </code></pre>
 <p>If you have a name that you want to apply to a person object, you can use a placeholder:</p>
 <pre><code class="hljs css language-reason">getName(input)
-  -&gt;namePerson(personDetails, _);
+  <span class="hljs-operator">-&gt;</span>namePerson(personDetails, _);
 </code></pre>
 <p>This allows you to pipe into any positional argument. It also works for named arguments:</p>
 <pre><code class="hljs css language-reason">getName(input)
-  -&gt;namePerson(~person=personDetails, ~name=_);
+  <span class="hljs-operator">-&gt;</span>namePerson(~person=personDetails, ~name=_);
 </code></pre>
 </span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/de/if-else"><span class="arrow-prev">← </span><span>If-Else</span></a><a class="docs-next button" href="/docs/de/more-on-type"><span>More on Type</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#js-method-chaining">JS Method Chaining</a></li><li><a href="#pipe-into-variants">Pipe Into Variants</a></li><li><a href="#pipe-placeholders">Pipe Placeholders</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.min.js"></script><script>window.foo = new Pjax({
           areas: [

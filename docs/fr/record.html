@@ -76,60 +76,60 @@
 </ul>
 <h2><a class="anchor" aria-hidden="true" id="utilisation"></a><a href="#utilisation" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Utilisation</h2>
 <p>Type (obligatoire) :</p>
-<pre><code class="hljs css language-reason">type person = {
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> person = {
   age: int,
   name: string
 };
 </code></pre>
 <p>Valeur (ceci va être déduit comme étant du type <code>person</code>) :</p>
-<pre><code class="hljs css language-reason">let me = {
-  age: 5,
-  name: &quot;Big Reason&quot;
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> me = {
+  age: <span class="hljs-number">5</span>,
+  name: <span class="hljs-string">"Big Reason"</span>
 };
 </code></pre>
 <p>Accès (la syntaxe habituelle avec un point) :</p>
-<pre><code class="hljs css language-reason">let name = me.name;
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> name = me.name;
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="les-records-necessitent-une-definition-de-type-explicite"></a><a href="#les-records-necessitent-une-definition-de-type-explicite" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Les records nécessitent une définition de type explicite</h3>
 <p>Si vous écrivez uniquement <code>{age: 5, name: &quot;Baby Reason&quot;}</code> sans une déclaration de type explicite quelque part plus haut, le système de types vous renverra une erreur. Si la défintion du type réside dans un autre fichier, vous devez explicitement indiquer de quel fichier il s'agit :</p>
-<pre><code class="hljs css language-reason">/* School.re */
+<pre><code class="hljs css language-reason"><span class="hljs-comment">/* School.re */</span>
 
-type person = {age: int, name: string};
+<span class="hljs-keyword">type</span> person = {age: int, name: string};
 </code></pre>
-<pre><code class="hljs css language-reason">/* example.re */
+<pre><code class="hljs css language-reason"><span class="hljs-comment">/* example.re */</span>
 
-let me: School.person = {age: 20, name: &quot;Big Reason&quot;};
-/* or */
-let me = School.{age: 20, name: &quot;Big Reason&quot;};
-/* or */
-let me = {School.age: 20, name: &quot;Big Reason&quot;};
+<span class="hljs-keyword">let</span> me: <span class="hljs-module-identifier">School</span>.person = {age: <span class="hljs-number">20</span>, name: <span class="hljs-string">"Big Reason"</span>};
+<span class="hljs-comment">/* or */</span>
+<span class="hljs-keyword">let</span> me = <span class="hljs-module-identifier">School</span>.{age: <span class="hljs-number">20</span>, name: <span class="hljs-string">"Big Reason"</span>};
+<span class="hljs-comment">/* or */</span>
+<span class="hljs-keyword">let</span> me = {<span class="hljs-module-identifier">School</span>.age: <span class="hljs-number">20</span>, name: <span class="hljs-string">"Big Reason"</span>};
 </code></pre>
 <p>Chacune de ces 3 syntaxes indique que &quot;la définition de ce record se trouve dans le fichier School&quot;. La première, l'annotation de type normale, est à préférer.</p>
 <h3><a class="anchor" aria-hidden="true" id="mise-a-jour-immuable"></a><a href="#mise-a-jour-immuable" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Mise à jour immuable</h3>
 <p>De nouveaux records peuvent être créés à partir d'anciens records avec le spread operator <code>...</code>. Le record original n'est pas modifié.</p>
-<pre><code class="hljs css language-reason">let meNextYear = {...me, age: me.age + 1};
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> meNextYear = {<span class="hljs-operator">...</span>me, age: me.age <span class="hljs-operator">+</span> <span class="hljs-number">1</span>};
 </code></pre>
 <p>Cette mise à jour est très efficace ! Essayez-en quelques-unes dans notre <a href="/try.html">éditeur</a> pour voir comment les records sont compilés.</p>
 <p><strong>Note</strong> : le spread ne peut pas ajouter de nouveaux champs, car la forme d'un record est définie par son type.</p>
 <h3><a class="anchor" aria-hidden="true" id="mise-a-jour-muable"></a><a href="#mise-a-jour-muable" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Mise à jour muable</h3>
 <p>Les champs des records peuvent éventuellement être mutables. Cela vous permet de mettre à jour ces champs avec l'opérateur <code>=</code>.</p>
-<pre><code class="hljs css language-reason">type person = {
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> person = {
   name: string,
-  mutable age: int
+  <span class="hljs-keyword">mutable</span> age: int
 };
-let baby = {name: &quot;Baby Reason&quot;, age: 5};
-baby.age = baby.age + 1; /* altère `baby`. Joyeux anniversaire ! */
+<span class="hljs-keyword">let</span> baby = {name: <span class="hljs-string">"Baby Reason"</span>, age: <span class="hljs-number">5</span>};
+baby.age = baby.age <span class="hljs-operator">+</span> <span class="hljs-number">1</span>; <span class="hljs-comment">/* altère `baby`. Joyeux anniversaire ! */</span>
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" id="syntaxe-du-shorthand"></a><a href="#syntaxe-du-shorthand" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Syntaxe du shorthand</h2>
 <p>Pour réduire la redondance, nous fournissons le <strong>punning</strong> pour les types et les valeurs d'un record. Le punning fait référence à la syntaxe que vous pouvez utiliser lorsque le nom d'un champ correspond au nom de sa valeur/type :</p>
-<pre><code class="hljs css language-reason">type horsePower = {power: int, metric: bool};
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> horsePower = {power: int, metric: bool};
 
-let metric = true;
-let someHorsePower = {power: 10, metric};
-/* similaire à la valeur {power: 10, metric: metric}; */
+<span class="hljs-keyword">let</span> metric = <span class="hljs-literal">true</span>;
+<span class="hljs-keyword">let</span> someHorsePower = {power: <span class="hljs-number">10</span>, metric};
+<span class="hljs-comment">/* similaire à la valeur {power: 10, metric: metric}; */</span>
 
-type car = {name: string, horsePower};
-/* similaire au type {name: string, horsePower: horsePower}; */
+<span class="hljs-keyword">type</span> car = {name: string, horsePower};
+<span class="hljs-comment">/* similaire au type {name: string, horsePower: horsePower}; */</span>
 </code></pre>
 <p><strong>Notez qu'il n'y a pas de punning pour les records avec un seul champ !</strong> <code>{foo}</code> ne fait pas ce à quoi on s'attendrait de prime abord (il s'agit d'un bloc qui retourne la valeur <code>foo</code>).</p>
 <h2><a class="anchor" aria-hidden="true" id="conseils-astuces"></a><a href="#conseils-astuces" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Conseils &amp; astuces</h2>
@@ -137,14 +137,14 @@ type car = {name: string, horsePower};
 <p>Si vous travaillez avec JavaScript, la syntaxe et les opérations de records devraient être familières. Vous pourriez être tenté(e) de travaillez avec JavaScript en convertissant un objet JavaScript en un record et vice versa. C'est bien, mais nous avons <strong>une bien meilleure solution qui ne présente aucun frais de conversion</strong> ! Voir <a href="https://bucklescript.github.io/docs/en/object.html#record-mode">ici</a></p>
 <h3><a class="anchor" aria-hidden="true" id="les-types-de-record-sont-trouves-par-nom-de-champ"></a><a href="#les-types-de-record-sont-trouves-par-nom-de-champ" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Les types de record sont trouvés par nom de champ</h3>
 <p>Avec les records, vous <strong>ne pouvez pas</strong> dire &quot;J'aimerais que cette fonction prenne n'importe quel type de record, tant qu'il a le champ <code>age</code>&quot;. Le code ci-dessous <em>fonctionne</em>, mais pas comme espéré:</p>
-<pre><code class="hljs css language-reason">type person = {age: int, name: string};
-type monster = {age: int, hasTentacles: bool};
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> person = {age: int, name: string};
+<span class="hljs-keyword">type</span> monster = {age: int, hasTentacles: bool};
 
-let getAge = (entity) =&gt; entity.age;
+<span class="hljs-keyword">let</span> getAge = (entity) =&gt; entity.age;
 </code></pre>
 <p>La fonction de la dernière ligne va inférer que le paramètre <code>entity</code> doit être de type <code>monster</code>. La dernière ligne du code suivant échoue :</p>
-<pre><code class="hljs css language-reason">let kraken = {age: 9999, hasTentacles: true};
-let me = {age: 5, name: &quot;Baby Reason&quot;};
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> kraken = {age: <span class="hljs-number">9999</span>, hasTentacles: <span class="hljs-literal">true</span>};
+<span class="hljs-keyword">let</span> me = {age: <span class="hljs-number">5</span>, name: <span class="hljs-string">"Baby Reason"</span>};
 
 getAge(kraken);
 getAge(me);

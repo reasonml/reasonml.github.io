@@ -70,18 +70,18 @@
 <p><strong>とうとうやってきました</strong>！パターンマッチングはこの言語の<em>ザ</em>・ベスト機能のひとつです。これは構造化代入に似ていますが、型システムの恩恵をより受けられます。</p>
 <h2><a class="anchor" aria-hidden="true" id="使い方"></a><a href="#使い方" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>使い方</h2>
 <p>ヴァリアントを考えてみましょう。</p>
-<pre><code class="hljs css language-reason">type payload =
-  | BadResult(int)
-  | GoodResult(string)
-  | NoResult;
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> payload =
+  | <span class="hljs-constructor">BadResult</span>(int)
+  | <span class="hljs-constructor">GoodResult</span>(string)
+  | <span class="hljs-constructor">NoResult</span>;
 </code></pre>
 <p><code>switch</code> 式の中で、それを「構造分解」することができます。</p>
-<pre><code class="hljs css language-reason">let data = GoodResult(&quot;Product shipped!&quot;);
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> data = <span class="hljs-constructor">GoodResult</span>(<span class="hljs-string">"Product shipped!"</span>);
 
-let message =
-  switch (data) {
-  | GoodResult(theMessage) =&gt; &quot;Success! &quot; ++ theMessage
-  | BadResult(errorCode) =&gt; &quot;Something's wrong. The error code is: &quot; ++ string_of_int(errorCode)
+<span class="hljs-keyword">let</span> message =
+  <span class="hljs-keyword">switch</span> (data) {
+  | <span class="hljs-constructor">GoodResult</span>(theMessage) =&gt; <span class="hljs-string">"Success! "</span> <span class="hljs-operator">++</span> theMessage
+  | <span class="hljs-constructor">BadResult</span>(errorCode) =&gt; <span class="hljs-string">"Something's wrong. The error code is: "</span> <span class="hljs-operator">++</span> string_of_int(errorCode)
   };
 </code></pre>
 <p>それぞれの異なるケースを処理している間、<code>data</code> をどのように構造分解したか注目してください。 上記の <code>switch</code> はコンパイラの警告を出力するでしょう。</p>
@@ -90,118 +90,118 @@ Here is an example of a value that is not matched:
 NoResult
 </code></pre>
 <p>すごくないですか？ 型システムはあなたのデータの形をマッチングしつつ、未処理のケースについて警告しました。 この<strong>条件的</strong>側面は、単純な構造化代入ではなく、パターンマッチングを行うものです。 「<strong>これならこれ</strong>」といった体のほとんどのデータ構造で動きます。</p>
-<pre><code class="hljs css language-reason">switch (myList) {
-| [] =&gt; print_endline(&quot;Empty list&quot;)
-| [a, ...theRest] =&gt; print_endline(&quot;list with the head value &quot; ++ a)
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">switch</span> (myList) {
+| <span class="hljs-literal">[</span><span class="hljs-literal">]</span> =&gt; print_endline(<span class="hljs-string">"Empty list"</span>)
+| <span class="hljs-literal">[</span>a, <span class="hljs-operator">...</span>theRest<span class="hljs-literal">]</span> =&gt; print_endline(<span class="hljs-string">"list with the head value "</span> <span class="hljs-operator">++</span> a)
 };
 
-switch (myArray) {
-| [|1, 2|] =&gt; print_endline(&quot;This is an array with item 1 and 2&quot;)
-| [||] =&gt; print_endline(&quot;This array has no element&quot;)
-| _ =&gt; print_endline(&quot;This is an array&quot;)
+<span class="hljs-keyword">switch</span> (myArray) {
+| <span class="hljs-literal">[|</span><span class="hljs-number">1</span>, <span class="hljs-number">2</span><span class="hljs-literal">|]</span> =&gt; print_endline(<span class="hljs-string">"This is an array with item 1 and 2"</span>)
+| <span class="hljs-literal">[|</span><span class="hljs-literal">|]</span> =&gt; print_endline(<span class="hljs-string">"This array has no element"</span>)
+| _ =&gt; print_endline(<span class="hljs-string">"This is an array"</span>)
 };
 </code></pre>
 <p>最後の <code>_</code> のケースは、マッチしないすべて条件をその分岐に行くようにするための特別なフォールスルーケースです。</p>
 <p>string、int、その他も switch できます。同じ結果に行きつく多くのパターンを持つこともできます！</p>
-<pre><code class="hljs css language-reason">let reply =
-  switch (message) {
-  | &quot;Reason's pretty cool&quot; =&gt; &quot;Yep&quot;
-  | &quot;good night&quot; =&gt; &quot;See ya!&quot;
-  | &quot;hello&quot; | &quot;hi&quot; | &quot;heya&quot; | &quot;hey&quot; =&gt; &quot;hello to you too!&quot;
-  | _ =&gt; &quot;Nice to meet you!&quot;
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> reply =
+  <span class="hljs-keyword">switch</span> (message) {
+  | <span class="hljs-string">"Reason's pretty cool"</span> =&gt; <span class="hljs-string">"Yep"</span>
+  | <span class="hljs-string">"good night"</span> =&gt; <span class="hljs-string">"See ya!"</span>
+  | <span class="hljs-string">"hello"</span> | <span class="hljs-string">"hi"</span> | <span class="hljs-string">"heya"</span> | <span class="hljs-string">"hey"</span> =&gt; <span class="hljs-string">"hello to you too!"</span>
+  | _ =&gt; <span class="hljs-string">"Nice to meet you!"</span>
   };
 </code></pre>
 <p>他のデータ構造と組み合わせることで、パターンマッチングは非常に簡潔で、コンパイラによって検証された、パフォーマンスの高いコードを作り出すことができます。</p>
-<pre><code class="hljs css language-reason">let message =
-  switch (data) {
-  | GoodResult(theMessage) =&gt; &quot;Success! &quot; ++ theMessage
-  | BadResult(0 | 1 | 5) =&gt; &quot;Something's wrong. It's a server side problem.&quot;
-  | BadResult(errorCode) =&gt; &quot;Unknown error occurred. Code: &quot; ++ string_of_int(errorCode)
-  | NoResult =&gt; &quot;Things look fine&quot;
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> message =
+  <span class="hljs-keyword">switch</span> (data) {
+  | <span class="hljs-constructor">GoodResult</span>(theMessage) =&gt; <span class="hljs-string">"Success! "</span> <span class="hljs-operator">++</span> theMessage
+  | <span class="hljs-constructor">BadResult</span>(<span class="hljs-number">0</span> | <span class="hljs-number">1</span> | <span class="hljs-number">5</span>) =&gt; <span class="hljs-string">"Something's wrong. It's a server side problem."</span>
+  | <span class="hljs-constructor">BadResult</span>(errorCode) =&gt; <span class="hljs-string">"Unknown error occurred. Code: "</span> <span class="hljs-operator">++</span> string_of_int(errorCode)
+  | <span class="hljs-constructor">NoResult</span> =&gt; <span class="hljs-string">"Things look fine"</span>
   };
 </code></pre>
 <p><strong>注</strong>: パターンとしてリテラル（つまり具体的な値）のみ渡すことができ、名前や他のものを let 束縛することはできません。下記は期待通りに動作しません。</p>
-<pre><code class="hljs css language-reason">let myMessage = &quot;Hello&quot;;
-switch (greeting) {
-| myMessage =&gt; print_endline(&quot;Hi to you&quot;)
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> myMessage = <span class="hljs-string">"Hello"</span>;
+<span class="hljs-keyword">switch</span> (greeting) {
+| myMessage =&gt; print_endline(<span class="hljs-string">"Hi to you"</span>)
 };
 </code></pre>
 <p>代わりに、上記は期待する結果にはならず、<code>switch</code> のケースの中で、任意の文字列にマッチングして、それに <code>myMessage</code> という名前を束縛することになるでしょう。</p>
 <h3><a class="anchor" aria-hidden="true" id="when-節"></a><a href="#when-節" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>When 節</h3>
 <p>完全なパターンマッチで任意のロジックを本当に使いたいときは、<code>when</code> 節に流すことができます。これは基本的には <code>if</code> のシュガーです。</p>
-<pre><code class="hljs css language-reason">let message =
-  switch (data) {
-  | GoodResult(theMessage) =&gt; ...
-  | BadResult(errorCode) when isServerError(errorCode) =&gt; ...
-  | BadResult(errorCode) =&gt; ... /* otherwise */
-  | NoResult =&gt; ...
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> message =
+  <span class="hljs-keyword">switch</span> (data) {
+  | <span class="hljs-constructor">GoodResult</span>(theMessage) =&gt; <span class="hljs-operator">...</span>
+  | <span class="hljs-constructor">BadResult</span>(errorCode) when isServerError(errorCode) =&gt; <span class="hljs-operator">...</span>
+  | <span class="hljs-constructor">BadResult</span>(errorCode) =&gt; <span class="hljs-operator">...</span> <span class="hljs-comment">/* otherwise */</span>
+  | <span class="hljs-constructor">NoResult</span> =&gt; <span class="hljs-operator">...</span>
   };
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="例外にマッチする"></a><a href="#例外にマッチする" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>例外にマッチする</h3>
 <p>もし関数が例外（後で説明します）をスローするなら、関数は通常に返される値に加えて、<em>それ</em>（例外）にマッチすることもできます。</p>
-<pre><code class="hljs css language-reason">switch (List.find((i) =&gt; i === theItem, myItems)) {
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">switch</span> (<span class="hljs-module-identifier">List</span>.find((i) =&gt; i <span class="hljs-operator">===</span> theItem, myItems)) {
 | item =&gt; print_endline(item)
-| exception Not_found =&gt; print_endline(&quot;No such item found!&quot;)
+| <span class="hljs-keyword">exception</span> <span class="hljs-constructor">Not_found</span> =&gt; print_endline(<span class="hljs-string">"No such item found!"</span>)
 };
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="入れ子パターン"></a><a href="#入れ子パターン" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>入れ子パターン</h3>
 <p>入れ子になった <code>|</code> は意図どおり動作します。</p>
-<pre><code class="hljs css language-reason">switch (student) {
-| {name: &quot;Jane&quot; | &quot;Joe&quot;} =&gt; ...
-| {name: &quot;Bob&quot;, Job: Programmer({fullTime: Yes | Maybe})} =&gt; ...
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">switch</span> (student) {
+| {name: <span class="hljs-string">"Jane"</span> | <span class="hljs-string">"Joe"</span>} =&gt; <span class="hljs-operator">...</span>
+| {name: <span class="hljs-string">"Bob"</span>, <span class="hljs-constructor">Job</span>: <span class="hljs-constructor">Programmer</span>({fullTime: <span class="hljs-constructor">Yes</span> | <span class="hljs-constructor">Maybe</span>})} =&gt; <span class="hljs-operator">...</span>
 };
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="パターンはどこにでも"></a><a href="#パターンはどこにでも" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>パターンはどこにでも</h3>
 <p>パターンは通常の「変数宣言」を書くであろう箇所のどこにでも書けます。</p>
-<pre><code class="hljs css language-reason">type leftOrRight =
-  | Left(int)
-  | Right(int);
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> leftOrRight =
+  | <span class="hljs-constructor">Left</span>(int)
+  | <span class="hljs-constructor">Right</span>(int);
 
-let i = Left(1);
+<span class="hljs-keyword">let</span> i = <span class="hljs-constructor">Left</span>(<span class="hljs-number">1</span>);
 
-/* magic! */
-let Left(v) | Right(v) = i;
+<span class="hljs-comment">/* magic! */</span>
+<span class="hljs-keyword">let</span> <span class="hljs-constructor">Left</span>(v) | <span class="hljs-constructor">Right</span>(v) = i;
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" id="ヒントとコツ"></a><a href="#ヒントとコツ" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>ヒントとコツ</h2>
 <p><strong>可能な限りパターンマッチをフラット化してください</strong>。これは実際にバグの除去装置です。以下で例示します。</p>
 <p>フォールスルーの <code>_</code> ケースを乱用しないでください。 これはコンパイラがあるケースをカバーすること（網羅性チェック）し忘れていると助言してくれることを妨げてしまいます。それはあなたがヴァリアントに新しいケースを追加するリファクタリングの後、特に有用でしょう。 無限の可能性があるパターン（例: string, int など）に対してのみ <code>_</code> を試してください。</p>
 <p>最悪から最高までの一連の例がここにあります。</p>
-<pre><code class="hljs css language-reason">let optionBoolToBool = opt =&gt;
-  if (opt == None) {
-    false;
-  } else if (opt == Some(true)) {
-    true;
-  } else {
-    false;
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> optionBoolToBool = opt =&gt;
+  <span class="hljs-keyword">if</span> (opt <span class="hljs-operator">==</span> <span class="hljs-constructor">None</span>) {
+    <span class="hljs-literal">false</span>;
+  } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (opt <span class="hljs-operator">==</span> <span class="hljs-constructor">Some</span>(<span class="hljs-literal">true</span>)) {
+    <span class="hljs-literal">true</span>;
+  } <span class="hljs-keyword">else</span> {
+    <span class="hljs-literal">false</span>;
   };
 </code></pre>
 <p>今が最悪です =)。パターンマッチングに切り替えてみましょう。</p>
-<pre><code class="hljs css language-reason">let optionBoolToBool = opt =&gt;
-  switch (opt) {
-  | None =&gt; false
-  | Some(a) =&gt; a ? true : false
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> optionBoolToBool = opt =&gt;
+  <span class="hljs-keyword">switch</span> (opt) {
+  | <span class="hljs-constructor">None</span> =&gt; <span class="hljs-literal">false</span>
+  | <span class="hljs-constructor">Some</span>(a) =&gt; a ? <span class="hljs-literal">true</span> : <span class="hljs-literal">false</span>
   };
 </code></pre>
 <p>少しマシですが、まだ入れ子です。パターンマッチングはこうすることを許容します。</p>
-<pre><code class="hljs css language-reason">let optionBoolToBool = opt =&gt;
-  switch (opt) {
-  | None =&gt; false
-  | Some(true) =&gt; true
-  | Some(false) =&gt; false
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> optionBoolToBool = opt =&gt;
+  <span class="hljs-keyword">switch</span> (opt) {
+  | <span class="hljs-constructor">None</span> =&gt; <span class="hljs-literal">false</span>
+  | <span class="hljs-constructor">Some</span>(<span class="hljs-literal">true</span>) =&gt; <span class="hljs-literal">true</span>
+  | <span class="hljs-constructor">Some</span>(<span class="hljs-literal">false</span>) =&gt; <span class="hljs-literal">false</span>
   };
 </code></pre>
 <p>かなり線形な見た目です！今、あなたはこうしたいと駆られているかもしれません。</p>
-<pre><code class="hljs css language-reason">let optionBoolToBool = opt =&gt;
-  switch (opt) {
-  | Some(true) =&gt; true
-  | _ =&gt; false
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> optionBoolToBool = opt =&gt;
+  <span class="hljs-keyword">switch</span> (opt) {
+  | <span class="hljs-constructor">Some</span>(<span class="hljs-literal">true</span>) =&gt; <span class="hljs-literal">true</span>
+  | _ =&gt; <span class="hljs-literal">false</span>
   };
 </code></pre>
 <p>Which is much more concise, but kills the exhaustiveness check mentioned above; refrain from using that. This is the best:</p>
-<pre><code class="hljs css language-reason">let optionBoolToBool = opt =&gt;
-  switch (opt) {
-  | Some(trueOrFalse) =&gt; trueOrFalse
-  | None =&gt; false
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> optionBoolToBool = opt =&gt;
+  <span class="hljs-keyword">switch</span> (opt) {
+  | <span class="hljs-constructor">Some</span>(trueOrFalse) =&gt; trueOrFalse
+  | <span class="hljs-constructor">None</span> =&gt; <span class="hljs-literal">false</span>
   };
 </code></pre>
 <p>この時点でこのコードで間違いを犯すのはかなり難しいです！ 多くの分岐で if-else を使用したい時はいつでも、代わりにパターンマッチングを選びます。 それはより簡潔で<a href="/docs/ja/variant#design-decisions">高性能</a>でもあります。</p>
@@ -210,13 +210,13 @@ let Left(v) | Right(v) = i;
 <p>悪名高き <a href="https://en.wikipedia.org/wiki/Fizz_buzz#Programming_interviews">fizzbuzz プログラム</a>は、いくつかの人々を妙に躓かせます。どこにもないエレガントな探索でいくつかの条件分岐を簡潔化/統一化すること望むプログラマーを麻痺させる性質があるためです。 うまくいけば通常、パターンマッチングの視覚的簡潔性は、総当りの <code>if-else</code> の利点のすべてを享受しつつ、<a href="/try.html?reason=PQKgBAQghgzgpgEzAewHZgBYBcsAcYBcwwATsvDlAMbIJwB0yJA5sAO4CWA1h8AGIcAXoIgBXYQGIA8gGEoAWwA2YEMABQiuFjAAzIYIBG4wWAC8YABQcAlGYB8asGBicsVDJY5h5tMAGYAGjAvHyQAVlsAb0cwAB9LAAYghNtTOzAAIgFhMWEMmPiLJLAAfVT0rP18p0KS5PLM3MFquNL7ZywSDlRmEuQdEu6sK2sYgF8AbjU1HSZPYPQARjAsZDBFhJSwaKcAKRh6RWRmCz1hI2ER0cmgA">決定の麻痺を克服させてくれます</a>。 実際にすべての可能性を明示的に一覧することは間違いはありません。パターンマッチングは妥当な問題解決テクニックとして非常に便利であることが知られている数学の<strong>場合分け</strong>に対応します。</p>
 <p>初めて Reason の <code>switch</code>を使うと、何年も過ちを犯していたのではないかと感じるかもしれません。あなたにとって他の言語が台無しになってしまうかもしれないことに注意してください =)。</p>
 <p>もし大きなリファクタリングをしようとした場合、if-else のロジックが入れ子になっていたら、そのロジックの正しさを維持することは難しいと気がついたかもしれません。 その一方で、パターンマッチング + タプルは2次元表にマッピングされ、各マスは独立して埋められます。 これにより <code>switch</code> にケースを追加する必要がある時はいつでも、他のセルを乱すことなく、そのテーブルセルのみを対象にできます。</p>
-<pre><code class="hljs css language-reason">type animal = Dog | Cat | Bird;
-let result = switch (isBig, myAnimal) {
-| (true, Dog) =&gt; 1
-| (true, Cat) =&gt; 2
-| (true, Bird) =&gt; 3
-| (false, Dog | Cat) =&gt; 4
-| (false, Bird) =&gt; 5
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> animal = <span class="hljs-constructor">Dog</span> | <span class="hljs-constructor">Cat</span> | <span class="hljs-constructor">Bird</span>;
+<span class="hljs-keyword">let</span> result = <span class="hljs-keyword">switch</span> (isBig, myAnimal) {
+| (<span class="hljs-literal">true</span>, <span class="hljs-constructor">Dog</span>) =&gt; <span class="hljs-number">1</span>
+| (<span class="hljs-literal">true</span>, <span class="hljs-constructor">Cat</span>) =&gt; <span class="hljs-number">2</span>
+| (<span class="hljs-literal">true</span>, <span class="hljs-constructor">Bird</span>) =&gt; <span class="hljs-number">3</span>
+| (<span class="hljs-literal">false</span>, <span class="hljs-constructor">Dog</span> | <span class="hljs-constructor">Cat</span>) =&gt; <span class="hljs-number">4</span>
+| (<span class="hljs-literal">false</span>, <span class="hljs-constructor">Bird</span>) =&gt; <span class="hljs-number">5</span>
 };
 </code></pre>
 <table>

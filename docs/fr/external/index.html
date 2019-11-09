@@ -68,10 +68,10 @@
             });
         </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://crowdin.com/project/reason/fr" target="_blank" rel="noreferrer noopener">Translate</a><h1 class="postHeaderTitle">External</h1></header><article><div><span><p>L'<code>external</code>, ou &quot;IFE&quot; (Interface de Fonction Étrangère), ou simplement &quot;interop&quot; (pour &quot;interopérabilité&quot;) est la façon dont Reason communique avec d'autres langages, comme C ou JavaScript.</p>
 <p>Imaginez que vous écrivez un binding let, mais en omettant son contenu et en le typant (obligatoire) :</p>
-<pre><code class="hljs css language-reason">external myCFunction: int =&gt; string = &quot;theCFunction&quot;;
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">external</span> myCFunction: int =&gt; string = <span class="hljs-string">"theCFunction"</span>;
 </code></pre>
-<pre><code class="hljs css language-reason">[@bs.val] external getElementsByClassName: string =&gt; array(Dom.element) =
-  &quot;document.getElementsByClassName&quot;;
+<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.val]</span> <span class="hljs-keyword">external</span> getElementsByClassName: string =&gt; array(<span class="hljs-module-identifier">Dom</span>.element) =
+  <span class="hljs-string">"document.getElementsByClassName"</span>;
 </code></pre>
 <p>(Le code ci-dessus est un external spécifique à <a href="https://bucklescript.github.io/docs/en/intro-to-external.html">BuckleScript</a> qui bind une fonction JavaScript portant le même nom)</p>
 <p><strong>Note</strong> : les <code>external</code>s ne peuvent être qu'au niveau supérieur ou à l'intérieur d'une définition de module. Vous ne pouvez pas les déclarer par exemple dans un corps de fonction.</p>

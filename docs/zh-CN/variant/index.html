@@ -68,67 +68,67 @@
             });
         </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://crowdin.com/project/reason/zh-CN" target="_blank" rel="noreferrer noopener">Translate</a><h1 class="postHeaderTitle">Variant!</h1></header><article><div><span><p>看，Reason 数据结构的王冠明珠！</p>
 <p>多数语言的大部分数据结构是关于“这个<strong>和</strong>那个”。而 variant 允许我们表达“这个<strong>或</strong>那个”。</p>
-<pre><code class="hljs css language-reason">type myResponseVariant =
-  | Yes
-  | No
-  | PrettyMuch;
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> myResponseVariant =
+  | <span class="hljs-constructor">Yes</span>
+  | <span class="hljs-constructor">No</span>
+  | <span class="hljs-constructor">PrettyMuch</span>;
 
-let areYouCrushingIt = Yes;
+<span class="hljs-keyword">let</span> areYouCrushingIt = <span class="hljs-constructor">Yes</span>;
 </code></pre>
 <p><code>Yes</code>，<code>No</code>和<code>PrettyMuch</code>既不是字符串，不是引用，也不是任何其他的特殊数据类型。 它们被称为 “constructors”（或”tag“）。 <code>|</code>符号分隔了每一个 constructor。</p>
 <p><strong>注意</strong>：一个 variant 的 constructors 必须是首字母大写。</p>
 <h2><a class="anchor" aria-hidden="true" id="用法"></a><a href="#用法" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>用法</h2>
 <p>除了 Variant，Reason 中还有一个非常重要的特性，<code>swtich</code> 表达式。</p>
 <p>Reason 中的 <code>switch</code> 看上去很像其他语言中的 <code>switch</code>（或者说一个巨大的<code>if/elseif/elseif</code>）。 它允许你检查一个 variant 的每种可能情况。 要使用它，请枚举该 variant 的每一个 variant 构造函数，每个构造函数之后跟一个 <code>=&gt;</code> 及其对应的表达式。</p>
-<pre><code class="hljs css language-reason">let message =
-  switch (areYouCrushingIt) {
-  | No =&gt; &quot;No worries. Keep going!&quot;
-  | Yes =&gt; &quot;Great!&quot;
-  | PrettyMuch =&gt; &quot;Nice!&quot;
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> message =
+  <span class="hljs-keyword">switch</span> (areYouCrushingIt) {
+  | <span class="hljs-constructor">No</span> =&gt; <span class="hljs-string">"No worries. Keep going!"</span>
+  | <span class="hljs-constructor">Yes</span> =&gt; <span class="hljs-string">"Great!"</span>
+  | <span class="hljs-constructor">PrettyMuch</span> =&gt; <span class="hljs-string">"Nice!"</span>
   };
-/* message 为 &quot;Great!&quot; */
+<span class="hljs-comment">/* message 为 "Great!" */</span>
 </code></pre>
 <p>Variant 拥有极为丰富的类型系统辅助。 例如，如果你没有列全一个 variant 的所有 case，或者两个 case 是重复的，我们都会抛出一个类型错误。 请务必在 <a href="/docs/zh-CN/pattern-matching">稍后的章节</a> 中查看 switch 和模式匹配的更多细节！</p>
 <h3><a class="anchor" aria-hidden="true" id="variant-需要显式的定义"></a><a href="#variant-需要显式的定义" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Variant 需要显式的定义</h3>
 <p>如果你使用的 variant 处于不同的文件中，像处理 record 那样将其导入到当前的范围中来：</p>
-<pre><code class="hljs css language-reason">/* Zoo.re */
+<pre><code class="hljs css language-reason"><span class="hljs-comment">/* Zoo.re */</span>
 
-type animal = Dog | Cat | Bird;
+<span class="hljs-keyword">type</span> animal = <span class="hljs-constructor">Dog</span> | <span class="hljs-constructor">Cat</span> | <span class="hljs-constructor">Bird</span>;
 </code></pre>
-<pre><code class="hljs css language-reason">/* example.re */
+<pre><code class="hljs css language-reason"><span class="hljs-comment">/* example.re */</span>
 
-let pet: Zoo.animal = Dog; /* preferred */
-/* or */
-let pet = Zoo.Dog;
+<span class="hljs-keyword">let</span> pet: <span class="hljs-module-identifier">Zoo</span>.animal = <span class="hljs-constructor">Dog</span>; <span class="hljs-comment">/* preferred */</span>
+<span class="hljs-comment">/* or */</span>
+<span class="hljs-keyword">let</span> pet = <span class="hljs-module-identifier">Zoo</span>.<span class="hljs-constructor">Dog</span>;
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="构造函数的参数"></a><a href="#构造函数的参数" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>构造函数的参数</h3>
 <p>variant 的构造函数能够携带用逗号隔开的额外数据。</p>
-<pre><code class="hljs css language-reason">type account =
-  | None
-  | Instagram(string)
-  | Facebook(string, int);
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> account =
+  | <span class="hljs-constructor">None</span>
+  | <span class="hljs-constructor">Instagram</span>(string)
+  | <span class="hljs-constructor">Facebook</span>(string, int);
 </code></pre>
 <p>在这里， <code>Instagram</code> 携带一个 <code>string</code> 类型的数据, 而 <code>Facebook</code> 携带两个数据，分别是 <code>string</code> 类型和 <code>int</code> 类型。用法：</p>
-<pre><code class="hljs css language-reason">let myAccount = Facebook(&quot;Josh&quot;, 26);
-let friendAccount = Instagram(&quot;Jenny&quot;);
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> myAccount = <span class="hljs-constructor">Facebook</span>(<span class="hljs-string">"Josh"</span>, <span class="hljs-number">26</span>);
+<span class="hljs-keyword">let</span> friendAccount = <span class="hljs-constructor">Instagram</span>(<span class="hljs-string">"Jenny"</span>);
 </code></pre>
 <p><strong>注意到使用构造函数很像函数调用？</strong> <code>Facebook</code> 看起来就像是一个接受两个参数的函数。 这并不是偶然现象；它就是构造函数所携带的数据被称为“构造函数参数”的原因。</p>
 <p>通过 <code>switch</code>，你可以对构造函数的参数进行模式匹配（在稍后的章节中会详细讲解）：</p>
-<pre><code class="hljs css language-reason">let greeting =
-  switch (myAccount) {
-  | None =&gt; &quot;Hi!&quot;
-  | Facebook(name, age) =&gt; &quot;Hi &quot; ++ name ++ &quot;, you're &quot; ++ string_of_int(age) ++ &quot;-year-old.&quot;
-  | Instagram(name) =&gt; &quot;Hello &quot; ++ name ++ &quot;!&quot;
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> greeting =
+  <span class="hljs-keyword">switch</span> (myAccount) {
+  | <span class="hljs-constructor">None</span> =&gt; <span class="hljs-string">"Hi!"</span>
+  | <span class="hljs-constructor">Facebook</span>(name, age) =&gt; <span class="hljs-string">"Hi "</span> <span class="hljs-operator">++</span> name <span class="hljs-operator">++</span> <span class="hljs-string">", you're "</span> <span class="hljs-operator">++</span> string_of_int(age) <span class="hljs-operator">++</span> <span class="hljs-string">"-year-old."</span>
+  | <span class="hljs-constructor">Instagram</span>(name) =&gt; <span class="hljs-string">"Hello "</span> <span class="hljs-operator">++</span> name <span class="hljs-operator">++</span> <span class="hljs-string">"!"</span>
   };
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="特别提及"></a><a href="#特别提及" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>特别提及</h3>
 <p><a href="/api/index.html">标准库</a> 暴露了两个重要的 variant，后续你会经常看到它们。</p>
 <h4><a class="anchor" aria-hidden="true" id="option"></a><a href="#option" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>option</code></h4>
-<pre><code class="hljs css language-reason">type option('a) = None | Some('a);
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> option('a) = <span class="hljs-constructor">None</span> | <span class="hljs-constructor">Some</span>('a);
 </code></pre>
 <p>This is the convention used to simulate a &quot;nullable&quot; (aka <code>undefined</code> or <code>null</code>) value in other languages. Thanks to this convenience type definition, Reason can default every value to be non-nullable. An <code>int</code> will always be an int, never &quot;<code>int</code> <strong>or</strong> <code>null</code> <strong>or</strong> <code>undefined</code>&quot;. If you do want to express a &quot;nullable int&quot;, you'd use <code>option(int)</code>, whose possible values are <code>None</code> or <code>Some(int)</code>. <code>switch</code> forces you to handle both cases; therefore, <strong>a pure Reason program doesn't have null errors</strong>.</p>
 <h4><a class="anchor" aria-hidden="true" id="list"></a><a href="#list" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>list</code></h4>
-<pre><code class="hljs css language-reason">type list('a) = Empty | Head('a, list('a));
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> list('a) = <span class="hljs-constructor">Empty</span> | <span class="hljs-constructor">Head</span>('a, list('a));
 </code></pre>
 <p><em>并不是实际类型定义，只是一个示例</em>。</p>
 <p>这表示：“一个携带 <code>a</code> 类型（任意类型）的值的列表要么是空的, 要么就是把携带的那个值附加在另一个列表上。”</p>
@@ -137,32 +137,32 @@ let friendAccount = Instagram(&quot;Jenny&quot;);
 <p>Did you know that you can use <code>switch</code> on string, int, float, array, and most other data structures? Try it!</p>
 <h2><a class="anchor" aria-hidden="true" id="tips-tricks"></a><a href="#tips-tricks" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Tips &amp; Tricks</h2>
 <p><strong>Be careful</strong> not to confuse a constructor carrying 2 arguments with a constructor carrying a single tuple argument:</p>
-<pre><code class="hljs css language-reason">type account =
-  | Facebook(string, int) /* 2 arguments */;
-type account2 =
-  | Instagram((string, int)) /* 1 argument - happens to be a 2-tuple */;
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> account =
+  | <span class="hljs-constructor">Facebook</span>(string, int) <span class="hljs-comment">/* 2 arguments */</span>;
+<span class="hljs-keyword">type</span> account2 =
+  | <span class="hljs-constructor">Instagram</span>((string, int)) <span class="hljs-comment">/* 1 argument - happens to be a 2-tuple */</span>;
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="variants-must-have-constructors"></a><a href="#variants-must-have-constructors" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Variants Must Have constructors</h3>
 <p>If you come from an untyped language, you might be tempted to try <code>type foo = int | string</code>. This isn't possible in Reason; you'd have to give each branch a constructor: <code>type foo = Int(int) | String(string)</code>. Though usually, needing this might be an anti-pattern. The Design Decisions section below explains more.</p>
 <h3><a class="anchor" aria-hidden="true" id="interop-with-javascript"></a><a href="#interop-with-javascript" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Interop with JavaScript</h3>
 <p><em>This section assumes knowledge about BuckleScript's <a href="https://bucklescript.github.io/docs/en/interop-overview.html">FFI</a>. Skip this if you haven't felt the itch to use variants for wrapping JS functions yet</em>.</p>
 <p>Quite a few JS libraries use functions that can accept many types of arguments. In these cases, it's very tempting to model them as variants. For example, suppose there's a <code>myLibrary.draw</code> JS function that takes in either a <code>number</code> or a <code>string</code>. You might be tempted to bind it like so:</p>
-<pre><code class="hljs css language-reason">/* reserved for internal usage */
-[@bs.module &quot;myLibrary&quot;] external draw : 'a =&gt; unit = &quot;draw&quot;;
+<pre><code class="hljs css language-reason"><span class="hljs-comment">/* reserved for internal usage */</span>
+<span class="hljs-attribute">[@bs.module "myLibrary"]</span> <span class="hljs-keyword">external</span> draw : 'a =&gt; unit = <span class="hljs-string">"draw"</span>;
 
-type animal =
-  | MyFloat(float)
-  | MyString(string);
+<span class="hljs-keyword">type</span> animal =
+  | <span class="hljs-constructor">MyFloat</span>(float)
+  | <span class="hljs-constructor">MyString</span>(string);
 
-let betterDraw = (animal) =&gt;
-  switch (animal) {
-  | MyFloat(f) =&gt; draw(f)
-  | MyString(s) =&gt; draw(s)
+<span class="hljs-keyword">let</span> betterDraw = (animal) =&gt;
+  <span class="hljs-keyword">switch</span> (animal) {
+  | <span class="hljs-constructor">MyFloat</span>(f) =&gt; draw(f)
+  | <span class="hljs-constructor">MyString</span>(s) =&gt; draw(s)
   };
 </code></pre>
 <p>You could definitely do that, but there are better ways! For example, simply two <code>external</code>s that both compile to the same JS call:</p>
-<pre><code class="hljs css language-reason">[@bs.module &quot;myLibrary&quot;] external drawFloat : float =&gt; unit = &quot;draw&quot;;
-[@bs.module &quot;myLibrary&quot;] external drawString : string =&gt; unit = &quot;draw&quot;;
+<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.module "myLibrary"]</span> <span class="hljs-keyword">external</span> drawFloat : float =&gt; unit = <span class="hljs-string">"draw"</span>;
+<span class="hljs-attribute">[@bs.module "myLibrary"]</span> <span class="hljs-keyword">external</span> drawString : string =&gt; unit = <span class="hljs-string">"draw"</span>;
 </code></pre>
 <p>BuckleScript also provides <a href="https://bucklescript.github.io/docs/en/function.html#modeling-polymorphic-function">a few other ways</a> to do this.</p>
 <h3><a class="anchor" aria-hidden="true" id="variant-types-are-found-by-field-name"></a><a href="#variant-types-are-found-by-field-name" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Variant Types Are Found By Field Name</h3>
@@ -181,12 +181,12 @@ let betterDraw = (animal) =&gt;
 }
 </code></pre>
 <p>There's a linear amount of branch checking here (<code>O(n)</code>). Compare this to using a Reason variant:</p>
-<pre><code class="hljs css language-reason">type animal = Dog | Cat | Bird;
-let data = Dog;
-switch (data) {
-| Dog =&gt; ...
-| Cat =&gt; ...
-| Bird =&gt; ...
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> animal = <span class="hljs-constructor">Dog</span> | <span class="hljs-constructor">Cat</span> | <span class="hljs-constructor">Bird</span>;
+<span class="hljs-keyword">let</span> data = <span class="hljs-constructor">Dog</span>;
+<span class="hljs-keyword">switch</span> (data) {
+| <span class="hljs-constructor">Dog</span> =&gt; <span class="hljs-operator">...</span>
+| <span class="hljs-constructor">Cat</span> =&gt; <span class="hljs-operator">...</span>
+| <span class="hljs-constructor">Bird</span> =&gt; <span class="hljs-operator">...</span>
 }
 </code></pre>
 <p>The compiler sees the variant, then</p>

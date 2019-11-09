@@ -69,29 +69,29 @@
         </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://crowdin.com/project/reason/fr" target="_blank" rel="noreferrer noopener">Translate</a><h1 class="postHeaderTitle">Null, Undefined &amp; Option</h1></header><article><div><span><p>Reason n'a pas de notion de valeurs <code>null</code> ou <code>undefined</code>. C'est une <em>bonne</em> chose, puisque cela permet d'éviter toute une catégorie de bugs. Terminé les <code>undefined is not a function</code> et les <code>cannot access foo of undefined</code> !</p>
 <p>Cependant, le <strong>concept</strong> d'une potentielle valeur inexistante est toujours utile, et par conséquent existe de façon sécurisée dans notre langage.</p>
 <p>Nous représentons l'existence ou l'inexistence d'une valeur en l'entourant avec le type <code>option</code>. Voici la définition de la bibliothèque standard :</p>
-<pre><code class="hljs css language-reason">type option('a) = None | Some('a)
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> option('a) = <span class="hljs-constructor">None</span> | <span class="hljs-constructor">Some</span>('a)
 </code></pre>
 <p>Cela se traduit par &quot;une valeur de type option peut-être None (rien) ou la valeur actuelle présente dans un Some&quot;. Vous vous demander sans doute pourquoi n'enlevons-nous pas le <code>Some</code> du code et nous n'écrivons pas simplement :</p>
-<pre><code class="hljs css language-reason">type option('a) = None | 'a
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> option('a) = <span class="hljs-constructor">None</span> | 'a
 </code></pre>
 <p>Auquel cas la value peut être ou <code>None</code> ou <code>valeurActuelle</code>. Bien que pratique, il y a plusieurs de raisons pour lesquelles cette syntaxe est indésirable, mais nous n'entrerons pas dans le détail pour le moment.</p>
 <h2><a class="anchor" aria-hidden="true" id="exemple"></a><a href="#exemple" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Exemple</h2>
 <p>Voici une valeur :</p>
-<pre><code class="hljs css language-reason">let licenseNumber = 5
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> licenseNumber = <span class="hljs-number">5</span>
 </code></pre>
 <p>Pour représenter le concept de « peut-être null », vous allez transformer cela en un type <code>option</code> en &quot;l'encapsulant&quot;. Dans un souci d’exemple plus illustratif, nous allons mettre une condition autour :</p>
-<pre><code class="hljs css language-reason">let licenseNumber =
-  if (personHasACar) {
-    Some(5);
-  } else {
-    None;
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> licenseNumber =
+  <span class="hljs-keyword">if</span> (personHasACar) {
+    <span class="hljs-constructor">Some</span>(<span class="hljs-number">5</span>);
+  } <span class="hljs-keyword">else</span> {
+    <span class="hljs-constructor">None</span>;
   };
 </code></pre>
 <p>Plus tard lorsqu’un autre morceau de code recevra une telle valeur, il sera obligé de gérer les deux cas :</p>
-<pre><code class="hljs css language-reason">switch (licenseNumber) {
-| None =&gt; print_endline(&quot;The person doesn't have a car&quot;)
-| Some(number) =&gt;
-  print_endline(&quot;The person's license number is &quot; ++ string_of_int(number))
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">switch</span> (licenseNumber) {
+| <span class="hljs-constructor">None</span> =&gt; print_endline(<span class="hljs-string">"The person doesn't have a car"</span>)
+| <span class="hljs-constructor">Some</span>(number) =&gt;
+  print_endline(<span class="hljs-string">"The person's license number is "</span> <span class="hljs-operator">++</span> string_of_int(number))
 };
 </code></pre>
 <p>En transformant votre nombre en un type <code>option</code> et en vous forçant à gérer les cas <code>None</code>, le langage va effectivement supprimer la possibilité pour vous d’altérer, ou que vous oubliiez de gérer une valeur <code>null</code> conceptuelle !</p>
@@ -99,18 +99,18 @@
 <p>**Le module helper <code>Option</code> ** est <a href="https://bucklescript.github.io/bucklescript/api/Belt.Option.html">ici</a>.</p>
 <h2><a class="anchor" aria-hidden="true" id="interagir-avec-undefined-null-javascript"></a><a href="#interagir-avec-undefined-null-javascript" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Intéragir avec <code>undefined</code> &amp; <code>null</code> JavaScript</h2>
 <p>Le type <code>option</code> est assez commun pour que nous ayons créé un cas spécial lors de sa compilation vers JavaScript :</p>
-<pre><code class="hljs css language-reason">Some(5)
+<pre><code class="hljs css language-reason"><span class="hljs-constructor">Some</span>(<span class="hljs-number">5</span>)
 </code></pre>
 <p>compile tout simplement vers <code>5</code>, et</p>
-<pre><code class="hljs css language-reason">None
+<pre><code class="hljs css language-reason"><span class="hljs-constructor">None</span>
 </code></pre>
 <p>compile vers <code>undefined</code> ! Si vous avez par exemple une chaîne des caractères en JavaScript que vous savez pouvoir être <code>undefined</code>, typée-la en <code>option(string)</code> et le tour est joué ! De la même façon, vous pouvez envoyer un <code>Some(5)</code> ou <code>None</code> au côté JavaScript et vous attendre à ce qu'ils soient interprétés correctement =)</p>
 <h3><a class="anchor" aria-hidden="true" id="mises-en-garde-1"></a><a href="#mises-en-garde-1" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Mises en garde 1</h3>
 <p>La traduction option-vers-undefined n’est pas parfaite, parce que de notre côté, les valeurs d'<code>option</code> peuvent être composées :</p>
-<pre><code class="hljs css language-reason">Some(some(some(5)))
+<pre><code class="hljs css language-reason"><span class="hljs-constructor">Some</span>(some(some(<span class="hljs-number">5</span>)))
 </code></pre>
 <p>Ceci compile toujours vers <code>5</code>, mais cela devient gênant :</p>
-<pre><code class="hljs css language-reason">Some(None)
+<pre><code class="hljs css language-reason"><span class="hljs-constructor">Some</span>(<span class="hljs-constructor">None</span>)
 </code></pre>
 <p>Qui compile en JavaScript :</p>
 <pre><code class="hljs css language-js">Js_primitive.some(<span class="hljs-literal">undefined</span>);
@@ -127,13 +127,13 @@
 <h4><a class="anchor" aria-hidden="true" id="exemples"></a><a href="#exemples" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Exemples</h4>
 <p>Pour créer un <code>null</code> JavaScript, utilisez la valeur <code>Js.Nullable.null</code>. Pour créer un <code>undefined</code> JavaScript, utilisez <code>Js.Nullable.undefined</code> (naturellement vous pouvez aussi utiliser <code>None</code>, mais ce n'est pas le sujet ici: les helpers <code>Js.Nullable.*</code> ne marcheraient pas avec).</p>
 <p>Si vous recevez , par exemple, une chaine de caractères JavaScript qui peut être <code>null</code> et <code>undefined</code>, typez la de la sorte :</p>
-<pre><code class="hljs css language-reason">[@bs.module &quot;MyConstant&quot;] external myId: Js.Nullable.t(string) = &quot;myId&quot;
+<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.module "MyConstant"]</span> <span class="hljs-keyword">external</span> myId: <span class="hljs-module-identifier">Js</span>.<span class="hljs-module-identifier">Nullable</span>.t(string) = <span class="hljs-string">"myId"</span>
 </code></pre>
 <p>Pour créer une telle chaîne nullable de notre côté (probablement pour la passer du côté JavaScript, à des fins d'interopérabilité), faites :</p>
-<pre><code class="hljs css language-reason">[@bs.module &quot;MyIdValidator&quot;] external validate: Js.Nullable.t(string) =&gt; bool = &quot;validate&quot;;
-let personId: Js.Nullable.t(string) = Js.Nullable.return(&quot;abc123&quot;);
+<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.module "MyIdValidator"]</span> <span class="hljs-keyword">external</span> validate: <span class="hljs-module-identifier">Js</span>.<span class="hljs-module-identifier">Nullable</span>.t(string) =&gt; bool = <span class="hljs-string">"validate"</span>;
+<span class="hljs-keyword">let</span> personId: <span class="hljs-module-identifier">Js</span>.<span class="hljs-module-identifier">Nullable</span>.t(string) = <span class="hljs-module-identifier">Js</span>.<span class="hljs-module-identifier">Nullable</span>.return(<span class="hljs-string">"abc123"</span>);
 
-let result = validate(personId);
+<span class="hljs-keyword">let</span> result = validate(personId);
 </code></pre>
 <p>La partie <code>return</code> &quot;encapsule&quot; une chaîne de caractères en une chaîne de caractères nullable, pour que le système de type le comprenne et tienne compte du fait que, lorsque vous transmettez cette valeur, il ne s'agit pas simplement d'une chaîne de caractères, mais d'une chaîne pouvant être <code>null</code> ou <code>undefined</code>.</p>
 <h4><a class="anchor" aria-hidden="true" id="convertir-vers-depuis-option"></a><a href="#convertir-vers-depuis-option" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Convertir vers/depuis <code>option</code></h4>

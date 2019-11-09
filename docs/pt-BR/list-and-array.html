@@ -73,7 +73,7 @@
 <li>imutável</li>
 <li>rápidas ao prepender itens</li>
 </ul>
-<pre><code class="hljs css language-reason">let myList = [1, 2, 3];
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> myList = <span class="hljs-literal">[</span><span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span><span class="hljs-literal">]</span>;
 </code></pre>
 <p>Reason lists are simple, singly linked lists.</p>
 <h3><a class="anchor" aria-hidden="true" id="uso"></a><a href="#uso" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Uso</h3>
@@ -81,18 +81,18 @@
 <p>A biblioteca padrão provê o <a href="/api/List.html">módulo de Lista</a> (e sua contraparte com argumentos nomeados, <code>ListLabels</code>).</p>
 <h4><a class="anchor" aria-hidden="true" id="prefixagem-imutavel"></a><a href="#prefixagem-imutavel" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Prefixagem Imutável</h4>
 <p>Use o operador de expansão, que é apenas <code>List.cons</code>:</p>
-<pre><code class="hljs css language-reason">let myList: list(int) = [1, 2, 3];
-let anotherList = [0, ...myList];
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> myList: list(int) = <span class="hljs-literal">[</span><span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span><span class="hljs-literal">]</span>;
+<span class="hljs-keyword">let</span> anotherList = <span class="hljs-literal">[</span><span class="hljs-number">0</span>, <span class="hljs-operator">...</span>myList<span class="hljs-literal">]</span>;
 </code></pre>
 <p><code>myList</code> não foi modificado. <code>anotherList</code> agora é <code>[0, 1, 2, 3]</code>. Isto é eficiente (tempo constante, não linear). Os últimos 3 elementos de <code>anotherList</code>são compartilhados com <code>myList</code>!</p>
 <p><strong>Note que <code>[a, ...b, ...c]</code> é um erro de sintaxe</strong>. Nós não suportamos múltiplas expansões em uma lista. Isso seria acidentalmente uma operação com tempo linear (<code>O(b)</code>), dado que cada item de b seria adicionado um a um à cabeça de <code>c</code>. Você poder usar <code>List.concat</code> para isso.</p>
 <p>Alterar um item arbitrário no meio de uma lista é desencorajado, dado que a performance e gastos extras de alocação seriam lineares (<code>O(n)</code>).</p>
 <h4><a class="anchor" aria-hidden="true" id="acesso"></a><a href="#acesso" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Acesso</h4>
 <p><code>switch</code> (descrito na <a href="/docs/pt-BR/pattern-matching">seção de pattern matching</a>) é geralmente usado para acessar itens de listas:</p>
-<pre><code class="hljs css language-reason">let message =
-  switch (myList) {
-  | [] =&gt; &quot;This list is empty&quot;
-  | [a, ...rest] =&gt; &quot;The head of the list is the string &quot; ++ string_of_int(a)
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> message =
+  <span class="hljs-keyword">switch</span> (myList) {
+  | <span class="hljs-literal">[</span><span class="hljs-literal">]</span> =&gt; <span class="hljs-string">"This list is empty"</span>
+  | <span class="hljs-literal">[</span>a, <span class="hljs-operator">...</span>rest<span class="hljs-literal">]</span> =&gt; <span class="hljs-string">"The head of the list is the string "</span> <span class="hljs-operator">++</span> string_of_int(a)
   };
 </code></pre>
 <p>Para acessar um item arbitrário de uma lista, use <code>List.nth</code>.</p>
@@ -109,18 +109,18 @@ let anotherList = [0, ...myList];
 <li>com tamanho fixo na plataforma nativa (tamanho flexível em JavaScript)</li>
 </ul>
 <p>Você deve envolvê-los com <code>[|</code> e <code>|]</code>.</p>
-<pre><code class="hljs css language-reason">let myArray = [|&quot;hello&quot;, &quot;world&quot;, &quot;how are you&quot;|];
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> myArray = <span class="hljs-literal">[|</span><span class="hljs-string">"hello"</span>, <span class="hljs-string">"world"</span>, <span class="hljs-string">"how are you"</span><span class="hljs-literal">|]</span>;
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="uso-1"></a><a href="#uso-1" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Uso</h3>
 <p>Módulos <a href="/api/Array.html">Array</a> e <a href="/api/ArrayLabels.html">ArrayLabel</a> da biblioteca padrão. For JS compilation, you also have the familiar <a href="https://bucklescript.github.io/bucklescript/api/Js.Array.html">Js.Array</a> API.</p>
 <p>Acesse &amp; altere um item de um array conforme:</p>
-<pre><code class="hljs css language-reason">let myArray: array(string) = [|&quot;hello&quot;, &quot;world&quot;, &quot;how are you&quot;|];
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> myArray: array(string) = <span class="hljs-literal">[|</span><span class="hljs-string">"hello"</span>, <span class="hljs-string">"world"</span>, <span class="hljs-string">"how are you"</span><span class="hljs-literal">|]</span>;
 
-let firstItem = myArray[0]; /* &quot;hello&quot; */
+<span class="hljs-keyword">let</span> firstItem = myArray<span class="hljs-literal">[</span><span class="hljs-number">0</span><span class="hljs-literal">]</span>; <span class="hljs-comment">/* "hello" */</span>
 
-myArray[0] = &quot;hey&quot;;
+myArray<span class="hljs-literal">[</span><span class="hljs-number">0</span><span class="hljs-literal">]</span> = <span class="hljs-string">"hey"</span>;
 
-/* now [|&quot;hey&quot;, &quot;world&quot;, &quot;how are you&quot;|] */
+<span class="hljs-comment">/* now [|"hey", "world", "how are you"|] */</span>
 </code></pre>
 <p>Os acesso e alteração de item de array acima são somente açúcar sintático para <code>Array.get</code>/<code>Array.set</code>.</p>
 <h3><a class="anchor" aria-hidden="true" id="dicas-truques-1"></a><a href="#dicas-truques-1" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Dicas &amp; Truques</h3>

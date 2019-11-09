@@ -68,15 +68,15 @@
             });
         </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://crowdin.com/project/reason/ru" target="_blank" rel="noreferrer noopener">Translate</a><h1 class="postHeaderTitle">Строки и символы</h1></header><article><div><span><h2><a class="anchor" aria-hidden="true" id="строка"></a><a href="#строка" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Строка</h2>
 <p>Строки в Reason ограничиваются <strong>двойными</strong> кавычками (одинарные кавычки зарезервированы для символов).</p>
-<pre><code class="hljs css language-reason">let greeting = &quot;Hello world!&quot;;
-let multilineGreeting = &quot;Hello
- world!&quot;;
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> greeting = <span class="hljs-string">"Hello world!"</span>;
+<span class="hljs-keyword">let</span> multilineGreeting = <span class="hljs-string">"Hello
+ world!"</span>;
 </code></pre>
 <p>Спецсимволы нужно экранировать:</p>
-<pre><code class="hljs css language-reason">let oneSlash = &quot;\\&quot;;
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> oneSlash = <span class="hljs-string">"\\"</span>;
 </code></pre>
 <p>Для конкатенации строк используется <code>++</code>:</p>
-<pre><code class="hljs css language-reason">let greetings = &quot;Hello &quot; ++ &quot;world!&quot;;
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> greetings = <span class="hljs-string">"Hello "</span> <span class="hljs-operator">++</span> <span class="hljs-string">"world!"</span>;
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="quoted-строка"></a><a href="#quoted-строка" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Quoted строка</h3>
 <p>Существует специальный синтаксис для строк, который позволяет</p>
@@ -85,15 +85,15 @@ let multilineGreeting = &quot;Hello
 <li>отсутствие необходимости в экранировании</li>
 <li>хуки для специальных препроцессоров</li>
 </ul>
-<pre><code class="hljs css language-reason">let greetingAndOneSlash = {|Hello
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> greetingAndOneSlash = <span class="hljs-string">{|Hello
 World
 \
 Hehe...
-|};
+|}</span>;
 </code></pre>
 <p>Это похоже на JS строки в обратных кавычках, но без необходимости экранирования и без интерполяции. Хотя вы можете легко сделать интерполяцию, <a href="https://bucklescript.github.io/docs/en/common-data-types.html#interpolation">как это сделал BuckleScript</a>:</p>
-<pre><code class="hljs css language-reason">let world = {js|世界|js}; /* Supports Unicode characters */
-let helloWorld = {j|你好，$world|j}; /* Supports Unicode and interpolation variables */
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> world = <span class="hljs-string">{js|世界|js}</span>; <span class="hljs-comment">/* Supports Unicode characters */</span>
+<span class="hljs-keyword">let</span> helloWorld = <span class="hljs-string">{j|你好，$world|j}</span>; <span class="hljs-comment">/* Supports Unicode and interpolation variables */</span>
 </code></pre>
 <p>Специальный пре-процессор BuckleScript ищет маркеры вокруг строк, такие как <code>js</code> и <code>j</code>, и позволяет затем трансформировать содержимое строки.</p>
 <h3><a class="anchor" aria-hidden="true" id="использование"></a><a href="#использование" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Использование</h3>
@@ -113,24 +113,24 @@ let helloWorld = {j|你好，$world|j}; /* Supports Unicode and interpolation va
 <p>В случае JavaScript компиляции, Reason строки отображаются в строки JS и наоборот. Потому нет необходимости переживать об подобных проблемах и применять дополнительный анализ для возможной оптимизации.</p>
 <h3><a class="anchor" aria-hidden="true" id="дизайн-решения"></a><a href="#дизайн-решения" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Дизайн решения</h3>
 <p>Использование quoted строки позволяет делать интересные DSL. Такие как <a href="/api/Str.html">регулярные выражения</a>:</p>
-<pre><code class="hljs css language-reason">let r = Str.regexp({|hello \([A-Za-z]+\)|});
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> r = <span class="hljs-module-identifier">Str</span>.regexp(<span class="hljs-string">{|hello \([A-Za-z]+\)|}</span>);
 </code></pre>
 <p>в противоположность</p>
-<pre><code class="hljs css language-reason">let r = Str.regexp(&quot;hello \\([A-Za-z]+\\)&quot;);
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> r = <span class="hljs-module-identifier">Str</span>.regexp(<span class="hljs-string">"hello \\([A-Za-z]+\\)"</span>);
 </code></pre>
 <p>Хотя для JS компиляции, вы должны использовать <a href="https://bucklescript.github.io/docs/en/regular-expression.html"><code>[%bs.re]</code></a> и <a href="https://bucklescript.github.io/bucklescript/api/Js.Re.html"><code>Js.Re</code></a> вместо этого, поскольку <code>Str</code> не доступен.</p>
 <p>Акцент на простоту Reason/OCaml можно видеть в его прямолинейной реализации нативных строк. Слишком сложная реализация строки иногда может иметь <a href="http://mrale.ph/blog/2016/11/23/making-less-dart-faster.html">обратный эффект</a>.</p>
 <h2><a class="anchor" aria-hidden="true" id="символ"></a><a href="#символ" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Символ</h2>
 <p>Reason имеет тип данных в виде строки, содержащей только одну букву:</p>
-<pre><code class="hljs css language-reason">let firstLetterOfAlphabet = 'a';
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> firstLetterOfAlphabet = <span class="hljs-character">'a'</span>;
 </code></pre>
 <p><strong>Важно</strong>: Символы не поддерживают Unicode или UTF-8.</p>
 <h3><a class="anchor" aria-hidden="true" id="советы-и-трюки-1"></a><a href="#советы-и-трюки-1" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Советы и трюки</h3>
 <p>Символ <a href="/try.html?reason=DYUwLgBAhhC8EHIoKA">компилируется в целое число от 0 до 255</a>, для дополнительной скорости. Вы можете использовать паттерн-матчинг (описание далее) на нем:</p>
-<pre><code class="hljs css language-reason">let isVowel = (theChar) =&gt;
-  switch (theChar) {
-  | 'a' | 'e' | 'i' | 'o' | 'u' | 'y' =&gt; true
-  | _ =&gt; false
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> isVowel = (theChar) =&gt;
+  <span class="hljs-keyword">switch</span> (theChar) {
+  | <span class="hljs-character">'a'</span> | <span class="hljs-character">'e'</span> | <span class="hljs-character">'i'</span> | <span class="hljs-character">'o'</span> | <span class="hljs-character">'u'</span> | <span class="hljs-character">'y'</span> =&gt; <span class="hljs-literal">true</span>
+  | _ =&gt; <span class="hljs-literal">false</span>
   };
 </code></pre>
 <p>Для преобразвания String в Char, используйте выражение вида <code>&quot;a&quot;.[0]</code>. Для преобразования Char to a String, используйте код <code>String.make(1, 'a')</code>.</p>

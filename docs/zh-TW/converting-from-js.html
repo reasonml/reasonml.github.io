@@ -93,15 +93,15 @@
 <li>其他修改。如果沒有 BuckleScript 等價慣用語法，直接使用 <code>bs.raw</code>（<a href="https://bucklescript.github.io/docs/en/embed-raw-javascript.html">文件</a>）。</li>
 </ul>
 <p>再一次，<strong>只需要操心讓檔案句法上合法</strong>。 試著在轉換過程中學習這三個語法，型別和其他語意，每次都能加快你的速度。</p>
-<pre><code class="hljs css language-reason">/* 句法上有效，語意上錯誤的轉換 */
-/* const school = require('school'); */
-let defaultId = 10;
+<pre><code class="hljs css language-reason"><span class="hljs-comment">/* 句法上有效，語意上錯誤的轉換 */</span>
+<span class="hljs-comment">/* const school = require('school'); */</span>
+<span class="hljs-keyword">let</span> defaultId = <span class="hljs-number">10</span>;
 
-let queryResult = (usePayload, payload) =&gt;
-  if (usePayload) {
+<span class="hljs-keyword">let</span> queryResult = (usePayload, payload) =&gt;
+  <span class="hljs-keyword">if</span> (usePayload) {
     payload.student
-  } else {
-    /* Reason 中不需要提前傳回；if-else 是個表達式 */
+  } <span class="hljs-keyword">else</span> {
+    <span class="hljs-comment">/* Reason 中不需要提前傳回；if-else 是個表達式 */</span>
     school.getStudentById(
       defaultId
     )
@@ -121,15 +121,15 @@ let queryResult = (usePayload, payload) =&gt;
 </ul></li>
 </ul>
 <p>這是第一關；最終型別可能會看起來不一樣。 現在，收割付出！ 一旦最後修正所有的型別錯誤，JS 檔案就能自動產生。 並排開啟檔案。 是時候來回檢查並修正！</p>
-<pre><code class="hljs css language-reason">/* 句法上合法，仍然語意上錯誤，但好一些 */
-[@bs.module &quot;school&quot;] external getStudentById : 'whatever =&gt; 'whateverElse = &quot;getStudentById&quot;;
+<pre><code class="hljs css language-reason"><span class="hljs-comment">/* 句法上合法，仍然語意上錯誤，但好一些 */</span>
+<span class="hljs-attribute">[@bs.module "school"]</span> <span class="hljs-keyword">external</span> getStudentById : 'whatever =&gt; 'whateverElse = <span class="hljs-string">"getStudentById"</span>;
 
-let defaultId = 10;
+<span class="hljs-keyword">let</span> defaultId = <span class="hljs-number">10</span>;
 
-let queryResult = (usePayload, payload) =&gt;
-  if (usePayload) {
-    payload##student /* 這會推斷成 `Js.t 'a` */
-  } else {
+<span class="hljs-keyword">let</span> queryResult = (usePayload, payload) =&gt;
+  <span class="hljs-keyword">if</span> (usePayload) {
+    payload##student <span class="hljs-comment">/* 這會推斷成 `Js.t 'a` */</span>
+  } <span class="hljs-keyword">else</span> {
     getStudentById(defaultId)
   };
 </code></pre>
@@ -141,18 +141,18 @@ let queryResult = (usePayload, payload) =&gt;
 <li>轉換那些部份成 records/變異/慣用的 OCaml 型別。</li>
 </ul>
 <p>持續不斷檢查每個修改的結果。</p>
-<pre><code class="hljs css language-reason">type student; /* 抽象型別，稍後解釋 */
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> student; <span class="hljs-comment">/* 抽象型別，稍後解釋 */</span>
 
-[@bs.module &quot;school&quot;] external getStudentById : 'whatever =&gt; student = &quot;getStudentById&quot;;
+<span class="hljs-attribute">[@bs.module "school"]</span> <span class="hljs-keyword">external</span> getStudentById : 'whatever =&gt; student = <span class="hljs-string">"getStudentById"</span>;
 
-type payloadType = {. &quot;student&quot;: student};
+<span class="hljs-keyword">type</span> payloadType = {. <span class="hljs-string">"student"</span>: student};
 
-let defaultId = 10;
+<span class="hljs-keyword">let</span> defaultId = <span class="hljs-number">10</span>;
 
-let queryResult = (usePayload, payload: payloadType) =&gt;
-  if (usePayload) {
+<span class="hljs-keyword">let</span> queryResult = (usePayload, payload: payloadType) =&gt;
+  <span class="hljs-keyword">if</span> (usePayload) {
     payload##student
-  } else {
+  } <span class="hljs-keyword">else</span> {
     getStudentById(defaultId)
   };
 </code></pre>
@@ -163,23 +163,23 @@ let queryResult = (usePayload, payload: payloadType) =&gt;
 <li>確保 <code>external</code> 沒有留下任何 <code>'whatever</code> 型別。</li>
 <li>可以保持 <code>external</code> 內聯，或者另外抽到別的檔案。</li>
 </ul>
-<pre><code class="hljs css language-reason">/* 目前檔案 */
-type payloadType = {. &quot;student&quot;: School.student}; /* TODO：放在別的地方！ */
+<pre><code class="hljs css language-reason"><span class="hljs-comment">/* 目前檔案 */</span>
+<span class="hljs-keyword">type</span> payloadType = {. <span class="hljs-string">"student"</span>: <span class="hljs-module-identifier">School</span>.student}; <span class="hljs-comment">/* TODO：放在別的地方！ */</span>
 
-let defaultId = 10;
+<span class="hljs-keyword">let</span> defaultId = <span class="hljs-number">10</span>;
 
-let queryResult = (usePayload, payload: payloadType) =&gt;
-  if (usePayload) {
+<span class="hljs-keyword">let</span> queryResult = (usePayload, payload: payloadType) =&gt;
+  <span class="hljs-keyword">if</span> (usePayload) {
     payload##student
-  } else {
-    School.getStudentById(defaultId)
+  } <span class="hljs-keyword">else</span> {
+    <span class="hljs-module-identifier">School</span>.getStudentById(defaultId)
   };
 </code></pre>
-<pre><code class="hljs css language-reason">/* 專屬 School.re 檔案 */
-type student;
+<pre><code class="hljs css language-reason"><span class="hljs-comment">/* 專屬 School.re 檔案 */</span>
+<span class="hljs-keyword">type</span> student;
 
-[@bs.module &quot;School&quot;] external getStudentById : int =&gt; student = &quot;getStudentById&quot;;
-[@bs.module &quot;School&quot;] external getAllStudents : unit =&gt; array(student) = &quot;getAllStudents&quot;;
+<span class="hljs-attribute">[@bs.module "School"]</span> <span class="hljs-keyword">external</span> getStudentById : int =&gt; student = <span class="hljs-string">"getStudentById"</span>;
+<span class="hljs-attribute">[@bs.module "School"]</span> <span class="hljs-keyword">external</span> getAllStudents : unit =&gt; array(student) = <span class="hljs-string">"getAllStudents"</span>;
 </code></pre>
 <p><code>student</code> 型別沒有實際內容；這個稱為<a href="/docs/zh-TW/module#signatures">抽象型別</a>。 這是方便指定外部呼叫關係的方法，不需要知道底部實際的資料外型。</p>
 <p>這樣就完成了！</p>

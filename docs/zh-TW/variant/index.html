@@ -68,67 +68,67 @@
             });
         </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://crowdin.com/project/reason/zh-TW" target="_blank" rel="noreferrer noopener">Translate</a><h1 class="postHeaderTitle">Variant!</h1></header><article><div><span><p>看，Reason 資料結構的皇冠寶石！</p>
 <p>多數語言的多數資料結構是關於 &quot;這個<strong>以及</strong>那個&quot;。變異允許表達成 &quot;這個<strong>或者</strong>那個&quot;。</p>
-<pre><code class="hljs css language-reason">type myResponseVariant =
-  | Yes
-  | No
-  | PrettyMuch;
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> myResponseVariant =
+  | <span class="hljs-constructor">Yes</span>
+  | <span class="hljs-constructor">No</span>
+  | <span class="hljs-constructor">PrettyMuch</span>;
 
-let areYouCrushingIt = Yes;
+<span class="hljs-keyword">let</span> areYouCrushingIt = <span class="hljs-constructor">Yes</span>;
 </code></pre>
 <p><code>Yes</code>、<code>No</code> 及 <code>PrettyMuch</code> 不是字串，不是參照，也不是某些特殊資料型別。 這些稱之為 &quot;建構子（constructors）&quot;（或者 &quot;tag&quot;）。 <code>|</code> 棒子符號分隔每個建構子。</p>
 <p><strong>注意</strong>：變異的建構子必須是大寫開頭。</p>
 <h2><a class="anchor" aria-hidden="true" id="用法"></a><a href="#用法" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>用法</h2>
 <p>Reason 中跟變體一起的一個重要功能，<code>switch</code> 表達式。</p>
 <p>Reason 的 <code>switch</code> 看起來很類似其他語言的 <code>switch</code>（意即大塊的 <code>if/elseif/elseif...</code>）。 允許你檢查每一個可能的變異。 若要使用它，列舉出你想要使用的每一個變異建構子，後面接著 <code>=&gt;</code>，再來就是該變異案例下的表達式。</p>
-<pre><code class="hljs css language-reason">let message =
-  switch (areYouCrushingIt) {
-  | No =&gt; &quot;No worries. Keep going!&quot;
-  | Yes =&gt; &quot;Great!&quot;
-  | PrettyMuch =&gt; &quot;Nice!&quot;
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> message =
+  <span class="hljs-keyword">switch</span> (areYouCrushingIt) {
+  | <span class="hljs-constructor">No</span> =&gt; <span class="hljs-string">"No worries. Keep going!"</span>
+  | <span class="hljs-constructor">Yes</span> =&gt; <span class="hljs-string">"Great!"</span>
+  | <span class="hljs-constructor">PrettyMuch</span> =&gt; <span class="hljs-string">"Nice!"</span>
   };
-/* message 為 &quot;Great!&quot; */
+<span class="hljs-comment">/* message 為 "Great!" */</span>
 </code></pre>
 <p>變異具有極其豐富的型別系統協助。 例如，若是忘了包含任一個案例，會發生型別錯誤，或者，存在多餘的相同案例。 請務必看看<a href="/docs/zh-TW/pattern-matching">後續章節</a>的 switch 及樣式匹配！</p>
 <h3><a class="anchor" aria-hidden="true" id="變異必須明確定義"></a><a href="#變異必須明確定義" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>變異必須明確定義</h3>
 <p>若使用不同檔案中的變異，將它帶入範疇，像是 <a href="/docs/zh-TW/record#record-needs-an-explicit-definition">record</a> 的作法：</p>
-<pre><code class="hljs css language-reason">/* Zoo.re */
+<pre><code class="hljs css language-reason"><span class="hljs-comment">/* Zoo.re */</span>
 
-type animal = Dog | Cat | Bird;
+<span class="hljs-keyword">type</span> animal = <span class="hljs-constructor">Dog</span> | <span class="hljs-constructor">Cat</span> | <span class="hljs-constructor">Bird</span>;
 </code></pre>
-<pre><code class="hljs css language-reason">/* example.re */
+<pre><code class="hljs css language-reason"><span class="hljs-comment">/* example.re */</span>
 
-let pet: Zoo.animal = Dog; /* 首選 */
-/* 或者 */
-let pet = Zoo.Dog;
+<span class="hljs-keyword">let</span> pet: <span class="hljs-module-identifier">Zoo</span>.animal = <span class="hljs-constructor">Dog</span>; <span class="hljs-comment">/* 首選 */</span>
+<span class="hljs-comment">/* 或者 */</span>
+<span class="hljs-keyword">let</span> pet = <span class="hljs-module-identifier">Zoo</span>.<span class="hljs-constructor">Dog</span>;
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="建構子參數"></a><a href="#建構子參數" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>建構子參數</h3>
 <p>變異建構子可以持有額外資料，使用逗點分隔。</p>
-<pre><code class="hljs css language-reason">type account =
-  | None
-  | Instagram(string)
-  | Facebook(string, int);
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> account =
+  | <span class="hljs-constructor">None</span>
+  | <span class="hljs-constructor">Instagram</span>(string)
+  | <span class="hljs-constructor">Facebook</span>(string, int);
 </code></pre>
 <p>這裡，<code>Instagram</code> 持有 <code>string</code>、<code>Facebook</code> 持有 <code>string</code> 及 <code>int</code>。用法：</p>
-<pre><code class="hljs css language-reason">let myAccount = Facebook(&quot;Josh&quot;, 26);
-let friendAccount = Instagram(&quot;Jenny&quot;);
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> myAccount = <span class="hljs-constructor">Facebook</span>(<span class="hljs-string">"Josh"</span>, <span class="hljs-number">26</span>);
+<span class="hljs-keyword">let</span> friendAccount = <span class="hljs-constructor">Instagram</span>(<span class="hljs-string">"Jenny"</span>);
 </code></pre>
 <p><strong>有注意到建構子用法就像是呼叫函式嗎</strong>？ 就好像 <code>Facebook</code> 是個函式，接受兩個參數。 這並不是個巧合；這就是為什麼建構子的資料稱為 &quot;建構子參數&quot; 的原因。</p>
 <p>使用 <code>switch</code>，可以樣式匹配（一樣，稍後章節討論）建構子的參數：</p>
-<pre><code class="hljs css language-reason">let greeting =
-  switch (myAccount) {
-  | None =&gt; &quot;Hi!&quot;
-  | Facebook(name, age) =&gt; &quot;Hi &quot; ++ name ++ &quot;, you're &quot; ++ string_of_int(age) ++ &quot;-year-old.&quot;
-  | Instagram(name) =&gt; &quot;Hello &quot; ++ name ++ &quot;!&quot;
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> greeting =
+  <span class="hljs-keyword">switch</span> (myAccount) {
+  | <span class="hljs-constructor">None</span> =&gt; <span class="hljs-string">"Hi!"</span>
+  | <span class="hljs-constructor">Facebook</span>(name, age) =&gt; <span class="hljs-string">"Hi "</span> <span class="hljs-operator">++</span> name <span class="hljs-operator">++</span> <span class="hljs-string">", you're "</span> <span class="hljs-operator">++</span> string_of_int(age) <span class="hljs-operator">++</span> <span class="hljs-string">"-year-old."</span>
+  | <span class="hljs-constructor">Instagram</span>(name) =&gt; <span class="hljs-string">"Hello "</span> <span class="hljs-operator">++</span> name <span class="hljs-operator">++</span> <span class="hljs-string">"!"</span>
   };
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="特別表揚"></a><a href="#特別表揚" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>特別表揚</h3>
 <p><a href="/api/index.html">標準函式庫</a> 公開兩個重要的變異你將會經常聽到。</p>
 <h4><a class="anchor" aria-hidden="true" id="option"></a><a href="#option" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>option</code></h4>
-<pre><code class="hljs css language-reason">type option('a) = None | Some('a);
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> option('a) = <span class="hljs-constructor">None</span> | <span class="hljs-constructor">Some</span>('a);
 </code></pre>
 <p>這是個慣例，用來模擬其他語言的 &quot;空值&quot;（又稱 <code>undefined</code> 或者 <code>null</code>）。 感謝這個方便的型別定義，Reason 可以預設所有的值都不會是空值。 <code>int</code> 永遠都是 int，不會 &quot;<code>int</code> <strong>或者</strong> <code>null</code> <strong>或者</strong> <code>undefined</code>&quot;。 如果要表達 &quot;可空值的 int&quot;，就使用 <code>option(int)</code>，可能有的值就是 <code>None</code> 或者 <code>Some(int)</code>。 <code>switch</code> 強迫你處理這兩個情況；因此，<strong>純 Reason 程式不存在 null 錯誤</strong>。</p>
 <h4><a class="anchor" aria-hidden="true" id="list"></a><a href="#list" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>list</code></h4>
-<pre><code class="hljs css language-reason">type list('a) = Empty | Head('a, list('a));
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> list('a) = <span class="hljs-constructor">Empty</span> | <span class="hljs-constructor">Head</span>('a, list('a));
 </code></pre>
 <p><em>並不是真的型別定義。只是個例子</em>。</p>
 <p>表示： &quot;某個 list 持有 <code>a</code> 型別的值（無論什麼型別），這個 list 可能是空的，或者是持有某個值加上額外的 list&quot;。</p>
@@ -137,32 +137,32 @@ let friendAccount = Instagram(&quot;Jenny&quot;);
 <p>你知道你可以在 string、int、float、array 以及其他大多數的資料結構上使用 <code>switch</code> 嗎？試試看！</p>
 <h2><a class="anchor" aria-hidden="true" id="提示-技巧"></a><a href="#提示-技巧" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>提示 &amp; 技巧</h2>
 <p><strong>請小心</strong>不要將「帶有 1 個 tuple 參數的建構子」與「帶有 2 個參數的建構子」搞混：</p>
-<pre><code class="hljs css language-reason">type account =
-  | Facebook(string, int) /* 2 個參數 */;
-type account2 =
-  | Instagram((string, int)) /* 1 個參數 - 是個 2-tuple */;
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> account =
+  | <span class="hljs-constructor">Facebook</span>(string, int) <span class="hljs-comment">/* 2 個參數 */</span>;
+<span class="hljs-keyword">type</span> account2 =
+  | <span class="hljs-constructor">Instagram</span>((string, int)) <span class="hljs-comment">/* 1 個參數 - 是個 2-tuple */</span>;
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="變異必須有建構子"></a><a href="#變異必須有建構子" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>變異必須有建構子</h3>
 <p>如果你來自無須型別的語言，可能會嘗試 <code>type foo = int | string</code>。 Reason 是不可能的；必須給予每個分支一個建構子： <code>type foo = Int(int) | String(string)</code>。 這種情況通常是個 anti-pattern。 下列「設計決策」會有更詳細解釋。</p>
 <h3><a class="anchor" aria-hidden="true" id="與-javascript-交互使用"></a><a href="#與-javascript-交互使用" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>與 JavaScript 交互使用</h3>
 <p><em>此段內容假設已有 BuckleScript 的 <a href="https://bucklescript.github.io/docs/en/interop-overview.html">FFI</a> 相關了解。 如果還不想應用變異於綁定 JS 函式，請先跳過</em>。</p>
 <p>許多 JS 函式庫的函式接受多種不同型別的參數。 這些情況下，十分建議使用變異。 例如，假設有個 <code>myLibrary.draw</code> JS 函式，接受 <code>number</code> 或者 <code>string</code> 參數。 你可能會試著綁定：</p>
-<pre><code class="hljs css language-reason">/*  內部保留使用 */
-[@bs.module &quot;myLibrary&quot;] external draw : 'a =&gt; unit = &quot;draw&quot;;
+<pre><code class="hljs css language-reason"><span class="hljs-comment">/*  內部保留使用 */</span>
+<span class="hljs-attribute">[@bs.module "myLibrary"]</span> <span class="hljs-keyword">external</span> draw : 'a =&gt; unit = <span class="hljs-string">"draw"</span>;
 
-type animal =
-  | MyFloat(float)
-  | MyString(string);
+<span class="hljs-keyword">type</span> animal =
+  | <span class="hljs-constructor">MyFloat</span>(float)
+  | <span class="hljs-constructor">MyString</span>(string);
 
-let betterDraw = (animal) =&gt;
-  switch (animal) {
-  | MyFloat(f) =&gt; draw(f)
-  | MyString(s) =&gt; draw(s)
+<span class="hljs-keyword">let</span> betterDraw = (animal) =&gt;
+  <span class="hljs-keyword">switch</span> (animal) {
+  | <span class="hljs-constructor">MyFloat</span>(f) =&gt; draw(f)
+  | <span class="hljs-constructor">MyString</span>(s) =&gt; draw(s)
   };
 </code></pre>
 <p>當然可以這麼做，但有更好的方法！例如，簡單使用兩個 <code>external</code> 編譯同個 JS 呼叫：</p>
-<pre><code class="hljs css language-reason">[@bs.module &quot;myLibrary&quot;] external drawFloat : float =&gt; unit = &quot;draw&quot;;
-[@bs.module &quot;myLibrary&quot;] external drawString : string =&gt; unit = &quot;draw&quot;;
+<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.module "myLibrary"]</span> <span class="hljs-keyword">external</span> drawFloat : float =&gt; unit = <span class="hljs-string">"draw"</span>;
+<span class="hljs-attribute">[@bs.module "myLibrary"]</span> <span class="hljs-keyword">external</span> drawString : string =&gt; unit = <span class="hljs-string">"draw"</span>;
 </code></pre>
 <p>BuckleScript 也提供了<a href="https://bucklescript.github.io/docs/en/function.html#modeling-polymorphic-function">幾個方式</a>供使用。</p>
 <h3><a class="anchor" aria-hidden="true" id="變異型別是從欄位找出"></a><a href="#變異型別是從欄位找出" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>變異型別是從欄位找出</h3>
@@ -181,12 +181,12 @@ let betterDraw = (animal) =&gt;
 }
 </code></pre>
 <p>這是線性（<code>O(n)</code>）的分支量檢查。跟 Reason 變異的比較：</p>
-<pre><code class="hljs css language-reason">type animal = Dog | Cat | Bird;
-let data = Dog;
-switch (data) {
-| Dog =&gt; ...
-| Cat =&gt; ...
-| Bird =&gt; ...
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> animal = <span class="hljs-constructor">Dog</span> | <span class="hljs-constructor">Cat</span> | <span class="hljs-constructor">Bird</span>;
+<span class="hljs-keyword">let</span> data = <span class="hljs-constructor">Dog</span>;
+<span class="hljs-keyword">switch</span> (data) {
+| <span class="hljs-constructor">Dog</span> =&gt; <span class="hljs-operator">...</span>
+| <span class="hljs-constructor">Cat</span> =&gt; <span class="hljs-operator">...</span>
+| <span class="hljs-constructor">Bird</span> =&gt; <span class="hljs-operator">...</span>
 }
 </code></pre>
 <p>編譯器看到變異，接著</p>

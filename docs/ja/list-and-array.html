@@ -73,7 +73,7 @@
 <li>イミュータブル</li>
 <li>先頭に要素を追加するのが速い</li>
 </ul>
-<pre><code class="hljs css language-reason">let myList = [1, 2, 3];
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> myList = <span class="hljs-literal">[</span><span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span><span class="hljs-literal">]</span>;
 </code></pre>
 <p>Reason のリストはシンプルで、単方向リストです。</p>
 <h3><a class="anchor" aria-hidden="true" id="使い方"></a><a href="#使い方" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>使い方</h3>
@@ -81,18 +81,18 @@
 <p>標準ライブラリは <a href="/api/List.html">List モジュール</a> (およびラベル付き引数版の <code>ListLabels</code>）を提供しています。</p>
 <h4><a class="anchor" aria-hidden="true" id="不変リストの前置"></a><a href="#不変リストの前置" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>不変リストの前置</h4>
 <p>ちょうど <code>List.cons</code> に相当する、スプレッドシンタックスを使用します。</p>
-<pre><code class="hljs css language-reason">let myList: list(int) = [1, 2, 3];
-let anotherList = [0, ...myList];
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> myList: list(int) = <span class="hljs-literal">[</span><span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span><span class="hljs-literal">]</span>;
+<span class="hljs-keyword">let</span> anotherList = <span class="hljs-literal">[</span><span class="hljs-number">0</span>, <span class="hljs-operator">...</span>myList<span class="hljs-literal">]</span>;
 </code></pre>
 <p><code>myList</code> は変更されていません。 <code>anotherList</code> は、現在 <code>[0, 1, 2, 3]</code> です。 これは効率的です。（線形ではなく定数時間） <code>anotherList</code> の最後の三要素は、<code>myList</code> と共有されます！</p>
 <p><strong>注意 <code>[a, ...b, ...c]</code> はシンタックスエラーになります。</strong> リストの複数のスプレッドはサポートしていません。 これは b のそれぞれの要素が <code>c</code> の先頭に一つづつ追加されるので、偶発的な線形演算（<code>O(b)</code>）になります。 これのために <code>List.concat</code> が使用できます。</p>
 <p>パフォーマンスと割当てのオーバーヘッドが線形（<code>O(n)</code>）になるため、list の真ん中にある任意の要素を更新することはお薦めしません。</p>
 <h4><a class="anchor" aria-hidden="true" id="アクセス"></a><a href="#アクセス" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>アクセス</h4>
 <p><code>switch</code>（<a href="/docs/ja/pattern-matching">パターンマッチングのセクション</a>に出てきます）は、通常、リストの要素にアクセスする時に使います。</p>
-<pre><code class="hljs css language-reason">let message =
-  switch (myList) {
-  | [] =&gt; &quot;This list is empty&quot;
-  | [a, ...rest] =&gt; &quot;The head of the list is the string &quot; ++ string_of_int(a)
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> message =
+  <span class="hljs-keyword">switch</span> (myList) {
+  | <span class="hljs-literal">[</span><span class="hljs-literal">]</span> =&gt; <span class="hljs-string">"This list is empty"</span>
+  | <span class="hljs-literal">[</span>a, <span class="hljs-operator">...</span>rest<span class="hljs-literal">]</span> =&gt; <span class="hljs-string">"The head of the list is the string "</span> <span class="hljs-operator">++</span> string_of_int(a)
   };
 </code></pre>
 <p>任意の要素にアクセスするには <code>List.nth</code> を使用します。</p>
@@ -109,18 +109,18 @@ let anotherList = [0, ...myList];
 <li>ネイティブで固定長（JavaScript では可変長）</li>
 </ul>
 <p><code>[|</code> と <code>|]</code> で囲みます。</p>
-<pre><code class="hljs css language-reason">let myArray = [|&quot;hello&quot;, &quot;world&quot;, &quot;how are you&quot;|];
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> myArray = <span class="hljs-literal">[|</span><span class="hljs-string">"hello"</span>, <span class="hljs-string">"world"</span>, <span class="hljs-string">"how are you"</span><span class="hljs-literal">|]</span>;
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="使用法"></a><a href="#使用法" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>使用法</h3>
 <p>標準ライブラリの <a href="/api/Array.html">Array</a> と <a href="/api/ArrayLabels.html">ArrayLabel</a> モジュール。 JS のコンパイルについては、おなじみの <a href="https://bucklescript.github.io/bucklescript/api/Js.Array.html">Js.Array</a> API もあります。</p>
 <p>配列の要素へのアクセスと更新は下記のようにします。</p>
-<pre><code class="hljs css language-reason">let myArray: array(string) = [|&quot;hello&quot;, &quot;world&quot;, &quot;how are you&quot;|];
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> myArray: array(string) = <span class="hljs-literal">[|</span><span class="hljs-string">"hello"</span>, <span class="hljs-string">"world"</span>, <span class="hljs-string">"how are you"</span><span class="hljs-literal">|]</span>;
 
-let firstItem = myArray[0]; /* &quot;hello&quot; */
+<span class="hljs-keyword">let</span> firstItem = myArray<span class="hljs-literal">[</span><span class="hljs-number">0</span><span class="hljs-literal">]</span>; <span class="hljs-comment">/* "hello" */</span>
 
-myArray[0] = &quot;hey&quot;;
+myArray<span class="hljs-literal">[</span><span class="hljs-number">0</span><span class="hljs-literal">]</span> = <span class="hljs-string">"hey"</span>;
 
-/* now [|&quot;hey&quot;, &quot;world&quot;, &quot;how are you&quot;|] */
+<span class="hljs-comment">/* now [|"hey", "world", "how are you"|] */</span>
 </code></pre>
 <p>上記の例の配列のアクセス/更新は <code>Array.get</code>/<code>Array.set</code> の単なるシンタックスシュガーです。</p>
 <h3><a class="anchor" aria-hidden="true" id="ヒントとコツ-1"></a><a href="#ヒントとコツ-1" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>ヒントとコツ</h3>

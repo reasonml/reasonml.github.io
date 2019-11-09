@@ -68,9 +68,9 @@
             });
         </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://crowdin.com/project/reason/ko" target="_blank" rel="noreferrer noopener">Translate</a><h1 class="postHeaderTitle">연동</h1></header><article><div><span><h2><a class="anchor" aria-hidden="true" id="just-dumping-javascript-in-the-middle-of-your-reason-code"></a><a href="#just-dumping-javascript-in-the-middle-of-your-reason-code" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Just dumping JavaScript in the middle of your Reason code</h2>
 <p>If you're just hacking things together, this can be very nice, but you also have all of the unsafety of JavaScript code</p>
-<pre><code class="hljs css language-reason">Js.log(&quot;this is reason&quot;);
+<pre><code class="hljs css language-reason"><span class="hljs-module-identifier">Js</span>.log(<span class="hljs-string">"this is reason"</span>);
 
-[%bs.raw {| console.log('here is some javascript for you') |}];
+<span class="hljs-attribute">[%bs.raw {| console.log('here is some javascript for you') |}]</span>;
 </code></pre>
 <blockquote>
 <p><code>{|</code> and <code>|}</code> are the delimiters of a multi-line string in OCaml. You can also put a tag in there e.g. <code>{something|</code> and then it will look for a matching <code>|something}</code> to close.</p>
@@ -83,19 +83,19 @@
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" id="dumping-in-some-javascript-and-making-it-accessible-from-reason"></a><a href="#dumping-in-some-javascript-and-making-it-accessible-from-reason" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Dumping in some JavaScript, and making it accessible from Reason</h2>
 <p>What if you want a value that can be used from your Reason code?</p>
-<pre><code class="hljs css language-reason">Js.log(&quot;this is reason&quot;);
-let x = [%bs.raw {| 'here is a string from javascript' |}];
-Js.log(x ++ &quot; back in reason land&quot;); /* ++ is the operator for string concat */
+<pre><code class="hljs css language-reason"><span class="hljs-module-identifier">Js</span>.log(<span class="hljs-string">"this is reason"</span>);
+<span class="hljs-keyword">let</span> x = <span class="hljs-attribute">[%bs.raw {| 'here is a string from javascript' |}]</span>;
+<span class="hljs-module-identifier">Js</span>.log(x <span class="hljs-operator">++</span> <span class="hljs-string">" back in reason land"</span>); <span class="hljs-comment">/* ++ is the operator for string concat */</span>
 </code></pre>
 <p>Now you might be wondering &quot;what magic is this?? How did ocaml know that <code>x</code> was a string?&quot; <strong>It doesn't</strong>. The type of <code>x</code> in this code is a magic type that will unify with anything! This is quite dangerous and can have cascading effects in OCaml's type inference algorithm.</p>
-<pre><code class="hljs css language-reason">let y = [%bs.raw {| 'something' |}];
-Js.log((&quot;a string&quot; ++ y, 10 + y));
-/* danger!! ocaml won't stop you from using y as 2 totally different types */
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> y = <span class="hljs-attribute">[%bs.raw {| 'something' |}]</span>;
+<span class="hljs-module-identifier">Js</span>.log((<span class="hljs-string">"a string"</span> <span class="hljs-operator">++</span> y, <span class="hljs-number">10</span> <span class="hljs-operator">+</span> y));
+<span class="hljs-comment">/* danger!! ocaml won't stop you from using y as 2 totally different types */</span>
 </code></pre>
 <p>To fix this, you should <strong>always</strong> provide a concrete type for the result of <code>bs.raw</code>.</p>
-<pre><code class="hljs css language-reason">let x: string = [%bs.raw {| 'well-typed' |}];
-Js.log(x ++ &quot; back in reason land&quot;);
-/* ocaml will error out if you try to use x as anything other than a string */
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> x: string = <span class="hljs-attribute">[%bs.raw {| 'well-typed' |}]</span>;
+<span class="hljs-module-identifier">Js</span>.log(x <span class="hljs-operator">++</span> <span class="hljs-string">" back in reason land"</span>);
+<span class="hljs-comment">/* ocaml will error out if you try to use x as anything other than a string */</span>
 </code></pre>
 <p>And here's the output!</p>
 <pre><code class="hljs css language-js"><span class="hljs-comment">// Generated by BUCKLESCRIPT VERSION 1.7.4, PLEASE EDIT WITH CARE</span>
@@ -123,7 +123,7 @@ Js.log(x ++ &quot; back in reason land&quot;);
 <li>If you want to go deeper, there's a list <a href="https://bucklescript.github.io/docs/en/common-data-types.html#cheat-sheet">in the BuckleScript documentation</a></li>
 </ul>
 <p>Knowing that, we can write a function in JavaScript that just accepts an array and returns a number, without much trouble at all.</p>
-<pre><code class="hljs css language-reason">let jsCalculate: (array(int), int) =&gt; int = [%bs.raw
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> jsCalculate: (array(int), int) =&gt; int = <span class="hljs-attribute">[%bs.raw
   {|
  function (numbers, scaleFactor) {
    var result = 0;
@@ -133,11 +133,11 @@ Js.log(x ++ &quot; back in reason land&quot;);
    return result * scaleFactor;
  }
 |}
-];
+]</span>;
 
-let calculate = (numbers, scaleFactor) =&gt; jsCalculate(Array.of_list(numbers), scaleFactor);
+<span class="hljs-keyword">let</span> calculate = (numbers, scaleFactor) =&gt; jsCalculate(<span class="hljs-module-identifier">Array</span>.of_list(numbers), scaleFactor);
 
-Js.log(calculate([1, 2, 3], 10)); /* -&gt; 60 */
+<span class="hljs-module-identifier">Js</span>.log(calculate(<span class="hljs-literal">[</span><span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span><span class="hljs-literal">]</span>, <span class="hljs-number">10</span>)); <span class="hljs-comment">/* -&gt; 60 */</span>
 </code></pre>
 <p>Of course, this function that I wrote in JavaScript could be ported over to Reason without much hassle.</p>
 <p><strong>Remember</strong> that this is an escape hatch that's very useful for learning so you can jump in quickly and make something, but it's a good exercise to go back through and convert things back into nice type safe reason code.</p>
@@ -146,32 +146,32 @@ Js.log(calculate([1, 2, 3], 10)); /* -&gt; 60 */
 <p>So far we've been using <code>bs.raw</code>, which is a very fast and loose way to do it, and <strong>not</strong> suitable for production.</p>
 <p>But what if we actually need to call a function that's in JavaScript? It's needed for interacting with the DOM, or using node modules. In BuckleScript, you use an <code>external</code> declaration (<a href="https://bucklescript.github.io/docs/en/intro-to-external.html">docs</a>).</p>
 <p>Getting a value and getting a function are both pretty easy:</p>
-<pre><code class="hljs css language-reason">[@bs.val] external pi : float = &quot;Math.PI&quot;;
-let tau = pi *. 2.0;
-[@bs.val] external alert : string =&gt; unit = &quot;alert&quot;;
-alert(&quot;hello&quot;);
+<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.val]</span> <span class="hljs-keyword">external</span> pi : float = <span class="hljs-string">"Math.PI"</span>;
+<span class="hljs-keyword">let</span> tau = pi <span class="hljs-operator">*.</span> <span class="hljs-number">2.0</span>;
+<span class="hljs-attribute">[@bs.val]</span> <span class="hljs-keyword">external</span> alert : string =&gt; unit = <span class="hljs-string">"alert"</span>;
+alert(<span class="hljs-string">"hello"</span>);
 </code></pre>
 <p>But what about when we want something more complicated? Here's how we could call <code>getContext</code> on a Canvas DOM node:</p>
-<pre><code class="hljs css language-reason">type canvas;
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> canvas;
 
-type context;
+<span class="hljs-keyword">type</span> context;
 
-/* we're leaving these types abstract, because we won't
- * be using them directly anywhere */
-[@bs.send] external getContext : (canvas, string) =&gt; context = &quot;getContext&quot;;
+<span class="hljs-comment">/* we're leaving these types abstract, because we won't
+ * be using them directly anywhere */</span>
+<span class="hljs-attribute">[@bs.send]</span> <span class="hljs-keyword">external</span> getContext : (canvas, string) =&gt; context = <span class="hljs-string">"getContext"</span>;
 
-let myCanvas: canvas = [%bs.raw {| document.getElementById(&quot;mycanvas&quot;) |}];
+<span class="hljs-keyword">let</span> myCanvas: canvas = <span class="hljs-attribute">[%bs.raw {| document.getElementById("mycanvas") |}]</span>;
 
-let ctx = getContext(myCanvas, &quot;2d&quot;);
+<span class="hljs-keyword">let</span> ctx = getContext(myCanvas, <span class="hljs-string">"2d"</span>);
 </code></pre>
 <p>So let's unpack what's going on. We created some abstract types for the Canvas DOM node and the associated RenderingContext object.</p>
 <p>Then we made a <code>getContext</code> function, but instead of <code>@bs.val</code> we used <code>@bs.send</code>, and we used an empty string for the text of the external. <code>@bs.send</code> means &quot;we're calling a method on the first argument&quot;, which in this case is the canvas. Given the above, BuckleScript will translate <code>getContext(theFirstArgument, theSecondArgument)</code> into <code>theFirstArgument.getContext(theSecondArgument, ...)</code>.</p>
 <p>The empty string means &quot;the JS name is the same as the name we're giving the external in BuckleScript-land&quot; – in this case <code>getContext</code>. If we wanted to name it something else (like <code>getRenderingContext</code>), then we'd have to supply the string <code>&quot;getContext&quot;</code> so that BuckleScript calls the right function.</p>
 <p>Let's add one more function just so it's interesting.</p>
-<pre><code class="hljs css language-reason">[@bs.send] external fillRect : (context, float, float, float, float) =&gt; unit = &quot;fillRect&quot;;
+<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.send]</span> <span class="hljs-keyword">external</span> fillRect : (context, float, float, float, float) =&gt; unit = <span class="hljs-string">"fillRect"</span>;
 </code></pre>
 <p>And now we can draw something!</p>
-<pre><code class="hljs css language-reason">fillRect(ctx, 0.0, 0.0, 100.0, 100.0);
+<pre><code class="hljs css language-reason">fillRect(ctx, <span class="hljs-number">0.0</span>, <span class="hljs-number">0.0</span>, <span class="hljs-number">100.0</span>, <span class="hljs-number">100.0</span>);
 </code></pre>
 <p>It's not much, but adding other canvas methods is similar, and then you can start doing some <a href="https://twitter.com/jaredforsyth/status/871062358076030976">really fun things</a>.</p>
 <p>So what does the compiled JavaScript look like?</p>
@@ -187,11 +187,11 @@ ctx.fillRect(<span class="hljs-number">0.0</span>, <span class="hljs-number">0.0
 <p>When folks write wrappers for a particular JavaScript library, they'd usually publish it to npm. Head over to the <a href="/docs/ko/libraries">Libraries</a> to find out how to find these.</p>
 <p>To use a library that does not have existing wrappers, however, you'll want to first install the npm package as usual, e.g. using <code>npm install --save &lt;package-name&gt;</code>, then just go ahead and write your wrapper. You'll probably find the <a href="https://bucklescript.github.io/docs/en/import-export.html#import"><code>bs.module</code></a> FFI feature particularly useful; it emits the right <code>import</code>s or <code>require</code>s, depending on the JS compilation target's module format.</p>
 <p>As an example, here's the entire source code of the <a href="https://github.com/reasonml-community/bs-glob"><code>bs.glob</code></a> wrapper (converted to Reason, the original is OCaml):</p>
-<pre><code class="hljs css language-reason">type error;
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> error;
 
-[@bs.module] external glob : (string, (Js.nullable(error), array(string)) =&gt; unit) =&gt; unit = &quot;glob&quot;;
+<span class="hljs-attribute">[@bs.module]</span> <span class="hljs-keyword">external</span> glob : (string, (<span class="hljs-module-identifier">Js</span>.nullable(error), array(string)) =&gt; unit) =&gt; unit = <span class="hljs-string">"glob"</span>;
 
-[@bs.val] [@bs.module &quot;glob&quot;] external sync : string =&gt; array(string) = &quot;glob&quot;;
+<span class="hljs-attribute">[@bs.val]</span> <span class="hljs-attribute">[@bs.module "glob"]</span> <span class="hljs-keyword">external</span> sync : string =&gt; array(string) = <span class="hljs-string">"glob"</span>;
 </code></pre>
 <p>And the relevant parts of <code>package.json</code>:</p>
 <pre><code class="hljs css language-json">{

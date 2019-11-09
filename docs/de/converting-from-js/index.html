@@ -93,15 +93,15 @@
 <li>Führe weitere solcher Änderungen durch. Für Idiome, die kein Äquivalent in BuckleScript haben, verwende <code>bs.raw</code> (<a href="https://bucklescript.github.io/docs/en/embed-raw-javascript.html">documentation</a>).</li>
 </ul>
 <p>Nochmals, <strong>sorge dich nur darum, die Datei syntaktisch gültig zu machen</strong>. Der Versuch, beim Konvertieren einer Datei alle drei Syntaxarten, Typen und andere Semantiken zu lernen, reduziert die Iterationsgeschwindigkeit auf weniger als ein Drittel.</p>
-<pre><code class="hljs css language-reason">/* syntaktisch gültige, semantisch falsche Konvertierung */
-/* const school = require('school'); */
-let defaultId = 10;
+<pre><code class="hljs css language-reason"><span class="hljs-comment">/* syntaktisch gültige, semantisch falsche Konvertierung */</span>
+<span class="hljs-comment">/* const school = require('school'); */</span>
+<span class="hljs-keyword">let</span> defaultId = <span class="hljs-number">10</span>;
 
-let queryResult = (usePayload, payload) =&gt;
-  if (usePayload) {
+<span class="hljs-keyword">let</span> queryResult = (usePayload, payload) =&gt;
+  <span class="hljs-keyword">if</span> (usePayload) {
     payload.student
-  } else {
-    /* kein vorzeitiges return in Reason gebraucht; if-else ist ein Ausdruck */
+  } <span class="hljs-keyword">else</span> {
+    <span class="hljs-comment">/* kein vorzeitiges return in Reason gebraucht; if-else ist ein Ausdruck */</span>
     school.getStudentById(
       defaultId
     )
@@ -121,15 +121,15 @@ let queryResult = (usePayload, payload) =&gt;
 </ul></li>
 </ul>
 <p>Dies ist der erste Durchgang. Die endgültigen Typen sehen wahrscheinlich anders aus. Ernte vorerst die Belohnungen! Sobald du endlich alle Typfehler behoben hast, sollte deine JS-Datei nun generiert werden. Halte sie nebeneinander geöffnet. Zeit zurückzukehren und alle Hacks zu reparieren!</p>
-<pre><code class="hljs css language-reason">/* syntaktisch gültig, semantisch falsch, aber besser */
-[@bs.module &quot;school&quot;] external getStudentById : 'whatever =&gt; 'whateverElse = &quot;getStudentById&quot;;
+<pre><code class="hljs css language-reason"><span class="hljs-comment">/* syntaktisch gültig, semantisch falsch, aber besser */</span>
+<span class="hljs-attribute">[@bs.module "school"]</span> <span class="hljs-keyword">external</span> getStudentById : 'whatever =&gt; 'whateverElse = <span class="hljs-string">"getStudentById"</span>;
 
-let defaultId = 10;
+<span class="hljs-keyword">let</span> defaultId = <span class="hljs-number">10</span>;
 
-let queryResult = (usePayload, payload) =&gt;
-  if (usePayload) {
-    payload##student /* this will be inferred as `Js.t 'a` */
-  } else {
+<span class="hljs-keyword">let</span> queryResult = (usePayload, payload) =&gt;
+  <span class="hljs-keyword">if</span> (usePayload) {
+    payload##student <span class="hljs-comment">/* this will be inferred as `Js.t 'a` */</span>
+  } <span class="hljs-keyword">else</span> {
     getStudentById(defaultId)
   };
 </code></pre>
@@ -141,18 +141,18 @@ let queryResult = (usePayload, payload) =&gt;
 <li>Konvertiere alle Teile in Records/Varianten/idiomatische OCaml-Typen.</li>
 </ul>
 <p>Überprüfe die ganze Zeit, ob es in der Ausgabe Änderungen gibt.</p>
-<pre><code class="hljs css language-reason">type student; /* abstrakter Typ, wird später beschrieben */
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> student; <span class="hljs-comment">/* abstrakter Typ, wird später beschrieben */</span>
 
-[@bs.module &quot;school&quot;] external getStudentById : 'whatever =&gt; student = &quot;getStudentById&quot;;
+<span class="hljs-attribute">[@bs.module "school"]</span> <span class="hljs-keyword">external</span> getStudentById : 'whatever =&gt; student = <span class="hljs-string">"getStudentById"</span>;
 
-type payloadType = {. &quot;student&quot;: student};
+<span class="hljs-keyword">type</span> payloadType = {. <span class="hljs-string">"student"</span>: student};
 
-let defaultId = 10;
+<span class="hljs-keyword">let</span> defaultId = <span class="hljs-number">10</span>;
 
-let queryResult = (usePayload, payload: payloadType) =&gt;
-  if (usePayload) {
+<span class="hljs-keyword">let</span> queryResult = (usePayload, payload: payloadType) =&gt;
+  <span class="hljs-keyword">if</span> (usePayload) {
     payload##student
-  } else {
+  } <span class="hljs-keyword">else</span> {
     getStudentById(defaultId)
   };
 </code></pre>
@@ -163,23 +163,23 @@ let queryResult = (usePayload, payload: payloadType) =&gt;
 <li>Stelle sicher, dass du keine <code>'whatever</code>-Typen in <code>externals</code>s übrig gelassen hast.</li>
 <li>Du kannst die <code>external</code>s inline beibehalten oder sie in eine Datei auslagern.</li>
 </ul>
-<pre><code class="hljs css language-reason">/* in der aktuellen Datei */
-type payloadType = {. &quot;student&quot;: School.student}; /* TODO: schiebe dies woanders hin! */
+<pre><code class="hljs css language-reason"><span class="hljs-comment">/* in der aktuellen Datei */</span>
+<span class="hljs-keyword">type</span> payloadType = {. <span class="hljs-string">"student"</span>: <span class="hljs-module-identifier">School</span>.student}; <span class="hljs-comment">/* <span class="hljs-doctag">TODO:</span> schiebe dies woanders hin! */</span>
 
-let defaultId = 10;
+<span class="hljs-keyword">let</span> defaultId = <span class="hljs-number">10</span>;
 
-let queryResult = (usePayload, payload: payloadType) =&gt;
-  if (usePayload) {
+<span class="hljs-keyword">let</span> queryResult = (usePayload, payload: payloadType) =&gt;
+  <span class="hljs-keyword">if</span> (usePayload) {
     payload##student
-  } else {
-    School.getStudentById(defaultId)
+  } <span class="hljs-keyword">else</span> {
+    <span class="hljs-module-identifier">School</span>.getStudentById(defaultId)
   };
 </code></pre>
-<pre><code class="hljs css language-reason">/* in einer dezidierten Datei School.re */
-type student;
+<pre><code class="hljs css language-reason"><span class="hljs-comment">/* in einer dezidierten Datei School.re */</span>
+<span class="hljs-keyword">type</span> student;
 
-[@bs.module &quot;School&quot;] external getStudentById : int =&gt; student = &quot;getStudentById&quot;;
-[@bs.module &quot;School&quot;] external getAllStudents : unit =&gt; array(student) = &quot;getAllStudents&quot;;
+<span class="hljs-attribute">[@bs.module "School"]</span> <span class="hljs-keyword">external</span> getStudentById : int =&gt; student = <span class="hljs-string">"getStudentById"</span>;
+<span class="hljs-attribute">[@bs.module "School"]</span> <span class="hljs-keyword">external</span> getAllStudents : unit =&gt; array(student) = <span class="hljs-string">"getAllStudents"</span>;
 </code></pre>
 <p>Der Typ <code>student</code> hat keinen eigentlichen Inhalt. Dies wird ein <a href="/docs/de/module#signatures">abstrakter Typ</a> genannt. Es ist eine bequeme Möglichkeit, die Beziehung zwischen Aufrufen von externals anzugeben, ohne zu wissen, wie die Daten unter der Haube aufgebaut sind.</p>
 <p>Und dann bist du fertig!</p>

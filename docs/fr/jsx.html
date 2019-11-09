@@ -70,53 +70,53 @@
 <p>Reason supporte la syntaxe JSX, avec quelques légères différences par rapport à celle utilisée dans <a href="https://facebook.github.io/react/docs/introducing-jsx.html">ReactJS</a>. Le JSX de Reason n'est pas lié à ReactJS ; il se traduit en classiques appels de fonctions :</p>
 <p><strong>Note</strong> pour les lecteurs de <a href="//reasonml.github.io/reason-react/">ReasonReact</a> : ce n'est pas la manière dont ReasonReact transforme le code JSX, au final. Voir la section Utilisation pour plus d'informations.</p>
 <h2><a class="anchor" aria-hidden="true" id="balise-avec-une-majuscule"></a><a href="#balise-avec-une-majuscule" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Balise avec une majuscule</h2>
-<pre><code class="hljs css language-reason">&lt;MyComponent foo={bar} /&gt;
+<pre><code class="hljs css language-reason">&lt;<span class="hljs-module-identifier">MyComponent</span> foo={bar} /&gt;
 </code></pre>
 <p>devient</p>
-<pre><code class="hljs css language-reason">([@JSX] MyComponent.createElement(~foo=bar, ~children=[], ()));
+<pre><code class="hljs css language-reason">(<span class="hljs-attribute">[@JSX]</span> <span class="hljs-module-identifier">MyComponent</span>.createElement(~foo=bar, ~children=<span class="hljs-literal">[</span><span class="hljs-literal">]</span>, ()));
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" id="balise-sans-majuscule"></a><a href="#balise-sans-majuscule" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Balise sans majuscule</h2>
 <pre><code class="hljs css language-reason">&lt;div foo={bar}&gt; child1 child2 &lt;/div&gt;;
 </code></pre>
 <p>devient</p>
-<pre><code class="hljs css language-reason">([@JSX] div(~foo=bar, ~children=[child1, child2], ()));
+<pre><code class="hljs css language-reason">(<span class="hljs-attribute">[@JSX]</span> div(~foo=bar, ~children=<span class="hljs-literal">[</span>child1, child2<span class="hljs-literal">]</span>, ()));
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" id="fragment"></a><a href="#fragment" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Fragment</h2>
 <pre><code class="hljs css language-reason">&lt;&gt; child1 child2 &lt;/&gt;;
 </code></pre>
 <p>devient</p>
-<pre><code class="hljs css language-reason">([@JSX] [child1, child2]);
+<pre><code class="hljs css language-reason">(<span class="hljs-attribute">[@JSX]</span> <span class="hljs-literal">[</span>child1, child2<span class="hljs-literal">]</span>);
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="enfants"></a><a href="#enfants" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Enfants</h3>
-<pre><code class="hljs css language-reason">&lt;MyComponent&gt; foo bar &lt;/MyComponent&gt;
+<pre><code class="hljs css language-reason">&lt;<span class="hljs-module-identifier">MyComponent</span>&gt; foo bar &lt;/<span class="hljs-module-identifier">MyComponent</span>&gt;
 </code></pre>
 <p>C'est la syntaxe pour passer une liste de deux éléments, <code>foo</code> et <code>bar</code>, comme enfants. Cela « désucre » une liste contenant <code>foo</code> et <code>bar</code> :</p>
-<pre><code class="hljs css language-reason">([@JSX] MyComponent.createElement(~children=[foo, bar], ()));
+<pre><code class="hljs css language-reason">(<span class="hljs-attribute">[@JSX]</span> <span class="hljs-module-identifier">MyComponent</span>.createElement(~children=<span class="hljs-literal">[</span>foo, bar<span class="hljs-literal">]</span>, ()));
 </code></pre>
 <p><strong>Notez</strong> à nouveau que ce n'est pas la transformation appliquée par ReasonReact. ReasonReact transforme la liste finale en tableau. Mais l'idée reste la même.</p>
 <p>Donc naturellement, <code>&lt;MyComponent&gt; foo &lt;/MyComponent&gt;</code> devient <code>([@JSX] MyComponent.createElement(~children=[foo], ()))</code>. Autrement dit, quoi que vous fassiez, les paramètres passés comme enfants seront placés dans une liste. Et si vous ne le souhaitez pas ? <strong>Qu’en est-il si vous voulez passer directement <code>foo</code> sans l’englober dans quoi que soit ?</strong></p>
 <h4><a class="anchor" aria-hidden="true" id="spread-denfants"></a><a href="#spread-denfants" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><em>Spread d'enfants</em></h4>
 <p>Pour répondre cette problématique, nous avons introduit :</p>
-<pre><code class="hljs css language-reason">&lt;MyComponent&gt; ...foo &lt;/MyComponent&gt;
+<pre><code class="hljs css language-reason">&lt;<span class="hljs-module-identifier">MyComponent</span>&gt; <span class="hljs-operator">...</span>foo &lt;/<span class="hljs-module-identifier">MyComponent</span>&gt;
 </code></pre>
 <p>Ceci passe la valeur <code>foo</code> <em>sans</em> l’englober dans une liste (ni dans un tableau, dans le cas de ReasonReact). Dit autrement dit, cela devient :</p>
-<pre><code class="hljs css language-reason">([@JSX] MyComponent.createElement(~children=foo, ()));
+<pre><code class="hljs css language-reason">(<span class="hljs-attribute">[@JSX]</span> <span class="hljs-module-identifier">MyComponent</span>.createElement(~children=foo, ()));
 </code></pre>
 <p>C’est extrêmement utile dans le cas où vous avez sous la main <code>foo</code> qui est déjà une liste, et vous voulez la passer sans l’inclure dans une nouvelle liste (ce qui constituerait une erreur de type) *. Cela vous permet également de passer des structures de données arbitraires comme <code>children</code> (pour rappel, en JSX <code>children</code> n’est qu’une simple propriété) :</p>
-<pre><code class="hljs css language-reason">&lt;MyComponent&gt; ...((theClassName) =&gt; &lt;div className=theClassName /&gt;) &lt;/MyComponent&gt;;
-&lt;MyForm&gt; ...(&quot;Hello&quot;, &quot;Submit&quot;) &lt;/MyForm&gt;;
+<pre><code class="hljs css language-reason">&lt;<span class="hljs-module-identifier">MyComponent</span>&gt; <span class="hljs-operator">...</span>((theClassName) =&gt; &lt;div className=theClassName /&gt;) &lt;/<span class="hljs-module-identifier">MyComponent</span>&gt;;
+&lt;<span class="hljs-module-identifier">MyForm</span>&gt; <span class="hljs-operator">...</span>(<span class="hljs-string">"Hello"</span>, <span class="hljs-string">"Submit"</span>) &lt;/<span class="hljs-module-identifier">MyForm</span>&gt;;
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" id="utilisation"></a><a href="#utilisation" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Utilisation</h2>
 <p>Voir <a href="//reasonml.github.io/reason-react/docs/jsx">ReasonReact</a> pour un exemple d’application de JSX, qui transforme les appels ci-dessus en un appel spécifique à ReasonReact.</p>
 <p>Voici une balise JSX qui montre la plupart des fonctionnalités.</p>
-<pre><code class="hljs css language-reason">&lt;MyComponent
-  booleanAttribute={true}
-  stringAttribute=&quot;string&quot;
-  intAttribute=1
-  forcedOptional=?{Some(&quot;hello&quot;)}
+<pre><code class="hljs css language-reason">&lt;<span class="hljs-module-identifier">MyComponent</span>
+  booleanAttribute={<span class="hljs-literal">true</span>}
+  stringAttribute=<span class="hljs-string">"string"</span>
+  intAttribute=<span class="hljs-number">1</span>
+  forcedOptional=?{<span class="hljs-constructor">Some</span>(<span class="hljs-string">"hello"</span>)}
   onClick={send(handleClick)}&gt;
-  &lt;div&gt; {ReasonReact.stringToElement(&quot;hello&quot;)} &lt;/div&gt;
-&lt;/MyComponent&gt;
+  &lt;div&gt; {<span class="hljs-module-identifier">ReasonReact</span>.stringToElement(<span class="hljs-string">"hello"</span>)} &lt;/div&gt;
+&lt;/<span class="hljs-module-identifier">MyComponent</span>&gt;
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" id="differences-avec-le-jsx-de-javascript"></a><a href="#differences-avec-le-jsx-de-javascript" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Différences avec le JSX de JavaScript</h2>
 <ul>
@@ -127,7 +127,7 @@
 <h3><a class="anchor" aria-hidden="true" id="punning"></a><a href="#punning" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Punning</h3>
 <p>Le « punning » désigne le raccourci de syntaxe pour quand un libellé et sa valeur sont les mêmes. Par exemple, en JavaScript, au lieu de faire <code>return {name: name}</code>, vous pouvez faire <code>return {name}</code>.</p>
 <p>Le JSX de Reason supporte le <em>punning</em>. <code>&lt;input checked /&gt;</code> n’est qu'un raccourci pour <code>&lt;input checked=checked /&gt;</code>. Le formateur vous aidera à formater votre code ainsi dès que possible. C’est pratique dans les cas où il y a un grand nombre de propriétés à passer :</p>
-<pre><code class="hljs css language-reason">&lt;MyComponent isLoading text onClick /&gt;
+<pre><code class="hljs css language-reason">&lt;<span class="hljs-module-identifier">MyComponent</span> isLoading text onClick /&gt;
 </code></pre>
 <p>Par conséquent, un composant JSX en Reason peut se permettre d’avoir un peu plus de propriétés avant d’avoir recours à une bibliothèque évitant de passer des propriétés.</p>
 <p><strong>Note</strong> : ceci est une différence avec le JSX de ReactJS, qui ne permet <strong>pas</strong> le <em>punning</em>. Avec ReactJS, <code>&lt;input checked /&gt;</code> devient <code>&lt;input checked=true /&gt;</code>, afin de se conformer aux idiomes de DOM pour compatibilité.</p>

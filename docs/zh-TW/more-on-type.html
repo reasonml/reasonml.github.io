@@ -69,51 +69,51 @@
         </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://crowdin.com/project/reason/zh-TW" target="_blank" rel="noreferrer noopener">Translate</a><h1 class="postHeaderTitle">More on Type</h1></header><article><div><span><h2><a class="anchor" aria-hidden="true" id="型別參數"></a><a href="#型別參數" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>型別參數！</h2>
 <p>型別可以接受參數，類似其他語言的泛型（generics）。 就像型別是個函式接受參數傳回新的型別！ 參數<strong>必須</strong>使用 <code>'</code> 開頭。</p>
 <p>參數化型別的用途在於減少重複。使用前：</p>
-<pre><code class="hljs css language-reason">/* 這是 3 個項目的 tuple，稍後解釋 */
-type intCoordinates = (int, int, int);
-type floatCoordinates = (float, float, float);
+<pre><code class="hljs css language-reason"><span class="hljs-comment">/* 這是 3 個項目的 tuple，稍後解釋 */</span>
+<span class="hljs-keyword">type</span> intCoordinates = (int, int, int);
+<span class="hljs-keyword">type</span> floatCoordinates = (float, float, float);
 
-let buddy: intCoordinates = (10, 20, 20);
+<span class="hljs-keyword">let</span> buddy: intCoordinates = (<span class="hljs-number">10</span>, <span class="hljs-number">20</span>, <span class="hljs-number">20</span>);
 </code></pre>
 <p>使用後：</p>
-<pre><code class="hljs css language-reason">type coordinates('a) = ('a, 'a, 'a);
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> coordinates('a) = ('a, 'a, 'a);
 
-/* 套用同等的 &quot;型別函式&quot; 傳回 (int, int, int) 型別 */
-type intCoordinatesAlias = coordinates(int);
+<span class="hljs-comment">/* 套用同等的 "型別函式" 傳回 (int, int, int) 型別 */</span>
+<span class="hljs-keyword">type</span> intCoordinatesAlias = coordinates(int);
 
-let buddy: intCoordinatesAlias = (10, 20, 20);
+<span class="hljs-keyword">let</span> buddy: intCoordinatesAlias = (<span class="hljs-number">10</span>, <span class="hljs-number">20</span>, <span class="hljs-number">20</span>);
 
-/* 或者，更常見的，撰寫成內嵌（inline） */
-let buddy: coordinates(float) = (10.5, 20.5, 20.5);
+<span class="hljs-comment">/* 或者，更常見的，撰寫成內嵌（inline） */</span>
+<span class="hljs-keyword">let</span> buddy: coordinates(float) = (<span class="hljs-number">10.5</span>, <span class="hljs-number">20.5</span>, <span class="hljs-number">20.5</span>);
 </code></pre>
 <p>實際上，型別會幫你推論。所以上述更簡潔的版本會是：</p>
-<pre><code class="hljs css language-reason">let buddy = (10, 20, 20);
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> buddy = (<span class="hljs-number">10</span>, <span class="hljs-number">20</span>, <span class="hljs-number">20</span>);
 </code></pre>
 <p>型別系統推論它是 <code>(int, int, int)</code> 型別。不需要額外撰寫。</p>
 <p>型別參數出現在任何地方。</p>
-<pre><code class="hljs css language-reason">/* 推論出 `list(string)` */
-let greetings = [&quot;hello&quot;, &quot;world&quot;, &quot;how are you&quot;];
+<pre><code class="hljs css language-reason"><span class="hljs-comment">/* 推論出 `list(string)` */</span>
+<span class="hljs-keyword">let</span> greetings = <span class="hljs-literal">[</span><span class="hljs-string">"hello"</span>, <span class="hljs-string">"world"</span>, <span class="hljs-string">"how are you"</span><span class="hljs-literal">]</span>;
 </code></pre>
 <p>如果型別不接受參數（例如，沒有 &quot;型別函式&quot;），標準函式庫就會需要定義 <code>listOfString</code> 、<code>listOfInt</code>、<code>listOfTuplesOfInt</code> 等型別。</p>
 <p>型別可以接受多個參數，並且組合在一起。</p>
-<pre><code class="hljs css language-reason">type result('a, 'b) =
-  | Ok('a)
-  | Error('b);
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> result('a, 'b) =
+  | <span class="hljs-constructor">Ok</span>('a)
+  | <span class="hljs-constructor">Error</span>('b);
 
-type myPayload = {data: string};
+<span class="hljs-keyword">type</span> myPayload = {data: string};
 
-type myPayloadResults('errorType) = list(result(myPayload, 'errorType));
+<span class="hljs-keyword">type</span> myPayloadResults('errorType) = list(result(myPayload, 'errorType));
 
-let payloadResults: myPayloadResults(string) = [
-  Ok({data: &quot;hi&quot;}),
-  Ok({data: &quot;bye&quot;}),
-  Error(&quot;Something wrong happened!&quot;)
-];
+<span class="hljs-keyword">let</span> payloadResults: myPayloadResults(string) = <span class="hljs-literal">[</span>
+  <span class="hljs-constructor">Ok</span>({data: <span class="hljs-string">"hi"</span>}),
+  <span class="hljs-constructor">Ok</span>({data: <span class="hljs-string">"bye"</span>}),
+  <span class="hljs-constructor">Error</span>(<span class="hljs-string">"Something wrong happened!"</span>)
+<span class="hljs-literal">]</span>;
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" id="相互遞迴型別"></a><a href="#相互遞迴型別" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>相互遞迴型別</h2>
 <p>就像是函式，型別可以用 <code>and</code> 相互遞迴：</p>
-<pre><code class="hljs css language-reason">type student = {taughtBy: teacher}
-and teacher = {students: list(student)};
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> student = {taughtBy: teacher}
+<span class="hljs-keyword">and</span> teacher = {students: list(student)};
 </code></pre>
 <p><strong>注意</strong>第一行結尾沒有分號，第二行沒有 <code>type</code>。</p>
 <h2><a class="anchor" aria-hidden="true" id="設計決策"></a><a href="#設計決策" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>設計決策</h2>

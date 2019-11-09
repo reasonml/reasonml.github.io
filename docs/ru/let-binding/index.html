@@ -67,33 +67,33 @@
               }
             });
         </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://crowdin.com/project/reason/ru" target="_blank" rel="noreferrer noopener">Translate</a><h1 class="postHeaderTitle">Связывание с использованием let</h1></header><article><div><span><p>Let привязка (let binding) в других языках называется декларацией/присваиванием переменной. <code>let</code> дает имена значениям. Они могут быть видны и использоваться кодом следующим после них.</p>
-<pre><code class="hljs css language-reason">let greeting = &quot;hello!&quot;;
-let score = 10;
-let newScore = 10 + score;
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> greeting = <span class="hljs-string">"hello!"</span>;
+<span class="hljs-keyword">let</span> score = <span class="hljs-number">10</span>;
+<span class="hljs-keyword">let</span> newScore = <span class="hljs-number">10</span> <span class="hljs-operator">+</span> score;
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" id="блочная-область-видимости"></a><a href="#блочная-область-видимости" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Блочная область видимости</h2>
 <p>Область видимости переменных может быть ограничена при помощи <code>{}</code>.</p>
-<pre><code class="hljs css language-reason">if (displayGreeting) {
-  let message = &quot;Вам нравится эта документация?&quot;;
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">if</span> (displayGreeting) {
+  <span class="hljs-keyword">let</span> message = <span class="hljs-string">"Вам нравится эта документация?"</span>;
   print_endline(message)
 };
-/* `message` не видима здесь! */
+<span class="hljs-comment">/* `message` не видима здесь! */</span>
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" id="привязки-неизменяемы"></a><a href="#привязки-неизменяемы" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Привязки неизменяемы</h2>
 <p>Неизменяемые, в смысле &quot;нельзя изменить&quot;. То есть, однажды создав связку ссылки со значением, нельзя поменять это значение на другое (за исключением случаев, когда ссылка неявно ведет на изменяемое значение, но об этом мы поговорим позже). Тем не менее, вы можете создать новую связку с таким же именем <em>затмевая</em> предыдущую; С этого момента, связка будет ссылаться на вновь присвоенное значение.</p>
-<pre><code class="hljs css language-reason">let message = &quot;Привет&quot;;
-print_endline(message); /* Выведет &quot;Привет&quot; */
-let message = &quot;пока&quot;;
-print_endline(message); /* Выведет &quot;пока&quot; */
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> message = <span class="hljs-string">"Привет"</span>;
+print_endline(message); <span class="hljs-comment">/* Выведет "Привет" */</span>
+<span class="hljs-keyword">let</span> message = <span class="hljs-string">"пока"</span>;
+print_endline(message); <span class="hljs-comment">/* Выведет "пока" */</span>
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" id="советы-и-трюки"></a><a href="#советы-и-трюки" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Советы и трюки</h2>
 <p>Так как область видимости ограничена <code>{}</code>, вы можете создавать анонимные переменные:</p>
-<pre><code class="hljs css language-reason">let message = {
-  let part1 = &quot;hello&quot;;
-  let part2 = &quot;world&quot;;
-  part1 ++ &quot; &quot; ++ part2
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> message = {
+  <span class="hljs-keyword">let</span> part1 = <span class="hljs-string">"hello"</span>;
+  <span class="hljs-keyword">let</span> part2 = <span class="hljs-string">"world"</span>;
+  part1 <span class="hljs-operator">++</span> <span class="hljs-string">" "</span> <span class="hljs-operator">++</span> part2
 };
-/* `part1` и `part2` недоступны здесь! */
+<span class="hljs-comment">/* `part1` и `part2` недоступны здесь! */</span>
 </code></pre>
 <p>Это позволяет не допустить использования этих переменных ниже в коде.</p>
 <h2><a class="anchor" aria-hidden="true" id="дизайн-решения"></a><a href="#дизайн-решения" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Дизайн решения</h2>
@@ -108,15 +108,15 @@ a + b
     a + b
 </code></pre>
 <p>Следовательно, в Reason это выглядит так:</p>
-<pre><code class="hljs css language-reason">let a = 1;
-let b = 2;
-a + b;
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> a = <span class="hljs-number">1</span>;
+<span class="hljs-keyword">let</span> b = <span class="hljs-number">2</span>;
+a <span class="hljs-operator">+</span> b;
 </code></pre>
 <p>Может напомнить вам:</p>
-<pre><code class="hljs css language-reason">/* Reason синтаксис */
+<pre><code class="hljs css language-reason"><span class="hljs-comment">/* Reason синтаксис */</span>
 (a) =&gt;
   (b) =&gt;
-    a + b;
+    a <span class="hljs-operator">+</span> b;
 </code></pre>
 <p>Не смотря на то, что это разные вещи, вы можете видеть, что <code>let</code> является просто выражением! В Reason, мы превращаем <code>in</code> в <code>;</code> для визуального подобия; Но не позволяйте этому скрыть лежащую в основе элегантность выражений.</p>
 </span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/ru/overview"><span class="arrow-prev">← </span><span>Обзор</span></a><a class="docs-next button" href="/docs/ru/type"><span>Типы!</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#блочная-область-видимости">Блочная область видимости</a></li><li><a href="#привязки-неизменяемы">Привязки неизменяемы</a></li><li><a href="#советы-и-трюки">Советы и трюки</a></li><li><a href="#дизайн-решения">Дизайн решения</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.min.js"></script><script>window.foo = new Pjax({

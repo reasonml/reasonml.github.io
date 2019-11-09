@@ -68,15 +68,15 @@
             });
         </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://crowdin.com/project/reason/zh-TW" target="_blank" rel="noreferrer noopener">Translate</a><h1 class="postHeaderTitle">String &amp; Char</h1></header><article><div><span><h2><a class="anchor" aria-hidden="true" id="字串"></a><a href="#字串" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>字串</h2>
 <p>Reason 字串使用<strong>雙</strong>引號分隔（單引號保留供字元型別使用）。</p>
-<pre><code class="hljs css language-reason">let greeting = &quot;Hello world!&quot;;
-let multilineGreeting = &quot;Hello
- world!&quot;;
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> greeting = <span class="hljs-string">"Hello world!"</span>;
+<span class="hljs-keyword">let</span> multilineGreeting = <span class="hljs-string">"Hello
+ world!"</span>;
 </code></pre>
 <p>字串中特殊字元需要脫逸（escaped）：</p>
-<pre><code class="hljs css language-reason">let oneSlash = &quot;\\&quot;;
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> oneSlash = <span class="hljs-string">"\\"</span>;
 </code></pre>
 <p>串接字串請用 <code>++</code>：</p>
-<pre><code class="hljs css language-reason">let greetings = &quot;Hello &quot; ++ &quot;world!&quot;;
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> greetings = <span class="hljs-string">"Hello "</span> <span class="hljs-operator">++</span> <span class="hljs-string">"world!"</span>;
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="帶引號的字串"></a><a href="#帶引號的字串" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>帶引號的字串</h3>
 <p>字串有個特殊句法允許</p>
@@ -85,15 +85,15 @@ let multilineGreeting = &quot;Hello
 <li>不須額外脫逸字元</li>
 <li>特殊前處理（pre-processors）的鉤點（hooks）</li>
 </ul>
-<pre><code class="hljs css language-reason">let greetingAndOneSlash = {|Hello
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> greetingAndOneSlash = <span class="hljs-string">{|Hello
 World
 \
 Hehe...
-|};
+|}</span>;
 </code></pre>
 <p>類比來說，就像是 JavaScript 的反引號（backtick）字串插值（interpolation），只是不需要額外的脫逸特殊字元，以及沒有內建變數插值。 儘管如此，你可以恢復後者的功能，<a href="https://bucklescript.github.io/docs/en/common-data-types.html#interpolation">如同 BuckleScript 所作</a>：</p>
-<pre><code class="hljs css language-reason">let world = {js|世界|js}; /* 支援 Unicode 字元 */
-let helloWorld = {j|你好，$world|j}; /* 支援 Unicode 以及變數插值 */
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> world = <span class="hljs-string">{js|世界|js}</span>; <span class="hljs-comment">/* 支援 Unicode 字元 */</span>
+<span class="hljs-keyword">let</span> helloWorld = <span class="hljs-string">{j|你好，$world|j}</span>; <span class="hljs-comment">/* 支援 Unicode 以及變數插值 */</span>
 </code></pre>
 <p>BuckleScript 的特殊前處理將找尋字串周圍的 <code>js</code> 及 <code>j</code> 標記，並轉換成其他東西。</p>
 <h3><a class="anchor" aria-hidden="true" id="用法"></a><a href="#用法" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>用法</h3>
@@ -113,24 +113,24 @@ let helloWorld = {j|你好，$world|j}; /* 支援 Unicode 以及變數插值 */
 <p>在 JavaScript 編譯中，Reason 字串直接對應 JavaScript 字串，反之亦然，所以沒有上述的考量及分析的機會。</p>
 <h3><a class="anchor" aria-hidden="true" id="設計決策"></a><a href="#設計決策" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>設計決策</h3>
 <p>帶引號字串不需要脫逸字元的功能開啟優美 DSLs 像是 <a href="/api/Str.html">正規表達式</a>：</p>
-<pre><code class="hljs css language-reason">let r = Str.regexp({|hello \([A-Za-z]+\)|});
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> r = <span class="hljs-module-identifier">Str</span>.regexp(<span class="hljs-string">{|hello \([A-Za-z]+\)|}</span>);
 </code></pre>
 <p>而不是</p>
-<pre><code class="hljs css language-reason">let r = Str.regexp(&quot;hello \\([A-Za-z]+\\)&quot;);
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> r = <span class="hljs-module-identifier">Str</span>.regexp(<span class="hljs-string">"hello \\([A-Za-z]+\\)"</span>);
 </code></pre>
 <p>儘管在 JS 編譯中，你需要改成使用 <a href="https://bucklescript.github.io/docs/en/regular-expression.html"><code>[%bs.re]</code></a> 及 <a href="https://bucklescript.github.io/bucklescript/api/Js.Re.html"><code>Js.Re</code></a> ，不可使用 <code>Str</code>。</p>
 <p>這裡可以看見 Reason/OCaml 強調簡單過於聰明，原生字串實作十分了當。 過於複雜的字串實做有時容易<a href="http://mrale.ph/blog/2016/11/23/making-less-dart-faster.html">玩火自焚</a>。</p>
 <h2><a class="anchor" aria-hidden="true" id="字元"></a><a href="#字元" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>字元</h2>
 <p>Reason 對單一字母有另外型別：</p>
-<pre><code class="hljs css language-reason">let firstLetterOfAlphabet = 'a';
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> firstLetterOfAlphabet = <span class="hljs-character">'a'</span>;
 </code></pre>
 <p><strong>注意</strong>: 字元不支援 Unicode 或 UTF-8。</p>
 <h3><a class="anchor" aria-hidden="true" id="提示-技巧-1"></a><a href="#提示-技巧-1" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>提示 &amp; 技巧</h3>
 <p>為了速度考量，字元<a href="/try.html?reason=DYUwLgBAhhC8EHIoKA">編譯成整數範圍從 0 到 255</a>，你可以樣式匹配（稍後章節會說明）：</p>
-<pre><code class="hljs css language-reason">let isVowel = (theChar) =&gt;
-  switch (theChar) {
-  | 'a' | 'e' | 'i' | 'o' | 'u' | 'y' =&gt; true
-  | _ =&gt; false
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> isVowel = (theChar) =&gt;
+  <span class="hljs-keyword">switch</span> (theChar) {
+  | <span class="hljs-character">'a'</span> | <span class="hljs-character">'e'</span> | <span class="hljs-character">'i'</span> | <span class="hljs-character">'o'</span> | <span class="hljs-character">'u'</span> | <span class="hljs-character">'y'</span> =&gt; <span class="hljs-literal">true</span>
+  | _ =&gt; <span class="hljs-literal">false</span>
   };
 </code></pre>
 <p>若要將字串轉換字元，使用 <code>&quot;a&quot;.[0]</code>。轉換字元成字串，使用 <code>String.make(1, 'a')</code>。</p>

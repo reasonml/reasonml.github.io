@@ -68,67 +68,67 @@
             });
         </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://crowdin.com/project/reason/ja" target="_blank" rel="noreferrer noopener">Translate</a><h1 class="postHeaderTitle">Variant!</h1></header><article><div><span><p>注目、これが Reason のデータ構造の王冠の宝石です！</p>
 <p>ほとんどの言語のほとんどのデータ構造は「これ<strong>と</strong>あれ」しか表現できませんが、ヴァリアントは「これ<strong>か</strong>あれ」を表現できます。</p>
-<pre><code class="hljs css language-reason">type myResponseVariant =
-  | Yes
-  | No
-  | PrettyMuch;
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> myResponseVariant =
+  | <span class="hljs-constructor">Yes</span>
+  | <span class="hljs-constructor">No</span>
+  | <span class="hljs-constructor">PrettyMuch</span>;
 
-let areYouCrushingIt = Yes;
+<span class="hljs-keyword">let</span> areYouCrushingIt = <span class="hljs-constructor">Yes</span>;
 </code></pre>
 <p><code>Yes</code>、<code>No</code>、そして<code>PrettyMuch</code> は文字列ではなく、リファレンスでもなく、その他の特殊なデータ型でもありません。 これらは「コンストラクタ」（または「タグ」）と呼ばれています。 <code>|</code> は、各コンストラクタを区切ります。</p>
 <p><strong>注意</strong>: ヴァリアントのコンストラクタは大文字にする必要があります。</p>
 <h2><a class="anchor" aria-hidden="true" id="使い方"></a><a href="#使い方" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>使い方</h2>
 <p>ヴァリアントに加えて、Reason の最も重要な機能の１つに、<code>switch</code> 式があります。</p>
 <p>Reason の <code>switch</code> は、見た目的に他の言語の<code>switch</code> に似ています（大きな <code>if/elseif/elseif...</code> として知られる）。 それはヴァリアントのすべてのケースをチェックすることができます。 それを使用するには、使用したい特定のヴァリアントのすべてのコンストラクタを列挙し、それぞれの後ろに <code>=&gt;</code> とそのケースに対応する式を記述します。</p>
-<pre><code class="hljs css language-reason">let message =
-  switch (areYouCrushingIt) {
-  | No =&gt; &quot;No worries. Keep going!&quot;
-  | Yes =&gt; &quot;Great!&quot;
-  | PrettyMuch =&gt; &quot;Nice!&quot;
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> message =
+  <span class="hljs-keyword">switch</span> (areYouCrushingIt) {
+  | <span class="hljs-constructor">No</span> =&gt; <span class="hljs-string">"No worries. Keep going!"</span>
+  | <span class="hljs-constructor">Yes</span> =&gt; <span class="hljs-string">"Great!"</span>
+  | <span class="hljs-constructor">PrettyMuch</span> =&gt; <span class="hljs-string">"Nice!"</span>
   };
-/* message は &quot;Great!&quot; */
+<span class="hljs-comment">/* message は "Great!" */</span>
 </code></pre>
 <p>ヴァリアントには、非常にたくさんの型システム支援があります。 例えば、ヴァリアントの全ケースを網羅し忘れたり、2つのケースが重複したりした場合、型エラーを返します。 <a href="/docs/ja/pattern-matching">後のセクション</a>で switch とパターンマッチングを必ず確認してください！</p>
 <h3><a class="anchor" aria-hidden="true" id="ヴァリアントは明示的な定義が必要"></a><a href="#ヴァリアントは明示的な定義が必要" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>ヴァリアントは明示的な定義が必要</h3>
 <p>もし使用するヴァリアントが別のファイルにある場合、<a href="/docs/ja/record#record-needs-an-explicit-definition">レコードの時</a>と同様に、それをスコープに入れてください:</p>
-<pre><code class="hljs css language-reason">/* Zoo.re */
+<pre><code class="hljs css language-reason"><span class="hljs-comment">/* Zoo.re */</span>
 
-type animal = Dog | Cat | Bird;
+<span class="hljs-keyword">type</span> animal = <span class="hljs-constructor">Dog</span> | <span class="hljs-constructor">Cat</span> | <span class="hljs-constructor">Bird</span>;
 </code></pre>
-<pre><code class="hljs css language-reason">/* example.re */
+<pre><code class="hljs css language-reason"><span class="hljs-comment">/* example.re */</span>
 
-let pet: Zoo.animal = Dog; /* preferred */
-/* or */
-let pet = Zoo.Dog;
+<span class="hljs-keyword">let</span> pet: <span class="hljs-module-identifier">Zoo</span>.animal = <span class="hljs-constructor">Dog</span>; <span class="hljs-comment">/* preferred */</span>
+<span class="hljs-comment">/* or */</span>
+<span class="hljs-keyword">let</span> pet = <span class="hljs-module-identifier">Zoo</span>.<span class="hljs-constructor">Dog</span>;
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="コンストラクタ引数"></a><a href="#コンストラクタ引数" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>コンストラクタ引数</h3>
 <p>ヴァリアントのコンストラクタはスペースで区切られた追加データを保持することができます。</p>
-<pre><code class="hljs css language-reason">type account =
-  | None
-  | Instagram(string)
-  | Facebook(string, int);
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> account =
+  | <span class="hljs-constructor">None</span>
+  | <span class="hljs-constructor">Instagram</span>(string)
+  | <span class="hljs-constructor">Facebook</span>(string, int);
 </code></pre>
 <p>ここでは、<code>Instagram</code> は、<code>string</code> を保持し、<code>Facebook</code> は、<code>string</code> と <code>int</code> を保持しています。使い方:</p>
-<pre><code class="hljs css language-reason">let myAccount = Facebook(&quot;Josh&quot;, 26);
-let friendAccount = Instagram(&quot;Jenny&quot;);
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> myAccount = <span class="hljs-constructor">Facebook</span>(<span class="hljs-string">"Josh"</span>, <span class="hljs-number">26</span>);
+<span class="hljs-keyword">let</span> friendAccount = <span class="hljs-constructor">Instagram</span>(<span class="hljs-string">"Jenny"</span>);
 </code></pre>
 <p><strong>コンストラクタを使用するのは関数を呼び出すようなものだと気づきましたか</strong>？ <code>Facebook</code> は2つの引数を受け取る関数であるかのようでした。 これは偶然ではありません。その理由として、コンストラクタのデータは「コンストラクタ引数」と呼ばれます。</p>
 <p><code>switch</code> を使用して、コンストラクタの引数をパターンマッチ（再度、後のセクションで説明します）できます:</p>
-<pre><code class="hljs css language-reason">let greeting =
-  switch (myAccount) {
-  | None =&gt; &quot;Hi!&quot;
-  | Facebook(name, age) =&gt; &quot;Hi &quot; ++ name ++ &quot;, you're &quot; ++ string_of_int(age) ++ &quot;-year-old.&quot;
-  | Instagram(name) =&gt; &quot;Hello &quot; ++ name ++ &quot;!&quot;
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> greeting =
+  <span class="hljs-keyword">switch</span> (myAccount) {
+  | <span class="hljs-constructor">None</span> =&gt; <span class="hljs-string">"Hi!"</span>
+  | <span class="hljs-constructor">Facebook</span>(name, age) =&gt; <span class="hljs-string">"Hi "</span> <span class="hljs-operator">++</span> name <span class="hljs-operator">++</span> <span class="hljs-string">", you're "</span> <span class="hljs-operator">++</span> string_of_int(age) <span class="hljs-operator">++</span> <span class="hljs-string">"-year-old."</span>
+  | <span class="hljs-constructor">Instagram</span>(name) =&gt; <span class="hljs-string">"Hello "</span> <span class="hljs-operator">++</span> name <span class="hljs-operator">++</span> <span class="hljs-string">"!"</span>
   };
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="特筆事項"></a><a href="#特筆事項" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>特筆事項</h3>
 <p><a href="/api/index.html">標準ライブラリ</a> では、今後よく耳にすることになるであろう2つの重要なヴァリアントを公開しています。</p>
 <h4><a class="anchor" aria-hidden="true" id="option"></a><a href="#option" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>option</code></h4>
-<pre><code class="hljs css language-reason">type option('a) = None | Some('a);
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> option('a) = <span class="hljs-constructor">None</span> | <span class="hljs-constructor">Some</span>('a);
 </code></pre>
 <p>これは他の言語で「nullable（null 許容）」（別名 <code>undefined</code> や <code>null</code>）値をシミュレートするために使用するものです。 この便利な型定義のおかげで、Reason はすべての値をデフォルトで non-nullable（null 非許容）にすることができます。 <code>int</code> は常に int であり、決して「<code>int</code> <strong>または ** <code>null</code> <strong>または</strong> <code>undefined</code>」にはなりません。 「null を許容する int」を表現したければ、<code>None</code> か <code>Some(int)</code> で書き分けられる <code>option(int)</code> を使用します。 <code>switch</code> は両方の場合を処理することを強制します。したがって、</strong>純粋な Reason プログラムには null エラーがありません**。</p>
 <h4><a class="anchor" aria-hidden="true" id="list"></a><a href="#list" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><code>list</code></h4>
-<pre><code class="hljs css language-reason">type list('a) = Empty | Head('a, list('a));
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> list('a) = <span class="hljs-constructor">Empty</span> | <span class="hljs-constructor">Head</span>('a, list('a));
 </code></pre>
 <p><em>実際の型定義ではありません。単なる例示です</em>。</p>
 <p>これは「a （なんでも）型の値を保持するリストは、空かその値と別のリストを保持しているかのどちらかである」と言っています。</p>
@@ -137,32 +137,32 @@ let friendAccount = Instagram(&quot;Jenny&quot;);
 <p>string、int、float、array、そして、その他ほとんどのデータ構造で<code>switch</code> が使用できることをご存知でしたか？試してみましょう！</p>
 <h2><a class="anchor" aria-hidden="true" id="ヒントとコツ"></a><a href="#ヒントとコツ" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>ヒントとコツ</h2>
 <p>2つの引数を持つコンストラクタと、1つのタプル引数を持つコンストラクタとを混同しないように<strong>注意してください</strong>。</p>
-<pre><code class="hljs css language-reason">type account =
-  | Facebook(string, int) /* 2 arguments */;
-type account2 =
-  | Instagram((string, int)) /* 1 argument - happens to be a 2-tuple */;
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> account =
+  | <span class="hljs-constructor">Facebook</span>(string, int) <span class="hljs-comment">/* 2 arguments */</span>;
+<span class="hljs-keyword">type</span> account2 =
+  | <span class="hljs-constructor">Instagram</span>((string, int)) <span class="hljs-comment">/* 1 argument - happens to be a 2-tuple */</span>;
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="ヴァリアントにはコンストラクタが必要"></a><a href="#ヴァリアントにはコンストラクタが必要" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>ヴァリアントにはコンストラクタが必要</h3>
 <p>あなたが型指定をしない言語から来ているなら、<code>type foo = int | string</code> と書きたい衝動に駆られるかもしれません。 これは Reason ではできません。各選択肢にコンストラクタを提供する必要があります: <code>type foo = Int(int) | String(string)</code>。 通常、これを必要とすることはアンチパターンになるかもしれません。 下部の設計方針のセクションで詳細を説明します。</p>
 <h3><a class="anchor" aria-hidden="true" id="javascript-との相互運用"></a><a href="#javascript-との相互運用" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>JavaScript との相互運用</h3>
 <p><em>このセクションは BuckleScript の <a href="https://bucklescript.github.io/docs/en/interop-overview.html">FFI</a> の知識があることを前提としています。 もし、まだ JS の関数にラップするためにヴァリアントを使用することにもやもやを感じていないなら、読み飛ばしてください</em>。</p>
 <p>かなりの数の JS ライブラリは、引数に様々な型を受け入れることができる関数を使用します。 これらのケースでは、それらをヴァリアントとしてモデル化するのに非常に魅力的です。 例えば、<code>number</code> か <code>string</code> のいずれかを受け取る <code>myLibrary.draw</code> という JS 関数があるとします。 あなたはそれを次のようにバインドしたくなるかもしれません。</p>
-<pre><code class="hljs css language-reason">/* 内部で使用するために予約する */
-[@bs.module &quot;myLibrary&quot;] external draw : 'a =&gt; unit = &quot;draw&quot;;
+<pre><code class="hljs css language-reason"><span class="hljs-comment">/* 内部で使用するために予約する */</span>
+<span class="hljs-attribute">[@bs.module "myLibrary"]</span> <span class="hljs-keyword">external</span> draw : 'a =&gt; unit = <span class="hljs-string">"draw"</span>;
 
-type animal =
-  | MyFloat(float)
-  | MyString(string);
+<span class="hljs-keyword">type</span> animal =
+  | <span class="hljs-constructor">MyFloat</span>(float)
+  | <span class="hljs-constructor">MyString</span>(string);
 
-let betterDraw = (animal) =&gt;
-  switch (animal) {
-  | MyFloat(f) =&gt; draw(f)
-  | MyString(s) =&gt; draw(s)
+<span class="hljs-keyword">let</span> betterDraw = (animal) =&gt;
+  <span class="hljs-keyword">switch</span> (animal) {
+  | <span class="hljs-constructor">MyFloat</span>(f) =&gt; draw(f)
+  | <span class="hljs-constructor">MyString</span>(s) =&gt; draw(s)
   };
 </code></pre>
 <p>確かに上記でも良いのですが、もっと良い方法があります！例えば単に同じ JS 呼び出しにコンパイルされる2つの <code>external</code> です。</p>
-<pre><code class="hljs css language-reason">[@bs.module &quot;myLibrary&quot;] external drawFloat : float =&gt; unit = &quot;draw&quot;;
-[@bs.module &quot;myLibrary&quot;] external drawString : string =&gt; unit = &quot;draw&quot;;
+<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.module "myLibrary"]</span> <span class="hljs-keyword">external</span> drawFloat : float =&gt; unit = <span class="hljs-string">"draw"</span>;
+<span class="hljs-attribute">[@bs.module "myLibrary"]</span> <span class="hljs-keyword">external</span> drawString : string =&gt; unit = <span class="hljs-string">"draw"</span>;
 </code></pre>
 <p>BuckleScript にもこれをするための<a href="https://bucklescript.github.io/docs/en/function.html#modeling-polymorphic-function">いくつかの方法</a>があります。</p>
 <h3><a class="anchor" aria-hidden="true" id="ヴァリアントの型はフィールドの名前で特定される"></a><a href="#ヴァリアントの型はフィールドの名前で特定される" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>ヴァリアントの型はフィールドの名前で特定される</h3>
@@ -181,12 +181,12 @@ let betterDraw = (animal) =&gt;
 }
 </code></pre>
 <p>ここには線形の計算量の分岐チェックがあります（<code>O(n)</code>）。これを Reason のヴァリアントを使用した場合とで比較してください。</p>
-<pre><code class="hljs css language-reason">type animal = Dog | Cat | Bird;
-let data = Dog;
-switch (data) {
-| Dog =&gt; ...
-| Cat =&gt; ...
-| Bird =&gt; ...
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> animal = <span class="hljs-constructor">Dog</span> | <span class="hljs-constructor">Cat</span> | <span class="hljs-constructor">Bird</span>;
+<span class="hljs-keyword">let</span> data = <span class="hljs-constructor">Dog</span>;
+<span class="hljs-keyword">switch</span> (data) {
+| <span class="hljs-constructor">Dog</span> =&gt; <span class="hljs-operator">...</span>
+| <span class="hljs-constructor">Cat</span> =&gt; <span class="hljs-operator">...</span>
+| <span class="hljs-constructor">Bird</span> =&gt; <span class="hljs-operator">...</span>
 }
 </code></pre>
 <p>コンパイラはヴァリアントを見て、</p>

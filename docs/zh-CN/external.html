@@ -68,10 +68,10 @@
             });
         </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://crowdin.com/project/reason/zh-CN" target="_blank" rel="noreferrer noopener">Translate</a><h1 class="postHeaderTitle">External</h1></header><article><div><span><p><code>external</code>，或叫 “FFI”（foreign function interface），或者更简单叫做 “interop” （interoperability 的缩写），帮助 Reason 与其他语言交流，像 C 和 JavaScript。</p>
 <p>想象一个 let 绑定，省略实体，但是标注了类型（强制）声明。</p>
-<pre><code class="hljs css language-reason">external myCFunction: int =&gt; string = &quot;theCFunction&quot;;
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">external</span> myCFunction: int =&gt; string = <span class="hljs-string">"theCFunction"</span>;
 </code></pre>
-<pre><code class="hljs css language-reason">[@bs.val] external getElementsByClassName: string =&gt; array(Dom.element) =
-  &quot;document.getElementsByClassName&quot;;
+<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.val]</span> <span class="hljs-keyword">external</span> getElementsByClassName: string =&gt; array(<span class="hljs-module-identifier">Dom</span>.element) =
+  <span class="hljs-string">"document.getElementsByClassName"</span>;
 </code></pre>
 <p>（上面是 <a href="https://bucklescript.github.io/docs/en/intro-to-external.html"> BuckleScript</a>-特定的 external，功能是绑定一个 JavaScript 函数到同名的变量）</p>
 <p><strong>注意</strong>：<code>external</code> 只能在最上层使用，或者在模块定义内。无法在函数体内声明 external。</p>

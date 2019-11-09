@@ -70,18 +70,18 @@
 <p><strong>終於到這了</strong>！樣式匹配是這個語言<em>最棒</em>的功能。像是解構，但更多來自型別系統的幫助。</p>
 <h2><a class="anchor" aria-hidden="true" id="用法"></a><a href="#用法" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>用法</h2>
 <p>考慮下列變異：</p>
-<pre><code class="hljs css language-reason">type payload =
-  | BadResult(int)
-  | GoodResult(string)
-  | NoResult;
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> payload =
+  | <span class="hljs-constructor">BadResult</span>(int)
+  | <span class="hljs-constructor">GoodResult</span>(string)
+  | <span class="hljs-constructor">NoResult</span>;
 </code></pre>
 <p>當使用 <code>switch</code> 表達式，可以&quot;解構&quot;：</p>
-<pre><code class="hljs css language-reason">let data = GoodResult(&quot;產品送出！&quot;);
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> data = <span class="hljs-constructor">GoodResult</span>(<span class="hljs-string">"產品送出！"</span>);
 
-let message =
-  switch (data) {
-  | GoodResult(theMessage) =&gt; &quot;成功！ &quot; ++ theMessage
-  | BadResult(errorCode) =&gt; &quot;發生錯誤。 錯誤代碼：&quot; ++ string_of_int(errorCode)
+<span class="hljs-keyword">let</span> message =
+  <span class="hljs-keyword">switch</span> (data) {
+  | <span class="hljs-constructor">GoodResult</span>(theMessage) =&gt; <span class="hljs-string">"成功！ "</span> <span class="hljs-operator">++</span> theMessage
+  | <span class="hljs-constructor">BadResult</span>(errorCode) =&gt; <span class="hljs-string">"發生錯誤。 錯誤代碼："</span> <span class="hljs-operator">++</span> string_of_int(errorCode)
   };
 </code></pre>
 <p>注意當處理不同情況時，對 <code>data</code> 的解構。上述 <code>switch</code> 會得到編譯器警告：</p>
@@ -90,118 +90,118 @@ Here is an example of a value that is not matched:
 NoResult
 </code></pre>
 <p>很棒吧？ 當匹配資料外型時，型別系統會警告尚未處理的情況。 這種<strong>條件式</strong>的局面會進行樣式匹配而不是一般的解構。 大多數資料結構都帶有&quot;<strong>如果是則..</strong>&quot;的局面：</p>
-<pre><code class="hljs css language-reason">switch (myList) {
-| [] =&gt; print_endline(&quot;空的 list&quot;)
-| [a, ...theRest] =&gt; print_endline(&quot;list 的開頭值 &quot; ++ a)
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">switch</span> (myList) {
+| <span class="hljs-literal">[</span><span class="hljs-literal">]</span> =&gt; print_endline(<span class="hljs-string">"空的 list"</span>)
+| <span class="hljs-literal">[</span>a, <span class="hljs-operator">...</span>theRest<span class="hljs-literal">]</span> =&gt; print_endline(<span class="hljs-string">"list 的開頭值 "</span> <span class="hljs-operator">++</span> a)
 };
 
-switch (myArray) {
-| [|1, 2|] =&gt; print_endline(&quot;此陣列有項目 1 和 2&quot;)
-| [||] =&gt; print_endline(&quot;此陣列沒有任何元素&quot;)
-| _ =&gt; print_endline(&quot;這是個陣列&quot;)
+<span class="hljs-keyword">switch</span> (myArray) {
+| <span class="hljs-literal">[|</span><span class="hljs-number">1</span>, <span class="hljs-number">2</span><span class="hljs-literal">|]</span> =&gt; print_endline(<span class="hljs-string">"此陣列有項目 1 和 2"</span>)
+| <span class="hljs-literal">[|</span><span class="hljs-literal">|]</span> =&gt; print_endline(<span class="hljs-string">"此陣列沒有任何元素"</span>)
+| _ =&gt; print_endline(<span class="hljs-string">"這是個陣列"</span>)
 };
 </code></pre>
 <p><code>_</code> 是個特殊失敗情況，允許所有條件都未匹配時進入此分支。</p>
 <p>你甚至可以 switch 字串、int 和其他。更甚至有許多樣式得到相同結果！</p>
-<pre><code class="hljs css language-reason">let reply =
-  switch (message) {
-  | &quot;Reason 蠻酷的&quot; =&gt; &quot;是啊&quot;
-  | &quot;晚安&quot; =&gt; &quot;再會！&quot;
-  | &quot;哈嘍&quot; | &quot;嗨&quot; | &quot;嘿呀&quot; | &quot;嘿&quot; =&gt; &quot;你好啊！&quot;
-  | _ =&gt; &quot;很高興認識你！&quot;
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> reply =
+  <span class="hljs-keyword">switch</span> (message) {
+  | <span class="hljs-string">"Reason 蠻酷的"</span> =&gt; <span class="hljs-string">"是啊"</span>
+  | <span class="hljs-string">"晚安"</span> =&gt; <span class="hljs-string">"再會！"</span>
+  | <span class="hljs-string">"哈嘍"</span> | <span class="hljs-string">"嗨"</span> | <span class="hljs-string">"嘿呀"</span> | <span class="hljs-string">"嘿"</span> =&gt; <span class="hljs-string">"你好啊！"</span>
+  | _ =&gt; <span class="hljs-string">"很高興認識你！"</span>
   };
 </code></pre>
 <p>與其他資料結構結合，樣式匹配可以產出非常簡潔、編譯器驗證、高效率的程式碼：</p>
-<pre><code class="hljs css language-reason">let message =
-  switch (data) {
-  | GoodResult(theMessage) =&gt; &quot;成功！ &quot; ++ theMessage
-  | BadResult(0 | 1 | 5) =&gt; &quot;發錯錯誤。 It's a server side problem.&quot;
-  | BadResult(errorCode) =&gt; &quot;發生未知錯誤。 錯誤代碼：&quot; ++ string_of_int(errorCode)
-  | NoResult =&gt; &quot;看起來沒問題&quot;
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> message =
+  <span class="hljs-keyword">switch</span> (data) {
+  | <span class="hljs-constructor">GoodResult</span>(theMessage) =&gt; <span class="hljs-string">"成功！ "</span> <span class="hljs-operator">++</span> theMessage
+  | <span class="hljs-constructor">BadResult</span>(<span class="hljs-number">0</span> | <span class="hljs-number">1</span> | <span class="hljs-number">5</span>) =&gt; <span class="hljs-string">"發錯錯誤。 It's a server side problem."</span>
+  | <span class="hljs-constructor">BadResult</span>(errorCode) =&gt; <span class="hljs-string">"發生未知錯誤。 錯誤代碼："</span> <span class="hljs-operator">++</span> string_of_int(errorCode)
+  | <span class="hljs-constructor">NoResult</span> =&gt; <span class="hljs-string">"看起來沒問題"</span>
   };
 </code></pre>
 <p><strong>注意</strong>：你只能傳遞字面上（如，具體的值）當作樣式，不能是 let-繫結的名字或其他。下列並不會如預期運作：</p>
-<pre><code class="hljs css language-reason">let myMessage = &quot;哈嘍&quot;;
-switch (greeting) {
-| myMessage =&gt; print_endline(&quot;嗨你好&quot;)
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> myMessage = <span class="hljs-string">"哈嘍"</span>;
+<span class="hljs-keyword">switch</span> (greeting) {
+| myMessage =&gt; print_endline(<span class="hljs-string">"嗨你好"</span>)
 };
 </code></pre>
 <p>反而，這會假設匹配任意字串，並將結果繫結到 <code>switch</code> 內的 <code>myMessage</code> 這個名稱，不是你所要的結果。</p>
 <h3><a class="anchor" aria-hidden="true" id="when-條件"></a><a href="#when-條件" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>When 條件</h3>
 <p>如果真的需要任意邏輯，具有乾淨的樣式匹配，可以使用 <code>when</code> 條件，基本上是 <code>if</code> 語法糖：</p>
-<pre><code class="hljs css language-reason">let message =
-  switch (data) {
-  | GoodResult(theMessage) =&gt; ...
-  | BadResult(errorCode) when isServerError(errorCode) =&gt; ...
-  | BadResult(errorCode) =&gt; ... /* 否則 */
-  | NoResult =&gt; ...
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> message =
+  <span class="hljs-keyword">switch</span> (data) {
+  | <span class="hljs-constructor">GoodResult</span>(theMessage) =&gt; <span class="hljs-operator">...</span>
+  | <span class="hljs-constructor">BadResult</span>(errorCode) when isServerError(errorCode) =&gt; <span class="hljs-operator">...</span>
+  | <span class="hljs-constructor">BadResult</span>(errorCode) =&gt; <span class="hljs-operator">...</span> <span class="hljs-comment">/* 否則 */</span>
+  | <span class="hljs-constructor">NoResult</span> =&gt; <span class="hljs-operator">...</span>
   };
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="匹配例外"></a><a href="#匹配例外" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>匹配例外</h3>
 <p>如果函式會丟出例外（稍後說明），也可以匹配<em>例外</em>，另外也可以匹配函式傳回的結果值。</p>
-<pre><code class="hljs css language-reason">switch (List.find((i) =&gt; i === theItem, myItems)) {
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">switch</span> (<span class="hljs-module-identifier">List</span>.find((i) =&gt; i <span class="hljs-operator">===</span> theItem, myItems)) {
 | item =&gt; print_endline(item)
-| exception Not_found =&gt; print_endline(&quot;找不到該項目！&quot;)
+| <span class="hljs-keyword">exception</span> <span class="hljs-constructor">Not_found</span> =&gt; print_endline(<span class="hljs-string">"找不到該項目！"</span>)
 };
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="巢狀樣式"></a><a href="#巢狀樣式" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>巢狀樣式</h3>
 <p>巢狀 <code>|</code> 如預期運作：</p>
-<pre><code class="hljs css language-reason">switch (student) {
-| {name: &quot;Jane&quot; | &quot;Joe&quot;} =&gt; ...
-| {name: &quot;Bob&quot;, Job: Programmer({fullTime: Yes | Maybe})} =&gt; ...
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">switch</span> (student) {
+| {name: <span class="hljs-string">"Jane"</span> | <span class="hljs-string">"Joe"</span>} =&gt; <span class="hljs-operator">...</span>
+| {name: <span class="hljs-string">"Bob"</span>, <span class="hljs-constructor">Job</span>: <span class="hljs-constructor">Programmer</span>({fullTime: <span class="hljs-constructor">Yes</span> | <span class="hljs-constructor">Maybe</span>})} =&gt; <span class="hljs-operator">...</span>
 };
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="樣式無所不在"></a><a href="#樣式無所不在" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>樣式無所不在</h3>
 <p>任何一般&quot;變數宣告&quot;的地方都可以用樣式：</p>
-<pre><code class="hljs css language-reason">type leftOrRight =
-  | Left(int)
-  | Right(int);
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> leftOrRight =
+  | <span class="hljs-constructor">Left</span>(int)
+  | <span class="hljs-constructor">Right</span>(int);
 
-let i = Left(1);
+<span class="hljs-keyword">let</span> i = <span class="hljs-constructor">Left</span>(<span class="hljs-number">1</span>);
 
-/* magic! */
-let Left(v) | Right(v) = i;
+<span class="hljs-comment">/* magic! */</span>
+<span class="hljs-keyword">let</span> <span class="hljs-constructor">Left</span>(v) | <span class="hljs-constructor">Right</span>(v) = i;
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" id="提示-技巧"></a><a href="#提示-技巧" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>提示 &amp; 技巧</h2>
 <p><strong>盡可能的讓樣式匹配扁平</strong>. 這是個真實的臭蟲去除劑。下列範例：</p>
 <p>不要經常濫用特殊失敗情況 <code>_</code>。 這讓編譯器無法提醒你忘記處理某些情況（徹底檢查），特別在重構之後，加入了新的變異時，特別有幫助。 試著盡量使用 <code>_</code> 於無限可能時，例如字串、int 等。</p>
 <p>下列幾個範例，從糟糕到最佳：</p>
-<pre><code class="hljs css language-reason">let optionBoolToBool = opt =&gt;
-  if (opt == None) {
-    false;
-  } else if (opt == Some(true)) {
-    true;
-  } else {
-    false;
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> optionBoolToBool = opt =&gt;
+  <span class="hljs-keyword">if</span> (opt <span class="hljs-operator">==</span> <span class="hljs-constructor">None</span>) {
+    <span class="hljs-literal">false</span>;
+  } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (opt <span class="hljs-operator">==</span> <span class="hljs-constructor">Some</span>(<span class="hljs-literal">true</span>)) {
+    <span class="hljs-literal">true</span>;
+  } <span class="hljs-keyword">else</span> {
+    <span class="hljs-literal">false</span>;
   };
 </code></pre>
 <p>現在，只是缺乏思考 =)。試著轉成樣式匹配：</p>
-<pre><code class="hljs css language-reason">let optionBoolToBool = opt =&gt;
-  switch (opt) {
-  | None =&gt; false
-  | Some(a) =&gt; a ? true : false
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> optionBoolToBool = opt =&gt;
+  <span class="hljs-keyword">switch</span> (opt) {
+  | <span class="hljs-constructor">None</span> =&gt; <span class="hljs-literal">false</span>
+  | <span class="hljs-constructor">Some</span>(a) =&gt; a ? <span class="hljs-literal">true</span> : <span class="hljs-literal">false</span>
   };
 </code></pre>
 <p>好一些，但仍然是巢狀。樣式匹配可以做到：</p>
-<pre><code class="hljs css language-reason">let optionBoolToBool = opt =&gt;
-  switch (opt) {
-  | None =&gt; false
-  | Some(true) =&gt; true
-  | Some(false) =&gt; false
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> optionBoolToBool = opt =&gt;
+  <span class="hljs-keyword">switch</span> (opt) {
+  | <span class="hljs-constructor">None</span> =&gt; <span class="hljs-literal">false</span>
+  | <span class="hljs-constructor">Some</span>(<span class="hljs-literal">true</span>) =&gt; <span class="hljs-literal">true</span>
+  | <span class="hljs-constructor">Some</span>(<span class="hljs-literal">false</span>) =&gt; <span class="hljs-literal">false</span>
   };
 </code></pre>
 <p>看起來更加線性！現在，可能會試著：</p>
-<pre><code class="hljs css language-reason">let optionBoolToBool = opt =&gt;
-  switch (opt) {
-  | Some(true) =&gt; true
-  | _ =&gt; false
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> optionBoolToBool = opt =&gt;
+  <span class="hljs-keyword">switch</span> (opt) {
+  | <span class="hljs-constructor">Some</span>(<span class="hljs-literal">true</span>) =&gt; <span class="hljs-literal">true</span>
+  | _ =&gt; <span class="hljs-literal">false</span>
   };
 </code></pre>
 <p>Which is much more concise, but kills the exhaustiveness check mentioned above; refrain from using that. This is the best:</p>
-<pre><code class="hljs css language-reason">let optionBoolToBool = opt =&gt;
-  switch (opt) {
-  | Some(trueOrFalse) =&gt; trueOrFalse
-  | None =&gt; false
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> optionBoolToBool = opt =&gt;
+  <span class="hljs-keyword">switch</span> (opt) {
+  | <span class="hljs-constructor">Some</span>(trueOrFalse) =&gt; trueOrFalse
+  | <span class="hljs-constructor">None</span> =&gt; <span class="hljs-literal">false</span>
   };
 </code></pre>
 <p>現在這份程式碼幾乎很難犯錯！ 當有許多 if-else 分支時，偏好使用樣式匹配。 這個更加簡潔且<a href="/docs/zh-TW/variant#design-decisions">高效</a>。</p>
@@ -210,13 +210,13 @@ let Left(v) | Right(v) = i;
 <p>知名的 <a href="https://en.wikipedia.org/wiki/Fizz_buzz#Programming_interviews">fizzbuzz 問題</a>奇怪地絆倒某些人，部份原因是程式開發者的生性麻痺，希望尋找出不存在的單純/單一化條件分支。 希望你可以看見，樣式匹配一如往常的視覺簡潔<a href="/try.html?reason=PQKgBAQghgzgpgEzAewHZgBYBcsAcYBcwwATsvDlAMbIJwB0yJA5sAO4CWA1h8AGIcAXoIgBXYQGIA8gGEoAWwA2YEMABQiuFjAAzIYIBG4wWAC8YABQcAlGYB8asGBicsVDJY5h5tMAGYAGjAvHyQAVlsAb0cwAB9LAAYghNtTOzAAIgFhMWEMmPiLJLAAfVT0rP18p0KS5PLM3MFquNL7ZywSDlRmEuQdEu6sK2sYgF8AbjU1HSZPYPQARjAsZDBFhJSwaKcAKRh6RWRmCz1hI2ER0cmgA">讓我們克服決策麻痺</a>，同時保有所有 <code>if-else</code> 分支的好處（更多即將看見）。 明確地列出所有可能性並沒有錯；樣式匹配類似數學的<strong>案例分析（case analysis）</strong>，一種有效的解決問題技巧，證明非常方便。</p>
 <p>第一次使用 Reason 的 <code>switch</code> 或許會讓你感到自己遺失多年。當心，這可能會讓你毀了其他語言 =)。</p>
 <p>如果試著重構一個巨大、巢狀 if-else 邏輯，會發現非常難以讓邏輯正確。 換句話說，樣式匹配 + tuple 概念上映射成 2D 表格，每格都可以獨立滿足。 確保當你需要在 <code>switch</code> 加入新的案例，可以針對該表格的那一格，不會漏掉其他格。</p>
-<pre><code class="hljs css language-reason">type animal = Dog | Cat | Bird;
-let result = switch (isBig, myAnimal) {
-| (true, Dog) =&gt; 1
-| (true, Cat) =&gt; 2
-| (true, Bird) =&gt; 3
-| (false, Dog | Cat) =&gt; 4
-| (false, Bird) =&gt; 5
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> animal = <span class="hljs-constructor">Dog</span> | <span class="hljs-constructor">Cat</span> | <span class="hljs-constructor">Bird</span>;
+<span class="hljs-keyword">let</span> result = <span class="hljs-keyword">switch</span> (isBig, myAnimal) {
+| (<span class="hljs-literal">true</span>, <span class="hljs-constructor">Dog</span>) =&gt; <span class="hljs-number">1</span>
+| (<span class="hljs-literal">true</span>, <span class="hljs-constructor">Cat</span>) =&gt; <span class="hljs-number">2</span>
+| (<span class="hljs-literal">true</span>, <span class="hljs-constructor">Bird</span>) =&gt; <span class="hljs-number">3</span>
+| (<span class="hljs-literal">false</span>, <span class="hljs-constructor">Dog</span> | <span class="hljs-constructor">Cat</span>) =&gt; <span class="hljs-number">4</span>
+| (<span class="hljs-literal">false</span>, <span class="hljs-constructor">Bird</span>) =&gt; <span class="hljs-number">5</span>
 };
 </code></pre>
 <table>

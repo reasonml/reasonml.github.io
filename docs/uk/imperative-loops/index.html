@@ -68,51 +68,51 @@
             });
         </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://crowdin.com/project/reason/uk" target="_blank" rel="noreferrer noopener">Translate</a><h1 class="postHeaderTitle">Імперативні цикли</h1></header><article><div><span><h2><a class="anchor" aria-hidden="true" id="for-loops"></a><a href="#for-loops" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>For Loops</h2>
 <p>For loops iterate from a starting value up to (and including) the ending value.</p>
-<pre><code class="hljs css language-reason">for (myBinding in startValue to endValue) {
-  /* use myBinding here */
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">for</span> (myBinding <span class="hljs-keyword">in</span> startValue <span class="hljs-keyword">to</span> endValue) {
+  <span class="hljs-comment">/* use myBinding here */</span>
 };
 </code></pre>
 <p>The parenthesis around <code>startValue</code> and <code>endValue</code> may be omitted if they are unnecessary.</p>
-<pre><code class="hljs css language-reason">let xStart = 1;
-let xEnd = 3;
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> xStart = <span class="hljs-number">1</span>;
+<span class="hljs-keyword">let</span> xEnd = <span class="hljs-number">3</span>;
 
-/* prints: 1 2 3 */
-for (x in xStart to xEnd) {
+<span class="hljs-comment">/* prints: 1 2 3 */</span>
+<span class="hljs-keyword">for</span> (x <span class="hljs-keyword">in</span> xStart <span class="hljs-keyword">to</span> xEnd) {
   print_int(x);
-  print_string(&quot; &quot;)
+  print_string(<span class="hljs-string">" "</span>)
 };
 </code></pre>
 <p>You can make the <code>for</code> loop count in the opposite direction by using <code>downto</code>.</p>
-<pre><code class="hljs css language-reason">for (myBinding in startValue downto endValue) {
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">for</span> (myBinding <span class="hljs-keyword">in</span> startValue <span class="hljs-keyword">downto</span> endValue) {
   statements
 };
 </code></pre>
-<pre><code class="hljs css language-reason">let xStart = 3;
-let xEnd = 1;
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> xStart = <span class="hljs-number">3</span>;
+<span class="hljs-keyword">let</span> xEnd = <span class="hljs-number">1</span>;
 
-/* prints: 3 2 1 */
-for (x in xStart downto xEnd) {
+<span class="hljs-comment">/* prints: 3 2 1 */</span>
+<span class="hljs-keyword">for</span> (x <span class="hljs-keyword">in</span> xStart <span class="hljs-keyword">downto</span> xEnd) {
   print_int(x);
-  print_string(&quot; &quot;)
+  print_string(<span class="hljs-string">" "</span>)
 };
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" id="while-loops"></a><a href="#while-loops" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>While Loops</h2>
 <p>While loops execute a code block while some condition is true. The form of a <code>while</code> loop includes a single expression, the condition to test.</p>
-<pre><code class="hljs css language-reason">while (testCondition) {
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">while</span> (testCondition) {
   statements
 };
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" id="tips-tricks"></a><a href="#tips-tricks" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Tips &amp; Tricks</h2>
 <p>There's no loop-breaking <code>break</code> keyword (nor early <code>return</code> from functions, for that matter) in Reason. However, we can break out of a while loop easily through using a <a href="/docs/uk/mutation">mutable binding</a>.</p>
-<pre><code class="hljs css language-reason">Random.self_init();
+<pre><code class="hljs css language-reason"><span class="hljs-module-identifier">Random</span>.self_init();
 
-let break = ref(false);
+<span class="hljs-keyword">let</span> break = ref(<span class="hljs-literal">false</span>);
 
-while (! break^) {
-  if (Random.int(10) === 3) {
-    break := true
-  } else {
-    print_endline(&quot;hello&quot;)
+<span class="hljs-keyword">while</span> (<span class="hljs-operator">!</span> break<span class="hljs-operator">^</span>) {
+  <span class="hljs-keyword">if</span> (<span class="hljs-module-identifier">Random</span>.int(<span class="hljs-number">10</span>) <span class="hljs-operator">===</span> <span class="hljs-number">3</span>) {
+    break <span class="hljs-operator">:=</span> <span class="hljs-literal">true</span>
+  } <span class="hljs-keyword">else</span> {
+    print_endline(<span class="hljs-string">"hello"</span>)
   }
 };
 </code></pre>

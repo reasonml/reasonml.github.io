@@ -68,10 +68,10 @@
             });
         </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://crowdin.com/project/reason/ko" target="_blank" rel="noreferrer noopener">Translate</a><h1 class="postHeaderTitle">외부 접근</h1></header><article><div><span><p><code>external</code>, 혹은 &quot;FFI&quot; (외부 함수 인터페이스), 혹은 간단하게 &quot;연동&quot;이라 부르는 것은 Reason이 C나 JavaScript와 같은 다른 언어와 어떻게 소통하는지에 대한 것입니다.</p>
 <p>Imagine writing a let binding, but with its body omitted and its (mandatory) type written down:</p>
-<pre><code class="hljs css language-reason">external myCFunction: int =&gt; string = &quot;theCFunction&quot;;
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">external</span> myCFunction: int =&gt; string = <span class="hljs-string">"theCFunction"</span>;
 </code></pre>
-<pre><code class="hljs css language-reason">[@bs.val] external getElementsByClassName: string =&gt; array(Dom.element) =
-  &quot;document.getElementsByClassName&quot;;
+<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.val]</span> <span class="hljs-keyword">external</span> getElementsByClassName: string =&gt; array(<span class="hljs-module-identifier">Dom</span>.element) =
+  <span class="hljs-string">"document.getElementsByClassName"</span>;
 </code></pre>
 <p>(The above is a <a href="https://bucklescript.github.io/docs/en/intro-to-external.html">BuckleScript</a>-specific external that binds to a JavaScript function of the same name.)</p>
 <p><strong>Note</strong>: <code>external</code>s can only be at the top level, or inside a module definition. You can't declare them in e.g. a function body.</p>

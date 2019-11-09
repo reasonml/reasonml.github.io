@@ -73,36 +73,36 @@
 <li>haben eine feste Größe beim Erstellungszeitpunkt</li>
 <li>sind heterogen (können verschiedene Typen von Werten enthalten)</li>
 </ul>
-<pre><code class="hljs css language-reason">let ageAndName = (24, &quot;Lil' Reason&quot;);
-let my3dCoordinates = (20.0, 30.5, 100.0);
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> ageAndName = (<span class="hljs-number">24</span>, <span class="hljs-string">"Lil' Reason"</span>);
+<span class="hljs-keyword">let</span> my3dCoordinates = (<span class="hljs-number">20.0</span>, <span class="hljs-number">30.5</span>, <span class="hljs-number">100.0</span>);
 </code></pre>
 <p>Die Typen von Tupeln können auch in Typannotationen angegeben werden. Tupeltypen ähneln visuell Tupelwerten.</p>
-<pre><code class="hljs css language-reason">let ageAndName: (int, string) = (24, &quot;Lil' Reason&quot;);
-/* a tuple type alias */
-type coord3d = (float, float, float);
-let my3dCoordinates: coord3d = (20.0, 30.5, 100.0);
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> ageAndName: (int, string) = (<span class="hljs-number">24</span>, <span class="hljs-string">"Lil' Reason"</span>);
+<span class="hljs-comment">/* a tuple type alias */</span>
+<span class="hljs-keyword">type</span> coord3d = (float, float, float);
+<span class="hljs-keyword">let</span> my3dCoordinates: coord3d = (<span class="hljs-number">20.0</span>, <span class="hljs-number">30.5</span>, <span class="hljs-number">100.0</span>);
 </code></pre>
 <p><strong>Bemerkung</strong>: es gibt keinen Tupel der Größe 1. Du würdest einfach den Wert selbst verwenden.</p>
 <h2><a class="anchor" aria-hidden="true" id="verwendung"></a><a href="#verwendung" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Verwendung</h2>
 <p>Die Standardbibliothek stellt <code>fst</code> und <code>snd</code> (<a href="/api/Pervasives.html">hier</a> unter &quot;Pair operations&quot;) bereit. Dies sind nützliche Hilfsfunktionen, die es dir erlauben, auf das erste und zweite Element eines 2-Tupels zuzugreifen. Im Allgemeinen würdest du auf die Einträge in einem n-Tupel mithilfe von Destrukturierung zugreifen (was später in der Seitenleiste beschrieben wird):</p>
-<pre><code class="hljs css language-reason">let (_, y, _) = my3dCoordinates; /* now you've retrieved y */
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> (_, y, _) = my3dCoordinates; <span class="hljs-comment">/* now you've retrieved y */</span>
 </code></pre>
 <p>Der <code>_</code> bedeutet, dass du die entsprechenden Einträge im Tupel ignorierst.</p>
 <p>Tupel sollten nicht durch Mutation verändert werden; du würdest neue erstellen, indem du die alten destrukturierst.</p>
 <h2><a class="anchor" aria-hidden="true" id="tips-tricks"></a><a href="#tips-tricks" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Tips &amp; Tricks</h2>
 <p>Du würdest Tupel in praktischen Situationen verwenden, die ohne allzu großen Aufwand mehrere Werte herumreichen. Um beispielsweise viele Werte zurückzugeben:</p>
-<pre><code class="hljs css language-reason">let getCenterCoordinates = () =&gt; {
-  let x = doSomeOperationsHere();
-  let y = doSomeMoreOperationsHere();
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> getCenterCoordinates = () =&gt; {
+  <span class="hljs-keyword">let</span> x = doSomeOperationsHere();
+  <span class="hljs-keyword">let</span> y = doSomeMoreOperationsHere();
   (x, y)
 };
 </code></pre>
 <p>Oder durch „Pattern Matching“ (wird später behandelt) mit einer Konjunktion der Möglichkeiten:</p>
-<pre><code class="hljs css language-reason">switch (isWindowOpen, isDoorOpen) { /* this is a 2-tuple */
-| (true, true) =&gt; ...
-| (true, false) =&gt; ...
-| (false, true) =&gt; ...
-| (false, false) =&gt; ...
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">switch</span> (isWindowOpen, isDoorOpen) { <span class="hljs-comment">/* this is a 2-tuple */</span>
+| (<span class="hljs-literal">true</span>, <span class="hljs-literal">true</span>) =&gt; <span class="hljs-operator">...</span>
+| (<span class="hljs-literal">true</span>, <span class="hljs-literal">false</span>) =&gt; <span class="hljs-operator">...</span>
+| (<span class="hljs-literal">false</span>, <span class="hljs-literal">true</span>) =&gt; <span class="hljs-operator">...</span>
+| (<span class="hljs-literal">false</span>, <span class="hljs-literal">false</span>) =&gt; <span class="hljs-operator">...</span>
 }
 </code></pre>
 <p>Versuche, das Tupel nur <strong>lokal</strong> zu verwenden. Für Datenstrukturen, die langlebig sind und häufig weitergegeben werden, bevorzuge einen <strong>Record</strong>, der benannte Felder hat.</p>

@@ -69,51 +69,51 @@
         </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://crowdin.com/project/reason/ja" target="_blank" rel="noreferrer noopener">Translate</a><h1 class="postHeaderTitle">More on Type</h1></header><article><div><span><h2><a class="anchor" aria-hidden="true" id="型引数"></a><a href="#型引数" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>型引数！</h2>
 <p>型はパラメータを受け取れます。他の言語で言うジェネリクスのようなものです。 それは型が引数を受け取り、新しい型を返す関数のようなものです！ パラメータは <code>'</code> で始める<strong>必要があります</strong>。</p>
 <p>パラメータ化された型のユースケースは重複をなくすことです。Before:</p>
-<pre><code class="hljs css language-reason">/* これは3要素のタプルで、次に説明があります。 */
-type intCoordinates = (int, int, int);
-type floatCoordinates = (float, float, float);
+<pre><code class="hljs css language-reason"><span class="hljs-comment">/* これは3要素のタプルで、次に説明があります。 */</span>
+<span class="hljs-keyword">type</span> intCoordinates = (int, int, int);
+<span class="hljs-keyword">type</span> floatCoordinates = (float, float, float);
 
-let buddy: intCoordinates = (10, 20, 20);
+<span class="hljs-keyword">let</span> buddy: intCoordinates = (<span class="hljs-number">10</span>, <span class="hljs-number">20</span>, <span class="hljs-number">20</span>);
 </code></pre>
 <p>After:</p>
-<pre><code class="hljs css language-reason">type coordinates('a) = ('a, 'a, 'a);
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> coordinates('a) = ('a, 'a, 'a);
 
-/* 「型関数」の coordinates を適用すると、(int, int, int) が返ります。 */
-type intCoordinatesAlias = coordinates(int);
+<span class="hljs-comment">/* 「型関数」の coordinates を適用すると、(int, int, int) が返ります。 */</span>
+<span class="hljs-keyword">type</span> intCoordinatesAlias = coordinates(int);
 
-let buddy: intCoordinatesAlias = (10, 20, 20);
+<span class="hljs-keyword">let</span> buddy: intCoordinatesAlias = (<span class="hljs-number">10</span>, <span class="hljs-number">20</span>, <span class="hljs-number">20</span>);
 
-/* または、より一般的に, インラインで書きます。 */
-let buddy: coordinates(float) = (10.5, 20.5, 20.5);
+<span class="hljs-comment">/* または、より一般的に, インラインで書きます。 */</span>
+<span class="hljs-keyword">let</span> buddy: coordinates(float) = (<span class="hljs-number">10.5</span>, <span class="hljs-number">20.5</span>, <span class="hljs-number">20.5</span>);
 </code></pre>
 <p>実際には、型は推論されます。したがって、上記の例のより簡潔なバージョンはありません。</p>
-<pre><code class="hljs css language-reason">let buddy = (10, 20, 20);
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> buddy = (<span class="hljs-number">10</span>, <span class="hljs-number">20</span>, <span class="hljs-number">20</span>);
 </code></pre>
 <p>型システムは上記を <code>(int, int, int)</code> に推論します。他には何も書く必要はありません。</p>
 <p>型引数は至る所に表れます。</p>
-<pre><code class="hljs css language-reason">/* `list(string)` に推論されます */
-let greetings = [&quot;hello&quot;, &quot;world&quot;, &quot;how are you&quot;];
+<pre><code class="hljs css language-reason"><span class="hljs-comment">/* `list(string)` に推論されます */</span>
+<span class="hljs-keyword">let</span> greetings = <span class="hljs-literal">[</span><span class="hljs-string">"hello"</span>, <span class="hljs-string">"world"</span>, <span class="hljs-string">"how are you"</span><span class="hljs-literal">]</span>;
 </code></pre>
 <p>型がパラメータを受け付けなかったとしたら（つまり、「型関数」がなかったとしたら）、標準ライブラリは <code>listOfString</code>、<code>listOfInt</code>、<code>listOfTuplesOfInt</code>、などの型を定義する必要があったでしょう。</p>
 <p>型はより多くの引数を受け取ることが可能です。</p>
-<pre><code class="hljs css language-reason">type result('a, 'b) =
-  | Ok('a)
-  | Error('b);
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> result('a, 'b) =
+  | <span class="hljs-constructor">Ok</span>('a)
+  | <span class="hljs-constructor">Error</span>('b);
 
-type myPayload = {data: string};
+<span class="hljs-keyword">type</span> myPayload = {data: string};
 
-type myPayloadResults('errorType) = list(result(myPayload, 'errorType));
+<span class="hljs-keyword">type</span> myPayloadResults('errorType) = list(result(myPayload, 'errorType));
 
-let payloadResults: myPayloadResults(string) = [
-  Ok({data: &quot;hi&quot;}),
-  Ok({data: &quot;bye&quot;}),
-  Error(&quot;Something wrong happened!&quot;)
-];
+<span class="hljs-keyword">let</span> payloadResults: myPayloadResults(string) = <span class="hljs-literal">[</span>
+  <span class="hljs-constructor">Ok</span>({data: <span class="hljs-string">"hi"</span>}),
+  <span class="hljs-constructor">Ok</span>({data: <span class="hljs-string">"bye"</span>}),
+  <span class="hljs-constructor">Error</span>(<span class="hljs-string">"Something wrong happened!"</span>)
+<span class="hljs-literal">]</span>;
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" id="相互再帰型"></a><a href="#相互再帰型" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>相互再帰型</h2>
 <p>関数と同様、型も <code>and</code> を通して相互再帰することができます。</p>
-<pre><code class="hljs css language-reason">type student = {taughtBy: teacher}
-and teacher = {students: list(student)};
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> student = {taughtBy: teacher}
+<span class="hljs-keyword">and</span> teacher = {students: list(student)};
 </code></pre>
 <p><strong>注意</strong> 最初の行の最後にセミコロンがなく、2行目には <code>type</code> がありません。</p>
 <h2><a class="anchor" aria-hidden="true" id="設計方針"></a><a href="#設計方針" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>設計方針</h2>

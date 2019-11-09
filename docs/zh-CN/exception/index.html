@@ -68,23 +68,23 @@
             });
         </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://crowdin.com/project/reason/zh-CN" target="_blank" rel="noreferrer noopener">Translate</a><h1 class="postHeaderTitle">Exception</h1></header><article><div><span><p>异常只是一种特殊类型的变体, 在 <strong>异常</strong> 的情况下 &quot;抛出&quot; (请不要滥用！）</p>
 <h2><a class="anchor" aria-hidden="true" id="用法"></a><a href="#用法" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>用法</h2>
-<pre><code class="hljs css language-reason">let getItem = (theList) =&gt;
-  if (callSomeFunctionThatThrows()) {
-    /* 在这里返回找到的值 */
-  } else {
-    raise(Not_found)
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> getItem = (theList) =&gt;
+  <span class="hljs-keyword">if</span> (callSomeFunctionThatThrows()) {
+    <span class="hljs-comment">/* 在这里返回找到的值 */</span>
+  } <span class="hljs-keyword">else</span> {
+    <span class="hljs-keyword">raise</span>(<span class="hljs-constructor">Not_found</span>)
   };
 
-let result =
-  try (getItem([1, 2, 3])) {
-  | Not_found =&gt; 0 /* getitem 异常情况下的默认值 */
+<span class="hljs-keyword">let</span> result =
+  <span class="hljs-keyword">try</span> (getItem(<span class="hljs-literal">[</span><span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span><span class="hljs-literal">]</span>)) {
+  | <span class="hljs-constructor">Not_found</span> =&gt; <span class="hljs-number">0</span> <span class="hljs-comment">/* getitem 异常情况下的默认值 */</span>
   };
 </code></pre>
 <p>注意上述只是为了展示；实际上，你应该直接从 <code>getItem</code> 返回 <code>option(int)</code> 而避免和 <code>try</code> 一起使用。</p>
 <p>在从一个函数获得返回值的 <em>同时</em>，也可以直接匹配异常：</p>
-<pre><code class="hljs css language-reason">switch (List.find((i) =&gt; i === theItem, myItems)) {
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">switch</span> (<span class="hljs-module-identifier">List</span>.find((i) =&gt; i <span class="hljs-operator">===</span> theItem, myItems)) {
 | item =&gt; print_endline(item)
-| exception Not_found =&gt; print_endline(&quot;No such item found!&quot;)
+| <span class="hljs-keyword">exception</span> <span class="hljs-constructor">Not_found</span> =&gt; print_endline(<span class="hljs-string">"No such item found!"</span>)
 };
 </code></pre>
 <p>你也可以像创建 variant 一样创建异常（异常也必須是字母大写）。</p>

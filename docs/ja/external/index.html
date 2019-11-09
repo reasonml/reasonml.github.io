@@ -68,10 +68,10 @@
             });
         </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://crowdin.com/project/reason/ja" target="_blank" rel="noreferrer noopener">Translate</a><h1 class="postHeaderTitle">External</h1></header><article><div><span><p><code>external</code>、または、&quot;FFI&quot; (foreign function interface)、単に &quot;interop&quot;（相互運用性のための）は、Reason が他言語（C や JavaScript など）と通信する手段です。</p>
 <p>Imagine writing a let binding, but with its body omitted and its (mandatory) type written down:</p>
-<pre><code class="hljs css language-reason">external myCFunction: int =&gt; string = &quot;theCFunction&quot;;
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">external</span> myCFunction: int =&gt; string = <span class="hljs-string">"theCFunction"</span>;
 </code></pre>
-<pre><code class="hljs css language-reason">[@bs.val] external getElementsByClassName: string =&gt; array(Dom.element) =
-  &quot;document.getElementsByClassName&quot;;
+<pre><code class="hljs css language-reason"><span class="hljs-attribute">[@bs.val]</span> <span class="hljs-keyword">external</span> getElementsByClassName: string =&gt; array(<span class="hljs-module-identifier">Dom</span>.element) =
+  <span class="hljs-string">"document.getElementsByClassName"</span>;
 </code></pre>
 <p>（上記は <a href="https://bucklescript.github.io/docs/en/intro-to-external.html">BuckleScript</a> 固有の external で、同じ名前の JavaScript 関数に束縛されます。）</p>
 <p><strong>注意</strong>：<code>external</code>s はトップレベル、または、モジュール定義の内部でしか宣言することはできません。例えば関数の本体でそれらを宣言することはできません。</p>

@@ -73,36 +73,36 @@
 <li>фиксированного размера, заданного во время создания</li>
 <li>гетерогенными (могут содержать значения разных типов)</li>
 </ul>
-<pre><code class="hljs css language-reason">let ageAndName = (24, &quot;Lil' Reason&quot;);
-let my3dCoordinates = (20.0, 30.5, 100.0);
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> ageAndName = (<span class="hljs-number">24</span>, <span class="hljs-string">"Lil' Reason"</span>);
+<span class="hljs-keyword">let</span> my3dCoordinates = (<span class="hljs-number">20.0</span>, <span class="hljs-number">30.5</span>, <span class="hljs-number">100.0</span>);
 </code></pre>
 <p>Кортежи-типы могут быть использованы в аннотациях. Кортежи-типы визуально напоминают кортежи-значения.</p>
-<pre><code class="hljs css language-reason">let ageAndName: (int, string) = (24, &quot;Lil' Reason&quot;);
-/* псевдоним кортежа */
-type coord3d = (float, float, float);
-let my3dCoordinates: coord3d = (20.0, 30.5, 100.0);
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> ageAndName: (int, string) = (<span class="hljs-number">24</span>, <span class="hljs-string">"Lil' Reason"</span>);
+<span class="hljs-comment">/* псевдоним кортежа */</span>
+<span class="hljs-keyword">type</span> coord3d = (float, float, float);
+<span class="hljs-keyword">let</span> my3dCoordinates: coord3d = (<span class="hljs-number">20.0</span>, <span class="hljs-number">30.5</span>, <span class="hljs-number">100.0</span>);
 </code></pre>
 <p><strong>Важно</strong>: не бывает кортежа размера 1. Это просто значение.</p>
 <h2><a class="anchor" aria-hidden="true" id="использование"></a><a href="#использование" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Использование</h2>
 <p>Стандартная библиотека предоставляет функции <code>fst</code> и <code>snd</code> (<a href="/api/Pervasives.html">тут</a>, под &quot;Pair operations&quot;), удобные для того, чтобы получить элементы кортежа длинны 2. Как правило, доступ к элементам n-tuple осуществляется через деструктуризацию (как описано ниже на боковой панели):</p>
-<pre><code class="hljs css language-reason">let (_, y, _) = my3dCoordinates; /* теперь у вас есть значение y */
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> (_, y, _) = my3dCoordinates; <span class="hljs-comment">/* теперь у вас есть значение y */</span>
 </code></pre>
 <p>Символ <code>_</code> означает, что вы игнорируете остальные элементы.</p>
 <p>Кортежи нельзя менять, вы можете создавать новые, деструктурируя старые.</p>
 <h2><a class="anchor" aria-hidden="true" id="советы-и-трюки"></a><a href="#советы-и-трюки" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Советы и трюки</h2>
 <p>Кортежи удобно использовать когда нужно передать или вернуть несколько значений без особых церемоний. Например, чтобы вернуть несколько значений:</p>
-<pre><code class="hljs css language-reason">let getCenterCoordinates = () =&gt; {
-  let x = doSomeOperationsHere();
-  let y = doSomeMoreOperationsHere();
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> getCenterCoordinates = () =&gt; {
+  <span class="hljs-keyword">let</span> x = doSomeOperationsHere();
+  <span class="hljs-keyword">let</span> y = doSomeMoreOperationsHere();
   (x, y)
 };
 </code></pre>
 <p>Или для «сопоставления с образцом» (будет рассмотрено позже) при сочетании вариантов:</p>
-<pre><code class="hljs css language-reason">switch (isWindowOpen, isDoorOpen) { /* кортеж размера 2 */
-| (true, true) =&gt; ...
-| (true, false) =&gt; ...
-| (false, true) =&gt; ...
-| (false, false) =&gt; ...
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">switch</span> (isWindowOpen, isDoorOpen) { <span class="hljs-comment">/* кортеж размера 2 */</span>
+| (<span class="hljs-literal">true</span>, <span class="hljs-literal">true</span>) =&gt; <span class="hljs-operator">...</span>
+| (<span class="hljs-literal">true</span>, <span class="hljs-literal">false</span>) =&gt; <span class="hljs-operator">...</span>
+| (<span class="hljs-literal">false</span>, <span class="hljs-literal">true</span>) =&gt; <span class="hljs-operator">...</span>
+| (<span class="hljs-literal">false</span>, <span class="hljs-literal">false</span>) =&gt; <span class="hljs-operator">...</span>
 }
 </code></pre>
 <p>Старайтесь использовать кортежи <strong>локально</strong>. Для структуры данных, которая живет долго и передается в различные функции предпочтите <strong>запись</strong>, которая имеет именованные поля.</p>

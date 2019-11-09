@@ -73,36 +73,36 @@
 <li>생성 시 크기 고정</li>
 <li>이기종 (다른 유형 값 포함 가능)</li>
 </ul>
-<pre><code class="hljs css language-reason">let ageAndName = (24, &quot;Lil' Reason&quot;);
-let my3dCoordinates = (20.0, 30.5, 100.0);
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> ageAndName = (<span class="hljs-number">24</span>, <span class="hljs-string">"Lil' Reason"</span>);
+<span class="hljs-keyword">let</span> my3dCoordinates = (<span class="hljs-number">20.0</span>, <span class="hljs-number">30.5</span>, <span class="hljs-number">100.0</span>);
 </code></pre>
 <p>튜플 타입은 타입 어노테이션에도 사용될 수 있습니다. 튜플 타입은 보기에 튜플 값과 유사합니다.</p>
-<pre><code class="hljs css language-reason">let ageAndName: (int, string) = (24, &quot;Lil' Reason&quot;);
-/* a tuple type alias */
-type coord3d = (float, float, float);
-let my3dCoordinates: coord3d = (20.0, 30.5, 100.0);
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> ageAndName: (int, string) = (<span class="hljs-number">24</span>, <span class="hljs-string">"Lil' Reason"</span>);
+<span class="hljs-comment">/* a tuple type alias */</span>
+<span class="hljs-keyword">type</span> coord3d = (float, float, float);
+<span class="hljs-keyword">let</span> my3dCoordinates: coord3d = (<span class="hljs-number">20.0</span>, <span class="hljs-number">30.5</span>, <span class="hljs-number">100.0</span>);
 </code></pre>
 <p><strong>주의</strong>: 1의 크기를 가진 튜플은 없습니다. 값 그 자체를 써야합니다.</p>
 <h2><a class="anchor" aria-hidden="true" id="사용"></a><a href="#사용" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>사용</h2>
 <p>표준 라이브러리는 편의 기능인 <code>fst</code> 및 <code>snd</code> (<a href="/api/Pervasives.html">여기</a>의 &quot;Pair operations&quot; 참조)를 제공합니다. 이 편의 기능으로 2개의 값을 가지는 튜플의 첫 번째 및 두 번째 요소에 액세스 할 수 있습니다. 일반적으로, 비구조화를 통해 튜플의 멤버에 접근할 겁니다 (뒤에서 설명합니다).</p>
-<pre><code class="hljs css language-reason">let (_, y, _) = my3dCoordinates; /* now you've retrieved y */
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> (_, y, _) = my3dCoordinates; <span class="hljs-comment">/* now you've retrieved y */</span>
 </code></pre>
 <p><code>_</code>는 튜플에서 해당 위치에 해당하는 멤버를 무시하겠다는 뜻입니다.</p>
 <p>튜플은 변경이 가능하게 설계하지 않았습니다. 따라서 새로 만들려면 바꾸기 전 값을 넣어줘야 합니다.</p>
 <h2><a class="anchor" aria-hidden="true" id="팁-트릭"></a><a href="#팁-트릭" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>팁 &amp; 트릭</h2>
 <p>너무 장황하지 않게 간편하게 여러 값을 전달하는 상황에서 튜플을 사용합니다. 예를 들어 많은 값을 반환하려면 이렇게 하면 됩니다.</p>
-<pre><code class="hljs css language-reason">let getCenterCoordinates = () =&gt; {
-  let x = doSomeOperationsHere();
-  let y = doSomeMoreOperationsHere();
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> getCenterCoordinates = () =&gt; {
+  <span class="hljs-keyword">let</span> x = doSomeOperationsHere();
+  <span class="hljs-keyword">let</span> y = doSomeMoreOperationsHere();
   (x, y)
 };
 </code></pre>
 <p>&quot;패턴 매칭&quot;(나중에 다룹니다) 에서 가능한 조합으로 사용 할 수도 있습니다.</p>
-<pre><code class="hljs css language-reason">switch (isWindowOpen, isDoorOpen) { /* this is a 2-tuple */
-| (true, true) =&gt; ...
-| (true, false) =&gt; ...
-| (false, true) =&gt; ...
-| (false, false) =&gt; ...
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">switch</span> (isWindowOpen, isDoorOpen) { <span class="hljs-comment">/* this is a 2-tuple */</span>
+| (<span class="hljs-literal">true</span>, <span class="hljs-literal">true</span>) =&gt; <span class="hljs-operator">...</span>
+| (<span class="hljs-literal">true</span>, <span class="hljs-literal">false</span>) =&gt; <span class="hljs-operator">...</span>
+| (<span class="hljs-literal">false</span>, <span class="hljs-literal">true</span>) =&gt; <span class="hljs-operator">...</span>
+| (<span class="hljs-literal">false</span>, <span class="hljs-literal">false</span>) =&gt; <span class="hljs-operator">...</span>
 }
 </code></pre>
 <p><strong>로컬</strong>에는 튜플을 사용하십시오. 오래 지속되고 자주 전달되는 데이터 구조의 경우 필드 이름이 지정된 <strong>레코드</strong>를 사용하는 것이 좋습니다.</p>
