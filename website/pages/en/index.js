@@ -29,32 +29,36 @@ const pre = "```";
 
 // fake, static, responsive refmt, lol. See reason.css homeCodeSnippet logic
 const codeExampleSmallScreen = `${pre}reason
-type schoolPerson =
-  | Teacher
-  | Director
-  | Student(string);
+/* Paste into online playground and try it out: */
+type track = int;
+type playState =
+  | Playing(track)
+  | Paused(track)
+  | NotPlaying;
 
-let greeting = person =>
-  switch (person) {
-  | Teacher => "Hey Professor!"
-  | Director => "Hello Director."
-  | Student("Richard") =>
-    "Still here Ricky?"
-  | Student(anyOtherName) =>
-    "Hey, " ++ anyOtherName ++ "."
+/* ~newTrack is a labeled optional argument! */
+let togglePlay = (~newTrack=1, playState) =>
+  switch (playState) {
+  | Playing(track) => Paused(track)
+  | Paused(track) => Playing(track)
+  | NotPlaying => Playing(newTrack)
   };
+let nextPlayState = togglePlay(NotPlaying);
 ${pre}`;
 
 const codeExampleLargeScreen = `${pre}reason
-type schoolPerson = Teacher | Director | Student(string);
+/* Paste into online playground and try it out: */
+type track = int;
+type playState = Playing(track) | Paused(track) | NotPlaying;
 
-let greeting = person =>
-  switch (person) {
-  | Teacher => "Hey Professor!"
-  | Director => "Hello Director."
-  | Student("Richard") => "Still here Ricky?"
-  | Student(anyOtherName) => "Hey, " ++ anyOtherName ++ "."
+/* ~newTrack is a labeled optional argument! */
+let togglePlay = (~newTrack=1, playState) =>
+  switch (playState) {
+  | Playing(track) => Paused(track)
+  | Paused(track) => Playing(track)
+  | NotPlaying => Playing(newTrack)
   };
+let nextPlayState = togglePlay(NotPlaying);
 ${pre}`;
 
 const quickStart = `${pre}sh
@@ -149,15 +153,15 @@ class Index extends React.Component {
               contents={[
                 {
                   title: <translate>Types without hassle</translate>,
-                  content: <translate>Powerful, safe type inference means you rarely have to annotate types, but everything gets checked for you.</translate>,
+                  content: <translate>Get 100% type coverage from day one, with almost no manual annotations and no runtime type errors.</translate>,
                 },
                 {
                   title: <translate>Easy JavaScript interop</translate>,
-                  content: <translate>Use packages from NPM/Yarn with minimum hassle, or even drop in a snippet of raw JavaScript while you're learning!</translate>,
+                  content: <translate>Use npm/yarn packages with ease, or even drop in a snippet of raw JavaScript while you're learning!</translate>,
                 },
                 {
-                  title: <translate>Flexible & Fun</translate>,
-                  content: <translate>Make websites, animations, games, servers, cli tools, and more! Take a look at these examples to get inspired.</translate>,
+                  title: <translate>Engineering pedigree</translate>,
+                  content: <translate>Reason uses the super-fast OCaml compiler and inherits decades of quality engineering & theoretical rigor.</translate>,
                 },
               ]}
               layout="threeColumn"
@@ -177,6 +181,9 @@ class Index extends React.Component {
             </div>
             <div>
               <h2><translate>Examples</translate></h2>
+              <p>
+                <translate>Make websites, animations, games, servers, cli tools, and more! Take a look at these examples to get inspired.</translate>
+              </p>
               <GridBlock
                 className="examples"
                 align="center"

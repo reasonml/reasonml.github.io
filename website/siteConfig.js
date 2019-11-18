@@ -273,7 +273,7 @@ let reasonHighlightJs = require('reason-highlightjs');
 
 const siteConfig = {
   title: "Reason" /* title for your website */,
-  tagline: "Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript & OCaml ecosystems.",
+  tagline: "Reason helps you ship high-quality, efficient applications to production, while benefiting from both the OCaml & JavaScript ecosystems.",
   url: "https://reasonml.github.io" /* your github url */,
   editUrl: "https://github.com/reasonml/reasonml.github.io/tree/source/docs/",
   translationRecruitingLink: "https://crowdin.com/project/reason",
