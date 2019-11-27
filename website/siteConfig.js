@@ -238,6 +238,11 @@ const users = [
     caption: "Velvon",
     image: "img/logos/velvon.svg",
     infoLink: "https://velvon.com/en/home/"
+  },
+  {
+    caption: "Band Protocol",
+    image: "img/logos/band-protocol.svg",
+    infoLink: "https://bandprotocol.com/"
   }
 ];
 
