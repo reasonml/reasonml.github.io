@@ -25,5 +25,5 @@ And other features.
 ## Native Project Development (Community Supported):
 
 - [VSCode](https://marketplace.visualstudio.com/items?itemName=freebroccolo.reasonml): Use [vscode-reasonml](https://marketplace.visualstudio.com/items?itemName=freebroccolo.reasonml) from the extensions marketplace. (Mac, Linux).
-- [Vim/Neovim](https://github.com/reasonml-editor/vim-reason-plus): Make sure to use [ocaml-language-server](https://github.com/freebroccolo/ocaml-language-server#installation-1) for native development as suggested. (Mac, Linux).
+- [Vim/Neovim](https://github.com/reasonml-editor/vim-reason-plus): Make sure to use [ocaml-language-server](https://www.npmjs.com/package/ocaml-language-server) for native development as suggested. (Mac, Linux): `npm install -g ocaml-language-server`
 - [vim-reasonml](https://github.com/jordwalke/vim-reasonml): For use with native [esy](https://esy.sh/), Reason, and Merlin (not LSP based). (Mac, Linux, Windows).
