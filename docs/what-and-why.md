@@ -38,7 +38,7 @@ Many backing languages would satisfy the previous section's points; the points b
 - **Side-effects, mutation & other escape hatches**. These aren't usually the shiny selling points of a language; but being able to bridge toward a part of a codebase without an elaborate interop/rewrite is crucial for us at Facebook. OCaml defaults to immutable and functional code, but having the escape hatches makes the initial adoption sometimes simply possible.
 - **Implementation polish matters**. OCaml has been refined over two decades and gets better every year.
 - **The language for writing React**. [ReasonReact](//reasonml.github.io/reason-react/) demonstrates how naturally React patterns play to the strengths of OCaml/Reason, and ReactJS itself was inspired by the functional, yet pragmatic philosophy of the ML family of languages (as described in the [React To The Future](https://www.youtube.com/watch?v=5fG_lyNuEAw) talk by [jordwalke](https://twitter.com/jordwalke)).
-- **Welcoming, growing community**. The Reason community is welcoming of newcomers. The community has members from all over the world. Join [the Discord channel](https://discord.gg/UugQtbW) and ask for help. Stick around to share what you've learned with other newcomers.
+- **Welcoming, growing community**. The Reason community is welcoming of newcomers. The community has members from all over the world. Join [the Discord channel](https://discord.gg/reasonml) and ask for help. Stick around to share what you've learned with other newcomers.
 
 ## Reason isn't for you?
 
