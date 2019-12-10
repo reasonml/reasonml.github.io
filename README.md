@@ -62,7 +62,7 @@ eval `opam config env`
 
 4. Inside `jscomp`, either modify `repl.js`'s occurrences of `js_of_ocaml` to an absolute path that points to it or symlink `js_of_ocaml` into your `$PATH`.
 
-5. Run `BS_PLAYGROUND=../../reasonml.github.io/website/playground/bs/ node repl.js`
+5. Run `BS_PLAYGROUND=../../reasonml.github.io/website/playground/bs/ node ../scripts/repl.js`
 
 6. Inside the `reasonml.github.io` repository, run `cd website && yarn`
 
