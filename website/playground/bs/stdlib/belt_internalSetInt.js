@@ -114,7 +114,7 @@ function get(_n, x) {
         continue ;
       }
     } else {
-      return undefined;
+      return ;
     }
   };
 }
@@ -131,7 +131,7 @@ function getUndefined(_n, x) {
         continue ;
       }
     } else {
-      return undefined;
+      return ;
     }
   };
 }
@@ -193,11 +193,11 @@ function fromArray(xs) {
   }
 }
 
-var S = 0;
+var S = /* alias */0;
 
-var N = 0;
+var N = /* alias */0;
 
-var A = 0;
+var A = /* alias */0;
 
 exports.S = S;
 exports.N = N;

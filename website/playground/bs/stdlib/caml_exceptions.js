@@ -1,17 +1,19 @@
 'use strict';
 
 
-var id = /* record */[/* contents */0];
+var id = {
+  contents: 0
+};
 
 function caml_set_oo_id(b) {
-  b[1] = id[0];
-  id[0] += 1;
+  b[1] = id.contents;
+  id.contents = id.contents + 1;
   return b;
 }
 
 function caml_fresh_oo_id(param) {
-  id[0] += 1;
-  return id[0];
+  id.contents = id.contents + 1;
+  return id.contents;
 }
 
 function create(str) {

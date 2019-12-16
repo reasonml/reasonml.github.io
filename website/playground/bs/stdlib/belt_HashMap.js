@@ -174,16 +174,16 @@ function get(h, key) {
                     continue ;
                   }
                 } else {
-                  return undefined;
+                  return ;
                 }
               };
             }
           } else {
-            return undefined;
+            return ;
           }
         }
       } else {
-        return undefined;
+        return ;
       }
     }
   }
@@ -218,12 +218,12 @@ function has(h, key) {
 }
 
 function make(hintSize, id) {
-  return Belt_internalBucketsType.make(id[/* hash */0], id[/* eq */1], hintSize);
+  return Belt_internalBucketsType.make(id.hash, id.eq, hintSize);
 }
 
 function fromArray(arr, id) {
-  var hash = id[/* hash */0];
-  var eq = id[/* eq */1];
+  var hash = id.hash;
+  var eq = id.eq;
   var len = arr.length;
   var v = Belt_internalBucketsType.make(hash, eq, len);
   for(var i = 0 ,i_finish = len - 1 | 0; i <= i_finish; ++i){
@@ -244,9 +244,9 @@ function mergeMany(h, arr) {
   return /* () */0;
 }
 
-var Int = 0;
+var Int = /* alias */0;
 
-var $$String = 0;
+var $$String = /* alias */0;
 
 var clear = Belt_internalBucketsType.clear;
 

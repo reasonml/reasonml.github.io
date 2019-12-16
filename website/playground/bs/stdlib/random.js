@@ -13,8 +13,8 @@ var Caml_string = require("./caml_string.js");
 var Caml_builtin_exceptions = require("./caml_builtin_exceptions.js");
 
 function assign(st1, st2) {
-  $$Array.blit(st2[/* st */0], 0, st1[/* st */0], 0, 55);
-  st1[/* idx */1] = st2[/* idx */1];
+  $$Array.blit(st2.st, 0, st1.st, 0, 55);
+  st1.idx = st2.idx;
   return /* () */0;
 }
 
@@ -28,7 +28,7 @@ function full_init(s, seed) {
   var seed$1 = seed.length === 0 ? /* array */[0] : seed;
   var l = seed$1.length;
   for(var i = 0; i <= 54; ++i){
-    Caml_array.caml_array_set(s[/* st */0], i, i);
+    Caml_array.caml_array_set(s.st, i, i);
   }
   var accu = "x";
   for(var i$1 = 0 ,i_finish = 54 + (
@@ -37,17 +37,17 @@ function full_init(s, seed) {
     var j = i$1 % 55;
     var k = i$1 % l;
     accu = combine(accu, Caml_array.caml_array_get(seed$1, k));
-    Caml_array.caml_array_set(s[/* st */0], j, (Caml_array.caml_array_get(s[/* st */0], j) ^ extract(accu)) & 1073741823);
+    Caml_array.caml_array_set(s.st, j, (Caml_array.caml_array_get(s.st, j) ^ extract(accu)) & 1073741823);
   }
-  s[/* idx */1] = 0;
+  s.idx = 0;
   return /* () */0;
 }
 
 function make(seed) {
-  var result = /* record */[
-    /* st */Caml_array.caml_make_vect(55, 0),
-    /* idx */0
-  ];
+  var result = {
+    st: Caml_array.caml_make_vect(55, 0),
+    idx: 0
+  };
   full_init(result, seed);
   return result;
 }
@@ -57,20 +57,20 @@ function make_self_init(param) {
 }
 
 function copy(s) {
-  var result = /* record */[
-    /* st */Caml_array.caml_make_vect(55, 0),
-    /* idx */0
-  ];
+  var result = {
+    st: Caml_array.caml_make_vect(55, 0),
+    idx: 0
+  };
   assign(result, s);
   return result;
 }
 
 function bits(s) {
-  s[/* idx */1] = (s[/* idx */1] + 1 | 0) % 55;
-  var curval = Caml_array.caml_array_get(s[/* st */0], s[/* idx */1]);
-  var newval = Caml_array.caml_array_get(s[/* st */0], (s[/* idx */1] + 24 | 0) % 55) + (curval ^ (curval >>> 25) & 31) | 0;
+  s.idx = (s.idx + 1 | 0) % 55;
+  var curval = Caml_array.caml_array_get(s.st, s.idx);
+  var newval = Caml_array.caml_array_get(s.st, (s.idx + 24 | 0) % 55) + (curval ^ (curval >>> 25) & 31) | 0;
   var newval30 = newval & 1073741823;
-  Caml_array.caml_array_set(s[/* st */0], s[/* idx */1], newval30);
+  Caml_array.caml_array_set(s.st, s.idx, newval30);
   return newval30;
 }
 
@@ -80,19 +80,18 @@ function $$int(s, bound) {
           Caml_builtin_exceptions.invalid_argument,
           "Random.int"
         ];
-  } else {
-    var s$1 = s;
-    var n = bound;
-    while(true) {
-      var r = bits(s$1);
-      var v = r % n;
-      if ((r - v | 0) > ((1073741823 - n | 0) + 1 | 0)) {
-        continue ;
-      } else {
-        return v;
-      }
-    };
   }
+  var s$1 = s;
+  var n = bound;
+  while(true) {
+    var r = bits(s$1);
+    var v = r % n;
+    if ((r - v | 0) > ((1073741823 - n | 0) + 1 | 0)) {
+      continue ;
+    } else {
+      return v;
+    }
+  };
 }
 
 function int32(s, bound) {
@@ -101,58 +100,53 @@ function int32(s, bound) {
           Caml_builtin_exceptions.invalid_argument,
           "Random.int32"
         ];
-  } else {
-    var s$1 = s;
-    var n = bound;
-    while(true) {
-      var b1 = bits(s$1);
-      var b2 = ((bits(s$1) & 1) << 30);
-      var r = b1 | b2;
-      var v = r % n;
-      if ((r - v | 0) > ((Int32.max_int - n | 0) + 1 | 0)) {
-        continue ;
-      } else {
-        return v;
-      }
-    };
   }
+  var s$1 = s;
+  var n = bound;
+  while(true) {
+    var b1 = bits(s$1);
+    var b2 = ((bits(s$1) & 1) << 30);
+    var r = b1 | b2;
+    var v = r % n;
+    if ((r - v | 0) > ((Int32.max_int - n | 0) + 1 | 0)) {
+      continue ;
+    } else {
+      return v;
+    }
+  };
 }
 
 function int64(s, bound) {
-  if (Caml_int64.le(bound, /* int64 */[
-          /* hi */0,
-          /* lo */0
-        ])) {
+  if (Caml_int64.le(bound, /* int64 */{
+          hi: 0,
+          lo: 0
+        })) {
     throw [
           Caml_builtin_exceptions.invalid_argument,
           "Random.int64"
         ];
-  } else {
-    var s$1 = s;
-    var n = bound;
-    while(true) {
-      var b1 = Caml_int64.of_int32(bits(s$1));
-      var b2 = Caml_int64.lsl_(Caml_int64.of_int32(bits(s$1)), 30);
-      var b3 = Caml_int64.lsl_(Caml_int64.of_int32(bits(s$1) & 7), 60);
-      var r = Caml_int64.or_(b1, /* int64 */[
-            /* hi */b2[0] | b3[0],
-            /* lo */((b2[1] | b3[1]) >>> 0)
-          ]);
-      var v = Caml_int64.mod_(r, n);
-      if (Caml_int64.gt(Caml_int64.sub(r, v), Caml_int64.add(Caml_int64.sub(Int64.max_int, n), /* int64 */[
-                  /* hi */0,
-                  /* lo */1
-                ]))) {
-        continue ;
-      } else {
-        return v;
-      }
-    };
   }
+  var s$1 = s;
+  var n = bound;
+  while(true) {
+    var b1 = Caml_int64.of_int32(bits(s$1));
+    var b2 = Caml_int64.lsl_(Caml_int64.of_int32(bits(s$1)), 30);
+    var b3 = Caml_int64.lsl_(Caml_int64.of_int32(bits(s$1) & 7), 60);
+    var r = Caml_int64.or_(b1, Caml_int64.or_(b2, b3));
+    var v = Caml_int64.mod_(r, n);
+    if (Caml_int64.gt(Caml_int64.sub(r, v), Caml_int64.add(Caml_int64.sub(Int64.max_int, n), /* int64 */{
+                hi: 0,
+                lo: 1
+              }))) {
+      continue ;
+    } else {
+      return v;
+    }
+  };
 }
 
 var nativeint = Nativeint.size === 32 ? int32 : (function (s, bound) {
-      return int64(s, Caml_int64.of_int32(bound))[1] | 0;
+      return Caml_int64.to_int32(int64(s, Caml_int64.of_int32(bound)));
     });
 
 function rawfloat(s) {
@@ -169,8 +163,8 @@ function bool(s) {
   return (bits(s) & 1) === 0;
 }
 
-var $$default = /* record */[
-  /* st : array */[
+var $$default = {
+  st: /* array */[
     987910699,
     495797812,
     364182224,
@@ -227,8 +221,8 @@ var $$default = /* record */[
     409934019,
     801085050
   ],
-  /* idx */0
-];
+  idx: 0
+};
 
 function bits$1(param) {
   return bits($$default);
@@ -278,18 +272,18 @@ function set_state(s) {
   return assign($$default, s);
 }
 
-var State = [
-  make,
-  make_self_init,
-  copy,
-  bits,
-  $$int,
-  int32,
-  nativeint,
-  int64,
-  $$float,
-  bool
-];
+var State = {
+  make: make,
+  make_self_init: make_self_init,
+  copy: copy,
+  bits: bits,
+  $$int: $$int,
+  int32: int32,
+  nativeint: nativeint,
+  int64: int64,
+  $$float: $$float,
+  bool: bool
+};
 
 exports.init = init;
 exports.full_init = full_init$1;

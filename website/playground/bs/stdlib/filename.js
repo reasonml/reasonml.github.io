@@ -6,85 +6,14 @@ var $$Buffer = require("./buffer.js");
 var Printf = require("./printf.js");
 var Random = require("./random.js");
 var $$String = require("./string.js");
+var Caml_obj = require("./caml_obj.js");
 var Caml_sys = require("./caml_sys.js");
 var Pervasives = require("./pervasives.js");
 var Caml_string = require("./caml_string.js");
 var CamlinternalLazy = require("./camlinternalLazy.js");
 var Caml_js_exceptions = require("./caml_js_exceptions.js");
-var Caml_missing_polyfill = require("./caml_missing_polyfill.js");
+var Caml_external_polyfill = require("./caml_external_polyfill.js");
 var Caml_builtin_exceptions = require("./caml_builtin_exceptions.js");
-
-function generic_basename(is_dir_sep, current_dir_name, name) {
-  if (name === "") {
-    return current_dir_name;
-  } else {
-    var _n = name.length - 1 | 0;
-    while(true) {
-      var n = _n;
-      if (n < 0) {
-        return $$String.sub(name, 0, 1);
-      } else if (Curry._2(is_dir_sep, name, n)) {
-        _n = n - 1 | 0;
-        continue ;
-      } else {
-        var _n$1 = n;
-        var p = n + 1 | 0;
-        while(true) {
-          var n$1 = _n$1;
-          if (n$1 < 0) {
-            return $$String.sub(name, 0, p);
-          } else if (Curry._2(is_dir_sep, name, n$1)) {
-            return $$String.sub(name, n$1 + 1 | 0, (p - n$1 | 0) - 1 | 0);
-          } else {
-            _n$1 = n$1 - 1 | 0;
-            continue ;
-          }
-        };
-      }
-    };
-  }
-}
-
-function generic_dirname(is_dir_sep, current_dir_name, name) {
-  if (name === "") {
-    return current_dir_name;
-  } else {
-    var _n = name.length - 1 | 0;
-    while(true) {
-      var n = _n;
-      if (n < 0) {
-        return $$String.sub(name, 0, 1);
-      } else if (Curry._2(is_dir_sep, name, n)) {
-        _n = n - 1 | 0;
-        continue ;
-      } else {
-        var _n$1 = n;
-        while(true) {
-          var n$1 = _n$1;
-          if (n$1 < 0) {
-            return current_dir_name;
-          } else if (Curry._2(is_dir_sep, name, n$1)) {
-            var _n$2 = n$1;
-            while(true) {
-              var n$2 = _n$2;
-              if (n$2 < 0) {
-                return $$String.sub(name, 0, 1);
-              } else if (Curry._2(is_dir_sep, name, n$2)) {
-                _n$2 = n$2 - 1 | 0;
-                continue ;
-              } else {
-                return $$String.sub(name, 0, n$2 + 1 | 0);
-              }
-            };
-          } else {
-            _n$1 = n$1 - 1 | 0;
-            continue ;
-          }
-        };
-      }
-    };
-  }
-}
 
 var current_dir_name = ".";
 
@@ -151,27 +80,84 @@ function quote(param) {
 }
 
 function basename(param) {
-  return generic_basename(is_dir_sep, current_dir_name, param);
-}
-
-function dirname(param) {
-  return generic_dirname(is_dir_sep, current_dir_name, param);
-}
-
-var temp_dir_name$1;
-
-try {
-  temp_dir_name$1 = Caml_sys.caml_sys_getenv("TEMP");
-}
-catch (exn$1){
-  if (exn$1 === Caml_builtin_exceptions.not_found) {
-    temp_dir_name$1 = ".";
+  var is_dir_sep$1 = is_dir_sep;
+  var current_dir_name$1 = current_dir_name;
+  var name = param;
+  if (name === "") {
+    return current_dir_name$1;
   } else {
-    throw exn$1;
+    var _n = name.length - 1 | 0;
+    while(true) {
+      var n = _n;
+      if (n < 0) {
+        return $$String.sub(name, 0, 1);
+      } else if (Curry._2(is_dir_sep$1, name, n)) {
+        _n = n - 1 | 0;
+        continue ;
+      } else {
+        var _n$1 = n;
+        var p = n + 1 | 0;
+        while(true) {
+          var n$1 = _n$1;
+          if (n$1 < 0) {
+            return $$String.sub(name, 0, p);
+          } else if (Curry._2(is_dir_sep$1, name, n$1)) {
+            return $$String.sub(name, n$1 + 1 | 0, (p - n$1 | 0) - 1 | 0);
+          } else {
+            _n$1 = n$1 - 1 | 0;
+            continue ;
+          }
+        };
+      }
+    };
   }
 }
 
-var temp_dir_name$2 = temp_dir_name;
+function dirname(param) {
+  var is_dir_sep$1 = is_dir_sep;
+  var current_dir_name$1 = current_dir_name;
+  var name = param;
+  if (name === "") {
+    return current_dir_name$1;
+  } else {
+    var _n = name.length - 1 | 0;
+    while(true) {
+      var n = _n;
+      if (n < 0) {
+        return $$String.sub(name, 0, 1);
+      } else if (Curry._2(is_dir_sep$1, name, n)) {
+        _n = n - 1 | 0;
+        continue ;
+      } else {
+        var _n$1 = n;
+        while(true) {
+          var n$1 = _n$1;
+          if (n$1 < 0) {
+            return current_dir_name$1;
+          } else if (Curry._2(is_dir_sep$1, name, n$1)) {
+            var _n$2 = n$1;
+            while(true) {
+              var n$2 = _n$2;
+              if (n$2 < 0) {
+                return $$String.sub(name, 0, 1);
+              } else if (Curry._2(is_dir_sep$1, name, n$2)) {
+                _n$2 = n$2 - 1 | 0;
+                continue ;
+              } else {
+                return $$String.sub(name, 0, n$2 + 1 | 0);
+              }
+            };
+          } else {
+            _n$1 = n$1 - 1 | 0;
+            continue ;
+          }
+        };
+      }
+    };
+  }
+}
+
+var temp_dir_name$1 = temp_dir_name;
 
 var is_dir_sep$1 = is_dir_sep;
 
@@ -193,22 +179,30 @@ function chop_suffix(name, suff) {
           Caml_builtin_exceptions.invalid_argument,
           "Filename.chop_suffix"
         ];
-  } else {
-    return $$String.sub(name, 0, n);
   }
+  return $$String.sub(name, 0, n);
 }
 
-function chop_extension(name) {
+function extension_len(name) {
   var _i = name.length - 1 | 0;
   while(true) {
     var i = _i;
     if (i < 0 || Curry._2(is_dir_sep$1, name, i)) {
-      throw [
-            Caml_builtin_exceptions.invalid_argument,
-            "Filename.chop_extension"
-          ];
+      return 0;
     } else if (Caml_string.get(name, i) === /* "." */46) {
-      return $$String.sub(name, 0, i);
+      var i0 = i;
+      var _i$1 = i - 1 | 0;
+      while(true) {
+        var i$1 = _i$1;
+        if (i$1 < 0 || Curry._2(is_dir_sep$1, name, i$1)) {
+          return 0;
+        } else if (Caml_string.get(name, i$1) === /* "." */46) {
+          _i$1 = i$1 - 1 | 0;
+          continue ;
+        } else {
+          return name.length - i0 | 0;
+        }
+      };
     } else {
       _i = i - 1 | 0;
       continue ;
@@ -216,15 +210,41 @@ function chop_extension(name) {
   };
 }
 
-var prng = Block.__(246, [(function (param) {
-        return Random.State[/* make_self_init */1](/* () */0);
-      })]);
+function extension(name) {
+  var l = extension_len(name);
+  if (l === 0) {
+    return "";
+  } else {
+    return $$String.sub(name, name.length - l | 0, l);
+  }
+}
+
+function chop_extension(name) {
+  var l = extension_len(name);
+  if (l === 0) {
+    throw [
+          Caml_builtin_exceptions.invalid_argument,
+          "Filename.chop_extension"
+        ];
+  }
+  return $$String.sub(name, 0, name.length - l | 0);
+}
+
+function remove_extension(name) {
+  var l = extension_len(name);
+  if (l === 0) {
+    return name;
+  } else {
+    return $$String.sub(name, 0, name.length - l | 0);
+  }
+}
+
+var prng = Caml_obj.caml_lazy_make((function (param) {
+        return Random.State.make_self_init(/* () */0);
+      }));
 
 function temp_file_name(temp_dir, prefix, suffix) {
-  var tag = prng.tag | 0;
-  var rnd = Random.State[/* bits */3](tag === 250 ? prng[0] : (
-          tag === 246 ? CamlinternalLazy.force_lazy_block(prng) : prng
-        )) & 16777215;
+  var rnd = Random.State.bits(CamlinternalLazy.force(prng)) & 16777215;
   return concat(temp_dir, Curry._3(Printf.sprintf(/* Format */[
                       /* String */Block.__(2, [
                           /* No_padding */0,
@@ -245,25 +265,36 @@ function temp_file_name(temp_dir, prefix, suffix) {
                     ]), prefix, rnd, suffix));
 }
 
-var current_temp_dir_name = /* record */[/* contents */temp_dir_name$2];
+var current_temp_dir_name = {
+  contents: temp_dir_name$1
+};
 
 function set_temp_dir_name(s) {
-  current_temp_dir_name[0] = s;
+  current_temp_dir_name.contents = s;
   return /* () */0;
 }
 
 function get_temp_dir_name(param) {
-  return current_temp_dir_name[0];
+  return current_temp_dir_name.contents;
 }
 
 function temp_file($staropt$star, prefix, suffix) {
-  var temp_dir = $staropt$star !== undefined ? $staropt$star : current_temp_dir_name[0];
+  var temp_dir = $staropt$star !== undefined ? $staropt$star : current_temp_dir_name.contents;
   var _counter = 0;
   while(true) {
     var counter = _counter;
     var name = temp_file_name(temp_dir, prefix, suffix);
     try {
-      Caml_missing_polyfill.not_implemented("caml_sys_close");
+      Caml_external_polyfill.resolve("caml_sys_close")(Caml_external_polyfill.resolve("caml_sys_open")(name, /* :: */[
+                /* Open_wronly */1,
+                /* :: */[
+                  /* Open_creat */3,
+                  /* :: */[
+                    /* Open_excl */5,
+                    /* [] */0
+                  ]
+                ]
+              ], 384));
       return name;
     }
     catch (raw_e){
@@ -271,10 +302,9 @@ function temp_file($staropt$star, prefix, suffix) {
       if (e[0] === Caml_builtin_exceptions.sys_error) {
         if (counter >= 1000) {
           throw e;
-        } else {
-          _counter = counter + 1 | 0;
-          continue ;
         }
+        _counter = counter + 1 | 0;
+        continue ;
       } else {
         throw e;
       }
@@ -282,12 +312,13 @@ function temp_file($staropt$star, prefix, suffix) {
   };
 }
 
-function open_temp_file($staropt$star, $staropt$star$1, prefix, suffix) {
+function open_temp_file($staropt$star, $staropt$star$1, $staropt$star$2, prefix, suffix) {
   var mode = $staropt$star !== undefined ? $staropt$star : /* :: */[
       /* Open_text */7,
       /* [] */0
     ];
-  var temp_dir = $staropt$star$1 !== undefined ? $staropt$star$1 : current_temp_dir_name[0];
+  var perms = $staropt$star$1 !== undefined ? $staropt$star$1 : 384;
+  var temp_dir = $staropt$star$2 !== undefined ? $staropt$star$2 : current_temp_dir_name.contents;
   var _counter = 0;
   while(true) {
     var counter = _counter;
@@ -304,7 +335,7 @@ function open_temp_file($staropt$star, $staropt$star$1, prefix, suffix) {
                         mode
                       ]
                     ]
-                  ], 384, name)
+                  ], perms, name)
             ];
     }
     catch (raw_e){
@@ -312,10 +343,9 @@ function open_temp_file($staropt$star, $staropt$star$1, prefix, suffix) {
       if (e[0] === Caml_builtin_exceptions.sys_error) {
         if (counter >= 1000) {
           throw e;
-        } else {
-          _counter = counter + 1 | 0;
-          continue ;
         }
+        _counter = counter + 1 | 0;
+        continue ;
       } else {
         throw e;
       }
@@ -347,6 +377,8 @@ exports.is_relative = is_relative$1;
 exports.is_implicit = is_implicit$1;
 exports.check_suffix = check_suffix$1;
 exports.chop_suffix = chop_suffix;
+exports.extension = extension;
+exports.remove_extension = remove_extension;
 exports.chop_extension = chop_extension;
 exports.basename = basename$1;
 exports.dirname = dirname$1;
@@ -354,6 +386,6 @@ exports.temp_file = temp_file;
 exports.open_temp_file = open_temp_file;
 exports.get_temp_dir_name = get_temp_dir_name;
 exports.set_temp_dir_name = set_temp_dir_name;
-exports.temp_dir_name = temp_dir_name$2;
+exports.temp_dir_name = temp_dir_name$1;
 exports.quote = quote$1;
-/* match Not a pure module */
+/* No side effect */

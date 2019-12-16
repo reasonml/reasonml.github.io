@@ -157,7 +157,7 @@ function removeMinAuxWithRef(n, v) {
   if (ln !== null) {
     return bal(removeMinAuxWithRef(ln, v), kn, rn);
   } else {
-    v[0] = kn;
+    v.contents = kn;
     return rn;
   }
 }
@@ -301,9 +301,11 @@ function joinShared(ln, v, rn) {
 function concatShared(t1, t2) {
   if (t1 !== null) {
     if (t2 !== null) {
-      var v = /* record */[/* contents */t2.value];
+      var v = {
+        contents: t2.value
+      };
       var t2r = removeMinAuxWithRef(t2, v);
-      return joinShared(t1, v[0], t2r);
+      return joinShared(t1, v.contents, t2r);
     } else {
       return t1;
     }
@@ -480,11 +482,11 @@ function toArray(n) {
 
 function fromSortedArrayRevAux(arr, off, len) {
   switch (len) {
-    case 0 : 
+    case 0 :
         return null;
-    case 1 : 
+    case 1 :
         return singleton(arr[off]);
-    case 2 : 
+    case 2 :
         var x0 = arr[off];
         var x1 = arr[off - 1 | 0];
         return {
@@ -493,7 +495,7 @@ function fromSortedArrayRevAux(arr, off, len) {
                 left: singleton(x0),
                 right: null
               };
-    case 3 : 
+    case 3 :
         var x0$1 = arr[off];
         var x1$1 = arr[off - 1 | 0];
         var x2 = arr[off - 2 | 0];
@@ -514,11 +516,11 @@ function fromSortedArrayRevAux(arr, off, len) {
 
 function fromSortedArrayAux(arr, off, len) {
   switch (len) {
-    case 0 : 
+    case 0 :
         return null;
-    case 1 : 
+    case 1 :
         return singleton(arr[off]);
-    case 2 : 
+    case 2 :
         var x0 = arr[off];
         var x1 = arr[off + 1 | 0];
         return {
@@ -527,7 +529,7 @@ function fromSortedArrayAux(arr, off, len) {
                 left: singleton(x0),
                 right: null
               };
-    case 3 : 
+    case 3 :
         var x0$1 = arr[off];
         var x1$1 = arr[off + 1 | 0];
         var x2 = arr[off + 2 | 0];
@@ -728,7 +730,7 @@ function get(_n, x, cmp) {
         continue ;
       }
     } else {
-      return undefined;
+      return ;
     }
   };
 }
@@ -746,7 +748,7 @@ function getUndefined(_n, x, cmp) {
         continue ;
       }
     } else {
-      return undefined;
+      return ;
     }
   };
 }

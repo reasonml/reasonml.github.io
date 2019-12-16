@@ -6,10 +6,12 @@ var $$Array = require("./array.js");
 var Block = require("./block.js");
 var Curry = require("./curry.js");
 var Printf = require("./printf.js");
+var $$String = require("./string.js");
 var Caml_io = require("./caml_io.js");
 var Hashtbl = require("./hashtbl.js");
 var Callback = require("./callback.js");
 var Caml_sys = require("./caml_sys.js");
+var Filename = require("./filename.js");
 var Printexc = require("./printexc.js");
 var Caml_array = require("./caml_array.js");
 var Caml_bytes = require("./caml_bytes.js");
@@ -17,7 +19,7 @@ var Pervasives = require("./pervasives.js");
 var Caml_format = require("./caml_format.js");
 var Caml_exceptions = require("./caml_exceptions.js");
 var Caml_js_exceptions = require("./caml_js_exceptions.js");
-var Caml_missing_polyfill = require("./caml_missing_polyfill.js");
+var Caml_external_polyfill = require("./caml_external_polyfill.js");
 var Caml_builtin_exceptions = require("./caml_builtin_exceptions.js");
 
 var Unix_error = Caml_exceptions.create("Unix.Unix_error");
@@ -35,208 +37,208 @@ Printexc.register_printer((function (param) {
           var msg;
           if (typeof e === "number") {
             switch (e) {
-              case 0 : 
+              case /* E2BIG */0 :
                   msg = "E2BIG";
                   break;
-              case 1 : 
+              case /* EACCES */1 :
                   msg = "EACCES";
                   break;
-              case 2 : 
+              case /* EAGAIN */2 :
                   msg = "EAGAIN";
                   break;
-              case 3 : 
+              case /* EBADF */3 :
                   msg = "EBADF";
                   break;
-              case 4 : 
+              case /* EBUSY */4 :
                   msg = "EBUSY";
                   break;
-              case 5 : 
+              case /* ECHILD */5 :
                   msg = "ECHILD";
                   break;
-              case 6 : 
+              case /* EDEADLK */6 :
                   msg = "EDEADLK";
                   break;
-              case 7 : 
+              case /* EDOM */7 :
                   msg = "EDOM";
                   break;
-              case 8 : 
+              case /* EEXIST */8 :
                   msg = "EEXIST";
                   break;
-              case 9 : 
+              case /* EFAULT */9 :
                   msg = "EFAULT";
                   break;
-              case 10 : 
+              case /* EFBIG */10 :
                   msg = "EFBIG";
                   break;
-              case 11 : 
+              case /* EINTR */11 :
                   msg = "EINTR";
                   break;
-              case 12 : 
+              case /* EINVAL */12 :
                   msg = "EINVAL";
                   break;
-              case 13 : 
+              case /* EIO */13 :
                   msg = "EIO";
                   break;
-              case 14 : 
+              case /* EISDIR */14 :
                   msg = "EISDIR";
                   break;
-              case 15 : 
+              case /* EMFILE */15 :
                   msg = "EMFILE";
                   break;
-              case 16 : 
+              case /* EMLINK */16 :
                   msg = "EMLINK";
                   break;
-              case 17 : 
+              case /* ENAMETOOLONG */17 :
                   msg = "ENAMETOOLONG";
                   break;
-              case 18 : 
+              case /* ENFILE */18 :
                   msg = "ENFILE";
                   break;
-              case 19 : 
+              case /* ENODEV */19 :
                   msg = "ENODEV";
                   break;
-              case 20 : 
+              case /* ENOENT */20 :
                   msg = "ENOENT";
                   break;
-              case 21 : 
+              case /* ENOEXEC */21 :
                   msg = "ENOEXEC";
                   break;
-              case 22 : 
+              case /* ENOLCK */22 :
                   msg = "ENOLCK";
                   break;
-              case 23 : 
+              case /* ENOMEM */23 :
                   msg = "ENOMEM";
                   break;
-              case 24 : 
+              case /* ENOSPC */24 :
                   msg = "ENOSPC";
                   break;
-              case 25 : 
+              case /* ENOSYS */25 :
                   msg = "ENOSYS";
                   break;
-              case 26 : 
+              case /* ENOTDIR */26 :
                   msg = "ENOTDIR";
                   break;
-              case 27 : 
+              case /* ENOTEMPTY */27 :
                   msg = "ENOTEMPTY";
                   break;
-              case 28 : 
+              case /* ENOTTY */28 :
                   msg = "ENOTTY";
                   break;
-              case 29 : 
+              case /* ENXIO */29 :
                   msg = "ENXIO";
                   break;
-              case 30 : 
+              case /* EPERM */30 :
                   msg = "EPERM";
                   break;
-              case 31 : 
+              case /* EPIPE */31 :
                   msg = "EPIPE";
                   break;
-              case 32 : 
+              case /* ERANGE */32 :
                   msg = "ERANGE";
                   break;
-              case 33 : 
+              case /* EROFS */33 :
                   msg = "EROFS";
                   break;
-              case 34 : 
+              case /* ESPIPE */34 :
                   msg = "ESPIPE";
                   break;
-              case 35 : 
+              case /* ESRCH */35 :
                   msg = "ESRCH";
                   break;
-              case 36 : 
+              case /* EXDEV */36 :
                   msg = "EXDEV";
                   break;
-              case 37 : 
+              case /* EWOULDBLOCK */37 :
                   msg = "EWOULDBLOCK";
                   break;
-              case 38 : 
+              case /* EINPROGRESS */38 :
                   msg = "EINPROGRESS";
                   break;
-              case 39 : 
+              case /* EALREADY */39 :
                   msg = "EALREADY";
                   break;
-              case 40 : 
+              case /* ENOTSOCK */40 :
                   msg = "ENOTSOCK";
                   break;
-              case 41 : 
+              case /* EDESTADDRREQ */41 :
                   msg = "EDESTADDRREQ";
                   break;
-              case 42 : 
+              case /* EMSGSIZE */42 :
                   msg = "EMSGSIZE";
                   break;
-              case 43 : 
+              case /* EPROTOTYPE */43 :
                   msg = "EPROTOTYPE";
                   break;
-              case 44 : 
+              case /* ENOPROTOOPT */44 :
                   msg = "ENOPROTOOPT";
                   break;
-              case 45 : 
+              case /* EPROTONOSUPPORT */45 :
                   msg = "EPROTONOSUPPORT";
                   break;
-              case 46 : 
+              case /* ESOCKTNOSUPPORT */46 :
                   msg = "ESOCKTNOSUPPORT";
                   break;
-              case 47 : 
+              case /* EOPNOTSUPP */47 :
                   msg = "EOPNOTSUPP";
                   break;
-              case 48 : 
+              case /* EPFNOSUPPORT */48 :
                   msg = "EPFNOSUPPORT";
                   break;
-              case 49 : 
+              case /* EAFNOSUPPORT */49 :
                   msg = "EAFNOSUPPORT";
                   break;
-              case 50 : 
+              case /* EADDRINUSE */50 :
                   msg = "EADDRINUSE";
                   break;
-              case 51 : 
+              case /* EADDRNOTAVAIL */51 :
                   msg = "EADDRNOTAVAIL";
                   break;
-              case 52 : 
+              case /* ENETDOWN */52 :
                   msg = "ENETDOWN";
                   break;
-              case 53 : 
+              case /* ENETUNREACH */53 :
                   msg = "ENETUNREACH";
                   break;
-              case 54 : 
+              case /* ENETRESET */54 :
                   msg = "ENETRESET";
                   break;
-              case 55 : 
+              case /* ECONNABORTED */55 :
                   msg = "ECONNABORTED";
                   break;
-              case 56 : 
+              case /* ECONNRESET */56 :
                   msg = "ECONNRESET";
                   break;
-              case 57 : 
+              case /* ENOBUFS */57 :
                   msg = "ENOBUFS";
                   break;
-              case 58 : 
+              case /* EISCONN */58 :
                   msg = "EISCONN";
                   break;
-              case 59 : 
+              case /* ENOTCONN */59 :
                   msg = "ENOTCONN";
                   break;
-              case 60 : 
+              case /* ESHUTDOWN */60 :
                   msg = "ESHUTDOWN";
                   break;
-              case 61 : 
+              case /* ETOOMANYREFS */61 :
                   msg = "ETOOMANYREFS";
                   break;
-              case 62 : 
+              case /* ETIMEDOUT */62 :
                   msg = "ETIMEDOUT";
                   break;
-              case 63 : 
+              case /* ECONNREFUSED */63 :
                   msg = "ECONNREFUSED";
                   break;
-              case 64 : 
+              case /* EHOSTDOWN */64 :
                   msg = "EHOSTDOWN";
                   break;
-              case 65 : 
+              case /* EHOSTUNREACH */65 :
                   msg = "EHOSTUNREACH";
                   break;
-              case 66 : 
+              case /* ELOOP */66 :
                   msg = "ELOOP";
                   break;
-              case 67 : 
+              case /* EOVERFLOW */67 :
                   msg = "EOVERFLOW";
                   break;
               
@@ -302,8 +304,153 @@ function handle_unix_error(f, arg) {
         Pervasives.prerr_string("\"");
       }
       Pervasives.prerr_string(": ");
-      console.error(Caml_missing_polyfill.not_implemented("unix_error_message"));
+      console.error(Caml_external_polyfill.resolve("unix_error_message")(exn[1]));
       return Pervasives.exit(2);
+    } else {
+      throw exn;
+    }
+  }
+}
+
+function execvpe(name, args, env) {
+  try {
+    return Caml_external_polyfill.resolve("unix_execvpe")(name, args, env);
+  }
+  catch (raw_exn){
+    var exn = Caml_js_exceptions.internalToOCamlException(raw_exn);
+    if (exn[0] === Unix_error) {
+      var match = exn[1];
+      if (typeof match === "number") {
+        if (match !== 25) {
+          throw exn;
+        }
+        var name$1 = name;
+        var args$1 = args;
+        var env$1 = env;
+        var exec = function (file) {
+          try {
+            return Caml_external_polyfill.resolve("unix_execve")(file, args$1, env$1);
+          }
+          catch (raw_exn){
+            var exn = Caml_js_exceptions.internalToOCamlException(raw_exn);
+            if (exn[0] === Unix_error) {
+              var match = exn[1];
+              if (typeof match === "number") {
+                if (match !== 21) {
+                  throw exn;
+                }
+                var argc = args$1.length;
+                var new_args = $$Array.append(/* array */[
+                      "/bin/sh",
+                      file
+                    ], argc === 0 ? args$1 : $$Array.sub(args$1, 1, argc - 1 | 0));
+                return Caml_external_polyfill.resolve("unix_execve")(Caml_array.caml_array_get(new_args, 0), new_args, env$1);
+              } else {
+                throw exn;
+              }
+            } else {
+              throw exn;
+            }
+          }
+        };
+        if ($$String.contains(name$1, /* "/" */47)) {
+          return exec(name$1);
+        } else {
+          var tmp;
+          try {
+            tmp = Caml_external_polyfill.resolve("caml_sys_unsafe_getenv")("PATH");
+          }
+          catch (exn$1){
+            if (exn$1 === Caml_builtin_exceptions.not_found) {
+              tmp = "/bin:/usr/bin";
+            } else {
+              throw exn$1;
+            }
+          }
+          var _eacces = false;
+          var _param = $$String.split_on_char(/* ":" */58, tmp);
+          while(true) {
+            var param = _param;
+            var eacces = _eacces;
+            if (param) {
+              var rem = param[1];
+              var dir = param[0];
+              var dir$1 = dir === "" ? Filename.current_dir_name : dir;
+              try {
+                return exec(Filename.concat(dir$1, name$1));
+              }
+              catch (raw_exn$1){
+                var exn$2 = Caml_js_exceptions.internalToOCamlException(raw_exn$1);
+                if (exn$2[0] === Unix_error) {
+                  var err = exn$2[1];
+                  if (typeof err === "number") {
+                    var switcher = err - 62 | 0;
+                    if (switcher > 4 || switcher < 0) {
+                      if (switcher >= -35) {
+                        throw exn$2;
+                      }
+                      switch (switcher + 62 | 0) {
+                        case /* EACCES */1 :
+                            _param = rem;
+                            _eacces = true;
+                            continue ;
+                        case /* E2BIG */0 :
+                        case /* EAGAIN */2 :
+                        case /* EBADF */3 :
+                        case /* EBUSY */4 :
+                        case /* ECHILD */5 :
+                        case /* EDEADLK */6 :
+                        case /* EDOM */7 :
+                        case /* EEXIST */8 :
+                        case /* EFAULT */9 :
+                        case /* EFBIG */10 :
+                        case /* EINTR */11 :
+                        case /* EINVAL */12 :
+                        case /* EIO */13 :
+                        case /* EMFILE */15 :
+                        case /* EMLINK */16 :
+                        case /* ENFILE */18 :
+                        case /* ENOEXEC */21 :
+                        case /* ENOLCK */22 :
+                        case /* ENOMEM */23 :
+                        case /* ENOSPC */24 :
+                        case /* ENOSYS */25 :
+                            throw exn$2;
+                        case /* EISDIR */14 :
+                        case /* ENAMETOOLONG */17 :
+                        case /* ENODEV */19 :
+                        case /* ENOENT */20 :
+                        case /* ENOTDIR */26 :
+                            _param = rem;
+                            continue ;
+                        
+                      }
+                    } else if (switcher > 3 || switcher < 1) {
+                      _param = rem;
+                      continue ;
+                    } else {
+                      throw exn$2;
+                    }
+                  } else {
+                    throw exn$2;
+                  }
+                } else {
+                  throw exn$2;
+                }
+              }
+            } else {
+              throw [
+                    Unix_error,
+                    eacces ? /* EACCES */1 : /* ENOENT */20,
+                    "execvpe",
+                    name$1
+                  ];
+            }
+          };
+        }
+      } else {
+        throw exn;
+      }
     } else {
       throw exn;
     }
@@ -316,9 +463,8 @@ function read(fd, buf, ofs, len) {
           Caml_builtin_exceptions.invalid_argument,
           "Unix.read"
         ];
-  } else {
-    return Caml_missing_polyfill.not_implemented("unix_read");
   }
+  return Caml_external_polyfill.resolve("unix_read")(fd, buf, ofs, len);
 }
 
 function write(fd, buf, ofs, len) {
@@ -327,9 +473,8 @@ function write(fd, buf, ofs, len) {
           Caml_builtin_exceptions.invalid_argument,
           "Unix.write"
         ];
-  } else {
-    return Caml_missing_polyfill.not_implemented("unix_write");
   }
+  return Caml_external_polyfill.resolve("unix_write")(fd, buf, ofs, len);
 }
 
 function single_write(fd, buf, ofs, len) {
@@ -338,9 +483,8 @@ function single_write(fd, buf, ofs, len) {
           Caml_builtin_exceptions.invalid_argument,
           "Unix.single_write"
         ];
-  } else {
-    return Caml_missing_polyfill.not_implemented("unix_single_write");
   }
+  return Caml_external_polyfill.resolve("unix_single_write")(fd, buf, ofs, len);
 }
 
 function write_substring(fd, buf, ofs, len) {
@@ -351,33 +495,30 @@ function single_write_substring(fd, buf, ofs, len) {
   return single_write(fd, Caml_bytes.bytes_of_string(buf), ofs, len);
 }
 
-function try_set_close_on_exec(fd) {
-  try {
-    Caml_missing_polyfill.not_implemented("unix_set_close_on_exec");
-    return true;
-  }
-  catch (raw_exn){
-    var exn = Caml_js_exceptions.internalToOCamlException(raw_exn);
-    if (exn[0] === Caml_builtin_exceptions.invalid_argument) {
-      return false;
-    } else {
-      throw exn;
-    }
-  }
+function map_file(fd, $staropt$star, kind, layout, shared, dims) {
+  var pos = $staropt$star !== undefined ? $staropt$star : /* int64 */({
+        hi: 0,
+        lo: 0
+      });
+  return Caml_external_polyfill.resolve("caml_unix_map_file_bytecode")(fd, kind, layout, shared, dims, pos);
 }
 
 function pause(param) {
-  return Caml_missing_polyfill.not_implemented("unix_sigsuspend");
+  return Caml_external_polyfill.resolve("unix_sigsuspend")(Caml_external_polyfill.resolve("unix_sigprocmask")(/* SIG_BLOCK */1, /* [] */0));
 }
 
-var inet_addr_any = Caml_missing_polyfill.not_implemented("unix_inet_addr_of_string");
+function sleep(duration) {
+  return Caml_external_polyfill.resolve("unix_sleep")(duration);
+}
 
-var inet_addr_loopback = Caml_missing_polyfill.not_implemented("unix_inet_addr_of_string");
+var inet_addr_any = Caml_external_polyfill.resolve("unix_inet_addr_of_string")("0.0.0.0");
+
+var inet_addr_loopback = Caml_external_polyfill.resolve("unix_inet_addr_of_string")("127.0.0.1");
 
 var inet6_addr_any;
 
 try {
-  inet6_addr_any = Caml_missing_polyfill.not_implemented("unix_inet_addr_of_string");
+  inet6_addr_any = Caml_external_polyfill.resolve("unix_inet_addr_of_string")("::");
 }
 catch (raw_exn){
   var exn = Caml_js_exceptions.internalToOCamlException(raw_exn);
@@ -391,7 +532,7 @@ catch (raw_exn){
 var inet6_addr_loopback;
 
 try {
-  inet6_addr_loopback = Caml_missing_polyfill.not_implemented("unix_inet_addr_of_string");
+  inet6_addr_loopback = Caml_external_polyfill.resolve("unix_inet_addr_of_string")("::1");
 }
 catch (raw_exn$1){
   var exn$1 = Caml_js_exceptions.internalToOCamlException(raw_exn$1);
@@ -420,9 +561,8 @@ function recv(fd, buf, ofs, len, flags) {
           Caml_builtin_exceptions.invalid_argument,
           "Unix.recv"
         ];
-  } else {
-    return Caml_missing_polyfill.not_implemented("unix_recv");
   }
+  return Caml_external_polyfill.resolve("unix_recv")(fd, buf, ofs, len, flags);
 }
 
 function recvfrom(fd, buf, ofs, len, flags) {
@@ -431,9 +571,8 @@ function recvfrom(fd, buf, ofs, len, flags) {
           Caml_builtin_exceptions.invalid_argument,
           "Unix.recvfrom"
         ];
-  } else {
-    return Caml_missing_polyfill.not_implemented("unix_recvfrom");
   }
+  return Caml_external_polyfill.resolve("unix_recvfrom")(fd, buf, ofs, len, flags);
 }
 
 function send(fd, buf, ofs, len, flags) {
@@ -442,9 +581,8 @@ function send(fd, buf, ofs, len, flags) {
           Caml_builtin_exceptions.invalid_argument,
           "Unix.send"
         ];
-  } else {
-    return Caml_missing_polyfill.not_implemented("unix_send");
   }
+  return Caml_external_polyfill.resolve("unix_send")(fd, buf, ofs, len, flags);
 }
 
 function sendto(fd, buf, ofs, len, flags, addr) {
@@ -453,9 +591,8 @@ function sendto(fd, buf, ofs, len, flags, addr) {
           Caml_builtin_exceptions.invalid_argument,
           "Unix.sendto"
         ];
-  } else {
-    return Caml_missing_polyfill.not_implemented("unix_sendto");
   }
+  return Caml_external_polyfill.resolve("unix_sendto")(fd, buf, ofs, len, flags, addr);
 }
 
 function send_substring(fd, buf, ofs, len, flags) {
@@ -466,53 +603,53 @@ function sendto_substring(fd, buf, ofs, len, flags, addr) {
   return sendto(fd, Caml_bytes.bytes_of_string(buf), ofs, len, flags, addr);
 }
 
-function SO_005(prim, prim$1, prim$2) {
-  return Caml_missing_polyfill.not_implemented("unix_getsockopt");
+function SO_get(prim, prim$1, prim$2) {
+  return Caml_external_polyfill.resolve("unix_getsockopt")(prim, prim$1, prim$2);
 }
 
-function SO_006(prim, prim$1, prim$2, prim$3) {
-  return Caml_missing_polyfill.not_implemented("unix_setsockopt");
+function SO_set(prim, prim$1, prim$2, prim$3) {
+  return Caml_external_polyfill.resolve("unix_setsockopt")(prim, prim$1, prim$2, prim$3);
 }
 
 function getsockopt(fd, opt) {
-  return Curry._3(SO_005, 0, fd, opt);
+  return Curry._3(SO_get, 0, fd, opt);
 }
 
 function setsockopt(fd, opt, v) {
-  return Curry._4(SO_006, 0, fd, opt, v);
+  return Curry._4(SO_set, 0, fd, opt, v);
 }
 
 function getsockopt_int(fd, opt) {
-  return Curry._3(SO_005, 1, fd, opt);
+  return Curry._3(SO_get, 1, fd, opt);
 }
 
 function setsockopt_int(fd, opt, v) {
-  return Curry._4(SO_006, 1, fd, opt, v);
+  return Curry._4(SO_set, 1, fd, opt, v);
 }
 
 function getsockopt_optint(fd, opt) {
-  return Curry._3(SO_005, 2, fd, opt);
+  return Curry._3(SO_get, 2, fd, opt);
 }
 
 function setsockopt_optint(fd, opt, v) {
-  return Curry._4(SO_006, 2, fd, opt, v);
+  return Curry._4(SO_set, 2, fd, opt, v);
 }
 
 function getsockopt_float(fd, opt) {
-  return Curry._3(SO_005, 3, fd, opt);
+  return Curry._3(SO_get, 3, fd, opt);
 }
 
 function setsockopt_float(fd, opt, v) {
-  return Curry._4(SO_006, 3, fd, opt, v);
+  return Curry._4(SO_set, 3, fd, opt, v);
 }
 
 function getsockopt_error(fd) {
-  return Curry._3(SO_005, 4, fd, /* SO_ERROR */0);
+  return Curry._3(SO_get, 4, fd, /* SO_ERROR */0);
 }
 
 function getaddrinfo(node, service, opts) {
   try {
-    return List.rev(Caml_missing_polyfill.not_implemented("unix_getaddrinfo"));
+    return List.rev(Caml_external_polyfill.resolve("unix_getaddrinfo")(node, service, opts));
   }
   catch (raw_exn){
     var exn = Caml_js_exceptions.internalToOCamlException(raw_exn);
@@ -520,24 +657,30 @@ function getaddrinfo(node, service, opts) {
       var node$1 = node;
       var service$1 = service;
       var opts$1 = opts;
-      var opt_socktype = /* record */[/* contents */undefined];
-      var opt_protocol = /* record */[/* contents */0];
-      var opt_passive = /* record */[/* contents */false];
+      var opt_socktype = {
+        contents: undefined
+      };
+      var opt_protocol = {
+        contents: 0
+      };
+      var opt_passive = {
+        contents: false
+      };
       List.iter((function (param) {
               if (typeof param === "number") {
-                if (param === 2) {
-                  opt_passive[0] = true;
+                if (param === /* AI_PASSIVE */2) {
+                  opt_passive.contents = true;
                   return /* () */0;
                 } else {
                   return /* () */0;
                 }
               } else {
                 switch (param.tag | 0) {
-                  case 1 : 
-                      opt_socktype[0] = param[0];
+                  case /* AI_SOCKTYPE */1 :
+                      opt_socktype.contents = param[0];
                       return /* () */0;
-                  case 2 : 
-                      opt_protocol[0] = param[0];
+                  case /* AI_PROTOCOL */2 :
+                      opt_protocol.contents = param[0];
                       return /* () */0;
                   default:
                     return /* () */0;
@@ -570,7 +713,7 @@ function getaddrinfo(node, service, opts) {
                 return /* :: */[
                         /* tuple */[
                           ty,
-                          Caml_missing_polyfill.not_implemented("unix_getservbyname")[/* s_port */2]
+                          Caml_external_polyfill.resolve("unix_getservbyname")(service$1, kind).s_port
                         ],
                         /* [] */0
                       ];
@@ -588,7 +731,7 @@ function getaddrinfo(node, service, opts) {
           }
         }
       };
-      var match = opt_socktype[0];
+      var match = opt_socktype.contents;
       var ports;
       if (match !== undefined) {
         var ty = match;
@@ -625,7 +768,7 @@ function getaddrinfo(node, service, opts) {
         try {
           addresses = /* :: */[
             /* tuple */[
-              Caml_missing_polyfill.not_implemented("unix_inet_addr_of_string"),
+              Caml_external_polyfill.resolve("unix_inet_addr_of_string")(node$1),
               node$1
             ],
             /* [] */0
@@ -635,13 +778,13 @@ function getaddrinfo(node, service, opts) {
           var exn$1 = Caml_js_exceptions.internalToOCamlException(raw_exn$1);
           if (exn$1[0] === Caml_builtin_exceptions.failure) {
             try {
-              var he = Caml_missing_polyfill.not_implemented("unix_gethostbyname");
+              var he = Caml_external_polyfill.resolve("unix_gethostbyname")(node$1);
               addresses = List.map((function (a) {
                       return /* tuple */[
                               a,
-                              he[/* h_name */0]
+                              he.h_name
                             ];
-                    }), $$Array.to_list(he[/* h_addr_list */3]));
+                    }), $$Array.to_list(he.h_addr_list));
             }
             catch (exn$2){
               if (exn$2 === Caml_builtin_exceptions.not_found) {
@@ -659,16 +802,16 @@ function getaddrinfo(node, service, opts) {
                         var port = param[1];
                         var ty = param[0];
                         return List.map((function (param) {
-                                      return /* record */[
-                                              /* ai_family : PF_INET */1,
-                                              /* ai_socktype */ty,
-                                              /* ai_protocol */opt_protocol[0],
-                                              /* ai_addr : ADDR_INET */Block.__(1, [
+                                      return {
+                                              ai_family: /* PF_INET */1,
+                                              ai_socktype: ty,
+                                              ai_protocol: opt_protocol.contents,
+                                              ai_addr: /* ADDR_INET */Block.__(1, [
                                                   param[0],
                                                   port
                                                 ]),
-                                              /* ai_canonname */param[1]
-                                            ];
+                                              ai_canonname: param[1]
+                                            };
                                     }), addresses);
                       }), ports));
     } else {
@@ -679,7 +822,7 @@ function getaddrinfo(node, service, opts) {
 
 function getnameinfo(addr, opts) {
   try {
-    return Caml_missing_polyfill.not_implemented("unix_getnameinfo");
+    return Caml_external_polyfill.resolve("unix_getnameinfo")(addr, opts);
   }
   catch (raw_exn){
     var exn = Caml_js_exceptions.internalToOCamlException(raw_exn);
@@ -688,19 +831,20 @@ function getnameinfo(addr, opts) {
       var opts$1 = opts;
       if (addr$1.tag) {
         var p = addr$1[1];
+        var a = addr$1[0];
         var hostname;
         try {
           if (List.mem(/* NI_NUMERICHOST */1, opts$1)) {
             throw Caml_builtin_exceptions.not_found;
           }
-          hostname = Caml_missing_polyfill.not_implemented("unix_gethostbyaddr")[/* h_name */0];
+          hostname = Caml_external_polyfill.resolve("unix_gethostbyaddr")(a).h_name;
         }
         catch (exn$1){
           if (exn$1 === Caml_builtin_exceptions.not_found) {
             if (List.mem(/* NI_NAMEREQD */2, opts$1)) {
               throw Caml_builtin_exceptions.not_found;
             }
-            hostname = Caml_missing_polyfill.not_implemented("unix_string_of_inet_addr");
+            hostname = Caml_external_polyfill.resolve("unix_string_of_inet_addr")(a);
           } else {
             throw exn$1;
           }
@@ -710,8 +854,8 @@ function getnameinfo(addr, opts) {
           if (List.mem(/* NI_NUMERICSERV */3, opts$1)) {
             throw Caml_builtin_exceptions.not_found;
           }
-          List.mem(/* NI_DGRAM */4, opts$1) ? "udp" : "tcp";
-          service = Caml_missing_polyfill.not_implemented("unix_getservbyport")[/* s_name */0];
+          var kind = List.mem(/* NI_DGRAM */4, opts$1) ? "udp" : "tcp";
+          service = Caml_external_polyfill.resolve("unix_getservbyport")(p, kind).s_name;
         }
         catch (exn$2){
           if (exn$2 === Caml_builtin_exceptions.not_found) {
@@ -720,15 +864,15 @@ function getnameinfo(addr, opts) {
             throw exn$2;
           }
         }
-        return /* record */[
-                /* ni_hostname */hostname,
-                /* ni_service */service
-              ];
+        return {
+                ni_hostname: hostname,
+                ni_service: service
+              };
       } else {
-        return /* record */[
-                /* ni_hostname */"",
-                /* ni_service */addr$1[0]
-              ];
+        return {
+                ni_hostname: "",
+                ni_service: addr$1[0]
+              };
       }
     } else {
       throw exn;
@@ -739,7 +883,7 @@ function getnameinfo(addr, opts) {
 function waitpid_non_intr(pid) {
   while(true) {
     try {
-      return Caml_missing_polyfill.not_implemented("unix_waitpid");
+      return Caml_external_polyfill.resolve("unix_waitpid")(/* [] */0, pid);
     }
     catch (raw_exn){
       var exn = Caml_js_exceptions.internalToOCamlException(raw_exn);
@@ -748,9 +892,8 @@ function waitpid_non_intr(pid) {
         if (typeof match === "number") {
           if (match !== 11) {
             throw exn;
-          } else {
-            continue ;
           }
+          continue ;
         } else {
           throw exn;
         }
@@ -762,33 +905,38 @@ function waitpid_non_intr(pid) {
 }
 
 function system(cmd) {
-  var id = Caml_missing_polyfill.not_implemented("unix_fork");
+  var id = Caml_external_polyfill.resolve("unix_fork")(/* () */0);
   if (id !== 0) {
     return waitpid_non_intr(id)[1];
   } else {
     try {
-      return Caml_missing_polyfill.not_implemented("unix_execv");
+      return Caml_external_polyfill.resolve("unix_execv")("/bin/sh", /* array */[
+                  "/bin/sh",
+                  "-c",
+                  cmd
+                ]);
     }
     catch (exn){
-      return Pervasives.exit(127);
+      return Caml_sys.caml_sys_exit(127);
     }
   }
 }
 
-function safe_dup(fd) {
-  var new_fd = Caml_missing_polyfill.not_implemented("unix_dup");
-  if (new_fd >= 3) {
-    return new_fd;
-  } else {
-    var res = safe_dup(fd);
-    Caml_missing_polyfill.not_implemented("unix_close");
-    return res;
-  }
+function file_descr_not_standard(_fd) {
+  while(true) {
+    var fd = _fd;
+    if (fd >= 3) {
+      return fd;
+    } else {
+      _fd = Caml_external_polyfill.resolve("unix_dup")(undefined, fd);
+      continue ;
+    }
+  };
 }
 
 function safe_close(fd) {
   try {
-    return Caml_missing_polyfill.not_implemented("unix_close");
+    return Caml_external_polyfill.resolve("unix_close")(fd);
   }
   catch (raw_exn){
     var exn = Caml_js_exceptions.internalToOCamlException(raw_exn);
@@ -801,266 +949,200 @@ function safe_close(fd) {
 }
 
 function perform_redirections(new_stdin, new_stdout, new_stderr) {
-  safe_dup(new_stdin);
-  safe_dup(new_stdout);
-  safe_dup(new_stderr);
-  safe_close(new_stdin);
-  safe_close(new_stdout);
-  safe_close(new_stderr);
-  Caml_missing_polyfill.not_implemented("unix_dup2");
-  Caml_missing_polyfill.not_implemented("unix_close");
-  Caml_missing_polyfill.not_implemented("unix_dup2");
-  Caml_missing_polyfill.not_implemented("unix_close");
-  Caml_missing_polyfill.not_implemented("unix_dup2");
-  return Caml_missing_polyfill.not_implemented("unix_close");
+  var new_stdin$1 = file_descr_not_standard(new_stdin);
+  var new_stdout$1 = file_descr_not_standard(new_stdout);
+  var new_stderr$1 = file_descr_not_standard(new_stderr);
+  Caml_external_polyfill.resolve("unix_dup2")(false, new_stdin$1, 0);
+  Caml_external_polyfill.resolve("unix_dup2")(false, new_stdout$1, 1);
+  Caml_external_polyfill.resolve("unix_dup2")(false, new_stderr$1, 2);
+  safe_close(new_stdin$1);
+  safe_close(new_stdout$1);
+  return safe_close(new_stderr$1);
 }
 
 function create_process(cmd, args, new_stdin, new_stdout, new_stderr) {
-  var id = Caml_missing_polyfill.not_implemented("unix_fork");
+  var id = Caml_external_polyfill.resolve("unix_fork")(/* () */0);
   if (id !== 0) {
     return id;
   } else {
     try {
       perform_redirections(new_stdin, new_stdout, new_stderr);
-      return Caml_missing_polyfill.not_implemented("unix_execvp");
+      return Caml_external_polyfill.resolve("unix_execvp")(cmd, args);
     }
     catch (exn){
-      return Pervasives.exit(127);
+      return Caml_sys.caml_sys_exit(127);
     }
   }
 }
 
 function create_process_env(cmd, args, env, new_stdin, new_stdout, new_stderr) {
-  var id = Caml_missing_polyfill.not_implemented("unix_fork");
+  var id = Caml_external_polyfill.resolve("unix_fork")(/* () */0);
   if (id !== 0) {
     return id;
   } else {
     try {
       perform_redirections(new_stdin, new_stdout, new_stderr);
-      return Caml_missing_polyfill.not_implemented("unix_execvpe");
+      return execvpe(cmd, args, env);
     }
     catch (exn){
-      return Pervasives.exit(127);
+      return Caml_sys.caml_sys_exit(127);
     }
   }
 }
 
 var popen_processes = Hashtbl.create(undefined, 7);
 
-function open_proc(cmd, proc, input, output, toclose) {
-  var cloexec = List.for_all(try_set_close_on_exec, toclose);
-  var id = Caml_missing_polyfill.not_implemented("unix_fork");
+function open_proc(cmd, envopt, proc, input, output, error) {
+  var id = Caml_external_polyfill.resolve("unix_fork")(/* () */0);
   if (id !== 0) {
     return Hashtbl.add(popen_processes, proc, id);
   } else {
-    if (input !== 0) {
-      Caml_missing_polyfill.not_implemented("unix_dup2");
-      Caml_missing_polyfill.not_implemented("unix_close");
-    }
-    if (output !== 1) {
-      Caml_missing_polyfill.not_implemented("unix_dup2");
-      Caml_missing_polyfill.not_implemented("unix_close");
-    }
-    if (!cloexec) {
-      List.iter((function (prim) {
-              return Caml_missing_polyfill.not_implemented("unix_close");
-            }), toclose);
-    }
+    perform_redirections(input, output, error);
+    var shell = "/bin/sh";
+    var argv = /* array */[
+      shell,
+      "-c",
+      cmd
+    ];
     try {
-      return Caml_missing_polyfill.not_implemented("unix_execv");
+      if (envopt !== undefined) {
+        return Caml_external_polyfill.resolve("unix_execve")(shell, argv, envopt);
+      } else {
+        return Caml_external_polyfill.resolve("unix_execv")(shell, argv);
+      }
     }
     catch (exn){
-      return Pervasives.exit(127);
+      return Caml_sys.caml_sys_exit(127);
     }
   }
 }
 
 function open_process_in(cmd) {
-  var match = Caml_missing_polyfill.not_implemented("unix_pipe");
+  var match = Caml_external_polyfill.resolve("unix_pipe")(true, /* () */0);
   var in_write = match[1];
-  var in_read = match[0];
-  var inchan = Caml_missing_polyfill.not_implemented("caml_ml_open_descriptor_in");
+  var inchan = Caml_external_polyfill.resolve("caml_ml_open_descriptor_in")(match[0]);
   try {
-    open_proc(cmd, /* Process_in */Block.__(1, [inchan]), 0, in_write, /* :: */[
-          in_read,
-          /* [] */0
-        ]);
+    open_proc(cmd, undefined, /* Process_in */Block.__(1, [inchan]), 0, in_write, 2);
   }
   catch (e){
-    Caml_missing_polyfill.not_implemented("caml_ml_close_channel");
-    Caml_missing_polyfill.not_implemented("unix_close");
+    Caml_external_polyfill.resolve("caml_ml_close_channel")(inchan);
+    Caml_external_polyfill.resolve("unix_close")(in_write);
     throw e;
   }
-  Caml_missing_polyfill.not_implemented("unix_close");
+  Caml_external_polyfill.resolve("unix_close")(in_write);
   return inchan;
 }
 
 function open_process_out(cmd) {
-  var match = Caml_missing_polyfill.not_implemented("unix_pipe");
-  var out_write = match[1];
+  var match = Caml_external_polyfill.resolve("unix_pipe")(true, /* () */0);
   var out_read = match[0];
-  var outchan = Caml_missing_polyfill.not_implemented("caml_ml_open_descriptor_out");
+  var outchan = Caml_external_polyfill.resolve("caml_ml_open_descriptor_out")(match[1]);
   try {
-    open_proc(cmd, /* Process_out */Block.__(2, [outchan]), out_read, 1, /* :: */[
-          out_write,
-          /* [] */0
-        ]);
+    open_proc(cmd, undefined, /* Process_out */Block.__(2, [outchan]), out_read, 1, 2);
   }
   catch (e){
     Caml_io.caml_ml_flush(outchan);
-    Caml_missing_polyfill.not_implemented("caml_ml_close_channel");
-    Caml_missing_polyfill.not_implemented("unix_close");
+    Caml_external_polyfill.resolve("caml_ml_close_channel")(outchan);
+    Caml_external_polyfill.resolve("unix_close")(out_read);
     throw e;
   }
-  Caml_missing_polyfill.not_implemented("unix_close");
+  Caml_external_polyfill.resolve("unix_close")(out_read);
   return outchan;
 }
 
 function open_process(cmd) {
-  var match = Caml_missing_polyfill.not_implemented("unix_pipe");
+  var match = Caml_external_polyfill.resolve("unix_pipe")(true, /* () */0);
   var in_write = match[1];
   var in_read = match[0];
-  var fds_to_close = /* :: */[
-    in_read,
-    /* :: */[
-      in_write,
-      /* [] */0
-    ]
-  ];
+  var match$1;
   try {
-    var match$1 = Caml_missing_polyfill.not_implemented("unix_pipe");
-    var out_write = match$1[1];
-    var out_read = match$1[0];
-    fds_to_close = /* :: */[
-      in_read,
-      /* :: */[
-        in_write,
-        /* :: */[
-          out_read,
-          /* :: */[
-            out_write,
-            /* [] */0
-          ]
-        ]
-      ]
-    ];
-    var inchan = Caml_missing_polyfill.not_implemented("caml_ml_open_descriptor_in");
-    var outchan = Caml_missing_polyfill.not_implemented("caml_ml_open_descriptor_out");
-    open_proc(cmd, /* Process */Block.__(0, [
-            inchan,
-            outchan
-          ]), out_read, in_write, /* :: */[
-          in_read,
-          /* :: */[
-            out_write,
-            /* [] */0
-          ]
-        ]);
-    Caml_missing_polyfill.not_implemented("unix_close");
-    Caml_missing_polyfill.not_implemented("unix_close");
-    return /* tuple */[
-            inchan,
-            outchan
-          ];
+    match$1 = Caml_external_polyfill.resolve("unix_pipe")(true, /* () */0);
   }
   catch (e){
-    List.iter((function (prim) {
-            return Caml_missing_polyfill.not_implemented("unix_close");
-          }), fds_to_close);
+    Caml_external_polyfill.resolve("unix_close")(in_read);
+    Caml_external_polyfill.resolve("unix_close")(in_write);
     throw e;
   }
-}
-
-function open_proc_full(cmd, env, proc, input, output, error, toclose) {
-  var cloexec = List.for_all(try_set_close_on_exec, toclose);
-  var id = Caml_missing_polyfill.not_implemented("unix_fork");
-  if (id !== 0) {
-    return Hashtbl.add(popen_processes, proc, id);
-  } else {
-    Caml_missing_polyfill.not_implemented("unix_dup2");
-    Caml_missing_polyfill.not_implemented("unix_close");
-    Caml_missing_polyfill.not_implemented("unix_dup2");
-    Caml_missing_polyfill.not_implemented("unix_close");
-    Caml_missing_polyfill.not_implemented("unix_dup2");
-    Caml_missing_polyfill.not_implemented("unix_close");
-    if (!cloexec) {
-      List.iter((function (prim) {
-              return Caml_missing_polyfill.not_implemented("unix_close");
-            }), toclose);
-    }
-    try {
-      return Caml_missing_polyfill.not_implemented("unix_execve");
-    }
-    catch (exn){
-      return Pervasives.exit(127);
-    }
+  var out_write = match$1[1];
+  var out_read = match$1[0];
+  var inchan = Caml_external_polyfill.resolve("caml_ml_open_descriptor_in")(in_read);
+  var outchan = Caml_external_polyfill.resolve("caml_ml_open_descriptor_out")(out_write);
+  try {
+    open_proc(cmd, undefined, /* Process */Block.__(0, [
+            inchan,
+            outchan
+          ]), out_read, in_write, 2);
   }
+  catch (e$1){
+    Caml_external_polyfill.resolve("unix_close")(out_read);
+    Caml_external_polyfill.resolve("unix_close")(out_write);
+    Caml_external_polyfill.resolve("unix_close")(in_read);
+    Caml_external_polyfill.resolve("unix_close")(in_write);
+    throw e$1;
+  }
+  Caml_external_polyfill.resolve("unix_close")(out_read);
+  Caml_external_polyfill.resolve("unix_close")(in_write);
+  return /* tuple */[
+          inchan,
+          outchan
+        ];
 }
 
 function open_process_full(cmd, env) {
-  var match = Caml_missing_polyfill.not_implemented("unix_pipe");
+  var match = Caml_external_polyfill.resolve("unix_pipe")(true, /* () */0);
   var in_write = match[1];
   var in_read = match[0];
-  var fds_to_close = /* :: */[
-    in_read,
-    /* :: */[
-      in_write,
-      /* [] */0
-    ]
-  ];
+  var match$1;
   try {
-    var match$1 = Caml_missing_polyfill.not_implemented("unix_pipe");
-    var out_write = match$1[1];
-    var out_read = match$1[0];
-    fds_to_close = /* :: */[
-      out_read,
-      /* :: */[
-        out_write,
-        fds_to_close
-      ]
-    ];
-    var match$2 = Caml_missing_polyfill.not_implemented("unix_pipe");
-    var err_write = match$2[1];
-    var err_read = match$2[0];
-    fds_to_close = /* :: */[
-      err_read,
-      /* :: */[
-        err_write,
-        fds_to_close
-      ]
-    ];
-    var inchan = Caml_missing_polyfill.not_implemented("caml_ml_open_descriptor_in");
-    var outchan = Caml_missing_polyfill.not_implemented("caml_ml_open_descriptor_out");
-    var errchan = Caml_missing_polyfill.not_implemented("caml_ml_open_descriptor_in");
-    open_proc_full(cmd, env, /* Process_full */Block.__(3, [
-            inchan,
-            outchan,
-            errchan
-          ]), out_read, in_write, err_write, /* :: */[
-          in_read,
-          /* :: */[
-            out_write,
-            /* :: */[
-              err_read,
-              /* [] */0
-            ]
-          ]
-        ]);
-    Caml_missing_polyfill.not_implemented("unix_close");
-    Caml_missing_polyfill.not_implemented("unix_close");
-    Caml_missing_polyfill.not_implemented("unix_close");
-    return /* tuple */[
-            inchan,
-            outchan,
-            errchan
-          ];
+    match$1 = Caml_external_polyfill.resolve("unix_pipe")(true, /* () */0);
   }
   catch (e){
-    List.iter((function (prim) {
-            return Caml_missing_polyfill.not_implemented("unix_close");
-          }), fds_to_close);
+    Caml_external_polyfill.resolve("unix_close")(in_read);
+    Caml_external_polyfill.resolve("unix_close")(in_write);
     throw e;
   }
+  var out_write = match$1[1];
+  var out_read = match$1[0];
+  var match$2;
+  try {
+    match$2 = Caml_external_polyfill.resolve("unix_pipe")(true, /* () */0);
+  }
+  catch (e$1){
+    Caml_external_polyfill.resolve("unix_close")(in_read);
+    Caml_external_polyfill.resolve("unix_close")(in_write);
+    Caml_external_polyfill.resolve("unix_close")(out_read);
+    Caml_external_polyfill.resolve("unix_close")(out_write);
+    throw e$1;
+  }
+  var err_write = match$2[1];
+  var err_read = match$2[0];
+  var inchan = Caml_external_polyfill.resolve("caml_ml_open_descriptor_in")(in_read);
+  var outchan = Caml_external_polyfill.resolve("caml_ml_open_descriptor_out")(out_write);
+  var errchan = Caml_external_polyfill.resolve("caml_ml_open_descriptor_in")(err_read);
+  try {
+    open_proc(cmd, env, /* Process_full */Block.__(3, [
+            inchan,
+            outchan,
+            errchan
+          ]), out_read, in_write, err_write);
+  }
+  catch (e$2){
+    Caml_external_polyfill.resolve("unix_close")(out_read);
+    Caml_external_polyfill.resolve("unix_close")(out_write);
+    Caml_external_polyfill.resolve("unix_close")(in_read);
+    Caml_external_polyfill.resolve("unix_close")(in_write);
+    Caml_external_polyfill.resolve("unix_close")(err_read);
+    Caml_external_polyfill.resolve("unix_close")(err_write);
+    throw e$2;
+  }
+  Caml_external_polyfill.resolve("unix_close")(out_read);
+  Caml_external_polyfill.resolve("unix_close")(in_write);
+  Caml_external_polyfill.resolve("unix_close")(err_write);
+  return /* tuple */[
+          inchan,
+          outchan,
+          errchan
+        ];
 }
 
 function find_proc_id(fun_name, proc) {
@@ -1077,22 +1159,30 @@ function find_proc_id(fun_name, proc) {
             fun_name,
             ""
           ];
-    } else {
-      throw exn;
     }
+    throw exn;
   }
 }
 
 function close_process_in(inchan) {
   var pid = find_proc_id("close_process_in", /* Process_in */Block.__(1, [inchan]));
-  Caml_missing_polyfill.not_implemented("caml_ml_close_channel");
+  Caml_external_polyfill.resolve("caml_ml_close_channel")(inchan);
   return waitpid_non_intr(pid)[1];
 }
 
 function close_process_out(outchan) {
   var pid = find_proc_id("close_process_out", /* Process_out */Block.__(2, [outchan]));
-  Caml_io.caml_ml_flush(outchan);
-  Caml_missing_polyfill.not_implemented("caml_ml_close_channel");
+  try {
+    Caml_io.caml_ml_flush(outchan);
+    Caml_external_polyfill.resolve("caml_ml_close_channel")(outchan);
+  }
+  catch (raw_exn){
+    var exn = Caml_js_exceptions.internalToOCamlException(raw_exn);
+    if (exn[0] !== Caml_builtin_exceptions.sys_error) {
+      throw exn;
+    }
+    
+  }
   return waitpid_non_intr(pid)[1];
 }
 
@@ -1103,10 +1193,10 @@ function close_process(param) {
           inchan,
           outchan
         ]));
-  Caml_missing_polyfill.not_implemented("caml_ml_close_channel");
+  Caml_external_polyfill.resolve("caml_ml_close_channel")(inchan);
   try {
     Caml_io.caml_ml_flush(outchan);
-    Caml_missing_polyfill.not_implemented("caml_ml_close_channel");
+    Caml_external_polyfill.resolve("caml_ml_close_channel")(outchan);
   }
   catch (raw_exn){
     var exn = Caml_js_exceptions.internalToOCamlException(raw_exn);
@@ -1127,10 +1217,10 @@ function close_process_full(param) {
           outchan,
           errchan
         ]));
-  Caml_missing_polyfill.not_implemented("caml_ml_close_channel");
+  Caml_external_polyfill.resolve("caml_ml_close_channel")(inchan);
   try {
     Caml_io.caml_ml_flush(outchan);
-    Caml_missing_polyfill.not_implemented("caml_ml_close_channel");
+    Caml_external_polyfill.resolve("caml_ml_close_channel")(outchan);
   }
   catch (raw_exn){
     var exn = Caml_js_exceptions.internalToOCamlException(raw_exn);
@@ -1139,34 +1229,33 @@ function close_process_full(param) {
     }
     
   }
-  Caml_missing_polyfill.not_implemented("caml_ml_close_channel");
+  Caml_external_polyfill.resolve("caml_ml_close_channel")(errchan);
   return waitpid_non_intr(pid)[1];
 }
 
 function open_connection(sockaddr) {
-  var sock = Caml_missing_polyfill.not_implemented("unix_socket");
+  var sock = Caml_external_polyfill.resolve("unix_socket")(true, domain_of_sockaddr(sockaddr), /* SOCK_STREAM */0, 0);
   try {
-    Caml_missing_polyfill.not_implemented("unix_connect");
-    try_set_close_on_exec(sock);
+    Caml_external_polyfill.resolve("unix_connect")(sock, sockaddr);
     return /* tuple */[
-            Caml_missing_polyfill.not_implemented("caml_ml_open_descriptor_in"),
-            Caml_missing_polyfill.not_implemented("caml_ml_open_descriptor_out")
+            Caml_external_polyfill.resolve("caml_ml_open_descriptor_in")(sock),
+            Caml_external_polyfill.resolve("caml_ml_open_descriptor_out")(sock)
           ];
   }
   catch (exn){
-    Caml_missing_polyfill.not_implemented("unix_close");
+    Caml_external_polyfill.resolve("unix_close")(sock);
     throw exn;
   }
 }
 
 function shutdown_connection(inchan) {
-  return Caml_missing_polyfill.not_implemented("unix_shutdown");
+  return Caml_external_polyfill.resolve("unix_shutdown")(Caml_external_polyfill.resolve("caml_channel_descriptor")(inchan), /* SHUTDOWN_SEND */1);
 }
 
 function accept_non_intr(s) {
   while(true) {
     try {
-      return Caml_missing_polyfill.not_implemented("unix_accept");
+      return Caml_external_polyfill.resolve("unix_accept")(true, s);
     }
     catch (raw_exn){
       var exn = Caml_js_exceptions.internalToOCamlException(raw_exn);
@@ -1175,9 +1264,8 @@ function accept_non_intr(s) {
         if (typeof match === "number") {
           if (match !== 11) {
             throw exn;
-          } else {
-            continue ;
           }
+          continue ;
         } else {
           throw exn;
         }
@@ -1189,25 +1277,24 @@ function accept_non_intr(s) {
 }
 
 function establish_server(server_fun, sockaddr) {
-  var sock = Caml_missing_polyfill.not_implemented("unix_socket");
+  var sock = Caml_external_polyfill.resolve("unix_socket")(true, domain_of_sockaddr(sockaddr), /* SOCK_STREAM */0, 0);
   setsockopt(sock, /* SO_REUSEADDR */2, true);
-  Caml_missing_polyfill.not_implemented("unix_bind");
-  Caml_missing_polyfill.not_implemented("unix_listen");
+  Caml_external_polyfill.resolve("unix_bind")(sock, sockaddr);
+  Caml_external_polyfill.resolve("unix_listen")(sock, 5);
   while(true) {
     var match = accept_non_intr(sock);
     var s = match[0];
-    var id = Caml_missing_polyfill.not_implemented("unix_fork");
+    var id = Caml_external_polyfill.resolve("unix_fork")(/* () */0);
     if (id !== 0) {
-      Caml_missing_polyfill.not_implemented("unix_close");
+      Caml_external_polyfill.resolve("unix_close")(s);
       waitpid_non_intr(id);
     } else {
-      if (Caml_missing_polyfill.not_implemented("unix_fork") !== 0) {
-        Pervasives.exit(0);
+      if (Caml_external_polyfill.resolve("unix_fork")(/* () */0) !== 0) {
+        Caml_sys.caml_sys_exit(0);
       }
-      Caml_missing_polyfill.not_implemented("unix_close");
-      try_set_close_on_exec(s);
-      var inchan = Caml_missing_polyfill.not_implemented("caml_ml_open_descriptor_in");
-      var outchan = Caml_missing_polyfill.not_implemented("caml_ml_open_descriptor_out");
+      Caml_external_polyfill.resolve("unix_close")(sock);
+      var inchan = Caml_external_polyfill.resolve("caml_ml_open_descriptor_in")(s);
+      var outchan = Caml_external_polyfill.resolve("caml_ml_open_descriptor_out")(s);
       Curry._2(server_fun, inchan, outchan);
       Pervasives.exit(0);
     }
@@ -1216,57 +1303,61 @@ function establish_server(server_fun, sockaddr) {
 }
 
 function error_message(prim) {
-  return Caml_missing_polyfill.not_implemented("unix_error_message");
+  return Caml_external_polyfill.resolve("unix_error_message")(prim);
 }
 
 function environment(prim) {
-  return Caml_missing_polyfill.not_implemented("unix_environment");
+  return Caml_external_polyfill.resolve("unix_environment")(prim);
+}
+
+function unsafe_environment(prim) {
+  return Caml_external_polyfill.resolve("unix_environment_unsafe")(prim);
 }
 
 var getenv = Caml_sys.caml_sys_getenv;
 
+function unsafe_getenv(prim) {
+  return Caml_external_polyfill.resolve("caml_sys_unsafe_getenv")(prim);
+}
+
 function putenv(prim, prim$1) {
-  return Caml_missing_polyfill.not_implemented("unix_putenv");
+  return Caml_external_polyfill.resolve("unix_putenv")(prim, prim$1);
 }
 
 function execv(prim, prim$1) {
-  return Caml_missing_polyfill.not_implemented("unix_execv");
+  return Caml_external_polyfill.resolve("unix_execv")(prim, prim$1);
 }
 
 function execve(prim, prim$1, prim$2) {
-  return Caml_missing_polyfill.not_implemented("unix_execve");
+  return Caml_external_polyfill.resolve("unix_execve")(prim, prim$1, prim$2);
 }
 
 function execvp(prim, prim$1) {
-  return Caml_missing_polyfill.not_implemented("unix_execvp");
-}
-
-function execvpe(prim, prim$1, prim$2) {
-  return Caml_missing_polyfill.not_implemented("unix_execvpe");
+  return Caml_external_polyfill.resolve("unix_execvp")(prim, prim$1);
 }
 
 function fork(prim) {
-  return Caml_missing_polyfill.not_implemented("unix_fork");
+  return Caml_external_polyfill.resolve("unix_fork")(prim);
 }
 
 function wait(prim) {
-  return Caml_missing_polyfill.not_implemented("unix_wait");
+  return Caml_external_polyfill.resolve("unix_wait")(prim);
 }
 
 function waitpid(prim, prim$1) {
-  return Caml_missing_polyfill.not_implemented("unix_waitpid");
+  return Caml_external_polyfill.resolve("unix_waitpid")(prim, prim$1);
 }
 
 function getpid(prim) {
-  return Caml_missing_polyfill.not_implemented("unix_getpid");
+  return Caml_external_polyfill.resolve("unix_getpid")(prim);
 }
 
 function getppid(prim) {
-  return Caml_missing_polyfill.not_implemented("unix_getppid");
+  return Caml_external_polyfill.resolve("unix_getppid")(prim);
 }
 
 function nice(prim) {
-  return Caml_missing_polyfill.not_implemented("unix_nice");
+  return Caml_external_polyfill.resolve("unix_nice")(prim);
 }
 
 var stdin = 0;
@@ -1276,431 +1367,437 @@ var stdout = 1;
 var stderr = 2;
 
 function openfile(prim, prim$1, prim$2) {
-  return Caml_missing_polyfill.not_implemented("unix_open");
+  return Caml_external_polyfill.resolve("unix_open")(prim, prim$1, prim$2);
 }
 
 function close(prim) {
-  return Caml_missing_polyfill.not_implemented("unix_close");
+  return Caml_external_polyfill.resolve("unix_close")(prim);
 }
 
 function in_channel_of_descr(prim) {
-  return Caml_missing_polyfill.not_implemented("caml_ml_open_descriptor_in");
+  return Caml_external_polyfill.resolve("caml_ml_open_descriptor_in")(prim);
 }
 
 function out_channel_of_descr(prim) {
-  return Caml_missing_polyfill.not_implemented("caml_ml_open_descriptor_out");
+  return Caml_external_polyfill.resolve("caml_ml_open_descriptor_out")(prim);
 }
 
 function descr_of_in_channel(prim) {
-  return Caml_missing_polyfill.not_implemented("caml_channel_descriptor");
+  return Caml_external_polyfill.resolve("caml_channel_descriptor")(prim);
 }
 
 function descr_of_out_channel(prim) {
-  return Caml_missing_polyfill.not_implemented("caml_channel_descriptor");
+  return Caml_external_polyfill.resolve("caml_channel_descriptor")(prim);
 }
 
 function lseek(prim, prim$1, prim$2) {
-  return Caml_missing_polyfill.not_implemented("unix_lseek");
+  return Caml_external_polyfill.resolve("unix_lseek")(prim, prim$1, prim$2);
 }
 
 function truncate(prim, prim$1) {
-  return Caml_missing_polyfill.not_implemented("unix_truncate");
+  return Caml_external_polyfill.resolve("unix_truncate")(prim, prim$1);
 }
 
 function ftruncate(prim, prim$1) {
-  return Caml_missing_polyfill.not_implemented("unix_ftruncate");
+  return Caml_external_polyfill.resolve("unix_ftruncate")(prim, prim$1);
 }
 
 function stat(prim) {
-  return Caml_missing_polyfill.not_implemented("unix_stat");
+  return Caml_external_polyfill.resolve("unix_stat")(prim);
 }
 
 function lstat(prim) {
-  return Caml_missing_polyfill.not_implemented("unix_lstat");
+  return Caml_external_polyfill.resolve("unix_lstat")(prim);
 }
 
 function fstat(prim) {
-  return Caml_missing_polyfill.not_implemented("unix_fstat");
+  return Caml_external_polyfill.resolve("unix_fstat")(prim);
 }
 
 function isatty(prim) {
-  return Caml_missing_polyfill.not_implemented("unix_isatty");
+  return Caml_external_polyfill.resolve("unix_isatty")(prim);
 }
 
-function LargeFile_000(prim, prim$1, prim$2) {
-  return Caml_missing_polyfill.not_implemented("unix_lseek_64");
+function LargeFile_lseek(prim, prim$1, prim$2) {
+  return Caml_external_polyfill.resolve("unix_lseek_64")(prim, prim$1, prim$2);
 }
 
-function LargeFile_001(prim, prim$1) {
-  return Caml_missing_polyfill.not_implemented("unix_truncate_64");
+function LargeFile_truncate(prim, prim$1) {
+  return Caml_external_polyfill.resolve("unix_truncate_64")(prim, prim$1);
 }
 
-function LargeFile_002(prim, prim$1) {
-  return Caml_missing_polyfill.not_implemented("unix_ftruncate_64");
+function LargeFile_ftruncate(prim, prim$1) {
+  return Caml_external_polyfill.resolve("unix_ftruncate_64")(prim, prim$1);
 }
 
-function LargeFile_003(prim) {
-  return Caml_missing_polyfill.not_implemented("unix_stat_64");
+function LargeFile_stat(prim) {
+  return Caml_external_polyfill.resolve("unix_stat_64")(prim);
 }
 
-function LargeFile_004(prim) {
-  return Caml_missing_polyfill.not_implemented("unix_lstat_64");
+function LargeFile_lstat(prim) {
+  return Caml_external_polyfill.resolve("unix_lstat_64")(prim);
 }
 
-function LargeFile_005(prim) {
-  return Caml_missing_polyfill.not_implemented("unix_fstat_64");
+function LargeFile_fstat(prim) {
+  return Caml_external_polyfill.resolve("unix_fstat_64")(prim);
 }
 
-var LargeFile = [
-  LargeFile_000,
-  LargeFile_001,
-  LargeFile_002,
-  LargeFile_003,
-  LargeFile_004,
-  LargeFile_005
-];
+var LargeFile = {
+  lseek: LargeFile_lseek,
+  truncate: LargeFile_truncate,
+  ftruncate: LargeFile_ftruncate,
+  stat: LargeFile_stat,
+  lstat: LargeFile_lstat,
+  fstat: LargeFile_fstat
+};
 
 function unlink(prim) {
-  return Caml_missing_polyfill.not_implemented("unix_unlink");
+  return Caml_external_polyfill.resolve("unix_unlink")(prim);
 }
 
 function rename(prim, prim$1) {
-  return Caml_missing_polyfill.not_implemented("unix_rename");
+  return Caml_external_polyfill.resolve("unix_rename")(prim, prim$1);
 }
 
 function link(prim, prim$1) {
-  return Caml_missing_polyfill.not_implemented("unix_link");
+  return Caml_external_polyfill.resolve("unix_link")(prim, prim$1);
 }
 
 function chmod(prim, prim$1) {
-  return Caml_missing_polyfill.not_implemented("unix_chmod");
+  return Caml_external_polyfill.resolve("unix_chmod")(prim, prim$1);
 }
 
 function fchmod(prim, prim$1) {
-  return Caml_missing_polyfill.not_implemented("unix_fchmod");
+  return Caml_external_polyfill.resolve("unix_fchmod")(prim, prim$1);
 }
 
 function chown(prim, prim$1, prim$2) {
-  return Caml_missing_polyfill.not_implemented("unix_chown");
+  return Caml_external_polyfill.resolve("unix_chown")(prim, prim$1, prim$2);
 }
 
 function fchown(prim, prim$1, prim$2) {
-  return Caml_missing_polyfill.not_implemented("unix_fchown");
+  return Caml_external_polyfill.resolve("unix_fchown")(prim, prim$1, prim$2);
 }
 
 function umask(prim) {
-  return Caml_missing_polyfill.not_implemented("unix_umask");
+  return Caml_external_polyfill.resolve("unix_umask")(prim);
 }
 
 function access(prim, prim$1) {
-  return Caml_missing_polyfill.not_implemented("unix_access");
+  return Caml_external_polyfill.resolve("unix_access")(prim, prim$1);
 }
 
-function dup(prim) {
-  return Caml_missing_polyfill.not_implemented("unix_dup");
+function dup(prim, prim$1) {
+  return Caml_external_polyfill.resolve("unix_dup")(prim, prim$1);
 }
 
-function dup2(prim, prim$1) {
-  return Caml_missing_polyfill.not_implemented("unix_dup2");
+function dup2(prim, prim$1, prim$2) {
+  return Caml_external_polyfill.resolve("unix_dup2")(prim, prim$1, prim$2);
 }
 
 function set_nonblock(prim) {
-  return Caml_missing_polyfill.not_implemented("unix_set_nonblock");
+  return Caml_external_polyfill.resolve("unix_set_nonblock")(prim);
 }
 
 function clear_nonblock(prim) {
-  return Caml_missing_polyfill.not_implemented("unix_clear_nonblock");
+  return Caml_external_polyfill.resolve("unix_clear_nonblock")(prim);
 }
 
 function set_close_on_exec(prim) {
-  return Caml_missing_polyfill.not_implemented("unix_set_close_on_exec");
+  return Caml_external_polyfill.resolve("unix_set_close_on_exec")(prim);
 }
 
 function clear_close_on_exec(prim) {
-  return Caml_missing_polyfill.not_implemented("unix_clear_close_on_exec");
+  return Caml_external_polyfill.resolve("unix_clear_close_on_exec")(prim);
 }
 
 function mkdir(prim, prim$1) {
-  return Caml_missing_polyfill.not_implemented("unix_mkdir");
+  return Caml_external_polyfill.resolve("unix_mkdir")(prim, prim$1);
 }
 
 function rmdir(prim) {
-  return Caml_missing_polyfill.not_implemented("unix_rmdir");
+  return Caml_external_polyfill.resolve("unix_rmdir")(prim);
 }
 
 function chdir(prim) {
-  return Caml_missing_polyfill.not_implemented("unix_chdir");
+  return Caml_external_polyfill.resolve("unix_chdir")(prim);
 }
 
 function getcwd(prim) {
-  return Caml_missing_polyfill.not_implemented("unix_getcwd");
+  return Caml_external_polyfill.resolve("unix_getcwd")(prim);
 }
 
 function chroot(prim) {
-  return Caml_missing_polyfill.not_implemented("unix_chroot");
+  return Caml_external_polyfill.resolve("unix_chroot")(prim);
 }
 
 function opendir(prim) {
-  return Caml_missing_polyfill.not_implemented("unix_opendir");
+  return Caml_external_polyfill.resolve("unix_opendir")(prim);
 }
 
 function readdir(prim) {
-  return Caml_missing_polyfill.not_implemented("unix_readdir");
+  return Caml_external_polyfill.resolve("unix_readdir")(prim);
 }
 
 function rewinddir(prim) {
-  return Caml_missing_polyfill.not_implemented("unix_rewinddir");
+  return Caml_external_polyfill.resolve("unix_rewinddir")(prim);
 }
 
 function closedir(prim) {
-  return Caml_missing_polyfill.not_implemented("unix_closedir");
+  return Caml_external_polyfill.resolve("unix_closedir")(prim);
 }
 
-function pipe(prim) {
-  return Caml_missing_polyfill.not_implemented("unix_pipe");
+function pipe(prim, prim$1) {
+  return Caml_external_polyfill.resolve("unix_pipe")(prim, prim$1);
 }
 
 function mkfifo(prim, prim$1) {
-  return Caml_missing_polyfill.not_implemented("unix_mkfifo");
+  return Caml_external_polyfill.resolve("unix_mkfifo")(prim, prim$1);
 }
 
-function symlink(prim, prim$1) {
-  return Caml_missing_polyfill.not_implemented("unix_symlink");
+function symlink(prim, prim$1, prim$2) {
+  return Caml_external_polyfill.resolve("unix_symlink")(prim, prim$1, prim$2);
+}
+
+function has_symlink(prim) {
+  return Caml_external_polyfill.resolve("unix_has_symlink")(prim);
 }
 
 function readlink(prim) {
-  return Caml_missing_polyfill.not_implemented("unix_readlink");
+  return Caml_external_polyfill.resolve("unix_readlink")(prim);
 }
 
 function select(prim, prim$1, prim$2, prim$3) {
-  return Caml_missing_polyfill.not_implemented("unix_select");
+  return Caml_external_polyfill.resolve("unix_select")(prim, prim$1, prim$2, prim$3);
 }
 
 function lockf(prim, prim$1, prim$2) {
-  return Caml_missing_polyfill.not_implemented("unix_lockf");
+  return Caml_external_polyfill.resolve("unix_lockf")(prim, prim$1, prim$2);
 }
 
 function kill(prim, prim$1) {
-  return Caml_missing_polyfill.not_implemented("unix_kill");
+  return Caml_external_polyfill.resolve("unix_kill")(prim, prim$1);
 }
 
 function sigprocmask(prim, prim$1) {
-  return Caml_missing_polyfill.not_implemented("unix_sigprocmask");
+  return Caml_external_polyfill.resolve("unix_sigprocmask")(prim, prim$1);
 }
 
 function sigpending(prim) {
-  return Caml_missing_polyfill.not_implemented("unix_sigpending");
+  return Caml_external_polyfill.resolve("unix_sigpending")(prim);
 }
 
 function sigsuspend(prim) {
-  return Caml_missing_polyfill.not_implemented("unix_sigsuspend");
+  return Caml_external_polyfill.resolve("unix_sigsuspend")(prim);
 }
 
 function time(prim) {
-  return Caml_missing_polyfill.not_implemented("unix_time");
+  return Caml_external_polyfill.resolve("unix_time")(prim);
 }
 
 function gettimeofday(prim) {
-  return Caml_missing_polyfill.not_implemented("unix_gettimeofday");
+  return Caml_external_polyfill.resolve("unix_gettimeofday")(prim);
 }
 
 function gmtime(prim) {
-  return Caml_missing_polyfill.not_implemented("unix_gmtime");
+  return Caml_external_polyfill.resolve("unix_gmtime")(prim);
 }
 
 function localtime(prim) {
-  return Caml_missing_polyfill.not_implemented("unix_localtime");
+  return Caml_external_polyfill.resolve("unix_localtime")(prim);
 }
 
 function mktime(prim) {
-  return Caml_missing_polyfill.not_implemented("unix_mktime");
+  return Caml_external_polyfill.resolve("unix_mktime")(prim);
 }
 
 function alarm(prim) {
-  return Caml_missing_polyfill.not_implemented("unix_alarm");
+  return Caml_external_polyfill.resolve("unix_alarm")(prim);
 }
 
-function sleep(prim) {
-  return Caml_missing_polyfill.not_implemented("unix_sleep");
+function sleepf(prim) {
+  return Caml_external_polyfill.resolve("unix_sleep")(prim);
 }
 
 function times(prim) {
-  return Caml_missing_polyfill.not_implemented("unix_times");
+  return Caml_external_polyfill.resolve("unix_times")(prim);
 }
 
 function utimes(prim, prim$1, prim$2) {
-  return Caml_missing_polyfill.not_implemented("unix_utimes");
+  return Caml_external_polyfill.resolve("unix_utimes")(prim, prim$1, prim$2);
 }
 
 function getitimer(prim) {
-  return Caml_missing_polyfill.not_implemented("unix_getitimer");
+  return Caml_external_polyfill.resolve("unix_getitimer")(prim);
 }
 
 function setitimer(prim, prim$1) {
-  return Caml_missing_polyfill.not_implemented("unix_setitimer");
+  return Caml_external_polyfill.resolve("unix_setitimer")(prim, prim$1);
 }
 
 function getuid(prim) {
-  return Caml_missing_polyfill.not_implemented("unix_getuid");
+  return Caml_external_polyfill.resolve("unix_getuid")(prim);
 }
 
 function geteuid(prim) {
-  return Caml_missing_polyfill.not_implemented("unix_geteuid");
+  return Caml_external_polyfill.resolve("unix_geteuid")(prim);
 }
 
 function setuid(prim) {
-  return Caml_missing_polyfill.not_implemented("unix_setuid");
+  return Caml_external_polyfill.resolve("unix_setuid")(prim);
 }
 
 function getgid(prim) {
-  return Caml_missing_polyfill.not_implemented("unix_getgid");
+  return Caml_external_polyfill.resolve("unix_getgid")(prim);
 }
 
 function getegid(prim) {
-  return Caml_missing_polyfill.not_implemented("unix_getegid");
+  return Caml_external_polyfill.resolve("unix_getegid")(prim);
 }
 
 function setgid(prim) {
-  return Caml_missing_polyfill.not_implemented("unix_setgid");
+  return Caml_external_polyfill.resolve("unix_setgid")(prim);
 }
 
 function getgroups(prim) {
-  return Caml_missing_polyfill.not_implemented("unix_getgroups");
+  return Caml_external_polyfill.resolve("unix_getgroups")(prim);
 }
 
 function setgroups(prim) {
-  return Caml_missing_polyfill.not_implemented("unix_setgroups");
+  return Caml_external_polyfill.resolve("unix_setgroups")(prim);
 }
 
 function initgroups(prim, prim$1) {
-  return Caml_missing_polyfill.not_implemented("unix_initgroups");
+  return Caml_external_polyfill.resolve("unix_initgroups")(prim, prim$1);
 }
 
 function getlogin(prim) {
-  return Caml_missing_polyfill.not_implemented("unix_getlogin");
+  return Caml_external_polyfill.resolve("unix_getlogin")(prim);
 }
 
 function getpwnam(prim) {
-  return Caml_missing_polyfill.not_implemented("unix_getpwnam");
+  return Caml_external_polyfill.resolve("unix_getpwnam")(prim);
 }
 
 function getgrnam(prim) {
-  return Caml_missing_polyfill.not_implemented("unix_getgrnam");
+  return Caml_external_polyfill.resolve("unix_getgrnam")(prim);
 }
 
 function getpwuid(prim) {
-  return Caml_missing_polyfill.not_implemented("unix_getpwuid");
+  return Caml_external_polyfill.resolve("unix_getpwuid")(prim);
 }
 
 function getgrgid(prim) {
-  return Caml_missing_polyfill.not_implemented("unix_getgrgid");
+  return Caml_external_polyfill.resolve("unix_getgrgid")(prim);
 }
 
 function inet_addr_of_string(prim) {
-  return Caml_missing_polyfill.not_implemented("unix_inet_addr_of_string");
+  return Caml_external_polyfill.resolve("unix_inet_addr_of_string")(prim);
 }
 
 function string_of_inet_addr(prim) {
-  return Caml_missing_polyfill.not_implemented("unix_string_of_inet_addr");
+  return Caml_external_polyfill.resolve("unix_string_of_inet_addr")(prim);
 }
 
-function socket(prim, prim$1, prim$2) {
-  return Caml_missing_polyfill.not_implemented("unix_socket");
+function socket(prim, prim$1, prim$2, prim$3) {
+  return Caml_external_polyfill.resolve("unix_socket")(prim, prim$1, prim$2, prim$3);
 }
 
-function socketpair(prim, prim$1, prim$2) {
-  return Caml_missing_polyfill.not_implemented("unix_socketpair");
+function socketpair(prim, prim$1, prim$2, prim$3) {
+  return Caml_external_polyfill.resolve("unix_socketpair")(prim, prim$1, prim$2, prim$3);
 }
 
-function accept(prim) {
-  return Caml_missing_polyfill.not_implemented("unix_accept");
+function accept(prim, prim$1) {
+  return Caml_external_polyfill.resolve("unix_accept")(prim, prim$1);
 }
 
 function bind(prim, prim$1) {
-  return Caml_missing_polyfill.not_implemented("unix_bind");
+  return Caml_external_polyfill.resolve("unix_bind")(prim, prim$1);
 }
 
 function connect(prim, prim$1) {
-  return Caml_missing_polyfill.not_implemented("unix_connect");
+  return Caml_external_polyfill.resolve("unix_connect")(prim, prim$1);
 }
 
 function listen(prim, prim$1) {
-  return Caml_missing_polyfill.not_implemented("unix_listen");
+  return Caml_external_polyfill.resolve("unix_listen")(prim, prim$1);
 }
 
 function shutdown(prim, prim$1) {
-  return Caml_missing_polyfill.not_implemented("unix_shutdown");
+  return Caml_external_polyfill.resolve("unix_shutdown")(prim, prim$1);
 }
 
 function getsockname(prim) {
-  return Caml_missing_polyfill.not_implemented("unix_getsockname");
+  return Caml_external_polyfill.resolve("unix_getsockname")(prim);
 }
 
 function getpeername(prim) {
-  return Caml_missing_polyfill.not_implemented("unix_getpeername");
+  return Caml_external_polyfill.resolve("unix_getpeername")(prim);
 }
 
 function gethostname(prim) {
-  return Caml_missing_polyfill.not_implemented("unix_gethostname");
+  return Caml_external_polyfill.resolve("unix_gethostname")(prim);
 }
 
 function gethostbyname(prim) {
-  return Caml_missing_polyfill.not_implemented("unix_gethostbyname");
+  return Caml_external_polyfill.resolve("unix_gethostbyname")(prim);
 }
 
 function gethostbyaddr(prim) {
-  return Caml_missing_polyfill.not_implemented("unix_gethostbyaddr");
+  return Caml_external_polyfill.resolve("unix_gethostbyaddr")(prim);
 }
 
 function getprotobyname(prim) {
-  return Caml_missing_polyfill.not_implemented("unix_getprotobyname");
+  return Caml_external_polyfill.resolve("unix_getprotobyname")(prim);
 }
 
 function getprotobynumber(prim) {
-  return Caml_missing_polyfill.not_implemented("unix_getprotobynumber");
+  return Caml_external_polyfill.resolve("unix_getprotobynumber")(prim);
 }
 
 function getservbyname(prim, prim$1) {
-  return Caml_missing_polyfill.not_implemented("unix_getservbyname");
+  return Caml_external_polyfill.resolve("unix_getservbyname")(prim, prim$1);
 }
 
 function getservbyport(prim, prim$1) {
-  return Caml_missing_polyfill.not_implemented("unix_getservbyport");
+  return Caml_external_polyfill.resolve("unix_getservbyport")(prim, prim$1);
 }
 
 function tcgetattr(prim) {
-  return Caml_missing_polyfill.not_implemented("unix_tcgetattr");
+  return Caml_external_polyfill.resolve("unix_tcgetattr")(prim);
 }
 
 function tcsetattr(prim, prim$1, prim$2) {
-  return Caml_missing_polyfill.not_implemented("unix_tcsetattr");
+  return Caml_external_polyfill.resolve("unix_tcsetattr")(prim, prim$1, prim$2);
 }
 
 function tcsendbreak(prim, prim$1) {
-  return Caml_missing_polyfill.not_implemented("unix_tcsendbreak");
+  return Caml_external_polyfill.resolve("unix_tcsendbreak")(prim, prim$1);
 }
 
 function tcdrain(prim) {
-  return Caml_missing_polyfill.not_implemented("unix_tcdrain");
+  return Caml_external_polyfill.resolve("unix_tcdrain")(prim);
 }
 
 function tcflush(prim, prim$1) {
-  return Caml_missing_polyfill.not_implemented("unix_tcflush");
+  return Caml_external_polyfill.resolve("unix_tcflush")(prim, prim$1);
 }
 
 function tcflow(prim, prim$1) {
-  return Caml_missing_polyfill.not_implemented("unix_tcflow");
+  return Caml_external_polyfill.resolve("unix_tcflow")(prim, prim$1);
 }
 
 function setsid(prim) {
-  return Caml_missing_polyfill.not_implemented("unix_setsid");
+  return Caml_external_polyfill.resolve("unix_setsid")(prim);
 }
 
 exports.Unix_error = Unix_error;
 exports.error_message = error_message;
 exports.handle_unix_error = handle_unix_error;
 exports.environment = environment;
+exports.unsafe_environment = unsafe_environment;
 exports.getenv = getenv;
+exports.unsafe_getenv = unsafe_getenv;
 exports.putenv = putenv;
 exports.execv = execv;
 exports.execve = execve;
@@ -1735,6 +1832,7 @@ exports.lstat = lstat;
 exports.fstat = fstat;
 exports.isatty = isatty;
 exports.LargeFile = LargeFile;
+exports.map_file = map_file;
 exports.unlink = unlink;
 exports.rename = rename;
 exports.link = link;
@@ -1772,6 +1870,7 @@ exports.close_process_out = close_process_out;
 exports.close_process = close_process;
 exports.close_process_full = close_process_full;
 exports.symlink = symlink;
+exports.has_symlink = has_symlink;
 exports.readlink = readlink;
 exports.select = select;
 exports.lockf = lockf;
@@ -1787,6 +1886,7 @@ exports.localtime = localtime;
 exports.mktime = mktime;
 exports.alarm = alarm;
 exports.sleep = sleep;
+exports.sleepf = sleepf;
 exports.times = times;
 exports.utimes = utimes;
 exports.getitimer = getitimer;

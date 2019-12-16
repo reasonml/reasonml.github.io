@@ -18,13 +18,13 @@ function copy(o) {
   return Caml_exceptions.caml_set_oo_id(Caml_obj.caml_obj_dup(o));
 }
 
-var params = /* record */[
-  /* compact_table */true,
-  /* copy_parent */true,
-  /* clean_when_copying */true,
-  /* retry_count */3,
-  /* bucket_small_size */16
-];
+var params = {
+  compact_table: true,
+  copy_parent: true,
+  clean_when_copying: true,
+  retry_count: 3,
+  bucket_small_size: 16
+};
 
 function public_method_label(s) {
   var accu = 0;
@@ -39,20 +39,22 @@ function public_method_label(s) {
   }
 }
 
-var dummy_table = /* record */[
-  /* size */0,
-  /* methods : array */[/* () */0],
-  /* methods_by_name */Belt_MapString.empty,
-  /* methods_by_label */Belt_MapInt.empty,
-  /* previous_states : [] */0,
-  /* hidden_meths : [] */0,
-  /* vars */Belt_MapString.empty,
-  /* initializers : [] */0
-];
+var dummy_table = {
+  size: 0,
+  methods: /* array */[/* () */0],
+  methods_by_name: Belt_MapString.empty,
+  methods_by_label: Belt_MapInt.empty,
+  previous_states: /* [] */0,
+  hidden_meths: /* [] */0,
+  vars: Belt_MapString.empty,
+  initializers: /* [] */0
+};
 
-var table_count = /* record */[/* contents */0];
+var table_count = {
+  contents: 0
+};
 
-var dummy_met = [];
+var dummy_met = /* obj_block */[];
 
 function fit_size(n) {
   if (n <= 2) {
@@ -63,7 +65,7 @@ function fit_size(n) {
 }
 
 function new_table(pub_labels) {
-  table_count[0] = table_count[0] + 1 | 0;
+  table_count.contents = table_count.contents + 1 | 0;
   var len = pub_labels.length;
   var methods = Caml_array.caml_make_vect((len << 1) + 2 | 0, dummy_met);
   Caml_array.caml_array_set(methods, 0, len);
@@ -71,48 +73,52 @@ function new_table(pub_labels) {
   for(var i = 0 ,i_finish = len - 1 | 0; i <= i_finish; ++i){
     Caml_array.caml_array_set(methods, (i << 1) + 3 | 0, Caml_array.caml_array_get(pub_labels, i));
   }
-  return /* record */[
-          /* size */2,
-          /* methods */methods,
-          /* methods_by_name */Belt_MapString.empty,
-          /* methods_by_label */Belt_MapInt.empty,
-          /* previous_states : [] */0,
-          /* hidden_meths : [] */0,
-          /* vars */Belt_MapString.empty,
-          /* initializers : [] */0
-        ];
+  return {
+          size: 2,
+          methods: methods,
+          methods_by_name: Belt_MapString.empty,
+          methods_by_label: Belt_MapInt.empty,
+          previous_states: /* [] */0,
+          hidden_meths: /* [] */0,
+          vars: Belt_MapString.empty,
+          initializers: /* [] */0
+        };
 }
 
 function resize(array, new_size) {
-  var old_size = array[/* methods */1].length;
+  var old_size = array.methods.length;
   if (new_size > old_size) {
     var new_buck = Caml_array.caml_make_vect(new_size, dummy_met);
-    $$Array.blit(array[/* methods */1], 0, new_buck, 0, old_size);
-    array[/* methods */1] = new_buck;
+    $$Array.blit(array.methods, 0, new_buck, 0, old_size);
+    array.methods = new_buck;
     return /* () */0;
   } else {
     return 0;
   }
 }
 
-var method_count = /* record */[/* contents */0];
+var method_count = {
+  contents: 0
+};
 
-var inst_var_count = /* record */[/* contents */0];
+var inst_var_count = {
+  contents: 0
+};
 
 function new_method(table) {
-  var index = table[/* methods */1].length;
+  var index = table.methods.length;
   resize(table, index + 1 | 0);
   return index;
 }
 
 function get_method_label(table, name) {
-  var match = Belt_MapString.getUndefined(table[/* methods_by_name */2], name);
+  var match = Belt_MapString.getUndefined(table.methods_by_name, name);
   if (match !== undefined) {
     return match;
   } else {
     var label = new_method(table);
-    table[/* methods_by_name */2] = Belt_MapString.set(table[/* methods_by_name */2], name, label);
-    table[/* methods_by_label */3] = Belt_MapInt.set(table[/* methods_by_label */3], label, true);
+    table.methods_by_name = Belt_MapString.set(table.methods_by_name, name, label);
+    table.methods_by_label = Belt_MapInt.set(table.methods_by_label, label, true);
     return label;
   }
 }
@@ -124,20 +130,20 @@ function get_method_labels(table, names) {
 }
 
 function set_method(table, label, element) {
-  method_count[0] = method_count[0] + 1 | 0;
-  if (Belt_MapInt.getExn(table[/* methods_by_label */3], label)) {
+  method_count.contents = method_count.contents + 1 | 0;
+  if (Belt_MapInt.getExn(table.methods_by_label, label)) {
     var array = table;
     var label$1 = label;
     var element$1 = element;
     resize(array, label$1 + 1 | 0);
-    return Caml_array.caml_array_set(array[/* methods */1], label$1, element$1);
+    return Caml_array.caml_array_set(array.methods, label$1, element$1);
   } else {
-    table[/* hidden_meths */5] = /* :: */[
+    table.hidden_meths = /* :: */[
       /* tuple */[
         label,
         element
       ],
-      table[/* hidden_meths */5]
+      table.hidden_meths
     ];
     return /* () */0;
   }
@@ -145,11 +151,11 @@ function set_method(table, label, element) {
 
 function get_method(table, label) {
   try {
-    return List.assoc(label, table[/* hidden_meths */5]);
+    return List.assoc(label, table.hidden_meths);
   }
   catch (exn){
     if (exn === Caml_builtin_exceptions.not_found) {
-      return Caml_array.caml_array_get(table[/* methods */1], label);
+      return Caml_array.caml_array_get(table.methods, label);
     } else {
       throw exn;
     }
@@ -174,39 +180,43 @@ function narrow(table, vars, virt_meths, concr_meths) {
   var concr_meth_labs = List.map((function (param) {
           return get_method_label(table, param);
         }), concr_meths$1);
-  table[/* previous_states */4] = /* :: */[
+  table.previous_states = /* :: */[
     /* tuple */[
-      table[/* methods_by_name */2],
-      table[/* methods_by_label */3],
-      table[/* hidden_meths */5],
-      table[/* vars */6],
+      table.methods_by_name,
+      table.methods_by_label,
+      table.hidden_meths,
+      table.vars,
       virt_meth_labs,
       vars$1
     ],
-    table[/* previous_states */4]
+    table.previous_states
   ];
-  table[/* vars */6] = Belt_MapString.reduceU(table[/* vars */6], Belt_MapString.empty, (function (tvars, lab, info) {
+  table.vars = Belt_MapString.reduceU(table.vars, Belt_MapString.empty, (function (tvars, lab, info) {
           if (List.mem(lab, vars$1)) {
             return Belt_MapString.set(tvars, lab, info);
           } else {
             return tvars;
           }
         }));
-  var by_name = /* record */[/* contents */Belt_MapString.empty];
-  var by_label = /* record */[/* contents */Belt_MapInt.empty];
+  var by_name = {
+    contents: Belt_MapString.empty
+  };
+  var by_label = {
+    contents: Belt_MapInt.empty
+  };
   List.iter2((function (met, label) {
-          by_name[0] = Belt_MapString.set(by_name[0], met, label);
-          by_label[0] = Belt_MapInt.set(by_label[0], label, Belt_MapInt.getWithDefault(table[/* methods_by_label */3], label, true));
+          by_name.contents = Belt_MapString.set(by_name.contents, met, label);
+          by_label.contents = Belt_MapInt.set(by_label.contents, label, Belt_MapInt.getWithDefault(table.methods_by_label, label, true));
           return /* () */0;
         }), concr_meths$1, concr_meth_labs);
   List.iter2((function (met, label) {
-          by_name[0] = Belt_MapString.set(by_name[0], met, label);
-          by_label[0] = Belt_MapInt.set(by_label[0], label, false);
+          by_name.contents = Belt_MapString.set(by_name.contents, met, label);
+          by_label.contents = Belt_MapInt.set(by_label.contents, label, false);
           return /* () */0;
         }), virt_meths$1, virt_meth_labs);
-  table[/* methods_by_name */2] = by_name[0];
-  table[/* methods_by_label */3] = by_label[0];
-  table[/* hidden_meths */5] = List.fold_right((function (met, hm) {
+  table.methods_by_name = by_name.contents;
+  table.methods_by_label = by_label.contents;
+  table.hidden_meths = List.fold_right((function (met, hm) {
           if (List.mem(met[0], virt_meth_labs)) {
             return hm;
           } else {
@@ -215,20 +225,20 @@ function narrow(table, vars, virt_meths, concr_meths) {
                     hm
                   ];
           }
-        }), table[/* hidden_meths */5], /* [] */0);
+        }), table.hidden_meths, /* [] */0);
   return /* () */0;
 }
 
 function widen(table) {
-  var match = List.hd(table[/* previous_states */4]);
+  var match = List.hd(table.previous_states);
   var virt_meths = match[4];
-  table[/* previous_states */4] = List.tl(table[/* previous_states */4]);
-  table[/* vars */6] = List.fold_left((function (s, v) {
-          return Belt_MapString.set(s, v, Belt_MapString.getExn(table[/* vars */6], v));
+  table.previous_states = List.tl(table.previous_states);
+  table.vars = List.fold_left((function (s, v) {
+          return Belt_MapString.set(s, v, Belt_MapString.getExn(table.vars, v));
         }), match[3], match[5]);
-  table[/* methods_by_name */2] = match[0];
-  table[/* methods_by_label */3] = match[1];
-  table[/* hidden_meths */5] = List.fold_right((function (met, hm) {
+  table.methods_by_name = match[0];
+  table.methods_by_label = match[1];
+  table.hidden_meths = List.fold_right((function (met, hm) {
           if (List.mem(met[0], virt_meths)) {
             return hm;
           } else {
@@ -237,24 +247,24 @@ function widen(table) {
                     hm
                   ];
           }
-        }), table[/* hidden_meths */5], match[2]);
+        }), table.hidden_meths, match[2]);
   return /* () */0;
 }
 
 function new_slot(table) {
-  var index = table[/* size */0];
-  table[/* size */0] = index + 1 | 0;
+  var index = table.size;
+  table.size = index + 1 | 0;
   return index;
 }
 
 function new_variable(table, name) {
-  var match = Belt_MapString.getUndefined(table[/* vars */6], name);
+  var match = Belt_MapString.getUndefined(table.vars, name);
   if (match !== undefined) {
     return match;
   } else {
     var index = new_slot(table);
     if (name !== "") {
-      table[/* vars */6] = Belt_MapString.set(table[/* vars */6], name, index);
+      table.vars = Belt_MapString.set(table.vars, name, index);
     }
     return index;
   }
@@ -283,19 +293,19 @@ function new_methods_variables(table, meths, vals) {
 }
 
 function get_variable(table, name) {
-  return Belt_MapString.getExn(table[/* vars */6], name);
+  return Belt_MapString.getExn(table.vars, name);
 }
 
 function get_variables(table, names) {
   return $$Array.map((function (param) {
-                return Belt_MapString.getExn(table[/* vars */6], param);
+                return Belt_MapString.getExn(table.vars, param);
               }), names);
 }
 
 function add_initializer(table, f) {
-  table[/* initializers */7] = /* :: */[
+  table.initializers = /* :: */[
     f,
-    table[/* initializers */7]
+    table.initializers
   ];
   return /* () */0;
 }
@@ -308,8 +318,8 @@ function create_table(public_methods) {
     var table = new_table(tags);
     $$Array.iteri((function (i, met) {
             var lab = (i << 1) + 2 | 0;
-            table[/* methods_by_name */2] = Belt_MapString.set(table[/* methods_by_name */2], met, lab);
-            table[/* methods_by_label */3] = Belt_MapInt.set(table[/* methods_by_label */3], lab, true);
+            table.methods_by_name = Belt_MapString.set(table.methods_by_name, met, lab);
+            table.methods_by_label = Belt_MapInt.set(table.methods_by_label, lab, true);
             return /* () */0;
           }), public_methods);
     return table;
@@ -317,9 +327,9 @@ function create_table(public_methods) {
 }
 
 function init_class(table) {
-  inst_var_count[0] = (inst_var_count[0] + table[/* size */0] | 0) - 1 | 0;
-  table[/* initializers */7] = List.rev(table[/* initializers */7]);
-  return resize(table, 3 + ((Caml_array.caml_array_get(table[/* methods */1], 1) << 4) / 32 | 0) | 0);
+  inst_var_count.contents = (inst_var_count.contents + table.size | 0) - 1 | 0;
+  table.initializers = List.rev(table.initializers);
+  return resize(table, 3 + ((Caml_array.caml_array_get(table.methods, 1) << 4) / 32 | 0) | 0);
 }
 
 function inherits(cla, vals, virt_meths, concr_meths, param, top) {
@@ -331,7 +341,7 @@ function inherits(cla, vals, virt_meths, concr_meths, param, top) {
               /* array */[init],
               /* :: */[
                 $$Array.map((function (param) {
-                        return Belt_MapString.getExn(cla[/* vars */6], param);
+                        return Belt_MapString.getExn(cla.vars, param);
                       }), to_array(vals)),
                 /* :: */[
                   $$Array.map((function (nm) {
@@ -359,14 +369,14 @@ function make_class_store(pub_meths, class_init, init_table) {
   var table = create_table(pub_meths);
   var env_init = Curry._1(class_init, table);
   init_class(table);
-  init_table[/* class_init */1] = class_init;
-  init_table[/* env_init */0] = env_init;
+  init_table.class_init = class_init;
+  init_table.env_init = env_init;
   return /* () */0;
 }
 
 function create_object(table) {
-  var obj = Caml_obj.caml_obj_block(Obj.object_tag, table[/* size */0]);
-  obj[0] = table[/* methods */1];
+  var obj = Caml_obj.caml_obj_block(Obj.object_tag, table.size);
+  obj[0] = table.methods;
   return Caml_exceptions.caml_set_oo_id(obj);
 }
 
@@ -374,8 +384,8 @@ function create_object_opt(obj_0, table) {
   if (obj_0) {
     return obj_0;
   } else {
-    var obj = Caml_obj.caml_obj_block(Obj.object_tag, table[/* size */0]);
-    obj[0] = table[/* methods */1];
+    var obj = Caml_obj.caml_obj_block(Obj.object_tag, table.size);
+    obj[0] = table.methods;
     return Caml_exceptions.caml_set_oo_id(obj);
   }
 }
@@ -394,7 +404,7 @@ function iter_f(obj, _param) {
 }
 
 function run_initializers(obj, table) {
-  var inits = table[/* initializers */7];
+  var inits = table.initializers;
   if (inits !== /* [] */0) {
     return iter_f(obj, inits);
   } else {
@@ -406,7 +416,7 @@ function run_initializers_opt(obj_0, obj, table) {
   if (obj_0) {
     return obj;
   } else {
-    var inits = table[/* initializers */7];
+    var inits = table.initializers;
     if (inits !== /* [] */0) {
       iter_f(obj, inits);
     }
@@ -424,8 +434,85 @@ function create_object_and_run_initializers(obj_0, table) {
   }
 }
 
+function set_data(tables, v) {
+  if (tables) {
+    tables[/* data */1] = v;
+    return /* () */0;
+  } else {
+    throw [
+          Caml_builtin_exceptions.assert_failure,
+          /* tuple */[
+            "camlinternalOO.ml",
+            484,
+            13
+          ]
+        ];
+  }
+}
+
+function set_next(tables, v) {
+  if (tables) {
+    tables[/* next */2] = v;
+    return /* () */0;
+  } else {
+    throw [
+          Caml_builtin_exceptions.assert_failure,
+          /* tuple */[
+            "camlinternalOO.ml",
+            487,
+            13
+          ]
+        ];
+  }
+}
+
+function get_key(param) {
+  if (param) {
+    return param[/* key */0];
+  } else {
+    throw [
+          Caml_builtin_exceptions.assert_failure,
+          /* tuple */[
+            "camlinternalOO.ml",
+            490,
+            13
+          ]
+        ];
+  }
+}
+
+function get_data(param) {
+  if (param) {
+    return param[/* data */1];
+  } else {
+    throw [
+          Caml_builtin_exceptions.assert_failure,
+          /* tuple */[
+            "camlinternalOO.ml",
+            493,
+            13
+          ]
+        ];
+  }
+}
+
+function get_next(param) {
+  if (param) {
+    return param[/* next */2];
+  } else {
+    throw [
+          Caml_builtin_exceptions.assert_failure,
+          /* tuple */[
+            "camlinternalOO.ml",
+            496,
+            13
+          ]
+        ];
+  }
+}
+
 function build_path(n, keys, tables) {
-  var res = /* record */[
+  var res = /* Cons */[
     /* key */0,
     /* data : Empty */0,
     /* next : Empty */0
@@ -433,12 +520,12 @@ function build_path(n, keys, tables) {
   var r = res;
   for(var i = 0; i <= n; ++i){
     r = /* Cons */[
-      Caml_array.caml_array_get(keys, i),
-      r,
-      /* Empty */0
+      /* key */Caml_array.caml_array_get(keys, i),
+      /* data */r,
+      /* next : Empty */0
     ];
   }
-  tables[/* data */1] = r;
+  set_data(tables, r);
   return res;
 }
 
@@ -450,27 +537,43 @@ function lookup_keys(i, keys, tables) {
     var _tables = tables;
     while(true) {
       var tables$1 = _tables;
-      if (tables$1[/* key */0] === key) {
-        return lookup_keys(i - 1 | 0, keys, tables$1[/* data */1]);
-      } else if (tables$1[/* next */2] !== /* Empty */0) {
-        _tables = tables$1[/* next */2];
-        continue ;
+      if (get_key(tables$1) === key) {
+        var tables_data = get_data(tables$1);
+        if (tables_data) {
+          return lookup_keys(i - 1 | 0, keys, tables_data);
+        } else {
+          throw [
+                Caml_builtin_exceptions.assert_failure,
+                /* tuple */[
+                  "camlinternalOO.ml",
+                  514,
+                  17
+                ]
+              ];
+        }
       } else {
-        var next = /* Cons */[
-          key,
-          /* Empty */0,
-          /* Empty */0
-        ];
-        tables$1[/* next */2] = next;
-        return build_path(i - 1 | 0, keys, next);
+        var next = get_next(tables$1);
+        if (next) {
+          _tables = next;
+          continue ;
+        } else {
+          var next$1 = /* Cons */[
+            /* key */key,
+            /* data : Empty */0,
+            /* next : Empty */0
+          ];
+          set_next(tables$1, next$1);
+          return build_path(i - 1 | 0, keys, next$1);
+        }
       }
     };
   }
 }
 
 function lookup_tables(root, keys) {
-  if (root[/* data */1] !== /* Empty */0) {
-    return lookup_keys(keys.length - 1 | 0, keys, root[/* data */1]);
+  var root_data = get_data(root);
+  if (root_data) {
+    return lookup_keys(keys.length - 1 | 0, keys, root_data);
   } else {
     return build_path(keys.length - 1 | 0, keys, root);
   }
@@ -478,30 +581,30 @@ function lookup_tables(root, keys) {
 
 function new_cache(table) {
   var n = new_method(table);
-  var n$1 = n % 2 === 0 || n > (2 + ((Caml_array.caml_array_get(table[/* methods */1], 1) << 4) / 32 | 0) | 0) ? n : new_method(table);
-  Caml_array.caml_array_set(table[/* methods */1], n$1, 0);
+  var n$1 = n % 2 === 0 || n > (2 + ((Caml_array.caml_array_get(table.methods, 1) << 4) / 32 | 0) | 0) ? n : new_method(table);
+  Caml_array.caml_array_set(table.methods, n$1, 0);
   return n$1;
 }
 
 function method_impl(table, i, arr) {
   var next = function (param) {
-    i[0] = i[0] + 1 | 0;
-    return Caml_array.caml_array_get(arr, i[0]);
+    i.contents = i.contents + 1 | 0;
+    return Caml_array.caml_array_get(arr, i.contents);
   };
   var clo = next(/* () */0);
   if (typeof clo === "number") {
     switch (clo) {
-      case 0 : 
+      case /* GetConst */0 :
           var x = next(/* () */0);
-          return (function (obj) {
+          return (function (_obj) {
               return x;
             });
-      case 1 : 
+      case /* GetVar */1 :
           var n = next(/* () */0);
           return (function (obj) {
               return obj[n];
             });
-      case 2 : 
+      case /* GetEnv */2 :
           var e = next(/* () */0);
           var n$1 = next(/* () */0);
           var e$1 = e;
@@ -509,30 +612,30 @@ function method_impl(table, i, arr) {
           return (function (obj) {
               return obj[e$1][n$2];
             });
-      case 3 : 
+      case /* GetMeth */3 :
           var n$3 = next(/* () */0);
           return (function (obj) {
               return Curry._1(obj[0][n$3], obj);
             });
-      case 4 : 
+      case /* SetVar */4 :
           var n$4 = next(/* () */0);
           return (function (obj, x) {
               obj[n$4] = x;
               return /* () */0;
             });
-      case 5 : 
+      case /* AppConst */5 :
           var f = next(/* () */0);
           var x$1 = next(/* () */0);
-          return (function (obj) {
+          return (function (_obj) {
               return Curry._1(f, x$1);
             });
-      case 6 : 
+      case /* AppVar */6 :
           var f$1 = next(/* () */0);
           var n$5 = next(/* () */0);
           return (function (obj) {
               return Curry._1(f$1, obj[n$5]);
             });
-      case 7 : 
+      case /* AppEnv */7 :
           var f$2 = next(/* () */0);
           var e$2 = next(/* () */0);
           var n$6 = next(/* () */0);
@@ -542,7 +645,7 @@ function method_impl(table, i, arr) {
           return (function (obj) {
               return Curry._1(f$3, obj[e$3][n$7]);
             });
-      case 8 : 
+      case /* AppMeth */8 :
           var f$4 = next(/* () */0);
           var n$8 = next(/* () */0);
           var f$5 = f$4;
@@ -550,14 +653,14 @@ function method_impl(table, i, arr) {
           return (function (obj) {
               return Curry._1(f$5, Curry._1(obj[0][n$9], obj));
             });
-      case 9 : 
+      case /* AppConstConst */9 :
           var f$6 = next(/* () */0);
           var x$2 = next(/* () */0);
           var y = next(/* () */0);
-          return (function (obj) {
+          return (function (_obj) {
               return Curry._2(f$6, x$2, y);
             });
-      case 10 : 
+      case /* AppConstVar */10 :
           var f$7 = next(/* () */0);
           var x$3 = next(/* () */0);
           var n$10 = next(/* () */0);
@@ -567,7 +670,7 @@ function method_impl(table, i, arr) {
           return (function (obj) {
               return Curry._2(f$8, x$4, obj[n$11]);
             });
-      case 11 : 
+      case /* AppConstEnv */11 :
           var f$9 = next(/* () */0);
           var x$5 = next(/* () */0);
           var e$4 = next(/* () */0);
@@ -579,7 +682,7 @@ function method_impl(table, i, arr) {
           return (function (obj) {
               return Curry._2(f$10, x$6, obj[e$5][n$13]);
             });
-      case 12 : 
+      case /* AppConstMeth */12 :
           var f$11 = next(/* () */0);
           var x$7 = next(/* () */0);
           var n$14 = next(/* () */0);
@@ -589,7 +692,7 @@ function method_impl(table, i, arr) {
           return (function (obj) {
               return Curry._2(f$12, x$8, Curry._1(obj[0][n$15], obj));
             });
-      case 13 : 
+      case /* AppVarConst */13 :
           var f$13 = next(/* () */0);
           var n$16 = next(/* () */0);
           var x$9 = next(/* () */0);
@@ -599,7 +702,7 @@ function method_impl(table, i, arr) {
           return (function (obj) {
               return Curry._2(f$14, obj[n$17], x$10);
             });
-      case 14 : 
+      case /* AppEnvConst */14 :
           var f$15 = next(/* () */0);
           var e$6 = next(/* () */0);
           var n$18 = next(/* () */0);
@@ -611,7 +714,7 @@ function method_impl(table, i, arr) {
           return (function (obj) {
               return Curry._2(f$16, obj[e$7][n$19], x$12);
             });
-      case 15 : 
+      case /* AppMethConst */15 :
           var f$17 = next(/* () */0);
           var n$20 = next(/* () */0);
           var x$13 = next(/* () */0);
@@ -621,7 +724,7 @@ function method_impl(table, i, arr) {
           return (function (obj) {
               return Curry._2(f$18, Curry._1(obj[0][n$21], obj), x$14);
             });
-      case 16 : 
+      case /* MethAppConst */16 :
           var n$22 = next(/* () */0);
           var x$15 = next(/* () */0);
           var n$23 = n$22;
@@ -629,7 +732,7 @@ function method_impl(table, i, arr) {
           return (function (obj) {
               return Curry._2(obj[0][n$23], obj, x$16);
             });
-      case 17 : 
+      case /* MethAppVar */17 :
           var n$24 = next(/* () */0);
           var m = next(/* () */0);
           var n$25 = n$24;
@@ -637,7 +740,7 @@ function method_impl(table, i, arr) {
           return (function (obj) {
               return Curry._2(obj[0][n$25], obj, obj[m$1]);
             });
-      case 18 : 
+      case /* MethAppEnv */18 :
           var n$26 = next(/* () */0);
           var e$8 = next(/* () */0);
           var m$2 = next(/* () */0);
@@ -647,7 +750,7 @@ function method_impl(table, i, arr) {
           return (function (obj) {
               return Curry._2(obj[0][n$27], obj, obj[e$9][m$3]);
             });
-      case 19 : 
+      case /* MethAppMeth */19 :
           var n$28 = next(/* () */0);
           var m$4 = next(/* () */0);
           var n$29 = n$28;
@@ -655,7 +758,7 @@ function method_impl(table, i, arr) {
           return (function (obj) {
               return Curry._2(obj[0][n$29], obj, Curry._1(obj[0][m$5], obj));
             });
-      case 20 : 
+      case /* SendConst */20 :
           var m$6 = next(/* () */0);
           var x$17 = next(/* () */0);
           var m$7 = m$6;
@@ -664,7 +767,7 @@ function method_impl(table, i, arr) {
           return (function (obj) {
               return Curry._1(Curry._3(Caml_oo.caml_get_public_method, x$18, m$7, 1), x$18);
             });
-      case 21 : 
+      case /* SendVar */21 :
           var m$8 = next(/* () */0);
           var n$30 = next(/* () */0);
           var m$9 = m$8;
@@ -674,7 +777,7 @@ function method_impl(table, i, arr) {
               var tmp = obj[n$31];
               return Curry._1(Curry._3(Caml_oo.caml_get_public_method, tmp, m$9, 2), tmp);
             });
-      case 22 : 
+      case /* SendEnv */22 :
           var m$10 = next(/* () */0);
           var e$10 = next(/* () */0);
           var n$32 = next(/* () */0);
@@ -686,7 +789,7 @@ function method_impl(table, i, arr) {
               var tmp = obj[e$11][n$33];
               return Curry._1(Curry._3(Caml_oo.caml_get_public_method, tmp, m$11, 3), tmp);
             });
-      case 23 : 
+      case /* SendMeth */23 :
           var m$12 = next(/* () */0);
           var n$34 = next(/* () */0);
           var m$13 = m$12;
@@ -705,22 +808,24 @@ function method_impl(table, i, arr) {
 
 function set_methods(table, methods) {
   var len = methods.length;
-  var i = /* record */[/* contents */0];
-  while(i[0] < len) {
-    var label = Caml_array.caml_array_get(methods, i[0]);
+  var i = {
+    contents: 0
+  };
+  while(i.contents < len) {
+    var label = Caml_array.caml_array_get(methods, i.contents);
     var clo = method_impl(table, i, methods);
     set_method(table, label, clo);
-    i[0] = i[0] + 1 | 0;
+    i.contents = i.contents + 1 | 0;
   };
   return /* () */0;
 }
 
 function stats(param) {
-  return /* record */[
-          /* classes */table_count[0],
-          /* methods */method_count[0],
-          /* inst_vars */inst_var_count[0]
-        ];
+  return {
+          classes: table_count.contents,
+          methods: method_count.contents,
+          inst_vars: inst_var_count.contents
+        };
 }
 
 exports.public_method_label = public_method_label;
