@@ -12,6 +12,7 @@ Integer Addition                      |  `23 + 1`
 Float Addition                        |  `23.0 +. 1.0`
 Integer Division/Multiplication       |  `2 / 23 * 1`
 Float Division/Multiplication         |  `2.0 /. 23.0 *. 1.0`
+Modulus                               |  `23 mod 7`
 Float Exponentiation                  |  `2.0 ** 2.0`
 String Concatenation                  |  `"Hello " ++ "World"`
 Comparison                            |  `>`, `<`, `>=`, `=<`
