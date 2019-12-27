@@ -4,7 +4,7 @@ title: Function
 
 _Cheat sheet for the full function syntax at the end_
 
-Can you believe we haven't covered function until now?
+Can you believe we haven't covered functions until now?
 
 Functions are declared with an arrow and return the expression.
 
@@ -18,7 +18,7 @@ This declares a function and assigns to it the name `greet`, which you can call 
 greet("world!"); /* "Hello world!" */
 ```
 
-Multi-arguments functions have arguments separated by comma:
+Multi-argument functions have arguments separated by a comma:
 
 ```reason
 let add = (x, y, z) => x + y + z;
@@ -53,7 +53,7 @@ logSomething();
 
 ## Labeled Arguments
 
-Multi-arguments functions, especially those whose arguments are of the same type, can be confusing to call.
+Multi-argument functions, especially those whose arguments are of the same type, can be confusing to call.
 
 ```reason
 let addCoordinates = (x, y) => {
@@ -63,7 +63,7 @@ let addCoordinates = (x, y) => {
 addCoordinates(5, 6); /* which is x, which is y? */
 ```
 
-In OCaml/Reason, you can attach labels to an argument by prefixing the name with the `~` symbol:
+In OCaml/Reason, you can attach a label to an argument by prefixing the name with the `~` symbol:
 
 ```reason
 let addCoordinates = (~x, ~y) => {
@@ -149,12 +149,12 @@ let whatIsThis = drawCircle(~color);
 
 Is `whatIsThis` a curried `drawCircle` function, waiting for the optional `radius` to be applied? Or did it finish applying because the `radius` is optional? To address this confusion, append a positional (aka non-labeled) argument to `drawCircle` (conventionally `()`), and OCaml will, as a rule of thumb, presume the optional labeled argument is omitted when the positional argument is provided.
 
-Because we don't supply the unit OCaml knows we want to curry the function.
+Because we don't supply the unit, OCaml knows we want to curry the function.
 ```reason
 let curriedFunction = drawCircle(~color);
 ```
 
-Because we _do_ supply the unit OCaml knows we deliberately omit the `radius` parameter, and the function is executed.
+Because we _do_ supply the unit, OCaml knows we deliberately omit the `radius` parameter and the function is executed.
 ```reason
 let circle = drawCircle(~color, ());
 ```
