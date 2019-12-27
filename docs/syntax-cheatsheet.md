@@ -79,7 +79,7 @@ We've worked very hard to make Reason look like JS while preserving OCaml's grea
 
 | JavaScript                      | Reason                     |
 | ------------------------------- | -------------------------- |
-| `arg => retVal`                 | `(arg) => retVal`          |
+| `arg => retVal`                 | `arg => retVal`          |
 | `function named(arg) {...}`     | `let named = (arg) => ...` |
 | `const f = function(arg) {...}` | `let f = (arg) => ...`     |
 | `add(4, add(5, 6))`             | Same                       |
