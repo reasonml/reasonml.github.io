@@ -62,9 +62,9 @@ open School;
 let p: profession = getProfession(person1);
 ```
 
-The content of `School` module are made visible (**not** copied into the file, but simply made visible!) in scope. `profession`, `getProfession` and `person1` will thus correctly be found.
+The contents of the `School` module are made visible (**not** copied into the file, but simply made visible!) in scope. `profession`, `getProfession` and `person1` will thus correctly be found.
 
-**Use `open` this sparingly, it's convenient, but makes it hard to know where some values come from**. You should usually use `open` in a local scope:
+**Use `open` sparingly; it's convenient, but makes it hard to know where some values come from**. You should usually use `open` in a local scope:
 
 ```reason
 let p = {
@@ -93,7 +93,7 @@ let p = {
 ### Extending modules
 
 Using `include` in a module statically "spreads" a module's content into
-a new one, thus often fulfill the role of "inheritance" or "mixin".
+the new one, thus often fulfilling the role of "inheritance" or "mixin".
 
 ```reason
 module BaseComponent = {
@@ -110,7 +110,7 @@ module ActualComponent = {
 };
 ```
 
-**Note**: `open` and `include` are very different! The former brings a module's content into your current scope, so that you don't have to refer to a value by prefixing it with the module's name every time. The latter **copies over** the definition of a module statically, then also do an `open`.
+**Note**: `open` and `include` are very different! The former brings a module's content into your current scope, so that you don't have to refer to a value by prefixing it with the module's name every time. The latter **copies over** the definition of a module statically, then also does an `open`.
 
 ### Every `.re` file is a module
 
@@ -182,7 +182,7 @@ To illustrate the various kinds of type entries, consider the above signature
 
 Modules of the type `EstablishmentType` can contain more fields than the
 signature declares, just like the module `School` in the previous section (if we
-choose to assign it the type `EstablishmentType`. Otherwise, `School` exposes
+choose to assign it the type `EstablishmentType`; otherwise, `School` exposes
 every field). This effectively makes the `person1` field an enforced
 implementation detail! Outsiders can't access it, since it's not present in the
 signature; the signature **constrained** what others can access.
@@ -316,7 +316,7 @@ module SetOfIntPairs = MakeSet(IntPair);
 ### Module functions types
 
 Like with module types, functor types also act to constrain and hide what we may
-assume about functors. The syntax for functor types are consistent with those
+assume about functors. The syntax for functor types is consistent with those
 for function types, but with types capitalized to represent the signatures of
 modules the functor accepts as arguments and return values. In the
 previous example, we're exposing the backing type of a set; by giving `MakeSet`
@@ -338,4 +338,4 @@ module MakeSet: MakeSetType = (Item: Comparable) => {
 
 ## Tips & Tricks
 
-Modules and functors are at a different "layer" of language than the rest (functions, let bindings, data structures, etc.). For example, you can't easily pass them into a tuple or record. Use them judiciously, if ever! Lots of times, just a record or a function is enough.
+Modules and functors are at a different "layer" of language than the rest (functions, let bindings, data structures, etc.). For example, you can't easily pass them in to a tuple or record. Use them judiciously, if ever! Lots of times, just a record or a function is enough.
