@@ -1,7 +1,6 @@
 'use strict';
 
 var Obj = require("./obj.js");
-var $$Array = require("./array.js");
 var Block = require("./block.js");
 var Curry = require("./curry.js");
 var $$Buffer = require("./buffer.js");
@@ -10,9 +9,12 @@ var Caml_io = require("./caml_io.js");
 var Caml_array = require("./caml_array.js");
 var Pervasives = require("./pervasives.js");
 var Caml_js_exceptions = require("./caml_js_exceptions.js");
+var Caml_external_polyfill = require("./caml_external_polyfill.js");
 var Caml_builtin_exceptions = require("./caml_builtin_exceptions.js");
 
-var printers = /* record */[/* contents : [] */0];
+var printers = {
+  contents: /* [] */0
+};
 
 var locfmt = /* Format */[
   /* String_literal */Block.__(11, [
@@ -103,12 +105,12 @@ function other_fields(x, i) {
 }
 
 function fields(x) {
-  var n = x.length;
-  switch (n) {
-    case 0 : 
-    case 1 : 
+  var match = x.length;
+  switch (match) {
+    case 0 :
+    case 1 :
         return "";
-    case 2 : 
+    case 2 :
         return Curry._1(Printf.sprintf(/* Format */[
                         /* Char_literal */Block.__(12, [
                             /* "(" */40,
@@ -143,7 +145,7 @@ function fields(x) {
 }
 
 function to_string(x) {
-  var _param = printers[0];
+  var _param = printers.contents;
   while(true) {
     var param = _param;
     if (param) {
@@ -240,14 +242,14 @@ function convert_raw_backtrace_slot(param) {
       ];
 }
 
-function convert_raw_backtrace(rbckt) {
+function convert_raw_backtrace(bt) {
   try {
-    return $$Array.map(convert_raw_backtrace_slot, rbckt);
+    return /* () */0;
   }
   catch (raw_exn){
     var exn = Caml_js_exceptions.internalToOCamlException(raw_exn);
     if (exn[0] === Caml_builtin_exceptions.failure) {
-      return undefined;
+      return ;
     } else {
       throw exn;
     }
@@ -269,8 +271,8 @@ function format_backtrace_slot(pos, slot) {
     }
   };
   if (slot.tag) {
-    if (slot[0]) {
-      return undefined;
+    if (slot[/* is_raise */0]) {
+      return ;
     } else {
       return Curry._1(Printf.sprintf(/* Format */[
                       /* String */Block.__(2, [
@@ -284,32 +286,38 @@ function format_backtrace_slot(pos, slot) {
                     ]), info(false));
     }
   } else {
-    return Curry._5(Printf.sprintf(/* Format */[
+    return Curry._6(Printf.sprintf(/* Format */[
                     /* String */Block.__(2, [
                         /* No_padding */0,
                         /* String_literal */Block.__(11, [
                             " file \"",
                             /* String */Block.__(2, [
                                 /* No_padding */0,
-                                /* String_literal */Block.__(11, [
-                                    "\", line ",
-                                    /* Int */Block.__(4, [
-                                        /* Int_d */0,
+                                /* Char_literal */Block.__(12, [
+                                    /* "\"" */34,
+                                    /* String */Block.__(2, [
                                         /* No_padding */0,
-                                        /* No_precision */0,
                                         /* String_literal */Block.__(11, [
-                                            ", characters ",
+                                            ", line ",
                                             /* Int */Block.__(4, [
                                                 /* Int_d */0,
                                                 /* No_padding */0,
                                                 /* No_precision */0,
-                                                /* Char_literal */Block.__(12, [
-                                                    /* "-" */45,
+                                                /* String_literal */Block.__(11, [
+                                                    ", characters ",
                                                     /* Int */Block.__(4, [
                                                         /* Int_d */0,
                                                         /* No_padding */0,
                                                         /* No_precision */0,
-                                                        /* End_of_format */0
+                                                        /* Char_literal */Block.__(12, [
+                                                            /* "-" */45,
+                                                            /* Int */Block.__(4, [
+                                                                /* Int_d */0,
+                                                                /* No_padding */0,
+                                                                /* No_precision */0,
+                                                                /* End_of_format */0
+                                                              ])
+                                                          ])
                                                       ])
                                                   ])
                                               ])
@@ -319,8 +327,8 @@ function format_backtrace_slot(pos, slot) {
                               ])
                           ])
                       ]),
-                    "%s file \"%s\", line %d, characters %d-%d"
-                  ]), info(slot[0]), slot[1], slot[2], slot[3], slot[4]);
+                    "%s file \"%s\"%s, line %d, characters %d-%d"
+                  ]), info(slot[/* is_raise */0]), slot[/* filename */1], slot[/* is_inline */5] ? " (inlined)" : "", slot[/* line_number */2], slot[/* start_char */3], slot[/* end_char */4]);
   }
 }
 
@@ -361,7 +369,8 @@ function print_backtrace(outchan) {
   return print_raw_backtrace(outchan, /* () */0);
 }
 
-function backtrace_to_string(backtrace) {
+function raw_backtrace_to_string(raw_backtrace) {
+  var backtrace = convert_raw_backtrace(raw_backtrace);
   if (backtrace !== undefined) {
     var a = backtrace;
     var b = $$Buffer.create(1024);
@@ -387,24 +396,28 @@ function backtrace_to_string(backtrace) {
   }
 }
 
-function raw_backtrace_to_string(raw_backtrace) {
-  return backtrace_to_string(convert_raw_backtrace(raw_backtrace));
+function backtrace_slot_is_raise(param) {
+  return param[/* is_raise */0];
 }
 
-function backtrace_slot_is_raise(param) {
-  return param[0];
+function backtrace_slot_is_inline(param) {
+  if (param.tag) {
+    return false;
+  } else {
+    return param[/* is_inline */5];
+  }
 }
 
 function backtrace_slot_location(param) {
   if (param.tag) {
-    return undefined;
+    return ;
   } else {
-    return /* record */[
-            /* filename */param[1],
-            /* line_number */param[2],
-            /* start_char */param[3],
-            /* end_char */param[4]
-          ];
+    return {
+            filename: param[/* filename */1],
+            line_number: param[/* line_number */2],
+            start_char: param[/* start_char */3],
+            end_char: param[/* end_char */4]
+          };
   }
 }
 
@@ -437,26 +450,20 @@ function backtrace_slots(raw_backtrace) {
     if (exists_usable(backtrace.length - 1 | 0)) {
       return backtrace;
     } else {
-      return undefined;
+      return ;
     }
   }
   
 }
 
-function raw_backtrace_length(bckt) {
-  return bckt.length;
-}
-
-var get_raw_backtrace_slot = Caml_array.caml_array_get;
-
 function get_backtrace(param) {
-  return backtrace_to_string(convert_raw_backtrace(/* () */0));
+  return raw_backtrace_to_string(/* () */0);
 }
 
 function register_printer(fn) {
-  printers[0] = /* :: */[
+  printers.contents = /* :: */[
     fn,
-    printers[0]
+    printers.contents
   ];
   return /* () */0;
 }
@@ -479,10 +486,12 @@ function exn_slot_name(x) {
   return slot[0];
 }
 
-var uncaught_exception_handler = /* record */[/* contents */undefined];
+var uncaught_exception_handler = {
+  contents: undefined
+};
 
 function set_uncaught_exception_handler(fn) {
-  uncaught_exception_handler[0] = fn;
+  uncaught_exception_handler.contents = fn;
   return /* () */0;
 }
 
@@ -502,11 +511,24 @@ function get_callstack(prim) {
   return /* () */0;
 }
 
-var Slot = [
-  backtrace_slot_is_raise,
-  backtrace_slot_location,
-  format_backtrace_slot
-];
+var Slot = {
+  is_raise: backtrace_slot_is_raise,
+  is_inline: backtrace_slot_is_inline,
+  $$location: backtrace_slot_location,
+  format: format_backtrace_slot
+};
+
+function raw_backtrace_length(prim) {
+  return Caml_external_polyfill.resolve("caml_raw_backtrace_length")(prim);
+}
+
+function get_raw_backtrace_slot(prim, prim$1) {
+  return Caml_external_polyfill.resolve("caml_raw_backtrace_slot")(prim, prim$1);
+}
+
+function get_raw_backtrace_next_slot(prim) {
+  return Caml_external_polyfill.resolve("caml_raw_backtrace_next_slot")(prim);
+}
 
 exports.to_string = to_string;
 exports.print = print;
@@ -526,6 +548,7 @@ exports.Slot = Slot;
 exports.raw_backtrace_length = raw_backtrace_length;
 exports.get_raw_backtrace_slot = get_raw_backtrace_slot;
 exports.convert_raw_backtrace_slot = convert_raw_backtrace_slot;
+exports.get_raw_backtrace_next_slot = get_raw_backtrace_next_slot;
 exports.exn_slot_id = exn_slot_id;
 exports.exn_slot_name = exn_slot_name;
 /* No side effect */

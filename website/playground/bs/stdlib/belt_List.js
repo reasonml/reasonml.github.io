@@ -44,7 +44,7 @@ function add(xs, x) {
 
 function get(x, n) {
   if (n < 0) {
-    return undefined;
+    return ;
   } else {
     var _x = x;
     var _n = n;
@@ -60,7 +60,7 @@ function get(x, n) {
           continue ;
         }
       } else {
-        return undefined;
+        return ;
       }
     };
   }
@@ -69,25 +69,24 @@ function get(x, n) {
 function getExn(x, n) {
   if (n < 0) {
     throw new Error("getExn");
-  } else {
-    var _x = x;
-    var _n = n;
-    while(true) {
-      var n$1 = _n;
-      var x$1 = _x;
-      if (x$1) {
-        if (n$1 === 0) {
-          return x$1[0];
-        } else {
-          _n = n$1 - 1 | 0;
-          _x = x$1[1];
-          continue ;
-        }
-      } else {
-        throw new Error("getExn");
-      }
-    };
   }
+  var _x = x;
+  var _n = n;
+  while(true) {
+    var n$1 = _n;
+    var x$1 = _x;
+    if (x$1) {
+      if (n$1 === 0) {
+        return x$1[0];
+      } else {
+        _n = n$1 - 1 | 0;
+        _x = x$1[1];
+        continue ;
+      }
+    } else {
+      throw new Error("getExn");
+    }
+  };
 }
 
 function partitionAux(p, _cell, _precX, _precY) {
@@ -430,14 +429,14 @@ function splitAtAux(_n, _cell, _prec) {
       _n = n - 1 | 0;
       continue ;
     } else {
-      return undefined;
+      return ;
     }
   };
 }
 
 function take(lst, n) {
   if (n < 0) {
-    return undefined;
+    return ;
   } else if (n === 0) {
     return /* [] */0;
   } else if (lst) {
@@ -449,16 +448,16 @@ function take(lst, n) {
     if (has) {
       return cell;
     } else {
-      return undefined;
+      return ;
     }
   } else {
-    return undefined;
+    return ;
   }
 }
 
 function drop(lst, n) {
   if (n < 0) {
-    return undefined;
+    return ;
   } else {
     var _l = lst;
     var _n = n;
@@ -472,7 +471,7 @@ function drop(lst, n) {
         _l = l[1];
         continue ;
       } else {
-        return undefined;
+        return ;
       }
     };
   }
@@ -480,7 +479,7 @@ function drop(lst, n) {
 
 function splitAt(lst, n) {
   if (n < 0) {
-    return undefined;
+    return ;
   } else if (n === 0) {
     return /* tuple */[
             /* [] */0,
@@ -498,10 +497,10 @@ function splitAt(lst, n) {
               rest
             ];
     } else {
-      return undefined;
+      return ;
     }
   } else {
-    return undefined;
+    return ;
   }
 }
 
@@ -1161,7 +1160,7 @@ function getAssocU(_xs, x, eq) {
         continue ;
       }
     } else {
-      return undefined;
+      return ;
     }
   };
 }
@@ -1284,7 +1283,7 @@ function getByU(_xs, p) {
         continue ;
       }
     } else {
-      return undefined;
+      return ;
     }
   };
 }

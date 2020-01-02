@@ -6,7 +6,7 @@ var Caml_md5 = require("./caml_md5.js");
 var Caml_bytes = require("./caml_bytes.js");
 var Pervasives = require("./pervasives.js");
 var Caml_string = require("./caml_string.js");
-var Caml_missing_polyfill = require("./caml_missing_polyfill.js");
+var Caml_external_polyfill = require("./caml_external_polyfill.js");
 var Caml_builtin_exceptions = require("./caml_builtin_exceptions.js");
 
 function string(str) {
@@ -23,9 +23,8 @@ function substring(str, ofs, len) {
           Caml_builtin_exceptions.invalid_argument,
           "Digest.substring"
         ];
-  } else {
-    return Caml_md5.caml_md5_string(str, ofs, len);
   }
+  return Caml_md5.caml_md5_string(str, ofs, len);
 }
 
 function subbytes(b, ofs, len) {
@@ -33,22 +32,17 @@ function subbytes(b, ofs, len) {
 }
 
 function file(filename) {
-  Pervasives.open_in_bin(filename);
-  var exit = 0;
+  var ic = Pervasives.open_in_bin(filename);
   var d;
   try {
-    d = Caml_missing_polyfill.not_implemented("caml_md5_chan");
-    exit = 1;
+    d = Caml_external_polyfill.resolve("caml_md5_chan")(ic, -1);
   }
   catch (e){
-    Caml_missing_polyfill.not_implemented("caml_ml_close_channel");
+    Caml_external_polyfill.resolve("caml_ml_close_channel")(ic);
     throw e;
   }
-  if (exit === 1) {
-    Caml_missing_polyfill.not_implemented("caml_ml_close_channel");
-    return d;
-  }
-  
+  Caml_external_polyfill.resolve("caml_ml_close_channel")(ic);
+  return d;
 }
 
 var output = Pervasives.output_string;
@@ -64,6 +58,12 @@ function char_hex(n) {
 }
 
 function to_hex(d) {
+  if (d.length !== 16) {
+    throw [
+          Caml_builtin_exceptions.invalid_argument,
+          "Digest.to_hex"
+        ];
+  }
   var result = Caml_bytes.caml_create_bytes(32);
   for(var i = 0; i <= 15; ++i){
     var x = Caml_string.get(d, i);
@@ -88,23 +88,24 @@ function from_hex(s) {
                 Caml_builtin_exceptions.invalid_argument,
                 "Digest.from_hex"
               ];
-        } else {
-          return (c - /* "a" */97 | 0) + 10 | 0;
         }
-      } else if (c >= 71) {
+        return (c - /* "a" */97 | 0) + 10 | 0;
+      } else {
+        if (c >= 71) {
+          throw [
+                Caml_builtin_exceptions.invalid_argument,
+                "Digest.from_hex"
+              ];
+        }
+        return (c - /* "A" */65 | 0) + 10 | 0;
+      }
+    } else {
+      if (c > 57 || c < 48) {
         throw [
               Caml_builtin_exceptions.invalid_argument,
               "Digest.from_hex"
             ];
-      } else {
-        return (c - /* "A" */65 | 0) + 10 | 0;
       }
-    } else if (c > 57 || c < 48) {
-      throw [
-            Caml_builtin_exceptions.invalid_argument,
-            "Digest.from_hex"
-          ];
-    } else {
       return c - /* "0" */48 | 0;
     }
   };
@@ -120,7 +121,10 @@ function from_hex(s) {
 
 var compare = $$String.compare;
 
+var equal = $$String.equal;
+
 exports.compare = compare;
+exports.equal = equal;
 exports.string = string;
 exports.bytes = bytes;
 exports.substring = substring;

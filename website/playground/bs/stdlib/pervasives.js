@@ -7,7 +7,8 @@ var Caml_bytes = require("./caml_bytes.js");
 var Caml_format = require("./caml_format.js");
 var Caml_string = require("./caml_string.js");
 var Caml_exceptions = require("./caml_exceptions.js");
-var Caml_missing_polyfill = require("./caml_missing_polyfill.js");
+var Caml_js_exceptions = require("./caml_js_exceptions.js");
+var Caml_external_polyfill = require("./caml_external_polyfill.js");
 var Caml_builtin_exceptions = require("./caml_builtin_exceptions.js");
 var CamlinternalFormatBasics = require("./camlinternalFormatBasics.js");
 
@@ -43,7 +44,7 @@ var min_int = -2147483648;
 
 function classify_float(x) {
   if (isFinite(x)) {
-    if (Math.abs(x) >= 2.2250738585072014e-308) {
+    if (Math.abs(x) >= 2.22507385850720138e-308) {
       return /* FP_normal */0;
     } else if (x !== 0) {
       return /* FP_subnormal */1;
@@ -63,9 +64,8 @@ function char_of_int(n) {
           Caml_builtin_exceptions.invalid_argument,
           "char_of_int"
         ];
-  } else {
-    return n;
   }
+  return n;
 }
 
 function string_of_bool(b) {
@@ -78,15 +78,40 @@ function string_of_bool(b) {
 
 function bool_of_string(param) {
   switch (param) {
-    case "false" : 
+    case "false" :
         return false;
-    case "true" : 
+    case "true" :
         return true;
     default:
       throw [
             Caml_builtin_exceptions.invalid_argument,
             "bool_of_string"
           ];
+  }
+}
+
+function bool_of_string_opt(param) {
+  switch (param) {
+    case "false" :
+        return false;
+    case "true" :
+        return true;
+    default:
+      return ;
+  }
+}
+
+function int_of_string_opt(s) {
+  try {
+    return Caml_format.caml_int_of_string(s);
+  }
+  catch (raw_exn){
+    var exn = Caml_js_exceptions.internalToOCamlException(raw_exn);
+    if (exn[0] === Caml_builtin_exceptions.failure) {
+      return ;
+    } else {
+      throw exn;
+    }
   }
 }
 
@@ -120,6 +145,20 @@ function string_of_float(f) {
   return valid_float_lexem(Caml_format.caml_format_float("%.12g", f));
 }
 
+function float_of_string_opt(s) {
+  try {
+    return Caml_format.caml_float_of_string(s);
+  }
+  catch (raw_exn){
+    var exn = Caml_js_exceptions.internalToOCamlException(raw_exn);
+    if (exn[0] === Caml_builtin_exceptions.failure) {
+      return ;
+    } else {
+      throw exn;
+    }
+  }
+}
+
 function $at(l1, l2) {
   if (l1) {
     return /* :: */[
@@ -138,7 +177,9 @@ var stdout = Caml_io.stdout;
 var stderr = Caml_io.stderr;
 
 function open_out_gen(mode, perm, name) {
-  return Caml_missing_polyfill.not_implemented("caml_ml_open_descriptor_out");
+  var c = Caml_external_polyfill.resolve("caml_ml_open_descriptor_out")(Caml_external_polyfill.resolve("caml_sys_open")(name, mode, perm));
+  Caml_external_polyfill.resolve("caml_ml_set_channel_name")(c, name);
+  return c;
 }
 
 function open_out(name) {
@@ -181,7 +222,11 @@ function flush_all(param) {
       try {
         Caml_io.caml_ml_flush(param$1[0]);
       }
-      catch (exn){
+      catch (raw_exn){
+        var exn = Caml_js_exceptions.internalToOCamlException(raw_exn);
+        if (exn[0] !== Caml_builtin_exceptions.sys_error) {
+          throw exn;
+        }
         
       }
       _param = param$1[1];
@@ -193,7 +238,7 @@ function flush_all(param) {
 }
 
 function output_bytes(oc, s) {
-  return Caml_io.caml_ml_output(oc, s, 0, s.length);
+  return Caml_external_polyfill.resolve("caml_ml_output_bytes")(oc, s, 0, s.length);
 }
 
 function output_string(oc, s) {
@@ -206,9 +251,8 @@ function output(oc, s, ofs, len) {
           Caml_builtin_exceptions.invalid_argument,
           "output"
         ];
-  } else {
-    return Caml_io.caml_ml_output(oc, s, ofs, len);
   }
+  return Caml_external_polyfill.resolve("caml_ml_output_bytes")(oc, s, ofs, len);
 }
 
 function output_substring(oc, s, ofs, len) {
@@ -217,18 +261,17 @@ function output_substring(oc, s, ofs, len) {
           Caml_builtin_exceptions.invalid_argument,
           "output_substring"
         ];
-  } else {
-    return Caml_io.caml_ml_output(oc, s, ofs, len);
   }
+  return Caml_io.caml_ml_output(oc, s, ofs, len);
 }
 
 function output_value(chan, v) {
-  return Caml_missing_polyfill.not_implemented("caml_output_value");
+  return Caml_external_polyfill.resolve("caml_output_value")(chan, v, /* [] */0);
 }
 
 function close_out(oc) {
   Caml_io.caml_ml_flush(oc);
-  return Caml_missing_polyfill.not_implemented("caml_ml_close_channel");
+  return Caml_external_polyfill.resolve("caml_ml_close_channel")(oc);
 }
 
 function close_out_noerr(oc) {
@@ -239,7 +282,7 @@ function close_out_noerr(oc) {
     
   }
   try {
-    return Caml_missing_polyfill.not_implemented("caml_ml_close_channel");
+    return Caml_external_polyfill.resolve("caml_ml_close_channel")(oc);
   }
   catch (exn$1){
     return /* () */0;
@@ -247,7 +290,9 @@ function close_out_noerr(oc) {
 }
 
 function open_in_gen(mode, perm, name) {
-  return Caml_missing_polyfill.not_implemented("caml_ml_open_descriptor_in");
+  var c = Caml_external_polyfill.resolve("caml_ml_open_descriptor_in")(Caml_external_polyfill.resolve("caml_sys_open")(name, mode, perm));
+  Caml_external_polyfill.resolve("caml_ml_set_channel_name")(c, name);
+  return c;
 }
 
 function open_in(name) {
@@ -276,9 +321,8 @@ function input(ic, s, ofs, len) {
           Caml_builtin_exceptions.invalid_argument,
           "input"
         ];
-  } else {
-    return Caml_missing_polyfill.not_implemented("caml_ml_input");
   }
+  return Caml_external_polyfill.resolve("caml_ml_input")(ic, s, ofs, len);
 }
 
 function unsafe_really_input(ic, s, _ofs, _len) {
@@ -288,14 +332,13 @@ function unsafe_really_input(ic, s, _ofs, _len) {
     if (len <= 0) {
       return /* () */0;
     } else {
-      var r = Caml_missing_polyfill.not_implemented("caml_ml_input");
+      var r = Caml_external_polyfill.resolve("caml_ml_input")(ic, s, ofs, len);
       if (r === 0) {
         throw Caml_builtin_exceptions.end_of_file;
-      } else {
-        _len = len - r | 0;
-        _ofs = ofs + r | 0;
-        continue ;
       }
+      _len = len - r | 0;
+      _ofs = ofs + r | 0;
+      continue ;
     }
   };
 }
@@ -306,9 +349,8 @@ function really_input(ic, s, ofs, len) {
           Caml_builtin_exceptions.invalid_argument,
           "really_input"
         ];
-  } else {
-    return unsafe_really_input(ic, s, ofs, len);
   }
+  return unsafe_really_input(ic, s, ofs, len);
 }
 
 function really_input_string(ic, len) {
@@ -338,7 +380,7 @@ function input_line(chan) {
     while(true) {
       var len = _len;
       var accu = _accu;
-      var n = Caml_missing_polyfill.not_implemented("caml_ml_input_scan_line");
+      var n = Caml_external_polyfill.resolve("caml_ml_input_scan_line")(chan);
       if (n === 0) {
         if (accu) {
           return build_result(Caml_bytes.caml_create_bytes(len), len, accu);
@@ -347,8 +389,8 @@ function input_line(chan) {
         }
       } else if (n > 0) {
         var res = Caml_bytes.caml_create_bytes(n - 1 | 0);
-        Caml_missing_polyfill.not_implemented("caml_ml_input");
-        Caml_missing_polyfill.not_implemented("caml_ml_input_char");
+        Caml_external_polyfill.resolve("caml_ml_input")(chan, res, 0, n - 1 | 0);
+        Caml_external_polyfill.resolve("caml_ml_input_char")(chan);
         if (accu) {
           var len$1 = (len + n | 0) - 1 | 0;
           return build_result(Caml_bytes.caml_create_bytes(len$1), len$1, /* :: */[
@@ -360,7 +402,7 @@ function input_line(chan) {
         }
       } else {
         var beg = Caml_bytes.caml_create_bytes(-n | 0);
-        Caml_missing_polyfill.not_implemented("caml_ml_input");
+        Caml_external_polyfill.resolve("caml_ml_input")(chan, beg, 0, -n | 0);
         _len = len - n | 0;
         _accu = /* :: */[
           beg,
@@ -375,7 +417,7 @@ function input_line(chan) {
 
 function close_in_noerr(ic) {
   try {
-    return Caml_missing_polyfill.not_implemented("caml_ml_close_channel");
+    return Caml_external_polyfill.resolve("caml_ml_close_channel")(ic);
   }
   catch (exn){
     return /* () */0;
@@ -441,8 +483,16 @@ function read_int(param) {
   return Caml_format.caml_int_of_string((Caml_io.caml_ml_flush(stdout), input_line(stdin)));
 }
 
+function read_int_opt(param) {
+  return int_of_string_opt((Caml_io.caml_ml_flush(stdout), input_line(stdin)));
+}
+
 function read_float(param) {
   return Caml_format.caml_float_of_string((Caml_io.caml_ml_flush(stdout), input_line(stdin)));
+}
+
+function read_float_opt(param) {
+  return float_of_string_opt((Caml_io.caml_ml_flush(stdout), input_line(stdin)));
 }
 
 function string_of_format(param) {
@@ -456,11 +506,13 @@ function $caret$caret(param, param$1) {
         ];
 }
 
-var exit_function = /* record */[/* contents */flush_all];
+var exit_function = {
+  contents: flush_all
+};
 
 function at_exit(f) {
-  var g = exit_function[0];
-  exit_function[0] = (function (param) {
+  var g = exit_function.contents;
+  exit_function.contents = (function (param) {
       Curry._1(f, /* () */0);
       return Curry._1(g, /* () */0);
     });
@@ -468,7 +520,7 @@ function at_exit(f) {
 }
 
 function do_at_exit(param) {
-  return Curry._1(exit_function[0], /* () */0);
+  return Curry._1(exit_function.contents, /* () */0);
 }
 
 function exit(retcode) {
@@ -478,7 +530,15 @@ function exit(retcode) {
 
 var max_int = 2147483647;
 
-var epsilon_float = 2.220446049250313e-16;
+var infinity = Infinity;
+
+var neg_infinity = -Infinity;
+
+var max_float = 1.79769313486231571e+308;
+
+var min_float = 2.22507385850720138e-308;
+
+var epsilon_float = 2.22044604925031308e-16;
 
 var flush = Caml_io.caml_ml_flush;
 
@@ -487,93 +547,93 @@ var output_char = Caml_io.caml_ml_output_char;
 var output_byte = Caml_io.caml_ml_output_char;
 
 function output_binary_int(prim, prim$1) {
-  return Caml_missing_polyfill.not_implemented("caml_ml_output_int");
+  return Caml_external_polyfill.resolve("caml_ml_output_int")(prim, prim$1);
 }
 
 function seek_out(prim, prim$1) {
-  return Caml_missing_polyfill.not_implemented("caml_ml_seek_out");
+  return Caml_external_polyfill.resolve("caml_ml_seek_out")(prim, prim$1);
 }
 
 function pos_out(prim) {
-  return Caml_missing_polyfill.not_implemented("caml_ml_pos_out");
+  return Caml_external_polyfill.resolve("caml_ml_pos_out")(prim);
 }
 
 function out_channel_length(prim) {
-  return Caml_missing_polyfill.not_implemented("caml_ml_channel_size");
+  return Caml_external_polyfill.resolve("caml_ml_channel_size")(prim);
 }
 
 function set_binary_mode_out(prim, prim$1) {
-  return Caml_missing_polyfill.not_implemented("caml_ml_set_binary_mode");
+  return Caml_external_polyfill.resolve("caml_ml_set_binary_mode")(prim, prim$1);
 }
 
 function input_char(prim) {
-  return Caml_missing_polyfill.not_implemented("caml_ml_input_char");
+  return Caml_external_polyfill.resolve("caml_ml_input_char")(prim);
 }
 
 function input_byte(prim) {
-  return Caml_missing_polyfill.not_implemented("caml_ml_input_char");
+  return Caml_external_polyfill.resolve("caml_ml_input_char")(prim);
 }
 
 function input_binary_int(prim) {
-  return Caml_missing_polyfill.not_implemented("caml_ml_input_int");
+  return Caml_external_polyfill.resolve("caml_ml_input_int")(prim);
 }
 
 function input_value(prim) {
-  return Caml_missing_polyfill.not_implemented("caml_input_value");
+  return Caml_external_polyfill.resolve("caml_input_value")(prim);
 }
 
 function seek_in(prim, prim$1) {
-  return Caml_missing_polyfill.not_implemented("caml_ml_seek_in");
+  return Caml_external_polyfill.resolve("caml_ml_seek_in")(prim, prim$1);
 }
 
 function pos_in(prim) {
-  return Caml_missing_polyfill.not_implemented("caml_ml_pos_in");
+  return Caml_external_polyfill.resolve("caml_ml_pos_in")(prim);
 }
 
 function in_channel_length(prim) {
-  return Caml_missing_polyfill.not_implemented("caml_ml_channel_size");
+  return Caml_external_polyfill.resolve("caml_ml_channel_size")(prim);
 }
 
 function close_in(prim) {
-  return Caml_missing_polyfill.not_implemented("caml_ml_close_channel");
+  return Caml_external_polyfill.resolve("caml_ml_close_channel")(prim);
 }
 
 function set_binary_mode_in(prim, prim$1) {
-  return Caml_missing_polyfill.not_implemented("caml_ml_set_binary_mode");
+  return Caml_external_polyfill.resolve("caml_ml_set_binary_mode")(prim, prim$1);
 }
 
-function LargeFile_000(prim, prim$1) {
-  return Caml_missing_polyfill.not_implemented("caml_ml_seek_out_64");
+function LargeFile_seek_out(prim, prim$1) {
+  return Caml_external_polyfill.resolve("caml_ml_seek_out_64")(prim, prim$1);
 }
 
-function LargeFile_001(prim) {
-  return Caml_missing_polyfill.not_implemented("caml_ml_pos_out_64");
+function LargeFile_pos_out(prim) {
+  return Caml_external_polyfill.resolve("caml_ml_pos_out_64")(prim);
 }
 
-function LargeFile_002(prim) {
-  return Caml_missing_polyfill.not_implemented("caml_ml_channel_size_64");
+function LargeFile_out_channel_length(prim) {
+  return Caml_external_polyfill.resolve("caml_ml_channel_size_64")(prim);
 }
 
-function LargeFile_003(prim, prim$1) {
-  return Caml_missing_polyfill.not_implemented("caml_ml_seek_in_64");
+function LargeFile_seek_in(prim, prim$1) {
+  return Caml_external_polyfill.resolve("caml_ml_seek_in_64")(prim, prim$1);
 }
 
-function LargeFile_004(prim) {
-  return Caml_missing_polyfill.not_implemented("caml_ml_pos_in_64");
+function LargeFile_pos_in(prim) {
+  return Caml_external_polyfill.resolve("caml_ml_pos_in_64")(prim);
 }
 
-function LargeFile_005(prim) {
-  return Caml_missing_polyfill.not_implemented("caml_ml_channel_size_64");
+function LargeFile_in_channel_length(prim) {
+  return Caml_external_polyfill.resolve("caml_ml_channel_size_64")(prim);
 }
 
-var LargeFile = [
-  LargeFile_000,
-  LargeFile_001,
-  LargeFile_002,
-  LargeFile_003,
-  LargeFile_004,
-  LargeFile_005
-];
+var LargeFile = {
+  seek_out: LargeFile_seek_out,
+  pos_out: LargeFile_pos_out,
+  out_channel_length: LargeFile_out_channel_length,
+  seek_in: LargeFile_seek_in,
+  pos_in: LargeFile_pos_in,
+  in_channel_length: LargeFile_in_channel_length
+};
 
 exports.invalid_arg = invalid_arg;
 exports.failwith = failwith;
@@ -582,12 +642,19 @@ exports.abs = abs;
 exports.max_int = max_int;
 exports.min_int = min_int;
 exports.lnot = lnot;
+exports.infinity = infinity;
+exports.neg_infinity = neg_infinity;
+exports.max_float = max_float;
+exports.min_float = min_float;
 exports.epsilon_float = epsilon_float;
 exports.classify_float = classify_float;
 exports.char_of_int = char_of_int;
 exports.string_of_bool = string_of_bool;
 exports.bool_of_string = bool_of_string;
+exports.bool_of_string_opt = bool_of_string_opt;
+exports.int_of_string_opt = int_of_string_opt;
 exports.string_of_float = string_of_float;
+exports.float_of_string_opt = float_of_string_opt;
 exports.$at = $at;
 exports.stdin = stdin;
 exports.stdout = stdout;
@@ -606,7 +673,9 @@ exports.prerr_float = prerr_float;
 exports.prerr_newline = prerr_newline;
 exports.read_line = read_line;
 exports.read_int = read_int;
+exports.read_int_opt = read_int_opt;
 exports.read_float = read_float;
+exports.read_float_opt = read_float_opt;
 exports.open_out = open_out;
 exports.open_out_bin = open_out_bin;
 exports.open_out_gen = open_out_gen;

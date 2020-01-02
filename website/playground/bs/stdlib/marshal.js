@@ -1,7 +1,7 @@
 'use strict';
 
 var Caml_bytes = require("./caml_bytes.js");
-var Caml_missing_polyfill = require("./caml_missing_polyfill.js");
+var Caml_external_polyfill = require("./caml_external_polyfill.js");
 var Caml_builtin_exceptions = require("./caml_builtin_exceptions.js");
 
 function to_buffer(buff, ofs, len, v, flags) {
@@ -10,9 +10,8 @@ function to_buffer(buff, ofs, len, v, flags) {
           Caml_builtin_exceptions.invalid_argument,
           "Marshal.to_buffer: substring out of bounds"
         ];
-  } else {
-    return Caml_missing_polyfill.not_implemented("caml_output_value_to_buffer");
   }
+  return Caml_external_polyfill.resolve("caml_output_value_to_buffer")(buff, ofs, len, v, flags);
 }
 
 function data_size(buff, ofs) {
@@ -21,9 +20,8 @@ function data_size(buff, ofs) {
           Caml_builtin_exceptions.invalid_argument,
           "Marshal.data_size"
         ];
-  } else {
-    return Caml_missing_polyfill.not_implemented("caml_marshal_data_size");
   }
+  return Caml_external_polyfill.resolve("caml_marshal_data_size")(buff, ofs);
 }
 
 function total_size(buff, ofs) {
@@ -36,17 +34,15 @@ function from_bytes(buff, ofs) {
           Caml_builtin_exceptions.invalid_argument,
           "Marshal.from_bytes"
         ];
-  } else {
-    var len = Caml_missing_polyfill.not_implemented("caml_marshal_data_size");
-    if (ofs > (buff.length - (20 + len | 0) | 0)) {
-      throw [
-            Caml_builtin_exceptions.invalid_argument,
-            "Marshal.from_bytes"
-          ];
-    } else {
-      return Caml_missing_polyfill.not_implemented("caml_input_value_from_string");
-    }
   }
+  var len = Caml_external_polyfill.resolve("caml_marshal_data_size")(buff, ofs);
+  if (ofs > (buff.length - (20 + len | 0) | 0)) {
+    throw [
+          Caml_builtin_exceptions.invalid_argument,
+          "Marshal.from_bytes"
+        ];
+  }
+  return Caml_external_polyfill.resolve("caml_input_value_from_string")(buff, ofs);
 }
 
 function from_string(buff, ofs) {
@@ -54,11 +50,11 @@ function from_string(buff, ofs) {
 }
 
 function to_channel(prim, prim$1, prim$2) {
-  return Caml_missing_polyfill.not_implemented("caml_output_value");
+  return Caml_external_polyfill.resolve("caml_output_value")(prim, prim$1, prim$2);
 }
 
 function from_channel(prim) {
-  return Caml_missing_polyfill.not_implemented("caml_input_value");
+  return Caml_external_polyfill.resolve("caml_input_value")(prim);
 }
 
 var header_size = 20;

@@ -45,29 +45,14 @@ You'll need to have this repository and the [BuckleScript](https://github.com/Bu
 
 1. Inside the BuckleScript repository, follow the [Setup](https://github.com/BuckleScript/bucklescript/blob/master/CONTRIBUTING.md#setup) guide.
 
-2. Navigate to the `jscomp` directory in the BuckleScript repository.
+2. Follow the [Contributing to the BS Playground Bundle](https://github.com/BuckleScript/bucklescript/blob/7.0.1/CONTRIBUTING.md#contributing-to-the-bs-playground-bundle) guide.
 
-3. Install or switch to `js_of_ocaml` 3.0 using:
+3. Run `BS_PLAYGROUND=../../reasonml.github.io/website/playground/bs node scripts/repl.js`
 
-```sh
-opam switch 4.02.3
-eval `opam config env`
-opam install js_of_ocaml.3.0
-which js_of_ocaml # use this absolute path for the task above or symlink this into your $PATH, maybe /usr/local/bin or something
-# switch back now
-opam switch 4.02.3+buckle-master
-opam install ocp-ocamlres
-eval `opam config env`
-```
+4. Inside the `reasonml.github.io` repository, run `cd website && yarn`
 
-4. Inside `jscomp`, either modify `repl.js`'s occurrences of `js_of_ocaml` to an absolute path that points to it or symlink `js_of_ocaml` into your `$PATH`.
+5. Then run, `yarn prepare` in the same place.
 
-5. Run `BS_PLAYGROUND=../../reasonml.github.io/website/playground/bs/ node repl.js`
-
-6. Inside the `reasonml.github.io` repository, run `cd website && yarn`
-
-7. Then run, `yarn prepare` in the same place.
-
-8. Finally, run `node setupSomeArtifacts.js`
+6. Finally, run `node setupSomeArtifacts.js`
 
 If this command fails, ping @chenglou in Discord.

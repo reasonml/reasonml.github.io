@@ -155,7 +155,7 @@ function update(t, x, f) {
 
 function make(id) {
   return {
-          cmp: id[/* cmp */0],
+          cmp: id.cmp,
           data: Belt_internalAVLtree.empty
         };
 }
@@ -317,7 +317,7 @@ function has(m, x) {
 }
 
 function fromArray(data, id) {
-  var cmp = id[/* cmp */0];
+  var cmp = id.cmp;
   return {
           cmp: cmp,
           data: Belt_internalAVLtree.fromArray(data, cmp)
@@ -355,9 +355,9 @@ function mergeMany(d, xs) {
   }
 }
 
-var Int = 0;
+var Int = /* alias */0;
 
-var $$String = 0;
+var $$String = /* alias */0;
 
 exports.Int = Int;
 exports.$$String = $$String;

@@ -1,5 +1,6 @@
 'use strict';
 
+var Sys = require("./sys.js");
 var $$Array = require("./array.js");
 var Curry = require("./curry.js");
 var Caml_obj = require("./caml_obj.js");
@@ -17,37 +18,36 @@ function fill(ar, ofs, len, x) {
           Caml_builtin_exceptions.invalid_argument,
           "Weak.fill"
         ];
-  } else {
-    for(var i = ofs ,i_finish = (ofs + len | 0) - 1 | 0; i <= i_finish; ++i){
-      Caml_weak.caml_weak_set(ar, i, x);
-    }
-    return /* () */0;
   }
+  for(var i = ofs ,i_finish = (ofs + len | 0) - 1 | 0; i <= i_finish; ++i){
+    Caml_weak.caml_weak_set(ar, i, x);
+  }
+  return /* () */0;
 }
 
 function Make(H) {
   var emptybucket = Caml_weak.caml_weak_create(0);
   var get_index = function (t, h) {
-    return (h & Pervasives.max_int) % t[/* table */0].length;
+    return (h & Pervasives.max_int) % t.table.length;
   };
   var create = function (sz) {
     var sz$1 = sz < 7 ? 7 : sz;
-    var sz$2 = sz$1 > 2147483647 ? 2147483647 : sz$1;
-    return /* record */[
-            /* table */Caml_array.caml_make_vect(sz$2, emptybucket),
-            /* hashes */Caml_array.caml_make_vect(sz$2, /* array */[]),
-            /* limit */7,
-            /* oversize */0,
-            /* rover */0
-          ];
+    var sz$2 = sz$1 > Sys.max_array_length ? Sys.max_array_length : sz$1;
+    return {
+            table: Caml_array.caml_make_vect(sz$2, emptybucket),
+            hashes: Caml_array.caml_make_vect(sz$2, /* array */[]),
+            limit: 7,
+            oversize: 0,
+            rover: 0
+          };
   };
   var clear = function (t) {
-    for(var i = 0 ,i_finish = t[/* table */0].length - 1 | 0; i <= i_finish; ++i){
-      Caml_array.caml_array_set(t[/* table */0], i, emptybucket);
-      Caml_array.caml_array_set(t[/* hashes */1], i, /* array */[]);
+    for(var i = 0 ,i_finish = t.table.length - 1 | 0; i <= i_finish; ++i){
+      Caml_array.caml_array_set(t.table, i, emptybucket);
+      Caml_array.caml_array_set(t.hashes, i, /* array */[]);
     }
-    t[/* limit */2] = 7;
-    t[/* oversize */3] = 0;
+    t.limit = 7;
+    t.oversize = 0;
     return /* () */0;
   };
   var fold = function (f, t, init) {
@@ -72,7 +72,7 @@ function Make(H) {
                       }
                     }
                   };
-                }), t[/* table */0], init);
+                }), t.table, init);
   };
   var iter = function (f, t) {
     return $$Array.iter((function (param) {
@@ -94,7 +94,7 @@ function Make(H) {
                       }
                     }
                   };
-                }), t[/* table */0]);
+                }), t.table);
   };
   var iter_weak = function (f, t) {
     return $$Array.iteri((function (param, param$1) {
@@ -108,7 +108,7 @@ function Make(H) {
                     } else {
                       var match = Caml_weak.caml_weak_check(b, i);
                       if (match) {
-                        Curry._3(f, b, Caml_array.caml_array_get(t[/* hashes */1], j), i);
+                        Curry._3(f, b, Caml_array.caml_array_get(t.hashes, j), i);
                         _i = i + 1 | 0;
                         continue ;
                       } else {
@@ -117,7 +117,7 @@ function Make(H) {
                       }
                     }
                   };
-                }), t[/* table */0]);
+                }), t.table);
   };
   var count_bucket = function (_i, b, _accu) {
     while(true) {
@@ -137,17 +137,17 @@ function Make(H) {
   var count = function (t) {
     return $$Array.fold_right((function (param, param$1) {
                   return count_bucket(0, param, param$1);
-                }), t[/* table */0], 0);
+                }), t.table, 0);
   };
   var next_sz = function (n) {
-    return Caml_primitive.caml_int_min((Caml_int32.imul(3, n) / 2 | 0) + 3 | 0, 2147483647);
+    return Caml_primitive.caml_int_min((Caml_int32.imul(3, n) / 2 | 0) + 3 | 0, Sys.max_array_length);
   };
   var prev_sz = function (n) {
     return (((n - 3 | 0) << 1) + 2 | 0) / 3 | 0;
   };
   var test_shrink_bucket = function (t) {
-    var bucket = Caml_array.caml_array_get(t[/* table */0], t[/* rover */4]);
-    var hbucket = Caml_array.caml_array_get(t[/* hashes */1], t[/* rover */4]);
+    var bucket = Caml_array.caml_array_get(t.table, t.rover);
+    var hbucket = Caml_array.caml_array_get(t.hashes, t.rover);
     var len = bucket.length;
     var prev_len = prev_sz(len);
     var live = count_bucket(0, bucket, 0);
@@ -177,29 +177,29 @@ function Make(H) {
       };
       loop(0, bucket.length - 1 | 0);
       if (prev_len === 0) {
-        Caml_array.caml_array_set(t[/* table */0], t[/* rover */4], emptybucket);
-        Caml_array.caml_array_set(t[/* hashes */1], t[/* rover */4], /* array */[]);
+        Caml_array.caml_array_set(t.table, t.rover, emptybucket);
+        Caml_array.caml_array_set(t.hashes, t.rover, /* array */[]);
       } else {
-        Caml_obj.caml_obj_truncate(bucket, prev_len + 1 | 0);
+        Caml_obj.caml_obj_truncate(bucket, prev_len + 0 | 0);
         Caml_obj.caml_obj_truncate(hbucket, prev_len);
       }
-      if (len > t[/* limit */2] && prev_len <= t[/* limit */2]) {
-        t[/* oversize */3] = t[/* oversize */3] - 1 | 0;
+      if (len > t.limit && prev_len <= t.limit) {
+        t.oversize = t.oversize - 1 | 0;
       }
       
     }
-    t[/* rover */4] = (t[/* rover */4] + 1 | 0) % t[/* table */0].length;
+    t.rover = (t.rover + 1 | 0) % t.table.length;
     return /* () */0;
   };
   var add_aux = function (t, setter, d, h, index) {
-    var bucket = Caml_array.caml_array_get(t[/* table */0], index);
-    var hashes = Caml_array.caml_array_get(t[/* hashes */1], index);
+    var bucket = Caml_array.caml_array_get(t.table, index);
+    var hashes = Caml_array.caml_array_get(t.hashes, index);
     var sz = bucket.length;
     var _i = 0;
     while(true) {
       var i = _i;
       if (i >= sz) {
-        var newsz = Caml_primitive.caml_int_min((Caml_int32.imul(3, sz) / 2 | 0) + 3 | 0, 2147483646);
+        var newsz = Caml_primitive.caml_int_min((Caml_int32.imul(3, sz) / 2 | 0) + 3 | 0, Sys.max_array_length - 0 | 0);
         if (newsz <= sz) {
           throw [
                 Caml_builtin_exceptions.failure,
@@ -212,17 +212,17 @@ function Make(H) {
         $$Array.blit(hashes, 0, newhashes, 0, sz);
         Curry._3(setter, newbucket, sz, d);
         Caml_array.caml_array_set(newhashes, sz, h);
-        Caml_array.caml_array_set(t[/* table */0], index, newbucket);
-        Caml_array.caml_array_set(t[/* hashes */1], index, newhashes);
-        if (sz <= t[/* limit */2] && newsz > t[/* limit */2]) {
-          t[/* oversize */3] = t[/* oversize */3] + 1 | 0;
+        Caml_array.caml_array_set(t.table, index, newbucket);
+        Caml_array.caml_array_set(t.hashes, index, newhashes);
+        if (sz <= t.limit && newsz > t.limit) {
+          t.oversize = t.oversize + 1 | 0;
           for(var _i$1 = 0; _i$1 <= 2; ++_i$1){
             test_shrink_bucket(t);
           }
         }
-        if (t[/* oversize */3] > (t[/* table */0].length >> 1)) {
+        if (t.oversize > (t.table.length >> 1)) {
           var t$1 = t;
-          var oldlen = t$1[/* table */0].length;
+          var oldlen = t$1.table.length;
           var newlen = next_sz(oldlen);
           if (newlen > oldlen) {
             var newt = create(newlen);
@@ -236,15 +236,15 @@ function Make(H) {
             }
             }(newt));
             iter_weak(add_weak, t$1);
-            t$1[/* table */0] = newt[/* table */0];
-            t$1[/* hashes */1] = newt[/* hashes */1];
-            t$1[/* limit */2] = newt[/* limit */2];
-            t$1[/* oversize */3] = newt[/* oversize */3];
-            t$1[/* rover */4] = t$1[/* rover */4] % newt[/* table */0].length;
+            t$1.table = newt.table;
+            t$1.hashes = newt.hashes;
+            t$1.limit = newt.limit;
+            t$1.oversize = newt.oversize;
+            t$1.rover = t$1.rover % newt.table.length;
             return /* () */0;
           } else {
-            t$1[/* limit */2] = Pervasives.max_int;
-            t$1[/* oversize */3] = 0;
+            t$1.limit = Pervasives.max_int;
+            t$1.oversize = 0;
             return /* () */0;
           }
         } else {
@@ -260,14 +260,14 @@ function Make(H) {
     };
   };
   var add = function (t, d) {
-    var h = Curry._1(H[/* hash */1], d);
+    var h = Curry._1(H.hash, d);
     return add_aux(t, Caml_weak.caml_weak_set, Caml_option.some(d), h, get_index(t, h));
   };
   var find_or = function (t, d, ifnotfound) {
-    var h = Curry._1(H[/* hash */1], d);
+    var h = Curry._1(H.hash, d);
     var index = get_index(t, h);
-    var bucket = Caml_array.caml_array_get(t[/* table */0], index);
-    var hashes = Caml_array.caml_array_get(t[/* hashes */1], index);
+    var bucket = Caml_array.caml_array_get(t.table, index);
+    var hashes = Caml_array.caml_array_get(t.hashes, index);
     var sz = bucket.length;
     var _i = 0;
     while(true) {
@@ -277,7 +277,7 @@ function Make(H) {
       } else if (h === Caml_array.caml_array_get(hashes, i)) {
         var match = Caml_weak.caml_weak_get_copy(bucket, i);
         if (match !== undefined) {
-          if (Curry._2(H[/* equal */0], Caml_option.valFromOption(match), d)) {
+          if (Curry._2(H.equal, Caml_option.valFromOption(match), d)) {
             var match$1 = Caml_weak.caml_weak_get(bucket, i);
             if (match$1 !== undefined) {
               return Caml_option.valFromOption(match$1);
@@ -306,15 +306,51 @@ function Make(H) {
                 }));
   };
   var find = function (t, d) {
-    return find_or(t, d, (function (h, index) {
+    return find_or(t, d, (function (_h, _index) {
                   throw Caml_builtin_exceptions.not_found;
                 }));
   };
-  var find_shadow = function (t, d, iffound, ifnotfound) {
-    var h = Curry._1(H[/* hash */1], d);
+  var find_opt = function (t, d) {
+    var h = Curry._1(H.hash, d);
     var index = get_index(t, h);
-    var bucket = Caml_array.caml_array_get(t[/* table */0], index);
-    var hashes = Caml_array.caml_array_get(t[/* hashes */1], index);
+    var bucket = Caml_array.caml_array_get(t.table, index);
+    var hashes = Caml_array.caml_array_get(t.hashes, index);
+    var sz = bucket.length;
+    var _i = 0;
+    while(true) {
+      var i = _i;
+      if (i >= sz) {
+        return ;
+      } else if (h === Caml_array.caml_array_get(hashes, i)) {
+        var match = Caml_weak.caml_weak_get_copy(bucket, i);
+        if (match !== undefined) {
+          if (Curry._2(H.equal, Caml_option.valFromOption(match), d)) {
+            var v = Caml_weak.caml_weak_get(bucket, i);
+            if (v !== undefined) {
+              return v;
+            } else {
+              _i = i + 1 | 0;
+              continue ;
+            }
+          } else {
+            _i = i + 1 | 0;
+            continue ;
+          }
+        } else {
+          _i = i + 1 | 0;
+          continue ;
+        }
+      } else {
+        _i = i + 1 | 0;
+        continue ;
+      }
+    };
+  };
+  var find_shadow = function (t, d, iffound, ifnotfound) {
+    var h = Curry._1(H.hash, d);
+    var index = get_index(t, h);
+    var bucket = Caml_array.caml_array_get(t.table, index);
+    var hashes = Caml_array.caml_array_get(t.hashes, index);
     var sz = bucket.length;
     var _i = 0;
     while(true) {
@@ -324,7 +360,7 @@ function Make(H) {
       } else if (h === Caml_array.caml_array_get(hashes, i)) {
         var match = Caml_weak.caml_weak_get_copy(bucket, i);
         if (match !== undefined) {
-          if (Curry._2(H[/* equal */0], Caml_option.valFromOption(match), d)) {
+          if (Curry._2(H.equal, Caml_option.valFromOption(match), d)) {
             return Curry._2(iffound, bucket, i);
           } else {
             _i = i + 1 | 0;
@@ -346,15 +382,15 @@ function Make(H) {
                 }), /* () */0);
   };
   var mem = function (t, d) {
-    return find_shadow(t, d, (function (w, i) {
+    return find_shadow(t, d, (function (_w, _i) {
                   return true;
                 }), false);
   };
   var find_all = function (t, d) {
-    var h = Curry._1(H[/* hash */1], d);
+    var h = Curry._1(H.hash, d);
     var index = get_index(t, h);
-    var bucket = Caml_array.caml_array_get(t[/* table */0], index);
-    var hashes = Caml_array.caml_array_get(t[/* hashes */1], index);
+    var bucket = Caml_array.caml_array_get(t.table, index);
+    var hashes = Caml_array.caml_array_get(t.hashes, index);
     var sz = bucket.length;
     var _i = 0;
     var _accu = /* [] */0;
@@ -366,7 +402,7 @@ function Make(H) {
       } else if (h === Caml_array.caml_array_get(hashes, i)) {
         var match = Caml_weak.caml_weak_get_copy(bucket, i);
         if (match !== undefined) {
-          if (Curry._2(H[/* equal */0], Caml_option.valFromOption(match), d)) {
+          if (Curry._2(H.equal, Caml_option.valFromOption(match), d)) {
             var match$1 = Caml_weak.caml_weak_get(bucket, i);
             if (match$1 !== undefined) {
               _accu = /* :: */[
@@ -394,11 +430,11 @@ function Make(H) {
     };
   };
   var stats = function (t) {
-    var len = t[/* table */0].length;
+    var len = t.table.length;
     var lens = $$Array.map((function (prim) {
             return prim.length;
-          }), t[/* table */0]);
-    $$Array.sort(Caml_obj.caml_compare, lens);
+          }), t.table);
+    $$Array.sort(Caml_primitive.caml_int_compare, lens);
     var totlen = $$Array.fold_left((function (prim, prim$1) {
             return prim + prim$1 | 0;
           }), 0, lens);
@@ -411,20 +447,21 @@ function Make(H) {
             Caml_array.caml_array_get(lens, len - 1 | 0)
           ];
   };
-  return /* module */[
-          /* create */create,
-          /* clear */clear,
-          /* merge */merge,
-          /* add */add,
-          /* remove */remove,
-          /* find */find,
-          /* find_all */find_all,
-          /* mem */mem,
-          /* iter */iter,
-          /* fold */fold,
-          /* count */count,
-          /* stats */stats
-        ];
+  return {
+          create: create,
+          clear: clear,
+          merge: merge,
+          add: add,
+          remove: remove,
+          find: find,
+          find_opt: find_opt,
+          find_all: find_all,
+          mem: mem,
+          iter: iter,
+          fold: fold,
+          count: count,
+          stats: stats
+        };
 }
 
 var create = Caml_weak.caml_weak_create;

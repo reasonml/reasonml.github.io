@@ -240,8 +240,8 @@ function removeMinAuxWithRef(n, kr, vr) {
   if (ln !== null) {
     return bal(removeMinAuxWithRef(ln, kr, vr), kn, vn, rn);
   } else {
-    kr[0] = kn;
-    vr[0] = vn;
+    kr.contents = kn;
+    vr.contents = vn;
     return rn;
   }
 }
@@ -286,7 +286,7 @@ function findFirstByU(n, p) {
         if (right !== undefined) {
           return right;
         } else {
-          return undefined;
+          return ;
         }
       }
     }
@@ -468,10 +468,14 @@ function join(ln, v, d, rn) {
 function concat(t1, t2) {
   if (t1 !== null) {
     if (t2 !== null) {
-      var kr = /* record */[/* contents */t2.key];
-      var vr = /* record */[/* contents */t2.value];
+      var kr = {
+        contents: t2.key
+      };
+      var vr = {
+        contents: t2.value
+      };
       var t2r = removeMinAuxWithRef(t2, kr, vr);
-      return join(t1, kr[0], vr[0], t2r);
+      return join(t1, kr.contents, vr.contents, t2r);
     } else {
       return t1;
     }
@@ -724,12 +728,12 @@ function valuesToArray(n) {
 
 function fromSortedArrayRevAux(arr, off, len) {
   switch (len) {
-    case 0 : 
+    case 0 :
         return null;
-    case 1 : 
+    case 1 :
         var match = arr[off];
         return singleton(match[0], match[1]);
-    case 2 : 
+    case 2 :
         var match_000 = arr[off];
         var match_001 = arr[off - 1 | 0];
         var match$1 = match_001;
@@ -741,7 +745,7 @@ function fromSortedArrayRevAux(arr, off, len) {
                 left: singleton(match$2[0], match$2[1]),
                 right: null
               };
-    case 3 : 
+    case 3 :
         var match_000$1 = arr[off];
         var match_001$1 = arr[off - 1 | 0];
         var match_002 = arr[off - 2 | 0];
@@ -766,12 +770,12 @@ function fromSortedArrayRevAux(arr, off, len) {
 
 function fromSortedArrayAux(arr, off, len) {
   switch (len) {
-    case 0 : 
+    case 0 :
         return null;
-    case 1 : 
+    case 1 :
         var match = arr[off];
         return singleton(match[0], match[1]);
-    case 2 : 
+    case 2 :
         var match_000 = arr[off];
         var match_001 = arr[off + 1 | 0];
         var match$1 = match_001;
@@ -783,7 +787,7 @@ function fromSortedArrayAux(arr, off, len) {
                 left: singleton(match$2[0], match$2[1]),
                 right: null
               };
-    case 3 : 
+    case 3 :
         var match_000$1 = arr[off];
         var match_001$1 = arr[off + 1 | 0];
         var match_002 = arr[off + 2 | 0];
@@ -899,7 +903,7 @@ function get(_n, x, cmp) {
         continue ;
       }
     } else {
-      return undefined;
+      return ;
     }
   };
 }
@@ -917,7 +921,7 @@ function getUndefined(_n, x, cmp) {
         continue ;
       }
     } else {
-      return undefined;
+      return ;
     }
   };
 }

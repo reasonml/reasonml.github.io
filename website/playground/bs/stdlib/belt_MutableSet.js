@@ -89,7 +89,7 @@ function removeCheck0(nt, x, removed, cmp) {
   var k = nt.value;
   var c = cmp(x, k);
   if (c === 0) {
-    removed[0] = true;
+    removed.contents = true;
     var l = nt.left;
     var r = nt.right;
     if (l !== null) {
@@ -124,12 +124,14 @@ function removeCheck0(nt, x, removed, cmp) {
 function removeCheck(d, v) {
   var oldRoot = d.data;
   if (oldRoot !== null) {
-    var removed = /* record */[/* contents */false];
+    var removed = {
+      contents: false
+    };
     var newRoot = removeCheck0(oldRoot, v, removed, d.cmp);
     if (newRoot !== oldRoot) {
       d.data = newRoot;
     }
-    return removed[0];
+    return removed.contents;
   } else {
     return false;
   }
@@ -153,19 +155,21 @@ function addCheck0(t, x, added, cmp) {
       return Belt_internalAVLset.balMutate(t);
     }
   } else {
-    added[0] = true;
+    added.contents = true;
     return Belt_internalAVLset.singleton(x);
   }
 }
 
 function addCheck(m, e) {
   var oldRoot = m.data;
-  var added = /* record */[/* contents */false];
+  var added = {
+    contents: false
+  };
   var newRoot = addCheck0(oldRoot, e, added, m.cmp);
   if (newRoot !== oldRoot) {
     m.data = newRoot;
   }
-  return added[0];
+  return added.contents;
 }
 
 function add(m, e) {
@@ -194,7 +198,7 @@ function mergeMany(d, xs) {
 
 function make(id) {
   return {
-          cmp: id[/* cmp */0],
+          cmp: id.cmp,
           data: Belt_internalAVLset.empty
         };
 }
@@ -266,7 +270,7 @@ function toArray(d) {
 
 function fromSortedArrayUnsafe(xs, id) {
   return {
-          cmp: id[/* cmp */0],
+          cmp: id.cmp,
           data: Belt_internalAVLset.fromSortedArrayUnsafe(xs)
         };
 }
@@ -276,7 +280,7 @@ function checkInvariantInternal(d) {
 }
 
 function fromArray(data, id) {
-  var cmp = id[/* cmp */0];
+  var cmp = id.cmp;
   return {
           cmp: cmp,
           data: Belt_internalAVLset.fromArray(data, cmp)
@@ -502,9 +506,9 @@ function copy(d) {
         };
 }
 
-var Int = 0;
+var Int = /* alias */0;
 
-var $$String = 0;
+var $$String = /* alias */0;
 
 exports.Int = Int;
 exports.$$String = $$String;

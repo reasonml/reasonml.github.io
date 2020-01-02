@@ -1,11 +1,8 @@
 'use strict';
 
 var Char = require("./char.js");
-var List = require("./list.js");
 var Curry = require("./curry.js");
-var Caml_obj = require("./caml_obj.js");
 var Caml_bytes = require("./caml_bytes.js");
-var Caml_int32 = require("./caml_int32.js");
 var Caml_primitive = require("./caml_primitive.js");
 var Caml_builtin_exceptions = require("./caml_builtin_exceptions.js");
 
@@ -46,19 +43,45 @@ function sub(s, ofs, len) {
           Caml_builtin_exceptions.invalid_argument,
           "String.sub / Bytes.sub"
         ];
-  } else {
-    var r = Caml_bytes.caml_create_bytes(len);
-    Caml_bytes.caml_blit_bytes(s, ofs, r, 0, len);
-    return r;
   }
+  var r = Caml_bytes.caml_create_bytes(len);
+  Caml_bytes.caml_blit_bytes(s, ofs, r, 0, len);
+  return r;
 }
 
 function sub_string(b, ofs, len) {
   return Caml_bytes.bytes_to_string(sub(b, ofs, len));
 }
 
+function $plus$plus(a, b) {
+  var c = a + b | 0;
+  var match = a < 0;
+  var match$1 = b < 0;
+  var match$2 = c < 0;
+  if (match) {
+    if (match$1 && !match$2) {
+      throw [
+            Caml_builtin_exceptions.invalid_argument,
+            "Bytes.extend"
+          ];
+    } else {
+      return c;
+    }
+  } else if (match$1) {
+    return c;
+  } else {
+    if (match$2) {
+      throw [
+            Caml_builtin_exceptions.invalid_argument,
+            "Bytes.extend"
+          ];
+    }
+    return c;
+  }
+}
+
 function extend(s, left, right) {
-  var len = (s.length + left | 0) + right | 0;
+  var len = $plus$plus($plus$plus(s.length, left), right);
   var r = Caml_bytes.caml_create_bytes(len);
   var match = left < 0 ? /* tuple */[
       -left | 0,
@@ -82,9 +105,8 @@ function fill(s, ofs, len, c) {
           Caml_builtin_exceptions.invalid_argument,
           "String.fill / Bytes.fill"
         ];
-  } else {
-    return Caml_bytes.caml_fill_bytes(s, ofs, len, c);
   }
+  return Caml_bytes.caml_fill_bytes(s, ofs, len, c);
 }
 
 function blit(s1, ofs1, s2, ofs2, len) {
@@ -93,9 +115,8 @@ function blit(s1, ofs1, s2, ofs2, len) {
           Caml_builtin_exceptions.invalid_argument,
           "Bytes.blit"
         ];
-  } else {
-    return Caml_bytes.caml_blit_bytes(s1, ofs1, s2, ofs2, len);
   }
+  return Caml_bytes.caml_blit_bytes(s1, ofs1, s2, ofs2, len);
 }
 
 function blit_string(s1, ofs1, s2, ofs2, len) {
@@ -104,9 +125,8 @@ function blit_string(s1, ofs1, s2, ofs2, len) {
           Caml_builtin_exceptions.invalid_argument,
           "String.blit / Bytes.blit_string"
         ];
-  } else {
-    return Caml_bytes.caml_blit_string(s1, ofs1, s2, ofs2, len);
   }
+  return Caml_bytes.caml_blit_string(s1, ofs1, s2, ofs2, len);
 }
 
 function iter(f, a) {
@@ -123,27 +143,65 @@ function iteri(f, a) {
   return /* () */0;
 }
 
+function ensure_ge(x, y) {
+  if (x >= y) {
+    return x;
+  } else {
+    throw [
+          Caml_builtin_exceptions.invalid_argument,
+          "Bytes.concat"
+        ];
+  }
+}
+
+function sum_lengths(_acc, seplen, _param) {
+  while(true) {
+    var param = _param;
+    var acc = _acc;
+    if (param) {
+      var tl = param[1];
+      var hd = param[0];
+      if (tl) {
+        _param = tl;
+        _acc = ensure_ge((hd.length + seplen | 0) + acc | 0, acc);
+        continue ;
+      } else {
+        return hd.length + acc | 0;
+      }
+    } else {
+      return acc;
+    }
+  };
+}
+
 function concat(sep, l) {
   if (l) {
-    var hd = l[0];
-    var num = /* record */[/* contents */0];
-    var len = /* record */[/* contents */0];
-    List.iter((function (s) {
-            num[0] = num[0] + 1 | 0;
-            len[0] = len[0] + s.length | 0;
-            return /* () */0;
-          }), l);
-    var r = Caml_bytes.caml_create_bytes(len[0] + Caml_int32.imul(sep.length, num[0] - 1 | 0) | 0);
-    Caml_bytes.caml_blit_bytes(hd, 0, r, 0, hd.length);
-    var pos = /* record */[/* contents */hd.length];
-    List.iter((function (s) {
-            Caml_bytes.caml_blit_bytes(sep, 0, r, pos[0], sep.length);
-            pos[0] = pos[0] + sep.length | 0;
-            Caml_bytes.caml_blit_bytes(s, 0, r, pos[0], s.length);
-            pos[0] = pos[0] + s.length | 0;
-            return /* () */0;
-          }), l[1]);
-    return r;
+    var seplen = sep.length;
+    var dst = Caml_bytes.caml_create_bytes(sum_lengths(0, seplen, l));
+    var _pos = 0;
+    var sep$1 = sep;
+    var seplen$1 = seplen;
+    var _param = l;
+    while(true) {
+      var param = _param;
+      var pos = _pos;
+      if (param) {
+        var tl = param[1];
+        var hd = param[0];
+        if (tl) {
+          Caml_bytes.caml_blit_bytes(hd, 0, dst, pos, hd.length);
+          Caml_bytes.caml_blit_bytes(sep$1, 0, dst, pos + hd.length | 0, seplen$1);
+          _param = tl;
+          _pos = (pos + hd.length | 0) + seplen$1 | 0;
+          continue ;
+        } else {
+          Caml_bytes.caml_blit_bytes(hd, 0, dst, pos, hd.length);
+          return dst;
+        }
+      } else {
+        return dst;
+      }
+    };
   } else {
     return empty;
   }
@@ -233,34 +291,34 @@ function escaped(s) {
         exit = 1;
       } else {
         switch (c) {
-          case 8 : 
+          case 8 :
               s$prime[n] = /* "\\" */92;
               n = n + 1 | 0;
               s$prime[n] = /* "b" */98;
               break;
-          case 9 : 
+          case 9 :
               s$prime[n] = /* "\\" */92;
               n = n + 1 | 0;
               s$prime[n] = /* "t" */116;
               break;
-          case 10 : 
+          case 10 :
               s$prime[n] = /* "\\" */92;
               n = n + 1 | 0;
               s$prime[n] = /* "n" */110;
               break;
-          case 0 : 
-          case 1 : 
-          case 2 : 
-          case 3 : 
-          case 4 : 
-          case 5 : 
-          case 6 : 
-          case 7 : 
-          case 11 : 
-          case 12 : 
+          case 0 :
+          case 1 :
+          case 2 :
+          case 3 :
+          case 4 :
+          case 5 :
+          case 6 :
+          case 7 :
+          case 11 :
+          case 12 :
               exit = 1;
               break;
-          case 13 : 
+          case 13 :
               s$prime[n] = /* "\\" */92;
               n = n + 1 | 0;
               s$prime[n] = /* "r" */114;
@@ -269,7 +327,7 @@ function escaped(s) {
         }
       }
       switch (exit) {
-        case 1 : 
+        case 1 :
             s$prime[n] = /* "\\" */92;
             n = n + 1 | 0;
             s$prime[n] = 48 + (c / 100 | 0) | 0;
@@ -278,7 +336,7 @@ function escaped(s) {
             n = n + 1 | 0;
             s$prime[n] = 48 + c % 10 | 0;
             break;
-        case 2 : 
+        case 2 :
             s$prime[n] = /* "\\" */92;
             n = n + 1 | 0;
             s$prime[n] = c;
@@ -317,12 +375,12 @@ function mapi(f, s) {
   }
 }
 
-function uppercase(s) {
-  return map(Char.uppercase, s);
+function uppercase_ascii(s) {
+  return map(Char.uppercase_ascii, s);
 }
 
-function lowercase(s) {
-  return map(Char.lowercase, s);
+function lowercase_ascii(s) {
+  return map(Char.lowercase_ascii, s);
 }
 
 function apply1(f, s) {
@@ -335,12 +393,12 @@ function apply1(f, s) {
   }
 }
 
-function capitalize(s) {
-  return apply1(Char.uppercase, s);
+function capitalize_ascii(s) {
+  return apply1(Char.uppercase_ascii, s);
 }
 
-function uncapitalize(s) {
-  return apply1(Char.lowercase, s);
+function uncapitalize_ascii(s) {
+  return apply1(Char.lowercase_ascii, s);
 }
 
 function index_rec(s, lim, _i, c) {
@@ -348,7 +406,8 @@ function index_rec(s, lim, _i, c) {
     var i = _i;
     if (i >= lim) {
       throw Caml_builtin_exceptions.not_found;
-    } else if (s[i] === c) {
+    }
+    if (s[i] === c) {
       return i;
     } else {
       _i = i + 1 | 0;
@@ -361,6 +420,24 @@ function index(s, c) {
   return index_rec(s, s.length, 0, c);
 }
 
+function index_rec_opt(s, lim, _i, c) {
+  while(true) {
+    var i = _i;
+    if (i >= lim) {
+      return ;
+    } else if (s[i] === c) {
+      return i;
+    } else {
+      _i = i + 1 | 0;
+      continue ;
+    }
+  };
+}
+
+function index_opt(s, c) {
+  return index_rec_opt(s, s.length, 0, c);
+}
+
 function index_from(s, i, c) {
   var l = s.length;
   if (i < 0 || i > l) {
@@ -368,9 +445,19 @@ function index_from(s, i, c) {
           Caml_builtin_exceptions.invalid_argument,
           "String.index_from / Bytes.index_from"
         ];
-  } else {
-    return index_rec(s, l, i, c);
   }
+  return index_rec(s, l, i, c);
+}
+
+function index_from_opt(s, i, c) {
+  var l = s.length;
+  if (i < 0 || i > l) {
+    throw [
+          Caml_builtin_exceptions.invalid_argument,
+          "String.index_from_opt / Bytes.index_from_opt"
+        ];
+  }
+  return index_rec_opt(s, l, i, c);
 }
 
 function rindex_rec(s, _i, c) {
@@ -378,7 +465,8 @@ function rindex_rec(s, _i, c) {
     var i = _i;
     if (i < 0) {
       throw Caml_builtin_exceptions.not_found;
-    } else if (s[i] === c) {
+    }
+    if (s[i] === c) {
       return i;
     } else {
       _i = i - 1 | 0;
@@ -397,9 +485,36 @@ function rindex_from(s, i, c) {
           Caml_builtin_exceptions.invalid_argument,
           "String.rindex_from / Bytes.rindex_from"
         ];
-  } else {
-    return rindex_rec(s, i, c);
   }
+  return rindex_rec(s, i, c);
+}
+
+function rindex_rec_opt(s, _i, c) {
+  while(true) {
+    var i = _i;
+    if (i < 0) {
+      return ;
+    } else if (s[i] === c) {
+      return i;
+    } else {
+      _i = i - 1 | 0;
+      continue ;
+    }
+  };
+}
+
+function rindex_opt(s, c) {
+  return rindex_rec_opt(s, s.length - 1 | 0, c);
+}
+
+function rindex_from_opt(s, i, c) {
+  if (i < -1 || i >= s.length) {
+    throw [
+          Caml_builtin_exceptions.invalid_argument,
+          "String.rindex_from_opt / Bytes.rindex_from_opt"
+        ];
+  }
+  return rindex_rec_opt(s, i, c);
 }
 
 function contains_from(s, i, c) {
@@ -409,17 +524,16 @@ function contains_from(s, i, c) {
           Caml_builtin_exceptions.invalid_argument,
           "String.contains_from / Bytes.contains_from"
         ];
-  } else {
-    try {
-      index_rec(s, l, i, c);
-      return true;
-    }
-    catch (exn){
-      if (exn === Caml_builtin_exceptions.not_found) {
-        return false;
-      } else {
-        throw exn;
-      }
+  }
+  try {
+    index_rec(s, l, i, c);
+    return true;
+  }
+  catch (exn){
+    if (exn === Caml_builtin_exceptions.not_found) {
+      return false;
+    } else {
+      throw exn;
     }
   }
 }
@@ -434,22 +548,39 @@ function rcontains_from(s, i, c) {
           Caml_builtin_exceptions.invalid_argument,
           "String.rcontains_from / Bytes.rcontains_from"
         ];
-  } else {
-    try {
-      rindex_rec(s, i, c);
-      return true;
-    }
-    catch (exn){
-      if (exn === Caml_builtin_exceptions.not_found) {
-        return false;
-      } else {
-        throw exn;
-      }
+  }
+  try {
+    rindex_rec(s, i, c);
+    return true;
+  }
+  catch (exn){
+    if (exn === Caml_builtin_exceptions.not_found) {
+      return false;
+    } else {
+      throw exn;
     }
   }
 }
 
-var compare = Caml_obj.caml_compare;
+var compare = Caml_primitive.caml_bytes_compare;
+
+function uppercase(s) {
+  return map(Char.uppercase, s);
+}
+
+function lowercase(s) {
+  return map(Char.lowercase, s);
+}
+
+function capitalize(s) {
+  return apply1(Char.uppercase, s);
+}
+
+function uncapitalize(s) {
+  return apply1(Char.lowercase, s);
+}
+
+var equal = Caml_primitive.caml_bytes_equal;
 
 var unsafe_to_string = Caml_bytes.bytes_to_string;
 
@@ -476,9 +607,13 @@ exports.mapi = mapi;
 exports.trim = trim;
 exports.escaped = escaped;
 exports.index = index;
+exports.index_opt = index_opt;
 exports.rindex = rindex;
+exports.rindex_opt = rindex_opt;
 exports.index_from = index_from;
+exports.index_from_opt = index_from_opt;
 exports.rindex_from = rindex_from;
+exports.rindex_from_opt = rindex_from_opt;
 exports.contains = contains;
 exports.contains_from = contains_from;
 exports.rcontains_from = rcontains_from;
@@ -486,7 +621,12 @@ exports.uppercase = uppercase;
 exports.lowercase = lowercase;
 exports.capitalize = capitalize;
 exports.uncapitalize = uncapitalize;
+exports.uppercase_ascii = uppercase_ascii;
+exports.lowercase_ascii = lowercase_ascii;
+exports.capitalize_ascii = capitalize_ascii;
+exports.uncapitalize_ascii = uncapitalize_ascii;
 exports.compare = compare;
+exports.equal = equal;
 exports.unsafe_to_string = unsafe_to_string;
 exports.unsafe_of_string = unsafe_of_string;
 /* No side effect */

@@ -5,7 +5,11 @@ var Caml_exceptions = require("./caml_exceptions.js");
 
 var match = Caml_sys.caml_sys_get_argv(/* () */0);
 
+var backend_type = /* Other */["BS"];
+
 var big_endian = false;
+
+var int_size = 32;
 
 var unix = true;
 
@@ -13,7 +17,17 @@ var win32 = false;
 
 var cygwin = false;
 
-var interactive = /* record */[/* contents */false];
+function getenv_opt(s) {
+  var match = typeof process === "undefined" ? undefined : process;
+  if (match !== undefined) {
+    return match.env[s];
+  }
+  
+}
+
+var interactive = {
+  contents: false
+};
 
 function set_signal(sig_num, sig_beh) {
   return /* () */0;
@@ -25,11 +39,17 @@ function catch_break(on) {
   return /* () */0;
 }
 
+function enable_runtime_warnings(param) {
+  return /* () */0;
+}
+
+function runtime_warnings_enabled(param) {
+  return false;
+}
+
 var argv = match[1];
 
 var executable_name = match[0];
-
-var os_type = "Unix";
 
 var word_size = 32;
 
@@ -79,16 +99,32 @@ var sigvtalrm = -20;
 
 var sigprof = -21;
 
-var ocaml_version = "4.02.3+dev1-2015-07-10";
+var sigbus = -22;
+
+var sigpoll = -23;
+
+var sigsys = -24;
+
+var sigtrap = -25;
+
+var sigurg = -26;
+
+var sigxcpu = -27;
+
+var sigxfsz = -28;
+
+var ocaml_version = "4.06.2+BS";
 
 exports.argv = argv;
 exports.executable_name = executable_name;
+exports.getenv_opt = getenv_opt;
 exports.interactive = interactive;
-exports.os_type = os_type;
+exports.backend_type = backend_type;
 exports.unix = unix;
 exports.win32 = win32;
 exports.cygwin = cygwin;
 exports.word_size = word_size;
+exports.int_size = int_size;
 exports.big_endian = big_endian;
 exports.max_string_length = max_string_length;
 exports.max_array_length = max_array_length;
@@ -114,7 +150,16 @@ exports.sigttin = sigttin;
 exports.sigttou = sigttou;
 exports.sigvtalrm = sigvtalrm;
 exports.sigprof = sigprof;
+exports.sigbus = sigbus;
+exports.sigpoll = sigpoll;
+exports.sigsys = sigsys;
+exports.sigtrap = sigtrap;
+exports.sigurg = sigurg;
+exports.sigxcpu = sigxcpu;
+exports.sigxfsz = sigxfsz;
 exports.Break = Break;
 exports.catch_break = catch_break;
 exports.ocaml_version = ocaml_version;
+exports.enable_runtime_warnings = enable_runtime_warnings;
+exports.runtime_warnings_enabled = runtime_warnings_enabled;
 /* No side effect */

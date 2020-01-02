@@ -4,7 +4,7 @@ var Curry = require("./curry.js");
 var Belt_MapDict = require("./belt_MapDict.js");
 
 function fromArray(data, id) {
-  var cmp = id[/* cmp */0];
+  var cmp = id.cmp;
   return {
           cmp: cmp,
           data: Belt_MapDict.fromArray(data, cmp)
@@ -96,7 +96,7 @@ function merge(s1, s2, f) {
 
 function make(id) {
   return {
-          cmp: id[/* cmp */0],
+          cmp: id.cmp,
           data: Belt_MapDict.empty
         };
 }
@@ -295,21 +295,23 @@ function getData(prim) {
 
 function getId(m) {
   var cmp = m.cmp;
-  return /* module */[/* cmp */cmp];
+  return {
+          cmp: cmp
+        };
 }
 
 function packIdData(id, data) {
   return {
-          cmp: id[/* cmp */0],
+          cmp: id.cmp,
           data: data
         };
 }
 
-var Int = 0;
+var Int = /* alias */0;
 
-var $$String = 0;
+var $$String = /* alias */0;
 
-var Dict = 0;
+var Dict = /* alias */0;
 
 exports.Int = Int;
 exports.$$String = $$String;
