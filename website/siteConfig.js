@@ -243,6 +243,11 @@ const users = [
     caption: "Band Protocol",
     image: "img/logos/band-protocol.svg",
     infoLink: "https://bandprotocol.com/"
+  },
+  {
+    caption: "Radity",
+    image: "img/logos/radity-logo-ds.svg",
+    infoLink: "https://radity.com/"
   }
 ];
 
