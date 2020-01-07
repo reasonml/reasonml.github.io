@@ -248,6 +248,11 @@ const users = [
     caption: "Radity",
     image: "img/logos/radity-logo-ds.svg",
     infoLink: "https://radity.com/"
+  },
+  {
+    caption: "codecentric",
+    image: "img/logos/codecentric.svg",
+    infoLink: "https://codecentric.de",
   }
 ];
 
