@@ -136,9 +136,9 @@ let ctx = getContext(myCanvas, "2d");
 
 So let's unpack what's going on. We created some abstract types for the Canvas DOM node and the associated RenderingContext object.
 
-Then we made a `getContext` function, but instead of `@bs.val` we used `@bs.send`, and we used an empty string for the text of the external. `@bs.send` means "we're calling a method on the first argument", which in this case is the canvas. Given the above, BuckleScript will translate `getContext(theFirstArgument, theSecondArgument)` into `theFirstArgument.getContext(theSecondArgument, ...)`.
+Then we made a `getContext` function, but instead of `@bs.val` we used `@bs.send`, and we provided the name of the function in JavaScript as a string value. `@bs.send` means "we're calling a method on the first argument", which in this case is the canvas. Given the above, BuckleScript will translate `getContext(theFirstArgument, theSecondArgument)` into `theFirstArgument.getContext(theSecondArgument, ...)`.
 
-The empty string means "the JS name is the same as the name we're giving the external in BuckleScript-land" – in this case `getContext`. If we wanted to name it something else (like `getRenderingContext`), then we'd have to supply the string `"getContext"` so that BuckleScript calls the right function.
+The name of the JavaScript function does not need to match the name of the function within Reason. In a form of punning, the string could be empty (i.e., ""), which is a special value that means "the JS name is the same as the name we're giving the external in BuckleScript-land" – in this case `getContext`. If we wanted to name the Reason function something else (like `getRenderingContext`), then we'd have to supply the string `"getContext"` so that BuckleScript calls the right function.
 
 Let's add one more function just so it's interesting.
 
