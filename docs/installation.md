@@ -2,7 +2,7 @@
 title: Installation
 ---
 
-Reason comes by default in [BuckleScript](https://bucklescript.github.io/), our compiler that turns Reason code into JavaScript code.
+Reason comes by default in [BuckleScript](https://bucklescript.github.io/), a compiler that turns Reason code into JavaScript code.
 
 **Prerequisite**: either NPM (comes with [node](https://nodejs.org/en/)) or [Yarn](https://yarnpkg.com/en/).
 
@@ -30,11 +30,11 @@ yarn build # or npm run build, for npm
 node src/Demo.bs.js
 ```
 
-That's it! We use BuckleScript to compile Reason to JavaScript, then we use NodeJS to run the JavaScript. Feel free to use the generated JS files in whichever way you'd like, as if they're hand-written by you.
+That uses BuckleScript to compile Reason to JavaScript, then uses NodeJS to run the JavaScript. Feel free to use the generated JS files in whichever way you'd like, as if they're hand-written by you.
 
 During development, instead of running `npm run build` each time to compile, run `npm run start` to start a watcher that recompiles automatically after file changes.
 
-By default, the `basic-reason` theme configures BuckleScript to output the generated JS files alongside the Reason files they were produced from. [There's a reason we do that](https://bucklescript.github.io/docs/en/build-overview#tips-tricks). If you prefer to keep the generated files somewhere else, edit `bsconfig.json` to set `in-source` to `false`; the JS files will then be output to the `lib/js` directory instead.
+By default, the `basic-reason` theme configures BuckleScript to output the generated JS files alongside the Reason files they were produced from. [There's a reason why this is helpful](https://bucklescript.github.io/docs/en/build-overview#tips-tricks). If you prefer to keep the generated files somewhere else, edit `bsconfig.json` to set `in-source` to `false`; the JS files will then be output to the `lib/js` directory instead.
 
 Alternatively, **to start a [ReasonReact](https://reasonml.github.io/reason-react/docs/en/installation.html) app**, follow the instructions [here](https://reasonml.github.io/reason-react/docs/en/installation).
 
