@@ -67,12 +67,12 @@
               }
             });
         </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://crowdin.com/project/reason/ko" target="_blank" rel="noreferrer noopener">Translate</a><h1 class="postHeaderTitle">JS에서 변환</h1></header><article><div><span><h2><a class="anchor" aria-hidden="true" id="준비"></a><a href="#준비" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>준비</h2>
-<p><strong>시작하기 전에</strong>, 당신의 팀이 Reason을 필요로 하는지 생각해보세요! As much as we vouch for Reason and BuckleScript's popularity, please don't unnecessarily thrash your colleagues and give them a bad first impression. That's hard to undo afterward.</p>
-<p>This guide covers a workflow that's helped us convert things over rapidly and efficiently. It's not intended to go over language/FFI features (though it puts them in context). Basic Reason/BuckleScript knowledge is assumed.</p>
+<p><strong>시작하기 전에</strong>, 당신의 팀이 Reason을 필요로 하는지 생각해보세요! 우리가 Reason과 BuckleScript의 인기를 보증하는 만큼, 불필요하게 동료들을 괴롭히지 말고 그들에게 그로인한 나쁜 인상을 주지 마세요. 이는 추후에 되돌리기가 어렵습니다.</p>
+<p>이 가이드에서는 빠르고 효율적으로 변환하는 데 도움을 주는 워크플로우를 다룹니다. 이는 언어나 FFI 기능을 다루기 위한 것이 아닙니다(문맥에 따라 다릅니다). 기본적인 Reason과 BuckleScript 지식이 필요합니다.</p>
 <h2><a class="anchor" aria-hidden="true" id="문법"></a><a href="#문법" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>문법</h2>
-<p><strong>목표</strong>: 무엇보다 먼저, <strong>파일 내용이 문법에 맞아야 합니다</strong>. 잘못된 타입, 모듈 누락, 잘못된 파일 구성, 너무나 많은 외부 접근 등에 대해 너무 신경 기울이지 마세요. We'll come back to clean these up after setting up the regression test that is &quot;no more syntax errors&quot;.</p>
-<p>Since the Reason syntax resembles enough to that of JavaScript, instead of starting a new Reason file, just copy over an existing js file and work on top of it.</p>
-<p><em>Tip</em>: don't forget that you can use <code>refmt</code> in your editor/terminal! If you don't know e.g. the precedence of some operations, wrap them in as many parentheses as you wish, then <code>refmt</code> your code and see which ones remain. Likewise, no need to lose time on indentations and spacing; <code>refmt</code> takes care of them.</p>
+<p><strong>목표</strong>: 무엇보다 먼저, <strong>파일 내용이 문법에 맞아야 합니다</strong>. 잘못된 타입, 모듈 누락, 잘못된 파일 구성, 너무나 많은 외부 접근 등에 대해 너무 신경 기울이지 마세요. 우리는 &quot;구문 오류 없음&quot;일 때 다시 돌아와 그것들을 정리하도록 할 것입니다.</p>
+<p>Reaon의 문법은 Javascript와 비슷하기 때문에 새로운 Reason 파일로 시작하는 것보단, 기존 js 파일을 복사하여 그 파일을 토대로 작업하는 게 좋습니다.</p>
+<p><em>팁</em>: 에디터나 터미널에서 <code>refmt</code>을 사용 할 수 있다는 걸 잊지 마세요! 만약 작업의 우선순위 등을 모른다면 원하는 만큼 괄호로 묶은 후 <code>refmt</code>를 사용해 수정해야 할 코드가 얼마나 남아있는지 확인해보세요. 마찬가지로 들여쓰기나 띄어쓰기에 시간낭비 할 필요가 없습니다. <code>refmt</code>가 알아서 해결해주니까요.</p>
 <pre><code class="hljs css language-js"><span class="hljs-comment">/* 당신이 복사한 원본 JS 파일 */</span>
 <span class="hljs-keyword">const</span> school = <span class="hljs-built_in">require</span>(<span class="hljs-string">'school'</span>);
 
@@ -85,14 +85,14 @@
   <span class="hljs-keyword">return</span> school.getStudentById(defaultId);
 }
 </code></pre>
-<p>Here are some of the things you'd do at this step:</p>
+<p>이 단계에서 수행해야 할 작업은 다음과 같습니다:</p>
 <ul>
-<li>Convert the function call syntax over.</li>
+<li>함수 호출 문법을 변환하세요.</li>
 <li><code>var</code>/<code>const</code>를 <code>let</code>으로 고치기.</li>
 <li><code>require</code> 없애기.</li>
-<li>Make other such changes. For idioms that don't have a BuckleScript equivalent, use <code>bs.raw</code> (<a href="https://bucklescript.github.io/docs/en/embed-raw-javascript.html">documentation</a>).</li>
+<li>BuckleScript에 없는 관용구 같은 경우에는 <code>bs.raw</code>를 사용하여 변환 방법을 추가하세요. (<a href="https://bucklescript.github.io/docs/en/embed-raw-javascript.html">문서</a>)</li>
 </ul>
-<p>Again, <strong>worry only about making the file syntactically valid</strong>. Trying to learn all three of syntax, types and other semantics while converting over a file reduces your iteration speed to less than a third.</p>
+<p>다시 한 번 말씀 드리지만, <strong>오직 파일을 구문상 유효하도록 만드는 것에만 집중하세요</strong>. 파일을 변환하는 동안 문법과 타입 그리고 의미등을 모두 배우려고 하면 반복 속도가 3배 이상 줄어들게 됩니다.</p>
 <pre><code class="hljs css language-reason"><span class="hljs-comment">/* syntactically valid, semantically wrong conversion */</span>
 <span class="hljs-comment">/* const school = require('school'); */</span>
 <span class="hljs-keyword">let</span> defaultId = <span class="hljs-number">10</span>;
