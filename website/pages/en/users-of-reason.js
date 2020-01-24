@@ -14,6 +14,7 @@ class Users extends React.Component {
           <img
             src={`${siteConfig.baseUrl}${user.image}`}
             title={user.caption}
+            alt={user.caption}
           />
         </a>
       );
