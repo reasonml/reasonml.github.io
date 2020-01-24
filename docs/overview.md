@@ -14,7 +14,7 @@ Integer Division/Multiplication       |  `2 / 23 * 1`
 Float Division/Multiplication         |  `2.0 /. 23.0 *. 1.0`
 Float Exponentiation                  |  `2.0 ** 2.0`
 String Concatenation                  |  `"Hello " ++ "World"`
-Comparison                            |  `>`, `<`, `>=`, `=<`
+Comparison                            |  `>`, `<`, `>=`, `<=`
 Boolean operations                    |  `!`, `&&`, <code>&#124;&#124;</code>
 Reference, Structural (deep) Equality |  `===`, `==`
 Immutable Lists                       |  `[1, 2, 3]`
