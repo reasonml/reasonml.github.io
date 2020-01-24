@@ -95,7 +95,3 @@ You can use the above object like so:
 ```reason
 obj#doYouWant();
 ```
-
-## Tip & Tricks
-
-If you come from JavaScript, **a Reason object doesn't compile to a JS object**. For that, try BuckleScript's [special feature](https://bucklescript.github.io/docs/en/object.html#record-mode).
