@@ -19,7 +19,7 @@ npm install -g esy
 Clone any esy project and run the `esy` command inside of it. This will install all dependencies and build everything.
 
 ```
-git clone git@github.com:esy-ocaml/hello-reason.git
+git clone https://github.com/esy-ocaml/hello-reason.git
 cd hello-reason
 esy
 ```
