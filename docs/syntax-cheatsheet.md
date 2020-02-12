@@ -2,9 +2,7 @@
 title: Syntax Cheatsheet
 ---
 
-We've worked very hard to make Reason look like JS while preserving OCaml's great semantics & types. Hope you enjoy it!
-
-## Let Binding
+## Variable
 
 | JavaScript              | Reason                         |
 | ----------------------- | ------------------------------ |
@@ -12,7 +10,7 @@ We've worked very hard to make Reason look like JS while preserving OCaml's grea
 | `var x = y;`            | No equivalent (thankfully)     |
 | `let x = 5; x = x + 1;` | `let x = ref(5); x := x^ + 1;` |
 
-## String & Char
+## String & Character
 
 | JavaScript             | Reason                |
 | ---------------------- | --------------------- |
@@ -49,12 +47,10 @@ We've worked very hard to make Reason look like JS while preserving OCaml's grea
 | JavaScript          | Reason                                  |
 | ------------------- | --------------------------------------- |
 | no static types     | `type point = {x: int, mutable y: int}` |
-| `{x: 30, y: 20}`    | Same \*                                 |
+| `{x: 30, y: 20}`    | Same                                    |
 | `point.x`           | Same                                    |
 | `point.y = 30;`     | Same                                    |
 | `{...point, x: 30}` | Same                                    |
-
-\* This is the Reason spiritual equivalent; it doesn't mean it compiles to JS' object! To compile to the latter, see [here](object.md#tip-tricks).
 
 ## Array
 
