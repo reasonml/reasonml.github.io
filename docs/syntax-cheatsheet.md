@@ -205,4 +205,4 @@ In Reason, "sequence expressions" are created with `{}` and evaluate to their la
 | JavaScript        | Reason      |
 | ----------------- | ----------- |
 | `/* Comment */`   | Same        |
-| `// Line comment` | Coming soon |
+| `// Line comment` | Same        |
