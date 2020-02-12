@@ -253,6 +253,11 @@ const users = [
     caption: "codecentric",
     image: "img/logos/codecentric.svg",
     infoLink: "https://codecentric.de",
+  },
+  {
+    caption: "Tradie Training",
+    image: "img/logos/tradie.png",
+    infoLink: "https://tt.edu.au",
   }
 ];
 
