@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="ko"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>문법 치트시트 · Reason</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="We&#x27;ve worked very hard to make Reason look like JS while preserving OCaml&#x27;s great semantics &amp; types. Hope you enjoy it!"/><meta name="docsearch:language" content="ko"/><meta property="og:title" content="문법 치트시트 · Reason"/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io/"/><meta property="og:description" content="We&#x27;ve worked very hard to make Reason look like JS while preserving OCaml&#x27;s great semantics &amp; types. Hope you enjoy it!"/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/icon_50.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io/blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io/blog/feed.xml" title="Reason Blog RSS Feed"/><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/ko"><img class="logo" src="/img/dummy.svg" alt="Reason"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/ko/what-and-why" target="_self">문서</a></li><li class=""><a href="/ko/try" target="_self">해보기</a></li><li class=""><a href="/api/index" target="_self">API</a></li><li class=""><a href="/docs/ko/community" target="_self">커뮤니티</a></li><li class=""><a href="/blog/" target="_self">블로그</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg" alt="Languages icon"/>한국어</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/docs/ja/syntax-cheatsheet">日本語</a></li><li><a href="/docs/en/syntax-cheatsheet">English</a></li><li><a href="/docs/de/syntax-cheatsheet">Deutsch</a></li><li><a href="/docs/es-ES/syntax-cheatsheet">Español</a></li><li><a href="/docs/fr/syntax-cheatsheet">Français</a></li><li><a href="/docs/pt-BR/syntax-cheatsheet">Português (Brasil)</a></li><li><a href="/docs/ru/syntax-cheatsheet">Русский</a></li><li><a href="/docs/uk/syntax-cheatsheet">Українська</a></li><li><a href="/docs/zh-CN/syntax-cheatsheet">中文</a></li><li><a href="/docs/zh-TW/syntax-cheatsheet">繁體中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank" rel="noreferrer noopener">번역 돕기</a></li></ul></div></li><script>
+<!DOCTYPE html><html lang="ko"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>문법 치트시트 · Reason</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="## Variable"/><meta name="docsearch:language" content="ko"/><meta property="og:title" content="문법 치트시트 · Reason"/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io/"/><meta property="og:description" content="## Variable"/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/icon_50.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io/blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io/blog/feed.xml" title="Reason Blog RSS Feed"/><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/ko"><img class="logo" src="/img/dummy.svg" alt="Reason"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/ko/what-and-why" target="_self">문서</a></li><li class=""><a href="/ko/try" target="_self">해보기</a></li><li class=""><a href="/api/index" target="_self">API</a></li><li class=""><a href="/docs/ko/community" target="_self">커뮤니티</a></li><li class=""><a href="/blog/" target="_self">블로그</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg" alt="Languages icon"/>한국어</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/docs/ja/syntax-cheatsheet">日本語</a></li><li><a href="/docs/en/syntax-cheatsheet">English</a></li><li><a href="/docs/de/syntax-cheatsheet">Deutsch</a></li><li><a href="/docs/es-ES/syntax-cheatsheet">Español</a></li><li><a href="/docs/fr/syntax-cheatsheet">Français</a></li><li><a href="/docs/pt-BR/syntax-cheatsheet">Português (Brasil)</a></li><li><a href="/docs/ru/syntax-cheatsheet">Русский</a></li><li><a href="/docs/uk/syntax-cheatsheet">Українська</a></li><li><a href="/docs/zh-CN/syntax-cheatsheet">中文</a></li><li><a href="/docs/zh-TW/syntax-cheatsheet">繁體中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank" rel="noreferrer noopener">번역 돕기</a></li></ul></div></li><script>
         const languagesMenuItem = document.getElementById("languages-menu");
         const languagesDropDown = document.getElementById("languages-dropdown");
         languagesMenuItem.addEventListener("click", function(event) {
@@ -66,8 +66,7 @@
                 };
               }
             });
-        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://crowdin.com/project/reason/ko" target="_blank" rel="noreferrer noopener">Translate</a><h1 class="postHeaderTitle">문법 치트시트</h1></header><article><div><span><p>We've worked very hard to make Reason look like JS while preserving OCaml's great semantics &amp; types. Hope you enjoy it!</p>
-<h2><a class="anchor" aria-hidden="true" id="let-바인딩"></a><a href="#let-바인딩" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Let 바인딩</h2>
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://crowdin.com/project/reason/ko" target="_blank" rel="noreferrer noopener">Translate</a><h1 class="postHeaderTitle">문법 치트시트</h1></header><article><div><span><h2><a class="anchor" aria-hidden="true" id="variable"></a><a href="#variable" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Variable</h2>
 <table>
 <thead>
 <tr><th>JavaScript</th><th>Reason</th></tr>
@@ -78,7 +77,7 @@
 <tr><td><code>let x = 5; x = x + 1;</code></td><td><code>let x = ref(5); x := x^ + 1;</code></td></tr>
 </tbody>
 </table>
-<h2><a class="anchor" aria-hidden="true" id="문자열-문자"></a><a href="#문자열-문자" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>문자열 &amp; 문자</h2>
+<h2><a class="anchor" aria-hidden="true" id="string-character"></a><a href="#string-character" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>String &amp; Character</h2>
 <table>
 <thead>
 <tr><th>JavaScript</th><th>Reason</th></tr>
@@ -117,7 +116,7 @@
 <tr><td><code>5 % 3</code></td><td><code>5 mod 3</code></td></tr>
 </tbody>
 </table>
-<p>* JS는 정수와 부동소수점을 구분하지 않습니다.</p>
+<p>* JS has no distinction between integer and float.</p>
 <h2><a class="anchor" aria-hidden="true" id="오브젝트-레코드"></a><a href="#오브젝트-레코드" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>오브젝트/레코드</h2>
 <table>
 <thead>
@@ -125,13 +124,12 @@
 </thead>
 <tbody>
 <tr><td>정적 타입 없음</td><td><code>type point = {x: int, mutable y: int}</code></td></tr>
-<tr><td><code>{x: 30, y: 20}</code></td><td>동일 *</td></tr>
+<tr><td><code>{x: 30, y: 20}</code></td><td>Same</td></tr>
 <tr><td><code>point.x</code></td><td>동일</td></tr>
 <tr><td><code>point.y = 30;</code></td><td>동일</td></tr>
 <tr><td><code>{...point, x: 30}</code></td><td>동일</td></tr>
 </tbody>
 </table>
-<p>* This is the Reason spiritual equivalent; it doesn't mean it compiles to JS' object! To compile to the latter, see <a href="/docs/ko/object#tip-tricks">here</a>.</p>
 <h2><a class="anchor" aria-hidden="true" id="배열"></a><a href="#배열" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>배열</h2>
 <table>
 <thead>
@@ -144,7 +142,7 @@
 <tr><td>불변 리스트 없음</td><td><code>[1, 2, 3]</code></td></tr>
 </tbody>
 </table>
-<p>* JavaScript에서는 배열로 튜플을 흉내냅니다. JavaScript의 배열은 여러 타입의 원소를 담을 수 있기 때문입니다.</p>
+<p>* We can simulate tuples in JavaScript with arrays, because JavaScript arrays can contain multiple types of elements.</p>
 <h2><a class="anchor" aria-hidden="true" id="null"></a><a href="#null" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Null</h2>
 <table>
 <thead>
@@ -217,7 +215,7 @@ doubleX + doubleY
 <tr><td><code>switch</code></td><td><code>switch</code> 지만 <a href="/docs/ko/pattern-matching">엄청 강력해요!</a></td></tr>
 </tbody>
 </table>
-<p>* Reason의 조건문은 언제나 식입니다!</p>
+<p>* Reason conditionals are always expressions!</p>
 <h2><a class="anchor" aria-hidden="true" id="비구조화"></a><a href="#비구조화" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>비구조화</h2>
 <table>
 <thead>
@@ -229,7 +227,7 @@ doubleX + doubleY
 <tr><td><code>const {a: aa, b: bb} = data</code></td><td><code>let {a: aa, b: bb} = data</code></td></tr>
 </tbody>
 </table>
-<p>* <code>data</code>의 길이가 2기 아닐 수 있으므로 컴파일러 경고를 줍니다. 위 코드 대신 패턴 매칭으로 고치는 게 좋습니다.</p>
+<p>* Gives good compiler warning that <code>data</code> might not be of length 2. Switch to pattern-matching instead.</p>
 <h2><a class="anchor" aria-hidden="true" id="반복문"></a><a href="#반복문" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>반복문</h2>
 <table>
 <thead>
@@ -264,7 +262,7 @@ doubleX + doubleY
 <tr><td><code>try {a} catch (Err) {...} finally {...}</code></td><td><code>try (a) { &amp;#124; Err =&gt; ...}</code> *</td></tr>
 </tbody>
 </table>
-<p>* finally 없음.</p>
+<p>* No finally.</p>
 <h2><a class="anchor" aria-hidden="true" id="블럭-1"></a><a href="#블럭-1" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>블럭</h2>
 <p>In Reason, &quot;sequence expressions&quot; are created with <code>{}</code> and evaluate to their last statement. In JavaScript, this can be simulated via an immediately-invoked function expression (since function bodies have their own local scope).</p>
 <table>
@@ -305,7 +303,7 @@ x + y
 <tr><td><code>// 줄 주석</code></td><td>Same</td></tr>
 </tbody>
 </table>
-</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/ko/interop"><span class="arrow-prev">← </span><span>연동</span></a><a class="docs-next button" href="/docs/ko/libraries"><span>라이브러리</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#let-바인딩">Let 바인딩</a></li><li><a href="#문자열-amp-문자">문자열 &amp; 문자</a></li><li><a href="#부울">부울</a></li><li><a href="#수">수</a></li><li><a href="#오브젝트-레코드">오브젝트/레코드</a></li><li><a href="#배열">배열</a></li><li><a href="#null">Null</a></li><li><a href="#함수">함수</a><ul class="toc-headings"><li><a href="#블럭">블럭</a></li><li><a href="#커링">커링</a></li></ul></li><li><a href="#if-else">If-Else</a></li><li><a href="#비구조화">비구조화</a></li><li><a href="#반복문">반복문</a></li><li><a href="#jsx">JSX</a></li><li><a href="#예외">예외</a></li><li><a href="#블럭-1">블럭</a></li><li><a href="#주석">주석</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.min.js"></script><script>window.foo = new Pjax({
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/ko/interop"><span class="arrow-prev">← </span><span>연동</span></a><a class="docs-next button" href="/docs/ko/libraries"><span>라이브러리</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#variable">Variable</a></li><li><a href="#string-amp-character">String &amp; Character</a></li><li><a href="#부울">부울</a></li><li><a href="#수">수</a></li><li><a href="#오브젝트-레코드">오브젝트/레코드</a></li><li><a href="#배열">배열</a></li><li><a href="#null">Null</a></li><li><a href="#함수">함수</a><ul class="toc-headings"><li><a href="#블럭">블럭</a></li><li><a href="#커링">커링</a></li></ul></li><li><a href="#if-else">If-Else</a></li><li><a href="#비구조화">비구조화</a></li><li><a href="#반복문">반복문</a></li><li><a href="#jsx">JSX</a></li><li><a href="#예외">예외</a></li><li><a href="#블럭-1">블럭</a></li><li><a href="#주석">주석</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.min.js"></script><script>window.foo = new Pjax({
           areas: [
             // try to use the first query.
             '.mainContainer, .docsNavContainer .toc .navWrapper, .onPageNav',

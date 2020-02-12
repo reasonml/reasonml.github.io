@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Syntax Cheatsheet · Reason</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="我们历经艰难让 Reason 在保留 OCaml 的强大语义和类型的同时看起来像 JS。希望你能喜欢！"/><meta name="docsearch:language" content="zh-CN"/><meta property="og:title" content="Syntax Cheatsheet · Reason"/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io/"/><meta property="og:description" content="我们历经艰难让 Reason 在保留 OCaml 的强大语义和类型的同时看起来像 JS。希望你能喜欢！"/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/icon_50.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io/blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io/blog/feed.xml" title="Reason Blog RSS Feed"/><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/zh-CN"><img class="logo" src="/img/dummy.svg" alt="Reason"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/zh-CN/what-and-why" target="_self">Docs</a></li><li class=""><a href="/zh-CN/try" target="_self">Try</a></li><li class=""><a href="/api/index" target="_self">API</a></li><li class=""><a href="/docs/zh-CN/community" target="_self">Community</a></li><li class=""><a href="/blog/" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg" alt="Languages icon"/>中文</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/docs/ja/syntax-cheatsheet">日本語</a></li><li><a href="/docs/en/syntax-cheatsheet">English</a></li><li><a href="/docs/de/syntax-cheatsheet">Deutsch</a></li><li><a href="/docs/es-ES/syntax-cheatsheet">Español</a></li><li><a href="/docs/fr/syntax-cheatsheet">Français</a></li><li><a href="/docs/ko/syntax-cheatsheet">한국어</a></li><li><a href="/docs/pt-BR/syntax-cheatsheet">Português (Brasil)</a></li><li><a href="/docs/ru/syntax-cheatsheet">Русский</a></li><li><a href="/docs/uk/syntax-cheatsheet">Українська</a></li><li><a href="/docs/zh-TW/syntax-cheatsheet">繁體中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank" rel="noreferrer noopener">帮助翻译</a></li></ul></div></li><script>
+<!DOCTYPE html><html lang="zh-CN"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Syntax Cheatsheet · Reason</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="## Variable"/><meta name="docsearch:language" content="zh-CN"/><meta property="og:title" content="Syntax Cheatsheet · Reason"/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io/"/><meta property="og:description" content="## Variable"/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/icon_50.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io/blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io/blog/feed.xml" title="Reason Blog RSS Feed"/><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/zh-CN"><img class="logo" src="/img/dummy.svg" alt="Reason"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/zh-CN/what-and-why" target="_self">Docs</a></li><li class=""><a href="/zh-CN/try" target="_self">Try</a></li><li class=""><a href="/api/index" target="_self">API</a></li><li class=""><a href="/docs/zh-CN/community" target="_self">Community</a></li><li class=""><a href="/blog/" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg" alt="Languages icon"/>中文</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/docs/ja/syntax-cheatsheet">日本語</a></li><li><a href="/docs/en/syntax-cheatsheet">English</a></li><li><a href="/docs/de/syntax-cheatsheet">Deutsch</a></li><li><a href="/docs/es-ES/syntax-cheatsheet">Español</a></li><li><a href="/docs/fr/syntax-cheatsheet">Français</a></li><li><a href="/docs/ko/syntax-cheatsheet">한국어</a></li><li><a href="/docs/pt-BR/syntax-cheatsheet">Português (Brasil)</a></li><li><a href="/docs/ru/syntax-cheatsheet">Русский</a></li><li><a href="/docs/uk/syntax-cheatsheet">Українська</a></li><li><a href="/docs/zh-TW/syntax-cheatsheet">繁體中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank" rel="noreferrer noopener">帮助翻译</a></li></ul></div></li><script>
         const languagesMenuItem = document.getElementById("languages-menu");
         const languagesDropDown = document.getElementById("languages-dropdown");
         languagesMenuItem.addEventListener("click", function(event) {
@@ -66,8 +66,7 @@
                 };
               }
             });
-        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://crowdin.com/project/reason/zh-CN" target="_blank" rel="noreferrer noopener">Translate</a><h1 class="postHeaderTitle">Syntax Cheatsheet</h1></header><article><div><span><p>我们历经艰难让 Reason 在保留 OCaml 的强大语义和类型的同时看起来像 JS。希望你能喜欢！</p>
-<h2><a class="anchor" aria-hidden="true" id="let-绑定"></a><a href="#let-绑定" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Let 绑定</h2>
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://crowdin.com/project/reason/zh-CN" target="_blank" rel="noreferrer noopener">Translate</a><h1 class="postHeaderTitle">Syntax Cheatsheet</h1></header><article><div><span><h2><a class="anchor" aria-hidden="true" id="variable"></a><a href="#variable" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Variable</h2>
 <table>
 <thead>
 <tr><th>JavaScript</th><th>Reason</th></tr>
@@ -78,7 +77,7 @@
 <tr><td><code>let x = 5; x = x + 1;</code></td><td><code>let x = ref(5); x := x^ + 1;</code></td></tr>
 </tbody>
 </table>
-<h2><a class="anchor" aria-hidden="true" id="string-char"></a><a href="#string-char" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>String &amp; Char</h2>
+<h2><a class="anchor" aria-hidden="true" id="string-character"></a><a href="#string-character" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>String &amp; Character</h2>
 <table>
 <thead>
 <tr><th>JavaScript</th><th>Reason</th></tr>
@@ -117,7 +116,7 @@
 <tr><td><code>5 % 3</code></td><td><code>5 mod 3</code></td></tr>
 </tbody>
 </table>
-<p>* JS 里的整数和浮点数没有区别。</p>
+<p>* JS has no distinction between integer and float.</p>
 <h2><a class="anchor" aria-hidden="true" id="object-record"></a><a href="#object-record" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Object/Record</h2>
 <table>
 <thead>
@@ -125,13 +124,12 @@
 </thead>
 <tbody>
 <tr><td>没有静态类型</td><td><code>type point = {x: int, mutable y: int}</code></td></tr>
-<tr><td><code>{x: 30, y: 20}</code></td><td>相同 *</td></tr>
+<tr><td><code>{x: 30, y: 20}</code></td><td>Same</td></tr>
 <tr><td><code>point.x</code></td><td>相同</td></tr>
 <tr><td><code>point.y = 30;</code></td><td>相同</td></tr>
 <tr><td><code>{...point, x: 30}</code></td><td>相同</td></tr>
 </tbody>
 </table>
-<p>* 这是 Reason 形式上等价，但不意味着会被编译成 JS 对象！想要编译到 JS 对象，看 <a href="/docs/zh-CN/object#tip-tricks">这里</a>。</p>
 <h2><a class="anchor" aria-hidden="true" id="数组"></a><a href="#数组" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>数组</h2>
 <table>
 <thead>
@@ -144,7 +142,7 @@
 <tr><td>没有不可变列表</td><td><code>[1, 2, 3]</code></td></tr>
 </tbody>
 </table>
-<p>* JavaScript 可以使用 array 模拟 tuple，因为 JavaScript 的数组可以同时包含多种类型。</p>
+<p>* We can simulate tuples in JavaScript with arrays, because JavaScript arrays can contain multiple types of elements.</p>
 <h2><a class="anchor" aria-hidden="true" id="null"></a><a href="#null" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Null</h2>
 <table>
 <thead>
@@ -154,7 +152,7 @@
 <tr><td><code>null</code>, <code>undefined</code></td><td><code>None</code> *</td></tr>
 </tbody>
 </table>
-<p>* 同样，只是形式上对应；Reason 没有 null 也没有关于 null 的 bug！ 但是当你需要 null 的时候，这有 <a href="/docs/zh-CN/newcomer-examples#using-the-option-type">一个 option 类型</a>。</p>
+<p>* Again, only a spiritual equivalent; Reason doesn't have nulls, nor null bugs! But it does have <a href="/docs/zh-CN/newcomer-examples#using-the-option-type">an option type</a> for when you actually need nullability.</p>
 <h2><a class="anchor" aria-hidden="true" id="函数"></a><a href="#函数" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>函数</h2>
 <table>
 <thead>
@@ -205,7 +203,7 @@ doubleX + doubleY
 <tr><td><code>let add = a =&gt; b =&gt; a + b</code></td><td><code>let add = (a, b) =&gt; a + b</code></td></tr>
 </tbody>
 </table>
-<p>JavaScript 和 Reason 都支持柯里，但 Reason 是 <strong>内置且针对避免分配 &amp; 调用中间函数优化</strong>，只要有可能。</p>
+<p>Both JavaScript and Reason support currying, but Reason currying is <strong>built-in and optimized to avoid intermediate function allocation &amp; calls</strong>, whenever possible.</p>
 <h2><a class="anchor" aria-hidden="true" id="if-else"></a><a href="#if-else" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>If-else</h2>
 <table>
 <thead>
@@ -217,7 +215,7 @@ doubleX + doubleY
 <tr><td><code>switch</code></td><td><code>switch</code> 以及 <a href="/docs/zh-CN/pattern-matching">超强</a> 能力。</td></tr>
 </tbody>
 </table>
-<p>* Reason 的条件语句总是一个表达式！</p>
+<p>* Reason conditionals are always expressions!</p>
 <h2><a class="anchor" aria-hidden="true" id="解构"></a><a href="#解构" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>解构</h2>
 <table>
 <thead>
@@ -229,7 +227,7 @@ doubleX + doubleY
 <tr><td><code>const {a: aa, b: bb} = data</code></td><td><code>let {a: aa, b: bb} = data</code></td></tr>
 </tbody>
 </table>
-<p>* 好的编译器会提示也许 <code>data</code> 长度不是 2。使用 pattern-matching 替代。</p>
+<p>* Gives good compiler warning that <code>data</code> might not be of length 2. Switch to pattern-matching instead.</p>
 <h2><a class="anchor" aria-hidden="true" id="循环"></a><a href="#循环" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>循环</h2>
 <table>
 <thead>
@@ -253,7 +251,7 @@ doubleX + doubleY
 <tr><td>没有 children 展开</td><td><code>&lt;Foo&gt;...children&lt;/Foo&gt;</code></td></tr>
 </tbody>
 </table>
-<p>* 双关参数！</p>
+<p>* Argument punning!</p>
 <h2><a class="anchor" aria-hidden="true" id="异常"></a><a href="#异常" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>异常</h2>
 <table>
 <thead>
@@ -264,9 +262,9 @@ doubleX + doubleY
 <tr><td><code>try {a} catch (Err) {...} finally {...}</code></td><td><code>try (a) { &amp;#124; Err =&gt; ...}</code> *</td></tr>
 </tbody>
 </table>
-<p>* 没有 finally</p>
+<p>* No finally.</p>
 <h2><a class="anchor" aria-hidden="true" id="块-1"></a><a href="#块-1" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>块</h2>
-<p>Reason 使用 <code>{}</code> 创建 “连续表达式”，并将最后一个语句的结果返回。 在 JavaScript 中，可以通过立即执行的函数来模拟（因为函数有自己的局部作用域）。</p>
+<p>In Reason, &quot;sequence expressions&quot; are created with <code>{}</code> and evaluate to their last statement. In JavaScript, this can be simulated via an immediately-invoked function expression (since function bodies have their own local scope).</p>
 <table>
   <tr>
     <th>
@@ -305,7 +303,7 @@ x + y
 <tr><td><code>// 单行注释</code></td><td>Same</td></tr>
 </tbody>
 </table>
-</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/zh-CN/interop"><span class="arrow-prev">← </span><span>Interop</span></a><a class="docs-next button" href="/docs/zh-CN/libraries"><span>Libraries</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#let-绑定">Let 绑定</a></li><li><a href="#string-amp-char">String &amp; Char</a></li><li><a href="#布尔值">布尔值</a></li><li><a href="#数字">数字</a></li><li><a href="#object-record">Object/Record</a></li><li><a href="#数组">数组</a></li><li><a href="#null">Null</a></li><li><a href="#函数">函数</a><ul class="toc-headings"><li><a href="#块">块</a></li><li><a href="#柯里">柯里</a></li></ul></li><li><a href="#if-else">If-else</a></li><li><a href="#解构">解构</a></li><li><a href="#循环">循环</a></li><li><a href="#jsx">JSX</a></li><li><a href="#异常">异常</a></li><li><a href="#块-1">块</a></li><li><a href="#注释">注释</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.min.js"></script><script>window.foo = new Pjax({
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/zh-CN/interop"><span class="arrow-prev">← </span><span>Interop</span></a><a class="docs-next button" href="/docs/zh-CN/libraries"><span>Libraries</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#variable">Variable</a></li><li><a href="#string-amp-character">String &amp; Character</a></li><li><a href="#布尔值">布尔值</a></li><li><a href="#数字">数字</a></li><li><a href="#object-record">Object/Record</a></li><li><a href="#数组">数组</a></li><li><a href="#null">Null</a></li><li><a href="#函数">函数</a><ul class="toc-headings"><li><a href="#块">块</a></li><li><a href="#柯里">柯里</a></li></ul></li><li><a href="#if-else">If-else</a></li><li><a href="#解构">解构</a></li><li><a href="#循环">循环</a></li><li><a href="#jsx">JSX</a></li><li><a href="#异常">异常</a></li><li><a href="#块-1">块</a></li><li><a href="#注释">注释</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.min.js"></script><script>window.foo = new Pjax({
           areas: [
             // try to use the first query.
             '.mainContainer, .docsNavContainer .toc .navWrapper, .onPageNav',

@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="ru"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Шпаргалка по синтаксису · Reason</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="Мы усердно работали над тем, чтобы Reason выглядел как JS, сохраняя при этом отличную семантику и типы OCaml. Надеемся, вам понравится!"/><meta name="docsearch:language" content="ru"/><meta property="og:title" content="Шпаргалка по синтаксису · Reason"/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io/"/><meta property="og:description" content="Мы усердно работали над тем, чтобы Reason выглядел как JS, сохраняя при этом отличную семантику и типы OCaml. Надеемся, вам понравится!"/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/icon_50.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io/blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io/blog/feed.xml" title="Reason Blog RSS Feed"/><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/ru"><img class="logo" src="/img/dummy.svg" alt="Reason"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/ru/what-and-why" target="_self">Документация</a></li><li class=""><a href="/ru/try" target="_self">Попробовать</a></li><li class=""><a href="/api/index" target="_self">API</a></li><li class=""><a href="/docs/ru/community" target="_self">Сообщество</a></li><li class=""><a href="/blog/" target="_self">Блог</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg" alt="Languages icon"/>Русский</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/docs/ja/syntax-cheatsheet">日本語</a></li><li><a href="/docs/en/syntax-cheatsheet">English</a></li><li><a href="/docs/de/syntax-cheatsheet">Deutsch</a></li><li><a href="/docs/es-ES/syntax-cheatsheet">Español</a></li><li><a href="/docs/fr/syntax-cheatsheet">Français</a></li><li><a href="/docs/ko/syntax-cheatsheet">한국어</a></li><li><a href="/docs/pt-BR/syntax-cheatsheet">Português (Brasil)</a></li><li><a href="/docs/uk/syntax-cheatsheet">Українська</a></li><li><a href="/docs/zh-CN/syntax-cheatsheet">中文</a></li><li><a href="/docs/zh-TW/syntax-cheatsheet">繁體中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank" rel="noreferrer noopener">Помочь с переводом</a></li></ul></div></li><script>
+<!DOCTYPE html><html lang="ru"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Шпаргалка по синтаксису · Reason</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="## Variable"/><meta name="docsearch:language" content="ru"/><meta property="og:title" content="Шпаргалка по синтаксису · Reason"/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io/"/><meta property="og:description" content="## Variable"/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/icon_50.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io/blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io/blog/feed.xml" title="Reason Blog RSS Feed"/><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/ru"><img class="logo" src="/img/dummy.svg" alt="Reason"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/ru/what-and-why" target="_self">Документация</a></li><li class=""><a href="/ru/try" target="_self">Попробовать</a></li><li class=""><a href="/api/index" target="_self">API</a></li><li class=""><a href="/docs/ru/community" target="_self">Сообщество</a></li><li class=""><a href="/blog/" target="_self">Блог</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg" alt="Languages icon"/>Русский</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/docs/ja/syntax-cheatsheet">日本語</a></li><li><a href="/docs/en/syntax-cheatsheet">English</a></li><li><a href="/docs/de/syntax-cheatsheet">Deutsch</a></li><li><a href="/docs/es-ES/syntax-cheatsheet">Español</a></li><li><a href="/docs/fr/syntax-cheatsheet">Français</a></li><li><a href="/docs/ko/syntax-cheatsheet">한국어</a></li><li><a href="/docs/pt-BR/syntax-cheatsheet">Português (Brasil)</a></li><li><a href="/docs/uk/syntax-cheatsheet">Українська</a></li><li><a href="/docs/zh-CN/syntax-cheatsheet">中文</a></li><li><a href="/docs/zh-TW/syntax-cheatsheet">繁體中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank" rel="noreferrer noopener">Помочь с переводом</a></li></ul></div></li><script>
         const languagesMenuItem = document.getElementById("languages-menu");
         const languagesDropDown = document.getElementById("languages-dropdown");
         languagesMenuItem.addEventListener("click", function(event) {
@@ -66,8 +66,7 @@
                 };
               }
             });
-        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://crowdin.com/project/reason/ru" target="_blank" rel="noreferrer noopener">Translate</a><h1 class="postHeaderTitle">Шпаргалка по синтаксису</h1></header><article><div><span><p>Мы усердно работали над тем, чтобы Reason выглядел как JS, сохраняя при этом отличную семантику и типы OCaml. Надеемся, вам понравится!</p>
-<h2><a class="anchor" aria-hidden="true" id="let-привязки"></a><a href="#let-привязки" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Let привязки</h2>
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://crowdin.com/project/reason/ru" target="_blank" rel="noreferrer noopener">Translate</a><h1 class="postHeaderTitle">Шпаргалка по синтаксису</h1></header><article><div><span><h2><a class="anchor" aria-hidden="true" id="variable"></a><a href="#variable" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Variable</h2>
 <table>
 <thead>
 <tr><th>JavaScript</th><th>Reason</th></tr>
@@ -78,7 +77,7 @@
 <tr><td><code>let x = 5; x = x + 1;</code></td><td><code>let x = ref(5); x := x^ + 1;</code></td></tr>
 </tbody>
 </table>
-<h2><a class="anchor" aria-hidden="true" id="строки-и-символы"></a><a href="#строки-и-символы" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Строки и символы</h2>
+<h2><a class="anchor" aria-hidden="true" id="string-character"></a><a href="#string-character" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>String &amp; Character</h2>
 <table>
 <thead>
 <tr><th>JavaScript</th><th>Reason</th></tr>
@@ -117,7 +116,7 @@
 <tr><td><code>5 % 3</code></td><td><code>5 mod 3</code></td></tr>
 </tbody>
 </table>
-<p>* JS не имеет разделения на целые и числа с плавающей точкой.</p>
+<p>* JS has no distinction between integer and float.</p>
 <h2><a class="anchor" aria-hidden="true" id="объект-запись"></a><a href="#объект-запись" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Объект/запись</h2>
 <table>
 <thead>
@@ -125,13 +124,12 @@
 </thead>
 <tbody>
 <tr><td>нет типов</td><td><code>type point = {x: int, mutable y: int}</code></td></tr>
-<tr><td><code>{x: 30, y: 20}</code></td><td>Так же *</td></tr>
+<tr><td><code>{x: 30, y: 20}</code></td><td>Same</td></tr>
 <tr><td><code>point.x</code></td><td>Так же</td></tr>
 <tr><td><code>point.y = 30;</code></td><td>Так же</td></tr>
 <tr><td><code>{...point, x: 30}</code></td><td>Так же</td></tr>
 </tbody>
 </table>
-<p>* Это ближайший эквивалент в Reason, но это не значит, что запись компилируется в JS объект! Про компиляции в объект подробнее <a href="/docs/ru/object#tip-tricks">тут</a>.</p>
 <h2><a class="anchor" aria-hidden="true" id="массив"></a><a href="#массив" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Массив</h2>
 <table>
 <thead>
@@ -144,7 +142,7 @@
 <tr><td>Нет неизменяемых списков</td><td><code>[1, 2, 3]</code></td></tr>
 </tbody>
 </table>
-<p>\ * Мы можем симулировать кортежи в JavaScript с помощью массивов, потому что массивы JavaScript могут содержать элементы нескольких типов.</p>
+<p>* We can simulate tuples in JavaScript with arrays, because JavaScript arrays can contain multiple types of elements.</p>
 <h2><a class="anchor" aria-hidden="true" id="null"></a><a href="#null" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Null</h2>
 <table>
 <thead>
@@ -154,7 +152,7 @@
 <tr><td><code>null</code>, <code>undefined</code></td><td><code>None</code> *</td></tr>
 </tbody>
 </table>
-<p>* Опять же, только примерный эквивалент; В Reason нет null, а соответственно багов, с ним связанных! Но у него есть <a href="/docs/ru/newcomer-examples#using-the-option-type">тип option</a> для случаев, когда вам действительно нужен nullable.</p>
+<p>* Again, only a spiritual equivalent; Reason doesn't have nulls, nor null bugs! But it does have <a href="/docs/ru/newcomer-examples#using-the-option-type">an option type</a> for when you actually need nullability.</p>
 <h2><a class="anchor" aria-hidden="true" id="функция"></a><a href="#функция" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Функция</h2>
 <table>
 <thead>
@@ -205,7 +203,7 @@ doubleX + doubleY
 <tr><td><code>let add = a =&gt; b =&gt; a + b</code></td><td><code>let add = (a, b) =&gt; a + b</code></td></tr>
 </tbody>
 </table>
-<p>Оба языка поддерживают каррирование, но в Reason каррирование <strong>встроенно и оптимизировано для избежания дополнительных аллокаций</strong>, когда это возможно.</p>
+<p>Both JavaScript and Reason support currying, but Reason currying is <strong>built-in and optimized to avoid intermediate function allocation &amp; calls</strong>, whenever possible.</p>
 <h2><a class="anchor" aria-hidden="true" id="if-else"></a><a href="#if-else" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>If-else</h2>
 <table>
 <thead>
@@ -217,7 +215,7 @@ doubleX + doubleY
 <tr><td><code>switch</code></td><td><code>switch</code> но <a href="/docs/ru/pattern-matching">совсем не такой!</a></td></tr>
 </tbody>
 </table>
-<p>* Условия в Reason всегда выражения!</p>
+<p>* Reason conditionals are always expressions!</p>
 <h2><a class="anchor" aria-hidden="true" id="деструктурирование"></a><a href="#деструктурирование" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Деструктурирование</h2>
 <table>
 <thead>
@@ -229,7 +227,7 @@ doubleX + doubleY
 <tr><td><code>const {a: aa, b: bb} = data</code></td><td><code>let {a: aa, b: bb} = data</code></td></tr>
 </tbody>
 </table>
-<p>* Дает хорошее предупреждение компилятора о том, что <code>data</code> может и не иметь длины 2. Вместо этого используйте сопоставление с образцом.</p>
+<p>* Gives good compiler warning that <code>data</code> might not be of length 2. Switch to pattern-matching instead.</p>
 <h2><a class="anchor" aria-hidden="true" id="цикл"></a><a href="#цикл" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Цикл</h2>
 <table>
 <thead>
@@ -253,7 +251,7 @@ doubleX + doubleY
 <tr><td>Не поддерживает spread дочерних элементов</td><td><code>&lt;Foo&gt;...children&lt;/Foo&gt;</code></td></tr>
 </tbody>
 </table>
-<p>* Сокращение в prop</p>
+<p>* Argument punning!</p>
 <h2><a class="anchor" aria-hidden="true" id="исключения"></a><a href="#исключения" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Исключения</h2>
 <table>
 <thead>
@@ -264,9 +262,9 @@ doubleX + doubleY
 <tr><td><code>try {a} catch (Err) {...} finally {...}</code></td><td><code>try (a) { &amp;#124; Err =&gt; ...}</code> *</td></tr>
 </tbody>
 </table>
-<p>* Нет finally.</p>
+<p>* No finally.</p>
 <h2><a class="anchor" aria-hidden="true" id="блоки-1"></a><a href="#блоки-1" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Блоки</h2>
-<p>В Reason последовательности выражений создаются с помощью <code>{}</code> и возвращают последнее выражение. В JavaScript это может быть смоделировано через немедленно вызываемые функции (поскольку тело функции имеет свою собственную локальную область видимости).</p>
+<p>In Reason, &quot;sequence expressions&quot; are created with <code>{}</code> and evaluate to their last statement. In JavaScript, this can be simulated via an immediately-invoked function expression (since function bodies have their own local scope).</p>
 <table>
   <tr>
     <th>
@@ -305,7 +303,7 @@ x + y
 <tr><td><code>// Строковый комментарий</code></td><td>Same</td></tr>
 </tbody>
 </table>
-</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/ru/interop"><span class="arrow-prev">← </span><span class="function-name-prevnext">Взаимодействие с JavaScript</span></a><a class="docs-next button" href="/docs/ru/libraries"><span>Библиотеки</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#let-привязки">Let привязки</a></li><li><a href="#строки-и-символы">Строки и символы</a></li><li><a href="#булев">Булев</a></li><li><a href="#число">Число</a></li><li><a href="#объект-запись">Объект/запись</a></li><li><a href="#массив">Массив</a></li><li><a href="#null">Null</a></li><li><a href="#функция">Функция</a><ul class="toc-headings"><li><a href="#блоки">Блоки</a></li><li><a href="#каррирование">Каррирование</a></li></ul></li><li><a href="#if-else">If-else</a></li><li><a href="#деструктурирование">Деструктурирование</a></li><li><a href="#цикл">Цикл</a></li><li><a href="#jsx">JSX</a></li><li><a href="#исключения">Исключения</a></li><li><a href="#блоки-1">Блоки</a></li><li><a href="#комментарии">Комментарии</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.min.js"></script><script>window.foo = new Pjax({
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/ru/interop"><span class="arrow-prev">← </span><span class="function-name-prevnext">Взаимодействие с JavaScript</span></a><a class="docs-next button" href="/docs/ru/libraries"><span>Библиотеки</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#variable">Variable</a></li><li><a href="#string-amp-character">String &amp; Character</a></li><li><a href="#булев">Булев</a></li><li><a href="#число">Число</a></li><li><a href="#объект-запись">Объект/запись</a></li><li><a href="#массив">Массив</a></li><li><a href="#null">Null</a></li><li><a href="#функция">Функция</a><ul class="toc-headings"><li><a href="#блоки">Блоки</a></li><li><a href="#каррирование">Каррирование</a></li></ul></li><li><a href="#if-else">If-else</a></li><li><a href="#деструктурирование">Деструктурирование</a></li><li><a href="#цикл">Цикл</a></li><li><a href="#jsx">JSX</a></li><li><a href="#исключения">Исключения</a></li><li><a href="#блоки-1">Блоки</a></li><li><a href="#комментарии">Комментарии</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.min.js"></script><script>window.foo = new Pjax({
           areas: [
             // try to use the first query.
             '.mainContainer, .docsNavContainer .toc .navWrapper, .onPageNav',
