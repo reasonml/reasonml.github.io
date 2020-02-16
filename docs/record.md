@@ -102,10 +102,6 @@ type car = {name: string, horsePower};
 
 ## Tips & Tricks
 
-### Interop with JavaScript
-
-If you're working with JavaScript, the record syntax & operations should feel familiar, and you might be tempted to interop with JS by converting a JS object to a record, and vice-versa. This is fine, but we have an **even better way without conversion overhead**! See [here](https://bucklescript.github.io/docs/en/object.html#record-mode)
-
 ### Record Types Are Found By Field Name
 
 With records, you **cannot** say "I'd like this function to take any record type, as long as they have the field `age`". The following _works_, but not as expected:

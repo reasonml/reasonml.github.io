@@ -38,18 +38,17 @@ let result: response(universityStudent) = fetchDataFromServer();
 Assuming you're compiling to JavaScript.
 
 ```reason
-[@bs.deriving abstract]
 type payload = {
   name: string,
   age: int
 };
 
-let obj1 = payload(~name="John", ~age=30);
-
+let student1 = {
+  name: "John",
+  age: 30,
+};
 /* Compiles to a JS object with the above fields */
 ```
-
-Note that the above isn't a record; this is a [special BuckleScript feature](https://bucklescript.github.io/docs/en/object.html#record-mode).
 
 ## Modeling a JS Module with Default Export
 
