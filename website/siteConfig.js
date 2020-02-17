@@ -258,6 +258,11 @@ const users = [
     caption: "Tradie Training",
     image: "img/logos/tradie.png",
     infoLink: "https://tt.edu.au",
+  },
+  {
+    caption: "Porter",
+    image: "img/logos/porter.svg",
+    infoLink: "https://porter.in/",
   }
 ];
 
