@@ -69,7 +69,7 @@ title: Syntax Cheatsheet
 | ------------------- | --------- |
 | `null`, `undefined` | `None` \* |
 
-\* Again, only a spiritual equivalent; Reason doesn't have nulls, nor null bugs! But it does have [an option type](newcomer-examples.md#using-the-option-type) for when you actually need nullability.
+\* Only a spiritual equivalent; Reason doesn't have nulls, nor null bugs! But it does have [an option type](newcomer-examples.md#using-the-option-type) for when you actually need nullability.
 
 ## Function
 
