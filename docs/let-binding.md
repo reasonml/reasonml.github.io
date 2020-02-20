@@ -2,7 +2,7 @@
 title: Let Binding
 ---
 
-A "let binding", in other languages, might be called a "variable declaration". `let` gives names to values. They can be seen and referenced by code that comes after them.
+A "let binding", in other languages, might be called a "variable declaration". `let` _binds_ values to names. They can be seen and referenced by code that comes _after_ them.
 
 ```reason
 let greeting = "hello!";
@@ -15,6 +15,21 @@ let newScore = 10 + score;
 Bindings can be scoped through `{}`.
 
 ```reason
+let message = {
+  let part1 = "hello";
+  let part2 = "world";
+  part1 ++ " " ++ part2
+};
+/* `part1` and `part2` not accessible here! */
+```
+
+The value of the last line of a scope is implicitly returned.
+
+### Design Decisions
+
+Reason's `if`, `while` and functions all use the same block scoping. The code below works **not** because of some special "if scope"; but simply because it's the same scope syntax and feature you just saw:
+
+```reason
 if (displayGreeting) {
   let message = "Enjoying the docs so far?";
   print_endline(message)
@@ -24,64 +39,53 @@ if (displayGreeting) {
 
 ## Bindings Are Immutable
 
-"Immutable" as in, "doesn't change". Once a binding refers to a value, it cannot refer to anything else (unless it
-explicitly contains a mutable value, discussed later). However, you may create a new binding of the same name which *shadows* the previous binding; from that point onward, the binding will refer to the newly assigned value.
+Reason let bindings are "immutable", aka "cannot change/vary". This helps Reason's type system to deduce and optimize much more than other languages (and in turn, help you more).
+
+## Binding Shadowing
+
+The above restriction might sound unpractical at first. How are would you change a value then? Usually, 2 ways:
+
+The first is to realize that many times, what you want isn't to mutate a variable's value. For example, in JavaScript:
+
+```javascript
+var result = 0;
+result = calculate(result);
+result = calculateSomeMore(result);
+```
+
+What you're really doing is just to name intermediate steps. You didn't need to mutate `result` at all! You could have just written this:
+
+```javascript
+var result1 = 0;
+var result2 = calculate(result1);
+var result3 = calculateSomeMore(result2);
+```
+
+In Reason, this obviously works too:
 
 ```reason
-let message = "hello";
-print_endline(message); /* Prints "hello" */
-let message = "bye";
-print_endline(message); /* Prints "bye" */
+let result1 = 0;
+let result2 = calculate(result1);
+let result3 = calculateSomeMore(result2);
 ```
 
-## Tips & Tricks
-
-Since bindings are scoped through `{}`, you can create an anonymous scope around them:
+Anyway, in Reason, we support let binding "shadowing". So you can write this too:
 
 ```reason
-let message = {
-  let part1 = "hello";
-  let part2 = "world";
-  part1 ++ " " ++ part2
-};
-/* `part1` and `part2` not accessible here! */
+let result = 0;
+let result = calculate(result);
+let result = calculateSomeMore(result);
 ```
 
-This prevents misuse of the bindings after these lines.
-
-## Design Decisions
-
-Reason is backed by OCaml under the hood. A let binding, in OCaml syntax, looks like this:
-
-```ocaml
-let a = 1 in
-let b = 2 in
-a + b
-```
-
-This could be conceptually read in this format instead:
-
-```ocaml
-let a = 1 in
-  let b = 2 in
-    a + b
-```
-
-Which is the following in Reason:
+As a matter of fact, even this is fine:
 
 ```reason
-let a = 1;
-let b = 2;
-a + b;
+let result = "hello";
+Js.log(result); // prints "hello"
+let result = 1;
+Js.log(result); // prints 1
 ```
 
-Which might remind you of:
+The binding you refer to is whatever's the closest upward. No mutation here!
 
-```reason
-/* Reason syntax */
-(a) =>
-  (b) =>
-    a + b;
-```
-
-Though they're not strictly the same, hopefully you can see that `let` is just an expression and akin to a function! In Reason, we've turned `in` into `;` for visual familiarity; but don't let that hide the underlying elegance of expressions.
+If you need _real_ mutation, e.g. passing a value around, have it modified by many pieces of code, we provide a slightly heavier [mutation feature](mutation.md).
