@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="de"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Let Binding · Reason</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="A &quot;let binding&quot;, in other languages, might be called a &quot;variable declaration&quot;. `let` gives names to values. They can be seen and referenced by code that comes after them."/><meta name="docsearch:language" content="de"/><meta property="og:title" content="Let Binding · Reason"/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io/"/><meta property="og:description" content="A &quot;let binding&quot;, in other languages, might be called a &quot;variable declaration&quot;. `let` gives names to values. They can be seen and referenced by code that comes after them."/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/icon_50.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io/blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io/blog/feed.xml" title="Reason Blog RSS Feed"/><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/de"><img class="logo" src="/img/dummy.svg" alt="Reason"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/de/what-and-why" target="_self">Docs</a></li><li class=""><a href="/de/try" target="_self">Try</a></li><li class=""><a href="/api/index" target="_self">API</a></li><li class=""><a href="/docs/de/community" target="_self">Community</a></li><li class=""><a href="/blog/" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg" alt="Languages icon"/>Deutsch</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/docs/ja/let-binding">日本語</a></li><li><a href="/docs/en/let-binding">English</a></li><li><a href="/docs/es-ES/let-binding">Español</a></li><li><a href="/docs/fr/let-binding">Français</a></li><li><a href="/docs/ko/let-binding">한국어</a></li><li><a href="/docs/pt-BR/let-binding">Português (Brasil)</a></li><li><a href="/docs/ru/let-binding">Русский</a></li><li><a href="/docs/uk/let-binding">Українська</a></li><li><a href="/docs/zh-CN/let-binding">中文</a></li><li><a href="/docs/zh-TW/let-binding">繁體中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank" rel="noreferrer noopener">Beim Übersetzen helfen</a></li></ul></div></li><script>
+<!DOCTYPE html><html lang="de"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Let Binding · Reason</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="A &quot;let binding&quot;, in other languages, might be called a &quot;variable declaration&quot;. `let` *binds* values to names. They can be seen and referenced by code that comes *after* them."/><meta name="docsearch:language" content="de"/><meta property="og:title" content="Let Binding · Reason"/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io/"/><meta property="og:description" content="A &quot;let binding&quot;, in other languages, might be called a &quot;variable declaration&quot;. `let` *binds* values to names. They can be seen and referenced by code that comes *after* them."/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/icon_50.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io/blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io/blog/feed.xml" title="Reason Blog RSS Feed"/><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/de"><img class="logo" src="/img/dummy.svg" alt="Reason"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/de/what-and-why" target="_self">Docs</a></li><li class=""><a href="/de/try" target="_self">Try</a></li><li class=""><a href="/api/index" target="_self">API</a></li><li class=""><a href="/docs/de/community" target="_self">Community</a></li><li class=""><a href="/blog/" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg" alt="Languages icon"/>Deutsch</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/docs/ja/let-binding">日本語</a></li><li><a href="/docs/en/let-binding">English</a></li><li><a href="/docs/es-ES/let-binding">Español</a></li><li><a href="/docs/fr/let-binding">Français</a></li><li><a href="/docs/ko/let-binding">한국어</a></li><li><a href="/docs/pt-BR/let-binding">Português (Brasil)</a></li><li><a href="/docs/ru/let-binding">Русский</a></li><li><a href="/docs/uk/let-binding">Українська</a></li><li><a href="/docs/zh-CN/let-binding">中文</a></li><li><a href="/docs/zh-TW/let-binding">繁體中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank" rel="noreferrer noopener">Beim Übersetzen helfen</a></li></ul></div></li><script>
         const languagesMenuItem = document.getElementById("languages-menu");
         const languagesDropDown = document.getElementById("languages-dropdown");
         languagesMenuItem.addEventListener("click", function(event) {
@@ -66,13 +66,23 @@
                 };
               }
             });
-        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://crowdin.com/project/reason/de" target="_blank" rel="noreferrer noopener">Translate</a><h1 class="postHeaderTitle">Let Binding</h1></header><article><div><span><p>A &quot;let binding&quot;, in other languages, might be called a &quot;variable declaration&quot;. <code>let</code> gives names to values. They can be seen and referenced by code that comes after them.</p>
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://crowdin.com/project/reason/de" target="_blank" rel="noreferrer noopener">Translate</a><h1 class="postHeaderTitle">Let Binding</h1></header><article><div><span><p>A &quot;let binding&quot;, in other languages, might be called a &quot;variable declaration&quot;. <code>let</code> <em>binds</em> values to names. They can be seen and referenced by code that comes <em>after</em> them.</p>
 <pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> greeting = <span class="hljs-string">"hello!"</span>;
 <span class="hljs-keyword">let</span> score = <span class="hljs-number">10</span>;
 <span class="hljs-keyword">let</span> newScore = <span class="hljs-number">10</span> <span class="hljs-operator">+</span> score;
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" id="sichtbarkeitsbereich-in-einem-block"></a><a href="#sichtbarkeitsbereich-in-einem-block" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Sichtbarkeitsbereich in einem Block</h2>
 <p>Für Bindungen kann mit <code>{}</code> ein Sichtbarkeitsbereich (<em>scope</em>) festgelegt werden.</p>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> message = {
+  <span class="hljs-keyword">let</span> part1 = <span class="hljs-string">"hello"</span>;
+  <span class="hljs-keyword">let</span> part2 = <span class="hljs-string">"world"</span>;
+  part1 <span class="hljs-operator">++</span> <span class="hljs-string">" "</span> <span class="hljs-operator">++</span> part2
+};
+<span class="hljs-comment">/* `part1` and `part2` not accessible here! */</span>
+</code></pre>
+<p>The value of the last line of a scope is implicitly returned.</p>
+<h3><a class="anchor" aria-hidden="true" id="design-decisions"></a><a href="#design-decisions" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Design Decisions</h3>
+<p>Reason's <code>if</code>, <code>while</code> and functions all use the same block scoping. The code below works <strong>not</strong> because of some special &quot;if scope&quot;; but simply because it's the same scope syntax and feature you just saw:</p>
 <pre><code class="hljs css language-reason"><span class="hljs-keyword">if</span> (displayGreeting) {
   <span class="hljs-keyword">let</span> message = <span class="hljs-string">"Enjoying the docs so far?"</span>;
   print_endline(message)
@@ -80,46 +90,38 @@
 <span class="hljs-comment">/* `message` not accessible here! */</span>
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" id="bindungen-sind-unveranderlich"></a><a href="#bindungen-sind-unveranderlich" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Bindungen sind unveränderlich</h2>
-<p>„Immutable“ im Sinne von „ändert sich nicht“. Sobald sich eine Bindung auf einen Wert bezieht, dann kann sie nicht auf etwas anderes verweisen (es sei denn sie enthält explizit einen veränderlichen Wert, was später beschrieben wird). Du kannst jedoch eine neue Bindung mit dem gleichen Namen erzeugen, die die vorige Bindung <em>überschattet</em>; Von diesem Zeitpunkt an bezieht sich die Bindung auf den neu zugewiesenen Wert.</p>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> message = <span class="hljs-string">"hello"</span>;
-print_endline(message); <span class="hljs-comment">/* Prints "hello" */</span>
-<span class="hljs-keyword">let</span> message = <span class="hljs-string">"bye"</span>;
-print_endline(message); <span class="hljs-comment">/* Prints "bye" */</span>
+<p>Reason let bindings are &quot;immutable&quot;, aka &quot;cannot change/vary&quot;. This helps Reason's type system to deduce and optimize much more than other languages (and in turn, help you more).</p>
+<h2><a class="anchor" aria-hidden="true" id="binding-shadowing"></a><a href="#binding-shadowing" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Binding Shadowing</h2>
+<p>The above restriction might sound unpractical at first. How are would you change a value then? Usually, 2 ways:</p>
+<p>The first is to realize that many times, what you want isn't to mutate a variable's value. For example, in JavaScript:</p>
+<pre><code class="hljs css language-javascript"><span class="hljs-keyword">var</span> result = <span class="hljs-number">0</span>;
+result = calculate(result);
+result = calculateSomeMore(result);
 </code></pre>
-<h2><a class="anchor" aria-hidden="true" id="tips-tricks"></a><a href="#tips-tricks" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Tips &amp; Tricks</h2>
-<p>Da Bindungen durch <code>{}</code> definiert sind, kannst du einen anonymen Sichtbarkeitsbereich um sie herum erstellen:</p>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> message = {
-  <span class="hljs-keyword">let</span> part1 = <span class="hljs-string">"hello"</span>;
-  <span class="hljs-keyword">let</span> part2 = <span class="hljs-string">"world"</span>;
-  part1 <span class="hljs-operator">++</span> <span class="hljs-string">" "</span> <span class="hljs-operator">++</span> part2
-};
-<span class="hljs-comment">/* `part1` und `part2` sind hier nicht erreichbar */</span>
+<p>What you're really doing is just to name intermediate steps. You didn't need to mutate <code>result</code> at all! You could have just written this:</p>
+<pre><code class="hljs css language-javascript"><span class="hljs-keyword">var</span> result1 = <span class="hljs-number">0</span>;
+<span class="hljs-keyword">var</span> result2 = calculate(result1);
+<span class="hljs-keyword">var</span> result3 = calculateSomeMore(result2);
 </code></pre>
-<p>Dies verhindert einen Missbrauch der Bindungen nach diesen Zeilen.</p>
-<h2><a class="anchor" aria-hidden="true" id="designentscheidungen"></a><a href="#designentscheidungen" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Designentscheidungen</h2>
-<p>Reason basiert unter der Haube auf OCaml. Eine Bindung mit <code>let</code> sieht in OCaml-Syntax folgendermaßen aus:</p>
-<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">let</span> a = <span class="hljs-number">1</span> <span class="hljs-keyword">in</span>
-<span class="hljs-keyword">let</span> b = <span class="hljs-number">2</span> <span class="hljs-keyword">in</span>
-a + b
+<p>In Reason, this obviously works too:</p>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> result1 = <span class="hljs-number">0</span>;
+<span class="hljs-keyword">let</span> result2 = calculate(result1);
+<span class="hljs-keyword">let</span> result3 = calculateSomeMore(result2);
 </code></pre>
-<p>Konzeptionell könnte dies stattdessen in diesem Format gelesen werden:</p>
-<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">let</span> a = <span class="hljs-number">1</span> <span class="hljs-keyword">in</span>
-  <span class="hljs-keyword">let</span> b = <span class="hljs-number">2</span> <span class="hljs-keyword">in</span>
-    a + b
+<p>Anyway, in Reason, we support let binding &quot;shadowing&quot;. So you can write this too:</p>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> result = <span class="hljs-number">0</span>;
+<span class="hljs-keyword">let</span> result = calculate(result);
+<span class="hljs-keyword">let</span> result = calculateSomeMore(result);
 </code></pre>
-<p>Welches in Reason folgendes ergibt:</p>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> a = <span class="hljs-number">1</span>;
-<span class="hljs-keyword">let</span> b = <span class="hljs-number">2</span>;
-a <span class="hljs-operator">+</span> b;
+<p>As a matter of fact, even this is fine:</p>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> result = <span class="hljs-string">"hello"</span>;
+<span class="hljs-module-identifier">Js</span>.log(result); <span class="hljs-operator">/</span><span class="hljs-operator">/</span> prints <span class="hljs-string">"hello"</span>
+<span class="hljs-keyword">let</span> result = <span class="hljs-number">1</span>;
+<span class="hljs-module-identifier">Js</span>.log(result); <span class="hljs-operator">/</span><span class="hljs-operator">/</span> prints <span class="hljs-number">1</span>
 </code></pre>
-<p>Was dich erinnern könnte an:</p>
-<pre><code class="hljs css language-reason"><span class="hljs-comment">/* Reason syntax */</span>
-(a) =&gt;
-  (b) =&gt;
-    a <span class="hljs-operator">+</span> b;
-</code></pre>
-<p>Obwohl sie nicht genau die gleichen sind, kannst du hoffentlich sehen, dass <code>let</code> lediglich ein Ausdruck ist und einer Funktion ähnelt! Um eine visuelle Vertrautheit zu erzeugen, haben wir in Reason <code>in</code> durch <code>;</code> ersetzt; Aber lass dies nicht die zugrundeliegende Eleganz von Ausdrücken verbergen.</p>
-</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/de/overview"><span class="arrow-prev">← </span><span>Overview</span></a><a class="docs-next button" href="/docs/de/type"><span>Type!</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#sichtbarkeitsbereich-in-einem-block">Sichtbarkeitsbereich in einem Block</a></li><li><a href="#bindungen-sind-unveranderlich">Bindungen sind unveränderlich</a></li><li><a href="#tips-amp-tricks">Tips &amp; Tricks</a></li><li><a href="#designentscheidungen">Designentscheidungen</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.min.js"></script><script>window.foo = new Pjax({
+<p>The binding you refer to is whatever's the closest upward. No mutation here!</p>
+<p>If you need <em>real</em> mutation, e.g. passing a value around, have it modified by many pieces of code, we provide a slightly heavier <a href="/docs/de/mutation">mutation feature</a>.</p>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/de/overview"><span class="arrow-prev">← </span><span>Overview</span></a><a class="docs-next button" href="/docs/de/type"><span>Type!</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#sichtbarkeitsbereich-in-einem-block">Sichtbarkeitsbereich in einem Block</a><ul class="toc-headings"><li><a href="#design-decisions">Design Decisions</a></li></ul></li><li><a href="#bindungen-sind-unveranderlich">Bindungen sind unveränderlich</a></li><li><a href="#binding-shadowing">Binding Shadowing</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.min.js"></script><script>window.foo = new Pjax({
           areas: [
             // try to use the first query.
             '.mainContainer, .docsNavContainer .toc .navWrapper, .onPageNav',

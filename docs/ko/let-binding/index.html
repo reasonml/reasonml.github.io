@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="ko"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Let 바인딩 · Reason</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="&quot;let 바인딩&quot;, 다른 언어에서는 아마 &quot;변수 선언&quot;이라고 부르죠. `let`은 값에 이름을 붙여줍니다. 사용 후에 코드 안에서 그 이름으로 참조할 수 있죠."/><meta name="docsearch:language" content="ko"/><meta property="og:title" content="Let 바인딩 · Reason"/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io/"/><meta property="og:description" content="&quot;let 바인딩&quot;, 다른 언어에서는 아마 &quot;변수 선언&quot;이라고 부르죠. `let`은 값에 이름을 붙여줍니다. 사용 후에 코드 안에서 그 이름으로 참조할 수 있죠."/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/icon_50.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io/blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io/blog/feed.xml" title="Reason Blog RSS Feed"/><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/ko"><img class="logo" src="/img/dummy.svg" alt="Reason"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/ko/what-and-why" target="_self">문서</a></li><li class=""><a href="/ko/try" target="_self">해보기</a></li><li class=""><a href="/api/index" target="_self">API</a></li><li class=""><a href="/docs/ko/community" target="_self">커뮤니티</a></li><li class=""><a href="/blog/" target="_self">블로그</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg" alt="Languages icon"/>한국어</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/docs/ja/let-binding">日本語</a></li><li><a href="/docs/en/let-binding">English</a></li><li><a href="/docs/de/let-binding">Deutsch</a></li><li><a href="/docs/es-ES/let-binding">Español</a></li><li><a href="/docs/fr/let-binding">Français</a></li><li><a href="/docs/pt-BR/let-binding">Português (Brasil)</a></li><li><a href="/docs/ru/let-binding">Русский</a></li><li><a href="/docs/uk/let-binding">Українська</a></li><li><a href="/docs/zh-CN/let-binding">中文</a></li><li><a href="/docs/zh-TW/let-binding">繁體中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank" rel="noreferrer noopener">번역 돕기</a></li></ul></div></li><script>
+<!DOCTYPE html><html lang="ko"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Let 바인딩 · Reason</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="A &quot;let binding&quot;, in other languages, might be called a &quot;variable declaration&quot;. `let` *binds* values to names. They can be seen and referenced by code that comes *after* them."/><meta name="docsearch:language" content="ko"/><meta property="og:title" content="Let 바인딩 · Reason"/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io/"/><meta property="og:description" content="A &quot;let binding&quot;, in other languages, might be called a &quot;variable declaration&quot;. `let` *binds* values to names. They can be seen and referenced by code that comes *after* them."/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/icon_50.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io/blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io/blog/feed.xml" title="Reason Blog RSS Feed"/><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/ko"><img class="logo" src="/img/dummy.svg" alt="Reason"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/ko/what-and-why" target="_self">문서</a></li><li class=""><a href="/ko/try" target="_self">해보기</a></li><li class=""><a href="/api/index" target="_self">API</a></li><li class=""><a href="/docs/ko/community" target="_self">커뮤니티</a></li><li class=""><a href="/blog/" target="_self">블로그</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg" alt="Languages icon"/>한국어</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/docs/ja/let-binding">日本語</a></li><li><a href="/docs/en/let-binding">English</a></li><li><a href="/docs/de/let-binding">Deutsch</a></li><li><a href="/docs/es-ES/let-binding">Español</a></li><li><a href="/docs/fr/let-binding">Français</a></li><li><a href="/docs/pt-BR/let-binding">Português (Brasil)</a></li><li><a href="/docs/ru/let-binding">Русский</a></li><li><a href="/docs/uk/let-binding">Українська</a></li><li><a href="/docs/zh-CN/let-binding">中文</a></li><li><a href="/docs/zh-TW/let-binding">繁體中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank" rel="noreferrer noopener">번역 돕기</a></li></ul></div></li><script>
         const languagesMenuItem = document.getElementById("languages-menu");
         const languagesDropDown = document.getElementById("languages-dropdown");
         languagesMenuItem.addEventListener("click", function(event) {
@@ -66,60 +66,62 @@
                 };
               }
             });
-        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://crowdin.com/project/reason/ko" target="_blank" rel="noreferrer noopener">Translate</a><h1 class="postHeaderTitle">Let 바인딩</h1></header><article><div><span><p>&quot;let 바인딩&quot;, 다른 언어에서는 아마 &quot;변수 선언&quot;이라고 부르죠. <code>let</code>은 값에 이름을 붙여줍니다. 사용 후에 코드 안에서 그 이름으로 참조할 수 있죠.</p>
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://crowdin.com/project/reason/ko" target="_blank" rel="noreferrer noopener">Translate</a><h1 class="postHeaderTitle">Let 바인딩</h1></header><article><div><span><p>A &quot;let binding&quot;, in other languages, might be called a &quot;variable declaration&quot;. <code>let</code> <em>binds</em> values to names. They can be seen and referenced by code that comes <em>after</em> them.</p>
 <pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> greeting = <span class="hljs-string">"hello!"</span>;
 <span class="hljs-keyword">let</span> score = <span class="hljs-number">10</span>;
 <span class="hljs-keyword">let</span> newScore = <span class="hljs-number">10</span> <span class="hljs-operator">+</span> score;
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" id="블럭-스코프"></a><a href="#블럭-스코프" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>블럭 스코프</h2>
 <p>바인딩은 <code>{}</code>를 통해 스코프가 설정됩니다.</p>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">if</span> (displayGreeting) {
-  <span class="hljs-keyword">let</span> message = <span class="hljs-string">"Enjoying the docs so far?"</span>;
-  print_endline(message)
-};
-<span class="hljs-comment">/* `message` 는 더 이상 접근할 수 없습니다! */</span>
-</code></pre>
-<h2><a class="anchor" aria-hidden="true" id="바인딩은-불변입니다"></a><a href="#바인딩은-불변입니다" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>바인딩은 불변입니다</h2>
-<p>&quot;불변&quot;은 &quot;변하지 않음&quot;을 나타냅니다. 하나의 바인딩이 한 값을 나타내면, 이 바인딩은 다른 어떠한 값도 나타낼 수 없습니다 (명시적으로 변하는 값을 담는다고 하지 않을 경우에, 추후에 논의). 하지만, 당신은 이전의 바인딩을 <em>가리는</em> 방식으로 같은 이름으로 바인딩을 만들 수 있습니다. 해당 코드 이후부터 그 바인딩은 새로 할당된 값을 가리킬 것입니다.</p>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> message = <span class="hljs-string">"hello"</span>;
-print_endline(message); <span class="hljs-comment">/* "hello"를 출력 */</span>
-<span class="hljs-keyword">let</span> message = <span class="hljs-string">"bye"</span>;
-print_endline(message); <span class="hljs-comment">/* "bye"를 출력 */</span>
-</code></pre>
-<h2><a class="anchor" aria-hidden="true" id="팁-트릭"></a><a href="#팁-트릭" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>팁 &amp; 트릭</h2>
-<p>바인딩은 <code>{}</code>로 스코프가 설정되므로 익명 스코프를 만들고 감싸서 다음과 같이 할 수 있습니다.</p>
 <pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> message = {
   <span class="hljs-keyword">let</span> part1 = <span class="hljs-string">"hello"</span>;
   <span class="hljs-keyword">let</span> part2 = <span class="hljs-string">"world"</span>;
   part1 <span class="hljs-operator">++</span> <span class="hljs-string">" "</span> <span class="hljs-operator">++</span> part2
 };
-<span class="hljs-comment">/* 여기서는 `part1` 과 `part2` 에 접근할 수 없습니다! */</span>
+<span class="hljs-comment">/* `part1` and `part2` not accessible here! */</span>
 </code></pre>
-<p>이는 해당 라인보다 뒤에서 바인딩이 잘못 사용되는 것을 사전에 막을 수 있게 합니다.</p>
-<h2><a class="anchor" aria-hidden="true" id="디자인-결정"></a><a href="#디자인-결정" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>디자인 결정</h2>
-<p>Reason is backed by OCaml under the hood. A let binding, in OCaml syntax, looks like this:</p>
-<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">let</span> a = <span class="hljs-number">1</span> <span class="hljs-keyword">in</span>
-<span class="hljs-keyword">let</span> b = <span class="hljs-number">2</span> <span class="hljs-keyword">in</span>
-a + b
+<p>The value of the last line of a scope is implicitly returned.</p>
+<h3><a class="anchor" aria-hidden="true" id="design-decisions"></a><a href="#design-decisions" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Design Decisions</h3>
+<p>Reason's <code>if</code>, <code>while</code> and functions all use the same block scoping. The code below works <strong>not</strong> because of some special &quot;if scope&quot;; but simply because it's the same scope syntax and feature you just saw:</p>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">if</span> (displayGreeting) {
+  <span class="hljs-keyword">let</span> message = <span class="hljs-string">"Enjoying the docs so far?"</span>;
+  print_endline(message)
+};
+<span class="hljs-comment">/* `message` not accessible here! */</span>
 </code></pre>
-<p>우리는 개념 상, 이런 식으로 읽을 수 있습니다:</p>
-<pre><code class="hljs css language-ocaml"><span class="hljs-keyword">let</span> a = <span class="hljs-number">1</span> <span class="hljs-keyword">in</span>
-  <span class="hljs-keyword">let</span> b = <span class="hljs-number">2</span> <span class="hljs-keyword">in</span>
-    a + b
+<h2><a class="anchor" aria-hidden="true" id="바인딩은-불변입니다"></a><a href="#바인딩은-불변입니다" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>바인딩은 불변입니다</h2>
+<p>Reason let bindings are &quot;immutable&quot;, aka &quot;cannot change/vary&quot;. This helps Reason's type system to deduce and optimize much more than other languages (and in turn, help you more).</p>
+<h2><a class="anchor" aria-hidden="true" id="binding-shadowing"></a><a href="#binding-shadowing" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Binding Shadowing</h2>
+<p>The above restriction might sound unpractical at first. How are would you change a value then? Usually, 2 ways:</p>
+<p>The first is to realize that many times, what you want isn't to mutate a variable's value. For example, in JavaScript:</p>
+<pre><code class="hljs css language-javascript"><span class="hljs-keyword">var</span> result = <span class="hljs-number">0</span>;
+result = calculate(result);
+result = calculateSomeMore(result);
 </code></pre>
-<p>Reason에서는 다음과 같습니다:</p>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> a = <span class="hljs-number">1</span>;
-<span class="hljs-keyword">let</span> b = <span class="hljs-number">2</span>;
-a <span class="hljs-operator">+</span> b;
+<p>What you're really doing is just to name intermediate steps. You didn't need to mutate <code>result</code> at all! You could have just written this:</p>
+<pre><code class="hljs css language-javascript"><span class="hljs-keyword">var</span> result1 = <span class="hljs-number">0</span>;
+<span class="hljs-keyword">var</span> result2 = calculate(result1);
+<span class="hljs-keyword">var</span> result3 = calculateSomeMore(result2);
 </code></pre>
-<p>이는 다음을 상기시켜줄 수 있습니다:</p>
-<pre><code class="hljs css language-reason"><span class="hljs-comment">/* Reason 문법 */</span>
-(a) =&gt;
-  (b) =&gt;
-    a <span class="hljs-operator">+</span> b;
+<p>In Reason, this obviously works too:</p>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> result1 = <span class="hljs-number">0</span>;
+<span class="hljs-keyword">let</span> result2 = calculate(result1);
+<span class="hljs-keyword">let</span> result3 = calculateSomeMore(result2);
 </code></pre>
-<p>Though they're not strictly the same, hopefully you can see that <code>let</code> is just an expression and akin to a function! In Reason, we've turned <code>in</code> into <code>;</code> for visual familiarity; but don't let that hide the underlying elegance of expressions.</p>
-</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/ko/overview"><span class="arrow-prev">← </span><span>개요</span></a><a class="docs-next button" href="/docs/ko/type"><span>타입!</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#블럭-스코프">블럭 스코프</a></li><li><a href="#바인딩은-불변입니다">바인딩은 불변입니다</a></li><li><a href="#팁-amp-트릭">팁 &amp; 트릭</a></li><li><a href="#디자인-결정">디자인 결정</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.min.js"></script><script>window.foo = new Pjax({
+<p>Anyway, in Reason, we support let binding &quot;shadowing&quot;. So you can write this too:</p>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> result = <span class="hljs-number">0</span>;
+<span class="hljs-keyword">let</span> result = calculate(result);
+<span class="hljs-keyword">let</span> result = calculateSomeMore(result);
+</code></pre>
+<p>As a matter of fact, even this is fine:</p>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> result = <span class="hljs-string">"hello"</span>;
+<span class="hljs-module-identifier">Js</span>.log(result); <span class="hljs-operator">/</span><span class="hljs-operator">/</span> prints <span class="hljs-string">"hello"</span>
+<span class="hljs-keyword">let</span> result = <span class="hljs-number">1</span>;
+<span class="hljs-module-identifier">Js</span>.log(result); <span class="hljs-operator">/</span><span class="hljs-operator">/</span> prints <span class="hljs-number">1</span>
+</code></pre>
+<p>The binding you refer to is whatever's the closest upward. No mutation here!</p>
+<p>If you need <em>real</em> mutation, e.g. passing a value around, have it modified by many pieces of code, we provide a slightly heavier <a href="/docs/ko/mutation">mutation feature</a>.</p>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/ko/overview"><span class="arrow-prev">← </span><span>개요</span></a><a class="docs-next button" href="/docs/ko/type"><span>타입!</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#블럭-스코프">블럭 스코프</a><ul class="toc-headings"><li><a href="#design-decisions">Design Decisions</a></li></ul></li><li><a href="#바인딩은-불변입니다">바인딩은 불변입니다</a></li><li><a href="#binding-shadowing">Binding Shadowing</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.min.js"></script><script>window.foo = new Pjax({
           areas: [
             // try to use the first query.
             '.mainContainer, .docsNavContainer .toc .navWrapper, .onPageNav',
