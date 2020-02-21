@@ -25,15 +25,43 @@
   margin-left: -15px;
   margin-right: -15px;
   border: 1px solid #eee;
-  border-radius: 6px;
+  /* top left corner joins the code tab bar's bottom left corner (styles below). No rounded border here */
+  border-radius: 0px 6px 6px 6px;
   padding: 15px;
   font-size: 15px;
-
-  /* respect the section's max width, from .mainContainer .wrapper p */
-  max-width: 50rem;
 }
-.hljs.javascript {
-  background-color: rgba(247, 223, 30, 0.03);
+.nav-tabs {
+  /* same as above */
+  margin-left: -15px;
+  margin-right: -15px;
+  /* collapse the shared borders of tab and code area into a single 1px border */
+  margin-bottom: -1px;
+  /* override docusaurus' default code tab's bottom bar */
+  border-bottom: none;
+}
+.tabs {
+  /* override docusaurus' default code tab bar's top highlight */
+  border-top: none;
+}
+.tabs .nav-tabs > div {
+  border: 1px solid #eee;
+  background-color: #fafafa;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  /* collapse neighbor tabs vertical borders into a single 1px border */
+  margin-left: -1px;
+}
+.tabs .nav-tabs > div:first-child {
+  border-top-left-radius: 6px;
+  margin-left: 0px;
+}
+.tabs .nav-tabs > div:last-child {
+  border-top-right-radius: 6px;
+}
+.tabs .nav-tabs > div.active {
+  background-color: #eee;
+  /* override docusaurus' default code tab's bottom highlight */
+  border-bottom: none;
 }
 table .hljs {
   border: none;
