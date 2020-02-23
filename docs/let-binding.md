@@ -62,7 +62,7 @@ Reason let bindings are "immutable", aka "cannot change/vary". This helps Reason
 
 ## Binding Shadowing
 
-The above restriction might sound unpractical at first. How are would you change a value then? Usually, 2 ways:
+The above restriction might sound unpractical at first. How would you change a value then? Usually, 2 ways:
 
 The first is to realize that many times, what you want isn't to mutate a variable's value. For example, in JavaScript:
 
