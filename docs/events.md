@@ -8,7 +8,7 @@ There are a Reason meetups all around the world, among others:
 - [Budapest](https://www.meetup.com/ReasonML-Budapest/)
 - [Brussels](https://www.meetup.com/ReasonML-BXL/)
 - [Chicago](https://www.meetup.com/Chicago-ReasonML/)
-- [Copenhagen](https://www.meetup.com/preview/ReasonML-CPH)
+- [Copenhagen](https://www.meetup.com/ReasonML-CPH)
 - [Göteborg](https://www.meetup.com/got-lambda/)
 - [Lisbon](https://www.meetup.com/ReasonML-Lisbon)
 - [London](https://www.meetup.com/ReasonLDN/) ([Twitter](https://twitter.com/reasonldn))
