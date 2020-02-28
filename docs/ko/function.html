@@ -160,10 +160,10 @@ drawCircle(~radius=<span class="hljs-number">10</span>, ~color=<span class="hljs
 <pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> whatIsThis = drawCircle(~color);
 </code></pre>
 <p><code>whatIsThis</code>는 선택적 인자인 <code>radius</code>가 적용되기를 기다리는 커리된 <code>drawCircle</code> 함수 인가요? Or did it finish applying because the <code>radius</code> is optional? 이 혼란을 바로잡기 위해선, <code>drawCircle</code> 끝에 고정된(즉 이름이 붙여지지 않은) 인자(관습적으로 <code>()</code>) 를 붙이면 경험에 기반한 규칙에 의해 OCaml이 고정된 인자가 주어지면 선택적 인자가 생략된 것으로 간주합니다.</p>
-<p>Because we don't supply the unit OCaml knows we want to curry the function.</p>
+<p>If we don't supply the unit, OCaml knows we want to curry the function.</p>
 <pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> curriedFunction = drawCircle(~color);
 </code></pre>
-<p>Because we <em>do</em> supply the unit OCaml knows we deliberately omit the <code>radius</code> parameter, and the function is executed.</p>
+<p>If we <em>do</em> supply the unit, OCaml knows we deliberately omit the <code>radius</code> parameter, and the function is executed.</p>
 <pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> circle = drawCircle(~color, ());
 </code></pre>
 <h3><a class="anchor" aria-hidden="true" id="명시적으로-전달된-선택적-인자"></a><a href="#명시적으로-전달된-선택적-인자" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>명시적으로 전달된 선택적 인자</h3>
