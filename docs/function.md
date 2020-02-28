@@ -149,12 +149,12 @@ let whatIsThis = drawCircle(~color);
 
 Is `whatIsThis` a curried `drawCircle` function, waiting for the optional `radius` to be applied? Or did it finish applying because the `radius` is optional? To address this confusion, append a positional (aka non-labeled) argument to `drawCircle` (conventionally `()`), and OCaml will, as a rule of thumb, presume the optional labeled argument is omitted when the positional argument is provided.
 
-Because we don't supply the unit OCaml knows we want to curry the function.
+If we don't supply the unit, OCaml knows we want to curry the function.
 ```reason
 let curriedFunction = drawCircle(~color);
 ```
 
-Because we _do_ supply the unit OCaml knows we deliberately omit the `radius` parameter, and the function is executed.
+If we _do_ supply the unit, OCaml knows we deliberately omit the `radius` parameter, and the function is executed.
 ```reason
 let circle = drawCircle(~color, ());
 ```
