@@ -4,6 +4,8 @@ title: Let Binding
 
 A "let binding", in other languages, might be called a "variable declaration". `let` _binds_ values to names. They can be seen and referenced by code that comes _after_ them.
 
+A let binding transforms into a regular JavaScript variable declaration. As much as possible, we preserve the same name after transformation, for easier debugging and communication with JavaScript libraries.
+
 <!--DOCUSAURUS_CODE_TABS-->
 <!--Reason-->
 ```reason

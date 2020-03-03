@@ -1,63 +1,71 @@
 ---
-title: String & Char
+title: String & Character
 ---
 
 ## String
 
-Reason strings are delimited using **double** quotes (single quotes are reserved for the character type below).
+Reason strings are delimited using **double** quotes. They transform into regular JavaScript strings.
+This also means **you can directly use a string declared from another JavaScript file**, without back-and-forth conversions!
 
+<!--DOCUSAURUS_CODE_TABS-->
+<!--Reason-->
 ```reason
 let greeting = "Hello world!";
 let multilineGreeting = "Hello
  world!";
 ```
-
-Special characters in the string need to be escaped:
-
-```reason
-let oneSlash = "\\";
+<!--Output-->
+```js
+var greeting = "Hello world!";
+var multilineGreeting = "Hello\n world!";
 ```
+<!--END_DOCUSAURUS_CODE_TABS-->
 
 To concatenate strings, use `++`:
 
+<!--DOCUSAURUS_CODE_TABS-->
+<!--Reason-->
 ```reason
 let greetings = "Hello " ++ "world!";
 ```
+<!--Output-->
+```js
+var greetings = "Hello world!";
+```
+<!--END_DOCUSAURUS_CODE_TABS-->
 
-### Quoted String
+### String Interpolation & Unicode
 
 There's a special syntax for string that allows
 
-- multiline string just like before
-- no special character escaping
-- hooks for special pre-processors
+- Multiline string just like before
+- No special character escaping
+- Variable interpolation
+- Better unicode support than the current default string type
 
+<!--DOCUSAURUS_CODE_TABS-->
+<!--Reason-->
 ```reason
-let greetingAndOneSlash = {|Hello
-World
-\
-Hehe...
-|};
+let name = "John"
+let greetingAndOneSlash = {j|Hello, $name
+I'm 奥巴马|j};
 ```
-
-Analogically speaking, it's like JavaScript's backtick string interpolation, except without needing to escape special chars, and without built-in interpolation of variables. Though you can trivially restore the latter functionality, [as BuckleScript has done](https://bucklescript.github.io/docs/en/common-data-types.html#interpolation):
-
-```reason
-let world = {js|世界|js}; /* Supports Unicode characters */
-let helloWorld = {j|你好，$world|j}; /* Supports Unicode and interpolation variables */
+<!--Output-->
+```js
+var name = "John";
+var greetingAndOneSlash = "Hello, " + (String(name) + "\nI\'m 奥巴马");
 ```
-
-BuckleScript's special pre-processor can then look for such `js` and `j` markers around the string and transforms it into something else.
+<!--END_DOCUSAURUS_CODE_TABS-->
 
 ### Usage
 
-[More string operations can be found in the standard library](/api/String.html). For JS compilation, see the familiar `Js.String` API in the [BuckleScript API docs](http://bucklescript.github.io/bucklescript/api/Js.String.html). Since a Reason string maps to a JavaScript string, you can mix & match the string operations in both standard libraries.
+If you're coming from JavaScript, we **strongly recommend** you to use the [`Js.String`](http://bucklescript.github.io/bucklescript/api/Js.String.html) API in the standard library. It's brings no extra runtime code, and frees you from learning other String APIs in the ecosystem.
 
 ### Tips & Tricks
 
-https://twitter.com/jusrin00/status/875238742621028355
+You probably don't need to use strings as much as you did! https://twitter.com/jusrin00/status/875238742621028355
 
-**You have an expressive type system now**! In an untyped language, you'd often overload the meaning of string by using it as:
+In other languages, you'd often overload the meaning of string by using it as:
 
 - a unique id: `var BLUE_COLOR = "blue"`
 - an identifier into a data structure: `var BLUE = "blue"; var RED = "red"; var colors = [BLUE, RED]`
@@ -71,44 +79,16 @@ Under native compilation, Reason strings compile to a simple representation whos
 
 Under JavaScript compilation, a Reason string maps to a JavaScript string and vice-versa, so no such above concern or analysis opportunities apply.
 
-### Design Decisions
-
-Quoted string's feature of not escaping special characters enables neat DSLs like [regular expression](/api/Str.html):
-
-```reason
-let r = Str.regexp({|hello \([A-Za-z]+\)|});
-```
-
-as opposed to
-
-```reason
-let r = Str.regexp("hello \\([A-Za-z]+\\)");
-```
-
-Though for JS compilation, you'd use [`[%bs.re]`](https://bucklescript.github.io/docs/en/regular-expression.html) and [`Js.Re`](https://bucklescript.github.io/bucklescript/api/Js.Re.html) instead, since `Str` is not available.
-
-Reason/OCaml's emphasis on simplicity over cleverness can be seen here through its straightforward native string implementation. An overly sophisticated string implementation can sometimes [backfire](http://mrale.ph/blog/2016/11/23/making-less-dart-faster.html).
-
 ## Char
 
-Reason has a type for a string with a single letter:
+Reason has a **legacy** type for a string with a single letter:
 
 ```reason
 let firstLetterOfAlphabet = 'a';
 ```
 
-**Note**: Char doesn't support Unicode or UTF-8.
+**Don't use it**. Char doesn't support proper internationalization (unicode or UFT-8), and most of the time you've better served by either a string or a [variant](variant.md).
 
 ### Tips & Tricks
 
-A character [compiles to an integer ranging from 0 to 255](/try.html?reason=DYUwLgBAhhC8EHIoKA), for extra speed. You can also pattern-match (covered later) on it:
-
-```reason
-let isVowel = (theChar) =>
-  switch (theChar) {
-  | 'a' | 'e' | 'i' | 'o' | 'u' | 'y' => true
-  | _ => false
-  };
-```
-
-To convert a String to a Char, use `"a".[0]`. To convert a Char to a String, use `String.make(1, 'a')`.
+To convert a String to a Char (hopefully you won't need to do that), use `"a".[0]`. To convert a Char to a String, use `String.make(1, 'a')`.
