@@ -113,24 +113,27 @@
 <p>A type system isn't all-powerful, nor should it be; some tasteful trade-offs need to be applied in order to keep the language simple, performant (both compilation and running speed) and easy to understand. Reason 的 list, 例如, 它们是尺寸灵活的; 它们可以被 串联, 追加, 裁剪 等等. In return, they need to be homogenous (can only contain a single type of value per list), and random index access on them might not always be valid*. Tuple, on the other hand, through its constraint on size, is faster, gives the type system the leeway to exhaustively track all its items' types, and guarantees safe access. In general, you'll notice a few prominent, tasteful tradeoffs in a type system: record fields are fixed but can be heterogenous, while a map's fields are flexible but homogenous, etc.</p>
 <p>A Reason tuple is typed &quot;structurally&quot;. This means that even if you don't annotate your data with an explicit type, the compiler can still deduce it by looking at its content, its usage, etc. As long as the declarations and the usages' inferred shapes match up, you're all good!</p>
 <p>* It's not that the Reason type system cannot accept heterogenous, dynamically-sized lists; it actually can (hint: GADT)! But making such feature the default increases both the first-time learning overhead and the understandability of code. Just because the types can accomplish it doesn't mean it's always a good idea to let some pieces of code grow unboundedly complex!</p>
-</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/zh-CN/integer-and-float"><span class="arrow-prev">← </span><span>Integer &amp; Float</span></a><a class="docs-next button" href="/docs/zh-CN/record"><span>Record</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#usage">Usage</a></li><li><a href="#提示-amp-技巧">提示&amp; 技巧</a></li><li><a href="#设计决策">设计决策</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.min.js"></script><script>window.foo = new Pjax({
-          areas: [
-            // try to use the first query.
-            '.mainContainer, .docsNavContainer .toc .navWrapper, .onPageNav',
-            // fallback
-            'body'
-          ],
-          link: '.docsNavContainer:not(.docsSliderActive) a',
-          update: {
-            script: false,
-          }
-        });
-        var languagesMenuItemCopy = document.getElementById("languages-menu");
-        languagesMenuItemCopy.addEventListener("click", function(e){
-          e.preventDefault();
-          e.stopPropagation();
-          e.stopImmediatePropagation();
-        });</script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/zh-CN/integer-and-float"><span class="arrow-prev">← </span><span>Integer &amp; Float</span></a><a class="docs-next button" href="/docs/zh-CN/record"><span>Record</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#usage">Usage</a></li><li><a href="#提示-amp-技巧">提示&amp; 技巧</a></li><li><a href="#设计决策">设计决策</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.min.js"></script><script>
+          var Pjax = require('pjax-api').Pjax;
+          new Pjax({
+            areas: [
+              // try to use the first query.
+              '.mainContainer, .docsNavContainer .toc .navWrapper, .onPageNav',
+              // fallback
+              'body'
+            ],
+            link: '.docsNavContainer:not(.docsSliderActive) a',
+            update: {
+              script: false,
+            }
+          });
+          var languagesMenuItemCopy = document.getElementById("languages-menu");
+          languagesMenuItemCopy.addEventListener("click", function(e){
+            e.preventDefault();
+            e.stopPropagation();
+            e.stopImmediatePropagation();
+          });
+        </script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
                 document.addEventListener('keyup', function(e) {
                   if (e.target !== document.body) {
                     return;

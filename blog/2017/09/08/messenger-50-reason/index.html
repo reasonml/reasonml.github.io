@@ -82,24 +82,27 @@
 <p>We've successfully onboarded regular JavaScript folks to Reason; in the most extreme case, an intern with no JS knowledge was able to ship ReasonReact code in production (and made 0 bug while doing so). Give your own team a try! =)</p>
 <p>A big thanks to all these teams' members, to Hongbo (BuckleScript author) and to the OCaml community (really, 50% Reason means 50% OCaml. We're nothing without you); and of course, to all of you folks in the community for being with us all this time. The best is yet to come.</p>
 <p>See you soon!</p>
-</span></div></div><div class="blogSocialSection"></div></div><div class="blog-recent"><a class="button" href="/blog">Recent Posts</a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#some-statistics">Some Statistics</a></li><li><a href="#which-teams-next">Which Team's Next?</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.min.js"></script><script>window.foo = new Pjax({
-          areas: [
-            // try to use the first query.
-            '.mainContainer, .docsNavContainer .toc .navWrapper, .onPageNav',
-            // fallback
-            'body'
-          ],
-          link: '.docsNavContainer:not(.docsSliderActive) a',
-          update: {
-            script: false,
-          }
-        });
-        var languagesMenuItemCopy = document.getElementById("languages-menu");
-        languagesMenuItemCopy.addEventListener("click", function(e){
-          e.preventDefault();
-          e.stopPropagation();
-          e.stopImmediatePropagation();
-        });</script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+</span></div></div><div class="blogSocialSection"></div></div><div class="blog-recent"><a class="button" href="/blog">Recent Posts</a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#some-statistics">Some Statistics</a></li><li><a href="#which-teams-next">Which Team's Next?</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.min.js"></script><script>
+          var Pjax = require('pjax-api').Pjax;
+          new Pjax({
+            areas: [
+              // try to use the first query.
+              '.mainContainer, .docsNavContainer .toc .navWrapper, .onPageNav',
+              // fallback
+              'body'
+            ],
+            link: '.docsNavContainer:not(.docsSliderActive) a',
+            update: {
+              script: false,
+            }
+          });
+          var languagesMenuItemCopy = document.getElementById("languages-menu");
+          languagesMenuItemCopy.addEventListener("click", function(e){
+            e.preventDefault();
+            e.stopPropagation();
+            e.stopImmediatePropagation();
+          });
+        </script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
                 document.addEventListener('keyup', function(e) {
                   if (e.target !== document.body) {
                     return;

@@ -198,24 +198,27 @@
 <!-- TODO: playground link -->
 <p>¿Sorprendido ya? Las variantes tienen una profunda conexión con otros campos de las matemáticas; <a href="https://codewords.recurse.com/issues/three/algebra-and-calculus-of-algebraic-data-types">Mira aquí</a> para una exploración interesante.</p>
 <p>* Siempre es más agradable diseñar para resolver el problema que recurrir a un sistema de tipos que cubra las deficiencias; En la práctica, es poco realista hacerlo para cada problema, o incluso solo para entender completamente cada problema a fin de diseñar una solución. Un sistema de tipos te permite hacer con seguridad una gran categoría de cambios a bases de código sin necesidad de entender todo por adelantado. Esto es genial para exploración guiada. In this regard, types also allow us not needing to overly design an API just to circumvent callers' simple pitfalls. Ellos reducen las capas de abstracciones necesarias para &quot;finalizar las cosas&quot;, lo que en retorno reduce la carga cognitiva de los interlocutores <em>callers</em>.</p>
-</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/es-ES/record"><span class="arrow-prev">← </span><span>Record</span></a><a class="docs-next button" href="/docs/es-ES/null-undefined-option"><span>Null, Undefined &amp; Option</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#uso">Uso</a><ul class="toc-headings"><li><a href="#las-variantes-necesitan-una-definicion-explicita">Las Variantes Necesitan una Definición Explícita</a></li><li><a href="#argumentos-de-constructor">Argumentos de constructor</a></li><li><a href="#menciones-honorables">Menciones Honorables</a></li></ul></li><li><a href="#consejos-y-trucos">Consejos y trucos</a><ul class="toc-headings"><li><a href="#las-variantes-deben-tener-constructores">Las variantes Deben Tener constructores</a></li><li><a href="#interoperabilidad-con-javascript">Interoperabilidad con JavaScript</a></li><li><a href="#los-tipos-de-variantes-son-encontrados-por-nombre-de-campo">Los Tipos de Variantes Son Encontrados Por Nombre de Campo</a></li></ul></li><li><a href="#decisiones-de-diseno">Decisiones de Diseño</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.min.js"></script><script>window.foo = new Pjax({
-          areas: [
-            // try to use the first query.
-            '.mainContainer, .docsNavContainer .toc .navWrapper, .onPageNav',
-            // fallback
-            'body'
-          ],
-          link: '.docsNavContainer:not(.docsSliderActive) a',
-          update: {
-            script: false,
-          }
-        });
-        var languagesMenuItemCopy = document.getElementById("languages-menu");
-        languagesMenuItemCopy.addEventListener("click", function(e){
-          e.preventDefault();
-          e.stopPropagation();
-          e.stopImmediatePropagation();
-        });</script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/es-ES/record"><span class="arrow-prev">← </span><span>Record</span></a><a class="docs-next button" href="/docs/es-ES/null-undefined-option"><span>Null, Undefined &amp; Option</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#uso">Uso</a><ul class="toc-headings"><li><a href="#las-variantes-necesitan-una-definicion-explicita">Las Variantes Necesitan una Definición Explícita</a></li><li><a href="#argumentos-de-constructor">Argumentos de constructor</a></li><li><a href="#menciones-honorables">Menciones Honorables</a></li></ul></li><li><a href="#consejos-y-trucos">Consejos y trucos</a><ul class="toc-headings"><li><a href="#las-variantes-deben-tener-constructores">Las variantes Deben Tener constructores</a></li><li><a href="#interoperabilidad-con-javascript">Interoperabilidad con JavaScript</a></li><li><a href="#los-tipos-de-variantes-son-encontrados-por-nombre-de-campo">Los Tipos de Variantes Son Encontrados Por Nombre de Campo</a></li></ul></li><li><a href="#decisiones-de-diseno">Decisiones de Diseño</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.min.js"></script><script>
+          var Pjax = require('pjax-api').Pjax;
+          new Pjax({
+            areas: [
+              // try to use the first query.
+              '.mainContainer, .docsNavContainer .toc .navWrapper, .onPageNav',
+              // fallback
+              'body'
+            ],
+            link: '.docsNavContainer:not(.docsSliderActive) a',
+            update: {
+              script: false,
+            }
+          });
+          var languagesMenuItemCopy = document.getElementById("languages-menu");
+          languagesMenuItemCopy.addEventListener("click", function(e){
+            e.preventDefault();
+            e.stopPropagation();
+            e.stopImmediatePropagation();
+          });
+        </script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
                 document.addEventListener('keyup', function(e) {
                   if (e.target !== document.body) {
                     return;

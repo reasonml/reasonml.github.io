@@ -301,24 +301,27 @@ add(~first: option(int)?, ~second: option(int)?);
 </code></pre>
 <p>Same rules as the previous section, except replacing <code>type foo = bar</code> with <code>let add: bar</code>.</p>
 <p><strong>Don't</strong> confuse this with actually exporting a type in the interface file. <code>let add: bar</code> annotates an existing value <code>bar</code> from the implementation file. <code>type foo = bar</code> exports a type of the same shape from the implementation file.</p>
-</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/zh-TW/list-and-array"><span class="arrow-prev">← </span><span>List &amp; Array</span></a><a class="docs-next button" href="/docs/zh-TW/if-else"><span>If-Else</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#無參數">無參數</a></li><li><a href="#標籤的參數">標籤的參數</a><ul class="toc-headings"><li><a href="#currying">Currying</a></li></ul></li><li><a href="#選項的標籤式參數">選項的標籤式參數</a><ul class="toc-headings"><li><a href="#明確地傳遞選項">明確地傳遞選項</a></li><li><a href="#選項帶有預設值">選項帶有預設值</a></li><li><a href="#遞迴函式">遞迴函式</a></li><li><a href="#互助地遞迴函式">互助地遞迴函式</a></li></ul></li><li><a href="#提示-amp-技巧">提示 &amp; 技巧</a><ul class="toc-headings"><li><a href="#宣告">宣告</a></li><li><a href="#應用-application">應用（Application）</a></li><li><a href="#單獨型別署名-signature">單獨型別署名（Signature）</a></li></ul></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.min.js"></script><script>window.foo = new Pjax({
-          areas: [
-            // try to use the first query.
-            '.mainContainer, .docsNavContainer .toc .navWrapper, .onPageNav',
-            // fallback
-            'body'
-          ],
-          link: '.docsNavContainer:not(.docsSliderActive) a',
-          update: {
-            script: false,
-          }
-        });
-        var languagesMenuItemCopy = document.getElementById("languages-menu");
-        languagesMenuItemCopy.addEventListener("click", function(e){
-          e.preventDefault();
-          e.stopPropagation();
-          e.stopImmediatePropagation();
-        });</script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/zh-TW/list-and-array"><span class="arrow-prev">← </span><span>List &amp; Array</span></a><a class="docs-next button" href="/docs/zh-TW/if-else"><span>If-Else</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#無參數">無參數</a></li><li><a href="#標籤的參數">標籤的參數</a><ul class="toc-headings"><li><a href="#currying">Currying</a></li></ul></li><li><a href="#選項的標籤式參數">選項的標籤式參數</a><ul class="toc-headings"><li><a href="#明確地傳遞選項">明確地傳遞選項</a></li><li><a href="#選項帶有預設值">選項帶有預設值</a></li><li><a href="#遞迴函式">遞迴函式</a></li><li><a href="#互助地遞迴函式">互助地遞迴函式</a></li></ul></li><li><a href="#提示-amp-技巧">提示 &amp; 技巧</a><ul class="toc-headings"><li><a href="#宣告">宣告</a></li><li><a href="#應用-application">應用（Application）</a></li><li><a href="#單獨型別署名-signature">單獨型別署名（Signature）</a></li></ul></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.min.js"></script><script>
+          var Pjax = require('pjax-api').Pjax;
+          new Pjax({
+            areas: [
+              // try to use the first query.
+              '.mainContainer, .docsNavContainer .toc .navWrapper, .onPageNav',
+              // fallback
+              'body'
+            ],
+            link: '.docsNavContainer:not(.docsSliderActive) a',
+            update: {
+              script: false,
+            }
+          });
+          var languagesMenuItemCopy = document.getElementById("languages-menu");
+          languagesMenuItemCopy.addEventListener("click", function(e){
+            e.preventDefault();
+            e.stopPropagation();
+            e.stopImmediatePropagation();
+          });
+        </script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
                 document.addEventListener('keyup', function(e) {
                   if (e.target !== document.body) {
                     return;

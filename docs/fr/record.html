@@ -156,24 +156,27 @@ getAge(me);
 <li>Enfin, étant donné qu'un type de record est résolu en trouvant cette fameuse déclaration de type explicite &amp; unique (nous appelons cela le &quot;typage nominal&quot;), les messages d'erreur de type sont au final mieux que la contrepartie (&quot;typage structurel&quot;, comme pour les tuples). Cela facilite le refactoring. La modification des champs d'un type de record permet naturellement au compilateur de savoir que c'est toujours le même record, juste parfois mal utilisé à certains endroits. Sinon, sous typage structurel, il peut être difficile de dire si le site de définition ou le site d'utilisation est incorrect.</li>
 </ol>
 <p>* And we're not just finding excuses for ourselves! Reason objects do support these features.</p>
-<!--TODO: sharable playground for 2 --></span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/fr/tuple"><span class="arrow-prev">← </span><span>Tuple</span></a><a class="docs-next button" href="/docs/fr/variant"><span>Variant!</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#utilisation">Utilisation</a><ul class="toc-headings"><li><a href="#les-records-necessitent-une-definition-de-type-explicite">Les records nécessitent une définition de type explicite</a></li><li><a href="#mise-a-jour-immuable">Mise à jour immuable</a></li><li><a href="#mise-a-jour-muable">Mise à jour muable</a></li></ul></li><li><a href="#syntaxe-du-shorthand">Syntaxe du shorthand</a></li><li><a href="#conseils-amp-astuces">Conseils &amp; astuces</a><ul class="toc-headings"><li><a href="#record-types-are-found-by-field-name">Record Types Are Found By Field Name</a></li></ul></li><li><a href="#decisions-de-conception">Décisions de conception</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.min.js"></script><script>window.foo = new Pjax({
-          areas: [
-            // try to use the first query.
-            '.mainContainer, .docsNavContainer .toc .navWrapper, .onPageNav',
-            // fallback
-            'body'
-          ],
-          link: '.docsNavContainer:not(.docsSliderActive) a',
-          update: {
-            script: false,
-          }
-        });
-        var languagesMenuItemCopy = document.getElementById("languages-menu");
-        languagesMenuItemCopy.addEventListener("click", function(e){
-          e.preventDefault();
-          e.stopPropagation();
-          e.stopImmediatePropagation();
-        });</script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+<!--TODO: sharable playground for 2 --></span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/fr/tuple"><span class="arrow-prev">← </span><span>Tuple</span></a><a class="docs-next button" href="/docs/fr/variant"><span>Variant!</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#utilisation">Utilisation</a><ul class="toc-headings"><li><a href="#les-records-necessitent-une-definition-de-type-explicite">Les records nécessitent une définition de type explicite</a></li><li><a href="#mise-a-jour-immuable">Mise à jour immuable</a></li><li><a href="#mise-a-jour-muable">Mise à jour muable</a></li></ul></li><li><a href="#syntaxe-du-shorthand">Syntaxe du shorthand</a></li><li><a href="#conseils-amp-astuces">Conseils &amp; astuces</a><ul class="toc-headings"><li><a href="#record-types-are-found-by-field-name">Record Types Are Found By Field Name</a></li></ul></li><li><a href="#decisions-de-conception">Décisions de conception</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.min.js"></script><script>
+          var Pjax = require('pjax-api').Pjax;
+          new Pjax({
+            areas: [
+              // try to use the first query.
+              '.mainContainer, .docsNavContainer .toc .navWrapper, .onPageNav',
+              // fallback
+              'body'
+            ],
+            link: '.docsNavContainer:not(.docsSliderActive) a',
+            update: {
+              script: false,
+            }
+          });
+          var languagesMenuItemCopy = document.getElementById("languages-menu");
+          languagesMenuItemCopy.addEventListener("click", function(e){
+            e.preventDefault();
+            e.stopPropagation();
+            e.stopImmediatePropagation();
+          });
+        </script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
                 document.addEventListener('keyup', function(e) {
                   if (e.target !== document.body) {
                     return;

@@ -120,24 +120,27 @@
 <p>型引数のある型システムには、基本的に型レベルの関数があります。 <code>list(int)</code> は実際には <code>int</code> 型を受け取る <code>list</code> 型の関数です。そして、最終的に様々な場所で使用する具体的な型を返します。 あなたはこれが他の言語で多かれ少なかれ「ジェネリクス」と呼ばれているものだと気づくかもしれません。 例えば Java では <code>ArrayList&lt;Integer&gt;</code> です。</p>
 <p><a href="https://en.wikipedia.org/wiki/Rule_of_least_power">パワー最小の原則</a> は「物事を成し遂げる」時に適用します。 問題領域が許可するなら、絶対に最も抽象度の低い（最も具体的な）解決策を選択します。不安定で遠回りなことをドタバタやらずに、問題をより早く解決できます。 例えば、フリーフォームなデータよりも型を優先する、チューリング完全な関数呼び出しよりもデータ駆動の設定を優先する、マクロよりも関数呼び出しを優先する、プロジェクトの分岐よりもマクロを優先する、などです。 ドメインとパワーに制約があるときは、物事を分析しやすくなります。 つまり、ドメインがそれを許可するのに十分な制約がある場合です。</p>
 <p>When a type system is an all-encompassing aspect of your program, we need to make sure we leave enough power in order not to overly constrain your expressiveness; without &quot;type functions&quot;, you'd end up with quite a bit of boilerplate, e.g. hard-coded <code>listOfInt</code>, <code>listOfString</code>, <code>listOfArrayOfFloat</code>, their respective helper functions, etc. しかし、強力な型システムによってもたらされた力を過度に乱用しないようにしてください。 場合によっては、それ他の強力な型の必要性を減らすために、定型文を<em>少し</em>書くことは問題ありません。 それどころか、味わい深いトレードオフが、ファンシーな型よりも実用主義と判断を見せるかもしれません！</p>
-</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/ja/pipe-first"><span class="arrow-prev">← </span><span>Pipe First</span></a><a class="docs-next button" href="/docs/ja/destructuring"><span>構造化代入</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#型引数">型引数！</a></li><li><a href="#相互再帰型">相互再帰型</a></li><li><a href="#設計方針">設計方針</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.min.js"></script><script>window.foo = new Pjax({
-          areas: [
-            // try to use the first query.
-            '.mainContainer, .docsNavContainer .toc .navWrapper, .onPageNav',
-            // fallback
-            'body'
-          ],
-          link: '.docsNavContainer:not(.docsSliderActive) a',
-          update: {
-            script: false,
-          }
-        });
-        var languagesMenuItemCopy = document.getElementById("languages-menu");
-        languagesMenuItemCopy.addEventListener("click", function(e){
-          e.preventDefault();
-          e.stopPropagation();
-          e.stopImmediatePropagation();
-        });</script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/ja/pipe-first"><span class="arrow-prev">← </span><span>Pipe First</span></a><a class="docs-next button" href="/docs/ja/destructuring"><span>構造化代入</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#型引数">型引数！</a></li><li><a href="#相互再帰型">相互再帰型</a></li><li><a href="#設計方針">設計方針</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.min.js"></script><script>
+          var Pjax = require('pjax-api').Pjax;
+          new Pjax({
+            areas: [
+              // try to use the first query.
+              '.mainContainer, .docsNavContainer .toc .navWrapper, .onPageNav',
+              // fallback
+              'body'
+            ],
+            link: '.docsNavContainer:not(.docsSliderActive) a',
+            update: {
+              script: false,
+            }
+          });
+          var languagesMenuItemCopy = document.getElementById("languages-menu");
+          languagesMenuItemCopy.addEventListener("click", function(e){
+            e.preventDefault();
+            e.stopPropagation();
+            e.stopImmediatePropagation();
+          });
+        </script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
                 document.addEventListener('keyup', function(e) {
                   if (e.target !== document.body) {
                     return;

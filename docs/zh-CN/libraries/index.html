@@ -69,24 +69,27 @@
         </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://crowdin.com/project/reason/zh-CN" target="_blank" rel="noreferrer noopener">Translate</a><h1 class="postHeaderTitle">Libraries</h1></header><article><div><span><p><a href="https://redex.github.io/">Reason Package Index（Redex）</a> 是包的主要來源，保留了可用包的精选列表，还可搜索与浏览。。 也包含了尚未发布的包，通常表示未完成或是实验性质，可能会满足你的需求。</p>
 <p>尚未被编入 redex 的包可能可以从 NPM 或 Github 上搜索到。 通过 BuckleScript 包装的库，习惯上会在前面加上 <code>bs-</code>，就像 <code>bs-director</code>。 <a href="https://www.npmjs.com/search?q=keywords:bucklescript">这个搜索</a> 展示了 NPM 上所有和 BS 相关的包。</p>
 <p>如果你不能找到所需：其实为了用 JS 库，有时 <strong>你不需要一层包装</strong> 大部分的 JS 数据类型，例如 array 和 object，<a href="https://bucklescript.github.io/docs/en/common-data-types.html">都清楚的与 Reason 对应</a>。 你也可以使用熟悉的 <a href="https://bucklescript.github.io/bucklescript/api/Js.html">JS API</a>。 Be sure to also check the &quot;Interop&quot; and &quot;Converting from JS&quot; sections here!</p>
-</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/zh-CN/syntax-cheatsheet"><span class="arrow-prev">← </span><span>Syntax Cheatsheet</span></a><a class="docs-next button" href="/docs/zh-CN/converting-from-js"><span>Converting from JS</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"></nav></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.min.js"></script><script>window.foo = new Pjax({
-          areas: [
-            // try to use the first query.
-            '.mainContainer, .docsNavContainer .toc .navWrapper, .onPageNav',
-            // fallback
-            'body'
-          ],
-          link: '.docsNavContainer:not(.docsSliderActive) a',
-          update: {
-            script: false,
-          }
-        });
-        var languagesMenuItemCopy = document.getElementById("languages-menu");
-        languagesMenuItemCopy.addEventListener("click", function(e){
-          e.preventDefault();
-          e.stopPropagation();
-          e.stopImmediatePropagation();
-        });</script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/zh-CN/syntax-cheatsheet"><span class="arrow-prev">← </span><span>Syntax Cheatsheet</span></a><a class="docs-next button" href="/docs/zh-CN/converting-from-js"><span>Converting from JS</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"></nav></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.min.js"></script><script>
+          var Pjax = require('pjax-api').Pjax;
+          new Pjax({
+            areas: [
+              // try to use the first query.
+              '.mainContainer, .docsNavContainer .toc .navWrapper, .onPageNav',
+              // fallback
+              'body'
+            ],
+            link: '.docsNavContainer:not(.docsSliderActive) a',
+            update: {
+              script: false,
+            }
+          });
+          var languagesMenuItemCopy = document.getElementById("languages-menu");
+          languagesMenuItemCopy.addEventListener("click", function(e){
+            e.preventDefault();
+            e.stopPropagation();
+            e.stopImmediatePropagation();
+          });
+        </script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
                 document.addEventListener('keyup', function(e) {
                   if (e.target !== document.body) {
                     return;

@@ -113,24 +113,27 @@
 <p>Um sistema de tipos não é todo-poderoso, nem deveria ser; alguns tipos de trade-offs precisam ser aplicados de maneira a manter a linguagem simples e performática (tanto para compilação quanto para velocidade de execução) e simples de entender. As listas de Reason, por exemplo, são mais flexíveis no tamanho; elas podem ser concatenadas, anexadas, repartidas, etc. Em troca, elas precisam ser homogêneas (podem conter apenas um tipo de valor por lista), e acessos por indíce aleatório nelas podem nem sempre ser válidos*. Tuplas, por outro lado, através da sua restrição no tamanho, é mais rápida, e dá ao sistema de tipos margem para exaustivamente verificar todos os tipos dos items que ela armazena, e garante acesso seguro. De maneira geral, você provavelmente perceberá poucos sabores de trade-offs proeminentes em um sistema de tipos: campos de records são fixos porém podem ser heterogêneos, enquanto campos de um map são flexiveís mas homogêneos, etc.</p>
 <p>Uma tupla em Reason é tipada &quot;estruturalmente&quot;. Isso quer dizer que mesmo se você não anotar seu dado com um tipo explícito, o compilador ainda pode deduzir qual tipo é olhando no seu conteúdo, seu uso, etc. Enquanto as declarações e as formas inferidas dos usos combinarem, está tudo bem!</p>
 <p>* Não é que o sistema de tipo Reason não pode aceitar listas heterogêneas e de tamanho dinâmico; na verdade pode (dica: GADT)! Mas fazer esta característica o padrão aumenta tanto a sobrecarga na curva de aprendizado da linguagem quanto na compreensividade do código. Não é apenas porque os tipos podem fazer isso não quer dizer que é sempre uma boa ideia deixar pedaços do código crescerem com complexidade sem limites!</p>
-</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/pt-BR/integer-and-float"><span class="arrow-prev">← </span><span>Integer &amp; Float</span></a><a class="docs-next button" href="/docs/pt-BR/record"><span>Record</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#uso">Uso</a></li><li><a href="#dicas-amp-truques">Dicas &amp; Truques</a></li><li><a href="#decisões-de-design">Decisões de Design</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.min.js"></script><script>window.foo = new Pjax({
-          areas: [
-            // try to use the first query.
-            '.mainContainer, .docsNavContainer .toc .navWrapper, .onPageNav',
-            // fallback
-            'body'
-          ],
-          link: '.docsNavContainer:not(.docsSliderActive) a',
-          update: {
-            script: false,
-          }
-        });
-        var languagesMenuItemCopy = document.getElementById("languages-menu");
-        languagesMenuItemCopy.addEventListener("click", function(e){
-          e.preventDefault();
-          e.stopPropagation();
-          e.stopImmediatePropagation();
-        });</script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/pt-BR/integer-and-float"><span class="arrow-prev">← </span><span>Integer &amp; Float</span></a><a class="docs-next button" href="/docs/pt-BR/record"><span>Record</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#uso">Uso</a></li><li><a href="#dicas-amp-truques">Dicas &amp; Truques</a></li><li><a href="#decisões-de-design">Decisões de Design</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.min.js"></script><script>
+          var Pjax = require('pjax-api').Pjax;
+          new Pjax({
+            areas: [
+              // try to use the first query.
+              '.mainContainer, .docsNavContainer .toc .navWrapper, .onPageNav',
+              // fallback
+              'body'
+            ],
+            link: '.docsNavContainer:not(.docsSliderActive) a',
+            update: {
+              script: false,
+            }
+          });
+          var languagesMenuItemCopy = document.getElementById("languages-menu");
+          languagesMenuItemCopy.addEventListener("click", function(e){
+            e.preventDefault();
+            e.stopPropagation();
+            e.stopImmediatePropagation();
+          });
+        </script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
                 document.addEventListener('keyup', function(e) {
                   if (e.target !== document.body) {
                     return;

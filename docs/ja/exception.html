@@ -98,24 +98,27 @@ raise(InputClosed(&quot;the stream has closed!&quot;));
 <p>上記の tip は OCaml の標準ライブラリで起こっていることと矛盾しているようです。<a href="/api/List.html">List</a> や <a href="/api/String.html">String</a> のようなモジュール内の主要な関数はしばしば過度に例外をスルーするようです。 これは部分的に歴史的な堆積物で、部分的にパフォーマンスのために細心の注意を払っていることによるものです。 ネイティブの OCaml/Reason は信じなれないくらいパフォーマンスが高いです。例外送出は、割当と返却（例えば <code>option</code>）に比べて非常に（訳注: パフォーマンスコストが）安くなるようにデザインされています。 これは残念ながら JavaScript のためのケースではありません。</p>
 <p>より新しい標準ライブラリの代替は、大抵例外を送出するのではなく、 <code>option</code> を返す関数が同梱しています。 例えば、<code>List.find</code> は <code>option</code> を返すバージョンの <code>List.find_opt</code> があります。これはスローしません。</p>
 <p>繰り返しますが、例外は実際にはただのヴァリアントです。 事実、それらはすべて <code>exn</code> と呼ばれる単一のヴァリアント型に所属しています。 それは、<a href="https://caml.inria.fr/pub/docs/manual-ocaml/extn.html#sec252">extensible variant</a> のことで、それに <code>InputClosed</code> のような新しいコンストラクタを追加することを意味しています。 <code>exception Foo</code> は、コンストラクタを <code>exn</code> に追加するためのただのシュガーです。</p>
-</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/ja/external"><span class="arrow-prev">← </span><span>External</span></a><a class="docs-next button" href="/docs/ja/object"><span>Object</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#使い方">使い方</a></li><li><a href="#ヒントとコツ">ヒントとコツ</a></li><li><a href="#設計方針">設計方針</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.min.js"></script><script>window.foo = new Pjax({
-          areas: [
-            // try to use the first query.
-            '.mainContainer, .docsNavContainer .toc .navWrapper, .onPageNav',
-            // fallback
-            'body'
-          ],
-          link: '.docsNavContainer:not(.docsSliderActive) a',
-          update: {
-            script: false,
-          }
-        });
-        var languagesMenuItemCopy = document.getElementById("languages-menu");
-        languagesMenuItemCopy.addEventListener("click", function(e){
-          e.preventDefault();
-          e.stopPropagation();
-          e.stopImmediatePropagation();
-        });</script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/ja/external"><span class="arrow-prev">← </span><span>External</span></a><a class="docs-next button" href="/docs/ja/object"><span>Object</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#使い方">使い方</a></li><li><a href="#ヒントとコツ">ヒントとコツ</a></li><li><a href="#設計方針">設計方針</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.min.js"></script><script>
+          var Pjax = require('pjax-api').Pjax;
+          new Pjax({
+            areas: [
+              // try to use the first query.
+              '.mainContainer, .docsNavContainer .toc .navWrapper, .onPageNav',
+              // fallback
+              'body'
+            ],
+            link: '.docsNavContainer:not(.docsSliderActive) a',
+            update: {
+              script: false,
+            }
+          });
+          var languagesMenuItemCopy = document.getElementById("languages-menu");
+          languagesMenuItemCopy.addEventListener("click", function(e){
+            e.preventDefault();
+            e.stopPropagation();
+            e.stopImmediatePropagation();
+          });
+        </script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
                 document.addEventListener('keyup', function(e) {
                   if (e.target !== document.body) {
                     return;

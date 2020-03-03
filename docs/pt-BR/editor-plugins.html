@@ -91,24 +91,27 @@
 <li><a href="https://github.com/reasonml-editor/vim-reason-plus">Vim/Neovim</a>: Make sure to use <a href="https://www.npmjs.com/package/ocaml-language-server">ocaml-language-server</a> for native development as suggested. (Mac, Linux): <code>npm install -g ocaml-language-server</code></li>
 <li><a href="https://github.com/jordwalke/vim-reasonml">vim-reasonml</a>: For use with native <a href="https://esy.sh/">esy</a>, Reason, and Merlin (not LSP based). (Mac, Linux, Windows).</li>
 </ul>
-</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/pt-BR/installation"><span class="arrow-prev">← </span><span>Installation</span></a><a class="docs-next button" href="/docs/pt-BR/extra-goodies"><span>Extra Goodies</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#bucklescript-development">BuckleScript Development:</a></li><li><a href="#native-project-development-community-supported">Native Project Development (Community Supported):</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.min.js"></script><script>window.foo = new Pjax({
-          areas: [
-            // try to use the first query.
-            '.mainContainer, .docsNavContainer .toc .navWrapper, .onPageNav',
-            // fallback
-            'body'
-          ],
-          link: '.docsNavContainer:not(.docsSliderActive) a',
-          update: {
-            script: false,
-          }
-        });
-        var languagesMenuItemCopy = document.getElementById("languages-menu");
-        languagesMenuItemCopy.addEventListener("click", function(e){
-          e.preventDefault();
-          e.stopPropagation();
-          e.stopImmediatePropagation();
-        });</script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/pt-BR/installation"><span class="arrow-prev">← </span><span>Installation</span></a><a class="docs-next button" href="/docs/pt-BR/extra-goodies"><span>Extra Goodies</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#bucklescript-development">BuckleScript Development:</a></li><li><a href="#native-project-development-community-supported">Native Project Development (Community Supported):</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.min.js"></script><script>
+          var Pjax = require('pjax-api').Pjax;
+          new Pjax({
+            areas: [
+              // try to use the first query.
+              '.mainContainer, .docsNavContainer .toc .navWrapper, .onPageNav',
+              // fallback
+              'body'
+            ],
+            link: '.docsNavContainer:not(.docsSliderActive) a',
+            update: {
+              script: false,
+            }
+          });
+          var languagesMenuItemCopy = document.getElementById("languages-menu");
+          languagesMenuItemCopy.addEventListener("click", function(e){
+            e.preventDefault();
+            e.stopPropagation();
+            e.stopImmediatePropagation();
+          });
+        </script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
                 document.addEventListener('keyup', function(e) {
                   if (e.target !== document.body) {
                     return;

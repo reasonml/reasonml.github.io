@@ -228,24 +228,27 @@ NoResult
 <tr><td>false</td><td>4</td><td>4</td><td>5</td></tr>
 </tbody>
 </table>
-</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/ja/destructuring"><span class="arrow-prev">← </span><span>構造化代入</span></a><a class="docs-next button" href="/docs/ja/mutation"><span>Mutation</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#使い方">使い方</a><ul class="toc-headings"><li><a href="#when-節">When 節</a></li><li><a href="#例外にマッチする">例外にマッチする</a></li><li><a href="#入れ子パターン">入れ子パターン</a></li><li><a href="#パターンはどこにでも">パターンはどこにでも</a></li></ul></li><li><a href="#ヒントとコツ">ヒントとコツ</a></li><li><a href="#設計方針">設計方針</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.min.js"></script><script>window.foo = new Pjax({
-          areas: [
-            // try to use the first query.
-            '.mainContainer, .docsNavContainer .toc .navWrapper, .onPageNav',
-            // fallback
-            'body'
-          ],
-          link: '.docsNavContainer:not(.docsSliderActive) a',
-          update: {
-            script: false,
-          }
-        });
-        var languagesMenuItemCopy = document.getElementById("languages-menu");
-        languagesMenuItemCopy.addEventListener("click", function(e){
-          e.preventDefault();
-          e.stopPropagation();
-          e.stopImmediatePropagation();
-        });</script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/ja/destructuring"><span class="arrow-prev">← </span><span>構造化代入</span></a><a class="docs-next button" href="/docs/ja/mutation"><span>Mutation</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#使い方">使い方</a><ul class="toc-headings"><li><a href="#when-節">When 節</a></li><li><a href="#例外にマッチする">例外にマッチする</a></li><li><a href="#入れ子パターン">入れ子パターン</a></li><li><a href="#パターンはどこにでも">パターンはどこにでも</a></li></ul></li><li><a href="#ヒントとコツ">ヒントとコツ</a></li><li><a href="#設計方針">設計方針</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.min.js"></script><script>
+          var Pjax = require('pjax-api').Pjax;
+          new Pjax({
+            areas: [
+              // try to use the first query.
+              '.mainContainer, .docsNavContainer .toc .navWrapper, .onPageNav',
+              // fallback
+              'body'
+            ],
+            link: '.docsNavContainer:not(.docsSliderActive) a',
+            update: {
+              script: false,
+            }
+          });
+          var languagesMenuItemCopy = document.getElementById("languages-menu");
+          languagesMenuItemCopy.addEventListener("click", function(e){
+            e.preventDefault();
+            e.stopPropagation();
+            e.stopImmediatePropagation();
+          });
+        </script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
                 document.addEventListener('keyup', function(e) {
                   if (e.target !== document.body) {
                     return;

@@ -139,24 +139,27 @@
 <p>Die Art und Weise wie wir dieses JSX entworfen steht im Zusammenhang mit unseren Wünschen, die Sprache weiterzuentwickeln. Siehe den Abschnitt „What's the point?“ in <a href="https://medium.com/@chenglou/cool-things-reason-formatter-does-9e1f79e25a82">diesem Blogbeitrag</a>.</p>
 <p>Die Fähigkeit, in der Sprache Makros zu haben + die bibliotheksunabhängige JSX-Syntax, erlaubt es jeder Bibliothek, JSX ohne großen Aufwand zu haben. Auf diese Weise fügen wir der zugrunde liegenden OCaml-Sprache einige visuelle Vertrautheit hinzu, ohne die Semantik (wie sie ausgeführt wird) zu kompromittieren. Ein großes Ziel von Reason ist es, mehr Leute die schöne Sprache von OCaml nutzen zu lassen und gleichzeitig die zeitaufwändigen Debatten über Syntax und Formatierung zu überwinden.</p>
 <p>* Du könntest dich fragen, warum du niemals solch einen children-Spread in ReactJS gebraucht hast. ReactJS nutzt eine spezielle Laufzeitlogik + spezielle Syntaxtransformationen + variadische Argumenterkennung &amp; -kennzeichnung um die meisten dieser Fälle zu vermeiden (<a href="https://github.com/facebook/react/blob/9b36df86c6ccecb73ca44899386e6a72a83ad445/packages/react/src/ReactElement.js#L207">siehe hier</a>). Eine solche dynamische Verwendung verkompliziert die Typsystemerkennung <em>ziemlich</em>. Da wir die gesamte Syntax und ReasonReact kontrollieren, haben wir uns dazu entschlossen, children-Spread einzuführen, um den Fall des Verpackens bzw. des Nicht-Verpackens eindeutig zu machen, ohne Kompilierungs- &amp; Laufzeitkosten!</p>
-</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/de/imperative-loops"><span class="arrow-prev">← </span><span>Imperative Loops</span></a><a class="docs-next button" href="/docs/de/external"><span>External</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#tag-mit-großschreibung">Tag mit Großschreibung</a></li><li><a href="#tag-ohne-großschreibung">Tag ohne Großschreibung</a></li><li><a href="#fragmente">Fragmente</a><ul class="toc-headings"><li><a href="#kinder">Kinder</a></li></ul></li><li><a href="#verwendung">Verwendung</a></li><li><a href="#abweichungen-von-js-jsx">Abweichungen von JS JSX</a><ul class="toc-headings"><li><a href="#punning">Punning</a></li></ul></li><li><a href="#tips-amp-tricks">Tips &amp; Tricks</a></li><li><a href="#designentscheidungen">Designentscheidungen</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.min.js"></script><script>window.foo = new Pjax({
-          areas: [
-            // try to use the first query.
-            '.mainContainer, .docsNavContainer .toc .navWrapper, .onPageNav',
-            // fallback
-            'body'
-          ],
-          link: '.docsNavContainer:not(.docsSliderActive) a',
-          update: {
-            script: false,
-          }
-        });
-        var languagesMenuItemCopy = document.getElementById("languages-menu");
-        languagesMenuItemCopy.addEventListener("click", function(e){
-          e.preventDefault();
-          e.stopPropagation();
-          e.stopImmediatePropagation();
-        });</script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/de/imperative-loops"><span class="arrow-prev">← </span><span>Imperative Loops</span></a><a class="docs-next button" href="/docs/de/external"><span>External</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#tag-mit-großschreibung">Tag mit Großschreibung</a></li><li><a href="#tag-ohne-großschreibung">Tag ohne Großschreibung</a></li><li><a href="#fragmente">Fragmente</a><ul class="toc-headings"><li><a href="#kinder">Kinder</a></li></ul></li><li><a href="#verwendung">Verwendung</a></li><li><a href="#abweichungen-von-js-jsx">Abweichungen von JS JSX</a><ul class="toc-headings"><li><a href="#punning">Punning</a></li></ul></li><li><a href="#tips-amp-tricks">Tips &amp; Tricks</a></li><li><a href="#designentscheidungen">Designentscheidungen</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.min.js"></script><script>
+          var Pjax = require('pjax-api').Pjax;
+          new Pjax({
+            areas: [
+              // try to use the first query.
+              '.mainContainer, .docsNavContainer .toc .navWrapper, .onPageNav',
+              // fallback
+              'body'
+            ],
+            link: '.docsNavContainer:not(.docsSliderActive) a',
+            update: {
+              script: false,
+            }
+          });
+          var languagesMenuItemCopy = document.getElementById("languages-menu");
+          languagesMenuItemCopy.addEventListener("click", function(e){
+            e.preventDefault();
+            e.stopPropagation();
+            e.stopImmediatePropagation();
+          });
+        </script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
                 document.addEventListener('keyup', function(e) {
                   if (e.target !== document.body) {
                     return;

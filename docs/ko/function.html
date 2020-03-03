@@ -301,24 +301,27 @@ add(~first: option(int)?, ~second: option(int)?);
 </code></pre>
 <p><code>type foo = bar</code>를 <code>let add: bar</code>로 바꿔야 한다는 것만 제외하면 같은 규칙이 적용됩니다.</p>
 <p>이것을 인터페이스 파일에서 실제로 타입을 내보내는 것과 <strong>헷갈리지 마세요</strong>. <code>let add: bar</code>는 구현 파일에 이미 존재하는 <code>bar</code> 값을 명시합니다. <code>type foo = bar</code>는 구현 파일에서 같은 형태를 가진 타입을 내보냅니다.</p>
-</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/ko/list-and-array"><span class="arrow-prev">← </span><span>리스트 &amp; 배열</span></a><a class="docs-next button" href="/docs/ko/if-else"><span>If-Else</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#무인자-함수">무인자 함수</a></li><li><a href="#이름-있는-인자">이름 있는 인자</a><ul class="toc-headings"><li><a href="#커링">커링</a></li></ul></li><li><a href="#선택적-이름-있는-인자">선택적 이름 있는 인자</a><ul class="toc-headings"><li><a href="#명시적으로-전달된-선택적-인자">명시적으로 전달된 선택적 인자</a></li><li><a href="#기본-값이-있는-선택적-인자">기본 값이 있는 선택적 인자</a></li><li><a href="#재귀-함수">재귀 함수</a></li><li><a href="#서로-재귀적인-함수">서로 재귀적인 함수</a></li></ul></li><li><a href="#팁-amp-트릭">팁 &amp; 트릭</a><ul class="toc-headings"><li><a href="#선언">선언</a></li><li><a href="#적용">적용</a></li><li><a href="#독립된-타입-시그니쳐">독립된 타입 시그니쳐</a></li></ul></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.min.js"></script><script>window.foo = new Pjax({
-          areas: [
-            // try to use the first query.
-            '.mainContainer, .docsNavContainer .toc .navWrapper, .onPageNav',
-            // fallback
-            'body'
-          ],
-          link: '.docsNavContainer:not(.docsSliderActive) a',
-          update: {
-            script: false,
-          }
-        });
-        var languagesMenuItemCopy = document.getElementById("languages-menu");
-        languagesMenuItemCopy.addEventListener("click", function(e){
-          e.preventDefault();
-          e.stopPropagation();
-          e.stopImmediatePropagation();
-        });</script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/ko/list-and-array"><span class="arrow-prev">← </span><span>리스트 &amp; 배열</span></a><a class="docs-next button" href="/docs/ko/if-else"><span>If-Else</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#무인자-함수">무인자 함수</a></li><li><a href="#이름-있는-인자">이름 있는 인자</a><ul class="toc-headings"><li><a href="#커링">커링</a></li></ul></li><li><a href="#선택적-이름-있는-인자">선택적 이름 있는 인자</a><ul class="toc-headings"><li><a href="#명시적으로-전달된-선택적-인자">명시적으로 전달된 선택적 인자</a></li><li><a href="#기본-값이-있는-선택적-인자">기본 값이 있는 선택적 인자</a></li><li><a href="#재귀-함수">재귀 함수</a></li><li><a href="#서로-재귀적인-함수">서로 재귀적인 함수</a></li></ul></li><li><a href="#팁-amp-트릭">팁 &amp; 트릭</a><ul class="toc-headings"><li><a href="#선언">선언</a></li><li><a href="#적용">적용</a></li><li><a href="#독립된-타입-시그니쳐">독립된 타입 시그니쳐</a></li></ul></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.min.js"></script><script>
+          var Pjax = require('pjax-api').Pjax;
+          new Pjax({
+            areas: [
+              // try to use the first query.
+              '.mainContainer, .docsNavContainer .toc .navWrapper, .onPageNav',
+              // fallback
+              'body'
+            ],
+            link: '.docsNavContainer:not(.docsSliderActive) a',
+            update: {
+              script: false,
+            }
+          });
+          var languagesMenuItemCopy = document.getElementById("languages-menu");
+          languagesMenuItemCopy.addEventListener("click", function(e){
+            e.preventDefault();
+            e.stopPropagation();
+            e.stopImmediatePropagation();
+          });
+        </script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
                 document.addEventListener('keyup', function(e) {
                   if (e.target !== document.body) {
                     return;

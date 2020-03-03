@@ -206,24 +206,27 @@ ctx.fillRect(<span class="hljs-number">0.0</span>, <span class="hljs-number">0.0
   }
 }
 </code></pre>
-</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/es-ES/promise"><span class="arrow-prev">← </span><span>Promise</span></a><a class="docs-next button" href="/docs/es-ES/syntax-cheatsheet"><span>Syntax Cheatsheet</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#tan-solo-escribe-javascript-en-medio-de-tu-codigo-reason">Tan solo escribe JavaScript en medio de tu código Reason</a></li><li><a href="#poniendo-algo-de-javascript-y-haciendolo-accesible-desde-reason">Poniendo algo de JavaScript, y haciéndolo accesible desde Reason</a></li><li><a href="#insertando-en-una-funcion-y-pasanso-valores">Insertando en una función y pasanso valores</a></li><li><a href="#asentarse-y-ser-disciplinado-con-las-cosas">Asentarse y ser disciplinado con las cosas</a></li><li><a href="#usando-librerias-javascript-existentes">Usando librerías JavaScript existentes</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.min.js"></script><script>window.foo = new Pjax({
-          areas: [
-            // try to use the first query.
-            '.mainContainer, .docsNavContainer .toc .navWrapper, .onPageNav',
-            // fallback
-            'body'
-          ],
-          link: '.docsNavContainer:not(.docsSliderActive) a',
-          update: {
-            script: false,
-          }
-        });
-        var languagesMenuItemCopy = document.getElementById("languages-menu");
-        languagesMenuItemCopy.addEventListener("click", function(e){
-          e.preventDefault();
-          e.stopPropagation();
-          e.stopImmediatePropagation();
-        });</script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/es-ES/promise"><span class="arrow-prev">← </span><span>Promise</span></a><a class="docs-next button" href="/docs/es-ES/syntax-cheatsheet"><span>Syntax Cheatsheet</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#tan-solo-escribe-javascript-en-medio-de-tu-codigo-reason">Tan solo escribe JavaScript en medio de tu código Reason</a></li><li><a href="#poniendo-algo-de-javascript-y-haciendolo-accesible-desde-reason">Poniendo algo de JavaScript, y haciéndolo accesible desde Reason</a></li><li><a href="#insertando-en-una-funcion-y-pasanso-valores">Insertando en una función y pasanso valores</a></li><li><a href="#asentarse-y-ser-disciplinado-con-las-cosas">Asentarse y ser disciplinado con las cosas</a></li><li><a href="#usando-librerias-javascript-existentes">Usando librerías JavaScript existentes</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.min.js"></script><script>
+          var Pjax = require('pjax-api').Pjax;
+          new Pjax({
+            areas: [
+              // try to use the first query.
+              '.mainContainer, .docsNavContainer .toc .navWrapper, .onPageNav',
+              // fallback
+              'body'
+            ],
+            link: '.docsNavContainer:not(.docsSliderActive) a',
+            update: {
+              script: false,
+            }
+          });
+          var languagesMenuItemCopy = document.getElementById("languages-menu");
+          languagesMenuItemCopy.addEventListener("click", function(e){
+            e.preventDefault();
+            e.stopPropagation();
+            e.stopImmediatePropagation();
+          });
+        </script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
                 document.addEventListener('keyup', function(e) {
                   if (e.target !== document.body) {
                     return;

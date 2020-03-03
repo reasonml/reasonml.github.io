@@ -198,24 +198,27 @@
 <!-- TODO: playground link -->
 <p>まだ驚かない？ ヴァリアントは数学の他の分野と深い関わりを持ちます。興味深い探求のために <a href="https://codewords.recurse.com/issues/three/algebra-and-calculus-of-algebraic-data-types">ここを見て</a>ください。</p>
 <p>落とし穴をカバーするために型システムに頼るよりも、問題を設計することが常に良い選択です。実際には、すべてのプログラムでそれをすること、または、闇雲にすべての問題を完全に理解して解決策を設計することは非現実的です。 型システムを使うと、前もってすべてを理解しなくても、コードベースの変更を安全に行うことができます。 これはガイド付き探索に最適です。 In this regard, types also allow us not needing to overly design an API just to circumvent callers' simple pitfalls. 彼らは「事を遂行する」ために必要な抽象レイヤを減らし、見返りに呼び出し元の認知的負荷を軽減します。</p>
-</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/ja/record"><span class="arrow-prev">← </span><span>Record</span></a><a class="docs-next button" href="/docs/ja/null-undefined-option"><span>NullとUndefinedとOption</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#使い方">使い方</a><ul class="toc-headings"><li><a href="#ヴァリアントは明示的な定義が必要">ヴァリアントは明示的な定義が必要</a></li><li><a href="#コンストラクタ引数">コンストラクタ引数</a></li><li><a href="#特筆事項">特筆事項</a></li></ul></li><li><a href="#ヒントとコツ">ヒントとコツ</a><ul class="toc-headings"><li><a href="#ヴァリアントにはコンストラクタが必要">ヴァリアントにはコンストラクタが必要</a></li><li><a href="#javascript-との相互運用">JavaScript との相互運用</a></li><li><a href="#ヴァリアントの型はフィールドの名前で特定される">ヴァリアントの型はフィールドの名前で特定される</a></li></ul></li><li><a href="#設計方針">設計方針</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.min.js"></script><script>window.foo = new Pjax({
-          areas: [
-            // try to use the first query.
-            '.mainContainer, .docsNavContainer .toc .navWrapper, .onPageNav',
-            // fallback
-            'body'
-          ],
-          link: '.docsNavContainer:not(.docsSliderActive) a',
-          update: {
-            script: false,
-          }
-        });
-        var languagesMenuItemCopy = document.getElementById("languages-menu");
-        languagesMenuItemCopy.addEventListener("click", function(e){
-          e.preventDefault();
-          e.stopPropagation();
-          e.stopImmediatePropagation();
-        });</script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/ja/record"><span class="arrow-prev">← </span><span>Record</span></a><a class="docs-next button" href="/docs/ja/null-undefined-option"><span>NullとUndefinedとOption</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#使い方">使い方</a><ul class="toc-headings"><li><a href="#ヴァリアントは明示的な定義が必要">ヴァリアントは明示的な定義が必要</a></li><li><a href="#コンストラクタ引数">コンストラクタ引数</a></li><li><a href="#特筆事項">特筆事項</a></li></ul></li><li><a href="#ヒントとコツ">ヒントとコツ</a><ul class="toc-headings"><li><a href="#ヴァリアントにはコンストラクタが必要">ヴァリアントにはコンストラクタが必要</a></li><li><a href="#javascript-との相互運用">JavaScript との相互運用</a></li><li><a href="#ヴァリアントの型はフィールドの名前で特定される">ヴァリアントの型はフィールドの名前で特定される</a></li></ul></li><li><a href="#設計方針">設計方針</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.min.js"></script><script>
+          var Pjax = require('pjax-api').Pjax;
+          new Pjax({
+            areas: [
+              // try to use the first query.
+              '.mainContainer, .docsNavContainer .toc .navWrapper, .onPageNav',
+              // fallback
+              'body'
+            ],
+            link: '.docsNavContainer:not(.docsSliderActive) a',
+            update: {
+              script: false,
+            }
+          });
+          var languagesMenuItemCopy = document.getElementById("languages-menu");
+          languagesMenuItemCopy.addEventListener("click", function(e){
+            e.preventDefault();
+            e.stopPropagation();
+            e.stopImmediatePropagation();
+          });
+        </script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
                 document.addEventListener('keyup', function(e) {
                   if (e.target !== document.body) {
                     return;

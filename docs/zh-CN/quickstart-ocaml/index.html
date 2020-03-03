@@ -94,24 +94,27 @@ esy
 <p>See the <a href="https://reasonml.github.io/docs/en/editor-plugins#native-project-development-community-supported">native project</a> section of the Reason editor support doc.</p>
 <p><strong>Compatibility:</strong></p>
 <p>In addition to supporting <code>esy</code> specific packages hosted on npm, <code>esy</code> also supports any opam package or ocaml native compiler. It <a href="https://esy.sh/docs/en/node-compatibility.html">can also be used</a> to develop JavaScript npm projects that are compatible with <a href="https://yarnpkg.com/lang/en/docs/pnp/">Yarn Plug'n'Play</a> (that includes most JS projects). <a href="https://github.com/BuckleScript/bucklescript/issues/3276">This Github issue</a> is tracking the required bucklescript features to enable support for managing BuckleScript projects using <code>esy</code>.</p>
-</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/zh-CN/native"><span class="arrow-prev">← </span><span>Native</span></a><a class="docs-next button" href="/docs/zh-CN/faq"><span>Frequently Asked Questions</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#esy"><a href="http://esy.sh">esy</a></a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.min.js"></script><script>window.foo = new Pjax({
-          areas: [
-            // try to use the first query.
-            '.mainContainer, .docsNavContainer .toc .navWrapper, .onPageNav',
-            // fallback
-            'body'
-          ],
-          link: '.docsNavContainer:not(.docsSliderActive) a',
-          update: {
-            script: false,
-          }
-        });
-        var languagesMenuItemCopy = document.getElementById("languages-menu");
-        languagesMenuItemCopy.addEventListener("click", function(e){
-          e.preventDefault();
-          e.stopPropagation();
-          e.stopImmediatePropagation();
-        });</script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/zh-CN/native"><span class="arrow-prev">← </span><span>Native</span></a><a class="docs-next button" href="/docs/zh-CN/faq"><span>Frequently Asked Questions</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#esy"><a href="http://esy.sh">esy</a></a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.min.js"></script><script>
+          var Pjax = require('pjax-api').Pjax;
+          new Pjax({
+            areas: [
+              // try to use the first query.
+              '.mainContainer, .docsNavContainer .toc .navWrapper, .onPageNav',
+              // fallback
+              'body'
+            ],
+            link: '.docsNavContainer:not(.docsSliderActive) a',
+            update: {
+              script: false,
+            }
+          });
+          var languagesMenuItemCopy = document.getElementById("languages-menu");
+          languagesMenuItemCopy.addEventListener("click", function(e){
+            e.preventDefault();
+            e.stopPropagation();
+            e.stopImmediatePropagation();
+          });
+        </script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
                 document.addEventListener('keyup', function(e) {
                   if (e.target !== document.body) {
                     return;

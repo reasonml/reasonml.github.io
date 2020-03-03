@@ -98,24 +98,27 @@ raise(InputClosed(&quot;串流已關閉！&quot;));
 <p>上述提示看似否定 OCaml 標準函式庫內所發生的事情；如 <a href="/api/List.html">List</a> 和 <a href="/api/String.html">String</a> 模組內顯著的函式看起來過度地使用例外。 這一部份是歷史沈澱物，另一部份是極度在意效率。 原生 OCaml/Reason 是非常有效率；丟出例外的設計是非常廉價的，比配置和傳回還要廉價，例如 <code>option</code>。 很不幸在 JavaScript 沒有這個問題。</p>
 <p>較新的標準函式庫通常帶有傳回 <code>option</code> 的函式，而非丟出例外。 例如，<code>List.find</code> 有傳回 <code>option</code> 的相似物 <code>List.find_opt</code>，不會丟出例外。</p>
 <p>實際上例外也是個變異。 事實上，它們都屬於單一變異，稱之為 <code>exn</code>。 這是個<a href="https://caml.inria.fr/pub/docs/manual-ocaml/extn.html#sec252">可擴充的變異</a>，表示你可以加入新的建構子，例如上述的 <code>InputClosed</code>。 <code>exception Foo</code> 只是個語法糖，方便加入建構子到 <code>exn</code>。</p>
-</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/zh-TW/external"><span class="arrow-prev">← </span><span>External</span></a><a class="docs-next button" href="/docs/zh-TW/object"><span>Object</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#用法">用法</a></li><li><a href="#提示-amp-技巧">提示 &amp; 技巧</a></li><li><a href="#設計決策">設計決策</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.min.js"></script><script>window.foo = new Pjax({
-          areas: [
-            // try to use the first query.
-            '.mainContainer, .docsNavContainer .toc .navWrapper, .onPageNav',
-            // fallback
-            'body'
-          ],
-          link: '.docsNavContainer:not(.docsSliderActive) a',
-          update: {
-            script: false,
-          }
-        });
-        var languagesMenuItemCopy = document.getElementById("languages-menu");
-        languagesMenuItemCopy.addEventListener("click", function(e){
-          e.preventDefault();
-          e.stopPropagation();
-          e.stopImmediatePropagation();
-        });</script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/zh-TW/external"><span class="arrow-prev">← </span><span>External</span></a><a class="docs-next button" href="/docs/zh-TW/object"><span>Object</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#用法">用法</a></li><li><a href="#提示-amp-技巧">提示 &amp; 技巧</a></li><li><a href="#設計決策">設計決策</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.min.js"></script><script>
+          var Pjax = require('pjax-api').Pjax;
+          new Pjax({
+            areas: [
+              // try to use the first query.
+              '.mainContainer, .docsNavContainer .toc .navWrapper, .onPageNav',
+              // fallback
+              'body'
+            ],
+            link: '.docsNavContainer:not(.docsSliderActive) a',
+            update: {
+              script: false,
+            }
+          });
+          var languagesMenuItemCopy = document.getElementById("languages-menu");
+          languagesMenuItemCopy.addEventListener("click", function(e){
+            e.preventDefault();
+            e.stopPropagation();
+            e.stopImmediatePropagation();
+          });
+        </script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
                 document.addEventListener('keyup', function(e) {
                   if (e.target !== document.body) {
                     return;

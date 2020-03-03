@@ -188,24 +188,27 @@
 <p>Whatever nice utilities you find, put them in a <code>tempUtils.re</code> file or something. They're easy examples for your colleagues and removes some conversion churns.</p>
 <p>Nós <strong>recomendamos fortemente</strong> que você realize o controle de versão da saída JS. Isto torna a integração com seu sistema de build quase transparente, e garante que quando você não está presente seus colegas ainda conseguem fazer pequenas mudanças, conferir as diferenças na saída e corrigir pequenos erros. Também é um ótimo argumento para o uso da tecnologia (principalmente para gerentes!) que a saída JS seja versionada e portanto diretamente modificável em caso de correções de emergência. Até mesmo em caso de atualização da versão do BuckleScript você será alertado de qualquer diferença na saída. É como o <a href="https://facebook.github.io/jest/docs/snapshot-testing.html">Jest snapshots</a>, embutido!</p>
 <p>As always, ping us on <a href="https://discord.gg/reasonml">Discord</a> or <a href="https://reasonml.chat">Forum</a> for more help!</p>
-</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/pt-BR/libraries"><span class="arrow-prev">← </span><span>Libraries</span></a><a class="docs-next button" href="/docs/pt-BR/native"><span>Native</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#preparacão">Preparação</a></li><li><a href="#sintaxe">Sintaxe</a></li><li><a href="#tipos-passo-1">Tipos, passo 1</a></li><li><a href="#semantica-de-execucão">Semântica de Execução</a></li><li><a href="#limpeza-tipos-passagem-2">Limpeza (Tipos, Passagem 2)</a></li><li><a href="#dicas">Dicas</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.min.js"></script><script>window.foo = new Pjax({
-          areas: [
-            // try to use the first query.
-            '.mainContainer, .docsNavContainer .toc .navWrapper, .onPageNav',
-            // fallback
-            'body'
-          ],
-          link: '.docsNavContainer:not(.docsSliderActive) a',
-          update: {
-            script: false,
-          }
-        });
-        var languagesMenuItemCopy = document.getElementById("languages-menu");
-        languagesMenuItemCopy.addEventListener("click", function(e){
-          e.preventDefault();
-          e.stopPropagation();
-          e.stopImmediatePropagation();
-        });</script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/pt-BR/libraries"><span class="arrow-prev">← </span><span>Libraries</span></a><a class="docs-next button" href="/docs/pt-BR/native"><span>Native</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#preparacão">Preparação</a></li><li><a href="#sintaxe">Sintaxe</a></li><li><a href="#tipos-passo-1">Tipos, passo 1</a></li><li><a href="#semantica-de-execucão">Semântica de Execução</a></li><li><a href="#limpeza-tipos-passagem-2">Limpeza (Tipos, Passagem 2)</a></li><li><a href="#dicas">Dicas</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.min.js"></script><script>
+          var Pjax = require('pjax-api').Pjax;
+          new Pjax({
+            areas: [
+              // try to use the first query.
+              '.mainContainer, .docsNavContainer .toc .navWrapper, .onPageNav',
+              // fallback
+              'body'
+            ],
+            link: '.docsNavContainer:not(.docsSliderActive) a',
+            update: {
+              script: false,
+            }
+          });
+          var languagesMenuItemCopy = document.getElementById("languages-menu");
+          languagesMenuItemCopy.addEventListener("click", function(e){
+            e.preventDefault();
+            e.stopPropagation();
+            e.stopImmediatePropagation();
+          });
+        </script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
                 document.addEventListener('keyup', function(e) {
                   if (e.target !== document.body) {
                     return;

@@ -188,24 +188,27 @@
 <p>Whatever nice utilities you find, put them in a <code>tempUtils.re</code> file or something. They're easy examples for your colleagues and removes some conversion churns.</p>
 <p>We <strong>highly recommend</strong> you to check the JS output into version control. It makes your build system integration quasi-nonexistent, and makes sure that when you're not there, your teammates can make small changes, audit the output diff, and catch any mistakes. It's also a great selling point that the checked in JS output is friendly to emergency hot patches (a big selling point for managers!). Even if you're upgrading BuckleScript version, you'd catch any output difference. It's like <a href="https://facebook.github.io/jest/docs/snapshot-testing.html">Jest snapshots</a>, for free!</p>
 <p>As always, ping us on <a href="https://discord.gg/reasonml">Discord</a> or <a href="https://reasonml.chat">Forum</a> for more help!</p>
-</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/ja/libraries"><span class="arrow-prev">← </span><span>ライブラリ</span></a><a class="docs-next button" href="/docs/ja/native"><span>Native</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#preparation">Preparation</a></li><li><a href="#syntax">Syntax</a></li><li><a href="#types-pass-1">Types, Pass 1</a></li><li><a href="#runtime-semantics">Runtime Semantics</a></li><li><a href="#clean-up-types-pass-2">Clean Up (Types, Pass 2)</a></li><li><a href="#tips">Tips</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.min.js"></script><script>window.foo = new Pjax({
-          areas: [
-            // try to use the first query.
-            '.mainContainer, .docsNavContainer .toc .navWrapper, .onPageNav',
-            // fallback
-            'body'
-          ],
-          link: '.docsNavContainer:not(.docsSliderActive) a',
-          update: {
-            script: false,
-          }
-        });
-        var languagesMenuItemCopy = document.getElementById("languages-menu");
-        languagesMenuItemCopy.addEventListener("click", function(e){
-          e.preventDefault();
-          e.stopPropagation();
-          e.stopImmediatePropagation();
-        });</script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/ja/libraries"><span class="arrow-prev">← </span><span>ライブラリ</span></a><a class="docs-next button" href="/docs/ja/native"><span>Native</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#preparation">Preparation</a></li><li><a href="#syntax">Syntax</a></li><li><a href="#types-pass-1">Types, Pass 1</a></li><li><a href="#runtime-semantics">Runtime Semantics</a></li><li><a href="#clean-up-types-pass-2">Clean Up (Types, Pass 2)</a></li><li><a href="#tips">Tips</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.min.js"></script><script>
+          var Pjax = require('pjax-api').Pjax;
+          new Pjax({
+            areas: [
+              // try to use the first query.
+              '.mainContainer, .docsNavContainer .toc .navWrapper, .onPageNav',
+              // fallback
+              'body'
+            ],
+            link: '.docsNavContainer:not(.docsSliderActive) a',
+            update: {
+              script: false,
+            }
+          });
+          var languagesMenuItemCopy = document.getElementById("languages-menu");
+          languagesMenuItemCopy.addEventListener("click", function(e){
+            e.preventDefault();
+            e.stopPropagation();
+            e.stopImmediatePropagation();
+          });
+        </script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
                 document.addEventListener('keyup', function(e) {
                   if (e.target !== document.body) {
                     return;

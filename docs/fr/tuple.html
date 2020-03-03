@@ -113,24 +113,27 @@
 <p>Un système de types n'est pas tout-puissant, et ne devrait pas l'être. Certains compromis de bon goût doivent être appliqués afin de garder le langage simple, performant (compilation et vitesse de fonctionnement) et facile à comprendre. Les lists Reason, par exemple, sont plus flexibles en taille. Elles peuvent être concaténées, ajoutées, tranchées, etc. En retour, elles doivent être homogènes (ne peuvent contenir qu'un seul type de valeur par list), et l'accès aléatoire à un index peut ne pas toujours être valide*. Le tuple, d'autre part, grâce à sa contrainte de taille, est plus rapide, donne au système de types assez de marge de manœuvre pour suivre de manière exhaustive tous les types de ses objets et garantit un accès sécurisé. En général, vous remarquerez quelques compromis importants et de bon goût dans un système de type : les champs de records sont fixes, mais peuvent être hétérogènes, alors que les champs d'une map sont flexibles mais homogènes, etc.</p>
 <p>Un tuple Reason est typé &quot;structurellement&quot;. Cela signifie que même si vous n'avez pas annoté votre donnée avec un type explicite, le compilateur peut encore le déduire en regardant son contenu, son utilisation, etc. Tant que les déclarations et les formes inférées des usages correspondent, tout va bien !</p>
 <p>* Ce n'est pas que le système de types de Reason ne peut pas accepter des listes hétérogènes et de taille dynamique. En fait, il le peut (indice : GADT) ! Mais en créant cette fonctionnalité, la valeur par défaut augmente à la fois la courbe d'apprentissage et la compréhension du code. Tout simplement parce que les types peuvent l'accomplir ne signifie pas que c'est toujours une bonne idée de laisser des morceaux de code grandir de façon complexe sans aucune limite !</p>
-</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/fr/integer-and-float"><span class="arrow-prev">← </span><span>Entier &amp; Flottant</span></a><a class="docs-next button" href="/docs/fr/record"><span>Record</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#utilisation">Utilisation</a></li><li><a href="#conseils-amp-astuces">Conseils &amp; astuces</a></li><li><a href="#decisions-de-conception">Décisions de conception</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.min.js"></script><script>window.foo = new Pjax({
-          areas: [
-            // try to use the first query.
-            '.mainContainer, .docsNavContainer .toc .navWrapper, .onPageNav',
-            // fallback
-            'body'
-          ],
-          link: '.docsNavContainer:not(.docsSliderActive) a',
-          update: {
-            script: false,
-          }
-        });
-        var languagesMenuItemCopy = document.getElementById("languages-menu");
-        languagesMenuItemCopy.addEventListener("click", function(e){
-          e.preventDefault();
-          e.stopPropagation();
-          e.stopImmediatePropagation();
-        });</script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/fr/integer-and-float"><span class="arrow-prev">← </span><span>Entier &amp; Flottant</span></a><a class="docs-next button" href="/docs/fr/record"><span>Record</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#utilisation">Utilisation</a></li><li><a href="#conseils-amp-astuces">Conseils &amp; astuces</a></li><li><a href="#decisions-de-conception">Décisions de conception</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.min.js"></script><script>
+          var Pjax = require('pjax-api').Pjax;
+          new Pjax({
+            areas: [
+              // try to use the first query.
+              '.mainContainer, .docsNavContainer .toc .navWrapper, .onPageNav',
+              // fallback
+              'body'
+            ],
+            link: '.docsNavContainer:not(.docsSliderActive) a',
+            update: {
+              script: false,
+            }
+          });
+          var languagesMenuItemCopy = document.getElementById("languages-menu");
+          languagesMenuItemCopy.addEventListener("click", function(e){
+            e.preventDefault();
+            e.stopPropagation();
+            e.stopImmediatePropagation();
+          });
+        </script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
                 document.addEventListener('keyup', function(e) {
                   if (e.target !== document.body) {
                     return;

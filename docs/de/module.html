@@ -277,24 +277,27 @@ print_endline(<span class="hljs-module-identifier">School</span>.getProfession(a
 </code></pre>
 <h2><a class="anchor" aria-hidden="true" id="tips-tricks"></a><a href="#tips-tricks" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Tips &amp; Tricks</h2>
 <p>Modules and functors are at a different &quot;layer&quot; of language than the rest (functions, let bindings, data structures, etc.). For example, you can't easily pass them into a tuple or record. Use them judiciously, if ever! Lots of times, just a record or a function is enough.</p>
-</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/de/object"><span class="arrow-prev">← </span><span>Object</span></a><a class="docs-next button" href="/docs/de/promise"><span>Promise</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#grundlagen">Grundlagen</a><ul class="toc-headings"><li><a href="#erzeugung">Erzeugung</a></li><li><a href="#ein-modul-mit-open-offnen">Ein Modul mit <code>open</code> öffnen</a></li><li><a href="#module-erweitern">Module erweitern</a></li><li><a href="#jede-re-datei-ist-ein-modul-">Jede <code>.re</code>-Datei ist ein Modul</a></li></ul></li><li><a href="#signaturen">Signaturen</a><ul class="toc-headings"><li><a href="#erzeugung-1">Erzeugung</a></li><li><a href="#modulsignaturen-erweitern">Modulsignaturen erweitern</a></li><li><a href="#jede-rei-datei-ist-eine-signatur-">Jede <code>.rei</code>-Datei ist eine Signatur</a></li></ul></li><li><a href="#modulfunktionen-functors">Modulfunktionen (functors)</a><ul class="toc-headings"><li><a href="#typen-von-modulfunktionen">Typen von Modulfunktionen</a></li></ul></li><li><a href="#tips-amp-tricks">Tips &amp; Tricks</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.min.js"></script><script>window.foo = new Pjax({
-          areas: [
-            // try to use the first query.
-            '.mainContainer, .docsNavContainer .toc .navWrapper, .onPageNav',
-            // fallback
-            'body'
-          ],
-          link: '.docsNavContainer:not(.docsSliderActive) a',
-          update: {
-            script: false,
-          }
-        });
-        var languagesMenuItemCopy = document.getElementById("languages-menu");
-        languagesMenuItemCopy.addEventListener("click", function(e){
-          e.preventDefault();
-          e.stopPropagation();
-          e.stopImmediatePropagation();
-        });</script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/de/object"><span class="arrow-prev">← </span><span>Object</span></a><a class="docs-next button" href="/docs/de/promise"><span>Promise</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#grundlagen">Grundlagen</a><ul class="toc-headings"><li><a href="#erzeugung">Erzeugung</a></li><li><a href="#ein-modul-mit-open-offnen">Ein Modul mit <code>open</code> öffnen</a></li><li><a href="#module-erweitern">Module erweitern</a></li><li><a href="#jede-re-datei-ist-ein-modul-">Jede <code>.re</code>-Datei ist ein Modul</a></li></ul></li><li><a href="#signaturen">Signaturen</a><ul class="toc-headings"><li><a href="#erzeugung-1">Erzeugung</a></li><li><a href="#modulsignaturen-erweitern">Modulsignaturen erweitern</a></li><li><a href="#jede-rei-datei-ist-eine-signatur-">Jede <code>.rei</code>-Datei ist eine Signatur</a></li></ul></li><li><a href="#modulfunktionen-functors">Modulfunktionen (functors)</a><ul class="toc-headings"><li><a href="#typen-von-modulfunktionen">Typen von Modulfunktionen</a></li></ul></li><li><a href="#tips-amp-tricks">Tips &amp; Tricks</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.min.js"></script><script>
+          var Pjax = require('pjax-api').Pjax;
+          new Pjax({
+            areas: [
+              // try to use the first query.
+              '.mainContainer, .docsNavContainer .toc .navWrapper, .onPageNav',
+              // fallback
+              'body'
+            ],
+            link: '.docsNavContainer:not(.docsSliderActive) a',
+            update: {
+              script: false,
+            }
+          });
+          var languagesMenuItemCopy = document.getElementById("languages-menu");
+          languagesMenuItemCopy.addEventListener("click", function(e){
+            e.preventDefault();
+            e.stopPropagation();
+            e.stopImmediatePropagation();
+          });
+        </script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
                 document.addEventListener('keyup', function(e) {
                   if (e.target !== document.body) {
                     return;

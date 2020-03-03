@@ -113,24 +113,27 @@
 <p>型システムはすべてにおいて強力なわけではなく、また、そうでなくてはなりません。言語をシンプルかつ、パフォーマンス（コンパイルと実行速度の両方）と理解しやすさを保つために、いくつかのトレードオフが適用される必要があります。 例えば、Reason のリストは、サイズがより柔軟で、連結、追加、スライスなどが可能です。 その代わり、一様（リストごとに1種の型の値しか含めることができない）であることが求められ、ランダムインデックスアクセスは常に有効であるとは限りません。 一方、タプルは、サイズに対する制約により、より速く、型システムにすべての要素の型を徹底的に追跡し、安全なアクセスを保証する余裕を与えます 一般的に、型システムの幾つかの主要な、味わい深い、トレードオフに気づくでしょう: レコードのフィールドは固定される代わりに、多様（複数の型を許容する）で、マップのフィールドは柔軟な代わりに、一様（複数の型を許容しない）でなければならない、など。</p>
 <p>Reason の型は「構造的に」型付けされます。 これは、たとえあなたがデータに明示的な型注釈をしなくても、コンパイラが内容や使われ方などから判断して、推論することも可能であることを意味します。 宣言と用途の推定された形が一致する限り、良いことしかありません！</p>
 <p>Reason の型システムは多様な動的サイズのリストを許可できませんが、実際には可能（ヒント: GADT）だったりします！ しかし、そのような機能をデフォルトにすることは、初見の学習オーバヘッドとコードの理解しやすさを増加させます。 型がそれを達成できるというだけで、コードの一部を無限に複雑にすることは、常に良い考えであるとは限りません！</p>
-</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/ja/integer-and-float"><span class="arrow-prev">← </span><span>Integer &amp; Float</span></a><a class="docs-next button" href="/docs/ja/record"><span>Record</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#使い方">使い方</a></li><li><a href="#ヒントとコツ">ヒントとコツ</a></li><li><a href="#設計方針">設計方針</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.min.js"></script><script>window.foo = new Pjax({
-          areas: [
-            // try to use the first query.
-            '.mainContainer, .docsNavContainer .toc .navWrapper, .onPageNav',
-            // fallback
-            'body'
-          ],
-          link: '.docsNavContainer:not(.docsSliderActive) a',
-          update: {
-            script: false,
-          }
-        });
-        var languagesMenuItemCopy = document.getElementById("languages-menu");
-        languagesMenuItemCopy.addEventListener("click", function(e){
-          e.preventDefault();
-          e.stopPropagation();
-          e.stopImmediatePropagation();
-        });</script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/ja/integer-and-float"><span class="arrow-prev">← </span><span>Integer &amp; Float</span></a><a class="docs-next button" href="/docs/ja/record"><span>Record</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#使い方">使い方</a></li><li><a href="#ヒントとコツ">ヒントとコツ</a></li><li><a href="#設計方針">設計方針</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.min.js"></script><script>
+          var Pjax = require('pjax-api').Pjax;
+          new Pjax({
+            areas: [
+              // try to use the first query.
+              '.mainContainer, .docsNavContainer .toc .navWrapper, .onPageNav',
+              // fallback
+              'body'
+            ],
+            link: '.docsNavContainer:not(.docsSliderActive) a',
+            update: {
+              script: false,
+            }
+          });
+          var languagesMenuItemCopy = document.getElementById("languages-menu");
+          languagesMenuItemCopy.addEventListener("click", function(e){
+            e.preventDefault();
+            e.stopPropagation();
+            e.stopImmediatePropagation();
+          });
+        </script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
                 document.addEventListener('keyup', function(e) {
                   if (e.target !== document.body) {
                     return;
