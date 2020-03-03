@@ -98,27 +98,7 @@ raise(InputClosed(&quot;the stream has closed!&quot;));
 <p>Совет выше выглядит противоречием тому, что происходит в стандартной библиотеке OCaml. Функции в модулях <a href="/api/List.html">List</a> и <a href="/api/String.html">String</a> часто выбрасывают исключения. Это сделано по историческим причинам и часто в угоду производительности. Нативный код OCaml/Reason очень производителен и исключения сделаны так, чтобы быть дешевле для алокации и выбрасывания чем <code>option</code>. Для JavaScript это не так.</p>
 <p>Новые альтернативы стандартной библиотеке обычно используют возврат <code>option</code> вместо выбрасывания исключений. For example, <code>List.find</code> has the <code>option</code>-returning counterpart <code>List.find_opt</code>, which doesn't throw.</p>
 <p>Exceptions are actually just variants too. In fact, they all belong to a single variant type, called <code>exn</code>. It's an <a href="https://caml.inria.fr/pub/docs/manual-ocaml/extn.html#sec252">extensible variant</a>, meaning you can add new constructors to it, such as <code>InputClosed</code> above. <code>exception Foo</code> is just a sugar for adding a constructor to <code>exn</code>.</p>
-</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/ru/external"><span class="arrow-prev">← </span><span>External</span></a><a class="docs-next button" href="/docs/ru/object"><span>Объекты</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#использование">Использование</a></li><li><a href="#советы-и-трюки">Советы и трюки</a></li><li><a href="#проектные-решения">Проектные решения</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.min.js"></script><script>
-          var Pjax = require('pjax-api').Pjax;
-          new Pjax({
-            areas: [
-              // try to use the first query.
-              '.mainContainer, .docsNavContainer .toc .navWrapper, .onPageNav',
-              // fallback
-              'body'
-            ],
-            link: '.docsNavContainer:not(.docsSliderActive) a',
-            update: {
-              script: false,
-            }
-          });
-          var languagesMenuItemCopy = document.getElementById("languages-menu");
-          languagesMenuItemCopy.addEventListener("click", function(e){
-            e.preventDefault();
-            e.stopPropagation();
-            e.stopImmediatePropagation();
-          });
-        </script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/ru/external"><span class="arrow-prev">← </span><span>External</span></a><a class="docs-next button" href="/docs/ru/object"><span>Объекты</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#использование">Использование</a></li><li><a href="#советы-и-трюки">Советы и трюки</a></li><li><a href="#проектные-решения">Проектные решения</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
                 document.addEventListener('keyup', function(e) {
                   if (e.target !== document.body) {
                     return;

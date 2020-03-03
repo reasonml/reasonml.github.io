@@ -198,27 +198,7 @@
 <!-- TODO: playground link -->
 <p>Schon verblüfft? Varianten haben eine tiefe Verbindung zu anderen Gebieten der Mathematik; <a href="https://codewords.recurse.com/issues/three/algebra-and-calculus-of-algebraic-data-types">Siehe hier</a> für eine interessante Erkundung.</p>
 <p>* Es ist immer schöner, das Problem durch einen besseren Entwurf zu lösen, als auf ein Typsystem zurückzugreifen, um die Fallstricke abzudecken. In der Realität ist es unrealistisch, dies für jedes Problem zu tun oder einfach nur jedes Problem vollständig zu verstehen, um eine Lösung zu entwickeln. Ein Typsystem ermöglicht es dir, eine große Kategorie von Änderungen an Codebasen vorzunehmen, ohne das Ganze im Voraus verstehen zu müssen. Dies ist großartig für geleitete Erkundungen. In this regard, types also allow us not needing to overly design an API just to circumvent callers' simple pitfalls. Sie reduzieren die Schichten von Abstraktionen, die nötig sind, um „Dinge zu erledigen“, was wiederum die kognitive Belastung in Aufrufszenarien reduziert.</p>
-</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/de/record"><span class="arrow-prev">← </span><span>Record</span></a><a class="docs-next button" href="/docs/de/null-undefined-option"><span>Null, Undefined &amp; Option</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#verwendung">Verwendung</a><ul class="toc-headings"><li><a href="#varianten-brauchen-eine-explizite-definition">Varianten brauchen eine explizite Definition</a></li><li><a href="#konstruktorargumente">Konstruktorargumente</a></li><li><a href="#lobende-erwahnungen">Lobende Erwähnungen</a></li></ul></li><li><a href="#tips-amp-tricks">Tips &amp; Tricks</a><ul class="toc-headings"><li><a href="#varianten-mussen-konstruktoren-haben">Varianten müssen Konstruktoren haben</a></li><li><a href="#interoperabilitat-mit-javascript">Interoperabilität mit JavaScript</a></li><li><a href="#variantentypen-werden-durch-feldnamen-gefunden">Variantentypen werden durch Feldnamen gefunden</a></li></ul></li><li><a href="#designentscheidungen">Designentscheidungen</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.min.js"></script><script>
-          var Pjax = require('pjax-api').Pjax;
-          new Pjax({
-            areas: [
-              // try to use the first query.
-              '.mainContainer, .docsNavContainer .toc .navWrapper, .onPageNav',
-              // fallback
-              'body'
-            ],
-            link: '.docsNavContainer:not(.docsSliderActive) a',
-            update: {
-              script: false,
-            }
-          });
-          var languagesMenuItemCopy = document.getElementById("languages-menu");
-          languagesMenuItemCopy.addEventListener("click", function(e){
-            e.preventDefault();
-            e.stopPropagation();
-            e.stopImmediatePropagation();
-          });
-        </script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/de/record"><span class="arrow-prev">← </span><span>Record</span></a><a class="docs-next button" href="/docs/de/null-undefined-option"><span>Null, Undefined &amp; Option</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#verwendung">Verwendung</a><ul class="toc-headings"><li><a href="#varianten-brauchen-eine-explizite-definition">Varianten brauchen eine explizite Definition</a></li><li><a href="#konstruktorargumente">Konstruktorargumente</a></li><li><a href="#lobende-erwahnungen">Lobende Erwähnungen</a></li></ul></li><li><a href="#tips-amp-tricks">Tips &amp; Tricks</a><ul class="toc-headings"><li><a href="#varianten-mussen-konstruktoren-haben">Varianten müssen Konstruktoren haben</a></li><li><a href="#interoperabilitat-mit-javascript">Interoperabilität mit JavaScript</a></li><li><a href="#variantentypen-werden-durch-feldnamen-gefunden">Variantentypen werden durch Feldnamen gefunden</a></li></ul></li><li><a href="#designentscheidungen">Designentscheidungen</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
                 document.addEventListener('keyup', function(e) {
                   if (e.target !== document.body) {
                     return;

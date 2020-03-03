@@ -98,27 +98,7 @@ raise(InputClosed(&quot;the stream has closed!&quot;));
 <p>Le point ci-dessus semble contredire ce qui se passe dans la librairie standard OCaml. Les fonctions éminentes dans des modules tels que <a href="/api/List.html">List</a> et <a href="/api/String.html">String</a> semblent lancer des exceptions trop souvent. Ceci est en partie un héritage historique, et partiellement une attention extrême à la performance. OCaml natif/Reason sont extrêmement performants. Le générateur d'exceptions a été conçu pour être très léger, moins gourmant que l'allocation et le retour d'une <code>option</code> par exemple. Ce n'est malheureusement pas le cas pour JavaScript.</p>
 <p>Les alternatives de librairies standard plus récentes sont généralement livrées avec des fonctions retournant des <code>option</code>s plutôt que lançant des exceptions. Par exemple, <code>List.find</code> à l'<code>option</code> en retour contrairement à <code>List.find_opt</code>, qui ne le throw pas.</p>
 <p>Les exceptions sont en fait de simples variantes. Pour être encore plus précis, ils appartiennent tous à un seul type de variante, appelé <code>exn</code>. C'est une <a href="https://caml.inria.fr/pub/docs/manual-ocaml/extn.html#sec252">variante extensible</a>, ce qui signifie que vous pouvez y ajouter de nouveaux constructeurs, tels que <code>InputClosed</code> ci-dessus. <code>exception Foo</code> est juste un sucre syntaxique pour ajouter un constructeur à <code>exn</code>.</p>
-</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/fr/external"><span class="arrow-prev">← </span><span>External</span></a><a class="docs-next button" href="/docs/fr/object"><span>Objet</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#utilisation">Utilisation</a></li><li><a href="#conseils-amp-astuces">Conseils &amp; astuces</a></li><li><a href="#decisions-de-conception">Décisions de conception</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.min.js"></script><script>
-          var Pjax = require('pjax-api').Pjax;
-          new Pjax({
-            areas: [
-              // try to use the first query.
-              '.mainContainer, .docsNavContainer .toc .navWrapper, .onPageNav',
-              // fallback
-              'body'
-            ],
-            link: '.docsNavContainer:not(.docsSliderActive) a',
-            update: {
-              script: false,
-            }
-          });
-          var languagesMenuItemCopy = document.getElementById("languages-menu");
-          languagesMenuItemCopy.addEventListener("click", function(e){
-            e.preventDefault();
-            e.stopPropagation();
-            e.stopImmediatePropagation();
-          });
-        </script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/fr/external"><span class="arrow-prev">← </span><span>External</span></a><a class="docs-next button" href="/docs/fr/object"><span>Objet</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#utilisation">Utilisation</a></li><li><a href="#conseils-amp-astuces">Conseils &amp; astuces</a></li><li><a href="#decisions-de-conception">Décisions de conception</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
                 document.addEventListener('keyup', function(e) {
                   if (e.target !== document.body) {
                     return;

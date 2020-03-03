@@ -120,27 +120,7 @@
 <p>型別系統接受型別參數基本上允許型別階層（type-level）函式。 <code>list(int)</code> 實際是 <code>list</code> 型別函式，接受 <code>int</code> 型別，傳回會拿來使用的最終、具體型別。 你可能注意到其他語言，或多或少稱這個為 &quot;泛型（generics）&quot;。 例如：Java 的 <code>ArrayList&lt;Integer&gt;</code>。</p>
 <p>當你使著 &quot;完成事情&quot; 時，套用 <a href="https://en.wikipedia.org/wiki/Rule_of_least_power">The principle of least power</a>。 如果問題領域允許，一定選擇最不抽象（又稱，最具體）解決方法，這樣解決方法才會達到快速和更少需要跨越不穩定的方向。 例如，偏好型別更勝於自由格式的資料，偏好資料導向配置更勝於完全圖靈函式呼叫，偏好函式呼叫更勝於巨集，偏好巨集更勝於專案分叉等。 當你限制領域及能力，事情變得個容易分析。 即，<em>如果</em> 領域是限制的，足以允許它。</p>
 <p>當型別系統是你程式的全部面向，我們需要確保留下足夠能力不會過度限制你的表達力；缺少 &quot;型別參數&quot;，結果是產生許多 boilerplate，例如，徒手撰寫 <code>listOfInt</code>、<code>listOfString</code>、<code>listOfArrayOfFloat</code>、各別輔助函式，等。 然而，請也確保不會透過這個稍微強大的型別系統過度濫用這個能力。 有時候，寫些<em>小型</em>的 boilerplate 減少對其他額外強大型別的需求。 如果有區別的話，品味權衡突顯你的實用主義及判斷更甚於花俏的型別！</p>
-</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/zh-TW/pipe-first"><span class="arrow-prev">← </span><span>Pipe First</span></a><a class="docs-next button" href="/docs/zh-TW/destructuring"><span>Destructuring</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#型別參數">型別參數！</a></li><li><a href="#相互遞迴型別">相互遞迴型別</a></li><li><a href="#設計決策">設計決策</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.min.js"></script><script>
-          var Pjax = require('pjax-api').Pjax;
-          new Pjax({
-            areas: [
-              // try to use the first query.
-              '.mainContainer, .docsNavContainer .toc .navWrapper, .onPageNav',
-              // fallback
-              'body'
-            ],
-            link: '.docsNavContainer:not(.docsSliderActive) a',
-            update: {
-              script: false,
-            }
-          });
-          var languagesMenuItemCopy = document.getElementById("languages-menu");
-          languagesMenuItemCopy.addEventListener("click", function(e){
-            e.preventDefault();
-            e.stopPropagation();
-            e.stopImmediatePropagation();
-          });
-        </script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/zh-TW/pipe-first"><span class="arrow-prev">← </span><span>Pipe First</span></a><a class="docs-next button" href="/docs/zh-TW/destructuring"><span>Destructuring</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#型別參數">型別參數！</a></li><li><a href="#相互遞迴型別">相互遞迴型別</a></li><li><a href="#設計決策">設計決策</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
                 document.addEventListener('keyup', function(e) {
                   if (e.target !== document.body) {
                     return;

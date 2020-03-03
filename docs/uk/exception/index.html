@@ -98,27 +98,7 @@ raise(InputClosed(&quot;the stream has closed!&quot;));
 <p>The above tip seems to contradict what's happening in the OCaml standard library; prominent functions in modules such as <a href="/api/List.html">List</a> and <a href="/api/String.html">String</a> seems to throw exceptions overly often. This is partially a historical sediment, and partially out of extreme care for performance. Native OCaml/Reason is incredibly performant; exception throwing was designed to be very cheap, cheaper than allocating and returning e.g. an <code>option</code>. This is unfortunately not the case for JavaScript.</p>
 <p>Newer standard library alternatives usually come with <code>option</code>-returning functions rather than exception-throwing ones. For example, <code>List.find</code> has the <code>option</code>-returning counterpart <code>List.find_opt</code>, which doesn't throw.</p>
 <p>Exceptions are actually just variants too. In fact, they all belong to a single variant type, called <code>exn</code>. It's an <a href="https://caml.inria.fr/pub/docs/manual-ocaml/extn.html#sec252">extensible variant</a>, meaning you can add new constructors to it, such as <code>InputClosed</code> above. <code>exception Foo</code> is just a sugar for adding a constructor to <code>exn</code>.</p>
-</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/uk/external"><span class="arrow-prev">← </span><span>External</span></a><a class="docs-next button" href="/docs/uk/object"><span>Object</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#usage">Usage</a></li><li><a href="#tips-amp-tricks">Tips &amp; Tricks</a></li><li><a href="#design-decisions">Design Decisions</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script><script src="/js/pjax-api.min.js"></script><script>
-          var Pjax = require('pjax-api').Pjax;
-          new Pjax({
-            areas: [
-              // try to use the first query.
-              '.mainContainer, .docsNavContainer .toc .navWrapper, .onPageNav',
-              // fallback
-              'body'
-            ],
-            link: '.docsNavContainer:not(.docsSliderActive) a',
-            update: {
-              script: false,
-            }
-          });
-          var languagesMenuItemCopy = document.getElementById("languages-menu");
-          languagesMenuItemCopy.addEventListener("click", function(e){
-            e.preventDefault();
-            e.stopPropagation();
-            e.stopImmediatePropagation();
-          });
-        </script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/uk/external"><span class="arrow-prev">← </span><span>External</span></a><a class="docs-next button" href="/docs/uk/object"><span>Object</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#usage">Usage</a></li><li><a href="#tips-amp-tricks">Tips &amp; Tricks</a></li><li><a href="#design-decisions">Design Decisions</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
                 document.addEventListener('keyup', function(e) {
                   if (e.target !== document.body) {
                     return;
