@@ -70,18 +70,22 @@
 <ul>
 <li><code>&amp;&amp;</code>: 논리곱</li>
 <li><code>||</code>: 논리합</li>
-<li><code>!</code>: 부정</li>
+<li><code>!</code>: logical not</li>
 <li><code>&lt;=</code>, <code>&gt;=</code>, <code>&lt;</code>, <code>&gt;</code></li>
-<li><code>==</code>: 구조적 동치, 데이터 구조를 깊게 비교합니다: <code>(1, 2) == (1, 2)</code> 은 <code>true</code>입니다. 편리하지만, 조심할 필요가 있습니다.</li>
+<li><code>==</code>: physical equal, compares data structures deeply: <code>(1, 2) == (1, 2)</code> is <code>true</code>. Convenient, but use with caution</li>
 <li><code>===</code>: 레퍼런스 동치, 얕게 비교합니다. <code>(1, 2) === (1, 2)</code> 은 <code>false</code>입니다. <code>let myTuple = (1, 2); myTuple === myTuple</code> 은 <code>true</code>입니다.</li>
-<li><code>!=</code>: 구조적 동치 부정</li>
+<li><code>!=</code>: physical unequal</li>
 <li><code>!==</code>: 레퍼런스 동치 부정</li>
 </ul>
-<h2><a class="anchor" aria-hidden="true" id="사용"></a><a href="#사용" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>사용</h2>
-<p><strong>주의</strong>: Reason/Bucklescript의 <code>true</code>와 <code>false</code>는 <a href="https://bucklescript.github.io/blog/2018/04/16/release-3-0-0.html">BuckleScript 3.0 이후부터 JS의 <code>true</code>와<code>false</code>로 바뀝니다.</a> 해당 릴리즈 전이라면 <code>JS.to_bool</code>과 <code>Js.Boolean.to_js_boolean</code>을 써야 하지만, 다행스럽게도 이제는 그렇지 않습니다!</p>
-<h2><a class="anchor" aria-hidden="true" id="팁-트릭"></a><a href="#팁-트릭" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>팁 &amp; 트릭</h2>
-<p><strong>구조적 동치를 적절히 사용하세요</strong>. 이는 편리하지만, 어떤 경우엔 뜻하지 않게 두 개의 깊은 데이터 구조를 비교하게 하여 큰 성능 하락을 초래하게 될 수 있습니다. 또한 어떤 것이 &quot;동치&quot;로 여겨지는지도 항상 자명하지 않습니다. 예를 들어, 하나의 데이터 <code>foo</code>는 평가가 지연된(lazy) <code>foo</code>와 같을까요? 이상적으로는 이것에 대한 확장이 가능해야 합니다. 이것이 가능하고 믿을 수 있게 하는 변화가 만들어지고 있습니다. 관심이 있으시다면, <a href="https://www.reddit.com/r/ocaml/comments/2vyk10/modular_implicits/">modular implicit</a>를 확인해보세요.</p>
-</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/ko/regular-expression"><span class="arrow-prev">← </span><span>Regular Expression</span></a><a class="docs-next button" href="/docs/ko/integer-and-float"><span>정수 &amp; 실수</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#사용">사용</a></li><li><a href="#팁-amp-트릭">팁 &amp; 트릭</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+<p>Reason booleans and their operations compile to the same JavaScript code you'd expect.</p>
+<h2><a class="anchor" aria-hidden="true" id="tips-tricks"></a><a href="#tips-tricks" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Tips &amp; Tricks</h2>
+<p><strong>Careful with physical equal</strong>. They:</p>
+<ul>
+<li>Compare 2 values deeply, so incur accidental performance cost if not used carefully.</li>
+<li>Don't actually work intuitively in many cases, e.g. 2 floating numbers that look the same but have miniscule precision difference will look different for the physical equal, and 2 sets that have the same items might be physically different because of the items' order difference in the implementation.</li>
+</ul>
+<p>Whenever possible, we suggest writing and using your own comparison function for custom data types to get full control over how the content of that data is compared.</p>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/ko/regular-expression"><span class="arrow-prev">← </span><span>Regular Expression</span></a><a class="docs-next button" href="/docs/ko/integer-and-float"><span>정수 &amp; 실수</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#tips-amp-tricks">Tips &amp; Tricks</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
                 document.addEventListener('keyup', function(e) {
                   if (e.target !== document.body) {
                     return;
