@@ -2,30 +2,36 @@
 title: Integer & Float
 ---
 
+Unlike JavaScript, which only has a number type, Reason has a proper integer type and a floating point number type. This clear separation helps code to e.g. not accidentally return a number when an integer is expected.
+
 ## Integers
 
-32-bits, truncated when necessary. Reason provides the usual operations on them: `+`, `-`, `*`, `/`, etc.
+Reason integers are 32-bits, **truncated when necessary**. They usually compile to JavaScript numbers, but you should **not** rely on that. For example, if you're receiving a JavaScript date number, you should type it in Reason as a **float**, since using integers would cause date truncation.
+
+(More on types and JavaScript interop in a later section.)
 
 ### Usage
 
-See the [Int32 module](/api/Int32.html) in the standard library. For JS compilation, see [Js.Int](https://bucklescript.github.io/bucklescript/api/Js.Int.html).
+Reason provides the usual operations on integers: `+`, `-`, `*`, `/`, etc.
 
-### Tips & Tricks
-
-**Careful when you bind to JavaScript numbers**! Long ones might be truncated. Bind JS number as float instead.
+We provide [a few helpers in the standard library](https://bucklescript.github.io/bucklescript/api/Js.Int.html) to work with ints.
 
 ## Floats
 
-Float requires other operators: `+.`, `-.`, `*.`, `/.`, etc. Like `0.5 +. 0.6`.
+Floats compile into regular JavaScript numbers. If you receive a JavaScript number, you can use them directly in Reason as floats.
 
 ### Usage
 
-There's no Float module in the current standard library. For JS compilation, see [Js.Float](https://bucklescript.github.io/bucklescript/api/Js.Float.html).
+Float requires other operators: `+.`, `-.`, `*.`, `/.`, etc. Like `0.5 +. 0.6`.
+
+We provide [a few helpers in the standard library](https://bucklescript.github.io/bucklescript/api/Js.Float.html) to work with floats.
+
+### Tips & Tricks
+
+`let a = 5` declares an integer. To declare a floating point 5, use `let a = 5.0`
 
 ### Design Decisions
 
-"Why the heck can't I just use an overloaded `+` for both int and float?"
+"Why the heck can't I just use `+` for both int and float?"
 
-There's a lot of history to this, but one day we'll be able to. Let's hang in there =)
-
-Additionally, floats are rather special in Reason/OCaml native. [Check here](https://www.lexifi.com/ocaml/unboxed-floats-ocaml/) if you're interested in learning some rather interesting optimizations!
+This is due to some unforunate constraints in the language's type system. They can be worked out in the future.
