@@ -6,17 +6,20 @@ A boolean has the type `bool` and can be either `true` or `false`. Common operat
 
 - `&&`: logical and
 - `||`: logical or
-- `!`: logical not.
+- `!`: logical not
 - `<=`, `>=`, `<`, `>`
-- `==`: structural equal, compares data structures deeply: `(1, 2) == (1, 2)` is `true`. Convenient, but use with caution
+- `==`: physical equal, compares data structures deeply: `(1, 2) == (1, 2)` is `true`. Convenient, but use with caution
 - `===`: referential equal, compares shallowly. `(1, 2) === (1, 2)` is `false`. `let myTuple = (1, 2); myTuple === myTuple` is `true`.
-- `!=`: structural unequal
+- `!=`: physical unequal
 - `!==`: referential unequal
 
-## Usage
-
-**Note**: Reason/Bucklescript `true` and `false` [compile to JS `true` and `false` since Bucklescript 3.0](https://bucklescript.github.io/blog/2018/04/16/release-3-0-0.html). Before that release you had to use `Js.to_bool` and `Js.Boolean.to_js_boolean` but thankfully this is no longer the case!
+Reason booleans and their operations compile to the same JavaScript code you'd expect.
 
 ## Tips & Tricks
 
-**Use structural equal tastefully**. It's convenient, but might accidentally make you compare two deeply nested data structures and incur a big performance hit. It's also not always clear what counts as "equal". For example, is a piece of data `foo` equal to a lazy `foo`? Ideally, it'd have been pluggable. Future changes are coming to make this possible and reliable; if you're interested, check [modular implicit](https://www.reddit.com/r/ocaml/comments/2vyk10/modular_implicits/).
+**Careful with physical equal**. They:
+
+- Compare 2 values deeply, so incur accidental performance cost if not used carefully.
+- Don't actually work intuitively in many cases, e.g. 2 floating numbers that look the same but have miniscule precision difference will look different for the physical equal, and 2 sets that have the same items might be physically different because of the items' order difference in the implementation.
+
+Whenever possible, we suggest writing and using your own comparison function for custom data types to get full control over how the content of that data is compared.
