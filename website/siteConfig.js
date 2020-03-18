@@ -294,7 +294,7 @@ const examples = [
   },
   {
     name: "SwissDev JavaScript Jobs",
-    image: "img/examples/swissdev-javascript-jobs.svg",
+    image: "img/examples/swiss-dev-jobs-square.png",
     link: "https://swissdevjobs.ch/jobs/JavaScript/All"
   }
 ]
