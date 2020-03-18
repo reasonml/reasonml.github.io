@@ -291,6 +291,11 @@ const examples = [
     name: "Avatar Generator",
     image: "img/examples/avatar-generator.png",
     link: "https://github.com/draftbit/avatar-generator"
+  },
+  {
+    name: "SwissDev JavaScript Jobs",
+    image: "img/examples/swissdev-javascript-jobs.svg",
+    link: "https://swissdevjobs.ch/jobs/JavaScript/All"
   }
 ]
 
