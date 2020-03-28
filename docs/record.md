@@ -9,9 +9,9 @@ Records are like JavaScript objects but are
 - fixed in field names and types
 - very fast
 - a bit more rigidly typed
-- compiles to a JavaScript object still
+- still compiled to JavaScript objects
 
-Because record compiles to a straightforward JS object, you can directly model incoming JS objects as Reason records, **no conversion functions needed**. This is extremely convenient when interoperating with existing JS libraries, since most of them use objects in their APIs and you wouldn't need to wrap those with a layer of Reason APIs.
+Because a record compiles to a straightforward JS object, you can directly model incoming JS objects as Reason records, **no conversion functions needed**. This is extremely convenient when interoperating with existing JS libraries, since most of them use objects in their APIs and you wouldn't need to wrap those with a layer of Reason APIs.
 
 ## Usage
 
@@ -58,7 +58,7 @@ let name = me.name;
 
 ### Record Needs an Explicit Definition
 
-Record is one of the very few features in Reason where we mandate you to pre-declare its type before using it. For various performance and type checking reasons. In the above example, if you only write `let me = {age: 5, name: "Baby Reason"}` without an explicit type declaration somewhere above, the type system will give you an error. If the type definition resides in another file or module, you need to indicate it:
+For various performance and type checking reasons, records are one of the very few features in Reason where we require you to pre-declare a type before using it. In the above example, if you only write `let me = {age: 5, name: "Baby Reason"}` without an explicit type declaration somewhere above, the type system will give you an error. If the type definition resides in another file or module, you need to indicate it:
 
 ```reason
 /* file School.re */
@@ -86,7 +86,7 @@ var me = {
 ```
 <!--END_DOCUSAURUS_CODE_TABS-->
 
-Either of the above 3 says "this record's definition is found in the School file/module". The first one, the regular type annotation, is preferred.
+Any of the three examples above says "this record's definition is found in the School file/module". The first one, the regular type annotation, is preferred.
 
 ### Immutable Update
 
@@ -161,7 +161,7 @@ var someHorsePower = {
 ```
 <!--END_DOCUSAURUS_CODE_TABS-->
 
-**Note that there's no punning for a single record field**! `{foo}` doesn't do what you expect (it's a block that returns the value `foo`).
+**Note that there's no punning for a single record field!** `{foo}` doesn't do what you expect; it's a block that returns the value `foo`.
 
 ## Tips & Tricks
 
@@ -186,16 +186,16 @@ getAge(kraken);
 getAge(me);
 ```
 
-The type system will complain that `me` is a `person`, and that `getAge` only works on `monster`. If you need such capability, use Reason objects, described [here](object.md).
+The type system will complain that `me` is a `person`, and that `getAge` only works on `monster`. If you need this capability, use Reason objects, described [here](object.md).
 
 ## Design Decisions
 
-After reading the constraints in the previous sections, and if you're coming from a dynamic language background, you might be wondering why one would bother with record in the first place instead of imitating JS and use a catch-all object concept for everything.
+If you're coming from a dynamic language background, you might be wondering why one would bother with records in the first place instead of imitating JS and using a catch-all object concept for everything.
 
-The reason is that JavaScript objects can be _really_ slow. Some code might add fieds, remove fields, iterate over them, pass the keys themselves somewhere else, etc. The JS engines nowadays try to "guess" your object's usage patterns and sometime optimize that into a solid C++ struct, but some other time fail to do so and convert your overly dynamic object into a hash map, with a sudden >100x performance degradation (imagine an object field access needing to hash the key and traverse the hashmap to find it).
+The reason is that JavaScript objects can be _really_ slow. Code can add fields, remove fields, iterate over them, or pass the keys themselves somewhere else. JS engines nowadays try to "guess" your object's usage patterns and optimize it into a solid C++ struct. Sometimes they fail to do so and convert your overly dynamic object into a hash map, with a sudden >100x performance degradation: every field access is forced to hash the field name and traverse the hash map to find it.
 
-We love simplicify, but a single all-powerful data structure that is the JS object is a bit too naive. This is why Reason separates the above use-cases into record, and proper hashmap (documented later). This way, you get to leverage the consistently fast record experience, like in the above immutable update section. Field access is also guaranteed to be super fast.
+We love simplicify, but the single all-powerful data structure that is the JS object is too simplistic. Reason separates the known and unknown key use cases into record and proper hash map (documented later). This way, you can leverage the consistently fast record experience, as shown in the immutable update section above. Field access is also guaranteed to be super fast.
 
-"But doesn't a Reason record compile to a JS object anyway"? Yes, but those records will trigger the JS engines' optimistic object optimizations, since they see that you never tried to e.g. add or remove record fields, iterate through the keys, etc., and therefore they'll never transform your those compiled JS objects into C++ hash maps or other slow data structures. Basically, Reason's type system enforced the disciplined usage of this data structure so that you can guarantee that it will never be accidentally slow.
+"But doesn't a Reason record compile to a JS object anyway?" Yes, but those records will trigger the JS engines' optimistic object optimizations, since they see that you never tried to, say, add or remove record fields or iterate through the keys, and therefore they'll never transform your compiled JS objects into C++ hash maps or other slow data structures. Basically, Reason's type system enforced the disciplined usage of this data structure so that you can guarantee that it will never be accidentally slow.
 
-(And yes, we're aware that it's comical for a language feature to transform into a dynamic-looking JS object, then transformed again by the JS engines into a C++ struct, then end up where we started in the first place. Such is modern engineering.)
+(And yes, we're aware that it's comical for a language feature to transform into a dynamic-looking JS object, then be transformed again by the JS engines into a C++ struct, only to end up where we started in the first place. Such is modern engineering.)
