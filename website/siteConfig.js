@@ -268,6 +268,11 @@ const users = [
     caption: "Oxidizing Systems",
     image: "img/logos/oxidizing-systems.svg",
     infoLink: "https://oxidizing.io/",
+  },
+  {
+    caption: "Tenzir",
+    image: "img/logos/tenzir.svg",
+    infoLink: "https://tenzir.com/",
   }
 ];
 
