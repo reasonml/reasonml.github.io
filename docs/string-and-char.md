@@ -59,7 +59,7 @@ var greetingAndOneSlash = "Hello, " + (String(name) + "\nI\'m 奥巴马");
 
 ### Usage
 
-If you're coming from JavaScript, we **strongly recommend** you to use the [`Js.String`](http://bucklescript.github.io/bucklescript/api/Js.String.html) API in the standard library. It's brings no extra runtime code, and frees you from learning other String APIs in the ecosystem.
+If you're coming from JavaScript, we **strongly recommend** you to use the [`Js.String`](http://bucklescript.github.io/bucklescript/api/Js.String.html) API in the standard library. It brings no extra runtime code, and frees you from learning other String APIs in the ecosystem.
 
 ### Tips & Tricks
 
