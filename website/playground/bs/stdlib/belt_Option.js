@@ -6,21 +6,19 @@ var Caml_option = require("./caml_option.js");
 function forEachU(opt, f) {
   if (opt !== undefined) {
     return f(Caml_option.valFromOption(opt));
-  } else {
-    return /* () */0;
   }
+  
 }
 
 function forEach(opt, f) {
   return forEachU(opt, Curry.__1(f));
 }
 
-function getExn(param) {
-  if (param !== undefined) {
-    return Caml_option.valFromOption(param);
-  } else {
-    throw new Error("getExn");
+function getExn(x) {
+  if (x !== undefined) {
+    return Caml_option.valFromOption(x);
   }
+  throw new Error("getExn");
 }
 
 function mapWithDefaultU(opt, $$default, f) {

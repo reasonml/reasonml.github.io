@@ -3,12 +3,11 @@
 var Block = require("./block.js");
 var Curry = require("./curry.js");
 
-function getExn(param) {
-  if (param.tag) {
-    throw new Error("getExn");
-  } else {
-    return param[0];
+function getExn(x) {
+  if (!x.tag) {
+    return x[0];
   }
+  throw new Error("getExn");
 }
 
 function mapWithDefaultU(opt, $$default, f) {

@@ -10,8 +10,8 @@ function remove0(nt, x, cmp) {
   if (c === 0) {
     var l = nt.left;
     var r = nt.right;
-    if (l !== null) {
-      if (r !== null) {
+    if (l !== undefined) {
+      if (r !== undefined) {
         nt.right = Belt_internalAVLset.removeMinAuxWithRootMutate(nt, r);
         return Belt_internalAVLset.balMutate(nt);
       } else {
@@ -20,69 +20,64 @@ function remove0(nt, x, cmp) {
     } else {
       return r;
     }
-  } else if (c < 0) {
-    var match = nt.left;
-    if (match !== null) {
-      nt.left = remove0(match, x, cmp);
+  }
+  if (c < 0) {
+    var l$1 = nt.left;
+    if (l$1 !== undefined) {
+      nt.left = remove0(l$1, x, cmp);
       return Belt_internalAVLset.balMutate(nt);
     } else {
       return nt;
     }
+  }
+  var r$1 = nt.right;
+  if (r$1 !== undefined) {
+    nt.right = remove0(r$1, x, cmp);
+    return Belt_internalAVLset.balMutate(nt);
   } else {
-    var match$1 = nt.right;
-    if (match$1 !== null) {
-      nt.right = remove0(match$1, x, cmp);
-      return Belt_internalAVLset.balMutate(nt);
-    } else {
-      return nt;
-    }
+    return nt;
   }
 }
 
 function remove(d, v) {
   var oldRoot = d.data;
-  if (oldRoot !== null) {
-    var newRoot = remove0(oldRoot, v, d.cmp);
-    if (newRoot !== oldRoot) {
-      d.data = newRoot;
-      return /* () */0;
-    } else {
-      return 0;
-    }
-  } else {
-    return /* () */0;
+  if (oldRoot === undefined) {
+    return ;
   }
+  var newRoot = remove0(oldRoot, v, d.cmp);
+  if (newRoot !== oldRoot) {
+    d.data = newRoot;
+    return ;
+  }
+  
 }
 
 function removeMany0(_t, xs, _i, len, cmp) {
   while(true) {
     var i = _i;
     var t = _t;
-    if (i < len) {
-      var ele = xs[i];
-      var u = remove0(t, ele, cmp);
-      if (u !== null) {
-        _i = i + 1 | 0;
-        _t = u;
-        continue ;
-      } else {
-        return Belt_internalAVLset.empty;
-      }
-    } else {
+    if (i >= len) {
       return t;
     }
+    var ele = xs[i];
+    var u = remove0(t, ele, cmp);
+    if (u === undefined) {
+      return ;
+    }
+    _i = i + 1 | 0;
+    _t = u;
+    continue ;
   };
 }
 
 function removeMany(d, xs) {
   var oldRoot = d.data;
-  if (oldRoot !== null) {
-    var len = xs.length;
-    d.data = removeMany0(oldRoot, xs, 0, len, d.cmp);
-    return /* () */0;
-  } else {
-    return /* () */0;
+  if (oldRoot === undefined) {
+    return ;
   }
+  var len = xs.length;
+  d.data = removeMany0(oldRoot, xs, 0, len, d.cmp);
+  
 }
 
 function removeCheck0(nt, x, removed, cmp) {
@@ -92,8 +87,8 @@ function removeCheck0(nt, x, removed, cmp) {
     removed.contents = true;
     var l = nt.left;
     var r = nt.right;
-    if (l !== null) {
-      if (r !== null) {
+    if (l !== undefined) {
+      if (r !== undefined) {
         nt.right = Belt_internalAVLset.removeMinAuxWithRootMutate(nt, r);
         return Belt_internalAVLset.balMutate(nt);
       } else {
@@ -102,62 +97,59 @@ function removeCheck0(nt, x, removed, cmp) {
     } else {
       return r;
     }
-  } else if (c < 0) {
-    var match = nt.left;
-    if (match !== null) {
-      nt.left = removeCheck0(match, x, removed, cmp);
+  }
+  if (c < 0) {
+    var l$1 = nt.left;
+    if (l$1 !== undefined) {
+      nt.left = removeCheck0(l$1, x, removed, cmp);
       return Belt_internalAVLset.balMutate(nt);
     } else {
       return nt;
     }
+  }
+  var r$1 = nt.right;
+  if (r$1 !== undefined) {
+    nt.right = removeCheck0(r$1, x, removed, cmp);
+    return Belt_internalAVLset.balMutate(nt);
   } else {
-    var match$1 = nt.right;
-    if (match$1 !== null) {
-      nt.right = removeCheck0(match$1, x, removed, cmp);
-      return Belt_internalAVLset.balMutate(nt);
-    } else {
-      return nt;
-    }
+    return nt;
   }
 }
 
 function removeCheck(d, v) {
   var oldRoot = d.data;
-  if (oldRoot !== null) {
-    var removed = {
-      contents: false
-    };
-    var newRoot = removeCheck0(oldRoot, v, removed, d.cmp);
-    if (newRoot !== oldRoot) {
-      d.data = newRoot;
-    }
-    return removed.contents;
-  } else {
+  if (oldRoot === undefined) {
     return false;
   }
+  var removed = {
+    contents: false
+  };
+  var newRoot = removeCheck0(oldRoot, v, removed, d.cmp);
+  if (newRoot !== oldRoot) {
+    d.data = newRoot;
+  }
+  return removed.contents;
 }
 
 function addCheck0(t, x, added, cmp) {
-  if (t !== null) {
+  if (t !== undefined) {
     var k = t.value;
     var c = cmp(x, k);
     if (c === 0) {
       return t;
-    } else {
-      var l = t.left;
-      var r = t.right;
-      if (c < 0) {
-        var ll = addCheck0(l, x, added, cmp);
-        t.left = ll;
-      } else {
-        t.right = addCheck0(r, x, added, cmp);
-      }
-      return Belt_internalAVLset.balMutate(t);
     }
-  } else {
-    added.contents = true;
-    return Belt_internalAVLset.singleton(x);
+    var l = t.left;
+    var r = t.right;
+    if (c < 0) {
+      var ll = addCheck0(l, x, added, cmp);
+      t.left = ll;
+    } else {
+      t.right = addCheck0(r, x, added, cmp);
+    }
+    return Belt_internalAVLset.balMutate(t);
   }
+  added.contents = true;
+  return Belt_internalAVLset.singleton(x);
 }
 
 function addCheck(m, e) {
@@ -177,15 +169,14 @@ function add(m, e) {
   var newRoot = Belt_internalAVLset.addMutate(m.cmp, oldRoot, e);
   if (newRoot !== oldRoot) {
     m.data = newRoot;
-    return /* () */0;
-  } else {
-    return 0;
+    return ;
   }
+  
 }
 
 function addArrayMutate(t, xs, cmp) {
   var v = t;
-  for(var i = 0 ,i_finish = xs.length - 1 | 0; i <= i_finish; ++i){
+  for(var i = 0 ,i_finish = xs.length; i < i_finish; ++i){
     v = Belt_internalAVLset.addMutate(cmp, v, xs[i]);
   }
   return v;
@@ -193,19 +184,19 @@ function addArrayMutate(t, xs, cmp) {
 
 function mergeMany(d, xs) {
   d.data = addArrayMutate(d.data, xs, d.cmp);
-  return /* () */0;
+  
 }
 
 function make(id) {
   return {
           cmp: id.cmp,
-          data: Belt_internalAVLset.empty
+          data: undefined
         };
 }
 
 function isEmpty(d) {
   var n = d.data;
-  return n === null;
+  return n === undefined;
 }
 
 function minimum(d) {
@@ -312,22 +303,7 @@ function split(d, key) {
   var cmp = d.cmp;
   var i = Belt_SortArray.binarySearchByU(arr, key, cmp);
   var len = arr.length;
-  if (i < 0) {
-    var next = (-i | 0) - 1 | 0;
-    return /* tuple */[
-            /* tuple */[
-              {
-                cmp: cmp,
-                data: Belt_internalAVLset.fromSortedArrayAux(arr, 0, next)
-              },
-              {
-                cmp: cmp,
-                data: Belt_internalAVLset.fromSortedArrayAux(arr, next, len - next | 0)
-              }
-            ],
-            false
-          ];
-  } else {
+  if (i >= 0) {
     return /* tuple */[
             /* tuple */[
               {
@@ -342,6 +318,20 @@ function split(d, key) {
             true
           ];
   }
+  var next = (-i | 0) - 1 | 0;
+  return /* tuple */[
+          /* tuple */[
+            {
+              cmp: cmp,
+              data: Belt_internalAVLset.fromSortedArrayAux(arr, 0, next)
+            },
+            {
+              cmp: cmp,
+              data: Belt_internalAVLset.fromSortedArrayAux(arr, next, len - next | 0)
+            }
+          ],
+          false
+        ];
 }
 
 function keepU(d, p) {
@@ -382,117 +372,108 @@ function intersect(a, b) {
   var cmp = a.cmp;
   var match = a.data;
   var match$1 = b.data;
-  if (match !== null) {
-    if (match$1 !== null) {
-      var sizea = Belt_internalAVLset.lengthNode(match);
-      var sizeb = Belt_internalAVLset.lengthNode(match$1);
-      var totalSize = sizea + sizeb | 0;
-      var tmp = new Array(totalSize);
-      Belt_internalAVLset.fillArray(match, 0, tmp);
-      Belt_internalAVLset.fillArray(match$1, sizea, tmp);
-      if (cmp(tmp[sizea - 1 | 0], tmp[sizea]) < 0 || cmp(tmp[totalSize - 1 | 0], tmp[0]) < 0) {
-        return {
-                cmp: cmp,
-                data: Belt_internalAVLset.empty
-              };
-      } else {
-        var tmp2 = new Array(sizea < sizeb ? sizea : sizeb);
-        var k = Belt_SortArray.intersectU(tmp, 0, sizea, tmp, sizea, sizeb, tmp2, 0, cmp);
-        return {
-                cmp: cmp,
-                data: Belt_internalAVLset.fromSortedArrayAux(tmp2, 0, k)
-              };
-      }
-    } else {
-      return {
-              cmp: cmp,
-              data: Belt_internalAVLset.empty
-            };
-    }
-  } else {
+  if (match === undefined) {
     return {
             cmp: cmp,
-            data: Belt_internalAVLset.empty
+            data: undefined
           };
   }
+  if (match$1 === undefined) {
+    return {
+            cmp: cmp,
+            data: undefined
+          };
+  }
+  var sizea = Belt_internalAVLset.lengthNode(match);
+  var sizeb = Belt_internalAVLset.lengthNode(match$1);
+  var totalSize = sizea + sizeb | 0;
+  var tmp = new Array(totalSize);
+  Belt_internalAVLset.fillArray(match, 0, tmp);
+  Belt_internalAVLset.fillArray(match$1, sizea, tmp);
+  if (cmp(tmp[sizea - 1 | 0], tmp[sizea]) < 0 || cmp(tmp[totalSize - 1 | 0], tmp[0]) < 0) {
+    return {
+            cmp: cmp,
+            data: undefined
+          };
+  }
+  var tmp2 = new Array(sizea < sizeb ? sizea : sizeb);
+  var k = Belt_SortArray.intersectU(tmp, 0, sizea, tmp, sizea, sizeb, tmp2, 0, cmp);
+  return {
+          cmp: cmp,
+          data: Belt_internalAVLset.fromSortedArrayAux(tmp2, 0, k)
+        };
 }
 
 function diff(a, b) {
   var cmp = a.cmp;
   var dataa = a.data;
   var match = b.data;
-  if (dataa !== null) {
-    if (match !== null) {
-      var sizea = Belt_internalAVLset.lengthNode(dataa);
-      var sizeb = Belt_internalAVLset.lengthNode(match);
-      var totalSize = sizea + sizeb | 0;
-      var tmp = new Array(totalSize);
-      Belt_internalAVLset.fillArray(dataa, 0, tmp);
-      Belt_internalAVLset.fillArray(match, sizea, tmp);
-      if (cmp(tmp[sizea - 1 | 0], tmp[sizea]) < 0 || cmp(tmp[totalSize - 1 | 0], tmp[0]) < 0) {
-        return {
-                cmp: cmp,
-                data: Belt_internalAVLset.copy(dataa)
-              };
-      } else {
-        var tmp2 = new Array(sizea);
-        var k = Belt_SortArray.diffU(tmp, 0, sizea, tmp, sizea, sizeb, tmp2, 0, cmp);
-        return {
-                cmp: cmp,
-                data: Belt_internalAVLset.fromSortedArrayAux(tmp2, 0, k)
-              };
-      }
-    } else {
-      return {
-              cmp: cmp,
-              data: Belt_internalAVLset.copy(dataa)
-            };
-    }
-  } else {
+  if (dataa === undefined) {
     return {
             cmp: cmp,
-            data: Belt_internalAVLset.empty
+            data: undefined
           };
   }
+  if (match === undefined) {
+    return {
+            cmp: cmp,
+            data: Belt_internalAVLset.copy(dataa)
+          };
+  }
+  var sizea = Belt_internalAVLset.lengthNode(dataa);
+  var sizeb = Belt_internalAVLset.lengthNode(match);
+  var totalSize = sizea + sizeb | 0;
+  var tmp = new Array(totalSize);
+  Belt_internalAVLset.fillArray(dataa, 0, tmp);
+  Belt_internalAVLset.fillArray(match, sizea, tmp);
+  if (cmp(tmp[sizea - 1 | 0], tmp[sizea]) < 0 || cmp(tmp[totalSize - 1 | 0], tmp[0]) < 0) {
+    return {
+            cmp: cmp,
+            data: Belt_internalAVLset.copy(dataa)
+          };
+  }
+  var tmp2 = new Array(sizea);
+  var k = Belt_SortArray.diffU(tmp, 0, sizea, tmp, sizea, sizeb, tmp2, 0, cmp);
+  return {
+          cmp: cmp,
+          data: Belt_internalAVLset.fromSortedArrayAux(tmp2, 0, k)
+        };
 }
 
 function union(a, b) {
   var cmp = a.cmp;
   var dataa = a.data;
   var datab = b.data;
-  if (dataa !== null) {
-    if (datab !== null) {
-      var sizea = Belt_internalAVLset.lengthNode(dataa);
-      var sizeb = Belt_internalAVLset.lengthNode(datab);
-      var totalSize = sizea + sizeb | 0;
-      var tmp = new Array(totalSize);
-      Belt_internalAVLset.fillArray(dataa, 0, tmp);
-      Belt_internalAVLset.fillArray(datab, sizea, tmp);
-      if (cmp(tmp[sizea - 1 | 0], tmp[sizea]) < 0) {
-        return {
-                cmp: cmp,
-                data: Belt_internalAVLset.fromSortedArrayAux(tmp, 0, totalSize)
-              };
-      } else {
-        var tmp2 = new Array(totalSize);
-        var k = Belt_SortArray.unionU(tmp, 0, sizea, tmp, sizea, sizeb, tmp2, 0, cmp);
-        return {
-                cmp: cmp,
-                data: Belt_internalAVLset.fromSortedArrayAux(tmp2, 0, k)
-              };
-      }
-    } else {
-      return {
-              cmp: cmp,
-              data: Belt_internalAVLset.copy(dataa)
-            };
-    }
-  } else {
+  if (dataa === undefined) {
     return {
             cmp: cmp,
             data: Belt_internalAVLset.copy(datab)
           };
   }
+  if (datab === undefined) {
+    return {
+            cmp: cmp,
+            data: Belt_internalAVLset.copy(dataa)
+          };
+  }
+  var sizea = Belt_internalAVLset.lengthNode(dataa);
+  var sizeb = Belt_internalAVLset.lengthNode(datab);
+  var totalSize = sizea + sizeb | 0;
+  var tmp = new Array(totalSize);
+  Belt_internalAVLset.fillArray(dataa, 0, tmp);
+  Belt_internalAVLset.fillArray(datab, sizea, tmp);
+  if (cmp(tmp[sizea - 1 | 0], tmp[sizea]) < 0) {
+    return {
+            cmp: cmp,
+            data: Belt_internalAVLset.fromSortedArrayAux(tmp, 0, totalSize)
+          };
+  }
+  var tmp2 = new Array(totalSize);
+  var k = Belt_SortArray.unionU(tmp, 0, sizea, tmp, sizea, sizeb, tmp2, 0, cmp);
+  return {
+          cmp: cmp,
+          data: Belt_internalAVLset.fromSortedArrayAux(tmp2, 0, k)
+        };
 }
 
 function has(d, x) {
@@ -506,9 +487,9 @@ function copy(d) {
         };
 }
 
-var Int = /* alias */0;
+var Int;
 
-var $$String = /* alias */0;
+var $$String;
 
 exports.Int = Int;
 exports.$$String = $$String;

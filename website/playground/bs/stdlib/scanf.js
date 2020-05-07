@@ -15,12 +15,11 @@ var Caml_exceptions = require("./caml_exceptions.js");
 var Caml_js_exceptions = require("./caml_js_exceptions.js");
 var CamlinternalFormat = require("./camlinternalFormat.js");
 var Caml_external_polyfill = require("./caml_external_polyfill.js");
-var Caml_builtin_exceptions = require("./caml_builtin_exceptions.js");
 var CamlinternalFormatBasics = require("./camlinternalFormatBasics.js");
 
 function next_char(ib) {
   try {
-    var c = Curry._1(ib.ic_get_next_char, /* () */0);
+    var c = Curry._1(ib.ic_get_next_char, undefined);
     ib.ic_current_char = c;
     ib.ic_current_char_is_valid = true;
     ib.ic_char_count = ib.ic_char_count + 1 | 0;
@@ -29,15 +28,15 @@ function next_char(ib) {
     }
     return c;
   }
-  catch (exn){
-    if (exn === Caml_builtin_exceptions.end_of_file) {
+  catch (raw_exn){
+    var exn = Caml_js_exceptions.internalToOCamlException(raw_exn);
+    if (exn.RE_EXN_ID === "End_of_file") {
       ib.ic_current_char = /* "\000" */0;
       ib.ic_current_char_is_valid = false;
       ib.ic_eof = true;
       return /* "\000" */0;
-    } else {
-      throw exn;
     }
+    throw exn;
   }
 }
 
@@ -52,7 +51,10 @@ function peek_char(ib) {
 function checked_peek_char(ib) {
   var c = peek_char(ib);
   if (ib.ic_eof) {
-    throw Caml_builtin_exceptions.end_of_file;
+    throw {
+          RE_EXN_ID: "End_of_file",
+          Error: new Error()
+        };
   }
   return c;
 }
@@ -67,15 +69,15 @@ function beginning_of_input(ib) {
 }
 
 function name_of_input(ib) {
-  var match = ib.ic_input_name;
-  if (typeof match === "number") {
-    if (match === /* From_function */0) {
+  var _ic = ib.ic_input_name;
+  if (typeof _ic === "number") {
+    if (_ic === /* From_function */0) {
       return "unnamed function";
     } else {
       return "unnamed character string";
     }
-  } else if (match.tag) {
-    return match[0];
+  } else if (_ic.tag) {
+    return _ic[0];
   } else {
     return "unnamed Pervasives input channel";
   }
@@ -129,7 +131,10 @@ function from_string(s) {
   var len = s.length;
   var next = function (param) {
     if (i.contents >= len) {
-      throw Caml_builtin_exceptions.end_of_file;
+      throw {
+            RE_EXN_ID: "End_of_file",
+            Error: new Error()
+          };
     }
     var c = Caml_string.get(s, i.contents);
     i.contents = i.contents + 1 | 0;
@@ -148,11 +153,17 @@ var file_buffer_size = {
 
 function scan_close_at_end(ic) {
   Caml_external_polyfill.resolve("caml_ml_close_channel")(ic);
-  throw Caml_builtin_exceptions.end_of_file;
+  throw {
+        RE_EXN_ID: "End_of_file",
+        Error: new Error()
+      };
 }
 
 function scan_raise_at_end(_ic) {
-  throw Caml_builtin_exceptions.end_of_file;
+  throw {
+        RE_EXN_ID: "End_of_file",
+        Error: new Error()
+      };
 }
 
 function from_ic(scan_close_ic, iname, ic) {
@@ -172,18 +183,20 @@ function from_ic(scan_close_ic, iname, ic) {
       var c = Caml_bytes.get(buf, i.contents);
       i.contents = i.contents + 1 | 0;
       return c;
+    }
+    if (eof.contents) {
+      throw {
+            RE_EXN_ID: "End_of_file",
+            Error: new Error()
+          };
+    }
+    lim.contents = Pervasives.input(ic, buf, 0, len);
+    if (lim.contents === 0) {
+      eof.contents = true;
+      return Curry._1(scan_close_ic, ic);
     } else {
-      if (eof.contents) {
-        throw Caml_builtin_exceptions.end_of_file;
-      }
-      lim.contents = Pervasives.input(ic, buf, 0, len);
-      if (lim.contents === 0) {
-        eof.contents = true;
-        return Curry._1(scan_close_ic, ic);
-      } else {
-        i.contents = 1;
-        return Caml_bytes.get(buf, 0);
-      }
+      i.contents = 1;
+      return Caml_bytes.get(buf, 0);
     }
   };
   return create(iname, next);
@@ -197,13 +210,12 @@ var stdin = from_ic(scan_raise_at_end, /* From_file */Block.__(1, [
 function open_in_file(open_in, fname) {
   if (fname === "-") {
     return stdin;
-  } else {
-    var ic = Curry._1(open_in, fname);
-    return from_ic(scan_close_at_end, /* From_file */Block.__(1, [
-                  fname,
-                  ic
-                ]), ic);
   }
+  var ic = Curry._1(open_in, fname);
+  return from_ic(scan_close_at_end, /* From_file */Block.__(1, [
+                fname,
+                ic
+              ]), ic);
 }
 
 function open_in(param) {
@@ -219,13 +231,13 @@ function from_channel(ic) {
 }
 
 function close_in(ib) {
-  var match = ib.ic_input_name;
-  if (typeof match === "number") {
-    return /* () */0;
-  } else if (match.tag) {
-    return Caml_external_polyfill.resolve("caml_ml_close_channel")(match[1]);
+  var ic = ib.ic_input_name;
+  if (typeof ic === "number") {
+    return ;
+  } else if (ic.tag) {
+    return Caml_external_polyfill.resolve("caml_ml_close_channel")(ic[1]);
   } else {
-    return Caml_external_polyfill.resolve("caml_ml_close_channel")(match[0]);
+    return Caml_external_polyfill.resolve("caml_ml_close_channel")(ic[0]);
   }
 }
 
@@ -237,8 +249,9 @@ function memo_from_ic(scan_close_ic, ic) {
   try {
     return List.assq(ic, memo.contents);
   }
-  catch (exn){
-    if (exn === Caml_builtin_exceptions.not_found) {
+  catch (raw_exn){
+    var exn = Caml_js_exceptions.internalToOCamlException(raw_exn);
+    if (exn.RE_EXN_ID === "Not_found") {
       var ib = from_ic(scan_close_ic, /* From_channel */Block.__(0, [ic]), ic);
       memo.contents = /* :: */[
         /* tuple */[
@@ -248,9 +261,8 @@ function memo_from_ic(scan_close_ic, ic) {
         memo.contents
       ];
       return ib;
-    } else {
-      throw exn;
     }
+    throw exn;
   }
 }
 
@@ -264,10 +276,11 @@ function bad_input_escape(c) {
               ]),
             "illegal escape character %C"
           ]), c);
-  throw [
-        Scan_failure,
-        s
-      ];
+  throw {
+        RE_EXN_ID: Scan_failure,
+        _1: s,
+        Error: new Error()
+      };
 }
 
 function bad_token_length(message) {
@@ -284,17 +297,19 @@ function bad_token_length(message) {
               ]),
             "scanning of %s failed: the specified length was too short for token"
           ]), message);
-  throw [
-        Scan_failure,
-        s
-      ];
+  throw {
+        RE_EXN_ID: Scan_failure,
+        _1: s,
+        Error: new Error()
+      };
 }
 
 function bad_hex_float(param) {
-  throw [
-        Scan_failure,
-        "not a valid float in hexadecimal notation"
-      ];
+  throw {
+        RE_EXN_ID: Scan_failure,
+        _1: "not a valid float in hexadecimal notation",
+        Error: new Error()
+      };
 }
 
 function character_mismatch_err(c, ci) {
@@ -314,14 +329,14 @@ function check_this_char(ib, c) {
   var ci = checked_peek_char(ib);
   if (ci === c) {
     ib.ic_current_char_is_valid = false;
-    return /* () */0;
-  } else {
-    var s = character_mismatch_err(c, ci);
-    throw [
-          Scan_failure,
-          s
-        ];
+    return ;
   }
+  var s = character_mismatch_err(c, ci);
+  throw {
+        RE_EXN_ID: Scan_failure,
+        _1: s,
+        Error: new Error()
+      };
 }
 
 function check_char(ib, c) {
@@ -329,47 +344,42 @@ function check_char(ib, c) {
     if (c !== 32) {
       return check_this_char(ib, c);
     } else {
-      var ib$1 = ib;
       while(true) {
-        var c$1 = peek_char(ib$1);
-        if (ib$1.ic_eof) {
-          return 0;
-        } else {
-          var switcher = c$1 - 9 | 0;
-          if (switcher > 4 || switcher < 0) {
-            if (switcher !== 23) {
-              return /* () */0;
-            } else {
-              ib$1.ic_current_char_is_valid = false;
-              continue ;
-            }
-          } else if (switcher === 3 || switcher === 2) {
-            return /* () */0;
-          } else {
-            ib$1.ic_current_char_is_valid = false;
-            continue ;
-          }
+        var c$1 = peek_char(ib);
+        if (ib.ic_eof) {
+          return ;
         }
+        var switcher = c$1 - 9 | 0;
+        if (switcher > 4 || switcher < 0) {
+          if (switcher !== 23) {
+            return ;
+          }
+          ib.ic_current_char_is_valid = false;
+          continue ;
+        }
+        if (switcher === 3 || switcher === 2) {
+          return ;
+        }
+        ib.ic_current_char_is_valid = false;
+        continue ;
       };
     }
   } else {
-    var ib$2 = ib;
-    var ci = checked_peek_char(ib$2);
-    if (ci !== 10) {
-      if (ci !== 13) {
-        var s = character_mismatch_err(/* "\n" */10, ci);
-        throw [
-              Scan_failure,
-              s
-            ];
-      } else {
-        ib$2.ic_current_char_is_valid = false;
-        return check_this_char(ib$2, /* "\n" */10);
-      }
-    } else {
-      ib$2.ic_current_char_is_valid = false;
-      return /* () */0;
+    var ci = checked_peek_char(ib);
+    if (ci === 10) {
+      ib.ic_current_char_is_valid = false;
+      return ;
     }
+    if (ci !== 13) {
+      var s = character_mismatch_err(/* "\n" */10, ci);
+      throw {
+            RE_EXN_ID: Scan_failure,
+            _1: s,
+            Error: new Error()
+          };
+    }
+    ib.ic_current_char_is_valid = false;
+    return check_this_char(ib, /* "\n" */10);
   }
 }
 
@@ -394,10 +404,11 @@ function token_bool(ib) {
                   ]),
                 "invalid boolean '%s'"
               ]), s);
-      throw [
-            Scan_failure,
-            s$1
-          ];
+      throw {
+            RE_EXN_ID: Scan_failure,
+            _1: s$1,
+            Error: new Error()
+          };
   }
 }
 
@@ -446,14 +457,15 @@ function integer_conversion_of_char(param) {
     default:
       
   }
-  throw [
-        Caml_builtin_exceptions.assert_failure,
-        /* tuple */[
+  throw {
+        RE_EXN_ID: "Assert_failure",
+        _1: /* tuple */[
           "scanf.ml",
           555,
           9
-        ]
-      ];
+        ],
+        Error: new Error()
+      };
 }
 
 function token_int_literal(conv, ib) {
@@ -494,112 +506,105 @@ function scan_decimal_digit_star(_width, ib) {
     var width = _width;
     if (width === 0) {
       return width;
-    } else {
-      var c = peek_char(ib);
-      if (ib.ic_eof) {
-        return width;
-      } else if (c >= 58) {
-        if (c !== 95) {
-          return width;
-        } else {
-          var width$1 = ignore_char(width, ib);
-          _width = width$1;
-          continue ;
-        }
-      } else if (c >= 48) {
-        var width$2 = store_char(width, ib, c);
-        _width = width$2;
-        continue ;
-      } else {
+    }
+    var c = peek_char(ib);
+    if (ib.ic_eof) {
+      return width;
+    }
+    if (c >= 58) {
+      if (c !== 95) {
         return width;
       }
+      var width$1 = ignore_char(width, ib);
+      _width = width$1;
+      continue ;
     }
+    if (c < 48) {
+      return width;
+    }
+    var width$2 = store_char(width, ib, c);
+    _width = width$2;
+    continue ;
   };
 }
 
 function scan_decimal_digit_plus(width, ib) {
   if (width === 0) {
     return bad_token_length("decimal digits");
-  } else {
-    var c = checked_peek_char(ib);
-    if (c > 57 || c < 48) {
-      var s = Curry._1(Printf.sprintf(/* Format */[
-                /* String_literal */Block.__(11, [
-                    "character ",
-                    /* Caml_char */Block.__(1, [/* String_literal */Block.__(11, [
-                            " is not a decimal digit",
-                            /* End_of_format */0
-                          ])])
-                  ]),
-                "character %C is not a decimal digit"
-              ]), c);
-      throw [
-            Scan_failure,
-            s
-          ];
-    } else {
-      var width$1 = store_char(width, ib, c);
-      return scan_decimal_digit_star(width$1, ib);
-    }
   }
+  var c = checked_peek_char(ib);
+  if (c > 57 || c < 48) {
+    var s = Curry._1(Printf.sprintf(/* Format */[
+              /* String_literal */Block.__(11, [
+                  "character ",
+                  /* Caml_char */Block.__(1, [/* String_literal */Block.__(11, [
+                          " is not a decimal digit",
+                          /* End_of_format */0
+                        ])])
+                ]),
+              "character %C is not a decimal digit"
+            ]), c);
+    throw {
+          RE_EXN_ID: Scan_failure,
+          _1: s,
+          Error: new Error()
+        };
+  }
+  var width$1 = store_char(width, ib, c);
+  return scan_decimal_digit_star(width$1, ib);
 }
 
 function scan_digit_plus(basis, digitp, width, ib) {
   if (width === 0) {
     return bad_token_length("digits");
-  } else {
-    var c = checked_peek_char(ib);
-    if (Curry._1(digitp, c)) {
-      var width$1 = store_char(width, ib, c);
-      var digitp$1 = digitp;
-      var width$2 = width$1;
-      var ib$1 = ib;
-      var _width = width$2;
-      var ib$2 = ib$1;
-      while(true) {
-        var width$3 = _width;
-        if (width$3 === 0) {
-          return width$3;
-        } else {
-          var c$1 = peek_char(ib$2);
-          if (ib$2.ic_eof) {
-            return width$3;
-          } else if (Curry._1(digitp$1, c$1)) {
-            var width$4 = store_char(width$3, ib$2, c$1);
-            _width = width$4;
-            continue ;
-          } else if (c$1 !== 95) {
-            return width$3;
-          } else {
-            var width$5 = ignore_char(width$3, ib$2);
-            _width = width$5;
-            continue ;
-          }
-        }
-      };
-    } else {
-      var s = Curry._2(Printf.sprintf(/* Format */[
-                /* String_literal */Block.__(11, [
-                    "character ",
-                    /* Caml_char */Block.__(1, [/* String_literal */Block.__(11, [
-                            " is not a valid ",
-                            /* String */Block.__(2, [
-                                /* No_padding */0,
-                                /* String_literal */Block.__(11, [
-                                    " digit",
-                                    /* End_of_format */0
-                                  ])
-                              ])
-                          ])])
-                  ]),
-                "character %C is not a valid %s digit"
-              ]), c, basis);
-      throw [
-            Scan_failure,
-            s
-          ];
-    }
   }
+  var c = checked_peek_char(ib);
+  if (Curry._1(digitp, c)) {
+    var width$1 = store_char(width, ib, c);
+    var _width = width$1;
+    while(true) {
+      var width$2 = _width;
+      if (width$2 === 0) {
+        return width$2;
+      }
+      var c$1 = peek_char(ib);
+      if (ib.ic_eof) {
+        return width$2;
+      }
+      if (Curry._1(digitp, c$1)) {
+        var width$3 = store_char(width$2, ib, c$1);
+        _width = width$3;
+        continue ;
+      }
+      if (c$1 !== 95) {
+        return width$2;
+      }
+      var width$4 = ignore_char(width$2, ib);
+      _width = width$4;
+      continue ;
+    };
+  }
+  var s = Curry._2(Printf.sprintf(/* Format */[
+            /* String_literal */Block.__(11, [
+                "character ",
+                /* Caml_char */Block.__(1, [/* String_literal */Block.__(11, [
+                        " is not a valid ",
+                        /* String */Block.__(2, [
+                            /* No_padding */0,
+                            /* String_literal */Block.__(11, [
+                                " digit",
+                                /* End_of_format */0
+                              ])
+                          ])
+                      ])])
+              ]),
+            "character %C is not a valid %s digit"
+          ]), c, basis);
+  throw {
+        RE_EXN_ID: Scan_failure,
+        _1: s,
+        Error: new Error()
+      };
 }
 
 function is_binary_digit(param) {
@@ -652,42 +657,36 @@ function scan_int_conversion(conv, width, ib) {
     case /* D_conversion */1 :
         return scan_optionally_signed_decimal_int(width, ib);
     case /* I_conversion */2 :
-        var width$1 = width;
-        var ib$1 = ib;
-        var width$2 = scan_sign(width$1, ib$1);
-        var width$3 = width$2;
-        var ib$2 = ib$1;
-        var c = checked_peek_char(ib$2);
+        var width$1 = scan_sign(width, ib);
+        var c = checked_peek_char(ib);
         if (c !== 48) {
-          return scan_decimal_digit_plus(width$3, ib$2);
-        } else {
-          var width$4 = store_char(width$3, ib$2, c);
-          if (width$4 === 0) {
-            return width$4;
-          } else {
-            var c$1 = peek_char(ib$2);
-            if (ib$2.ic_eof) {
-              return width$4;
-            } else if (c$1 >= 99) {
-              if (c$1 !== 111) {
-                if (c$1 !== 120) {
-                  return scan_decimal_digit_star(width$4, ib$2);
-                } else {
-                  return scan_hexadecimal_int(store_char(width$4, ib$2, c$1), ib$2);
-                }
-              } else {
-                return scan_octal_int(store_char(width$4, ib$2, c$1), ib$2);
-              }
-            } else if (c$1 !== 88) {
-              if (c$1 >= 98) {
-                return scan_binary_int(store_char(width$4, ib$2, c$1), ib$2);
-              } else {
-                return scan_decimal_digit_star(width$4, ib$2);
-              }
+          return scan_decimal_digit_plus(width$1, ib);
+        }
+        var width$2 = store_char(width$1, ib, c);
+        if (width$2 === 0) {
+          return width$2;
+        }
+        var c$1 = peek_char(ib);
+        if (ib.ic_eof) {
+          return width$2;
+        } else if (c$1 >= 99) {
+          if (c$1 !== 111) {
+            if (c$1 !== 120) {
+              return scan_decimal_digit_star(width$2, ib);
             } else {
-              return scan_hexadecimal_int(store_char(width$4, ib$2, c$1), ib$2);
+              return scan_hexadecimal_int(store_char(width$2, ib, c$1), ib);
             }
+          } else {
+            return scan_octal_int(store_char(width$2, ib, c$1), ib);
           }
+        } else if (c$1 !== 88) {
+          if (c$1 >= 98) {
+            return scan_binary_int(store_char(width$2, ib, c$1), ib);
+          } else {
+            return scan_decimal_digit_star(width$2, ib);
+          }
+        } else {
+          return scan_hexadecimal_int(store_char(width$2, ib, c$1), ib);
         }
     case /* O_conversion */3 :
         return scan_octal_int(width, ib);
@@ -702,26 +701,24 @@ function scan_int_conversion(conv, width, ib) {
 function scan_fractional_part(width, ib) {
   if (width === 0) {
     return width;
+  }
+  var c = peek_char(ib);
+  if (ib.ic_eof || c > 57 || c < 48) {
+    return width;
   } else {
-    var c = peek_char(ib);
-    if (ib.ic_eof || c > 57 || c < 48) {
-      return width;
-    } else {
-      return scan_decimal_digit_star(store_char(width, ib, c), ib);
-    }
+    return scan_decimal_digit_star(store_char(width, ib, c), ib);
   }
 }
 
 function scan_exponent_part(width, ib) {
   if (width === 0) {
     return width;
+  }
+  var c = peek_char(ib);
+  if (ib.ic_eof || c !== 69 && c !== 101) {
+    return width;
   } else {
-    var c = peek_char(ib);
-    if (ib.ic_eof || c !== 69 && c !== 101) {
-      return width;
-    } else {
-      return scan_optionally_signed_decimal_int(store_char(width, ib, c), ib);
-    }
+    return scan_optionally_signed_decimal_int(store_char(width, ib, c), ib);
   }
 }
 
@@ -737,28 +734,27 @@ function scan_float(width, precision, ib) {
             width$1,
             precision
           ];
-  } else {
-    var c = peek_char(ib);
-    if (ib.ic_eof) {
-      return /* tuple */[
-              width$1,
-              precision
-            ];
-    } else if (c !== 46) {
-      return /* tuple */[
-              scan_exponent_part(width$1, ib),
-              precision
-            ];
-    } else {
-      var width$2 = store_char(width$1, ib, c);
-      var precision$1 = width$2 < precision ? width$2 : precision;
-      var width$3 = width$2 - (precision$1 - scan_fractional_part(precision$1, ib) | 0) | 0;
-      return /* tuple */[
-              scan_exponent_part(width$3, ib),
-              precision$1
-            ];
-    }
   }
+  var c = peek_char(ib);
+  if (ib.ic_eof) {
+    return /* tuple */[
+            width$1,
+            precision
+          ];
+  }
+  if (c !== 46) {
+    return /* tuple */[
+            scan_exponent_part(width$1, ib),
+            precision
+          ];
+  }
+  var width$2 = store_char(width$1, ib, c);
+  var precision$1 = width$2 < precision ? width$2 : precision;
+  var width$3 = width$2 - (precision$1 - scan_fractional_part(precision$1, ib) | 0) | 0;
+  return /* tuple */[
+          scan_exponent_part(width$3, ib),
+          precision$1
+        ];
 }
 
 function check_case_insensitive_string(width, ib, error, str) {
@@ -771,13 +767,13 @@ function check_case_insensitive_string(width, ib, error, str) {
   };
   var len = str.length;
   var width$1 = width;
-  for(var i = 0 ,i_finish = len - 1 | 0; i <= i_finish; ++i){
+  for(var i = 0; i < len; ++i){
     var c = peek_char(ib);
     if (lowercase(c) !== lowercase(Caml_string.get(str, i))) {
-      Curry._1(error, /* () */0);
+      Curry._1(error, undefined);
     }
     if (width$1 === 0) {
-      Curry._1(error, /* () */0);
+      Curry._1(error, undefined);
     }
     width$1 = store_char(width$1, ib, c);
   }
@@ -786,282 +782,315 @@ function check_case_insensitive_string(width, ib, error, str) {
 
 function scan_hex_float(width, precision, ib) {
   if (width === 0 || end_of_input(ib)) {
-    throw [
-          Scan_failure,
-          "not a valid float in hexadecimal notation"
-        ];
+    throw {
+          RE_EXN_ID: Scan_failure,
+          _1: "not a valid float in hexadecimal notation",
+          Error: new Error()
+        };
   }
   var width$1 = scan_sign(width, ib);
   if (width$1 === 0 || end_of_input(ib)) {
-    throw [
-          Scan_failure,
-          "not a valid float in hexadecimal notation"
-        ];
+    throw {
+          RE_EXN_ID: Scan_failure,
+          _1: "not a valid float in hexadecimal notation",
+          Error: new Error()
+        };
   }
   var c = peek_char(ib);
   if (c >= 78) {
     var switcher = c - 79 | 0;
     if (switcher > 30 || switcher < 0) {
       if (switcher >= 32) {
-        throw [
-              Scan_failure,
-              "not a valid float in hexadecimal notation"
-            ];
-      } else {
-        var width$2 = store_char(width$1, ib, c);
-        if (width$2 === 0 || end_of_input(ib)) {
-          throw [
-                Scan_failure,
-                "not a valid float in hexadecimal notation"
-              ];
-        }
-        return check_case_insensitive_string(width$2, ib, bad_hex_float, "an");
+        throw {
+              RE_EXN_ID: Scan_failure,
+              _1: "not a valid float in hexadecimal notation",
+              Error: new Error()
+            };
       }
-    } else if (switcher !== 26) {
-      throw [
-            Scan_failure,
-            "not a valid float in hexadecimal notation"
-          ];
+      var width$2 = store_char(width$1, ib, c);
+      if (width$2 === 0 || end_of_input(ib)) {
+        throw {
+              RE_EXN_ID: Scan_failure,
+              _1: "not a valid float in hexadecimal notation",
+              Error: new Error()
+            };
+      }
+      return check_case_insensitive_string(width$2, ib, bad_hex_float, "an");
+    }
+    if (switcher !== 26) {
+      throw {
+            RE_EXN_ID: Scan_failure,
+            _1: "not a valid float in hexadecimal notation",
+            Error: new Error()
+          };
     }
     
   } else if (c !== 48) {
     if (c !== 73) {
-      throw [
-            Scan_failure,
-            "not a valid float in hexadecimal notation"
-          ];
+      throw {
+            RE_EXN_ID: Scan_failure,
+            _1: "not a valid float in hexadecimal notation",
+            Error: new Error()
+          };
     }
     
   } else {
     var width$3 = store_char(width$1, ib, c);
     if (width$3 === 0 || end_of_input(ib)) {
-      throw [
-            Scan_failure,
-            "not a valid float in hexadecimal notation"
-          ];
+      throw {
+            RE_EXN_ID: Scan_failure,
+            _1: "not a valid float in hexadecimal notation",
+            Error: new Error()
+          };
     }
     var width$4 = check_case_insensitive_string(width$3, ib, bad_hex_float, "x");
     if (width$4 === 0 || end_of_input(ib)) {
       return width$4;
+    }
+    var match = peek_char(ib);
+    var switcher$1 = match - 46 | 0;
+    var width$5 = switcher$1 > 34 || switcher$1 < 0 ? (
+        switcher$1 !== 66 ? scan_hexadecimal_int(width$4, ib) : width$4
+      ) : (
+        switcher$1 > 33 || switcher$1 < 1 ? width$4 : scan_hexadecimal_int(width$4, ib)
+      );
+    if (width$5 === 0 || end_of_input(ib)) {
+      return width$5;
+    }
+    var c$1 = peek_char(ib);
+    var width$6;
+    if (c$1 !== 46) {
+      width$6 = width$5;
     } else {
-      var match = peek_char(ib);
-      var switcher$1 = match - 46 | 0;
-      var width$5 = switcher$1 > 34 || switcher$1 < 0 ? (
-          switcher$1 !== 66 ? scan_hexadecimal_int(width$4, ib) : width$4
-        ) : (
-          switcher$1 > 33 || switcher$1 < 1 ? width$4 : scan_hexadecimal_int(width$4, ib)
-        );
-      if (width$5 === 0 || end_of_input(ib)) {
-        return width$5;
+      var width$7 = store_char(width$5, ib, c$1);
+      if (width$7 === 0 || end_of_input(ib)) {
+        width$6 = width$7;
       } else {
-        var c$1 = peek_char(ib);
-        var width$6;
-        if (c$1 !== 46) {
-          width$6 = width$5;
+        var match$1 = peek_char(ib);
+        if (match$1 !== 80 && match$1 !== 112) {
+          var precision$1 = width$7 < precision ? width$7 : precision;
+          width$6 = width$7 - (precision$1 - scan_hexadecimal_int(precision$1, ib) | 0) | 0;
         } else {
-          var width$7 = store_char(width$5, ib, c$1);
-          if (width$7 === 0 || end_of_input(ib)) {
-            width$6 = width$7;
-          } else {
-            var match$1 = peek_char(ib);
-            if (match$1 !== 80 && match$1 !== 112) {
-              var precision$1 = width$7 < precision ? width$7 : precision;
-              width$6 = width$7 - (precision$1 - scan_hexadecimal_int(precision$1, ib) | 0) | 0;
-            } else {
-              width$6 = width$7;
-            }
-          }
-        }
-        if (width$6 === 0 || end_of_input(ib)) {
-          return width$6;
-        } else {
-          var c$2 = peek_char(ib);
-          var exit = 0;
-          if (c$2 !== 80 && c$2 !== 112) {
-            return width$6;
-          } else {
-            exit = 2;
-          }
-          if (exit === 2) {
-            var width$8 = store_char(width$6, ib, c$2);
-            if (width$8 === 0 || end_of_input(ib)) {
-              throw [
-                    Scan_failure,
-                    "not a valid float in hexadecimal notation"
-                  ];
-            }
-            return scan_optionally_signed_decimal_int(width$8, ib);
-          }
-          
+          width$6 = width$7;
         }
       }
     }
+    if (width$6 === 0 || end_of_input(ib)) {
+      return width$6;
+    }
+    var c$2 = peek_char(ib);
+    var exit = 0;
+    if (c$2 !== 80) {
+      if (c$2 !== 112) {
+        return width$6;
+      }
+      exit = 2;
+    } else {
+      exit = 2;
+    }
+    if (exit === 2) {
+      var width$8 = store_char(width$6, ib, c$2);
+      if (width$8 === 0 || end_of_input(ib)) {
+        throw {
+              RE_EXN_ID: Scan_failure,
+              _1: "not a valid float in hexadecimal notation",
+              Error: new Error()
+            };
+      }
+      return scan_optionally_signed_decimal_int(width$8, ib);
+    }
+    
   }
   var width$9 = store_char(width$1, ib, c);
   if (width$9 === 0 || end_of_input(ib)) {
-    throw [
-          Scan_failure,
-          "not a valid float in hexadecimal notation"
-        ];
+    throw {
+          RE_EXN_ID: Scan_failure,
+          _1: "not a valid float in hexadecimal notation",
+          Error: new Error()
+        };
   }
   return check_case_insensitive_string(width$9, ib, bad_hex_float, "nfinity");
 }
 
 function scan_caml_float_rest(width, precision, ib) {
   if (width === 0 || end_of_input(ib)) {
-    throw [
-          Scan_failure,
-          "no dot or exponent part found in float token"
-        ];
+    throw {
+          RE_EXN_ID: Scan_failure,
+          _1: "no dot or exponent part found in float token",
+          Error: new Error()
+        };
   }
   var width$1 = scan_decimal_digit_star(width, ib);
   if (width$1 === 0 || end_of_input(ib)) {
-    throw [
-          Scan_failure,
-          "no dot or exponent part found in float token"
-        ];
+    throw {
+          RE_EXN_ID: Scan_failure,
+          _1: "no dot or exponent part found in float token",
+          Error: new Error()
+        };
   }
   var c = peek_char(ib);
   var switcher = c - 69 | 0;
   if (switcher > 32 || switcher < 0) {
     if (switcher !== -23) {
-      throw [
-            Scan_failure,
-            "no dot or exponent part found in float token"
-          ];
-    } else {
-      var width$2 = store_char(width$1, ib, c);
-      var precision$1 = width$2 < precision ? width$2 : precision;
-      var width_precision = scan_fractional_part(precision$1, ib);
-      var frac_width = precision$1 - width_precision | 0;
-      var width$3 = width$2 - frac_width | 0;
-      return scan_exponent_part(width$3, ib);
+      throw {
+            RE_EXN_ID: Scan_failure,
+            _1: "no dot or exponent part found in float token",
+            Error: new Error()
+          };
     }
-  } else if (switcher > 31 || switcher < 1) {
-    return scan_exponent_part(width$1, ib);
-  } else {
-    throw [
-          Scan_failure,
-          "no dot or exponent part found in float token"
-        ];
+    var width$2 = store_char(width$1, ib, c);
+    var precision$1 = width$2 < precision ? width$2 : precision;
+    var width_precision = scan_fractional_part(precision$1, ib);
+    var frac_width = precision$1 - width_precision | 0;
+    var width$3 = width$2 - frac_width | 0;
+    return scan_exponent_part(width$3, ib);
   }
+  if (switcher > 31 || switcher < 1) {
+    return scan_exponent_part(width$1, ib);
+  }
+  throw {
+        RE_EXN_ID: Scan_failure,
+        _1: "no dot or exponent part found in float token",
+        Error: new Error()
+      };
 }
 
 function scan_caml_float(width, precision, ib) {
   if (width === 0 || end_of_input(ib)) {
-    throw [
-          Scan_failure,
-          "no dot or exponent part found in float token"
-        ];
+    throw {
+          RE_EXN_ID: Scan_failure,
+          _1: "no dot or exponent part found in float token",
+          Error: new Error()
+        };
   }
   var width$1 = scan_sign(width, ib);
   if (width$1 === 0 || end_of_input(ib)) {
-    throw [
-          Scan_failure,
-          "no dot or exponent part found in float token"
-        ];
+    throw {
+          RE_EXN_ID: Scan_failure,
+          _1: "no dot or exponent part found in float token",
+          Error: new Error()
+        };
   }
   var c = peek_char(ib);
   if (c >= 49) {
     if (c >= 58) {
-      throw [
-            Scan_failure,
-            "no dot or exponent part found in float token"
-          ];
-    } else {
-      var width$2 = store_char(width$1, ib, c);
-      if (width$2 === 0 || end_of_input(ib)) {
-        throw [
-              Scan_failure,
-              "no dot or exponent part found in float token"
-            ];
-      }
-      return scan_caml_float_rest(width$2, precision, ib);
+      throw {
+            RE_EXN_ID: Scan_failure,
+            _1: "no dot or exponent part found in float token",
+            Error: new Error()
+          };
     }
-  } else if (c >= 48) {
+    var width$2 = store_char(width$1, ib, c);
+    if (width$2 === 0 || end_of_input(ib)) {
+      throw {
+            RE_EXN_ID: Scan_failure,
+            _1: "no dot or exponent part found in float token",
+            Error: new Error()
+          };
+    }
+    return scan_caml_float_rest(width$2, precision, ib);
+  }
+  if (c >= 48) {
     var width$3 = store_char(width$1, ib, c);
     if (width$3 === 0 || end_of_input(ib)) {
-      throw [
-            Scan_failure,
-            "no dot or exponent part found in float token"
-          ];
+      throw {
+            RE_EXN_ID: Scan_failure,
+            _1: "no dot or exponent part found in float token",
+            Error: new Error()
+          };
     }
     var c$1 = peek_char(ib);
     var exit = 0;
-    if (c$1 !== 88 && c$1 !== 120) {
-      return scan_caml_float_rest(width$3, precision, ib);
+    if (c$1 !== 88) {
+      if (c$1 !== 120) {
+        return scan_caml_float_rest(width$3, precision, ib);
+      }
+      exit = 1;
     } else {
       exit = 1;
     }
     if (exit === 1) {
       var width$4 = store_char(width$3, ib, c$1);
       if (width$4 === 0 || end_of_input(ib)) {
-        throw [
-              Scan_failure,
-              "no dot or exponent part found in float token"
-            ];
+        throw {
+              RE_EXN_ID: Scan_failure,
+              _1: "no dot or exponent part found in float token",
+              Error: new Error()
+            };
       }
       var width$5 = scan_hexadecimal_int(width$4, ib);
       if (width$5 === 0 || end_of_input(ib)) {
-        throw [
-              Scan_failure,
-              "no dot or exponent part found in float token"
-            ];
+        throw {
+              RE_EXN_ID: Scan_failure,
+              _1: "no dot or exponent part found in float token",
+              Error: new Error()
+            };
       }
       var c$2 = peek_char(ib);
       var switcher = c$2 - 80 | 0;
       var width$6;
       if (switcher > 32 || switcher < 0) {
         if (switcher !== -34) {
-          throw [
-                Scan_failure,
-                "no dot or exponent part found in float token"
-              ];
+          throw {
+                RE_EXN_ID: Scan_failure,
+                _1: "no dot or exponent part found in float token",
+                Error: new Error()
+              };
+        }
+        var width$7 = store_char(width$5, ib, c$2);
+        if (width$7 === 0 || end_of_input(ib)) {
+          width$6 = width$7;
         } else {
-          var width$7 = store_char(width$5, ib, c$2);
-          if (width$7 === 0 || end_of_input(ib)) {
-            width$6 = width$7;
+          var match = peek_char(ib);
+          if (match !== 80 && match !== 112) {
+            var precision$1 = width$7 < precision ? width$7 : precision;
+            width$6 = width$7 - (precision$1 - scan_hexadecimal_int(precision$1, ib) | 0) | 0;
           } else {
-            var match = peek_char(ib);
-            if (match !== 80 && match !== 112) {
-              var precision$1 = width$7 < precision ? width$7 : precision;
-              width$6 = width$7 - (precision$1 - scan_hexadecimal_int(precision$1, ib) | 0) | 0;
-            } else {
-              width$6 = width$7;
-            }
+            width$6 = width$7;
           }
         }
       } else if (switcher > 31 || switcher < 1) {
         width$6 = width$5;
       } else {
-        throw [
-              Scan_failure,
-              "no dot or exponent part found in float token"
-            ];
+        throw {
+              RE_EXN_ID: Scan_failure,
+              _1: "no dot or exponent part found in float token",
+              Error: new Error()
+            };
       }
       if (width$6 === 0 || end_of_input(ib)) {
         return width$6;
-      } else {
-        var c$3 = peek_char(ib);
-        if (c$3 !== 80 && c$3 !== 112) {
+      }
+      var c$3 = peek_char(ib);
+      var exit$1 = 0;
+      if (c$3 !== 80) {
+        if (c$3 !== 112) {
           return width$6;
         }
+        exit$1 = 2;
+      } else {
+        exit$1 = 2;
+      }
+      if (exit$1 === 2) {
         var width$8 = store_char(width$6, ib, c$3);
         if (width$8 === 0 || end_of_input(ib)) {
-          throw [
-                Scan_failure,
-                "not a valid float in hexadecimal notation"
-              ];
+          throw {
+                RE_EXN_ID: Scan_failure,
+                _1: "not a valid float in hexadecimal notation",
+                Error: new Error()
+              };
         }
         return scan_optionally_signed_decimal_int(width$8, ib);
       }
+      
     }
     
   } else {
-    throw [
-          Scan_failure,
-          "no dot or exponent part found in float token"
-        ];
+    throw {
+          RE_EXN_ID: Scan_failure,
+          _1: "no dot or exponent part found in float token",
+          Error: new Error()
+        };
   }
 }
 
@@ -1071,35 +1100,32 @@ function scan_string(stp, width, ib) {
     var width$1 = _width;
     if (width$1 === 0) {
       return width$1;
-    } else {
-      var c = peek_char(ib);
-      if (ib.ic_eof) {
-        return width$1;
-      } else if (stp !== undefined) {
-        if (c === stp) {
-          ib.ic_current_char_is_valid = false;
-          return width$1;
-        } else {
-          _width = store_char(width$1, ib, c);
-          continue ;
-        }
-      } else {
-        var switcher = c - 9 | 0;
-        if (switcher > 4 || switcher < 0) {
-          if (switcher !== 23) {
-            _width = store_char(width$1, ib, c);
-            continue ;
-          } else {
-            return width$1;
-          }
-        } else if (switcher === 3 || switcher === 2) {
-          _width = store_char(width$1, ib, c);
-          continue ;
-        } else {
-          return width$1;
-        }
-      }
     }
+    var c = peek_char(ib);
+    if (ib.ic_eof) {
+      return width$1;
+    }
+    if (stp !== undefined) {
+      if (c === stp) {
+        ib.ic_current_char_is_valid = false;
+        return width$1;
+      }
+      _width = store_char(width$1, ib, c);
+      continue ;
+    }
+    var switcher = c - 9 | 0;
+    if (switcher > 4 || switcher < 0) {
+      if (switcher === 23) {
+        return width$1;
+      }
+      _width = store_char(width$1, ib, c);
+      continue ;
+    }
+    if (!(switcher === 3 || switcher === 2)) {
+      return width$1;
+    }
+    _width = store_char(width$1, ib, c);
+    continue ;
   };
 }
 
@@ -1108,49 +1134,49 @@ function scan_char(width, ib) {
 }
 
 function char_for_backslash(c) {
-  if (c >= 110) {
-    if (c >= 117) {
+  if (c < 110) {
+    if (c !== 98) {
       return c;
     } else {
-      switch (c - 110 | 0) {
-        case 0 :
-            return /* "\n" */10;
-        case 4 :
-            return /* "\r" */13;
-        case 1 :
-        case 2 :
-        case 3 :
-        case 5 :
-            return c;
-        case 6 :
-            return /* "\t" */9;
-        
-      }
+      return /* "\b" */8;
     }
-  } else if (c !== 98) {
+  }
+  if (c >= 117) {
     return c;
-  } else {
-    return /* "\b" */8;
+  }
+  switch (c - 110 | 0) {
+    case 0 :
+        return /* "\n" */10;
+    case 4 :
+        return /* "\r" */13;
+    case 1 :
+    case 2 :
+    case 3 :
+    case 5 :
+        return c;
+    case 6 :
+        return /* "\t" */9;
+    
   }
 }
 
 function char_for_decimal_code(c0, c1, c2) {
   var c = (Caml_int32.imul(100, c0 - /* "0" */48 | 0) + Caml_int32.imul(10, c1 - /* "0" */48 | 0) | 0) + (c2 - /* "0" */48 | 0) | 0;
-  if (c < 0 || c > 255) {
-    var s = Curry._3(Printf.sprintf(/* Format */[
-              /* String_literal */Block.__(11, [
-                  "bad character decimal encoding \\",
-                  /* Char */Block.__(0, [/* Char */Block.__(0, [/* Char */Block.__(0, [/* End_of_format */0])])])
-                ]),
-              "bad character decimal encoding \\%c%c%c"
-            ]), c0, c1, c2);
-    throw [
-          Scan_failure,
-          s
-        ];
-  } else {
+  if (!(c < 0 || c > 255)) {
     return Pervasives.char_of_int(c);
   }
+  var s = Curry._3(Printf.sprintf(/* Format */[
+            /* String_literal */Block.__(11, [
+                "bad character decimal encoding \\",
+                /* Char */Block.__(0, [/* Char */Block.__(0, [/* Char */Block.__(0, [/* End_of_format */0])])])
+              ]),
+            "bad character decimal encoding \\%c%c%c"
+          ]), c0, c1, c2);
+  throw {
+        RE_EXN_ID: Scan_failure,
+        _1: s,
+        Error: new Error()
+      };
 }
 
 function hexadecimal_value_of_char(c) {
@@ -1165,50 +1191,49 @@ function hexadecimal_value_of_char(c) {
 
 function char_for_hexadecimal_code(c1, c2) {
   var c = (hexadecimal_value_of_char(c1) << 4) + hexadecimal_value_of_char(c2) | 0;
-  if (c < 0 || c > 255) {
-    var s = Curry._2(Printf.sprintf(/* Format */[
-              /* String_literal */Block.__(11, [
-                  "bad character hexadecimal encoding \\",
-                  /* Char */Block.__(0, [/* Char */Block.__(0, [/* End_of_format */0])])
-                ]),
-              "bad character hexadecimal encoding \\%c%c"
-            ]), c1, c2);
-    throw [
-          Scan_failure,
-          s
-        ];
-  } else {
+  if (!(c < 0 || c > 255)) {
     return Pervasives.char_of_int(c);
   }
+  var s = Curry._2(Printf.sprintf(/* Format */[
+            /* String_literal */Block.__(11, [
+                "bad character hexadecimal encoding \\",
+                /* Char */Block.__(0, [/* Char */Block.__(0, [/* End_of_format */0])])
+              ]),
+            "bad character hexadecimal encoding \\%c%c"
+          ]), c1, c2);
+  throw {
+        RE_EXN_ID: Scan_failure,
+        _1: s,
+        Error: new Error()
+      };
 }
 
 function check_next_char(message, width, ib) {
   if (width === 0) {
     return bad_token_length(message);
+  }
+  var c = peek_char(ib);
+  if (ib.ic_eof) {
+    var s = Curry._1(Printf.sprintf(/* Format */[
+              /* String_literal */Block.__(11, [
+                  "scanning of ",
+                  /* String */Block.__(2, [
+                      /* No_padding */0,
+                      /* String_literal */Block.__(11, [
+                          " failed: premature end of file occurred before end of token",
+                          /* End_of_format */0
+                        ])
+                    ])
+                ]),
+              "scanning of %s failed: premature end of file occurred before end of token"
+            ]), message);
+    throw {
+          RE_EXN_ID: Scan_failure,
+          _1: s,
+          Error: new Error()
+        };
   } else {
-    var c = peek_char(ib);
-    if (ib.ic_eof) {
-      var message$1 = message;
-      var s = Curry._1(Printf.sprintf(/* Format */[
-                /* String_literal */Block.__(11, [
-                    "scanning of ",
-                    /* String */Block.__(2, [
-                        /* No_padding */0,
-                        /* String_literal */Block.__(11, [
-                            " failed: premature end of file occurred before end of token",
-                            /* End_of_format */0
-                          ])
-                      ])
-                  ]),
-                "scanning of %s failed: premature end of file occurred before end of token"
-              ]), message$1);
-      throw [
-            Scan_failure,
-            s
-          ];
-    } else {
-      return c;
-    }
+    return c;
   }
 }
 
@@ -1263,13 +1288,16 @@ function scan_backslash_char(width, ib) {
                 return bad_input_escape(c);
               }
             };
-            var c1 = get_digit(/* () */0);
-            var c2 = get_digit(/* () */0);
+            var c1 = get_digit(undefined);
+            var c2 = get_digit(undefined);
             return store_char(width - 2 | 0, ib, char_for_hexadecimal_code(c1, c2));
         default:
           return bad_input_escape(c);
       }
-    } else if (c >= 48) {
+    } else {
+      if (c < 48) {
+        return bad_input_escape(c);
+      }
       var get_digit$1 = function (param) {
         var c = next_char(ib);
         if (c > 57 || c < 48) {
@@ -1278,11 +1306,9 @@ function scan_backslash_char(width, ib) {
           return c;
         }
       };
-      var c1$1 = get_digit$1(/* () */0);
-      var c2$1 = get_digit$1(/* () */0);
+      var c1$1 = get_digit$1(undefined);
+      var c2$1 = get_digit$1(undefined);
       return store_char(width - 2 | 0, ib, char_for_decimal_code(c, c1$1, c2$1));
-    } else {
-      return bad_input_escape(c);
     }
   } else if (c !== 34 && c < 39) {
     return bad_input_escape(c);
@@ -1293,33 +1319,32 @@ function scan_backslash_char(width, ib) {
 function scan_caml_char(width, ib) {
   var find_stop = function (width) {
     var c = check_next_char("a Char", width, ib);
-    if (c !== 39) {
-      var s = character_mismatch_err(/* "'" */39, c);
-      throw [
-            Scan_failure,
-            s
-          ];
-    } else {
+    if (c === 39) {
       return ignore_char(width, ib);
     }
-  };
-  var width$1 = width;
-  var c = checked_peek_char(ib);
-  if (c !== 39) {
     var s = character_mismatch_err(/* "'" */39, c);
-    throw [
-          Scan_failure,
-          s
-        ];
-  } else {
-    var width$2 = ignore_char(width$1, ib);
-    var c$1 = check_next_char("a Char", width$2, ib);
+    throw {
+          RE_EXN_ID: Scan_failure,
+          _1: s,
+          Error: new Error()
+        };
+  };
+  var c = checked_peek_char(ib);
+  if (c === 39) {
+    var width$1 = ignore_char(width, ib);
+    var c$1 = check_next_char("a Char", width$1, ib);
     if (c$1 !== 92) {
-      return find_stop(store_char(width$2, ib, c$1));
+      return find_stop(store_char(width$1, ib, c$1));
     } else {
-      return find_stop(scan_backslash_char(ignore_char(width$2, ib), ib));
+      return find_stop(scan_backslash_char(ignore_char(width$1, ib), ib));
     }
   }
+  var s = character_mismatch_err(/* "'" */39, c);
+  throw {
+        RE_EXN_ID: Scan_failure,
+        _1: s,
+        Error: new Error()
+      };
 }
 
 function scan_caml_string(width, ib) {
@@ -1327,32 +1352,30 @@ function scan_caml_string(width, ib) {
     while(true) {
       var width = _width;
       var c = check_next_char("a String", width, ib);
-      if (c !== 34) {
-        if (c !== 92) {
-          _width = store_char(width, ib, c);
-          continue ;
-        } else {
-          var width$1 = ignore_char(width, ib);
-          var match = check_next_char("a String", width$1, ib);
-          if (match !== 10) {
-            if (match !== 13) {
-              return find_stop(scan_backslash_char(width$1, ib));
-            } else {
-              var width$2 = ignore_char(width$1, ib);
-              var match$1 = check_next_char("a String", width$2, ib);
-              if (match$1 !== 10) {
-                return find_stop(store_char(width$2, ib, /* "\r" */13));
-              } else {
-                return skip_spaces(ignore_char(width$2, ib));
-              }
-            }
-          } else {
-            return skip_spaces(ignore_char(width$1, ib));
-          }
-        }
-      } else {
+      if (c === 34) {
         return ignore_char(width, ib);
       }
+      if (c === 92) {
+        var width$1 = ignore_char(width, ib);
+        var match = check_next_char("a String", width$1, ib);
+        if (match !== 10) {
+          if (match !== 13) {
+            return find_stop(scan_backslash_char(width$1, ib));
+          } else {
+            var width$2 = ignore_char(width$1, ib);
+            var match$1 = check_next_char("a String", width$2, ib);
+            if (match$1 !== 10) {
+              return find_stop(store_char(width$2, ib, /* "\r" */13));
+            } else {
+              return skip_spaces(ignore_char(width$2, ib));
+            }
+          }
+        } else {
+          return skip_spaces(ignore_char(width$1, ib));
+        }
+      }
+      _width = store_char(width, ib, c);
+      continue ;
     };
   };
   var skip_spaces = function (_width) {
@@ -1361,23 +1384,21 @@ function scan_caml_string(width, ib) {
       var match = check_next_char("a String", width, ib);
       if (match !== 32) {
         return find_stop(width);
-      } else {
-        _width = ignore_char(width, ib);
-        continue ;
       }
+      _width = ignore_char(width, ib);
+      continue ;
     };
   };
-  var width$1 = width;
   var c = checked_peek_char(ib);
-  if (c !== 34) {
-    var s = character_mismatch_err(/* "\"" */34, c);
-    throw [
-          Scan_failure,
-          s
-        ];
-  } else {
-    return find_stop(ignore_char(width$1, ib));
+  if (c === 34) {
+    return find_stop(ignore_char(width, ib));
   }
+  var s = character_mismatch_err(/* "\"" */34, c);
+  throw {
+        RE_EXN_ID: Scan_failure,
+        _1: s,
+        Error: new Error()
+      };
 }
 
 function scan_chars_in_char_set(char_set, scan_indic, width, ib) {
@@ -1385,42 +1406,38 @@ function scan_chars_in_char_set(char_set, scan_indic, width, ib) {
     while(true) {
       var i = _i;
       var c = peek_char(ib);
-      if (i > 0 && !ib.ic_eof && CamlinternalFormat.is_in_char_set(char_set, c) && c !== stp) {
-        store_char(Pervasives.max_int, ib, c);
-        _i = i - 1 | 0;
-        continue ;
-      } else {
-        return 0;
+      if (!(i > 0 && !ib.ic_eof && CamlinternalFormat.is_in_char_set(char_set, c) && c !== stp)) {
+        return ;
       }
+      store_char(Pervasives.max_int, ib, c);
+      _i = i - 1 | 0;
+      continue ;
     };
   };
-  if (scan_indic !== undefined) {
-    var c = scan_indic;
-    scan_chars(width, c);
-    if (ib.ic_eof) {
-      return 0;
-    } else {
-      var ci = peek_char(ib);
-      if (c === ci) {
-        ib.ic_current_char_is_valid = false;
-        return /* () */0;
-      } else {
-        var s = character_mismatch_err(c, ci);
-        throw [
-              Scan_failure,
-              s
-            ];
-      }
-    }
-  } else {
+  if (scan_indic === undefined) {
     return scan_chars(width, -1);
   }
+  scan_chars(width, scan_indic);
+  if (ib.ic_eof) {
+    return ;
+  }
+  var ci = peek_char(ib);
+  if (scan_indic === ci) {
+    ib.ic_current_char_is_valid = false;
+    return ;
+  }
+  var s = character_mismatch_err(scan_indic, ci);
+  throw {
+        RE_EXN_ID: Scan_failure,
+        _1: s,
+        Error: new Error()
+      };
 }
 
 function scanf_bad_input(ib, x) {
   var s;
-  if (x[0] === Scan_failure || x[0] === Caml_builtin_exceptions.failure) {
-    s = x[1];
+  if (x.RE_EXN_ID === Scan_failure || x.RE_EXN_ID === "Failure") {
+    s = x._1;
   } else {
     throw x;
   }
@@ -1443,10 +1460,11 @@ function scanf_bad_input(ib, x) {
               ]),
             "scanf: bad input at char number %i: %s"
           ]), i, s);
-  throw [
-        Scan_failure,
-        s$1
-      ];
+  throw {
+        RE_EXN_ID: Scan_failure,
+        _1: s$1,
+        Error: new Error()
+      };
 }
 
 function get_counter(ib, counter) {
@@ -1461,29 +1479,20 @@ function get_counter(ib, counter) {
   }
 }
 
-function width_of_pad_opt(pad_opt) {
-  if (pad_opt !== undefined) {
-    return pad_opt;
-  } else {
-    return Pervasives.max_int;
-  }
-}
-
 function stopper_of_formatting_lit(fmting) {
   if (fmting === /* Escaped_percent */6) {
     return /* tuple */[
             /* "%" */37,
             ""
           ];
-  } else {
-    var str = CamlinternalFormat.string_of_formatting_lit(fmting);
-    var stp = Caml_string.get(str, 1);
-    var sub_str = $$String.sub(str, 2, str.length - 2 | 0);
-    return /* tuple */[
-            stp,
-            sub_str
-          ];
   }
+  var str = CamlinternalFormat.string_of_formatting_lit(fmting);
+  var stp = Caml_string.get(str, 1);
+  var sub_str = $$String.sub(str, 2, str.length - 2 | 0);
+  return /* tuple */[
+          stp,
+          sub_str
+        ];
 }
 
 function take_format_readers(k, _fmt) {
@@ -1491,75 +1500,73 @@ function take_format_readers(k, _fmt) {
     var fmt = _fmt;
     if (typeof fmt === "number") {
       return Curry._1(k, /* Nil */0);
-    } else {
-      switch (fmt.tag | 0) {
-        case /* Int */4 :
-        case /* Int32 */5 :
-        case /* Nativeint */6 :
-        case /* Int64 */7 :
-        case /* Float */8 :
-            _fmt = fmt[3];
-            continue ;
-        case /* Format_subst */14 :
-            return take_fmtty_format_readers(k, CamlinternalFormatBasics.erase_rel(CamlinternalFormat.symm(fmt[1])), fmt[2]);
-        case /* Formatting_gen */18 :
-            _fmt = CamlinternalFormatBasics.concat_fmt(fmt[0][0][0], fmt[1]);
-            continue ;
-        case /* Reader */19 :
-            var fmt_rest = fmt[0];
-            return (function(fmt_rest){
-            return function (reader) {
-              var new_k = function (readers_rest) {
-                return Curry._1(k, /* Cons */[
-                            reader,
-                            readers_rest
-                          ]);
-              };
-              return take_format_readers(new_k, fmt_rest);
-            }
-            }(fmt_rest));
-        case /* Char */0 :
-        case /* Caml_char */1 :
-        case /* Flush */10 :
-        case /* Alpha */15 :
-        case /* Theta */16 :
-        case /* Scan_next_char */22 :
-            _fmt = fmt[0];
-            continue ;
-        case /* Ignored_param */23 :
-            var k$1 = k;
-            var ign = fmt[0];
-            var fmt$1 = fmt[1];
-            if (typeof ign === "number") {
-              if (ign === /* Ignored_reader */2) {
-                return (function(k$1,fmt$1){
-                return function (reader) {
-                  var new_k = function (readers_rest) {
-                    return Curry._1(k$1, /* Cons */[
-                                reader,
-                                readers_rest
-                              ]);
-                  };
-                  return take_format_readers(new_k, fmt$1);
-                }
-                }(k$1,fmt$1));
-              } else {
-                return take_format_readers(k$1, fmt$1);
-              }
-            } else if (ign.tag === /* Ignored_format_subst */9) {
-              return take_fmtty_format_readers(k$1, ign[1], fmt$1);
-            } else {
-              return take_format_readers(k$1, fmt$1);
-            }
-        case /* Format_arg */13 :
-        case /* Scan_char_set */20 :
-        case /* Custom */24 :
-            _fmt = fmt[2];
-            continue ;
-        default:
-          _fmt = fmt[1];
+    }
+    switch (fmt.tag | 0) {
+      case /* Int */4 :
+      case /* Int32 */5 :
+      case /* Nativeint */6 :
+      case /* Int64 */7 :
+      case /* Float */8 :
+          _fmt = fmt[3];
           continue ;
-      }
+      case /* Format_subst */14 :
+          return take_fmtty_format_readers(k, CamlinternalFormatBasics.erase_rel(CamlinternalFormat.symm(fmt[1])), fmt[2]);
+      case /* Formatting_gen */18 :
+          _fmt = CamlinternalFormatBasics.concat_fmt(fmt[0][0][0], fmt[1]);
+          continue ;
+      case /* Reader */19 :
+          var fmt_rest = fmt[0];
+          return (function(fmt_rest){
+          return function (reader) {
+            var new_k = function (readers_rest) {
+              return Curry._1(k, /* Cons */[
+                          reader,
+                          readers_rest
+                        ]);
+            };
+            return take_format_readers(new_k, fmt_rest);
+          }
+          }(fmt_rest));
+      case /* Char */0 :
+      case /* Caml_char */1 :
+      case /* Flush */10 :
+      case /* Alpha */15 :
+      case /* Theta */16 :
+      case /* Scan_next_char */22 :
+          _fmt = fmt[0];
+          continue ;
+      case /* Ignored_param */23 :
+          var ign = fmt[0];
+          var fmt$1 = fmt[1];
+          if (typeof ign === "number") {
+            if (ign === /* Ignored_reader */2) {
+              return (function(fmt$1){
+              return function (reader) {
+                var new_k = function (readers_rest) {
+                  return Curry._1(k, /* Cons */[
+                              reader,
+                              readers_rest
+                            ]);
+                };
+                return take_format_readers(new_k, fmt$1);
+              }
+              }(fmt$1));
+            } else {
+              return take_format_readers(k, fmt$1);
+            }
+          } else if (ign.tag === /* Ignored_format_subst */9) {
+            return take_fmtty_format_readers(k, ign[1], fmt$1);
+          } else {
+            return take_format_readers(k, fmt$1);
+          }
+      case /* Format_arg */13 :
+      case /* Scan_char_set */20 :
+      case /* Custom */24 :
+          _fmt = fmt[2];
+          continue ;
+      default:
+        _fmt = fmt[1];
+        continue ;
     }
   };
 }
@@ -1569,45 +1576,44 @@ function take_fmtty_format_readers(k, _fmtty, fmt) {
     var fmtty = _fmtty;
     if (typeof fmtty === "number") {
       return take_format_readers(k, fmt);
-    } else {
-      switch (fmtty.tag | 0) {
-        case /* Format_arg_ty */8 :
-            _fmtty = fmtty[1];
-            continue ;
-        case /* Format_subst_ty */9 :
-            var ty = CamlinternalFormat.trans(CamlinternalFormat.symm(fmtty[0]), fmtty[1]);
-            _fmtty = CamlinternalFormatBasics.concat_fmtty(ty, fmtty[2]);
-            continue ;
-        case /* Reader_ty */13 :
-            var fmt_rest = fmtty[0];
-            return (function(fmt_rest){
-            return function (reader) {
-              var new_k = function (readers_rest) {
-                return Curry._1(k, /* Cons */[
-                            reader,
-                            readers_rest
-                          ]);
-              };
-              return take_fmtty_format_readers(new_k, fmt_rest, fmt);
-            }
-            }(fmt_rest));
-        case /* Ignored_reader_ty */14 :
-            var fmt_rest$1 = fmtty[0];
-            return (function(fmt_rest$1){
-            return function (reader) {
-              var new_k = function (readers_rest) {
-                return Curry._1(k, /* Cons */[
-                            reader,
-                            readers_rest
-                          ]);
-              };
-              return take_fmtty_format_readers(new_k, fmt_rest$1, fmt);
-            }
-            }(fmt_rest$1));
-        default:
-          _fmtty = fmtty[0];
+    }
+    switch (fmtty.tag | 0) {
+      case /* Format_arg_ty */8 :
+          _fmtty = fmtty[1];
           continue ;
-      }
+      case /* Format_subst_ty */9 :
+          var ty = CamlinternalFormat.trans(CamlinternalFormat.symm(fmtty[0]), fmtty[1]);
+          _fmtty = CamlinternalFormatBasics.concat_fmtty(ty, fmtty[2]);
+          continue ;
+      case /* Reader_ty */13 :
+          var fmt_rest = fmtty[0];
+          return (function(fmt_rest){
+          return function (reader) {
+            var new_k = function (readers_rest) {
+              return Curry._1(k, /* Cons */[
+                          reader,
+                          readers_rest
+                        ]);
+            };
+            return take_fmtty_format_readers(new_k, fmt_rest, fmt);
+          }
+          }(fmt_rest));
+      case /* Ignored_reader_ty */14 :
+          var fmt_rest$1 = fmtty[0];
+          return (function(fmt_rest$1){
+          return function (reader) {
+            var new_k = function (readers_rest) {
+              return Curry._1(k, /* Cons */[
+                          reader,
+                          readers_rest
+                        ]);
+            };
+            return take_fmtty_format_readers(new_k, fmt_rest$1, fmt);
+          }
+          }(fmt_rest$1));
+      default:
+        _fmtty = fmtty[0];
+        continue ;
     }
   };
 }
@@ -1617,330 +1623,334 @@ function make_scanf(ib, _fmt, readers) {
     var fmt = _fmt;
     if (typeof fmt === "number") {
       return /* Nil */0;
-    } else {
-      switch (fmt.tag | 0) {
-        case /* Char */0 :
-            scan_char(0, ib);
-            var c = Caml_string.get(token(ib), 0);
-            return /* Cons */[
-                    c,
-                    make_scanf(ib, fmt[0], readers)
-                  ];
-        case /* Caml_char */1 :
-            scan_caml_char(0, ib);
-            var c$1 = Caml_string.get(token(ib), 0);
-            return /* Cons */[
-                    c$1,
-                    make_scanf(ib, fmt[0], readers)
-                  ];
-        case /* String */2 :
-            var rest = fmt[1];
-            var pad = fmt[0];
-            if (typeof rest !== "number") {
-              switch (rest.tag | 0) {
-                case /* Formatting_lit */17 :
-                    var match = stopper_of_formatting_lit(rest[0]);
-                    var stp = match[0];
-                    var scan = (function(stp){
-                    return function scan(width, param, ib) {
-                      return scan_string(stp, width, ib);
-                    }
-                    }(stp));
-                    var str_rest_000 = match[1];
-                    var str_rest_001 = rest[1];
-                    var str_rest = /* String_literal */Block.__(11, [
-                        str_rest_000,
-                        str_rest_001
-                      ]);
-                    return pad_prec_scanf(ib, str_rest, readers, pad, /* No_precision */0, scan, token);
-                case /* Formatting_gen */18 :
-                    var match$1 = rest[0];
-                    if (match$1.tag) {
-                      var scan$1 = function (width, param, ib) {
-                        return scan_string(/* "[" */91, width, ib);
-                      };
-                      return pad_prec_scanf(ib, CamlinternalFormatBasics.concat_fmt(match$1[0][0], rest[1]), readers, pad, /* No_precision */0, scan$1, token);
-                    } else {
-                      var scan$2 = function (width, param, ib) {
-                        return scan_string(/* "{" */123, width, ib);
-                      };
-                      return pad_prec_scanf(ib, CamlinternalFormatBasics.concat_fmt(match$1[0][0], rest[1]), readers, pad, /* No_precision */0, scan$2, token);
-                    }
-                default:
-                  
-              }
-            }
-            var scan$3 = function (width, param, ib) {
-              return scan_string(undefined, width, ib);
-            };
-            return pad_prec_scanf(ib, rest, readers, pad, /* No_precision */0, scan$3, token);
-        case /* Caml_string */3 :
-            var scan$4 = function (width, param, ib) {
-              return scan_caml_string(width, ib);
-            };
-            return pad_prec_scanf(ib, fmt[1], readers, fmt[0], /* No_precision */0, scan$4, token);
-        case /* Int */4 :
-            var c$2 = integer_conversion_of_char(CamlinternalFormat.char_of_iconv(fmt[0]));
-            var scan$5 = (function(c$2){
-            return function scan$5(width, param, ib) {
-              return scan_int_conversion(c$2, width, ib);
-            }
-            }(c$2));
-            return pad_prec_scanf(ib, fmt[3], readers, fmt[1], fmt[2], scan$5, (function(c$2){
-                      return function (param) {
-                        return Caml_format.caml_int_of_string(token_int_literal(c$2, param));
-                      }
-                      }(c$2)));
-        case /* Int32 */5 :
-            var c$3 = integer_conversion_of_char(CamlinternalFormat.char_of_iconv(fmt[0]));
-            var scan$6 = (function(c$3){
-            return function scan$6(width, param, ib) {
-              return scan_int_conversion(c$3, width, ib);
-            }
-            }(c$3));
-            return pad_prec_scanf(ib, fmt[3], readers, fmt[1], fmt[2], scan$6, (function(c$3){
-                      return function (param) {
-                        return Caml_format.caml_int32_of_string(token_int_literal(c$3, param));
-                      }
-                      }(c$3)));
-        case /* Nativeint */6 :
-            var c$4 = integer_conversion_of_char(CamlinternalFormat.char_of_iconv(fmt[0]));
-            var scan$7 = (function(c$4){
-            return function scan$7(width, param, ib) {
-              return scan_int_conversion(c$4, width, ib);
-            }
-            }(c$4));
-            return pad_prec_scanf(ib, fmt[3], readers, fmt[1], fmt[2], scan$7, (function(c$4){
-                      return function (param) {
-                        return Caml_format.caml_nativeint_of_string(token_int_literal(c$4, param));
-                      }
-                      }(c$4)));
-        case /* Int64 */7 :
-            var c$5 = integer_conversion_of_char(CamlinternalFormat.char_of_iconv(fmt[0]));
-            var scan$8 = (function(c$5){
-            return function scan$8(width, param, ib) {
-              return scan_int_conversion(c$5, width, ib);
-            }
-            }(c$5));
-            return pad_prec_scanf(ib, fmt[3], readers, fmt[1], fmt[2], scan$8, (function(c$5){
-                      return function (param) {
-                        return Caml_format.caml_int64_of_string(token_int_literal(c$5, param));
-                      }
-                      }(c$5)));
-        case /* Float */8 :
-            var match$2 = fmt[0];
-            if (match$2 !== 15) {
-              if (match$2 >= 16) {
-                return pad_prec_scanf(ib, fmt[3], readers, fmt[1], fmt[2], scan_hex_float, token_float);
-              } else {
-                return pad_prec_scanf(ib, fmt[3], readers, fmt[1], fmt[2], scan_float, token_float);
-              }
-            } else {
-              return pad_prec_scanf(ib, fmt[3], readers, fmt[1], fmt[2], scan_caml_float, token_float);
-            }
-        case /* Bool */9 :
-            var scan$9 = function (param, param$1, ib) {
-              var ib$1 = ib;
-              var c = checked_peek_char(ib$1);
-              var m;
-              if (c !== 102) {
-                if (c !== 116) {
-                  var s = Curry._1(Printf.sprintf(/* Format */[
-                            /* String_literal */Block.__(11, [
-                                "the character ",
-                                /* Caml_char */Block.__(1, [/* String_literal */Block.__(11, [
-                                        " cannot start a boolean",
-                                        /* End_of_format */0
-                                      ])])
-                              ]),
-                            "the character %C cannot start a boolean"
-                          ]), c);
-                  throw [
-                        Scan_failure,
-                        s
-                      ];
-                } else {
-                  m = 4;
-                }
-              } else {
-                m = 5;
-              }
-              return scan_string(undefined, m, ib$1);
-            };
-            return pad_prec_scanf(ib, fmt[1], readers, fmt[0], /* No_precision */0, scan$9, token_bool);
-        case /* Flush */10 :
-            if (end_of_input(ib)) {
-              _fmt = fmt[0];
-              continue ;
-            } else {
-              throw [
-                    Scan_failure,
-                    "end of input not found"
-                  ];
-            }
-        case /* String_literal */11 :
-            $$String.iter((function (param) {
-                    return check_char(ib, param);
-                  }), fmt[0]);
-            _fmt = fmt[1];
-            continue ;
-        case /* Char_literal */12 :
-            check_char(ib, fmt[0]);
-            _fmt = fmt[1];
-            continue ;
-        case /* Format_arg */13 :
-            scan_caml_string(width_of_pad_opt(fmt[0]), ib);
-            var s = token(ib);
-            var fmt$1;
-            try {
-              fmt$1 = CamlinternalFormat.format_of_string_fmtty(s, fmt[1]);
-            }
-            catch (raw_exn){
-              var exn = Caml_js_exceptions.internalToOCamlException(raw_exn);
-              if (exn[0] === Caml_builtin_exceptions.failure) {
-                throw [
-                      Scan_failure,
-                      exn[1]
-                    ];
-              }
-              throw exn;
-            }
-            return /* Cons */[
-                    fmt$1,
-                    make_scanf(ib, fmt[2], readers)
-                  ];
-        case /* Format_subst */14 :
-            var fmtty = fmt[1];
-            scan_caml_string(width_of_pad_opt(fmt[0]), ib);
-            var s$1 = token(ib);
-            var match$3;
-            try {
-              var match$4 = CamlinternalFormat.fmt_ebb_of_string(undefined, s$1);
-              var match$5 = CamlinternalFormat.fmt_ebb_of_string(undefined, s$1);
-              match$3 = /* tuple */[
-                CamlinternalFormat.type_format(match$4[0], CamlinternalFormatBasics.erase_rel(fmtty)),
-                CamlinternalFormat.type_format(match$5[0], CamlinternalFormatBasics.erase_rel(CamlinternalFormat.symm(fmtty)))
-              ];
-            }
-            catch (raw_exn$1){
-              var exn$1 = Caml_js_exceptions.internalToOCamlException(raw_exn$1);
-              if (exn$1[0] === Caml_builtin_exceptions.failure) {
-                throw [
-                      Scan_failure,
-                      exn$1[1]
-                    ];
-              }
-              throw exn$1;
-            }
-            return /* Cons */[
-                    /* Format */[
-                      match$3[0],
-                      s$1
-                    ],
-                    make_scanf(ib, CamlinternalFormatBasics.concat_fmt(match$3[1], fmt[2]), readers)
-                  ];
-        case /* Alpha */15 :
-            throw [
-                  Caml_builtin_exceptions.invalid_argument,
-                  "scanf: bad conversion \"%a\""
+    }
+    switch (fmt.tag | 0) {
+      case /* Char */0 :
+          scan_char(0, ib);
+          var c = Caml_string.get(token(ib), 0);
+          return /* Cons */[
+                  c,
+                  make_scanf(ib, fmt[0], readers)
                 ];
-        case /* Theta */16 :
-            throw [
-                  Caml_builtin_exceptions.invalid_argument,
-                  "scanf: bad conversion \"%t\""
+      case /* Caml_char */1 :
+          scan_caml_char(0, ib);
+          var c$1 = Caml_string.get(token(ib), 0);
+          return /* Cons */[
+                  c$1,
+                  make_scanf(ib, fmt[0], readers)
                 ];
-        case /* Formatting_lit */17 :
-            $$String.iter((function (param) {
-                    return check_char(ib, param);
-                  }), CamlinternalFormat.string_of_formatting_lit(fmt[0]));
-            _fmt = fmt[1];
+      case /* String */2 :
+          var rest = fmt[1];
+          var pad = fmt[0];
+          if (typeof rest !== "number") {
+            switch (rest.tag | 0) {
+              case /* Formatting_lit */17 :
+                  var match = stopper_of_formatting_lit(rest[0]);
+                  var stp = match[0];
+                  var scan = (function(stp){
+                  return function scan(width, param, ib) {
+                    return scan_string(stp, width, ib);
+                  }
+                  }(stp));
+                  var str_rest_000 = match[1];
+                  var str_rest_001 = rest[1];
+                  var str_rest = /* String_literal */Block.__(11, [
+                      str_rest_000,
+                      str_rest_001
+                    ]);
+                  return pad_prec_scanf(ib, str_rest, readers, pad, /* No_precision */0, scan, token);
+              case /* Formatting_gen */18 :
+                  var match$1 = rest[0];
+                  if (match$1.tag) {
+                    var scan$1 = function (width, param, ib) {
+                      return scan_string(/* "[" */91, width, ib);
+                    };
+                    return pad_prec_scanf(ib, CamlinternalFormatBasics.concat_fmt(match$1[0][0], rest[1]), readers, pad, /* No_precision */0, scan$1, token);
+                  }
+                  var scan$2 = function (width, param, ib) {
+                    return scan_string(/* "{" */123, width, ib);
+                  };
+                  return pad_prec_scanf(ib, CamlinternalFormatBasics.concat_fmt(match$1[0][0], rest[1]), readers, pad, /* No_precision */0, scan$2, token);
+              default:
+                
+            }
+          }
+          var scan$3 = function (width, param, ib) {
+            return scan_string(undefined, width, ib);
+          };
+          return pad_prec_scanf(ib, rest, readers, pad, /* No_precision */0, scan$3, token);
+      case /* Caml_string */3 :
+          var scan$4 = function (width, param, ib) {
+            return scan_caml_string(width, ib);
+          };
+          return pad_prec_scanf(ib, fmt[1], readers, fmt[0], /* No_precision */0, scan$4, token);
+      case /* Int */4 :
+          var c$2 = integer_conversion_of_char(CamlinternalFormat.char_of_iconv(fmt[0]));
+          var scan$5 = (function(c$2){
+          return function scan$5(width, param, ib) {
+            return scan_int_conversion(c$2, width, ib);
+          }
+          }(c$2));
+          return pad_prec_scanf(ib, fmt[3], readers, fmt[1], fmt[2], scan$5, (function(c$2){
+                    return function (param) {
+                      return Caml_format.caml_int_of_string(token_int_literal(c$2, param));
+                    }
+                    }(c$2)));
+      case /* Int32 */5 :
+          var c$3 = integer_conversion_of_char(CamlinternalFormat.char_of_iconv(fmt[0]));
+          var scan$6 = (function(c$3){
+          return function scan$6(width, param, ib) {
+            return scan_int_conversion(c$3, width, ib);
+          }
+          }(c$3));
+          return pad_prec_scanf(ib, fmt[3], readers, fmt[1], fmt[2], scan$6, (function(c$3){
+                    return function (param) {
+                      return Caml_format.caml_int32_of_string(token_int_literal(c$3, param));
+                    }
+                    }(c$3)));
+      case /* Nativeint */6 :
+          var c$4 = integer_conversion_of_char(CamlinternalFormat.char_of_iconv(fmt[0]));
+          var scan$7 = (function(c$4){
+          return function scan$7(width, param, ib) {
+            return scan_int_conversion(c$4, width, ib);
+          }
+          }(c$4));
+          return pad_prec_scanf(ib, fmt[3], readers, fmt[1], fmt[2], scan$7, (function(c$4){
+                    return function (param) {
+                      return Caml_format.caml_nativeint_of_string(token_int_literal(c$4, param));
+                    }
+                    }(c$4)));
+      case /* Int64 */7 :
+          var c$5 = integer_conversion_of_char(CamlinternalFormat.char_of_iconv(fmt[0]));
+          var scan$8 = (function(c$5){
+          return function scan$8(width, param, ib) {
+            return scan_int_conversion(c$5, width, ib);
+          }
+          }(c$5));
+          return pad_prec_scanf(ib, fmt[3], readers, fmt[1], fmt[2], scan$8, (function(c$5){
+                    return function (param) {
+                      return Caml_format.caml_int64_of_string(token_int_literal(c$5, param));
+                    }
+                    }(c$5)));
+      case /* Float */8 :
+          var match$2 = fmt[0];
+          if (match$2 !== 15) {
+            if (match$2 >= 16) {
+              return pad_prec_scanf(ib, fmt[3], readers, fmt[1], fmt[2], scan_hex_float, token_float);
+            } else {
+              return pad_prec_scanf(ib, fmt[3], readers, fmt[1], fmt[2], scan_float, token_float);
+            }
+          } else {
+            return pad_prec_scanf(ib, fmt[3], readers, fmt[1], fmt[2], scan_caml_float, token_float);
+          }
+      case /* Bool */9 :
+          var scan$9 = function (param, param$1, ib) {
+            var c = checked_peek_char(ib);
+            var m;
+            if (c !== 102) {
+              if (c !== 116) {
+                var s = Curry._1(Printf.sprintf(/* Format */[
+                          /* String_literal */Block.__(11, [
+                              "the character ",
+                              /* Caml_char */Block.__(1, [/* String_literal */Block.__(11, [
+                                      " cannot start a boolean",
+                                      /* End_of_format */0
+                                    ])])
+                            ]),
+                          "the character %C cannot start a boolean"
+                        ]), c);
+                throw {
+                      RE_EXN_ID: Scan_failure,
+                      _1: s,
+                      Error: new Error()
+                    };
+              }
+              m = 4;
+            } else {
+              m = 5;
+            }
+            return scan_string(undefined, m, ib);
+          };
+          return pad_prec_scanf(ib, fmt[1], readers, fmt[0], /* No_precision */0, scan$9, token_bool);
+      case /* Flush */10 :
+          if (end_of_input(ib)) {
+            _fmt = fmt[0];
             continue ;
-        case /* Formatting_gen */18 :
-            var match$6 = fmt[0];
+          }
+          throw {
+                RE_EXN_ID: Scan_failure,
+                _1: "end of input not found",
+                Error: new Error()
+              };
+      case /* String_literal */11 :
+          $$String.iter((function (param) {
+                  return check_char(ib, param);
+                }), fmt[0]);
+          _fmt = fmt[1];
+          continue ;
+      case /* Char_literal */12 :
+          check_char(ib, fmt[0]);
+          _fmt = fmt[1];
+          continue ;
+      case /* Format_arg */13 :
+          var pad_opt = fmt[0];
+          scan_caml_string(pad_opt !== undefined ? pad_opt : Pervasives.max_int, ib);
+          var s = token(ib);
+          var fmt$1;
+          try {
+            fmt$1 = CamlinternalFormat.format_of_string_fmtty(s, fmt[1]);
+          }
+          catch (raw_msg){
+            var msg = Caml_js_exceptions.internalToOCamlException(raw_msg);
+            if (msg.RE_EXN_ID === "Failure") {
+              throw {
+                    RE_EXN_ID: Scan_failure,
+                    _1: msg._1,
+                    Error: new Error()
+                  };
+            }
+            throw msg;
+          }
+          return /* Cons */[
+                  fmt$1,
+                  make_scanf(ib, fmt[2], readers)
+                ];
+      case /* Format_subst */14 :
+          var fmtty = fmt[1];
+          var pad_opt$1 = fmt[0];
+          scan_caml_string(pad_opt$1 !== undefined ? pad_opt$1 : Pervasives.max_int, ib);
+          var s$1 = token(ib);
+          var match$3;
+          try {
+            var fmt$2 = CamlinternalFormat.fmt_ebb_of_string(undefined, s$1);
+            var fmt$prime = CamlinternalFormat.fmt_ebb_of_string(undefined, s$1);
+            match$3 = /* tuple */[
+              CamlinternalFormat.type_format(fmt$2[0], CamlinternalFormatBasics.erase_rel(fmtty)),
+              CamlinternalFormat.type_format(fmt$prime[0], CamlinternalFormatBasics.erase_rel(CamlinternalFormat.symm(fmtty)))
+            ];
+          }
+          catch (raw_msg$1){
+            var msg$1 = Caml_js_exceptions.internalToOCamlException(raw_msg$1);
+            if (msg$1.RE_EXN_ID === "Failure") {
+              throw {
+                    RE_EXN_ID: Scan_failure,
+                    _1: msg$1._1,
+                    Error: new Error()
+                  };
+            }
+            throw msg$1;
+          }
+          return /* Cons */[
+                  /* Format */[
+                    match$3[0],
+                    s$1
+                  ],
+                  make_scanf(ib, CamlinternalFormatBasics.concat_fmt(match$3[1], fmt[2]), readers)
+                ];
+      case /* Alpha */15 :
+          throw {
+                RE_EXN_ID: "Invalid_argument",
+                _1: "scanf: bad conversion \"%a\"",
+                Error: new Error()
+              };
+      case /* Theta */16 :
+          throw {
+                RE_EXN_ID: "Invalid_argument",
+                _1: "scanf: bad conversion \"%t\"",
+                Error: new Error()
+              };
+      case /* Formatting_lit */17 :
+          $$String.iter((function (param) {
+                  return check_char(ib, param);
+                }), CamlinternalFormat.string_of_formatting_lit(fmt[0]));
+          _fmt = fmt[1];
+          continue ;
+      case /* Formatting_gen */18 :
+          var match$4 = fmt[0];
+          if (match$4.tag) {
             check_char(ib, /* "@" */64);
-            if (match$6.tag) {
-              check_char(ib, /* "[" */91);
-              _fmt = CamlinternalFormatBasics.concat_fmt(match$6[0][0], fmt[1]);
-              continue ;
-            } else {
-              check_char(ib, /* "{" */123);
-              _fmt = CamlinternalFormatBasics.concat_fmt(match$6[0][0], fmt[1]);
-              continue ;
-            }
-        case /* Reader */19 :
-            if (readers) {
-              var x = Curry._1(readers[0], ib);
-              return /* Cons */[
-                      x,
-                      make_scanf(ib, fmt[0], readers[1])
-                    ];
-            } else {
-              throw [
-                    Caml_builtin_exceptions.invalid_argument,
-                    "scanf: missing reader"
-                  ];
-            }
-        case /* Scan_char_set */20 :
-            var rest$1 = fmt[2];
-            var char_set = fmt[1];
-            var width_opt = fmt[0];
-            if (typeof rest$1 !== "number" && rest$1.tag === /* Formatting_lit */17) {
-              var match$7 = stopper_of_formatting_lit(rest$1[0]);
-              var width = width_of_pad_opt(width_opt);
-              scan_chars_in_char_set(char_set, match$7[0], width, ib);
-              var s$2 = token(ib);
-              var str_rest_000$1 = match$7[1];
-              var str_rest_001$1 = rest$1[1];
-              var str_rest$1 = /* String_literal */Block.__(11, [
-                  str_rest_000$1,
-                  str_rest_001$1
-                ]);
-              return /* Cons */[
-                      s$2,
-                      make_scanf(ib, str_rest$1, readers)
-                    ];
-            }
-            var width$1 = width_of_pad_opt(width_opt);
-            scan_chars_in_char_set(char_set, undefined, width$1, ib);
-            var s$3 = token(ib);
+            check_char(ib, /* "[" */91);
+            _fmt = CamlinternalFormatBasics.concat_fmt(match$4[0][0], fmt[1]);
+            continue ;
+          }
+          check_char(ib, /* "@" */64);
+          check_char(ib, /* "{" */123);
+          _fmt = CamlinternalFormatBasics.concat_fmt(match$4[0][0], fmt[1]);
+          continue ;
+      case /* Reader */19 :
+          if (readers) {
+            var x = Curry._1(readers[0], ib);
             return /* Cons */[
-                    s$3,
-                    make_scanf(ib, rest$1, readers)
+                    x,
+                    make_scanf(ib, fmt[0], readers[1])
                   ];
-        case /* Scan_get_counter */21 :
-            var count = get_counter(ib, fmt[0]);
+          }
+          throw {
+                RE_EXN_ID: "Invalid_argument",
+                _1: "scanf: missing reader",
+                Error: new Error()
+              };
+      case /* Scan_char_set */20 :
+          var rest$1 = fmt[2];
+          var char_set = fmt[1];
+          var width_opt = fmt[0];
+          if (typeof rest$1 !== "number" && rest$1.tag === /* Formatting_lit */17) {
+            var match$5 = stopper_of_formatting_lit(rest$1[0]);
+            var width = width_opt !== undefined ? width_opt : Pervasives.max_int;
+            scan_chars_in_char_set(char_set, match$5[0], width, ib);
+            var s$2 = token(ib);
+            var str_rest_000$1 = match$5[1];
+            var str_rest_001$1 = rest$1[1];
+            var str_rest$1 = /* String_literal */Block.__(11, [
+                str_rest_000$1,
+                str_rest_001$1
+              ]);
             return /* Cons */[
-                    count,
-                    make_scanf(ib, fmt[1], readers)
+                    s$2,
+                    make_scanf(ib, str_rest$1, readers)
                   ];
-        case /* Scan_next_char */22 :
-            var c$6 = checked_peek_char(ib);
-            return /* Cons */[
-                    c$6,
-                    make_scanf(ib, fmt[0], readers)
-                  ];
-        case /* Ignored_param */23 :
-            var match$8 = CamlinternalFormat.param_format_of_ignored_format(fmt[0], fmt[1]);
-            var match$9 = make_scanf(ib, match$8[0], readers);
-            if (match$9) {
-              return match$9[1];
-            } else {
-              throw [
-                    Caml_builtin_exceptions.assert_failure,
-                    /* tuple */[
-                      "scanf.ml",
-                      1455,
-                      13
-                    ]
-                  ];
-            }
-        case /* Custom */24 :
-            throw [
-                  Caml_builtin_exceptions.invalid_argument,
-                  "scanf: bad conversion \"%?\" (custom converter)"
+          }
+          var width$1 = width_opt !== undefined ? width_opt : Pervasives.max_int;
+          scan_chars_in_char_set(char_set, undefined, width$1, ib);
+          var s$3 = token(ib);
+          return /* Cons */[
+                  s$3,
+                  make_scanf(ib, rest$1, readers)
                 ];
-        
-      }
+      case /* Scan_get_counter */21 :
+          var count = get_counter(ib, fmt[0]);
+          return /* Cons */[
+                  count,
+                  make_scanf(ib, fmt[1], readers)
+                ];
+      case /* Scan_next_char */22 :
+          var c$6 = checked_peek_char(ib);
+          return /* Cons */[
+                  c$6,
+                  make_scanf(ib, fmt[0], readers)
+                ];
+      case /* Ignored_param */23 :
+          var fmt$prime$1 = CamlinternalFormat.param_format_of_ignored_format(fmt[0], fmt[1]);
+          var match$6 = make_scanf(ib, fmt$prime$1[0], readers);
+          if (match$6) {
+            return match$6[1];
+          }
+          throw {
+                RE_EXN_ID: "Assert_failure",
+                _1: /* tuple */[
+                  "scanf.ml",
+                  1455,
+                  13
+                ],
+                Error: new Error()
+              };
+      case /* Custom */24 :
+          throw {
+                RE_EXN_ID: "Invalid_argument",
+                _1: "scanf: bad conversion \"%?\" (custom converter)",
+                Error: new Error()
+              };
+      
     }
   };
 }
@@ -1949,10 +1959,11 @@ function pad_prec_scanf(ib, fmt, readers, pad, prec, scan, token) {
   if (typeof pad === "number") {
     if (typeof prec === "number") {
       if (prec !== 0) {
-        throw [
-              Caml_builtin_exceptions.invalid_argument,
-              "scanf: bad conversion \"%*\""
-            ];
+        throw {
+              RE_EXN_ID: "Invalid_argument",
+              _1: "scanf: bad conversion \"%*\"",
+              Error: new Error()
+            };
       }
       Curry._3(scan, Pervasives.max_int, Pervasives.max_int, ib);
       var x = Curry._1(token, ib);
@@ -1960,27 +1971,30 @@ function pad_prec_scanf(ib, fmt, readers, pad, prec, scan, token) {
               x,
               make_scanf(ib, fmt, readers)
             ];
-    } else {
-      Curry._3(scan, Pervasives.max_int, prec[0], ib);
-      var x$1 = Curry._1(token, ib);
-      return /* Cons */[
-              x$1,
-              make_scanf(ib, fmt, readers)
-            ];
     }
-  } else if (pad.tag) {
-    throw [
-          Caml_builtin_exceptions.invalid_argument,
-          "scanf: bad conversion \"%*\""
-        ];
-  } else if (pad[0] !== 0) {
+    Curry._3(scan, Pervasives.max_int, prec[0], ib);
+    var x$1 = Curry._1(token, ib);
+    return /* Cons */[
+            x$1,
+            make_scanf(ib, fmt, readers)
+          ];
+  }
+  if (pad.tag) {
+    throw {
+          RE_EXN_ID: "Invalid_argument",
+          _1: "scanf: bad conversion \"%*\"",
+          Error: new Error()
+        };
+  }
+  if (pad[0] !== 0) {
     var w = pad[1];
     if (typeof prec === "number") {
       if (prec !== 0) {
-        throw [
-              Caml_builtin_exceptions.invalid_argument,
-              "scanf: bad conversion \"%*\""
-            ];
+        throw {
+              RE_EXN_ID: "Invalid_argument",
+              _1: "scanf: bad conversion \"%*\"",
+              Error: new Error()
+            };
       }
       Curry._3(scan, w, Pervasives.max_int, ib);
       var x$2 = Curry._1(token, ib);
@@ -1988,20 +2002,19 @@ function pad_prec_scanf(ib, fmt, readers, pad, prec, scan, token) {
               x$2,
               make_scanf(ib, fmt, readers)
             ];
-    } else {
-      Curry._3(scan, w, prec[0], ib);
-      var x$3 = Curry._1(token, ib);
-      return /* Cons */[
-              x$3,
-              make_scanf(ib, fmt, readers)
-            ];
     }
-  } else {
-    throw [
-          Caml_builtin_exceptions.invalid_argument,
-          "scanf: bad conversion \"%-\""
-        ];
+    Curry._3(scan, w, prec[0], ib);
+    var x$3 = Curry._1(token, ib);
+    return /* Cons */[
+            x$3,
+            make_scanf(ib, fmt, readers)
+          ];
   }
+  throw {
+        RE_EXN_ID: "Invalid_argument",
+        _1: "scanf: bad conversion \"%-\"",
+        Error: new Error()
+      };
 }
 
 function kscanf(ib, ef, param) {
@@ -2009,39 +2022,40 @@ function kscanf(ib, ef, param) {
   var fmt = param[0];
   var k = function (readers, f) {
     $$Buffer.reset(ib.ic_token_buffer);
-    var match;
+    var args;
     try {
-      match = /* Args */Block.__(0, [make_scanf(ib, fmt, readers)]);
+      args = /* Args */Block.__(0, [make_scanf(ib, fmt, readers)]);
     }
     catch (raw_exc){
       var exc = Caml_js_exceptions.internalToOCamlException(raw_exc);
-      if (exc[0] === Scan_failure || exc[0] === Caml_builtin_exceptions.failure || exc === Caml_builtin_exceptions.end_of_file) {
-        match = /* Exc */Block.__(1, [exc]);
-      } else if (exc[0] === Caml_builtin_exceptions.invalid_argument) {
-        var s = exc[1] + (" in format \"" + ($$String.escaped(str) + "\""));
-        throw [
-              Caml_builtin_exceptions.invalid_argument,
-              s
-            ];
+      if (exc.RE_EXN_ID === Scan_failure || exc.RE_EXN_ID === "Failure" || exc.RE_EXN_ID === "End_of_file") {
+        args = /* Exc */Block.__(1, [exc]);
       } else {
+        if (exc.RE_EXN_ID === "Invalid_argument") {
+          var s = exc._1 + (" in format \"" + ($$String.escaped(str) + "\""));
+          throw {
+                RE_EXN_ID: "Invalid_argument",
+                _1: s,
+                Error: new Error()
+              };
+        }
         throw exc;
       }
     }
-    if (match.tag) {
-      return Curry._2(ef, ib, match[0]);
+    if (args.tag) {
+      return Curry._2(ef, ib, args[0]);
     } else {
       var _f = f;
-      var _args = match[0];
+      var _args = args[0];
       while(true) {
-        var args = _args;
+        var args$1 = _args;
         var f$1 = _f;
-        if (args) {
-          _args = args[1];
-          _f = Curry._1(f$1, args[0]);
-          continue ;
-        } else {
+        if (!args$1) {
           return f$1;
         }
+        _args = args$1[1];
+        _f = Curry._1(f$1, args$1[0]);
+        continue ;
       };
     }
   };
@@ -2071,15 +2085,16 @@ function bscanf_format(ib, format, f) {
   try {
     tmp = CamlinternalFormat.format_of_string_format(str, format);
   }
-  catch (raw_exn){
-    var exn = Caml_js_exceptions.internalToOCamlException(raw_exn);
-    if (exn[0] === Caml_builtin_exceptions.failure) {
-      throw [
-            Scan_failure,
-            exn[1]
-          ];
+  catch (raw_msg){
+    var msg = Caml_js_exceptions.internalToOCamlException(raw_msg);
+    if (msg.RE_EXN_ID === "Failure") {
+      throw {
+            RE_EXN_ID: Scan_failure,
+            _1: msg._1,
+            Error: new Error()
+          };
     }
-    throw exn;
+    throw msg;
   }
   return Curry._1(f, tmp);
 }
@@ -2092,7 +2107,7 @@ function string_to_String(s) {
   var l = s.length;
   var b = $$Buffer.create(l + 2 | 0);
   $$Buffer.add_char(b, /* "\"" */34);
-  for(var i = 0 ,i_finish = l - 1 | 0; i <= i_finish; ++i){
+  for(var i = 0; i < l; ++i){
     var c = Caml_string.get(s, i);
     if (c === /* "\"" */34) {
       $$Buffer.add_char(b, /* "\\" */92);

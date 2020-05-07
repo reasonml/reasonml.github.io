@@ -11,10 +11,9 @@ function caml_weak_create(n) {
 function caml_weak_set(xs, i, v) {
   if (v !== undefined) {
     xs[i] = Caml_option.valFromOption(v);
-    return /* () */0;
-  } else {
-    return /* () */0;
+    return ;
   }
+  
 }
 
 function caml_weak_get(xs, i) {
@@ -22,9 +21,9 @@ function caml_weak_get(xs, i) {
 }
 
 function caml_weak_get_copy(xs, i) {
-  var match = xs[i];
-  if (match !== undefined) {
-    return Caml_option.some(Caml_obj.caml_obj_dup(match));
+  var x = xs[i];
+  if (x !== undefined) {
+    return Caml_option.some(Caml_obj.caml_obj_dup(x));
   }
   
 }

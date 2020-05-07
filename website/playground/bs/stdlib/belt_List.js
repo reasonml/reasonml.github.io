@@ -15,9 +15,8 @@ function head(x) {
 function headExn(x) {
   if (x) {
     return x[0];
-  } else {
-    throw new Error("headExn");
   }
+  throw new Error("headExn");
 }
 
 function tail(x) {
@@ -30,9 +29,8 @@ function tail(x) {
 function tailExn(x) {
   if (x) {
     return x[1];
-  } else {
-    throw new Error("tailExn");
   }
+  throw new Error("tailExn");
 }
 
 function add(xs, x) {
@@ -51,17 +49,15 @@ function get(x, n) {
     while(true) {
       var n$1 = _n;
       var x$1 = _x;
-      if (x$1) {
-        if (n$1 === 0) {
-          return Caml_option.some(x$1[0]);
-        } else {
-          _n = n$1 - 1 | 0;
-          _x = x$1[1];
-          continue ;
-        }
-      } else {
+      if (!x$1) {
         return ;
       }
+      if (n$1 === 0) {
+        return Caml_option.some(x$1[0]);
+      }
+      _n = n$1 - 1 | 0;
+      _x = x$1[1];
+      continue ;
     };
   }
 }
@@ -78,14 +74,12 @@ function getExn(x, n) {
     if (x$1) {
       if (n$1 === 0) {
         return x$1[0];
-      } else {
-        _n = n$1 - 1 | 0;
-        _x = x$1[1];
-        continue ;
       }
-    } else {
-      throw new Error("getExn");
+      _n = n$1 - 1 | 0;
+      _x = x$1[1];
+      continue ;
     }
+    throw new Error("getExn");
   };
 }
 
@@ -94,27 +88,25 @@ function partitionAux(p, _cell, _precX, _precY) {
     var precY = _precY;
     var precX = _precX;
     var cell = _cell;
-    if (cell) {
-      var t = cell[1];
-      var h = cell[0];
-      var next = /* :: */[
-        h,
-        /* [] */0
-      ];
-      if (p(h)) {
-        precX[1] = next;
-        _precX = next;
-        _cell = t;
-        continue ;
-      } else {
-        precY[1] = next;
-        _precY = next;
-        _cell = t;
-        continue ;
-      }
-    } else {
-      return /* () */0;
+    if (!cell) {
+      return ;
     }
+    var t = cell[1];
+    var h = cell[0];
+    var next = /* :: */[
+      h,
+      /* [] */0
+    ];
+    if (p(h)) {
+      precX[1] = next;
+      _precX = next;
+      _cell = t;
+      continue ;
+    }
+    precY[1] = next;
+    _precY = next;
+    _cell = t;
+    continue ;
   };
 }
 
@@ -123,25 +115,24 @@ function splitAux(_cell, _precX, _precY) {
     var precY = _precY;
     var precX = _precX;
     var cell = _cell;
-    if (cell) {
-      var match = cell[0];
-      var nextA = /* :: */[
-        match[0],
-        /* [] */0
-      ];
-      var nextB = /* :: */[
-        match[1],
-        /* [] */0
-      ];
-      precX[1] = nextA;
-      precY[1] = nextB;
-      _precY = nextB;
-      _precX = nextA;
-      _cell = cell[1];
-      continue ;
-    } else {
-      return /* () */0;
+    if (!cell) {
+      return ;
     }
+    var match = cell[0];
+    var nextA = /* :: */[
+      match[0],
+      /* [] */0
+    ];
+    var nextB = /* :: */[
+      match[1],
+      /* [] */0
+    ];
+    precX[1] = nextA;
+    precY[1] = nextB;
+    _precY = nextB;
+    _precX = nextA;
+    _cell = cell[1];
+    continue ;
   };
 }
 
@@ -149,18 +140,17 @@ function copyAuxCont(_cellX, _prec) {
   while(true) {
     var prec = _prec;
     var cellX = _cellX;
-    if (cellX) {
-      var next = /* :: */[
-        cellX[0],
-        /* [] */0
-      ];
-      prec[1] = next;
-      _prec = next;
-      _cellX = cellX[1];
-      continue ;
-    } else {
+    if (!cellX) {
       return prec;
     }
+    var next = /* :: */[
+      cellX[0],
+      /* [] */0
+    ];
+    prec[1] = next;
+    _prec = next;
+    _cellX = cellX[1];
+    continue ;
   };
 }
 
@@ -168,25 +158,23 @@ function copyAuxWitFilter(f, _cellX, _prec) {
   while(true) {
     var prec = _prec;
     var cellX = _cellX;
-    if (cellX) {
-      var t = cellX[1];
-      var h = cellX[0];
-      if (f(h)) {
-        var next = /* :: */[
-          h,
-          /* [] */0
-        ];
-        prec[1] = next;
-        _prec = next;
-        _cellX = t;
-        continue ;
-      } else {
-        _cellX = t;
-        continue ;
-      }
-    } else {
-      return /* () */0;
+    if (!cellX) {
+      return ;
     }
+    var t = cellX[1];
+    var h = cellX[0];
+    if (f(h)) {
+      var next = /* :: */[
+        h,
+        /* [] */0
+      ];
+      prec[1] = next;
+      _prec = next;
+      _cellX = t;
+      continue ;
+    }
+    _cellX = t;
+    continue ;
   };
 }
 
@@ -195,27 +183,25 @@ function copyAuxWithFilterIndex(f, _cellX, _prec, _i) {
     var i = _i;
     var prec = _prec;
     var cellX = _cellX;
-    if (cellX) {
-      var t = cellX[1];
-      var h = cellX[0];
-      if (f(h, i)) {
-        var next = /* :: */[
-          h,
-          /* [] */0
-        ];
-        prec[1] = next;
-        _i = i + 1 | 0;
-        _prec = next;
-        _cellX = t;
-        continue ;
-      } else {
-        _i = i + 1 | 0;
-        _cellX = t;
-        continue ;
-      }
-    } else {
-      return /* () */0;
+    if (!cellX) {
+      return ;
     }
+    var t = cellX[1];
+    var h = cellX[0];
+    if (f(h, i)) {
+      var next = /* :: */[
+        h,
+        /* [] */0
+      ];
+      prec[1] = next;
+      _i = i + 1 | 0;
+      _prec = next;
+      _cellX = t;
+      continue ;
+    }
+    _i = i + 1 | 0;
+    _cellX = t;
+    continue ;
   };
 }
 
@@ -223,25 +209,23 @@ function copyAuxWitFilterMap(f, _cellX, _prec) {
   while(true) {
     var prec = _prec;
     var cellX = _cellX;
-    if (cellX) {
-      var t = cellX[1];
-      var match = f(cellX[0]);
-      if (match !== undefined) {
-        var next = /* :: */[
-          Caml_option.valFromOption(match),
-          /* [] */0
-        ];
-        prec[1] = next;
-        _prec = next;
-        _cellX = t;
-        continue ;
-      } else {
-        _cellX = t;
-        continue ;
-      }
-    } else {
-      return /* () */0;
+    if (!cellX) {
+      return ;
     }
+    var t = cellX[1];
+    var h = f(cellX[0]);
+    if (h !== undefined) {
+      var next = /* :: */[
+        Caml_option.valFromOption(h),
+        /* [] */0
+      ];
+      prec[1] = next;
+      _prec = next;
+      _cellX = t;
+      continue ;
+    }
+    _cellX = t;
+    continue ;
   };
 }
 
@@ -249,25 +233,23 @@ function removeAssocAuxWithMap(_cellX, x, _prec, f) {
   while(true) {
     var prec = _prec;
     var cellX = _cellX;
-    if (cellX) {
-      var t = cellX[1];
-      var h = cellX[0];
-      if (f(h[0], x)) {
-        prec[1] = t;
-        return true;
-      } else {
-        var next = /* :: */[
-          h,
-          /* [] */0
-        ];
-        prec[1] = next;
-        _prec = next;
-        _cellX = t;
-        continue ;
-      }
-    } else {
+    if (!cellX) {
       return false;
     }
+    var t = cellX[1];
+    var h = cellX[0];
+    if (f(h[0], x)) {
+      prec[1] = t;
+      return true;
+    }
+    var next = /* :: */[
+      h,
+      /* [] */0
+    ];
+    prec[1] = next;
+    _prec = next;
+    _cellX = t;
+    continue ;
   };
 }
 
@@ -275,31 +257,29 @@ function setAssocAuxWithMap(_cellX, x, k, _prec, eq) {
   while(true) {
     var prec = _prec;
     var cellX = _cellX;
-    if (cellX) {
-      var t = cellX[1];
-      var h = cellX[0];
-      if (eq(h[0], x)) {
-        prec[1] = /* :: */[
-          /* tuple */[
-            x,
-            k
-          ],
-          t
-        ];
-        return true;
-      } else {
-        var next = /* :: */[
-          h,
-          /* [] */0
-        ];
-        prec[1] = next;
-        _prec = next;
-        _cellX = t;
-        continue ;
-      }
-    } else {
+    if (!cellX) {
       return false;
     }
+    var t = cellX[1];
+    var h = cellX[0];
+    if (eq(h[0], x)) {
+      prec[1] = /* :: */[
+        /* tuple */[
+          x,
+          k
+        ],
+        t
+      ];
+      return true;
+    }
+    var next = /* :: */[
+      h,
+      /* [] */0
+    ];
+    prec[1] = next;
+    _prec = next;
+    _cellX = t;
+    continue ;
   };
 }
 
@@ -307,18 +287,17 @@ function copyAuxWithMap(_cellX, _prec, f) {
   while(true) {
     var prec = _prec;
     var cellX = _cellX;
-    if (cellX) {
-      var next = /* :: */[
-        f(cellX[0]),
-        /* [] */0
-      ];
-      prec[1] = next;
-      _prec = next;
-      _cellX = cellX[1];
-      continue ;
-    } else {
-      return /* () */0;
+    if (!cellX) {
+      return ;
     }
+    var next = /* :: */[
+      f(cellX[0]),
+      /* [] */0
+    ];
+    prec[1] = next;
+    _prec = next;
+    _cellX = cellX[1];
+    continue ;
   };
 }
 
@@ -327,22 +306,24 @@ function zipAux(_cellX, _cellY, _prec) {
     var prec = _prec;
     var cellY = _cellY;
     var cellX = _cellX;
-    if (cellX && cellY) {
-      var next = /* :: */[
-        /* tuple */[
-          cellX[0],
-          cellY[0]
-        ],
-        /* [] */0
-      ];
-      prec[1] = next;
-      _prec = next;
-      _cellY = cellY[1];
-      _cellX = cellX[1];
-      continue ;
-    } else {
-      return /* () */0;
+    if (!cellX) {
+      return ;
     }
+    if (!cellY) {
+      return ;
+    }
+    var next = /* :: */[
+      /* tuple */[
+        cellX[0],
+        cellY[0]
+      ],
+      /* [] */0
+    ];
+    prec[1] = next;
+    _prec = next;
+    _cellY = cellY[1];
+    _cellX = cellX[1];
+    continue ;
   };
 }
 
@@ -351,19 +332,21 @@ function copyAuxWithMap2(f, _cellX, _cellY, _prec) {
     var prec = _prec;
     var cellY = _cellY;
     var cellX = _cellX;
-    if (cellX && cellY) {
-      var next = /* :: */[
-        f(cellX[0], cellY[0]),
-        /* [] */0
-      ];
-      prec[1] = next;
-      _prec = next;
-      _cellY = cellY[1];
-      _cellX = cellX[1];
-      continue ;
-    } else {
-      return /* () */0;
+    if (!cellX) {
+      return ;
     }
+    if (!cellY) {
+      return ;
+    }
+    var next = /* :: */[
+      f(cellX[0], cellY[0]),
+      /* [] */0
+    ];
+    prec[1] = next;
+    _prec = next;
+    _cellY = cellY[1];
+    _cellX = cellX[1];
+    continue ;
   };
 }
 
@@ -372,19 +355,18 @@ function copyAuxWithMapI(f, _i, _cellX, _prec) {
     var prec = _prec;
     var cellX = _cellX;
     var i = _i;
-    if (cellX) {
-      var next = /* :: */[
-        f(i, cellX[0]),
-        /* [] */0
-      ];
-      prec[1] = next;
-      _prec = next;
-      _cellX = cellX[1];
-      _i = i + 1 | 0;
-      continue ;
-    } else {
-      return /* () */0;
+    if (!cellX) {
+      return ;
     }
+    var next = /* :: */[
+      f(i, cellX[0]),
+      /* [] */0
+    ];
+    prec[1] = next;
+    _prec = next;
+    _cellX = cellX[1];
+    _i = i + 1 | 0;
+    continue ;
   };
 }
 
@@ -395,19 +377,19 @@ function takeAux(_n, _cell, _prec) {
     var n = _n;
     if (n === 0) {
       return true;
-    } else if (cell) {
-      var cell$1 = /* :: */[
-        cell[0],
-        /* [] */0
-      ];
-      prec[1] = cell$1;
-      _prec = cell$1;
-      _cell = cell[1];
-      _n = n - 1 | 0;
-      continue ;
-    } else {
+    }
+    if (!cell) {
       return false;
     }
+    var cell$1 = /* :: */[
+      cell[0],
+      /* [] */0
+    ];
+    prec[1] = cell$1;
+    _prec = cell$1;
+    _cell = cell[1];
+    _n = n - 1 | 0;
+    continue ;
   };
 }
 
@@ -418,41 +400,41 @@ function splitAtAux(_n, _cell, _prec) {
     var n = _n;
     if (n === 0) {
       return cell;
-    } else if (cell) {
-      var cell$1 = /* :: */[
-        cell[0],
-        /* [] */0
-      ];
-      prec[1] = cell$1;
-      _prec = cell$1;
-      _cell = cell[1];
-      _n = n - 1 | 0;
-      continue ;
-    } else {
+    }
+    if (!cell) {
       return ;
     }
+    var cell$1 = /* :: */[
+      cell[0],
+      /* [] */0
+    ];
+    prec[1] = cell$1;
+    _prec = cell$1;
+    _cell = cell[1];
+    _n = n - 1 | 0;
+    continue ;
   };
 }
 
 function take(lst, n) {
   if (n < 0) {
     return ;
-  } else if (n === 0) {
+  }
+  if (n === 0) {
     return /* [] */0;
-  } else if (lst) {
-    var cell = /* :: */[
-      lst[0],
-      /* [] */0
-    ];
-    var has = takeAux(n - 1 | 0, lst[1], cell);
-    if (has) {
-      return cell;
-    } else {
-      return ;
-    }
-  } else {
+  }
+  if (!lst) {
     return ;
   }
+  var cell = /* :: */[
+    lst[0],
+    /* [] */0
+  ];
+  var has = takeAux(n - 1 | 0, lst[1], cell);
+  if (has) {
+    return cell;
+  }
+  
 }
 
 function drop(lst, n) {
@@ -466,13 +448,13 @@ function drop(lst, n) {
       var l = _l;
       if (n$1 === 0) {
         return l;
-      } else if (l) {
-        _n = n$1 - 1 | 0;
-        _l = l[1];
-        continue ;
-      } else {
+      }
+      if (!l) {
         return ;
       }
+      _n = n$1 - 1 | 0;
+      _l = l[1];
+      continue ;
     };
   }
 }
@@ -480,54 +462,52 @@ function drop(lst, n) {
 function splitAt(lst, n) {
   if (n < 0) {
     return ;
-  } else if (n === 0) {
+  }
+  if (n === 0) {
     return /* tuple */[
             /* [] */0,
             lst
           ];
-  } else if (lst) {
-    var cell = /* :: */[
-      lst[0],
-      /* [] */0
-    ];
-    var rest = splitAtAux(n - 1 | 0, lst[1], cell);
-    if (rest !== undefined) {
-      return /* tuple */[
-              cell,
-              rest
-            ];
-    } else {
-      return ;
-    }
-  } else {
+  }
+  if (!lst) {
     return ;
   }
+  var cell = /* :: */[
+    lst[0],
+    /* [] */0
+  ];
+  var rest = splitAtAux(n - 1 | 0, lst[1], cell);
+  if (rest !== undefined) {
+    return /* tuple */[
+            cell,
+            rest
+          ];
+  }
+  
 }
 
 function concat(xs, ys) {
-  if (xs) {
-    var cell = /* :: */[
-      xs[0],
-      /* [] */0
-    ];
-    copyAuxCont(xs[1], cell)[1] = ys;
-    return cell;
-  } else {
+  if (!xs) {
     return ys;
   }
+  var cell = /* :: */[
+    xs[0],
+    /* [] */0
+  ];
+  copyAuxCont(xs[1], cell)[1] = ys;
+  return cell;
 }
 
 function mapU(xs, f) {
-  if (xs) {
-    var cell = /* :: */[
-      f(xs[0]),
-      /* [] */0
-    ];
-    copyAuxWithMap(xs[1], cell, f);
-    return cell;
-  } else {
+  if (!xs) {
     return /* [] */0;
   }
+  var cell = /* :: */[
+    f(xs[0]),
+    /* [] */0
+  ];
+  copyAuxWithMap(xs[1], cell, f);
+  return cell;
 }
 
 function map(xs, f) {
@@ -535,16 +515,18 @@ function map(xs, f) {
 }
 
 function zipByU(l1, l2, f) {
-  if (l1 && l2) {
-    var cell = /* :: */[
-      f(l1[0], l2[0]),
-      /* [] */0
-    ];
-    copyAuxWithMap2(f, l1[1], l2[1], cell);
-    return cell;
-  } else {
+  if (!l1) {
     return /* [] */0;
   }
+  if (!l2) {
+    return /* [] */0;
+  }
+  var cell = /* :: */[
+    f(l1[0], l2[0]),
+    /* [] */0
+  ];
+  copyAuxWithMap2(f, l1[1], l2[1], cell);
+  return cell;
 }
 
 function zipBy(l1, l2, f) {
@@ -552,16 +534,15 @@ function zipBy(l1, l2, f) {
 }
 
 function mapWithIndexU(xs, f) {
-  if (xs) {
-    var cell = /* :: */[
-      f(0, xs[0]),
-      /* [] */0
-    ];
-    copyAuxWithMapI(f, 1, xs[1], cell);
-    return cell;
-  } else {
+  if (!xs) {
     return /* [] */0;
   }
+  var cell = /* :: */[
+    f(0, xs[0]),
+    /* [] */0
+  ];
+  copyAuxWithMapI(f, 1, xs[1], cell);
+  return cell;
 }
 
 function mapWithIndex(xs, f) {
@@ -571,24 +552,23 @@ function mapWithIndex(xs, f) {
 function makeByU(n, f) {
   if (n <= 0) {
     return /* [] */0;
-  } else {
-    var headX = /* :: */[
-      f(0),
+  }
+  var headX = /* :: */[
+    f(0),
+    /* [] */0
+  ];
+  var cur = headX;
+  var i = 1;
+  while(i < n) {
+    var v = /* :: */[
+      f(i),
       /* [] */0
     ];
-    var cur = headX;
-    var i = 1;
-    while(i < n) {
-      var v = /* :: */[
-        f(i),
-        /* [] */0
-      ];
-      cur[1] = v;
-      cur = v;
-      i = i + 1 | 0;
-    };
-    return headX;
-  }
+    cur[1] = v;
+    cur = v;
+    i = i + 1 | 0;
+  };
+  return headX;
 }
 
 function makeBy(n, f) {
@@ -598,24 +578,23 @@ function makeBy(n, f) {
 function make(n, v) {
   if (n <= 0) {
     return /* [] */0;
-  } else {
-    var headX = /* :: */[
+  }
+  var headX = /* :: */[
+    v,
+    /* [] */0
+  ];
+  var cur = headX;
+  var i = 1;
+  while(i < n) {
+    var v$1 = /* :: */[
       v,
       /* [] */0
     ];
-    var cur = headX;
-    var i = 1;
-    while(i < n) {
-      var v$1 = /* :: */[
-        v,
-        /* [] */0
-      ];
-      cur[1] = v$1;
-      cur = v$1;
-      i = i + 1 | 0;
-    };
-    return headX;
-  }
+    cur[1] = v$1;
+    cur = v$1;
+    i = i + 1 | 0;
+  };
+  return headX;
 }
 
 function length(xs) {
@@ -624,13 +603,12 @@ function length(xs) {
   while(true) {
     var acc = _acc;
     var x = _x;
-    if (x) {
-      _acc = acc + 1 | 0;
-      _x = x[1];
-      continue ;
-    } else {
+    if (!x) {
       return acc;
     }
+    _acc = acc + 1 | 0;
+    _x = x[1];
+    continue ;
   };
 }
 
@@ -638,19 +616,17 @@ function fillAux(arr, _i, _x) {
   while(true) {
     var x = _x;
     var i = _i;
-    if (x) {
-      arr[i] = x[0];
-      _x = x[1];
-      _i = i + 1 | 0;
-      continue ;
-    } else {
-      return /* () */0;
+    if (!x) {
+      return ;
     }
+    arr[i] = x[0];
+    _x = x[1];
+    _i = i + 1 | 0;
+    continue ;
   };
 }
 
 function fromArray(a) {
-  var a$1 = a;
   var _i = a.length - 1 | 0;
   var _res = /* [] */0;
   while(true) {
@@ -658,14 +634,13 @@ function fromArray(a) {
     var i = _i;
     if (i < 0) {
       return res;
-    } else {
-      _res = /* :: */[
-        a$1[i],
-        res
-      ];
-      _i = i - 1 | 0;
-      continue ;
     }
+    _res = /* :: */[
+      a[i],
+      res
+    ];
+    _i = i - 1 | 0;
+    continue ;
   };
 }
 
@@ -686,16 +661,15 @@ function reverseConcat(_l1, _l2) {
   while(true) {
     var l2 = _l2;
     var l1 = _l1;
-    if (l1) {
-      _l2 = /* :: */[
-        l1[0],
-        l2
-      ];
-      _l1 = l1[1];
-      continue ;
-    } else {
+    if (!l1) {
       return l2;
     }
+    _l2 = /* :: */[
+      l1[0],
+      l2
+    ];
+    _l1 = l1[1];
+    continue ;
   };
 }
 
@@ -707,74 +681,67 @@ function flattenAux(_prec, _xs) {
   while(true) {
     var xs = _xs;
     var prec = _prec;
-    if (xs) {
-      _xs = xs[1];
-      _prec = copyAuxCont(xs[0], prec);
-      continue ;
-    } else {
+    if (!xs) {
       prec[1] = /* [] */0;
-      return /* () */0;
+      return ;
     }
+    _xs = xs[1];
+    _prec = copyAuxCont(xs[0], prec);
+    continue ;
   };
 }
 
 function flatten(_xs) {
   while(true) {
     var xs = _xs;
-    if (xs) {
-      var match = xs[0];
-      if (match) {
-        var cell = /* :: */[
-          match[0],
-          /* [] */0
-        ];
-        flattenAux(copyAuxCont(match[1], cell), xs[1]);
-        return cell;
-      } else {
-        _xs = xs[1];
-        continue ;
-      }
-    } else {
+    if (!xs) {
       return /* [] */0;
     }
+    var match = xs[0];
+    if (match) {
+      var cell = /* :: */[
+        match[0],
+        /* [] */0
+      ];
+      flattenAux(copyAuxCont(match[1], cell), xs[1]);
+      return cell;
+    }
+    _xs = xs[1];
+    continue ;
   };
 }
 
 function concatMany(xs) {
   var len = xs.length;
-  if (len !== 1) {
-    if (len !== 0) {
-      var len$1 = xs.length;
-      var v = xs[len$1 - 1 | 0];
-      for(var i = len$1 - 2 | 0; i >= 0; --i){
-        v = concat(xs[i], v);
-      }
-      return v;
-    } else {
-      return /* [] */0;
-    }
-  } else {
+  if (len === 1) {
     return xs[0];
   }
+  if (len === 0) {
+    return /* [] */0;
+  }
+  var len$1 = xs.length;
+  var v = xs[len$1 - 1 | 0];
+  for(var i = len$1 - 2 | 0; i >= 0; --i){
+    v = concat(xs[i], v);
+  }
+  return v;
 }
 
 function mapReverseU(l, f) {
-  var f$1 = f;
   var _accu = /* [] */0;
   var _xs = l;
   while(true) {
     var xs = _xs;
     var accu = _accu;
-    if (xs) {
-      _xs = xs[1];
-      _accu = /* :: */[
-        f$1(xs[0]),
-        accu
-      ];
-      continue ;
-    } else {
+    if (!xs) {
       return accu;
     }
+    _xs = xs[1];
+    _accu = /* :: */[
+      f(xs[0]),
+      accu
+    ];
+    continue ;
   };
 }
 
@@ -785,13 +752,12 @@ function mapReverse(l, f) {
 function forEachU(_xs, f) {
   while(true) {
     var xs = _xs;
-    if (xs) {
-      f(xs[0]);
-      _xs = xs[1];
-      continue ;
-    } else {
-      return /* () */0;
+    if (!xs) {
+      return ;
     }
+    f(xs[0]);
+    _xs = xs[1];
+    continue ;
   };
 }
 
@@ -802,18 +768,16 @@ function forEach(xs, f) {
 function forEachWithIndexU(l, f) {
   var _xs = l;
   var _i = 0;
-  var f$1 = f;
   while(true) {
     var i = _i;
     var xs = _xs;
-    if (xs) {
-      f$1(i, xs[0]);
-      _i = i + 1 | 0;
-      _xs = xs[1];
-      continue ;
-    } else {
-      return /* () */0;
+    if (!xs) {
+      return ;
     }
+    f(i, xs[0]);
+    _i = i + 1 | 0;
+    _xs = xs[1];
+    continue ;
   };
 }
 
@@ -825,13 +789,12 @@ function reduceU(_l, _accu, f) {
   while(true) {
     var accu = _accu;
     var l = _l;
-    if (l) {
-      _accu = f(accu, l[0]);
-      _l = l[1];
-      continue ;
-    } else {
+    if (!l) {
       return accu;
     }
+    _accu = f(accu, l[0]);
+    _l = l[1];
+    continue ;
   };
 }
 
@@ -863,20 +826,18 @@ function reduceReverse(l, accu, f) {
 function reduceWithIndexU(l, acc, f) {
   var _l = l;
   var _acc = acc;
-  var f$1 = f;
   var _i = 0;
   while(true) {
     var i = _i;
     var acc$1 = _acc;
     var l$1 = _l;
-    if (l$1) {
-      _i = i + 1 | 0;
-      _acc = f$1(acc$1, l$1[0], i);
-      _l = l$1[1];
-      continue ;
-    } else {
+    if (!l$1) {
       return acc$1;
     }
+    _i = i + 1 | 0;
+    _acc = f(acc$1, l$1[0], i);
+    _l = l$1[1];
+    continue ;
   };
 }
 
@@ -888,22 +849,23 @@ function mapReverse2U(l1, l2, f) {
   var _l1 = l1;
   var _l2 = l2;
   var _accu = /* [] */0;
-  var f$1 = f;
   while(true) {
     var accu = _accu;
     var l2$1 = _l2;
     var l1$1 = _l1;
-    if (l1$1 && l2$1) {
-      _accu = /* :: */[
-        f$1(l1$1[0], l2$1[0]),
-        accu
-      ];
-      _l2 = l2$1[1];
-      _l1 = l1$1[1];
-      continue ;
-    } else {
+    if (!l1$1) {
       return accu;
     }
+    if (!l2$1) {
+      return accu;
+    }
+    _accu = /* :: */[
+      f(l1$1[0], l2$1[0]),
+      accu
+    ];
+    _l2 = l2$1[1];
+    _l1 = l1$1[1];
+    continue ;
   };
 }
 
@@ -915,14 +877,16 @@ function forEach2U(_l1, _l2, f) {
   while(true) {
     var l2 = _l2;
     var l1 = _l1;
-    if (l1 && l2) {
-      f(l1[0], l2[0]);
-      _l2 = l2[1];
-      _l1 = l1[1];
-      continue ;
-    } else {
-      return /* () */0;
+    if (!l1) {
+      return ;
     }
+    if (!l2) {
+      return ;
+    }
+    f(l1[0], l2[0]);
+    _l2 = l2[1];
+    _l1 = l1[1];
+    continue ;
   };
 }
 
@@ -935,14 +899,16 @@ function reduce2U(_l1, _l2, _accu, f) {
     var accu = _accu;
     var l2 = _l2;
     var l1 = _l1;
-    if (l1 && l2) {
-      _accu = f(accu, l1[0], l2[0]);
-      _l2 = l2[1];
-      _l1 = l1[1];
-      continue ;
-    } else {
+    if (!l1) {
       return accu;
     }
+    if (!l2) {
+      return accu;
+    }
+    _accu = f(accu, l1[0], l2[0]);
+    _l2 = l2[1];
+    _l1 = l1[1];
+    continue ;
   };
 }
 
@@ -974,16 +940,14 @@ function reduceReverse2(l1, l2, acc, f) {
 function everyU(_xs, p) {
   while(true) {
     var xs = _xs;
-    if (xs) {
-      if (p(xs[0])) {
-        _xs = xs[1];
-        continue ;
-      } else {
-        return false;
-      }
-    } else {
+    if (!xs) {
       return true;
     }
+    if (!p(xs[0])) {
+      return false;
+    }
+    _xs = xs[1];
+    continue ;
   };
 }
 
@@ -994,16 +958,14 @@ function every(xs, p) {
 function someU(_xs, p) {
   while(true) {
     var xs = _xs;
-    if (xs) {
-      if (p(xs[0])) {
-        return true;
-      } else {
-        _xs = xs[1];
-        continue ;
-      }
-    } else {
+    if (!xs) {
       return false;
     }
+    if (p(xs[0])) {
+      return true;
+    }
+    _xs = xs[1];
+    continue ;
   };
 }
 
@@ -1015,17 +977,18 @@ function every2U(_l1, _l2, p) {
   while(true) {
     var l2 = _l2;
     var l1 = _l1;
-    if (l1 && l2) {
-      if (p(l1[0], l2[0])) {
-        _l2 = l2[1];
-        _l1 = l1[1];
-        continue ;
-      } else {
-        return false;
-      }
-    } else {
+    if (!l1) {
       return true;
     }
+    if (!l2) {
+      return true;
+    }
+    if (!p(l1[0], l2[0])) {
+      return false;
+    }
+    _l2 = l2[1];
+    _l1 = l1[1];
+    continue ;
   };
 }
 
@@ -1037,19 +1000,19 @@ function cmpByLength(_l1, _l2) {
   while(true) {
     var l2 = _l2;
     var l1 = _l1;
-    if (l1) {
+    if (!l1) {
       if (l2) {
-        _l2 = l2[1];
-        _l1 = l1[1];
-        continue ;
+        return -1;
       } else {
-        return 1;
+        return 0;
       }
-    } else if (l2) {
-      return -1;
-    } else {
-      return 0;
     }
+    if (!l2) {
+      return 1;
+    }
+    _l2 = l2[1];
+    _l1 = l1[1];
+    continue ;
   };
 }
 
@@ -1057,24 +1020,23 @@ function cmpU(_l1, _l2, p) {
   while(true) {
     var l2 = _l2;
     var l1 = _l1;
-    if (l1) {
+    if (!l1) {
       if (l2) {
-        var c = p(l1[0], l2[0]);
-        if (c === 0) {
-          _l2 = l2[1];
-          _l1 = l1[1];
-          continue ;
-        } else {
-          return c;
-        }
+        return -1;
       } else {
-        return 1;
+        return 0;
       }
-    } else if (l2) {
-      return -1;
-    } else {
-      return 0;
     }
+    if (!l2) {
+      return 1;
+    }
+    var c = p(l1[0], l2[0]);
+    if (c !== 0) {
+      return c;
+    }
+    _l2 = l2[1];
+    _l1 = l1[1];
+    continue ;
   };
 }
 
@@ -1086,19 +1048,22 @@ function eqU(_l1, _l2, p) {
   while(true) {
     var l2 = _l2;
     var l1 = _l1;
-    if (l1) {
-      if (l2 && p(l1[0], l2[0])) {
-        _l2 = l2[1];
-        _l1 = l1[1];
-        continue ;
-      } else {
+    if (!l1) {
+      if (l2) {
         return false;
+      } else {
+        return true;
       }
-    } else if (l2) {
-      return false;
-    } else {
-      return true;
     }
+    if (!l2) {
+      return false;
+    }
+    if (!p(l1[0], l2[0])) {
+      return false;
+    }
+    _l2 = l2[1];
+    _l1 = l1[1];
+    continue ;
   };
 }
 
@@ -1110,17 +1075,18 @@ function some2U(_l1, _l2, p) {
   while(true) {
     var l2 = _l2;
     var l1 = _l1;
-    if (l1 && l2) {
-      if (p(l1[0], l2[0])) {
-        return true;
-      } else {
-        _l2 = l2[1];
-        _l1 = l1[1];
-        continue ;
-      }
-    } else {
+    if (!l1) {
       return false;
     }
+    if (!l2) {
+      return false;
+    }
+    if (p(l1[0], l2[0])) {
+      return true;
+    }
+    _l2 = l2[1];
+    _l1 = l1[1];
+    continue ;
   };
 }
 
@@ -1131,16 +1097,14 @@ function some2(l1, l2, p) {
 function hasU(_xs, x, eq) {
   while(true) {
     var xs = _xs;
-    if (xs) {
-      if (eq(xs[0], x)) {
-        return true;
-      } else {
-        _xs = xs[1];
-        continue ;
-      }
-    } else {
+    if (!xs) {
       return false;
     }
+    if (eq(xs[0], x)) {
+      return true;
+    }
+    _xs = xs[1];
+    continue ;
   };
 }
 
@@ -1151,17 +1115,15 @@ function has(xs, x, eq) {
 function getAssocU(_xs, x, eq) {
   while(true) {
     var xs = _xs;
-    if (xs) {
-      var match = xs[0];
-      if (eq(match[0], x)) {
-        return Caml_option.some(match[1]);
-      } else {
-        _xs = xs[1];
-        continue ;
-      }
-    } else {
+    if (!xs) {
       return ;
     }
+    var match = xs[0];
+    if (eq(match[0], x)) {
+      return Caml_option.some(match[1]);
+    }
+    _xs = xs[1];
+    continue ;
   };
 }
 
@@ -1172,16 +1134,14 @@ function getAssoc(xs, x, eq) {
 function hasAssocU(_xs, x, eq) {
   while(true) {
     var xs = _xs;
-    if (xs) {
-      if (eq(xs[0][0], x)) {
-        return true;
-      } else {
-        _xs = xs[1];
-        continue ;
-      }
-    } else {
+    if (!xs) {
       return false;
     }
+    if (eq(xs[0][0], x)) {
+      return true;
+    }
+    _xs = xs[1];
+    continue ;
   };
 }
 
@@ -1190,25 +1150,23 @@ function hasAssoc(xs, x, eq) {
 }
 
 function removeAssocU(xs, x, eq) {
-  if (xs) {
-    var l = xs[1];
-    var pair = xs[0];
-    if (eq(pair[0], x)) {
-      return l;
-    } else {
-      var cell = /* :: */[
-        pair,
-        /* [] */0
-      ];
-      var removed = removeAssocAuxWithMap(l, x, cell, eq);
-      if (removed) {
-        return cell;
-      } else {
-        return xs;
-      }
-    }
-  } else {
+  if (!xs) {
     return /* [] */0;
+  }
+  var l = xs[1];
+  var pair = xs[0];
+  if (eq(pair[0], x)) {
+    return l;
+  }
+  var cell = /* :: */[
+    pair,
+    /* [] */0
+  ];
+  var removed = removeAssocAuxWithMap(l, x, cell, eq);
+  if (removed) {
+    return cell;
+  } else {
+    return xs;
   }
 }
 
@@ -1217,42 +1175,40 @@ function removeAssoc(xs, x, eq) {
 }
 
 function setAssocU(xs, x, k, eq) {
-  if (xs) {
-    var l = xs[1];
-    var pair = xs[0];
-    if (eq(pair[0], x)) {
-      return /* :: */[
-              /* tuple */[
-                x,
-                k
-              ],
-              l
-            ];
-    } else {
-      var cell = /* :: */[
-        pair,
-        /* [] */0
-      ];
-      var replaced = setAssocAuxWithMap(l, x, k, cell, eq);
-      if (replaced) {
-        return cell;
-      } else {
-        return /* :: */[
-                /* tuple */[
-                  x,
-                  k
-                ],
-                xs
-              ];
-      }
-    }
-  } else {
+  if (!xs) {
     return /* :: */[
             /* tuple */[
               x,
               k
             ],
             /* [] */0
+          ];
+  }
+  var l = xs[1];
+  var pair = xs[0];
+  if (eq(pair[0], x)) {
+    return /* :: */[
+            /* tuple */[
+              x,
+              k
+            ],
+            l
+          ];
+  }
+  var cell = /* :: */[
+    pair,
+    /* [] */0
+  ];
+  var replaced = setAssocAuxWithMap(l, x, k, cell, eq);
+  if (replaced) {
+    return cell;
+  } else {
+    return /* :: */[
+            /* tuple */[
+              x,
+              k
+            ],
+            xs
           ];
   }
 }
@@ -1274,17 +1230,15 @@ function sort(xs, cmp) {
 function getByU(_xs, p) {
   while(true) {
     var xs = _xs;
-    if (xs) {
-      var x = xs[0];
-      if (p(x)) {
-        return Caml_option.some(x);
-      } else {
-        _xs = xs[1];
-        continue ;
-      }
-    } else {
+    if (!xs) {
       return ;
     }
+    var x = xs[0];
+    if (p(x)) {
+      return Caml_option.some(x);
+    }
+    _xs = xs[1];
+    continue ;
   };
 }
 
@@ -1295,23 +1249,21 @@ function getBy(xs, p) {
 function keepU(_xs, p) {
   while(true) {
     var xs = _xs;
-    if (xs) {
-      var t = xs[1];
-      var h = xs[0];
-      if (p(h)) {
-        var cell = /* :: */[
-          h,
-          /* [] */0
-        ];
-        copyAuxWitFilter(p, t, cell);
-        return cell;
-      } else {
-        _xs = t;
-        continue ;
-      }
-    } else {
+    if (!xs) {
       return /* [] */0;
     }
+    var t = xs[1];
+    var h = xs[0];
+    if (p(h)) {
+      var cell = /* :: */[
+        h,
+        /* [] */0
+      ];
+      copyAuxWitFilter(p, t, cell);
+      return cell;
+    }
+    _xs = t;
+    continue ;
   };
 }
 
@@ -1321,29 +1273,26 @@ function keep(xs, p) {
 
 function keepWithIndexU(xs, p) {
   var _xs = xs;
-  var p$1 = p;
   var _i = 0;
   while(true) {
     var i = _i;
     var xs$1 = _xs;
-    if (xs$1) {
-      var t = xs$1[1];
-      var h = xs$1[0];
-      if (p$1(h, i)) {
-        var cell = /* :: */[
-          h,
-          /* [] */0
-        ];
-        copyAuxWithFilterIndex(p$1, t, cell, i + 1 | 0);
-        return cell;
-      } else {
-        _i = i + 1 | 0;
-        _xs = t;
-        continue ;
-      }
-    } else {
+    if (!xs$1) {
       return /* [] */0;
     }
+    var t = xs$1[1];
+    var h = xs$1[0];
+    if (p(h, i)) {
+      var cell = /* :: */[
+        h,
+        /* [] */0
+      ];
+      copyAuxWithFilterIndex(p, t, cell, i + 1 | 0);
+      return cell;
+    }
+    _i = i + 1 | 0;
+    _xs = t;
+    continue ;
   };
 }
 
@@ -1354,23 +1303,21 @@ function keepWithIndex(xs, p) {
 function keepMapU(_xs, p) {
   while(true) {
     var xs = _xs;
-    if (xs) {
-      var t = xs[1];
-      var match = p(xs[0]);
-      if (match !== undefined) {
-        var cell = /* :: */[
-          Caml_option.valFromOption(match),
-          /* [] */0
-        ];
-        copyAuxWitFilterMap(p, t, cell);
-        return cell;
-      } else {
-        _xs = t;
-        continue ;
-      }
-    } else {
+    if (!xs) {
       return /* [] */0;
     }
+    var t = xs[1];
+    var h = p(xs[0]);
+    if (h !== undefined) {
+      var cell = /* :: */[
+        Caml_option.valFromOption(h),
+        /* [] */0
+      ];
+      copyAuxWitFilterMap(p, t, cell);
+      return cell;
+    }
+    _xs = t;
+    continue ;
   };
 }
 
@@ -1379,33 +1326,32 @@ function keepMap(xs, p) {
 }
 
 function partitionU(l, p) {
-  if (l) {
-    var h = l[0];
-    var nextX = /* :: */[
-      h,
-      /* [] */0
-    ];
-    var nextY = /* :: */[
-      h,
-      /* [] */0
-    ];
-    var b = p(h);
-    partitionAux(p, l[1], nextX, nextY);
-    if (b) {
-      return /* tuple */[
-              nextX,
-              nextY[1]
-            ];
-    } else {
-      return /* tuple */[
-              nextX[1],
-              nextY
-            ];
-    }
-  } else {
+  if (!l) {
     return /* tuple */[
             /* [] */0,
             /* [] */0
+          ];
+  }
+  var h = l[0];
+  var nextX = /* :: */[
+    h,
+    /* [] */0
+  ];
+  var nextY = /* :: */[
+    h,
+    /* [] */0
+  ];
+  var b = p(h);
+  partitionAux(p, l[1], nextX, nextY);
+  if (b) {
+    return /* tuple */[
+            nextX,
+            nextY[1]
+          ];
+  } else {
+    return /* tuple */[
+            nextX[1],
+            nextY
           ];
   }
 }
@@ -1415,43 +1361,44 @@ function partition(l, p) {
 }
 
 function unzip(xs) {
-  if (xs) {
-    var match = xs[0];
-    var cellX = /* :: */[
-      match[0],
-      /* [] */0
-    ];
-    var cellY = /* :: */[
-      match[1],
-      /* [] */0
-    ];
-    splitAux(xs[1], cellX, cellY);
-    return /* tuple */[
-            cellX,
-            cellY
-          ];
-  } else {
+  if (!xs) {
     return /* tuple */[
             /* [] */0,
             /* [] */0
           ];
   }
+  var match = xs[0];
+  var cellX = /* :: */[
+    match[0],
+    /* [] */0
+  ];
+  var cellY = /* :: */[
+    match[1],
+    /* [] */0
+  ];
+  splitAux(xs[1], cellX, cellY);
+  return /* tuple */[
+          cellX,
+          cellY
+        ];
 }
 
 function zip(l1, l2) {
-  if (l1 && l2) {
-    var cell = /* :: */[
-      /* tuple */[
-        l1[0],
-        l2[0]
-      ],
-      /* [] */0
-    ];
-    zipAux(l1[1], l2[1], cell);
-    return cell;
-  } else {
+  if (!l1) {
     return /* [] */0;
   }
+  if (!l2) {
+    return /* [] */0;
+  }
+  var cell = /* :: */[
+    /* tuple */[
+      l1[0],
+      l2[0]
+    ],
+    /* [] */0
+  ];
+  zipAux(l1[1], l2[1], cell);
+  return cell;
 }
 
 var size = length;

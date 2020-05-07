@@ -15,7 +15,7 @@ function create(param) {
 function clear(s) {
   s.c = /* [] */0;
   s.len = 0;
-  return /* () */0;
+  
 }
 
 function copy(s) {
@@ -31,7 +31,7 @@ function push(x, s) {
     s.c
   ];
   s.len = s.len + 1 | 0;
-  return /* () */0;
+  
 }
 
 function pop(s) {
@@ -40,18 +40,22 @@ function pop(s) {
     s.c = match[1];
     s.len = s.len - 1 | 0;
     return match[0];
-  } else {
-    throw Empty;
   }
+  throw {
+        RE_EXN_ID: Empty,
+        Error: new Error()
+      };
 }
 
 function top(s) {
   var match = s.c;
   if (match) {
     return match[0];
-  } else {
-    throw Empty;
   }
+  throw {
+        RE_EXN_ID: Empty,
+        Error: new Error()
+      };
 }
 
 function is_empty(s) {

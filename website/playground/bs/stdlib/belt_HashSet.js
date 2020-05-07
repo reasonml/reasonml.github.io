@@ -6,20 +6,19 @@ var Belt_internalBucketsType = require("./belt_internalBucketsType.js");
 function copyBucket(hash, h_buckets, ndata_tail, _old_bucket) {
   while(true) {
     var old_bucket = _old_bucket;
-    if (old_bucket !== undefined) {
-      var nidx = hash(old_bucket.key) & (h_buckets.length - 1 | 0);
-      var match = ndata_tail[nidx];
-      if (match !== undefined) {
-        match.next = old_bucket;
-      } else {
-        h_buckets[nidx] = old_bucket;
-      }
-      ndata_tail[nidx] = old_bucket;
-      _old_bucket = old_bucket.next;
-      continue ;
-    } else {
-      return /* () */0;
+    if (old_bucket === undefined) {
+      return ;
     }
+    var nidx = hash(old_bucket.key) & (h_buckets.length - 1 | 0);
+    var tail = ndata_tail[nidx];
+    if (tail !== undefined) {
+      tail.next = old_bucket;
+    } else {
+      h_buckets[nidx] = old_bucket;
+    }
+    ndata_tail[nidx] = old_bucket;
+    _old_bucket = old_bucket.next;
+    continue ;
   };
 }
 
@@ -28,39 +27,35 @@ function remove(h, key) {
   var h_buckets = h.buckets;
   var i = h.hash(key) & (h_buckets.length - 1 | 0);
   var l = h_buckets[i];
-  if (l !== undefined) {
-    var next_cell = l.next;
-    if (eq(l.key, key)) {
-      h.size = h.size - 1 | 0;
-      h_buckets[i] = next_cell;
-      return /* () */0;
-    } else if (next_cell !== undefined) {
-      var eq$1 = eq;
-      var h$1 = h;
-      var key$1 = key;
-      var _prec = l;
-      var _cell = next_cell;
-      while(true) {
-        var cell = _cell;
-        var prec = _prec;
-        var cell_next = cell.next;
-        if (eq$1(cell.key, key$1)) {
-          prec.next = cell_next;
-          h$1.size = h$1.size - 1 | 0;
-          return /* () */0;
-        } else if (cell_next !== undefined) {
-          _cell = cell_next;
-          _prec = cell;
-          continue ;
-        } else {
-          return /* () */0;
-        }
-      };
-    } else {
-      return /* () */0;
-    }
+  if (l === undefined) {
+    return ;
+  }
+  var next_cell = l.next;
+  if (eq(l.key, key)) {
+    h.size = h.size - 1 | 0;
+    h_buckets[i] = next_cell;
+    return ;
+  } else if (next_cell !== undefined) {
+    var _prec = l;
+    var _cell = next_cell;
+    while(true) {
+      var cell = _cell;
+      var prec = _prec;
+      var cell_next = cell.next;
+      if (eq(cell.key, key)) {
+        prec.next = cell_next;
+        h.size = h.size - 1 | 0;
+        return ;
+      }
+      if (cell_next === undefined) {
+        return ;
+      }
+      _cell = cell_next;
+      _prec = cell;
+      continue ;
+    };
   } else {
-    return /* () */0;
+    return ;
   }
 }
 
@@ -68,21 +63,19 @@ function addBucket(h, key, _cell, eq) {
   while(true) {
     var cell = _cell;
     if (eq(cell.key, key)) {
-      return 0;
-    } else {
-      var n = cell.next;
-      if (n !== undefined) {
-        _cell = n;
-        continue ;
-      } else {
-        h.size = h.size + 1 | 0;
-        cell.next = {
-          key: key,
-          next: undefined
-        };
-        return /* () */0;
-      }
+      return ;
     }
+    var n = cell.next;
+    if (n !== undefined) {
+      _cell = n;
+      continue ;
+    }
+    h.size = h.size + 1 | 0;
+    cell.next = {
+      key: key,
+      next: undefined
+    };
+    return ;
   };
 }
 
@@ -101,32 +94,28 @@ function add0(h, key, hash, eq) {
     };
   }
   if (h.size > (buckets_len << 1)) {
-    var hash$1 = hash;
-    var h$1 = h;
-    var odata = h$1.buckets;
+    var odata = h.buckets;
     var osize = odata.length;
     var nsize = (osize << 1);
-    if (nsize >= osize) {
-      var h_buckets$1 = new Array(nsize);
-      var ndata_tail = new Array(nsize);
-      h$1.buckets = h_buckets$1;
-      for(var i$1 = 0 ,i_finish = osize - 1 | 0; i$1 <= i_finish; ++i$1){
-        copyBucket(hash$1, h_buckets$1, ndata_tail, odata[i$1]);
-      }
-      for(var i$2 = 0 ,i_finish$1 = nsize - 1 | 0; i$2 <= i_finish$1; ++i$2){
-        var match = ndata_tail[i$2];
-        if (match !== undefined) {
-          match.next = undefined;
-        }
-        
-      }
-      return /* () */0;
-    } else {
-      return 0;
+    if (nsize < osize) {
+      return ;
     }
-  } else {
-    return 0;
+    var h_buckets$1 = new Array(nsize);
+    var ndata_tail = new Array(nsize);
+    h.buckets = h_buckets$1;
+    for(var i$1 = 0; i$1 < osize; ++i$1){
+      copyBucket(hash, h_buckets$1, ndata_tail, odata[i$1]);
+    }
+    for(var i$2 = 0; i$2 < nsize; ++i$2){
+      var tail = ndata_tail[i$2];
+      if (tail !== undefined) {
+        tail.next = undefined;
+      }
+      
+    }
+    return ;
   }
+  
 }
 
 function add(h, key) {
@@ -139,22 +128,18 @@ function has(h, key) {
   var nid = h.hash(key) & (h_buckets.length - 1 | 0);
   var bucket = h_buckets[nid];
   if (bucket !== undefined) {
-    var eq$1 = eq;
-    var key$1 = key;
     var _cell = bucket;
     while(true) {
       var cell = _cell;
-      if (eq$1(cell.key, key$1)) {
+      if (eq(cell.key, key)) {
         return true;
-      } else {
-        var match = cell.next;
-        if (match !== undefined) {
-          _cell = match;
-          continue ;
-        } else {
-          return false;
-        }
       }
+      var nextCell = cell.next;
+      if (nextCell === undefined) {
+        return false;
+      }
+      _cell = nextCell;
+      continue ;
     };
   } else {
     return false;
@@ -165,8 +150,8 @@ function make(hintSize, id) {
   return Belt_internalBucketsType.make(id.hash, id.eq, hintSize);
 }
 
-function size(prim) {
-  return prim.size;
+function size(h) {
+  return h.size;
 }
 
 function fromArray(arr, id) {
@@ -174,7 +159,7 @@ function fromArray(arr, id) {
   var hash = id.hash;
   var len = arr.length;
   var v = Belt_internalBucketsType.make(hash, eq, len);
-  for(var i = 0 ,i_finish = len - 1 | 0; i <= i_finish; ++i){
+  for(var i = 0; i < len; ++i){
     add0(v, arr[i], hash, eq);
   }
   return v;
@@ -184,15 +169,15 @@ function mergeMany(h, arr) {
   var eq = h.eq;
   var hash = h.hash;
   var len = arr.length;
-  for(var i = 0 ,i_finish = len - 1 | 0; i <= i_finish; ++i){
+  for(var i = 0; i < len; ++i){
     add0(h, arr[i], hash, eq);
   }
-  return /* () */0;
+  
 }
 
-var Int = /* alias */0;
+var Int;
 
-var $$String = /* alias */0;
+var $$String;
 
 var clear = Belt_internalBucketsType.clear;
 

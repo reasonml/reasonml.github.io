@@ -95,17 +95,17 @@ function cycle(x, k) {
   x[1] = b + x[1] | 0;
   x[2] = c + x[2] | 0;
   x[3] = d + x[3] | 0;
-  return /* () */0;
+  
 }
 
-var state = /* array */[
+var state = [
   1732584193,
   -271733879,
   -1732584194,
   271733878
 ];
 
-var md5blk = /* array */[
+var md5blk = [
   0,
   0,
   0,

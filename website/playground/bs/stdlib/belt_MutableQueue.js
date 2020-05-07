@@ -3,134 +3,130 @@
 var Curry = require("./curry.js");
 var Caml_option = require("./caml_option.js");
 
-var $$null = null;
-
 function make(param) {
   return {
           length: 0,
-          first: $$null,
-          last: $$null
+          first: undefined,
+          last: undefined
         };
 }
 
 function clear(q) {
   q.length = 0;
-  q.first = $$null;
-  q.last = $$null;
-  return /* () */0;
+  q.first = undefined;
+  q.last = undefined;
+  
 }
 
 function add(q, x) {
   var cell = {
     content: x,
-    next: $$null
+    next: undefined
   };
-  var match = q.last;
-  if (match !== null) {
+  var last = q.last;
+  if (last !== undefined) {
     q.length = q.length + 1 | 0;
-    match.next = cell;
+    last.next = cell;
     q.last = cell;
-    return /* () */0;
+    return ;
   } else {
     q.length = 1;
     q.first = cell;
     q.last = cell;
-    return /* () */0;
+    return ;
   }
 }
 
 function peek(q) {
-  var match = q.first;
-  if (match !== null) {
-    return Caml_option.some(match.content);
+  var v = q.first;
+  if (v !== undefined) {
+    return Caml_option.some(v.content);
   }
   
 }
 
 function peekUndefined(q) {
-  var match = q.first;
-  if (match !== null) {
-    return match.content;
+  var v = q.first;
+  if (v !== undefined) {
+    return v.content;
   }
   
 }
 
 function peekExn(q) {
-  var match = q.first;
-  if (match !== null) {
-    return match.content;
-  } else {
-    throw new Error("Belt.Queue.Empty");
+  var v = q.first;
+  if (v !== undefined) {
+    return v.content;
   }
+  throw new Error("Belt.Queue.Empty");
 }
 
 function pop(q) {
-  var match = q.first;
-  if (match !== null) {
-    var next = match.next;
-    if (next === null) {
-      clear(q);
-      return Caml_option.some(match.content);
-    } else {
-      q.length = q.length - 1 | 0;
-      q.first = next;
-      return Caml_option.some(match.content);
-    }
+  var x = q.first;
+  if (x === undefined) {
+    return ;
   }
-  
+  var next = x.next;
+  if (next === undefined) {
+    clear(q);
+    return Caml_option.some(x.content);
+  } else {
+    q.length = q.length - 1 | 0;
+    q.first = next;
+    return Caml_option.some(x.content);
+  }
 }
 
 function popExn(q) {
-  var match = q.first;
-  if (match !== null) {
-    var next = match.next;
-    if (next === null) {
+  var x = q.first;
+  if (x !== undefined) {
+    var next = x.next;
+    if (next === undefined) {
       clear(q);
-      return match.content;
+      return x.content;
     } else {
       q.length = q.length - 1 | 0;
       q.first = next;
-      return match.content;
+      return x.content;
     }
-  } else {
-    throw new Error("Empty");
   }
+  throw new Error("Empty");
 }
 
 function popUndefined(q) {
-  var match = q.first;
-  if (match !== null) {
-    var next = match.next;
-    if (next === null) {
-      clear(q);
-      return match.content;
-    } else {
-      q.length = q.length - 1 | 0;
-      q.first = next;
-      return match.content;
-    }
+  var x = q.first;
+  if (x === undefined) {
+    return ;
   }
-  
+  var next = x.next;
+  if (next === undefined) {
+    clear(q);
+    return x.content;
+  } else {
+    q.length = q.length - 1 | 0;
+    q.first = next;
+    return x.content;
+  }
 }
 
 function copy(q) {
   var qRes = {
     length: q.length,
-    first: $$null,
-    last: $$null
+    first: undefined,
+    last: undefined
   };
-  var _prev = $$null;
+  var _prev;
   var _cell = q.first;
   while(true) {
     var cell = _cell;
     var prev = _prev;
-    if (cell !== null) {
+    if (cell !== undefined) {
       var content = cell.content;
       var res = {
         content: content,
-        next: $$null
+        next: undefined
       };
-      if (prev !== null) {
+      if (prev !== undefined) {
         prev.next = res;
       } else {
         qRes.first = res;
@@ -138,32 +134,30 @@ function copy(q) {
       _cell = cell.next;
       _prev = res;
       continue ;
-    } else {
-      qRes.last = prev;
-      return qRes;
     }
+    qRes.last = prev;
+    return qRes;
   };
 }
 
 function mapU(q, f) {
   var qRes = {
     length: q.length,
-    first: $$null,
-    last: $$null
+    first: undefined,
+    last: undefined
   };
-  var _prev = $$null;
+  var _prev;
   var _cell = q.first;
-  var f$1 = f;
   while(true) {
     var cell = _cell;
     var prev = _prev;
-    if (cell !== null) {
-      var content = f$1(cell.content);
+    if (cell !== undefined) {
+      var content = f(cell.content);
       var res = {
         content: content,
-        next: $$null
+        next: undefined
       };
-      if (prev !== null) {
+      if (prev !== undefined) {
         prev.next = res;
       } else {
         qRes.first = res;
@@ -171,10 +165,9 @@ function mapU(q, f) {
       _cell = cell.next;
       _prev = res;
       continue ;
-    } else {
-      qRes.last = prev;
-      return qRes;
     }
+    qRes.last = prev;
+    return qRes;
   };
 }
 
@@ -192,16 +185,14 @@ function size(q) {
 
 function forEachU(q, f) {
   var _cell = q.first;
-  var f$1 = f;
   while(true) {
     var cell = _cell;
-    if (cell !== null) {
-      f$1(cell.content);
-      _cell = cell.next;
-      continue ;
-    } else {
-      return /* () */0;
+    if (cell === undefined) {
+      return ;
     }
+    f(cell.content);
+    _cell = cell.next;
+    continue ;
   };
 }
 
@@ -210,20 +201,18 @@ function forEach(q, f) {
 }
 
 function reduceU(q, accu, f) {
-  var f$1 = f;
   var _accu = accu;
   var _cell = q.first;
   while(true) {
     var cell = _cell;
     var accu$1 = _accu;
-    if (cell !== null) {
-      var accu$2 = f$1(accu$1, cell.content);
-      _cell = cell.next;
-      _accu = accu$2;
-      continue ;
-    } else {
+    if (cell === undefined) {
       return accu$1;
     }
+    var accu$2 = f(accu$1, cell.content);
+    _cell = cell.next;
+    _accu = accu$2;
+    continue ;
   };
 }
 
@@ -232,21 +221,20 @@ function reduce(q, accu, f) {
 }
 
 function transfer(q1, q2) {
-  if (q1.length > 0) {
-    var match = q2.last;
-    if (match !== null) {
-      q2.length = q2.length + q1.length | 0;
-      match.next = q1.first;
-      q2.last = q1.last;
-      return clear(q1);
-    } else {
-      q2.length = q1.length;
-      q2.first = q1.first;
-      q2.last = q1.last;
-      return clear(q1);
-    }
+  if (q1.length <= 0) {
+    return ;
+  }
+  var l = q2.last;
+  if (l !== undefined) {
+    q2.length = q2.length + q1.length | 0;
+    l.next = q1.first;
+    q2.last = q1.last;
+    return clear(q1);
   } else {
-    return 0;
+    q2.length = q1.length;
+    q2.first = q1.first;
+    q2.last = q1.last;
+    return clear(q1);
   }
 }
 
@@ -254,14 +242,13 @@ function fillAux(_i, arr, _cell) {
   while(true) {
     var cell = _cell;
     var i = _i;
-    if (cell !== null) {
-      arr[i] = cell.content;
-      _cell = cell.next;
-      _i = i + 1 | 0;
-      continue ;
-    } else {
-      return /* () */0;
+    if (cell === undefined) {
+      return ;
     }
+    arr[i] = cell.content;
+    _cell = cell.next;
+    _i = i + 1 | 0;
+    continue ;
   };
 }
 
@@ -272,8 +259,12 @@ function toArray(x) {
 }
 
 function fromArray(arr) {
-  var q = make(/* () */0);
-  for(var i = 0 ,i_finish = arr.length - 1 | 0; i <= i_finish; ++i){
+  var q = {
+    length: 0,
+    first: undefined,
+    last: undefined
+  };
+  for(var i = 0 ,i_finish = arr.length; i < i_finish; ++i){
     add(q, arr[i]);
   }
   return q;

@@ -1,8 +1,5 @@
 'use strict';
 
-var Caml_builtin_exceptions = require("./caml_builtin_exceptions.js");
-
- 
 
 /***********************************************************************/
 /*                                                                     */
@@ -32,10 +29,9 @@ function caml_lex_array(s) {
         a[i] = (s.charCodeAt(2 * i) | (s.charCodeAt(2 * i + 1) << 8)) << 16 >> 16;
     return a;
 }
-
 ;
 
-function caml_lex_engine_aux (tbl,start_state,lexbuf,exn){
+var caml_lex_engine_aux = (function (tbl, start_state, lexbuf, exn){
     // Lexing.lexbuf
     var lex_buffer = 'lex_buffer';
     var lex_buffer_len = 'lex_buffer_len';
@@ -117,19 +113,16 @@ function caml_lex_engine_aux (tbl,start_state,lexbuf,exn){
                 lexbuf[lex_eof_reached] = 0;
         }
     }
-};
+});
 
 var empty_token_lit = "lexing: empty token";
 
 function caml_lex_engine(tbls, i, buf) {
-  return caml_lex_engine_aux(tbls, i, buf, [
-              Caml_builtin_exceptions.failure,
-              empty_token_lit
-            ]);
+  return caml_lex_engine_aux(tbls, i, buf, {
+              RE_EXN_ID: "Failure",
+              _1: empty_token_lit
+            });
 }
-
-
-
 
 /***********************************************/
 /* New lexer engine, with memory of positions  */
@@ -175,10 +168,9 @@ function caml_lex_run_tag(s, i, mem) {
             mem[dst] = mem[src];
     }
 }
-
 ;
 
-function caml_new_lex_engine_aux (tbl,start_state,lexbuf,exn){
+var caml_new_lex_engine_aux = (function (tbl, start_state, lexbuf, exn) {
     // Lexing.lexbuf
     var lex_buffer = 'lex_buffer';
     var lex_buffer_len = 'lex_buffer_len';
@@ -283,13 +275,13 @@ function caml_new_lex_engine_aux (tbl,start_state,lexbuf,exn){
                 lexbuf[lex_eof_reached] = 0;
         }
     }
-};
+    });
 
 function caml_new_lex_engine(tbl, i, buf) {
-  return caml_new_lex_engine_aux(tbl, i, buf, [
-              Caml_builtin_exceptions.failure,
-              empty_token_lit
-            ]);
+  return caml_new_lex_engine_aux(tbl, i, buf, {
+              RE_EXN_ID: "Failure",
+              _1: empty_token_lit
+            });
 }
 
 exports.caml_lex_engine = caml_lex_engine;

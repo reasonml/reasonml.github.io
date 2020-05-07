@@ -1,16 +1,14 @@
 'use strict';
 
-var Obj = require("./obj.js");
 var Block = require("./block.js");
 var Curry = require("./curry.js");
 var $$Buffer = require("./buffer.js");
 var Printf = require("./printf.js");
-var Caml_io = require("./caml_io.js");
 var Caml_array = require("./caml_array.js");
 var Pervasives = require("./pervasives.js");
+var Caml_exceptions = require("./caml_exceptions.js");
 var Caml_js_exceptions = require("./caml_js_exceptions.js");
 var Caml_external_polyfill = require("./caml_external_polyfill.js");
-var Caml_builtin_exceptions = require("./caml_builtin_exceptions.js");
 
 var printers = {
   contents: /* [] */0
@@ -57,133 +55,60 @@ var locfmt = /* Format */[
   "File \"%s\", line %d, characters %d-%d: %s"
 ];
 
-function field(x, i) {
-  var f = x[i];
-  if (typeof f === "number") {
-    return Curry._1(Printf.sprintf(/* Format */[
-                    /* Int */Block.__(4, [
-                        /* Int_d */0,
-                        /* No_padding */0,
-                        /* No_precision */0,
-                        /* End_of_format */0
-                      ]),
-                    "%d"
-                  ]), f);
-  } else if ((f.tag | 0) === Obj.string_tag) {
-    return Curry._1(Printf.sprintf(/* Format */[
-                    /* Caml_string */Block.__(3, [
-                        /* No_padding */0,
-                        /* End_of_format */0
-                      ]),
-                    "%S"
-                  ]), f);
-  } else if ((f.tag | 0) === Obj.double_tag) {
-    return Pervasives.string_of_float(f);
-  } else {
-    return "_";
+var fields = (function(x){
+  var s = "" 
+  var index = 1
+  while ("_"+index in x){
+    s += x ["_" + index];
+    ++ index
   }
-}
-
-function other_fields(x, i) {
-  if (i >= x.length) {
-    return "";
-  } else {
-    return Curry._2(Printf.sprintf(/* Format */[
-                    /* String_literal */Block.__(11, [
-                        ", ",
-                        /* String */Block.__(2, [
-                            /* No_padding */0,
-                            /* String */Block.__(2, [
-                                /* No_padding */0,
-                                /* End_of_format */0
-                              ])
-                          ])
-                      ]),
-                    ", %s%s"
-                  ]), field(x, i), other_fields(x, i + 1 | 0));
+  if(index === 1){
+    return s 
   }
-}
-
-function fields(x) {
-  var match = x.length;
-  switch (match) {
-    case 0 :
-    case 1 :
-        return "";
-    case 2 :
-        return Curry._1(Printf.sprintf(/* Format */[
-                        /* Char_literal */Block.__(12, [
-                            /* "(" */40,
-                            /* String */Block.__(2, [
-                                /* No_padding */0,
-                                /* Char_literal */Block.__(12, [
-                                    /* ")" */41,
-                                    /* End_of_format */0
-                                  ])
-                              ])
-                          ]),
-                        "(%s)"
-                      ]), field(x, 1));
-    default:
-      return Curry._2(Printf.sprintf(/* Format */[
-                      /* Char_literal */Block.__(12, [
-                          /* "(" */40,
-                          /* String */Block.__(2, [
-                              /* No_padding */0,
-                              /* String */Block.__(2, [
-                                  /* No_padding */0,
-                                  /* Char_literal */Block.__(12, [
-                                      /* ")" */41,
-                                      /* End_of_format */0
-                                    ])
-                                ])
-                            ])
-                        ]),
-                      "(%s%s)"
-                    ]), field(x, 1), other_fields(x, 2));
-  }
-}
+  return "(" + s + ")"
+});
 
 function to_string(x) {
   var _param = printers.contents;
   while(true) {
     var param = _param;
     if (param) {
-      var match;
+      var s;
       try {
-        match = Curry._1(param[0], x);
+        s = Curry._1(param[0], x);
       }
       catch (exn){
-        match = undefined;
+        s = undefined;
       }
-      if (match !== undefined) {
-        return match;
-      } else {
-        _param = param[1];
-        continue ;
+      if (s !== undefined) {
+        return s;
       }
-    } else if (x === Caml_builtin_exceptions.out_of_memory) {
-      return "Out of memory";
-    } else if (x === Caml_builtin_exceptions.stack_overflow) {
-      return "Stack overflow";
-    } else if (x[0] === Caml_builtin_exceptions.match_failure) {
-      var match$1 = x[1];
-      var $$char = match$1[2];
-      return Curry._5(Printf.sprintf(locfmt), match$1[0], match$1[1], $$char, $$char + 5 | 0, "Pattern matching failed");
-    } else if (x[0] === Caml_builtin_exceptions.assert_failure) {
-      var match$2 = x[1];
-      var $$char$1 = match$2[2];
-      return Curry._5(Printf.sprintf(locfmt), match$2[0], match$2[1], $$char$1, $$char$1 + 6 | 0, "Assertion failed");
-    } else if (x[0] === Caml_builtin_exceptions.undefined_recursive_module) {
-      var match$3 = x[1];
-      var $$char$2 = match$3[2];
-      return Curry._5(Printf.sprintf(locfmt), match$3[0], match$3[1], $$char$2, $$char$2 + 6 | 0, "Undefined recursive module");
-    } else if ((x.tag | 0) !== 0) {
-      return x[0];
-    } else {
-      var constructor = x[0][0];
-      return constructor + fields(x);
+      _param = param[1];
+      continue ;
     }
+    if (x.RE_EXN_ID === "Out_of_memory") {
+      return "Out of memory";
+    }
+    if (x.RE_EXN_ID === "Stack_overflow") {
+      return "Stack overflow";
+    }
+    if (x.RE_EXN_ID === "Match_failure") {
+      var match = x._1;
+      var $$char = match[2];
+      return Curry._5(Printf.sprintf(locfmt), match[0], match[1], $$char, $$char + 5 | 0, "Pattern matching failed");
+    }
+    if (x.RE_EXN_ID === "Assert_failure") {
+      var match$1 = x._1;
+      var $$char$1 = match$1[2];
+      return Curry._5(Printf.sprintf(locfmt), match$1[0], match$1[1], $$char$1, $$char$1 + 6 | 0, "Assertion failed");
+    }
+    if (x.RE_EXN_ID === "Undefined_recursive_module") {
+      var match$2 = x._1;
+      var $$char$2 = match$2[2];
+      return Curry._5(Printf.sprintf(locfmt), match$2[0], match$2[1], $$char$2, $$char$2 + 6 | 0, "Undefined recursive module");
+    }
+    var constructor = Caml_exceptions.caml_exn_slot_name(x);
+    return constructor + fields(x);
   };
 }
 
@@ -206,7 +131,7 @@ function print(fct, arg) {
                 ]),
               "Uncaught exception: %s\n"
             ]), to_string(x));
-    Caml_io.caml_ml_flush(Pervasives.stderr);
+    Pervasives.flush(Pervasives.stderr);
     throw x;
   }
 }
@@ -217,7 +142,7 @@ function $$catch(fct, arg) {
   }
   catch (raw_x){
     var x = Caml_js_exceptions.internalToOCamlException(raw_x);
-    Caml_io.caml_ml_flush(Pervasives.stdout);
+    Pervasives.flush(Pervasives.stdout);
     Curry._1(Printf.eprintf(/* Format */[
               /* String_literal */Block.__(11, [
                   "Uncaught exception: ",
@@ -236,23 +161,19 @@ function $$catch(fct, arg) {
 }
 
 function convert_raw_backtrace_slot(param) {
-  throw [
-        Caml_builtin_exceptions.failure,
-        "convert_raw_backtrace_slot not implemented"
-      ];
+  return Pervasives.failwith("convert_raw_backtrace_slot not implemented");
 }
 
 function convert_raw_backtrace(bt) {
   try {
-    return /* () */0;
+    return undefined;
   }
   catch (raw_exn){
     var exn = Caml_js_exceptions.internalToOCamlException(raw_exn);
-    if (exn[0] === Caml_builtin_exceptions.failure) {
+    if (exn.RE_EXN_ID === "Failure") {
       return ;
-    } else {
-      throw exn;
     }
+    throw exn;
   }
 }
 
@@ -333,29 +254,9 @@ function format_backtrace_slot(pos, slot) {
 }
 
 function print_raw_backtrace(outchan, raw_backtrace) {
-  var outchan$1 = outchan;
   var backtrace = convert_raw_backtrace(raw_backtrace);
-  if (backtrace !== undefined) {
-    var a = backtrace;
-    for(var i = 0 ,i_finish = a.length - 1 | 0; i <= i_finish; ++i){
-      var match = format_backtrace_slot(i, Caml_array.caml_array_get(a, i));
-      if (match !== undefined) {
-        Curry._1(Printf.fprintf(outchan$1, /* Format */[
-                  /* String */Block.__(2, [
-                      /* No_padding */0,
-                      /* Char_literal */Block.__(12, [
-                          /* "\n" */10,
-                          /* End_of_format */0
-                        ])
-                    ]),
-                  "%s\n"
-                ]), match);
-      }
-      
-    }
-    return /* () */0;
-  } else {
-    return Printf.fprintf(outchan$1, /* Format */[
+  if (backtrace === undefined) {
+    return Printf.fprintf(outchan, /* Format */[
                 /* String_literal */Block.__(11, [
                     "(Program not linked with -g, cannot print stack backtrace)\n",
                     /* End_of_format */0
@@ -363,101 +264,112 @@ function print_raw_backtrace(outchan, raw_backtrace) {
                 "(Program not linked with -g, cannot print stack backtrace)\n"
               ]);
   }
+  for(var i = 0 ,i_finish = backtrace.length; i < i_finish; ++i){
+    var str = format_backtrace_slot(i, Caml_array.caml_array_get(backtrace, i));
+    if (str !== undefined) {
+      Curry._1(Printf.fprintf(outchan, /* Format */[
+                /* String */Block.__(2, [
+                    /* No_padding */0,
+                    /* Char_literal */Block.__(12, [
+                        /* "\n" */10,
+                        /* End_of_format */0
+                      ])
+                  ]),
+                "%s\n"
+              ]), str);
+    }
+    
+  }
+  
 }
 
 function print_backtrace(outchan) {
-  return print_raw_backtrace(outchan, /* () */0);
+  return print_raw_backtrace(outchan, undefined);
 }
 
 function raw_backtrace_to_string(raw_backtrace) {
   var backtrace = convert_raw_backtrace(raw_backtrace);
-  if (backtrace !== undefined) {
-    var a = backtrace;
-    var b = $$Buffer.create(1024);
-    for(var i = 0 ,i_finish = a.length - 1 | 0; i <= i_finish; ++i){
-      var match = format_backtrace_slot(i, Caml_array.caml_array_get(a, i));
-      if (match !== undefined) {
-        Curry._1(Printf.bprintf(b, /* Format */[
-                  /* String */Block.__(2, [
-                      /* No_padding */0,
-                      /* Char_literal */Block.__(12, [
-                          /* "\n" */10,
-                          /* End_of_format */0
-                        ])
-                    ]),
-                  "%s\n"
-                ]), match);
-      }
-      
-    }
-    return $$Buffer.contents(b);
-  } else {
+  if (backtrace === undefined) {
     return "(Program not linked with -g, cannot print stack backtrace)\n";
   }
+  var b = $$Buffer.create(1024);
+  for(var i = 0 ,i_finish = backtrace.length; i < i_finish; ++i){
+    var str = format_backtrace_slot(i, Caml_array.caml_array_get(backtrace, i));
+    if (str !== undefined) {
+      Curry._1(Printf.bprintf(b, /* Format */[
+                /* String */Block.__(2, [
+                    /* No_padding */0,
+                    /* Char_literal */Block.__(12, [
+                        /* "\n" */10,
+                        /* End_of_format */0
+                      ])
+                  ]),
+                "%s\n"
+              ]), str);
+    }
+    
+  }
+  return $$Buffer.contents(b);
 }
 
-function backtrace_slot_is_raise(param) {
-  return param[/* is_raise */0];
+function backtrace_slot_is_raise(l) {
+  return l[/* is_raise */0];
 }
 
-function backtrace_slot_is_inline(param) {
-  if (param.tag) {
+function backtrace_slot_is_inline(l) {
+  if (l.tag) {
     return false;
   } else {
-    return param[/* is_inline */5];
+    return l[/* is_inline */5];
   }
 }
 
-function backtrace_slot_location(param) {
-  if (param.tag) {
+function backtrace_slot_location(l) {
+  if (l.tag) {
     return ;
   } else {
     return {
-            filename: param[/* filename */1],
-            line_number: param[/* line_number */2],
-            start_char: param[/* start_char */3],
-            end_char: param[/* end_char */4]
+            filename: l[/* filename */1],
+            line_number: l[/* line_number */2],
+            start_char: l[/* start_char */3],
+            end_char: l[/* end_char */4]
           };
   }
 }
 
 function backtrace_slots(raw_backtrace) {
-  var match = convert_raw_backtrace(raw_backtrace);
-  if (match !== undefined) {
-    var backtrace = match;
-    var usable_slot = function (param) {
-      if (param.tag) {
+  var backtrace = convert_raw_backtrace(raw_backtrace);
+  if (backtrace === undefined) {
+    return ;
+  }
+  var usable_slot = function (param) {
+    if (param.tag) {
+      return false;
+    } else {
+      return true;
+    }
+  };
+  var exists_usable = function (_i) {
+    while(true) {
+      var i = _i;
+      if (i === -1) {
         return false;
-      } else {
+      }
+      if (usable_slot(Caml_array.caml_array_get(backtrace, i))) {
         return true;
       }
+      _i = i - 1 | 0;
+      continue ;
     };
-    var exists_usable = function (_i) {
-      while(true) {
-        var i = _i;
-        if (i !== -1) {
-          if (usable_slot(Caml_array.caml_array_get(backtrace, i))) {
-            return true;
-          } else {
-            _i = i - 1 | 0;
-            continue ;
-          }
-        } else {
-          return false;
-        }
-      };
-    };
-    if (exists_usable(backtrace.length - 1 | 0)) {
-      return backtrace;
-    } else {
-      return ;
-    }
+  };
+  if (exists_usable(backtrace.length - 1 | 0)) {
+    return backtrace;
   }
   
 }
 
 function get_backtrace(param) {
-  return raw_backtrace_to_string(/* () */0);
+  return raw_backtrace_to_string(undefined);
 }
 
 function register_printer(fn) {
@@ -465,50 +377,27 @@ function register_printer(fn) {
     fn,
     printers.contents
   ];
-  return /* () */0;
+  
 }
 
-function exn_slot(x) {
-  if (x.tag) {
-    return x;
-  } else {
-    return x[0];
-  }
-}
-
-function exn_slot_id(x) {
-  var slot = exn_slot(x);
-  return slot[1];
-}
-
-function exn_slot_name(x) {
-  var slot = exn_slot(x);
-  return slot[0];
-}
-
-var uncaught_exception_handler = {
-  contents: undefined
-};
-
-function set_uncaught_exception_handler(fn) {
-  uncaught_exception_handler.contents = fn;
-  return /* () */0;
+function set_uncaught_exception_handler(param) {
+  
 }
 
 function record_backtrace(prim) {
-  return /* () */0;
+  
 }
 
 function backtrace_status(prim) {
-  return /* () */0;
+  
 }
 
 function get_raw_backtrace(prim) {
-  return /* () */0;
+  
 }
 
 function get_callstack(prim) {
-  return /* () */0;
+  
 }
 
 var Slot = {
@@ -549,6 +438,4 @@ exports.raw_backtrace_length = raw_backtrace_length;
 exports.get_raw_backtrace_slot = get_raw_backtrace_slot;
 exports.convert_raw_backtrace_slot = convert_raw_backtrace_slot;
 exports.get_raw_backtrace_next_slot = get_raw_backtrace_next_slot;
-exports.exn_slot_id = exn_slot_id;
-exports.exn_slot_name = exn_slot_name;
 /* No side effect */

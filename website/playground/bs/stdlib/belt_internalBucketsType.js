@@ -4,12 +4,14 @@
 function power_2_above(_x, n) {
   while(true) {
     var x = _x;
-    if (x >= n || (x << 1) < x) {
+    if (x >= n) {
       return x;
-    } else {
-      _x = (x << 1);
-      continue ;
     }
+    if ((x << 1) < x) {
+      return x;
+    }
+    _x = (x << 1);
+    continue ;
   };
 }
 
@@ -27,17 +29,17 @@ function clear(h) {
   h.size = 0;
   var h_buckets = h.buckets;
   var len = h_buckets.length;
-  for(var i = 0 ,i_finish = len - 1 | 0; i <= i_finish; ++i){
+  for(var i = 0; i < len; ++i){
     h_buckets[i] = undefined;
   }
-  return /* () */0;
+  
 }
 
 function isEmpty(h) {
   return h.size === 0;
 }
 
-var emptyOpt = undefined;
+var emptyOpt;
 
 exports.emptyOpt = emptyOpt;
 exports.make = make;

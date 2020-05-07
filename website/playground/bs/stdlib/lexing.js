@@ -6,7 +6,6 @@ var Caml_array = require("./caml_array.js");
 var Caml_bytes = require("./caml_bytes.js");
 var Caml_lexer = require("./caml_lexer.js");
 var Pervasives = require("./pervasives.js");
-var Caml_builtin_exceptions = require("./caml_builtin_exceptions.js");
 
 function engine(tbl, state, buf) {
   var result = Caml_lexer.caml_lex_engine(tbl, state, buf);
@@ -49,34 +48,32 @@ function from_function(f) {
   var partial_arg = Caml_bytes.caml_create_bytes(512);
   return {
           refill_buff: (function (param) {
-              var read_fun = f;
-              var aux_buffer = partial_arg;
-              var lexbuf = param;
-              var read = Curry._2(read_fun, aux_buffer, aux_buffer.length);
-              var n = read > 0 ? read : (lexbuf.lex_eof_reached = true, 0);
-              if ((lexbuf.lex_buffer_len + n | 0) > lexbuf.lex_buffer.length) {
-                if (((lexbuf.lex_buffer_len - lexbuf.lex_start_pos | 0) + n | 0) <= lexbuf.lex_buffer.length) {
-                  Bytes.blit(lexbuf.lex_buffer, lexbuf.lex_start_pos, lexbuf.lex_buffer, 0, lexbuf.lex_buffer_len - lexbuf.lex_start_pos | 0);
+              var read = Curry._2(f, partial_arg, partial_arg.length);
+              var n = read > 0 ? read : (param.lex_eof_reached = true, 0);
+              if ((param.lex_buffer_len + n | 0) > param.lex_buffer.length) {
+                if (((param.lex_buffer_len - param.lex_start_pos | 0) + n | 0) <= param.lex_buffer.length) {
+                  Bytes.blit(param.lex_buffer, param.lex_start_pos, param.lex_buffer, 0, param.lex_buffer_len - param.lex_start_pos | 0);
                 } else {
-                  var newlen = (lexbuf.lex_buffer.length << 1);
-                  if (((lexbuf.lex_buffer_len - lexbuf.lex_start_pos | 0) + n | 0) > newlen) {
-                    throw [
-                          Caml_builtin_exceptions.failure,
-                          "Lexing.lex_refill: cannot grow buffer"
-                        ];
+                  var newlen = (param.lex_buffer.length << 1);
+                  if (((param.lex_buffer_len - param.lex_start_pos | 0) + n | 0) > newlen) {
+                    throw {
+                          RE_EXN_ID: "Failure",
+                          _1: "Lexing.lex_refill: cannot grow buffer",
+                          Error: new Error()
+                        };
                   }
                   var newbuf = Caml_bytes.caml_create_bytes(newlen);
-                  Bytes.blit(lexbuf.lex_buffer, lexbuf.lex_start_pos, newbuf, 0, lexbuf.lex_buffer_len - lexbuf.lex_start_pos | 0);
-                  lexbuf.lex_buffer = newbuf;
+                  Bytes.blit(param.lex_buffer, param.lex_start_pos, newbuf, 0, param.lex_buffer_len - param.lex_start_pos | 0);
+                  param.lex_buffer = newbuf;
                 }
-                var s = lexbuf.lex_start_pos;
-                lexbuf.lex_abs_pos = lexbuf.lex_abs_pos + s | 0;
-                lexbuf.lex_curr_pos = lexbuf.lex_curr_pos - s | 0;
-                lexbuf.lex_start_pos = 0;
-                lexbuf.lex_last_pos = lexbuf.lex_last_pos - s | 0;
-                lexbuf.lex_buffer_len = lexbuf.lex_buffer_len - s | 0;
-                var t = lexbuf.lex_mem;
-                for(var i = 0 ,i_finish = t.length - 1 | 0; i <= i_finish; ++i){
+                var s = param.lex_start_pos;
+                param.lex_abs_pos = param.lex_abs_pos + s | 0;
+                param.lex_curr_pos = param.lex_curr_pos - s | 0;
+                param.lex_start_pos = 0;
+                param.lex_last_pos = param.lex_last_pos - s | 0;
+                param.lex_buffer_len = param.lex_buffer_len - s | 0;
+                var t = param.lex_mem;
+                for(var i = 0 ,i_finish = t.length; i < i_finish; ++i){
                   var v = Caml_array.caml_array_get(t, i);
                   if (v >= 0) {
                     Caml_array.caml_array_set(t, i, v - s | 0);
@@ -84,9 +81,9 @@ function from_function(f) {
                   
                 }
               }
-              Bytes.blit(aux_buffer, 0, lexbuf.lex_buffer, lexbuf.lex_buffer_len, n);
-              lexbuf.lex_buffer_len = lexbuf.lex_buffer_len + n | 0;
-              return /* () */0;
+              Bytes.blit(partial_arg, 0, param.lex_buffer, param.lex_buffer_len, n);
+              param.lex_buffer_len = param.lex_buffer_len + n | 0;
+              
             }),
           lex_buffer: Caml_bytes.caml_create_bytes(1024),
           lex_buffer_len: 0,
@@ -96,7 +93,7 @@ function from_function(f) {
           lex_last_pos: 0,
           lex_last_action: 0,
           lex_eof_reached: false,
-          lex_mem: /* array */[],
+          lex_mem: [],
           lex_start_p: zero_pos,
           lex_curr_p: zero_pos
         };
@@ -112,7 +109,7 @@ function from_string(s) {
   return {
           refill_buff: (function (lexbuf) {
               lexbuf.lex_eof_reached = true;
-              return /* () */0;
+              
             }),
           lex_buffer: Bytes.of_string(s),
           lex_buffer_len: s.length,
@@ -122,7 +119,7 @@ function from_string(s) {
           lex_last_pos: 0,
           lex_last_action: 0,
           lex_eof_reached: true,
-          lex_mem: /* array */[],
+          lex_mem: [],
           lex_start_p: zero_pos,
           lex_curr_p: zero_pos
         };
@@ -139,11 +136,11 @@ function sub_lexeme(lexbuf, i1, i2) {
 }
 
 function sub_lexeme_opt(lexbuf, i1, i2) {
-  if (i1 >= 0) {
-    var len = i2 - i1 | 0;
-    return Bytes.sub_string(lexbuf.lex_buffer, i1, len);
+  if (i1 < 0) {
+    return ;
   }
-  
+  var len = i2 - i1 | 0;
+  return Bytes.sub_string(lexbuf.lex_buffer, i1, len);
 }
 
 function sub_lexeme_char(lexbuf, i) {
@@ -185,7 +182,7 @@ function new_line(lexbuf) {
     pos_bol: lcp.pos_cnum,
     pos_cnum: lcp.pos_cnum
   };
-  return /* () */0;
+  
 }
 
 function flush_input(lb) {
@@ -199,7 +196,7 @@ function flush_input(lb) {
     pos_cnum: 0
   };
   lb.lex_buffer_len = 0;
-  return /* () */0;
+  
 }
 
 var dummy_pos = {

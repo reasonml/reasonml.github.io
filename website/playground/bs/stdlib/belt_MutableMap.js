@@ -10,131 +10,119 @@ function removeMutateAux(nt, x, cmp) {
   if (c === 0) {
     var l = nt.left;
     var r = nt.right;
-    if (l !== null) {
-      if (r !== null) {
+    if (l !== undefined) {
+      if (r !== undefined) {
         nt.right = Belt_internalAVLtree.removeMinAuxWithRootMutate(nt, r);
         return Belt_internalAVLtree.balMutate(nt);
       } else {
         return l;
       }
-    } else if (r !== null) {
+    } else if (r !== undefined) {
       return r;
     } else {
       return l;
     }
-  } else if (c < 0) {
-    var match = nt.left;
-    if (match !== null) {
-      nt.left = removeMutateAux(match, x, cmp);
+  }
+  if (c < 0) {
+    var l$1 = nt.left;
+    if (l$1 !== undefined) {
+      nt.left = removeMutateAux(l$1, x, cmp);
       return Belt_internalAVLtree.balMutate(nt);
     } else {
       return nt;
     }
+  }
+  var r$1 = nt.right;
+  if (r$1 !== undefined) {
+    nt.right = removeMutateAux(r$1, x, cmp);
+    return Belt_internalAVLtree.balMutate(nt);
   } else {
-    var match$1 = nt.right;
-    if (match$1 !== null) {
-      nt.right = removeMutateAux(match$1, x, cmp);
-      return Belt_internalAVLtree.balMutate(nt);
-    } else {
-      return nt;
-    }
+    return nt;
   }
 }
 
 function remove(d, k) {
   var oldRoot = d.data;
-  if (oldRoot !== null) {
-    var newRoot = removeMutateAux(oldRoot, k, d.cmp);
-    if (newRoot !== oldRoot) {
-      d.data = newRoot;
-      return /* () */0;
-    } else {
-      return 0;
-    }
-  } else {
-    return /* () */0;
+  if (oldRoot === undefined) {
+    return ;
   }
+  var newRoot = removeMutateAux(oldRoot, k, d.cmp);
+  if (newRoot !== oldRoot) {
+    d.data = newRoot;
+    return ;
+  }
+  
 }
 
 function removeArrayMutateAux(_t, xs, _i, len, cmp) {
   while(true) {
     var i = _i;
     var t = _t;
-    if (i < len) {
-      var ele = xs[i];
-      var u = removeMutateAux(t, ele, cmp);
-      if (u !== null) {
-        _i = i + 1 | 0;
-        _t = u;
-        continue ;
-      } else {
-        return Belt_internalAVLtree.empty;
-      }
-    } else {
+    if (i >= len) {
       return t;
     }
+    var ele = xs[i];
+    var u = removeMutateAux(t, ele, cmp);
+    if (u === undefined) {
+      return ;
+    }
+    _i = i + 1 | 0;
+    _t = u;
+    continue ;
   };
 }
 
 function removeMany(d, xs) {
   var oldRoot = d.data;
-  if (oldRoot !== null) {
-    var len = xs.length;
-    var newRoot = removeArrayMutateAux(oldRoot, xs, 0, len, d.cmp);
-    if (newRoot !== oldRoot) {
-      d.data = newRoot;
-      return /* () */0;
-    } else {
-      return 0;
-    }
-  } else {
-    return /* () */0;
+  if (oldRoot === undefined) {
+    return ;
   }
+  var len = xs.length;
+  var newRoot = removeArrayMutateAux(oldRoot, xs, 0, len, d.cmp);
+  if (newRoot !== oldRoot) {
+    d.data = newRoot;
+    return ;
+  }
+  
 }
 
 function updateDone(t, x, f, cmp) {
-  if (t !== null) {
+  if (t !== undefined) {
     var k = t.key;
     var c = cmp(x, k);
     if (c === 0) {
-      var match = f(Caml_option.some(t.value));
-      if (match !== undefined) {
-        t.value = Caml_option.valFromOption(match);
+      var data = f(Caml_option.some(t.value));
+      if (data !== undefined) {
+        t.value = Caml_option.valFromOption(data);
         return t;
-      } else {
-        var l = t.left;
-        var r = t.right;
-        if (l !== null) {
-          if (r !== null) {
-            t.right = Belt_internalAVLtree.removeMinAuxWithRootMutate(t, r);
-            return Belt_internalAVLtree.balMutate(t);
-          } else {
-            return l;
-          }
-        } else if (r !== null) {
-          return r;
+      }
+      var l = t.left;
+      var r = t.right;
+      if (l !== undefined) {
+        if (r !== undefined) {
+          t.right = Belt_internalAVLtree.removeMinAuxWithRootMutate(t, r);
+          return Belt_internalAVLtree.balMutate(t);
         } else {
           return l;
         }
-      }
-    } else {
-      var l$1 = t.left;
-      var r$1 = t.right;
-      if (c < 0) {
-        var ll = updateDone(l$1, x, f, cmp);
-        t.left = ll;
+      } else if (r !== undefined) {
+        return r;
       } else {
-        t.right = updateDone(r$1, x, f, cmp);
+        return l;
       }
-      return Belt_internalAVLtree.balMutate(t);
     }
-  } else {
-    var match$1 = f(undefined);
-    if (match$1 !== undefined) {
-      return Belt_internalAVLtree.singleton(x, Caml_option.valFromOption(match$1));
+    if (c < 0) {
+      t.left = updateDone(t.left, x, f, cmp);
     } else {
-      return t;
+      t.right = updateDone(t.right, x, f, cmp);
     }
+    return Belt_internalAVLtree.balMutate(t);
+  }
+  var data$1 = f(undefined);
+  if (data$1 !== undefined) {
+    return Belt_internalAVLtree.singleton(x, Caml_option.valFromOption(data$1));
+  } else {
+    return t;
   }
 }
 
@@ -143,10 +131,9 @@ function updateU(t, x, f) {
   var newRoot = updateDone(oldRoot, x, f, t.cmp);
   if (newRoot !== oldRoot) {
     t.data = newRoot;
-    return /* () */0;
-  } else {
-    return 0;
+    return ;
   }
+  
 }
 
 function update(t, x, f) {
@@ -156,18 +143,18 @@ function update(t, x, f) {
 function make(id) {
   return {
           cmp: id.cmp,
-          data: Belt_internalAVLtree.empty
+          data: undefined
         };
 }
 
 function clear(m) {
-  m.data = Belt_internalAVLtree.empty;
-  return /* () */0;
+  m.data = undefined;
+  
 }
 
 function isEmpty(d) {
   var x = d.data;
-  return x === null;
+  return x === undefined;
 }
 
 function minKey(m) {
@@ -329,15 +316,14 @@ function set(m, e, v) {
   var newRoot = Belt_internalAVLtree.updateMutate(oldRoot, e, v, m.cmp);
   if (newRoot !== oldRoot) {
     m.data = newRoot;
-    return /* () */0;
-  } else {
-    return 0;
+    return ;
   }
+  
 }
 
 function mergeManyAux(t, xs, cmp) {
   var v = t;
-  for(var i = 0 ,i_finish = xs.length - 1 | 0; i <= i_finish; ++i){
+  for(var i = 0 ,i_finish = xs.length; i < i_finish; ++i){
     var match = xs[i];
     v = Belt_internalAVLtree.updateMutate(v, match[0], match[1], cmp);
   }
@@ -349,15 +335,14 @@ function mergeMany(d, xs) {
   var newRoot = mergeManyAux(oldRoot, xs, d.cmp);
   if (newRoot !== oldRoot) {
     d.data = newRoot;
-    return /* () */0;
-  } else {
-    return 0;
+    return ;
   }
+  
 }
 
-var Int = /* alias */0;
+var Int;
 
-var $$String = /* alias */0;
+var $$String;
 
 exports.Int = Int;
 exports.$$String = $$String;

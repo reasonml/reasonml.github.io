@@ -4,38 +4,35 @@ var Belt_internalAVLset = require("./belt_internalAVLset.js");
 var Belt_internalSetInt = require("./belt_internalSetInt.js");
 
 function add(t, x) {
-  if (t !== null) {
-    var v = t.value;
-    if (x === v) {
+  if (t === undefined) {
+    return Belt_internalAVLset.singleton(x);
+  }
+  var v = t.value;
+  if (x === v) {
+    return t;
+  }
+  var l = t.left;
+  var r = t.right;
+  if (x < v) {
+    var ll = add(l, x);
+    if (ll === l) {
       return t;
     } else {
-      var l = t.left;
-      var r = t.right;
-      if (x < v) {
-        var ll = add(l, x);
-        if (ll === l) {
-          return t;
-        } else {
-          return Belt_internalAVLset.bal(ll, v, r);
-        }
-      } else {
-        var rr = add(r, x);
-        if (rr === r) {
-          return t;
-        } else {
-          return Belt_internalAVLset.bal(l, v, rr);
-        }
-      }
+      return Belt_internalAVLset.bal(ll, v, r);
     }
+  }
+  var rr = add(r, x);
+  if (rr === r) {
+    return t;
   } else {
-    return Belt_internalAVLset.singleton(x);
+    return Belt_internalAVLset.bal(l, v, rr);
   }
 }
 
 function mergeMany(h, arr) {
   var len = arr.length;
   var v = h;
-  for(var i = 0 ,i_finish = len - 1 | 0; i <= i_finish; ++i){
+  for(var i = 0; i < len; ++i){
     var key = arr[i];
     v = add(v, key);
   }
@@ -43,48 +40,45 @@ function mergeMany(h, arr) {
 }
 
 function remove(t, x) {
-  if (t !== null) {
-    var l = t.left;
-    var v = t.value;
-    var r = t.right;
-    if (x === v) {
-      if (l !== null) {
-        if (r !== null) {
-          var v$1 = {
-            contents: r.value
-          };
-          var r$1 = Belt_internalAVLset.removeMinAuxWithRef(r, v$1);
-          return Belt_internalAVLset.bal(l, v$1.contents, r$1);
-        } else {
-          return l;
-        }
-      } else {
-        return r;
-      }
-    } else if (x < v) {
-      var ll = remove(l, x);
-      if (ll === l) {
-        return t;
-      } else {
-        return Belt_internalAVLset.bal(ll, v, r);
-      }
-    } else {
-      var rr = remove(r, x);
-      if (rr === r) {
-        return t;
-      } else {
-        return Belt_internalAVLset.bal(l, v, rr);
-      }
-    }
-  } else {
+  if (t === undefined) {
     return t;
+  }
+  var v = t.value;
+  var l = t.left;
+  var r = t.right;
+  if (x === v) {
+    if (l === undefined) {
+      return r;
+    }
+    if (r === undefined) {
+      return l;
+    }
+    var v$1 = {
+      contents: r.value
+    };
+    var r$1 = Belt_internalAVLset.removeMinAuxWithRef(r, v$1);
+    return Belt_internalAVLset.bal(l, v$1.contents, r$1);
+  }
+  if (x < v) {
+    var ll = remove(l, x);
+    if (ll === l) {
+      return t;
+    } else {
+      return Belt_internalAVLset.bal(ll, v, r);
+    }
+  }
+  var rr = remove(r, x);
+  if (rr === r) {
+    return t;
+  } else {
+    return Belt_internalAVLset.bal(l, v, rr);
   }
 }
 
 function removeMany(h, arr) {
   var len = arr.length;
   var v = h;
-  for(var i = 0 ,i_finish = len - 1 | 0; i <= i_finish; ++i){
+  for(var i = 0; i < len; ++i){
     var key = arr[i];
     v = remove(v, key);
   }
@@ -92,44 +86,44 @@ function removeMany(h, arr) {
 }
 
 function splitAuxNoPivot(n, x) {
-  var l = n.left;
   var v = n.value;
+  var l = n.left;
   var r = n.right;
   if (x === v) {
     return /* tuple */[
             l,
             r
           ];
-  } else if (x < v) {
-    if (l !== null) {
-      var match = splitAuxNoPivot(l, x);
+  }
+  if (x < v) {
+    if (l === undefined) {
       return /* tuple */[
-              match[0],
-              Belt_internalAVLset.joinShared(match[1], v, r)
-            ];
-    } else {
-      return /* tuple */[
-              Belt_internalAVLset.empty,
+              undefined,
               n
             ];
     }
-  } else if (r !== null) {
-    var match$1 = splitAuxNoPivot(r, x);
+    var match = splitAuxNoPivot(l, x);
     return /* tuple */[
-            Belt_internalAVLset.joinShared(l, v, match$1[0]),
-            match$1[1]
-          ];
-  } else {
-    return /* tuple */[
-            n,
-            Belt_internalAVLset.empty
+            match[0],
+            Belt_internalAVLset.joinShared(match[1], v, r)
           ];
   }
+  if (r === undefined) {
+    return /* tuple */[
+            n,
+            undefined
+          ];
+  }
+  var match$1 = splitAuxNoPivot(r, x);
+  return /* tuple */[
+          Belt_internalAVLset.joinShared(l, v, match$1[0]),
+          match$1[1]
+        ];
 }
 
 function splitAuxPivot(n, x, pres) {
-  var l = n.left;
   var v = n.value;
+  var l = n.left;
   var r = n.right;
   if (x === v) {
     pres.contents = true;
@@ -137,129 +131,129 @@ function splitAuxPivot(n, x, pres) {
             l,
             r
           ];
-  } else if (x < v) {
-    if (l !== null) {
-      var match = splitAuxPivot(l, x, pres);
+  }
+  if (x < v) {
+    if (l === undefined) {
       return /* tuple */[
-              match[0],
-              Belt_internalAVLset.joinShared(match[1], v, r)
-            ];
-    } else {
-      return /* tuple */[
-              Belt_internalAVLset.empty,
+              undefined,
               n
             ];
     }
-  } else if (r !== null) {
-    var match$1 = splitAuxPivot(r, x, pres);
+    var match = splitAuxPivot(l, x, pres);
     return /* tuple */[
-            Belt_internalAVLset.joinShared(l, v, match$1[0]),
-            match$1[1]
-          ];
-  } else {
-    return /* tuple */[
-            n,
-            Belt_internalAVLset.empty
+            match[0],
+            Belt_internalAVLset.joinShared(match[1], v, r)
           ];
   }
+  if (r === undefined) {
+    return /* tuple */[
+            n,
+            undefined
+          ];
+  }
+  var match$1 = splitAuxPivot(r, x, pres);
+  return /* tuple */[
+          Belt_internalAVLset.joinShared(l, v, match$1[0]),
+          match$1[1]
+        ];
 }
 
 function split(t, x) {
-  if (t !== null) {
-    var pres = {
-      contents: false
-    };
-    var v = splitAuxPivot(t, x, pres);
-    return /* tuple */[
-            v,
-            pres.contents
-          ];
-  } else {
+  if (t === undefined) {
     return /* tuple */[
             /* tuple */[
-              Belt_internalAVLset.empty,
-              Belt_internalAVLset.empty
+              undefined,
+              undefined
             ],
             false
           ];
   }
+  var pres = {
+    contents: false
+  };
+  var v = splitAuxPivot(t, x, pres);
+  return /* tuple */[
+          v,
+          pres.contents
+        ];
 }
 
 function union(s1, s2) {
-  if (s1 !== null) {
-    if (s2 !== null) {
-      var h1 = s1.height;
-      var h2 = s2.height;
-      if (h1 >= h2) {
-        if (h2 === 1) {
-          return add(s1, s2.value);
-        } else {
-          var l1 = s1.left;
-          var v1 = s1.value;
-          var r1 = s1.right;
-          var match = splitAuxNoPivot(s2, v1);
-          return Belt_internalAVLset.joinShared(union(l1, match[0]), v1, union(r1, match[1]));
-        }
-      } else if (h1 === 1) {
-        return add(s2, s1.value);
-      } else {
-        var l2 = s2.left;
-        var v2 = s2.value;
-        var r2 = s2.right;
-        var match$1 = splitAuxNoPivot(s1, v2);
-        return Belt_internalAVLset.joinShared(union(match$1[0], l2), v2, union(match$1[1], r2));
-      }
-    } else {
-      return s1;
-    }
-  } else {
+  if (s1 === undefined) {
     return s2;
   }
+  if (s2 === undefined) {
+    return s1;
+  }
+  var h1 = s1.height;
+  var h2 = s2.height;
+  if (h1 >= h2) {
+    if (h2 === 1) {
+      return add(s1, s2.value);
+    }
+    var v1 = s1.value;
+    var l1 = s1.left;
+    var r1 = s1.right;
+    var match = splitAuxNoPivot(s2, v1);
+    return Belt_internalAVLset.joinShared(union(l1, match[0]), v1, union(r1, match[1]));
+  }
+  if (h1 === 1) {
+    return add(s2, s1.value);
+  }
+  var v2 = s2.value;
+  var l2 = s2.left;
+  var r2 = s2.right;
+  var match$1 = splitAuxNoPivot(s1, v2);
+  return Belt_internalAVLset.joinShared(union(match$1[0], l2), v2, union(match$1[1], r2));
 }
 
 function intersect(s1, s2) {
-  if (s1 !== null && s2 !== null) {
-    var l1 = s1.left;
-    var v1 = s1.value;
-    var r1 = s1.right;
-    var pres = {
-      contents: false
-    };
-    var match = splitAuxPivot(s2, v1, pres);
-    var ll = intersect(l1, match[0]);
-    var rr = intersect(r1, match[1]);
-    if (pres.contents) {
-      return Belt_internalAVLset.joinShared(ll, v1, rr);
-    } else {
-      return Belt_internalAVLset.concatShared(ll, rr);
-    }
+  if (s1 === undefined) {
+    return ;
+  }
+  if (s2 === undefined) {
+    return ;
+  }
+  var v1 = s1.value;
+  var l1 = s1.left;
+  var r1 = s1.right;
+  var pres = {
+    contents: false
+  };
+  var match = splitAuxPivot(s2, v1, pres);
+  var ll = intersect(l1, match[0]);
+  var rr = intersect(r1, match[1]);
+  if (pres.contents) {
+    return Belt_internalAVLset.joinShared(ll, v1, rr);
   } else {
-    return Belt_internalAVLset.empty;
+    return Belt_internalAVLset.concatShared(ll, rr);
   }
 }
 
 function diff(s1, s2) {
-  if (s1 !== null && s2 !== null) {
-    var l1 = s1.left;
-    var v1 = s1.value;
-    var r1 = s1.right;
-    var pres = {
-      contents: false
-    };
-    var match = splitAuxPivot(s2, v1, pres);
-    var ll = diff(l1, match[0]);
-    var rr = diff(r1, match[1]);
-    if (pres.contents) {
-      return Belt_internalAVLset.concatShared(ll, rr);
-    } else {
-      return Belt_internalAVLset.joinShared(ll, v1, rr);
-    }
-  } else {
+  if (s1 === undefined) {
     return s1;
+  }
+  if (s2 === undefined) {
+    return s1;
+  }
+  var v1 = s1.value;
+  var l1 = s1.left;
+  var r1 = s1.right;
+  var pres = {
+    contents: false
+  };
+  var match = splitAuxPivot(s2, v1, pres);
+  var ll = diff(l1, match[0]);
+  var rr = diff(r1, match[1]);
+  if (pres.contents) {
+    return Belt_internalAVLset.concatShared(ll, rr);
+  } else {
+    return Belt_internalAVLset.joinShared(ll, v1, rr);
   }
 }
 
-var empty = Belt_internalAVLset.empty;
+var empty;
 
 var fromArray = Belt_internalSetInt.fromArray;
 

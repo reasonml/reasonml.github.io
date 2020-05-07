@@ -1,14 +1,14 @@
 'use strict';
 
 var Caml_bytes = require("./caml_bytes.js");
-var Caml_builtin_exceptions = require("./caml_builtin_exceptions.js");
 
 function chr(n) {
   if (n < 0 || n > 255) {
-    throw [
-          Caml_builtin_exceptions.invalid_argument,
-          "Char.chr"
-        ];
+    throw {
+          RE_EXN_ID: "Invalid_argument",
+          _1: "Char.chr",
+          Error: new Error()
+        };
   }
   return n;
 }
@@ -16,17 +16,15 @@ function chr(n) {
 function escaped(c) {
   var exit = 0;
   if (c >= 40) {
-    if (c !== 92) {
-      exit = c >= 127 ? 1 : 2;
-    } else {
+    if (c === 92) {
       return "\\\\";
     }
+    exit = c >= 127 ? 1 : 2;
   } else if (c >= 32) {
     if (c >= 39) {
       return "\\'";
-    } else {
-      exit = 2;
     }
+    exit = 2;
   } else if (c >= 14) {
     exit = 1;
   } else {

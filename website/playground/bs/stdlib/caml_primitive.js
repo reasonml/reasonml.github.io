@@ -52,20 +52,19 @@ function caml_string_compare(s1, s2) {
 function caml_bytes_compare_aux(s1, s2, _off, len, def) {
   while(true) {
     var off = _off;
-    if (off < len) {
-      var a = s1[off];
-      var b = s2[off];
-      if (a > b) {
-        return 1;
-      } else if (a < b) {
-        return -1;
-      } else {
-        _off = off + 1 | 0;
-        continue ;
-      }
-    } else {
+    if (off >= len) {
       return def;
     }
+    var a = s1[off];
+    var b = s2[off];
+    if (a > b) {
+      return 1;
+    }
+    if (a < b) {
+      return -1;
+    }
+    _off = off + 1 | 0;
+    continue ;
   };
 }
 
@@ -85,24 +84,19 @@ function caml_bytes_equal(s1, s2) {
   var len1 = s1.length;
   var len2 = s2.length;
   if (len1 === len2) {
-    var s1$1 = s1;
-    var s2$1 = s2;
     var _off = 0;
-    var len = len1;
     while(true) {
       var off = _off;
-      if (off === len) {
+      if (off === len1) {
         return true;
-      } else {
-        var a = s1$1[off];
-        var b = s2$1[off];
-        if (a === b) {
-          _off = off + 1 | 0;
-          continue ;
-        } else {
-          return false;
-        }
       }
+      var a = s1[off];
+      var b = s2[off];
+      if (a !== b) {
+        return false;
+      }
+      _off = off + 1 | 0;
+      continue ;
     };
   } else {
     return false;

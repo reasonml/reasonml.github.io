@@ -2,8 +2,6 @@
 
 var Caml_int32 = require("./caml_int32.js");
 var Caml_int64 = require("./caml_int64.js");
-var Caml_utils = require("./caml_utils.js");
-var Caml_builtin_exceptions = require("./caml_builtin_exceptions.js");
 
 function parse_digit(c) {
   if (c >= 65) {
@@ -138,10 +136,11 @@ function caml_int_of_string(s) {
   var c = i < len ? s.charCodeAt(i) : /* "\000" */0;
   var d = parse_digit(c);
   if (d < 0 || d >= base) {
-    throw [
-          Caml_builtin_exceptions.failure,
-          "int_of_string"
-        ];
+    throw {
+          RE_EXN_ID: "Failure",
+          _1: "int_of_string",
+          Error: new Error()
+        };
   }
   var aux = function (_acc, _k) {
     while(true) {
@@ -149,40 +148,41 @@ function caml_int_of_string(s) {
       var acc = _acc;
       if (k === len) {
         return acc;
-      } else {
-        var a = s.charCodeAt(k);
-        if (a === /* "_" */95) {
-          _k = k + 1 | 0;
-          continue ;
-        } else {
-          var v = parse_digit(a);
-          if (v < 0 || v >= base) {
-            throw [
-                  Caml_builtin_exceptions.failure,
-                  "int_of_string"
-                ];
-          }
-          var acc$1 = base * acc + v;
-          if (acc$1 > threshold) {
-            throw [
-                  Caml_builtin_exceptions.failure,
-                  "int_of_string"
-                ];
-          }
-          _k = k + 1 | 0;
-          _acc = acc$1;
-          continue ;
-        }
       }
+      var a = s.charCodeAt(k);
+      if (a === /* "_" */95) {
+        _k = k + 1 | 0;
+        continue ;
+      }
+      var v = parse_digit(a);
+      if (v < 0 || v >= base) {
+        throw {
+              RE_EXN_ID: "Failure",
+              _1: "int_of_string",
+              Error: new Error()
+            };
+      }
+      var acc$1 = base * acc + v;
+      if (acc$1 > threshold) {
+        throw {
+              RE_EXN_ID: "Failure",
+              _1: "int_of_string",
+              Error: new Error()
+            };
+      }
+      _k = k + 1 | 0;
+      _acc = acc$1;
+      continue ;
     };
   };
   var res = match[1] * aux(d, i + 1 | 0);
   var or_res = res | 0;
   if (base === 10 && res !== or_res) {
-    throw [
-          Caml_builtin_exceptions.failure,
-          "int_of_string"
-        ];
+    throw {
+          RE_EXN_ID: "Failure",
+          _1: "int_of_string",
+          Error: new Error()
+        };
   }
   return or_res;
 }
@@ -196,42 +196,28 @@ function caml_int64_of_string(s) {
   var threshold;
   switch (hbase) {
     case /* Oct */0 :
-        threshold = /* int64 */{
-          hi: 536870911,
-          lo: 4294967295
-        };
+        threshold = Caml_int64.mk(-1, 536870911);
         break;
     case /* Hex */1 :
-        threshold = /* int64 */{
-          hi: 268435455,
-          lo: 4294967295
-        };
+        threshold = Caml_int64.mk(-1, 268435455);
         break;
     case /* Dec */2 :
-        threshold = /* int64 */{
-          hi: 429496729,
-          lo: 2576980377
-        };
+        threshold = Caml_int64.mk(-1717986919, 429496729);
         break;
     case /* Bin */3 :
-        threshold = /* int64 */{
-          hi: 2147483647,
-          lo: 4294967295
-        };
+        threshold = Caml_int64.max_int;
         break;
     
   }
   var len = s.length;
   var c = i < len ? s.charCodeAt(i) : /* "\000" */0;
   var d = Caml_int64.of_int32(parse_digit(c));
-  if (Caml_int64.lt(d, /* int64 */{
-          hi: 0,
-          lo: 0
-        }) || Caml_int64.ge(d, base)) {
-    throw [
-          Caml_builtin_exceptions.failure,
-          "int64_of_string"
-        ];
+  if (Caml_int64.lt(d, Caml_int64.zero) || Caml_int64.ge(d, base)) {
+    throw {
+          RE_EXN_ID: "Failure",
+          _1: "int64_of_string",
+          Error: new Error()
+        };
   }
   var aux = function (_acc, _k) {
     while(true) {
@@ -239,43 +225,34 @@ function caml_int64_of_string(s) {
       var acc = _acc;
       if (k === len) {
         return acc;
-      } else {
-        var a = s.charCodeAt(k);
-        if (a === /* "_" */95) {
-          _k = k + 1 | 0;
-          continue ;
-        } else {
-          var v = Caml_int64.of_int32(parse_digit(a));
-          if (Caml_int64.lt(v, /* int64 */{
-                  hi: 0,
-                  lo: 0
-                }) || Caml_int64.ge(v, base) || Caml_int64.gt(acc, threshold)) {
-            throw [
-                  Caml_builtin_exceptions.failure,
-                  "int64_of_string"
-                ];
-          }
-          var acc$1 = Caml_int64.add(Caml_int64.mul(base, acc), v);
-          _k = k + 1 | 0;
-          _acc = acc$1;
-          continue ;
-        }
       }
+      var a = s.charCodeAt(k);
+      if (a === /* "_" */95) {
+        _k = k + 1 | 0;
+        continue ;
+      }
+      var v = Caml_int64.of_int32(parse_digit(a));
+      if (Caml_int64.lt(v, Caml_int64.zero) || Caml_int64.ge(v, base) || Caml_int64.gt(acc, threshold)) {
+        throw {
+              RE_EXN_ID: "Failure",
+              _1: "int64_of_string",
+              Error: new Error()
+            };
+      }
+      var acc$1 = Caml_int64.add(Caml_int64.mul(base, acc), v);
+      _k = k + 1 | 0;
+      _acc = acc$1;
+      continue ;
     };
   };
   var res = Caml_int64.mul(sign, aux(d, i + 1 | 0));
-  var or_res = Caml_int64.or_(res, /* int64 */{
-        hi: 0,
-        lo: 0
-      });
-  if (Caml_int64.eq(base, /* int64 */{
-          hi: 0,
-          lo: 10
-        }) && Caml_int64.neq(res, or_res)) {
-    throw [
-          Caml_builtin_exceptions.failure,
-          "int64_of_string"
-        ];
+  var or_res = Caml_int64.or_(res, Caml_int64.zero);
+  if (Caml_int64.eq(base, Caml_int64.mk(10, 0)) && Caml_int64.neq(res, or_res)) {
+    throw {
+          RE_EXN_ID: "Failure",
+          _1: "int64_of_string",
+          Error: new Error()
+        };
   }
   return or_res;
 }
@@ -303,10 +280,11 @@ function lowercase(c) {
 function parse_format(fmt) {
   var len = fmt.length;
   if (len > 31) {
-    throw [
-          Caml_builtin_exceptions.invalid_argument,
-          "format_int: format too long"
-        ];
+    throw {
+          RE_EXN_ID: "Invalid_argument",
+          _1: "format_int: format too long",
+          Error: new Error()
+        };
   }
   var f = {
     justify: "+",
@@ -326,173 +304,172 @@ function parse_format(fmt) {
     var i = _i;
     if (i >= len) {
       return f;
-    } else {
-      var c = fmt.charCodeAt(i);
-      var exit = 0;
-      if (c >= 69) {
-        if (c >= 88) {
-          if (c >= 121) {
-            exit = 1;
-          } else {
-            switch (c - 88 | 0) {
-              case 0 :
-                  f.base = /* Hex */1;
-                  f.uppercase = true;
-                  _i = i + 1 | 0;
-                  continue ;
-              case 13 :
-              case 14 :
-              case 15 :
-                  exit = 5;
-                  break;
-              case 12 :
-              case 17 :
-                  exit = 4;
-                  break;
-              case 23 :
-                  f.base = /* Oct */0;
-                  _i = i + 1 | 0;
-                  continue ;
-              case 29 :
-                  f.base = /* Dec */2;
-                  _i = i + 1 | 0;
-                  continue ;
-              case 1 :
-              case 2 :
-              case 3 :
-              case 4 :
-              case 5 :
-              case 6 :
-              case 7 :
-              case 8 :
-              case 9 :
-              case 10 :
-              case 11 :
-              case 16 :
-              case 18 :
-              case 19 :
-              case 20 :
-              case 21 :
-              case 22 :
-              case 24 :
-              case 25 :
-              case 26 :
-              case 27 :
-              case 28 :
-              case 30 :
-              case 31 :
-                  exit = 1;
-                  break;
-              case 32 :
-                  f.base = /* Hex */1;
-                  _i = i + 1 | 0;
-                  continue ;
-              
-            }
-          }
-        } else if (c >= 72) {
+    }
+    var c = fmt.charCodeAt(i);
+    var exit = 0;
+    if (c >= 69) {
+      if (c >= 88) {
+        if (c >= 121) {
           exit = 1;
         } else {
-          f.signedconv = true;
-          f.uppercase = true;
-          f.conv = String.fromCharCode(lowercase(c));
-          _i = i + 1 | 0;
-          continue ;
+          switch (c - 88 | 0) {
+            case 0 :
+                f.base = /* Hex */1;
+                f.uppercase = true;
+                _i = i + 1 | 0;
+                continue ;
+            case 13 :
+            case 14 :
+            case 15 :
+                exit = 5;
+                break;
+            case 12 :
+            case 17 :
+                exit = 4;
+                break;
+            case 23 :
+                f.base = /* Oct */0;
+                _i = i + 1 | 0;
+                continue ;
+            case 29 :
+                f.base = /* Dec */2;
+                _i = i + 1 | 0;
+                continue ;
+            case 1 :
+            case 2 :
+            case 3 :
+            case 4 :
+            case 5 :
+            case 6 :
+            case 7 :
+            case 8 :
+            case 9 :
+            case 10 :
+            case 11 :
+            case 16 :
+            case 18 :
+            case 19 :
+            case 20 :
+            case 21 :
+            case 22 :
+            case 24 :
+            case 25 :
+            case 26 :
+            case 27 :
+            case 28 :
+            case 30 :
+            case 31 :
+                exit = 1;
+                break;
+            case 32 :
+                f.base = /* Hex */1;
+                _i = i + 1 | 0;
+                continue ;
+            
+          }
         }
+      } else if (c >= 72) {
+        exit = 1;
       } else {
-        switch (c) {
-          case 35 :
-              f.alternate = true;
-              _i = i + 1 | 0;
-              continue ;
-          case 32 :
-          case 43 :
-              exit = 2;
-              break;
-          case 45 :
-              f.justify = "-";
-              _i = i + 1 | 0;
-              continue ;
-          case 46 :
-              f.prec = 0;
-              var j = i + 1 | 0;
-              while((function(j){
-                  return function () {
-                    var w = fmt.charCodeAt(j) - /* "0" */48 | 0;
-                    return w >= 0 && w <= 9;
-                  }
-                  }(j))()) {
-                f.prec = (Caml_int32.imul(f.prec, 10) + fmt.charCodeAt(j) | 0) - /* "0" */48 | 0;
-                j = j + 1 | 0;
-              };
-              _i = j;
-              continue ;
-          case 33 :
-          case 34 :
-          case 36 :
-          case 37 :
-          case 38 :
-          case 39 :
-          case 40 :
-          case 41 :
-          case 42 :
-          case 44 :
-          case 47 :
-              exit = 1;
-              break;
-          case 48 :
-              f.filter = "0";
-              _i = i + 1 | 0;
-              continue ;
-          case 49 :
-          case 50 :
-          case 51 :
-          case 52 :
-          case 53 :
-          case 54 :
-          case 55 :
-          case 56 :
-          case 57 :
-              exit = 3;
-              break;
-          default:
-            exit = 1;
-        }
+        f.signedconv = true;
+        f.uppercase = true;
+        f.conv = String.fromCharCode(lowercase(c));
+        _i = i + 1 | 0;
+        continue ;
       }
-      switch (exit) {
-        case 1 :
+    } else {
+      switch (c) {
+        case 35 :
+            f.alternate = true;
             _i = i + 1 | 0;
             continue ;
-        case 2 :
-            f.signstyle = String.fromCharCode(c);
+        case 32 :
+        case 43 :
+            exit = 2;
+            break;
+        case 45 :
+            f.justify = "-";
             _i = i + 1 | 0;
             continue ;
-        case 3 :
-            f.width = 0;
-            var j$1 = i;
-            while((function(j$1){
+        case 46 :
+            f.prec = 0;
+            var j = i + 1 | 0;
+            while((function(j){
                 return function () {
-                  var w = fmt.charCodeAt(j$1) - /* "0" */48 | 0;
+                  var w = fmt.charCodeAt(j) - /* "0" */48 | 0;
                   return w >= 0 && w <= 9;
                 }
-                }(j$1))()) {
-              f.width = (Caml_int32.imul(f.width, 10) + fmt.charCodeAt(j$1) | 0) - /* "0" */48 | 0;
-              j$1 = j$1 + 1 | 0;
+                }(j))()) {
+              f.prec = (Caml_int32.imul(f.prec, 10) + fmt.charCodeAt(j) | 0) - /* "0" */48 | 0;
+              j = j + 1 | 0;
             };
-            _i = j$1;
+            _i = j;
             continue ;
-        case 4 :
-            f.signedconv = true;
-            f.base = /* Dec */2;
+        case 33 :
+        case 34 :
+        case 36 :
+        case 37 :
+        case 38 :
+        case 39 :
+        case 40 :
+        case 41 :
+        case 42 :
+        case 44 :
+        case 47 :
+            exit = 1;
+            break;
+        case 48 :
+            f.filter = "0";
             _i = i + 1 | 0;
             continue ;
-        case 5 :
-            f.signedconv = true;
-            f.conv = String.fromCharCode(c);
-            _i = i + 1 | 0;
-            continue ;
-        
+        case 49 :
+        case 50 :
+        case 51 :
+        case 52 :
+        case 53 :
+        case 54 :
+        case 55 :
+        case 56 :
+        case 57 :
+            exit = 3;
+            break;
+        default:
+          exit = 1;
       }
+    }
+    switch (exit) {
+      case 1 :
+          _i = i + 1 | 0;
+          continue ;
+      case 2 :
+          f.signstyle = String.fromCharCode(c);
+          _i = i + 1 | 0;
+          continue ;
+      case 3 :
+          f.width = 0;
+          var j$1 = i;
+          while((function(j$1){
+              return function () {
+                var w = fmt.charCodeAt(j$1) - /* "0" */48 | 0;
+                return w >= 0 && w <= 9;
+              }
+              }(j$1))()) {
+            f.width = (Caml_int32.imul(f.width, 10) + fmt.charCodeAt(j$1) | 0) - /* "0" */48 | 0;
+            j$1 = j$1 + 1 | 0;
+          };
+          _i = j$1;
+          continue ;
+      case 4 :
+          f.signedconv = true;
+          f.base = /* Dec */2;
+          _i = i + 1 | 0;
+          continue ;
+      case 5 :
+          f.signedconv = true;
+          f.conv = String.fromCharCode(c);
+          _i = i + 1 | 0;
+          continue ;
+      
     }
   };
 }
@@ -521,7 +498,7 @@ function finish_formatting(config, rawbuffer) {
   }
   var buffer = "";
   if (justify === "+" && filter === " ") {
-    for(var i = len ,i_finish = width - 1 | 0; i <= i_finish; ++i){
+    for(var _for = len; _for < width; ++_for){
       buffer = buffer + filter;
     }
   }
@@ -540,13 +517,13 @@ function finish_formatting(config, rawbuffer) {
     buffer = buffer + "0x";
   }
   if (justify === "+" && filter === "0") {
-    for(var i$1 = len ,i_finish$1 = width - 1 | 0; i$1 <= i_finish$1; ++i$1){
+    for(var _for$1 = len; _for$1 < width; ++_for$1){
       buffer = buffer + filter;
     }
   }
   buffer = uppercase ? buffer + rawbuffer.toUpperCase() : buffer + rawbuffer;
   if (justify === "-") {
-    for(var i$2 = len ,i_finish$2 = width - 1 | 0; i$2 <= i_finish$2; ++i$2){
+    for(var _for$2 = len; _for$2 < width; ++_for$2){
       buffer = buffer + " ";
     }
   }
@@ -556,139 +533,95 @@ function finish_formatting(config, rawbuffer) {
 function caml_format_int(fmt, i) {
   if (fmt === "%d") {
     return String(i);
-  } else {
-    var f = parse_format(fmt);
-    var f$1 = f;
-    var i$1 = i;
-    var i$2 = i$1 < 0 ? (
-        f$1.signedconv ? (f$1.sign = -1, -i$1) : (i$1 >>> 0)
-      ) : i$1;
-    var s = i$2.toString(int_of_base(f$1.base));
-    if (f$1.prec >= 0) {
-      f$1.filter = " ";
-      var n = f$1.prec - s.length | 0;
-      if (n > 0) {
-        s = Caml_utils.repeat(n, "0") + s;
-      }
-      
-    }
-    return finish_formatting(f$1, s);
   }
-}
-
-function caml_int64_format(fmt, x) {
   var f = parse_format(fmt);
-  var x$1 = f.signedconv && Caml_int64.lt(x, /* int64 */{
-        hi: 0,
-        lo: 0
-      }) ? (f.sign = -1, Caml_int64.neg(x)) : x;
-  var s = "";
-  var match = f.base;
-  switch (match) {
-    case /* Oct */0 :
-        var wbase = /* int64 */{
-          hi: 0,
-          lo: 8
-        };
-        var cvtbl = "01234567";
-        if (Caml_int64.lt(x$1, /* int64 */{
-                hi: 0,
-                lo: 0
-              })) {
-          var y = Caml_int64.discard_sign(x$1);
-          var match$1 = Caml_int64.div_mod(y, wbase);
-          var quotient = Caml_int64.add(/* int64 */{
-                hi: 268435456,
-                lo: 0
-              }, match$1[0]);
-          var modulus = match$1[1];
-          s = String.fromCharCode(cvtbl.charCodeAt(Caml_int64.to_int32(modulus))) + s;
-          while(Caml_int64.neq(quotient, /* int64 */{
-                  hi: 0,
-                  lo: 0
-                })) {
-            var match$2 = Caml_int64.div_mod(quotient, wbase);
-            quotient = match$2[0];
-            modulus = match$2[1];
-            s = String.fromCharCode(cvtbl.charCodeAt(Caml_int64.to_int32(modulus))) + s;
-          };
-        } else {
-          var match$3 = Caml_int64.div_mod(x$1, wbase);
-          var quotient$1 = match$3[0];
-          var modulus$1 = match$3[1];
-          s = String.fromCharCode(cvtbl.charCodeAt(Caml_int64.to_int32(modulus$1))) + s;
-          while(Caml_int64.neq(quotient$1, /* int64 */{
-                  hi: 0,
-                  lo: 0
-                })) {
-            var match$4 = Caml_int64.div_mod(quotient$1, wbase);
-            quotient$1 = match$4[0];
-            modulus$1 = match$4[1];
-            s = String.fromCharCode(cvtbl.charCodeAt(Caml_int64.to_int32(modulus$1))) + s;
-          };
-        }
-        break;
-    case /* Hex */1 :
-        s = Caml_int64.to_hex(x$1) + s;
-        break;
-    case /* Dec */2 :
-        var wbase$1 = /* int64 */{
-          hi: 0,
-          lo: 10
-        };
-        var cvtbl$1 = "0123456789";
-        if (Caml_int64.lt(x$1, /* int64 */{
-                hi: 0,
-                lo: 0
-              })) {
-          var y$1 = Caml_int64.discard_sign(x$1);
-          var match$5 = Caml_int64.div_mod(y$1, wbase$1);
-          var match$6 = Caml_int64.div_mod(Caml_int64.add(/* int64 */{
-                    hi: 0,
-                    lo: 8
-                  }, match$5[1]), wbase$1);
-          var quotient$2 = Caml_int64.add(Caml_int64.add(/* int64 */{
-                    hi: 214748364,
-                    lo: 3435973836
-                  }, match$5[0]), match$6[0]);
-          var modulus$2 = match$6[1];
-          s = String.fromCharCode(cvtbl$1.charCodeAt(Caml_int64.to_int32(modulus$2))) + s;
-          while(Caml_int64.neq(quotient$2, /* int64 */{
-                  hi: 0,
-                  lo: 0
-                })) {
-            var match$7 = Caml_int64.div_mod(quotient$2, wbase$1);
-            quotient$2 = match$7[0];
-            modulus$2 = match$7[1];
-            s = String.fromCharCode(cvtbl$1.charCodeAt(Caml_int64.to_int32(modulus$2))) + s;
-          };
-        } else {
-          var match$8 = Caml_int64.div_mod(x$1, wbase$1);
-          var quotient$3 = match$8[0];
-          var modulus$3 = match$8[1];
-          s = String.fromCharCode(cvtbl$1.charCodeAt(Caml_int64.to_int32(modulus$3))) + s;
-          while(Caml_int64.neq(quotient$3, /* int64 */{
-                  hi: 0,
-                  lo: 0
-                })) {
-            var match$9 = Caml_int64.div_mod(quotient$3, wbase$1);
-            quotient$3 = match$9[0];
-            modulus$3 = match$9[1];
-            s = String.fromCharCode(cvtbl$1.charCodeAt(Caml_int64.to_int32(modulus$3))) + s;
-          };
-        }
-        break;
-    
-  }
+  var i$1 = i < 0 ? (
+      f.signedconv ? (f.sign = -1, -i) : (i >>> 0)
+    ) : i;
+  var s = i$1.toString(int_of_base(f.base));
   if (f.prec >= 0) {
     f.filter = " ";
     var n = f.prec - s.length | 0;
     if (n > 0) {
-      s = Caml_utils.repeat(n, "0") + s;
+      s = "0".repeat(n) + s;
     }
     
   }
   return finish_formatting(f, s);
+}
+
+function dec_of_pos_int64(x) {
+  if (!Caml_int64.lt(x, Caml_int64.zero)) {
+    return Caml_int64.to_string(x);
+  }
+  var wbase = Caml_int64.mk(10, 0);
+  var y = Caml_int64.discard_sign(x);
+  var match = Caml_int64.div_mod(y, wbase);
+  var match$1 = Caml_int64.div_mod(Caml_int64.add(Caml_int64.mk(8, 0), match[1]), wbase);
+  var quotient = Caml_int64.add(Caml_int64.add(Caml_int64.mk(-858993460, 214748364), match[0]), match$1[0]);
+  return Caml_int64.to_string(quotient) + "0123456789"[Caml_int64.to_int32(match$1[1])];
+}
+
+function oct_of_int64(x) {
+  var s = "";
+  var wbase = Caml_int64.mk(8, 0);
+  var cvtbl = "01234567";
+  if (Caml_int64.lt(x, Caml_int64.zero)) {
+    var y = Caml_int64.discard_sign(x);
+    var match = Caml_int64.div_mod(y, wbase);
+    var quotient = Caml_int64.add(Caml_int64.mk(0, 268435456), match[0]);
+    var modulus = match[1];
+    s = cvtbl[Caml_int64.to_int32(modulus)] + s;
+    while(Caml_int64.neq(quotient, Caml_int64.zero)) {
+      var match$1 = Caml_int64.div_mod(quotient, wbase);
+      quotient = match$1[0];
+      modulus = match$1[1];
+      s = cvtbl[Caml_int64.to_int32(modulus)] + s;
+    };
+  } else {
+    var match$2 = Caml_int64.div_mod(x, wbase);
+    var quotient$1 = match$2[0];
+    var modulus$1 = match$2[1];
+    s = cvtbl[Caml_int64.to_int32(modulus$1)] + s;
+    while(Caml_int64.neq(quotient$1, Caml_int64.zero)) {
+      var match$3 = Caml_int64.div_mod(quotient$1, wbase);
+      quotient$1 = match$3[0];
+      modulus$1 = match$3[1];
+      s = cvtbl[Caml_int64.to_int32(modulus$1)] + s;
+    };
+  }
+  return s;
+}
+
+function caml_int64_format(fmt, x) {
+  if (fmt === "%d") {
+    return Caml_int64.to_string(x);
+  }
+  var f = parse_format(fmt);
+  var x$1 = f.signedconv && Caml_int64.lt(x, Caml_int64.zero) ? (f.sign = -1, Caml_int64.neg(x)) : x;
+  var match = f.base;
+  var s;
+  switch (match) {
+    case /* Oct */0 :
+        s = oct_of_int64(x$1);
+        break;
+    case /* Hex */1 :
+        s = Caml_int64.to_hex(x$1);
+        break;
+    case /* Dec */2 :
+        s = dec_of_pos_int64(x$1);
+        break;
+    
+  }
+  var fill_s;
+  if (f.prec >= 0) {
+    f.filter = " ";
+    var n = f.prec - s.length | 0;
+    fill_s = n > 0 ? "0".repeat(n) + s : s;
+  } else {
+    fill_s = s;
+  }
+  return finish_formatting(f, fill_s);
 }
 
 function caml_format_float(fmt, x) {
@@ -767,7 +700,7 @@ function caml_format_float(fmt, x) {
   return finish_formatting(f, s);
 }
 
-function caml_hexstring_of_float (x,prec,style){ 
+var caml_hexstring_of_float = (function(x,prec,style){
   if (!isFinite(x)) {
     if (isNaN(x)) return "nan";
     return x > 0 ? "infinity":"-infinity";
@@ -811,9 +744,9 @@ function caml_hexstring_of_float (x,prec,style){
     }
   }
   return  (sign_str + '0x' + x_str + 'p' + exp_sign + exp.toString(10));
-};
+});
 
-function float_of_string (s,exn){ 
+var float_of_string = (function(s,exn){
 
     var res = +s;
     if ((s.length > 0) && (res === res))
@@ -837,14 +770,13 @@ function float_of_string (s,exn){
     if (/^-inf(inity)?$/i.test(s))
         return -Infinity;
     throw exn;
-
-};
+});
 
 function caml_float_of_string(s) {
-  return float_of_string(s, [
-              Caml_builtin_exceptions.failure,
-              "float_of_string"
-            ]);
+  return float_of_string(s, {
+              RE_EXN_ID: "Failure",
+              _1: "float_of_string"
+            });
 }
 
 var caml_nativeint_format = caml_format_int;
