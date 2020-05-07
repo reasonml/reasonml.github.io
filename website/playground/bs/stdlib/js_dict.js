@@ -9,16 +9,15 @@ function get(dict, k) {
   
 }
 
-function unsafeDeleteKey (dict,key){
-     delete dict[key];
-     return 0
-  };
+var unsafeDeleteKey = (function (dict,key){
+      delete dict[key];
+     });
 
 function entries(dict) {
   var keys = Object.keys(dict);
   var l = keys.length;
   var values = new Array(l);
-  for(var i = 0 ,i_finish = l - 1 | 0; i <= i_finish; ++i){
+  for(var i = 0; i < l; ++i){
     var key = keys[i];
     values[i] = /* tuple */[
       key,
@@ -32,7 +31,7 @@ function values(dict) {
   var keys = Object.keys(dict);
   var l = keys.length;
   var values$1 = new Array(l);
-  for(var i = 0 ,i_finish = l - 1 | 0; i <= i_finish; ++i){
+  for(var i = 0; i < l; ++i){
     values$1[i] = dict[keys[i]];
   }
   return values$1;
@@ -43,21 +42,20 @@ function fromList(entries) {
   var _param = entries;
   while(true) {
     var param = _param;
-    if (param) {
-      var match = param[0];
-      dict[match[0]] = match[1];
-      _param = param[1];
-      continue ;
-    } else {
+    if (!param) {
       return dict;
     }
+    var match = param[0];
+    dict[match[0]] = match[1];
+    _param = param[1];
+    continue ;
   };
 }
 
 function fromArray(entries) {
   var dict = { };
   var l = entries.length;
-  for(var i = 0 ,i_finish = l - 1 | 0; i <= i_finish; ++i){
+  for(var i = 0; i < l; ++i){
     var match = entries[i];
     dict[match[0]] = match[1];
   }
@@ -68,7 +66,7 @@ function map(f, source) {
   var target = { };
   var keys = Object.keys(source);
   var l = keys.length;
-  for(var i = 0 ,i_finish = l - 1 | 0; i <= i_finish; ++i){
+  for(var i = 0; i < l; ++i){
     var key = keys[i];
     target[key] = f(source[key]);
   }

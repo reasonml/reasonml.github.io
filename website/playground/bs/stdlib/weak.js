@@ -10,19 +10,19 @@ var Caml_int32 = require("./caml_int32.js");
 var Pervasives = require("./pervasives.js");
 var Caml_option = require("./caml_option.js");
 var Caml_primitive = require("./caml_primitive.js");
-var Caml_builtin_exceptions = require("./caml_builtin_exceptions.js");
 
 function fill(ar, ofs, len, x) {
   if (ofs < 0 || len < 0 || (ofs + len | 0) > ar.length) {
-    throw [
-          Caml_builtin_exceptions.invalid_argument,
-          "Weak.fill"
-        ];
+    throw {
+          RE_EXN_ID: "Invalid_argument",
+          _1: "Weak.fill",
+          Error: new Error()
+        };
   }
-  for(var i = ofs ,i_finish = (ofs + len | 0) - 1 | 0; i <= i_finish; ++i){
+  for(var i = ofs ,i_finish = ofs + len | 0; i < i_finish; ++i){
     Caml_weak.caml_weak_set(ar, i, x);
   }
-  return /* () */0;
+  
 }
 
 function Make(H) {
@@ -35,87 +35,76 @@ function Make(H) {
     var sz$2 = sz$1 > Sys.max_array_length ? Sys.max_array_length : sz$1;
     return {
             table: Caml_array.caml_make_vect(sz$2, emptybucket),
-            hashes: Caml_array.caml_make_vect(sz$2, /* array */[]),
+            hashes: Caml_array.caml_make_vect(sz$2, []),
             limit: 7,
             oversize: 0,
             rover: 0
           };
   };
   var clear = function (t) {
-    for(var i = 0 ,i_finish = t.table.length - 1 | 0; i <= i_finish; ++i){
+    for(var i = 0 ,i_finish = t.table.length; i < i_finish; ++i){
       Caml_array.caml_array_set(t.table, i, emptybucket);
-      Caml_array.caml_array_set(t.hashes, i, /* array */[]);
+      Caml_array.caml_array_set(t.hashes, i, []);
     }
     t.limit = 7;
     t.oversize = 0;
-    return /* () */0;
+    
   };
   var fold = function (f, t, init) {
     return $$Array.fold_right((function (param, param$1) {
                   var _i = 0;
-                  var b = param;
                   var _accu = param$1;
                   while(true) {
                     var accu = _accu;
                     var i = _i;
-                    if (i >= b.length) {
+                    if (i >= param.length) {
                       return accu;
-                    } else {
-                      var match = Caml_weak.caml_weak_get(b, i);
-                      if (match !== undefined) {
-                        _accu = Curry._2(f, Caml_option.valFromOption(match), accu);
-                        _i = i + 1 | 0;
-                        continue ;
-                      } else {
-                        _i = i + 1 | 0;
-                        continue ;
-                      }
                     }
+                    var v = Caml_weak.caml_weak_get(param, i);
+                    if (v !== undefined) {
+                      _accu = Curry._2(f, Caml_option.valFromOption(v), accu);
+                      _i = i + 1 | 0;
+                      continue ;
+                    }
+                    _i = i + 1 | 0;
+                    continue ;
                   };
                 }), t.table, init);
   };
   var iter = function (f, t) {
     return $$Array.iter((function (param) {
                   var _i = 0;
-                  var b = param;
                   while(true) {
                     var i = _i;
-                    if (i >= b.length) {
-                      return /* () */0;
-                    } else {
-                      var match = Caml_weak.caml_weak_get(b, i);
-                      if (match !== undefined) {
-                        Curry._1(f, Caml_option.valFromOption(match));
-                        _i = i + 1 | 0;
-                        continue ;
-                      } else {
-                        _i = i + 1 | 0;
-                        continue ;
-                      }
+                    if (i >= param.length) {
+                      return ;
                     }
+                    var v = Caml_weak.caml_weak_get(param, i);
+                    if (v !== undefined) {
+                      Curry._1(f, Caml_option.valFromOption(v));
+                      _i = i + 1 | 0;
+                      continue ;
+                    }
+                    _i = i + 1 | 0;
+                    continue ;
                   };
                 }), t.table);
   };
   var iter_weak = function (f, t) {
     return $$Array.iteri((function (param, param$1) {
                   var _i = 0;
-                  var j = param;
-                  var b = param$1;
                   while(true) {
                     var i = _i;
-                    if (i >= b.length) {
-                      return /* () */0;
-                    } else {
-                      var match = Caml_weak.caml_weak_check(b, i);
-                      if (match) {
-                        Curry._3(f, b, Caml_array.caml_array_get(t.hashes, j), i);
-                        _i = i + 1 | 0;
-                        continue ;
-                      } else {
-                        _i = i + 1 | 0;
-                        continue ;
-                      }
+                    if (i >= param$1.length) {
+                      return ;
                     }
+                    if (Caml_weak.caml_weak_check(param$1, i)) {
+                      Curry._3(f, param$1, Caml_array.caml_array_get(t.hashes, param), i);
+                      _i = i + 1 | 0;
+                      continue ;
+                    }
+                    _i = i + 1 | 0;
+                    continue ;
                   };
                 }), t.table);
   };
@@ -125,13 +114,12 @@ function Make(H) {
       var i = _i;
       if (i >= b.length) {
         return accu;
-      } else {
-        _accu = accu + (
-          Caml_weak.caml_weak_check(b, i) ? 1 : 0
-        ) | 0;
-        _i = i + 1 | 0;
-        continue ;
       }
+      _accu = accu + (
+        Caml_weak.caml_weak_check(b, i) ? 1 : 0
+      ) | 0;
+      _i = i + 1 | 0;
+      continue ;
     };
   };
   var count = function (t) {
@@ -156,29 +144,28 @@ function Make(H) {
         while(true) {
           var j = _j;
           var i = _i;
-          if (j >= prev_len) {
-            if (Caml_weak.caml_weak_check(bucket, i)) {
-              _i = i + 1 | 0;
-              continue ;
-            } else if (Caml_weak.caml_weak_check(bucket, j)) {
-              Caml_weak.caml_weak_blit(bucket, j, bucket, i, 1);
-              Caml_array.caml_array_set(hbucket, i, Caml_array.caml_array_get(hbucket, j));
-              _j = j - 1 | 0;
-              _i = i + 1 | 0;
-              continue ;
-            } else {
-              _j = j - 1 | 0;
-              continue ;
-            }
-          } else {
-            return 0;
+          if (j < prev_len) {
+            return ;
           }
+          if (Caml_weak.caml_weak_check(bucket, i)) {
+            _i = i + 1 | 0;
+            continue ;
+          }
+          if (Caml_weak.caml_weak_check(bucket, j)) {
+            Caml_weak.caml_weak_blit(bucket, j, bucket, i, 1);
+            Caml_array.caml_array_set(hbucket, i, Caml_array.caml_array_get(hbucket, j));
+            _j = j - 1 | 0;
+            _i = i + 1 | 0;
+            continue ;
+          }
+          _j = j - 1 | 0;
+          continue ;
         };
       };
       loop(0, bucket.length - 1 | 0);
       if (prev_len === 0) {
         Caml_array.caml_array_set(t.table, t.rover, emptybucket);
-        Caml_array.caml_array_set(t.hashes, t.rover, /* array */[]);
+        Caml_array.caml_array_set(t.hashes, t.rover, []);
       } else {
         Caml_obj.caml_obj_truncate(bucket, prev_len + 0 | 0);
         Caml_obj.caml_obj_truncate(hbucket, prev_len);
@@ -189,7 +176,7 @@ function Make(H) {
       
     }
     t.rover = (t.rover + 1 | 0) % t.table.length;
-    return /* () */0;
+    
   };
   var add_aux = function (t, setter, d, h, index) {
     var bucket = Caml_array.caml_array_get(t.table, index);
@@ -201,10 +188,11 @@ function Make(H) {
       if (i >= sz) {
         var newsz = Caml_primitive.caml_int_min((Caml_int32.imul(3, sz) / 2 | 0) + 3 | 0, Sys.max_array_length - 0 | 0);
         if (newsz <= sz) {
-          throw [
-                Caml_builtin_exceptions.failure,
-                "Weak.Make: hash bucket cannot grow more"
-              ];
+          throw {
+                RE_EXN_ID: "Failure",
+                _1: "Weak.Make: hash bucket cannot grow more",
+                Error: new Error()
+              };
         }
         var newbucket = Caml_weak.caml_weak_create(newsz);
         var newhashes = Caml_array.caml_make_vect(newsz, 0);
@@ -221,8 +209,7 @@ function Make(H) {
           }
         }
         if (t.oversize > (t.table.length >> 1)) {
-          var t$1 = t;
-          var oldlen = t$1.table.length;
+          var oldlen = t.table.length;
           var newlen = next_sz(oldlen);
           if (newlen > oldlen) {
             var newt = create(newlen);
@@ -235,28 +222,27 @@ function Make(H) {
               return add_aux(newt, setter, undefined, h, get_index(newt, h));
             }
             }(newt));
-            iter_weak(add_weak, t$1);
-            t$1.table = newt.table;
-            t$1.hashes = newt.hashes;
-            t$1.limit = newt.limit;
-            t$1.oversize = newt.oversize;
-            t$1.rover = t$1.rover % newt.table.length;
-            return /* () */0;
-          } else {
-            t$1.limit = Pervasives.max_int;
-            t$1.oversize = 0;
-            return /* () */0;
+            iter_weak(add_weak, t);
+            t.table = newt.table;
+            t.hashes = newt.hashes;
+            t.limit = newt.limit;
+            t.oversize = newt.oversize;
+            t.rover = t.rover % newt.table.length;
+            return ;
           }
+          t.limit = Pervasives.max_int;
+          t.oversize = 0;
+          return ;
         } else {
-          return 0;
+          return ;
         }
-      } else if (Caml_weak.caml_weak_check(bucket, i)) {
+      }
+      if (Caml_weak.caml_weak_check(bucket, i)) {
         _i = i + 1 | 0;
         continue ;
-      } else {
-        Curry._3(setter, bucket, i, d);
-        return Caml_array.caml_array_set(hashes, i, h);
       }
+      Curry._3(setter, bucket, i, d);
+      return Caml_array.caml_array_set(hashes, i, h);
     };
   };
   var add = function (t, d) {
@@ -274,29 +260,26 @@ function Make(H) {
       var i = _i;
       if (i >= sz) {
         return Curry._2(ifnotfound, h, index);
-      } else if (h === Caml_array.caml_array_get(hashes, i)) {
-        var match = Caml_weak.caml_weak_get_copy(bucket, i);
-        if (match !== undefined) {
-          if (Curry._2(H.equal, Caml_option.valFromOption(match), d)) {
-            var match$1 = Caml_weak.caml_weak_get(bucket, i);
-            if (match$1 !== undefined) {
-              return Caml_option.valFromOption(match$1);
-            } else {
-              _i = i + 1 | 0;
-              continue ;
+      }
+      if (h === Caml_array.caml_array_get(hashes, i)) {
+        var v = Caml_weak.caml_weak_get_copy(bucket, i);
+        if (v !== undefined) {
+          if (Curry._2(H.equal, Caml_option.valFromOption(v), d)) {
+            var v$1 = Caml_weak.caml_weak_get(bucket, i);
+            if (v$1 !== undefined) {
+              return Caml_option.valFromOption(v$1);
             }
-          } else {
             _i = i + 1 | 0;
             continue ;
           }
-        } else {
           _i = i + 1 | 0;
           continue ;
         }
-      } else {
         _i = i + 1 | 0;
         continue ;
       }
+      _i = i + 1 | 0;
+      continue ;
     };
   };
   var merge = function (t, d) {
@@ -307,7 +290,10 @@ function Make(H) {
   };
   var find = function (t, d) {
     return find_or(t, d, (function (_h, _index) {
-                  throw Caml_builtin_exceptions.not_found;
+                  throw {
+                        RE_EXN_ID: "Not_found",
+                        Error: new Error()
+                      };
                 }));
   };
   var find_opt = function (t, d) {
@@ -321,29 +307,26 @@ function Make(H) {
       var i = _i;
       if (i >= sz) {
         return ;
-      } else if (h === Caml_array.caml_array_get(hashes, i)) {
-        var match = Caml_weak.caml_weak_get_copy(bucket, i);
-        if (match !== undefined) {
-          if (Curry._2(H.equal, Caml_option.valFromOption(match), d)) {
-            var v = Caml_weak.caml_weak_get(bucket, i);
-            if (v !== undefined) {
-              return v;
-            } else {
-              _i = i + 1 | 0;
-              continue ;
+      }
+      if (h === Caml_array.caml_array_get(hashes, i)) {
+        var v = Caml_weak.caml_weak_get_copy(bucket, i);
+        if (v !== undefined) {
+          if (Curry._2(H.equal, Caml_option.valFromOption(v), d)) {
+            var v$1 = Caml_weak.caml_weak_get(bucket, i);
+            if (v$1 !== undefined) {
+              return v$1;
             }
-          } else {
             _i = i + 1 | 0;
             continue ;
           }
-        } else {
           _i = i + 1 | 0;
           continue ;
         }
-      } else {
         _i = i + 1 | 0;
         continue ;
       }
+      _i = i + 1 | 0;
+      continue ;
     };
   };
   var find_shadow = function (t, d, iffound, ifnotfound) {
@@ -357,29 +340,27 @@ function Make(H) {
       var i = _i;
       if (i >= sz) {
         return ifnotfound;
-      } else if (h === Caml_array.caml_array_get(hashes, i)) {
-        var match = Caml_weak.caml_weak_get_copy(bucket, i);
-        if (match !== undefined) {
-          if (Curry._2(H.equal, Caml_option.valFromOption(match), d)) {
+      }
+      if (h === Caml_array.caml_array_get(hashes, i)) {
+        var v = Caml_weak.caml_weak_get_copy(bucket, i);
+        if (v !== undefined) {
+          if (Curry._2(H.equal, Caml_option.valFromOption(v), d)) {
             return Curry._2(iffound, bucket, i);
-          } else {
-            _i = i + 1 | 0;
-            continue ;
           }
-        } else {
           _i = i + 1 | 0;
           continue ;
         }
-      } else {
         _i = i + 1 | 0;
         continue ;
       }
+      _i = i + 1 | 0;
+      continue ;
     };
   };
   var remove = function (t, d) {
     return find_shadow(t, d, (function (w, i) {
                   return Caml_weak.caml_weak_set(w, i, undefined);
-                }), /* () */0);
+                }), undefined);
   };
   var mem = function (t, d) {
     return find_shadow(t, d, (function (_w, _i) {
@@ -399,34 +380,31 @@ function Make(H) {
       var i = _i;
       if (i >= sz) {
         return accu;
-      } else if (h === Caml_array.caml_array_get(hashes, i)) {
-        var match = Caml_weak.caml_weak_get_copy(bucket, i);
-        if (match !== undefined) {
-          if (Curry._2(H.equal, Caml_option.valFromOption(match), d)) {
-            var match$1 = Caml_weak.caml_weak_get(bucket, i);
-            if (match$1 !== undefined) {
+      }
+      if (h === Caml_array.caml_array_get(hashes, i)) {
+        var v = Caml_weak.caml_weak_get_copy(bucket, i);
+        if (v !== undefined) {
+          if (Curry._2(H.equal, Caml_option.valFromOption(v), d)) {
+            var v$1 = Caml_weak.caml_weak_get(bucket, i);
+            if (v$1 !== undefined) {
               _accu = /* :: */[
-                Caml_option.valFromOption(match$1),
+                Caml_option.valFromOption(v$1),
                 accu
               ];
               _i = i + 1 | 0;
               continue ;
-            } else {
-              _i = i + 1 | 0;
-              continue ;
             }
-          } else {
             _i = i + 1 | 0;
             continue ;
           }
-        } else {
           _i = i + 1 | 0;
           continue ;
         }
-      } else {
         _i = i + 1 | 0;
         continue ;
       }
+      _i = i + 1 | 0;
+      continue ;
     };
   };
   var stats = function (t) {

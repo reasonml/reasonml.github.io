@@ -15,13 +15,13 @@ var Parse_error = Caml_exceptions.create("Parsing.Parse_error");
 
 var env = {
   s_stack: Caml_array.caml_make_vect(100, 0),
-  v_stack: Caml_array.caml_make_vect(100, /* () */0),
+  v_stack: Caml_array.caml_make_vect(100, undefined),
   symb_start_stack: Caml_array.caml_make_vect(100, Lexing.dummy_pos),
   symb_end_stack: Caml_array.caml_make_vect(100, Lexing.dummy_pos),
   stacksize: 100,
   stackbase: 0,
   curr_char: 0,
-  lval: /* () */0,
+  lval: undefined,
   symb_start: Lexing.dummy_pos,
   symb_end: Lexing.dummy_pos,
   asp: 0,
@@ -36,7 +36,7 @@ function grow_stacks(param) {
   var oldsize = env.stacksize;
   var newsize = (oldsize << 1);
   var new_s = Caml_array.caml_make_vect(newsize, 0);
-  var new_v = Caml_array.caml_make_vect(newsize, /* () */0);
+  var new_v = Caml_array.caml_make_vect(newsize, undefined);
   var new_start = Caml_array.caml_make_vect(newsize, Lexing.dummy_pos);
   var new_end = Caml_array.caml_make_vect(newsize, Lexing.dummy_pos);
   $$Array.blit(env.s_stack, 0, new_s, 0, oldsize);
@@ -48,13 +48,13 @@ function grow_stacks(param) {
   $$Array.blit(env.symb_end_stack, 0, new_end, 0, oldsize);
   env.symb_end_stack = new_end;
   env.stacksize = newsize;
-  return /* () */0;
+  
 }
 
 function clear_parser(param) {
-  $$Array.fill(env.v_stack, 0, env.stacksize, /* () */0);
-  env.lval = /* () */0;
-  return /* () */0;
+  $$Array.fill(env.v_stack, 0, env.stacksize, undefined);
+  env.lval = undefined;
+  
 }
 
 var current_lookahead_fun = {
@@ -76,7 +76,7 @@ function yyparse(tables, start, lexer, lexbuf) {
   env.symb_end = lexbuf.lex_curr_p;
   try {
     var _cmd = /* Start */0;
-    var _arg = /* () */0;
+    var _arg;
     while(true) {
       var arg = _arg;
       var cmd = _cmd;
@@ -90,15 +90,18 @@ function yyparse(tables, start, lexer, lexbuf) {
             _cmd = /* Token_read */1;
             continue ;
         case /* Raise_parse_error */1 :
-            throw Parse_error;
+            throw {
+                  RE_EXN_ID: Parse_error,
+                  Error: new Error()
+                };
         case /* Grow_stacks_1 */2 :
-            grow_stacks(/* () */0);
-            _arg = /* () */0;
+            grow_stacks(undefined);
+            _arg = undefined;
             _cmd = /* Stacks_grown_1 */2;
             continue ;
         case /* Grow_stacks_2 */3 :
-            grow_stacks(/* () */0);
-            _arg = /* () */0;
+            grow_stacks(undefined);
+            _arg = undefined;
             _cmd = /* Stacks_grown_2 */3;
             continue ;
         case /* Compute_semantic_action */4 :
@@ -109,11 +112,12 @@ function yyparse(tables, start, lexer, lexbuf) {
                 Curry._1(Caml_array.caml_array_get(tables.actions, env.rule_number), env)
               ];
             }
-            catch (exn){
-              if (exn === Parse_error) {
+            catch (raw_exn){
+              var exn = Caml_js_exceptions.internalToOCamlException(raw_exn);
+              if (exn.RE_EXN_ID === Parse_error) {
                 match$1 = /* tuple */[
                   /* Error_detected */5,
-                  /* () */0
+                  undefined
                 ];
               } else {
                 throw exn;
@@ -124,15 +128,15 @@ function yyparse(tables, start, lexer, lexbuf) {
             continue ;
         case /* Call_error_function */5 :
             Curry._1(tables.error_function, "syntax error");
-            _arg = /* () */0;
+            _arg = undefined;
             _cmd = /* Error_detected */5;
             continue ;
         
       }
     };
   }
-  catch (raw_exn){
-    var exn$1 = Caml_js_exceptions.internalToOCamlException(raw_exn);
+  catch (raw_exn$1){
+    var exn$1 = Caml_js_exceptions.internalToOCamlException(raw_exn$1);
     var curr_char = env.curr_char;
     env.asp = init_asp;
     env.sp = init_sp;
@@ -141,18 +145,17 @@ function yyparse(tables, start, lexer, lexbuf) {
     env.curr_char = init_curr_char;
     env.lval = init_lval;
     env.errflag = init_errflag;
-    if (exn$1[0] === YYexit) {
-      return exn$1[1];
-    } else {
-      current_lookahead_fun.contents = (function (tok) {
-          if (typeof tok !== "number") {
-            return Caml_array.caml_array_get(tables.transl_block, tok.tag | 0) === curr_char;
-          } else {
-            return Caml_array.caml_array_get(tables.transl_const, tok) === curr_char;
-          }
-        });
-      throw exn$1;
+    if (exn$1.RE_EXN_ID === YYexit) {
+      return exn$1._1;
     }
+    current_lookahead_fun.contents = (function (tok) {
+        if (typeof tok !== "number") {
+          return Caml_array.caml_array_get(tables.transl_block, tok.tag | 0) === curr_char;
+        } else {
+          return Caml_array.caml_array_get(tables.transl_const, tok) === curr_char;
+        }
+      });
+    throw exn$1;
   }
 }
 
@@ -166,16 +169,14 @@ function symbol_start_pos(param) {
     var i = _i;
     if (i <= 0) {
       return Caml_array.caml_array_get(env.symb_end_stack, env.asp);
-    } else {
-      var st = Caml_array.caml_array_get(env.symb_start_stack, (env.asp - i | 0) + 1 | 0);
-      var en = Caml_array.caml_array_get(env.symb_end_stack, (env.asp - i | 0) + 1 | 0);
-      if (Caml_obj.caml_notequal(st, en)) {
-        return st;
-      } else {
-        _i = i - 1 | 0;
-        continue ;
-      }
     }
+    var st = Caml_array.caml_array_get(env.symb_start_stack, (env.asp - i | 0) + 1 | 0);
+    var en = Caml_array.caml_array_get(env.symb_end_stack, (env.asp - i | 0) + 1 | 0);
+    if (Caml_obj.caml_notequal(st, en)) {
+      return st;
+    }
+    _i = i - 1 | 0;
+    continue ;
   };
 }
 
@@ -192,11 +193,11 @@ function rhs_end_pos(n) {
 }
 
 function symbol_start(param) {
-  return symbol_start_pos(/* () */0).pos_cnum;
+  return symbol_start_pos(undefined).pos_cnum;
 }
 
 function symbol_end(param) {
-  return symbol_end_pos(/* () */0).pos_cnum;
+  return symbol_end_pos(undefined).pos_cnum;
 }
 
 function rhs_start(n) {
@@ -212,7 +213,7 @@ function is_current_lookahead(tok) {
 }
 
 function parse_error(param) {
-  return /* () */0;
+  
 }
 
 var set_trace = Caml_parser.caml_set_parser_trace;

@@ -7,18 +7,18 @@ var Belt_internalMapString = require("./belt_internalMapString.js");
 
 function make(param) {
   return {
-          data: Belt_internalAVLtree.empty
+          data: undefined
         };
 }
 
 function isEmpty(m) {
   var x = m.data;
-  return x === null;
+  return x === undefined;
 }
 
 function clear(m) {
-  m.data = Belt_internalAVLtree.empty;
-  return /* () */0;
+  m.data = undefined;
+  
 }
 
 function minKeyUndefined(m) {
@@ -58,10 +58,9 @@ function set(m, k, v) {
   var v$1 = Belt_internalMapString.addMutate(old_data, k, v);
   if (v$1 !== old_data) {
     m.data = v$1;
-    return /* () */0;
-  } else {
-    return 0;
+    return ;
   }
+  
 }
 
 function forEachU(d, f) {
@@ -149,8 +148,8 @@ function removeMutateAux(nt, x) {
   if (x === k) {
     var l = nt.left;
     var r = nt.right;
-    if (l !== null) {
-      if (r !== null) {
+    if (l !== undefined) {
+      if (r !== undefined) {
         nt.right = Belt_internalAVLtree.removeMinAuxWithRootMutate(nt, r);
         return Belt_internalAVLtree.balMutate(nt);
       } else {
@@ -159,80 +158,75 @@ function removeMutateAux(nt, x) {
     } else {
       return r;
     }
-  } else if (x < k) {
-    var match = nt.left;
-    if (match !== null) {
-      nt.left = removeMutateAux(match, x);
+  }
+  if (x < k) {
+    var l$1 = nt.left;
+    if (l$1 !== undefined) {
+      nt.left = removeMutateAux(l$1, x);
       return Belt_internalAVLtree.balMutate(nt);
     } else {
       return nt;
     }
+  }
+  var r$1 = nt.right;
+  if (r$1 !== undefined) {
+    nt.right = removeMutateAux(r$1, x);
+    return Belt_internalAVLtree.balMutate(nt);
   } else {
-    var match$1 = nt.right;
-    if (match$1 !== null) {
-      nt.right = removeMutateAux(match$1, x);
-      return Belt_internalAVLtree.balMutate(nt);
-    } else {
-      return nt;
-    }
+    return nt;
   }
 }
 
 function remove(d, v) {
   var oldRoot = d.data;
-  if (oldRoot !== null) {
-    var newRoot = removeMutateAux(oldRoot, v);
-    if (newRoot !== oldRoot) {
-      d.data = newRoot;
-      return /* () */0;
-    } else {
-      return 0;
-    }
-  } else {
-    return /* () */0;
+  if (oldRoot === undefined) {
+    return ;
   }
+  var newRoot = removeMutateAux(oldRoot, v);
+  if (newRoot !== oldRoot) {
+    d.data = newRoot;
+    return ;
+  }
+  
 }
 
 function updateDone(t, x, f) {
-  if (t !== null) {
+  if (t !== undefined) {
     var k = t.key;
     if (k === x) {
-      var match = f(Caml_option.some(t.value));
-      if (match !== undefined) {
-        t.value = Caml_option.valFromOption(match);
+      var data = f(Caml_option.some(t.value));
+      if (data !== undefined) {
+        t.value = Caml_option.valFromOption(data);
         return t;
-      } else {
-        var l = t.left;
-        var r = t.right;
-        if (l !== null) {
-          if (r !== null) {
-            t.right = Belt_internalAVLtree.removeMinAuxWithRootMutate(t, r);
-            return Belt_internalAVLtree.balMutate(t);
-          } else {
-            return l;
-          }
+      }
+      var l = t.left;
+      var r = t.right;
+      if (l !== undefined) {
+        if (r !== undefined) {
+          t.right = Belt_internalAVLtree.removeMinAuxWithRootMutate(t, r);
+          return Belt_internalAVLtree.balMutate(t);
         } else {
-          return r;
+          return l;
         }
-      }
-    } else {
-      var l$1 = t.left;
-      var r$1 = t.right;
-      if (x < k) {
-        var ll = updateDone(l$1, x, f);
-        t.left = ll;
       } else {
-        t.right = updateDone(r$1, x, f);
+        return r;
       }
-      return Belt_internalAVLtree.balMutate(t);
     }
-  } else {
-    var match$1 = f(undefined);
-    if (match$1 !== undefined) {
-      return Belt_internalAVLtree.singleton(x, Caml_option.valFromOption(match$1));
+    var l$1 = t.left;
+    var r$1 = t.right;
+    if (x < k) {
+      var ll = updateDone(l$1, x, f);
+      t.left = ll;
     } else {
-      return t;
+      t.right = updateDone(r$1, x, f);
     }
+    return Belt_internalAVLtree.balMutate(t);
+  }
+  var data$1 = f(undefined);
+  if (data$1 !== undefined) {
+    return Belt_internalAVLtree.singleton(x, Caml_option.valFromOption(data$1));
+  } else {
+    return t;
   }
 }
 
@@ -241,10 +235,9 @@ function updateU(t, x, f) {
   var newRoot = updateDone(oldRoot, x, f);
   if (newRoot !== oldRoot) {
     t.data = newRoot;
-    return /* () */0;
-  } else {
-    return 0;
+    return ;
   }
+  
 }
 
 function update(t, x, f) {
@@ -255,36 +248,32 @@ function removeArrayMutateAux(_t, xs, _i, len) {
   while(true) {
     var i = _i;
     var t = _t;
-    if (i < len) {
-      var ele = xs[i];
-      var u = removeMutateAux(t, ele);
-      if (u !== null) {
-        _i = i + 1 | 0;
-        _t = u;
-        continue ;
-      } else {
-        return Belt_internalAVLtree.empty;
-      }
-    } else {
+    if (i >= len) {
       return t;
     }
+    var ele = xs[i];
+    var u = removeMutateAux(t, ele);
+    if (u === undefined) {
+      return ;
+    }
+    _i = i + 1 | 0;
+    _t = u;
+    continue ;
   };
 }
 
 function removeMany(d, xs) {
   var oldRoot = d.data;
-  if (oldRoot !== null) {
-    var len = xs.length;
-    var newRoot = removeArrayMutateAux(oldRoot, xs, 0, len);
-    if (newRoot !== oldRoot) {
-      d.data = newRoot;
-      return /* () */0;
-    } else {
-      return 0;
-    }
-  } else {
-    return /* () */0;
+  if (oldRoot === undefined) {
+    return ;
   }
+  var len = xs.length;
+  var newRoot = removeArrayMutateAux(oldRoot, xs, 0, len);
+  if (newRoot !== oldRoot) {
+    d.data = newRoot;
+    return ;
+  }
+  
 }
 
 function fromArray(xs) {

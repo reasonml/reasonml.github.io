@@ -7,38 +7,36 @@ function copyAuxCont(_c, _prec) {
   while(true) {
     var prec = _prec;
     var c = _c;
-    if (c !== undefined) {
-      var ncopy = {
-        key: c.key,
-        next: undefined
-      };
-      prec.next = ncopy;
-      _prec = ncopy;
-      _c = c.next;
-      continue ;
-    } else {
-      return /* () */0;
+    if (c === undefined) {
+      return ;
     }
+    var ncopy = {
+      key: c.key,
+      next: undefined
+    };
+    prec.next = ncopy;
+    _prec = ncopy;
+    _c = c.next;
+    continue ;
   };
 }
 
 function copyBucket(c) {
-  if (c !== undefined) {
-    var head = {
-      key: c.key,
-      next: undefined
-    };
-    copyAuxCont(c.next, head);
-    return head;
-  } else {
+  if (c === undefined) {
     return c;
   }
+  var head = {
+    key: c.key,
+    next: undefined
+  };
+  copyAuxCont(c.next, head);
+  return head;
 }
 
 function copyBuckets(buckets) {
   var len = buckets.length;
   var newBuckets = new Array(len);
-  for(var i = 0 ,i_finish = len - 1 | 0; i <= i_finish; ++i){
+  for(var i = 0; i < len; ++i){
     newBuckets[i] = copyBucket(buckets[i]);
   }
   return newBuckets;
@@ -57,35 +55,33 @@ function bucketLength(_accu, _buckets) {
   while(true) {
     var buckets = _buckets;
     var accu = _accu;
-    if (buckets !== undefined) {
-      _buckets = buckets.next;
-      _accu = accu + 1 | 0;
-      continue ;
-    } else {
+    if (buckets === undefined) {
       return accu;
     }
+    _buckets = buckets.next;
+    _accu = accu + 1 | 0;
+    continue ;
   };
 }
 
 function doBucketIter(f, _buckets) {
   while(true) {
     var buckets = _buckets;
-    if (buckets !== undefined) {
-      f(buckets.key);
-      _buckets = buckets.next;
-      continue ;
-    } else {
-      return /* () */0;
+    if (buckets === undefined) {
+      return ;
     }
+    f(buckets.key);
+    _buckets = buckets.next;
+    continue ;
   };
 }
 
 function forEachU(h, f) {
   var d = h.buckets;
-  for(var i = 0 ,i_finish = d.length - 1 | 0; i <= i_finish; ++i){
+  for(var i = 0 ,i_finish = d.length; i < i_finish; ++i){
     doBucketIter(f, d[i]);
   }
-  return /* () */0;
+  
 }
 
 function forEach(h, f) {
@@ -97,14 +93,13 @@ function fillArray(_i, arr, _cell) {
     var cell = _cell;
     var i = _i;
     arr[i] = cell.key;
-    var match = cell.next;
-    if (match !== undefined) {
-      _cell = match;
-      _i = i + 1 | 0;
-      continue ;
-    } else {
+    var v = cell.next;
+    if (v === undefined) {
       return i + 1 | 0;
     }
+    _cell = v;
+    _i = i + 1 | 0;
+    continue ;
   };
 }
 
@@ -112,7 +107,7 @@ function toArray(h) {
   var d = h.buckets;
   var current = 0;
   var arr = new Array(h.size);
-  for(var i = 0 ,i_finish = d.length - 1 | 0; i <= i_finish; ++i){
+  for(var i = 0 ,i_finish = d.length; i < i_finish; ++i){
     var cell = d[i];
     if (cell !== undefined) {
       current = fillArray(current, arr, cell);
@@ -126,20 +121,19 @@ function doBucketFold(f, _b, _accu) {
   while(true) {
     var accu = _accu;
     var b = _b;
-    if (b !== undefined) {
-      _accu = f(accu, b.key);
-      _b = b.next;
-      continue ;
-    } else {
+    if (b === undefined) {
       return accu;
     }
+    _accu = f(accu, b.key);
+    _b = b.next;
+    continue ;
   };
 }
 
 function reduceU(h, init, f) {
   var d = h.buckets;
   var accu = init;
-  for(var i = 0 ,i_finish = d.length - 1 | 0; i <= i_finish; ++i){
+  for(var i = 0 ,i_finish = d.length; i < i_finish; ++i){
     accu = doBucketFold(f, d[i], accu);
   }
   return accu;
@@ -168,7 +162,7 @@ function getBucketHistogram(h) {
   Belt_Array.forEachU(h.buckets, (function (b) {
           var l = bucketLength(0, b);
           histo[l] = histo[l] + 1 | 0;
-          return /* () */0;
+          
         }));
   return histo;
 }
@@ -180,10 +174,10 @@ function logStats(h) {
         buckets: h.buckets.length,
         histogram: histogram
       });
-  return /* () */0;
+  
 }
 
-var C = /* alias */0;
+var C;
 
 exports.C = C;
 exports.copy = copy;

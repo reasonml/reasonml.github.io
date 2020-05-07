@@ -8,21 +8,19 @@ var Belt_internalBucketsType = require("./belt_internalBucketsType.js");
 function copyBucketReHash(h_buckets, ndata_tail, _old_bucket) {
   while(true) {
     var old_bucket = _old_bucket;
-    if (old_bucket !== undefined) {
-      var s = old_bucket.key;
-      var nidx = Caml_hash_primitive.caml_hash_final_mix(Caml_hash_primitive.caml_hash_mix_string(0, s)) & (h_buckets.length - 1 | 0);
-      var match = ndata_tail[nidx];
-      if (match !== undefined) {
-        match.next = old_bucket;
-      } else {
-        h_buckets[nidx] = old_bucket;
-      }
-      ndata_tail[nidx] = old_bucket;
-      _old_bucket = old_bucket.next;
-      continue ;
-    } else {
-      return /* () */0;
+    if (old_bucket === undefined) {
+      return ;
     }
+    var nidx = Caml_hash_primitive.caml_hash_final_mix(Caml_hash_primitive.caml_hash_mix_string(0, old_bucket.key)) & (h_buckets.length - 1 | 0);
+    var tail = ndata_tail[nidx];
+    if (tail !== undefined) {
+      tail.next = old_bucket;
+    } else {
+      h_buckets[nidx] = old_bucket;
+    }
+    ndata_tail[nidx] = old_bucket;
+    _old_bucket = old_bucket.next;
+    continue ;
   };
 }
 
@@ -32,15 +30,13 @@ function replaceInBucket(key, info, _cell) {
     if (cell.key === key) {
       cell.value = info;
       return false;
-    } else {
-      var match = cell.next;
-      if (match !== undefined) {
-        _cell = match;
-        continue ;
-      } else {
-        return true;
-      }
     }
+    var cell$1 = cell.next;
+    if (cell$1 === undefined) {
+      return true;
+    }
+    _cell = cell$1;
+    continue ;
   };
 }
 
@@ -68,31 +64,28 @@ function set(h, key, value) {
     h.size = h.size + 1 | 0;
   }
   if (h.size > (buckets_len << 1)) {
-    var h$1 = h;
-    var odata = h$1.buckets;
+    var odata = h.buckets;
     var osize = odata.length;
     var nsize = (osize << 1);
-    if (nsize >= osize) {
-      var h_buckets$1 = new Array(nsize);
-      var ndata_tail = new Array(nsize);
-      h$1.buckets = h_buckets$1;
-      for(var i$1 = 0 ,i_finish = osize - 1 | 0; i$1 <= i_finish; ++i$1){
-        copyBucketReHash(h_buckets$1, ndata_tail, odata[i$1]);
-      }
-      for(var i$2 = 0 ,i_finish$1 = nsize - 1 | 0; i$2 <= i_finish$1; ++i$2){
-        var match = ndata_tail[i$2];
-        if (match !== undefined) {
-          match.next = undefined;
-        }
-        
-      }
-      return /* () */0;
-    } else {
-      return 0;
+    if (nsize < osize) {
+      return ;
     }
-  } else {
-    return 0;
+    var h_buckets$1 = new Array(nsize);
+    var ndata_tail = new Array(nsize);
+    h.buckets = h_buckets$1;
+    for(var i$1 = 0; i$1 < osize; ++i$1){
+      copyBucketReHash(h_buckets$1, ndata_tail, odata[i$1]);
+    }
+    for(var i$2 = 0; i$2 < nsize; ++i$2){
+      var tail = ndata_tail[i$2];
+      if (tail !== undefined) {
+        tail.next = undefined;
+      }
+      
+    }
+    return ;
   }
+  
 }
 
 function remove(h, key) {
@@ -103,77 +96,65 @@ function remove(h, key) {
     if (bucket.key === key) {
       h_buckets[i] = bucket.next;
       h.size = h.size - 1 | 0;
-      return /* () */0;
+      return ;
     } else {
-      var h$1 = h;
-      var key$1 = key;
       var _prec = bucket;
       var _buckets = bucket.next;
       while(true) {
         var buckets = _buckets;
         var prec = _prec;
-        if (buckets !== undefined) {
-          var cell_next = buckets.next;
-          if (buckets.key === key$1) {
-            prec.next = cell_next;
-            h$1.size = h$1.size - 1 | 0;
-            return /* () */0;
-          } else {
-            _buckets = cell_next;
-            _prec = buckets;
-            continue ;
-          }
-        } else {
-          return /* () */0;
+        if (buckets === undefined) {
+          return ;
         }
+        var cell_next = buckets.next;
+        if (buckets.key === key) {
+          prec.next = cell_next;
+          h.size = h.size - 1 | 0;
+          return ;
+        }
+        _buckets = cell_next;
+        _prec = buckets;
+        continue ;
       };
     }
-  } else {
-    return /* () */0;
   }
+  
 }
 
 function get(h, key) {
   var h_buckets = h.buckets;
   var nid = Caml_hash_primitive.caml_hash_final_mix(Caml_hash_primitive.caml_hash_mix_string(0, key)) & (h_buckets.length - 1 | 0);
-  var match = h_buckets[nid];
-  if (match !== undefined) {
-    if (key === match.key) {
-      return Caml_option.some(match.value);
+  var cell1 = h_buckets[nid];
+  if (cell1 === undefined) {
+    return ;
+  }
+  if (key === cell1.key) {
+    return Caml_option.some(cell1.value);
+  }
+  var cell2 = cell1.next;
+  if (cell2 === undefined) {
+    return ;
+  }
+  if (key === cell2.key) {
+    return Caml_option.some(cell2.value);
+  }
+  var cell3 = cell2.next;
+  if (cell3 !== undefined) {
+    if (key === cell3.key) {
+      return Caml_option.some(cell3.value);
     } else {
-      var match$1 = match.next;
-      if (match$1 !== undefined) {
-        if (key === match$1.key) {
-          return Caml_option.some(match$1.value);
-        } else {
-          var match$2 = match$1.next;
-          if (match$2 !== undefined) {
-            if (key === match$2.key) {
-              return Caml_option.some(match$2.value);
-            } else {
-              var key$1 = key;
-              var _buckets = match$2.next;
-              while(true) {
-                var buckets = _buckets;
-                if (buckets !== undefined) {
-                  if (key$1 === buckets.key) {
-                    return Caml_option.some(buckets.value);
-                  } else {
-                    _buckets = buckets.next;
-                    continue ;
-                  }
-                } else {
-                  return ;
-                }
-              };
-            }
-          } else {
-            return ;
-          }
+      var _buckets = cell3.next;
+      while(true) {
+        var buckets = _buckets;
+        if (buckets === undefined) {
+          return ;
         }
-      } else {
-        return ;
-      }
+        if (key === buckets.key) {
+          return Caml_option.some(buckets.value);
+        }
+        _buckets = buckets.next;
+        continue ;
+      };
     }
   }
   
@@ -184,21 +165,18 @@ function has(h, key) {
   var nid = Caml_hash_primitive.caml_hash_final_mix(Caml_hash_primitive.caml_hash_mix_string(0, key)) & (h_buckets.length - 1 | 0);
   var bucket = h_buckets[nid];
   if (bucket !== undefined) {
-    var key$1 = key;
     var _cell = bucket;
     while(true) {
       var cell = _cell;
-      if (cell.key === key$1) {
+      if (cell.key === key) {
         return true;
-      } else {
-        var match = cell.next;
-        if (match !== undefined) {
-          _cell = match;
-          continue ;
-        } else {
-          return false;
-        }
       }
+      var nextCell = cell.next;
+      if (nextCell === undefined) {
+        return false;
+      }
+      _cell = nextCell;
+      continue ;
     };
   } else {
     return false;
@@ -206,17 +184,17 @@ function has(h, key) {
 }
 
 function make(hintSize) {
-  return Belt_internalBucketsType.make(/* () */0, /* () */0, hintSize);
+  return Belt_internalBucketsType.make(undefined, undefined, hintSize);
 }
 
-function size(prim) {
-  return prim.size;
+function size(h) {
+  return h.size;
 }
 
 function fromArray(arr) {
   var len = arr.length;
-  var v = Belt_internalBucketsType.make(/* () */0, /* () */0, len);
-  for(var i = 0 ,i_finish = len - 1 | 0; i <= i_finish; ++i){
+  var v = Belt_internalBucketsType.make(undefined, undefined, len);
+  for(var i = 0; i < len; ++i){
     var match = arr[i];
     set(v, match[0], match[1]);
   }
@@ -225,11 +203,11 @@ function fromArray(arr) {
 
 function mergeMany(h, arr) {
   var len = arr.length;
-  for(var i = 0 ,i_finish = len - 1 | 0; i <= i_finish; ++i){
+  for(var i = 0; i < len; ++i){
     var match = arr[i];
     set(h, match[0], match[1]);
   }
-  return /* () */0;
+  
 }
 
 var clear = Belt_internalBucketsType.clear;

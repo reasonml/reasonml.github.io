@@ -6,13 +6,12 @@ var $$Array = require("./array.js");
 var Curry = require("./curry.js");
 var Random = require("./random.js");
 var Hashtbl = require("./hashtbl.js");
-var Caml_obj = require("./caml_obj.js");
 var Caml_array = require("./caml_array.js");
 var Caml_int32 = require("./caml_int32.js");
 var Caml_option = require("./caml_option.js");
 var Caml_primitive = require("./caml_primitive.js");
 var CamlinternalLazy = require("./camlinternalLazy.js");
-var Caml_builtin_exceptions = require("./caml_builtin_exceptions.js");
+var Caml_js_exceptions = require("./caml_js_exceptions.js");
 
 function create(param) {
   return Obj.Ephemeron.create(1);
@@ -75,9 +74,9 @@ function MakeSeeded(H) {
   };
   var hash = H.hash;
   var equal = function (c, k) {
-    var match = Obj.Ephemeron.get_key(c, 0);
-    if (match !== undefined) {
-      if (Curry._2(H.equal, k, Caml_option.valFromOption(match))) {
+    var k$prime = Obj.Ephemeron.get_key(c, 0);
+    if (k$prime !== undefined) {
+      if (Curry._2(H.equal, k, Caml_option.valFromOption(k$prime))) {
         return /* ETrue */0;
       } else {
         return /* EFalse */1;
@@ -94,19 +93,24 @@ function MakeSeeded(H) {
   var power_2_above = function (_x, n) {
     while(true) {
       var x = _x;
-      if (x >= n || (x << 1) > Sys.max_array_length) {
+      if (x >= n) {
         return x;
-      } else {
-        _x = (x << 1);
-        continue ;
       }
+      if ((x << 1) > Sys.max_array_length) {
+        return x;
+      }
+      _x = (x << 1);
+      continue ;
     };
   };
-  var prng = Caml_obj.caml_lazy_make((function (param) {
-          return Random.State.make_self_init(/* () */0);
-        }));
-  var create$1 = function ($staropt$star, initial_size) {
-    var random = $staropt$star !== undefined ? $staropt$star : Hashtbl.is_randomized(/* () */0);
+  var prng = {
+    tag: 246,
+    value: (function () {
+        return Random.State.make_self_init(undefined);
+      })
+  };
+  var create$1 = function (randomOpt, initial_size) {
+    var random = randomOpt !== undefined ? randomOpt : Hashtbl.is_randomized(undefined);
     var s = power_2_above(16, initial_size);
     var seed = random ? Random.State.bits(CamlinternalLazy.force(prng)) : 0;
     return {
@@ -119,10 +123,10 @@ function MakeSeeded(H) {
   var clear = function (h) {
     h.size = 0;
     var len = h.data.length;
-    for(var i = 0 ,i_finish = len - 1 | 0; i <= i_finish; ++i){
+    for(var i = 0; i < len; ++i){
       Caml_array.caml_array_set(h.data, i, /* Empty */0);
     }
-    return /* () */0;
+    
   };
   var reset = function (h) {
     var len = h.data.length;
@@ -131,7 +135,7 @@ function MakeSeeded(H) {
     } else {
       h.size = 0;
       h.data = Caml_array.caml_make_vect(h.initial_size, /* Empty */0);
-      return /* () */0;
+      return ;
     }
   };
   var copy = function (h) {
@@ -149,60 +153,56 @@ function MakeSeeded(H) {
     var do_bucket = function (_param) {
       while(true) {
         var param = _param;
-        if (param) {
-          var rest = param[2];
-          var c = param[1];
-          if (check_key(c)) {
-            return /* Cons */[
-                    param[0],
-                    c,
-                    do_bucket(rest)
-                  ];
-          } else {
-            h.size = h.size - 1 | 0;
-            _param = rest;
-            continue ;
-          }
-        } else {
+        if (!param) {
           return /* Empty */0;
         }
+        var rest = param[2];
+        var c = param[1];
+        if (check_key(c)) {
+          return /* Cons */[
+                  param[0],
+                  c,
+                  do_bucket(rest)
+                ];
+        }
+        h.size = h.size - 1 | 0;
+        _param = rest;
+        continue ;
       };
     };
     var d = h.data;
-    for(var i = 0 ,i_finish = d.length - 1 | 0; i <= i_finish; ++i){
+    for(var i = 0 ,i_finish = d.length; i < i_finish; ++i){
       Caml_array.caml_array_set(d, i, do_bucket(Caml_array.caml_array_get(d, i)));
     }
-    return /* () */0;
+    
   };
   var resize = function (h) {
     var odata = h.data;
     var osize = odata.length;
     var nsize = (osize << 1);
     clean(h);
-    if (nsize < Sys.max_array_length && h.size >= (osize >>> 1)) {
-      var ndata = Caml_array.caml_make_vect(nsize, /* Empty */0);
-      h.data = ndata;
-      var insert_bucket = function (param) {
-        if (param) {
-          var hkey = param[0];
-          insert_bucket(param[2]);
-          var nidx = key_index(h, hkey);
-          return Caml_array.caml_array_set(ndata, nidx, /* Cons */[
-                      hkey,
-                      param[1],
-                      Caml_array.caml_array_get(ndata, nidx)
-                    ]);
-        } else {
-          return /* () */0;
-        }
-      };
-      for(var i = 0 ,i_finish = osize - 1 | 0; i <= i_finish; ++i){
-        insert_bucket(Caml_array.caml_array_get(odata, i));
-      }
-      return /* () */0;
-    } else {
-      return 0;
+    if (!(nsize < Sys.max_array_length && h.size >= (osize >>> 1))) {
+      return ;
     }
+    var ndata = Caml_array.caml_make_vect(nsize, /* Empty */0);
+    h.data = ndata;
+    var insert_bucket = function (param) {
+      if (!param) {
+        return ;
+      }
+      var hkey = param[0];
+      insert_bucket(param[2]);
+      var nidx = key_index(h, hkey);
+      return Caml_array.caml_array_set(ndata, nidx, /* Cons */[
+                  hkey,
+                  param[1],
+                  Caml_array.caml_array_get(ndata, nidx)
+                ]);
+    };
+    for(var i = 0; i < osize; ++i){
+      insert_bucket(Caml_array.caml_array_get(odata, i));
+    }
+    
   };
   var add = function (h, key, info) {
     var hkey = Curry._2(hash, h.seed, key);
@@ -218,46 +218,43 @@ function MakeSeeded(H) {
     h.size = h.size + 1 | 0;
     if (h.size > (h.data.length << 1)) {
       return resize(h);
-    } else {
-      return 0;
     }
+    
   };
   var remove = function (h, key) {
     var hkey = Curry._2(hash, h.seed, key);
     var remove_bucket = function (_param) {
       while(true) {
         var param = _param;
-        if (param) {
-          var next = param[2];
-          var c = param[1];
-          var hk = param[0];
-          if (hkey === hk) {
-            var match = equal(c, key);
-            switch (match) {
-              case /* ETrue */0 :
-                  h.size = h.size - 1 | 0;
-                  return next;
-              case /* EFalse */1 :
-                  return /* Cons */[
-                          hk,
-                          c,
-                          remove_bucket(next)
-                        ];
-              case /* EDead */2 :
-                  h.size = h.size - 1 | 0;
-                  _param = next;
-                  continue ;
-              
-            }
-          } else {
-            return /* Cons */[
-                    hk,
-                    c,
-                    remove_bucket(next)
-                  ];
-          }
-        } else {
+        if (!param) {
           return /* Empty */0;
+        }
+        var next = param[2];
+        var c = param[1];
+        var hk = param[0];
+        if (hkey !== hk) {
+          return /* Cons */[
+                  hk,
+                  c,
+                  remove_bucket(next)
+                ];
+        }
+        var match = equal(c, key);
+        switch (match) {
+          case /* ETrue */0 :
+              h.size = h.size - 1 | 0;
+              return next;
+          case /* EFalse */1 :
+              return /* Cons */[
+                      hk,
+                      c,
+                      remove_bucket(next)
+                    ];
+          case /* EDead */2 :
+              h.size = h.size - 1 | 0;
+              _param = next;
+              continue ;
+          
         }
       };
     };
@@ -266,68 +263,59 @@ function MakeSeeded(H) {
   };
   var find = function (h, key) {
     var hkey = Curry._2(hash, h.seed, key);
-    var key$1 = key;
-    var hkey$1 = hkey;
     var _param = Caml_array.caml_array_get(h.data, key_index(h, hkey));
     while(true) {
       var param = _param;
       if (param) {
         var rest = param[2];
         var c = param[1];
-        if (hkey$1 === param[0]) {
-          var match = equal(c, key$1);
+        if (hkey === param[0]) {
+          var match = equal(c, key);
           if (match !== 0) {
             _param = rest;
             continue ;
-          } else {
-            var match$1 = get_data(c);
-            if (match$1 !== undefined) {
-              return Caml_option.valFromOption(match$1);
-            } else {
-              _param = rest;
-              continue ;
-            }
           }
-        } else {
+          var d = get_data(c);
+          if (d !== undefined) {
+            return Caml_option.valFromOption(d);
+          }
           _param = rest;
           continue ;
         }
-      } else {
-        throw Caml_builtin_exceptions.not_found;
+        _param = rest;
+        continue ;
       }
+      throw {
+            RE_EXN_ID: "Not_found",
+            Error: new Error()
+          };
     };
   };
   var find_opt = function (h, key) {
     var hkey = Curry._2(hash, h.seed, key);
-    var key$1 = key;
-    var hkey$1 = hkey;
     var _param = Caml_array.caml_array_get(h.data, key_index(h, hkey));
     while(true) {
       var param = _param;
-      if (param) {
-        var rest = param[2];
-        var c = param[1];
-        if (hkey$1 === param[0]) {
-          var match = equal(c, key$1);
-          if (match !== 0) {
-            _param = rest;
-            continue ;
-          } else {
-            var d = get_data(c);
-            if (d !== undefined) {
-              return d;
-            } else {
-              _param = rest;
-              continue ;
-            }
-          }
-        } else {
+      if (!param) {
+        return ;
+      }
+      var rest = param[2];
+      var c = param[1];
+      if (hkey === param[0]) {
+        var match = equal(c, key);
+        if (match !== 0) {
           _param = rest;
           continue ;
         }
-      } else {
-        return ;
+        var d = get_data(c);
+        if (d !== undefined) {
+          return d;
+        }
+        _param = rest;
+        continue ;
       }
+      _param = rest;
+      continue ;
     };
   };
   var find_all = function (h, key) {
@@ -335,33 +323,29 @@ function MakeSeeded(H) {
     var find_in_bucket = function (_param) {
       while(true) {
         var param = _param;
-        if (param) {
-          var rest = param[2];
-          var c = param[1];
-          if (hkey === param[0]) {
-            var match = equal(c, key);
-            if (match !== 0) {
-              _param = rest;
-              continue ;
-            } else {
-              var match$1 = get_data(c);
-              if (match$1 !== undefined) {
-                return /* :: */[
-                        Caml_option.valFromOption(match$1),
-                        find_in_bucket(rest)
-                      ];
-              } else {
-                _param = rest;
-                continue ;
-              }
-            }
-          } else {
+        if (!param) {
+          return /* [] */0;
+        }
+        var rest = param[2];
+        var c = param[1];
+        if (hkey === param[0]) {
+          var match = equal(c, key);
+          if (match !== 0) {
             _param = rest;
             continue ;
           }
-        } else {
-          return /* [] */0;
+          var d = get_data(c);
+          if (d !== undefined) {
+            return /* :: */[
+                    Caml_option.valFromOption(d),
+                    find_in_bucket(rest)
+                  ];
+          }
+          _param = rest;
+          continue ;
         }
+        _param = rest;
+        continue ;
       };
     };
     return find_in_bucket(Caml_array.caml_array_get(h.data, key_index(h, hkey)));
@@ -379,23 +363,24 @@ function MakeSeeded(H) {
           var c = param[1];
           if (hkey === param[0]) {
             var match = equal(c, key);
-            if (match !== 0) {
-              _param = next;
-              continue ;
-            } else {
+            if (match === 0) {
               return set_key_data(c, key, info);
             }
-          } else {
             _param = next;
             continue ;
           }
-        } else {
-          throw Caml_builtin_exceptions.not_found;
+          _param = next;
+          continue ;
         }
+        throw {
+              RE_EXN_ID: "Not_found",
+              Error: new Error()
+            };
       };
     }
-    catch (exn){
-      if (exn === Caml_builtin_exceptions.not_found) {
+    catch (raw_exn){
+      var exn = Caml_js_exceptions.internalToOCamlException(raw_exn);
+      if (exn.RE_EXN_ID === "Not_found") {
         var container = create(key, info);
         Caml_array.caml_array_set(h.data, i, /* Cons */[
               hkey,
@@ -406,11 +391,10 @@ function MakeSeeded(H) {
         if (h.size > (h.data.length << 1)) {
           return resize(h);
         } else {
-          return 0;
+          return ;
         }
-      } else {
-        throw exn;
       }
+      throw exn;
     }
   };
   var mem = function (h, key) {
@@ -418,73 +402,65 @@ function MakeSeeded(H) {
     var _param = Caml_array.caml_array_get(h.data, key_index(h, hkey));
     while(true) {
       var param = _param;
-      if (param) {
-        var rest = param[2];
-        if (param[0] === hkey) {
-          var match = equal(param[1], key);
-          if (match !== 0) {
-            _param = rest;
-            continue ;
-          } else {
-            return true;
-          }
-        } else {
-          _param = rest;
-          continue ;
-        }
-      } else {
+      if (!param) {
         return false;
       }
+      var rest = param[2];
+      if (param[0] === hkey) {
+        var match = equal(param[1], key);
+        if (match === 0) {
+          return true;
+        }
+        _param = rest;
+        continue ;
+      }
+      _param = rest;
+      continue ;
     };
   };
   var iter = function (f, h) {
     var do_bucket = function (_param) {
       while(true) {
         var param = _param;
-        if (param) {
-          var c = param[1];
-          var match = get_key(c);
-          var match$1 = get_data(c);
-          if (match !== undefined) {
-            if (match$1 !== undefined) {
-              Curry._2(f, Caml_option.valFromOption(match), Caml_option.valFromOption(match$1));
-            }
-            
-          }
-          _param = param[2];
-          continue ;
-        } else {
-          return /* () */0;
+        if (!param) {
+          return ;
         }
+        var c = param[1];
+        var match = get_key(c);
+        var match$1 = get_data(c);
+        if (match !== undefined && match$1 !== undefined) {
+          Curry._2(f, Caml_option.valFromOption(match), Caml_option.valFromOption(match$1));
+        }
+        _param = param[2];
+        continue ;
       };
     };
     var d = h.data;
-    for(var i = 0 ,i_finish = d.length - 1 | 0; i <= i_finish; ++i){
+    for(var i = 0 ,i_finish = d.length; i < i_finish; ++i){
       do_bucket(Caml_array.caml_array_get(d, i));
     }
-    return /* () */0;
+    
   };
   var fold = function (f, h, init) {
     var do_bucket = function (_b, _accu) {
       while(true) {
         var accu = _accu;
         var b = _b;
-        if (b) {
-          var c = b[1];
-          var match = get_key(c);
-          var match$1 = get_data(c);
-          var accu$1 = match !== undefined && match$1 !== undefined ? Curry._3(f, Caml_option.valFromOption(match), Caml_option.valFromOption(match$1), accu) : accu;
-          _accu = accu$1;
-          _b = b[2];
-          continue ;
-        } else {
+        if (!b) {
           return accu;
         }
+        var c = b[1];
+        var match = get_key(c);
+        var match$1 = get_data(c);
+        var accu$1 = match !== undefined && match$1 !== undefined ? Curry._3(f, Caml_option.valFromOption(match), Caml_option.valFromOption(match$1), accu) : accu;
+        _accu = accu$1;
+        _b = b[2];
+        continue ;
       };
     };
     var d = h.data;
     var accu = init;
-    for(var i = 0 ,i_finish = d.length - 1 | 0; i <= i_finish; ++i){
+    for(var i = 0 ,i_finish = d.length; i < i_finish; ++i){
       accu = do_bucket(Caml_array.caml_array_get(d, i), accu);
     }
     return accu;
@@ -493,44 +469,40 @@ function MakeSeeded(H) {
     var do_bucket = function (_param) {
       while(true) {
         var param = _param;
-        if (param) {
-          var rest = param[2];
-          var c = param[1];
-          var match = get_key(c);
-          var match$1 = get_data(c);
-          if (match !== undefined) {
-            if (match$1 !== undefined) {
-              var k = Caml_option.valFromOption(match);
-              var match$2 = Curry._2(f, k, Caml_option.valFromOption(match$1));
-              if (match$2 !== undefined) {
-                set_key_data(c, k, Caml_option.valFromOption(match$2));
-                return /* Cons */[
-                        param[0],
-                        c,
-                        do_bucket(rest)
-                      ];
-              } else {
-                _param = rest;
-                continue ;
-              }
-            } else {
-              _param = rest;
-              continue ;
+        if (!param) {
+          return /* Empty */0;
+        }
+        var rest = param[2];
+        var c = param[1];
+        var match = get_key(c);
+        var match$1 = get_data(c);
+        if (match !== undefined) {
+          if (match$1 !== undefined) {
+            var k = Caml_option.valFromOption(match);
+            var new_d = Curry._2(f, k, Caml_option.valFromOption(match$1));
+            if (new_d !== undefined) {
+              set_key_data(c, k, Caml_option.valFromOption(new_d));
+              return /* Cons */[
+                      param[0],
+                      c,
+                      do_bucket(rest)
+                    ];
             }
-          } else {
             _param = rest;
             continue ;
           }
-        } else {
-          return /* Empty */0;
+          _param = rest;
+          continue ;
         }
+        _param = rest;
+        continue ;
       };
     };
     var d = h.data;
-    for(var i = 0 ,i_finish = d.length - 1 | 0; i <= i_finish; ++i){
+    for(var i = 0 ,i_finish = d.length; i < i_finish; ++i){
       Caml_array.caml_array_set(d, i, do_bucket(Caml_array.caml_array_get(d, i)));
     }
-    return /* () */0;
+    
   };
   var length = function (h) {
     return h.size;
@@ -539,13 +511,12 @@ function MakeSeeded(H) {
     while(true) {
       var param = _param;
       var accu = _accu;
-      if (param) {
-        _param = param[2];
-        _accu = accu + 1 | 0;
-        continue ;
-      } else {
+      if (!param) {
         return accu;
       }
+      _param = param[2];
+      _accu = accu + 1 | 0;
+      continue ;
     };
   };
   var stats = function (h) {
@@ -568,19 +539,17 @@ function MakeSeeded(H) {
     while(true) {
       var param = _param;
       var accu = _accu;
-      if (param) {
-        var rest = param[2];
-        if (check_key(param[1])) {
-          _param = rest;
-          _accu = accu + 1 | 0;
-          continue ;
-        } else {
-          _param = rest;
-          continue ;
-        }
-      } else {
+      if (!param) {
         return accu;
       }
+      var rest = param[2];
+      if (check_key(param[1])) {
+        _param = rest;
+        _accu = accu + 1 | 0;
+        continue ;
+      }
+      _param = rest;
+      continue ;
     };
   };
   var stats_alive = function (h) {
@@ -637,9 +606,9 @@ function Make(H) {
     return c;
   };
   var equal$1 = function (c, k) {
-    var match = Obj.Ephemeron.get_key(c, 0);
-    if (match !== undefined) {
-      if (Curry._2(equal, k, Caml_option.valFromOption(match))) {
+    var k$prime = Obj.Ephemeron.get_key(c, 0);
+    if (k$prime !== undefined) {
+      if (Curry._2(equal, k, Caml_option.valFromOption(k$prime))) {
         return /* ETrue */0;
       } else {
         return /* EFalse */1;
@@ -656,24 +625,29 @@ function Make(H) {
   var power_2_above = function (_x, n) {
     while(true) {
       var x = _x;
-      if (x >= n || (x << 1) > Sys.max_array_length) {
+      if (x >= n) {
         return x;
-      } else {
-        _x = (x << 1);
-        continue ;
       }
+      if ((x << 1) > Sys.max_array_length) {
+        return x;
+      }
+      _x = (x << 1);
+      continue ;
     };
   };
-  var prng = Caml_obj.caml_lazy_make((function (param) {
-          return Random.State.make_self_init(/* () */0);
-        }));
+  var prng = {
+    tag: 246,
+    value: (function () {
+        return Random.State.make_self_init(undefined);
+      })
+  };
   var clear = function (h) {
     h.size = 0;
     var len = h.data.length;
-    for(var i = 0 ,i_finish = len - 1 | 0; i <= i_finish; ++i){
+    for(var i = 0; i < len; ++i){
       Caml_array.caml_array_set(h.data, i, /* Empty */0);
     }
-    return /* () */0;
+    
   };
   var reset = function (h) {
     var len = h.data.length;
@@ -682,7 +656,7 @@ function Make(H) {
     } else {
       h.size = 0;
       h.data = Caml_array.caml_make_vect(h.initial_size, /* Empty */0);
-      return /* () */0;
+      return ;
     }
   };
   var copy = function (h) {
@@ -700,60 +674,56 @@ function Make(H) {
     var do_bucket = function (_param) {
       while(true) {
         var param = _param;
-        if (param) {
-          var rest = param[2];
-          var c = param[1];
-          if (check_key(c)) {
-            return /* Cons */[
-                    param[0],
-                    c,
-                    do_bucket(rest)
-                  ];
-          } else {
-            h.size = h.size - 1 | 0;
-            _param = rest;
-            continue ;
-          }
-        } else {
+        if (!param) {
           return /* Empty */0;
         }
+        var rest = param[2];
+        var c = param[1];
+        if (check_key(c)) {
+          return /* Cons */[
+                  param[0],
+                  c,
+                  do_bucket(rest)
+                ];
+        }
+        h.size = h.size - 1 | 0;
+        _param = rest;
+        continue ;
       };
     };
     var d = h.data;
-    for(var i = 0 ,i_finish = d.length - 1 | 0; i <= i_finish; ++i){
+    for(var i = 0 ,i_finish = d.length; i < i_finish; ++i){
       Caml_array.caml_array_set(d, i, do_bucket(Caml_array.caml_array_get(d, i)));
     }
-    return /* () */0;
+    
   };
   var resize = function (h) {
     var odata = h.data;
     var osize = odata.length;
     var nsize = (osize << 1);
     clean(h);
-    if (nsize < Sys.max_array_length && h.size >= (osize >>> 1)) {
-      var ndata = Caml_array.caml_make_vect(nsize, /* Empty */0);
-      h.data = ndata;
-      var insert_bucket = function (param) {
-        if (param) {
-          var hkey = param[0];
-          insert_bucket(param[2]);
-          var nidx = key_index(h, hkey);
-          return Caml_array.caml_array_set(ndata, nidx, /* Cons */[
-                      hkey,
-                      param[1],
-                      Caml_array.caml_array_get(ndata, nidx)
-                    ]);
-        } else {
-          return /* () */0;
-        }
-      };
-      for(var i = 0 ,i_finish = osize - 1 | 0; i <= i_finish; ++i){
-        insert_bucket(Caml_array.caml_array_get(odata, i));
-      }
-      return /* () */0;
-    } else {
-      return 0;
+    if (!(nsize < Sys.max_array_length && h.size >= (osize >>> 1))) {
+      return ;
     }
+    var ndata = Caml_array.caml_make_vect(nsize, /* Empty */0);
+    h.data = ndata;
+    var insert_bucket = function (param) {
+      if (!param) {
+        return ;
+      }
+      var hkey = param[0];
+      insert_bucket(param[2]);
+      var nidx = key_index(h, hkey);
+      return Caml_array.caml_array_set(ndata, nidx, /* Cons */[
+                  hkey,
+                  param[1],
+                  Caml_array.caml_array_get(ndata, nidx)
+                ]);
+    };
+    for(var i = 0; i < osize; ++i){
+      insert_bucket(Caml_array.caml_array_get(odata, i));
+    }
+    
   };
   var add = function (h, key, info) {
     var hkey = hash(h.seed, key);
@@ -769,46 +739,43 @@ function Make(H) {
     h.size = h.size + 1 | 0;
     if (h.size > (h.data.length << 1)) {
       return resize(h);
-    } else {
-      return 0;
     }
+    
   };
   var remove = function (h, key) {
     var hkey = hash(h.seed, key);
     var remove_bucket = function (_param) {
       while(true) {
         var param = _param;
-        if (param) {
-          var next = param[2];
-          var c = param[1];
-          var hk = param[0];
-          if (hkey === hk) {
-            var match = equal$1(c, key);
-            switch (match) {
-              case /* ETrue */0 :
-                  h.size = h.size - 1 | 0;
-                  return next;
-              case /* EFalse */1 :
-                  return /* Cons */[
-                          hk,
-                          c,
-                          remove_bucket(next)
-                        ];
-              case /* EDead */2 :
-                  h.size = h.size - 1 | 0;
-                  _param = next;
-                  continue ;
-              
-            }
-          } else {
-            return /* Cons */[
-                    hk,
-                    c,
-                    remove_bucket(next)
-                  ];
-          }
-        } else {
+        if (!param) {
           return /* Empty */0;
+        }
+        var next = param[2];
+        var c = param[1];
+        var hk = param[0];
+        if (hkey !== hk) {
+          return /* Cons */[
+                  hk,
+                  c,
+                  remove_bucket(next)
+                ];
+        }
+        var match = equal$1(c, key);
+        switch (match) {
+          case /* ETrue */0 :
+              h.size = h.size - 1 | 0;
+              return next;
+          case /* EFalse */1 :
+              return /* Cons */[
+                      hk,
+                      c,
+                      remove_bucket(next)
+                    ];
+          case /* EDead */2 :
+              h.size = h.size - 1 | 0;
+              _param = next;
+              continue ;
+          
         }
       };
     };
@@ -817,68 +784,59 @@ function Make(H) {
   };
   var find = function (h, key) {
     var hkey = hash(h.seed, key);
-    var key$1 = key;
-    var hkey$1 = hkey;
     var _param = Caml_array.caml_array_get(h.data, key_index(h, hkey));
     while(true) {
       var param = _param;
       if (param) {
         var rest = param[2];
         var c = param[1];
-        if (hkey$1 === param[0]) {
-          var match = equal$1(c, key$1);
+        if (hkey === param[0]) {
+          var match = equal$1(c, key);
           if (match !== 0) {
             _param = rest;
             continue ;
-          } else {
-            var match$1 = get_data(c);
-            if (match$1 !== undefined) {
-              return Caml_option.valFromOption(match$1);
-            } else {
-              _param = rest;
-              continue ;
-            }
           }
-        } else {
+          var d = get_data(c);
+          if (d !== undefined) {
+            return Caml_option.valFromOption(d);
+          }
           _param = rest;
           continue ;
         }
-      } else {
-        throw Caml_builtin_exceptions.not_found;
+        _param = rest;
+        continue ;
       }
+      throw {
+            RE_EXN_ID: "Not_found",
+            Error: new Error()
+          };
     };
   };
   var find_opt = function (h, key) {
     var hkey = hash(h.seed, key);
-    var key$1 = key;
-    var hkey$1 = hkey;
     var _param = Caml_array.caml_array_get(h.data, key_index(h, hkey));
     while(true) {
       var param = _param;
-      if (param) {
-        var rest = param[2];
-        var c = param[1];
-        if (hkey$1 === param[0]) {
-          var match = equal$1(c, key$1);
-          if (match !== 0) {
-            _param = rest;
-            continue ;
-          } else {
-            var d = get_data(c);
-            if (d !== undefined) {
-              return d;
-            } else {
-              _param = rest;
-              continue ;
-            }
-          }
-        } else {
+      if (!param) {
+        return ;
+      }
+      var rest = param[2];
+      var c = param[1];
+      if (hkey === param[0]) {
+        var match = equal$1(c, key);
+        if (match !== 0) {
           _param = rest;
           continue ;
         }
-      } else {
-        return ;
+        var d = get_data(c);
+        if (d !== undefined) {
+          return d;
+        }
+        _param = rest;
+        continue ;
       }
+      _param = rest;
+      continue ;
     };
   };
   var find_all = function (h, key) {
@@ -886,33 +844,29 @@ function Make(H) {
     var find_in_bucket = function (_param) {
       while(true) {
         var param = _param;
-        if (param) {
-          var rest = param[2];
-          var c = param[1];
-          if (hkey === param[0]) {
-            var match = equal$1(c, key);
-            if (match !== 0) {
-              _param = rest;
-              continue ;
-            } else {
-              var match$1 = get_data(c);
-              if (match$1 !== undefined) {
-                return /* :: */[
-                        Caml_option.valFromOption(match$1),
-                        find_in_bucket(rest)
-                      ];
-              } else {
-                _param = rest;
-                continue ;
-              }
-            }
-          } else {
+        if (!param) {
+          return /* [] */0;
+        }
+        var rest = param[2];
+        var c = param[1];
+        if (hkey === param[0]) {
+          var match = equal$1(c, key);
+          if (match !== 0) {
             _param = rest;
             continue ;
           }
-        } else {
-          return /* [] */0;
+          var d = get_data(c);
+          if (d !== undefined) {
+            return /* :: */[
+                    Caml_option.valFromOption(d),
+                    find_in_bucket(rest)
+                  ];
+          }
+          _param = rest;
+          continue ;
         }
+        _param = rest;
+        continue ;
       };
     };
     return find_in_bucket(Caml_array.caml_array_get(h.data, key_index(h, hkey)));
@@ -930,23 +884,24 @@ function Make(H) {
           var c = param[1];
           if (hkey === param[0]) {
             var match = equal$1(c, key);
-            if (match !== 0) {
-              _param = next;
-              continue ;
-            } else {
+            if (match === 0) {
               return set_key_data(c, key, info);
             }
-          } else {
             _param = next;
             continue ;
           }
-        } else {
-          throw Caml_builtin_exceptions.not_found;
+          _param = next;
+          continue ;
         }
+        throw {
+              RE_EXN_ID: "Not_found",
+              Error: new Error()
+            };
       };
     }
-    catch (exn){
-      if (exn === Caml_builtin_exceptions.not_found) {
+    catch (raw_exn){
+      var exn = Caml_js_exceptions.internalToOCamlException(raw_exn);
+      if (exn.RE_EXN_ID === "Not_found") {
         var container = create(key, info);
         Caml_array.caml_array_set(h.data, i, /* Cons */[
               hkey,
@@ -957,11 +912,10 @@ function Make(H) {
         if (h.size > (h.data.length << 1)) {
           return resize(h);
         } else {
-          return 0;
+          return ;
         }
-      } else {
-        throw exn;
       }
+      throw exn;
     }
   };
   var mem = function (h, key) {
@@ -969,73 +923,65 @@ function Make(H) {
     var _param = Caml_array.caml_array_get(h.data, key_index(h, hkey));
     while(true) {
       var param = _param;
-      if (param) {
-        var rest = param[2];
-        if (param[0] === hkey) {
-          var match = equal$1(param[1], key);
-          if (match !== 0) {
-            _param = rest;
-            continue ;
-          } else {
-            return true;
-          }
-        } else {
-          _param = rest;
-          continue ;
-        }
-      } else {
+      if (!param) {
         return false;
       }
+      var rest = param[2];
+      if (param[0] === hkey) {
+        var match = equal$1(param[1], key);
+        if (match === 0) {
+          return true;
+        }
+        _param = rest;
+        continue ;
+      }
+      _param = rest;
+      continue ;
     };
   };
   var iter = function (f, h) {
     var do_bucket = function (_param) {
       while(true) {
         var param = _param;
-        if (param) {
-          var c = param[1];
-          var match = get_key(c);
-          var match$1 = get_data(c);
-          if (match !== undefined) {
-            if (match$1 !== undefined) {
-              Curry._2(f, Caml_option.valFromOption(match), Caml_option.valFromOption(match$1));
-            }
-            
-          }
-          _param = param[2];
-          continue ;
-        } else {
-          return /* () */0;
+        if (!param) {
+          return ;
         }
+        var c = param[1];
+        var match = get_key(c);
+        var match$1 = get_data(c);
+        if (match !== undefined && match$1 !== undefined) {
+          Curry._2(f, Caml_option.valFromOption(match), Caml_option.valFromOption(match$1));
+        }
+        _param = param[2];
+        continue ;
       };
     };
     var d = h.data;
-    for(var i = 0 ,i_finish = d.length - 1 | 0; i <= i_finish; ++i){
+    for(var i = 0 ,i_finish = d.length; i < i_finish; ++i){
       do_bucket(Caml_array.caml_array_get(d, i));
     }
-    return /* () */0;
+    
   };
   var fold = function (f, h, init) {
     var do_bucket = function (_b, _accu) {
       while(true) {
         var accu = _accu;
         var b = _b;
-        if (b) {
-          var c = b[1];
-          var match = get_key(c);
-          var match$1 = get_data(c);
-          var accu$1 = match !== undefined && match$1 !== undefined ? Curry._3(f, Caml_option.valFromOption(match), Caml_option.valFromOption(match$1), accu) : accu;
-          _accu = accu$1;
-          _b = b[2];
-          continue ;
-        } else {
+        if (!b) {
           return accu;
         }
+        var c = b[1];
+        var match = get_key(c);
+        var match$1 = get_data(c);
+        var accu$1 = match !== undefined && match$1 !== undefined ? Curry._3(f, Caml_option.valFromOption(match), Caml_option.valFromOption(match$1), accu) : accu;
+        _accu = accu$1;
+        _b = b[2];
+        continue ;
       };
     };
     var d = h.data;
     var accu = init;
-    for(var i = 0 ,i_finish = d.length - 1 | 0; i <= i_finish; ++i){
+    for(var i = 0 ,i_finish = d.length; i < i_finish; ++i){
       accu = do_bucket(Caml_array.caml_array_get(d, i), accu);
     }
     return accu;
@@ -1044,44 +990,40 @@ function Make(H) {
     var do_bucket = function (_param) {
       while(true) {
         var param = _param;
-        if (param) {
-          var rest = param[2];
-          var c = param[1];
-          var match = get_key(c);
-          var match$1 = get_data(c);
-          if (match !== undefined) {
-            if (match$1 !== undefined) {
-              var k = Caml_option.valFromOption(match);
-              var match$2 = Curry._2(f, k, Caml_option.valFromOption(match$1));
-              if (match$2 !== undefined) {
-                set_key_data(c, k, Caml_option.valFromOption(match$2));
-                return /* Cons */[
-                        param[0],
-                        c,
-                        do_bucket(rest)
-                      ];
-              } else {
-                _param = rest;
-                continue ;
-              }
-            } else {
-              _param = rest;
-              continue ;
+        if (!param) {
+          return /* Empty */0;
+        }
+        var rest = param[2];
+        var c = param[1];
+        var match = get_key(c);
+        var match$1 = get_data(c);
+        if (match !== undefined) {
+          if (match$1 !== undefined) {
+            var k = Caml_option.valFromOption(match);
+            var new_d = Curry._2(f, k, Caml_option.valFromOption(match$1));
+            if (new_d !== undefined) {
+              set_key_data(c, k, Caml_option.valFromOption(new_d));
+              return /* Cons */[
+                      param[0],
+                      c,
+                      do_bucket(rest)
+                    ];
             }
-          } else {
             _param = rest;
             continue ;
           }
-        } else {
-          return /* Empty */0;
+          _param = rest;
+          continue ;
         }
+        _param = rest;
+        continue ;
       };
     };
     var d = h.data;
-    for(var i = 0 ,i_finish = d.length - 1 | 0; i <= i_finish; ++i){
+    for(var i = 0 ,i_finish = d.length; i < i_finish; ++i){
       Caml_array.caml_array_set(d, i, do_bucket(Caml_array.caml_array_get(d, i)));
     }
-    return /* () */0;
+    
   };
   var length = function (h) {
     return h.size;
@@ -1090,13 +1032,12 @@ function Make(H) {
     while(true) {
       var param = _param;
       var accu = _accu;
-      if (param) {
-        _param = param[2];
-        _accu = accu + 1 | 0;
-        continue ;
-      } else {
+      if (!param) {
         return accu;
       }
+      _param = param[2];
+      _accu = accu + 1 | 0;
+      continue ;
     };
   };
   var stats = function (h) {
@@ -1119,19 +1060,17 @@ function Make(H) {
     while(true) {
       var param = _param;
       var accu = _accu;
-      if (param) {
-        var rest = param[2];
-        if (check_key(param[1])) {
-          _param = rest;
-          _accu = accu + 1 | 0;
-          continue ;
-        } else {
-          _param = rest;
-          continue ;
-        }
-      } else {
+      if (!param) {
         return accu;
       }
+      var rest = param[2];
+      if (check_key(param[1])) {
+        _param = rest;
+        _accu = accu + 1 | 0;
+        continue ;
+      }
+      _param = rest;
+      continue ;
     };
   };
   var stats_alive = function (h) {
@@ -1155,10 +1094,9 @@ function Make(H) {
           };
   };
   var create$1 = function (sz) {
-    var $staropt$star = false;
-    var initial_size = sz;
-    var random = $staropt$star !== undefined ? $staropt$star : Hashtbl.is_randomized(/* () */0);
-    var s = power_2_above(16, initial_size);
+    var randomOpt = false;
+    var random = randomOpt !== undefined ? randomOpt : Hashtbl.is_randomized(undefined);
+    var s = power_2_above(16, sz);
     var seed = random ? Random.State.bits(CamlinternalLazy.force(prng)) : 0;
     return {
             size: 0,
@@ -1320,19 +1258,24 @@ function MakeSeeded$1(H1, H2) {
   var power_2_above = function (_x, n) {
     while(true) {
       var x = _x;
-      if (x >= n || (x << 1) > Sys.max_array_length) {
+      if (x >= n) {
         return x;
-      } else {
-        _x = (x << 1);
-        continue ;
       }
+      if ((x << 1) > Sys.max_array_length) {
+        return x;
+      }
+      _x = (x << 1);
+      continue ;
     };
   };
-  var prng = Caml_obj.caml_lazy_make((function (param) {
-          return Random.State.make_self_init(/* () */0);
-        }));
-  var create$1 = function ($staropt$star, initial_size) {
-    var random = $staropt$star !== undefined ? $staropt$star : Hashtbl.is_randomized(/* () */0);
+  var prng = {
+    tag: 246,
+    value: (function () {
+        return Random.State.make_self_init(undefined);
+      })
+  };
+  var create$1 = function (randomOpt, initial_size) {
+    var random = randomOpt !== undefined ? randomOpt : Hashtbl.is_randomized(undefined);
     var s = power_2_above(16, initial_size);
     var seed = random ? Random.State.bits(CamlinternalLazy.force(prng)) : 0;
     return {
@@ -1345,10 +1288,10 @@ function MakeSeeded$1(H1, H2) {
   var clear = function (h) {
     h.size = 0;
     var len = h.data.length;
-    for(var i = 0 ,i_finish = len - 1 | 0; i <= i_finish; ++i){
+    for(var i = 0; i < len; ++i){
       Caml_array.caml_array_set(h.data, i, /* Empty */0);
     }
-    return /* () */0;
+    
   };
   var reset = function (h) {
     var len = h.data.length;
@@ -1357,7 +1300,7 @@ function MakeSeeded$1(H1, H2) {
     } else {
       h.size = 0;
       h.data = Caml_array.caml_make_vect(h.initial_size, /* Empty */0);
-      return /* () */0;
+      return ;
     }
   };
   var copy = function (h) {
@@ -1375,60 +1318,56 @@ function MakeSeeded$1(H1, H2) {
     var do_bucket = function (_param) {
       while(true) {
         var param = _param;
-        if (param) {
-          var rest = param[2];
-          var c = param[1];
-          if (check_key(c)) {
-            return /* Cons */[
-                    param[0],
-                    c,
-                    do_bucket(rest)
-                  ];
-          } else {
-            h.size = h.size - 1 | 0;
-            _param = rest;
-            continue ;
-          }
-        } else {
+        if (!param) {
           return /* Empty */0;
         }
+        var rest = param[2];
+        var c = param[1];
+        if (check_key(c)) {
+          return /* Cons */[
+                  param[0],
+                  c,
+                  do_bucket(rest)
+                ];
+        }
+        h.size = h.size - 1 | 0;
+        _param = rest;
+        continue ;
       };
     };
     var d = h.data;
-    for(var i = 0 ,i_finish = d.length - 1 | 0; i <= i_finish; ++i){
+    for(var i = 0 ,i_finish = d.length; i < i_finish; ++i){
       Caml_array.caml_array_set(d, i, do_bucket(Caml_array.caml_array_get(d, i)));
     }
-    return /* () */0;
+    
   };
   var resize = function (h) {
     var odata = h.data;
     var osize = odata.length;
     var nsize = (osize << 1);
     clean(h);
-    if (nsize < Sys.max_array_length && h.size >= (osize >>> 1)) {
-      var ndata = Caml_array.caml_make_vect(nsize, /* Empty */0);
-      h.data = ndata;
-      var insert_bucket = function (param) {
-        if (param) {
-          var hkey = param[0];
-          insert_bucket(param[2]);
-          var nidx = key_index(h, hkey);
-          return Caml_array.caml_array_set(ndata, nidx, /* Cons */[
-                      hkey,
-                      param[1],
-                      Caml_array.caml_array_get(ndata, nidx)
-                    ]);
-        } else {
-          return /* () */0;
-        }
-      };
-      for(var i = 0 ,i_finish = osize - 1 | 0; i <= i_finish; ++i){
-        insert_bucket(Caml_array.caml_array_get(odata, i));
-      }
-      return /* () */0;
-    } else {
-      return 0;
+    if (!(nsize < Sys.max_array_length && h.size >= (osize >>> 1))) {
+      return ;
     }
+    var ndata = Caml_array.caml_make_vect(nsize, /* Empty */0);
+    h.data = ndata;
+    var insert_bucket = function (param) {
+      if (!param) {
+        return ;
+      }
+      var hkey = param[0];
+      insert_bucket(param[2]);
+      var nidx = key_index(h, hkey);
+      return Caml_array.caml_array_set(ndata, nidx, /* Cons */[
+                  hkey,
+                  param[1],
+                  Caml_array.caml_array_get(ndata, nidx)
+                ]);
+    };
+    for(var i = 0; i < osize; ++i){
+      insert_bucket(Caml_array.caml_array_get(odata, i));
+    }
+    
   };
   var add = function (h, key, info) {
     var hkey = hash(h.seed, key);
@@ -1444,46 +1383,43 @@ function MakeSeeded$1(H1, H2) {
     h.size = h.size + 1 | 0;
     if (h.size > (h.data.length << 1)) {
       return resize(h);
-    } else {
-      return 0;
     }
+    
   };
   var remove = function (h, key) {
     var hkey = hash(h.seed, key);
     var remove_bucket = function (_param) {
       while(true) {
         var param = _param;
-        if (param) {
-          var next = param[2];
-          var c = param[1];
-          var hk = param[0];
-          if (hkey === hk) {
-            var match = equal(c, key);
-            switch (match) {
-              case /* ETrue */0 :
-                  h.size = h.size - 1 | 0;
-                  return next;
-              case /* EFalse */1 :
-                  return /* Cons */[
-                          hk,
-                          c,
-                          remove_bucket(next)
-                        ];
-              case /* EDead */2 :
-                  h.size = h.size - 1 | 0;
-                  _param = next;
-                  continue ;
-              
-            }
-          } else {
-            return /* Cons */[
-                    hk,
-                    c,
-                    remove_bucket(next)
-                  ];
-          }
-        } else {
+        if (!param) {
           return /* Empty */0;
+        }
+        var next = param[2];
+        var c = param[1];
+        var hk = param[0];
+        if (hkey !== hk) {
+          return /* Cons */[
+                  hk,
+                  c,
+                  remove_bucket(next)
+                ];
+        }
+        var match = equal(c, key);
+        switch (match) {
+          case /* ETrue */0 :
+              h.size = h.size - 1 | 0;
+              return next;
+          case /* EFalse */1 :
+              return /* Cons */[
+                      hk,
+                      c,
+                      remove_bucket(next)
+                    ];
+          case /* EDead */2 :
+              h.size = h.size - 1 | 0;
+              _param = next;
+              continue ;
+          
         }
       };
     };
@@ -1492,68 +1428,59 @@ function MakeSeeded$1(H1, H2) {
   };
   var find = function (h, key) {
     var hkey = hash(h.seed, key);
-    var key$1 = key;
-    var hkey$1 = hkey;
     var _param = Caml_array.caml_array_get(h.data, key_index(h, hkey));
     while(true) {
       var param = _param;
       if (param) {
         var rest = param[2];
         var c = param[1];
-        if (hkey$1 === param[0]) {
-          var match = equal(c, key$1);
+        if (hkey === param[0]) {
+          var match = equal(c, key);
           if (match !== 0) {
             _param = rest;
             continue ;
-          } else {
-            var match$1 = get_data$1(c);
-            if (match$1 !== undefined) {
-              return Caml_option.valFromOption(match$1);
-            } else {
-              _param = rest;
-              continue ;
-            }
           }
-        } else {
+          var d = get_data$1(c);
+          if (d !== undefined) {
+            return Caml_option.valFromOption(d);
+          }
           _param = rest;
           continue ;
         }
-      } else {
-        throw Caml_builtin_exceptions.not_found;
+        _param = rest;
+        continue ;
       }
+      throw {
+            RE_EXN_ID: "Not_found",
+            Error: new Error()
+          };
     };
   };
   var find_opt = function (h, key) {
     var hkey = hash(h.seed, key);
-    var key$1 = key;
-    var hkey$1 = hkey;
     var _param = Caml_array.caml_array_get(h.data, key_index(h, hkey));
     while(true) {
       var param = _param;
-      if (param) {
-        var rest = param[2];
-        var c = param[1];
-        if (hkey$1 === param[0]) {
-          var match = equal(c, key$1);
-          if (match !== 0) {
-            _param = rest;
-            continue ;
-          } else {
-            var d = get_data$1(c);
-            if (d !== undefined) {
-              return d;
-            } else {
-              _param = rest;
-              continue ;
-            }
-          }
-        } else {
+      if (!param) {
+        return ;
+      }
+      var rest = param[2];
+      var c = param[1];
+      if (hkey === param[0]) {
+        var match = equal(c, key);
+        if (match !== 0) {
           _param = rest;
           continue ;
         }
-      } else {
-        return ;
+        var d = get_data$1(c);
+        if (d !== undefined) {
+          return d;
+        }
+        _param = rest;
+        continue ;
       }
+      _param = rest;
+      continue ;
     };
   };
   var find_all = function (h, key) {
@@ -1561,33 +1488,29 @@ function MakeSeeded$1(H1, H2) {
     var find_in_bucket = function (_param) {
       while(true) {
         var param = _param;
-        if (param) {
-          var rest = param[2];
-          var c = param[1];
-          if (hkey === param[0]) {
-            var match = equal(c, key);
-            if (match !== 0) {
-              _param = rest;
-              continue ;
-            } else {
-              var match$1 = get_data$1(c);
-              if (match$1 !== undefined) {
-                return /* :: */[
-                        Caml_option.valFromOption(match$1),
-                        find_in_bucket(rest)
-                      ];
-              } else {
-                _param = rest;
-                continue ;
-              }
-            }
-          } else {
+        if (!param) {
+          return /* [] */0;
+        }
+        var rest = param[2];
+        var c = param[1];
+        if (hkey === param[0]) {
+          var match = equal(c, key);
+          if (match !== 0) {
             _param = rest;
             continue ;
           }
-        } else {
-          return /* [] */0;
+          var d = get_data$1(c);
+          if (d !== undefined) {
+            return /* :: */[
+                    Caml_option.valFromOption(d),
+                    find_in_bucket(rest)
+                  ];
+          }
+          _param = rest;
+          continue ;
         }
+        _param = rest;
+        continue ;
       };
     };
     return find_in_bucket(Caml_array.caml_array_get(h.data, key_index(h, hkey)));
@@ -1605,23 +1528,24 @@ function MakeSeeded$1(H1, H2) {
           var c = param[1];
           if (hkey === param[0]) {
             var match = equal(c, key);
-            if (match !== 0) {
-              _param = next;
-              continue ;
-            } else {
+            if (match === 0) {
               return set_key_data(c, key, info);
             }
-          } else {
             _param = next;
             continue ;
           }
-        } else {
-          throw Caml_builtin_exceptions.not_found;
+          _param = next;
+          continue ;
         }
+        throw {
+              RE_EXN_ID: "Not_found",
+              Error: new Error()
+            };
       };
     }
-    catch (exn){
-      if (exn === Caml_builtin_exceptions.not_found) {
+    catch (raw_exn){
+      var exn = Caml_js_exceptions.internalToOCamlException(raw_exn);
+      if (exn.RE_EXN_ID === "Not_found") {
         var container = create(key, info);
         Caml_array.caml_array_set(h.data, i, /* Cons */[
               hkey,
@@ -1632,11 +1556,10 @@ function MakeSeeded$1(H1, H2) {
         if (h.size > (h.data.length << 1)) {
           return resize(h);
         } else {
-          return 0;
+          return ;
         }
-      } else {
-        throw exn;
       }
+      throw exn;
     }
   };
   var mem = function (h, key) {
@@ -1644,73 +1567,65 @@ function MakeSeeded$1(H1, H2) {
     var _param = Caml_array.caml_array_get(h.data, key_index(h, hkey));
     while(true) {
       var param = _param;
-      if (param) {
-        var rest = param[2];
-        if (param[0] === hkey) {
-          var match = equal(param[1], key);
-          if (match !== 0) {
-            _param = rest;
-            continue ;
-          } else {
-            return true;
-          }
-        } else {
-          _param = rest;
-          continue ;
-        }
-      } else {
+      if (!param) {
         return false;
       }
+      var rest = param[2];
+      if (param[0] === hkey) {
+        var match = equal(param[1], key);
+        if (match === 0) {
+          return true;
+        }
+        _param = rest;
+        continue ;
+      }
+      _param = rest;
+      continue ;
     };
   };
   var iter = function (f, h) {
     var do_bucket = function (_param) {
       while(true) {
         var param = _param;
-        if (param) {
-          var c = param[1];
-          var match = get_key(c);
-          var match$1 = get_data$1(c);
-          if (match !== undefined) {
-            if (match$1 !== undefined) {
-              Curry._2(f, Caml_option.valFromOption(match), Caml_option.valFromOption(match$1));
-            }
-            
-          }
-          _param = param[2];
-          continue ;
-        } else {
-          return /* () */0;
+        if (!param) {
+          return ;
         }
+        var c = param[1];
+        var match = get_key(c);
+        var match$1 = get_data$1(c);
+        if (match !== undefined && match$1 !== undefined) {
+          Curry._2(f, Caml_option.valFromOption(match), Caml_option.valFromOption(match$1));
+        }
+        _param = param[2];
+        continue ;
       };
     };
     var d = h.data;
-    for(var i = 0 ,i_finish = d.length - 1 | 0; i <= i_finish; ++i){
+    for(var i = 0 ,i_finish = d.length; i < i_finish; ++i){
       do_bucket(Caml_array.caml_array_get(d, i));
     }
-    return /* () */0;
+    
   };
   var fold = function (f, h, init) {
     var do_bucket = function (_b, _accu) {
       while(true) {
         var accu = _accu;
         var b = _b;
-        if (b) {
-          var c = b[1];
-          var match = get_key(c);
-          var match$1 = get_data$1(c);
-          var accu$1 = match !== undefined && match$1 !== undefined ? Curry._3(f, Caml_option.valFromOption(match), Caml_option.valFromOption(match$1), accu) : accu;
-          _accu = accu$1;
-          _b = b[2];
-          continue ;
-        } else {
+        if (!b) {
           return accu;
         }
+        var c = b[1];
+        var match = get_key(c);
+        var match$1 = get_data$1(c);
+        var accu$1 = match !== undefined && match$1 !== undefined ? Curry._3(f, Caml_option.valFromOption(match), Caml_option.valFromOption(match$1), accu) : accu;
+        _accu = accu$1;
+        _b = b[2];
+        continue ;
       };
     };
     var d = h.data;
     var accu = init;
-    for(var i = 0 ,i_finish = d.length - 1 | 0; i <= i_finish; ++i){
+    for(var i = 0 ,i_finish = d.length; i < i_finish; ++i){
       accu = do_bucket(Caml_array.caml_array_get(d, i), accu);
     }
     return accu;
@@ -1719,44 +1634,40 @@ function MakeSeeded$1(H1, H2) {
     var do_bucket = function (_param) {
       while(true) {
         var param = _param;
-        if (param) {
-          var rest = param[2];
-          var c = param[1];
-          var match = get_key(c);
-          var match$1 = get_data$1(c);
-          if (match !== undefined) {
-            if (match$1 !== undefined) {
-              var k = Caml_option.valFromOption(match);
-              var match$2 = Curry._2(f, k, Caml_option.valFromOption(match$1));
-              if (match$2 !== undefined) {
-                set_key_data(c, k, Caml_option.valFromOption(match$2));
-                return /* Cons */[
-                        param[0],
-                        c,
-                        do_bucket(rest)
-                      ];
-              } else {
-                _param = rest;
-                continue ;
-              }
-            } else {
-              _param = rest;
-              continue ;
+        if (!param) {
+          return /* Empty */0;
+        }
+        var rest = param[2];
+        var c = param[1];
+        var match = get_key(c);
+        var match$1 = get_data$1(c);
+        if (match !== undefined) {
+          if (match$1 !== undefined) {
+            var k = Caml_option.valFromOption(match);
+            var new_d = Curry._2(f, k, Caml_option.valFromOption(match$1));
+            if (new_d !== undefined) {
+              set_key_data(c, k, Caml_option.valFromOption(new_d));
+              return /* Cons */[
+                      param[0],
+                      c,
+                      do_bucket(rest)
+                    ];
             }
-          } else {
             _param = rest;
             continue ;
           }
-        } else {
-          return /* Empty */0;
+          _param = rest;
+          continue ;
         }
+        _param = rest;
+        continue ;
       };
     };
     var d = h.data;
-    for(var i = 0 ,i_finish = d.length - 1 | 0; i <= i_finish; ++i){
+    for(var i = 0 ,i_finish = d.length; i < i_finish; ++i){
       Caml_array.caml_array_set(d, i, do_bucket(Caml_array.caml_array_get(d, i)));
     }
-    return /* () */0;
+    
   };
   var length = function (h) {
     return h.size;
@@ -1765,13 +1676,12 @@ function MakeSeeded$1(H1, H2) {
     while(true) {
       var param = _param;
       var accu = _accu;
-      if (param) {
-        _param = param[2];
-        _accu = accu + 1 | 0;
-        continue ;
-      } else {
+      if (!param) {
         return accu;
       }
+      _param = param[2];
+      _accu = accu + 1 | 0;
+      continue ;
     };
   };
   var stats = function (h) {
@@ -1794,19 +1704,17 @@ function MakeSeeded$1(H1, H2) {
     while(true) {
       var param = _param;
       var accu = _accu;
-      if (param) {
-        var rest = param[2];
-        if (check_key(param[1])) {
-          _param = rest;
-          _accu = accu + 1 | 0;
-          continue ;
-        } else {
-          _param = rest;
-          continue ;
-        }
-      } else {
+      if (!param) {
         return accu;
       }
+      var rest = param[2];
+      if (check_key(param[1])) {
+        _param = rest;
+        _accu = accu + 1 | 0;
+        continue ;
+      }
+      _param = rest;
+      continue ;
     };
   };
   var stats_alive = function (h) {
@@ -1859,613 +1767,559 @@ function Make$1(H1, H2) {
   var hash$1 = function (_seed, x) {
     return Curry._1(H2.hash, x);
   };
-  var include = (function (param) {
-        var create = function (param, d) {
-          var c = Obj.Ephemeron.create(2);
-          Obj.Ephemeron.set_data(c, d);
-          set_key1(c, param[0]);
-          set_key2(c, param[1]);
-          return c;
-        };
-        var hash$2 = function (seed, param$1) {
-          return Curry._2(hash, seed, param$1[0]) + Caml_int32.imul(Curry._2(param.hash, seed, param$1[1]), 65599) | 0;
-        };
-        var equal = function (c, param$1) {
-          var match = Obj.Ephemeron.get_key(c, 0);
-          var match$1 = Obj.Ephemeron.get_key(c, 1);
-          if (match !== undefined && match$1 !== undefined) {
-            if (Curry._2(partial_arg_equal, param$1[0], Caml_option.valFromOption(match)) && Curry._2(param.equal, param$1[1], Caml_option.valFromOption(match$1))) {
-              return /* ETrue */0;
-            } else {
-              return /* EFalse */1;
-            }
-          } else {
-            return /* EDead */2;
+  var H2_equal = H2.equal;
+  var create = function (param, d) {
+    var c = Obj.Ephemeron.create(2);
+    Obj.Ephemeron.set_data(c, d);
+    set_key1(c, param[0]);
+    set_key2(c, param[1]);
+    return c;
+  };
+  var hash$2 = function (seed, param) {
+    return Curry._2(hash, seed, param[0]) + Caml_int32.imul(Curry._2(hash$1, seed, param[1]), 65599) | 0;
+  };
+  var equal = function (c, param) {
+    var match = Obj.Ephemeron.get_key(c, 0);
+    var match$1 = Obj.Ephemeron.get_key(c, 1);
+    if (match !== undefined && match$1 !== undefined) {
+      if (Curry._2(partial_arg_equal, param[0], Caml_option.valFromOption(match)) && Curry._2(H2_equal, param[1], Caml_option.valFromOption(match$1))) {
+        return /* ETrue */0;
+      } else {
+        return /* EFalse */1;
+      }
+    } else {
+      return /* EDead */2;
+    }
+  };
+  var get_key = function (c) {
+    var match = Obj.Ephemeron.get_key(c, 0);
+    var match$1 = Obj.Ephemeron.get_key(c, 1);
+    if (match !== undefined && match$1 !== undefined) {
+      return /* tuple */[
+              Caml_option.valFromOption(match),
+              Caml_option.valFromOption(match$1)
+            ];
+    }
+    
+  };
+  var set_key_data = function (c, param, d) {
+    Obj.Ephemeron.unset_data(c);
+    set_key1(c, param[0]);
+    set_key2(c, param[1]);
+    return Obj.Ephemeron.set_data(c, d);
+  };
+  var check_key = function (c) {
+    if (Obj.Ephemeron.check_key(c, 0)) {
+      return Obj.Ephemeron.check_key(c, 1);
+    } else {
+      return false;
+    }
+  };
+  var power_2_above = function (_x, n) {
+    while(true) {
+      var x = _x;
+      if (x >= n) {
+        return x;
+      }
+      if ((x << 1) > Sys.max_array_length) {
+        return x;
+      }
+      _x = (x << 1);
+      continue ;
+    };
+  };
+  var prng = {
+    tag: 246,
+    value: (function () {
+        return Random.State.make_self_init(undefined);
+      })
+  };
+  var create$1 = function (randomOpt, initial_size) {
+    var random = randomOpt !== undefined ? randomOpt : Hashtbl.is_randomized(undefined);
+    var s = power_2_above(16, initial_size);
+    var seed = random ? Random.State.bits(CamlinternalLazy.force(prng)) : 0;
+    return {
+            size: 0,
+            data: Caml_array.caml_make_vect(s, /* Empty */0),
+            seed: seed,
+            initial_size: s
+          };
+  };
+  var clear = function (h) {
+    h.size = 0;
+    var len = h.data.length;
+    for(var i = 0; i < len; ++i){
+      Caml_array.caml_array_set(h.data, i, /* Empty */0);
+    }
+    
+  };
+  var reset = function (h) {
+    var len = h.data.length;
+    if (len === h.initial_size) {
+      return clear(h);
+    } else {
+      h.size = 0;
+      h.data = Caml_array.caml_make_vect(h.initial_size, /* Empty */0);
+      return ;
+    }
+  };
+  var copy = function (h) {
+    return {
+            size: h.size,
+            data: $$Array.copy(h.data),
+            seed: h.seed,
+            initial_size: h.initial_size
+          };
+  };
+  var key_index = function (h, hkey) {
+    return hkey & (h.data.length - 1 | 0);
+  };
+  var clean = function (h) {
+    var do_bucket = function (_param) {
+      while(true) {
+        var param = _param;
+        if (!param) {
+          return /* Empty */0;
+        }
+        var rest = param[2];
+        var c = param[1];
+        if (Curry._1(check_key, c)) {
+          return /* Cons */[
+                  param[0],
+                  c,
+                  do_bucket(rest)
+                ];
+        }
+        h.size = h.size - 1 | 0;
+        _param = rest;
+        continue ;
+      };
+    };
+    var d = h.data;
+    for(var i = 0 ,i_finish = d.length; i < i_finish; ++i){
+      Caml_array.caml_array_set(d, i, do_bucket(Caml_array.caml_array_get(d, i)));
+    }
+    
+  };
+  var resize = function (h) {
+    var odata = h.data;
+    var osize = odata.length;
+    var nsize = (osize << 1);
+    clean(h);
+    if (!(nsize < Sys.max_array_length && h.size >= (osize >>> 1))) {
+      return ;
+    }
+    var ndata = Caml_array.caml_make_vect(nsize, /* Empty */0);
+    h.data = ndata;
+    var insert_bucket = function (param) {
+      if (!param) {
+        return ;
+      }
+      var hkey = param[0];
+      insert_bucket(param[2]);
+      var nidx = key_index(h, hkey);
+      return Caml_array.caml_array_set(ndata, nidx, /* Cons */[
+                  hkey,
+                  param[1],
+                  Caml_array.caml_array_get(ndata, nidx)
+                ]);
+    };
+    for(var i = 0; i < osize; ++i){
+      insert_bucket(Caml_array.caml_array_get(odata, i));
+    }
+    
+  };
+  var add = function (h, key, info) {
+    var hkey = Curry._2(hash$2, h.seed, key);
+    var i = key_index(h, hkey);
+    var container = Curry._2(create, key, info);
+    var bucket_002 = Caml_array.caml_array_get(h.data, i);
+    var bucket = /* Cons */[
+      hkey,
+      container,
+      bucket_002
+    ];
+    Caml_array.caml_array_set(h.data, i, bucket);
+    h.size = h.size + 1 | 0;
+    if (h.size > (h.data.length << 1)) {
+      return resize(h);
+    }
+    
+  };
+  var remove = function (h, key) {
+    var hkey = Curry._2(hash$2, h.seed, key);
+    var remove_bucket = function (_param) {
+      while(true) {
+        var param = _param;
+        if (!param) {
+          return /* Empty */0;
+        }
+        var next = param[2];
+        var c = param[1];
+        var hk = param[0];
+        if (hkey !== hk) {
+          return /* Cons */[
+                  hk,
+                  c,
+                  remove_bucket(next)
+                ];
+        }
+        var match = Curry._2(equal, c, key);
+        switch (match) {
+          case /* ETrue */0 :
+              h.size = h.size - 1 | 0;
+              return next;
+          case /* EFalse */1 :
+              return /* Cons */[
+                      hk,
+                      c,
+                      remove_bucket(next)
+                    ];
+          case /* EDead */2 :
+              h.size = h.size - 1 | 0;
+              _param = next;
+              continue ;
+          
+        }
+      };
+    };
+    var i = key_index(h, hkey);
+    return Caml_array.caml_array_set(h.data, i, remove_bucket(Caml_array.caml_array_get(h.data, i)));
+  };
+  var find = function (h, key) {
+    var hkey = Curry._2(hash$2, h.seed, key);
+    var _param = Caml_array.caml_array_get(h.data, key_index(h, hkey));
+    while(true) {
+      var param = _param;
+      if (param) {
+        var rest = param[2];
+        var c = param[1];
+        if (hkey === param[0]) {
+          var match = Curry._2(equal, c, key);
+          if (match !== 0) {
+            _param = rest;
+            continue ;
           }
-        };
-        var get_key = function (c) {
-          var match = Obj.Ephemeron.get_key(c, 0);
-          var match$1 = Obj.Ephemeron.get_key(c, 1);
-          if (match !== undefined && match$1 !== undefined) {
-            return /* tuple */[
-                    Caml_option.valFromOption(match),
-                    Caml_option.valFromOption(match$1)
+          var d = Curry._1(get_data$1, c);
+          if (d !== undefined) {
+            return Caml_option.valFromOption(d);
+          }
+          _param = rest;
+          continue ;
+        }
+        _param = rest;
+        continue ;
+      }
+      throw {
+            RE_EXN_ID: "Not_found",
+            Error: new Error()
+          };
+    };
+  };
+  var find_opt = function (h, key) {
+    var hkey = Curry._2(hash$2, h.seed, key);
+    var _param = Caml_array.caml_array_get(h.data, key_index(h, hkey));
+    while(true) {
+      var param = _param;
+      if (!param) {
+        return ;
+      }
+      var rest = param[2];
+      var c = param[1];
+      if (hkey === param[0]) {
+        var match = Curry._2(equal, c, key);
+        if (match !== 0) {
+          _param = rest;
+          continue ;
+        }
+        var d = Curry._1(get_data$1, c);
+        if (d !== undefined) {
+          return d;
+        }
+        _param = rest;
+        continue ;
+      }
+      _param = rest;
+      continue ;
+    };
+  };
+  var find_all = function (h, key) {
+    var hkey = Curry._2(hash$2, h.seed, key);
+    var find_in_bucket = function (_param) {
+      while(true) {
+        var param = _param;
+        if (!param) {
+          return /* [] */0;
+        }
+        var rest = param[2];
+        var c = param[1];
+        if (hkey === param[0]) {
+          var match = Curry._2(equal, c, key);
+          if (match !== 0) {
+            _param = rest;
+            continue ;
+          }
+          var d = Curry._1(get_data$1, c);
+          if (d !== undefined) {
+            return /* :: */[
+                    Caml_option.valFromOption(d),
+                    find_in_bucket(rest)
                   ];
           }
-          
-        };
-        var set_key_data = function (c, param, d) {
-          Obj.Ephemeron.unset_data(c);
-          set_key1(c, param[0]);
-          set_key2(c, param[1]);
-          return Obj.Ephemeron.set_data(c, d);
-        };
-        var check_key = function (c) {
-          if (Obj.Ephemeron.check_key(c, 0)) {
-            return Obj.Ephemeron.check_key(c, 1);
-          } else {
-            return false;
-          }
-        };
-        var power_2_above = function (_x, n) {
-          while(true) {
-            var x = _x;
-            if (x >= n || (x << 1) > Sys.max_array_length) {
-              return x;
-            } else {
-              _x = (x << 1);
-              continue ;
+          _param = rest;
+          continue ;
+        }
+        _param = rest;
+        continue ;
+      };
+    };
+    return find_in_bucket(Caml_array.caml_array_get(h.data, key_index(h, hkey)));
+  };
+  var replace = function (h, key, info) {
+    var hkey = Curry._2(hash$2, h.seed, key);
+    var i = key_index(h, hkey);
+    var l = Caml_array.caml_array_get(h.data, i);
+    try {
+      var _param = l;
+      while(true) {
+        var param = _param;
+        if (param) {
+          var next = param[2];
+          var c = param[1];
+          if (hkey === param[0]) {
+            var match = Curry._2(equal, c, key);
+            if (match === 0) {
+              return Curry._3(set_key_data, c, key, info);
             }
-          };
-        };
-        var prng = Caml_obj.caml_lazy_make((function (param) {
-                return Random.State.make_self_init(/* () */0);
-              }));
-        var create$1 = function ($staropt$star, initial_size) {
-          var random = $staropt$star !== undefined ? $staropt$star : Hashtbl.is_randomized(/* () */0);
-          var s = power_2_above(16, initial_size);
-          var seed = random ? Random.State.bits(CamlinternalLazy.force(prng)) : 0;
-          return {
-                  size: 0,
-                  data: Caml_array.caml_make_vect(s, /* Empty */0),
-                  seed: seed,
-                  initial_size: s
-                };
-        };
-        var clear = function (h) {
-          h.size = 0;
-          var len = h.data.length;
-          for(var i = 0 ,i_finish = len - 1 | 0; i <= i_finish; ++i){
-            Caml_array.caml_array_set(h.data, i, /* Empty */0);
+            _param = next;
+            continue ;
           }
-          return /* () */0;
-        };
-        var reset = function (h) {
-          var len = h.data.length;
-          if (len === h.initial_size) {
-            return clear(h);
-          } else {
-            h.size = 0;
-            h.data = Caml_array.caml_make_vect(h.initial_size, /* Empty */0);
-            return /* () */0;
-          }
-        };
-        var copy = function (h) {
-          return {
-                  size: h.size,
-                  data: $$Array.copy(h.data),
-                  seed: h.seed,
-                  initial_size: h.initial_size
-                };
-        };
-        var key_index = function (h, hkey) {
-          return hkey & (h.data.length - 1 | 0);
-        };
-        var clean = function (h) {
-          var do_bucket = function (_param) {
-            while(true) {
-              var param = _param;
-              if (param) {
-                var rest = param[2];
-                var c = param[1];
-                if (Curry._1(check_key, c)) {
-                  return /* Cons */[
-                          param[0],
-                          c,
-                          do_bucket(rest)
-                        ];
-                } else {
-                  h.size = h.size - 1 | 0;
-                  _param = rest;
-                  continue ;
-                }
-              } else {
-                return /* Empty */0;
-              }
+          _param = next;
+          continue ;
+        }
+        throw {
+              RE_EXN_ID: "Not_found",
+              Error: new Error()
             };
-          };
-          var d = h.data;
-          for(var i = 0 ,i_finish = d.length - 1 | 0; i <= i_finish; ++i){
-            Caml_array.caml_array_set(d, i, do_bucket(Caml_array.caml_array_get(d, i)));
-          }
-          return /* () */0;
-        };
-        var resize = function (h) {
-          var odata = h.data;
-          var osize = odata.length;
-          var nsize = (osize << 1);
-          clean(h);
-          if (nsize < Sys.max_array_length && h.size >= (osize >>> 1)) {
-            var ndata = Caml_array.caml_make_vect(nsize, /* Empty */0);
-            h.data = ndata;
-            var insert_bucket = function (param) {
-              if (param) {
-                var hkey = param[0];
-                insert_bucket(param[2]);
-                var nidx = key_index(h, hkey);
-                return Caml_array.caml_array_set(ndata, nidx, /* Cons */[
-                            hkey,
-                            param[1],
-                            Caml_array.caml_array_get(ndata, nidx)
-                          ]);
-              } else {
-                return /* () */0;
-              }
-            };
-            for(var i = 0 ,i_finish = osize - 1 | 0; i <= i_finish; ++i){
-              insert_bucket(Caml_array.caml_array_get(odata, i));
-            }
-            return /* () */0;
-          } else {
-            return 0;
-          }
-        };
-        var add = function (h, key, info) {
-          var hkey = Curry._2(hash$2, h.seed, key);
-          var i = key_index(h, hkey);
-          var container = Curry._2(create, key, info);
-          var bucket_002 = Caml_array.caml_array_get(h.data, i);
-          var bucket = /* Cons */[
-            hkey,
-            container,
-            bucket_002
-          ];
-          Caml_array.caml_array_set(h.data, i, bucket);
-          h.size = h.size + 1 | 0;
-          if (h.size > (h.data.length << 1)) {
-            return resize(h);
-          } else {
-            return 0;
-          }
-        };
-        var remove = function (h, key) {
-          var hkey = Curry._2(hash$2, h.seed, key);
-          var remove_bucket = function (_param) {
-            while(true) {
-              var param = _param;
-              if (param) {
-                var next = param[2];
-                var c = param[1];
-                var hk = param[0];
-                if (hkey === hk) {
-                  var match = Curry._2(equal, c, key);
-                  switch (match) {
-                    case /* ETrue */0 :
-                        h.size = h.size - 1 | 0;
-                        return next;
-                    case /* EFalse */1 :
-                        return /* Cons */[
-                                hk,
-                                c,
-                                remove_bucket(next)
-                              ];
-                    case /* EDead */2 :
-                        h.size = h.size - 1 | 0;
-                        _param = next;
-                        continue ;
-                    
-                  }
-                } else {
-                  return /* Cons */[
-                          hk,
-                          c,
-                          remove_bucket(next)
-                        ];
-                }
-              } else {
-                return /* Empty */0;
-              }
-            };
-          };
-          var i = key_index(h, hkey);
-          return Caml_array.caml_array_set(h.data, i, remove_bucket(Caml_array.caml_array_get(h.data, i)));
-        };
-        var find = function (h, key) {
-          var hkey = Curry._2(hash$2, h.seed, key);
-          var key$1 = key;
-          var hkey$1 = hkey;
-          var _param = Caml_array.caml_array_get(h.data, key_index(h, hkey));
-          while(true) {
-            var param = _param;
-            if (param) {
-              var rest = param[2];
-              var c = param[1];
-              if (hkey$1 === param[0]) {
-                var match = Curry._2(equal, c, key$1);
-                if (match !== 0) {
-                  _param = rest;
-                  continue ;
-                } else {
-                  var match$1 = Curry._1(get_data$1, c);
-                  if (match$1 !== undefined) {
-                    return Caml_option.valFromOption(match$1);
-                  } else {
-                    _param = rest;
-                    continue ;
-                  }
-                }
-              } else {
-                _param = rest;
-                continue ;
-              }
-            } else {
-              throw Caml_builtin_exceptions.not_found;
-            }
-          };
-        };
-        var find_opt = function (h, key) {
-          var hkey = Curry._2(hash$2, h.seed, key);
-          var key$1 = key;
-          var hkey$1 = hkey;
-          var _param = Caml_array.caml_array_get(h.data, key_index(h, hkey));
-          while(true) {
-            var param = _param;
-            if (param) {
-              var rest = param[2];
-              var c = param[1];
-              if (hkey$1 === param[0]) {
-                var match = Curry._2(equal, c, key$1);
-                if (match !== 0) {
-                  _param = rest;
-                  continue ;
-                } else {
-                  var d = Curry._1(get_data$1, c);
-                  if (d !== undefined) {
-                    return d;
-                  } else {
-                    _param = rest;
-                    continue ;
-                  }
-                }
-              } else {
-                _param = rest;
-                continue ;
-              }
-            } else {
-              return ;
-            }
-          };
-        };
-        var find_all = function (h, key) {
-          var hkey = Curry._2(hash$2, h.seed, key);
-          var find_in_bucket = function (_param) {
-            while(true) {
-              var param = _param;
-              if (param) {
-                var rest = param[2];
-                var c = param[1];
-                if (hkey === param[0]) {
-                  var match = Curry._2(equal, c, key);
-                  if (match !== 0) {
-                    _param = rest;
-                    continue ;
-                  } else {
-                    var match$1 = Curry._1(get_data$1, c);
-                    if (match$1 !== undefined) {
-                      return /* :: */[
-                              Caml_option.valFromOption(match$1),
-                              find_in_bucket(rest)
-                            ];
-                    } else {
-                      _param = rest;
-                      continue ;
-                    }
-                  }
-                } else {
-                  _param = rest;
-                  continue ;
-                }
-              } else {
-                return /* [] */0;
-              }
-            };
-          };
-          return find_in_bucket(Caml_array.caml_array_get(h.data, key_index(h, hkey)));
-        };
-        var replace = function (h, key, info) {
-          var hkey = Curry._2(hash$2, h.seed, key);
-          var i = key_index(h, hkey);
-          var l = Caml_array.caml_array_get(h.data, i);
-          try {
-            var _param = l;
-            while(true) {
-              var param = _param;
-              if (param) {
-                var next = param[2];
-                var c = param[1];
-                if (hkey === param[0]) {
-                  var match = Curry._2(equal, c, key);
-                  if (match !== 0) {
-                    _param = next;
-                    continue ;
-                  } else {
-                    return Curry._3(set_key_data, c, key, info);
-                  }
-                } else {
-                  _param = next;
-                  continue ;
-                }
-              } else {
-                throw Caml_builtin_exceptions.not_found;
-              }
-            };
-          }
-          catch (exn){
-            if (exn === Caml_builtin_exceptions.not_found) {
-              var container = Curry._2(create, key, info);
-              Caml_array.caml_array_set(h.data, i, /* Cons */[
-                    hkey,
-                    container,
-                    l
-                  ]);
-              h.size = h.size + 1 | 0;
-              if (h.size > (h.data.length << 1)) {
-                return resize(h);
-              } else {
-                return 0;
-              }
-            } else {
-              throw exn;
-            }
-          }
-        };
-        var mem = function (h, key) {
-          var hkey = Curry._2(hash$2, h.seed, key);
-          var _param = Caml_array.caml_array_get(h.data, key_index(h, hkey));
-          while(true) {
-            var param = _param;
-            if (param) {
-              var rest = param[2];
-              if (param[0] === hkey) {
-                var match = Curry._2(equal, param[1], key);
-                if (match !== 0) {
-                  _param = rest;
-                  continue ;
-                } else {
-                  return true;
-                }
-              } else {
-                _param = rest;
-                continue ;
-              }
-            } else {
-              return false;
-            }
-          };
-        };
-        var iter = function (f, h) {
-          var do_bucket = function (_param) {
-            while(true) {
-              var param = _param;
-              if (param) {
-                var c = param[1];
-                var match = Curry._1(get_key, c);
-                var match$1 = Curry._1(get_data$1, c);
-                if (match !== undefined) {
-                  if (match$1 !== undefined) {
-                    Curry._2(f, Caml_option.valFromOption(match), Caml_option.valFromOption(match$1));
-                  }
-                  
-                }
-                _param = param[2];
-                continue ;
-              } else {
-                return /* () */0;
-              }
-            };
-          };
-          var d = h.data;
-          for(var i = 0 ,i_finish = d.length - 1 | 0; i <= i_finish; ++i){
-            do_bucket(Caml_array.caml_array_get(d, i));
-          }
-          return /* () */0;
-        };
-        var fold = function (f, h, init) {
-          var do_bucket = function (_b, _accu) {
-            while(true) {
-              var accu = _accu;
-              var b = _b;
-              if (b) {
-                var c = b[1];
-                var match = Curry._1(get_key, c);
-                var match$1 = Curry._1(get_data$1, c);
-                var accu$1 = match !== undefined && match$1 !== undefined ? Curry._3(f, Caml_option.valFromOption(match), Caml_option.valFromOption(match$1), accu) : accu;
-                _accu = accu$1;
-                _b = b[2];
-                continue ;
-              } else {
-                return accu;
-              }
-            };
-          };
-          var d = h.data;
-          var accu = init;
-          for(var i = 0 ,i_finish = d.length - 1 | 0; i <= i_finish; ++i){
-            accu = do_bucket(Caml_array.caml_array_get(d, i), accu);
-          }
+      };
+    }
+    catch (raw_exn){
+      var exn = Caml_js_exceptions.internalToOCamlException(raw_exn);
+      if (exn.RE_EXN_ID === "Not_found") {
+        var container = Curry._2(create, key, info);
+        Caml_array.caml_array_set(h.data, i, /* Cons */[
+              hkey,
+              container,
+              l
+            ]);
+        h.size = h.size + 1 | 0;
+        if (h.size > (h.data.length << 1)) {
+          return resize(h);
+        } else {
+          return ;
+        }
+      }
+      throw exn;
+    }
+  };
+  var mem = function (h, key) {
+    var hkey = Curry._2(hash$2, h.seed, key);
+    var _param = Caml_array.caml_array_get(h.data, key_index(h, hkey));
+    while(true) {
+      var param = _param;
+      if (!param) {
+        return false;
+      }
+      var rest = param[2];
+      if (param[0] === hkey) {
+        var match = Curry._2(equal, param[1], key);
+        if (match === 0) {
+          return true;
+        }
+        _param = rest;
+        continue ;
+      }
+      _param = rest;
+      continue ;
+    };
+  };
+  var iter = function (f, h) {
+    var do_bucket = function (_param) {
+      while(true) {
+        var param = _param;
+        if (!param) {
+          return ;
+        }
+        var c = param[1];
+        var match = Curry._1(get_key, c);
+        var match$1 = Curry._1(get_data$1, c);
+        if (match !== undefined && match$1 !== undefined) {
+          Curry._2(f, Caml_option.valFromOption(match), Caml_option.valFromOption(match$1));
+        }
+        _param = param[2];
+        continue ;
+      };
+    };
+    var d = h.data;
+    for(var i = 0 ,i_finish = d.length; i < i_finish; ++i){
+      do_bucket(Caml_array.caml_array_get(d, i));
+    }
+    
+  };
+  var fold = function (f, h, init) {
+    var do_bucket = function (_b, _accu) {
+      while(true) {
+        var accu = _accu;
+        var b = _b;
+        if (!b) {
           return accu;
-        };
-        var filter_map_inplace = function (f, h) {
-          var do_bucket = function (_param) {
-            while(true) {
-              var param = _param;
-              if (param) {
-                var rest = param[2];
-                var c = param[1];
-                var match = Curry._1(get_key, c);
-                var match$1 = Curry._1(get_data$1, c);
-                if (match !== undefined) {
-                  if (match$1 !== undefined) {
-                    var k = Caml_option.valFromOption(match);
-                    var match$2 = Curry._2(f, k, Caml_option.valFromOption(match$1));
-                    if (match$2 !== undefined) {
-                      Curry._3(set_key_data, c, k, Caml_option.valFromOption(match$2));
-                      return /* Cons */[
-                              param[0],
-                              c,
-                              do_bucket(rest)
-                            ];
-                    } else {
-                      _param = rest;
-                      continue ;
-                    }
-                  } else {
-                    _param = rest;
-                    continue ;
-                  }
-                } else {
-                  _param = rest;
-                  continue ;
-                }
-              } else {
-                return /* Empty */0;
-              }
-            };
-          };
-          var d = h.data;
-          for(var i = 0 ,i_finish = d.length - 1 | 0; i <= i_finish; ++i){
-            Caml_array.caml_array_set(d, i, do_bucket(Caml_array.caml_array_get(d, i)));
+        }
+        var c = b[1];
+        var match = Curry._1(get_key, c);
+        var match$1 = Curry._1(get_data$1, c);
+        var accu$1 = match !== undefined && match$1 !== undefined ? Curry._3(f, Caml_option.valFromOption(match), Caml_option.valFromOption(match$1), accu) : accu;
+        _accu = accu$1;
+        _b = b[2];
+        continue ;
+      };
+    };
+    var d = h.data;
+    var accu = init;
+    for(var i = 0 ,i_finish = d.length; i < i_finish; ++i){
+      accu = do_bucket(Caml_array.caml_array_get(d, i), accu);
+    }
+    return accu;
+  };
+  var filter_map_inplace = function (f, h) {
+    var do_bucket = function (_param) {
+      while(true) {
+        var param = _param;
+        if (!param) {
+          return /* Empty */0;
+        }
+        var rest = param[2];
+        var c = param[1];
+        var match = Curry._1(get_key, c);
+        var match$1 = Curry._1(get_data$1, c);
+        if (match !== undefined) {
+          if (match$1 !== undefined) {
+            var k = Caml_option.valFromOption(match);
+            var new_d = Curry._2(f, k, Caml_option.valFromOption(match$1));
+            if (new_d !== undefined) {
+              Curry._3(set_key_data, c, k, Caml_option.valFromOption(new_d));
+              return /* Cons */[
+                      param[0],
+                      c,
+                      do_bucket(rest)
+                    ];
+            }
+            _param = rest;
+            continue ;
           }
-          return /* () */0;
-        };
-        var length = function (h) {
-          return h.size;
-        };
-        var bucket_length = function (_accu, _param) {
-          while(true) {
-            var param = _param;
-            var accu = _accu;
-            if (param) {
-              _param = param[2];
-              _accu = accu + 1 | 0;
-              continue ;
-            } else {
-              return accu;
-            }
+          _param = rest;
+          continue ;
+        }
+        _param = rest;
+        continue ;
+      };
+    };
+    var d = h.data;
+    for(var i = 0 ,i_finish = d.length; i < i_finish; ++i){
+      Caml_array.caml_array_set(d, i, do_bucket(Caml_array.caml_array_get(d, i)));
+    }
+    
+  };
+  var length = function (h) {
+    return h.size;
+  };
+  var bucket_length = function (_accu, _param) {
+    while(true) {
+      var param = _param;
+      var accu = _accu;
+      if (!param) {
+        return accu;
+      }
+      _param = param[2];
+      _accu = accu + 1 | 0;
+      continue ;
+    };
+  };
+  var stats = function (h) {
+    var mbl = $$Array.fold_left((function (m, b) {
+            return Caml_primitive.caml_int_max(m, bucket_length(0, b));
+          }), 0, h.data);
+    var histo = Caml_array.caml_make_vect(mbl + 1 | 0, 0);
+    $$Array.iter((function (b) {
+            var l = bucket_length(0, b);
+            return Caml_array.caml_array_set(histo, l, Caml_array.caml_array_get(histo, l) + 1 | 0);
+          }), h.data);
+    return {
+            num_bindings: h.size,
+            num_buckets: h.data.length,
+            max_bucket_length: mbl,
+            bucket_histogram: histo
           };
-        };
-        var stats = function (h) {
-          var mbl = $$Array.fold_left((function (m, b) {
-                  return Caml_primitive.caml_int_max(m, bucket_length(0, b));
-                }), 0, h.data);
-          var histo = Caml_array.caml_make_vect(mbl + 1 | 0, 0);
-          $$Array.iter((function (b) {
-                  var l = bucket_length(0, b);
-                  return Caml_array.caml_array_set(histo, l, Caml_array.caml_array_get(histo, l) + 1 | 0);
-                }), h.data);
-          return {
-                  num_bindings: h.size,
-                  num_buckets: h.data.length,
-                  max_bucket_length: mbl,
-                  bucket_histogram: histo
-                };
-        };
-        var bucket_length_alive = function (_accu, _param) {
-          while(true) {
-            var param = _param;
-            var accu = _accu;
-            if (param) {
-              var rest = param[2];
-              if (Curry._1(check_key, param[1])) {
-                _param = rest;
-                _accu = accu + 1 | 0;
-                continue ;
-              } else {
-                _param = rest;
-                continue ;
-              }
-            } else {
-              return accu;
-            }
+  };
+  var bucket_length_alive = function (_accu, _param) {
+    while(true) {
+      var param = _param;
+      var accu = _accu;
+      if (!param) {
+        return accu;
+      }
+      var rest = param[2];
+      if (Curry._1(check_key, param[1])) {
+        _param = rest;
+        _accu = accu + 1 | 0;
+        continue ;
+      }
+      _param = rest;
+      continue ;
+    };
+  };
+  var stats_alive = function (h) {
+    var size = {
+      contents: 0
+    };
+    var mbl = $$Array.fold_left((function (m, b) {
+            return Caml_primitive.caml_int_max(m, bucket_length_alive(0, b));
+          }), 0, h.data);
+    var histo = Caml_array.caml_make_vect(mbl + 1 | 0, 0);
+    $$Array.iter((function (b) {
+            var l = bucket_length_alive(0, b);
+            size.contents = size.contents + l | 0;
+            return Caml_array.caml_array_set(histo, l, Caml_array.caml_array_get(histo, l) + 1 | 0);
+          }), h.data);
+    return {
+            num_bindings: size.contents,
+            num_buckets: h.data.length,
+            max_bucket_length: mbl,
+            bucket_histogram: histo
           };
-        };
-        var stats_alive = function (h) {
-          var size = {
-            contents: 0
-          };
-          var mbl = $$Array.fold_left((function (m, b) {
-                  return Caml_primitive.caml_int_max(m, bucket_length_alive(0, b));
-                }), 0, h.data);
-          var histo = Caml_array.caml_make_vect(mbl + 1 | 0, 0);
-          $$Array.iter((function (b) {
-                  var l = bucket_length_alive(0, b);
-                  size.contents = size.contents + l | 0;
-                  return Caml_array.caml_array_set(histo, l, Caml_array.caml_array_get(histo, l) + 1 | 0);
-                }), h.data);
-          return {
-                  num_bindings: size.contents,
-                  num_buckets: h.data.length,
-                  max_bucket_length: mbl,
-                  bucket_histogram: histo
-                };
-        };
-        return {
-                create: create$1,
-                clear: clear,
-                reset: reset,
-                copy: copy,
-                add: add,
-                remove: remove,
-                find: find,
-                find_opt: find_opt,
-                find_all: find_all,
-                replace: replace,
-                mem: mem,
-                iter: iter,
-                filter_map_inplace: filter_map_inplace,
-                fold: fold,
-                length: length,
-                stats: stats,
-                clean: clean,
-                stats_alive: stats_alive
-              };
-      })({
-        equal: H2.equal,
-        hash: hash$1
-      });
-  var create = include.create;
-  var create$1 = function (sz) {
-    return Curry._2(create, false, sz);
+  };
+  var create$2 = create$1;
+  var create$3 = function (sz) {
+    return Curry._2(create$2, false, sz);
   };
   return {
-          create: create$1,
-          clear: include.clear,
-          reset: include.reset,
-          copy: include.copy,
-          add: include.add,
-          remove: include.remove,
-          find: include.find,
-          find_opt: include.find_opt,
-          find_all: include.find_all,
-          replace: include.replace,
-          mem: include.mem,
-          iter: include.iter,
-          filter_map_inplace: include.filter_map_inplace,
-          fold: include.fold,
-          length: include.length,
-          stats: include.stats,
-          clean: include.clean,
-          stats_alive: include.stats_alive
+          create: create$3,
+          clear: clear,
+          reset: reset,
+          copy: copy,
+          add: add,
+          remove: remove,
+          find: find,
+          find_opt: find_opt,
+          find_all: find_all,
+          replace: replace,
+          mem: mem,
+          iter: iter,
+          filter_map_inplace: filter_map_inplace,
+          fold: fold,
+          length: length,
+          stats: stats,
+          clean: clean,
+          stats_alive: stats_alive
         };
 }
 
@@ -2525,14 +2379,14 @@ function MakeSeeded$2(H) {
   var create = function (k, d) {
     var c = Obj.Ephemeron.create(k.length);
     Obj.Ephemeron.set_data(c, d);
-    for(var i = 0 ,i_finish = k.length - 1 | 0; i <= i_finish; ++i){
+    for(var i = 0 ,i_finish = k.length; i < i_finish; ++i){
       set_key$1(c, i, Caml_array.caml_array_get(k, i));
     }
     return c;
   };
   var hash = function (seed, k) {
     var h = 0;
-    for(var i = 0 ,i_finish = k.length - 1 | 0; i <= i_finish; ++i){
+    for(var i = 0 ,i_finish = k.length; i < i_finish; ++i){
       h = Caml_int32.imul(Curry._2(H.hash, seed, Caml_array.caml_array_get(k, i)), 65599) + h | 0;
     }
     return h;
@@ -2542,98 +2396,91 @@ function MakeSeeded$2(H) {
     var len$prime = Obj.Ephemeron.length(c);
     if (len !== len$prime) {
       return /* EFalse */1;
-    } else {
-      var k$1 = k;
-      var c$1 = c;
-      var _i = len - 1 | 0;
-      while(true) {
-        var i = _i;
-        if (i < 0) {
-          return /* ETrue */0;
-        } else {
-          var match = Obj.Ephemeron.get_key(c$1, i);
-          if (match !== undefined) {
-            if (Curry._2(H.equal, Caml_array.caml_array_get(k$1, i), Caml_option.valFromOption(match))) {
-              _i = i - 1 | 0;
-              continue ;
-            } else {
-              return /* EFalse */1;
-            }
-          } else {
-            return /* EDead */2;
-          }
-        }
-      };
     }
+    var _i = len - 1 | 0;
+    while(true) {
+      var i = _i;
+      if (i < 0) {
+        return /* ETrue */0;
+      }
+      var ki = Obj.Ephemeron.get_key(c, i);
+      if (ki === undefined) {
+        return /* EDead */2;
+      }
+      if (!Curry._2(H.equal, Caml_array.caml_array_get(k, i), Caml_option.valFromOption(ki))) {
+        return /* EFalse */1;
+      }
+      _i = i - 1 | 0;
+      continue ;
+    };
   };
   var get_key = function (c) {
     var len = Obj.Ephemeron.length(c);
     if (len === 0) {
-      return /* array */[];
-    } else {
-      var match = Obj.Ephemeron.get_key(c, 0);
-      if (match !== undefined) {
-        var a = Caml_array.caml_make_vect(len, Caml_option.valFromOption(match));
-        var a$1 = a;
-        var _i = len - 1 | 0;
-        while(true) {
-          var i = _i;
-          if (i < 1) {
-            return a$1;
-          } else {
-            var match$1 = Obj.Ephemeron.get_key(c, i);
-            if (match$1 !== undefined) {
-              Caml_array.caml_array_set(a$1, i, Caml_option.valFromOption(match$1));
-              _i = i - 1 | 0;
-              continue ;
-            } else {
-              return ;
-            }
-          }
-        };
-      } else {
+      return [];
+    }
+    var k0 = Obj.Ephemeron.get_key(c, 0);
+    if (k0 === undefined) {
+      return ;
+    }
+    var a = Caml_array.caml_make_vect(len, Caml_option.valFromOption(k0));
+    var _i = len - 1 | 0;
+    while(true) {
+      var i = _i;
+      if (i < 1) {
+        return a;
+      }
+      var ki = Obj.Ephemeron.get_key(c, i);
+      if (ki === undefined) {
         return ;
       }
-    }
+      Caml_array.caml_array_set(a, i, Caml_option.valFromOption(ki));
+      _i = i - 1 | 0;
+      continue ;
+    };
   };
   var set_key_data = function (c, k, d) {
     Obj.Ephemeron.unset_data(c);
-    for(var i = 0 ,i_finish = k.length - 1 | 0; i <= i_finish; ++i){
+    for(var i = 0 ,i_finish = k.length; i < i_finish; ++i){
       set_key$1(c, i, Caml_array.caml_array_get(k, i));
     }
     return Obj.Ephemeron.set_data(c, d);
   };
   var check_key = function (c) {
-    var c$1 = c;
     var _i = Obj.Ephemeron.length(c) - 1 | 0;
     while(true) {
       var i = _i;
       if (i < 0) {
         return true;
-      } else if (Obj.Ephemeron.check_key(c$1, i)) {
-        _i = i - 1 | 0;
-        continue ;
-      } else {
+      }
+      if (!Obj.Ephemeron.check_key(c, i)) {
         return false;
       }
+      _i = i - 1 | 0;
+      continue ;
     };
   };
   var power_2_above = function (_x, n) {
     while(true) {
       var x = _x;
-      if (x >= n || (x << 1) > Sys.max_array_length) {
+      if (x >= n) {
         return x;
-      } else {
-        _x = (x << 1);
-        continue ;
       }
+      if ((x << 1) > Sys.max_array_length) {
+        return x;
+      }
+      _x = (x << 1);
+      continue ;
     };
   };
-  var prng = Caml_obj.caml_lazy_make((function (param) {
-          return Random.State.make_self_init(/* () */0);
-        }));
-  var create$1 = function ($staropt$star, initial_size) {
-    var random = $staropt$star !== undefined ? $staropt$star : Hashtbl.is_randomized(/* () */0);
+  var prng = {
+    tag: 246,
+    value: (function () {
+        return Random.State.make_self_init(undefined);
+      })
+  };
+  var create$1 = function (randomOpt, initial_size) {
+    var random = randomOpt !== undefined ? randomOpt : Hashtbl.is_randomized(undefined);
     var s = power_2_above(16, initial_size);
     var seed = random ? Random.State.bits(CamlinternalLazy.force(prng)) : 0;
     return {
@@ -2646,10 +2493,10 @@ function MakeSeeded$2(H) {
   var clear = function (h) {
     h.size = 0;
     var len = h.data.length;
-    for(var i = 0 ,i_finish = len - 1 | 0; i <= i_finish; ++i){
+    for(var i = 0; i < len; ++i){
       Caml_array.caml_array_set(h.data, i, /* Empty */0);
     }
-    return /* () */0;
+    
   };
   var reset = function (h) {
     var len = h.data.length;
@@ -2658,7 +2505,7 @@ function MakeSeeded$2(H) {
     } else {
       h.size = 0;
       h.data = Caml_array.caml_make_vect(h.initial_size, /* Empty */0);
-      return /* () */0;
+      return ;
     }
   };
   var copy = function (h) {
@@ -2676,60 +2523,56 @@ function MakeSeeded$2(H) {
     var do_bucket = function (_param) {
       while(true) {
         var param = _param;
-        if (param) {
-          var rest = param[2];
-          var c = param[1];
-          if (check_key(c)) {
-            return /* Cons */[
-                    param[0],
-                    c,
-                    do_bucket(rest)
-                  ];
-          } else {
-            h.size = h.size - 1 | 0;
-            _param = rest;
-            continue ;
-          }
-        } else {
+        if (!param) {
           return /* Empty */0;
         }
+        var rest = param[2];
+        var c = param[1];
+        if (check_key(c)) {
+          return /* Cons */[
+                  param[0],
+                  c,
+                  do_bucket(rest)
+                ];
+        }
+        h.size = h.size - 1 | 0;
+        _param = rest;
+        continue ;
       };
     };
     var d = h.data;
-    for(var i = 0 ,i_finish = d.length - 1 | 0; i <= i_finish; ++i){
+    for(var i = 0 ,i_finish = d.length; i < i_finish; ++i){
       Caml_array.caml_array_set(d, i, do_bucket(Caml_array.caml_array_get(d, i)));
     }
-    return /* () */0;
+    
   };
   var resize = function (h) {
     var odata = h.data;
     var osize = odata.length;
     var nsize = (osize << 1);
     clean(h);
-    if (nsize < Sys.max_array_length && h.size >= (osize >>> 1)) {
-      var ndata = Caml_array.caml_make_vect(nsize, /* Empty */0);
-      h.data = ndata;
-      var insert_bucket = function (param) {
-        if (param) {
-          var hkey = param[0];
-          insert_bucket(param[2]);
-          var nidx = key_index(h, hkey);
-          return Caml_array.caml_array_set(ndata, nidx, /* Cons */[
-                      hkey,
-                      param[1],
-                      Caml_array.caml_array_get(ndata, nidx)
-                    ]);
-        } else {
-          return /* () */0;
-        }
-      };
-      for(var i = 0 ,i_finish = osize - 1 | 0; i <= i_finish; ++i){
-        insert_bucket(Caml_array.caml_array_get(odata, i));
-      }
-      return /* () */0;
-    } else {
-      return 0;
+    if (!(nsize < Sys.max_array_length && h.size >= (osize >>> 1))) {
+      return ;
     }
+    var ndata = Caml_array.caml_make_vect(nsize, /* Empty */0);
+    h.data = ndata;
+    var insert_bucket = function (param) {
+      if (!param) {
+        return ;
+      }
+      var hkey = param[0];
+      insert_bucket(param[2]);
+      var nidx = key_index(h, hkey);
+      return Caml_array.caml_array_set(ndata, nidx, /* Cons */[
+                  hkey,
+                  param[1],
+                  Caml_array.caml_array_get(ndata, nidx)
+                ]);
+    };
+    for(var i = 0; i < osize; ++i){
+      insert_bucket(Caml_array.caml_array_get(odata, i));
+    }
+    
   };
   var add = function (h, key, info) {
     var hkey = hash(h.seed, key);
@@ -2745,46 +2588,43 @@ function MakeSeeded$2(H) {
     h.size = h.size + 1 | 0;
     if (h.size > (h.data.length << 1)) {
       return resize(h);
-    } else {
-      return 0;
     }
+    
   };
   var remove = function (h, key) {
     var hkey = hash(h.seed, key);
     var remove_bucket = function (_param) {
       while(true) {
         var param = _param;
-        if (param) {
-          var next = param[2];
-          var c = param[1];
-          var hk = param[0];
-          if (hkey === hk) {
-            var match = equal(c, key);
-            switch (match) {
-              case /* ETrue */0 :
-                  h.size = h.size - 1 | 0;
-                  return next;
-              case /* EFalse */1 :
-                  return /* Cons */[
-                          hk,
-                          c,
-                          remove_bucket(next)
-                        ];
-              case /* EDead */2 :
-                  h.size = h.size - 1 | 0;
-                  _param = next;
-                  continue ;
-              
-            }
-          } else {
-            return /* Cons */[
-                    hk,
-                    c,
-                    remove_bucket(next)
-                  ];
-          }
-        } else {
+        if (!param) {
           return /* Empty */0;
+        }
+        var next = param[2];
+        var c = param[1];
+        var hk = param[0];
+        if (hkey !== hk) {
+          return /* Cons */[
+                  hk,
+                  c,
+                  remove_bucket(next)
+                ];
+        }
+        var match = equal(c, key);
+        switch (match) {
+          case /* ETrue */0 :
+              h.size = h.size - 1 | 0;
+              return next;
+          case /* EFalse */1 :
+              return /* Cons */[
+                      hk,
+                      c,
+                      remove_bucket(next)
+                    ];
+          case /* EDead */2 :
+              h.size = h.size - 1 | 0;
+              _param = next;
+              continue ;
+          
         }
       };
     };
@@ -2793,68 +2633,59 @@ function MakeSeeded$2(H) {
   };
   var find = function (h, key) {
     var hkey = hash(h.seed, key);
-    var key$1 = key;
-    var hkey$1 = hkey;
     var _param = Caml_array.caml_array_get(h.data, key_index(h, hkey));
     while(true) {
       var param = _param;
       if (param) {
         var rest = param[2];
         var c = param[1];
-        if (hkey$1 === param[0]) {
-          var match = equal(c, key$1);
+        if (hkey === param[0]) {
+          var match = equal(c, key);
           if (match !== 0) {
             _param = rest;
             continue ;
-          } else {
-            var match$1 = get_data$2(c);
-            if (match$1 !== undefined) {
-              return Caml_option.valFromOption(match$1);
-            } else {
-              _param = rest;
-              continue ;
-            }
           }
-        } else {
+          var d = get_data$2(c);
+          if (d !== undefined) {
+            return Caml_option.valFromOption(d);
+          }
           _param = rest;
           continue ;
         }
-      } else {
-        throw Caml_builtin_exceptions.not_found;
+        _param = rest;
+        continue ;
       }
+      throw {
+            RE_EXN_ID: "Not_found",
+            Error: new Error()
+          };
     };
   };
   var find_opt = function (h, key) {
     var hkey = hash(h.seed, key);
-    var key$1 = key;
-    var hkey$1 = hkey;
     var _param = Caml_array.caml_array_get(h.data, key_index(h, hkey));
     while(true) {
       var param = _param;
-      if (param) {
-        var rest = param[2];
-        var c = param[1];
-        if (hkey$1 === param[0]) {
-          var match = equal(c, key$1);
-          if (match !== 0) {
-            _param = rest;
-            continue ;
-          } else {
-            var d = get_data$2(c);
-            if (d !== undefined) {
-              return d;
-            } else {
-              _param = rest;
-              continue ;
-            }
-          }
-        } else {
+      if (!param) {
+        return ;
+      }
+      var rest = param[2];
+      var c = param[1];
+      if (hkey === param[0]) {
+        var match = equal(c, key);
+        if (match !== 0) {
           _param = rest;
           continue ;
         }
-      } else {
-        return ;
+        var d = get_data$2(c);
+        if (d !== undefined) {
+          return d;
+        }
+        _param = rest;
+        continue ;
       }
+      _param = rest;
+      continue ;
     };
   };
   var find_all = function (h, key) {
@@ -2862,33 +2693,29 @@ function MakeSeeded$2(H) {
     var find_in_bucket = function (_param) {
       while(true) {
         var param = _param;
-        if (param) {
-          var rest = param[2];
-          var c = param[1];
-          if (hkey === param[0]) {
-            var match = equal(c, key);
-            if (match !== 0) {
-              _param = rest;
-              continue ;
-            } else {
-              var match$1 = get_data$2(c);
-              if (match$1 !== undefined) {
-                return /* :: */[
-                        Caml_option.valFromOption(match$1),
-                        find_in_bucket(rest)
-                      ];
-              } else {
-                _param = rest;
-                continue ;
-              }
-            }
-          } else {
+        if (!param) {
+          return /* [] */0;
+        }
+        var rest = param[2];
+        var c = param[1];
+        if (hkey === param[0]) {
+          var match = equal(c, key);
+          if (match !== 0) {
             _param = rest;
             continue ;
           }
-        } else {
-          return /* [] */0;
+          var d = get_data$2(c);
+          if (d !== undefined) {
+            return /* :: */[
+                    Caml_option.valFromOption(d),
+                    find_in_bucket(rest)
+                  ];
+          }
+          _param = rest;
+          continue ;
         }
+        _param = rest;
+        continue ;
       };
     };
     return find_in_bucket(Caml_array.caml_array_get(h.data, key_index(h, hkey)));
@@ -2906,23 +2733,24 @@ function MakeSeeded$2(H) {
           var c = param[1];
           if (hkey === param[0]) {
             var match = equal(c, key);
-            if (match !== 0) {
-              _param = next;
-              continue ;
-            } else {
+            if (match === 0) {
               return set_key_data(c, key, info);
             }
-          } else {
             _param = next;
             continue ;
           }
-        } else {
-          throw Caml_builtin_exceptions.not_found;
+          _param = next;
+          continue ;
         }
+        throw {
+              RE_EXN_ID: "Not_found",
+              Error: new Error()
+            };
       };
     }
-    catch (exn){
-      if (exn === Caml_builtin_exceptions.not_found) {
+    catch (raw_exn){
+      var exn = Caml_js_exceptions.internalToOCamlException(raw_exn);
+      if (exn.RE_EXN_ID === "Not_found") {
         var container = create(key, info);
         Caml_array.caml_array_set(h.data, i, /* Cons */[
               hkey,
@@ -2933,11 +2761,10 @@ function MakeSeeded$2(H) {
         if (h.size > (h.data.length << 1)) {
           return resize(h);
         } else {
-          return 0;
+          return ;
         }
-      } else {
-        throw exn;
       }
+      throw exn;
     }
   };
   var mem = function (h, key) {
@@ -2945,73 +2772,65 @@ function MakeSeeded$2(H) {
     var _param = Caml_array.caml_array_get(h.data, key_index(h, hkey));
     while(true) {
       var param = _param;
-      if (param) {
-        var rest = param[2];
-        if (param[0] === hkey) {
-          var match = equal(param[1], key);
-          if (match !== 0) {
-            _param = rest;
-            continue ;
-          } else {
-            return true;
-          }
-        } else {
-          _param = rest;
-          continue ;
-        }
-      } else {
+      if (!param) {
         return false;
       }
+      var rest = param[2];
+      if (param[0] === hkey) {
+        var match = equal(param[1], key);
+        if (match === 0) {
+          return true;
+        }
+        _param = rest;
+        continue ;
+      }
+      _param = rest;
+      continue ;
     };
   };
   var iter = function (f, h) {
     var do_bucket = function (_param) {
       while(true) {
         var param = _param;
-        if (param) {
-          var c = param[1];
-          var match = get_key(c);
-          var match$1 = get_data$2(c);
-          if (match !== undefined) {
-            if (match$1 !== undefined) {
-              Curry._2(f, Caml_option.valFromOption(match), Caml_option.valFromOption(match$1));
-            }
-            
-          }
-          _param = param[2];
-          continue ;
-        } else {
-          return /* () */0;
+        if (!param) {
+          return ;
         }
+        var c = param[1];
+        var match = get_key(c);
+        var match$1 = get_data$2(c);
+        if (match !== undefined && match$1 !== undefined) {
+          Curry._2(f, Caml_option.valFromOption(match), Caml_option.valFromOption(match$1));
+        }
+        _param = param[2];
+        continue ;
       };
     };
     var d = h.data;
-    for(var i = 0 ,i_finish = d.length - 1 | 0; i <= i_finish; ++i){
+    for(var i = 0 ,i_finish = d.length; i < i_finish; ++i){
       do_bucket(Caml_array.caml_array_get(d, i));
     }
-    return /* () */0;
+    
   };
   var fold = function (f, h, init) {
     var do_bucket = function (_b, _accu) {
       while(true) {
         var accu = _accu;
         var b = _b;
-        if (b) {
-          var c = b[1];
-          var match = get_key(c);
-          var match$1 = get_data$2(c);
-          var accu$1 = match !== undefined && match$1 !== undefined ? Curry._3(f, Caml_option.valFromOption(match), Caml_option.valFromOption(match$1), accu) : accu;
-          _accu = accu$1;
-          _b = b[2];
-          continue ;
-        } else {
+        if (!b) {
           return accu;
         }
+        var c = b[1];
+        var match = get_key(c);
+        var match$1 = get_data$2(c);
+        var accu$1 = match !== undefined && match$1 !== undefined ? Curry._3(f, Caml_option.valFromOption(match), Caml_option.valFromOption(match$1), accu) : accu;
+        _accu = accu$1;
+        _b = b[2];
+        continue ;
       };
     };
     var d = h.data;
     var accu = init;
-    for(var i = 0 ,i_finish = d.length - 1 | 0; i <= i_finish; ++i){
+    for(var i = 0 ,i_finish = d.length; i < i_finish; ++i){
       accu = do_bucket(Caml_array.caml_array_get(d, i), accu);
     }
     return accu;
@@ -3020,44 +2839,40 @@ function MakeSeeded$2(H) {
     var do_bucket = function (_param) {
       while(true) {
         var param = _param;
-        if (param) {
-          var rest = param[2];
-          var c = param[1];
-          var match = get_key(c);
-          var match$1 = get_data$2(c);
-          if (match !== undefined) {
-            if (match$1 !== undefined) {
-              var k = Caml_option.valFromOption(match);
-              var match$2 = Curry._2(f, k, Caml_option.valFromOption(match$1));
-              if (match$2 !== undefined) {
-                set_key_data(c, k, Caml_option.valFromOption(match$2));
-                return /* Cons */[
-                        param[0],
-                        c,
-                        do_bucket(rest)
-                      ];
-              } else {
-                _param = rest;
-                continue ;
-              }
-            } else {
-              _param = rest;
-              continue ;
+        if (!param) {
+          return /* Empty */0;
+        }
+        var rest = param[2];
+        var c = param[1];
+        var match = get_key(c);
+        var match$1 = get_data$2(c);
+        if (match !== undefined) {
+          if (match$1 !== undefined) {
+            var k = Caml_option.valFromOption(match);
+            var new_d = Curry._2(f, k, Caml_option.valFromOption(match$1));
+            if (new_d !== undefined) {
+              set_key_data(c, k, Caml_option.valFromOption(new_d));
+              return /* Cons */[
+                      param[0],
+                      c,
+                      do_bucket(rest)
+                    ];
             }
-          } else {
             _param = rest;
             continue ;
           }
-        } else {
-          return /* Empty */0;
+          _param = rest;
+          continue ;
         }
+        _param = rest;
+        continue ;
       };
     };
     var d = h.data;
-    for(var i = 0 ,i_finish = d.length - 1 | 0; i <= i_finish; ++i){
+    for(var i = 0 ,i_finish = d.length; i < i_finish; ++i){
       Caml_array.caml_array_set(d, i, do_bucket(Caml_array.caml_array_get(d, i)));
     }
-    return /* () */0;
+    
   };
   var length = function (h) {
     return h.size;
@@ -3066,13 +2881,12 @@ function MakeSeeded$2(H) {
     while(true) {
       var param = _param;
       var accu = _accu;
-      if (param) {
-        _param = param[2];
-        _accu = accu + 1 | 0;
-        continue ;
-      } else {
+      if (!param) {
         return accu;
       }
+      _param = param[2];
+      _accu = accu + 1 | 0;
+      continue ;
     };
   };
   var stats = function (h) {
@@ -3095,19 +2909,17 @@ function MakeSeeded$2(H) {
     while(true) {
       var param = _param;
       var accu = _accu;
-      if (param) {
-        var rest = param[2];
-        if (check_key(param[1])) {
-          _param = rest;
-          _accu = accu + 1 | 0;
-          continue ;
-        } else {
-          _param = rest;
-          continue ;
-        }
-      } else {
+      if (!param) {
         return accu;
       }
+      var rest = param[2];
+      if (check_key(param[1])) {
+        _param = rest;
+        _accu = accu + 1 | 0;
+        continue ;
+      }
+      _param = rest;
+      continue ;
     };
   };
   var stats_alive = function (h) {
@@ -3157,14 +2969,14 @@ function Make$2(H) {
   var create = function (k, d) {
     var c = Obj.Ephemeron.create(k.length);
     Obj.Ephemeron.set_data(c, d);
-    for(var i = 0 ,i_finish = k.length - 1 | 0; i <= i_finish; ++i){
+    for(var i = 0 ,i_finish = k.length; i < i_finish; ++i){
       set_key$1(c, i, Caml_array.caml_array_get(k, i));
     }
     return c;
   };
   var hash = function (seed, k) {
     var h = 0;
-    for(var i = 0 ,i_finish = k.length - 1 | 0; i <= i_finish; ++i){
+    for(var i = 0 ,i_finish = k.length; i < i_finish; ++i){
       h = Caml_int32.imul(Curry._1(H.hash, Caml_array.caml_array_get(k, i)), 65599) + h | 0;
     }
     return h;
@@ -3174,103 +2986,96 @@ function Make$2(H) {
     var len$prime = Obj.Ephemeron.length(c);
     if (len !== len$prime) {
       return /* EFalse */1;
-    } else {
-      var k$1 = k;
-      var c$1 = c;
-      var _i = len - 1 | 0;
-      while(true) {
-        var i = _i;
-        if (i < 0) {
-          return /* ETrue */0;
-        } else {
-          var match = Obj.Ephemeron.get_key(c$1, i);
-          if (match !== undefined) {
-            if (Curry._2(equal, Caml_array.caml_array_get(k$1, i), Caml_option.valFromOption(match))) {
-              _i = i - 1 | 0;
-              continue ;
-            } else {
-              return /* EFalse */1;
-            }
-          } else {
-            return /* EDead */2;
-          }
-        }
-      };
     }
+    var _i = len - 1 | 0;
+    while(true) {
+      var i = _i;
+      if (i < 0) {
+        return /* ETrue */0;
+      }
+      var ki = Obj.Ephemeron.get_key(c, i);
+      if (ki === undefined) {
+        return /* EDead */2;
+      }
+      if (!Curry._2(equal, Caml_array.caml_array_get(k, i), Caml_option.valFromOption(ki))) {
+        return /* EFalse */1;
+      }
+      _i = i - 1 | 0;
+      continue ;
+    };
   };
   var get_key = function (c) {
     var len = Obj.Ephemeron.length(c);
     if (len === 0) {
-      return /* array */[];
-    } else {
-      var match = Obj.Ephemeron.get_key(c, 0);
-      if (match !== undefined) {
-        var a = Caml_array.caml_make_vect(len, Caml_option.valFromOption(match));
-        var a$1 = a;
-        var _i = len - 1 | 0;
-        while(true) {
-          var i = _i;
-          if (i < 1) {
-            return a$1;
-          } else {
-            var match$1 = Obj.Ephemeron.get_key(c, i);
-            if (match$1 !== undefined) {
-              Caml_array.caml_array_set(a$1, i, Caml_option.valFromOption(match$1));
-              _i = i - 1 | 0;
-              continue ;
-            } else {
-              return ;
-            }
-          }
-        };
-      } else {
+      return [];
+    }
+    var k0 = Obj.Ephemeron.get_key(c, 0);
+    if (k0 === undefined) {
+      return ;
+    }
+    var a = Caml_array.caml_make_vect(len, Caml_option.valFromOption(k0));
+    var _i = len - 1 | 0;
+    while(true) {
+      var i = _i;
+      if (i < 1) {
+        return a;
+      }
+      var ki = Obj.Ephemeron.get_key(c, i);
+      if (ki === undefined) {
         return ;
       }
-    }
+      Caml_array.caml_array_set(a, i, Caml_option.valFromOption(ki));
+      _i = i - 1 | 0;
+      continue ;
+    };
   };
   var set_key_data = function (c, k, d) {
     Obj.Ephemeron.unset_data(c);
-    for(var i = 0 ,i_finish = k.length - 1 | 0; i <= i_finish; ++i){
+    for(var i = 0 ,i_finish = k.length; i < i_finish; ++i){
       set_key$1(c, i, Caml_array.caml_array_get(k, i));
     }
     return Obj.Ephemeron.set_data(c, d);
   };
   var check_key = function (c) {
-    var c$1 = c;
     var _i = Obj.Ephemeron.length(c) - 1 | 0;
     while(true) {
       var i = _i;
       if (i < 0) {
         return true;
-      } else if (Obj.Ephemeron.check_key(c$1, i)) {
-        _i = i - 1 | 0;
-        continue ;
-      } else {
+      }
+      if (!Obj.Ephemeron.check_key(c, i)) {
         return false;
       }
+      _i = i - 1 | 0;
+      continue ;
     };
   };
   var power_2_above = function (_x, n) {
     while(true) {
       var x = _x;
-      if (x >= n || (x << 1) > Sys.max_array_length) {
+      if (x >= n) {
         return x;
-      } else {
-        _x = (x << 1);
-        continue ;
       }
+      if ((x << 1) > Sys.max_array_length) {
+        return x;
+      }
+      _x = (x << 1);
+      continue ;
     };
   };
-  var prng = Caml_obj.caml_lazy_make((function (param) {
-          return Random.State.make_self_init(/* () */0);
-        }));
+  var prng = {
+    tag: 246,
+    value: (function () {
+        return Random.State.make_self_init(undefined);
+      })
+  };
   var clear = function (h) {
     h.size = 0;
     var len = h.data.length;
-    for(var i = 0 ,i_finish = len - 1 | 0; i <= i_finish; ++i){
+    for(var i = 0; i < len; ++i){
       Caml_array.caml_array_set(h.data, i, /* Empty */0);
     }
-    return /* () */0;
+    
   };
   var reset = function (h) {
     var len = h.data.length;
@@ -3279,7 +3084,7 @@ function Make$2(H) {
     } else {
       h.size = 0;
       h.data = Caml_array.caml_make_vect(h.initial_size, /* Empty */0);
-      return /* () */0;
+      return ;
     }
   };
   var copy = function (h) {
@@ -3297,60 +3102,56 @@ function Make$2(H) {
     var do_bucket = function (_param) {
       while(true) {
         var param = _param;
-        if (param) {
-          var rest = param[2];
-          var c = param[1];
-          if (check_key(c)) {
-            return /* Cons */[
-                    param[0],
-                    c,
-                    do_bucket(rest)
-                  ];
-          } else {
-            h.size = h.size - 1 | 0;
-            _param = rest;
-            continue ;
-          }
-        } else {
+        if (!param) {
           return /* Empty */0;
         }
+        var rest = param[2];
+        var c = param[1];
+        if (check_key(c)) {
+          return /* Cons */[
+                  param[0],
+                  c,
+                  do_bucket(rest)
+                ];
+        }
+        h.size = h.size - 1 | 0;
+        _param = rest;
+        continue ;
       };
     };
     var d = h.data;
-    for(var i = 0 ,i_finish = d.length - 1 | 0; i <= i_finish; ++i){
+    for(var i = 0 ,i_finish = d.length; i < i_finish; ++i){
       Caml_array.caml_array_set(d, i, do_bucket(Caml_array.caml_array_get(d, i)));
     }
-    return /* () */0;
+    
   };
   var resize = function (h) {
     var odata = h.data;
     var osize = odata.length;
     var nsize = (osize << 1);
     clean(h);
-    if (nsize < Sys.max_array_length && h.size >= (osize >>> 1)) {
-      var ndata = Caml_array.caml_make_vect(nsize, /* Empty */0);
-      h.data = ndata;
-      var insert_bucket = function (param) {
-        if (param) {
-          var hkey = param[0];
-          insert_bucket(param[2]);
-          var nidx = key_index(h, hkey);
-          return Caml_array.caml_array_set(ndata, nidx, /* Cons */[
-                      hkey,
-                      param[1],
-                      Caml_array.caml_array_get(ndata, nidx)
-                    ]);
-        } else {
-          return /* () */0;
-        }
-      };
-      for(var i = 0 ,i_finish = osize - 1 | 0; i <= i_finish; ++i){
-        insert_bucket(Caml_array.caml_array_get(odata, i));
-      }
-      return /* () */0;
-    } else {
-      return 0;
+    if (!(nsize < Sys.max_array_length && h.size >= (osize >>> 1))) {
+      return ;
     }
+    var ndata = Caml_array.caml_make_vect(nsize, /* Empty */0);
+    h.data = ndata;
+    var insert_bucket = function (param) {
+      if (!param) {
+        return ;
+      }
+      var hkey = param[0];
+      insert_bucket(param[2]);
+      var nidx = key_index(h, hkey);
+      return Caml_array.caml_array_set(ndata, nidx, /* Cons */[
+                  hkey,
+                  param[1],
+                  Caml_array.caml_array_get(ndata, nidx)
+                ]);
+    };
+    for(var i = 0; i < osize; ++i){
+      insert_bucket(Caml_array.caml_array_get(odata, i));
+    }
+    
   };
   var add = function (h, key, info) {
     var hkey = hash(h.seed, key);
@@ -3366,46 +3167,43 @@ function Make$2(H) {
     h.size = h.size + 1 | 0;
     if (h.size > (h.data.length << 1)) {
       return resize(h);
-    } else {
-      return 0;
     }
+    
   };
   var remove = function (h, key) {
     var hkey = hash(h.seed, key);
     var remove_bucket = function (_param) {
       while(true) {
         var param = _param;
-        if (param) {
-          var next = param[2];
-          var c = param[1];
-          var hk = param[0];
-          if (hkey === hk) {
-            var match = equal$1(c, key);
-            switch (match) {
-              case /* ETrue */0 :
-                  h.size = h.size - 1 | 0;
-                  return next;
-              case /* EFalse */1 :
-                  return /* Cons */[
-                          hk,
-                          c,
-                          remove_bucket(next)
-                        ];
-              case /* EDead */2 :
-                  h.size = h.size - 1 | 0;
-                  _param = next;
-                  continue ;
-              
-            }
-          } else {
-            return /* Cons */[
-                    hk,
-                    c,
-                    remove_bucket(next)
-                  ];
-          }
-        } else {
+        if (!param) {
           return /* Empty */0;
+        }
+        var next = param[2];
+        var c = param[1];
+        var hk = param[0];
+        if (hkey !== hk) {
+          return /* Cons */[
+                  hk,
+                  c,
+                  remove_bucket(next)
+                ];
+        }
+        var match = equal$1(c, key);
+        switch (match) {
+          case /* ETrue */0 :
+              h.size = h.size - 1 | 0;
+              return next;
+          case /* EFalse */1 :
+              return /* Cons */[
+                      hk,
+                      c,
+                      remove_bucket(next)
+                    ];
+          case /* EDead */2 :
+              h.size = h.size - 1 | 0;
+              _param = next;
+              continue ;
+          
         }
       };
     };
@@ -3414,68 +3212,59 @@ function Make$2(H) {
   };
   var find = function (h, key) {
     var hkey = hash(h.seed, key);
-    var key$1 = key;
-    var hkey$1 = hkey;
     var _param = Caml_array.caml_array_get(h.data, key_index(h, hkey));
     while(true) {
       var param = _param;
       if (param) {
         var rest = param[2];
         var c = param[1];
-        if (hkey$1 === param[0]) {
-          var match = equal$1(c, key$1);
+        if (hkey === param[0]) {
+          var match = equal$1(c, key);
           if (match !== 0) {
             _param = rest;
             continue ;
-          } else {
-            var match$1 = get_data$2(c);
-            if (match$1 !== undefined) {
-              return Caml_option.valFromOption(match$1);
-            } else {
-              _param = rest;
-              continue ;
-            }
           }
-        } else {
+          var d = get_data$2(c);
+          if (d !== undefined) {
+            return Caml_option.valFromOption(d);
+          }
           _param = rest;
           continue ;
         }
-      } else {
-        throw Caml_builtin_exceptions.not_found;
+        _param = rest;
+        continue ;
       }
+      throw {
+            RE_EXN_ID: "Not_found",
+            Error: new Error()
+          };
     };
   };
   var find_opt = function (h, key) {
     var hkey = hash(h.seed, key);
-    var key$1 = key;
-    var hkey$1 = hkey;
     var _param = Caml_array.caml_array_get(h.data, key_index(h, hkey));
     while(true) {
       var param = _param;
-      if (param) {
-        var rest = param[2];
-        var c = param[1];
-        if (hkey$1 === param[0]) {
-          var match = equal$1(c, key$1);
-          if (match !== 0) {
-            _param = rest;
-            continue ;
-          } else {
-            var d = get_data$2(c);
-            if (d !== undefined) {
-              return d;
-            } else {
-              _param = rest;
-              continue ;
-            }
-          }
-        } else {
+      if (!param) {
+        return ;
+      }
+      var rest = param[2];
+      var c = param[1];
+      if (hkey === param[0]) {
+        var match = equal$1(c, key);
+        if (match !== 0) {
           _param = rest;
           continue ;
         }
-      } else {
-        return ;
+        var d = get_data$2(c);
+        if (d !== undefined) {
+          return d;
+        }
+        _param = rest;
+        continue ;
       }
+      _param = rest;
+      continue ;
     };
   };
   var find_all = function (h, key) {
@@ -3483,33 +3272,29 @@ function Make$2(H) {
     var find_in_bucket = function (_param) {
       while(true) {
         var param = _param;
-        if (param) {
-          var rest = param[2];
-          var c = param[1];
-          if (hkey === param[0]) {
-            var match = equal$1(c, key);
-            if (match !== 0) {
-              _param = rest;
-              continue ;
-            } else {
-              var match$1 = get_data$2(c);
-              if (match$1 !== undefined) {
-                return /* :: */[
-                        Caml_option.valFromOption(match$1),
-                        find_in_bucket(rest)
-                      ];
-              } else {
-                _param = rest;
-                continue ;
-              }
-            }
-          } else {
+        if (!param) {
+          return /* [] */0;
+        }
+        var rest = param[2];
+        var c = param[1];
+        if (hkey === param[0]) {
+          var match = equal$1(c, key);
+          if (match !== 0) {
             _param = rest;
             continue ;
           }
-        } else {
-          return /* [] */0;
+          var d = get_data$2(c);
+          if (d !== undefined) {
+            return /* :: */[
+                    Caml_option.valFromOption(d),
+                    find_in_bucket(rest)
+                  ];
+          }
+          _param = rest;
+          continue ;
         }
+        _param = rest;
+        continue ;
       };
     };
     return find_in_bucket(Caml_array.caml_array_get(h.data, key_index(h, hkey)));
@@ -3527,23 +3312,24 @@ function Make$2(H) {
           var c = param[1];
           if (hkey === param[0]) {
             var match = equal$1(c, key);
-            if (match !== 0) {
-              _param = next;
-              continue ;
-            } else {
+            if (match === 0) {
               return set_key_data(c, key, info);
             }
-          } else {
             _param = next;
             continue ;
           }
-        } else {
-          throw Caml_builtin_exceptions.not_found;
+          _param = next;
+          continue ;
         }
+        throw {
+              RE_EXN_ID: "Not_found",
+              Error: new Error()
+            };
       };
     }
-    catch (exn){
-      if (exn === Caml_builtin_exceptions.not_found) {
+    catch (raw_exn){
+      var exn = Caml_js_exceptions.internalToOCamlException(raw_exn);
+      if (exn.RE_EXN_ID === "Not_found") {
         var container = create(key, info);
         Caml_array.caml_array_set(h.data, i, /* Cons */[
               hkey,
@@ -3554,11 +3340,10 @@ function Make$2(H) {
         if (h.size > (h.data.length << 1)) {
           return resize(h);
         } else {
-          return 0;
+          return ;
         }
-      } else {
-        throw exn;
       }
+      throw exn;
     }
   };
   var mem = function (h, key) {
@@ -3566,73 +3351,65 @@ function Make$2(H) {
     var _param = Caml_array.caml_array_get(h.data, key_index(h, hkey));
     while(true) {
       var param = _param;
-      if (param) {
-        var rest = param[2];
-        if (param[0] === hkey) {
-          var match = equal$1(param[1], key);
-          if (match !== 0) {
-            _param = rest;
-            continue ;
-          } else {
-            return true;
-          }
-        } else {
-          _param = rest;
-          continue ;
-        }
-      } else {
+      if (!param) {
         return false;
       }
+      var rest = param[2];
+      if (param[0] === hkey) {
+        var match = equal$1(param[1], key);
+        if (match === 0) {
+          return true;
+        }
+        _param = rest;
+        continue ;
+      }
+      _param = rest;
+      continue ;
     };
   };
   var iter = function (f, h) {
     var do_bucket = function (_param) {
       while(true) {
         var param = _param;
-        if (param) {
-          var c = param[1];
-          var match = get_key(c);
-          var match$1 = get_data$2(c);
-          if (match !== undefined) {
-            if (match$1 !== undefined) {
-              Curry._2(f, Caml_option.valFromOption(match), Caml_option.valFromOption(match$1));
-            }
-            
-          }
-          _param = param[2];
-          continue ;
-        } else {
-          return /* () */0;
+        if (!param) {
+          return ;
         }
+        var c = param[1];
+        var match = get_key(c);
+        var match$1 = get_data$2(c);
+        if (match !== undefined && match$1 !== undefined) {
+          Curry._2(f, Caml_option.valFromOption(match), Caml_option.valFromOption(match$1));
+        }
+        _param = param[2];
+        continue ;
       };
     };
     var d = h.data;
-    for(var i = 0 ,i_finish = d.length - 1 | 0; i <= i_finish; ++i){
+    for(var i = 0 ,i_finish = d.length; i < i_finish; ++i){
       do_bucket(Caml_array.caml_array_get(d, i));
     }
-    return /* () */0;
+    
   };
   var fold = function (f, h, init) {
     var do_bucket = function (_b, _accu) {
       while(true) {
         var accu = _accu;
         var b = _b;
-        if (b) {
-          var c = b[1];
-          var match = get_key(c);
-          var match$1 = get_data$2(c);
-          var accu$1 = match !== undefined && match$1 !== undefined ? Curry._3(f, Caml_option.valFromOption(match), Caml_option.valFromOption(match$1), accu) : accu;
-          _accu = accu$1;
-          _b = b[2];
-          continue ;
-        } else {
+        if (!b) {
           return accu;
         }
+        var c = b[1];
+        var match = get_key(c);
+        var match$1 = get_data$2(c);
+        var accu$1 = match !== undefined && match$1 !== undefined ? Curry._3(f, Caml_option.valFromOption(match), Caml_option.valFromOption(match$1), accu) : accu;
+        _accu = accu$1;
+        _b = b[2];
+        continue ;
       };
     };
     var d = h.data;
     var accu = init;
-    for(var i = 0 ,i_finish = d.length - 1 | 0; i <= i_finish; ++i){
+    for(var i = 0 ,i_finish = d.length; i < i_finish; ++i){
       accu = do_bucket(Caml_array.caml_array_get(d, i), accu);
     }
     return accu;
@@ -3641,44 +3418,40 @@ function Make$2(H) {
     var do_bucket = function (_param) {
       while(true) {
         var param = _param;
-        if (param) {
-          var rest = param[2];
-          var c = param[1];
-          var match = get_key(c);
-          var match$1 = get_data$2(c);
-          if (match !== undefined) {
-            if (match$1 !== undefined) {
-              var k = Caml_option.valFromOption(match);
-              var match$2 = Curry._2(f, k, Caml_option.valFromOption(match$1));
-              if (match$2 !== undefined) {
-                set_key_data(c, k, Caml_option.valFromOption(match$2));
-                return /* Cons */[
-                        param[0],
-                        c,
-                        do_bucket(rest)
-                      ];
-              } else {
-                _param = rest;
-                continue ;
-              }
-            } else {
-              _param = rest;
-              continue ;
+        if (!param) {
+          return /* Empty */0;
+        }
+        var rest = param[2];
+        var c = param[1];
+        var match = get_key(c);
+        var match$1 = get_data$2(c);
+        if (match !== undefined) {
+          if (match$1 !== undefined) {
+            var k = Caml_option.valFromOption(match);
+            var new_d = Curry._2(f, k, Caml_option.valFromOption(match$1));
+            if (new_d !== undefined) {
+              set_key_data(c, k, Caml_option.valFromOption(new_d));
+              return /* Cons */[
+                      param[0],
+                      c,
+                      do_bucket(rest)
+                    ];
             }
-          } else {
             _param = rest;
             continue ;
           }
-        } else {
-          return /* Empty */0;
+          _param = rest;
+          continue ;
         }
+        _param = rest;
+        continue ;
       };
     };
     var d = h.data;
-    for(var i = 0 ,i_finish = d.length - 1 | 0; i <= i_finish; ++i){
+    for(var i = 0 ,i_finish = d.length; i < i_finish; ++i){
       Caml_array.caml_array_set(d, i, do_bucket(Caml_array.caml_array_get(d, i)));
     }
-    return /* () */0;
+    
   };
   var length = function (h) {
     return h.size;
@@ -3687,13 +3460,12 @@ function Make$2(H) {
     while(true) {
       var param = _param;
       var accu = _accu;
-      if (param) {
-        _param = param[2];
-        _accu = accu + 1 | 0;
-        continue ;
-      } else {
+      if (!param) {
         return accu;
       }
+      _param = param[2];
+      _accu = accu + 1 | 0;
+      continue ;
     };
   };
   var stats = function (h) {
@@ -3716,19 +3488,17 @@ function Make$2(H) {
     while(true) {
       var param = _param;
       var accu = _accu;
-      if (param) {
-        var rest = param[2];
-        if (check_key(param[1])) {
-          _param = rest;
-          _accu = accu + 1 | 0;
-          continue ;
-        } else {
-          _param = rest;
-          continue ;
-        }
-      } else {
+      if (!param) {
         return accu;
       }
+      var rest = param[2];
+      if (check_key(param[1])) {
+        _param = rest;
+        _accu = accu + 1 | 0;
+        continue ;
+      }
+      _param = rest;
+      continue ;
     };
   };
   var stats_alive = function (h) {
@@ -3752,10 +3522,9 @@ function Make$2(H) {
           };
   };
   var create$1 = function (sz) {
-    var $staropt$star = false;
-    var initial_size = sz;
-    var random = $staropt$star !== undefined ? $staropt$star : Hashtbl.is_randomized(/* () */0);
-    var s = power_2_above(16, initial_size);
+    var randomOpt = false;
+    var random = randomOpt !== undefined ? randomOpt : Hashtbl.is_randomized(undefined);
+    var s = power_2_above(16, sz);
     var seed = random ? Random.State.bits(CamlinternalLazy.force(prng)) : 0;
     return {
             size: 0,
@@ -3861,19 +3630,24 @@ var GenHashTable = {
       var power_2_above = function (_x, n) {
         while(true) {
           var x = _x;
-          if (x >= n || (x << 1) > Sys.max_array_length) {
+          if (x >= n) {
             return x;
-          } else {
-            _x = (x << 1);
-            continue ;
           }
+          if ((x << 1) > Sys.max_array_length) {
+            return x;
+          }
+          _x = (x << 1);
+          continue ;
         };
       };
-      var prng = Caml_obj.caml_lazy_make((function (param) {
-              return Random.State.make_self_init(/* () */0);
-            }));
-      var create = function ($staropt$star, initial_size) {
-        var random = $staropt$star !== undefined ? $staropt$star : Hashtbl.is_randomized(/* () */0);
+      var prng = {
+        tag: 246,
+        value: (function () {
+            return Random.State.make_self_init(undefined);
+          })
+      };
+      var create = function (randomOpt, initial_size) {
+        var random = randomOpt !== undefined ? randomOpt : Hashtbl.is_randomized(undefined);
         var s = power_2_above(16, initial_size);
         var seed = random ? Random.State.bits(CamlinternalLazy.force(prng)) : 0;
         return {
@@ -3886,10 +3660,10 @@ var GenHashTable = {
       var clear = function (h) {
         h.size = 0;
         var len = h.data.length;
-        for(var i = 0 ,i_finish = len - 1 | 0; i <= i_finish; ++i){
+        for(var i = 0; i < len; ++i){
           Caml_array.caml_array_set(h.data, i, /* Empty */0);
         }
-        return /* () */0;
+        
       };
       var reset = function (h) {
         var len = h.data.length;
@@ -3898,7 +3672,7 @@ var GenHashTable = {
         } else {
           h.size = 0;
           h.data = Caml_array.caml_make_vect(h.initial_size, /* Empty */0);
-          return /* () */0;
+          return ;
         }
       };
       var copy = function (h) {
@@ -3916,60 +3690,56 @@ var GenHashTable = {
         var do_bucket = function (_param) {
           while(true) {
             var param = _param;
-            if (param) {
-              var rest = param[2];
-              var c = param[1];
-              if (Curry._1(H.check_key, c)) {
-                return /* Cons */[
-                        param[0],
-                        c,
-                        do_bucket(rest)
-                      ];
-              } else {
-                h.size = h.size - 1 | 0;
-                _param = rest;
-                continue ;
-              }
-            } else {
+            if (!param) {
               return /* Empty */0;
             }
+            var rest = param[2];
+            var c = param[1];
+            if (Curry._1(H.check_key, c)) {
+              return /* Cons */[
+                      param[0],
+                      c,
+                      do_bucket(rest)
+                    ];
+            }
+            h.size = h.size - 1 | 0;
+            _param = rest;
+            continue ;
           };
         };
         var d = h.data;
-        for(var i = 0 ,i_finish = d.length - 1 | 0; i <= i_finish; ++i){
+        for(var i = 0 ,i_finish = d.length; i < i_finish; ++i){
           Caml_array.caml_array_set(d, i, do_bucket(Caml_array.caml_array_get(d, i)));
         }
-        return /* () */0;
+        
       };
       var resize = function (h) {
         var odata = h.data;
         var osize = odata.length;
         var nsize = (osize << 1);
         clean(h);
-        if (nsize < Sys.max_array_length && h.size >= (osize >>> 1)) {
-          var ndata = Caml_array.caml_make_vect(nsize, /* Empty */0);
-          h.data = ndata;
-          var insert_bucket = function (param) {
-            if (param) {
-              var hkey = param[0];
-              insert_bucket(param[2]);
-              var nidx = key_index(h, hkey);
-              return Caml_array.caml_array_set(ndata, nidx, /* Cons */[
-                          hkey,
-                          param[1],
-                          Caml_array.caml_array_get(ndata, nidx)
-                        ]);
-            } else {
-              return /* () */0;
-            }
-          };
-          for(var i = 0 ,i_finish = osize - 1 | 0; i <= i_finish; ++i){
-            insert_bucket(Caml_array.caml_array_get(odata, i));
-          }
-          return /* () */0;
-        } else {
-          return 0;
+        if (!(nsize < Sys.max_array_length && h.size >= (osize >>> 1))) {
+          return ;
         }
+        var ndata = Caml_array.caml_make_vect(nsize, /* Empty */0);
+        h.data = ndata;
+        var insert_bucket = function (param) {
+          if (!param) {
+            return ;
+          }
+          var hkey = param[0];
+          insert_bucket(param[2]);
+          var nidx = key_index(h, hkey);
+          return Caml_array.caml_array_set(ndata, nidx, /* Cons */[
+                      hkey,
+                      param[1],
+                      Caml_array.caml_array_get(ndata, nidx)
+                    ]);
+        };
+        for(var i = 0; i < osize; ++i){
+          insert_bucket(Caml_array.caml_array_get(odata, i));
+        }
+        
       };
       var add = function (h, key, info) {
         var hkey = Curry._2(H.hash, h.seed, key);
@@ -3985,46 +3755,43 @@ var GenHashTable = {
         h.size = h.size + 1 | 0;
         if (h.size > (h.data.length << 1)) {
           return resize(h);
-        } else {
-          return 0;
         }
+        
       };
       var remove = function (h, key) {
         var hkey = Curry._2(H.hash, h.seed, key);
         var remove_bucket = function (_param) {
           while(true) {
             var param = _param;
-            if (param) {
-              var next = param[2];
-              var c = param[1];
-              var hk = param[0];
-              if (hkey === hk) {
-                var match = Curry._2(H.equal, c, key);
-                switch (match) {
-                  case /* ETrue */0 :
-                      h.size = h.size - 1 | 0;
-                      return next;
-                  case /* EFalse */1 :
-                      return /* Cons */[
-                              hk,
-                              c,
-                              remove_bucket(next)
-                            ];
-                  case /* EDead */2 :
-                      h.size = h.size - 1 | 0;
-                      _param = next;
-                      continue ;
-                  
-                }
-              } else {
-                return /* Cons */[
-                        hk,
-                        c,
-                        remove_bucket(next)
-                      ];
-              }
-            } else {
+            if (!param) {
               return /* Empty */0;
+            }
+            var next = param[2];
+            var c = param[1];
+            var hk = param[0];
+            if (hkey !== hk) {
+              return /* Cons */[
+                      hk,
+                      c,
+                      remove_bucket(next)
+                    ];
+            }
+            var match = Curry._2(H.equal, c, key);
+            switch (match) {
+              case /* ETrue */0 :
+                  h.size = h.size - 1 | 0;
+                  return next;
+              case /* EFalse */1 :
+                  return /* Cons */[
+                          hk,
+                          c,
+                          remove_bucket(next)
+                        ];
+              case /* EDead */2 :
+                  h.size = h.size - 1 | 0;
+                  _param = next;
+                  continue ;
+              
             }
           };
         };
@@ -4033,68 +3800,59 @@ var GenHashTable = {
       };
       var find = function (h, key) {
         var hkey = Curry._2(H.hash, h.seed, key);
-        var key$1 = key;
-        var hkey$1 = hkey;
         var _param = Caml_array.caml_array_get(h.data, key_index(h, hkey));
         while(true) {
           var param = _param;
           if (param) {
             var rest = param[2];
             var c = param[1];
-            if (hkey$1 === param[0]) {
-              var match = Curry._2(H.equal, c, key$1);
+            if (hkey === param[0]) {
+              var match = Curry._2(H.equal, c, key);
               if (match !== 0) {
                 _param = rest;
                 continue ;
-              } else {
-                var match$1 = Curry._1(H.get_data, c);
-                if (match$1 !== undefined) {
-                  return Caml_option.valFromOption(match$1);
-                } else {
-                  _param = rest;
-                  continue ;
-                }
               }
-            } else {
+              var d = Curry._1(H.get_data, c);
+              if (d !== undefined) {
+                return Caml_option.valFromOption(d);
+              }
               _param = rest;
               continue ;
             }
-          } else {
-            throw Caml_builtin_exceptions.not_found;
+            _param = rest;
+            continue ;
           }
+          throw {
+                RE_EXN_ID: "Not_found",
+                Error: new Error()
+              };
         };
       };
       var find_opt = function (h, key) {
         var hkey = Curry._2(H.hash, h.seed, key);
-        var key$1 = key;
-        var hkey$1 = hkey;
         var _param = Caml_array.caml_array_get(h.data, key_index(h, hkey));
         while(true) {
           var param = _param;
-          if (param) {
-            var rest = param[2];
-            var c = param[1];
-            if (hkey$1 === param[0]) {
-              var match = Curry._2(H.equal, c, key$1);
-              if (match !== 0) {
-                _param = rest;
-                continue ;
-              } else {
-                var d = Curry._1(H.get_data, c);
-                if (d !== undefined) {
-                  return d;
-                } else {
-                  _param = rest;
-                  continue ;
-                }
-              }
-            } else {
+          if (!param) {
+            return ;
+          }
+          var rest = param[2];
+          var c = param[1];
+          if (hkey === param[0]) {
+            var match = Curry._2(H.equal, c, key);
+            if (match !== 0) {
               _param = rest;
               continue ;
             }
-          } else {
-            return ;
+            var d = Curry._1(H.get_data, c);
+            if (d !== undefined) {
+              return d;
+            }
+            _param = rest;
+            continue ;
           }
+          _param = rest;
+          continue ;
         };
       };
       var find_all = function (h, key) {
@@ -4102,33 +3860,29 @@ var GenHashTable = {
         var find_in_bucket = function (_param) {
           while(true) {
             var param = _param;
-            if (param) {
-              var rest = param[2];
-              var c = param[1];
-              if (hkey === param[0]) {
-                var match = Curry._2(H.equal, c, key);
-                if (match !== 0) {
-                  _param = rest;
-                  continue ;
-                } else {
-                  var match$1 = Curry._1(H.get_data, c);
-                  if (match$1 !== undefined) {
-                    return /* :: */[
-                            Caml_option.valFromOption(match$1),
-                            find_in_bucket(rest)
-                          ];
-                  } else {
-                    _param = rest;
-                    continue ;
-                  }
-                }
-              } else {
+            if (!param) {
+              return /* [] */0;
+            }
+            var rest = param[2];
+            var c = param[1];
+            if (hkey === param[0]) {
+              var match = Curry._2(H.equal, c, key);
+              if (match !== 0) {
                 _param = rest;
                 continue ;
               }
-            } else {
-              return /* [] */0;
+              var d = Curry._1(H.get_data, c);
+              if (d !== undefined) {
+                return /* :: */[
+                        Caml_option.valFromOption(d),
+                        find_in_bucket(rest)
+                      ];
+              }
+              _param = rest;
+              continue ;
             }
+            _param = rest;
+            continue ;
           };
         };
         return find_in_bucket(Caml_array.caml_array_get(h.data, key_index(h, hkey)));
@@ -4146,23 +3900,24 @@ var GenHashTable = {
               var c = param[1];
               if (hkey === param[0]) {
                 var match = Curry._2(H.equal, c, key);
-                if (match !== 0) {
-                  _param = next;
-                  continue ;
-                } else {
+                if (match === 0) {
                   return Curry._3(H.set_key_data, c, key, info);
                 }
-              } else {
                 _param = next;
                 continue ;
               }
-            } else {
-              throw Caml_builtin_exceptions.not_found;
+              _param = next;
+              continue ;
             }
+            throw {
+                  RE_EXN_ID: "Not_found",
+                  Error: new Error()
+                };
           };
         }
-        catch (exn){
-          if (exn === Caml_builtin_exceptions.not_found) {
+        catch (raw_exn){
+          var exn = Caml_js_exceptions.internalToOCamlException(raw_exn);
+          if (exn.RE_EXN_ID === "Not_found") {
             var container = Curry._2(H.create, key, info);
             Caml_array.caml_array_set(h.data, i, /* Cons */[
                   hkey,
@@ -4173,11 +3928,10 @@ var GenHashTable = {
             if (h.size > (h.data.length << 1)) {
               return resize(h);
             } else {
-              return 0;
+              return ;
             }
-          } else {
-            throw exn;
           }
+          throw exn;
         }
       };
       var mem = function (h, key) {
@@ -4185,73 +3939,65 @@ var GenHashTable = {
         var _param = Caml_array.caml_array_get(h.data, key_index(h, hkey));
         while(true) {
           var param = _param;
-          if (param) {
-            var rest = param[2];
-            if (param[0] === hkey) {
-              var match = Curry._2(H.equal, param[1], key);
-              if (match !== 0) {
-                _param = rest;
-                continue ;
-              } else {
-                return true;
-              }
-            } else {
-              _param = rest;
-              continue ;
-            }
-          } else {
+          if (!param) {
             return false;
           }
+          var rest = param[2];
+          if (param[0] === hkey) {
+            var match = Curry._2(H.equal, param[1], key);
+            if (match === 0) {
+              return true;
+            }
+            _param = rest;
+            continue ;
+          }
+          _param = rest;
+          continue ;
         };
       };
       var iter = function (f, h) {
         var do_bucket = function (_param) {
           while(true) {
             var param = _param;
-            if (param) {
-              var c = param[1];
-              var match = Curry._1(H.get_key, c);
-              var match$1 = Curry._1(H.get_data, c);
-              if (match !== undefined) {
-                if (match$1 !== undefined) {
-                  Curry._2(f, Caml_option.valFromOption(match), Caml_option.valFromOption(match$1));
-                }
-                
-              }
-              _param = param[2];
-              continue ;
-            } else {
-              return /* () */0;
+            if (!param) {
+              return ;
             }
+            var c = param[1];
+            var match = Curry._1(H.get_key, c);
+            var match$1 = Curry._1(H.get_data, c);
+            if (match !== undefined && match$1 !== undefined) {
+              Curry._2(f, Caml_option.valFromOption(match), Caml_option.valFromOption(match$1));
+            }
+            _param = param[2];
+            continue ;
           };
         };
         var d = h.data;
-        for(var i = 0 ,i_finish = d.length - 1 | 0; i <= i_finish; ++i){
+        for(var i = 0 ,i_finish = d.length; i < i_finish; ++i){
           do_bucket(Caml_array.caml_array_get(d, i));
         }
-        return /* () */0;
+        
       };
       var fold = function (f, h, init) {
         var do_bucket = function (_b, _accu) {
           while(true) {
             var accu = _accu;
             var b = _b;
-            if (b) {
-              var c = b[1];
-              var match = Curry._1(H.get_key, c);
-              var match$1 = Curry._1(H.get_data, c);
-              var accu$1 = match !== undefined && match$1 !== undefined ? Curry._3(f, Caml_option.valFromOption(match), Caml_option.valFromOption(match$1), accu) : accu;
-              _accu = accu$1;
-              _b = b[2];
-              continue ;
-            } else {
+            if (!b) {
               return accu;
             }
+            var c = b[1];
+            var match = Curry._1(H.get_key, c);
+            var match$1 = Curry._1(H.get_data, c);
+            var accu$1 = match !== undefined && match$1 !== undefined ? Curry._3(f, Caml_option.valFromOption(match), Caml_option.valFromOption(match$1), accu) : accu;
+            _accu = accu$1;
+            _b = b[2];
+            continue ;
           };
         };
         var d = h.data;
         var accu = init;
-        for(var i = 0 ,i_finish = d.length - 1 | 0; i <= i_finish; ++i){
+        for(var i = 0 ,i_finish = d.length; i < i_finish; ++i){
           accu = do_bucket(Caml_array.caml_array_get(d, i), accu);
         }
         return accu;
@@ -4260,44 +4006,40 @@ var GenHashTable = {
         var do_bucket = function (_param) {
           while(true) {
             var param = _param;
-            if (param) {
-              var rest = param[2];
-              var c = param[1];
-              var match = Curry._1(H.get_key, c);
-              var match$1 = Curry._1(H.get_data, c);
-              if (match !== undefined) {
-                if (match$1 !== undefined) {
-                  var k = Caml_option.valFromOption(match);
-                  var match$2 = Curry._2(f, k, Caml_option.valFromOption(match$1));
-                  if (match$2 !== undefined) {
-                    Curry._3(H.set_key_data, c, k, Caml_option.valFromOption(match$2));
-                    return /* Cons */[
-                            param[0],
-                            c,
-                            do_bucket(rest)
-                          ];
-                  } else {
-                    _param = rest;
-                    continue ;
-                  }
-                } else {
-                  _param = rest;
-                  continue ;
+            if (!param) {
+              return /* Empty */0;
+            }
+            var rest = param[2];
+            var c = param[1];
+            var match = Curry._1(H.get_key, c);
+            var match$1 = Curry._1(H.get_data, c);
+            if (match !== undefined) {
+              if (match$1 !== undefined) {
+                var k = Caml_option.valFromOption(match);
+                var new_d = Curry._2(f, k, Caml_option.valFromOption(match$1));
+                if (new_d !== undefined) {
+                  Curry._3(H.set_key_data, c, k, Caml_option.valFromOption(new_d));
+                  return /* Cons */[
+                          param[0],
+                          c,
+                          do_bucket(rest)
+                        ];
                 }
-              } else {
                 _param = rest;
                 continue ;
               }
-            } else {
-              return /* Empty */0;
+              _param = rest;
+              continue ;
             }
+            _param = rest;
+            continue ;
           };
         };
         var d = h.data;
-        for(var i = 0 ,i_finish = d.length - 1 | 0; i <= i_finish; ++i){
+        for(var i = 0 ,i_finish = d.length; i < i_finish; ++i){
           Caml_array.caml_array_set(d, i, do_bucket(Caml_array.caml_array_get(d, i)));
         }
-        return /* () */0;
+        
       };
       var length = function (h) {
         return h.size;
@@ -4306,13 +4048,12 @@ var GenHashTable = {
         while(true) {
           var param = _param;
           var accu = _accu;
-          if (param) {
-            _param = param[2];
-            _accu = accu + 1 | 0;
-            continue ;
-          } else {
+          if (!param) {
             return accu;
           }
+          _param = param[2];
+          _accu = accu + 1 | 0;
+          continue ;
         };
       };
       var stats = function (h) {
@@ -4335,19 +4076,17 @@ var GenHashTable = {
         while(true) {
           var param = _param;
           var accu = _accu;
-          if (param) {
-            var rest = param[2];
-            if (Curry._1(H.check_key, param[1])) {
-              _param = rest;
-              _accu = accu + 1 | 0;
-              continue ;
-            } else {
-              _param = rest;
-              continue ;
-            }
-          } else {
+          if (!param) {
             return accu;
           }
+          var rest = param[2];
+          if (Curry._1(H.check_key, param[1])) {
+            _param = rest;
+            _accu = accu + 1 | 0;
+            continue ;
+          }
+          _param = rest;
+          continue ;
         };
       };
       var stats_alive = function (h) {

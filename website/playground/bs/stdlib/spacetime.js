@@ -4,10 +4,9 @@ var Caml_gc = require("./caml_gc.js");
 var Caml_io = require("./caml_io.js");
 var Pervasives = require("./pervasives.js");
 var Caml_external_polyfill = require("./caml_external_polyfill.js");
-var Caml_builtin_exceptions = require("./caml_builtin_exceptions.js");
 
 function if_spacetime_enabled(f) {
-  return /* () */0;
+  
 }
 
 function create(path) {
@@ -26,17 +25,18 @@ function save_event(time, t, event_name) {
 function save_and_close(time, t) {
   return if_spacetime_enabled((function (param) {
                 if (t.closed) {
-                  throw [
-                        Caml_builtin_exceptions.failure,
-                        "Series is closed"
-                      ];
+                  throw {
+                        RE_EXN_ID: "Failure",
+                        _1: "Series is closed",
+                        Error: new Error()
+                      };
                 }
                 Caml_external_polyfill.resolve("caml_spacetime_only_works_for_native_code")(time, t.channel);
                 var oc = t.channel;
                 Caml_io.caml_ml_flush(oc);
                 Caml_external_polyfill.resolve("caml_ml_close_channel")(oc);
                 t.closed = true;
-                return /* () */0;
+                
               }));
 }
 
@@ -51,12 +51,13 @@ function take(time, param) {
   var closed = param.closed;
   return if_spacetime_enabled((function (param) {
                 if (closed) {
-                  throw [
-                        Caml_builtin_exceptions.failure,
-                        "Series is closed"
-                      ];
+                  throw {
+                        RE_EXN_ID: "Failure",
+                        _1: "Series is closed",
+                        Error: new Error()
+                      };
                 }
-                Caml_gc.caml_gc_minor(/* () */0);
+                Caml_gc.caml_gc_minor(undefined);
                 return Caml_external_polyfill.resolve("caml_spacetime_only_works_for_native_code")(time, channel);
               }));
 }

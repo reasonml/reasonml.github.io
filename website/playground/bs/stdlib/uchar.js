@@ -2,7 +2,6 @@
 
 var Caml_format = require("./caml_format.js");
 var Caml_primitive = require("./caml_primitive.js");
-var Caml_builtin_exceptions = require("./caml_builtin_exceptions.js");
 
 function err_not_sv(i) {
   return Caml_format.caml_format_int("%X", i) + " is not an Unicode scalar value";
@@ -15,29 +14,29 @@ function err_not_latin1(u) {
 function succ(u) {
   if (u === 55295) {
     return 57344;
-  } else {
-    if (u === 1114111) {
-      throw [
-            Caml_builtin_exceptions.invalid_argument,
-            "U+10FFFF has no successor"
-          ];
-    }
-    return u + 1 | 0;
   }
+  if (u === 1114111) {
+    throw {
+          RE_EXN_ID: "Invalid_argument",
+          _1: "U+10FFFF has no successor",
+          Error: new Error()
+        };
+  }
+  return u + 1 | 0;
 }
 
 function pred(u) {
   if (u === 57344) {
     return 55295;
-  } else {
-    if (u === 0) {
-      throw [
-            Caml_builtin_exceptions.invalid_argument,
-            "U+0000 has no predecessor"
-          ];
-    }
-    return u - 1 | 0;
   }
+  if (u === 0) {
+    throw {
+          RE_EXN_ID: "Invalid_argument",
+          _1: "U+0000 has no predecessor",
+          Error: new Error()
+        };
+  }
+  return u - 1 | 0;
 }
 
 function is_valid(i) {
@@ -53,13 +52,13 @@ function is_valid(i) {
 function of_int(i) {
   if (is_valid(i)) {
     return i;
-  } else {
-    var s = err_not_sv(i);
-    throw [
-          Caml_builtin_exceptions.invalid_argument,
-          s
-        ];
   }
+  var s = err_not_sv(i);
+  throw {
+        RE_EXN_ID: "Invalid_argument",
+        _1: s,
+        Error: new Error()
+      };
 }
 
 function is_char(u) {
@@ -71,15 +70,15 @@ function of_char(c) {
 }
 
 function to_char(u) {
-  if (u > 255) {
-    var s = err_not_latin1(u);
-    throw [
-          Caml_builtin_exceptions.invalid_argument,
-          s
-        ];
-  } else {
+  if (u <= 255) {
     return u;
   }
+  var s = err_not_latin1(u);
+  throw {
+        RE_EXN_ID: "Invalid_argument",
+        _1: s,
+        Error: new Error()
+      };
 }
 
 function unsafe_to_char(prim) {

@@ -12,8 +12,8 @@ function fromArray(data, id) {
 }
 
 function remove(m, e) {
-  var cmp = m.cmp;
   var data = m.data;
+  var cmp = m.cmp;
   var newData = Belt_SetDict.remove(data, e, cmp);
   if (newData === data) {
     return m;
@@ -26,8 +26,8 @@ function remove(m, e) {
 }
 
 function add(m, e) {
-  var cmp = m.cmp;
   var data = m.data;
+  var cmp = m.cmp;
   var newData = Belt_SetDict.add(data, e, cmp);
   if (newData === data) {
     return m;
@@ -106,7 +106,7 @@ function split(m, e) {
 function make(id) {
   return {
           cmp: id.cmp,
-          data: Belt_SetDict.empty
+          data: undefined
         };
 }
 
@@ -236,8 +236,8 @@ function fromSortedArrayUnsafe(xs, id) {
         };
 }
 
-function getData(prim) {
-  return prim.data;
+function getData(m) {
+  return m.data;
 }
 
 function getId(m) {
@@ -258,11 +258,11 @@ function checkInvariantInternal(d) {
   return Belt_SetDict.checkInvariantInternal(d.data);
 }
 
-var Int = /* alias */0;
+var Int;
 
-var $$String = /* alias */0;
+var $$String;
 
-var Dict = /* alias */0;
+var Dict;
 
 exports.Int = Int;
 exports.$$String = $$String;

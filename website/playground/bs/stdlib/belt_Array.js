@@ -33,22 +33,22 @@ function setExn(arr, i, v) {
     throw new Error("File \"belt_Array.ml\", line 31, characters 4-10");
   }
   arr[i] = v;
-  return /* () */0;
+  
 }
 
 function swapUnsafe(xs, i, j) {
   var tmp = xs[i];
   xs[i] = xs[j];
   xs[j] = tmp;
-  return /* () */0;
+  
 }
 
 function shuffleInPlace(xs) {
   var len = xs.length;
-  for(var i = 0 ,i_finish = len - 1 | 0; i <= i_finish; ++i){
+  for(var i = 0; i < len; ++i){
     swapUnsafe(xs, i, Js_math.random_int(i, len));
   }
-  return /* () */0;
+  
 }
 
 function shuffle(xs) {
@@ -59,19 +59,17 @@ function shuffle(xs) {
 
 function reverseInPlace(xs) {
   var len = xs.length;
-  var xs$1 = xs;
   var ofs = 0;
-  var len$1 = len;
-  for(var i = 0 ,i_finish = (len$1 / 2 | 0) - 1 | 0; i <= i_finish; ++i){
-    swapUnsafe(xs$1, ofs + i | 0, ((ofs + len$1 | 0) - i | 0) - 1 | 0);
+  for(var i = 0 ,i_finish = len / 2 | 0; i < i_finish; ++i){
+    swapUnsafe(xs, ofs + i | 0, ((ofs + len | 0) - i | 0) - 1 | 0);
   }
-  return /* () */0;
+  
 }
 
 function reverse(xs) {
   var len = xs.length;
   var result = new Array(len);
-  for(var i = 0 ,i_finish = len - 1 | 0; i <= i_finish; ++i){
+  for(var i = 0; i < len; ++i){
     result[i] = xs[(len - 1 | 0) - i | 0];
   }
   return result;
@@ -79,26 +77,24 @@ function reverse(xs) {
 
 function make(l, f) {
   if (l <= 0) {
-    return /* array */[];
-  } else {
-    var res = new Array(l);
-    for(var i = 0 ,i_finish = l - 1 | 0; i <= i_finish; ++i){
-      res[i] = f;
-    }
-    return res;
+    return [];
   }
+  var res = new Array(l);
+  for(var i = 0; i < l; ++i){
+    res[i] = f;
+  }
+  return res;
 }
 
 function makeByU(l, f) {
   if (l <= 0) {
-    return /* array */[];
-  } else {
-    var res = new Array(l);
-    for(var i = 0 ,i_finish = l - 1 | 0; i <= i_finish; ++i){
-      res[i] = f(i);
-    }
-    return res;
+    return [];
   }
+  var res = new Array(l);
+  for(var i = 0; i < l; ++i){
+    res[i] = f(i);
+  }
+  return res;
 }
 
 function makeBy(l, f) {
@@ -118,30 +114,28 @@ function makeByAndShuffle(l, f) {
 function range(start, finish) {
   var cut = finish - start | 0;
   if (cut < 0) {
-    return /* array */[];
-  } else {
-    var arr = new Array(cut + 1 | 0);
-    for(var i = 0; i <= cut; ++i){
-      arr[i] = start + i | 0;
-    }
-    return arr;
+    return [];
   }
+  var arr = new Array(cut + 1 | 0);
+  for(var i = 0; i <= cut; ++i){
+    arr[i] = start + i | 0;
+  }
+  return arr;
 }
 
 function rangeBy(start, finish, step) {
   var cut = finish - start | 0;
   if (cut < 0 || step <= 0) {
-    return /* array */[];
-  } else {
-    var nb = (cut / step | 0) + 1 | 0;
-    var arr = new Array(nb);
-    var cur = start;
-    for(var i = 0 ,i_finish = nb - 1 | 0; i <= i_finish; ++i){
-      arr[i] = cur;
-      cur = cur + step | 0;
-    }
-    return arr;
+    return [];
   }
+  var nb = (cut / step | 0) + 1 | 0;
+  var arr = new Array(nb);
+  var cur = start;
+  for(var i = 0; i < nb; ++i){
+    arr[i] = cur;
+    cur = cur + step | 0;
+  }
+  return arr;
 }
 
 function zip(xs, ys) {
@@ -149,7 +143,7 @@ function zip(xs, ys) {
   var leny = ys.length;
   var len = lenx < leny ? lenx : leny;
   var s = new Array(len);
-  for(var i = 0 ,i_finish = len - 1 | 0; i <= i_finish; ++i){
+  for(var i = 0; i < len; ++i){
     s[i] = /* tuple */[
       xs[i],
       ys[i]
@@ -163,7 +157,7 @@ function zipByU(xs, ys, f) {
   var leny = ys.length;
   var len = lenx < leny ? lenx : leny;
   var s = new Array(len);
-  for(var i = 0 ,i_finish = len - 1 | 0; i <= i_finish; ++i){
+  for(var i = 0; i < len; ++i){
     s[i] = f(xs[i], ys[i]);
   }
   return s;
@@ -177,10 +171,10 @@ function concat(a1, a2) {
   var l1 = a1.length;
   var l2 = a2.length;
   var a1a2 = new Array(l1 + l2 | 0);
-  for(var i = 0 ,i_finish = l1 - 1 | 0; i <= i_finish; ++i){
+  for(var i = 0; i < l1; ++i){
     a1a2[i] = a1[i];
   }
-  for(var i$1 = 0 ,i_finish$1 = l2 - 1 | 0; i$1 <= i_finish$1; ++i$1){
+  for(var i$1 = 0; i$1 < l2; ++i$1){
     a1a2[l1 + i$1 | 0] = a2[i$1];
   }
   return a1a2;
@@ -189,14 +183,14 @@ function concat(a1, a2) {
 function concatMany(arrs) {
   var lenArrs = arrs.length;
   var totalLen = 0;
-  for(var i = 0 ,i_finish = lenArrs - 1 | 0; i <= i_finish; ++i){
+  for(var i = 0; i < lenArrs; ++i){
     totalLen = totalLen + arrs[i].length | 0;
   }
   var result = new Array(totalLen);
   totalLen = 0;
-  for(var j = 0 ,j_finish = lenArrs - 1 | 0; j <= j_finish; ++j){
+  for(var j = 0; j < lenArrs; ++j){
     var cur = arrs[j];
-    for(var k = 0 ,k_finish = cur.length - 1 | 0; k <= k_finish; ++k){
+    for(var k = 0 ,k_finish = cur.length; k < k_finish; ++k){
       result[totalLen] = cur[k];
       totalLen = totalLen + 1 | 0;
     }
@@ -206,22 +200,20 @@ function concatMany(arrs) {
 
 function slice(a, offset, len) {
   if (len <= 0) {
-    return /* array */[];
-  } else {
-    var lena = a.length;
-    var ofs = offset < 0 ? Caml_primitive.caml_int_max(lena + offset | 0, 0) : offset;
-    var hasLen = lena - ofs | 0;
-    var copyLength = hasLen < len ? hasLen : len;
-    if (copyLength <= 0) {
-      return /* array */[];
-    } else {
-      var result = new Array(copyLength);
-      for(var i = 0 ,i_finish = copyLength - 1 | 0; i <= i_finish; ++i){
-        result[i] = a[ofs + i | 0];
-      }
-      return result;
-    }
+    return [];
   }
+  var lena = a.length;
+  var ofs = offset < 0 ? Caml_primitive.caml_int_max(lena + offset | 0, 0) : offset;
+  var hasLen = lena - ofs | 0;
+  var copyLength = hasLen < len ? hasLen : len;
+  if (copyLength <= 0) {
+    return [];
+  }
+  var result = new Array(copyLength);
+  for(var i = 0; i < copyLength; ++i){
+    result[i] = a[ofs + i | 0];
+  }
+  return result;
 }
 
 function sliceToEnd(a, offset) {
@@ -229,43 +221,40 @@ function sliceToEnd(a, offset) {
   var ofs = offset < 0 ? Caml_primitive.caml_int_max(lena + offset | 0, 0) : offset;
   var len = lena - ofs | 0;
   var result = new Array(len);
-  for(var i = 0 ,i_finish = len - 1 | 0; i <= i_finish; ++i){
+  for(var i = 0; i < len; ++i){
     result[i] = a[ofs + i | 0];
   }
   return result;
 }
 
 function fill(a, offset, len, v) {
-  if (len > 0) {
-    var lena = a.length;
-    var ofs = offset < 0 ? Caml_primitive.caml_int_max(lena + offset | 0, 0) : offset;
-    var hasLen = lena - ofs | 0;
-    var fillLength = hasLen < len ? hasLen : len;
-    if (fillLength > 0) {
-      for(var i = ofs ,i_finish = (ofs + fillLength | 0) - 1 | 0; i <= i_finish; ++i){
-        a[i] = v;
-      }
-      return /* () */0;
-    } else {
-      return 0;
-    }
-  } else {
-    return 0;
+  if (len <= 0) {
+    return ;
   }
+  var lena = a.length;
+  var ofs = offset < 0 ? Caml_primitive.caml_int_max(lena + offset | 0, 0) : offset;
+  var hasLen = lena - ofs | 0;
+  var fillLength = hasLen < len ? hasLen : len;
+  if (fillLength <= 0) {
+    return ;
+  }
+  for(var i = ofs ,i_finish = ofs + fillLength | 0; i < i_finish; ++i){
+    a[i] = v;
+  }
+  
 }
 
 function blitUnsafe(a1, srcofs1, a2, srcofs2, blitLength) {
   if (srcofs2 <= srcofs1) {
-    for(var j = 0 ,j_finish = blitLength - 1 | 0; j <= j_finish; ++j){
+    for(var j = 0; j < blitLength; ++j){
       a2[j + srcofs2 | 0] = a1[j + srcofs1 | 0];
     }
-    return /* () */0;
-  } else {
-    for(var j$1 = blitLength - 1 | 0; j$1 >= 0; --j$1){
-      a2[j$1 + srcofs2 | 0] = a1[j$1 + srcofs1 | 0];
-    }
-    return /* () */0;
+    return ;
   }
+  for(var j$1 = blitLength - 1 | 0; j$1 >= 0; --j$1){
+    a2[j$1 + srcofs2 | 0] = a1[j$1 + srcofs1 | 0];
+  }
+  
 }
 
 function blit(a1, ofs1, a2, ofs2, len) {
@@ -275,23 +264,22 @@ function blit(a1, ofs1, a2, ofs2, len) {
   var srcofs2 = ofs2 < 0 ? Caml_primitive.caml_int_max(lena2 + ofs2 | 0, 0) : ofs2;
   var blitLength = Caml_primitive.caml_int_min(len, Caml_primitive.caml_int_min(lena1 - srcofs1 | 0, lena2 - srcofs2 | 0));
   if (srcofs2 <= srcofs1) {
-    for(var j = 0 ,j_finish = blitLength - 1 | 0; j <= j_finish; ++j){
+    for(var j = 0; j < blitLength; ++j){
       a2[j + srcofs2 | 0] = a1[j + srcofs1 | 0];
     }
-    return /* () */0;
-  } else {
-    for(var j$1 = blitLength - 1 | 0; j$1 >= 0; --j$1){
-      a2[j$1 + srcofs2 | 0] = a1[j$1 + srcofs1 | 0];
-    }
-    return /* () */0;
+    return ;
   }
+  for(var j$1 = blitLength - 1 | 0; j$1 >= 0; --j$1){
+    a2[j$1 + srcofs2 | 0] = a1[j$1 + srcofs1 | 0];
+  }
+  
 }
 
 function forEachU(a, f) {
-  for(var i = 0 ,i_finish = a.length - 1 | 0; i <= i_finish; ++i){
+  for(var i = 0 ,i_finish = a.length; i < i_finish; ++i){
     f(a[i]);
   }
-  return /* () */0;
+  
 }
 
 function forEach(a, f) {
@@ -301,7 +289,7 @@ function forEach(a, f) {
 function mapU(a, f) {
   var l = a.length;
   var r = new Array(l);
-  for(var i = 0 ,i_finish = l - 1 | 0; i <= i_finish; ++i){
+  for(var i = 0; i < l; ++i){
     r[i] = f(a[i]);
   }
   return r;
@@ -314,7 +302,7 @@ function map(a, f) {
 function getByU(a, p) {
   var l = a.length;
   var i = 0;
-  var r = undefined;
+  var r;
   while(r === undefined && i < l) {
     var v = a[i];
     if (p(v)) {
@@ -332,7 +320,7 @@ function getBy(a, p) {
 function getIndexByU(a, p) {
   var l = a.length;
   var i = 0;
-  var r = undefined;
+  var r;
   while(r === undefined && i < l) {
     var v = a[i];
     if (p(v)) {
@@ -351,7 +339,7 @@ function keepU(a, f) {
   var l = a.length;
   var r = new Array(l);
   var j = 0;
-  for(var i = 0 ,i_finish = l - 1 | 0; i <= i_finish; ++i){
+  for(var i = 0; i < l; ++i){
     var v = a[i];
     if (f(v)) {
       r[j] = v;
@@ -371,7 +359,7 @@ function keepWithIndexU(a, f) {
   var l = a.length;
   var r = new Array(l);
   var j = 0;
-  for(var i = 0 ,i_finish = l - 1 | 0; i <= i_finish; ++i){
+  for(var i = 0; i < l; ++i){
     var v = a[i];
     if (f(v, i)) {
       r[j] = v;
@@ -391,11 +379,11 @@ function keepMapU(a, f) {
   var l = a.length;
   var r = new Array(l);
   var j = 0;
-  for(var i = 0 ,i_finish = l - 1 | 0; i <= i_finish; ++i){
+  for(var i = 0; i < l; ++i){
     var v = a[i];
-    var match = f(v);
-    if (match !== undefined) {
-      r[j] = Caml_option.valFromOption(match);
+    var v$1 = f(v);
+    if (v$1 !== undefined) {
+      r[j] = Caml_option.valFromOption(v$1);
       j = j + 1 | 0;
     }
     
@@ -409,10 +397,10 @@ function keepMap(a, f) {
 }
 
 function forEachWithIndexU(a, f) {
-  for(var i = 0 ,i_finish = a.length - 1 | 0; i <= i_finish; ++i){
+  for(var i = 0 ,i_finish = a.length; i < i_finish; ++i){
     f(i, a[i]);
   }
-  return /* () */0;
+  
 }
 
 function forEachWithIndex(a, f) {
@@ -422,7 +410,7 @@ function forEachWithIndex(a, f) {
 function mapWithIndexU(a, f) {
   var l = a.length;
   var r = new Array(l);
-  for(var i = 0 ,i_finish = l - 1 | 0; i <= i_finish; ++i){
+  for(var i = 0; i < l; ++i){
     r[i] = f(i, a[i]);
   }
   return r;
@@ -434,7 +422,7 @@ function mapWithIndex(a, f) {
 
 function reduceU(a, x, f) {
   var r = x;
-  for(var i = 0 ,i_finish = a.length - 1 | 0; i <= i_finish; ++i){
+  for(var i = 0 ,i_finish = a.length; i < i_finish; ++i){
     r = f(r, a[i]);
   }
   return r;
@@ -471,7 +459,7 @@ function reduceReverse2(a, b, x, f) {
 
 function reduceWithIndexU(a, x, f) {
   var r = x;
-  for(var i = 0 ,i_finish = a.length - 1 | 0; i <= i_finish; ++i){
+  for(var i = 0 ,i_finish = a.length; i < i_finish; ++i){
     r = f(r, a[i], i);
   }
   return r;
@@ -483,20 +471,17 @@ function reduceWithIndex(a, x, f) {
 
 function everyU(arr, b) {
   var len = arr.length;
-  var arr$1 = arr;
   var _i = 0;
-  var b$1 = b;
-  var len$1 = len;
   while(true) {
     var i = _i;
-    if (i === len$1) {
+    if (i === len) {
       return true;
-    } else if (b$1(arr$1[i])) {
-      _i = i + 1 | 0;
-      continue ;
-    } else {
+    }
+    if (!b(arr[i])) {
       return false;
     }
+    _i = i + 1 | 0;
+    continue ;
   };
 }
 
@@ -506,20 +491,17 @@ function every(arr, f) {
 
 function someU(arr, b) {
   var len = arr.length;
-  var arr$1 = arr;
   var _i = 0;
-  var b$1 = b;
-  var len$1 = len;
   while(true) {
     var i = _i;
-    if (i === len$1) {
+    if (i === len) {
       return false;
-    } else if (b$1(arr$1[i])) {
-      return true;
-    } else {
-      _i = i + 1 | 0;
-      continue ;
     }
+    if (b(arr[i])) {
+      return true;
+    }
+    _i = i + 1 | 0;
+    continue ;
   };
 }
 
@@ -532,12 +514,12 @@ function everyAux2(arr1, arr2, _i, b, len) {
     var i = _i;
     if (i === len) {
       return true;
-    } else if (b(arr1[i], arr2[i])) {
-      _i = i + 1 | 0;
-      continue ;
-    } else {
+    }
+    if (!b(arr1[i], arr2[i])) {
       return false;
     }
+    _i = i + 1 | 0;
+    continue ;
   };
 }
 
@@ -550,21 +532,18 @@ function every2(a, b, p) {
 }
 
 function some2U(a, b, p) {
-  var arr1 = a;
-  var arr2 = b;
   var _i = 0;
-  var b$1 = p;
   var len = Caml_primitive.caml_int_min(a.length, b.length);
   while(true) {
     var i = _i;
     if (i === len) {
       return false;
-    } else if (b$1(arr1[i], arr2[i])) {
-      return true;
-    } else {
-      _i = i + 1 | 0;
-      continue ;
     }
+    if (p(a[i], b[i])) {
+      return true;
+    }
+    _i = i + 1 | 0;
+    continue ;
   };
 }
 
@@ -594,24 +573,18 @@ function cmpU(a, b, p) {
   } else if (lena < lenb) {
     return -1;
   } else {
-    var arr1 = a;
-    var arr2 = b;
     var _i = 0;
-    var b$1 = p;
-    var len = lena;
     while(true) {
       var i = _i;
-      if (i === len) {
+      if (i === lena) {
         return 0;
-      } else {
-        var c = b$1(arr1[i], arr2[i]);
-        if (c === 0) {
-          _i = i + 1 | 0;
-          continue ;
-        } else {
-          return c;
-        }
       }
+      var c = p(a[i], b[i]);
+      if (c !== 0) {
+        return c;
+      }
+      _i = i + 1 | 0;
+      continue ;
     };
   }
 }
@@ -626,7 +599,7 @@ function partitionU(a, f) {
   var j = 0;
   var a1 = new Array(l);
   var a2 = new Array(l);
-  for(var ii = 0 ,ii_finish = l - 1 | 0; ii <= ii_finish; ++ii){
+  for(var ii = 0; ii < l; ++ii){
     var v = a[ii];
     if (f(v)) {
       a1[i] = v;
@@ -652,7 +625,7 @@ function unzip(a) {
   var l = a.length;
   var a1 = new Array(l);
   var a2 = new Array(l);
-  for(var i = 0 ,i_finish = l - 1 | 0; i <= i_finish; ++i){
+  for(var i = 0; i < l; ++i){
     var match = a[i];
     a1[i] = match[0];
     a2[i] = match[1];

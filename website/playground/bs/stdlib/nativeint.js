@@ -3,7 +3,6 @@
 var Caml_format = require("./caml_format.js");
 var Caml_primitive = require("./caml_primitive.js");
 var Caml_js_exceptions = require("./caml_js_exceptions.js");
-var Caml_builtin_exceptions = require("./caml_builtin_exceptions.js");
 
 function succ(n) {
   return n + 1;
@@ -35,11 +34,10 @@ function of_string_opt(s) {
   }
   catch (raw_exn){
     var exn = Caml_js_exceptions.internalToOCamlException(raw_exn);
-    if (exn[0] === Caml_builtin_exceptions.failure) {
+    if (exn.RE_EXN_ID === "Failure") {
       return ;
-    } else {
-      throw exn;
     }
+    throw exn;
   }
 }
 

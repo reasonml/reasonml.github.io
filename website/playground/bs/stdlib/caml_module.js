@@ -1,14 +1,14 @@
 'use strict';
 
 var Caml_obj = require("./caml_obj.js");
-var Caml_builtin_exceptions = require("./caml_builtin_exceptions.js");
 
 function init_mod(loc, shape) {
   var undef_module = function (param) {
-    throw [
-          Caml_builtin_exceptions.undefined_recursive_module,
-          loc
-        ];
+    throw {
+          RE_EXN_ID: "Undefined_recursive_module",
+          _1: loc,
+          Error: new Error()
+        };
   };
   var loop = function (shape, struct_, idx) {
     if (typeof shape === "number") {
@@ -16,7 +16,7 @@ function init_mod(loc, shape) {
         case /* Function */0 :
         case /* Lazy */1 :
             struct_[idx] = undef_module;
-            return /* () */0;
+            return ;
         case /* Class */2 :
             struct_[idx] = /* tuple */[
               undef_module,
@@ -24,22 +24,23 @@ function init_mod(loc, shape) {
               undef_module,
               0
             ];
-            return /* () */0;
+            return ;
         
       }
-    } else if (shape.tag) {
-      struct_[idx] = shape[0];
-      return /* () */0;
     } else {
+      if (shape.tag) {
+        struct_[idx] = shape[0];
+        return ;
+      }
       var comps = shape[0];
       var v = { };
       struct_[idx] = v;
       var len = comps.length;
-      for(var i = 0 ,i_finish = len - 1 | 0; i <= i_finish; ++i){
+      for(var i = 0; i < len; ++i){
         var match = comps[i];
         loop(match[0], v, match[1]);
       }
-      return /* () */0;
+      return ;
     }
   };
   var res = { };
@@ -54,51 +55,54 @@ function update_mod(shape, o, n) {
       switch (shape) {
         case /* Function */0 :
             parent[i] = n;
-            return /* () */0;
+            return ;
         case /* Lazy */1 :
         case /* Class */2 :
             return Caml_obj.caml_update_dummy(o, n);
         
       }
-    } else if (shape.tag) {
-      return /* () */0;
     } else {
+      if (shape.tag) {
+        return ;
+      }
       var comps = shape[0];
-      for(var i$1 = 0 ,i_finish = comps.length - 1 | 0; i$1 <= i_finish; ++i$1){
+      for(var i$1 = 0 ,i_finish = comps.length; i$1 < i_finish; ++i$1){
         var match = comps[i$1];
         var name = match[1];
         aux(match[0], o[name], n[name], o, name);
       }
-      return /* () */0;
+      return ;
     }
   };
   if (typeof shape === "number") {
-    throw [
-          Caml_builtin_exceptions.assert_failure,
-          /* tuple */[
+    throw {
+          RE_EXN_ID: "Assert_failure",
+          _1: /* tuple */[
             "caml_module.ml",
             107,
             10
-          ]
-        ];
-  } else if (shape.tag) {
-    throw [
-          Caml_builtin_exceptions.assert_failure,
-          /* tuple */[
-            "caml_module.ml",
-            107,
-            10
-          ]
-        ];
-  } else {
-    var comps = shape[0];
-    for(var i = 0 ,i_finish = comps.length - 1 | 0; i <= i_finish; ++i){
-      var match = comps[i];
-      var name = match[1];
-      aux(match[0], o[name], n[name], o, name);
-    }
-    return /* () */0;
+          ],
+          Error: new Error()
+        };
   }
+  if (shape.tag) {
+    throw {
+          RE_EXN_ID: "Assert_failure",
+          _1: /* tuple */[
+            "caml_module.ml",
+            107,
+            10
+          ],
+          Error: new Error()
+        };
+  }
+  var comps = shape[0];
+  for(var i = 0 ,i_finish = comps.length; i < i_finish; ++i){
+    var match = comps[i];
+    var name = match[1];
+    aux(match[0], o[name], n[name], o, name);
+  }
+  
 }
 
 exports.init_mod = init_mod;

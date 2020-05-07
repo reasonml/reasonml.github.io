@@ -12,8 +12,8 @@ function fromArray(data, id) {
 }
 
 function remove(m, x) {
-  var cmp = m.cmp;
   var odata = m.data;
+  var cmp = m.cmp;
   var newData = Belt_MapDict.remove(odata, x, cmp);
   if (newData === odata) {
     return m;
@@ -27,8 +27,7 @@ function remove(m, x) {
 
 function removeMany(m, x) {
   var cmp = m.cmp;
-  var odata = m.data;
-  var newData = Belt_MapDict.removeMany(odata, x, cmp);
+  var newData = Belt_MapDict.removeMany(m.data, x, cmp);
   return {
           cmp: cmp,
           data: newData
@@ -97,7 +96,7 @@ function merge(s1, s2, f) {
 function make(id) {
   return {
           cmp: id.cmp,
-          data: Belt_MapDict.empty
+          data: undefined
         };
 }
 
@@ -289,8 +288,8 @@ function cmp(m1, m2, vcmp) {
   return cmpU(m1, m2, Curry.__2(vcmp));
 }
 
-function getData(prim) {
-  return prim.data;
+function getData(m) {
+  return m.data;
 }
 
 function getId(m) {
@@ -307,11 +306,11 @@ function packIdData(id, data) {
         };
 }
 
-var Int = /* alias */0;
+var Int;
 
-var $$String = /* alias */0;
+var $$String;
 
-var Dict = /* alias */0;
+var Dict;
 
 exports.Int = Int;
 exports.$$String = $$String;

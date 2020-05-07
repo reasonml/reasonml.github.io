@@ -1,67 +1,101 @@
 'use strict';
 
-var Obj = require("./obj.js");
-var Curry = require("./curry.js");
-var Caml_obj = require("./caml_obj.js");
 var Caml_exceptions = require("./caml_exceptions.js");
+
+function lazy_boxed(l) {
+  if (l == null) {
+    return false;
+  }
+  var t = l.tag;
+  if (t === 250) {
+    return true;
+  } else {
+    return t === 246;
+  }
+}
+
+function is_val(l) {
+  if (l == null) {
+    return true;
+  } else {
+    return l.tag !== 246;
+  }
+}
+
+function from_fun(f) {
+  return {
+          tag: 246,
+          value: f
+        };
+}
+
+function from_val(v) {
+  if (lazy_boxed(v)) {
+    return {
+            tag: 250,
+            value: v
+          };
+  } else {
+    return v;
+  }
+}
 
 var Undefined = Caml_exceptions.create("CamlinternalLazy.Undefined");
 
-function raise_undefined(param) {
-  throw Undefined;
-}
-
-function force_lazy_block(blk) {
-  var closure = blk[0];
-  blk[0] = raise_undefined;
-  try {
-    var result = Curry._1(closure, /* () */0);
-    blk[0] = result;
-    Caml_obj.caml_obj_set_tag(blk, Obj.forward_tag);
-    return result;
-  }
-  catch (e){
-    blk[0] = (function (param) {
-        throw e;
-      });
-    throw e;
-  }
-}
-
-function force_val_lazy_block(blk) {
-  var closure = blk[0];
-  blk[0] = raise_undefined;
-  var result = Curry._1(closure, /* () */0);
-  blk[0] = result;
-  Caml_obj.caml_obj_set_tag(blk, Obj.forward_tag);
+function forward_with_closure(blk, closure) {
+  var result = closure();
+  blk.value = result;
+  blk.tag = 250;
   return result;
 }
 
+function raise_undefined() {
+  throw {
+        RE_EXN_ID: Undefined,
+        Error: new Error()
+      };
+}
+
 function force(lzv) {
-  var t = lzv.tag | 0;
-  if (t === Obj.forward_tag) {
-    return lzv[0];
-  } else if (t !== Obj.lazy_tag) {
-    return lzv;
+  if (lazy_boxed(lzv)) {
+    if (is_val(lzv)) {
+      return lzv.value;
+    } else {
+      var closure = lzv.value;
+      lzv.value = raise_undefined;
+      try {
+        return forward_with_closure(lzv, closure);
+      }
+      catch (e){
+        lzv.value = (function () {
+            throw e;
+          });
+        throw e;
+      }
+    }
   } else {
-    return force_lazy_block(lzv);
+    return lzv;
   }
 }
 
 function force_val(lzv) {
-  var t = lzv.tag | 0;
-  if (t === Obj.forward_tag) {
-    return lzv[0];
-  } else if (t !== Obj.lazy_tag) {
-    return lzv;
+  if (lazy_boxed(lzv)) {
+    if (is_val(lzv)) {
+      return lzv.value;
+    } else {
+      var closure = lzv.value;
+      lzv.value = raise_undefined;
+      return forward_with_closure(lzv, closure);
+    }
   } else {
-    return force_val_lazy_block(lzv);
+    return lzv;
   }
 }
 
 exports.Undefined = Undefined;
-exports.force_lazy_block = force_lazy_block;
-exports.force_val_lazy_block = force_val_lazy_block;
 exports.force = force;
 exports.force_val = force_val;
+exports.from_fun = from_fun;
+exports.from_val = from_val;
+exports.is_val = is_val;
 /* No side effect */

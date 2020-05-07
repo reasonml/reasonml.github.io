@@ -17,7 +17,7 @@ function clear(q) {
   q.length = 0;
   q.first = /* Nil */0;
   q.last = /* Nil */0;
-  return /* () */0;
+  
 }
 
 function add(x, q) {
@@ -25,17 +25,17 @@ function add(x, q) {
     /* content */x,
     /* next : Nil */0
   ];
-  var match = q.last;
-  if (match) {
+  var last = q.last;
+  if (last) {
     q.length = q.length + 1 | 0;
-    match[/* next */1] = cell;
+    last[/* next */1] = cell;
     q.last = cell;
-    return /* () */0;
+    return ;
   } else {
     q.length = 1;
     q.first = cell;
     q.last = cell;
-    return /* () */0;
+    return ;
   }
 }
 
@@ -43,9 +43,11 @@ function peek(q) {
   var match = q.first;
   if (match) {
     return match[/* content */0];
-  } else {
-    throw Empty;
   }
+  throw {
+        RE_EXN_ID: Empty,
+        Error: new Error()
+      };
 }
 
 function take(q) {
@@ -61,9 +63,11 @@ function take(q) {
       clear(q);
       return content;
     }
-  } else {
-    throw Empty;
   }
+  throw {
+        RE_EXN_ID: Empty,
+        Error: new Error()
+      };
 }
 
 function copy(q) {
@@ -91,10 +95,9 @@ function copy(q) {
       _cell = next;
       _prev = res;
       continue ;
-    } else {
-      q_res.last = prev;
-      return q_res;
     }
+    q_res.last = prev;
+    return q_res;
   };
 }
 
@@ -107,56 +110,51 @@ function length(q) {
 }
 
 function iter(f, q) {
-  var f$1 = f;
   var _cell = q.first;
   while(true) {
     var cell = _cell;
-    if (cell) {
-      var next = cell[/* next */1];
-      Curry._1(f$1, cell[/* content */0]);
-      _cell = next;
-      continue ;
-    } else {
-      return /* () */0;
+    if (!cell) {
+      return ;
     }
+    var next = cell[/* next */1];
+    Curry._1(f, cell[/* content */0]);
+    _cell = next;
+    continue ;
   };
 }
 
 function fold(f, accu, q) {
-  var f$1 = f;
   var _accu = accu;
   var _cell = q.first;
   while(true) {
     var cell = _cell;
     var accu$1 = _accu;
-    if (cell) {
-      var next = cell[/* next */1];
-      var accu$2 = Curry._2(f$1, accu$1, cell[/* content */0]);
-      _cell = next;
-      _accu = accu$2;
-      continue ;
-    } else {
+    if (!cell) {
       return accu$1;
     }
+    var next = cell[/* next */1];
+    var accu$2 = Curry._2(f, accu$1, cell[/* content */0]);
+    _cell = next;
+    _accu = accu$2;
+    continue ;
   };
 }
 
 function transfer(q1, q2) {
-  if (q1.length > 0) {
-    var match = q2.last;
-    if (match) {
-      q2.length = q2.length + q1.length | 0;
-      match[/* next */1] = q1.first;
-      q2.last = q1.last;
-      return clear(q1);
-    } else {
-      q2.length = q1.length;
-      q2.first = q1.first;
-      q2.last = q1.last;
-      return clear(q1);
-    }
+  if (q1.length <= 0) {
+    return ;
+  }
+  var last = q2.last;
+  if (last) {
+    q2.length = q2.length + q1.length | 0;
+    last[/* next */1] = q1.first;
+    q2.last = q1.last;
+    return clear(q1);
   } else {
-    return 0;
+    q2.length = q1.length;
+    q2.first = q1.first;
+    q2.last = q1.last;
+    return clear(q1);
   }
 }
 

@@ -4,44 +4,42 @@ var Curry = require("./curry.js");
 var Belt_Array = require("./belt_Array.js");
 var Caml_option = require("./caml_option.js");
 
+function copyBucket(c) {
+  if (c === undefined) {
+    return c;
+  }
+  var head = {
+    key: c.key,
+    value: c.value,
+    next: undefined
+  };
+  copyAuxCont(c.next, head);
+  return head;
+}
+
 function copyAuxCont(_c, _prec) {
   while(true) {
     var prec = _prec;
     var c = _c;
-    if (c !== undefined) {
-      var ncopy = {
-        key: c.key,
-        value: c.value,
-        next: undefined
-      };
-      prec.next = ncopy;
-      _prec = ncopy;
-      _c = c.next;
-      continue ;
-    } else {
-      return /* () */0;
+    if (c === undefined) {
+      return ;
     }
-  };
-}
-
-function copyBucket(c) {
-  if (c !== undefined) {
-    var head = {
+    var ncopy = {
       key: c.key,
       value: c.value,
       next: undefined
     };
-    copyAuxCont(c.next, head);
-    return head;
-  } else {
-    return c;
-  }
+    prec.next = ncopy;
+    _prec = ncopy;
+    _c = c.next;
+    continue ;
+  };
 }
 
 function copyBuckets(buckets) {
   var len = buckets.length;
   var newBuckets = new Array(len);
-  for(var i = 0 ,i_finish = len - 1 | 0; i <= i_finish; ++i){
+  for(var i = 0; i < len; ++i){
     newBuckets[i] = copyBucket(buckets[i]);
   }
   return newBuckets;
@@ -60,35 +58,33 @@ function bucketLength(_accu, _buckets) {
   while(true) {
     var buckets = _buckets;
     var accu = _accu;
-    if (buckets !== undefined) {
-      _buckets = buckets.next;
-      _accu = accu + 1 | 0;
-      continue ;
-    } else {
+    if (buckets === undefined) {
       return accu;
     }
+    _buckets = buckets.next;
+    _accu = accu + 1 | 0;
+    continue ;
   };
 }
 
 function do_bucket_iter(f, _buckets) {
   while(true) {
     var buckets = _buckets;
-    if (buckets !== undefined) {
-      f(buckets.key, buckets.value);
-      _buckets = buckets.next;
-      continue ;
-    } else {
-      return /* () */0;
+    if (buckets === undefined) {
+      return ;
     }
+    f(buckets.key, buckets.value);
+    _buckets = buckets.next;
+    continue ;
   };
 }
 
 function forEachU(h, f) {
   var d = h.buckets;
-  for(var i = 0 ,i_finish = d.length - 1 | 0; i <= i_finish; ++i){
+  for(var i = 0 ,i_finish = d.length; i < i_finish; ++i){
     do_bucket_iter(f, d[i]);
   }
-  return /* () */0;
+  
 }
 
 function forEach(h, f) {
@@ -99,20 +95,19 @@ function do_bucket_fold(f, _b, _accu) {
   while(true) {
     var accu = _accu;
     var b = _b;
-    if (b !== undefined) {
-      _accu = f(accu, b.key, b.value);
-      _b = b.next;
-      continue ;
-    } else {
+    if (b === undefined) {
       return accu;
     }
+    _accu = f(accu, b.key, b.value);
+    _b = b.next;
+    continue ;
   };
 }
 
 function reduceU(h, init, f) {
   var d = h.buckets;
   var accu = init;
-  for(var i = 0 ,i_finish = d.length - 1 | 0; i <= i_finish; ++i){
+  for(var i = 0 ,i_finish = d.length; i < i_finish; ++i){
     accu = do_bucket_fold(f, d[i], accu);
   }
   return accu;
@@ -141,7 +136,7 @@ function getBucketHistogram(h) {
   Belt_Array.forEachU(h.buckets, (function (b) {
           var l = bucketLength(0, b);
           histo[l] = histo[l] + 1 | 0;
-          return /* () */0;
+          
         }));
   return histo;
 }
@@ -153,7 +148,7 @@ function logStats(h) {
         buckets: h.buckets.length,
         histogram: histogram
       });
-  return /* () */0;
+  
 }
 
 function filterMapInplaceBucket(f, h, i, _prec, _cell) {
@@ -161,48 +156,47 @@ function filterMapInplaceBucket(f, h, i, _prec, _cell) {
     var cell = _cell;
     var prec = _prec;
     var n = cell.next;
-    var match = f(cell.key, cell.value);
-    if (match !== undefined) {
+    var data = f(cell.key, cell.value);
+    if (data !== undefined) {
       if (prec !== undefined) {
         cell.next = cell;
       } else {
         h.buckets[i] = cell;
       }
-      cell.value = Caml_option.valFromOption(match);
-      if (n !== undefined) {
-        _cell = n;
-        _prec = cell;
-        continue ;
-      } else {
+      cell.value = Caml_option.valFromOption(data);
+      if (n === undefined) {
         cell.next = n;
-        return /* () */0;
+        return ;
       }
-    } else {
-      h.size = h.size - 1 | 0;
-      if (n !== undefined) {
-        _cell = n;
-        continue ;
-      } else if (prec !== undefined) {
+      _cell = n;
+      _prec = cell;
+      continue ;
+    }
+    h.size = h.size - 1 | 0;
+    if (n === undefined) {
+      if (prec !== undefined) {
         prec.next = n;
-        return /* () */0;
+        return ;
       } else {
         h.buckets[i] = prec;
-        return /* () */0;
+        return ;
       }
     }
+    _cell = n;
+    continue ;
   };
 }
 
 function keepMapInPlaceU(h, f) {
   var h_buckets = h.buckets;
-  for(var i = 0 ,i_finish = h_buckets.length - 1 | 0; i <= i_finish; ++i){
+  for(var i = 0 ,i_finish = h_buckets.length; i < i_finish; ++i){
     var v = h_buckets[i];
     if (v !== undefined) {
       filterMapInplaceBucket(f, h, i, undefined, v);
     }
     
   }
-  return /* () */0;
+  
 }
 
 function keepMapInPlace(h, f) {
@@ -217,14 +211,13 @@ function fillArray(_i, arr, _cell) {
       cell.key,
       cell.value
     ];
-    var match = cell.next;
-    if (match !== undefined) {
-      _cell = match;
-      _i = i + 1 | 0;
-      continue ;
-    } else {
+    var v = cell.next;
+    if (v === undefined) {
       return i + 1 | 0;
     }
+    _cell = v;
+    _i = i + 1 | 0;
+    continue ;
   };
 }
 
@@ -233,14 +226,13 @@ function fillArrayMap(_i, arr, _cell, f) {
     var cell = _cell;
     var i = _i;
     arr[i] = f(cell);
-    var match = cell.next;
-    if (match !== undefined) {
-      _cell = match;
-      _i = i + 1 | 0;
-      continue ;
-    } else {
+    var v = cell.next;
+    if (v === undefined) {
       return i + 1 | 0;
     }
+    _cell = v;
+    _i = i + 1 | 0;
+    continue ;
   };
 }
 
@@ -248,7 +240,7 @@ function linear(h, f) {
   var d = h.buckets;
   var current = 0;
   var arr = new Array(h.size);
-  for(var i = 0 ,i_finish = d.length - 1 | 0; i <= i_finish; ++i){
+  for(var i = 0 ,i_finish = d.length; i < i_finish; ++i){
     var cell = d[i];
     if (cell !== undefined) {
       current = fillArrayMap(current, arr, cell, f);
@@ -279,7 +271,7 @@ function toArray(h) {
               }));
 }
 
-var C = /* alias */0;
+var C;
 
 exports.C = C;
 exports.copy = copy;

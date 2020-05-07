@@ -49,14 +49,13 @@ function div(x, y) {
             re: (x.re + r * x.im) / d,
             im: (x.im - r * x.re) / d
           };
-  } else {
-    var r$1 = y.re / y.im;
-    var d$1 = y.im + r$1 * y.re;
-    return {
-            re: (r$1 * x.re + x.im) / d$1,
-            im: (r$1 * x.im - x.re) / d$1
-          };
   }
+  var r$1 = y.re / y.im;
+  var d$1 = y.im + r$1 * y.re;
+  return {
+          re: (r$1 * x.re + x.im) / d$1,
+          im: (r$1 * x.im - x.re) / d$1
+        };
 }
 
 function inv(x) {
@@ -72,15 +71,16 @@ function norm(x) {
   var i = Math.abs(x.im);
   if (r === 0.0) {
     return i;
-  } else if (i === 0.0) {
+  }
+  if (i === 0.0) {
     return r;
-  } else if (r >= i) {
+  }
+  if (r >= i) {
     var q = i / r;
     return r * Math.sqrt(1.0 + q * q);
-  } else {
-    var q$1 = r / i;
-    return i * Math.sqrt(1.0 + q$1 * q$1);
   }
+  var q$1 = r / i;
+  return i * Math.sqrt(1.0 + q$1 * q$1);
 }
 
 function arg(x) {
@@ -100,28 +100,27 @@ function sqrt(x) {
             re: 0.0,
             im: 0.0
           };
+  }
+  var r = Math.abs(x.re);
+  var i = Math.abs(x.im);
+  var w;
+  if (r >= i) {
+    var q = i / r;
+    w = Math.sqrt(r) * Math.sqrt(0.5 * (1.0 + Math.sqrt(1.0 + q * q)));
   } else {
-    var r = Math.abs(x.re);
-    var i = Math.abs(x.im);
-    var w;
-    if (r >= i) {
-      var q = i / r;
-      w = Math.sqrt(r) * Math.sqrt(0.5 * (1.0 + Math.sqrt(1.0 + q * q)));
-    } else {
-      var q$1 = r / i;
-      w = Math.sqrt(i) * Math.sqrt(0.5 * (q$1 + Math.sqrt(1.0 + q$1 * q$1)));
-    }
-    if (x.re >= 0.0) {
-      return {
-              re: w,
-              im: 0.5 * x.im / w
-            };
-    } else {
-      return {
-              re: 0.5 * i / w,
-              im: x.im >= 0.0 ? w : -w
-            };
-    }
+    var q$1 = r / i;
+    w = Math.sqrt(i) * Math.sqrt(0.5 * (q$1 + Math.sqrt(1.0 + q$1 * q$1)));
+  }
+  if (x.re >= 0.0) {
+    return {
+            re: w,
+            im: 0.5 * x.im / w
+          };
+  } else {
+    return {
+            re: 0.5 * i / w,
+            im: x.im >= 0.0 ? w : -w
+          };
   }
 }
 

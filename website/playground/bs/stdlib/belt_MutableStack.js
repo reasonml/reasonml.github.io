@@ -5,13 +5,13 @@ var Caml_option = require("./caml_option.js");
 
 function make(param) {
   return {
-          root: null
+          root: undefined
         };
 }
 
 function clear(s) {
-  s.root = null;
-  return /* () */0;
+  s.root = undefined;
+  
 }
 
 function copy(s) {
@@ -25,63 +25,62 @@ function push(s, x) {
     head: x,
     tail: s.root
   };
-  return /* () */0;
+  
 }
 
 function topUndefined(s) {
-  var match = s.root;
-  if (match !== null) {
-    return match.head;
+  var x = s.root;
+  if (x !== undefined) {
+    return x.head;
   }
   
 }
 
 function top(s) {
-  var match = s.root;
-  if (match !== null) {
-    return Caml_option.some(match.head);
+  var x = s.root;
+  if (x !== undefined) {
+    return Caml_option.some(x.head);
   }
   
 }
 
 function isEmpty(s) {
-  return s.root === null;
+  return s.root === undefined;
 }
 
 function popUndefined(s) {
-  var match = s.root;
-  if (match !== null) {
-    s.root = match.tail;
-    return match.head;
+  var x = s.root;
+  if (x !== undefined) {
+    s.root = x.tail;
+    return x.head;
   }
   
 }
 
 function pop(s) {
-  var match = s.root;
-  if (match !== null) {
-    s.root = match.tail;
-    return Caml_option.some(match.head);
+  var x = s.root;
+  if (x !== undefined) {
+    s.root = x.tail;
+    return Caml_option.some(x.head);
   }
   
 }
 
 function size(s) {
-  var match = s.root;
-  if (match !== null) {
-    var _x = match;
+  var x = s.root;
+  if (x !== undefined) {
+    var _x = x;
     var _acc = 0;
     while(true) {
       var acc = _acc;
-      var x = _x;
-      var match$1 = x.tail;
-      if (match$1 !== null) {
-        _acc = acc + 1 | 0;
-        _x = match$1;
-        continue ;
-      } else {
+      var x$1 = _x;
+      var x$2 = x$1.tail;
+      if (x$2 === undefined) {
         return acc + 1 | 0;
       }
+      _acc = acc + 1 | 0;
+      _x = x$2;
+      continue ;
     };
   } else {
     return 0;
@@ -90,16 +89,14 @@ function size(s) {
 
 function forEachU(s, f) {
   var _s = s.root;
-  var f$1 = f;
   while(true) {
     var s$1 = _s;
-    if (s$1 !== null) {
-      f$1(s$1.head);
-      _s = s$1.tail;
-      continue ;
-    } else {
-      return /* () */0;
+    if (s$1 === undefined) {
+      return ;
     }
+    f(s$1.head);
+    _s = s$1.tail;
+    continue ;
   };
 }
 
@@ -108,14 +105,15 @@ function forEach(s, f) {
 }
 
 function dynamicPopIterU(s, f) {
-  var cursor = s.root;
-  while(cursor !== null) {
-    var v = cursor;
-    s.root = v.tail;
-    f(v.head);
-    cursor = s.root;
+  while(true) {
+    var match = s.root;
+    if (match === undefined) {
+      return ;
+    }
+    s.root = match.tail;
+    f(match.head);
+    continue ;
   };
-  return /* () */0;
 }
 
 function dynamicPopIter(s, f) {

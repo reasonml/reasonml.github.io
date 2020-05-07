@@ -2,24 +2,25 @@
 
 var Caml_bytes = require("./caml_bytes.js");
 var Caml_external_polyfill = require("./caml_external_polyfill.js");
-var Caml_builtin_exceptions = require("./caml_builtin_exceptions.js");
 
 function to_buffer(buff, ofs, len, v, flags) {
   if (ofs < 0 || len < 0 || ofs > (buff.length - len | 0)) {
-    throw [
-          Caml_builtin_exceptions.invalid_argument,
-          "Marshal.to_buffer: substring out of bounds"
-        ];
+    throw {
+          RE_EXN_ID: "Invalid_argument",
+          _1: "Marshal.to_buffer: substring out of bounds",
+          Error: new Error()
+        };
   }
   return Caml_external_polyfill.resolve("caml_output_value_to_buffer")(buff, ofs, len, v, flags);
 }
 
 function data_size(buff, ofs) {
   if (ofs < 0 || ofs > (buff.length - 20 | 0)) {
-    throw [
-          Caml_builtin_exceptions.invalid_argument,
-          "Marshal.data_size"
-        ];
+    throw {
+          RE_EXN_ID: "Invalid_argument",
+          _1: "Marshal.data_size",
+          Error: new Error()
+        };
   }
   return Caml_external_polyfill.resolve("caml_marshal_data_size")(buff, ofs);
 }
@@ -30,17 +31,19 @@ function total_size(buff, ofs) {
 
 function from_bytes(buff, ofs) {
   if (ofs < 0 || ofs > (buff.length - 20 | 0)) {
-    throw [
-          Caml_builtin_exceptions.invalid_argument,
-          "Marshal.from_bytes"
-        ];
+    throw {
+          RE_EXN_ID: "Invalid_argument",
+          _1: "Marshal.from_bytes",
+          Error: new Error()
+        };
   }
   var len = Caml_external_polyfill.resolve("caml_marshal_data_size")(buff, ofs);
   if (ofs > (buff.length - (20 + len | 0) | 0)) {
-    throw [
-          Caml_builtin_exceptions.invalid_argument,
-          "Marshal.from_bytes"
-        ];
+    throw {
+          RE_EXN_ID: "Invalid_argument",
+          _1: "Marshal.from_bytes",
+          Error: new Error()
+        };
   }
   return Caml_external_polyfill.resolve("caml_input_value_from_string")(buff, ofs);
 }

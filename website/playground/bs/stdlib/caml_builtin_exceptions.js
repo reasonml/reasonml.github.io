@@ -1,89 +1,65 @@
 'use strict';
 
 
-var out_of_memory = /* tuple */[
-  "Out_of_memory",
-  0
-];
+var out_of_memory = {
+  ExceptionID: 0,
+  Debug: "Out_of_memory"
+};
 
-var sys_error = /* tuple */[
-  "Sys_error",
-  -1
-];
+var sys_error = {
+  ExceptionID: -1,
+  Debug: "Sys_error"
+};
 
-var failure = /* tuple */[
-  "Failure",
-  -2
-];
+var failure = {
+  ExceptionID: -2,
+  Debug: "Failure"
+};
 
-var invalid_argument = /* tuple */[
-  "Invalid_argument",
-  -3
-];
+var invalid_argument = {
+  ExceptionID: -3,
+  Debug: "Invalid_argument"
+};
 
-var end_of_file = /* tuple */[
-  "End_of_file",
-  -4
-];
+var end_of_file = {
+  ExceptionID: -4,
+  Debug: "End_of_file"
+};
 
-var division_by_zero = /* tuple */[
-  "Division_by_zero",
-  -5
-];
+var division_by_zero = {
+  ExceptionID: -5,
+  Debug: "Division_by_zero"
+};
 
-var not_found = /* tuple */[
-  "Not_found",
-  -6
-];
+var not_found = {
+  ExceptionID: -6,
+  Debug: "Not_found"
+};
 
-var match_failure = /* tuple */[
-  "Match_failure",
-  -7
-];
+var match_failure = {
+  ExceptionID: -7,
+  Debug: "Match_failure"
+};
 
-var stack_overflow = /* tuple */[
-  "Stack_overflow",
-  -8
-];
+var stack_overflow = {
+  ExceptionID: -8,
+  Debug: "Stack_overflow"
+};
 
-var sys_blocked_io = /* tuple */[
-  "Sys_blocked_io",
-  -9
-];
+var sys_blocked_io = {
+  ExceptionID: -9,
+  Debug: "Sys_blocked_io"
+};
 
-var assert_failure = /* tuple */[
-  "Assert_failure",
-  -10
-];
+var assert_failure = {
+  ExceptionID: -10,
+  Debug: "Assert_failure"
+};
 
-var undefined_recursive_module = /* tuple */[
-  "Undefined_recursive_module",
-  -11
-];
-
-out_of_memory.tag = 248;
-
-sys_error.tag = 248;
-
-failure.tag = 248;
-
-invalid_argument.tag = 248;
-
-end_of_file.tag = 248;
-
-division_by_zero.tag = 248;
-
-not_found.tag = 248;
-
-match_failure.tag = 248;
-
-stack_overflow.tag = 248;
-
-sys_blocked_io.tag = 248;
-
-assert_failure.tag = 248;
-
-undefined_recursive_module.tag = 248;
+var undefined_recursive_module = {
+  ExceptionID: -11,
+  Debug: "Undefined_recursive_module"
+};
 
 exports.out_of_memory = out_of_memory;
 exports.sys_error = sys_error;
@@ -97,4 +73,4 @@ exports.stack_overflow = stack_overflow;
 exports.sys_blocked_io = sys_blocked_io;
 exports.assert_failure = assert_failure;
 exports.undefined_recursive_module = undefined_recursive_module;
-/*  Not a pure module */
+/* No side effect */

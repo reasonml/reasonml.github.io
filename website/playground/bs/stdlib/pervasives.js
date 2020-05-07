@@ -9,21 +9,22 @@ var Caml_string = require("./caml_string.js");
 var Caml_exceptions = require("./caml_exceptions.js");
 var Caml_js_exceptions = require("./caml_js_exceptions.js");
 var Caml_external_polyfill = require("./caml_external_polyfill.js");
-var Caml_builtin_exceptions = require("./caml_builtin_exceptions.js");
 var CamlinternalFormatBasics = require("./camlinternalFormatBasics.js");
 
 function failwith(s) {
-  throw [
-        Caml_builtin_exceptions.failure,
-        s
-      ];
+  throw {
+        RE_EXN_ID: "Failure",
+        _1: s,
+        Error: new Error()
+      };
 }
 
 function invalid_arg(s) {
-  throw [
-        Caml_builtin_exceptions.invalid_argument,
-        s
-      ];
+  throw {
+        RE_EXN_ID: "Invalid_argument",
+        _1: s,
+        Error: new Error()
+      };
 }
 
 var Exit = Caml_exceptions.create("Pervasives.Exit");
@@ -60,10 +61,11 @@ function classify_float(x) {
 
 function char_of_int(n) {
   if (n < 0 || n > 255) {
-    throw [
-          Caml_builtin_exceptions.invalid_argument,
-          "char_of_int"
-        ];
+    throw {
+          RE_EXN_ID: "Invalid_argument",
+          _1: "char_of_int",
+          Error: new Error()
+        };
   }
   return n;
 }
@@ -83,10 +85,11 @@ function bool_of_string(param) {
     case "true" :
         return true;
     default:
-      throw [
-            Caml_builtin_exceptions.invalid_argument,
-            "bool_of_string"
-          ];
+      throw {
+            RE_EXN_ID: "Invalid_argument",
+            _1: "bool_of_string",
+            Error: new Error()
+          };
   }
 }
 
@@ -107,11 +110,10 @@ function int_of_string_opt(s) {
   }
   catch (raw_exn){
     var exn = Caml_js_exceptions.internalToOCamlException(raw_exn);
-    if (exn[0] === Caml_builtin_exceptions.failure) {
+    if (exn.RE_EXN_ID === "Failure") {
       return ;
-    } else {
-      throw exn;
     }
+    throw exn;
   }
 }
 
@@ -122,22 +124,20 @@ function valid_float_lexem(s) {
     var i = _i;
     if (i >= l) {
       return s + ".";
-    } else {
-      var match = Caml_string.get(s, i);
-      if (match >= 48) {
-        if (match >= 58) {
-          return s;
-        } else {
-          _i = i + 1 | 0;
-          continue ;
-        }
-      } else if (match !== 45) {
-        return s;
-      } else {
-        _i = i + 1 | 0;
-        continue ;
-      }
     }
+    var match = Caml_string.get(s, i);
+    if (match >= 48) {
+      if (match >= 58) {
+        return s;
+      }
+      _i = i + 1 | 0;
+      continue ;
+    }
+    if (match !== 45) {
+      return s;
+    }
+    _i = i + 1 | 0;
+    continue ;
   };
 }
 
@@ -151,11 +151,10 @@ function float_of_string_opt(s) {
   }
   catch (raw_exn){
     var exn = Caml_js_exceptions.internalToOCamlException(raw_exn);
-    if (exn[0] === Caml_builtin_exceptions.failure) {
+    if (exn.RE_EXN_ID === "Failure") {
       return ;
-    } else {
-      throw exn;
     }
+    throw exn;
   }
 }
 
@@ -215,25 +214,24 @@ function open_out_bin(name) {
 }
 
 function flush_all(param) {
-  var _param = Caml_io.caml_ml_out_channels_list(/* () */0);
+  var _param = Caml_io.caml_ml_out_channels_list(undefined);
   while(true) {
     var param$1 = _param;
-    if (param$1) {
-      try {
-        Caml_io.caml_ml_flush(param$1[0]);
-      }
-      catch (raw_exn){
-        var exn = Caml_js_exceptions.internalToOCamlException(raw_exn);
-        if (exn[0] !== Caml_builtin_exceptions.sys_error) {
-          throw exn;
-        }
-        
-      }
-      _param = param$1[1];
-      continue ;
-    } else {
-      return /* () */0;
+    if (!param$1) {
+      return ;
     }
+    try {
+      Caml_io.caml_ml_flush(param$1[0]);
+    }
+    catch (raw_exn){
+      var exn = Caml_js_exceptions.internalToOCamlException(raw_exn);
+      if (exn.RE_EXN_ID !== "Sys_error") {
+        throw exn;
+      }
+      
+    }
+    _param = param$1[1];
+    continue ;
   };
 }
 
@@ -247,20 +245,22 @@ function output_string(oc, s) {
 
 function output(oc, s, ofs, len) {
   if (ofs < 0 || len < 0 || ofs > (s.length - len | 0)) {
-    throw [
-          Caml_builtin_exceptions.invalid_argument,
-          "output"
-        ];
+    throw {
+          RE_EXN_ID: "Invalid_argument",
+          _1: "output",
+          Error: new Error()
+        };
   }
   return Caml_external_polyfill.resolve("caml_ml_output_bytes")(oc, s, ofs, len);
 }
 
 function output_substring(oc, s, ofs, len) {
   if (ofs < 0 || len < 0 || ofs > (s.length - len | 0)) {
-    throw [
-          Caml_builtin_exceptions.invalid_argument,
-          "output_substring"
-        ];
+    throw {
+          RE_EXN_ID: "Invalid_argument",
+          _1: "output_substring",
+          Error: new Error()
+        };
   }
   return Caml_io.caml_ml_output(oc, s, ofs, len);
 }
@@ -285,7 +285,7 @@ function close_out_noerr(oc) {
     return Caml_external_polyfill.resolve("caml_ml_close_channel")(oc);
   }
   catch (exn$1){
-    return /* () */0;
+    return ;
   }
 }
 
@@ -317,10 +317,11 @@ function open_in_bin(name) {
 
 function input(ic, s, ofs, len) {
   if (ofs < 0 || len < 0 || ofs > (s.length - len | 0)) {
-    throw [
-          Caml_builtin_exceptions.invalid_argument,
-          "input"
-        ];
+    throw {
+          RE_EXN_ID: "Invalid_argument",
+          _1: "input",
+          Error: new Error()
+        };
   }
   return Caml_external_polyfill.resolve("caml_ml_input")(ic, s, ofs, len);
 }
@@ -330,25 +331,28 @@ function unsafe_really_input(ic, s, _ofs, _len) {
     var len = _len;
     var ofs = _ofs;
     if (len <= 0) {
-      return /* () */0;
-    } else {
-      var r = Caml_external_polyfill.resolve("caml_ml_input")(ic, s, ofs, len);
-      if (r === 0) {
-        throw Caml_builtin_exceptions.end_of_file;
-      }
-      _len = len - r | 0;
-      _ofs = ofs + r | 0;
-      continue ;
+      return ;
     }
+    var r = Caml_external_polyfill.resolve("caml_ml_input")(ic, s, ofs, len);
+    if (r === 0) {
+      throw {
+            RE_EXN_ID: "End_of_file",
+            Error: new Error()
+          };
+    }
+    _len = len - r | 0;
+    _ofs = ofs + r | 0;
+    continue ;
   };
 }
 
 function really_input(ic, s, ofs, len) {
   if (ofs < 0 || len < 0 || ofs > (s.length - len | 0)) {
-    throw [
-          Caml_builtin_exceptions.invalid_argument,
-          "really_input"
-        ];
+    throw {
+          RE_EXN_ID: "Invalid_argument",
+          _1: "really_input",
+          Error: new Error()
+        };
   }
   return unsafe_really_input(ic, s, ofs, len);
 }
@@ -364,16 +368,15 @@ function input_line(chan) {
     while(true) {
       var param = _param;
       var pos = _pos;
-      if (param) {
-        var hd = param[0];
-        var len = hd.length;
-        Caml_bytes.caml_blit_bytes(hd, 0, buf, pos - len | 0, len);
-        _param = param[1];
-        _pos = pos - len | 0;
-        continue ;
-      } else {
+      if (!param) {
         return buf;
       }
+      var hd = param[0];
+      var len = hd.length;
+      Caml_bytes.caml_blit_bytes(hd, 0, buf, pos - len | 0, len);
+      _param = param[1];
+      _pos = pos - len | 0;
+      continue ;
     };
   };
   var scan = function (_accu, _len) {
@@ -384,32 +387,33 @@ function input_line(chan) {
       if (n === 0) {
         if (accu) {
           return build_result(Caml_bytes.caml_create_bytes(len), len, accu);
-        } else {
-          throw Caml_builtin_exceptions.end_of_file;
         }
-      } else if (n > 0) {
+        throw {
+              RE_EXN_ID: "End_of_file",
+              Error: new Error()
+            };
+      }
+      if (n > 0) {
         var res = Caml_bytes.caml_create_bytes(n - 1 | 0);
         Caml_external_polyfill.resolve("caml_ml_input")(chan, res, 0, n - 1 | 0);
         Caml_external_polyfill.resolve("caml_ml_input_char")(chan);
-        if (accu) {
-          var len$1 = (len + n | 0) - 1 | 0;
-          return build_result(Caml_bytes.caml_create_bytes(len$1), len$1, /* :: */[
-                      res,
-                      accu
-                    ]);
-        } else {
+        if (!accu) {
           return res;
         }
-      } else {
-        var beg = Caml_bytes.caml_create_bytes(-n | 0);
-        Caml_external_polyfill.resolve("caml_ml_input")(chan, beg, 0, -n | 0);
-        _len = len - n | 0;
-        _accu = /* :: */[
-          beg,
-          accu
-        ];
-        continue ;
+        var len$1 = (len + n | 0) - 1 | 0;
+        return build_result(Caml_bytes.caml_create_bytes(len$1), len$1, /* :: */[
+                    res,
+                    accu
+                  ]);
       }
+      var beg = Caml_bytes.caml_create_bytes(-n | 0);
+      Caml_external_polyfill.resolve("caml_ml_input")(chan, beg, 0, -n | 0);
+      _len = len - n | 0;
+      _accu = /* :: */[
+        beg,
+        accu
+      ];
+      continue ;
     };
   };
   return Caml_bytes.bytes_to_string(scan(/* [] */0, 0));
@@ -420,7 +424,7 @@ function close_in_noerr(ic) {
     return Caml_external_polyfill.resolve("caml_ml_close_channel")(ic);
   }
   catch (exn){
-    return /* () */0;
+    return ;
   }
 }
 
@@ -513,18 +517,18 @@ var exit_function = {
 function at_exit(f) {
   var g = exit_function.contents;
   exit_function.contents = (function (param) {
-      Curry._1(f, /* () */0);
-      return Curry._1(g, /* () */0);
+      Curry._1(f, undefined);
+      return Curry._1(g, undefined);
     });
-  return /* () */0;
+  
 }
 
 function do_at_exit(param) {
-  return Curry._1(exit_function.contents, /* () */0);
+  return Curry._1(exit_function.contents, undefined);
 }
 
 function exit(retcode) {
-  do_at_exit(/* () */0);
+  do_at_exit(undefined);
   return Caml_sys.caml_sys_exit(retcode);
 }
 
