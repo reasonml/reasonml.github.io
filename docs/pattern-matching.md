@@ -140,6 +140,36 @@ let i = Left(1);
 let Left(v) | Right(v) = i;
 ```
 
+### `fun` syntax
+
+Often a function will pattern match on its argument:
+
+```reason
+type position =
+  | Start
+  | Center
+  | End;
+
+let toStyle = position =>
+  switch (position) {
+  | Start => "items-start"
+  | Center => "items-center"
+  | End => "items-end"
+  };
+```
+
+For this case there's a shorter syntax you can use:
+
+```reason
+let toStyle =
+  fun
+  | Start => "items-start"
+  | Center => "items-center"
+  | End => "items-end";
+```
+
+In other words, `fun ...` is syntactic sugar for `x => switch (x) { ... }`, where `x` is some variable which doesn't appear in any of the switch statement arms.
+
 ## Tips & Tricks
 
 **Flatten your pattern-match whenever you can**. This is a real bug remover. Example below.
