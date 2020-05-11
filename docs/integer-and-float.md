@@ -34,4 +34,4 @@ We provide [a few helpers in the standard library](https://bucklescript.github.i
 
 "Why the heck can't I just use `+` for both int and float?"
 
-This is due to some unforunate constraints in the language's type system. They can be worked out in the future.
+This is due to some unfortunate constraints in the language's type system. They can be worked out in the future.
