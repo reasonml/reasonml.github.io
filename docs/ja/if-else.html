@@ -73,7 +73,7 @@
   <span class="hljs-string">"Hello!"</span>
 };
 </code></pre>
-<p><strong>Note:</strong> an <code>if-else</code> expression without the final <code>else</code> branch implicitly gives <code>()</code>. So this:</p>
+<p><strong>備考:</strong> 最後に<code>else</code> の分岐がない<code>if-elseif-else</code> 式は暗黙的に <code>()</code> になります。よって下は:</p>
 <pre><code class="hljs css language-reason"><span class="hljs-keyword">if</span> (showMenu) {
   displayMenu()
 };
@@ -86,7 +86,7 @@
 };
 </code></pre>
 <p>通常これは望みどおりです。<code>displayMenu()</code> も unit を返すはずです。</p>
-<p>Here's another way to look at it. This is clearly wrong:</p>
+<p>ここで別の見方をしてみましょう。これは明らかに誤りです:</p>
 <pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> result = <span class="hljs-keyword">if</span> (showMenu) {
   <span class="hljs-number">1</span> <span class="hljs-operator">+</span> <span class="hljs-number">2</span>
 };

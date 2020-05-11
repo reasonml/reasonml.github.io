@@ -119,7 +119,7 @@
 <ul>
 <li><code>strings</code> は文字列、<code>ints</code> と <code>floats</code> は単に数値です。</li>
 <li><a href="/docs/ja/list-and-array#array">配列</a> は OCaml ではミュータブルな固定長のリストで、プレーンな javascript の配列として表現されます。</li>
-<li><a href="/docs/ja/list-and-array#list">リスト</a> はイミュータブルな関数型スタイルの連結リストで、間違いなくほとんどのケースで使用する慣用的なものです。 However, its representation is more complicated (try <code>Js.log([1,2,3,4])</code> to check it out). このため、javascript とやり取りする時は大抵、 <code>Array.of_list</code> を介して <code>Array</code> へ、または <code>Array.to_list&lt;code&gt; を介して &lt;code&gt;Array</code> から変換します。</li>
+<li><a href="/docs/ja/list-and-array#list">リスト</a> はイミュータブルな関数型スタイルの連結リストで、間違いなくほとんどのケースで使用する慣用的なものです。 しかし、その表現はもっと複雑です(<code>Js.log([1,2,3,4])</code> を試して確認できます)。 このため、javascript とやり取りする時は大抵、 <code>Array.of_list</code> を介して <code>Array</code> へ、または <code>Array.to_list&lt;code&gt; を介して &lt;code&gt;Array</code> から変換します。</li>
 <li>より深めたい場合は、<a href="https://bucklescript.github.io/docs/en/common-data-types.html#cheat-sheet">BuckleScript のドキュメント</a>にリストがあります。</li>
 </ul>
 <p>配列を受け取り、数値を返す関数を、全く苦労することなく JavaScript で書けることを知っています。</p>
@@ -156,8 +156,8 @@ alert(<span class="hljs-string">"hello"</span>);
 
 <span class="hljs-keyword">type</span> context;
 
-<span class="hljs-comment">/* we're leaving these types abstract, because we won't
- * be using them directly anywhere */</span>
+<span class="hljs-comment">/* これらの型を直接使うことはないので、
+ * 抽象的なままにしてあります */</span>
 <span class="hljs-attribute">[@bs.send]</span> <span class="hljs-keyword">external</span> getContext : (canvas, string) =&gt; context = <span class="hljs-string">"getContext"</span>;
 
 <span class="hljs-keyword">let</span> myCanvas: canvas = <span class="hljs-attribute">[%bs.raw {| document.getElementById("mycanvas") |}]</span>;
