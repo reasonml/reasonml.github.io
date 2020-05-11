@@ -69,7 +69,7 @@ title: Syntax Cheatsheet
 | ------------------- | --------- |
 | `null`, `undefined` | `None` \* |
 
-\* Again, only a spiritual equivalent; Reason doesn't have nulls, nor null bugs! But it does have [an option type](newcomer-examples.md#using-the-option-type) for when you actually need nullability.
+\* Only a spiritual equivalent; Reason doesn't have nulls, nor null bugs! But it does have [an option type](newcomer-examples.md#using-the-option-type) for when you actually need nullability. Also Reason will warn you if you don't handle both cases (null/non-null).
 
 ## Function
 
@@ -163,7 +163,30 @@ Both JavaScript and Reason support currying, but Reason currying is **built-in a
 | `throw new SomeError(...)`                      | `raise(SomeError(...))`                    |
 | `try {a} catch (Err) {...} finally {...}` | <code>try (a) { &#124; Err => ...}</code> \* |
 
-\* No finally.
+\* No finally syntax sugar yet. You could copy this snippet as workaround now.
+```
+exception Finally_raised(exn);
+
+let protect = (~finally: unit => unit, work) => {
+  let finally_no_exn = () =>
+    try(finally()) {
+    | e =>
+      let bt = Printexc.get_raw_backtrace();
+      Printexc.raise_with_backtrace(Finally_raised(e), bt);
+    };
+
+  switch (work()) {
+  | result =>
+    finally_no_exn();
+    result;
+  | exception work_exn =>
+    let work_bt = Printexc.get_raw_backtrace();
+    finally_no_exn();
+    Printexc.raise_with_backtrace(work_exn, work_bt);
+  };
+};
+```
+Original source: https://github.com/ocaml/ocaml/blob/4.10/stdlib/fun.ml#L23-L34 translated to Reason Syntax
 
 ## Blocks
 
