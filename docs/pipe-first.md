@@ -61,7 +61,7 @@ asyncRequest()
   .send();
 ```
 
-Assuming we don't need the chaining behavior above, we'd bind to each case this using `bs.send` from the previous section:
+Assuming we don't need the chaining behavior above, we'd bind to each case of `this` using `bs.send` from the previous section:
 
 ```reason
 [@bs.send] external map : (array('a), 'a => 'b) => array('b) = "map";
