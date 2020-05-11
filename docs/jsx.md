@@ -68,7 +68,7 @@ To solve the above problem, we've introduced
 <MyComponent> ...foo </MyComponent>
 ```
 
-This passes the value `foo` _without_ wrapping it in a list (or array, in the case of ReasonReact). Aka, this desugars to:
+This passes the value `foo` _without_ wrapping it in a list (or array, in the case of ReasonReact), and desugars to:
 
 ```reason
 ([@JSX] MyComponent.createElement(~children=foo, ()));
@@ -122,7 +122,7 @@ Consequently, a Reason JSX component can cram in a few more props before reachin
 
 For library authors wanting to take advantage of the JSX: the `[@JSX]` attribute above is a hook for potential ppx macros to spot a function wanting to format as JSX. Once you spot the function, you can turn it into any other expression.
 
-This way, everyone gets to benefit the JSX syntax without needing to opt into a specific library using it, e.g. ReasonReact.
+This way, everyone gets to benefit from the JSX syntax without needing to opt into a specific library using it, e.g. ReasonReact.
 
 JSX calls supports the features of [labeled functions](function.md#labeled-arguments): optional, explicitly passed optional and optional with default.
 
@@ -130,6 +130,6 @@ JSX calls supports the features of [labeled functions](function.md#labeled-argum
 
 The way we designed this JSX is related to how we'd like to help the language evolve. See the section "What's the point?" in [this blog post](https://medium.com/@chenglou/cool-things-reason-formatter-does-9e1f79e25a82).
 
-The ability to have macros in the language + the library-agnostic JSX syntax allows every library to potentially have JSX without hassle. This way, we add some visual familiarities to the underlying OCaml language without compromising on its semantics (aka how it executes). One big goal of Reason is to let more folks take advantage of the beautiful language that is OCaml, while discarding the time-consuming debates around syntax and formatting.
+The ability to have macros in the language + the library-agnostic JSX syntax allows every library to potentially have JSX without hassle. This way, we add some visual familiarities to the underlying OCaml language without compromising on its semantics (i.e., how it executes). One big goal of Reason is to let more folks take advantage of the beautiful language that is OCaml, while discarding the time-consuming debates around syntax and formatting.
 
 \* You might wonder why you never needed such children spread in ReactJS; ReactJS uses some special runtime logic + special syntax transforms + variadic argument detection & marking to avoid most of these cases ([see here](https://github.com/facebook/react/blob/9b36df86c6ccecb73ca44899386e6a72a83ad445/packages/react/src/ReactElement.js#L207)). Such dynamic usage complexifies the type system detection _quite a bit_. Since we control the whole syntax and ReasonReact, we decided to introduce children spread to disambiguate between the case of wrapping vs not wrapping, without compile-time & runtime cost!
