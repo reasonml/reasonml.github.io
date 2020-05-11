@@ -21,7 +21,7 @@ var score = 10;
 ```
 <!--END_DOCUSAURUS_CODE_TABS-->
 
-Reason deducted that `score` is an `int`, judging by the value `10`. This is called **inference**.
+Reason deduced that `score` is an `int`, judging by the value `10`. This is called **inference**.
 
 But types can also be explicitly written down by choice:
 
