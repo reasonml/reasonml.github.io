@@ -45,7 +45,7 @@ You'll need to have this repository and the [BuckleScript](https://github.com/Bu
 
 1. Inside the BuckleScript repository, follow the [Setup](https://github.com/BuckleScript/bucklescript/blob/master/CONTRIBUTING.md#setup) guide.
 
-2. Follow the [BS Playground instructions](https://github.com/BuckleScript/bucklescript/tree/7b96816a4e38d9a1a6a66817bdacabde6582766e/playground), with these caveats:
+2. Follow the [BS Playground instructions](https://github.com/BuckleScript/bucklescript/tree/master/playground), with these caveats:
 - Make sure the `reason-react` version in BuckleScript `playground` folder is the same as the one in this project
 - When calling `cmij.exe`, just pass the path to `reason-react`, e.g. `../jscomp/bin/cmij.exe -playground node_modules/reason-react/lib/ocaml`
 - Run `BS_PLAYGROUND=../../reasonml.github.io/website/playground/bs node scripts/repl.js`
