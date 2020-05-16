@@ -273,6 +273,11 @@ const users = [
     caption: "Tenzir",
     image: "img/logos/tenzir.svg",
     infoLink: "https://tenzir.com/",
+  },
+  {
+    name: "Wolt",
+    image: "img/logos/wolt.svg",
+    link: "https://wolt.com/"
   }
 ];
 
