@@ -16,7 +16,7 @@ Float Exponentiation            | `2.0 ** 3.0`                         | `Math.p
 String Concatenation            | `"Hello " ++ "World"`                | `"Hello " + "World"`
 Comparison                      | `>`, `<`, `>=`, `<=`                 | `>`, `<`, `>=`, `<=`
 Boolean operation               | `!`, `&&`, <code>&#124;&#124;</code> | `!`, `&&`, <code>&#124;&#124;</code>
-Shallow and deep Equality       | `===`, `==`                          | `===`, `==`
+Shallow and Deep Equality       | `==`, `===`                          | `==`, `===`
 List                            | `[1, 2, 3]`                          | `[1, [2, [3, 0]]]`
 List Prepend                    | `[a1, a2, ...theRest]`               | `[a1, [a2, theRest]]`
 Array                           | <code>[&#124;1, 2, 3&#124;]</code>   | <code>[1, 2, 3]</code>
