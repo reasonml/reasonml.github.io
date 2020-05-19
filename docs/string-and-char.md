@@ -87,7 +87,7 @@ Reason has a **legacy** type for a string with a single letter:
 let firstLetterOfAlphabet = 'a';
 ```
 
-**Don't use it**. Char doesn't support proper internationalization (unicode or UFT-8), and most of the time you've better served by either a string or a [variant](variant.md).
+**Don't use it**. Char doesn't support proper internationalization (unicode or UFT-8), and most of the time you're better served by either a string or a [variant](variant.md).
 
 ### Tips & Tricks
 
