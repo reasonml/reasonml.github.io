@@ -277,7 +277,7 @@ const users = [
   {
     name: "Wolt",
     image: "img/logos/wolt.svg",
-    link: "https://wolt.com/"
+    infoLink: "https://wolt.com/"
   }
 ];
 
