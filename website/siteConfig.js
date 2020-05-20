@@ -278,6 +278,11 @@ const users = [
     name: "Wolt",
     image: "img/logos/wolt.svg",
     infoLink: "https://wolt.com/"
+  },
+  {
+    name: "Hemnet",
+    image: "img/logos/hemnet.svg",
+    infoLink: "https://hemnet.se",
   }
 ];
 
