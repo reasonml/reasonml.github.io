@@ -40,7 +40,7 @@ In case you find any content issues on any of the aforementioned Reason websites
 
 A unification of all documentation websites means a unification for the blog as well! On our new [unified blog](https://reasonml.org/blog), you will find all our previous and future blog posts in one glimpse. You can also sort them by topic to find the most recent content you are interested in more easily.
 
-## ReasonML is growing up
+## ReasonML is growing strong
 
 So far it was a really interesting experience to see the language grow over the past 4 years. We have a considerable amount of [individuals and organizations](/users-of-reason) relying on our tech day by day, and our goal right now is to optimize and polish the experience as much as possible, so our users can focus on building reliable and enjoyable products.
 
