@@ -4,18 +4,16 @@ title: Future Blog Updates / Unified Website
 
 ## Insights in our Development Processes
 
-You might be wondering why we haven't posted any blog posts for the Reason syntax for almost 2 years now, so we wanted to give you an update and explain how the Reason development process takes place and what we have achieved so far.
+You might be wondering why we haven't posted any blog posts for the Reason syntax / ecosystem for almost 2 years now, so we wanted to give you an update and explain how the Reason development process takes place and what we have achieved so far.
 
 The ReasonML ecosystem consists of multiple parts, currently separated to different websites:
 - [Reason](https:///reasonml.github.io): The Reason Syntax
 - [BuckleScript](https://bucklescript.github.io): The "Reason Compiler" for JS development
 - [ReasonReact](https://reasonml.github.io/reasonreact): The official Reason bindings to ReactJS
 
-The Reason syntax has been stable for several years now, we didn't introduce any major changes since v3 and the most interesting changes to the ecosystem almost exclusively happened on the compiler side within the BuckleScript project. Technically speaking, Reason is "just a syntax" after all, the compiler does the heavy lifting to make the language useful!
-
 That means that most recent blog posts relevant for the Reason ecosystem can be found on the current [BuckleScript Blog](https://bucklescript.github.io/blog). Arguably, this is a discoverability problem, mostly caused by separate websites that should have been one unified website to begin with.
 
-We learned a lot about the most common use-cases of the language, this is something we couldn't predict a few years ago, so we set out to improve and streamline the ecosystem.
+We learned a lot about the language usage and its use-cases, this is something we couldn't predict a few years ago, so we set out to improve and streamline the ecosystem.
 
 ## Reason & BuckleScript
 
