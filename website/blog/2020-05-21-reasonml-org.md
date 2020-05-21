@@ -21,9 +21,9 @@ We learned a lot about the most common use-cases of the language, this is someth
 
 Reason and BuckleScript are getting closer, that's why we started to call BuckleScript more often the "Reason Compiler", to make it easier for newcomers to understand the relation between the syntax and the JS compiler. So be aware that we will think about a more unified naming scheme in the future to make the language ecosystem more approachable.
 
-Also since BuckleScript's biggest target group is the Reason community (ReasonReact, JSX, etc), we started to simplify and optimize the content and by removing OCaml syntax for examples, blog posts and code snippets.
+Also since BuckleScript's biggest target group is the Reason community (ReasonReact, JSX, etc), we started to simplify and optimize the content by e.g. removing OCaml syntax for examples, blog posts and code snippets.
 
-This is not a take against OCaml, since Reason **is** OCaml behind the scenes after all (and the compiler will still understand `.ml` files of course), but we believe that this will make a better, more cohesive learning experience without any additional cognitive overload for our target group.
+This is not a take against OCaml, since Reason **is OCaml** behind the scenes after all (and the compiler will still understand `.ml` files of course), but we believe that this will make a better, more cohesive learning experience without any additional cognitive overload for our target group.
 
 
 ## New Unified Website is coming!
