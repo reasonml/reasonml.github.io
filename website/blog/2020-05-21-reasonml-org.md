@@ -47,12 +47,3 @@ So far it was a really interesting experience to see the language grow over the 
 We hope this blog post shows that ReasonML is growing strong and that we are working hard to provide you with a language that has a strong type system, first-class ReactJS support and a custom-tailored compiler that compiles extremely fast to readable and efficient JavaScript.
 
 Happy hacking everyone!
-
-
-
-
-
-
-
-
-
