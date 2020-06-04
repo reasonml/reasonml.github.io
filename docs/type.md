@@ -76,7 +76,7 @@ let x: scoreType = 10;
 ```
 <!--Output-->
 ```js
-var score = 10;
+var x = 10;
 ```
 <!--END_DOCUSAURUS_CODE_TABS-->
 
