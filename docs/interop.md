@@ -127,7 +127,7 @@ type context;
 
 /* we're leaving these types abstract, because we won't
  * be using them directly anywhere */
-[@bs.send] external getContext : (canvas, string) => context = "getContext";
+[@bs.send] external getContext : (canvas, string) => context = "";
 
 let myCanvas: canvas = [%bs.raw {| document.getElementById("mycanvas") |}];
 
