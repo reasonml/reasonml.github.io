@@ -5,8 +5,8 @@ title: Records
 _Quick overview: [Records](overview.md#records)_
 
 Records are structures used for storing data in named fields. They are similar
-to objects or structs in other languages. Records are very performant and often
-faster than other language features like tuples.
+to objects or structs in other languages. Records are very performant and can be
+used in hot-paths.
 
 _Note: Record types are [nominal](https://en.wikipedia.org/wiki/Nominal_type_system). This has some important consequences
 that we will explore [later on](#nominal-typing)._
