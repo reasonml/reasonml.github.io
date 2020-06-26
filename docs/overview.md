@@ -148,6 +148,8 @@ String list                     | `let x: list(string) = ["Hello", "World"];`
 
 ## Records
 
+_Details: [Records](record.md)_
+
 Feature                         | Example
 --------------------------------|----------
 Record definition               | `type t = {foo: int, bar: string};`
