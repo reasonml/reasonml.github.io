@@ -13,7 +13,7 @@ that we will explore [later on](#nominal-typing)._
 
 ## Defining a Record
 
-In order to use a record it has to have a type declared ahead of time:
+In order to use a record, you must first declare a type for it:
 
 ```reason
 type person = {
@@ -23,7 +23,7 @@ type person = {
 ```
 
 From this point on the `person` record can be created and the correct type will
-be inferred, it does not have to be annotated:
+be inferred. It does not have to be annotated:
 
 ```reason
 let alice = {
@@ -42,8 +42,8 @@ print_endline("Hello " ++ alice.name);
 
 ## Updating Records & Spreading
 
-Record fields are **immutable** by default and cannot be changed. Typically to
-"update" a record you will start with some existing record and use the spread
+Record fields are **immutable** by default and cannot be changed. To "update" 
+a record, you will typically start with some existing record and use the spread
 syntax to update the desired set of fields:
 
 ```reason
@@ -70,9 +70,10 @@ let happyBirthday = (person) => {
 
 ## Nominal Typing
 
-Nominal typing means that only records that have exactly the same type are
-compatible with each other. Two different record types with the exact same
-fields cannot be used in place of one another.
+Records use nominal typing, which means that only records that have exactly
+the same type are compatible with each other. Two different record types with 
+the exact same fields cannot be used in place of one another. This behavior is 
+similar to classes in C++, Java, and Swift.
 
 This comes up most often when trying to spread one record that has a subset
 of fields into another record:
@@ -95,7 +96,7 @@ let hire = (baby: baby, job): adult => {
 };
 ```
 
-Instead the conversion has to happen manually and cover all fields:
+Instead, the conversion has to be done manually and cover all fields:
 
 ```reason
 let hire = (baby: baby, job): adult => {
@@ -111,7 +112,7 @@ let hire = (baby: baby, job): adult => {
 
 ### Shorthand Notation
 
-Very often fields of records are constructed using bindings with the exact
+Fields of records are often constructed using bindings with the exact
 same name. A shorthand notation can be used:
 
 ```reason
@@ -309,4 +310,4 @@ let fnPerson = (name): person => {
 
 This is an uncommon case because single-field records are uncommon. Typically
 instead of having a record type you would use the type of the single field
-directly (a notable exception is the `ref` record type).
+directly (a notable exception is the [`ref` record type](overview.md#refs)).
