@@ -17,3 +17,41 @@ We love simplicify, but a single all-powerful data structure that is the JS obje
 "But doesn't a Reason record compile to a JS object anyway"? Yes, but those records will trigger the JS engines' optimistic object optimizations, since they see that you never tried to e.g. add or remove record fields, iterate through the keys, etc., and therefore they'll never transform your those compiled JS objects into C++ hash maps or other slow data structures. Basically, Reason's type system enforced the disciplined usage of this data structure so that you can guarantee that it will never be accidentally slow.
 
 (And yes, we're aware that it's comical for a language feature to transform into a dynamic-looking JS object, then transformed again by the JS engines into a C++ struct, then end up where we started in the first place. Such is modern engineering.)
+
+
+## Block Scope Design Decisions
+
+Bindings can be scoped through `{}`.
+
+<!--DOCUSAURUS_CODE_TABS-->
+<!--Reason-->
+```reason
+let message = {
+  let part1 = "hello";
+  let part2 = "world";
+  part1 ++ " " ++ part2
+};
+/* `part1` and `part2` not accessible here! */
+```
+<!--Output-->
+```js
+var message = "hello world";
+```
+<!--END_DOCUSAURUS_CODE_TABS-->
+
+The value of the last line of a scope is implicitly returned.
+
+### Design Decisions
+
+Reason's `if`, `while` and functions all use the same block scoping. The code below works **not** because of some special "if scope"; but simply because it's the same scope syntax and feature you just saw:
+
+<!--DOCUSAURUS_CODE_TABS-->
+<!--Reason-->
+```reason
+if (displayGreeting) {
+  let message = "Enjoying the docs so far?";
+  Js.log(message)
+};
+/* `message` not accessible here! */
+```
+<!--END_DOCUSAURUS_CODE_TABS-->
