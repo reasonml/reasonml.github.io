@@ -42,7 +42,7 @@ print_endline("Hello " ++ alice.name);
 
 ## Updating Records & Spreading
 
-Record fields are **immutable** by default and cannot be changed. To "update" 
+Record fields are **immutable** by default and cannot be changed. To "update"
 a record, you will typically start with some existing record and use the spread
 syntax to update the desired set of fields:
 
@@ -71,9 +71,8 @@ let happyBirthday = (person) => {
 ## Nominal Typing
 
 Records use nominal typing, which means that only records that have exactly
-the same type are compatible with each other. Two different record types with 
-the exact same fields cannot be used in place of one another. This behavior is 
-similar to classes in C++, Java, and Swift.
+the same type are compatible with each other. Two different record types with
+the exact same fields cannot be used in place of one another.
 
 This comes up most often when trying to spread one record that has a subset
 of fields into another record:
