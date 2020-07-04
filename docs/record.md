@@ -152,7 +152,7 @@ Or by creating a builder function:
 let makePerson = (
   ~name="Unknown",
   ~age=0,
-  _: unit,
+  (),
 ) => {
   {name, age};
 };
