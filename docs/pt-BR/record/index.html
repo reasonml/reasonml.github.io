@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="pt-BR"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Record · Reason</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="Registros são como objetos JavaScript mas são"/><meta name="docsearch:language" content="pt-BR"/><meta property="og:title" content="Record · Reason"/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io/"/><meta property="og:description" content="Registros são como objetos JavaScript mas são"/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/icon_50.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io/blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io/blog/feed.xml" title="Reason Blog RSS Feed"/><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/pt-BR"><img class="logo" src="/img/dummy.svg" alt="Reason"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/pt-BR/what-and-why" target="_self">Docs</a></li><li class=""><a href="/pt-BR/try" target="_self">Try</a></li><li class=""><a href="/api/index" target="_self">API</a></li><li class=""><a href="/docs/pt-BR/community" target="_self">Community</a></li><li class=""><a href="/blog/" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg" alt="Languages icon"/>Português (Brasil)</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/docs/ja/record">日本語</a></li><li><a href="/docs/en/record">English</a></li><li><a href="/docs/de/record">Deutsch</a></li><li><a href="/docs/es-ES/record">Español</a></li><li><a href="/docs/fr/record">Français</a></li><li><a href="/docs/ko/record">한국어</a></li><li><a href="/docs/ru/record">Русский</a></li><li><a href="/docs/uk/record">Українська</a></li><li><a href="/docs/zh-CN/record">中文</a></li><li><a href="/docs/zh-TW/record">繁體中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank" rel="noreferrer noopener">Ajude a Traduzir</a></li></ul></div></li><script>
+<!DOCTYPE html><html lang="pt-BR"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Records · Reason</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="*Quick overview: [Records](/docs/pt-BR/overview#records)*"/><meta name="docsearch:language" content="pt-BR"/><meta property="og:title" content="Records · Reason"/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io/"/><meta property="og:description" content="*Quick overview: [Records](/docs/pt-BR/overview#records)*"/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/icon_50.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io/blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io/blog/feed.xml" title="Reason Blog RSS Feed"/><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/pt-BR"><img class="logo" src="/img/dummy.svg" alt="Reason"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/pt-BR/what-and-why" target="_self">Docs</a></li><li class=""><a href="/pt-BR/try" target="_self">Try</a></li><li class=""><a href="/api/index" target="_self">API</a></li><li class=""><a href="/docs/pt-BR/community" target="_self">Community</a></li><li class=""><a href="/blog/" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg" alt="Languages icon"/>Português (Brasil)</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/docs/ja/record">日本語</a></li><li><a href="/docs/en/record">English</a></li><li><a href="/docs/de/record">Deutsch</a></li><li><a href="/docs/es-ES/record">Español</a></li><li><a href="/docs/fr/record">Français</a></li><li><a href="/docs/ko/record">한국어</a></li><li><a href="/docs/ru/record">Русский</a></li><li><a href="/docs/uk/record">Українська</a></li><li><a href="/docs/zh-CN/record">中文</a></li><li><a href="/docs/zh-TW/record">繁體中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank" rel="noreferrer noopener">Ajude a Traduzir</a></li></ul></div></li><script>
         const languagesMenuItem = document.getElementById("languages-menu");
         const languagesDropDown = document.getElementById("languages-dropdown");
         languagesMenuItem.addEventListener("click", function(event) {
@@ -10,7 +10,7 @@
             languagesDropDown.className = "hide";
           }
         });
-      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/facebook/reason" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Language Basics</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Intro</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/pt-BR/what-and-why">O quê &amp; porquê</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Setup</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/pt-BR/installation">Instalação</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/editor-plugins">Editor Plugins</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/extra-goodies">Extra Goodies</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Language Basics</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/pt-BR/overview">Visão geral</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/let-binding">Let Binding</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/type">Type!</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/string-and-char">String &amp; Character</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/regular-expression">Regular Expression</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/boolean">Boleano</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/integer-and-float">Integer &amp; Float</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/tuple">Tuple</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/docs/pt-BR/record">Record</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/variant">Variant!</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/null-undefined-option">Null, Undefined &amp; Option</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/list-and-array">Lista e Array</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/function">Função</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/if-else">If-Else</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/pipe-first">Pipe First</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/more-on-type">More on Type</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/destructuring">Destructuring</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/pattern-matching">Pattern Matching!</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/mutation">Mutation</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/imperative-loops">Imperative Loops</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/jsx">JSX</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/external">External</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/exception">Exception</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/object">Object</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/module">Módulo</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/promise">Promise</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">JavaScript</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/pt-BR/interop">Interop</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/syntax-cheatsheet">Syntax Cheatsheet</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/libraries">Bibliotecas</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/converting-from-js">Converting from JS</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Native</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/pt-BR/native">Nativo</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/quickstart-ocaml">Native Quickstart</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Extra</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/pt-BR/faq">Frequently Asked Questions</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/newcomer-examples">Newcomer Examples</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/project-structure">Project Structure</a></li></ul></div></div></section></div><script>
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/facebook/reason" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Language Basics</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Intro</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/pt-BR/what-and-why">O quê &amp; porquê</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Setup</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/pt-BR/installation">Instalação</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/editor-plugins">Editor Plugins</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/extra-goodies">Extra Goodies</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Language Basics</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/pt-BR/overview">Visão geral</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/let-binding">Let Binding</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/type">Type!</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/string-and-char">String &amp; Character</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/regular-expression">Regular Expression</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/boolean">Boleano</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/integer-and-float">Integer &amp; Float</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/tuple">Tuple</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/docs/pt-BR/record">Records</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/variant">Variant!</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/null-undefined-option">Null, Undefined &amp; Option</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/list-and-array">Lista e Array</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/function">Função</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/if-else">If-Else</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/pipe-first">Pipe First</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/more-on-type">More on Type</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/destructuring">Destructuring</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/pattern-matching">Pattern Matching!</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/mutation">Mutation</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/imperative-loops">Imperative Loops</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/jsx">JSX</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/external">External</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/exception">Exception</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/object">Object</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/module">Módulo</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/promise">Promise</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">JavaScript</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/pt-BR/interop">Interop</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/syntax-cheatsheet">Syntax Cheatsheet</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/libraries">Bibliotecas</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/converting-from-js">Converting from JS</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Native</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/pt-BR/native">Nativo</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/quickstart-ocaml">Native Quickstart</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Extra</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/pt-BR/faq">Frequently Asked Questions</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/newcomer-examples">Newcomer Examples</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/project-structure">Project Structure</a></li></ul></div></div></section></div><script>
             var coll = document.getElementsByClassName('collapsible');
             var checkActiveCategory = true;
             for (var i = 0; i < coll.length; i++) {
@@ -66,79 +66,209 @@
                 };
               }
             });
-        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://crowdin.com/project/reason/pt-BR" target="_blank" rel="noreferrer noopener">Translate</a><h1 class="postHeaderTitle">Record</h1></header><article><div><span><p>Registros são como objetos JavaScript mas são</p>
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://crowdin.com/project/reason/pt-BR" target="_blank" rel="noreferrer noopener">Translate</a><h1 class="postHeaderTitle">Records</h1></header><article><div><span><p><em>Quick overview: <a href="/docs/pt-BR/overview#records">Records</a></em></p>
+<p>Records are structures used for storing data in named fields. They are similar to objects or structs in other languages. Records are very performant and can be used in hot code paths.</p>
+<p><em>Note: Record types are <a href="https://en.wikipedia.org/wiki/Nominal_type_system">nominal</a>. This has some important consequences that we will explore <a href="#nominal-typing">later on</a>.</em></p>
+<h2><a class="anchor" aria-hidden="true" id="defining-a-record"></a><a href="#defining-a-record" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Defining a Record</h2>
+<p>In order to use a record, you must first declare a type for it:</p>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> person = {
+  name: string,
+  age: int,
+};
+</code></pre>
+<p>From this point on the <code>person</code> record can be created and the correct type will be inferred. It does not have to be annotated:</p>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> alice = {
+  name: <span class="hljs-string">"Alice"</span>,
+  age: <span class="hljs-number">42</span>,
+};
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="accessing-fields"></a><a href="#accessing-fields" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Accessing Fields</h2>
+<p>Access fields on a record by using a <code>.</code> followed by the field name:</p>
+<pre><code class="hljs css language-reason">print_endline(<span class="hljs-string">"Hello "</span> <span class="hljs-operator">++</span> alice.name);
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="updating-records-spreading"></a><a href="#updating-records-spreading" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Updating Records &amp; Spreading</h2>
+<p>Record fields are <strong>immutable</strong> by default and cannot be changed. To &quot;update&quot; a record, you will typically start with some existing record and use the spread syntax to update the desired set of fields:</p>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> happyBirthday = (person) =&gt; {
+  {<span class="hljs-operator">...</span>person, age: person.age <span class="hljs-operator">+</span> <span class="hljs-number">1</span>};
+};
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="mutable-records"></a><a href="#mutable-records" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Mutable Records</h2>
+<p>Records do support mutable fields, and this is how <a href="/docs/pt-BR/overview#refs">Mutable Bindings</a> are implemented:</p>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> mutablePerson = {
+  name: string,
+  <span class="hljs-keyword">mutable</span> age: int,
+};
+
+<span class="hljs-keyword">let</span> happyBirthday = (person) =&gt; {
+  person.age = person.age <span class="hljs-operator">+</span> <span class="hljs-number">1</span>;
+};
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="nominal-typing"></a><a href="#nominal-typing" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Nominal Typing</h2>
+<p>Records use nominal typing, which means that only records that have exactly the same type are compatible with each other. Two different record types with the exact same fields cannot be used in place of one another.</p>
+<p>This comes up most often when trying to spread one record that has a subset of fields into another record:</p>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> baby = {
+  name: string,
+  age: int,
+};
+
+<span class="hljs-keyword">type</span> adult = {
+  name: string,
+  age: int,
+  job: string,
+};
+
+<span class="hljs-keyword">let</span> hire = (baby: baby, job): adult =&gt; {
+  <span class="hljs-comment">/* Error: Unexpected type */</span>
+  {<span class="hljs-operator">...</span>baby, job: job};
+};
+</code></pre>
+<p>Instead, the conversion has to be done manually and cover all fields:</p>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> hire = (baby: baby, job): adult =&gt; {
+  {
+    name: baby.name,
+    age: baby.age,
+    job: job,
+  };
+};
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="tips"></a><a href="#tips" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Tips</h2>
+<h3><a class="anchor" aria-hidden="true" id="shorthand-notation"></a><a href="#shorthand-notation" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Shorthand Notation</h3>
+<p>Fields of records are often constructed using bindings with the exact same name. A shorthand notation can be used:</p>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> name = <span class="hljs-string">"Alice"</span>;
+<span class="hljs-keyword">let</span> age = <span class="hljs-number">42</span>;
+
+<span class="hljs-comment">/* With shorthand */</span>
+<span class="hljs-keyword">let</span> alice = {name, age};
+
+<span class="hljs-comment">/* Without shorthand */</span>
+<span class="hljs-keyword">let</span> alice = {name: name, age: age};
+</code></pre>
+<p><em>Warning: There is a &quot;gotcha&quot; when working with only one field, see <a href="#single-field-records">Single Field Records</a> below.</em></p>
+<h3><a class="anchor" aria-hidden="true" id="providing-all-fields"></a><a href="#providing-all-fields" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Providing All Fields</h3>
+<p>When working with large records it can be annoying to provide all fields when there are sensible defaults. Two ways to work around this are by using a default record everywhere:</p>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> defaultPerson = {
+  name: <span class="hljs-string">"Unknown"</span>,
+  age: <span class="hljs-number">0</span>,
+};
+
+<span class="hljs-keyword">let</span> alice = {
+  <span class="hljs-operator">...</span>defaultPerson,
+  name: <span class="hljs-string">"Alice"</span>,
+};
+</code></pre>
+<p>Or by creating a builder function:</p>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> makePerson = (
+  ~name=<span class="hljs-string">"Unknown"</span>,
+  ~age=<span class="hljs-number">0</span>,
+  (),
+) =&gt; {
+  {name, age};
+};
+
+<span class="hljs-comment">/* The final unit is important. It lets the compiler know you're "done". */</span>
+<span class="hljs-keyword">let</span> alice = makePerson(~name=<span class="hljs-string">"Alice"</span>, ());
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="troubleshooting"></a><a href="#troubleshooting" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Troubleshooting</h2>
+<h3><a class="anchor" aria-hidden="true" id="add-an-explicit-annotation"></a><a href="#add-an-explicit-annotation" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Add an Explicit Annotation</h3>
+<p>There are quite a few different issues that can come up when using records and it can feel like you are fighting the type system. A general approach to figuring out what the type system wants you to do is to add explicit annotations and see if that fixes, moves, or changes the error.</p>
+<p>This approach can be used to fix or diagnose all of the following issues.</p>
+<h3><a class="anchor" aria-hidden="true" id="unbound-record-field"></a><a href="#unbound-record-field" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Unbound Record Field</h3>
+<p>The record type must be in scope to build records of that type; otherwise, there will be an &quot;Unbound Record Field&quot; error.</p>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">module</span> <span class="hljs-module-identifier">Person</span> = {
+  <span class="hljs-keyword">type</span> t = {
+    name: string,
+    age: int,
+  };
+};
+
+<span class="hljs-keyword">let</span> alice = {
+  <span class="hljs-comment">/* Error: Unbound record field */</span>
+  name: <span class="hljs-string">"Alice"</span>,
+  age: <span class="hljs-number">42</span>,
+};
+</code></pre>
+<p>Fix this by adding an explicit type:</p>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> alice: <span class="hljs-module-identifier">Person</span>.t = {
+  name: <span class="hljs-string">"Alice"</span>,
+  age: <span class="hljs-number">42</span>,
+};
+</code></pre>
+<p>Or by opening the module:</p>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">open</span> <span class="hljs-module-identifier">Person</span>;
+
+<span class="hljs-keyword">let</span> alice = {
+  name: <span class="hljs-string">"Alice"</span>,
+  age: <span class="hljs-number">42</span>,
+};
+</code></pre>
+<p>There is also an odd syntax that you might come across when working with records with the type out of scope. Fields can be referenced by <code>Module.field</code> instead of just <code>.field</code>. This is discouraged in favor of the prior approaches, but is something to be aware of:</p>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> alice = {
+  <span class="hljs-module-identifier">Person</span>.name: <span class="hljs-string">"Alice"</span>,
+  <span class="hljs-module-identifier">Person</span>.age: <span class="hljs-number">42</span>,
+};
+
+<span class="hljs-keyword">let</span> getName = (person) =&gt; {
+  person.<span class="hljs-module-identifier">Person</span>.name;
+};
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="disambiguating-record-types"></a><a href="#disambiguating-record-types" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Disambiguating Record Types</h3>
+<p>If records have any field names in common the type system can get confused. The type inference will pick one of the types that matches the first field it sees and use that as the type, even if later fields are incompatible.</p>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> person = {
+  age: int,
+  name: string,
+};
+
+<span class="hljs-keyword">type</span> wine = {
+  age: int,
+  kind: string,
+};
+
+<span class="hljs-keyword">let</span> happyBirthday = person =&gt; {
+  <span class="hljs-keyword">let</span> next = {<span class="hljs-operator">...</span>person, age: person.age <span class="hljs-operator">+</span> <span class="hljs-number">1</span>};
+  <span class="hljs-comment">/* Error: The field name does not belong to type wine */</span>
+  print_endline(<span class="hljs-string">"Happy Birthday "</span> <span class="hljs-operator">++</span> person.name);
+  next;
+};
+</code></pre>
+<p>Fix this by adding an explicit type:</p>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> happyBirthday = (person: person) =&gt; {
+  <span class="hljs-keyword">let</span> next = {<span class="hljs-operator">...</span>person, age: person.age <span class="hljs-operator">+</span> <span class="hljs-number">1</span>};
+  print_endline(<span class="hljs-string">"Happy Birthday "</span> <span class="hljs-operator">++</span> person.name);
+  next;
+};
+</code></pre>
+<p>Or, a less reliable fix is to reorder the usage of fields so an unambiguous field is seen first:</p>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> happyBirthday = (person: person) =&gt; {
+  print_endline(<span class="hljs-string">"Happy Birthday "</span> <span class="hljs-operator">++</span> person.name);
+  <span class="hljs-keyword">let</span> next = {<span class="hljs-operator">...</span>person, age: person.age <span class="hljs-operator">+</span> <span class="hljs-number">1</span>};
+  next;
+};
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="single-field-records"></a><a href="#single-field-records" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Single Field Records</h3>
+<p>There is an uncommon edge-case when using <a href="#shorthand-notation">Shorthand Notation</a> with records containing only one field. In the following example, taking into account shorthand notation, try to determine:</p>
 <ul>
-<li>mais leves</li>
-<li>imutáveis por padrão</li>
-<li>fixos em nomes e tipos</li>
-<li>muito rápidos</li>
-<li>uma tipagem um pouco mais rígida</li>
-<li>compiles to a JavaScript object still</li>
+<li>Does the function return a person with the name field set as name?</li>
+<li>Does the function return the name argument?</li>
 </ul>
-<p>Because record compiles to a straightforward JS object, you can directly model incoming JS objects as Reason records, <strong>no conversion functions needed</strong>. This is extremely convenient when interoperating with existing JS libraries, since most of them use objects in their APIs and you wouldn't need to wrap those with a layer of Reason APIs.</p>
-<h2><a class="anchor" aria-hidden="true" id="uso"></a><a href="#uso" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Uso</h2>
-<p>To make a record value, you have to first declare its type:</p>
-<div class="tabs"><div class="nav-tabs"><div id="tab-group-340-tab-341" class="nav-link active" data-group="group_340" data-tab="tab-group-340-content-341">Reason</div><div id="tab-group-340-tab-342" class="nav-link" data-group="group_340" data-tab="tab-group-340-content-342">Output</div></div><div class="tab-content"><div id="tab-group-340-content-341" class="tab-pane active" data-group="group_340" tabindex="-1"><div><span><pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> person = {<br />  age: int,<br />  name: string<br />};<br /></code></pre>
-</span></div></div><div id="tab-group-340-content-342" class="tab-pane" data-group="group_340" tabindex="-1"><div><span><pre><code class="hljs css language-js"><span class="hljs-comment">/* Nothing. Types disappear in the output */</span><br /></code></pre>
-</span></div></div></div></div>
-<p>To use it (this will be inferred to be of type <code>person</code>):</p>
-<div class="tabs"><div class="nav-tabs"><div id="tab-group-343-tab-344" class="nav-link active" data-group="group_343" data-tab="tab-group-343-content-344">Reason</div><div id="tab-group-343-tab-345" class="nav-link" data-group="group_343" data-tab="tab-group-343-content-345">Output</div></div><div class="tab-content"><div id="tab-group-343-content-344" class="tab-pane active" data-group="group_343" tabindex="-1"><div><span><pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> me = {<br />  age: <span class="hljs-number">5</span>,<br />  name: <span class="hljs-string">"Big Reason"</span><br />};<br /></code></pre>
-</span></div></div><div id="tab-group-343-content-345" class="tab-pane" data-group="group_343" tabindex="-1"><div><span><pre><code class="hljs css language-js"><span class="hljs-keyword">var</span> me = {<br />  <span class="hljs-attr">age</span>: <span class="hljs-number">5</span>,<br />  <span class="hljs-attr">name</span>: <span class="hljs-string">"Big Reason"</span><br />};<br /></code></pre>
-</span></div></div></div></div>
-<p>Access a field:</p>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> name = me.name;
-</code></pre>
-<h3><a class="anchor" aria-hidden="true" id="records-precisam-de-definicões-explicitas"></a><a href="#records-precisam-de-definicões-explicitas" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Records Precisam de Definições Explícitas</h3>
-<p>Record is one of the very few features in Reason where we mandate you to pre-declare its type before using it. For various performance and type checking reasons. In the above example, if you only write <code>let me = {age: 5, name: &quot;Baby Reason&quot;}</code> without an explicit type declaration somewhere above, the type system will give you an error. If the type definition resides in another file or module, you need to indicate it:</p>
-<pre><code class="hljs css language-reason"><span class="hljs-comment">/* file School.re */</span>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> person = {
+  name: string,
+};
 
-<span class="hljs-keyword">type</span> person = {age: int, name: string};
+<span class="hljs-keyword">let</span> fn = (name) =&gt; {
+  name
+};
 </code></pre>
-<div class="tabs"><div class="nav-tabs"><div id="tab-group-346-tab-347" class="nav-link active" data-group="group_346" data-tab="tab-group-346-content-347">Reason</div><div id="tab-group-346-tab-348" class="nav-link" data-group="group_346" data-tab="tab-group-346-content-348">Output</div></div><div class="tab-content"><div id="tab-group-346-content-347" class="tab-pane active" data-group="group_346" tabindex="-1"><div><span><pre><code class="hljs css language-reason"><span class="hljs-comment">/* file Example.re */</span><br /><br /><span class="hljs-keyword">let</span> me: <span class="hljs-module-identifier">School</span>.person = {age: <span class="hljs-number">5</span>, name: <span class="hljs-string">"Big Reason"</span>};<br /><span class="hljs-comment">/* or */</span><br /><span class="hljs-keyword">let</span> me = <span class="hljs-module-identifier">School</span>.{age: <span class="hljs-number">5</span>, name: <span class="hljs-string">"Big Reason"</span>};<br /><span class="hljs-comment">/* or */</span><br /><span class="hljs-keyword">let</span> me = {<span class="hljs-module-identifier">School</span>.age: <span class="hljs-number">5</span>, name: <span class="hljs-string">"Big Reason"</span>};<br /></code></pre>
-</span></div></div><div id="tab-group-346-content-348" class="tab-pane" data-group="group_346" tabindex="-1"><div><span><pre><code class="hljs css language-js"><span class="hljs-keyword">var</span> me = {<br />  <span class="hljs-attr">age</span>: <span class="hljs-number">5</span>,<br />  <span class="hljs-attr">name</span>: <span class="hljs-string">"Big Reason"</span><br />};<br /></code></pre>
-</span></div></div></div></div>
-<p>Either of the above 3 says &quot;this record's definition is found in the School file/module&quot;. The first one, the regular type annotation, is preferred.</p>
-<h3><a class="anchor" aria-hidden="true" id="atualizacões-imutaveis"></a><a href="#atualizacões-imutaveis" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Atualizações Imutáveis</h3>
-<p>New records can be created from old records with the <code>...</code> spread operator. The original record isn't mutated.</p>
-<div class="tabs"><div class="nav-tabs"><div id="tab-group-349-tab-350" class="nav-link active" data-group="group_349" data-tab="tab-group-349-content-350">Reason</div><div id="tab-group-349-tab-351" class="nav-link" data-group="group_349" data-tab="tab-group-349-content-351">Output</div></div><div class="tab-content"><div id="tab-group-349-content-350" class="tab-pane active" data-group="group_349" tabindex="-1"><div><span><pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> meNextYear = {<br />  <span class="hljs-operator">...</span>me,<br />  age: me.age <span class="hljs-operator">+</span> <span class="hljs-number">1</span><br />};<br /></code></pre>
-</span></div></div><div id="tab-group-349-content-351" class="tab-pane" data-group="group_349" tabindex="-1"><div><span><pre><code class="hljs css language-js"><span class="hljs-keyword">var</span> meNextYear = {<br />  <span class="hljs-attr">age</span>: me.age + <span class="hljs-number">1</span> | <span class="hljs-number">0</span>,<br />  <span class="hljs-attr">name</span>: <span class="hljs-string">"Big Reason"</span><br />};<br /></code></pre>
-</span></div></div></div></div>
-<p>This update is very efficient! <strong>Check the output tab</strong>. Because we know the whole type shape of the record you're updating, we can avoid the JavaScript way of iterating over all the object fields and stuffing them into a new one. Instead, a new record is directly created.</p>
-<p><strong>Note</strong>: spread cannot add new fields, as a record's shape is fixed by its type.</p>
-<h3><a class="anchor" aria-hidden="true" id="atualizacões-mutaveis"></a><a href="#atualizacões-mutaveis" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Atualizações Mutáveis</h3>
-<p>Record fields can optionally be mutable. This allows you to update those fields in-place with the <code>=</code> operator.</p>
-<div class="tabs"><div class="nav-tabs"><div id="tab-group-352-tab-353" class="nav-link active" data-group="group_352" data-tab="tab-group-352-content-353">Reason</div><div id="tab-group-352-tab-354" class="nav-link" data-group="group_352" data-tab="tab-group-352-content-354">Output</div></div><div class="tab-content"><div id="tab-group-352-content-353" class="tab-pane active" data-group="group_352" tabindex="-1"><div><span><pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> person = {<br />  name: string,<br />  <span class="hljs-keyword">mutable</span> age: int<br />};<br /><span class="hljs-keyword">let</span> baby = {name: <span class="hljs-string">"Baby Reason"</span>, age: <span class="hljs-number">5</span>};<br />baby.age = baby.age <span class="hljs-operator">+</span> <span class="hljs-number">1</span>; <span class="hljs-comment">/* alter `baby`. Happy birthday! */</span><br /></code></pre>
-</span></div></div><div id="tab-group-352-content-354" class="tab-pane" data-group="group_352" tabindex="-1"><div><span><pre><code class="hljs css language-js"><span class="hljs-keyword">var</span> baby = {<span class="hljs-attr">name</span>: <span class="hljs-string">"Baby Reason"</span>, <span class="hljs-attr">age</span>: <span class="hljs-number">5</span>};<br /><br />baby.age = baby.age + <span class="hljs-number">1</span> | <span class="hljs-number">0</span>;<br /></code></pre>
-</span></div></div></div></div>
-<h2><a class="anchor" aria-hidden="true" id="atalho-de-sintaxe"></a><a href="#atalho-de-sintaxe" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Atalho de sintaxe</h2>
-<p>To reduce redundancy, we provide <strong>punning</strong> for a record's types and values. Punning refers to the syntax shorthand you can use when the name of a field matches the name of its value/type:</p>
-<div class="tabs"><div class="nav-tabs"><div id="tab-group-355-tab-356" class="nav-link active" data-group="group_355" data-tab="tab-group-355-content-356">Reason</div><div id="tab-group-355-tab-357" class="nav-link" data-group="group_355" data-tab="tab-group-355-content-357">Output</div></div><div class="tab-content"><div id="tab-group-355-content-356" class="tab-pane active" data-group="group_355" tabindex="-1"><div><span><pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> horsePower = {power: int, metric: bool};<br /><br /><span class="hljs-keyword">let</span> metric = <span class="hljs-literal">true</span>;<br /><span class="hljs-keyword">let</span> someHorsePower = {power: <span class="hljs-number">10</span>, metric};<br /><span class="hljs-comment">/* same as the value {power: 10, metric: metric}; */</span><br /><br /><span class="hljs-keyword">type</span> car = {name: string, horsePower};<br /><span class="hljs-comment">/* same as the type {name: string, horsePower: horsePower}; */</span><br /></code></pre>
-</span></div></div><div id="tab-group-355-content-357" class="tab-pane" data-group="group_355" tabindex="-1"><div><span><pre><code class="hljs css language-js"><span class="hljs-keyword">var</span> metric = <span class="hljs-literal">true</span>;<br /><span class="hljs-keyword">var</span> someHorsePower = {<br />  <span class="hljs-attr">power</span>: <span class="hljs-number">10</span>,<br />  <span class="hljs-attr">metric</span>: <span class="hljs-literal">true</span><br />};<br /></code></pre>
-</span></div></div></div></div>
-<p><strong>Note that there's no punning for a single record field</strong>! <code>{foo}</code> doesn't do what you expect (it's a block that returns the value <code>foo</code>).</p>
-<h2><a class="anchor" aria-hidden="true" id="dicas-truques"></a><a href="#dicas-truques" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Dicas &amp; Truques</h2>
-<h3><a class="anchor" aria-hidden="true" id="record-types-are-found-by-field-name"></a><a href="#record-types-are-found-by-field-name" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Record Types Are Found By Field Name</h3>
-<p>With records, you <strong>cannot</strong> say &quot;I'd like this function to take any record type, as long as they have the field <code>age</code>&quot;. The following does <strong>not</strong> work as expected:</p>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> person = {age: int, name: string};
-<span class="hljs-keyword">type</span> monster = {age: int, hasTentacles: bool};
+<p>If single-field records are allowed to use shorthand notation this is ambiguous. That is not okay in a language! To avoid this ambiguity single-field records always have to have both field and value written:</p>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> fnName = (name): string =&gt; {
+  name
+};
 
-<span class="hljs-keyword">let</span> getAge = (entity) =&gt; entity.age;
+<span class="hljs-keyword">let</span> fnPerson = (name): person =&gt; {
+  name: name
+};
 </code></pre>
-<p>The last line's function will infer that the parameter <code>entity</code> must be of type <code>monster</code>. The following code's last line fails:</p>
-<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> kraken = {age: <span class="hljs-number">9999</span>, hasTentacles: <span class="hljs-literal">true</span>};
-<span class="hljs-keyword">let</span> me = {age: <span class="hljs-number">5</span>, name: <span class="hljs-string">"Baby Reason"</span>};
-
-getAge(kraken);
-getAge(me);
-</code></pre>
-<p>The type system will complain that <code>me</code> is a <code>person</code>, and that <code>getAge</code> only works on <code>monster</code>. If you need such capability, use Reason objects, described <a href="/docs/pt-BR/object">here</a>.</p>
-<h2><a class="anchor" aria-hidden="true" id="decisões-de-design"></a><a href="#decisões-de-design" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Decisões de Design</h2>
-<p>After reading the constraints in the previous sections, and if you're coming from a dynamic language background, you might be wondering why one would bother with record in the first place instead of imitating JS and use a catch-all object concept for everything.</p>
-<p>The reason is that JavaScript objects can be <em>really</em> slow. Some code might add fieds, remove fields, iterate over them, pass the keys themselves somewhere else, etc. The JS engines nowadays try to &quot;guess&quot; your object's usage patterns and sometime optimize that into a solid C++ struct, but some other time fail to do so and convert your overly dynamic object into a hash map, with a sudden &gt;100x performance degradation (imagine an object field access needing to hash the key and traverse the hashmap to find it).</p>
-<p>We love simplicify, but a single all-powerful data structure that is the JS object is a bit too naive. This is why Reason separates the above use-cases into record, and proper hashmap (documented later). This way, you get to leverage the consistently fast record experience, like in the above immutable update section. Field access is also guaranteed to be super fast.</p>
-<p>&quot;But doesn't a Reason record compile to a JS object anyway&quot;? Yes, but those records will trigger the JS engines' optimistic object optimizations, since they see that you never tried to e.g. add or remove record fields, iterate through the keys, etc., and therefore they'll never transform your those compiled JS objects into C++ hash maps or other slow data structures. Basically, Reason's type system enforced the disciplined usage of this data structure so that you can guarantee that it will never be accidentally slow.</p>
-<p>(And yes, we're aware that it's comical for a language feature to transform into a dynamic-looking JS object, then transformed again by the JS engines into a C++ struct, then end up where we started in the first place. Such is modern engineering.)</p>
-</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/pt-BR/tuple"><span class="arrow-prev">← </span><span>Tuple</span></a><a class="docs-next button" href="/docs/pt-BR/variant"><span>Variant!</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#uso">Uso</a><ul class="toc-headings"><li><a href="#records-precisam-de-definicões-explicitas">Records Precisam de Definições Explícitas</a></li><li><a href="#atualizacões-imutaveis">Atualizações Imutáveis</a></li><li><a href="#atualizacões-mutaveis">Atualizações Mutáveis</a></li></ul></li><li><a href="#atalho-de-sintaxe">Atalho de sintaxe</a></li><li><a href="#dicas-amp-truques">Dicas &amp; Truques</a><ul class="toc-headings"><li><a href="#record-types-are-found-by-field-name">Record Types Are Found By Field Name</a></li></ul></li><li><a href="#decisões-de-design">Decisões de Design</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+<p>This is an uncommon case because single-field records are uncommon. Typically instead of having a record type you would use the type of the single field directly (a notable exception is the <a href="/docs/pt-BR/overview#refs"><code>ref</code> record type</a>).</p>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/pt-BR/tuple"><span class="arrow-prev">← </span><span>Tuple</span></a><a class="docs-next button" href="/docs/pt-BR/variant"><span>Variant!</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#defining-a-record">Defining a Record</a></li><li><a href="#accessing-fields">Accessing Fields</a></li><li><a href="#updating-records-amp-spreading">Updating Records &amp; Spreading</a></li><li><a href="#mutable-records">Mutable Records</a></li><li><a href="#nominal-typing">Nominal Typing</a></li><li><a href="#tips">Tips</a><ul class="toc-headings"><li><a href="#shorthand-notation">Shorthand Notation</a></li><li><a href="#providing-all-fields">Providing All Fields</a></li></ul></li><li><a href="#troubleshooting">Troubleshooting</a><ul class="toc-headings"><li><a href="#add-an-explicit-annotation">Add an Explicit Annotation</a></li><li><a href="#unbound-record-field">Unbound Record Field</a></li><li><a href="#disambiguating-record-types">Disambiguating Record Types</a></li><li><a href="#single-field-records">Single Field Records</a></li></ul></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
                 document.addEventListener('keyup', function(e) {
                   if (e.target !== document.body) {
                     return;
