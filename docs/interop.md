@@ -26,6 +26,66 @@ Record                          | `type t = {b: int}; let a = {b: 10}` | `var a 
 Multiline Comment               | `/* Comment here */`                 | Not in output
 Single line Comment             | `// Comment here`                    | Not in output
 
+## Records
+
+_Details: [Records](record.md)_
+
+Records compiles to a straightforward JS object, you can directly model incoming JS objects as Reason records, **no conversion functions needed**. This is extremely convenient when interoperating with existing JS libraries, since most of them use objects in their APIs and you wouldn't need to wrap those with a layer of Reason APIs.
+
+<!--DOCUSAURUS_CODE_TABS-->
+<!--Reason-->
+```reason
+type person = {
+  age: int,
+  name: string
+};
+```
+<!--Output-->
+```js
+/* Nothing. Types disappear in the output */
+```
+<!--END_DOCUSAURUS_CODE_TABS-->
+
+To use it (this will be inferred to be of type `person`):
+
+<!--DOCUSAURUS_CODE_TABS-->
+<!--Reason-->
+```reason
+let me = {
+  age: 5,
+  name: "Big Reason"
+};
+```
+<!--Output-->
+```js
+var me = {
+  age: 5,
+  name: "Big Reason"
+};
+```
+<!--END_DOCUSAURUS_CODE_TABS-->
+
+New records can be created from old records with the `...` spread operator. The original record isn't mutated.
+
+<!--DOCUSAURUS_CODE_TABS-->
+<!--Reason-->
+```reason
+let meNextYear = {
+  ...me,
+  age: me.age + 1
+};
+```
+<!--Output-->
+```js
+var meNextYear = {
+  age: me.age + 1 | 0,
+  name: "Big Reason"
+};
+```
+<!--END_DOCUSAURUS_CODE_TABS-->
+
+This update is very efficient! **Check the output tab**. Because we know the whole type shape of the record you're updating, we can avoid the JavaScript way of iterating over all the object fields and stuffing them into a new one. Instead, a new record is directly created.
+
 ## Just dumping JavaScript in the middle of your Reason code
 
 If you're just hacking things together, this can be very nice, but you also have all of the unsafety of JavaScript code 😄.

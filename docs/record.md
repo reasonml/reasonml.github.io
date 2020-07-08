@@ -1,201 +1,312 @@
 ---
-title: Record
+title: Records
 ---
 
-Records are like JavaScript objects but are
+_Quick overview: [Records](overview.md#records)_
 
-- lighter
-- immutable by default
-- fixed in field names and types
-- very fast
-- a bit more rigidly typed
-- compiles to a JavaScript object still
+Records are structures used for storing data in named fields. They are similar
+to objects or structs in other languages. Records are very performant and can be
+used in hot code paths.
 
-Because record compiles to a straightforward JS object, you can directly model incoming JS objects as Reason records, **no conversion functions needed**. This is extremely convenient when interoperating with existing JS libraries, since most of them use objects in their APIs and you wouldn't need to wrap those with a layer of Reason APIs.
+_Note: Record types are [nominal](https://en.wikipedia.org/wiki/Nominal_type_system). This has some important consequences
+that we will explore [later on](#nominal-typing)._
 
-## Usage
+## Defining a Record
 
-To make a record value, you have to first declare its type:
+In order to use a record, you must first declare a type for it:
 
-<!--DOCUSAURUS_CODE_TABS-->
-<!--Reason-->
-```reason
-type person = {
-  age: int,
-  name: string
-};
-```
-<!--Output-->
-```js
-/* Nothing. Types disappear in the output */
-```
-<!--END_DOCUSAURUS_CODE_TABS-->
-
-To use it (this will be inferred to be of type `person`):
-
-<!--DOCUSAURUS_CODE_TABS-->
-<!--Reason-->
-```reason
-let me = {
-  age: 5,
-  name: "Big Reason"
-};
-```
-<!--Output-->
-```js
-var me = {
-  age: 5,
-  name: "Big Reason"
-};
-```
-<!--END_DOCUSAURUS_CODE_TABS-->
-
-Access a field:
-
-```reason
-let name = me.name;
-```
-
-### Record Needs an Explicit Definition
-
-Record is one of the very few features in Reason where we mandate you to pre-declare its type before using it. For various performance and type checking reasons. In the above example, if you only write `let me = {age: 5, name: "Baby Reason"}` without an explicit type declaration somewhere above, the type system will give you an error. If the type definition resides in another file or module, you need to indicate it:
-
-```reason
-/* file School.re */
-
-type person = {age: int, name: string};
-```
-
-<!--DOCUSAURUS_CODE_TABS-->
-<!--Reason-->
-```reason
-/* file Example.re */
-
-let me: School.person = {age: 5, name: "Big Reason"};
-/* or */
-let me = School.{age: 5, name: "Big Reason"};
-/* or */
-let me = {School.age: 5, name: "Big Reason"};
-```
-<!--Output-->
-```js
-var me = {
-  age: 5,
-  name: "Big Reason"
-};
-```
-<!--END_DOCUSAURUS_CODE_TABS-->
-
-Either of the above 3 says "this record's definition is found in the School file/module". The first one, the regular type annotation, is preferred.
-
-### Immutable Update
-
-New records can be created from old records with the `...` spread operator. The original record isn't mutated.
-
-<!--DOCUSAURUS_CODE_TABS-->
-<!--Reason-->
-```reason
-let meNextYear = {
-  ...me,
-  age: me.age + 1
-};
-```
-<!--Output-->
-```js
-var meNextYear = {
-  age: me.age + 1 | 0,
-  name: "Big Reason"
-};
-```
-<!--END_DOCUSAURUS_CODE_TABS-->
-
-This update is very efficient! **Check the output tab**. Because we know the whole type shape of the record you're updating, we can avoid the JavaScript way of iterating over all the object fields and stuffing them into a new one. Instead, a new record is directly created.
-
-**Note**: spread cannot add new fields, as a record's shape is fixed by its type.
-
-### Mutable Update
-
-Record fields can optionally be mutable. This allows you to update those fields in-place with the `=` operator.
-
-<!--DOCUSAURUS_CODE_TABS-->
-<!--Reason-->
 ```reason
 type person = {
   name: string,
-  mutable age: int
-};
-let baby = {name: "Baby Reason", age: 5};
-baby.age = baby.age + 1; /* alter `baby`. Happy birthday! */
-```
-<!--Output-->
-```js
-var baby = {name: "Baby Reason", age: 5};
-
-baby.age = baby.age + 1 | 0;
-```
-<!--END_DOCUSAURUS_CODE_TABS-->
-
-## Syntax shorthand
-
-To reduce redundancy, we provide **punning** for a record's types and values. Punning refers to the syntax shorthand you can use when the name of a field matches the name of its value/type:
-
-<!--DOCUSAURUS_CODE_TABS-->
-<!--Reason-->
-```reason
-type horsePower = {power: int, metric: bool};
-
-let metric = true;
-let someHorsePower = {power: 10, metric};
-/* same as the value {power: 10, metric: metric}; */
-
-type car = {name: string, horsePower};
-/* same as the type {name: string, horsePower: horsePower}; */
-```
-<!--Output-->
-```js
-var metric = true;
-var someHorsePower = {
-  power: 10,
-  metric: true
+  age: int,
 };
 ```
-<!--END_DOCUSAURUS_CODE_TABS-->
 
-**Note that there's no punning for a single record field**! `{foo}` doesn't do what you expect (it's a block that returns the value `foo`).
-
-## Tips & Tricks
-
-### Record Types Are Found By Field Name
-
-With records, you **cannot** say "I'd like this function to take any record type, as long as they have the field `age`". The following does **not** work as expected:
+From this point on the `person` record can be created and the correct type will
+be inferred. It does not have to be annotated:
 
 ```reason
-type person = {age: int, name: string};
-type monster = {age: int, hasTentacles: bool};
-
-let getAge = (entity) => entity.age;
+let alice = {
+  name: "Alice",
+  age: 42,
+};
 ```
 
-The last line's function will infer that the parameter `entity` must be of type `monster`. The following code's last line fails:
+## Accessing Fields
+
+Access fields on a record by using a `.` followed by the field name:
 
 ```reason
-let kraken = {age: 9999, hasTentacles: true};
-let me = {age: 5, name: "Baby Reason"};
-
-getAge(kraken);
-getAge(me);
+print_endline("Hello " ++ alice.name);
 ```
 
-The type system will complain that `me` is a `person`, and that `getAge` only works on `monster`. If you need such capability, use Reason objects, described [here](object.md).
+## Updating Records & Spreading
 
-## Design Decisions
+Record fields are **immutable** by default and cannot be changed. To "update"
+a record, you will typically start with some existing record and use the spread
+syntax to update the desired set of fields:
 
-After reading the constraints in the previous sections, and if you're coming from a dynamic language background, you might be wondering why one would bother with record in the first place instead of imitating JS and use a catch-all object concept for everything.
+```reason
+let happyBirthday = (person) => {
+  {...person, age: person.age + 1};
+};
+```
 
-The reason is that JavaScript objects can be _really_ slow. Some code might add fieds, remove fields, iterate over them, pass the keys themselves somewhere else, etc. The JS engines nowadays try to "guess" your object's usage patterns and sometime optimize that into a solid C++ struct, but some other time fail to do so and convert your overly dynamic object into a hash map, with a sudden >100x performance degradation (imagine an object field access needing to hash the key and traverse the hashmap to find it).
+## Mutable Records
 
-We love simplicify, but a single all-powerful data structure that is the JS object is a bit too naive. This is why Reason separates the above use-cases into record, and proper hashmap (documented later). This way, you get to leverage the consistently fast record experience, like in the above immutable update section. Field access is also guaranteed to be super fast.
+Records do support mutable fields, and this is how [Mutable Bindings](overview.md#refs)
+are implemented:
 
-"But doesn't a Reason record compile to a JS object anyway"? Yes, but those records will trigger the JS engines' optimistic object optimizations, since they see that you never tried to e.g. add or remove record fields, iterate through the keys, etc., and therefore they'll never transform your those compiled JS objects into C++ hash maps or other slow data structures. Basically, Reason's type system enforced the disciplined usage of this data structure so that you can guarantee that it will never be accidentally slow.
+```reason
+type mutablePerson = {
+  name: string,
+  mutable age: int,
+};
 
-(And yes, we're aware that it's comical for a language feature to transform into a dynamic-looking JS object, then transformed again by the JS engines into a C++ struct, then end up where we started in the first place. Such is modern engineering.)
+let happyBirthday = (person) => {
+  person.age = person.age + 1;
+};
+```
+
+## Nominal Typing
+
+Records use nominal typing, which means that only records that have exactly
+the same type are compatible with each other. Two different record types with
+the exact same fields cannot be used in place of one another.
+
+This comes up most often when trying to spread one record that has a subset
+of fields into another record:
+
+```reason
+type baby = {
+  name: string,
+  age: int,
+};
+
+type adult = {
+  name: string,
+  age: int,
+  job: string,
+};
+
+let hire = (baby: baby, job): adult => {
+  /* Error: Unexpected type */
+  {...baby, job: job};
+};
+```
+
+Instead, the conversion has to be done manually and cover all fields:
+
+```reason
+let hire = (baby: baby, job): adult => {
+  {
+    name: baby.name,
+    age: baby.age,
+    job: job,
+  };
+};
+```
+
+## Tips
+
+### Shorthand Notation
+
+Fields of records are often constructed using bindings with the exact
+same name. A shorthand notation can be used:
+
+```reason
+let name = "Alice";
+let age = 42;
+
+/* With shorthand */
+let alice = {name, age};
+
+/* Without shorthand */
+let alice = {name: name, age: age};
+```
+
+_Warning: There is a "gotcha" when working with only one field, see
+[Single Field Records](#single-field-records) below._
+
+### Providing All Fields
+
+When working with large records it can be annoying to provide all fields when
+there are sensible defaults. Two ways to work around this are by using a default
+record everywhere:
+
+```reason
+let defaultPerson = {
+  name: "Unknown",
+  age: 0,
+};
+
+let alice = {
+  ...defaultPerson,
+  name: "Alice",
+};
+```
+
+Or by creating a builder function:
+
+```reason
+let makePerson = (
+  ~name="Unknown",
+  ~age=0,
+  (),
+) => {
+  {name, age};
+};
+
+/* The final unit is important. It lets the compiler know you're "done". */
+let alice = makePerson(~name="Alice", ());
+```
+
+## Troubleshooting
+
+### Add an Explicit Annotation
+
+There are quite a few different issues that can come up when using records and
+it can feel like you are fighting the type system. A general approach to
+figuring out what the type system wants you to do is to add explicit annotations
+and see if that fixes, moves, or changes the error.
+
+This approach can be used to fix or diagnose all of the following issues.
+
+### Unbound Record Field
+
+The record type must be in scope to build records of that type; otherwise, there
+will be an "Unbound Record Field" error.
+
+```reason
+module Person = {
+  type t = {
+    name: string,
+    age: int,
+  };
+};
+
+let alice = {
+  /* Error: Unbound record field */
+  name: "Alice",
+  age: 42,
+};
+```
+
+Fix this by adding an explicit type:
+
+```reason
+let alice: Person.t = {
+  name: "Alice",
+  age: 42,
+};
+```
+
+Or by opening the module:
+
+```reason
+open Person;
+
+let alice = {
+  name: "Alice",
+  age: 42,
+};
+```
+
+There is also an odd syntax that you might come across when working with records
+with the type out of scope. Fields can be referenced by `Module.field` instead
+of just `.field`. This is discouraged in favor of the prior approaches, but is
+something to be aware of:
+
+```reason
+let alice = {
+  Person.name: "Alice",
+  Person.age: 42,
+};
+
+let getName = (person) => {
+  person.Person.name;
+};
+```
+
+### Disambiguating Record Types
+
+If records have any field names in common the type system can get confused. The
+type inference will pick one of the types that matches the first field it sees
+and use that as the type, even if later fields are incompatible.
+
+```reason
+type person = {
+  age: int,
+  name: string,
+};
+
+type wine = {
+  age: int,
+  kind: string,
+};
+
+let happyBirthday = person => {
+  let next = {...person, age: person.age + 1};
+  /* Error: The field name does not belong to type wine */
+  print_endline("Happy Birthday " ++ person.name);
+  next;
+};
+```
+
+Fix this by adding an explicit type:
+
+```reason
+let happyBirthday = (person: person) => {
+  let next = {...person, age: person.age + 1};
+  print_endline("Happy Birthday " ++ person.name);
+  next;
+};
+```
+
+Or, a less reliable fix is to reorder the usage of fields so an unambiguous
+field is seen first:
+
+```reason
+let happyBirthday = (person: person) => {
+  print_endline("Happy Birthday " ++ person.name);
+  let next = {...person, age: person.age + 1};
+  next;
+};
+```
+
+### Single Field Records
+
+There is an uncommon edge-case when using [Shorthand Notation](#shorthand-notation)
+with records containing only one field. In the following example, taking into
+account shorthand notation, try to determine:
+
+- Does the function return a person with the name field set as name?
+- Does the function return the name argument?
+
+```reason
+type person = {
+  name: string,
+};
+
+let fn = (name) => {
+  name
+};
+```
+
+If single-field records are allowed to use shorthand notation this is ambiguous.
+That is not okay in a language! To avoid this ambiguity single-field records
+always have to have both field and value written:
+
+```reason
+let fnName = (name): string => {
+  name
+};
+
+let fnPerson = (name): person => {
+  name: name
+};
+```
+
+This is an uncommon case because single-field records are uncommon. Typically
+instead of having a record type you would use the type of the single field
+directly (a notable exception is the [`ref` record type](overview.md#refs)).
