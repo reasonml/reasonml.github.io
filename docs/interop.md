@@ -26,6 +26,27 @@ Record                          | `type t = {b: int}; let a = {b: 10}` | `var a 
 Multiline Comment               | `/* Comment here */`                 | Not in output
 Single line Comment             | `// Comment here`                    | Not in output
 
+## Let Bindings
+
+_Details: [Let Bindings](let-binding.md)_
+
+A let binding transforms into a regular JavaScript variable declaration. As much as possible, we preserve the same name after transformation, for easier debugging and communication with JavaScript libraries.
+
+<!--DOCUSAURUS_CODE_TABS-->
+<!--Reason-->
+```reason
+let greeting = "hello!";
+let score = 10;
+let newScore = 10 + score;
+```
+<!--Output-->
+```js
+var greeting = "hello!";
+var score = 10;
+var newScore = 20;
+```
+<!--END_DOCUSAURUS_CODE_TABS-->
+
 ## Records
 
 _Details: [Records](record.md)_
