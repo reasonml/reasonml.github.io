@@ -267,7 +267,7 @@ Or, a less reliable fix is to reorder the usage of fields so an unambiguous
 field is seen first:
 
 ```reason
-let happyBirthday = (person: person) => {
+let happyBirthday = (person) => {
   print_endline("Happy Birthday " ++ person.name);
   let next = {...person, age: person.age + 1};
   next;
