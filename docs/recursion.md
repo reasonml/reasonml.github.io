@@ -99,7 +99,7 @@ Sometimes functions will be organized across modules and both modules need
 functions from each other. Use the `module rec` and `and` keywords for this
 kind of mutual recursion.
 
-Note: Recursive modules require an explicit module type annotation.
+_Note: Recursive modules require an explicit module type annotation._
 
 ```reason
 module type X = {
