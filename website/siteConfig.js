@@ -358,6 +358,11 @@ const siteConfig = {
     primaryColor: "#db4d3f",
     // darkened 10%
     secondaryColor: "#C23426",
+    bodyTextColor: "#444",
+    codeBgColor: "#f7f7f7",
+    tableRowColor: "#f7f7f7",
+    codeBoxVisualSpacing: "20px",
+    inactiveCodeTabBgColor: "#fcfcfc"
   },
   // for the api page
   wrapPagesHTML: true,

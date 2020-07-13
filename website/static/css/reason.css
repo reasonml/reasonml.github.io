@@ -22,18 +22,18 @@
     themselves are aligned with the rest of the page's paragraphs' starting
     point
    */
-  margin-left: -15px;
-  margin-right: -15px;
+  margin-left: -$codeBoxVisualSpacing;
+  margin-right: -$codeBoxVisualSpacing;
   border: 1px solid #eee;
   /* top left corner joins the code tab bar's bottom left corner (styles below). No rounded border here */
-  border-radius: 0px 6px 6px 6px;
-  padding: 15px;
+  border-radius: 2px 2px 2px 2px;
+  padding: $codeBoxVisualSpacing;
   font-size: 15px;
 }
 .nav-tabs {
   /* same as above */
-  margin-left: -15px;
-  margin-right: -15px;
+  margin-left: -$codeBoxVisualSpacing;
+  margin-right: -$codeBoxVisualSpacing;
   /* collapse the shared borders of tab and code area into a single 1px border */
   margin-bottom: -1px;
   /* override docusaurus' default code tab's bottom bar */
@@ -44,22 +44,26 @@
   border-top: none;
 }
 .tabs .nav-tabs > div {
-  border: 1px solid #eee;
-  background-color: #fafafa;
-  padding-top: 8px;
-  padding-bottom: 8px;
+  min-width: 50px;
+  font-size: 14px;
+  border: 1px solid $codeBgColor;
+  color: #aaa;
+  background-color: $inactiveCodeTabBgColor;
+  padding-top: 6px;
+  padding-bottom: 6px;
   /* collapse neighbor tabs vertical borders into a single 1px border */
   margin-left: -1px;
 }
 .tabs .nav-tabs > div:first-child {
-  border-top-left-radius: 6px;
+  border-top-left-radius: 0px;
   margin-left: 0px;
 }
 .tabs .nav-tabs > div:last-child {
-  border-top-right-radius: 6px;
+  border-top-right-radius: 0px;
 }
 .tabs .nav-tabs > div.active {
-  background-color: #eee;
+  color: #555;
+  background-color: $codeBgColor;
   /* override docusaurus' default code tab's bottom highlight */
   border-bottom: none;
 }
