@@ -8,11 +8,15 @@ on the left for additional details about each feature.
 
 ## Let Bindings
 
+_Details: [Let Bindings](let-binding.md)_
+
 Feature                         | Example
 --------------------------------|----------
 String value                    | `let hi = "Hello World";`
 Int value                       | `let count = 42;`
 Type annotation on binding      | `let count: int = 42;`
+
+- Note: Let bindings are immutable and cannot change once created.
 
 ## Built In Types
 
@@ -224,8 +228,10 @@ Unit as only argument           | `let fn = () => 1; fn();`
 
 ## Refs
 
-Refs are a way to have a mutable "variable" in your program. It is a thin wrapper
-around a record with a mutable field called `contents`.
+_Details: [Mutable Bindings](mutable-bindings.md)_
+
+Refs allow mutable "variables" in your program. They are a thin wrapper around
+a record with a mutable field called `contents`.
 
 Feature                         | Example
 --------------------------------|----------
