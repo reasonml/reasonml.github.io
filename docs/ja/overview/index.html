@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="ja"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>概要 · Reason</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="This is an overview of most language features in Reason. It does not explain them in detail, but should serve as a quick reference. Please see the guides on the left for additional details about each feature."/><meta name="docsearch:language" content="ja"/><meta property="og:title" content="概要 · Reason"/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io/"/><meta property="og:description" content="This is an overview of most language features in Reason. It does not explain them in detail, but should serve as a quick reference. Please see the guides on the left for additional details about each feature."/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/icon_50.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io/blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io/blog/feed.xml" title="Reason Blog RSS Feed"/><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/ja"><img class="logo" src="/img/dummy.svg" alt="Reason"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/ja/what-and-why" target="_self">ドキュメント</a></li><li class=""><a href="/ja/try" target="_self">試してみる</a></li><li class=""><a href="/api/index" target="_self">API</a></li><li class=""><a href="/docs/ja/community" target="_self">コミュニティ</a></li><li class=""><a href="/blog/" target="_self">ブログ</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg" alt="Languages icon"/>日本語</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/docs/en/overview">English</a></li><li><a href="/docs/de/overview">Deutsch</a></li><li><a href="/docs/es-ES/overview">Español</a></li><li><a href="/docs/fr/overview">Français</a></li><li><a href="/docs/ko/overview">한국어</a></li><li><a href="/docs/pt-BR/overview">Português (Brasil)</a></li><li><a href="/docs/ru/overview">Русский</a></li><li><a href="/docs/uk/overview">Українська</a></li><li><a href="/docs/zh-CN/overview">中文</a></li><li><a href="/docs/zh-TW/overview">繁體中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank" rel="noreferrer noopener">翻訳を助ける</a></li></ul></div></li><script>
+<!DOCTYPE html><html lang="ja"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>概要 · Reason</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="この記事では Reason がもつ言語機能のほとんど全てを紹介していきます。 言語機能の詳細な説明ではなく、クイックリファレンスとして機能するようになっています。 各機能の詳細な説明は、左側のガイドをご覧ください。"/><meta name="docsearch:language" content="ja"/><meta property="og:title" content="概要 · Reason"/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io/"/><meta property="og:description" content="この記事では Reason がもつ言語機能のほとんど全てを紹介していきます。 言語機能の詳細な説明ではなく、クイックリファレンスとして機能するようになっています。 各機能の詳細な説明は、左側のガイドをご覧ください。"/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/icon_50.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io/blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io/blog/feed.xml" title="Reason Blog RSS Feed"/><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/ja"><img class="logo" src="/img/dummy.svg" alt="Reason"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/ja/what-and-why" target="_self">ドキュメント</a></li><li class=""><a href="/ja/try" target="_self">試してみる</a></li><li class=""><a href="/api/index" target="_self">API</a></li><li class=""><a href="/docs/ja/community" target="_self">コミュニティ</a></li><li class=""><a href="/blog/" target="_self">ブログ</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg" alt="Languages icon"/>日本語</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/docs/en/overview">English</a></li><li><a href="/docs/de/overview">Deutsch</a></li><li><a href="/docs/es-ES/overview">Español</a></li><li><a href="/docs/fr/overview">Français</a></li><li><a href="/docs/ko/overview">한국어</a></li><li><a href="/docs/pt-BR/overview">Português (Brasil)</a></li><li><a href="/docs/ru/overview">Русский</a></li><li><a href="/docs/uk/overview">Українська</a></li><li><a href="/docs/zh-CN/overview">中文</a></li><li><a href="/docs/zh-TW/overview">繁體中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank" rel="noreferrer noopener">翻訳を助ける</a></li></ul></div></li><script>
         const languagesMenuItem = document.getElementById("languages-menu");
         const languagesDropDown = document.getElementById("languages-dropdown");
         languagesMenuItem.addEventListener("click", function(event) {
@@ -66,138 +66,138 @@
                 };
               }
             });
-        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://crowdin.com/project/reason/ja" target="_blank" rel="noreferrer noopener">Translate</a><h1 class="postHeaderTitle">概要</h1></header><article><div><span><p>This is an overview of most language features in Reason. It does not explain them in detail, but should serve as a quick reference. Please see the guides on the left for additional details about each feature.</p>
-<h2><a class="anchor" aria-hidden="true" id="let-bindings"></a><a href="#let-bindings" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Let Bindings</h2>
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://crowdin.com/project/reason/ja" target="_blank" rel="noreferrer noopener">Translate</a><h1 class="postHeaderTitle">概要</h1></header><article><div><span><p>この記事では Reason がもつ言語機能のほとんど全てを紹介していきます。 言語機能の詳細な説明ではなく、クイックリファレンスとして機能するようになっています。 各機能の詳細な説明は、左側のガイドをご覧ください。</p>
+<h2><a class="anchor" aria-hidden="true" id="let-変数束縛"></a><a href="#let-変数束縛" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Let 変数束縛</h2>
 <table>
 <thead>
-<tr><th>Feature</th><th>例</th></tr>
+<tr><th>機能</th><th>例</th></tr>
 </thead>
 <tbody>
-<tr><td>String value</td><td><code>let hi = &quot;Hello World&quot;;</code></td></tr>
-<tr><td>Int value</td><td><code>let count = 42;</code></td></tr>
-<tr><td>Type annotation on binding</td><td><code>let count: int = 42;</code></td></tr>
+<tr><td>文字列</td><td><code>let hi = &quot;Hello World&quot;;</code></td></tr>
+<tr><td>整数値</td><td><code>let count = 42;</code></td></tr>
+<tr><td>型註釈付きでの束縛</td><td><code>let count: int = 42;</code></td></tr>
 </tbody>
 </table>
-<h2><a class="anchor" aria-hidden="true" id="built-in-types"></a><a href="#built-in-types" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Built In Types</h2>
+<h2><a class="anchor" aria-hidden="true" id="組み込み型"></a><a href="#組み込み型" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>組み込み型</h2>
 <table>
 <thead>
-<tr><th>Feature</th><th>Example</th></tr>
+<tr><th>機能</th><th>Example</th></tr>
 </thead>
 <tbody>
-<tr><td>Int</td><td><code>let x: int = 10;</code></td></tr>
-<tr><td>Float</td><td><code>let x: float = 10.0;</code></td></tr>
-<tr><td>Boolean</td><td><code>let x: bool = false;</code></td></tr>
-<tr><td>String</td><td><code>let x: string = &quot;ten&quot;;</code></td></tr>
-<tr><td>Char</td><td><code>let x: char = 'c';</code></td></tr>
+<tr><td>整数型</td><td><code>let x: int = 10;</code></td></tr>
+<tr><td>浮動小数点数型</td><td><code>let x: float = 10.0;</code></td></tr>
+<tr><td>真偽値型</td><td><code>let x: bool = false;</code></td></tr>
+<tr><td>文字列型</td><td><code>let x: string = &quot;ten&quot;;</code></td></tr>
+<tr><td>文字型</td><td><code>let x: char = 'c';</code></td></tr>
 <tr><td>Unit</td><td><code>let x: unit = ();</code></td></tr>
 <tr><td>Option</td><td><code>let x: option(int) = Some(10);</code></td></tr>
-<tr><td>Tuple</td><td><code>let x: (int, string) = (10, &quot;ten&quot;);</code></td></tr>
-<tr><td>List</td><td><code>let x: list(int) = [1, 2, 3];</code></td></tr>
-<tr><td>Array</td><td><code>let x: array(int) = [&amp;#124;1, 2, 3&amp;#124;];</code></td></tr>
-<tr><td>Functions</td><td><code>let x: (int, int) =&gt; int = (a, b) =&gt; a + b;</code></td></tr>
+<tr><td>タプル型</td><td><code>let x: (int, string) = (10, &quot;ten&quot;);</code></td></tr>
+<tr><td>リスト型</td><td><code>let x: list(int) = [1, 2, 3];</code></td></tr>
+<tr><td>配列型</td><td><code>let x: array(int) = [&amp;#124;1, 2, 3&amp;#124;];</code></td></tr>
+<tr><td>関数型</td><td><code>let x: (int, int) =&gt; int = (a, b) =&gt; a + b;</code></td></tr>
 </tbody>
 </table>
-<h2><a class="anchor" aria-hidden="true" id="strings"></a><a href="#strings" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Strings</h2>
+<h2><a class="anchor" aria-hidden="true" id="文字列"></a><a href="#文字列" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>文字列</h2>
 <table>
 <thead>
-<tr><th>Feature</th><th>Example</th></tr>
+<tr><th>機能</th><th>例</th></tr>
 </thead>
 <tbody>
-<tr><td>String</td><td><code>&quot;Hello&quot;</code></td></tr>
-<tr><td>String concatenation</td><td><code>&quot;Hello &quot; ++ &quot;World&quot;</code></td></tr>
-<tr><td>Character</td><td><code>'x'</code></td></tr>
+<tr><td>文字列</td><td><code>&quot;Hello&quot;</code></td></tr>
+<tr><td>文字列の連結</td><td><code>&quot;Hello &quot; ++ &quot;World&quot;</code></td></tr>
+<tr><td>文字</td><td><code>'x'</code></td></tr>
 <tr><td>Character at index</td><td><code>let x = &quot;Hello&quot;; x.[2];</code></td></tr>
 </tbody>
 </table>
 <ul>
 <li>String Functions: <a href="https://reasonml.github.io/api/String.html"><code>module String</code></a></li>
 </ul>
-<h2><a class="anchor" aria-hidden="true" id="numbers"></a><a href="#numbers" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Numbers</h2>
+<h2><a class="anchor" aria-hidden="true" id="数値"></a><a href="#数値" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>数値</h2>
 <table>
 <thead>
-<tr><th>Feature</th><th>Example</th></tr>
+<tr><th>機能</th><th>例</th></tr>
 </thead>
 <tbody>
-<tr><td>Integer</td><td><code>23</code>, <code>-23</code></td></tr>
-<tr><td>Integer operations</td><td><code>23 + 1 - 7 * 2 / 5</code></td></tr>
-<tr><td>Integer modulo</td><td><code>13 mod 2</code></td></tr>
-<tr><td>Float</td><td><code>23.0</code>, <code>-23.0</code></td></tr>
-<tr><td>Float operations</td><td><code>23.0 +. 1.0 -. 7.0 *. 2.0 /. 5.0</code></td></tr>
-<tr><td>Float exponentiation</td><td><code>2.0 ** 3.0</code></td></tr>
+<tr><td>整数</td><td><code>23</code>, <code>-23</code></td></tr>
+<tr><td>整数の演算</td><td><code>23 + 1 - 7 * 2 / 5</code></td></tr>
+<tr><td>整数の剰余演算</td><td><code>13 mod 2</code></td></tr>
+<tr><td>浮動小数点数</td><td><code>23.0</code>, <code>-23.0</code></td></tr>
+<tr><td>浮動小数点数の四則演算</td><td><code>23.0 +. 1.0 -. 7.0 *. 2.0 /. 5.0</code></td></tr>
+<tr><td>浮動小数点数の累乗</td><td><code>2.0 ** 3.0</code></td></tr>
 </tbody>
 </table>
-<h2><a class="anchor" aria-hidden="true" id="boolean-values-and-logical-operations"></a><a href="#boolean-values-and-logical-operations" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Boolean Values And Logical Operations</h2>
+<h2><a class="anchor" aria-hidden="true" id="真偽値と論理演算"></a><a href="#真偽値と論理演算" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>真偽値と論理演算</h2>
 <table>
 <thead>
-<tr><th>Feature</th><th>Example</th></tr>
+<tr><th>機能</th><th>例</th></tr>
 </thead>
 <tbody>
-<tr><td>Boolean Values</td><td><code>true</code>, <code>false</code></td></tr>
-<tr><td>Comparison</td><td><code>&gt;</code>, <code>&lt;</code>, <code>&gt;=</code>, <code>&lt;=</code></td></tr>
-<tr><td>Boolean operations</td><td><code>!</code>, <code>&amp;&amp;</code>, <code>&amp;#124;&amp;#124;</code></td></tr>
-<tr><td>Reference equality</td><td><code>===</code>, <code>!==</code></td></tr>
-<tr><td>Structural equality</td><td><code>==</code>, <code>!=</code></td></tr>
-<tr><td>If-Else expressions</td><td><code>if (condition) { a; } else { b; }</code></td></tr>
-<tr><td>Ternary expressions</td><td><code>condition ? a : b;</code></td></tr>
+<tr><td>真偽値</td><td><code>true</code>, <code>false</code></td></tr>
+<tr><td>比較演算</td><td><code>&gt;</code>, <code>&lt;</code>, <code>&gt;=</code>, <code>&lt;=</code></td></tr>
+<tr><td>論理演算</td><td><code>!</code>, <code>&amp;&amp;</code>, <code>&amp;#124;&amp;#124;</code></td></tr>
+<tr><td>参照の等価性</td><td><code>===</code>, <code>!==</code></td></tr>
+<tr><td>構造の等価性</td><td><code>==</code>, <code>!=</code></td></tr>
+<tr><td>If-else 式</td><td><code>if (condition) { a; } else { b; }</code></td></tr>
+<tr><td>三項演算子</td><td><code>condition ? a : b;</code></td></tr>
 </tbody>
 </table>
-<h2><a class="anchor" aria-hidden="true" id="functions"></a><a href="#functions" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Functions</h2>
+<h2><a class="anchor" aria-hidden="true" id="関数"></a><a href="#関数" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>関数</h2>
 <table>
 <thead>
-<tr><th>Feature</th><th>Example</th></tr>
+<tr><th>機能</th><th>例</th></tr>
 </thead>
 <tbody>
-<tr><td>Function definition</td><td><code>let divide = (a, b) =&gt; a / b;</code></td></tr>
-<tr><td>Function calls</td><td><code>divide(6, 2); // 3</code></td></tr>
-<tr><td>Named arguments</td><td><code>let divide = (~a, ~b) =&gt; a / b;</code></td></tr>
-<tr><td>Calling named arguments</td><td><code>divide(~a=6, ~b=2); // 3</code></td></tr>
-<tr><td>Recursive functions</td><td><code>let rec infinite = () =&gt; infinite();</code></td></tr>
+<tr><td>関数の定義</td><td><code>let divide = (a, b) =&gt; a / b;</code></td></tr>
+<tr><td>関数の呼び出し</td><td><code>divide(6, 2); // 3</code></td></tr>
+<tr><td>名前付き引数</td><td><code>let divide = (~a, ~b) =&gt; a / b;</code></td></tr>
+<tr><td>名前付き引数の呼び出し</td><td><code>divide(~a=6, ~b=2); // 3</code></td></tr>
+<tr><td>再帰関数</td><td><code>let rec infinite = () =&gt; infinite();</code></td></tr>
 </tbody>
 </table>
-<h2><a class="anchor" aria-hidden="true" id="advanced-functions"></a><a href="#advanced-functions" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Advanced Functions</h2>
+<h2><a class="anchor" aria-hidden="true" id="関数の高度な利用"></a><a href="#関数の高度な利用" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>関数の高度な利用</h2>
 <table>
 <thead>
-<tr><th>Feature</th><th>Example</th></tr>
+<tr><th>機能</th><th>例</th></tr>
 </thead>
 <tbody>
-<tr><td>Partial application</td><td><code>let divideTen = divide(10); divideTen(5); // 2</code></td></tr>
-<tr><td>Partially applying out of order</td><td><code>let half = divide(_, 2); half(10); // 5</code></td></tr>
-<tr><td>Optional arguments</td><td><code>let print = (~prefix=?, text) =&gt; {...};</code></td></tr>
-<tr><td>Optional arguments with default</td><td><code>let divide = (~a=100, ~b) =&gt; a / b;</code></td></tr>
-<tr><td>Function chaining (pipe)</td><td><code>32 &amp;#124;&gt; half &amp;#124;&gt; half; // 8</code></td></tr>
+<tr><td>部分適用</td><td><code>let divideTen = divide(10); divideTen(5); // 2</code></td></tr>
+<tr><td>引数の順序に沿わない部分適用</td><td><code>let half = divide(_, 2); half(10); // 5</code></td></tr>
+<tr><td>省略可能な引数</td><td><code>let print = (~prefix=?, text) =&gt; {...};</code></td></tr>
+<tr><td>省略可能な引数のデフォルト値</td><td><code>let divide = (~a=100, ~b) =&gt; a / b;</code></td></tr>
+<tr><td>関数を連ねる(パイプライン)</td><td><code>32 &amp;#124;&gt; half &amp;#124;&gt; half; // 8</code></td></tr>
 </tbody>
 </table>
-<h2><a class="anchor" aria-hidden="true" id="function-types"></a><a href="#function-types" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Function Types</h2>
+<h2><a class="anchor" aria-hidden="true" id="関数と型"></a><a href="#関数と型" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>関数と型</h2>
 <table>
 <thead>
-<tr><th>Feature</th><th>Example</th></tr>
+<tr><th>機能</th><th>例</th></tr>
 </thead>
 <tbody>
-<tr><td>Inline typing</td><td><code>let divide = (a: int, b: int): int =&gt; a / b;</code></td></tr>
-<tr><td>Standalone type</td><td><code>type intFn = (int, int) =&gt; int;</code></td></tr>
-<tr><td>Using standalone type</td><td><code>let divide: intFn = (a, b) =&gt; a / b;</code></td></tr>
-<tr><td>Typing optional arguments</td><td><code>let print = (~prefix: option(string)=?, text) =&gt; {...};</code></td></tr>
+<tr><td>インラインで型付け</td><td><code>let divide = (a: int, b: int): int =&gt; a / b;</code></td></tr>
+<tr><td>スタンドアロン型</td><td><code>type intFn = (int, int) =&gt; int;</code></td></tr>
+<tr><td>スタンドアロン型の使用</td><td><code>let divide: intFn = (a, b) =&gt; a / b;</code></td></tr>
+<tr><td>省略可能な引数と型</td><td><code>let print = (~prefix: option(string)=?, text) =&gt; {...};</code></td></tr>
 </tbody>
 </table>
-<h2><a class="anchor" aria-hidden="true" id="basic-structures"></a><a href="#basic-structures" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Basic Structures</h2>
+<h2><a class="anchor" aria-hidden="true" id="基本的なデータ構造"></a><a href="#基本的なデータ構造" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>基本的なデータ構造</h2>
 <table>
 <thead>
-<tr><th>Feature</th><th>Example</th></tr>
+<tr><th>機能</th><th>例</th></tr>
 </thead>
 <tbody>
-<tr><td>List (Immutable)</td><td><code>[1, 2, 3]</code></td></tr>
-<tr><td>List add to front</td><td><code>[a1, a2, ...theRest]</code></td></tr>
-<tr><td>List concat</td><td><code>[a1, a2] @ theRest</code></td></tr>
-<tr><td>Array (Mutable)</td><td><code>[&amp;#124;1, 2, 3&amp;#124;]</code></td></tr>
-<tr><td>Array access</td><td><code>let arr = [&amp;#124;1, 2, 3&amp;#124;]; arr[1];</code></td></tr>
+<tr><td>リスト (不変)</td><td><code>[1, 2, 3]</code></td></tr>
+<tr><td>リストの前に要素を追加</td><td><code>[a1, a2, ...theRest]</code></td></tr>
+<tr><td>リストを連結</td><td><code>[a1, a2] @ theRest</code></td></tr>
+<tr><td>配列 (可変)</td><td><code>[&amp;#124;1, 2, 3&amp;#124;]</code></td></tr>
+<tr><td>配列へアクセス</td><td><code>let arr = [&amp;#124;1, 2, 3&amp;#124;]; arr[1];</code></td></tr>
 </tbody>
 </table>
 <ul>
 <li>List Functions: <a href="https://reasonml.github.io/api/List.html"><code>module List</code></a></li>
 <li>Array Functions: <a href="https://reasonml.github.io/api/Array.html"><code>module Array</code></a></li>
 </ul>
-<h2><a class="anchor" aria-hidden="true" id="maps-and-sets"></a><a href="#maps-and-sets" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Maps and Sets</h2>
-<p>There are several different ways to interact with Maps and Sets depending on the specific environment being used. In standard Reason code there are <code>Map</code> and <code>Set</code> modules:</p>
+<h2><a class="anchor" aria-hidden="true" id="map-と-set"></a><a href="#map-と-set" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Map と Set</h2>
+<p>Map と Set を操作する方法には、環境に応じていくつかの種類があります。標準的な Reason のコードには <code>Map</code> 、 <code>Set</code> モジュールがあります。</p>
 <ul>
 <li><a href="https://reasonml.github.io/api/Map.Make.html"><code>module Map.Make</code></a></li>
 <li><a href="https://reasonml.github.io/api/Set.Make.html"><code>module Set.Make</code></a></li>
@@ -208,26 +208,26 @@
 <li><a href="https://bucklescript.github.io/bucklescript/api/Belt.Set.html"><code>module Belt.Set</code></a></li>
 </ul>
 <p>There are also other libraries that will provide their own implementation of these data structures. Check the style guide of the project you are working in to determine which module to use.</p>
-<h2><a class="anchor" aria-hidden="true" id="type-annotations"></a><a href="#type-annotations" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Type Annotations</h2>
-<p>Any expression or argument may include a &quot;type annotation&quot;. In most cases, type annotations are not necessary and the compiler will infer the types automatically. You may include type annotations to verify your own understanding against what the compiler infers.</p>
+<h2><a class="anchor" aria-hidden="true" id="型註釈"></a><a href="#型註釈" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>型註釈</h2>
+<p>式や引数には「型註釈」を含めることができます。 ほとんどの場合、コンパイラが自動的に型を推論するので、型註釈は必要ありません。 型註釈をつけることで、コンパイラの推論があなたの意図に沿っているか検証することもできます。</p>
 <table>
 <thead>
 <tr><th>Feature</th><th>Example</th></tr>
 </thead>
 <tbody>
-<tr><td>Expression type annotation</td><td><code>let x = (expression: int)</code></td></tr>
-<tr><td>Annotation on let binding</td><td><code>let x: int = expression;</code></td></tr>
-<tr><td>Argument/return value annotation</td><td><code>let addOne = (a: int): int =&gt; a + 1;</code></td></tr>
+<tr><td>式に型註釈</td><td><code>let x = (expression: int)</code></td></tr>
+<tr><td>Let 束縛に型註釈</td><td><code>let x: int = expression;</code></td></tr>
+<tr><td>引数/戻り値に型註釈</td><td><code>let addOne = (a: int): int =&gt; a + 1;</code></td></tr>
 </tbody>
 </table>
-<h2><a class="anchor" aria-hidden="true" id="type-parameters"></a><a href="#type-parameters" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Type Parameters</h2>
-<p>Types can be made generic with type parameters.</p>
+<h2><a class="anchor" aria-hidden="true" id="型引数"></a><a href="#型引数" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>型引数</h2>
+<p>型引数を追加して、ジェネリック型 (総称型) を作ることができます。</p>
 <table>
 <thead>
 <tr><th>Feature</th><th>Example</th></tr>
 </thead>
 <tbody>
-<tr><td>Type parameters</td><td><code>type pair('a, 'b) = ('a, 'b);</code></td></tr>
+<tr><td>型引数</td><td><code>type pair('a, 'b) = ('a, 'b);</code></td></tr>
 <tr><td>Annotation with parameters</td><td><code>let x: pair(int, string) = (10, &quot;ten&quot;);</code></td></tr>
 <tr><td>String list</td><td><code>let x: list(string) = [&quot;Hello&quot;, &quot;World&quot;];</code></td></tr>
 </tbody>
@@ -387,7 +387,7 @@
 <tr><td>Single line Comment</td><td><code>// Comment here</code></td></tr>
 </tbody>
 </table>
-</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/ja/extra-goodies"><span class="arrow-prev">← </span><span>Extra Goodies</span></a><a class="docs-next button" href="/docs/ja/let-binding"><span>Let バインディング</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#let-bindings">Let Bindings</a></li><li><a href="#built-in-types">Built In Types</a></li><li><a href="#strings">Strings</a></li><li><a href="#numbers">Numbers</a></li><li><a href="#boolean-values-and-logical-operations">Boolean Values And Logical Operations</a></li><li><a href="#functions">Functions</a></li><li><a href="#advanced-functions">Advanced Functions</a></li><li><a href="#function-types">Function Types</a></li><li><a href="#basic-structures">Basic Structures</a></li><li><a href="#maps-and-sets">Maps and Sets</a></li><li><a href="#type-annotations">Type Annotations</a></li><li><a href="#type-parameters">Type Parameters</a></li><li><a href="#records">Records</a></li><li><a href="#variants">Variants</a></li><li><a href="#options">Options</a></li><li><a href="#pattern-matching">Pattern Matching</a></li><li><a href="#unit">Unit</a></li><li><a href="#refs">Refs</a></li><li><a href="#loops">Loops</a></li><li><a href="#modules">Modules</a></li><li><a href="#functors">Functors</a></li><li><a href="#comments">Comments</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/ja/extra-goodies"><span class="arrow-prev">← </span><span>Extra Goodies</span></a><a class="docs-next button" href="/docs/ja/let-binding"><span>Let バインディング</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#let-変数束縛">Let 変数束縛</a></li><li><a href="#組み込み型">組み込み型</a></li><li><a href="#文字列">文字列</a></li><li><a href="#数値">数値</a></li><li><a href="#真偽値と論理演算">真偽値と論理演算</a></li><li><a href="#関数">関数</a></li><li><a href="#関数の高度な利用">関数の高度な利用</a></li><li><a href="#関数と型">関数と型</a></li><li><a href="#基本的なデータ構造">基本的なデータ構造</a></li><li><a href="#map-と-set">Map と Set</a></li><li><a href="#型註釈">型註釈</a></li><li><a href="#型引数">型引数</a></li><li><a href="#records">Records</a></li><li><a href="#variants">Variants</a></li><li><a href="#options">Options</a></li><li><a href="#pattern-matching">Pattern Matching</a></li><li><a href="#unit">Unit</a></li><li><a href="#refs">Refs</a></li><li><a href="#loops">Loops</a></li><li><a href="#modules">Modules</a></li><li><a href="#functors">Functors</a></li><li><a href="#comments">Comments</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
                 document.addEventListener('keyup', function(e) {
                   if (e.target !== document.body) {
                     return;
