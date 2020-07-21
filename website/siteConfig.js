@@ -289,7 +289,7 @@ const users = [
     image: "img/logos/atvero.svg",
     infoLink: "https://atvero.com",
   },
-   {
+  {
     name: "Lukin Co.",
     image: "img/logos/lukin.svg",
     infoLink: "https://lukin.co",
