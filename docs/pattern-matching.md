@@ -1,229 +1,306 @@
 ---
-title: Pattern Matching!
+title: Pattern Matching
 ---
 
-_Make sure you've read up on [Variant](variant.md) first_.
+_Quick overview: [Pattern matching](overview.md#pattern-matching)_
 
-**We're finally here**! Pattern matching is one of _the_ best features of the language. It's like destructuring, but comes with even more help from the type system.
+Pattern matching provides a way to execute code when the shape of some data matches a particular pattern. It's similar to switch-case statements in other languages, but it can be more expressive and includes some extra safeguards.
 
-## Usage
+## Defining a pattern match statement
 
-Consider a variant:
-
-```reason
-type payload =
-  | BadResult(int)
-  | GoodResult(string)
-  | NoResult;
-```
-
-While using the `switch` expression on it, you can "destructure" it:
+Use the `switch` keyword to make a pattern matching statement:
 
 ```reason
-let data = GoodResult("Product shipped!");
-
-let message =
-  switch (data) {
-  | GoodResult(theMessage) => "Success! " ++ theMessage
-  | BadResult(errorCode) => "Something's wrong. The error code is: " ++ string_of_int(errorCode)
-  };
-```
-
-Notice how we've destructured `data` while handling each different case. The above `switch` will give you a compiler warning:
-
-```
-Warning 8: this pattern-matching is not exhaustive.
-Here is an example of a value that is not matched:
-NoResult
-```
-
-Isn't that great? While matching on the shape of your data, the type system warned of an unhandled case. This **conditional** aspect is what makes it pattern matching rather than plain destructuring. Most data structures with an "**if this then that**" aspect work with it:
-
-```reason
-switch (myList) {
-| [] => print_endline("Empty list")
-| [a, ...theRest] => print_endline("list with the head value " ++ a)
-};
-
-switch (myArray) {
-| [|1, 2|] => print_endline("This is an array with item 1 and 2")
-| [||] => print_endline("This array has no element")
-| _ => print_endline("This is an array")
+switch (input) {
+| pattern1 => code1
+| pattern2 => code2
+| pattern3 => code3
 };
 ```
 
-The `_` case is a special fall-through case that allows all unmatched conditions to go to that branch.
-
-You can even switch on string, int and others. You can even have many patterns going to the same result!
+The switch finds the first pattern that matches the input, and then executes the code that the pattern points to (the code after the `=>`). Code for a pattern can be a single expression, or a block of statements.
 
 ```reason
-let reply =
-  switch (message) {
-  | "Reason's pretty cool" => "Yep"
-  | "good night" => "See ya!"
-  | "hello" | "hi" | "heya" | "hey" => "hello to you too!"
-  | _ => "Nice to meet you!"
+let y =
+  switch (x) {
+  | 0 => "zero"
+  | 1 =>
+    f();
+    "one";
+  | _ => "another number"
   };
 ```
 
-Combined with other data structures, pattern matching can produce extremely concise, compiler-verified, performant code:
+If `x` were `1`, then the second pattern is matched, causing `f(); "one";` to be executed, which causes `y` to be set to `"one"`. Note that each code block in the switch must evaluate to the same type (`string` in this example).
+
+## Patterns
+
+### Primitives 
+
+The simplest patterns are primitive values, which are checked for equality.
 
 ```reason
-let message =
-  switch (data) {
-  | GoodResult(theMessage) => "Success! " ++ theMessage
-  | BadResult(0 | 1 | 5) => "Something's wrong. It's a server side problem."
-  | BadResult(errorCode) => "Unknown error occurred. Code: " ++ string_of_int(errorCode)
-  | NoResult => "Things look fine"
-  };
-```
+switch (x) {
+| true => f("t")
+| false => g("f")
+};
 
-**Note**: you can only pass literals (i.e. concrete values) as a pattern, not let-binding names or other things. The following doesn't work as expected:
-
-```reason
-let myMessage = "Hello";
-switch (greeting) {
-| myMessage => print_endline("Hi to you")
+switch (x) {
+| "a" => 4.0
+| "tree" => 1.23
+| _ => 77.5
 };
 ```
 
-Instead, it'd assume you're matching on any string, and binding that to the name `myMessage` in that `switch` case, which is not what you wanted.
+### Variables 
 
-### When clauses
-
-When you really need to use arbitrary logic with an otherwise clean pattern match, you can slip in some `when` clauses, which are basically `if` sugar:
+Variables can be created from patterns. In the last few examples, the `_` variable acted as a catch-all, matching all remaining values. You could instead create a variable without a leading underscore to use it later in the block.
 
 ```reason
-let message =
-  switch (data) {
-  | GoodResult(theMessage) => ...
-  | BadResult(errorCode) when isServerError(errorCode) => ...
-  | BadResult(errorCode) => ... /* otherwise */
-  | NoResult => ...
-  };
-```
-
-### Match on Exceptions
-
-If the function throws an exception (covered later), you can also match on _that_, in addition to the function's normally returned values.
-
-```reason
-switch (List.find((i) => i === theItem, myItems)) {
-| item => print_endline(item)
-| exception Not_found => print_endline("No such item found!")
+switch (f()) {
+| 0 => "zero"
+| 1 => "one"
+| k => "another number " ++ string_of_int(k)
 };
 ```
 
-### Nested Patterns
-
-Nested `|` work as intended:
+Note that if a variable with the same name already exists in the scope of the switch, then it is not used in the pattern, and is instead shadowed by the pattern's variable. Variables in patterns are declarations of new variables, not references to existing ones.
 
 ```reason
-switch (student) {
-| {name: "Jane" | "Joe"} => ...
-| {name: "Bob", Job: Programmer({fullTime: Yes | Maybe})} => ...
+let k = 60;
+let y =
+  switch (3) {
+  | 0 => "zero"
+  | 1 => "one"
+  | k => "another number " ++ string_of_int(k)
+  };
+/* y is "another number 3", k is still 60 */
+```
+
+### Variants
+
+Patterns can also include variants and data held by variant tags.
+
+```reason
+type t =
+  | A
+  | B(int);
+let x = B(42);
+let y =
+  switch (x) {
+  | A => "a"
+  | B(0) => "b_zero"
+  | B(k) => "b_" ++ string_of_int(k)
+  };
+/* y is now "b_42" */
+```
+
+This can be useful when working with the option variant.
+
+```reason
+let x: option(int) = Some(3);
+let value =
+  switch (x) {
+  | None => 0
+  | Some(v) => v
+  };
+```
+
+### More data structures
+
+Patterns can include other data structures, like tuples, records, lists, arrays, and any nested combination of those structures.
+
+```reason
+type point = {
+  x: int,
+  y: int,
+};
+type t =
+  | A((string, int))
+  | B(r)
+  | C(array(int))
+  | D(list(r));
+
+let x = D([{x: 2, y: 1.2}]);
+switch (x) {
+| A(("hi", num)) => num
+| B({x, y: 1.2}) => x
+| C([|x|]) => x
+| C([|2, 3, x|]) => x
+| D([]) => 2
+| D([{x: x1, _}, {x: x2, _}, ..._]) => x1 + x2
+| _ => 42
 };
 ```
 
-### Patterns Everywhere
+### Extracting parts of patterns
 
-You can put a pattern anywhere you'd put a normal "variable declaration":
-
-```reason
-type leftOrRight =
-  | Left(int)
-  | Right(int);
-
-let i = Left(1);
-
-/* magic! */
-let Left(v) | Right(v) = i;
-```
-
-## Tips & Tricks
-
-**Flatten your pattern-match whenever you can**. This is a real bug remover. Example below.
-
-Do not abuse the fall-through `_` case too much. This prevents the compiler from telling you that you've forgotten to cover a case (exhaustiveness check), which would be especially helpful after a refactoring where you add a new case to a variant. Try only using `_` against infinite possibilities, e.g. string, int, etc.
-
-Here's a series of examples, from worst to best:
+`as` can be used to assign part of a pattern to a variable. This is convenient if you need to match on a certain value, but need to reference something that encompasses that value.
 
 ```reason
-let optionBoolToBool = opt =>
-  if (opt == None) {
-    false;
-  } else if (opt == Some(true)) {
-    true;
-  } else {
-    false;
-  };
-```
-
-Now that's just silly =). Let's turn it into pattern-matching:
-
-```reason
-let optionBoolToBool = opt =>
-  switch (opt) {
-  | None => false
-  | Some(a) => a ? true : false
-  };
-```
-
-Slightly better, but still nested. Pattern-matching allows you to do this:
-
-```reason
-let optionBoolToBool = opt =>
-  switch (opt) {
-  | None => false
-  | Some(true) => true
-  | Some(false) => false
-  };
-```
-
-Much more linear-looking! Now, you might be tempted to do this:
-
-```reason
-let optionBoolToBool = opt =>
-  switch (opt) {
-  | Some(true) => true
-  | _ => false
-  };
-```
-
-Which is much more concise, but kills the exhaustiveness check mentioned above; refrain from using that. This is the best:
-
-```reason
-let optionBoolToBool = opt =>
-  switch (opt) {
-  | Some(trueOrFalse) => trueOrFalse
-  | None => false
-  };
-```
-
-Pretty darn hard to make a mistake in this code at this point! Whenever you'd like to use an if-else with many branches, prefer pattern matching instead. It's more concise and [performant](variant.md#design-decisions) too.
-
-See another example, with switch + tuple [here](tuple.md#tips-tricks).
-
-## Design Decisions
-
-The notorious [fizzbuzz problem](https://en.wikipedia.org/wiki/Fizz_buzz#Programming_interviews) strangely trips up some people, partially due its nature of paralyzing the programmer who hopes to simplify/unify the few condition branches in search of elegance where there's none. Hopefully you can see that usually, pattern-matching's visual conciseness [allows us to overcome decision paralysis](/try.html?reason=PQKgBAQghgzgpgEzAewHZgBYBcsAcYBcwwATsvDlAMbIJwB0yJA5sAO4CWA1h8AGIcAXoIgBXYQGIA8gGEoAWwA2YEMABQiuFjAAzIYIBG4wWAC8YABQcAlGYB8asGBicsVDJY5h5tMAGYAGjAvHyQAVlsAb0cwAB9LAAYghNtTOzAAIgFhMWEMmPiLJLAAfVT0rP18p0KS5PLM3MFquNL7ZywSDlRmEuQdEu6sK2sYgF8AbjU1HSZPYPQARjAsZDBFhJSwaKcAKRh6RWRmCz1hI2ER0cmgA), while keeping all the benefits (and more, as you've seen) of a bunch of brute-forced `if-else`s. There's really nothing wrong with explicitly listing out all the possibilities; Pattern matching corresponds to **case analysis** in math, a valid problem-solving technique that proves to be extremely convenient.
-
-Using a Reason `switch` for the first time might make you feel like you've been missing out all these years. Careful, for it might ruin other languages for you =).
-
-If you've tried to refactor a big, nested if-else logic, you might realize it's very hard to get the logic right. On the other hand, pattern matching + tuple conceptually maps to a 2D table, where each cell can be independently filled. This ensures that whenever you need to add a case in the `switch`, you can target that and only that table cell, without messing other cells up.
-
-```reason
-type animal = Dog | Cat | Bird;
-let result = switch (isBig, myAnimal) {
-| (true, Dog) => 1
-| (true, Cat) => 2
-| (true, Bird) => 3
-| (false, Dog | Cat) => 4
-| (false, Bird) => 5
+switch (x) {
+| A(("hi", num)) as v => f(v)
+| B({x: _, y: 1.2} as r) => g(r)
+| D([{x: _, y: 1.2} as r, ..._]) => g(r)
+| _ => 42
 };
 ```
 
-isBig \ myAnimal | Dog | Cat | Bird
------------------|-----|-----|------
-true             |  1  |  2  |  3
-false            |  4  |  4  |  5
+### Matching multiple inputs
+
+Passing multiple input to the switch statement is identical to passing in a tuple.
+
+```reason
+switch (k1, k2) {
+| (1, "a") => 0
+| (_, "b") => 1
+| _ => 3
+};
+```
+
+### Combining patterns
+
+A single block of code can be run for multiple patterns by listing them together. The `|` character can also be used inside patterns to list multiple possibilities.
+
+```reason
+let li: list(int) = [1, 2, 3, 4];
+switch (li) {
+| [1, 2] 
+| [3, 4] => "is 1,2 or 3,4"
+| [5, 6 | 7, ..._] => "starts with 5, then has 6 or 7"
+| _ => ""
+};
+```
+
+## Safeguards
+
+### Exhaustive warning
+
+The compiler returns a warning if patterns do not cover all possible values of the input. An exception will be thrown at runtime for unmatched inputs.
+
+```reason
+let f = x =>
+  switch (x) {
+  /* Warning: this pattern-matching is not exhaustive. */
+  | 0 => "zero"
+  };
+f(2); /* Exception: Match_failure */
+```
+
+The warning can be fixed by using a variable like `_` to match the remaining values:
+
+```reason
+switch (x) {
+| 0 => "zero"
+| _ => "another number"
+};
+```
+
+Using catch-all variable like `_` is useful when handling many values, such as with ints and strings. But if there are fewer possibilities, such as with variants, it's usually better to match each explicitly to ensure that all cases are handled and guard against future changes.
+
+### Unused warning
+
+The compiler also returns a warning if patterns are repeated.
+
+```reason
+let x = 3;
+switch (x) {
+| 0 => "zero"
+| 0 => "nil" /* Warning: this match case is unused. */
+| k => "another number " ++ string_of_int(k)
+};
+```
+
+More generally, this warning detects when a pattern will never be matched due to the patterns above it.
+
+```reason
+switch (x) {
+| k => "another number " ++ string_of_int(k)
+| 0 => "zero" /* Warning: this match case is unused. */
+};
+```
+
+Since patterns are matched sequentially, this warning can sometimes be resolved by changing the order in which they're listed. 
+
+```reason
+/* no warning */
+switch (x) {
+| 0 => "zero" 
+| k => "another number " ++ string_of_int(k)
+};
+```
+
+## Using patterns outside of switch statements
+
+Patterns can also be used outside of switch statements to "unpack" data whenever variables are declared.
+
+```reason
+let data = (1, ("red", true));
+let (a, (b, _) as c) = data;
+/* a is 1, b is "red", c is ("red", true) */
+
+type point = {
+  x: int,
+  y: int,
+};
+let f = ({x, y} as p) => x + y + p.x + p.y;
+```
+
+Declarations can combine patterns with `|` if the same variables are declared in each pattern.
+
+```reason
+type t = A(int) | B(int);
+let data = B(3);
+let A(v) | B(v) = data; 
+/* v is 3 */
+```
+
+## Other pattern matching features
+
+### when
+
+`when` can add extra conditions to patterns. The condition must be satisfied in order to execute the pattern's code, otherwise the pattern is skipped. Note that `when` should be used carefully since the exhaustive and unused pattern warnings do not analyze their conditions.
+
+```reason
+let k =
+  switch (p) {
+  | {x, y: 0} when x * x <= 4
+  | {x, y: 0} when f(x)
+  | {x: 2, y} when y < 10 => 1
+  | {x: 2, y} when y < 2 => 2 /* never executed, but no warning */
+  | _ => 3
+  };
+/* k is 1 */
+```
+
+### Matching exceptions
+
+If executing an input raises an exception, it can be matched alongside the other values of the input:
+
+```reason
+let y =
+  switch (List.find(x => x == 0, [1, 2, 3])) {
+  | 0 => "zero"
+  | n => string_of_int(n)
+  | exception Not_found => "not found"
+  };
+/* y is "not found" */
+```
+
+### fun
+
+A function that only matches a parameter can be written with `fun`.
+
+```reason
+let f = x =>
+  switch (x) {
+  | Some(x) => x
+  | None => ""
+  };
+
+/* equivalent */
+let f =
+  fun
+  | Some(x) => x
+  | None => "";
+```
