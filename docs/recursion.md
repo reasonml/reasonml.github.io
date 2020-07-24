@@ -56,10 +56,14 @@ and function3 = () => {
 };
 ```
 
+- Note: The `and` keyword is not specific to recursion, it can be used without
+the `rec` keyword. Doing so would cause all bindings to be created
+simultaneously but _not_ visible to each other.
+
 ## Recursive Types
 
 Types, unlike bindings, are recursive by default. This is because it is
-common for types to be recursive and uncommon for types to be overriden. A
+common for types to be recursive and uncommon for types to be shadowed. A
 recursive type could be used to define a binary tree:
 
 ```reason
