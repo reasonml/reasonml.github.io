@@ -2,59 +2,65 @@
 title: Destructuring
 ---
 
-"Destructuring" is a visually concise way of extracting fields from a data structure. You can use destructuring anywhere you'd normally use a variable.
+Destructuring is a concise way to extract data from a structure. Destructuring
+can be used anywhere a variable name might appear.
 
-## Usage
-
-The following binds variables: `ten = 10`, `twenty = 20`
-
-```reason
-let someInts = (10, 20);
-let (ten, twenty) = someInts;
-```
-
-The following binds variables: `name = "Guy"`, `age = 30`
+## Tuples
 
 ```reason
-type person = {name: string, age: int};
-let somePerson = {name: "Guy", age: 30};
-let {name, age} = somePerson;
+let pair = (1, "Hello");
+
+/* Destructuring */
+let (one, hello) = pair;
+
+/* Prints: Hello */
+print_endline(hello);
 ```
 
-When you pull out fields, you can optionally rename the fields. The following binds these instead: `n = "Guy"`, `a = 30`.
+## Records
 
-```reason
-let {name: n, age: a} = somePerson;
-```
-
-Destructuring also allows type annotations.
-
-```reason
-let (ten: int, twenty: int) = someInts;
-let {name: (n: string), age: (a: int)} = somePerson;
-```
-
-Destructuring a function's labeled arguments is also possible.
+Destructuring is very commonly used with [records](record.md).
 
 ```reason
 type person = {
   name: string,
-  age: int
+  age: int,
 };
 
-let someFunction = (~person as {name}) => {
-  /* you can use `name` here */
+let alice = {
+  name: "Alice",
+  age: 42,
 };
 
-let otherFunction = (~person as {name} as thePerson) => {
-  /* you can use both `name` and the whole record as `thePerson` here */
-};
+/* Destructuring */
+let {name, age} = alice;
+
+/* Prints: Alice */
+print_endline(name);
 ```
 
-**Keep reading the section, pattern matching, for a crazier form of destructuring**!
+### Renaming Record Fields
 
-## Tips & Tricks
+While destructuring it is possible to bind to variables different than the field
+names:
 
-Destructuring can make your code much more concise without requiring you to name intermediate variables. Do use them! But don't abuse them and make your code overly nested & terse.
+```reason
+let {name: legalName, age} = alice;
 
-If you're destructuring a record or a variant whose definition isn't in the current file, you need to explicitly annotate it. See [here](record.md#record-needs-an-explicit-definition) and [here](variant.md#variant-needs-an-explicit-definition).
+/* Prints: Alice */
+print_endline(legalName);
+```
+
+## Function Arguments
+
+```reason
+/* Without destructuring */
+let hello = (person) => {
+  print_endline("Hello " ++ person.name);
+};
+
+/* With destructuring */
+let hello = ({name}) => {
+  print_endline("Hello " ++ name);
+};
+```
