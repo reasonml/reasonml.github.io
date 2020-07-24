@@ -20,6 +20,8 @@ Type annotation on binding      | `let count: int = 42;`
 
 ## Built In Types
 
+_Details: [Primitives](primitives.md)_
+
 Feature                         | Example
 --------------------------------|----------
 Int                             | `let x: int = 10;`
@@ -36,6 +38,8 @@ Functions                       | `let x: (int, int) => int = (a, b) => a + b;`
 
 ## Strings
 
+_Details: [Strings](primitives.md#strings)_
+
 Feature                         | Example
 --------------------------------|----------
 String                          | `"Hello"`
@@ -47,6 +51,9 @@ Character at index              | `let x = "Hello"; x.[2];`
 
 ## Numbers
 
+- _Details: [Integer](primitives.md#integer)_
+- _Details: [Float](primitives.md#float)_
+
 Feature                         | Example
 --------------------------------|----------
 Integer                         | `23`, `-23`
@@ -57,6 +64,8 @@ Float operations                | `23.0 +. 1.0 -. 7.0 *. 2.0 /. 5.0`
 Float exponentiation            | `2.0 ** 3.0`
 
 ## Boolean Values And Logical Operations
+
+_Details: [Boolean](primitives.md#boolean)_
 
 Feature                         | Example
 --------------------------------|----------
