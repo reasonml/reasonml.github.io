@@ -108,6 +108,8 @@ Typing optional arguments       | `let print = (~prefix: option(string)=?, text)
 
 ## Basic Structures
 
+_Details: [Basic Structures](basic-structures.md)_
+
 Feature                         | Example
 --------------------------------|----------
 List (Immutable)                | `[1, 2, 3]`
@@ -115,6 +117,7 @@ List add to front               | `[a1, a2, ...theRest]`
 List concat                     | `[a1, a2] @ theRest`
 Array (Mutable)                 | <code>[&#124;1, 2, 3&#124;]</code>
 Array access                    | <code>let arr = [&#124;1, 2, 3&#124;]; arr[1];</code>
+Tuples                          | `(1, "hello")`
 
 - List Functions: [`module List`](https://reasonml.github.io/api/List.html)
 - Array Functions: [`module Array`](https://reasonml.github.io/api/Array.html)

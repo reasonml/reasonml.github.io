@@ -124,6 +124,23 @@ _Details: [Boolean](primitives.md#boolean)_
 
 Reason booleans and their operations compile to the same JavaScript code you'd expect.
 
+## Regular Expression
+
+Reason's regular expression directly transforms to JavaScript's regular expression.
+Because of that, You can also directly use a JS regular expression in Reason.
+
+<!--DOCUSAURUS_CODE_TABS-->
+<!--Reason-->
+```reason
+let f = [%re "/(0-9)+/g"];
+```
+<!--Output-->
+```js
+var f = (/(0-9)+/g);
+```
+<!--END_DOCUSAURUS_CODE_TABS-->
+
+
 ## Records
 
 _Details: [Records](record.md)_
@@ -184,21 +201,29 @@ var meNextYear = {
 
 This update is very efficient! **Check the output tab**. Because we know the whole type shape of the record you're updating, we can avoid the JavaScript way of iterating over all the object fields and stuffing them into a new one. Instead, a new record is directly created.
 
-## Regular Expression
+## List & Array
 
-Reason's regular expression directly transforms to JavaScript's regular expression.
-Because of that, You can also directly use a JS regular expression in Reason.
+Reason **arrays** map straightforwardly to JavaScript arrays, and vice-versa. Thus, even though arrays are fix-sized on native, you can still use the `Js.Array` API to resize them. This is fine.
+
+- [`module Js.Array`](https://bucklescript.github.io/bucklescript/api/Js.Array.html)
+- [`module Js.List`](https://bucklescript.github.io/bucklescript/api/Js.List.html)
+
+## Tuples
 
 <!--DOCUSAURUS_CODE_TABS-->
 <!--Reason-->
 ```reason
-let f = [%re "/(0-9)+/g"];
+let ageAndName = (16, "Lil' Reason");
+let my3dCoordinates = (20.0, 30.5, 100.0);
 ```
 <!--Output-->
 ```js
-var f = (/(0-9)+/g);
+var ageAndName = /* tuple */[16, "Lil' Reason"];
+var my3dCoordinates = /* tuple */[20.0, 30.5, 100.0];
 ```
 <!--END_DOCUSAURUS_CODE_TABS-->
+
+Because tuples turn into JavaScript arrays, when you receive an existing JS array from the JS side of your codebase, you can also model it as a tuple on the Reason side, providing that said array has the characteristics of a tuple (fixed-sized, potentially heterogenous, etc.).
 
 ## Just dumping JavaScript in the middle of your Reason code
 
