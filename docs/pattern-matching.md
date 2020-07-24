@@ -4,7 +4,9 @@ title: Pattern Matching
 
 _Quick overview: [Pattern matching](overview.md#pattern-matching)_
 
-Pattern matching provides a way to execute code when the shape of some data matches a particular pattern. It's similar to switch-case statements in other languages, but it can be more expressive and includes some extra safeguards.
+Pattern matching provides a way to conditionally execute code when the shape of some data matches a particular pattern. It is similar to switch-case statements in other languages, but it can be more expressive and includes some extra safeguards.
+
+Pattern matching is often used with [variants](variant.md).
 
 ## Defining a pattern match statement
 
@@ -12,30 +14,32 @@ Use the `switch` keyword to make a pattern matching statement:
 
 ```reason
 switch (input) {
-| pattern1 => code1
-| pattern2 => code2
-| pattern3 => code3
+| Pattern1 => code1
+| Pattern2 => code2
+| Pattern3 => code3
 };
 ```
 
 The switch finds the first pattern that matches the input, and then executes the code that the pattern points to (the code after the `=>`). Code for a pattern can be a single expression, or a block of statements.
 
 ```reason
+type t = A | B | C;
+
 let y =
   switch (x) {
-  | 0 => "zero"
-  | 1 =>
+  | A => "zero"
+  | B =>
     f();
     "one";
-  | _ => "another number"
+  | C => "two"
   };
 ```
 
-If `x` were `1`, then the second pattern is matched, causing `f(); "one";` to be executed, which causes `y` to be set to `"one"`. Note that each code block in the switch must evaluate to the same type (`string` in this example).
+If `x` were `B`, then the second pattern is matched, causing `f(); "one";` to be executed, which causes `y` to be set to `"one"`. Note that each code block in the switch must evaluate to the same type (`string` in this example).
 
 ## Patterns
 
-### Primitives 
+### Primitives
 
 The simplest patterns are primitive values, which are checked for equality.
 
@@ -52,9 +56,9 @@ switch (x) {
 };
 ```
 
-### Variables 
+### Variables
 
-Variables can be created from patterns. In the last few examples, the `_` variable acted as a catch-all, matching all remaining values. You could instead create a variable without a leading underscore to use it later in the block.
+Variables can be created from patterns. In the previous examples, the `_` variable acted as a catch-all, matching all remaining values (see [Exhaustive warning](#exhaustive-warning)). You could instead create a variable without a leading underscore to use it later in the block.
 
 ```reason
 switch (f()) {
@@ -68,6 +72,7 @@ Note that if a variable with the same name already exists in the scope of the sw
 
 ```reason
 let k = 60;
+
 let y =
   switch (3) {
   | 0 => "zero"
@@ -85,7 +90,9 @@ Patterns can also include variants and data held by variant tags.
 type t =
   | A
   | B(int);
+
 let x = B(42);
+
 let y =
   switch (x) {
   | A => "a"
@@ -99,6 +106,7 @@ This can be useful when working with the option variant.
 
 ```reason
 let x: option(int) = Some(3);
+
 let value =
   switch (x) {
   | None => 0
@@ -115,6 +123,7 @@ type point = {
   x: int,
   y: int,
 };
+
 type t =
   | A((string, int))
   | B(r)
@@ -122,6 +131,7 @@ type t =
   | D(list(r));
 
 let x = D([{x: 2, y: 1.2}]);
+
 switch (x) {
 | A(("hi", num)) => num
 | B({x, y: 1.2}) => x
@@ -163,9 +173,10 @@ switch (k1, k2) {
 A single block of code can be run for multiple patterns by listing them together. The `|` character can also be used inside patterns to list multiple possibilities.
 
 ```reason
-let li: list(int) = [1, 2, 3, 4];
-switch (li) {
-| [1, 2] 
+let items: list(int) = [1, 2, 3, 4];
+
+switch (items) {
+| [1, 2]
 | [3, 4] => "is 1,2 or 3,4"
 | [5, 6 | 7, ..._] => "starts with 5, then has 6 or 7"
 | _ => ""
@@ -184,10 +195,11 @@ let f = x =>
   /* Warning: this pattern-matching is not exhaustive. */
   | 0 => "zero"
   };
+
 f(2); /* Exception: Match_failure */
 ```
 
-The warning can be fixed by using a variable like `_` to match the remaining values:
+The warning can be fixed by adding an unused variable `_` to match the remaining values:
 
 ```reason
 switch (x) {
@@ -196,7 +208,40 @@ switch (x) {
 };
 ```
 
-Using catch-all variable like `_` is useful when handling many values, such as with ints and strings. But if there are fewer possibilities, such as with variants, it's usually better to match each explicitly to ensure that all cases are handled and guard against future changes.
+`_` signifies things that you do not care about. It is useful when writing complicated patterns:
+
+```reason
+type t =
+  | A(string, int)
+  | B(string, (int, int))
+  | C(list(point));
+
+let x = A("hi", 2);
+
+switch (x) {
+| A("a", _) => 0
+| A(_) => 1
+| B(_, (i, _)) => i
+| C([{x, y}, ..._]) => x + y
+| _ => 2
+}
+```
+
+Note that `_` has special treatment: it can be used multiple times in the same pattern, and it can refer to a group of things like all parts of a variant tag.
+
+Using `_` is useful when handling many possibilies, such as with ints, strings, or elements of a list. But if there are fewer possibilities, such as with variants, it is usually better to explicitly match each case to ensure that all cases are handled and guard against future changes.
+
+```reason
+switch (x) {
+| A("a", _) => 0
+| A(_) => 1
+| B(_, (i, _)) => i
+| C([{x, y}, ..._]) => x + y
+| C([]) => 2
+}
+```
+
+Now if someone adds a new variant tag to `t`, the exhaustive warning will require them to consider how it should be handled in this `switch` statement. If the last pattern were just `_`, they would receive no warning.
 
 ### Unused warning
 
@@ -204,6 +249,7 @@ The compiler also returns a warning if patterns are repeated.
 
 ```reason
 let x = 3;
+
 switch (x) {
 | 0 => "zero"
 | 0 => "nil" /* Warning: this match case is unused. */
@@ -220,12 +266,12 @@ switch (x) {
 };
 ```
 
-Since patterns are matched sequentially, this warning can sometimes be resolved by changing the order in which they're listed. 
+Since patterns are matched sequentially, this warning can sometimes be resolved by changing the order in which they are listed.
 
 ```reason
 /* no warning */
 switch (x) {
-| 0 => "zero" 
+| 0 => "zero"
 | k => "another number " ++ string_of_int(k)
 };
 ```
@@ -239,20 +285,7 @@ let data = (1, ("red", true));
 let (a, (b, _) as c) = data;
 /* a is 1, b is "red", c is ("red", true) */
 
-type point = {
-  x: int,
-  y: int,
-};
 let f = ({x, y} as p) => x + y + p.x + p.y;
-```
-
-Declarations can combine patterns with `|` if the same variables are declared in each pattern.
-
-```reason
-type t = A(int) | B(int);
-let data = B(3);
-let A(v) | B(v) = data; 
-/* v is 3 */
 ```
 
 ## Other pattern matching features
@@ -262,29 +295,56 @@ let A(v) | B(v) = data;
 `when` can add extra conditions to patterns. The condition must be satisfied in order to execute the pattern's code, otherwise the pattern is skipped. Note that `when` should be used carefully since the exhaustive and unused pattern warnings do not analyze their conditions.
 
 ```reason
+let p = {x: 2, y: 2};
+
 let k =
   switch (p) {
-  | {x, y: 0} when x * x <= 4
-  | {x, y: 0} when f(x)
-  | {x: 2, y} when y < 10 => 1
-  | {x: 2, y} when y < 2 => 2 /* never executed, but no warning */
-  | _ => 3
+  | {x, y: 0} when x * x <= 4 => 0
+  | {x, y: 0} when f(x) => 1
+  | {x: 2, y} when y < 10 => 2
+  | {x: 2, y} when y < 2 => 3 /* never executed, but no warning */
+  | _ => 4
   };
-/* k is 1 */
+/* k is 2 */
 ```
 
 ### Matching exceptions
 
-If executing an input raises an exception, it can be matched alongside the other values of the input:
+`try` statements have a similar syntax to pattern matching statments.
+
+```reason
+exception IndexNegative;
+exception IndexOutOfBounds;
+
+let nth = (index, items) =>
+  if (index < 0) {
+    raise(IndexNegative);
+  } else if (index >= Array.length(items)) {
+    raise(IndexOutOfBounds);
+  } else {
+    items[index];
+  };
+
+let items = [|1, 2, 3|];
+let y =
+  try (nth(-1, items)) {
+  | IndexNegative => -1
+  | IndexOutOfBounds => -2
+  };
+/* y is -1 */
+```
+
+`switch` statements can also match exceptions raised from executing the input.
 
 ```reason
 let y =
-  switch (List.find(x => x == 0, [1, 2, 3])) {
+  switch (nth(-1, items)) {
   | 0 => "zero"
   | n => string_of_int(n)
-  | exception Not_found => "not found"
+  | exception IndexNegative => "index is negative"
+  | exception IndexOutOfBounds => "index is too big"
   };
-/* y is "not found" */
+/* y is "index is negative" */
 ```
 
 ### fun
