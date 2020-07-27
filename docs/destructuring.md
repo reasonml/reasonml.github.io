@@ -39,10 +39,13 @@ let {name, age} = alice;
 print_endline(name);
 ```
 
+- Note: When destructuring a record the type needs to be in scope or the
+record needs to be explicitly annotated.
+
 ### Renaming Record Fields
 
-While destructuring it is possible to bind to variables different than the field
-names:
+While destructuring record fields, it is possible to bind variable names that
+are different than the record field names:
 
 ```reason
 let {name: legalName, age} = alice;
@@ -62,5 +65,10 @@ let hello = (person) => {
 /* With destructuring */
 let hello = ({name}) => {
   print_endline("Hello " ++ name);
+};
+
+/* With destructuring and aliasing */
+let hello = ({name: legalName}) => {
+  print_endline("Hello " ++ legalName);
 };
 ```
