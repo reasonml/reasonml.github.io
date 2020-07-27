@@ -6,7 +6,7 @@ _Quick overview: [Basic Structures](overview.md#basic-structures)_
 
 ## List
 
-Lists are an immutable, dynamically sized, homogeneous, and ordered collection
+Lists are immutable, dynamically sized, homogeneous, and ordered collections
 of items. It is fast to add or remove elements from the front of a list, but
 random access is slow.
 
@@ -76,7 +76,7 @@ let isEmpty = list == [];
 
 ### Pattern Matching
 
-Pattern matching works with lists:
+[Pattern matching](pattern-matching.md) works with lists:
 
 ```reason
 switch (list) {
@@ -164,8 +164,8 @@ let array = Array.of_list(list);
 
 ### Pattern Matching
 
-Pattern matching works with arrays, but there is no `...rest` syntax like lists
-have:
+[Pattern matching](pattern-matching.md) works with arrays, but there is no
+`...rest` syntax like lists have:
 
 ```reason
 switch (array) {
@@ -193,7 +193,7 @@ let (_, second) = pair;
 let (first, _, third) = triple;
 ```
 
-Or pattern match over a tuple:
+Or [pattern matching](pattern-matching.md) over a tuple:
 
 ```reason
 switch (pair) {
