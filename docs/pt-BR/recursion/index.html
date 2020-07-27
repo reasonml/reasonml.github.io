@@ -1,0 +1,172 @@
+<!DOCTYPE html><html lang="pt-BR"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Recursion · Reason</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="There are three places recursion is commonly used: bindings, types, and modules."/><meta name="docsearch:language" content="pt-BR"/><meta property="og:title" content="Recursion · Reason"/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io/"/><meta property="og:description" content="There are three places recursion is commonly used: bindings, types, and modules."/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/icon_50.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io/blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io/blog/feed.xml" title="Reason Blog RSS Feed"/><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/pt-BR"><img class="logo" src="/img/dummy.svg" alt="Reason"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/pt-BR/what-and-why" target="_self">Docs</a></li><li class=""><a href="/pt-BR/try" target="_self">Try</a></li><li class=""><a href="/api/index" target="_self">API</a></li><li class=""><a href="/docs/pt-BR/community" target="_self">Community</a></li><li class=""><a href="/blog/" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg" alt="Languages icon"/>Português (Brasil)</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/docs/ja/recursion">日本語</a></li><li><a href="/docs/en/recursion">English</a></li><li><a href="/docs/de/recursion">Deutsch</a></li><li><a href="/docs/es-ES/recursion">Español</a></li><li><a href="/docs/fr/recursion">Français</a></li><li><a href="/docs/ko/recursion">한국어</a></li><li><a href="/docs/ru/recursion">Русский</a></li><li><a href="/docs/uk/recursion">Українська</a></li><li><a href="/docs/zh-CN/recursion">中文</a></li><li><a href="/docs/zh-TW/recursion">繁體中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank" rel="noreferrer noopener">Ajude a Traduzir</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/facebook/reason" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Language Basics</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Intro</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/pt-BR/what-and-why">O quê &amp; porquê</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Setup</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/pt-BR/installation">Instalação</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/editor-plugins">Editor Plugins</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/extra-goodies">Extra Goodies</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Language Basics</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/pt-BR/overview">Visão geral</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/let-binding">Let Bindings</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/type">Type!</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/string-and-char">String &amp; Character</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/regular-expression">Regular Expression</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/boolean">Boleano</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/integer-and-float">Integer &amp; Float</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/tuple">Tuple</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/record">Records</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/variant">Variant!</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/null-undefined-option">Null, Undefined &amp; Option</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/list-and-array">Lista e Array</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/function">Função</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/docs/pt-BR/recursion">Recursion</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/if-else">If-Else</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/pipe-first">Pipe First</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/more-on-type">More on Type</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/destructuring">Destructuring</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/pattern-matching">Pattern Matching!</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/mutable-bindings">Mutable Bindings</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/imperative-loops">Imperative Loops</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/jsx">JSX</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/external">External</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/exception">Exception</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/object">Object</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/module">Módulo</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/promise">Promise</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">JavaScript</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/pt-BR/interop">Interop</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/syntax-cheatsheet">Syntax Cheatsheet</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/libraries">Bibliotecas</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/converting-from-js">Converting from JS</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Native</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/pt-BR/native">Nativo</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/quickstart-ocaml">Native Quickstart</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Extra</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/pt-BR/faq">Frequently Asked Questions</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/newcomer-examples">Newcomer Examples</a></li><li class="navListItem"><a class="navItem" href="/docs/pt-BR/project-structure">Project Structure</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://crowdin.com/project/reason/pt-BR" target="_blank" rel="noreferrer noopener">Translate</a><h1 class="postHeaderTitle">Recursion</h1></header><article><div><span><p>There are three places recursion is commonly used: bindings, types, and modules.</p>
+<table>
+<thead>
+<tr><th>Feature</th><th>Recursive</th><th>Non-recursive</th></tr>
+</thead>
+<tbody>
+<tr><td>Bindings</td><td><code>let rec fn = ...</code></td><td><code>let fn = ...</code></td></tr>
+<tr><td>Types</td><td><code>type t = ...</code></td><td><code>type nonrec t = ...</code></td></tr>
+<tr><td>Modules</td><td><code>module rec A ...</code></td><td><code>module A ...</code></td></tr>
+</tbody>
+</table>
+<h2><a class="anchor" aria-hidden="true" id="recursive-bindings"></a><a href="#recursive-bindings" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Recursive Bindings</h2>
+<p>By default the name of a binding is not available for use on the right side of that binding. This applies to all <code>let</code> bindings, including function definitions. This behavior is required for <a href="/docs/pt-BR/let-binding#binding-shadowing">Binding Shadowing</a> to work:</p>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> x = <span class="hljs-number">10</span>;
+<span class="hljs-comment">/* If bindings were recursive by default this would form a cycle and break */</span>
+<span class="hljs-keyword">let</span> x = x <span class="hljs-operator">+</span> <span class="hljs-number">10</span>;
+</code></pre>
+<p>The natural way to write a recursive function will have an error:</p>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> infiniteRecursion = () =&gt; {
+  <span class="hljs-comment">/* Error: Unbound value infiniteRecursion */</span>
+  infiniteRecursion();
+};
+</code></pre>
+<p>Opt-in to a recursive binding using the <code>rec</code> keyword:</p>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> <span class="hljs-keyword">rec</span> infiniteRecursion = () =&gt; {
+  infiniteRecursion();
+};
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="mutual-recursion"></a><a href="#mutual-recursion" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Mutual Recursion</h2>
+<p>Mutually recursive functions use the <code>and</code> keyword:</p>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> <span class="hljs-keyword">rec</span> function1 = () =&gt; {
+  function2();
+}
+<span class="hljs-keyword">and</span> function2 = () =&gt; {
+  function3();
+}
+<span class="hljs-keyword">and</span> function3 = () =&gt; {
+  function1();
+};
+</code></pre>
+<ul>
+<li>Note: The <code>and</code> keyword is not specific to recursion, it can be used without the <code>rec</code> keyword. Doing so would cause all bindings to be created simultaneously but <em>not</em> visible to each other.</li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="recursive-types"></a><a href="#recursive-types" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Recursive Types</h2>
+<p>Types, unlike bindings, are recursive by default. This is because it is common for types to be recursive and uncommon for types to be shadowed. A recursive type could be used to define a binary tree:</p>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> tree =
+  | <span class="hljs-constructor">Leaf</span>
+  | <span class="hljs-constructor">Node</span>(tree, tree);
+</code></pre>
+<p>Opt-out of recursive types using the <code>nonrec</code> keyword:</p>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> t = string;
+<span class="hljs-keyword">type</span> <span class="hljs-keyword">nonrec</span> t = list(t);
+
+<span class="hljs-comment">/* t is now list(string) */</span>
+<span class="hljs-keyword">let</span> x: t = <span class="hljs-literal">[</span><span class="hljs-string">"hello"</span>, <span class="hljs-string">"world"</span><span class="hljs-literal">]</span>;
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="mutually-recursive-types"></a><a href="#mutually-recursive-types" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Mutually Recursive Types</h2>
+<p>Types can be mutually recursive just like bindings using the <code>and</code> keyword:</p>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> node = {
+  value: string,
+  edges: list(edge),
+}
+<span class="hljs-keyword">and</span> edge = {
+  weight: int,
+  next: node,
+};
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="mutually-recursive-modules"></a><a href="#mutually-recursive-modules" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Mutually Recursive Modules</h2>
+<p>Sometimes functions will be organized across modules and both modules need functions from each other. Use the <code>module rec</code> and <code>and</code> keywords for this kind of mutual recursion.</p>
+<p><em>Note: Recursive modules require an explicit module type annotation.</em></p>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">module</span> <span class="hljs-keyword">type</span> <span class="hljs-module-identifier">X</span> = {
+  <span class="hljs-keyword">let</span> x: unit =&gt; int;
+  <span class="hljs-keyword">let</span> y: unit =&gt; int;
+};
+
+<span class="hljs-keyword">module</span> <span class="hljs-keyword">rec</span> <span class="hljs-constructor">A</span>: <span class="hljs-constructor">X</span> = {
+  <span class="hljs-keyword">let</span> x = () =&gt; <span class="hljs-number">1</span>;
+  <span class="hljs-keyword">let</span> y = () =&gt; <span class="hljs-module-identifier">B</span>.y() <span class="hljs-operator">+</span> <span class="hljs-number">1</span>;
+}
+<span class="hljs-keyword">and</span> <span class="hljs-constructor">B</span>: <span class="hljs-constructor">X</span> = {
+  <span class="hljs-keyword">let</span> x = () =&gt; <span class="hljs-module-identifier">A</span>.x() <span class="hljs-operator">+</span> <span class="hljs-number">2</span>;
+  <span class="hljs-keyword">let</span> y = () =&gt; <span class="hljs-number">2</span>;
+};
+</code></pre>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/pt-BR/function"><span class="arrow-prev">← </span><span>Função</span></a><a class="docs-next button" href="/docs/pt-BR/if-else"><span>If-Else</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#recursive-bindings">Recursive Bindings</a></li><li><a href="#mutual-recursion">Mutual Recursion</a></li><li><a href="#recursive-types">Recursive Types</a></li><li><a href="#mutually-recursive-types">Mutually Recursive Types</a></li><li><a href="#mutually-recursive-modules">Mutually Recursive Modules</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+                document.addEventListener('keyup', function(e) {
+                  if (e.target !== document.body) {
+                    return;
+                  }
+                  // keyCode for '/' (slash)
+                  if (e.keyCode === 191) {
+                    const search = document.getElementById('search_input_react');
+                    search && search.focus();
+                  }
+                });
+              </script><script>
+              var search = docsearch({
+                
+                apiKey: '966d1e412f67114a07dc0afe44b19b53',
+                indexName: 'reason',
+                inputSelector: '#search_input_react',
+                algoliaOptions: {"facetFilters":["lang:pt-BR"]}
+              });
+            </script></body></html>
