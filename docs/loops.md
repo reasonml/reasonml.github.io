@@ -9,8 +9,9 @@ like `map`, `filter`, or `reduce` can usually be used in their place.
 
 ## For Loops
 
-For loops use the `for`, `in`, and `to` keywords. The increment cannot be
-changed. Use while loops for more control over the increment.
+For loops use the `for`, `in`, and `to` keywords. For loops always increment
+or decrement a counter by one on each iteration. This increment cannot be
+changed, use while loops for more control over the increment.
 
 ```reason
 let x = 1;
