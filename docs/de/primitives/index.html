@@ -1,0 +1,184 @@
+<!DOCTYPE html><html lang="de"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Primitives · Reason</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="_Quick overview: [Primitives](/docs/de/overview#built-in-types)_"/><meta name="docsearch:language" content="de"/><meta property="og:title" content="Primitives · Reason"/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io/"/><meta property="og:description" content="_Quick overview: [Primitives](/docs/de/overview#built-in-types)_"/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/icon_50.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io/blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io/blog/feed.xml" title="Reason Blog RSS Feed"/><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/de"><img class="logo" src="/img/dummy.svg" alt="Reason"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/de/what-and-why" target="_self">Docs</a></li><li class=""><a href="/de/try" target="_self">Try</a></li><li class=""><a href="/api/index" target="_self">API</a></li><li class=""><a href="/docs/de/community" target="_self">Community</a></li><li class=""><a href="/blog/" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg" alt="Languages icon"/>Deutsch</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/docs/ja/primitives">日本語</a></li><li><a href="/docs/en/primitives">English</a></li><li><a href="/docs/es-ES/primitives">Español</a></li><li><a href="/docs/fr/primitives">Français</a></li><li><a href="/docs/ko/primitives">한국어</a></li><li><a href="/docs/pt-BR/primitives">Português (Brasil)</a></li><li><a href="/docs/ru/primitives">Русский</a></li><li><a href="/docs/uk/primitives">Українська</a></li><li><a href="/docs/zh-CN/primitives">中文</a></li><li><a href="/docs/zh-TW/primitives">繁體中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank" rel="noreferrer noopener">Beim Übersetzen helfen</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/facebook/reason" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Language Basics</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Intro</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/de/what-and-why">What &amp; Why</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Setup</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/de/installation">Installation</a></li><li class="navListItem"><a class="navItem" href="/docs/de/editor-plugins">Editor Plugins</a></li><li class="navListItem"><a class="navItem" href="/docs/de/extra-goodies">Extra Goodies</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Language Basics</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/de/overview">Overview</a></li><li class="navListItem"><a class="navItem" href="/docs/de/let-binding">Let Bindings</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/docs/de/primitives">Primitives</a></li><li class="navListItem"><a class="navItem" href="/docs/de/type">Type!</a></li><li class="navListItem"><a class="navItem" href="/docs/de/tuple">Tuple</a></li><li class="navListItem"><a class="navItem" href="/docs/de/record">Records</a></li><li class="navListItem"><a class="navItem" href="/docs/de/variant">Variant!</a></li><li class="navListItem"><a class="navItem" href="/docs/de/null-undefined-option">Null, Undefined &amp; Option</a></li><li class="navListItem"><a class="navItem" href="/docs/de/list-and-array">List &amp; Array</a></li><li class="navListItem"><a class="navItem" href="/docs/de/function">Function</a></li><li class="navListItem"><a class="navItem" href="/docs/de/recursion">Recursion</a></li><li class="navListItem"><a class="navItem" href="/docs/de/if-else">If-Else</a></li><li class="navListItem"><a class="navItem" href="/docs/de/pipe-first">Pipe First</a></li><li class="navListItem"><a class="navItem" href="/docs/de/more-on-type">More on Type</a></li><li class="navListItem"><a class="navItem" href="/docs/de/destructuring">Destructuring</a></li><li class="navListItem"><a class="navItem" href="/docs/de/pattern-matching">Pattern Matching!</a></li><li class="navListItem"><a class="navItem" href="/docs/de/mutable-bindings">Mutable Bindings</a></li><li class="navListItem"><a class="navItem" href="/docs/de/imperative-loops">Imperative Loops</a></li><li class="navListItem"><a class="navItem" href="/docs/de/jsx">JSX</a></li><li class="navListItem"><a class="navItem" href="/docs/de/external">External</a></li><li class="navListItem"><a class="navItem" href="/docs/de/exception">Exception</a></li><li class="navListItem"><a class="navItem" href="/docs/de/object">Object</a></li><li class="navListItem"><a class="navItem" href="/docs/de/module">Module</a></li><li class="navListItem"><a class="navItem" href="/docs/de/promise">Promise</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">JavaScript</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/de/interop">Interop</a></li><li class="navListItem"><a class="navItem" href="/docs/de/syntax-cheatsheet">Syntax Cheatsheet</a></li><li class="navListItem"><a class="navItem" href="/docs/de/libraries">Libraries</a></li><li class="navListItem"><a class="navItem" href="/docs/de/converting-from-js">Converting from JS</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Native</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/de/native">Native</a></li><li class="navListItem"><a class="navItem" href="/docs/de/quickstart-ocaml">Native Quickstart</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Extra</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/de/faq">Frequently Asked Questions</a></li><li class="navListItem"><a class="navItem" href="/docs/de/newcomer-examples">Newcomer Examples</a></li><li class="navListItem"><a class="navItem" href="/docs/de/project-structure">Project Structure</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://crowdin.com/project/reason/de" target="_blank" rel="noreferrer noopener">Translate</a><h1 class="postHeaderTitle">Primitives</h1></header><article><div><span><p><em>Quick overview: <a href="/docs/de/overview#built-in-types">Primitives</a></em></p>
+<p>These are the built in types that can be used to represent information and build more complex types.</p>
+<h2><a class="anchor" aria-hidden="true" id="strings"></a><a href="#strings" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Strings</h2>
+<p><em>Quick overview: <a href="/docs/de/overview#strings">Strings</a></em></p>
+<p>Create a string using double quotes:</p>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> s = <span class="hljs-string">"Hello World!"</span>;
+</code></pre>
+<p>Concatenate strings using the <code>++</code> operator:</p>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> s = <span class="hljs-string">"Hello "</span> <span class="hljs-operator">++</span> <span class="hljs-string">"World!"</span>;
+</code></pre>
+<p>More String functions can be found in standard libraries:</p>
+<ul>
+<li>Native: <a href="https://reasonml.github.io/api/String.html"><code>module String</code></a></li>
+<li>BuckleScript: <a href="https://bucklescript.github.io/bucklescript/api/Js.String.html"><code>module Js.String</code></a></li>
+</ul>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> s = <span class="hljs-module-identifier">String</span>.trim(<span class="hljs-string">"  extra whitespace\n"</span>);
+<span class="hljs-comment">/* "extra whitespace" */</span>
+
+<span class="hljs-keyword">let</span> s = <span class="hljs-module-identifier">String</span>.concat(<span class="hljs-string">"\n"</span>, <span class="hljs-literal">[</span><span class="hljs-string">"line 1"</span>, <span class="hljs-string">"line 2"</span><span class="hljs-literal">]</span>);
+<span class="hljs-comment">/* "Line 1\nLine 2" */</span>
+
+<span class="hljs-keyword">let</span> s = <span class="hljs-module-identifier">String</span>.sub(<span class="hljs-string">"Hello World!"</span>, <span class="hljs-number">6</span>, <span class="hljs-number">5</span>);
+<span class="hljs-comment">/* "World" */</span>
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="char"></a><a href="#char" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Char</h3>
+<p>Create a char using single quotes:</p>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> c = <span class="hljs-character">'a'</span>;
+</code></pre>
+<p>Access the char at an index using <code>string.[index]</code>:</p>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> c = <span class="hljs-string">"Hello"</span>.<span class="hljs-literal">[</span><span class="hljs-number">1</span><span class="hljs-literal">]</span>;
+<span class="hljs-comment">/* 'e' */</span>
+</code></pre>
+<p>Convert char to string:</p>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> s = <span class="hljs-module-identifier">String</span>.make(<span class="hljs-number">1</span>, <span class="hljs-character">'c'</span>);
+<span class="hljs-comment">/* "c" */</span>
+
+<span class="hljs-keyword">let</span> charArray = <span class="hljs-literal">[|</span> <span class="hljs-character">'H'</span>, <span class="hljs-character">'e'</span>, <span class="hljs-character">'l'</span>, <span class="hljs-character">'l'</span>, <span class="hljs-character">'o'</span> <span class="hljs-literal">|]</span>;
+<span class="hljs-keyword">let</span> s = <span class="hljs-module-identifier">String</span>.init(<span class="hljs-number">5</span>, i =&gt; charArray<span class="hljs-literal">[</span>i<span class="hljs-literal">]</span>);
+<span class="hljs-comment">/* "Hello" */</span>
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="integer"></a><a href="#integer" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Integer</h2>
+<p><em>Quick overview: <a href="/docs/de/overview#numbers">Numbers</a></em></p>
+<p>Integers are whole numbers. Their bit-size depends on the platform.</p>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> x = <span class="hljs-number">23</span>;
+<span class="hljs-keyword">let</span> x = <span class="hljs-operator">-</span><span class="hljs-number">23</span>;
+</code></pre>
+<p>Standard operations include <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>mod</code>:</p>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> x = <span class="hljs-number">23</span> <span class="hljs-operator">+</span> <span class="hljs-number">1</span> <span class="hljs-operator">-</span> <span class="hljs-number">7</span> <span class="hljs-operator">*</span> <span class="hljs-number">2</span> <span class="hljs-operator">/</span> <span class="hljs-number">5</span>;
+<span class="hljs-keyword">let</span> x = <span class="hljs-number">13</span> mod <span class="hljs-number">2</span>;
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="integer-literals"></a><a href="#integer-literals" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Integer literals</h3>
+<p>Different radix literals can be created using prefixes <code>0x</code>, <code>0o</code>, <code>0b</code>:</p>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> decimal = <span class="hljs-number">11256099</span>;
+<span class="hljs-keyword">let</span> hex = <span class="hljs-number">0xABC123</span>;
+<span class="hljs-keyword">let</span> octal = <span class="hljs-number">0o52740443</span>;
+<span class="hljs-keyword">let</span> binary = <span class="hljs-number">0b101010111100000100100011</span>;
+</code></pre>
+<p>Literals can be broken up using the <code>_</code> character which will be ignored:</p>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> trillion = <span class="hljs-number">1_000_000_000_000</span>;
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="bitwise-operations"></a><a href="#bitwise-operations" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Bitwise operations</h3>
+<p>Use infix functions: <code>land</code>, <code>lor</code>, <code>lxor</code>, <code>lnot</code>, <code>lsl</code>, <code>lsr</code>, <code>asr</code> from <a href="https://reasonml.github.io/api/Pervasives.html#VAL(land)"><code>module Pervasives</code></a></p>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> x = <span class="hljs-number">0b1010</span> lor <span class="hljs-number">0b1100</span>;
+<span class="hljs-comment">/* 0b1110, 14 */</span>
+</code></pre>
+<p>Many bit tricks can be found here: <a href="http://graphics.stanford.edu/~seander/bithacks.html">bithacks</a></p>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> isPowerOfTwo = x =&gt; {
+  x <span class="hljs-operator">!</span><span class="hljs-operator">==</span> <span class="hljs-number">0</span> <span class="hljs-operator">&amp;&amp;</span> x land (x <span class="hljs-operator">-</span> <span class="hljs-number">1</span>) <span class="hljs-operator">===</span> <span class="hljs-number">0</span>
+};
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="float"></a><a href="#float" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Float</h2>
+<p><em>Quick overview: <a href="/docs/de/overview#numbers">Numbers</a></em></p>
+<p>Floats are 64-bit numbers that may have a decimal. They follow the <a href="https://en.wikipedia.org/wiki/IEEE_754">IEEE 754 standard</a>.</p>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> x = <span class="hljs-number">23.0</span>;
+<span class="hljs-keyword">let</span> x = <span class="hljs-number">23.</span>;
+<span class="hljs-keyword">let</span> x = <span class="hljs-operator">-</span><span class="hljs-number">23.0</span>;
+</code></pre>
+<p>Standard operations include <code>+.</code>, <code>-.</code>, <code>*.</code>, <code>/.</code>, <code>**</code>:</p>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> x = <span class="hljs-number">3.0</span> <span class="hljs-operator">+.</span> <span class="hljs-number">1.0</span> <span class="hljs-operator">-.</span> <span class="hljs-number">7.0</span> <span class="hljs-operator">*.</span> <span class="hljs-number">2.0</span> <span class="hljs-operator">/.</span> <span class="hljs-number">5.0</span>;
+
+<span class="hljs-comment">/* Exponentiation */</span>
+<span class="hljs-keyword">let</span> x = <span class="hljs-number">2.0</span> <span class="hljs-operator">**</span> <span class="hljs-number">3.0</span>;
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="boolean"></a><a href="#boolean" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Boolean</h2>
+<p><em>Quick overview: <a href="/docs/de/overview#boolean-values-and-logical-operations">Boolean</a></em></p>
+<p>Reason supports a normal set of boolean and logical operations:</p>
+<ul>
+<li>Boolean operations: <code>!</code>, <code>&amp;&amp;</code>, <code>||</code></li>
+<li>Comparison: <code>&gt;</code>, <code>&lt;</code>, <code>&gt;=</code>, <code>&lt;=</code></li>
+<li>Reference equality: <code>===</code>, <code>!==</code></li>
+<li>Structural equality: <code>==</code>, <code>!=</code></li>
+</ul>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> x = <span class="hljs-literal">true</span>;
+<span class="hljs-keyword">let</span> y = <span class="hljs-operator">!</span><span class="hljs-literal">true</span>;
+<span class="hljs-keyword">let</span> z = x <span class="hljs-operator">&amp;&amp;</span> y <span class="hljs-operator">||</span> <span class="hljs-literal">false</span>;
+</code></pre>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/de/let-binding"><span class="arrow-prev">← </span><span>Let Bindings</span></a><a class="docs-next button" href="/docs/de/type"><span>Type!</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#strings">Strings</a><ul class="toc-headings"><li><a href="#char">Char</a></li></ul></li><li><a href="#integer">Integer</a><ul class="toc-headings"><li><a href="#integer-literals">Integer literals</a></li><li><a href="#bitwise-operations">Bitwise operations</a></li></ul></li><li><a href="#float">Float</a></li><li><a href="#boolean">Boolean</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+                document.addEventListener('keyup', function(e) {
+                  if (e.target !== document.body) {
+                    return;
+                  }
+                  // keyCode for '/' (slash)
+                  if (e.keyCode === 191) {
+                    const search = document.getElementById('search_input_react');
+                    search && search.focus();
+                  }
+                });
+              </script><script>
+              var search = docsearch({
+                
+                apiKey: '966d1e412f67114a07dc0afe44b19b53',
+                indexName: 'reason',
+                inputSelector: '#search_input_react',
+                algoliaOptions: {"facetFilters":["lang:de"]}
+              });
+            </script></body></html>
