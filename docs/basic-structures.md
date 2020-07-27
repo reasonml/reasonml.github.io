@@ -88,7 +88,7 @@ switch (list) {
 
 ## Array
 
-Arrays are a mutable, fixed sized, homogeneous, and ordered collection of items.
+Arrays are mutable, fixed sized, homogeneous, and ordered collections of items.
 Random access on an array is fast, but changing the size of an array requires
 recreating the entire structure.
 
@@ -178,7 +178,7 @@ switch (array) {
 
 ## Tuple
 
-Tuples are an immutable, constant sized, and heterogeneous collection of items.
+Tuples are  immutable, constant sized, and heterogeneous collections of items.
 They provide a way to group values together quickly.
 
 ```reason
