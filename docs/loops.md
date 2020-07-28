@@ -36,7 +36,7 @@ for (i in y downto x) {
 
 ## While Loops
 
-While loops allw executing code until a certain condition is met. It is not
+While loops allow executing code until a certain condition is met. It is not
 restricted to counting between two integers like for loops.
 
 It is common to use [`ref`s](mutable-bindings.md) with while loops.
