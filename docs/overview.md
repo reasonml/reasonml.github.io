@@ -254,6 +254,8 @@ Ref update                      | `x := 20;` or `x.contents = 20;`
 
 ## Loops
 
+_Details: [Loops](loops.md)_
+
 Loops are discouraged in most cases. Instead functional programming patterns
 like `map`, `filter`, or `reduce` can usually be used in their place.
 
