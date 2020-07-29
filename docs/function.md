@@ -2,11 +2,11 @@
 title: Function
 ---
 
-_Cheat sheet for the full function syntax at the end_
+The _[cheat sheet](Tips-&-Tricks) at the end provides the full function syntax._
 
-Can you believe we haven't covered function until now?
+Can you believe we haven't covered functions until now?
 
-Functions are declared with an arrow and return the expression.
+Functions are declared with an arrow and return an expression.
 
 ```reason
 let greet = (name) => "Hello " ++ name;
@@ -18,7 +18,7 @@ This declares a function and assigns to it the name `greet`, which you can call 
 greet("world!"); /* "Hello world!" */
 ```
 
-Multi-arguments functions have arguments separated by comma:
+Multi-argument functions have arguments separated by commas:
 
 ```reason
 let add = (x, y, z) => x + y + z;
@@ -36,7 +36,7 @@ let greetMore = (name) => {
 
 ## No Argument
 
-A function always takes an argument; but sometimes, we'd use it for e.g. side-effects, and don't have anything to pass to it. In other languages, we'd conceptually pass "no argument". In Reason, every function takes an argument; here we'd conventionally pass it the value `()`, called "unit".
+A function always takes an argument. However, sometimes we use a function for a desired side-effect and we don't have anything to pass to it. In other languages, we'd conceptually pass "no argument". In Reason, every function takes an argument; here we'd conventionally pass it the value `()`, called "unit".
 
 ```reason
 /* receive & destructure the unit argument */
@@ -49,11 +49,11 @@ let logSomething = () => {
 logSomething();
 ```
 
-`()` is a totally normal value, the single possible value in `unit`. Reason gave it a special syntax out of convenience.
+`()` is a totally normal value, the single possible value in `unit`. Reason gives it a special syntax for convenience.
 
 ## Labeled Arguments
 
-Multi-arguments functions, especially those whose arguments are of the same type, can be confusing to call.
+Multi-argument functions, especially those whose arguments are of the same type, can be confusing to call.
 
 ```reason
 let addCoordinates = (x, y) => {
@@ -91,9 +91,9 @@ let drawCircle = (~radius as r, ~color as c) => {
 drawCircle(~radius=10, ~color="red");
 ```
 
-As a matter of fact, `(~radius)` is just a shorthand (called **punning**) for `(~radius as radius)`.
+As a matter of fact, `(~radius)` is just shorthand (called **punning**) for `(~radius as radius)`.
 
-Here's the syntax for typing the arguments:
+Here's the syntax for indicating the argument data types:
 
 ```reason
 let drawCircle = (~radius as r: int, ~color as c: string) => ...;
@@ -116,7 +116,7 @@ Actually, the above `add` is nothing but syntactic sugar for this:
 let add = (x) => (y) => x + y;
 ```
 
-OCaml optimizes this to [avoid the unnecessary function allocation](https://reasonml.github.io/en/try.html?reason=DYUwLgBAhgJjEF4IAoAeBKRA+FBPTCOqEA1BLgNwBQVA9AFQTAD2zA1tJGABYgTMBXMAAchAQmhwAYgEsAbnxkBnaBAD6SmQDsA5qDUQAZgK0BjMDOZaIpqMGAT6tKqEiwYshYkkxkAVnRqF3AITWIkd08QZABGQKA) (2 functions here, naively speaking) whenever it can! This way, we get
+OCaml optimizes this to [avoid the unnecessary function allocation](https://reasonml.github.io/en/try.html?reason=DYUwLgBAhgJjEF4IAoAeBKRA+FBPTCOqEA1BLgNwBQVA9AFQTAD2zA1tJGABYgTMBXMAAchAQmhwAYgEsAbnxkBnaBAD6SmQDsA5qDUQAZgK0BjMDOZaIpqMGAT6tKqEiwYshYkkxkAVnRqF3AITWIkd08QZABGQKA) (2 functions here, naively speaking) whenever it can! This way, we get:
 
 - Nice syntax
 - Currying for free (every function takes a single argument, actually!)
@@ -139,22 +139,22 @@ let drawCircle = (~color, ~radius=?, ()) => {
 
 When given in this syntax, `radius` is **wrapped** in the standard library's `option` type, defaulting to `None`. If provided, it'll be wrapped with a `Some`. So `radius`'s type value is either `None` or `Some(int)` here.
 
-**Note**: `None | Some(foo)` is a data structure type called variant, described [earlier](variant.md). This particular variant type is provided by the standard library. It's called `option`. Its definition: `type option('a) = None | Some('a)`.
+**Note**: `None | Some(foo)` is a data structure type called variant, described [earlier](variant.md). This particular variant type, called `option`, is provided by the standard library. Its definition is: `type option('a) = None | Some('a)`.
 
-**Note** the unit `()` at the end of `drawCircle`. Writing this particular function without the unit `()` would lead to the following problem. Because `radius` and `color` are both labeled, the function can be curried, and it can be applied out-of-order, it's unclear what the following means:
+**Note** the unit `()` at the end of `drawCircle`. Writing this particular function without the unit `()` would lead to the following problem. Because `radius` and `color` are both labeled and can be applied out-of-order, and the function can be curried, it's therefore unclear what the following means:
 
 ```reason
 let whatIsThis = drawCircle(~color);
 ```
 
-Is `whatIsThis` a curried `drawCircle` function, waiting for the optional `radius` to be applied? Or did it finish applying because the `radius` is optional? To address this confusion, append a positional (aka non-labeled) argument to `drawCircle` (conventionally `()`), and OCaml will, as a rule of thumb, presume the optional labeled argument is omitted when the positional argument is provided.
+Is `whatIsThis` a curried `drawCircle` function, waiting for the optional `radius` to be applied? Or has it finished applying arguments because the `radius` is optional? To address this confusion, we append a positional (aka non-labeled) argument to `drawCircle` (conventionally, `()`). As a rule of thumb, when the positional argument is provided, OCaml presumes that the optional labeled argument has been omitted on purpose.
 
 If we don't supply the unit, OCaml knows we want to curry the function.
 ```reason
 let curriedFunction = drawCircle(~color);
 ```
 
-If we _do_ supply the unit, OCaml knows we deliberately omit the `radius` parameter, and the function is executed.
+If we _do_ supply the unit, OCaml knows that we have deliberately omitted the `radius` parameter, and the function is executed.
 ```reason
 let circle = drawCircle(~color, ());
 ```
@@ -171,7 +171,7 @@ let result =
   };
 ```
 
-This quickly gets tedious. We provide a shortcut:
+This quickly gets tedious, so we provide a shortcut:
 
 ```reason
 let result = drawCircle(~color, ~radius=?payloadRadius, ());
@@ -212,7 +212,7 @@ and callFirst = () => callSecond();
 
 ## Tips & Tricks
 
-Cheat sheet for the function syntaxes:
+A syntax cheat sheet for functions:
 
 ### Declaration
 
@@ -337,4 +337,6 @@ let add: (int, int) => int;
 
 Same rules as the previous section, except replacing `type foo = bar` with `let add: bar`.
 
-**Don't** confuse this with actually exporting a type in the interface file. `let add: bar` annotates an existing value `bar` from the implementation file. `type foo = bar` exports a type of the same shape from the implementation file.
+**Don't** confuse this with actually exporting a type in the interface file: 
+* `let add: bar` annotates an existing value `bar` from the implementation file. 
+* `type foo = bar` exports a type of the same shape from the implementation file.
