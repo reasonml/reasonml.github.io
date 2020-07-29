@@ -86,7 +86,7 @@ let y =
 /* y is "another number 3", k is still 60 */
 ```
 
-To constrain pattern matching with existing variables, see (when clauses)[#when].
+To constrain pattern matching with existing variables, see [when clauses](#when).
 
 ### Variants
 
