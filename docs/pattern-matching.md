@@ -20,7 +20,7 @@ switch (input) {
 };
 ```
 
-The switch finds the first pattern that matches the input, and then executes the code that the pattern points to (the code after the `=>`). Code for a pattern can be a single expression, or a block of statements.
+The switch finds the first pattern that matches the input, and then executes the code that the pattern points to (the code after the next `=>`). Code for a pattern can be a single expression, or a block of statements. The switch statement itself is an expression that returns the value of the code that it executes.
 
 ```reason
 type t = A | B | C;
@@ -68,19 +68,25 @@ switch (f()) {
 };
 ```
 
-Note that if a variable with the same name already exists in the scope of the switch, then it is not used in the pattern, and is instead shadowed by the pattern's variable. Variables in patterns are declarations of new variables, not references to existing ones.
+Note that if a variable with the same name already exists in the scope of the switch, then it will be shadowed by the variable declared in the pattern inside the code after the `=>`. The original variable is not used in the pattern. Variables in patterns are declarations of new variables, not references to existing ones.
 
 ```reason
 let k = 60;
 
+let x = 3;
+
 let y =
-  switch (3) {
+  switch (x) {
   | 0 => "zero"
   | 1 => "one"
-  | k => "another number " ++ string_of_int(k)
+  | k =>
+    /* k is 3 */
+    "another number " ++ string_of_int(k)
   };
 /* y is "another number 3", k is still 60 */
 ```
+
+To constrain pattern matching with existing variables, see (when clauses)[#when].
 
 ### Variants
 
@@ -297,9 +303,11 @@ let f = ({x, y} as p) => x + y + p.x + p.y;
 ```reason
 let p = {x: 2, y: 2};
 
+let z = 3;
+
 let k =
   switch (p) {
-  | {x, y: 0} when x * x <= 4 => 0
+  | {x, y: 0} when x == z => 0
   | {x, y: 0} when f(x) => 1
   | {x: 2, y} when y < 10 => 2
   | {x: 2, y} when y < 2 => 3 /* never executed, but no warning */
