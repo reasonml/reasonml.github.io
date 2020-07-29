@@ -125,7 +125,7 @@ are more often created using interface files._
 interacted with using a limited set of functions:
 
 _(Writing `type t;` is what makes `t` opaque. `t` would not be opaque and would
-still have a concrete type if `type t = int;` was written instead.)_
+still have a concrete type if `type t = int;` were written instead.)_
 
 ```reason
 module type Duration = {
@@ -143,12 +143,16 @@ module Duration: Duration = {
 };
 ```
 
-Normal integer functions intentionally have errors with `Duration.t`:
+Use the `Duration` module to create and interact with the opaque type:
 
 ```reason
 let oneMinute = Duration.fromSeconds(60);
 let twoMinutes = Duration.add(oneMinute, oneMinute);
+```
 
+Normal integer functions intentionally have errors with `Duration.t` values:
+
+```reason
 /* Error: expected int, but got Duration.t */
 let twoMinutes = oneMinute + oneMinute;
 ```
