@@ -56,6 +56,34 @@ if (displayGreeting) {
 ```
 <!--END_DOCUSAURUS_CODE_TABS-->
 
+## Pattern matching Design Decisions
+
+The notorious [fizzbuzz problem](https://en.wikipedia.org/wiki/Fizz_buzz#Programming_interviews) strangely trips up some people, partially due its nature of paralyzing the programmer who hopes to simplify/unify the few condition branches in search of elegance where there's none. Hopefully you can see that usually, pattern-matching's
+ visual conciseness [allows us to overcome decision paralysis](/try.html?reason=PQKgBAQghgzgpgEzAewHZgBYBcsAcYBcwwATsvDlAMbIJwB0yJA5sAO4CWA1h8AGIcAXoIgBXYQGIA8gGEoAWwA2YEMABQiuFjAAzIYIBG4wWAC8YABQcAlGYB8asGBicsVDJY5h5tMAGYAGjAvHyQAVlsAb0cwAB9LAAYghNtTOzAAIgFhMWEMmPiLJLAAfVT0rP18p0KS5PLM3MFquNL7ZywSDlRmEuQdEu6sK2sYgF8AbjU1HSZPYPQARjA
+sZDBFhJSwaKcAKRh6RWRmCz1hI2ER0cmgA), while keeping all the benefits (and more, as you've seen) of a bunch of brute-forced `if-else`s. There's really nothing wrong with explicitly listing out all the possibilities; Pattern matching corresponds to **case analysis** in math, a valid problem-solving technique that proves to be extremely
+ convenient.
+
+Using a Reason `switch` for the first time might make you feel like you've been missing out all these years. Careful, for it might ruin other languages for you =).
+
+If you've tried to refactor a big, nested if-else logic, you might realize it's very hard to get the logic right. On the other hand, pattern matching + tuple conceptually maps to a 2D table, where each cell can be independently filled. This ensures that whenever you need to add a case in the `switch`, you can target that and only th
+at table cell, without messing other cells up.
+
+```reason
+type animal = Dog | Cat | Bird;
+let result = switch (isBig, myAnimal) {
+| (true, Dog) => 1
+| (true, Cat) => 2
+| (true, Bird) => 3
+| (false, Dog | Cat) => 4
+| (false, Bird) => 5
+};
+```
+
+isBig \ myAnimal | Dog | Cat | Bird
+-----------------|-----|-----|------
+true             |  1  |  2  |  3
+false            |  4  |  4  |  5
+
 ## Strings Tips & Tricks
 
 You probably don't need to use strings as much as you did! https://twitter.com/jusrin00/status/875238742621028355
