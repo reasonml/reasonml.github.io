@@ -35,6 +35,7 @@ Adding to the end of a list is slow because the built-in list is singly linked.
 The expected syntax does **not** work and will not compile:
 
 ```reason
+/* Syntax error */
 let listB = [...listA, 100];
 ```
 
