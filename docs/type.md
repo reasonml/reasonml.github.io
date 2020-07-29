@@ -67,7 +67,7 @@ type timeInterval = (seconds, seconds);
 ```
 
 Using the alias `seconds` it is clear how the `sleep` function works. If `int`
-was used it might not be obvious:
+were used it might not be obvious:
 
 ```reason
 let sleep = (time: seconds) => { ... }
