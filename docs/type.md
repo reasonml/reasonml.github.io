@@ -1,98 +1,192 @@
 ---
-title: Type!
+title: Types
 ---
 
-Types are the highlight of Reason! Here, you get a glimpse of why so many are excited about them.
+Types describe what kind of thing values are. Is this value a string, integer,
+or some complex structure? The type of that value will give a direct answer.
+Having a strict type system is a powerful tool that removes large classes of
+bugs and catches many others when compiling.
 
-This page briefly introduces the types syntax so that you can power through the subsequent sections without getting confused. More advanced topics on types can be found in the [More On Type](more-on-type.md) section.
+In Reason almost all types can be inferred. The compiler will figure out the
+types of everything in your program and ensure they make sense. This means you
+get the benefits of a strict type system without the drawbacks of writing down
+the type of every value.
+
+## The Basics
+
+This is a [let binding](let-binding.md). The binding is named `count`, is of
+type `int`, and has a value of `42`. Its type was inferred, we did not
+explicitly write down that it is an `int`.
+
+_Everything_ in Reason has a type, even if you do not write it down.
+
+```reason
+let count = 42;
+```
+
+Types can be explicitly added with an annotation:
+
+```reason
+let count: int = 42;
+```
+
+Because `count` has a type the compiler knows what we are and are not allowed
+to do with its value:
+
+```reason
+/* Allowed: addition */
+let nextCount = count + 1;
+
+/* Error: count is not a list */
+let x = List.map(fn, count);
+```
 
 ## Annotations
 
-This let-binding doesn't contain any written type:
+Type annotations can appear almost anywhere. They are not often necessary due to
+Reason's type inference, but they can be helpful to confirm your own
+understanding of the program's types.
 
-<!--DOCUSAURUS_CODE_TABS-->
-<!--Reason-->
+`int` and `string` are annotations used throughout these examples:
+
 ```reason
-let score = 10;
-```
-<!--Output-->
-```js
-var score = 10;
-```
-<!--END_DOCUSAURUS_CODE_TABS-->
-
-Reason deducted that `score` is an `int`, judging by the value `10`. This is called **inference**.
-
-But types can also be explicitly written down by choice:
-
-<!--DOCUSAURUS_CODE_TABS-->
-<!--Reason-->
-```reason
-let score: int = 10;
-```
-<!--Output-->
-```js
-var score = 10;
-```
-<!--END_DOCUSAURUS_CODE_TABS-->
-
-You can also wrap any expression in parentheses and annotate it:
-
-<!--DOCUSAURUS_CODE_TABS-->
-<!--Reason-->
-```reason
-let myInt1 = 5;
-let myInt2: int = 5;
-let myInt3 = (5: int) + (4: int);
+let five: int = 5;
+let nine = (five: int) + (4: int);
 let add = (x: int, y: int): int => x + y;
-let drawCircle = (~radius as r: int) : string => "hi";
+let drawCircle = (~radius: int): string => "hi";
 ```
-<!--Output-->
-```js
-var myInt1 = 5;
-var myInt2 = 5;
-var myInt3 = 9;
-function addInts(x, y) {
-  return x + y | 0;
-}
-function drawCircle(r) {
-  return "hi";
-}
-```
-<!--END_DOCUSAURUS_CODE_TABS-->
-
-Note: in the last line, `(~radius as r: int)` is a labeled argument. More on this [here](function.md).
 
 ## Aliases
 
-You can refer to a type by a different name. They'll be equivalent:
+Aliases can be defined for types. This is helpful to attach meaning to simple
+types and when working with complex types that become long to write down.
 
-<!--DOCUSAURUS_CODE_TABS-->
-<!--Reason-->
 ```reason
-type scoreType = int;
-let x: scoreType = 10;
-
+type seconds = int;
+type timeInterval = (seconds, seconds);
 ```
-<!--Output-->
-```js
-var score = 10;
+
+Using the alias `seconds` it is clear how the `sleep` function works. If `int`
+was used it might not be obvious:
+
+```reason
+let sleep = (time: seconds) => { ... }
 ```
-<!--END_DOCUSAURUS_CODE_TABS-->
 
-## Design Decisions
+Type aliases are required in some cases, such as working with
+[variants](variant.md) or [records](record.md).
 
-Reason's type system is the crystallization of decades of research and engineering. Here are a few highlights:
+## Type Arguments
 
-- **Types can be inferred**. The type system deduces the types for you even if you don't manually write them down. This speeds up the prototyping phase. Additionally, editor features like [VSCode's codelens](https://github.com/jaredly/reason-language-server) in our editor integrations show you all the types while you write code.
+Types can have arguments. This is useful when defining structures that work
+with many types of values. Having a single `list` type with an argument that can
+be `int`, `float`, or `string`, is better than having three concrete `intList`,
+`floatList`, and `stringList` types.
 
-- **The type coverage is always 100%**. We don't need a "type coverage" tool! Every piece of Reason code has a type.
+Arguments are prefixed with a single `'` when defining the type:
 
-- **The type system is completely "sound"**. This means that, as long as your code compiles fine, every type guarantees that it's not lying about itself. In a conventional, best-effort type system, just because the type says it's e.g. "an integer that's never null", doesn't mean it's actually never null. In contrast, a pure Reason program has no null bugs.
+```reason
+type list('item) = ...
+```
 
-Many folks who come from a gradually typed community (for example, having experienced using a type system on top of JavaScript, Ruby, Python, etc.) don't understand the fuss about Reason's types "soundness". In reality, there's a big difference between these type systems that are "best effort", aka 99.9% correct, and our type system that's "sound", aka 100% correct.
+When using this type as an annotation the argument must be filled in with a
+concrete type:
 
-Many claim that "99% is good enough". While this could be true in other domains, such claim isn't very valid for code. **Naive probability**: If your code has 100 types, 99.9% probability of correctness per type means that overall, that code's correctness is `99.9% ^ 100 = 90.4%`
+```reason
+let x: list(int) = [1, 2, 3];
+let y: list(string) = ["one", "two", "three"];
+```
 
-Oops. That's potentially lots of false positives in the system's reported types now. Which ones are wrong though? That type system sure isn't telling you ¯\\\_(ツ)\_/¯.
+Types can have multiple arguments and be nested:
 
+```reason
+type pair('a, 'b) = ('a, 'b);
+
+let x: pair(int, string) = (1, "one");
+let y: pair(string, list(int)) = ("123", [1, 2, 3]);
+```
+
+- Note: It is common convention for type arguments to be named `'a`, `'b`,
+`'c`, etc.
+
+## Opaque Types
+
+Opaque types are a powerful tool that limits the implementation details that
+are exposed to users. This makes it easier and safer to modify implementations
+to suit changing needs.
+
+_Note: In these examples module types are used for simplicity, but opqaue types
+are more often created using interface files._
+
+### Setup
+
+`Duration.t` is an opaque type. Its concrete type is hidden and it can only be
+interacted with using a limited set of functions:
+
+_(Writing `type t;` is what makes `t` opaque. `t` would not be opaque and would
+still have a concrete type if `type t = int;` was written instead.)_
+
+```reason
+module type Duration = {
+  /* This is an opaque type. */
+  type t;
+  let fromSeconds: int => t;
+  let add: (t, t) => t;
+};
+
+module Duration: Duration = {
+  /* Duration in seconds */
+  type t = int;
+  let fromSeconds = value => value;
+  let add = (x, y) => x + y;
+};
+```
+
+Normal integer functions intentionally have errors with `Duration.t`:
+
+```reason
+let oneMinute = Duration.fromSeconds(60);
+let twoMinutes = Duration.add(oneMinute, oneMinute);
+
+/* Error: expected int, but got Duration.t */
+let twoMinutes = oneMinute + oneMinute;
+```
+
+### Changing implementation
+
+Now if we want the duration to be more precise and allow millisecond precision
+we can confidently change the implementation and be sure that nothing breaks:
+
+```reason
+module type Duration = {
+  type t;
+  let fromSeconds: int => t;
+  let fromMS: int => t;
+  let add: (t, t) => t;
+};
+
+module Duration: Duration = {
+  /* Duration in milliseconds */
+  type t = int;
+  let fromSeconds = value => value * 1000;
+  let fromMS = value => value;
+  let add = (x, y) => x + y;
+};
+```
+
+This works the exact same:
+
+```reason
+let oneMinute = Duration.fromSeconds(60);
+let twoMinutes = Duration.add(oneMinute, oneMinute);
+```
+
+But now we also support durations less than one second:
+
+```reason
+let halfSecond = Duration.fromMS(500);
+let longerThanOneMinute = Duration.add(oneMinute, halfSecond);
+```
+
+This is a helpful technique that can make code easier to maintain and safer to
+change.
