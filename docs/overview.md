@@ -20,6 +20,8 @@ Type annotation on binding      | `let count: int = 42;`
 
 ## Built In Types
 
+_Details: [Primitives](primitives.md)_
+
 Feature                         | Example
 --------------------------------|----------
 Int                             | `let x: int = 10;`
@@ -36,6 +38,8 @@ Functions                       | `let x: (int, int) => int = (a, b) => a + b;`
 
 ## Strings
 
+_Details: [Strings](primitives.md#strings)_
+
 Feature                         | Example
 --------------------------------|----------
 String                          | `"Hello"`
@@ -47,6 +51,9 @@ Character at index              | `let x = "Hello"; x.[2];`
 
 ## Numbers
 
+- _Details: [Integer](primitives.md#integer)_
+- _Details: [Float](primitives.md#float)_
+
 Feature                         | Example
 --------------------------------|----------
 Integer                         | `23`, `-23`
@@ -57,6 +64,8 @@ Float operations                | `23.0 +. 1.0 -. 7.0 *. 2.0 /. 5.0`
 Float exponentiation            | `2.0 ** 3.0`
 
 ## Boolean Values And Logical Operations
+
+_Details: [Boolean](primitives.md#boolean)_
 
 Feature                         | Example
 --------------------------------|----------
@@ -99,6 +108,8 @@ Typing optional arguments       | `let print = (~prefix: option(string)=?, text)
 
 ## Basic Structures
 
+_Details: [Basic Structures](basic-structures.md)_
+
 Feature                         | Example
 --------------------------------|----------
 List (Immutable)                | `[1, 2, 3]`
@@ -106,6 +117,7 @@ List add to front               | `[a1, a2, ...theRest]`
 List concat                     | `[a1, a2] @ theRest`
 Array (Mutable)                 | <code>[&#124;1, 2, 3&#124;]</code>
 Array access                    | <code>let arr = [&#124;1, 2, 3&#124;]; arr[1];</code>
+Tuples                          | `(1, "hello")`
 
 - List Functions: [`module List`](https://reasonml.github.io/api/List.html)
 - Array Functions: [`module Array`](https://reasonml.github.io/api/Array.html)
@@ -241,6 +253,8 @@ Ref access                      | `x^;` or `x.contents;`
 Ref update                      | `x := 20;` or `x.contents = 20;`
 
 ## Loops
+
+_Details: [Loops](loops.md)_
 
 Loops are discouraged in most cases. Instead functional programming patterns
 like `map`, `filter`, or `reduce` can usually be used in their place.

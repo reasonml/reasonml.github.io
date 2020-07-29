@@ -47,6 +47,100 @@ var newScore = 20;
 ```
 <!--END_DOCUSAURUS_CODE_TABS-->
 
+## Strings & Character
+
+_Details: [Strings](primitives.md#strings)_
+
+Reason strings are delimited using double quotes. They transform into
+regular JavaScript strings. You can directly use a string declared from another
+JavaScript file without back-and-forth conversions.
+
+<!--DOCUSAURUS_CODE_TABS-->
+<!--Reason-->
+```reason
+let greeting = "Hello world!";
+let multilineGreeting = "Hello
+ world!";
+```
+<!--Output-->
+```js
+var greeting = "Hello world!";
+var multilineGreeting = "Hello\n world!";
+```
+<!--END_DOCUSAURUS_CODE_TABS-->
+
+In some cases the compiler can optimize concatenations:
+
+<!--DOCUSAURUS_CODE_TABS-->
+<!--Reason-->
+```reason
+let greetings = "Hello " ++ "world!";
+```
+<!--Output-->
+```js
+var greetings = "Hello world!";
+```
+<!--END_DOCUSAURUS_CODE_TABS-->
+
+### String Interpolation & Unicode
+
+There's a special syntax for string that allows
+
+- Multiline string
+- No special character escaping
+- Variable interpolation
+- Better unicode support
+
+<!--DOCUSAURUS_CODE_TABS-->
+<!--Reason-->
+```reason
+let name = "John"
+let greetingAndOneSlash = {j|Hello, $name
+I'm 奥巴马|j};
+```
+<!--Output-->
+```js
+var name = "John";
+var greetingAndOneSlash = "Hello, " + (String(name) + "\nI\'m 奥巴马");
+```
+<!--END_DOCUSAURUS_CODE_TABS-->
+
+## Integer & Float
+
+_Details: [Integer](primitives.md#integer)_
+
+Reason integers are 32-bits, **truncated when necessary**. They usually compile to JavaScript numbers, but you should **not** rely on that. For example, if you're receiving a JavaScript date number, you should type it in Reason as a **float**, since using integers would cause date truncation.
+
+(More on types and JavaScript interop in a later section.)
+
+BuckleScript has some helpers to work with Integers and Floats:
+
+- [`module Js.Int`](https://bucklescript.github.io/bucklescript/api/Js.Int.html)
+- [`module Js.Float`](https://bucklescript.github.io/bucklescript/api/Js.Float.html)
+
+## Boolean
+
+_Details: [Boolean](primitives.md#boolean)_
+
+Reason booleans and their operations compile to the same JavaScript code you'd expect.
+
+## Regular Expression
+
+Reason's regular expression directly transforms to JavaScript's regular expression.
+Because of that, You can also directly use a JS regular expression in Reason.
+
+<!--DOCUSAURUS_CODE_TABS-->
+<!--Reason-->
+```reason
+let f = [%re "/(0-9)+/g"];
+```
+<!--Output-->
+```js
+var f = (/(0-9)+/g);
+```
+<!--END_DOCUSAURUS_CODE_TABS-->
+
+
 ## Records
 
 _Details: [Records](record.md)_
@@ -106,6 +200,30 @@ var meNextYear = {
 <!--END_DOCUSAURUS_CODE_TABS-->
 
 This update is very efficient! **Check the output tab**. Because we know the whole type shape of the record you're updating, we can avoid the JavaScript way of iterating over all the object fields and stuffing them into a new one. Instead, a new record is directly created.
+
+## List & Array
+
+Reason **arrays** map straightforwardly to JavaScript arrays, and vice-versa. Thus, even though arrays are fix-sized on native, you can still use the `Js.Array` API to resize them. This is fine.
+
+- [`module Js.Array`](https://bucklescript.github.io/bucklescript/api/Js.Array.html)
+- [`module Js.List`](https://bucklescript.github.io/bucklescript/api/Js.List.html)
+
+## Tuples
+
+<!--DOCUSAURUS_CODE_TABS-->
+<!--Reason-->
+```reason
+let ageAndName = (16, "Lil' Reason");
+let my3dCoordinates = (20.0, 30.5, 100.0);
+```
+<!--Output-->
+```js
+var ageAndName = /* tuple */[16, "Lil' Reason"];
+var my3dCoordinates = /* tuple */[20.0, 30.5, 100.0];
+```
+<!--END_DOCUSAURUS_CODE_TABS-->
+
+Because tuples turn into JavaScript arrays, when you receive an existing JS array from the JS side of your codebase, you can also model it as a tuple on the Reason side, providing that said array has the characteristics of a tuple (fixed-sized, potentially heterogenous, etc.).
 
 ## Just dumping JavaScript in the middle of your Reason code
 
