@@ -108,6 +108,7 @@ let y: pair(string, list(int)) = ("123", [1, 2, 3]);
 
 - Note: It is common convention for type arguments to be named `'a`, `'b`,
 `'c`, etc.
+- Note: Type arguments can still be inferred!
 
 ## Opaque Types
 
