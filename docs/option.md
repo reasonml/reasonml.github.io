@@ -27,7 +27,6 @@ type option('value) =
 
 _Note: It is not necessary to define this type, it is already defined._
 
-
 ## Examples
 
 It is common for `None` to be the default value before something is setup.
@@ -49,7 +48,6 @@ let login = () =>
     name: "Alice",
     age: 42,
   });
-
 
 let alice = login();
 ```
