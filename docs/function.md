@@ -1,107 +1,105 @@
 ---
-title: Function
+title: Functions
 ---
 
-_Cheat sheet for the full function syntax at the end_
+_Quick overview: [Functions](overview.md#functions)_
 
-Can you believe we haven't covered function until now?
+Functions are a core part of any language. They perform logic and return values
+based on the arguments provided.
 
-Functions are declared with an arrow and return the expression.
+There is a comprehensive [Cheat-sheet](#cheat-sheet) at the end.
 
-```reason
-let greet = (name) => "Hello " ++ name;
-```
+## The Basics
 
-This declares a function and assigns to it the name `greet`, which you can call like so:
-
-```reason
-greet("world!"); /* "Hello world!" */
-```
-
-Multi-arguments functions have arguments separated by comma:
+Define named functions with a [let binding](let-binding.md), parenthesis `()`,
+and an arrow `=>`:
 
 ```reason
-let add = (x, y, z) => x + y + z;
-add(1, 2, 3); /* 6 */
-```
-
-For longer functions, you'd surround the body with a block:
-
-```reason
-let greetMore = (name) => {
-  let part1 = "Hello";
-  part1 ++ " " ++ name
+let add = (x, y) => {
+  x + y;
 };
 ```
 
-## No Argument
-
-A function always takes an argument; but sometimes, we'd use it for e.g. side-effects, and don't have anything to pass to it. In other languages, we'd conceptually pass "no argument". In Reason, every function takes an argument; here we'd conventionally pass it the value `()`, called "unit".
+Short function bodies can leave out the surrounding block:
 
 ```reason
-/* receive & destructure the unit argument */
-let logSomething = () => {
-  print_endline("hello");
-  print_endline("world")
+let add = (x, y) => x + y;
+```
+
+Call functions using their name and a comma separated list of arguments:
+
+```reason
+let twentyThree = add(10, 13);
+```
+
+- Note: There is no `return` keyword. See
+[implicit return](overview.md#implicit) for details.
+
+## No Arguments
+
+Use a [`unit`](overview.md#unit) argument when writing a function that should
+have "no arguments". This is commonly used when a function has side-effects.
+The unit argument looks like `()`:
+
+```reason
+let launchMissle = () => {
+  someSideEffects();
+  print_endline("Missles have been launched!");
 };
 
-/* call the function with the value of type unit */
-logSomething();
+launchMissle();
 ```
 
-`()` is a totally normal value, the single possible value in `unit`. Reason gave it a special syntax out of convenience.
+## Named Arguments
 
-## Labeled Arguments
-
-Multi-arguments functions, especially those whose arguments are of the same type, can be confusing to call.
+Arguments can be named using a `~` prefix. This can be helpful when dealing with
+many function arguments, or arguments with the same types.
 
 ```reason
-let addCoordinates = (x, y) => {
-  /* use x and y here */
-};
-/* ... */
-addCoordinates(5, 6); /* which is x, which is y? */
+let makeCircle = (~x, ~y, ~radius) => { ... };
 ```
 
-In OCaml/Reason, you can attach labels to an argument by prefixing the name with the `~` symbol:
+Call functions with named arguments using an `=`:
 
 ```reason
-let addCoordinates = (~x, ~y) => {
-  /* use x and y here */
-};
-/* ... */
-addCoordinates(~x=5, ~y=6);
+makeCircle(~x=5, ~y=5, ~radius=10);
 ```
 
-Since we have currying (more on that below), we can provide the arguments in **any order**:
+Because the arguments are named, the calling order can be changed:
 
 ```reason
-addCoordinates(~y=6, ~x=5);
+makeCircle(~radius=10, ~y=5, ~x=5);
 ```
 
-The `~x` part in the declaration means the function accepts an argument labeled `x` and can refer to it in the function body by the same name. You can also refer to the arguments inside the function body by a different name for conciseness:
+## Inline Functions
+
+Functions can be created inline, they do not have to have a name and let
+binding. This is helpful when working with functions that accept other functions
+as arguments.
 
 ```reason
-let drawCircle = (~radius as r, ~color as c) => {
-  setColor(c);
-  startAt(r, r);
-  /* ... */
-};
+/* Not inline */
+let double = value => value * 2;
+let x = List.map(double, x);
 
-drawCircle(~radius=10, ~color="red");
+/* Inline function */
+let x = List.map(value => value * 2, x);
 ```
 
-As a matter of fact, `(~radius)` is just a shorthand (called **punning**) for `(~radius as radius)`.
+## Recursive Functions
 
-Here's the syntax for typing the arguments:
+See [Recursion](recursion.md) for details on defining recursive functions.
 
 ```reason
-let drawCircle = (~radius as r: int, ~color as c: string) => ...;
+let rec infiniteRecursion = () => infiniteRecursion();
 ```
 
-### Currying
+## Advanced
 
-Reason functions can automatically be **partially** called:
+### Partial application
+
+Reason functions can be partially called. This is like creating a new function
+with some of the arguments already set as a particular value.
 
 ```reason
 let add = (x, y) => x + y;
@@ -110,231 +108,144 @@ let eleven = addFive(6);
 let twelve = addFive(7);
 ```
 
-Actually, the above `add` is nothing but syntactic sugar for this:
+If you want to partially call a function with an argument that is not the first
+argument use a `_` to skip arguments:
 
 ```reason
-let add = (x) => (y) => x + y;
+let divide = (a, b) => a / b;
+let half = divide(_, 2);
+let five = half(10);
 ```
 
-OCaml optimizes this to [avoid the unnecessary function allocation](https://reasonml.github.io/en/try.html?reason=DYUwLgBAhgJjEF4IAoAeBKRA+FBPTCOqEA1BLgNwBQVA9AFQTAD2zA1tJGABYgTMBXMAAchAQmhwAYgEsAbnxkBnaBAD6SmQDsA5qDUQAZgK0BjMDOZaIpqMGAT6tKqEiwYshYkkxkAVnRqF3AITWIkd08QZABGQKA) (2 functions here, naively speaking) whenever it can! This way, we get
+### Default Argument Values
 
-- Nice syntax
-- Currying for free (every function takes a single argument, actually!)
-- No performance cost
-
-## Optional Labeled Arguments
-
-Labeled function arguments can be made optional during declaration. You can then omit them when calling the function.
+When defining a function with named arguments default values can be provided:
 
 ```reason
-/* radius can be omitted */
-let drawCircle = (~color, ~radius=?, ()) => {
-  setColor(color);
-  switch (radius) {
-  | None => startAt(1, 1)
-  | Some(r_) => startAt(r_, r_)
-  }
-};
+let makeCircle = (~x=0, ~y=0, ~radius=10, ()) => { ... };
+
+/* Position (0, 0) with radius 10 */
+makeCircle();
+
+/* Position (10, 0) with radius 2 */
+makeCircle(~x=10, ~radius=2, ());
 ```
 
-When given in this syntax, `radius` is **wrapped** in the standard library's `option` type, defaulting to `None`. If provided, it'll be wrapped with a `Some`. So `radius`'s type value is either `None` or `Some(int)` here.
+Notice that an extra unit argument was added after the `radius` argument. This
+has to do with the partial application feature. Now that some arguments have
+default values and can be left out the compiler needs some indication of when
+you are "done" calling a function.
 
-**Note**: `None | Some(foo)` is a data structure type called variant, described [earlier](variant.md). This particular variant type is provided by the standard library. It's called `option`. Its definition: `type option('a) = None | Some('a)`.
+There must be a positional argument after all optional arguments so the compiler
+knows whether to partially apply a function or to use the default values.
 
-**Note** the unit `()` at the end of `drawCircle`. Writing this particular function without the unit `()` would lead to the following problem. Because `radius` and `color` are both labeled, the function can be curried, and it can be applied out-of-order, it's unclear what the following means:
+Consider if there were no final unit argument, what should this do:
 
 ```reason
-let whatIsThis = drawCircle(~color);
+makeCircle(~radius=1);
 ```
 
-Is `whatIsThis` a curried `drawCircle` function, waiting for the optional `radius` to be applied? Or did it finish applying because the `radius` is optional? To address this confusion, append a positional (aka non-labeled) argument to `drawCircle` (conventionally `()`), and OCaml will, as a rule of thumb, presume the optional labeled argument is omitted when the positional argument is provided.
+It is not clear if that should return a function waiting for `x` and `y`
+coordinates, or if should default the `x` and `y` coordinates to zeroes. With
+the final unit argument these cases are disambiguated:
 
-If we don't supply the unit, OCaml knows we want to curry the function.
 ```reason
-let curriedFunction = drawCircle(~color);
+/* Function waiting for x and y coordinates. */
+let makeUnitCircle = makeCircle(~radius=1);
+let c = makeUnitCircle(~x=5, ~y=5, ());
+
+/* Creates a circle at (0, 0) with radius 1 */
+let c = makeCircle(~radius=1, ());
 ```
 
-If we _do_ supply the unit, OCaml knows we deliberately omit the `radius` parameter, and the function is executed.
-```reason
-let circle = drawCircle(~color, ());
-```
+### Optional Arguments
 
-### Explicitly Passed Optional
-
-Sometimes, you might want to forward a value to a function without knowing whether the value is `None` or `Some(a)`. Naively, you'd do:
+Similar to default argument values, named arguments can be marked as optional.
+This is just syntax around making the default value `None`.
 
 ```reason
-let result =
-  switch (payloadRadius) {
-  | None => drawCircle(~color, ())
-  | Some(r) => drawCircle(~color, ~radius=r, ())
+let next = (~value=?, ()) => {
+  switch (value) {
+  | Some(value) => value + 1
+  | None => 1
   };
-```
-
-This quickly gets tedious. We provide a shortcut:
-
-```reason
-let result = drawCircle(~color, ~radius=?payloadRadius, ());
-```
-
-This means "I understand `radius` is optional, and that when I pass it a value it needs to be an `int`, but I don't know whether the value I'm passing is `None` or `Some(val)`, so I'll pass you the whole `option` wrapper".
-
-### Optional with Default Value
-
-Optional labeled arguments can also be provided a default value. In this case, they aren't wrapped in an `option` type.
-
-```reason
-let drawCircle = (~radius=1, ~color, ()) => {
-  setColor(color);
-  startAt(radius, radius)
 };
+
+next(); /* 1 */
+next(~value=11, ()); /* 12 */
 ```
 
-### Recursive Functions
-
-By default, a value can't see a binding that points to it, but including the `rec` keyword in a `let` binding makes this possible. This allows functions to see and call themselves, giving us the power of recursion.
+Sometimes you will have an option that needs to be passed to a function with an
+optional argument. Passing it normally will not work:
 
 ```reason
-let rec neverTerminate = () => neverTerminate();
+let x = Some(11);
+
+/* Error: Incorrect type */
+next(~value=x, ());
 ```
 
-### Mutually Recursive Functions
-
-Mutually recursive functions start like a single recursive function using the
-`rec` keyword, and then are chained together with `and`:
+Instead prefix the variable name with a `?`:
 
 ```reason
-let rec callSecond = () => callFirst()
-and callFirst = () => callSecond();
+next(~value=?x, ()); /* 12 */
 ```
 
-**Note** that there's no semicolon ending the first line and no `let` on the second line.
+### Referencing Previous Arguments
 
-## Tips & Tricks
-
-Cheat sheet for the function syntaxes:
-
-### Declaration
+When defining default values previous arguments may be used:
 
 ```reason
-/* anonymous function. Listed for completeness only */
-(x) => (y) => 1;
-/* sugar for the above */
-(x, y) => 1;
-/* assign to a name */
-let add = (x, y) => 1;
+let add = (a, ~b, ~c=a+1, ~d=b+1, ()) => a + b + c + d;
 
-/* labeled */
-let add = (~first as x, ~second as y) => x + y;
-/* with punning sugar */
-let add = (~first, ~second) => first + second;
-
-/* labeled with default value */
-let add = (~first as x=1, ~second as y=2) => x + y;
-/* with punning */
-let add = (~first=1, ~second=2) => first + second;
-
-/* optional */
-let add = (~first as x=?, ~second as y=?) => switch (x) {...};
-/* with punning */
-let add = (~first=?, ~second=?) => switch (first) {...};
+add(1, ~b=1, ()); /* 6 */
+add(1, ~b=1, ~c=10, ()); /* 14 */
 ```
 
-#### With Type Annotation
+## No Var-args
 
-```reason
-/* anonymous function */
-(x: int) => (y: int): int => 1;
-/* sugar for the above */
-(x: int, y: int): int => 1;
-/* assign to a name */
-let add = (x: int, y: int): int => 1;
+This is no way to define a function that accepts a variable number of arguments
+in Reason. A workaround can be to accept a list as the final argument.
 
-/* labeled */
-let add = (~first as x: int, ~second as y: int) : int => x + y;
-/* with punning sugar */
-let add = (~first: int, ~second: int) : int => first + second;
+## Cheat-sheet
 
-/* labeled with default value */
-let add = (~first as x: int=1, ~second as y: int=2) : int => x + y;
-/* with punning sugar */
-let add = (~first: int=1, ~second: int=2) : int => first + second;
+#### Creating functions:
 
-/* optional */
-let add = (~first as x: option(int)=?, ~second as y: option(int)=?) : int => switch (x) {...};
-/* with punning sugar */
-/* note that the caller would pass an `int`, not `option int` */
-/* Inside the function, `first` and `second` are `option int`. */
-let add = (~first: option(int)=?, ~second: option(int)=?) : int => switch (first) {...};
-```
+Feature                               | Example
+--------------------------------------|----------
+Anonymous function                    | `(x, y) => x + y`
+Named function                        | `let add = (x, y) => x + y;`
+Named arguments                       | `let add = (~x, ~y) => x + y;`
+Default values                        | `let add = (~x=1, ~y=1, ()) => x + y;`
+Optional values                       | `let add = (~x=?, ~y=?, ()) => { ... };`
 
-### Application
+#### Creating functions with annotations:
 
-```reason
-/* anonymous application. Listed for completeness only */
-add(x)(y);
-/* sugar for the above */
-add(x, y);
+Feature                               | Example
+--------------------------------------|----------
+Anonymous function                    | `(x: int, y: int): int => x + y`
+Named function                        | `let add = (x: int, y: int): int => x + y;`
+Named arguments                       | `let add = (~x: int, ~y: int): int => x + y;`
+Default values                        | `let add = (~x: int=1, ~y: int=1, ()): int => x + y;`
+Optional values                       | `let add = (~x: option(int)=?, ~y: option(int)=?, ()): int => { ... };`
 
-/* labeled */
-add(~first=1, ~second=2);
-/* with punning sugar */
-add(~first, ~second);
+#### Function Application
 
-/* application with default value. Same as normal application */
-add(~first=1, ~second=2);
+Feature                               | Example
+--------------------------------------|----------
+Normal arguments                      | `add(1, 2)`
+Named arguments                       | `add(~x=1, ~y=2, ())`
+Named argument punning                | `add(~x, ~y, ())`
+Partial application                   | `let addTen = add(10);`
+Partial application out of order      | `let half = divide(_, 2);`
+Explicit optional application         | `add(~x=?Some(1), ~y=?Some(2), ())`
+Default values                        | `let add = (~x=1, ~y=1, ()) => x + y;`
+Optional values                       | `let add = (~x=?, ~y=?, ()) => { ... };`
 
-/* explicit optional application */
-add(~first=?Some(1), ~second=?Some(2));
-/* with punning */
-add(~first?, ~second?);
-```
+#### Function Types
 
-#### With Type Annotation
-
-```reason
-/* anonymous application */
-add(x: int)(y: int);
-
-/* labeled */
-add(~first=1: int, ~second=2: int);
-/* with punning sugar */
-add(~first: int, ~second: int);
-
-/* application with default value. Same as normal application */
-add(~first=1: int, ~second=2: int);
-
-/* explicit optional application */
-add(~first=?Some(1): option(int), ~second=?Some(2): option(int));
-/* with punning sugar */
-add(~first: option(int)?, ~second: option(int)?);
-```
-
-### Standalone Type Signature
-
-```reason
-/* first arg type, second arg type, return type */
-type foo = int => int => int;
-/* sugar for the above */
-type foo = (int, int) => int;
-
-/* labeled */
-type foo = (~first: int, ~second: int) => int;
-
-/* labeled */
-type foo = (~first: int=?, ~second: int=?, unit) => int;
-```
-
-#### In Interface Files
-
-To annotate a function from the implementation file (`.re`):
-
-```reason
-let add: int => int => int;
-/* sugar for the above */
-let add: (int, int) => int;
-```
-
-Same rules as the previous section, except replacing `type foo = bar` with `let add: bar`.
-
-**Don't** confuse this with actually exporting a type in the interface file. `let add: bar` annotates an existing value `bar` from the implementation file. `type foo = bar` exports a type of the same shape from the implementation file.
+Feature                               | Example
+--------------------------------------|----------
+Normal function                       | `type f = (int, int) => int;`
+Named arguments                       | `type f = (~x: int, ~y: int) => int;`
+Optional arguments                    | `type f = (~x: int=?, ~y: int=?, unit) => int;`

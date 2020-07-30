@@ -79,15 +79,18 @@ Ternary expressions             | `condition ? a : b;`
 
 ## Functions
 
+_Details: [Functions](function.md)_
+
 Feature                         | Example
 --------------------------------|----------
 Function definition             | `let divide = (a, b) => a / b;`
 Function calls                  | `divide(6, 2); // 3`
 Named arguments                 | `let divide = (~a, ~b) => a / b;`
 Calling named arguments         | `divide(~a=6, ~b=2); // 3`
+Named argument punning          | `divide(~a, ~b);`
 Recursive functions             | `let rec infinite = () => infinite();`
 
-## Advanced Functions
+### Advanced Functions
 
 Feature                         | Example
 --------------------------------|----------
@@ -97,7 +100,7 @@ Optional arguments              | `let print = (~prefix=?, text) => {...};`
 Optional arguments with default | `let divide = (~a=100, ~b) => a / b;`
 Function chaining (pipe)        | <code>32 &#124;> half &#124;> half; // 8</code>
 
-## Function Types
+### Function Types
 
 Feature                         | Example
 --------------------------------|----------
