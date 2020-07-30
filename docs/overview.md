@@ -63,7 +63,7 @@ Float                           | `23.0`, `-23.0`
 Float operations                | `23.0 +. 1.0 -. 7.0 *. 2.0 /. 5.0`
 Float exponentiation            | `2.0 ** 3.0`
 
-## Boolean Values And Logical Operations
+## Booleans and Logical Operators
 
 _Details: [Boolean](primitives.md#boolean)_
 
@@ -74,8 +74,6 @@ Comparison                      | `>`, `<`, `>=`, `<=`
 Boolean operations              | `!`, `&&`, <code>&#124;&#124;</code>
 Reference equality              | `===`, `!==`
 Structural equality             | `==`, `!=`
-If-Else expressions             | `if (condition) { a; } else { b; }`
-Ternary expressions             | `condition ? a : b;`
 
 ## Implicit Return
 
@@ -94,6 +92,15 @@ let twentyThree = {
 This applies to functions too. Notice in the following sections that there is
 never a `return` keyword used. The last line of the function is what gets
 returned.
+
+## If-Else Expressions
+
+Feature                         | Example
+--------------------------------|----------
+If-Else expressions             | `if (condition) { a; } else { b; }`
+Ternary expressions             | `condition ? a : b;`
+
+- Note: These are expressions and can be assigned to a variable: `let x = if (condtion) { a; } else { b; };`
 
 ## Functions
 
