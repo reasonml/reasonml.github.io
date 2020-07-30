@@ -254,6 +254,119 @@ var my3dCoordinates = /* tuple */[20.0, 30.5, 100.0];
 
 Because tuples turn into JavaScript arrays, when you receive an existing JS array from the JS side of your codebase, you can also model it as a tuple on the Reason side, providing that said array has the characteristics of a tuple (fixed-sized, potentially heterogenous, etc.).
 
+## Variants
+
+_Details: [Variants](variant.md)_
+
+_This section assumes knowledge about BuckleScript's [FFI](https://bucklescript.github.io/docs/en/interop-overview.html). Skip this if you haven't felt the itch to use variants for wrapping JS functions yet_.
+
+Quite a few JS libraries use functions that can accept many types of arguments. In these cases, it's very tempting to model them as variants. For example, suppose there's a `myLibrary.draw` JS function that takes in either a `number` or a `string`. You might be tempted to bind it like so:
+
+```reason
+/* reserved for internal usage */
+[@bs.module "myLibrary"] external draw : 'a => unit = "draw";
+
+type animal =
+  | MyFloat(float)
+  | MyString(string);
+
+let betterDraw = (animal) =>
+  switch (animal) {
+  | MyFloat(f) => draw(f)
+  | MyString(s) => draw(s)
+  };
+```
+
+You could definitely do that, but there are better ways! For example, simply two `external`s that both compile to the same JS call:
+
+```reason
+[@bs.module "myLibrary"] external drawFloat : float => unit = "draw";
+[@bs.module "myLibrary"] external drawString : string => unit = "draw";
+```
+
+BuckleScript also provides [a few other ways](https://bucklescript.github.io/docs/en/function.html#modeling-polymorphic-function) to do this.
+
+### Variant Types Are Found By Field Name
+
+Please refer to this [record section](record.md#record-types-are-found-by-field-name). Variants are the same: a function can't accept an arbitrary constructor shared by two different variants. Again, such feature exists, it's called a polymorphic variant. We'll talk about this in the future =).
+
+## Options, Null & Undefined
+
+**The `Option` helper module** is [here](https://bucklescript.github.io/bucklescript/api/Belt.Option.html).
+
+The `option` type is common enough that we special-case it when compiling to JavaScript:
+
+```reason
+Some(5)
+```
+
+simply compiles down to `5`, and
+
+```reason
+None
+```
+
+compiles to `undefined`! If you've got e.g. a string in JavaScript that you know might be `undefined`, type it as `option(string)` and you're done! Likewise, you can send a `Some(5)` or `None` to the JS side and expect it to be interpreted correctly =)
+
+### Caveat 1
+
+The option-to-undefined translation isn't perfect, because on our side, `option` values can be composed:
+
+```reason
+Some(Some(Some(5)))
+```
+
+This still compiles to `5`, but this gets troublesome:
+
+```reason
+Some(None)
+```
+
+This is compiled into the following JS:
+
+```js
+Js_primitive.some(undefined);
+```
+
+What's this `Js_primitive` thing? Why can't this compile to `undefined`? Long story short, when dealing with a polymorphic `option` type (aka `option('a)`, for any `'a`), many operations become tricky if we don't mark the value with some special annotation. If this doesn't make sense, don't worry; just remember the following rule:
+
+- **Never, EVER, pass a nested `option` value (e.g. `Some(Some(Some(5)))`) into the JS side.**
+- **Never, EVER, annotate a value coming from JS as `option('a)`. Always give the concrete, non-polymorphic type.**
+
+### Caveat 2
+
+Unfortunately, lots of times, your JavaScript value might be _both_ `null` or `undefined`. In that case, you unfortunately can't type such value as e.g. `option(int)`, since our `option` type only checks for `undefined` and not `null` when dealing with a `None`.
+
+#### Solution: More Sophisticated `undefined` & `null` Interop
+
+To solve this, we provide access to more elaborate `null` and `undefined` helpers through the [`Js.Nullable`](https://bucklescript.github.io/bucklescript/api/Js.Nullable.html) module. This somewhat works like an `option` type, but is different from it.
+
+#### Examples
+
+To create a JS `null`, use the value `Js.Nullable.null`. To create a JS `undefined`, use `Js.Nullable.undefined` (you can naturally use `None` too, but that's not the point here; the `Js.Nullable.*` helpers wouldn't work with it).
+
+If you're receiving, for example, a JS string that can be `null` and `undefined`, type it as:
+
+```reason
+[@bs.module "MyConstant"] external myId: Js.Nullable.t(string) = "myId"
+```
+
+To create such a nullable string from our side (presumably to pass it to the JS side, for interop purpose), do:
+
+```reason
+[@bs.module "MyIdValidator"] external validate: Js.Nullable.t(string) => bool = "validate";
+let personId: Js.Nullable.t(string) = Js.Nullable.return("abc123");
+
+let result = validate(personId);
+```
+
+The `return` part "wraps" a string into a nullable string, to make the type system understand and track the fact that, as you pass this value around, it's not just a string, but a string that can be `null` or `undefined`.
+
+#### Convert to/from `option`
+
+`Js.Nullable.fromOption` converts from a `option` to `Js.Nullable.t`. `Js.Nullable.toOption` does the opposite.
+
+
 ## Just dumping JavaScript in the middle of your Reason code
 
 If you're just hacking things together, this can be very nice, but you also have all of the unsafety of JavaScript code 😄.
