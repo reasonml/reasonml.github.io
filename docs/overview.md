@@ -77,6 +77,24 @@ Structural equality             | `==`, `!=`
 If-Else expressions             | `if (condition) { a; } else { b; }`
 Ternary expressions             | `condition ? a : b;`
 
+## Implicit Return
+
+There is no `return` keyword in Reason. The last expression in a block or
+function definition is the return value for that block.
+
+```reason
+let twentyThree = {
+  let x = 10;
+  let x = x + 10;
+  /* x + 3 is the implicit return of the block. */
+  x + 3;
+};
+```
+
+This applies to functions too. Notice in the following sections that there is
+never a `return` keyword used. The last line of the function is what gets
+returned.
+
 ## Functions
 
 Feature                         | Example
