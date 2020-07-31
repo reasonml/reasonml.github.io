@@ -181,6 +181,8 @@ With type parameters            | `type t('a) = {foo: 'a, bar: string};`
 
 ## Variants
 
+_Details: [Variants](variant.md)_
+
 Variant types model values that may assume one of many known variations. This
 feature is similar to "enums" in other languages, but each variant form may
 optionally specify data that is carried along with it.
@@ -193,6 +195,8 @@ With type parameters            | <code>type t('a) = &#124; One('a) &#124; Two('
 Using a variant                 | `let x = Two("Hello", "World");`
 
 ## Options
+
+_Details: [Options](option.md)_
 
 Options are a built-in variant that represent the presence or absence of a
 value. It is similar to the concept of "nullable" values in other languages. Options

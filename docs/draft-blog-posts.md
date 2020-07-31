@@ -166,3 +166,47 @@ A type system allowing type argument is basically allowing type-level functions.
 [The principle of least power](https://en.wikipedia.org/wiki/Rule_of_least_power) applies when you're trying to "Get Things Done". If the problem domain allows, definitely pick the least abstract (aka, the most concrete) solution available, so that the solution is reached faster and has fewer unstable indirections you'd have to traverse. For example, prefer types over free-form data, prefer data-driven configuration over turing-complete function calls, prefer function calls over macros, prefer macros over project forks, etc. When you constrain your domain and power, things become easier to analyze. That is, _if_ the domain is constrained enough to allow it.
 
 When a type system is an all-encompassing aspect of your program, we need to make sure we leave enough power in order not to overly constrain your expressiveness; without "type functions", you'd end up with quite a bit of boilerplate, e.g. hard-coded `listOfInt`, `listOfString`, `listOfArrayOfFloat`, their respective helper functions, etc. However, please also make sure you don't overly abuse the power given to you through a rather powerful type system. Sometimes, it's fine to write a _little_ bit of boilerplate to reduce the need for otherwise extra powerful types. If anything, tasteful tradeoffs might show your pragmatism and judgement more than fancy types!
+
+## Variant Design Decisions
+
+Variants, in their many forms (polymorphic variant, open variant, GADT, etc.), are likely _the_ feature of a type system such as Reason's. The aforementioned `option` variant, for example, obliterates the need for nullable types, a major source of bugs in other languages. Philosophically speaking, a problem is composed of many possible branches/conditions. Mishandling these conditions is the majority of what we call bugs. **A type system doesn't magically eliminate bugs; it points out the unhandled conditions and asks you to cover them**\*. The ability to model "this or that" correctly is crucial.
+
+For example, some folks wonder how the type system can safely eliminate badly formatted JSON data from propagating into their program. They don't, not by themselves! But if the parser returns the `option` type `None | Some(actualData)`, then you'd have to handle the `None` case explicitly in later call sites. That's all there is.
+
+Performance-wise, a variant can potentially tremendously speed up your program's logic. Here's a piece of JavaScript:
+
+```js
+let data = 'dog';
+if (data === 'dog') {
+  ...
+} else if (data === 'cat') {
+  ...
+} else if (data === 'bird') {
+  ...
+}
+```
+
+There's a linear amount of branch checking here (`O(n)`). Compare this to using a Reason variant:
+
+```reason
+type animal = Dog | Cat | Bird;
+let data = Dog;
+switch (data) {
+| Dog => ...
+| Cat => ...
+| Bird => ...
+}
+```
+
+The compiler sees the variant, then
+
+1. conceptually turns them into `type animal = 0 | 1 | 2`
+2. compiles `switch` to a constant-time format (`O(1)`).
+
+You might wonder why typed functional languages are used so often for parsing; switching on a large tree efficiently and safely is pretty much the best-case scenario for variants.
+
+<!-- TODO: playground link -->
+
+Mind blown yet? Variants have a deep connection to other fields of mathematics; [See here](https://codewords.recurse.com/issues/three/algebra-and-calculus-of-algebraic-data-types) for an interesting exploration.
+
+\* It's always nicer to design away the problem rather than resorting to a type system to cover the pitfalls; In reality, it's unrealistic to do so for every problem, or even just to understand every problem fully in order to design a solution. A type system allows you to safely make a big category of changes to codebases without needing to understand the whole thing upfront. This is great for guided exploration. In this regard, types also allow us not needing to overly design an API just to circumvent callers' simple pitfalls. They reduce the layers of abstractions needed to "get things done", which in return reduces callers' cognitive burden.
