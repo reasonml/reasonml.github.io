@@ -140,6 +140,35 @@ var f = (/(0-9)+/g);
 ```
 <!--END_DOCUSAURUS_CODE_TABS-->
 
+## Types
+
+_Details: [Types](type.md)_
+
+Types do not appear in the JavaScript output:
+
+<!--DOCUSAURUS_CODE_TABS-->
+<!--Reason-->
+```reason
+type foo = int;
+let myInt1 = 5;
+let myInt2: int = 5;
+let myInt3 = (5: int) + (4: int);
+let add = (x: int, y: int): int => x + y;
+let drawCircle = (~radius as r: int) : string => "hi";
+```
+<!--Output-->
+```js
+var myInt1 = 5;
+var myInt2 = 5;
+var myInt3 = 9;
+function addInts(x, y) {
+  return x + y | 0;
+}
+function drawCircle(r) {
+  return "hi";
+}
+```
+<!--END_DOCUSAURUS_CODE_TABS-->
 
 ## Records
 
