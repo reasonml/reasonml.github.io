@@ -3,9 +3,9 @@ title: Types
 ---
 
 Types describe what kind of thing values are. Is this value a string, integer,
-or some complex structure? The type of that value will give a direct answer.
-Having a strict type system is a powerful tool that removes large classes of
-bugs and catches many others when compiling.
+or some complex structure? The type of that value gives an answer. Having a
+strict type system is a powerful tool that removes large classes of bugs and
+catches many others when compiling.
 
 In Reason almost all types can be inferred. The compiler will figure out the
 types of everything in your program and ensure they make sense. This means you
@@ -76,20 +76,21 @@ let sleep = (time: seconds) => { ... }
 Type aliases are required in some cases, such as working with
 [variants](variant.md) or [records](record.md).
 
-## Type Arguments
+## Type Parameters
 
-Types can have arguments. This is useful when defining structures that work
+Types can accept type parameters, which are similar to generics in other
+languages. Parameterized types are useful when defining structures that work
 with many types of values. Having a single `list` type with an argument that can
 be `int`, `float`, or `string`, is better than having three concrete `intList`,
 `floatList`, and `stringList` types.
 
-Arguments are prefixed with a single `'` when defining the type:
+Parameters are prefixed with a single `'` when defining the type:
 
 ```reason
 type list('item) = ...
 ```
 
-When using this type as an annotation the argument must be filled in with a
+When using this type as an annotation the parameter can be filled in with a
 concrete type:
 
 ```reason
@@ -97,7 +98,7 @@ let x: list(int) = [1, 2, 3];
 let y: list(string) = ["one", "two", "three"];
 ```
 
-Types can have multiple arguments and be nested:
+Types can have multiple parameters and be nested:
 
 ```reason
 type pair('a, 'b) = ('a, 'b);
@@ -106,9 +107,9 @@ let x: pair(int, string) = (1, "one");
 let y: pair(string, list(int)) = ("123", [1, 2, 3]);
 ```
 
-- Note: It is common convention for type arguments to be named `'a`, `'b`,
+- Note: It is common convention for type parameters to be named `'a`, `'b`,
 `'c`, etc.
-- Note: Type arguments can still be inferred!
+- Note: Type parameters can still be inferred!
 
 ## Opaque Types
 
