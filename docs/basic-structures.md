@@ -29,6 +29,27 @@ Concatenate lists with the `@` operator:
 let listD = listA @ listB @ [7, 8];
 ```
 
+### Add to end
+
+Adding to the end of a list is slow because the built-in list is singly linked.
+The expected syntax does **not** work and will not compile:
+
+```reason
+/* Syntax error */
+let listB = [...listA, 100];
+```
+
+If you need to add to the end and do not care about the operation being slow,
+then use the concatenate operator:
+
+```reason
+let listB = listA @ [100];
+```
+
+A common workaround that remains performant is adding to the front of the list,
+then reversing the list at the end with
+[`List.rev`](basic-structures.md#reverse).
+
 ### Common Functions
 
 - List Functions: [`module List`](https://reasonml.github.io/api/List.html)
