@@ -44,8 +44,8 @@ type linkedList =
   | Empty;
 ```
 
-The constructors are now like functions that accept their data as arguments.
-Creating a linked list `[1, 2, 3]` looks like:
+The constructors can now accept their data as arguments. Creating a linked
+list `[1, 2, 3]` looks like:
 
 ```reason
 let x = Node(1, Node(2, Node(3, Empty)));
@@ -60,7 +60,7 @@ The primary way to interact with variants is through
 [pattern matching](pattern-matching.md). When pattern matching over a variant
 the compiler can ensure that all cases are covered exhaustively so that there
 is no undefined behavior. This is also helpful when adding new cases to a
-variant later, the compiler will present a clear list of code that needs
+variant later, because the compiler will present a clear list of code that needs
 to be updated.
 
 ```reason
@@ -95,9 +95,7 @@ Details: [Options](option.md)
 
 ## Inline Records
 
-Defining variant constructors with many arguments is an anti-pattern, just like
-defining a function with many unnamed arguments is an anti-pattern. To give
-the arguments names a record is used:
+Often times variants will hold a single predefined record type:
 
 ```reason
 type cat = {
@@ -115,9 +113,9 @@ type animal =
 let x = Cat({name: "Fluffy"});
 ```
 
-This is rather verbose when the record is only meant to be used with specific
-variant constructors. Inline records allows you to create the record type at
-the same time the variant is defined:
+If that record type is only ever used within that single variant, it can be
+more concise to define the variant and record type at the same time using
+inline records:
 
 ```reason
 type animal =
@@ -172,7 +170,8 @@ let y = TwoArgs(2, "two");
 ```
 
 Using a one-argument variant that accepts a 2-tuple is common when dealing with
-structures that use [type arguments](type.md#type-arguments).
+structures that use [type parameters](type.md#type-parameters).
+`list((int, int))` is used because `list(int, int)` is not valid.
 
 ### Variants Must Have Constructors
 

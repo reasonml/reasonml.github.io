@@ -25,7 +25,8 @@ type option('value) =
   | Some('value);
 ```
 
-_Note: It is not necessary to define this type, it is already defined._
+_Note: This type is already defined and automatically available for use
+everywhere._
 
 ## Examples
 
@@ -52,7 +53,7 @@ let login = () =>
 let alice = login();
 ```
 
-Now when writing functions that deal with users we can make sure that there is
+Now when writing functions that deal with users we must make sure that there is
 actually a user present:
 
 ```reason
