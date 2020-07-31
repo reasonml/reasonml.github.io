@@ -1,0 +1,128 @@
+<!DOCTYPE html><html lang="de"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Options and nullability · Reason</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="_Quick overview: [Options](/docs/de/overview#options)_"/><meta name="docsearch:language" content="de"/><meta property="og:title" content="Options and nullability · Reason"/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io/"/><meta property="og:description" content="_Quick overview: [Options](/docs/de/overview#options)_"/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/icon_50.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io/blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io/blog/feed.xml" title="Reason Blog RSS Feed"/><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/de"><img class="logo" src="/img/dummy.svg" alt="Reason"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/de/what-and-why" target="_self">Docs</a></li><li class=""><a href="/de/try" target="_self">Try</a></li><li class=""><a href="/api/index" target="_self">API</a></li><li class=""><a href="/docs/de/community" target="_self">Community</a></li><li class=""><a href="/blog/" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg" alt="Languages icon"/>Deutsch</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/docs/ja/option">日本語</a></li><li><a href="/docs/en/option">English</a></li><li><a href="/docs/es-ES/option">Español</a></li><li><a href="/docs/fr/option">Français</a></li><li><a href="/docs/ko/option">한국어</a></li><li><a href="/docs/pt-BR/option">Português (Brasil)</a></li><li><a href="/docs/ru/option">Русский</a></li><li><a href="/docs/uk/option">Українська</a></li><li><a href="/docs/zh-CN/option">中文</a></li><li><a href="/docs/zh-TW/option">繁體中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank" rel="noreferrer noopener">Beim Übersetzen helfen</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/facebook/reason" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Language Basics</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Intro</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/de/what-and-why">What &amp; Why</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Setup</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/de/installation">Installation</a></li><li class="navListItem"><a class="navItem" href="/docs/de/editor-plugins">Editor Plugins</a></li><li class="navListItem"><a class="navItem" href="/docs/de/extra-goodies">Extra Goodies</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Language Basics</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/de/overview">Overview</a></li><li class="navListItem"><a class="navItem" href="/docs/de/let-binding">Let Bindings</a></li><li class="navListItem"><a class="navItem" href="/docs/de/primitives">Primitives</a></li><li class="navListItem"><a class="navItem" href="/docs/de/basic-structures">Basic Structures</a></li><li class="navListItem"><a class="navItem" href="/docs/de/type">Types</a></li><li class="navListItem"><a class="navItem" href="/docs/de/record">Records</a></li><li class="navListItem"><a class="navItem" href="/docs/de/variant">Variants</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/docs/de/option">Options and nullability</a></li><li class="navListItem"><a class="navItem" href="/docs/de/function">Function</a></li><li class="navListItem"><a class="navItem" href="/docs/de/recursion">Recursion</a></li><li class="navListItem"><a class="navItem" href="/docs/de/if-else">If-Else</a></li><li class="navListItem"><a class="navItem" href="/docs/de/destructuring">Destructuring</a></li><li class="navListItem"><a class="navItem" href="/docs/de/pattern-matching">Pattern Matching</a></li><li class="navListItem"><a class="navItem" href="/docs/de/mutable-bindings">Mutable Bindings</a></li><li class="navListItem"><a class="navItem" href="/docs/de/loops">Loops</a></li><li class="navListItem"><a class="navItem" href="/docs/de/module">Module</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Advanced Features</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/de/jsx">JSX</a></li><li class="navListItem"><a class="navItem" href="/docs/de/external">External</a></li><li class="navListItem"><a class="navItem" href="/docs/de/exception">Exception</a></li><li class="navListItem"><a class="navItem" href="/docs/de/object">Object</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">JavaScript</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/de/interop">Interop</a></li><li class="navListItem"><a class="navItem" href="/docs/de/syntax-cheatsheet">Syntax Cheatsheet</a></li><li class="navListItem"><a class="navItem" href="/docs/de/pipe-first">Pipe First</a></li><li class="navListItem"><a class="navItem" href="/docs/de/promise">Promise</a></li><li class="navListItem"><a class="navItem" href="/docs/de/libraries">Libraries</a></li><li class="navListItem"><a class="navItem" href="/docs/de/converting-from-js">Converting from JS</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Native</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/de/native">Native</a></li><li class="navListItem"><a class="navItem" href="/docs/de/quickstart-ocaml">Native Quickstart</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Extra</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/de/faq">Frequently Asked Questions</a></li><li class="navListItem"><a class="navItem" href="/docs/de/newcomer-examples">Newcomer Examples</a></li><li class="navListItem"><a class="navItem" href="/docs/de/project-structure">Project Structure</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://crowdin.com/project/reason/de" target="_blank" rel="noreferrer noopener">Translate</a><h1 class="postHeaderTitle">Options and nullability</h1></header><article><div><span><p><em>Quick overview: <a href="/docs/de/overview#options">Options</a></em></p>
+<p>Options are a built-in variant that represent the presence or absence of a value. It is similar to the concept of &quot;nullable&quot; values in other languages. Options are used often.</p>
+<p>In Reason there is no &quot;null&quot; value that any type might assume. Instead if a value needs to communicate that it might (or might not) be available, then the <code>option</code> type is used.</p>
+<h2><a class="anchor" aria-hidden="true" id="definition"></a><a href="#definition" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Definition</h2>
+<p>The option type is a <a href="/docs/de/variant">variant</a> with two constructors:</p>
+<ul>
+<li><code>Some</code> represents the presence of a value and accepts that value as an argument</li>
+<li><code>None</code> represents the absence of a value and acceps no arguments</li>
+</ul>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> option('value) =
+  | <span class="hljs-constructor">None</span>
+  | <span class="hljs-constructor">Some</span>('value);
+</code></pre>
+<p><em>Note: This type is already defined and automatically available for use everywhere.</em></p>
+<h2><a class="anchor" aria-hidden="true" id="examples"></a><a href="#examples" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Examples</h2>
+<p>It is common for <code>None</code> to be the default value before something is setup.</p>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> person = {
+  name: string,
+  age: int,
+};
+
+<span class="hljs-keyword">let</span> nobody: option(person) = <span class="hljs-constructor">None</span>;
+</code></pre>
+<p>Logging in can set up the user's data:</p>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> login = () =&gt;
+  <span class="hljs-constructor">Some</span>({
+    name: <span class="hljs-string">"Alice"</span>,
+    age: <span class="hljs-number">42</span>,
+  });
+
+<span class="hljs-keyword">let</span> alice = login();
+</code></pre>
+<p>Now when writing functions that deal with users we must make sure that there is actually a user present:</p>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> happyBirthday = (user) =&gt; {
+  <span class="hljs-keyword">switch</span> (user) {
+  | <span class="hljs-constructor">Some</span>(person) =&gt; <span class="hljs-string">"Happy birthday "</span> <span class="hljs-operator">++</span> person.name
+  | <span class="hljs-constructor">None</span> =&gt; <span class="hljs-string">"Please login first"</span>
+  };
+};
+</code></pre>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/de/variant"><span class="arrow-prev">← </span><span>Variants</span></a><a class="docs-next button" href="/docs/de/function"><span>Function</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#definition">Definition</a></li><li><a href="#examples">Examples</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+                document.addEventListener('keyup', function(e) {
+                  if (e.target !== document.body) {
+                    return;
+                  }
+                  // keyCode for '/' (slash)
+                  if (e.keyCode === 191) {
+                    const search = document.getElementById('search_input_react');
+                    search && search.focus();
+                  }
+                });
+              </script><script>
+              var search = docsearch({
+                
+                apiKey: '966d1e412f67114a07dc0afe44b19b53',
+                indexName: 'reason',
+                inputSelector: '#search_input_react',
+                algoliaOptions: {"facetFilters":["lang:de"]}
+              });
+            </script></body></html>
