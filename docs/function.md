@@ -192,24 +192,47 @@ let c = makeCircle(~radius=1, ());
 
 #### Passing Options to Non-Mandatory Arguments
 
-Sometimes you will have an option that needs to be passed to a function with a
-non-mandatory argument. Passing it normally will not work:
+Sometimes you will want to provide a non-mandatory argument based on whether
+a variable is `Some(data)` or `None`.
 
 ```reason
-let addOne = (~value=?, ()) => { ... };
+let fn = (~data=?, ()) => { ... };
 
-let x = Some(10);
+let x = Some(100);
 
+/* Provide data based on whether x is Some or None */
+switch (x) {
+| Some(data) => fn(~data, ());
+| None => fn();
+};
+```
+
+Passing `x` directly to `~data` will not work because the callsite does not
+expect an option type.
+
+```reason
 /* Error: Incorrect type */
-addOne(~value=x)
+fn(~data=x, ());
 ```
 
-Prefix the variable name with a `?` to explicitly pass the option:
+Reason provides a shorthand syntax for the pattern above. Prefixing a named
+argument's value with a question mark at the call site, will pass whatever is
+inside of the `Some()`, but if the value is `None`, then the named argument
+will not be supplied at all.
 
 ```reason
-/* Good */
-addOne(~value=?x)
+let a = Some(100);
+let b = None;
+
+/* fn is called like `fn(~data=100, ())` */
+fn(~data=?a, ());
+
+/* fn is called like `fn()` */
+fn(~data=?b, ());
 ```
+
+_Note: This shorthand works with non-mandatory arguments that have default
+values too._
 
 #### Referencing Previous Arguments
 
