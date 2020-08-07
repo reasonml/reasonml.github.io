@@ -5,9 +5,10 @@ title: Modules
 _Quick overview: [Modules](overview.md#modules)_
 
 Modules are a way to group type definitions, [let bindings](let-binding.md),
-and other nested modules.
+and other nested modules. They are a helpful tool to keep your code neat and
+organized.
 
-## Basics
+## The Basics
 
 Create a module with the `module` keyword:
 
