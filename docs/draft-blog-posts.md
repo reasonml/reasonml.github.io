@@ -102,6 +102,25 @@ Under native compilation, Reason strings compile to a simple representation whos
 
 Under JavaScript compilation, a Reason string maps to a JavaScript string and vice-versa, so no such above concern or analysis opportunities apply.
 
+## Ternary Design Decisions
+
+Reason ternary is just a sugar for the `bool` variant and a switch:
+
+```reason
+switch (isMorning) {
+| true => "Good morning!"
+| false => "Hello!"
+}
+```
+
+If you pass that through [`refmt`](extra-goodies.md#refmt), you'd get:
+
+```reason
+isMorning ? "Good morning!" : "Hello!";
+```
+
+Interested? Here's a [blog post](https://medium.com/@chenglou/cool-things-reason-formatter-does-9e1f79e25a82) about the spirit of our `refmt`.
+
 ## Tuples
 
 ### Tips & Tricks
