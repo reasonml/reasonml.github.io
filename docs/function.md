@@ -117,9 +117,37 @@ let half = divide(_, 2);
 let five = half(10);
 ```
 
-### Default Argument Values
+### Non-Mandatory Arguments
 
-When defining a function with named arguments default values can be provided:
+When defining a function, named arguments can be marked as non-mandatory.
+This means they do not need to be supplied as arguments by the caller.
+You may simultaneously mark a named argument as non-mandatory, and specify a
+default value (in the event it was not supplied by the caller).
+
+#### Defining Non-Mandatory Arguments
+
+Use `=?` after a named argument to mark it as non-mandatory. Inside the function
+this value will be wrapped in an option based on whether or not the caller
+provided the value.
+
+_Notice: The caller provides an `int`, but inside the function `value` is
+`option(int)`._
+
+```reason
+let addOne = (~value=?, ()) => {
+  switch (value) {
+  | Some(value) => value + 1
+  | None => 1
+  };
+};
+
+addOne(); /* 1 */
+addOne(~value=11, ()); /* 12 */
+```
+
+#### Default Values
+
+Default values can be provided to named arguments using `=value`.
 
 ```reason
 let makeCircle = (~x=0, ~y=0, ~radius=10, ()) => { ... };
@@ -131,15 +159,19 @@ makeCircle();
 makeCircle(~x=10, ~radius=2, ());
 ```
 
-Notice that an extra unit argument was added after the `radius` argument. This
-has to do with the partial application feature. Now that some arguments have
-default values and can be left out the compiler needs some indication of when
-you are "done" calling a function.
+#### Final Unit Argument
 
-There must be a positional argument after all optional arguments so the compiler
-knows whether to partially apply a function or to use the default values.
+In the above examples a final unit argument was added to the function
+definitions. This is related to the partial application feature. When using
+non-mandatory arguments that can be omitted at call sites, the compiler needs
+some indication of when you are "done" calling a function.
 
-Consider if there were no final unit argument, what should this do:
+Specifically, there must be a positional argument after all non-mandatory
+arguments so the compiler can determine whether to partially apply the provided
+arguments or evaluate the function using default values.
+
+Consider if there were no final unit argument to `makeCircle`, what
+should this do:
 
 ```reason
 makeCircle(~radius=1);
@@ -158,40 +190,28 @@ let c = makeUnitCircle(~x=5, ~y=5, ());
 let c = makeCircle(~radius=1, ());
 ```
 
-### Optional Arguments
+#### Passing Options to Non-Mandatory Arguments
 
-Similar to default argument values, named arguments can be marked as optional.
-This is just syntax around making the default value `None`.
-
-```reason
-let next = (~value=?, ()) => {
-  switch (value) {
-  | Some(value) => value + 1
-  | None => 1
-  };
-};
-
-next(); /* 1 */
-next(~value=11, ()); /* 12 */
-```
-
-Sometimes you will have an option that needs to be passed to a function with an
-optional argument. Passing it normally will not work:
+Sometimes you will have an option that needs to be passed to a function with a
+non-mandatory argument. Passing it normally will not work:
 
 ```reason
-let x = Some(11);
+let addOne = (~value=?, ()) => { ... };
+
+let x = Some(10);
 
 /* Error: Incorrect type */
-next(~value=x, ());
+addOne(~value=x)
 ```
 
-Instead prefix the variable name with a `?`:
+Prefix the variable name with a `?` to explicitly pass the option:
 
 ```reason
-next(~value=?x, ()); /* 12 */
+/* Good */
+addOne(~value=?x)
 ```
 
-### Referencing Previous Arguments
+#### Referencing Previous Arguments
 
 When defining default values previous arguments may be used:
 
@@ -216,8 +236,8 @@ Feature                               | Example
 Anonymous function                    | `(x, y) => x + y`
 Named function                        | `let add = (x, y) => x + y;`
 Named arguments                       | `let add = (~x, ~y) => x + y;`
-Default values                        | `let add = (~x=1, ~y=1, ()) => x + y;`
-Optional values                       | `let add = (~x=?, ~y=?, ()) => { ... };`
+Non-mandatory arguments               | `let add = (~x=?, ~y=?, ()) => { ... };`
+Non-mandatory with default            | `let add = (~x=1, ~y=1, ()) => x + y;`
 
 #### Creating functions with annotations:
 
@@ -226,8 +246,8 @@ Feature                               | Example
 Anonymous function                    | `(x: int, y: int): int => x + y`
 Named function                        | `let add = (x: int, y: int): int => x + y;`
 Named arguments                       | `let add = (~x: int, ~y: int): int => x + y;`
-Default values                        | `let add = (~x: int=1, ~y: int=1, ()): int => x + y;`
-Optional values                       | `let add = (~x: option(int)=?, ~y: option(int)=?, ()): int => { ... };`
+Non-mandatory arguments               | `let add = (~x: option(int)=?, ~y: option(int)=?, ()): int => { ... };`
+Non-mandatory with default            | `let add = (~x: int=1, ~y: int=1, ()): int => x + y;`
 
 #### Function Application
 
@@ -238,9 +258,7 @@ Named arguments                       | `add(~x=1, ~y=2, ())`
 Named argument punning                | `add(~x, ~y, ())`
 Partial application                   | `let addTen = add(10);`
 Partial application out of order      | `let half = divide(_, 2);`
-Explicit optional application         | `add(~x=?Some(1), ~y=?Some(2), ())`
-Default values                        | `let add = (~x=1, ~y=1, ()) => x + y;`
-Optional values                       | `let add = (~x=?, ~y=?, ()) => { ... };`
+Options to Non-mandatory arguments    | `add(~x=?Some(1), ~y=?foo, ())`
 
 #### Function Types
 
@@ -248,4 +266,4 @@ Feature                               | Example
 --------------------------------------|----------
 Normal function                       | `type f = (int, int) => int;`
 Named arguments                       | `type f = (~x: int, ~y: int) => int;`
-Optional arguments                    | `type f = (~x: int=?, ~y: int=?, unit) => int;`
+Non-mandatory arguments               | `type f = (~x: int=?, ~y: int=?, unit) => int;`
