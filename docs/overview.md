@@ -75,24 +75,6 @@ Boolean operations              | `!`, `&&`, <code>&#124;&#124;</code>
 Reference equality              | `===`, `!==`
 Structural equality             | `==`, `!=`
 
-## Implicit Return
-
-There is no `return` keyword in Reason. The last expression in a block or
-function definition is the return value for that block.
-
-```reason
-let twentyThree = {
-  let x = 10;
-  let x = x + 10;
-  /* x + 3 is the implicit return of the block. */
-  x + 3;
-};
-```
-
-This applies to functions too. Notice in the following sections that there is
-never a `return` keyword used. The last line of the function is what gets
-returned.
-
 ## If-Else Expressions
 
 Feature                         | Example
@@ -100,7 +82,8 @@ Feature                         | Example
 If-Else expressions             | `if (condition) { a; } else { b; }`
 Ternary expressions             | `condition ? a : b;`
 
-- Note: These are expressions and can be assigned to a variable: `let x = if (condtion) { a; } else { b; };`
+- Note: These are expressions and can be assigned to a variable:
+`let x = if (condtion) { a; } else { b; };`
 
 ## Functions
 
@@ -130,6 +113,20 @@ Inline typing                   | `let divide = (a: int, b: int): int => a / b;`
 Standalone type                 | `type intFn = (int, int) => int;`
 Using standalone type           | `let divide: intFn = (a, b) => a / b;`
 Typing optional arguments       | `let print = (~prefix: option(string)=?, text) => {...};`
+
+## Implicit Return
+
+There is no `return` keyword in Reason. The last expression in a block or
+function definition is the returned value.
+
+```reason
+let twentyThree = () => {
+  let x = 10;
+  let x = x + 10;
+  /* x + 3 is the implicit return of the function. */
+  x + 3;
+};
+```
 
 ## Basic Structures
 
