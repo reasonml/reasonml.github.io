@@ -62,7 +62,7 @@ const users = [
   {
     caption: "Rung",
     image: "img/logos/rung.svg",
-    infoLink: "https://rung.com.br/"
+    infoLink: "https://rung.com.br/",
   },
   {
     caption: "Astrocoders",
@@ -182,72 +182,72 @@ const users = [
   {
     caption: "ruangguru",
     image: "img/logos/ruangguru.svg",
-    infoLink: "https://ruangguru.com/"
+    infoLink: "https://ruangguru.com/",
   },
   {
     caption: "Draftbit",
     image: "img/logos/draftbit.svg",
-    infoLink: "https://draftbit.com"
+    infoLink: "https://draftbit.com",
   },
   {
     caption: "Qwick",
     image: "img/logos/qwick.svg",
-    infoLink: "https://qwick.com"
+    infoLink: "https://qwick.com",
   },
   {
     caption: "Revery",
     image: "img/logos/revery.png",
-    infoLink: "https://outrunlabs.com/revery"
+    infoLink: "https://outrunlabs.com/revery",
   },
   {
     caption: "Onivim 2",
     image: "img/logos/onivim2.png",
-    infoLink: "https://v2.onivim.io"
+    infoLink: "https://v2.onivim.io",
   },
   {
     caption: "O(1) Labs",
     image: "img/logos/o1labs.svg",
-    infoLink: "https://o1labs.org"
+    infoLink: "https://o1labs.org",
   },
   {
     caption: "minima",
     image: "img/logos/minima.svg",
-    infoLink: "https://minima.app"
+    infoLink: "https://minima.app",
   },
   {
     caption: "Iteam",
     image: "img/logos/iteam.svg",
-    infoLink: "https://iteam.se"
+    infoLink: "https://iteam.se",
   },
   {
     caption: "Astrolabe Diagnostics",
     image: "img/logos/astrolabe.svg",
-    infoLink: "https://astrolabediagnostics.com/"
+    infoLink: "https://astrolabediagnostics.com/",
   },
   {
     caption: "Auditless",
     image: "img/logos/auditless.svg",
-    infoLink: "https://auditless.com"
+    infoLink: "https://auditless.com",
   },
   {
     caption: "Cutii",
     image: "img/logos/cutii.svg",
-    infoLink: "https://www.cutii.io/en"
+    infoLink: "https://www.cutii.io/en",
   },
   {
     caption: "Velvon",
     image: "img/logos/velvon.svg",
-    infoLink: "https://velvon.com/en/home/"
+    infoLink: "https://velvon.com/en/home/",
   },
   {
     caption: "Band Protocol",
     image: "img/logos/band-protocol.svg",
-    infoLink: "https://bandprotocol.com/"
+    infoLink: "https://bandprotocol.com/",
   },
   {
     caption: "Radity",
     image: "img/logos/radity-logo-ds.svg",
-    infoLink: "https://radity.com/"
+    infoLink: "https://radity.com/",
   },
   {
     caption: "codecentric",
@@ -277,7 +277,7 @@ const users = [
   {
     name: "Wolt",
     image: "img/logos/wolt.svg",
-    infoLink: "https://wolt.com/"
+    infoLink: "https://wolt.com/",
   },
   {
     name: "Hemnet",
@@ -293,7 +293,17 @@ const users = [
     name: "Lukin Co.",
     image: "img/logos/lukin.svg",
     infoLink: "https://lukin.co",
-  }
+  },
+  {
+    name: "Wildcards",
+    image: "img/logos/wildcards.svg",
+    link: "https://wildcards.world",
+  },
+  {
+    name: "Always For Sale",
+    image: "img/logos/always-for-sale.svg",
+    link: "https://alwaysforsale.io",
+  },
 ];
 
 const examples = [
@@ -310,7 +320,8 @@ const examples = [
   {
     name: "TodoMVC",
     image: "img/examples/todomvc.png",
-    link: "https://github.com/reasonml-community/reason-react-example/tree/master/src/todomvc",
+    link:
+      "https://github.com/reasonml-community/reason-react-example/tree/master/src/todomvc",
   },
   {
     name: "Mareo",
@@ -320,20 +331,21 @@ const examples = [
   {
     name: "Avatar Generator",
     image: "img/examples/avatar-generator.png",
-    link: "https://github.com/draftbit/avatar-generator"
+    link: "https://github.com/draftbit/avatar-generator",
   },
   {
     name: "SwissDev JavaScript Jobs",
     image: "img/examples/swiss-dev-jobs-square.png",
-    link: "https://swissdevjobs.ch/jobs/JavaScript/All"
-  }
-]
+    link: "https://swissdevjobs.ch/jobs/JavaScript/All",
+  },
+];
 
-let reasonHighlightJs = require('reason-highlightjs');
+let reasonHighlightJs = require("reason-highlightjs");
 
 const siteConfig = {
   title: "Reason" /* title for your website */,
-  tagline: "Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript & OCaml ecosystems.",
+  tagline:
+    "Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript & OCaml ecosystems.",
   url: "https://reasonml.github.io" /* your github url */,
   editUrl: "https://github.com/reasonml/reasonml.github.io/tree/source/docs/",
   translationRecruitingLink: "https://crowdin.com/project/reason",
@@ -353,7 +365,7 @@ const siteConfig = {
   ],
   users,
   examples,
-  onPageNav: 'separate',
+  onPageNav: "separate",
   /* path to images for header/footer */
   headerIcon: "img/dummy.svg",
   footerIcon: "img/icon_50.png",
@@ -367,24 +379,24 @@ const siteConfig = {
     codeBgColor: "#f7f7f7",
     tableRowColor: "#f7f7f7",
     codeBoxVisualSpacing: "20px",
-    inactiveCodeTabBgColor: "#fcfcfc"
+    inactiveCodeTabBgColor: "#fcfcfc",
   },
   // for the api page
   wrapPagesHTML: true,
   // no .html suffix needed
   cleanUrl: true,
   highlight: {
-    theme: 'atom-one-light',
+    theme: "atom-one-light",
     hljs: function (hljs) {
-      hljs.registerLanguage('reason', reasonHighlightJs)
-    }
+      hljs.registerLanguage("reason", reasonHighlightJs);
+    },
   },
   algolia: {
     apiKey: "966d1e412f67114a07dc0afe44b19b53",
     indexName: "reason",
     algoliaOptions: {
-      facetFilters: ["lang:LANGUAGE"]
-    }
+      facetFilters: ["lang:LANGUAGE"],
+    },
   },
   disableHeaderTitle: true,
 };
