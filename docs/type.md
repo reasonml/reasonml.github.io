@@ -117,7 +117,7 @@ Opaque types are a powerful tool that limits the implementation details that
 are exposed to users. This makes it easier and safer to modify implementations
 to suit changing needs.
 
-_Note: In these examples module types are used for simplicity, but opqaue types
+_Note: In these examples module types are used for simplicity, but opaque types
 are more often created using interface files._
 
 ### Setup
