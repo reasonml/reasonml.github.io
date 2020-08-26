@@ -354,6 +354,7 @@ const siteConfig = {
   users,
   examples,
   onPageNav: 'separate',
+  scripts: ['/js/redirectToNewDoc.js'],
   /* path to images for header/footer */
   headerIcon: "img/dummy.svg",
   footerIcon: "img/icon_50.png",
