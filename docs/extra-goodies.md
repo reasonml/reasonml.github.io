@@ -20,4 +20,4 @@ https://sketch.sh/
 
 ## Bsb-native
 
-[Bsb-native](https://github.com/bsansouci/bsb-native) is a tiny fork of our `bsb` build system (used by Reason and BuckleScript) that compiles to native assembly code through the familiar setup you've been using.
+[Bsb-native](https://github.com/bsansouci/bucklescript) is a tiny fork of our `bsb` build system (used by Reason and BuckleScript) that compiles to native assembly code through the familiar setup you've been using.
