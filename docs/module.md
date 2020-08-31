@@ -52,14 +52,17 @@ Constantly referring to a value/type in a module can be tedious. Instead, we can
 module's name. Instead of writing:
 
 ```reason
-let p: School.profession = School.getProfession(School.person1);
+let person: School.profession = School.person1
+let prof = School.getProfession(person);
 ```
 
 We can write:
 
 ```reason
 open School;
-let p: profession = getProfession(person1);
+let person: profession = person1
+let prof = getProfession(person);
+
 ```
 
 The content of `School` module are made visible (**not** copied into the file, but simply made visible!) in scope. `profession`, `getProfession` and `person1` will thus correctly be found.
