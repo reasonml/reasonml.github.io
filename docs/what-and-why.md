@@ -6,7 +6,7 @@ title: What & Why
 
 Reason is not a new language; it's a new syntax and toolchain powered by the battle-tested language, [OCaml](http://ocaml.org). Reason gives OCaml a familiar syntax geared toward JavaScript programmers, and caters to the existing NPM/Yarn workflow folks already know.
 
-In that regard, Reason can be considered as a solidly, statically typed, faster and simpler cousin of JavaScript, minus the historical crufts, plus the features of ES2030 you can use today, and with access to both the JS and the OCaml ecosystem!
+In that regard, Reason can be considered as a solidly, statically typed, faster and simpler cousin of JavaScript, minus the historical crufts, plus the features of ES2020 you can use today, and with access to both the JS and the OCaml ecosystem!
 
 Reason compiles to JavaScript thanks to our partner project, [BuckleScript](https://bucklescript.github.io), which compiles OCaml/Reason into readable JavaScript with smooth interop. Reason also compiles to fast, barebone assembly, thanks to OCaml itself.
 
