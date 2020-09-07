@@ -27,7 +27,7 @@ for it, learn about people using Reason in production:
 There are several projects that allow Reason (and OCaml) to be used in different
 environments.
 
-- **Native Executables**: Using the standard compiler native executables be built and run directly on your machine.
+- **Native Executables**: Using the standard compiler native executables can be built and run directly on your machine.
   - Tools: [dune](https://dune.build/), [esy](https://github.com/esy/esy)
 - **Browsers**: There are several projects that will compile Reason to equivalent JavaScript code that can be run in the browser. 
   - [ReScript](https://rescript-lang.org/) (formerly BuckleScript)
