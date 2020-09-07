@@ -14,8 +14,8 @@ possible in Reason is also possible with OCaml and vice-versa._
 ## Why Use Reason?
 
 The powerful typesystem underlying Reason will reduce bugs, increase
-maintainability, and improve refactorabilty of your code. Don't take our word
-for it, learn about people using Reason in production:
+maintainability, and improve refactorabilty of your code. Learn more about
+people using Reason in production:
 
 - [One and a half years of ReasonML in production](https://tech.ahrefs.com/one-and-a-half-years-of-reasonml-in-production-2250cf5ba63b)
 - [Link 2]
