@@ -9,7 +9,7 @@ strong type system, and has a syntax designed to feel familiar to people
 coming from JavaScript or C-family languages.
 
 _Note: Reason can be translated back and forth to OCaml using `refmt`. Anything
-possible in Reason is also possible with OCaml and vice-versa._
+possible in Reason is also possible with OCaml and vice versa._
 
 ## Why Use Reason?
 
