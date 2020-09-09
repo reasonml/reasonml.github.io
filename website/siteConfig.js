@@ -280,11 +280,6 @@ const users = [
     infoLink: "https://wolt.com/"
   },
   {
-    name: "Hemnet",
-    image: "img/logos/hemnet.svg",
-    infoLink: "https://hemnet.se",
-  },
-  {
     name: "Atvero",
     image: "img/logos/atvero.svg",
     infoLink: "https://atvero.com",
