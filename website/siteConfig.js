@@ -293,6 +293,11 @@ const users = [
     name: "Lukin Co.",
     image: "img/logos/lukin.svg",
     infoLink: "https://lukin.co",
+  },
+  {
+    name: "Maker",
+    image: "img/logos/maker.svg",
+    infoLink: "https://maker.co",
   }
 ];
 
