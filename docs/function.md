@@ -247,7 +247,7 @@ add(1, ~b=1, ~c=10, ()); /* 14 */
 
 ## No Var-args
 
-This is no way to define a function that accepts a variable number of arguments
+There is no way to define a function that accepts a variable number of arguments
 in Reason. A workaround can be to accept a list as the final argument.
 
 ## Cheat-sheet
