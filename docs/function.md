@@ -42,12 +42,12 @@ have "no arguments". This is commonly used when a function has side-effects.
 The unit argument looks like `()`:
 
 ```reason
-let launchMissle = () => {
+let launchMissile = () => {
   someSideEffects();
-  print_endline("Missles have been launched!");
+  print_endline("Missiles have been launched!");
 };
 
-launchMissle();
+launchMissile();
 ```
 
 ## Named Arguments
