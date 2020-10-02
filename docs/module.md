@@ -107,28 +107,24 @@ It is covered [later](#including-modules).
 ## Including Modules
 
 The `include` keyword copies the contents of a module into another module. This
-can provide a sense of inheritance by always including a base module.
+can provide a sense of inheritance by always including a default set of
+functions.
 
 ```reason
-module BaseItem = {
-  let name = "Unknown";
-  let cost = 0;
-  let quantity = 0;
-
-  let getTotalCost = () => cost * quantity;
+module BaseItem = {  
+  let isEnabled = (user) => user.isLoggedIn;
+  let run = () => "Do Nothing.";
 };
 
-module Apples = {
-  include BaseItem;
-
-  /* These overwrite the values from BaseItem */
-  let name = "Apple";
-  let cost = 50;
-  let quantity = 7;
+module Hello = {
+  include BaseItem;  
+  let run = () => "Hello World!";
 };
 
-/* We do not have to re-implement this function for each item. */
-Apples.getTotalCost();
+/* Can safely use the interface of BaseItem even if isEnabled does not change */
+if (Hello.isEnabled(User.getCurrentUser())) {
+  print_endline(Hello.run());
+};
 ```
 
 ## Module Types
