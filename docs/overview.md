@@ -299,6 +299,8 @@ bool for break-like behavior: `let break = ref(false); while (!break^ && conditi
 
 ## Modules
 
+_Details: [Modules](module.md)_
+
 Modules are a way to group types and values. Each Reason file implicitly
 creates a module of the same name. Each `type` definition and `let` binding in
 a module automatically becomes a "member" of that module which can be accessed
