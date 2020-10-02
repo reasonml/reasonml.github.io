@@ -66,7 +66,7 @@ let getDuration = () => {
   ten;
 };
 
-/* Unbound value */
+/* Error: Unbound value */
 fromSeconds(5);
 ```
 
@@ -81,7 +81,7 @@ let timer = Duration.{contents: fromSeconds(10)};
 /* A list of durations */
 let durations = Duration.[fromSeconds(1), fromSeconds(2), fromSeconds(3)];
 
-/* Unbound value */
+/* Error: Unbound value */
 fromSeconds(5);
 ```
 
@@ -97,7 +97,7 @@ module DurationCopy = {
   let ten = fromSeconds(10);
 };
 
-/* Error Unbound Value */
+/* Error: Unbound Value */
 let twenty = DurationCopy.fromSeconds(20);
 ```
 
@@ -122,7 +122,7 @@ module Hello = {
 };
 
 /* Can safely use the interface of BaseItem even if isEnabled does not change */
-if (Hello.isEnabled(User.getCurrentUser())) {
+if (Hello.isEnabled(currentUser)) {
   print_endline(Hello.run());
 };
 ```
@@ -187,8 +187,8 @@ module type PrintableDuration = {
 
 ## Interface Files
 
-Interface files (`.rei` files) are similar to module types. They create a module
-type and automatically apply it to the `.re` file with the same name.
+Interface files (`.rei` files) are module types. The file creates a module
+type and automatically applies it to the `.re` file with the same name.
 
 In the above examples we instead may have written two files:
 
