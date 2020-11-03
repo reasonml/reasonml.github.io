@@ -19,7 +19,7 @@ yarn global add bs-platform
 The global installation comes with a simple project generator. Try:
 
 ```sh
-bsb -init my-new-project -theme basic-reason
+bsb -init my-new-project -theme basic
 ```
 
 To compile & run the project you just created:
