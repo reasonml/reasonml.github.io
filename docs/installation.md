@@ -26,6 +26,7 @@ To compile & run the project you just created:
 
 ```sh
 cd my-new-project
+yarn
 yarn build # or npm run build, for npm
 node src/Demo.bs.js
 ```
