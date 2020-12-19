@@ -83,7 +83,7 @@ If-Else expressions             | `if (condition) { a; } else { b; }`
 Ternary expressions             | `condition ? a : b;`
 
 - Note: These are expressions and can be assigned to a variable:
-`let x = if (condtion) { a; } else { b; };`
+`let x = if (condition) { a; } else { b; };`
 
 ## Functions
 
