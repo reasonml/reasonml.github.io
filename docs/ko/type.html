@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="ko"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>타입 · Reason</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="Types describe what kind of thing values are. Is this value a string, integer, or some complex structure? The type of that value gives an answer. Having a strict type system is a powerful tool that removes large classes of bugs and catches many others when compiling."/><meta name="docsearch:language" content="ko"/><meta property="og:title" content="타입 · Reason"/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io/"/><meta property="og:description" content="Types describe what kind of thing values are. Is this value a string, integer, or some complex structure? The type of that value gives an answer. Having a strict type system is a powerful tool that removes large classes of bugs and catches many others when compiling."/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/icon_50.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io/blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io/blog/feed.xml" title="Reason Blog RSS Feed"/><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/ko"><img class="logo" src="/img/dummy.svg" alt="Reason"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/ko/what-and-why" target="_self">문서</a></li><li class=""><a href="/ko/try" target="_self">해보기</a></li><li class=""><a href="/api/index" target="_self">API</a></li><li class=""><a href="/docs/ko/community" target="_self">커뮤니티</a></li><li class=""><a href="/blog/" target="_self">블로그</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg" alt="Languages icon"/>한국어</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/docs/ja/type">日本語</a></li><li><a href="/docs/en/type">English</a></li><li><a href="/docs/de/type">Deutsch</a></li><li><a href="/docs/es-ES/type">Español</a></li><li><a href="/docs/fr/type">Français</a></li><li><a href="/docs/pt-BR/type">Português (Brasil)</a></li><li><a href="/docs/ru/type">Русский</a></li><li><a href="/docs/uk/type">Українська</a></li><li><a href="/docs/zh-CN/type">中文</a></li><li><a href="/docs/zh-TW/type">繁體中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank" rel="noreferrer noopener">번역 돕기</a></li></ul></div></li><script>
+<!DOCTYPE html><html lang="ko"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>타입 · Reason</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="타입은 값이 어떤 종류인지를 나타냅니다. 어떤 값이 문자열일까요, 정수일까요, 아니면 어떤 복잡한 구조체일까요? 값의 타입이 바로 그 답을 알려 줍니다. 엄격한 타입 시스템은 컴파일 도중에 큰 부류의 버그를 없애고, 다른 많은 버그를 잡아 주는 강력한 도구입니다."/><meta name="docsearch:language" content="ko"/><meta property="og:title" content="타입 · Reason"/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io/"/><meta property="og:description" content="타입은 값이 어떤 종류인지를 나타냅니다. 어떤 값이 문자열일까요, 정수일까요, 아니면 어떤 복잡한 구조체일까요? 값의 타입이 바로 그 답을 알려 줍니다. 엄격한 타입 시스템은 컴파일 도중에 큰 부류의 버그를 없애고, 다른 많은 버그를 잡아 주는 강력한 도구입니다."/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/icon_50.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io/blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io/blog/feed.xml" title="Reason Blog RSS Feed"/><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/ko"><img class="logo" src="/img/dummy.svg" alt="Reason"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/ko/what-and-why" target="_self">문서</a></li><li class=""><a href="/ko/try" target="_self">해보기</a></li><li class=""><a href="/api/index" target="_self">API</a></li><li class=""><a href="/docs/ko/community" target="_self">커뮤니티</a></li><li class=""><a href="/blog/" target="_self">블로그</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg" alt="Languages icon"/>한국어</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/docs/ja/type">日本語</a></li><li><a href="/docs/en/type">English</a></li><li><a href="/docs/de/type">Deutsch</a></li><li><a href="/docs/es-ES/type">Español</a></li><li><a href="/docs/fr/type">Français</a></li><li><a href="/docs/pt-BR/type">Português (Brasil)</a></li><li><a href="/docs/ru/type">Русский</a></li><li><a href="/docs/uk/type">Українська</a></li><li><a href="/docs/zh-CN/type">中文</a></li><li><a href="/docs/zh-TW/type">繁體中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank" rel="noreferrer noopener">번역 돕기</a></li></ul></div></li><script>
         const languagesMenuItem = document.getElementById("languages-menu");
         const languagesDropDown = document.getElementById("languages-dropdown");
         languagesMenuItem.addEventListener("click", function(event) {
@@ -66,89 +66,89 @@
                 };
               }
             });
-        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://crowdin.com/project/reason/ko" target="_blank" rel="noreferrer noopener">Translate</a><h1 class="postHeaderTitle">타입</h1></header><article><div><span><p>Types describe what kind of thing values are. Is this value a string, integer, or some complex structure? The type of that value gives an answer. Having a strict type system is a powerful tool that removes large classes of bugs and catches many others when compiling.</p>
-<p>In Reason almost all types can be inferred. The compiler will figure out the types of everything in your program and ensure they make sense. This means you get the benefits of a strict type system without the drawbacks of writing down the type of every value.</p>
-<h2><a class="anchor" aria-hidden="true" id="the-basics"></a><a href="#the-basics" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>The Basics</h2>
-<p>This is a <a href="/docs/ko/let-binding">let binding</a>. The binding is named <code>count</code>, is of type <code>int</code>, and has a value of <code>42</code>. Its type was inferred, we did not explicitly write down that it is an <code>int</code>.</p>
-<p><em>Everything</em> in Reason has a type, even if you do not write it down.</p>
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://crowdin.com/project/reason/ko" target="_blank" rel="noreferrer noopener">Translate</a><h1 class="postHeaderTitle">타입</h1></header><article><div><span><p>타입은 값이 어떤 종류인지를 나타냅니다. 어떤 값이 문자열일까요, 정수일까요, 아니면 어떤 복잡한 구조체일까요? 값의 타입이 바로 그 답을 알려 줍니다. 엄격한 타입 시스템은 컴파일 도중에 큰 부류의 버그를 없애고, 다른 많은 버그를 잡아 주는 강력한 도구입니다.</p>
+<p>Reason에선 거의 대부분의 타입이 추론될 수 있습니다. 컴파일러는 프로그램 속 모든 것의 타입을 추론하고, 추론한 타입이 말이 되도록 보장할 것입니다. 따라서 우리는 모든 값의 타입을 쓰지 않고도 엄격한 타입 시스템의 이점을 누릴 수 있습니다.</p>
+<h2><a class="anchor" aria-hidden="true" id="기초"></a><a href="#기초" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>기초</h2>
+<p>여기 [let binding](let binding.md)이 하나 있습니다. 이름은 <code>count</code>이고, 타입은 <code>int</code>, 값은 <code>42</code>입니다. 우리는 명시적으로 그게 <code>int</code>라고 쓰지 않았지만, 타입은 추론됩니다.</p>
+<p>여러분이 타입을 쓰지 않아도 Reason의 <em>모든 것</em>에는 타입이 있습니다.</p>
 <pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> count = <span class="hljs-number">42</span>;
 </code></pre>
-<p>Types can be explicitly added with an annotation:</p>
+<p>타입은 주석을 통해 명시적으로 추가될 수 있습니다.</p>
 <pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> count: int = <span class="hljs-number">42</span>;
 </code></pre>
-<p>Because <code>count</code> has a type the compiler knows what we are and are not allowed to do with its value:</p>
-<pre><code class="hljs css language-reason"><span class="hljs-comment">/* Allowed: addition */</span>
+<p><code>count</code>가 타입을 가지기 때문에 컴파일러는 우리가 이 값을 가지고 무엇을 할 수 있고 없는지를 알고 있습니다.</p>
+<pre><code class="hljs css language-reason"><span class="hljs-comment">/* 덧셈은 허용됨 */</span>
 <span class="hljs-keyword">let</span> nextCount = count <span class="hljs-operator">+</span> <span class="hljs-number">1</span>;
 
-<span class="hljs-comment">/* Error: count is not a list */</span>
+<span class="hljs-comment">/* 오류: count는 list가 아님 */</span>
 <span class="hljs-keyword">let</span> x = <span class="hljs-module-identifier">List</span>.map(fn, count);
 </code></pre>
-<h2><a class="anchor" aria-hidden="true" id="annotations"></a><a href="#annotations" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Annotations</h2>
-<p>Type annotations can appear almost anywhere. They are not often necessary due to Reason's type inference, but they can be helpful to confirm your own understanding of the program's types.</p>
-<p><code>int</code> and <code>string</code> are annotations used throughout these examples:</p>
+<h2><a class="anchor" aria-hidden="true" id="주석-annotation"></a><a href="#주석-annotation" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>주석 (Annotation)</h2>
+<p>타입 주석은 거의 모든 곳에 사용할 수 있습니다. Reason의 타입 추론 때문에 자주 필요하지는 않지만, 여러분의 프로그램의 타입에 대한 이해를 더 확실히 갖게 하는 데에 도움이 될 수 있습니다.</p>
+<p>아래 예시 곳곳에 <code>int</code>와 <code>string</code>이 사용되었습니다.</p>
 <pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> five: int = <span class="hljs-number">5</span>;
 <span class="hljs-keyword">let</span> nine = (five: int) <span class="hljs-operator">+</span> (<span class="hljs-number">4</span>: int);
 <span class="hljs-keyword">let</span> add = (x: int, y: int): int =&gt; x <span class="hljs-operator">+</span> y;
 <span class="hljs-keyword">let</span> drawCircle = (~radius: int): string =&gt; <span class="hljs-string">"hi"</span>;
 </code></pre>
-<h2><a class="anchor" aria-hidden="true" id="aliases"></a><a href="#aliases" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Aliases</h2>
-<p>Aliases can be defined for types. This is helpful to attach meaning to simple types and when working with complex types that become long to write down.</p>
+<h2><a class="anchor" aria-hidden="true" id="별칭-alias"></a><a href="#별칭-alias" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>별칭 (Alias)</h2>
+<p>타입에 대해 별칭을 정의할 수 있습니다. 이는 간단한 타입에 의미를 붙일 때와 쓰기엔 너무 길어지는 복잡한 타입을 다룰 때 도움이 됩니다.</p>
 <pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> seconds = int;
 <span class="hljs-keyword">type</span> timeInterval = (seconds, seconds);
 </code></pre>
-<p>Using the alias <code>seconds</code> it is clear how the <code>sleep</code> function works. If <code>int</code> were used it might not be obvious:</p>
+<p>별칭 <code>seconds</code>를 사용하여 <code>sleep</code> 함수가 어떻게 동작하는지가 분명해졌습니다. <code>int</code>를 사용했다면 그렇지 않았을 것입니다.</p>
 <pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> sleep = (time: seconds) =&gt; { <span class="hljs-operator">...</span> }
 </code></pre>
-<p>Type aliases are required in some cases, such as working with <a href="/docs/ko/variant">variants</a> or <a href="/docs/ko/record">records</a>.</p>
-<h2><a class="anchor" aria-hidden="true" id="type-parameters"></a><a href="#type-parameters" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Type Parameters</h2>
-<p>Types can accept type parameters, which are similar to generics in other languages. Parameterized types are useful when defining structures that work with many types of values. Having a single <code>list</code> type with an argument that can be <code>int</code>, <code>float</code>, or <code>string</code>, is better than having three concrete <code>intList</code>, <code>floatList</code>, and <code>stringList</code> types.</p>
-<p>Parameters are prefixed with a single <code>'</code> when defining the type:</p>
+<p>타입 별칭은 <a href="/docs/ko/variant">variants</a>나 <a href="/docs/ko/record">records</a>를 다루는 등 몇몇 경우에 필요합니다.</p>
+<h2><a class="anchor" aria-hidden="true" id="타입-파라미터"></a><a href="#타입-파라미터" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>타입 파라미터</h2>
+<p>타입은 다른 언어의 제네릭과 비슷하게, 타입 파라미터를 받을 수 있습니다. 파라미터화된 타입은 여러 타입의 값을 다루는 구조를 정의할 때 유용합니다. 인자로 <code>int</code>, <code>float</code>, <code>string</code>을 받는 <code>list</code> 타입 하나를 쓰는 게 세 타입 <code>intList</code>, <code>floatList</code>, <code>stringList</code>을 쓰는 것보다 낫습니다.</p>
+<p>타입을 정의할 때 파라미터 앞에는 작은따옴표(<code>'</code>) 하나를 붙입니다.</p>
 <pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> list('item) = <span class="hljs-operator">...</span>
 </code></pre>
-<p>When using this type as an annotation the parameter can be filled in with a concrete type:</p>
+<p>이 타입을 주석으로써 사용할 때 파라미터 자리에는 구체적인 타입이 채워집니다.</p>
 <pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> x: list(int) = <span class="hljs-literal">[</span><span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span><span class="hljs-literal">]</span>;
 <span class="hljs-keyword">let</span> y: list(string) = <span class="hljs-literal">[</span><span class="hljs-string">"one"</span>, <span class="hljs-string">"two"</span>, <span class="hljs-string">"three"</span><span class="hljs-literal">]</span>;
 </code></pre>
-<p>Types can have multiple parameters and be nested:</p>
+<p>타입은 파라미터 여러 개를 가질 수 있고, 중첩될 수도 있습니다.</p>
 <pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> pair('a, 'b) = ('a, 'b);
 
 <span class="hljs-keyword">let</span> x: pair(int, string) = (<span class="hljs-number">1</span>, <span class="hljs-string">"one"</span>);
 <span class="hljs-keyword">let</span> y: pair(string, list(int)) = (<span class="hljs-string">"123"</span>, <span class="hljs-literal">[</span><span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span><span class="hljs-literal">]</span>);
 </code></pre>
 <ul>
-<li>Note: It is common convention for type parameters to be named <code>'a</code>, <code>'b</code>, <code>'c</code>, etc.</li>
-<li>Note: Type parameters can still be inferred!</li>
+<li>타입 파라미터 이름을 <code>'a</code>, <code>'b</code>, <code>'c</code>, ... 로 짓는 것이 일반적인 컨벤션입니다.</li>
+<li>타입 파라미터도 추론될 수 있습니다!</li>
 </ul>
-<h2><a class="anchor" aria-hidden="true" id="opaque-types"></a><a href="#opaque-types" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Opaque Types</h2>
-<p>Opaque types are a powerful tool that limits the implementation details that are exposed to users. This makes it easier and safer to modify implementations to suit changing needs.</p>
-<p><em>Note: In these examples module types are used for simplicity, but opaque types are more often created using interface files.</em></p>
-<h3><a class="anchor" aria-hidden="true" id="setup"></a><a href="#setup" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Setup</h3>
-<p><code>Duration.t</code> is an opaque type. Its concrete type is hidden and it can only be interacted with using a limited set of functions:</p>
-<p><em>(Writing <code>type t;</code> is what makes <code>t</code> opaque. <code>t</code> would not be opaque and would still have a concrete type if <code>type t = int;</code> were written instead.)</em></p>
+<h2><a class="anchor" aria-hidden="true" id="불투명-타입"></a><a href="#불투명-타입" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>불투명 타입</h2>
+<p>불투명 타입은 유저들에게 노출되는 구현 세부 사항을 제한하는 강력한 도구입니다. 불투명 타입을 사용하면 변경 요구 사항을 맞추도록 더 쉽고 안전하게 구현을 수정할 수 있습니다.</p>
+<p><em>알아두기: 이 예시들에서는 간단함을 위해 모듈 타입을 사용했습니다. 하지만 보통 불투명 타입은 인터페이스 파일을 써서 만듭니다.</em></p>
+<h3><a class="anchor" aria-hidden="true" id="준비"></a><a href="#준비" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>준비</h3>
+<p><code>Duration.t</code>는 불투명 타입입니다. 구체적 타입은 숨겨져 있고, 제한된 종류의 함수만을 사용해서 상호작용할 수 있습니다.</p>
+<p><em>(<code>type t;</code>라고 쓰는 것은 <code>t</code>를 불투명하게 만듭니다. <code>type t = int;</code>라고 쓰면 <code>t</code>는 불투명하지 않고 구체적인 타입을 가질 것입니다.)</em></p>
 <pre><code class="hljs css language-reason"><span class="hljs-keyword">module</span> <span class="hljs-keyword">type</span> <span class="hljs-module-identifier">Duration</span> = {
-  <span class="hljs-comment">/* This is an opaque type. */</span>
+  <span class="hljs-comment">/* 불투명 타입 */</span>
   <span class="hljs-keyword">type</span> t;
   <span class="hljs-keyword">let</span> fromSeconds: int =&gt; t;
   <span class="hljs-keyword">let</span> add: (t, t) =&gt; t;
 };
 
 <span class="hljs-keyword">module</span> <span class="hljs-module-identifier">Duration</span>: <span class="hljs-module-identifier">Duration</span> = {
-  <span class="hljs-comment">/* Duration in seconds */</span>
+  <span class="hljs-comment">/* Duration이 몇 초인지 */</span>
   <span class="hljs-keyword">type</span> t = int;
   <span class="hljs-keyword">let</span> fromSeconds = value =&gt; value;
   <span class="hljs-keyword">let</span> add = (x, y) =&gt; x <span class="hljs-operator">+</span> y;
 };
 </code></pre>
-<p>Use the <code>Duration</code> module to create and interact with the opaque type:</p>
+<p><code>Duration</code> 모듈을 써서 불투명 타입을 만들고 사용합니다.</p>
 <pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> oneMinute = <span class="hljs-module-identifier">Duration</span>.fromSeconds(<span class="hljs-number">60</span>);
 <span class="hljs-keyword">let</span> twoMinutes = <span class="hljs-module-identifier">Duration</span>.add(oneMinute, oneMinute);
 </code></pre>
-<p>Normal integer functions intentionally have errors with <code>Duration.t</code> values:</p>
-<pre><code class="hljs css language-reason"><span class="hljs-comment">/* Error: expected int, but got Duration.t */</span>
+<p>보통의 정수 함수는 <code>Duration.t</code> 타입 값을 받으면 일부러 오류를 냅니다.</p>
+<pre><code class="hljs css language-reason"><span class="hljs-comment">/* 오류: int를 예상했지만 Duration.t를 받음 */</span>
 <span class="hljs-keyword">let</span> twoMinutes = oneMinute <span class="hljs-operator">+</span> oneMinute;
 </code></pre>
-<h3><a class="anchor" aria-hidden="true" id="changing-implementation"></a><a href="#changing-implementation" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Changing implementation</h3>
-<p>Now if we want the duration to be more precise and allow millisecond precision we can confidently change the implementation and be sure that nothing breaks:</p>
+<h3><a class="anchor" aria-hidden="true" id="구현-바꾸기"></a><a href="#구현-바꾸기" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>구현 바꾸기</h3>
+<p>만약 우리가 duration의 정밀도를 높여서 밀리초 단위의 정밀도를 허용하고 싶다면 자신있게 구현을 바꿔도 아무것도 망가뜨리지 않는다고 확신할 수 있습니다.</p>
 <pre><code class="hljs css language-reason"><span class="hljs-keyword">module</span> <span class="hljs-keyword">type</span> <span class="hljs-module-identifier">Duration</span> = {
   <span class="hljs-keyword">type</span> t;
   <span class="hljs-keyword">let</span> fromSeconds: int =&gt; t;
@@ -164,16 +164,16 @@
   <span class="hljs-keyword">let</span> add = (x, y) =&gt; x <span class="hljs-operator">+</span> y;
 };
 </code></pre>
-<p>This works the exact same:</p>
+<p>아래 코드는 위에서 했던 것과 완전히 똑같이 동작합니다.</p>
 <pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> oneMinute = <span class="hljs-module-identifier">Duration</span>.fromSeconds(<span class="hljs-number">60</span>);
 <span class="hljs-keyword">let</span> twoMinutes = <span class="hljs-module-identifier">Duration</span>.add(oneMinute, oneMinute);
 </code></pre>
-<p>But now we also support durations less than one second:</p>
+<p>하지만 이제는 1초 미만의 duration도 지원할 수 있습니다.</p>
 <pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> halfSecond = <span class="hljs-module-identifier">Duration</span>.fromMS(<span class="hljs-number">500</span>);
 <span class="hljs-keyword">let</span> longerThanOneMinute = <span class="hljs-module-identifier">Duration</span>.add(oneMinute, halfSecond);
 </code></pre>
-<p>This is a helpful technique that can make code easier to maintain and safer to change.</p>
-</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/ko/basic-structures"><span class="arrow-prev">← </span><span>기본 자료구조</span></a><a class="docs-next button" href="/docs/ko/record"><span>레코드</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#the-basics">The Basics</a></li><li><a href="#annotations">Annotations</a></li><li><a href="#aliases">Aliases</a></li><li><a href="#type-parameters">Type Parameters</a></li><li><a href="#opaque-types">Opaque Types</a><ul class="toc-headings"><li><a href="#setup">Setup</a></li><li><a href="#changing-implementation">Changing implementation</a></li></ul></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+<p>이는 코드를 더 쉽게 코드를 관리하고, 더 안전하게 변경하는 데 도움이 되는 기법입니다.</p>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/ko/basic-structures"><span class="arrow-prev">← </span><span>기본 자료구조</span></a><a class="docs-next button" href="/docs/ko/record"><span>레코드</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#기초">기초</a></li><li><a href="#주석-annotation">주석 (Annotation)</a></li><li><a href="#별칭-alias">별칭 (Alias)</a></li><li><a href="#타입-파라미터">타입 파라미터</a></li><li><a href="#불투명-타입">불투명 타입</a><ul class="toc-headings"><li><a href="#준비">준비</a></li><li><a href="#구현-바꾸기">구현 바꾸기</a></li></ul></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
                 document.addEventListener('keyup', function(e) {
                   if (e.target !== document.body) {
                     return;
