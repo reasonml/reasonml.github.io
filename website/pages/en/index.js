@@ -152,43 +152,12 @@ class Index extends React.Component {
                   content: <translate>Powerful, safe type inference means you rarely have to annotate types, but everything gets checked for you.</translate>,
                 },
                 {
-                  title: <translate>Easy JavaScript interop</translate>,
-                  content: <translate>Use packages from NPM/Yarn with minimum hassle, or even drop in a snippet of raw JavaScript while you're learning!</translate>,
-                },
-                {
-                  title: <translate>Flexible & Fun</translate>,
-                  content: <translate>Make websites, animations, games, servers, cli tools, and more! Take a look at these examples to get inspired.</translate>,
+                  title: <translate>Use the power of the OCaml ecosystem</translate>,
+                  content: <translate>Get access to the powerful systems programming language OCaml with an easier to learn syntax.</translate>,
                 },
               ]}
               layout="threeColumn"
             />
-          </Container>
-
-          <Container background="light" className="quickStartAndExamples homeCodeSnippet">
-            <div>
-              <h2><translate>QuickStart</translate></h2>
-              <MarkdownBlock>
-                {quickStart}
-              </MarkdownBlock>
-              <p>
-                <translate>It runs in watch mode, so any changes to files will be picked up and compiled.</translate>
-                <a href="https://reasonml.github.io/reason-react/docs/en/installation"> <translate>Read more here!</translate></a>
-              </p>
-            </div>
-            <div>
-              <h2><translate>Examples</translate></h2>
-              <GridBlock
-                className="examples"
-                align="center"
-                contents={siteConfig.examples.map(example => ({
-                  title: example.name,
-                  image: `${siteConfig.baseUrl}${example.image}`,
-                  imageLink: example.link,
-                  imageAlign: "top",
-                  content: "",
-                }))}
-              />
-            </div>
           </Container>
 
           <div className="productShowcaseSection paddingBottom">
