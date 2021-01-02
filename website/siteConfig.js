@@ -10,11 +10,6 @@ const users = [
     infoLink: "https://messenger.com",
   },
   {
-    caption: "Reason Association",
-    image: "img/logos/reason-association.svg",
-    infoLink: "https://www.reason-association.org",
-  },
-  {
     caption: "OneGraph",
     image: "img/logos/onegraph.svg",
     infoLink: "https://onegraph.com",
@@ -278,11 +273,6 @@ const users = [
     name: "Wolt",
     image: "img/logos/wolt.svg",
     infoLink: "https://wolt.com/"
-  },
-  {
-    name: "Hemnet",
-    image: "img/logos/hemnet.svg",
-    infoLink: "https://hemnet.se",
   },
   {
     name: "Atvero",
