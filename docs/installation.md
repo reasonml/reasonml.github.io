@@ -32,6 +32,28 @@ Reason native development is essentially OCaml development. From here on, you wa
 All your packages are managed in your `package.json` file. Usually you will find a `dune` file in each source code directory (such as `bin/` and `lib/`) for all the build system settings as well.
 
 
+### Some `esy` Tips
+
+**Adding dependencies:**
+
+To add Reason / OCaml packages that happen to be hosted on npm, run `esy add npm-package-name`.
+
+```
+esy add refmterr
+```
+
+**Opam integration:**
+
+`esy` treats the npm scope `@opam` specially. `esy` will install any package name with the `@opam` scope directly from [opam](https://opam.ocaml.org/packages/). This is the only scope with special meaning. All other package names are assumed to be hosted on npm.
+
+```
+esy add @opam/bos
+```
+
+**Advanced esy configuration:**
+
+See the [configuration](https://esy.sh/docs/en/configuration.html) section from the complete `esy` docs.
+
 ## Compiling to JavaScript
 
 Reason + OCaml both leverage the [js_of_ocaml (JSOO)](https://ocsigen.org/js_of_ocaml/3.7.0/manual/overview) compiler to compile from bytecode to JavaScript.
