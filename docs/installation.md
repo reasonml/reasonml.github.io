@@ -2,9 +2,9 @@
 title: Installation
 ---
 
-> **Important:** In case you are looking for BuckleScript + Reason instructions, please note that BuckleScript has rebranded to ReScript and comes with its own syntax, that's very similar to Reason. Please refer to the [ReScript website](https://rescript-lang.org) for more infos.
+> **Important:** In case you are looking for BuckleScript + Reason instructions, please note that BuckleScript has rebranded to ReScript and with its own syntax (it's very similar to Reason that is targeted more towards JS development needs). Please refer to the [ReScript website](https://rescript-lang.org) for more infos.
 
-Reason comes with an npm like package manager called [esy](https://esy.sh):
+Reason comes with its own "npm like" package manager called [esy](https://esy.sh):
 
 ```
 npm install -g esy
@@ -32,6 +32,21 @@ Reason native development is essentially OCaml development. From here on, you wa
 All your packages are managed in your `package.json` file. Usually you will find a `dune` file in each source code directory (such as `bin/` and `lib/`) for all the build system settings as well.
 
 
-## What Next?
+## Compiling to JavaScript
 
-After you have successfully compiled your first example, it's time to [set up your editor](editor-plugins.md). Later on we recommend to explore the [language basics](overview.md) to get a feeling for the Reason syntax.
+Reason + OCaml both leverage the [js_of_ocaml (JSOO)](https://ocsigen.org/js_of_ocaml/3.7.0/manual/overview) compiler to compile from bytecode to JavaScript.
+
+To get started with Reason + esy + JSOO, check out this [`hello-jsoo-esy`](https://github.com/jchavarri/hello-jsoo-esy) template:
+
+```
+git clone https://github.com/jchavarri/hello-jsoo-esy.git
+cd hello-jsoo-esy
+esy
+
+yarn
+yarn webpack
+```
+
+## What's Next?
+
+After you have successfully compiled your first example, it's time to [set up your editor](editor-plugins.md) to get access to all the nice features such as auto-completion. After the editor setup, it's time to start with the [language basics](overview.md) to get a basic understanding of all the Reason language constructs.
