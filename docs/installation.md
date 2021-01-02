@@ -2,7 +2,7 @@
 title: Installation
 ---
 
-> **Important:** In case you are looking for BuckleScript + Reason instructions, please note that BuckleScript has rebranded to ReScript and created its own syntax (it's very similar to Reason that is targeted more towards JS development needs). Please refer to the [ReScript website](https://rescript-lang.org) for more infos.
+> **Important:** In case you are looking for BuckleScript + Reason instructions, please note that BuckleScript has rebranded to ReScript and created its own syntax (it's very similar to Reason that is targeted more towards JS development needs). Please refer to the [ReScript website](https://rescript-lang.org) or our [FAQ](http://localhost:3000/docs/en/faq#what-is-bucklescript-and-rescript-and-why-is-it-mentioned-in-so-many-reason-related-resources) for more infos.
 
 Reason comes with its own "npm like" package manager called [esy](https://esy.sh):
 
