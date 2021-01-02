@@ -2,25 +2,9 @@
 title: Articles & Videos
 ---
 
-## BuckleScript
-
-- [BuckleScript Documentation](https://bucklescript.github.io): the official documentations for our JavaScript backend.
-- [BuckleScript JS API docs](http://bucklescript.github.io/bucklescript/api/index.html)
-- [BuckleScript build system schema](https://bucklescript.github.io/docs/en/build-overview.html): comprehensive resource on `bsb`'s configuration.
-- [BuckleScript Cookbook](https://github.com/glennsl/bucklescript-cookbook)
-- [Unit Testing in ReasonML](https://jaketrent.com/post/unit-testing-in-reasonml/)
-
-## ReasonReact
-
-- [Documentation](//reasonml.github.io/reason-react/)
-- [Interactive ReasonReact Tutorial](https://jaredforsyth.com/2017/07/05/a-reason-react-tutorial/): features runnable code and type hint on hover!
-- [Deploying ReasonReact with Docker](https://medium.com/@anirudhmurali/how-i-deployed-a-reasonml-react-app-with-docker-29dd2ce6de82)
-- [Building a Marvel Heroes App using ReasonReact](https://medium.com/oke-software-poland/reasonml-marvel-tutorial-part-0-e38e1bfe1866)
-
 ## Videos
 
 - [React To The Future - ReasonConf 2019](https://www.youtube.com/watch?v=5fG_lyNuEAw)
-- [Community-maintained Reason talks playlist](https://www.youtube.com/playlist?list=PLYU6eGtVFu8ZG3yh1FfLrqHBMUXj80wgK)
 - [ReasonML: Hype or next big thing?](https://www.youtube.com/watch?v=bqNploxWpjA&t): October 2017
 - [The Why and How of ReasonML](https://www.youtube.com/watch?v=j5mlMUzpE5g): October 2017
 - [Critical ReasonML'ing](https://www.youtube.com/watch?v=k77aR_JyvEE): October 2017
@@ -38,15 +22,6 @@ title: Articles & Videos
 - [Inference engines: 5 examples with TypeScript, Flow and Reason](https://medium.com/@javierwchavarri/inference-engines-5-examples-with-typescript-flow-and-reason-edef2f4cf2d3)
 - [C# and F# approaches to illegal states](http://enterprisecraftsmanship.com/2015/09/28/c-and-f-approaches-to-illegal-states/): F# is a cousin of Reason. Great article on F#'s equivalent of variants
 - [The algebra (and calculus!) of algebraic data types](https://codewords.recurse.com/issues/three/algebra-and-calculus-of-algebraic-data-types)
-
-## Coding Philosophy
-
-A few articles we find interesting, or agree with. Not to be taken as literal truth.
-
-- [Write dumb code](https://matthewrocklin.com/blog//work/2018/01/27/write-dumb-code)
-- [Not Explicit](https://boats.gitlab.io/blog/post/2017-12-27-things-explicit-is-not/)
-- [Always start with simple solution](http://buklijas.info/blog/2018/01/01/always-start-with-simple-solution/)
-- [The Pony Philosophy](https://www.ponylang.org/discover/#the-pony-philosophy)
 
 ## Pro Links
 
