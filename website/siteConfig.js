@@ -25,11 +25,6 @@ const users = [
     infoLink: "https://beop.io",
   },
   {
-    caption: "Mesopo",
-    image: "img/logos/mesopo.svg",
-    infoLink: "https://mesopo.ai",
-  },
-  {
     caption: "Social Tables",
     image: "img/logos/socialtables.svg",
     infoLink: "https://www.socialtables.com",
@@ -228,11 +223,6 @@ const users = [
     caption: "Cutii",
     image: "img/logos/cutii.svg",
     infoLink: "https://www.cutii.io/en"
-  },
-  {
-    caption: "Velvon",
-    image: "img/logos/velvon.svg",
-    infoLink: "https://velvon.com/en/home/"
   },
   {
     caption: "Band Protocol",
