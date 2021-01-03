@@ -14,10 +14,6 @@ Reason also gives access to the declarative UI framework [revery-ui](https://git
 
 Reason was originally bundled with BuckleScript (ReScript) as its user-facing syntax to provide a single toolchain for Reason JS / ReactJS development.
 
-On [July 1st 2020](https://rescript-lang.org/blog/bucklescript-8-1-new-syntax), the Reason and BuckleScript teams decided to split up due to different goals / roadmaps. BuckleScript was renamed to ReScript and shipped its own syntax variant (called ReScript) to provide a more fine-tuned experience for their JS focused users (while dropping native compilation support). More infos on the BuckleScript -> ReScript rebrand can be found in the [official rebranding announcement](https://rescript-lang.org/blog/bucklescript-is-rebranding).
-
-Reason continues its promise to be 100% compatible with OCaml semantics, therefore will change its focus on `js_of_ocaml` centered workflows for a streamlined cross-platform compilation story (native / js).
-
-ReScript will continue to support Reason `v3.6` for backwards compatibility, but will not ship any other future Reason versions. The ReScript website also kept the [`< 8.2.0` docs](https://rescript-lang.org/docs/manual/v8.0.0/introduction) in Reason syntax to allow easy usage during the Reason -> ReScript migration.
-
-If you are already using BuckleScript + Reason, we recommend to either upgrade your existing code to ReScript syntax, or alternatively, consider migrating to a `js_of_ocaml` based setup to keep 100% compatibility with the OCaml platform and runtime semantics.
+On [July 1st 2020](https://rescript-lang.org/blog/bucklescript-8-1-new-syntax), the Reason and BuckleScript teams decided to split up due to different goals / roadmaps:
+- BuckleScript was renamed to ReScript and shipped its own syntax variant (called ReScript) to provide a more fine-tuned experience for their JS focused users. More on that in their [official rebranding announcement](https://rescript-lang.org/blog/bucklescript-is-rebranding).
+- Reason / ReasonML continues its promise to be 100% compatible with OCaml semantics, therefore will change its focus on `js_of_ocaml` centered workflows for a streamlined cross-platform compilation story (native / js).  
