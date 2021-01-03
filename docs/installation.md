@@ -2,7 +2,7 @@
 title: Installation
 ---
 
-> **Important:** In case you are looking for BuckleScript + Reason instructions, please note that BuckleScript has rebranded to ReScript and created its own syntax (it's very similar to Reason that is targeted more towards JS development needs). Please refer to the [ReScript website](https://rescript-lang.org) or our [FAQ](http://localhost:3000/docs/en/faq#what-is-bucklescript-and-rescript-and-why-is-it-mentioned-in-so-many-reason-related-resources) for more infos.
+> **Important:** If you are looking for ReScript (formerly BuckleScript) installation instructions, please refer to the [ReScript website](https://rescript-lang.org/docs/manual/latest/installation).
 
 Reason comes with its own "npm like" package manager called [esy](https://esy.sh):
 
@@ -65,10 +65,10 @@ git clone https://github.com/jchavarri/hello-jsoo-esy.git
 cd hello-jsoo-esy
 esy
 
-yarn
-yarn webpack
+npm install
+npm run webpack
 ```
 
 ## What's Next?
 
-After you have successfully compiled your first example, it's time to [set up your editor](editor-plugins.md) to get access to all the nice features such as auto-completion. After the editor setup, it's time to start with the [language basics](overview.md) to get a basic understanding of all the Reason language constructs.
+After you have successfully compiled your first example, it's time to [set up your editor](editor-plugins.md) to get access to all the nice features such as auto-completion. Later on you can check out the [language basics](overview.md) to get a basic understanding of all the Reason language constructs.
