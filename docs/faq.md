@@ -8,11 +8,13 @@ You can do all the things you'd usually do with OCaml! OCaml is an incredible us
 
 Natively compiled CLI's are also known to be really fast (like... C-like fast), and since the language is garbage collected, you will find yourself in a very nice spot of not having to worry about borrow-checking like in Rust and you don't have to deal with verbose non-ML languages like Go. 
 
+Reason also gives access to the declarative UI framework [revery-ui](https://github.com/revery-ui/revery) to build native applications with a ReactJS like paradigm (+ JSX).
+
 ### What is BuckleScript and ReScript, and why is it mentioned in so many Reason related resources?
 
-Reason originally shipped as the user-facing syntax for BuckleScript (ReScript), a compiler toolchain to compile OCaml to efficient JS code.
+Reason was originally bundled with BuckleScript (ReScript) as its user-facing syntax to provide a single toolchain for Reason JS / ReactJS development.
 
-On [July 1st](https://rescript-lang.org/blog/bucklescript-8-1-new-syntax), the Reason and BuckleScript teams decided to split up due to different goals / roadmaps. BuckleScript was renamed to ReScript and shipped its own syntax (also called ReScript) to provide a more fine-tuned experience for their JS focused users (while dropping native compilation support). More infos on the BuckleScript -> ReScript rebrand can be found in the [official rebranding announcement](https://rescript-lang.org/blog/bucklescript-is-rebranding).
+On [July 1st 2020](https://rescript-lang.org/blog/bucklescript-8-1-new-syntax), the Reason and BuckleScript teams decided to split up due to different goals / roadmaps. BuckleScript was renamed to ReScript and shipped its own syntax variant (called ReScript) to provide a more fine-tuned experience for their JS focused users (while dropping native compilation support). More infos on the BuckleScript -> ReScript rebrand can be found in the [official rebranding announcement](https://rescript-lang.org/blog/bucklescript-is-rebranding).
 
 Reason continues its promise to be 100% compatible with OCaml semantics, therefore will change its focus on `js_of_ocaml` centered workflows for a streamlined cross-platform compilation story (native / js).
 
