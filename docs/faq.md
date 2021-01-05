@@ -12,8 +12,6 @@ Reason also gives access to the declarative UI framework [revery-ui](https://git
 
 ### What is BuckleScript and ReScript, and why is it mentioned in so many Reason related resources?
 
-Reason was originally bundled with BuckleScript (ReScript) as its user-facing syntax to provide a single toolchain for Reason JS / ReactJS development.
+Reason was originally bundled with BuckleScript (JS compiler) to provide a single toolchain for JS / ReactJS development.
 
-On [July 1st 2020](https://rescript-lang.org/blog/bucklescript-8-1-new-syntax), the Reason and BuckleScript teams decided to split up due to different goals / roadmaps:
-- BuckleScript was renamed to ReScript and shipped its own syntax variant (called ReScript) to provide a more fine-tuned experience for their JS focused users. More on that in their [official rebranding announcement](https://rescript-lang.org/blog/bucklescript-is-rebranding).
-- Reason / ReasonML continues its promise to be 100% compatible with OCaml semantics, therefore will change its focus on `js_of_ocaml` centered workflows for a streamlined cross-platform compilation story (native / js).  
+In July 2020, BuckleScript released its own syntax and rebranded to ReScript to be its own language. More infos can be found in their [official rebranding announcement](https://rescript-lang.org/blog/bucklescript-is-rebranding).
