@@ -13,17 +13,14 @@ Reason's nature lends itself to great editor support. Most of our editor plugins
 
 And other features.
 
-## BuckleScript Development:
+## Editor Plugins & Language Server
 
-- [VSCode](https://github.com/jaredly/reason-language-server): **Recommended**. Use [reason-vscode](https://marketplace.visualstudio.com/items?itemName=jaredly.reason-vscode) from the extensions marketplace.
-- [Atom](https://github.com/reasonml-editor/atom-ide-reason)
-- [Vim/Neovim](https://github.com/reasonml-editor/vim-reason-plus)
-- [Sublime Text](https://github.com/reasonml-editor/sublime-reason)
-- [IDEA](https://github.com/reasonml-editor/reasonml-idea-plugin)
-- [Emacs](https://github.com/reasonml-editor/reason-mode): **Currently unmaintained**. We'd like to upgrade it to [reason-language-server](https://github.com/jaredly/reason-language-server) one day. Contributions welcome!
+Since Reason is just an alternative syntax for OCaml, we integrate seamlessly into the official OCaml editor toolchain as well.
 
-## Native Project Development (Community Supported):
+- For VSCode, we recommend using the [vscode-ocaml-platform](https://github.com/ocamllabs/vscode-ocaml-platform) plugin, which offers OCaml & Reason support out of the box.
+- For other editors, we recommend using a language server client plugin of your choice, and pairing it with the [`ocaml-lsp`](https://github.com/ocaml/ocaml-lsp). Check out the respective README's to get started.
 
-- [VSCode](https://marketplace.visualstudio.com/items?itemName=freebroccolo.reasonml): Use [vscode-reasonml](https://marketplace.visualstudio.com/items?itemName=freebroccolo.reasonml) from the extensions marketplace. (Mac, Linux).
+**Other:**
+
 - [Vim/Neovim](https://github.com/reasonml-editor/vim-reason-plus): Make sure to use [ocaml-language-server](https://www.npmjs.com/package/ocaml-language-server) for native development as suggested. (Mac, Linux): `npm install -g ocaml-language-server`
-- [vim-reasonml](https://github.com/jordwalke/vim-reasonml): For use with native [esy](https://esy.sh/), Reason, and Merlin (not LSP based). (Mac, Linux, Windows).
+- [vim-reasonml](https://github.com/jordwalke/vim-reasonml): For use with [esy](https://esy.sh/), Reason, and Merlin (not LSP based). (Mac, Linux, Windows).

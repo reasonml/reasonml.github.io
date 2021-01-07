@@ -2,50 +2,73 @@
 title: Installation
 ---
 
-Reason comes by default in [BuckleScript](https://bucklescript.github.io/), a compiler that turns Reason code into JavaScript code.
+> **Important:** If you are looking for ReScript (formerly BuckleScript) installation instructions, please refer to the [ReScript website](https://rescript-lang.org/docs/manual/latest/installation).
 
-**Prerequisite**: either NPM (comes with [node](https://nodejs.org/en/)) or [Yarn](https://yarnpkg.com/en/).
+Reason comes with its own "npm like" package manager called [esy](https://esy.sh):
 
-To install BuckleScript & Reason globally:
-
-```sh
-yarn global add bs-platform
+```
+npm install -g esy
 ```
 
-(or `npm install -g bs-platform` for npm).
+To create your first Reason native CLI program, run the following commands:
 
-## New Project
+```
+git clone https://github.com/esy-ocaml/hello-reason.git
+cd hello-reason
 
-The global installation comes with a simple project generator. Try:
+# Install all dependencies (might take a while in the first run)
+esy 
 
-```sh
-bsb -init my-new-project -theme basic-reason
+# Compile and run Hello.exe
+esy x Hello
 ```
 
-To compile & run the project you just created:
+Reason native development is essentially OCaml development. From here on, you want to read up following websites to get to understand the ecosystem:
 
-```sh
-cd my-new-project
-yarn build # or npm run build, for npm
-node src/Demo.bs.js
+- **esy**: The `esy` package manager is designed to manage your npm and opam dependencies and efficiently caches & sandboxes your project compiler and dependencies. Check out the [esy website](https://esy.sh) to find out how to install dependencies, setting up package resolutions, and executing compiled programs.
+- **opam**: The [opam package index](https://opam.ocaml.org/packages/) lists all available packages available in the OCaml ecosystem
+- **dune**: [`dune`](https://github.com/ocaml/dune) is the official build system in the OCaml ecosystem. Check out the [manual](https://dune.readthedocs.io/en/latest/) for more details on how to set up your project.
+
+All your packages are managed in your `package.json` file. Usually you will find a `dune` file in each source code directory (such as `bin/` and `lib/`) for all the build system settings as well.
+
+
+### Some `esy` Tips
+
+**Adding dependencies:**
+
+To add Reason / OCaml packages that happen to be hosted on npm, run `esy add npm-package-name`.
+
+```
+esy add refmterr
 ```
 
-That uses BuckleScript to compile Reason to JavaScript, then uses NodeJS to run the JavaScript. Feel free to use the generated JS files in whichever way you'd like, as if they're hand-written by you.
+**Opam integration:**
 
-During development, instead of running `npm run build` each time to compile, run `npm run start` to start a watcher that recompiles automatically after file changes.
+`esy` treats the npm scope `@opam` specially. `esy` will install any package name with the `@opam` scope directly from [opam](https://opam.ocaml.org/packages/). This is the only scope with special meaning. All other package names are assumed to be hosted on npm.
 
-By default, the `basic-reason` theme configures BuckleScript to output the generated JS files alongside the Reason files they were produced from. [There's a reason why this is helpful](https://bucklescript.github.io/docs/en/build-overview#tips-tricks). If you prefer to keep the generated files somewhere else, edit `bsconfig.json` to set `in-source` to `false`; the JS files will then be output to the `lib/js` directory instead.
-
-Alternatively, **to start a [ReasonReact](https://reasonml.github.io/reason-react/docs/en/installation.html) app**, follow the instructions [here](https://reasonml.github.io/reason-react/docs/en/installation).
-
-## Existing Project
-
-You can install the toolchain locally to an existing project, through the familiar command:
-
-```sh
-yarn add --dev bs-platform
+```
+esy add @opam/bos
 ```
 
-(or `npm install --save-dev bs-platform` for npm).
+**Advanced esy configuration:**
 
-The rest is the same as above.
+See the [configuration](https://esy.sh/docs/en/configuration.html) section from the complete `esy` docs.
+
+## Compiling to JavaScript
+
+Reason + OCaml both leverage the [js_of_ocaml (JSOO)](https://ocsigen.org/js_of_ocaml/3.7.0/manual/overview) compiler to compile from bytecode to JavaScript.
+
+To get started with Reason + esy + JSOO, check out this [`hello-jsoo-esy`](https://github.com/jchavarri/hello-jsoo-esy) template:
+
+```
+git clone https://github.com/jchavarri/hello-jsoo-esy.git
+cd hello-jsoo-esy
+esy
+
+npm install
+npm run webpack
+```
+
+## What's Next?
+
+After you have successfully compiled your first example, it's time to [set up your editor](editor-plugins.md) to get access to all the nice features such as auto-completion. Later on you can check out the [language basics](overview.md) to get a basic understanding of all the Reason language constructs.

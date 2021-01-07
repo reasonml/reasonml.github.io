@@ -3,57 +3,15 @@ title: Frequently Asked Questions
 ---
 
 ### I'm not sure what to do with Reason
-Think of what project you'd usually make if it was pure JavaScript; try porting/writing that in Reason + BuckleScript instead! We recommend trying to make concrete, end-user projects (e.g. a little command line util) rather than infra-level projects (e.g. a boilerplate generator). The latter category requires expertise and understanding idiomatic Reason code.
 
-### What's the relation between Reason, BuckleScript and OCaml?
-Reason's a syntax for OCaml and supports all its features. BuckleScript compiles OCaml/Reason code into JavaScript.
+You can do all the things you'd usually do with OCaml! OCaml is an incredible useful language for systems programming, while still being able to compile to pretty type safe JS with the aid of the `js_of_ocaml` compiler.
 
-### Where do all these `print_endline`, `string_of_int` functions come from?
-They're from the standard library, pre-`open`ed during the compilation of your file. This is why you see them in scope.
+Natively compiled CLI's are also known to be really fast (like... C-like fast), and since the language is garbage collected, you will find yourself in a very nice spot of not having to worry about borrow-checking like in Rust and you don't have to deal with verbose non-ML languages like Go. 
 
-You can read more about the Pervasives library in the api documentation:
+Reason also gives access to the declarative UI framework [revery-ui](https://github.com/revery-ui/revery) to build native applications with a ReactJS like paradigm (+ JSX).
 
-https://reasonml.github.io/api/Pervasives.html
+### What is BuckleScript and ReScript, and why is it mentioned in so many Reason related resources?
 
-### Can I have a function to print arbitrary data structures?
-If you're compiling to JavaScript through BuckleScript, you can use the JS `console.log` through [`Js.log`](https://bucklescript.github.io/bucklescript/api/Js.html#VALlog).
+Reason was originally bundled with BuckleScript (JS compiler) to provide a single toolchain for JS / ReactJS development.
 
-### Why is there a + for adding ints and +. for adding floats, etc.?
-See [here](integer-and-float.md#design-decisions).
-
-### Does library ___ work with Reason?
-Most JS libraries should easily work under Reason + BuckleScript.
-
-### What's the server-side story? Should I compile to native or to JS and use node.js?
-At this time, we recommend compiling to JS through BuckleScript and use the JS wrappers at [reasonml-community](https://github.com/reasonml-community) or somewhere else.
-
-### What's BuckleScript's async story?
-If you're not interfacing with any library that uses promises, you can simply use callbacks. Everyone gets them and they're performant.
-
-If you need to bind to a JS library that uses promises, or communicate with such library, you can use BS's [Js.Promise](http://bucklescript.github.io/bucklescript/api/Js.Promise.html).
-
-### What's the (unit) test story?
-Some of OCaml's language features (not just types) might be able to defer the need for unit testing until later. In the meantime, for compilation to JS, we're working on [Jest wrapper](https://github.com/BuckleTypes/bs-jest). We'll look into using Jest for native too, if Jest is written using Reason in the future (no concrete plan yet). [OUnit](http://ounit.forge.ocamlcore.org) is a good, small native OCaml testing library right now.
-
-### What's the `.merlin` file at the root of my project?
-That's the metadata file for [editor support](editor-plugins.md). This is usually generated for you; You don't need to check that into your version control and don't have to manually modify it.
-
-### I don't see any `import` or `require` in my file; how does module resolution work?
-Reason/OCaml doesn't require you to write any import; modules being referred to in the file are automatically searched in the project. Specifically, a module `Hello` asks the compiler to look for the file `hello.re` or `hello.ml` (and their corresponding [interface file](module.md#signatures), `hello.rei` or `hello.mli`, if available).
-
-A module name is the file name, capitalized. It has to be unique per project; this abstracts away the file system and allows you to move files around without changing code.
-
-### Is `Some | None`, `contents`, `Array`, `List` and all of these special? Where do they come from?
-They're ordinary variants/records/module definitions that come with the [standard library](/api/index.html), `open`ed by default during compilation out of convenience.
-
-### What does an argument with a prepended underscore (e.g. `_` or `_foo`) mean?
-Say you have `List.map(item => 1, myList);`. The argument `item` isn't used and will generate a compiler warning. Using `_ => 1` instead indicates that you're intentionally receiving and ignoring the argument, therefore bypassing the warning. Alternatively, `_item => 1` has the same effect, but indicates more descriptively what you're ignoring.
-
-### What's this `MyModule.t` I keep seeing?
-Assuming `MyModule` is a module's name, `t` is a community convention that indicates "the type that represents that module, whatever that means". For example, for the [`Js.String`](http://bucklescript.github.io/bucklescript/api/Js.String.html) module, [`String.t`](http://bucklescript.github.io/bucklescript/api/Js.String.html#TYPEt) is the type carried around and representing "a string".
-
-### Why is there a [`Js_promise`](http://bucklescript.github.io/bucklescript/api/Js_promise.html) and then a [`Js.Promise`](http://bucklescript.github.io/bucklescript/api/Js.Promise.html)? What about [`Js_array`](http://bucklescript.github.io/bucklescript/api/Js_array.html), [`Js_string`](http://bucklescript.github.io/bucklescript/api/Js_string.html) and whatever else?
-As a convention, `Js_foo` is the actual module, and `Js.Foo` is just an alias for it. They're [equivalent](https://github.com/bloomberg/bucklescript/blob/7bc37f387a726ba1ae4afeefe02b9c82577d9e10/jscomp/runtime/js.ml#L124-L138). Prefer `Js.Foo`, because that's the official, public module name.
-
-### Why are BuckleScript and bsb so fast?
-Software should at least be this fast.
+In July 2020, BuckleScript released its own syntax and rebranded to ReScript to be its own language. More infos can be found in their [official rebranding announcement](https://rescript-lang.org/blog/bucklescript-is-rebranding).

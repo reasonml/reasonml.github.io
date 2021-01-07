@@ -10,11 +10,6 @@ const users = [
     infoLink: "https://messenger.com",
   },
   {
-    caption: "Reason Association",
-    image: "img/logos/reason-association.svg",
-    infoLink: "https://www.reason-association.org",
-  },
-  {
     caption: "OneGraph",
     image: "img/logos/onegraph.svg",
     infoLink: "https://onegraph.com",
@@ -28,11 +23,6 @@ const users = [
     caption: "BeOp",
     image: "img/logos/beop.svg",
     infoLink: "https://beop.io",
-  },
-  {
-    caption: "Mesopo",
-    image: "img/logos/mesopo.svg",
-    infoLink: "https://mesopo.ai",
   },
   {
     caption: "Social Tables",
@@ -235,11 +225,6 @@ const users = [
     infoLink: "https://www.cutii.io/en"
   },
   {
-    caption: "Velvon",
-    image: "img/logos/velvon.svg",
-    infoLink: "https://velvon.com/en/home/"
-  },
-  {
     caption: "Band Protocol",
     image: "img/logos/band-protocol.svg",
     infoLink: "https://bandprotocol.com/"
@@ -278,11 +263,6 @@ const users = [
     name: "Wolt",
     image: "img/logos/wolt.svg",
     infoLink: "https://wolt.com/"
-  },
-  {
-    name: "Hemnet",
-    image: "img/logos/hemnet.svg",
-    infoLink: "https://hemnet.se",
   },
   {
     name: "Atvero",
