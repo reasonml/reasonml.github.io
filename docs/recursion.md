@@ -76,10 +76,12 @@ Opt-out of recursive types using the `nonrec` keyword:
 
 ```reason
 type t = string;
-type nonrec t = list(t);
+module M = {
+  type nonrec t = list(t);
+};
 
 /* t is now list(string) */
-let x: t = ["hello", "world"];
+let x: M.t = ["Hello", "World"]
 ```
 
 ## Mutually Recursive Types
