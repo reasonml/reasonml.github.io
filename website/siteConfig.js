@@ -273,6 +273,11 @@ const users = [
     name: "Lukin Co.",
     image: "img/logos/lukin.svg",
     infoLink: "https://lukin.co",
+  },
+  {
+    name: "DevITjobs",
+    image: "img/logos/dev-it-jobs.svg",
+    infoLink: "https://devitjobs.uk",
   }
 ];
 
