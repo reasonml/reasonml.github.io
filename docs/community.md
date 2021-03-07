@@ -11,6 +11,7 @@ Come say hi!
 - [Twitter](https://twitter.com/reasonml)
 - [Reddit](https://www.reddit.com/r/reasonml/)
 - [Stack Overflow](http://stackoverflow.com/questions/tagged/reason)
+- [DEV](https://dev.to/t/reason)
 
 ## GitHub
 
