@@ -1,14 +1,14 @@
 # Reason Website
 
-This code is used to generate https://reasonml.github.io. It pulls in files from `docs/` and `website/` to generate html files served on the site.
+This code is used to generate https://reasonml.github.io. It pulls in files from `docs/` and `website/` to generate HTML files served on the site.
 
-`website/` contains the JS, CSS, images and other files (and blog, which contains some markdown files too, these are separated from `docs/`, not too important).
+`website/` contains the JS, CSS, images and other files (and some markdown files in `blog` which are separated from `docs/`; it's not too important).
 
 `cd website && yarn && yarn start` to start the development server & watcher.
 
 Don't use `yarn build`. It's mostly for debugging.
 
-In the end, we spit out normal HTML, with all the JS dependencies (barring a few critical ones) removed, including ReactJS itself. It's a full, static website, super lightweight, portable, unfancy but good looking. Works with JS turned off too.
+In the end, we spit out normal HTML with all but a few critical JS dependencies removed, including ReactJS itself. It's a full static website: super lightweight, portable, unfancy, but good looking. And it works with JS turned off!
 
 Two special files:
 
@@ -19,7 +19,7 @@ During your development, most changes will be picked up at each browser refresh.
 
 ## Translations
 
-The entire site can be translated via the [Crowdin project](https://crowdin.com/project/reason). This repo only has the canonical english documentation. Don't manually edit things in `i18n/`.
+The entire site can be translated via the [Crowdin project](https://crowdin.com/project/reason). This repo only has the canonical English documentation. Don't manually edit things in `i18n/`.
 
 ## Debugging
 
@@ -27,9 +27,9 @@ The entire site can be translated via the [Crowdin project](https://crowdin.com/
 
 ## Building and Deploying
 
-Changes from `source` branch are automatically picked into `master` branch by CI, then published.
+Changes from the `source` branch are automatically picked into `master` branch by CI and then published.
 
-# Build the Playground
+# Building the Playground
 
 ```
 cd website && yarn
@@ -45,13 +45,14 @@ You'll need to have this repository and the [BuckleScript](https://github.com/Bu
 
 1. Inside the BuckleScript repository, follow the [Setup](https://github.com/BuckleScript/bucklescript/blob/master/CONTRIBUTING.md#setup) guide.
 
-2. Follow the [BS Playground instructions](https://github.com/BuckleScript/bucklescript/tree/master/playground), with these caveats:
-- Make sure the `reason-react` version in BuckleScript `playground` folder is the same as the one in this project
-- When calling `cmij.exe`, just pass the path to `reason-react`, e.g. `../jscomp/bin/cmij.exe -playground node_modules/reason-react/lib/ocaml`
-- Run `BS_PLAYGROUND=../../reasonml.github.io/website/playground/bs node scripts/repl.js`
+2. Follow the [Contributing to the BS Playground Bundle](https://github.com/BuckleScript/bucklescript/blob/7.0.1/CONTRIBUTING.md#contributing-to-the-bs-playground-bundle) guide.
 
-3. Inside the `reasonml.github.io` repository, run `cd website && yarn`
+3. Run `BS_PLAYGROUND=../../reasonml.github.io/website/playground/bs node scripts/repl.js`
 
-4. Finally, run `node setupSomeArtifacts.js`
+4. Inside the `reasonml.github.io` repository, run `cd website && yarn`
+
+5. Then run, `yarn prepare` in the same place.
+
+6. Finally, run `node setupSomeArtifacts.js`
 
 If this command fails, ping @chenglou in Discord.
