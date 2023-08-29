@@ -11,7 +11,7 @@ There is a comprehensive [Cheat-sheet](#cheat-sheet) at the end.
 
 ## The Basics
 
-Define named functions with a [let binding](let-binding.md), parenthesis `()`,
+Define named functions with a [let binding](let-binding.md), parentheses `()`,
 and an arrow `=>`:
 
 ```reason
@@ -216,7 +216,7 @@ fn(~data=x, ());
 ```
 
 Reason provides a shorthand syntax for the pattern above. Prefixing a named
-argument's value with a question mark at the call site, will pass whatever is
+argument's value with a question mark at the call site will pass whatever is
 inside of the `Some()`, but if the value is `None`, then the named argument
 will not be supplied at all.
 
@@ -236,7 +236,7 @@ values too._
 
 #### Referencing Previous Arguments
 
-When defining default values previous arguments may be used:
+When defining default values, previous arguments may be used:
 
 ```reason
 let add = (a, ~b, ~c=a+1, ~d=b+1, ()) => a + b + c + d;
