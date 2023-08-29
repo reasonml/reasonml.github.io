@@ -17,7 +17,7 @@ value needs to communicate that it might (or might not) be available, then the
 The option type is a [variant](variant.md) with two constructors:
 
 - `Some` represents the presence of a value and accepts that value as an argument
-- `None` represents the absence of a value and acceps no arguments
+- `None` represents the absence of a value and accepts no arguments
 
 ```reason
 type option('value) =
