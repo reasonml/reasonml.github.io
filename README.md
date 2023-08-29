@@ -4,9 +4,9 @@ This code is used to generate https://reasonml.github.io. It pulls in files from
 
 `website/` contains the JS, CSS, images and other files (and some markdown files in `blog` which are separated from `docs/`; it's not too important).
 
-`cd website && yarn && yarn start` to start the development server & watcher.
+`cd website && npm install && npm run start` to start the development server & watcher.
 
-Don't use `yarn build`. It's mostly for debugging.
+Don't use `npm run build`. It's mostly for debugging.
 
 In the end, we spit out normal HTML with all but a few critical JS dependencies removed, including ReactJS itself. It's a full static website: super lightweight, portable, unfancy, but good looking. And it works with JS turned off!
 
@@ -32,10 +32,10 @@ Changes from the `source` branch are automatically picked into `master` branch b
 # Building the Playground
 
 ```
-cd website && yarn
+cd website && npm install
 ```
 
-For modifying the actual try playground source code, run `yarn bundle-try-playground:dev` to start a watcher. Once you're done, run `yarn bundle-try-playground:prod` once.
+For modifying the actual try playground source code, run `npm run bundle-try-playground:dev` to start a watcher. Once you're done, run `npm run bundle-try-playground:prod` once.
 
 ## Building with custom BuckleScript/etc
 
