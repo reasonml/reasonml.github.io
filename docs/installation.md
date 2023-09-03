@@ -2,13 +2,79 @@
 title: Installation
 ---
 
-> **Important:** If you are looking for ReScript (formerly BuckleScript) installation instructions, please refer to the [ReScript website](https://rescript-lang.org/docs/manual/latest/installation).
+This page is a detailed explanation on how to install Reason, both manually and using a template.
 
-Reason comes with its own "npm like" package manager called [esy](https://esy.sh):
+Reason is installed with a package manager like [opam](https://opam.ocaml.org/) or [esy](https://esy.sh).
 
+## Package manager
+
+<!-- Should I move this into another section? Titled with "Choose package manager or 'Package manager'? -->
+
+The `esy` package manager is designed to manage your npm and opam dependencies and efficiently caches & sandboxes your project compiler and dependencies. Check out the [esy website](https://esy.sh) to find out how to install dependencies, setting up package resolutions, and executing compiled programs.
+
+- **opam**: The [opam package index](https://opam.ocaml.org/packages/) lists all available packages available in the OCaml ecosystem
+- [esy](https://esy.sh) was designed to work with Reason and JavaScript projects.
+- esy allows to install packages from npm and opam.
+- [opam](https://opam.ocaml.org/) is the official package manager for OCaml.
+- opam allows to install packages from opam (you would need npm/yarn/pnpm to install JavaScript dependencies).
+- opam is closer to the OCaml ecosystem and more mature.
+- esy is closer to npm/yarn/pnpm in terms of workflow.
+- esy sandboxing vs opam switch
+<!-- Explain a few differences (in a table?) -->
+
+ESY:
+- esy was designed to work well with Reason and JavaScript projects.
+- esy allows to install packages from the npm's registry and opam's registry.
+- esy developer experience is closer to npm/yarn/pnpm.
+- Just one command to run `esy`, it will install deps if missing, build your dependencies and build your project.
+- Due to it's cache, it's faster than opam.
+- works on all platforms (Linux, MacOS and Windows)
+- Publish is more straight forward (esy publish)
+- Since esy needs to download packages from the opam repository, it needs to xxx and it can break, isn't as stable as opam.
+- There's not an active team working on it
+
+OPAM:
+- opam is the official package manager for OCaml.
+- opam is closer to the OCaml ecosystem and more mature.
+- opam allows to only install packages from opam (you would need npm/yarn/pnpm to install JavaScript dependencies).
+- opam comes with switches
+- opam works great on Linux and MacOS (and Windows not straight forward)
+- Publish is more tedious and comes with manual revision (with the tradeoff of reliability when installing)
+- opam is being actively maintained and improved
+
+<!-- Jump to opam -->
+<!-- Jump to esy -->
+
+## Installing with esy
+
+Esy is distributed via npm, this installation requires npm x.x.x or higher.
 ```
 npm install -g esy
 ```
+> It's recommended to install esy globally
+
+### Install reason
+
+To add packages that happen to be hosted on npm, run `esy add npm-package-name`.
+
+To add packages from opam's registry, prefix the package name with `@opam`. `esy` treats the npm scope `@opam` specially. In this case, `esy` will install any package name with the `@opam` scope directly from [opam](https://opam.ocaml.org/packages/).
+
+```bash
+esy add @opam/bos
+```
+
+<!-- Add a warning about being crazy slow the first time -->
+
+We install reason from opam using the following command:
+
+```
+esy add @opam/reason
+```
+
+Link to getting started with esy https://esy.sh/docs/en/getting-started.html
+See the [configuration](https://esy.sh/docs/en/configuration.html) section from the complete `esy` docs.
+
+### Using the [`hello-reason`](https://github.com/esy-ocaml/hello-reason) template
 
 To create your first Reason native CLI program, run the following commands:
 
@@ -17,57 +83,53 @@ git clone https://github.com/esy-ocaml/hello-reason.git
 cd hello-reason
 
 # Install all dependencies (might take a while in the first run)
-esy 
+esy
 
 # Compile and run Hello.exe
 esy x Hello
 ```
 
-Reason native development is essentially OCaml development. From here on, you want to read up following websites to get to understand the ecosystem:
+## Installing with opam
 
-- **esy**: The `esy` package manager is designed to manage your npm and opam dependencies and efficiently caches & sandboxes your project compiler and dependencies. Check out the [esy website](https://esy.sh) to find out how to install dependencies, setting up package resolutions, and executing compiled programs.
-- **opam**: The [opam package index](https://opam.ocaml.org/packages/) lists all available packages available in the OCaml ecosystem
-- **dune**: [`dune`](https://github.com/ocaml/dune) is the official build system in the OCaml ecosystem. Check out the [manual](https://dune.readthedocs.io/en/latest/) for more details on how to set up your project.
+<!--
 
-All your packages are managed in your `package.json` file. Usually you will find a `dune` file in each source code directory (such as `bin/` and `lib/`) for all the build system settings as well.
+While using Reason,
+Explain the relation with OCaml (and link to https://ocaml.org/docs/up-and-running#3-create-an-opam-switch) -->
+If you don't have opam installed, follow the instructions on the opam website.
+<!-- Add disclamer about being crazy slow the first time -->
 
+```bash
 
-### Some `esy` Tips
+bash -c "sh <(curl -fsSL https://raw.githubusercontent.com/ocaml/opam/master/shell/install.sh)"
+```
+(See the content of the script [here](https://raw.githubusercontent.com/ocaml/opam/master/shell/install.sh))
 
-**Adding dependencies:**
+### Setup a new environment
+<!-- Explain opam init, opam env and opam switch -->
 
-To add Reason / OCaml packages that happen to be hosted on npm, run `esy add npm-package-name`.
+opam needs to be initialised, which will create a default opam switch. An opam switch is an isolated environment for the OCaml compiler and any packages you install.
 
 ```
-esy add refmterr
+opam init
 ```
 
-**Opam integration:**
+During opam init, you will be asked if you want to add a hook to your shell to put the tools available in the current opam switch on your PATH.
 
-`esy` treats the npm scope `@opam` specially. `esy` will install any package name with the `@opam` scope directly from [opam](https://opam.ocaml.org/packages/). This is the only scope with special meaning. All other package names are assumed to be hosted on npm.
-
-```
-esy add @opam/bos
-```
-
-**Advanced esy configuration:**
-
-See the [configuration](https://esy.sh/docs/en/configuration.html) section from the complete `esy` docs.
-
-## Compiling to JavaScript
-
-Reason + OCaml both leverage the [js_of_ocaml (JSOO)](https://ocsigen.org/js_of_ocaml/3.7.0/manual/overview) compiler to compile from bytecode to JavaScript.
-
-To get started with Reason + esy + JSOO, check out this [`hello-jsoo-esy`](https://github.com/jchavarri/hello-jsoo-esy) template:
+### Install reason
 
 ```
-git clone https://github.com/jchavarri/hello-jsoo-esy.git
-cd hello-jsoo-esy
-esy
-
-npm install
-npm run webpack
+opam install reason
 ```
+<!-- Link to opam -->
+Current version 3.9.0
+
+<!-- Small file with dune -->
+<!-- https://til.hashrocket.com/posts/qljaabp1yb-compile-reasonml-to-native-with-dune -->
+<!-- dune exec ... -->
+
+### Using a template
+
+<!-- Link to opam template and explanation -->
 
 ## What's Next?
 
