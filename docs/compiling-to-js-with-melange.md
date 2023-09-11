@@ -1,5 +1,5 @@
 ---
-title: Compiling to JavaScript
+title: Compiling to JavaScript with Melange
 ---
 
 After the installation page, we have a CLI application written in Reason, running a native executable, but one of the best usages of Reason is to compile it to JavaScript an run it in the browser or any JavaScript platform such as Node, Deno Cloudflare Workers,

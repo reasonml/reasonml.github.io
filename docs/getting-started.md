@@ -7,7 +7,10 @@ This section of the docs is all about quickly setting up a Reason development en
 ## Get an overview of Reason
 
 ```reason
-type schoolPerson = Teacher | Director | Student(string);
+type schoolPerson =
+  | Teacher
+  | Director
+  | Student(string);
 
 let greeting = person =>
   switch (person) {
