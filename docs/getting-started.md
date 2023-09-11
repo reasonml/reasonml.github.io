@@ -2,10 +2,7 @@
 title: Getting started
 ---
 
-This section of the docs is all about quickly setting up a Reason development enviromanet up and running a small "Hello world" and finally compile it to JavaScript.
-
-<!-- Explain this more formal -->
-This page introduces a few tools without much detail to get you up to speed
+This section of the docs is all about quickly setting up a Reason development enviromanet up and running, plus a "Hello world" executable to introduce the build system.
 
 ## Get an overview of Reason
 
@@ -34,19 +31,39 @@ For an introduction to most language features check out the [overview](overview.
 
 To start immediately an online REPL is available at [Sketch.sh](https://sketch.sh)
 or open the [playground](playground)
-<!-- Link to the playground -->
 
 ## Setup your editor
 
-Go to [editor-plugins](editor-plugins.md)
 <!-- Screenshot of an editor with hover? -->
+Go to [editor-plugins](editor-plugins.md)
 
 ## Install Reason
 
 Install Reason on your computer to start writing Reason programs.
-<!-- - Link to installation -->
 
-## Compile to JavaScript
+```sh
+opam install reason
+```
 
-Compiling Reason to JavaScript with Melange
-<!-- Link to compiling with Melange -->
+Check the [installation](installation.md) for a more detailed guide.
+
+### Example
+
+```clojure
+; Defines a executable with the name hi. After running `dune build` you can find
+; _build/default/hi.exe and call it directly `./_build/default/hi.exe` or via dune
+; `dune exec hi`
+;
+; Yes, executables have the .exe extension on all platforms
+(executable
+  (name hi)
+  (public_name hi))
+```
+
+```reason
+// hi.exe
+print_endline("Hello!");
+```
+
+<!-- Link to dune executable docs -->
+<!-- Introduce library and link to docs -->
