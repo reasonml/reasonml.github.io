@@ -8,8 +8,7 @@ Reason is installed with a package manager like [opam](https://opam.ocaml.org/) 
 
 ## Package manager
 
-<!-- Should I move this into another section? Titled with "Choose package manager or 'Package manager'? -->
-
+<!-- Explain a few differences (in a table?) -->
 The `esy` package manager is designed to manage your npm and opam dependencies and efficiently caches & sandboxes your project compiler and dependencies. Check out the [esy website](https://esy.sh) to find out how to install dependencies, setting up package resolutions, and executing compiled programs.
 
 - **opam**: The [opam package index](https://opam.ocaml.org/packages/) lists all available packages available in the OCaml ecosystem
@@ -20,7 +19,6 @@ The `esy` package manager is designed to manage your npm and opam dependencies a
 - opam is closer to the OCaml ecosystem and more mature.
 - esy is closer to npm/yarn/pnpm in terms of workflow.
 - esy sandboxing vs opam switch
-<!-- Explain a few differences (in a table?) -->
 
 ESY:
 - esy was designed to work well with Reason and JavaScript projects.
@@ -44,6 +42,47 @@ OPAM:
 
 <!-- Jump to opam -->
 <!-- Jump to esy -->
+
+## Installing with opam
+
+<!--
+
+While using Reason,
+Explain the relation with OCaml (and link to https://ocaml.org/docs/up-and-running#3-create-an-opam-switch) -->
+If you don't have opam installed, follow the instructions on the opam website.
+<!-- Add disclamer about being crazy slow the first time -->
+
+```bash
+
+bash -c "sh <(curl -fsSL https://raw.githubusercontent.com/ocaml/opam/master/shell/install.sh)"
+```
+(See the content of the script [here](https://raw.githubusercontent.com/ocaml/opam/master/shell/install.sh))
+
+### Setup a new environment
+<!-- Explain opam init, opam env and opam switch -->
+
+opam needs to be initialised, which will create a default opam switch. An opam switch is an isolated environment for the OCaml compiler and any packages you install.
+
+```
+opam init
+```
+
+During opam init, you will be asked if you want to add a hook to your shell to put the tools available in the current opam switch on your PATH.
+
+### Install reason
+
+```
+opam install reason
+```
+<!-- Link to opam -->
+Current version 3.9.0
+
+<!-- Check versions/stuff is installed -->
+<!-- Link to refmt page -->
+
+### Using a template
+
+<!-- Link to opam template and explanation -->
 
 ## Installing with esy
 
@@ -88,48 +127,6 @@ esy
 # Compile and run Hello.exe
 esy x Hello
 ```
-
-## Installing with opam
-
-<!--
-
-While using Reason,
-Explain the relation with OCaml (and link to https://ocaml.org/docs/up-and-running#3-create-an-opam-switch) -->
-If you don't have opam installed, follow the instructions on the opam website.
-<!-- Add disclamer about being crazy slow the first time -->
-
-```bash
-
-bash -c "sh <(curl -fsSL https://raw.githubusercontent.com/ocaml/opam/master/shell/install.sh)"
-```
-(See the content of the script [here](https://raw.githubusercontent.com/ocaml/opam/master/shell/install.sh))
-
-### Setup a new environment
-<!-- Explain opam init, opam env and opam switch -->
-
-opam needs to be initialised, which will create a default opam switch. An opam switch is an isolated environment for the OCaml compiler and any packages you install.
-
-```
-opam init
-```
-
-During opam init, you will be asked if you want to add a hook to your shell to put the tools available in the current opam switch on your PATH.
-
-### Install reason
-
-```
-opam install reason
-```
-<!-- Link to opam -->
-Current version 3.9.0
-
-<!-- Small file with dune -->
-<!-- https://til.hashrocket.com/posts/qljaabp1yb-compile-reasonml-to-native-with-dune -->
-<!-- dune exec ... -->
-
-### Using a template
-
-<!-- Link to opam template and explanation -->
 
 ## What's Next?
 
