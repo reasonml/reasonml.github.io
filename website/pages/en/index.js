@@ -67,7 +67,7 @@ ${pre}`;
 class HomeSplash extends React.Component {
   render() {
     let language = translation[this.props.language];
-    let tagline = language['localized-strings']
+    let tagline = language && language['localized-strings']
       ? language['localized-strings'].tagline
       : siteConfig.tagline;
 
