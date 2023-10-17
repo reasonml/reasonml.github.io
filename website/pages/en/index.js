@@ -66,6 +66,11 @@ ${pre}`;
 
 class HomeSplash extends React.Component {
   render() {
+    let language = translation[this.props.language];
+    let tagline = language['localized-strings']
+      ? language['localized-strings'].tagline
+      : siteConfig.tagline;
+
     let promoSection =
       <div className="section promoSection">
         <div className="promoRow">
@@ -114,7 +119,7 @@ class HomeSplash extends React.Component {
                 <MarkdownBlock>{codeExampleLargeScreen}</MarkdownBlock>
               </div>
               <div className="homeTagLine">
-                {translation[this.props.language]['localized-strings'].tagline}
+                {tagline}
               </div>
             </div>
 

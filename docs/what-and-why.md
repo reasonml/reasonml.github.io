@@ -8,29 +8,51 @@ Reason is a programming language powered by [OCaml](http://ocaml.org)'s
 strong type system, and has a syntax designed to feel familiar to people
 coming from JavaScript or C-family languages.
 
+<!-- Explain better the compatibility, remove the mention to refmt -->
 _Note: Reason can be translated back and forth to OCaml using `refmt`. Anything
 possible in Reason is also possible with OCaml and vice versa._
 
 ## Why Use Reason?
+
+<!-- Link jordan's video -->
+
+<!-- Explain why is a syntax layer on top of ocaml, problems with OCaml syntax -->
+<!-- Link to "Comparision with OCaml" if there's any -->
+<!-- To make it a great fit for web development, RReason has first-class support for JSX -->
+
+<!-- OCaml is a wonderful language, awarded, robust, fast and growing -->
+<!-- Write down some features of the language from Excesim.io -->
 
 The powerful typesystem underlying Reason will reduce bugs, increase
 maintainability, and improve the refactorabilty of your code.
 
 ## Different Environments
 
+<!-- Explain different "envs" in good detail -->
+
 There are several projects that allow Reason (and OCaml) to be used in different
 environments.
 
-- **Native Executables**: Using the standard compiler native executables can be built and run directly on your machine.
+<!-- Reason + OCaml = Reason Native -->
+- **Native**: Using the OCaml compiler native executables can be built and run directly on your machine.
   - Tools: [dune](https://dune.build/), [esy](https://github.com/esy/esy)
-- **Browsers**: There are several projects that will compile Reason to equivalent JavaScript code that can be run in the browser. 
-  - [ReScript](https://rescript-lang.org/) (formerly BuckleScript)
+<!-- Reason + Melange = JavaScript -->
+- **JavaScript**: There are several projects that will compile Reason to equivalent JavaScript code that can be run in the browser.
+  - [Melange](https://melange.re/)
   - [Js_of_ocaml](https://ocsigen.org/js_of_ocaml/)
+
+<!-- Mention universal code
+
+Reason can be used to target both environtment at the same time
+
+- It's experimental
+- Thanks to dune
+
+-->
 
 ## Where do I start?
 
-- For an introduction to most language features check out the [overview](overview.md)
-- To start immediately an online REPL is available at [Sketch.sh](https://sketch.sh/)
+The [getting started](getting-started.md) page will set you up
 
 ## Alternatives
 
