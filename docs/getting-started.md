@@ -42,20 +42,25 @@ Go to [editor-plugins](editor-plugins.md)
 
 ## Install Reason
 
-Install Reason on your computer to start writing Reason programs.
-
-```sh
-opam install reason
-```
-
+Install Reason on your computer to start writing Reason applications.
 Check the [installation](installation.md) for a more detailed guide.
 
-### Example
+### Example ¿¿¿
+
+Here's a minimal example of a native Reason project that prints "Hello!" to the console:
+
+```reason
+// src/hi.re
+print_endline("Hello!");
+```
 
 ```clojure
-; Defines a executable with the name hi. After running `dune build` you can find
-; _build/default/hi.exe and call it directly `./_build/default/hi.exe` or via dune
-; `dune exec hi`
+; src/dune
+
+; Defines an executable named hi. Running `dune build` compiles the hi.re file into
+; _build/default/hi.exe.
+; Can run it directly `./_build/default/hi.exe`
+; or via dune with `dune exec hi`
 ;
 ; Yes, executables have the .exe extension on all platforms
 (executable
@@ -63,10 +68,5 @@ Check the [installation](installation.md) for a more detailed guide.
   (public_name hi))
 ```
 
-```reason
-// hi.exe
-print_endline("Hello!");
-```
-
-<!-- Link to dune executable docs -->
+More info on the `executable` stanza on the [Dune documentation](https://dune.readthedocs.io/en/stable/dune-files.html#executable)
 <!-- Introduce library and link to docs -->
