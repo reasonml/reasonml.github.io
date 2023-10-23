@@ -46,12 +46,15 @@ Reason can be compiled to native, bytecode, and JavaScript, with an ongoing plan
 
 ## Different Environments
 
-There are several projects that allow Reason (and OCaml) to be used in different environments.
+Reason compiles to JavaScript thanks to our partner project, [Melange](https://melange.re), which compiles OCaml/Reason into JavaScript with smooth interoperability with JavaScript. Reason also compiles to fast, barebone assembly, thanks to OCaml itself.
 
-- **JavaScript**: Compile Reason to equivalent JavaScript code that can be run in the browser, or any other JavaScript environment.
-  - [Melange](https://melange.re) is a backend for the OCaml compiler that emits JavaScript. Melange strives to provide the best integration with both the OCaml and JavaScript ecosystems. It is the recommended way to compile Reason to JavaScript, since it compiles 1 module to 1 file, has a very good interop with JavaScript and integrates well with modern frontend development tooling.
-  - [Js_of_ocaml](https://ocsigen.org/js_of_ocaml) is a compiler from OCaml bytecode programs to JavaScript. Since it compiles from the bytecode, it can compile all OCaml programs, but makes the whole process more opaque, generates bigger bundles and has a worse interop with JavaScript.
-- **Native**: Using the OCaml compiler to produce native executables that can run directly on your machine. [dune](https://dune.build) is the defacto build system for native OCaml projects, but it's also possible to use [ocamlc (OCaml's compiler)](https://ocaml.org/docs/compiling-ocaml-projects) directly
+There's a clear distinction between the two environments, one runs JavaScript in the browser while the other runs assembly on the machine. But the language constructors and tooling is the same, so you can write code for the two environments.
+
+**Compile to JavaScript**
+[Melange](https://melange.re) is a backend for the OCaml compiler that emits JavaScript. Melange strives to provide the best integration with both the OCaml and JavaScript ecosystems. It is the recommended way to compile Reason to JavaScript, since it compiles 1 module to 1 file, has a very good interop with JavaScript and integrates well with modern frontend development tooling.
+
+**Compile to Native**
+Using the OCaml compiler to produce native executables that can run directly on your machine. It's recommended to use [dune](https://dune.build) which is the defacto build system for native OCaml projects, but it's also possible to use [ocamlc (OCaml's compiler)](https://ocaml.org/docs/compiling-ocaml-projects) directly.
 
 ## Where do I start?
 
