@@ -5,13 +5,12 @@ title: Installation
 This page is a detailed explanation on how to install Reason with [opam](https://opam.ocaml.org/), both manually and using a template. There are other options available, such as [esy](https://esy.sh), but we recommend using opam for the best experience. Check the [esy installation page](installation-esy.md) if you want to use esy instead.
 
 ### System requirements
-- opam
 - macOS and Linux are supported natively
 - Windows is supported via WSL (https://ocaml.org/docs/ocaml-on-windows)
 
 ## Install the package manager
 
-opam (short for OCaml Package Manager) is a tool for managing packages and environments. If you haven't installed opam yet, please follow the instructions provided on the [official website](https://opam.ocaml.org/doc/Install.html). Be aware that the initial setup might be notably slow due to compiler retrieval and build processes.
+[opam](https://opam.ocaml.org) (short for OCaml Package Manager) is a tool for managing packages and environments. If you haven't installed opam yet, please follow the instructions provided on the [official website](https://opam.ocaml.org/doc/Install.html). Be aware that the initial setup might be notably slow due to compiler retrieval and build processes.
 
 ### Using a template
 
