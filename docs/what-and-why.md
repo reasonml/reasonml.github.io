@@ -12,25 +12,37 @@ Notably versatile, Reason serves as an excellent choice for a range of applicati
 
 ## Why Use Reason?
 
-![Jordan Walke - Keynote ReasonConf US 2019](https://www.youtube.com/watch?v=5fG_lyNuEAw&t=3s&ab_channel=ReasonConf)
+<iframe
+  width="784"
+  height="432"
+  src="https://www.youtube.com/embed/5fG_lyNuEAw?si=HPFaMIMIX0Krn2wK"
+  title="Jordan Walke - Keynote ReasonConf US 2019"
+  frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+  allowfullscreen>
+</iframe>
 
 **Functional Programming**
-ReasonML is a practical functional programming language. Offers a powerful blend of functional programming capabilities, with optional support for mutation and side-effects, enhancing its practicality.
+Reason is a practical functional programming language. Offers a powerful blend of functional programming capabilities, with optional support for mutation and side-effects, enhancing its practicality.
 
-**OCaml's type system**
-OCaml offers an industrial-strength state-of-the-art type system and provides strong type inference. It is a sound type system which means it is guaranteed there will be no runtime type errors after type checking.
+**An eye for simplicity & pragmatism**
 
-**Type inference**
-No need to specify types, types are inferred by the compiler and are guaranteed to be correct. Adding types helps the compiler give better error messages.
+We allow opt-in side-effect, mutation and object for familiarity & interop, while keeping the rest of the language pure, immutable and functional.
+
+**Rock solid type system**
+
+The type system offers a state-of-the-art sound type system, soundness  which means it is guaranteed there will be no runtime type errors after type checking and provides strong type inference, types are rarely required to be written manually, while maintaining soundness.
 
 **Fast compiler**
-ReasonML compilation times are super fast which translates to fast and safe iteration cycles.
+
+Compilation times are super fast which translates to fast and safe iteration cycles. The compiler won't compile twice the same code, and will only compile the necessary files each run.
 
 **First-class JSX support**
-JSX is part of the language. JSX is an embeddable XML-like syntax, used to describe what the UI should look like, and composes with the rest of the language. (Link to JSX)
+
+JSX is part of the language. JSX is an embeddable XML-like syntax, used to describe what the UI should look like, and composes with the rest of the language. More into [JSX](jsx.md).
 
 **Portability/Universal code**
-Reason can compile to native, bytecode, and JavaScript, with plans for WebAssembly support.
+
+Reason can be compiled to native, bytecode, and JavaScript, with an ongoing plan for WebAssembly.
 
 ## Different Environments
 
