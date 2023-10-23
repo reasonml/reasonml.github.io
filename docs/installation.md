@@ -19,7 +19,10 @@ This template serves as a solid foundation, integrating essential configurations
 
 We recommend this method for beginners.
 
-**Repository** [reasonml/opam-template](https://github.com/reasonml/opam-template).
+**Repository** [melange-re/melange-opam-template](https://github.com/melange-re/melange-opam-template)
+
+The template comes from the [Melange](https://melange.re) team, since it's a common duo to use Reason with Melange.
+Melange is a compiler that emits JavaScript, from Reason code. You can find all the information about Melange in their docs: https://melange.re
 
 ### Setup a new environment manually
 
