@@ -10,7 +10,7 @@ Comes inside the [`reason`](https://opam.ocaml.org/packages/reason) package from
 
 ## Installation
 
-```sh
+```bash
 opam install reason
 ```
 
@@ -26,7 +26,7 @@ refmt
 
 ## Help
 
-```sh
+```bash
 REFMT(1)                         Refmt Manual                         REFMT(1)
 
 NAME

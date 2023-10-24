@@ -10,14 +10,16 @@ Inspired by [utop](https://github.com/ocaml-community/utop)
 
 ## Installation
 
-```sh
+```bash
 opam install rtop
 ```
 
 ## Usage
 
-```sh
+```bash
 rtop
+```
+```bash
 ─────────────┬─────────────────────────────────────────────────────────────┬──────────────
              │ Welcome to utop version 2.13.1 (using OCaml version 5.0.0)! │
              └─────────────────────────────────────────────────────────────┘

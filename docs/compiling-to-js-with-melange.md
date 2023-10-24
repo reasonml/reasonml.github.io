@@ -42,7 +42,8 @@ make serve # Run the development server
 If you prefer to do all the steps manually, here is a step by step. Assuming you have an opam switch with OCaml 5.1.0. If not, check the [installation](installation.md#setup-a-new-environment-manually) guide.
 
 #### Install melange
-```sh
+
+```bash
 opam install melange
 ```
 
