@@ -4,9 +4,9 @@ title: What & Why
 
 # Overview
 
-Reason is a user-friendly programming language built on the robust type system of [OCaml](http://ocaml.org), providing a comfortable transition for developers familiar with JavaScript or C-family languages. It offers a powerful blend of functional programming capabilities, such as pattern matching and variants, with optional support for mutation and side-effects, enhancing its practicality.
+Reason is a user-friendly programming language built on the robust type system of [OCaml](http://ocaml.org), providing a comfortable transition for developers familiar with JavaScript or C-family languages.
 
-The language's strength lies in its seamless integration with the reliable OCaml ecosystem, allowing for smooth refactoring aided by the compiler's speed and intelligent type inference.
+Not only uses the type-system, but also integrates seamlessly with the reliable OCaml ecosystem, with access to all the tools from OCaml, such as: Language Server, the defacto build system [dune](https://dune.build), and the package manager [opam](https://opam.ocaml.org).
 
 Notably versatile, Reason serves as an excellent choice for a range of applications, particularly excelling in web development. Its adaptability extends to the creation of visually appealing UIs for browsers, aided by its capability to compile to native, bytecode, and JavaScript, with plans for WebAssembly support.
 
@@ -22,6 +22,7 @@ Notably versatile, Reason serves as an excellent choice for a range of applicati
 </iframe>
 
 **Functional Programming**
+
 Reason is a practical functional programming language. Offers a powerful blend of functional programming capabilities, with optional support for mutation and side-effects, enhancing its practicality.
 
 **An eye for simplicity & pragmatism**
@@ -46,15 +47,17 @@ Reason can be compiled to native, bytecode, and JavaScript, with an ongoing plan
 
 ## Different Environments
 
-Reason compiles to JavaScript thanks to our partner project, [Melange](https://melange.re), which compiles OCaml/Reason into JavaScript with smooth interoperability with JavaScript. Reason also compiles to fast, barebone assembly, thanks to OCaml itself.
+Reason compiles to JavaScript thanks to our partner project, [Melange](compiling-to-js-with-melange.md), which compiles OCaml/Reason into JavaScript with smooth interoperability with JavaScript. Reason also compiles to fast, barebone assembly, thanks to OCaml itself.
 
 There's a clear distinction between the two environments, one runs JavaScript in the browser while the other runs assembly on the machine. But the language constructors and tooling is the same, so you can write code for the two environments.
 
 **Compile to JavaScript**
-[Melange](https://melange.re) is a backend for the OCaml compiler that emits JavaScript. Melange strives to provide the best integration with both the OCaml and JavaScript ecosystems. It is the recommended way to compile Reason to JavaScript, since it compiles 1 module to 1 file, has a very good interop with JavaScript and integrates well with modern frontend development tooling.
+
+[Melange](compiling-to-js-with-melange.md) is a backend for the OCaml compiler that emits JavaScript. Melange strives to provide the best integration with both the OCaml and JavaScript ecosystems. It is the recommended way to compile Reason to JavaScript, since it compiles 1 module to 1 file, has a very good interop with JavaScript and integrates well with modern frontend development tooling. Take a closer look at our page [Compiling to JavaSCript with Melange](compiling-to-js-with-melange.md).
 
 **Compile to Native**
-Using the OCaml compiler to produce native executables that can run directly on your machine. It's recommended to use [dune](https://dune.build) which is the defacto build system for native OCaml projects, but it's also possible to use [ocamlc (OCaml's compiler)](https://ocaml.org/docs/compiling-ocaml-projects) directly.
+
+Native means using the OCaml compiler to produce native executables that can run directly on your machine. It's recommended to use [dune](https://dune.build) which is the defacto build system for native OCaml projects, but it's also possible to use [ocamlc (OCaml's compiler)](https://ocaml.org/docs/compiling-ocaml-projects) directly.
 
 ## Where do I start?
 
