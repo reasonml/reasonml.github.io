@@ -158,7 +158,7 @@ class Index extends React.Component {
                 },
                 {
                   title: <translate>Use the power of the OCaml ecosystem</translate>,
-                  content: <translate>Get access to the powerful systems programming language OCaml with an easier to learn syntax. Use js_of_ocaml to compile to JavaScript!</translate>,
+                  content: <translate>Get access to the powerful systems programming language OCaml with an easier to learn syntax. Use Melange to compile to JavaScript!</translate>,
                 },
               ]}
               layout="threeColumn"
