@@ -15,7 +15,7 @@ And other features.
 
 ## Editor Plugins & Language Server
 
-Since Reason is just an alternative syntax for OCaml, we integrate seamlessly into the official OCaml editor toolchain as well.
+The OCaml Platform provides support for Reason and integrates with editors such as VSCode, Vim, or Emacs.
 
 - For VSCode, we recommend using the [vscode-ocaml-platform](https://github.com/ocamllabs/vscode-ocaml-platform) plugin, which offers OCaml & Reason support out of the box.
 - For other editors, we recommend using a language server client plugin of your choice, and pairing it with the [`ocaml-lsp`](https://github.com/ocaml/ocaml-lsp). Check out the respective README's to get started.
