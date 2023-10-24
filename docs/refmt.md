@@ -1,12 +1,12 @@
 ---
-title: refmt
+title: Format (refmt)
 ---
 
-`refmt` formats Reason programs, is a parser and pretty-printer for Reason. Stands for `re` `f`or`m`a`t`ter.
+`refmt` stands by Reason Formatter and it formats Reason programs, is a parser and pretty-printer for Reason.
 
 `refmt` can easily convert Reason code to OCaml code and vice versa, since Reason and OCaml are compatible on the AST-level.
 
-Comes inside the [`reason`](https://opam.ocaml.org/packages/reason) package from opam https://opam.ocaml.org/packages/reason/.
+Comes inside the [`reason`](https://opam.ocaml.org/packages/reason) package from the [opam repository](https://opam.ocaml.org/packages/reason/).
 
 ## Installation
 
@@ -16,13 +16,21 @@ opam install reason
 
 ## Usage
 
-It comes integrated automatically in dune, so you don't need to do anything to use it.
+It comes integrated automatically in `dune`, so you don't need to do anything to use it, but you can use it directly from the command line via `refmt` directly or via dune.
+
+```bash
+dune build @fmt
+# or
+refmt
+```
+
+## Help
 
 ```sh
 REFMT(1)                         Refmt Manual                         REFMT(1)
 
 NAME
-       refmt - Reason's Parser & Pretty-printer
+       refmt - Reason´s Parser & Pretty-printer
 
 SYNOPSIS
        refmt [OPTION]... [FILENAMES]...
@@ -37,7 +45,7 @@ ARGUMENTS
 
 OPTIONS
        -e, --assume-explicit-arity
-           if a constructor's argument is a tuple, always interpret it as
+           if a constructor´s argument is a tuple, always interpret it as
            multiple arguments
 
        -h VAL, --heuristics-file=VAL

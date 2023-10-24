@@ -1,10 +1,10 @@
 ---
-title: rtop
+title: REPL (rtop)
 ---
 
 `rtop` is a REPL (Read, Evaluate, Print, and Loop) to interact with Reason.
 
-Comes from the [`rtop`](https://opam.ocaml.org/packages/rtop) package in opam https://opam.ocaml.org/packages/rtop/.
+Comes from the [`rtop`](https://opam.ocaml.org/packages/rtop) package in the [opam repository](https://opam.ocaml.org/packages/rtop/).
 
 Inspired by [utop](https://github.com/ocaml-community/utop)
 
