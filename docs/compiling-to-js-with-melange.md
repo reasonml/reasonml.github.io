@@ -18,7 +18,7 @@ If you have experience with JavaScript and the ecosystem we recommend Melange, o
 
 The install guide on the Melange website shares a lot of common steps with [our installation](installation.md), check it out: [melange.re/v2.0.0/getting-started](https://melange.re/v2.0.0/getting-started).
 
-Since [Melange v1](https://buttondown.email/anmonteiro/archive/melange-hits-v10/), it integrates with dune, the OCaml build system. This means that you can use dune to compile
+Since [Melange v1](https://buttondown.email/anmonteiro/archive/melange-hits-v10/), Melange integrates with dune. This means that you can use dune to compile your Reason code to JavaScript and also to bytecode or native.
 
 ## Template
 
@@ -68,6 +68,27 @@ The `melange.emit` stanza tells dune to generate JavaScript files from a set of 
  (target app))
 ```
 
+#### Libraries
+
+dune allows to define libraries by creating a dune file inside a folder and adding a library stanza: https://dune.readthedocs.io/en/stable/concepts/package-spec.html#libraries
+
+To compile a library with melange, add the `(modes melange)` stanza to the library dune file.
+
+```diff
+(library
+  (name ui_library)
++ (modes melange)
+)
+```
+
+Once you have a melange library, you can add it to the `melange.emit` stanza:
+```lisp
+; dune
+(melange.emit
+ (target app)
+ (libraries ui_library))
+```
+
 #### Compile
 
 Each time you compile the project, dune will emit JavaScript files under `_build/default/app/` (`app` comes from the `(target app)` defined under `melange.emit`).
@@ -78,16 +99,4 @@ To compile the project, run:
 dune build # Compile the entire project
 # or compile the melange alias (only melange.emit stanzas)
 dune build @melange
-```
-
-#### Libraries
-
-dune allows to define libraries by creating a dune file inside a folder and adding a library stanza: https://dune.readthedocs.io/en/stable/concepts/package-spec.html#libraries
-
-To compile a library with melange, add the `(modes melange)` stanza to the library dune file.
-
-```diff
-(library
-+ (modes melange)
-)
 ```
