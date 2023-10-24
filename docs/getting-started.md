@@ -27,7 +27,7 @@ module Intro = {
   }
 };
 ```
-> This snippet code includes [@react.component] which comes from [reason-react](https://reasonml.github.io/reason-react/)
+> This snippet includes [@react.component] which comes from [reason-react](https://reasonml.github.io/reason-react/)
 
 For an introduction to most language features check out the [overview](overview.md)
 
