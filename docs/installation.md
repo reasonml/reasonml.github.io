@@ -25,7 +25,7 @@ Melange is a compiler that emits JavaScript, from Reason code. You can find all 
 
 ### Setup a new environment manually
 
-opam needs to be initialised (Initialize `~/.opam`)
+opam needs to be initialised (Initialize `~/.opam`). This step is only required once.
 
 ```bash
 opam init -y
@@ -36,6 +36,8 @@ During opam init, you will be asked if you want to add a hook to your shell to p
 ```bash
 eval $(opam env)
 ```
+
+### Create switch
 
 opam is now installed and configured. Before installing Reason, we need to create a switch which is set of packages that are installed in a given compiler version. This is similar to how [nvm](https://github.com/nvm-sh/nvm) manages different versions of packages on a Node version.
 
@@ -82,6 +84,8 @@ Create a file `dune` with the following content:
  (name hello)
  (public_name hello))
 ```
+> Note: dune uniformly uses the .exe extension to build native executables, even on Unix where programs don’t usually have a .exe extension.
+
 The `executable` stanza is used to define executables and the `name` field is used to specify the name of the executable (Can run with `dune exec src/hello.exe`). The `public_name` field is used to specify the name of the executable when it is installed and allows you to run the executable with `hello` directly: `dune exec hello`.
 
 Run the project (this will compile the project and run the executable):
