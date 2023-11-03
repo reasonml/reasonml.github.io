@@ -1,0 +1,131 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Reason · Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems.</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Reason · Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io/"/><meta property="og:description" content="Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/icon_50.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io/blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io/blog/feed.xml" title="Reason Blog RSS Feed"/><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/en"><img class="logo" src="/img/dummy.svg" alt="Reason"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/docs/en/what-and-why" target="_self">Docs</a></li><li class=""><a href="/en/try" target="_self">Try</a></li><li class=""><a href="/api/index" target="_self">API</a></li><li class=""><a href="/docs/en/community" target="_self">Community</a></li><li class=""><a href="/blog/" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg" alt="Languages icon"/>English</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/ja/Random">日本語</a></li><li><a href="/de/Random">Deutsch</a></li><li><a href="/es-ES/Random">Español</a></li><li><a href="/fr/Random">Français</a></li><li><a href="/ko/Random">한국어</a></li><li><a href="/pt-BR/Random">Português (Brasil)</a></li><li><a href="/ru/Random">Русский</a></li><li><a href="/uk/Random">Українська</a></li><li><a href="/zh-CN/Random">中文</a></li><li><a href="/zh-TW/Random">繁體中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank" rel="noreferrer noopener">Help Translate</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/facebook/reason" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div><link rel="stylesheet" href="/css/main.css"><div class="ocamldoc">
+<div class="navbar"><a class="pre" href="Queue.html" title="Queue">Previous</a>
+&#xA0;<a class="up" href="index.html" title="Index">Up</a>
+&#xA0;<a class="post" href="Scanf.html" title="Scanf">Next</a>
+</div>
+<h1>Module <a href="type_Random.html">Random</a></h1>
+
+<pre><span class="keyword">module</span> Random: sig .. end</pre><div class="info module top">
+Pseudo-random number generators (PRNG).<br>
+</div>
+<hr width="100%">
+<br>
+<h6 id="6_Basicfunctions">Basic functions</h6><br>
+
+<pre id="VALinit"><span class="keyword">let</span> init: int =&gt; unit;
+</pre><div class="info ">
+Initialize the generator, using the argument as a seed.
+     The same seed will always yield the same sequence of numbers.<br>
+</div>
+
+<pre id="VALfull_init"><span class="keyword">let</span> full_init: array(int) =&gt; unit;
+</pre><div class="info ">
+Same as <a href="Random.html#VALinit"><code class="code">Random.init</code></a> but takes more data as seed.<br>
+</div>
+
+<pre id="VALself_init"><span class="keyword">let</span> self_init: unit =&gt; unit;
+</pre><div class="info ">
+Initialize the generator with a random seed chosen
+   in a system-dependent way.  If <code class="code">/dev/urandom</code> is available on
+   the host machine, it is used to provide a highly random initial
+   seed.  Otherwise, a less random seed is computed from system
+   parameters (current time, process IDs).<br>
+</div>
+
+<pre id="VALbits"><span class="keyword">let</span> bits: unit =&gt; int;
+</pre><div class="info ">
+Return 30 random bits in a nonnegative integer.<br>
+<b>Before 3.12.0 </b> used a different algorithm (affects all the following
+                   functions)<br>
+</div>
+
+<pre id="VALint"><span class="keyword">let</span> int: int =&gt; int;
+</pre><div class="info ">
+<code class="code">Random.int bound</code> returns a random integer between 0 (inclusive)
+     and <code class="code">bound</code> (exclusive).  <code class="code">bound</code> must be greater than 0 and less
+     than 2<sup class="superscript">30</sup>.<br>
+</div>
+
+<pre id="VALint32"><span class="keyword">let</span> int32: Int32.t =&gt; Int32.t;
+</pre><div class="info ">
+<code class="code">Random.int32 bound</code> returns a random integer between 0 (inclusive)
+     and <code class="code">bound</code> (exclusive).  <code class="code">bound</code> must be greater than 0.<br>
+</div>
+
+<pre id="VALnativeint"><span class="keyword">let</span> nativeint: Nativeint.t =&gt; Nativeint.t;
+</pre><div class="info ">
+<code class="code">Random.nativeint bound</code> returns a random integer between 0 (inclusive)
+     and <code class="code">bound</code> (exclusive).  <code class="code">bound</code> must be greater than 0.<br>
+</div>
+
+<pre id="VALint64"><span class="keyword">let</span> int64: Int64.t =&gt; Int64.t;
+</pre><div class="info ">
+<code class="code">Random.int64 bound</code> returns a random integer between 0 (inclusive)
+     and <code class="code">bound</code> (exclusive).  <code class="code">bound</code> must be greater than 0.<br>
+</div>
+
+<pre id="VALfloat"><span class="keyword">let</span> float: float =&gt; float;
+</pre><div class="info ">
+<code class="code">Random.float bound</code> returns a random floating-point number
+   between 0 and <code class="code">bound</code> (inclusive).  If <code class="code">bound</code> is
+   negative, the result is negative or zero.  If <code class="code">bound</code> is 0,
+   the result is 0.<br>
+</div>
+
+<pre id="VALbool"><span class="keyword">let</span> bool: unit =&gt; bool;
+</pre><div class="info ">
+<code class="code">Random.bool ()</code> returns <code class="code">true</code> or <code class="code">false</code> with probability 0.5 each.<br>
+</div>
+<br>
+<h6 id="6_Advancedfunctions">Advanced functions</h6><br>
+<br>
+<h6 id="6_Advancedfunctions">Advanced functions</h6><br>
+<br>
+The functions from module <code class="code">State</code> manipulate the current state
+    of the random generator explicitly.
+    This allows using one or several deterministic PRNGs,
+    even in a multi-threaded program, without interference from
+    other parts of the program.<br>
+
+<pre><span class="keyword">module</span> State: sig .. end</pre>
+<pre id="VALget_state"><span class="keyword">let</span> get_state: unit =&gt; State.t;
+</pre><div class="info ">
+Return the current state of the generator used by the basic functions.<br>
+</div>
+
+<pre id="VALset_state"><span class="keyword">let</span> set_state: State.t =&gt; unit;
+</pre><div class="info ">
+Set the state of the generator used by the basic functions.<br>
+</div>
+</div></div><span><script src="/js/redirectBlog.js"></script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+                document.addEventListener('keyup', function(e) {
+                  if (e.target !== document.body) {
+                    return;
+                  }
+                  // keyCode for '/' (slash)
+                  if (e.keyCode === 191) {
+                    const search = document.getElementById('search_input_react');
+                    search && search.focus();
+                  }
+                });
+              </script><script>
+              var search = docsearch({
+                
+                apiKey: '966d1e412f67114a07dc0afe44b19b53',
+                indexName: 'reason',
+                inputSelector: '#search_input_react',
+                algoliaOptions: {"facetFilters":["lang:en"]}
+              });
+            </script></body></html>

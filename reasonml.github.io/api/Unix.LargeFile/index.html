@@ -1,0 +1,186 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Reason · Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems.</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Reason · Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io/"/><meta property="og:description" content="Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/icon_50.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io/blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io/blog/feed.xml" title="Reason Blog RSS Feed"/><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/en"><img class="logo" src="/img/dummy.svg" alt="Reason"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/docs/en/what-and-why" target="_self">Docs</a></li><li class=""><a href="/en/try" target="_self">Try</a></li><li class=""><a href="/api/index" target="_self">API</a></li><li class=""><a href="/docs/en/community" target="_self">Community</a></li><li class=""><a href="/blog/" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg" alt="Languages icon"/>English</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/ja/Unix.LargeFile">日本語</a></li><li><a href="/de/Unix.LargeFile">Deutsch</a></li><li><a href="/es-ES/Unix.LargeFile">Español</a></li><li><a href="/fr/Unix.LargeFile">Français</a></li><li><a href="/ko/Unix.LargeFile">한국어</a></li><li><a href="/pt-BR/Unix.LargeFile">Português (Brasil)</a></li><li><a href="/ru/Unix.LargeFile">Русский</a></li><li><a href="/uk/Unix.LargeFile">Українська</a></li><li><a href="/zh-CN/Unix.LargeFile">中文</a></li><li><a href="/zh-TW/Unix.LargeFile">繁體中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank" rel="noreferrer noopener">Help Translate</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/facebook/reason" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div><link rel="stylesheet" href="/css/main.css"><div class="ocamldoc">
+<div class="navbar">&#xA0;<a class="up" href="Unix.html" title="Unix">Up</a>
+&#xA0;</div>
+<h1>Module <a href="type_Unix.LargeFile.html">Unix.LargeFile</a></h1>
+
+<pre><span class="keyword">module</span> LargeFile: sig .. end</pre><div class="info module top">
+File operations on large files.
+  This sub-module provides 64-bit variants of the functions
+  <a href="Unix.html#VALlseek"><code class="code">Unix.lseek</code></a> (for positioning a file descriptor),
+  <a href="Unix.html#VALtruncate"><code class="code">Unix.truncate</code></a> and <a href="Unix.html#VALftruncate"><code class="code">Unix.ftruncate</code></a> (for changing the size of a file),
+  and <a href="Unix.html#VALstat"><code class="code">Unix.stat</code></a>, <a href="Unix.html#VALlstat"><code class="code">Unix.lstat</code></a> and <a href="Unix.html#VALfstat"><code class="code">Unix.fstat</code></a> (for obtaining
+  information on files).  These alternate functions represent
+  positions and sizes by 64-bit integers (type <code class="code">int64</code>) instead of
+  regular integers (type <code class="code">int</code>), thus allowing operating on files
+  whose sizes are greater than <code class="code">max_int</code>.<br>
+</div>
+<hr width="100%">
+
+<pre id="VALlseek"><span class="keyword">let</span> lseek: (Unix.file_descr, int64, Unix.seek_command) =&gt; int64;
+</pre>
+<pre id="VALtruncate"><span class="keyword">let</span> truncate: (string, int64) =&gt; unit;
+</pre>
+<pre id="VALftruncate"><span class="keyword">let</span> ftruncate: (Unix.file_descr, int64) =&gt; unit;
+</pre>
+<pre><span class="keyword">type</span> stats = {</pre><table class="typetable">
+<tbody><tr>
+<td align="left" valign="top">
+<code>&#xA0;&#xA0;</code></td>
+<td align="left" valign="top">
+<code>st_dev&#xA0;: int;</code></td>
+<td class="typefieldcomment" align="left" valign="top"><code>(*</code></td><td class="typefieldcomment" align="left" valign="top"><div class="info ">
+Device number<br>
+</div>
+</td><td class="typefieldcomment" align="left" valign="bottom"><code>*)</code></td>
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>&#xA0;&#xA0;</code></td>
+<td align="left" valign="top">
+<code>st_ino&#xA0;: int;</code></td>
+<td class="typefieldcomment" align="left" valign="top"><code>(*</code></td><td class="typefieldcomment" align="left" valign="top"><div class="info ">
+Inode number<br>
+</div>
+</td><td class="typefieldcomment" align="left" valign="bottom"><code>*)</code></td>
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>&#xA0;&#xA0;</code></td>
+<td align="left" valign="top">
+<code>st_kind&#xA0;: Unix.file_kind;</code></td>
+<td class="typefieldcomment" align="left" valign="top"><code>(*</code></td><td class="typefieldcomment" align="left" valign="top"><div class="info ">
+Kind of the file<br>
+</div>
+</td><td class="typefieldcomment" align="left" valign="bottom"><code>*)</code></td>
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>&#xA0;&#xA0;</code></td>
+<td align="left" valign="top">
+<code>st_perm&#xA0;: Unix.file_perm;</code></td>
+<td class="typefieldcomment" align="left" valign="top"><code>(*</code></td><td class="typefieldcomment" align="left" valign="top"><div class="info ">
+Access rights<br>
+</div>
+</td><td class="typefieldcomment" align="left" valign="bottom"><code>*)</code></td>
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>&#xA0;&#xA0;</code></td>
+<td align="left" valign="top">
+<code>st_nlink&#xA0;: int;</code></td>
+<td class="typefieldcomment" align="left" valign="top"><code>(*</code></td><td class="typefieldcomment" align="left" valign="top"><div class="info ">
+Number of links<br>
+</div>
+</td><td class="typefieldcomment" align="left" valign="bottom"><code>*)</code></td>
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>&#xA0;&#xA0;</code></td>
+<td align="left" valign="top">
+<code>st_uid&#xA0;: int;</code></td>
+<td class="typefieldcomment" align="left" valign="top"><code>(*</code></td><td class="typefieldcomment" align="left" valign="top"><div class="info ">
+User id of the owner<br>
+</div>
+</td><td class="typefieldcomment" align="left" valign="bottom"><code>*)</code></td>
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>&#xA0;&#xA0;</code></td>
+<td align="left" valign="top">
+<code>st_gid&#xA0;: int;</code></td>
+<td class="typefieldcomment" align="left" valign="top"><code>(*</code></td><td class="typefieldcomment" align="left" valign="top"><div class="info ">
+Group ID of the file&apos;s group<br>
+</div>
+</td><td class="typefieldcomment" align="left" valign="bottom"><code>*)</code></td>
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>&#xA0;&#xA0;</code></td>
+<td align="left" valign="top">
+<code>st_rdev&#xA0;: int;</code></td>
+<td class="typefieldcomment" align="left" valign="top"><code>(*</code></td><td class="typefieldcomment" align="left" valign="top"><div class="info ">
+Device minor number<br>
+</div>
+</td><td class="typefieldcomment" align="left" valign="bottom"><code>*)</code></td>
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>&#xA0;&#xA0;</code></td>
+<td align="left" valign="top">
+<code>st_size&#xA0;: int64;</code></td>
+<td class="typefieldcomment" align="left" valign="top"><code>(*</code></td><td class="typefieldcomment" align="left" valign="top"><div class="info ">
+Size in bytes<br>
+</div>
+</td><td class="typefieldcomment" align="left" valign="bottom"><code>*)</code></td>
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>&#xA0;&#xA0;</code></td>
+<td align="left" valign="top">
+<code>st_atime&#xA0;: float;</code></td>
+<td class="typefieldcomment" align="left" valign="top"><code>(*</code></td><td class="typefieldcomment" align="left" valign="top"><div class="info ">
+Last access time<br>
+</div>
+</td><td class="typefieldcomment" align="left" valign="bottom"><code>*)</code></td>
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>&#xA0;&#xA0;</code></td>
+<td align="left" valign="top">
+<code>st_mtime&#xA0;: float;</code></td>
+<td class="typefieldcomment" align="left" valign="top"><code>(*</code></td><td class="typefieldcomment" align="left" valign="top"><div class="info ">
+Last modification time<br>
+</div>
+</td><td class="typefieldcomment" align="left" valign="bottom"><code>*)</code></td>
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>&#xA0;&#xA0;</code></td>
+<td align="left" valign="top">
+<code>st_ctime&#xA0;: float;</code></td>
+<td class="typefieldcomment" align="left" valign="top"><code>(*</code></td><td class="typefieldcomment" align="left" valign="top"><div class="info ">
+Last status change time<br>
+</div>
+</td><td class="typefieldcomment" align="left" valign="bottom"><code>*)</code></td>
+</tr></tbody></table>
+}
+
+
+
+<pre id="VALstat"><span class="keyword">let</span> stat: string =&gt; stats;
+</pre>
+<pre id="VALlstat"><span class="keyword">let</span> lstat: string =&gt; stats;
+</pre>
+<pre id="VALfstat"><span class="keyword">let</span> fstat: Unix.file_descr =&gt; stats;
+</pre></div></div><span><script src="/js/redirectBlog.js"></script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+                document.addEventListener('keyup', function(e) {
+                  if (e.target !== document.body) {
+                    return;
+                  }
+                  // keyCode for '/' (slash)
+                  if (e.keyCode === 191) {
+                    const search = document.getElementById('search_input_react');
+                    search && search.focus();
+                  }
+                });
+              </script><script>
+              var search = docsearch({
+                
+                apiKey: '966d1e412f67114a07dc0afe44b19b53',
+                indexName: 'reason',
+                inputSelector: '#search_input_react',
+                algoliaOptions: {"facetFilters":["lang:en"]}
+              });
+            </script></body></html>

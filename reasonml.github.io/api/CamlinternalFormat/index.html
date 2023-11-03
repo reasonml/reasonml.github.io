@@ -1,0 +1,340 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Reason · Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems.</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Reason · Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io/"/><meta property="og:description" content="Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/icon_50.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io/blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io/blog/feed.xml" title="Reason Blog RSS Feed"/><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/en"><img class="logo" src="/img/dummy.svg" alt="Reason"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/docs/en/what-and-why" target="_self">Docs</a></li><li class=""><a href="/en/try" target="_self">Try</a></li><li class=""><a href="/api/index" target="_self">API</a></li><li class=""><a href="/docs/en/community" target="_self">Community</a></li><li class=""><a href="/blog/" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg" alt="Languages icon"/>English</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/ja/CamlinternalFormat">日本語</a></li><li><a href="/de/CamlinternalFormat">Deutsch</a></li><li><a href="/es-ES/CamlinternalFormat">Español</a></li><li><a href="/fr/CamlinternalFormat">Français</a></li><li><a href="/ko/CamlinternalFormat">한국어</a></li><li><a href="/pt-BR/CamlinternalFormat">Português (Brasil)</a></li><li><a href="/ru/CamlinternalFormat">Русский</a></li><li><a href="/uk/CamlinternalFormat">Українська</a></li><li><a href="/zh-CN/CamlinternalFormat">中文</a></li><li><a href="/zh-TW/CamlinternalFormat">繁體中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank" rel="noreferrer noopener">Help Translate</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/facebook/reason" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div><link rel="stylesheet" href="/css/main.css"><div class="ocamldoc">
+<div class="navbar"><a class="pre" href="Callback.html" title="Callback">Previous</a>
+&#xA0;<a class="up" href="index.html" title="Index">Up</a>
+&#xA0;<a class="post" href="CamlinternalFormatBasics.html" title="CamlinternalFormatBasics">Next</a>
+</div>
+<h1>Module <a href="type_CamlinternalFormat.html">CamlinternalFormat</a></h1>
+
+<pre><span class="keyword">module</span> CamlinternalFormat: sig .. end</pre><hr width="100%">
+
+<pre id="VALis_in_char_set"><span class="keyword">let</span> is_in_char_set: (CamlinternalFormatBasics.char_set, char) =&gt; bool;
+</pre>
+<pre id="VALrev_char_set"><span class="keyword">let</span> rev_char_set:
+  CamlinternalFormatBasics.char_set =&gt; CamlinternalFormatBasics.char_set;
+</pre>
+<pre id="TYPEmutable_char_set"><span class="keyword">type</span> mutable_char_set = bytes;
+</pre>
+
+
+<pre id="VALcreate_char_set"><span class="keyword">let</span> create_char_set: unit =&gt; mutable_char_set;
+</pre>
+<pre id="VALadd_in_char_set"><span class="keyword">let</span> add_in_char_set: (mutable_char_set, char) =&gt; unit;
+</pre>
+<pre id="VALfreeze_char_set"><span class="keyword">let</span> freeze_char_set: mutable_char_set =&gt; CamlinternalFormatBasics.char_set;
+</pre>
+<pre><span class="keyword">type</span> (&apos;a, &apos;b, &apos;c, &apos;d, &apos;e, &apos;f) param_format_ebb = </pre><table class="typetable">
+<tbody><tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Param_format_EBB : (&apos;x -&gt; &apos;a0, &apos;b0, &apos;c0, &apos;d0, &apos;e0, &apos;f0) CamlinternalFormatBasics.fmt -&gt; (&apos;a0, &apos;b0, &apos;c0, &apos;d0, &apos;e0, &apos;f0) param_format_ebb</code></td>
+
+</tr></tbody></table>
+
+
+
+<pre id="VALparam_format_of_ignored_format"><span class="keyword">let</span> param_format_of_ignored_format:
+  (
+    CamlinternalFormatBasics.ignored(&apos;a, &apos;b, &apos;c, &apos;d, &apos;y, &apos;x),
+    CamlinternalFormatBasics.fmt(&apos;x, &apos;b, &apos;c, &apos;y, &apos;e, &apos;f)
+  ) =&gt;
+  param_format_ebb(&apos;a, &apos;b, &apos;c, &apos;d, &apos;e, &apos;f);
+</pre>
+<pre><span class="keyword">type</span> (&apos;b, &apos;c) acc_formatting_gen = </pre><table class="typetable">
+<tbody><tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Acc_open_tag of (&apos;b, &apos;c) acc</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Acc_open_box of (&apos;b, &apos;c) acc</code></td>
+
+</tr></tbody></table>
+
+
+
+<pre><span class="keyword">type</span> (&apos;b, &apos;c) acc = </pre><table class="typetable">
+<tbody><tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Acc_formatting_lit of (&apos;b, &apos;c) acc * CamlinternalFormatBasics.formatting_lit</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Acc_formatting_gen of (&apos;b, &apos;c) acc        * (&apos;b, &apos;c) acc_formatting_gen</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Acc_string_literal of (&apos;b, &apos;c) acc * string</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Acc_char_literal of (&apos;b, &apos;c) acc * char</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Acc_data_string of (&apos;b, &apos;c) acc * string</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Acc_data_char of (&apos;b, &apos;c) acc * char</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Acc_delay of (&apos;b, &apos;c) acc * (&apos;b -&gt; &apos;c)</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Acc_flush of (&apos;b, &apos;c) acc</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Acc_invalid_arg of (&apos;b, &apos;c) acc * string</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>End_of_acc</code></td>
+
+</tr></tbody></table>
+
+
+
+<pre><span class="keyword">type</span> (&apos;a, &apos;b) heter_list = </pre><table class="typetable">
+<tbody><tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Cons : &apos;c * (&apos;a0, &apos;b0) heter_list -&gt; (&apos;c -&gt; &apos;a0, &apos;b0) heter_list</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Nil : (&apos;b1, &apos;b1) heter_list</code></td>
+
+</tr></tbody></table>
+
+
+
+<pre><span class="keyword">type</span> (&apos;b, &apos;c, &apos;e, &apos;f) fmt_ebb = </pre><table class="typetable">
+<tbody><tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Fmt_EBB : (&apos;a, &apos;b0, &apos;c0, &apos;d, &apos;e0, &apos;f0) CamlinternalFormatBasics.fmt -&gt; (&apos;b0, &apos;c0, &apos;e0, &apos;f0) fmt_ebb</code></td>
+
+</tr></tbody></table>
+
+
+
+<pre id="VALmake_printf"><span class="keyword">let</span> make_printf:
+  (
+    (&apos;b, acc(&apos;b, &apos;c)) =&gt; &apos;d,
+    &apos;b,
+    acc(&apos;b, &apos;c),
+    CamlinternalFormatBasics.fmt(&apos;a, &apos;b, &apos;c, &apos;c, &apos;c, &apos;d)
+  ) =&gt;
+  &apos;a;
+</pre>
+<pre id="VALoutput_acc"><span class="keyword">let</span> output_acc:
+  (Pervasives.out_channel, acc(Pervasives.out_channel, unit)) =&gt; unit;
+</pre>
+<pre id="VALbufput_acc"><span class="keyword">let</span> bufput_acc: (Buffer.t, acc(Buffer.t, unit)) =&gt; unit;
+</pre>
+<pre id="VALstrput_acc"><span class="keyword">let</span> strput_acc: (Buffer.t, acc(unit, string)) =&gt; unit;
+</pre>
+<pre id="VALtype_format"><span class="keyword">let</span> type_format:
+  (
+    CamlinternalFormatBasics.fmt(&apos;x, &apos;b, &apos;c, &apos;t, &apos;u, &apos;v),
+    CamlinternalFormatBasics.fmtty(&apos;a, &apos;b, &apos;c, &apos;d, &apos;e, &apos;f)
+  ) =&gt;
+  CamlinternalFormatBasics.fmt(&apos;a, &apos;b, &apos;c, &apos;d, &apos;e, &apos;f);
+</pre>
+<pre id="VALfmt_ebb_of_string"><span class="keyword">let</span> fmt_ebb_of_string:
+  (~legacy_behavior: bool=?, string) =&gt; fmt_ebb(&apos;b, &apos;c, &apos;e, &apos;f);
+</pre>
+<pre id="VALformat_of_string_fmtty"><span class="keyword">let</span> format_of_string_fmtty:
+  (string, CamlinternalFormatBasics.fmtty(&apos;a, &apos;b, &apos;c, &apos;d, &apos;e, &apos;f)) =&gt;
+  CamlinternalFormatBasics.format6(&apos;a, &apos;b, &apos;c, &apos;d, &apos;e, &apos;f);
+</pre>
+<pre id="VALformat_of_string_format"><span class="keyword">let</span> format_of_string_format:
+  (string, CamlinternalFormatBasics.format6(&apos;a, &apos;b, &apos;c, &apos;d, &apos;e, &apos;f)) =&gt;
+  CamlinternalFormatBasics.format6(&apos;a, &apos;b, &apos;c, &apos;d, &apos;e, &apos;f);
+</pre>
+<pre id="VALchar_of_iconv"><span class="keyword">let</span> char_of_iconv: CamlinternalFormatBasics.int_conv =&gt; char;
+</pre>
+<pre id="VALstring_of_formatting_lit"><span class="keyword">let</span> string_of_formatting_lit:
+  CamlinternalFormatBasics.formatting_lit =&gt; string;
+</pre>
+<pre id="VALstring_of_formatting_gen"><span class="keyword">let</span> string_of_formatting_gen:
+  CamlinternalFormatBasics.formatting_gen(&apos;a, &apos;b, &apos;c, &apos;d, &apos;e, &apos;f) =&gt; string;
+</pre>
+<pre id="VALstring_of_fmtty"><span class="keyword">let</span> string_of_fmtty:
+  CamlinternalFormatBasics.fmtty(&apos;a, &apos;b, &apos;c, &apos;d, &apos;e, &apos;f) =&gt; string;
+</pre>
+<pre id="VALstring_of_fmt"><span class="keyword">let</span> string_of_fmt:
+  CamlinternalFormatBasics.fmt(&apos;a, &apos;b, &apos;c, &apos;d, &apos;e, &apos;f) =&gt; string;
+</pre>
+<pre id="VALopen_box_of_string"><span class="keyword">let</span> open_box_of_string: string =&gt; (int, CamlinternalFormatBasics.block_type);
+</pre>
+<pre id="VALsymm"><span class="keyword">let</span> symm:
+  CamlinternalFormatBasics.fmtty_rel(
+    &apos;a1,
+    &apos;b1,
+    &apos;c1,
+    &apos;d1,
+    &apos;e1,
+    &apos;f1,
+    &apos;a2,
+    &apos;b2,
+    &apos;c2,
+    &apos;d2,
+    &apos;e2,
+    &apos;f2
+  ) =&gt;
+  CamlinternalFormatBasics.fmtty_rel(
+    &apos;a2,
+    &apos;b2,
+    &apos;c2,
+    &apos;d2,
+    &apos;e2,
+    &apos;f2,
+    &apos;a1,
+    &apos;b1,
+    &apos;c1,
+    &apos;d1,
+    &apos;e1,
+    &apos;f1
+  );
+</pre>
+<pre id="VALtrans"><span class="keyword">let</span> trans:
+  (
+    CamlinternalFormatBasics.fmtty_rel(
+      &apos;a1,
+      &apos;b1,
+      &apos;c1,
+      &apos;d1,
+      &apos;e1,
+      &apos;f1,
+      &apos;a2,
+      &apos;b2,
+      &apos;c2,
+      &apos;d2,
+      &apos;e2,
+      &apos;f2
+    ),
+    CamlinternalFormatBasics.fmtty_rel(
+      &apos;a2,
+      &apos;b2,
+      &apos;c2,
+      &apos;d2,
+      &apos;e2,
+      &apos;f2,
+      &apos;a3,
+      &apos;b3,
+      &apos;c3,
+      &apos;d3,
+      &apos;e3,
+      &apos;f3
+    )
+  ) =&gt;
+  CamlinternalFormatBasics.fmtty_rel(
+    &apos;a1,
+    &apos;b1,
+    &apos;c1,
+    &apos;d1,
+    &apos;e1,
+    &apos;f1,
+    &apos;a3,
+    &apos;b3,
+    &apos;c3,
+    &apos;d3,
+    &apos;e3,
+    &apos;f3
+  );
+</pre>
+<pre id="VALrecast"><span class="keyword">let</span> recast:
+  (
+    CamlinternalFormatBasics.fmt(&apos;a1, &apos;b1, &apos;c1, &apos;d1, &apos;e1, &apos;f1),
+    CamlinternalFormatBasics.fmtty_rel(
+      &apos;a1,
+      &apos;b1,
+      &apos;c1,
+      &apos;d1,
+      &apos;e1,
+      &apos;f1,
+      &apos;a2,
+      &apos;b2,
+      &apos;c2,
+      &apos;d2,
+      &apos;e2,
+      &apos;f2
+    )
+  ) =&gt;
+  CamlinternalFormatBasics.fmt(&apos;a2, &apos;b2, &apos;c2, &apos;d2, &apos;e2, &apos;f2);
+</pre></div></div><span><script src="/js/redirectBlog.js"></script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+                document.addEventListener('keyup', function(e) {
+                  if (e.target !== document.body) {
+                    return;
+                  }
+                  // keyCode for '/' (slash)
+                  if (e.keyCode === 191) {
+                    const search = document.getElementById('search_input_react');
+                    search && search.focus();
+                  }
+                });
+              </script><script>
+              var search = docsearch({
+                
+                apiKey: '966d1e412f67114a07dc0afe44b19b53',
+                indexName: 'reason',
+                inputSelector: '#search_input_react',
+                algoliaOptions: {"facetFilters":["lang:en"]}
+              });
+            </script></body></html>

@@ -1,0 +1,339 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Reason · Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems.</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Reason · Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io/"/><meta property="og:description" content="Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/icon_50.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io/blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io/blog/feed.xml" title="Reason Blog RSS Feed"/><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/en"><img class="logo" src="/img/dummy.svg" alt="Reason"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/docs/en/what-and-why" target="_self">Docs</a></li><li class=""><a href="/en/try" target="_self">Try</a></li><li class=""><a href="/api/index" target="_self">API</a></li><li class=""><a href="/docs/en/community" target="_self">Community</a></li><li class=""><a href="/blog/" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg" alt="Languages icon"/>English</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/ja/Printexc">日本語</a></li><li><a href="/de/Printexc">Deutsch</a></li><li><a href="/es-ES/Printexc">Español</a></li><li><a href="/fr/Printexc">Français</a></li><li><a href="/ko/Printexc">한국어</a></li><li><a href="/pt-BR/Printexc">Português (Brasil)</a></li><li><a href="/ru/Printexc">Русский</a></li><li><a href="/uk/Printexc">Українська</a></li><li><a href="/zh-CN/Printexc">中文</a></li><li><a href="/zh-TW/Printexc">繁體中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank" rel="noreferrer noopener">Help Translate</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/facebook/reason" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div><link rel="stylesheet" href="/css/main.css"><div class="ocamldoc">
+<div class="navbar"><a class="pre" href="Pervasives.html" title="Pervasives">Previous</a>
+&#xA0;<a class="up" href="index.html" title="Index">Up</a>
+&#xA0;<a class="post" href="Printf.html" title="Printf">Next</a>
+</div>
+<h1>Module <a href="type_Printexc.html">Printexc</a></h1>
+
+<pre><span class="keyword">module</span> Printexc: sig .. end</pre><div class="info module top">
+Facilities for printing exceptions and inspecting current call stack.<br>
+</div>
+<hr width="100%">
+
+<pre id="VALto_string"><span class="keyword">let</span> to_string: exn =&gt; string;
+</pre><div class="info ">
+<code class="code">Printexc.to_string e</code> returns a string representation of
+   the exception <code class="code">e</code>.<br>
+</div>
+
+<pre id="VALprint"><span class="keyword">let</span> print: (&apos;a =&gt; &apos;b, &apos;a) =&gt; &apos;b;
+</pre><div class="info ">
+<code class="code">Printexc.print fn x</code> applies <code class="code">fn</code> to <code class="code">x</code> and returns the result.
+   If the evaluation of <code class="code">fn x</code> raises any exception, the
+   name of the exception is printed on standard error output,
+   and the exception is raised again.
+   The typical use is to catch and report exceptions that
+   escape a function application.<br>
+</div>
+
+<pre id="VALcatch"><span class="keyword">let</span> catch: (&apos;a =&gt; &apos;b, &apos;a) =&gt; &apos;b;
+</pre><div class="info ">
+<code class="code">Printexc.catch fn x</code> is similar to <a href="Printexc.html#VALprint"><code class="code">Printexc.print</code></a>, but
+   aborts the program with exit code 2 after printing the
+   uncaught exception.  This function is deprecated: the runtime
+   system is now able to print uncaught exceptions as precisely
+   as <code class="code">Printexc.catch</code> does.  Moreover, calling <code class="code">Printexc.catch</code>
+   makes it harder to track the location of the exception
+   using the debugger or the stack backtrace facility.
+   So, do not use <code class="code">Printexc.catch</code> in new code.<br>
+</div>
+
+<pre id="VALprint_backtrace"><span class="keyword">let</span> print_backtrace: Pervasives.out_channel =&gt; unit;
+</pre><div class="info ">
+<code class="code">Printexc.print_backtrace oc</code> prints an exception backtrace
+    on the output channel <code class="code">oc</code>.  The backtrace lists the program
+    locations where the most-recently raised exception was raised
+    and where it was propagated through function calls.<br>
+<b>Since</b> 3.11.0<br>
+</div>
+
+<pre id="VALget_backtrace"><span class="keyword">let</span> get_backtrace: unit =&gt; string;
+</pre><div class="info ">
+<code class="code">Printexc.get_backtrace ()</code> returns a string containing the
+    same exception backtrace that <code class="code">Printexc.print_backtrace</code> would
+    print.<br>
+<b>Since</b> 3.11.0<br>
+</div>
+
+<pre id="VALrecord_backtrace"><span class="keyword">let</span> record_backtrace: bool =&gt; unit;
+</pre><div class="info ">
+<code class="code">Printexc.record_backtrace b</code> turns recording of exception backtraces
+    on (if <code class="code">b = true</code>) or off (if <code class="code">b = false</code>).  Initially, backtraces
+    are not recorded, unless the <code class="code">b</code> flag is given to the program
+    through the <code class="code">OCAMLRUNPARAM</code> variable.<br>
+<b>Since</b> 3.11.0<br>
+</div>
+
+<pre id="VALbacktrace_status"><span class="keyword">let</span> backtrace_status: unit =&gt; bool;
+</pre><div class="info ">
+<code class="code">Printexc.backtrace_status()</code> returns <code class="code">true</code> if exception
+    backtraces are currently recorded, <code class="code">false</code> if not.<br>
+<b>Since</b> 3.11.0<br>
+</div>
+
+<pre id="VALregister_printer"><span class="keyword">let</span> register_printer: (exn =&gt; option(string)) =&gt; unit;
+</pre><div class="info ">
+<code class="code">Printexc.register_printer fn</code> registers <code class="code">fn</code> as an exception
+    printer.  The printer should return <code class="code">None</code> or raise an exception
+    if it does not know how to convert the passed exception, and <code class="code">Some
+    s</code> with <code class="code">s</code> the resulting string if it can convert the passed
+    exception. Exceptions raised by the printer are ignored.
+<p>
+
+    When converting an exception into a string, the printers will be invoked
+    in the reverse order of their registrations, until a printer returns
+    a <code class="code">Some s</code> value (if no such printer exists, the runtime will use a
+    generic printer).
+</p><p>
+
+    When using this mechanism, one should be aware that an exception backtrace
+    is attached to the thread that saw it raised, rather than to the exception
+    itself. Practically, it means that the code related to <code class="code">fn</code> should not use
+    the backtrace if it has itself raised an exception before.<br>
+<b>Since</b> 3.11.2<br>
+</p></div>
+<br>
+<h6 id="6_Rawbacktraces">Raw backtraces</h6><br>
+
+<pre id="TYPEraw_backtrace"><span class="keyword">type</span> raw_backtrace;
+</pre>
+<div class="info ">
+The abstract type <code class="code">raw_backtrace</code> stores a backtrace in
+    a low-level format, instead of directly exposing them as string as
+    the <code class="code">get_backtrace()</code> function does.
+<p>
+
+    This allows delaying the formatting of backtraces to when they are
+    actually printed, which may be useful if you record more
+    backtraces than you print.
+</p><p>
+
+    Raw backtraces cannot be marshalled. If you need marshalling, you
+    should use the array returned by the <code class="code">backtrace_slots</code> function of
+    the next section.<br>
+<b>Since</b> 4.01.0<br>
+</p></div>
+
+
+<pre id="VALget_raw_backtrace"><span class="keyword">let</span> get_raw_backtrace: unit =&gt; raw_backtrace;
+</pre><div class="info ">
+<code class="code">Printexc.get_raw_backtrace ()</code> returns the same exception
+    backtrace that <code class="code">Printexc.print_backtrace</code> would print, but in
+    a raw format.<br>
+<b>Since</b> 4.01.0<br>
+</div>
+
+<pre id="VALprint_raw_backtrace"><span class="keyword">let</span> print_raw_backtrace: (Pervasives.out_channel, raw_backtrace) =&gt; unit;
+</pre><div class="info ">
+Print a raw backtrace in the same format
+    <code class="code">Printexc.print_backtrace</code> uses.<br>
+<b>Since</b> 4.01.0<br>
+</div>
+
+<pre id="VALraw_backtrace_to_string"><span class="keyword">let</span> raw_backtrace_to_string: raw_backtrace =&gt; string;
+</pre><div class="info ">
+Return a string from a raw backtrace, in the same format
+    <code class="code">Printexc.get_backtrace</code> uses.<br>
+<b>Since</b> 4.01.0<br>
+</div>
+<br>
+<h6 id="6_Currentcallstack">Current call stack</h6><br>
+
+<pre id="VALget_callstack"><span class="keyword">let</span> get_callstack: int =&gt; raw_backtrace;
+</pre><div class="info ">
+<code class="code">Printexc.get_callstack n</code> returns a description of the top of the
+    call stack on the current program point (for the current thread),
+    with at most <code class="code">n</code> entries.  (Note: this function is not related to
+    exceptions at all, despite being part of the <code class="code">Printexc</code> module.)<br>
+<b>Since</b> 4.01.0<br>
+</div>
+<br>
+<h6 id="6_Uncaughtexceptions">Uncaught exceptions</h6><br>
+
+<pre id="VALset_uncaught_exception_handler"><span class="keyword">let</span> set_uncaught_exception_handler: ((exn, raw_backtrace) =&gt; unit) =&gt; unit;
+</pre><div class="info ">
+<code class="code">Printexc.set_uncaught_exception_handler fn</code> registers <code class="code">fn</code> as the handler
+    for uncaught exceptions. The default handler prints the exception and
+    backtrace on standard error output.
+<p>
+
+    Note that when <code class="code">fn</code> is called all the functions registered with
+    <a href="Pervasives.html#VALat_exit"><code class="code">Pervasives.at_exit</code></a> have already been called. Because of this you must
+    make sure any output channel <code class="code">fn</code> writes on is flushed.
+</p><p>
+
+    Also note that exceptions raised by user code in the interactive toplevel
+    are not passed to this function as they are caught by the toplevel itself.
+</p><p>
+
+    If <code class="code">fn</code> raises an exception, both the exceptions passed to <code class="code">fn</code> and raised
+    by <code class="code">fn</code> will be printed with their respective backtrace.<br>
+<b>Since</b> 4.02.0<br>
+</p></div>
+<br>
+<h6 id="6_Manipulationofbacktraceinformation">Manipulation of backtrace information</h6>
+<p>
+
+    Those function allow to traverse the slots of a raw backtrace,
+    extract information from them in a programmer-friendly format.<br>
+
+</p><pre id="TYPEbacktrace_slot"><span class="keyword">type</span> backtrace_slot;
+</pre>
+<div class="info ">
+The abstract type <code class="code">backtrace_slot</code> represents a single slot of
+    a backtrace.<br>
+<b>Since</b> 4.02<br>
+</div>
+
+
+<pre id="VALbacktrace_slots"><span class="keyword">let</span> backtrace_slots: raw_backtrace =&gt; option(array(backtrace_slot));
+</pre><div class="info ">
+Returns the slots of a raw backtrace, or <code class="code">None</code> if none of them
+    contain useful information.
+<p>
+
+    In the return array, the slot at index <code class="code">0</code> corresponds to the most
+    recent function call, raise, or primitive <code class="code">get_backtrace</code> call in
+    the trace.
+</p><p>
+
+    Some possible reasons for returning <code class="code">None</code> are as follow:</p><ul>
+<li>none of the slots in the trace come from modules compiled with
+    debug information (<code class="code">-g</code>)</li>
+<li>the program is a bytecode program that has not been linked with
+    debug information enabled (<code class="code">ocamlc -g</code>)</li>
+</ul>
+<br>
+<b>Since</b> 4.02.0<br>
+</div>
+
+<pre><span class="keyword">type</span> location = {</pre><table class="typetable">
+<tbody><tr>
+<td align="left" valign="top">
+<code>&#xA0;&#xA0;</code></td>
+<td align="left" valign="top">
+<code>filename&#xA0;: string;</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>&#xA0;&#xA0;</code></td>
+<td align="left" valign="top">
+<code>line_number&#xA0;: int;</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>&#xA0;&#xA0;</code></td>
+<td align="left" valign="top">
+<code>start_char&#xA0;: int;</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>&#xA0;&#xA0;</code></td>
+<td align="left" valign="top">
+<code>end_char&#xA0;: int;</code></td>
+
+</tr></tbody></table>
+}
+
+<div class="info ">
+The type of location information found in backtraces. <code class="code">start_char</code>
+    and <code class="code">end_char</code> are positions relative to the beginning of the
+    line.<br>
+<b>Since</b> 4.02<br>
+</div>
+
+
+<pre><span class="keyword">module</span> Slot: sig .. end</pre><br>
+<h6 id="6_Rawbacktraceslots">Raw backtrace slots</h6><br>
+
+<pre id="TYPEraw_backtrace_slot"><span class="keyword">type</span> raw_backtrace_slot;
+</pre>
+<div class="info ">
+This type allows direct access to raw backtrace slots, without any
+    conversion in an OCaml-usable data-structure. Being
+    process-specific, they must absolutely not be marshalled, and are
+    unsafe to use for this reason (marshalling them may not fail, but
+    un-marshalling and using the result will result in
+    undefined behavior).
+<p>
+
+    Elements of this type can still be compared and hashed: when two
+    elements are equal, then they represent the same source location
+    (the converse is not necessarily true in presence of inlining,
+    for example).<br>
+<b>Since</b> 4.02.0<br>
+</p></div>
+
+
+<pre id="VALraw_backtrace_length"><span class="keyword">let</span> raw_backtrace_length: raw_backtrace =&gt; int;
+</pre><div class="info ">
+<code class="code">raw_backtrace_length bckt</code> returns the number of slots in the
+    backtrace <code class="code">bckt</code>.<br>
+<b>Since</b> 4.02<br>
+</div>
+
+<pre id="VALget_raw_backtrace_slot"><span class="keyword">let</span> get_raw_backtrace_slot: (raw_backtrace, int) =&gt; raw_backtrace_slot;
+</pre><div class="info ">
+<code class="code">get_slot bckt pos</code> returns the slot in position <code class="code">pos</code> in the
+    backtrace <code class="code">bckt</code>.<br>
+<b>Since</b> 4.02<br>
+</div>
+
+<pre id="VALconvert_raw_backtrace_slot"><span class="keyword">let</span> convert_raw_backtrace_slot: raw_backtrace_slot =&gt; backtrace_slot;
+</pre><div class="info ">
+Extracts the user-friendly <code class="code">backtrace_slot</code> from a low-level
+    <code class="code">raw_backtrace_slot</code>.<br>
+<b>Since</b> 4.02<br>
+</div>
+<br>
+<h6 id="6_Exceptionslots">Exception slots</h6><br>
+
+<pre id="VALexn_slot_id"><span class="keyword">let</span> exn_slot_id: exn =&gt; int;
+</pre><div class="info ">
+<code class="code">Printexc.exn_slot_id</code> returns an integer which uniquely identifies
+    the constructor used to create the exception value <code class="code">exn</code>
+    (in the current runtime).<br>
+<b>Since</b> 4.02.0<br>
+</div>
+
+<pre id="VALexn_slot_name"><span class="keyword">let</span> exn_slot_name: exn =&gt; string;
+</pre><div class="info ">
+<code class="code">Printexc.exn_slot_id exn</code> returns the internal name of the constructor
+    used to create the exception value <code class="code">exn</code>.<br>
+<b>Since</b> 4.02.0<br>
+</div>
+</div></div><span><script src="/js/redirectBlog.js"></script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+                document.addEventListener('keyup', function(e) {
+                  if (e.target !== document.body) {
+                    return;
+                  }
+                  // keyCode for '/' (slash)
+                  if (e.keyCode === 191) {
+                    const search = document.getElementById('search_input_react');
+                    search && search.focus();
+                  }
+                });
+              </script><script>
+              var search = docsearch({
+                
+                apiKey: '966d1e412f67114a07dc0afe44b19b53',
+                indexName: 'reason',
+                inputSelector: '#search_input_react',
+                algoliaOptions: {"facetFilters":["lang:en"]}
+              });
+            </script></body></html>

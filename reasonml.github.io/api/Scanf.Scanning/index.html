@@ -1,0 +1,181 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Reason · Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems.</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Reason · Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io/"/><meta property="og:description" content="Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/icon_50.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io/blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io/blog/feed.xml" title="Reason Blog RSS Feed"/><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/en"><img class="logo" src="/img/dummy.svg" alt="Reason"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/docs/en/what-and-why" target="_self">Docs</a></li><li class=""><a href="/en/try" target="_self">Try</a></li><li class=""><a href="/api/index" target="_self">API</a></li><li class=""><a href="/docs/en/community" target="_self">Community</a></li><li class=""><a href="/blog/" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg" alt="Languages icon"/>English</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/ja/Scanf.Scanning">日本語</a></li><li><a href="/de/Scanf.Scanning">Deutsch</a></li><li><a href="/es-ES/Scanf.Scanning">Español</a></li><li><a href="/fr/Scanf.Scanning">Français</a></li><li><a href="/ko/Scanf.Scanning">한국어</a></li><li><a href="/pt-BR/Scanf.Scanning">Português (Brasil)</a></li><li><a href="/ru/Scanf.Scanning">Русский</a></li><li><a href="/uk/Scanf.Scanning">Українська</a></li><li><a href="/zh-CN/Scanf.Scanning">中文</a></li><li><a href="/zh-TW/Scanf.Scanning">繁體中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank" rel="noreferrer noopener">Help Translate</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/facebook/reason" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div><link rel="stylesheet" href="/css/main.css"><div class="ocamldoc">
+<div class="navbar">&#xA0;<a class="up" href="Scanf.html" title="Scanf">Up</a>
+&#xA0;</div>
+<h1>Module <a href="type_Scanf.Scanning.html">Scanf.Scanning</a></h1>
+
+<pre><span class="keyword">module</span> Scanning: sig .. end</pre><hr width="100%">
+
+<pre id="TYPEin_channel"><span class="keyword">type</span> in_channel;
+</pre>
+<div class="info ">
+The notion of input channel for the <code class="code">Scanf</code> module:
+   those channels provide all the machinery necessary to read from a given
+   <code class="code">Pervasives.in_channel</code> value.
+   A <code class="code">Scanf.Scanning.in_channel</code> value is also called a <i>formatted input
+   channel</i> or equivalently a <i>scanning buffer</i>.
+   The type <code class="code">scanbuf</code> below is an alias for <code class="code">in_channel</code>.<br>
+<b>Since</b> 3.12.0<br>
+</div>
+
+
+<pre id="TYPEscanbuf"><span class="keyword">type</span> scanbuf = in_channel;
+</pre>
+<div class="info ">
+The type of scanning buffers. A scanning buffer is the source from which a
+    formatted input function gets characters. The scanning buffer holds the
+    current state of the scan, plus a function to get the next char from the
+    input, and a token buffer to store the string matched so far.
+<p>
+
+    Note: a scanning action may often require to examine one character in
+    advance; when this &apos;lookahead&apos; character does not belong to the token
+    read, it is stored back in the scanning buffer and becomes the next
+    character yet to be read.<br>
+</p></div>
+
+
+<pre id="VALstdin"><span class="keyword">let</span> stdin: in_channel;
+</pre><div class="info ">
+The standard input notion for the <code class="code">Scanf</code> module.
+    <code class="code">Scanning.stdin</code> is the formatted input channel attached to
+    <code class="code">Pervasives.stdin</code>.
+<p>
+
+    Note: in the interactive system, when input is read from <code class="code">stdin</code>, the
+    newline character that triggers the evaluation is incorporated in the
+    input; thus, the scanning specifications must properly skip this
+    additional newline character (for instance, simply add a <code class="code">&apos;\n&apos;</code> as the
+    last character of the format string).<br>
+<b>Since</b> 3.12.0<br>
+</p></div>
+
+<pre id="TYPEfile_name"><span class="keyword">type</span> file_name = string;
+</pre>
+<div class="info ">
+A convenient alias to designate a file name.<br>
+<b>Since</b> 4.00.0<br>
+</div>
+
+
+<pre id="VALopen_in"><span class="keyword">let</span> open_in: file_name =&gt; in_channel;
+</pre><div class="info ">
+<code class="code">Scanning.open_in fname</code> returns a formatted input channel for bufferized
+    reading in text mode from file <code class="code">fname</code>.
+<p>
+
+    Note:
+    <code class="code">open_in</code> returns a formatted input channel that efficiently reads
+    characters in large chunks; in contrast, <code class="code">from_channel</code> below returns
+    formatted input channels that must read one character at a time, leading
+    to a much slower scanning rate.<br>
+<b>Since</b> 3.12.0<br>
+</p></div>
+
+<pre id="VALopen_in_bin"><span class="keyword">let</span> open_in_bin: file_name =&gt; in_channel;
+</pre><div class="info ">
+<code class="code">Scanning.open_in_bin fname</code> returns a formatted input channel for
+    bufferized reading in binary mode from file <code class="code">fname</code>.<br>
+<b>Since</b> 3.12.0<br>
+</div>
+
+<pre id="VALclose_in"><span class="keyword">let</span> close_in: in_channel =&gt; unit;
+</pre><div class="info ">
+Closes the <code class="code">Pervasives.in_channel</code> associated with the given
+  <code class="code">Scanning.in_channel</code> formatted input channel.<br>
+<b>Since</b> 3.12.0<br>
+</div>
+
+<pre id="VALfrom_file"><span class="keyword">let</span> from_file: file_name =&gt; in_channel;
+</pre><div class="info ">
+An alias for <code class="code">open_in</code> above.<br>
+</div>
+
+<pre id="VALfrom_file_bin"><span class="keyword">let</span> from_file_bin: string =&gt; in_channel;
+</pre><div class="info ">
+An alias for <code class="code">open_in_bin</code> above.<br>
+</div>
+
+<pre id="VALfrom_string"><span class="keyword">let</span> from_string: string =&gt; in_channel;
+</pre><div class="info ">
+<code class="code">Scanning.from_string s</code> returns a formatted input channel which reads
+    from the given string.
+    Reading starts from the first character in the string.
+    The end-of-input condition is set when the end of the string is reached.<br>
+</div>
+
+<pre id="VALfrom_function"><span class="keyword">let</span> from_function: (unit =&gt; char) =&gt; in_channel;
+</pre><div class="info ">
+<code class="code">Scanning.from_function f</code> returns a formatted input channel with the
+    given function as its reading method.
+<p>
+
+    When scanning needs one more character, the given function is called.
+</p><p>
+
+    When the function has no more character to provide, it <em>must</em> signal an
+    end-of-input condition by raising the exception <code class="code">End_of_file</code>.<br>
+</p></div>
+
+<pre id="VALfrom_channel"><span class="keyword">let</span> from_channel: Pervasives.in_channel =&gt; in_channel;
+</pre><div class="info ">
+<code class="code">Scanning.from_channel ic</code> returns a formatted input channel which reads
+    from the regular input channel <code class="code">ic</code> argument, starting at the current
+    reading position.<br>
+</div>
+
+<pre id="VALend_of_input"><span class="keyword">let</span> end_of_input: in_channel =&gt; bool;
+</pre><div class="info ">
+<code class="code">Scanning.end_of_input ic</code> tests the end-of-input condition of the given
+    formatted input channel.<br>
+</div>
+
+<pre id="VALbeginning_of_input"><span class="keyword">let</span> beginning_of_input: in_channel =&gt; bool;
+</pre><div class="info ">
+<code class="code">Scanning.beginning_of_input ic</code> tests the beginning of input condition of
+    the given formatted input channel.<br>
+</div>
+
+<pre id="VALname_of_input"><span class="keyword">let</span> name_of_input: in_channel =&gt; string;
+</pre><div class="info ">
+<code class="code">Scanning.name_of_input ic</code> returns the name of the character source
+    for the formatted input channel <code class="code">ic</code>.<br>
+<b>Since</b> 3.09.0<br>
+</div>
+
+<pre id="VALstdib"><span class="keyword">let</span> stdib: in_channel;
+</pre><div class="info ">
+A deprecated alias for <code class="code">Scanning.stdin</code>, the scanning buffer reading from
+    <code class="code">Pervasives.stdin</code>.<br>
+</div>
+</div></div><span><script src="/js/redirectBlog.js"></script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+                document.addEventListener('keyup', function(e) {
+                  if (e.target !== document.body) {
+                    return;
+                  }
+                  // keyCode for '/' (slash)
+                  if (e.keyCode === 191) {
+                    const search = document.getElementById('search_input_react');
+                    search && search.focus();
+                  }
+                });
+              </script><script>
+              var search = docsearch({
+                
+                apiKey: '966d1e412f67114a07dc0afe44b19b53',
+                indexName: 'reason',
+                inputSelector: '#search_input_react',
+                algoliaOptions: {"facetFilters":["lang:en"]}
+              });
+            </script></body></html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Reason · Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems.</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Reason · Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io/"/><meta property="og:description" content="Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/icon_50.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io/blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io/blog/feed.xml" title="Reason Blog RSS Feed"/><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/en"><img class="logo" src="/img/dummy.svg" alt="Reason"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/docs/en/what-and-why" target="_self">Docs</a></li><li class=""><a href="/en/try" target="_self">Try</a></li><li class=""><a href="/api/index" target="_self">API</a></li><li class=""><a href="/docs/en/community" target="_self">Community</a></li><li class=""><a href="/blog/" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg" alt="Languages icon"/>English</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/ja/type_Docstrings">日本語</a></li><li><a href="/de/type_Docstrings">Deutsch</a></li><li><a href="/es-ES/type_Docstrings">Español</a></li><li><a href="/fr/type_Docstrings">Français</a></li><li><a href="/ko/type_Docstrings">한국어</a></li><li><a href="/pt-BR/type_Docstrings">Português (Brasil)</a></li><li><a href="/ru/type_Docstrings">Русский</a></li><li><a href="/uk/type_Docstrings">Українська</a></li><li><a href="/zh-CN/type_Docstrings">中文</a></li><li><a href="/zh-TW/type_Docstrings">繁體中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank" rel="noreferrer noopener">Help Translate</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/facebook/reason" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div><link rel="stylesheet" href="/css/main.css"><div class="ocamldoc"><pre>sig
+
+&#xA0;&#xA0;val&#xA0;init&#xA0;:&#xA0;unit&#xA0;-&gt;&#xA0;unit
+&#xA0;&#xA0;val&#xA0;warn_bad_docstrings&#xA0;:&#xA0;unit&#xA0;-&gt;&#xA0;unit
+&#xA0;&#xA0;type&#xA0;docstring
+&#xA0;&#xA0;val&#xA0;docstring&#xA0;:&#xA0;string&#xA0;-&gt;&#xA0;Location.t&#xA0;-&gt;&#xA0;Docstrings.docstring
+&#xA0;&#xA0;val&#xA0;docstring_body&#xA0;:&#xA0;Docstrings.docstring&#xA0;-&gt;&#xA0;string
+&#xA0;&#xA0;val&#xA0;docstring_loc&#xA0;:&#xA0;Docstrings.docstring&#xA0;-&gt;&#xA0;Location.t
+&#xA0;&#xA0;val&#xA0;set_pre_docstrings&#xA0;:
+&#xA0;&#xA0;&#xA0;&#xA0;Lexing.position&#xA0;-&gt;&#xA0;Docstrings.docstring&#xA0;list&#xA0;-&gt;&#xA0;unit
+&#xA0;&#xA0;val&#xA0;set_post_docstrings&#xA0;:
+&#xA0;&#xA0;&#xA0;&#xA0;Lexing.position&#xA0;-&gt;&#xA0;Docstrings.docstring&#xA0;list&#xA0;-&gt;&#xA0;unit
+&#xA0;&#xA0;val&#xA0;set_floating_docstrings&#xA0;:
+&#xA0;&#xA0;&#xA0;&#xA0;Lexing.position&#xA0;-&gt;&#xA0;Docstrings.docstring&#xA0;list&#xA0;-&gt;&#xA0;unit
+&#xA0;&#xA0;val&#xA0;set_pre_extra_docstrings&#xA0;:
+&#xA0;&#xA0;&#xA0;&#xA0;Lexing.position&#xA0;-&gt;&#xA0;Docstrings.docstring&#xA0;list&#xA0;-&gt;&#xA0;unit
+&#xA0;&#xA0;val&#xA0;set_post_extra_docstrings&#xA0;:
+&#xA0;&#xA0;&#xA0;&#xA0;Lexing.position&#xA0;-&gt;&#xA0;Docstrings.docstring&#xA0;list&#xA0;-&gt;&#xA0;unit
+&#xA0;&#xA0;type&#xA0;docs&#xA0;=&#xA0;{
+&#xA0;&#xA0;&#xA0;&#xA0;docs_pre&#xA0;:&#xA0;Docstrings.docstring&#xA0;option;
+&#xA0;&#xA0;&#xA0;&#xA0;docs_post&#xA0;:&#xA0;Docstrings.docstring&#xA0;option;
+&#xA0;&#xA0;}
+&#xA0;&#xA0;val&#xA0;empty_docs&#xA0;:&#xA0;Docstrings.docs
+&#xA0;&#xA0;val&#xA0;docs_attr&#xA0;:&#xA0;Docstrings.docstring&#xA0;-&gt;&#xA0;Parsetree.attribute
+&#xA0;&#xA0;val&#xA0;add_docs_attrs&#xA0;:
+&#xA0;&#xA0;&#xA0;&#xA0;Docstrings.docs&#xA0;-&gt;&#xA0;Parsetree.attributes&#xA0;-&gt;&#xA0;Parsetree.attributes
+&#xA0;&#xA0;val&#xA0;symbol_docs&#xA0;:&#xA0;unit&#xA0;-&gt;&#xA0;Docstrings.docs
+&#xA0;&#xA0;val&#xA0;symbol_docs_lazy&#xA0;:&#xA0;unit&#xA0;-&gt;&#xA0;Docstrings.docs&#xA0;Lazy.t
+&#xA0;&#xA0;val&#xA0;rhs_docs&#xA0;:&#xA0;int&#xA0;-&gt;&#xA0;int&#xA0;-&gt;&#xA0;Docstrings.docs
+&#xA0;&#xA0;val&#xA0;rhs_docs_lazy&#xA0;:&#xA0;int&#xA0;-&gt;&#xA0;int&#xA0;-&gt;&#xA0;Docstrings.docs&#xA0;Lazy.t
+&#xA0;&#xA0;val&#xA0;mark_symbol_docs&#xA0;:&#xA0;unit&#xA0;-&gt;&#xA0;unit
+&#xA0;&#xA0;val&#xA0;mark_rhs_docs&#xA0;:&#xA0;int&#xA0;-&gt;&#xA0;int&#xA0;-&gt;&#xA0;unit
+&#xA0;&#xA0;type&#xA0;info&#xA0;=&#xA0;Docstrings.docstring&#xA0;option
+&#xA0;&#xA0;val&#xA0;empty_info&#xA0;:&#xA0;Docstrings.info
+&#xA0;&#xA0;val&#xA0;info_attr&#xA0;:&#xA0;Docstrings.docstring&#xA0;-&gt;&#xA0;Parsetree.attribute
+&#xA0;&#xA0;val&#xA0;add_info_attrs&#xA0;:
+&#xA0;&#xA0;&#xA0;&#xA0;Docstrings.info&#xA0;-&gt;&#xA0;Parsetree.attributes&#xA0;-&gt;&#xA0;Parsetree.attributes
+&#xA0;&#xA0;val&#xA0;symbol_info&#xA0;:&#xA0;unit&#xA0;-&gt;&#xA0;Docstrings.info
+&#xA0;&#xA0;val&#xA0;rhs_info&#xA0;:&#xA0;int&#xA0;-&gt;&#xA0;Docstrings.info
+&#xA0;&#xA0;type&#xA0;text&#xA0;=&#xA0;Docstrings.docstring&#xA0;list
+&#xA0;&#xA0;val&#xA0;empty_text&#xA0;:&#xA0;Docstrings.text
+&#xA0;&#xA0;val&#xA0;text_attr&#xA0;:&#xA0;Docstrings.docstring&#xA0;-&gt;&#xA0;Parsetree.attribute
+&#xA0;&#xA0;val&#xA0;add_text_attrs&#xA0;:
+&#xA0;&#xA0;&#xA0;&#xA0;Docstrings.text&#xA0;-&gt;&#xA0;Parsetree.attributes&#xA0;-&gt;&#xA0;Parsetree.attributes
+&#xA0;&#xA0;val&#xA0;symbol_text&#xA0;:&#xA0;unit&#xA0;-&gt;&#xA0;Docstrings.text
+&#xA0;&#xA0;val&#xA0;symbol_text_lazy&#xA0;:&#xA0;unit&#xA0;-&gt;&#xA0;Docstrings.text&#xA0;Lazy.t
+&#xA0;&#xA0;val&#xA0;rhs_text&#xA0;:&#xA0;int&#xA0;-&gt;&#xA0;Docstrings.text
+&#xA0;&#xA0;val&#xA0;rhs_text_lazy&#xA0;:&#xA0;int&#xA0;-&gt;&#xA0;Docstrings.text&#xA0;Lazy.t
+&#xA0;&#xA0;val&#xA0;symbol_pre_extra_text&#xA0;:&#xA0;unit&#xA0;-&gt;&#xA0;Docstrings.text
+&#xA0;&#xA0;val&#xA0;symbol_post_extra_text&#xA0;:&#xA0;unit&#xA0;-&gt;&#xA0;Docstrings.text
+&#xA0;&#xA0;val&#xA0;rhs_pre_extra_text&#xA0;:&#xA0;int&#xA0;-&gt;&#xA0;Docstrings.text
+&#xA0;&#xA0;val&#xA0;rhs_post_extra_text&#xA0;:&#xA0;int&#xA0;-&gt;&#xA0;Docstrings.text
+end</pre></div></div><span><script src="/js/redirectBlog.js"></script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+                document.addEventListener('keyup', function(e) {
+                  if (e.target !== document.body) {
+                    return;
+                  }
+                  // keyCode for '/' (slash)
+                  if (e.keyCode === 191) {
+                    const search = document.getElementById('search_input_react');
+                    search && search.focus();
+                  }
+                });
+              </script><script>
+              var search = docsearch({
+                
+                apiKey: '966d1e412f67114a07dc0afe44b19b53',
+                indexName: 'reason',
+                inputSelector: '#search_input_react',
+                algoliaOptions: {"facetFilters":["lang:en"]}
+              });
+            </script></body></html>

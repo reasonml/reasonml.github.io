@@ -1,0 +1,419 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Reason · Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems.</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Reason · Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io/"/><meta property="og:description" content="Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/icon_50.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io/blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io/blog/feed.xml" title="Reason Blog RSS Feed"/><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/en"><img class="logo" src="/img/dummy.svg" alt="Reason"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/docs/en/what-and-why" target="_self">Docs</a></li><li class=""><a href="/en/try" target="_self">Try</a></li><li class=""><a href="/api/index" target="_self">API</a></li><li class=""><a href="/docs/en/community" target="_self">Community</a></li><li class=""><a href="/blog/" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg" alt="Languages icon"/>English</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/ja/CamlinternalOO">日本語</a></li><li><a href="/de/CamlinternalOO">Deutsch</a></li><li><a href="/es-ES/CamlinternalOO">Español</a></li><li><a href="/fr/CamlinternalOO">Français</a></li><li><a href="/ko/CamlinternalOO">한국어</a></li><li><a href="/pt-BR/CamlinternalOO">Português (Brasil)</a></li><li><a href="/ru/CamlinternalOO">Русский</a></li><li><a href="/uk/CamlinternalOO">Українська</a></li><li><a href="/zh-CN/CamlinternalOO">中文</a></li><li><a href="/zh-TW/CamlinternalOO">繁體中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank" rel="noreferrer noopener">Help Translate</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/facebook/reason" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div><link rel="stylesheet" href="/css/main.css"><div class="ocamldoc">
+<div class="navbar"><a class="pre" href="CamlinternalMod.html" title="CamlinternalMod">Previous</a>
+&#xA0;<a class="up" href="index.html" title="Index">Up</a>
+&#xA0;<a class="post" href="Char.html" title="Char">Next</a>
+</div>
+<h1>Module <a href="type_CamlinternalOO.html">CamlinternalOO</a></h1>
+
+<pre><span class="keyword">module</span> CamlinternalOO: sig .. end</pre><div class="info module top">
+Run-time support for objects and classes.
+    All functions in this module are for system use only, not for the
+    casual user.<br>
+</div>
+<hr width="100%">
+<br>
+<h6 id="6_Classes">Classes</h6><br>
+
+<pre id="TYPEtag"><span class="keyword">type</span> tag;
+</pre>
+
+
+<pre id="TYPElabel"><span class="keyword">type</span> label;
+</pre>
+
+
+<pre id="TYPEtable"><span class="keyword">type</span> table;
+</pre>
+
+
+<pre id="TYPEmeth"><span class="keyword">type</span> meth;
+</pre>
+
+
+<pre id="TYPEt"><span class="keyword">type</span> t;
+</pre>
+
+
+<pre id="TYPEobj"><span class="keyword">type</span> obj;
+</pre>
+
+
+<pre id="TYPEclosure"><span class="keyword">type</span> closure;
+</pre>
+
+
+<pre id="VALpublic_method_label"><span class="keyword">let</span> public_method_label: string =&gt; tag;
+</pre>
+<pre id="VALnew_method"><span class="keyword">let</span> new_method: table =&gt; label;
+</pre>
+<pre id="VALnew_variable"><span class="keyword">let</span> new_variable: (table, string) =&gt; int;
+</pre>
+<pre id="VALnew_methods_variables"><span class="keyword">let</span> new_methods_variables:
+  (table, array(string), array(string)) =&gt; array(label);
+</pre>
+<pre id="VALget_variable"><span class="keyword">let</span> get_variable: (table, string) =&gt; int;
+</pre>
+<pre id="VALget_variables"><span class="keyword">let</span> get_variables: (table, array(string)) =&gt; array(int);
+</pre>
+<pre id="VALget_method_label"><span class="keyword">let</span> get_method_label: (table, string) =&gt; label;
+</pre>
+<pre id="VALget_method_labels"><span class="keyword">let</span> get_method_labels: (table, array(string)) =&gt; array(label);
+</pre>
+<pre id="VALget_method"><span class="keyword">let</span> get_method: (table, label) =&gt; meth;
+</pre>
+<pre id="VALset_method"><span class="keyword">let</span> set_method: (table, label, meth) =&gt; unit;
+</pre>
+<pre id="VALset_methods"><span class="keyword">let</span> set_methods: (table, array(label)) =&gt; unit;
+</pre>
+<pre id="VALnarrow"><span class="keyword">let</span> narrow: (table, array(string), array(string), array(string)) =&gt; unit;
+</pre>
+<pre id="VALwiden"><span class="keyword">let</span> widen: table =&gt; unit;
+</pre>
+<pre id="VALadd_initializer"><span class="keyword">let</span> add_initializer: (table, obj =&gt; unit) =&gt; unit;
+</pre>
+<pre id="VALdummy_table"><span class="keyword">let</span> dummy_table: table;
+</pre>
+<pre id="VALcreate_table"><span class="keyword">let</span> create_table: array(string) =&gt; table;
+</pre>
+<pre id="VALinit_class"><span class="keyword">let</span> init_class: table =&gt; unit;
+</pre>
+<pre id="VALinherits"><span class="keyword">let</span> inherits:
+  (
+    table,
+    array(string),
+    array(string),
+    array(string),
+    (t, (table, obj) =&gt; Obj.t, t, obj),
+    bool
+  ) =&gt;
+  array(Obj.t);
+</pre>
+<pre id="VALmake_class"><span class="keyword">let</span> make_class:
+  (array(string), (table, Obj.t) =&gt; t) =&gt;
+  (t, (table, Obj.t) =&gt; t, Obj.t =&gt; t, Obj.t);
+</pre>
+<pre id="TYPEinit_table"><span class="keyword">type</span> init_table;
+</pre>
+
+
+<pre id="VALmake_class_store"><span class="keyword">let</span> make_class_store: (array(string), table =&gt; t, init_table) =&gt; unit;
+</pre>
+<pre id="VALdummy_class"><span class="keyword">let</span> dummy_class:
+  ((string, int, int)) =&gt; (t, (table, Obj.t) =&gt; t, Obj.t =&gt; t, Obj.t);
+</pre><br>
+<h6 id="6_Objects">Objects</h6><br>
+
+<pre id="VALcopy"><span class="keyword">let</span> copy: ({..} as &apos;a) =&gt; &apos;a;
+</pre>
+<pre id="VALcreate_object"><span class="keyword">let</span> create_object: table =&gt; obj;
+</pre>
+<pre id="VALcreate_object_opt"><span class="keyword">let</span> create_object_opt: (obj, table) =&gt; obj;
+</pre>
+<pre id="VALrun_initializers"><span class="keyword">let</span> run_initializers: (obj, table) =&gt; unit;
+</pre>
+<pre id="VALrun_initializers_opt"><span class="keyword">let</span> run_initializers_opt: (obj, obj, table) =&gt; obj;
+</pre>
+<pre id="VALcreate_object_and_run_initializers"><span class="keyword">let</span> create_object_and_run_initializers: (obj, table) =&gt; obj;
+</pre>
+<pre id="VALsend"><span class="keyword">let</span> send: (obj, tag) =&gt; t;
+</pre>
+<pre id="VALsendcache"><span class="keyword">let</span> sendcache: (obj, tag, t, int) =&gt; t;
+</pre>
+<pre id="VALsendself"><span class="keyword">let</span> sendself: (obj, label) =&gt; t;
+</pre>
+<pre id="VALget_public_method"><span class="keyword">let</span> get_public_method: (obj, tag) =&gt; closure;
+</pre><br>
+<h6 id="6_Tablecache">Table cache</h6><br>
+
+<pre id="TYPEtables"><span class="keyword">type</span> tables;
+</pre>
+
+
+<pre id="VALlookup_tables"><span class="keyword">let</span> lookup_tables: (tables, array(closure)) =&gt; tables;
+</pre><br>
+<h6 id="6_Builtinstoreducecodesize">Builtins to reduce code size</h6><br>
+
+<pre><span class="keyword">type</span> impl = </pre><table class="typetable">
+<tbody><tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>GetConst</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>GetVar</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>GetEnv</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>GetMeth</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>SetVar</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>AppConst</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>AppVar</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>AppEnv</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>AppMeth</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>AppConstConst</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>AppConstVar</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>AppConstEnv</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>AppConstMeth</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>AppVarConst</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>AppEnvConst</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>AppMethConst</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>MethAppConst</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>MethAppVar</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>MethAppEnv</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>MethAppMeth</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>SendConst</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>SendVar</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>SendEnv</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>SendMeth</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Closure of closure</code></td>
+
+</tr></tbody></table>
+
+
+<br>
+<h6 id="6_Parameters">Parameters</h6><br>
+
+<pre><span class="keyword">type</span> params = {</pre><table class="typetable">
+<tbody><tr>
+<td align="left" valign="top">
+<code>&#xA0;&#xA0;</code></td>
+<td align="left" valign="top">
+<code>mutable&#xA0;compact_table&#xA0;: bool;</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>&#xA0;&#xA0;</code></td>
+<td align="left" valign="top">
+<code>mutable&#xA0;copy_parent&#xA0;: bool;</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>&#xA0;&#xA0;</code></td>
+<td align="left" valign="top">
+<code>mutable&#xA0;clean_when_copying&#xA0;: bool;</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>&#xA0;&#xA0;</code></td>
+<td align="left" valign="top">
+<code>mutable&#xA0;retry_count&#xA0;: int;</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>&#xA0;&#xA0;</code></td>
+<td align="left" valign="top">
+<code>mutable&#xA0;bucket_small_size&#xA0;: int;</code></td>
+
+</tr></tbody></table>
+}
+
+
+
+<pre id="VALparams"><span class="keyword">let</span> params: params;
+</pre><br>
+<h6 id="6_Statistics">Statistics</h6><br>
+
+<pre><span class="keyword">type</span> stats = {</pre><table class="typetable">
+<tbody><tr>
+<td align="left" valign="top">
+<code>&#xA0;&#xA0;</code></td>
+<td align="left" valign="top">
+<code>classes&#xA0;: int;</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>&#xA0;&#xA0;</code></td>
+<td align="left" valign="top">
+<code>methods&#xA0;: int;</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>&#xA0;&#xA0;</code></td>
+<td align="left" valign="top">
+<code>inst_vars&#xA0;: int;</code></td>
+
+</tr></tbody></table>
+}
+
+
+
+<pre id="VALstats"><span class="keyword">let</span> stats: unit =&gt; stats;
+</pre></div></div><span><script src="/js/redirectBlog.js"></script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+                document.addEventListener('keyup', function(e) {
+                  if (e.target !== document.body) {
+                    return;
+                  }
+                  // keyCode for '/' (slash)
+                  if (e.keyCode === 191) {
+                    const search = document.getElementById('search_input_react');
+                    search && search.focus();
+                  }
+                });
+              </script><script>
+              var search = docsearch({
+                
+                apiKey: '966d1e412f67114a07dc0afe44b19b53',
+                indexName: 'reason',
+                inputSelector: '#search_input_react',
+                algoliaOptions: {"facetFilters":["lang:en"]}
+              });
+            </script></body></html>

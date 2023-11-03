@@ -1,0 +1,176 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>JSX · Reason</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="JSX is a syntax extension for HTML-like syntax inside a JavaScript file. It&#x27;s a convenient way to write React components."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="JSX · Reason"/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io/"/><meta property="og:description" content="JSX is a syntax extension for HTML-like syntax inside a JavaScript file. It&#x27;s a convenient way to write React components."/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/icon_50.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io/blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io/blog/feed.xml" title="Reason Blog RSS Feed"/><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/en"><img class="logo" src="/img/dummy.svg" alt="Reason"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/en/what-and-why" target="_self">Docs</a></li><li class=""><a href="/en/try" target="_self">Try</a></li><li class=""><a href="/api/index" target="_self">API</a></li><li class=""><a href="/docs/en/community" target="_self">Community</a></li><li class=""><a href="/blog/" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg" alt="Languages icon"/>English</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/docs/ja/jsx">日本語</a></li><li><a href="/docs/de/jsx">Deutsch</a></li><li><a href="/docs/es-ES/jsx">Español</a></li><li><a href="/docs/fr/jsx">Français</a></li><li><a href="/docs/ko/jsx">한국어</a></li><li><a href="/docs/pt-BR/jsx">Português (Brasil)</a></li><li><a href="/docs/ru/jsx">Русский</a></li><li><a href="/docs/uk/jsx">Українська</a></li><li><a href="/docs/zh-CN/jsx">中文</a></li><li><a href="/docs/zh-TW/jsx">繁體中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank" rel="noreferrer noopener">Help Translate</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/facebook/reason" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Advanced Features</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Intro</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/en/what-and-why">What &amp; Why</a></li><li class="navListItem"><a class="navItem" href="/docs/en/getting-started">Getting started</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Setup</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/en/installation">Installation</a></li><li class="navListItem"><a class="navItem" href="/docs/en/editor-plugins">Editor Plugins</a></li><li class="navListItem"><a class="navItem" href="/docs/en/refmt">Format (refmt)</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Language Basics</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/en/overview">Overview</a></li><li class="navListItem"><a class="navItem" href="/docs/en/let-binding">Let Bindings</a></li><li class="navListItem"><a class="navItem" href="/docs/en/primitives">Primitives</a></li><li class="navListItem"><a class="navItem" href="/docs/en/basic-structures">Basic Structures</a></li><li class="navListItem"><a class="navItem" href="/docs/en/type">Types</a></li><li class="navListItem"><a class="navItem" href="/docs/en/record">Records</a></li><li class="navListItem"><a class="navItem" href="/docs/en/variant">Variants</a></li><li class="navListItem"><a class="navItem" href="/docs/en/option">Options and nullability</a></li><li class="navListItem"><a class="navItem" href="/docs/en/function">Functions</a></li><li class="navListItem"><a class="navItem" href="/docs/en/recursion">Recursion</a></li><li class="navListItem"><a class="navItem" href="/docs/en/destructuring">Destructuring</a></li><li class="navListItem"><a class="navItem" href="/docs/en/pattern-matching">Pattern Matching</a></li><li class="navListItem"><a class="navItem" href="/docs/en/mutable-bindings">Mutable Bindings</a></li><li class="navListItem"><a class="navItem" href="/docs/en/loops">Loops</a></li><li class="navListItem"><a class="navItem" href="/docs/en/module">Modules</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Advanced Features</h3><ul class=""><li class="navListItem navListItemActive"><a class="navItem" href="/docs/en/jsx">JSX</a></li><li class="navListItem"><a class="navItem" href="/docs/en/external">External</a></li><li class="navListItem"><a class="navItem" href="/docs/en/exception">Exception</a></li><li class="navListItem"><a class="navItem" href="/docs/en/object">Object</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">JavaScript</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/en/compiling-to-js-with-melange">Melange</a></li><li class="navListItem"><a class="navItem" href="/docs/en/interop">Interop</a></li><li class="navListItem"><a class="navItem" href="/docs/en/syntax-cheatsheet">Syntax Cheatsheet</a></li><li class="navListItem"><a class="navItem" href="/docs/en/pipe-first">Pipe First</a></li><li class="navListItem"><a class="navItem" href="/docs/en/promise">Promise</a></li><li class="navListItem"><a class="navItem" href="/docs/en/libraries">Libraries</a></li><li class="navListItem"><a class="navItem" href="/docs/en/converting-from-js">Converting from JS</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Extra</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/en/faq">Frequently Asked Questions</a></li><li class="navListItem"><a class="navItem" href="/docs/en/extra-goodies">Extra Goodies</a></li><li class="navListItem"><a class="navItem" href="/docs/en/rtop">REPL (rtop)</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/reasonml/reasonml.github.io/tree/source/docs/jsx.md" target="_blank" rel="noreferrer noopener">Edit</a><h1 class="postHeaderTitle">JSX</h1></header><article><div><span><p>JSX is a syntax extension for HTML-like syntax inside a JavaScript file. It's a convenient way to write React components.</p>
+<p>Reason has built in support for JSX at the language-level, so you can use it without any extra tooling.</p>
+<p>The design is slight different compared to the one in <a href="https://facebook.github.io/react/docs/introducing-jsx.html">React</a>, since Reason JSX isn't tied to React and it translate to normal function calls.</p>
+<h3><a class="anchor" aria-hidden="true" id="features-of-reason-jsx"></a><a href="#features-of-reason-jsx" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Features of Reason JSX</h3>
+<ul>
+<li>Components are modules with a <code>make</code> function</li>
+<li>Props are labeled arguments</li>
+<li>Adds dynamic expressions that allow you to reference variables and functions within your JSX by using the <code>{ }</code> (block-scoped) syntax</li>
+</ul>
+<h3><a class="anchor" aria-hidden="true" id="departures-from-javascript-jsx"></a><a href="#departures-from-javascript-jsx" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Departures from JavaScript JSX</h3>
+<ul>
+<li>Attributes and children don't mandate <code>{}</code>, but we show them anyway for ease of learning. Once you format your file, some of them go away and some turn into parentheses.</li>
+<li>There is no support for JSX prop spread: <code>&lt;Foo {...bar} /&gt;</code>. Though somewhat related, we do have children spread, described above: <code>&lt;Foo&gt; ...baz &lt;/Foo&gt;</code>.</li>
+<li>Punning <a href="#punning">See below</a></li>
+</ul>
+<h1><a class="anchor" aria-hidden="true" id="syntax"></a><a href="#syntax" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Syntax</h1>
+<p>Here's a quick overview of the syntax, and example of how it transforms to normal function calls.</p>
+<h2><a class="anchor" aria-hidden="true" id="capitalized-tag"></a><a href="#capitalized-tag" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Capitalized Tag</h2>
+<pre><code class="hljs css language-reason">&lt;<span class="hljs-module-identifier">MyComponent</span> foo={bar} /&gt;
+</code></pre>
+<p>becomes</p>
+<pre><code class="hljs css language-reason">(<span class="hljs-attribute">[@JSX]</span> <span class="hljs-module-identifier">MyComponent</span>.createElement(~foo=bar, ~children=<span class="hljs-literal">[</span><span class="hljs-literal">]</span>, ()));
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="uncapitalized-tag"></a><a href="#uncapitalized-tag" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Uncapitalized Tag</h2>
+<pre><code class="hljs css language-reason">&lt;div foo={bar}&gt; child1 child2 &lt;/div&gt;;
+</code></pre>
+<p>becomes</p>
+<pre><code class="hljs css language-reason">(<span class="hljs-attribute">[@JSX]</span> div(~foo=bar, ~children=<span class="hljs-literal">[</span>child1, child2<span class="hljs-literal">]</span>, ()));
+</code></pre>
+<p><code>[@JSX]</code> is just an attribute for hooking up ppxes. As an example, <a href="https://reasonml.github.io/reason-react/">reason-react-ppx</a> turns that agnostic <code>div</code> call into something React-specific.</p>
+<h2><a class="anchor" aria-hidden="true" id="fragment"></a><a href="#fragment" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Fragment</h2>
+<pre><code class="hljs css language-reason">&lt;&gt; child1 child2 &lt;/&gt;
+</code></pre>
+<p>becomes</p>
+<pre><code class="hljs css language-reason">(<span class="hljs-attribute">[@JSX]</span> <span class="hljs-literal">[</span>child1, child2<span class="hljs-literal">]</span>);
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="children"></a><a href="#children" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Children</h3>
+<pre><code class="hljs css language-reason">&lt;<span class="hljs-module-identifier">MyComponent</span>&gt; foo bar &lt;/<span class="hljs-module-identifier">MyComponent</span>&gt;
+</code></pre>
+<p>This is the syntax for passing a list of two items, <code>foo</code> and <code>bar</code>, to the children position. It desugars to a list containing <code>foo</code> and <code>bar</code>:</p>
+<pre><code class="hljs css language-reason">(<span class="hljs-attribute">[@JSX]</span> <span class="hljs-module-identifier">MyComponent</span>.createElement(~children=<span class="hljs-literal">[</span>foo, bar<span class="hljs-literal">]</span>, ()));
+</code></pre>
+<p>So naturally, <code>&lt;MyComponent&gt; foo &lt;/MyComponent&gt;</code> desugars to <code>([@JSX] MyComponent.createElement(~children=[foo], ()))</code>. I.e. whatever you do, the arguments passed to the children position will be wrapped in a list. What if you don't want that? <strong>What if you want to directly pass <code>foo</code> without an extra wrapping</strong>?</p>
+<h4><a class="anchor" aria-hidden="true" id="children-spread"></a><a href="#children-spread" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Children Spread</h4>
+<p>To solve the above problem, we've introduced</p>
+<pre><code class="hljs css language-reason">&lt;<span class="hljs-module-identifier">MyComponent</span>&gt; <span class="hljs-operator">...</span>foo &lt;/<span class="hljs-module-identifier">MyComponent</span>&gt;
+</code></pre>
+<p>This passes the value <code>foo</code> <em>without</em> wrapping it in a list. Aka, this desugars to:</p>
+<pre><code class="hljs css language-reason">(<span class="hljs-attribute">[@JSX]</span> <span class="hljs-module-identifier">MyComponent</span>.createElement(~children=foo, ()));
+</code></pre>
+<p>This is extra useful in the cases where you are handled <code>foo</code> that is already a list of things, and want to forward that without wrapping it an extra time (which would be a type error). It also allows you to pass arbitrary data structures at <code>children</code> position (remember, JSX <code>children</code> is really just a totally normal prop):</p>
+<pre><code class="hljs css language-reason">&lt;<span class="hljs-module-identifier">MyComponent</span>&gt; <span class="hljs-operator">...</span>((theClassName) =&gt; &lt;div className=theClassName /&gt;) &lt;/<span class="hljs-module-identifier">MyComponent</span>&gt;;
+&lt;<span class="hljs-module-identifier">MyForm</span>&gt; <span class="hljs-operator">...</span>(<span class="hljs-string">"Hello"</span>, <span class="hljs-string">"Submit"</span>) &lt;/<span class="hljs-module-identifier">MyForm</span>&gt;;
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="usage"></a><a href="#usage" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Usage</h2>
+<p>Here's a JSX tag that shows most of the features.</p>
+<pre><code class="hljs css language-reason">&lt;<span class="hljs-module-identifier">MyComponent</span>
+  booleanAttribute={<span class="hljs-literal">true</span>}
+  stringAttribute=<span class="hljs-string">"string"</span>
+  intAttribute=<span class="hljs-number">1</span>
+  optionalProp={<span class="hljs-constructor">Some</span>(<span class="hljs-string">"hello"</span>)}
+  forcedOptional=?{<span class="hljs-constructor">Some</span>(<span class="hljs-string">"hello"</span>)}
+  onClick={event =&gt; handleClick(event)}&gt;
+  &lt;div&gt; {<span class="hljs-string">"hello"</span>} &lt;/div&gt;
+&lt;/<span class="hljs-module-identifier">MyComponent</span>&gt;
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="punning"></a><a href="#punning" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Punning</h3>
+<p>&quot;Punning&quot; refers to the syntax shorthand for when a label and a value are the same. For example, in JavaScript, instead of doing <code>return {name: name}</code>, you can do <code>return {name}</code>.</p>
+<p>Reason JSX supports punning. <code>&lt;input checked /&gt;</code> is just a shorthand for <code>&lt;input checked=checked /&gt;</code>. The formatter will help you format to the latter whenever possible. This is convenient in the cases where there are lots of props to pass down:</p>
+<pre><code class="hljs css language-reason">&lt;<span class="hljs-module-identifier">MyComponent</span> isLoading text onClick /&gt;
+</code></pre>
+<p>Consequently, a Reason JSX component can cram in a few more props before reaching for extra libraries solutions that avoids props passing.</p>
+<p><strong>Note</strong> that this is a big difference from ReactJS JSX, which does <strong>not</strong> have punning. ReactJS' <code>&lt;input checked /&gt;</code> means <code>&lt;input checked=true /&gt;</code>, in order to conform to DOM's idioms and for backward compatibility.</p>
+<h2><a class="anchor" aria-hidden="true" id="frameworks-using-jsx"></a><a href="#frameworks-using-jsx" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Frameworks using JSX</h2>
+<p>Aside from the tight integration with <a href="https://reasonml.github.io/reason-react/"><strong><code>reason-react</code></strong></a>, there are a few libraries that are build on top of JSX in Reason. The following list is not exhaustive, and the quality of the libraries may vary.</p>
+<ul>
+<li><a href="https://www.outrunlabs.com/revery/api/revery/#Overview"><strong>ReveryUI</strong></a>: A ReactJS-like UI framework for building cross-platform GUI applications</li>
+<li><a href="https://github.com/ml-in-barcelona/jsoo-react"><strong>jsoo-react</strong></a>: js_of_ocaml bindings for ReactJS</li>
+<li><a href="https://github.com/briskml/brisk"><strong>brisk</strong></a>: Cross-platform set of tools for building native UIs with Reason/OCaml</li>
+<li><a href="https://github.com/osener/ppx-tea-jsx"><strong>ppx-tea-jsx</strong></a>: Reason JSX syntax for BuckleScript-TEA</li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="tip-tricks"></a><a href="#tip-tricks" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Tip &amp; Tricks</h2>
+<p>For library authors wanting to take advantage of the JSX: the <code>[@JSX]</code> attribute above is a hook for potential ppx macros to spot a function wanting to format as JSX. Once you spot the function, you can turn it into any other expression.</p>
+<p>This way, everyone gets to benefit the JSX syntax without needing to opt into a specific library using it.</p>
+<p>JSX calls supports the features of <a href="/docs/en/function#labeled-arguments">labeled functions</a>: optional, explicitly passed optional and optional with default.</p>
+<h2><a class="anchor" aria-hidden="true" id="design-decisions"></a><a href="#design-decisions" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Design Decisions</h2>
+<p>The way we designed this JSX is related to how we'd like to help the language evolve. See the section &quot;What's the point?&quot; in <a href="https://medium.com/@chenglou/cool-things-reason-formatter-does-9e1f79e25a82">this blog post</a>.</p>
+<p>The ability to have macros in the language + the library-agnostic JSX syntax allows every library to potentially have JSX without hassle. This way, we add some visual familiarities to the underlying OCaml language without compromising on its semantics (aka how it executes). One big goal of Reason is to let more folks take advantage of the beautiful language that is OCaml, while discarding the time-consuming debates around syntax and formatting.</p>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/en/module"><span class="arrow-prev">← </span><span>Modules</span></a><a class="docs-next button" href="/docs/en/external"><span>External</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#capitalized-tag">Capitalized Tag</a></li><li><a href="#uncapitalized-tag">Uncapitalized Tag</a></li><li><a href="#fragment">Fragment</a><ul class="toc-headings"><li><a href="#children">Children</a></li></ul></li><li><a href="#usage">Usage</a><ul class="toc-headings"><li><a href="#punning">Punning</a></li></ul></li><li><a href="#frameworks-using-jsx">Frameworks using JSX</a></li><li><a href="#tip-amp-tricks">Tip &amp; Tricks</a></li><li><a href="#design-decisions">Design Decisions</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+                document.addEventListener('keyup', function(e) {
+                  if (e.target !== document.body) {
+                    return;
+                  }
+                  // keyCode for '/' (slash)
+                  if (e.keyCode === 191) {
+                    const search = document.getElementById('search_input_react');
+                    search && search.focus();
+                  }
+                });
+              </script><script>
+              var search = docsearch({
+                
+                apiKey: '966d1e412f67114a07dc0afe44b19b53',
+                indexName: 'reason',
+                inputSelector: '#search_input_react',
+                algoliaOptions: {"facetFilters":["lang:en"]}
+              });
+            </script></body></html>

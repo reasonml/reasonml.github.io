@@ -1,0 +1,474 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Overview · Reason</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="This is an overview of most language features in Reason. It does not explain"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Overview · Reason"/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io/"/><meta property="og:description" content="This is an overview of most language features in Reason. It does not explain"/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/icon_50.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io/blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io/blog/feed.xml" title="Reason Blog RSS Feed"/><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/en"><img class="logo" src="/img/dummy.svg" alt="Reason"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/en/what-and-why" target="_self">Docs</a></li><li class=""><a href="/en/try" target="_self">Try</a></li><li class=""><a href="/api/index" target="_self">API</a></li><li class=""><a href="/docs/en/community" target="_self">Community</a></li><li class=""><a href="/blog/" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg" alt="Languages icon"/>English</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/docs/ja/overview">日本語</a></li><li><a href="/docs/de/overview">Deutsch</a></li><li><a href="/docs/es-ES/overview">Español</a></li><li><a href="/docs/fr/overview">Français</a></li><li><a href="/docs/ko/overview">한국어</a></li><li><a href="/docs/pt-BR/overview">Português (Brasil)</a></li><li><a href="/docs/ru/overview">Русский</a></li><li><a href="/docs/uk/overview">Українська</a></li><li><a href="/docs/zh-CN/overview">中文</a></li><li><a href="/docs/zh-TW/overview">繁體中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank" rel="noreferrer noopener">Help Translate</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/facebook/reason" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Language Basics</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Intro</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/en/what-and-why">What &amp; Why</a></li><li class="navListItem"><a class="navItem" href="/docs/en/getting-started">Getting started</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Setup</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/en/installation">Installation</a></li><li class="navListItem"><a class="navItem" href="/docs/en/editor-plugins">Editor Plugins</a></li><li class="navListItem"><a class="navItem" href="/docs/en/refmt">Format (refmt)</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Language Basics</h3><ul class=""><li class="navListItem navListItemActive"><a class="navItem" href="/docs/en/overview">Overview</a></li><li class="navListItem"><a class="navItem" href="/docs/en/let-binding">Let Bindings</a></li><li class="navListItem"><a class="navItem" href="/docs/en/primitives">Primitives</a></li><li class="navListItem"><a class="navItem" href="/docs/en/basic-structures">Basic Structures</a></li><li class="navListItem"><a class="navItem" href="/docs/en/type">Types</a></li><li class="navListItem"><a class="navItem" href="/docs/en/record">Records</a></li><li class="navListItem"><a class="navItem" href="/docs/en/variant">Variants</a></li><li class="navListItem"><a class="navItem" href="/docs/en/option">Options and nullability</a></li><li class="navListItem"><a class="navItem" href="/docs/en/function">Functions</a></li><li class="navListItem"><a class="navItem" href="/docs/en/recursion">Recursion</a></li><li class="navListItem"><a class="navItem" href="/docs/en/destructuring">Destructuring</a></li><li class="navListItem"><a class="navItem" href="/docs/en/pattern-matching">Pattern Matching</a></li><li class="navListItem"><a class="navItem" href="/docs/en/mutable-bindings">Mutable Bindings</a></li><li class="navListItem"><a class="navItem" href="/docs/en/loops">Loops</a></li><li class="navListItem"><a class="navItem" href="/docs/en/module">Modules</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Advanced Features</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/en/jsx">JSX</a></li><li class="navListItem"><a class="navItem" href="/docs/en/external">External</a></li><li class="navListItem"><a class="navItem" href="/docs/en/exception">Exception</a></li><li class="navListItem"><a class="navItem" href="/docs/en/object">Object</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">JavaScript</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/en/compiling-to-js-with-melange">Melange</a></li><li class="navListItem"><a class="navItem" href="/docs/en/interop">Interop</a></li><li class="navListItem"><a class="navItem" href="/docs/en/syntax-cheatsheet">Syntax Cheatsheet</a></li><li class="navListItem"><a class="navItem" href="/docs/en/pipe-first">Pipe First</a></li><li class="navListItem"><a class="navItem" href="/docs/en/promise">Promise</a></li><li class="navListItem"><a class="navItem" href="/docs/en/libraries">Libraries</a></li><li class="navListItem"><a class="navItem" href="/docs/en/converting-from-js">Converting from JS</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Extra</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/en/faq">Frequently Asked Questions</a></li><li class="navListItem"><a class="navItem" href="/docs/en/extra-goodies">Extra Goodies</a></li><li class="navListItem"><a class="navItem" href="/docs/en/rtop">REPL (rtop)</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/reasonml/reasonml.github.io/tree/source/docs/overview.md" target="_blank" rel="noreferrer noopener">Edit</a><h1 class="postHeaderTitle">Overview</h1></header><article><div><span><p>This is an overview of most language features in Reason. It does not explain
+them in detail, but should serve as a quick reference. Please see the guides
+on the left for additional details about each feature.</p>
+<h2><a class="anchor" aria-hidden="true" id="let-bindings"></a><a href="#let-bindings" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Let Bindings</h2>
+<p><em>Details: <a href="/docs/en/let-binding">Let Bindings</a></em></p>
+<table>
+<thead>
+<tr><th>Feature</th><th>Example</th></tr>
+</thead>
+<tbody>
+<tr><td>String value</td><td><code>let hi = &quot;Hello World&quot;;</code></td></tr>
+<tr><td>Int value</td><td><code>let count = 42;</code></td></tr>
+<tr><td>Type annotation on binding</td><td><code>let count: int = 42;</code></td></tr>
+</tbody>
+</table>
+<ul>
+<li>Note: Let bindings are immutable and cannot change once created.</li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="built-in-types"></a><a href="#built-in-types" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Built In Types</h2>
+<p><em>Details: <a href="/docs/en/primitives">Primitives</a></em></p>
+<table>
+<thead>
+<tr><th>Feature</th><th>Example</th></tr>
+</thead>
+<tbody>
+<tr><td>Int</td><td><code>let x: int = 10;</code></td></tr>
+<tr><td>Float</td><td><code>let x: float = 10.0;</code></td></tr>
+<tr><td>Boolean</td><td><code>let x: bool = false;</code></td></tr>
+<tr><td>String</td><td><code>let x: string = &quot;ten&quot;;</code></td></tr>
+<tr><td>Char</td><td><code>let x: char = 'c';</code></td></tr>
+<tr><td>Unit</td><td><code>let x: unit = ();</code></td></tr>
+<tr><td>Option</td><td><code>let x: option(int) = Some(10);</code></td></tr>
+<tr><td>Tuple</td><td><code>let x: (int, string) = (10, &quot;ten&quot;);</code></td></tr>
+<tr><td>List</td><td><code>let x: list(int) = [1, 2, 3];</code></td></tr>
+<tr><td>Array</td><td><code>let x: array(int) = [|1, 2, 3|];</code></td></tr>
+<tr><td>Functions</td><td><code>let x: (int, int) =&gt; int = (a, b) =&gt; a + b;</code></td></tr>
+</tbody>
+</table>
+<h2><a class="anchor" aria-hidden="true" id="strings"></a><a href="#strings" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Strings</h2>
+<p><em>Details: <a href="/docs/en/primitives#strings">Strings</a></em></p>
+<table>
+<thead>
+<tr><th>Feature</th><th>Example</th></tr>
+</thead>
+<tbody>
+<tr><td>String</td><td><code>&quot;Hello&quot;</code></td></tr>
+<tr><td>String concatenation</td><td><code>&quot;Hello &quot; ++ &quot;World&quot;</code></td></tr>
+<tr><td>Character</td><td><code>'x'</code></td></tr>
+<tr><td>Character at index</td><td><code>let x = &quot;Hello&quot;; x.[2];</code></td></tr>
+</tbody>
+</table>
+<ul>
+<li>String Functions: <a href="https://reasonml.github.io/api/String.html"><code>module String</code></a></li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="numbers"></a><a href="#numbers" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Numbers</h2>
+<ul>
+<li><em>Details: <a href="/docs/en/primitives#integer">Integer</a></em></li>
+<li><em>Details: <a href="/docs/en/primitives#float">Float</a></em></li>
+</ul>
+<table>
+<thead>
+<tr><th>Feature</th><th>Example</th></tr>
+</thead>
+<tbody>
+<tr><td>Integer</td><td><code>23</code>, <code>-23</code></td></tr>
+<tr><td>Integer operations</td><td><code>23 + 1 - 7 * 2 / 5</code></td></tr>
+<tr><td>Integer modulo</td><td><code>13 mod 2</code></td></tr>
+<tr><td>Float</td><td><code>23.0</code>, <code>-23.0</code></td></tr>
+<tr><td>Float operations</td><td><code>23.0 +. 1.0 -. 7.0 *. 2.0 /. 5.0</code></td></tr>
+<tr><td>Float exponentiation</td><td><code>2.0 ** 3.0</code></td></tr>
+</tbody>
+</table>
+<h2><a class="anchor" aria-hidden="true" id="booleans-and-logical-operators"></a><a href="#booleans-and-logical-operators" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Booleans and Logical Operators</h2>
+<p><em>Details: <a href="/docs/en/primitives#boolean">Boolean</a></em></p>
+<table>
+<thead>
+<tr><th>Feature</th><th>Example</th></tr>
+</thead>
+<tbody>
+<tr><td>Boolean Values</td><td><code>true</code>, <code>false</code></td></tr>
+<tr><td>Comparison</td><td><code>&gt;</code>, <code>&lt;</code>, <code>&gt;=</code>, <code>&lt;=</code></td></tr>
+<tr><td>Boolean operations</td><td><code>!</code>, <code>&amp;&amp;</code>, <code>||</code></td></tr>
+<tr><td>Reference equality</td><td><code>===</code>, <code>!==</code></td></tr>
+<tr><td>Structural equality</td><td><code>==</code>, <code>!=</code></td></tr>
+</tbody>
+</table>
+<h2><a class="anchor" aria-hidden="true" id="if-else-expressions"></a><a href="#if-else-expressions" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>If-Else Expressions</h2>
+<table>
+<thead>
+<tr><th>Feature</th><th>Example</th></tr>
+</thead>
+<tbody>
+<tr><td>If-Else expressions</td><td><code>if (condition) { a; } else { b; }</code></td></tr>
+<tr><td>Ternary expressions</td><td><code>condition ? a : b;</code></td></tr>
+</tbody>
+</table>
+<ul>
+<li>Note: These are expressions and can be assigned to a variable:
+<code>let x = if (condition) { a; } else { b; };</code></li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="functions"></a><a href="#functions" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Functions</h2>
+<p><em>Details: <a href="/docs/en/function">Functions</a></em></p>
+<table>
+<thead>
+<tr><th>Feature</th><th>Example</th></tr>
+</thead>
+<tbody>
+<tr><td>Function definition</td><td><code>let divide = (a, b) =&gt; a / b;</code></td></tr>
+<tr><td>Function calls</td><td><code>divide(6, 2); // 3</code></td></tr>
+<tr><td>Named arguments</td><td><code>let divide = (~a, ~b) =&gt; a / b;</code></td></tr>
+<tr><td>Calling named arguments</td><td><code>divide(~a=6, ~b=2); // 3</code></td></tr>
+<tr><td>Named argument punning</td><td><code>divide(~a, ~b);</code></td></tr>
+<tr><td>Recursive functions</td><td><code>let rec infinite = () =&gt; infinite();</code></td></tr>
+</tbody>
+</table>
+<h3><a class="anchor" aria-hidden="true" id="advanced-functions"></a><a href="#advanced-functions" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Advanced Functions</h3>
+<table>
+<thead>
+<tr><th>Feature</th><th>Example</th></tr>
+</thead>
+<tbody>
+<tr><td>Partial application</td><td><code>let divideTen = divide(10); divideTen(5); // 2</code></td></tr>
+<tr><td>Partially applying out of order</td><td><code>let half = divide(_, 2); half(10); // 5</code></td></tr>
+<tr><td>Optional arguments</td><td><code>let print = (~prefix=?, text) =&gt; {...};</code></td></tr>
+<tr><td>Optional arguments with default</td><td><code>let divide = (~a=100, ~b) =&gt; a / b;</code></td></tr>
+<tr><td>Function chaining (pipe)</td><td><code>32 |&gt; half |&gt; half; // 8</code></td></tr>
+</tbody>
+</table>
+<h3><a class="anchor" aria-hidden="true" id="function-types"></a><a href="#function-types" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Function Types</h3>
+<table>
+<thead>
+<tr><th>Feature</th><th>Example</th></tr>
+</thead>
+<tbody>
+<tr><td>Inline typing</td><td><code>let divide = (a: int, b: int): int =&gt; a / b;</code></td></tr>
+<tr><td>Standalone type</td><td><code>type intFn = (int, int) =&gt; int;</code></td></tr>
+<tr><td>Using standalone type</td><td><code>let divide: intFn = (a, b) =&gt; a / b;</code></td></tr>
+<tr><td>Typing optional arguments</td><td><code>let print = (~prefix: option(string)=?, text) =&gt; {...};</code></td></tr>
+</tbody>
+</table>
+<h2><a class="anchor" aria-hidden="true" id="implicit-return"></a><a href="#implicit-return" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Implicit Return</h2>
+<p>There is no <code>return</code> keyword in Reason. The last expression in a block or
+function definition is the returned value.</p>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> twentyThree = () =&gt; {
+  <span class="hljs-keyword">let</span> x = <span class="hljs-number">10</span>;
+  <span class="hljs-keyword">let</span> x = x <span class="hljs-operator">+</span> <span class="hljs-number">10</span>;
+  <span class="hljs-comment">/* x + 3 is the implicit return of the function. */</span>
+  x <span class="hljs-operator">+</span> <span class="hljs-number">3</span>;
+};
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="basic-structures"></a><a href="#basic-structures" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Basic Structures</h2>
+<p><em>Details: <a href="/docs/en/basic-structures">Basic Structures</a></em></p>
+<table>
+<thead>
+<tr><th>Feature</th><th>Example</th></tr>
+</thead>
+<tbody>
+<tr><td>List (Immutable)</td><td><code>[1, 2, 3]</code></td></tr>
+<tr><td>List add to front</td><td><code>[a1, a2, ...theRest]</code></td></tr>
+<tr><td>List concat</td><td><code>[a1, a2] @ theRest</code></td></tr>
+<tr><td>Array (Mutable)</td><td><code>[|1, 2, 3|]</code></td></tr>
+<tr><td>Array access</td><td><code>let arr = [|1, 2, 3|]; arr[1];</code></td></tr>
+<tr><td>Tuples</td><td><code>(1, &quot;hello&quot;)</code></td></tr>
+</tbody>
+</table>
+<ul>
+<li>List Functions: <a href="https://reasonml.github.io/api/List.html"><code>module List</code></a></li>
+<li>Array Functions: <a href="https://reasonml.github.io/api/Array.html"><code>module Array</code></a></li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="maps-and-sets"></a><a href="#maps-and-sets" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Maps and Sets</h2>
+<p>There are several different ways to interact with Maps and Sets depending on the
+specific environment being used. In standard Reason code there are <code>Map</code> and
+<code>Set</code> modules:</p>
+<ul>
+<li><a href="https://reasonml.github.io/api/Map.Make.html"><code>module Map.Make</code></a></li>
+<li><a href="https://reasonml.github.io/api/Set.Make.html"><code>module Set.Make</code></a></li>
+</ul>
+<p>When using BuckleScript <code>belt</code> exposes these modules:</p>
+<ul>
+<li><a href="https://bucklescript.github.io/bucklescript/api/Belt.Map.html"><code>module Belt.Map</code></a></li>
+<li><a href="https://bucklescript.github.io/bucklescript/api/Belt.Set.html"><code>module Belt.Set</code></a></li>
+</ul>
+<p>There are also other libraries that will provide their own implementation of
+these data structures. Check the style guide of the project you are
+working in to determine which module to use.</p>
+<h2><a class="anchor" aria-hidden="true" id="type-annotations"></a><a href="#type-annotations" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Type Annotations</h2>
+<p>Any expression or argument may include a &quot;type annotation&quot;. In most cases, type annotations
+are not necessary and the compiler will infer the types automatically. You may include
+type annotations to verify your own understanding against what the compiler infers.</p>
+<table>
+<thead>
+<tr><th>Feature</th><th>Example</th></tr>
+</thead>
+<tbody>
+<tr><td>Expression type annotation</td><td><code>let x = (expression: int)</code></td></tr>
+<tr><td>Annotation on let binding</td><td><code>let x: int = expression;</code></td></tr>
+<tr><td>Argument/return value annotation</td><td><code>let addOne = (a: int): int =&gt; a + 1;</code></td></tr>
+</tbody>
+</table>
+<h2><a class="anchor" aria-hidden="true" id="type-parameters"></a><a href="#type-parameters" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Type Parameters</h2>
+<p>Types can be made generic with type parameters.</p>
+<table>
+<thead>
+<tr><th>Feature</th><th>Example</th></tr>
+</thead>
+<tbody>
+<tr><td>Type parameters</td><td><code>type pair('a, 'b) = ('a, 'b);</code></td></tr>
+<tr><td>Annotation with parameters</td><td><code>let x: pair(int, string) = (10, &quot;ten&quot;);</code></td></tr>
+<tr><td>String list</td><td><code>let x: list(string) = [&quot;Hello&quot;, &quot;World&quot;];</code></td></tr>
+</tbody>
+</table>
+<h2><a class="anchor" aria-hidden="true" id="records"></a><a href="#records" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Records</h2>
+<p><em>Details: <a href="/docs/en/record">Records</a></em></p>
+<table>
+<thead>
+<tr><th>Feature</th><th>Example</th></tr>
+</thead>
+<tbody>
+<tr><td>Record definition</td><td><code>type t = {foo: int, bar: string};</code></td></tr>
+<tr><td>Record creation</td><td><code>let x = {foo: 10, bar: &quot;hello&quot;};</code></td></tr>
+<tr><td>Record access</td><td><code>x.foo;</code></td></tr>
+<tr><td>Record spread</td><td><code>let y = {...x, bar: &quot;world&quot;};</code></td></tr>
+<tr><td>Destructuring</td><td><code>let {foo, bar} = x;</code></td></tr>
+<tr><td>Mutable record fields</td><td><code>type t = {mutable baz: int}; let z = {baz: 10};</code></td></tr>
+<tr><td>Mutable record updates</td><td><code>z.baz = 23;</code></td></tr>
+<tr><td>With type parameters</td><td><code>type t('a) = {foo: 'a, bar: string};</code></td></tr>
+</tbody>
+</table>
+<ul>
+<li>Note: Record types are <a href="https://en.wikipedia.org/wiki/Nominal_type_system">nominal</a>. This means that two different record definitions (<code>type x = {...};</code>) with the exact same fields are not compatible. They cannot be used interchangeably and cannot be spread into each other.</li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="variants"></a><a href="#variants" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Variants</h2>
+<p><em>Details: <a href="/docs/en/variant">Variants</a></em></p>
+<p>Variant types model values that may assume one of many known variations. This
+feature is similar to &quot;enums&quot; in other languages, but each variant form may
+optionally specify data that is carried along with it.</p>
+<table>
+<thead>
+<tr><th>Feature</th><th>Example</th></tr>
+</thead>
+<tbody>
+<tr><td>Variant definition</td><td><code>type t = | Foo | Bar;</code></td></tr>
+<tr><td>Variants with args</td><td><code>type t = | Foo(string) | Bar(int);</code></td></tr>
+<tr><td>With type parameters</td><td><code>type t('a) = | One('a) | Two('a, 'a);</code></td></tr>
+<tr><td>Using a variant</td><td><code>let x = Two(&quot;Hello&quot;, &quot;World&quot;);</code></td></tr>
+</tbody>
+</table>
+<h2><a class="anchor" aria-hidden="true" id="options"></a><a href="#options" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Options</h2>
+<p><em>Details: <a href="/docs/en/option">Options</a></em></p>
+<p>Options are a built-in variant that represent the presence or absence of a
+value. It is similar to the concept of &quot;nullable&quot; values in other languages. Options
+are used often.</p>
+<table>
+<thead>
+<tr><th>Feature</th><th>Example</th></tr>
+</thead>
+<tbody>
+<tr><td>Definition (already defined)</td><td><code>type option('a) = | None | Some('a);</code></td></tr>
+<tr><td>Value that is present</td><td><code>let x = Some(&quot;Hello World&quot;);</code></td></tr>
+<tr><td>Value that is absent</td><td><code>let y = None;</code></td></tr>
+</tbody>
+</table>
+<h2><a class="anchor" aria-hidden="true" id="pattern-matching"></a><a href="#pattern-matching" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Pattern Matching</h2>
+<p>Pattern matching is a very powerful feature in Reason. It matches against variants
+and ensures all cases are covered. Start matching using the <code>switch</code> keyword:</p>
+<pre><code class="hljs css language-re"><span class="hljs-keyword">switch</span> (foo) {
+| <span class="hljs-constructor">Some</span>(value) =&gt; doSomething(value)
+| <span class="hljs-constructor">None</span> =&gt; error()
+}
+</code></pre>
+<table>
+<thead>
+<tr><th>Feature</th><th>Example</th></tr>
+</thead>
+<tbody>
+<tr><td>Basic case</td><td><code>| Some(value) =&gt; doSomething(value)</code></td></tr>
+<tr><td>When conditions</td><td><code>| Some(value) when value &gt; 10 =&gt; doSomething(value)</code></td></tr>
+<tr><td>Catch-all case</td><td><code>| _ =&gt; doSomething()</code></td></tr>
+<tr><td>Matching lists</td><td><code>| [a, b, ...rest] =&gt; doSomething(rest)</code></td></tr>
+<tr><td>Matching records</td><td><code>| {foo: value} =&gt; doSomething(value)</code></td></tr>
+<tr><td>Matching literals</td><td><code>| &quot;Hello&quot; =&gt; handleHello()</code></td></tr>
+</tbody>
+</table>
+<h2><a class="anchor" aria-hidden="true" id="unit"></a><a href="#unit" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Unit</h2>
+<p>The special &quot;unit&quot; value (written <code>()</code>) represents something that never has any
+meaningful value (this is distinct from options which may have a value).
+Functions usually indicate that they perform a side effect by returning a unit
+value.</p>
+<table>
+<thead>
+<tr><th>Feature</th><th>Example</th></tr>
+</thead>
+<tbody>
+<tr><td>Creating a unit</td><td><code>let x = ();</code></td></tr>
+<tr><td>Passing to a function</td><td><code>fn(a, b, ());</code></td></tr>
+<tr><td>Unit as only argument</td><td><code>let fn = () =&gt; 1; fn();</code></td></tr>
+</tbody>
+</table>
+<h2><a class="anchor" aria-hidden="true" id="refs"></a><a href="#refs" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Refs</h2>
+<p><em>Details: <a href="/docs/en/mutable-bindings">Mutable Bindings</a></em></p>
+<p>Refs allow mutable &quot;variables&quot; in your program. They are a thin wrapper around
+a record with a mutable field called <code>contents</code>.</p>
+<table>
+<thead>
+<tr><th>Feature</th><th>Example</th></tr>
+</thead>
+<tbody>
+<tr><td>Type (already defined)</td><td><code>type ref('a) = {mutable contents: 'a};</code></td></tr>
+<tr><td>Ref creation</td><td><code>let x = ref(10);</code> or <code>let x = {contents: 10};</code></td></tr>
+<tr><td>Ref access</td><td><code>x^;</code> or <code>x.contents;</code></td></tr>
+<tr><td>Ref update</td><td><code>x := 20;</code> or <code>x.contents = 20;</code></td></tr>
+</tbody>
+</table>
+<h2><a class="anchor" aria-hidden="true" id="loops"></a><a href="#loops" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Loops</h2>
+<p><em>Details: <a href="/docs/en/loops">Loops</a></em></p>
+<p>Loops are discouraged in most cases. Instead functional programming patterns
+like <code>map</code>, <code>filter</code>, or <code>reduce</code> can usually be used in their place.</p>
+<table>
+<thead>
+<tr><th>Feature</th><th>Example</th></tr>
+</thead>
+<tbody>
+<tr><td>While</td><td><code>while (condition) {...}</code></td></tr>
+<tr><td>For (incrementing)</td><td><code>for (i in 0 to 9) {...}</code> (inclusive)</td></tr>
+<tr><td>For (decrementing)</td><td><code>for (i in 9 downto 0) {...}</code> (inclusive)</td></tr>
+</tbody>
+</table>
+<ul>
+<li>Note: There is no <code>break</code> or early returns in Reason. Use a ref containing a
+bool for break-like behavior: <code>let break = ref(false); while (!break^ &amp;&amp; condition) {...};</code></li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="modules"></a><a href="#modules" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Modules</h2>
+<p><em>Details: <a href="/docs/en/module">Modules</a></em></p>
+<p>Modules are a way to group types and values. Each Reason file implicitly
+creates a module of the same name. Each <code>type</code> definition and <code>let</code> binding in
+a module automatically becomes a &quot;member&quot; of that module which can be accessed
+by other modules.  Modules can also be nested using the <code>module</code> keyword.</p>
+<table>
+<thead>
+<tr><th>Feature</th><th>Example</th></tr>
+</thead>
+<tbody>
+<tr><td>Module creation</td><td><code>module Foo = { let bar = 10; };</code></td></tr>
+<tr><td>Module member access</td><td><code>Foo.bar;</code></td></tr>
+<tr><td>Module types</td><td><code>module type Foo = { let bar: int; };</code></td></tr>
+</tbody>
+</table>
+<h2><a class="anchor" aria-hidden="true" id="functors"></a><a href="#functors" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Functors</h2>
+<p>Functors are like functions that create modules. This is an advanced topic
+that can be very powerful. Here is a basic example:</p>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">module</span> <span class="hljs-keyword">type</span> <span class="hljs-module-identifier">Stringable</span> = {
+  <span class="hljs-keyword">type</span> t;
+  <span class="hljs-keyword">let</span> toString: (t) =&gt; string;
+};
+
+<span class="hljs-keyword">module</span> <span class="hljs-module-identifier">Printer</span> = (<span class="hljs-module-identifier">Item</span>: <span class="hljs-module-identifier">Stringable</span>) =&gt; {
+  <span class="hljs-keyword">let</span> print = (t: <span class="hljs-module-identifier">Item</span>.t) =&gt; {
+    print_endline(<span class="hljs-module-identifier">Item</span>.toString(t));
+  };
+
+  <span class="hljs-keyword">let</span> printList = (list: list(<span class="hljs-module-identifier">Item</span>.t)) =&gt; {
+    list
+    <span class="hljs-operator">|&gt;</span> <span class="hljs-module-identifier">List</span>.map(<span class="hljs-module-identifier">Item</span>.toString)
+    <span class="hljs-operator">|&gt;</span> <span class="hljs-module-identifier">String</span>.concat(<span class="hljs-string">", "</span>)
+    <span class="hljs-operator">|&gt;</span> print_endline;
+  };
+};
+
+<span class="hljs-keyword">module</span> <span class="hljs-module-identifier">IntPrinter</span> = <span class="hljs-module-identifier">Printer</span>({
+  <span class="hljs-keyword">type</span> t = int;
+  <span class="hljs-keyword">let</span> toString = string_of_int;
+});
+
+<span class="hljs-module-identifier">IntPrinter</span>.print(<span class="hljs-number">10</span>); <span class="hljs-operator">/</span><span class="hljs-operator">/</span> <span class="hljs-number">10</span>
+<span class="hljs-module-identifier">IntPrinter</span>.printList(<span class="hljs-literal">[</span><span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span><span class="hljs-literal">]</span>); <span class="hljs-operator">/</span><span class="hljs-operator">/</span> <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="comments"></a><a href="#comments" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Comments</h2>
+<table>
+<thead>
+<tr><th>Feature</th><th>Example</th></tr>
+</thead>
+<tbody>
+<tr><td>Multiline Comment</td><td><code>/* Comment here */</code></td></tr>
+<tr><td>Single line Comment</td><td><code>// Comment here</code></td></tr>
+</tbody>
+</table>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/en/refmt"><span class="arrow-prev">← </span><span>Format (refmt)</span></a><a class="docs-next button" href="/docs/en/let-binding"><span>Let Bindings</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#let-bindings">Let Bindings</a></li><li><a href="#built-in-types">Built In Types</a></li><li><a href="#strings">Strings</a></li><li><a href="#numbers">Numbers</a></li><li><a href="#booleans-and-logical-operators">Booleans and Logical Operators</a></li><li><a href="#if-else-expressions">If-Else Expressions</a></li><li><a href="#functions">Functions</a><ul class="toc-headings"><li><a href="#advanced-functions">Advanced Functions</a></li><li><a href="#function-types">Function Types</a></li></ul></li><li><a href="#implicit-return">Implicit Return</a></li><li><a href="#basic-structures">Basic Structures</a></li><li><a href="#maps-and-sets">Maps and Sets</a></li><li><a href="#type-annotations">Type Annotations</a></li><li><a href="#type-parameters">Type Parameters</a></li><li><a href="#records">Records</a></li><li><a href="#variants">Variants</a></li><li><a href="#options">Options</a></li><li><a href="#pattern-matching">Pattern Matching</a></li><li><a href="#unit">Unit</a></li><li><a href="#refs">Refs</a></li><li><a href="#loops">Loops</a></li><li><a href="#modules">Modules</a></li><li><a href="#functors">Functors</a></li><li><a href="#comments">Comments</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+                document.addEventListener('keyup', function(e) {
+                  if (e.target !== document.body) {
+                    return;
+                  }
+                  // keyCode for '/' (slash)
+                  if (e.keyCode === 191) {
+                    const search = document.getElementById('search_input_react');
+                    search && search.focus();
+                  }
+                });
+              </script><script>
+              var search = docsearch({
+                
+                apiKey: '966d1e412f67114a07dc0afe44b19b53',
+                indexName: 'reason',
+                inputSelector: '#search_input_react',
+                algoliaOptions: {"facetFilters":["lang:en"]}
+              });
+            </script></body></html>

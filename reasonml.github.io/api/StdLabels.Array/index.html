@@ -1,0 +1,296 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Reason · Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems.</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Reason · Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io/"/><meta property="og:description" content="Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/icon_50.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io/blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io/blog/feed.xml" title="Reason Blog RSS Feed"/><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/en"><img class="logo" src="/img/dummy.svg" alt="Reason"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/docs/en/what-and-why" target="_self">Docs</a></li><li class=""><a href="/en/try" target="_self">Try</a></li><li class=""><a href="/api/index" target="_self">API</a></li><li class=""><a href="/docs/en/community" target="_self">Community</a></li><li class=""><a href="/blog/" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg" alt="Languages icon"/>English</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/ja/StdLabels.Array">日本語</a></li><li><a href="/de/StdLabels.Array">Deutsch</a></li><li><a href="/es-ES/StdLabels.Array">Español</a></li><li><a href="/fr/StdLabels.Array">Français</a></li><li><a href="/ko/StdLabels.Array">한국어</a></li><li><a href="/pt-BR/StdLabels.Array">Português (Brasil)</a></li><li><a href="/ru/StdLabels.Array">Русский</a></li><li><a href="/uk/StdLabels.Array">Українська</a></li><li><a href="/zh-CN/StdLabels.Array">中文</a></li><li><a href="/zh-TW/StdLabels.Array">繁體中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank" rel="noreferrer noopener">Help Translate</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/facebook/reason" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div><link rel="stylesheet" href="/css/main.css"><div class="ocamldoc">
+<div class="navbar">&#xA0;<a class="up" href="StdLabels.html" title="StdLabels">Up</a>
+&#xA0;<a class="post" href="StdLabels.Bytes.html" title="StdLabels.Bytes">Next</a>
+</div>
+<h1>Module <a href="type_StdLabels.Array.html">StdLabels.Array</a></h1>
+
+<pre><span class="keyword">module</span> Array: ArrayLabels;
+</pre><hr width="100%">
+
+<pre id="VALlength"><span class="keyword">let</span> length: array(&apos;a) =&gt; int;
+</pre><div class="info ">
+Return the length (number of elements) of the given array.<br>
+</div>
+
+<pre id="VALget"><span class="keyword">let</span> get: (array(&apos;a), int) =&gt; &apos;a;
+</pre><div class="info ">
+<code class="code">ArrayLabels.get a n</code> returns the element number <code class="code">n</code> of array <code class="code">a</code>.
+   The first element has number 0.
+   The last element has number <code class="code">ArrayLabels.length a - 1</code>.
+   You can also write <code class="code">a.(n)</code> instead of <code class="code">ArrayLabels.get a n</code>.
+<p>
+
+   Raise <code class="code">Invalid_argument &quot;index out of bounds&quot;</code>
+   if <code class="code">n</code> is outside the range 0 to <code class="code">(ArrayLabels.length a - 1)</code>.<br>
+</p></div>
+
+<pre id="VALset"><span class="keyword">let</span> set: (array(&apos;a), int, &apos;a) =&gt; unit;
+</pre><div class="info ">
+<code class="code">ArrayLabels.set a n x</code> modifies array <code class="code">a</code> in place, replacing
+   element number <code class="code">n</code> with <code class="code">x</code>.
+   You can also write <code class="code">a.(n) &lt;- x</code> instead of <code class="code">ArrayLabels.set a n x</code>.
+<p>
+
+   Raise <code class="code">Invalid_argument &quot;index out of bounds&quot;</code>
+   if <code class="code">n</code> is outside the range 0 to <code class="code">ArrayLabels.length a - 1</code>.<br>
+</p></div>
+
+<pre id="VALmake"><span class="keyword">let</span> make: (int, &apos;a) =&gt; array(&apos;a);
+</pre><div class="info ">
+<code class="code">ArrayLabels.make n x</code> returns a fresh array of length <code class="code">n</code>,
+   initialized with <code class="code">x</code>.
+   All the elements of this new array are initially
+   physically equal to <code class="code">x</code> (in the sense of the <code class="code">==</code> predicate).
+   Consequently, if <code class="code">x</code> is mutable, it is shared among all elements
+   of the array, and modifying <code class="code">x</code> through one of the array entries
+   will modify all other entries at the same time.
+<p>
+
+   Raise <code class="code">Invalid_argument</code> if <code class="code">n &lt; 0</code> or <code class="code">n &gt; Sys.max_array_length</code>.
+   If the value of <code class="code">x</code> is a floating-point number, then the maximum
+   size is only <code class="code">Sys.max_array_length / 2</code>.<br>
+</p></div>
+
+<pre id="VALcreate"><span class="keyword">let</span> create: (int, &apos;a) =&gt; array(&apos;a);
+</pre><div class="info ">
+<span class="warning">Deprecated.</span><code class="code">ArrayLabels.create</code> is an alias for <a href="ArrayLabels.html#VALmake"><code class="code">ArrayLabels.make</code></a>.<br>
+</div>
+
+<pre id="VALinit"><span class="keyword">let</span> init: (int, ~f: int =&gt; &apos;a) =&gt; array(&apos;a);
+</pre><div class="info ">
+<code class="code">ArrayLabels.init n f</code> returns a fresh array of length <code class="code">n</code>,
+   with element number <code class="code">i</code> initialized to the result of <code class="code">f i</code>.
+   In other terms, <code class="code">ArrayLabels.init n f</code> tabulates the results of <code class="code">f</code>
+   applied to the integers <code class="code">0</code> to <code class="code">n-1</code>.
+<p>
+
+   Raise <code class="code">Invalid_argument</code> if <code class="code">n &lt; 0</code> or <code class="code">n &gt; Sys.max_array_length</code>.
+   If the return type of <code class="code">f</code> is <code class="code">float</code>, then the maximum
+   size is only <code class="code">Sys.max_array_length / 2</code>.<br>
+</p></div>
+
+<pre id="VALmake_matrix"><span class="keyword">let</span> make_matrix: (~dimx: int, ~dimy: int, &apos;a) =&gt; array(array(&apos;a));
+</pre><div class="info ">
+<code class="code">ArrayLabels.make_matrix dimx dimy e</code> returns a two-dimensional array
+   (an array of arrays) with first dimension <code class="code">dimx</code> and
+   second dimension <code class="code">dimy</code>. All the elements of this new matrix
+   are initially physically equal to <code class="code">e</code>.
+   The element (<code class="code">x,y</code>) of a matrix <code class="code">m</code> is accessed
+   with the notation <code class="code">m.(x).(y)</code>.
+<p>
+
+   Raise <code class="code">Invalid_argument</code> if <code class="code">dimx</code> or <code class="code">dimy</code> is negative or
+   greater than <code class="code">Sys.max_array_length</code>.
+   If the value of <code class="code">e</code> is a floating-point number, then the maximum
+   size is only <code class="code">Sys.max_array_length / 2</code>.<br>
+</p></div>
+
+<pre id="VALcreate_matrix"><span class="keyword">let</span> create_matrix: (~dimx: int, ~dimy: int, &apos;a) =&gt; array(array(&apos;a));
+</pre><div class="info ">
+<span class="warning">Deprecated.</span><code class="code">ArrayLabels.create_matrix</code> is an alias for
+   <a href="ArrayLabels.html#VALmake_matrix"><code class="code">ArrayLabels.make_matrix</code></a>.<br>
+</div>
+
+<pre id="VALappend"><span class="keyword">let</span> append: (array(&apos;a), array(&apos;a)) =&gt; array(&apos;a);
+</pre><div class="info ">
+<code class="code">ArrayLabels.append v1 v2</code> returns a fresh array containing the
+   concatenation of the arrays <code class="code">v1</code> and <code class="code">v2</code>.<br>
+</div>
+
+<pre id="VALconcat"><span class="keyword">let</span> concat: list(array(&apos;a)) =&gt; array(&apos;a);
+</pre><div class="info ">
+Same as <code class="code">ArrayLabels.append</code>, but concatenates a list of arrays.<br>
+</div>
+
+<pre id="VALsub"><span class="keyword">let</span> sub: (array(&apos;a), ~pos: int, ~len: int) =&gt; array(&apos;a);
+</pre><div class="info ">
+<code class="code">ArrayLabels.sub a start len</code> returns a fresh array of length <code class="code">len</code>,
+   containing the elements number <code class="code">start</code> to <code class="code">start + len - 1</code>
+   of array <code class="code">a</code>.
+<p>
+
+   Raise <code class="code">Invalid_argument &quot;Array.sub&quot;</code> if <code class="code">start</code> and <code class="code">len</code> do not
+   designate a valid subarray of <code class="code">a</code>; that is, if
+   <code class="code">start &lt; 0</code>, or <code class="code">len &lt; 0</code>, or <code class="code">start + len &gt; ArrayLabels.length a</code>.<br>
+</p></div>
+
+<pre id="VALcopy"><span class="keyword">let</span> copy: array(&apos;a) =&gt; array(&apos;a);
+</pre><div class="info ">
+<code class="code">ArrayLabels.copy a</code> returns a copy of <code class="code">a</code>, that is, a fresh array
+   containing the same elements as <code class="code">a</code>.<br>
+</div>
+
+<pre id="VALfill"><span class="keyword">let</span> fill: (array(&apos;a), ~pos: int, ~len: int, &apos;a) =&gt; unit;
+</pre><div class="info ">
+<code class="code">ArrayLabels.fill a ofs len x</code> modifies the array <code class="code">a</code> in place,
+   storing <code class="code">x</code> in elements number <code class="code">ofs</code> to <code class="code">ofs + len - 1</code>.
+<p>
+
+   Raise <code class="code">Invalid_argument &quot;Array.fill&quot;</code> if <code class="code">ofs</code> and <code class="code">len</code> do not
+   designate a valid subarray of <code class="code">a</code>.<br>
+</p></div>
+
+<pre id="VALblit"><span class="keyword">let</span> blit:
+  (
+    ~src: array(&apos;a),
+    ~src_pos: int,
+    ~dst: array(&apos;a),
+    ~dst_pos: int,
+    ~len: int
+  ) =&gt;
+  unit;
+</pre><div class="info ">
+<code class="code">ArrayLabels.blit v1 o1 v2 o2 len</code> copies <code class="code">len</code> elements
+   from array <code class="code">v1</code>, starting at element number <code class="code">o1</code>, to array <code class="code">v2</code>,
+   starting at element number <code class="code">o2</code>. It works correctly even if
+   <code class="code">v1</code> and <code class="code">v2</code> are the same array, and the source and
+   destination chunks overlap.
+<p>
+
+   Raise <code class="code">Invalid_argument &quot;Array.blit&quot;</code> if <code class="code">o1</code> and <code class="code">len</code> do not
+   designate a valid subarray of <code class="code">v1</code>, or if <code class="code">o2</code> and <code class="code">len</code> do not
+   designate a valid subarray of <code class="code">v2</code>.<br>
+</p></div>
+
+<pre id="VALto_list"><span class="keyword">let</span> to_list: array(&apos;a) =&gt; list(&apos;a);
+</pre><div class="info ">
+<code class="code">ArrayLabels.to_list a</code> returns the list of all the elements of <code class="code">a</code>.<br>
+</div>
+
+<pre id="VALof_list"><span class="keyword">let</span> of_list: list(&apos;a) =&gt; array(&apos;a);
+</pre><div class="info ">
+<code class="code">ArrayLabels.of_list l</code> returns a fresh array containing the elements
+   of <code class="code">l</code>.<br>
+</div>
+
+<pre id="VALiter"><span class="keyword">let</span> iter: (~f: &apos;a =&gt; unit, array(&apos;a)) =&gt; unit;
+</pre><div class="info ">
+<code class="code">ArrayLabels.iter f a</code> applies function <code class="code">f</code> in turn to all
+   the elements of <code class="code">a</code>.  It is equivalent to
+   <code class="code">f a.(0); f a.(1); ...; f a.(ArrayLabels.length a - 1); ()</code>.<br>
+</div>
+
+<pre id="VALmap"><span class="keyword">let</span> map: (~f: &apos;a =&gt; &apos;b, array(&apos;a)) =&gt; array(&apos;b);
+</pre><div class="info ">
+<code class="code">ArrayLabels.map f a</code> applies function <code class="code">f</code> to all the elements of <code class="code">a</code>,
+   and builds an array with the results returned by <code class="code">f</code>:
+   <code class="code">[| f a.(0); f a.(1); ...; f a.(ArrayLabels.length a - 1) |]</code>.<br>
+</div>
+
+<pre id="VALiteri"><span class="keyword">let</span> iteri: (~f: (int, &apos;a) =&gt; unit, array(&apos;a)) =&gt; unit;
+</pre><div class="info ">
+Same as <a href="ArrayLabels.html#VALiter"><code class="code">ArrayLabels.iter</code></a>, but the
+   function is applied to the index of the element as first argument,
+   and the element itself as second argument.<br>
+</div>
+
+<pre id="VALmapi"><span class="keyword">let</span> mapi: (~f: (int, &apos;a) =&gt; &apos;b, array(&apos;a)) =&gt; array(&apos;b);
+</pre><div class="info ">
+Same as <a href="ArrayLabels.html#VALmap"><code class="code">ArrayLabels.map</code></a>, but the
+   function is applied to the index of the element as first argument,
+   and the element itself as second argument.<br>
+</div>
+
+<pre id="VALfold_left"><span class="keyword">let</span> fold_left: (~f: (&apos;a, &apos;b) =&gt; &apos;a, ~init: &apos;a, array(&apos;b)) =&gt; &apos;a;
+</pre><div class="info ">
+<code class="code">ArrayLabels.fold_left f x a</code> computes
+   <code class="code">f (... (f (f x a.(0)) a.(1)) ...) a.(n-1)</code>,
+   where <code class="code">n</code> is the length of the array <code class="code">a</code>.<br>
+</div>
+
+<pre id="VALfold_right"><span class="keyword">let</span> fold_right: (~f: (&apos;b, &apos;a) =&gt; &apos;a, array(&apos;b), ~init: &apos;a) =&gt; &apos;a;
+</pre><div class="info ">
+<code class="code">ArrayLabels.fold_right f a x</code> computes
+   <code class="code">f a.(0) (f a.(1) ( ... (f a.(n-1) x) ...))</code>,
+   where <code class="code">n</code> is the length of the array <code class="code">a</code>.<br>
+</div>
+<br>
+<h6 id="6_Sorting">Sorting</h6><br>
+
+<pre id="VALsort"><span class="keyword">let</span> sort: (~cmp: (&apos;a, &apos;a) =&gt; int, array(&apos;a)) =&gt; unit;
+</pre><div class="info ">
+Sort an array in increasing order according to a comparison
+   function.  The comparison function must return 0 if its arguments
+   compare as equal, a positive integer if the first is greater,
+   and a negative integer if the first is smaller (see below for a
+   complete specification).  For example, <a href="Pervasives.html#VALcompare"><code class="code">Pervasives.compare</code></a> is
+   a suitable comparison function, provided there are no floating-point
+   NaN values in the data.  After calling <code class="code">ArrayLabels.sort</code>, the
+   array is sorted in place in increasing order.
+   <code class="code">ArrayLabels.sort</code> is guaranteed to run in constant heap space
+   and (at most) logarithmic stack space.
+<p>
+
+   The current implementation uses Heap Sort.  It runs in constant
+   stack space.
+</p><p>
+
+   Specification of the comparison function:
+   Let <code class="code">a</code> be the array and <code class="code">cmp</code> the comparison function.  The following
+   must be true for all x, y, z in a :</p><ul>
+<li>  <code class="code">cmp x y</code> &gt; 0 if and only if <code class="code">cmp y x</code> &lt; 0</li>
+<li>  if <code class="code">cmp x y</code> &gt;= 0 and <code class="code">cmp y z</code> &gt;= 0 then <code class="code">cmp x z</code> &gt;= 0</li>
+</ul>
+
+   When <code class="code">ArrayLabels.sort</code> returns, <code class="code">a</code> contains the same elements as before,
+   reordered in such a way that for all i and j valid indices of <code class="code">a</code> :<ul>
+<li>  <code class="code">cmp a.(i) a.(j)</code> &gt;= 0 if and only if i &gt;= j</li>
+</ul>
+<br>
+</div>
+
+<pre id="VALstable_sort"><span class="keyword">let</span> stable_sort: (~cmp: (&apos;a, &apos;a) =&gt; int, array(&apos;a)) =&gt; unit;
+</pre><div class="info ">
+Same as <a href="ArrayLabels.html#VALsort"><code class="code">ArrayLabels.sort</code></a>, but the sorting algorithm is stable (i.e.
+   elements that compare equal are kept in their original order) and
+   not guaranteed to run in constant heap space.
+<p>
+
+   The current implementation uses Merge Sort. It uses <code class="code">n/2</code>
+   words of heap space, where <code class="code">n</code> is the length of the array.
+   It is usually faster than the current implementation of <a href="ArrayLabels.html#VALsort"><code class="code">ArrayLabels.sort</code></a>.<br>
+</p></div>
+
+<pre id="VALfast_sort"><span class="keyword">let</span> fast_sort: (~cmp: (&apos;a, &apos;a) =&gt; int, array(&apos;a)) =&gt; unit;
+</pre><div class="info ">
+Same as <a href="ArrayLabels.html#VALsort"><code class="code">ArrayLabels.sort</code></a> or <a href="ArrayLabels.html#VALstable_sort"><code class="code">ArrayLabels.stable_sort</code></a>, whichever is
+    faster on typical input.<br>
+</div>
+<br>
+<h6 id="6_Undocumentedfunctions">Undocumented functions</h6><br>
+
+<pre id="VALunsafe_get"><span class="keyword">let</span> unsafe_get: (array(&apos;a), int) =&gt; &apos;a;
+</pre>
+<pre id="VALunsafe_set"><span class="keyword">let</span> unsafe_set: (array(&apos;a), int, &apos;a) =&gt; unit;
+</pre></div></div><span><script src="/js/redirectBlog.js"></script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+                document.addEventListener('keyup', function(e) {
+                  if (e.target !== document.body) {
+                    return;
+                  }
+                  // keyCode for '/' (slash)
+                  if (e.keyCode === 191) {
+                    const search = document.getElementById('search_input_react');
+                    search && search.focus();
+                  }
+                });
+              </script><script>
+              var search = docsearch({
+                
+                apiKey: '966d1e412f67114a07dc0afe44b19b53',
+                indexName: 'reason',
+                inputSelector: '#search_input_react',
+                algoliaOptions: {"facetFilters":["lang:en"]}
+              });
+            </script></body></html>

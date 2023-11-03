@@ -1,0 +1,121 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Reason · Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems.</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Reason · Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io/"/><meta property="og:description" content="Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/icon_50.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io/blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io/blog/feed.xml" title="Reason Blog RSS Feed"/><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/en"><img class="logo" src="/img/dummy.svg" alt="Reason"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/docs/en/what-and-why" target="_self">Docs</a></li><li class=""><a href="/en/try" target="_self">Try</a></li><li class=""><a href="/api/index" target="_self">API</a></li><li class=""><a href="/docs/en/community" target="_self">Community</a></li><li class=""><a href="/blog/" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg" alt="Languages icon"/>English</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/ja/Lexer">日本語</a></li><li><a href="/de/Lexer">Deutsch</a></li><li><a href="/es-ES/Lexer">Español</a></li><li><a href="/fr/Lexer">Français</a></li><li><a href="/ko/Lexer">한국어</a></li><li><a href="/pt-BR/Lexer">Português (Brasil)</a></li><li><a href="/ru/Lexer">Русский</a></li><li><a href="/uk/Lexer">Українська</a></li><li><a href="/zh-CN/Lexer">中文</a></li><li><a href="/zh-TW/Lexer">繁體中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank" rel="noreferrer noopener">Help Translate</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/facebook/reason" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div><link rel="stylesheet" href="/css/main.css"><div class="ocamldoc">
+<div class="navbar"><a class="pre" href="Docstrings.html" title="Docstrings">Previous</a>
+&#xA0;<a class="up" href="index.html" title="Index">Up</a>
+&#xA0;<a class="post" href="Location.html" title="Location">Next</a>
+</div>
+<h1>Module <a href="type_Lexer.html">Lexer</a></h1>
+
+<pre><span class="keyword">module</span> Lexer: sig .. end</pre><hr width="100%">
+
+<pre id="VALinit"><span class="keyword">let</span> init: unit =&gt; unit;
+</pre>
+<pre id="VALtoken"><span class="keyword">let</span> token: Lexing.lexbuf =&gt; Parser.token;
+</pre>
+<pre id="VALskip_sharp_bang"><span class="keyword">let</span> skip_sharp_bang: Lexing.lexbuf =&gt; unit;
+</pre>
+<pre><span class="keyword">type</span> error = </pre><table class="typetable">
+<tbody><tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Illegal_character of char</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Illegal_escape of string</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Unterminated_comment of Location.t</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Unterminated_string</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Unterminated_string_in_comment of Location.t * Location.t</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Keyword_as_label of string</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Literal_overflow of string</code></td>
+
+</tr></tbody></table>
+
+
+
+<pre id="EXCEPTIONError"><span class="keyword">exception</span> Error(error, Location.t);
+</pre>
+
+<pre id="VALreport_error"><span class="keyword">let</span> report_error: (Format.formatter, error) =&gt; unit;
+</pre>
+<pre id="VALin_comment"><span class="keyword">let</span> in_comment: unit =&gt; bool;
+</pre>
+<pre id="VALin_string"><span class="keyword">let</span> in_string: unit =&gt; bool;
+</pre>
+<pre id="VALprint_warnings"><span class="keyword">let</span> print_warnings: Pervasives.ref(bool);
+</pre>
+<pre id="VALcomments"><span class="keyword">let</span> comments: unit =&gt; list((string, Location.t));
+</pre>
+<pre id="VALtoken_with_comments"><span class="keyword">let</span> token_with_comments: Lexing.lexbuf =&gt; Parser.token;
+</pre>
+<pre id="VALset_preprocessor"><span class="keyword">let</span> set_preprocessor:
+  (
+    unit =&gt; unit,
+    (Lexing.lexbuf =&gt; Parser.token, Lexing.lexbuf) =&gt; Parser.token
+  ) =&gt;
+  unit;
+</pre></div></div><span><script src="/js/redirectBlog.js"></script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+                document.addEventListener('keyup', function(e) {
+                  if (e.target !== document.body) {
+                    return;
+                  }
+                  // keyCode for '/' (slash)
+                  if (e.keyCode === 191) {
+                    const search = document.getElementById('search_input_react');
+                    search && search.focus();
+                  }
+                });
+              </script><script>
+              var search = docsearch({
+                
+                apiKey: '966d1e412f67114a07dc0afe44b19b53',
+                indexName: 'reason',
+                inputSelector: '#search_input_react',
+                algoliaOptions: {"facetFilters":["lang:en"]}
+              });
+            </script></body></html>

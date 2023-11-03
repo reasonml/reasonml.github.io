@@ -1,0 +1,42 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Js_of_ocaml · Reason</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="[Js_of_ocaml](https://ocsigen.org/js_of_ocaml/3.7.0/manual/overview)"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Js_of_ocaml · Reason"/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io/"/><meta property="og:description" content="[Js_of_ocaml](https://ocsigen.org/js_of_ocaml/3.7.0/manual/overview)"/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/icon_50.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io/blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io/blog/feed.xml" title="Reason Blog RSS Feed"/><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/en"><img class="logo" src="/img/dummy.svg" alt="Reason"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/docs/en/what-and-why" target="_self">Docs</a></li><li class=""><a href="/en/try" target="_self">Try</a></li><li class=""><a href="/api/index" target="_self">API</a></li><li class=""><a href="/docs/en/community" target="_self">Community</a></li><li class=""><a href="/blog/" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg" alt="Languages icon"/>English</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/docs/ja/compiling-to-js-with-jsoo">日本語</a></li><li><a href="/docs/de/compiling-to-js-with-jsoo">Deutsch</a></li><li><a href="/docs/es-ES/compiling-to-js-with-jsoo">Español</a></li><li><a href="/docs/fr/compiling-to-js-with-jsoo">Français</a></li><li><a href="/docs/ko/compiling-to-js-with-jsoo">한국어</a></li><li><a href="/docs/pt-BR/compiling-to-js-with-jsoo">Português (Brasil)</a></li><li><a href="/docs/ru/compiling-to-js-with-jsoo">Русский</a></li><li><a href="/docs/uk/compiling-to-js-with-jsoo">Українська</a></li><li><a href="/docs/zh-CN/compiling-to-js-with-jsoo">中文</a></li><li><a href="/docs/zh-TW/compiling-to-js-with-jsoo">繁體中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank" rel="noreferrer noopener">Help Translate</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/facebook/reason" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/reasonml/reasonml.github.io/tree/source/docs/compiling-to-js-with-jsoo.md" target="_blank" rel="noreferrer noopener">Edit</a><h1 class="postHeaderTitle">Js_of_ocaml</h1></header><article><div><span><p><a href="https://ocsigen.org/js_of_ocaml/3.7.0/manual/overview">Js_of_ocaml</a></p>
+<h2><a class="anchor" aria-hidden="true" id="template"></a><a href="#template" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Template</h2>
+<p>To get started check out this <a href="https://github.com/jchavarri/hello-jsoo-esy"><code>hello-jsoo-esy</code></a> template:</p>
+<pre><code class="hljs"><span class="hljs-attr">git</span> <span class="hljs-string">clone https://github.com/jchavarri/hello-jsoo-esy.git</span>
+<span class="hljs-attr">cd</span> <span class="hljs-string">hello-jsoo-esy</span>
+<span class="hljs-attr">esy</span>
+
+<span class="hljs-attr">npm</span> <span class="hljs-string">install</span>
+<span class="hljs-attr">npm</span> <span class="hljs-string">run webpack</span>
+</code></pre>
+</span></div></article></div><div class="docs-prevnext"></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#template">Template</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+                document.addEventListener('keyup', function(e) {
+                  if (e.target !== document.body) {
+                    return;
+                  }
+                  // keyCode for '/' (slash)
+                  if (e.keyCode === 191) {
+                    const search = document.getElementById('search_input_react');
+                    search && search.focus();
+                  }
+                });
+              </script><script>
+              var search = docsearch({
+                
+                apiKey: '966d1e412f67114a07dc0afe44b19b53',
+                indexName: 'reason',
+                inputSelector: '#search_input_react',
+                algoliaOptions: {"facetFilters":["lang:en"]}
+              });
+            </script></body></html>

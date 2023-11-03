@@ -1,0 +1,308 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Reason · Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems.</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Reason · Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io/"/><meta property="og:description" content="Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/icon_50.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io/blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io/blog/feed.xml" title="Reason Blog RSS Feed"/><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/en"><img class="logo" src="/img/dummy.svg" alt="Reason"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/docs/en/what-and-why" target="_self">Docs</a></li><li class=""><a href="/en/try" target="_self">Try</a></li><li class=""><a href="/api/index" target="_self">API</a></li><li class=""><a href="/docs/en/community" target="_self">Community</a></li><li class=""><a href="/blog/" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg" alt="Languages icon"/>English</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/ja/StdLabels.Bytes">日本語</a></li><li><a href="/de/StdLabels.Bytes">Deutsch</a></li><li><a href="/es-ES/StdLabels.Bytes">Español</a></li><li><a href="/fr/StdLabels.Bytes">Français</a></li><li><a href="/ko/StdLabels.Bytes">한국어</a></li><li><a href="/pt-BR/StdLabels.Bytes">Português (Brasil)</a></li><li><a href="/ru/StdLabels.Bytes">Русский</a></li><li><a href="/uk/StdLabels.Bytes">Українська</a></li><li><a href="/zh-CN/StdLabels.Bytes">中文</a></li><li><a href="/zh-TW/StdLabels.Bytes">繁體中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank" rel="noreferrer noopener">Help Translate</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/facebook/reason" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div><link rel="stylesheet" href="/css/main.css"><div class="ocamldoc">
+<div class="navbar"><a class="pre" href="StdLabels.Array.html" title="StdLabels.Array">Previous</a>
+&#xA0;<a class="up" href="StdLabels.html" title="StdLabels">Up</a>
+&#xA0;<a class="post" href="StdLabels.List.html" title="StdLabels.List">Next</a>
+</div>
+<h1>Module <a href="type_StdLabels.Bytes.html">StdLabels.Bytes</a></h1>
+
+<pre><span class="keyword">module</span> Bytes: BytesLabels;
+</pre><hr width="100%">
+
+<pre id="VALlength"><span class="keyword">let</span> length: bytes =&gt; int;
+</pre><div class="info ">
+Return the length (number of bytes) of the argument.<br>
+</div>
+
+<pre id="VALget"><span class="keyword">let</span> get: (bytes, int) =&gt; char;
+</pre><div class="info ">
+<code class="code">get s n</code> returns the byte at index <code class="code">n</code> in argument <code class="code">s</code>.
+<p>
+
+    Raise <code class="code">Invalid_argument</code> if <code class="code">n</code> not a valid index in <code class="code">s</code>.<br>
+</p></div>
+
+<pre id="VALset"><span class="keyword">let</span> set: (bytes, int, char) =&gt; unit;
+</pre><div class="info ">
+<code class="code">set s n c</code> modifies <code class="code">s</code> in place, replacing the byte at index <code class="code">n</code>
+    with <code class="code">c</code>.
+<p>
+
+    Raise <code class="code">Invalid_argument</code> if <code class="code">n</code> is not a valid index in <code class="code">s</code>.<br>
+</p></div>
+
+<pre id="VALcreate"><span class="keyword">let</span> create: int =&gt; bytes;
+</pre><div class="info ">
+<code class="code">create n</code> returns a new byte sequence of length <code class="code">n</code>. The
+    sequence is uninitialized and contains arbitrary bytes.
+<p>
+
+    Raise <code class="code">Invalid_argument</code> if <code class="code">n &lt; 0</code> or <code class="code">n &gt; </code><a href="Sys.html#VALmax_string_length"><code class="code">Sys.max_string_length</code></a>.<br>
+</p></div>
+
+<pre id="VALmake"><span class="keyword">let</span> make: (int, char) =&gt; bytes;
+</pre><div class="info ">
+<code class="code">make n c</code> returns a new byte sequence of length <code class="code">n</code>, filled with
+    the byte <code class="code">c</code>.
+<p>
+
+    Raise <code class="code">Invalid_argument</code> if <code class="code">n &lt; 0</code> or <code class="code">n &gt; </code><a href="Sys.html#VALmax_string_length"><code class="code">Sys.max_string_length</code></a>.<br>
+</p></div>
+
+<pre id="VALinit"><span class="keyword">let</span> init: (int, ~f: int =&gt; char) =&gt; bytes;
+</pre><div class="info ">
+<code class="code">init n f</code> returns a fresh byte sequence of length <code class="code">n</code>,
+    with character <code class="code">i</code> initialized to the result of <code class="code">f i</code>.
+<p>
+
+    Raise <code class="code">Invalid_argument</code> if <code class="code">n &lt; 0</code> or <code class="code">n &gt; </code><a href="Sys.html#VALmax_string_length"><code class="code">Sys.max_string_length</code></a>.<br>
+</p></div>
+
+<pre id="VALempty"><span class="keyword">let</span> empty: bytes;
+</pre><div class="info ">
+A byte sequence of size 0.<br>
+</div>
+
+<pre id="VALcopy"><span class="keyword">let</span> copy: bytes =&gt; bytes;
+</pre><div class="info ">
+Return a new byte sequence that contains the same bytes as the
+    argument.<br>
+</div>
+
+<pre id="VALof_string"><span class="keyword">let</span> of_string: string =&gt; bytes;
+</pre><div class="info ">
+Return a new byte sequence that contains the same bytes as the
+    given string.<br>
+</div>
+
+<pre id="VALto_string"><span class="keyword">let</span> to_string: bytes =&gt; string;
+</pre><div class="info ">
+Return a new string that contains the same bytes as the given byte
+    sequence.<br>
+</div>
+
+<pre id="VALsub"><span class="keyword">let</span> sub: (bytes, ~pos: int, ~len: int) =&gt; bytes;
+</pre><div class="info ">
+<code class="code">sub s start len</code> returns a new byte sequence of length <code class="code">len</code>,
+    containing the subsequence of <code class="code">s</code> that starts at position <code class="code">start</code>
+    and has length <code class="code">len</code>.
+<p>
+
+    Raise <code class="code">Invalid_argument</code> if <code class="code">start</code> and <code class="code">len</code> do not designate a
+    valid range of <code class="code">s</code>.<br>
+</p></div>
+
+<pre id="VALsub_string"><span class="keyword">let</span> sub_string: (bytes, int, int) =&gt; string;
+</pre><div class="info ">
+Same as <code class="code">sub</code> but return a string instead of a byte sequence.<br>
+</div>
+
+<pre id="VALfill"><span class="keyword">let</span> fill: (bytes, ~pos: int, ~len: int, char) =&gt; unit;
+</pre><div class="info ">
+<code class="code">fill s start len c</code> modifies <code class="code">s</code> in place, replacing <code class="code">len</code>
+    characters with <code class="code">c</code>, starting at <code class="code">start</code>.
+<p>
+
+    Raise <code class="code">Invalid_argument</code> if <code class="code">start</code> and <code class="code">len</code> do not designate a
+    valid range of <code class="code">s</code>.<br>
+</p></div>
+
+<pre id="VALblit"><span class="keyword">let</span> blit:
+  (~src: bytes, ~src_pos: int, ~dst: bytes, ~dst_pos: int, ~len: int) =&gt; unit;
+</pre><div class="info ">
+<code class="code">blit src srcoff dst dstoff len</code> copies <code class="code">len</code> bytes from sequence
+    <code class="code">src</code>, starting at index <code class="code">srcoff</code>, to sequence <code class="code">dst</code>, starting at
+    index <code class="code">dstoff</code>. It works correctly even if <code class="code">src</code> and <code class="code">dst</code> are the
+    same byte sequence, and the source and destination intervals
+    overlap.
+<p>
+
+    Raise <code class="code">Invalid_argument</code> if <code class="code">srcoff</code> and <code class="code">len</code> do not
+    designate a valid range of <code class="code">src</code>, or if <code class="code">dstoff</code> and <code class="code">len</code>
+    do not designate a valid range of <code class="code">dst</code>.<br>
+</p></div>
+
+<pre id="VALconcat"><span class="keyword">let</span> concat: (~sep: bytes, list(bytes)) =&gt; bytes;
+</pre><div class="info ">
+<code class="code">concat sep sl</code> concatenates the list of byte sequences <code class="code">sl</code>,
+    inserting the separator byte sequence <code class="code">sep</code> between each, and
+    returns the result as a new byte sequence.<br>
+</div>
+
+<pre id="VALiter"><span class="keyword">let</span> iter: (~f: char =&gt; unit, bytes) =&gt; unit;
+</pre><div class="info ">
+<code class="code">iter f s</code> applies function <code class="code">f</code> in turn to all the bytes of <code class="code">s</code>.
+    It is equivalent to <code class="code">f (get s 0); f (get s 1); ...; f (get s
+    (length s - 1)); ()</code>.<br>
+</div>
+
+<pre id="VALiteri"><span class="keyword">let</span> iteri: (~f: (int, char) =&gt; unit, bytes) =&gt; unit;
+</pre><div class="info ">
+Same as <a href="Bytes.html#VALiter"><code class="code">Bytes.iter</code></a>, but the function is applied to the index of
+    the byte as first argument and the byte itself as second
+    argument.<br>
+</div>
+
+<pre id="VALmap"><span class="keyword">let</span> map: (~f: char =&gt; char, bytes) =&gt; bytes;
+</pre><div class="info ">
+<code class="code">map f s</code> applies function <code class="code">f</code> in turn to all the bytes of <code class="code">s</code> and
+    stores the resulting bytes in a new sequence that is returned as
+    the result.<br>
+</div>
+
+<pre id="VALmapi"><span class="keyword">let</span> mapi: (~f: (int, char) =&gt; char, bytes) =&gt; bytes;
+</pre><div class="info ">
+<code class="code">mapi f s</code> calls <code class="code">f</code> with each character of <code class="code">s</code> and its
+    index (in increasing index order) and stores the resulting bytes
+    in a new sequence that is returned as the result.<br>
+</div>
+
+<pre id="VALtrim"><span class="keyword">let</span> trim: bytes =&gt; bytes;
+</pre><div class="info ">
+Return a copy of the argument, without leading and trailing
+    whitespace. The bytes regarded as whitespace are the ASCII
+    characters <code class="code">&apos; &apos;</code>, <code class="code">&apos;\012&apos;</code>, <code class="code">&apos;\n&apos;</code>, <code class="code">&apos;\r&apos;</code>, and <code class="code">&apos;\t&apos;</code>.<br>
+</div>
+
+<pre id="VALescaped"><span class="keyword">let</span> escaped: bytes =&gt; bytes;
+</pre><div class="info ">
+Return a copy of the argument, with special characters represented
+    by escape sequences, following the lexical conventions of OCaml.<br>
+</div>
+
+<pre id="VALindex"><span class="keyword">let</span> index: (bytes, char) =&gt; int;
+</pre><div class="info ">
+<code class="code">index s c</code> returns the index of the first occurrence of byte <code class="code">c</code>
+    in <code class="code">s</code>.
+<p>
+
+    Raise <code class="code">Not_found</code> if <code class="code">c</code> does not occur in <code class="code">s</code>.<br>
+</p></div>
+
+<pre id="VALrindex"><span class="keyword">let</span> rindex: (bytes, char) =&gt; int;
+</pre><div class="info ">
+<code class="code">rindex s c</code> returns the index of the last occurrence of byte <code class="code">c</code>
+    in <code class="code">s</code>.
+<p>
+
+    Raise <code class="code">Not_found</code> if <code class="code">c</code> does not occur in <code class="code">s</code>.<br>
+</p></div>
+
+<pre id="VALindex_from"><span class="keyword">let</span> index_from: (bytes, int, char) =&gt; int;
+</pre><div class="info ">
+<code class="code">index_from s i c</code> returns the index of the first occurrence of
+    byte <code class="code">c</code> in <code class="code">s</code> after position <code class="code">i</code>.  <code class="code">Bytes.index s c</code> is
+    equivalent to <code class="code">Bytes.index_from s 0 c</code>.
+<p>
+
+    Raise <code class="code">Invalid_argument</code> if <code class="code">i</code> is not a valid position in <code class="code">s</code>.
+    Raise <code class="code">Not_found</code> if <code class="code">c</code> does not occur in <code class="code">s</code> after position <code class="code">i</code>.<br>
+</p></div>
+
+<pre id="VALrindex_from"><span class="keyword">let</span> rindex_from: (bytes, int, char) =&gt; int;
+</pre><div class="info ">
+<code class="code">rindex_from s i c</code> returns the index of the last occurrence of
+    byte <code class="code">c</code> in <code class="code">s</code> before position <code class="code">i+1</code>.  <code class="code">rindex s c</code> is equivalent
+    to <code class="code">rindex_from s (Bytes.length s - 1) c</code>.
+<p>
+
+    Raise <code class="code">Invalid_argument</code> if <code class="code">i+1</code> is not a valid position in <code class="code">s</code>.
+    Raise <code class="code">Not_found</code> if <code class="code">c</code> does not occur in <code class="code">s</code> before position <code class="code">i+1</code>.<br>
+</p></div>
+
+<pre id="VALcontains"><span class="keyword">let</span> contains: (bytes, char) =&gt; bool;
+</pre><div class="info ">
+<code class="code">contains s c</code> tests if byte <code class="code">c</code> appears in <code class="code">s</code>.<br>
+</div>
+
+<pre id="VALcontains_from"><span class="keyword">let</span> contains_from: (bytes, int, char) =&gt; bool;
+</pre><div class="info ">
+<code class="code">contains_from s start c</code> tests if byte <code class="code">c</code> appears in <code class="code">s</code> after
+    position <code class="code">start</code>.  <code class="code">contains s c</code> is equivalent to <code class="code">contains_from
+    s 0 c</code>.
+<p>
+
+    Raise <code class="code">Invalid_argument</code> if <code class="code">start</code> is not a valid position in <code class="code">s</code>.<br>
+</p></div>
+
+<pre id="VALrcontains_from"><span class="keyword">let</span> rcontains_from: (bytes, int, char) =&gt; bool;
+</pre><div class="info ">
+<code class="code">rcontains_from s stop c</code> tests if byte <code class="code">c</code> appears in <code class="code">s</code> before
+    position <code class="code">stop+1</code>.
+<p>
+
+    Raise <code class="code">Invalid_argument</code> if <code class="code">stop &lt; 0</code> or <code class="code">stop+1</code> is not a valid
+    position in <code class="code">s</code>.<br>
+</p></div>
+
+<pre id="VALuppercase"><span class="keyword">let</span> uppercase: bytes =&gt; bytes;
+</pre><div class="info ">
+Return a copy of the argument, with all lowercase letters
+    translated to uppercase, including accented letters of the ISO
+    Latin-1 (8859-1) character set.<br>
+</div>
+
+<pre id="VALlowercase"><span class="keyword">let</span> lowercase: bytes =&gt; bytes;
+</pre><div class="info ">
+Return a copy of the argument, with all uppercase letters
+    translated to lowercase, including accented letters of the ISO
+    Latin-1 (8859-1) character set.<br>
+</div>
+
+<pre id="VALcapitalize"><span class="keyword">let</span> capitalize: bytes =&gt; bytes;
+</pre><div class="info ">
+Return a copy of the argument, with the first byte set to
+    uppercase.<br>
+</div>
+
+<pre id="VALuncapitalize"><span class="keyword">let</span> uncapitalize: bytes =&gt; bytes;
+</pre><div class="info ">
+Return a copy of the argument, with the first byte set to
+    lowercase.<br>
+</div>
+
+<pre id="TYPEt"><span class="keyword">type</span> t = bytes;
+</pre>
+<div class="info ">
+An alias for the type of byte sequences.<br>
+</div>
+
+
+<pre id="VALcompare"><span class="keyword">let</span> compare: (t, t) =&gt; int;
+</pre><div class="info ">
+The comparison function for byte sequences, with the same
+    specification as <a href="Pervasives.html#VALcompare"><code class="code">Pervasives.compare</code></a>.  Along with the type <code class="code">t</code>,
+    this function <code class="code">compare</code> allows the module <code class="code">Bytes</code> to be passed as
+    argument to the functors <a href="Set.Make.html"><code class="code">Set.Make</code></a> and <a href="Map.Make.html"><code class="code">Map.Make</code></a>.<br>
+</div>
+</div></div><span><script src="/js/redirectBlog.js"></script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+                document.addEventListener('keyup', function(e) {
+                  if (e.target !== document.body) {
+                    return;
+                  }
+                  // keyCode for '/' (slash)
+                  if (e.keyCode === 191) {
+                    const search = document.getElementById('search_input_react');
+                    search && search.focus();
+                  }
+                });
+              </script><script>
+              var search = docsearch({
+                
+                apiKey: '966d1e412f67114a07dc0afe44b19b53',
+                indexName: 'reason',
+                inputSelector: '#search_input_react',
+                algoliaOptions: {"facetFilters":["lang:en"]}
+              });
+            </script></body></html>

@@ -1,0 +1,196 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Reason · Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems.</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Reason · Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io/"/><meta property="og:description" content="Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/icon_50.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io/blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io/blog/feed.xml" title="Reason Blog RSS Feed"/><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/en"><img class="logo" src="/img/dummy.svg" alt="Reason"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/docs/en/what-and-why" target="_self">Docs</a></li><li class=""><a href="/en/try" target="_self">Try</a></li><li class=""><a href="/api/index" target="_self">API</a></li><li class=""><a href="/docs/en/community" target="_self">Community</a></li><li class=""><a href="/blog/" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg" alt="Languages icon"/>English</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/ja/Filename">日本語</a></li><li><a href="/de/Filename">Deutsch</a></li><li><a href="/es-ES/Filename">Español</a></li><li><a href="/fr/Filename">Français</a></li><li><a href="/ko/Filename">한국어</a></li><li><a href="/pt-BR/Filename">Português (Brasil)</a></li><li><a href="/ru/Filename">Русский</a></li><li><a href="/uk/Filename">Українська</a></li><li><a href="/zh-CN/Filename">中文</a></li><li><a href="/zh-TW/Filename">繁體中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank" rel="noreferrer noopener">Help Translate</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/facebook/reason" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div><link rel="stylesheet" href="/css/main.css"><div class="ocamldoc">
+<div class="navbar"><a class="pre" href="Digest.html" title="Digest">Previous</a>
+&#xA0;<a class="up" href="index.html" title="Index">Up</a>
+&#xA0;<a class="post" href="Format.html" title="Format">Next</a>
+</div>
+<h1>Module <a href="type_Filename.html">Filename</a></h1>
+
+<pre><span class="keyword">module</span> Filename: sig .. end</pre><div class="info module top">
+Operations on file names.<br>
+</div>
+<hr width="100%">
+
+<pre id="VALcurrent_dir_name"><span class="keyword">let</span> current_dir_name: string;
+</pre><div class="info ">
+The conventional name for the current directory (e.g. <code class="code">.</code> in Unix).<br>
+</div>
+
+<pre id="VALparent_dir_name"><span class="keyword">let</span> parent_dir_name: string;
+</pre><div class="info ">
+The conventional name for the parent of the current directory
+   (e.g. <code class="code">..</code> in Unix).<br>
+</div>
+
+<pre id="VALdir_sep"><span class="keyword">let</span> dir_sep: string;
+</pre><div class="info ">
+The directory separator (e.g. <code class="code">/</code> in Unix).<br>
+<b>Since</b> 3.11.2<br>
+</div>
+
+<pre id="VALconcat"><span class="keyword">let</span> concat: (string, string) =&gt; string;
+</pre><div class="info ">
+<code class="code">concat dir file</code> returns a file name that designates file
+   <code class="code">file</code> in directory <code class="code">dir</code>.<br>
+</div>
+
+<pre id="VALis_relative"><span class="keyword">let</span> is_relative: string =&gt; bool;
+</pre><div class="info ">
+Return <code class="code">true</code> if the file name is relative to the current
+   directory, <code class="code">false</code> if it is absolute (i.e. in Unix, starts
+   with <code class="code">/</code>).<br>
+</div>
+
+<pre id="VALis_implicit"><span class="keyword">let</span> is_implicit: string =&gt; bool;
+</pre><div class="info ">
+Return <code class="code">true</code> if the file name is relative and does not start
+   with an explicit reference to the current directory (<code class="code">./</code> or
+   <code class="code">../</code> in Unix), <code class="code">false</code> if it starts with an explicit reference
+   to the root directory or the current directory.<br>
+</div>
+
+<pre id="VALcheck_suffix"><span class="keyword">let</span> check_suffix: (string, string) =&gt; bool;
+</pre><div class="info ">
+<code class="code">check_suffix name suff</code> returns <code class="code">true</code> if the filename <code class="code">name</code>
+   ends with the suffix <code class="code">suff</code>.<br>
+</div>
+
+<pre id="VALchop_suffix"><span class="keyword">let</span> chop_suffix: (string, string) =&gt; string;
+</pre><div class="info ">
+<code class="code">chop_suffix name suff</code> removes the suffix <code class="code">suff</code> from
+   the filename <code class="code">name</code>. The behavior is undefined if <code class="code">name</code> does not
+   end with the suffix <code class="code">suff</code>.<br>
+</div>
+
+<pre id="VALchop_extension"><span class="keyword">let</span> chop_extension: string =&gt; string;
+</pre><div class="info ">
+Return the given file name without its extension. The extension
+   is the shortest suffix starting with a period and not including
+   a directory separator, <code class="code">.xyz</code> for instance.
+<p>
+
+   Raise <code class="code">Invalid_argument</code> if the given name does not contain
+   an extension.<br>
+</p></div>
+
+<pre id="VALbasename"><span class="keyword">let</span> basename: string =&gt; string;
+</pre><div class="info ">
+Split a file name into directory name / base file name.
+   If <code class="code">name</code> is a valid file name, then <code class="code">concat (dirname name) (basename name)</code>
+   returns a file name which is equivalent to <code class="code">name</code>. Moreover,
+   after setting the current directory to <code class="code">dirname name</code> (with <a href="Sys.html#VALchdir"><code class="code">Sys.chdir</code></a>),
+   references to <code class="code">basename name</code> (which is a relative file name)
+   designate the same file as <code class="code">name</code> before the call to <a href="Sys.html#VALchdir"><code class="code">Sys.chdir</code></a>.
+<p>
+
+   This function conforms to the specification of POSIX.1-2008 for the
+   <code class="code">basename</code> utility.<br>
+</p></div>
+
+<pre id="VALdirname"><span class="keyword">let</span> dirname: string =&gt; string;
+</pre><div class="info ">
+See <a href="Filename.html#VALbasename"><code class="code">Filename.basename</code></a>.
+   This function conforms to the specification of POSIX.1-2008 for the
+   <code class="code">dirname</code> utility.<br>
+</div>
+
+<pre id="VALtemp_file"><span class="keyword">let</span> temp_file: (~temp_dir: string=?, string, string) =&gt; string;
+</pre><div class="info ">
+<code class="code">temp_file prefix suffix</code> returns the name of a
+   fresh temporary file in the temporary directory.
+   The base name of the temporary file is formed by concatenating
+   <code class="code">prefix</code>, then a suitably chosen integer number, then <code class="code">suffix</code>.
+   The optional argument <code class="code">temp_dir</code> indicates the temporary directory
+   to use, defaulting to the current result of <a href="Filename.html#VALget_temp_dir_name"><code class="code">Filename.get_temp_dir_name</code></a>.
+   The temporary file is created empty, with permissions <code class="code">0o600</code>
+   (readable and writable only by the file owner).  The file is
+   guaranteed to be different from any other file that existed when
+   <code class="code">temp_file</code> was called.
+   Raise <code class="code">Sys_error</code> if the file could not be created.<br>
+<b>Before 3.11.2 </b> no ?temp_dir optional argument<br>
+</div>
+
+<pre id="VALopen_temp_file"><span class="keyword">let</span> open_temp_file:
+  (~mode: list(Pervasives.open_flag)=?, ~temp_dir: string=?, string, string) =&gt;
+  (string, Pervasives.out_channel);
+</pre><div class="info ">
+Same as <a href="Filename.html#VALtemp_file"><code class="code">Filename.temp_file</code></a>, but returns both the name of a fresh
+   temporary file, and an output channel opened (atomically) on
+   this file.  This function is more secure than <code class="code">temp_file</code>: there
+   is no risk that the temporary file will be modified (e.g. replaced
+   by a symbolic link) before the program opens it.  The optional argument
+   <code class="code">mode</code> is a list of additional flags to control the opening of the file.
+   It can contain one or several of <code class="code">Open_append</code>, <code class="code">Open_binary</code>,
+   and <code class="code">Open_text</code>.  The default is <code class="code">[Open_text]</code> (open in text mode).
+   Raise <code class="code">Sys_error</code> if the file could not be opened.<br>
+<b>Before 3.11.2 </b> no ?temp_dir optional argument<br>
+</div>
+
+<pre id="VALget_temp_dir_name"><span class="keyword">let</span> get_temp_dir_name: unit =&gt; string;
+</pre><div class="info ">
+The name of the temporary directory:
+    Under Unix, the value of the <code class="code">TMPDIR</code> environment variable, or &quot;/tmp&quot;
+    if the variable is not set.
+    Under Windows, the value of the <code class="code">TEMP</code> environment variable, or &quot;.&quot;
+    if the variable is not set.
+    The temporary directory can be changed with <a href="Filename.html#VALset_temp_dir_name"><code class="code">Filename.set_temp_dir_name</code></a>.<br>
+<b>Since</b> 4.00.0<br>
+</div>
+
+<pre id="VALset_temp_dir_name"><span class="keyword">let</span> set_temp_dir_name: string =&gt; unit;
+</pre><div class="info ">
+Change the temporary directory returned by <a href="Filename.html#VALget_temp_dir_name"><code class="code">Filename.get_temp_dir_name</code></a>
+    and used by <a href="Filename.html#VALtemp_file"><code class="code">Filename.temp_file</code></a> and <a href="Filename.html#VALopen_temp_file"><code class="code">Filename.open_temp_file</code></a>.<br>
+<b>Since</b> 4.00.0<br>
+</div>
+
+<pre id="VALtemp_dir_name"><span class="keyword">let</span> temp_dir_name: string;
+</pre><div class="info ">
+<span class="warning">Deprecated.</span>You should use <a href="Filename.html#VALget_temp_dir_name"><code class="code">Filename.get_temp_dir_name</code></a> instead.<br>
+The name of the initial temporary directory:
+    Under Unix, the value of the <code class="code">TMPDIR</code> environment variable, or &quot;/tmp&quot;
+    if the variable is not set.
+    Under Windows, the value of the <code class="code">TEMP</code> environment variable, or &quot;.&quot;
+    if the variable is not set.<br>
+<b>Since</b> 3.09.1<br>
+</div>
+
+<pre id="VALquote"><span class="keyword">let</span> quote: string =&gt; string;
+</pre><div class="info ">
+Return a quoted version of a file name, suitable for use as
+    one argument in a command line, escaping all meta-characters.
+    Warning: under Windows, the output is only suitable for use
+    with programs that follow the standard Windows quoting
+    conventions.<br>
+</div>
+</div></div><span><script src="/js/redirectBlog.js"></script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+                document.addEventListener('keyup', function(e) {
+                  if (e.target !== document.body) {
+                    return;
+                  }
+                  // keyCode for '/' (slash)
+                  if (e.keyCode === 191) {
+                    const search = document.getElementById('search_input_react');
+                    search && search.focus();
+                  }
+                });
+              </script><script>
+              var search = docsearch({
+                
+                apiKey: '966d1e412f67114a07dc0afe44b19b53',
+                indexName: 'reason',
+                inputSelector: '#search_input_react',
+                algoliaOptions: {"facetFilters":["lang:en"]}
+              });
+            </script></body></html>

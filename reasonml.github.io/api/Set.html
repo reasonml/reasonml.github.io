@@ -1,0 +1,87 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Reason · Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems.</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Reason · Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io/"/><meta property="og:description" content="Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/icon_50.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io/blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io/blog/feed.xml" title="Reason Blog RSS Feed"/><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/en"><img class="logo" src="/img/dummy.svg" alt="Reason"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/docs/en/what-and-why" target="_self">Docs</a></li><li class=""><a href="/en/try" target="_self">Try</a></li><li class=""><a href="/api/index" target="_self">API</a></li><li class=""><a href="/docs/en/community" target="_self">Community</a></li><li class=""><a href="/blog/" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg" alt="Languages icon"/>English</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/ja/Set">日本語</a></li><li><a href="/de/Set">Deutsch</a></li><li><a href="/es-ES/Set">Español</a></li><li><a href="/fr/Set">Français</a></li><li><a href="/ko/Set">한국어</a></li><li><a href="/pt-BR/Set">Português (Brasil)</a></li><li><a href="/ru/Set">Русский</a></li><li><a href="/uk/Set">Українська</a></li><li><a href="/zh-CN/Set">中文</a></li><li><a href="/zh-TW/Set">繁體中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank" rel="noreferrer noopener">Help Translate</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/facebook/reason" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div><link rel="stylesheet" href="/css/main.css"><div class="ocamldoc">
+<div class="navbar"><a class="pre" href="Scanf.html" title="Scanf">Previous</a>
+&#xA0;<a class="up" href="index.html" title="Index">Up</a>
+&#xA0;<a class="post" href="Sort.html" title="Sort">Next</a>
+</div>
+<h1>Module <a href="type_Set.html">Set</a></h1>
+
+<pre><span class="keyword">module</span> Set: sig .. end</pre><div class="info module top">
+Sets over ordered types.
+<p>
+
+   This module implements the set data structure, given a total ordering
+   function over the set elements. All operations over sets
+   are purely applicative (no side-effects).
+   The implementation uses balanced binary trees, and is therefore
+   reasonably efficient: insertion and membership take time
+   logarithmic in the size of the set, for instance.
+</p><p>
+
+   The <code class="code">Make</code> functor constructs implementations for any type, given a
+   <code class="code">compare</code> function.
+   For instance:
+   </p><pre class="codepre">     module IntPairs =
+       struct
+         type t = int * int
+         let compare (x0,y0) (x1,y1) =
+           match Pervasives.compare x0 x1 with
+               0 -&gt; Pervasives.compare y0 y1
+             | c -&gt; c
+       end
+
+     module PairsSet = Set.Make(IntPairs)
+
+     let m = PairsSet.(empty |&gt; add (2,3) |&gt; add (5,7) |&gt; add (11,13))
+   </pre>
+<p>
+
+   This creates a new module <code class="code">PairsSet</code>, with a new type <code class="code">PairsSet.t</code>
+   of sets of <code class="code">int * int</code>.<br>
+</p></div>
+<hr width="100%">
+
+<pre><span class="keyword">module</span> type OrderedType = sig .. end</pre><div class="info">
+Input signature of the functor <a href="Set.Make.html"><code class="code">Set.Make</code></a>.
+</div>
+
+<pre><span class="keyword">module</span> type S = sig .. end</pre><div class="info">
+Output signature of the functor <a href="Set.Make.html"><code class="code">Set.Make</code></a>.
+</div>
+
+<pre><span class="keyword">module</span> Make: (Ord: OrderedType) =&gt; S with type elt = Ord.t;
+</pre><div class="info">
+Functor building an implementation of the set structure
+   given a totally ordered type.
+</div>
+</div></div><span><script src="/js/redirectBlog.js"></script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+                document.addEventListener('keyup', function(e) {
+                  if (e.target !== document.body) {
+                    return;
+                  }
+                  // keyCode for '/' (slash)
+                  if (e.keyCode === 191) {
+                    const search = document.getElementById('search_input_react');
+                    search && search.focus();
+                  }
+                });
+              </script><script>
+              var search = docsearch({
+                
+                apiKey: '966d1e412f67114a07dc0afe44b19b53',
+                indexName: 'reason',
+                inputSelector: '#search_input_react',
+                algoliaOptions: {"facetFilters":["lang:en"]}
+              });
+            </script></body></html>

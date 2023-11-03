@@ -1,0 +1,342 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Reason · Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems.</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Reason · Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io/"/><meta property="og:description" content="Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/icon_50.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io/blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io/blog/feed.xml" title="Reason Blog RSS Feed"/><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/en"><img class="logo" src="/img/dummy.svg" alt="Reason"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/docs/en/what-and-why" target="_self">Docs</a></li><li class=""><a href="/en/try" target="_self">Try</a></li><li class=""><a href="/api/index" target="_self">API</a></li><li class=""><a href="/docs/en/community" target="_self">Community</a></li><li class=""><a href="/blog/" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg" alt="Languages icon"/>English</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/ja/String">日本語</a></li><li><a href="/de/String">Deutsch</a></li><li><a href="/es-ES/String">Español</a></li><li><a href="/fr/String">Français</a></li><li><a href="/ko/String">한국어</a></li><li><a href="/pt-BR/String">Português (Brasil)</a></li><li><a href="/ru/String">Русский</a></li><li><a href="/uk/String">Українська</a></li><li><a href="/zh-CN/String">中文</a></li><li><a href="/zh-TW/String">繁體中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank" rel="noreferrer noopener">Help Translate</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/facebook/reason" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div><link rel="stylesheet" href="/css/main.css"><div class="ocamldoc">
+<div class="navbar"><a class="pre" href="Stream.html" title="Stream">Previous</a>
+&#xA0;<a class="up" href="index.html" title="Index">Up</a>
+&#xA0;<a class="post" href="StringLabels.html" title="StringLabels">Next</a>
+</div>
+<h1>Module <a href="type_String.html">String</a></h1>
+
+<pre><span class="keyword">module</span> String: sig .. end</pre><div class="info module top">
+String operations.
+<p>
+
+  A string is an immutable data structure that contains a
+  fixed-length sequence of (single-byte) characters. Each character
+  can be accessed in constant time through its index.
+</p><p>
+
+  Given a string <code class="code">s</code> of length <code class="code">l</code>, we can access each of the <code class="code">l</code>
+  characters of <code class="code">s</code> via its index in the sequence. Indexes start at
+  <code class="code">0</code>, and we will call an index valid in <code class="code">s</code> if it falls within the
+  range <code class="code">[0...l-1]</code> (inclusive). A position is the point between two
+  characters or at the beginning or end of the string.  We call a
+  position valid in <code class="code">s</code> if it falls within the range <code class="code">[0...l]</code>
+  (inclusive). Note that the character at index <code class="code">n</code> is between
+  positions <code class="code">n</code> and <code class="code">n+1</code>.
+</p><p>
+
+  Two parameters <code class="code">start</code> and <code class="code">len</code> are said to designate a valid
+  substring of <code class="code">s</code> if <code class="code">len &gt;= 0</code> and <code class="code">start</code> and <code class="code">start+len</code> are
+  valid positions in <code class="code">s</code>.
+</p><p>
+
+  OCaml strings used to be modifiable in place, for instance via the
+  <a href="String.html#VALset"><code class="code">String.set</code></a> and <a href="String.html#VALblit"><code class="code">String.blit</code></a> functions described below. This
+  usage is deprecated and only possible when the compiler is put in
+  &quot;unsafe-string&quot; mode by giving the <code class="code">-unsafe-string</code> command-line
+  option (which is currently the default for reasons of backward
+  compatibility). This is done by making the types <code class="code">string</code> and
+  <code class="code">bytes</code> (see module <a href="Bytes.html"><code class="code">Bytes</code></a>) interchangeable so that functions
+  expecting byte sequences can also accept strings as arguments and
+  modify them.
+</p><p>
+
+  All new code should avoid this feature and be compiled with the
+  <code class="code">-safe-string</code> command-line option to enforce the separation between
+  the types <code class="code">string</code> and <code class="code">bytes</code>.<br>
+</p></div>
+<hr width="100%">
+
+<pre id="VALlength"><span class="keyword">let</span> length: string =&gt; int;
+</pre><div class="info ">
+Return the length (number of characters) of the given string.<br>
+</div>
+
+<pre id="VALget"><span class="keyword">let</span> get: (string, int) =&gt; char;
+</pre><div class="info ">
+<code class="code">String.get s n</code> returns the character at index <code class="code">n</code> in string <code class="code">s</code>.
+   You can also write <code class="code">s.[n]</code> instead of <code class="code">String.get s n</code>.
+<p>
+
+   Raise <code class="code">Invalid_argument</code> if <code class="code">n</code> not a valid index in <code class="code">s</code>.<br>
+</p></div>
+
+<pre id="VALset"><span class="keyword">let</span> set: (bytes, int, char) =&gt; unit;
+</pre><div class="info ">
+<span class="warning">Deprecated.</span>This is a deprecated alias of <a href="Bytes.html#VALset"><code class="code">Bytes.set</code></a>.<code class="code">
+</code><br>
+<code class="code">String.set s n c</code> modifies byte sequence <code class="code">s</code> in place,
+   replacing the byte at index <code class="code">n</code> with <code class="code">c</code>.
+   You can also write <code class="code">s.[n] &lt;- c</code> instead of <code class="code">String.set s n c</code>.
+<p>
+
+   Raise <code class="code">Invalid_argument</code> if <code class="code">n</code> is not a valid index in <code class="code">s</code>.<br>
+</p></div>
+
+<pre id="VALcreate"><span class="keyword">let</span> create: int =&gt; bytes;
+</pre><div class="info ">
+<span class="warning">Deprecated.</span>This is a deprecated alias of <a href="Bytes.html#VALcreate"><code class="code">Bytes.create</code></a>.<code class="code">
+</code><br>
+<code class="code">String.create n</code> returns a fresh byte sequence of length <code class="code">n</code>.
+   The sequence is uninitialized and contains arbitrary bytes.
+<p>
+
+   Raise <code class="code">Invalid_argument</code> if <code class="code">n &lt; 0</code> or <code class="code">n &gt; </code><a href="Sys.html#VALmax_string_length"><code class="code">Sys.max_string_length</code></a>.<br>
+</p></div>
+
+<pre id="VALmake"><span class="keyword">let</span> make: (int, char) =&gt; string;
+</pre><div class="info ">
+<code class="code">String.make n c</code> returns a fresh string of length <code class="code">n</code>,
+   filled with the character <code class="code">c</code>.
+<p>
+
+   Raise <code class="code">Invalid_argument</code> if <code class="code">n &lt; 0</code> or <code class="code">n &gt; </code><a href="Sys.html#VALmax_string_length"><code class="code">Sys.max_string_length</code></a>.<br>
+</p></div>
+
+<pre id="VALinit"><span class="keyword">let</span> init: (int, int =&gt; char) =&gt; string;
+</pre><div class="info ">
+<code class="code">String.init n f</code> returns a string of length <code class="code">n</code>, with character
+    <code class="code">i</code> initialized to the result of <code class="code">f i</code> (called in increasing
+    index order).
+<p>
+
+    Raise <code class="code">Invalid_argument</code> if <code class="code">n &lt; 0</code> or <code class="code">n &gt; </code><a href="Sys.html#VALmax_string_length"><code class="code">Sys.max_string_length</code></a>.<br>
+<b>Since</b> 4.02.0<br>
+</p></div>
+
+<pre id="VALcopy"><span class="keyword">let</span> copy: string =&gt; string;
+</pre><div class="info ">
+<span class="warning">Deprecated.</span>Because strings are immutable, it doesn&apos;t make much
+    sense to make identical copies of them.<br>
+Return a copy of the given string.<br>
+</div>
+
+<pre id="VALsub"><span class="keyword">let</span> sub: (string, int, int) =&gt; string;
+</pre><div class="info ">
+<code class="code">String.sub s start len</code> returns a fresh string of length <code class="code">len</code>,
+   containing the substring of <code class="code">s</code> that starts at position <code class="code">start</code> and
+   has length <code class="code">len</code>.
+<p>
+
+   Raise <code class="code">Invalid_argument</code> if <code class="code">start</code> and <code class="code">len</code> do not
+   designate a valid substring of <code class="code">s</code>.<br>
+</p></div>
+
+<pre id="VALfill"><span class="keyword">let</span> fill: (bytes, int, int, char) =&gt; unit;
+</pre><div class="info ">
+<span class="warning">Deprecated.</span>This is a deprecated alias of <a href="Bytes.html#VALfill"><code class="code">Bytes.fill</code></a>.<code class="code">
+</code><br>
+<code class="code">String.fill s start len c</code> modifies byte sequence <code class="code">s</code> in place,
+   replacing <code class="code">len</code> bytes with <code class="code">c</code>, starting at <code class="code">start</code>.
+<p>
+
+   Raise <code class="code">Invalid_argument</code> if <code class="code">start</code> and <code class="code">len</code> do not
+   designate a valid range of <code class="code">s</code>.<br>
+</p></div>
+
+<pre id="VALblit"><span class="keyword">let</span> blit: (string, int, bytes, int, int) =&gt; unit;
+</pre><div class="info ">
+Same as <a href="Bytes.html#VALblit_string"><code class="code">Bytes.blit_string</code></a>.<br>
+</div>
+
+<pre id="VALconcat"><span class="keyword">let</span> concat: (string, list(string)) =&gt; string;
+</pre><div class="info ">
+<code class="code">String.concat sep sl</code> concatenates the list of strings <code class="code">sl</code>,
+    inserting the separator string <code class="code">sep</code> between each.
+<p>
+
+    Raise <code class="code">Invalid_argument</code> if the result is longer than
+    <a href="Sys.html#VALmax_string_length"><code class="code">Sys.max_string_length</code></a> bytes.<br>
+</p></div>
+
+<pre id="VALiter"><span class="keyword">let</span> iter: (char =&gt; unit, string) =&gt; unit;
+</pre><div class="info ">
+<code class="code">String.iter f s</code> applies function <code class="code">f</code> in turn to all
+   the characters of <code class="code">s</code>.  It is equivalent to
+   <code class="code">f s.[0]; f s.[1]; ...; f s.[String.length s - 1]; ()</code>.<br>
+</div>
+
+<pre id="VALiteri"><span class="keyword">let</span> iteri: ((int, char) =&gt; unit, string) =&gt; unit;
+</pre><div class="info ">
+Same as <a href="String.html#VALiter"><code class="code">String.iter</code></a>, but the
+   function is applied to the index of the element as first argument
+   (counting from 0), and the character itself as second argument.<br>
+<b>Since</b> 4.00.0<br>
+</div>
+
+<pre id="VALmap"><span class="keyword">let</span> map: (char =&gt; char, string) =&gt; string;
+</pre><div class="info ">
+<code class="code">String.map f s</code> applies function <code class="code">f</code> in turn to all the
+    characters of <code class="code">s</code> (in increasing index order) and stores the
+    results in a new string that is returned.<br>
+<b>Since</b> 4.00.0<br>
+</div>
+
+<pre id="VALmapi"><span class="keyword">let</span> mapi: ((int, char) =&gt; char, string) =&gt; string;
+</pre><div class="info ">
+<code class="code">String.mapi f s</code> calls <code class="code">f</code> with each character of <code class="code">s</code> and its
+    index (in increasing index order) and stores the results in a new
+    string that is returned.<br>
+<b>Since</b> 4.02.0<br>
+</div>
+
+<pre id="VALtrim"><span class="keyword">let</span> trim: string =&gt; string;
+</pre><div class="info ">
+Return a copy of the argument, without leading and trailing
+   whitespace.  The characters regarded as whitespace are: <code class="code">&apos; &apos;</code>,
+   <code class="code">&apos;\012&apos;</code>, <code class="code">&apos;\n&apos;</code>, <code class="code">&apos;\r&apos;</code>, and <code class="code">&apos;\t&apos;</code>.  If there is neither leading nor
+   trailing whitespace character in the argument, return the original
+   string itself, not a copy.<br>
+<b>Since</b> 4.00.0<br>
+</div>
+
+<pre id="VALescaped"><span class="keyword">let</span> escaped: string =&gt; string;
+</pre><div class="info ">
+Return a copy of the argument, with special characters
+   represented by escape sequences, following the lexical
+   conventions of OCaml.  If there is no special
+   character in the argument, return the original string itself,
+   not a copy. Its inverse function is Scanf.unescaped.
+<p>
+
+   Raise <code class="code">Invalid_argument</code> if the result is longer than
+   <a href="Sys.html#VALmax_string_length"><code class="code">Sys.max_string_length</code></a> bytes.<br>
+</p></div>
+
+<pre id="VALindex"><span class="keyword">let</span> index: (string, char) =&gt; int;
+</pre><div class="info ">
+<code class="code">String.index s c</code> returns the index of the first
+   occurrence of character <code class="code">c</code> in string <code class="code">s</code>.
+<p>
+
+   Raise <code class="code">Not_found</code> if <code class="code">c</code> does not occur in <code class="code">s</code>.<br>
+</p></div>
+
+<pre id="VALrindex"><span class="keyword">let</span> rindex: (string, char) =&gt; int;
+</pre><div class="info ">
+<code class="code">String.rindex s c</code> returns the index of the last
+   occurrence of character <code class="code">c</code> in string <code class="code">s</code>.
+<p>
+
+   Raise <code class="code">Not_found</code> if <code class="code">c</code> does not occur in <code class="code">s</code>.<br>
+</p></div>
+
+<pre id="VALindex_from"><span class="keyword">let</span> index_from: (string, int, char) =&gt; int;
+</pre><div class="info ">
+<code class="code">String.index_from s i c</code> returns the index of the
+   first occurrence of character <code class="code">c</code> in string <code class="code">s</code> after position <code class="code">i</code>.
+   <code class="code">String.index s c</code> is equivalent to <code class="code">String.index_from s 0 c</code>.
+<p>
+
+   Raise <code class="code">Invalid_argument</code> if <code class="code">i</code> is not a valid position in <code class="code">s</code>.
+   Raise <code class="code">Not_found</code> if <code class="code">c</code> does not occur in <code class="code">s</code> after position <code class="code">i</code>.<br>
+</p></div>
+
+<pre id="VALrindex_from"><span class="keyword">let</span> rindex_from: (string, int, char) =&gt; int;
+</pre><div class="info ">
+<code class="code">String.rindex_from s i c</code> returns the index of the
+   last occurrence of character <code class="code">c</code> in string <code class="code">s</code> before position <code class="code">i+1</code>.
+   <code class="code">String.rindex s c</code> is equivalent to
+   <code class="code">String.rindex_from s (String.length s - 1) c</code>.
+<p>
+
+   Raise <code class="code">Invalid_argument</code> if <code class="code">i+1</code> is not a valid position in <code class="code">s</code>.
+   Raise <code class="code">Not_found</code> if <code class="code">c</code> does not occur in <code class="code">s</code> before position <code class="code">i+1</code>.<br>
+</p></div>
+
+<pre id="VALcontains"><span class="keyword">let</span> contains: (string, char) =&gt; bool;
+</pre><div class="info ">
+<code class="code">String.contains s c</code> tests if character <code class="code">c</code>
+   appears in the string <code class="code">s</code>.<br>
+</div>
+
+<pre id="VALcontains_from"><span class="keyword">let</span> contains_from: (string, int, char) =&gt; bool;
+</pre><div class="info ">
+<code class="code">String.contains_from s start c</code> tests if character <code class="code">c</code>
+   appears in <code class="code">s</code> after position <code class="code">start</code>.
+   <code class="code">String.contains s c</code> is equivalent to
+   <code class="code">String.contains_from s 0 c</code>.
+<p>
+
+   Raise <code class="code">Invalid_argument</code> if <code class="code">start</code> is not a valid position in <code class="code">s</code>.<br>
+</p></div>
+
+<pre id="VALrcontains_from"><span class="keyword">let</span> rcontains_from: (string, int, char) =&gt; bool;
+</pre><div class="info ">
+<code class="code">String.rcontains_from s stop c</code> tests if character <code class="code">c</code>
+   appears in <code class="code">s</code> before position <code class="code">stop+1</code>.
+<p>
+
+   Raise <code class="code">Invalid_argument</code> if <code class="code">stop &lt; 0</code> or <code class="code">stop+1</code> is not a valid
+   position in <code class="code">s</code>.<br>
+</p></div>
+
+<pre id="VALuppercase"><span class="keyword">let</span> uppercase: string =&gt; string;
+</pre><div class="info ">
+Return a copy of the argument, with all lowercase letters
+   translated to uppercase, including accented letters of the ISO
+   Latin-1 (8859-1) character set.<br>
+</div>
+
+<pre id="VALlowercase"><span class="keyword">let</span> lowercase: string =&gt; string;
+</pre><div class="info ">
+Return a copy of the argument, with all uppercase letters
+   translated to lowercase, including accented letters of the ISO
+   Latin-1 (8859-1) character set.<br>
+</div>
+
+<pre id="VALcapitalize"><span class="keyword">let</span> capitalize: string =&gt; string;
+</pre><div class="info ">
+Return a copy of the argument, with the first character set to uppercase.<br>
+</div>
+
+<pre id="VALuncapitalize"><span class="keyword">let</span> uncapitalize: string =&gt; string;
+</pre><div class="info ">
+Return a copy of the argument, with the first character set to lowercase.<br>
+</div>
+
+<pre id="TYPEt"><span class="keyword">type</span> t = string;
+</pre>
+<div class="info ">
+An alias for the type of strings.<br>
+</div>
+
+
+<pre id="VALcompare"><span class="keyword">let</span> compare: (t, t) =&gt; int;
+</pre><div class="info ">
+The comparison function for strings, with the same specification as
+    <a href="Pervasives.html#VALcompare"><code class="code">Pervasives.compare</code></a>.  Along with the type <code class="code">t</code>, this function <code class="code">compare</code>
+    allows the module <code class="code">String</code> to be passed as argument to the functors
+    <a href="Set.Make.html"><code class="code">Set.Make</code></a> and <a href="Map.Make.html"><code class="code">Map.Make</code></a>.<br>
+</div>
+</div></div><span><script src="/js/redirectBlog.js"></script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+                document.addEventListener('keyup', function(e) {
+                  if (e.target !== document.body) {
+                    return;
+                  }
+                  // keyCode for '/' (slash)
+                  if (e.keyCode === 191) {
+                    const search = document.getElementById('search_input_react');
+                    search && search.focus();
+                  }
+                });
+              </script><script>
+              var search = docsearch({
+                
+                apiKey: '966d1e412f67114a07dc0afe44b19b53',
+                indexName: 'reason',
+                inputSelector: '#search_input_react',
+                algoliaOptions: {"facetFilters":["lang:en"]}
+              });
+            </script></body></html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Melange · Reason</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="ne of the best ways to use Reason is by compiling it to JavaScript and running it in a web browser or on any other environment with a JavaScript runtime, such as [Node.js](https://nodejs.org), [Deno](https://deno.com), [Cloudflare Workers](https://workers.cloudflare.com)."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Melange · Reason"/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io/"/><meta property="og:description" content="ne of the best ways to use Reason is by compiling it to JavaScript and running it in a web browser or on any other environment with a JavaScript runtime, such as [Node.js](https://nodejs.org), [Deno](https://deno.com), [Cloudflare Workers](https://workers.cloudflare.com)."/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/icon_50.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io/blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io/blog/feed.xml" title="Reason Blog RSS Feed"/><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/en"><img class="logo" src="/img/dummy.svg" alt="Reason"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/en/what-and-why" target="_self">Docs</a></li><li class=""><a href="/en/try" target="_self">Try</a></li><li class=""><a href="/api/index" target="_self">API</a></li><li class=""><a href="/docs/en/community" target="_self">Community</a></li><li class=""><a href="/blog/" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg" alt="Languages icon"/>English</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/docs/ja/compiling-to-js-with-melange">日本語</a></li><li><a href="/docs/de/compiling-to-js-with-melange">Deutsch</a></li><li><a href="/docs/es-ES/compiling-to-js-with-melange">Español</a></li><li><a href="/docs/fr/compiling-to-js-with-melange">Français</a></li><li><a href="/docs/ko/compiling-to-js-with-melange">한국어</a></li><li><a href="/docs/pt-BR/compiling-to-js-with-melange">Português (Brasil)</a></li><li><a href="/docs/ru/compiling-to-js-with-melange">Русский</a></li><li><a href="/docs/uk/compiling-to-js-with-melange">Українська</a></li><li><a href="/docs/zh-CN/compiling-to-js-with-melange">中文</a></li><li><a href="/docs/zh-TW/compiling-to-js-with-melange">繁體中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank" rel="noreferrer noopener">Help Translate</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/facebook/reason" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>JavaScript</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Intro</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/en/what-and-why">What &amp; Why</a></li><li class="navListItem"><a class="navItem" href="/docs/en/getting-started">Getting started</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Setup</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/en/installation">Installation</a></li><li class="navListItem"><a class="navItem" href="/docs/en/editor-plugins">Editor Plugins</a></li><li class="navListItem"><a class="navItem" href="/docs/en/refmt">Format (refmt)</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Language Basics</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/en/overview">Overview</a></li><li class="navListItem"><a class="navItem" href="/docs/en/let-binding">Let Bindings</a></li><li class="navListItem"><a class="navItem" href="/docs/en/primitives">Primitives</a></li><li class="navListItem"><a class="navItem" href="/docs/en/basic-structures">Basic Structures</a></li><li class="navListItem"><a class="navItem" href="/docs/en/type">Types</a></li><li class="navListItem"><a class="navItem" href="/docs/en/record">Records</a></li><li class="navListItem"><a class="navItem" href="/docs/en/variant">Variants</a></li><li class="navListItem"><a class="navItem" href="/docs/en/option">Options and nullability</a></li><li class="navListItem"><a class="navItem" href="/docs/en/function">Functions</a></li><li class="navListItem"><a class="navItem" href="/docs/en/recursion">Recursion</a></li><li class="navListItem"><a class="navItem" href="/docs/en/destructuring">Destructuring</a></li><li class="navListItem"><a class="navItem" href="/docs/en/pattern-matching">Pattern Matching</a></li><li class="navListItem"><a class="navItem" href="/docs/en/mutable-bindings">Mutable Bindings</a></li><li class="navListItem"><a class="navItem" href="/docs/en/loops">Loops</a></li><li class="navListItem"><a class="navItem" href="/docs/en/module">Modules</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Advanced Features</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/en/jsx">JSX</a></li><li class="navListItem"><a class="navItem" href="/docs/en/external">External</a></li><li class="navListItem"><a class="navItem" href="/docs/en/exception">Exception</a></li><li class="navListItem"><a class="navItem" href="/docs/en/object">Object</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">JavaScript</h3><ul class=""><li class="navListItem navListItemActive"><a class="navItem" href="/docs/en/compiling-to-js-with-melange">Melange</a></li><li class="navListItem"><a class="navItem" href="/docs/en/interop">Interop</a></li><li class="navListItem"><a class="navItem" href="/docs/en/syntax-cheatsheet">Syntax Cheatsheet</a></li><li class="navListItem"><a class="navItem" href="/docs/en/pipe-first">Pipe First</a></li><li class="navListItem"><a class="navItem" href="/docs/en/promise">Promise</a></li><li class="navListItem"><a class="navItem" href="/docs/en/libraries">Libraries</a></li><li class="navListItem"><a class="navItem" href="/docs/en/converting-from-js">Converting from JS</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Extra</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/en/faq">Frequently Asked Questions</a></li><li class="navListItem"><a class="navItem" href="/docs/en/extra-goodies">Extra Goodies</a></li><li class="navListItem"><a class="navItem" href="/docs/en/rtop">REPL (rtop)</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/reasonml/reasonml.github.io/tree/source/docs/compiling-to-js-with-melange.md" target="_blank" rel="noreferrer noopener">Edit</a><h1 class="postHeaderTitle">Melange</h1></header><article><div><span><p>ne of the best ways to use Reason is by compiling it to JavaScript and running it in a web browser or on any other environment with a JavaScript runtime, such as <a href="https://nodejs.org">Node.js</a>, <a href="https://deno.com">Deno</a>, <a href="https://workers.cloudflare.com">Cloudflare Workers</a>.</p>
+<p>Reason source code can be compiled to JavaScript through our partner project, <a href="https://melange.re">Melange</a>.</p>
+<h2><a class="anchor" aria-hidden="true" id="whats-melange"></a><a href="#whats-melange" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>What's Melange?</h2>
+<p><a href="https://melange.re">Melange</a> is a backend for the OCaml compiler that emits readable, modular and highly performant JavaScript code.</p>
+<blockquote>
+<p>Melange strives to provide the best integration with both the OCaml and JavaScript ecosystems</p>
+</blockquote>
+<p>If you have experience with JavaScript and the ecosystem we recommend Melange, over other alternatives such as Js_of_ocaml.</p>
+<h2><a class="anchor" aria-hidden="true" id="getting-started"></a><a href="#getting-started" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Getting started</h2>
+<p>The install guide on the Melange website shares a lot of common steps with <a href="/docs/en/installation">our installation</a>, check it out: <a href="https://melange.re/v2.0.0/getting-started">melange.re/v2.0.0/getting-started</a>.</p>
+<p>Since <a href="https://buttondown.email/anmonteiro/archive/melange-hits-v10/">Melange v1</a>, Melange integrates with dune. This means that you can use dune to compile your Reason code to JavaScript and also to bytecode or native.</p>
+<h2><a class="anchor" aria-hidden="true" id="template"></a><a href="#template" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Template</h2>
+<p>To get started with Reason and Melange, there's an official template:</p>
+<pre><code class="hljs css language-bash">git <span class="hljs-built_in">clone</span> https://github.com/melange-re/melange-opam-template
+<span class="hljs-built_in">cd</span> melange-opam-template
+
+<span class="hljs-comment"># Create opam switch and install dependencies</span>
+make init
+
+<span class="hljs-comment"># In separate terminals:</span>
+
+make watch <span class="hljs-comment"># Watch for reason file changes and recompile</span>
+make serve <span class="hljs-comment"># Run the development server</span>
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="manual"></a><a href="#manual" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Manual</h2>
+<p>If you prefer to do all the steps manually, here is a step by step. Assuming you have an opam switch with OCaml 5.1.0. If not, check the <a href="/docs/en/installation#setup-a-new-environment-manually">installation</a> guide.</p>
+<h4><a class="anchor" aria-hidden="true" id="install-melange"></a><a href="#install-melange" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Install melange</h4>
+<pre><code class="hljs css language-bash">opam install melange
+</code></pre>
+<h4><a class="anchor" aria-hidden="true" id="create-dune-project"></a><a href="#create-dune-project" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Create dune-project</h4>
+<p>If you don't have a <code>dune-project</code> file, create one with the following content:</p>
+<pre><code class="hljs css language-lisp"><span class="hljs-comment">; dune-project</span>
+(<span class="hljs-name">dune</span> lang <span class="hljs-number">3.8</span>)
+(<span class="hljs-name">use</span> melange <span class="hljs-number">0.1</span>) <span class="hljs-comment">; Here we enable melange to work with dune</span>
+</code></pre>
+<h4><a class="anchor" aria-hidden="true" id="emit-javascript"></a><a href="#emit-javascript" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Emit JavaScript</h4>
+<p>In your <code>dune</code> file, add a <code>melange.emit</code> stanza to emit JavaScript.</p>
+<p>The <code>melange.emit</code> stanza tells dune to generate JavaScript files from a set of libraries and modules. In-depth documentation about this stanza can be found in the <a href="https://melange.re/v2.0.0/build-system/#entry-points-with-melangeemit">build-system on the Melange documentation</a>.</p>
+<pre><code class="hljs css language-lisp"><span class="hljs-comment">; dune</span>
+(<span class="hljs-name">melange</span>.emit
+ (<span class="hljs-name">target</span> app))
+</code></pre>
+<h4><a class="anchor" aria-hidden="true" id="libraries"></a><a href="#libraries" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Libraries</h4>
+<p><code>dune</code> allows to define libraries by creating a <code>dune</code> file inside a folder and adding a <a href="https://dune.readthedocs.io/en/stable/concepts/package-spec.html#libraries"><code>library</code> stanza</a>.</p>
+<p>To compile a library with melange, add the <code>(modes melange)</code> stanza to the library <code>dune</code> file.</p>
+<pre><code class="hljs css language-diff">(library
+  (name ui_library)
+<span class="hljs-addition">+ (modes melange)</span>
+)
+</code></pre>
+<p>Once you have a melange library, you can add it to the <code>melange.emit</code> stanza:</p>
+<pre><code class="hljs css language-lisp"><span class="hljs-comment">; dune</span>
+(<span class="hljs-name">melange</span>.emit
+ (<span class="hljs-name">target</span> app)
+ (<span class="hljs-name">libraries</span> ui_library))
+</code></pre>
+<h4><a class="anchor" aria-hidden="true" id="compile"></a><a href="#compile" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Compile</h4>
+<p>Each time you compile the project, dune will emit JavaScript files under <code>_build/default/app/</code> (<code>app</code> comes from the <code>(target app)</code> defined under <code>melange.emit</code>).</p>
+<p>To compile the project, run:</p>
+<pre><code class="hljs css language-bash">dune build <span class="hljs-comment"># Compile the entire project</span>
+<span class="hljs-comment"># or compile the melange alias (only melange.emit stanzas)</span>
+dune build @melange
+</code></pre>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/en/object"><span class="arrow-prev">← </span><span>Object</span></a><a class="docs-next button" href="/docs/en/interop"><span>Interop</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#whats-melange">What's Melange?</a></li><li><a href="#getting-started">Getting started</a></li><li><a href="#template">Template</a></li><li><a href="#manual">Manual</a></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+                document.addEventListener('keyup', function(e) {
+                  if (e.target !== document.body) {
+                    return;
+                  }
+                  // keyCode for '/' (slash)
+                  if (e.keyCode === 191) {
+                    const search = document.getElementById('search_input_react');
+                    search && search.focus();
+                  }
+                });
+              </script><script>
+              var search = docsearch({
+                
+                apiKey: '966d1e412f67114a07dc0afe44b19b53',
+                indexName: 'reason',
+                inputSelector: '#search_input_react',
+                algoliaOptions: {"facetFilters":["lang:en"]}
+              });
+            </script></body></html>

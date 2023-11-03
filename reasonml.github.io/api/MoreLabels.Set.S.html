@@ -1,0 +1,99 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Reason · Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems.</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Reason · Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io/"/><meta property="og:description" content="Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/icon_50.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io/blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io/blog/feed.xml" title="Reason Blog RSS Feed"/><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/en"><img class="logo" src="/img/dummy.svg" alt="Reason"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/docs/en/what-and-why" target="_self">Docs</a></li><li class=""><a href="/en/try" target="_self">Try</a></li><li class=""><a href="/api/index" target="_self">API</a></li><li class=""><a href="/docs/en/community" target="_self">Community</a></li><li class=""><a href="/blog/" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg" alt="Languages icon"/>English</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/ja/MoreLabels.Set.S">日本語</a></li><li><a href="/de/MoreLabels.Set.S">Deutsch</a></li><li><a href="/es-ES/MoreLabels.Set.S">Español</a></li><li><a href="/fr/MoreLabels.Set.S">Français</a></li><li><a href="/ko/MoreLabels.Set.S">한국어</a></li><li><a href="/pt-BR/MoreLabels.Set.S">Português (Brasil)</a></li><li><a href="/ru/MoreLabels.Set.S">Русский</a></li><li><a href="/uk/MoreLabels.Set.S">Українська</a></li><li><a href="/zh-CN/MoreLabels.Set.S">中文</a></li><li><a href="/zh-TW/MoreLabels.Set.S">繁體中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank" rel="noreferrer noopener">Help Translate</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/facebook/reason" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div><link rel="stylesheet" href="/css/main.css"><div class="ocamldoc">
+<div class="navbar"><a class="pre" href="MoreLabels.Set.OrderedType.html" title="MoreLabels.Set.OrderedType">Previous</a>
+&#xA0;<a class="up" href="MoreLabels.Set.html" title="MoreLabels.Set">Up</a>
+&#xA0;</div>
+<h1>Module type <a href="type_MoreLabels.Set.S.html">MoreLabels.Set.S</a></h1>
+
+<pre><span class="keyword">module</span> type S = sig .. end</pre><hr width="100%">
+
+<pre id="TYPEelt"><span class="keyword">type</span> elt;
+</pre>
+
+
+<pre id="TYPEt"><span class="keyword">type</span> t;
+</pre>
+
+
+<pre id="VALempty"><span class="keyword">let</span> empty: t;
+</pre>
+<pre id="VALis_empty"><span class="keyword">let</span> is_empty: t =&gt; bool;
+</pre>
+<pre id="VALmem"><span class="keyword">let</span> mem: (elt, t) =&gt; bool;
+</pre>
+<pre id="VALadd"><span class="keyword">let</span> add: (elt, t) =&gt; t;
+</pre>
+<pre id="VALsingleton"><span class="keyword">let</span> singleton: elt =&gt; t;
+</pre>
+<pre id="VALremove"><span class="keyword">let</span> remove: (elt, t) =&gt; t;
+</pre>
+<pre id="VALunion"><span class="keyword">let</span> union: (t, t) =&gt; t;
+</pre>
+<pre id="VALinter"><span class="keyword">let</span> inter: (t, t) =&gt; t;
+</pre>
+<pre id="VALdiff"><span class="keyword">let</span> diff: (t, t) =&gt; t;
+</pre>
+<pre id="VALcompare"><span class="keyword">let</span> compare: (t, t) =&gt; int;
+</pre>
+<pre id="VALequal"><span class="keyword">let</span> equal: (t, t) =&gt; bool;
+</pre>
+<pre id="VALsubset"><span class="keyword">let</span> subset: (t, t) =&gt; bool;
+</pre>
+<pre id="VALiter"><span class="keyword">let</span> iter: (~f: elt =&gt; unit, t) =&gt; unit;
+</pre>
+<pre id="VALfold"><span class="keyword">let</span> fold: (~f: (elt, &apos;a) =&gt; &apos;a, t, ~init: &apos;a) =&gt; &apos;a;
+</pre>
+<pre id="VALfor_all"><span class="keyword">let</span> for_all: (~f: elt =&gt; bool, t) =&gt; bool;
+</pre>
+<pre id="VALexists"><span class="keyword">let</span> exists: (~f: elt =&gt; bool, t) =&gt; bool;
+</pre>
+<pre id="VALfilter"><span class="keyword">let</span> filter: (~f: elt =&gt; bool, t) =&gt; t;
+</pre>
+<pre id="VALpartition"><span class="keyword">let</span> partition: (~f: elt =&gt; bool, t) =&gt; (t, t);
+</pre>
+<pre id="VALcardinal"><span class="keyword">let</span> cardinal: t =&gt; int;
+</pre>
+<pre id="VALelements"><span class="keyword">let</span> elements: t =&gt; list(elt);
+</pre>
+<pre id="VALmin_elt"><span class="keyword">let</span> min_elt: t =&gt; elt;
+</pre>
+<pre id="VALmax_elt"><span class="keyword">let</span> max_elt: t =&gt; elt;
+</pre>
+<pre id="VALchoose"><span class="keyword">let</span> choose: t =&gt; elt;
+</pre>
+<pre id="VALsplit"><span class="keyword">let</span> split: (elt, t) =&gt; (t, bool, t);
+</pre>
+<pre id="VALfind"><span class="keyword">let</span> find: (elt, t) =&gt; elt;
+</pre>
+<pre id="VALof_list"><span class="keyword">let</span> of_list: list(elt) =&gt; t;
+</pre></div></div><span><script src="/js/redirectBlog.js"></script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+                document.addEventListener('keyup', function(e) {
+                  if (e.target !== document.body) {
+                    return;
+                  }
+                  // keyCode for '/' (slash)
+                  if (e.keyCode === 191) {
+                    const search = document.getElementById('search_input_react');
+                    search && search.focus();
+                  }
+                });
+              </script><script>
+              var search = docsearch({
+                
+                apiKey: '966d1e412f67114a07dc0afe44b19b53',
+                indexName: 'reason',
+                inputSelector: '#search_input_react',
+                algoliaOptions: {"facetFilters":["lang:en"]}
+              });
+            </script></body></html>

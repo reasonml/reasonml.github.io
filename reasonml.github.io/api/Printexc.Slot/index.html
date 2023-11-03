@@ -1,0 +1,78 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Reason · Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems.</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Reason · Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io/"/><meta property="og:description" content="Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/icon_50.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io/blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io/blog/feed.xml" title="Reason Blog RSS Feed"/><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/en"><img class="logo" src="/img/dummy.svg" alt="Reason"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/docs/en/what-and-why" target="_self">Docs</a></li><li class=""><a href="/en/try" target="_self">Try</a></li><li class=""><a href="/api/index" target="_self">API</a></li><li class=""><a href="/docs/en/community" target="_self">Community</a></li><li class=""><a href="/blog/" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg" alt="Languages icon"/>English</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/ja/Printexc.Slot">日本語</a></li><li><a href="/de/Printexc.Slot">Deutsch</a></li><li><a href="/es-ES/Printexc.Slot">Español</a></li><li><a href="/fr/Printexc.Slot">Français</a></li><li><a href="/ko/Printexc.Slot">한국어</a></li><li><a href="/pt-BR/Printexc.Slot">Português (Brasil)</a></li><li><a href="/ru/Printexc.Slot">Русский</a></li><li><a href="/uk/Printexc.Slot">Українська</a></li><li><a href="/zh-CN/Printexc.Slot">中文</a></li><li><a href="/zh-TW/Printexc.Slot">繁體中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank" rel="noreferrer noopener">Help Translate</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/facebook/reason" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div><link rel="stylesheet" href="/css/main.css"><div class="ocamldoc">
+<div class="navbar">&#xA0;<a class="up" href="Printexc.html" title="Printexc">Up</a>
+&#xA0;</div>
+<h1>Module <a href="type_Printexc.Slot.html">Printexc.Slot</a></h1>
+
+<pre><span class="keyword">module</span> Slot: sig .. end</pre><hr width="100%">
+
+<pre id="TYPEt"><span class="keyword">type</span> t = Printexc.backtrace_slot;
+</pre>
+
+
+<pre id="VALis_raise"><span class="keyword">let</span> is_raise: t =&gt; bool;
+</pre><div class="info ">
+<code class="code">is_raise slot</code> is <code class="code">true</code> when <code class="code">slot</code> refers to a raising
+      point in the code, and <code class="code">false</code> when it comes from a simple
+      function call.<br>
+<b>Since</b> 4.02<br>
+</div>
+
+<pre id="VALlocation"><span class="keyword">let</span> location: t =&gt; option(Printexc.location);
+</pre><div class="info ">
+<code class="code">location slot</code> returns the location information of the slot,
+      if available, and <code class="code">None</code> otherwise.
+<p>
+
+      Some possible reasons for failing to return a location are as follow:</p><ul>
+<li>the slot corresponds to a compiler-inserted raise</li>
+<li>the slot corresponds to a part of the program that has not been
+      compiled with debug information (<code class="code">-g</code>)</li>
+</ul>
+<br>
+<b>Since</b> 4.02<br>
+</div>
+
+<pre id="VALformat"><span class="keyword">let</span> format: (int, t) =&gt; option(string);
+</pre><div class="info ">
+<code class="code">format pos slot</code> returns the string representation of <code class="code">slot</code> as
+      <code class="code">raw_backtrace_to_string</code> would format it, assuming it is the
+      <code class="code">pos</code>-th element of the backtrace: the <code class="code">0</code>-th element is
+      pretty-printed differently than the others.
+<p>
+
+      Whole-backtrace printing functions also skip some uninformative
+      slots; in that case, <code class="code">format pos slot</code> returns <code class="code">None</code>.<br>
+<b>Since</b> 4.02<br>
+</p></div>
+</div></div><span><script src="/js/redirectBlog.js"></script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+                document.addEventListener('keyup', function(e) {
+                  if (e.target !== document.body) {
+                    return;
+                  }
+                  // keyCode for '/' (slash)
+                  if (e.keyCode === 191) {
+                    const search = document.getElementById('search_input_react');
+                    search && search.focus();
+                  }
+                });
+              </script><script>
+              var search = docsearch({
+                
+                apiKey: '966d1e412f67114a07dc0afe44b19b53',
+                indexName: 'reason',
+                inputSelector: '#search_input_react',
+                algoliaOptions: {"facetFilters":["lang:en"]}
+              });
+            </script></body></html>

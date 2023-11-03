@@ -1,0 +1,135 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Reason · Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems.</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Reason · Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io/"/><meta property="og:description" content="Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/icon_50.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io/blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io/blog/feed.xml" title="Reason Blog RSS Feed"/><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/en"><img class="logo" src="/img/dummy.svg" alt="Reason"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/docs/en/what-and-why" target="_self">Docs</a></li><li class=""><a href="/en/try" target="_self">Try</a></li><li class=""><a href="/api/index" target="_self">API</a></li><li class=""><a href="/docs/en/community" target="_self">Community</a></li><li class=""><a href="/blog/" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg" alt="Languages icon"/>English</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/ja/Weak.S">日本語</a></li><li><a href="/de/Weak.S">Deutsch</a></li><li><a href="/es-ES/Weak.S">Español</a></li><li><a href="/fr/Weak.S">Français</a></li><li><a href="/ko/Weak.S">한국어</a></li><li><a href="/pt-BR/Weak.S">Português (Brasil)</a></li><li><a href="/ru/Weak.S">Русский</a></li><li><a href="/uk/Weak.S">Українська</a></li><li><a href="/zh-CN/Weak.S">中文</a></li><li><a href="/zh-TW/Weak.S">繁體中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank" rel="noreferrer noopener">Help Translate</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/facebook/reason" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div><link rel="stylesheet" href="/css/main.css"><div class="ocamldoc">
+<div class="navbar">&#xA0;<a class="up" href="Weak.html" title="Weak">Up</a>
+&#xA0;</div>
+<h1>Module type <a href="type_Weak.S.html">Weak.S</a></h1>
+
+<pre><span class="keyword">module</span> type S = sig .. end</pre><div class="info modtype top">
+The output signature of the functor <a href="Weak.Make.html"><code class="code">Weak.Make</code></a>.<br>
+</div>
+<hr width="100%">
+
+<pre id="TYPEdata"><span class="keyword">type</span> data;
+</pre>
+<div class="info ">
+The type of the elements stored in the table.<br>
+</div>
+
+
+<pre id="TYPEt"><span class="keyword">type</span> t;
+</pre>
+<div class="info ">
+The type of tables that contain elements of type <code class="code">data</code>.
+        Note that weak hash tables cannot be marshaled using
+        <a href="Pervasives.html#VALoutput_value"><code class="code">Pervasives.output_value</code></a> or the functions of the <a href="Marshal.html"><code class="code">Marshal</code></a>
+        module.<br>
+</div>
+
+
+<pre id="VALcreate"><span class="keyword">let</span> create: int =&gt; t;
+</pre><div class="info ">
+<code class="code">create n</code> creates a new empty weak hash table, of initial
+        size <code class="code">n</code>.  The table will grow as needed.<br>
+</div>
+
+<pre id="VALclear"><span class="keyword">let</span> clear: t =&gt; unit;
+</pre><div class="info ">
+Remove all elements from the table.<br>
+</div>
+
+<pre id="VALmerge"><span class="keyword">let</span> merge: (t, data) =&gt; data;
+</pre><div class="info ">
+<code class="code">merge t x</code> returns an instance of <code class="code">x</code> found in <code class="code">t</code> if any,
+        or else adds <code class="code">x</code> to <code class="code">t</code> and return <code class="code">x</code>.<br>
+</div>
+
+<pre id="VALadd"><span class="keyword">let</span> add: (t, data) =&gt; unit;
+</pre><div class="info ">
+<code class="code">add t x</code> adds <code class="code">x</code> to <code class="code">t</code>.  If there is already an instance
+        of <code class="code">x</code> in <code class="code">t</code>, it is unspecified which one will be
+        returned by subsequent calls to <code class="code">find</code> and <code class="code">merge</code>.<br>
+</div>
+
+<pre id="VALremove"><span class="keyword">let</span> remove: (t, data) =&gt; unit;
+</pre><div class="info ">
+<code class="code">remove t x</code> removes from <code class="code">t</code> one instance of <code class="code">x</code>.  Does
+        nothing if there is no instance of <code class="code">x</code> in <code class="code">t</code>.<br>
+</div>
+
+<pre id="VALfind"><span class="keyword">let</span> find: (t, data) =&gt; data;
+</pre><div class="info ">
+<code class="code">find t x</code> returns an instance of <code class="code">x</code> found in <code class="code">t</code>.
+        Raise <code class="code">Not_found</code> if there is no such element.<br>
+</div>
+
+<pre id="VALfind_all"><span class="keyword">let</span> find_all: (t, data) =&gt; list(data);
+</pre><div class="info ">
+<code class="code">find_all t x</code> returns a list of all the instances of <code class="code">x</code>
+        found in <code class="code">t</code>.<br>
+</div>
+
+<pre id="VALmem"><span class="keyword">let</span> mem: (t, data) =&gt; bool;
+</pre><div class="info ">
+<code class="code">mem t x</code> returns <code class="code">true</code> if there is at least one instance
+        of <code class="code">x</code> in <code class="code">t</code>, false otherwise.<br>
+</div>
+
+<pre id="VALiter"><span class="keyword">let</span> iter: (data =&gt; unit, t) =&gt; unit;
+</pre><div class="info ">
+<code class="code">iter f t</code> calls <code class="code">f</code> on each element of <code class="code">t</code>, in some unspecified
+        order.  It is not specified what happens if <code class="code">f</code> tries to change
+        <code class="code">t</code> itself.<br>
+</div>
+
+<pre id="VALfold"><span class="keyword">let</span> fold: ((data, &apos;a) =&gt; &apos;a, t, &apos;a) =&gt; &apos;a;
+</pre><div class="info ">
+<code class="code">fold f t init</code> computes <code class="code">(f d1 (... (f dN init)))</code> where
+        <code class="code">d1 ... dN</code> are the elements of <code class="code">t</code> in some unspecified order.
+        It is not specified what happens if <code class="code">f</code> tries to change <code class="code">t</code>
+        itself.<br>
+</div>
+
+<pre id="VALcount"><span class="keyword">let</span> count: t =&gt; int;
+</pre><div class="info ">
+Count the number of elements in the table.  <code class="code">count t</code> gives the
+        same result as <code class="code">fold (fun _ n -&gt; n+1) t 0</code> but does not delay the
+        deallocation of the dead elements.<br>
+</div>
+
+<pre id="VALstats"><span class="keyword">let</span> stats: t =&gt; (int, int, int, int, int, int);
+</pre><div class="info ">
+Return statistics on the table.  The numbers are, in order:
+        table length, number of entries, sum of bucket lengths,
+        smallest bucket length, median bucket length, biggest bucket length.<br>
+</div>
+</div></div><span><script src="/js/redirectBlog.js"></script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+                document.addEventListener('keyup', function(e) {
+                  if (e.target !== document.body) {
+                    return;
+                  }
+                  // keyCode for '/' (slash)
+                  if (e.keyCode === 191) {
+                    const search = document.getElementById('search_input_react');
+                    search && search.focus();
+                  }
+                });
+              </script><script>
+              var search = docsearch({
+                
+                apiKey: '966d1e412f67114a07dc0afe44b19b53',
+                indexName: 'reason',
+                inputSelector: '#search_input_react',
+                algoliaOptions: {"facetFilters":["lang:en"]}
+              });
+            </script></body></html>

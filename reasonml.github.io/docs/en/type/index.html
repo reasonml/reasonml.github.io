@@ -1,0 +1,222 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Types · Reason</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="Types describe what kind of thing values are. Is this value a string, integer,"/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Types · Reason"/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io/"/><meta property="og:description" content="Types describe what kind of thing values are. Is this value a string, integer,"/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/icon_50.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io/blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io/blog/feed.xml" title="Reason Blog RSS Feed"/><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body class="sideNavVisible separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/en"><img class="logo" src="/img/dummy.svg" alt="Reason"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive"><a href="/docs/en/what-and-why" target="_self">Docs</a></li><li class=""><a href="/en/try" target="_self">Try</a></li><li class=""><a href="/api/index" target="_self">API</a></li><li class=""><a href="/docs/en/community" target="_self">Community</a></li><li class=""><a href="/blog/" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg" alt="Languages icon"/>English</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/docs/ja/type">日本語</a></li><li><a href="/docs/de/type">Deutsch</a></li><li><a href="/docs/es-ES/type">Español</a></li><li><a href="/docs/fr/type">Français</a></li><li><a href="/docs/ko/type">한국어</a></li><li><a href="/docs/pt-BR/type">Português (Brasil)</a></li><li><a href="/docs/ru/type">Русский</a></li><li><a href="/docs/uk/type">Українська</a></li><li><a href="/docs/zh-CN/type">中文</a></li><li><a href="/docs/zh-TW/type">繁體中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank" rel="noreferrer noopener">Help Translate</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/facebook/reason" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><div class="hamburger-menu"><div class="line1"></div><div class="line2"></div><div class="line3"></div></div></div><h2><i>›</i><span>Language Basics</span></h2><div class="tocToggler" id="tocToggler"><i class="icon-toc"></i></div></div><div class="navGroups"><div class="navGroup"><h3 class="navGroupCategoryTitle">Intro</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/en/what-and-why">What &amp; Why</a></li><li class="navListItem"><a class="navItem" href="/docs/en/getting-started">Getting started</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Setup</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/en/installation">Installation</a></li><li class="navListItem"><a class="navItem" href="/docs/en/editor-plugins">Editor Plugins</a></li><li class="navListItem"><a class="navItem" href="/docs/en/refmt">Format (refmt)</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Language Basics</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/en/overview">Overview</a></li><li class="navListItem"><a class="navItem" href="/docs/en/let-binding">Let Bindings</a></li><li class="navListItem"><a class="navItem" href="/docs/en/primitives">Primitives</a></li><li class="navListItem"><a class="navItem" href="/docs/en/basic-structures">Basic Structures</a></li><li class="navListItem navListItemActive"><a class="navItem" href="/docs/en/type">Types</a></li><li class="navListItem"><a class="navItem" href="/docs/en/record">Records</a></li><li class="navListItem"><a class="navItem" href="/docs/en/variant">Variants</a></li><li class="navListItem"><a class="navItem" href="/docs/en/option">Options and nullability</a></li><li class="navListItem"><a class="navItem" href="/docs/en/function">Functions</a></li><li class="navListItem"><a class="navItem" href="/docs/en/recursion">Recursion</a></li><li class="navListItem"><a class="navItem" href="/docs/en/destructuring">Destructuring</a></li><li class="navListItem"><a class="navItem" href="/docs/en/pattern-matching">Pattern Matching</a></li><li class="navListItem"><a class="navItem" href="/docs/en/mutable-bindings">Mutable Bindings</a></li><li class="navListItem"><a class="navItem" href="/docs/en/loops">Loops</a></li><li class="navListItem"><a class="navItem" href="/docs/en/module">Modules</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Advanced Features</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/en/jsx">JSX</a></li><li class="navListItem"><a class="navItem" href="/docs/en/external">External</a></li><li class="navListItem"><a class="navItem" href="/docs/en/exception">Exception</a></li><li class="navListItem"><a class="navItem" href="/docs/en/object">Object</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">JavaScript</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/en/compiling-to-js-with-melange">Melange</a></li><li class="navListItem"><a class="navItem" href="/docs/en/interop">Interop</a></li><li class="navListItem"><a class="navItem" href="/docs/en/syntax-cheatsheet">Syntax Cheatsheet</a></li><li class="navListItem"><a class="navItem" href="/docs/en/pipe-first">Pipe First</a></li><li class="navListItem"><a class="navItem" href="/docs/en/promise">Promise</a></li><li class="navListItem"><a class="navItem" href="/docs/en/libraries">Libraries</a></li><li class="navListItem"><a class="navItem" href="/docs/en/converting-from-js">Converting from JS</a></li></ul></div><div class="navGroup"><h3 class="navGroupCategoryTitle">Extra</h3><ul class=""><li class="navListItem"><a class="navItem" href="/docs/en/faq">Frequently Asked Questions</a></li><li class="navListItem"><a class="navItem" href="/docs/en/extra-goodies">Extra Goodies</a></li><li class="navListItem"><a class="navItem" href="/docs/en/rtop">REPL (rtop)</a></li></ul></div></div></section></div><script>
+            var coll = document.getElementsByClassName('collapsible');
+            var checkActiveCategory = true;
+            for (var i = 0; i < coll.length; i++) {
+              var links = coll[i].nextElementSibling.getElementsByTagName('*');
+              if (checkActiveCategory){
+                for (var j = 0; j < links.length; j++) {
+                  if (links[j].classList.contains('navListItemActive')){
+                    coll[i].nextElementSibling.classList.toggle('hide');
+                    coll[i].childNodes[1].classList.toggle('rotate');
+                    checkActiveCategory = false;
+                    break;
+                  }
+                }
+              }
+
+              coll[i].addEventListener('click', function() {
+                var arrow = this.childNodes[1];
+                arrow.classList.toggle('rotate');
+                var content = this.nextElementSibling;
+                content.classList.toggle('hide');
+              });
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+              createToggler('#navToggler', '#docsNav', 'docsSliderActive');
+              createToggler('#tocToggler', 'body', 'tocActive');
+
+              var headings = document.querySelector('.toc-headings');
+              headings && headings.addEventListener('click', function(event) {
+                var el = event.target;
+                while(el !== headings){
+                  if (el.tagName === 'A') {
+                    document.body.classList.remove('tocActive');
+                    break;
+                  } else{
+                    el = el.parentNode;
+                  }
+                }
+              }, false);
+
+              function createToggler(togglerSelector, targetSelector, className) {
+                var toggler = document.querySelector(togglerSelector);
+                var target = document.querySelector(targetSelector);
+
+                if (!toggler) {
+                  return;
+                }
+
+                toggler.onclick = function(event) {
+                  event.preventDefault();
+
+                  target.classList.toggle(className);
+                };
+              }
+            });
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><a class="edit-page-link button" href="https://github.com/reasonml/reasonml.github.io/tree/source/docs/type.md" target="_blank" rel="noreferrer noopener">Edit</a><h1 class="postHeaderTitle">Types</h1></header><article><div><span><p>Types describe what kind of thing values are. Is this value a string, integer,
+or some complex structure? The type of that value gives an answer. Having a
+strict type system is a powerful tool that removes large classes of bugs and
+catches many others when compiling.</p>
+<p>In Reason almost all types can be inferred. The compiler will figure out the
+types of everything in your program and ensure they make sense. This means you
+get the benefits of a strict type system without the drawbacks of writing down
+the type of every value.</p>
+<h2><a class="anchor" aria-hidden="true" id="the-basics"></a><a href="#the-basics" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>The Basics</h2>
+<p>This is a <a href="/docs/en/let-binding">let binding</a>. The binding is named <code>count</code>, is of
+type <code>int</code>, and has a value of <code>42</code>. Its type was inferred, we did not
+explicitly write down that it is an <code>int</code>.</p>
+<p><em>Everything</em> in Reason has a type, even if you do not write it down.</p>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> count = <span class="hljs-number">42</span>;
+</code></pre>
+<p>Types can be explicitly added with an annotation:</p>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> count: int = <span class="hljs-number">42</span>;
+</code></pre>
+<p>Because <code>count</code> has a type the compiler knows what we are and are not allowed
+to do with its value:</p>
+<pre><code class="hljs css language-reason"><span class="hljs-comment">/* Allowed: addition */</span>
+<span class="hljs-keyword">let</span> nextCount = count <span class="hljs-operator">+</span> <span class="hljs-number">1</span>;
+
+<span class="hljs-comment">/* Error: count is not a list */</span>
+<span class="hljs-keyword">let</span> x = <span class="hljs-module-identifier">List</span>.map(fn, count);
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="annotations"></a><a href="#annotations" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Annotations</h2>
+<p>Type annotations can appear almost anywhere. They are not often necessary due to
+Reason's type inference, but they can be helpful to confirm your own
+understanding of the program's types.</p>
+<p><code>int</code> and <code>string</code> are annotations used throughout these examples:</p>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> five: int = <span class="hljs-number">5</span>;
+<span class="hljs-keyword">let</span> nine = (five: int) <span class="hljs-operator">+</span> (<span class="hljs-number">4</span>: int);
+<span class="hljs-keyword">let</span> add = (x: int, y: int): int =&gt; x <span class="hljs-operator">+</span> y;
+<span class="hljs-keyword">let</span> drawCircle = (~radius: int): string =&gt; <span class="hljs-string">"hi"</span>;
+</code></pre>
+<h2><a class="anchor" aria-hidden="true" id="aliases"></a><a href="#aliases" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Aliases</h2>
+<p>Aliases can be defined for types. This is helpful to attach meaning to simple
+types and when working with complex types that become long to write down.</p>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> seconds = int;
+<span class="hljs-keyword">type</span> timeInterval = (seconds, seconds);
+</code></pre>
+<p>Using the alias <code>seconds</code> it is clear how the <code>sleep</code> function works. If <code>int</code>
+were used it might not be obvious:</p>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> sleep = (time: seconds) =&gt; { <span class="hljs-operator">...</span> }
+</code></pre>
+<p>Type aliases are required in some cases, such as working with
+<a href="/docs/en/variant">variants</a> or <a href="/docs/en/record">records</a>.</p>
+<h2><a class="anchor" aria-hidden="true" id="type-parameters"></a><a href="#type-parameters" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Type Parameters</h2>
+<p>Types can accept type parameters, which are similar to generics in other
+languages. Parameterized types are useful when defining structures that work
+with many types of values. Having a single <code>list</code> type with an argument that can
+be <code>int</code>, <code>float</code>, or <code>string</code>, is better than having three concrete <code>intList</code>,
+<code>floatList</code>, and <code>stringList</code> types.</p>
+<p>Parameters are prefixed with a single <code>'</code> when defining the type:</p>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> list('item) = <span class="hljs-operator">...</span>
+</code></pre>
+<p>When using this type as an annotation the parameter can be filled in with a
+concrete type:</p>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> x: list(int) = <span class="hljs-literal">[</span><span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span><span class="hljs-literal">]</span>;
+<span class="hljs-keyword">let</span> y: list(string) = <span class="hljs-literal">[</span><span class="hljs-string">"one"</span>, <span class="hljs-string">"two"</span>, <span class="hljs-string">"three"</span><span class="hljs-literal">]</span>;
+</code></pre>
+<p>Types can have multiple parameters and be nested:</p>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">type</span> pair('a, 'b) = ('a, 'b);
+
+<span class="hljs-keyword">let</span> x: pair(int, string) = (<span class="hljs-number">1</span>, <span class="hljs-string">"one"</span>);
+<span class="hljs-keyword">let</span> y: pair(string, list(int)) = (<span class="hljs-string">"123"</span>, <span class="hljs-literal">[</span><span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span><span class="hljs-literal">]</span>);
+</code></pre>
+<ul>
+<li>Note: It is common convention for type parameters to be named <code>'a</code>, <code>'b</code>,
+<code>'c</code>, etc.</li>
+<li>Note: Type parameters can still be inferred!</li>
+</ul>
+<h2><a class="anchor" aria-hidden="true" id="opaque-types"></a><a href="#opaque-types" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Opaque Types</h2>
+<p>Opaque types are a powerful tool that limits the implementation details that
+are exposed to users. This makes it easier and safer to modify implementations
+to suit changing needs.</p>
+<p><em>Note: In these examples module types are used for simplicity, but opaque types
+are more often created using interface files.</em></p>
+<h3><a class="anchor" aria-hidden="true" id="setup"></a><a href="#setup" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Setup</h3>
+<p><code>Duration.t</code> is an opaque type. Its concrete type is hidden and it can only be
+interacted with using a limited set of functions:</p>
+<p><em>(Writing <code>type t;</code> is what makes <code>t</code> opaque. <code>t</code> would not be opaque and would
+still have a concrete type if <code>type t = int;</code> were written instead.)</em></p>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">module</span> <span class="hljs-keyword">type</span> <span class="hljs-module-identifier">Duration</span> = {
+  <span class="hljs-comment">/* This is an opaque type. */</span>
+  <span class="hljs-keyword">type</span> t;
+  <span class="hljs-keyword">let</span> fromSeconds: int =&gt; t;
+  <span class="hljs-keyword">let</span> add: (t, t) =&gt; t;
+};
+
+<span class="hljs-keyword">module</span> <span class="hljs-module-identifier">Duration</span>: <span class="hljs-module-identifier">Duration</span> = {
+  <span class="hljs-comment">/* Duration in seconds */</span>
+  <span class="hljs-keyword">type</span> t = int;
+  <span class="hljs-keyword">let</span> fromSeconds = value =&gt; value;
+  <span class="hljs-keyword">let</span> add = (x, y) =&gt; x <span class="hljs-operator">+</span> y;
+};
+</code></pre>
+<p>Use the <code>Duration</code> module to create and interact with the opaque type:</p>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> oneMinute = <span class="hljs-module-identifier">Duration</span>.fromSeconds(<span class="hljs-number">60</span>);
+<span class="hljs-keyword">let</span> twoMinutes = <span class="hljs-module-identifier">Duration</span>.add(oneMinute, oneMinute);
+</code></pre>
+<p>Normal integer functions intentionally have errors with <code>Duration.t</code> values:</p>
+<pre><code class="hljs css language-reason"><span class="hljs-comment">/* Error: expected int, but got Duration.t */</span>
+<span class="hljs-keyword">let</span> twoMinutes = oneMinute <span class="hljs-operator">+</span> oneMinute;
+</code></pre>
+<h3><a class="anchor" aria-hidden="true" id="changing-implementation"></a><a href="#changing-implementation" aria-hidden="true" class="hash-link"><svg class="hash-link-icon" aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Changing implementation</h3>
+<p>Now if we want the duration to be more precise and allow millisecond precision
+we can confidently change the implementation and be sure that nothing breaks:</p>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">module</span> <span class="hljs-keyword">type</span> <span class="hljs-module-identifier">Duration</span> = {
+  <span class="hljs-keyword">type</span> t;
+  <span class="hljs-keyword">let</span> fromSeconds: int =&gt; t;
+  <span class="hljs-keyword">let</span> fromMS: int =&gt; t;
+  <span class="hljs-keyword">let</span> add: (t, t) =&gt; t;
+};
+
+<span class="hljs-keyword">module</span> <span class="hljs-module-identifier">Duration</span>: <span class="hljs-module-identifier">Duration</span> = {
+  <span class="hljs-comment">/* Duration in milliseconds */</span>
+  <span class="hljs-keyword">type</span> t = int;
+  <span class="hljs-keyword">let</span> fromSeconds = value =&gt; value <span class="hljs-operator">*</span> <span class="hljs-number">1000</span>;
+  <span class="hljs-keyword">let</span> fromMS = value =&gt; value;
+  <span class="hljs-keyword">let</span> add = (x, y) =&gt; x <span class="hljs-operator">+</span> y;
+};
+</code></pre>
+<p>This works the exact same:</p>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> oneMinute = <span class="hljs-module-identifier">Duration</span>.fromSeconds(<span class="hljs-number">60</span>);
+<span class="hljs-keyword">let</span> twoMinutes = <span class="hljs-module-identifier">Duration</span>.add(oneMinute, oneMinute);
+</code></pre>
+<p>But now we also support durations less than one second:</p>
+<pre><code class="hljs css language-reason"><span class="hljs-keyword">let</span> halfSecond = <span class="hljs-module-identifier">Duration</span>.fromMS(<span class="hljs-number">500</span>);
+<span class="hljs-keyword">let</span> longerThanOneMinute = <span class="hljs-module-identifier">Duration</span>.add(oneMinute, halfSecond);
+</code></pre>
+<p>This is a helpful technique that can make code easier to maintain and safer to
+change.</p>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-prev button" href="/docs/en/basic-structures"><span class="arrow-prev">← </span><span>Basic Structures</span></a><a class="docs-next button" href="/docs/en/record"><span>Records</span><span class="arrow-next"> →</span></a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#the-basics">The Basics</a></li><li><a href="#annotations">Annotations</a></li><li><a href="#aliases">Aliases</a></li><li><a href="#type-parameters">Type Parameters</a></li><li><a href="#opaque-types">Opaque Types</a><ul class="toc-headings"><li><a href="#setup">Setup</a></li><li><a href="#changing-implementation">Changing implementation</a></li></ul></li></ul></nav></div><span><script src="/js/redirectBlog.js"></script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+                document.addEventListener('keyup', function(e) {
+                  if (e.target !== document.body) {
+                    return;
+                  }
+                  // keyCode for '/' (slash)
+                  if (e.keyCode === 191) {
+                    const search = document.getElementById('search_input_react');
+                    search && search.focus();
+                  }
+                });
+              </script><script>
+              var search = docsearch({
+                
+                apiKey: '966d1e412f67114a07dc0afe44b19b53',
+                indexName: 'reason',
+                inputSelector: '#search_input_react',
+                algoliaOptions: {"facetFilters":["lang:en"]}
+              });
+            </script></body></html>
