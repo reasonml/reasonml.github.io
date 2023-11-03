@@ -132,15 +132,15 @@ type point = {
 
 type t =
   | A((string, int))
-  | B(r)
+  | B(point)
   | C(array(int))
-  | D(list(r));
+  | D(list(point));
 
-let x = D([{x: 2, y: 1.2}]);
+let x = D([{x: 2, y: 1}]);
 
 switch (x) {
 | A(("hi", num)) => num
-| B({x, y: 1.2}) => x
+| B({x, y: 1}) => x
 | C([|x|]) => x
 | C([|2, 3, x|]) => x
 | D([]) => 2
@@ -156,8 +156,8 @@ switch (x) {
 ```reason
 switch (x) {
 | A(("hi", num)) as v => f(v)
-| B({x: _, y: 1.2} as r) => g(r)
-| D([{x: _, y: 1.2} as r, ..._]) => g(r)
+| B({x: _, y: 1} as r) => g(r)
+| D([{x: _, y: 1} as r, ..._]) => g(r)
 | _ => 42
 };
 ```
