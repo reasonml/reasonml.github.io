@@ -12,7 +12,7 @@ Reason source code can be compiled to JavaScript through our partner project, [M
 
 > Melange strives to provide the best integration with both the OCaml and JavaScript ecosystems
 
-If you have experience with JavaScript and the ecosystem we recommend Melange, over other alternatives such as [Js_of_ocaml](compiling-to-js-with-jsoo.md).
+If you have experience with JavaScript and the ecosystem we recommend Melange, over other alternatives such as Js_of_ocaml.
 
 ## Getting started
 
