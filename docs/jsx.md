@@ -2,11 +2,26 @@
 title: JSX
 ---
 
-> **Note:** If you are looking for ReasonReact specific JSX infos, please refer to the [ReScript JSX docs](https://rescript-lang.org/docs/manual/v8.0.0/jsx) instead.
+JSX is a syntax extension for HTML-like syntax inside a JavaScript file. It's a convenient way to write React components.
 
-Would you like some HTML syntax in your Reason? If not, quickly skip over this section and pretend you didn't see anything!
+Reason has built in support for JSX at the language-level, so you can use it without any extra tooling.
 
-Reason supports the JSX syntax, with some slight differences compared to the one in [ReactJS](https://facebook.github.io/react/docs/introducing-jsx.html). Reason JSX isn't tied to ReactJS; they translate to normal function calls:
+The design is slight different compared to the one in [React](https://facebook.github.io/react/docs/introducing-jsx.html), since Reason JSX isn't tied to React and it translate to normal function calls.
+
+### Features of Reason JSX
+- Components are modules with a `make` function
+- Props are labeled arguments
+- Adds dynamic expressions that allow you to reference variables and functions within your JSX by using the `{ }` (block-scoped) syntax
+
+### Departures from JavaScript JSX
+
+- Attributes and children don't mandate `{}`, but we show them anyway for ease of learning. Once you format your file, some of them go away and some turn into parentheses.
+- There is no support for JSX prop spread: `<Foo {...bar} />`. Though somewhat related, we do have children spread, described above: `<Foo> ...baz </Foo>`.
+- Punning [See below](#punning)
+
+# Syntax
+
+Here's a quick overview of the syntax, and example of how it transforms to normal function calls.
 
 ## Capitalized Tag
 
@@ -32,10 +47,12 @@ becomes
 ([@JSX] div(~foo=bar, ~children=[child1, child2], ()));
 ```
 
+`[@JSX]` is just an attribute for hooking up ppxes. As an example, [reason-react-ppx](https://reasonml.github.io/reason-react/) turns that agnostic `div` call into something React-specific.
+
 ## Fragment
 
 ```reason
-<> child1 child2 </>;
+<> child1 child2 </>
 ```
 
 becomes
@@ -88,17 +105,12 @@ Here's a JSX tag that shows most of the features.
   booleanAttribute={true}
   stringAttribute="string"
   intAttribute=1
+  optionalProp={Some("hello")}
   forcedOptional=?{Some("hello")}
-  onClick={send(handleClick)}>
+  onClick={event => handleClick(event)}>
   <div> {"hello"} </div>
 </MyComponent>
 ```
-
-## Departures From JS JSX
-
-- Attributes and children don't mandate `{}`, but we show them anyway for ease of learning. Once you `refmt` your file, some of them go away and some turn into parentheses.
-- There is no support for JSX prop spread: `<Foo {...bar} />`. Though somewhat related,  we do have children spread, described above: `<Foo> ...baz </Foo>`.
-- Punning!
 
 ### Punning
 
@@ -112,12 +124,16 @@ Reason JSX supports punning. `<input checked />` is just a shorthand for `<input
 
 Consequently, a Reason JSX component can cram in a few more props before reaching for extra libraries solutions that avoids props passing.
 
-**Note** that this is a departure from ReactJS JSX, which does **not** have punning. ReactJS' `<input checked />` desugars to `<input checked=true />`, in order to conform to DOM's idioms and for backward compatibility.
+**Note** that this is a big difference from ReactJS JSX, which does **not** have punning. ReactJS' `<input checked />` means `<input checked=true />`, in order to conform to DOM's idioms and for backward compatibility.
 
 ## Frameworks using JSX
 
-- [**ReveryUI**](https://www.outrunlabs.com/revery/api/revery/#Overview): A ReactJS-like UI framework for building cross-platform GUI applications
+Aside from the tight integration with [**`reason-react`**](https://reasonml.github.io/reason-react/), there are a few libraries that are build on top of JSX in Reason. The following list is not exhaustive, and the quality of the libraries may vary.
 
+- [**ReveryUI**](https://www.outrunlabs.com/revery/api/revery/#Overview): A ReactJS-like UI framework for building cross-platform GUI applications
+- [**jsoo-react**](https://github.com/ml-in-barcelona/jsoo-react): js_of_ocaml bindings for ReactJS
+- [**brisk**](https://github.com/briskml/brisk): Cross-platform set of tools for building native UIs with Reason/OCaml
+- [**ppx-tea-jsx**](https://github.com/osener/ppx-tea-jsx): Reason JSX syntax for BuckleScript-TEA
 
 ## Tip & Tricks
 

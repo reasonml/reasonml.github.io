@@ -2,4 +2,4 @@
 title: Promise
 ---
 
-This section has been moved to the new ReScript project: https://rescript-lang.org/docs/manual/v8.0.0/promise. More info on the transition [here](https://rescript-lang.org/blog/bucklescript-is-rebranding).
+Promise support comes from Melange's [Js.Promise](https://melange.re/v2.0.0/api/re/melange/Js/Promise/index.html) module.

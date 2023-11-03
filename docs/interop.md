@@ -2,4 +2,6 @@
 title: Interop
 ---
 
-This section has been moved to the new ReScript project: https://rescript-lang.org/docs/manual/v8.0.0/introduction. More info on the transition [here](https://rescript-lang.org/blog/bucklescript-is-rebranding).
+Interoperability with JavaScript is a first-class feature of Melange. This section will cover the different ways you can interact with JavaScript code from Reason using Melange.
+
+This section is documented under Melange's documentation: [Communicate with JavaScript](https://melange.re/v2.0.0/communicate-with-javascript/).

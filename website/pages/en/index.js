@@ -66,6 +66,11 @@ ${pre}`;
 
 class HomeSplash extends React.Component {
   render() {
+    let language = translation[this.props.language];
+    let tagline = language && language['localized-strings']
+      ? language['localized-strings'].tagline
+      : siteConfig.tagline;
+
     let promoSection =
       <div className="section promoSection">
         <div className="promoRow">
@@ -114,7 +119,7 @@ class HomeSplash extends React.Component {
                 <MarkdownBlock>{codeExampleLargeScreen}</MarkdownBlock>
               </div>
               <div className="homeTagLine">
-                {translation[this.props.language]['localized-strings'].tagline}
+                {tagline}
               </div>
             </div>
 
@@ -153,7 +158,7 @@ class Index extends React.Component {
                 },
                 {
                   title: <translate>Use the power of the OCaml ecosystem</translate>,
-                  content: <translate>Get access to the powerful systems programming language OCaml with an easier to learn syntax. Use js_of_ocaml to compile to JavaScript!</translate>,
+                  content: <translate>Get access to the powerful systems programming language OCaml with an easier to learn syntax. Use Melange to compile to JavaScript!</translate>,
                 },
               ]}
               layout="threeColumn"
