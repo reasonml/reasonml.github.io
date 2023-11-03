@@ -27,7 +27,7 @@ Here is the cheat sheet with some equivalents between JavaScript and Reason synt
 |-------------------------------------------------------|-----------------------------------|
 | `true`, `false`                                       | Same                              |
 | `!true`                                               | Same                              |
-| `||`, `&&`, `<=`, `>=`, `<`, `>`                      | Same                              |
+| `&&`, `<=`, `>=`, `<`, `>`, <code>&#124;&#124;</code> | Same                              |
 | `a === b`, `a !== b`                                  | Same                              |
 | No deep equality (recursive compare)                  | `a == b`, `a != b`                |
 | `a == b`                                              | No equality with implicit casting |
@@ -58,7 +58,7 @@ Here is the cheat sheet with some equivalents between JavaScript and Reason synt
 
 | JavaScript            | Reason                             |
 |-----------------------|------------------------------------|
-| `[1, 2, 3]`           | <code>\[\|1, 2, 3\|\]</code> |
+| `[1, 2, 3]`           | <code>[&#124;1, 2, 3&#124;]</code>           |
 | `myArray[1] = 10`     | Same                               |
 | `[1, "Bob", true]` \* | `(1, "Bob", true)`                 |
 | No immutable list     | `[1, 2, 3]`                        |
@@ -89,7 +89,7 @@ contain multiple types of elements.
   <thead>
     <tr>
       <th>JavaScript</th>
-      <th>Reason               th>
+      <th>Reason</th>
     </tr>
   </thead>
   <tbody>
@@ -135,7 +135,7 @@ possible.
 | JavaScript                    | Reason                                        |
 |-------------------------------|-----------------------------------------------|
 | `const {a, b} = data`         | `let {a, b} = data`                           |
-| `const [a, b] = data`         | <code>let \[\|a, b\|\] = data</code> \*       |
+| `const [a, b] = data`         | <code>let [&#124;a, b&#124;] = data</code> \* |
 | `const {a: aa, b: bb} = data` | `let {a: aa, b: bb} = data`                   |
 
 \* This will cause the compiler to warn that not all cases are handled, because
@@ -166,7 +166,7 @@ instead.
 | JavaScript                                | Reason                                       |
 |-------------------------------------------|----------------------------------------------|
 | `throw new SomeError(...)`                | `raise(SomeError(...))`                      |
-| `try {a} catch (Err) {...} finally {...}` | <code>try (a) { \| Err =\> ...}</code> \*    |
+| `try {a} catch (Err) {...} finally {...}` | <code>try (a) { &#124; Err =\> ...}</code> \*|
 
 \* No finally.
 
