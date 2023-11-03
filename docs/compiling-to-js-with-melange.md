@@ -2,9 +2,9 @@
 title: Melange
 ---
 
-One of the best usages of Reason is to compile it to JavaScript an run it in the browser or any JavaScript platform such as [Node.js](https://nodejs.org), [Deno](https://deno.com), [Cloudflare Workers](https://workers.cloudflare.com).
+ne of the best ways to use Reason is by compiling it to JavaScript and running it in a web browser or on any other environment with a JavaScript runtime, such as [Node.js](https://nodejs.org), [Deno](https://deno.com), [Cloudflare Workers](https://workers.cloudflare.com).
 
-Reason compiles to JavaScript thanks to our partner project, [Melange](https://melange.re).
+Reason source code can be compiled to JavaScript through our partner project, [Melange](https://melange.re).
 
 ## What's Melange?
 
@@ -71,9 +71,9 @@ The `melange.emit` stanza tells dune to generate JavaScript files from a set of 
 
 #### Libraries
 
-dune allows to define libraries by creating a dune file inside a folder and adding a library stanza: https://dune.readthedocs.io/en/stable/concepts/package-spec.html#libraries
+`dune` allows to define libraries by creating a `dune` file inside a folder and adding a [`library` stanza](https://dune.readthedocs.io/en/stable/concepts/package-spec.html#libraries).
 
-To compile a library with melange, add the `(modes melange)` stanza to the library dune file.
+To compile a library with melange, add the `(modes melange)` stanza to the library `dune` file.
 
 ```diff
 (library
