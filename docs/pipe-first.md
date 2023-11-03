@@ -28,15 +28,25 @@ Basically, `parseData(person)` is transformed into `person->parseData`, and `get
 **Pipe first operator always applies the value to the _first_ argument of the function, even if that function takes more than one argument**.
 
 ```reason
-a(one, two, three)
+fn(one, two, three)
 ```
 
 is the same as
 
 ```reason
-one->a(two, three)
+one->fn(two, three)
 ```
 
-This works with labeled arguments too.
+This can be combined with labeled arguments. For example if a function `foo` is defined as:
+
+```reason
+let foo = (~two, ~three, data) => // { ... }
+```
+
+Note that the last argument isn't labelled, and  it can be called with pipe-first like this:
+
+```reason
+data->foo(~two, ~three)
+```
 
 This section is documented under Melange's documentation as well: [Pipe first](https://melange.re/v2.0.0/communicate-with-javascript/#pipe-first).
