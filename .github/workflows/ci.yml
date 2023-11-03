@@ -18,6 +18,12 @@ jobs:
       with:
         node-version: '20'
 
+    - name: Install generate-docs dependencies
+      run: cd generate-docs; ./install-dependencies.sh
+
+    - name: Build generate-docs
+      run: cd generate-docs; ./build-docs.sh
+
     - name: Install website dependencies
       run: cd website; npm install
 

@@ -9,7 +9,7 @@ docs_path="../website/pages/api/"
 
 mkdir -p ./output/
 rm -f ./output/*.html
-cp ocaml/ocamldoc/stdlib_html/*.html ./output/
+cp ocaml/ocamldoc/stdlib/*.html ./output/
 echo ""
 echo "converting docs - this will take a minute"
 echo ""
