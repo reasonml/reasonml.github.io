@@ -49,7 +49,7 @@ opam install melange
 
 #### Create dune-project
 
-If you don't have a dune-project file, create one with the following content:
+If you don't have a `dune-project` file, create one with the following content:
 
 ```lisp
 ; dune-project
