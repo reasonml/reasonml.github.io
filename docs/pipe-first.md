@@ -25,7 +25,7 @@ person
 
 Basically, `parseData(person)` is transformed into `person->parseData`, and `getAge(person->parseData)` is transformed into `person->parseData->getAge`, etc.
 
-**This works when the function takes more than one argument too**.
+**Pipe first operator always applies the value to the _first_ argument of the function, even if that function takes more than one argument**.
 
 ```reason
 a(one, two, three)
