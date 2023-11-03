@@ -59,7 +59,7 @@ If you don't have a `dune-project` file, create one with the following content:
 
 #### Emit JavaScript
 
-In your dune file, add `melange.emit` stanza to emit JavaScript.
+In your `dune` file, add a `melange.emit` stanza to emit JavaScript.
 
 The `melange.emit` stanza tells dune to generate JavaScript files from a set of libraries and modules. In-depth documentation about this stanza can be found in the [build-system on the Melange documentation](https://melange.re/v2.0.0/build-system/#entry-points-with-melangeemit).
 
