@@ -25,13 +25,13 @@ Melange is a compiler that emits JavaScript, from Reason code. You can find all 
 
 ### Setup a new environment manually
 
-opam needs to be initialised (Initialize `~/.opam`). This step is only required once.
+opam needs to be initialized. This initialization will create a folder in `~/.opam`, where the packages will be stored. This step is only required once.
 
 ```bash
 opam init -y
 ```
 
-During opam init, you will be asked if you want to add a hook to your shell to put the tools available in the current opam switch on your PATH.
+During `opam init`, you will be asked if you want to add a hook to your shell to put the tools available in the current opam switch on your PATH.
 
 ```bash
 eval $(opam env)
