@@ -2,7 +2,7 @@
 title: Getting started
 ---
 
-This section of the docs is all about quickly setting up a Reason development enviromanet up and running.
+This section of the docs is all about quickly setting up a Reason development environment up and running.
 
 ## Get an overview of Reason
 
