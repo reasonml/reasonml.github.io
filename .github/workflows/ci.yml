@@ -3,7 +3,7 @@ name: Build and Deploy
 on:
   push:
     branches:
-      - main # Adjust to your main branch name
+      - main
 
 jobs:
   build:
@@ -21,7 +21,7 @@ jobs:
     - name: Install generate-docs dependencies
       run: cd generate-docs; ./install-dependencies.sh
 
-    - name: Build generate-docs
+    - name: Run generate-docs
       run: cd generate-docs; ./build-docs.sh
 
     - name: Install website dependencies
@@ -34,4 +34,4 @@ jobs:
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./website/build  # Adjust to your build directory
+        publish_dir: ./website/build
