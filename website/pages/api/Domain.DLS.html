@@ -1,0 +1,67 @@
+<link rel="stylesheet" href="/css/main.css"><div class="ocamldoc">
+<h1>Module <a href="type_Domain.DLS.html">Domain.DLS</a></h1>
+
+<pre id="MODULEDLS"><span class="keyword">module</span> DLS: sig .. end</pre><hr width="100%">
+<p>Domain-local Storage</p>
+
+<pre id="TYPEkey"><span class="keyword">type</span> 'a key </pre>
+<div class="info ">
+<div class="info-desc">
+<p>Type of a DLS key</p>
+</div>
+</div>
+
+
+<pre id="VALnew_key">val new_key : ?split_from_parent:('a -&gt; 'a) -&gt; (unit -&gt; 'a) -&gt; 'a key</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">new_key&nbsp;f</code> returns a new key bound to initialiser <code class="code">f</code> for accessing
+,        domain-local variables.</p>
+
+<p>If <code class="code">split_from_parent</code> is not provided, the value for a new
+        domain will be computed on-demand by the new domain: the first
+        <code class="code">get</code> call will call the initializer <code class="code">f</code> and store that value.</p>
+
+<p>If <code class="code">split_from_parent</code> is provided, spawning a domain will
+        derive the child value (for this key) from the parent
+        value. This computation happens in the parent domain and it
+        always happens, regardless of whether the child domain will
+        use it.
+        If the splitting function is expensive or requires
+        child-side computation, consider using <code class="code">'a&nbsp;Lazy.t&nbsp;key</code>:</p>
+
+<pre class="codepre">        let init () = ...
+
+        let split_from_parent parent_value =
+          ... parent-side computation ...;
+          lazy (
+            ... child-side computation ...
+          )
+
+        let key = Domain.DLS.new_key ~split_from_parent init
+
+        let get () = Lazy.force (Domain.DLS.get key)
+        </pre>
+<p>In this case a part of the computation happens on the child
+        domain; in particular, it can access <code class="code">parent_value</code>
+        concurrently with the parent domain, which may require
+        explicit synchronization to avoid data races.</p>
+</div>
+</div>
+
+<pre id="VALget">val get : 'a key -&gt; 'a</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">get&nbsp;k</code> returns <code class="code">v</code> if a value <code class="code">v</code> is associated to the key <code class="code">k</code> on
+        the calling domain's domain-local state. Sets <code class="code">k</code>'s value with its
+        initialiser and returns it otherwise.</p>
+</div>
+</div>
+
+<pre id="VALset">val set : 'a key -&gt; 'a -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">set&nbsp;k&nbsp;v</code> updates the calling domain's domain-local state to associate
+        the key <code class="code">k</code> with value <code class="code">v</code>. It overwrites any previous values associated
+        to <code class="code">k</code>, which cannot be restored later.</p>
+</div>
+</div>
+
+</div>

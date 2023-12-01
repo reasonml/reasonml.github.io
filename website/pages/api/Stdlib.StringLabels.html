@@ -1,0 +1,683 @@
+<link rel="stylesheet" href="/css/main.css"><div class="ocamldoc">
+<h1>Module <a href="type_Stdlib.StringLabels.html">Stdlib.StringLabels</a></h1>
+
+<pre id="MODULEStringLabels"><span class="keyword">module</span> StringLabels: StringLabels</pre><hr width="100%">
+<h2 id="strings">Strings</h2>
+<pre id="TYPEt"><span class="keyword">type</span> t = string </pre>
+<div class="info ">
+<div class="info-desc">
+<p>The type for strings.</p>
+</div>
+</div>
+
+
+<pre id="VALmake">val make : int -&gt; char -&gt; string</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">make&nbsp;n&nbsp;c</code> is a string of length <code class="code">n</code> with each index holding the
+    character <code class="code">c</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Raises</b> <code>Invalid_argument</code> if <code class="code">n&nbsp;&lt;&nbsp;0</code> or <code class="code">n&nbsp;&gt;&nbsp;</code><a href="Sys.html#VALmax_string_length"><code class="code">Sys.max_string_length</code></a>.</li>
+</ul>
+</div>
+
+<pre id="VALinit">val init : int -&gt; f:(int -&gt; char) -&gt; string</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">init&nbsp;n&nbsp;~f</code> is a string of length <code class="code">n</code> with index
+    <code class="code">i</code> holding the character <code class="code">f&nbsp;i</code> (called in increasing index order).</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.02.0</li>
+<li><b>Raises</b> <code>Invalid_argument</code> if <code class="code">n&nbsp;&lt;&nbsp;0</code> or <code class="code">n&nbsp;&gt;&nbsp;</code><a href="Sys.html#VALmax_string_length"><code class="code">Sys.max_string_length</code></a>.</li>
+</ul>
+</div>
+
+<pre id="VALempty">val empty : string</pre><div class="info ">
+<div class="info-desc">
+<p>The empty string.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.13.0</li>
+</ul>
+</div>
+
+<pre id="VALof_bytes">val of_bytes : bytes -&gt; string</pre><div class="info ">
+<div class="info-desc">
+<p>Return a new string that contains the same bytes as the given byte
+    sequence.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.13.0</li>
+</ul>
+</div>
+
+<pre id="VALto_bytes">val to_bytes : string -&gt; bytes</pre><div class="info ">
+<div class="info-desc">
+<p>Return a new byte sequence that contains the same bytes as the given
+    string.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.13.0</li>
+</ul>
+</div>
+
+<pre id="VALlength">val length : string -&gt; int</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">length&nbsp;s</code> is the length (number of bytes/characters) of <code class="code">s</code>.</p>
+</div>
+</div>
+
+<pre id="VALget">val get : string -&gt; int -&gt; char</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">get&nbsp;s&nbsp;i</code> is the character at index <code class="code">i</code> in <code class="code">s</code>. This is the same
+    as writing <code class="code">s.[i]</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Raises</b> <code>Invalid_argument</code> if <code class="code">i</code> not an index of <code class="code">s</code>.</li>
+</ul>
+</div>
+<h2 id="concat">Concatenating</h2>
+<p><b>Note.</b> The <a href="Stdlib.html#VAL(^)"><code class="code">(^)</code></a> binary operator concatenates two
+    strings.</p>
+
+<pre id="VALconcat">val concat : sep:string -&gt; string list -&gt; string</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">concat&nbsp;~sep&nbsp;ss</code> concatenates the list of strings <code class="code">ss</code>, inserting
+    the separator string <code class="code">sep</code> between each.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Raises</b> <code>Invalid_argument</code> if the result is longer than
+    <a href="Sys.html#VALmax_string_length"><code class="code">Sys.max_string_length</code></a> bytes.</li>
+</ul>
+</div>
+
+<pre id="VALcat">val cat : string -&gt; string -&gt; string</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">cat&nbsp;s1&nbsp;s2</code> concatenates s1 and s2 (<code class="code">s1&nbsp;^&nbsp;s2</code>).</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.13.0</li>
+<li><b>Raises</b> <code>Invalid_argument</code> if the result is longer than
+    <a href="Sys.html#VALmax_string_length"><code class="code">Sys.max_string_length</code></a> bytes.</li>
+</ul>
+</div>
+<h2 id="predicates">Predicates and comparisons</h2>
+<pre id="VALequal">val equal : t -&gt; t -&gt; bool</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">equal&nbsp;s0&nbsp;s1</code> is <code class="code">true</code> if and only if <code class="code">s0</code> and <code class="code">s1</code> are character-wise
+    equal.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.05.0</li>
+</ul>
+</div>
+
+<pre id="VALcompare">val compare : t -&gt; t -&gt; int</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">compare&nbsp;s0&nbsp;s1</code> sorts <code class="code">s0</code> and <code class="code">s1</code> in lexicographical order. <code class="code">compare</code>
+    behaves like <a href="Stdlib.html#VALcompare"><code class="code">compare</code></a> on strings but may be more efficient.</p>
+</div>
+</div>
+
+<pre id="VALstarts_with">val starts_with : prefix:string -&gt; string -&gt; bool</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">starts_with&nbsp;</code><code class="code">~prefix&nbsp;s</code> is <code class="code">true</code> if and only if <code class="code">s</code> starts with
+    <code class="code">prefix</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.13.0</li>
+</ul>
+</div>
+
+<pre id="VALends_with">val ends_with : suffix:string -&gt; string -&gt; bool</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">ends_with&nbsp;</code><code class="code">~suffix&nbsp;s</code> is <code class="code">true</code> if and only if <code class="code">s</code> ends with <code class="code">suffix</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.13.0</li>
+</ul>
+</div>
+
+<pre id="VALcontains_from">val contains_from : string -&gt; int -&gt; char -&gt; bool</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">contains_from&nbsp;s&nbsp;start&nbsp;c</code> is <code class="code">true</code> if and only if <code class="code">c</code> appears in <code class="code">s</code>
+    after position <code class="code">start</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Raises</b> <code>Invalid_argument</code> if <code class="code">start</code> is not a valid position in <code class="code">s</code>.</li>
+</ul>
+</div>
+
+<pre id="VALrcontains_from">val rcontains_from : string -&gt; int -&gt; char -&gt; bool</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">rcontains_from&nbsp;s&nbsp;stop&nbsp;c</code> is <code class="code">true</code> if and only if <code class="code">c</code> appears in <code class="code">s</code>
+    before position <code class="code">stop+1</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Raises</b> <code>Invalid_argument</code> if <code class="code">stop&nbsp;&lt;&nbsp;0</code> or <code class="code">stop+1</code> is not a valid
+    position in <code class="code">s</code>.</li>
+</ul>
+</div>
+
+<pre id="VALcontains">val contains : string -&gt; char -&gt; bool</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">contains&nbsp;s&nbsp;c</code> is <a href="String.html#VALcontains_from"><code class="code">String.contains_from</code></a><code class="code">&nbsp;s&nbsp;0&nbsp;c</code>.</p>
+</div>
+</div>
+<h2 id="extract">Extracting substrings</h2>
+<pre id="VALsub">val sub : string -&gt; pos:int -&gt; len:int -&gt; string</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">sub&nbsp;s&nbsp;~pos&nbsp;~len</code> is a string of length <code class="code">len</code>, containing the
+    substring of <code class="code">s</code> that starts at position <code class="code">pos</code> and has length
+    <code class="code">len</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Raises</b> <code>Invalid_argument</code> if <code class="code">pos</code> and <code class="code">len</code> do not designate a valid
+    substring of <code class="code">s</code>.</li>
+</ul>
+</div>
+
+<pre id="VALsplit_on_char">val split_on_char : sep:char -&gt; string -&gt; string list</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">split_on_char&nbsp;~sep&nbsp;s</code> is the list of all (possibly empty)
+    substrings of <code class="code">s</code> that are delimited by the character <code class="code">sep</code>.</p>
+
+<p>The function's result is specified by the following invariants:</p>
+<ul>
+<li>The list is not empty.</li>
+<li>Concatenating its elements using <code class="code">sep</code> as a separator returns a
+      string equal to the input (<code class="code">concat&nbsp;(make&nbsp;1&nbsp;sep)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(split_on_char&nbsp;sep&nbsp;s)&nbsp;=&nbsp;s</code>).</li>
+<li>No string in the result contains the <code class="code">sep</code> character.</li>
+</ul>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.05.0</li>
+</ul>
+</div>
+<h2 id="transforming">Transforming</h2>
+<pre id="VALmap">val map : f:(char -&gt; char) -&gt; string -&gt; string</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">map&nbsp;f&nbsp;s</code> is the string resulting from applying <code class="code">f</code> to all the
+    characters of <code class="code">s</code> in increasing order.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.00.0</li>
+</ul>
+</div>
+
+<pre id="VALmapi">val mapi : f:(int -&gt; char -&gt; char) -&gt; string -&gt; string</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">mapi&nbsp;~f&nbsp;s</code> is like <a href="StringLabels.html#VALmap"><code class="code">StringLabels.map</code></a> but the index of the character is also
+    passed to <code class="code">f</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.02.0</li>
+</ul>
+</div>
+
+<pre id="VALfold_left">val fold_left : f:('a -&gt; char -&gt; 'a) -&gt; init:'a -&gt; string -&gt; 'a</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">fold_left&nbsp;f&nbsp;x&nbsp;s</code> computes <code class="code">f&nbsp;(...&nbsp;(f&nbsp;(f&nbsp;x&nbsp;s.[0])&nbsp;s.[1])&nbsp;...)&nbsp;s.[n-1]</code>,
+    where <code class="code">n</code> is the length of the string <code class="code">s</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.13.0</li>
+</ul>
+</div>
+
+<pre id="VALfold_right">val fold_right : f:(char -&gt; 'a -&gt; 'a) -&gt; string -&gt; init:'a -&gt; 'a</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">fold_right&nbsp;f&nbsp;s&nbsp;x</code> computes <code class="code">f&nbsp;s.[0]&nbsp;(f&nbsp;s.[1]&nbsp;(&nbsp;...&nbsp;(f&nbsp;s.[n-1]&nbsp;x)&nbsp;...))</code>,
+    where <code class="code">n</code> is the length of the string <code class="code">s</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.13.0</li>
+</ul>
+</div>
+
+<pre id="VALfor_all">val for_all : f:(char -&gt; bool) -&gt; string -&gt; bool</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">for_all&nbsp;p&nbsp;s</code> checks if all characters in <code class="code">s</code> satisfy the predicate <code class="code">p</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.13.0</li>
+</ul>
+</div>
+
+<pre id="VALexists">val exists : f:(char -&gt; bool) -&gt; string -&gt; bool</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">exists&nbsp;p&nbsp;s</code> checks if at least one character of <code class="code">s</code> satisfies the predicate
+    <code class="code">p</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.13.0</li>
+</ul>
+</div>
+
+<pre id="VALtrim">val trim : string -&gt; string</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">trim&nbsp;s</code> is <code class="code">s</code> without leading and trailing whitespace. Whitespace
+    characters are: <code class="code">'&nbsp;'</code>, <code class="code">'\x0C'</code> (form feed), <code class="code">'\n'</code>, <code class="code">'\r'</code>, and <code class="code">'\t'</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.00.0</li>
+</ul>
+</div>
+
+<pre id="VALescaped">val escaped : string -&gt; string</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">escaped&nbsp;s</code> is <code class="code">s</code> with special characters represented by escape
+    sequences, following the lexical conventions of OCaml.</p>
+
+<p>All characters outside the US-ASCII printable range [0x20;0x7E] are
+    escaped, as well as backslash (0x2F) and double-quote (0x22).</p>
+
+<p>The function <a href="Scanf.html#VALunescaped"><code class="code">Scanf.unescaped</code></a> is a left inverse of <code class="code">escaped</code>,
+    i.e. <code class="code">Scanf.unescaped&nbsp;(escaped&nbsp;s)&nbsp;=&nbsp;s</code> for any string <code class="code">s</code> (unless
+    <code class="code">escaped&nbsp;s</code> fails).</p>
+</div>
+<ul class="info-attributes">
+<li><b>Raises</b> <code>Invalid_argument</code> if the result is longer than
+    <a href="Sys.html#VALmax_string_length"><code class="code">Sys.max_string_length</code></a> bytes.</li>
+</ul>
+</div>
+
+<pre id="VALuppercase_ascii">val uppercase_ascii : string -&gt; string</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">uppercase_ascii&nbsp;s</code> is <code class="code">s</code> with all lowercase letters
+    translated to uppercase, using the US-ASCII character set.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.05.0</li>
+</ul>
+</div>
+
+<pre id="VALlowercase_ascii">val lowercase_ascii : string -&gt; string</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">lowercase_ascii&nbsp;s</code> is <code class="code">s</code> with all uppercase letters translated
+    to lowercase, using the US-ASCII character set.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.05.0</li>
+</ul>
+</div>
+
+<pre id="VALcapitalize_ascii">val capitalize_ascii : string -&gt; string</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">capitalize_ascii&nbsp;s</code> is <code class="code">s</code> with the first character set to
+    uppercase, using the US-ASCII character set.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.05.0</li>
+</ul>
+</div>
+
+<pre id="VALuncapitalize_ascii">val uncapitalize_ascii : string -&gt; string</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">uncapitalize_ascii&nbsp;s</code> is <code class="code">s</code> with the first character set to lowercase,
+    using the US-ASCII character set.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.05.0</li>
+</ul>
+</div>
+<h2 id="traversing">Traversing</h2>
+<pre id="VALiter">val iter : f:(char -&gt; unit) -&gt; string -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">iter&nbsp;~f&nbsp;s</code> applies function <code class="code">f</code> in turn to all the characters of <code class="code">s</code>.
+    It is equivalent to <code class="code">f&nbsp;s.[0];&nbsp;f&nbsp;s.[1];&nbsp;...;&nbsp;f&nbsp;s.[length&nbsp;s&nbsp;-&nbsp;1];&nbsp;()</code>.</p>
+</div>
+</div>
+
+<pre id="VALiteri">val iteri : f:(int -&gt; char -&gt; unit) -&gt; string -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">iteri</code> is like <a href="StringLabels.html#VALiter"><code class="code">StringLabels.iter</code></a>, but the function is also given the
+    corresponding character index.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.00.0</li>
+</ul>
+</div>
+<h2 id="searching">Searching</h2>
+<pre id="VALindex_from">val index_from : string -&gt; int -&gt; char -&gt; int</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">index_from&nbsp;s&nbsp;i&nbsp;c</code> is the index of the first occurrence of <code class="code">c</code> in
+    <code class="code">s</code> after position <code class="code">i</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Raises</b><ul><li><code>Not_found</code> if <code class="code">c</code> does not occur in <code class="code">s</code> after position <code class="code">i</code>.</li>
+<li><code>Invalid_argument</code> if <code class="code">i</code> is not a valid position in <code class="code">s</code>.</li>
+</ul></li>
+</ul>
+</div>
+
+<pre id="VALindex_from_opt">val index_from_opt : string -&gt; int -&gt; char -&gt; int option</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">index_from_opt&nbsp;s&nbsp;i&nbsp;c</code> is the index of the first occurrence of <code class="code">c</code>
+    in <code class="code">s</code> after position <code class="code">i</code> (if any).</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.05</li>
+<li><b>Raises</b> <code>Invalid_argument</code> if <code class="code">i</code> is not a valid position in <code class="code">s</code>.</li>
+</ul>
+</div>
+
+<pre id="VALrindex_from">val rindex_from : string -&gt; int -&gt; char -&gt; int</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">rindex_from&nbsp;s&nbsp;i&nbsp;c</code> is the index of the last occurrence of <code class="code">c</code> in
+    <code class="code">s</code> before position <code class="code">i+1</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Raises</b><ul><li><code>Not_found</code> if <code class="code">c</code> does not occur in <code class="code">s</code> before position <code class="code">i+1</code>.</li>
+<li><code>Invalid_argument</code> if <code class="code">i+1</code> is not a valid position in <code class="code">s</code>.</li>
+</ul></li>
+</ul>
+</div>
+
+<pre id="VALrindex_from_opt">val rindex_from_opt : string -&gt; int -&gt; char -&gt; int option</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">rindex_from_opt&nbsp;s&nbsp;i&nbsp;c</code> is the index of the last occurrence of <code class="code">c</code>
+    in <code class="code">s</code> before position <code class="code">i+1</code> (if any).</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.05</li>
+<li><b>Raises</b> <code>Invalid_argument</code> if <code class="code">i+1</code> is not a valid position in <code class="code">s</code>.</li>
+</ul>
+</div>
+
+<pre id="VALindex">val index : string -&gt; char -&gt; int</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">index&nbsp;s&nbsp;c</code> is <a href="String.html#VALindex_from"><code class="code">String.index_from</code></a><code class="code">&nbsp;s&nbsp;0&nbsp;c</code>.</p>
+</div>
+</div>
+
+<pre id="VALindex_opt">val index_opt : string -&gt; char -&gt; int option</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">index_opt&nbsp;s&nbsp;c</code> is <a href="String.html#VALindex_from_opt"><code class="code">String.index_from_opt</code></a><code class="code">&nbsp;s&nbsp;0&nbsp;c</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.05</li>
+</ul>
+</div>
+
+<pre id="VALrindex">val rindex : string -&gt; char -&gt; int</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">rindex&nbsp;s&nbsp;c</code> is <a href="String.html#VALrindex_from"><code class="code">String.rindex_from</code></a><code class="code">&nbsp;s&nbsp;(length&nbsp;s&nbsp;-&nbsp;1)&nbsp;c</code>.</p>
+</div>
+</div>
+
+<pre id="VALrindex_opt">val rindex_opt : string -&gt; char -&gt; int option</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">rindex_opt&nbsp;s&nbsp;c</code> is <a href="String.html#VALrindex_from_opt"><code class="code">String.rindex_from_opt</code></a><code class="code">&nbsp;s&nbsp;(length&nbsp;s&nbsp;-&nbsp;1)&nbsp;c</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.05</li>
+</ul>
+</div>
+<h2 id="1_StringsandSequences">Strings and Sequences</h2>
+<pre id="VALto_seq">val to_seq : t -&gt; char Seq.t</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">to_seq&nbsp;s</code> is a sequence made of the string's characters in
+    increasing order. In <code class="code">"unsafe-string"</code> mode, modifications of the string
+    during iteration will be reflected in the sequence.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.07</li>
+</ul>
+</div>
+
+<pre id="VALto_seqi">val to_seqi : t -&gt; (int * char) Seq.t</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">to_seqi&nbsp;s</code> is like <a href="StringLabels.html#VALto_seq"><code class="code">StringLabels.to_seq</code></a> but also tuples the corresponding index.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.07</li>
+</ul>
+</div>
+
+<pre id="VALof_seq">val of_seq : char Seq.t -&gt; t</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">of_seq&nbsp;s</code> is a string made of the sequence's characters.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.07</li>
+</ul>
+</div>
+<h2 id="utf">UTF decoding and validations</h2><h3 id="utf_8">UTF-8</h3>
+<pre id="VALget_utf_8_uchar">val get_utf_8_uchar : t -&gt; int -&gt; Uchar.utf_decode</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">get_utf_8_uchar&nbsp;b&nbsp;i</code> decodes an UTF-8 character at index <code class="code">i</code> in
+    <code class="code">b</code>.</p>
+</div>
+</div>
+
+<pre id="VALis_valid_utf_8">val is_valid_utf_8 : t -&gt; bool</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">is_valid_utf_8&nbsp;b</code> is <code class="code">true</code> if and only if <code class="code">b</code> contains valid
+    UTF-8 data.</p>
+</div>
+</div>
+<h3 id="utf_16be">UTF-16BE</h3>
+<pre id="VALget_utf_16be_uchar">val get_utf_16be_uchar : t -&gt; int -&gt; Uchar.utf_decode</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">get_utf_16be_uchar&nbsp;b&nbsp;i</code> decodes an UTF-16BE character at index
+    <code class="code">i</code> in <code class="code">b</code>.</p>
+</div>
+</div>
+
+<pre id="VALis_valid_utf_16be">val is_valid_utf_16be : t -&gt; bool</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">is_valid_utf_16be&nbsp;b</code> is <code class="code">true</code> if and only if <code class="code">b</code> contains valid
+    UTF-16BE data.</p>
+</div>
+</div>
+<h3 id="utf_16le">UTF-16LE</h3>
+<pre id="VALget_utf_16le_uchar">val get_utf_16le_uchar : t -&gt; int -&gt; Uchar.utf_decode</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">get_utf_16le_uchar&nbsp;b&nbsp;i</code> decodes an UTF-16LE character at index
+    <code class="code">i</code> in <code class="code">b</code>.</p>
+</div>
+</div>
+
+<pre id="VALis_valid_utf_16le">val is_valid_utf_16le : t -&gt; bool</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">is_valid_utf_16le&nbsp;b</code> is <code class="code">true</code> if and only if <code class="code">b</code> contains valid
+    UTF-16LE data.</p>
+</div>
+</div>
+
+<pre id="VALblit">val blit : src:string -&gt; src_pos:int -&gt; dst:bytes -&gt; dst_pos:int -&gt; len:int -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">blit&nbsp;~src&nbsp;~src_pos&nbsp;~dst&nbsp;~dst_pos&nbsp;~len</code> copies <code class="code">len</code> bytes
+    from the string <code class="code">src</code>, starting at index <code class="code">src_pos</code>,
+    to byte sequence <code class="code">dst</code>, starting at character number <code class="code">dst_pos</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Raises</b> <code>Invalid_argument</code> if <code class="code">src_pos</code> and <code class="code">len</code> do not
+    designate a valid range of <code class="code">src</code>, or if <code class="code">dst_pos</code> and <code class="code">len</code>
+    do not designate a valid range of <code class="code">dst</code>.</li>
+</ul>
+</div>
+<h2 id="1_Binarydecodingofintegers">Binary decoding of integers</h2><p>The functions in this section binary decode integers from strings.</p>
+
+<p>All following functions raise <code class="code">Invalid_argument</code> if the characters
+    needed at index <code class="code">i</code> to decode the integer are not available.</p>
+
+<p>Little-endian (resp. big-endian) encoding means that least
+    (resp. most) significant bytes are stored first.  Big-endian is
+    also known as network byte order.  Native-endian encoding is
+    either little-endian or big-endian depending on <a href="Sys.html#VALbig_endian"><code class="code">Sys.big_endian</code></a>.</p>
+
+<p>32-bit and 64-bit integers are represented by the <code class="code">int32</code> and
+    <code class="code">int64</code> types, which can be interpreted either as signed or
+    unsigned numbers.</p>
+
+<p>8-bit and 16-bit integers are represented by the <code class="code">int</code> type,
+    which has more bits than the binary encoding.  These extra bits
+    are sign-extended (or zero-extended) for functions which decode 8-bit
+    or 16-bit integers and represented them with <code class="code">int</code> values.</p>
+
+<pre id="VALget_uint8">val get_uint8 : string -&gt; int -&gt; int</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">get_uint8&nbsp;b&nbsp;i</code> is <code class="code">b</code>'s unsigned 8-bit integer starting at character
+    index <code class="code">i</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.13.0</li>
+</ul>
+</div>
+
+<pre id="VALget_int8">val get_int8 : string -&gt; int -&gt; int</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">get_int8&nbsp;b&nbsp;i</code> is <code class="code">b</code>'s signed 8-bit integer starting at character
+    index <code class="code">i</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.13.0</li>
+</ul>
+</div>
+
+<pre id="VALget_uint16_ne">val get_uint16_ne : string -&gt; int -&gt; int</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">get_uint16_ne&nbsp;b&nbsp;i</code> is <code class="code">b</code>'s native-endian unsigned 16-bit integer
+    starting at character index <code class="code">i</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.13.0</li>
+</ul>
+</div>
+
+<pre id="VALget_uint16_be">val get_uint16_be : string -&gt; int -&gt; int</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">get_uint16_be&nbsp;b&nbsp;i</code> is <code class="code">b</code>'s big-endian unsigned 16-bit integer
+    starting at character index <code class="code">i</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.13.0</li>
+</ul>
+</div>
+
+<pre id="VALget_uint16_le">val get_uint16_le : string -&gt; int -&gt; int</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">get_uint16_le&nbsp;b&nbsp;i</code> is <code class="code">b</code>'s little-endian unsigned 16-bit integer
+    starting at character index <code class="code">i</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.13.0</li>
+</ul>
+</div>
+
+<pre id="VALget_int16_ne">val get_int16_ne : string -&gt; int -&gt; int</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">get_int16_ne&nbsp;b&nbsp;i</code> is <code class="code">b</code>'s native-endian signed 16-bit integer
+    starting at character index <code class="code">i</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.13.0</li>
+</ul>
+</div>
+
+<pre id="VALget_int16_be">val get_int16_be : string -&gt; int -&gt; int</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">get_int16_be&nbsp;b&nbsp;i</code> is <code class="code">b</code>'s big-endian signed 16-bit integer
+    starting at character index <code class="code">i</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.13.0</li>
+</ul>
+</div>
+
+<pre id="VALget_int16_le">val get_int16_le : string -&gt; int -&gt; int</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">get_int16_le&nbsp;b&nbsp;i</code> is <code class="code">b</code>'s little-endian signed 16-bit integer
+    starting at character index <code class="code">i</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.13.0</li>
+</ul>
+</div>
+
+<pre id="VALget_int32_ne">val get_int32_ne : string -&gt; int -&gt; int32</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">get_int32_ne&nbsp;b&nbsp;i</code> is <code class="code">b</code>'s native-endian 32-bit integer
+    starting at character index <code class="code">i</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.13.0</li>
+</ul>
+</div>
+
+<pre id="VALhash">val hash : t -&gt; int</pre><div class="info ">
+<div class="info-desc">
+<p>An unseeded hash function for strings, with the same output value as
+    <a href="Hashtbl.html#VALhash"><code class="code">Hashtbl.hash</code></a>. This function allows this module to be passed as argument
+    to the functor <a href="Hashtbl.Make.html"><code class="code">Hashtbl.Make</code></a>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 5.0.0</li>
+</ul>
+</div>
+
+<pre id="VALseeded_hash">val seeded_hash : int -&gt; t -&gt; int</pre><div class="info ">
+<div class="info-desc">
+<p>A seeded hash function for strings, with the same output value as
+    <a href="Hashtbl.html#VALseeded_hash"><code class="code">Hashtbl.seeded_hash</code></a>. This function allows this module to be passed as
+    argument to the functor <a href="Hashtbl.MakeSeeded.html"><code class="code">Hashtbl.MakeSeeded</code></a>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 5.0.0</li>
+</ul>
+</div>
+
+<pre id="VALget_int32_be">val get_int32_be : string -&gt; int -&gt; int32</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">get_int32_be&nbsp;b&nbsp;i</code> is <code class="code">b</code>'s big-endian 32-bit integer
+    starting at character index <code class="code">i</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.13.0</li>
+</ul>
+</div>
+
+<pre id="VALget_int32_le">val get_int32_le : string -&gt; int -&gt; int32</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">get_int32_le&nbsp;b&nbsp;i</code> is <code class="code">b</code>'s little-endian 32-bit integer
+    starting at character index <code class="code">i</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.13.0</li>
+</ul>
+</div>
+
+<pre id="VALget_int64_ne">val get_int64_ne : string -&gt; int -&gt; int64</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">get_int64_ne&nbsp;b&nbsp;i</code> is <code class="code">b</code>'s native-endian 64-bit integer
+    starting at character index <code class="code">i</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.13.0</li>
+</ul>
+</div>
+
+<pre id="VALget_int64_be">val get_int64_be : string -&gt; int -&gt; int64</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">get_int64_be&nbsp;b&nbsp;i</code> is <code class="code">b</code>'s big-endian 64-bit integer
+    starting at character index <code class="code">i</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.13.0</li>
+</ul>
+</div>
+
+<pre id="VALget_int64_le">val get_int64_le : string -&gt; int -&gt; int64</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">get_int64_le&nbsp;b&nbsp;i</code> is <code class="code">b</code>'s little-endian 64-bit integer
+    starting at character index <code class="code">i</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.13.0</li>
+</ul>
+</div>
+
+</div>

@@ -1,0 +1,59 @@
+<link rel="stylesheet" href="/css/main.css"><div class="ocamldoc">
+<h1>Module <a href="type_Stdlib.Condition.html">Stdlib.Condition</a></h1>
+
+<pre id="MODULECondition"><span class="keyword">module</span> Condition: Condition</pre><hr width="100%">
+
+<pre id="TYPEt"><span class="keyword">type</span> t </pre>
+<div class="info ">
+<div class="info-desc">
+<p>The type of condition variables.</p>
+</div>
+</div>
+
+
+<pre id="VALcreate">val create : unit -&gt; t</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">create()</code> creates and returns a new condition variable.
+   This condition variable should be associated (in the programmer's mind)
+   with a certain mutex <code class="code">m</code> and with a certain property <i>P</i> of the data
+   structure that is protected by the mutex <code class="code">m</code>.</p>
+</div>
+</div>
+
+<pre id="VALwait">val wait : t -&gt; Mutex.t -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p>The call <code class="code">wait&nbsp;c&nbsp;m</code> is permitted only if <code class="code">m</code> is the mutex associated
+   with the condition variable <code class="code">c</code>, and only if <code class="code">m</code> is currently locked.
+   This call atomically unlocks the mutex <code class="code">m</code> and suspends the
+   current thread on the condition variable <code class="code">c</code>. This thread can
+   later be woken up after the condition variable <code class="code">c</code> has been signaled
+   via <a href="Condition.html#VALsignal"><code class="code">Condition.signal</code></a> or <a href="Condition.html#VALbroadcast"><code class="code">Condition.broadcast</code></a>; however, it can also be woken up for
+   no reason. The mutex <code class="code">m</code> is locked again before <code class="code">wait</code> returns. One
+   cannot assume that the property <i>P</i> associated with the condition
+   variable <code class="code">c</code> holds when <code class="code">wait</code> returns; one must explicitly test
+   whether <i>P</i> holds after calling <code class="code">wait</code>.</p>
+</div>
+</div>
+
+<pre id="VALsignal">val signal : t -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">signal&nbsp;c</code> wakes up one of the threads waiting on the condition
+   variable <code class="code">c</code>, if there is one. If there is none, this call has
+   no effect.</p>
+
+<p>It is recommended to call <code class="code">signal&nbsp;c</code> inside a critical section,
+   that is, while the mutex <code class="code">m</code> associated with <code class="code">c</code> is locked.</p>
+</div>
+</div>
+
+<pre id="VALbroadcast">val broadcast : t -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">broadcast&nbsp;c</code> wakes up all threads waiting on the condition
+   variable <code class="code">c</code>. If there are none, this call has no effect.</p>
+
+<p>It is recommended to call <code class="code">broadcast&nbsp;c</code> inside a critical section,
+   that is, while the mutex <code class="code">m</code> associated with <code class="code">c</code> is locked.</p>
+</div>
+</div>
+
+</div>

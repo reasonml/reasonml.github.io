@@ -1,0 +1,120 @@
+<link rel="stylesheet" href="/css/main.css"><div class="ocamldoc">
+<h1>Module <a href="type_Effect.Deep.html">Effect.Deep</a></h1>
+
+<pre id="MODULEDeep"><span class="keyword">module</span> Deep: sig .. end</pre><hr width="100%">
+<p>Deep handlers</p>
+
+<pre id="TYPEcontinuation"><span class="keyword">type</span> ('a, 'b) continuation </pre>
+<div class="info ">
+<div class="info-desc">
+<p><code class="code">('a,'b)&nbsp;continuation</code> is a delimited continuation that expects a <code class="code">'a</code>
+      value and returns a <code class="code">'b</code> value.</p>
+</div>
+</div>
+
+
+<pre id="VALcontinue">val continue : ('a, 'b) continuation -&gt; 'a -&gt; 'b</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">continue&nbsp;k&nbsp;x</code> resumes the continuation <code class="code">k</code> by passing <code class="code">x</code> to <code class="code">k</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Raises</b> <code>Continuation_already_resumed</code> if the continuation has already been
+      resumed.</li>
+</ul>
+</div>
+
+<pre id="VALdiscontinue">val discontinue : ('a, 'b) continuation -&gt; exn -&gt; 'b</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">discontinue&nbsp;k&nbsp;e</code> resumes the continuation <code class="code">k</code> by raising the
+      exception <code class="code">e</code> in <code class="code">k</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Raises</b> <code>Continuation_already_resumed</code> if the continuation has already been
+      resumed.</li>
+</ul>
+</div>
+
+<pre id="VALdiscontinue_with_backtrace">val discontinue_with_backtrace : ('a, 'b) continuation -&gt;       exn -&gt; Printexc.raw_backtrace -&gt; 'b</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">discontinue_with_backtrace&nbsp;k&nbsp;e&nbsp;bt</code> resumes the continuation <code class="code">k</code> by
+      raising the exception <code class="code">e</code> in <code class="code">k</code> using <code class="code">bt</code> as the origin for the
+      exception.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Raises</b> <code>Continuation_already_resumed</code> if the continuation has already been
+      resumed.</li>
+</ul>
+</div>
+
+<pre><span class="keyword">type</span> ('a, 'b) handler = {</pre><table class="typetable">
+<tbody><tr>
+<td align="left" valign="top">
+<code>&nbsp;&nbsp;</code></td>
+<td align="left" valign="top">
+<code>retc&nbsp;: 'a -&gt; 'b;</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>&nbsp;&nbsp;</code></td>
+<td align="left" valign="top">
+<code>exnc&nbsp;: exn -&gt; 'b;</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>&nbsp;&nbsp;</code></td>
+<td align="left" valign="top">
+<code>effc&nbsp;: 'c. 'c Effect.t -&gt; (('c, 'b) continuation -&gt; 'b) option;</code></td>
+
+</tr></tbody></table>
+<code>}</code>
+
+<div class="info ">
+<div class="info-desc">
+<p><code class="code">('a,'b)&nbsp;handler</code> is a handler record with three fields -- <code class="code">retc</code>
+      is the value handler, <code class="code">exnc</code> handles exceptions, and <code class="code">effc</code> handles the
+      effects performed by the computation enclosed by the handler.</p>
+</div>
+</div>
+
+
+<pre id="VALmatch_with">val match_with : ('c -&gt; 'a) -&gt; 'c -&gt; ('a, 'b) handler -&gt; 'b</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">match_with&nbsp;f&nbsp;v&nbsp;h</code> runs the computation <code class="code">f&nbsp;v</code> in the handler <code class="code">h</code>.</p>
+</div>
+</div>
+
+<pre><span class="keyword">type</span> 'a effect_handler = {</pre><table class="typetable">
+<tbody><tr>
+<td align="left" valign="top">
+<code>&nbsp;&nbsp;</code></td>
+<td align="left" valign="top">
+<code>effc&nbsp;: 'b. 'b Effect.t -&gt; (('b, 'a) continuation -&gt; 'a) option;</code></td>
+
+</tr></tbody></table>
+<code>}</code>
+
+<div class="info ">
+<div class="info-desc">
+<p><code class="code">'a&nbsp;effect_handler</code> is a deep handler with an identity value handler
+      <code class="code">fun&nbsp;x&nbsp;-&gt;&nbsp;x</code> and an exception handler that raises any exception
+      <code class="code">fun&nbsp;e&nbsp;-&gt;&nbsp;raise&nbsp;e</code>.</p>
+</div>
+</div>
+
+
+<pre id="VALtry_with">val try_with : ('b -&gt; 'a) -&gt; 'b -&gt; 'a effect_handler -&gt; 'a</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">try_with&nbsp;f&nbsp;v&nbsp;h</code> runs the computation <code class="code">f&nbsp;v</code> under the handler <code class="code">h</code>.</p>
+</div>
+</div>
+
+<pre id="VALget_callstack">val get_callstack : ('a, 'b) continuation -&gt; int -&gt; Printexc.raw_backtrace</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">get_callstack&nbsp;c&nbsp;n</code> returns a description of the top of the call stack on
+      the continuation <code class="code">c</code>, with at most <code class="code">n</code> entries.</p>
+</div>
+</div>
+
+</div>

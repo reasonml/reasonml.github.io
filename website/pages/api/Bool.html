@@ -1,0 +1,95 @@
+<link rel="stylesheet" href="/css/main.css"><div class="ocamldoc">
+<h1>Module <a href="type_Bool.html">Bool</a></h1>
+
+<pre id="MODULEBool"><span class="keyword">module</span> Bool: sig .. end</pre><div class="info module top">
+<div class="info-desc">
+<p>Boolean values.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.08</li>
+</ul>
+</div>
+<hr width="100%">
+<h2 id="bools">Booleans</h2>
+<pre id="TYPEt"><span class="keyword">type</span> t = bool = </pre><table class="typetable">
+<tbody><tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>false</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>true</code></td>
+
+</tr></tbody></table>
+
+<div class="info ">
+<div class="info-desc">
+<p>The type of booleans (truth values).</p>
+
+<p>The constructors <code class="code">false</code> and <code class="code">true</code> are included here so that they have
+    paths, but they are not intended to be used in user-defined data types.</p>
+</div>
+</div>
+
+
+<pre id="VALnot">val not : bool -&gt; bool</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">not&nbsp;b</code> is the boolean negation of <code class="code">b</code>.</p>
+</div>
+</div>
+
+<pre id="VAL(&amp;&amp;)">val (&amp;&amp;) : bool -&gt; bool -&gt; bool</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">e0&nbsp;&amp;&amp;&nbsp;e1</code> is the lazy boolean conjunction of expressions <code class="code">e0</code> and <code class="code">e1</code>.
+    If <code class="code">e0</code> evaluates to <code class="code">false</code>, <code class="code">e1</code> is not evaluated. Right-associative
+    operator at precedence level 3/11.</p>
+</div>
+</div>
+
+<pre id="VAL(||)">val (||) : bool -&gt; bool -&gt; bool</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">e0&nbsp;||&nbsp;e1</code> is the lazy boolean disjunction of expressions <code class="code">e0</code> and <code class="code">e1</code>.
+    If <code class="code">e0</code> evaluates to <code class="code">true</code>, <code class="code">e1</code> is not evaluated. Right-associative
+    operator at precedence level 2/11.</p>
+</div>
+</div>
+<h2 id="preds">Predicates and comparisons</h2>
+<pre id="VALequal">val equal : bool -&gt; bool -&gt; bool</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">equal&nbsp;b0&nbsp;b1</code> is <code class="code">true</code> if and only if <code class="code">b0</code> and <code class="code">b1</code> are both <code class="code">true</code>
+    or both <code class="code">false</code>.</p>
+</div>
+</div>
+
+<pre id="VALcompare">val compare : bool -&gt; bool -&gt; int</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">compare&nbsp;b0&nbsp;b1</code> is a total order on boolean values. <code class="code">false</code> is smaller
+    than <code class="code">true</code>.</p>
+</div>
+</div>
+<h2 id="convert">Converting</h2>
+<pre id="VALto_int">val to_int : bool -&gt; int</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">to_int&nbsp;b</code> is <code class="code">0</code> if <code class="code">b</code> is <code class="code">false</code> and <code class="code">1</code> if <code class="code">b</code> is <code class="code">true</code>.</p>
+</div>
+</div>
+
+<pre id="VALto_float">val to_float : bool -&gt; float</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">to_float&nbsp;b</code> is <code class="code">0.</code> if <code class="code">b</code> is <code class="code">false</code> and <code class="code">1.</code> if <code class="code">b</code> is <code class="code">true</code>.</p>
+</div>
+</div>
+
+<pre id="VALto_string">val to_string : bool -&gt; string</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">to_string&nbsp;b</code> is <code class="code">"true"</code> if <code class="code">b</code> is <code class="code">true</code> and <code class="code">"false"</code> if <code class="code">b</code> is
+    <code class="code">false</code>.</p>
+</div>
+</div>
+
+</div>

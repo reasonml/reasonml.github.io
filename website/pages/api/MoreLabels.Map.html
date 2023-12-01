@@ -1,14 +1,50 @@
 <link rel="stylesheet" href="/css/main.css"><div class="ocamldoc">
-<div class="navbar"><a class="pre" href="MoreLabels.Hashtbl.html" title="MoreLabels.Hashtbl">Previous</a>
-&#xA0;<a class="up" href="MoreLabels.html" title="MoreLabels">Up</a>
-&#xA0;<a class="post" href="MoreLabels.Set.html" title="MoreLabels.Set">Next</a>
-</div>
 <h1>Module <a href="type_MoreLabels.Map.html">MoreLabels.Map</a></h1>
 
-<pre><span class="keyword">module</span> Map: sig .. end</pre><hr width="100%">
+<pre id="MODULEMap"><span class="keyword">module</span> Map: sig .. end</pre><hr width="100%">
+<p>Association tables over ordered types.</p>
 
-<pre><span class="keyword">module</span> type OrderedType = Map.OrderedType;
-</pre>
-<pre><span class="keyword">module</span> type S = sig .. end</pre>
-<pre><span class="keyword">module</span> Make: (Ord: OrderedType) =&gt; S with type key = Ord.t;
-</pre></div>
+<p>This module implements applicative association tables, also known as
+     finite maps or dictionaries, given a total ordering function
+     over the keys.
+     All operations over maps are purely applicative (no side-effects).
+     The implementation uses balanced binary trees, and therefore searching
+     and insertion take time logarithmic in the size of the map.</p>
+
+<p>For instance:</p>
+<pre class="codepre">       module IntPairs =
+         struct
+           type t = int * int
+           let compare (x0,y0) (x1,y1) =
+             match Stdlib.compare x0 x1 with
+                 0 -&gt; Stdlib.compare y0 y1
+               | c -&gt; c
+         end
+
+       module PairsMap = Map.Make(IntPairs)
+
+       let m = PairsMap.(empty |&gt; add (0,1) "hello" |&gt; add (1,0) "world")
+     </pre>
+<p>This creates a new module <code class="code">PairsMap</code>, with a new type <code class="code">'a&nbsp;PairsMap.t</code>
+     of maps from <code class="code">int&nbsp;*&nbsp;int</code> to <code class="code">'a</code>. In this example, <code class="code">m</code> contains <code class="code">string</code>
+     values so its type is <code class="code">string&nbsp;PairsMap.t</code>.</p>
+
+<pre id="MODULETYPEOrderedType"><span class="keyword">module</span> type OrderedType = sig .. end</pre><div class="info">
+<p>Input signature of the functor <a href="MoreLabels.Map.Make.html"><code class="code">MoreLabels.Map.Make</code></a>.</p>
+
+</div>
+
+<pre id="MODULETYPES"><span class="keyword">module</span> type S = sig .. end</pre><div class="info">
+<p>Output signature of the functor <a href="MoreLabels.Map.Make.html"><code class="code">MoreLabels.Map.Make</code></a>.</p>
+
+</div>
+
+<pre id="MODULEMake"><span class="keyword">module</span> Make: functor&nbsp;(Ord&nbsp;:&nbsp;OrderedType)&nbsp;-&gt;&nbsp;S 
+    with type key = Ord.t
+     and type 'a t = 'a Map.Make(Ord).t</pre><div class="info">
+<p>Functor building an implementation of the map structure
+     given a totally ordered type.</p>
+
+</div>
+
+</div>

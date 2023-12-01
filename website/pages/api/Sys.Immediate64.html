@@ -1,0 +1,13 @@
+<link rel="stylesheet" href="/css/main.css"><div class="ocamldoc">
+<h1>Module <a href="type_Sys.Immediate64.html">Sys.Immediate64</a></h1>
+
+<pre id="MODULEImmediate64"><span class="keyword">module</span> Immediate64: sig .. end</pre><hr width="100%">
+<p>This module allows to define a type <code class="code">t</code> with the <code class="code">immediate64</code>
+      attribute. This attribute means that the type is immediate on 64
+      bit architectures. On other architectures, it might or might not
+      be immediate.</p>
+
+<pre id="MODULETYPENon_immediate"><span class="keyword">module</span> type Non_immediate = sig .. end</pre>
+<pre id="MODULETYPEImmediate"><span class="keyword">module</span> type Immediate = sig .. end</pre>
+<pre id="MODULEMake"><span class="keyword">module</span> Make: functor&nbsp;(Immediate&nbsp;:&nbsp;Immediate)&nbsp;-&gt;&nbsp;functor&nbsp;(Non_immediate&nbsp;:&nbsp;Non_immediate)&nbsp;-&gt;&nbsp;sig .. end</pre>
+</div>

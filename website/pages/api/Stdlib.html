@@ -1,0 +1,2133 @@
+<link rel="stylesheet" href="/css/main.css"><div class="ocamldoc">
+<h1>Module <a href="type_Stdlib.html">Stdlib</a></h1>
+
+<pre id="MODULEStdlib"><span class="keyword">module</span> Stdlib: sig .. end</pre><div class="info module top">
+<div class="info-desc">
+<p>The OCaml Standard library.</p>
+
+<p>This module is automatically opened at the beginning of each
+    compilation. All components of this module can therefore be
+    referred by their short name, without prefixing them by <code class="code">Stdlib</code>.</p>
+
+<p>In particular, it provides the basic operations over the built-in
+    types (numbers, booleans, byte sequences, strings, exceptions,
+    references, lists, arrays, input-output channels, ...) and the
+    <a href="Stdlib.html#modules">standard library modules</a>.</p>
+</div>
+</div>
+<hr width="100%">
+<h2 id="1_Exceptions">Exceptions</h2>
+<pre id="VALraise">val raise : exn -&gt; 'a</pre><div class="info ">
+<div class="info-desc">
+<p>Raise the given exception value</p>
+</div>
+</div>
+
+<pre id="VALraise_notrace">val raise_notrace : exn -&gt; 'a</pre><div class="info ">
+<div class="info-desc">
+<p>A faster version <code class="code">raise</code> which does not record the backtrace.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.02.0</li>
+</ul>
+</div>
+
+<pre id="VALinvalid_arg">val invalid_arg : string -&gt; 'a</pre><div class="info ">
+<div class="info-desc">
+<p>Raise exception <code class="code">Invalid_argument</code> with the given string.</p>
+</div>
+</div>
+
+<pre id="VALfailwith">val failwith : string -&gt; 'a</pre><div class="info ">
+<div class="info-desc">
+<p>Raise exception <code class="code">Failure</code> with the given string.</p>
+</div>
+</div>
+
+<pre id="EXCEPTIONExit"><span class="keyword">exception</span> Exit</pre>
+<div class="info ">
+<div class="info-desc">
+<p>The <code class="code">Exit</code> exception is not raised by any library function.  It is
+    provided for use in your programs.</p>
+</div>
+</div>
+
+<pre id="EXCEPTIONMatch_failure"><span class="keyword">exception</span> Match_failure of (string * int * int)</pre>
+<div class="info ">
+<div class="info-desc">
+<p>Exception raised when none of the cases of a pattern-matching
+   apply. The arguments are the location of the match keyword in the
+   source code (file name, line number, column number).</p>
+</div>
+</div>
+
+<pre id="EXCEPTIONAssert_failure"><span class="keyword">exception</span> Assert_failure of (string * int * int)</pre>
+<div class="info ">
+<div class="info-desc">
+<p>Exception raised when an assertion fails. The arguments are the
+   location of the assert keyword in the source code (file name, line
+   number, column number).</p>
+</div>
+</div>
+
+<pre id="EXCEPTIONInvalid_argument"><span class="keyword">exception</span> Invalid_argument of string</pre>
+<div class="info ">
+<div class="info-desc">
+<p>Exception raised by library functions to signal that the given
+   arguments do not make sense. The string gives some information to
+   the programmer. As a general rule, this exception should not be
+   caught, it denotes a programming error and the code should be
+   modified not to trigger it.</p>
+</div>
+</div>
+
+<pre id="EXCEPTIONFailure"><span class="keyword">exception</span> Failure of string</pre>
+<div class="info ">
+<div class="info-desc">
+<p>Exception raised by library functions to signal that they are
+   undefined on the given arguments. The string is meant to give some
+   information to the programmer; you must not pattern match on the
+   string literal because it may change in future versions (use
+   Failure _ instead).</p>
+</div>
+</div>
+
+<pre id="EXCEPTIONNot_found"><span class="keyword">exception</span> Not_found</pre>
+<div class="info ">
+<div class="info-desc">
+<p>Exception raised by search functions when the desired object could
+   not be found.</p>
+</div>
+</div>
+
+<pre id="EXCEPTIONOut_of_memory"><span class="keyword">exception</span> Out_of_memory</pre>
+<div class="info ">
+<div class="info-desc">
+<p>Exception raised by the garbage collector when there is
+   insufficient memory to complete the computation. (Not reliable for
+   allocations on the minor heap.)</p>
+</div>
+</div>
+
+<pre id="EXCEPTIONStack_overflow"><span class="keyword">exception</span> Stack_overflow</pre>
+<div class="info ">
+<div class="info-desc">
+<p>Exception raised by the bytecode interpreter when the evaluation
+   stack reaches its maximal size. This often indicates infinite or
+   excessively deep recursion in the user's program.</p>
+
+<p>Before 4.10, it was not fully implemented by the native-code
+   compiler.</p>
+</div>
+</div>
+
+<pre id="EXCEPTIONSys_error"><span class="keyword">exception</span> Sys_error of string</pre>
+<div class="info ">
+<div class="info-desc">
+<p>Exception raised by the input/output functions to report an
+   operating system error. The string is meant to give some
+   information to the programmer; you must not pattern match on the
+   string literal because it may change in future versions (use
+   Sys_error _ instead).</p>
+</div>
+</div>
+
+<pre id="EXCEPTIONEnd_of_file"><span class="keyword">exception</span> End_of_file</pre>
+<div class="info ">
+<div class="info-desc">
+<p>Exception raised by input functions to signal that the end of file
+   has been reached.</p>
+</div>
+</div>
+
+<pre id="EXCEPTIONDivision_by_zero"><span class="keyword">exception</span> Division_by_zero</pre>
+<div class="info ">
+<div class="info-desc">
+<p>Exception raised by integer division and remainder operations when
+   their second argument is zero.</p>
+</div>
+</div>
+
+<pre id="EXCEPTIONSys_blocked_io"><span class="keyword">exception</span> Sys_blocked_io</pre>
+<div class="info ">
+<div class="info-desc">
+<p>A special case of Sys_error raised when no I/O is possible on a
+   non-blocking I/O channel.</p>
+</div>
+</div>
+
+<pre id="EXCEPTIONUndefined_recursive_module"><span class="keyword">exception</span> Undefined_recursive_module of (string * int * int)</pre>
+<div class="info ">
+<div class="info-desc">
+<p>Exception raised when an ill-founded recursive module definition
+   is evaluated. The arguments are the location of the definition in
+   the source code (file name, line number, column number).</p>
+</div>
+</div>
+<h2 id="1_Comparisons">Comparisons</h2>
+<pre id="VAL(=)">val (=) : 'a -&gt; 'a -&gt; bool</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">e1&nbsp;=&nbsp;e2</code> tests for structural equality of <code class="code">e1</code> and <code class="code">e2</code>.
+   Mutable structures (e.g. references and arrays) are equal
+   if and only if their current contents are structurally equal,
+   even if the two mutable objects are not the same physical object.
+   Equality between functional values raises <code class="code">Invalid_argument</code>.
+   Equality between cyclic data structures may not terminate.
+   Left-associative operator, see <a href="Ocaml_operators.html"><code class="code">Ocaml_operators</code></a> for more information.</p>
+</div>
+</div>
+
+<pre id="VAL(<>)">val (&lt;&gt;) : 'a -&gt; 'a -&gt; bool</pre><div class="info ">
+<div class="info-desc">
+<p>Negation of <a href="Stdlib.html#VAL(=)"><code class="code">(=)</code></a>.
+    Left-associative operator, see <a href="Ocaml_operators.html"><code class="code">Ocaml_operators</code></a> for more information.</p>
+</div>
+</div>
+
+<pre id="VAL(<)">val (&lt;) : 'a -&gt; 'a -&gt; bool</pre><div class="info ">
+<div class="info-desc">
+<p>See <a href="Stdlib.html#VAL(>=)"><code class="code">(&gt;=)</code></a>.
+    Left-associative operator, see <a href="Ocaml_operators.html"><code class="code">Ocaml_operators</code></a> for more information.</p>
+</div>
+</div>
+
+<pre id="VAL(>)">val (&gt;) : 'a -&gt; 'a -&gt; bool</pre><div class="info ">
+<div class="info-desc">
+<p>See <a href="Stdlib.html#VAL(>=)"><code class="code">(&gt;=)</code></a>.
+    Left-associative operator,  see <a href="Ocaml_operators.html"><code class="code">Ocaml_operators</code></a> for more information.</p>
+</div>
+</div>
+
+<pre id="VAL(<=)">val (&lt;=) : 'a -&gt; 'a -&gt; bool</pre><div class="info ">
+<div class="info-desc">
+<p>See <a href="Stdlib.html#VAL(>=)"><code class="code">(&gt;=)</code></a>.
+    Left-associative operator,  see <a href="Ocaml_operators.html"><code class="code">Ocaml_operators</code></a> for more information.</p>
+</div>
+</div>
+
+<pre id="VAL(>=)">val (&gt;=) : 'a -&gt; 'a -&gt; bool</pre><div class="info ">
+<div class="info-desc">
+<p>Structural ordering functions. These functions coincide with
+   the usual orderings over integers, characters, strings, byte sequences
+   and floating-point numbers, and extend them to a
+   total ordering over all types.
+   The ordering is compatible with <code class="code">(&nbsp;=&nbsp;)</code>. As in the case
+   of <code class="code">(&nbsp;=&nbsp;)</code>, mutable structures are compared by contents.
+   Comparison between functional values raises <code class="code">Invalid_argument</code>.
+   Comparison between cyclic structures may not terminate.
+   Left-associative operator, see <a href="Ocaml_operators.html"><code class="code">Ocaml_operators</code></a> for more information.</p>
+</div>
+</div>
+
+<pre id="VALcompare">val compare : 'a -&gt; 'a -&gt; int</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">compare&nbsp;x&nbsp;y</code> returns <code class="code">0</code> if <code class="code">x</code> is equal to <code class="code">y</code>,
+   a negative integer if <code class="code">x</code> is less than <code class="code">y</code>, and a positive integer
+   if <code class="code">x</code> is greater than <code class="code">y</code>.  The ordering implemented by <code class="code">compare</code>
+   is compatible with the comparison predicates <code class="code">=</code>, <code class="code">&lt;</code> and <code class="code">&gt;</code>
+   defined above,  with one difference on the treatment of the float value
+   <a href="Stdlib.html#VALnan"><code class="code">nan</code></a>.  Namely, the comparison predicates treat <code class="code">nan</code>
+   as different from any other float value, including itself;
+   while <code class="code">compare</code> treats <code class="code">nan</code> as equal to itself and less than any
+   other float value.  This treatment of <code class="code">nan</code> ensures that <code class="code">compare</code>
+   defines a total ordering relation.</p>
+
+<p><code class="code">compare</code> applied to functional values may raise <code class="code">Invalid_argument</code>.
+   <code class="code">compare</code> applied to cyclic structures may not terminate.</p>
+
+<p>The <code class="code">compare</code> function can be used as the comparison function
+   required by the <a href="Set.Make.html"><code class="code">Set.Make</code></a> and <a href="Map.Make.html"><code class="code">Map.Make</code></a> functors, as well as
+   the <a href="List.html#VALsort"><code class="code">List.sort</code></a> and <a href="Array.html#VALsort"><code class="code">Array.sort</code></a> functions.</p>
+</div>
+</div>
+
+<pre id="VALmin">val min : 'a -&gt; 'a -&gt; 'a</pre><div class="info ">
+<div class="info-desc">
+<p>Return the smaller of the two arguments.
+    The result is unspecified if one of the arguments contains
+    the float value <code class="code">nan</code>.</p>
+</div>
+</div>
+
+<pre id="VALmax">val max : 'a -&gt; 'a -&gt; 'a</pre><div class="info ">
+<div class="info-desc">
+<p>Return the greater of the two arguments.
+    The result is unspecified if one of the arguments contains
+    the float value <code class="code">nan</code>.</p>
+</div>
+</div>
+
+<pre id="VAL(==)">val (==) : 'a -&gt; 'a -&gt; bool</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">e1&nbsp;==&nbsp;e2</code> tests for physical equality of <code class="code">e1</code> and <code class="code">e2</code>.
+   On mutable types such as references, arrays, byte sequences, records with
+   mutable fields and objects with mutable instance variables,
+   <code class="code">e1&nbsp;==&nbsp;e2</code> is true if and only if physical modification of <code class="code">e1</code>
+   also affects <code class="code">e2</code>.
+   On non-mutable types, the behavior of <code class="code">(&nbsp;==&nbsp;)</code> is
+   implementation-dependent; however, it is guaranteed that
+   <code class="code">e1&nbsp;==&nbsp;e2</code> implies <code class="code">compare&nbsp;e1&nbsp;e2&nbsp;=&nbsp;0</code>.
+   Left-associative operator,  see <a href="Ocaml_operators.html"><code class="code">Ocaml_operators</code></a> for more information.</p>
+</div>
+</div>
+
+<pre id="VAL(!=)">val (!=) : 'a -&gt; 'a -&gt; bool</pre><div class="info ">
+<div class="info-desc">
+<p>Negation of <a href="Stdlib.html#VAL(==)"><code class="code">(==)</code></a>.
+    Left-associative operator,  see <a href="Ocaml_operators.html"><code class="code">Ocaml_operators</code></a> for more information.</p>
+</div>
+</div>
+<h2 id="1_Booleanoperations">Boolean operations</h2>
+<pre id="VALnot">val not : bool -&gt; bool</pre><div class="info ">
+<div class="info-desc">
+<p>The boolean negation.</p>
+</div>
+</div>
+
+<pre id="VAL(&amp;&amp;)">val (&amp;&amp;) : bool -&gt; bool -&gt; bool</pre><div class="info ">
+<div class="info-desc">
+<p>The boolean 'and'. Evaluation is sequential, left-to-right:
+   in <code class="code">e1&nbsp;&amp;&amp;&nbsp;e2</code>, <code class="code">e1</code> is evaluated first, and if it returns <code class="code">false</code>,
+   <code class="code">e2</code> is not evaluated at all.
+   Right-associative operator,  see <a href="Ocaml_operators.html"><code class="code">Ocaml_operators</code></a> for more information.</p>
+</div>
+</div>
+
+<pre id="VAL(||)">val (||) : bool -&gt; bool -&gt; bool</pre><div class="info ">
+<div class="info-desc">
+<p>The boolean 'or'. Evaluation is sequential, left-to-right:
+   in <code class="code">e1&nbsp;||&nbsp;e2</code>, <code class="code">e1</code> is evaluated first, and if it returns <code class="code">true</code>,
+   <code class="code">e2</code> is not evaluated at all.
+   Right-associative operator,  see <a href="Ocaml_operators.html"><code class="code">Ocaml_operators</code></a> for more information.</p>
+</div>
+</div>
+<h2 id="1_Debugging">Debugging</h2>
+<pre id="VAL__LOC__">val __LOC__ : string</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">__LOC__</code> returns the location at which this expression appears in
+    the file currently being parsed by the compiler, with the standard
+    error format of OCaml: "File %S, line %d, characters %d-%d".</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.02.0</li>
+</ul>
+</div>
+
+<pre id="VAL__FILE__">val __FILE__ : string</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">__FILE__</code> returns the name of the file currently being
+    parsed by the compiler.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.02.0</li>
+</ul>
+</div>
+
+<pre id="VAL__LINE__">val __LINE__ : int</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">__LINE__</code> returns the line number at which this expression
+    appears in the file currently being parsed by the compiler.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.02.0</li>
+</ul>
+</div>
+
+<pre id="VAL__MODULE__">val __MODULE__ : string</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">__MODULE__</code> returns the module name of the file being
+    parsed by the compiler.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.02.0</li>
+</ul>
+</div>
+
+<pre id="VAL__POS__">val __POS__ : string * int * int * int</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">__POS__</code> returns a tuple <code class="code">(file,lnum,cnum,enum)</code>, corresponding
+    to the location at which this expression appears in the file
+    currently being parsed by the compiler. <code class="code">file</code> is the current
+    filename, <code class="code">lnum</code> the line number, <code class="code">cnum</code> the character position in
+    the line and <code class="code">enum</code> the last character position in the line.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.02.0</li>
+</ul>
+</div>
+
+<pre id="VAL__FUNCTION__">val __FUNCTION__ : string</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">__FUNCTION__</code> returns the name of the current function or method, including
+    any enclosing modules or classes.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.12.0</li>
+</ul>
+</div>
+
+<pre id="VAL__LOC_OF__">val __LOC_OF__ : 'a -&gt; string * 'a</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">__LOC_OF__&nbsp;expr</code> returns a pair <code class="code">(loc,&nbsp;expr)</code> where <code class="code">loc</code> is the
+    location of <code class="code">expr</code> in the file currently being parsed by the
+    compiler, with the standard error format of OCaml: "File %S, line
+    %d, characters %d-%d".</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.02.0</li>
+</ul>
+</div>
+
+<pre id="VAL__LINE_OF__">val __LINE_OF__ : 'a -&gt; int * 'a</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">__LINE_OF__&nbsp;expr</code> returns a pair <code class="code">(line,&nbsp;expr)</code>, where <code class="code">line</code> is the
+    line number at which the expression <code class="code">expr</code> appears in the file
+    currently being parsed by the compiler.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.02.0</li>
+</ul>
+</div>
+
+<pre id="VAL__POS_OF__">val __POS_OF__ : 'a -&gt; (string * int * int * int) * 'a</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">__POS_OF__&nbsp;expr</code> returns a pair <code class="code">(loc,expr)</code>, where <code class="code">loc</code> is a
+    tuple <code class="code">(file,lnum,cnum,enum)</code> corresponding to the location at
+    which the expression <code class="code">expr</code> appears in the file currently being
+    parsed by the compiler. <code class="code">file</code> is the current filename, <code class="code">lnum</code> the
+    line number, <code class="code">cnum</code> the character position in the line and <code class="code">enum</code>
+    the last character position in the line.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.02.0</li>
+</ul>
+</div>
+<h2 id="1_Compositionoperators">Composition operators</h2>
+<pre id="VAL(|>)">val (|&gt;) : 'a -&gt; ('a -&gt; 'b) -&gt; 'b</pre><div class="info ">
+<div class="info-desc">
+<p>Reverse-application operator: <code class="code">x&nbsp;|&gt;&nbsp;f&nbsp;|&gt;&nbsp;g</code> is exactly equivalent
+ to <code class="code">g&nbsp;(f&nbsp;(x))</code>.
+ Left-associative operator, see <a href="Ocaml_operators.html"><code class="code">Ocaml_operators</code></a> for more information.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.01</li>
+</ul>
+</div>
+
+<pre id="VAL(@@)">val (@@) : ('a -&gt; 'b) -&gt; 'a -&gt; 'b</pre><div class="info ">
+<div class="info-desc">
+<p>Application operator: <code class="code">g&nbsp;@@&nbsp;f&nbsp;@@&nbsp;x</code> is exactly equivalent to
+ <code class="code">g&nbsp;(f&nbsp;(x))</code>.
+ Right-associative operator, see <a href="Ocaml_operators.html"><code class="code">Ocaml_operators</code></a> for more information.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.01</li>
+</ul>
+</div>
+<h2 id="1_Integerarithmetic">Integer arithmetic</h2><p>Integers are <code class="code">Sys.int_size</code> bits wide.
+    All operations are taken modulo 2<sup class="superscript"><code class="code">Sys.int_size</code></sup>.
+    They do not fail on overflow.</p>
+
+<pre id="VAL(~-)">val (~-) : int -&gt; int</pre><div class="info ">
+<div class="info-desc">
+<p>Unary negation. You can also write <code class="code">-&nbsp;e</code> instead of <code class="code">~-&nbsp;e</code>.
+    Unary operator, see <a href="Ocaml_operators.html"><code class="code">Ocaml_operators</code></a> for more information.</p>
+</div>
+</div>
+
+<pre id="VAL(~+)">val (~+) : int -&gt; int</pre><div class="info ">
+<div class="info-desc">
+<p>Unary addition. You can also write <code class="code">+&nbsp;e</code> instead of <code class="code">~+&nbsp;e</code>.
+    Unary operator, see <a href="Ocaml_operators.html"><code class="code">Ocaml_operators</code></a> for more information.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 3.12.0</li>
+</ul>
+</div>
+
+<pre id="VALsucc">val succ : int -&gt; int</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">succ&nbsp;x</code> is <code class="code">x&nbsp;+&nbsp;1</code>.</p>
+</div>
+</div>
+
+<pre id="VALpred">val pred : int -&gt; int</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">pred&nbsp;x</code> is <code class="code">x&nbsp;-&nbsp;1</code>.</p>
+</div>
+</div>
+
+<pre id="VAL(+)">val (+) : int -&gt; int -&gt; int</pre><div class="info ">
+<div class="info-desc">
+<p>Integer addition.
+    Left-associative operator, see <a href="Ocaml_operators.html"><code class="code">Ocaml_operators</code></a> for more information.</p>
+</div>
+</div>
+
+<pre id="VAL(-)">val (-) : int -&gt; int -&gt; int</pre><div class="info ">
+<div class="info-desc">
+<p>Integer subtraction.
+    Left-associative operator, , see <a href="Ocaml_operators.html"><code class="code">Ocaml_operators</code></a> for more information.</p>
+</div>
+</div>
+
+<pre id="VAL( * )">val ( * ) : int -&gt; int -&gt; int</pre><div class="info ">
+<div class="info-desc">
+<p>Integer multiplication.
+    Left-associative operator, see <a href="Ocaml_operators.html"><code class="code">Ocaml_operators</code></a> for more information.</p>
+</div>
+</div>
+
+<pre id="VAL(/)">val (/) : int -&gt; int -&gt; int</pre><div class="info ">
+<div class="info-desc">
+<p>Integer division.
+   Integer division rounds the real quotient of its arguments towards zero.
+   More precisely, if <code class="code">x&nbsp;&gt;=&nbsp;0</code> and <code class="code">y&nbsp;&gt;&nbsp;0</code>, <code class="code">x&nbsp;/&nbsp;y</code> is the greatest integer
+   less than or equal to the real quotient of <code class="code">x</code> by <code class="code">y</code>.  Moreover,
+   <code class="code">(-&nbsp;x)&nbsp;/&nbsp;y&nbsp;=&nbsp;x&nbsp;/&nbsp;(-&nbsp;y)&nbsp;=&nbsp;-&nbsp;(x&nbsp;/&nbsp;y)</code>.
+   Left-associative operator, see <a href="Ocaml_operators.html"><code class="code">Ocaml_operators</code></a> for more information.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Raises</b> <code>Division_by_zero</code> if the second argument is 0.</li>
+</ul>
+</div>
+
+<pre id="VAL(mod)">val (mod) : int -&gt; int -&gt; int</pre><div class="info ">
+<div class="info-desc">
+<p>Integer remainder.  If <code class="code">y</code> is not zero, the result
+   of <code class="code">x&nbsp;mod&nbsp;y</code> satisfies the following properties:
+   <code class="code">x&nbsp;=&nbsp;(x&nbsp;/&nbsp;y)&nbsp;*&nbsp;y&nbsp;+&nbsp;x&nbsp;mod&nbsp;y</code> and
+   <code class="code">abs(x&nbsp;mod&nbsp;y)&nbsp;&lt;=&nbsp;abs(y)&nbsp;-&nbsp;1</code>.
+   If <code class="code">y&nbsp;=&nbsp;0</code>, <code class="code">x&nbsp;mod&nbsp;y</code> raises <code class="code">Division_by_zero</code>.
+   Note that <code class="code">x&nbsp;mod&nbsp;y</code> is negative only if <code class="code">x&nbsp;&lt;&nbsp;0</code>.
+   Left-associative operator, see <a href="Ocaml_operators.html"><code class="code">Ocaml_operators</code></a> for more information.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Raises</b> <code>Division_by_zero</code> if <code class="code">y</code> is zero.</li>
+</ul>
+</div>
+
+<pre id="VALabs">val abs : int -&gt; int</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">abs&nbsp;x</code> is the absolute value of <code class="code">x</code>. On <code class="code">min_int</code> this
+   is <code class="code">min_int</code> itself and thus remains negative.</p>
+</div>
+</div>
+
+<pre id="VALmax_int">val max_int : int</pre><div class="info ">
+<div class="info-desc">
+<p>The greatest representable integer.</p>
+</div>
+</div>
+
+<pre id="VALmin_int">val min_int : int</pre><div class="info ">
+<div class="info-desc">
+<p>The smallest representable integer.</p>
+</div>
+</div>
+<h3 id="2_Bitwiseoperations">Bitwise operations</h3>
+<pre id="VAL(land)">val (land) : int -&gt; int -&gt; int</pre><div class="info ">
+<div class="info-desc">
+<p>Bitwise logical and.
+    Left-associative operator, see <a href="Ocaml_operators.html"><code class="code">Ocaml_operators</code></a> for more information.</p>
+</div>
+</div>
+
+<pre id="VAL(lor)">val (lor) : int -&gt; int -&gt; int</pre><div class="info ">
+<div class="info-desc">
+<p>Bitwise logical or.
+    Left-associative operator, see <a href="Ocaml_operators.html"><code class="code">Ocaml_operators</code></a> for more information.</p>
+</div>
+</div>
+
+<pre id="VAL(lxor)">val (lxor) : int -&gt; int -&gt; int</pre><div class="info ">
+<div class="info-desc">
+<p>Bitwise logical exclusive or.
+    Left-associative operator, see <a href="Ocaml_operators.html"><code class="code">Ocaml_operators</code></a> for more information.</p>
+</div>
+</div>
+
+<pre id="VALlnot">val lnot : int -&gt; int</pre><div class="info ">
+<div class="info-desc">
+<p>Bitwise logical negation.</p>
+</div>
+</div>
+
+<pre id="VAL(lsl)">val (lsl) : int -&gt; int -&gt; int</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">n&nbsp;lsl&nbsp;m</code> shifts <code class="code">n</code> to the left by <code class="code">m</code> bits.
+    The result is unspecified if <code class="code">m&nbsp;&lt;&nbsp;0</code> or <code class="code">m&nbsp;&gt;&nbsp;Sys.int_size</code>.
+    Right-associative operator, see <a href="Ocaml_operators.html"><code class="code">Ocaml_operators</code></a> for more information.</p>
+</div>
+</div>
+
+<pre id="VAL(lsr)">val (lsr) : int -&gt; int -&gt; int</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">n&nbsp;lsr&nbsp;m</code> shifts <code class="code">n</code> to the right by <code class="code">m</code> bits.
+    This is a logical shift: zeroes are inserted regardless of
+    the sign of <code class="code">n</code>.
+    The result is unspecified if <code class="code">m&nbsp;&lt;&nbsp;0</code> or <code class="code">m&nbsp;&gt;&nbsp;Sys.int_size</code>.
+    Right-associative operator, see <a href="Ocaml_operators.html"><code class="code">Ocaml_operators</code></a> for more information.</p>
+</div>
+</div>
+
+<pre id="VAL(asr)">val (asr) : int -&gt; int -&gt; int</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">n&nbsp;asr&nbsp;m</code> shifts <code class="code">n</code> to the right by <code class="code">m</code> bits.
+    This is an arithmetic shift: the sign bit of <code class="code">n</code> is replicated.
+    The result is unspecified if <code class="code">m&nbsp;&lt;&nbsp;0</code> or <code class="code">m&nbsp;&gt;&nbsp;Sys.int_size</code>.
+    Right-associative operator, see <a href="Ocaml_operators.html"><code class="code">Ocaml_operators</code></a> for more information.</p>
+</div>
+</div>
+<h2 id="1_Floatingpointarithmetic">Floating-point arithmetic</h2>
+<p>OCaml's floating-point numbers follow the
+   IEEE 754 standard, using double precision (64 bits) numbers.
+   Floating-point operations never raise an exception on overflow,
+   underflow, division by zero, etc.  Instead, special IEEE numbers
+   are returned as appropriate, such as <code class="code">infinity</code> for <code class="code">1.0&nbsp;/.&nbsp;0.0</code>,
+   <code class="code">neg_infinity</code> for <code class="code">-1.0&nbsp;/.&nbsp;0.0</code>, and <code class="code">nan</code> ('not a number')
+   for <code class="code">0.0&nbsp;/.&nbsp;0.0</code>.  These special numbers then propagate through
+   floating-point computations as expected: for instance,
+    <code class="code">1.0&nbsp;/.&nbsp;infinity</code> is <code class="code">0.0</code>, basic arithmetic operations
+    (<code class="code">+.</code>, <code class="code">-.</code>, <code class="code">*.</code>, <code class="code">/.</code>) with <code class="code">nan</code> as an argument return <code class="code">nan</code>, ...</p>
+
+<pre id="VAL(~-.)">val (~-.) : float -&gt; float</pre><div class="info ">
+<div class="info-desc">
+<p>Unary negation. You can also write <code class="code">-.&nbsp;e</code> instead of <code class="code">~-.&nbsp;e</code>.
+    Unary operator, see <a href="Ocaml_operators.html"><code class="code">Ocaml_operators</code></a> for more information.</p>
+</div>
+</div>
+
+<pre id="VAL(~+.)">val (~+.) : float -&gt; float</pre><div class="info ">
+<div class="info-desc">
+<p>Unary addition. You can also write <code class="code">+.&nbsp;e</code> instead of <code class="code">~+.&nbsp;e</code>.
+    Unary operator, see <a href="Ocaml_operators.html"><code class="code">Ocaml_operators</code></a> for more information.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 3.12.0</li>
+</ul>
+</div>
+
+<pre id="VAL(+.)">val (+.) : float -&gt; float -&gt; float</pre><div class="info ">
+<div class="info-desc">
+<p>Floating-point addition.
+    Left-associative operator, see <a href="Ocaml_operators.html"><code class="code">Ocaml_operators</code></a> for more information.</p>
+</div>
+</div>
+
+<pre id="VAL(-.)">val (-.) : float -&gt; float -&gt; float</pre><div class="info ">
+<div class="info-desc">
+<p>Floating-point subtraction.
+    Left-associative operator, see <a href="Ocaml_operators.html"><code class="code">Ocaml_operators</code></a> for more information.</p>
+</div>
+</div>
+
+<pre id="VAL( *. )">val ( *. ) : float -&gt; float -&gt; float</pre><div class="info ">
+<div class="info-desc">
+<p>Floating-point multiplication.
+    Left-associative operator, see <a href="Ocaml_operators.html"><code class="code">Ocaml_operators</code></a> for more information.</p>
+</div>
+</div>
+
+<pre id="VAL(/.)">val (/.) : float -&gt; float -&gt; float</pre><div class="info ">
+<div class="info-desc">
+<p>Floating-point division.
+    Left-associative operator, see <a href="Ocaml_operators.html"><code class="code">Ocaml_operators</code></a> for more information.</p>
+</div>
+</div>
+
+<pre id="VAL( ** )">val ( ** ) : float -&gt; float -&gt; float</pre><div class="info ">
+<div class="info-desc">
+<p>Exponentiation.
+    Right-associative operator, see <a href="Ocaml_operators.html"><code class="code">Ocaml_operators</code></a> for more information.</p>
+</div>
+</div>
+
+<pre id="VALsqrt">val sqrt : float -&gt; float</pre><div class="info ">
+<div class="info-desc">
+<p>Square root.</p>
+</div>
+</div>
+
+<pre id="VALexp">val exp : float -&gt; float</pre><div class="info ">
+<div class="info-desc">
+<p>Exponential.</p>
+</div>
+</div>
+
+<pre id="VALlog">val log : float -&gt; float</pre><div class="info ">
+<div class="info-desc">
+<p>Natural logarithm.</p>
+</div>
+</div>
+
+<pre id="VALlog10">val log10 : float -&gt; float</pre><div class="info ">
+<div class="info-desc">
+<p>Base 10 logarithm.</p>
+</div>
+</div>
+
+<pre id="VALexpm1">val expm1 : float -&gt; float</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">expm1&nbsp;x</code> computes <code class="code">exp&nbsp;x&nbsp;-.&nbsp;1.0</code>, giving numerically-accurate results
+    even if <code class="code">x</code> is close to <code class="code">0.0</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 3.12.0</li>
+</ul>
+</div>
+
+<pre id="VALlog1p">val log1p : float -&gt; float</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">log1p&nbsp;x</code> computes <code class="code">log(1.0&nbsp;+.&nbsp;x)</code> (natural logarithm),
+    giving numerically-accurate results even if <code class="code">x</code> is close to <code class="code">0.0</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 3.12.0</li>
+</ul>
+</div>
+
+<pre id="VALcos">val cos : float -&gt; float</pre><div class="info ">
+<div class="info-desc">
+<p>Cosine.  Argument is in radians.</p>
+</div>
+</div>
+
+<pre id="VALsin">val sin : float -&gt; float</pre><div class="info ">
+<div class="info-desc">
+<p>Sine.  Argument is in radians.</p>
+</div>
+</div>
+
+<pre id="VALtan">val tan : float -&gt; float</pre><div class="info ">
+<div class="info-desc">
+<p>Tangent.  Argument is in radians.</p>
+</div>
+</div>
+
+<pre id="VALacos">val acos : float -&gt; float</pre><div class="info ">
+<div class="info-desc">
+<p>Arc cosine.  The argument must fall within the range <code class="code">[-1.0,&nbsp;1.0]</code>.
+    Result is in radians and is between <code class="code">0.0</code> and <code class="code">pi</code>.</p>
+</div>
+</div>
+
+<pre id="VALasin">val asin : float -&gt; float</pre><div class="info ">
+<div class="info-desc">
+<p>Arc sine.  The argument must fall within the range <code class="code">[-1.0,&nbsp;1.0]</code>.
+    Result is in radians and is between <code class="code">-pi/2</code> and <code class="code">pi/2</code>.</p>
+</div>
+</div>
+
+<pre id="VALatan">val atan : float -&gt; float</pre><div class="info ">
+<div class="info-desc">
+<p>Arc tangent.
+    Result is in radians and is between <code class="code">-pi/2</code> and <code class="code">pi/2</code>.</p>
+</div>
+</div>
+
+<pre id="VALatan2">val atan2 : float -&gt; float -&gt; float</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">atan2&nbsp;y&nbsp;x</code> returns the arc tangent of <code class="code">y&nbsp;/.&nbsp;x</code>.  The signs of <code class="code">x</code>
+    and <code class="code">y</code> are used to determine the quadrant of the result.
+    Result is in radians and is between <code class="code">-pi</code> and <code class="code">pi</code>.</p>
+</div>
+</div>
+
+<pre id="VALhypot">val hypot : float -&gt; float -&gt; float</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">hypot&nbsp;x&nbsp;y</code> returns <code class="code">sqrt(x&nbsp;*.&nbsp;x&nbsp;+&nbsp;y&nbsp;*.&nbsp;y)</code>, that is, the length
+  of the hypotenuse of a right-angled triangle with sides of length
+  <code class="code">x</code> and <code class="code">y</code>, or, equivalently, the distance of the point <code class="code">(x,y)</code>
+  to origin.  If one of <code class="code">x</code> or <code class="code">y</code> is infinite, returns <code class="code">infinity</code>
+  even if the other is <code class="code">nan</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.00.0</li>
+</ul>
+</div>
+
+<pre id="VALcosh">val cosh : float -&gt; float</pre><div class="info ">
+<div class="info-desc">
+<p>Hyperbolic cosine.  Argument is in radians.</p>
+</div>
+</div>
+
+<pre id="VALsinh">val sinh : float -&gt; float</pre><div class="info ">
+<div class="info-desc">
+<p>Hyperbolic sine.  Argument is in radians.</p>
+</div>
+</div>
+
+<pre id="VALtanh">val tanh : float -&gt; float</pre><div class="info ">
+<div class="info-desc">
+<p>Hyperbolic tangent.  Argument is in radians.</p>
+</div>
+</div>
+
+<pre id="VALacosh">val acosh : float -&gt; float</pre><div class="info ">
+<div class="info-desc">
+<p>Hyperbolic arc cosine.  The argument must fall within the range
+    <code class="code">[1.0,&nbsp;inf]</code>.
+    Result is in radians and is between <code class="code">0.0</code> and <code class="code">inf</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.13.0</li>
+</ul>
+</div>
+
+<pre id="VALasinh">val asinh : float -&gt; float</pre><div class="info ">
+<div class="info-desc">
+<p>Hyperbolic arc sine.  The argument and result range over the entire
+    real line.
+    Result is in radians.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.13.0</li>
+</ul>
+</div>
+
+<pre id="VALatanh">val atanh : float -&gt; float</pre><div class="info ">
+<div class="info-desc">
+<p>Hyperbolic arc tangent.  The argument must fall within the range
+    <code class="code">[-1.0,&nbsp;1.0]</code>.
+    Result is in radians and ranges over the entire real line.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.13.0</li>
+</ul>
+</div>
+
+<pre id="VALceil">val ceil : float -&gt; float</pre><div class="info ">
+<div class="info-desc">
+<p>Round above to an integer value.
+    <code class="code">ceil&nbsp;f</code> returns the least integer value greater than or equal to <code class="code">f</code>.
+    The result is returned as a float.</p>
+</div>
+</div>
+
+<pre id="VALfloor">val floor : float -&gt; float</pre><div class="info ">
+<div class="info-desc">
+<p>Round below to an integer value.
+    <code class="code">floor&nbsp;f</code> returns the greatest integer value less than or
+    equal to <code class="code">f</code>.
+    The result is returned as a float.</p>
+</div>
+</div>
+
+<pre id="VALabs_float">val abs_float : float -&gt; float</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">abs_float&nbsp;f</code> returns the absolute value of <code class="code">f</code>.</p>
+</div>
+</div>
+
+<pre id="VALcopysign">val copysign : float -&gt; float -&gt; float</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">copysign&nbsp;x&nbsp;y</code> returns a float whose absolute value is that of <code class="code">x</code>
+  and whose sign is that of <code class="code">y</code>.  If <code class="code">x</code> is <code class="code">nan</code>, returns <code class="code">nan</code>.
+  If <code class="code">y</code> is <code class="code">nan</code>, returns either <code class="code">x</code> or <code class="code">-.&nbsp;x</code>, but it is not
+  specified which.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.00.0</li>
+</ul>
+</div>
+
+<pre id="VALmod_float">val mod_float : float -&gt; float -&gt; float</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">mod_float&nbsp;a&nbsp;b</code> returns the remainder of <code class="code">a</code> with respect to
+   <code class="code">b</code>.  The returned value is <code class="code">a&nbsp;-.&nbsp;n&nbsp;*.&nbsp;b</code>, where <code class="code">n</code>
+   is the quotient <code class="code">a&nbsp;/.&nbsp;b</code> rounded towards zero to an integer.</p>
+</div>
+</div>
+
+<pre id="VALfrexp">val frexp : float -&gt; float * int</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">frexp&nbsp;f</code> returns the pair of the significant
+   and the exponent of <code class="code">f</code>.  When <code class="code">f</code> is zero, the
+   significant <code class="code">x</code> and the exponent <code class="code">n</code> of <code class="code">f</code> are equal to
+   zero.  When <code class="code">f</code> is non-zero, they are defined by
+   <code class="code">f&nbsp;=&nbsp;x&nbsp;*.&nbsp;2&nbsp;**&nbsp;n</code> and <code class="code">0.5&nbsp;&lt;=&nbsp;x&nbsp;&lt;&nbsp;1.0</code>.</p>
+</div>
+</div>
+
+<pre id="VALldexp">val ldexp : float -&gt; int -&gt; float</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">ldexp&nbsp;x&nbsp;n</code> returns <code class="code">x&nbsp;*.&nbsp;2&nbsp;**&nbsp;n</code>.</p>
+</div>
+</div>
+
+<pre id="VALmodf">val modf : float -&gt; float * float</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">modf&nbsp;f</code> returns the pair of the fractional and integral
+   part of <code class="code">f</code>.</p>
+</div>
+</div>
+
+<pre id="VALfloat">val float : int -&gt; float</pre><div class="info ">
+<div class="info-desc">
+<p>Same as <a href="Stdlib.html#VALfloat_of_int"><code class="code">float_of_int</code></a>.</p>
+</div>
+</div>
+
+<pre id="VALfloat_of_int">val float_of_int : int -&gt; float</pre><div class="info ">
+<div class="info-desc">
+<p>Convert an integer to floating-point.</p>
+</div>
+</div>
+
+<pre id="VALtruncate">val truncate : float -&gt; int</pre><div class="info ">
+<div class="info-desc">
+<p>Same as <a href="Stdlib.html#VALint_of_float"><code class="code">int_of_float</code></a>.</p>
+</div>
+</div>
+
+<pre id="VALint_of_float">val int_of_float : float -&gt; int</pre><div class="info ">
+<div class="info-desc">
+<p>Truncate the given floating-point number to an integer.
+   The result is unspecified if the argument is <code class="code">nan</code> or falls outside the
+   range of representable integers.</p>
+</div>
+</div>
+
+<pre id="VALinfinity">val infinity : float</pre><div class="info ">
+<div class="info-desc">
+<p>Positive infinity.</p>
+</div>
+</div>
+
+<pre id="VALneg_infinity">val neg_infinity : float</pre><div class="info ">
+<div class="info-desc">
+<p>Negative infinity.</p>
+</div>
+</div>
+
+<pre id="VALnan">val nan : float</pre><div class="info ">
+<div class="info-desc">
+<p>A special floating-point value denoting the result of an
+   undefined operation such as <code class="code">0.0&nbsp;/.&nbsp;0.0</code>.  Stands for
+   'not a number'.  Any floating-point operation with <code class="code">nan</code> as
+   argument returns <code class="code">nan</code> as result.  As for floating-point comparisons,
+   <code class="code">=</code>, <code class="code">&lt;</code>, <code class="code">&lt;=</code>, <code class="code">&gt;</code> and <code class="code">&gt;=</code> return <code class="code">false</code> and <code class="code">&lt;&gt;</code> returns <code class="code">true</code>
+   if one or both of their arguments is <code class="code">nan</code>.</p>
+</div>
+</div>
+
+<pre id="VALmax_float">val max_float : float</pre><div class="info ">
+<div class="info-desc">
+<p>The largest positive finite value of type <code class="code">float</code>.</p>
+</div>
+</div>
+
+<pre id="VALmin_float">val min_float : float</pre><div class="info ">
+<div class="info-desc">
+<p>The smallest positive, non-zero, non-denormalized value of type <code class="code">float</code>.</p>
+</div>
+</div>
+
+<pre id="VALepsilon_float">val epsilon_float : float</pre><div class="info ">
+<div class="info-desc">
+<p>The difference between <code class="code">1.0</code> and the smallest exactly representable
+    floating-point number greater than <code class="code">1.0</code>.</p>
+</div>
+</div>
+
+<pre><span class="keyword">type</span> fpclass = </pre><table class="typetable">
+<tbody><tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>FP_normal</code></td>
+<td class="typefieldcomment" align="left" valign="top"><code>(*</code></td><td class="typefieldcomment" align="left" valign="top"><div class="info ">
+<div class="info-desc">
+<p>Normal number, none of the below</p>
+</div>
+</div>
+</td><td class="typefieldcomment" align="left" valign="bottom"><code>*)</code></td>
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>FP_subnormal</code></td>
+<td class="typefieldcomment" align="left" valign="top"><code>(*</code></td><td class="typefieldcomment" align="left" valign="top"><div class="info ">
+<div class="info-desc">
+<p>Number very close to 0.0, has reduced precision</p>
+</div>
+</div>
+</td><td class="typefieldcomment" align="left" valign="bottom"><code>*)</code></td>
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>FP_zero</code></td>
+<td class="typefieldcomment" align="left" valign="top"><code>(*</code></td><td class="typefieldcomment" align="left" valign="top"><div class="info ">
+<div class="info-desc">
+<p>Number is 0.0 or -0.0</p>
+</div>
+</div>
+</td><td class="typefieldcomment" align="left" valign="bottom"><code>*)</code></td>
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>FP_infinite</code></td>
+<td class="typefieldcomment" align="left" valign="top"><code>(*</code></td><td class="typefieldcomment" align="left" valign="top"><div class="info ">
+<div class="info-desc">
+<p>Number is positive or negative infinity</p>
+</div>
+</div>
+</td><td class="typefieldcomment" align="left" valign="bottom"><code>*)</code></td>
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>FP_nan</code></td>
+<td class="typefieldcomment" align="left" valign="top"><code>(*</code></td><td class="typefieldcomment" align="left" valign="top"><div class="info ">
+<div class="info-desc">
+<p>Not a number: result of an undefined operation</p>
+</div>
+</div>
+</td><td class="typefieldcomment" align="left" valign="bottom"><code>*)</code></td>
+</tr></tbody></table>
+
+<div class="info ">
+<div class="info-desc">
+<p>The five classes of floating-point numbers, as determined by
+   the <a href="Stdlib.html#VALclassify_float"><code class="code">classify_float</code></a> function.</p>
+</div>
+</div>
+
+
+<pre id="VALclassify_float">val classify_float : float -&gt; fpclass</pre><div class="info ">
+<div class="info-desc">
+<p>Return the class of the given floating-point number:
+   normal, subnormal, zero, infinite, or not a number.</p>
+</div>
+</div>
+<h2 id="1_Stringoperations">String operations</h2>
+<p>More string operations are provided in module <a href="Stdlib.String.html"><code class="code">String</code></a>.</p>
+
+<pre id="VAL(^)">val (^) : string -&gt; string -&gt; string</pre><div class="info ">
+<div class="info-desc">
+<p>String concatenation.
+    Right-associative operator, see <a href="Ocaml_operators.html"><code class="code">Ocaml_operators</code></a> for more information.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Raises</b> <code>Invalid_argument</code> if the result is longer then
+    than <a href="Sys.html#VALmax_string_length"><code class="code">Sys.max_string_length</code></a> bytes.</li>
+</ul>
+</div>
+<h2 id="1_Characteroperations">Character operations</h2>
+<p>More character operations are provided in module <a href="Stdlib.Char.html"><code class="code">Char</code></a>.</p>
+
+<pre id="VALint_of_char">val int_of_char : char -&gt; int</pre><div class="info ">
+<div class="info-desc">
+<p>Return the ASCII code of the argument.</p>
+</div>
+</div>
+
+<pre id="VALchar_of_int">val char_of_int : int -&gt; char</pre><div class="info ">
+<div class="info-desc">
+<p>Return the character with the given ASCII code.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Raises</b> <code>Invalid_argument</code> if the argument is
+   outside the range 0--255.</li>
+</ul>
+</div>
+<h2 id="1_Unitoperations">Unit operations</h2>
+<pre id="VALignore">val ignore : 'a -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p>Discard the value of its argument and return <code class="code">()</code>.
+   For instance, <code class="code">ignore(f&nbsp;x)</code> discards the result of
+   the side-effecting function <code class="code">f</code>.  It is equivalent to
+   <code class="code">f&nbsp;x;&nbsp;()</code>, except that the latter may generate a
+   compiler warning; writing <code class="code">ignore(f&nbsp;x)</code> instead
+   avoids the warning.</p>
+</div>
+</div>
+<h2 id="1_Stringconversionfunctions">String conversion functions</h2>
+<pre id="VALstring_of_bool">val string_of_bool : bool -&gt; string</pre><div class="info ">
+<div class="info-desc">
+<p>Return the string representation of a boolean. As the returned values
+   may be shared, the user should not modify them directly.</p>
+</div>
+</div>
+
+<pre id="VALbool_of_string_opt">val bool_of_string_opt : string -&gt; bool option</pre><div class="info ">
+<div class="info-desc">
+<p>Convert the given string to a boolean.</p>
+
+<p>Return <code class="code">None</code> if the string is not <code class="code">"true"</code> or <code class="code">"false"</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.05</li>
+</ul>
+</div>
+
+<pre id="VALbool_of_string">val bool_of_string : string -&gt; bool</pre><div class="info ">
+<div class="info-desc">
+<p>Same as <a href="Stdlib.html#VALbool_of_string_opt"><code class="code">bool_of_string_opt</code></a>, but raise
+   <code class="code">Invalid_argument&nbsp;"bool_of_string"</code> instead of returning <code class="code">None</code>.</p>
+</div>
+</div>
+
+<pre id="VALstring_of_int">val string_of_int : int -&gt; string</pre><div class="info ">
+<div class="info-desc">
+<p>Return the string representation of an integer, in decimal.</p>
+</div>
+</div>
+
+<pre id="VALint_of_string_opt">val int_of_string_opt : string -&gt; int option</pre><div class="info ">
+<div class="info-desc">
+<p>Convert the given string to an integer.
+   The string is read in decimal (by default, or if the string
+   begins with <code class="code">0u</code>), in hexadecimal (if it begins with <code class="code">0x</code> or
+   <code class="code">0X</code>), in octal (if it begins with <code class="code">0o</code> or <code class="code">0O</code>), or in binary
+   (if it begins with <code class="code">0b</code> or <code class="code">0B</code>).</p>
+
+<p>The <code class="code">0u</code> prefix reads the input as an unsigned integer in the range
+   <code class="code">[0,&nbsp;2*max_int+1]</code>.  If the input exceeds <a href="Stdlib.html#VALmax_int"><code class="code">max_int</code></a>
+   it is converted to the signed integer
+   <code class="code">min_int&nbsp;+&nbsp;input&nbsp;-&nbsp;max_int&nbsp;-&nbsp;1</code>.</p>
+
+<p>The <code class="code">_</code> (underscore) character can appear anywhere in the string
+   and is ignored.</p>
+
+<p>Return <code class="code">None</code> if the given string is not a valid representation of an
+   integer, or if the integer represented exceeds the range of integers
+   representable in type <code class="code">int</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.05</li>
+</ul>
+</div>
+
+<pre id="VALint_of_string">val int_of_string : string -&gt; int</pre><div class="info ">
+<div class="info-desc">
+<p>Same as <a href="Stdlib.html#VALint_of_string_opt"><code class="code">int_of_string_opt</code></a>, but raise
+   <code class="code">Failure&nbsp;"int_of_string"</code> instead of returning <code class="code">None</code>.</p>
+</div>
+</div>
+
+<pre id="VALstring_of_float">val string_of_float : float -&gt; string</pre><div class="info ">
+<div class="info-desc">
+<p>Return a string representation of a floating-point number.</p>
+
+<p>This conversion can involve a loss of precision. For greater control over
+    the manner in which the number is printed, see <a href="Stdlib.Printf.html"><code class="code">Printf</code></a>.</p>
+</div>
+</div>
+
+<pre id="VALfloat_of_string_opt">val float_of_string_opt : string -&gt; float option</pre><div class="info ">
+<div class="info-desc">
+<p>Convert the given string to a float.  The string is read in decimal
+   (by default) or in hexadecimal (marked by <code class="code">0x</code> or <code class="code">0X</code>).</p>
+
+<p>The format of decimal floating-point numbers is
+   <code class="code">&nbsp;[-]&nbsp;dd.ddd&nbsp;(e|E)&nbsp;[+|-]&nbsp;dd&nbsp;</code>, where <code class="code">d</code> stands for a decimal digit.</p>
+
+<p>The format of hexadecimal floating-point numbers is
+   <code class="code">&nbsp;[-]&nbsp;0(x|X)&nbsp;hh.hhh&nbsp;(p|P)&nbsp;[+|-]&nbsp;dd&nbsp;</code>, where <code class="code">h</code> stands for an
+   hexadecimal digit and <code class="code">d</code> for a decimal digit.</p>
+
+<p>In both cases, at least one of the integer and fractional parts must be
+   given; the exponent part is optional.</p>
+
+<p>The <code class="code">_</code> (underscore) character can appear anywhere in the string
+   and is ignored.</p>
+
+<p>Depending on the execution platforms, other representations of
+   floating-point numbers can be accepted, but should not be relied upon.</p>
+
+<p>Return <code class="code">None</code> if the given string is not a valid representation of a float.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.05</li>
+</ul>
+</div>
+
+<pre id="VALfloat_of_string">val float_of_string : string -&gt; float</pre><div class="info ">
+<div class="info-desc">
+<p>Same as <a href="Stdlib.html#VALfloat_of_string_opt"><code class="code">float_of_string_opt</code></a>, but raise
+   <code class="code">Failure&nbsp;"float_of_string"</code> instead of returning <code class="code">None</code>.</p>
+</div>
+</div>
+<h2 id="1_Pairoperations">Pair operations</h2>
+<pre id="VALfst">val fst : 'a * 'b -&gt; 'a</pre><div class="info ">
+<div class="info-desc">
+<p>Return the first component of a pair.</p>
+</div>
+</div>
+
+<pre id="VALsnd">val snd : 'a * 'b -&gt; 'b</pre><div class="info ">
+<div class="info-desc">
+<p>Return the second component of a pair.</p>
+</div>
+</div>
+<h2 id="1_Listoperations">List operations</h2>
+<p>More list operations are provided in module <a href="Stdlib.List.html"><code class="code">List</code></a>.</p>
+
+<pre id="VAL(@)">val (@) : 'a list -&gt; 'a list -&gt; 'a list</pre><div class="info ">
+<div class="info-desc">
+<p>List concatenation.  Not tail-recursive (length of the first argument).
+  Right-associative operator, see <a href="Ocaml_operators.html"><code class="code">Ocaml_operators</code></a> for more information.</p>
+</div>
+</div>
+<h2 id="1_Inputoutput">Input/output</h2><p>Note: all input/output functions can raise <code class="code">Sys_error</code> when the system
+    calls they invoke fail.</p>
+
+<pre id="TYPEin_channel"><span class="keyword">type</span> in_channel </pre>
+<div class="info ">
+<div class="info-desc">
+<p>The type of input channel.</p>
+</div>
+</div>
+
+
+<pre id="TYPEout_channel"><span class="keyword">type</span> out_channel </pre>
+<div class="info ">
+<div class="info-desc">
+<p>The type of output channel.</p>
+</div>
+</div>
+
+
+<pre id="VALstdin">val stdin : in_channel</pre><div class="info ">
+<div class="info-desc">
+<p>The standard input for the process.</p>
+</div>
+</div>
+
+<pre id="VALstdout">val stdout : out_channel</pre><div class="info ">
+<div class="info-desc">
+<p>The standard output for the process.</p>
+</div>
+</div>
+
+<pre id="VALstderr">val stderr : out_channel</pre><div class="info ">
+<div class="info-desc">
+<p>The standard error output for the process.</p>
+</div>
+</div>
+<h3 id="2_Outputfunctionsonstandardoutput">Output functions on standard output</h3>
+<pre id="VALprint_char">val print_char : char -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p>Print a character on standard output.</p>
+</div>
+</div>
+
+<pre id="VALprint_string">val print_string : string -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p>Print a string on standard output.</p>
+</div>
+</div>
+
+<pre id="VALprint_bytes">val print_bytes : bytes -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p>Print a byte sequence on standard output.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.02.0</li>
+</ul>
+</div>
+
+<pre id="VALprint_int">val print_int : int -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p>Print an integer, in decimal, on standard output.</p>
+</div>
+</div>
+
+<pre id="VALprint_float">val print_float : float -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p>Print a floating-point number, in decimal, on standard output.</p>
+
+<p>The conversion of the number to a string uses <a href="Stdlib.html#VALstring_of_float"><code class="code">string_of_float</code></a> and
+    can involve a loss of precision.</p>
+</div>
+</div>
+
+<pre id="VALprint_endline">val print_endline : string -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p>Print a string, followed by a newline character, on
+   standard output and flush standard output.</p>
+</div>
+</div>
+
+<pre id="VALprint_newline">val print_newline : unit -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p>Print a newline character on standard output, and flush
+   standard output. This can be used to simulate line
+   buffering of standard output.</p>
+</div>
+</div>
+<h3 id="2_Outputfunctionsonstandarderror">Output functions on standard error</h3>
+<pre id="VALprerr_char">val prerr_char : char -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p>Print a character on standard error.</p>
+</div>
+</div>
+
+<pre id="VALprerr_string">val prerr_string : string -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p>Print a string on standard error.</p>
+</div>
+</div>
+
+<pre id="VALprerr_bytes">val prerr_bytes : bytes -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p>Print a byte sequence on standard error.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.02.0</li>
+</ul>
+</div>
+
+<pre id="VALprerr_int">val prerr_int : int -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p>Print an integer, in decimal, on standard error.</p>
+</div>
+</div>
+
+<pre id="VALprerr_float">val prerr_float : float -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p>Print a floating-point number, in decimal, on standard error.</p>
+
+<p>The conversion of the number to a string uses <a href="Stdlib.html#VALstring_of_float"><code class="code">string_of_float</code></a> and
+    can involve a loss of precision.</p>
+</div>
+</div>
+
+<pre id="VALprerr_endline">val prerr_endline : string -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p>Print a string, followed by a newline character on standard
+   error and flush standard error.</p>
+</div>
+</div>
+
+<pre id="VALprerr_newline">val prerr_newline : unit -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p>Print a newline character on standard error, and flush
+   standard error.</p>
+</div>
+</div>
+<h3 id="2_Inputfunctionsonstandardinput">Input functions on standard input</h3>
+<pre id="VALread_line">val read_line : unit -&gt; string</pre><div class="info ">
+<div class="info-desc">
+<p>Flush standard output, then read characters from standard input
+   until a newline character is encountered.</p>
+
+<p>Return the string of all characters read, without the newline character
+   at the end.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Raises</b> <code>End_of_file</code> if the end of the file is reached at the beginning of
+   line.</li>
+</ul>
+</div>
+
+<pre id="VALread_int_opt">val read_int_opt : unit -&gt; int option</pre><div class="info ">
+<div class="info-desc">
+<p>Flush standard output, then read one line from standard input
+   and convert it to an integer.</p>
+
+<p>Return <code class="code">None</code> if the line read is not a valid representation of an integer.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.05</li>
+</ul>
+</div>
+
+<pre id="VALread_int">val read_int : unit -&gt; int</pre><div class="info ">
+<div class="info-desc">
+<p>Same as <a href="Stdlib.html#VALread_int_opt"><code class="code">read_int_opt</code></a>, but raise <code class="code">Failure&nbsp;"int_of_string"</code>
+   instead of returning <code class="code">None</code>.</p>
+</div>
+</div>
+
+<pre id="VALread_float_opt">val read_float_opt : unit -&gt; float option</pre><div class="info ">
+<div class="info-desc">
+<p>Flush standard output, then read one line from standard input
+   and convert it to a floating-point number.</p>
+
+<p>Return <code class="code">None</code> if the line read is not a valid representation of a
+   floating-point number.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.05.0</li>
+</ul>
+</div>
+
+<pre id="VALread_float">val read_float : unit -&gt; float</pre><div class="info ">
+<div class="info-desc">
+<p>Same as <a href="Stdlib.html#VALread_float_opt"><code class="code">read_float_opt</code></a>, but raise <code class="code">Failure&nbsp;"float_of_string"</code>
+   instead of returning <code class="code">None</code>.</p>
+</div>
+</div>
+<h3 id="2_Generaloutputfunctions">General output functions</h3>
+<pre><span class="keyword">type</span> open_flag = </pre><table class="typetable">
+<tbody><tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Open_rdonly</code></td>
+<td class="typefieldcomment" align="left" valign="top"><code>(*</code></td><td class="typefieldcomment" align="left" valign="top"><div class="info ">
+<div class="info-desc">
+<p>open for reading.</p>
+</div>
+</div>
+</td><td class="typefieldcomment" align="left" valign="bottom"><code>*)</code></td>
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Open_wronly</code></td>
+<td class="typefieldcomment" align="left" valign="top"><code>(*</code></td><td class="typefieldcomment" align="left" valign="top"><div class="info ">
+<div class="info-desc">
+<p>open for writing.</p>
+</div>
+</div>
+</td><td class="typefieldcomment" align="left" valign="bottom"><code>*)</code></td>
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Open_append</code></td>
+<td class="typefieldcomment" align="left" valign="top"><code>(*</code></td><td class="typefieldcomment" align="left" valign="top"><div class="info ">
+<div class="info-desc">
+<p>open for appending: always write at end of file.</p>
+</div>
+</div>
+</td><td class="typefieldcomment" align="left" valign="bottom"><code>*)</code></td>
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Open_creat</code></td>
+<td class="typefieldcomment" align="left" valign="top"><code>(*</code></td><td class="typefieldcomment" align="left" valign="top"><div class="info ">
+<div class="info-desc">
+<p>create the file if it does not exist.</p>
+</div>
+</div>
+</td><td class="typefieldcomment" align="left" valign="bottom"><code>*)</code></td>
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Open_trunc</code></td>
+<td class="typefieldcomment" align="left" valign="top"><code>(*</code></td><td class="typefieldcomment" align="left" valign="top"><div class="info ">
+<div class="info-desc">
+<p>empty the file if it already exists.</p>
+</div>
+</div>
+</td><td class="typefieldcomment" align="left" valign="bottom"><code>*)</code></td>
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Open_excl</code></td>
+<td class="typefieldcomment" align="left" valign="top"><code>(*</code></td><td class="typefieldcomment" align="left" valign="top"><div class="info ">
+<div class="info-desc">
+<p>fail if Open_creat and the file already exists.</p>
+</div>
+</div>
+</td><td class="typefieldcomment" align="left" valign="bottom"><code>*)</code></td>
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Open_binary</code></td>
+<td class="typefieldcomment" align="left" valign="top"><code>(*</code></td><td class="typefieldcomment" align="left" valign="top"><div class="info ">
+<div class="info-desc">
+<p>open in binary mode (no conversion).</p>
+</div>
+</div>
+</td><td class="typefieldcomment" align="left" valign="bottom"><code>*)</code></td>
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Open_text</code></td>
+<td class="typefieldcomment" align="left" valign="top"><code>(*</code></td><td class="typefieldcomment" align="left" valign="top"><div class="info ">
+<div class="info-desc">
+<p>open in text mode (may perform conversions).</p>
+</div>
+</div>
+</td><td class="typefieldcomment" align="left" valign="bottom"><code>*)</code></td>
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Open_nonblock</code></td>
+<td class="typefieldcomment" align="left" valign="top"><code>(*</code></td><td class="typefieldcomment" align="left" valign="top"><div class="info ">
+<div class="info-desc">
+<p>open in non-blocking mode.</p>
+</div>
+</div>
+</td><td class="typefieldcomment" align="left" valign="bottom"><code>*)</code></td>
+</tr></tbody></table>
+
+<div class="info ">
+<div class="info-desc">
+<p>Opening modes for <a href="Stdlib.html#VALopen_out_gen"><code class="code">open_out_gen</code></a> and
+  <a href="Stdlib.html#VALopen_in_gen"><code class="code">open_in_gen</code></a>.</p>
+</div>
+</div>
+
+
+<pre id="VALopen_out">val open_out : string -&gt; out_channel</pre><div class="info ">
+<div class="info-desc">
+<p>Open the named file for writing, and return a new output channel
+   on that file, positioned at the beginning of the file. The
+   file is truncated to zero length if it already exists. It
+   is created if it does not already exists.</p>
+</div>
+</div>
+
+<pre id="VALopen_out_bin">val open_out_bin : string -&gt; out_channel</pre><div class="info ">
+<div class="info-desc">
+<p>Same as <a href="Stdlib.html#VALopen_out"><code class="code">open_out</code></a>, but the file is opened in binary mode,
+   so that no translation takes place during writes. On operating
+   systems that do not distinguish between text mode and binary
+   mode, this function behaves like <a href="Stdlib.html#VALopen_out"><code class="code">open_out</code></a>.</p>
+</div>
+</div>
+
+<pre id="VALopen_out_gen">val open_out_gen : open_flag list -&gt; int -&gt; string -&gt; out_channel</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">open_out_gen&nbsp;mode&nbsp;perm&nbsp;filename</code> opens the named file for writing,
+   as described above. The extra argument <code class="code">mode</code>
+   specifies the opening mode. The extra argument <code class="code">perm</code> specifies
+   the file permissions, in case the file must be created.
+   <a href="Stdlib.html#VALopen_out"><code class="code">open_out</code></a> and <a href="Stdlib.html#VALopen_out_bin"><code class="code">open_out_bin</code></a> are special
+   cases of this function.</p>
+</div>
+</div>
+
+<pre id="VALflush">val flush : out_channel -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p>Flush the buffer associated with the given output channel,
+   performing all pending writes on that channel.
+   Interactive programs must be careful about flushing standard
+   output and standard error at the right time.</p>
+</div>
+</div>
+
+<pre id="VALflush_all">val flush_all : unit -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p>Flush all open output channels; ignore errors.</p>
+</div>
+</div>
+
+<pre id="VALoutput_char">val output_char : out_channel -&gt; char -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p>Write the character on the given output channel.</p>
+</div>
+</div>
+
+<pre id="VALoutput_string">val output_string : out_channel -&gt; string -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p>Write the string on the given output channel.</p>
+</div>
+</div>
+
+<pre id="VALoutput_bytes">val output_bytes : out_channel -&gt; bytes -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p>Write the byte sequence on the given output channel.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.02.0</li>
+</ul>
+</div>
+
+<pre id="VALoutput">val output : out_channel -&gt; bytes -&gt; int -&gt; int -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">output&nbsp;oc&nbsp;buf&nbsp;pos&nbsp;len</code> writes <code class="code">len</code> characters from byte sequence <code class="code">buf</code>,
+   starting at offset <code class="code">pos</code>, to the given output channel <code class="code">oc</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Raises</b> <code>Invalid_argument</code> if <code class="code">pos</code> and <code class="code">len</code> do not
+   designate a valid range of <code class="code">buf</code>.</li>
+</ul>
+</div>
+
+<pre id="VALoutput_substring">val output_substring : out_channel -&gt; string -&gt; int -&gt; int -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p>Same as <code class="code">output</code> but take a string as argument instead of
+   a byte sequence.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.02.0</li>
+</ul>
+</div>
+
+<pre id="VALoutput_byte">val output_byte : out_channel -&gt; int -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p>Write one 8-bit integer (as the single character with that code)
+   on the given output channel. The given integer is taken modulo
+   256.</p>
+</div>
+</div>
+
+<pre id="VALoutput_binary_int">val output_binary_int : out_channel -&gt; int -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p>Write one integer in binary format (4 bytes, big-endian)
+   on the given output channel.
+   The given integer is taken modulo 2<sup class="superscript">32</sup>.
+   The only reliable way to read it back is through the
+   <a href="Stdlib.html#VALinput_binary_int"><code class="code">input_binary_int</code></a> function. The format is compatible across
+   all machines for a given version of OCaml.</p>
+</div>
+</div>
+
+<pre id="VALoutput_value">val output_value : out_channel -&gt; 'a -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p>Write the representation of a structured value of any type
+   to a channel. Circularities and sharing inside the value
+   are detected and preserved. The object can be read back,
+   by the function <a href="Stdlib.html#VALinput_value"><code class="code">input_value</code></a>. See the description of module
+   <a href="Stdlib.Marshal.html"><code class="code">Marshal</code></a> for more information. <a href="Stdlib.html#VALoutput_value"><code class="code">output_value</code></a> is equivalent
+   to <a href="Marshal.html#VALto_channel"><code class="code">Marshal.to_channel</code></a> with an empty list of flags.</p>
+</div>
+</div>
+
+<pre id="VALseek_out">val seek_out : out_channel -&gt; int -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">seek_out&nbsp;chan&nbsp;pos</code> sets the current writing position to <code class="code">pos</code>
+   for channel <code class="code">chan</code>. This works only for regular files. On
+   files of other kinds (such as terminals, pipes and sockets),
+   the behavior is unspecified.</p>
+</div>
+</div>
+
+<pre id="VALpos_out">val pos_out : out_channel -&gt; int</pre><div class="info ">
+<div class="info-desc">
+<p>Return the current writing position for the given channel.  Does
+    not work on channels opened with the <code class="code">Open_append</code> flag (returns
+    unspecified results).
+    For files opened in text mode under Windows, the returned position
+    is approximate (owing to end-of-line conversion); in particular,
+    saving the current position with <code class="code">pos_out</code>, then going back to
+    this position using <code class="code">seek_out</code> will not work.  For this
+    programming idiom to work reliably and portably, the file must be
+    opened in binary mode.</p>
+</div>
+</div>
+
+<pre id="VALout_channel_length">val out_channel_length : out_channel -&gt; int</pre><div class="info ">
+<div class="info-desc">
+<p>Return the size (number of characters) of the regular file
+   on which the given channel is opened.  If the channel is opened
+    on a file that is not a regular file, the result is meaningless.</p>
+</div>
+</div>
+
+<pre id="VALclose_out">val close_out : out_channel -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p>Close the given channel, flushing all buffered write operations.
+   Output functions raise a <code class="code">Sys_error</code> exception when they are
+   applied to a closed output channel, except <code class="code">close_out</code> and <code class="code">flush</code>,
+   which do nothing when applied to an already closed channel.
+   Note that <code class="code">close_out</code> may raise <code class="code">Sys_error</code> if the operating
+   system signals an error when flushing or closing.</p>
+</div>
+</div>
+
+<pre id="VALclose_out_noerr">val close_out_noerr : out_channel -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p>Same as <code class="code">close_out</code>, but ignore all errors.</p>
+</div>
+</div>
+
+<pre id="VALset_binary_mode_out">val set_binary_mode_out : out_channel -&gt; bool -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">set_binary_mode_out&nbsp;oc&nbsp;true</code> sets the channel <code class="code">oc</code> to binary
+   mode: no translations take place during output.
+   <code class="code">set_binary_mode_out&nbsp;oc&nbsp;false</code> sets the channel <code class="code">oc</code> to text
+   mode: depending on the operating system, some translations
+   may take place during output.  For instance, under Windows,
+   end-of-lines will be translated from <code class="code">\n</code> to <code class="code">\r\n</code>.
+   This function has no effect under operating systems that
+   do not distinguish between text mode and binary mode.</p>
+</div>
+</div>
+<h3 id="2_Generalinputfunctions">General input functions</h3>
+<pre id="VALopen_in">val open_in : string -&gt; in_channel</pre><div class="info ">
+<div class="info-desc">
+<p>Open the named file for reading, and return a new input channel
+   on that file, positioned at the beginning of the file.</p>
+</div>
+</div>
+
+<pre id="VALopen_in_bin">val open_in_bin : string -&gt; in_channel</pre><div class="info ">
+<div class="info-desc">
+<p>Same as <a href="Stdlib.html#VALopen_in"><code class="code">open_in</code></a>, but the file is opened in binary mode,
+   so that no translation takes place during reads. On operating
+   systems that do not distinguish between text mode and binary
+   mode, this function behaves like <a href="Stdlib.html#VALopen_in"><code class="code">open_in</code></a>.</p>
+</div>
+</div>
+
+<pre id="VALopen_in_gen">val open_in_gen : open_flag list -&gt; int -&gt; string -&gt; in_channel</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">open_in_gen&nbsp;mode&nbsp;perm&nbsp;filename</code> opens the named file for reading,
+   as described above. The extra arguments
+   <code class="code">mode</code> and <code class="code">perm</code> specify the opening mode and file permissions.
+   <a href="Stdlib.html#VALopen_in"><code class="code">open_in</code></a> and <a href="Stdlib.html#VALopen_in_bin"><code class="code">open_in_bin</code></a> are special
+   cases of this function.</p>
+</div>
+</div>
+
+<pre id="VALinput_char">val input_char : in_channel -&gt; char</pre><div class="info ">
+<div class="info-desc">
+<p>Read one character from the given input channel.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Raises</b> <code>End_of_file</code> if there are no more characters to read.</li>
+</ul>
+</div>
+
+<pre id="VALinput_line">val input_line : in_channel -&gt; string</pre><div class="info ">
+<div class="info-desc">
+<p>Read characters from the given input channel, until a
+   newline character is encountered. Return the string of
+   all characters read, without the newline character at the end.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Raises</b> <code>End_of_file</code> if the end of the file is reached
+   at the beginning of line.</li>
+</ul>
+</div>
+
+<pre id="VALinput">val input : in_channel -&gt; bytes -&gt; int -&gt; int -&gt; int</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">input&nbsp;ic&nbsp;buf&nbsp;pos&nbsp;len</code> reads up to <code class="code">len</code> characters from
+   the given channel <code class="code">ic</code>, storing them in byte sequence <code class="code">buf</code>, starting at
+   character number <code class="code">pos</code>.
+   It returns the actual number of characters read, between 0 and
+   <code class="code">len</code> (inclusive).
+   A return value of 0 means that the end of file was reached.
+   A return value between 0 and <code class="code">len</code> exclusive means that
+   not all requested <code class="code">len</code> characters were read, either because
+   no more characters were available at that time, or because
+   the implementation found it convenient to do a partial read;
+   <code class="code">input</code> must be called again to read the remaining characters,
+   if desired.  (See also <a href="Stdlib.html#VALreally_input"><code class="code">really_input</code></a> for reading
+   exactly <code class="code">len</code> characters.)
+   Exception <code class="code">Invalid_argument&nbsp;"input"</code> is raised if <code class="code">pos</code> and <code class="code">len</code>
+   do not designate a valid range of <code class="code">buf</code>.</p>
+</div>
+</div>
+
+<pre id="VALreally_input">val really_input : in_channel -&gt; bytes -&gt; int -&gt; int -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">really_input&nbsp;ic&nbsp;buf&nbsp;pos&nbsp;len</code> reads <code class="code">len</code> characters from channel <code class="code">ic</code>,
+   storing them in byte sequence <code class="code">buf</code>, starting at character number <code class="code">pos</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Raises</b><ul><li><code>End_of_file</code> if the end of file is reached before <code class="code">len</code>
+   characters have been read.</li>
+<li><code>Invalid_argument</code> if
+   <code class="code">pos</code> and <code class="code">len</code> do not designate a valid range of <code class="code">buf</code>.</li>
+</ul></li>
+</ul>
+</div>
+
+<pre id="VALreally_input_string">val really_input_string : in_channel -&gt; int -&gt; string</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">really_input_string&nbsp;ic&nbsp;len</code> reads <code class="code">len</code> characters from channel <code class="code">ic</code>
+   and returns them in a new string.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.02.0</li>
+<li><b>Raises</b> <code>End_of_file</code> if the end of file is reached before <code class="code">len</code>
+   characters have been read.</li>
+</ul>
+</div>
+
+<pre id="VALinput_byte">val input_byte : in_channel -&gt; int</pre><div class="info ">
+<div class="info-desc">
+<p>Same as <a href="Stdlib.html#VALinput_char"><code class="code">input_char</code></a>, but return the 8-bit integer representing
+   the character.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Raises</b> <code>End_of_file</code> if the end of file was reached.</li>
+</ul>
+</div>
+
+<pre id="VALinput_binary_int">val input_binary_int : in_channel -&gt; int</pre><div class="info ">
+<div class="info-desc">
+<p>Read an integer encoded in binary format (4 bytes, big-endian)
+   from the given input channel. See <a href="Stdlib.html#VALoutput_binary_int"><code class="code">output_binary_int</code></a>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Raises</b> <code>End_of_file</code> if the end of file was reached while reading the
+   integer.</li>
+</ul>
+</div>
+
+<pre id="VALinput_value">val input_value : in_channel -&gt; 'a</pre><div class="info ">
+<div class="info-desc">
+<p>Read the representation of a structured value, as produced
+   by <a href="Stdlib.html#VALoutput_value"><code class="code">output_value</code></a>, and return the corresponding value.
+   This function is identical to <a href="Marshal.html#VALfrom_channel"><code class="code">Marshal.from_channel</code></a>;
+   see the description of module <a href="Stdlib.Marshal.html"><code class="code">Marshal</code></a> for more information,
+   in particular concerning the lack of type safety.</p>
+</div>
+</div>
+
+<pre id="VALseek_in">val seek_in : in_channel -&gt; int -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">seek_in&nbsp;chan&nbsp;pos</code> sets the current reading position to <code class="code">pos</code>
+   for channel <code class="code">chan</code>. This works only for regular files. On
+   files of other kinds, the behavior is unspecified.</p>
+</div>
+</div>
+
+<pre id="VALpos_in">val pos_in : in_channel -&gt; int</pre><div class="info ">
+<div class="info-desc">
+<p>Return the current reading position for the given channel.  For
+    files opened in text mode under Windows, the returned position is
+    approximate (owing to end-of-line conversion); in particular,
+    saving the current position with <code class="code">pos_in</code>, then going back to this
+    position using <code class="code">seek_in</code> will not work.  For this programming
+    idiom to work reliably and portably, the file must be opened in
+    binary mode.</p>
+</div>
+</div>
+
+<pre id="VALin_channel_length">val in_channel_length : in_channel -&gt; int</pre><div class="info ">
+<div class="info-desc">
+<p>Return the size (number of characters) of the regular file
+    on which the given channel is opened.  If the channel is opened
+    on a file that is not a regular file, the result is meaningless.
+    The returned size does not take into account the end-of-line
+    translations that can be performed when reading from a channel
+    opened in text mode.</p>
+</div>
+</div>
+
+<pre id="VALclose_in">val close_in : in_channel -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p>Close the given channel.  Input functions raise a <code class="code">Sys_error</code>
+  exception when they are applied to a closed input channel,
+  except <code class="code">close_in</code>, which does nothing when applied to an already
+  closed channel.</p>
+</div>
+</div>
+
+<pre id="VALclose_in_noerr">val close_in_noerr : in_channel -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p>Same as <code class="code">close_in</code>, but ignore all errors.</p>
+</div>
+</div>
+
+<pre id="VALset_binary_mode_in">val set_binary_mode_in : in_channel -&gt; bool -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">set_binary_mode_in&nbsp;ic&nbsp;true</code> sets the channel <code class="code">ic</code> to binary
+   mode: no translations take place during input.
+   <code class="code">set_binary_mode_out&nbsp;ic&nbsp;false</code> sets the channel <code class="code">ic</code> to text
+   mode: depending on the operating system, some translations
+   may take place during input.  For instance, under Windows,
+   end-of-lines will be translated from <code class="code">\r\n</code> to <code class="code">\n</code>.
+   This function has no effect under operating systems that
+   do not distinguish between text mode and binary mode.</p>
+</div>
+</div>
+<h3 id="2_Operationsonlargefiles">Operations on large files</h3>
+<pre id="MODULELargeFile"><span class="keyword">module</span> LargeFile: sig .. end</pre><div class="info">
+<p>Operations on large files.</p>
+
+</div>
+<h2 id="1_References">References</h2>
+<pre><span class="keyword">type</span> 'a ref = {</pre><table class="typetable">
+<tbody><tr>
+<td align="left" valign="top">
+<code>&nbsp;&nbsp;</code></td>
+<td align="left" valign="top">
+<code>mutable&nbsp;contents&nbsp;: 'a;</code></td>
+
+</tr></tbody></table>
+<code>}</code>
+
+<div class="info ">
+<div class="info-desc">
+<p>The type of references (mutable indirection cells) containing
+   a value of type <code class="code">'a</code>.</p>
+</div>
+</div>
+
+
+<pre id="VALref">val ref : 'a -&gt; 'a ref</pre><div class="info ">
+<div class="info-desc">
+<p>Return a fresh reference containing the given value.</p>
+</div>
+</div>
+
+<pre id="VAL(!)">val (!) : 'a ref -&gt; 'a</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">!r</code> returns the current contents of reference <code class="code">r</code>.
+   Equivalent to <code class="code">fun&nbsp;r&nbsp;-&gt;&nbsp;r.contents</code>.
+   Unary operator, see <a href="Ocaml_operators.html"><code class="code">Ocaml_operators</code></a> for more information.</p>
+</div>
+</div>
+
+<pre id="VAL(:=)">val (:=) : 'a ref -&gt; 'a -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">r&nbsp;:=&nbsp;a</code> stores the value of <code class="code">a</code> in reference <code class="code">r</code>.
+   Equivalent to <code class="code">fun&nbsp;r&nbsp;v&nbsp;-&gt;&nbsp;r.contents&nbsp;&lt;-&nbsp;v</code>.
+   Right-associative operator, see <a href="Ocaml_operators.html"><code class="code">Ocaml_operators</code></a> for more information.</p>
+</div>
+</div>
+
+<pre id="VALincr">val incr : int ref -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p>Increment the integer contained in the given reference.
+   Equivalent to <code class="code">fun&nbsp;r&nbsp;-&gt;&nbsp;r&nbsp;:=&nbsp;succ&nbsp;!r</code>.</p>
+</div>
+</div>
+
+<pre id="VALdecr">val decr : int ref -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p>Decrement the integer contained in the given reference.
+   Equivalent to <code class="code">fun&nbsp;r&nbsp;-&gt;&nbsp;r&nbsp;:=&nbsp;pred&nbsp;!r</code>.</p>
+</div>
+</div>
+<h2 id="1_Resulttype">Result type</h2>
+<pre><span class="keyword">type</span> ('a, 'b) result = </pre><table class="typetable">
+<tbody><tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Ok of 'a</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Error of 'b</code></td>
+
+</tr></tbody></table>
+
+<div class="info ">
+<ul class="info-attributes">
+<li><b>Since</b> 4.03.0</li>
+</ul>
+</div>
+
+<h2 id="1_Operationsonformatstrings">Operations on format strings</h2><p>Format strings are character strings with special lexical conventions
+  that defines the functionality of formatted input/output functions. Format
+  strings are used to read data with formatted input functions from module
+  <a href="Stdlib.Scanf.html"><code class="code">Scanf</code></a> and to print data with formatted output functions from modules
+  <a href="Stdlib.Printf.html"><code class="code">Printf</code></a> and <a href="Stdlib.Format.html"><code class="code">Format</code></a>.</p>
+
+<p>Format strings are made of three kinds of entities:</p>
+<ul>
+<li><em>conversions specifications</em>, introduced by the special character <code class="code">'%'</code>
+    followed by one or more characters specifying what kind of argument to
+    read or print,</li>
+<li><em>formatting indications</em>, introduced by the special character <code class="code">'@'</code>
+    followed by one or more characters specifying how to read or print the
+    argument,</li>
+<li><em>plain characters</em> that are regular characters with usual lexical
+    conventions. Plain characters specify string literals to be read in the
+    input or printed in the output.</li>
+</ul>
+<p>There is an additional lexical rule to escape the special characters <code class="code">'%'</code>
+  and <code class="code">'@'</code> in format strings: if a special character follows a <code class="code">'%'</code>
+  character, it is treated as a plain character. In other words, <code class="code">"%%"</code> is
+  considered as a plain <code class="code">'%'</code> and <code class="code">"%@"</code> as a plain <code class="code">'@'</code>.</p>
+
+<p>For more information about conversion specifications and formatting
+  indications available, read the documentation of modules <a href="Stdlib.Scanf.html"><code class="code">Scanf</code></a>,
+  <a href="Stdlib.Printf.html"><code class="code">Printf</code></a> and <a href="Stdlib.Format.html"><code class="code">Format</code></a>.</p>
+<p>Format strings have a general and highly polymorphic type
+    <code class="code">('a,&nbsp;'b,&nbsp;'c,&nbsp;'d,&nbsp;'e,&nbsp;'f)&nbsp;format6</code>.
+    The two simplified types, <code class="code">format</code> and <code class="code">format4</code> below are
+    included for backward compatibility with earlier releases of
+    OCaml.</p>
+
+<p>The meaning of format string type parameters is as follows:</p>
+
+<ul>
+<li><code class="code">'a</code> is the type of the parameters of the format for formatted output
+      functions (<code class="code">printf</code>-style functions);
+      <code class="code">'a</code> is the type of the values read by the format for formatted input
+      functions (<code class="code">scanf</code>-style functions).</li>
+</ul>
+<ul>
+<li><code class="code">'b</code> is the type of input source for formatted input functions and the
+      type of output target for formatted output functions.
+      For <code class="code">printf</code>-style functions from module <a href="Stdlib.Printf.html"><code class="code">Printf</code></a>, <code class="code">'b</code> is typically
+      <code class="code">out_channel</code>;
+      for <code class="code">printf</code>-style functions from module <a href="Stdlib.Format.html"><code class="code">Format</code></a>, <code class="code">'b</code> is typically
+      <a href="Format.html#TYPEformatter"><code class="code">Format.formatter</code></a>;
+      for <code class="code">scanf</code>-style functions from module <a href="Stdlib.Scanf.html"><code class="code">Scanf</code></a>, <code class="code">'b</code> is typically
+      <a href="Scanf.Scanning.html#TYPEin_channel"><code class="code">Scanf.Scanning.in_channel</code></a>.</li>
+</ul>
+<p>Type argument <code class="code">'b</code> is also the type of the first argument given to
+      user's defined printing functions for <code class="code">%a</code> and <code class="code">%t</code> conversions,
+      and user's defined reading functions for <code class="code">%r</code> conversion.</p>
+
+<ul>
+<li><code class="code">'c</code> is the type of the result of the <code class="code">%a</code> and <code class="code">%t</code> printing
+      functions, and also the type of the argument transmitted to the
+      first argument of <code class="code">kprintf</code>-style functions or to the
+      <code class="code">kscanf</code>-style functions.</li>
+</ul>
+<ul>
+<li><code class="code">'d</code> is the type of parameters for the <code class="code">scanf</code>-style functions.</li>
+</ul>
+<ul>
+<li><code class="code">'e</code> is the type of the receiver function for the <code class="code">scanf</code>-style functions.</li>
+</ul>
+<ul>
+<li><code class="code">'f</code> is the final result type of a formatted input/output function
+      invocation: for the <code class="code">printf</code>-style functions, it is typically <code class="code">unit</code>;
+      for the <code class="code">scanf</code>-style functions, it is typically the result type of the
+      receiver function.</li>
+</ul>
+
+<pre id="TYPEformat6"><span class="keyword">type</span> ('a, 'b, 'c, 'd, 'e, 'f) format6 = ('a, 'b, 'c, 'd, 'e, 'f) CamlinternalFormatBasics.format6 </pre>
+
+
+<pre id="TYPEformat4"><span class="keyword">type</span> ('a, 'b, 'c, 'd) format4 = ('a, 'b, 'c, 'c, 'c, 'd) format6 </pre>
+
+
+<pre id="TYPEformat"><span class="keyword">type</span> ('a, 'b, 'c) format = ('a, 'b, 'c, 'c) format4 </pre>
+
+
+<pre id="VALstring_of_format">val string_of_format : ('a, 'b, 'c, 'd, 'e, 'f) format6 -&gt; string</pre><div class="info ">
+<div class="info-desc">
+<p>Converts a format string into a string.</p>
+</div>
+</div>
+
+<pre id="VALformat_of_string">val format_of_string : ('a, 'b, 'c, 'd, 'e, 'f) format6 -&gt;       ('a, 'b, 'c, 'd, 'e, 'f) format6</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">format_of_string&nbsp;s</code> returns a format string read from the string
+    literal <code class="code">s</code>.
+    Note: <code class="code">format_of_string</code> can not convert a string argument that is not a
+    literal. If you need this functionality, use the more general
+    <a href="Scanf.html#VALformat_from_string"><code class="code">Scanf.format_from_string</code></a> function.</p>
+</div>
+</div>
+
+<pre id="VAL(^^)">val (^^) : ('a, 'b, 'c, 'd, 'e, 'f) format6 -&gt;       ('f, 'b, 'c, 'e, 'g, 'h) format6 -&gt;       ('a, 'b, 'c, 'd, 'g, 'h) format6</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">f1&nbsp;^^&nbsp;f2</code> catenates format strings <code class="code">f1</code> and <code class="code">f2</code>. The result is a
+  format string that behaves as the concatenation of format strings <code class="code">f1</code> and
+  <code class="code">f2</code>: in case of formatted output, it accepts arguments from <code class="code">f1</code>, then
+  arguments from <code class="code">f2</code>; in case of formatted input, it returns results from
+  <code class="code">f1</code>, then results from <code class="code">f2</code>.
+  Right-associative operator, see <a href="Ocaml_operators.html"><code class="code">Ocaml_operators</code></a> for more information.</p>
+</div>
+</div>
+<h2 id="1_Programtermination">Program termination</h2>
+<pre id="VALexit">val exit : int -&gt; 'a</pre><div class="info ">
+<div class="info-desc">
+<p>Terminate the process, returning the given status code to the operating
+    system: usually 0 to indicate no errors, and a small positive integer to
+    indicate failure. All open output channels are flushed with <code class="code">flush_all</code>.
+    The callbacks registered with <a href="Domain.html#VALat_exit"><code class="code">Domain.at_exit</code></a> are called followed by
+    those registered with <a href="Stdlib.html#VALat_exit"><code class="code">at_exit</code></a>.</p>
+
+<p>An implicit <code class="code">exit&nbsp;0</code> is performed each time a program terminates normally.
+    An implicit <code class="code">exit&nbsp;2</code> is performed if the program terminates early because
+    of an uncaught exception.</p>
+</div>
+</div>
+
+<pre id="VALat_exit">val at_exit : (unit -&gt; unit) -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p>Register the given function to be called at program termination
+   time. The functions registered with <code class="code">at_exit</code> will be called when
+   the program does any of the following:</p>
+<ul>
+<li>executes <a href="Stdlib.html#VALexit"><code class="code">exit</code></a></li>
+<li>terminates, either normally or because of an uncaught
+     exception</li>
+<li>executes the C function <code class="code">caml_shutdown</code>.
+   The functions are called in 'last in, first out' order: the
+   function most recently added with <code class="code">at_exit</code> is called first.</li>
+</ul>
+</div>
+</div>
+<h2 id="modules">Standard library modules </h2>
+<pre id="MODULEArg"><span class="keyword">module</span> Arg: Arg</pre>
+<pre id="MODULEArray"><span class="keyword">module</span> Array: Array</pre>
+<pre id="MODULEArrayLabels"><span class="keyword">module</span> ArrayLabels: ArrayLabels</pre>
+<pre id="MODULEAtomic"><span class="keyword">module</span> Atomic: Atomic</pre>
+<pre id="MODULEBigarray"><span class="keyword">module</span> Bigarray: Bigarray</pre>
+<pre id="MODULEBool"><span class="keyword">module</span> Bool: Bool</pre>
+<pre id="MODULEBuffer"><span class="keyword">module</span> Buffer: Buffer</pre>
+<pre id="MODULEBytes"><span class="keyword">module</span> Bytes: Bytes</pre>
+<pre id="MODULEBytesLabels"><span class="keyword">module</span> BytesLabels: BytesLabels</pre>
+<pre id="MODULECallback"><span class="keyword">module</span> Callback: Callback</pre>
+<pre id="MODULEChar"><span class="keyword">module</span> Char: Char</pre>
+<pre id="MODULEComplex"><span class="keyword">module</span> Complex: Complex</pre>
+<pre id="MODULECondition"><span class="keyword">module</span> Condition: Condition</pre>
+<pre id="MODULEDigest"><span class="keyword">module</span> Digest: Digest</pre>
+<pre id="MODULEDomain"><span class="keyword">module</span> Domain: Domain</pre><div class="info">
+</div>
+
+<pre id="MODULEEffect"><span class="keyword">module</span> Effect: Effect</pre><div class="info">
+</div>
+
+<pre id="MODULEEither"><span class="keyword">module</span> Either: Either</pre>
+<pre id="MODULEEphemeron"><span class="keyword">module</span> Ephemeron: Ephemeron</pre>
+<pre id="MODULEFilename"><span class="keyword">module</span> Filename: Filename</pre>
+<pre id="MODULEFloat"><span class="keyword">module</span> Float: Float</pre>
+<pre id="MODULEFormat"><span class="keyword">module</span> Format: Format</pre>
+<pre id="MODULEFun"><span class="keyword">module</span> Fun: Fun</pre>
+<pre id="MODULEGc"><span class="keyword">module</span> Gc: Gc</pre>
+<pre id="MODULEHashtbl"><span class="keyword">module</span> Hashtbl: Hashtbl</pre>
+<pre id="MODULEIn_channel"><span class="keyword">module</span> In_channel: In_channel</pre>
+<pre id="MODULEInt"><span class="keyword">module</span> Int: Int</pre>
+<pre id="MODULEInt32"><span class="keyword">module</span> Int32: Int32</pre>
+<pre id="MODULEInt64"><span class="keyword">module</span> Int64: Int64</pre>
+<pre id="MODULELazy"><span class="keyword">module</span> Lazy: Lazy</pre>
+<pre id="MODULELexing"><span class="keyword">module</span> Lexing: Lexing</pre>
+<pre id="MODULEList"><span class="keyword">module</span> List: List</pre>
+<pre id="MODULEListLabels"><span class="keyword">module</span> ListLabels: ListLabels</pre>
+<pre id="MODULEMap"><span class="keyword">module</span> Map: Map</pre>
+<pre id="MODULEMarshal"><span class="keyword">module</span> Marshal: Marshal</pre>
+<pre id="MODULEMoreLabels"><span class="keyword">module</span> MoreLabels: MoreLabels</pre>
+<pre id="MODULEMutex"><span class="keyword">module</span> Mutex: Mutex</pre>
+<pre id="MODULENativeint"><span class="keyword">module</span> Nativeint: Nativeint</pre>
+<pre id="MODULEObj"><span class="keyword">module</span> Obj: Obj</pre>
+<pre id="MODULEOo"><span class="keyword">module</span> Oo: Oo</pre>
+<pre id="MODULEOption"><span class="keyword">module</span> Option: Option</pre>
+<pre id="MODULEOut_channel"><span class="keyword">module</span> Out_channel: Out_channel</pre>
+<pre id="MODULEParsing"><span class="keyword">module</span> Parsing: Parsing</pre>
+<pre id="MODULEPrintexc"><span class="keyword">module</span> Printexc: Printexc</pre>
+<pre id="MODULEPrintf"><span class="keyword">module</span> Printf: Printf</pre>
+<pre id="MODULEQueue"><span class="keyword">module</span> Queue: Queue</pre>
+<pre id="MODULERandom"><span class="keyword">module</span> Random: Random</pre>
+<pre id="MODULEResult"><span class="keyword">module</span> Result: Result</pre>
+<pre id="MODULEScanf"><span class="keyword">module</span> Scanf: Scanf</pre>
+<pre id="MODULESemaphore"><span class="keyword">module</span> Semaphore: Semaphore</pre>
+<pre id="MODULESeq"><span class="keyword">module</span> Seq: Seq</pre>
+<pre id="MODULESet"><span class="keyword">module</span> Set: Set</pre>
+<pre id="MODULEStack"><span class="keyword">module</span> Stack: Stack</pre>
+<pre id="MODULEStdLabels"><span class="keyword">module</span> StdLabels: StdLabels</pre>
+<pre id="MODULEString"><span class="keyword">module</span> String: String</pre>
+<pre id="MODULEStringLabels"><span class="keyword">module</span> StringLabels: StringLabels</pre>
+<pre id="MODULESys"><span class="keyword">module</span> Sys: Sys</pre>
+<pre id="MODULEUchar"><span class="keyword">module</span> Uchar: Uchar</pre>
+<pre id="MODULEUnit"><span class="keyword">module</span> Unit: Unit</pre>
+<pre id="MODULEWeak"><span class="keyword">module</span> Weak: Weak</pre>
+</div>

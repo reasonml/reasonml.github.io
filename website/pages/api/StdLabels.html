@@ -1,29 +1,26 @@
 <link rel="stylesheet" href="/css/main.css"><div class="ocamldoc">
-<div class="navbar"><a class="pre" href="Stack.html" title="Stack">Previous</a>
-&#xA0;<a class="up" href="index.html" title="Index">Up</a>
-&#xA0;<a class="post" href="Stream.html" title="Stream">Next</a>
-</div>
 <h1>Module <a href="type_StdLabels.html">StdLabels</a></h1>
 
-<pre><span class="keyword">module</span> StdLabels: sig .. end</pre><div class="info module top">
-Standard labeled libraries.
-<p>
+<pre id="MODULEStdLabels"><span class="keyword">module</span> StdLabels: sig .. end</pre><div class="info module top">
+<div class="info-desc">
+<p>Standard labeled libraries.</p>
 
-   This meta-module provides labelized version of the <a href="Array.html"><code class="code">Array</code></a>,
-   <a href="Bytes.html"><code class="code">Bytes</code></a>, <a href="List.html"><code class="code">List</code></a> and <a href="String.html"><code class="code">String</code></a> modules.
-</p><p>
+<p>This meta-module provides versions of the <a href="StdLabels.Array.html"><code class="code">StdLabels.Array</code></a>, <a href="StdLabels.Bytes.html"><code class="code">StdLabels.Bytes</code></a>,
+   <a href="StdLabels.List.html"><code class="code">StdLabels.List</code></a> and <a href="StdLabels.String.html"><code class="code">StdLabels.String</code></a> modules where function arguments are
+   systematically labeled.  It is intended to be opened at the top of
+   source files, as shown below.</p>
 
-   They only differ by their labels. Detailed interfaces can be found
-   in <code class="code">arrayLabels.mli</code>, <code class="code">bytesLabels.mli</code>, <code class="code">listLabels.mli</code>
-   and <code class="code">stringLabels.mli</code>.<br>
-</p></div>
+<pre class="codepre">     open StdLabels
+
+     let to_upper = String.map ~f:Char.uppercase_ascii
+     let seq len = List.init ~f:(fun i -&gt; i) ~len
+     let everything = Array.create_matrix ~dimx:42 ~dimy:42 42
+   </pre></div>
+</div>
 <hr width="100%">
 
-<pre><span class="keyword">module</span> Array: ArrayLabels;
-</pre>
-<pre><span class="keyword">module</span> Bytes: BytesLabels;
-</pre>
-<pre><span class="keyword">module</span> List: ListLabels;
-</pre>
-<pre><span class="keyword">module</span> String: StringLabels;
-</pre></div>
+<pre id="MODULEArray"><span class="keyword">module</span> Array: ArrayLabels</pre>
+<pre id="MODULEBytes"><span class="keyword">module</span> Bytes: BytesLabels</pre>
+<pre id="MODULEList"><span class="keyword">module</span> List: ListLabels</pre>
+<pre id="MODULEString"><span class="keyword">module</span> String: StringLabels</pre>
+</div>

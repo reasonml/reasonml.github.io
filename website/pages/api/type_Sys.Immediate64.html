@@ -1,0 +1,15 @@
+<link rel="stylesheet" href="/css/main.css"><div class="ocamldoc"><pre>sig
+
+&nbsp;&nbsp;module&nbsp;type&nbsp;Non_immediate&nbsp;=&nbsp;sig&nbsp;type&nbsp;t&nbsp;end
+&nbsp;&nbsp;module&nbsp;type&nbsp;Immediate&nbsp;=&nbsp;sig&nbsp;type&nbsp;t&nbsp;[@@immediate]&nbsp;end
+&nbsp;&nbsp;module&nbsp;Make&nbsp;:
+&nbsp;&nbsp;&nbsp;&nbsp;functor&nbsp;(Immediate&nbsp;:&nbsp;Immediate)&nbsp;(Non_immediate&nbsp;:&nbsp;Non_immediate)&nbsp;-&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;sig
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type&nbsp;t&nbsp;[@@immediate64]
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type&nbsp;'a&nbsp;repr&nbsp;=
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Immediate&nbsp;:&nbsp;Sys.Immediate64.Immediate.t&nbsp;Sys.Immediate64.Make.repr
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;Non_immediate&nbsp;:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sys.Immediate64.Non_immediate.t&nbsp;Sys.Immediate64.Make.repr
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;repr&nbsp;:&nbsp;Sys.Immediate64.Make.t&nbsp;Sys.Immediate64.Make.repr
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;end
+end</pre></div>

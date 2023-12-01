@@ -1,0 +1,74 @@
+<link rel="stylesheet" href="/css/main.css"><div class="ocamldoc">
+<h1>Module <a href="type_Fun.html">Fun</a></h1>
+
+<pre id="MODULEFun"><span class="keyword">module</span> Fun: sig .. end</pre><div class="info module top">
+<div class="info-desc">
+<p>Function manipulation.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.08</li>
+</ul>
+</div>
+<hr width="100%">
+<h2 id="combinators">Combinators</h2>
+<pre id="VALid">val id : 'a -&gt; 'a</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">id</code> is the identity function. For any argument <code class="code">x</code>, <code class="code">id&nbsp;x</code> is <code class="code">x</code>.</p>
+</div>
+</div>
+
+<pre id="VALconst">val const : 'a -&gt; 'b -&gt; 'a</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">const&nbsp;c</code> is a function that always returns the value <code class="code">c</code>. For any
+    argument <code class="code">x</code>, <code class="code">(const&nbsp;c)&nbsp;x</code> is <code class="code">c</code>.</p>
+</div>
+</div>
+
+<pre id="VALflip">val flip : ('a -&gt; 'b -&gt; 'c) -&gt; 'b -&gt; 'a -&gt; 'c</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">flip&nbsp;f</code> reverses the argument order of the binary function
+    <code class="code">f</code>. For any arguments <code class="code">x</code> and <code class="code">y</code>, <code class="code">(flip&nbsp;f)&nbsp;x&nbsp;y</code> is <code class="code">f&nbsp;y&nbsp;x</code>.</p>
+</div>
+</div>
+
+<pre id="VALnegate">val negate : ('a -&gt; bool) -&gt; 'a -&gt; bool</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">negate&nbsp;p</code> is the negation of the predicate function <code class="code">p</code>. For any
+    argument <code class="code">x</code>, <code class="code">(negate&nbsp;p)&nbsp;x</code> is <code class="code">not&nbsp;(p&nbsp;x)</code>.</p>
+</div>
+</div>
+<h2 id="exception">Exception handling</h2>
+<pre id="VALprotect">val protect : finally:(unit -&gt; unit) -&gt; (unit -&gt; 'a) -&gt; 'a</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">protect&nbsp;~finally&nbsp;work</code> invokes <code class="code">work&nbsp;()</code> and then <code class="code">finally&nbsp;()</code>
+    before <code class="code">work&nbsp;()</code> returns with its value or an exception. In the
+    latter case the exception is re-raised after <code class="code">finally&nbsp;()</code>. If
+    <code class="code">finally&nbsp;()</code> raises an exception, then the exception
+    <a href="Fun.html#EXCEPTIONFinally_raised"><code class="code">Fun.Finally_raised</code></a> is raised instead.</p>
+
+<p><code class="code">protect</code> can be used to enforce local invariants whether <code class="code">work&nbsp;()</code>
+    returns normally or raises an exception. However, it does not
+    protect against unexpected exceptions raised inside <code class="code">finally&nbsp;()</code>
+    such as <a href="Stdlib.html#EXCEPTIONOut_of_memory"><code class="code">Out_of_memory</code></a>, <a href="Stdlib.html#EXCEPTIONStack_overflow"><code class="code">Stack_overflow</code></a>, or
+    asynchronous exceptions raised by signal handlers
+    (e.g. <a href="Sys.html#EXCEPTIONBreak"><code class="code">Sys.Break</code></a>).</p>
+
+<p>Note: It is a <em>programming error</em> if other kinds of exceptions
+    are raised by <code class="code">finally</code>, as any exception raised in <code class="code">work&nbsp;()</code> will
+    be lost in the event of a <a href="Fun.html#EXCEPTIONFinally_raised"><code class="code">Fun.Finally_raised</code></a> exception. Therefore,
+    one should make sure to handle those inside the finally.</p>
+</div>
+</div>
+
+<pre id="EXCEPTIONFinally_raised"><span class="keyword">exception</span> Finally_raised of exn</pre>
+<div class="info ">
+<div class="info-desc">
+<p><code class="code">Finally_raised&nbsp;exn</code> is raised by <code class="code">protect&nbsp;~finally&nbsp;work</code> when
+    <code class="code">finally</code> raises an exception <code class="code">exn</code>. This exception denotes either
+    an unexpected exception or a programming error. As a general rule,
+    one should not catch a <code class="code">Finally_raised</code> exception except as part of
+    a catch-all handler.</p>
+</div>
+</div>
+
+</div>

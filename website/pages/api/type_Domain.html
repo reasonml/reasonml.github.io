@@ -1,0 +1,22 @@
+<link rel="stylesheet" href="/css/main.css"><div class="ocamldoc"><pre>sig
+
+&nbsp;&nbsp;type&nbsp;!'a&nbsp;t
+&nbsp;&nbsp;val&nbsp;spawn&nbsp;:&nbsp;(unit&nbsp;-&gt;&nbsp;'a)&nbsp;-&gt;&nbsp;'a&nbsp;Domain.t
+&nbsp;&nbsp;val&nbsp;join&nbsp;:&nbsp;'a&nbsp;Domain.t&nbsp;-&gt;&nbsp;'a
+&nbsp;&nbsp;type&nbsp;id&nbsp;=&nbsp;private&nbsp;int
+&nbsp;&nbsp;val&nbsp;get_id&nbsp;:&nbsp;'a&nbsp;Domain.t&nbsp;-&gt;&nbsp;Domain.id
+&nbsp;&nbsp;val&nbsp;self&nbsp;:&nbsp;unit&nbsp;-&gt;&nbsp;Domain.id
+&nbsp;&nbsp;val&nbsp;before_first_spawn&nbsp;:&nbsp;(unit&nbsp;-&gt;&nbsp;unit)&nbsp;-&gt;&nbsp;unit
+&nbsp;&nbsp;val&nbsp;at_exit&nbsp;:&nbsp;(unit&nbsp;-&gt;&nbsp;unit)&nbsp;-&gt;&nbsp;unit
+&nbsp;&nbsp;val&nbsp;cpu_relax&nbsp;:&nbsp;unit&nbsp;-&gt;&nbsp;unit
+&nbsp;&nbsp;val&nbsp;is_main_domain&nbsp;:&nbsp;unit&nbsp;-&gt;&nbsp;bool
+&nbsp;&nbsp;val&nbsp;recommended_domain_count&nbsp;:&nbsp;unit&nbsp;-&gt;&nbsp;int
+&nbsp;&nbsp;module&nbsp;DLS&nbsp;:
+&nbsp;&nbsp;&nbsp;&nbsp;sig
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type&nbsp;'a&nbsp;key
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;new_key&nbsp;:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;?split_from_parent:('a&nbsp;-&gt;&nbsp;'a)&nbsp;-&gt;&nbsp;(unit&nbsp;-&gt;&nbsp;'a)&nbsp;-&gt;&nbsp;'a&nbsp;Domain.DLS.key
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;get&nbsp;:&nbsp;'a&nbsp;Domain.DLS.key&nbsp;-&gt;&nbsp;'a
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;set&nbsp;:&nbsp;'a&nbsp;Domain.DLS.key&nbsp;-&gt;&nbsp;'a&nbsp;-&gt;&nbsp;unit
+&nbsp;&nbsp;&nbsp;&nbsp;end
+end</pre></div>

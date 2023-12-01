@@ -1,0 +1,24 @@
+<link rel="stylesheet" href="/css/main.css"><div class="ocamldoc"><pre>sig
+
+&nbsp;&nbsp;type&nbsp;('a,&nbsp;'b)&nbsp;continuation
+&nbsp;&nbsp;val&nbsp;fiber&nbsp;:&nbsp;('a&nbsp;-&gt;&nbsp;'b)&nbsp;-&gt;&nbsp;('a,&nbsp;'b)&nbsp;Effect.Shallow.continuation
+&nbsp;&nbsp;type&nbsp;('a,&nbsp;'b)&nbsp;handler&nbsp;=&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;retc&nbsp;:&nbsp;'a&nbsp;-&gt;&nbsp;'b;
+&nbsp;&nbsp;&nbsp;&nbsp;exnc&nbsp;:&nbsp;exn&nbsp;-&gt;&nbsp;'b;
+&nbsp;&nbsp;&nbsp;&nbsp;effc&nbsp;:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'c.&nbsp;'c&nbsp;Effect.t&nbsp;-&gt;&nbsp;(('c,&nbsp;'a)&nbsp;Effect.Shallow.continuation&nbsp;-&gt;&nbsp;'b)&nbsp;option;
+&nbsp;&nbsp;}
+&nbsp;&nbsp;val&nbsp;continue_with&nbsp;:
+&nbsp;&nbsp;&nbsp;&nbsp;('c,&nbsp;'a)&nbsp;Effect.Shallow.continuation&nbsp;-&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;'c&nbsp;-&gt;&nbsp;('a,&nbsp;'b)&nbsp;Effect.Shallow.handler&nbsp;-&gt;&nbsp;'b
+&nbsp;&nbsp;val&nbsp;discontinue_with&nbsp;:
+&nbsp;&nbsp;&nbsp;&nbsp;('c,&nbsp;'a)&nbsp;Effect.Shallow.continuation&nbsp;-&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;exn&nbsp;-&gt;&nbsp;('a,&nbsp;'b)&nbsp;Effect.Shallow.handler&nbsp;-&gt;&nbsp;'b
+&nbsp;&nbsp;val&nbsp;discontinue_with_backtrace&nbsp;:
+&nbsp;&nbsp;&nbsp;&nbsp;('a,&nbsp;'b)&nbsp;Effect.Shallow.continuation&nbsp;-&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;exn&nbsp;-&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;Stdlib.Printexc.raw_backtrace&nbsp;-&gt;&nbsp;('b,&nbsp;'c)&nbsp;Effect.Shallow.handler&nbsp;-&gt;&nbsp;'c
+&nbsp;&nbsp;external&nbsp;get_callstack&nbsp;:
+&nbsp;&nbsp;&nbsp;&nbsp;('a,&nbsp;'b)&nbsp;Effect.Shallow.continuation&nbsp;-&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;int&nbsp;-&gt;&nbsp;Stdlib.Printexc.raw_backtrace&nbsp;=&nbsp;"caml_get_continuation_callstack"
+end</pre></div>

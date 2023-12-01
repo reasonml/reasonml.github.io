@@ -1,0 +1,57 @@
+<link rel="stylesheet" href="/css/main.css"><div class="ocamldoc">
+<h1>Module <a href="type_Stdlib.Mutex.html">Stdlib.Mutex</a></h1>
+
+<pre id="MODULEMutex"><span class="keyword">module</span> Mutex: Mutex</pre><hr width="100%">
+
+<pre id="TYPEt"><span class="keyword">type</span> t </pre>
+<div class="info ">
+<div class="info-desc">
+<p>The type of mutexes.</p>
+</div>
+</div>
+
+
+<pre id="VALcreate">val create : unit -&gt; t</pre><div class="info ">
+<div class="info-desc">
+<p>Return a new mutex.</p>
+</div>
+</div>
+
+<pre id="VALlock">val lock : t -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p>Lock the given mutex. Only one thread can have the mutex locked
+   at any time. A thread that attempts to lock a mutex already locked
+   by another thread will suspend until the other thread unlocks
+   the mutex.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Before 4.12 </b> <code class="code">Sys_error</code> was not raised for recursive locking
+   (platform-dependent behaviour)</li>
+<li><b>Raises</b> <code>Sys_error</code> if the mutex is already locked by the thread calling
+   <a href="Mutex.html#VALlock"><code class="code">Mutex.lock</code></a>.</li>
+</ul>
+</div>
+
+<pre id="VALtry_lock">val try_lock : t -&gt; bool</pre><div class="info ">
+<div class="info-desc">
+<p>Same as <a href="Mutex.html#VALlock"><code class="code">Mutex.lock</code></a>, but does not suspend the calling thread if
+   the mutex is already locked: just return <code class="code">false</code> immediately
+   in that case. If the mutex is unlocked, lock it and
+   return <code class="code">true</code>.</p>
+</div>
+</div>
+
+<pre id="VALunlock">val unlock : t -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p>Unlock the given mutex. Other threads suspended trying to lock
+   the mutex will restart.  The mutex must have been previously locked
+   by the thread that calls <a href="Mutex.html#VALunlock"><code class="code">Mutex.unlock</code></a>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Before 4.12 </b> <code class="code">Sys_error</code> was not raised when unlocking an unlocked mutex
+   or when unlocking a mutex from a different thread.</li>
+<li><b>Raises</b> <code>Sys_error</code> if the mutex is unlocked or was locked by another thread.</li>
+</ul>
+</div>
+
+</div>

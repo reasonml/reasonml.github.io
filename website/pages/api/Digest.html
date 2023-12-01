@@ -1,100 +1,130 @@
 <link rel="stylesheet" href="/css/main.css"><div class="ocamldoc">
-<div class="navbar"><a class="pre" href="Complex.html" title="Complex">Previous</a>
-&#xA0;<a class="up" href="index.html" title="Index">Up</a>
-&#xA0;<a class="post" href="Filename.html" title="Filename">Next</a>
-</div>
 <h1>Module <a href="type_Digest.html">Digest</a></h1>
 
-<pre><span class="keyword">module</span> Digest: sig .. end</pre><div class="info module top">
-MD5 message digest.
-<p>
+<pre id="MODULEDigest"><span class="keyword">module</span> Digest: sig .. end</pre><div class="info module top">
+<div class="info-desc">
+<p>MD5 message digest.</p>
 
-   This module provides functions to compute 128-bit &apos;digests&apos; of
-   arbitrary-length strings or files. The digests are of cryptographic
-   quality: it is very hard, given a digest, to forge a string having
-   that digest. The algorithm used is MD5. This module should not be
-   used for secure and sensitive cryptographic applications. For these
-   kind of applications more recent and stronger cryptographic
-   primitives should be used instead.<br>
-</p></div>
+<p>This module provides functions to compute 128-bit 'digests' of
+   arbitrary-length strings or files. The algorithm used is MD5.</p>
+
+<p>The MD5 hash function is not cryptographically secure.
+   Hence, this module should not be used for security-sensitive
+   applications.  More recent, stronger cryptographic primitives
+   should be used instead.</p>
+</div>
+</div>
 <hr width="100%">
 
-<pre id="TYPEt"><span class="keyword">type</span> t = string;
-</pre>
+<pre id="TYPEt"><span class="keyword">type</span> t = string </pre>
 <div class="info ">
-The type of digests: 16-character strings.<br>
+<div class="info-desc">
+<p>The type of digests: 16-character strings.</p>
+</div>
 </div>
 
 
-<pre id="VALcompare"><span class="keyword">let</span> compare: (t, t) =&gt; int;
-</pre><div class="info ">
-The comparison function for 16-character digest, with the same
-    specification as <a href="Pervasives.html#VALcompare"><code class="code">Pervasives.compare</code></a> and the implementation
+<pre id="VALcompare">val compare : t -&gt; t -&gt; int</pre><div class="info ">
+<div class="info-desc">
+<p>The comparison function for 16-character digest, with the same
+    specification as <a href="Stdlib.html#VALcompare"><code class="code">compare</code></a> and the implementation
     shared with <a href="String.html#VALcompare"><code class="code">String.compare</code></a>. Along with the type <code class="code">t</code>, this
     function <code class="code">compare</code> allows the module <code class="code">Digest</code> to be passed as
-    argument to the functors <a href="Set.Make.html"><code class="code">Set.Make</code></a> and <a href="Map.Make.html"><code class="code">Map.Make</code></a>.<br>
-<b>Since</b> 4.00.0<br>
+    argument to the functors <a href="Set.Make.html"><code class="code">Set.Make</code></a> and <a href="Map.Make.html"><code class="code">Map.Make</code></a>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.00.0</li>
+</ul>
 </div>
 
-<pre id="VALstring"><span class="keyword">let</span> string: string =&gt; t;
-</pre><div class="info ">
-Return the digest of the given string.<br>
+<pre id="VALequal">val equal : t -&gt; t -&gt; bool</pre><div class="info ">
+<div class="info-desc">
+<p>The equal function for 16-character digest.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.03.0</li>
+</ul>
 </div>
 
-<pre id="VALbytes"><span class="keyword">let</span> bytes: bytes =&gt; t;
-</pre><div class="info ">
-Return the digest of the given byte sequence.<br>
-<b>Since</b> 4.02.0<br>
+<pre id="VALstring">val string : string -&gt; t</pre><div class="info ">
+<div class="info-desc">
+<p>Return the digest of the given string.</p>
+</div>
 </div>
 
-<pre id="VALsubstring"><span class="keyword">let</span> substring: (string, int, int) =&gt; t;
-</pre><div class="info ">
-<code class="code">Digest.substring s ofs len</code> returns the digest of the substring
-   of <code class="code">s</code> starting at index <code class="code">ofs</code> and containing <code class="code">len</code> characters.<br>
+<pre id="VALbytes">val bytes : bytes -&gt; t</pre><div class="info ">
+<div class="info-desc">
+<p>Return the digest of the given byte sequence.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.02.0</li>
+</ul>
 </div>
 
-<pre id="VALsubbytes"><span class="keyword">let</span> subbytes: (bytes, int, int) =&gt; t;
-</pre><div class="info ">
-<code class="code">Digest.subbytes s ofs len</code> returns the digest of the subsequence
-    of <code class="code">s</code> starting at index <code class="code">ofs</code> and containing <code class="code">len</code> bytes.<br>
-<b>Since</b> 4.02.0<br>
+<pre id="VALsubstring">val substring : string -&gt; int -&gt; int -&gt; t</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">Digest.substring&nbsp;s&nbsp;ofs&nbsp;len</code> returns the digest of the substring
+   of <code class="code">s</code> starting at index <code class="code">ofs</code> and containing <code class="code">len</code> characters.</p>
+</div>
 </div>
 
-<pre id="VALchannel"><span class="keyword">let</span> channel: (Pervasives.in_channel, int) =&gt; t;
-</pre><div class="info ">
-If <code class="code">len</code> is nonnegative, <code class="code">Digest.channel ic len</code> reads <code class="code">len</code>
+<pre id="VALsubbytes">val subbytes : bytes -&gt; int -&gt; int -&gt; t</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">Digest.subbytes&nbsp;s&nbsp;ofs&nbsp;len</code> returns the digest of the subsequence
+    of <code class="code">s</code> starting at index <code class="code">ofs</code> and containing <code class="code">len</code> bytes.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.02.0</li>
+</ul>
+</div>
+
+<pre id="VALchannel">val channel : in_channel -&gt; int -&gt; t</pre><div class="info ">
+<div class="info-desc">
+<p>If <code class="code">len</code> is nonnegative, <code class="code">Digest.channel&nbsp;ic&nbsp;len</code> reads <code class="code">len</code>
    characters from channel <code class="code">ic</code> and returns their digest, or raises
    <code class="code">End_of_file</code> if end-of-file is reached before <code class="code">len</code> characters
-   are read.  If <code class="code">len</code> is negative, <code class="code">Digest.channel ic len</code> reads
+   are read.  If <code class="code">len</code> is negative, <code class="code">Digest.channel&nbsp;ic&nbsp;len</code> reads
    all characters from <code class="code">ic</code> until end-of-file is reached and return
-   their digest.<br>
+   their digest.</p>
+</div>
 </div>
 
-<pre id="VALfile"><span class="keyword">let</span> file: string =&gt; t;
-</pre><div class="info ">
-Return the digest of the file whose name is given.<br>
+<pre id="VALfile">val file : string -&gt; t</pre><div class="info ">
+<div class="info-desc">
+<p>Return the digest of the file whose name is given.</p>
+</div>
 </div>
 
-<pre id="VALoutput"><span class="keyword">let</span> output: (Pervasives.out_channel, t) =&gt; unit;
-</pre><div class="info ">
-Write a digest on the given output channel.<br>
+<pre id="VALoutput">val output : out_channel -&gt; t -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p>Write a digest on the given output channel.</p>
+</div>
 </div>
 
-<pre id="VALinput"><span class="keyword">let</span> input: Pervasives.in_channel =&gt; t;
-</pre><div class="info ">
-Read a digest from the given input channel.<br>
+<pre id="VALinput">val input : in_channel -&gt; t</pre><div class="info ">
+<div class="info-desc">
+<p>Read a digest from the given input channel.</p>
+</div>
 </div>
 
-<pre id="VALto_hex"><span class="keyword">let</span> to_hex: t =&gt; string;
-</pre><div class="info ">
-Return the printable hexadecimal representation of the given digest.<br>
+<pre id="VALto_hex">val to_hex : t -&gt; string</pre><div class="info ">
+<div class="info-desc">
+<p>Return the printable hexadecimal representation of the given digest.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Raises</b> <code>Invalid_argument</code> if the argument is not exactly 16 bytes.</li>
+</ul>
 </div>
 
-<pre id="VALfrom_hex"><span class="keyword">let</span> from_hex: string =&gt; t;
-</pre><div class="info ">
-Convert a hexadecimal representation back into the corresponding digest.
-   Raise <code class="code">Invalid_argument</code> if the argument is not exactly 32 hexadecimal
-   characters.<br>
-<b>Since</b> 4.00.0<br>
+<pre id="VALfrom_hex">val from_hex : string -&gt; t</pre><div class="info ">
+<div class="info-desc">
+<p>Convert a hexadecimal representation back into the corresponding digest.</p>
 </div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.00.0</li>
+<li><b>Raises</b> <code>Invalid_argument</code> if the argument is not exactly 32 hexadecimal
+   characters.</li>
+</ul>
+</div>
+
 </div>

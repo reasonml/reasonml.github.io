@@ -1,130 +1,156 @@
 <link rel="stylesheet" href="/css/main.css"><div class="ocamldoc">
-<div class="navbar"><a class="pre" href="Sys.html" title="Sys">Previous</a>
-&#xA0;<a class="up" href="index.html" title="Index">Up</a>
-&#xA0;<a class="post" href="Ast_helper.html" title="Ast_helper">Next</a>
-</div>
 <h1>Module <a href="type_Weak.html">Weak</a></h1>
 
-<pre><span class="keyword">module</span> Weak: sig .. end</pre><div class="info module top">
-Arrays of weak pointers and hash tables of weak pointers.<br>
+<pre id="MODULEWeak"><span class="keyword">module</span> Weak: sig .. end</pre><div class="info module top">
+<div class="info-desc">
+<p>Arrays of weak pointers and hash sets of weak pointers.</p>
+</div>
 </div>
 <hr width="100%">
-<br>
-<h6 id="6_Lowlevelfunctions">Low-level functions</h6><br>
-
-<pre id="TYPEt"><span class="keyword">type</span> t(&apos;a);
-</pre>
+<h2 id="1_Lowlevelfunctions">Low-level functions</h2>
+<pre id="TYPEt"><span class="keyword">type</span> 'a t </pre>
 <div class="info ">
-The type of arrays of weak pointers (weak arrays).  A weak
+<div class="info-desc">
+<p>The type of arrays of weak pointers (weak arrays).  A weak
    pointer is a value that the garbage collector may erase whenever
    the value is not used any more (through normal pointers) by the
-   program.  Note that finalisation functions are run after the
-   weak pointers are erased.
-<p>
+   program.  Note that finalisation functions are run before the
+   weak pointers are erased, because the finalisation functions
+   can make values alive again (before 4.03 the finalisation
+   functions were run after).</p>
 
-   A weak pointer is said to be full if it points to a value,
-   empty if the value was erased by the GC.
-</p><p>
+<p>A weak pointer is said to be full if it points to a value,
+   empty if the value was erased by the GC.</p>
 
-   Notes:</p><ul>
+<p>Notes:</p>
+<ul>
 <li>Integers are not allocated and cannot be stored in weak arrays.</li>
-<li>Weak arrays cannot be marshaled using <a href="Pervasives.html#VALoutput_value"><code class="code">Pervasives.output_value</code></a>
+<li>Weak arrays cannot be marshaled using <a href="Stdlib.html#VALoutput_value"><code class="code">output_value</code></a>
      nor the functions of the <a href="Marshal.html"><code class="code">Marshal</code></a> module.</li>
 </ul>
-<br>
+</div>
 </div>
 
 
-<pre id="VALcreate"><span class="keyword">let</span> create: int =&gt; t(&apos;a);
-</pre><div class="info ">
-<code class="code">Weak.create n</code> returns a new weak array of length <code class="code">n</code>.
-   All the pointers are initially empty.  Raise <code class="code">Invalid_argument</code>
-   if <code class="code">n</code> is negative or greater than <a href="Sys.html#VALmax_array_length"><code class="code">Sys.max_array_length</code></a><code class="code">-1</code>.<br>
+<pre id="VALcreate">val create : int -&gt; 'a t</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">Weak.create&nbsp;n</code> returns a new weak array of length <code class="code">n</code>.
+   All the pointers are initially empty.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Raises</b> <code>Invalid_argument</code> if <code class="code">n</code> is not comprised between zero and
+   <a href="Obj.Ephemeron.html#VALmax_ephe_length"><code class="code">Obj.Ephemeron.max_ephe_length</code></a> (limits included).</li>
+</ul>
 </div>
 
-<pre id="VALlength"><span class="keyword">let</span> length: t(&apos;a) =&gt; int;
-</pre><div class="info ">
-<code class="code">Weak.length ar</code> returns the length (number of elements) of
-   <code class="code">ar</code>.<br>
+<pre id="VALlength">val length : 'a t -&gt; int</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">Weak.length&nbsp;ar</code> returns the length (number of elements) of
+   <code class="code">ar</code>.</p>
+</div>
 </div>
 
-<pre id="VALset"><span class="keyword">let</span> set: (t(&apos;a), int, option(&apos;a)) =&gt; unit;
-</pre><div class="info ">
-<code class="code">Weak.set ar n (Some el)</code> sets the <code class="code">n</code>th cell of <code class="code">ar</code> to be a
-   (full) pointer to <code class="code">el</code>; <code class="code">Weak.set ar n None</code> sets the <code class="code">n</code>th
-   cell of <code class="code">ar</code> to empty.
-   Raise <code class="code">Invalid_argument &quot;Weak.set&quot;</code> if <code class="code">n</code> is not in the range
-   0 to <a href="Weak.html#VALlength"><code class="code">Weak.length</code></a><code class="code"> a - 1</code>.<br>
+<pre id="VALset">val set : 'a t -&gt; int -&gt; 'a option -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">Weak.set&nbsp;ar&nbsp;n&nbsp;(Some&nbsp;el)</code> sets the <code class="code">n</code>th cell of <code class="code">ar</code> to be a
+   (full) pointer to <code class="code">el</code>; <code class="code">Weak.set&nbsp;ar&nbsp;n&nbsp;None</code> sets the <code class="code">n</code>th
+   cell of <code class="code">ar</code> to empty.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Raises</b> <code>Invalid_argument</code> if <code class="code">n</code> is not in the range
+   0 to <a href="Weak.html#VALlength"><code class="code">Weak.length</code></a><code class="code">&nbsp;ar&nbsp;-&nbsp;1</code>.</li>
+</ul>
 </div>
 
-<pre id="VALget"><span class="keyword">let</span> get: (t(&apos;a), int) =&gt; option(&apos;a);
-</pre><div class="info ">
-<code class="code">Weak.get ar n</code> returns None if the <code class="code">n</code>th cell of <code class="code">ar</code> is
-   empty, <code class="code">Some x</code> (where <code class="code">x</code> is the value) if it is full.
-   Raise <code class="code">Invalid_argument &quot;Weak.get&quot;</code> if <code class="code">n</code> is not in the range
-   0 to <a href="Weak.html#VALlength"><code class="code">Weak.length</code></a><code class="code"> a - 1</code>.<br>
+<pre id="VALget">val get : 'a t -&gt; int -&gt; 'a option</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">Weak.get&nbsp;ar&nbsp;n</code> returns None if the <code class="code">n</code>th cell of <code class="code">ar</code> is
+   empty, <code class="code">Some&nbsp;x</code> (where <code class="code">x</code> is the value) if it is full.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Raises</b> <code>Invalid_argument</code> if <code class="code">n</code> is not in the range
+   0 to <a href="Weak.html#VALlength"><code class="code">Weak.length</code></a><code class="code">&nbsp;ar&nbsp;-&nbsp;1</code>.</li>
+</ul>
 </div>
 
-<pre id="VALget_copy"><span class="keyword">let</span> get_copy: (t(&apos;a), int) =&gt; option(&apos;a);
-</pre><div class="info ">
-<code class="code">Weak.get_copy ar n</code> returns None if the <code class="code">n</code>th cell of <code class="code">ar</code> is
-   empty, <code class="code">Some x</code> (where <code class="code">x</code> is a (shallow) copy of the value) if
+<pre id="VALget_copy">val get_copy : 'a t -&gt; int -&gt; 'a option</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">Weak.get_copy&nbsp;ar&nbsp;n</code> returns None if the <code class="code">n</code>th cell of <code class="code">ar</code> is
+   empty, <code class="code">Some&nbsp;x</code> (where <code class="code">x</code> is a (shallow) copy of the value) if
    it is full.
    In addition to pitfalls with mutable values, the interesting
    difference with <code class="code">get</code> is that <code class="code">get_copy</code> does not prevent
    the incremental GC from erasing the value in its current cycle
-   (<code class="code">get</code> may delay the erasure to the next GC cycle).
-   Raise <code class="code">Invalid_argument &quot;Weak.get&quot;</code> if <code class="code">n</code> is not in the range
-   0 to <a href="Weak.html#VALlength"><code class="code">Weak.length</code></a><code class="code"> a - 1</code>.<br>
+   (<code class="code">get</code> may delay the erasure to the next GC cycle).</p>
+</div>
+<ul class="info-attributes">
+<li><b>Raises</b> <code>Invalid_argument</code> if <code class="code">n</code> is not in the range
+   0 to <a href="Weak.html#VALlength"><code class="code">Weak.length</code></a><code class="code">&nbsp;ar&nbsp;-&nbsp;1</code>.
+
+   If the element is a custom block it is not copied.</li>
+</ul>
 </div>
 
-<pre id="VALcheck"><span class="keyword">let</span> check: (t(&apos;a), int) =&gt; bool;
-</pre><div class="info ">
-<code class="code">Weak.check ar n</code> returns <code class="code">true</code> if the <code class="code">n</code>th cell of <code class="code">ar</code> is
-   full, <code class="code">false</code> if it is empty.  Note that even if <code class="code">Weak.check ar n</code>
-   returns <code class="code">true</code>, a subsequent <a href="Weak.html#VALget"><code class="code">Weak.get</code></a><code class="code"> ar n</code> can return <code class="code">None</code>.<br>
+<pre id="VALcheck">val check : 'a t -&gt; int -&gt; bool</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">Weak.check&nbsp;ar&nbsp;n</code> returns <code class="code">true</code> if the <code class="code">n</code>th cell of <code class="code">ar</code> is
+   full, <code class="code">false</code> if it is empty.  Note that even if <code class="code">Weak.check&nbsp;ar&nbsp;n</code>
+   returns <code class="code">true</code>, a subsequent <a href="Weak.html#VALget"><code class="code">Weak.get</code></a><code class="code">&nbsp;ar&nbsp;n</code> can return <code class="code">None</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Raises</b> <code>Invalid_argument</code> if <code class="code">n</code> is not in the range
+   0 to <a href="Weak.html#VALlength"><code class="code">Weak.length</code></a><code class="code">&nbsp;ar&nbsp;-&nbsp;1</code>.</li>
+</ul>
 </div>
 
-<pre id="VALfill"><span class="keyword">let</span> fill: (t(&apos;a), int, int, option(&apos;a)) =&gt; unit;
-</pre><div class="info ">
-<code class="code">Weak.fill ar ofs len el</code> sets to <code class="code">el</code> all pointers of <code class="code">ar</code> from
-   <code class="code">ofs</code> to <code class="code">ofs + len - 1</code>.  Raise <code class="code">Invalid_argument &quot;Weak.fill&quot;</code>
-   if <code class="code">ofs</code> and <code class="code">len</code> do not designate a valid subarray of <code class="code">a</code>.<br>
+<pre id="VALfill">val fill : 'a t -&gt; int -&gt; int -&gt; 'a option -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">Weak.fill&nbsp;ar&nbsp;ofs&nbsp;len&nbsp;el</code> sets to <code class="code">el</code> all pointers of <code class="code">ar</code> from
+   <code class="code">ofs</code> to <code class="code">ofs&nbsp;+&nbsp;len&nbsp;-&nbsp;1</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Raises</b> <code>Invalid_argument</code> if <code class="code">ofs</code> and <code class="code">len</code> do not designate a valid subarray of <code class="code">ar</code>.</li>
+</ul>
 </div>
 
-<pre id="VALblit"><span class="keyword">let</span> blit: (t(&apos;a), int, t(&apos;a), int, int) =&gt; unit;
-</pre><div class="info ">
-<code class="code">Weak.blit ar1 off1 ar2 off2 len</code> copies <code class="code">len</code> weak pointers
+<pre id="VALblit">val blit : 'a t -&gt; int -&gt; 'a t -&gt; int -&gt; int -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">Weak.blit&nbsp;ar1&nbsp;off1&nbsp;ar2&nbsp;off2&nbsp;len</code> copies <code class="code">len</code> weak pointers
    from <code class="code">ar1</code> (starting at <code class="code">off1</code>) to <code class="code">ar2</code> (starting at <code class="code">off2</code>).
-   It works correctly even if <code class="code">ar1</code> and <code class="code">ar2</code> are the same.
-   Raise <code class="code">Invalid_argument &quot;Weak.blit&quot;</code> if <code class="code">off1</code> and <code class="code">len</code> do
-   not designate a valid subarray of <code class="code">ar1</code>, or if <code class="code">off2</code> and <code class="code">len</code>
-   do not designate a valid subarray of <code class="code">ar2</code>.<br>
+   It works correctly even if <code class="code">ar1</code> and <code class="code">ar2</code> are the same.</p>
 </div>
-<br>
-<h6 id="6_Weakhashtables">Weak hash tables</h6><br>
-<br>
-<h6 id="6_Weakhashtables">Weak hash tables</h6><br>
-<br>
-A weak hash table is a hashed set of values.  Each value may
+<ul class="info-attributes">
+<li><b>Raises</b> <code>Invalid_argument</code> if <code class="code">off1</code> and <code class="code">len</code> do
+   not designate a valid subarray of <code class="code">ar1</code>, or if <code class="code">off2</code> and <code class="code">len</code>
+   do not designate a valid subarray of <code class="code">ar2</code>.</li>
+</ul>
+</div>
+<h2 id="1_Weakhashsets">Weak hash sets</h2><p>A weak hash set is a hashed set of values.  Each value may
     magically disappear from the set when it is not used by the
     rest of the program any more.  This is normally used to share
     data structures without inducing memory leaks.
-    Weak hash tables are defined on values from a <a href="Hashtbl.HashedType.html"><code class="code">Hashtbl.HashedType</code></a>
+    Weak hash sets are defined on values from a <a href="Hashtbl.HashedType.html"><code class="code">Hashtbl.HashedType</code></a>
     module; the <code class="code">equal</code> relation and <code class="code">hash</code> function are taken from that
-    module.  We will say that <code class="code">v</code> is an instance of <code class="code">x</code> if <code class="code">equal x v</code>
-    is <code class="code">true</code>.
-<p>
+    module.  We will say that <code class="code">v</code> is an instance of <code class="code">x</code> if <code class="code">equal&nbsp;x&nbsp;v</code>
+    is <code class="code">true</code>.</p>
 
-    The <code class="code">equal</code> relation must be able to work on a shallow copy of
-    the values and give the same result as with the values themselves.<br>
+<p>The <code class="code">equal</code> relation must be able to work on a shallow copy of
+    the values and give the same result as with the values themselves.</p>
+<p><b>Unsynchronized accesses</b></p>
 
-</p><pre><span class="keyword">module</span> type S = sig .. end</pre><div class="info">
-The output signature of the functor <a href="Weak.Make.html"><code class="code">Weak.Make</code></a>.
+<p>Unsynchronized accesses to weak hash sets are a programming error.
+    Unsynchronized accesses to a weak hash set may lead to an invalid weak hash
+    set state. Thus, concurrent accesses to weak hash sets must be synchronized
+    (for instance with a <a href="Mutex.html#TYPEt"><code class="code">Mutex.t</code></a>).</p>
+
+<pre id="MODULETYPES"><span class="keyword">module</span> type S = sig .. end</pre><div class="info">
+<p>The output signature of the functor <a href="Weak.Make.html"><code class="code">Weak.Make</code></a>.</p>
+
 </div>
 
-<pre><span class="keyword">module</span> Make: (H: Hashtbl.HashedType) =&gt; S with type data = H.t;
-</pre><div class="info">
-Functor building an implementation of the weak hash table structure.
+<pre id="MODULEMake"><span class="keyword">module</span> Make: functor&nbsp;(H&nbsp;:&nbsp;Hashtbl.HashedType)&nbsp;-&gt;&nbsp;S  with type data = H.t</pre><div class="info">
+<p>Functor building an implementation of the weak hash set structure.</p>
+
 </div>
+
 </div>

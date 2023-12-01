@@ -1,68 +1,417 @@
 <link rel="stylesheet" href="/css/main.css"><div class="ocamldoc">
-<div class="navbar"><a class="pre" href="MoreLabels.Set.OrderedType.html" title="MoreLabels.Set.OrderedType">Previous</a>
-&#xA0;<a class="up" href="MoreLabels.Set.html" title="MoreLabels.Set">Up</a>
-&#xA0;</div>
 <h1>Module type <a href="type_MoreLabels.Set.S.html">MoreLabels.Set.S</a></h1>
 
-<pre><span class="keyword">module</span> type S = sig .. end</pre><hr width="100%">
+<pre id="MODULETYPES"><span class="keyword">module</span> type S = sig .. end</pre><div class="info modtype top">
+<div class="info-desc">
+<p>Output signature of the functor <a href="MoreLabels.Set.Make.html"><code class="code">MoreLabels.Set.Make</code></a>.</p>
+</div>
+</div>
+<hr width="100%">
 
-<pre id="TYPEelt"><span class="keyword">type</span> elt;
-</pre>
+<pre id="TYPEelt"><span class="keyword">type</span> elt </pre>
+<div class="info ">
+<div class="info-desc">
+<p>The type of the set elements.</p>
+</div>
+</div>
 
 
-<pre id="TYPEt"><span class="keyword">type</span> t;
-</pre>
+<pre id="TYPEt"><span class="keyword">type</span> t </pre>
+<div class="info ">
+<div class="info-desc">
+<p>The type of sets.</p>
+</div>
+</div>
 
 
-<pre id="VALempty"><span class="keyword">let</span> empty: t;
-</pre>
-<pre id="VALis_empty"><span class="keyword">let</span> is_empty: t =&gt; bool;
-</pre>
-<pre id="VALmem"><span class="keyword">let</span> mem: (elt, t) =&gt; bool;
-</pre>
-<pre id="VALadd"><span class="keyword">let</span> add: (elt, t) =&gt; t;
-</pre>
-<pre id="VALsingleton"><span class="keyword">let</span> singleton: elt =&gt; t;
-</pre>
-<pre id="VALremove"><span class="keyword">let</span> remove: (elt, t) =&gt; t;
-</pre>
-<pre id="VALunion"><span class="keyword">let</span> union: (t, t) =&gt; t;
-</pre>
-<pre id="VALinter"><span class="keyword">let</span> inter: (t, t) =&gt; t;
-</pre>
-<pre id="VALdiff"><span class="keyword">let</span> diff: (t, t) =&gt; t;
-</pre>
-<pre id="VALcompare"><span class="keyword">let</span> compare: (t, t) =&gt; int;
-</pre>
-<pre id="VALequal"><span class="keyword">let</span> equal: (t, t) =&gt; bool;
-</pre>
-<pre id="VALsubset"><span class="keyword">let</span> subset: (t, t) =&gt; bool;
-</pre>
-<pre id="VALiter"><span class="keyword">let</span> iter: (~f: elt =&gt; unit, t) =&gt; unit;
-</pre>
-<pre id="VALfold"><span class="keyword">let</span> fold: (~f: (elt, &apos;a) =&gt; &apos;a, t, ~init: &apos;a) =&gt; &apos;a;
-</pre>
-<pre id="VALfor_all"><span class="keyword">let</span> for_all: (~f: elt =&gt; bool, t) =&gt; bool;
-</pre>
-<pre id="VALexists"><span class="keyword">let</span> exists: (~f: elt =&gt; bool, t) =&gt; bool;
-</pre>
-<pre id="VALfilter"><span class="keyword">let</span> filter: (~f: elt =&gt; bool, t) =&gt; t;
-</pre>
-<pre id="VALpartition"><span class="keyword">let</span> partition: (~f: elt =&gt; bool, t) =&gt; (t, t);
-</pre>
-<pre id="VALcardinal"><span class="keyword">let</span> cardinal: t =&gt; int;
-</pre>
-<pre id="VALelements"><span class="keyword">let</span> elements: t =&gt; list(elt);
-</pre>
-<pre id="VALmin_elt"><span class="keyword">let</span> min_elt: t =&gt; elt;
-</pre>
-<pre id="VALmax_elt"><span class="keyword">let</span> max_elt: t =&gt; elt;
-</pre>
-<pre id="VALchoose"><span class="keyword">let</span> choose: t =&gt; elt;
-</pre>
-<pre id="VALsplit"><span class="keyword">let</span> split: (elt, t) =&gt; (t, bool, t);
-</pre>
-<pre id="VALfind"><span class="keyword">let</span> find: (elt, t) =&gt; elt;
-</pre>
-<pre id="VALof_list"><span class="keyword">let</span> of_list: list(elt) =&gt; t;
-</pre></div>
+<pre id="VALempty">val empty : t</pre><div class="info ">
+<div class="info-desc">
+<p>The empty set.</p>
+</div>
+</div>
+
+<pre id="VALis_empty">val is_empty : t -&gt; bool</pre><div class="info ">
+<div class="info-desc">
+<p>Test whether a set is empty or not.</p>
+</div>
+</div>
+
+<pre id="VALmem">val mem : elt -&gt; t -&gt; bool</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">mem&nbsp;x&nbsp;s</code> tests whether <code class="code">x</code> belongs to the set <code class="code">s</code>.</p>
+</div>
+</div>
+
+<pre id="VALadd">val add : elt -&gt; t -&gt; t</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">add&nbsp;x&nbsp;s</code> returns a set containing all elements of <code class="code">s</code>,
+         plus <code class="code">x</code>. If <code class="code">x</code> was already in <code class="code">s</code>, <code class="code">s</code> is returned unchanged
+         (the result of the function is then physically equal to <code class="code">s</code>).</p>
+</div>
+<ul class="info-attributes">
+<li><b>Before 4.03 </b> Physical equality was not ensured.</li>
+</ul>
+</div>
+
+<pre id="VALsingleton">val singleton : elt -&gt; t</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">singleton&nbsp;x</code> returns the one-element set containing only <code class="code">x</code>.</p>
+</div>
+</div>
+
+<pre id="VALremove">val remove : elt -&gt; t -&gt; t</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">remove&nbsp;x&nbsp;s</code> returns a set containing all elements of <code class="code">s</code>,
+         except <code class="code">x</code>. If <code class="code">x</code> was not in <code class="code">s</code>, <code class="code">s</code> is returned unchanged
+         (the result of the function is then physically equal to <code class="code">s</code>).</p>
+</div>
+<ul class="info-attributes">
+<li><b>Before 4.03 </b> Physical equality was not ensured.</li>
+</ul>
+</div>
+
+<pre id="VALunion">val union : t -&gt; t -&gt; t</pre><div class="info ">
+<div class="info-desc">
+<p>Set union.</p>
+</div>
+</div>
+
+<pre id="VALinter">val inter : t -&gt; t -&gt; t</pre><div class="info ">
+<div class="info-desc">
+<p>Set intersection.</p>
+</div>
+</div>
+
+<pre id="VALdisjoint">val disjoint : t -&gt; t -&gt; bool</pre><div class="info ">
+<div class="info-desc">
+<p>Test if two sets are disjoint.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.08.0</li>
+</ul>
+</div>
+
+<pre id="VALdiff">val diff : t -&gt; t -&gt; t</pre><div class="info ">
+<div class="info-desc">
+<p>Set difference: <code class="code">diff&nbsp;s1&nbsp;s2</code> contains the elements of <code class="code">s1</code>
+         that are not in <code class="code">s2</code>.</p>
+</div>
+</div>
+
+<pre id="VALcompare">val compare : t -&gt; t -&gt; int</pre><div class="info ">
+<div class="info-desc">
+<p>Total ordering between sets. Can be used as the ordering function
+         for doing sets of sets.</p>
+</div>
+</div>
+
+<pre id="VALequal">val equal : t -&gt; t -&gt; bool</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">equal&nbsp;s1&nbsp;s2</code> tests whether the sets <code class="code">s1</code> and <code class="code">s2</code> are
+         equal, that is, contain equal elements.</p>
+</div>
+</div>
+
+<pre id="VALsubset">val subset : t -&gt; t -&gt; bool</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">subset&nbsp;s1&nbsp;s2</code> tests whether the set <code class="code">s1</code> is a subset of
+         the set <code class="code">s2</code>.</p>
+</div>
+</div>
+
+<pre id="VALiter">val iter : f:(elt -&gt; unit) -&gt; t -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">iter&nbsp;~f&nbsp;s</code> applies <code class="code">f</code> in turn to all elements of <code class="code">s</code>.
+         The elements of <code class="code">s</code> are presented to <code class="code">f</code> in increasing order
+         with respect to the ordering over the type of the elements.</p>
+</div>
+</div>
+
+<pre id="VALmap">val map : f:(elt -&gt; elt) -&gt;       t -&gt; t</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">map&nbsp;~f&nbsp;s</code> is the set whose elements are <code class="code">f&nbsp;a0</code>,<code class="code">f&nbsp;a1</code>... <code class="code">f
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;aN</code>, where <code class="code">a0</code>,<code class="code">a1</code>...<code class="code">aN</code> are the elements of <code class="code">s</code>.</p>
+
+<p>The elements are passed to <code class="code">f</code> in increasing order
+         with respect to the ordering over the type of the elements.</p>
+
+<p>If no element of <code class="code">s</code> is changed by <code class="code">f</code>, <code class="code">s</code> is returned
+         unchanged. (If each output of <code class="code">f</code> is physically equal to its
+         input, the returned set is physically equal to <code class="code">s</code>.)</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.04.0</li>
+</ul>
+</div>
+
+<pre id="VALfold">val fold : f:(elt -&gt; 'a -&gt; 'a) -&gt; t -&gt; init:'a -&gt; 'a</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">fold&nbsp;~f&nbsp;s&nbsp;init</code> computes <code class="code">(f&nbsp;xN&nbsp;...&nbsp;(f&nbsp;x2&nbsp;(f&nbsp;x1&nbsp;init))...)</code>,
+         where <code class="code">x1&nbsp;...&nbsp;xN</code> are the elements of <code class="code">s</code>, in increasing order.</p>
+</div>
+</div>
+
+<pre id="VALfor_all">val for_all : f:(elt -&gt; bool) -&gt; t -&gt; bool</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">for_all&nbsp;~f&nbsp;s</code> checks if all elements of the set
+         satisfy the predicate <code class="code">f</code>.</p>
+</div>
+</div>
+
+<pre id="VALexists">val exists : f:(elt -&gt; bool) -&gt; t -&gt; bool</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">exists&nbsp;~f&nbsp;s</code> checks if at least one element of
+         the set satisfies the predicate <code class="code">f</code>.</p>
+</div>
+</div>
+
+<pre id="VALfilter">val filter : f:(elt -&gt; bool) -&gt; t -&gt; t</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">filter&nbsp;~f&nbsp;s</code> returns the set of all elements in <code class="code">s</code>
+         that satisfy predicate <code class="code">f</code>. If <code class="code">f</code> satisfies every element in <code class="code">s</code>,
+         <code class="code">s</code> is returned unchanged (the result of the function is then
+         physically equal to <code class="code">s</code>).</p>
+</div>
+<ul class="info-attributes">
+<li><b>Before 4.03 </b> Physical equality was not ensured.</li>
+</ul>
+</div>
+
+<pre id="VALfilter_map">val filter_map : f:(elt -&gt; elt option) -&gt;       t -&gt; t</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">filter_map&nbsp;~f&nbsp;s</code> returns the set of all <code class="code">v</code> such that
+          <code class="code">f&nbsp;x&nbsp;=&nbsp;Some&nbsp;v</code> for some element <code class="code">x</code> of <code class="code">s</code>.</p>
+
+<p>For example,</p>
+<pre class="codepre">filter_map (fun n -&gt; if n mod 2 = 0 then Some (n / 2) else None) s</pre><p>is the set of halves of the even elements of <code class="code">s</code>.</p>
+
+<p>If no element of <code class="code">s</code> is changed or dropped by <code class="code">f</code> (if
+         <code class="code">f&nbsp;x&nbsp;=&nbsp;Some&nbsp;x</code> for each element <code class="code">x</code>), then
+         <code class="code">s</code> is returned unchanged: the result of the function
+         is then physically equal to <code class="code">s</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.11.0</li>
+</ul>
+</div>
+
+<pre id="VALpartition">val partition : f:(elt -&gt; bool) -&gt;       t -&gt; t * t</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">partition&nbsp;~f&nbsp;s</code> returns a pair of sets <code class="code">(s1,&nbsp;s2)</code>, where
+         <code class="code">s1</code> is the set of all the elements of <code class="code">s</code> that satisfy the
+         predicate <code class="code">f</code>, and <code class="code">s2</code> is the set of all the elements of
+         <code class="code">s</code> that do not satisfy <code class="code">f</code>.</p>
+</div>
+</div>
+
+<pre id="VALcardinal">val cardinal : t -&gt; int</pre><div class="info ">
+<div class="info-desc">
+<p>Return the number of elements of a set.</p>
+</div>
+</div>
+
+<pre id="VALelements">val elements : t -&gt; elt list</pre><div class="info ">
+<div class="info-desc">
+<p>Return the list of all elements of the given set.
+         The returned list is sorted in increasing order with respect
+         to the ordering <code class="code">Ord.compare</code>, where <code class="code">Ord</code> is the argument
+         given to <a href="MoreLabels.Set.Make.html"><code class="code">MoreLabels.Set.Make</code></a>.</p>
+</div>
+</div>
+
+<pre id="VALmin_elt">val min_elt : t -&gt; elt</pre><div class="info ">
+<div class="info-desc">
+<p>Return the smallest element of the given set
+         (with respect to the <code class="code">Ord.compare</code> ordering), or raise
+         <code class="code">Not_found</code> if the set is empty.</p>
+</div>
+</div>
+
+<pre id="VALmin_elt_opt">val min_elt_opt : t -&gt; elt option</pre><div class="info ">
+<div class="info-desc">
+<p>Return the smallest element of the given set
+         (with respect to the <code class="code">Ord.compare</code> ordering), or <code class="code">None</code>
+         if the set is empty.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.05</li>
+</ul>
+</div>
+
+<pre id="VALmax_elt">val max_elt : t -&gt; elt</pre><div class="info ">
+<div class="info-desc">
+<p>Same as <a href="MoreLabels.Set.S.html#VALmin_elt"><code class="code">MoreLabels.Set.S.min_elt</code></a>, but returns the largest element of the
+         given set.</p>
+</div>
+</div>
+
+<pre id="VALmax_elt_opt">val max_elt_opt : t -&gt; elt option</pre><div class="info ">
+<div class="info-desc">
+<p>Same as <a href="MoreLabels.Set.S.html#VALmin_elt_opt"><code class="code">MoreLabels.Set.S.min_elt_opt</code></a>, but returns the largest element of the
+          given set.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.05</li>
+</ul>
+</div>
+
+<pre id="VALchoose">val choose : t -&gt; elt</pre><div class="info ">
+<div class="info-desc">
+<p>Return one element of the given set, or raise <code class="code">Not_found</code> if
+         the set is empty. Which element is chosen is unspecified,
+         but equal elements will be chosen for equal sets.</p>
+</div>
+</div>
+
+<pre id="VALchoose_opt">val choose_opt : t -&gt; elt option</pre><div class="info ">
+<div class="info-desc">
+<p>Return one element of the given set, or <code class="code">None</code> if
+          the set is empty. Which element is chosen is unspecified,
+          but equal elements will be chosen for equal sets.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.05</li>
+</ul>
+</div>
+
+<pre id="VALsplit">val split : elt -&gt;       t -&gt; t * bool * t</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">split&nbsp;x&nbsp;s</code> returns a triple <code class="code">(l,&nbsp;present,&nbsp;r)</code>, where
+            <code class="code">l</code> is the set of elements of <code class="code">s</code> that are
+            strictly less than <code class="code">x</code>;
+            <code class="code">r</code> is the set of elements of <code class="code">s</code> that are
+            strictly greater than <code class="code">x</code>;
+            <code class="code">present</code> is <code class="code">false</code> if <code class="code">s</code> contains no element equal to <code class="code">x</code>,
+            or <code class="code">true</code> if <code class="code">s</code> contains an element equal to <code class="code">x</code>.</p>
+</div>
+</div>
+
+<pre id="VALfind">val find : elt -&gt; t -&gt; elt</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">find&nbsp;x&nbsp;s</code> returns the element of <code class="code">s</code> equal to <code class="code">x</code> (according
+          to <code class="code">Ord.compare</code>), or raise <code class="code">Not_found</code> if no such element
+          exists.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.01.0</li>
+</ul>
+</div>
+
+<pre id="VALfind_opt">val find_opt : elt -&gt; t -&gt; elt option</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">find_opt&nbsp;x&nbsp;s</code> returns the element of <code class="code">s</code> equal to <code class="code">x</code> (according
+          to <code class="code">Ord.compare</code>), or <code class="code">None</code> if no such element
+          exists.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.05</li>
+</ul>
+</div>
+
+<pre id="VALfind_first">val find_first : f:(elt -&gt; bool) -&gt;       t -&gt; elt</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">find_first&nbsp;~f&nbsp;s</code>, where <code class="code">f</code> is a monotonically increasing function,
+         returns the lowest element <code class="code">e</code> of <code class="code">s</code> such that <code class="code">f&nbsp;e</code>,
+         or raises <code class="code">Not_found</code> if no such element exists.</p>
+
+<p>For example, <code class="code">find_first&nbsp;(fun&nbsp;e&nbsp;-&gt;&nbsp;Ord.compare&nbsp;e&nbsp;x&nbsp;&gt;=&nbsp;0)&nbsp;s</code> will return
+         the first element <code class="code">e</code> of <code class="code">s</code> where <code class="code">Ord.compare&nbsp;e&nbsp;x&nbsp;&gt;=&nbsp;0</code> (intuitively:
+         <code class="code">e&nbsp;&gt;=&nbsp;x</code>), or raise <code class="code">Not_found</code> if <code class="code">x</code> is greater than any element of
+         <code class="code">s</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.05</li>
+</ul>
+</div>
+
+<pre id="VALfind_first_opt">val find_first_opt : f:(elt -&gt; bool) -&gt;       t -&gt; elt option</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">find_first_opt&nbsp;~f&nbsp;s</code>, where <code class="code">f</code> is a monotonically increasing
+         function, returns an option containing the lowest element <code class="code">e</code> of <code class="code">s</code>
+         such that <code class="code">f&nbsp;e</code>, or <code class="code">None</code> if no such element exists.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.05</li>
+</ul>
+</div>
+
+<pre id="VALfind_last">val find_last : f:(elt -&gt; bool) -&gt;       t -&gt; elt</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">find_last&nbsp;~f&nbsp;s</code>, where <code class="code">f</code> is a monotonically decreasing function,
+         returns the highest element <code class="code">e</code> of <code class="code">s</code> such that <code class="code">f&nbsp;e</code>,
+         or raises <code class="code">Not_found</code> if no such element exists.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.05</li>
+</ul>
+</div>
+
+<pre id="VALfind_last_opt">val find_last_opt : f:(elt -&gt; bool) -&gt;       t -&gt; elt option</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">find_last_opt&nbsp;~f&nbsp;s</code>, where <code class="code">f</code> is a monotonically decreasing
+         function, returns an option containing the highest element <code class="code">e</code> of <code class="code">s</code>
+         such that <code class="code">f&nbsp;e</code>, or <code class="code">None</code> if no such element exists.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.05</li>
+</ul>
+</div>
+
+<pre id="VALof_list">val of_list : elt list -&gt; t</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">of_list&nbsp;l</code> creates a set from a list of elements.
+          This is usually more efficient than folding <code class="code">add</code> over the list,
+          except perhaps for lists with many duplicated elements.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.02.0</li>
+</ul>
+</div>
+<h2 id="1_Iterators">Iterators</h2>
+<pre id="VALto_seq_from">val to_seq_from : elt -&gt;       t -&gt; elt Seq.t</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">to_seq_from&nbsp;x&nbsp;s</code> iterates on a subset of the elements of <code class="code">s</code>
+          in ascending order, from <code class="code">x</code> or above.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.07</li>
+</ul>
+</div>
+
+<pre id="VALto_seq">val to_seq : t -&gt; elt Seq.t</pre><div class="info ">
+<div class="info-desc">
+<p>Iterate on the whole set, in ascending order</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.07</li>
+</ul>
+</div>
+
+<pre id="VALto_rev_seq">val to_rev_seq : t -&gt; elt Seq.t</pre><div class="info ">
+<div class="info-desc">
+<p>Iterate on the whole set, in descending order</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.12</li>
+</ul>
+</div>
+
+<pre id="VALadd_seq">val add_seq : elt Seq.t -&gt; t -&gt; t</pre><div class="info ">
+<div class="info-desc">
+<p>Add the given elements to the set, in order.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.07</li>
+</ul>
+</div>
+
+<pre id="VALof_seq">val of_seq : elt Seq.t -&gt; t</pre><div class="info ">
+<div class="info-desc">
+<p>Build a set from the given bindings</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.07</li>
+</ul>
+</div>
+
+</div>

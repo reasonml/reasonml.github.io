@@ -1,0 +1,715 @@
+<link rel="stylesheet" href="/css/main.css"><div class="ocamldoc">
+<h1>Module <a href="type_Stdlib.Sys.html">Stdlib.Sys</a></h1>
+
+<pre id="MODULESys"><span class="keyword">module</span> Sys: Sys</pre><hr width="100%">
+
+<pre id="VALargv">val argv : string array</pre><div class="info ">
+<div class="info-desc">
+<p>The command line arguments given to the process.
+   The first element is the command name used to invoke the program.
+   The following elements are the command-line arguments
+   given to the program.</p>
+</div>
+</div>
+
+<pre id="VALexecutable_name">val executable_name : string</pre><div class="info ">
+<div class="info-desc">
+<p>The name of the file containing the executable currently running.
+    This name may be absolute or relative to the current directory, depending
+    on the platform and whether the program was compiled to bytecode or a native
+    executable.</p>
+</div>
+</div>
+
+<pre id="VALfile_exists">val file_exists : string -&gt; bool</pre><div class="info ">
+<div class="info-desc">
+<p>Test if a file with the given name exists.</p>
+</div>
+</div>
+
+<pre id="VALis_directory">val is_directory : string -&gt; bool</pre><div class="info ">
+<div class="info-desc">
+<p>Returns <code class="code">true</code> if the given name refers to a directory,
+    <code class="code">false</code> if it refers to another kind of file.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 3.10.0</li>
+<li><b>Raises</b> <code>Sys_error</code> if no file exists with the given name.</li>
+</ul>
+</div>
+
+<pre id="VALremove">val remove : string -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p>Remove the given file name from the file system.</p>
+</div>
+</div>
+
+<pre id="VALrename">val rename : string -&gt; string -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p>Rename a file.  <code class="code">rename&nbsp;oldpath&nbsp;newpath</code> renames the file
+    called <code class="code">oldpath</code>, giving it <code class="code">newpath</code> as its new name,
+    moving it between directories if needed.  If <code class="code">newpath</code> already
+    exists, its contents will be replaced with those of <code class="code">oldpath</code>.
+    Depending on the operating system, the metadata (permissions,
+    owner, etc) of <code class="code">newpath</code> can either be preserved or be replaced by
+    those of <code class="code">oldpath</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.06 concerning the "replace existing file" behavior</li>
+</ul>
+</div>
+
+<pre id="VALgetenv">val getenv : string -&gt; string</pre><div class="info ">
+<div class="info-desc">
+<p>Return the value associated to a variable in the process
+   environment.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Raises</b> <code>Not_found</code> if the variable is unbound.</li>
+</ul>
+</div>
+
+<pre id="VALgetenv_opt">val getenv_opt : string -&gt; string option</pre><div class="info ">
+<div class="info-desc">
+<p>Return the value associated to a variable in the process
+    environment or <code class="code">None</code> if the variable is unbound.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.05</li>
+</ul>
+</div>
+
+<pre id="VALcommand">val command : string -&gt; int</pre><div class="info ">
+<div class="info-desc">
+<p>Execute the given shell command and return its exit code.</p>
+
+<p>The argument of <a href="Sys.html#VALcommand"><code class="code">Sys.command</code></a> is generally the name of a
+  command followed by zero, one or several arguments, separated
+  by whitespace.  The given argument is interpreted by a
+  shell: either the Windows shell <code class="code">cmd.exe</code> for the Win32 ports of
+  OCaml, or the POSIX shell <code class="code">sh</code> for other ports.  It can contain
+  shell builtin commands such as <code class="code">echo</code>, and also special characters
+  such as file redirections <code class="code">&gt;</code> and <code class="code">&lt;</code>, which will be honored by the
+  shell.</p>
+
+<p>Conversely, whitespace or special shell characters occurring in
+  command names or in their arguments must be quoted or escaped
+  so that the shell does not interpret them.  The quoting rules vary
+  between the POSIX shell and the Windows shell.
+  The <a href="Filename.html#VALquote_command"><code class="code">Filename.quote_command</code></a> performs the appropriate quoting
+  given a command name, a list of arguments, and optional file redirections.</p>
+</div>
+</div>
+
+<pre id="VALtime">val time : unit -&gt; float</pre><div class="info ">
+<div class="info-desc">
+<p>Return the processor time, in seconds, used by the program
+   since the beginning of execution.</p>
+</div>
+</div>
+
+<pre id="VALchdir">val chdir : string -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p>Change the current working directory of the process.</p>
+</div>
+</div>
+
+<pre id="VALmkdir">val mkdir : string -&gt; int -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p>Create a directory with the given permissions.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.12.0</li>
+</ul>
+</div>
+
+<pre id="VALrmdir">val rmdir : string -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p>Remove an empty directory.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.12.0</li>
+</ul>
+</div>
+
+<pre id="VALgetcwd">val getcwd : unit -&gt; string</pre><div class="info ">
+<div class="info-desc">
+<p>Return the current working directory of the process.</p>
+</div>
+</div>
+
+<pre id="VALreaddir">val readdir : string -&gt; string array</pre><div class="info ">
+<div class="info-desc">
+<p>Return the names of all files present in the given directory.
+   Names denoting the current directory and the parent directory
+   (<code class="code">"."</code> and <code class="code">".."</code> in Unix) are not returned.  Each string in the
+   result is a file name rather than a complete path.  There is no
+   guarantee that the name strings in the resulting array will appear
+   in any specific order; they are not, in particular, guaranteed to
+   appear in alphabetical order.</p>
+</div>
+</div>
+
+<pre id="VALinteractive">val interactive : bool ref</pre><div class="info ">
+<div class="info-desc">
+<p>This reference is initially set to <code class="code">false</code> in standalone
+   programs and to <code class="code">true</code> if the code is being executed under
+   the interactive toplevel system <code class="code">ocaml</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Alert unsynchronized_access.</b> The interactive status is a mutable global state.</li>
+</ul>
+</div>
+
+<pre id="VALos_type">val os_type : string</pre><div class="info ">
+<div class="info-desc">
+<p>Operating system currently executing the OCaml program. One of</p>
+<ul>
+<li> <code class="code">"Unix"</code> (for all Unix versions, including Linux and Mac OS X),</li>
+<li> <code class="code">"Win32"</code> (for MS-Windows, OCaml compiled with MSVC++ or Mingw),</li>
+<li> <code class="code">"Cygwin"</code> (for MS-Windows, OCaml compiled with Cygwin).</li>
+</ul>
+</div>
+</div>
+
+<pre><span class="keyword">type</span> backend_type = </pre><table class="typetable">
+<tbody><tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Native</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Bytecode</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Other of string</code></td>
+
+</tr></tbody></table>
+
+<div class="info ">
+<div class="info-desc">
+<p>Currently, the official distribution only supports <code class="code">Native</code> and
+    <code class="code">Bytecode</code>, but it can be other backends with alternative
+    compilers, for example, javascript.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.04.0</li>
+</ul>
+</div>
+
+
+<pre id="VALbackend_type">val backend_type : backend_type</pre><div class="info ">
+<div class="info-desc">
+<p>Backend type  currently executing the OCaml program.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.04.0</li>
+</ul>
+</div>
+
+<pre id="VALunix">val unix : bool</pre><div class="info ">
+<div class="info-desc">
+<p>True if <code class="code">Sys.os_type&nbsp;=&nbsp;"Unix"</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.01.0</li>
+</ul>
+</div>
+
+<pre id="VALwin32">val win32 : bool</pre><div class="info ">
+<div class="info-desc">
+<p>True if <code class="code">Sys.os_type&nbsp;=&nbsp;"Win32"</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.01.0</li>
+</ul>
+</div>
+
+<pre id="VALcygwin">val cygwin : bool</pre><div class="info ">
+<div class="info-desc">
+<p>True if <code class="code">Sys.os_type&nbsp;=&nbsp;"Cygwin"</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.01.0</li>
+</ul>
+</div>
+
+<pre id="VALword_size">val word_size : int</pre><div class="info ">
+<div class="info-desc">
+<p>Size of one word on the machine currently executing the OCaml
+    program, in bits: 32 or 64.</p>
+</div>
+</div>
+
+<pre id="VALint_size">val int_size : int</pre><div class="info ">
+<div class="info-desc">
+<p>Size of <code class="code">int</code>, in bits. It is 31 (resp. 63) when using OCaml on a
+    32-bit (resp. 64-bit) platform. It may differ for other implementations,
+    e.g. it can be 32 bits when compiling to JavaScript.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.03.0</li>
+</ul>
+</div>
+
+<pre id="VALbig_endian">val big_endian : bool</pre><div class="info ">
+<div class="info-desc">
+<p>Whether the machine currently executing the Caml program is big-endian.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.00.0</li>
+</ul>
+</div>
+
+<pre id="VALmax_string_length">val max_string_length : int</pre><div class="info ">
+<div class="info-desc">
+<p>Maximum length of strings and byte sequences.</p>
+</div>
+</div>
+
+<pre id="VALmax_array_length">val max_array_length : int</pre><div class="info ">
+<div class="info-desc">
+<p>Maximum length of a normal array (i.e. any array whose elements are
+    not of type <code class="code">float</code>). The maximum length of a <code class="code">float&nbsp;array</code>
+    is <code class="code">max_floatarray_length</code> if OCaml was configured with
+    <code class="code">--enable-flat-float-array</code> and <code class="code">max_array_length</code> if configured
+    with <code class="code">--disable-flat-float-array</code>.</p>
+</div>
+</div>
+
+<pre id="VALmax_floatarray_length">val max_floatarray_length : int</pre><div class="info ">
+<div class="info-desc">
+<p>Maximum length of a floatarray. This is also the maximum length of
+    a <code class="code">float&nbsp;array</code> when OCaml is configured with
+    <code class="code">--enable-flat-float-array</code>.</p>
+</div>
+</div>
+
+<pre id="VALruntime_variant">val runtime_variant : unit -&gt; string</pre><div class="info ">
+<div class="info-desc">
+<p>Return the name of the runtime variant the program is running on.
+    This is normally the argument given to <code class="code">-runtime-variant</code> at compile
+    time, but for byte-code it can be changed after compilation.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.03.0</li>
+</ul>
+</div>
+
+<pre id="VALruntime_parameters">val runtime_parameters : unit -&gt; string</pre><div class="info ">
+<div class="info-desc">
+<p>Return the value of the runtime parameters, in the same format
+    as the contents of the <code class="code">OCAMLRUNPARAM</code> environment variable.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.03.0</li>
+</ul>
+</div>
+<h2 id="1_Signalhandling">Signal handling</h2>
+<pre><span class="keyword">type</span> signal_behavior = </pre><table class="typetable">
+<tbody><tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Signal_default</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Signal_ignore</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Signal_handle of (int -&gt; unit)</code></td>
+
+</tr></tbody></table>
+
+<div class="info ">
+<div class="info-desc">
+<p>What to do when receiving a signal:</p>
+<ul>
+<li><code class="code">Signal_default</code>: take the default behavior
+     (usually: abort the program)</li>
+<li><code class="code">Signal_ignore</code>: ignore the signal</li>
+<li><code class="code">Signal_handle&nbsp;f</code>: call function <code class="code">f</code>, giving it the signal
+   number as argument.</li>
+</ul>
+</div>
+</div>
+
+
+<pre id="VALsignal">val signal : int -&gt; signal_behavior -&gt; signal_behavior</pre><div class="info ">
+<div class="info-desc">
+<p>Set the behavior of the system on receipt of a given signal.  The
+   first argument is the signal number.  Return the behavior
+   previously associated with the signal. If the signal number is
+   invalid (or not available on your system), an <code class="code">Invalid_argument</code>
+   exception is raised.</p>
+</div>
+</div>
+
+<pre id="VALset_signal">val set_signal : int -&gt; signal_behavior -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p>Same as <a href="Sys.html#VALsignal"><code class="code">Sys.signal</code></a> but return value is ignored.</p>
+</div>
+</div>
+<h3 id="2_SignalnumbersforthestandardPOSIXsignals">Signal numbers for the standard POSIX signals.</h3>
+<pre id="VALsigabrt">val sigabrt : int</pre><div class="info ">
+<div class="info-desc">
+<p>Abnormal termination</p>
+</div>
+</div>
+
+<pre id="VALsigalrm">val sigalrm : int</pre><div class="info ">
+<div class="info-desc">
+<p>Timeout</p>
+</div>
+</div>
+
+<pre id="VALsigfpe">val sigfpe : int</pre><div class="info ">
+<div class="info-desc">
+<p>Arithmetic exception</p>
+</div>
+</div>
+
+<pre id="VALsighup">val sighup : int</pre><div class="info ">
+<div class="info-desc">
+<p>Hangup on controlling terminal</p>
+</div>
+</div>
+
+<pre id="VALsigill">val sigill : int</pre><div class="info ">
+<div class="info-desc">
+<p>Invalid hardware instruction</p>
+</div>
+</div>
+
+<pre id="VALsigint">val sigint : int</pre><div class="info ">
+<div class="info-desc">
+<p>Interactive interrupt (ctrl-C)</p>
+</div>
+</div>
+
+<pre id="VALsigkill">val sigkill : int</pre><div class="info ">
+<div class="info-desc">
+<p>Termination (cannot be ignored)</p>
+</div>
+</div>
+
+<pre id="VALsigpipe">val sigpipe : int</pre><div class="info ">
+<div class="info-desc">
+<p>Broken pipe</p>
+</div>
+</div>
+
+<pre id="VALsigquit">val sigquit : int</pre><div class="info ">
+<div class="info-desc">
+<p>Interactive termination</p>
+</div>
+</div>
+
+<pre id="VALsigsegv">val sigsegv : int</pre><div class="info ">
+<div class="info-desc">
+<p>Invalid memory reference</p>
+</div>
+</div>
+
+<pre id="VALsigterm">val sigterm : int</pre><div class="info ">
+<div class="info-desc">
+<p>Termination</p>
+</div>
+</div>
+
+<pre id="VALsigusr1">val sigusr1 : int</pre><div class="info ">
+<div class="info-desc">
+<p>Application-defined signal 1</p>
+</div>
+</div>
+
+<pre id="VALsigusr2">val sigusr2 : int</pre><div class="info ">
+<div class="info-desc">
+<p>Application-defined signal 2</p>
+</div>
+</div>
+
+<pre id="VALsigchld">val sigchld : int</pre><div class="info ">
+<div class="info-desc">
+<p>Child process terminated</p>
+</div>
+</div>
+
+<pre id="VALsigcont">val sigcont : int</pre><div class="info ">
+<div class="info-desc">
+<p>Continue</p>
+</div>
+</div>
+
+<pre id="VALsigstop">val sigstop : int</pre><div class="info ">
+<div class="info-desc">
+<p>Stop</p>
+</div>
+</div>
+
+<pre id="VALsigtstp">val sigtstp : int</pre><div class="info ">
+<div class="info-desc">
+<p>Interactive stop</p>
+</div>
+</div>
+
+<pre id="VALsigttin">val sigttin : int</pre><div class="info ">
+<div class="info-desc">
+<p>Terminal read from background process</p>
+</div>
+</div>
+
+<pre id="VALsigttou">val sigttou : int</pre><div class="info ">
+<div class="info-desc">
+<p>Terminal write from background process</p>
+</div>
+</div>
+
+<pre id="VALsigvtalrm">val sigvtalrm : int</pre><div class="info ">
+<div class="info-desc">
+<p>Timeout in virtual time</p>
+</div>
+</div>
+
+<pre id="VALsigprof">val sigprof : int</pre><div class="info ">
+<div class="info-desc">
+<p>Profiling interrupt</p>
+</div>
+</div>
+
+<pre id="VALsigbus">val sigbus : int</pre><div class="info ">
+<div class="info-desc">
+<p>Bus error</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.03</li>
+</ul>
+</div>
+
+<pre id="VALsigpoll">val sigpoll : int</pre><div class="info ">
+<div class="info-desc">
+<p>Pollable event</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.03</li>
+</ul>
+</div>
+
+<pre id="VALsigsys">val sigsys : int</pre><div class="info ">
+<div class="info-desc">
+<p>Bad argument to routine</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.03</li>
+</ul>
+</div>
+
+<pre id="VALsigtrap">val sigtrap : int</pre><div class="info ">
+<div class="info-desc">
+<p>Trace/breakpoint trap</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.03</li>
+</ul>
+</div>
+
+<pre id="VALsigurg">val sigurg : int</pre><div class="info ">
+<div class="info-desc">
+<p>Urgent condition on socket</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.03</li>
+</ul>
+</div>
+
+<pre id="VALsigxcpu">val sigxcpu : int</pre><div class="info ">
+<div class="info-desc">
+<p>Timeout in cpu time</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.03</li>
+</ul>
+</div>
+
+<pre id="VALsigxfsz">val sigxfsz : int</pre><div class="info ">
+<div class="info-desc">
+<p>File size limit exceeded</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.03</li>
+</ul>
+</div>
+
+<pre id="EXCEPTIONBreak"><span class="keyword">exception</span> Break</pre>
+<div class="info ">
+<div class="info-desc">
+<p>Exception raised on interactive interrupt if <a href="Sys.html#VALcatch_break"><code class="code">Sys.catch_break</code></a>
+   is on.</p>
+</div>
+</div>
+
+<pre id="VALcatch_break">val catch_break : bool -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">catch_break</code> governs whether interactive interrupt (ctrl-C)
+   terminates the program or raises the <code class="code">Break</code> exception.
+   Call <code class="code">catch_break&nbsp;true</code> to enable raising <code class="code">Break</code>,
+   and <code class="code">catch_break&nbsp;false</code> to let the system
+   terminate the program on user interrupt.</p>
+</div>
+</div>
+
+<pre id="VALocaml_version">val ocaml_version : string</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">ocaml_version</code> is the version of OCaml.
+    It is a string of the form
+      <code class="code">"major.minor[.patchlevel][(+|~)additional-info]"</code>,
+    where <code class="code">major</code>, <code class="code">minor</code>, and <code class="code">patchlevel</code> are integers, and
+    <code class="code">additional-info</code> is an arbitrary string.
+    The <code class="code">[.patchlevel]</code> part was absent before version 3.08.0 and
+    became mandatory from 3.08.0 onwards.
+    The <code class="code">[(+|~)additional-info]</code> part may be absent.</p>
+</div>
+</div>
+
+<pre id="VALdevelopment_version">val development_version : bool</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">true</code> if this is a development version, <code class="code">false</code> otherwise.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.14.0</li>
+</ul>
+</div>
+
+<pre><span class="keyword">type</span> extra_prefix = </pre><table class="typetable">
+<tbody><tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Plus</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Tilde</code></td>
+
+</tr></tbody></table>
+
+
+
+<pre id="TYPEextra_info"><span class="keyword">type</span> extra_info = extra_prefix * string </pre>
+<div class="info ">
+<ul class="info-attributes">
+<li><b>Since</b> 4.14</li>
+</ul>
+</div>
+
+
+<pre><span class="keyword">type</span> ocaml_release_info = {</pre><table class="typetable">
+<tbody><tr>
+<td align="left" valign="top">
+<code>&nbsp;&nbsp;</code></td>
+<td align="left" valign="top">
+<code>major&nbsp;: int;</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>&nbsp;&nbsp;</code></td>
+<td align="left" valign="top">
+<code>minor&nbsp;: int;</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>&nbsp;&nbsp;</code></td>
+<td align="left" valign="top">
+<code>patchlevel&nbsp;: int;</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>&nbsp;&nbsp;</code></td>
+<td align="left" valign="top">
+<code>extra&nbsp;: extra_info option;</code></td>
+
+</tr></tbody></table>
+<code>}</code>
+
+<div class="info ">
+<ul class="info-attributes">
+<li><b>Since</b> 4.14</li>
+</ul>
+</div>
+
+
+<pre id="VALocaml_release">val ocaml_release : ocaml_release_info</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">ocaml_release</code> is the version of OCaml.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.14</li>
+</ul>
+</div>
+
+<pre id="VALenable_runtime_warnings">val enable_runtime_warnings : bool -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p>Control whether the OCaml runtime system can emit warnings
+    on stderr.  Currently, the only supported warning is triggered
+    when a channel created by <code class="code">open_*</code> functions is finalized without
+    being closed.  Runtime warnings are disabled by default.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.03.0</li>
+<li><b>Alert unsynchronized_access.</b> The status of runtime warnings is a mutable global state.</li>
+</ul>
+</div>
+
+<pre id="VALruntime_warnings_enabled">val runtime_warnings_enabled : unit -&gt; bool</pre><div class="info ">
+<div class="info-desc">
+<p>Return whether runtime warnings are currently enabled.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.03.0</li>
+<li><b>Alert unsynchronized_access.</b> The status of runtime warnings is a mutable global state.</li>
+</ul>
+</div>
+<h2 id="1_Optimization">Optimization</h2>
+<pre id="VALopaque_identity">val opaque_identity : 'a -&gt; 'a</pre><div class="info ">
+<div class="info-desc">
+<p>For the purposes of optimization, <code class="code">opaque_identity</code> behaves like an
+    unknown (and thus possibly side-effecting) function.</p>
+
+<p>At runtime, <code class="code">opaque_identity</code> disappears altogether.</p>
+
+<p>A typical use of this function is to prevent pure computations from being
+    optimized away in benchmarking loops.  For example:</p>
+<pre class="codepre">      for _round = 1 to 100_000 do
+        ignore (Sys.opaque_identity (my_pure_computation ()))
+      done
+    </pre></div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.03.0</li>
+</ul>
+</div>
+
+<pre id="MODULEImmediate64"><span class="keyword">module</span> Immediate64: sig .. end</pre>
+</div>

@@ -1,0 +1,148 @@
+<link rel="stylesheet" href="/css/main.css"><div class="ocamldoc">
+<h1>Module <a href="type_Either.html">Either</a></h1>
+
+<pre id="MODULEEither"><span class="keyword">module</span> Either: sig .. end</pre><div class="info module top">
+<div class="info-desc">
+<p>Either type.</p>
+
+<p>Either is the simplest and most generic sum/variant type:
+    a value of <code class="code">('a,&nbsp;'b)&nbsp;Either.t</code> is either a <code class="code">Left&nbsp;(v&nbsp;:&nbsp;'a)</code>
+    or a <code class="code">Right&nbsp;(v&nbsp;:&nbsp;'b)</code>.</p>
+
+<p>It is a natural choice in the API of generic functions where values
+    could fall in two different cases, possibly at different types,
+    without assigning a specific meaning to what each case should be.</p>
+
+<p>For example:</p>
+
+<pre class="codepre">List.partition_map:
+    ('a -&gt; ('b, 'c) Either.t) -&gt; 'a list -&gt; 'b list * 'c list</pre>
+<p>If you are looking for a parametrized type where
+    one alternative means success and the other means failure,
+    you should use the more specific type <a href="Result.html#TYPEt"><code class="code">Result.t</code></a>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.12</li>
+</ul>
+</div>
+<hr width="100%">
+
+<pre><span class="keyword">type</span> ('a, 'b) t = </pre><table class="typetable">
+<tbody><tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Left of 'a</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Right of 'b</code></td>
+
+</tr></tbody></table>
+
+<div class="info ">
+<div class="info-desc">
+<p>A value of <code class="code">('a,&nbsp;'b)&nbsp;Either.t</code> contains
+    either a value of <code class="code">'a</code>  or a value of <code class="code">'b</code></p>
+</div>
+</div>
+
+
+<pre id="VALleft">val left : 'a -&gt; ('a, 'b) t</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">left&nbsp;v</code> is <code class="code">Left&nbsp;v</code>.</p>
+</div>
+</div>
+
+<pre id="VALright">val right : 'b -&gt; ('a, 'b) t</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">right&nbsp;v</code> is <code class="code">Right&nbsp;v</code>.</p>
+</div>
+</div>
+
+<pre id="VALis_left">val is_left : ('a, 'b) t -&gt; bool</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">is_left&nbsp;(Left&nbsp;v)</code> is <code class="code">true</code>, <code class="code">is_left&nbsp;(Right&nbsp;v)</code> is <code class="code">false</code>.</p>
+</div>
+</div>
+
+<pre id="VALis_right">val is_right : ('a, 'b) t -&gt; bool</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">is_right&nbsp;(Left&nbsp;v)</code> is <code class="code">false</code>, <code class="code">is_right&nbsp;(Right&nbsp;v)</code> is <code class="code">true</code>.</p>
+</div>
+</div>
+
+<pre id="VALfind_left">val find_left : ('a, 'b) t -&gt; 'a option</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">find_left&nbsp;(Left&nbsp;v)</code> is <code class="code">Some&nbsp;v</code>, <code class="code">find_left&nbsp;(Right&nbsp;_)</code> is <code class="code">None</code></p>
+</div>
+</div>
+
+<pre id="VALfind_right">val find_right : ('a, 'b) t -&gt; 'b option</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">find_right&nbsp;(Right&nbsp;v)</code> is <code class="code">Some&nbsp;v</code>, <code class="code">find_right&nbsp;(Left&nbsp;_)</code> is <code class="code">None</code></p>
+</div>
+</div>
+
+<pre id="VALmap_left">val map_left : ('a1 -&gt; 'a2) -&gt; ('a1, 'b) t -&gt; ('a2, 'b) t</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">map_left&nbsp;f&nbsp;e</code> is <code class="code">Left&nbsp;(f&nbsp;v)</code> if <code class="code">e</code> is <code class="code">Left&nbsp;v</code>
+    and <code class="code">e</code> if <code class="code">e</code> is <code class="code">Right&nbsp;_</code>.</p>
+</div>
+</div>
+
+<pre id="VALmap_right">val map_right : ('b1 -&gt; 'b2) -&gt; ('a, 'b1) t -&gt; ('a, 'b2) t</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">map_right&nbsp;f&nbsp;e</code> is <code class="code">Right&nbsp;(f&nbsp;v)</code> if <code class="code">e</code> is <code class="code">Right&nbsp;v</code>
+    and <code class="code">e</code> if <code class="code">e</code> is <code class="code">Left&nbsp;_</code>.</p>
+</div>
+</div>
+
+<pre id="VALmap">val map : left:('a1 -&gt; 'a2) -&gt;       right:('b1 -&gt; 'b2) -&gt; ('a1, 'b1) t -&gt; ('a2, 'b2) t</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">map&nbsp;~left&nbsp;~right&nbsp;(Left&nbsp;v)</code> is <code class="code">Left&nbsp;(left&nbsp;v)</code>,
+    <code class="code">map&nbsp;~left&nbsp;~right&nbsp;(Right&nbsp;v)</code> is <code class="code">Right&nbsp;(right&nbsp;v)</code>.</p>
+</div>
+</div>
+
+<pre id="VALfold">val fold : left:('a -&gt; 'c) -&gt; right:('b -&gt; 'c) -&gt; ('a, 'b) t -&gt; 'c</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">fold&nbsp;~left&nbsp;~right&nbsp;(Left&nbsp;v)</code> is <code class="code">left&nbsp;v</code>, and
+    <code class="code">fold&nbsp;~left&nbsp;~right&nbsp;(Right&nbsp;v)</code> is <code class="code">right&nbsp;v</code>.</p>
+</div>
+</div>
+
+<pre id="VALiter">val iter : left:('a -&gt; unit) -&gt; right:('b -&gt; unit) -&gt; ('a, 'b) t -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">iter&nbsp;~left&nbsp;~right&nbsp;(Left&nbsp;v)</code> is <code class="code">left&nbsp;v</code>, and
+    <code class="code">iter&nbsp;~left&nbsp;~right&nbsp;(Right&nbsp;v)</code> is <code class="code">right&nbsp;v</code>.</p>
+</div>
+</div>
+
+<pre id="VALfor_all">val for_all : left:('a -&gt; bool) -&gt; right:('b -&gt; bool) -&gt; ('a, 'b) t -&gt; bool</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">for_all&nbsp;~left&nbsp;~right&nbsp;(Left&nbsp;v)</code> is <code class="code">left&nbsp;v</code>, and
+    <code class="code">for_all&nbsp;~left&nbsp;~right&nbsp;(Right&nbsp;v)</code> is <code class="code">right&nbsp;v</code>.</p>
+</div>
+</div>
+
+<pre id="VALequal">val equal : left:('a -&gt; 'a -&gt; bool) -&gt;       right:('b -&gt; 'b -&gt; bool) -&gt; ('a, 'b) t -&gt; ('a, 'b) t -&gt; bool</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">equal&nbsp;~left&nbsp;~right&nbsp;e0&nbsp;e1</code> tests equality of <code class="code">e0</code> and <code class="code">e1</code> using <code class="code">left</code>
+    and <code class="code">right</code> to respectively compare values wrapped by <code class="code">Left&nbsp;_</code> and
+    <code class="code">Right&nbsp;_</code>.</p>
+</div>
+</div>
+
+<pre id="VALcompare">val compare : left:('a -&gt; 'a -&gt; int) -&gt;       right:('b -&gt; 'b -&gt; int) -&gt; ('a, 'b) t -&gt; ('a, 'b) t -&gt; int</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">compare&nbsp;~left&nbsp;~right&nbsp;e0&nbsp;e1</code> totally orders <code class="code">e0</code> and <code class="code">e1</code> using <code class="code">left</code> and
+    <code class="code">right</code> to respectively compare values wrapped by <code class="code">Left&nbsp;_&nbsp;</code> and <code class="code">Right&nbsp;_</code>.
+    <code class="code">Left&nbsp;_</code> values are smaller than <code class="code">Right&nbsp;_</code> values.</p>
+</div>
+</div>
+
+</div>

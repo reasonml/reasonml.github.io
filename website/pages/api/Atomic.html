@@ -1,0 +1,77 @@
+<link rel="stylesheet" href="/css/main.css"><div class="ocamldoc">
+<h1>Module <a href="type_Atomic.html">Atomic</a></h1>
+
+<pre id="MODULEAtomic"><span class="keyword">module</span> Atomic: sig .. end</pre><div class="info module top">
+<div class="info-desc">
+<p>Atomic references.</p>
+
+<p>See 'Memory model: The hard bits' chapter in the manual.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.12</li>
+</ul>
+</div>
+<hr width="100%">
+
+<pre id="TYPEt"><span class="keyword">type</span> 'a t </pre>
+<div class="info ">
+<div class="info-desc">
+<p>An atomic (mutable) reference to a value of type <code class="code">'a</code>.</p>
+</div>
+</div>
+
+
+<pre id="VALmake">val make : 'a -&gt; 'a t</pre><div class="info ">
+<div class="info-desc">
+<p>Create an atomic reference.</p>
+</div>
+</div>
+
+<pre id="VALget">val get : 'a t -&gt; 'a</pre><div class="info ">
+<div class="info-desc">
+<p>Get the current value of the atomic reference.</p>
+</div>
+</div>
+
+<pre id="VALset">val set : 'a t -&gt; 'a -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p>Set a new value for the atomic reference.</p>
+</div>
+</div>
+
+<pre id="VALexchange">val exchange : 'a t -&gt; 'a -&gt; 'a</pre><div class="info ">
+<div class="info-desc">
+<p>Set a new value for the atomic reference, and return the current value.</p>
+</div>
+</div>
+
+<pre id="VALcompare_and_set">val compare_and_set : 'a t -&gt; 'a -&gt; 'a -&gt; bool</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">compare_and_set&nbsp;r&nbsp;seen&nbsp;v</code> sets the new value of <code class="code">r</code> to <code class="code">v</code> only
+    if its current value is physically equal to <code class="code">seen</code> -- the
+    comparison and the set occur atomically. Returns <code class="code">true</code> if the
+    comparison succeeded (so the set happened) and <code class="code">false</code>
+    otherwise.</p>
+</div>
+</div>
+
+<pre id="VALfetch_and_add">val fetch_and_add : int t -&gt; int -&gt; int</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">fetch_and_add&nbsp;r&nbsp;n</code> atomically increments the value of <code class="code">r</code> by <code class="code">n</code>,
+    and returns the current value (before the increment).</p>
+</div>
+</div>
+
+<pre id="VALincr">val incr : int t -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">incr&nbsp;r</code> atomically increments the value of <code class="code">r</code> by <code class="code">1</code>.</p>
+</div>
+</div>
+
+<pre id="VALdecr">val decr : int t -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">decr&nbsp;r</code> atomically decrements the value of <code class="code">r</code> by <code class="code">1</code>.</p>
+</div>
+</div>
+
+</div>

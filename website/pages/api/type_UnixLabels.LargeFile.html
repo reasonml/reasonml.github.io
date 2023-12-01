@@ -1,0 +1,25 @@
+<link rel="stylesheet" href="/css/main.css"><div class="ocamldoc"><pre>sig
+
+&nbsp;&nbsp;val&nbsp;lseek&nbsp;:
+&nbsp;&nbsp;&nbsp;&nbsp;UnixLabels.file_descr&nbsp;-&gt;&nbsp;int64&nbsp;-&gt;&nbsp;mode:UnixLabels.seek_command&nbsp;-&gt;&nbsp;int64
+&nbsp;&nbsp;val&nbsp;truncate&nbsp;:&nbsp;string&nbsp;-&gt;&nbsp;len:int64&nbsp;-&gt;&nbsp;unit
+&nbsp;&nbsp;val&nbsp;ftruncate&nbsp;:&nbsp;UnixLabels.file_descr&nbsp;-&gt;&nbsp;len:int64&nbsp;-&gt;&nbsp;unit
+&nbsp;&nbsp;type&nbsp;stats&nbsp;=
+&nbsp;&nbsp;&nbsp;&nbsp;Unix.LargeFile.stats&nbsp;=&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;st_dev&nbsp;:&nbsp;int;
+&nbsp;&nbsp;&nbsp;&nbsp;st_ino&nbsp;:&nbsp;int;
+&nbsp;&nbsp;&nbsp;&nbsp;st_kind&nbsp;:&nbsp;UnixLabels.file_kind;
+&nbsp;&nbsp;&nbsp;&nbsp;st_perm&nbsp;:&nbsp;UnixLabels.file_perm;
+&nbsp;&nbsp;&nbsp;&nbsp;st_nlink&nbsp;:&nbsp;int;
+&nbsp;&nbsp;&nbsp;&nbsp;st_uid&nbsp;:&nbsp;int;
+&nbsp;&nbsp;&nbsp;&nbsp;st_gid&nbsp;:&nbsp;int;
+&nbsp;&nbsp;&nbsp;&nbsp;st_rdev&nbsp;:&nbsp;int;
+&nbsp;&nbsp;&nbsp;&nbsp;st_size&nbsp;:&nbsp;int64;
+&nbsp;&nbsp;&nbsp;&nbsp;st_atime&nbsp;:&nbsp;float;
+&nbsp;&nbsp;&nbsp;&nbsp;st_mtime&nbsp;:&nbsp;float;
+&nbsp;&nbsp;&nbsp;&nbsp;st_ctime&nbsp;:&nbsp;float;
+&nbsp;&nbsp;}
+&nbsp;&nbsp;val&nbsp;stat&nbsp;:&nbsp;string&nbsp;-&gt;&nbsp;UnixLabels.LargeFile.stats
+&nbsp;&nbsp;val&nbsp;lstat&nbsp;:&nbsp;string&nbsp;-&gt;&nbsp;UnixLabels.LargeFile.stats
+&nbsp;&nbsp;val&nbsp;fstat&nbsp;:&nbsp;UnixLabels.file_descr&nbsp;-&gt;&nbsp;UnixLabels.LargeFile.stats
+end</pre></div>

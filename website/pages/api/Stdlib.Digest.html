@@ -1,0 +1,117 @@
+<link rel="stylesheet" href="/css/main.css"><div class="ocamldoc">
+<h1>Module <a href="type_Stdlib.Digest.html">Stdlib.Digest</a></h1>
+
+<pre id="MODULEDigest"><span class="keyword">module</span> Digest: Digest</pre><hr width="100%">
+
+<pre id="TYPEt"><span class="keyword">type</span> t = string </pre>
+<div class="info ">
+<div class="info-desc">
+<p>The type of digests: 16-character strings.</p>
+</div>
+</div>
+
+
+<pre id="VALcompare">val compare : t -&gt; t -&gt; int</pre><div class="info ">
+<div class="info-desc">
+<p>The comparison function for 16-character digest, with the same
+    specification as <a href="Stdlib.html#VALcompare"><code class="code">compare</code></a> and the implementation
+    shared with <a href="String.html#VALcompare"><code class="code">String.compare</code></a>. Along with the type <code class="code">t</code>, this
+    function <code class="code">compare</code> allows the module <code class="code">Digest</code> to be passed as
+    argument to the functors <a href="Set.Make.html"><code class="code">Set.Make</code></a> and <a href="Map.Make.html"><code class="code">Map.Make</code></a>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.00.0</li>
+</ul>
+</div>
+
+<pre id="VALequal">val equal : t -&gt; t -&gt; bool</pre><div class="info ">
+<div class="info-desc">
+<p>The equal function for 16-character digest.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.03.0</li>
+</ul>
+</div>
+
+<pre id="VALstring">val string : string -&gt; t</pre><div class="info ">
+<div class="info-desc">
+<p>Return the digest of the given string.</p>
+</div>
+</div>
+
+<pre id="VALbytes">val bytes : bytes -&gt; t</pre><div class="info ">
+<div class="info-desc">
+<p>Return the digest of the given byte sequence.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.02.0</li>
+</ul>
+</div>
+
+<pre id="VALsubstring">val substring : string -&gt; int -&gt; int -&gt; t</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">Digest.substring&nbsp;s&nbsp;ofs&nbsp;len</code> returns the digest of the substring
+   of <code class="code">s</code> starting at index <code class="code">ofs</code> and containing <code class="code">len</code> characters.</p>
+</div>
+</div>
+
+<pre id="VALsubbytes">val subbytes : bytes -&gt; int -&gt; int -&gt; t</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">Digest.subbytes&nbsp;s&nbsp;ofs&nbsp;len</code> returns the digest of the subsequence
+    of <code class="code">s</code> starting at index <code class="code">ofs</code> and containing <code class="code">len</code> bytes.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.02.0</li>
+</ul>
+</div>
+
+<pre id="VALchannel">val channel : in_channel -&gt; int -&gt; t</pre><div class="info ">
+<div class="info-desc">
+<p>If <code class="code">len</code> is nonnegative, <code class="code">Digest.channel&nbsp;ic&nbsp;len</code> reads <code class="code">len</code>
+   characters from channel <code class="code">ic</code> and returns their digest, or raises
+   <code class="code">End_of_file</code> if end-of-file is reached before <code class="code">len</code> characters
+   are read.  If <code class="code">len</code> is negative, <code class="code">Digest.channel&nbsp;ic&nbsp;len</code> reads
+   all characters from <code class="code">ic</code> until end-of-file is reached and return
+   their digest.</p>
+</div>
+</div>
+
+<pre id="VALfile">val file : string -&gt; t</pre><div class="info ">
+<div class="info-desc">
+<p>Return the digest of the file whose name is given.</p>
+</div>
+</div>
+
+<pre id="VALoutput">val output : out_channel -&gt; t -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p>Write a digest on the given output channel.</p>
+</div>
+</div>
+
+<pre id="VALinput">val input : in_channel -&gt; t</pre><div class="info ">
+<div class="info-desc">
+<p>Read a digest from the given input channel.</p>
+</div>
+</div>
+
+<pre id="VALto_hex">val to_hex : t -&gt; string</pre><div class="info ">
+<div class="info-desc">
+<p>Return the printable hexadecimal representation of the given digest.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Raises</b> <code>Invalid_argument</code> if the argument is not exactly 16 bytes.</li>
+</ul>
+</div>
+
+<pre id="VALfrom_hex">val from_hex : string -&gt; t</pre><div class="info ">
+<div class="info-desc">
+<p>Convert a hexadecimal representation back into the corresponding digest.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.00.0</li>
+<li><b>Raises</b> <code>Invalid_argument</code> if the argument is not exactly 32 hexadecimal
+   characters.</li>
+</ul>
+</div>
+
+</div>
