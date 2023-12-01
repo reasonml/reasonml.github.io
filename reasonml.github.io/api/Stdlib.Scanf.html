@@ -1,0 +1,475 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Reason · Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems.</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Reason · Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io/"/><meta property="og:description" content="Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/icon_50.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io/blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io/blog/feed.xml" title="Reason Blog RSS Feed"/><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/en"><img class="logo" src="/img/dummy.svg" alt="Reason"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/docs/en/what-and-why" target="_self">Docs</a></li><li class=""><a href="/en/try" target="_self">Try</a></li><li class=""><a href="/api/index" target="_self">API</a></li><li class=""><a href="/docs/en/community" target="_self">Community</a></li><li class=""><a href="/blog/" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg" alt="Languages icon"/>English</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/ja/Stdlib.Scanf">日本語</a></li><li><a href="/de/Stdlib.Scanf">Deutsch</a></li><li><a href="/es-ES/Stdlib.Scanf">Español</a></li><li><a href="/fr/Stdlib.Scanf">Français</a></li><li><a href="/ko/Stdlib.Scanf">한국어</a></li><li><a href="/pt-BR/Stdlib.Scanf">Português (Brasil)</a></li><li><a href="/ru/Stdlib.Scanf">Русский</a></li><li><a href="/uk/Stdlib.Scanf">Українська</a></li><li><a href="/zh-CN/Stdlib.Scanf">中文</a></li><li><a href="/zh-TW/Stdlib.Scanf">繁體中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank" rel="noreferrer noopener">Help Translate</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/facebook/reason" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div><link rel="stylesheet" href="/css/main.css"><div class="ocamldoc">
+<h1>Module <a href="type_Stdlib.Scanf.html">Stdlib.Scanf</a></h1>
+
+<pre id="MODULEScanf"><span class="keyword">module</span> Scanf: Scanf</pre><hr width="100%">
+<h2 id="1_Introduction">Introduction</h2><h3 id="2_Functionalinputwithformatstrings">Functional input with format strings</h3><p>The module <a href="Scanf.html"><code class="code">Scanf</code></a> provides formatted input functions or <em>scanners</em>.</p>
+
+<p>The formatted input functions can read from any kind of input, including
+    strings, files, or anything that can return characters. The more general
+    source of characters is named a <em>formatted input channel</em> (or <em>    scanning buffer</em>) and has type <a href="Scanf.Scanning.html#TYPEin_channel"><code class="code">Scanf.Scanning.in_channel</code></a>. The more general
+    formatted input function reads from any scanning buffer and is named
+    <code class="code">bscanf</code>.</p>
+
+<p>Generally speaking, the formatted input functions have 3 arguments:</p>
+<ul>
+<li>the first argument is a source of characters for the input,</li>
+<li>the second argument is a format string that specifies the values to
+      read,</li>
+<li>the third argument is a <em>receiver function</em> that is applied to the
+      values read.</li>
+</ul>
+<p>Hence, a typical call to the formatted input function <a href="Scanf.html#VALbscanf"><code class="code">Scanf.bscanf</code></a> is
+    <code class="code">bscanf&nbsp;ic&nbsp;fmt&nbsp;f</code>, where:</p>
+
+<ul>
+<li><code class="code">ic</code> is a source of characters (typically a <em>    formatted input channel</em> with type <a href="Scanf.Scanning.html#TYPEin_channel"><code class="code">Scanf.Scanning.in_channel</code></a>),</li>
+</ul>
+<ul>
+<li><code class="code">fmt</code> is a format string (the same format strings as those used to print
+    material with module <a href="Printf.html"><code class="code">Printf</code></a> or <a href="Format.html"><code class="code">Format</code></a>),</li>
+</ul>
+<ul>
+<li><code class="code">f</code> is a function that has as many arguments as the number of values to
+    read in the input according to <code class="code">fmt</code>.</li>
+</ul>
+<h3 id="2_Asimpleexample">A simple example</h3><p>As suggested above, the expression <code class="code">bscanf&nbsp;ic&nbsp;"%d"&nbsp;f</code> reads a decimal
+    integer <code class="code">n</code> from the source of characters <code class="code">ic</code> and returns <code class="code">f&nbsp;n</code>.</p>
+
+<p>For instance,</p>
+
+<ul>
+<li>if we use <code class="code">stdin</code> as the source of characters (<a href="Scanf.Scanning.html#VALstdin"><code class="code">Scanf.Scanning.stdin</code></a> is
+    the predefined formatted input channel that reads from standard input),</li>
+</ul>
+<ul>
+<li>if we define the receiver <code class="code">f</code> as <code class="code">let&nbsp;f&nbsp;x&nbsp;=&nbsp;x&nbsp;+&nbsp;1</code>,</li>
+</ul>
+<p>then <code class="code">bscanf&nbsp;Scanning.stdin&nbsp;"%d"&nbsp;f</code> reads an integer <code class="code">n</code> from the
+    standard input and returns <code class="code">f&nbsp;n</code> (that is <code class="code">n&nbsp;+&nbsp;1</code>). Thus, if we
+    evaluate <code class="code">bscanf&nbsp;stdin&nbsp;"%d"&nbsp;f</code>, and then enter <code class="code">41</code> at the
+    keyboard, the result we get is <code class="code">42</code>.</p>
+<h3 id="2_Formattedinputasafunctionalfeature">Formatted input as a functional feature</h3><p>The OCaml scanning facility is reminiscent of the corresponding C feature.
+    However, it is also largely different, simpler, and yet more powerful:
+    the formatted input functions are higher-order functionals and the
+    parameter passing mechanism is just the regular function application not
+    the variable assignment based mechanism which is typical for formatted
+    input in imperative languages; the OCaml format strings also feature
+    useful additions to easily define complex tokens; as expected within a
+    functional programming language, the formatted input functions also
+    support polymorphism, in particular arbitrary interaction with
+    polymorphic user-defined scanners. Furthermore, the OCaml formatted input
+    facility is fully type-checked at compile time.</p>
+<p><b>Unsynchronized accesses</b></p>
+<p>Unsynchronized accesses to a <a href="Scanf.Scanning.html#TYPEin_channel"><code class="code">Scanf.Scanning.in_channel</code></a> may lead to an
+      invalid <a href="Scanf.Scanning.html#TYPEin_channel"><code class="code">Scanf.Scanning.in_channel</code></a> state. Thus, concurrent accesses
+      to <a href="Scanf.Scanning.html#TYPEin_channel"><code class="code">Scanf.Scanning.in_channel</code></a>s must be synchronized (for instance with
+      a <a href="Mutex.html#TYPEt"><code class="code">Mutex.t</code></a>).</p>
+<h2 id="1_Formattedinputchannel">Formatted input channel</h2>
+<pre id="MODULEScanning"><span class="keyword">module</span> Scanning: sig .. end</pre><h2 id="1_Typeofformattedinputfunctions">Type of formatted input functions</h2>
+<pre id="TYPEscanner"><span class="keyword">type</span> ('a, 'b, 'c, 'd) scanner = ('a, Scanning.in_channel, 'b, 'c, 'a -&gt; 'd, 'd) format6 -&gt; 'c </pre>
+<div class="info ">
+<div class="info-desc">
+<p>The type of formatted input scanners: <code class="code">('a,&nbsp;'b,&nbsp;'c,&nbsp;'d)&nbsp;scanner</code>
+    is the type of a formatted input function that reads from some
+    formatted input channel according to some format string; more
+    precisely, if <code class="code">scan</code> is some formatted input function, then <code class="code">scan
+&nbsp;&nbsp;&nbsp;&nbsp;ic&nbsp;fmt&nbsp;f</code> applies <code class="code">f</code> to all the arguments specified by format
+    string <code class="code">fmt</code>, when <code class="code">scan</code> has read those arguments from the
+    <a href="Scanf.Scanning.html#TYPEin_channel"><code class="code">Scanf.Scanning.in_channel</code></a> formatted input channel <code class="code">ic</code>.</p>
+
+<p>For instance, the <a href="Scanf.html#VALscanf"><code class="code">Scanf.scanf</code></a> function below has type
+    <code class="code">('a,&nbsp;'b,&nbsp;'c,&nbsp;'d)&nbsp;scanner</code>, since it is a formatted input function that
+    reads from <a href="Scanf.Scanning.html#VALstdin"><code class="code">Scanf.Scanning.stdin</code></a>: <code class="code">scanf&nbsp;fmt&nbsp;f</code> applies <code class="code">f</code> to the arguments
+    specified by <code class="code">fmt</code>, reading those arguments from <a href="Stdlib.html#VALstdin"><code class="code">stdin</code></a> as
+    expected.</p>
+
+<p>If the format <code class="code">fmt</code> has some <code class="code">%r</code> indications, the corresponding
+    formatted input functions must be provided <em>before</em> receiver function
+    <code class="code">f</code>. For instance, if <code class="code">read_elem</code> is an input function for values of type
+    <code class="code">t</code>, then <code class="code">bscanf&nbsp;ic&nbsp;"%r;"&nbsp;read_elem&nbsp;f</code> reads a value <code class="code">v</code> of type <code class="code">t</code>
+    followed by a <code class="code">';'</code> character, and returns <code class="code">f&nbsp;v</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 3.10.0</li>
+</ul>
+</div>
+
+
+<pre id="TYPEscanner_opt"><span class="keyword">type</span> ('a, 'b, 'c, 'd) scanner_opt = ('a, Scanning.in_channel, 'b, 'c, 'a -&gt; 'd option, 'd) format6 -&gt;       'c </pre>
+
+
+<pre id="EXCEPTIONScan_failure"><span class="keyword">exception</span> Scan_failure of string</pre>
+<div class="info ">
+<div class="info-desc">
+<p>When the input can not be read according to the format string
+    specification, formatted input functions typically raise exception
+    <code class="code">Scan_failure</code>.</p>
+</div>
+</div>
+<h2 id="1_Thegeneralformattedinputfunction">The general formatted input function</h2>
+<pre id="VALbscanf">val bscanf : Scanning.in_channel -&gt; ('a, 'b, 'c, 'd) scanner</pre><p><code class="code">bscanf&nbsp;ic&nbsp;fmt&nbsp;r1&nbsp;...&nbsp;rN&nbsp;f</code> reads characters from the
+    <a href="Scanf.Scanning.html#TYPEin_channel"><code class="code">Scanf.Scanning.in_channel</code></a> formatted input channel <code class="code">ic</code> and converts them to
+    values according to format string <code class="code">fmt</code>.
+    As a final step, receiver function <code class="code">f</code> is applied to the values read and
+    gives the result of the <code class="code">bscanf</code> call.</p>
+
+<p>For instance, if <code class="code">f</code> is the function <code class="code">fun&nbsp;s&nbsp;i&nbsp;-&gt;&nbsp;i&nbsp;+&nbsp;1</code>, then
+    <code class="code">Scanf.sscanf&nbsp;"x&nbsp;=&nbsp;1"&nbsp;"%s&nbsp;=&nbsp;%i"&nbsp;f</code> returns <code class="code">2</code>.</p>
+
+<p>Arguments <code class="code">r1</code> to <code class="code">rN</code> are user-defined input functions that read the
+    argument corresponding to the <code class="code">%r</code> conversions specified in the format
+    string.</p>
+
+<pre id="VALbscanf_opt">val bscanf_opt : Scanning.in_channel -&gt; ('a, 'b, 'c, 'd) scanner_opt</pre><div class="info ">
+<div class="info-desc">
+<p>Same as <a href="Scanf.html#VALbscanf"><code class="code">Scanf.bscanf</code></a>, but returns <code class="code">None</code> in case of scanning failure.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 5.0</li>
+</ul>
+</div>
+<h2 id="1_Formatstringdescription">Format string description</h2><p>The format string is a character string which contains three types of
+    objects:</p>
+<ul>
+<li>plain characters, which are simply matched with the characters of the
+      input (with a special case for space and line feed, see <a href="Scanf.html#space"><i>The space character in format strings</i></a>),</li>
+<li>conversion specifications, each of which causes reading and conversion of
+      one argument for the function <code class="code">f</code> (see <a href="Scanf.html#conversion"><i>Conversion specifications in format strings</i></a>),</li>
+<li>scanning indications to specify boundaries of tokens
+      (see scanning <a href="Scanf.html#indication"><i>Scanning indications in format strings</i></a>).</li>
+</ul>
+<h3 id="space">The space character in format strings</h3><p>As mentioned above, a plain character in the format string is just
+    matched with the next character of the input; however, two characters are
+    special exceptions to this rule: the space character (<code class="code">'&nbsp;'</code> or ASCII code
+    32) and the line feed character (<code class="code">'\n'</code> or ASCII code 10).
+    A space does not match a single space character, but any amount of
+    'whitespace' in the input. More precisely, a space inside the format
+    string matches <em>any number</em> of tab, space, line feed and carriage
+    return characters. Similarly, a line feed character in the format string
+    matches either a single line feed or a carriage return followed by a line
+    feed.</p>
+
+<p>Matching <em>any</em> amount of whitespace, a space in the format string
+    also matches no amount of whitespace at all; hence, the call <code class="code">bscanf&nbsp;ib
+&nbsp;&nbsp;&nbsp;&nbsp;"Price&nbsp;=&nbsp;%d&nbsp;$"&nbsp;(fun&nbsp;p&nbsp;-&gt;&nbsp;p)</code> succeeds and returns <code class="code">1</code> when reading an
+    input with various whitespace in it, such as <code class="code">Price&nbsp;=&nbsp;1&nbsp;$</code>,
+    <code class="code">Price&nbsp;&nbsp;=&nbsp;&nbsp;1&nbsp;&nbsp;&nbsp;&nbsp;$</code>, or even <code class="code">Price=1$</code>.</p>
+<h3 id="conversion">Conversion specifications in format strings</h3><p>Conversion specifications consist in the <code class="code">%</code> character, followed by
+    an optional flag, an optional field width, and followed by one or
+    two conversion characters.</p>
+
+<p>The conversion characters and their meanings are:</p>
+
+<ul>
+<li><code class="code">d</code>: reads an optionally signed decimal integer (<code class="code">0-9</code>+).</li>
+<li><code class="code">i</code>: reads an optionally signed integer
+      (usual input conventions for decimal (<code class="code">0-9</code>+), hexadecimal
+       (<code class="code">0x[0-9a-f]+</code> and <code class="code">0X[0-9A-F]+</code>), octal (<code class="code">0o[0-7]+</code>), and binary
+       (<code class="code">0b[0-1]+</code>) notations are understood).</li>
+<li><code class="code">u</code>: reads an unsigned decimal integer.</li>
+<li><code class="code">x</code> or <code class="code">X</code>: reads an unsigned hexadecimal integer (<code class="code">[0-9a-fA-F]+</code>).</li>
+<li><code class="code">o</code>: reads an unsigned octal integer (<code class="code">[0-7]+</code>).</li>
+<li><code class="code">s</code>: reads a string argument that spreads as much as possible, until the
+      following bounding condition holds:
+      <ul>
+<li>a whitespace has been found (see <a href="Scanf.html#space"><i>The space character in format strings</i></a>),</li>
+<li>a scanning indication (see scanning <a href="Scanf.html#indication"><i>Scanning indications in format strings</i></a>) has been
+         encountered,</li>
+<li>the end-of-input has been reached.</li>
+</ul>
+
+      Hence, this conversion always succeeds: it returns an empty
+      string if the bounding condition holds when the scan begins.</li>
+<li><code class="code">S</code>: reads a delimited string argument (delimiters and special
+      escaped characters follow the lexical conventions of OCaml).</li>
+<li><code class="code">c</code>: reads a single character. To test the current input character
+      without reading it, specify a null field width, i.e. use
+      specification <code class="code">%0c</code>. Raise <code class="code">Invalid_argument</code>, if the field width
+      specification is greater than 1.</li>
+<li><code class="code">C</code>: reads a single delimited character (delimiters and special
+      escaped characters follow the lexical conventions of OCaml).</li>
+<li><code class="code">f</code>, <code class="code">e</code>, <code class="code">E</code>, <code class="code">g</code>, <code class="code">G</code>: reads an optionally signed
+      floating-point number in decimal notation, in the style <code class="code">dddd.ddd
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;e/E+-dd</code>.</li>
+<li><code class="code">h</code>, <code class="code">H</code>: reads an optionally signed floating-point number
+      in hexadecimal notation.</li>
+<li><code class="code">F</code>: reads a floating point number according to the lexical
+      conventions of OCaml (hence the decimal point is mandatory if the
+      exponent part is not mentioned).</li>
+<li><code class="code">B</code>: reads a boolean argument (<code class="code">true</code> or <code class="code">false</code>).</li>
+<li><code class="code">b</code>: reads a boolean argument (for backward compatibility; do not use
+      in new programs).</li>
+<li><code class="code">ld</code>, <code class="code">li</code>, <code class="code">lu</code>, <code class="code">lx</code>, <code class="code">lX</code>, <code class="code">lo</code>: reads an <code class="code">int32</code> argument to
+      the format specified by the second letter for regular integers.</li>
+<li><code class="code">nd</code>, <code class="code">ni</code>, <code class="code">nu</code>, <code class="code">nx</code>, <code class="code">nX</code>, <code class="code">no</code>: reads a <code class="code">nativeint</code> argument to
+      the format specified by the second letter for regular integers.</li>
+<li><code class="code">Ld</code>, <code class="code">Li</code>, <code class="code">Lu</code>, <code class="code">Lx</code>, <code class="code">LX</code>, <code class="code">Lo</code>: reads an <code class="code">int64</code> argument to
+      the format specified by the second letter for regular integers.</li>
+<li><code class="code">[&nbsp;range&nbsp;]</code>: reads characters that matches one of the characters
+      mentioned in the range of characters <code class="code">range</code> (or not mentioned in
+      it, if the range starts with <code class="code">^</code>). Reads a <code class="code">string</code> that can be
+      empty, if the next input character does not match the range. The set of
+      characters from <code class="code">c1</code> to <code class="code">c2</code> (inclusively) is denoted by <code class="code">c1-c2</code>.
+      Hence, <code class="code">%[0-9]</code> returns a string representing a decimal number
+      or an empty string if no decimal digit is found; similarly,
+      <code class="code">%[0-9a-f]</code> returns a string of hexadecimal digits.
+      If a closing bracket appears in a range, it must occur as the
+      first character of the range (or just after the <code class="code">^</code> in case of
+      range negation); hence <code class="code">[]]</code> matches a <code class="code">]</code> character and
+      <code class="code">[^]]</code> matches any character that is not <code class="code">]</code>.
+      Use <code class="code">%%</code> and <code class="code">%@</code> to include a <code class="code">%</code> or a <code class="code">@</code> in a range.</li>
+<li><code class="code">r</code>: user-defined reader. Takes the next <code class="code">ri</code> formatted input
+      function and applies it to the scanning buffer <code class="code">ib</code> to read the
+      next argument. The input function <code class="code">ri</code> must therefore have type
+      <code class="code">Scanning.in_channel&nbsp;-&gt;&nbsp;'a</code> and the argument read has type <code class="code">'a</code>.</li>
+<li><code class="code">{&nbsp;fmt&nbsp;%}</code>: reads a format string argument. The format string
+      read must have the same type as the format string specification
+      <code class="code">fmt</code>. For instance, <code class="code">"%{&nbsp;%i&nbsp;%}"</code> reads any format string that
+      can read a value of type <code class="code">int</code>; hence, if <code class="code">s</code> is the string
+      <code class="code">"fmt:\"number&nbsp;is&nbsp;%u\""</code>, then <code class="code">Scanf.sscanf&nbsp;s&nbsp;"fmt:&nbsp;%{%i%}"</code>
+      succeeds and returns the format string <code class="code">"number&nbsp;is&nbsp;%u"</code>.</li>
+<li><code class="code">(&nbsp;fmt&nbsp;%)</code>: scanning sub-format substitution.
+      Reads a format string <code class="code">rf</code> in the input, then goes on scanning with
+      <code class="code">rf</code> instead of scanning with <code class="code">fmt</code>.
+      The format string <code class="code">rf</code> must have the same type as the format string
+      specification <code class="code">fmt</code> that it replaces.
+      For instance, <code class="code">"%(&nbsp;%i&nbsp;%)"</code> reads any format string that can read a value
+      of type <code class="code">int</code>.
+      The conversion returns the format string read <code class="code">rf</code>, and then a value
+      read using <code class="code">rf</code>.
+      Hence, if <code class="code">s</code> is the string <code class="code">"\"%4d\"1234.00"</code>, then
+      <code class="code">Scanf.sscanf&nbsp;s&nbsp;"%(%i%)"&nbsp;(fun&nbsp;fmt&nbsp;i&nbsp;-&gt;&nbsp;fmt,&nbsp;i)</code> evaluates to
+      <code class="code">("%4d",&nbsp;1234)</code>.
+      This behaviour is not mere format substitution, since the conversion
+      returns the format string read as additional argument. If you need
+      pure format substitution, use special flag <code class="code">_</code> to discard the
+      extraneous argument: conversion <code class="code">%_(&nbsp;fmt&nbsp;%)</code> reads a format string
+      <code class="code">rf</code> and then behaves the same as format string <code class="code">rf</code>.  Hence, if <code class="code">s</code> is
+      the string <code class="code">"\"%4d\"1234.00"</code>, then <code class="code">Scanf.sscanf&nbsp;s&nbsp;"%_(%i%)"</code> is
+      simply equivalent to <code class="code">Scanf.sscanf&nbsp;"1234.00"&nbsp;"%4d"</code>.</li>
+<li><code class="code">l</code>: returns the number of lines read so far.</li>
+<li><code class="code">n</code>: returns the number of characters read so far.</li>
+<li><code class="code">N</code> or <code class="code">L</code>: returns the number of tokens read so far.</li>
+<li><code class="code">!</code>: matches the end of input condition.</li>
+<li><code class="code">%</code>: matches one <code class="code">%</code> character in the input.</li>
+<li><code class="code">@</code>: matches one <code class="code">@</code> character in the input.</li>
+<li><code class="code">,</code>: does nothing.</li>
+</ul>
+<p>Following the <code class="code">%</code> character that introduces a conversion, there may be
+    the special flag <code class="code">_</code>: the conversion that follows occurs as usual,
+    but the resulting value is discarded.
+    For instance, if <code class="code">f</code> is the function <code class="code">fun&nbsp;i&nbsp;-&gt;&nbsp;i&nbsp;+&nbsp;1</code>, and <code class="code">s</code> is the
+    string <code class="code">"x&nbsp;=&nbsp;1"</code>, then <code class="code">Scanf.sscanf&nbsp;s&nbsp;"%_s&nbsp;=&nbsp;%i"&nbsp;f</code> returns <code class="code">2</code>.</p>
+
+<p>The field width is composed of an optional integer literal
+    indicating the maximal width of the token to read.
+    For instance, <code class="code">%6d</code> reads an integer, having at most 6 decimal digits;
+    <code class="code">%4f</code> reads a float with at most 4 characters; and <code class="code">%8[\000-\255]</code>
+    returns the next 8 characters (or all the characters still available,
+    if fewer than 8 characters are available in the input).</p>
+
+<p>Notes:</p>
+
+<ul>
+<li>as mentioned above, a <code class="code">%s</code> conversion always succeeds, even if there is
+      nothing to read in the input: in this case, it simply returns <code class="code">""</code>.</li>
+</ul>
+<ul>
+<li>in addition to the relevant digits, <code class="code">'_'</code> characters may appear
+    inside numbers (this is reminiscent to the usual OCaml lexical
+    conventions). If stricter scanning is desired, use the range
+    conversion facility instead of the number conversions.</li>
+</ul>
+<ul>
+<li>the <code class="code">scanf</code> facility is not intended for heavy duty lexical
+    analysis and parsing. If it appears not expressive enough for your
+    needs, several alternative exists: regular expressions (module
+    <a href="Str.html"><code class="code">Str</code></a>), stream parsers, <code class="code">ocamllex</code>-generated lexers,
+    <code class="code">ocamlyacc</code>-generated parsers.</li>
+</ul>
+<h3 id="indication">Scanning indications in format strings</h3><p>Scanning indications appear just after the string conversions <code class="code">%s</code>
+    and <code class="code">%[&nbsp;range&nbsp;]</code> to delimit the end of the token. A scanning
+    indication is introduced by a <code class="code">@</code> character, followed by some
+    plain character <code class="code">c</code>. It means that the string token should end
+    just before the next matching <code class="code">c</code> (which is skipped). If no <code class="code">c</code>
+    character is encountered, the string token spreads as much as
+    possible. For instance, <code class="code">"%s@\t"</code> reads a string up to the next
+    tab character or to the end of input. If a <code class="code">@</code> character appears
+    anywhere else in the format string, it is treated as a plain character.</p>
+
+<p>Note:</p>
+
+<ul>
+<li>As usual in format strings, <code class="code">%</code> and <code class="code">@</code> characters must be escaped
+    using <code class="code">%%</code> and <code class="code">%@</code>; this rule still holds within range specifications
+    and scanning indications.
+    For instance, format <code class="code">"%s@%%"</code> reads a string up to the next <code class="code">%</code>
+    character, and format <code class="code">"%s@%@"</code> reads a string up to the next <code class="code">@</code>.</li>
+<li>The scanning indications introduce slight differences in the syntax of
+    <a href="Scanf.html"><code class="code">Scanf</code></a> format strings, compared to those used for the <a href="Printf.html"><code class="code">Printf</code></a>
+    module. However, the scanning indications are similar to those used in
+    the <a href="Format.html"><code class="code">Format</code></a> module; hence, when producing formatted text to be scanned
+    by <a href="Scanf.html#VALbscanf"><code class="code">Scanf.bscanf</code></a>, it is wise to use printing functions from the
+    <a href="Format.html"><code class="code">Format</code></a> module (or, if you need to use functions from <a href="Printf.html"><code class="code">Printf</code></a>, banish
+    or carefully double check the format strings that contain <code class="code">'@'</code>
+    characters).</li>
+</ul>
+<h3 id="2_Exceptionsduringscanning">Exceptions during scanning</h3><p>Scanners may raise the following exceptions when the input cannot be read
+    according to the format string:</p>
+
+<ul>
+<li>Raise <a href="Scanf.html#EXCEPTIONScan_failure"><code class="code">Scanf.Scan_failure</code></a> if the input does not match the format.</li>
+</ul>
+<ul>
+<li>Raise <code class="code">Failure</code> if a conversion to a number is not possible.</li>
+</ul>
+<ul>
+<li>Raise <code class="code">End_of_file</code> if the end of input is encountered while some more
+      characters are needed to read the current conversion specification.</li>
+</ul>
+<ul>
+<li>Raise <code class="code">Invalid_argument</code> if the format string is invalid.</li>
+</ul>
+<p>Note:</p>
+
+<ul>
+<li>as a consequence, scanning a <code class="code">%s</code> conversion never raises exception
+    <code class="code">End_of_file</code>: if the end of input is reached the conversion succeeds and
+    simply returns the characters read so far, or <code class="code">""</code> if none were ever read.</li>
+</ul>
+<h2 id="1_Specialisedformattedinputfunctions">Specialised formatted input functions</h2>
+<pre id="VALsscanf">val sscanf : string -&gt; ('a, 'b, 'c, 'd) scanner</pre><div class="info ">
+<div class="info-desc">
+<p>Same as <a href="Scanf.html#VALbscanf"><code class="code">Scanf.bscanf</code></a>, but reads from the given string.</p>
+</div>
+</div>
+
+<pre id="VALsscanf_opt">val sscanf_opt : string -&gt; ('a, 'b, 'c, 'd) scanner_opt</pre><div class="info ">
+<div class="info-desc">
+<p>Same as <a href="Scanf.html#VALsscanf"><code class="code">Scanf.sscanf</code></a>, but returns <code class="code">None</code> in case of scanning failure.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 5.0</li>
+</ul>
+</div>
+
+<pre id="VALscanf">val scanf : ('a, 'b, 'c, 'd) scanner</pre><div class="info ">
+<div class="info-desc">
+<p>Same as <a href="Scanf.html#VALbscanf"><code class="code">Scanf.bscanf</code></a>, but reads from the predefined formatted input
+    channel <a href="Scanf.Scanning.html#VALstdin"><code class="code">Scanf.Scanning.stdin</code></a> that is connected to <a href="Stdlib.html#VALstdin"><code class="code">stdin</code></a>.</p>
+</div>
+</div>
+
+<pre id="VALscanf_opt">val scanf_opt : ('a, 'b, 'c, 'd) scanner_opt</pre><div class="info ">
+<div class="info-desc">
+<p>Same as <a href="Scanf.html#VALscanf"><code class="code">Scanf.scanf</code></a>, but returns <code class="code">None</code> in case of scanning failure.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 5.0</li>
+</ul>
+</div>
+
+<pre id="VALkscanf">val kscanf : Scanning.in_channel -&gt;       (Scanning.in_channel -&gt; exn -&gt; 'd) -&gt; ('a, 'b, 'c, 'd) scanner</pre><div class="info ">
+<div class="info-desc">
+<p>Same as <a href="Scanf.html#VALbscanf"><code class="code">Scanf.bscanf</code></a>, but takes an additional function argument
+    <code class="code">ef</code> that is called in case of error: if the scanning process or
+    some conversion fails, the scanning function aborts and calls the
+    error handling function <code class="code">ef</code> with the formatted input channel and the
+    exception that aborted the scanning process as arguments.</p>
+</div>
+</div>
+
+<pre id="VALksscanf">val ksscanf : string -&gt;       (Scanning.in_channel -&gt; exn -&gt; 'd) -&gt; ('a, 'b, 'c, 'd) scanner</pre><div class="info ">
+<div class="info-desc">
+<p>Same as <a href="Scanf.html#VALkscanf"><code class="code">Scanf.kscanf</code></a> but reads from the given string.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.02.0</li>
+</ul>
+</div>
+<h2 id="1_Readingformatstringsfrominput">Reading format strings from input</h2>
+<pre id="VALbscanf_format">val bscanf_format : Scanning.in_channel -&gt;       ('a, 'b, 'c, 'd, 'e, 'f) format6 -&gt;       (('a, 'b, 'c, 'd, 'e, 'f) format6 -&gt; 'g) -&gt; 'g</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">bscanf_format&nbsp;ic&nbsp;fmt&nbsp;f</code> reads a format string token from the formatted
+    input channel <code class="code">ic</code>, according to the given format string <code class="code">fmt</code>, and
+    applies <code class="code">f</code> to the resulting format string value.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 3.09.0</li>
+<li><b>Raises</b> <code>Scan_failure</code> if the format string value read does not have the
+    same type as <code class="code">fmt</code>.</li>
+</ul>
+</div>
+
+<pre id="VALsscanf_format">val sscanf_format : string -&gt;       ('a, 'b, 'c, 'd, 'e, 'f) format6 -&gt;       (('a, 'b, 'c, 'd, 'e, 'f) format6 -&gt; 'g) -&gt; 'g</pre><div class="info ">
+<div class="info-desc">
+<p>Same as <a href="Scanf.html#VALbscanf_format"><code class="code">Scanf.bscanf_format</code></a>, but reads from the given string.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 3.09.0</li>
+</ul>
+</div>
+
+<pre id="VALformat_from_string">val format_from_string : string -&gt;       ('a, 'b, 'c, 'd, 'e, 'f) format6 -&gt;       ('a, 'b, 'c, 'd, 'e, 'f) format6</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">format_from_string&nbsp;s&nbsp;fmt</code> converts a string argument to a format string,
+    according to the given format string <code class="code">fmt</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 3.10.0</li>
+<li><b>Raises</b> <code>Scan_failure</code> if <code class="code">s</code>, considered as a format string, does not
+    have the same type as <code class="code">fmt</code>.</li>
+</ul>
+</div>
+
+<pre id="VALunescaped">val unescaped : string -&gt; string</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">unescaped&nbsp;s</code> return a copy of <code class="code">s</code> with escape sequences (according to
+    the lexical conventions of OCaml) replaced by their corresponding special
+    characters.
+    More precisely, <code class="code">Scanf.unescaped</code> has the following property:
+    for all string <code class="code">s</code>, <code class="code">Scanf.unescaped&nbsp;(String.escaped&nbsp;s)&nbsp;=&nbsp;s</code>.</p>
+
+<p>Always return a copy of the argument, even if there is no escape sequence
+    in the argument.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.00.0</li>
+<li><b>Raises</b> <code>Scan_failure</code> if <code class="code">s</code> is not properly escaped (i.e. <code class="code">s</code> has invalid
+    escape sequences or special characters that are not properly escaped).
+    For instance, <code class="code">Scanf.unescaped&nbsp;"\""</code> will fail.</li>
+</ul>
+</div>
+
+</div></div><span><script src="/js/redirectBlog.js"></script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+                document.addEventListener('keyup', function(e) {
+                  if (e.target !== document.body) {
+                    return;
+                  }
+                  // keyCode for '/' (slash)
+                  if (e.keyCode === 191) {
+                    const search = document.getElementById('search_input_react');
+                    search && search.focus();
+                  }
+                });
+              </script><script>
+              var search = docsearch({
+                
+                apiKey: '966d1e412f67114a07dc0afe44b19b53',
+                indexName: 'reason',
+                inputSelector: '#search_input_react',
+                algoliaOptions: {"facetFilters":["lang:en"]}
+              });
+            </script></body></html>

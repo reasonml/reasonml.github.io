@@ -11,104 +11,180 @@
           }
         });
       </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/facebook/reason" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div><link rel="stylesheet" href="/css/main.css"><div class="ocamldoc">
-<div class="navbar"><a class="pre" href="Queue.html" title="Queue">Previous</a>
-&#xA0;<a class="up" href="index.html" title="Index">Up</a>
-&#xA0;<a class="post" href="Scanf.html" title="Scanf">Next</a>
-</div>
 <h1>Module <a href="type_Random.html">Random</a></h1>
 
-<pre><span class="keyword">module</span> Random: sig .. end</pre><div class="info module top">
-Pseudo-random number generators (PRNG).<br>
+<pre id="MODULERandom"><span class="keyword">module</span> Random: sig .. end</pre><div class="info module top">
+<div class="info-desc">
+<p>Pseudo-random number generators (PRNG).</p>
+
+<p>With multiple domains, each domain has its own generator that evolves
+    independently of the generators of other domains.  When a domain is
+    created, its generator is initialized by splitting the state
+    of the generator associated with the parent domain.</p>
+
+<p>In contrast, all threads within a domain share the same domain-local
+    generator.  Independent generators can be created with the <a href="Random.html#VALsplit"><code class="code">Random.split</code></a>
+    function and used with the functions from the <a href="Random.State.html"><code class="code">Random.State</code></a> module.</p>
+</div>
 </div>
 <hr width="100%">
-<br>
-<h6 id="6_Basicfunctions">Basic functions</h6><br>
-
-<pre id="VALinit"><span class="keyword">let</span> init: int =&gt; unit;
-</pre><div class="info ">
-Initialize the generator, using the argument as a seed.
-     The same seed will always yield the same sequence of numbers.<br>
+<h2 id="1_Basicfunctions">Basic functions</h2>
+<pre id="VALinit">val init : int -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p>Initialize the domain-local generator, using the argument as a seed.
+    The same seed will always yield the same sequence of numbers.</p>
+</div>
 </div>
 
-<pre id="VALfull_init"><span class="keyword">let</span> full_init: array(int) =&gt; unit;
-</pre><div class="info ">
-Same as <a href="Random.html#VALinit"><code class="code">Random.init</code></a> but takes more data as seed.<br>
+<pre id="VALfull_init">val full_init : int array -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p>Same as <a href="Random.html#VALinit"><code class="code">Random.init</code></a> but takes more data as seed.</p>
+</div>
 </div>
 
-<pre id="VALself_init"><span class="keyword">let</span> self_init: unit =&gt; unit;
-</pre><div class="info ">
-Initialize the generator with a random seed chosen
-   in a system-dependent way.  If <code class="code">/dev/urandom</code> is available on
-   the host machine, it is used to provide a highly random initial
-   seed.  Otherwise, a less random seed is computed from system
-   parameters (current time, process IDs).<br>
+<pre id="VALself_init">val self_init : unit -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p>Initialize the domain-local generator with a random seed chosen
+    in a system-dependent way.  If <code class="code">/dev/urandom</code> is available on the host
+    machine, it is used to provide a highly random initial seed.  Otherwise, a
+    less random seed is computed from system parameters (current time, process
+    IDs, domain-local state).</p>
+</div>
 </div>
 
-<pre id="VALbits"><span class="keyword">let</span> bits: unit =&gt; int;
-</pre><div class="info ">
-Return 30 random bits in a nonnegative integer.<br>
-<b>Before 3.12.0 </b> used a different algorithm (affects all the following
-                   functions)<br>
+<pre id="VALbits">val bits : unit -&gt; int</pre><div class="info ">
+<div class="info-desc">
+<p>Return 30 random bits in a nonnegative integer.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Before 5.0.0 </b> used a different algorithm
+                   (affects all the following functions)</li>
+</ul>
 </div>
 
-<pre id="VALint"><span class="keyword">let</span> int: int =&gt; int;
-</pre><div class="info ">
-<code class="code">Random.int bound</code> returns a random integer between 0 (inclusive)
+<pre id="VALint">val int : int -&gt; int</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">Random.int&nbsp;bound</code> returns a random integer between 0 (inclusive)
      and <code class="code">bound</code> (exclusive).  <code class="code">bound</code> must be greater than 0 and less
-     than 2<sup class="superscript">30</sup>.<br>
+     than 2<sup class="superscript">30</sup>.</p>
+</div>
 </div>
 
-<pre id="VALint32"><span class="keyword">let</span> int32: Int32.t =&gt; Int32.t;
-</pre><div class="info ">
-<code class="code">Random.int32 bound</code> returns a random integer between 0 (inclusive)
-     and <code class="code">bound</code> (exclusive).  <code class="code">bound</code> must be greater than 0.<br>
+<pre id="VALfull_int">val full_int : int -&gt; int</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">Random.full_int&nbsp;bound</code> returns a random integer between 0 (inclusive)
+     and <code class="code">bound</code> (exclusive). <code class="code">bound</code> may be any positive integer.</p>
+
+<p>If <code class="code">bound</code> is less than 2<sup class="superscript">30</sup>, <code class="code">Random.full_int&nbsp;bound</code> is equal to
+     <a href="Random.html#VALint"><code class="code">Random.int</code></a><code class="code">&nbsp;bound</code>. If <code class="code">bound</code> is greater than 2<sup class="superscript">30</sup> (on 64-bit systems
+     or non-standard environments, such as JavaScript), <code class="code">Random.full_int</code>
+     returns a value, where <a href="Random.html#VALint"><code class="code">Random.int</code></a> raises <a href="Stdlib.html#EXCEPTIONInvalid_argument"><code class="code">Invalid_argument</code></a>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.13.0</li>
+</ul>
 </div>
 
-<pre id="VALnativeint"><span class="keyword">let</span> nativeint: Nativeint.t =&gt; Nativeint.t;
-</pre><div class="info ">
-<code class="code">Random.nativeint bound</code> returns a random integer between 0 (inclusive)
-     and <code class="code">bound</code> (exclusive).  <code class="code">bound</code> must be greater than 0.<br>
+<pre id="VALint32">val int32 : Int32.t -&gt; Int32.t</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">Random.int32&nbsp;bound</code> returns a random integer between 0 (inclusive)
+     and <code class="code">bound</code> (exclusive).  <code class="code">bound</code> must be greater than 0.</p>
+</div>
 </div>
 
-<pre id="VALint64"><span class="keyword">let</span> int64: Int64.t =&gt; Int64.t;
-</pre><div class="info ">
-<code class="code">Random.int64 bound</code> returns a random integer between 0 (inclusive)
-     and <code class="code">bound</code> (exclusive).  <code class="code">bound</code> must be greater than 0.<br>
+<pre id="VALnativeint">val nativeint : Nativeint.t -&gt; Nativeint.t</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">Random.nativeint&nbsp;bound</code> returns a random integer between 0 (inclusive)
+     and <code class="code">bound</code> (exclusive).  <code class="code">bound</code> must be greater than 0.</p>
+</div>
 </div>
 
-<pre id="VALfloat"><span class="keyword">let</span> float: float =&gt; float;
-</pre><div class="info ">
-<code class="code">Random.float bound</code> returns a random floating-point number
+<pre id="VALint64">val int64 : Int64.t -&gt; Int64.t</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">Random.int64&nbsp;bound</code> returns a random integer between 0 (inclusive)
+     and <code class="code">bound</code> (exclusive).  <code class="code">bound</code> must be greater than 0.</p>
+</div>
+</div>
+
+<pre id="VALfloat">val float : float -&gt; float</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">Random.float&nbsp;bound</code> returns a random floating-point number
    between 0 and <code class="code">bound</code> (inclusive).  If <code class="code">bound</code> is
    negative, the result is negative or zero.  If <code class="code">bound</code> is 0,
-   the result is 0.<br>
+   the result is 0.</p>
+</div>
 </div>
 
-<pre id="VALbool"><span class="keyword">let</span> bool: unit =&gt; bool;
-</pre><div class="info ">
-<code class="code">Random.bool ()</code> returns <code class="code">true</code> or <code class="code">false</code> with probability 0.5 each.<br>
+<pre id="VALbool">val bool : unit -&gt; bool</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">Random.bool&nbsp;()</code> returns <code class="code">true</code> or <code class="code">false</code> with probability 0.5 each.</p>
 </div>
-<br>
-<h6 id="6_Advancedfunctions">Advanced functions</h6><br>
-<br>
-<h6 id="6_Advancedfunctions">Advanced functions</h6><br>
-<br>
-The functions from module <code class="code">State</code> manipulate the current state
+</div>
+
+<pre id="VALbits32">val bits32 : unit -&gt; Int32.t</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">Random.bits32&nbsp;()</code> returns 32 random bits as an integer between
+    <a href="Int32.html#VALmin_int"><code class="code">Int32.min_int</code></a> and <a href="Int32.html#VALmax_int"><code class="code">Int32.max_int</code></a>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.14.0</li>
+</ul>
+</div>
+
+<pre id="VALbits64">val bits64 : unit -&gt; Int64.t</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">Random.bits64&nbsp;()</code> returns 64 random bits as an integer between
+    <a href="Int64.html#VALmin_int"><code class="code">Int64.min_int</code></a> and <a href="Int64.html#VALmax_int"><code class="code">Int64.max_int</code></a>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.14.0</li>
+</ul>
+</div>
+
+<pre id="VALnativebits">val nativebits : unit -&gt; Nativeint.t</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">Random.nativebits&nbsp;()</code> returns 32 or 64 random bits (depending on
+    the bit width of the platform) as an integer between
+    <a href="Nativeint.html#VALmin_int"><code class="code">Nativeint.min_int</code></a> and <a href="Nativeint.html#VALmax_int"><code class="code">Nativeint.max_int</code></a>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.14.0</li>
+</ul>
+</div>
+<h2 id="1_Advancedfunctions">Advanced functions</h2><p>The functions from module <a href="Random.State.html"><code class="code">Random.State</code></a> manipulate the current state
     of the random generator explicitly.
     This allows using one or several deterministic PRNGs,
     even in a multi-threaded program, without interference from
-    other parts of the program.<br>
+    other parts of the program.</p>
 
-<pre><span class="keyword">module</span> State: sig .. end</pre>
-<pre id="VALget_state"><span class="keyword">let</span> get_state: unit =&gt; State.t;
-</pre><div class="info ">
-Return the current state of the generator used by the basic functions.<br>
+<pre id="MODULEState"><span class="keyword">module</span> State: sig .. end</pre>
+<pre id="VALget_state">val get_state : unit -&gt; State.t</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">get_state()</code> returns a fresh copy of the current state of the
+    domain-local generator (which is used by the basic functions).</p>
+</div>
 </div>
 
-<pre id="VALset_state"><span class="keyword">let</span> set_state: State.t =&gt; unit;
-</pre><div class="info ">
-Set the state of the generator used by the basic functions.<br>
+<pre id="VALset_state">val set_state : State.t -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">set_state&nbsp;s</code> updates the current state of the domain-local
+    generator (which is used by the basic functions) by copying
+    the state <code class="code">s</code> into it.</p>
 </div>
+</div>
+
+<pre id="VALsplit">val split : unit -&gt; State.t</pre><div class="info ">
+<div class="info-desc">
+<p>Draw a fresh PRNG state from the current state of the domain-local
+    generator used by the default functions.
+    (The state of the domain-local generator is modified.)
+    See <a href="Random.State.html#VALsplit"><code class="code">Random.State.split</code></a>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 5.0.0</li>
+</ul>
+</div>
+
 </div></div><span><script src="/js/redirectBlog.js"></script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
                 document.addEventListener('keyup', function(e) {
                   if (e.target !== document.body) {

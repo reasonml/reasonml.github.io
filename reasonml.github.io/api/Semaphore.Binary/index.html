@@ -1,0 +1,78 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Reason · Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems.</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Reason · Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io/"/><meta property="og:description" content="Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/icon_50.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io/blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io/blog/feed.xml" title="Reason Blog RSS Feed"/><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/en"><img class="logo" src="/img/dummy.svg" alt="Reason"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/docs/en/what-and-why" target="_self">Docs</a></li><li class=""><a href="/en/try" target="_self">Try</a></li><li class=""><a href="/api/index" target="_self">API</a></li><li class=""><a href="/docs/en/community" target="_self">Community</a></li><li class=""><a href="/blog/" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg" alt="Languages icon"/>English</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/ja/Semaphore.Binary">日本語</a></li><li><a href="/de/Semaphore.Binary">Deutsch</a></li><li><a href="/es-ES/Semaphore.Binary">Español</a></li><li><a href="/fr/Semaphore.Binary">Français</a></li><li><a href="/ko/Semaphore.Binary">한국어</a></li><li><a href="/pt-BR/Semaphore.Binary">Português (Brasil)</a></li><li><a href="/ru/Semaphore.Binary">Русский</a></li><li><a href="/uk/Semaphore.Binary">Українська</a></li><li><a href="/zh-CN/Semaphore.Binary">中文</a></li><li><a href="/zh-TW/Semaphore.Binary">繁體中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank" rel="noreferrer noopener">Help Translate</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/facebook/reason" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div><link rel="stylesheet" href="/css/main.css"><div class="ocamldoc">
+<h1>Module <a href="type_Semaphore.Binary.html">Semaphore.Binary</a></h1>
+
+<pre id="MODULEBinary"><span class="keyword">module</span> Binary: sig .. end</pre><hr width="100%">
+
+<pre id="TYPEt"><span class="keyword">type</span> t </pre>
+<div class="info ">
+<div class="info-desc">
+<p>The type of binary semaphores.</p>
+</div>
+</div>
+
+
+<pre id="VALmake">val make : bool -&gt; t</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">make&nbsp;b</code> returns a new binary semaphore.
+    If <code class="code">b</code> is <code class="code">true</code>, the initial value of the semaphore is 1, meaning
+    "available".  If <code class="code">b</code> is <code class="code">false</code>, the initial value of the
+    semaphore is 0, meaning "unavailable".</p>
+</div>
+</div>
+
+<pre id="VALrelease">val release : t -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">release&nbsp;s</code> sets the value of semaphore <code class="code">s</code> to 1, putting it in the
+    "available" state.  If other threads are waiting on <code class="code">s</code>, one of them is
+    restarted.</p>
+</div>
+</div>
+
+<pre id="VALacquire">val acquire : t -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">acquire&nbsp;s</code> blocks the calling thread until the semaphore <code class="code">s</code>
+    has value 1 (is available), then atomically sets it to 0
+    and returns.</p>
+</div>
+</div>
+
+<pre id="VALtry_acquire">val try_acquire : t -&gt; bool</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">try_acquire&nbsp;s</code> immediately returns <code class="code">false</code> if the semaphore <code class="code">s</code>
+    has value 0.  If <code class="code">s</code> has value 1, its value is atomically set to 0
+    and <code class="code">try_acquire&nbsp;s</code> returns <code class="code">true</code>.</p>
+</div>
+</div>
+
+</div></div><span><script src="/js/redirectBlog.js"></script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+                document.addEventListener('keyup', function(e) {
+                  if (e.target !== document.body) {
+                    return;
+                  }
+                  // keyCode for '/' (slash)
+                  if (e.keyCode === 191) {
+                    const search = document.getElementById('search_input_react');
+                    search && search.focus();
+                  }
+                });
+              </script><script>
+              var search = docsearch({
+                
+                apiKey: '966d1e412f67114a07dc0afe44b19b53',
+                indexName: 'reason',
+                inputSelector: '#search_input_react',
+                algoliaOptions: {"facetFilters":["lang:en"]}
+              });
+            </script></body></html>

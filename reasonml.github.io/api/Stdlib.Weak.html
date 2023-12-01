@@ -1,0 +1,182 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Reason · Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems.</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Reason · Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io/"/><meta property="og:description" content="Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/icon_50.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io/blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io/blog/feed.xml" title="Reason Blog RSS Feed"/><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/en"><img class="logo" src="/img/dummy.svg" alt="Reason"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/docs/en/what-and-why" target="_self">Docs</a></li><li class=""><a href="/en/try" target="_self">Try</a></li><li class=""><a href="/api/index" target="_self">API</a></li><li class=""><a href="/docs/en/community" target="_self">Community</a></li><li class=""><a href="/blog/" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg" alt="Languages icon"/>English</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/ja/Stdlib.Weak">日本語</a></li><li><a href="/de/Stdlib.Weak">Deutsch</a></li><li><a href="/es-ES/Stdlib.Weak">Español</a></li><li><a href="/fr/Stdlib.Weak">Français</a></li><li><a href="/ko/Stdlib.Weak">한국어</a></li><li><a href="/pt-BR/Stdlib.Weak">Português (Brasil)</a></li><li><a href="/ru/Stdlib.Weak">Русский</a></li><li><a href="/uk/Stdlib.Weak">Українська</a></li><li><a href="/zh-CN/Stdlib.Weak">中文</a></li><li><a href="/zh-TW/Stdlib.Weak">繁體中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank" rel="noreferrer noopener">Help Translate</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/facebook/reason" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div><link rel="stylesheet" href="/css/main.css"><div class="ocamldoc">
+<h1>Module <a href="type_Stdlib.Weak.html">Stdlib.Weak</a></h1>
+
+<pre id="MODULEWeak"><span class="keyword">module</span> Weak: Weak</pre><hr width="100%">
+<h2 id="1_Lowlevelfunctions">Low-level functions</h2>
+<pre id="TYPEt"><span class="keyword">type</span> 'a t </pre>
+<div class="info ">
+<div class="info-desc">
+<p>The type of arrays of weak pointers (weak arrays).  A weak
+   pointer is a value that the garbage collector may erase whenever
+   the value is not used any more (through normal pointers) by the
+   program.  Note that finalisation functions are run before the
+   weak pointers are erased, because the finalisation functions
+   can make values alive again (before 4.03 the finalisation
+   functions were run after).</p>
+
+<p>A weak pointer is said to be full if it points to a value,
+   empty if the value was erased by the GC.</p>
+
+<p>Notes:</p>
+<ul>
+<li>Integers are not allocated and cannot be stored in weak arrays.</li>
+<li>Weak arrays cannot be marshaled using <a href="Stdlib.html#VALoutput_value"><code class="code">output_value</code></a>
+     nor the functions of the <a href="Marshal.html"><code class="code">Marshal</code></a> module.</li>
+</ul>
+</div>
+</div>
+
+
+<pre id="VALcreate">val create : int -&gt; 'a t</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">Weak.create&nbsp;n</code> returns a new weak array of length <code class="code">n</code>.
+   All the pointers are initially empty.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Raises</b> <code>Invalid_argument</code> if <code class="code">n</code> is not comprised between zero and
+   <a href="Obj.Ephemeron.html#VALmax_ephe_length"><code class="code">Obj.Ephemeron.max_ephe_length</code></a> (limits included).</li>
+</ul>
+</div>
+
+<pre id="VALlength">val length : 'a t -&gt; int</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">Weak.length&nbsp;ar</code> returns the length (number of elements) of
+   <code class="code">ar</code>.</p>
+</div>
+</div>
+
+<pre id="VALset">val set : 'a t -&gt; int -&gt; 'a option -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">Weak.set&nbsp;ar&nbsp;n&nbsp;(Some&nbsp;el)</code> sets the <code class="code">n</code>th cell of <code class="code">ar</code> to be a
+   (full) pointer to <code class="code">el</code>; <code class="code">Weak.set&nbsp;ar&nbsp;n&nbsp;None</code> sets the <code class="code">n</code>th
+   cell of <code class="code">ar</code> to empty.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Raises</b> <code>Invalid_argument</code> if <code class="code">n</code> is not in the range
+   0 to <a href="Weak.html#VALlength"><code class="code">Weak.length</code></a><code class="code">&nbsp;ar&nbsp;-&nbsp;1</code>.</li>
+</ul>
+</div>
+
+<pre id="VALget">val get : 'a t -&gt; int -&gt; 'a option</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">Weak.get&nbsp;ar&nbsp;n</code> returns None if the <code class="code">n</code>th cell of <code class="code">ar</code> is
+   empty, <code class="code">Some&nbsp;x</code> (where <code class="code">x</code> is the value) if it is full.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Raises</b> <code>Invalid_argument</code> if <code class="code">n</code> is not in the range
+   0 to <a href="Weak.html#VALlength"><code class="code">Weak.length</code></a><code class="code">&nbsp;ar&nbsp;-&nbsp;1</code>.</li>
+</ul>
+</div>
+
+<pre id="VALget_copy">val get_copy : 'a t -&gt; int -&gt; 'a option</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">Weak.get_copy&nbsp;ar&nbsp;n</code> returns None if the <code class="code">n</code>th cell of <code class="code">ar</code> is
+   empty, <code class="code">Some&nbsp;x</code> (where <code class="code">x</code> is a (shallow) copy of the value) if
+   it is full.
+   In addition to pitfalls with mutable values, the interesting
+   difference with <code class="code">get</code> is that <code class="code">get_copy</code> does not prevent
+   the incremental GC from erasing the value in its current cycle
+   (<code class="code">get</code> may delay the erasure to the next GC cycle).</p>
+</div>
+<ul class="info-attributes">
+<li><b>Raises</b> <code>Invalid_argument</code> if <code class="code">n</code> is not in the range
+   0 to <a href="Weak.html#VALlength"><code class="code">Weak.length</code></a><code class="code">&nbsp;ar&nbsp;-&nbsp;1</code>.
+
+   If the element is a custom block it is not copied.</li>
+</ul>
+</div>
+
+<pre id="VALcheck">val check : 'a t -&gt; int -&gt; bool</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">Weak.check&nbsp;ar&nbsp;n</code> returns <code class="code">true</code> if the <code class="code">n</code>th cell of <code class="code">ar</code> is
+   full, <code class="code">false</code> if it is empty.  Note that even if <code class="code">Weak.check&nbsp;ar&nbsp;n</code>
+   returns <code class="code">true</code>, a subsequent <a href="Weak.html#VALget"><code class="code">Weak.get</code></a><code class="code">&nbsp;ar&nbsp;n</code> can return <code class="code">None</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Raises</b> <code>Invalid_argument</code> if <code class="code">n</code> is not in the range
+   0 to <a href="Weak.html#VALlength"><code class="code">Weak.length</code></a><code class="code">&nbsp;ar&nbsp;-&nbsp;1</code>.</li>
+</ul>
+</div>
+
+<pre id="VALfill">val fill : 'a t -&gt; int -&gt; int -&gt; 'a option -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">Weak.fill&nbsp;ar&nbsp;ofs&nbsp;len&nbsp;el</code> sets to <code class="code">el</code> all pointers of <code class="code">ar</code> from
+   <code class="code">ofs</code> to <code class="code">ofs&nbsp;+&nbsp;len&nbsp;-&nbsp;1</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Raises</b> <code>Invalid_argument</code> if <code class="code">ofs</code> and <code class="code">len</code> do not designate a valid subarray of <code class="code">ar</code>.</li>
+</ul>
+</div>
+
+<pre id="VALblit">val blit : 'a t -&gt; int -&gt; 'a t -&gt; int -&gt; int -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">Weak.blit&nbsp;ar1&nbsp;off1&nbsp;ar2&nbsp;off2&nbsp;len</code> copies <code class="code">len</code> weak pointers
+   from <code class="code">ar1</code> (starting at <code class="code">off1</code>) to <code class="code">ar2</code> (starting at <code class="code">off2</code>).
+   It works correctly even if <code class="code">ar1</code> and <code class="code">ar2</code> are the same.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Raises</b> <code>Invalid_argument</code> if <code class="code">off1</code> and <code class="code">len</code> do
+   not designate a valid subarray of <code class="code">ar1</code>, or if <code class="code">off2</code> and <code class="code">len</code>
+   do not designate a valid subarray of <code class="code">ar2</code>.</li>
+</ul>
+</div>
+<h2 id="1_Weakhashsets">Weak hash sets</h2><p>A weak hash set is a hashed set of values.  Each value may
+    magically disappear from the set when it is not used by the
+    rest of the program any more.  This is normally used to share
+    data structures without inducing memory leaks.
+    Weak hash sets are defined on values from a <a href="Hashtbl.HashedType.html"><code class="code">Hashtbl.HashedType</code></a>
+    module; the <code class="code">equal</code> relation and <code class="code">hash</code> function are taken from that
+    module.  We will say that <code class="code">v</code> is an instance of <code class="code">x</code> if <code class="code">equal&nbsp;x&nbsp;v</code>
+    is <code class="code">true</code>.</p>
+
+<p>The <code class="code">equal</code> relation must be able to work on a shallow copy of
+    the values and give the same result as with the values themselves.</p>
+<p><b>Unsynchronized accesses</b></p>
+
+<p>Unsynchronized accesses to weak hash sets are a programming error.
+    Unsynchronized accesses to a weak hash set may lead to an invalid weak hash
+    set state. Thus, concurrent accesses to weak hash sets must be synchronized
+    (for instance with a <a href="Mutex.html#TYPEt"><code class="code">Mutex.t</code></a>).</p>
+
+<pre id="MODULETYPES"><span class="keyword">module</span> type S = sig .. end</pre><div class="info">
+<p>The output signature of the functor <a href="Weak.Make.html"><code class="code">Weak.Make</code></a>.</p>
+
+</div>
+
+<pre id="MODULEMake"><span class="keyword">module</span> Make: functor&nbsp;(H&nbsp;:&nbsp;Hashtbl.HashedType)&nbsp;-&gt;&nbsp;S  with type data = H.t</pre><div class="info">
+<p>Functor building an implementation of the weak hash set structure.</p>
+
+</div>
+
+</div></div><span><script src="/js/redirectBlog.js"></script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+                document.addEventListener('keyup', function(e) {
+                  if (e.target !== document.body) {
+                    return;
+                  }
+                  // keyCode for '/' (slash)
+                  if (e.keyCode === 191) {
+                    const search = document.getElementById('search_input_react');
+                    search && search.focus();
+                  }
+                });
+              </script><script>
+              var search = docsearch({
+                
+                apiKey: '966d1e412f67114a07dc0afe44b19b53',
+                indexName: 'reason',
+                inputSelector: '#search_input_react',
+                algoliaOptions: {"facetFilters":["lang:en"]}
+              });
+            </script></body></html>

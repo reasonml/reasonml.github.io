@@ -1,0 +1,56 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Reason · Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems.</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Reason · Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io/"/><meta property="og:description" content="Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/icon_50.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io/blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io/blog/feed.xml" title="Reason Blog RSS Feed"/><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/en"><img class="logo" src="/img/dummy.svg" alt="Reason"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/docs/en/what-and-why" target="_self">Docs</a></li><li class=""><a href="/en/try" target="_self">Try</a></li><li class=""><a href="/api/index" target="_self">API</a></li><li class=""><a href="/docs/en/community" target="_self">Community</a></li><li class=""><a href="/blog/" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg" alt="Languages icon"/>English</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/ja/type_UnixLabels.LargeFile">日本語</a></li><li><a href="/de/type_UnixLabels.LargeFile">Deutsch</a></li><li><a href="/es-ES/type_UnixLabels.LargeFile">Español</a></li><li><a href="/fr/type_UnixLabels.LargeFile">Français</a></li><li><a href="/ko/type_UnixLabels.LargeFile">한국어</a></li><li><a href="/pt-BR/type_UnixLabels.LargeFile">Português (Brasil)</a></li><li><a href="/ru/type_UnixLabels.LargeFile">Русский</a></li><li><a href="/uk/type_UnixLabels.LargeFile">Українська</a></li><li><a href="/zh-CN/type_UnixLabels.LargeFile">中文</a></li><li><a href="/zh-TW/type_UnixLabels.LargeFile">繁體中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank" rel="noreferrer noopener">Help Translate</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/facebook/reason" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div><link rel="stylesheet" href="/css/main.css"><div class="ocamldoc"><pre>sig
+
+&nbsp;&nbsp;val&nbsp;lseek&nbsp;:
+&nbsp;&nbsp;&nbsp;&nbsp;UnixLabels.file_descr&nbsp;-&gt;&nbsp;int64&nbsp;-&gt;&nbsp;mode:UnixLabels.seek_command&nbsp;-&gt;&nbsp;int64
+&nbsp;&nbsp;val&nbsp;truncate&nbsp;:&nbsp;string&nbsp;-&gt;&nbsp;len:int64&nbsp;-&gt;&nbsp;unit
+&nbsp;&nbsp;val&nbsp;ftruncate&nbsp;:&nbsp;UnixLabels.file_descr&nbsp;-&gt;&nbsp;len:int64&nbsp;-&gt;&nbsp;unit
+&nbsp;&nbsp;type&nbsp;stats&nbsp;=
+&nbsp;&nbsp;&nbsp;&nbsp;Unix.LargeFile.stats&nbsp;=&nbsp;{
+&nbsp;&nbsp;&nbsp;&nbsp;st_dev&nbsp;:&nbsp;int;
+&nbsp;&nbsp;&nbsp;&nbsp;st_ino&nbsp;:&nbsp;int;
+&nbsp;&nbsp;&nbsp;&nbsp;st_kind&nbsp;:&nbsp;UnixLabels.file_kind;
+&nbsp;&nbsp;&nbsp;&nbsp;st_perm&nbsp;:&nbsp;UnixLabels.file_perm;
+&nbsp;&nbsp;&nbsp;&nbsp;st_nlink&nbsp;:&nbsp;int;
+&nbsp;&nbsp;&nbsp;&nbsp;st_uid&nbsp;:&nbsp;int;
+&nbsp;&nbsp;&nbsp;&nbsp;st_gid&nbsp;:&nbsp;int;
+&nbsp;&nbsp;&nbsp;&nbsp;st_rdev&nbsp;:&nbsp;int;
+&nbsp;&nbsp;&nbsp;&nbsp;st_size&nbsp;:&nbsp;int64;
+&nbsp;&nbsp;&nbsp;&nbsp;st_atime&nbsp;:&nbsp;float;
+&nbsp;&nbsp;&nbsp;&nbsp;st_mtime&nbsp;:&nbsp;float;
+&nbsp;&nbsp;&nbsp;&nbsp;st_ctime&nbsp;:&nbsp;float;
+&nbsp;&nbsp;}
+&nbsp;&nbsp;val&nbsp;stat&nbsp;:&nbsp;string&nbsp;-&gt;&nbsp;UnixLabels.LargeFile.stats
+&nbsp;&nbsp;val&nbsp;lstat&nbsp;:&nbsp;string&nbsp;-&gt;&nbsp;UnixLabels.LargeFile.stats
+&nbsp;&nbsp;val&nbsp;fstat&nbsp;:&nbsp;UnixLabels.file_descr&nbsp;-&gt;&nbsp;UnixLabels.LargeFile.stats
+end</pre></div></div><span><script src="/js/redirectBlog.js"></script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+                document.addEventListener('keyup', function(e) {
+                  if (e.target !== document.body) {
+                    return;
+                  }
+                  // keyCode for '/' (slash)
+                  if (e.keyCode === 191) {
+                    const search = document.getElementById('search_input_react');
+                    search && search.focus();
+                  }
+                });
+              </script><script>
+              var search = docsearch({
+                
+                apiKey: '966d1e412f67114a07dc0afe44b19b53',
+                indexName: 'reason',
+                inputSelector: '#search_input_react',
+                algoliaOptions: {"facetFilters":["lang:en"]}
+              });
+            </script></body></html>

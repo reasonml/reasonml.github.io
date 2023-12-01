@@ -11,53 +11,94 @@
           }
         });
       </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/facebook/reason" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div><link rel="stylesheet" href="/css/main.css"><div class="ocamldoc">
-<div class="navbar"><a class="pre" href="Hashtbl.HashedType.html" title="Hashtbl.HashedType">Previous</a>
-&#xA0;<a class="up" href="Hashtbl.html" title="Hashtbl">Up</a>
-&#xA0;<a class="post" href="Hashtbl.SeededHashedType.html" title="Hashtbl.SeededHashedType">Next</a>
-</div>
 <h1>Module type <a href="type_Hashtbl.S.html">Hashtbl.S</a></h1>
 
-<pre><span class="keyword">module</span> type S = sig .. end</pre><div class="info modtype top">
-The output signature of the functor <a href="Hashtbl.Make.html"><code class="code">Hashtbl.Make</code></a>.<br>
+<pre id="MODULETYPES"><span class="keyword">module</span> type S = sig .. end</pre><div class="info modtype top">
+<div class="info-desc">
+<p>The output signature of the functor <a href="Hashtbl.Make.html"><code class="code">Hashtbl.Make</code></a>.</p>
+</div>
 </div>
 <hr width="100%">
 
-<pre id="TYPEkey"><span class="keyword">type</span> key;
-</pre>
+<pre id="TYPEkey"><span class="keyword">type</span> key </pre>
 
 
-<pre id="TYPEt"><span class="keyword">type</span> t(&apos;a);
-</pre>
+<pre id="TYPEt"><span class="keyword">type</span> 'a t </pre>
 
 
-<pre id="VALcreate"><span class="keyword">let</span> create: int =&gt; t(&apos;a);
-</pre>
-<pre id="VALclear"><span class="keyword">let</span> clear: t(&apos;a) =&gt; unit;
-</pre>
-<pre id="VALreset"><span class="keyword">let</span> reset: t(&apos;a) =&gt; unit;
-</pre>
-<pre id="VALcopy"><span class="keyword">let</span> copy: t(&apos;a) =&gt; t(&apos;a);
-</pre>
-<pre id="VALadd"><span class="keyword">let</span> add: (t(&apos;a), key, &apos;a) =&gt; unit;
-</pre>
-<pre id="VALremove"><span class="keyword">let</span> remove: (t(&apos;a), key) =&gt; unit;
-</pre>
-<pre id="VALfind"><span class="keyword">let</span> find: (t(&apos;a), key) =&gt; &apos;a;
-</pre>
-<pre id="VALfind_all"><span class="keyword">let</span> find_all: (t(&apos;a), key) =&gt; list(&apos;a);
-</pre>
-<pre id="VALreplace"><span class="keyword">let</span> replace: (t(&apos;a), key, &apos;a) =&gt; unit;
-</pre>
-<pre id="VALmem"><span class="keyword">let</span> mem: (t(&apos;a), key) =&gt; bool;
-</pre>
-<pre id="VALiter"><span class="keyword">let</span> iter: ((key, &apos;a) =&gt; unit, t(&apos;a)) =&gt; unit;
-</pre>
-<pre id="VALfold"><span class="keyword">let</span> fold: ((key, &apos;a, &apos;b) =&gt; &apos;b, t(&apos;a), &apos;b) =&gt; &apos;b;
-</pre>
-<pre id="VALlength"><span class="keyword">let</span> length: t(&apos;a) =&gt; int;
-</pre>
-<pre id="VALstats"><span class="keyword">let</span> stats: t(&apos;a) =&gt; Hashtbl.statistics;
-</pre></div></div><span><script src="/js/redirectBlog.js"></script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+<pre id="VALcreate">val create : int -&gt; 'a t</pre>
+<pre id="VALclear">val clear : 'a t -&gt; unit</pre>
+<pre id="VALreset">val reset : 'a t -&gt; unit</pre><div class="info ">
+<ul class="info-attributes">
+<li><b>Since</b> 4.00.0</li>
+</ul>
+</div>
+
+<pre id="VALcopy">val copy : 'a t -&gt; 'a t</pre>
+<pre id="VALadd">val add : 'a t -&gt; key -&gt; 'a -&gt; unit</pre>
+<pre id="VALremove">val remove : 'a t -&gt; key -&gt; unit</pre>
+<pre id="VALfind">val find : 'a t -&gt; key -&gt; 'a</pre>
+<pre id="VALfind_opt">val find_opt : 'a t -&gt; key -&gt; 'a option</pre><div class="info ">
+<ul class="info-attributes">
+<li><b>Since</b> 4.05.0</li>
+</ul>
+</div>
+
+<pre id="VALfind_all">val find_all : 'a t -&gt; key -&gt; 'a list</pre>
+<pre id="VALreplace">val replace : 'a t -&gt; key -&gt; 'a -&gt; unit</pre>
+<pre id="VALmem">val mem : 'a t -&gt; key -&gt; bool</pre>
+<pre id="VALiter">val iter : (key -&gt; 'a -&gt; unit) -&gt; 'a t -&gt; unit</pre>
+<pre id="VALfilter_map_inplace">val filter_map_inplace : (key -&gt; 'a -&gt; 'a option) -&gt; 'a t -&gt; unit</pre><div class="info ">
+<ul class="info-attributes">
+<li><b>Since</b> 4.03.0</li>
+</ul>
+</div>
+
+<pre id="VALfold">val fold : (key -&gt; 'a -&gt; 'b -&gt; 'b) -&gt; 'a t -&gt; 'b -&gt; 'b</pre>
+<pre id="VALlength">val length : 'a t -&gt; int</pre>
+<pre id="VALstats">val stats : 'a t -&gt; Hashtbl.statistics</pre><div class="info ">
+<ul class="info-attributes">
+<li><b>Since</b> 4.00.0</li>
+</ul>
+</div>
+
+<pre id="VALto_seq">val to_seq : 'a t -&gt; (key * 'a) Seq.t</pre><div class="info ">
+<ul class="info-attributes">
+<li><b>Since</b> 4.07</li>
+</ul>
+</div>
+
+<pre id="VALto_seq_keys">val to_seq_keys : 'a t -&gt; key Seq.t</pre><div class="info ">
+<ul class="info-attributes">
+<li><b>Since</b> 4.07</li>
+</ul>
+</div>
+
+<pre id="VALto_seq_values">val to_seq_values : 'a t -&gt; 'a Seq.t</pre><div class="info ">
+<ul class="info-attributes">
+<li><b>Since</b> 4.07</li>
+</ul>
+</div>
+
+<pre id="VALadd_seq">val add_seq : 'a t -&gt; (key * 'a) Seq.t -&gt; unit</pre><div class="info ">
+<ul class="info-attributes">
+<li><b>Since</b> 4.07</li>
+</ul>
+</div>
+
+<pre id="VALreplace_seq">val replace_seq : 'a t -&gt; (key * 'a) Seq.t -&gt; unit</pre><div class="info ">
+<ul class="info-attributes">
+<li><b>Since</b> 4.07</li>
+</ul>
+</div>
+
+<pre id="VALof_seq">val of_seq : (key * 'a) Seq.t -&gt; 'a t</pre><div class="info ">
+<ul class="info-attributes">
+<li><b>Since</b> 4.07</li>
+</ul>
+</div>
+
+</div></div><span><script src="/js/redirectBlog.js"></script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
                 document.addEventListener('keyup', function(e) {
                   if (e.target !== document.body) {
                     return;

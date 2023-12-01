@@ -1,0 +1,352 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Reason · Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems.</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Reason · Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io/"/><meta property="og:description" content="Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/icon_50.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io/blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io/blog/feed.xml" title="Reason Blog RSS Feed"/><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/en"><img class="logo" src="/img/dummy.svg" alt="Reason"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/docs/en/what-and-why" target="_self">Docs</a></li><li class=""><a href="/en/try" target="_self">Try</a></li><li class=""><a href="/api/index" target="_self">API</a></li><li class=""><a href="/docs/en/community" target="_self">Community</a></li><li class=""><a href="/blog/" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg" alt="Languages icon"/>English</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/ja/Stdlib.In_channel">日本語</a></li><li><a href="/de/Stdlib.In_channel">Deutsch</a></li><li><a href="/es-ES/Stdlib.In_channel">Español</a></li><li><a href="/fr/Stdlib.In_channel">Français</a></li><li><a href="/ko/Stdlib.In_channel">한국어</a></li><li><a href="/pt-BR/Stdlib.In_channel">Português (Brasil)</a></li><li><a href="/ru/Stdlib.In_channel">Русский</a></li><li><a href="/uk/Stdlib.In_channel">Українська</a></li><li><a href="/zh-CN/Stdlib.In_channel">中文</a></li><li><a href="/zh-TW/Stdlib.In_channel">繁體中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank" rel="noreferrer noopener">Help Translate</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/facebook/reason" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div><link rel="stylesheet" href="/css/main.css"><div class="ocamldoc">
+<h1>Module <a href="type_Stdlib.In_channel.html">Stdlib.In_channel</a></h1>
+
+<pre id="MODULEIn_channel"><span class="keyword">module</span> In_channel: In_channel</pre><hr width="100%">
+
+<pre id="TYPEt"><span class="keyword">type</span> t = in_channel </pre>
+<div class="info ">
+<div class="info-desc">
+<p>The type of input channel.</p>
+</div>
+</div>
+
+
+<pre id="TYPEopen_flag"><span class="keyword">type</span> open_flag = open_flag = </pre><table class="typetable">
+<tbody><tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Open_rdonly</code></td>
+<td class="typefieldcomment" align="left" valign="top"><code>(*</code></td><td class="typefieldcomment" align="left" valign="top"><div class="info ">
+<div class="info-desc">
+<p>open for reading.</p>
+</div>
+</div>
+</td><td class="typefieldcomment" align="left" valign="bottom"><code>*)</code></td>
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Open_wronly</code></td>
+<td class="typefieldcomment" align="left" valign="top"><code>(*</code></td><td class="typefieldcomment" align="left" valign="top"><div class="info ">
+<div class="info-desc">
+<p>open for writing.</p>
+</div>
+</div>
+</td><td class="typefieldcomment" align="left" valign="bottom"><code>*)</code></td>
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Open_append</code></td>
+<td class="typefieldcomment" align="left" valign="top"><code>(*</code></td><td class="typefieldcomment" align="left" valign="top"><div class="info ">
+<div class="info-desc">
+<p>open for appending: always write at end of file.</p>
+</div>
+</div>
+</td><td class="typefieldcomment" align="left" valign="bottom"><code>*)</code></td>
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Open_creat</code></td>
+<td class="typefieldcomment" align="left" valign="top"><code>(*</code></td><td class="typefieldcomment" align="left" valign="top"><div class="info ">
+<div class="info-desc">
+<p>create the file if it does not exist.</p>
+</div>
+</div>
+</td><td class="typefieldcomment" align="left" valign="bottom"><code>*)</code></td>
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Open_trunc</code></td>
+<td class="typefieldcomment" align="left" valign="top"><code>(*</code></td><td class="typefieldcomment" align="left" valign="top"><div class="info ">
+<div class="info-desc">
+<p>empty the file if it already exists.</p>
+</div>
+</div>
+</td><td class="typefieldcomment" align="left" valign="bottom"><code>*)</code></td>
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Open_excl</code></td>
+<td class="typefieldcomment" align="left" valign="top"><code>(*</code></td><td class="typefieldcomment" align="left" valign="top"><div class="info ">
+<div class="info-desc">
+<p>fail if Open_creat and the file already exists.</p>
+</div>
+</div>
+</td><td class="typefieldcomment" align="left" valign="bottom"><code>*)</code></td>
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Open_binary</code></td>
+<td class="typefieldcomment" align="left" valign="top"><code>(*</code></td><td class="typefieldcomment" align="left" valign="top"><div class="info ">
+<div class="info-desc">
+<p>open in binary mode (no conversion).</p>
+</div>
+</div>
+</td><td class="typefieldcomment" align="left" valign="bottom"><code>*)</code></td>
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Open_text</code></td>
+<td class="typefieldcomment" align="left" valign="top"><code>(*</code></td><td class="typefieldcomment" align="left" valign="top"><div class="info ">
+<div class="info-desc">
+<p>open in text mode (may perform conversions).</p>
+</div>
+</div>
+</td><td class="typefieldcomment" align="left" valign="bottom"><code>*)</code></td>
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Open_nonblock</code></td>
+<td class="typefieldcomment" align="left" valign="top"><code>(*</code></td><td class="typefieldcomment" align="left" valign="top"><div class="info ">
+<div class="info-desc">
+<p>open in non-blocking mode.</p>
+</div>
+</div>
+</td><td class="typefieldcomment" align="left" valign="bottom"><code>*)</code></td>
+</tr></tbody></table>
+
+<div class="info ">
+<div class="info-desc">
+<p>Opening modes for <a href="In_channel.html#VALopen_gen"><code class="code">In_channel.open_gen</code></a>.</p>
+</div>
+</div>
+
+
+<pre id="VALstdin">val stdin : t</pre><div class="info ">
+<div class="info-desc">
+<p>The standard input for the process.</p>
+</div>
+</div>
+
+<pre id="VALopen_bin">val open_bin : string -&gt; t</pre><div class="info ">
+<div class="info-desc">
+<p>Open the named file for reading, and return a new input channel on that
+    file, positioned at the beginning of the file.</p>
+</div>
+</div>
+
+<pre id="VALopen_text">val open_text : string -&gt; t</pre><div class="info ">
+<div class="info-desc">
+<p>Same as <a href="In_channel.html#VALopen_bin"><code class="code">In_channel.open_bin</code></a>, but the file is opened in text mode, so that newline
+    translation takes place during reads. On operating systems that do not
+    distinguish between text mode and binary mode, this function behaves like
+    <a href="In_channel.html#VALopen_bin"><code class="code">In_channel.open_bin</code></a>.</p>
+</div>
+</div>
+
+<pre id="VALopen_gen">val open_gen : open_flag list -&gt; int -&gt; string -&gt; t</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">open_gen&nbsp;mode&nbsp;perm&nbsp;filename</code> opens the named file for reading, as described
+    above. The extra arguments <code class="code">mode</code> and <code class="code">perm</code> specify the opening mode and
+    file permissions.  <a href="In_channel.html#VALopen_text"><code class="code">In_channel.open_text</code></a> and <a href="In_channel.html#VALopen_bin"><code class="code">In_channel.open_bin</code></a> are special cases of this
+    function.</p>
+</div>
+</div>
+
+<pre id="VALwith_open_bin">val with_open_bin : string -&gt; (t -&gt; 'a) -&gt; 'a</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">with_open_bin&nbsp;fn&nbsp;f</code> opens a channel <code class="code">ic</code> on file <code class="code">fn</code> and returns <code class="code">f
+&nbsp;&nbsp;&nbsp;&nbsp;ic</code>. After <code class="code">f</code> returns, either with a value or by raising an exception, <code class="code">ic</code>
+    is guaranteed to be closed.</p>
+</div>
+</div>
+
+<pre id="VALwith_open_text">val with_open_text : string -&gt; (t -&gt; 'a) -&gt; 'a</pre><div class="info ">
+<div class="info-desc">
+<p>Like <a href="In_channel.html#VALwith_open_bin"><code class="code">In_channel.with_open_bin</code></a>, but the channel is opened in text mode (see
+    <a href="In_channel.html#VALopen_text"><code class="code">In_channel.open_text</code></a>).</p>
+</div>
+</div>
+
+<pre id="VALwith_open_gen">val with_open_gen : open_flag list -&gt; int -&gt; string -&gt; (t -&gt; 'a) -&gt; 'a</pre><div class="info ">
+<div class="info-desc">
+<p>Like <a href="In_channel.html#VALwith_open_bin"><code class="code">In_channel.with_open_bin</code></a>, but can specify the opening mode and file permission,
+    in case the file must be created (see <a href="In_channel.html#VALopen_gen"><code class="code">In_channel.open_gen</code></a>).</p>
+</div>
+</div>
+
+<pre id="VALseek">val seek : t -&gt; int64 -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">seek&nbsp;chan&nbsp;pos</code> sets the current reading position to <code class="code">pos</code> for channel
+    <code class="code">chan</code>. This works only for regular files. On files of other kinds, the
+    behavior is unspecified.</p>
+</div>
+</div>
+
+<pre id="VALpos">val pos : t -&gt; int64</pre><div class="info ">
+<div class="info-desc">
+<p>Return the current reading position for the given channel.  For files opened
+    in text mode under Windows, the returned position is approximate (owing to
+    end-of-line conversion); in particular, saving the current position with
+    <a href="In_channel.html#VALpos"><code class="code">In_channel.pos</code></a>, then going back to this position using <a href="In_channel.html#VALseek"><code class="code">In_channel.seek</code></a> will not work.  For
+    this programming idiom to work reliably and portably, the file must be
+    opened in binary mode.</p>
+</div>
+</div>
+
+<pre id="VALlength">val length : t -&gt; int64</pre><div class="info ">
+<div class="info-desc">
+<p>Return the size (number of characters) of the regular file on which the
+    given channel is opened.  If the channel is opened on a file that is not a
+    regular file, the result is meaningless.  The returned size does not take
+    into account the end-of-line translations that can be performed when reading
+    from a channel opened in text mode.</p>
+</div>
+</div>
+
+<pre id="VALclose">val close : t -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p>Close the given channel.  Input functions raise a <code class="code">Sys_error</code> exception when
+    they are applied to a closed input channel, except <a href="In_channel.html#VALclose"><code class="code">In_channel.close</code></a>, which does
+    nothing when applied to an already closed channel.</p>
+</div>
+</div>
+
+<pre id="VALclose_noerr">val close_noerr : t -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p>Same as <a href="In_channel.html#VALclose"><code class="code">In_channel.close</code></a>, but ignore all errors.</p>
+</div>
+</div>
+
+<pre id="VALinput_char">val input_char : t -&gt; char option</pre><div class="info ">
+<div class="info-desc">
+<p>Read one character from the given input channel.  Returns <code class="code">None</code> if there
+    are no more characters to read.</p>
+</div>
+</div>
+
+<pre id="VALinput_byte">val input_byte : t -&gt; int option</pre><div class="info ">
+<div class="info-desc">
+<p>Same as <a href="In_channel.html#VALinput_char"><code class="code">In_channel.input_char</code></a>, but return the 8-bit integer representing the
+    character. Returns <code class="code">None</code> if the end of file was reached.</p>
+</div>
+</div>
+
+<pre id="VALinput_line">val input_line : t -&gt; string option</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">input_line&nbsp;ic</code> reads characters from <code class="code">ic</code> until a newline or the end of
+    file is reached.  Returns the string of all characters read, without the
+    newline (if any).  Returns <code class="code">None</code> if the end of the file has been reached.
+    In particular, this will be the case if the last line of input is empty.</p>
+
+<p>A newline is the character <code class="code">\n</code> unless the file is open in text mode and
+    <a href="Sys.html#VALwin32"><code class="code">Sys.win32</code></a> is <code class="code">true</code> in which case it is the sequence of characters
+    <code class="code">\r\n</code>.</p>
+</div>
+</div>
+
+<pre id="VALinput">val input : t -&gt; bytes -&gt; int -&gt; int -&gt; int</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">input&nbsp;ic&nbsp;buf&nbsp;pos&nbsp;len</code> reads up to <code class="code">len</code> characters from the given channel
+    <code class="code">ic</code>, storing them in byte sequence <code class="code">buf</code>, starting at character number
+    <code class="code">pos</code>. It returns the actual number of characters read, between 0 and <code class="code">len</code>
+    (inclusive). A return value of 0 means that the end of file was reached.</p>
+
+<p>Use <a href="In_channel.html#VALreally_input"><code class="code">In_channel.really_input</code></a> to read exactly <code class="code">len</code> characters.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Raises</b> <code>Invalid_argument</code> if <code class="code">pos</code> and <code class="code">len</code> do not designate a valid range of
+    <code class="code">buf</code>.</li>
+</ul>
+</div>
+
+<pre id="VALreally_input">val really_input : t -&gt; bytes -&gt; int -&gt; int -&gt; unit option</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">really_input&nbsp;ic&nbsp;buf&nbsp;pos&nbsp;len</code> reads <code class="code">len</code> characters from channel <code class="code">ic</code>,
+    storing them in byte sequence <code class="code">buf</code>, starting at character number <code class="code">pos</code>.</p>
+
+<p>Returns <code class="code">None</code> if the end of file is reached before <code class="code">len</code> characters have
+    been read.</p>
+
+<p>If the same channel is read concurrently by multiple threads, the bytes
+    read by <code class="code">really_input</code> are not guaranteed to be contiguous.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Raises</b> <code>Invalid_argument</code> if <code class="code">pos</code> and <code class="code">len</code> do not designate a valid range of
+    <code class="code">buf</code>.</li>
+</ul>
+</div>
+
+<pre id="VALreally_input_string">val really_input_string : t -&gt; int -&gt; string option</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">really_input_string&nbsp;ic&nbsp;len</code> reads <code class="code">len</code> characters from channel <code class="code">ic</code> and
+    returns them in a new string.  Returns <code class="code">None</code> if the end of file is reached
+    before <code class="code">len</code> characters have been read.</p>
+
+<p>If the same channel is read concurrently by multiple threads, the returned
+    string is not guaranteed to contain contiguous characters from the input.</p>
+</div>
+</div>
+
+<pre id="VALinput_all">val input_all : t -&gt; string</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">input_all&nbsp;ic</code> reads all remaining data from <code class="code">ic</code>.</p>
+
+<p>If the same channel is read concurrently by multiple threads, the returned
+    string is not guaranteed to contain contiguous characters from the input.</p>
+</div>
+</div>
+
+<pre id="VALset_binary_mode">val set_binary_mode : t -&gt; bool -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">set_binary_mode&nbsp;ic&nbsp;true</code> sets the channel <code class="code">ic</code> to binary mode: no
+    translations take place during input.</p>
+
+<p><code class="code">set_binary_mode&nbsp;ic&nbsp;false</code> sets the channel <code class="code">ic</code> to text mode: depending
+    on the operating system, some translations may take place during input.  For
+    instance, under Windows, end-of-lines will be translated from <code class="code">\r\n</code> to
+    <code class="code">\n</code>.</p>
+
+<p>This function has no effect under operating systems that do not distinguish
+    between text mode and binary mode.</p>
+</div>
+</div>
+
+</div></div><span><script src="/js/redirectBlog.js"></script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+                document.addEventListener('keyup', function(e) {
+                  if (e.target !== document.body) {
+                    return;
+                  }
+                  // keyCode for '/' (slash)
+                  if (e.keyCode === 191) {
+                    const search = document.getElementById('search_input_react');
+                    search && search.focus();
+                  }
+                });
+              </script><script>
+              var search = docsearch({
+                
+                apiKey: '966d1e412f67114a07dc0afe44b19b53',
+                indexName: 'reason',
+                inputSelector: '#search_input_react',
+                algoliaOptions: {"facetFilters":["lang:en"]}
+              });
+            </script></body></html>

@@ -1,0 +1,188 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Reason · Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems.</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Reason · Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io/"/><meta property="og:description" content="Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/icon_50.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io/blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io/blog/feed.xml" title="Reason Blog RSS Feed"/><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/en"><img class="logo" src="/img/dummy.svg" alt="Reason"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/docs/en/what-and-why" target="_self">Docs</a></li><li class=""><a href="/en/try" target="_self">Try</a></li><li class=""><a href="/api/index" target="_self">API</a></li><li class=""><a href="/docs/en/community" target="_self">Community</a></li><li class=""><a href="/blog/" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg" alt="Languages icon"/>English</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/ja/Stdlib.Result">日本語</a></li><li><a href="/de/Stdlib.Result">Deutsch</a></li><li><a href="/es-ES/Stdlib.Result">Español</a></li><li><a href="/fr/Stdlib.Result">Français</a></li><li><a href="/ko/Stdlib.Result">한국어</a></li><li><a href="/pt-BR/Stdlib.Result">Português (Brasil)</a></li><li><a href="/ru/Stdlib.Result">Русский</a></li><li><a href="/uk/Stdlib.Result">Українська</a></li><li><a href="/zh-CN/Stdlib.Result">中文</a></li><li><a href="/zh-TW/Stdlib.Result">繁體中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank" rel="noreferrer noopener">Help Translate</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/facebook/reason" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div><link rel="stylesheet" href="/css/main.css"><div class="ocamldoc">
+<h1>Module <a href="type_Stdlib.Result.html">Stdlib.Result</a></h1>
+
+<pre id="MODULEResult"><span class="keyword">module</span> Result: Result</pre><hr width="100%">
+<h2 id="results">Results</h2>
+<pre id="TYPEt"><span class="keyword">type</span> ('a, 'e) t = ('a, 'e) result = </pre><table class="typetable">
+<tbody><tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Ok of 'a</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Error of 'e</code></td>
+
+</tr></tbody></table>
+
+<div class="info ">
+<div class="info-desc">
+<p>The type for result values. Either a value <code class="code">Ok&nbsp;v</code> or an error <code class="code">Error&nbsp;e</code>.</p>
+</div>
+</div>
+
+
+<pre id="VALok">val ok : 'a -&gt; ('a, 'e) result</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">ok&nbsp;v</code> is <code class="code">Ok&nbsp;v</code>.</p>
+</div>
+</div>
+
+<pre id="VALerror">val error : 'e -&gt; ('a, 'e) result</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">error&nbsp;e</code> is <code class="code">Error&nbsp;e</code>.</p>
+</div>
+</div>
+
+<pre id="VALvalue">val value : ('a, 'e) result -&gt; default:'a -&gt; 'a</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">value&nbsp;r&nbsp;~default</code> is <code class="code">v</code> if <code class="code">r</code> is <code class="code">Ok&nbsp;v</code> and <code class="code">default</code> otherwise.</p>
+</div>
+</div>
+
+<pre id="VALget_ok">val get_ok : ('a, 'e) result -&gt; 'a</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">get_ok&nbsp;r</code> is <code class="code">v</code> if <code class="code">r</code> is <code class="code">Ok&nbsp;v</code> and raise otherwise.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Raises</b> <code>Invalid_argument</code> if <code class="code">r</code> is <code class="code">Error&nbsp;_</code>.</li>
+</ul>
+</div>
+
+<pre id="VALget_error">val get_error : ('a, 'e) result -&gt; 'e</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">get_error&nbsp;r</code> is <code class="code">e</code> if <code class="code">r</code> is <code class="code">Error&nbsp;e</code> and raise otherwise.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Raises</b> <code>Invalid_argument</code> if <code class="code">r</code> is <code class="code">Ok&nbsp;_</code>.</li>
+</ul>
+</div>
+
+<pre id="VALbind">val bind : ('a, 'e) result -&gt;       ('a -&gt; ('b, 'e) result) -&gt; ('b, 'e) result</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">bind&nbsp;r&nbsp;f</code> is <code class="code">f&nbsp;v</code> if <code class="code">r</code> is <code class="code">Ok&nbsp;v</code> and <code class="code">r</code> if <code class="code">r</code> is <code class="code">Error&nbsp;_</code>.</p>
+</div>
+</div>
+
+<pre id="VALjoin">val join : (('a, 'e) result, 'e) result -&gt; ('a, 'e) result</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">join&nbsp;rr</code> is <code class="code">r</code> if <code class="code">rr</code> is <code class="code">Ok&nbsp;r</code> and <code class="code">rr</code> if <code class="code">rr</code> is <code class="code">Error&nbsp;_</code>.</p>
+</div>
+</div>
+
+<pre id="VALmap">val map : ('a -&gt; 'b) -&gt; ('a, 'e) result -&gt; ('b, 'e) result</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">map&nbsp;f&nbsp;r</code> is <code class="code">Ok&nbsp;(f&nbsp;v)</code> if <code class="code">r</code> is <code class="code">Ok&nbsp;v</code> and <code class="code">r</code> if <code class="code">r</code> is <code class="code">Error&nbsp;_</code>.</p>
+</div>
+</div>
+
+<pre id="VALmap_error">val map_error : ('e -&gt; 'f) -&gt; ('a, 'e) result -&gt; ('a, 'f) result</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">map_error&nbsp;f&nbsp;r</code> is <code class="code">Error&nbsp;(f&nbsp;e)</code> if <code class="code">r</code> is <code class="code">Error&nbsp;e</code> and <code class="code">r</code> if
+    <code class="code">r</code> is <code class="code">Ok&nbsp;_</code>.</p>
+</div>
+</div>
+
+<pre id="VALfold">val fold : ok:('a -&gt; 'c) -&gt; error:('e -&gt; 'c) -&gt; ('a, 'e) result -&gt; 'c</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">fold&nbsp;~ok&nbsp;~error&nbsp;r</code> is <code class="code">ok&nbsp;v</code> if <code class="code">r</code> is <code class="code">Ok&nbsp;v</code> and <code class="code">error&nbsp;e</code> if <code class="code">r</code>
+    is <code class="code">Error&nbsp;e</code>.</p>
+</div>
+</div>
+
+<pre id="VALiter">val iter : ('a -&gt; unit) -&gt; ('a, 'e) result -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">iter&nbsp;f&nbsp;r</code> is <code class="code">f&nbsp;v</code> if <code class="code">r</code> is <code class="code">Ok&nbsp;v</code> and <code class="code">()</code> otherwise.</p>
+</div>
+</div>
+
+<pre id="VALiter_error">val iter_error : ('e -&gt; unit) -&gt; ('a, 'e) result -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">iter_error&nbsp;f&nbsp;r</code> is <code class="code">f&nbsp;e</code> if <code class="code">r</code> is <code class="code">Error&nbsp;e</code> and <code class="code">()</code> otherwise.</p>
+</div>
+</div>
+<h2 id="preds">Predicates and comparisons</h2>
+<pre id="VALis_ok">val is_ok : ('a, 'e) result -&gt; bool</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">is_ok&nbsp;r</code> is <code class="code">true</code> if and only if <code class="code">r</code> is <code class="code">Ok&nbsp;_</code>.</p>
+</div>
+</div>
+
+<pre id="VALis_error">val is_error : ('a, 'e) result -&gt; bool</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">is_error&nbsp;r</code> is <code class="code">true</code> if and only if <code class="code">r</code> is <code class="code">Error&nbsp;_</code>.</p>
+</div>
+</div>
+
+<pre id="VALequal">val equal : ok:('a -&gt; 'a -&gt; bool) -&gt;       error:('e -&gt; 'e -&gt; bool) -&gt;       ('a, 'e) result -&gt; ('a, 'e) result -&gt; bool</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">equal&nbsp;~ok&nbsp;~error&nbsp;r0&nbsp;r1</code> tests equality of <code class="code">r0</code> and <code class="code">r1</code> using <code class="code">ok</code>
+    and <code class="code">error</code> to respectively compare values wrapped by <code class="code">Ok&nbsp;_</code> and
+    <code class="code">Error&nbsp;_</code>.</p>
+</div>
+</div>
+
+<pre id="VALcompare">val compare : ok:('a -&gt; 'a -&gt; int) -&gt;       error:('e -&gt; 'e -&gt; int) -&gt;       ('a, 'e) result -&gt; ('a, 'e) result -&gt; int</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">compare&nbsp;~ok&nbsp;~error&nbsp;r0&nbsp;r1</code> totally orders <code class="code">r0</code> and <code class="code">r1</code> using <code class="code">ok</code> and
+    <code class="code">error</code> to respectively compare values wrapped by <code class="code">Ok&nbsp;_&nbsp;</code> and <code class="code">Error&nbsp;_</code>.
+    <code class="code">Ok&nbsp;_</code> values are smaller than <code class="code">Error&nbsp;_</code> values.</p>
+</div>
+</div>
+<h2 id="convert">Converting</h2>
+<pre id="VALto_option">val to_option : ('a, 'e) result -&gt; 'a option</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">to_option&nbsp;r</code> is <code class="code">r</code> as an option, mapping <code class="code">Ok&nbsp;v</code> to <code class="code">Some&nbsp;v</code> and
+    <code class="code">Error&nbsp;_</code> to <code class="code">None</code>.</p>
+</div>
+</div>
+
+<pre id="VALto_list">val to_list : ('a, 'e) result -&gt; 'a list</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">to_list&nbsp;r</code> is <code class="code">[v]</code> if <code class="code">r</code> is <code class="code">Ok&nbsp;v</code> and <code class="code">[]</code> otherwise.</p>
+</div>
+</div>
+
+<pre id="VALto_seq">val to_seq : ('a, 'e) result -&gt; 'a Seq.t</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">to_seq&nbsp;r</code> is <code class="code">r</code> as a sequence. <code class="code">Ok&nbsp;v</code> is the singleton sequence
+    containing <code class="code">v</code> and <code class="code">Error&nbsp;_</code> is the empty sequence.</p>
+</div>
+</div>
+
+</div></div><span><script src="/js/redirectBlog.js"></script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+                document.addEventListener('keyup', function(e) {
+                  if (e.target !== document.body) {
+                    return;
+                  }
+                  // keyCode for '/' (slash)
+                  if (e.keyCode === 191) {
+                    const search = document.getElementById('search_input_react');
+                    search && search.focus();
+                  }
+                });
+              </script><script>
+              var search = docsearch({
+                
+                apiKey: '966d1e412f67114a07dc0afe44b19b53',
+                indexName: 'reason',
+                inputSelector: '#search_input_react',
+                algoliaOptions: {"facetFilters":["lang:en"]}
+              });
+            </script></body></html>

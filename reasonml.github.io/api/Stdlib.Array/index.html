@@ -1,0 +1,539 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Reason · Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems.</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Reason · Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io/"/><meta property="og:description" content="Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/icon_50.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io/blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io/blog/feed.xml" title="Reason Blog RSS Feed"/><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/en"><img class="logo" src="/img/dummy.svg" alt="Reason"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/docs/en/what-and-why" target="_self">Docs</a></li><li class=""><a href="/en/try" target="_self">Try</a></li><li class=""><a href="/api/index" target="_self">API</a></li><li class=""><a href="/docs/en/community" target="_self">Community</a></li><li class=""><a href="/blog/" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg" alt="Languages icon"/>English</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/ja/Stdlib.Array">日本語</a></li><li><a href="/de/Stdlib.Array">Deutsch</a></li><li><a href="/es-ES/Stdlib.Array">Español</a></li><li><a href="/fr/Stdlib.Array">Français</a></li><li><a href="/ko/Stdlib.Array">한국어</a></li><li><a href="/pt-BR/Stdlib.Array">Português (Brasil)</a></li><li><a href="/ru/Stdlib.Array">Русский</a></li><li><a href="/uk/Stdlib.Array">Українська</a></li><li><a href="/zh-CN/Stdlib.Array">中文</a></li><li><a href="/zh-TW/Stdlib.Array">繁體中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank" rel="noreferrer noopener">Help Translate</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/facebook/reason" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div><link rel="stylesheet" href="/css/main.css"><div class="ocamldoc">
+<h1>Module <a href="type_Stdlib.Array.html">Stdlib.Array</a></h1>
+
+<pre id="MODULEArray"><span class="keyword">module</span> Array: Array</pre><hr width="100%">
+
+<pre id="TYPEt"><span class="keyword">type</span> 'a t = 'a array </pre>
+<div class="info ">
+<div class="info-desc">
+<p>An alias for the type of arrays.</p>
+</div>
+</div>
+
+
+<pre id="VALlength">val length : 'a array -&gt; int</pre><div class="info ">
+<div class="info-desc">
+<p>Return the length (number of elements) of the given array.</p>
+</div>
+</div>
+
+<pre id="VALget">val get : 'a array -&gt; int -&gt; 'a</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">get&nbsp;a&nbsp;n</code> returns the element number <code class="code">n</code> of array <code class="code">a</code>.
+   The first element has number 0.
+   The last element has number <code class="code">length&nbsp;a&nbsp;-&nbsp;1</code>.
+   You can also write <code class="code">a.(n)</code> instead of <code class="code">get&nbsp;a&nbsp;n</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Raises</b> <code>Invalid_argument</code> if <code class="code">n</code> is outside the range 0 to <code class="code">(length&nbsp;a&nbsp;-&nbsp;1)</code>.</li>
+</ul>
+</div>
+
+<pre id="VALset">val set : 'a array -&gt; int -&gt; 'a -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">set&nbsp;a&nbsp;n&nbsp;x</code> modifies array <code class="code">a</code> in place, replacing
+   element number <code class="code">n</code> with <code class="code">x</code>.
+   You can also write <code class="code">a.(n)&nbsp;&lt;-&nbsp;x</code> instead of <code class="code">set&nbsp;a&nbsp;n&nbsp;x</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Raises</b> <code>Invalid_argument</code> if <code class="code">n</code> is outside the range 0 to <code class="code">length&nbsp;a&nbsp;-&nbsp;1</code>.</li>
+</ul>
+</div>
+
+<pre id="VALmake">val make : int -&gt; 'a -&gt; 'a array</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">make&nbsp;n&nbsp;x</code> returns a fresh array of length <code class="code">n</code>,
+   initialized with <code class="code">x</code>.
+   All the elements of this new array are initially
+   physically equal to <code class="code">x</code> (in the sense of the <code class="code">==</code> predicate).
+   Consequently, if <code class="code">x</code> is mutable, it is shared among all elements
+   of the array, and modifying <code class="code">x</code> through one of the array entries
+   will modify all other entries at the same time.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Raises</b> <code>Invalid_argument</code> if <code class="code">n&nbsp;&lt;&nbsp;0</code> or <code class="code">n&nbsp;&gt;&nbsp;Sys.max_array_length</code>.
+   If the value of <code class="code">x</code> is a floating-point number, then the maximum
+   size is only <code class="code">Sys.max_array_length&nbsp;/&nbsp;2</code>.</li>
+</ul>
+</div>
+
+<pre id="VALcreate_float">val create_float : int -&gt; float array</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">create_float&nbsp;n</code> returns a fresh float array of length <code class="code">n</code>,
+    with uninitialized data.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.03</li>
+</ul>
+</div>
+
+<pre id="VALinit">val init : int -&gt; (int -&gt; 'a) -&gt; 'a array</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">init&nbsp;n&nbsp;f</code> returns a fresh array of length <code class="code">n</code>,
+   with element number <code class="code">i</code> initialized to the result of <code class="code">f&nbsp;i</code>.
+   In other terms, <code class="code">init&nbsp;n&nbsp;f</code> tabulates the results of <code class="code">f</code>
+   applied to the integers <code class="code">0</code> to <code class="code">n-1</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Raises</b> <code>Invalid_argument</code> if <code class="code">n&nbsp;&lt;&nbsp;0</code> or <code class="code">n&nbsp;&gt;&nbsp;Sys.max_array_length</code>.
+   If the return type of <code class="code">f</code> is <code class="code">float</code>, then the maximum
+   size is only <code class="code">Sys.max_array_length&nbsp;/&nbsp;2</code>.</li>
+</ul>
+</div>
+
+<pre id="VALmake_matrix">val make_matrix : int -&gt; int -&gt; 'a -&gt; 'a array array</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">make_matrix&nbsp;dimx&nbsp;dimy&nbsp;e</code> returns a two-dimensional array
+   (an array of arrays) with first dimension <code class="code">dimx</code> and
+   second dimension <code class="code">dimy</code>. All the elements of this new matrix
+   are initially physically equal to <code class="code">e</code>.
+   The element (<code class="code">x,y</code>) of a matrix <code class="code">m</code> is accessed
+   with the notation <code class="code">m.(x).(y)</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Raises</b> <code>Invalid_argument</code> if <code class="code">dimx</code> or <code class="code">dimy</code> is negative or
+   greater than <a href="Sys.html#VALmax_array_length"><code class="code">Sys.max_array_length</code></a>.
+   If the value of <code class="code">e</code> is a floating-point number, then the maximum
+   size is only <code class="code">Sys.max_array_length&nbsp;/&nbsp;2</code>.</li>
+</ul>
+</div>
+
+<pre id="VALappend">val append : 'a array -&gt; 'a array -&gt; 'a array</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">append&nbsp;v1&nbsp;v2</code> returns a fresh array containing the
+   concatenation of the arrays <code class="code">v1</code> and <code class="code">v2</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Raises</b> <code>Invalid_argument</code> if
+   <code class="code">length&nbsp;v1&nbsp;+&nbsp;length&nbsp;v2&nbsp;&gt;&nbsp;Sys.max_array_length</code>.</li>
+</ul>
+</div>
+
+<pre id="VALconcat">val concat : 'a array list -&gt; 'a array</pre><div class="info ">
+<div class="info-desc">
+<p>Same as <a href="Array.html#VALappend"><code class="code">Array.append</code></a>, but concatenates a list of arrays.</p>
+</div>
+</div>
+
+<pre id="VALsub">val sub : 'a array -&gt; int -&gt; int -&gt; 'a array</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">sub&nbsp;a&nbsp;pos&nbsp;len</code> returns a fresh array of length <code class="code">len</code>,
+   containing the elements number <code class="code">pos</code> to <code class="code">pos&nbsp;+&nbsp;len&nbsp;-&nbsp;1</code>
+   of array <code class="code">a</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Raises</b> <code>Invalid_argument</code> if <code class="code">pos</code> and <code class="code">len</code> do not
+   designate a valid subarray of <code class="code">a</code>; that is, if
+   <code class="code">pos&nbsp;&lt;&nbsp;0</code>, or <code class="code">len&nbsp;&lt;&nbsp;0</code>, or <code class="code">pos&nbsp;+&nbsp;len&nbsp;&gt;&nbsp;length&nbsp;a</code>.</li>
+</ul>
+</div>
+
+<pre id="VALcopy">val copy : 'a array -&gt; 'a array</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">copy&nbsp;a</code> returns a copy of <code class="code">a</code>, that is, a fresh array
+   containing the same elements as <code class="code">a</code>.</p>
+</div>
+</div>
+
+<pre id="VALfill">val fill : 'a array -&gt; int -&gt; int -&gt; 'a -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">fill&nbsp;a&nbsp;pos&nbsp;len&nbsp;x</code> modifies the array <code class="code">a</code> in place,
+   storing <code class="code">x</code> in elements number <code class="code">pos</code> to <code class="code">pos&nbsp;+&nbsp;len&nbsp;-&nbsp;1</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Raises</b> <code>Invalid_argument</code> if <code class="code">pos</code> and <code class="code">len</code> do not
+   designate a valid subarray of <code class="code">a</code>.</li>
+</ul>
+</div>
+
+<pre id="VALblit">val blit : 'a array -&gt; int -&gt; 'a array -&gt; int -&gt; int -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">blit&nbsp;src&nbsp;src_pos&nbsp;dst&nbsp;dst_pos&nbsp;len</code> copies <code class="code">len</code> elements
+   from array <code class="code">src</code>, starting at element number <code class="code">src_pos</code>, to array <code class="code">dst</code>,
+   starting at element number <code class="code">dst_pos</code>. It works correctly even if
+   <code class="code">src</code> and <code class="code">dst</code> are the same array, and the source and
+   destination chunks overlap.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Raises</b> <code>Invalid_argument</code> if <code class="code">src_pos</code> and <code class="code">len</code> do not
+   designate a valid subarray of <code class="code">src</code>, or if <code class="code">dst_pos</code> and <code class="code">len</code> do not
+   designate a valid subarray of <code class="code">dst</code>.</li>
+</ul>
+</div>
+
+<pre id="VALto_list">val to_list : 'a array -&gt; 'a list</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">to_list&nbsp;a</code> returns the list of all the elements of <code class="code">a</code>.</p>
+</div>
+</div>
+
+<pre id="VALof_list">val of_list : 'a list -&gt; 'a array</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">of_list&nbsp;l</code> returns a fresh array containing the elements
+   of <code class="code">l</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Raises</b> <code>Invalid_argument</code> if the length of <code class="code">l</code> is greater than
+   <code class="code">Sys.max_array_length</code>.</li>
+</ul>
+</div>
+<h2 id="1_Iterators">Iterators</h2>
+<pre id="VALiter">val iter : ('a -&gt; unit) -&gt; 'a array -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">iter&nbsp;f&nbsp;a</code> applies function <code class="code">f</code> in turn to all
+   the elements of <code class="code">a</code>.  It is equivalent to
+   <code class="code">f&nbsp;a.(0);&nbsp;f&nbsp;a.(1);&nbsp;...;&nbsp;f&nbsp;a.(length&nbsp;a&nbsp;-&nbsp;1);&nbsp;()</code>.</p>
+</div>
+</div>
+
+<pre id="VALiteri">val iteri : (int -&gt; 'a -&gt; unit) -&gt; 'a array -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p>Same as <a href="Array.html#VALiter"><code class="code">Array.iter</code></a>, but the
+   function is applied to the index of the element as first argument,
+   and the element itself as second argument.</p>
+</div>
+</div>
+
+<pre id="VALmap">val map : ('a -&gt; 'b) -&gt; 'a array -&gt; 'b array</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">map&nbsp;f&nbsp;a</code> applies function <code class="code">f</code> to all the elements of <code class="code">a</code>,
+   and builds an array with the results returned by <code class="code">f</code>:
+   <code class="code">[|&nbsp;f&nbsp;a.(0);&nbsp;f&nbsp;a.(1);&nbsp;...;&nbsp;f&nbsp;a.(length&nbsp;a&nbsp;-&nbsp;1)&nbsp;|]</code>.</p>
+</div>
+</div>
+
+<pre id="VALmapi">val mapi : (int -&gt; 'a -&gt; 'b) -&gt; 'a array -&gt; 'b array</pre><div class="info ">
+<div class="info-desc">
+<p>Same as <a href="Array.html#VALmap"><code class="code">Array.map</code></a>, but the
+   function is applied to the index of the element as first argument,
+   and the element itself as second argument.</p>
+</div>
+</div>
+
+<pre id="VALfold_left">val fold_left : ('a -&gt; 'b -&gt; 'a) -&gt; 'a -&gt; 'b array -&gt; 'a</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">fold_left&nbsp;f&nbsp;init&nbsp;a</code> computes
+   <code class="code">f&nbsp;(...&nbsp;(f&nbsp;(f&nbsp;init&nbsp;a.(0))&nbsp;a.(1))&nbsp;...)&nbsp;a.(n-1)</code>,
+   where <code class="code">n</code> is the length of the array <code class="code">a</code>.</p>
+</div>
+</div>
+
+<pre id="VALfold_left_map">val fold_left_map : ('a -&gt; 'b -&gt; 'a * 'c) -&gt; 'a -&gt; 'b array -&gt; 'a * 'c array</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">fold_left_map</code> is a combination of <a href="Array.html#VALfold_left"><code class="code">Array.fold_left</code></a> and <a href="Array.html#VALmap"><code class="code">Array.map</code></a> that threads an
+    accumulator through calls to <code class="code">f</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.13.0</li>
+</ul>
+</div>
+
+<pre id="VALfold_right">val fold_right : ('b -&gt; 'a -&gt; 'a) -&gt; 'b array -&gt; 'a -&gt; 'a</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">fold_right&nbsp;f&nbsp;a&nbsp;init</code> computes
+   <code class="code">f&nbsp;a.(0)&nbsp;(f&nbsp;a.(1)&nbsp;(&nbsp;...&nbsp;(f&nbsp;a.(n-1)&nbsp;init)&nbsp;...))</code>,
+   where <code class="code">n</code> is the length of the array <code class="code">a</code>.</p>
+</div>
+</div>
+<h2 id="1_Iteratorsontwoarrays">Iterators on two arrays</h2>
+<pre id="VALiter2">val iter2 : ('a -&gt; 'b -&gt; unit) -&gt; 'a array -&gt; 'b array -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">iter2&nbsp;f&nbsp;a&nbsp;b</code> applies function <code class="code">f</code> to all the elements of <code class="code">a</code>
+   and <code class="code">b</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.03.0 (4.05.0 in ArrayLabels)</li>
+<li><b>Raises</b> <code>Invalid_argument</code> if the arrays are not the same size.</li>
+</ul>
+</div>
+
+<pre id="VALmap2">val map2 : ('a -&gt; 'b -&gt; 'c) -&gt; 'a array -&gt; 'b array -&gt; 'c array</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">map2&nbsp;f&nbsp;a&nbsp;b</code> applies function <code class="code">f</code> to all the elements of <code class="code">a</code>
+   and <code class="code">b</code>, and builds an array with the results returned by <code class="code">f</code>:
+   <code class="code">[|&nbsp;f&nbsp;a.(0)&nbsp;b.(0);&nbsp;...;&nbsp;f&nbsp;a.(length&nbsp;a&nbsp;-&nbsp;1)&nbsp;b.(length&nbsp;b&nbsp;-&nbsp;1)|]</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.03.0 (4.05.0 in ArrayLabels)</li>
+<li><b>Raises</b> <code>Invalid_argument</code> if the arrays are not the same size.</li>
+</ul>
+</div>
+<h2 id="1_Arrayscanning">Array scanning</h2>
+<pre id="VALfor_all">val for_all : ('a -&gt; bool) -&gt; 'a array -&gt; bool</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">for_all&nbsp;f&nbsp;[|a1;&nbsp;...;&nbsp;an|]</code> checks if all elements
+   of the array satisfy the predicate <code class="code">f</code>. That is, it returns
+   <code class="code">(f&nbsp;a1)&nbsp;&amp;&amp;&nbsp;(f&nbsp;a2)&nbsp;&amp;&amp;&nbsp;...&nbsp;&amp;&amp;&nbsp;(f&nbsp;an)</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.03.0</li>
+</ul>
+</div>
+
+<pre id="VALexists">val exists : ('a -&gt; bool) -&gt; 'a array -&gt; bool</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">exists&nbsp;f&nbsp;[|a1;&nbsp;...;&nbsp;an|]</code> checks if at least one element of
+    the array satisfies the predicate <code class="code">f</code>. That is, it returns
+    <code class="code">(f&nbsp;a1)&nbsp;||&nbsp;(f&nbsp;a2)&nbsp;||&nbsp;...&nbsp;||&nbsp;(f&nbsp;an)</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.03.0</li>
+</ul>
+</div>
+
+<pre id="VALfor_all2">val for_all2 : ('a -&gt; 'b -&gt; bool) -&gt; 'a array -&gt; 'b array -&gt; bool</pre><div class="info ">
+<div class="info-desc">
+<p>Same as <a href="Array.html#VALfor_all"><code class="code">Array.for_all</code></a>, but for a two-argument predicate.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.11.0</li>
+<li><b>Raises</b> <code>Invalid_argument</code> if the two arrays have different lengths.</li>
+</ul>
+</div>
+
+<pre id="VALexists2">val exists2 : ('a -&gt; 'b -&gt; bool) -&gt; 'a array -&gt; 'b array -&gt; bool</pre><div class="info ">
+<div class="info-desc">
+<p>Same as <a href="Array.html#VALexists"><code class="code">Array.exists</code></a>, but for a two-argument predicate.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.11.0</li>
+<li><b>Raises</b> <code>Invalid_argument</code> if the two arrays have different lengths.</li>
+</ul>
+</div>
+
+<pre id="VALmem">val mem : 'a -&gt; 'a array -&gt; bool</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">mem&nbsp;a&nbsp;set</code> is true if and only if <code class="code">a</code> is structurally equal
+    to an element of <code class="code">l</code> (i.e. there is an <code class="code">x</code> in <code class="code">l</code> such that
+    <code class="code">compare&nbsp;a&nbsp;x&nbsp;=&nbsp;0</code>).</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.03.0</li>
+</ul>
+</div>
+
+<pre id="VALmemq">val memq : 'a -&gt; 'a array -&gt; bool</pre><div class="info ">
+<div class="info-desc">
+<p>Same as <a href="Array.html#VALmem"><code class="code">Array.mem</code></a>, but uses physical equality
+   instead of structural equality to compare list elements.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.03.0</li>
+</ul>
+</div>
+
+<pre id="VALfind_opt">val find_opt : ('a -&gt; bool) -&gt; 'a array -&gt; 'a option</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">find_opt&nbsp;f&nbsp;a</code> returns the first element of the array <code class="code">a</code> that satisfies
+    the predicate <code class="code">f</code>, or <code class="code">None</code> if there is no value that satisfies <code class="code">f</code> in the
+    array <code class="code">a</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.13.0</li>
+</ul>
+</div>
+
+<pre id="VALfind_map">val find_map : ('a -&gt; 'b option) -&gt; 'a array -&gt; 'b option</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">find_map&nbsp;f&nbsp;a</code> applies <code class="code">f</code> to the elements of <code class="code">a</code> in order, and returns the
+    first result of the form <code class="code">Some&nbsp;v</code>, or <code class="code">None</code> if none exist.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.13.0</li>
+</ul>
+</div>
+<h2 id="1_Arraysofpairs">Arrays of pairs</h2>
+<pre id="VALsplit">val split : ('a * 'b) array -&gt; 'a array * 'b array</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">split&nbsp;[|(a1,b1);&nbsp;...;&nbsp;(an,bn)|]</code> is <code class="code">([|a1;&nbsp;...;&nbsp;an|],&nbsp;[|b1;&nbsp;...;&nbsp;bn|])</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.13.0</li>
+</ul>
+</div>
+
+<pre id="VALcombine">val combine : 'a array -&gt; 'b array -&gt; ('a * 'b) array</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">combine&nbsp;[|a1;&nbsp;...;&nbsp;an|]&nbsp;[|b1;&nbsp;...;&nbsp;bn|]</code> is <code class="code">[|(a1,b1);&nbsp;...;&nbsp;(an,bn)|]</code>.
+    Raise <code class="code">Invalid_argument</code> if the two arrays have different lengths.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.13.0</li>
+</ul>
+</div>
+<h2 id="1_Sorting">Sorting</h2>
+<pre id="VALsort">val sort : ('a -&gt; 'a -&gt; int) -&gt; 'a array -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p>Sort an array in increasing order according to a comparison
+   function.  The comparison function must return 0 if its arguments
+   compare as equal, a positive integer if the first is greater,
+   and a negative integer if the first is smaller (see below for a
+   complete specification).  For example, <a href="Stdlib.html#VALcompare"><code class="code">compare</code></a> is
+   a suitable comparison function. After calling <code class="code">sort</code>, the
+   array is sorted in place in increasing order.
+   <code class="code">sort</code> is guaranteed to run in constant heap space
+   and (at most) logarithmic stack space.</p>
+
+<p>The current implementation uses Heap Sort.  It runs in constant
+   stack space.</p>
+
+<p>Specification of the comparison function:
+   Let <code class="code">a</code> be the array and <code class="code">cmp</code> the comparison function.  The following
+   must be true for all <code class="code">x</code>, <code class="code">y</code>, <code class="code">z</code> in <code class="code">a</code> :</p>
+<ul>
+<li>  <code class="code">cmp&nbsp;x&nbsp;y</code> &gt; 0 if and only if <code class="code">cmp&nbsp;y&nbsp;x</code> &lt; 0</li>
+<li>  if <code class="code">cmp&nbsp;x&nbsp;y</code> &gt;= 0 and <code class="code">cmp&nbsp;y&nbsp;z</code> &gt;= 0 then <code class="code">cmp&nbsp;x&nbsp;z</code> &gt;= 0</li>
+</ul>
+<p>When <code class="code">sort</code> returns, <code class="code">a</code> contains the same elements as before,
+   reordered in such a way that for all i and j valid indices of <code class="code">a</code> :</p>
+<ul>
+<li>  <code class="code">cmp&nbsp;a.(i)&nbsp;a.(j)</code> &gt;= 0 if and only if i &gt;= j</li>
+</ul>
+</div>
+</div>
+
+<pre id="VALstable_sort">val stable_sort : ('a -&gt; 'a -&gt; int) -&gt; 'a array -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p>Same as <a href="Array.html#VALsort"><code class="code">Array.sort</code></a>, but the sorting algorithm is stable (i.e.
+   elements that compare equal are kept in their original order) and
+   not guaranteed to run in constant heap space.</p>
+
+<p>The current implementation uses Merge Sort. It uses a temporary array of
+   length <code class="code">n/2</code>, where <code class="code">n</code> is the length of the array.  It is usually faster
+   than the current implementation of <a href="Array.html#VALsort"><code class="code">Array.sort</code></a>.</p>
+</div>
+</div>
+
+<pre id="VALfast_sort">val fast_sort : ('a -&gt; 'a -&gt; int) -&gt; 'a array -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p>Same as <a href="Array.html#VALsort"><code class="code">Array.sort</code></a> or <a href="Array.html#VALstable_sort"><code class="code">Array.stable_sort</code></a>, whichever is
+    faster on typical input.</p>
+</div>
+</div>
+<h2 id="1_ArraysandSequences">Arrays and Sequences</h2>
+<pre id="VALto_seq">val to_seq : 'a array -&gt; 'a Seq.t</pre><div class="info ">
+<div class="info-desc">
+<p>Iterate on the array, in increasing order. Modifications of the
+    array during iteration will be reflected in the sequence.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.07</li>
+</ul>
+</div>
+
+<pre id="VALto_seqi">val to_seqi : 'a array -&gt; (int * 'a) Seq.t</pre><div class="info ">
+<div class="info-desc">
+<p>Iterate on the array, in increasing order, yielding indices along elements.
+    Modifications of the array during iteration will be reflected in the
+    sequence.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.07</li>
+</ul>
+</div>
+
+<pre id="VALof_seq">val of_seq : 'a Seq.t -&gt; 'a array</pre><div class="info ">
+<div class="info-desc">
+<p>Create an array from the generator</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.07</li>
+</ul>
+</div>
+<h2 id="array_concurrency">Arrays and concurrency safety</h2>
+<p>Care must be taken when concurrently accessing arrays from multiple
+    domains: accessing an array will never crash a program, but unsynchronized
+    accesses might yield surprising (non-sequentially-consistent) results.</p>
+
+<h3 id="array_atomicity">Atomicity</h3>
+<p>Every array operation that accesses more than one array element is not
+    atomic. This includes iteration, scanning, sorting, splitting and
+    combining arrays.</p>
+
+<p>For example, consider the following program:</p>
+<pre class="codepre"><span class="keyword">let</span> size = 100_000_000
+let a = Array.make size 1
+let d1 = Domain.spawn (fun () -&gt;
+   Array.iteri (fun i x -&gt; a.(i) &lt;- x + 1) a
+)
+let d2 = Domain.spawn (fun () -&gt;
+  Array.iteri (fun i x -&gt; a.(i) &lt;- 2 * x + 1) a
+)
+let () = Domain.join d1; Domain.join d2
+</pre>
+<p>After executing this code, each field of the array <code class="code">a</code> is either <code class="code">2</code>, <code class="code">3</code>,
+    <code class="code">4</code> or <code class="code">5</code>. If atomicity is required, then the user must implement their own
+    synchronization (for example, using <a href="Mutex.html#TYPEt"><code class="code">Mutex.t</code></a>).</p>
+
+<h3 id="array_data_race">Data races</h3>
+<p>If two domains only access disjoint parts of the array, then the
+    observed behaviour is the equivalent to some sequential interleaving of the
+    operations from the two domains.</p>
+
+<p>A data race is said to occur when two domains access the same array element
+    without synchronization and at least one of the accesses is a write.
+    In the absence of data races, the observed behaviour is equivalent to some
+    sequential interleaving of the operations from different domains.</p>
+
+<p>Whenever possible, data races should be avoided by using synchronization to
+    mediate the accesses to the array elements.</p>
+
+<p>Indeed, in the presence of data races, programs will not crash but the
+    observed behaviour may not be equivalent to any sequential interleaving of
+    operations from different domains. Nevertheless, even in the presence of
+    data races, a read operation will return the value of some prior write to
+    that location (with a few exceptions for float arrays).</p>
+
+<h3 id="array_data_race_exceptions">Float arrays</h3>
+<p>Float arrays have two supplementary caveats in the presence of data races.</p>
+
+<p>First, the blit operation might copy an array byte-by-byte. Data races
+    between such a blit operation and another operation might produce surprising
+    values due to tearing: partial writes interleaved with other operations can
+    create float values that would not exist with a sequential execution.</p>
+
+<p>For instance, at the end of</p>
+<pre class="codepre"><span class="keyword">let</span> zeros = Array.make size 0.
+let max_floats = Array.make size Float.max_float
+let res = Array.copy zeros
+let d1 = Domain.spawn (fun () -&gt; Array.blit zeros 0 res 0 size)
+let d2 = Domain.spawn (fun () -&gt; Array.blit max_floats 0 res 0 size)
+let () = Domain.join d1; Domain.join d2
+</pre><p>the <code class="code">res</code> array might contain values that are neither <code class="code">0.</code> nor <code class="code">max_float</code>.</p>
+
+<p>Second, on 32-bit architectures, getting or setting a field involves two
+    separate memory accesses. In the presence of data races, the user may
+    observe tearing on any operation.</p>
+
+</div></div><span><script src="/js/redirectBlog.js"></script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+                document.addEventListener('keyup', function(e) {
+                  if (e.target !== document.body) {
+                    return;
+                  }
+                  // keyCode for '/' (slash)
+                  if (e.keyCode === 191) {
+                    const search = document.getElementById('search_input_react');
+                    search && search.focus();
+                  }
+                });
+              </script><script>
+              var search = docsearch({
+                
+                apiKey: '966d1e412f67114a07dc0afe44b19b53',
+                indexName: 'reason',
+                inputSelector: '#search_input_react',
+                algoliaOptions: {"facetFilters":["lang:en"]}
+              });
+            </script></body></html>

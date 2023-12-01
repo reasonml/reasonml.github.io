@@ -1,0 +1,295 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Reason · Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems.</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Reason · Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io/"/><meta property="og:description" content="Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/icon_50.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io/blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io/blog/feed.xml" title="Reason Blog RSS Feed"/><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/en"><img class="logo" src="/img/dummy.svg" alt="Reason"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/docs/en/what-and-why" target="_self">Docs</a></li><li class=""><a href="/en/try" target="_self">Try</a></li><li class=""><a href="/api/index" target="_self">API</a></li><li class=""><a href="/docs/en/community" target="_self">Community</a></li><li class=""><a href="/blog/" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg" alt="Languages icon"/>English</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/ja/Dynlink">日本語</a></li><li><a href="/de/Dynlink">Deutsch</a></li><li><a href="/es-ES/Dynlink">Español</a></li><li><a href="/fr/Dynlink">Français</a></li><li><a href="/ko/Dynlink">한국어</a></li><li><a href="/pt-BR/Dynlink">Português (Brasil)</a></li><li><a href="/ru/Dynlink">Русский</a></li><li><a href="/uk/Dynlink">Українська</a></li><li><a href="/zh-CN/Dynlink">中文</a></li><li><a href="/zh-TW/Dynlink">繁體中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank" rel="noreferrer noopener">Help Translate</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/facebook/reason" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div><link rel="stylesheet" href="/css/main.css"><div class="ocamldoc">
+<h1>Module <a href="type_Dynlink.html">Dynlink</a></h1>
+
+<pre id="MODULEDynlink"><span class="keyword">module</span> Dynlink: sig .. end</pre><div class="info module top">
+<div class="info-desc">
+<p>Dynamic loading of .cmo, .cma and .cmxs files.</p>
+</div>
+</div>
+<hr width="100%">
+
+<pre id="VALis_native">val is_native : bool</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">true</code> if the program is native,
+    <code class="code">false</code> if the program is bytecode.</p>
+</div>
+</div>
+<h2 id="1_Dynamicloadingofcompiledfiles">Dynamic loading of compiled files</h2>
+<pre id="VALloadfile">val loadfile : string -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p>In bytecode: load the given bytecode object file (<code class="code">.cmo</code> file) or
+    bytecode library file (<code class="code">.cma</code> file), and link it with the running
+    program. In native code: load the given OCaml plugin file (usually
+    <code class="code">.cmxs</code>), and link it with the running program.</p>
+
+<p>All toplevel expressions in the loaded compilation units
+    are evaluated. No facilities are provided to
+    access value names defined by the unit. Therefore, the unit
+    must itself register its entry points with the main program (or a
+    previously-loaded library) e.g. by modifying tables of functions.</p>
+
+<p>An exception will be raised if the given library defines toplevel
+    modules whose names clash with modules existing either in the main
+    program or a shared library previously loaded with <code class="code">loadfile</code>.
+    Modules from shared libraries previously loaded with
+    <code class="code">loadfile_private</code> are not included in this restriction.</p>
+
+<p>The compilation units loaded by this function are added to the
+    "allowed units" list (see <a href="Dynlink.html#VALset_allowed_units"><code class="code">Dynlink.set_allowed_units</code></a>).</p>
+</div>
+</div>
+
+<pre id="VALloadfile_private">val loadfile_private : string -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p>Same as <code class="code">loadfile</code>, except that the compilation units just loaded
+    are hidden (cannot be referenced) from other modules dynamically
+    loaded afterwards.</p>
+
+<p>An exception will be raised if the given library defines toplevel
+    modules whose names clash with modules existing in either the main
+    program or a shared library previously loaded with <code class="code">loadfile</code>.
+    Modules from shared libraries previously loaded with
+    <code class="code">loadfile_private</code> are not included in this restriction.</p>
+
+<p>An exception will also be raised if the given library defines
+    toplevel modules whose name matches that of an interface depended
+    on by a module existing in either the main program or a shared
+    library previously loaded with <code class="code">loadfile</code>. This applies even if
+    such dependency is only a "module alias" dependency (i.e. just on
+    the name rather than the contents of the interface).</p>
+
+<p>The compilation units loaded by this function are not added to the
+    "allowed units" list (see <a href="Dynlink.html#VALset_allowed_units"><code class="code">Dynlink.set_allowed_units</code></a>) since they cannot
+    be referenced from other compilation units.</p>
+</div>
+</div>
+
+<pre id="VALadapt_filename">val adapt_filename : string -&gt; string</pre><div class="info ">
+<div class="info-desc">
+<p>In bytecode, the identity function. In native code, replace the last
+    extension with <code class="code">.cmxs</code>.</p>
+</div>
+</div>
+<h2 id="1_Accesscontrol">Access control</h2>
+<pre id="VALset_allowed_units">val set_allowed_units : string list -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p>Set the list of compilation units that may be referenced from units that
+    are dynamically loaded in the future to be exactly the given value.</p>
+
+<p>Initially all compilation units composing the program currently running
+    are available for reference from dynamically-linked units.
+    <code class="code">set_allowed_units</code> can be used to restrict access to a subset of these
+    units, e.g. to the units that compose the API for
+    dynamically-linked code, and prevent access to all other units,
+    e.g. private, internal modules of the running program.</p>
+
+<p>Note that <a href="Dynlink.html#VALloadfile"><code class="code">Dynlink.loadfile</code></a> changes the allowed-units list.</p>
+</div>
+</div>
+
+<pre id="VALallow_only">val allow_only : string list -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">allow_only&nbsp;units</code> sets the list of allowed units to be the intersection
+    of the existing allowed units and the given list of units.  As such it
+    can never increase the set of allowed units.</p>
+</div>
+</div>
+
+<pre id="VALprohibit">val prohibit : string list -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">prohibit&nbsp;units</code> prohibits dynamically-linked units from referencing
+    the units named in list <code class="code">units</code> by removing such units from the allowed
+    units list.  This can be used to prevent access to selected units,
+    e.g. private, internal modules of the running program.</p>
+</div>
+</div>
+
+<pre id="VALmain_program_units">val main_program_units : unit -&gt; string list</pre><div class="info ">
+<div class="info-desc">
+<p>Return the list of compilation units that form the main program (i.e.
+    are not dynamically linked).</p>
+</div>
+</div>
+
+<pre id="VALpublic_dynamically_loaded_units">val public_dynamically_loaded_units : unit -&gt; string list</pre><div class="info ">
+<div class="info-desc">
+<p>Return the list of compilation units that have been dynamically loaded via
+    <code class="code">loadfile</code> (and not via <code class="code">loadfile_private</code>).  Note that compilation units
+    loaded dynamically cannot be unloaded.</p>
+</div>
+</div>
+
+<pre id="VALall_units">val all_units : unit -&gt; string list</pre><div class="info ">
+<div class="info-desc">
+<p>Return the list of compilation units that form the main program together
+    with those that have been dynamically loaded via <code class="code">loadfile</code> (and not via
+    <code class="code">loadfile_private</code>).</p>
+</div>
+</div>
+
+<pre id="VALallow_unsafe_modules">val allow_unsafe_modules : bool -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p>Govern whether unsafe object files are allowed to be
+    dynamically linked. A compilation unit is 'unsafe' if it contains
+    declarations of external functions, which can break type safety.
+    By default, dynamic linking of unsafe object files is
+    not allowed. In native code, this function does nothing; object files
+    with external functions are always allowed to be dynamically linked.</p>
+</div>
+</div>
+<h2 id="1_Errorreporting">Error reporting</h2>
+<pre><span class="keyword">type</span> linking_error = private </pre><table class="typetable">
+<tbody><tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Undefined_global of string</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Unavailable_primitive of string</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Uninitialized_global of string</code></td>
+
+</tr></tbody></table>
+
+
+
+<pre><span class="keyword">type</span> error = private </pre><table class="typetable">
+<tbody><tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Not_a_bytecode_file of string</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Inconsistent_import of string</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Unavailable_unit of string</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Unsafe_file</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Linking_error of string * linking_error</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Corrupted_interface of string</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Cannot_open_dynamic_library of exn</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Library's_module_initializers_failed of exn</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Inconsistent_implementation of string</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Module_already_loaded of string</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Private_library_cannot_implement_interface of string</code></td>
+
+</tr></tbody></table>
+
+
+
+<pre id="EXCEPTIONError"><span class="keyword">exception</span> Error of error</pre>
+<div class="info ">
+<div class="info-desc">
+<p>Errors in dynamic linking are reported by raising the <code class="code">Error</code>
+    exception with a description of the error.
+    A common case is the dynamic library not being found on the system: this
+    is reported via <code class="code">Cannot_open_dynamic_library</code> (the enclosed exception may
+    be platform-specific).</p>
+</div>
+</div>
+
+<pre id="VALerror_message">val error_message : error -&gt; string</pre><div class="info ">
+<div class="info-desc">
+<p>Convert an error description to a printable message.</p>
+</div>
+</div>
+
+</div></div><span><script src="/js/redirectBlog.js"></script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+                document.addEventListener('keyup', function(e) {
+                  if (e.target !== document.body) {
+                    return;
+                  }
+                  // keyCode for '/' (slash)
+                  if (e.keyCode === 191) {
+                    const search = document.getElementById('search_input_react');
+                    search && search.focus();
+                  }
+                });
+              </script><script>
+              var search = docsearch({
+                
+                apiKey: '966d1e412f67114a07dc0afe44b19b53',
+                indexName: 'reason',
+                inputSelector: '#search_input_react',
+                algoliaOptions: {"facetFilters":["lang:en"]}
+              });
+            </script></body></html>

@@ -1,0 +1,476 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Reason · Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems.</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Reason · Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io/"/><meta property="og:description" content="Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/icon_50.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io/blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io/blog/feed.xml" title="Reason Blog RSS Feed"/><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/en"><img class="logo" src="/img/dummy.svg" alt="Reason"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/docs/en/what-and-why" target="_self">Docs</a></li><li class=""><a href="/en/try" target="_self">Try</a></li><li class=""><a href="/api/index" target="_self">API</a></li><li class=""><a href="/docs/en/community" target="_self">Community</a></li><li class=""><a href="/blog/" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg" alt="Languages icon"/>English</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/ja/Stdlib.Buffer">日本語</a></li><li><a href="/de/Stdlib.Buffer">Deutsch</a></li><li><a href="/es-ES/Stdlib.Buffer">Español</a></li><li><a href="/fr/Stdlib.Buffer">Français</a></li><li><a href="/ko/Stdlib.Buffer">한국어</a></li><li><a href="/pt-BR/Stdlib.Buffer">Português (Brasil)</a></li><li><a href="/ru/Stdlib.Buffer">Русский</a></li><li><a href="/uk/Stdlib.Buffer">Українська</a></li><li><a href="/zh-CN/Stdlib.Buffer">中文</a></li><li><a href="/zh-TW/Stdlib.Buffer">繁體中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank" rel="noreferrer noopener">Help Translate</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/facebook/reason" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div><link rel="stylesheet" href="/css/main.css"><div class="ocamldoc">
+<h1>Module <a href="type_Stdlib.Buffer.html">Stdlib.Buffer</a></h1>
+
+<pre id="MODULEBuffer"><span class="keyword">module</span> Buffer: Buffer</pre><hr width="100%">
+<p><b>Unsynchronized accesses</b></p>
+<p>Unsynchronized accesses to a buffer may lead to an invalid buffer state.
+    Thus, concurrent accesses to a buffer must be synchronized (for instance
+    with a <a href="Mutex.html#TYPEt"><code class="code">Mutex.t</code></a>).</p>
+
+<pre id="TYPEt"><span class="keyword">type</span> t </pre>
+<div class="info ">
+<div class="info-desc">
+<p>The abstract type of buffers.</p>
+</div>
+</div>
+
+
+<pre id="VALcreate">val create : int -&gt; t</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">create&nbsp;n</code> returns a fresh buffer, initially empty.
+   The <code class="code">n</code> parameter is the initial size of the internal byte sequence
+   that holds the buffer contents. That byte sequence is automatically
+   reallocated when more than <code class="code">n</code> characters are stored in the buffer,
+   but shrinks back to <code class="code">n</code> characters when <code class="code">reset</code> is called.
+   For best performance, <code class="code">n</code> should be of the same order of magnitude
+   as the number of characters that are expected to be stored in
+   the buffer (for instance, 80 for a buffer that holds one output
+   line).  Nothing bad will happen if the buffer grows beyond that
+   limit, however. In doubt, take <code class="code">n&nbsp;=&nbsp;16</code> for instance.
+   If <code class="code">n</code> is not between 1 and <a href="Sys.html#VALmax_string_length"><code class="code">Sys.max_string_length</code></a>, it will
+   be clipped to that interval.</p>
+</div>
+</div>
+
+<pre id="VALcontents">val contents : t -&gt; string</pre><div class="info ">
+<div class="info-desc">
+<p>Return a copy of the current contents of the buffer.
+    The buffer itself is unchanged.</p>
+</div>
+</div>
+
+<pre id="VALto_bytes">val to_bytes : t -&gt; bytes</pre><div class="info ">
+<div class="info-desc">
+<p>Return a copy of the current contents of the buffer.
+    The buffer itself is unchanged.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.02</li>
+</ul>
+</div>
+
+<pre id="VALsub">val sub : t -&gt; int -&gt; int -&gt; string</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">Buffer.sub&nbsp;b&nbsp;off&nbsp;len</code> returns a copy of <code class="code">len</code> bytes from the
+    current contents of the buffer <code class="code">b</code>, starting at offset <code class="code">off</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Raises</b> <code>Invalid_argument</code> if <code class="code">off</code> and <code class="code">len</code> do not designate a valid
+    range of <code class="code">b</code>.</li>
+</ul>
+</div>
+
+<pre id="VALblit">val blit : t -&gt; int -&gt; bytes -&gt; int -&gt; int -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">Buffer.blit&nbsp;src&nbsp;srcoff&nbsp;dst&nbsp;dstoff&nbsp;len</code> copies <code class="code">len</code> characters from
+   the current contents of the buffer <code class="code">src</code>, starting at offset <code class="code">srcoff</code>
+   to <code class="code">dst</code>, starting at character <code class="code">dstoff</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 3.11.2</li>
+<li><b>Raises</b> <code>Invalid_argument</code> if <code class="code">srcoff</code> and <code class="code">len</code> do not designate a valid
+   range of <code class="code">src</code>, or if <code class="code">dstoff</code> and <code class="code">len</code> do not designate a valid
+   range of <code class="code">dst</code>.</li>
+</ul>
+</div>
+
+<pre id="VALnth">val nth : t -&gt; int -&gt; char</pre><div class="info ">
+<div class="info-desc">
+<p>Get the n-th character of the buffer.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Raises</b> <code>Invalid_argument</code> if
+    index out of bounds</li>
+</ul>
+</div>
+
+<pre id="VALlength">val length : t -&gt; int</pre><div class="info ">
+<div class="info-desc">
+<p>Return the number of characters currently contained in the buffer.</p>
+</div>
+</div>
+
+<pre id="VALclear">val clear : t -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p>Empty the buffer.</p>
+</div>
+</div>
+
+<pre id="VALreset">val reset : t -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p>Empty the buffer and deallocate the internal byte sequence holding the
+   buffer contents, replacing it with the initial internal byte sequence
+   of length <code class="code">n</code> that was allocated by <a href="Buffer.html#VALcreate"><code class="code">Buffer.create</code></a> <code class="code">n</code>.
+   For long-lived buffers that may have grown a lot, <code class="code">reset</code> allows
+   faster reclamation of the space used by the buffer.</p>
+</div>
+</div>
+
+<pre id="VALoutput_buffer">val output_buffer : out_channel -&gt; t -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">output_buffer&nbsp;oc&nbsp;b</code> writes the current contents of buffer <code class="code">b</code>
+   on the output channel <code class="code">oc</code>.</p>
+</div>
+</div>
+
+<pre id="VALtruncate">val truncate : t -&gt; int -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">truncate&nbsp;b&nbsp;len</code> truncates the length of <code class="code">b</code> to <code class="code">len</code>
+  Note: the internal byte sequence is not shortened.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.05.0</li>
+<li><b>Raises</b> <code>Invalid_argument</code> if <code class="code">len&nbsp;&lt;&nbsp;0</code> or <code class="code">len&nbsp;&gt;&nbsp;length&nbsp;b</code>.</li>
+</ul>
+</div>
+<h2 id="1_Appending">Appending</h2><p>Note: all <code class="code">add_*</code> operations can raise <code class="code">Failure</code> if the internal byte
+    sequence of the buffer would need to grow beyond <a href="Sys.html#VALmax_string_length"><code class="code">Sys.max_string_length</code></a>.</p>
+
+<pre id="VALadd_char">val add_char : t -&gt; char -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">add_char&nbsp;b&nbsp;c</code> appends the character <code class="code">c</code> at the end of buffer <code class="code">b</code>.</p>
+</div>
+</div>
+
+<pre id="VALadd_utf_8_uchar">val add_utf_8_uchar : t -&gt; Uchar.t -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">add_utf_8_uchar&nbsp;b&nbsp;u</code> appends the <a href="https://tools.ietf.org/html/rfc3629">
+    UTF-8</a> encoding of <code class="code">u</code> at the end of buffer <code class="code">b</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.06.0</li>
+</ul>
+</div>
+
+<pre id="VALadd_utf_16le_uchar">val add_utf_16le_uchar : t -&gt; Uchar.t -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">add_utf_16le_uchar&nbsp;b&nbsp;u</code> appends the
+    <a href="https://tools.ietf.org/html/rfc2781">UTF-16LE</a> encoding of <code class="code">u</code>
+    at the end of buffer <code class="code">b</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.06.0</li>
+</ul>
+</div>
+
+<pre id="VALadd_utf_16be_uchar">val add_utf_16be_uchar : t -&gt; Uchar.t -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">add_utf_16be_uchar&nbsp;b&nbsp;u</code> appends the
+    <a href="https://tools.ietf.org/html/rfc2781">UTF-16BE</a> encoding of <code class="code">u</code>
+    at the end of buffer <code class="code">b</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.06.0</li>
+</ul>
+</div>
+
+<pre id="VALadd_string">val add_string : t -&gt; string -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">add_string&nbsp;b&nbsp;s</code> appends the string <code class="code">s</code> at the end of buffer <code class="code">b</code>.</p>
+</div>
+</div>
+
+<pre id="VALadd_bytes">val add_bytes : t -&gt; bytes -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">add_bytes&nbsp;b&nbsp;s</code> appends the byte sequence <code class="code">s</code> at the end of buffer <code class="code">b</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.02</li>
+</ul>
+</div>
+
+<pre id="VALadd_substring">val add_substring : t -&gt; string -&gt; int -&gt; int -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">add_substring&nbsp;b&nbsp;s&nbsp;ofs&nbsp;len</code> takes <code class="code">len</code> characters from offset
+   <code class="code">ofs</code> in string <code class="code">s</code> and appends them at the end of buffer <code class="code">b</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Raises</b> <code>Invalid_argument</code> if <code class="code">ofs</code> and <code class="code">len</code> do not designate a valid
+    range of <code class="code">s</code>.</li>
+</ul>
+</div>
+
+<pre id="VALadd_subbytes">val add_subbytes : t -&gt; bytes -&gt; int -&gt; int -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">add_subbytes&nbsp;b&nbsp;s&nbsp;ofs&nbsp;len</code> takes <code class="code">len</code> characters from offset
+    <code class="code">ofs</code> in byte sequence <code class="code">s</code> and appends them at the end of buffer <code class="code">b</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.02</li>
+<li><b>Raises</b> <code>Invalid_argument</code> if <code class="code">ofs</code> and <code class="code">len</code> do not designate a valid
+    range of <code class="code">s</code>.</li>
+</ul>
+</div>
+
+<pre id="VALadd_substitute">val add_substitute : t -&gt; (string -&gt; string) -&gt; string -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">add_substitute&nbsp;b&nbsp;f&nbsp;s</code> appends the string pattern <code class="code">s</code> at the end
+   of buffer <code class="code">b</code> with substitution.
+   The substitution process looks for variables into
+   the pattern and substitutes each variable name by its value, as
+   obtained by applying the mapping <code class="code">f</code> to the variable name. Inside the
+   string pattern, a variable name immediately follows a non-escaped
+   <code class="code">$</code> character and is one of the following:</p>
+<ul>
+<li>a non empty sequence of alphanumeric or <code class="code">_</code> characters,</li>
+<li>an arbitrary sequence of characters enclosed by a pair of
+   matching parentheses or curly brackets.
+   An escaped <code class="code">$</code> character is a <code class="code">$</code> that immediately follows a backslash
+   character; it then stands for a plain <code class="code">$</code>.</li>
+</ul>
+</div>
+<ul class="info-attributes">
+<li><b>Raises</b> <code>Not_found</code> if the closing character of a parenthesized variable
+   cannot be found.</li>
+</ul>
+</div>
+
+<pre id="VALadd_buffer">val add_buffer : t -&gt; t -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">add_buffer&nbsp;b1&nbsp;b2</code> appends the current contents of buffer <code class="code">b2</code>
+   at the end of buffer <code class="code">b1</code>.  <code class="code">b2</code> is not modified.</p>
+</div>
+</div>
+
+<pre id="VALadd_channel">val add_channel : t -&gt; in_channel -&gt; int -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">add_channel&nbsp;b&nbsp;ic&nbsp;n</code> reads at most <code class="code">n</code> characters from the
+   input channel <code class="code">ic</code> and stores them at the end of buffer <code class="code">b</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Raises</b><ul><li><code>End_of_file</code> if the channel contains fewer than <code class="code">n</code>
+   characters. In this case, the characters are still added to
+   the buffer, so as to avoid loss of data.</li>
+<li><code>Invalid_argument</code> if <code class="code">len&nbsp;&lt;&nbsp;0</code> or <code class="code">len&nbsp;&gt;&nbsp;Sys.max_string_length</code>.</li>
+</ul></li>
+</ul>
+</div>
+<h2 id="1_BuffersandSequences">Buffers and Sequences</h2>
+<pre id="VALto_seq">val to_seq : t -&gt; char Seq.t</pre><div class="info ">
+<div class="info-desc">
+<p>Iterate on the buffer, in increasing order.</p>
+
+<p>The behavior is not specified if the buffer is modified during iteration.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.07</li>
+</ul>
+</div>
+
+<pre id="VALto_seqi">val to_seqi : t -&gt; (int * char) Seq.t</pre><div class="info ">
+<div class="info-desc">
+<p>Iterate on the buffer, in increasing order, yielding indices along chars.</p>
+
+<p>The behavior is not specified if the buffer is modified during iteration.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.07</li>
+</ul>
+</div>
+
+<pre id="VALadd_seq">val add_seq : t -&gt; char Seq.t -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p>Add chars to the buffer</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.07</li>
+</ul>
+</div>
+
+<pre id="VALof_seq">val of_seq : char Seq.t -&gt; t</pre><div class="info ">
+<div class="info-desc">
+<p>Create a buffer from the generator</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.07</li>
+</ul>
+</div>
+<h2 id="1_Binaryencodingofintegers">Binary encoding of integers</h2><p>The functions in this section append binary encodings of integers
+    to buffers.</p>
+
+<p>Little-endian (resp. big-endian) encoding means that least
+    (resp. most) significant bytes are stored first.  Big-endian is
+    also known as network byte order.  Native-endian encoding is
+    either little-endian or big-endian depending on <a href="Sys.html#VALbig_endian"><code class="code">Sys.big_endian</code></a>.</p>
+
+<p>32-bit and 64-bit integers are represented by the <code class="code">int32</code> and
+    <code class="code">int64</code> types, which can be interpreted either as signed or
+    unsigned numbers.</p>
+
+<p>8-bit and 16-bit integers are represented by the <code class="code">int</code> type,
+    which has more bits than the binary encoding.  Functions that
+    encode these values truncate their inputs to their least
+    significant bytes.</p>
+
+<pre id="VALadd_uint8">val add_uint8 : t -&gt; int -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">add_uint8&nbsp;b&nbsp;i</code> appends a binary unsigned 8-bit integer <code class="code">i</code> to
+    <code class="code">b</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.08</li>
+</ul>
+</div>
+
+<pre id="VALadd_int8">val add_int8 : t -&gt; int -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">add_int8&nbsp;b&nbsp;i</code> appends a binary signed 8-bit integer <code class="code">i</code> to
+    <code class="code">b</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.08</li>
+</ul>
+</div>
+
+<pre id="VALadd_uint16_ne">val add_uint16_ne : t -&gt; int -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">add_uint16_ne&nbsp;b&nbsp;i</code> appends a binary native-endian unsigned 16-bit
+    integer <code class="code">i</code> to <code class="code">b</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.08</li>
+</ul>
+</div>
+
+<pre id="VALadd_uint16_be">val add_uint16_be : t -&gt; int -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">add_uint16_be&nbsp;b&nbsp;i</code> appends a binary big-endian unsigned 16-bit
+    integer <code class="code">i</code> to <code class="code">b</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.08</li>
+</ul>
+</div>
+
+<pre id="VALadd_uint16_le">val add_uint16_le : t -&gt; int -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">add_uint16_le&nbsp;b&nbsp;i</code> appends a binary little-endian unsigned 16-bit
+    integer <code class="code">i</code> to <code class="code">b</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.08</li>
+</ul>
+</div>
+
+<pre id="VALadd_int16_ne">val add_int16_ne : t -&gt; int -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">add_int16_ne&nbsp;b&nbsp;i</code> appends a binary native-endian signed 16-bit
+    integer <code class="code">i</code> to <code class="code">b</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.08</li>
+</ul>
+</div>
+
+<pre id="VALadd_int16_be">val add_int16_be : t -&gt; int -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">add_int16_be&nbsp;b&nbsp;i</code> appends a binary big-endian signed 16-bit
+    integer <code class="code">i</code> to <code class="code">b</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.08</li>
+</ul>
+</div>
+
+<pre id="VALadd_int16_le">val add_int16_le : t -&gt; int -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">add_int16_le&nbsp;b&nbsp;i</code> appends a binary little-endian signed 16-bit
+    integer <code class="code">i</code> to <code class="code">b</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.08</li>
+</ul>
+</div>
+
+<pre id="VALadd_int32_ne">val add_int32_ne : t -&gt; int32 -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">add_int32_ne&nbsp;b&nbsp;i</code> appends a binary native-endian 32-bit integer
+    <code class="code">i</code> to <code class="code">b</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.08</li>
+</ul>
+</div>
+
+<pre id="VALadd_int32_be">val add_int32_be : t -&gt; int32 -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">add_int32_be&nbsp;b&nbsp;i</code> appends a binary big-endian 32-bit integer
+    <code class="code">i</code> to <code class="code">b</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.08</li>
+</ul>
+</div>
+
+<pre id="VALadd_int32_le">val add_int32_le : t -&gt; int32 -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">add_int32_le&nbsp;b&nbsp;i</code> appends a binary little-endian 32-bit integer
+    <code class="code">i</code> to <code class="code">b</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.08</li>
+</ul>
+</div>
+
+<pre id="VALadd_int64_ne">val add_int64_ne : t -&gt; int64 -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">add_int64_ne&nbsp;b&nbsp;i</code> appends a binary native-endian 64-bit integer
+    <code class="code">i</code> to <code class="code">b</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.08</li>
+</ul>
+</div>
+
+<pre id="VALadd_int64_be">val add_int64_be : t -&gt; int64 -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">add_int64_be&nbsp;b&nbsp;i</code> appends a binary big-endian 64-bit integer
+    <code class="code">i</code> to <code class="code">b</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.08</li>
+</ul>
+</div>
+
+<pre id="VALadd_int64_le">val add_int64_le : t -&gt; int64 -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">add_int64_ne&nbsp;b&nbsp;i</code> appends a binary little-endian 64-bit integer
+    <code class="code">i</code> to <code class="code">b</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.08</li>
+</ul>
+</div>
+
+</div></div><span><script src="/js/redirectBlog.js"></script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+                document.addEventListener('keyup', function(e) {
+                  if (e.target !== document.body) {
+                    return;
+                  }
+                  // keyCode for '/' (slash)
+                  if (e.keyCode === 191) {
+                    const search = document.getElementById('search_input_react');
+                    search && search.focus();
+                  }
+                });
+              </script><script>
+              var search = docsearch({
+                
+                apiKey: '966d1e412f67114a07dc0afe44b19b53',
+                indexName: 'reason',
+                inputSelector: '#search_input_react',
+                algoliaOptions: {"facetFilters":["lang:en"]}
+              });
+            </script></body></html>

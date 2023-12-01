@@ -1,0 +1,173 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Reason · Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems.</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Reason · Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io/"/><meta property="og:description" content="Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/icon_50.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io/blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io/blog/feed.xml" title="Reason Blog RSS Feed"/><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/en"><img class="logo" src="/img/dummy.svg" alt="Reason"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/docs/en/what-and-why" target="_self">Docs</a></li><li class=""><a href="/en/try" target="_self">Try</a></li><li class=""><a href="/api/index" target="_self">API</a></li><li class=""><a href="/docs/en/community" target="_self">Community</a></li><li class=""><a href="/blog/" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg" alt="Languages icon"/>English</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/ja/Stdlib.Stack">日本語</a></li><li><a href="/de/Stdlib.Stack">Deutsch</a></li><li><a href="/es-ES/Stdlib.Stack">Español</a></li><li><a href="/fr/Stdlib.Stack">Français</a></li><li><a href="/ko/Stdlib.Stack">한국어</a></li><li><a href="/pt-BR/Stdlib.Stack">Português (Brasil)</a></li><li><a href="/ru/Stdlib.Stack">Русский</a></li><li><a href="/uk/Stdlib.Stack">Українська</a></li><li><a href="/zh-CN/Stdlib.Stack">中文</a></li><li><a href="/zh-TW/Stdlib.Stack">繁體中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank" rel="noreferrer noopener">Help Translate</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/facebook/reason" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div><link rel="stylesheet" href="/css/main.css"><div class="ocamldoc">
+<h1>Module <a href="type_Stdlib.Stack.html">Stdlib.Stack</a></h1>
+
+<pre id="MODULEStack"><span class="keyword">module</span> Stack: Stack</pre><hr width="100%">
+<p><b>Unsynchronized accesses</b></p>
+<p>Unsynchronized accesses to a stack may lead to an invalid queue state.
+    Thus, concurrent accesses to stacks must be synchronized (for instance
+    with a <a href="Mutex.html#TYPEt"><code class="code">Mutex.t</code></a>).</p>
+
+<pre id="TYPEt"><span class="keyword">type</span> 'a t </pre>
+<div class="info ">
+<div class="info-desc">
+<p>The type of stacks containing elements of type <code class="code">'a</code>.</p>
+</div>
+</div>
+
+
+<pre id="EXCEPTIONEmpty"><span class="keyword">exception</span> Empty</pre>
+<div class="info ">
+<div class="info-desc">
+<p>Raised when <a href="Stack.html#VALpop"><code class="code">Stack.pop</code></a> or <a href="Stack.html#VALtop"><code class="code">Stack.top</code></a> is applied to an empty stack.</p>
+</div>
+</div>
+
+<pre id="VALcreate">val create : unit -&gt; 'a t</pre><div class="info ">
+<div class="info-desc">
+<p>Return a new stack, initially empty.</p>
+</div>
+</div>
+
+<pre id="VALpush">val push : 'a -&gt; 'a t -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">push&nbsp;x&nbsp;s</code> adds the element <code class="code">x</code> at the top of stack <code class="code">s</code>.</p>
+</div>
+</div>
+
+<pre id="VALpop">val pop : 'a t -&gt; 'a</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">pop&nbsp;s</code> removes and returns the topmost element in stack <code class="code">s</code>,
+   or raises <a href="Stack.html#EXCEPTIONEmpty"><code class="code">Stack.Empty</code></a> if the stack is empty.</p>
+</div>
+</div>
+
+<pre id="VALpop_opt">val pop_opt : 'a t -&gt; 'a option</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">pop_opt&nbsp;s</code> removes and returns the topmost element in stack <code class="code">s</code>,
+   or returns <code class="code">None</code> if the stack is empty.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.08</li>
+</ul>
+</div>
+
+<pre id="VALtop">val top : 'a t -&gt; 'a</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">top&nbsp;s</code> returns the topmost element in stack <code class="code">s</code>,
+   or raises <a href="Stack.html#EXCEPTIONEmpty"><code class="code">Stack.Empty</code></a> if the stack is empty.</p>
+</div>
+</div>
+
+<pre id="VALtop_opt">val top_opt : 'a t -&gt; 'a option</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">top_opt&nbsp;s</code> returns the topmost element in stack <code class="code">s</code>,
+   or <code class="code">None</code> if the stack is empty.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.08</li>
+</ul>
+</div>
+
+<pre id="VALclear">val clear : 'a t -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p>Discard all elements from a stack.</p>
+</div>
+</div>
+
+<pre id="VALcopy">val copy : 'a t -&gt; 'a t</pre><div class="info ">
+<div class="info-desc">
+<p>Return a copy of the given stack.</p>
+</div>
+</div>
+
+<pre id="VALis_empty">val is_empty : 'a t -&gt; bool</pre><div class="info ">
+<div class="info-desc">
+<p>Return <code class="code">true</code> if the given stack is empty, <code class="code">false</code> otherwise.</p>
+</div>
+</div>
+
+<pre id="VALlength">val length : 'a t -&gt; int</pre><div class="info ">
+<div class="info-desc">
+<p>Return the number of elements in a stack. Time complexity O(1)</p>
+</div>
+</div>
+
+<pre id="VALiter">val iter : ('a -&gt; unit) -&gt; 'a t -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">iter&nbsp;f&nbsp;s</code> applies <code class="code">f</code> in turn to all elements of <code class="code">s</code>,
+   from the element at the top of the stack to the element at the
+   bottom of the stack. The stack itself is unchanged.</p>
+</div>
+</div>
+
+<pre id="VALfold">val fold : ('b -&gt; 'a -&gt; 'b) -&gt; 'b -&gt; 'a t -&gt; 'b</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">fold&nbsp;f&nbsp;accu&nbsp;s</code> is <code class="code">(f&nbsp;(...&nbsp;(f&nbsp;(f&nbsp;accu&nbsp;x1)&nbsp;x2)&nbsp;...)&nbsp;xn)</code>
+    where <code class="code">x1</code> is the top of the stack, <code class="code">x2</code> the second element,
+    and <code class="code">xn</code> the bottom element. The stack is unchanged.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.03</li>
+</ul>
+</div>
+<h2 id="1_StacksandSequences">Stacks and Sequences</h2>
+<pre id="VALto_seq">val to_seq : 'a t -&gt; 'a Seq.t</pre><div class="info ">
+<div class="info-desc">
+<p>Iterate on the stack, top to bottom.
+    It is safe to modify the stack during iteration.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.07</li>
+</ul>
+</div>
+
+<pre id="VALadd_seq">val add_seq : 'a t -&gt; 'a Seq.t -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p>Add the elements from the sequence on the top of the stack.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.07</li>
+</ul>
+</div>
+
+<pre id="VALof_seq">val of_seq : 'a Seq.t -&gt; 'a t</pre><div class="info ">
+<div class="info-desc">
+<p>Create a stack from the sequence.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.07</li>
+</ul>
+</div>
+
+</div></div><span><script src="/js/redirectBlog.js"></script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+                document.addEventListener('keyup', function(e) {
+                  if (e.target !== document.body) {
+                    return;
+                  }
+                  // keyCode for '/' (slash)
+                  if (e.keyCode === 191) {
+                    const search = document.getElementById('search_input_react');
+                    search && search.focus();
+                  }
+                });
+              </script><script>
+              var search = docsearch({
+                
+                apiKey: '966d1e412f67114a07dc0afe44b19b53',
+                indexName: 'reason',
+                inputSelector: '#search_input_react',
+                algoliaOptions: {"facetFilters":["lang:en"]}
+              });
+            </script></body></html>

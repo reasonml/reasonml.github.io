@@ -1,0 +1,97 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Reason · Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems.</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Reason · Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io/"/><meta property="og:description" content="Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/icon_50.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io/blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io/blog/feed.xml" title="Reason Blog RSS Feed"/><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/en"><img class="logo" src="/img/dummy.svg" alt="Reason"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/docs/en/what-and-why" target="_self">Docs</a></li><li class=""><a href="/en/try" target="_self">Try</a></li><li class=""><a href="/api/index" target="_self">API</a></li><li class=""><a href="/docs/en/community" target="_self">Community</a></li><li class=""><a href="/blog/" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg" alt="Languages icon"/>English</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/ja/Stdlib.Fun">日本語</a></li><li><a href="/de/Stdlib.Fun">Deutsch</a></li><li><a href="/es-ES/Stdlib.Fun">Español</a></li><li><a href="/fr/Stdlib.Fun">Français</a></li><li><a href="/ko/Stdlib.Fun">한국어</a></li><li><a href="/pt-BR/Stdlib.Fun">Português (Brasil)</a></li><li><a href="/ru/Stdlib.Fun">Русский</a></li><li><a href="/uk/Stdlib.Fun">Українська</a></li><li><a href="/zh-CN/Stdlib.Fun">中文</a></li><li><a href="/zh-TW/Stdlib.Fun">繁體中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank" rel="noreferrer noopener">Help Translate</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/facebook/reason" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div><link rel="stylesheet" href="/css/main.css"><div class="ocamldoc">
+<h1>Module <a href="type_Stdlib.Fun.html">Stdlib.Fun</a></h1>
+
+<pre id="MODULEFun"><span class="keyword">module</span> Fun: Fun</pre><hr width="100%">
+<h2 id="combinators">Combinators</h2>
+<pre id="VALid">val id : 'a -&gt; 'a</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">id</code> is the identity function. For any argument <code class="code">x</code>, <code class="code">id&nbsp;x</code> is <code class="code">x</code>.</p>
+</div>
+</div>
+
+<pre id="VALconst">val const : 'a -&gt; 'b -&gt; 'a</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">const&nbsp;c</code> is a function that always returns the value <code class="code">c</code>. For any
+    argument <code class="code">x</code>, <code class="code">(const&nbsp;c)&nbsp;x</code> is <code class="code">c</code>.</p>
+</div>
+</div>
+
+<pre id="VALflip">val flip : ('a -&gt; 'b -&gt; 'c) -&gt; 'b -&gt; 'a -&gt; 'c</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">flip&nbsp;f</code> reverses the argument order of the binary function
+    <code class="code">f</code>. For any arguments <code class="code">x</code> and <code class="code">y</code>, <code class="code">(flip&nbsp;f)&nbsp;x&nbsp;y</code> is <code class="code">f&nbsp;y&nbsp;x</code>.</p>
+</div>
+</div>
+
+<pre id="VALnegate">val negate : ('a -&gt; bool) -&gt; 'a -&gt; bool</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">negate&nbsp;p</code> is the negation of the predicate function <code class="code">p</code>. For any
+    argument <code class="code">x</code>, <code class="code">(negate&nbsp;p)&nbsp;x</code> is <code class="code">not&nbsp;(p&nbsp;x)</code>.</p>
+</div>
+</div>
+<h2 id="exception">Exception handling</h2>
+<pre id="VALprotect">val protect : finally:(unit -&gt; unit) -&gt; (unit -&gt; 'a) -&gt; 'a</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">protect&nbsp;~finally&nbsp;work</code> invokes <code class="code">work&nbsp;()</code> and then <code class="code">finally&nbsp;()</code>
+    before <code class="code">work&nbsp;()</code> returns with its value or an exception. In the
+    latter case the exception is re-raised after <code class="code">finally&nbsp;()</code>. If
+    <code class="code">finally&nbsp;()</code> raises an exception, then the exception
+    <a href="Fun.html#EXCEPTIONFinally_raised"><code class="code">Fun.Finally_raised</code></a> is raised instead.</p>
+
+<p><code class="code">protect</code> can be used to enforce local invariants whether <code class="code">work&nbsp;()</code>
+    returns normally or raises an exception. However, it does not
+    protect against unexpected exceptions raised inside <code class="code">finally&nbsp;()</code>
+    such as <a href="Stdlib.html#EXCEPTIONOut_of_memory"><code class="code">Out_of_memory</code></a>, <a href="Stdlib.html#EXCEPTIONStack_overflow"><code class="code">Stack_overflow</code></a>, or
+    asynchronous exceptions raised by signal handlers
+    (e.g. <a href="Sys.html#EXCEPTIONBreak"><code class="code">Sys.Break</code></a>).</p>
+
+<p>Note: It is a <em>programming error</em> if other kinds of exceptions
+    are raised by <code class="code">finally</code>, as any exception raised in <code class="code">work&nbsp;()</code> will
+    be lost in the event of a <a href="Fun.html#EXCEPTIONFinally_raised"><code class="code">Fun.Finally_raised</code></a> exception. Therefore,
+    one should make sure to handle those inside the finally.</p>
+</div>
+</div>
+
+<pre id="EXCEPTIONFinally_raised"><span class="keyword">exception</span> Finally_raised of exn</pre>
+<div class="info ">
+<div class="info-desc">
+<p><code class="code">Finally_raised&nbsp;exn</code> is raised by <code class="code">protect&nbsp;~finally&nbsp;work</code> when
+    <code class="code">finally</code> raises an exception <code class="code">exn</code>. This exception denotes either
+    an unexpected exception or a programming error. As a general rule,
+    one should not catch a <code class="code">Finally_raised</code> exception except as part of
+    a catch-all handler.</p>
+</div>
+</div>
+
+</div></div><span><script src="/js/redirectBlog.js"></script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+                document.addEventListener('keyup', function(e) {
+                  if (e.target !== document.body) {
+                    return;
+                  }
+                  // keyCode for '/' (slash)
+                  if (e.keyCode === 191) {
+                    const search = document.getElementById('search_input_react');
+                    search && search.focus();
+                  }
+                });
+              </script><script>
+              var search = docsearch({
+                
+                apiKey: '966d1e412f67114a07dc0afe44b19b53',
+                indexName: 'reason',
+                inputSelector: '#search_input_react',
+                algoliaOptions: {"facetFilters":["lang:en"]}
+              });
+            </script></body></html>

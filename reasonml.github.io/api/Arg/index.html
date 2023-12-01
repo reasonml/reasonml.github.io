@@ -11,42 +11,69 @@
           }
         });
       </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/facebook/reason" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div><link rel="stylesheet" href="/css/main.css"><div class="ocamldoc">
-<div class="navbar">&#xA0;<a class="up" href="index.html" title="Index">Up</a>
-&#xA0;<a class="post" href="Array.html" title="Array">Next</a>
-</div>
 <h1>Module <a href="type_Arg.html">Arg</a></h1>
 
-<pre><span class="keyword">module</span> Arg: sig .. end</pre><div class="info module top">
-Parsing of command line arguments.
-<p>
+<pre id="MODULEArg"><span class="keyword">module</span> Arg: sig .. end</pre><div class="info module top">
+<div class="info-desc">
+<p>Parsing of command line arguments.</p>
 
-   This module provides a general mechanism for extracting options and
-   arguments from the command line to the program.
-</p><p>
+<p>This module provides a general mechanism for extracting options and
+   arguments from the command line to the program. For example:</p>
 
-   Syntax of command lines:
+<pre class="codepre">     let usage_msg = "append [-verbose] &lt;file1&gt; [&lt;file2&gt;] ... -o &lt;output&gt;"
+     let verbose = ref false
+     let input_files = ref []
+     let output_file = ref ""
+
+     let anon_fun filename =
+       input_files := filename::!input_files
+
+     let speclist =
+       [("-verbose", Arg.Set verbose, "Output debug information");
+        ("-o", Arg.Set_string output_file, "Set output file name")]
+
+     let () =
+       Arg.parse speclist anon_fun usage_msg;
+       (* Main functionality here *)
+</pre>
+<p>Syntax of command lines:
     A keyword is a character string starting with a <code class="code">-</code>.
     An option is a keyword alone or followed by an argument.
     The types of keywords are: <code class="code">Unit</code>, <code class="code">Bool</code>, <code class="code">Set</code>, <code class="code">Clear</code>,
     <code class="code">String</code>, <code class="code">Set_string</code>, <code class="code">Int</code>, <code class="code">Set_int</code>, <code class="code">Float</code>, <code class="code">Set_float</code>,
-    <code class="code">Tuple</code>, <code class="code">Symbol</code>, and <code class="code">Rest</code>.
-    <code class="code">Unit</code>, <code class="code">Set</code> and <code class="code">Clear</code> keywords take no argument. A <code class="code">Rest</code>
-    keyword takes the remaining of the command line as arguments.
-    Every other keyword takes the following word on the command line
-    as argument.
-    Arguments not preceded by a keyword are called anonymous arguments.
-</p><p>
+    <code class="code">Tuple</code>, <code class="code">Symbol</code>, <code class="code">Rest</code>, <code class="code">Rest_all</code> and <code class="code">Expand</code>.</p>
 
-   Examples (<code class="code">cmd</code> is assumed to be the command name):</p><ul>
-<li>  <code class="code">cmd -flag           </code>(a unit option)</li>
-<li>  <code class="code">cmd -int 1          </code>(an int option with argument <code class="code">1</code>)</li>
-<li>  <code class="code">cmd -string foobar  </code>(a string option with argument <code class="code">&quot;foobar&quot;</code>)</li>
-<li>  <code class="code">cmd -float 12.34    </code>(a float option with argument <code class="code">12.34</code>)</li>
-<li>  <code class="code">cmd a b c           </code>(three anonymous arguments: <code class="code">&quot;a&quot;</code>, <code class="code">&quot;b&quot;</code>, and <code class="code">&quot;c&quot;</code>)</li>
-<li>  <code class="code">cmd a b -- c d      </code>(two anonymous arguments and a rest option with
+<p><code class="code">Unit</code>, <code class="code">Set</code> and <code class="code">Clear</code> keywords take no argument.</p>
+
+<p>A <code class="code">Rest</code> or <code class="code">Rest_all</code> keyword takes the remainder of the command line
+    as arguments. (More explanations below.)</p>
+
+<p>Every other keyword takes the following word on the command line
+    as argument.  For compatibility with GNU getopt_long, <code class="code">keyword=arg</code>
+    is also allowed.
+    Arguments not preceded by a keyword are called anonymous arguments.</p>
+
+<p>Examples (<code class="code">cmd</code> is assumed to be the command name):</p>
+<ul>
+<li>  <code class="code">cmd&nbsp;-flag&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code>(a unit option)</li>
+<li>  <code class="code">cmd&nbsp;-int&nbsp;1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code>(an int option with argument <code class="code">1</code>)</li>
+<li>  <code class="code">cmd&nbsp;-string&nbsp;foobar&nbsp;&nbsp;</code>(a string option with argument <code class="code">"foobar"</code>)</li>
+<li>  <code class="code">cmd&nbsp;-float&nbsp;12.34&nbsp;&nbsp;&nbsp;&nbsp;</code>(a float option with argument <code class="code">12.34</code>)</li>
+<li>  <code class="code">cmd&nbsp;a&nbsp;b&nbsp;c&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code>(three anonymous arguments: <code class="code">"a"</code>, <code class="code">"b"</code>, and <code class="code">"c"</code>)</li>
+<li>  <code class="code">cmd&nbsp;a&nbsp;b&nbsp;--&nbsp;c&nbsp;d&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code>(two anonymous arguments and a rest option with
                            two arguments)</li>
 </ul>
-<br>
+<p><code class="code">Rest</code> takes a function that is called repeatedly for each
+    remaining command line argument. <code class="code">Rest_all</code> takes a function that
+    is called once, with the list of all remaining arguments.</p>
+
+<p>Note that if no arguments follow a <code class="code">Rest</code> keyword then the function
+    is not called at all whereas the function for a <code class="code">Rest_all</code> keyword
+    is called with an empty list.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Alert unsynchronized_access.</b> The Arg module relies on a mutable global state, parsing functions should only be called from a single domain.</li>
+</ul>
 </div>
 <hr width="100%">
 
@@ -57,7 +84,9 @@ Parsing of command line arguments.
 <td align="left" valign="top">
 <code>Unit of (unit -&gt; unit)</code></td>
 <td class="typefieldcomment" align="left" valign="top"><code>(*</code></td><td class="typefieldcomment" align="left" valign="top"><div class="info ">
-Call the function with unit argument<br>
+<div class="info-desc">
+<p>Call the function with unit argument</p>
+</div>
 </div>
 </td><td class="typefieldcomment" align="left" valign="bottom"><code>*)</code></td>
 </tr>
@@ -67,7 +96,9 @@ Call the function with unit argument<br>
 <td align="left" valign="top">
 <code>Bool of (bool -&gt; unit)</code></td>
 <td class="typefieldcomment" align="left" valign="top"><code>(*</code></td><td class="typefieldcomment" align="left" valign="top"><div class="info ">
-Call the function with a bool argument<br>
+<div class="info-desc">
+<p>Call the function with a bool argument</p>
+</div>
 </div>
 </td><td class="typefieldcomment" align="left" valign="bottom"><code>*)</code></td>
 </tr>
@@ -75,9 +106,11 @@ Call the function with a bool argument<br>
 <td align="left" valign="top">
 <code>|</code></td>
 <td align="left" valign="top">
-<code>Set of bool Pervasives.ref</code></td>
+<code>Set of bool ref</code></td>
 <td class="typefieldcomment" align="left" valign="top"><code>(*</code></td><td class="typefieldcomment" align="left" valign="top"><div class="info ">
-Set the reference to true<br>
+<div class="info-desc">
+<p>Set the reference to true</p>
+</div>
 </div>
 </td><td class="typefieldcomment" align="left" valign="bottom"><code>*)</code></td>
 </tr>
@@ -85,9 +118,11 @@ Set the reference to true<br>
 <td align="left" valign="top">
 <code>|</code></td>
 <td align="left" valign="top">
-<code>Clear of bool Pervasives.ref</code></td>
+<code>Clear of bool ref</code></td>
 <td class="typefieldcomment" align="left" valign="top"><code>(*</code></td><td class="typefieldcomment" align="left" valign="top"><div class="info ">
-Set the reference to false<br>
+<div class="info-desc">
+<p>Set the reference to false</p>
+</div>
 </div>
 </td><td class="typefieldcomment" align="left" valign="bottom"><code>*)</code></td>
 </tr>
@@ -97,7 +132,9 @@ Set the reference to false<br>
 <td align="left" valign="top">
 <code>String of (string -&gt; unit)</code></td>
 <td class="typefieldcomment" align="left" valign="top"><code>(*</code></td><td class="typefieldcomment" align="left" valign="top"><div class="info ">
-Call the function with a string argument<br>
+<div class="info-desc">
+<p>Call the function with a string argument</p>
+</div>
 </div>
 </td><td class="typefieldcomment" align="left" valign="bottom"><code>*)</code></td>
 </tr>
@@ -105,9 +142,11 @@ Call the function with a string argument<br>
 <td align="left" valign="top">
 <code>|</code></td>
 <td align="left" valign="top">
-<code>Set_string of string Pervasives.ref</code></td>
+<code>Set_string of string ref</code></td>
 <td class="typefieldcomment" align="left" valign="top"><code>(*</code></td><td class="typefieldcomment" align="left" valign="top"><div class="info ">
-Set the reference to the string argument<br>
+<div class="info-desc">
+<p>Set the reference to the string argument</p>
+</div>
 </div>
 </td><td class="typefieldcomment" align="left" valign="bottom"><code>*)</code></td>
 </tr>
@@ -117,7 +156,9 @@ Set the reference to the string argument<br>
 <td align="left" valign="top">
 <code>Int of (int -&gt; unit)</code></td>
 <td class="typefieldcomment" align="left" valign="top"><code>(*</code></td><td class="typefieldcomment" align="left" valign="top"><div class="info ">
-Call the function with an int argument<br>
+<div class="info-desc">
+<p>Call the function with an int argument</p>
+</div>
 </div>
 </td><td class="typefieldcomment" align="left" valign="bottom"><code>*)</code></td>
 </tr>
@@ -125,9 +166,11 @@ Call the function with an int argument<br>
 <td align="left" valign="top">
 <code>|</code></td>
 <td align="left" valign="top">
-<code>Set_int of int Pervasives.ref</code></td>
+<code>Set_int of int ref</code></td>
 <td class="typefieldcomment" align="left" valign="top"><code>(*</code></td><td class="typefieldcomment" align="left" valign="top"><div class="info ">
-Set the reference to the int argument<br>
+<div class="info-desc">
+<p>Set the reference to the int argument</p>
+</div>
 </div>
 </td><td class="typefieldcomment" align="left" valign="bottom"><code>*)</code></td>
 </tr>
@@ -137,7 +180,9 @@ Set the reference to the int argument<br>
 <td align="left" valign="top">
 <code>Float of (float -&gt; unit)</code></td>
 <td class="typefieldcomment" align="left" valign="top"><code>(*</code></td><td class="typefieldcomment" align="left" valign="top"><div class="info ">
-Call the function with a float argument<br>
+<div class="info-desc">
+<p>Call the function with a float argument</p>
+</div>
 </div>
 </td><td class="typefieldcomment" align="left" valign="bottom"><code>*)</code></td>
 </tr>
@@ -145,9 +190,11 @@ Call the function with a float argument<br>
 <td align="left" valign="top">
 <code>|</code></td>
 <td align="left" valign="top">
-<code>Set_float of float Pervasives.ref</code></td>
+<code>Set_float of float ref</code></td>
 <td class="typefieldcomment" align="left" valign="top"><code>(*</code></td><td class="typefieldcomment" align="left" valign="top"><div class="info ">
-Set the reference to the float argument<br>
+<div class="info-desc">
+<p>Set the reference to the float argument</p>
+</div>
 </div>
 </td><td class="typefieldcomment" align="left" valign="bottom"><code>*)</code></td>
 </tr>
@@ -157,8 +204,10 @@ Set the reference to the float argument<br>
 <td align="left" valign="top">
 <code>Tuple of spec list</code></td>
 <td class="typefieldcomment" align="left" valign="top"><code>(*</code></td><td class="typefieldcomment" align="left" valign="top"><div class="info ">
-Take several arguments according to the
-                                   spec list<br>
+<div class="info-desc">
+<p>Take several arguments according to the
+                                   spec list</p>
+</div>
 </div>
 </td><td class="typefieldcomment" align="left" valign="bottom"><code>*)</code></td>
 </tr>
@@ -168,8 +217,10 @@ Take several arguments according to the
 <td align="left" valign="top">
 <code>Symbol of string list * (string -&gt; unit)</code></td>
 <td class="typefieldcomment" align="left" valign="top"><code>(*</code></td><td class="typefieldcomment" align="left" valign="top"><div class="info ">
-Take one of the symbols as argument and
-                                   call the function with the symbol<br>
+<div class="info-desc">
+<p>Take one of the symbols as argument and
+                                   call the function with the symbol</p>
+</div>
 </div>
 </td><td class="typefieldcomment" align="left" valign="bottom"><code>*)</code></td>
 </tr>
@@ -179,161 +230,252 @@ Take one of the symbols as argument and
 <td align="left" valign="top">
 <code>Rest of (string -&gt; unit)</code></td>
 <td class="typefieldcomment" align="left" valign="top"><code>(*</code></td><td class="typefieldcomment" align="left" valign="top"><div class="info ">
-Stop interpreting keywords and call the
-                                   function with each remaining argument<br>
+<div class="info-desc">
+<p>Stop interpreting keywords and call the
+                                   function with each remaining argument</p>
+</div>
+</div>
+</td><td class="typefieldcomment" align="left" valign="bottom"><code>*)</code></td>
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Rest_all of (string list -&gt; unit)</code></td>
+<td class="typefieldcomment" align="left" valign="top"><code>(*</code></td><td class="typefieldcomment" align="left" valign="top"><div class="info ">
+<div class="info-desc">
+<p>Stop interpreting keywords and call the
+                                   function with all remaining arguments</p>
+</div>
+</div>
+</td><td class="typefieldcomment" align="left" valign="bottom"><code>*)</code></td>
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Expand of (string -&gt; string array)</code></td>
+<td class="typefieldcomment" align="left" valign="top"><code>(*</code></td><td class="typefieldcomment" align="left" valign="top"><div class="info ">
+<div class="info-desc">
+<p>If the remaining arguments to process
+                                           are of the form
+                                           <code class="code">["-foo";&nbsp;"arg"]&nbsp;@&nbsp;rest</code> where "foo"
+                                           is registered as <code class="code">Expand&nbsp;f</code>, then the
+                                           arguments <code class="code">f&nbsp;"arg"&nbsp;@&nbsp;rest</code> are
+                                           processed. Only allowed in
+                                           <code class="code">parse_and_expand_argv_dynamic</code>.</p>
+</div>
 </div>
 </td><td class="typefieldcomment" align="left" valign="bottom"><code>*)</code></td>
 </tr></tbody></table>
 
 <div class="info ">
-The concrete type describing the behavior associated
-   with a keyword.<br>
+<div class="info-desc">
+<p>The concrete type describing the behavior associated
+   with a keyword.</p>
+</div>
 </div>
 
 
-<pre id="TYPEkey"><span class="keyword">type</span> key = string;
-</pre>
+<pre id="TYPEkey"><span class="keyword">type</span> key = string </pre>
 
 
-<pre id="TYPEdoc"><span class="keyword">type</span> doc = string;
-</pre>
+<pre id="TYPEdoc"><span class="keyword">type</span> doc = string </pre>
 
 
-<pre id="TYPEusage_msg"><span class="keyword">type</span> usage_msg = string;
-</pre>
+<pre id="TYPEusage_msg"><span class="keyword">type</span> usage_msg = string </pre>
 
 
-<pre id="TYPEanon_fun"><span class="keyword">type</span> anon_fun = string =&gt; unit;
-</pre>
+<pre id="TYPEanon_fun"><span class="keyword">type</span> anon_fun = string -&gt; unit </pre>
 
 
-<pre id="VALparse"><span class="keyword">let</span> parse: (list((key, spec, doc)), anon_fun, usage_msg) =&gt; unit;
-</pre><div class="info ">
-<code class="code">Arg.parse speclist anon_fun usage_msg</code> parses the command line.
-    <code class="code">speclist</code> is a list of triples <code class="code">(key, spec, doc)</code>.
-    <code class="code">key</code> is the option keyword, it must start with a <code class="code">&apos;-&apos;</code> character.
+<pre id="VALparse">val parse : (key * spec * doc) list -&gt; anon_fun -&gt; usage_msg -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">Arg.parse&nbsp;speclist&nbsp;anon_fun&nbsp;usage_msg</code> parses the command line.
+    <code class="code">speclist</code> is a list of triples <code class="code">(key,&nbsp;spec,&nbsp;doc)</code>.
+    <code class="code">key</code> is the option keyword, it must start with a <code class="code">'-'</code> character.
     <code class="code">spec</code> gives the option type and the function to call when this option
     is found on the command line.
     <code class="code">doc</code> is a one-line description of this option.
     <code class="code">anon_fun</code> is called on anonymous arguments.
     The functions in <code class="code">spec</code> and <code class="code">anon_fun</code> are called in the same order
-    as their arguments appear on the command line.
-<p>
+    as their arguments appear on the command line.</p>
 
-    If an error occurs, <code class="code">Arg.parse</code> exits the program, after printing
-    to standard error an error message as follows:</p><ul>
+<p>If an error occurs, <code class="code">Arg.parse</code> exits the program, after printing
+    to standard error an error message as follows:</p>
+<ul>
 <li>  The reason for the error: unknown option, invalid or missing argument, etc.</li>
 <li>  <code class="code">usage_msg</code></li>
 <li>  The list of options, each followed by the corresponding <code class="code">doc</code> string.
     Beware: options that have an empty <code class="code">doc</code> string will not be included in the
     list.</li>
 </ul>
+<p>For the user to be able to specify anonymous arguments starting with a
+    <code class="code">-</code>, include for example <code class="code">("-",&nbsp;String&nbsp;anon_fun,&nbsp;doc)</code> in <code class="code">speclist</code>.</p>
 
-    For the user to be able to specify anonymous arguments starting with a
-    <code class="code">-</code>, include for example <code class="code">(&quot;-&quot;, String anon_fun, doc)</code> in <code class="code">speclist</code>.
-<p>
-
-    By default, <code class="code">parse</code> recognizes two unit options, <code class="code">-help</code> and <code class="code">--help</code>,
+<p>By default, <code class="code">parse</code> recognizes two unit options, <code class="code">-help</code> and <code class="code">--help</code>,
     which will print to standard output <code class="code">usage_msg</code> and the list of
     options, and exit the program.  You can override this behaviour
-    by specifying your own <code class="code">-help</code> and <code class="code">--help</code> options in <code class="code">speclist</code>.<br>
-</p></div>
+    by specifying your own <code class="code">-help</code> and <code class="code">--help</code> options in <code class="code">speclist</code>.</p>
+</div>
+</div>
 
-<pre id="VALparse_dynamic"><span class="keyword">let</span> parse_dynamic:
-  (Pervasives.ref(list((key, spec, doc))), anon_fun, usage_msg) =&gt; unit;
-</pre><div class="info ">
-Same as <a href="Arg.html#VALparse"><code class="code">Arg.parse</code></a>, except that the <code class="code">speclist</code> argument is a reference
+<pre id="VALparse_dynamic">val parse_dynamic : (key * spec * doc) list ref -&gt;       anon_fun -&gt; usage_msg -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p>Same as <a href="Arg.html#VALparse"><code class="code">Arg.parse</code></a>, except that the <code class="code">speclist</code> argument is a reference
     and may be updated during the parsing. A typical use for this feature
-    is to parse command lines of the form:<ul>
+    is to parse command lines of the form:</p>
+<ul>
 <li>    command subcommand <code class="code">options</code>
     where the list of options depends on the value of the subcommand argument.</li>
 </ul>
-<br>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.01.0</li>
+</ul>
 </div>
 
-<pre id="VALparse_argv"><span class="keyword">let</span> parse_argv:
-  (
-    ~current: Pervasives.ref(int)=?,
-    array(string),
-    list((key, spec, doc)),
-    anon_fun,
-    usage_msg
-  ) =&gt;
-  unit;
-</pre><div class="info ">
-<code class="code">Arg.parse_argv ~current args speclist anon_fun usage_msg</code> parses
+<pre id="VALparse_argv">val parse_argv : ?current:int ref -&gt;       string array -&gt;       (key * spec * doc) list -&gt; anon_fun -&gt; usage_msg -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">Arg.parse_argv&nbsp;~current&nbsp;args&nbsp;speclist&nbsp;anon_fun&nbsp;usage_msg</code> parses
   the array <code class="code">args</code> as if it were the command line.  It uses and updates
-  the value of <code class="code">~current</code> (if given), or <code class="code">Arg.current</code>.  You must set
+  the value of <code class="code">~current</code> (if given), or <a href="Arg.html#VALcurrent"><code class="code">Arg.current</code></a>.  You must set
   it before calling <code class="code">parse_argv</code>.  The initial value of <code class="code">current</code>
   is the index of the program name (argument 0) in the array.
-  If an error occurs, <code class="code">Arg.parse_argv</code> raises <code class="code">Arg.Bad</code> with
+  If an error occurs, <code class="code">Arg.parse_argv</code> raises <a href="Arg.html#EXCEPTIONBad"><code class="code">Arg.Bad</code></a> with
   the error message as argument.  If option <code class="code">-help</code> or <code class="code">--help</code> is
-  given, <code class="code">Arg.parse_argv</code> raises <code class="code">Arg.Help</code> with the help message
-  as argument.<br>
+  given, <code class="code">Arg.parse_argv</code> raises <a href="Arg.html#EXCEPTIONHelp"><code class="code">Arg.Help</code></a> with the help message
+  as argument.</p>
+</div>
 </div>
 
-<pre id="VALparse_argv_dynamic"><span class="keyword">let</span> parse_argv_dynamic:
-  (
-    ~current: Pervasives.ref(int)=?,
-    array(string),
-    Pervasives.ref(list((key, spec, doc))),
-    anon_fun,
-    string
-  ) =&gt;
-  unit;
-</pre><div class="info ">
-Same as <a href="Arg.html#VALparse_argv"><code class="code">Arg.parse_argv</code></a>, except that the <code class="code">speclist</code> argument is a
+<pre id="VALparse_argv_dynamic">val parse_argv_dynamic : ?current:int ref -&gt;       string array -&gt;       (key * spec * doc) list ref -&gt;       anon_fun -&gt; string -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p>Same as <a href="Arg.html#VALparse_argv"><code class="code">Arg.parse_argv</code></a>, except that the <code class="code">speclist</code> argument is a
     reference and may be updated during the parsing.
-    See <a href="Arg.html#VALparse_dynamic"><code class="code">Arg.parse_dynamic</code></a>.<br>
+    See <a href="Arg.html#VALparse_dynamic"><code class="code">Arg.parse_dynamic</code></a>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.01.0</li>
+</ul>
 </div>
 
-<pre id="EXCEPTIONHelp"><span class="keyword">exception</span> Help(string);
-</pre>
-<div class="info ">
-Raised by <code class="code">Arg.parse_argv</code> when the user asks for help.<br>
+<pre id="VALparse_and_expand_argv_dynamic">val parse_and_expand_argv_dynamic : int ref -&gt;       string array ref -&gt;       (key * spec * doc) list ref -&gt;       anon_fun -&gt; string -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p>Same as <a href="Arg.html#VALparse_argv_dynamic"><code class="code">Arg.parse_argv_dynamic</code></a>, except that the <code class="code">argv</code> argument is a
+    reference and may be updated during the parsing of <code class="code">Expand</code> arguments.
+    See <a href="Arg.html#VALparse_argv_dynamic"><code class="code">Arg.parse_argv_dynamic</code></a>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.05.0</li>
+</ul>
 </div>
 
-<pre id="EXCEPTIONBad"><span class="keyword">exception</span> Bad(string);
-</pre>
+<pre id="VALparse_expand">val parse_expand : (key * spec * doc) list -&gt; anon_fun -&gt; usage_msg -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p>Same as <a href="Arg.html#VALparse"><code class="code">Arg.parse</code></a>, except that the <code class="code">Expand</code> arguments are allowed and
+    the <a href="Arg.html#VALcurrent"><code class="code">Arg.current</code></a> reference is not updated.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.05.0</li>
+</ul>
+</div>
+
+<pre id="EXCEPTIONHelp"><span class="keyword">exception</span> Help of string</pre>
 <div class="info ">
-Functions in <code class="code">spec</code> or <code class="code">anon_fun</code> can raise <code class="code">Arg.Bad</code> with an error
+<div class="info-desc">
+<p>Raised by <code class="code">Arg.parse_argv</code> when the user asks for help.</p>
+</div>
+</div>
+
+<pre id="EXCEPTIONBad"><span class="keyword">exception</span> Bad of string</pre>
+<div class="info ">
+<div class="info-desc">
+<p>Functions in <code class="code">spec</code> or <code class="code">anon_fun</code> can raise <code class="code">Arg.Bad</code> with an error
     message to reject invalid arguments.
-    <code class="code">Arg.Bad</code> is also raised by <code class="code">Arg.parse_argv</code> in case of an error.<br>
+    <code class="code">Arg.Bad</code> is also raised by <a href="Arg.html#VALparse_argv"><code class="code">Arg.parse_argv</code></a> in case of an error.</p>
+</div>
 </div>
 
-<pre id="VALusage"><span class="keyword">let</span> usage: (list((key, spec, doc)), usage_msg) =&gt; unit;
-</pre><div class="info ">
-<code class="code">Arg.usage speclist usage_msg</code> prints to standard error
+<pre id="VALusage">val usage : (key * spec * doc) list -&gt; usage_msg -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">Arg.usage&nbsp;speclist&nbsp;usage_msg</code> prints to standard error
     an error message that includes the list of valid options.  This is
     the same message that <a href="Arg.html#VALparse"><code class="code">Arg.parse</code></a> prints in case of error.
-    <code class="code">speclist</code> and <code class="code">usage_msg</code> are the same as for <code class="code">Arg.parse</code>.<br>
+    <code class="code">speclist</code> and <code class="code">usage_msg</code> are the same as for <a href="Arg.html#VALparse"><code class="code">Arg.parse</code></a>.</p>
+</div>
 </div>
 
-<pre id="VALusage_string"><span class="keyword">let</span> usage_string: (list((key, spec, doc)), usage_msg) =&gt; string;
-</pre><div class="info ">
-Returns the message that would have been printed by <a href="Arg.html#VALusage"><code class="code">Arg.usage</code></a>,
-    if provided with the same parameters.<br>
+<pre id="VALusage_string">val usage_string : (key * spec * doc) list -&gt; usage_msg -&gt; string</pre><div class="info ">
+<div class="info-desc">
+<p>Returns the message that would have been printed by <a href="Arg.html#VALusage"><code class="code">Arg.usage</code></a>,
+    if provided with the same parameters.</p>
+</div>
 </div>
 
-<pre id="VALalign"><span class="keyword">let</span> align: (~limit: int=?, list((key, spec, doc))) =&gt; list((key, spec, doc));
-</pre><div class="info ">
-Align the documentation strings by inserting spaces at the first
-    space, according to the length of the keyword.  Use a
-    space as the first character in a doc string if you want to
-    align the whole string.  The doc strings corresponding to
-    <code class="code">Symbol</code> arguments are aligned on the next line.<br>
+<pre id="VALalign">val align : ?limit:int -&gt;       (key * spec * doc) list -&gt; (key * spec * doc) list</pre><div class="info ">
+<div class="info-desc">
+<p>Align the documentation strings by inserting spaces at the first alignment
+    separator (tab or, if tab is not found, space), according to the length of
+    the keyword.  Use a alignment separator as the first character in a doc
+    string if you want to align the whole string.  The doc strings corresponding
+    to <code class="code">Symbol</code> arguments are aligned on the next line.</p>
 </div>
-<div class="param_info"><code class="code">limit</code> : options with keyword and message longer than
-    <code class="code">limit</code> will not be used to compute the alignement.</div>
+</div>
+<div class="param_info"><code class="code">limit</code> : options with keyword and message longer than <code class="code">limit</code> will not
+    be used to compute the alignment.</div>
 
-<pre id="VALcurrent"><span class="keyword">let</span> current: Pervasives.ref(int);
-</pre><div class="info ">
-Position (in <a href="Sys.html#VALargv"><code class="code">Sys.argv</code></a>) of the argument being processed.  You can
+<pre id="VALcurrent">val current : int ref</pre><div class="info ">
+<div class="info-desc">
+<p>Position (in <a href="Sys.html#VALargv"><code class="code">Sys.argv</code></a>) of the argument being processed.  You can
     change this value, e.g. to force <a href="Arg.html#VALparse"><code class="code">Arg.parse</code></a> to skip some arguments.
     <a href="Arg.html#VALparse"><code class="code">Arg.parse</code></a> uses the initial value of <a href="Arg.html#VALcurrent"><code class="code">Arg.current</code></a> as the index of
     argument 0 (the program name) and starts parsing arguments
-    at the next element.<br>
+    at the next element.</p>
 </div>
+</div>
+
+<pre id="VALread_arg">val read_arg : string -&gt; string array</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">Arg.read_arg&nbsp;file</code> reads newline-terminated command line arguments from
+    file <code class="code">file</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.05.0</li>
+</ul>
+</div>
+
+<pre id="VALread_arg0">val read_arg0 : string -&gt; string array</pre><div class="info ">
+<div class="info-desc">
+<p>Identical to <a href="Arg.html#VALread_arg"><code class="code">Arg.read_arg</code></a> but assumes null character terminated command
+    line arguments.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.05.0</li>
+</ul>
+</div>
+
+<pre id="VALwrite_arg">val write_arg : string -&gt; string array -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">Arg.write_arg&nbsp;file&nbsp;args</code> writes the arguments <code class="code">args</code> newline-terminated
+    into the file <code class="code">file</code>. If the any of the arguments in <code class="code">args</code> contains a
+    newline, use <a href="Arg.html#VALwrite_arg0"><code class="code">Arg.write_arg0</code></a> instead.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.05.0</li>
+</ul>
+</div>
+
+<pre id="VALwrite_arg0">val write_arg0 : string -&gt; string array -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p>Identical to <a href="Arg.html#VALwrite_arg"><code class="code">Arg.write_arg</code></a> but uses the null character for terminator
+    instead of newline.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.05.0</li>
+</ul>
+</div>
+
 </div></div><span><script src="/js/redirectBlog.js"></script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
                 document.addEventListener('keyup', function(e) {
                   if (e.target !== document.body) {

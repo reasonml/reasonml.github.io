@@ -11,13 +11,29 @@
           }
         });
       </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/facebook/reason" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div><link rel="stylesheet" href="/css/main.css"><div class="ocamldoc">
-<div class="navbar"><a class="pre" href="MoreLabels.Hashtbl.Make.html" title="MoreLabels.Hashtbl.Make">Previous</a>
-&#xA0;<a class="up" href="MoreLabels.Hashtbl.html" title="MoreLabels.Hashtbl">Up</a>
-&#xA0;</div>
 <h1>Functor <a href="type_MoreLabels.Hashtbl.MakeSeeded.html">MoreLabels.Hashtbl.MakeSeeded</a></h1>
 
-<pre><span class="keyword">module</span> MakeSeeded: (H: SeededHashedType) =&gt; SeededS with type key = H.t;
-</pre><table border="0" cellpadding="3" width="100%">
+<pre id="MODULEMakeSeeded"><span class="keyword">module</span> MakeSeeded: functor&nbsp;(H&nbsp;:&nbsp;SeededHashedType)&nbsp;-&gt;&nbsp;SeededS 
+    with type key = H.t
+     and type 'a t = 'a Hashtbl.MakeSeeded(H).t</pre><div class="info module top">
+<div class="info-desc">
+<p>Functor building an implementation of the hashtable structure.
+      The functor <code class="code">Hashtbl.MakeSeeded</code> returns a structure containing
+      a type <code class="code">key</code> of keys and a type <code class="code">'a&nbsp;t</code> of hash tables
+      associating data of type <code class="code">'a</code> to keys of type <code class="code">key</code>.
+      The operations perform similarly to those of the generic
+      interface, but use the seeded hashing and equality functions
+      specified in the functor argument <code class="code">H</code> instead of generic
+      equality and hashing.  The <code class="code">create</code> operation of the
+      result structure supports the <code class="code">~random</code> optional parameter
+      and returns randomized hash tables if <code class="code">~random:true</code> is passed
+      or if randomization is globally on (see <a href="MoreLabels.Hashtbl.html#VALrandomize"><code class="code">MoreLabels.Hashtbl.randomize</code></a>).</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.00.0</li>
+</ul>
+</div>
+<table border="0" cellpadding="3" width="100%">
 <tbody><tr>
 <td align="left" valign="top" width="1%%"><b>Parameters: </b></td>
 <td>
@@ -33,42 +49,75 @@
 </tbody></table>
 <hr width="100%">
 
-<pre id="TYPEkey"><span class="keyword">type</span> key;
-</pre>
+<pre id="TYPEkey"><span class="keyword">type</span> key </pre>
 
 
-<pre id="TYPEt"><span class="keyword">type</span> t(&apos;a);
-</pre>
+<pre id="TYPEt"><span class="keyword">type</span> 'a t </pre>
 
 
-<pre id="VALcreate"><span class="keyword">let</span> create: (~random: bool=?, int) =&gt; t(&apos;a);
-</pre>
-<pre id="VALclear"><span class="keyword">let</span> clear: t(&apos;a) =&gt; unit;
-</pre>
-<pre id="VALreset"><span class="keyword">let</span> reset: t(&apos;a) =&gt; unit;
-</pre>
-<pre id="VALcopy"><span class="keyword">let</span> copy: t(&apos;a) =&gt; t(&apos;a);
-</pre>
-<pre id="VALadd"><span class="keyword">let</span> add: (t(&apos;a), ~key: key, ~data: &apos;a) =&gt; unit;
-</pre>
-<pre id="VALremove"><span class="keyword">let</span> remove: (t(&apos;a), key) =&gt; unit;
-</pre>
-<pre id="VALfind"><span class="keyword">let</span> find: (t(&apos;a), key) =&gt; &apos;a;
-</pre>
-<pre id="VALfind_all"><span class="keyword">let</span> find_all: (t(&apos;a), key) =&gt; list(&apos;a);
-</pre>
-<pre id="VALreplace"><span class="keyword">let</span> replace: (t(&apos;a), ~key: key, ~data: &apos;a) =&gt; unit;
-</pre>
-<pre id="VALmem"><span class="keyword">let</span> mem: (t(&apos;a), key) =&gt; bool;
-</pre>
-<pre id="VALiter"><span class="keyword">let</span> iter: (~f: (~key: key, ~data: &apos;a) =&gt; unit, t(&apos;a)) =&gt; unit;
-</pre>
-<pre id="VALfold"><span class="keyword">let</span> fold: (~f: (~key: key, ~data: &apos;a, &apos;b) =&gt; &apos;b, t(&apos;a), ~init: &apos;b) =&gt; &apos;b;
-</pre>
-<pre id="VALlength"><span class="keyword">let</span> length: t(&apos;a) =&gt; int;
-</pre>
-<pre id="VALstats"><span class="keyword">let</span> stats: t(&apos;a) =&gt; MoreLabels.Hashtbl.statistics;
-</pre></div></div><span><script src="/js/redirectBlog.js"></script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+<pre id="VALcreate">val create : ?random:bool -&gt; int -&gt; 'a t</pre>
+<pre id="VALclear">val clear : 'a t -&gt; unit</pre>
+<pre id="VALreset">val reset : 'a t -&gt; unit</pre>
+<pre id="VALcopy">val copy : 'a t -&gt; 'a t</pre>
+<pre id="VALadd">val add : 'a t -&gt;       key:key -&gt; data:'a -&gt; unit</pre>
+<pre id="VALremove">val remove : 'a t -&gt; key -&gt; unit</pre>
+<pre id="VALfind">val find : 'a t -&gt; key -&gt; 'a</pre>
+<pre id="VALfind_opt">val find_opt : 'a t -&gt;       key -&gt; 'a option</pre><div class="info ">
+<ul class="info-attributes">
+<li><b>Since</b> 4.05.0</li>
+</ul>
+</div>
+
+<pre id="VALfind_all">val find_all : 'a t -&gt; key -&gt; 'a list</pre>
+<pre id="VALreplace">val replace : 'a t -&gt;       key:key -&gt; data:'a -&gt; unit</pre>
+<pre id="VALmem">val mem : 'a t -&gt; key -&gt; bool</pre>
+<pre id="VALiter">val iter : f:(key:key -&gt; data:'a -&gt; unit) -&gt;       'a t -&gt; unit</pre>
+<pre id="VALfilter_map_inplace">val filter_map_inplace : f:(key:key -&gt; data:'a -&gt; 'a option) -&gt;       'a t -&gt; unit</pre><div class="info ">
+<ul class="info-attributes">
+<li><b>Since</b> 4.03.0</li>
+</ul>
+</div>
+
+<pre id="VALfold">val fold : f:(key:key -&gt; data:'a -&gt; 'b -&gt; 'b) -&gt;       'a t -&gt; init:'b -&gt; 'b</pre>
+<pre id="VALlength">val length : 'a t -&gt; int</pre>
+<pre id="VALstats">val stats : 'a t -&gt; MoreLabels.Hashtbl.statistics</pre>
+<pre id="VALto_seq">val to_seq : 'a t -&gt;       (key * 'a) Seq.t</pre><div class="info ">
+<ul class="info-attributes">
+<li><b>Since</b> 4.07</li>
+</ul>
+</div>
+
+<pre id="VALto_seq_keys">val to_seq_keys : 'a t -&gt;       key Seq.t</pre><div class="info ">
+<ul class="info-attributes">
+<li><b>Since</b> 4.07</li>
+</ul>
+</div>
+
+<pre id="VALto_seq_values">val to_seq_values : 'a t -&gt; 'a Seq.t</pre><div class="info ">
+<ul class="info-attributes">
+<li><b>Since</b> 4.07</li>
+</ul>
+</div>
+
+<pre id="VALadd_seq">val add_seq : 'a t -&gt;       (key * 'a) Seq.t -&gt; unit</pre><div class="info ">
+<ul class="info-attributes">
+<li><b>Since</b> 4.07</li>
+</ul>
+</div>
+
+<pre id="VALreplace_seq">val replace_seq : 'a t -&gt;       (key * 'a) Seq.t -&gt; unit</pre><div class="info ">
+<ul class="info-attributes">
+<li><b>Since</b> 4.07</li>
+</ul>
+</div>
+
+<pre id="VALof_seq">val of_seq : (key * 'a) Seq.t -&gt;       'a t</pre><div class="info ">
+<ul class="info-attributes">
+<li><b>Since</b> 4.07</li>
+</ul>
+</div>
+
+</div></div><span><script src="/js/redirectBlog.js"></script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
                 document.addEventListener('keyup', function(e) {
                   if (e.target !== document.body) {
                     return;

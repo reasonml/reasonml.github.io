@@ -1,0 +1,242 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Reason · Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems.</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Reason · Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io/"/><meta property="og:description" content="Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/icon_50.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io/blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io/blog/feed.xml" title="Reason Blog RSS Feed"/><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/en"><img class="logo" src="/img/dummy.svg" alt="Reason"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/docs/en/what-and-why" target="_self">Docs</a></li><li class=""><a href="/en/try" target="_self">Try</a></li><li class=""><a href="/api/index" target="_self">API</a></li><li class=""><a href="/docs/en/community" target="_self">Community</a></li><li class=""><a href="/blog/" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg" alt="Languages icon"/>English</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/ja/Stdlib.Marshal">日本語</a></li><li><a href="/de/Stdlib.Marshal">Deutsch</a></li><li><a href="/es-ES/Stdlib.Marshal">Español</a></li><li><a href="/fr/Stdlib.Marshal">Français</a></li><li><a href="/ko/Stdlib.Marshal">한국어</a></li><li><a href="/pt-BR/Stdlib.Marshal">Português (Brasil)</a></li><li><a href="/ru/Stdlib.Marshal">Русский</a></li><li><a href="/uk/Stdlib.Marshal">Українська</a></li><li><a href="/zh-CN/Stdlib.Marshal">中文</a></li><li><a href="/zh-TW/Stdlib.Marshal">繁體中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank" rel="noreferrer noopener">Help Translate</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/facebook/reason" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div><link rel="stylesheet" href="/css/main.css"><div class="ocamldoc">
+<h1>Module <a href="type_Stdlib.Marshal.html">Stdlib.Marshal</a></h1>
+
+<pre id="MODULEMarshal"><span class="keyword">module</span> Marshal: Marshal</pre><hr width="100%">
+
+<pre><span class="keyword">type</span> extern_flags = </pre><table class="typetable">
+<tbody><tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>No_sharing</code></td>
+<td class="typefieldcomment" align="left" valign="top"><code>(*</code></td><td class="typefieldcomment" align="left" valign="top"><div class="info ">
+<div class="info-desc">
+<p>Don't preserve sharing</p>
+</div>
+</div>
+</td><td class="typefieldcomment" align="left" valign="bottom"><code>*)</code></td>
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Closures</code></td>
+<td class="typefieldcomment" align="left" valign="top"><code>(*</code></td><td class="typefieldcomment" align="left" valign="top"><div class="info ">
+<div class="info-desc">
+<p>Send function closures</p>
+</div>
+</div>
+</td><td class="typefieldcomment" align="left" valign="bottom"><code>*)</code></td>
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Compat_32</code></td>
+<td class="typefieldcomment" align="left" valign="top"><code>(*</code></td><td class="typefieldcomment" align="left" valign="top"><div class="info ">
+<div class="info-desc">
+<p>Ensure 32-bit compatibility</p>
+</div>
+</div>
+</td><td class="typefieldcomment" align="left" valign="bottom"><code>*)</code></td>
+</tr></tbody></table>
+
+<div class="info ">
+<div class="info-desc">
+<p>The flags to the <code class="code">Marshal.to_*</code> functions below.</p>
+</div>
+</div>
+
+
+<pre id="VALto_channel">val to_channel : out_channel -&gt; 'a -&gt; extern_flags list -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">Marshal.to_channel&nbsp;chan&nbsp;v&nbsp;flags</code> writes the representation
+   of <code class="code">v</code> on channel <code class="code">chan</code>. The <code class="code">flags</code> argument is a
+   possibly empty list of flags that governs the marshaling
+   behavior with respect to sharing, functional values, and compatibility
+   between 32- and 64-bit platforms.</p>
+
+<p>If <code class="code">flags</code> does not contain <code class="code">Marshal.No_sharing</code>, circularities
+   and sharing inside the value <code class="code">v</code> are detected and preserved
+   in the sequence of bytes produced. In particular, this
+   guarantees that marshaling always terminates. Sharing
+   between values marshaled by successive calls to
+   <code class="code">Marshal.to_channel</code> is neither detected nor preserved, though.
+   If <code class="code">flags</code> contains <code class="code">Marshal.No_sharing</code>, sharing is ignored.
+   This results in faster marshaling if <code class="code">v</code> contains no shared
+   substructures, but may cause slower marshaling and larger
+   byte representations if <code class="code">v</code> actually contains sharing,
+   or even non-termination if <code class="code">v</code> contains cycles.</p>
+
+<p>If <code class="code">flags</code> does not contain <code class="code">Marshal.Closures</code>, marshaling fails
+   when it encounters a functional value inside <code class="code">v</code>: only 'pure' data
+   structures, containing neither functions nor objects, can safely be
+   transmitted between different programs. If <code class="code">flags</code> contains
+   <code class="code">Marshal.Closures</code>, functional values will be marshaled as a the
+   position in the code of the program together with the values
+   corresponding to the free variables captured in the closure.  In
+   this case, the output of marshaling can only be read back in
+   processes that run exactly the same program, with exactly the same
+   compiled code. (This is checked at un-marshaling time, using an MD5
+   digest of the code transmitted along with the code position.)</p>
+
+<p>The exact definition of which free variables are captured in a
+   closure is not specified and can vary between bytecode and native
+   code (and according to optimization flags).  In particular, a
+   function value accessing a global reference may or may not include
+   the reference in its closure.  If it does, unmarshaling the
+   corresponding closure will create a new reference, different from
+   the global one.</p>
+
+<p>If <code class="code">flags</code> contains <code class="code">Marshal.Compat_32</code>, marshaling fails when
+   it encounters an integer value outside the range <code class="code">[-2{^30},&nbsp;2{^30}-1]</code>
+   of integers that are representable on a 32-bit platform.  This
+   ensures that marshaled data generated on a 64-bit platform can be
+   safely read back on a 32-bit platform.  If <code class="code">flags</code> does not
+   contain <code class="code">Marshal.Compat_32</code>, integer values outside the
+   range <code class="code">[-2{^30},&nbsp;2{^30}-1]</code> are marshaled, and can be read back on
+   a 64-bit platform, but will cause an error at un-marshaling time
+   when read back on a 32-bit platform.  The <code class="code">Mashal.Compat_32</code> flag
+   only matters when marshaling is performed on a 64-bit platform;
+   it has no effect if marshaling is performed on a 32-bit platform.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Raises</b> <code>Failure</code> if <code class="code">chan</code> is not in binary mode.</li>
+</ul>
+</div>
+
+<pre id="VALto_bytes">val to_bytes : 'a -&gt; extern_flags list -&gt; bytes</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">Marshal.to_bytes&nbsp;v&nbsp;flags</code> returns a byte sequence containing
+   the representation of <code class="code">v</code>.
+   The <code class="code">flags</code> argument has the same meaning as for
+   <a href="Marshal.html#VALto_channel"><code class="code">Marshal.to_channel</code></a>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.02.0</li>
+</ul>
+</div>
+
+<pre id="VALto_string">val to_string : 'a -&gt; extern_flags list -&gt; string</pre><div class="info ">
+<div class="info-desc">
+<p>Same as <code class="code">to_bytes</code> but return the result as a string instead of
+    a byte sequence.</p>
+</div>
+</div>
+
+<pre id="VALto_buffer">val to_buffer : bytes -&gt; int -&gt; int -&gt; 'a -&gt; extern_flags list -&gt; int</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">Marshal.to_buffer&nbsp;buff&nbsp;ofs&nbsp;len&nbsp;v&nbsp;flags</code> marshals the value <code class="code">v</code>,
+   storing its byte representation in the sequence <code class="code">buff</code>,
+   starting at index <code class="code">ofs</code>, and writing at most
+   <code class="code">len</code> bytes.  It returns the number of bytes
+   actually written to the sequence. If the byte representation
+   of <code class="code">v</code> does not fit in <code class="code">len</code> characters, the exception <code class="code">Failure</code>
+   is raised.</p>
+</div>
+</div>
+
+<pre id="VALfrom_channel">val from_channel : in_channel -&gt; 'a</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">Marshal.from_channel&nbsp;chan</code> reads from channel <code class="code">chan</code> the
+   byte representation of a structured value, as produced by
+   one of the <code class="code">Marshal.to_*</code> functions, and reconstructs and
+   returns the corresponding value.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Raises</b><ul><li><code>End_of_file</code> if <code class="code">chan</code> is already at the end of the file.</li>
+<li><code>Failure</code> if the end of the file is reached during
+   unmarshalling itself or if <code class="code">chan</code> is not in binary mode.</li>
+</ul></li>
+</ul>
+</div>
+
+<pre id="VALfrom_bytes">val from_bytes : bytes -&gt; int -&gt; 'a</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">Marshal.from_bytes&nbsp;buff&nbsp;ofs</code> unmarshals a structured value
+   like <a href="Marshal.html#VALfrom_channel"><code class="code">Marshal.from_channel</code></a> does, except that the byte
+   representation is not read from a channel, but taken from
+   the byte sequence <code class="code">buff</code>, starting at position <code class="code">ofs</code>.
+   The byte sequence is not mutated.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.02.0</li>
+</ul>
+</div>
+
+<pre id="VALfrom_string">val from_string : string -&gt; int -&gt; 'a</pre><div class="info ">
+<div class="info-desc">
+<p>Same as <code class="code">from_bytes</code> but take a string as argument instead of a
+    byte sequence.</p>
+</div>
+</div>
+
+<pre id="VALheader_size">val header_size : int</pre><div class="info ">
+<div class="info-desc">
+<p>The bytes representing a marshaled value are composed of
+   a fixed-size header and a variable-sized data part,
+   whose size can be determined from the header.
+   <a href="Marshal.html#VALheader_size"><code class="code">Marshal.header_size</code></a> is the size, in bytes, of the header.
+   <a href="Marshal.html#VALdata_size"><code class="code">Marshal.data_size</code></a><code class="code">&nbsp;buff&nbsp;ofs</code> is the size, in bytes,
+   of the data part, assuming a valid header is stored in
+   <code class="code">buff</code> starting at position <code class="code">ofs</code>.
+   Finally, <a href="Marshal.html#VALtotal_size"><code class="code">Marshal.total_size</code></a> <code class="code">buff&nbsp;ofs</code> is the total size,
+   in bytes, of the marshaled value.
+   Both <a href="Marshal.html#VALdata_size"><code class="code">Marshal.data_size</code></a> and <a href="Marshal.html#VALtotal_size"><code class="code">Marshal.total_size</code></a> raise <code class="code">Failure</code>
+   if <code class="code">buff</code>, <code class="code">ofs</code> does not contain a valid header.</p>
+
+<p>To read the byte representation of a marshaled value into
+   a byte sequence, the program needs to read first
+   <a href="Marshal.html#VALheader_size"><code class="code">Marshal.header_size</code></a> bytes into the sequence,
+   then determine the length of the remainder of the
+   representation using <a href="Marshal.html#VALdata_size"><code class="code">Marshal.data_size</code></a>,
+   make sure the sequence is large enough to hold the remaining
+   data, then read it, and finally call <a href="Marshal.html#VALfrom_bytes"><code class="code">Marshal.from_bytes</code></a>
+   to unmarshal the value.</p>
+</div>
+</div>
+
+<pre id="VALdata_size">val data_size : bytes -&gt; int -&gt; int</pre><div class="info ">
+<div class="info-desc">
+<p>See <a href="Marshal.html#VALheader_size"><code class="code">Marshal.header_size</code></a>.</p>
+</div>
+</div>
+
+<pre id="VALtotal_size">val total_size : bytes -&gt; int -&gt; int</pre><div class="info ">
+<div class="info-desc">
+<p>See <a href="Marshal.html#VALheader_size"><code class="code">Marshal.header_size</code></a>.</p>
+</div>
+</div>
+
+</div></div><span><script src="/js/redirectBlog.js"></script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+                document.addEventListener('keyup', function(e) {
+                  if (e.target !== document.body) {
+                    return;
+                  }
+                  // keyCode for '/' (slash)
+                  if (e.keyCode === 191) {
+                    const search = document.getElementById('search_input_react');
+                    search && search.focus();
+                  }
+                });
+              </script><script>
+              var search = docsearch({
+                
+                apiKey: '966d1e412f67114a07dc0afe44b19b53',
+                indexName: 'reason',
+                inputSelector: '#search_input_react',
+                algoliaOptions: {"facetFilters":["lang:en"]}
+              });
+            </script></body></html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Reason · Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems.</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Reason · Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io/"/><meta property="og:description" content="Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/icon_50.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io/blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io/blog/feed.xml" title="Reason Blog RSS Feed"/><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/en"><img class="logo" src="/img/dummy.svg" alt="Reason"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/docs/en/what-and-why" target="_self">Docs</a></li><li class=""><a href="/en/try" target="_self">Try</a></li><li class=""><a href="/api/index" target="_self">API</a></li><li class=""><a href="/docs/en/community" target="_self">Community</a></li><li class=""><a href="/blog/" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg" alt="Languages icon"/>English</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/ja/Bigarray.Array0">日本語</a></li><li><a href="/de/Bigarray.Array0">Deutsch</a></li><li><a href="/es-ES/Bigarray.Array0">Español</a></li><li><a href="/fr/Bigarray.Array0">Français</a></li><li><a href="/ko/Bigarray.Array0">한국어</a></li><li><a href="/pt-BR/Bigarray.Array0">Português (Brasil)</a></li><li><a href="/ru/Bigarray.Array0">Русский</a></li><li><a href="/uk/Bigarray.Array0">Українська</a></li><li><a href="/zh-CN/Bigarray.Array0">中文</a></li><li><a href="/zh-TW/Bigarray.Array0">繁體中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank" rel="noreferrer noopener">Help Translate</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/facebook/reason" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div><link rel="stylesheet" href="/css/main.css"><div class="ocamldoc">
+<h1>Module <a href="type_Bigarray.Array0.html">Bigarray.Array0</a></h1>
+
+<pre id="MODULEArray0"><span class="keyword">module</span> Array0: sig .. end</pre><div class="info module top">
+<div class="info-desc">
+<p>Zero-dimensional arrays. The <code class="code">Array0</code> structure provides operations
+   similar to those of <a href="Bigarray.Genarray.html"><code class="code">Bigarray.Genarray</code></a>, but specialized to the case
+   of zero-dimensional arrays that only contain a single scalar value.
+   Statically knowing the number of dimensions of the array allows
+   faster operations, and more precise static type-checking.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.05.0</li>
+</ul>
+</div>
+<hr width="100%">
+
+<pre id="TYPEt"><span class="keyword">type</span> ('a, 'b, 'c) t </pre>
+<div class="info ">
+<div class="info-desc">
+<p>The type of zero-dimensional Bigarrays whose elements have
+     OCaml type <code class="code">'a</code>, representation kind <code class="code">'b</code>, and memory layout <code class="code">'c</code>.</p>
+</div>
+</div>
+
+
+<pre id="VALcreate">val create : ('a, 'b) Bigarray.kind -&gt;       'c Bigarray.layout -&gt; ('a, 'b, 'c) t</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">Array0.create&nbsp;kind&nbsp;layout</code> returns a new Bigarray of zero dimension.
+     <code class="code">kind</code> and <code class="code">layout</code> determine the array element kind and the array
+     layout as described for <a href="Bigarray.Genarray.html#VALcreate"><code class="code">Bigarray.Genarray.create</code></a>.</p>
+</div>
+</div>
+
+<pre id="VALinit">val init : ('a, 'b) Bigarray.kind -&gt;       'c Bigarray.layout -&gt; 'a -&gt; ('a, 'b, 'c) t</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">Array0.init&nbsp;kind&nbsp;layout&nbsp;v</code> behaves like <code class="code">Array0.create&nbsp;kind&nbsp;layout</code>
+     except that the element is additionally initialized to the value <code class="code">v</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.12.0</li>
+</ul>
+</div>
+
+<pre id="VALkind">val kind : ('a, 'b, 'c) t -&gt; ('a, 'b) Bigarray.kind</pre><div class="info ">
+<div class="info-desc">
+<p>Return the kind of the given Bigarray.</p>
+</div>
+</div>
+
+<pre id="VALlayout">val layout : ('a, 'b, 'c) t -&gt; 'c Bigarray.layout</pre><div class="info ">
+<div class="info-desc">
+<p>Return the layout of the given Bigarray.</p>
+</div>
+</div>
+
+<pre id="VALchange_layout">val change_layout : ('a, 'b, 'c) t -&gt;       'd Bigarray.layout -&gt; ('a, 'b, 'd) t</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">Array0.change_layout&nbsp;a&nbsp;layout</code> returns a Bigarray with the
+      specified <code class="code">layout</code>, sharing the data with <code class="code">a</code>. No copying of elements
+      is involved: the new array and the original array share the same
+      storage space.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.06.0</li>
+</ul>
+</div>
+
+<pre id="VALsize_in_bytes">val size_in_bytes : ('a, 'b, 'c) t -&gt; int</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">size_in_bytes&nbsp;a</code> is <code class="code">a</code>'s <a href="Bigarray.html#VALkind_size_in_bytes"><code class="code">Bigarray.kind_size_in_bytes</code></a>.</p>
+</div>
+</div>
+
+<pre id="VALget">val get : ('a, 'b, 'c) t -&gt; 'a</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">Array0.get&nbsp;a</code> returns the only element in <code class="code">a</code>.</p>
+</div>
+</div>
+
+<pre id="VALset">val set : ('a, 'b, 'c) t -&gt; 'a -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">Array0.set&nbsp;a&nbsp;x&nbsp;v</code> stores the value <code class="code">v</code> in <code class="code">a</code>.</p>
+</div>
+</div>
+
+<pre id="VALblit">val blit : ('a, 'b, 'c) t -&gt; ('a, 'b, 'c) t -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p>Copy the first Bigarray to the second Bigarray.
+     See <a href="Bigarray.Genarray.html#VALblit"><code class="code">Bigarray.Genarray.blit</code></a> for more details.</p>
+</div>
+</div>
+
+<pre id="VALfill">val fill : ('a, 'b, 'c) t -&gt; 'a -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p>Fill the given Bigarray with the given value.
+     See <a href="Bigarray.Genarray.html#VALfill"><code class="code">Bigarray.Genarray.fill</code></a> for more details.</p>
+</div>
+</div>
+
+<pre id="VALof_value">val of_value : ('a, 'b) Bigarray.kind -&gt;       'c Bigarray.layout -&gt; 'a -&gt; ('a, 'b, 'c) t</pre><div class="info ">
+<div class="info-desc">
+<p>Build a zero-dimensional Bigarray initialized from the
+     given value.</p>
+</div>
+</div>
+
+</div></div><span><script src="/js/redirectBlog.js"></script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+                document.addEventListener('keyup', function(e) {
+                  if (e.target !== document.body) {
+                    return;
+                  }
+                  // keyCode for '/' (slash)
+                  if (e.keyCode === 191) {
+                    const search = document.getElementById('search_input_react');
+                    search && search.focus();
+                  }
+                });
+              </script><script>
+              var search = docsearch({
+                
+                apiKey: '966d1e412f67114a07dc0afe44b19b53',
+                indexName: 'reason',
+                inputSelector: '#search_input_react',
+                algoliaOptions: {"facetFilters":["lang:en"]}
+              });
+            </script></body></html>

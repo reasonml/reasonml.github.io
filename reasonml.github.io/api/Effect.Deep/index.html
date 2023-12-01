@@ -1,0 +1,151 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Reason · Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems.</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Reason · Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io/"/><meta property="og:description" content="Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/icon_50.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io/blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io/blog/feed.xml" title="Reason Blog RSS Feed"/><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/en"><img class="logo" src="/img/dummy.svg" alt="Reason"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/docs/en/what-and-why" target="_self">Docs</a></li><li class=""><a href="/en/try" target="_self">Try</a></li><li class=""><a href="/api/index" target="_self">API</a></li><li class=""><a href="/docs/en/community" target="_self">Community</a></li><li class=""><a href="/blog/" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg" alt="Languages icon"/>English</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/ja/Effect.Deep">日本語</a></li><li><a href="/de/Effect.Deep">Deutsch</a></li><li><a href="/es-ES/Effect.Deep">Español</a></li><li><a href="/fr/Effect.Deep">Français</a></li><li><a href="/ko/Effect.Deep">한국어</a></li><li><a href="/pt-BR/Effect.Deep">Português (Brasil)</a></li><li><a href="/ru/Effect.Deep">Русский</a></li><li><a href="/uk/Effect.Deep">Українська</a></li><li><a href="/zh-CN/Effect.Deep">中文</a></li><li><a href="/zh-TW/Effect.Deep">繁體中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank" rel="noreferrer noopener">Help Translate</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/facebook/reason" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div><link rel="stylesheet" href="/css/main.css"><div class="ocamldoc">
+<h1>Module <a href="type_Effect.Deep.html">Effect.Deep</a></h1>
+
+<pre id="MODULEDeep"><span class="keyword">module</span> Deep: sig .. end</pre><hr width="100%">
+<p>Deep handlers</p>
+
+<pre id="TYPEcontinuation"><span class="keyword">type</span> ('a, 'b) continuation </pre>
+<div class="info ">
+<div class="info-desc">
+<p><code class="code">('a,'b)&nbsp;continuation</code> is a delimited continuation that expects a <code class="code">'a</code>
+      value and returns a <code class="code">'b</code> value.</p>
+</div>
+</div>
+
+
+<pre id="VALcontinue">val continue : ('a, 'b) continuation -&gt; 'a -&gt; 'b</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">continue&nbsp;k&nbsp;x</code> resumes the continuation <code class="code">k</code> by passing <code class="code">x</code> to <code class="code">k</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Raises</b> <code>Continuation_already_resumed</code> if the continuation has already been
+      resumed.</li>
+</ul>
+</div>
+
+<pre id="VALdiscontinue">val discontinue : ('a, 'b) continuation -&gt; exn -&gt; 'b</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">discontinue&nbsp;k&nbsp;e</code> resumes the continuation <code class="code">k</code> by raising the
+      exception <code class="code">e</code> in <code class="code">k</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Raises</b> <code>Continuation_already_resumed</code> if the continuation has already been
+      resumed.</li>
+</ul>
+</div>
+
+<pre id="VALdiscontinue_with_backtrace">val discontinue_with_backtrace : ('a, 'b) continuation -&gt;       exn -&gt; Printexc.raw_backtrace -&gt; 'b</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">discontinue_with_backtrace&nbsp;k&nbsp;e&nbsp;bt</code> resumes the continuation <code class="code">k</code> by
+      raising the exception <code class="code">e</code> in <code class="code">k</code> using <code class="code">bt</code> as the origin for the
+      exception.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Raises</b> <code>Continuation_already_resumed</code> if the continuation has already been
+      resumed.</li>
+</ul>
+</div>
+
+<pre><span class="keyword">type</span> ('a, 'b) handler = {</pre><table class="typetable">
+<tbody><tr>
+<td align="left" valign="top">
+<code>&nbsp;&nbsp;</code></td>
+<td align="left" valign="top">
+<code>retc&nbsp;: 'a -&gt; 'b;</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>&nbsp;&nbsp;</code></td>
+<td align="left" valign="top">
+<code>exnc&nbsp;: exn -&gt; 'b;</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>&nbsp;&nbsp;</code></td>
+<td align="left" valign="top">
+<code>effc&nbsp;: 'c. 'c Effect.t -&gt; (('c, 'b) continuation -&gt; 'b) option;</code></td>
+
+</tr></tbody></table>
+<code>}</code>
+
+<div class="info ">
+<div class="info-desc">
+<p><code class="code">('a,'b)&nbsp;handler</code> is a handler record with three fields -- <code class="code">retc</code>
+      is the value handler, <code class="code">exnc</code> handles exceptions, and <code class="code">effc</code> handles the
+      effects performed by the computation enclosed by the handler.</p>
+</div>
+</div>
+
+
+<pre id="VALmatch_with">val match_with : ('c -&gt; 'a) -&gt; 'c -&gt; ('a, 'b) handler -&gt; 'b</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">match_with&nbsp;f&nbsp;v&nbsp;h</code> runs the computation <code class="code">f&nbsp;v</code> in the handler <code class="code">h</code>.</p>
+</div>
+</div>
+
+<pre><span class="keyword">type</span> 'a effect_handler = {</pre><table class="typetable">
+<tbody><tr>
+<td align="left" valign="top">
+<code>&nbsp;&nbsp;</code></td>
+<td align="left" valign="top">
+<code>effc&nbsp;: 'b. 'b Effect.t -&gt; (('b, 'a) continuation -&gt; 'a) option;</code></td>
+
+</tr></tbody></table>
+<code>}</code>
+
+<div class="info ">
+<div class="info-desc">
+<p><code class="code">'a&nbsp;effect_handler</code> is a deep handler with an identity value handler
+      <code class="code">fun&nbsp;x&nbsp;-&gt;&nbsp;x</code> and an exception handler that raises any exception
+      <code class="code">fun&nbsp;e&nbsp;-&gt;&nbsp;raise&nbsp;e</code>.</p>
+</div>
+</div>
+
+
+<pre id="VALtry_with">val try_with : ('b -&gt; 'a) -&gt; 'b -&gt; 'a effect_handler -&gt; 'a</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">try_with&nbsp;f&nbsp;v&nbsp;h</code> runs the computation <code class="code">f&nbsp;v</code> under the handler <code class="code">h</code>.</p>
+</div>
+</div>
+
+<pre id="VALget_callstack">val get_callstack : ('a, 'b) continuation -&gt; int -&gt; Printexc.raw_backtrace</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">get_callstack&nbsp;c&nbsp;n</code> returns a description of the top of the call stack on
+      the continuation <code class="code">c</code>, with at most <code class="code">n</code> entries.</p>
+</div>
+</div>
+
+</div></div><span><script src="/js/redirectBlog.js"></script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+                document.addEventListener('keyup', function(e) {
+                  if (e.target !== document.body) {
+                    return;
+                  }
+                  // keyCode for '/' (slash)
+                  if (e.keyCode === 191) {
+                    const search = document.getElementById('search_input_react');
+                    search && search.focus();
+                  }
+                });
+              </script><script>
+              var search = docsearch({
+                
+                apiKey: '966d1e412f67114a07dc0afe44b19b53',
+                indexName: 'reason',
+                inputSelector: '#search_input_react',
+                algoliaOptions: {"facetFilters":["lang:en"]}
+              });
+            </script></body></html>

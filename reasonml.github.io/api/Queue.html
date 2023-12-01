@@ -11,116 +11,181 @@
           }
         });
       </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/facebook/reason" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div><link rel="stylesheet" href="/css/main.css"><div class="ocamldoc">
-<div class="navbar"><a class="pre" href="Printf.html" title="Printf">Previous</a>
-&#xA0;<a class="up" href="index.html" title="Index">Up</a>
-&#xA0;<a class="post" href="Random.html" title="Random">Next</a>
-</div>
 <h1>Module <a href="type_Queue.html">Queue</a></h1>
 
-<pre><span class="keyword">module</span> Queue: sig .. end</pre><div class="info module top">
-First-in first-out queues.
-<p>
+<pre id="MODULEQueue"><span class="keyword">module</span> Queue: sig .. end</pre><div class="info module top">
+<div class="info-desc">
+<p>First-in first-out queues.</p>
 
-   This module implements queues (FIFOs), with in-place modification.
-</p><p>
-
-   <b>Warning</b> This module is not thread-safe: each <a href="Queue.html#TYPEt"><code class="code">Queue.t</code></a> value
-   must be protected from concurrent access (e.g. with a <code class="code">Mutex.t</code>).
-   Failure to do so can lead to a crash.<br>
-</p></div>
+<p>This module implements queues (FIFOs), with in-place modification.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Alert unsynchronized_access.</b> Unsynchronized accesses to queues are a programming error.</li>
+</ul>
+</div>
 <hr width="100%">
+<p><b>Unsynchronized accesses</b></p>
+<p>Unsynchronized accesses to a queue may lead to an invalid queue state.
+    Thus, concurrent accesses to queues must be synchronized (for instance
+    with a <a href="Mutex.html#TYPEt"><code class="code">Mutex.t</code></a>).</p>
 
-<pre id="TYPEt"><span class="keyword">type</span> t(&apos;a);
-</pre>
+<pre id="TYPEt"><span class="keyword">type</span> 'a t </pre>
 <div class="info ">
-The type of queues containing elements of type <code class="code">&apos;a</code>.<br>
+<div class="info-desc">
+<p>The type of queues containing elements of type <code class="code">'a</code>.</p>
+</div>
 </div>
 
 
-<pre id="EXCEPTIONEmpty"><span class="keyword">exception</span> Empty;
-</pre>
+<pre id="EXCEPTIONEmpty"><span class="keyword">exception</span> Empty</pre>
 <div class="info ">
-Raised when <a href="Queue.html#VALtake"><code class="code">Queue.take</code></a> or <a href="Queue.html#VALpeek"><code class="code">Queue.peek</code></a> is applied to an empty queue.<br>
+<div class="info-desc">
+<p>Raised when <a href="Queue.html#VALtake"><code class="code">Queue.take</code></a> or <a href="Queue.html#VALpeek"><code class="code">Queue.peek</code></a> is applied to an empty queue.</p>
+</div>
 </div>
 
-<pre id="VALcreate"><span class="keyword">let</span> create: unit =&gt; t(&apos;a);
-</pre><div class="info ">
-Return a new queue, initially empty.<br>
+<pre id="VALcreate">val create : unit -&gt; 'a t</pre><div class="info ">
+<div class="info-desc">
+<p>Return a new queue, initially empty.</p>
+</div>
 </div>
 
-<pre id="VALadd"><span class="keyword">let</span> add: (&apos;a, t(&apos;a)) =&gt; unit;
-</pre><div class="info ">
-<code class="code">add x q</code> adds the element <code class="code">x</code> at the end of the queue <code class="code">q</code>.<br>
+<pre id="VALadd">val add : 'a -&gt; 'a t -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">add&nbsp;x&nbsp;q</code> adds the element <code class="code">x</code> at the end of the queue <code class="code">q</code>.</p>
+</div>
 </div>
 
-<pre id="VALpush"><span class="keyword">let</span> push: (&apos;a, t(&apos;a)) =&gt; unit;
-</pre><div class="info ">
-<code class="code">push</code> is a synonym for <code class="code">add</code>.<br>
+<pre id="VALpush">val push : 'a -&gt; 'a t -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">push</code> is a synonym for <code class="code">add</code>.</p>
+</div>
 </div>
 
-<pre id="VALtake"><span class="keyword">let</span> take: t(&apos;a) =&gt; &apos;a;
-</pre><div class="info ">
-<code class="code">take q</code> removes and returns the first element in queue <code class="code">q</code>,
-   or raises <code class="code">Empty</code> if the queue is empty.<br>
+<pre id="VALtake">val take : 'a t -&gt; 'a</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">take&nbsp;q</code> removes and returns the first element in queue <code class="code">q</code>,
+   or raises <a href="Queue.html#EXCEPTIONEmpty"><code class="code">Queue.Empty</code></a> if the queue is empty.</p>
+</div>
 </div>
 
-<pre id="VALpop"><span class="keyword">let</span> pop: t(&apos;a) =&gt; &apos;a;
-</pre><div class="info ">
-<code class="code">pop</code> is a synonym for <code class="code">take</code>.<br>
+<pre id="VALtake_opt">val take_opt : 'a t -&gt; 'a option</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">take_opt&nbsp;q</code> removes and returns the first element in queue <code class="code">q</code>,
+   or returns <code class="code">None</code> if the queue is empty.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.08</li>
+</ul>
 </div>
 
-<pre id="VALpeek"><span class="keyword">let</span> peek: t(&apos;a) =&gt; &apos;a;
-</pre><div class="info ">
-<code class="code">peek q</code> returns the first element in queue <code class="code">q</code>, without removing
-   it from the queue, or raises <code class="code">Empty</code> if the queue is empty.<br>
+<pre id="VALpop">val pop : 'a t -&gt; 'a</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">pop</code> is a synonym for <code class="code">take</code>.</p>
+</div>
 </div>
 
-<pre id="VALtop"><span class="keyword">let</span> top: t(&apos;a) =&gt; &apos;a;
-</pre><div class="info ">
-<code class="code">top</code> is a synonym for <code class="code">peek</code>.<br>
+<pre id="VALpeek">val peek : 'a t -&gt; 'a</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">peek&nbsp;q</code> returns the first element in queue <code class="code">q</code>, without removing
+   it from the queue, or raises <a href="Queue.html#EXCEPTIONEmpty"><code class="code">Queue.Empty</code></a> if the queue is empty.</p>
+</div>
 </div>
 
-<pre id="VALclear"><span class="keyword">let</span> clear: t(&apos;a) =&gt; unit;
-</pre><div class="info ">
-Discard all elements from a queue.<br>
+<pre id="VALpeek_opt">val peek_opt : 'a t -&gt; 'a option</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">peek_opt&nbsp;q</code> returns the first element in queue <code class="code">q</code>, without removing
+   it from the queue, or returns <code class="code">None</code> if the queue is empty.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.08</li>
+</ul>
 </div>
 
-<pre id="VALcopy"><span class="keyword">let</span> copy: t(&apos;a) =&gt; t(&apos;a);
-</pre><div class="info ">
-Return a copy of the given queue.<br>
+<pre id="VALtop">val top : 'a t -&gt; 'a</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">top</code> is a synonym for <code class="code">peek</code>.</p>
+</div>
 </div>
 
-<pre id="VALis_empty"><span class="keyword">let</span> is_empty: t(&apos;a) =&gt; bool;
-</pre><div class="info ">
-Return <code class="code">true</code> if the given queue is empty, <code class="code">false</code> otherwise.<br>
+<pre id="VALclear">val clear : 'a t -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p>Discard all elements from a queue.</p>
+</div>
 </div>
 
-<pre id="VALlength"><span class="keyword">let</span> length: t(&apos;a) =&gt; int;
-</pre><div class="info ">
-Return the number of elements in a queue.<br>
+<pre id="VALcopy">val copy : 'a t -&gt; 'a t</pre><div class="info ">
+<div class="info-desc">
+<p>Return a copy of the given queue.</p>
+</div>
 </div>
 
-<pre id="VALiter"><span class="keyword">let</span> iter: (&apos;a =&gt; unit, t(&apos;a)) =&gt; unit;
-</pre><div class="info ">
-<code class="code">iter f q</code> applies <code class="code">f</code> in turn to all elements of <code class="code">q</code>,
+<pre id="VALis_empty">val is_empty : 'a t -&gt; bool</pre><div class="info ">
+<div class="info-desc">
+<p>Return <code class="code">true</code> if the given queue is empty, <code class="code">false</code> otherwise.</p>
+</div>
+</div>
+
+<pre id="VALlength">val length : 'a t -&gt; int</pre><div class="info ">
+<div class="info-desc">
+<p>Return the number of elements in a queue.</p>
+</div>
+</div>
+
+<pre id="VALiter">val iter : ('a -&gt; unit) -&gt; 'a t -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">iter&nbsp;f&nbsp;q</code> applies <code class="code">f</code> in turn to all elements of <code class="code">q</code>,
    from the least recently entered to the most recently entered.
-   The queue itself is unchanged.<br>
+   The queue itself is unchanged.</p>
+</div>
 </div>
 
-<pre id="VALfold"><span class="keyword">let</span> fold: ((&apos;b, &apos;a) =&gt; &apos;b, &apos;b, t(&apos;a)) =&gt; &apos;b;
-</pre><div class="info ">
-<code class="code">fold f accu q</code> is equivalent to <code class="code">List.fold_left f accu l</code>,
-   where <code class="code">l</code> is the list of <code class="code">q</code>&apos;s elements. The queue remains
-   unchanged.<br>
+<pre id="VALfold">val fold : ('b -&gt; 'a -&gt; 'b) -&gt; 'b -&gt; 'a t -&gt; 'b</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">fold&nbsp;f&nbsp;accu&nbsp;q</code> is equivalent to <code class="code">List.fold_left&nbsp;f&nbsp;accu&nbsp;l</code>,
+   where <code class="code">l</code> is the list of <code class="code">q</code>'s elements. The queue remains
+   unchanged.</p>
+</div>
 </div>
 
-<pre id="VALtransfer"><span class="keyword">let</span> transfer: (t(&apos;a), t(&apos;a)) =&gt; unit;
-</pre><div class="info ">
-<code class="code">transfer q1 q2</code> adds all of <code class="code">q1</code>&apos;s elements at the end of
+<pre id="VALtransfer">val transfer : 'a t -&gt; 'a t -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">transfer&nbsp;q1&nbsp;q2</code> adds all of <code class="code">q1</code>'s elements at the end of
    the queue <code class="code">q2</code>, then clears <code class="code">q1</code>. It is equivalent to the
-   sequence <code class="code">iter (fun x -&gt; add x q2) q1; clear q1</code>, but runs
-   in constant time.<br>
+   sequence <code class="code">iter&nbsp;(fun&nbsp;x&nbsp;-&gt;&nbsp;add&nbsp;x&nbsp;q2)&nbsp;q1;&nbsp;clear&nbsp;q1</code>, but runs
+   in constant time.</p>
 </div>
+</div>
+<h2 id="1_Iterators">Iterators</h2>
+<pre id="VALto_seq">val to_seq : 'a t -&gt; 'a Seq.t</pre><div class="info ">
+<div class="info-desc">
+<p>Iterate on the queue, in front-to-back order.
+    The behavior is not specified if the queue is modified
+    during the iteration.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.07</li>
+</ul>
+</div>
+
+<pre id="VALadd_seq">val add_seq : 'a t -&gt; 'a Seq.t -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p>Add the elements from a sequence to the end of the queue.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.07</li>
+</ul>
+</div>
+
+<pre id="VALof_seq">val of_seq : 'a Seq.t -&gt; 'a t</pre><div class="info ">
+<div class="info-desc">
+<p>Create a queue from a sequence.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.07</li>
+</ul>
+</div>
+
 </div></div><span><script src="/js/redirectBlog.js"></script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
                 document.addEventListener('keyup', function(e) {
                   if (e.target !== document.body) {

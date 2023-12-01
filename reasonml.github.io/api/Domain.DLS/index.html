@@ -1,0 +1,98 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Reason · Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems.</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Reason · Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io/"/><meta property="og:description" content="Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/icon_50.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io/blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io/blog/feed.xml" title="Reason Blog RSS Feed"/><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/en"><img class="logo" src="/img/dummy.svg" alt="Reason"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/docs/en/what-and-why" target="_self">Docs</a></li><li class=""><a href="/en/try" target="_self">Try</a></li><li class=""><a href="/api/index" target="_self">API</a></li><li class=""><a href="/docs/en/community" target="_self">Community</a></li><li class=""><a href="/blog/" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg" alt="Languages icon"/>English</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/ja/Domain.DLS">日本語</a></li><li><a href="/de/Domain.DLS">Deutsch</a></li><li><a href="/es-ES/Domain.DLS">Español</a></li><li><a href="/fr/Domain.DLS">Français</a></li><li><a href="/ko/Domain.DLS">한국어</a></li><li><a href="/pt-BR/Domain.DLS">Português (Brasil)</a></li><li><a href="/ru/Domain.DLS">Русский</a></li><li><a href="/uk/Domain.DLS">Українська</a></li><li><a href="/zh-CN/Domain.DLS">中文</a></li><li><a href="/zh-TW/Domain.DLS">繁體中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank" rel="noreferrer noopener">Help Translate</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/facebook/reason" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div><link rel="stylesheet" href="/css/main.css"><div class="ocamldoc">
+<h1>Module <a href="type_Domain.DLS.html">Domain.DLS</a></h1>
+
+<pre id="MODULEDLS"><span class="keyword">module</span> DLS: sig .. end</pre><hr width="100%">
+<p>Domain-local Storage</p>
+
+<pre id="TYPEkey"><span class="keyword">type</span> 'a key </pre>
+<div class="info ">
+<div class="info-desc">
+<p>Type of a DLS key</p>
+</div>
+</div>
+
+
+<pre id="VALnew_key">val new_key : ?split_from_parent:('a -&gt; 'a) -&gt; (unit -&gt; 'a) -&gt; 'a key</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">new_key&nbsp;f</code> returns a new key bound to initialiser <code class="code">f</code> for accessing
+,        domain-local variables.</p>
+
+<p>If <code class="code">split_from_parent</code> is not provided, the value for a new
+        domain will be computed on-demand by the new domain: the first
+        <code class="code">get</code> call will call the initializer <code class="code">f</code> and store that value.</p>
+
+<p>If <code class="code">split_from_parent</code> is provided, spawning a domain will
+        derive the child value (for this key) from the parent
+        value. This computation happens in the parent domain and it
+        always happens, regardless of whether the child domain will
+        use it.
+        If the splitting function is expensive or requires
+        child-side computation, consider using <code class="code">'a&nbsp;Lazy.t&nbsp;key</code>:</p>
+
+<pre class="codepre">        let init () = ...
+
+        let split_from_parent parent_value =
+          ... parent-side computation ...;
+          lazy (
+            ... child-side computation ...
+          )
+
+        let key = Domain.DLS.new_key ~split_from_parent init
+
+        let get () = Lazy.force (Domain.DLS.get key)
+        </pre>
+<p>In this case a part of the computation happens on the child
+        domain; in particular, it can access <code class="code">parent_value</code>
+        concurrently with the parent domain, which may require
+        explicit synchronization to avoid data races.</p>
+</div>
+</div>
+
+<pre id="VALget">val get : 'a key -&gt; 'a</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">get&nbsp;k</code> returns <code class="code">v</code> if a value <code class="code">v</code> is associated to the key <code class="code">k</code> on
+        the calling domain's domain-local state. Sets <code class="code">k</code>'s value with its
+        initialiser and returns it otherwise.</p>
+</div>
+</div>
+
+<pre id="VALset">val set : 'a key -&gt; 'a -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">set&nbsp;k&nbsp;v</code> updates the calling domain's domain-local state to associate
+        the key <code class="code">k</code> with value <code class="code">v</code>. It overwrites any previous values associated
+        to <code class="code">k</code>, which cannot be restored later.</p>
+</div>
+</div>
+
+</div></div><span><script src="/js/redirectBlog.js"></script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+                document.addEventListener('keyup', function(e) {
+                  if (e.target !== document.body) {
+                    return;
+                  }
+                  // keyCode for '/' (slash)
+                  if (e.keyCode === 191) {
+                    const search = document.getElementById('search_input_react');
+                    search && search.focus();
+                  }
+                });
+              </script><script>
+              var search = docsearch({
+                
+                apiKey: '966d1e412f67114a07dc0afe44b19b53',
+                indexName: 'reason',
+                inputSelector: '#search_input_react',
+                algoliaOptions: {"facetFilters":["lang:en"]}
+              });
+            </script></body></html>

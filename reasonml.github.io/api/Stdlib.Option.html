@@ -1,0 +1,164 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Reason · Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems.</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Reason · Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io/"/><meta property="og:description" content="Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/icon_50.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io/blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io/blog/feed.xml" title="Reason Blog RSS Feed"/><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/en"><img class="logo" src="/img/dummy.svg" alt="Reason"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/docs/en/what-and-why" target="_self">Docs</a></li><li class=""><a href="/en/try" target="_self">Try</a></li><li class=""><a href="/api/index" target="_self">API</a></li><li class=""><a href="/docs/en/community" target="_self">Community</a></li><li class=""><a href="/blog/" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg" alt="Languages icon"/>English</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/ja/Stdlib.Option">日本語</a></li><li><a href="/de/Stdlib.Option">Deutsch</a></li><li><a href="/es-ES/Stdlib.Option">Español</a></li><li><a href="/fr/Stdlib.Option">Français</a></li><li><a href="/ko/Stdlib.Option">한국어</a></li><li><a href="/pt-BR/Stdlib.Option">Português (Brasil)</a></li><li><a href="/ru/Stdlib.Option">Русский</a></li><li><a href="/uk/Stdlib.Option">Українська</a></li><li><a href="/zh-CN/Stdlib.Option">中文</a></li><li><a href="/zh-TW/Stdlib.Option">繁體中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank" rel="noreferrer noopener">Help Translate</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/facebook/reason" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div><link rel="stylesheet" href="/css/main.css"><div class="ocamldoc">
+<h1>Module <a href="type_Stdlib.Option.html">Stdlib.Option</a></h1>
+
+<pre id="MODULEOption"><span class="keyword">module</span> Option: Option</pre><hr width="100%">
+<h2 id="options">Options</h2>
+<pre id="TYPEt"><span class="keyword">type</span> 'a t = 'a option = </pre><table class="typetable">
+<tbody><tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>None</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Some of 'a</code></td>
+
+</tr></tbody></table>
+
+<div class="info ">
+<div class="info-desc">
+<p>The type for option values. Either <code class="code">None</code> or a value <code class="code">Some&nbsp;v</code>.</p>
+</div>
+</div>
+
+
+<pre id="VALnone">val none : 'a option</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">none</code> is <code class="code">None</code>.</p>
+</div>
+</div>
+
+<pre id="VALsome">val some : 'a -&gt; 'a option</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">some&nbsp;v</code> is <code class="code">Some&nbsp;v</code>.</p>
+</div>
+</div>
+
+<pre id="VALvalue">val value : 'a option -&gt; default:'a -&gt; 'a</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">value&nbsp;o&nbsp;~default</code> is <code class="code">v</code> if <code class="code">o</code> is <code class="code">Some&nbsp;v</code> and <code class="code">default</code> otherwise.</p>
+</div>
+</div>
+
+<pre id="VALget">val get : 'a option -&gt; 'a</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">get&nbsp;o</code> is <code class="code">v</code> if <code class="code">o</code> is <code class="code">Some&nbsp;v</code> and raise otherwise.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Raises</b> <code>Invalid_argument</code> if <code class="code">o</code> is <code class="code">None</code>.</li>
+</ul>
+</div>
+
+<pre id="VALbind">val bind : 'a option -&gt; ('a -&gt; 'b option) -&gt; 'b option</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">bind&nbsp;o&nbsp;f</code> is <code class="code">f&nbsp;v</code> if <code class="code">o</code> is <code class="code">Some&nbsp;v</code> and <code class="code">None</code> if <code class="code">o</code> is <code class="code">None</code>.</p>
+</div>
+</div>
+
+<pre id="VALjoin">val join : 'a option option -&gt; 'a option</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">join&nbsp;oo</code> is <code class="code">Some&nbsp;v</code> if <code class="code">oo</code> is <code class="code">Some&nbsp;(Some&nbsp;v)</code> and <code class="code">None</code> otherwise.</p>
+</div>
+</div>
+
+<pre id="VALmap">val map : ('a -&gt; 'b) -&gt; 'a option -&gt; 'b option</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">map&nbsp;f&nbsp;o</code> is <code class="code">None</code> if <code class="code">o</code> is <code class="code">None</code> and <code class="code">Some&nbsp;(f&nbsp;v)</code> if <code class="code">o</code> is <code class="code">Some&nbsp;v</code>.</p>
+</div>
+</div>
+
+<pre id="VALfold">val fold : none:'a -&gt; some:('b -&gt; 'a) -&gt; 'b option -&gt; 'a</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">fold&nbsp;~none&nbsp;~some&nbsp;o</code> is <code class="code">none</code> if <code class="code">o</code> is <code class="code">None</code> and <code class="code">some&nbsp;v</code> if <code class="code">o</code> is
+    <code class="code">Some&nbsp;v</code>.</p>
+</div>
+</div>
+
+<pre id="VALiter">val iter : ('a -&gt; unit) -&gt; 'a option -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">iter&nbsp;f&nbsp;o</code> is <code class="code">f&nbsp;v</code> if <code class="code">o</code> is <code class="code">Some&nbsp;v</code> and <code class="code">()</code> otherwise.</p>
+</div>
+</div>
+<h2 id="preds">Predicates and comparisons</h2>
+<pre id="VALis_none">val is_none : 'a option -&gt; bool</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">is_none&nbsp;o</code> is <code class="code">true</code> if and only if <code class="code">o</code> is <code class="code">None</code>.</p>
+</div>
+</div>
+
+<pre id="VALis_some">val is_some : 'a option -&gt; bool</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">is_some&nbsp;o</code> is <code class="code">true</code> if and only if <code class="code">o</code> is <code class="code">Some&nbsp;o</code>.</p>
+</div>
+</div>
+
+<pre id="VALequal">val equal : ('a -&gt; 'a -&gt; bool) -&gt; 'a option -&gt; 'a option -&gt; bool</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">equal&nbsp;eq&nbsp;o0&nbsp;o1</code> is <code class="code">true</code> if and only if <code class="code">o0</code> and <code class="code">o1</code> are both <code class="code">None</code>
+    or if they are <code class="code">Some&nbsp;v0</code> and <code class="code">Some&nbsp;v1</code> and <code class="code">eq&nbsp;v0&nbsp;v1</code> is <code class="code">true</code>.</p>
+</div>
+</div>
+
+<pre id="VALcompare">val compare : ('a -&gt; 'a -&gt; int) -&gt; 'a option -&gt; 'a option -&gt; int</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">compare&nbsp;cmp&nbsp;o0&nbsp;o1</code> is a total order on options using <code class="code">cmp</code> to compare
+    values wrapped by <code class="code">Some&nbsp;_</code>. <code class="code">None</code> is smaller than <code class="code">Some&nbsp;_</code> values.</p>
+</div>
+</div>
+<h2 id="convert">Converting</h2>
+<pre id="VALto_result">val to_result : none:'e -&gt; 'a option -&gt; ('a, 'e) result</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">to_result&nbsp;~none&nbsp;o</code> is <code class="code">Ok&nbsp;v</code> if <code class="code">o</code> is <code class="code">Some&nbsp;v</code> and <code class="code">Error&nbsp;none</code>
+    otherwise.</p>
+</div>
+</div>
+
+<pre id="VALto_list">val to_list : 'a option -&gt; 'a list</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">to_list&nbsp;o</code> is <code class="code">[]</code> if <code class="code">o</code> is <code class="code">None</code> and <code class="code">[v]</code> if <code class="code">o</code> is <code class="code">Some&nbsp;v</code>.</p>
+</div>
+</div>
+
+<pre id="VALto_seq">val to_seq : 'a option -&gt; 'a Seq.t</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">to_seq&nbsp;o</code> is <code class="code">o</code> as a sequence. <code class="code">None</code> is the empty sequence and
+    <code class="code">Some&nbsp;v</code> is the singleton sequence containing <code class="code">v</code>.</p>
+</div>
+</div>
+
+</div></div><span><script src="/js/redirectBlog.js"></script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+                document.addEventListener('keyup', function(e) {
+                  if (e.target !== document.body) {
+                    return;
+                  }
+                  // keyCode for '/' (slash)
+                  if (e.keyCode === 191) {
+                    const search = document.getElementById('search_input_react');
+                    search && search.focus();
+                  }
+                });
+              </script><script>
+              var search = docsearch({
+                
+                apiKey: '966d1e412f67114a07dc0afe44b19b53',
+                indexName: 'reason',
+                inputSelector: '#search_input_react',
+                algoliaOptions: {"facetFilters":["lang:en"]}
+              });
+            </script></body></html>

@@ -1,0 +1,599 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Reason · Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems.</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Reason · Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io/"/><meta property="og:description" content="Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/icon_50.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io/blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io/blog/feed.xml" title="Reason Blog RSS Feed"/><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/en"><img class="logo" src="/img/dummy.svg" alt="Reason"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/docs/en/what-and-why" target="_self">Docs</a></li><li class=""><a href="/en/try" target="_self">Try</a></li><li class=""><a href="/api/index" target="_self">API</a></li><li class=""><a href="/docs/en/community" target="_self">Community</a></li><li class=""><a href="/blog/" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg" alt="Languages icon"/>English</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/ja/Runtime_events">日本語</a></li><li><a href="/de/Runtime_events">Deutsch</a></li><li><a href="/es-ES/Runtime_events">Español</a></li><li><a href="/fr/Runtime_events">Français</a></li><li><a href="/ko/Runtime_events">한국어</a></li><li><a href="/pt-BR/Runtime_events">Português (Brasil)</a></li><li><a href="/ru/Runtime_events">Русский</a></li><li><a href="/uk/Runtime_events">Українська</a></li><li><a href="/zh-CN/Runtime_events">中文</a></li><li><a href="/zh-TW/Runtime_events">繁體中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank" rel="noreferrer noopener">Help Translate</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/facebook/reason" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div><link rel="stylesheet" href="/css/main.css"><div class="ocamldoc">
+<h1>Module <a href="type_Runtime_events.html">Runtime_events</a></h1>
+
+<pre id="MODULERuntime_events"><span class="keyword">module</span> Runtime_events: sig .. end</pre><div class="info module top">
+<div class="info-desc">
+<p>Runtime events - ring buffer-based runtime tracing</p>
+
+<p>This module enables users to enable and subscribe to tracing events
+    from the Garbage Collector and other parts of the OCaml runtime. This can
+    be useful for diagnostic or performance monitoring purposes. This module
+    can be used to subscribe to events for the current process or external
+    processes asynchronously.</p>
+
+<p>When enabled (either via setting the OCAML_RUNTIME_EVENTS_START environment
+    variable or calling Runtime_events.start) a file with the pid of the process
+    and extension .events will be created. By default this is in the
+    current directory but can be over-ridden by the OCAML_RUNTIME_EVENTS_DIR
+    environment variable. Each domain maintains its own ring buffer in a section
+    of the larger file into which it emits events.</p>
+
+<p>There is additionally a set of C APIs in runtime_events.h that can enable
+    zero-impact monitoring of the current process or bindings for other
+    languages.</p>
+
+<p>The runtime events system's behaviour can be controlled by the following
+    environment variables:</p>
+
+<ul>
+<li>OCAML_RUNTIME_EVENTS_START if set will cause the runtime events system
+    to be started as part of the OCaml runtime initialization.</li>
+</ul>
+<ul>
+<li>OCAML_RUNTIME_EVENTS_DIR sets the directory where the runtime events
+    ring buffers will be located. If not present the program's working directory
+    will be used.</li>
+</ul>
+<ul>
+<li>OCAML_RUNTIME_EVENTS_PRESERVE if set will prevent the OCaml runtime from
+    removing its ring buffers when it terminates. This can help if monitoring
+    very short running programs.</li>
+</ul>
+</div>
+</div>
+<hr width="100%">
+
+<pre><span class="keyword">type</span> runtime_counter = </pre><table class="typetable">
+<tbody><tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>EV_C_FORCE_MINOR_ALLOC_SMALL</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>EV_C_FORCE_MINOR_MAKE_VECT</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>EV_C_FORCE_MINOR_SET_MINOR_HEAP_SIZE</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>EV_C_FORCE_MINOR_MEMPROF</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>EV_C_MINOR_PROMOTED</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>EV_C_MINOR_ALLOCATED</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>EV_C_REQUEST_MAJOR_ALLOC_SHR</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>EV_C_REQUEST_MAJOR_ADJUST_GC_SPEED</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>EV_C_REQUEST_MINOR_REALLOC_REF_TABLE</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>EV_C_REQUEST_MINOR_REALLOC_EPHE_REF_TABLE</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>EV_C_REQUEST_MINOR_REALLOC_CUSTOM_TABLE</code></td>
+
+</tr></tbody></table>
+
+<div class="info ">
+<div class="info-desc">
+<p>The type for counter events emitted by the runtime</p>
+</div>
+</div>
+
+
+<pre><span class="keyword">type</span> runtime_phase = </pre><table class="typetable">
+<tbody><tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>EV_EXPLICIT_GC_SET</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>EV_EXPLICIT_GC_STAT</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>EV_EXPLICIT_GC_MINOR</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>EV_EXPLICIT_GC_MAJOR</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>EV_EXPLICIT_GC_FULL_MAJOR</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>EV_EXPLICIT_GC_COMPACT</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>EV_MAJOR</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>EV_MAJOR_SWEEP</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>EV_MAJOR_MARK_ROOTS</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>EV_MAJOR_MARK</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>EV_MINOR</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>EV_MINOR_LOCAL_ROOTS</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>EV_MINOR_FINALIZED</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>EV_EXPLICIT_GC_MAJOR_SLICE</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>EV_FINALISE_UPDATE_FIRST</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>EV_FINALISE_UPDATE_LAST</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>EV_INTERRUPT_REMOTE</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>EV_MAJOR_EPHE_MARK</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>EV_MAJOR_EPHE_SWEEP</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>EV_MAJOR_FINISH_MARKING</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>EV_MAJOR_GC_CYCLE_DOMAINS</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>EV_MAJOR_GC_PHASE_CHANGE</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>EV_MAJOR_GC_STW</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>EV_MAJOR_MARK_OPPORTUNISTIC</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>EV_MAJOR_SLICE</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>EV_MAJOR_FINISH_CYCLE</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>EV_MINOR_CLEAR</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>EV_MINOR_FINALIZERS_OLDIFY</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>EV_MINOR_GLOBAL_ROOTS</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>EV_MINOR_LEAVE_BARRIER</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>EV_STW_API_BARRIER</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>EV_STW_HANDLER</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>EV_STW_LEADER</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>EV_MAJOR_FINISH_SWEEPING</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>EV_MINOR_FINALIZERS_ADMIN</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>EV_MINOR_REMEMBERED_SET</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>EV_MINOR_REMEMBERED_SET_PROMOTE</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>EV_MINOR_LOCAL_ROOTS_PROMOTE</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>EV_DOMAIN_CONDITION_WAIT</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>EV_DOMAIN_RESIZE_HEAP_RESERVATION</code></td>
+
+</tr></tbody></table>
+
+<div class="info ">
+<div class="info-desc">
+<p>The type for span events emitted by the runtime</p>
+</div>
+</div>
+
+
+<pre><span class="keyword">type</span> lifecycle = </pre><table class="typetable">
+<tbody><tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>EV_RING_START</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>EV_RING_STOP</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>EV_RING_PAUSE</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>EV_RING_RESUME</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>EV_FORK_PARENT</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>EV_FORK_CHILD</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>EV_DOMAIN_SPAWN</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>EV_DOMAIN_TERMINATE</code></td>
+
+</tr></tbody></table>
+
+<div class="info ">
+<div class="info-desc">
+<p>Lifecycle events for the ring itself</p>
+</div>
+</div>
+
+
+<pre id="VALlifecycle_name">val lifecycle_name : lifecycle -&gt; string</pre><div class="info ">
+<div class="info-desc">
+<p>Return a string representation of a given lifecycle event type</p>
+</div>
+</div>
+
+<pre id="VALruntime_phase_name">val runtime_phase_name : runtime_phase -&gt; string</pre><div class="info ">
+<div class="info-desc">
+<p>Return a string representation of a given runtime phase event type</p>
+</div>
+</div>
+
+<pre id="VALruntime_counter_name">val runtime_counter_name : runtime_counter -&gt; string</pre><div class="info ">
+<div class="info-desc">
+<p>Return a string representation of a given runtime counter type</p>
+</div>
+</div>
+
+<pre id="TYPEcursor"><span class="keyword">type</span> cursor </pre>
+<div class="info ">
+<div class="info-desc">
+<p>Type of the cursor used when consuming</p>
+</div>
+</div>
+
+
+<pre id="MODULETimestamp"><span class="keyword">module</span> Timestamp: sig .. end</pre>
+<pre id="MODULECallbacks"><span class="keyword">module</span> Callbacks: sig .. end</pre>
+<pre id="VALstart">val start : unit -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">start&nbsp;()</code> will start the collection of events in the runtime if not already
+  started.</p>
+
+<p>Events can be consumed by creating a cursor with <code class="code">create_cursor</code> and providing
+  a set of callbacks to be called for each type of event.</p>
+</div>
+</div>
+
+<pre id="VALpause">val pause : unit -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">pause&nbsp;()</code> will pause the collection of events in the runtime.
+   Traces are collected if the program has called <code class="code">Runtime_events.start&nbsp;()</code> or
+   the OCAML_RUNTIME_EVENTS_START environment variable has been set.</p>
+</div>
+</div>
+
+<pre id="VALresume">val resume : unit -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">resume&nbsp;()</code> will resume the collection of events in the runtime.
+   Traces are collected if the program has called <code class="code">Runtime_events.start&nbsp;()</code> or
+   the OCAML_RUNTIME_EVENTS_START environment variable has been set.</p>
+</div>
+</div>
+
+<pre id="VALcreate_cursor">val create_cursor : (string * int) option -&gt; cursor</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">create_cursor&nbsp;path_pid</code> creates a cursor to read from an runtime_events.
+   Cursors can be created for runtime_events in and out of process. A
+   runtime_events ring-buffer may have multiple cursors reading from it at any
+   point in time and a program may have multiple cursors open concurrently
+  (for example if multiple consumers want different sets of events). If
+   <code class="code">path_pid</code> is None then a cursor is created for the current process.
+   Otherwise the pair contains a string <code class="code">path</code> to the directory that contains
+   the <code class="code">pid</code>.events file and int <code class="code">pid</code> for the runtime_events of an
+   external process to monitor.</p>
+</div>
+</div>
+
+<pre id="VALfree_cursor">val free_cursor : cursor -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p>Free a previously created runtime_events cursor</p>
+</div>
+</div>
+
+<pre id="VALread_poll">val read_poll : cursor -&gt; Callbacks.t -&gt; int option -&gt; int</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">read_poll&nbsp;cursor&nbsp;callbacks&nbsp;max_option</code> calls the corresponding functions
+    on <code class="code">callbacks</code> for up to <code class="code">max_option</code> events read off <code class="code">cursor</code>'s
+    runtime_events and returns the number of events read.</p>
+</div>
+</div>
+
+</div></div><span><script src="/js/redirectBlog.js"></script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+                document.addEventListener('keyup', function(e) {
+                  if (e.target !== document.body) {
+                    return;
+                  }
+                  // keyCode for '/' (slash)
+                  if (e.keyCode === 191) {
+                    const search = document.getElementById('search_input_react');
+                    search && search.focus();
+                  }
+                });
+              </script><script>
+              var search = docsearch({
+                
+                apiKey: '966d1e412f67114a07dc0afe44b19b53',
+                indexName: 'reason',
+                inputSelector: '#search_input_react',
+                algoliaOptions: {"facetFilters":["lang:en"]}
+              });
+            </script></body></html>

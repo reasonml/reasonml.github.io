@@ -1,0 +1,697 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Reason · Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems.</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Reason · Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io/"/><meta property="og:description" content="Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/icon_50.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io/blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io/blog/feed.xml" title="Reason Blog RSS Feed"/><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/en"><img class="logo" src="/img/dummy.svg" alt="Reason"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/docs/en/what-and-why" target="_self">Docs</a></li><li class=""><a href="/en/try" target="_self">Try</a></li><li class=""><a href="/api/index" target="_self">API</a></li><li class=""><a href="/docs/en/community" target="_self">Community</a></li><li class=""><a href="/blog/" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg" alt="Languages icon"/>English</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/ja/Stdlib.Bigarray">日本語</a></li><li><a href="/de/Stdlib.Bigarray">Deutsch</a></li><li><a href="/es-ES/Stdlib.Bigarray">Español</a></li><li><a href="/fr/Stdlib.Bigarray">Français</a></li><li><a href="/ko/Stdlib.Bigarray">한국어</a></li><li><a href="/pt-BR/Stdlib.Bigarray">Português (Brasil)</a></li><li><a href="/ru/Stdlib.Bigarray">Русский</a></li><li><a href="/uk/Stdlib.Bigarray">Українська</a></li><li><a href="/zh-CN/Stdlib.Bigarray">中文</a></li><li><a href="/zh-TW/Stdlib.Bigarray">繁體中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank" rel="noreferrer noopener">Help Translate</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/facebook/reason" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div><link rel="stylesheet" href="/css/main.css"><div class="ocamldoc">
+<h1>Module <a href="type_Stdlib.Bigarray.html">Stdlib.Bigarray</a></h1>
+
+<pre id="MODULEBigarray"><span class="keyword">module</span> Bigarray: Bigarray</pre><hr width="100%">
+<h2 id="1_Elementkinds">Element kinds</h2><p>Bigarrays can contain elements of the following kinds:</p>
+<ul>
+<li>IEEE single precision (32 bits) floating-point numbers
+   (<a href="Bigarray.html#TYPEfloat32_elt"><code class="code">Bigarray.float32_elt</code></a>),</li>
+<li>IEEE double precision (64 bits) floating-point numbers
+   (<a href="Bigarray.html#TYPEfloat64_elt"><code class="code">Bigarray.float64_elt</code></a>),</li>
+<li>IEEE single precision (2 * 32 bits) floating-point complex numbers
+   (<a href="Bigarray.html#TYPEcomplex32_elt"><code class="code">Bigarray.complex32_elt</code></a>),</li>
+<li>IEEE double precision (2 * 64 bits) floating-point complex numbers
+   (<a href="Bigarray.html#TYPEcomplex64_elt"><code class="code">Bigarray.complex64_elt</code></a>),</li>
+<li>8-bit integers (signed or unsigned)
+   (<a href="Bigarray.html#TYPEint8_signed_elt"><code class="code">Bigarray.int8_signed_elt</code></a> or <a href="Bigarray.html#TYPEint8_unsigned_elt"><code class="code">Bigarray.int8_unsigned_elt</code></a>),</li>
+<li>16-bit integers (signed or unsigned)
+   (<a href="Bigarray.html#TYPEint16_signed_elt"><code class="code">Bigarray.int16_signed_elt</code></a> or <a href="Bigarray.html#TYPEint16_unsigned_elt"><code class="code">Bigarray.int16_unsigned_elt</code></a>),</li>
+<li>OCaml integers (signed, 31 bits on 32-bit architectures,
+   63 bits on 64-bit architectures) (<a href="Bigarray.html#TYPEint_elt"><code class="code">Bigarray.int_elt</code></a>),</li>
+<li>32-bit signed integers (<a href="Bigarray.html#TYPEint32_elt"><code class="code">Bigarray.int32_elt</code></a>),</li>
+<li>64-bit signed integers (<a href="Bigarray.html#TYPEint64_elt"><code class="code">Bigarray.int64_elt</code></a>),</li>
+<li>platform-native signed integers (32 bits on 32-bit architectures,
+   64 bits on 64-bit architectures) (<a href="Bigarray.html#TYPEnativeint_elt"><code class="code">Bigarray.nativeint_elt</code></a>).</li>
+</ul>
+<p>Each element kind is represented at the type level by one of the
+   <code class="code">*_elt</code> types defined below (defined with a single constructor instead
+   of abstract types for technical injectivity reasons).</p>
+
+<pre><span class="keyword">type</span> float32_elt = </pre><table class="typetable">
+<tbody><tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Float32_elt</code></td>
+
+</tr></tbody></table>
+
+
+
+<pre><span class="keyword">type</span> float64_elt = </pre><table class="typetable">
+<tbody><tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Float64_elt</code></td>
+
+</tr></tbody></table>
+
+
+
+<pre><span class="keyword">type</span> int8_signed_elt = </pre><table class="typetable">
+<tbody><tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Int8_signed_elt</code></td>
+
+</tr></tbody></table>
+
+
+
+<pre><span class="keyword">type</span> int8_unsigned_elt = </pre><table class="typetable">
+<tbody><tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Int8_unsigned_elt</code></td>
+
+</tr></tbody></table>
+
+
+
+<pre><span class="keyword">type</span> int16_signed_elt = </pre><table class="typetable">
+<tbody><tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Int16_signed_elt</code></td>
+
+</tr></tbody></table>
+
+
+
+<pre><span class="keyword">type</span> int16_unsigned_elt = </pre><table class="typetable">
+<tbody><tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Int16_unsigned_elt</code></td>
+
+</tr></tbody></table>
+
+
+
+<pre><span class="keyword">type</span> int32_elt = </pre><table class="typetable">
+<tbody><tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Int32_elt</code></td>
+
+</tr></tbody></table>
+
+
+
+<pre><span class="keyword">type</span> int64_elt = </pre><table class="typetable">
+<tbody><tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Int64_elt</code></td>
+
+</tr></tbody></table>
+
+
+
+<pre><span class="keyword">type</span> int_elt = </pre><table class="typetable">
+<tbody><tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Int_elt</code></td>
+
+</tr></tbody></table>
+
+
+
+<pre><span class="keyword">type</span> nativeint_elt = </pre><table class="typetable">
+<tbody><tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Nativeint_elt</code></td>
+
+</tr></tbody></table>
+
+
+
+<pre><span class="keyword">type</span> complex32_elt = </pre><table class="typetable">
+<tbody><tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Complex32_elt</code></td>
+
+</tr></tbody></table>
+
+
+
+<pre><span class="keyword">type</span> complex64_elt = </pre><table class="typetable">
+<tbody><tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Complex64_elt</code></td>
+
+</tr></tbody></table>
+
+
+
+<pre><span class="keyword">type</span> ('a, 'b) kind = </pre><table class="typetable">
+<tbody><tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Float32 : (float, float32_elt) kind</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Float64 : (float, float64_elt) kind</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Int8_signed : (int, int8_signed_elt) kind</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Int8_unsigned : (int, int8_unsigned_elt) kind</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Int16_signed : (int, int16_signed_elt) kind</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Int16_unsigned : (int, int16_unsigned_elt) kind</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Int32 : (int32, int32_elt) kind</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Int64 : (int64, int64_elt) kind</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Int : (int, int_elt) kind</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Nativeint : (nativeint, nativeint_elt) kind</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Complex32 : (Complex.t, complex32_elt) kind</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Complex64 : (Complex.t, complex64_elt) kind</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Char : (char, int8_unsigned_elt) kind</code></td>
+
+</tr></tbody></table>
+
+<div class="info ">
+<div class="info-desc">
+<p>To each element kind is associated an OCaml type, which is
+   the type of OCaml values that can be stored in the Bigarray
+   or read back from it.  This type is not necessarily the same
+   as the type of the array elements proper: for instance,
+   a Bigarray whose elements are of kind <code class="code">float32_elt</code> contains
+   32-bit single precision floats, but reading or writing one of
+   its elements from OCaml uses the OCaml type <code class="code">float</code>, which is
+   64-bit double precision floats.</p>
+
+<p>The GADT type <code class="code">('a,&nbsp;'b)&nbsp;kind</code> captures this association
+   of an OCaml type <code class="code">'a</code> for values read or written in the Bigarray,
+   and of an element kind <code class="code">'b</code> which represents the actual contents
+   of the Bigarray. Its constructors list all possible associations
+   of OCaml types with element kinds, and are re-exported below for
+   backward-compatibility reasons.</p>
+
+<p>Using a generalized algebraic datatype (GADT) here allows writing
+   well-typed polymorphic functions whose return type depend on the
+   argument type, such as:</p>
+
+<pre class="codepre">  let zero : type a b. (a, b) kind -&gt; a = function
+    | Float32 -&gt; 0.0 | Complex32 -&gt; Complex.zero
+    | Float64 -&gt; 0.0 | Complex64 -&gt; Complex.zero
+    | Int8_signed -&gt; 0 | Int8_unsigned -&gt; 0
+    | Int16_signed -&gt; 0 | Int16_unsigned -&gt; 0
+    | Int32 -&gt; 0l | Int64 -&gt; 0L
+    | Int -&gt; 0 | Nativeint -&gt; 0n
+    | Char -&gt; '\000'
+</pre></div>
+</div>
+
+
+<pre id="VALfloat32">val float32 : (float, float32_elt) kind</pre><div class="info ">
+<div class="info-desc">
+<p>See <a href="Bigarray.html#VALchar"><code class="code">Bigarray.char</code></a>.</p>
+</div>
+</div>
+
+<pre id="VALfloat64">val float64 : (float, float64_elt) kind</pre><div class="info ">
+<div class="info-desc">
+<p>See <a href="Bigarray.html#VALchar"><code class="code">Bigarray.char</code></a>.</p>
+</div>
+</div>
+
+<pre id="VALcomplex32">val complex32 : (Complex.t, complex32_elt) kind</pre><div class="info ">
+<div class="info-desc">
+<p>See <a href="Bigarray.html#VALchar"><code class="code">Bigarray.char</code></a>.</p>
+</div>
+</div>
+
+<pre id="VALcomplex64">val complex64 : (Complex.t, complex64_elt) kind</pre><div class="info ">
+<div class="info-desc">
+<p>See <a href="Bigarray.html#VALchar"><code class="code">Bigarray.char</code></a>.</p>
+</div>
+</div>
+
+<pre id="VALint8_signed">val int8_signed : (int, int8_signed_elt) kind</pre><div class="info ">
+<div class="info-desc">
+<p>See <a href="Bigarray.html#VALchar"><code class="code">Bigarray.char</code></a>.</p>
+</div>
+</div>
+
+<pre id="VALint8_unsigned">val int8_unsigned : (int, int8_unsigned_elt) kind</pre><div class="info ">
+<div class="info-desc">
+<p>See <a href="Bigarray.html#VALchar"><code class="code">Bigarray.char</code></a>.</p>
+</div>
+</div>
+
+<pre id="VALint16_signed">val int16_signed : (int, int16_signed_elt) kind</pre><div class="info ">
+<div class="info-desc">
+<p>See <a href="Bigarray.html#VALchar"><code class="code">Bigarray.char</code></a>.</p>
+</div>
+</div>
+
+<pre id="VALint16_unsigned">val int16_unsigned : (int, int16_unsigned_elt) kind</pre><div class="info ">
+<div class="info-desc">
+<p>See <a href="Bigarray.html#VALchar"><code class="code">Bigarray.char</code></a>.</p>
+</div>
+</div>
+
+<pre id="VALint">val int : (int, int_elt) kind</pre><div class="info ">
+<div class="info-desc">
+<p>See <a href="Bigarray.html#VALchar"><code class="code">Bigarray.char</code></a>.</p>
+</div>
+</div>
+
+<pre id="VALint32">val int32 : (int32, int32_elt) kind</pre><div class="info ">
+<div class="info-desc">
+<p>See <a href="Bigarray.html#VALchar"><code class="code">Bigarray.char</code></a>.</p>
+</div>
+</div>
+
+<pre id="VALint64">val int64 : (int64, int64_elt) kind</pre><div class="info ">
+<div class="info-desc">
+<p>See <a href="Bigarray.html#VALchar"><code class="code">Bigarray.char</code></a>.</p>
+</div>
+</div>
+
+<pre id="VALnativeint">val nativeint : (nativeint, nativeint_elt) kind</pre><div class="info ">
+<div class="info-desc">
+<p>See <a href="Bigarray.html#VALchar"><code class="code">Bigarray.char</code></a>.</p>
+</div>
+</div>
+
+<pre id="VALchar">val char : (char, int8_unsigned_elt) kind</pre><div class="info ">
+<div class="info-desc">
+<p>As shown by the types of the values above,
+   Bigarrays of kind <code class="code">float32_elt</code> and <code class="code">float64_elt</code> are
+   accessed using the OCaml type <code class="code">float</code>.  Bigarrays of complex kinds
+   <code class="code">complex32_elt</code>, <code class="code">complex64_elt</code> are accessed with the OCaml type
+   <a href="Complex.html#TYPEt"><code class="code">Complex.t</code></a>. Bigarrays of
+   integer kinds are accessed using the smallest OCaml integer
+   type large enough to represent the array elements:
+   <code class="code">int</code> for 8- and 16-bit integer Bigarrays, as well as OCaml-integer
+   Bigarrays; <code class="code">int32</code> for 32-bit integer Bigarrays; <code class="code">int64</code>
+   for 64-bit integer Bigarrays; and <code class="code">nativeint</code> for
+   platform-native integer Bigarrays.  Finally, Bigarrays of
+   kind <code class="code">int8_unsigned_elt</code> can also be accessed as arrays of
+   characters instead of arrays of small integers, by using
+   the kind value <code class="code">char</code> instead of <code class="code">int8_unsigned</code>.</p>
+</div>
+</div>
+
+<pre id="VALkind_size_in_bytes">val kind_size_in_bytes : ('a, 'b) kind -&gt; int</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">kind_size_in_bytes&nbsp;k</code> is the number of bytes used to store
+   an element of type <code class="code">k</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.03.0</li>
+</ul>
+</div>
+<h2 id="1_Arraylayouts">Array layouts</h2>
+<pre><span class="keyword">type</span> c_layout = </pre><table class="typetable">
+<tbody><tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>C_layout_typ</code></td>
+
+</tr></tbody></table>
+
+<div class="info ">
+<div class="info-desc">
+<p>See <a href="Bigarray.html#TYPEfortran_layout"><code class="code">Bigarray.fortran_layout</code></a>.</p>
+</div>
+</div>
+
+
+<pre><span class="keyword">type</span> fortran_layout = </pre><table class="typetable">
+<tbody><tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Fortran_layout_typ</code></td>
+
+</tr></tbody></table>
+
+<div class="info ">
+<div class="info-desc">
+<p>To facilitate interoperability with existing C and Fortran code,
+   this library supports two different memory layouts for Bigarrays,
+   one compatible with the C conventions,
+   the other compatible with the Fortran conventions.</p>
+
+<p>In the C-style layout, array indices start at 0, and
+   multi-dimensional arrays are laid out in row-major format.
+   That is, for a two-dimensional array, all elements of
+   row 0 are contiguous in memory, followed by all elements of
+   row 1, etc.  In other terms, the array elements at <code class="code">(x,y)</code>
+   and <code class="code">(x,&nbsp;y+1)</code> are adjacent in memory.</p>
+
+<p>In the Fortran-style layout, array indices start at 1, and
+   multi-dimensional arrays are laid out in column-major format.
+   That is, for a two-dimensional array, all elements of
+   column 0 are contiguous in memory, followed by all elements of
+   column 1, etc.  In other terms, the array elements at <code class="code">(x,y)</code>
+   and <code class="code">(x+1,&nbsp;y)</code> are adjacent in memory.</p>
+
+<p>Each layout style is identified at the type level by the
+   phantom types <a href="Bigarray.html#TYPEc_layout"><code class="code">Bigarray.c_layout</code></a> and <a href="Bigarray.html#TYPEfortran_layout"><code class="code">Bigarray.fortran_layout</code></a>
+   respectively.</p>
+</div>
+</div>
+
+<h3 id="2_Supportedlayouts">Supported layouts</h3>
+<p>The GADT type <code class="code">'a&nbsp;layout</code> represents one of the two supported
+   memory layouts: C-style or Fortran-style. Its constructors are
+   re-exported as values below for backward-compatibility reasons.</p>
+
+<pre><span class="keyword">type</span> 'a layout = </pre><table class="typetable">
+<tbody><tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>C_layout : c_layout layout</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Fortran_layout : fortran_layout layout</code></td>
+
+</tr></tbody></table>
+
+
+
+<pre id="VALc_layout">val c_layout : c_layout layout</pre>
+<pre id="VALfortran_layout">val fortran_layout : fortran_layout layout</pre><h2 id="1_Genericarraysofarbitrarilymanydimensions">Generic arrays (of arbitrarily many dimensions)</h2>
+<pre id="MODULEGenarray"><span class="keyword">module</span> Genarray: sig .. end</pre><h2 id="1_Zerodimensionalarrays">Zero-dimensional arrays</h2>
+<pre id="MODULEArray0"><span class="keyword">module</span> Array0: sig .. end</pre><div class="info">
+<p>Zero-dimensional arrays.</p>
+
+</div>
+<h2 id="1_Onedimensionalarrays">One-dimensional arrays</h2>
+<pre id="MODULEArray1"><span class="keyword">module</span> Array1: sig .. end</pre><div class="info">
+<p>One-dimensional arrays.</p>
+
+</div>
+<h2 id="1_Twodimensionalarrays">Two-dimensional arrays</h2>
+<pre id="MODULEArray2"><span class="keyword">module</span> Array2: sig .. end</pre><div class="info">
+<p>Two-dimensional arrays.</p>
+
+</div>
+<h2 id="1_Threedimensionalarrays">Three-dimensional arrays</h2>
+<pre id="MODULEArray3"><span class="keyword">module</span> Array3: sig .. end</pre><div class="info">
+<p>Three-dimensional arrays.</p>
+
+</div>
+<h2 id="1_CoercionsbetweengenericBigarraysandfixeddimensionBigarrays">Coercions between generic Bigarrays and fixed-dimension Bigarrays</h2>
+<pre id="VALgenarray_of_array0">val genarray_of_array0 : ('a, 'b, 'c) Array0.t -&gt; ('a, 'b, 'c) Genarray.t</pre><div class="info ">
+<div class="info-desc">
+<p>Return the generic Bigarray corresponding to the given zero-dimensional
+    Bigarray.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.05.0</li>
+</ul>
+</div>
+
+<pre id="VALgenarray_of_array1">val genarray_of_array1 : ('a, 'b, 'c) Array1.t -&gt; ('a, 'b, 'c) Genarray.t</pre><div class="info ">
+<div class="info-desc">
+<p>Return the generic Bigarray corresponding to the given one-dimensional
+   Bigarray.</p>
+</div>
+</div>
+
+<pre id="VALgenarray_of_array2">val genarray_of_array2 : ('a, 'b, 'c) Array2.t -&gt; ('a, 'b, 'c) Genarray.t</pre><div class="info ">
+<div class="info-desc">
+<p>Return the generic Bigarray corresponding to the given two-dimensional
+   Bigarray.</p>
+</div>
+</div>
+
+<pre id="VALgenarray_of_array3">val genarray_of_array3 : ('a, 'b, 'c) Array3.t -&gt; ('a, 'b, 'c) Genarray.t</pre><div class="info ">
+<div class="info-desc">
+<p>Return the generic Bigarray corresponding to the given three-dimensional
+   Bigarray.</p>
+</div>
+</div>
+
+<pre id="VALarray0_of_genarray">val array0_of_genarray : ('a, 'b, 'c) Genarray.t -&gt; ('a, 'b, 'c) Array0.t</pre><div class="info ">
+<div class="info-desc">
+<p>Return the zero-dimensional Bigarray corresponding to the given
+   generic Bigarray.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.05.0</li>
+<li><b>Raises</b> <code>Invalid_argument</code> if the generic Bigarray
+   does not have exactly zero dimension.</li>
+</ul>
+</div>
+
+<pre id="VALarray1_of_genarray">val array1_of_genarray : ('a, 'b, 'c) Genarray.t -&gt; ('a, 'b, 'c) Array1.t</pre><div class="info ">
+<div class="info-desc">
+<p>Return the one-dimensional Bigarray corresponding to the given
+   generic Bigarray.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Raises</b> <code>Invalid_argument</code> if the generic Bigarray
+   does not have exactly one dimension.</li>
+</ul>
+</div>
+
+<pre id="VALarray2_of_genarray">val array2_of_genarray : ('a, 'b, 'c) Genarray.t -&gt; ('a, 'b, 'c) Array2.t</pre><div class="info ">
+<div class="info-desc">
+<p>Return the two-dimensional Bigarray corresponding to the given
+   generic Bigarray.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Raises</b> <code>Invalid_argument</code> if the generic Bigarray
+   does not have exactly two dimensions.</li>
+</ul>
+</div>
+
+<pre id="VALarray3_of_genarray">val array3_of_genarray : ('a, 'b, 'c) Genarray.t -&gt; ('a, 'b, 'c) Array3.t</pre><div class="info ">
+<div class="info-desc">
+<p>Return the three-dimensional Bigarray corresponding to the given
+   generic Bigarray.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Raises</b> <code>Invalid_argument</code> if the generic Bigarray
+   does not have exactly three dimensions.</li>
+</ul>
+</div>
+<h2 id="1_ReshapingBigarrays">Re-shaping Bigarrays</h2>
+<pre id="VALreshape">val reshape : ('a, 'b, 'c) Genarray.t -&gt;       int array -&gt; ('a, 'b, 'c) Genarray.t</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">reshape&nbsp;b&nbsp;[|d1;...;dN|]</code> converts the Bigarray <code class="code">b</code> to a
+   <code class="code">N</code>-dimensional array of dimensions <code class="code">d1</code>...<code class="code">dN</code>.  The returned
+   array and the original array <code class="code">b</code> share their data
+   and have the same layout.  For instance, assuming that <code class="code">b</code>
+   is a one-dimensional array of dimension 12, <code class="code">reshape&nbsp;b&nbsp;[|3;4|]</code>
+   returns a two-dimensional array <code class="code">b'</code> of dimensions 3 and 4.
+   If <code class="code">b</code> has C layout, the element <code class="code">(x,y)</code> of <code class="code">b'</code> corresponds
+   to the element <code class="code">x&nbsp;*&nbsp;3&nbsp;+&nbsp;y</code> of <code class="code">b</code>.  If <code class="code">b</code> has Fortran layout,
+   the element <code class="code">(x,y)</code> of <code class="code">b'</code> corresponds to the element
+   <code class="code">x&nbsp;+&nbsp;(y&nbsp;-&nbsp;1)&nbsp;*&nbsp;4</code> of <code class="code">b</code>.
+   The returned Bigarray must have exactly the same number of
+   elements as the original Bigarray <code class="code">b</code>.  That is, the product
+   of the dimensions of <code class="code">b</code> must be equal to <code class="code">i1&nbsp;*&nbsp;...&nbsp;*&nbsp;iN</code>.
+   Otherwise, <code class="code">Invalid_argument</code> is raised.</p>
+</div>
+</div>
+
+<pre id="VALreshape_0">val reshape_0 : ('a, 'b, 'c) Genarray.t -&gt; ('a, 'b, 'c) Array0.t</pre><div class="info ">
+<div class="info-desc">
+<p>Specialized version of <a href="Bigarray.html#VALreshape"><code class="code">Bigarray.reshape</code></a> for reshaping to
+   zero-dimensional arrays.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.05.0</li>
+</ul>
+</div>
+
+<pre id="VALreshape_1">val reshape_1 : ('a, 'b, 'c) Genarray.t -&gt; int -&gt; ('a, 'b, 'c) Array1.t</pre><div class="info ">
+<div class="info-desc">
+<p>Specialized version of <a href="Bigarray.html#VALreshape"><code class="code">Bigarray.reshape</code></a> for reshaping to
+   one-dimensional arrays.</p>
+</div>
+</div>
+
+<pre id="VALreshape_2">val reshape_2 : ('a, 'b, 'c) Genarray.t -&gt;       int -&gt; int -&gt; ('a, 'b, 'c) Array2.t</pre><div class="info ">
+<div class="info-desc">
+<p>Specialized version of <a href="Bigarray.html#VALreshape"><code class="code">Bigarray.reshape</code></a> for reshaping to
+   two-dimensional arrays.</p>
+</div>
+</div>
+
+<pre id="VALreshape_3">val reshape_3 : ('a, 'b, 'c) Genarray.t -&gt;       int -&gt; int -&gt; int -&gt; ('a, 'b, 'c) Array3.t</pre><div class="info ">
+<div class="info-desc">
+<p>Specialized version of <a href="Bigarray.html#VALreshape"><code class="code">Bigarray.reshape</code></a> for reshaping to
+    three-dimensional arrays.</p>
+</div>
+</div>
+<h2 id="bigarray_concurrency">Bigarrays and concurrency safety</h2>
+<p>Care must be taken when concurrently accessing bigarrays from multiple
+    domains: accessing a bigarray will never crash a program, but unsynchronized
+    accesses might yield surprising (non-sequentially-consistent) results.</p>
+
+<h3 id="bigarray_atomicity">Atomicity</h3>
+<p>Every bigarray operation that accesses more than one array element is not
+    atomic. This includes slicing, bliting, and filling bigarrays.</p>
+
+<p>For example, consider the following program:</p>
+<pre class="codepre">open Bigarray
+let size = 100_000_000
+let a = Array1.init Int C_layout size (fun _ -&gt; 1)
+let update f a () =
+  for i = 0 to size - 1 do a.{i} &lt;- f a.{i} done
+let d1 = Domain.spawn (update (fun x -&gt; x + 1) a)
+let d2 = Domain.spawn (update (fun x -&gt; 2 * x + 1) a)
+let () = Domain.join d1; Domain.join d2
+</pre>
+<p>After executing this code, each field of the bigarray <code class="code">a</code> is either <code class="code">2</code>,
+    <code class="code">3</code>, <code class="code">4</code> or <code class="code">5</code>. If atomicity is required, then the user must implement
+    their own synchronization (for example, using <a href="Mutex.html#TYPEt"><code class="code">Mutex.t</code></a>).</p>
+
+<h3 id="bigarray_data_race">Data races</h3>
+<p>If two domains only access disjoint parts of the bigarray, then the
+    observed behaviour is the equivalent to some sequential interleaving of the
+    operations from the two domains.</p>
+
+<p>A data race is said to occur when two domains access the same bigarray
+    element without synchronization and at least one of the accesses is a
+    write. In the absence of data races, the observed behaviour is equivalent
+    to some sequential interleaving of the operations from different domains.</p>
+
+<p>Whenever possible, data races should be avoided by using synchronization to
+    mediate the accesses to the bigarray elements.</p>
+
+<p>Indeed, in the presence of data races, programs will not crash but the
+    observed behaviour may not be equivalent to any sequential interleaving of
+    operations from different domains.</p>
+
+<h3 id="bigarrarray_data_race_tearing">Tearing</h3>
+<p>Bigarrays have a distinct caveat in the presence of data races:
+    concurrent bigarray operations might produce surprising values due to
+    tearing. More precisely, the interleaving of partial writes and reads might
+    create values that would not exist with a sequential execution.
+    For instance, at the end of</p>
+<pre class="codepre"><span class="keyword">let</span> res = Array1.init Complex64 c_layout size (fun _ -&gt; Complex.zero)
+let d1 = Domain.spawn (fun () -&gt; Array1.fill res Complex.one)
+let d2 = Domain.spawn (fun () -&gt; Array1.fill res Complex.i)
+let () = Domain.join d1; Domain.join d2
+</pre><p>the <code class="code">res</code> bigarray might contain values that are neither <code class="code">Complex.i</code>
+    nor <code class="code">Complex.one</code> (for instance <code class="code">1&nbsp;+&nbsp;i</code>).</p>
+
+</div></div><span><script src="/js/redirectBlog.js"></script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+                document.addEventListener('keyup', function(e) {
+                  if (e.target !== document.body) {
+                    return;
+                  }
+                  // keyCode for '/' (slash)
+                  if (e.keyCode === 191) {
+                    const search = document.getElementById('search_input_react');
+                    search && search.focus();
+                  }
+                });
+              </script><script>
+              var search = docsearch({
+                
+                apiKey: '966d1e412f67114a07dc0afe44b19b53',
+                indexName: 'reason',
+                inputSelector: '#search_input_react',
+                algoliaOptions: {"facetFilters":["lang:en"]}
+              });
+            </script></body></html>

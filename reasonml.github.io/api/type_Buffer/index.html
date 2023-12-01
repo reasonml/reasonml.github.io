@@ -12,25 +12,47 @@
         });
       </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/facebook/reason" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div><link rel="stylesheet" href="/css/main.css"><div class="ocamldoc"><pre>sig
 
-&#xA0;&#xA0;type&#xA0;t
-&#xA0;&#xA0;val&#xA0;create&#xA0;:&#xA0;int&#xA0;-&gt;&#xA0;Buffer.t
-&#xA0;&#xA0;val&#xA0;contents&#xA0;:&#xA0;Buffer.t&#xA0;-&gt;&#xA0;string
-&#xA0;&#xA0;val&#xA0;to_bytes&#xA0;:&#xA0;Buffer.t&#xA0;-&gt;&#xA0;bytes
-&#xA0;&#xA0;val&#xA0;sub&#xA0;:&#xA0;Buffer.t&#xA0;-&gt;&#xA0;int&#xA0;-&gt;&#xA0;int&#xA0;-&gt;&#xA0;string
-&#xA0;&#xA0;val&#xA0;blit&#xA0;:&#xA0;Buffer.t&#xA0;-&gt;&#xA0;int&#xA0;-&gt;&#xA0;bytes&#xA0;-&gt;&#xA0;int&#xA0;-&gt;&#xA0;int&#xA0;-&gt;&#xA0;unit
-&#xA0;&#xA0;val&#xA0;nth&#xA0;:&#xA0;Buffer.t&#xA0;-&gt;&#xA0;int&#xA0;-&gt;&#xA0;char
-&#xA0;&#xA0;val&#xA0;length&#xA0;:&#xA0;Buffer.t&#xA0;-&gt;&#xA0;int
-&#xA0;&#xA0;val&#xA0;clear&#xA0;:&#xA0;Buffer.t&#xA0;-&gt;&#xA0;unit
-&#xA0;&#xA0;val&#xA0;reset&#xA0;:&#xA0;Buffer.t&#xA0;-&gt;&#xA0;unit
-&#xA0;&#xA0;val&#xA0;add_char&#xA0;:&#xA0;Buffer.t&#xA0;-&gt;&#xA0;char&#xA0;-&gt;&#xA0;unit
-&#xA0;&#xA0;val&#xA0;add_string&#xA0;:&#xA0;Buffer.t&#xA0;-&gt;&#xA0;string&#xA0;-&gt;&#xA0;unit
-&#xA0;&#xA0;val&#xA0;add_bytes&#xA0;:&#xA0;Buffer.t&#xA0;-&gt;&#xA0;bytes&#xA0;-&gt;&#xA0;unit
-&#xA0;&#xA0;val&#xA0;add_substring&#xA0;:&#xA0;Buffer.t&#xA0;-&gt;&#xA0;string&#xA0;-&gt;&#xA0;int&#xA0;-&gt;&#xA0;int&#xA0;-&gt;&#xA0;unit
-&#xA0;&#xA0;val&#xA0;add_subbytes&#xA0;:&#xA0;Buffer.t&#xA0;-&gt;&#xA0;bytes&#xA0;-&gt;&#xA0;int&#xA0;-&gt;&#xA0;int&#xA0;-&gt;&#xA0;unit
-&#xA0;&#xA0;val&#xA0;add_substitute&#xA0;:&#xA0;Buffer.t&#xA0;-&gt;&#xA0;(string&#xA0;-&gt;&#xA0;string)&#xA0;-&gt;&#xA0;string&#xA0;-&gt;&#xA0;unit
-&#xA0;&#xA0;val&#xA0;add_buffer&#xA0;:&#xA0;Buffer.t&#xA0;-&gt;&#xA0;Buffer.t&#xA0;-&gt;&#xA0;unit
-&#xA0;&#xA0;val&#xA0;add_channel&#xA0;:&#xA0;Buffer.t&#xA0;-&gt;&#xA0;Pervasives.in_channel&#xA0;-&gt;&#xA0;int&#xA0;-&gt;&#xA0;unit
-&#xA0;&#xA0;val&#xA0;output_buffer&#xA0;:&#xA0;Pervasives.out_channel&#xA0;-&gt;&#xA0;Buffer.t&#xA0;-&gt;&#xA0;unit
+&nbsp;&nbsp;type&nbsp;t
+&nbsp;&nbsp;val&nbsp;create&nbsp;:&nbsp;int&nbsp;-&gt;&nbsp;Buffer.t
+&nbsp;&nbsp;val&nbsp;contents&nbsp;:&nbsp;Buffer.t&nbsp;-&gt;&nbsp;string
+&nbsp;&nbsp;val&nbsp;to_bytes&nbsp;:&nbsp;Buffer.t&nbsp;-&gt;&nbsp;bytes
+&nbsp;&nbsp;val&nbsp;sub&nbsp;:&nbsp;Buffer.t&nbsp;-&gt;&nbsp;int&nbsp;-&gt;&nbsp;int&nbsp;-&gt;&nbsp;string
+&nbsp;&nbsp;val&nbsp;blit&nbsp;:&nbsp;Buffer.t&nbsp;-&gt;&nbsp;int&nbsp;-&gt;&nbsp;bytes&nbsp;-&gt;&nbsp;int&nbsp;-&gt;&nbsp;int&nbsp;-&gt;&nbsp;unit
+&nbsp;&nbsp;val&nbsp;nth&nbsp;:&nbsp;Buffer.t&nbsp;-&gt;&nbsp;int&nbsp;-&gt;&nbsp;char
+&nbsp;&nbsp;val&nbsp;length&nbsp;:&nbsp;Buffer.t&nbsp;-&gt;&nbsp;int
+&nbsp;&nbsp;val&nbsp;clear&nbsp;:&nbsp;Buffer.t&nbsp;-&gt;&nbsp;unit
+&nbsp;&nbsp;val&nbsp;reset&nbsp;:&nbsp;Buffer.t&nbsp;-&gt;&nbsp;unit
+&nbsp;&nbsp;val&nbsp;output_buffer&nbsp;:&nbsp;Stdlib.out_channel&nbsp;-&gt;&nbsp;Buffer.t&nbsp;-&gt;&nbsp;unit
+&nbsp;&nbsp;val&nbsp;truncate&nbsp;:&nbsp;Buffer.t&nbsp;-&gt;&nbsp;int&nbsp;-&gt;&nbsp;unit
+&nbsp;&nbsp;val&nbsp;add_char&nbsp;:&nbsp;Buffer.t&nbsp;-&gt;&nbsp;char&nbsp;-&gt;&nbsp;unit
+&nbsp;&nbsp;val&nbsp;add_utf_8_uchar&nbsp;:&nbsp;Buffer.t&nbsp;-&gt;&nbsp;Stdlib.Uchar.t&nbsp;-&gt;&nbsp;unit
+&nbsp;&nbsp;val&nbsp;add_utf_16le_uchar&nbsp;:&nbsp;Buffer.t&nbsp;-&gt;&nbsp;Stdlib.Uchar.t&nbsp;-&gt;&nbsp;unit
+&nbsp;&nbsp;val&nbsp;add_utf_16be_uchar&nbsp;:&nbsp;Buffer.t&nbsp;-&gt;&nbsp;Stdlib.Uchar.t&nbsp;-&gt;&nbsp;unit
+&nbsp;&nbsp;val&nbsp;add_string&nbsp;:&nbsp;Buffer.t&nbsp;-&gt;&nbsp;string&nbsp;-&gt;&nbsp;unit
+&nbsp;&nbsp;val&nbsp;add_bytes&nbsp;:&nbsp;Buffer.t&nbsp;-&gt;&nbsp;bytes&nbsp;-&gt;&nbsp;unit
+&nbsp;&nbsp;val&nbsp;add_substring&nbsp;:&nbsp;Buffer.t&nbsp;-&gt;&nbsp;string&nbsp;-&gt;&nbsp;int&nbsp;-&gt;&nbsp;int&nbsp;-&gt;&nbsp;unit
+&nbsp;&nbsp;val&nbsp;add_subbytes&nbsp;:&nbsp;Buffer.t&nbsp;-&gt;&nbsp;bytes&nbsp;-&gt;&nbsp;int&nbsp;-&gt;&nbsp;int&nbsp;-&gt;&nbsp;unit
+&nbsp;&nbsp;val&nbsp;add_substitute&nbsp;:&nbsp;Buffer.t&nbsp;-&gt;&nbsp;(string&nbsp;-&gt;&nbsp;string)&nbsp;-&gt;&nbsp;string&nbsp;-&gt;&nbsp;unit
+&nbsp;&nbsp;val&nbsp;add_buffer&nbsp;:&nbsp;Buffer.t&nbsp;-&gt;&nbsp;Buffer.t&nbsp;-&gt;&nbsp;unit
+&nbsp;&nbsp;val&nbsp;add_channel&nbsp;:&nbsp;Buffer.t&nbsp;-&gt;&nbsp;Stdlib.in_channel&nbsp;-&gt;&nbsp;int&nbsp;-&gt;&nbsp;unit
+&nbsp;&nbsp;val&nbsp;to_seq&nbsp;:&nbsp;Buffer.t&nbsp;-&gt;&nbsp;char&nbsp;Stdlib.Seq.t
+&nbsp;&nbsp;val&nbsp;to_seqi&nbsp;:&nbsp;Buffer.t&nbsp;-&gt;&nbsp;(int&nbsp;*&nbsp;char)&nbsp;Stdlib.Seq.t
+&nbsp;&nbsp;val&nbsp;add_seq&nbsp;:&nbsp;Buffer.t&nbsp;-&gt;&nbsp;char&nbsp;Stdlib.Seq.t&nbsp;-&gt;&nbsp;unit
+&nbsp;&nbsp;val&nbsp;of_seq&nbsp;:&nbsp;char&nbsp;Stdlib.Seq.t&nbsp;-&gt;&nbsp;Buffer.t
+&nbsp;&nbsp;val&nbsp;add_uint8&nbsp;:&nbsp;Buffer.t&nbsp;-&gt;&nbsp;int&nbsp;-&gt;&nbsp;unit
+&nbsp;&nbsp;val&nbsp;add_int8&nbsp;:&nbsp;Buffer.t&nbsp;-&gt;&nbsp;int&nbsp;-&gt;&nbsp;unit
+&nbsp;&nbsp;val&nbsp;add_uint16_ne&nbsp;:&nbsp;Buffer.t&nbsp;-&gt;&nbsp;int&nbsp;-&gt;&nbsp;unit
+&nbsp;&nbsp;val&nbsp;add_uint16_be&nbsp;:&nbsp;Buffer.t&nbsp;-&gt;&nbsp;int&nbsp;-&gt;&nbsp;unit
+&nbsp;&nbsp;val&nbsp;add_uint16_le&nbsp;:&nbsp;Buffer.t&nbsp;-&gt;&nbsp;int&nbsp;-&gt;&nbsp;unit
+&nbsp;&nbsp;val&nbsp;add_int16_ne&nbsp;:&nbsp;Buffer.t&nbsp;-&gt;&nbsp;int&nbsp;-&gt;&nbsp;unit
+&nbsp;&nbsp;val&nbsp;add_int16_be&nbsp;:&nbsp;Buffer.t&nbsp;-&gt;&nbsp;int&nbsp;-&gt;&nbsp;unit
+&nbsp;&nbsp;val&nbsp;add_int16_le&nbsp;:&nbsp;Buffer.t&nbsp;-&gt;&nbsp;int&nbsp;-&gt;&nbsp;unit
+&nbsp;&nbsp;val&nbsp;add_int32_ne&nbsp;:&nbsp;Buffer.t&nbsp;-&gt;&nbsp;int32&nbsp;-&gt;&nbsp;unit
+&nbsp;&nbsp;val&nbsp;add_int32_be&nbsp;:&nbsp;Buffer.t&nbsp;-&gt;&nbsp;int32&nbsp;-&gt;&nbsp;unit
+&nbsp;&nbsp;val&nbsp;add_int32_le&nbsp;:&nbsp;Buffer.t&nbsp;-&gt;&nbsp;int32&nbsp;-&gt;&nbsp;unit
+&nbsp;&nbsp;val&nbsp;add_int64_ne&nbsp;:&nbsp;Buffer.t&nbsp;-&gt;&nbsp;int64&nbsp;-&gt;&nbsp;unit
+&nbsp;&nbsp;val&nbsp;add_int64_be&nbsp;:&nbsp;Buffer.t&nbsp;-&gt;&nbsp;int64&nbsp;-&gt;&nbsp;unit
+&nbsp;&nbsp;val&nbsp;add_int64_le&nbsp;:&nbsp;Buffer.t&nbsp;-&gt;&nbsp;int64&nbsp;-&gt;&nbsp;unit
 end</pre></div></div><span><script src="/js/redirectBlog.js"></script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
                 document.addEventListener('keyup', function(e) {
                   if (e.target !== document.body) {

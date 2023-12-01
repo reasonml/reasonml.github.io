@@ -1,0 +1,260 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Reason · Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems.</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Reason · Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io/"/><meta property="og:description" content="Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/icon_50.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io/blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io/blog/feed.xml" title="Reason Blog RSS Feed"/><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/en"><img class="logo" src="/img/dummy.svg" alt="Reason"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/docs/en/what-and-why" target="_self">Docs</a></li><li class=""><a href="/en/try" target="_self">Try</a></li><li class=""><a href="/api/index" target="_self">API</a></li><li class=""><a href="/docs/en/community" target="_self">Community</a></li><li class=""><a href="/blog/" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg" alt="Languages icon"/>English</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/ja/Stdlib.Printf">日本語</a></li><li><a href="/de/Stdlib.Printf">Deutsch</a></li><li><a href="/es-ES/Stdlib.Printf">Español</a></li><li><a href="/fr/Stdlib.Printf">Français</a></li><li><a href="/ko/Stdlib.Printf">한국어</a></li><li><a href="/pt-BR/Stdlib.Printf">Português (Brasil)</a></li><li><a href="/ru/Stdlib.Printf">Русский</a></li><li><a href="/uk/Stdlib.Printf">Українська</a></li><li><a href="/zh-CN/Stdlib.Printf">中文</a></li><li><a href="/zh-TW/Stdlib.Printf">繁體中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank" rel="noreferrer noopener">Help Translate</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/facebook/reason" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div><link rel="stylesheet" href="/css/main.css"><div class="ocamldoc">
+<h1>Module <a href="type_Stdlib.Printf.html">Stdlib.Printf</a></h1>
+
+<pre id="MODULEPrintf"><span class="keyword">module</span> Printf: Printf</pre><hr width="100%">
+
+<pre id="VALfprintf">val fprintf : out_channel -&gt; ('a, out_channel, unit) format -&gt; 'a</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">fprintf&nbsp;outchan&nbsp;format&nbsp;arg1&nbsp;...&nbsp;argN</code> formats the arguments
+   <code class="code">arg1</code> to <code class="code">argN</code> according to the format string <code class="code">format</code>, and
+   outputs the resulting string on the channel <code class="code">outchan</code>.</p>
+
+<p>The format string is a character string which contains two types of
+   objects: plain characters, which are simply copied to the output
+   channel, and conversion specifications, each of which causes
+   conversion and printing of arguments.</p>
+
+<p>Conversion specifications have the following form:</p>
+
+<p><code class="code">%&nbsp;[flags]&nbsp;[width]&nbsp;[.precision]&nbsp;type</code></p>
+
+<p>In short, a conversion specification consists in the <code class="code">%</code> character,
+   followed by optional modifiers and a type which is made of one or
+   two characters.</p>
+
+<p>The types and their meanings are:</p>
+
+<ul>
+<li><code class="code">d</code>, <code class="code">i</code>: convert an integer argument to signed decimal.
+     The flag <code class="code">#</code> adds underscores to large values for readability.</li>
+<li><code class="code">u</code>, <code class="code">n</code>, <code class="code">l</code>, <code class="code">L</code>, or <code class="code">N</code>: convert an integer argument to
+     unsigned decimal.  Warning: <code class="code">n</code>, <code class="code">l</code>, <code class="code">L</code>, and <code class="code">N</code> are
+     used for <code class="code">scanf</code>, and should not be used for <code class="code">printf</code>.
+     The flag <code class="code">#</code> adds underscores to large values for readability.</li>
+<li><code class="code">x</code>: convert an integer argument to unsigned hexadecimal,
+     using lowercase letters.
+     The flag <code class="code">#</code> adds a <code class="code">0x</code> prefix to non zero values.</li>
+<li><code class="code">X</code>: convert an integer argument to unsigned hexadecimal,
+     using uppercase letters.
+     The flag <code class="code">#</code> adds a <code class="code">0X</code> prefix to non zero values.</li>
+<li><code class="code">o</code>: convert an integer argument to unsigned octal.
+     The flag <code class="code">#</code> adds a <code class="code">0</code> prefix to non zero values.</li>
+<li><code class="code">s</code>: insert a string argument.</li>
+<li><code class="code">S</code>: convert a string argument to OCaml syntax (double quotes, escapes).</li>
+<li><code class="code">c</code>: insert a character argument.</li>
+<li><code class="code">C</code>: convert a character argument to OCaml syntax
+     (single quotes, escapes).</li>
+<li><code class="code">f</code>: convert a floating-point argument to decimal notation,
+     in the style <code class="code">dddd.ddd</code>.</li>
+<li><code class="code">F</code>: convert a floating-point argument to OCaml syntax (<code class="code">dddd.</code>
+     or <code class="code">dddd.ddd</code> or <code class="code">d.ddd&nbsp;e+-dd</code>).
+     Converts to hexadecimal with the <code class="code">#</code> flag (see <code class="code">h</code>).</li>
+<li><code class="code">e</code> or <code class="code">E</code>: convert a floating-point argument to decimal notation,
+     in the style <code class="code">d.ddd&nbsp;e+-dd</code> (mantissa and exponent).</li>
+<li><code class="code">g</code> or <code class="code">G</code>: convert a floating-point argument to decimal notation,
+     in style <code class="code">f</code> or <code class="code">e</code>, <code class="code">E</code> (whichever is more compact). Moreover,
+     any trailing zeros are removed from the fractional part of the result
+     and the decimal-point character is removed if there is no fractional
+     part remaining.</li>
+<li><code class="code">h</code> or <code class="code">H</code>: convert a floating-point argument to hexadecimal notation,
+     in the style <code class="code">0xh.hhhh&nbsp;p+-dd</code> (hexadecimal mantissa, exponent in
+     decimal and denotes a power of 2).</li>
+<li><code class="code">B</code>: convert a boolean argument to the string <code class="code">true</code> or <code class="code">false</code></li>
+<li><code class="code">b</code>: convert a boolean argument (deprecated; do not use in new
+     programs).</li>
+<li><code class="code">ld</code>, <code class="code">li</code>, <code class="code">lu</code>, <code class="code">lx</code>, <code class="code">lX</code>, <code class="code">lo</code>: convert an <code class="code">int32</code> argument to
+     the format specified by the second letter (decimal, hexadecimal, etc).</li>
+<li><code class="code">nd</code>, <code class="code">ni</code>, <code class="code">nu</code>, <code class="code">nx</code>, <code class="code">nX</code>, <code class="code">no</code>: convert a <code class="code">nativeint</code> argument to
+     the format specified by the second letter.</li>
+<li><code class="code">Ld</code>, <code class="code">Li</code>, <code class="code">Lu</code>, <code class="code">Lx</code>, <code class="code">LX</code>, <code class="code">Lo</code>: convert an <code class="code">int64</code> argument to
+     the format specified by the second letter.</li>
+<li><code class="code">a</code>: user-defined printer. Take two arguments and apply the
+     first one to <code class="code">outchan</code> (the current output channel) and to the
+     second argument. The first argument must therefore have type
+     <code class="code">out_channel&nbsp;-&gt;&nbsp;'b&nbsp;-&gt;&nbsp;unit</code> and the second <code class="code">'b</code>.
+     The output produced by the function is inserted in the output of
+     <code class="code">fprintf</code> at the current point.</li>
+<li><code class="code">t</code>: same as <code class="code">%a</code>, but take only one argument (with type
+     <code class="code">out_channel&nbsp;-&gt;&nbsp;unit</code>) and apply it to <code class="code">outchan</code>.</li>
+<li><code class="code">{&nbsp;fmt&nbsp;%}</code>: convert a format string argument to its type digest.
+     The argument must have the same type as the internal format string
+     <code class="code">fmt</code>.</li>
+<li><code class="code">(&nbsp;fmt&nbsp;%)</code>: format string substitution. Take a format string
+     argument and substitute it to the internal format string <code class="code">fmt</code>
+     to print following arguments. The argument must have the same
+     type as the internal format string <code class="code">fmt</code>.</li>
+<li><code class="code">!</code>: take no argument and flush the output.</li>
+<li><code class="code">%</code>: take no argument and output one <code class="code">%</code> character.</li>
+<li><code class="code">@</code>: take no argument and output one <code class="code">@</code> character.</li>
+<li><code class="code">,</code>: take no argument and output nothing: a no-op delimiter for
+     conversion specifications.</li>
+</ul>
+<p>The optional <code class="code">flags</code> are:</p>
+<ul>
+<li><code class="code">-</code>: left-justify the output (default is right justification).</li>
+<li><code class="code">0</code>: for numerical conversions, pad with zeroes instead of spaces.</li>
+<li><code class="code">+</code>: for signed numerical conversions, prefix number with a <code class="code">+</code>
+     sign if positive.</li>
+<li>space: for signed numerical conversions, prefix number with a
+     space if positive.</li>
+<li><code class="code">#</code>: request an alternate formatting style for the integer types
+     and the floating-point type <code class="code">F</code>.</li>
+</ul>
+<p>The optional <code class="code">width</code> is an integer indicating the minimal
+   width of the result. For instance, <code class="code">%6d</code> prints an integer,
+   prefixing it with spaces to fill at least 6 characters.</p>
+
+<p>The optional <code class="code">precision</code> is a dot <code class="code">.</code> followed by an integer
+   indicating how many digits follow the decimal point in the <code class="code">%f</code>,
+   <code class="code">%e</code>, <code class="code">%E</code>, <code class="code">%h</code>, and <code class="code">%H</code> conversions or the maximum number of
+   significant digits to appear for the <code class="code">%F</code>, <code class="code">%g</code> and <code class="code">%G</code> conversions.
+   For instance, <code class="code">%.4f</code> prints a <code class="code">float</code> with 4 fractional digits.</p>
+
+<p>The integer in a <code class="code">width</code> or <code class="code">precision</code> can also be specified as
+   <code class="code">*</code>, in which case an extra integer argument is taken to specify
+   the corresponding <code class="code">width</code> or <code class="code">precision</code>. This integer argument
+   precedes immediately the argument to print.
+   For instance, <code class="code">%.*f</code> prints a <code class="code">float</code> with as many fractional
+   digits as the value of the argument given before the float.</p>
+</div>
+</div>
+
+<pre id="VALprintf">val printf : ('a, out_channel, unit) format -&gt; 'a</pre><div class="info ">
+<div class="info-desc">
+<p>Same as <a href="Printf.html#VALfprintf"><code class="code">Printf.fprintf</code></a>, but output on <code class="code">stdout</code>.</p>
+</div>
+</div>
+
+<pre id="VALeprintf">val eprintf : ('a, out_channel, unit) format -&gt; 'a</pre><div class="info ">
+<div class="info-desc">
+<p>Same as <a href="Printf.html#VALfprintf"><code class="code">Printf.fprintf</code></a>, but output on <code class="code">stderr</code>.</p>
+</div>
+</div>
+
+<pre id="VALsprintf">val sprintf : ('a, unit, string) format -&gt; 'a</pre><div class="info ">
+<div class="info-desc">
+<p>Same as <a href="Printf.html#VALfprintf"><code class="code">Printf.fprintf</code></a>, but instead of printing on an output channel,
+   return a string containing the result of formatting the arguments.</p>
+</div>
+</div>
+
+<pre id="VALbprintf">val bprintf : Buffer.t -&gt; ('a, Buffer.t, unit) format -&gt; 'a</pre><div class="info ">
+<div class="info-desc">
+<p>Same as <a href="Printf.html#VALfprintf"><code class="code">Printf.fprintf</code></a>, but instead of printing on an output channel,
+   append the formatted arguments to the given extensible buffer
+   (see module <a href="Buffer.html"><code class="code">Buffer</code></a>).</p>
+</div>
+</div>
+
+<pre id="VALifprintf">val ifprintf : 'b -&gt; ('a, 'b, 'c, unit) format4 -&gt; 'a</pre><div class="info ">
+<div class="info-desc">
+<p>Same as <a href="Printf.html#VALfprintf"><code class="code">Printf.fprintf</code></a>, but does not print anything.
+    Useful to ignore some material when conditionally printing.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 3.10.0</li>
+</ul>
+</div>
+
+<pre id="VALibprintf">val ibprintf : Buffer.t -&gt; ('a, Buffer.t, unit) format -&gt; 'a</pre><div class="info ">
+<div class="info-desc">
+<p>Same as <a href="Printf.html#VALbprintf"><code class="code">Printf.bprintf</code></a>, but does not print anything.
+    Useful to ignore some material when conditionally printing.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.11.0</li>
+</ul>
+</div>
+<p>Formatted output functions with continuations.</p>
+
+<pre id="VALkfprintf">val kfprintf : (out_channel -&gt; 'd) -&gt;       out_channel -&gt; ('a, out_channel, unit, 'd) format4 -&gt; 'a</pre><div class="info ">
+<div class="info-desc">
+<p>Same as <code class="code">fprintf</code>, but instead of returning immediately,
+   passes the out channel to its first argument at the end of printing.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 3.09.0</li>
+</ul>
+</div>
+
+<pre id="VALikfprintf">val ikfprintf : ('b -&gt; 'd) -&gt; 'b -&gt; ('a, 'b, 'c, 'd) format4 -&gt; 'a</pre><div class="info ">
+<div class="info-desc">
+<p>Same as <code class="code">kfprintf</code> above, but does not print anything.
+   Useful to ignore some material when conditionally printing.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.01.0</li>
+</ul>
+</div>
+
+<pre id="VALksprintf">val ksprintf : (string -&gt; 'd) -&gt; ('a, unit, string, 'd) format4 -&gt; 'a</pre><div class="info ">
+<div class="info-desc">
+<p>Same as <code class="code">sprintf</code> above, but instead of returning the string,
+   passes it to the first argument.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 3.09.0</li>
+</ul>
+</div>
+
+<pre id="VALkbprintf">val kbprintf : (Buffer.t -&gt; 'd) -&gt;       Buffer.t -&gt; ('a, Buffer.t, unit, 'd) format4 -&gt; 'a</pre><div class="info ">
+<div class="info-desc">
+<p>Same as <code class="code">bprintf</code>, but instead of returning immediately,
+   passes the buffer to its first argument at the end of printing.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 3.10.0</li>
+</ul>
+</div>
+
+<pre id="VALikbprintf">val ikbprintf : (Buffer.t -&gt; 'd) -&gt;       Buffer.t -&gt; ('a, Buffer.t, unit, 'd) format4 -&gt; 'a</pre><div class="info ">
+<div class="info-desc">
+<p>Same as <code class="code">kbprintf</code> above, but does not print anything.
+   Useful to ignore some material when conditionally printing.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.11.0</li>
+</ul>
+</div>
+<p>Deprecated</p>
+
+<pre id="VALkprintf">val kprintf : (string -&gt; 'b) -&gt; ('a, unit, string, 'b) format4 -&gt; 'a</pre><div class="info ">
+<div class="info-deprecated">
+<span class="warning">Deprecated. </span>Use Printf.ksprintf instead.</div>
+<div class="info-desc">
+<p>A deprecated synonym for <code class="code">ksprintf</code>.</p>
+</div>
+</div>
+
+</div></div><span><script src="/js/redirectBlog.js"></script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+                document.addEventListener('keyup', function(e) {
+                  if (e.target !== document.body) {
+                    return;
+                  }
+                  // keyCode for '/' (slash)
+                  if (e.keyCode === 191) {
+                    const search = document.getElementById('search_input_react');
+                    search && search.focus();
+                  }
+                });
+              </script><script>
+              var search = docsearch({
+                
+                apiKey: '966d1e412f67114a07dc0afe44b19b53',
+                indexName: 'reason',
+                inputSelector: '#search_input_react',
+                algoliaOptions: {"facetFilters":["lang:en"]}
+              });
+            </script></body></html>

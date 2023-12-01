@@ -1,0 +1,148 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Reason · Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems.</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Reason · Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io/"/><meta property="og:description" content="Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/icon_50.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io/blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io/blog/feed.xml" title="Reason Blog RSS Feed"/><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/en"><img class="logo" src="/img/dummy.svg" alt="Reason"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/docs/en/what-and-why" target="_self">Docs</a></li><li class=""><a href="/en/try" target="_self">Try</a></li><li class=""><a href="/api/index" target="_self">API</a></li><li class=""><a href="/docs/en/community" target="_self">Community</a></li><li class=""><a href="/blog/" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg" alt="Languages icon"/>English</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/ja/Stdlib.Digest">日本語</a></li><li><a href="/de/Stdlib.Digest">Deutsch</a></li><li><a href="/es-ES/Stdlib.Digest">Español</a></li><li><a href="/fr/Stdlib.Digest">Français</a></li><li><a href="/ko/Stdlib.Digest">한국어</a></li><li><a href="/pt-BR/Stdlib.Digest">Português (Brasil)</a></li><li><a href="/ru/Stdlib.Digest">Русский</a></li><li><a href="/uk/Stdlib.Digest">Українська</a></li><li><a href="/zh-CN/Stdlib.Digest">中文</a></li><li><a href="/zh-TW/Stdlib.Digest">繁體中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank" rel="noreferrer noopener">Help Translate</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/facebook/reason" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div><link rel="stylesheet" href="/css/main.css"><div class="ocamldoc">
+<h1>Module <a href="type_Stdlib.Digest.html">Stdlib.Digest</a></h1>
+
+<pre id="MODULEDigest"><span class="keyword">module</span> Digest: Digest</pre><hr width="100%">
+
+<pre id="TYPEt"><span class="keyword">type</span> t = string </pre>
+<div class="info ">
+<div class="info-desc">
+<p>The type of digests: 16-character strings.</p>
+</div>
+</div>
+
+
+<pre id="VALcompare">val compare : t -&gt; t -&gt; int</pre><div class="info ">
+<div class="info-desc">
+<p>The comparison function for 16-character digest, with the same
+    specification as <a href="Stdlib.html#VALcompare"><code class="code">compare</code></a> and the implementation
+    shared with <a href="String.html#VALcompare"><code class="code">String.compare</code></a>. Along with the type <code class="code">t</code>, this
+    function <code class="code">compare</code> allows the module <code class="code">Digest</code> to be passed as
+    argument to the functors <a href="Set.Make.html"><code class="code">Set.Make</code></a> and <a href="Map.Make.html"><code class="code">Map.Make</code></a>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.00.0</li>
+</ul>
+</div>
+
+<pre id="VALequal">val equal : t -&gt; t -&gt; bool</pre><div class="info ">
+<div class="info-desc">
+<p>The equal function for 16-character digest.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.03.0</li>
+</ul>
+</div>
+
+<pre id="VALstring">val string : string -&gt; t</pre><div class="info ">
+<div class="info-desc">
+<p>Return the digest of the given string.</p>
+</div>
+</div>
+
+<pre id="VALbytes">val bytes : bytes -&gt; t</pre><div class="info ">
+<div class="info-desc">
+<p>Return the digest of the given byte sequence.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.02.0</li>
+</ul>
+</div>
+
+<pre id="VALsubstring">val substring : string -&gt; int -&gt; int -&gt; t</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">Digest.substring&nbsp;s&nbsp;ofs&nbsp;len</code> returns the digest of the substring
+   of <code class="code">s</code> starting at index <code class="code">ofs</code> and containing <code class="code">len</code> characters.</p>
+</div>
+</div>
+
+<pre id="VALsubbytes">val subbytes : bytes -&gt; int -&gt; int -&gt; t</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">Digest.subbytes&nbsp;s&nbsp;ofs&nbsp;len</code> returns the digest of the subsequence
+    of <code class="code">s</code> starting at index <code class="code">ofs</code> and containing <code class="code">len</code> bytes.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.02.0</li>
+</ul>
+</div>
+
+<pre id="VALchannel">val channel : in_channel -&gt; int -&gt; t</pre><div class="info ">
+<div class="info-desc">
+<p>If <code class="code">len</code> is nonnegative, <code class="code">Digest.channel&nbsp;ic&nbsp;len</code> reads <code class="code">len</code>
+   characters from channel <code class="code">ic</code> and returns their digest, or raises
+   <code class="code">End_of_file</code> if end-of-file is reached before <code class="code">len</code> characters
+   are read.  If <code class="code">len</code> is negative, <code class="code">Digest.channel&nbsp;ic&nbsp;len</code> reads
+   all characters from <code class="code">ic</code> until end-of-file is reached and return
+   their digest.</p>
+</div>
+</div>
+
+<pre id="VALfile">val file : string -&gt; t</pre><div class="info ">
+<div class="info-desc">
+<p>Return the digest of the file whose name is given.</p>
+</div>
+</div>
+
+<pre id="VALoutput">val output : out_channel -&gt; t -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p>Write a digest on the given output channel.</p>
+</div>
+</div>
+
+<pre id="VALinput">val input : in_channel -&gt; t</pre><div class="info ">
+<div class="info-desc">
+<p>Read a digest from the given input channel.</p>
+</div>
+</div>
+
+<pre id="VALto_hex">val to_hex : t -&gt; string</pre><div class="info ">
+<div class="info-desc">
+<p>Return the printable hexadecimal representation of the given digest.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Raises</b> <code>Invalid_argument</code> if the argument is not exactly 16 bytes.</li>
+</ul>
+</div>
+
+<pre id="VALfrom_hex">val from_hex : string -&gt; t</pre><div class="info ">
+<div class="info-desc">
+<p>Convert a hexadecimal representation back into the corresponding digest.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.00.0</li>
+<li><b>Raises</b> <code>Invalid_argument</code> if the argument is not exactly 32 hexadecimal
+   characters.</li>
+</ul>
+</div>
+
+</div></div><span><script src="/js/redirectBlog.js"></script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+                document.addEventListener('keyup', function(e) {
+                  if (e.target !== document.body) {
+                    return;
+                  }
+                  // keyCode for '/' (slash)
+                  if (e.keyCode === 191) {
+                    const search = document.getElementById('search_input_react');
+                    search && search.focus();
+                  }
+                });
+              </script><script>
+              var search = docsearch({
+                
+                apiKey: '966d1e412f67114a07dc0afe44b19b53',
+                indexName: 'reason',
+                inputSelector: '#search_input_react',
+                algoliaOptions: {"facetFilters":["lang:en"]}
+              });
+            </script></body></html>

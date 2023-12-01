@@ -1,0 +1,258 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Reason · Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems.</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Reason · Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io/"/><meta property="og:description" content="Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/icon_50.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io/blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io/blog/feed.xml" title="Reason Blog RSS Feed"/><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/en"><img class="logo" src="/img/dummy.svg" alt="Reason"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/docs/en/what-and-why" target="_self">Docs</a></li><li class=""><a href="/en/try" target="_self">Try</a></li><li class=""><a href="/api/index" target="_self">API</a></li><li class=""><a href="/docs/en/community" target="_self">Community</a></li><li class=""><a href="/blog/" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg" alt="Languages icon"/>English</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/ja/type_Float">日本語</a></li><li><a href="/de/type_Float">Deutsch</a></li><li><a href="/es-ES/type_Float">Español</a></li><li><a href="/fr/type_Float">Français</a></li><li><a href="/ko/type_Float">한국어</a></li><li><a href="/pt-BR/type_Float">Português (Brasil)</a></li><li><a href="/ru/type_Float">Русский</a></li><li><a href="/uk/type_Float">Українська</a></li><li><a href="/zh-CN/type_Float">中文</a></li><li><a href="/zh-TW/type_Float">繁體中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank" rel="noreferrer noopener">Help Translate</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/facebook/reason" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div><link rel="stylesheet" href="/css/main.css"><div class="ocamldoc"><pre>sig
+
+&nbsp;&nbsp;val&nbsp;zero&nbsp;:&nbsp;float
+&nbsp;&nbsp;val&nbsp;one&nbsp;:&nbsp;float
+&nbsp;&nbsp;val&nbsp;minus_one&nbsp;:&nbsp;float
+&nbsp;&nbsp;external&nbsp;neg&nbsp;:&nbsp;float&nbsp;-&gt;&nbsp;float&nbsp;=&nbsp;"%negfloat"
+&nbsp;&nbsp;external&nbsp;add&nbsp;:&nbsp;float&nbsp;-&gt;&nbsp;float&nbsp;-&gt;&nbsp;float&nbsp;=&nbsp;"%addfloat"
+&nbsp;&nbsp;external&nbsp;sub&nbsp;:&nbsp;float&nbsp;-&gt;&nbsp;float&nbsp;-&gt;&nbsp;float&nbsp;=&nbsp;"%subfloat"
+&nbsp;&nbsp;external&nbsp;mul&nbsp;:&nbsp;float&nbsp;-&gt;&nbsp;float&nbsp;-&gt;&nbsp;float&nbsp;=&nbsp;"%mulfloat"
+&nbsp;&nbsp;external&nbsp;div&nbsp;:&nbsp;float&nbsp;-&gt;&nbsp;float&nbsp;-&gt;&nbsp;float&nbsp;=&nbsp;"%divfloat"
+&nbsp;&nbsp;external&nbsp;fma&nbsp;:&nbsp;float&nbsp;-&gt;&nbsp;float&nbsp;-&gt;&nbsp;float&nbsp;-&gt;&nbsp;float&nbsp;=&nbsp;"caml_fma_float"
+&nbsp;&nbsp;&nbsp;&nbsp;"caml_fma"&nbsp;[@@unboxed]&nbsp;[@@noalloc]
+&nbsp;&nbsp;external&nbsp;rem&nbsp;:&nbsp;float&nbsp;-&gt;&nbsp;float&nbsp;-&gt;&nbsp;float&nbsp;=&nbsp;"caml_fmod_float"&nbsp;"fmod"
+&nbsp;&nbsp;&nbsp;&nbsp;[@@unboxed]&nbsp;[@@noalloc]
+&nbsp;&nbsp;val&nbsp;succ&nbsp;:&nbsp;float&nbsp;-&gt;&nbsp;float
+&nbsp;&nbsp;val&nbsp;pred&nbsp;:&nbsp;float&nbsp;-&gt;&nbsp;float
+&nbsp;&nbsp;external&nbsp;abs&nbsp;:&nbsp;float&nbsp;-&gt;&nbsp;float&nbsp;=&nbsp;"%absfloat"
+&nbsp;&nbsp;val&nbsp;infinity&nbsp;:&nbsp;float
+&nbsp;&nbsp;val&nbsp;neg_infinity&nbsp;:&nbsp;float
+&nbsp;&nbsp;val&nbsp;nan&nbsp;:&nbsp;float
+&nbsp;&nbsp;val&nbsp;pi&nbsp;:&nbsp;float
+&nbsp;&nbsp;val&nbsp;max_float&nbsp;:&nbsp;float
+&nbsp;&nbsp;val&nbsp;min_float&nbsp;:&nbsp;float
+&nbsp;&nbsp;val&nbsp;epsilon&nbsp;:&nbsp;float
+&nbsp;&nbsp;val&nbsp;is_finite&nbsp;:&nbsp;float&nbsp;-&gt;&nbsp;bool
+&nbsp;&nbsp;val&nbsp;is_infinite&nbsp;:&nbsp;float&nbsp;-&gt;&nbsp;bool
+&nbsp;&nbsp;val&nbsp;is_nan&nbsp;:&nbsp;float&nbsp;-&gt;&nbsp;bool
+&nbsp;&nbsp;val&nbsp;is_integer&nbsp;:&nbsp;float&nbsp;-&gt;&nbsp;bool
+&nbsp;&nbsp;external&nbsp;of_int&nbsp;:&nbsp;int&nbsp;-&gt;&nbsp;float&nbsp;=&nbsp;"%floatofint"
+&nbsp;&nbsp;external&nbsp;to_int&nbsp;:&nbsp;float&nbsp;-&gt;&nbsp;int&nbsp;=&nbsp;"%intoffloat"
+&nbsp;&nbsp;external&nbsp;of_string&nbsp;:&nbsp;string&nbsp;-&gt;&nbsp;float&nbsp;=&nbsp;"caml_float_of_string"
+&nbsp;&nbsp;val&nbsp;of_string_opt&nbsp;:&nbsp;string&nbsp;-&gt;&nbsp;float&nbsp;option
+&nbsp;&nbsp;val&nbsp;to_string&nbsp;:&nbsp;float&nbsp;-&gt;&nbsp;string
+&nbsp;&nbsp;type&nbsp;fpclass&nbsp;=
+&nbsp;&nbsp;&nbsp;&nbsp;Stdlib.fpclass&nbsp;=
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FP_normal
+&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;FP_subnormal
+&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;FP_zero
+&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;FP_infinite
+&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;FP_nan
+&nbsp;&nbsp;external&nbsp;classify_float&nbsp;:&nbsp;(float&nbsp;[@unboxed])&nbsp;-&gt;&nbsp;Float.fpclass
+&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;"caml_classify_float"&nbsp;"caml_classify_float_unboxed"&nbsp;[@@noalloc]
+&nbsp;&nbsp;external&nbsp;pow&nbsp;:&nbsp;float&nbsp;-&gt;&nbsp;float&nbsp;-&gt;&nbsp;float&nbsp;=&nbsp;"caml_power_float"&nbsp;"pow"
+&nbsp;&nbsp;&nbsp;&nbsp;[@@unboxed]&nbsp;[@@noalloc]
+&nbsp;&nbsp;external&nbsp;sqrt&nbsp;:&nbsp;float&nbsp;-&gt;&nbsp;float&nbsp;=&nbsp;"caml_sqrt_float"&nbsp;"sqrt"&nbsp;[@@unboxed]
+&nbsp;&nbsp;&nbsp;&nbsp;[@@noalloc]
+&nbsp;&nbsp;external&nbsp;cbrt&nbsp;:&nbsp;float&nbsp;-&gt;&nbsp;float&nbsp;=&nbsp;"caml_cbrt_float"&nbsp;"caml_cbrt"&nbsp;[@@unboxed]
+&nbsp;&nbsp;&nbsp;&nbsp;[@@noalloc]
+&nbsp;&nbsp;external&nbsp;exp&nbsp;:&nbsp;float&nbsp;-&gt;&nbsp;float&nbsp;=&nbsp;"caml_exp_float"&nbsp;"exp"&nbsp;[@@unboxed]
+&nbsp;&nbsp;&nbsp;&nbsp;[@@noalloc]
+&nbsp;&nbsp;external&nbsp;exp2&nbsp;:&nbsp;float&nbsp;-&gt;&nbsp;float&nbsp;=&nbsp;"caml_exp2_float"&nbsp;"caml_exp2"&nbsp;[@@unboxed]
+&nbsp;&nbsp;&nbsp;&nbsp;[@@noalloc]
+&nbsp;&nbsp;external&nbsp;log&nbsp;:&nbsp;float&nbsp;-&gt;&nbsp;float&nbsp;=&nbsp;"caml_log_float"&nbsp;"log"&nbsp;[@@unboxed]
+&nbsp;&nbsp;&nbsp;&nbsp;[@@noalloc]
+&nbsp;&nbsp;external&nbsp;log10&nbsp;:&nbsp;float&nbsp;-&gt;&nbsp;float&nbsp;=&nbsp;"caml_log10_float"&nbsp;"log10"&nbsp;[@@unboxed]
+&nbsp;&nbsp;&nbsp;&nbsp;[@@noalloc]
+&nbsp;&nbsp;external&nbsp;log2&nbsp;:&nbsp;float&nbsp;-&gt;&nbsp;float&nbsp;=&nbsp;"caml_log2_float"&nbsp;"caml_log2"&nbsp;[@@unboxed]
+&nbsp;&nbsp;&nbsp;&nbsp;[@@noalloc]
+&nbsp;&nbsp;external&nbsp;expm1&nbsp;:&nbsp;float&nbsp;-&gt;&nbsp;float&nbsp;=&nbsp;"caml_expm1_float"&nbsp;"caml_expm1"
+&nbsp;&nbsp;&nbsp;&nbsp;[@@unboxed]&nbsp;[@@noalloc]
+&nbsp;&nbsp;external&nbsp;log1p&nbsp;:&nbsp;float&nbsp;-&gt;&nbsp;float&nbsp;=&nbsp;"caml_log1p_float"&nbsp;"caml_log1p"
+&nbsp;&nbsp;&nbsp;&nbsp;[@@unboxed]&nbsp;[@@noalloc]
+&nbsp;&nbsp;external&nbsp;cos&nbsp;:&nbsp;float&nbsp;-&gt;&nbsp;float&nbsp;=&nbsp;"caml_cos_float"&nbsp;"cos"&nbsp;[@@unboxed]
+&nbsp;&nbsp;&nbsp;&nbsp;[@@noalloc]
+&nbsp;&nbsp;external&nbsp;sin&nbsp;:&nbsp;float&nbsp;-&gt;&nbsp;float&nbsp;=&nbsp;"caml_sin_float"&nbsp;"sin"&nbsp;[@@unboxed]
+&nbsp;&nbsp;&nbsp;&nbsp;[@@noalloc]
+&nbsp;&nbsp;external&nbsp;tan&nbsp;:&nbsp;float&nbsp;-&gt;&nbsp;float&nbsp;=&nbsp;"caml_tan_float"&nbsp;"tan"&nbsp;[@@unboxed]
+&nbsp;&nbsp;&nbsp;&nbsp;[@@noalloc]
+&nbsp;&nbsp;external&nbsp;acos&nbsp;:&nbsp;float&nbsp;-&gt;&nbsp;float&nbsp;=&nbsp;"caml_acos_float"&nbsp;"acos"&nbsp;[@@unboxed]
+&nbsp;&nbsp;&nbsp;&nbsp;[@@noalloc]
+&nbsp;&nbsp;external&nbsp;asin&nbsp;:&nbsp;float&nbsp;-&gt;&nbsp;float&nbsp;=&nbsp;"caml_asin_float"&nbsp;"asin"&nbsp;[@@unboxed]
+&nbsp;&nbsp;&nbsp;&nbsp;[@@noalloc]
+&nbsp;&nbsp;external&nbsp;atan&nbsp;:&nbsp;float&nbsp;-&gt;&nbsp;float&nbsp;=&nbsp;"caml_atan_float"&nbsp;"atan"&nbsp;[@@unboxed]
+&nbsp;&nbsp;&nbsp;&nbsp;[@@noalloc]
+&nbsp;&nbsp;external&nbsp;atan2&nbsp;:&nbsp;float&nbsp;-&gt;&nbsp;float&nbsp;-&gt;&nbsp;float&nbsp;=&nbsp;"caml_atan2_float"&nbsp;"atan2"
+&nbsp;&nbsp;&nbsp;&nbsp;[@@unboxed]&nbsp;[@@noalloc]
+&nbsp;&nbsp;external&nbsp;hypot&nbsp;:&nbsp;float&nbsp;-&gt;&nbsp;float&nbsp;-&gt;&nbsp;float&nbsp;=&nbsp;"caml_hypot_float"&nbsp;"caml_hypot"
+&nbsp;&nbsp;&nbsp;&nbsp;[@@unboxed]&nbsp;[@@noalloc]
+&nbsp;&nbsp;external&nbsp;cosh&nbsp;:&nbsp;float&nbsp;-&gt;&nbsp;float&nbsp;=&nbsp;"caml_cosh_float"&nbsp;"cosh"&nbsp;[@@unboxed]
+&nbsp;&nbsp;&nbsp;&nbsp;[@@noalloc]
+&nbsp;&nbsp;external&nbsp;sinh&nbsp;:&nbsp;float&nbsp;-&gt;&nbsp;float&nbsp;=&nbsp;"caml_sinh_float"&nbsp;"sinh"&nbsp;[@@unboxed]
+&nbsp;&nbsp;&nbsp;&nbsp;[@@noalloc]
+&nbsp;&nbsp;external&nbsp;tanh&nbsp;:&nbsp;float&nbsp;-&gt;&nbsp;float&nbsp;=&nbsp;"caml_tanh_float"&nbsp;"tanh"&nbsp;[@@unboxed]
+&nbsp;&nbsp;&nbsp;&nbsp;[@@noalloc]
+&nbsp;&nbsp;external&nbsp;acosh&nbsp;:&nbsp;float&nbsp;-&gt;&nbsp;float&nbsp;=&nbsp;"caml_acosh_float"&nbsp;"caml_acosh"
+&nbsp;&nbsp;&nbsp;&nbsp;[@@unboxed]&nbsp;[@@noalloc]
+&nbsp;&nbsp;external&nbsp;asinh&nbsp;:&nbsp;float&nbsp;-&gt;&nbsp;float&nbsp;=&nbsp;"caml_asinh_float"&nbsp;"caml_asinh"
+&nbsp;&nbsp;&nbsp;&nbsp;[@@unboxed]&nbsp;[@@noalloc]
+&nbsp;&nbsp;external&nbsp;atanh&nbsp;:&nbsp;float&nbsp;-&gt;&nbsp;float&nbsp;=&nbsp;"caml_atanh_float"&nbsp;"caml_atanh"
+&nbsp;&nbsp;&nbsp;&nbsp;[@@unboxed]&nbsp;[@@noalloc]
+&nbsp;&nbsp;external&nbsp;erf&nbsp;:&nbsp;float&nbsp;-&gt;&nbsp;float&nbsp;=&nbsp;"caml_erf_float"&nbsp;"caml_erf"&nbsp;[@@unboxed]
+&nbsp;&nbsp;&nbsp;&nbsp;[@@noalloc]
+&nbsp;&nbsp;external&nbsp;erfc&nbsp;:&nbsp;float&nbsp;-&gt;&nbsp;float&nbsp;=&nbsp;"caml_erfc_float"&nbsp;"caml_erfc"&nbsp;[@@unboxed]
+&nbsp;&nbsp;&nbsp;&nbsp;[@@noalloc]
+&nbsp;&nbsp;external&nbsp;trunc&nbsp;:&nbsp;float&nbsp;-&gt;&nbsp;float&nbsp;=&nbsp;"caml_trunc_float"&nbsp;"caml_trunc"
+&nbsp;&nbsp;&nbsp;&nbsp;[@@unboxed]&nbsp;[@@noalloc]
+&nbsp;&nbsp;external&nbsp;round&nbsp;:&nbsp;float&nbsp;-&gt;&nbsp;float&nbsp;=&nbsp;"caml_round_float"&nbsp;"caml_round"
+&nbsp;&nbsp;&nbsp;&nbsp;[@@unboxed]&nbsp;[@@noalloc]
+&nbsp;&nbsp;external&nbsp;ceil&nbsp;:&nbsp;float&nbsp;-&gt;&nbsp;float&nbsp;=&nbsp;"caml_ceil_float"&nbsp;"ceil"&nbsp;[@@unboxed]
+&nbsp;&nbsp;&nbsp;&nbsp;[@@noalloc]
+&nbsp;&nbsp;external&nbsp;floor&nbsp;:&nbsp;float&nbsp;-&gt;&nbsp;float&nbsp;=&nbsp;"caml_floor_float"&nbsp;"floor"&nbsp;[@@unboxed]
+&nbsp;&nbsp;&nbsp;&nbsp;[@@noalloc]
+&nbsp;&nbsp;external&nbsp;next_after&nbsp;:&nbsp;float&nbsp;-&gt;&nbsp;float&nbsp;-&gt;&nbsp;float&nbsp;=&nbsp;"caml_nextafter_float"
+&nbsp;&nbsp;&nbsp;&nbsp;"caml_nextafter"&nbsp;[@@unboxed]&nbsp;[@@noalloc]
+&nbsp;&nbsp;external&nbsp;copy_sign&nbsp;:&nbsp;float&nbsp;-&gt;&nbsp;float&nbsp;-&gt;&nbsp;float&nbsp;=&nbsp;"caml_copysign_float"
+&nbsp;&nbsp;&nbsp;&nbsp;"caml_copysign"&nbsp;[@@unboxed]&nbsp;[@@noalloc]
+&nbsp;&nbsp;external&nbsp;sign_bit&nbsp;:&nbsp;(float&nbsp;[@unboxed])&nbsp;-&gt;&nbsp;bool&nbsp;=&nbsp;"caml_signbit_float"
+&nbsp;&nbsp;&nbsp;&nbsp;"caml_signbit"&nbsp;[@@noalloc]
+&nbsp;&nbsp;external&nbsp;frexp&nbsp;:&nbsp;float&nbsp;-&gt;&nbsp;float&nbsp;*&nbsp;int&nbsp;=&nbsp;"caml_frexp_float"
+&nbsp;&nbsp;external&nbsp;ldexp&nbsp;:
+&nbsp;&nbsp;&nbsp;&nbsp;(float&nbsp;[@unboxed])&nbsp;-&gt;&nbsp;(int&nbsp;[@untagged])&nbsp;-&gt;&nbsp;(float&nbsp;[@unboxed])
+&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;"caml_ldexp_float"&nbsp;"caml_ldexp_float_unboxed"&nbsp;[@@noalloc]
+&nbsp;&nbsp;external&nbsp;modf&nbsp;:&nbsp;float&nbsp;-&gt;&nbsp;float&nbsp;*&nbsp;float&nbsp;=&nbsp;"caml_modf_float"
+&nbsp;&nbsp;type&nbsp;t&nbsp;=&nbsp;float
+&nbsp;&nbsp;val&nbsp;compare&nbsp;:&nbsp;Float.t&nbsp;-&gt;&nbsp;Float.t&nbsp;-&gt;&nbsp;int
+&nbsp;&nbsp;val&nbsp;equal&nbsp;:&nbsp;Float.t&nbsp;-&gt;&nbsp;Float.t&nbsp;-&gt;&nbsp;bool
+&nbsp;&nbsp;val&nbsp;min&nbsp;:&nbsp;Float.t&nbsp;-&gt;&nbsp;Float.t&nbsp;-&gt;&nbsp;Float.t
+&nbsp;&nbsp;val&nbsp;max&nbsp;:&nbsp;float&nbsp;-&gt;&nbsp;float&nbsp;-&gt;&nbsp;float
+&nbsp;&nbsp;val&nbsp;min_max&nbsp;:&nbsp;float&nbsp;-&gt;&nbsp;float&nbsp;-&gt;&nbsp;float&nbsp;*&nbsp;float
+&nbsp;&nbsp;val&nbsp;min_num&nbsp;:&nbsp;Float.t&nbsp;-&gt;&nbsp;Float.t&nbsp;-&gt;&nbsp;Float.t
+&nbsp;&nbsp;val&nbsp;max_num&nbsp;:&nbsp;Float.t&nbsp;-&gt;&nbsp;Float.t&nbsp;-&gt;&nbsp;Float.t
+&nbsp;&nbsp;val&nbsp;min_max_num&nbsp;:&nbsp;float&nbsp;-&gt;&nbsp;float&nbsp;-&gt;&nbsp;float&nbsp;*&nbsp;float
+&nbsp;&nbsp;val&nbsp;hash&nbsp;:&nbsp;Float.t&nbsp;-&gt;&nbsp;int
+&nbsp;&nbsp;module&nbsp;Array&nbsp;:
+&nbsp;&nbsp;&nbsp;&nbsp;sig
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type&nbsp;t&nbsp;=&nbsp;floatarray
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;length&nbsp;:&nbsp;Float.Array.t&nbsp;-&gt;&nbsp;int
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;get&nbsp;:&nbsp;Float.Array.t&nbsp;-&gt;&nbsp;int&nbsp;-&gt;&nbsp;float
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;set&nbsp;:&nbsp;Float.Array.t&nbsp;-&gt;&nbsp;int&nbsp;-&gt;&nbsp;float&nbsp;-&gt;&nbsp;unit
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;make&nbsp;:&nbsp;int&nbsp;-&gt;&nbsp;float&nbsp;-&gt;&nbsp;Float.Array.t
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;create&nbsp;:&nbsp;int&nbsp;-&gt;&nbsp;Float.Array.t
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;init&nbsp;:&nbsp;int&nbsp;-&gt;&nbsp;(int&nbsp;-&gt;&nbsp;float)&nbsp;-&gt;&nbsp;Float.Array.t
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;append&nbsp;:&nbsp;Float.Array.t&nbsp;-&gt;&nbsp;Float.Array.t&nbsp;-&gt;&nbsp;Float.Array.t
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;concat&nbsp;:&nbsp;Float.Array.t&nbsp;list&nbsp;-&gt;&nbsp;Float.Array.t
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;sub&nbsp;:&nbsp;Float.Array.t&nbsp;-&gt;&nbsp;int&nbsp;-&gt;&nbsp;int&nbsp;-&gt;&nbsp;Float.Array.t
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;copy&nbsp;:&nbsp;Float.Array.t&nbsp;-&gt;&nbsp;Float.Array.t
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;fill&nbsp;:&nbsp;Float.Array.t&nbsp;-&gt;&nbsp;int&nbsp;-&gt;&nbsp;int&nbsp;-&gt;&nbsp;float&nbsp;-&gt;&nbsp;unit
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;blit&nbsp;:&nbsp;Float.Array.t&nbsp;-&gt;&nbsp;int&nbsp;-&gt;&nbsp;Float.Array.t&nbsp;-&gt;&nbsp;int&nbsp;-&gt;&nbsp;int&nbsp;-&gt;&nbsp;unit
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;to_list&nbsp;:&nbsp;Float.Array.t&nbsp;-&gt;&nbsp;float&nbsp;list
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;of_list&nbsp;:&nbsp;float&nbsp;list&nbsp;-&gt;&nbsp;Float.Array.t
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;iter&nbsp;:&nbsp;(float&nbsp;-&gt;&nbsp;unit)&nbsp;-&gt;&nbsp;Float.Array.t&nbsp;-&gt;&nbsp;unit
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;iteri&nbsp;:&nbsp;(int&nbsp;-&gt;&nbsp;float&nbsp;-&gt;&nbsp;unit)&nbsp;-&gt;&nbsp;Float.Array.t&nbsp;-&gt;&nbsp;unit
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;map&nbsp;:&nbsp;(float&nbsp;-&gt;&nbsp;float)&nbsp;-&gt;&nbsp;Float.Array.t&nbsp;-&gt;&nbsp;Float.Array.t
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;mapi&nbsp;:&nbsp;(int&nbsp;-&gt;&nbsp;float&nbsp;-&gt;&nbsp;float)&nbsp;-&gt;&nbsp;Float.Array.t&nbsp;-&gt;&nbsp;Float.Array.t
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;fold_left&nbsp;:&nbsp;('a&nbsp;-&gt;&nbsp;float&nbsp;-&gt;&nbsp;'a)&nbsp;-&gt;&nbsp;'a&nbsp;-&gt;&nbsp;Float.Array.t&nbsp;-&gt;&nbsp;'a
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;fold_right&nbsp;:&nbsp;(float&nbsp;-&gt;&nbsp;'a&nbsp;-&gt;&nbsp;'a)&nbsp;-&gt;&nbsp;Float.Array.t&nbsp;-&gt;&nbsp;'a&nbsp;-&gt;&nbsp;'a
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;iter2&nbsp;:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(float&nbsp;-&gt;&nbsp;float&nbsp;-&gt;&nbsp;unit)&nbsp;-&gt;&nbsp;Float.Array.t&nbsp;-&gt;&nbsp;Float.Array.t&nbsp;-&gt;&nbsp;unit
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;map2&nbsp;:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(float&nbsp;-&gt;&nbsp;float&nbsp;-&gt;&nbsp;float)&nbsp;-&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Float.Array.t&nbsp;-&gt;&nbsp;Float.Array.t&nbsp;-&gt;&nbsp;Float.Array.t
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;for_all&nbsp;:&nbsp;(float&nbsp;-&gt;&nbsp;bool)&nbsp;-&gt;&nbsp;Float.Array.t&nbsp;-&gt;&nbsp;bool
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;exists&nbsp;:&nbsp;(float&nbsp;-&gt;&nbsp;bool)&nbsp;-&gt;&nbsp;Float.Array.t&nbsp;-&gt;&nbsp;bool
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;mem&nbsp;:&nbsp;float&nbsp;-&gt;&nbsp;Float.Array.t&nbsp;-&gt;&nbsp;bool
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;mem_ieee&nbsp;:&nbsp;float&nbsp;-&gt;&nbsp;Float.Array.t&nbsp;-&gt;&nbsp;bool
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;sort&nbsp;:&nbsp;(float&nbsp;-&gt;&nbsp;float&nbsp;-&gt;&nbsp;int)&nbsp;-&gt;&nbsp;Float.Array.t&nbsp;-&gt;&nbsp;unit
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;stable_sort&nbsp;:&nbsp;(float&nbsp;-&gt;&nbsp;float&nbsp;-&gt;&nbsp;int)&nbsp;-&gt;&nbsp;Float.Array.t&nbsp;-&gt;&nbsp;unit
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;fast_sort&nbsp;:&nbsp;(float&nbsp;-&gt;&nbsp;float&nbsp;-&gt;&nbsp;int)&nbsp;-&gt;&nbsp;Float.Array.t&nbsp;-&gt;&nbsp;unit
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;to_seq&nbsp;:&nbsp;Float.Array.t&nbsp;-&gt;&nbsp;float&nbsp;Stdlib.Seq.t
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;to_seqi&nbsp;:&nbsp;Float.Array.t&nbsp;-&gt;&nbsp;(int&nbsp;*&nbsp;float)&nbsp;Stdlib.Seq.t
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;of_seq&nbsp;:&nbsp;float&nbsp;Stdlib.Seq.t&nbsp;-&gt;&nbsp;Float.Array.t
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;map_to_array&nbsp;:&nbsp;(float&nbsp;-&gt;&nbsp;'a)&nbsp;-&gt;&nbsp;Float.Array.t&nbsp;-&gt;&nbsp;'a&nbsp;array
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;map_from_array&nbsp;:&nbsp;('a&nbsp;-&gt;&nbsp;float)&nbsp;-&gt;&nbsp;'a&nbsp;array&nbsp;-&gt;&nbsp;Float.Array.t
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;external&nbsp;unsafe_get&nbsp;:&nbsp;Float.Array.t&nbsp;-&gt;&nbsp;int&nbsp;-&gt;&nbsp;float
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;"%floatarray_unsafe_get"
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;external&nbsp;unsafe_set&nbsp;:&nbsp;Float.Array.t&nbsp;-&gt;&nbsp;int&nbsp;-&gt;&nbsp;float&nbsp;-&gt;&nbsp;unit
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;"%floatarray_unsafe_set"
+&nbsp;&nbsp;&nbsp;&nbsp;end
+&nbsp;&nbsp;module&nbsp;ArrayLabels&nbsp;:
+&nbsp;&nbsp;&nbsp;&nbsp;sig
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;type&nbsp;t&nbsp;=&nbsp;floatarray
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;length&nbsp;:&nbsp;Float.ArrayLabels.t&nbsp;-&gt;&nbsp;int
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;get&nbsp;:&nbsp;Float.ArrayLabels.t&nbsp;-&gt;&nbsp;int&nbsp;-&gt;&nbsp;float
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;set&nbsp;:&nbsp;Float.ArrayLabels.t&nbsp;-&gt;&nbsp;int&nbsp;-&gt;&nbsp;float&nbsp;-&gt;&nbsp;unit
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;make&nbsp;:&nbsp;int&nbsp;-&gt;&nbsp;float&nbsp;-&gt;&nbsp;Float.ArrayLabels.t
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;create&nbsp;:&nbsp;int&nbsp;-&gt;&nbsp;Float.ArrayLabels.t
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;init&nbsp;:&nbsp;int&nbsp;-&gt;&nbsp;f:(int&nbsp;-&gt;&nbsp;float)&nbsp;-&gt;&nbsp;Float.ArrayLabels.t
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;append&nbsp;:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Float.ArrayLabels.t&nbsp;-&gt;&nbsp;Float.ArrayLabels.t&nbsp;-&gt;&nbsp;Float.ArrayLabels.t
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;concat&nbsp;:&nbsp;Float.ArrayLabels.t&nbsp;list&nbsp;-&gt;&nbsp;Float.ArrayLabels.t
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;sub&nbsp;:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Float.ArrayLabels.t&nbsp;-&gt;&nbsp;pos:int&nbsp;-&gt;&nbsp;len:int&nbsp;-&gt;&nbsp;Float.ArrayLabels.t
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;copy&nbsp;:&nbsp;Float.ArrayLabels.t&nbsp;-&gt;&nbsp;Float.ArrayLabels.t
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;fill&nbsp;:&nbsp;Float.ArrayLabels.t&nbsp;-&gt;&nbsp;pos:int&nbsp;-&gt;&nbsp;len:int&nbsp;-&gt;&nbsp;float&nbsp;-&gt;&nbsp;unit
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;blit&nbsp;:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;src:Float.ArrayLabels.t&nbsp;-&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;src_pos:int&nbsp;-&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dst:Float.ArrayLabels.t&nbsp;-&gt;&nbsp;dst_pos:int&nbsp;-&gt;&nbsp;len:int&nbsp;-&gt;&nbsp;unit
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;to_list&nbsp;:&nbsp;Float.ArrayLabels.t&nbsp;-&gt;&nbsp;float&nbsp;list
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;of_list&nbsp;:&nbsp;float&nbsp;list&nbsp;-&gt;&nbsp;Float.ArrayLabels.t
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;iter&nbsp;:&nbsp;f:(float&nbsp;-&gt;&nbsp;unit)&nbsp;-&gt;&nbsp;Float.ArrayLabels.t&nbsp;-&gt;&nbsp;unit
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;iteri&nbsp;:&nbsp;f:(int&nbsp;-&gt;&nbsp;float&nbsp;-&gt;&nbsp;unit)&nbsp;-&gt;&nbsp;Float.ArrayLabels.t&nbsp;-&gt;&nbsp;unit
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;map&nbsp;:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;f:(float&nbsp;-&gt;&nbsp;float)&nbsp;-&gt;&nbsp;Float.ArrayLabels.t&nbsp;-&gt;&nbsp;Float.ArrayLabels.t
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;mapi&nbsp;:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;f:(int&nbsp;-&gt;&nbsp;float&nbsp;-&gt;&nbsp;float)&nbsp;-&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Float.ArrayLabels.t&nbsp;-&gt;&nbsp;Float.ArrayLabels.t
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;fold_left&nbsp;:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;f:('a&nbsp;-&gt;&nbsp;float&nbsp;-&gt;&nbsp;'a)&nbsp;-&gt;&nbsp;init:'a&nbsp;-&gt;&nbsp;Float.ArrayLabels.t&nbsp;-&gt;&nbsp;'a
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;fold_right&nbsp;:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;f:(float&nbsp;-&gt;&nbsp;'a&nbsp;-&gt;&nbsp;'a)&nbsp;-&gt;&nbsp;Float.ArrayLabels.t&nbsp;-&gt;&nbsp;init:'a&nbsp;-&gt;&nbsp;'a
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;iter2&nbsp;:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;f:(float&nbsp;-&gt;&nbsp;float&nbsp;-&gt;&nbsp;unit)&nbsp;-&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Float.ArrayLabels.t&nbsp;-&gt;&nbsp;Float.ArrayLabels.t&nbsp;-&gt;&nbsp;unit
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;map2&nbsp;:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;f:(float&nbsp;-&gt;&nbsp;float&nbsp;-&gt;&nbsp;float)&nbsp;-&gt;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Float.ArrayLabels.t&nbsp;-&gt;&nbsp;Float.ArrayLabels.t&nbsp;-&gt;&nbsp;Float.ArrayLabels.t
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;for_all&nbsp;:&nbsp;f:(float&nbsp;-&gt;&nbsp;bool)&nbsp;-&gt;&nbsp;Float.ArrayLabels.t&nbsp;-&gt;&nbsp;bool
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;exists&nbsp;:&nbsp;f:(float&nbsp;-&gt;&nbsp;bool)&nbsp;-&gt;&nbsp;Float.ArrayLabels.t&nbsp;-&gt;&nbsp;bool
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;mem&nbsp;:&nbsp;float&nbsp;-&gt;&nbsp;set:Float.ArrayLabels.t&nbsp;-&gt;&nbsp;bool
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;mem_ieee&nbsp;:&nbsp;float&nbsp;-&gt;&nbsp;set:Float.ArrayLabels.t&nbsp;-&gt;&nbsp;bool
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;sort&nbsp;:&nbsp;cmp:(float&nbsp;-&gt;&nbsp;float&nbsp;-&gt;&nbsp;int)&nbsp;-&gt;&nbsp;Float.ArrayLabels.t&nbsp;-&gt;&nbsp;unit
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;stable_sort&nbsp;:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cmp:(float&nbsp;-&gt;&nbsp;float&nbsp;-&gt;&nbsp;int)&nbsp;-&gt;&nbsp;Float.ArrayLabels.t&nbsp;-&gt;&nbsp;unit
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;fast_sort&nbsp;:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;cmp:(float&nbsp;-&gt;&nbsp;float&nbsp;-&gt;&nbsp;int)&nbsp;-&gt;&nbsp;Float.ArrayLabels.t&nbsp;-&gt;&nbsp;unit
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;to_seq&nbsp;:&nbsp;Float.ArrayLabels.t&nbsp;-&gt;&nbsp;float&nbsp;Stdlib.Seq.t
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;to_seqi&nbsp;:&nbsp;Float.ArrayLabels.t&nbsp;-&gt;&nbsp;(int&nbsp;*&nbsp;float)&nbsp;Stdlib.Seq.t
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;of_seq&nbsp;:&nbsp;float&nbsp;Stdlib.Seq.t&nbsp;-&gt;&nbsp;Float.ArrayLabels.t
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;map_to_array&nbsp;:&nbsp;f:(float&nbsp;-&gt;&nbsp;'a)&nbsp;-&gt;&nbsp;Float.ArrayLabels.t&nbsp;-&gt;&nbsp;'a&nbsp;array
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;map_from_array&nbsp;:&nbsp;f:('a&nbsp;-&gt;&nbsp;float)&nbsp;-&gt;&nbsp;'a&nbsp;array&nbsp;-&gt;&nbsp;Float.ArrayLabels.t
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;external&nbsp;unsafe_get&nbsp;:&nbsp;Float.ArrayLabels.t&nbsp;-&gt;&nbsp;int&nbsp;-&gt;&nbsp;float
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;"%floatarray_unsafe_get"
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;external&nbsp;unsafe_set&nbsp;:&nbsp;Float.ArrayLabels.t&nbsp;-&gt;&nbsp;int&nbsp;-&gt;&nbsp;float&nbsp;-&gt;&nbsp;unit
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;=&nbsp;"%floatarray_unsafe_set"
+&nbsp;&nbsp;&nbsp;&nbsp;end
+end</pre></div></div><span><script src="/js/redirectBlog.js"></script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+                document.addEventListener('keyup', function(e) {
+                  if (e.target !== document.body) {
+                    return;
+                  }
+                  // keyCode for '/' (slash)
+                  if (e.keyCode === 191) {
+                    const search = document.getElementById('search_input_react');
+                    search && search.focus();
+                  }
+                });
+              </script><script>
+              var search = docsearch({
+                
+                apiKey: '966d1e412f67114a07dc0afe44b19b53',
+                indexName: 'reason',
+                inputSelector: '#search_input_react',
+                algoliaOptions: {"facetFilters":["lang:en"]}
+              });
+            </script></body></html>

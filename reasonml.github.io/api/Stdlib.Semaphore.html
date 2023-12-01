@@ -1,0 +1,70 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Reason · Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems.</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Reason · Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io/"/><meta property="og:description" content="Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/icon_50.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io/blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io/blog/feed.xml" title="Reason Blog RSS Feed"/><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/en"><img class="logo" src="/img/dummy.svg" alt="Reason"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/docs/en/what-and-why" target="_self">Docs</a></li><li class=""><a href="/en/try" target="_self">Try</a></li><li class=""><a href="/api/index" target="_self">API</a></li><li class=""><a href="/docs/en/community" target="_self">Community</a></li><li class=""><a href="/blog/" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg" alt="Languages icon"/>English</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/ja/Stdlib.Semaphore">日本語</a></li><li><a href="/de/Stdlib.Semaphore">Deutsch</a></li><li><a href="/es-ES/Stdlib.Semaphore">Español</a></li><li><a href="/fr/Stdlib.Semaphore">Français</a></li><li><a href="/ko/Stdlib.Semaphore">한국어</a></li><li><a href="/pt-BR/Stdlib.Semaphore">Português (Brasil)</a></li><li><a href="/ru/Stdlib.Semaphore">Русский</a></li><li><a href="/uk/Stdlib.Semaphore">Українська</a></li><li><a href="/zh-CN/Stdlib.Semaphore">中文</a></li><li><a href="/zh-TW/Stdlib.Semaphore">繁體中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank" rel="noreferrer noopener">Help Translate</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/facebook/reason" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div><link rel="stylesheet" href="/css/main.css"><div class="ocamldoc">
+<h1>Module <a href="type_Stdlib.Semaphore.html">Stdlib.Semaphore</a></h1>
+
+<pre id="MODULESemaphore"><span class="keyword">module</span> Semaphore: Semaphore</pre><hr width="100%">
+<h3 id="2_Countingsemaphores">Counting semaphores</h3><p>A counting semaphore is a counter that can be accessed concurrently
+  by several threads.  The typical use is to synchronize producers and
+  consumers of a resource by counting how many units of the resource
+  are available.</p>
+
+<p>The two basic operations on semaphores are:</p>
+<ul>
+<li>"release" (also called "V", "post", "up", and "signal"), which
+  increments the value of the counter.  This corresponds to producing
+  one more unit of the shared resource and making it available to others.</li>
+<li>"acquire" (also called "P", "wait", "down", and "pend"), which
+  waits until the counter is greater than zero and decrements it.
+  This corresponds to consuming one unit of the shared resource.</li>
+</ul>
+
+<pre id="MODULECounting"><span class="keyword">module</span> Counting: sig .. end</pre><h3 id="2_Binarysemaphores">Binary semaphores</h3><p>Binary semaphores are a variant of counting semaphores
+    where semaphores can only take two values, 0 and 1.</p>
+
+<p>A binary semaphore can be used to control access to a single
+    shared resource, with value 1 meaning "resource is available" and
+    value 0 meaning "resource is unavailable".</p>
+
+<p>The "release" operation of a binary semaphore sets its value to 1,
+    and "acquire" waits until the value is 1 and sets it to 0.</p>
+
+<p>A binary semaphore can be used instead of a mutex (see module
+    <a href="Mutex.html"><code class="code">Mutex</code></a>) when the mutex discipline (of unlocking the mutex from the
+    thread that locked it) is too restrictive.  The "acquire" operation
+    corresponds to locking the mutex, and the "release" operation to
+    unlocking it, but "release" can be performed in a thread different
+    than the one that performed the "acquire".  Likewise, it is safe
+    to release a binary semaphore that is already available.</p>
+
+<pre id="MODULEBinary"><span class="keyword">module</span> Binary: sig .. end</pre>
+</div></div><span><script src="/js/redirectBlog.js"></script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+                document.addEventListener('keyup', function(e) {
+                  if (e.target !== document.body) {
+                    return;
+                  }
+                  // keyCode for '/' (slash)
+                  if (e.keyCode === 191) {
+                    const search = document.getElementById('search_input_react');
+                    search && search.focus();
+                  }
+                });
+              </script><script>
+              var search = docsearch({
+                
+                apiKey: '966d1e412f67114a07dc0afe44b19b53',
+                indexName: 'reason',
+                inputSelector: '#search_input_react',
+                algoliaOptions: {"facetFilters":["lang:en"]}
+              });
+            </script></body></html>

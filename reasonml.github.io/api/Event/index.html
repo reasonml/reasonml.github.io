@@ -1,0 +1,149 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Reason · Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems.</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Reason · Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io/"/><meta property="og:description" content="Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/icon_50.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io/blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io/blog/feed.xml" title="Reason Blog RSS Feed"/><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/en"><img class="logo" src="/img/dummy.svg" alt="Reason"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/docs/en/what-and-why" target="_self">Docs</a></li><li class=""><a href="/en/try" target="_self">Try</a></li><li class=""><a href="/api/index" target="_self">API</a></li><li class=""><a href="/docs/en/community" target="_self">Community</a></li><li class=""><a href="/blog/" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg" alt="Languages icon"/>English</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/ja/Event">日本語</a></li><li><a href="/de/Event">Deutsch</a></li><li><a href="/es-ES/Event">Español</a></li><li><a href="/fr/Event">Français</a></li><li><a href="/ko/Event">한국어</a></li><li><a href="/pt-BR/Event">Português (Brasil)</a></li><li><a href="/ru/Event">Русский</a></li><li><a href="/uk/Event">Українська</a></li><li><a href="/zh-CN/Event">中文</a></li><li><a href="/zh-TW/Event">繁體中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank" rel="noreferrer noopener">Help Translate</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/facebook/reason" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div><link rel="stylesheet" href="/css/main.css"><div class="ocamldoc">
+<h1>Module <a href="type_Event.html">Event</a></h1>
+
+<pre id="MODULEEvent"><span class="keyword">module</span> Event: sig .. end</pre><div class="info module top">
+<div class="info-desc">
+<p>First-class synchronous communication.</p>
+
+<p>This module implements synchronous inter-thread communications over
+   channels. As in John Reppy's Concurrent ML system, the communication
+   events are first-class values: they can be built and combined
+   independently before being offered for communication.</p>
+</div>
+</div>
+<hr width="100%">
+
+<pre id="TYPEchannel"><span class="keyword">type</span> 'a channel </pre>
+<div class="info ">
+<div class="info-desc">
+<p>The type of communication channels carrying values of type <code class="code">'a</code>.</p>
+</div>
+</div>
+
+
+<pre id="VALnew_channel">val new_channel : unit -&gt; 'a channel</pre><div class="info ">
+<div class="info-desc">
+<p>Return a new channel.</p>
+</div>
+</div>
+
+<pre id="TYPEevent"><span class="keyword">type</span> +'a event </pre>
+<div class="info ">
+<div class="info-desc">
+<p>The type of communication events returning a result of type <code class="code">'a</code>.</p>
+</div>
+</div>
+
+
+<pre id="VALsend">val send : 'a channel -&gt; 'a -&gt; unit event</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">send&nbsp;ch&nbsp;v</code> returns the event consisting in sending the value <code class="code">v</code>
+   over the channel <code class="code">ch</code>. The result value of this event is <code class="code">()</code>.</p>
+</div>
+</div>
+
+<pre id="VALreceive">val receive : 'a channel -&gt; 'a event</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">receive&nbsp;ch</code> returns the event consisting in receiving a value
+   from the channel <code class="code">ch</code>. The result value of this event is the
+   value received.</p>
+</div>
+</div>
+
+<pre id="VALalways">val always : 'a -&gt; 'a event</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">always&nbsp;v</code> returns an event that is always ready for
+   synchronization.  The result value of this event is <code class="code">v</code>.</p>
+</div>
+</div>
+
+<pre id="VALchoose">val choose : 'a event list -&gt; 'a event</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">choose&nbsp;evl</code> returns the event that is the alternative of
+   all the events in the list <code class="code">evl</code>.</p>
+</div>
+</div>
+
+<pre id="VALwrap">val wrap : 'a event -&gt; ('a -&gt; 'b) -&gt; 'b event</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">wrap&nbsp;ev&nbsp;fn</code> returns the event that performs the same communications
+   as <code class="code">ev</code>, then applies the post-processing function <code class="code">fn</code>
+   on the return value.</p>
+</div>
+</div>
+
+<pre id="VALwrap_abort">val wrap_abort : 'a event -&gt; (unit -&gt; unit) -&gt; 'a event</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">wrap_abort&nbsp;ev&nbsp;fn</code> returns the event that performs
+   the same communications as <code class="code">ev</code>, but if it is not selected
+   the function <code class="code">fn</code> is called after the synchronization.</p>
+</div>
+</div>
+
+<pre id="VALguard">val guard : (unit -&gt; 'a event) -&gt; 'a event</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">guard&nbsp;fn</code> returns the event that, when synchronized, computes
+   <code class="code">fn()</code> and behaves as the resulting event. This enables
+   computing events with side-effects at the time of the synchronization
+   operation.</p>
+</div>
+</div>
+
+<pre id="VALsync">val sync : 'a event -&gt; 'a</pre><div class="info ">
+<div class="info-desc">
+<p>'Synchronize' on an event: offer all the communication
+   possibilities specified in the event to the outside world,
+   and block until one of the communications succeed. The result
+   value of that communication is returned.</p>
+</div>
+</div>
+
+<pre id="VALselect">val select : 'a event list -&gt; 'a</pre><div class="info ">
+<div class="info-desc">
+<p>'Synchronize' on an alternative of events.
+   <code class="code">select&nbsp;evl</code> is shorthand for <code class="code">sync(choose&nbsp;evl)</code>.</p>
+</div>
+</div>
+
+<pre id="VALpoll">val poll : 'a event -&gt; 'a option</pre><div class="info ">
+<div class="info-desc">
+<p>Non-blocking version of <a href="Event.html#VALsync"><code class="code">Event.sync</code></a>: offer all the communication
+   possibilities specified in the event to the outside world,
+   and if one can take place immediately, perform it and return
+   <code class="code">Some&nbsp;r</code> where <code class="code">r</code> is the result value of that communication.
+   Otherwise, return <code class="code">None</code> without blocking.</p>
+</div>
+</div>
+
+</div></div><span><script src="/js/redirectBlog.js"></script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+                document.addEventListener('keyup', function(e) {
+                  if (e.target !== document.body) {
+                    return;
+                  }
+                  // keyCode for '/' (slash)
+                  if (e.keyCode === 191) {
+                    const search = document.getElementById('search_input_react');
+                    search && search.focus();
+                  }
+                });
+              </script><script>
+              var search = docsearch({
+                
+                apiKey: '966d1e412f67114a07dc0afe44b19b53',
+                indexName: 'reason',
+                inputSelector: '#search_input_react',
+                algoliaOptions: {"facetFilters":["lang:en"]}
+              });
+            </script></body></html>

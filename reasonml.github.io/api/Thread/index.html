@@ -1,0 +1,242 @@
+<!DOCTYPE html><html lang="en"><head><meta charSet="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Reason · Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems.</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta name="description" content="Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta name="docsearch:language" content="en"/><meta property="og:title" content="Reason · Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta property="og:type" content="website"/><meta property="og:url" content="https://reasonml.github.io/"/><meta property="og:description" content="Reason lets you write simple, fast and quality type safe code while leveraging both the JavaScript &amp; OCaml ecosystems."/><meta name="twitter:card" content="summary"/><link rel="shortcut icon" href="/img/icon_50.png"/><link rel="stylesheet" href="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.css"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"/><link rel="alternate" type="application/atom+xml" href="https://reasonml.github.io/blog/atom.xml" title="Reason Blog ATOM Feed"/><link rel="alternate" type="application/rss+xml" href="https://reasonml.github.io/blog/feed.xml" title="Reason Blog RSS Feed"/><script src="/js/scrollSpy.js"></script><link rel="stylesheet" href="/css/main.css"/><script src="/js/codetabs.js"></script></head><body><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/en"><img class="logo" src="/img/dummy.svg" alt="Reason"/></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class=""><a href="/docs/en/what-and-why" target="_self">Docs</a></li><li class=""><a href="/en/try" target="_self">Try</a></li><li class=""><a href="/api/index" target="_self">API</a></li><li class=""><a href="/docs/en/community" target="_self">Community</a></li><li class=""><a href="/blog/" target="_self">Blog</a></li><span><li><a id="languages-menu" href="#"><img class="languages-icon" src="/img/language.svg" alt="Languages icon"/>English</a><div id="languages-dropdown" class="hide"><ul id="languages-dropdown-items"><li><a href="/ja/Thread">日本語</a></li><li><a href="/de/Thread">Deutsch</a></li><li><a href="/es-ES/Thread">Español</a></li><li><a href="/fr/Thread">Français</a></li><li><a href="/ko/Thread">한국어</a></li><li><a href="/pt-BR/Thread">Português (Brasil)</a></li><li><a href="/ru/Thread">Русский</a></li><li><a href="/uk/Thread">Українська</a></li><li><a href="/zh-CN/Thread">中文</a></li><li><a href="/zh-TW/Thread">繁體中文</a></li><li><a href="https://crowdin.com/project/reason" target="_blank" rel="noreferrer noopener">Help Translate</a></li></ul></div></li><script>
+        const languagesMenuItem = document.getElementById("languages-menu");
+        const languagesDropDown = document.getElementById("languages-dropdown");
+        languagesMenuItem.addEventListener("click", function(event) {
+          event.preventDefault();
+
+          if (languagesDropDown.className == "hide") {
+            languagesDropDown.className = "visible";
+          } else {
+            languagesDropDown.className = "hide";
+          }
+        });
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/facebook/reason" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div><link rel="stylesheet" href="/css/main.css"><div class="ocamldoc">
+<h1>Module <a href="type_Thread.html">Thread</a></h1>
+
+<pre id="MODULEThread"><span class="keyword">module</span> Thread: sig .. end</pre><div class="info module top">
+<div class="info-desc">
+<p>Lightweight threads for Posix <code class="code">1003.1c</code> and Win32.</p>
+</div>
+</div>
+<hr width="100%">
+
+<pre id="TYPEt"><span class="keyword">type</span> t </pre>
+<div class="info ">
+<div class="info-desc">
+<p>The type of thread handles.</p>
+</div>
+</div>
+
+<h2 id="1_Threadcreationandtermination">Thread creation and termination</h2>
+<pre id="VALcreate">val create : ('a -&gt; 'b) -&gt; 'a -&gt; t</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">Thread.create&nbsp;funct&nbsp;arg</code> creates a new thread of control,
+   in which the function application <code class="code">funct&nbsp;arg</code>
+   is executed concurrently with the other threads of the domain.
+   The application of <code class="code">Thread.create</code>
+   returns the handle of the newly created thread.
+   The new thread terminates when the application <code class="code">funct&nbsp;arg</code>
+   returns, either normally or by raising the <a href="Thread.html#EXCEPTIONExit"><code class="code">Thread.Exit</code></a> exception
+   or by raising any other uncaught exception.
+   In the last case, the uncaught exception is printed on standard error,
+   but not propagated back to the parent thread. Similarly, the
+   result of the application <code class="code">funct&nbsp;arg</code> is discarded and not
+   directly accessible to the parent thread.</p>
+
+<p>See also <a href="Domain.html#VALspawn"><code class="code">Domain.spawn</code></a> if you want parallel execution instead.</p>
+</div>
+</div>
+
+<pre id="VALself">val self : unit -&gt; t</pre><div class="info ">
+<div class="info-desc">
+<p>Return the handle for the thread currently executing.</p>
+</div>
+</div>
+
+<pre id="VALid">val id : t -&gt; int</pre><div class="info ">
+<div class="info-desc">
+<p>Return the identifier of the given thread. A thread identifier
+   is an integer that identifies uniquely the thread.
+   It can be used to build data structures indexed by threads.</p>
+</div>
+</div>
+
+<pre id="EXCEPTIONExit"><span class="keyword">exception</span> Exit</pre>
+<div class="info ">
+<div class="info-desc">
+<p>Exception raised by user code to initiate termination of the
+    current thread.
+    In a thread created by <a href="Thread.html#VALcreate"><code class="code">Thread.create</code></a> <code class="code">funct</code> <code class="code">arg</code>, if the
+    <a href="Thread.html#EXCEPTIONExit"><code class="code">Thread.Exit</code></a> exception reaches the top of the application
+    <code class="code">funct&nbsp;arg</code>, it has the effect of terminating the current thread
+    silently.  In other contexts, there is no implicit handling of the
+    <a href="Thread.html#EXCEPTIONExit"><code class="code">Thread.Exit</code></a> exception.</p>
+</div>
+</div>
+
+<pre id="VALexit">val exit : unit -&gt; unit</pre><div class="info ">
+<div class="info-deprecated">
+<span class="warning">Deprecated. </span>Use 'raise Thread.Exit' instead.</div>
+<div class="info-desc">
+<p>Raise the <a href="Thread.html#EXCEPTIONExit"><code class="code">Thread.Exit</code></a> exception.
+    In a thread created by <a href="Thread.html#VALcreate"><code class="code">Thread.create</code></a>, this will cause the thread
+    to terminate prematurely, unless the thread function handles the
+    exception itself.  <a href="Fun.html#VALprotect"><code class="code">Fun.protect</code></a> finalizers and catch-all
+    exception handlers will be executed.</p>
+
+<p>To make it clear that an exception is raised and will trigger
+    finalizers and catch-all exception handlers, it is recommended
+    to write <code class="code">raise&nbsp;Thread.Exit</code> instead of <code class="code">Thread.exit&nbsp;()</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Before 5.0 </b> A different implementation was used, not based on raising
+        an exception, and not running finalizers and catch-all handlers.
+        The previous implementation had a different behavior when called
+        outside of a thread created by <code class="code">Thread.create</code>.</li>
+</ul>
+</div>
+<h2 id="1_Suspendingthreads">Suspending threads</h2>
+<pre id="VALdelay">val delay : float -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">delay&nbsp;d</code> suspends the execution of the calling thread for
+   <code class="code">d</code> seconds. The other program threads continue to run during
+   this time.</p>
+</div>
+</div>
+
+<pre id="VALjoin">val join : t -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">join&nbsp;th</code> suspends the execution of the calling thread
+   until the thread <code class="code">th</code> has terminated.</p>
+</div>
+</div>
+
+<pre id="VALyield">val yield : unit -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p>Re-schedule the calling thread without suspending it.
+   This function can be used to give scheduling hints,
+   telling the scheduler that now is a good time to
+   switch to other threads.</p>
+</div>
+</div>
+<h2 id="1_Waitingforfiledescriptorsorprocesses">Waiting for file descriptors or processes</h2><p>The functions below are leftovers from an earlier, VM-based threading
+    system.  The <a href="Unix.html"><code class="code">Unix</code></a> module provides equivalent functionality, in
+    a more general and more standard-conformant manner.  It is recommended
+    to use <a href="Unix.html"><code class="code">Unix</code></a> functions directly.</p>
+
+<pre id="VALwait_timed_read">val wait_timed_read : Unix.file_descr -&gt; float -&gt; bool</pre><div class="info ">
+<div class="info-deprecated">
+<span class="warning">Deprecated. </span>Use Unix.select instead.</div>
+<div class="info-desc">
+<p>See <a href="Thread.html#VALwait_timed_write"><code class="code">Thread.wait_timed_write</code></a>.</p>
+</div>
+</div>
+
+<pre id="VALwait_timed_write">val wait_timed_write : Unix.file_descr -&gt; float -&gt; bool</pre><div class="info ">
+<div class="info-deprecated">
+<span class="warning">Deprecated. </span>Use Unix.select instead.</div>
+<div class="info-desc">
+<p>Suspend the execution of the calling thread until at least
+   one character or EOF is available for reading (<code class="code">wait_timed_read</code>) or
+   one character can be written without blocking (<code class="code">wait_timed_write</code>)
+   on the given Unix file descriptor. Wait for at most
+   the amount of time given as second argument (in seconds).
+   Return <code class="code">true</code> if the file descriptor is ready for input/output
+   and <code class="code">false</code> if the timeout expired.
+   The same functionality can be achieved with <a href="Unix.html#VALselect"><code class="code">Unix.select</code></a>.</p>
+</div>
+</div>
+
+<pre id="VALselect">val select : Unix.file_descr list -&gt;       Unix.file_descr list -&gt;       Unix.file_descr list -&gt;       float -&gt; Unix.file_descr list * Unix.file_descr list * Unix.file_descr list</pre><div class="info ">
+<div class="info-deprecated">
+<span class="warning">Deprecated. </span>Use Unix.select instead.</div>
+<div class="info-desc">
+<p>Same function as <a href="Unix.html#VALselect"><code class="code">Unix.select</code></a>.
+   Suspend the execution of the calling thread until input/output
+   becomes possible on the given Unix file descriptors.
+   The arguments and results have the same meaning as for
+   <a href="Unix.html#VALselect"><code class="code">Unix.select</code></a>.</p>
+</div>
+</div>
+
+<pre id="VALwait_pid">val wait_pid : int -&gt; int * Unix.process_status</pre><div class="info ">
+<div class="info-deprecated">
+<span class="warning">Deprecated. </span>Use Unix.waitpid instead.</div>
+<div class="info-desc">
+<p>Same function as <a href="Unix.html#VALwaitpid"><code class="code">Unix.waitpid</code></a>.
+   <code class="code">wait_pid&nbsp;p</code> suspends the execution of the calling thread
+   until the process specified by the process identifier <code class="code">p</code>
+   terminates. Returns the pid of the child caught and
+   its termination status, as per <a href="Unix.html#VALwait"><code class="code">Unix.wait</code></a>.</p>
+</div>
+</div>
+<h2 id="1_Managementofsignals">Management of signals</h2><p>Signal handling follows the POSIX thread model: signals generated
+  by a thread are delivered to that thread; signals generated externally
+  are delivered to one of the threads that does not block it.
+  Each thread possesses a set of blocked signals, which can be modified
+  using <a href="Thread.html#VALsigmask"><code class="code">Thread.sigmask</code></a>.  This set is inherited at thread creation time.
+  Per-thread signal masks are supported only by the system thread library
+  under Unix, but not under Win32, nor by the VM thread library.</p>
+
+<pre id="VALsigmask">val sigmask : Unix.sigprocmask_command -&gt; int list -&gt; int list</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">sigmask&nbsp;cmd&nbsp;sigs</code> changes the set of blocked signals for the
+   calling thread.
+   If <code class="code">cmd</code> is <code class="code">SIG_SETMASK</code>, blocked signals are set to those in
+   the list <code class="code">sigs</code>.
+   If <code class="code">cmd</code> is <code class="code">SIG_BLOCK</code>, the signals in <code class="code">sigs</code> are added to
+   the set of blocked signals.
+   If <code class="code">cmd</code> is <code class="code">SIG_UNBLOCK</code>, the signals in <code class="code">sigs</code> are removed
+   from the set of blocked signals.
+   <code class="code">sigmask</code> returns the set of previously blocked signals for the thread.</p>
+</div>
+</div>
+
+<pre id="VALwait_signal">val wait_signal : int list -&gt; int</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">wait_signal&nbsp;sigs</code> suspends the execution of the calling thread
+   until the process receives one of the signals specified in the
+   list <code class="code">sigs</code>.  It then returns the number of the signal received.
+   Signal handlers attached to the signals in <code class="code">sigs</code> will not
+   be invoked.  The signals <code class="code">sigs</code> are expected to be blocked before
+   calling <code class="code">wait_signal</code>.</p>
+</div>
+</div>
+<h2 id="1_Uncaughtexceptions">Uncaught exceptions</h2>
+<pre id="VALdefault_uncaught_exception_handler">val default_uncaught_exception_handler : exn -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">Thread.default_uncaught_exception_handler</code> will print the thread's id,
+    exception and backtrace (if available).</p>
+</div>
+</div>
+
+<pre id="VALset_uncaught_exception_handler">val set_uncaught_exception_handler : (exn -&gt; unit) -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">Thread.set_uncaught_exception_handler&nbsp;fn</code> registers <code class="code">fn</code> as the handler
+    for uncaught exceptions.</p>
+
+<p>If the newly set uncaught exception handler raise an exception,
+    <a href="Thread.html#VALdefault_uncaught_exception_handler"><code class="code">Thread.default_uncaught_exception_handler</code></a> will be called.</p>
+</div>
+</div>
+
+</div></div><span><script src="/js/redirectBlog.js"></script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+                document.addEventListener('keyup', function(e) {
+                  if (e.target !== document.body) {
+                    return;
+                  }
+                  // keyCode for '/' (slash)
+                  if (e.keyCode === 191) {
+                    const search = document.getElementById('search_input_react');
+                    search && search.focus();
+                  }
+                });
+              </script><script>
+              var search = docsearch({
+                
+                apiKey: '966d1e412f67114a07dc0afe44b19b53',
+                indexName: 'reason',
+                inputSelector: '#search_input_react',
+                algoliaOptions: {"facetFilters":["lang:en"]}
+              });
+            </script></body></html>

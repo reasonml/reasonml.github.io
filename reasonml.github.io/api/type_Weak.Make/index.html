@@ -10,24 +10,25 @@
             languagesDropDown.className = "hide";
           }
         });
-      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/facebook/reason" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div><link rel="stylesheet" href="/css/main.css"><div class="ocamldoc"><pre>functor&#xA0;(H&#xA0;:&#xA0;Hashtbl.HashedType)&#xA0;-&gt;
+      </script></span><li class="navSearchWrapper reactNavSearchWrapper"><input type="text" id="search_input_react" placeholder="Search" title="Search"/></li><li class=""><a href="https://github.com/facebook/reason" target="_self">GitHub</a></li></ul></nav></div></header></div></div><div class="navPusher"><div><link rel="stylesheet" href="/css/main.css"><div class="ocamldoc"><pre>functor&nbsp;(H&nbsp;:&nbsp;Hashtbl.HashedType)&nbsp;-&gt;
 
-&#xA0;&#xA0;sig
-&#xA0;&#xA0;&#xA0;&#xA0;type&#xA0;data&#xA0;=&#xA0;H.t
-&#xA0;&#xA0;&#xA0;&#xA0;type&#xA0;t
-&#xA0;&#xA0;&#xA0;&#xA0;val&#xA0;create&#xA0;:&#xA0;int&#xA0;-&gt;&#xA0;t
-&#xA0;&#xA0;&#xA0;&#xA0;val&#xA0;clear&#xA0;:&#xA0;t&#xA0;-&gt;&#xA0;unit
-&#xA0;&#xA0;&#xA0;&#xA0;val&#xA0;merge&#xA0;:&#xA0;t&#xA0;-&gt;&#xA0;data&#xA0;-&gt;&#xA0;data
-&#xA0;&#xA0;&#xA0;&#xA0;val&#xA0;add&#xA0;:&#xA0;t&#xA0;-&gt;&#xA0;data&#xA0;-&gt;&#xA0;unit
-&#xA0;&#xA0;&#xA0;&#xA0;val&#xA0;remove&#xA0;:&#xA0;t&#xA0;-&gt;&#xA0;data&#xA0;-&gt;&#xA0;unit
-&#xA0;&#xA0;&#xA0;&#xA0;val&#xA0;find&#xA0;:&#xA0;t&#xA0;-&gt;&#xA0;data&#xA0;-&gt;&#xA0;data
-&#xA0;&#xA0;&#xA0;&#xA0;val&#xA0;find_all&#xA0;:&#xA0;t&#xA0;-&gt;&#xA0;data&#xA0;-&gt;&#xA0;data&#xA0;list
-&#xA0;&#xA0;&#xA0;&#xA0;val&#xA0;mem&#xA0;:&#xA0;t&#xA0;-&gt;&#xA0;data&#xA0;-&gt;&#xA0;bool
-&#xA0;&#xA0;&#xA0;&#xA0;val&#xA0;iter&#xA0;:&#xA0;(data&#xA0;-&gt;&#xA0;unit)&#xA0;-&gt;&#xA0;t&#xA0;-&gt;&#xA0;unit
-&#xA0;&#xA0;&#xA0;&#xA0;val&#xA0;fold&#xA0;:&#xA0;(data&#xA0;-&gt;&#xA0;&apos;a&#xA0;-&gt;&#xA0;&apos;a)&#xA0;-&gt;&#xA0;t&#xA0;-&gt;&#xA0;&apos;a&#xA0;-&gt;&#xA0;&apos;a
-&#xA0;&#xA0;&#xA0;&#xA0;val&#xA0;count&#xA0;:&#xA0;t&#xA0;-&gt;&#xA0;int
-&#xA0;&#xA0;&#xA0;&#xA0;val&#xA0;stats&#xA0;:&#xA0;t&#xA0;-&gt;&#xA0;int&#xA0;*&#xA0;int&#xA0;*&#xA0;int&#xA0;*&#xA0;int&#xA0;*&#xA0;int&#xA0;*&#xA0;int
-&#xA0;&#xA0;end</pre></div></div><span><script src="/js/redirectBlog.js"></script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
+&nbsp;&nbsp;sig
+&nbsp;&nbsp;&nbsp;&nbsp;type&nbsp;data&nbsp;=&nbsp;H.t
+&nbsp;&nbsp;&nbsp;&nbsp;type&nbsp;t
+&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;create&nbsp;:&nbsp;int&nbsp;-&gt;&nbsp;t
+&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;clear&nbsp;:&nbsp;t&nbsp;-&gt;&nbsp;unit
+&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;merge&nbsp;:&nbsp;t&nbsp;-&gt;&nbsp;data&nbsp;-&gt;&nbsp;data
+&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;add&nbsp;:&nbsp;t&nbsp;-&gt;&nbsp;data&nbsp;-&gt;&nbsp;unit
+&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;remove&nbsp;:&nbsp;t&nbsp;-&gt;&nbsp;data&nbsp;-&gt;&nbsp;unit
+&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;find&nbsp;:&nbsp;t&nbsp;-&gt;&nbsp;data&nbsp;-&gt;&nbsp;data
+&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;find_opt&nbsp;:&nbsp;t&nbsp;-&gt;&nbsp;data&nbsp;-&gt;&nbsp;data&nbsp;option
+&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;find_all&nbsp;:&nbsp;t&nbsp;-&gt;&nbsp;data&nbsp;-&gt;&nbsp;data&nbsp;list
+&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;mem&nbsp;:&nbsp;t&nbsp;-&gt;&nbsp;data&nbsp;-&gt;&nbsp;bool
+&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;iter&nbsp;:&nbsp;(data&nbsp;-&gt;&nbsp;unit)&nbsp;-&gt;&nbsp;t&nbsp;-&gt;&nbsp;unit
+&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;fold&nbsp;:&nbsp;(data&nbsp;-&gt;&nbsp;'a&nbsp;-&gt;&nbsp;'a)&nbsp;-&gt;&nbsp;t&nbsp;-&gt;&nbsp;'a&nbsp;-&gt;&nbsp;'a
+&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;count&nbsp;:&nbsp;t&nbsp;-&gt;&nbsp;int
+&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;stats&nbsp;:&nbsp;t&nbsp;-&gt;&nbsp;int&nbsp;*&nbsp;int&nbsp;*&nbsp;int&nbsp;*&nbsp;int&nbsp;*&nbsp;int&nbsp;*&nbsp;int
+&nbsp;&nbsp;end</pre></div></div><span><script src="/js/redirectBlog.js"></script></span></div><script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/1/docsearch.min.js"></script><script>
                 document.addEventListener('keyup', function(e) {
                   if (e.target !== document.body) {
                     return;
