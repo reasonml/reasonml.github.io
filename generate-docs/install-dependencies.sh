@@ -8,7 +8,7 @@ if [[ ! -d "ocaml/" ]]; then
 fi
 cd ocaml/
 
-git checkout 5.1
+git checkout 5.0
 ./configure
 make clean
 make world
