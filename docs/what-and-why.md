@@ -12,15 +12,6 @@ Notably versatile, Reason serves as an excellent choice for a range of applicati
 
 ## Why Use Reason?
 
-<iframe
-  width="784"
-  height="432"
-  src="https://www.youtube.com/embed/5fG_lyNuEAw?si=HPFaMIMIX0Krn2wK"
-  title="Jordan Walke - Keynote ReasonConf US 2019"
-  frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-  allowfullscreen>
-</iframe>
-
 **Functional Programming**
 
 Reason is a practical functional programming language. Offers a powerful blend of functional programming capabilities, with optional support for mutation and side-effects, enhancing its practicality.
@@ -44,6 +35,15 @@ JSX is part of the language. JSX is an embeddable XML-like syntax, used to descr
 **Portability/Universal code**
 
 Reason can be compiled to native, bytecode, and JavaScript, with an ongoing plan for WebAssembly.
+
+<iframe
+  width="784"
+  height="432"
+  src="https://www.youtube.com/embed/5fG_lyNuEAw?si=HPFaMIMIX0Krn2wK"
+  title="Jordan Walke - Keynote ReasonConf US 2019"
+  frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+  allowfullscreen>
+</iframe>
 
 ## Different Environments
 
