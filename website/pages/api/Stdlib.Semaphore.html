@@ -1,0 +1,39 @@
+<link rel="stylesheet" href="/css/main.css"><div class="ocamldoc">
+<h1>Module <a href="type_Stdlib.Semaphore.html">Stdlib.Semaphore</a></h1>
+
+<pre id="MODULESemaphore"><span class="keyword">module</span> Semaphore: Semaphore</pre><hr width="100%">
+<h3 id="2_Countingsemaphores">Counting semaphores</h3><p>A counting semaphore is a counter that can be accessed concurrently
+  by several threads.  The typical use is to synchronize producers and
+  consumers of a resource by counting how many units of the resource
+  are available.</p>
+
+<p>The two basic operations on semaphores are:</p>
+<ul>
+<li>"release" (also called "V", "post", "up", and "signal"), which
+  increments the value of the counter.  This corresponds to producing
+  one more unit of the shared resource and making it available to others.</li>
+<li>"acquire" (also called "P", "wait", "down", and "pend"), which
+  waits until the counter is greater than zero and decrements it.
+  This corresponds to consuming one unit of the shared resource.</li>
+</ul>
+
+<pre id="MODULECounting"><span class="keyword">module</span> Counting: sig .. end</pre><h3 id="2_Binarysemaphores">Binary semaphores</h3><p>Binary semaphores are a variant of counting semaphores
+    where semaphores can only take two values, 0 and 1.</p>
+
+<p>A binary semaphore can be used to control access to a single
+    shared resource, with value 1 meaning "resource is available" and
+    value 0 meaning "resource is unavailable".</p>
+
+<p>The "release" operation of a binary semaphore sets its value to 1,
+    and "acquire" waits until the value is 1 and sets it to 0.</p>
+
+<p>A binary semaphore can be used instead of a mutex (see module
+    <a href="Mutex.html"><code class="code">Mutex</code></a>) when the mutex discipline (of unlocking the mutex from the
+    thread that locked it) is too restrictive.  The "acquire" operation
+    corresponds to locking the mutex, and the "release" operation to
+    unlocking it, but "release" can be performed in a thread different
+    than the one that performed the "acquire".  Likewise, it is safe
+    to release a binary semaphore that is already available.</p>
+
+<pre id="MODULEBinary"><span class="keyword">module</span> Binary: sig .. end</pre>
+</div>

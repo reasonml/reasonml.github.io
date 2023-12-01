@@ -1,0 +1,25 @@
+<link rel="stylesheet" href="/css/main.css"><div class="ocamldoc"><pre>sig
+
+&nbsp;&nbsp;type&nbsp;key
+&nbsp;&nbsp;type&nbsp;!'a&nbsp;t
+&nbsp;&nbsp;val&nbsp;create&nbsp;:&nbsp;int&nbsp;-&gt;&nbsp;'a&nbsp;Ephemeron.S.t
+&nbsp;&nbsp;val&nbsp;clear&nbsp;:&nbsp;'a&nbsp;Ephemeron.S.t&nbsp;-&gt;&nbsp;unit
+&nbsp;&nbsp;val&nbsp;reset&nbsp;:&nbsp;'a&nbsp;Ephemeron.S.t&nbsp;-&gt;&nbsp;unit
+&nbsp;&nbsp;val&nbsp;copy&nbsp;:&nbsp;'a&nbsp;Ephemeron.S.t&nbsp;-&gt;&nbsp;'a&nbsp;Ephemeron.S.t
+&nbsp;&nbsp;val&nbsp;add&nbsp;:&nbsp;'a&nbsp;Ephemeron.S.t&nbsp;-&gt;&nbsp;Ephemeron.S.key&nbsp;-&gt;&nbsp;'a&nbsp;-&gt;&nbsp;unit
+&nbsp;&nbsp;val&nbsp;remove&nbsp;:&nbsp;'a&nbsp;Ephemeron.S.t&nbsp;-&gt;&nbsp;Ephemeron.S.key&nbsp;-&gt;&nbsp;unit
+&nbsp;&nbsp;val&nbsp;find&nbsp;:&nbsp;'a&nbsp;Ephemeron.S.t&nbsp;-&gt;&nbsp;Ephemeron.S.key&nbsp;-&gt;&nbsp;'a
+&nbsp;&nbsp;val&nbsp;find_opt&nbsp;:&nbsp;'a&nbsp;Ephemeron.S.t&nbsp;-&gt;&nbsp;Ephemeron.S.key&nbsp;-&gt;&nbsp;'a&nbsp;option
+&nbsp;&nbsp;val&nbsp;find_all&nbsp;:&nbsp;'a&nbsp;Ephemeron.S.t&nbsp;-&gt;&nbsp;Ephemeron.S.key&nbsp;-&gt;&nbsp;'a&nbsp;list
+&nbsp;&nbsp;val&nbsp;replace&nbsp;:&nbsp;'a&nbsp;Ephemeron.S.t&nbsp;-&gt;&nbsp;Ephemeron.S.key&nbsp;-&gt;&nbsp;'a&nbsp;-&gt;&nbsp;unit
+&nbsp;&nbsp;val&nbsp;mem&nbsp;:&nbsp;'a&nbsp;Ephemeron.S.t&nbsp;-&gt;&nbsp;Ephemeron.S.key&nbsp;-&gt;&nbsp;bool
+&nbsp;&nbsp;val&nbsp;length&nbsp;:&nbsp;'a&nbsp;Ephemeron.S.t&nbsp;-&gt;&nbsp;int
+&nbsp;&nbsp;val&nbsp;stats&nbsp;:&nbsp;'a&nbsp;Ephemeron.S.t&nbsp;-&gt;&nbsp;Stdlib.Hashtbl.statistics
+&nbsp;&nbsp;val&nbsp;add_seq&nbsp;:
+&nbsp;&nbsp;&nbsp;&nbsp;'a&nbsp;Ephemeron.S.t&nbsp;-&gt;&nbsp;(Ephemeron.S.key&nbsp;*&nbsp;'a)&nbsp;Stdlib.Seq.t&nbsp;-&gt;&nbsp;unit
+&nbsp;&nbsp;val&nbsp;replace_seq&nbsp;:
+&nbsp;&nbsp;&nbsp;&nbsp;'a&nbsp;Ephemeron.S.t&nbsp;-&gt;&nbsp;(Ephemeron.S.key&nbsp;*&nbsp;'a)&nbsp;Stdlib.Seq.t&nbsp;-&gt;&nbsp;unit
+&nbsp;&nbsp;val&nbsp;of_seq&nbsp;:&nbsp;(Ephemeron.S.key&nbsp;*&nbsp;'a)&nbsp;Stdlib.Seq.t&nbsp;-&gt;&nbsp;'a&nbsp;Ephemeron.S.t
+&nbsp;&nbsp;val&nbsp;clean&nbsp;:&nbsp;'a&nbsp;Ephemeron.S.t&nbsp;-&gt;&nbsp;unit
+&nbsp;&nbsp;val&nbsp;stats_alive&nbsp;:&nbsp;'a&nbsp;Ephemeron.S.t&nbsp;-&gt;&nbsp;Stdlib.Hashtbl.statistics
+end</pre></div>

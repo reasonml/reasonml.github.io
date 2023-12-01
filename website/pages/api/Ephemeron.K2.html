@@ -1,0 +1,42 @@
+<link rel="stylesheet" href="/css/main.css"><div class="ocamldoc">
+<h1>Module <a href="type_Ephemeron.K2.html">Ephemeron.K2</a></h1>
+
+<pre id="MODULEK2"><span class="keyword">module</span> K2: sig .. end</pre><div class="info module top">
+<div class="info-desc">
+<p>Ephemerons with two keys.</p>
+</div>
+</div>
+<hr width="100%">
+
+<pre id="TYPEt"><span class="keyword">type</span> ('k1, 'k2, 'd) t </pre>
+<div class="info ">
+<div class="info-desc">
+<p>an ephemeron with two keys</p>
+</div>
+</div>
+
+
+<pre id="VALmake">val make : 'k1 -&gt; 'k2 -&gt; 'd -&gt; ('k1, 'k2, 'd) t</pre><div class="info ">
+<div class="info-desc">
+<p>Same as <a href="Ephemeron.K1.html#VALmake"><code class="code">Ephemeron.K1.make</code></a></p>
+</div>
+</div>
+
+<pre id="VALquery">val query : ('k1, 'k2, 'd) t -&gt; 'k1 -&gt; 'k2 -&gt; 'd option</pre><div class="info ">
+<div class="info-desc">
+<p>Same as <a href="Ephemeron.K1.html#VALquery"><code class="code">Ephemeron.K1.query</code></a></p>
+</div>
+</div>
+
+<pre id="MODULEMake"><span class="keyword">module</span> Make: functor&nbsp;(H1&nbsp;:&nbsp;Hashtbl.HashedType)&nbsp;-&gt;&nbsp;functor&nbsp;(H2&nbsp;:&nbsp;Hashtbl.HashedType)&nbsp;-&gt;&nbsp;Ephemeron.S  with type key = H1.t * H2.t</pre><div class="info">
+<p>Functor building an implementation of a weak hash table</p>
+
+</div>
+
+<pre id="MODULEMakeSeeded"><span class="keyword">module</span> MakeSeeded: functor&nbsp;(H1&nbsp;:&nbsp;Hashtbl.SeededHashedType)&nbsp;-&gt;&nbsp;functor&nbsp;(H2&nbsp;:&nbsp;Hashtbl.SeededHashedType)&nbsp;-&gt;&nbsp;Ephemeron.SeededS  with type key = H1.t * H2.t</pre><div class="info">
+<p>Functor building an implementation of a weak hash table.</p>
+
+</div>
+
+<pre id="MODULEBucket"><span class="keyword">module</span> Bucket: sig .. end</pre>
+</div>

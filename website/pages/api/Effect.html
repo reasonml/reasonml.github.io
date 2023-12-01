@@ -1,0 +1,49 @@
+<link rel="stylesheet" href="/css/main.css"><div class="ocamldoc">
+<h1>Module <a href="type_Effect.html">Effect</a></h1>
+
+<pre id="MODULEEffect"><span class="keyword">module</span> Effect: sig .. end</pre><div class="info module top">
+<ul class="info-attributes">
+<li><b>Alert unstable.</b> The Effect interface may change in incompatible ways in the future.</li>
+</ul>
+</div>
+<hr width="100%">
+<p>Effects.</p>
+
+<p>See 'Language extensions/Effect handlers' section in the manual.</p>
+
+<pre id="TYPEt"><span class="keyword">type</span> '_ t = ..</pre>
+<div class="info ">
+<div class="info-desc">
+<p>The type of effects.</p>
+</div>
+</div>
+
+
+<pre id="EXCEPTIONUnhandled"><span class="keyword">exception</span> Unhandled : 'a t -&gt; exn</pre>
+<div class="info ">
+<div class="info-desc">
+<p><code class="code">Unhandled&nbsp;e</code> is raised when effect <code class="code">e</code> is performed and there is no
+    handler for it.</p>
+</div>
+</div>
+
+<pre id="EXCEPTIONContinuation_already_resumed"><span class="keyword">exception</span> Continuation_already_resumed</pre>
+<div class="info ">
+<div class="info-desc">
+<p>Exception raised when a continuation is continued or discontinued more
+    than once.</p>
+</div>
+</div>
+
+<pre id="VALperform">val perform : 'a t -&gt; 'a</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">perform&nbsp;e</code> performs an effect <code class="code">e</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Raises</b> <code>Unhandled</code> if there is no handler for <code class="code">e</code>.</li>
+</ul>
+</div>
+
+<pre id="MODULEDeep"><span class="keyword">module</span> Deep: sig .. end</pre>
+<pre id="MODULEShallow"><span class="keyword">module</span> Shallow: sig .. end</pre>
+</div>

@@ -1,0 +1,24 @@
+<link rel="stylesheet" href="/css/main.css"><div class="ocamldoc"><pre>functor&nbsp;(H&nbsp;:&nbsp;Hashtbl.SeededHashedType)&nbsp;-&gt;
+
+&nbsp;&nbsp;sig
+&nbsp;&nbsp;&nbsp;&nbsp;type&nbsp;key&nbsp;=&nbsp;H.t&nbsp;array
+&nbsp;&nbsp;&nbsp;&nbsp;type&nbsp;!'a&nbsp;t
+&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;create&nbsp;:&nbsp;?random:bool&nbsp;-&gt;&nbsp;int&nbsp;-&gt;&nbsp;'a&nbsp;t
+&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;clear&nbsp;:&nbsp;'a&nbsp;t&nbsp;-&gt;&nbsp;unit
+&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;reset&nbsp;:&nbsp;'a&nbsp;t&nbsp;-&gt;&nbsp;unit
+&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;copy&nbsp;:&nbsp;'a&nbsp;t&nbsp;-&gt;&nbsp;'a&nbsp;t
+&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;add&nbsp;:&nbsp;'a&nbsp;t&nbsp;-&gt;&nbsp;key&nbsp;-&gt;&nbsp;'a&nbsp;-&gt;&nbsp;unit
+&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;remove&nbsp;:&nbsp;'a&nbsp;t&nbsp;-&gt;&nbsp;key&nbsp;-&gt;&nbsp;unit
+&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;find&nbsp;:&nbsp;'a&nbsp;t&nbsp;-&gt;&nbsp;key&nbsp;-&gt;&nbsp;'a
+&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;find_opt&nbsp;:&nbsp;'a&nbsp;t&nbsp;-&gt;&nbsp;key&nbsp;-&gt;&nbsp;'a&nbsp;option
+&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;find_all&nbsp;:&nbsp;'a&nbsp;t&nbsp;-&gt;&nbsp;key&nbsp;-&gt;&nbsp;'a&nbsp;list
+&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;replace&nbsp;:&nbsp;'a&nbsp;t&nbsp;-&gt;&nbsp;key&nbsp;-&gt;&nbsp;'a&nbsp;-&gt;&nbsp;unit
+&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;mem&nbsp;:&nbsp;'a&nbsp;t&nbsp;-&gt;&nbsp;key&nbsp;-&gt;&nbsp;bool
+&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;length&nbsp;:&nbsp;'a&nbsp;t&nbsp;-&gt;&nbsp;int
+&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;stats&nbsp;:&nbsp;'a&nbsp;t&nbsp;-&gt;&nbsp;Hashtbl.statistics
+&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;add_seq&nbsp;:&nbsp;'a&nbsp;t&nbsp;-&gt;&nbsp;(key&nbsp;*&nbsp;'a)&nbsp;Seq.t&nbsp;-&gt;&nbsp;unit
+&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;replace_seq&nbsp;:&nbsp;'a&nbsp;t&nbsp;-&gt;&nbsp;(key&nbsp;*&nbsp;'a)&nbsp;Seq.t&nbsp;-&gt;&nbsp;unit
+&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;of_seq&nbsp;:&nbsp;(key&nbsp;*&nbsp;'a)&nbsp;Seq.t&nbsp;-&gt;&nbsp;'a&nbsp;t
+&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;clean&nbsp;:&nbsp;'a&nbsp;t&nbsp;-&gt;&nbsp;unit
+&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;stats_alive&nbsp;:&nbsp;'a&nbsp;t&nbsp;-&gt;&nbsp;Hashtbl.statistics
+&nbsp;&nbsp;end</pre></div>

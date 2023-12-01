@@ -1,0 +1,78 @@
+<link rel="stylesheet" href="/css/main.css"><div class="ocamldoc">
+<h1>Module <a href="type_Stdlib.Obj.html">Stdlib.Obj</a></h1>
+
+<pre id="MODULEObj"><span class="keyword">module</span> Obj: Obj</pre><hr width="100%">
+
+<pre id="TYPEt"><span class="keyword">type</span> t </pre>
+
+
+<pre id="TYPEraw_data"><span class="keyword">type</span> raw_data = nativeint </pre>
+
+
+<pre id="VALrepr">val repr : 'a -&gt; t</pre>
+<pre id="VALobj">val obj : t -&gt; 'a</pre>
+<pre id="VALmagic">val magic : 'a -&gt; 'b</pre>
+<pre id="VALis_block">val is_block : t -&gt; bool</pre>
+<pre id="VALis_int">val is_int : t -&gt; bool</pre>
+<pre id="VALtag">val tag : t -&gt; int</pre>
+<pre id="VALsize">val size : t -&gt; int</pre>
+<pre id="VALreachable_words">val reachable_words : t -&gt; int</pre><div class="info ">
+<div class="info-desc">
+<p>Computes the total size (in words, including the headers) of all
+     heap blocks accessible from the argument.  Statically
+     allocated blocks are included.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.04</li>
+</ul>
+</div>
+
+<pre id="VALfield">val field : t -&gt; int -&gt; t</pre>
+<pre id="VALset_field">val set_field : t -&gt; int -&gt; t -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p>When using flambda:</p>
+
+<p><code class="code">set_field</code> MUST NOT be called on immutable blocks.  (Blocks allocated
+    in C stubs, or with <code class="code">new_block</code> below, are always considered mutable.)</p>
+
+<p>The same goes for <code class="code">set_double_field</code>.</p>
+
+<p>For experts only:
+    <code class="code">set_field</code> et al can be made safe by first wrapping the block in
+    <a href="Sys.html#VALopaque_identity"><code class="code">Sys.opaque_identity</code></a>, so any information about its contents will not
+    be propagated.</p>
+</div>
+</div>
+
+<pre id="VALcompare_and_swap_field">val compare_and_swap_field : t -&gt; int -&gt; t -&gt; t -&gt; bool</pre>
+<pre id="VALis_shared">val is_shared : t -&gt; bool</pre>
+<pre id="VALdouble_field">val double_field : t -&gt; int -&gt; float</pre>
+<pre id="VALset_double_field">val set_double_field : t -&gt; int -&gt; float -&gt; unit</pre>
+<pre id="VALraw_field">val raw_field : t -&gt; int -&gt; raw_data</pre>
+<pre id="VALset_raw_field">val set_raw_field : t -&gt; int -&gt; raw_data -&gt; unit</pre>
+<pre id="VALnew_block">val new_block : int -&gt; int -&gt; t</pre>
+<pre id="VALdup">val dup : t -&gt; t</pre>
+<pre id="VALadd_offset">val add_offset : t -&gt; Int32.t -&gt; t</pre>
+<pre id="VALwith_tag">val with_tag : int -&gt; t -&gt; t</pre>
+<pre id="VALfirst_non_constant_constructor_tag">val first_non_constant_constructor_tag : int</pre>
+<pre id="VALlast_non_constant_constructor_tag">val last_non_constant_constructor_tag : int</pre>
+<pre id="VALforcing_tag">val forcing_tag : int</pre>
+<pre id="VALcont_tag">val cont_tag : int</pre>
+<pre id="VALlazy_tag">val lazy_tag : int</pre>
+<pre id="VALclosure_tag">val closure_tag : int</pre>
+<pre id="VALobject_tag">val object_tag : int</pre>
+<pre id="VALinfix_tag">val infix_tag : int</pre>
+<pre id="VALforward_tag">val forward_tag : int</pre>
+<pre id="VALno_scan_tag">val no_scan_tag : int</pre>
+<pre id="VALabstract_tag">val abstract_tag : int</pre>
+<pre id="VALstring_tag">val string_tag : int</pre>
+<pre id="VALdouble_tag">val double_tag : int</pre>
+<pre id="VALdouble_array_tag">val double_array_tag : int</pre>
+<pre id="VALcustom_tag">val custom_tag : int</pre>
+<pre id="VALint_tag">val int_tag : int</pre>
+<pre id="VALout_of_heap_tag">val out_of_heap_tag : int</pre>
+<pre id="VALunaligned_tag">val unaligned_tag : int</pre>
+<pre id="MODULEClosure"><span class="keyword">module</span> Closure: sig .. end</pre>
+<pre id="MODULEExtension_constructor"><span class="keyword">module</span> Extension_constructor: sig .. end</pre>
+<pre id="MODULEEphemeron"><span class="keyword">module</span> Ephemeron: sig .. end</pre>
+</div>

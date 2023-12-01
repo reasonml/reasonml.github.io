@@ -1,0 +1,215 @@
+<link rel="stylesheet" href="/css/main.css"><div class="ocamldoc">
+<h1>Module <a href="type_Gc.Memprof.html">Gc.Memprof</a></h1>
+
+<pre id="MODULEMemprof"><span class="keyword">module</span> Memprof: sig .. end</pre><div class="info module top">
+<div class="info-desc">
+<p><code class="code">Memprof</code> is a sampling engine for allocated memory words. Every
+   allocated word has a probability of being sampled equal to a
+   configurable sampling rate. Once a block is sampled, it becomes
+   tracked. A tracked block triggers a user-defined callback as soon
+   as it is allocated, promoted or deallocated.</p>
+
+<p>Since blocks are composed of several words, a block can potentially
+   be sampled several times. If a block is sampled several times, then
+   each of the callback is called once for each event of this block:
+   the multiplicity is given in the <code class="code">n_samples</code> field of the
+   <code class="code">allocation</code> structure.</p>
+
+<p>This engine makes it possible to implement a low-overhead memory
+   profiler as an OCaml library.</p>
+
+<p>Note: this API is EXPERIMENTAL. It may change without prior
+   notice.</p>
+</div>
+</div>
+<hr width="100%">
+
+<pre><span class="keyword">type</span> allocation_source = </pre><table class="typetable">
+<tbody><tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Normal</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Marshal</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Custom</code></td>
+
+</tr></tbody></table>
+
+
+
+<pre><span class="keyword">type</span> allocation = private {</pre><table class="typetable">
+<tbody><tr>
+<td align="left" valign="top">
+<code>&nbsp;&nbsp;</code></td>
+<td align="left" valign="top">
+<code>n_samples&nbsp;: int;</code></td>
+<td class="typefieldcomment" align="left" valign="top"><code>(*</code></td><td class="typefieldcomment" align="left" valign="top"><div class="info ">
+<div class="info-desc">
+<p>The number of samples in this block (&gt;= 1).</p>
+</div>
+</div>
+</td><td class="typefieldcomment" align="left" valign="bottom"><code>*)</code></td>
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>&nbsp;&nbsp;</code></td>
+<td align="left" valign="top">
+<code>size&nbsp;: int;</code></td>
+<td class="typefieldcomment" align="left" valign="top"><code>(*</code></td><td class="typefieldcomment" align="left" valign="top"><div class="info ">
+<div class="info-desc">
+<p>The size of the block, in words, excluding the header.</p>
+</div>
+</div>
+</td><td class="typefieldcomment" align="left" valign="bottom"><code>*)</code></td>
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>&nbsp;&nbsp;</code></td>
+<td align="left" valign="top">
+<code>source&nbsp;: allocation_source;</code></td>
+<td class="typefieldcomment" align="left" valign="top"><code>(*</code></td><td class="typefieldcomment" align="left" valign="top"><div class="info ">
+<div class="info-desc">
+<p>The type of the allocation.</p>
+</div>
+</div>
+</td><td class="typefieldcomment" align="left" valign="bottom"><code>*)</code></td>
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>&nbsp;&nbsp;</code></td>
+<td align="left" valign="top">
+<code>callstack&nbsp;: Printexc.raw_backtrace;</code></td>
+<td class="typefieldcomment" align="left" valign="top"><code>(*</code></td><td class="typefieldcomment" align="left" valign="top"><div class="info ">
+<div class="info-desc">
+<p>The callstack for the allocation.</p>
+</div>
+</div>
+</td><td class="typefieldcomment" align="left" valign="bottom"><code>*)</code></td>
+</tr></tbody></table>
+<code>}</code>
+
+<div class="info ">
+<div class="info-desc">
+<p>The type of metadata associated with allocations. This is the
+       type of records passed to the callback triggered by the
+       sampling of an allocation.</p>
+</div>
+</div>
+
+
+<pre><span class="keyword">type</span> ('minor, 'major) tracker = {</pre><table class="typetable">
+<tbody><tr>
+<td align="left" valign="top">
+<code>&nbsp;&nbsp;</code></td>
+<td align="left" valign="top">
+<code>alloc_minor&nbsp;: allocation -&gt; 'minor option;</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>&nbsp;&nbsp;</code></td>
+<td align="left" valign="top">
+<code>alloc_major&nbsp;: allocation -&gt; 'major option;</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>&nbsp;&nbsp;</code></td>
+<td align="left" valign="top">
+<code>promote&nbsp;: 'minor -&gt; 'major option;</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>&nbsp;&nbsp;</code></td>
+<td align="left" valign="top">
+<code>dealloc_minor&nbsp;: 'minor -&gt; unit;</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>&nbsp;&nbsp;</code></td>
+<td align="left" valign="top">
+<code>dealloc_major&nbsp;: 'major -&gt; unit;</code></td>
+
+</tr></tbody></table>
+<code>}</code>
+
+<div class="info ">
+<div class="info-desc">
+<p>A <code class="code">('minor,&nbsp;'major)&nbsp;tracker</code> describes how memprof should track
+       sampled blocks over their lifetime, keeping a user-defined piece
+       of metadata for each of them: <code class="code">'minor</code> is the type of metadata
+       to keep for minor blocks, and <code class="code">'major</code> the type of metadata
+       for major blocks.</p>
+
+<p>When using threads, it is guaranteed that allocation callbacks are
+       always run in the thread where the allocation takes place.</p>
+
+<p>If an allocation-tracking or promotion-tracking function returns <code class="code">None</code>,
+       memprof stops tracking the corresponding value.</p>
+</div>
+</div>
+
+
+<pre id="VALnull_tracker">val null_tracker : ('minor, 'major) tracker</pre><div class="info ">
+<div class="info-desc">
+<p>Default callbacks simply return <code class="code">None</code> or <code class="code">()</code></p>
+</div>
+</div>
+
+<pre id="VALstart">val start : sampling_rate:float -&gt;       ?callstack_size:int -&gt; ('minor, 'major) tracker -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p>Start the sampling with the given parameters. Fails if
+       sampling is already active.</p>
+
+<p>The parameter <code class="code">sampling_rate</code> is the sampling rate in samples
+       per word (including headers). Usually, with cheap callbacks, a
+       rate of 1e-4 has no visible effect on performance, and 1e-3
+       causes the program to run a few percent slower</p>
+
+<p>The parameter <code class="code">callstack_size</code> is the length of the callstack
+       recorded at every sample. Its default is <code class="code">max_int</code>.</p>
+
+<p>The parameter <code class="code">tracker</code> determines how to track sampled blocks
+       over their lifetime in the minor and major heap.</p>
+
+<p>Sampling is temporarily disabled when calling a callback
+       for the current thread. So they do not need to be re-entrant if
+       the program is single-threaded. However, if threads are used,
+       it is possible that a context switch occurs during a callback,
+       in this case the callback functions must be re-entrant.</p>
+
+<p>Note that the callback can be postponed slightly after the
+       actual event. The callstack passed to the callback is always
+       accurate, but the program state may have evolved.</p>
+</div>
+</div>
+
+<pre id="VALstop">val stop : unit -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p>Stop the sampling. Fails if sampling is not active.</p>
+
+<p>This function does not allocate memory.</p>
+
+<p>All the already tracked blocks are discarded. If there are
+        pending postponed callbacks, they may be discarded.</p>
+
+<p>Calling <code class="code">stop</code> when a callback is running can lead to
+        callbacks not being called even though some events happened.</p>
+</div>
+</div>
+
+</div>

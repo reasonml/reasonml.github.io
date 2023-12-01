@@ -1,0 +1,409 @@
+<link rel="stylesheet" href="/css/main.css"><div class="ocamldoc">
+<h1>Module <a href="type_Float.Array.html">Float.Array</a></h1>
+
+<pre id="MODULEArray"><span class="keyword">module</span> Array: sig .. end</pre><div class="info module top">
+<div class="info-desc">
+<p>Float arrays with packed representation.</p>
+</div>
+</div>
+<hr width="100%">
+
+<pre id="TYPEt"><span class="keyword">type</span> t = floatarray </pre>
+<div class="info ">
+<div class="info-desc">
+<p>The type of float arrays with packed representation.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.08.0</li>
+</ul>
+</div>
+
+
+<pre id="VALlength">val length : t -&gt; int</pre><div class="info ">
+<div class="info-desc">
+<p>Return the length (number of elements) of the given floatarray.</p>
+</div>
+</div>
+
+<pre id="VALget">val get : t -&gt; int -&gt; float</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">get&nbsp;a&nbsp;n</code> returns the element number <code class="code">n</code> of floatarray <code class="code">a</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Raises</b> <code>Invalid_argument</code> if <code class="code">n</code> is outside the range 0 to
+      <code class="code">(length&nbsp;a&nbsp;-&nbsp;1)</code>.</li>
+</ul>
+</div>
+
+<pre id="VALset">val set : t -&gt; int -&gt; float -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">set&nbsp;a&nbsp;n&nbsp;x</code> modifies floatarray <code class="code">a</code> in place, replacing element
+      number <code class="code">n</code> with <code class="code">x</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Raises</b> <code>Invalid_argument</code> if <code class="code">n</code> is outside the range 0 to
+      <code class="code">(length&nbsp;a&nbsp;-&nbsp;1)</code>.</li>
+</ul>
+</div>
+
+<pre id="VALmake">val make : int -&gt; float -&gt; t</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">make&nbsp;n&nbsp;x</code> returns a fresh floatarray of length <code class="code">n</code>, initialized with <code class="code">x</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Raises</b> <code>Invalid_argument</code> if <code class="code">n&nbsp;&lt;&nbsp;0</code> or <code class="code">n&nbsp;&gt;&nbsp;Sys.max_floatarray_length</code>.</li>
+</ul>
+</div>
+
+<pre id="VALcreate">val create : int -&gt; t</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">create&nbsp;n</code> returns a fresh floatarray of length <code class="code">n</code>,
+      with uninitialized data.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Raises</b> <code>Invalid_argument</code> if <code class="code">n&nbsp;&lt;&nbsp;0</code> or <code class="code">n&nbsp;&gt;&nbsp;Sys.max_floatarray_length</code>.</li>
+</ul>
+</div>
+
+<pre id="VALinit">val init : int -&gt; (int -&gt; float) -&gt; t</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">init&nbsp;n&nbsp;f</code> returns a fresh floatarray of length <code class="code">n</code>,
+      with element number <code class="code">i</code> initialized to the result of <code class="code">f&nbsp;i</code>.
+      In other terms, <code class="code">init&nbsp;n&nbsp;f</code> tabulates the results of <code class="code">f</code>
+      applied to the integers <code class="code">0</code> to <code class="code">n-1</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Raises</b> <code>Invalid_argument</code> if <code class="code">n&nbsp;&lt;&nbsp;0</code> or <code class="code">n&nbsp;&gt;&nbsp;Sys.max_floatarray_length</code>.</li>
+</ul>
+</div>
+
+<pre id="VALappend">val append : t -&gt; t -&gt; t</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">append&nbsp;v1&nbsp;v2</code> returns a fresh floatarray containing the
+      concatenation of the floatarrays <code class="code">v1</code> and <code class="code">v2</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Raises</b> <code>Invalid_argument</code> if
+      <code class="code">length&nbsp;v1&nbsp;+&nbsp;length&nbsp;v2&nbsp;&gt;&nbsp;Sys.max_floatarray_length</code>.</li>
+</ul>
+</div>
+
+<pre id="VALconcat">val concat : t list -&gt; t</pre><div class="info ">
+<div class="info-desc">
+<p>Same as <a href="Float.Array.html#VALappend"><code class="code">Float.Array.append</code></a>, but concatenates a list of floatarrays.</p>
+</div>
+</div>
+
+<pre id="VALsub">val sub : t -&gt; int -&gt; int -&gt; t</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">sub&nbsp;a&nbsp;pos&nbsp;len</code> returns a fresh floatarray of length <code class="code">len</code>,
+      containing the elements number <code class="code">pos</code> to <code class="code">pos&nbsp;+&nbsp;len&nbsp;-&nbsp;1</code>
+      of floatarray <code class="code">a</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Raises</b> <code>Invalid_argument</code> if <code class="code">pos</code> and <code class="code">len</code> do not
+      designate a valid subarray of <code class="code">a</code>; that is, if
+      <code class="code">pos&nbsp;&lt;&nbsp;0</code>, or <code class="code">len&nbsp;&lt;&nbsp;0</code>, or <code class="code">pos&nbsp;+&nbsp;len&nbsp;&gt;&nbsp;length&nbsp;a</code>.</li>
+</ul>
+</div>
+
+<pre id="VALcopy">val copy : t -&gt; t</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">copy&nbsp;a</code> returns a copy of <code class="code">a</code>, that is, a fresh floatarray
+      containing the same elements as <code class="code">a</code>.</p>
+</div>
+</div>
+
+<pre id="VALfill">val fill : t -&gt; int -&gt; int -&gt; float -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">fill&nbsp;a&nbsp;pos&nbsp;len&nbsp;x</code> modifies the floatarray <code class="code">a</code> in place,
+      storing <code class="code">x</code> in elements number <code class="code">pos</code> to <code class="code">pos&nbsp;+&nbsp;len&nbsp;-&nbsp;1</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Raises</b> <code>Invalid_argument</code> if <code class="code">pos</code> and <code class="code">len</code> do not
+      designate a valid subarray of <code class="code">a</code>.</li>
+</ul>
+</div>
+
+<pre id="VALblit">val blit : t -&gt; int -&gt; t -&gt; int -&gt; int -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">blit&nbsp;src&nbsp;src_pos&nbsp;dst&nbsp;dst_pos&nbsp;len</code> copies <code class="code">len</code> elements
+      from floatarray <code class="code">src</code>, starting at element number <code class="code">src_pos</code>,
+      to floatarray <code class="code">dst</code>, starting at element number <code class="code">dst_pos</code>.
+      It works correctly even if
+      <code class="code">src</code> and <code class="code">dst</code> are the same floatarray, and the source and
+      destination chunks overlap.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Raises</b> <code>Invalid_argument</code> if <code class="code">src_pos</code> and <code class="code">len</code> do not
+      designate a valid subarray of <code class="code">src</code>, or if <code class="code">dst_pos</code> and <code class="code">len</code> do not
+      designate a valid subarray of <code class="code">dst</code>.</li>
+</ul>
+</div>
+
+<pre id="VALto_list">val to_list : t -&gt; float list</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">to_list&nbsp;a</code> returns the list of all the elements of <code class="code">a</code>.</p>
+</div>
+</div>
+
+<pre id="VALof_list">val of_list : float list -&gt; t</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">of_list&nbsp;l</code> returns a fresh floatarray containing the elements
+      of <code class="code">l</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Raises</b> <code>Invalid_argument</code> if the length of <code class="code">l</code> is greater than
+      <code class="code">Sys.max_floatarray_length</code>.</li>
+</ul>
+</div>
+<h3 id="2_Iterators">Iterators</h3>
+<pre id="VALiter">val iter : (float -&gt; unit) -&gt; t -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">iter&nbsp;f&nbsp;a</code> applies function <code class="code">f</code> in turn to all
+      the elements of <code class="code">a</code>.  It is equivalent to
+      <code class="code">f&nbsp;a.(0);&nbsp;f&nbsp;a.(1);&nbsp;...;&nbsp;f&nbsp;a.(length&nbsp;a&nbsp;-&nbsp;1);&nbsp;()</code>.</p>
+</div>
+</div>
+
+<pre id="VALiteri">val iteri : (int -&gt; float -&gt; unit) -&gt; t -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p>Same as <a href="Float.Array.html#VALiter"><code class="code">Float.Array.iter</code></a>, but the
+      function is applied with the index of the element as first argument,
+      and the element itself as second argument.</p>
+</div>
+</div>
+
+<pre id="VALmap">val map : (float -&gt; float) -&gt; t -&gt; t</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">map&nbsp;f&nbsp;a</code> applies function <code class="code">f</code> to all the elements of <code class="code">a</code>,
+      and builds a floatarray with the results returned by <code class="code">f</code>.</p>
+</div>
+</div>
+
+<pre id="VALmapi">val mapi : (int -&gt; float -&gt; float) -&gt; t -&gt; t</pre><div class="info ">
+<div class="info-desc">
+<p>Same as <a href="Float.Array.html#VALmap"><code class="code">Float.Array.map</code></a>, but the
+      function is applied to the index of the element as first argument,
+      and the element itself as second argument.</p>
+</div>
+</div>
+
+<pre id="VALfold_left">val fold_left : ('a -&gt; float -&gt; 'a) -&gt; 'a -&gt; t -&gt; 'a</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">fold_left&nbsp;f&nbsp;x&nbsp;init</code> computes
+      <code class="code">f&nbsp;(...&nbsp;(f&nbsp;(f&nbsp;x&nbsp;init.(0))&nbsp;init.(1))&nbsp;...)&nbsp;init.(n-1)</code>,
+      where <code class="code">n</code> is the length of the floatarray <code class="code">init</code>.</p>
+</div>
+</div>
+
+<pre id="VALfold_right">val fold_right : (float -&gt; 'a -&gt; 'a) -&gt; t -&gt; 'a -&gt; 'a</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">fold_right&nbsp;f&nbsp;a&nbsp;init</code> computes
+      <code class="code">f&nbsp;a.(0)&nbsp;(f&nbsp;a.(1)&nbsp;(&nbsp;...&nbsp;(f&nbsp;a.(n-1)&nbsp;init)&nbsp;...))</code>,
+      where <code class="code">n</code> is the length of the floatarray <code class="code">a</code>.</p>
+</div>
+</div>
+<h3 id="2_Iteratorsontwoarrays">Iterators on two arrays</h3>
+<pre id="VALiter2">val iter2 : (float -&gt; float -&gt; unit) -&gt; t -&gt; t -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">Array.iter2&nbsp;f&nbsp;a&nbsp;b</code> applies function <code class="code">f</code> to all the elements of <code class="code">a</code>
+      and <code class="code">b</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Raises</b> <code>Invalid_argument</code> if the floatarrays are not the same size.</li>
+</ul>
+</div>
+
+<pre id="VALmap2">val map2 : (float -&gt; float -&gt; float) -&gt; t -&gt; t -&gt; t</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">map2&nbsp;f&nbsp;a&nbsp;b</code> applies function <code class="code">f</code> to all the elements of <code class="code">a</code>
+      and <code class="code">b</code>, and builds a floatarray with the results returned by <code class="code">f</code>:
+      <code class="code">[|&nbsp;f&nbsp;a.(0)&nbsp;b.(0);&nbsp;...;&nbsp;f&nbsp;a.(length&nbsp;a&nbsp;-&nbsp;1)&nbsp;b.(length&nbsp;b&nbsp;-&nbsp;1)|]</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Raises</b> <code>Invalid_argument</code> if the floatarrays are not the same size.</li>
+</ul>
+</div>
+<h3 id="2_Arrayscanning">Array scanning</h3>
+<pre id="VALfor_all">val for_all : (float -&gt; bool) -&gt; t -&gt; bool</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">for_all&nbsp;f&nbsp;[|a1;&nbsp;...;&nbsp;an|]</code> checks if all elements of the floatarray
+      satisfy the predicate <code class="code">f</code>. That is, it returns
+      <code class="code">(f&nbsp;a1)&nbsp;&amp;&amp;&nbsp;(f&nbsp;a2)&nbsp;&amp;&amp;&nbsp;...&nbsp;&amp;&amp;&nbsp;(f&nbsp;an)</code>.</p>
+</div>
+</div>
+
+<pre id="VALexists">val exists : (float -&gt; bool) -&gt; t -&gt; bool</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">exists&nbsp;f&nbsp;[|a1;&nbsp;...;&nbsp;an|]</code> checks if at least one element of
+      the floatarray satisfies the predicate <code class="code">f</code>. That is, it returns
+      <code class="code">(f&nbsp;a1)&nbsp;||&nbsp;(f&nbsp;a2)&nbsp;||&nbsp;...&nbsp;||&nbsp;(f&nbsp;an)</code>.</p>
+</div>
+</div>
+
+<pre id="VALmem">val mem : float -&gt; t -&gt; bool</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">mem&nbsp;a&nbsp;set</code> is true if and only if there is an element of <code class="code">set</code> that is
+      structurally equal to <code class="code">a</code>, i.e. there is an <code class="code">x</code> in <code class="code">set</code> such
+      that <code class="code">compare&nbsp;a&nbsp;x&nbsp;=&nbsp;0</code>.</p>
+</div>
+</div>
+
+<pre id="VALmem_ieee">val mem_ieee : float -&gt; t -&gt; bool</pre><div class="info ">
+<div class="info-desc">
+<p>Same as <a href="Float.Array.html#VALmem"><code class="code">Float.Array.mem</code></a>, but uses IEEE equality instead of structural equality.</p>
+</div>
+</div>
+<h3 id="2_Sorting">Sorting</h3>
+<pre id="VALsort">val sort : (float -&gt; float -&gt; int) -&gt; t -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p>Sort a floatarray in increasing order according to a comparison
+      function.  The comparison function must return 0 if its arguments
+      compare as equal, a positive integer if the first is greater,
+      and a negative integer if the first is smaller (see below for a
+      complete specification).  For example, <a href="Stdlib.html#VALcompare"><code class="code">compare</code></a> is
+      a suitable comparison function.  After calling <code class="code">sort</code>, the
+      array is sorted in place in increasing order.
+      <code class="code">sort</code> is guaranteed to run in constant heap space
+      and (at most) logarithmic stack space.</p>
+
+<p>The current implementation uses Heap Sort.  It runs in constant
+      stack space.</p>
+
+<p>Specification of the comparison function:
+      Let <code class="code">a</code> be the floatarray and <code class="code">cmp</code> the comparison function. The following
+      must be true for all <code class="code">x</code>, <code class="code">y</code>, <code class="code">z</code> in <code class="code">a</code> :</p>
+<ul>
+<li>     <code class="code">cmp&nbsp;x&nbsp;y</code> &gt; 0 if and only if <code class="code">cmp&nbsp;y&nbsp;x</code> &lt; 0</li>
+<li>     if <code class="code">cmp&nbsp;x&nbsp;y</code> &gt;= 0 and <code class="code">cmp&nbsp;y&nbsp;z</code> &gt;= 0 then <code class="code">cmp&nbsp;x&nbsp;z</code> &gt;= 0</li>
+</ul>
+<p>When <code class="code">sort</code> returns, <code class="code">a</code> contains the same elements as before,
+      reordered in such a way that for all i and j valid indices of <code class="code">a</code> :</p>
+<ul>
+<li>     <code class="code">cmp&nbsp;a.(i)&nbsp;a.(j)</code> &gt;= 0 if and only if i &gt;= j</li>
+</ul>
+</div>
+</div>
+
+<pre id="VALstable_sort">val stable_sort : (float -&gt; float -&gt; int) -&gt; t -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p>Same as <a href="Float.Array.html#VALsort"><code class="code">Float.Array.sort</code></a>, but the sorting algorithm is stable (i.e.
+       elements that compare equal are kept in their original order) and
+       not guaranteed to run in constant heap space.</p>
+
+<p>The current implementation uses Merge Sort. It uses a temporary
+       floatarray of length <code class="code">n/2</code>, where <code class="code">n</code> is the length of the floatarray.
+       It is usually faster than the current implementation of <a href="Float.Array.html#VALsort"><code class="code">Float.Array.sort</code></a>.</p>
+</div>
+</div>
+
+<pre id="VALfast_sort">val fast_sort : (float -&gt; float -&gt; int) -&gt; t -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p>Same as <a href="Float.Array.html#VALsort"><code class="code">Float.Array.sort</code></a> or <a href="Float.Array.html#VALstable_sort"><code class="code">Float.Array.stable_sort</code></a>, whichever is faster
+      on typical input.</p>
+</div>
+</div>
+<h3 id="2_FloatarraysandSequences">Float arrays and Sequences</h3>
+<pre id="VALto_seq">val to_seq : t -&gt; float Seq.t</pre><div class="info ">
+<div class="info-desc">
+<p>Iterate on the floatarray, in increasing order. Modifications of the
+      floatarray during iteration will be reflected in the sequence.</p>
+</div>
+</div>
+
+<pre id="VALto_seqi">val to_seqi : t -&gt; (int * float) Seq.t</pre><div class="info ">
+<div class="info-desc">
+<p>Iterate on the floatarray, in increasing order, yielding indices along
+      elements. Modifications of the floatarray during iteration will be
+      reflected in the sequence.</p>
+</div>
+</div>
+
+<pre id="VALof_seq">val of_seq : float Seq.t -&gt; t</pre><div class="info ">
+<div class="info-desc">
+<p>Create an array from the generator.</p>
+</div>
+</div>
+
+<pre id="VALmap_to_array">val map_to_array : (float -&gt; 'a) -&gt; t -&gt; 'a array</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">map_to_array&nbsp;f&nbsp;a</code> applies function <code class="code">f</code> to all the elements of <code class="code">a</code>,
+      and builds an array with the results returned by <code class="code">f</code>:
+      <code class="code">[|&nbsp;f&nbsp;a.(0);&nbsp;f&nbsp;a.(1);&nbsp;...;&nbsp;f&nbsp;a.(length&nbsp;a&nbsp;-&nbsp;1)&nbsp;|]</code>.</p>
+</div>
+</div>
+
+<pre id="VALmap_from_array">val map_from_array : ('a -&gt; float) -&gt; 'a array -&gt; t</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">map_from_array&nbsp;f&nbsp;a</code> applies function <code class="code">f</code> to all the elements of <code class="code">a</code>,
+      and builds a floatarray with the results returned by <code class="code">f</code>.</p>
+</div>
+</div>
+<h2 id="floatarray_concurrency">Arrays and concurrency safety</h2>
+<p>Care must be taken when concurrently accessing float arrays from multiple
+      domains: accessing an array will never crash a program, but unsynchronized
+      accesses might yield surprising (non-sequentially-consistent) results.</p>
+
+<h3 id="floatarray_atomicity">Atomicity</h3>
+<p>Every float array operation that accesses more than one array element is
+      not atomic. This includes iteration, scanning, sorting, splitting and
+      combining arrays.</p>
+
+<p>For example, consider the following program:</p>
+<pre class="codepre"><span class="keyword">let</span> size = 100_000_000
+  let a = Float.Array.make size 1.
+  let update a f () =
+     Float.Array.iteri (fun i x -&gt; Float.Array.set a i (f x)) a
+  let d1 = Domain.spawn (update a (fun x -&gt; x +. 1.))
+  let d2 = Domain.spawn (update a (fun x -&gt;  2. *. x +. 1.))
+  let () = Domain.join d1; Domain.join d2
+  </pre>
+<p>After executing this code, each field of the float array <code class="code">a</code> is either
+      <code class="code">2.</code>, <code class="code">3.</code>, <code class="code">4.</code> or <code class="code">5.</code>. If atomicity is required, then the user must
+      implement their own synchronization (for example, using <a href="Mutex.html#TYPEt"><code class="code">Mutex.t</code></a>).</p>
+
+<h3 id="floatarray_data_race">Data races</h3>
+<p>If two domains only access disjoint parts of the array, then the
+      observed behaviour is the equivalent to some sequential interleaving of
+      the operations from the two domains.</p>
+
+<p>A data race is said to occur when two domains access the same array
+      element without synchronization and at least one of the accesses is a
+      write. In the absence of data races, the observed behaviour is equivalent
+      to some sequential interleaving of the operations from different domains.</p>
+
+<p>Whenever possible, data races should be avoided by using synchronization
+      to mediate the accesses to the array elements.</p>
+
+<p>Indeed, in the presence of data races, programs will not crash but the
+      observed behaviour may not be equivalent to any sequential interleaving of
+      operations from different domains. Nevertheless, even in the presence of
+      data races, a read operation will return the value of some prior write to
+      that location with a few exceptions.</p>
+
+<h3 id="floatarray_datarace_tearing">Tearing </h3>
+<p>Float arrays have two supplementary caveats in the presence of data races.</p>
+
+<p>First, the blit operation might copy an array byte-by-byte. Data races
+      between such a blit operation and another operation might produce
+      surprising values due to tearing: partial writes interleaved with other
+      operations can create float values that would not exist with a sequential
+      execution.</p>
+
+<p>For instance, at the end of</p>
+<pre class="codepre"><span class="keyword">let</span> zeros = Float.Array.make size 0.
+  let max_floats = Float.Array.make size Float.max_float
+  let res = Float.Array.copy zeros
+  let d1 = Domain.spawn (fun () -&gt; Float.Array.blit zeros 0 res 0 size)
+  let d2 = Domain.spawn (fun () -&gt; Float.Array.blit max_floats 0 res 0 size)
+  let () = Domain.join d1; Domain.join d2
+  </pre>
+<p>the <code class="code">res</code> float array might contain values that are neither <code class="code">0.</code>
+      nor <code class="code">max_float</code>.</p>
+
+<p>Second, on 32-bit architectures, getting or setting a field involves two
+      separate memory accesses. In the presence of data races, the user may
+      observe tearing on any operation.</p>
+
+</div>

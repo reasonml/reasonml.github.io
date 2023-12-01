@@ -1,0 +1,983 @@
+<link rel="stylesheet" href="/css/main.css"><div class="ocamldoc">
+<h1>Module <a href="type_Seq.html">Seq</a></h1>
+
+<pre id="MODULESeq"><span class="keyword">module</span> Seq: sig .. end</pre><div class="info module top">
+<div class="info-desc">
+<p>Sequences.</p>
+
+<p>A sequence of type <code class="code">'a&nbsp;Seq.t</code> can be thought of as a <b>delayed list</b>,
+   that is, a list whose elements are computed only when they are demanded
+   by a consumer. This allows sequences to be produced and transformed
+   lazily (one element at a time) rather than eagerly (all elements at
+   once). This also allows constructing conceptually infinite sequences.</p>
+
+<p>The type <code class="code">'a&nbsp;Seq.t</code> is defined as a synonym for <code class="code">unit&nbsp;-&gt;&nbsp;'a&nbsp;Seq.node</code>.
+   This is a function type: therefore, it is opaque. The consumer can <b>   query</b> a sequence in order to request the next element (if there is
+   one), but cannot otherwise inspect the sequence in any way.</p>
+
+<p>Because it is opaque, the type <code class="code">'a&nbsp;Seq.t</code> does <i>not</i> reveal whether
+   a sequence is:</p>
+<ul>
+<li><b>persistent</b>,
+     which means that the sequence can be used as many times as desired,
+     producing the same elements every time,
+     just like an immutable list; or</li>
+<li><b>ephemeral</b>,
+     which means that the sequence is not persistent.
+     Querying an ephemeral sequence might have an observable side effect,
+     such as incrementing a mutable counter.
+     As a common special case, an ephemeral sequence can be <b>affine</b>,
+     which means that it must be queried at most once.</li>
+</ul>
+<p>It also does <i>not</i> reveal whether the elements of the sequence are:</p>
+
+<ul>
+<li><b>pre-computed and stored</b> in memory,
+     which means that querying the sequence is cheap;</li>
+<li><b>computed when first demanded and then stored</b> in memory,
+     which means that querying the sequence once can be expensive,
+     but querying the same sequence again is cheap; or</li>
+<li><b>re-computed every time they are demanded</b>,
+     which may or may not be cheap.</li>
+</ul>
+<p>It is up to the programmer to keep these distinctions in mind
+   so as to understand the time and space requirements of sequences.</p>
+
+<p>For the sake of simplicity, most of the documentation that follows
+   is written under the implicit assumption that the sequences at hand
+   are persistent.
+   We normally do not point out <i>when</i> or <i>how many times</i>
+   each function is invoked, because that would be too verbose.
+   For instance, in the description of <code class="code">map</code>, we write:
+   "if <code class="code">xs</code> is the sequence <code class="code">x0;&nbsp;x1;&nbsp;...</code>
+    then <code class="code">map&nbsp;f&nbsp;xs</code> is the sequence <code class="code">f&nbsp;x0;&nbsp;f&nbsp;x1;&nbsp;...</code>".
+   If we wished to be more explicit,
+   we could point out that the transformation takes place on demand:
+   that is, the elements of <code class="code">map&nbsp;f&nbsp;xs</code> are computed only when they
+   are demanded. In other words,
+   the definition <code class="code">let&nbsp;ys&nbsp;=&nbsp;map&nbsp;f&nbsp;xs</code> terminates immediately and
+   does not invoke <code class="code">f</code>. The function call <code class="code">f&nbsp;x0</code> takes place only when the
+   first element of <code class="code">ys</code> is demanded, via the function call <code class="code">ys()</code>.
+   Furthermore, calling <code class="code">ys()</code> twice causes <code class="code">f&nbsp;x0</code> to be called twice
+   as well. If one wishes for <code class="code">f</code> to be applied at most once to each
+   element of <code class="code">xs</code>, even in scenarios where <code class="code">ys</code> is queried more than once,
+   then one should use <code class="code">let&nbsp;ys&nbsp;=&nbsp;memoize&nbsp;(map&nbsp;f&nbsp;xs)</code>.</p>
+
+<p>As a general rule, the functions that build sequences, such as <code class="code">map</code>,
+   <code class="code">filter</code>, <code class="code">scan</code>, <code class="code">take</code>, etc., produce sequences whose elements are
+   computed only on demand. The functions that eagerly consume sequences,
+   such as <code class="code">is_empty</code>, <code class="code">find</code>, <code class="code">length</code>, <code class="code">iter</code>, <code class="code">fold_left</code>,
+   etc., are the functions that force computation to take place.</p>
+
+<p>When possible, we recommend using sequences rather than dispensers
+   (functions of type <code class="code">unit&nbsp;-&gt;&nbsp;'a&nbsp;option</code> that produce elements upon
+   demand). Whereas sequences can be persistent or ephemeral, dispensers
+   are always ephemeral, and are typically more difficult to work with
+   than sequences. Two conversion functions, <a href="Seq.html#VALto_dispenser"><code class="code">Seq.to_dispenser</code></a> and
+   <a href="Seq.html#VALof_dispenser"><code class="code">Seq.of_dispenser</code></a>, are provided.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.07</li>
+</ul>
+</div>
+<hr width="100%">
+
+<pre id="TYPEt"><span class="keyword">type</span> 'a t = unit -&gt; 'a node </pre>
+<div class="info ">
+<div class="info-desc">
+<p>A sequence <code class="code">xs</code> of type <code class="code">'a&nbsp;t</code> is a delayed list of elements of
+    type <code class="code">'a</code>. Such a sequence is queried by performing a function
+    application <code class="code">xs()</code>. This function application returns a node,
+    allowing the caller to determine whether the sequence is empty
+    or nonempty, and in the latter case, to obtain its head and tail.</p>
+</div>
+</div>
+
+
+<pre><span class="keyword">type</span> 'a node = </pre><table class="typetable">
+<tbody><tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Nil</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>Cons of 'a * 'a t</code></td>
+
+</tr></tbody></table>
+
+<div class="info ">
+<div class="info-desc">
+<p>A node is either <code class="code">Nil</code>, which means that the sequence is empty,
+    or <code class="code">Cons&nbsp;(x,&nbsp;xs)</code>, which means that <code class="code">x</code> is the first element
+    of the sequence and that <code class="code">xs</code> is the remainder of the sequence.</p>
+</div>
+</div>
+
+<h2 id="1_Consumingsequences">Consuming sequences</h2><p>The functions in this section consume their argument, a sequence, either
+   partially or completely:</p>
+<ul>
+<li><code class="code">is_empty</code> and <code class="code">uncons</code> consume the sequence down to depth 1.
+     That is, they demand the first argument of the sequence, if there is one.</li>
+<li><code class="code">iter</code>, <code class="code">fold_left</code>, <code class="code">length</code>, etc., consume the sequence all the way to
+     its end. They terminate only if the sequence is finite.</li>
+<li><code class="code">for_all</code>, <code class="code">exists</code>, <code class="code">find</code>, etc. consume the sequence down to a certain
+     depth, which is a priori unpredictable.</li>
+</ul>
+<p>Similarly, among the functions that consume two sequences,
+   one can distinguish two groups:</p>
+<ul>
+<li><code class="code">iter2</code> and <code class="code">fold_left2</code> consume both sequences all the way
+     to the end, provided the sequences have the same length.</li>
+<li><code class="code">for_all2</code>, <code class="code">exists2</code>, <code class="code">equal</code>, <code class="code">compare</code> consume the sequences down
+     to a certain depth, which is a priori unpredictable.</li>
+</ul>
+<p>The functions that consume two sequences can be applied to two sequences
+   of distinct lengths: in that case, the excess elements in the longer
+   sequence are ignored. (It may be the case that one excess element is
+   demanded, even though this element is not used.)</p>
+
+<p>None of the functions in this section is lazy. These functions
+   are consumers: they force some computation to take place.</p>
+
+<pre id="VALis_empty">val is_empty : 'a t -&gt; bool</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">is_empty&nbsp;xs</code> determines whether the sequence <code class="code">xs</code> is empty.</p>
+
+<p>It is recommended that the sequence <code class="code">xs</code> be persistent.
+    Indeed, <code class="code">is_empty&nbsp;xs</code> demands the head of the sequence <code class="code">xs</code>,
+    so, if <code class="code">xs</code> is ephemeral, it may be the case that <code class="code">xs</code> cannot
+    be used any more after this call has taken place.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.14</li>
+</ul>
+</div>
+
+<pre id="VALuncons">val uncons : 'a t -&gt; ('a * 'a t) option</pre><div class="info ">
+<div class="info-desc">
+<p>If <code class="code">xs</code> is empty, then <code class="code">uncons&nbsp;xs</code> is <code class="code">None</code>.</p>
+
+<p>If <code class="code">xs</code> is nonempty, then <code class="code">uncons&nbsp;xs</code> is <code class="code">Some&nbsp;(x,&nbsp;ys)</code> where <code class="code">x</code> is the
+    head of the sequence and <code class="code">ys</code> its tail.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.14</li>
+</ul>
+</div>
+
+<pre id="VALlength">val length : 'a t -&gt; int</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">length&nbsp;xs</code> is the length of the sequence <code class="code">xs</code>.</p>
+
+<p>The sequence <code class="code">xs</code> must be finite.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.14</li>
+</ul>
+</div>
+
+<pre id="VALiter">val iter : ('a -&gt; unit) -&gt; 'a t -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">iter&nbsp;f&nbsp;xs</code> invokes <code class="code">f&nbsp;x</code> successively
+    for every element <code class="code">x</code> of the sequence <code class="code">xs</code>,
+    from left to right.</p>
+
+<p>It terminates only if the sequence <code class="code">xs</code> is finite.</p>
+</div>
+</div>
+
+<pre id="VALfold_left">val fold_left : ('a -&gt; 'b -&gt; 'a) -&gt; 'a -&gt; 'b t -&gt; 'a</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">fold_left&nbsp;f&nbsp;_&nbsp;xs</code> invokes <code class="code">f&nbsp;_&nbsp;x</code> successively
+    for every element <code class="code">x</code> of the sequence <code class="code">xs</code>,
+    from left to right.</p>
+
+<p>An accumulator of type <code class="code">'a</code> is threaded through the calls to <code class="code">f</code>.</p>
+
+<p>It terminates only if the sequence <code class="code">xs</code> is finite.</p>
+</div>
+</div>
+
+<pre id="VALiteri">val iteri : (int -&gt; 'a -&gt; unit) -&gt; 'a t -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">iteri&nbsp;f&nbsp;xs</code> invokes <code class="code">f&nbsp;i&nbsp;x</code> successively
+    for every element <code class="code">x</code> located at index <code class="code">i</code> in the sequence <code class="code">xs</code>.</p>
+
+<p>It terminates only if the sequence <code class="code">xs</code> is finite.</p>
+
+<p><code class="code">iteri&nbsp;f&nbsp;xs</code> is equivalent to
+    <code class="code">iter&nbsp;(fun&nbsp;(i,&nbsp;x)&nbsp;-&gt;&nbsp;f&nbsp;i&nbsp;x)&nbsp;(zip&nbsp;(ints&nbsp;0)&nbsp;xs)</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.14</li>
+</ul>
+</div>
+
+<pre id="VALfold_lefti">val fold_lefti : ('b -&gt; int -&gt; 'a -&gt; 'b) -&gt; 'b -&gt; 'a t -&gt; 'b</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">fold_lefti&nbsp;f&nbsp;_&nbsp;xs</code> invokes <code class="code">f&nbsp;_&nbsp;i&nbsp;x</code> successively
+    for every element <code class="code">x</code> located at index <code class="code">i</code> of the sequence <code class="code">xs</code>.</p>
+
+<p>An accumulator of type <code class="code">'b</code> is threaded through the calls to <code class="code">f</code>.</p>
+
+<p>It terminates only if the sequence <code class="code">xs</code> is finite.</p>
+
+<p><code class="code">fold_lefti&nbsp;f&nbsp;accu&nbsp;xs</code> is equivalent to
+    <code class="code">fold_left&nbsp;(fun&nbsp;accu&nbsp;(i,&nbsp;x)&nbsp;-&gt;&nbsp;f&nbsp;accu&nbsp;i&nbsp;x)&nbsp;accu&nbsp;(zip&nbsp;(ints&nbsp;0)&nbsp;xs)</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.14</li>
+</ul>
+</div>
+
+<pre id="VALfor_all">val for_all : ('a -&gt; bool) -&gt; 'a t -&gt; bool</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">for_all&nbsp;p&nbsp;xs</code> determines whether all elements <code class="code">x</code> of the sequence <code class="code">xs</code>
+    satisfy <code class="code">p&nbsp;x</code>.</p>
+
+<p>The sequence <code class="code">xs</code> must be finite.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.14</li>
+</ul>
+</div>
+
+<pre id="VALexists">val exists : ('a -&gt; bool) -&gt; 'a t -&gt; bool</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">exists&nbsp;xs&nbsp;p</code> determines whether at least one element <code class="code">x</code>
+    of the sequence <code class="code">xs</code> satisfies <code class="code">p&nbsp;x</code>.</p>
+
+<p>The sequence <code class="code">xs</code> must be finite.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.14</li>
+</ul>
+</div>
+
+<pre id="VALfind">val find : ('a -&gt; bool) -&gt; 'a t -&gt; 'a option</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">find&nbsp;p&nbsp;xs</code> returns <code class="code">Some&nbsp;x</code>, where <code class="code">x</code> is the first element of the
+    sequence <code class="code">xs</code> that satisfies <code class="code">p&nbsp;x</code>, if there is such an element.</p>
+
+<p>It returns <code class="code">None</code> if there is no such element.</p>
+
+<p>The sequence <code class="code">xs</code> must be finite.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.14</li>
+</ul>
+</div>
+
+<pre id="VALfind_map">val find_map : ('a -&gt; 'b option) -&gt; 'a t -&gt; 'b option</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">find_map&nbsp;f&nbsp;xs</code> returns <code class="code">Some&nbsp;y</code>, where <code class="code">x</code> is the first element of the
+    sequence <code class="code">xs</code> such that <code class="code">f&nbsp;x&nbsp;=&nbsp;Some&nbsp;_</code>, if there is such an element,
+    and where <code class="code">y</code> is defined by <code class="code">f&nbsp;x&nbsp;=&nbsp;Some&nbsp;y</code>.</p>
+
+<p>It returns <code class="code">None</code> if there is no such element.</p>
+
+<p>The sequence <code class="code">xs</code> must be finite.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.14</li>
+</ul>
+</div>
+
+<pre id="VALiter2">val iter2 : ('a -&gt; 'b -&gt; unit) -&gt; 'a t -&gt; 'b t -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">iter2&nbsp;f&nbsp;xs&nbsp;ys</code> invokes <code class="code">f&nbsp;x&nbsp;y</code> successively for every pair <code class="code">(x,&nbsp;y)</code> of
+    elements drawn synchronously from the sequences <code class="code">xs</code> and <code class="code">ys</code>.</p>
+
+<p>If the sequences <code class="code">xs</code> and <code class="code">ys</code> have different lengths, then
+    iteration stops as soon as one sequence is exhausted;
+    the excess elements in the other sequence are ignored.</p>
+
+<p>Iteration terminates only if at least one of the sequences
+    <code class="code">xs</code> and <code class="code">ys</code> is finite.</p>
+
+<p><code class="code">iter2&nbsp;f&nbsp;xs&nbsp;ys</code> is equivalent to
+    <code class="code">iter&nbsp;(fun&nbsp;(x,&nbsp;y)&nbsp;-&gt;&nbsp;f&nbsp;x&nbsp;y)&nbsp;(zip&nbsp;xs&nbsp;ys)</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.14</li>
+</ul>
+</div>
+
+<pre id="VALfold_left2">val fold_left2 : ('a -&gt; 'b -&gt; 'c -&gt; 'a) -&gt; 'a -&gt; 'b t -&gt; 'c t -&gt; 'a</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">fold_left2&nbsp;f&nbsp;_&nbsp;xs&nbsp;ys</code> invokes <code class="code">f&nbsp;_&nbsp;x&nbsp;y</code> successively
+    for every pair <code class="code">(x,&nbsp;y)</code> of elements drawn synchronously
+    from the sequences <code class="code">xs</code> and <code class="code">ys</code>.</p>
+
+<p>An accumulator of type <code class="code">'a</code> is threaded through the calls to <code class="code">f</code>.</p>
+
+<p>If the sequences <code class="code">xs</code> and <code class="code">ys</code> have different lengths, then
+    iteration stops as soon as one sequence is exhausted;
+    the excess elements in the other sequence are ignored.</p>
+
+<p>Iteration terminates only if at least one of the sequences
+    <code class="code">xs</code> and <code class="code">ys</code> is finite.</p>
+
+<p><code class="code">fold_left2&nbsp;f&nbsp;accu&nbsp;xs&nbsp;ys</code> is equivalent to
+    <code class="code">fold_left&nbsp;(fun&nbsp;accu&nbsp;(x,&nbsp;y)&nbsp;-&gt;&nbsp;f&nbsp;accu&nbsp;x&nbsp;y)&nbsp;(zip&nbsp;xs&nbsp;ys)</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.14</li>
+</ul>
+</div>
+
+<pre id="VALfor_all2">val for_all2 : ('a -&gt; 'b -&gt; bool) -&gt; 'a t -&gt; 'b t -&gt; bool</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">for_all2&nbsp;p&nbsp;xs&nbsp;ys</code> determines whether all pairs <code class="code">(x,&nbsp;y)</code> of elements
+    drawn synchronously from the sequences <code class="code">xs</code> and <code class="code">ys</code> satisfy <code class="code">p&nbsp;x&nbsp;y</code>.</p>
+
+<p>If the sequences <code class="code">xs</code> and <code class="code">ys</code> have different lengths, then
+    iteration stops as soon as one sequence is exhausted;
+    the excess elements in the other sequence are ignored.
+    In particular, if <code class="code">xs</code> or <code class="code">ys</code> is empty, then
+    <code class="code">for_all2&nbsp;p&nbsp;xs&nbsp;ys</code> is true. This is where
+    <code class="code">for_all2</code> and <code class="code">equal</code> differ: <code class="code">equal&nbsp;eq&nbsp;xs&nbsp;ys</code> can
+    be true only if <code class="code">xs</code> and <code class="code">ys</code> have the same length.</p>
+
+<p>At least one of the sequences <code class="code">xs</code> and <code class="code">ys</code> must be finite.</p>
+
+<p><code class="code">for_all2&nbsp;p&nbsp;xs&nbsp;ys</code> is equivalent to <code class="code">for_all&nbsp;(fun&nbsp;b&nbsp;-&gt;&nbsp;b)&nbsp;(map2&nbsp;p&nbsp;xs&nbsp;ys)</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.14</li>
+</ul>
+</div>
+
+<pre id="VALexists2">val exists2 : ('a -&gt; 'b -&gt; bool) -&gt; 'a t -&gt; 'b t -&gt; bool</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">exists2&nbsp;p&nbsp;xs&nbsp;ys</code> determines whether some pair <code class="code">(x,&nbsp;y)</code> of elements
+    drawn synchronously from the sequences <code class="code">xs</code> and <code class="code">ys</code> satisfies <code class="code">p&nbsp;x&nbsp;y</code>.</p>
+
+<p>If the sequences <code class="code">xs</code> and <code class="code">ys</code> have different lengths, then
+    iteration must stop as soon as one sequence is exhausted;
+    the excess elements in the other sequence are ignored.</p>
+
+<p>At least one of the sequences <code class="code">xs</code> and <code class="code">ys</code> must be finite.</p>
+
+<p><code class="code">exists2&nbsp;p&nbsp;xs&nbsp;ys</code> is equivalent to <code class="code">exists&nbsp;(fun&nbsp;b&nbsp;-&gt;&nbsp;b)&nbsp;(map2&nbsp;p&nbsp;xs&nbsp;ys)</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.14</li>
+</ul>
+</div>
+
+<pre id="VALequal">val equal : ('a -&gt; 'b -&gt; bool) -&gt; 'a t -&gt; 'b t -&gt; bool</pre><div class="info ">
+<div class="info-desc">
+<p>Provided the function <code class="code">eq</code> defines an equality on elements,
+    <code class="code">equal&nbsp;eq&nbsp;xs&nbsp;ys</code> determines whether the sequences <code class="code">xs</code> and <code class="code">ys</code>
+    are pointwise equal.</p>
+
+<p>At least one of the sequences <code class="code">xs</code> and <code class="code">ys</code> must be finite.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.14</li>
+</ul>
+</div>
+
+<pre id="VALcompare">val compare : ('a -&gt; 'b -&gt; int) -&gt; 'a t -&gt; 'b t -&gt; int</pre><div class="info ">
+<div class="info-desc">
+<p>Provided the function <code class="code">cmp</code> defines a preorder on elements,
+    <code class="code">compare&nbsp;cmp&nbsp;xs&nbsp;ys</code> compares the sequences <code class="code">xs</code> and <code class="code">ys</code>
+    according to the lexicographic preorder.</p>
+
+<p>For more details on comparison functions, see <a href="Array.html#VALsort"><code class="code">Array.sort</code></a>.</p>
+
+<p>At least one of the sequences <code class="code">xs</code> and <code class="code">ys</code> must be finite.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.14</li>
+</ul>
+</div>
+<h2 id="1_Constructingsequences">Constructing sequences</h2><p>The functions in this section are lazy: that is, they return sequences
+    whose elements are computed only when demanded.</p>
+
+<pre id="VALempty">val empty : 'a t</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">empty</code> is the empty sequence.
+    It has no elements. Its length is 0.</p>
+</div>
+</div>
+
+<pre id="VALreturn">val return : 'a -&gt; 'a t</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">return&nbsp;x</code> is the sequence whose sole element is <code class="code">x</code>.
+    Its length is 1.</p>
+</div>
+</div>
+
+<pre id="VALcons">val cons : 'a -&gt; 'a t -&gt; 'a t</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">cons&nbsp;x&nbsp;xs</code> is the sequence that begins with the element <code class="code">x</code>,
+    followed with the sequence <code class="code">xs</code>.</p>
+
+<p>Writing <code class="code">cons&nbsp;(f())&nbsp;xs</code> causes the function call <code class="code">f()</code>
+    to take place immediately. For this call to be delayed until the
+    sequence is queried, one must instead write
+    <code class="code">(fun&nbsp;()&nbsp;-&gt;&nbsp;Cons(f(),&nbsp;xs))</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.11</li>
+</ul>
+</div>
+
+<pre id="VALinit">val init : int -&gt; (int -&gt; 'a) -&gt; 'a t</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">init&nbsp;n&nbsp;f</code> is the sequence <code class="code">f&nbsp;0;&nbsp;f&nbsp;1;&nbsp;...;&nbsp;f&nbsp;(n-1)</code>.</p>
+
+<p><code class="code">n</code> must be nonnegative.</p>
+
+<p>If desired, the infinite sequence <code class="code">f&nbsp;0;&nbsp;f&nbsp;1;&nbsp;...</code>
+    can be defined as <code class="code">map&nbsp;f&nbsp;(ints&nbsp;0)</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.14</li>
+<li><b>Raises</b> <code>Invalid_argument</code> if <code class="code">n</code> is negative.</li>
+</ul>
+</div>
+
+<pre id="VALunfold">val unfold : ('b -&gt; ('a * 'b) option) -&gt; 'b -&gt; 'a t</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">unfold</code> constructs a sequence
+    out of a step function and an initial state.</p>
+
+<p>If <code class="code">f&nbsp;u</code> is <code class="code">None</code> then
+    <code class="code">unfold&nbsp;f&nbsp;u</code> is the empty sequence.
+    If <code class="code">f&nbsp;u</code> is <code class="code">Some&nbsp;(x,&nbsp;u')</code> then
+    <code class="code">unfold&nbsp;f&nbsp;u</code> is the nonempty sequence <code class="code">cons&nbsp;x&nbsp;(unfold&nbsp;f&nbsp;u')</code>.</p>
+
+<p>For example, <code class="code">unfold&nbsp;(function&nbsp;[]&nbsp;-&gt;&nbsp;None&nbsp;|&nbsp;h&nbsp;::&nbsp;t&nbsp;-&gt;&nbsp;Some&nbsp;(h,&nbsp;t))&nbsp;l</code>
+    is equivalent to <code class="code">List.to_seq&nbsp;l</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.11</li>
+</ul>
+</div>
+
+<pre id="VALrepeat">val repeat : 'a -&gt; 'a t</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">repeat&nbsp;x</code> is the infinite sequence
+    where the element <code class="code">x</code> is repeated indefinitely.</p>
+
+<p><code class="code">repeat&nbsp;x</code> is equivalent to <code class="code">cycle&nbsp;(return&nbsp;x)</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.14</li>
+</ul>
+</div>
+
+<pre id="VALforever">val forever : (unit -&gt; 'a) -&gt; 'a t</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">forever&nbsp;f</code> is an infinite sequence where every element is produced
+    (on demand) by the function call <code class="code">f()</code>.</p>
+
+<p>For instance,
+    <code class="code">forever&nbsp;Random.bool</code> is an infinite sequence of random bits.</p>
+
+<p><code class="code">forever&nbsp;f</code> is equivalent to <code class="code">map&nbsp;f&nbsp;(repeat&nbsp;())</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.14</li>
+</ul>
+</div>
+
+<pre id="VALcycle">val cycle : 'a t -&gt; 'a t</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">cycle&nbsp;xs</code> is the infinite sequence that consists of an infinite
+    number of repetitions of the sequence <code class="code">xs</code>.</p>
+
+<p>If <code class="code">xs</code> is an empty sequence,
+    then <code class="code">cycle&nbsp;xs</code> is empty as well.</p>
+
+<p>Consuming (a prefix of) the sequence <code class="code">cycle&nbsp;xs</code> once
+    can cause the sequence <code class="code">xs</code> to be consumed more than once.
+    Therefore, <code class="code">xs</code> must be persistent.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.14</li>
+</ul>
+</div>
+
+<pre id="VALiterate">val iterate : ('a -&gt; 'a) -&gt; 'a -&gt; 'a t</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">iterate&nbsp;f&nbsp;x</code> is the infinite sequence whose elements are
+    <code class="code">x</code>, <code class="code">f&nbsp;x</code>, <code class="code">f&nbsp;(f&nbsp;x)</code>, and so on.</p>
+
+<p>In other words, it is the orbit of the function <code class="code">f</code>,
+    starting at <code class="code">x</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.14</li>
+</ul>
+</div>
+<h2 id="1_Transformingsequences">Transforming sequences</h2><p>The functions in this section are lazy: that is, they return sequences
+    whose elements are computed only when demanded.</p>
+
+<pre id="VALmap">val map : ('a -&gt; 'b) -&gt; 'a t -&gt; 'b t</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">map&nbsp;f&nbsp;xs</code> is the image of the sequence <code class="code">xs</code> through the
+    transformation <code class="code">f</code>.</p>
+
+<p>If <code class="code">xs</code> is the sequence <code class="code">x0;&nbsp;x1;&nbsp;...</code> then
+    <code class="code">map&nbsp;f&nbsp;xs</code> is the sequence <code class="code">f&nbsp;x0;&nbsp;f&nbsp;x1;&nbsp;...</code>.</p>
+</div>
+</div>
+
+<pre id="VALmapi">val mapi : (int -&gt; 'a -&gt; 'b) -&gt; 'a t -&gt; 'b t</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">mapi</code> is analogous to <code class="code">map</code>, but applies the function <code class="code">f</code> to
+    an index and an element.</p>
+
+<p><code class="code">mapi&nbsp;f&nbsp;xs</code> is equivalent to <code class="code">map2&nbsp;f&nbsp;(ints&nbsp;0)&nbsp;xs</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.14</li>
+</ul>
+</div>
+
+<pre id="VALfilter">val filter : ('a -&gt; bool) -&gt; 'a t -&gt; 'a t</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">filter&nbsp;p&nbsp;xs</code> is the sequence of the elements <code class="code">x</code> of <code class="code">xs</code>
+    that satisfy <code class="code">p&nbsp;x</code>.</p>
+
+<p>In other words, <code class="code">filter&nbsp;p&nbsp;xs</code> is the sequence <code class="code">xs</code>,
+    deprived of the elements <code class="code">x</code> such that <code class="code">p&nbsp;x</code> is false.</p>
+</div>
+</div>
+
+<pre id="VALfilter_map">val filter_map : ('a -&gt; 'b option) -&gt; 'a t -&gt; 'b t</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">filter_map&nbsp;f&nbsp;xs</code> is the sequence of the elements <code class="code">y</code> such that
+    <code class="code">f&nbsp;x&nbsp;=&nbsp;Some&nbsp;y</code>, where <code class="code">x</code> ranges over <code class="code">xs</code>.</p>
+
+<p><code class="code">filter_map&nbsp;f&nbsp;xs</code> is equivalent to
+    <code class="code">map&nbsp;Option.get&nbsp;(filter&nbsp;Option.is_some&nbsp;(map&nbsp;f&nbsp;xs))</code>.</p>
+</div>
+</div>
+
+<pre id="VALscan">val scan : ('b -&gt; 'a -&gt; 'b) -&gt; 'b -&gt; 'a t -&gt; 'b t</pre><div class="info ">
+<div class="info-desc">
+<p>If <code class="code">xs</code> is a sequence <code class="code">[x0;&nbsp;x1;&nbsp;x2;&nbsp;...]</code>, then
+    <code class="code">scan&nbsp;f&nbsp;a0&nbsp;xs</code> is a sequence of accumulators
+    <code class="code">[a0;&nbsp;a1;&nbsp;a2;&nbsp;...]</code>
+    where <code class="code">a1</code> is <code class="code">f&nbsp;a0&nbsp;x0</code>, <code class="code">a2</code> is <code class="code">f&nbsp;a1&nbsp;x1</code>, and so on.</p>
+
+<p>Thus, <code class="code">scan&nbsp;f&nbsp;a0&nbsp;xs</code> is conceptually related to
+    <code class="code">fold_left&nbsp;f&nbsp;a0&nbsp;xs</code>. However, instead of performing an
+    eager iteration and immediately returning the final accumulator,
+    it returns a sequence of accumulators.</p>
+
+<p>For instance, <code class="code">scan&nbsp;(+)&nbsp;0</code> transforms a sequence of integers
+    into the sequence of its partial sums.</p>
+
+<p>If <code class="code">xs</code> has length <code class="code">n</code>
+    then <code class="code">scan&nbsp;f&nbsp;a0&nbsp;xs</code> has length <code class="code">n+1</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.14</li>
+</ul>
+</div>
+
+<pre id="VALtake">val take : int -&gt; 'a t -&gt; 'a t</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">take&nbsp;n&nbsp;xs</code> is the sequence of the first <code class="code">n</code> elements of <code class="code">xs</code>.</p>
+
+<p>If <code class="code">xs</code> has fewer than <code class="code">n</code> elements,
+    then <code class="code">take&nbsp;n&nbsp;xs</code> is equivalent to <code class="code">xs</code>.</p>
+
+<p><code class="code">n</code> must be nonnegative.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.14</li>
+<li><b>Raises</b> <code>Invalid_argument</code> if <code class="code">n</code> is negative.</li>
+</ul>
+</div>
+
+<pre id="VALdrop">val drop : int -&gt; 'a t -&gt; 'a t</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">drop&nbsp;n&nbsp;xs</code> is the sequence <code class="code">xs</code>, deprived of its first <code class="code">n</code> elements.</p>
+
+<p>If <code class="code">xs</code> has fewer than <code class="code">n</code> elements,
+    then <code class="code">drop&nbsp;n&nbsp;xs</code> is empty.</p>
+
+<p><code class="code">n</code> must be nonnegative.</p>
+
+<p><code class="code">drop</code> is lazy: the first <code class="code">n+1</code> elements of the sequence <code class="code">xs</code>
+    are demanded only when the first element of <code class="code">drop&nbsp;n&nbsp;xs</code> is
+    demanded. For this reason, <code class="code">drop&nbsp;1&nbsp;xs</code> is <i>not</i> equivalent
+    to <code class="code">tail&nbsp;xs</code>, which queries <code class="code">xs</code> immediately.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.14</li>
+<li><b>Raises</b> <code>Invalid_argument</code> if <code class="code">n</code> is negative.</li>
+</ul>
+</div>
+
+<pre id="VALtake_while">val take_while : ('a -&gt; bool) -&gt; 'a t -&gt; 'a t</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">take_while&nbsp;p&nbsp;xs</code> is the longest prefix of the sequence <code class="code">xs</code>
+    where every element <code class="code">x</code> satisfies <code class="code">p&nbsp;x</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.14</li>
+</ul>
+</div>
+
+<pre id="VALdrop_while">val drop_while : ('a -&gt; bool) -&gt; 'a t -&gt; 'a t</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">drop_while&nbsp;p&nbsp;xs</code> is the sequence <code class="code">xs</code>, deprived of the prefix
+    <code class="code">take_while&nbsp;p&nbsp;xs</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.14</li>
+</ul>
+</div>
+
+<pre id="VALgroup">val group : ('a -&gt; 'a -&gt; bool) -&gt; 'a t -&gt; 'a t t</pre><div class="info ">
+<div class="info-desc">
+<p>Provided the function <code class="code">eq</code> defines an equality on elements,
+    <code class="code">group&nbsp;eq&nbsp;xs</code> is the sequence of the maximal runs
+    of adjacent duplicate elements of the sequence <code class="code">xs</code>.</p>
+
+<p>Every element of <code class="code">group&nbsp;eq&nbsp;xs</code> is a nonempty sequence of equal elements.</p>
+
+<p>The concatenation <code class="code">concat&nbsp;(group&nbsp;eq&nbsp;xs)</code> is equal to <code class="code">xs</code>.</p>
+
+<p>Consuming <code class="code">group&nbsp;eq&nbsp;xs</code>, and consuming the sequences that it contains,
+    can cause <code class="code">xs</code> to be consumed more than once. Therefore, <code class="code">xs</code> must be
+    persistent.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.14</li>
+</ul>
+</div>
+
+<pre id="VALmemoize">val memoize : 'a t -&gt; 'a t</pre><div class="info ">
+<div class="info-desc">
+<p>The sequence <code class="code">memoize&nbsp;xs</code> has the same elements as the sequence <code class="code">xs</code>.</p>
+
+<p>Regardless of whether <code class="code">xs</code> is ephemeral or persistent,
+    <code class="code">memoize&nbsp;xs</code> is persistent: even if it is queried several times,
+    <code class="code">xs</code> is queried at most once.</p>
+
+<p>The construction of the sequence <code class="code">memoize&nbsp;xs</code> internally relies on
+    suspensions provided by the module <a href="Lazy.html"><code class="code">Lazy</code></a>. These suspensions are
+    <i>not</i> thread-safe. Therefore, the sequence <code class="code">memoize&nbsp;xs</code>
+    must <i>not</i> be queried by multiple threads concurrently.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.14</li>
+</ul>
+</div>
+
+<pre id="EXCEPTIONForced_twice"><span class="keyword">exception</span> Forced_twice</pre>
+<div class="info ">
+<div class="info-desc">
+<p>This exception is raised when a sequence returned by <a href="Seq.html#VALonce"><code class="code">Seq.once</code></a>
+    (or a suffix of it) is queried more than once.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.14</li>
+</ul>
+</div>
+
+<pre id="VALonce">val once : 'a t -&gt; 'a t</pre><div class="info ">
+<div class="info-desc">
+<p>The sequence <code class="code">once&nbsp;xs</code> has the same elements as the sequence <code class="code">xs</code>.</p>
+
+<p>Regardless of whether <code class="code">xs</code> is ephemeral or persistent,
+    <code class="code">once&nbsp;xs</code> is an ephemeral sequence: it can be queried at most once.
+    If it (or a suffix of it) is queried more than once, then the exception
+    <code class="code">Forced_twice</code> is raised. This can be useful, while debugging or testing,
+    to ensure that a sequence is consumed at most once.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.14</li>
+<li><b>Raises</b> <code>Forced_twice</code> if <code class="code">once&nbsp;xs</code>, or a suffix of it,
+           is queried more than once.</li>
+</ul>
+</div>
+
+<pre id="VALtranspose">val transpose : 'a t t -&gt; 'a t t</pre><div class="info ">
+<div class="info-desc">
+<p>If <code class="code">xss</code> is a matrix (a sequence of rows), then <code class="code">transpose&nbsp;xss</code> is
+    the sequence of the columns of the matrix <code class="code">xss</code>.</p>
+
+<p>The rows of the matrix <code class="code">xss</code> are not required to have the same length.</p>
+
+<p>The matrix <code class="code">xss</code> is not required to be finite (in either direction).</p>
+
+<p>The matrix <code class="code">xss</code> must be persistent.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.14</li>
+</ul>
+</div>
+<h2 id="1_Combiningsequences">Combining sequences</h2>
+<pre id="VALappend">val append : 'a t -&gt; 'a t -&gt; 'a t</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">append&nbsp;xs&nbsp;ys</code> is the concatenation of the sequences <code class="code">xs</code> and <code class="code">ys</code>.</p>
+
+<p>Its elements are the elements of <code class="code">xs</code>, followed by the elements of <code class="code">ys</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.11</li>
+</ul>
+</div>
+
+<pre id="VALconcat">val concat : 'a t t -&gt; 'a t</pre><div class="info ">
+<div class="info-desc">
+<p>If <code class="code">xss</code> is a sequence of sequences,
+    then <code class="code">concat&nbsp;xss</code> is its concatenation.</p>
+
+<p>If <code class="code">xss</code> is the sequence <code class="code">xs0;&nbsp;xs1;&nbsp;...</code> then
+    <code class="code">concat&nbsp;xss</code> is the sequence <code class="code">xs0&nbsp;@&nbsp;xs1&nbsp;@&nbsp;...</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.13</li>
+</ul>
+</div>
+
+<pre id="VALflat_map">val flat_map : ('a -&gt; 'b t) -&gt; 'a t -&gt; 'b t</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">flat_map&nbsp;f&nbsp;xs</code> is equivalent to <code class="code">concat&nbsp;(map&nbsp;f&nbsp;xs)</code>.</p>
+</div>
+</div>
+
+<pre id="VALconcat_map">val concat_map : ('a -&gt; 'b t) -&gt; 'a t -&gt; 'b t</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">concat_map&nbsp;f&nbsp;xs</code> is equivalent to <code class="code">concat&nbsp;(map&nbsp;f&nbsp;xs)</code>.</p>
+
+<p><code class="code">concat_map</code> is an alias for <code class="code">flat_map</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.13</li>
+</ul>
+</div>
+
+<pre id="VALzip">val zip : 'a t -&gt; 'b t -&gt; ('a * 'b) t</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">zip&nbsp;xs&nbsp;ys</code> is the sequence of pairs <code class="code">(x,&nbsp;y)</code>
+    drawn synchronously from the sequences <code class="code">xs</code> and <code class="code">ys</code>.</p>
+
+<p>If the sequences <code class="code">xs</code> and <code class="code">ys</code> have different lengths, then
+    the sequence ends as soon as one sequence is exhausted;
+    the excess elements in the other sequence are ignored.</p>
+
+<p><code class="code">zip&nbsp;xs&nbsp;ys</code> is equivalent to <code class="code">map2&nbsp;(fun&nbsp;a&nbsp;b&nbsp;-&gt;&nbsp;(a,&nbsp;b))&nbsp;xs&nbsp;ys</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.14</li>
+</ul>
+</div>
+
+<pre id="VALmap2">val map2 : ('a -&gt; 'b -&gt; 'c) -&gt; 'a t -&gt; 'b t -&gt; 'c t</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">map2&nbsp;f&nbsp;xs&nbsp;ys</code> is the sequence of the elements <code class="code">f&nbsp;x&nbsp;y</code>,
+    where the pairs <code class="code">(x,&nbsp;y)</code> are drawn synchronously from the
+    sequences <code class="code">xs</code> and <code class="code">ys</code>.</p>
+
+<p>If the sequences <code class="code">xs</code> and <code class="code">ys</code> have different lengths, then
+    the sequence ends as soon as one sequence is exhausted;
+    the excess elements in the other sequence are ignored.</p>
+
+<p><code class="code">map2&nbsp;f&nbsp;xs&nbsp;ys</code> is equivalent to <code class="code">map&nbsp;(fun&nbsp;(x,&nbsp;y)&nbsp;-&gt;&nbsp;f&nbsp;x&nbsp;y)&nbsp;(zip&nbsp;xs&nbsp;ys)</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.14</li>
+</ul>
+</div>
+
+<pre id="VALinterleave">val interleave : 'a t -&gt; 'a t -&gt; 'a t</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">interleave&nbsp;xs&nbsp;ys</code> is the sequence that begins with the first element of
+    <code class="code">xs</code>, continues with the first element of <code class="code">ys</code>, and so on.</p>
+
+<p>When one of the sequences <code class="code">xs</code> and <code class="code">ys</code> is exhausted,
+    <code class="code">interleave&nbsp;xs&nbsp;ys</code> continues with the rest of the other sequence.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.14</li>
+</ul>
+</div>
+
+<pre id="VALsorted_merge">val sorted_merge : ('a -&gt; 'a -&gt; int) -&gt; 'a t -&gt; 'a t -&gt; 'a t</pre><div class="info ">
+<div class="info-desc">
+<p>If the sequences <code class="code">xs</code> and <code class="code">ys</code> are sorted according to the total preorder
+    <code class="code">cmp</code>, then <code class="code">sorted_merge&nbsp;cmp&nbsp;xs&nbsp;ys</code> is the sorted sequence obtained by
+    merging the sequences <code class="code">xs</code> and <code class="code">ys</code>.</p>
+
+<p>For more details on comparison functions, see <a href="Array.html#VALsort"><code class="code">Array.sort</code></a>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.14</li>
+</ul>
+</div>
+
+<pre id="VALproduct">val product : 'a t -&gt; 'b t -&gt; ('a * 'b) t</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">product&nbsp;xs&nbsp;ys</code> is the Cartesian product of the sequences <code class="code">xs</code> and <code class="code">ys</code>.</p>
+
+<p>For every element <code class="code">x</code> of <code class="code">xs</code> and for every element <code class="code">y</code> of <code class="code">ys</code>,
+    the pair <code class="code">(x,&nbsp;y)</code> appears once as an element of <code class="code">product&nbsp;xs&nbsp;ys</code>.</p>
+
+<p>The order in which the pairs appear is unspecified.</p>
+
+<p>The sequences <code class="code">xs</code> and <code class="code">ys</code> are not required to be finite.</p>
+
+<p>The sequences <code class="code">xs</code> and <code class="code">ys</code> must be persistent.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.14</li>
+</ul>
+</div>
+
+<pre id="VALmap_product">val map_product : ('a -&gt; 'b -&gt; 'c) -&gt; 'a t -&gt; 'b t -&gt; 'c t</pre><div class="info ">
+<div class="info-desc">
+<p>The sequence <code class="code">map_product&nbsp;f&nbsp;xs&nbsp;ys</code> is the image through <code class="code">f</code>
+    of the Cartesian product of the sequences <code class="code">xs</code> and <code class="code">ys</code>.</p>
+
+<p>For every element <code class="code">x</code> of <code class="code">xs</code> and for every element <code class="code">y</code> of <code class="code">ys</code>,
+    the element <code class="code">f&nbsp;x&nbsp;y</code> appears once as an element of <code class="code">map_product&nbsp;f&nbsp;xs&nbsp;ys</code>.</p>
+
+<p>The order in which these elements appear is unspecified.</p>
+
+<p>The sequences <code class="code">xs</code> and <code class="code">ys</code> are not required to be finite.</p>
+
+<p>The sequences <code class="code">xs</code> and <code class="code">ys</code> must be persistent.</p>
+
+<p><code class="code">map_product&nbsp;f&nbsp;xs&nbsp;ys</code> is equivalent to
+    <code class="code">map&nbsp;(fun&nbsp;(x,&nbsp;y)&nbsp;-&gt;&nbsp;f&nbsp;x&nbsp;y)&nbsp;(product&nbsp;xs&nbsp;ys)</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.14</li>
+</ul>
+</div>
+<h2 id="1_Splittingasequenceintotwosequences">Splitting a sequence into two sequences</h2>
+<pre id="VALunzip">val unzip : ('a * 'b) t -&gt; 'a t * 'b t</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">unzip</code> transforms a sequence of pairs into a pair of sequences.</p>
+
+<p><code class="code">unzip&nbsp;xs</code> is equivalent to <code class="code">(map&nbsp;fst&nbsp;xs,&nbsp;map&nbsp;snd&nbsp;xs)</code>.</p>
+
+<p>Querying either of the sequences returned by <code class="code">unzip&nbsp;xs</code>
+    causes <code class="code">xs</code> to be queried.
+    Therefore, querying both of them
+    causes <code class="code">xs</code> to be queried twice.
+    Thus, <code class="code">xs</code> must be persistent and cheap.
+    If that is not the case, use <code class="code">unzip&nbsp;(memoize&nbsp;xs)</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.14</li>
+</ul>
+</div>
+
+<pre id="VALsplit">val split : ('a * 'b) t -&gt; 'a t * 'b t</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">split</code> is an alias for <code class="code">unzip</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.14</li>
+</ul>
+</div>
+
+<pre id="VALpartition_map">val partition_map : ('a -&gt; ('b, 'c) Either.t) -&gt; 'a t -&gt; 'b t * 'c t</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">partition_map&nbsp;f&nbsp;xs</code> returns a pair of sequences <code class="code">(ys,&nbsp;zs)</code>, where:</p>
+
+<ul>
+<li><code class="code">ys</code> is the sequence of the elements <code class="code">y</code> such that
+      <code class="code">f&nbsp;x&nbsp;=&nbsp;Left&nbsp;y</code>, where <code class="code">x</code> ranges over <code class="code">xs</code>;</li>
+</ul>
+<ul>
+<li><code class="code">zs</code> is the sequence of the elements <code class="code">z</code> such that
+      <code class="code">f&nbsp;x&nbsp;=&nbsp;Right&nbsp;z</code>, where <code class="code">x</code> ranges over <code class="code">xs</code>.</li>
+</ul>
+<p><code class="code">partition_map&nbsp;f&nbsp;xs</code> is equivalent to a pair of
+    <code class="code">filter_map&nbsp;Either.find_left&nbsp;(map&nbsp;f&nbsp;xs)</code> and
+    <code class="code">filter_map&nbsp;Either.find_right&nbsp;(map&nbsp;f&nbsp;xs)</code>.</p>
+
+<p>Querying either of the sequences returned by <code class="code">partition_map&nbsp;f&nbsp;xs</code>
+    causes <code class="code">xs</code> to be queried.
+    Therefore, querying both of them
+    causes <code class="code">xs</code> to be queried twice.
+    Thus, <code class="code">xs</code> must be persistent and cheap.
+    If that is not the case, use <code class="code">partition_map&nbsp;f&nbsp;(memoize&nbsp;xs)</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.14</li>
+</ul>
+</div>
+
+<pre id="VALpartition">val partition : ('a -&gt; bool) -&gt; 'a t -&gt; 'a t * 'a t</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">partition&nbsp;p&nbsp;xs</code> returns a pair of the subsequence of the elements
+    of <code class="code">xs</code> that satisfy <code class="code">p</code> and the subsequence of the elements of
+    <code class="code">xs</code> that do not satisfy <code class="code">p</code>.</p>
+
+<p><code class="code">partition&nbsp;p&nbsp;xs</code> is equivalent to
+    <code class="code">filter&nbsp;p&nbsp;xs,&nbsp;filter&nbsp;(fun&nbsp;x&nbsp;-&gt;&nbsp;not&nbsp;(p&nbsp;x))&nbsp;xs</code>.</p>
+
+<p>Consuming both of the sequences returned by <code class="code">partition&nbsp;p&nbsp;xs</code> causes
+    <code class="code">xs</code> to be consumed twice and causes the function <code class="code">f</code> to be applied
+    twice to each element of the list.
+    Therefore, <code class="code">f</code> should be pure and cheap.
+    Furthermore, <code class="code">xs</code> should be persistent and cheap.
+    If that is not the case, use <code class="code">partition&nbsp;p&nbsp;(memoize&nbsp;xs)</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.14</li>
+</ul>
+</div>
+<h2 id="1_Convertingbetweensequencesanddispensers">Converting between sequences and dispensers</h2><p>A dispenser is a representation of a sequence as a function of type
+    <code class="code">unit&nbsp;-&gt;&nbsp;'a&nbsp;option</code>. Every time this function is invoked, it returns
+    the next element of the sequence. When there are no more elements,
+    it returns <code class="code">None</code>. A dispenser has mutable internal state, therefore
+    is ephemeral: the sequence that it represents can be consumed at most
+    once.</p>
+
+<pre id="VALof_dispenser">val of_dispenser : (unit -&gt; 'a option) -&gt; 'a t</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">of_dispenser&nbsp;it</code> is the sequence of the elements produced by the
+    dispenser <code class="code">it</code>. It is an ephemeral sequence: it can be consumed at most
+    once. If a persistent sequence is needed, use
+    <code class="code">memoize&nbsp;(of_dispenser&nbsp;it)</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.14</li>
+</ul>
+</div>
+
+<pre id="VALto_dispenser">val to_dispenser : 'a t -&gt; unit -&gt; 'a option</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">to_dispenser&nbsp;xs</code> is a fresh dispenser on the sequence <code class="code">xs</code>.</p>
+
+<p>This dispenser has mutable internal state,
+    which is not protected by a lock;
+    so, it must not be used by several threads concurrently.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.14</li>
+</ul>
+</div>
+<h2 id="1_Sequencesofintegers">Sequences of integers</h2>
+<pre id="VALints">val ints : int -&gt; int t</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">ints&nbsp;i</code> is the infinite sequence of the integers beginning at <code class="code">i</code> and
+    counting up.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.14</li>
+</ul>
+</div>
+
+</div>

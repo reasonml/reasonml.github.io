@@ -1,0 +1,53 @@
+<link rel="stylesheet" href="/css/main.css"><div class="ocamldoc">
+<h1>Module <a href="type_Ephemeron.K1.Bucket.html">Ephemeron.K1.Bucket</a></h1>
+
+<pre id="MODULEBucket"><span class="keyword">module</span> Bucket: sig .. end</pre><hr width="100%">
+
+<pre id="TYPEt"><span class="keyword">type</span> ('k, 'd) t </pre>
+<div class="info ">
+<div class="info-desc">
+<p>A bucket is a mutable "list" of ephemerons.</p>
+</div>
+</div>
+
+
+<pre id="VALmake">val make : unit -&gt; ('k, 'd) t</pre><div class="info ">
+<div class="info-desc">
+<p>Create a new bucket.</p>
+</div>
+</div>
+
+<pre id="VALadd">val add : ('k, 'd) t -&gt; 'k -&gt; 'd -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p>Add an ephemeron to the bucket.</p>
+</div>
+</div>
+
+<pre id="VALremove">val remove : ('k, 'd) t -&gt; 'k -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">remove&nbsp;b&nbsp;k</code> removes from <code class="code">b</code> the most-recently added
+        ephemeron with key <code class="code">k</code>, or does nothing if there is no such
+        ephemeron.</p>
+</div>
+</div>
+
+<pre id="VALfind">val find : ('k, 'd) t -&gt; 'k -&gt; 'd option</pre><div class="info ">
+<div class="info-desc">
+<p>Returns the data of the most-recently added ephemeron with the
+        given key, or <code class="code">None</code> if there is no such ephemeron.</p>
+</div>
+</div>
+
+<pre id="VALlength">val length : ('k, 'd) t -&gt; int</pre><div class="info ">
+<div class="info-desc">
+<p>Returns an upper bound on the length of the bucket.</p>
+</div>
+</div>
+
+<pre id="VALclear">val clear : ('k, 'd) t -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p>Remove all ephemerons from the bucket.</p>
+</div>
+</div>
+
+</div>

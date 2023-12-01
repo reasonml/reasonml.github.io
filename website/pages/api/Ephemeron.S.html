@@ -1,0 +1,52 @@
+<link rel="stylesheet" href="/css/main.css"><div class="ocamldoc">
+<h1>Module type <a href="type_Ephemeron.S.html">Ephemeron.S</a></h1>
+
+<pre id="MODULETYPES"><span class="keyword">module</span> type S = sig .. end</pre><div class="info modtype top">
+<div class="info-desc">
+<p>The output signature of the functors <a href="Ephemeron.K1.Make.html"><code class="code">Ephemeron.K1.Make</code></a> and <a href="Ephemeron.K2.Make.html"><code class="code">Ephemeron.K2.Make</code></a>.
+    These hash tables are weak in the keys. If all the keys of a binding are
+    alive the binding is kept, but if one of the keys of the binding
+    is dead then the binding is removed.</p>
+</div>
+</div>
+<hr width="100%">
+<p>Propose the same interface as usual hash table. However since
+      the bindings are weak, even if <code class="code">mem&nbsp;h&nbsp;k</code> is true, a subsequent
+      <code class="code">find&nbsp;h&nbsp;k</code> may raise <code class="code">Not_found</code> because the garbage collector
+      can run between the two.</p>
+
+<pre id="TYPEkey"><span class="keyword">type</span> key </pre>
+
+
+<pre id="TYPEt"><span class="keyword">type</span> 'a t </pre>
+
+
+<pre id="VALcreate">val create : int -&gt; 'a t</pre>
+<pre id="VALclear">val clear : 'a t -&gt; unit</pre>
+<pre id="VALreset">val reset : 'a t -&gt; unit</pre>
+<pre id="VALcopy">val copy : 'a t -&gt; 'a t</pre>
+<pre id="VALadd">val add : 'a t -&gt; key -&gt; 'a -&gt; unit</pre>
+<pre id="VALremove">val remove : 'a t -&gt; key -&gt; unit</pre>
+<pre id="VALfind">val find : 'a t -&gt; key -&gt; 'a</pre>
+<pre id="VALfind_opt">val find_opt : 'a t -&gt; key -&gt; 'a option</pre>
+<pre id="VALfind_all">val find_all : 'a t -&gt; key -&gt; 'a list</pre>
+<pre id="VALreplace">val replace : 'a t -&gt; key -&gt; 'a -&gt; unit</pre>
+<pre id="VALmem">val mem : 'a t -&gt; key -&gt; bool</pre>
+<pre id="VALlength">val length : 'a t -&gt; int</pre>
+<pre id="VALstats">val stats : 'a t -&gt; Hashtbl.statistics</pre>
+<pre id="VALadd_seq">val add_seq : 'a t -&gt; (key * 'a) Seq.t -&gt; unit</pre>
+<pre id="VALreplace_seq">val replace_seq : 'a t -&gt; (key * 'a) Seq.t -&gt; unit</pre>
+<pre id="VALof_seq">val of_seq : (key * 'a) Seq.t -&gt; 'a t</pre>
+<pre id="VALclean">val clean : 'a t -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p>remove all dead bindings. Done automatically during automatic resizing.</p>
+</div>
+</div>
+
+<pre id="VALstats_alive">val stats_alive : 'a t -&gt; Hashtbl.statistics</pre><div class="info ">
+<div class="info-desc">
+<p>same as <a href="Hashtbl.SeededS.html#VALstats"><code class="code">Hashtbl.SeededS.stats</code></a> but only count the alive bindings</p>
+</div>
+</div>
+
+</div>

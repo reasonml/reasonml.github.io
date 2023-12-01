@@ -1,0 +1,60 @@
+<link rel="stylesheet" href="/css/main.css"><div class="ocamldoc">
+<h1>Functor <a href="type_Ephemeron.K1.MakeSeeded.html">Ephemeron.K1.MakeSeeded</a></h1>
+
+<pre id="MODULEMakeSeeded"><span class="keyword">module</span> MakeSeeded: functor&nbsp;(H&nbsp;:&nbsp;Hashtbl.SeededHashedType)&nbsp;-&gt;&nbsp;Ephemeron.SeededS  with type key = H.t</pre><div class="info module top">
+<div class="info-desc">
+<p>Functor building an implementation of a weak hash table.
+      The seed is similar to the one of <a href="Hashtbl.MakeSeeded.html"><code class="code">Hashtbl.MakeSeeded</code></a>.</p>
+</div>
+</div>
+<table border="0" cellpadding="3" width="100%">
+<tbody><tr>
+<td align="left" valign="top" width="1%%"><b>Parameters: </b></td>
+<td>
+<table class="paramstable">
+<tbody><tr>
+<td align="center" valign="top" width="15%">
+<code>H</code></td>
+<td align="center" valign="top">:</td>
+<td><code class="type">Hashtbl.SeededHashedType</code>
+</td></tr></tbody></table>
+</td>
+</tr>
+</tbody></table>
+<hr width="100%">
+
+<pre id="TYPEkey"><span class="keyword">type</span> key </pre>
+
+
+<pre id="TYPEt"><span class="keyword">type</span> 'a t </pre>
+
+
+<pre id="VALcreate">val create : ?random:bool -&gt; int -&gt; 'a t</pre>
+<pre id="VALclear">val clear : 'a t -&gt; unit</pre>
+<pre id="VALreset">val reset : 'a t -&gt; unit</pre>
+<pre id="VALcopy">val copy : 'a t -&gt; 'a t</pre>
+<pre id="VALadd">val add : 'a t -&gt; key -&gt; 'a -&gt; unit</pre>
+<pre id="VALremove">val remove : 'a t -&gt; key -&gt; unit</pre>
+<pre id="VALfind">val find : 'a t -&gt; key -&gt; 'a</pre>
+<pre id="VALfind_opt">val find_opt : 'a t -&gt; key -&gt; 'a option</pre>
+<pre id="VALfind_all">val find_all : 'a t -&gt; key -&gt; 'a list</pre>
+<pre id="VALreplace">val replace : 'a t -&gt; key -&gt; 'a -&gt; unit</pre>
+<pre id="VALmem">val mem : 'a t -&gt; key -&gt; bool</pre>
+<pre id="VALlength">val length : 'a t -&gt; int</pre>
+<pre id="VALstats">val stats : 'a t -&gt; Hashtbl.statistics</pre>
+<pre id="VALadd_seq">val add_seq : 'a t -&gt; (key * 'a) Seq.t -&gt; unit</pre>
+<pre id="VALreplace_seq">val replace_seq : 'a t -&gt; (key * 'a) Seq.t -&gt; unit</pre>
+<pre id="VALof_seq">val of_seq : (key * 'a) Seq.t -&gt; 'a t</pre>
+<pre id="VALclean">val clean : 'a t -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p>remove all dead bindings. Done automatically during automatic resizing.</p>
+</div>
+</div>
+
+<pre id="VALstats_alive">val stats_alive : 'a t -&gt; Hashtbl.statistics</pre><div class="info ">
+<div class="info-desc">
+<p>same as <a href="Hashtbl.SeededS.html#VALstats"><code class="code">Hashtbl.SeededS.stats</code></a> but only count the alive bindings</p>
+</div>
+</div>
+
+</div>

@@ -1,0 +1,118 @@
+<link rel="stylesheet" href="/css/main.css"><div class="ocamldoc">
+<h1>Module <a href="type_Event.html">Event</a></h1>
+
+<pre id="MODULEEvent"><span class="keyword">module</span> Event: sig .. end</pre><div class="info module top">
+<div class="info-desc">
+<p>First-class synchronous communication.</p>
+
+<p>This module implements synchronous inter-thread communications over
+   channels. As in John Reppy's Concurrent ML system, the communication
+   events are first-class values: they can be built and combined
+   independently before being offered for communication.</p>
+</div>
+</div>
+<hr width="100%">
+
+<pre id="TYPEchannel"><span class="keyword">type</span> 'a channel </pre>
+<div class="info ">
+<div class="info-desc">
+<p>The type of communication channels carrying values of type <code class="code">'a</code>.</p>
+</div>
+</div>
+
+
+<pre id="VALnew_channel">val new_channel : unit -&gt; 'a channel</pre><div class="info ">
+<div class="info-desc">
+<p>Return a new channel.</p>
+</div>
+</div>
+
+<pre id="TYPEevent"><span class="keyword">type</span> +'a event </pre>
+<div class="info ">
+<div class="info-desc">
+<p>The type of communication events returning a result of type <code class="code">'a</code>.</p>
+</div>
+</div>
+
+
+<pre id="VALsend">val send : 'a channel -&gt; 'a -&gt; unit event</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">send&nbsp;ch&nbsp;v</code> returns the event consisting in sending the value <code class="code">v</code>
+   over the channel <code class="code">ch</code>. The result value of this event is <code class="code">()</code>.</p>
+</div>
+</div>
+
+<pre id="VALreceive">val receive : 'a channel -&gt; 'a event</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">receive&nbsp;ch</code> returns the event consisting in receiving a value
+   from the channel <code class="code">ch</code>. The result value of this event is the
+   value received.</p>
+</div>
+</div>
+
+<pre id="VALalways">val always : 'a -&gt; 'a event</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">always&nbsp;v</code> returns an event that is always ready for
+   synchronization.  The result value of this event is <code class="code">v</code>.</p>
+</div>
+</div>
+
+<pre id="VALchoose">val choose : 'a event list -&gt; 'a event</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">choose&nbsp;evl</code> returns the event that is the alternative of
+   all the events in the list <code class="code">evl</code>.</p>
+</div>
+</div>
+
+<pre id="VALwrap">val wrap : 'a event -&gt; ('a -&gt; 'b) -&gt; 'b event</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">wrap&nbsp;ev&nbsp;fn</code> returns the event that performs the same communications
+   as <code class="code">ev</code>, then applies the post-processing function <code class="code">fn</code>
+   on the return value.</p>
+</div>
+</div>
+
+<pre id="VALwrap_abort">val wrap_abort : 'a event -&gt; (unit -&gt; unit) -&gt; 'a event</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">wrap_abort&nbsp;ev&nbsp;fn</code> returns the event that performs
+   the same communications as <code class="code">ev</code>, but if it is not selected
+   the function <code class="code">fn</code> is called after the synchronization.</p>
+</div>
+</div>
+
+<pre id="VALguard">val guard : (unit -&gt; 'a event) -&gt; 'a event</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">guard&nbsp;fn</code> returns the event that, when synchronized, computes
+   <code class="code">fn()</code> and behaves as the resulting event. This enables
+   computing events with side-effects at the time of the synchronization
+   operation.</p>
+</div>
+</div>
+
+<pre id="VALsync">val sync : 'a event -&gt; 'a</pre><div class="info ">
+<div class="info-desc">
+<p>'Synchronize' on an event: offer all the communication
+   possibilities specified in the event to the outside world,
+   and block until one of the communications succeed. The result
+   value of that communication is returned.</p>
+</div>
+</div>
+
+<pre id="VALselect">val select : 'a event list -&gt; 'a</pre><div class="info ">
+<div class="info-desc">
+<p>'Synchronize' on an alternative of events.
+   <code class="code">select&nbsp;evl</code> is shorthand for <code class="code">sync(choose&nbsp;evl)</code>.</p>
+</div>
+</div>
+
+<pre id="VALpoll">val poll : 'a event -&gt; 'a option</pre><div class="info ">
+<div class="info-desc">
+<p>Non-blocking version of <a href="Event.html#VALsync"><code class="code">Event.sync</code></a>: offer all the communication
+   possibilities specified in the event to the outside world,
+   and if one can take place immediately, perform it and return
+   <code class="code">Some&nbsp;r</code> where <code class="code">r</code> is the result value of that communication.
+   Otherwise, return <code class="code">None</code> without blocking.</p>
+</div>
+</div>
+
+</div>

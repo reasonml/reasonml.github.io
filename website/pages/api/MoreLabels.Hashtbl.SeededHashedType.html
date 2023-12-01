@@ -1,31 +1,38 @@
 <link rel="stylesheet" href="/css/main.css"><div class="ocamldoc">
-<div class="navbar"><a class="pre" href="MoreLabels.Hashtbl.HashedType.html" title="MoreLabels.Hashtbl.HashedType">Previous</a>
-&#xA0;<a class="up" href="MoreLabels.Hashtbl.html" title="MoreLabels.Hashtbl">Up</a>
-&#xA0;<a class="post" href="MoreLabels.Hashtbl.S.html" title="MoreLabels.Hashtbl.S">Next</a>
-</div>
 <h1>Module type <a href="type_MoreLabels.Hashtbl.SeededHashedType.html">MoreLabels.Hashtbl.SeededHashedType</a></h1>
 
-<pre><span class="keyword">module</span> type SeededHashedType = Hashtbl.SeededHashedType;
-</pre><hr width="100%">
+<pre id="MODULETYPESeededHashedType"><span class="keyword">module</span> type SeededHashedType = sig .. end</pre><div class="info modtype top">
+<div class="info-desc">
+<p>The input signature of the functor <a href="MoreLabels.Hashtbl.MakeSeeded.html"><code class="code">MoreLabels.Hashtbl.MakeSeeded</code></a>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.00.0</li>
+</ul>
+</div>
+<hr width="100%">
 
-<pre id="TYPEt"><span class="keyword">type</span> t;
-</pre>
+<pre id="TYPEt"><span class="keyword">type</span> t </pre>
 <div class="info ">
-The type of the hashtable keys.<br>
+<div class="info-desc">
+<p>The type of the hashtable keys.</p>
+</div>
 </div>
 
 
-<pre id="VALequal"><span class="keyword">let</span> equal: (t, t) =&gt; bool;
-</pre><div class="info ">
-The equality predicate used to compare keys.<br>
+<pre id="VALequal">val equal : t -&gt;       t -&gt; bool</pre><div class="info ">
+<div class="info-desc">
+<p>The equality predicate used to compare keys.</p>
+</div>
 </div>
 
-<pre id="VALhash"><span class="keyword">let</span> hash: (int, t) =&gt; int;
-</pre><div class="info ">
-A seeded hashing function on keys.  The first argument is
-          the seed.  It must be the case that if <code class="code">equal x y</code> is true,
-          then <code class="code">hash seed x = hash seed y</code> for any value of <code class="code">seed</code>.
-          A suitable choice for <code class="code">hash</code> is the function <a href="Hashtbl.html#VALseeded_hash"><code class="code">Hashtbl.seeded_hash</code></a>
-          below.<br>
+<pre id="VALseeded_hash">val seeded_hash : int -&gt; t -&gt; int</pre><div class="info ">
+<div class="info-desc">
+<p>A seeded hashing function on keys.  The first argument is
+            the seed.  It must be the case that if <code class="code">equal&nbsp;x&nbsp;y</code> is true,
+            then <code class="code">seeded_hash&nbsp;seed&nbsp;x&nbsp;=&nbsp;seeded_hash&nbsp;seed&nbsp;y</code> for any value of
+            <code class="code">seed</code>.  A suitable choice for <code class="code">seeded_hash</code> is the function
+            <a href="MoreLabels.Hashtbl.html#VALseeded_hash"><code class="code">MoreLabels.Hashtbl.seeded_hash</code></a> below.</p>
 </div>
+</div>
+
 </div>

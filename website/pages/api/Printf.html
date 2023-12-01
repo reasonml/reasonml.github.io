@@ -1,56 +1,49 @@
 <link rel="stylesheet" href="/css/main.css"><div class="ocamldoc">
-<div class="navbar"><a class="pre" href="Printexc.html" title="Printexc">Previous</a>
-&#xA0;<a class="up" href="index.html" title="Index">Up</a>
-&#xA0;<a class="post" href="Queue.html" title="Queue">Next</a>
-</div>
 <h1>Module <a href="type_Printf.html">Printf</a></h1>
 
-<pre><span class="keyword">module</span> Printf: sig .. end</pre><div class="info module top">
-Formatted output functions.<br>
+<pre id="MODULEPrintf"><span class="keyword">module</span> Printf: sig .. end</pre><div class="info module top">
+<div class="info-desc">
+<p>Formatted output functions.</p>
+</div>
 </div>
 <hr width="100%">
 
-<pre id="VALfprintf"><span class="keyword">let</span> fprintf:
-  (
-    Pervasives.out_channel,
-    Pervasives.format(&apos;a, Pervasives.out_channel, unit)
-  ) =&gt;
-  &apos;a;
-</pre><div class="info ">
-<code class="code">fprintf outchan format arg1 ... argN</code> formats the arguments
+<pre id="VALfprintf">val fprintf : out_channel -&gt; ('a, out_channel, unit) format -&gt; 'a</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">fprintf&nbsp;outchan&nbsp;format&nbsp;arg1&nbsp;...&nbsp;argN</code> formats the arguments
    <code class="code">arg1</code> to <code class="code">argN</code> according to the format string <code class="code">format</code>, and
-   outputs the resulting string on the channel <code class="code">outchan</code>.
-<p>
+   outputs the resulting string on the channel <code class="code">outchan</code>.</p>
 
-   The format string is a character string which contains two types of
+<p>The format string is a character string which contains two types of
    objects: plain characters, which are simply copied to the output
    channel, and conversion specifications, each of which causes
-   conversion and printing of arguments.
-</p><p>
+   conversion and printing of arguments.</p>
 
-   Conversion specifications have the following form:
-</p><p>
+<p>Conversion specifications have the following form:</p>
 
-   <code class="code">% [flags] [width] [.precision] type</code>
-</p><p>
+<p><code class="code">%&nbsp;[flags]&nbsp;[width]&nbsp;[.precision]&nbsp;type</code></p>
 
-   In short, a conversion specification consists in the <code class="code">%</code> character,
+<p>In short, a conversion specification consists in the <code class="code">%</code> character,
    followed by optional modifiers and a type which is made of one or
-   two characters.
-</p><p>
+   two characters.</p>
 
-   The types and their meanings are:
-</p><p>
-</p><ul>
-<li><code class="code">d</code>, <code class="code">i</code>: convert an integer argument to signed decimal.</li>
+<p>The types and their meanings are:</p>
+
+<ul>
+<li><code class="code">d</code>, <code class="code">i</code>: convert an integer argument to signed decimal.
+     The flag <code class="code">#</code> adds underscores to large values for readability.</li>
 <li><code class="code">u</code>, <code class="code">n</code>, <code class="code">l</code>, <code class="code">L</code>, or <code class="code">N</code>: convert an integer argument to
      unsigned decimal.  Warning: <code class="code">n</code>, <code class="code">l</code>, <code class="code">L</code>, and <code class="code">N</code> are
-     used for <code class="code">scanf</code>, and should not be used for <code class="code">printf</code>.</li>
+     used for <code class="code">scanf</code>, and should not be used for <code class="code">printf</code>.
+     The flag <code class="code">#</code> adds underscores to large values for readability.</li>
 <li><code class="code">x</code>: convert an integer argument to unsigned hexadecimal,
-     using lowercase letters.</li>
+     using lowercase letters.
+     The flag <code class="code">#</code> adds a <code class="code">0x</code> prefix to non zero values.</li>
 <li><code class="code">X</code>: convert an integer argument to unsigned hexadecimal,
-     using uppercase letters.</li>
-<li><code class="code">o</code>: convert an integer argument to unsigned octal.</li>
+     using uppercase letters.
+     The flag <code class="code">#</code> adds a <code class="code">0X</code> prefix to non zero values.</li>
+<li><code class="code">o</code>: convert an integer argument to unsigned octal.
+     The flag <code class="code">#</code> adds a <code class="code">0</code> prefix to non zero values.</li>
 <li><code class="code">s</code>: insert a string argument.</li>
 <li><code class="code">S</code>: convert a string argument to OCaml syntax (double quotes, escapes).</li>
 <li><code class="code">c</code>: insert a character argument.</li>
@@ -59,11 +52,18 @@ Formatted output functions.<br>
 <li><code class="code">f</code>: convert a floating-point argument to decimal notation,
      in the style <code class="code">dddd.ddd</code>.</li>
 <li><code class="code">F</code>: convert a floating-point argument to OCaml syntax (<code class="code">dddd.</code>
-     or <code class="code">dddd.ddd</code> or <code class="code">d.ddd e+-dd</code>).</li>
+     or <code class="code">dddd.ddd</code> or <code class="code">d.ddd&nbsp;e+-dd</code>).
+     Converts to hexadecimal with the <code class="code">#</code> flag (see <code class="code">h</code>).</li>
 <li><code class="code">e</code> or <code class="code">E</code>: convert a floating-point argument to decimal notation,
-     in the style <code class="code">d.ddd e+-dd</code> (mantissa and exponent).</li>
+     in the style <code class="code">d.ddd&nbsp;e+-dd</code> (mantissa and exponent).</li>
 <li><code class="code">g</code> or <code class="code">G</code>: convert a floating-point argument to decimal notation,
-     in style <code class="code">f</code> or <code class="code">e</code>, <code class="code">E</code> (whichever is more compact).</li>
+     in style <code class="code">f</code> or <code class="code">e</code>, <code class="code">E</code> (whichever is more compact). Moreover,
+     any trailing zeros are removed from the fractional part of the result
+     and the decimal-point character is removed if there is no fractional
+     part remaining.</li>
+<li><code class="code">h</code> or <code class="code">H</code>: convert a floating-point argument to hexadecimal notation,
+     in the style <code class="code">0xh.hhhh&nbsp;p+-dd</code> (hexadecimal mantissa, exponent in
+     decimal and denotes a power of 2).</li>
 <li><code class="code">B</code>: convert a boolean argument to the string <code class="code">true</code> or <code class="code">false</code></li>
 <li><code class="code">b</code>: convert a boolean argument (deprecated; do not use in new
      programs).</li>
@@ -76,15 +76,15 @@ Formatted output functions.<br>
 <li><code class="code">a</code>: user-defined printer. Take two arguments and apply the
      first one to <code class="code">outchan</code> (the current output channel) and to the
      second argument. The first argument must therefore have type
-     <code class="code">out_channel -&gt; &apos;b -&gt; unit</code> and the second <code class="code">&apos;b</code>.
+     <code class="code">out_channel&nbsp;-&gt;&nbsp;'b&nbsp;-&gt;&nbsp;unit</code> and the second <code class="code">'b</code>.
      The output produced by the function is inserted in the output of
      <code class="code">fprintf</code> at the current point.</li>
 <li><code class="code">t</code>: same as <code class="code">%a</code>, but take only one argument (with type
-     <code class="code">out_channel -&gt; unit</code>) and apply it to <code class="code">outchan</code>.</li>
-<li><code class="code">{ fmt %}</code>: convert a format string argument to its type digest.
+     <code class="code">out_channel&nbsp;-&gt;&nbsp;unit</code>) and apply it to <code class="code">outchan</code>.</li>
+<li><code class="code">{&nbsp;fmt&nbsp;%}</code>: convert a format string argument to its type digest.
      The argument must have the same type as the internal format string
      <code class="code">fmt</code>.</li>
-<li><code class="code">( fmt %)</code>: format string substitution. Take a format string
+<li><code class="code">(&nbsp;fmt&nbsp;%)</code>: format string substitution. Take a format string
      argument and substitute it to the internal format string <code class="code">fmt</code>
      to print following arguments. The argument must have the same
      type as the internal format string <code class="code">fmt</code>.</li>
@@ -94,115 +94,141 @@ Formatted output functions.<br>
 <li><code class="code">,</code>: take no argument and output nothing: a no-op delimiter for
      conversion specifications.</li>
 </ul>
-
-   The optional <code class="code">flags</code> are:<ul>
+<p>The optional <code class="code">flags</code> are:</p>
+<ul>
 <li><code class="code">-</code>: left-justify the output (default is right justification).</li>
 <li><code class="code">0</code>: for numerical conversions, pad with zeroes instead of spaces.</li>
 <li><code class="code">+</code>: for signed numerical conversions, prefix number with a <code class="code">+</code>
      sign if positive.</li>
 <li>space: for signed numerical conversions, prefix number with a
      space if positive.</li>
-<li><code class="code">#</code>: request an alternate formatting style for the hexadecimal
-     and octal integer types (<code class="code">x</code>, <code class="code">X</code>, <code class="code">o</code>, <code class="code">lx</code>, <code class="code">lX</code>, <code class="code">lo</code>, <code class="code">Lx</code>,
-     <code class="code">LX</code>, <code class="code">Lo</code>).</li>
+<li><code class="code">#</code>: request an alternate formatting style for the integer types
+     and the floating-point type <code class="code">F</code>.</li>
 </ul>
-
-   The optional <code class="code">width</code> is an integer indicating the minimal
+<p>The optional <code class="code">width</code> is an integer indicating the minimal
    width of the result. For instance, <code class="code">%6d</code> prints an integer,
-   prefixing it with spaces to fill at least 6 characters.
-<p>
+   prefixing it with spaces to fill at least 6 characters.</p>
 
-   The optional <code class="code">precision</code> is a dot <code class="code">.</code> followed by an integer
+<p>The optional <code class="code">precision</code> is a dot <code class="code">.</code> followed by an integer
    indicating how many digits follow the decimal point in the <code class="code">%f</code>,
-   <code class="code">%e</code>, and <code class="code">%E</code> conversions. For instance, <code class="code">%.4f</code> prints a <code class="code">float</code> with
-   4 fractional digits.
-</p><p>
+   <code class="code">%e</code>, <code class="code">%E</code>, <code class="code">%h</code>, and <code class="code">%H</code> conversions or the maximum number of
+   significant digits to appear for the <code class="code">%F</code>, <code class="code">%g</code> and <code class="code">%G</code> conversions.
+   For instance, <code class="code">%.4f</code> prints a <code class="code">float</code> with 4 fractional digits.</p>
 
-   The integer in a <code class="code">width</code> or <code class="code">precision</code> can also be specified as
+<p>The integer in a <code class="code">width</code> or <code class="code">precision</code> can also be specified as
    <code class="code">*</code>, in which case an extra integer argument is taken to specify
    the corresponding <code class="code">width</code> or <code class="code">precision</code>. This integer argument
    precedes immediately the argument to print.
    For instance, <code class="code">%.*f</code> prints a <code class="code">float</code> with as many fractional
-   digits as the value of the argument given before the float.<br>
-</p></div>
-
-<pre id="VALprintf"><span class="keyword">let</span> printf: Pervasives.format(&apos;a, Pervasives.out_channel, unit) =&gt; &apos;a;
-</pre><div class="info ">
-Same as <a href="Printf.html#VALfprintf"><code class="code">Printf.fprintf</code></a>, but output on <code class="code">stdout</code>.<br>
+   digits as the value of the argument given before the float.</p>
+</div>
 </div>
 
-<pre id="VALeprintf"><span class="keyword">let</span> eprintf: Pervasives.format(&apos;a, Pervasives.out_channel, unit) =&gt; &apos;a;
-</pre><div class="info ">
-Same as <a href="Printf.html#VALfprintf"><code class="code">Printf.fprintf</code></a>, but output on <code class="code">stderr</code>.<br>
+<pre id="VALprintf">val printf : ('a, out_channel, unit) format -&gt; 'a</pre><div class="info ">
+<div class="info-desc">
+<p>Same as <a href="Printf.html#VALfprintf"><code class="code">Printf.fprintf</code></a>, but output on <code class="code">stdout</code>.</p>
+</div>
 </div>
 
-<pre id="VALsprintf"><span class="keyword">let</span> sprintf: Pervasives.format(&apos;a, unit, string) =&gt; &apos;a;
-</pre><div class="info ">
-Same as <a href="Printf.html#VALfprintf"><code class="code">Printf.fprintf</code></a>, but instead of printing on an output channel,
-   return a string containing the result of formatting the arguments.<br>
+<pre id="VALeprintf">val eprintf : ('a, out_channel, unit) format -&gt; 'a</pre><div class="info ">
+<div class="info-desc">
+<p>Same as <a href="Printf.html#VALfprintf"><code class="code">Printf.fprintf</code></a>, but output on <code class="code">stderr</code>.</p>
+</div>
 </div>
 
-<pre id="VALbprintf"><span class="keyword">let</span> bprintf: (Buffer.t, Pervasives.format(&apos;a, Buffer.t, unit)) =&gt; &apos;a;
-</pre><div class="info ">
-Same as <a href="Printf.html#VALfprintf"><code class="code">Printf.fprintf</code></a>, but instead of printing on an output channel,
+<pre id="VALsprintf">val sprintf : ('a, unit, string) format -&gt; 'a</pre><div class="info ">
+<div class="info-desc">
+<p>Same as <a href="Printf.html#VALfprintf"><code class="code">Printf.fprintf</code></a>, but instead of printing on an output channel,
+   return a string containing the result of formatting the arguments.</p>
+</div>
+</div>
+
+<pre id="VALbprintf">val bprintf : Buffer.t -&gt; ('a, Buffer.t, unit) format -&gt; 'a</pre><div class="info ">
+<div class="info-desc">
+<p>Same as <a href="Printf.html#VALfprintf"><code class="code">Printf.fprintf</code></a>, but instead of printing on an output channel,
    append the formatted arguments to the given extensible buffer
-   (see module <a href="Buffer.html"><code class="code">Buffer</code></a>).<br>
+   (see module <a href="Buffer.html"><code class="code">Buffer</code></a>).</p>
+</div>
 </div>
 
-<pre id="VALifprintf"><span class="keyword">let</span> ifprintf: (&apos;a, Pervasives.format(&apos;b, &apos;a, unit)) =&gt; &apos;b;
-</pre><div class="info ">
-Same as <a href="Printf.html#VALfprintf"><code class="code">Printf.fprintf</code></a>, but does not print anything.
-    Useful to ignore some material when conditionally printing.<br>
-<b>Since</b> 3.10.0<br>
+<pre id="VALifprintf">val ifprintf : 'b -&gt; ('a, 'b, 'c, unit) format4 -&gt; 'a</pre><div class="info ">
+<div class="info-desc">
+<p>Same as <a href="Printf.html#VALfprintf"><code class="code">Printf.fprintf</code></a>, but does not print anything.
+    Useful to ignore some material when conditionally printing.</p>
 </div>
-<br>
-Formatted output functions with continuations.<br>
-
-<pre id="VALkfprintf"><span class="keyword">let</span> kfprintf:
-  (
-    Pervasives.out_channel =&gt; &apos;a,
-    Pervasives.out_channel,
-    Pervasives.format4(&apos;b, Pervasives.out_channel, unit, &apos;a)
-  ) =&gt;
-  &apos;b;
-</pre><div class="info ">
-Same as <code class="code">fprintf</code>, but instead of returning immediately,
-   passes the out channel to its first argument at the end of printing.<br>
-<b>Since</b> 3.09.0<br>
+<ul class="info-attributes">
+<li><b>Since</b> 3.10.0</li>
+</ul>
 </div>
 
-<pre id="VALikfprintf"><span class="keyword">let</span> ikfprintf:
-  (
-    Pervasives.out_channel =&gt; &apos;a,
-    Pervasives.out_channel,
-    Pervasives.format4(&apos;b, Pervasives.out_channel, unit, &apos;a)
-  ) =&gt;
-  &apos;b;
-</pre><div class="info ">
-Same as <code class="code">kfprintf</code> above, but does not print anything.
-   Useful to ignore some material when conditionally printing.<br>
-<b>Since</b> 4.0<br>
+<pre id="VALibprintf">val ibprintf : Buffer.t -&gt; ('a, Buffer.t, unit) format -&gt; 'a</pre><div class="info ">
+<div class="info-desc">
+<p>Same as <a href="Printf.html#VALbprintf"><code class="code">Printf.bprintf</code></a>, but does not print anything.
+    Useful to ignore some material when conditionally printing.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.11.0</li>
+</ul>
+</div>
+<p>Formatted output functions with continuations.</p>
+
+<pre id="VALkfprintf">val kfprintf : (out_channel -&gt; 'd) -&gt;       out_channel -&gt; ('a, out_channel, unit, 'd) format4 -&gt; 'a</pre><div class="info ">
+<div class="info-desc">
+<p>Same as <code class="code">fprintf</code>, but instead of returning immediately,
+   passes the out channel to its first argument at the end of printing.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 3.09.0</li>
+</ul>
 </div>
 
-<pre id="VALksprintf"><span class="keyword">let</span> ksprintf: (string =&gt; &apos;a, Pervasives.format4(&apos;b, unit, string, &apos;a)) =&gt; &apos;b;
-</pre><div class="info ">
-Same as <code class="code">sprintf</code> above, but instead of returning the string,
-   passes it to the first argument.<br>
-<b>Since</b> 3.09.0<br>
+<pre id="VALikfprintf">val ikfprintf : ('b -&gt; 'd) -&gt; 'b -&gt; ('a, 'b, 'c, 'd) format4 -&gt; 'a</pre><div class="info ">
+<div class="info-desc">
+<p>Same as <code class="code">kfprintf</code> above, but does not print anything.
+   Useful to ignore some material when conditionally printing.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.01.0</li>
+</ul>
 </div>
 
-<pre id="VALkbprintf"><span class="keyword">let</span> kbprintf:
-  (Buffer.t =&gt; &apos;a, Buffer.t, Pervasives.format4(&apos;b, Buffer.t, unit, &apos;a)) =&gt; &apos;b;
-</pre><div class="info ">
-Same as <code class="code">bprintf</code>, but instead of returning immediately,
-   passes the buffer to its first argument at the end of printing.<br>
-<b>Since</b> 3.10.0<br>
+<pre id="VALksprintf">val ksprintf : (string -&gt; 'd) -&gt; ('a, unit, string, 'd) format4 -&gt; 'a</pre><div class="info ">
+<div class="info-desc">
+<p>Same as <code class="code">sprintf</code> above, but instead of returning the string,
+   passes it to the first argument.</p>
 </div>
-<br>
-Deprecated<br>
+<ul class="info-attributes">
+<li><b>Since</b> 3.09.0</li>
+</ul>
+</div>
 
-<pre id="VALkprintf"><span class="keyword">let</span> kprintf: (string =&gt; &apos;a, Pervasives.format4(&apos;b, unit, string, &apos;a)) =&gt; &apos;b;
-</pre><div class="info ">
-A deprecated synonym for <code class="code">ksprintf</code>.<br>
+<pre id="VALkbprintf">val kbprintf : (Buffer.t -&gt; 'd) -&gt;       Buffer.t -&gt; ('a, Buffer.t, unit, 'd) format4 -&gt; 'a</pre><div class="info ">
+<div class="info-desc">
+<p>Same as <code class="code">bprintf</code>, but instead of returning immediately,
+   passes the buffer to its first argument at the end of printing.</p>
 </div>
+<ul class="info-attributes">
+<li><b>Since</b> 3.10.0</li>
+</ul>
+</div>
+
+<pre id="VALikbprintf">val ikbprintf : (Buffer.t -&gt; 'd) -&gt;       Buffer.t -&gt; ('a, Buffer.t, unit, 'd) format4 -&gt; 'a</pre><div class="info ">
+<div class="info-desc">
+<p>Same as <code class="code">kbprintf</code> above, but does not print anything.
+   Useful to ignore some material when conditionally printing.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.11.0</li>
+</ul>
+</div>
+<p>Deprecated</p>
+
+<pre id="VALkprintf">val kprintf : (string -&gt; 'b) -&gt; ('a, unit, string, 'b) format4 -&gt; 'a</pre><div class="info ">
+<div class="info-deprecated">
+<span class="warning">Deprecated. </span>Use Printf.ksprintf instead.</div>
+<div class="info-desc">
+<p>A deprecated synonym for <code class="code">ksprintf</code>.</p>
+</div>
+</div>
+
 </div>

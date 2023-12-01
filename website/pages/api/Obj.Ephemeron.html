@@ -1,0 +1,57 @@
+<link rel="stylesheet" href="/css/main.css"><div class="ocamldoc">
+<h1>Module <a href="type_Obj.Ephemeron.html">Obj.Ephemeron</a></h1>
+
+<pre id="MODULEEphemeron"><span class="keyword">module</span> Ephemeron: sig .. end</pre><hr width="100%">
+<p>Ephemeron with arbitrary arity and untyped</p>
+
+<pre id="TYPEobj_t"><span class="keyword">type</span> obj_t = Obj.t </pre>
+<div class="info ">
+<div class="info-desc">
+<p>alias for <a href="Obj.html#TYPEt"><code class="code">Obj.t</code></a></p>
+</div>
+</div>
+
+
+<pre id="TYPEt"><span class="keyword">type</span> t </pre>
+<div class="info ">
+<div class="info-desc">
+<p>an ephemeron cf <a href="Obj.Ephemeron.html"><code class="code">Obj.Ephemeron</code></a></p>
+</div>
+</div>
+
+
+<pre id="VALcreate">val create : int -&gt; t</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">create&nbsp;n</code> returns an ephemeron with <code class="code">n</code> keys.
+      All the keys and the data are initially empty.
+      The argument <code class="code">n</code> must be between zero
+      and <a href="Obj.Ephemeron.html#VALmax_ephe_length"><code class="code">Obj.Ephemeron.max_ephe_length</code></a> (limits included).</p>
+</div>
+</div>
+
+<pre id="VALlength">val length : t -&gt; int</pre><div class="info ">
+<div class="info-desc">
+<p>return the number of keys</p>
+</div>
+</div>
+
+<pre id="VALget_key">val get_key : t -&gt; int -&gt; obj_t option</pre>
+<pre id="VALget_key_copy">val get_key_copy : t -&gt; int -&gt; obj_t option</pre>
+<pre id="VALset_key">val set_key : t -&gt; int -&gt; obj_t -&gt; unit</pre>
+<pre id="VALunset_key">val unset_key : t -&gt; int -&gt; unit</pre>
+<pre id="VALcheck_key">val check_key : t -&gt; int -&gt; bool</pre>
+<pre id="VALblit_key">val blit_key : t -&gt; int -&gt; t -&gt; int -&gt; int -&gt; unit</pre>
+<pre id="VALget_data">val get_data : t -&gt; obj_t option</pre>
+<pre id="VALget_data_copy">val get_data_copy : t -&gt; obj_t option</pre>
+<pre id="VALset_data">val set_data : t -&gt; obj_t -&gt; unit</pre>
+<pre id="VALunset_data">val unset_data : t -&gt; unit</pre>
+<pre id="VALcheck_data">val check_data : t -&gt; bool</pre>
+<pre id="VALblit_data">val blit_data : t -&gt; t -&gt; unit</pre>
+<pre id="VALmax_ephe_length">val max_ephe_length : int</pre><div class="info ">
+<div class="info-desc">
+<p>Maximum length of an ephemeron, ie the maximum number of keys an
+      ephemeron could contain</p>
+</div>
+</div>
+
+</div>

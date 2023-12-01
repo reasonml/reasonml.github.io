@@ -1,0 +1,473 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<link rel="stylesheet" href="style.css" type="text/css">
+<meta content="text/html; charset=utf8" http-equiv="Content-Type">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="Start" href="index.html">
+<link rel="next" href="Ocaml_operators.html">
+<link rel="Up" href="index.html">
+<link title="Index of types" rel=Appendix href="index_types.html">
+<link title="Index of extensions" rel=Appendix href="index_extensions.html">
+<link title="Index of exceptions" rel=Appendix href="index_exceptions.html">
+<link title="Index of values" rel=Appendix href="index_values.html">
+<link title="Index of modules" rel=Appendix href="index_modules.html">
+<link title="Index of module types" rel=Appendix href="index_module_types.html">
+<link title="Format_tutorial" rel="Chapter" href="Format_tutorial.html">
+<link title="Ocaml_operators" rel="Chapter" href="Ocaml_operators.html">
+<link title="Arg" rel="Chapter" href="Arg.html">
+<link title="Array" rel="Chapter" href="Array.html">
+<link title="ArrayLabels" rel="Chapter" href="ArrayLabels.html">
+<link title="Atomic" rel="Chapter" href="Atomic.html">
+<link title="Bigarray" rel="Chapter" href="Bigarray.html">
+<link title="Bool" rel="Chapter" href="Bool.html">
+<link title="Buffer" rel="Chapter" href="Buffer.html">
+<link title="Bytes" rel="Chapter" href="Bytes.html">
+<link title="BytesLabels" rel="Chapter" href="BytesLabels.html">
+<link title="Callback" rel="Chapter" href="Callback.html">
+<link title="Char" rel="Chapter" href="Char.html">
+<link title="Complex" rel="Chapter" href="Complex.html">
+<link title="Condition" rel="Chapter" href="Condition.html">
+<link title="Digest" rel="Chapter" href="Digest.html">
+<link title="Domain" rel="Chapter" href="Domain.html">
+<link title="Dynlink" rel="Chapter" href="Dynlink.html">
+<link title="Effect" rel="Chapter" href="Effect.html">
+<link title="Either" rel="Chapter" href="Either.html">
+<link title="Ephemeron" rel="Chapter" href="Ephemeron.html">
+<link title="Event" rel="Chapter" href="Event.html">
+<link title="Filename" rel="Chapter" href="Filename.html">
+<link title="Float" rel="Chapter" href="Float.html">
+<link title="Format" rel="Chapter" href="Format.html">
+<link title="Fun" rel="Chapter" href="Fun.html">
+<link title="Gc" rel="Chapter" href="Gc.html">
+<link title="Hashtbl" rel="Chapter" href="Hashtbl.html">
+<link title="In_channel" rel="Chapter" href="In_channel.html">
+<link title="Int" rel="Chapter" href="Int.html">
+<link title="Int32" rel="Chapter" href="Int32.html">
+<link title="Int64" rel="Chapter" href="Int64.html">
+<link title="Lazy" rel="Chapter" href="Lazy.html">
+<link title="Lexing" rel="Chapter" href="Lexing.html">
+<link title="List" rel="Chapter" href="List.html">
+<link title="ListLabels" rel="Chapter" href="ListLabels.html">
+<link title="Map" rel="Chapter" href="Map.html">
+<link title="Marshal" rel="Chapter" href="Marshal.html">
+<link title="MoreLabels" rel="Chapter" href="MoreLabels.html">
+<link title="Mutex" rel="Chapter" href="Mutex.html">
+<link title="Nativeint" rel="Chapter" href="Nativeint.html">
+<link title="Obj" rel="Chapter" href="Obj.html">
+<link title="Oo" rel="Chapter" href="Oo.html">
+<link title="Option" rel="Chapter" href="Option.html">
+<link title="Out_channel" rel="Chapter" href="Out_channel.html">
+<link title="Parsing" rel="Chapter" href="Parsing.html">
+<link title="Printexc" rel="Chapter" href="Printexc.html">
+<link title="Printf" rel="Chapter" href="Printf.html">
+<link title="Queue" rel="Chapter" href="Queue.html">
+<link title="Random" rel="Chapter" href="Random.html">
+<link title="Result" rel="Chapter" href="Result.html">
+<link title="Runtime_events" rel="Chapter" href="Runtime_events.html">
+<link title="Scanf" rel="Chapter" href="Scanf.html">
+<link title="Semaphore" rel="Chapter" href="Semaphore.html">
+<link title="Seq" rel="Chapter" href="Seq.html">
+<link title="Set" rel="Chapter" href="Set.html">
+<link title="Stack" rel="Chapter" href="Stack.html">
+<link title="StdLabels" rel="Chapter" href="StdLabels.html">
+<link title="Stdlib" rel="Chapter" href="Stdlib.html">
+<link title="Str" rel="Chapter" href="Str.html">
+<link title="String" rel="Chapter" href="String.html">
+<link title="StringLabels" rel="Chapter" href="StringLabels.html">
+<link title="Sys" rel="Chapter" href="Sys.html">
+<link title="Thread" rel="Chapter" href="Thread.html">
+<link title="Uchar" rel="Chapter" href="Uchar.html">
+<link title="Unit" rel="Chapter" href="Unit.html">
+<link title="Unix" rel="Chapter" href="Unix.html">
+<link title="UnixLabels" rel="Chapter" href="UnixLabels.html">
+<link title="Weak" rel="Chapter" href="Weak.html">
+<link title="CamlinternalFormat" rel="Chapter" href="CamlinternalFormat.html">
+<link title="CamlinternalFormatBasics" rel="Chapter" href="CamlinternalFormatBasics.html">
+<link title="CamlinternalLazy" rel="Chapter" href="CamlinternalLazy.html">
+<link title="CamlinternalMod" rel="Chapter" href="CamlinternalMod.html">
+<link title="CamlinternalOO" rel="Chapter" href="CamlinternalOO.html"><title>OCaml library : Format_tutorial</title>
+</head>
+<body>
+<h1>Format_tutorial</h1>
+<div class="info-desc">
+<h1 id="0_UsingtheFormatmodule">Using the Format module</h1>
+<h2 id="1_Principles">Principles</h2>
+<p>Line breaking is based on three concepts:</p>
+
+<ul>
+<li><b>boxes</b> : a box is a logical pretty-printing unit, which
+    defines a behaviour of the pretty-printing engine to display the
+    material inside the box.</li>
+<li><b>break hints</b>: a break hint is a directive to the
+      pretty-printing engine that proposes to break the line here, if it is
+      necessary to properly print the rest of the material.
+      Otherwise, the pretty-printing engine never break lines (except
+      "in case of emergency" to avoid very bad output).
+      In short, a break hint tells the pretty printer that a line break here
+      may be appropriate.</li>
+<li><b>indentation rules</b>:
+      When a line break occurs, the pretty-printing engines fixes the
+      indentation (or amount of leading spaces) of the new line using
+      indentation rules, as follows:
+    <ul>
+<li>A box can state the extra indentation of every new line opened in
+        its scope. This extra indentation is named
+        <b>box breaking indentation</b>.</li>
+<li>A break hint can also set the additional indentation of the new line
+        it may fire. This extra indentation is named <b>hint breaking
+        indentation</b>.</li>
+<li> If break hint <code class="code">bh</code> fires a new line within box
+            <code class="code">b</code>, then the indentation of the new line is simply the sum of:
+            the current indentation of box <code class="code">b</code>
+            +
+            the additional box breaking indentation, as defined by box <code class="code">b</code>
+            +
+            the additional hint breaking indentation, as defined by break
+            hint <code class="code">bh</code>.</li>
+</ul>
+</li>
+</ul>
+
+<h2 id="1_Boxes">Boxes</h2>
+<p>There are 4 types of boxes. (The most often used is the "hov" box type, so skip
+the rest at first reading).</p>
+
+<ul>
+<li><b>horizontal box</b> (<i>h</i> box, as obtained by the
+    <a href="Format.html#VALopen_hbox"><code class="code"><span class="constructor">Format</span>.open_hbox</code></a> procedure): within this box, break hints do not
+    lead to line breaks.</li>
+<li><b>vertical box</b> (<i>v</i> box, as obtained by the
+    <a href="Format.html#VALopen_vbox"><code class="code"><span class="constructor">Format</span>.open_vbox</code></a> procedure): within this box, every break hint lead
+    to a new line.</li>
+<li><b>vertical/horizontal box</b> (<i>hv</i> box, as obtained by
+    the <a href="Format.html#VALopen_hvbox"><code class="code"><span class="constructor">Format</span>.open_hvbox</code></a> procedure): if it is possible, the entire box
+    is written on a single line; otherwise, every break hint within the box
+    leads to a new line.</li>
+<li><b>vertical or horizontal box</b> (<i>hov</i> box, as obtained
+    by the <a href="Format.html#VALopen_box"><code class="code"><span class="constructor">Format</span>.open_box</code></a> or <a href="Format.html#VALopen_hovbox"><code class="code"><span class="constructor">Format</span>.open_hovbox</code></a> procedures): within this
+    box, break hints are used to cut the line when there is no more room on the
+    line. There are two kinds of "hov" boxes, you can find the details below.
+    In first approximation, let me consider these two kinds of "hov" boxes as
+    equivalent and obtained by calling the <a href="Format.html#VALopen_box"><code class="code"><span class="constructor">Format</span>.open_box</code></a> procedure.</li>
+</ul>
+<p>Let me give an example. Suppose we can write 10 chars before
+the right margin (that indicates no more room). We represent any
+char as a <code class="code">-</code> sign; characters <code class="code">[</code> and <code class="code">]</code>
+indicates the opening and closing of a box and <code class="code">b</code> stands
+for a break hint given to the pretty-printing engine.</p>
+
+<p>The output "--b--b--" is displayed like this (the <code class="code">b</code> symbol
+stands for the value of the break that is explained below):</p>
+
+<p>Within a "h" box:</p>
+
+<pre class="codepre"><code class="code">--b--b--
+</code></pre>
+<p>Within a "v" box:</p>
+
+<pre class="codepre"><code class="code">--b
+--b
+--
+</code></pre>
+<p>Within a "hv" box:</p>
+
+<p>If there is enough room to print the box on the line:</p>
+
+<pre class="codepre"><code class="code">--b--b--
+</code></pre>
+<p>But "---b---b---" that cannot fit on the line is written</p>
+
+<pre class="codepre"><code class="code">---b
+---b
+---
+</code></pre>
+<p>Within a "hov" box:</p>
+
+<p>If there is enough room to print the box on the line:</p>
+
+<pre class="codepre"><code class="code">--b--b--
+</code></pre>
+<p>But if "---b---b---" cannot fit on the line, it is written as</p>
+
+<pre class="codepre"><code class="code">---b---b
+---
+</code></pre>
+<p>The first break hint does not lead to a new line, since there is enough room on
+the line. The second one leads to a new line since there is no more room to
+print the material following it. If the room left on the line were even
+shorter, the first break hint may lead to a new line and "---b---b---" is
+written as:</p>
+
+<pre class="codepre"><code class="code">---b
+---b
+---
+</code></pre>
+<h2 id="1_Printingspaces">Printing spaces</h2>
+<p>Break hints are also used to output spaces (if the line is not split when the
+break is encountered, otherwise the new line indicates properly the separation
+between printing items). You output a break hint using <code class="code">print_break&nbsp;sp&nbsp;indent</code>,
+and this sp integer is used to print "sp" spaces. Thus <code class="code">print_break&nbsp;sp&nbsp;...</code> may
+be thought as: print <code class="code">sp</code> spaces or output a new line.</p>
+
+<p>For instance, if b is <code class="code">break&nbsp;1&nbsp;0</code> in the output "--b--b--", we get</p>
+
+<p>within a "h" box:</p>
+
+<pre class="codepre"><code class="code">-- -- --
+</code></pre>
+<p>within a "v" box:</p>
+
+<pre class="codepre"><code class="code">--
+--
+--
+</code></pre>
+<p>within a "hv" box:</p>
+<pre class="codepre"><code class="code">-- -- --
+</code></pre>
+<p>or, according to the remaining room on the line:</p>
+
+<pre class="codepre"><code class="code">--
+--
+--
+</code></pre>
+<p>and similarly for "hov" boxes.</p>
+
+<p>Generally speaking, a printing routine using "format", should not directly
+output white spaces: the routine should use break hints instead. (For instance
+<code class="code">print_space&nbsp;()</code> that is a convenient abbreviation for <code class="code">print_break&nbsp;1&nbsp;0</code> and
+outputs a single space or break the line.)</p>
+
+<h2 id="1_Indentationofnewlines">Indentation of new lines</h2>
+<p>The user gets 2 ways to fix the indentation of new lines:</p>
+
+<p><b>When defining the box</b>: when you open a box, you can fix the indentation
+added to each new line opened within that box.</p>
+
+<p>For instance: <code class="code">open_hovbox&nbsp;1</code> opens a "hov" box with new lines indented 1 more
+than the initial indentation of the box. With output "---[--b--b--b--", we
+get:</p>
+
+<pre class="codepre"><code class="code">---[--b--b
+     --b--
+</code></pre>
+<p>with open_hovbox 2, we get</p>
+
+<pre class="codepre"><code class="code">---[--b--b
+      --b--
+</code></pre>
+<p>Note: the [ sign in the display is not visible on the screen, it is just there
+to materialise the aperture of the pretty-printing box. Last "screen" stands
+for:</p>
+
+<pre class="codepre"><code class="code">-----b--b
+     --b--
+</code></pre>
+<p><b>When defining the break that makes the new line</b>. As said above, you output
+a break hint using <code class="code">print_break&nbsp;sp&nbsp;indent</code>. The <code class="code">indent</code> integer is used to fix
+the additional indentation of the new line. Namely, it is added to the default
+indentation offset of the box where the break occurs.</p>
+
+<p>For instance, if [ stands for the opening of a "hov" box with 1 as extra
+indentation (as obtained by <code class="code">open_hovbox&nbsp;1</code>), and b is <code class="code">print_break&nbsp;1&nbsp;2</code>, then
+  from output "---[--b--b--b--", we get:</p>
+
+<pre class="codepre"><code class="code">   ---[-- --
+         --
+         --
+</code></pre>
+<h2 id="1_Refinementonhovboxes">Refinement on "hov" boxes</h2>
+<p>The "hov" box type is refined into two categories.</p>
+
+<ul>
+<li><b>the vertical or horizontal <i>packing</i> box</b> (as obtained by the
+<a href="Format.html#VALopen_hovbox"><code class="code"><span class="constructor">Format</span>.open_hovbox</code></a> procedure): break hints are used to cut the line when
+there is no more room on the line; no new line occurs if there is enough room
+on the line.</li>
+<li><b>vertical or horizontal <i>structural</i> box</b> (as obtained by the
+<a href="Format.html#VALopen_box"><code class="code"><span class="constructor">Format</span>.open_box</code></a> procedure): similar to the "hov" packing box, the break
+hints are used to cut the line when there is no more room on the line; in
+addition, break hints that can show the box structure lead to new lines even if
+there is enough room on the current line.</li>
+</ul>
+<p>The difference between a packing and a structural "hov" box is shown by a
+routine that closes boxes and parentheses at the end of printing: with packing
+boxes, the closure of boxes and parentheses do not lead to new lines if there
+is enough room on the line, whereas with structural boxes each break hint will
+lead to a new line. For instance, when printing
+"[(---[(----[(---b)]b)]b)]", where "b" is a break hint without extra
+indentation (<code class="code">print_cut&nbsp;()</code>). If "[" means opening of a packing "hov" box
+(<a href="Format.html#VALopen_hovbox"><code class="code"><span class="constructor">Format</span>.open_hovbox</code></a>), "[(---[(----[(---b)]b)]b)]" is printed as
+follows:</p>
+
+<pre class="codepre"><code class="code">(---
+ (----
+  (---)))
+</code></pre>
+<p>If we replace the packing boxes by structural boxes (<a href="Format.html#VALopen_box"><code class="code"><span class="constructor">Format</span>.open_box</code></a>), each
+break hint that precedes a closing parenthesis can show the boxes structure, if
+it leads to a new line; hence "[(---[(----[(---b)]b)]b)]" is printed like
+this:</p>
+
+<pre class="codepre"><code class="code">(---
+ (----
+  (---
+  )
+ )
+)
+</code></pre>
+<h2 id="1_Practicaladvice">Practical advice</h2>
+<p>When writing a pretty-printing routine, follow these simple rules:</p>
+
+<OL>
+<li>Boxes must be opened and closed consistently (<code class="code">open_*</code> and
+<a href="Format.html#VALclose_box"><code class="code"><span class="constructor">Format</span>.close_box</code></a> must be nested like parentheses).</li>
+<li>Never hesitate to open a box.</li>
+<li>Output many break hints, otherwise the pretty-printer is in a bad situation
+where it tries to do its best, which is always "worse than your bad".</li>
+<li>Do not try to force spacing using explicit spaces in the character strings.
+For each space you want in the output emit a break hint (<code class="code">print_space&nbsp;()</code>),
+unless you explicitly don't want the line to be broken here. For instance,
+imagine you want to pretty print an OCaml definition, more precisely a <code class="code"><span class="keyword">let</span>&nbsp;<span class="keyword">rec</span><br>
+ident&nbsp;=&nbsp;expression</code> value definition. You will probably treat the first three
+spaces as "unbreakable spaces" and write them directly in the string constants
+for keywords, and print <code class="code"><span class="string">"let&nbsp;rec"</span></code> before the identifier, and similarly write
+<code class="code">=</code> to get an unbreakable space after the identifier; in contrast, the space
+after the <code class="code">=</code> sign is certainly a break hint, since breaking the line after <code class="code">=</code>
+is a usual (and elegant) way to indent the expression part of a definition.  In
+short, it is often necessary to print unbreakable spaces; however, most of the
+time a space should be considered a break hint.</li>
+<li>Do not try to force new lines, let the pretty-printer do it for you: that's
+its only job.  In particular, do not use <a href="Format.html#VALforce_newline"><code class="code"><span class="constructor">Format</span>.force_newline</code></a>: this
+procedure effectively leads to a newline, but it also as the unfortunate side
+effect to partially reinitialise the pretty-printing engine, so that the rest
+of the printing material is noticeably messed up.</li>
+<li>Never put newline characters directly in the strings to be printed: pretty
+printing engine will consider this newline character as any other character
+written on the current line and this will completely mess up the output.
+Instead of new line characters use line break hints: if those break hints must
+always result in new lines, it just means that the surrounding box must be a
+vertical box!</li>
+<li>End your main program by a <code class="code">print_newline&nbsp;()</code> call, that flushes the
+pretty-printer tables (hence the output).  (Note that the top-level loop of the
+interactive system does it as well, just before a new input.)</li>
+</OL>
+<h2 id="1_Printingtostdoutusingprintf">Printing to stdout: using printf</h2>
+<p>The format module provides a general printing facility "a la" printf. In
+addition to the usual conversion facility provided by printf, you can write
+pretty-printing indications directly inside the format string (opening and
+closing boxes, indicating breaking hints, etc).</p>
+
+<p>Pretty-printing annotations are introduced by the <code class="code">@</code> symbol, directly into the
+string format. Almost any function of the <code class="code"><span class="constructor">Format</span></code> module can be called from
+within a <code class="code">printf</code> format string. For instance</p>
+
+<ul>
+<li>"<code class="code">@[</code>" open a box (open_box 0).  You may precise the type as an extra
+argument. For instance <code class="code">@[&lt;hov&nbsp;n&gt;</code> is equivalent to <code class="code">open_hovbox&nbsp;n</code>.</li>
+<li>"<code class="code">@]</code>" close a box (<code class="code">close_box&nbsp;()</code>).</li>
+<li>"<code class="code">@&nbsp;</code>" output a breakable space (<code class="code">print_space&nbsp;()</code>).</li>
+<li>"<code class="code">@,</code>" output a break hint (<code class="code">print_cut&nbsp;()</code>).</li>
+<li>"<code class="code">@;&lt;n&nbsp;m&gt;</code>" emit a "full" break hint (<code class="code">print_break&nbsp;n&nbsp;m</code>).</li>
+<li>"<code class="code">@.</code>" end the pretty-printing, closing all the boxes still opened
+(<code class="code">print_newline&nbsp;()</code>).</li>
+</ul>
+<p>For instance</p>
+
+<pre class="verbatim">printf "@[&lt;1&gt;%s@ =@ %d@ %s@]@." "Prix TTC" 100 "Euros";;
+Prix TTC = 100 Euros
+- : unit = ()</pre>
+<h2 id="1_Aconcreteexample"> A concrete example</h2>
+<p>Let me give a full example: the shortest non trivial example you could imagine,
+that is the lambda calculus :)</p>
+
+<p>Thus the problem is to pretty-print the values of a concrete data type that
+models a language of expressions that defines functions and their applications
+to arguments.</p>
+
+<p>First, I give the abstract syntax of lambda-terms:</p>
+
+<pre class="verbatim">type lambda =
+ | Lambda of string * lambda
+ | Var of string
+ | Apply of lambda * lambda
+;;</pre>
+<p>I use the format library to print the lambda-terms:</p>
+
+<pre class="verbatim">open Format;;
+
+let ident = print_string;;
+let kwd = print_string;;
+val ident : string -&gt; unit = &lt;fun&gt;
+val kwd : string -&gt; unit = &lt;fun&gt;
+
+let rec print_exp0 = function
+| Var s -&gt;  ident s
+| lam -&gt; open_hovbox 1; kwd "("; print_lambda lam; kwd ")"; close_box ()
+
+and print_app = function
+| e -&gt; open_hovbox 2; print_other_applications e; close_box ()
+
+and print_other_applications f =
+  match f with
+  | Apply (f, arg) -&gt; print_app f; print_space (); print_exp0 arg
+  | f -&gt; print_exp0 f
+
+and print_lambda = function
+| Lambda (s, lam) -&gt;
+      open_hovbox 1;
+      kwd "\\"; ident s; kwd "."; print_space(); print_lambda lam;
+      close_box()
+      | e -&gt; print_app e;;
+val print_app : lambda -&gt; unit = &lt;fun&gt;
+val print_other_applications : lambda -&gt; unit = &lt;fun&gt;
+val print_lambda : lambda -&gt; unit = &lt;fun&gt;</pre>
+<h3 id="2_Mostgeneralprettyprintingusingfprintf">Most general pretty-printing: using fprintf</h3>
+<p>We use the <code class="code">fprintf</code> function to write the most versatile version of the
+pretty-printing functions for lambda-terms.  Now, the functions get an extra
+argument, namely a pretty-printing formatter (the ppf argument) where printing
+will occur. This way the printing routines are more general, since they can
+print on any formatter defined in the program (either printing to a file, or to
+<code class="code">stdout</code>, to <code class="code">stderr</code>, or even to a string).  Furthermore, the pretty-printing
+functions are now compositional, since they may be used in conjunction with the
+special <code class="code">%a</code> conversion, that prints a <code class="code">fprintf</code> argument with a user's supplied
+function (these user's supplied functions also have a formatter as first
+argument).</p>
+
+<p>Using <code class="code">fprintf</code>, the lambda-terms printing routines can be written as follows:</p>
+
+<pre class="verbatim">open Format;;
+
+let ident ppf s = fprintf ppf "%s" s;;
+let kwd ppf s = fprintf ppf "%s" s;;
+val ident : Format.formatter -&gt; string -&gt; unit
+val kwd : Format.formatter -&gt; string -&gt; unit
+
+let rec pr_exp0 ppf = function
+| Var s -&gt; fprintf ppf "%a" ident s
+| lam -&gt; fprintf ppf "@[&lt;1&gt;(%a)@]" pr_lambda lam
+
+and pr_app ppf = function
+| e -&gt; fprintf ppf "@[&lt;2&gt;%a@]" pr_other_applications e
+
+and pr_other_applications ppf f =
+match f with
+| Apply (f, arg) -&gt; fprintf ppf "%a@ %a" pr_app f pr_exp0 arg
+| f -&gt; pr_exp0 ppf f
+
+and pr_lambda ppf = function
+| Lambda (s, lam) -&gt;
+fprintf ppf "@[&lt;1&gt;%a%a%a@ %a@]" kwd "\\" ident s kwd "." pr_lambda lam
+| e -&gt; pr_app ppf e
+;;
+val pr_app : Format.formatter -&gt; lambda -&gt; unit
+val pr_other_applications : Format.formatter -&gt; lambda -&gt; unit
+val pr_lambda : Format.formatter -&gt; lambda -&gt; unit</pre>
+<p>Given those general printing routines, procedures to print to <code class="code">stdout</code> or
+<code class="code">stderr</code> is just a matter of partial application:</p>
+
+<pre class="verbatim">let print_lambda = pr_lambda std_formatter;;
+let eprint_lambda = pr_lambda err_formatter;;
+val print_lambda : lambda -&gt; unit
+val eprint_lambda : lambda -&gt; unit</pre></div>
+</body></html>

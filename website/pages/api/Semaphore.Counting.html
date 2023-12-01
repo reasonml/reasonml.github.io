@@ -1,0 +1,62 @@
+<link rel="stylesheet" href="/css/main.css"><div class="ocamldoc">
+<h1>Module <a href="type_Semaphore.Counting.html">Semaphore.Counting</a></h1>
+
+<pre id="MODULECounting"><span class="keyword">module</span> Counting: sig .. end</pre><hr width="100%">
+
+<pre id="TYPEt"><span class="keyword">type</span> t </pre>
+<div class="info ">
+<div class="info-desc">
+<p>The type of counting semaphores.</p>
+</div>
+</div>
+
+
+<pre id="VALmake">val make : int -&gt; t</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">make&nbsp;n</code> returns a new counting semaphore, with initial value <code class="code">n</code>.
+    The initial value <code class="code">n</code> must be nonnegative.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Raises</b> <code>Invalid_argument</code> if <code class="code">n&nbsp;&lt;&nbsp;0</code></li>
+</ul>
+</div>
+
+<pre id="VALrelease">val release : t -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">release&nbsp;s</code> increments the value of semaphore <code class="code">s</code>.
+    If other threads are waiting on <code class="code">s</code>, one of them is restarted.
+    If the current value of <code class="code">s</code> is equal to <code class="code">max_int</code>, the value of
+    the semaphore is unchanged and a <code class="code">Sys_error</code> exception is raised
+    to signal overflow.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Raises</b> <code>Sys_error</code> if the value of the semaphore would overflow <code class="code">max_int</code></li>
+</ul>
+</div>
+
+<pre id="VALacquire">val acquire : t -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">acquire&nbsp;s</code> blocks the calling thread until the value of semaphore <code class="code">s</code>
+    is not zero, then atomically decrements the value of <code class="code">s</code> and returns.</p>
+</div>
+</div>
+
+<pre id="VALtry_acquire">val try_acquire : t -&gt; bool</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">try_acquire&nbsp;s</code> immediately returns <code class="code">false</code> if the value of semaphore <code class="code">s</code>
+    is zero.  Otherwise, the value of <code class="code">s</code> is atomically decremented
+    and <code class="code">try_acquire&nbsp;s</code> returns <code class="code">true</code>.</p>
+</div>
+</div>
+
+<pre id="VALget_value">val get_value : t -&gt; int</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">get_value&nbsp;s</code> returns the current value of semaphore <code class="code">s</code>.
+    The current value can be modified at any time by concurrent
+    <a href="Semaphore.Counting.html#VALrelease"><code class="code">Semaphore.Counting.release</code></a> and <a href="Semaphore.Counting.html#VALacquire"><code class="code">Semaphore.Counting.acquire</code></a> operations.  Hence, the <code class="code">get_value</code>
+    operation is racy, and its result should only be used for debugging
+    or informational messages.</p>
+</div>
+</div>
+
+</div>

@@ -1,0 +1,142 @@
+<link rel="stylesheet" href="/css/main.css"><div class="ocamldoc">
+<h1>Module <a href="type_Stdlib.Stack.html">Stdlib.Stack</a></h1>
+
+<pre id="MODULEStack"><span class="keyword">module</span> Stack: Stack</pre><hr width="100%">
+<p><b>Unsynchronized accesses</b></p>
+<p>Unsynchronized accesses to a stack may lead to an invalid queue state.
+    Thus, concurrent accesses to stacks must be synchronized (for instance
+    with a <a href="Mutex.html#TYPEt"><code class="code">Mutex.t</code></a>).</p>
+
+<pre id="TYPEt"><span class="keyword">type</span> 'a t </pre>
+<div class="info ">
+<div class="info-desc">
+<p>The type of stacks containing elements of type <code class="code">'a</code>.</p>
+</div>
+</div>
+
+
+<pre id="EXCEPTIONEmpty"><span class="keyword">exception</span> Empty</pre>
+<div class="info ">
+<div class="info-desc">
+<p>Raised when <a href="Stack.html#VALpop"><code class="code">Stack.pop</code></a> or <a href="Stack.html#VALtop"><code class="code">Stack.top</code></a> is applied to an empty stack.</p>
+</div>
+</div>
+
+<pre id="VALcreate">val create : unit -&gt; 'a t</pre><div class="info ">
+<div class="info-desc">
+<p>Return a new stack, initially empty.</p>
+</div>
+</div>
+
+<pre id="VALpush">val push : 'a -&gt; 'a t -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">push&nbsp;x&nbsp;s</code> adds the element <code class="code">x</code> at the top of stack <code class="code">s</code>.</p>
+</div>
+</div>
+
+<pre id="VALpop">val pop : 'a t -&gt; 'a</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">pop&nbsp;s</code> removes and returns the topmost element in stack <code class="code">s</code>,
+   or raises <a href="Stack.html#EXCEPTIONEmpty"><code class="code">Stack.Empty</code></a> if the stack is empty.</p>
+</div>
+</div>
+
+<pre id="VALpop_opt">val pop_opt : 'a t -&gt; 'a option</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">pop_opt&nbsp;s</code> removes and returns the topmost element in stack <code class="code">s</code>,
+   or returns <code class="code">None</code> if the stack is empty.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.08</li>
+</ul>
+</div>
+
+<pre id="VALtop">val top : 'a t -&gt; 'a</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">top&nbsp;s</code> returns the topmost element in stack <code class="code">s</code>,
+   or raises <a href="Stack.html#EXCEPTIONEmpty"><code class="code">Stack.Empty</code></a> if the stack is empty.</p>
+</div>
+</div>
+
+<pre id="VALtop_opt">val top_opt : 'a t -&gt; 'a option</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">top_opt&nbsp;s</code> returns the topmost element in stack <code class="code">s</code>,
+   or <code class="code">None</code> if the stack is empty.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.08</li>
+</ul>
+</div>
+
+<pre id="VALclear">val clear : 'a t -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p>Discard all elements from a stack.</p>
+</div>
+</div>
+
+<pre id="VALcopy">val copy : 'a t -&gt; 'a t</pre><div class="info ">
+<div class="info-desc">
+<p>Return a copy of the given stack.</p>
+</div>
+</div>
+
+<pre id="VALis_empty">val is_empty : 'a t -&gt; bool</pre><div class="info ">
+<div class="info-desc">
+<p>Return <code class="code">true</code> if the given stack is empty, <code class="code">false</code> otherwise.</p>
+</div>
+</div>
+
+<pre id="VALlength">val length : 'a t -&gt; int</pre><div class="info ">
+<div class="info-desc">
+<p>Return the number of elements in a stack. Time complexity O(1)</p>
+</div>
+</div>
+
+<pre id="VALiter">val iter : ('a -&gt; unit) -&gt; 'a t -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">iter&nbsp;f&nbsp;s</code> applies <code class="code">f</code> in turn to all elements of <code class="code">s</code>,
+   from the element at the top of the stack to the element at the
+   bottom of the stack. The stack itself is unchanged.</p>
+</div>
+</div>
+
+<pre id="VALfold">val fold : ('b -&gt; 'a -&gt; 'b) -&gt; 'b -&gt; 'a t -&gt; 'b</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">fold&nbsp;f&nbsp;accu&nbsp;s</code> is <code class="code">(f&nbsp;(...&nbsp;(f&nbsp;(f&nbsp;accu&nbsp;x1)&nbsp;x2)&nbsp;...)&nbsp;xn)</code>
+    where <code class="code">x1</code> is the top of the stack, <code class="code">x2</code> the second element,
+    and <code class="code">xn</code> the bottom element. The stack is unchanged.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.03</li>
+</ul>
+</div>
+<h2 id="1_StacksandSequences">Stacks and Sequences</h2>
+<pre id="VALto_seq">val to_seq : 'a t -&gt; 'a Seq.t</pre><div class="info ">
+<div class="info-desc">
+<p>Iterate on the stack, top to bottom.
+    It is safe to modify the stack during iteration.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.07</li>
+</ul>
+</div>
+
+<pre id="VALadd_seq">val add_seq : 'a t -&gt; 'a Seq.t -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p>Add the elements from the sequence on the top of the stack.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.07</li>
+</ul>
+</div>
+
+<pre id="VALof_seq">val of_seq : 'a Seq.t -&gt; 'a t</pre><div class="info ">
+<div class="info-desc">
+<p>Create a stack from the sequence.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.07</li>
+</ul>
+</div>
+
+</div>

@@ -1,0 +1,737 @@
+<link rel="stylesheet" href="/css/main.css"><div class="ocamldoc">
+<h1>Module <a href="type_Stdlib.Float.html">Stdlib.Float</a></h1>
+
+<pre id="MODULEFloat"><span class="keyword">module</span> Float: Float</pre><hr width="100%">
+
+<pre id="VALzero">val zero : float</pre><div class="info ">
+<div class="info-desc">
+<p>The floating point 0.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.08.0</li>
+</ul>
+</div>
+
+<pre id="VALone">val one : float</pre><div class="info ">
+<div class="info-desc">
+<p>The floating-point 1.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.08.0</li>
+</ul>
+</div>
+
+<pre id="VALminus_one">val minus_one : float</pre><div class="info ">
+<div class="info-desc">
+<p>The floating-point -1.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.08.0</li>
+</ul>
+</div>
+
+<pre id="VALneg">val neg : float -&gt; float</pre><div class="info ">
+<div class="info-desc">
+<p>Unary negation.</p>
+</div>
+</div>
+
+<pre id="VALadd">val add : float -&gt; float -&gt; float</pre><div class="info ">
+<div class="info-desc">
+<p>Floating-point addition.</p>
+</div>
+</div>
+
+<pre id="VALsub">val sub : float -&gt; float -&gt; float</pre><div class="info ">
+<div class="info-desc">
+<p>Floating-point subtraction.</p>
+</div>
+</div>
+
+<pre id="VALmul">val mul : float -&gt; float -&gt; float</pre><div class="info ">
+<div class="info-desc">
+<p>Floating-point multiplication.</p>
+</div>
+</div>
+
+<pre id="VALdiv">val div : float -&gt; float -&gt; float</pre><div class="info ">
+<div class="info-desc">
+<p>Floating-point division.</p>
+</div>
+</div>
+
+<pre id="VALfma">val fma : float -&gt; float -&gt; float -&gt; float</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">fma&nbsp;x&nbsp;y&nbsp;z</code> returns <code class="code">x&nbsp;*&nbsp;y&nbsp;+&nbsp;z</code>, with a best effort for computing
+   this expression with a single rounding, using either hardware
+   instructions (providing full IEEE compliance) or a software
+   emulation.</p>
+
+<p>On 64-bit Cygwin, 64-bit mingw-w64 and MSVC 2017 and earlier, this function
+   may be emulated owing to known bugs on limitations on these platforms.
+   Note: since software emulation of the fma is costly, make sure that you are
+   using hardware fma support if performance matters.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.08.0</li>
+</ul>
+</div>
+
+<pre id="VALrem">val rem : float -&gt; float -&gt; float</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">rem&nbsp;a&nbsp;b</code> returns the remainder of <code class="code">a</code> with respect to <code class="code">b</code>.  The returned
+    value is <code class="code">a&nbsp;-.&nbsp;n&nbsp;*.&nbsp;b</code>, where <code class="code">n</code> is the quotient <code class="code">a&nbsp;/.&nbsp;b</code> rounded towards
+    zero to an integer.</p>
+</div>
+</div>
+
+<pre id="VALsucc">val succ : float -&gt; float</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">succ&nbsp;x</code> returns the floating point number right after <code class="code">x</code> i.e.,
+   the smallest floating-point number greater than <code class="code">x</code>.  See also
+   <a href="Float.html#VALnext_after"><code class="code">Float.next_after</code></a>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.08.0</li>
+</ul>
+</div>
+
+<pre id="VALpred">val pred : float -&gt; float</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">pred&nbsp;x</code> returns the floating-point number right before <code class="code">x</code> i.e.,
+   the greatest floating-point number smaller than <code class="code">x</code>.  See also
+   <a href="Float.html#VALnext_after"><code class="code">Float.next_after</code></a>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.08.0</li>
+</ul>
+</div>
+
+<pre id="VALabs">val abs : float -&gt; float</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">abs&nbsp;f</code> returns the absolute value of <code class="code">f</code>.</p>
+</div>
+</div>
+
+<pre id="VALinfinity">val infinity : float</pre><div class="info ">
+<div class="info-desc">
+<p>Positive infinity.</p>
+</div>
+</div>
+
+<pre id="VALneg_infinity">val neg_infinity : float</pre><div class="info ">
+<div class="info-desc">
+<p>Negative infinity.</p>
+</div>
+</div>
+
+<pre id="VALnan">val nan : float</pre><div class="info ">
+<div class="info-desc">
+<p>A special floating-point value denoting the result of an
+    undefined operation such as <code class="code">0.0&nbsp;/.&nbsp;0.0</code>.  Stands for
+    'not a number'.  Any floating-point operation with <code class="code">nan</code> as
+    argument returns <code class="code">nan</code> as result.  As for floating-point comparisons,
+    <code class="code">=</code>, <code class="code">&lt;</code>, <code class="code">&lt;=</code>, <code class="code">&gt;</code> and <code class="code">&gt;=</code> return <code class="code">false</code> and <code class="code">&lt;&gt;</code> returns <code class="code">true</code>
+    if one or both of their arguments is <code class="code">nan</code>.</p>
+</div>
+</div>
+
+<pre id="VALpi">val pi : float</pre><div class="info ">
+<div class="info-desc">
+<p>The constant pi.</p>
+</div>
+</div>
+
+<pre id="VALmax_float">val max_float : float</pre><div class="info ">
+<div class="info-desc">
+<p>The largest positive finite value of type <code class="code">float</code>.</p>
+</div>
+</div>
+
+<pre id="VALmin_float">val min_float : float</pre><div class="info ">
+<div class="info-desc">
+<p>The smallest positive, non-zero, non-denormalized value of type <code class="code">float</code>.</p>
+</div>
+</div>
+
+<pre id="VALepsilon">val epsilon : float</pre><div class="info ">
+<div class="info-desc">
+<p>The difference between <code class="code">1.0</code> and the smallest exactly representable
+    floating-point number greater than <code class="code">1.0</code>.</p>
+</div>
+</div>
+
+<pre id="VALis_finite">val is_finite : float -&gt; bool</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">is_finite&nbsp;x</code> is <code class="code">true</code> if and only if <code class="code">x</code> is finite i.e., not infinite and
+   not <a href="Float.html#VALnan"><code class="code">Float.nan</code></a>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.08.0</li>
+</ul>
+</div>
+
+<pre id="VALis_infinite">val is_infinite : float -&gt; bool</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">is_infinite&nbsp;x</code> is <code class="code">true</code> if and only if <code class="code">x</code> is <a href="Float.html#VALinfinity"><code class="code">Float.infinity</code></a> or
+    <a href="Float.html#VALneg_infinity"><code class="code">Float.neg_infinity</code></a>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.08.0</li>
+</ul>
+</div>
+
+<pre id="VALis_nan">val is_nan : float -&gt; bool</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">is_nan&nbsp;x</code> is <code class="code">true</code> if and only if <code class="code">x</code> is not a number (see <a href="Float.html#VALnan"><code class="code">Float.nan</code></a>).</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.08.0</li>
+</ul>
+</div>
+
+<pre id="VALis_integer">val is_integer : float -&gt; bool</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">is_integer&nbsp;x</code> is <code class="code">true</code> if and only if <code class="code">x</code> is an integer.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.08.0</li>
+</ul>
+</div>
+
+<pre id="VALof_int">val of_int : int -&gt; float</pre><div class="info ">
+<div class="info-desc">
+<p>Convert an integer to floating-point.</p>
+</div>
+</div>
+
+<pre id="VALto_int">val to_int : float -&gt; int</pre><div class="info ">
+<div class="info-desc">
+<p>Truncate the given floating-point number to an integer.
+    The result is unspecified if the argument is <code class="code">nan</code> or falls outside the
+    range of representable integers.</p>
+</div>
+</div>
+
+<pre id="VALof_string">val of_string : string -&gt; float</pre><div class="info ">
+<div class="info-desc">
+<p>Convert the given string to a float.  The string is read in decimal
+    (by default) or in hexadecimal (marked by <code class="code">0x</code> or <code class="code">0X</code>).
+    The format of decimal floating-point numbers is
+    <code class="code">&nbsp;[-]&nbsp;dd.ddd&nbsp;(e|E)&nbsp;[+|-]&nbsp;dd&nbsp;</code>, where <code class="code">d</code> stands for a decimal digit.
+    The format of hexadecimal floating-point numbers is
+    <code class="code">&nbsp;[-]&nbsp;0(x|X)&nbsp;hh.hhh&nbsp;(p|P)&nbsp;[+|-]&nbsp;dd&nbsp;</code>, where <code class="code">h</code> stands for an
+    hexadecimal digit and <code class="code">d</code> for a decimal digit.
+    In both cases, at least one of the integer and fractional parts must be
+    given; the exponent part is optional.
+    The <code class="code">_</code> (underscore) character can appear anywhere in the string
+    and is ignored.
+    Depending on the execution platforms, other representations of
+    floating-point numbers can be accepted, but should not be relied upon.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Raises</b> <code>Failure</code> if the given string is not a valid
+    representation of a float.</li>
+</ul>
+</div>
+
+<pre id="VALof_string_opt">val of_string_opt : string -&gt; float option</pre><div class="info ">
+<div class="info-desc">
+<p>Same as <code class="code">of_string</code>, but returns <code class="code">None</code> instead of raising.</p>
+</div>
+</div>
+
+<pre id="VALto_string">val to_string : float -&gt; string</pre><div class="info ">
+<div class="info-desc">
+<p>Return a string representation of a floating-point number.</p>
+
+<p>This conversion can involve a loss of precision. For greater control over
+    the manner in which the number is printed, see <a href="Printf.html"><code class="code">Printf</code></a>.</p>
+
+<p>This function is an alias for <a href="Stdlib.html#VALstring_of_float"><code class="code">string_of_float</code></a>.</p>
+</div>
+</div>
+
+<pre id="TYPEfpclass"><span class="keyword">type</span> fpclass = fpclass = </pre><table class="typetable">
+<tbody><tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>FP_normal</code></td>
+<td class="typefieldcomment" align="left" valign="top"><code>(*</code></td><td class="typefieldcomment" align="left" valign="top"><div class="info ">
+<div class="info-desc">
+<p>Normal number, none of the below</p>
+</div>
+</div>
+</td><td class="typefieldcomment" align="left" valign="bottom"><code>*)</code></td>
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>FP_subnormal</code></td>
+<td class="typefieldcomment" align="left" valign="top"><code>(*</code></td><td class="typefieldcomment" align="left" valign="top"><div class="info ">
+<div class="info-desc">
+<p>Number very close to 0.0, has reduced precision</p>
+</div>
+</div>
+</td><td class="typefieldcomment" align="left" valign="bottom"><code>*)</code></td>
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>FP_zero</code></td>
+<td class="typefieldcomment" align="left" valign="top"><code>(*</code></td><td class="typefieldcomment" align="left" valign="top"><div class="info ">
+<div class="info-desc">
+<p>Number is 0.0 or -0.0</p>
+</div>
+</div>
+</td><td class="typefieldcomment" align="left" valign="bottom"><code>*)</code></td>
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>FP_infinite</code></td>
+<td class="typefieldcomment" align="left" valign="top"><code>(*</code></td><td class="typefieldcomment" align="left" valign="top"><div class="info ">
+<div class="info-desc">
+<p>Number is positive or negative infinity</p>
+</div>
+</div>
+</td><td class="typefieldcomment" align="left" valign="bottom"><code>*)</code></td>
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>|</code></td>
+<td align="left" valign="top">
+<code>FP_nan</code></td>
+<td class="typefieldcomment" align="left" valign="top"><code>(*</code></td><td class="typefieldcomment" align="left" valign="top"><div class="info ">
+<div class="info-desc">
+<p>Not a number: result of an undefined operation</p>
+</div>
+</div>
+</td><td class="typefieldcomment" align="left" valign="bottom"><code>*)</code></td>
+</tr></tbody></table>
+
+<div class="info ">
+<div class="info-desc">
+<p>The five classes of floating-point numbers, as determined by
+    the <a href="Float.html#VALclassify_float"><code class="code">Float.classify_float</code></a> function.</p>
+</div>
+</div>
+
+
+<pre id="VALclassify_float">val classify_float : float -&gt; fpclass</pre><div class="info ">
+<div class="info-desc">
+<p>Return the class of the given floating-point number:
+    normal, subnormal, zero, infinite, or not a number.</p>
+</div>
+</div>
+
+<pre id="VALpow">val pow : float -&gt; float -&gt; float</pre><div class="info ">
+<div class="info-desc">
+<p>Exponentiation.</p>
+</div>
+</div>
+
+<pre id="VALsqrt">val sqrt : float -&gt; float</pre><div class="info ">
+<div class="info-desc">
+<p>Square root.</p>
+</div>
+</div>
+
+<pre id="VALcbrt">val cbrt : float -&gt; float</pre><div class="info ">
+<div class="info-desc">
+<p>Cube root.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.13.0</li>
+</ul>
+</div>
+
+<pre id="VALexp">val exp : float -&gt; float</pre><div class="info ">
+<div class="info-desc">
+<p>Exponential.</p>
+</div>
+</div>
+
+<pre id="VALexp2">val exp2 : float -&gt; float</pre><div class="info ">
+<div class="info-desc">
+<p>Base 2 exponential function.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.13.0</li>
+</ul>
+</div>
+
+<pre id="VALlog">val log : float -&gt; float</pre><div class="info ">
+<div class="info-desc">
+<p>Natural logarithm.</p>
+</div>
+</div>
+
+<pre id="VALlog10">val log10 : float -&gt; float</pre><div class="info ">
+<div class="info-desc">
+<p>Base 10 logarithm.</p>
+</div>
+</div>
+
+<pre id="VALlog2">val log2 : float -&gt; float</pre><div class="info ">
+<div class="info-desc">
+<p>Base 2 logarithm.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.13.0</li>
+</ul>
+</div>
+
+<pre id="VALexpm1">val expm1 : float -&gt; float</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">expm1&nbsp;x</code> computes <code class="code">exp&nbsp;x&nbsp;-.&nbsp;1.0</code>, giving numerically-accurate results
+    even if <code class="code">x</code> is close to <code class="code">0.0</code>.</p>
+</div>
+</div>
+
+<pre id="VALlog1p">val log1p : float -&gt; float</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">log1p&nbsp;x</code> computes <code class="code">log(1.0&nbsp;+.&nbsp;x)</code> (natural logarithm),
+    giving numerically-accurate results even if <code class="code">x</code> is close to <code class="code">0.0</code>.</p>
+</div>
+</div>
+
+<pre id="VALcos">val cos : float -&gt; float</pre><div class="info ">
+<div class="info-desc">
+<p>Cosine.  Argument is in radians.</p>
+</div>
+</div>
+
+<pre id="VALsin">val sin : float -&gt; float</pre><div class="info ">
+<div class="info-desc">
+<p>Sine.  Argument is in radians.</p>
+</div>
+</div>
+
+<pre id="VALtan">val tan : float -&gt; float</pre><div class="info ">
+<div class="info-desc">
+<p>Tangent.  Argument is in radians.</p>
+</div>
+</div>
+
+<pre id="VALacos">val acos : float -&gt; float</pre><div class="info ">
+<div class="info-desc">
+<p>Arc cosine.  The argument must fall within the range <code class="code">[-1.0,&nbsp;1.0]</code>.
+    Result is in radians and is between <code class="code">0.0</code> and <code class="code">pi</code>.</p>
+</div>
+</div>
+
+<pre id="VALasin">val asin : float -&gt; float</pre><div class="info ">
+<div class="info-desc">
+<p>Arc sine.  The argument must fall within the range <code class="code">[-1.0,&nbsp;1.0]</code>.
+    Result is in radians and is between <code class="code">-pi/2</code> and <code class="code">pi/2</code>.</p>
+</div>
+</div>
+
+<pre id="VALatan">val atan : float -&gt; float</pre><div class="info ">
+<div class="info-desc">
+<p>Arc tangent.
+    Result is in radians and is between <code class="code">-pi/2</code> and <code class="code">pi/2</code>.</p>
+</div>
+</div>
+
+<pre id="VALatan2">val atan2 : float -&gt; float -&gt; float</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">atan2&nbsp;y&nbsp;x</code> returns the arc tangent of <code class="code">y&nbsp;/.&nbsp;x</code>.  The signs of <code class="code">x</code>
+    and <code class="code">y</code> are used to determine the quadrant of the result.
+    Result is in radians and is between <code class="code">-pi</code> and <code class="code">pi</code>.</p>
+</div>
+</div>
+
+<pre id="VALhypot">val hypot : float -&gt; float -&gt; float</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">hypot&nbsp;x&nbsp;y</code> returns <code class="code">sqrt(x&nbsp;*.&nbsp;x&nbsp;+&nbsp;y&nbsp;*.&nbsp;y)</code>, that is, the length
+    of the hypotenuse of a right-angled triangle with sides of length
+    <code class="code">x</code> and <code class="code">y</code>, or, equivalently, the distance of the point <code class="code">(x,y)</code>
+    to origin.  If one of <code class="code">x</code> or <code class="code">y</code> is infinite, returns <code class="code">infinity</code>
+    even if the other is <code class="code">nan</code>.</p>
+</div>
+</div>
+
+<pre id="VALcosh">val cosh : float -&gt; float</pre><div class="info ">
+<div class="info-desc">
+<p>Hyperbolic cosine.  Argument is in radians.</p>
+</div>
+</div>
+
+<pre id="VALsinh">val sinh : float -&gt; float</pre><div class="info ">
+<div class="info-desc">
+<p>Hyperbolic sine.  Argument is in radians.</p>
+</div>
+</div>
+
+<pre id="VALtanh">val tanh : float -&gt; float</pre><div class="info ">
+<div class="info-desc">
+<p>Hyperbolic tangent.  Argument is in radians.</p>
+</div>
+</div>
+
+<pre id="VALacosh">val acosh : float -&gt; float</pre><div class="info ">
+<div class="info-desc">
+<p>Hyperbolic arc cosine.  The argument must fall within the range
+    <code class="code">[1.0,&nbsp;inf]</code>.
+    Result is in radians and is between <code class="code">0.0</code> and <code class="code">inf</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.13.0</li>
+</ul>
+</div>
+
+<pre id="VALasinh">val asinh : float -&gt; float</pre><div class="info ">
+<div class="info-desc">
+<p>Hyperbolic arc sine.  The argument and result range over the entire
+    real line.
+    Result is in radians.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.13.0</li>
+</ul>
+</div>
+
+<pre id="VALatanh">val atanh : float -&gt; float</pre><div class="info ">
+<div class="info-desc">
+<p>Hyperbolic arc tangent.  The argument must fall within the range
+    <code class="code">[-1.0,&nbsp;1.0]</code>.
+    Result is in radians and ranges over the entire real line.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.13.0</li>
+</ul>
+</div>
+
+<pre id="VALerf">val erf : float -&gt; float</pre><div class="info ">
+<div class="info-desc">
+<p>Error function.  The argument ranges over the entire real line.
+    The result is always within <code class="code">[-1.0,&nbsp;1.0]</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.13.0</li>
+</ul>
+</div>
+
+<pre id="VALerfc">val erfc : float -&gt; float</pre><div class="info ">
+<div class="info-desc">
+<p>Complementary error function (<code class="code">erfc&nbsp;x&nbsp;=&nbsp;1&nbsp;-&nbsp;erf&nbsp;x</code>).
+    The argument ranges over the entire real line.
+    The result is always within <code class="code">[-1.0,&nbsp;1.0]</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.13.0</li>
+</ul>
+</div>
+
+<pre id="VALtrunc">val trunc : float -&gt; float</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">trunc&nbsp;x</code> rounds <code class="code">x</code> to the nearest integer whose absolute value is
+   less than or equal to <code class="code">x</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.08.0</li>
+</ul>
+</div>
+
+<pre id="VALround">val round : float -&gt; float</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">round&nbsp;x</code> rounds <code class="code">x</code> to the nearest integer with ties (fractional
+   values of 0.5) rounded away from zero, regardless of the current
+   rounding direction.  If <code class="code">x</code> is an integer, <code class="code">+0.</code>, <code class="code">-0.</code>, <code class="code">nan</code>, or
+   infinite, <code class="code">x</code> itself is returned.</p>
+
+<p>On 64-bit mingw-w64, this function may be emulated owing to a bug in the
+   C runtime library (CRT) on this platform.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.08.0</li>
+</ul>
+</div>
+
+<pre id="VALceil">val ceil : float -&gt; float</pre><div class="info ">
+<div class="info-desc">
+<p>Round above to an integer value.
+    <code class="code">ceil&nbsp;f</code> returns the least integer value greater than or equal to <code class="code">f</code>.
+    The result is returned as a float.</p>
+</div>
+</div>
+
+<pre id="VALfloor">val floor : float -&gt; float</pre><div class="info ">
+<div class="info-desc">
+<p>Round below to an integer value.
+    <code class="code">floor&nbsp;f</code> returns the greatest integer value less than or
+    equal to <code class="code">f</code>.
+    The result is returned as a float.</p>
+</div>
+</div>
+
+<pre id="VALnext_after">val next_after : float -&gt; float -&gt; float</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">next_after&nbsp;x&nbsp;y</code> returns the next representable floating-point
+   value following <code class="code">x</code> in the direction of <code class="code">y</code>.  More precisely, if
+   <code class="code">y</code> is greater (resp. less) than <code class="code">x</code>, it returns the smallest
+   (resp. largest) representable number greater (resp. less) than <code class="code">x</code>.
+   If <code class="code">x</code> equals <code class="code">y</code>, the function returns <code class="code">y</code>.  If <code class="code">x</code> or <code class="code">y</code> is
+   <code class="code">nan</code>, a <code class="code">nan</code> is returned.
+   Note that <code class="code">next_after&nbsp;max_float&nbsp;infinity&nbsp;=&nbsp;infinity</code> and that
+   <code class="code">next_after&nbsp;0.&nbsp;infinity</code> is the smallest denormalized positive number.
+   If <code class="code">x</code> is the smallest denormalized positive number,
+   <code class="code">next_after&nbsp;x&nbsp;0.&nbsp;=&nbsp;0.</code></p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.08.0</li>
+</ul>
+</div>
+
+<pre id="VALcopy_sign">val copy_sign : float -&gt; float -&gt; float</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">copy_sign&nbsp;x&nbsp;y</code> returns a float whose absolute value is that of <code class="code">x</code>
+    and whose sign is that of <code class="code">y</code>.  If <code class="code">x</code> is <code class="code">nan</code>, returns <code class="code">nan</code>.
+    If <code class="code">y</code> is <code class="code">nan</code>, returns either <code class="code">x</code> or <code class="code">-.&nbsp;x</code>, but it is not
+    specified which.</p>
+</div>
+</div>
+
+<pre id="VALsign_bit">val sign_bit : float -&gt; bool</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">sign_bit&nbsp;x</code> is <code class="code">true</code> if and only if the sign bit of <code class="code">x</code> is set.
+    For example <code class="code">sign_bit&nbsp;1.</code> and <code class="code">signbit&nbsp;0.</code> are <code class="code">false</code> while
+    <code class="code">sign_bit&nbsp;(-1.)</code> and <code class="code">sign_bit&nbsp;(-0.)</code> are <code class="code">true</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.08.0</li>
+</ul>
+</div>
+
+<pre id="VALfrexp">val frexp : float -&gt; float * int</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">frexp&nbsp;f</code> returns the pair of the significant
+    and the exponent of <code class="code">f</code>.  When <code class="code">f</code> is zero, the
+    significant <code class="code">x</code> and the exponent <code class="code">n</code> of <code class="code">f</code> are equal to
+    zero.  When <code class="code">f</code> is non-zero, they are defined by
+    <code class="code">f&nbsp;=&nbsp;x&nbsp;*.&nbsp;2&nbsp;**&nbsp;n</code> and <code class="code">0.5&nbsp;&lt;=&nbsp;x&nbsp;&lt;&nbsp;1.0</code>.</p>
+</div>
+</div>
+
+<pre id="VALldexp">val ldexp : float -&gt; int -&gt; float</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">ldexp&nbsp;x&nbsp;n</code> returns <code class="code">x&nbsp;*.&nbsp;2&nbsp;**&nbsp;n</code>.</p>
+</div>
+</div>
+
+<pre id="VALmodf">val modf : float -&gt; float * float</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">modf&nbsp;f</code> returns the pair of the fractional and integral
+    part of <code class="code">f</code>.</p>
+</div>
+</div>
+
+<pre id="TYPEt"><span class="keyword">type</span> t = float </pre>
+<div class="info ">
+<div class="info-desc">
+<p>An alias for the type of floating-point numbers.</p>
+</div>
+</div>
+
+
+<pre id="VALcompare">val compare : t -&gt; t -&gt; int</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">compare&nbsp;x&nbsp;y</code> returns <code class="code">0</code> if <code class="code">x</code> is equal to <code class="code">y</code>, a negative integer if <code class="code">x</code>
+    is less than <code class="code">y</code>, and a positive integer if <code class="code">x</code> is greater than
+    <code class="code">y</code>. <code class="code">compare</code> treats <code class="code">nan</code> as equal to itself and less than any other float
+    value.  This treatment of <code class="code">nan</code> ensures that <code class="code">compare</code> defines a total
+    ordering relation.</p>
+</div>
+</div>
+
+<pre id="VALequal">val equal : t -&gt; t -&gt; bool</pre><div class="info ">
+<div class="info-desc">
+<p>The equal function for floating-point numbers, compared using <a href="Float.html#VALcompare"><code class="code">Float.compare</code></a>.</p>
+</div>
+</div>
+
+<pre id="VALmin">val min : t -&gt; t -&gt; t</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">min&nbsp;x&nbsp;y</code> returns the minimum of <code class="code">x</code> and <code class="code">y</code>.  It returns <code class="code">nan</code>
+   when <code class="code">x</code> or <code class="code">y</code> is <code class="code">nan</code>.  Moreover <code class="code">min&nbsp;(-0.)&nbsp;(+0.)&nbsp;=&nbsp;-0.</code></p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.08.0</li>
+</ul>
+</div>
+
+<pre id="VALmax">val max : float -&gt; float -&gt; float</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">max&nbsp;x&nbsp;y</code> returns the maximum of <code class="code">x</code> and <code class="code">y</code>.  It returns <code class="code">nan</code>
+   when <code class="code">x</code> or <code class="code">y</code> is <code class="code">nan</code>.  Moreover <code class="code">max&nbsp;(-0.)&nbsp;(+0.)&nbsp;=&nbsp;+0.</code></p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.08.0</li>
+</ul>
+</div>
+
+<pre id="VALmin_max">val min_max : float -&gt; float -&gt; float * float</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">min_max&nbsp;x&nbsp;y</code> is <code class="code">(min&nbsp;x&nbsp;y,&nbsp;max&nbsp;x&nbsp;y)</code>, just more efficient.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.08.0</li>
+</ul>
+</div>
+
+<pre id="VALmin_num">val min_num : t -&gt; t -&gt; t</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">min_num&nbsp;x&nbsp;y</code> returns the minimum of <code class="code">x</code> and <code class="code">y</code> treating <code class="code">nan</code> as
+   missing values.  If both <code class="code">x</code> and <code class="code">y</code> are <code class="code">nan</code>, <code class="code">nan</code> is returned.
+   Moreover <code class="code">min_num&nbsp;(-0.)&nbsp;(+0.)&nbsp;=&nbsp;-0.</code></p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.08.0</li>
+</ul>
+</div>
+
+<pre id="VALmax_num">val max_num : t -&gt; t -&gt; t</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">max_num&nbsp;x&nbsp;y</code> returns the maximum of <code class="code">x</code> and <code class="code">y</code> treating <code class="code">nan</code> as
+   missing values.  If both <code class="code">x</code> and <code class="code">y</code> are <code class="code">nan</code> <code class="code">nan</code> is returned.
+   Moreover <code class="code">max_num&nbsp;(-0.)&nbsp;(+0.)&nbsp;=&nbsp;+0.</code></p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.08.0</li>
+</ul>
+</div>
+
+<pre id="VALmin_max_num">val min_max_num : float -&gt; float -&gt; float * float</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">min_max_num&nbsp;x&nbsp;y</code> is <code class="code">(min_num&nbsp;x&nbsp;y,&nbsp;max_num&nbsp;x&nbsp;y)</code>, just more
+   efficient.  Note that in particular <code class="code">min_max_num&nbsp;x&nbsp;nan&nbsp;=&nbsp;(x,&nbsp;x)</code>
+   and <code class="code">min_max_num&nbsp;nan&nbsp;y&nbsp;=&nbsp;(y,&nbsp;y)</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Since</b> 4.08.0</li>
+</ul>
+</div>
+
+<pre id="VALhash">val hash : t -&gt; int</pre><div class="info ">
+<div class="info-desc">
+<p>The hash function for floating-point numbers.</p>
+</div>
+</div>
+
+<pre id="MODULEArray"><span class="keyword">module</span> Array: sig .. end</pre><div class="info">
+<p>Float arrays with packed representation.</p>
+
+</div>
+
+<pre id="MODULEArrayLabels"><span class="keyword">module</span> ArrayLabels: sig .. end</pre><div class="info">
+<p>Float arrays with packed representation (labeled functions).</p>
+
+</div>
+
+</div>

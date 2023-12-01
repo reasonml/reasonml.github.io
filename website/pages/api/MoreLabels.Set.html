@@ -1,13 +1,51 @@
 <link rel="stylesheet" href="/css/main.css"><div class="ocamldoc">
-<div class="navbar"><a class="pre" href="MoreLabels.Map.html" title="MoreLabels.Map">Previous</a>
-&#xA0;<a class="up" href="MoreLabels.html" title="MoreLabels">Up</a>
-&#xA0;</div>
 <h1>Module <a href="type_MoreLabels.Set.html">MoreLabels.Set</a></h1>
 
-<pre><span class="keyword">module</span> Set: sig .. end</pre><hr width="100%">
+<pre id="MODULESet"><span class="keyword">module</span> Set: sig .. end</pre><hr width="100%">
+<p>Sets over ordered types.</p>
 
-<pre><span class="keyword">module</span> type OrderedType = Set.OrderedType;
-</pre>
-<pre><span class="keyword">module</span> type S = sig .. end</pre>
-<pre><span class="keyword">module</span> Make: (Ord: OrderedType) =&gt; S with type elt = Ord.t;
-</pre></div>
+<p>This module implements the set data structure, given a total ordering
+     function over the set elements. All operations over sets
+     are purely applicative (no side-effects).
+     The implementation uses balanced binary trees, and is therefore
+     reasonably efficient: insertion and membership take time
+     logarithmic in the size of the set, for instance.</p>
+
+<p>The <a href="MoreLabels.Set.Make.html"><code class="code">MoreLabels.Set.Make</code></a> functor constructs implementations for any type, given a
+     <code class="code">compare</code> function.
+     For instance:</p>
+<pre class="codepre">       module IntPairs =
+         struct
+           type t = int * int
+           let compare (x0,y0) (x1,y1) =
+             match Stdlib.compare x0 x1 with
+                 0 -&gt; Stdlib.compare y0 y1
+               | c -&gt; c
+         end
+
+       module PairsSet = Set.Make(IntPairs)
+
+       let m = PairsSet.(empty |&gt; add (2,3) |&gt; add (5,7) |&gt; add (11,13))
+     </pre>
+<p>This creates a new module <code class="code">PairsSet</code>, with a new type <code class="code">PairsSet.t</code>
+     of sets of <code class="code">int&nbsp;*&nbsp;int</code>.</p>
+
+<pre id="MODULETYPEOrderedType"><span class="keyword">module</span> type OrderedType = sig .. end</pre><div class="info">
+<p>Input signature of the functor <a href="MoreLabels.Set.Make.html"><code class="code">MoreLabels.Set.Make</code></a>.</p>
+
+</div>
+
+<pre id="MODULETYPES"><span class="keyword">module</span> type S = sig .. end</pre><div class="info">
+<p>Output signature of the functor <a href="MoreLabels.Set.Make.html"><code class="code">MoreLabels.Set.Make</code></a>.</p>
+
+</div>
+
+<pre id="MODULEMake"><span class="keyword">module</span> Make: functor&nbsp;(Ord&nbsp;:&nbsp;OrderedType)&nbsp;-&gt;&nbsp;S 
+    with type elt = Ord.t
+     and type t = Set.Make(Ord).t</pre><div class="info">
+<p>Functor building an implementation of the set structure
+     given a totally ordered type.</p>
+
+</div>
+
+</div>

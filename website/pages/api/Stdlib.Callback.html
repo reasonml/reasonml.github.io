@@ -1,0 +1,25 @@
+<link rel="stylesheet" href="/css/main.css"><div class="ocamldoc">
+<h1>Module <a href="type_Stdlib.Callback.html">Stdlib.Callback</a></h1>
+
+<pre id="MODULECallback"><span class="keyword">module</span> Callback: Callback</pre><hr width="100%">
+
+<pre id="VALregister">val register : string -&gt; 'a -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">Callback.register&nbsp;n&nbsp;v</code> registers the value <code class="code">v</code> under
+   the name <code class="code">n</code>. C code can later retrieve a handle to <code class="code">v</code>
+   by calling <code class="code">caml_named_value(n)</code>.</p>
+</div>
+</div>
+
+<pre id="VALregister_exception">val register_exception : string -&gt; exn -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">Callback.register_exception&nbsp;n&nbsp;exn</code> registers the
+   exception contained in the exception value <code class="code">exn</code>
+   under the name <code class="code">n</code>. C code can later retrieve a handle to
+   the exception by calling <code class="code">caml_named_value(n)</code>. The exception
+   value thus obtained is suitable for passing as first argument
+   to <code class="code">raise_constant</code> or <code class="code">raise_with_arg</code>.</p>
+</div>
+</div>
+
+</div>

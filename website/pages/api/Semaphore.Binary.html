@@ -1,0 +1,47 @@
+<link rel="stylesheet" href="/css/main.css"><div class="ocamldoc">
+<h1>Module <a href="type_Semaphore.Binary.html">Semaphore.Binary</a></h1>
+
+<pre id="MODULEBinary"><span class="keyword">module</span> Binary: sig .. end</pre><hr width="100%">
+
+<pre id="TYPEt"><span class="keyword">type</span> t </pre>
+<div class="info ">
+<div class="info-desc">
+<p>The type of binary semaphores.</p>
+</div>
+</div>
+
+
+<pre id="VALmake">val make : bool -&gt; t</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">make&nbsp;b</code> returns a new binary semaphore.
+    If <code class="code">b</code> is <code class="code">true</code>, the initial value of the semaphore is 1, meaning
+    "available".  If <code class="code">b</code> is <code class="code">false</code>, the initial value of the
+    semaphore is 0, meaning "unavailable".</p>
+</div>
+</div>
+
+<pre id="VALrelease">val release : t -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">release&nbsp;s</code> sets the value of semaphore <code class="code">s</code> to 1, putting it in the
+    "available" state.  If other threads are waiting on <code class="code">s</code>, one of them is
+    restarted.</p>
+</div>
+</div>
+
+<pre id="VALacquire">val acquire : t -&gt; unit</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">acquire&nbsp;s</code> blocks the calling thread until the semaphore <code class="code">s</code>
+    has value 1 (is available), then atomically sets it to 0
+    and returns.</p>
+</div>
+</div>
+
+<pre id="VALtry_acquire">val try_acquire : t -&gt; bool</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">try_acquire&nbsp;s</code> immediately returns <code class="code">false</code> if the semaphore <code class="code">s</code>
+    has value 0.  If <code class="code">s</code> has value 1, its value is atomically set to 0
+    and <code class="code">try_acquire&nbsp;s</code> returns <code class="code">true</code>.</p>
+</div>
+</div>
+
+</div>

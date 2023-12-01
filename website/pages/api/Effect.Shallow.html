@@ -1,0 +1,95 @@
+<link rel="stylesheet" href="/css/main.css"><div class="ocamldoc">
+<h1>Module <a href="type_Effect.Shallow.html">Effect.Shallow</a></h1>
+
+<pre id="MODULEShallow"><span class="keyword">module</span> Shallow: sig .. end</pre><hr width="100%">
+
+<pre id="TYPEcontinuation"><span class="keyword">type</span> ('a, 'b) continuation </pre>
+<div class="info ">
+<div class="info-desc">
+<p><code class="code">('a,'b)&nbsp;continuation</code> is a delimited continuation that expects a <code class="code">'a</code>
+      value and returns a <code class="code">'b</code> value.</p>
+</div>
+</div>
+
+
+<pre id="VALfiber">val fiber : ('a -&gt; 'b) -&gt; ('a, 'b) continuation</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">fiber&nbsp;f</code> constructs a continuation that runs the computation <code class="code">f</code>.</p>
+</div>
+</div>
+
+<pre><span class="keyword">type</span> ('a, 'b) handler = {</pre><table class="typetable">
+<tbody><tr>
+<td align="left" valign="top">
+<code>&nbsp;&nbsp;</code></td>
+<td align="left" valign="top">
+<code>retc&nbsp;: 'a -&gt; 'b;</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>&nbsp;&nbsp;</code></td>
+<td align="left" valign="top">
+<code>exnc&nbsp;: exn -&gt; 'b;</code></td>
+
+</tr>
+<tr>
+<td align="left" valign="top">
+<code>&nbsp;&nbsp;</code></td>
+<td align="left" valign="top">
+<code>effc&nbsp;: 'c. 'c Effect.t -&gt; (('c, 'a) continuation -&gt; 'b) option;</code></td>
+
+</tr></tbody></table>
+<code>}</code>
+
+<div class="info ">
+<div class="info-desc">
+<p><code class="code">('a,'b)&nbsp;handler</code> is a handler record with three fields -- <code class="code">retc</code>
+      is the value handler, <code class="code">exnc</code> handles exceptions, and <code class="code">effc</code> handles the
+      effects performed by the computation enclosed by the handler.</p>
+</div>
+</div>
+
+
+<pre id="VALcontinue_with">val continue_with : ('c, 'a) continuation -&gt;       'c -&gt; ('a, 'b) handler -&gt; 'b</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">continue_with&nbsp;k&nbsp;v&nbsp;h</code> resumes the continuation <code class="code">k</code> with value <code class="code">v</code> with
+      the handler <code class="code">h</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Raises</b> <code>Continuation_already_resumed</code> if the continuation has already been
+      resumed.</li>
+</ul>
+</div>
+
+<pre id="VALdiscontinue_with">val discontinue_with : ('c, 'a) continuation -&gt;       exn -&gt; ('a, 'b) handler -&gt; 'b</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">discontinue_with&nbsp;k&nbsp;e&nbsp;h</code> resumes the continuation <code class="code">k</code> by raising the
+      exception <code class="code">e</code> with the handler <code class="code">h</code>.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Raises</b> <code>Continuation_already_resumed</code> if the continuation has already been
+      resumed.</li>
+</ul>
+</div>
+
+<pre id="VALdiscontinue_with_backtrace">val discontinue_with_backtrace : ('a, 'b) continuation -&gt;       exn -&gt; Printexc.raw_backtrace -&gt; ('b, 'c) handler -&gt; 'c</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">discontinue_with&nbsp;k&nbsp;e&nbsp;bt&nbsp;h</code> resumes the continuation <code class="code">k</code> by raising the
+      exception <code class="code">e</code> with the handler <code class="code">h</code> using the raw backtrace <code class="code">bt</code> as the
+      origin of the exception.</p>
+</div>
+<ul class="info-attributes">
+<li><b>Raises</b> <code>Continuation_already_resumed</code> if the continuation has already been
+      resumed.</li>
+</ul>
+</div>
+
+<pre id="VALget_callstack">val get_callstack : ('a, 'b) continuation -&gt; int -&gt; Printexc.raw_backtrace</pre><div class="info ">
+<div class="info-desc">
+<p><code class="code">get_callstack&nbsp;c&nbsp;n</code> returns a description of the top of the call stack on
+      the continuation <code class="code">c</code>, with at most <code class="code">n</code> entries.</p>
+</div>
+</div>
+
+</div>

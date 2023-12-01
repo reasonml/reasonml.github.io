@@ -51,7 +51,9 @@ module.exports = function(fileInfo, api, options) {
   });
   $('pre').map((i, el) => {
     const $el = $(el);
-    $el.attr('id', $el.children()[0].attribs.id);
+    if ($el.children()[0].attribs) {
+      $el.attr('id', $el.children()[0].attribs.id);
+    }
     const input = $el.text();
     const transformed = convert(input, true);
     const keywordMatch = transformed.match(/^(module|let|type|exception)/);

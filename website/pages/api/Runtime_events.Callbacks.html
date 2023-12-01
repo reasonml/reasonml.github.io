@@ -1,0 +1,32 @@
+<link rel="stylesheet" href="/css/main.css"><div class="ocamldoc">
+<h1>Module <a href="type_Runtime_events.Callbacks.html">Runtime_events.Callbacks</a></h1>
+
+<pre id="MODULECallbacks"><span class="keyword">module</span> Callbacks: sig .. end</pre><hr width="100%">
+
+<pre id="TYPEt"><span class="keyword">type</span> t </pre>
+<div class="info ">
+<div class="info-desc">
+<p>Type of callbacks</p>
+</div>
+</div>
+
+
+<pre id="VALcreate">val create : ?runtime_begin:(int -&gt;                       Runtime_events.Timestamp.t -&gt;                       Runtime_events.runtime_phase -&gt; unit) -&gt;       ?runtime_end:(int -&gt;                     Runtime_events.Timestamp.t -&gt;                     Runtime_events.runtime_phase -&gt; unit) -&gt;       ?runtime_counter:(int -&gt;                         Runtime_events.Timestamp.t -&gt;                         Runtime_events.runtime_counter -&gt; int -&gt; unit) -&gt;       ?alloc:(int -&gt; Runtime_events.Timestamp.t -&gt; int array -&gt; unit) -&gt;       ?lifecycle:(int -&gt;                   Runtime_events.Timestamp.t -&gt;                   Runtime_events.lifecycle -&gt; int option -&gt; unit) -&gt;       ?lost_events:(int -&gt; int -&gt; unit) -&gt; unit -&gt; t</pre><div class="info ">
+<div class="info-desc">
+<p>Create a <code class="code">Callback</code> that optionally subscribes to one or more runtime
+      events. The first int supplied to callbacks is the ring buffer index.
+      Each domain owns a single ring buffer for the duration of the domain's
+      existence. After a domain terminates, a newly spawned domain may take
+      ownership of the ring buffer. A <code class="code">runtime_begin</code> callback is called when
+      the runtime enters a new phase (e.g a runtime_begin with EV_MINOR is
+      called at the start of a minor GC). A <code class="code">runtime_end</code> callback is called
+      when the runtime leaves a certain phase. The <code class="code">runtime_counter</code> callback
+      is called when a counter is emitted by the runtime. <code class="code">lifecycle</code> callbacks
+      are called when the ring undergoes a change in lifecycle and a consumer
+      may need to respond. <code class="code">alloc</code> callbacks are currently only called on the
+      instrumented runtime. <code class="code">lost_events</code> callbacks are called if the consumer
+      code detects some unconsumed events have been overwritten.</p>
+</div>
+</div>
+
+</div>
