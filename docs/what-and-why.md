@@ -53,7 +53,7 @@ There's a clear distinction between the two environments, one runs JavaScript in
 
 **Compile to JavaScript**
 
-[Melange](compiling-to-js-with-melange.md) is a backend for the OCaml compiler that emits JavaScript. Melange strives to provide the best integration with both the OCaml and JavaScript ecosystems. It is the recommended way to compile Reason to JavaScript, since it compiles 1 module to 1 file, has a very good interop with JavaScript and integrates well with modern frontend development tooling. Take a closer look at our page [Compiling to JavaSCript with Melange](compiling-to-js-with-melange.md).
+[Melange](compiling-to-js-with-melange.md) is a backend for the OCaml compiler that emits JavaScript. Melange strives to provide the best integration with both the OCaml and JavaScript ecosystems. It is the recommended way to compile Reason to JavaScript, since it compiles 1 module to 1 file, has a very good interop with JavaScript and integrates well with modern frontend development tooling. Take a closer look at our page [Compiling to JavaScript with Melange](compiling-to-js-with-melange.md).
 
 **Compile to Native**
 
