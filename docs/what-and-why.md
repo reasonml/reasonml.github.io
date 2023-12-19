@@ -2,8 +2,6 @@
 title: What & Why
 ---
 
-# Overview
-
 Reason is a user-friendly programming language built on [OCaml](http://ocaml.org)'s robust type system, making it a comfortable choice for developers familiar with JavaScript or C-family languages.
 
 Not only does Reason leverage the OCaml type system, but it also seamlessly integrates with its reliable ecosystem, providing access to all the tools of OCaml, including the Language Server, the de facto build system [dune](https://dune.build), and the package manager [opam](https://opam.ocaml.org).
