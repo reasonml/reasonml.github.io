@@ -2,7 +2,7 @@
 title: Melange
 ---
 
-ne of the best ways to use Reason is by compiling it to JavaScript and running it in a web browser or on any other environment with a JavaScript runtime, such as [Node.js](https://nodejs.org), [Deno](https://deno.com), [Cloudflare Workers](https://workers.cloudflare.com).
+One of the best ways to use Reason is by compiling it to JavaScript and running it in a web browser or on any other environment with a JavaScript runtime, such as [Node.js](https://nodejs.org), [Deno](https://deno.com), [Cloudflare Workers](https://workers.cloudflare.com).
 
 Reason source code can be compiled to JavaScript through our partner project, [Melange](https://melange.re).
 
