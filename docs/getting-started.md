@@ -34,7 +34,7 @@ For an introduction to most language features check out the [overview](overview.
 ## Try Reason in your browser
 
 To start immediately an online REPL is available at [Sketch.sh](https://sketch.sh)
-or open the [playground](playground)
+or open the [playground](try)
 
 ## Install Reason
 
