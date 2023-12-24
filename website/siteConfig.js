@@ -80,11 +80,6 @@ const users = [
     infoLink: "https://mobilunity.com",
   },
   {
-    caption: "Appier",
-    image: "img/logos/appier.svg",
-    infoLink: "https://appier.com",
-  },
-  {
     caption: "InVision",
     image: "img/logos/invision.svg",
     infoLink: "https://www.invision.de",
