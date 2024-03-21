@@ -278,6 +278,11 @@ const users = [
     name: "OneChronos",
     image: "img/logos/onechronos.svg",
     infoLink: "https://www.onechronos.com",
+  },
+  {
+    name: "Pagepro",
+    image: "img/logos/pagepro.svg",
+    infoLink: "https://pagepro.co",
   }
 ];
 
