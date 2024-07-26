@@ -283,6 +283,11 @@ const users = [
     name: "Pagepro",
     image: "img/logos/pagepro.svg",
     infoLink: "https://pagepro.co",
+  },
+  {
+    name: "Aspectivo",
+    image: "img/logos/aspectivo.svg",
+    infoLink: "https://aspectivo.ai",
   }
 ];
 
