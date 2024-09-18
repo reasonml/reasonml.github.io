@@ -283,6 +283,11 @@ const users = [
     name: "Pagepro",
     image: "img/logos/pagepro.svg",
     infoLink: "https://pagepro.co",
+  },
+  {
+    name: "DevITJobs",
+    image: "img/logos/devitjobs-uk.svg",
+    infoLink: "https://devitjobs.uk",
   }
 ];
 
