@@ -26,7 +26,7 @@ type car('a) = {
 } as 'a;
 ```
 
-Two dots, also called an elision, indicate that this is an "open" object type, and therefore can also contain other values and methods. An open object is also polymorphic and therefore requires a parameter.
+Two dots, also called an elision, indicate that this is an "open" object type, and therefore can also contain other values and methods. An open object is also polymorphic and therefore requires a parameter. This parameter refers to the complete type of the object, including those other values and methods.
 
 ### Creation
 
@@ -77,7 +77,9 @@ type tesla('a) = {
   drive: int => int
 } as 'a;
 
-let obj: tesla({. drive: int => int, doYouWant: unit => bool}) = {
+let driveInterstate = (t: tesla('a)) => t#drive(60);
+
+let obj: {. drive: int => int, doYouWant: unit => bool} = {
   val hasEnvy = ref(false);
   pub drive = (speed) => {
     this#enableEnvy(true);
@@ -91,5 +93,6 @@ let obj: tesla({. drive: int => int, doYouWant: unit => bool}) = {
 You can use the above object like so:
 
 ```reason
+driveInterstate(obj);
 obj#doYouWant();
 ```
