@@ -235,6 +235,11 @@ const users = [
     infoLink: "https://radity.com/"
   },
   {
+    caption: "Global CTO Forum",
+    image: "img/logos/global-cto-forum.svg",
+    infoLink: "https://global-cto-forum.org/"
+  },
+  {
     caption: "codecentric",
     image: "img/logos/codecentric.svg",
     infoLink: "https://codecentric.de",
