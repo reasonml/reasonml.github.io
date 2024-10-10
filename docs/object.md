@@ -93,3 +93,12 @@ You can use the above object like so:
 ```reason
 obj#doYouWant();
 ```
+
+To disable the `this` binding you can use `as`.
+```reason
+let makeMyObject () =>
+{
+  as _;
+  pub = doYouWant () => true;
+}
+```
