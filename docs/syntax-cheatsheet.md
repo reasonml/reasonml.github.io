@@ -180,7 +180,7 @@ function expression (since function bodies have their own local scope).
   <thead>
     <tr>
       <th>JavaScript</th>
-      <th>Reason               th>
+      <th>Reason</th>
     </tr>
   </thead>
   <tbody>
