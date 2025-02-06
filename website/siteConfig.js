@@ -285,6 +285,11 @@ const users = [
     infoLink: "https://pagepro.co",
   },
   {
+    name: "Aspectivo",
+    image: "img/logos/aspectivo.svg",
+    infoLink: "https://aspectivo.ai",
+  },
+  {
     name: "DevITJobs",
     image: "img/logos/devitjobs-uk.svg",
     infoLink: "https://devitjobs.uk",
