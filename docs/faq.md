@@ -19,9 +19,7 @@ In July 2020, BuckleScript released its own syntax and rebranded to ReScript to 
 ### Where do all these `print_endline`, `string_of_int` functions come from?
 They're from the standard library, pre-`open`ed during the compilation of your file. This is why you see them in scope.
 
-You can read more about the Pervasives library in the api documentation:
-
-https://reasonml.github.io/api/Pervasives.html
+You can read more about the Standard library in the [api documentation](https://reasonml.github.io/api/Stdlib.html)
 
 ### Why is there a + for adding ints and +. for adding floats, etc.?
 See [here](integer-and-float.md#design-decisions).
