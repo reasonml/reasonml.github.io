@@ -293,6 +293,11 @@ const users = [
     name: "DevITJobs",
     image: "img/logos/devitjobs-uk.svg",
     infoLink: "https://devitjobs.uk",
+  },
+  {
+    name: "RailsCarma",
+    image: "img/logos/railscarma.png",
+    infoLink: "https://www.railscarma.com",
   }
 ];
 
