@@ -65,11 +65,11 @@ The [getting started](getting-started.md) page will set you up.
 
 Here are some alternatives that share similar concepts with Reason:
 
-- [Rust](http://rust-lang.org). Inspired by the ML family of languages, but not garbage collected. Has excellent parallelism support.
-- [Elm](http://elm-lang.org). Another great language in the ML family. Focuses on building web applications. See the widely praised talk on Elm, [Let's Be Mainstream](https://www.youtube.com/watch?v=oYk8CKH7OhE).
-- [PureScript](http://www.purescript.org). Inspired by Haskell, compiles to JavaScript.
-- [Fable](http://fable.io/). Based on F#, which is closely related to OCaml.
+- [Rust](https://rust-lang.org). Inspired by the ML family of languages, but not garbage collected. Has excellent parallelism support.
+- [Elm](https://elm-lang.org). Another great language in the ML family. Focuses on building web applications. See the widely praised talk on Elm, [Let's Be Mainstream](https://www.youtube.com/watch?v=oYk8CKH7OhE).
+- [PureScript](https://www.purescript.org). Inspired by Haskell, compiles to JavaScript.
+- [Fable](https://fable.io/). Based on F#, which is closely related to OCaml.
 - [ClojureScript](https://clojurescript.org). Dynamically typed language that prioritizes simplicity & great interop.
 - [Swift](https://www.apple.com/swift/). Language built by Apple, and interoperates with Objective-C well.
 - [Haxe](https://haxe.org). Compiles to basically anything with a focus on game development.
-- [ReScript](rescript-lang.org). Fast, Simple, Fully Typed JavaScript from the Future.
+- [ReScript](https://rescript-lang.org). Fast, Simple, Fully Typed JavaScript from the Future.
