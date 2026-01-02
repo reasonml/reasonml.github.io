@@ -16,6 +16,20 @@ Reason was originally integrated with BuckleScript to provide a single toolchain
 
 In July 2020, BuckleScript released its own syntax and rebranded to ReScript to be its own language. More infos can be found in their [official rebranding announcement](https://rescript-lang.org/blog/bucklescript-is-rebranding).
 
+### How can I convert between OCaml syntax and Reason syntax?
+
+As described in the [What & Why](what-and-why.md) section, Reason and OCaml are pretty much interchangeable at the tooling level: editor (ocaml-lsp), package manager (opam/esy), task runner (dune), while being compatible at the syntax-level.
+
+The [`refmt`](refmt.md) tool, our code formatter, can easily convert Reason code to OCaml code and vice versa, since Reason and OCaml are compatible on the AST-level.
+
+```bash
+refmt --parse {ml,re} --print {ml,re}
+```
+
+The [melange playground](https://melange.re/v4.0.0/playground) has the transformation as a language toggle.
+
+Note: to make sure Reason to OCaml transformation is idempotent, refmt adds a few annotations to the OCaml code such as `[@explicit_arity]`.
+
 ### Where do all these `print_endline`, `string_of_int` functions come from?
 They're from the standard library, pre-`open`ed during the compilation of your file. This is why you see them in scope.
 
